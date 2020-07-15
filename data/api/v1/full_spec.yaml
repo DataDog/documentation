@@ -7692,6 +7692,66 @@ components:
             $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
+    UsageCustomReportsAttributes:
+      description: The response containing attributes for custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of custom report
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of custom report
+          type: string
+        tags:
+          description: A list of tags to apply to custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageCustomReportsData:
+      description: The response containing the date and type for custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageCustomReportsMeta:
+      description: The object containing document meta data.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageCustomReportsPage'
+      type: object
+    UsageCustomReportsPage:
+      description: The object containing page total count.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageCustomReportsResponse:
+      description: Returns available daily custom reports.
+      properties:
+        data:
+          description: An array of available daily custom reports.
+          items:
+            $ref: '#/components/schemas/UsageCustomReportsData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/UsageCustomReportsMeta'
+      type: object
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
       properties:
@@ -7931,6 +7991,15 @@ components:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
           type: array
       type: object
+    UsageReportsType:
+      default: reports
+      description: The type of reports.
+      enum:
+      - reports
+      example: reports
+      type: string
+      x-enum-varnames:
+      - REPORTS
     UsageRumSessionsHour:
       description: Number of RUM Sessions recorded for each hour for a given organization.
       properties:
@@ -7974,6 +8043,91 @@ components:
           items:
             $ref: '#/components/schemas/UsageSNMPHour'
           type: array
+      type: object
+    UsageSort:
+      default: start_date
+      description: The field to sort by.
+      enum:
+      - computed_on
+      - size
+      - start_date
+      - end_date
+      type: string
+      x-enum-varnames:
+      - COMPUTED_ON
+      - SIZE
+      - START_DATE
+      - END_DATE
+    UsageSortDirection:
+      default: desc
+      description: The direction to sort by.
+      enum:
+      - desc
+      - asc
+      type: string
+      x-enum-varnames:
+      - DESC
+      - ASC
+    UsageSpecifiedCustomReportsAttributes:
+      description: The response containing attributes for specified custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of specified custom report.
+          type: string
+        location:
+          description: A downloadable file for the specified custom reporting file.
+          example: https://an-s3-or-gs-bucket.s3.amazonaws.com
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of specified custom report.
+          type: string
+        tags:
+          description: A list of tags to apply to specified custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageSpecifiedCustomReportsData:
+      description: Response containing date and type for specified custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageSpecifiedCustomReportsMeta:
+      description: The object containing document meta data.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsPage'
+      type: object
+    UsageSpecifiedCustomReportsPage:
+      description: The object containing page total count for specified ID.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageSpecifiedCustomReportsResponse:
+      description: Returns available specified custom reports.
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsData'
+        meta:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsMeta'
       type: object
     UsageSummaryDate:
       description: Response with hourly report of all data billed by Datadog all organizations.
@@ -9780,6 +9934,99 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+  /api/v1/daily_custom_reports:
+    get:
+      description: Get daily custom reports.
+      operationId: GetDailyCustomReports
+      parameters:
+      - description: The number of files to return in the response. `[default=60]`.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The identifier of the first page to return. This parameter is
+          used for the pagination feature `[default=0]`.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: 'The field to sort by: `[computed_on, size, start_date, end_date]`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get the list of available daily custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/daily_custom_reports/{report_id}:
+    get:
+      description: Get specified daily custom reports.
+      operationId: GetSpecifiedDailyCustomReports
+      parameters:
+      - description: The specified ID to search results for.
+        in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSpecifiedCustomReportsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get specified daily custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
     get:
       description: 'Get all dashboards.
@@ -13718,6 +13965,99 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /api/v1/monthly_custom_reports:
+    get:
+      description: Get monthly custom reports.
+      operationId: GetMonthlyCustomReports
+      parameters:
+      - description: The number of files to return in the response `[default=60].`
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The identifier of the first page to return. This parameter is
+          used for the pagination feature `[default=0]`.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: 'The field to sort by: `[computed_on, size, start_date, end_date]`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get the list of available monthly custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/monthly_custom_reports/{report_id}:
+    get:
+      description: Get specified monthly custom reports.
+      operationId: GetSpecifiedMonthlyCustomReports
+      parameters:
+      - description: The specified ID to search results for.
+        in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSpecifiedCustomReportsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get specified monthly custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/org:
     get:
       description: List your managed organizations.
@@ -15355,7 +15695,7 @@ paths:
       - Usage Metering
   /api/v1/usage/billable-summary:
     get:
-      description: Get the monthly billable summary.
+      description: Get billable usage across your multi-org account.
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -15385,7 +15725,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Get monthly billable summary
+      summary: Get billable usage across your multi-org account
       tags:
       - Usage Metering
   /api/v1/usage/fargate:
