@@ -57,7 +57,7 @@ Exact resource requirements depend on usage. Datadog found the following when te
 To automatically download and install the correct IoT Agent for your operating system and chipset architecture, use the following command:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=iot-agent bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 #### Manual
