@@ -27,45 +27,35 @@ further_reading:
 
 ## Overview
 
-The APM [Live Tail][1] gives you the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog Agent section and before they are indexed by Datadog. All trace spans ingested by Datadog are displayed (Tracing without Limits\*) after being processed. With the APM Live tail page you can:
+The APM [Live Search][1] gives you the ability to search all ingested spans using any tag in real-time for the past 15 minutes. It displays spans as soon as they are sent by the Datadog agent and before they are indexed by Datadog. All spans ingested by Datadog are displayed without any sampling (Tracing without Limits\*). With the APM Live Search you can:
+- Write search queries to refine the stream of traces by any tag on any span. Example: monitor that a new deployment went smoothly by filtering on version_id of all tags
+- View 100% of trace spans as they are ingested - no sampling on ingested spans for 15 minutes. Example: view outage related information in real-time as it happens related to specific org_id or customer_id associated with a child span
+- Search queries autocomplete in real-time. Example: check if a process has correctly started type process_id of a child span tag and it auto completes the id.
+- View Live timeseries visualization of key RED metrics: requests per second, errors, and latency. Example: monitor load test and performance impact on your endpoints by filtering on the duration of a child resource
+- One-click search queries on any span or tag directly from the trace panel view
+- Add, remove, and sort columns from span tags for a customized view
 
-- Write search parameters to refine the stream of traces.
-- View distributed trace in real-time.
-- Add or remove columns from span tags for a customized view.
+## Live Search mode
 
-This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly. Or view outage related information in real-time
-
-## Live Tail view
-
-Choose the `Live Tail` option in the time range selector to switch to the Live Tail view. The number of received spans per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity. Use the Live Tail search bar filtering features to filter the spans stream and the Pause/Play button at the top right of the screen to pause or resume the stream.
+`Live Search` mode is the default experience on the Traces page or you can choose the `LIVE` option in the time range selector to switch to the Live Search mode for the past 15 minutes from the `HISTORICAL` mode. The number of received spans per second is displayed at the top of the traces table, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity but are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the Pause/Play button at the top right of the screen to pause or resume the stream.
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
-## Column Options
+## Filtering the trace stream and search query
 
-Customize the Live Tail column view to better highlight the relevant information in your traces. Click on the column dropdown at the top right of the column header to activate one of the options below:
+A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones. 
 
-{{< img src="tracing/live_tail/column_livetail.png" alt="Live tail" style="width:20%;">}}
+Note: You can select only the `top-level spans of the service` by selecting the checkbox above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services.  
 
-1. Move column to the right or left.
-2. Insert column to the right or left from span tags.
-3. Remove or replace column.
-
-## Filtering the trace Stream
-
-A valid query in the search bar displays traces that match your search criteria. The search syntax is the same in the Live Tail views as in the other trace views, but here, your query is matched against all of the ingested traces and not just the indexed ones.
-
-## Search Query
-
-{{< img src="tracing/live_tail/search_livetail.png" alt="Live tail" >}}
-
-Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets. For example, to filter on the a customer_id attribute, there are two options:
+You can also filter on attributes that are not defined as facets. For example, to filter on the customer_id attribute, there are two options:
 
 - Click on the attribute and add it to the search using the query `@customer_id:1123`.
-- Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`.
+- Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`
+
+**Note**: selecting this box only visually filters the spans shown.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/livetail
+[1]: https://app.datadoghq.com/apm/traces
