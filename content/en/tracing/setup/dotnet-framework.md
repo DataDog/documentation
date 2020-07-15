@@ -98,7 +98,7 @@ SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
-dotnet.exe example.dll
+example.exe
 ```
 
 ## Manual Instrumentation
