@@ -126,7 +126,7 @@ If your application runs in IIS, skip the rest of this section.
 
 For Windows applications **not** running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
 Name                       | Value
 ---------------------------|------
