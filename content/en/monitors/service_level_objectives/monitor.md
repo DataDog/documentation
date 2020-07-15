@@ -24,13 +24,18 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 2. Select multiple monitors (up to 20) or,
 3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation.
 
+**Supported Monitor Types:**
+- Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
+- Synthetics
+- Service Checks (open beta)
+
 **Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to track how often this host is down.
 
 ### Set your SLO targets
 
-SLO targets are the stat you use to measure uptime success.
+An SLO comprised of the target percentage and the time window that the target should be tracked for.
 
-First select your target value, example: `95% of all HTTP requests should be "good" over the last 7 days`.
+Example: `95% of all HTTP requests should be "good" over the last 7 days`.
 
 You can optionally include a warning value that is greater than the target value to indicate when you are approaching an SLO breach.
 
@@ -38,9 +43,9 @@ You can optionally include a warning value that is greater than the target value
 
 Here we add contextual information about the purpose of the SLO, including any related information in the description and tags you would like to associate with the SLO.
 
-### Underlying monitor and SLO histories
+## Underlying monitor and SLO histories
 
-Making changes to the monitor used by an SLO recalculates the SLO history. Therefore, the monitor history and SLO history may not match after a monitor update.
+SLOs based on the metric monitor types have a feature called SLO Replay that will backfill SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. This means that if you create a new Metric Monitor and set an SLO on that new monitor, rather than having to wait a full 7, 30 or 90 days for the SLO's status to fill out, SLO Replay will trigger and look at the underlying metric of that monitor and the monitor's query to get the status sooner. SLO Replay also triggers when the underlying metric monitor's query is changed (e.g. the threshold is changed) to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
