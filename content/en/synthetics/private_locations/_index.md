@@ -353,7 +353,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 #### Set up healthchecks
 
-You can add a healthcheck mechanism to have your orchestrator ensure your workers are always running correctly.
+Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
 
 The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (every 500ms by default). The container can be considered unhealthy if no poll has been performed in a while (e.g., no fetch in the last minute).
 
