@@ -43,7 +43,24 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 
 Here you can add contextual information about the purpose of the SLO, including any related information or resources in the description and tags you would like to associate with the SLO.
 
-### Underlying monitor and SLO histories
+## Overall Status Calculation
+
+{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
+
+The overall status can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors.
+
+Consider the following example for 3 monitors:
+
+| Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
+|--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
+| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    |
+| Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90%    |
+| Monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80%    |
+| **Overall Status** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70%    |
+
+This can result in the overall status being lower than the average of the individual statuses.
+
+## Underlying monitor and SLO histories
 
 SLOs based on the metric monitor types have a feature called SLO Replay that will backfill SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. This means that if you create a new Metric Monitor and set an SLO on that new monitor, rather than having to wait a full 7, 30 or 90 days for the SLO's status to fill out, SLO Replay will trigger and look at the underlying metric of that monitor and the monitor's query to get the status sooner. SLO Replay also triggers when the underlying metric monitor's query is changed (e.g. the threshold is changed) to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
 
