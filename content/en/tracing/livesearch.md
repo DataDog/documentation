@@ -25,7 +25,7 @@ further_reading:
   text: "Analytics on your APM data at infinite cardinality"
 ---
 
-{{< img src="tracing/live_tail/livesearchmain.gif" alt="Live Search" >}}
+{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 ## Overview
 
@@ -39,14 +39,14 @@ The APM [Live Search][1] gives you the ability to search all ingested spans usin
 - Add, remove, and sort columns from span tags for a customized view.
 
 ## Live Search Mode
-{{< img src="tracing/live_tail/livesearch_mode.gif" alt="Live Search mode" >}}
+{{< img src="tracing/live_search/livesearch_mode.gif" alt="Live Search mode" >}}
 
 `Live Search` mode is the default experience on the Traces page or you can choose the `LIVE` option in the time range selector to switch to the Live Search mode for the past 15 minutes from the `HISTORICAL` mode. The number of received spans per second is displayed at the top of the traces table, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity but are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
-## Filtering the trace stream and search query
-{{< img src="tracing/live_tail/toplevelspan.gif" alt="Live Search query" >}}
+## Filtering the Trace Stream and Search Query
+{{< img src="tracing/live_search/toplevespan.gif" alt="Live Search query" >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
 
@@ -54,7 +54,7 @@ Note: You can select only the `top-level spans of the service` by selecting the 
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `customer_id` attribute, there are two options:
 
-{{< img src="tracing/live_tail/livesearch_query.png" alt="Live Search filter" >}}
+{{< img src="tracing/live_search/livesearch_query.png" alt="Live Search filter" >}}
 
 - Click on the attribute and add it to the search using the query `@customer_id:1123`.
 - Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`
