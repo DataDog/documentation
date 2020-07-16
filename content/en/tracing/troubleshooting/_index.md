@@ -56,11 +56,11 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **An [agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your agent while in [debug mode][6]**
+4. **An [Agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug mode][6]**
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-    **Note**: If you are using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` set in your `datadog.yaml` to get a flare from the trace-agent:
+    **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
