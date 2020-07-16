@@ -42,7 +42,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 ## Dedicated containers
 
-When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will deploy an Agent Pod containing:
+When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog Agent and Trace Agent are in separate containers, you will deploy an Agent Pod containing:
 
 * One container with the agent process (Agent + Log agent)
 * One container with the process-agent process
