@@ -238,7 +238,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTP`     | An HTTP URL to use as a proxy for `http` requests.                |
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
-| `DD_SKIP_SSL_VALIDATION` | An option to test if the agent is having issues connecting to Datadog. |
+| `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
 For more information about proxy settings, see the [Agent v6 Proxy documentation][5].
 
