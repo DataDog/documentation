@@ -37,9 +37,9 @@ The following provisioning systems are supported:
 
 ## Setup
 
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup. 
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup.
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommend to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -154,7 +154,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe for the Agent container with the following environment variables:
+2. Enable process collection and the system probe with the following environment variables in the Agent container. If all Agents are running in a single container, use:
 
     ```yaml
       # (...)
@@ -169,6 +169,8 @@ If you already have the [Agent running with a manifest][3]:
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
     ```
+
+    If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
 
 3. Mount the following extra volumes into the `datadog-agent` container:
 
@@ -193,7 +195,7 @@ If you already have the [Agent running with a manifest][3]:
                         mountPath: /var/run/s6
     ```
 
-4. Add a new system-prob as a side car to the Agent:
+4. Add a new system-probe as a side car to the Agent:
 
     ```yaml
      # (...)
@@ -217,8 +219,6 @@ If you already have the [Agent running with a manifest][3]:
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
-                          - name: DD_SYSTEM_PROBE_ENABLED
-                            value: 'true'
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
                       resources:
