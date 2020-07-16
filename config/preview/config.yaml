@@ -3,8 +3,8 @@ buildfuture: true
 builddrafts: true
 enableGitInfo: true
 
-deployment: 
-    order: 
+deployment:
+    order:
       - ".css$"
       - ".js$"
       - ".jpg$"
@@ -12,15 +12,15 @@ deployment:
       - ".gif$"
       - ".mp4$"
 
-    targets: 
+    targets:
     - name: "preview"
       URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
-      exclude: "**.{go,java,sh,py,rb,json}"
+      exclude: "**.{go,java,sh,py,rb}"
       cloudFrontDistributionID: E3EYIYXXL26MK1
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
-  
+
     matchers:
       - pattern: "^.+\\.(js|css|svg)$"
         cacheControl: "max-age=31536000, no-transform, public"
