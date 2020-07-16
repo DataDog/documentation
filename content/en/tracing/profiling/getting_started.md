@@ -90,7 +90,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
     ```
     DD_PROFILING_ENABLED=true ddtrace-run python app.py
     ```
-    **Note:** `DD_PROFILING_ENABLED` is only supported in `dd-trace` version 0.40+. Please use the alternate method if you are running an older version of `dd-trace`.
+    **Note:** `DD_PROFILING_ENABLED` is only supported in `dd-trace` version 0.40+. Use the alternate method if you are running an older version of `dd-trace`.
 
     **Alternate method**
 
