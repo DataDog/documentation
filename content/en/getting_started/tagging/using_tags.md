@@ -281,6 +281,41 @@ Additionally, tags are used to filter a logs [Pipeline][14]. In the example belo
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags"  style="width:80%;">}}
 
+
+## Service Level Objectives
+
+{{< tabs >}}
+{{% tab "Manage SLOs" %}}
+
+To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example `-journey:add_item`. **Note**: SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
+
+{{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO Tags"  style="width:80%;">}}
+
+[1]: /getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
+{{% /tab %}}
+
+{{% tab "Metric-based SLOs" %}}
+
+When creating a [metric-based SLO][1], use metric tags in the SLO's success ratio metric queries (all metrics must use the same set of metric tags):
+
+* **from** textbox to limit the metric scope to only those tags.
+* **sum by** textbox to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
+
+{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Metric-based SLO Tags"  style="width:80%;">}}
+
+[1]: /monitors/service_level_objectives/metric/
+{{% /tab %}}
+{{% tab "Monitor-based SLOs" %}}
+
+When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use the **Calculate on selected groups** toggle to select up to 20 tag values from the underlying monitor to display a status percentage and remaining error budget for both the overall SLO and for each tag value:
+
+{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags"  style="width:80%;">}}
+
+[1]: /monitors/service_level_objectives/monitor/
+[2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Developers
 
 Tags can be used in various ways with the [API][15]. See the list below for links to those sections:
@@ -296,6 +331,9 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 * [Monitors group search][22]
 * [Create a Screenboard][24]
 * [Create a Timeboard][24]
+* [Create a SLO][25]
+* [Get a SLO's details][26]
+* [Update a SLO][27]
 
 ## Further Reading
 
@@ -325,3 +363,6 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 [22]: /api/v1/monitors/#get-all-monitor-details
 [23]: /api/v1/monitors/#mute-a-monitor
 [24]: /api/v1/dashboards/#create-a-new-dashboard
+[25]: /api/v1/service-level-objectives/#create-a-slo-object
+[26]: /api/v1/service-level-objectives/#get-a-slos-details
+[27]: /api/v1/service-level-objectives/#update-a-slo
