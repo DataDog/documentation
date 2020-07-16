@@ -1,5 +1,5 @@
 ---
-title: Live Tail
+title: Live Search
 kind: documentation
 description: "See all your trace spans in real time."
 further_reading:
@@ -28,6 +28,7 @@ further_reading:
 ## Overview
 
 The APM [Live Search][1] gives you the ability to search all ingested spans using any tag in real-time for the past 15 minutes. It displays spans as soon as they are sent by the Datadog agent and before they are indexed by Datadog. All spans ingested by Datadog are displayed without any sampling (Tracing without Limits\*). With the APM Live Search you can:
+
 - Write search queries to refine the stream of traces by any tag on any span. Example: monitor that a new deployment went smoothly by filtering on version_id of all tags
 - View 100% of trace spans as they are ingested - no sampling on ingested spans for 15 minutes. Example: view outage related information in real-time as it happens related to specific org_id or customer_id associated with a child span
 - Search queries autocomplete in real-time. Example: check if a process has correctly started type process_id of a child span tag and it auto completes the id.
