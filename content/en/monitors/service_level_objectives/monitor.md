@@ -24,7 +24,7 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 
 1. Select a single monitor or,
 2. Select multiple monitors (up to 20) or,
-3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation.
+3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation using the **Calculate on selected groups** toggle.
 
 **Supported Monitor Types:**
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
