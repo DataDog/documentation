@@ -157,7 +157,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 **Example with system property**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_methods.png" alt="trace methods"  >}}
