@@ -840,10 +840,10 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: app_analytics
     weight: 405
-  - name: Live Tail
-    url: tracing/livetail/
+  - name: Live Search
+    url: tracing/livesearch/
     parent: tracing
-    identifier: livetail
+    identifier: Live Search
     weight: 5
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
