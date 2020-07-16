@@ -94,7 +94,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
     **Alternate method**
 
-    If you prefer to instrument the profiler through code, import `ddtrace.profile.auto`. After import, the profiler starts:
+    If you prefer to instrument the profiler through code, import `ddtrace.profile.auto`. After import, the Profiler starts:
 
     ```python
     import ddtrace.profiling.auto
