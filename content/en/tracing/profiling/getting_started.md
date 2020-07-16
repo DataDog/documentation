@@ -85,7 +85,16 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
-3. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+3. To automatically profile your code, set `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
+
+    ```
+    DD_PROFILING_ENABLED=true ddtrace-run python app.py
+    ```
+    **Note:** `DD_PROFILING_ENABLED` is only supported in `dd-trace` version 0.40+. Use the alternate method if you are running an older version of `dd-trace`.
+
+    **Alternate method**
+
+    If you prefer to instrument the profiler through code, import `ddtrace.profile.auto`. After import, the Profiler starts:
 
     ```python
     import ddtrace.profiling.auto
@@ -105,6 +114,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling. Supported from tracker version 0.40+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -218,7 +228,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
     npm install --save dd-trace
     ```
 
-    **Note**: Profiling is available in the `dd-trace` library in versions 0.23+.
+    **Note**: Profiling is available in the `dd-trace` library in versions 0.23.1+.
 
 3. To automatically profile your code, import and initialize `dd-trace` with profiling enabled:
 
@@ -236,6 +246,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling.               |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |
