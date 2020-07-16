@@ -124,9 +124,9 @@ try (final Scope scope = tracer.activateSpan(span)) {
 
     // Set error on root span
     if (span instanceof MutableSpan) {
-    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
-    localRootSpan.setError(true);
-    localRootSpan.setTag("some.other.tag", "value");
+        MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+        localRootSpan.setError(true);
+        localRootSpan.setTag("some.other.tag", "value");
     }
 } finally {
     // Close span in a finally block
