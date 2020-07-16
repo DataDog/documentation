@@ -12,6 +12,8 @@ further_reading:
 
 Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior. Using the sum of the good time divided by the sum of total time provides a Service Level Indicator (or SLI).
 
+{{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example"  >}}
+
 ## Setup
 
 On the [SLO status page][2], select **New SLO +**. Then select [**Monitor**][3].
