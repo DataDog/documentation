@@ -319,7 +319,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 The following tables list the supported configuration variables. Use the first name (e.g. `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name, if present (e.g. `AgentUri`), indicates the name the `TracerSettings` propery to use when changing settings in the code.
 
-#### Tagging
+#### Unified Service Tagging
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -343,7 +343,7 @@ The following table below lists configuration variables that are available for b
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
-| `DD_TRACE_HEADER_TAGS`                                    | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+  | 
+| `DD_TRACE_HEADER_TAGS`                                    | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+  | 
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
