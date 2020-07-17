@@ -228,7 +228,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
     npm install --save dd-trace
     ```
 
-    **Note**: Profiling is available in the `dd-trace` library in versions 0.23.1+.
+    **Note**: Profiling is available in the `dd-trace` library in versions 0.23.2+.
 
 3. To automatically profile your code, import and initialize `dd-trace` with profiling enabled:
 
