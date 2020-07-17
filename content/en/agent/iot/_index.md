@@ -91,6 +91,9 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
   <li><p>Copy the example config and plug in your API key:</p>
   <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
   </li>
+  <li><p>Start the IoT Agent:</p>
+  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
+  </li>
 </ol>
 
 {{< /site-region >}}
@@ -99,19 +102,16 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
 <ol start="4">
   <li><p>Copy the example config and plug in your API key:</p>
   <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
   <li><p>Set your Datadog site:</p>
   <pre><code>sudo sh -c "sed 's/# site:.*/site: datadoghq.eu/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml</code></pre>
   </li>
-  </li>
-</ol>
-
-{{< /site-region >}}
-
-<ol start="6">
   <li><p>Start the IoT Agent:</p>
   <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
   </li>
 </ol>
+
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "RPM" %}}
@@ -145,6 +145,9 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
   <li><p>Copy the example config and plug in your API key:</p>
   <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
   </li>
+  <li><p>Start the IoT Agent:</p>
+  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
+  </li>
 </ol>
 
 {{< /site-region >}}
@@ -153,19 +156,16 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
 <ol start="3">
   <li><p>Copy the example config and plug in your API key:</p>
   <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
   <li><p>Set your Datadog site:</p>
   <pre><code>sudo sh -c "sed 's/# site:.*/site: datadoghq.eu/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml</code></pre>
   </li>
-  </li>
-</ol>
-
-{{< /site-region >}}
-
-<ol start="5">
   <li><p>Start the IoT Agent:</p>
   <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
   </li>
 </ol>
+
+{{< /site-region >}}
 
 {{% /tab %}}
 {{< /tabs >}}
