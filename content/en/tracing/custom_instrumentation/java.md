@@ -317,27 +317,9 @@ The value of the property or environment variable is a comma (or space) separate
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-### Resource Filtering for Health Checks & other endpoints
-
-The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
-
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][9].
-
-This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to disable certain traces based on their resource name
-## all entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
-
-
-
-<br>
-
 ## OpenTracing
 
-Datadog integrates seamlessly with the [OpenTracing API][10].
+Datadog integrates seamlessly with the [OpenTracing API][9].
 
 ### Setup
 
@@ -400,7 +382,7 @@ public class Application {
 }
 ```
 
-Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][11] for a full listing.
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][10] for a full listing.
 
 
 ### Asynchronous traces
@@ -500,7 +482,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][10] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][9] for more details and information.
 
 
 ## Further Reading
@@ -515,6 +497,5 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: https://github.com/openzipkin/b3-propagation
-[9]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[10]: https://github.com/opentracing/opentracing-java
-[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
+[9]: https://github.com/opentracing/opentracing-java
+[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java

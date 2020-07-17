@@ -970,61 +970,74 @@ main:
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_dotnet
     weight: 908
+  - name: Security and Fine-tuning
+    url: tracing/security/
+    parent: tracing
+    identifier: tracing_security
+    weight: 10
+  - name: Agent Span Modification
+    url: tracing/security/agent_span_modification/
+    parent: tracing_security
+    weight: 1001
+  - name: Tracer Span Modification
+    url: tracing/security/tracer_span_modification/
+    parent: tracing_security
+    weight: 1002
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 10
+    weight: 11
   - name: Services List
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1001
+    weight: 1101
   - name: Service Page
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1002
+    weight: 1102
   - name: Resource Page
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1003
+    weight: 1103
   - name: Trace View
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1004
+    weight: 1104
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1005
+    weight: 1105
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 11
+    weight: 12
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 12
+    weight: 13
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1201
+    weight: 1301
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1202
+    weight: 1302
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1203
+    weight: 1303
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1204
+    weight: 1304
   - name: Log Management
     url: logs/
     pre: nav_logs

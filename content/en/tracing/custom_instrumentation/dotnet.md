@@ -111,29 +111,12 @@ using (var parentScope =
 }
 ```
 
-<br>
-
-## Resource filtering
-
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
-
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
-
-Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
-
-
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][6].
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][5].
 
 ### Setup
-For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][7] to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][6] to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
 using Datadog.Trace.OpenTracing;
@@ -189,6 +172,5 @@ To trace code running in an asynchronous task, create a new scope within the bac
 [2]: /tracing/visualization/#span-tags
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/trace/?tab=spantags#more-information
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[6]: https://github.com/opentracing/opentracing-csharp
-[7]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
+[5]: https://github.com/opentracing/opentracing-csharp
+[6]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
