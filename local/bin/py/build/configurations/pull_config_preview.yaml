@@ -273,7 +273,7 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: tanguy.lebarzic/security-monitoring-rules-cleanup
+      branch: main
       globs:
         - "security-monitoring/*.json"
       options:
