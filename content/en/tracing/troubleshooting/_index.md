@@ -28,7 +28,7 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 | NodeJS | 0.23.0+  |
 | Python | 0.41 (once available)  |
 | Ruby | 0.38 (once available)  |
-| C++ | 1.1.6 (once available)  |
+| C++ | 1.2.0+ |
 
 ## Tracer debug logs
 
