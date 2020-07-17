@@ -372,3 +372,4 @@ The following table lists configuration variables that are available only when u
 [3]: /tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /tracing/manual_instrumentation/dotnet/
+[9]: /getting_started/tagging/unified_service_tagging/

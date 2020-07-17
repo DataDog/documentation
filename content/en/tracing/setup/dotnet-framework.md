@@ -258,3 +258,4 @@ The following table lists configuration variables that are available only when u
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /tracing/manual_instrumentation/dotnet/
+[9]: /getting_started/tagging/unified_service_tagging/
