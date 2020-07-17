@@ -28,7 +28,7 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 | NodeJS | 0.23.0+  |
 | Python | 0.41 (once available)  |
 | Ruby | 0.38 (once available)  |
-| C++ | 1.1.6 (once available)  |
+| C++ | 1.2.0+ |
 
 ## Tracer debug logs
 
@@ -38,7 +38,7 @@ These logs can surface instrumentation errors or integration-specific errors.  F
 
 ## APM rate limits
 
-Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
 
 ## Troubleshooting data requested by Datadog Support
 
