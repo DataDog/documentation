@@ -14,12 +14,6 @@ private: true
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic. [8 mins]{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="APM Video Feature Tour" >}}
-    {{< nextlink href="videos/apm_overview/" >}}APM Overview{{< /nextlink >}}
-    {{< nextlink href="videos/apm_traces_flame_graph/" >}}APM Traces and Flamegraph{{< /nextlink >}}
-    {{< nextlink href="videos/apm_dashboards_trace_metrics/" >}}Datadog Dashboards and Trace Metrics{{< /nextlink >}}
-{{< /whatsnext >}}
-<br>
 {{< whatsnext desc="Advanced Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
