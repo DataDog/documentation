@@ -110,7 +110,9 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 3. By default the Agent does not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
-4. You may have some .yaml parsing errors in your configuration files. YAML can be finicky, so when in doubt rely on a [YAML validator][8].
+4.  yaml parsing errors in your configuration files.Checkout on this https://www.yamlonline.com/
+
+5. You may have some .yaml parsing errors in your configuration files. YAML can be finicky, so when in doubt rely on a [YAML validator][8].
 
 ### Check for errors in the Agent logs
 
