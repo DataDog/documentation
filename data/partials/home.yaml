@@ -70,7 +70,7 @@ nav_sections:
         desc: Gain visibiliy into your network traffic using tagged objects
       - title: Mobile
         link: mobile/
-        icon: network.svg
+        icon: mobile.svg
         desc: View Datadog alerts and dashboards on your mobile device
       - title: Watchdog
         link: watchdog/
