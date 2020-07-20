@@ -88,7 +88,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
 [4]: /tracing/troubleshooting/agent_rate_limits
-[5]: /agent/troubleshooting/#send-a-flare
+[5]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
 [6]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [7]: /tracing/custom_instrumentation/
 [8]: /tracing/compatibility_requirements/
