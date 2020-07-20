@@ -2,12 +2,6 @@
 title: Getting Started
 kind: Documentation
 further_reading:
-    - link: 'tracing/profiling/trace_profile'
-      tag: 'Documentation'
-      text: 'Connect traces and profiles.'
-    - link: 'tracing/profiling/code_level_metrics'
-      tag: 'Documentation'
-      text: 'View code level metrics.'  
     - link: 'tracing/profiling/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
