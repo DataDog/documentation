@@ -276,31 +276,35 @@ main:
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
     weight: 405
+  - name: Admission Controller
+    url: agent/cluster_agent/admission_controller/
+    parent: agent_cluster
+    weight: 406
   - name: Commands & Options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 406
+    weight: 407
   - name: Cluster metadata provider
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 407
+    weight: 408
   - name: Build
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 408
+    weight: 409
   - name: Cluster Checks Runner
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 409
+    weight: 410
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 410
+    weight: 411
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
