@@ -1315,7 +1315,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
             no quotes).
 
-            Limited to events no older than 1 year, 24 days (389 days).'
+            Limited to events no older than 7 days.'
           format: int64
           type: integer
         device_name:
@@ -1693,12 +1693,12 @@ components:
             When it matches an integration name, Datadog automatically installs the
             corresponding parsers and facets.
 
-            See [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
           example: nginx
           type: string
         ddtags:
           description: Tags associated with your logs.
-          example: env:staging,service:payment
+          example: env:staging,version:5.1
           type: string
         hostname:
           description: The name of the originating host of the log.
@@ -1713,6 +1713,16 @@ components:
             That value is then highlighted and displayed in the Logstream, where it
             is indexed for full text search.'
           example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+            value when you use both products.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: payment
           type: string
       required:
       - name
@@ -16730,7 +16740,8 @@ paths:
         the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
       operationId: SubmitLog
       parameters:
-      - in: header
+      - description: HTTP header used to compress the media-type.
+        in: header
         name: Content-Encoding
         required: false
         schema:
