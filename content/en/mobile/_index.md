@@ -28,7 +28,7 @@ To install on an Android device, [download the app from the Google Play store][2
 
 You can login using standard authentication, Google authentication, and [SAML][3]. 
 
-To enable SAML login, you need to login to the [account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen. Now you can login using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
+To enable SAML login, you need to login to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen. Now you can login using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
 
 ## Monitors
 
