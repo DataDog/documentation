@@ -26,15 +26,17 @@ To install on an Android device, [download the app from the Google Play store][2
 
 ### Logging in
 
-You can login using standard authentication, Google authentication, and [SAML][3].
+You can login using standard authentication, Google authentication, and [SAML][3]. 
+
+To enable SAML login, you need to login to the [account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen. Now you can login using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
 
 ## Monitors
 
 {{< img src="mobile/monitor-example.png" alt="monitor page" style="width:50%;">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][4]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][5]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
-**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][5]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][6].
+**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][6]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][7].
 
 ## Dashboards
 
@@ -42,7 +44,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org. Click into an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][7]. For more information, see [Dashboards][8].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][8]. For more information, see [Dashboards][9].
 
 ## Account
 
@@ -50,7 +52,7 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][9]. You can also send a message in the [Datadog public Slack][10] [#mobile-app][11] channel. 
+For help with troubleshooting, [contact Datadog support][10]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
 
 ### Further Reading
 
@@ -59,11 +61,12 @@ For help with troubleshooting, [contact Datadog support][9]. You can also send a
 [1]: https://apps.apple.com/app/datadog/id1391380318
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
-[4]: /monitors/manage_monitor/#search
-[5]: https://app.datadoghq.com/monitors
-[6]: /monitors/monitor_types/
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: /dashboards/
-[9]: /help/
-[10]: https://chat.datadoghq.com/
-[11]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[4]: https://app.datadoghq.com/account/profile
+[5]: /monitors/manage_monitor/#search
+[6]: https://app.datadoghq.com/monitors
+[7]: /monitors/monitor_types/
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: /dashboards/
+[10]: /help/
+[11]: https://chat.datadoghq.com/
+[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
