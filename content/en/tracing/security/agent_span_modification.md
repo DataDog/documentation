@@ -8,11 +8,11 @@ aliases:
 
 ## Filtering Baseline
 
-Several filtering mechanisms are enforced as a baseline in an effort to provide sound defaults. In particular:
+Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security. In particular:
 
 * **Environment variables are not collected by the Agent**
-* **SQL variables are obfuscated by default, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` would have its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
-* **Numbers in Resource names (e.g. in request urls) are obfuscated by default** For example, the following `elasticsearch` attribute:
+* **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
+* **Numbers in Resource names (for example, request URLs) are obfuscated** For example, the following `elasticsearch` attribute:
 
     ```text
     Elasticsearch : {
@@ -21,13 +21,13 @@ Several filtering mechanisms are enforced as a baseline in an effort to provide 
     }
     ```
 
-    would have its number in the url obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
+    has its number in the URL obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
 
 ## Agent Trace Obfuscation
 
 Agent [trace][1] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
-Currently this options only works with the following services:
+This option works with the following services:
 
 * `mongodb`
 * `elasticsearch`
@@ -36,7 +36,7 @@ Currently this options only works with the following services:
 * `http`
 * `remove_stack_traces`
 
-**Note:** Automatic scrubbing can be used for multiple types of services at the same time.  Each should be configured under the `obfuscation` level of your `datadog.yaml` file.
+**Note:** You can use automatic scrubbing for multiple types of services at the same time.  Configure each in the `obfuscation` section of your `datadog.yaml` file.
 
 {{< tabs >}}
 {{% tab "MongoDB" %}}
@@ -159,7 +159,7 @@ apm_config:
 
 ## Replace rules for tag filtering
 
-To scrub sensitive data from your [span][2]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][3] or the `DD_APM_REPLACE_TAGS` environment variable. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
+To scrub sensitive data from your [span][2]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][3] or the `DD_APM_REPLACE_TAGS` environment variable. The value of the setting or environment variable is a list of one or more groups of parameters that specify how to replace sensitive data in your tags. These parameters are:
 
 * `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
 * `pattern`: The regexp pattern to match against.
@@ -213,7 +213,7 @@ DD_APM_REPLACE_TAGS=[
 
 ## Resource filtering
 
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
+The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent will filter out based on their resource name.
 
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][4] for details.
 

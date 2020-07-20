@@ -1,12 +1,12 @@
 ---
-title: Agent Span Modification
+title: Tracer Span Modification
 kind: documentation
 description: "Configure the Datadog Tracer to modify or discard spans for security or fine-tuning purposes."
 ---
 
 ## Post-Processing Traces
 
-The tracing libraries are designed to be extensible. Customers may consider writing a custom post-processor to intercept Spans then adjust or discard them accordingly (e.g. based on a regular expressions). For example, this could be achieved with the following constructs:
+The tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (fore example, based on a regular expression match). See the following examples:
 
 * Java: [TraceInterceptor interface][1]
 * Ruby: [Processing Pipeline][2]

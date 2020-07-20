@@ -970,7 +970,7 @@ main:
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_dotnet
     weight: 908
-  - name: Security and Fine-tuning
+  - name: Security and Fine-Tuning
     url: tracing/security/
     parent: tracing
     identifier: tracing_security
