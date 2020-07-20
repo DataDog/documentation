@@ -13,7 +13,7 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 - link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
-  text: "Log Parsing - Best Practice"
+  text: "Log Parsing - Best Practices"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
