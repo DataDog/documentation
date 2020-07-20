@@ -83,7 +83,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 **Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
 
-If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, the monitor is forced to Recover. And then, it is triggered again quickly.
+If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, the monitor is forced to recover. It is then quickly triggered again.
 
 If a monitor triggers an alert **before** a downtime and recovers **during** that downtime, then a recovery event is sent during the downtime (if this is the first recovery during that downtime).
 
