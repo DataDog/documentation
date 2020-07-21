@@ -68,8 +68,8 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
   For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 
+[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
@@ -131,9 +131,9 @@ You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS
 
 The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
 
+
 [1]: https://github.com/DataDog/datadog-lambda-layer-python/releases
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-
 {{% /tab %}}
 {{% tab "Other" %}}
 
@@ -142,7 +142,9 @@ The Datadog Forwarder will now send enhanced metrics and traces from your functi
 The Datadog Lambda Library can be installed from PyPI by running the following command
 or adding datadog-lambda to your project's requirements.txt:
 
-```pip install datadog-lambda```
+```
+pip install datadog-lambda
+```
 
 Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
 
@@ -172,8 +174,8 @@ You need the Datadog Forwarder to subscribe to each of your function’s log gro
 
 You can quickly verify that you’ve installed the Datadog Forwarder here. For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 
+[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}}
 {{< /tabs >}}
 
