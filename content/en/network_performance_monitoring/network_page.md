@@ -119,7 +119,7 @@ Congifure the traffic shown with the `Filter Traffic` button.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
 
-External traffic (to public IPs) and Datadog Agent traffic is shown by default. To denoise your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
+External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
 
 ### Unresolved Traffic
 
