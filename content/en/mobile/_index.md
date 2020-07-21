@@ -14,8 +14,6 @@ The Datadog Mobile app enables on-call engineers to view alerts from Datadog on 
 
 ## Installing
 
-Download the Datadog mobile app in the [Apple App Store][1] or in the [Google Play store][2].
-
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
 ### Logging in
