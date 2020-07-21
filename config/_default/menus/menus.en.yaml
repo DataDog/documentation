@@ -1378,6 +1378,7 @@ main:
   - name: Python
     url: serverless/installation/python
     parent: serverless_installation
+    identifier: serverless_installation_python
     weight: 101
   - name: Node
     url: serverless/installation/nodejs
