@@ -35,7 +35,7 @@ Otherwise, to begin tracing applications written in any language, first [install
 
 ## Automatic Instrumentation
 
-Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries](#integrations) out of the box.
+Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][1] out of the box.
 
 Automatic instrumentation captures:
 
@@ -355,7 +355,7 @@ The following table lists configuration variables that are available only when u
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above. **Note:** On Linux, the names of environment variables are case-sensitive.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations][1] section. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 | Setting Name                                                            | Description                                                                                                           |
 |-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -371,5 +371,5 @@ The following table lists configuration variables that are available only when u
 [2]: https://app.datadoghq.com/apm/install
 [3]: /tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
-[5]: /tracing/manual_instrumentation/dotnet/
+[5]: /tracing/custom_instrumentation/dotnet/
 [9]: /getting_started/tagging/unified_service_tagging/
