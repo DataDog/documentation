@@ -28,9 +28,9 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
     {{< img src="mobile/link-device.png" alt="monitor page">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen.
 3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
-4. Now log in using your normal SAML login flow. 
+4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
 
-**Note**: By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
+**Note**: Idp-initiated login (authentication starting from the SAML identity provider) needs additional configuration on the identity provider side. Please contact [Datadog Support][10] for more information or if you have issues with SAML login.
 
 ## Monitors
 
@@ -44,7 +44,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 {{< img src="mobile/dashboard-example.png" alt="dashboard page" style="width:50%;">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org. Click into an individual dashboard to view it.
+On the Dashboards page, you can view and search all of the dashboard that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click into an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][8]. For more information, see [Dashboards][9].
 
