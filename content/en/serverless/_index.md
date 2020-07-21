@@ -23,25 +23,23 @@ Make sure to check out discussions going on in the [#serverless][2] channel in t
 
 ## Getting Started
 
-### 1. Install the Cloud Integration
+### 1. Install the AWS Integration
 
-Start by setting up the cloud integration you are using to run your serverless functions.
-
-#### AWS Lambda
-
-To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][4]. Alternatively, you can use [AWS X-Ray][5] to trace your Lambda functions.
-
-#### Azure App Services
-
-The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][6].
-
-#### Google App Engine
-
-To monitor serverless functions on Google App Engine, you need to enable [Datadog APM][7]. Datadog APM requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to configure a separate VM that accepts trace traffic externally.
+Start by installing the [AWS Integration][4]. Once this is completed, view all of your Lambda Functions in the [Datadog Serverless Homepage][1].
 
 ### 2. Instrument Your Application
 
 {{< partial name="serverless/getting-started-languages.html" >}}
+
+## Not Using AWS Lambda?
+
+### Azure App Services
+
+The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][5].
+
+### Google Cloud Functions
+
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, you need to enable the [Google Cloud Platform integration][6].
 
 ## Further Reading
 
@@ -50,7 +48,6 @@ To monitor serverless functions on Google App Engine, you need to enable [Datado
 [1]: http://app.datadoghq.com/functions
 [2]: https://datadoghq.slack.com/archives/CFDPB83M4
 [3]: https://chat.datadoghq.com/
-[4]: /integrations/amazon_lambda/#trace-collection
-[5]: /integrations/amazon_xray/#overview
-[6]: /infrastructure/serverless/azure_app_services/#overview
-[7]: /tracing/
+[4]: /integrations/amazon_web_services/
+[5]: /infrastructure/serverless/azure_app_services/#overview
+[6]: /integrations/google_cloud_platform/
