@@ -15,6 +15,8 @@ further_reading:
   text: "AWS Lambda Integration"
 ---
 
+{{< img src="serverless/datadog_serverless_overview.png" alt="Datadog Serverless Overview"  style="width:100%;">}}
+
 ## Overview
 
 Serverless is a concept where you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
