@@ -14,7 +14,7 @@ The Datadog Mobile app enables on-call engineers to view alerts from Datadog on 
 
 ## Installing
 
-The Datadog Mobile App is currently in beta, so it's not available generally in app stores. To download the app, use the specific invite links in these instructions.
+Download the Datadog mobile app in the [Apple App Store][1] or in the [Google Play store][2].
 
 ### iOS
 
@@ -26,9 +26,19 @@ To install on an Android device, [download the app from the Google Play store][2
 
 ### Logging in
 
-You can login using standard authentication, Google authentication, and [SAML][3]. 
+You can log in using standard authentication, Google authentication, or [SAML][3]. 
 
-To enable SAML login, you need to login to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen. Now you can login using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
+#### Enabling SAML
+
+SAML login requires you to set up and authenticate your SAML provider with Datadog. Before trying to login with SAML, 
+
+1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
+    {{< img src="mobile/link-device.png" alt="monitor page">}}
+2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen.
+3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
+4. Now log in using your normal SAML login flow. 
+
+**Note**: By clicking **Authorize** when logging in, you link this mobile device to your account so that you don't have to go through this flow again.
 
 ## Monitors
 

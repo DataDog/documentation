@@ -67,8 +67,8 @@ nav_sections:
       - title: Network Monitoring
         link: network_performance_monitoring/
         icon: network.svg
-        desc: Gain visibiliy into your network traffic using tagged objects
-      - title: Mobile
+        desc: Gain visibility into your network traffic using tagged objects
+      - title: Mobile App
         link: mobile/
         icon: mobile.svg
         desc: View Datadog alerts and dashboards on your mobile device
