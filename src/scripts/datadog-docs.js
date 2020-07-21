@@ -806,15 +806,6 @@ function getPathElement() {
         )[1];
     }
 
-    if (path.includes('security/agent')) {
-        aPath = document.querySelectorAll(
-            '.side [data-path*="security/agent"]'
-        )[1];
-        maPath = document.querySelectorAll(
-            'header [data-path*="security/agent"]'
-        )[1];
-    }
-
     if (path.includes('videos')) {
         aPath = document.querySelector('.side [data-path*="videos"]');
         maPath = document.querySelector('header [data-path*="videos"]');
