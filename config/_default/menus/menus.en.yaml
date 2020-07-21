@@ -978,10 +978,12 @@ main:
   - name: Agent Span Modification
     url: tracing/security/agent_span_modification/
     parent: tracing_security
+    identifier: tracing_security_agent_span_modification
     weight: 1001
   - name: Tracer Span Modification
     url: tracing/security/tracer_span_modification/
     parent: tracing_security
+    identifier: tracing_security_tracer_span_modification
     weight: 1002
   - name: APM Glossary
     url: tracing/visualization/
