@@ -2,12 +2,6 @@
 title: Getting Started
 kind: Documentation
 further_reading:
-    - link: 'tracing/profiling/trace_profile'
-      tag: 'Documentation'
-      text: 'Connect traces and profiles.'
-    - link: 'tracing/profiling/code_level_metrics'
-      tag: 'Documentation'
-      text: 'View code level metrics.'  
     - link: 'tracing/profiling/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
@@ -85,7 +79,16 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
-3. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+3. To automatically profile your code, set `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
+
+    ```
+    DD_PROFILING_ENABLED=true ddtrace-run python app.py
+    ```
+    **Note:** `DD_PROFILING_ENABLED` is only supported in `dd-trace` version 0.40+. Use the alternate method if you are running an older version of `dd-trace`.
+
+    **Alternate method**
+
+    If you prefer to instrument the profiler through code, import `ddtrace.profile.auto`. After import, the Profiler starts:
 
     ```python
     import ddtrace.profiling.auto
@@ -105,6 +108,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling. Supported from tracker version 0.40+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -210,15 +214,15 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1] or [6.20.2][1].  
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].  
 
-2. Install `ddtrace` which contains both tracing and profiling:
+2. Install `dd-trace` which contains both tracing and profiling:
 
     ```shell
     npm install --save dd-trace
     ```
 
-    **Note**: Profiling is available in the `dd-trace` library in versions 0.23+.
+    **Note**: Profiling is available in the `dd-trace` library in versions 0.23.2+.
 
 3. To automatically profile your code, import and initialize `dd-trace` with profiling enabled:
 
@@ -236,6 +240,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling.               |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |
@@ -255,11 +260,6 @@ If you've configured the profiler and don't see profiles in the [profile search 
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version, and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
-
-If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
-
-- OS type and version (e.g Linux Ubuntu 14.04.3)
-- Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
 
 
 ## Further Reading

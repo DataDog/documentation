@@ -13,7 +13,7 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 - link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
-  text: "Log Parsing - Best Practice"
+  text: "Log Parsing - Best Practices"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
@@ -113,7 +113,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).                                                         |
-| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#xml).                                                                                          |  
+| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                          |  
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -174,6 +174,7 @@ Some examples demonstrating how to use parsers:
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 * [List and Arrays](#list-and-arrays)
+* [Glog format](#glog-format)
 * [XML](#parsing-xml)
 
 ### Key value or logfmt
@@ -412,6 +413,37 @@ Users {John-Oliver-Marc-Tom} have been added to the database
 
 ```text
 myParsingRule Users %{data:users:array("{}","-")} have been added to the database
+```
+
+### Glog format
+
+Kubernetes components sometimes log in the `glog` format; this example is from the Kube Scheduler item in the Pipeline Library.
+
+Example log line:
+
+```text
+W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
+```
+
+Parsing rule:
+
+```text
+kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
+```
+
+And extracted JSON:
+
+```json
+{
+  "level": "W",
+  "timestamp": 1587728861605,
+  "logger": {
+    "thread_id": 1,
+    "name": "authorization.go"
+  },
+  "lineno": 47,
+  "msg": "Authorization is disabled"
+}
 ```
 
 ### Parsing XML

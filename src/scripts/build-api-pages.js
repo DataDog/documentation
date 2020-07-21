@@ -7,7 +7,7 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
-const supportedLangs = ['en', 'fr', 'ja'];
+const supportedLangs = ['en'];
 
 /**
  * Update the menu yaml file with api
@@ -367,8 +367,11 @@ const outputExample = (chosenExample, inputkey) => {
       // if array of strings use them
       // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
-        if(typeof item === 'object') {
-          // this needs to change, currently only output 1 level of example array
+        if(item instanceof Array) {
+          // if nested array pass back through
+          ex = `[${outputExample(item, inputkey)}]`;
+        } else if(typeof item === 'object') {
+          // output 1 level of example array
           if(inputkey && inputkey in item) {
             ex = outputValue(item[inputkey]);
           }

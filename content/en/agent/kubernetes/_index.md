@@ -238,6 +238,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTP`     | An HTTP URL to use as a proxy for `http` requests.                |
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
+| `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
 For more information about proxy settings, see the [Agent v6 Proxy documentation][5].
 
@@ -251,6 +252,8 @@ Optional collection Agents are disabled by default for security or performance r
 | `DD_LOGS_ENABLED`          | Enable [log collection][7] with the Logs Agent.                                                                                                                                                                                                              |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][8] with the Process Agent. The [live container view][9] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][8] and the [live container view][9] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well. |
+
+To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`. 
 
 ### DogStatsD (custom metrics)
 

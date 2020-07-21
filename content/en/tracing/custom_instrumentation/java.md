@@ -123,9 +123,11 @@ try (final Scope scope = tracer.activateSpan(span)) {
     span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
 
     // Set error on root span
-    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
-    localRootSpan.setError(true);
-    localRootSpan.setTag("some.other.tag", "value");
+    if (span instanceof MutableSpan) {
+        MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+        localRootSpan.setError(true);
+        localRootSpan.setTag("some.other.tag", "value");
+    }
 } finally {
     // Close span in a finally block
     span.finish();
@@ -136,7 +138,7 @@ If you are not manually creating a span, you can still access the root span thro
 
 ```java
 final Span span = GlobalTracer.get().activeSpan();
-if (span != null) {
+if (span != null && (span instanceof MutableSpan)) {
     MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
     // do stuff with root span
 }
@@ -510,7 +512,7 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
 [3]: /tracing/visualization/#trace
-[4]: /tracing/manual_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
+[4]: /tracing/custom_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37

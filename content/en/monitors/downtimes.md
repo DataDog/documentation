@@ -83,15 +83,13 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 **Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
 
-If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger the recovery event when data returns for the scope or the monitor returns to an `OK` state.
-
-This behavior is designed to prevent `NO DATA` alerts when using the *Autoresolve* feature. If you prefer the monitor to trigger a `NO DATA` event at the time the silencing expires, reach out to the [Datadog support team][7] to have the feature enabled for your account. **Note**: This only affects instances when a monitor exits a downtime period in a `NO DATA` state.
+If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, the monitor is forced to recover. It is then quickly triggered again.
 
 If a monitor triggers an alert **before** a downtime and recovers **during** that downtime, then a recovery event is sent during the downtime (if this is the first recovery during that downtime).
 
 ### Monitor report
 
-All alerted states are included on the [weekly monitor report][8] even if the monitor is in a downtime.
+All alerted states are included on the [weekly monitor report][7] even if the monitor is in a downtime.
 
 ## Further Reading
 
@@ -103,5 +101,4 @@ All alerted states are included on the [weekly monitor report][8] even if the mo
 [4]: /monitors/monitor_status/
 [5]: /events/#event-stream
 [6]: /api/v1/downtimes/#cancel-a-downtime
-[7]: /help/
-[8]: /account_management/#preferences
+[7]: /account_management/#preferences

@@ -101,7 +101,8 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 | [APM][16]            | Filter App Analytics or jump to other areas with the service map                                 |
 | [Notebooks][17]      | Filter and group metrics on graphs                                                               |
 | [Logs][18]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
-| [Developers][19]     | Pull information or setup different areas in the UI with the API                                 |
+| [SLOs][19]           | Search for SLOs, grouped metric-based SLOs, grouped monitor-based SLOs                           |
+| [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |
 
 ### Further Reading
 
@@ -125,4 +126,5 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 [16]: /getting_started/tagging/using_tags/#apm
 [17]: /getting_started/tagging/using_tags/#notebooks
 [18]: /getting_started/tagging/using_tags/#logs
-[19]: /getting_started/tagging/using_tags/#developers
+[19]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
+[20]: /getting_started/tagging/using_tags/#developers
