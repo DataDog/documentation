@@ -19,11 +19,16 @@
 
 {{ $currentPage := . }}
 
+<!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
+{{ $currentEnURL := $currentPage.RelPermalink }}
+{{ if ne $currentPage.Lang "en" }}
+    {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
+{{ end }}
                 
 <ul class="list-unstyled">
 {{ range $menu }}
     {{ if .HasChildren }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
+        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
@@ -38,7 +43,7 @@
             </ul>
         </li>
     {{ else }}
-        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
+        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
