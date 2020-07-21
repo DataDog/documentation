@@ -62,7 +62,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 ### Notify your team
 
-A notification is sent according to the set of alerting conditions. To configure your notifications:
+A notification is sent according to the set of alerting conditions. Notifications are only sent for automated tests. Notifications are not sent when tests are manually triggered by **Run Test Now**. To configure your notifications:
 
 1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
