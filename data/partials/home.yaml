@@ -68,6 +68,10 @@ nav_sections:
         link: network_performance_monitoring/
         icon: network.svg
         desc: Gain visibiliy into your network traffic using tagged objects
+      - title: Serverless
+        link: serverless/
+        icon: serverless.svg
+        desc: Bring together metrics, traces, and logs from your serverless applications.
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg
