@@ -13,12 +13,14 @@ further_reading:
 ## Overview
 The Datadog admission controller is a component of the Datadog Cluster Agent. The main benefit of the admission controller is to simplify the user's application pod configuration. For that, It has two main functionalities:
 
-- Inject environment variables (`DD_AGENT_HOST` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's app containers.
-- Inject Datadog standard tags (`env`, `service`, `version`) from app labels into the container environment variables.
+- Inject environment variables (`DD_AGENT_HOST` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
+
+Datadog's admission controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide][1].
 
 ## Requirements
 
-- Datadog Cluster Agent 1.7.0
+- Datadog Cluster Agent v1.7.0+
 
 ## Configuration
 
@@ -63,7 +65,9 @@ To enable the admission controller for the Datadog operator, set the parameter `
 
 ### APM and DogStatsD
 
-Inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` to configure DogstatsD clients and APM tracers automatically by using one of the following:
+By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][2]).
+
+To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
 
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
 - Configure the Cluster Agent admission controller by setting `mutateUnlabelled: true`.
@@ -90,3 +94,6 @@ Possible options:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
+[2]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
