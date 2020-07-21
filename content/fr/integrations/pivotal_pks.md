@@ -33,7 +33,7 @@ L'intégration surveille les clusters [Pivotal Container Service][1].
 
 ## Implémentation
 
-Comme Datadog intègre déjà Kubernetes, la plateforme est prête pour la surveillance de PKS.
+Étant donné que Datadog s'intègre déjà à Kubernetes, la plateforme est prête pour la surveillance de PKS.
 
 ### Collecte de métriques
 

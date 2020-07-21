@@ -10,7 +10,7 @@ further_reading:
     text: En savoir plus sur les emplacements privés
 ---
 <div class="alert alert-warning">
-Contactez l'<a href="https://docs.datadoghq.com/help/">équipe d'assistance Datadog</a> pour demander à accéder à cette fonctionnalité.
+L'accès à cette fonctionnalité est limité. Si vous n'êtes pas autorisé à y accéder, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
 </div>
 
 ## Présentation
