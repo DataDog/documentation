@@ -8,6 +8,15 @@ further_reading:
     - link: 'serverless/installation/ruby'
       tag: 'Documentation'
       text: 'Installing Ruby Serverless Monitoring'
+    - link: 'serverless/installation/dotnet'
+      tag: 'Documentation'
+      text: 'Installing .NET Serverless Monitoring'
+    - link: 'serverless/installation/go'
+      tag: 'Documentation'
+      text: 'Installing Go Serverless Monitoring'
+    - link: 'serverless/installation/java'
+      tag: 'Documentation'
+      text: 'Installing Java Serverless Monitoring'
 ---
 
 After you have [installed the AWS integration][1], use Python to instrument your application to send metrics, logs, and traces to Datadog. 
