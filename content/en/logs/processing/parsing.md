@@ -302,6 +302,7 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 
 <sup>1</sup> Use the Timezone parameter if you perform your own localizations and your timestamps are _not_ in UTC. 
 The supported format for Timezones are:
+
 * `GMT`, `UTC`, `UT` or `Z`
 * `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive. 
 * Timezone starting by `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
