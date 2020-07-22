@@ -227,13 +227,14 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{< /tabs >}}
 
-## Resource filtering
+## Exclude Resources from being collected
+
+If your services include simulated traffic such as health checks, you may want to exclude these traces from being collected so the metrics for your services match production traffic.
 
 The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . Then create a list of one or more regular expressions, specifying which resources the Agent will filter out based on their resource name.
 
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
 
-Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
 ```text
 ## @param ignore_resources - list of strings - optional
 ## A list of regular expressions can be provided to exclude certain traces based on their resource name.
@@ -245,7 +246,7 @@ Excluding resources for traces from the calculation of metrics for your services
 
 ## Submit Traces directly to the Agent API
 
-If a customer requires tailored instrumentation for a specific application, they should consider relying on the Agent-side tracing API to select individual Spans to include in Traces submitted to Datadog. See the [API documentation][7] for additional information.
+If you require tailored instrumentation for a specific application, consider using the Agent-side tracing API to select individual spans to include in traces. See the [API documentation][7] for additional information.
 
 ## Modifying Spans with the Datadog Tracer
 
