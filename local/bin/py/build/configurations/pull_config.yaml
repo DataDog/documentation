@@ -173,9 +173,9 @@
     - action: pull-and-push-file
       branch: master
       globs:
-      - '/aws/logs_monitoring/README.md'
+      - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/troubleshooting/installing_the_forwarder/'
+        dest_path: '/serverless/troubleshooting/'
         file_name: 'installing_the_forwarder.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
