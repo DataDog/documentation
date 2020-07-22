@@ -1,5 +1,5 @@
----
-title: Datadog Lambda Layer
+  ---
+title: Datadog Lambda Library
 kind: documentation
 aliases:
   - infrastructure/serverless/datadog-lambda-layer
@@ -12,14 +12,16 @@ further_reading:
   text: "AWS Lambda Integration"
 ---
 
-The Datadog Lambda Layer is responsible for:
+{{< img src="serverless/datadog_lambda_library.png" alt="Datadog Lambda Library"  style="width:100%;">}}
+
+The Datadog Lambda Library is responsible for:
 
 - Generating real-time [enhanced Lambda metrics][1] for invocations, errors, cold starts, etc.
 - Submitting custom metrics (synchronously and asynchronously).
 - Automatically propagating tracing headers from upstream requests to downstream services. This enables full distributed tracing across Lambda functions, hosts, containers, and other infrastructure running the Datadog Agent.
 - Packaging the `dd-trace` library, letting customers trace their Lambda functions with Datadog's tracing libraries, currently available for Node.js, Python, and Ruby with more runtimes coming soon.
 
-Datadog offers Lambda Layers for Python, Node.js, and Ruby. Go is also supported with a [package][7] to include in your project. Datadog is working on support for new languages and runtimes; if there is another runtime you would like Datadog to support, reach out to the [Datadog support team][8].
+Datadog distributes the Lambda Library as a Lambda Layer and open-source package for Python, Node.js, and Ruby. Go is also supported with a [package][7] to include in your project. Datadog is working on support for new languages and runtimes; if there is another runtime you would like Datadog to support, reach out to the [Datadog support team][8].
 
 # Setup
 
@@ -60,7 +62,7 @@ Installation steps:
 
 ## Serverless Framework
 
-This plugin attaches the Datadog Lambda Layers for Node.js and Python to your functions. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Layers.
+This plugin attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
 You can install the plugin with one of the following commands.
 
@@ -137,7 +139,7 @@ Globals:
 
 ## Local Development
 
-You can also include the Datadog Lambda package directly in your project either from source or with the standard package manager for your runtime.
+You can also include the Datadog Lambda Library directly in your project either from source or with the standard package manager for your runtime.
 
 | Language | Repository   | Approximate Size |
 | -------- | ------------ | ---------------- |
@@ -152,7 +154,7 @@ You can also include the Datadog Lambda package directly in your project either 
 
 ## Environment Variables
 
-You can configure the Datadog Lambda Layer by adding [environment variables][16] to your Lambda functions:
+You can configure the Datadog Lambda Library by adding [environment variables][16] to your Lambda functions:
 
 | Environment Variable | Description                                                                              | Required | Default         | Accepted Values                 |
 | -------------------- | ---------------------------------------------------------------------------------------- | -------- | --------------- | ------------------------------- |
