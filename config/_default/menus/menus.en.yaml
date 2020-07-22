@@ -1635,7 +1635,7 @@ main:
     parent: security
     weight: 1
   - name: APM (Tracing)
-    url: security/tracing/
+    url: tracing/security/
     parent: security
     weight: 2
   - name: Log Management
