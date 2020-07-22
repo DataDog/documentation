@@ -144,6 +144,10 @@ The value of the environment variable is a comma (or space) separated list of he
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
+### Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -158,3 +162,4 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 [8]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
 [9]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 [10]: https://github.com/openzipkin/b3-propagation
+[11]: /tracing/security

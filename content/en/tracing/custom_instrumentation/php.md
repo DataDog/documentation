@@ -256,9 +256,13 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
+
 ## OpenTracing
 
-The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][5] which is installed with Composer:
+The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][6] which is installed with Composer:
 
 ```bash
 composer require opentracing/opentracing:1.0.0-beta5
@@ -301,7 +305,7 @@ function(
 
 #### Parameter 1: `DDTrace\SpanData $span`
 
-The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][6]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span and the `error` field is managed automatically.
+The `DDTrace\SpanData` instance contains [the same span information that the Agent expects][7]. A few exceptions are `trace_id`, `span_id`, `parent_id`, `start`, and `duration` which are set at the C level and not exposed to userland via `DDTrace\SpanData`. Exceptions from the instrumented call are automatically attached to the span and the `error` field is managed automatically.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -344,7 +348,7 @@ function myRandFunc($min, $max) {
 
 #### Parameter 2: `array $args`
 
-The second parameter to the tracing closure is an array of arguments from the instrumented call. It functions similarly to [`func_get_args()`][7].
+The second parameter to the tracing closure is an array of arguments from the instrumented call. It functions similarly to [`func_get_args()`][8].
 
 By default the tracing closure is executed _after_ the instrumented call which means any arguments passed by reference could be a different value when they reach the tracing closure.
 
@@ -557,7 +561,7 @@ Done.
 
 Zend Framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
-First, [download the latest source code from the releases page][8]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
+First, [download the latest source code from the releases page][9]. Extract the zip file and copy the `src/DDTrace` folder to your application's `/library` folder. Then add the following to your `application/configs/application.ini` file:
 
 ```ini
 autoloaderNamespaces[] = "DDTrace_"
@@ -569,7 +573,7 @@ resources.ddtrace = true
 
 Prior to PHP 7, some frameworks provided ways to compile PHP classes—e.g., through the Laravel's `php artisan optimize` command.
 
-While this [has been deprecated][9] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing](#opentracing) API instead of adding `datadog/dd-trace` to your Composer file.
+While this [has been deprecated][10] if you are using PHP 7.x, you still may use this caching mechanism in your app prior to version 7.x. In this case, Datadog suggests you use the [OpenTracing](#opentracing) API instead of adding `datadog/dd-trace` to your Composer file.
 
 ## Legacy API upgrade guide
 
@@ -656,8 +660,9 @@ dd_trace('CustomDriver', 'doWork', function (...$args) {
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/#span-tags
-[5]: https://github.com/opentracing/opentracing-php
-[6]: /api/v1/tracing/#send-traces
-[7]: https://www.php.net/func_get_args
-[8]: https://github.com/DataDog/dd-trace-php/releases/latest
-[9]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
+[5]: /tracing/security
+[6]: https://github.com/opentracing/opentracing-php
+[7]: /api/v1/tracing/#send-traces
+[8]: https://www.php.net/func_get_args
+[9]: https://github.com/DataDog/dd-trace-php/releases/latest
+[10]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize

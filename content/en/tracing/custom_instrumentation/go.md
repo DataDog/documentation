@@ -217,13 +217,17 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
+### Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
+
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][9], or see the setup information below.
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][10], or see the setup information below.
 
 ### Setup
 
-Import the [`opentracer` package][10] to expose the Datadog tracer as an [OpenTracing][11] compatible tracer.
+Import the [`opentracer` package][11] to expose the Datadog tracer as an [OpenTracing][12] compatible tracer.
 
 A basic usage example:
 
@@ -252,7 +256,7 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][9] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][10] for more examples and details.
+**Note**: Using the [OpenTracing API][10] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][11] for more examples and details.
 
 ## Further Reading
 
@@ -266,6 +270,7 @@ func main() {
 [6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/visualization/#trace
 [8]: https://github.com/openzipkin/b3-propagation
-[9]: https://github.com/opentracing/opentracing-go
-[10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[11]: http://opentracing.io
+[9]: /tracing/security
+[10]: https://github.com/opentracing/opentracing-go
+[11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[12]: http://opentracing.io

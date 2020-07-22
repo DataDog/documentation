@@ -310,9 +310,13 @@ The value of the environment variable is a comma separated list of header styles
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
+### Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][6] page.
+
 ## OpenTracing
 
-To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][6] for details.
+To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][7] for details.
 
 ### Configuring Datadog tracer settings
 
@@ -323,13 +327,13 @@ The underlying Datadog tracer can be configured by passing options (which match 
 OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 ```
 
-It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][7] section.
+It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][8] section.
 
 ### Activating and configuring integrations
 
-By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][2] and [traces][8] from OpenTracing instrumentation you have in your application.
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][2] and [traces][9] from OpenTracing instrumentation you have in your application.
 
-However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][9] for more details.
+However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][10] for more details.
 
 ### Supported serialization formats
 
@@ -348,7 +352,8 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: https://github.com/openzipkin/b3-propagation
-[6]: /tracing/setup/ruby/#quickstart-for-opentracing
-[7]: /tracing/setup/ruby/#tracer-settings
-[8]: /tracing/visualization/#trace
-[9]: /tracing/setup/ruby/#integration-instrumentation
+[6]: /tracing/security
+[7]: /tracing/setup/ruby/#quickstart-for-opentracing
+[8]: /tracing/setup/ruby/#tracer-settings
+[9]: /tracing/visualization/#trace
+[10]: /tracing/setup/ruby/#integration-instrumentation

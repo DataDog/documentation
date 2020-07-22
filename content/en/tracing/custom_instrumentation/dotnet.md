@@ -110,13 +110,16 @@ using (var parentScope =
     }
 }
 ```
+## Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
 
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][5].
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][6].
 
 ### Setup
-For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][6] to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][7] to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
 using Datadog.Trace.OpenTracing;
@@ -172,5 +175,6 @@ To trace code running in an asynchronous task, create a new scope within the bac
 [2]: /tracing/visualization/#span-tags
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/trace/?tab=spantags#more-information
-[5]: https://github.com/opentracing/opentracing-csharp
-[6]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
+[5]: /tracing/security
+[6]: https://github.com/opentracing/opentracing-csharp
+[7]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing

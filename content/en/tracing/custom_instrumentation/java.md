@@ -317,9 +317,13 @@ The value of the property or environment variable is a comma (or space) separate
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
+### Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
+
 ## OpenTracing
 
-Datadog integrates seamlessly with the [OpenTracing API][9].
+Datadog integrates seamlessly with the [OpenTracing API][10].
 
 ### Setup
 
@@ -382,7 +386,7 @@ public class Application {
 }
 ```
 
-Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][10] for a full listing.
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][11] for a full listing.
 
 
 ### Asynchronous traces
@@ -482,7 +486,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][9] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][10] for more details and information.
 
 
 ## Further Reading
@@ -497,5 +501,6 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: https://github.com/openzipkin/b3-propagation
-[9]: https://github.com/opentracing/opentracing-java
-[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
+[9]: /tracing/security
+[10]: https://github.com/opentracing/opentracing-java
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
