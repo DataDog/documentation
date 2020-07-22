@@ -57,7 +57,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Click on the attribute in the trace panel and add it to the search query `@customer.id:584959`.
 {{< img src="tracing/live_search/livesearch_query2.png" alt="Live Search filter" >}}
 
-- Filter on all spans with a `customer.id` attribute by typing customer.id in the search queryb bar: `@customer.id:584959`
+- Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
 ## Further Reading
