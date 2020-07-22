@@ -4515,6 +4515,7 @@ components:
       - service check
       - synthetics alert
       - trace-analytics alert
+      - slo alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -4527,6 +4528,7 @@ components:
       - SERVICE_CHECK
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
+      - SLO_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
