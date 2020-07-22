@@ -265,4 +265,4 @@ Some tracing libraries are extensible. You can write a custom post-processor to 
 [7]: /api/v1/tracing/
 [8]: /tracing/custom_instrumentation/java/#extending-tracers
 [9]: /tracing/custom_instrumentation/ruby?tab=activespan#post-processing-traces
-[10]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L472-L490
+[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
