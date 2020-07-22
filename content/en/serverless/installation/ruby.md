@@ -15,62 +15,6 @@ After you have [installed your cloud integration][1], use Ruby to instrument you
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-### Install the Datadog Lambda Library
-
-Use the Datadog Serverless Plugin to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
-
-To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
-
-1. Install the Serverless Plugin in your application package: 
-	`yarn add --dev serverless-plugin-datadog`
-2. In your `serverless.yml`, add the following:
-    ```
-    plugins:
-		    - serverless-plugin-datadog
-    ```
-3. In your `serverless.yml`, also add the following section:
-    ```
-    custom:
-        datadog:
-        flushMetricsToLogs: true
-        # The Datadog Forwarder ARN goes here.
-        Forwarder:
-    ```
-    For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
-4. Redeploy your serverless application.
-
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-{{% /tab %}}
-{{% tab "SAM" %}}
-
-### Install the Datadog Lambda Library
-
-Use the Datadog SAM macro to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Ruby to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
-
-To install the Datadog Lambda Library with the SAM macro, follow these steps:
-
-1. In your `template.yml`, add the following:
-  ```
-  Transform:
-	  DD::Serverless
-  ```
-2. In your `template.yml`, also add the following section:
-  ```
-  Mappings:
-	  Custom:
-		  Datadog:
-			  flushMetricsToLogs: true
-			  # The Datadog Forwarder ARN goes here.
-			  Forwarder:
-  ```
-  For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
-4. Redeploy your serverless application.
-
-
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-{{% /tab %}}
 {{% tab "AWS Console" %}}
 
 ### Install the Datadog Lambda Library
@@ -128,8 +72,6 @@ module.exports.hello = datadog((event, context, callback) => {
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
-You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS Forwarder page][2]. If you have not yet installed the Forwarder, follow the instructions to install the Forwarder in the same AWS region as the Lambda functions you are monitoring.
-
 1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
 2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger:
 
@@ -137,7 +79,6 @@ The Datadog Forwarder will now send enhanced metrics and traces from your functi
 
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
-[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}}
 {{% tab "Other" %}}
 

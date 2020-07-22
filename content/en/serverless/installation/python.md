@@ -172,10 +172,14 @@ return "Hello from serverless!"
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
-You can quickly verify that you’ve installed the Datadog Forwarder here. For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
+For more information on the Forwarder ARN, or to install the forwarder see the [documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
 
+1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
+2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger:
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
+
+[1]: /serverless/troubleshooting/installing_the_forwarder
 {{% /tab %}}
 {{< /tabs >}}
 
