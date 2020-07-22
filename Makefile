@@ -101,8 +101,6 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/troubleshooting/installing_the_forwarder.md ]; then \
-	rm -f content/en/serverless/troubleshooting/installing_the_forwarder.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
