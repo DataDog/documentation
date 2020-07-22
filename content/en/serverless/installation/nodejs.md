@@ -10,7 +10,7 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed your cloud integration][1], use Node JS to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], use Node JS to instrument your application to send metrics, logs, and traces to Datadog. 
 
 ## Configuration
 
