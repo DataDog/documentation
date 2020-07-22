@@ -1,5 +1,5 @@
 ---
-title: Account Management TESTING
+title: Account Management
 kind: documentation
 description: "Manage your Datadog account and organization"
 aliases:
