@@ -300,13 +300,13 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Use the Timezone parameter if you perform your own localizations and your timestamps are _not_ in UTC. 
-The supported format for Timezones are:
+<sup>1</sup> Use the `timezone` parameter if you perform your own localizations and your timestamps are _not_ in UTC. 
+The supported format for timezones are:
 
 * `GMT`, `UTC`, `UT` or `Z`
 * `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive. 
-* Timezone starting by `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
-* Timezone IDs pulled from the TZ Database. For more information, see [TZ database names][1].
+* Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
+* Timezone IDs pulled from the TZ database. For more information, see [TZ database names][1].
 
 **Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
 
