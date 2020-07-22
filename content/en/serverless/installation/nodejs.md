@@ -43,7 +43,7 @@ To install the Datadog Lambda Library with the Serverless Framework plugin, foll
 
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}}
-{{% tab "SAM" %}}
+<!--- {{% tab "SAM" %}}
 
 ### Install the Datadog Lambda Library
 
@@ -70,7 +70,7 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 
 
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-{{% /tab %}}
+{{% /tab %}} --->
 {{% tab "AWS Console" %}}
 
 ### Install the Datadog Lambda Library
