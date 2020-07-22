@@ -16,9 +16,9 @@ further_reading:
 ---
 ## Overview
 
-The Datadog Agent and all tracing libraries have several options available to modify or discard spans.
+The performance data and traces that you're collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect.  Additionally, it may contain synthetic traffic that might cause your error counts to be inaccurate or Datadog to not accurately indicate the health of your services.
 
-These configuration options allow for a variety of use cases related to obfuscating or removing sensitive information from traces, as well as discarding traces from certain endpoints or matching criteria. Various options are described below.  These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
+The Datadog Agent and some tracing libraries have  options available to address these situations and modify or discard spans, and various options are described below.  These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
@@ -249,7 +249,7 @@ If a customer requires tailored instrumentation for a specific application, they
 
 ## Modifying Spans with the Datadog Tracer
 
-Some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (fore example, based on a regular expression match). See the following examples:
+Some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). See the following examples:
 
 * Java: [TraceInterceptor interface][8]
 * Ruby: [Processing Pipeline][9]
