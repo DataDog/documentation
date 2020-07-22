@@ -19,7 +19,7 @@ After you have [installed the AWS integration][1], use Python to instrument your
 
 ### Install the Datadog Lambda Library
 
-Use the Datadog Serverless Plugin to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+Use the [Datadog Serverless Plugin][3] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
 To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
 
@@ -34,9 +34,10 @@ To install the Datadog Lambda Library with the Serverless Framework plugin, foll
     ```
     custom:
         datadog:
-        flushMetricsToLogs: true
-        # The Datadog Forwarder ARN goes here.
-        Forwarder:
+            enableDDTracing: true
+            flushMetricsToLogs: true
+            # The Datadog Forwarder ARN goes here.
+            forwarder:
     ```
     For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.
@@ -61,9 +62,10 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
   Mappings:
 	  Custom:
 		  Datadog:
+        enableDDTracing: true
 			  flushMetricsToLogs: true
 			  # The Datadog Forwarder ARN goes here.
-			  Forwarder:
+			  forwarder:
   ```
   For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.

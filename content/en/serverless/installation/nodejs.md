@@ -1,4 +1,4 @@
----
+  ---
 title: Installing Node JS Serverless Monitoring
 kind: documentation
 further_reading:
@@ -19,7 +19,7 @@ After you have [installed the AWS integration][1], use Node JS to instrument you
 
 ### Install the Datadog Lambda Library
 
-Use the Datadog Serverless Plugin to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+Use the [Datadog Serverless Plugin][3] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
 To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
 
@@ -34,9 +34,10 @@ To install the Datadog Lambda Library with the Serverless Framework plugin, foll
     ```
     custom:
         datadog:
-        flushMetricsToLogs: true
-        # The Datadog Forwarder ARN goes here.
-        Forwarder:
+            enableDDTracing: true
+            flushMetricsToLogs: true
+            # The Datadog Forwarder ARN goes here.
+            forwarder:
     ```
     For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.
@@ -57,13 +58,14 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 	  DD::Serverless
   ```
 2. In your `template.yml`, also add the following section:
-  ```
+  ```   
   Mappings:
 	  Custom:
 		  Datadog:
+        enableDDTracing: true
 			  flushMetricsToLogs: true
 			  # The Datadog Forwarder ARN goes here.
-			  Forwarder:
+			  forwarder:
   ```
   For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.
@@ -196,6 +198,7 @@ You can quickly verify that you’ve installed the Datadog Forwarder here. For m
 ## Results
 
 Now you can view your metrics, logs, and traces on the [serverless home page][2].
+
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://app.datadoghq.com/functions
