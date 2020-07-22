@@ -182,10 +182,10 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the format:
 
 ```text
-{"foo", "bar_%%label%%"}
+{"foo": "bar_%%label%%"}
 ```
 
-For example, `{"app*", "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*", "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
+For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*": "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
 
 When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
