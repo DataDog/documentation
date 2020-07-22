@@ -44,7 +44,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 {{< img src="mobile/dashboards.png" alt="dashboard page" style="width:50%;">}}
 
-On the Dashboards page, you can view and search all of the dashboard that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click into an individual dashboard to view it.
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][10].
 
