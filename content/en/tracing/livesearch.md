@@ -50,16 +50,15 @@ The APM [Live Search][1] gives you the ability to search all ingested spans usin
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
 
-Note: You can select only the `top-level spans of the service` by selecting the checkbox above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services.
+**Note**: You can select only the `top-level spans of the service` by selecting the checkbox above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only visually filters the spans shown.
 
-You can also filter on attributes that are not defined as facets. For example, to filter on the `customer_id` attribute, there are two options:
+You can also filter on attributes that are not defined as facets. For example, to filter on the `customer.id` attribute, there are two options:
 
-{{< img src="tracing/live_search/livesearch_query.png" alt="Live Search filter" >}}
+- Click on the attribute in the trace panel and add it to the search query `@customer.id:584959`.
+{{< img src="tracing/live_search/livesearch_query2.png" alt="Live Search filter" >}}
 
-- Click on the attribute and add it to the search using the query `@customer_id:1123`.
-- Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`
-
-**Note**: Selecting this box only visually filters the spans shown.
+- Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
+{{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
 ## Further Reading
 

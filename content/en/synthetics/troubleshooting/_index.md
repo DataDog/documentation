@@ -51,6 +51,10 @@ If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the
 
 Additionally, you might also have to ensure [Datadog Synthetics' IP ranges][7] are allowed as traffic sources by your firewalls.
 
+### Missing notifications
+
+Synthetic tests by default do not [renotify][8]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -62,3 +66,4 @@ Additionally, you might also have to ensure [Datadog Synthetics' IP ranges][7] a
 [5]: /synthetics/api_tests/?tab=httptest#use-global-variables
 [6]: /synthetics/browser_tests/#use-global-variables
 [7]: https://ip-ranges.datadoghq.com/synthetics.json
+[8]: /synthetics/api_tests/?tab=httptest#notify-your-team
