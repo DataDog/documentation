@@ -27,7 +27,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ### 1. Install the AWS Integration
 
-Start by installing the [AWS Integration][2]. Once this is completed, view all of your Lambda Functions in the [Datadog Serverless Homepage][1].
+Start by installing the [AWS Integration][2]. This will allow Datadog to ingest Amazon CloudWatch metrics from AWS Lambda. The AWS integration installation also configures the Datadog Forwarder, which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics and logs.
 
 ### 2. Instrument Your Application
 
