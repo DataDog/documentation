@@ -59,11 +59,11 @@ Find below the list of permissions for the monitor assets:
 
 Find below the list of permissions for the Security Monitoring assets:
 
-| Name                             | Description                                        | Scopable |
-| -------------------------------- | -------------------------------------------------- | -------- |
-| security_monitoring_rules_read   | Ability to view Detection rules                    | false    |
-| security_monitoring_rules_write  | Ability to create, edit and delete Detection rules | false    |
-| security_monitoring_signals_read | Ability to view Security signals                   | false    |
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| security_monitoring_rules_read   | Ability to view detection rules                     | false    |
+| security_monitoring_rules_write  | Ability to create, edit, and delete detection rules | false    |
+| security_monitoring_signals_read | Ability to view security signals                    | false    |
 
 ## Log Management
 
