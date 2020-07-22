@@ -1,4 +1,4 @@
-  heading: Welcome to Datadog Docs!
+heading: Welcome to Datadog Docs!
 
 guides:
     # There can be only 3 guides in this section
@@ -72,7 +72,7 @@ nav_sections:
         link: serverless/
         icon: serverless.svg
         desc: End-to-end visibility into your serverless development lifecycle
-      - title: Mobile App
+      - title: Mobile application
         link: mobile/
         icon: mobile.svg
         desc: View Datadog alerts and dashboards on your mobile device

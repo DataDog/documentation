@@ -1,4 +1,4 @@
-  ---
+---
 title: Installing Node JS Serverless Monitoring
 kind: documentation
 further_reading:
