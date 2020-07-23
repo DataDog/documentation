@@ -1,8 +1,8 @@
-<div class="alert alert-info">We recommend using <b>STDOUT/STDERR</b> to collect container logs. Here is the official documentation on collecting logs from - <a href="/docker/log/?tab=containerinstallation#overview" target="_blank">Docker</a> and <a href="/agent/kubernetes/log/?tab=daemonset#pagetitle" target="_blank">Kubernetes</a>. To know more about docker logging please read this <a href="https://www.datadoghq.com/blog/docker-logging/" target="_blank">Docker Logging Best Practices</a> blog post.</div>
+<div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs. This is the official documentation on collecting logs from <a href="/docker/log/?tab=containerinstallation#overview" target="_blank">Docker</a> and <a href="/agent/kubernetes/log/?tab=daemonset#pagetitle" target="_blank">Kubernetes</a>. To learn more about Docker logging, read the <a href="https://www.datadoghq.com/blog/docker-logging/" target="_blank">Docker Logging Best Practices</a> blog post.</div>
 
 ## Overview
 
-Pods/Containers have no access to host files by default and this applies to the agent that is deployed in this manner. You will see a similar error message below if you try to configure your container agent to collect from host files:
+Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect host files, you will see a similar error message to the one below:
 
 ```
   syslog
@@ -13,11 +13,11 @@ Pods/Containers have no access to host files by default and this applies to the 
 
 ```
 
-To give the agent container an access to host files, you will need to mount the file or its directory to the agent container. Here are some examples for Kubernetes and Docker:
+To give the Agent container access to host files, mount the file or its directory to the Agent container. Here are some examples for Kubernetes and Docker:
 
 ### Kubernetes:
 
-To mount the log files in your host to the agent container, set the host log directory in the volumes section of your agent manifest and the container log directory in volumeMounts section:
+To mount the log files in your host to the Agent container, set the host log directory in the volumes section of your Agent manifest and the container log directory in `volumeMounts` section:
 
 ```
         volumeMounts:
@@ -32,9 +32,9 @@ To mount the log files in your host to the agent container, set the host log dir
             path: /var/test-dir/logs/
 ```
 
-The next step would be to configure the agent to tail the files for log collection. To do this, you can mount a custom logs config into /conf.d/ , the file name can be anything as long as it has a .yaml extension.
+Next, configure the Agent to tail the files for log collection. To do this, you can mount a custom logs config into `/conf.d/`. The file name can be anything, as long as it has a `.yaml` extension.
 
-It is preferable to use a configMap to store configurations rather than mounting a host file directly. Here's a sample configMap manifest that has a logs.yaml file:
+It is preferable to use a ConfigMap to store configurations rather than mounting a host file directly. Here's a sample ConfigMap manifest that has a `logs.yaml` file:
 
 ```
 kind: ConfigMap
@@ -52,11 +52,13 @@ data:
                path: /container/var/test-dir/logs/*.log
 ```
 
-Create the configMap object using the command:
+Create the ConfigMap object using the command:
 
+```bash
 kubectl create -f <configmap manifest>
+```
 
-Then mount it under /conf.d/:
+Then, mount it under `/conf.d/`:
 
 ```
         volumeMounts:
@@ -71,7 +73,7 @@ Then mount it under /conf.d/:
 
 ### Docker:
 
-To mount the host log file, you can add a volume parameter in your agent's docker run command:
+To mount the host log file, you can add a volume parameter in your Agent's `docker run` command:
 
 ```
 -v /<host log directory>/:<container log directory>/
@@ -87,13 +89,13 @@ logs:
     path: <container log path>/*.log
 ```
 
-and mount it into /conf.d/ , the file name can be anything:
+and mount it into `/conf.d/`. The file name can be anything:
 
 ```
 -v <absolute path>/logs.yaml:/conf.d/logs.yaml
 ```
 
-Your agent’s docker installation command should look like this:
+Your Agent’s Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
@@ -110,7 +112,7 @@ docker run -d --name datadog-agent \
 
 ## Verification
 
-After you have set this all up. You can now deploy the agent and you should be able to see something like this below when you run docker exec -it datadog-agent agent status:
+After you have set this all up, you can now deploy the Agent. You should be able to see something like the below when you run `docker exec -it datadog-agent agent status`:
 
 ```
 ==========
