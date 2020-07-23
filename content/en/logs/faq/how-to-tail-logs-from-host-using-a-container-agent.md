@@ -5,12 +5,15 @@ further_reading:
 - link: "/docker/log"
   tag: "Documentation"
   text: "Logging with Docker"
-- link: "/agent/kubernetes/log/?tab=daemonset#pagetitle"
+- link: "/agent/kubernetes/log"
   tag: "Documentation"
   text: "Logging with Kubernetes"
+- link: "https://www.datadoghq.com/blog/docker-logging/"
+  tag: "Blog"
+  text: "Docker Logging Best Practices"
 ---
 
-<div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs. This is the official documentation on collecting logs from <a href="/docker/log/?tab=containerinstallation#overview" target="_blank">Docker</a> and <a href="/agent/kubernetes/log/?tab=daemonset#pagetitle" target="_blank">Kubernetes</a>. To learn more about Docker logging, read the <a href="https://www.datadoghq.com/blog/docker-logging/" target="_blank">Docker Logging Best Practices</a> blog post.</div>
+<div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.</div>
 
 ## Overview
 
@@ -146,3 +149,5 @@ Logs Agent
     Inputs: /container/var/test-dir/logs/722bfb2cb35cc627-json.log
 
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}
