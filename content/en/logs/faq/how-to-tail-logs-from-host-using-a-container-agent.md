@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect host files, you will see a similar error message to the one below:
+Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect logs from host files, you will see a similar error message to the one below:
 
 ```
   syslog
@@ -28,7 +28,7 @@ Pods/containers have no access to host files by default, which also applies to t
 
 ```
 
-To give the Agent container access to host files, mount the file or its directory to the Agent container. Here are some examples for Kubernetes and Docker:
+To give the container Agent access to host files, mount the file or its directory to the container Agent. Here are some examples for Kubernetes and Docker:
 
 ### Kubernetes:
 
@@ -88,13 +88,13 @@ Then, mount it under `/conf.d/`:
 
 ### Docker:
 
-To mount the host log file, you can add a volume parameter in your Agent's `docker run` command:
+To mount the host log file, add a volume parameter in your Agent's `docker run` command:
 
 ```
 -v /<host log directory>/:<container log directory>/
 ```
 
-Then, you will need to create a custom logs config locally:
+Then, create a custom logs config locally:
 
 ```
 logs:
