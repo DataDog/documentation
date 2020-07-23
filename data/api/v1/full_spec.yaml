@@ -16735,10 +16735,8 @@ paths:
 
         We encourage you to send your logs compressed.
 
-
-        **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`),
-
-        the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
+        Add the `Content-Encoding: gzip` header to the request when sending compressed
+        logs.'
       operationId: SubmitLog
       parameters:
       - description: HTTP header used to compress the media-type.
@@ -16970,9 +16968,8 @@ tags:
 
     We encourage you to send your logs compressed.
 
-
-    **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
-    endpoint is `http-intake.logs.datadoghq.eu`.'
+    Add the `Content-Encoding: gzip` header to the request when sending compressed
+    logs.'
   name: Logs
 - description: '[Check API version 2](/api/v2/logs-archives/).'
   name: Logs Archives
