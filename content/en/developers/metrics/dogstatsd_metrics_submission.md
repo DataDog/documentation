@@ -591,7 +591,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
+    statsd.histogram('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}

@@ -2253,6 +2253,22 @@ api_v1:
     url: /ja/api/v1/usage-metering/
     identifier: Usage Metering
     generated: true
+  - name: Get the list of available daily custom reports
+    parent: Usage Metering
+    url: get-the-list-of-available-daily-custom-reports
+    generated: true
+  - name: Get specified daily custom reports
+    parent: Usage Metering
+    url: get-specified-daily-custom-reports
+    generated: true
+  - name: Get the list of available monthly custom reports
+    parent: Usage Metering
+    url: get-the-list-of-available-monthly-custom-reports
+    generated: true
+  - name: Get specified monthly custom reports
+    parent: Usage Metering
+    url: get-specified-monthly-custom-reports
+    generated: true
   - name: Get hourly usage for analyzed logs
     parent: Usage Metering
     url: get-hourly-usage-for-analyzed-logs
@@ -2260,6 +2276,10 @@ api_v1:
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
+    generated: true
+  - name: Get billable usage across your multi-org account
+    parent: Usage Metering
+    url: get-billable-usage-across-your-multi-org-account
     generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering
@@ -2297,9 +2317,9 @@ api_v1:
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
+  - name: Get hourly usage for Synthetics Checks
     parent: Usage Metering
-    url: get-hourly-usage-for-synthetics-api-checks
+    url: get-hourly-usage-for-synthetics-checks
     generated: true
   - name: Get hourly usage for Synthetics API Checks
     parent: Usage Metering
@@ -2477,6 +2497,14 @@ api_v2:
   - name: Logs
     url: /ja/api/v2/logs/
     identifier: Logs
+    generated: true
+  - name: Get a quick list of logs
+    parent: Logs
+    url: get-a-quick-list-of-logs
+    generated: true
+  - name: Get a list of logs
+    parent: Logs
+    url: get-a-list-of-logs
     generated: true
   - name: Logs Archives
     url: /ja/api/v2/logs-archives/

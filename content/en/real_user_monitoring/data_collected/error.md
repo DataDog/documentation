@@ -16,20 +16,27 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-All errors that appear in the user console are collected.
+Front-end errors are automatically collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+
+## Error Origins
+Front-end errors are split in 3 different categories depending on their `error.origin`:
+
+- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1]
+- **source**: unhandled exceptions or unhandled promise rejections (source-code related)
+- **console**: console.error() API calls
 
 ## Facet Collected
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
+| `error.origin`  | string | Where the error originates from (i.e. console, network, etc.)          |
 | `error.kind`    | string | The error type or kind (or code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
-| `error.origin`  | string | Where the error originates from (i.e. console, network, etc.)          |
 
-### Network Error
+### Network Errors
 
-For network errors, the following facets are also collected:
+Network errors include information about the failing HTTP request. Hence, the following facets are also collected:
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -40,6 +47,17 @@ For network errors, the following facets are also collected:
 | `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
 | `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
 
+### Source Errors
+
+Source Errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
+
+| Attribute       | Type   | Description                                                       |
+|-----------------|--------|-------------------------------------------------------------------|
+| `error.kind`    | string | The error type or kind (or code in some cases).                   |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/data_collected/error/#network-errors
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error

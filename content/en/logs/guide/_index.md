@@ -13,7 +13,6 @@ private: true
     {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}Collect multiple logs with the Log List API and pagination{{< /nextlink >}}
     {{< nextlink href="logs/guide/restrict-access-to-log-events-with-restriction-queries" >}}Restrict access to a subset of your log data to authorized users{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
-    {{< nextlink href="logs/guide/integration-pipeline-reference" >}}Integration Pipeline Reference{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
 {{< /whatsnext >}}

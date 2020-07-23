@@ -3,13 +3,20 @@ buildfuture: false
 builddrafts: false
 enableGitInfo: true
 
-deployment: 
+deployment:
+    order:
+      - ".css$"
+      - ".js$"
+      - ".jpg$"
+      - ".png$"
+      - ".gif$"
+      - ".mp4$"
 
-    targets: 
+    targets:
     - name: "live"
       URL: "s3://datadog-docs-live-hugo?region=us-east-1"
-      exclude: "**.{go,java,sh,py,rb,json}"
-      cloudFrontDistributionID: E2B2OODXRYOXSA
+      exclude: "**.{go,java,sh,py,rb}"
+      # cloudFrontDistributionID: E2B2OODXRYOXSA
     - name: "liveAssets"
       URL: "s3://origin-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"

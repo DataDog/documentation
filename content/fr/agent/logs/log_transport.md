@@ -31,6 +31,7 @@ Pour vérifier le transport que l'Agent utilise, exécutez la [commande status d
 {{< img src="agent/logs/agent-status.png" alt="Commande status de l'Agent"  style="width:70%;">}}
 
 **Remarques** :
+
 * Pour les versions antérieures de l'Agent, le transport TCP est utilisé par défaut. Datadog vous recommande vivement d'imposer l'utilisation du transport HTTPS si vous utilisez les versions 6.14/7.14 ou ultérieures, et le transport HTTPS avec compression si vous utilisez les versions 6.16/7.16 ou ultérieures.
 * Imposez toujours un transport spécifique (TCP ou HTTPS) lorsque vous utilisez un proxy pour transmettre des logs à Datadog.
 

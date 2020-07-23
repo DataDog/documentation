@@ -237,16 +237,16 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ### Checks de service
 
 **mysql.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au serveur MQ pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur MQ pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_mq.queue_manager** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques provenant du gestionnaire de files d'attente. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir des statistiques provenant du gestionnaire de files d'attente. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_mq.queue** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques sur les files d'attente. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir des statistiques sur les files d'attente. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_mq.channel** :br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recueillir des statistiques sur les canaux. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir des statistiques sur les canaux. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_mq.channel.status** :<br/>
 Renvoie `CRITICAL` si le statut est INACTIVE, STOPPED ou STOPPING. Renvoie `OK` si le statut est RUNNING et renvoie `WARNING` si le statut peut passer à running.

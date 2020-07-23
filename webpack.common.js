@@ -18,6 +18,9 @@ const commonConfig = env => {
             writeToDisk: true,
             sortManifest: true,
             publicPath: 'static/'
+        }),
+        new webpack.DefinePlugin({
+            CI_COMMIT_SHORT_SHA: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA || '00000000')
         })
     ];
 

@@ -72,11 +72,11 @@ Choose the default locations for your browser and API tests details. Options inc
 
 ### APM integration for Browser Tests
 
-Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
+Allow URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
 
-Use `*` to whitelist wider domain names. For example, adding `https://*.datadoghq.com/*` whitelists everything on `https://datadoghq.com/`.
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and whitelisted, your browser test results are then automatically tied to its corresponding trace.
+If the endpoint is being traced and allowed, your browser test results are then automatically tied to its corresponding trace.
 
 ## Further Reading
 

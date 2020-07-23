@@ -73,15 +73,31 @@ Some standard fields—for instance, `error.stack`, `http.method`, or `duration`
 
 ### A hub to other data sources
 
-Interact with the upper reserved attributes section:
-
-- with the **Host** section, to access the related [host dashboard][10] or [network page][11].
-- with the **Service** section, to see the [trace in APM][12] (both require a `trace_id` attribute in the log: refer to [trace injection in logs][13]) or the [service page][14].
-- Enhance your experience further with [Unified Service Tagging][15] to navigate to and from logs with `env`, `service`, and `version`.
+#### Correlation with Infrastructure (Host, Container, Serverless) data
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-{{< img src="logs/explorer/side_panel_hub.gif" alt="Side Panel Hub" style="width:60%;">}}
+Click on the **Metrics Tab** and access underlying infrastructure metrics in a 30 minutes timeframe around the log. 
+
+Interact with **Host** in the upper reserved attributes section, the related [host dashboard][10] or [network page][11]. Interact with **Container** sections to jump to the [container page][19] scoped with the underlying parameters.
+
+{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to Infra" style="width:60%;">}}
+
+In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][20]. 
+
+{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="Hub to Serverless" style="width:60%;">}}
+
+
+#### Correlation with APM data
+
+Make sure you enable [trace injection in logs][13] and follow our [Unified Service Tagging][15] best practices to benefit from all the capabilities of Logs and APM correlation.
+
+Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][12]. 
+
+Interact with the **Service** section to refocus the search in the log explorer and see all other logs from the same trace.
+
+{{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to APM" style="width:60%;">}}
+
 
 ### Configure your troubleshooting context
 
@@ -152,3 +168,5 @@ Use saved views to automatically configure your log explorer with a preselected 
 [16]: /logs/explorer/facets/#overview
 [17]: /logs/processing/
 [18]: /logs/explorer/saved_views/
+[19]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
+[20]: /infrastructure/serverless/#function-detail-view

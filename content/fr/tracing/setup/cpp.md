@@ -9,26 +9,22 @@ further_reading:
   - link: 'https://github.com/DataDog/dd-opentracing-cpp'
     tag: Github
     text: Code source
-  - link: tracing/visualization/
+  - link: /tracing/visualization/
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
-  - link: tracing/
+  - link: /tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
-**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2].
+**Remarque** : le C++ ne fournit pas d'intégrations pour une instrumentation par défaut, mais il est utilisé pour le tracing en passant par un proxy comme [Envoy][1] et [Nginx][2]. Pour en savoir plus sur les exigences de compatibilité du traceur C++, consultez la [page dédiée][3]. 
 
 ## Débuter
 
-Pour commencer le tracing d'applications écrites dans n'importe quel langage, vous devez d'abord [installer et configurer l'Agent Datadog][3].
+Si vous avez déjà un compte Datadog, vous trouverez des [instructions détaillées][4] dans nos guides intégrés à l'application pour les configurations basées sur un host et les configurations basées sur un conteneur.
 
-Compiler avec [OpenTracing-cpp][4].
+Si ce n'est pas le cas, pour commencer le tracing d'applications écrites dans n'importe quel langage, vous devez d'abord [installer et configurer l'Agent Datadog][5].
 
-## Compatibilité
-
-`dd-opentracing-cpp` requiert C++14 pour être compilé, mais si vous utilisez le [chargement dynamique](#chargement-dynamique), vous n'êtes alors limité que par la version minimale exigée par OpenTracing, c'est-à-dire [C++11 ou supérieur][5].
-
-Les plateformes prises en charge comprennent Linux et Mac. Pour une compatibilité avec Windows, [contactez l'assistance Datadog][6].
+Compilez avec [OpenTracing-cpp][6].
 
 ## Installation
 
@@ -59,7 +55,7 @@ make
 make install
 ```
 
-Incluez `<datadog/opentracing.h>` et créez le traceur :
+Ajoutez `<datadog/opentracing.h>` et créez le traceur :
 
 ```cpp
 // tracer_example.cpp
@@ -114,7 +110,7 @@ wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${VERSION_C
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-Incluez `<opentracing/dynamic_load.h>` et chargez le traceur depuis `libdd_opentracing_plugin.so` :
+Ajoutez `<opentracing/dynamic_load.h>` et chargez le traceur depuis `libdd_opentracing_plugin.so` :
 
 ```cpp
 // tracer_example.cpp
@@ -170,17 +166,36 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 **Remarque** : OpenTracing nécessite C++ 11 ou une version ultérieure.
 
+### Variables d'environnement
+
+| Variable | Version | Valeur par défaut | Remarque |
+|----------|---------|---------|------|
+| `DD_AGENT_HOST` | v0.3.6 | `localhost` | Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. |
+| `DD_TRACE_AGENT_PORT` | v0.3.6 | `8126` | Définit le port sur lequel les traces sont envoyées (le port où l'Agent écoute les connexions). Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. |
+| `DD_TRACE_AGENT_URL` | v1.1.4 | | Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. Cette URL prend en charge les schémas d'adresse HTTP, HTTPS et Unix. |
+| `DD_ENV` | v1.0.0 | | Lorsqu'il est défini, ce paramètre ajoute le tag `env` avec la valeur spécifiée à toutes les spans générées. |
+| `DD_SERVICE` | v1.1.4 | | Lorsqu'il est défini, ce paramètre définit le nom de service par défaut. Si ce n'est pas le cas, le nom de service doit être fourni via TracerOptions ou par la configuration JSON. |
+| `DD_TRACE_ANALYTICS_ENABLED` | v1.1.3 | `false` | Active App Analytics pour l'ensemble de l'application. |
+| `DD_TRACE_ANALYTICS_SAMPLE_RATE` | v1.1.3 | | Définit le taux d'échantillonnage App Analytics. Utilisé à la place de `DD_TRACE_ANALYTICS_ENABLED` si défini. Doit être un nombre flottant compris entre `0.0` et `1.0`. |
+| `DD_TRACE_SAMPLING_RULES` | v1.1.4 | `[{"sample_rate": 1.0}]` | Un tableau JSON d'objets. Chaque objet doit avoir un « sample_rate ». Les champs « name » et « service » sont facultatifs. La valeur de « sample_rate » doit être comprise entre 0.0 et 1.0 (inclus). Pour déterminer le taux d'échantillonnage de la trace, les règles sont appliquées dans l'ordre configuré. |
+| `DD_VERSION` | v1.1.4 | | Lorsqu'il est défini, ce paramètre ajoute le tag `version` avec la valeur spécifiée à toutes les spans générées. |
+| `DD_TAGS` | v1.1.4 | | Lorsqu'il est défini, ce paramètre ajoute des tags à l'ensemble des spans générées. Les tags doivent être inclus dans une liste de paires `key:value` séparées par des virgules. |
+| `DD_PROPAGATION_STYLE_INJECT` | v0.4.1 | `Datadog` | Le ou les styles de propagation à utiliser lors de l'injection des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`. |
+| `DD_PROPAGATION_STYLE_EXTRACT` | v0.4.1 | `Datadog` | Le ou les styles de propagation à utiliser lors de l'extraction des en-têtes de tracing. `Datadog`, `B3` ou `Datadog B3`. |
+
 ### Modifier le hostname de l'Agent
 
-Configurez vos traceurs d'applications de façon à envoyer des traces à un hostname d'Agent personnalisé :
+Configurez vos traceurs d'application de façon à ce qu'ils envoient les traces vers un hostname d'Agent personnalisé. Le module de tracing C++ recherche automatiquement les variables d'environnement `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` et s'initialise avec celles-ci.
+
+Pour vous connecter à l'Agent à l'aide de sockets de domaine Unix, vous pouvez utiliser `DD_TRACE_AGENT_URL` à la place. La valeur doit correspondre à celle de l'Agent pour `DD_APM_RECEIVER_SOCKET`.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/setup/envoy
-[2]: /fr/tracing/setup/nginx
-[3]: /fr/tracing/send_traces
-[4]: https://github.com/opentracing/opentracing-cpp
-[5]: https://github.com/opentracing/opentracing-cpp/#cc98
-[6]: /fr/help
+[1]: /fr/tracing/setup/envoy/
+[2]: /fr/tracing/setup/nginx/
+[3]: /fr/tracing/compatibility_requirements/cpp
+[4]: https://app.datadoghq.com/apm/install
+[5]: /fr/tracing/send_traces/
+[6]: https://github.com/opentracing/opentracing-cpp

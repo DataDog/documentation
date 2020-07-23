@@ -273,9 +273,9 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: master
+      branch: main
       globs:
-        - "*.json"
+        - "security-monitoring/*.json"
       options:
         dest_path: '/security_monitoring/default_rules/'
 

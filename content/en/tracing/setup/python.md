@@ -19,12 +19,15 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
+## Compatibility requirements
+
+Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
+If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
 
-Otherwise, to begin tracing applications written in Python, first [install and configure the Datadog Agent][2], see the additional documentation for [tracing Docker applications][3] or [Kubernetes applications][4].
+Otherwise, to begin tracing applications written in Python, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
 Next, install the Datadog Tracing library, `ddtrace`, using pip:
 
@@ -40,33 +43,31 @@ For example, if your application is started with `python app.py` then:
 ddtrace-run python app.py
 ```
 
-For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][5].
+For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][6].
 
 ## Configuration
 
-When using **ddtrace-run**, the following [environment variable options][6] can be used:
+When using **ddtrace-run**, the following [environment variable options][7] can be used:
 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_ENV`                           |             | Set the application’s environment e.g. `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][7].                                                                                                                                                  |
-| `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations (e.g. Pylons, Flask, Django). For tracing without a web integration, it is recommended that you [set the service name in code](#integrations).      |
-| `DD_VERSION`                       |             | Set the application’s version e.g. `1.2.3`, `6c44da20`, `2020.02.13`.                                                                                                                                                                                                       |
-| `DD_TAGS`                       |             | A list of default tags to be added to every span, profile, and runtime metric e.g. `layer:api,team:intake`.      |
+| `DATADOG_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer.                                                                                                                                                                                                                                         |
+| `DATADOG_PATCH_MODULES`            |             | Override the modules patched for this application execution. It should follow the format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                            |
 
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][8] documentation for recommendations on how to configure these environment variables.
 
-### Instrumentation
-
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_ENV`                           |             | Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][9]. Available in version 0.38+.                                                                                                             |
+| `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you [set the service name in code](#integrations). Available in version 0.38+. |
+| `DD_VERSION`                       |             | Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.                                                                                                                                                                  |
+| `DD_TAGS`                          |             | A list of default tags to be added to every span, profile, and runtime metric, for example: `layer:api,team:intake`. Available in version 0.38+.                                                                                                                            |
 | `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.                                                                                                                                                           |
-| `DATADOG_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer. Note that this is [not available with Django][9].                                                                                                                                                                                       |
-| `DATADOG_PATCH_MODULES`            |             | Override the modules patched for this application execution. It should follow this format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                            |
 | `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
 | `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |
 | `DD_TRACE_AGENT_URL`               |             | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.  |
 | `DATADOG_PRIORITY_SAMPLING`        | `true`      | Enable [Priority Sampling][10].                                                                                                                                                                                                                                              |
-| `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][11].                                                                                                                                                                                                                           |
+| `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and trace injection][11].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][12].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
 
@@ -90,15 +91,15 @@ tracer.configure(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/install
-[2]: /tracing/send_traces/
-[3]: /tracing/setup/docker/
-[4]: /agent/kubernetes/apm/
-[5]: http://pypi.datadoghq.com/trace/docs
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
-[7]: /tracing/guide/setting_primary_tags_to_scope/
+[1]: /tracing/compatibility_requirements/python
+[2]: https://app.datadoghq.com/apm/install
+[3]: /tracing/send_traces/
+[4]: /tracing/setup/docker/
+[5]: /agent/kubernetes/apm/
+[6]: http://pypi.datadoghq.com/trace/docs
+[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
 [8]: /getting_started/tagging/unified_service_tagging
-[9]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
+[9]: /tracing/guide/setting_primary_tags_to_scope/
 [10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [11]: /tracing/connect_logs_and_traces/python/
 [12]: /tracing/app_analytics/?tab=python#automatic-configuration

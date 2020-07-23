@@ -79,6 +79,8 @@ The system core check is included in the [Datadog Agent][4] package. No addition
     init_config:
     instances:
         - foo: bar
+        tags:
+            - key:value
     ```
 
 2. [Restart the Agent][7].

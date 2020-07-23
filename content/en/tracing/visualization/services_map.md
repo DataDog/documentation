@@ -30,7 +30,7 @@ The Service Map was built to provide an overview of your services and their heal
 
 ## Filtering vs changing scopes
 
-The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes.
+The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes. In addition, the service can be scoped to a specific time range, helpful for keeping track of your evolving architecture.
 
 Services are also scoped by `env`, and, optionally, a [Second Primary Tag][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
@@ -72,7 +72,7 @@ Additionally, monitors can be tagged by service in the “Say what’s happening
 
 Nodes represent services exactly as instrumented in APM and match those in your [Services][3] page. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][4].
 
-New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for two weeks.  This takes into account services that do work infrequently, but are an important part of a functioning system.
+New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days.  This takes into account services that do work infrequently, but are an important part of a functioning system.
 
 {{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true"  width="90%">}}
 

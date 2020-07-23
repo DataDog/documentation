@@ -1,0 +1,37 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "datadog/agent:latest",
+      "cpu": 10,
+      "memory": 256,
+      "essential": true,
+      "mountPoints": [
+        {
+          "containerPath": "\\\\.\\pipe\\docker_engine",
+          "sourceVolume": "docker_sock",
+          "readOnly": true
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "\\\\.\\pipe\\docker_engine"
+      },
+      "name": "docker_sock"
+    }
+  ],
+  "family": "datadog-agent-task"
+}

@@ -140,8 +140,8 @@
               "length": "integer",
               "metric": "system.cpu.idle",
               "pointlist": [
-                "1575317847",
-                "0.5"
+                1575317847,
+                0.5
               ],
               "scope": "host:foo,env:test",
               "start": "integer",
@@ -264,7 +264,10 @@
           {
             "metric": "system.load.1",
             "points": [
-              null
+              [
+                1575317847,
+                0.5
+              ]
             ]
           }
         ]
@@ -272,14 +275,19 @@
       "json": {
         "series": [
           {
-            "host": "string",
-            "interval": "integer",
+            "host": "test.example.com",
+            "interval": 20,
             "metric": "system.load.1",
             "points": [
-              []
+              [
+                1575317847,
+                0.5
+              ]
             ],
-            "tags": [],
-            "type": "string"
+            "tags": [
+              "environment:test"
+            ],
+            "type": "rate"
           }
         ]
       },

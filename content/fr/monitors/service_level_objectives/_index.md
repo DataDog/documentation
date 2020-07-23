@@ -23,20 +23,16 @@ Utilisez le widget dédié aux SLO et à la disponibilité pour surveiller vos S
 
 L'*uptime* ou la disponibilité correspond à la durée pendant laquelle un monitor affichait un statut *up* (OK) comparé à un statut *down* (non OK). Le statut est représenté par des barres de couleur verte (disponible) et rouge (non disponible). Exemple : `99 % du temps, la latence est inférieure à 200 ms`.
 
-Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des événements. Par exemple : `99 % des requêtes sont effectuées avec succès`
-
-{{< img src="monitors/service_level_objectives/create-slo.png" alt="créer un slo" >}}
+Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des métriques. Par exemple : `99 % des requêtes sont effectuées avec succès.`
 
 ### Configuration
 
 1. Sur la [page de statut des SLO][1], sélectionnez **New SLO +**.
-2. Définissez la source de vos SLO. Les SLO peuvent être basés sur des [événements][2] ou des [monitors][3].
+2. Définissez la source de vos SLO. Les SLO peuvent être basés sur des [métriques][2] ou des [monitors][3].
 3. Définissez votre objectif de disponibilité. Les fenêtres disponibles sont : 7 days, month-to-date, 30 days (rolling), Previous Month et 90 days (rolling). Pour 7 jours, le widget est limité à 2 décimales. Pour 30 jours et plus, il est limité à 2 ou 3 décimales.
 4. Enfin, donnez un titre à votre SLO, spécifiez une description plus détaillée, ajoutez des tags et enregistrez-le.
 
 Une fois les monitors configurés, la [page de statut des Service Level Objectives][1] vous permet de consulter le pourcentage global de disponibilité uniquement ou le pourcentage global ainsi que la disponibilité pour chaque monitor.
-
-{{< img src="monitors/service_level_objectives/slo-overview.png" alt="page slo principale" >}}
 
 ## Modifier un SLO
 
@@ -83,6 +79,51 @@ On constate que la disponibilité globale peut être inférieure à la moyenne d
 
 La [page de statut des SLO][1] vous permet d'afficher et de modifier votre SLO ainsi que ses propriétés, mais aussi d'afficher son statut dans le temps et son historique.
 
+### Vue par défaut des SLO
+
+La vue par défaut des SLO apparaît lorsque vous accédez à la liste des SLO.
+
+La vue par défaut comprend :
+
+- Une requête de recherche vide
+- La liste de l'ensemble des SLO définis dans votre organisation
+- La liste des facettes disponibles dans le volet latéral de gauche
+
+### Vues enregistrées
+
+Les vues enregistrées vous permettent d'enregistrer des recherches personnalisées dans la liste des SLO et de les partager. Consultez facilement les SLO pertinentes pour votre équipe et vous-même en partageant les éléments suivants :
+
+- Une requête de recherche
+- Un sous-ensemble de facettes
+
+Vous pouvez à présent ajouter à une vue enregistrée la requête utilisée pour filtrer un sous-ensemble de SLO dans la liste.
+
+#### Ajouter une vue enregistrée
+
+Pour ajouter une vue enregistrée :
+
+1. Rédigez une requête pour vos SLO.
+2. Cliquez sur *Save View* en haut de la fenêtre.
+3. Donnez un nom à votre vue, puis enregistrez-la.
+
+#### Charger une vue enregistrée
+
+Pour charger une vue enregistrée, ouvrez le volet *Saved Views* en haut de la page et sélectionnez la vue de votre choix. Vous pouvez également rechercher des vues dans la barre de recherche *Filter Saved Views*.
+
+#### Mettre en avant des vues enregistrées.
+
+Ajoutez une étoile aux vues enregistrées pour les ajouter à vos favoris. Vous pouvez accéder aux vues enregistrées marquées d'une étoile directement à partir du menu de navigation principal.
+
+#### Partager une vue enregistrée
+
+Copiez-collez le lien simplifié de la vue enregistrée pour la partager avec vos collègues.
+
+#### Gérer les vues enregistrées
+
+Pour créer une vue enregistrée, cliquez sur le bouton *Save as* en haut de l'écran. Nommez votre vue et cliquez sur *Save*. Vous pouvez mettre à jour une vue enregistrée en la sélectionnant, en modifiant la requête, puis en cliquant sur *Update*.
+
+Les vues enregistrées peuvent être supprimées directement depuis la liste Saved View. Passez le curseur sur le nom de la vue enregistrée pour afficher le bouton de suppression. Cliquez ensuite sur ce dernier et confirmez l'opération.
+
 ## Widgets SLO
 
 Une fois votre SLO créé, ajoutez un widget SLO pour visualiser le statut de vos SLO en même temps que les métriques, les logs et les données APM de votre dashboard. Pour en savoir plus sur ce type de widget, consultez la page de [documentation sur le widget SLO][4].
@@ -92,6 +133,6 @@ Une fois votre SLO créé, ajoutez un widget SLO pour visualiser le statut de vo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /fr/monitors/service_level_objectives/event/
+[2]: /fr/monitors/service_level_objectives/metric/
 [3]: /fr/monitors/service_level_objectives/monitor/
-[4]: /fr/dashboards/widgets/slo
+[4]: /fr/dashboards/widgets/slo/

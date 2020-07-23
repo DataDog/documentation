@@ -947,7 +947,93 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson('curl', mockSchema);
-    const expected = {"series": [{"metric": "system.load.1", "points": ["1575317847", "0.5"]}]};
+    const expected = {"series": [{"metric": "system.load.1", "points": [1575317847, 0.5]}]};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show nested array when curl', () => {
+    const mockSchema = {
+      "description": "The metrics' payload.",
+      "properties": {
+        "series": {
+          "description": "A list of time series to submit to Datadog.",
+          "items": {
+            "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+            "properties": {
+              "host": {
+                "description": "The name of the host that produced the metric.",
+                "example": "test.example.com",
+                "type": "string"
+              },
+              "interval": {
+                "default": null,
+                "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                "example": 20,
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
+              },
+              "metric": {
+                "description": "The name of the timeseries.",
+                "example": "system.load.1",
+                "type": "string"
+              },
+              "points": {
+                "description": "Points relating to a metric. All points must be tuples with timestamp and a scalar value (cannot be a string).",
+                "example": [
+                  [
+                    1575317847,
+                    0.5
+                  ]
+                ],
+                "items": {
+                  "description": "Array of timeseries points.",
+                  "example": [
+                    1575317847,
+                    0.5
+                  ],
+                  "items": {
+                    "description": "Each point is of the form `[POSIX_timestamp, numeric_value]`.\nThe timestamp should be in seconds and current.\nThe numeric value format should be a 32bit float gauge-type value.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "tags": {
+                "description": "A list of tags associated with the metric.",
+                "example": [
+                  "environment:test"
+                ],
+                "items": {
+                  "description": "Individual tags.",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "default": "gauge",
+                "description": "The type of the metric.",
+                "example": "rate",
+                "type": "string"
+              }
+            },
+            "required": [
+              "metric",
+              "points"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('curl', mockSchema);
+    const expected = {"series": [{"metric": "system.load.1", "points": [[1575317847, 0.5]]}]};
     expect(actual).toEqual(expected);
   });
 

@@ -64,11 +64,11 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
-### Live Tail
+### Live Search
 
-[Search by any tag][4] on 100% of your ingested traces live with no sampling.
+[Search on any span][4] by any tag on 100% of your ingested traces live with no sampling for 15 minutes.
 
-{{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
+{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 ### Connect Logs and Distributed Traces
 
@@ -94,9 +94,9 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
-### Integrate with OpenTracing
+### Customize your Instrumentation or add OpenTracing
 
-[Integrate your instrumentation][9] seamlessly between Opentracing and Datadog APM.
+[Seamlessly connect your instrumentation][9] between automatic instrumentation, dd-trace-api, and OpenTracing.
 
 ## Further Reading
 
@@ -105,9 +105,9 @@ Now that you've configured your application to send traces to Datadog, start get
 [1]: /tracing/send_traces/
 [2]: /tracing/visualization/services_map/
 [3]: /tracing/visualization/service/
-[4]: /tracing/livetail/
+[4]: /tracing/livesearch/
 [5]: /tracing/connect_logs_and_traces/
 [6]: /tracing/app_analytics/
 [7]: /synthetics/apm/
 [8]: /tracing/profiling/
-[9]: /tracing/opentracing/
+[9]: /tracing/manual_instrumentation/
