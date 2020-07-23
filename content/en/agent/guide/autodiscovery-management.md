@@ -51,7 +51,7 @@ DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/clean
 
 You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"`
 
-In Agent v7.2+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In Agent v7.20+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_CONTAINER_EXCLUDE_LOGS = "image:<IMAGE_NAME>"
@@ -84,7 +84,7 @@ To remove a given Docker container with the name `<NAME>` from Autodiscovery, ad
 container_exclude: [name:<NAME>]
 ```
 
-In Agent v7.2+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In Agent v7.20+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 container_exclude_logs: [image:<IMAGE_NAME>]
