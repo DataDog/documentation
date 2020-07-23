@@ -1622,6 +1622,146 @@ components:
             type: string
           type: array
       type: object
+    SecurityMonitoringSignal:
+      description: Object description of a security signal.
+      properties:
+        attributes:
+          description: JSON object containing all signal attributes and their associated
+            values.
+          properties:
+            attributes:
+              additionalProperties: {}
+              description: JSON object of attributes in the security signal.
+              example:
+                workflow:
+                  first_seen: '2020-06-23T14:46:01.000Z'
+                  last_seen: '2020-06-23T14:46:49.000Z'
+                  rule:
+                    id: 0f5-e0c-805
+                    name: 'Brute Force Attack Grouped By User '
+                    version: 12
+              type: object
+            message:
+              description: The message the security signal, defined by the rule which
+                which generated the signal.
+              example: Detect Account Take Over (ATO) through brute force attempts
+              type: string
+            tags:
+              description: Array of tags associated with the security signal.
+              example:
+              - security:attack
+              - technique:T1110-brute-force
+              format: array
+              items:
+                description: Tag associated with the security signal.
+                format: string
+            timestamp:
+              description: Timestamp of the security signal.
+              example: '2019-01-02T09:42:36.320Z'
+              format: date-time
+              type: string
+          type: object
+        id:
+          description: Unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalType'
+      type: object
+    SecurityMonitoringSignalListRequest:
+      description: The request for a security signal list.
+      properties:
+        filter:
+          description: Search filters for listing security signals.
+          properties:
+            from:
+              description: Minimum timestamp for requested security signals.
+              example: '2019-01-02T09:42:36.320Z'
+              format: date-time
+              type: string
+            query:
+              description: Search query for listing security signals.
+              example: security:attack status:high
+              type: string
+            to:
+              description: Maximum timestamp for requested security signals.
+              example: '2019-01-03T09:42:36.320Z'
+              format: date-time
+              type: string
+          type: object
+        page:
+          description: Paging attributes for listing security signals.
+          properties:
+            cursor:
+              description: List following results with a cursor provided in the previous
+                query.
+              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+              type: string
+            limit:
+              default: 10
+              description: Maximum number of security signals in the response.
+              example: 25
+              format: int32
+              maximum: 1000
+              type: integer
+          type: object
+        sort:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      type: object
+    SecurityMonitoringSignalType:
+      default: signal
+      description: Type of the event.
+      enum:
+      - signal
+      example: signal
+      type: string
+      x-enum-varnames:
+      - SIGNAL
+    SecurityMonitoringSignalsListResponse:
+      description: Response object with all security signals matching the request
+        and pagination information.
+      properties:
+        data:
+          description: Array of security signals matching the request.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignal'
+          type: array
+        links:
+          description: Links attributes.
+          properties:
+            next:
+              description: 'Link for the next set of results. Note that the request
+                can also be made using the
+
+                POST endpoint.'
+              example: https://app.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+              type: string
+          type: object
+        meta:
+          description: Meta attributes.
+          properties:
+            page:
+              description: Paging attributes.
+              properties:
+                after:
+                  description: 'Cursor to use to get next results, if any. To make
+                    the next request, use the same
+
+                    parameters with the addition of the `page[cursor]`.'
+                  example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+                  type: string
+              type: object
+          type: object
+      type: object
+    SecurityMonitoringSignalsSort:
+      description: Sort parameters when querying security signals.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
     User:
       description: User object returned by the API.
       properties:
@@ -3372,6 +3512,111 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+  /api/v2/security_monitoring/signals:
+    get:
+      description: 'List endpoint returns security signals that match a search query.
+
+        Both this endpoint and the POST endpoint can be used interchangeably when
+        listing
+
+        security signals.'
+      operationId: ListSecurityMonitoringSignals
+      parameters:
+      - description: Search query for security signals.
+        example: security:attack status:high
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested security signals.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Maximum timestamp for requested security signals.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Order of security signals in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of security signals in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Get a quick list of security signals
+      tags:
+      - Security Monitoring
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/signals/search:
+    post:
+      description: 'Returns security signals that match a search query.
+
+        Both this endpoint and the GET endpoint can be used interchangeably when listing
+
+        security signals.'
+      operationId: SearchSecurityMonitoringSignals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Get a list of security signals
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -3814,7 +4059,7 @@ tags:
   name: Roles
 - description: '[See API version 1](/api/v1/screenboards/).'
   name: Screenboards
-- description: Detection Rules for generating signals
+- description: Detection Rules for generating signals and listing of generated signals
   name: Security Monitoring
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
