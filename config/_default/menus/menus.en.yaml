@@ -1395,11 +1395,16 @@ main:
     parent: ndm
     identifier: ndm_setup
     weight: 401
+  - name: Profiles
+    url: network_performance_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 402
   - name: Data Collected
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 402
+    weight: 403
   - name: Developer Tools
     url: developers/
     pre: nav_developers
