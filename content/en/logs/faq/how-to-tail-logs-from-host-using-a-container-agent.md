@@ -1,0 +1,134 @@
+<div class="alert alert-info">We recommend using <b>STDOUT/STDERR</b> to collect container logs. Here is the official documentation on collecting logs from - <a href="/docker/log/?tab=containerinstallation#overview" target="_blank">Docker</a> and <a href="/agent/kubernetes/log/?tab=daemonset#pagetitle" target="_blank">Kubernetes</a>. To know more about docker logging please read this <a href="https://www.datadoghq.com/blog/docker-logging/" target="_blank">Docker Logging Best Practices</a> blog post.</div>
+
+## Overview
+
+Pods/Containers have no access to host files by default and this applies to the agent that is deployed in this manner. You will see a similar error message below if you try to configure your container agent to collect from host files:
+
+```
+  syslog
+  ------
+    Type: file
+    Path: /var/log/messages
+    Status: Error: file /var/log/messages does not exist
+
+```
+
+To give the agent container an access to host files, you will need to mount the file or its directory to the agent container. Here are some examples for Kubernetes and Docker:
+
+### Kubernetes:
+
+To mount the log files in your host to the agent container, set the host log directory in the volumes section of your agent manifest and the container log directory in volumeMounts section:
+
+```
+        volumeMounts:
+          - name: customlogs
+            ## The desired log directory inside the agent container:
+            mountPath: /container/var/test-dir/logs/
+            
+      volumes:
+        - name: customlogs
+          hostPath:
+            ## The directory in your host containing the log files.
+            path: /var/test-dir/logs/
+```
+
+The next step would be to configure the agent to tail the files for log collection. To do this, you can mount a custom logs config into /conf.d/ , the file name can be anything as long as it has a .yaml extension.
+
+It is preferable to use a configMap to store configurations rather than mounting a host file directly. Here's a sample configMap manifest that has a logs.yaml file:
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+     name: ddagent-logs-configmap
+     namespace: default
+data:
+     logs.yaml: |-
+           logs:
+             - type: file
+               service: syslog
+               source: os
+               ## Use the container log directory you set in the agent manifest
+               path: /container/var/test-dir/logs/*.log
+```
+
+Create the configMap object using the command:
+
+kubectl create -f <configmap manifest>
+
+Then mount it under /conf.d/:
+
+```
+        volumeMounts:
+          - name: cm-logs
+            mountPath: /conf.d/
+
+      volumes:
+        - name: cm-logs
+          configMap:
+            name: ddagent-logs-configmap
+```
+
+### Docker:
+
+To mount the host log file, you can add a volume parameter in your agent's docker run command:
+
+```
+-v /<host log directory>/:<container log directory>/
+```
+
+Then, you will need to create a custom logs config locally:
+
+```
+logs:
+  - type: file
+    service: syslog
+    source: os
+    path: <container log path>/*.log
+```
+
+and mount it into /conf.d/ , the file name can be anything:
+
+```
+-v <absolute path>/logs.yaml:/conf.d/logs.yaml
+```
+
+Your agent’s docker installation command should look like this:
+
+```
+docker run -d --name datadog-agent \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_LOGS_ENABLED=true \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /proc/:/host/proc/:ro \
+           -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+           -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+           -v /<host log directory>/:<container log directory>/ \
+           -v /<config location>/logs.yaml:/conf.d/logs.yaml \
+           datadog/agent:latest
+```
+
+## Verification
+
+After you have set this all up. You can now deploy the agent and you should be able to see something like this below when you run docker exec -it datadog-agent agent status:
+
+```
+==========
+Logs Agent
+==========
+
+    Sending compressed logs in HTTPS to agent-http-intake.logs.datadoghq.com on port 443
+    BytesSent: 10605
+    EncodedBytesSent: 2144
+    LogsProcessed: 32
+    LogsSent: 31
+
+  logs
+  ----
+    Type: file
+    Path: /container/var/test-dir/logs/*.log
+    Status: OK
+      1 files tailed out of 1 files matching
+    Inputs: /container/var/test-dir/logs/722bfb2cb35cc627-json.log
+
+```
