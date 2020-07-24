@@ -17,7 +17,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< img src="real_user_monitoring/etracking_explorer.png" alt="Error Tracking Explorer"  >}}
+{{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
 
 <div class="alert alert-warning"> This service is in private beta. If you have any feedback or you want to request access, contact <a href="/help">Datadog support</a>.</div>
 
