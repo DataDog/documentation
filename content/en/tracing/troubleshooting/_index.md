@@ -27,8 +27,8 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 | Go | 1.26.0 (once available)  |
 | NodeJS | 0.23.0+  |
 | Python | 0.41 (once available)  |
-| Ruby | 0.38 (once available)  |
-| C++ | 1.1.6 (once available)  |
+| Ruby | 0.38+  |
+| C++ | 1.2.0+ |
 
 ## Tracer debug logs
 
@@ -36,19 +36,20 @@ To capture full details on the Datadog tracer, enable debug mode on your tracer 
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
+
 ## APM rate limits
 
-Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
 
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
 
 ## Troubleshooting data requested by Datadog Support
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace or screenshots, for example, and tell us what you expect to see.**
+1. **How are you confirming the issue? Provide links to a trace (preferrably) or screenshots, for example, and tell us what you expect to see.**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
@@ -60,11 +61,13 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **An [Agent flare][6] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug mode][7]**
+4. **An [Agent flare][6] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug or trace mode][7] depending on what information we are looking for in these logs.**
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-    **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` set in your `datadog.yaml` to get a flare from the trace-agent:
+    When adjusting the log level to `debug` or `trace` mode, please take into consideration that these will significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). We recommend these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
+
+    **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
@@ -74,19 +77,13 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **Any automatic or [custom instrumentation][8], along with any configurations**
+6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][8], and adding span tags**
 
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
 7. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
-    Knowing what versions are being used allows us to ensure integrations are supported, to check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
-
-8. **Confirm Agent configurations, including if APM is enabled**
-
-    While APM is enabled by default for Agent 6+, in containerized environments there is an additional configuration step for [non local traffic][9] that can be the solution to traces not being received.
-
-    You can check this by running the command `netstat -van | grep 8126` on your Agent host. If you don't see an entry, this means you should check that your Agent is running and check the configuration in your `datadog.yaml` file. Instructions can be found on the [Agent Configuration page][9].
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][9] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
 ## Further Reading
 
@@ -96,8 +93,8 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
 [4]: /tracing/troubleshooting/agent_rate_limits
-[5]: /tracing/custom_instrumentation/security_and_agent_customization
-[6]: /agent/troubleshooting/#send-a-flare
+[5]: /tracing/custom_instrumentation/agent_customization
+[6]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
 [7]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [8]: /tracing/custom_instrumentation/
-[9]: /tracing/send_traces/#datadog-agent
+[9]: /tracing/compatibility_requirements/
