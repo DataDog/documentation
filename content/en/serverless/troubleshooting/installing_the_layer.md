@@ -2,10 +2,11 @@
 title: Datadog Lambda Layer
 kind: documentation
 aliases:
-  - infrastructure/serverless/datadog-lambda-layer
-  - infrastructure/serverless/lambda_layer
-  - infrastructure/serverless/lambda-layer
-  - infrastructure/serverless/datadog_lambda_layer
+  - /infrastructure/serverless/datadog-lambda-layer
+  - /infrastructure/serverless/lambda_layer
+  - /infrastructure/serverless/lambda-layer
+  - /infrastructure/serverless/datadog_lambda_layer
+  - /infrastructure/serverless/datadog_lambda_layer/
 further_reading:
 - link: "/integrations/amazon_lambda/"
   tag: "AWS Lambda Integration"
