@@ -34,12 +34,12 @@ framework for defining clear targets around application performance, which ultim
 
 ## Setup
 
-You can use Datadog’s [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][4] to your dashboards to visualize your SLO statuses at a glance. 
+You can use Datadog’s [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance. 
 
 ### Configuration
 
 1. On the [SLO status page][1], select **New SLO +**.
-2. Define the source for your SLOs. SLO types are [Metric-based][2] and [Monitor-based][3].
+2. Define the source for your SLOs. SLO types are [Metric-based][3] and [Monitor-based][4].
 3. Set up to three SLO targets. Each target consists of a target percentage and a rolling time window. Available time windows are: 7 days, 30 days, and 90 days. It is recommended that you make the SLO target percentage stricter than the target percentages stipluated in your SLAs.
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
@@ -112,16 +112,16 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 ## SLO Widgets
 
-After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][4] page.
+After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /monitors/service_level_objectives/metric/
-[3]: /monitors/service_level_objectives/monitor/
-[4]: /dashboards/widgets/slo/
+[2]: /dashboards/widgets/slo/
+[3]: /monitors/service_level_objectives/metric/
+[4]: /monitors/service_level_objectives/monitor/
 [5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/#saved-views
