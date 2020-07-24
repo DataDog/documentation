@@ -26,6 +26,7 @@ A MIB (Management Information Base) acts as a translator between OIDs and human 
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/devices/setup" >}}<u>Setup</u>: Configure the Agent to collect network device data.{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/devices/profiles" >}}<u>Profiles</u>: Set up profiles to work with your devices.{{< /nextlink >}}
     {{< nextlink href="network_performance_monitoring/devices/data" >}}<u>Data Collected</u>: View the metrics, events, and service checks collected.{{< /nextlink >}}
 {{< /whatsnext >}}
 

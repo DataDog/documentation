@@ -2,6 +2,9 @@
 title: NDM Setup
 kind: documentation
 further_reading:
+- link: "/network_performance_monitoring/devices/profiles"
+  tag: "Documentation"
+  text: "Using Profiles with Network Device Monitoring"
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"

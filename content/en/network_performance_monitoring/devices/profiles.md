@@ -1,6 +1,13 @@
 ---
 title: NDM Profiles
 kind: documentation
+further_reading:
+- link: "/network_performance_monitoring/devices/data"
+  tag: "Documentation"
+  text: "Data Collected with Network Device Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+  tag: "Blog"
+  text: "Monitor SNMP with Datadog"
 ---
 
 ## Overview
@@ -9,11 +16,13 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 ## Configuration
 
-By default, all profiles shipped by the Agent and in the configuration directory are loaded. To customize the specific profiles for collection, they can be explicitly referenced by filename under `definition_file`, or written inline under `definition`. Any of the OOTB Datadog profiles can be listed by their name. Additional custom profiles can be referenced by the file path in the config, or simply dropped in the configuration directory. **Note**: The generic profile is `generic_router.yaml`, which should work for routers, switches, etc.
+By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
-### sysOID mapped device profiles
+**Note**: The generic profile is [generic_router.yaml][1], which supports routers, switches, etc.
 
-Profiles allow the SNMP check to reuse metric definitions across several device types or instances. Profiles define metrics the same way as instances, either inline in the configuration file or in separate files. Each instance can only match a single profile. For example, you can define a profile in the `init_config` section:
+### sysOID mapped devices
+
+Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define metrics the same way as instances, either inline in the configuration file or in separate files. Each instance can only match a single profile. For example, you can define a profile in the `init_config` section:
 
 ```yaml
 init_config:
@@ -45,46 +54,14 @@ If necessary, additional metrics can be defined in the instances. These metrics 
 
 ### Metric definition by profile
 
-Profiles can be used interchangeably, such that devices that share MIB dependencies can reuse the same profiles. For example, the Cisco c3850 profile can be used across many Cisco switches.
+Profiles can be used interchangeably, meaning devices that share MIB dependencies can reuse the same profiles. For example, the [Cisco c3850 profile][2] can be used across many Cisco switches.
 
-* [Generic router][1]
-* [Cisco ASA 5525][2]
-* [Cisco c3850][3]
-* [Cisco Nexus][4]
-* [Cisco Meraki][5]
-* [Cisco UC Virtual Machine][6]
-* [Cisco ICM][7]
-* [Cisco ISR 4431][8]
-* [Dell iDRAC][9]
-* [Dell Poweredge][10]
-* [F5 Big IP][11]
-* [Fortinet FortiGate][12]
-* [HP iLO4][13]
-* [HPE Proliant][14]
-* [NetApp][15]
-* [Palo Alto][16]
-* [Checkpoint Firewall][17]
-* [Isilon][18]
-* [APC UPS][19]
+For more Datadog provided profiles, see the [Github repository][2].
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
-[2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-asa-5525.yaml
-[3]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-3850.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-nexus.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/meraki-cloud-controller.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_uc_virtual_machine.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_icm.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_isr_4431.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/idrac.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/dell-poweredge.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/f5-big-ip.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/fortinet-fortigate.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/hp-ilo4.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/hpe-proliant.yaml
-[15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/netapp.yaml
-[16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/palo-alto.yaml
-[17]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/checkpoint-firewall.yaml
-[18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/isilon.yaml
-[19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/apc-ups.yaml
+[2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
