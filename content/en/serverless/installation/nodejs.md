@@ -200,6 +200,5 @@ You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS
 
 Now you can view your metrics, logs, and traces on the [serverless home page][2].
 
-
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://app.datadoghq.com/functions

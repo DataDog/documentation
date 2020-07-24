@@ -30,7 +30,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
 4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: The mobile app does not support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][10] for more information or if you have issues with SAML login.
+**Note**: The mobile app does not support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][5] for more information or if you have issues with SAML login.
 
 ## Monitors
 
@@ -46,7 +46,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][10].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5].
 
 ## Account
 
@@ -54,7 +54,7 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][5]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
+For help with troubleshooting, [contact Datadog support][10]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
 
 ### Further Reading
 
@@ -64,11 +64,11 @@ For help with troubleshooting, [contact Datadog support][5]. You can also send a
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /help/
+[5]: /dashboards/
 [6]: /monitors/manage_monitor/#search
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /dashboards/
+[10]: /help/
 [11]: https://chat.datadoghq.com/
 [12]: https://datadoghq.slack.com/archives/C0114D5EHNG
