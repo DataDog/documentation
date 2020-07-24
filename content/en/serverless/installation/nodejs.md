@@ -1,16 +1,16 @@
 ---
-title: Installing Node JS Serverless Monitoring
+title: Installing Node.js Serverless Monitoring
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
       tag: 'Documentation'
-      text: 'Installing Node JS Serverless Monitoring'
+      text: 'Installing Node.js Serverless Monitoring'
     - link: 'serverless/installation/ruby'
       tag: 'Documentation'
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], use Node JS to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], use Node.js to instrument your application to send metrics, logs, and traces to Datadog. 
 
 ## Configuration
 
@@ -77,7 +77,7 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 
 ### Install the Datadog Lambda Library
 
-The Datadog Lambda Library can be imported as a layer. It’s ARN includes a region, language runtime, and version. Construct yours in the following format:
+The Datadog Lambda Library can be imported as a layer. Its ARN includes a region, language runtime, and version. Construct yours in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -102,7 +102,7 @@ To install the Datadog Lambda Library:
 
 These steps need to be repeated for every function you wish to trace.
 
-### Instrument your Code
+### Instrument your code
 
 Instrument your functions to ingest traces into Datadog:
 
@@ -126,7 +126,7 @@ module.exports.hello = datadog((event, context, callback) => {
 });
 ```
 
-### Subscribe the Forwarder to Log Groups
+### Subscribe the Forwarder to log groups
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
@@ -160,7 +160,7 @@ yarn add datadog-lambda-js
 
 Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
 
-### Instrument your Code
+### Instrument your code
 
 Instrument your functions to ingest traces into Datadog:
 
@@ -184,7 +184,7 @@ module.exports.hello = datadog((event, context, callback) => {
 });
 ```
 
-### Subscribe the Forwarder to Log Groups
+### Subscribe the Forwarder to log groups
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 

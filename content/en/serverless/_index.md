@@ -27,9 +27,9 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ### 1. Install the AWS Integration
 
-Start by installing the [AWS Integration][2]. This will allow Datadog to ingest Amazon CloudWatch metrics from AWS Lambda. The AWS integration installation also configures the Datadog Forwarder, which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics and logs.
+Start by installing the [AWS Integration][2]. This allows Datadog to ingest Amazon CloudWatch metrics from AWS Lambda. The AWS integration installation also configures the Datadog Forwarder, which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-### 2. Instrument Your Application
+### 2. Instrument your application
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
@@ -41,7 +41,7 @@ The Datadog extension for Azure App Services provides tracing capabilities for A
 
 ### Google Cloud Functions
 
-Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, you need to enable the [Google Cloud Platform integration][4].
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][4].
 
 ## Further Reading
 

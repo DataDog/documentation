@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
       tag: 'Documentation'
-      text: 'Installing Node JS Serverless Monitoring'
+      text: 'Installing Node.js Serverless Monitoring'
     - link: 'serverless/installation/ruby'
       tag: 'Documentation'
       text: 'Installing Ruby Serverless Monitoring'
@@ -77,7 +77,7 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 
 ### Install the Datadog Lambda Library
 
-The Datadog Lambda Library can be imported as a layer. It’s ARN includes a region, language runtime, and version. Construct yours in the following format:
+The Datadog Lambda Library can be imported as a layer. Its ARN includes a region, language runtime, and version. Construct yours in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -102,7 +102,7 @@ To install the Datadog Lambda Library:
 
 These steps need to be repeated for every function you wish to trace.
 
-### Instrument your Code
+### Instrument your code
 
 Instrument your functions to ingest traces into Datadog:
 
@@ -142,7 +142,7 @@ The Datadog Forwarder will now send enhanced metrics and traces from your functi
 ### Install the Datadog Lambda Library
 
 The Datadog Lambda Library can be installed from PyPI by running the following command
-or adding datadog-lambda to your project's requirements.txt:
+or by adding `datadog-lambda` to your project's `requirements.txt`:
 
 ```
 pip install datadog-lambda
@@ -150,7 +150,7 @@ pip install datadog-lambda
 
 Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
 
-### Instrument your Code
+### Instrument your code
 
 Instrument your functions to ingest traces into Datadog:
 
@@ -170,7 +170,7 @@ def get_message():
 return "Hello from serverless!"
 ```
 
-### Subscribe the Forwarder to Log Groups
+### Subscribe the Forwarder to log groups
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
