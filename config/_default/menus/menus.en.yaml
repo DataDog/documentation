@@ -578,11 +578,11 @@ main:
     parent: serverless
     identifier: serverless_troubleshooting
     weight: 2
-  - name: Forwarder
+  - name: Datadog Forwarder
     url: serverless/troubleshooting/installing_the_forwarder
     parent: serverless_troubleshooting
     weight: 201
-  - name: Layer
+  - name: Datadog Lambda Library
     url: serverless/troubleshooting/installing_the_layer
     parent: serverless_troubleshooting
     weight: 202
