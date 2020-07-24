@@ -52,22 +52,22 @@ Source maps are mapping files generated when minifying Javascript source code. T
 1. Add `@datadog/datadog-ci` to your `package.json` file
 2. Export your Datadog API key as an environment variable named `<DATADOG_API_KEY>`
 3. Run the following command:
-
    ```bash
    datadog-ci sourcemaps upload /path/to/build/directory \
               --service=my-service \
               --release-version=v35.2395005 \
               --minified-path-prefix=https://hostname.com/static/js
    ```
-   Get more information about CLI parameters in the [official Github repository](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)
+  
+Get more information about CLI parameters in the [official Github repository](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)
 
 __Important note__: you must use the `v0.5.2` version and onwards of the CLI.
 
 <div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourceContent</code> attribute in your source maps is not empty before uploading them.</div>
 
-{{< partial name="whats-next/whats-next.html" >}}
+## Further Reading
 
-[1]: /real_user_monitoring/error_tracking/explorer
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 
