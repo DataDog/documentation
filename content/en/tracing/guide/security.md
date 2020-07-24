@@ -102,6 +102,28 @@ DD_APM_REPLACE_TAGS=[
 ```
 
 {{% /tab %}}
+{{% tab "Kubernetes" %}}
+NOTE: Make sure you put this environment variable in the trace-agent container if you are using the recommended [daemonset configuration](https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset).
+```datadog-agent.yaml
+- name: DD_APM_REPLACE_TAGS
+  value: '[
+            {
+              "name": "http.url",
+              "pattern": "token/(.*)",
+              "repl": "?"
+            },
+            {
+              "name": "*",
+              "pattern": "foo",
+              "repl": "bar"
+            },
+            {
+              "name": "error.stack",
+              "pattern": "(?s).*"
+            }
+          ]'
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 [1]: /tracing/visualization/#trace
