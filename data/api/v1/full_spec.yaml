@@ -564,6 +564,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         show_present:
           description: Whether to show the present value.
           type: boolean
@@ -1000,6 +1002,8 @@ components:
           description: Widget query.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
@@ -1832,6 +1836,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
@@ -1972,6 +1978,8 @@ components:
           description: Query definition.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     HostMapWidgetDefinition:
@@ -4515,6 +4523,7 @@ components:
       - service check
       - synthetics alert
       - trace-analytics alert
+      - slo alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -4527,6 +4536,7 @@ components:
       - SERVICE_CHECK
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
+      - SLO_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -5433,6 +5443,8 @@ components:
           description: Query definition.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     ScatterPlotWidgetDefinition:
@@ -7393,6 +7405,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -7499,6 +7513,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
@@ -7566,6 +7582,8 @@ components:
           description: Widget query.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
@@ -16733,10 +16751,8 @@ paths:
 
         We encourage you to send your logs compressed.
 
-
-        **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`),
-
-        the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
+        Add the `Content-Encoding: gzip` header to the request when sending compressed
+        logs.'
       operationId: SubmitLog
       parameters:
       - description: HTTP header used to compress the media-type.
@@ -16968,9 +16984,8 @@ tags:
 
     We encourage you to send your logs compressed.
 
-
-    **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
-    endpoint is `http-intake.logs.datadoghq.eu`.'
+    Add the `Content-Encoding: gzip` header to the request when sending compressed
+    logs.'
   name: Logs
 - description: '[Check API version 2](/api/v2/logs-archives/).'
   name: Logs Archives
