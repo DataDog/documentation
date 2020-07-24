@@ -29,11 +29,11 @@ Navigate to the Lambda function in the AWS console you want to instrument. In th
 
 **Note**: If you’re using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your IAM policy where the Resource is the Customer Master Key used for X-Ray.
 
-### Install the AWS X-Ray Client Library
+### Install the AWS X-Ray client library
 
 Install the [AWS X-Ray client library][2].
 
-### Subscribe the Forwarder to Log Groups
+### Subscribe the Forwarder to log groups
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send custom metrics and logs to Datadog.
 

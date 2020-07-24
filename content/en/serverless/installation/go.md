@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
       tag: 'Documentation'
-      text: 'Installing Node JS Serverless Monitoring'
+      text: 'Installing Node.js Serverless Monitoring'
     - link: 'serverless/installation/ruby'
       tag: 'Documentation'
       text: 'Installing Ruby Serverless Monitoring'
@@ -33,7 +33,7 @@ go get github.com/DataDog/datadog-lambda-go
 
 Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
 
-### Instrument your Code
+### Instrument your code
 
 Datadog needs to be able to read headers from the incoming Lambda event. Instrument each of your Lambda handler functions that you wish to trace as outlined below:
 
@@ -58,7 +58,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-### Subscribe the Forwarder to Log Groups
+### Subscribe the Forwarder to log groups
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
