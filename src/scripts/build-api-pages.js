@@ -7,7 +7,7 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
-const supportedLangs = ['en', 'fr', 'ja'];
+const supportedLangs = ['en'];
 
 /**
  * Update the menu yaml file with api

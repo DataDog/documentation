@@ -25,7 +25,7 @@ Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on
 2. Select an SLO from the dropdown menu.
 3. Select up to three different time windows.
 
-**Note:** SLOs can be configured with 7-, 30- or 90-day time windows. If an SLO has a 7-day time window configured, you can select `Week to date` as a time window. If an SLO has a 30-day time window configured, additionally you can select `Previous week` as a time window. If an SLO has a 90-day time window configured, additionally you can select `Month to date` or `Previous month` as a time window.
+**Note:** SLOs can be configured with 7-, 30- or 90-day time windows. For all SLOs, you can also select `Week to date` as a time window. If an SLO has at least a 30-day time window configured, additionally you can select `Previous week` as a time window. If an SLO has a 90-day time window configured, additionally you can select `Month to date` or `Previous month` as a time window.
 
 ### Options
 
@@ -40,7 +40,7 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
 
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
   - `Status`: displays the overall SLO status percentages and targets
-  - `Groups`: displays a table of status percentages for each monitor
+  - `Monitors`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}

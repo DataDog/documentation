@@ -2311,18 +2311,6 @@ api_v1:
     parent: Synthetics
     url: pause-or-start-a-test
     generated: true
-  - name: Create a global variable
-    parent: Synthetics
-    url: create-a-global-variable
-    generated: true
-  - name: Delete a global variable
-    parent: Synthetics
-    url: delete-a-global-variable
-    generated: true
-  - name: Edit a global variable
-    parent: Synthetics
-    url: edit-a-global-variable
-    generated: true
   - name: Tags
     url: /fr/api/v1/tags/
     identifier: Tags
@@ -2363,6 +2351,22 @@ api_v1:
     url: /fr/api/v1/usage-metering/
     identifier: Usage Metering
     generated: true
+  - name: Get the list of available daily custom reports
+    parent: Usage Metering
+    url: get-the-list-of-available-daily-custom-reports
+    generated: true
+  - name: Get specified daily custom reports
+    parent: Usage Metering
+    url: get-specified-daily-custom-reports
+    generated: true
+  - name: Get the list of available monthly custom reports
+    parent: Usage Metering
+    url: get-the-list-of-available-monthly-custom-reports
+    generated: true
+  - name: Get specified monthly custom reports
+    parent: Usage Metering
+    url: get-specified-monthly-custom-reports
+    generated: true
   - name: Get hourly usage for analyzed logs
     parent: Usage Metering
     url: get-hourly-usage-for-analyzed-logs
@@ -2371,9 +2375,9 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
     generated: true
-  - name: Get monthly billable summary
+  - name: Get billable usage across your multi-org account
     parent: Usage Metering
-    url: get-monthly-billable-summary
+    url: get-billable-usage-across-your-multi-org-account
     generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering

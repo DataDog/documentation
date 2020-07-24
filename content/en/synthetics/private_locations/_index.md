@@ -36,7 +36,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Docker
 
-The private location worker is shipped as a Docker container. It can run on a Linux based OS or Windows OS if the [Docker engine][3] is available on your host and can run in Linux containers mode.
+The private location worker is shipped as a Docker container. The official [Docker image][3] is available on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog Private Locations Endpoints
 
@@ -96,21 +96,21 @@ If the traffic between your private location and Datadog has to go through a pro
 
 {{< img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file"  style="width:90%;">}}
 
-[Advanced proxy configuration options][4] are available.
+[Advanced proxy configuration options][5] are available.
 
 #### Blocking Reserved IPs
 
-By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][5] and [IPv6 address registry][6]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
+By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
 
 If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configure reserved IPs"  style="width:90%;">}}
 
-[Advanced reserved IPs configuration options][7] are available.
+[Advanced reserved IPs configuration options][8] are available.
 
 #### Advanced Configuration
 
-[Advanced configuration options][8] are available and can be found by running the below `help` command: 
+[Advanced configuration options][9] are available and can be found by running the below `help` command: 
 
 ```shell
 docker run --rm datadog/synthetics-private-location-worker --help
@@ -464,13 +464,13 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:80%;">}}
 
-Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][9], etc.
+Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
 
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also leverage the [`concurrency` parameter][10] value to adjust the number of tests your private location workers can run in parallel.
+You can also leverage the [`concurrency` parameter][11] value to adjust the number of tests your private location workers can run in parallel.
 
 ### Hardware Requirements
 
@@ -486,7 +486,7 @@ You can also leverage the [`concurrency` parameter][10] value to adjust the numb
 | Private location running API tests only             | From 1 to 200                 | 20mCores/5MiB per slot    |
 | Private location running Browser tests only         | From 1 to 50                  | 150mCores/1GiB per slot   |
 
-**Example:** For a private location running both API and Browser tests, and with a `concurrency` set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
+**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][11] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
 
 #### Disk
 
@@ -498,11 +498,12 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 
 [1]: /synthetics/ci
 [2]: /synthetics/
-[3]: https://docs.docker.com/engine/install/
-[4]: /synthetics/private_locations/configuration/#proxy-configuration
-[5]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[6]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[7]: /synthetics/private_locations/configuration/#reserved-ips-configuration
-[8]: /synthetics/private_locations/configuration/
-[9]: /synthetics/metrics
-[10]: /synthetics/private_locations/configuration/#parallelization-configuration
+[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[4]: https://docs.docker.com/engine/install/
+[5]: /synthetics/private_locations/configuration/#proxy-configuration
+[6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
+[9]: /synthetics/private_locations/configuration/
+[10]: /synthetics/metrics
+[11]: /synthetics/private_locations/configuration/#parallelization-configuration

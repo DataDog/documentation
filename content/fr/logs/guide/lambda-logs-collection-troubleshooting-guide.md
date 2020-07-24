@@ -2,25 +2,22 @@
 title: Guide de dépannage pour la collecte de logs de la fonction Lambda
 kind: documentation
 ---
-Si vous ne voyez pas de logs transmis depuis une fonction Lambda dans le Log Explorer, consultez l'[intégration Datadog/AWS][1] pour configurer votre environnement. Si vous ne voyez toujours pas vos logs après cela, vérifiez à nouveau les points suivants :
-
-Certains problèmes courants peuvent survenir lorsque vous configurez la fonction Lambda AWS pour la transmission de logs à Datadog. Les étapes de dépannage ci-dessous peuvent vous aider si vous utilisez la fonction Lambda et que vos logs ne sont pas transmis à Datadog. Si vous rencontrez toujours des problèmes après cela, [contactez l'assistance Datadog][2] pour obtenir de l'aide.
+Si vous ne voyez aucun log transmis depuis une fonction Lambda du Forwarder Datadog dans le Log Explorer, suivez les étapes de dépannage ci-dessous. Si vous avez suivi ces instructions, mais que vos problèmes persistent, [contactez l'assistance Datadog][2] pour obtenir de l'aide.
 
 ## Vos logs sont-ils envoyés à Datadog ?
 
 1. Accédez à la [vue Live Tail du Log Explorer][3].
-2. Dans la barre de recherche, utilisez un filtre pour limiter la vue Live Tail aux logs provenant de votre fonction Lambda. Voici des requêtes de recherche courantes :
-    * Filtrage par source : la source est souvent définie sur `source:aws` ou `source:cloudwatch`, mais vous pouvez trouver d'autres sources possibles dans la fonction `parse_event_source` de la [fonction Lambda][4]. 
-    * Filtrage par nom de transmetteur : la fonction Lambda ajoute un tag forwardername à tous les logs qu'elle renvoie. Vous pouvez filtrer ce tag en recherchant `forwardername:*` ou `forwardername:<NOM_FONCTION>`.
-3. Si vous ne voyez pas les logs dans la vue Live Tail, c'est qu'ils ne parviennent pas à Datadog. Cela peut être dû à l'un de ces problèmes de configuration courants :
-    * Les logs sont trop anciens : Datadog accepte uniquement les logs avec un timestamp de plus 6 heures avant l'événement et plus d'une heure après celui-ci.
-    * Si des [filtres d'exclusion][5] sont appliqués à votre index, il se peut qu'ils excluent vos logs.
+2. Dans la barre de recherche, utilisez un filtre pour limiter la vue Live Tail aux logs provenant de votre fonction Lambda. Voici des requêtes de recherche courantes :
+    * Filtrage par source : la source est souvent définie sur `source:lambda`, `source:aws` ou `source:cloudwatch`, mais vous pouvez trouver d'autres sources possibles dans la fonction `parse_event_source` de la [fonction Lambda][4]. 
+    * Filtrage par nom de forwarder : la fonction Lambda ajoute un tag `forwardername` à tous les logs qu'elle renvoie. Vous pouvez filtrer ce tag en recherchant `forwardername:*` ou `forwardername:<NOM_FONCTION_FORWARDER>`.
+3. Si vous voyez les logs dans la vue Live Tail, mais pas dans le Log Explorer, cela signifie que certains [filtres d'exclusion][5] sont définis dans votre index de log. Ces derniers filtrent vos logs.
+4. Si vous ne voyez pas les logs dans la vue Live Tail, c'est qu'ils ne parviennent pas à Datadog.
 
 ## Consulter l'onglet Monitoring de la fonction Lambda
 
 [Depuis la console AWS][6]
 
-1. Ouvrez votre fonction Lambda.
+1. Ouvrez la fonction Lambda de votre Forwarder.
 
 2. Cliquez sur l'onglet Monitoring.
 
@@ -32,7 +29,7 @@ Certains problèmes courants peuvent survenir lorsque vous configurez la fonctio
     * Les logs
 
 4. Si vous ne voyez aucun point de données dans le graphique **Invocations**, il est possible que les déclencheurs que vous avez définis pour votre fonction posent problème. Consultez la section [Gérer vos déclencheurs de fonction](#gerer-vos-declencheurs-de-fonction) un peu plus bas. Pour analyser vos invocations Lambda sans utiliser l'onglet Monitoring, reportez-vous à la section [Visualiser des métriques Lambda dans Datadog](#visualiser-des-metriques-lambda-dans-datadog).
-5. Si vous voyez des points de données dans le graphique « Error count and success rate », [consultez les logs de la fonction Lambda](#consulter-les-logs-de-la-fonction-Lambda) pour accéder aux messages d'erreurs signalés.
+5. Si vous voyez des points de données dans le graphique « Error count and success rate », [consultez les logs de la fonction Lambda](#consulter-les-logs-de-la-fonction-lambda) pour accéder aux messages d'erreur signalés.
 
 ### Visualiser des métriques Lambda dans Datadog
 
@@ -40,7 +37,7 @@ Si vous avez activé les métriques Lambda AWS, vous pouvez visualiser les métr
 
 | Métrique                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.lambda.invocations`     | Nombre de déclenchement ou d'invocation de la fonction Lambda                                    |
+| `aws.lambda.invocations`     | Nombre de déclenchements ou d'invocations de la fonction Lambda                                      |
 | `aws.lambda.errors `          | Nombre d'erreurs générées suite à l'invocation de la fonction                                        |
 | `aws.lambda.duration `        | Durée moyenne d'exécution (en millisecondes) de la fonction Lambda  |
 | `aws.lambda.duration.maximum` | Durée maximale d'exécution (en millisecondes) de la fonction Lambda  |
@@ -50,79 +47,45 @@ Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, con
 
 ### Gérer vos déclencheurs de fonction
 
-La fonction Lambda doit inclure des déclencheurs pour que les logs soient transmis. Si vous voyez [dans l'onglet Monitoring de votre fonction Lambda](#consulter-l-onglet-monitoring-de-la-fonction-lambda) que celle-ci n'a jamais été invoquée, c'est peut-être qu'aucun déclencheur n'a été configuré. Il existe deux moyens de définir des déclencheurs pour la fonction Lambda : manuellement ou automatiquement.
+La fonction Lambda du Forwarder (logs CloudWatch ou S3) doit inclure des déclencheurs pour que les logs soient transmis. Suivez les étapes ci-dessous pour veiller à ce que les déclencheurs soient correctement configurés.
 
-{{< tabs >}}
-{{% tab "Déclencheur manuel" %}}
-Vous pouvez voir si des [déclencheurs manuels][1] sont configurés pour votre fonction Lambda en vérifiant directement dans l'onglet de configuration de la fonction Lambda, comme indiqué ci-dessous :
+1. La source de votre log (groupe de logs CloudWatch ou compartiment S3) s'affiche-t-elle dans la liste Triggers de la console Lambda du Forwarder ? Si c'est le cas, assurez-vous qu'elle est activée. Sinon, suivez les étapes ci-dessous pour vérifier dans la console de groupe de logs CloudWatch ou S3. En effet, cette liste affichée dans la console Lambda semble être incomplète.
 
-{{< img src="logs/guide/manual-triggers-example.png" alt="Exemple d'emplacement de déclencheurs manuels"  style="width:80%;" >}}
+2. Pour le compartiment S3, accédez à l'onglet « Properties » et faites défiler vers le bas jusqu'à « Advanced settings » et au carré « Events », ou exécutez une requête en utilisant la commande AWS CLI ci-dessous. Une notification d'événement ayant pour but de déclencher la fonction Lambda du Forwarder s'affiche-t-elle ? Si ce n'est pas le cas, vous devez configurer un déclencheur.
+   ```
+   aws s3api get-bucket-notification-configuration --bucket <BUCKET_NAME>
+   ```
 
-**Remarque** : si votre fonction Lambda possède des déclencheurs, mais si elle n'est tout de même pas invoquée, cela peut-être dû à un conflit avec une autre ressource déjà abonnée à la même source de log. Lorsque vous ajoutez un déclencheur manuel, un message d'erreur vous informe si une ressource est déjà abonnée à la source de log :
+3. Pour le groupe de logs CloudWatch, accédez au champ « Subscriptions » de la console du groupe de logs, sous la section « Log group details ». Vous pouvez également exécuter une requête à l'aide de la commande AWS CLI ci-dessous. Vous devez configurer un déclencheur si la fonction Lambda du Forwarder n'est pas abonnée au groupe de logs.
+   ```
+   aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
+   ```
 
-{{< img src="logs/guide/creating-trigger-error-example.png" alt="Exemple d'erreur lors de la création d'un déclencheur avec abonnement"  style="width:80%;" >}}
+4. Définissez des déclencheurs [automatiquement][8] ou [manuellement][9].
 
-Consultez la section [Vérifier les conflits d'abonnement](#verifier-les-conflits-d-abonnement) pour en savoir plus sur la suppression d'abonnements.
+Remarque : AWS ne permet pas à plus d'une ressource d'être abonnée à une source de log. Si une autre ressource est déjà abonnée à votre source de log source, vous devez d'abord supprimer cet abonnement.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers
-{{% /tab %}}
-{{% tab "Déclencheur automatique" %}}
+Pour le groupe de logs CloudWatch, vous pouvez utiliser les métriques suivantes dans la plateforme Datadog pour confirmer si les logs sont envoyés depuis le groupe de logs vers la fonction Lambda du Forwarder. Utilisez le tag `log_group` pour filtrer les données lorsque vous consultez les métriques.
 
-Suivez les étapes suivantes pour vérifier si des [déclencheurs automatiques][1] sont configurés pour votre fonction Lambda :
-
-1. Accédez à la [console Cloudwatch][2].
-2. Cliquez sur **Log Groups** dans la barre latérale de gauche pour afficher la liste des groupes de logs. Sur la droite, la colonne **subscriptions** indique quelles ressources (le cas échéant) sont actuellement abonnées à la source de log.
-
-{{< img src="logs/guide/log-group-subscriptions-example.png" alt="Exemple d'abonnement à un groupe de logs"  style="width:80%;" >}}
-
-3. Si votre fonction Lambda ne fait pas partie des ressources abonnées au groupe de logs à surveiller, suivez à nouveau les étapes indiquées dans la [documentation sur la configuration automatique de déclencheurs][1].
-4. Si une autre ressource est déjà abonnée au groupe de logs que vous voulez surveiller, consultez la section [Vérifier les conflits d'abonnement](#verifier-les-conflits-d-abonnement) ci-dessous.
-
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers
-[2]: https://console.aws.amazon.com/cloudwatch/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Vérifier les conflits d'abonnement
-
-AWS autorise l'abonnement d'une ressource maximum par source de log. Si vous avez des déclencheurs pour votre fonction Lambda, mais qu'elle n'est tout de même pas invoquée, cela peut-être dû à un conflit avec une autre ressource déjà abonnée à la même source de log. La source de log doit être libérée pour permettre à la fonction Lambda de Datadog d'y recueillir des logs.
-
-Si une ressource est déjà abonnée à un groupe de logs que vous souhaitez surveiller à l'aide de la fonction Lambda de Datadog, vous pouvez le supprimer de la manière suivante :
-
-* Sélectionnez la source de log.
-* Sélectionner **Remove Subscription Filter** dans le menu déroulant **Actions**.
+| Métrique                          | Description                                                                                        |
+|---------------------------------|----------------------------------------------------------------------------------------------------|
+| `aws.logs.incoming_log_events`  | Le nombre d'événements de log chargés dans les logs CloudWatch                                               |
+| `aws.logs.forwarded_log_events` | Le nombre d'événements de log transmis à la destination de l'abonnement                                 |
+| `aws.logs.delivery_errors`      | Le nombre d'échecs d'envoi des événements de log vers la destination de l'abonnement                    |
+| `aws.logs.delivery_throttling`  | Le nombre d'événements de log limités pour la livraison à la destination de l'abonnement                  |
 
 ## Consulter les logs de la fonction Lambda
 
-Depuis l'onglet Monitoring, cliquez sur **View logs in Cloudwatch**.
+1. Depuis l'onglet Monitoring, cliquez sur **View logs in Cloudwatch**.
 
 {{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Logs Lambda dans Cloudwatch"  style="width:80%;" >}}
 
-### Clé d'API
+2. Recherchez le flux de logs le plus récent.
 
-Si vous voyez l'une des lignes de log suivantes, cela signifie que votre clé d'API n'est pas configurée correctement.
+3. Trouvez-vous des erreurs ? Essayez de rechercher « ?ERROR ?Error ?error ».
 
-```
-module initialization error: Missing Datadog API key
-```
+4. Définissez la variable d'environnement « DD_LOG_LEVEL » sur « debug » au niveau de la fonction Lambda du Forwarder afin d'activer le debugging complémentaire des logs pertinents. N'oubliez pas de désactiver ces logs une fois le debugging terminé, car ils sont très détaillés.
 
-Ce message indique que vous n'avez pas configuré la clé d'API. Il existe trois moyens d'y parvenir :
-
-* Directement dans le code Python de votre fonction Lambda
-* En tant que variable d'environnement sous le nom `DD_API-KEY`
-* En tant que clé chiffrée KMS sous le nom `DD_KMS_API_KEY`
-
-```
-module initialization error: The API key is not valid.
-```
-
-La clé d'API que vous avez indiquée ne correspond à aucune clé reconnue par Datadog. Vérifiez que vous avez bien saisi la clé et assurez-vous qu'elle correspond à l'organisation à laquelle vous envoyez des données. Si vous êtes sur le site européen de Datadog, vous devez indiquer une variable `DD_SITE` avec la valeur `datadoghq.eu` pour que la clé d'API soit bien associée à votre compte.
-
-```
-module initialization error: The API key is not the expected length. Please confirm that your API key is correct
-```
-
-La clé d'API est soit trop courte, soit trop longue. Vérifiez que vous l'avez copiée correctement.
 
 [1]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [2]: https://docs.datadoghq.com/fr/help
@@ -131,3 +94,5 @@ La clé d'API est soit trop courte, soit trop longue. Vérifiez que vous l'avez 
 [5]: https://docs.datadoghq.com/fr/logs/indexes/#exclusion-filters
 [6]: https://console.aws.amazon.com/lambda/home
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=awsconsole#metrics
+[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
+[9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers

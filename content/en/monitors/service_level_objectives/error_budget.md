@@ -30,12 +30,33 @@ over the past `target` number of days.
 
 {{< img src="monitors/service_level_objectives/error_budget_alert.png" alt="setting up an error budget alert">}}
 
-### API
+### API and Terraform
 
 You can create SLO error budget monitors using the [create-monitor API endpoint][4]. Below is an example query for an SLO monitor, which alerts when more than 75% of the error budget of an SLO is consumed:
 
 ```
 error_budget("slo_id").over("time_window") > 75
+```
+
+In addition, SLO error budget monitors can also be created using the [datadog_monitor resource in Terraform][5]. Below is an example `.tf` for configuring an error budget monitor for a metric-based SLO using the same example query as above.
+
+**Note:** SLO error budget monitors are only supported in Terraform provider v2.7.0 or earlier.
+
+```
+resource "datadog_monitor" "metric-based-slo" {
+    name = "SLO Error Budget Alert Example"
+    type  = "slo alert"
+    
+    query = <<EOT
+    error_budget("slo_id").over("time_window") > 75 
+    EOT
+
+    message = "Example monitor message"
+    thresholds = {
+      critical = 75
+    }
+    tags = ["foo:bar", "baz"]
+}
 ```
 
 Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to configure an error budget monitor on and replace `time_window` with one of `7d`, `30d` or `90d`- depending on which target is used to configure your metric-based SLO.
@@ -50,3 +71,4 @@ Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to co
 [2]: https://app.datadoghq.com/slo
 [3]: /monitors/notifications/
 [4]: /api/v1/monitors/#create-a-monitor
+[5]: https://www.terraform.io/docs/providers/datadog/r/monitor.html

@@ -13,7 +13,7 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 - link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
-  text: "Log Parsing - Best Practice"
+  text: "Log Parsing - Best Practices"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
@@ -113,7 +113,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).                                                         |
-| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#xml).                                                                                          |  
+| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                          |  
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -174,6 +174,7 @@ Some examples demonstrating how to use parsers:
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 * [List and Arrays](#list-and-arrays)
+* [Glog format](#glog-format)
 * [XML](#parsing-xml)
 
 ### Key value or logfmt
@@ -294,10 +295,18 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 | 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
 | 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
-| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Use this format if you perform your own localizations and your timestamps are _not_ in UTC. Timezone IDs are pulled from the TZ Database. For more information, see [TZ database names][1].
+<sup>1</sup> Use the `timezone` parameter if you perform your own localizations and your timestamps are _not_ in UTC. 
+The supported format for timezones are:
+
+* `GMT`, `UTC`, `UT` or `Z`
+* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive. 
+* Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
+* Timezone IDs pulled from the TZ database. For more information, see [TZ database names][1].
 
 **Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
 
@@ -412,6 +421,37 @@ Users {John-Oliver-Marc-Tom} have been added to the database
 
 ```text
 myParsingRule Users %{data:users:array("{}","-")} have been added to the database
+```
+
+### Glog format
+
+Kubernetes components sometimes log in the `glog` format; this example is from the Kube Scheduler item in the Pipeline Library.
+
+Example log line:
+
+```text
+W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
+```
+
+Parsing rule:
+
+```text
+kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
+```
+
+And extracted JSON:
+
+```json
+{
+  "level": "W",
+  "timestamp": 1587728861605,
+  "logger": {
+    "thread_id": 1,
+    "name": "authorization.go"
+  },
+  "lineno": 47,
+  "msg": "Authorization is disabled"
+}
 ```
 
 ### Parsing XML

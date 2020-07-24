@@ -26,11 +26,9 @@ In the URL field enter the following endpoint:
 
 `https://<YOUR_DOMAIN>.freshservice.com/api/v2/tickets`
 
-### Custom Payload
+### Payload
 
-First, check the **Use custom payload** checkbox to use a custom JSON payload. If you don’t do this, the standard Datadog payload is sent to Freshservice resulting in a failed request.
-
-Next, enter a new ticket JSON payload. The following example uses only the required fields, so review [Freshservice’s ticket endpoint][2] for more options on customizing your payload:
+Enter a new ticket JSON payload. The following example uses only the required fields, so review [Freshservice’s ticket endpoint][2] for more options on customizing your payload:
 
 ```json
 {

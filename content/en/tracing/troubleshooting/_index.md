@@ -36,14 +36,13 @@ To capture full details on the Datadog tracer, enable debug mode on your tracer 
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
-
 ## APM rate limits
 
 Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
 
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
 
 ## Troubleshooting data requested by Datadog Support
 
