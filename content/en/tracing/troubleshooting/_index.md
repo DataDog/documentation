@@ -40,6 +40,10 @@ These logs can surface instrumentation errors or integration-specific errors.  F
 
 Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
 
+## Modifying, discarding, or obfuscating spans
+
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+
 ## Troubleshooting data requested by Datadog Support
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
@@ -56,7 +60,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **An [Agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug or trace mode][6] depending on what information we are looking for in these logs.**
+4. **An [Agent flare][6] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug or trace mode][7] depending on what information we are looking for in these logs.**
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
@@ -72,13 +76,13 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
     Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][7], and adding span tags**
+6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][8], and adding span tags**
 
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
 7. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
-    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][8] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][9] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
 ## Further Reading
 
@@ -88,7 +92,8 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
 [4]: /tracing/troubleshooting/agent_rate_limits
-[5]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[6]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
-[7]: /tracing/custom_instrumentation/
-[8]: /tracing/compatibility_requirements/
+[5]: /tracing/custom_instrumentation/agent_customization
+[6]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[7]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[8]: /tracing/custom_instrumentation/
+[9]: /tracing/compatibility_requirements/
