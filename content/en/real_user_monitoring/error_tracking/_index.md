@@ -34,7 +34,8 @@ The goal of __Error Tracking__ is to make this easy by:
 Error Tracking processes for now __errors collected from the browser by the RUM SDK__ (errors with [source origin](/real_user_monitoring/data_collected/error#error-origins)). We plan to soon process errors from your mobile and back-end applications using errors already collected through the RUM and APM SDKs.
 
 For Error Tracking to properly work, you must set the __version__, the __environment__ and the __service__ when initializing your different SDKs or when configuring your Datadog agent (for APM only, once supported). Refer to the dedicated documentation for more information:
-* [Initialize the RUM SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters)
+
+- [Initialize the RUM SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters)
 
 __Important note__: you must download the `v1.11.5` version and onwards of the RUM SDK.
 
@@ -53,15 +54,18 @@ Source maps are mapping files generated when minifying Javascript source code. T
 3. Run the following command:
 
    ```bash
-    $ datadog-ci sourcemaps upload /path/to/build/directory \
-                --service=my-service \
-                --release-version=v35.2395005 \
-                --minified-path-prefix=https://hostname.com/static/js
+   datadog-ci sourcemaps upload /path/to/build/directory \
+              --service=my-service \
+              --release-version=v35.2395005 \
+              --minified-path-prefix=https://hostname.com/static/js
    ```
-
-   Get more information about CLI parameters in the [official Github repository][https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps]
+   Get more information about CLI parameters in the [official Github repository](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)
 
 <div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourceContent</code> attribute in your source maps is not empty before uploading them.</div>
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/error_tracking/explorer
 
 
 
