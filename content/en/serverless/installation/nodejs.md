@@ -19,7 +19,7 @@ After you have [installed the AWS integration][1], use Node.js to instrument you
 
 ### Install the Datadog Lambda Library
 
-Use the [Datadog Serverless Plugin][3] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+Use the [Datadog Serverless Plugin][1] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
 To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
 
@@ -42,6 +42,7 @@ To install the Datadog Lambda Library with the Serverless Framework plugin, foll
     For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
 4. Redeploy your serverless application.
 
+[1]:https://github.com/DataDog/serverless-plugin-datadog
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}}
 <!--- {{% tab "SAM" %}}
@@ -97,7 +98,7 @@ To install the Datadog Lambda Library:
 2. Click on **Layers** on the main page of your function.
 3. Scroll down, and click on **Add a Layer**.
 4. Select the option to *Provide a layer version ARN*.
-5. Enter the Datadog Lambda Library ARN from the table above.
+5. Enter the Datadog Lambda Library ARN from the example above.
 6. Navigate to the Environment Variables section of your function and add a new `“DD_FLUSH_TO_LOG”` variable set to `“true”`.
 
 These steps need to be repeated for every function you wish to trace.
@@ -133,7 +134,7 @@ You need the Datadog Forwarder to subscribe to each of your function’s log gro
 For more information on the Forwarder ARN, or to install the forwarder see the [documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
 
 1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger:
+2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
 
 The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
 
@@ -188,7 +189,7 @@ module.exports.hello = datadog((event, context, callback) => {
 
 You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
 
-You can quickly verify that you’ve installed the Datadog Forwarder here. For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
+You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS Forwarder page][1] For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
 
 
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
