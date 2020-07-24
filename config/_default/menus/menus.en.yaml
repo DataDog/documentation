@@ -555,6 +555,21 @@ main:
     url: serverless/installation/ruby
     parent: serverless_installation
     weight: 103
+  - name: Java
+    url: serverless/installation/java
+    parent: serverless_installation
+    identifier: serverless_installation_java
+    weight: 104  
+  - name: Go
+    url: serverless/installation/go
+    parent: serverless_installation
+    identifier: serverless_installation_go
+    weight: 105
+  - name: .NET
+    url: serverless/installation/dotnet
+    parent: serverless_installation
+    identifier: serverless_installation_dotnet
+    weight: 106
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
