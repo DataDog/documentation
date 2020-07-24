@@ -37,3 +37,10 @@ For Error Tracking to properly work, you must set the __version__, the __environ
 
 __Important note__: you must download the `v1.11.5` version and onwards of the RUM SDK.
 
+### Upload Mapping Files
+
+The source code of some applications is obfuscated and/or minified when deployed to production for performance optimization and security concerns. The consequence is that stack traces of errors fired from those applications are also obfuscated making the troubleshooting process harder: they cannot be used to understand which file and which line of code are responsible for a given error.
+
+__Datadog allows you to securely upload your mapping files so that collected stack traces can be automatically deobfuscated.__
+
+
