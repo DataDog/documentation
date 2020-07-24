@@ -930,106 +930,106 @@ main:
     parent: tracing
     identifier: tracing_custom_instrumentation
     weight: 9
+  - name: Agent Customization
+    url: tracing/custom_instrumentation/agent_customization
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_agent_customization
+    weight: 901
   - name: Java
     url: tracing/custom_instrumentation/java
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_java
-    weight: 901
+    weight: 902
   - name: Python
     url: tracing/custom_instrumentation/python
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_python
-    weight: 902
+    weight: 903
   - name: Ruby
     url: tracing/custom_instrumentation/ruby
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_ruby
-    weight: 903
+    weight: 904
   - name: Go
     url: tracing/custom_instrumentation/go
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_go
-    weight: 904
+    weight: 905
   - name: NodeJS
     url: tracing/custom_instrumentation/nodejs
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_nodejs
-    weight: 905
+    weight: 906
   - name: PHP
     url: tracing/custom_instrumentation/php
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_php
-    weight: 906
+    weight: 907
   - name: C++
     url: tracing/custom_instrumentation/cpp
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_cpp
-    weight: 907
+    weight: 908
   - name: .NET
     url: tracing/custom_instrumentation/dotnet
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_dotnet
-    weight: 908
-  - name: Security and Fine-Tuning
-    url: tracing/security/
-    parent: tracing
-    identifier: tracing_security
-    weight: 10
+    weight: 909
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 11
+    weight: 10
   - name: Services List
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1101
+    weight: 1001
   - name: Service Page
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1102
+    weight: 1002
   - name: Resource Page
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1103
+    weight: 1003
   - name: Trace View
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1104
+    weight: 1004
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1105
+    weight: 1005
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 12
+    weight: 11
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 13
+    weight: 12
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1301
+    weight: 1201
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1302
+    weight: 1202
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1303
+    weight: 1203
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1304
+    weight: 1204
   - name: Log Management
     url: logs/
     pre: nav_logs

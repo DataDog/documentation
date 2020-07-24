@@ -42,7 +42,7 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 ## Modifying, discarding, or obfuscating spans
 
-There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security & Fine-Tuning][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
 
 ## Troubleshooting data requested by Datadog Support
 
@@ -96,7 +96,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
 [4]: /tracing/troubleshooting/agent_rate_limits
-[5]: /tracing/security
+[5]: /tracing/custom_instrumentation/security_and_agent_customization
 [6]: /agent/troubleshooting/#send-a-flare
 [7]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [8]: /tracing/custom_instrumentation/

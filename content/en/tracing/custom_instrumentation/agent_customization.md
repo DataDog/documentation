@@ -1,18 +1,11 @@
 ---
-title: Security and Fine-Tuning
+title: Security and Agent Customization
 kind: documentation
 description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
 aliases:
     - /security/tracing
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation
-further_reading:
-    - link: 'tracing/security/agent_span_modifications'
-      tag: 'Documentation'
-      text: 'Configure the Agent to modify or discard spans'
-    - link: 'tracing/tracer_span_modification'
-      tag: 'Documentation'
-      text: 'Configure the Tracer to modify or discard spans'
 ---
 ## Overview
 
@@ -250,7 +243,7 @@ If you require tailored instrumentation for a specific application, consider usi
 
 ## Modifying Spans with the Datadog Tracer
 
-Some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). See the following examples:
+While this page deals with modifying data once it has reached the Datadog Agent, some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). View the Custom Instrumentation documentation for your language for more information.
 
 * Java: [TraceInterceptor interface][8]
 * Ruby: [Processing Pipeline][9]
