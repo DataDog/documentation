@@ -71,14 +71,8 @@ nav_sections:
       - title: Serverless
         link: serverless/
         icon: serverless.svg
-<<<<<<< HEAD
-        desc: Bring together metrics, traces, and logs from your serverless applications.
-        desc: Gain visibility into your network traffic using tagged objects
-      - title: Mobile App
-=======
         desc: End-to-end visibility into your serverless development lifecycle
       - title: Mobile application
->>>>>>> master
         link: mobile/
         icon: mobile.svg
         desc: View Datadog alerts and dashboards on your mobile device
