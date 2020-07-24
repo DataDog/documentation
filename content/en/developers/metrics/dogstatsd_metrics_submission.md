@@ -531,7 +531,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
 {{< /code-block >}}

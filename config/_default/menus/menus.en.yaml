@@ -555,6 +555,7 @@ main:
     url: serverless/installation/ruby
     parent: serverless_installation
     weight: 103
+<<<<<<< HEAD
   - name: Java
     url: serverless/installation/java
     parent: serverless_installation
@@ -570,6 +571,8 @@ main:
     parent: serverless_installation
     identifier: serverless_installation_dotnet
     weight: 106
+=======
+>>>>>>> master
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
@@ -2823,6 +2826,14 @@ api_v2:
   - name: Update an existing rule
     parent: Security Monitoring
     url: update-an-existing-rule
+    generated: true
+  - name: Get a quick list of security signals
+    parent: Security Monitoring
+    url: get-a-quick-list-of-security-signals
+    generated: true
+  - name: Get a list of security signals
+    parent: Security Monitoring
+    url: get-a-list-of-security-signals
     generated: true
   - name: Service Checks
     url: /api/v2/service-checks/
