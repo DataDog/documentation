@@ -49,7 +49,7 @@ __Datadog allows you to securely upload your mapping files so that collected sta
 
 Source maps are mapping files generated when minifying Javascript source code. The __Datadog CLI__ can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps along with their related minified files. To upload your source maps:
 
-1. Add `@datadog/datadog-ci` to your `package.json` file (you must use the `v0.5.2` version and onwards of the CLI)
+1. Add `@datadog/datadog-ci` to your `package.json` file
 2. Export your Datadog API key as an environment variable named `<DATADOG_API_KEY>`
 3. Run the following command:
 
@@ -60,6 +60,8 @@ Source maps are mapping files generated when minifying Javascript source code. T
               --minified-path-prefix=https://hostname.com/static/js
    ```
    Get more information about CLI parameters in the [official Github repository](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)
+
+__Important note__: you must use the `v0.5.2` version and onwards of the CLI.
 
 <div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourceContent</code> attribute in your source maps is not empty before uploading them.</div>
 
