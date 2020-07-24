@@ -481,6 +481,24 @@
     {{- end -}}
 {{- end -}}
 
+
+{{- with $context.action.requestBody -}}
+{{- with .content -}}
+
+{{- with (index . "application/json") -}}
+{{- with (index . "examples") -}}
+{{- range $key, $value :=  . -}}
+{{- range $key, $value := (index $value "x-variables") -}}
+<span class="n">{{$key }}</span><span class="o">=</span><span class="s1">{{ . }}</span><br/>
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- end -}}
+{{- end -}}
+
+
 {{- with $queryStrings -}}
     {{- $i := 0 -}}
     {{- range . -}}
@@ -515,6 +533,8 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
+
+
 
 {{- /* Content-Type header based on "requestBody" */ -}}
 {{- with $context.action.requestBody -}}
@@ -553,7 +573,20 @@
 {{- if $context.action.requestBody -}}
 &nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
+{{- with $context.action.requestBody -}}
+<br>
+{{- with .content -}}
+{{- with (index . "application/json") -}}
+{{- with (index . "examples") -}}
+{{- range $key, $value :=  . -}}
+<span class="s1">{{ (index $value "value") | jsonify (dict "indent" "  ") }}</span>
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- else -}}
 <span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
+{{ end}}
 <span class="n">EOF</span>
 {{- end -}}
                                             </code>

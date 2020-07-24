@@ -14373,6 +14373,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              dynamic-points:
+                name: This my cool example
+                summary: ...
+                x-variables:
+                  FOO: "$(date ...)"
+                value:
+                  series:
+                    - metric: "system.load.1"
+                      points:
+                        - ["${FOO}", "1234.5"]
             schema:
               $ref: '#/components/schemas/MetricsPayload'
         required: true
