@@ -30,7 +30,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
 4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: The mobile app currently does not support IdP-initiation login (authentication starting from the SAML identity provider). Also, there are know login issues with certain browser versions. Please contact [Datadog Support][10] for more information or if you have issues with SAML login.
+**Note**: The mobile app currently does not support IdP-initiated login (authentication starting from the SAML identity provider). Also, there are known login issues with certain browser versions. Please contact [Datadog Support][10] for more information or if you have issues with SAML login.
 
 ## Monitors
 
