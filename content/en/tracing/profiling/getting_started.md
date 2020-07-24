@@ -17,7 +17,7 @@ Profiling is shipped within the following tracing libraries. Select your languag
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2] or [6.20.2][2]. Please ensure the agent has `DD_APM_ENABLED` environment variable set to `true` and it listens to the port `8126/TCP`, because this is where the profiling activity will be pushed by your application.
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][2] or [6.20.2][2]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
