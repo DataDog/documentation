@@ -19,7 +19,13 @@ further_reading:
 
 {{< img src="real_user_monitoring/etracking_explorer.png" alt="Error Tracking Explorer"  >}}
 
-<div class="alert alert-warning"> This service is in private beta. If you have any feedback or you want to request access, contact <a href="/help">Datadog support</a>.</div>
+## Explore your issues
+
+### Time range
+
+### Facets
+
+## Inspect an issue
 
 ## Further Reading
 

@@ -19,16 +19,14 @@ further_reading:
 
 {{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
 
-<div class="alert alert-warning"> This service is in private beta. If you have any feedback or you want to request access, contact <a href="/help">Datadog support</a>.</div>
-
-## What is error tracking?
+## What is Error Tracking?
 
 Across the different products of its platform, namely [Real User Monitoring][/real_user_monitoring], [APM][/tracing] and [Log Management][/logs], Datadog collects a lot of errors. The monitoring of those errors is critical for the health of a system but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. The goal of Error Tracking is to make this easy by:
 * __Grouping similar errors into issues__ to reduce the noise and help identify the most important ones.
 * __Following issues over time__ to know when they first started, if they are still ongoing and more importantly how often they are occurring.
 * __Getting all the context needed in one place__ to facilitate the troubleshooting.
 
-## Getting Started
+## Getting started
 
 Error Tracking processes for now __errors collected from the browser by the RUM SDK__ (errors with [source origin][/real_user_monitoring/data_collected/error#error-origins]). We plan to soon process errors from your mobile and back-end applications using errors already collected through the RUM and APM SDKs.
 
@@ -37,13 +35,13 @@ For Error Tracking to properly work, you must set the __version__, the __environ
 
 __Important note__: you must download the `v1.11.5` version and onwards of the RUM SDK.
 
-### Upload Mapping Files
+### Upload mapping files
 
 The source code of some applications is obfuscated or minified when deployed to production for performance optimization and security concerns. The consequence is that stack traces of errors fired from those applications are also obfuscated making the troubleshooting process harder: they cannot be used to understand which file and which line of code are responsible for a given error.
 
 __Datadog allows you to securely upload your mapping files so that collected stack traces can be automatically deobfuscated.__
 
-#### Javascript Source Maps
+#### Javascript source maps
 
 Source maps are mapping files generated when minifying Javascript source code. The __Datadog CLI__ can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps along with their related minified files. To upload your source maps:
 1. Add `@datadog/datadog-ci` to your `package.json` file (you must use the `v0.5.2` version and onwards of the CLI)
