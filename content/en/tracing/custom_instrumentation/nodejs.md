@@ -290,6 +290,124 @@ The following tags are available to override Datadog specific options:
 
 See [opentracing.io][4] for OpenTracing NodeJS usage.
 
+## OpenTelemetry
+
+OpenTelemetry support is available by using the `opentelemetry-exporters-datadog` package to export traces from OpenTelemetry to Datadog.
+
+### Installation
+
+To install:
+
+```
+npm install --save opentelemetry-exporter-datadog
+```
+
+### Usage
+
+Install the datadog processor and exporter in your application and configure the options. Then use the OpenTelemetry interfaces to produces traces and other information:
+
+```javascript
+const opentelemetry = require('@opentelemetry/api');
+const { BasicTracerProvider } = require('@opentelemetry/tracing');
+const { DatadogSpanProcessor, DatadogExporter, DatadogProbabilitySampler, DatadogPropagator } = require('opentelemetry-exporter-datadog');
+
+const provider = new BasicTracerProvider();
+ 
+const exporterOptions = {
+  serviceName: 'my-service', // optional
+  agentUrl: 'http://localhost:8126', // optional
+  tags: 'example_key:example_value,example_key_two:value_two', // optional
+  env: 'production', // optional
+  version: '1.0' // optional
+};
+ 
+const exporter = new DatadogExporter(exporterOptions);
+const processor = new DatadogSpanProcessor(exporter);
+
+provider.addSpanProcessor(processor);
+ 
+// Next, add the Datadog Propagator for distributed tracing 
+provider.register({
+  propagator: new DatadogPropagator()
+});
+
+const tracer = opentelemetry.trace.getTracer('example-basic-tracer-node');
+
+// Create a span. A span must be closed.
+const parentSpan = tracer.startSpan('main');
+
+doWork(parentSpan);
+
+setTimeout(() => {
+  parentSpan.end();
+
+  setTimeout(() => {
+    processor.shutdown()
+  },4000);
+}, 5000);
+
+function doWork(parent) {
+  const span = tracer.startSpan('doWork', {
+    parent,
+  });
+
+  // simulate some random work.
+  for (let i = 0; i <= Math.floor(Math.random() * 40000000); i += 1) {
+    // empty
+  }
+  // Set attributes to the span.
+  span.setAttribute('key', 'value');
+  setTimeout( () => {
+    span.end();
+  }, 1000)
+}
+```
+
+### Configuration Options - Datadog Agent URL
+
+By default the OpenTelemetry Datadog Exporter transmits traces to `http://localhost:8126`. You can configure the application to send traces to a diffent URL using the following environmennt variables:
+
+- `DD_TRACE_AGENT_URL`: The `<host>:<port:` where you Datadog Agent is listening for traces. (e.g. `agent-host:8126`)
+
+These values can also be overridden at the trace exporter level:
+
+```js
+// Configure the datadog trace agent url
+new DatadogExporter({agentUrl: 'http://dd-agent:8126'});
+```
+
+### Configuration Options - Tagging
+
+You can configure the application to automatically tag your Datadog exported traces, using the following environment variables:
+
+- `DD_ENV`: Your application environment (e.g. `production`, `staging`, etc.)
+- `DD_SERVICE`: Your application's default service name (e.g. `billing-api`)
+- `DD_VERSION`: Your application version (e.g. `2.5`, `202003181415`, `1.3-alpha`, etc.)
+- `DD_TAGS`: Custom tags in value pairs separated by `,` (e.g. `layer:api,team:intake`)
+- If `DD_ENV`, `DD_SERVICE` or `DD_VERSION` are set, it will override any respective `env`/`service`/`version` tag defined in `DD_TAGS`.
+- If `DD_ENV`, `DD_SERVICE` or `DD_VERSION` are NOT set, tags defined in `DD_TAGS` will be used to populate `env`/`service`/`version` respectively.
+
+These values can also be overridden at the trace exporter level:
+
+```javascript
+
+new DatadogExporter({
+  serviceName: 'my-service', // optional
+  agentUrl: 'http://localhost:8126' // optional
+  tags: 'example_key:example_value,example_key_two:value_two', // optional
+  env: 'production', // optional
+  version: '1.1' // optional
+});
+```
+
+This enables you to set this value on a per application basis, so you can have for example several applications reporting for different environments on the same host.
+
+Tags can also be set directly on individual spans, which will supersede any conflicting tags defined at the application level.
+
+### OpenTelemetry Links
+
+- See [npm][5] or [github][6] for more OpenTelemetry NodeJS Datadog Exporter usage.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -298,3 +416,5 @@ See [opentracing.io][4] for OpenTracing NodeJS usage.
 [2]: /tracing/visualization/#spans
 [3]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
 [4]: https://opentracing.io/guides/javascript/
+[5]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
+[6]: https://github.com/Datadog/dd-opentelemetry-exporter-js
