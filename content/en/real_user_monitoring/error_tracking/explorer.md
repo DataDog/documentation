@@ -21,6 +21,8 @@ further_reading:
 
 ## Explore your issues
 
+The Error Tracking Explorer allows you to explore all your different issues: an issue is a __group of similar errors related to the same bug__. We compute a fingerprint for each error using some of its attributes such as the error type, the error message or the stack trace. Errors with the same fingerprint are grouped together within the same issue. 
+
 ### Time range
 
 ### Facets
