@@ -1,5 +1,5 @@
 ---
-title: Writing a custom Agent check
+title: Writing a Custom Agent Check
 kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
@@ -66,6 +66,8 @@ For more details about the interface provided by the base class, browse the [API
 ### Collection interval
 
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
+
+**Note**: The `min_collection_interval` parameter is available for both standard and custom integrations.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
