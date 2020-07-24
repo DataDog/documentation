@@ -30,8 +30,10 @@ Across the different products of its platform, namely [Real User Monitoring][/re
 
 ## Getting Started
 
+Error Tracking processes for now __errors collected from the browser by the RUM SDK__ (errors with [source origin][/real_user_monitoring/data_collected/error#error-origins]). We plan to soon process errors from your mobile and back-end applications using errors already collected through the RUM and APM SDKs.
 
-## Further Reading
+For Error Tracking to properly work, you must set the __version__, the __environment__ and the __service__ when initializing your different SDKs or when configuring your Datadog agent (for APM only, once supported). Refer to the dedicated documentation for more information:
+* [Initialize the RUM SDK][/real_user_monitoring/installation/?tab=us#initialization-parameters]
 
-{{< partial name="whats-next/whats-next.html" >}}
+__Important note__: you must download the `v1.11.5` version and onwards of the RUM SDK.
 
