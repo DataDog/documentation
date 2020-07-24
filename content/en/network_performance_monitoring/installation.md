@@ -25,7 +25,7 @@ Supported platforms include:
 - Amazon AMI 2016.03+
 - Amazon Linux 2
 
-There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2].
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][7] feature is not supported on CentOS/RHEL 7.6.
 
 **Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
@@ -326,3 +326,4 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [4]: https://github.com/DataDog/chef-datadog
 [5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
 [6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /network_performance_monitoring/network_page#dns-resolution

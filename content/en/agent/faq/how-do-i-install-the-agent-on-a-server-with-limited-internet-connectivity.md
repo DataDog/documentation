@@ -12,7 +12,7 @@ further_reading:
 
 The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a number of different endpoints to function properly and might not work with servers that have limited internet access.
 
-For servers with no direct internet access, the Agent can be configured to route through a proxy, refer to [Can I use a proxy to connect my servers to Datadog?][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
+For servers with no direct internet access, the Agent can be configured to route through a proxy, refer to [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
 
 If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
 
@@ -45,7 +45,7 @@ Then, [start the Agent][7] using the appropriate command for your system.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
+[2]: /agent/proxy
 [3]: https://yum.datadoghq.com/stable/6/x86_64
 [4]: https://yum.datadoghq.com/stable/7/x86_64
 [5]: https://apt.datadoghq.com/pool/d/da

@@ -1,6 +1,8 @@
 ---
-title: Agent proxy configuration
+title: Agent Proxy Configuration
 kind: documentation
+aliases:
+- /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

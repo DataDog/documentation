@@ -17,7 +17,7 @@ Profiling is shipped within the following tracing libraries. Select your languag
 
 The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2] or [6.20.2][2]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][2]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -25,7 +25,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling li
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
+     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
@@ -69,7 +69,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling li
 
 The Datadog Profiler requires Python 2.7+. Memory profiling is available on Python 3.5+. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
 2. Install `ddtrace` which contains both tracing and profiling:
 
@@ -150,7 +150,7 @@ Recommended for advanced usage only.
 
 The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
 2. Get `dd-trace-go` using the command:
 
@@ -214,7 +214,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].  
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.  
 
 2. Install `dd-trace` which contains both tracing and profiling:
 

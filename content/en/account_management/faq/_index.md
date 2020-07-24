@@ -26,9 +26,8 @@ private: true
 * [How do I configure Okta as a SAML IdP?][12]
 * [How do I configure Google as a SAML IdP?][13]
 * [How do I setup Microsoft Active Directory Federation Services as a SAML IdP?][14]
-* [Can I use a proxy to connect my servers to Datadog?][15]
-* [How is Datadog retrieving my data? Are my data and credentials safe?][16]
-* [Managing Global Role Permissions][17]
+* [How is Datadog retrieving my data? Are my data and credentials safe?][15]
+* [Managing Global Role Permissions][16]
 
 [1]: /account_management/faq/are-my-data-and-credentials-safe/
 [2]: /account_management/faq/help-my-password-email-never-came-through/
@@ -44,6 +43,5 @@ private: true
 [12]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 [13]: /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 [14]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
-[15]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
-[16]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe/
-[17]: /account_management/faq/managing-global-role-permissions/
+[15]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe/
+[16]: /account_management/faq/managing-global-role-permissions/
