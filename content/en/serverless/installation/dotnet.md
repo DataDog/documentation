@@ -1,5 +1,5 @@
 ---
-title: Installing Node.js Serverless Monitoring
+title: Monitoring .NET Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -19,13 +19,13 @@ further_reading:
       text: 'Installing Java Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], use .Net to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], use .NET to instrument your application to send metrics, logs, and traces to Datadog. 
 
 ## Configuration
 
 ### Enable AWS X-Ray
 
-Navigate to the Lambda function in the AWS console you want to instrument. In the **Debugging and error handling** section, check the box to **Enable AWS X-Ray**.
+Navigate to the Lambda function in the AWS console you want to instrument. In the debugging and error handling section, check the box to enable AWS X-Ray.
 
 **Note**: If you’re using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your IAM policy where the Resource is the Customer Master Key used for X-Ray.
 
@@ -46,7 +46,7 @@ The Datadog Forwarder sends logs and custom metrics from your function to Datado
 
 ## Results
 
-Now you can view your metrics, logs, and traces on the [serverless home page][2].
+Now you can view your metrics, logs, and traces on the [Serverless page][2].
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html

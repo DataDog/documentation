@@ -1,5 +1,5 @@
 ---
-title: Installing Java Serverless Monitoring
+title: Monitoring Java Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -23,8 +23,9 @@ After you have [installed the AWS integration][1], use Java to instrument your a
 
 ## Configuration
 
-Install the Datadog Lambda Library
-You can install the [Datadog Lambda package][1] locally by running one of the following commands based on your project’s configuration:
+### Install the Datadog Lambda Library
+
+You can install the [Datadog Lambda Library][1] locally by running one of the following commands based on your project’s configuration:
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -62,11 +63,11 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
+Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
 
 ### Instrument your code
 
-Instrument your application by creating a new DDLambda with your request and Lambda context, as outlined below:
+Instrument your application by creating a new `DDLambda` with your request and Lambda context, as outlined below:
 
 ```
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -94,7 +95,7 @@ The Datadog Forwarder now sends enhanced metrics and traces from your function t
 
 ## Results
 
-Now you can view your metrics, logs, and traces on the [serverless home page][3].
+Now you can view your metrics, logs, and traces on the [Serverless page][3].
 
 [1]: https://github.com/DataDog/datadog-lambda-java
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
