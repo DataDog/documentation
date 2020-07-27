@@ -62,11 +62,10 @@ git clone https://github.com/DataDog/datadog-cloudformation-macro.git
 ```
 npm install
 ```
-3. Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you wish to monitor Lambda functions:
+3. Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you are monitoring Lambda functions:
 ```
 sam deploy
 ```
-
 
 ### Install the Datadog Lambda Library
 
@@ -75,18 +74,18 @@ To install the Datadog Lambda Library with the CloudFormation macro, follow thes
 1. In your `template.yml`, add the following:
   ```
   Transform:
-	  DatadogCfnMacro
+      DatadogCfnMacro
   ```
 2. In your `template.yml`, also add the following section:
   ```   
   Mappings:
-	  Custom:
-		  Datadog:
-        enableDDTracing: true
-			  flushMetricsToLogs: true
-			  forwarderArn:
+      Custom:
+          Datadog:
+              enableDDTracing: true
+              flushMetricsToLogs: true
+              forwarderArn:
   ```
-  Find your Datadog Forwarder ARN [in the AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
+  Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
 4. Redeploy your serverless application.
 
 
