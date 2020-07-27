@@ -310,7 +310,6 @@ To setup your client, Datadog API and application keys need to be configured. Th
     * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
     * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
     * **subdomain**: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
-    * **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
 
     **Example global configuration file**:
 
@@ -333,7 +332,8 @@ To setup your client, Datadog API and application keys need to be configured. Th
             "retry": { "count": 2, "interval": 300 },
             "executionRule": "skipped",
             "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" }
+            "variables": { "titleVariable": "new value" },
+            "pollingTimeout": 180000
         },
         "proxy": {
           "auth": {
@@ -344,8 +344,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
           "port": 3128,
           "protocol": "http"
         },
-        "subdomain": "subdomainname",
-        "timeout": 120000
+        "subdomain": "subdomainname"
     }
     ```
 
@@ -374,7 +373,7 @@ The default configurations used for the tests are the original tests' configurat
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
-* **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
+* **allowInsecureCertificates**: (_boolean_) Disable certificate checks in API tests.
 * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
      * **username**: (_string_) Username to use in basic authentication.
      * **password**: (_string_) Password to use in basic authentication.
@@ -382,7 +381,7 @@ However, in the context of your CI deployment, you can optionally decide to over
 * **bodyType**: (_string_) Type of the data sent in a synthetics API test.
 * **cookies**: (_string_) Use provided string as cookie header in API or browser test.
 * **deviceIds**: (_array_) List of devices on which to run the browser test.
-* **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
+* **followRedirects**: (_boolean_) Indicates whether to follow HTTP redirections in API tests.
 * **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
 * **locations**: (_array_) List of locations from which the test should be run.
 * **retry**: (_object_) Retry policy for the test:
@@ -394,6 +393,7 @@ However, in the context of your CI deployment, you can optionally decide to over
      * **skipped**: The test is not executed at all.
 * **startUrl**: (_string_) New start URL to provide to the test.
 * **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
+* **pollingTimeout**: (_integer_) Duration after which synthetic tests are considered failed (in milliseconds).
 
 **Note**: Tests' overrides take precedence over global overrides.
 
@@ -417,7 +417,8 @@ However, in the context of your CI deployment, you can optionally decide to over
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-                "variables": { "titleVariable": "new value" }
+                "variables": { "titleVariable": "new value" },
+                "pollingTimeout": 180000
             }
         }
     ]
