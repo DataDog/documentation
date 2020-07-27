@@ -1,5 +1,5 @@
 ---
-title: Installing Python Serverless Monitoring
+title: Monitoring Python Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -99,7 +99,7 @@ To install the Datadog Lambda Library:
 3. Scroll down, and click on **Add a Layer**.
 4. Select the option to *Provide a layer version ARN*.
 5. Enter the Datadog Lambda Library ARN from the example above.
-6. Navigate to the Environment Variables section of your function and add a new `“DD_FLUSH_TO_LOG”` variable set to `“true”`.
+6. Navigate to the Environment Variables section of your function and add a new `DD_FLUSH_TO_LOG` variable set to `true`.
 
 These steps need to be repeated for every function you wish to trace.
 
@@ -148,7 +148,7 @@ or by adding `datadog-lambda` to your project's `requirements.txt`:
 pip install datadog-lambda
 ```
 
-Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
+Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
 
 ### Instrument your code
 
@@ -187,7 +187,7 @@ The Datadog Forwarder will now send enhanced metrics and traces from your functi
 
 ## Results
 
-Now you can view your metrics, logs, and traces on the [serverless home page][2].
+Now you can view your metrics, logs, and traces on the [Serverless page][2].
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://app.datadoghq.com/functions

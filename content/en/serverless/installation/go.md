@@ -1,5 +1,5 @@
 ---
-title: Installing Go Serverless Monitoring
+title: Monitoring Go Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -25,13 +25,13 @@ After you have [installed the AWS integration][1], use Go to instrument your app
 
 ### Install the Datadog Lambda Library
 
-You can install the [Datadog Lambda package][2] locally by running the following command:
+You can install the [Datadog Lambda Library][2] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-Then, using the AWS Console or the AWS CLI, add a new `“DD_FLUSH_TO_LOG”` environment variable set to `“true”`. This step needs to be repeated for every function you wish to trace.
+Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
 
 ### Instrument your code
 
@@ -71,7 +71,7 @@ The Datadog Forwarder now sends enhanced metrics and traces from your function t
 
 ## Results
 
-Now you can view your metrics, logs, and traces on the [serverless home page][5].
+Now you can view your metrics, logs, and traces on the [Serverless page][5].
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://github.com/DataDog/datadog-lambda-go

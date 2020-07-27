@@ -118,7 +118,7 @@ Setting `flushMetricsToLogs: true` is recommended for submitting custom metrics 
 
 [1]: https://serverless.com/framework/docs/providers/aws/
 
-## AWS SAM
+<!--## AWS SAM
 
 To enable X-Ray tracing by default for your Lambda functions and API Gateways, add the `Function::Tracing` and `Api::TracingEnabled` keys to the [Globals section][1] of your `template.yaml`. Also, add your Datadog API key and any other environment variables (see table below):
 
@@ -136,7 +136,7 @@ Globals:
 [AWS SAM docs][2]
 
 [1]: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#globals-section
-[2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
+[2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html-->
 
 ## Local Development
 
