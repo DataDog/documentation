@@ -4952,6 +4952,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     SLOBulkDelete:
       additionalProperties:
