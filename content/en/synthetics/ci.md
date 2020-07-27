@@ -1,11 +1,11 @@
 ---
-title: Synthetics CI
+title: Synthetic CI tests
 kind: documentation
-description: Run Synthetics tests on-demand in your CI.
+description: Run Synthetic tests on-demand in your CI.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
@@ -21,11 +21,11 @@ further_reading:
 This feature is in private beta. To request access, contact <a href="/help/">Datadog Support</a>.
 </div>
 
-On top of executing your tests at predefined intervals, you can also execute Datadog Synthetics tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetics tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints.
+On top of executing your tests at predefined intervals, you can also execute Datadog Synthetic tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetic tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetics with your CI tooling.
+On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling.
 
 ## API usage
 
@@ -306,8 +306,8 @@ To setup your client, Datadog API and application keys need to be configured. Th
     * **apiKey**: The API key used to query the Datadog API.
     * **appKey**: The application key used to query the Datadog API.
     * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`). The default is `datadoghq.com`.
-    * **files**: Glob pattern to detect synthetics tests config files.
-    * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
+    * **files**: Glob pattern to detect synthetic tests config files.
+    * **global**: Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
     * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
     * **subdomain**: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
 
@@ -377,8 +377,8 @@ However, in the context of your CI deployment, you can optionally decide to over
 * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
      * **username**: (_string_) Username to use in basic authentication.
      * **password**: (_string_) Password to use in basic authentication.
-* **body**: (_string_) Data to send in a synthetics API test.
-* **bodyType**: (_string_) Type of the data sent in a synthetics API test.
+* **body**: (_string_) Data to send in a synthetic API test.
+* **bodyType**: (_string_) Type of the data sent in a synthetic API test.
 * **cookies**: (_string_) Use provided string as cookie header in API or browser test.
 * **deviceIds**: (_array_) List of devices on which to run the browser test.
 * **followRedirects**: (_boolean_) Indicates whether to follow HTTP redirections in API tests.
@@ -458,7 +458,7 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 
 ### Running tests
 
-You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 

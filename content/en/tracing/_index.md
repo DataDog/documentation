@@ -82,11 +82,11 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
-### Connect Synthetics and Traces
+### Connect Synthetic Test Data and Traces
 
 [Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
 
-{{< img src="tracing/index/Synthetics.gif" alt="Synthetics"  style="width:100%;">}}
+{{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
 ### Continuous Profiling
 

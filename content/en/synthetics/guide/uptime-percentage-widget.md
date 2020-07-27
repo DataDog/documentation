@@ -10,37 +10,37 @@ further_reading:
       text: 'Monitor Uptime Widget'
     - link: '/synthetics/'
       tag: 'Documentation'
-      text: 'Synthetics'
+      text: 'Synthetic Monitoring'
 ---
 
 ## Overview
 
-Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [Synthetics Monitoring][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
+Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog [Synthetic Monitoring][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
 
-## Synthetics test creation
+## Synthetic test creation
 
-Create a new [Synthetics API test][3] upon `http://example.com/`:
+Create a new [Synthetic API test][3] upon `http://example.com/`:
 
-1. [Go to the new Synthetics API test page][4].
+1. [Go to the new Synthetic API test page][4].
 2. Enter `http://example.com/` in the **URL** field.
 3. Click **Test URL** to automatically populate assertions about the health of your website:
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Synthetics test configuration" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Synthetic test configuration" >}}
 
 4. Tweak those assertions to match your SLI and define your test retry policy, in this example if at least half of the locations fails, even after one retry, then we consider that the site is down;
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Synthetics test assertions" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Synthetic test assertions" >}}
 
 5. Optionally - [Define a verbose notification message][5]:
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetics test message" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetic test message" >}}
 
 ## Slo Widget configuration
 
 ### Create your SLO
 
-1. [Create a new SLO][6] to track your website's uptime based on your Synthetics test results.
-2. Select **Monitor based** and enter your Synthetics test name:
+1. [Create a new SLO][6] to track your website's uptime based on your Synthetic test results.
+2. Select **Monitor based** and enter your Synthetic test name:
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO configuration" >}}
 
