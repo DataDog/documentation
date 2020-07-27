@@ -1,5 +1,5 @@
 ---
-title: Synthetic CI tests
+title: Synthetic CI Test Integration
 kind: documentation
 description: Run Synthetic tests on-demand in your CI.
 further_reading:
