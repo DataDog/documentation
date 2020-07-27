@@ -46,6 +46,20 @@ Error Tracking automatically indexes a predefined list of attributes from your i
 
 ## Inspect an issue
 
+Click on any issue to open the Issue Panel and see more information about it.
+
+{{< img src="real_user_monitoring/etracking_issue_panel_upper_part.png" alt="Upper Part of the Error Tracking Issue Panel"  >}}
+
+The __high-level details__ you need when troubleshooting an issue can be found in the upper part of the panel. From here, __you can understand its lifecycle__: first and last occurence dates, total count as well as the count over time for the given issue.
+
+{{< img src="real_user_monitoring/etracking_issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
+
+The lower part of the Issue Panel gives you the ability to __navigate error samples from the related issue__. Each error sample gives you important information while troubleshooting:
+
+- The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
+- Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
+- Information about the user such as the browser or the OS with the related versions that were used when the error occurred.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
