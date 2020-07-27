@@ -37,7 +37,7 @@ For Error Tracking to properly work, you must set the __version__, the __environ
 
 - [Initialize the RUM SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters)
 
-__Important note__: you must download the `v1.11.5` version and onwards of the RUM SDK.
+__Important note__: you must download the `v1.11.5` version and onwards of the [RUM SDK](https://www.npmjs.com/package/@datadog/browser-rum).
 
 ### Upload mapping files
 
@@ -52,7 +52,7 @@ Source maps are mapping files generated when minifying Javascript source code. T
 1. Add `@datadog/datadog-ci` to your `package.json` file
 2. Export your Datadog API key as an environment variable named `<DATADOG_API_KEY>`
 3. Run the following command:
-   ```bash
+   ```console
    datadog-ci sourcemaps upload /path/to/build/directory \
               --service=my-service \
               --release-version=v35.2395005 \
