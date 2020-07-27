@@ -28,8 +28,8 @@ Each item listed in the explorer is an issue and contains high-level information
 - The error type and the error message
 - The path to the file in which underlying errors are fired
 - Important information about issue’s lifetime:
-  - Graph of occurrences over time
   - When it was first and last seen
+  - Graph of occurrences over time
   - Number of occurrences in the selected time period
 
 ### Time range
@@ -54,7 +54,7 @@ The __high-level details__ you need when troubleshooting an issue can be found i
 
 {{< img src="real_user_monitoring/etracking_issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
 
-The lower part of the Issue Panel gives you the ability to __navigate error samples from the related issue__. Each error sample gives you important information while troubleshooting:
+The lower part of the Issue Panel gives you the ability to __navigate error samples from the related issue__. Each error sample gives you important information while troubleshooting, some important examples:
 
 - The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
 - Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
