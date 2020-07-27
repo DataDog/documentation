@@ -259,7 +259,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 ## @param ignore_resources - list of strings - optional
 ## A list of regular expressions can be provided to exclude certain traces based on their resource name.
 ## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
+# ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 ```
 
 **Note:** The NodeJS Tracer has an additional option for request filtering that is part of the Node Tracer API.  More details can be found [here][6]
