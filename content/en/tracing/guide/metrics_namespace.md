@@ -35,7 +35,7 @@ With the following definitions:
 | `<SPAN_NAME>`                | The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<METRIC_SUFFIX>`       | The name of the metric (examples: `duration`, `hits`, `span_count`). See the section below.                                                                                                                                               |
 | `<2ND_PRIM_TAG>` | If the metric name accounts for the [second primary tag][4], this tag is part of the metric name.                                                                                                                       |
-| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). |
+| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag).  **Note:** Tags set on spans do not count and will not be available as tags for your traces metrics. |
 
 ## Metric Suffix
 
