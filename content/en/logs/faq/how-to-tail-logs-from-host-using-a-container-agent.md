@@ -88,7 +88,7 @@ Then, mount it under `/conf.d/`:
 ```
 
 {{% /tab %}}
-{{% tab "Filter" %}}
+{{% tab "Docker" %}}
 
 To mount the host log file, add a volume parameter in your Agent's `docker run` command:
 
