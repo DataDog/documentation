@@ -559,7 +559,7 @@ main:
     url: serverless/installation/java
     parent: serverless_installation
     identifier: serverless_installation_java
-    weight: 104  
+    weight: 104
   - name: Go
     url: serverless/installation/go
     parent: serverless_installation
