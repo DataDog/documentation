@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with browser tests"
@@ -40,9 +40,9 @@ Define the configuration of your browser test.
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 2. **Name**: The name of your browser test.
-3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
+3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
 4. **Devices**: The devices to run your test on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up a [Private Location][2] to run a Synthetics Browser test on a private URL not accessible from the public internet.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up a [Private Location][2] to run a Synthetic Browser test on a private URL not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every 5 minutes to once per week.
 
 ### Use global variables

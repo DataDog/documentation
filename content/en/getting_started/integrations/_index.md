@@ -126,7 +126,7 @@ For information on how Datadog handles your data, and other security considerati
 
 Now that you have your first integrations set up, you can start [exploring all of the metrics][30] being sent to Datadog by your application, and use these metrics to begin setting up [dashboards][31] and [alerts][32] to monitor your data.
 
-Also check out our [Logs management][33], [APM][34], and [Synthetics][35] solutions.
+Also check out our [Logs management][33], [APM][34], and [Synthetic Monitoring][35] solutions.
 
 ## Troubleshooting
 
