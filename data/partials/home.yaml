@@ -68,7 +68,11 @@ nav_sections:
         link: network_performance_monitoring/
         icon: network.svg
         desc: Gain visibility into your network traffic using tagged objects
-      - title: Mobile App
+      - title: Serverless
+        link: serverless/
+        icon: serverless.svg
+        desc: End-to-end visibility into your serverless development lifecycle
+      - title: Mobile application
         link: mobile/
         icon: mobile.svg
         desc: View Datadog alerts and dashboards on your mobile device

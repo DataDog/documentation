@@ -30,15 +30,15 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
 4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: IdP-initiated login (authentication starting from the SAML identity provider) needs additional configuration on the identity provider side. Please contact [Datadog Support][10] for more information or if you have issues with SAML login.
+**Note**: The mobile app does not support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][5] for more information or if you have issues with SAML login.
 
 ## Monitors
 
 {{< img src="mobile/monitors.png" alt="monitor page" style="width:50%;">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][5]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
-**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][6]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][7].
+**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
 
 ## Dashboards
 
@@ -46,7 +46,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][8]. For more information, see [Dashboards][9].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5].
 
 ## Account
 
@@ -64,11 +64,11 @@ For help with troubleshooting, [contact Datadog support][10]. You can also send 
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
 [4]: https://app.datadoghq.com/account/profile
-[5]: /monitors/manage_monitor/#search
-[6]: https://app.datadoghq.com/monitors
-[7]: /monitors/monitor_types/
-[8]: https://app.datadoghq.com/dashboard/lists
-[9]: /dashboards/
+[5]: /dashboards/
+[6]: /monitors/manage_monitor/#search
+[7]: https://app.datadoghq.com/monitors
+[8]: /monitors/monitor_types/
+[9]: https://app.datadoghq.com/dashboard/lists
 [10]: /help/
 [11]: https://chat.datadoghq.com/
 [12]: https://datadoghq.slack.com/archives/C0114D5EHNG

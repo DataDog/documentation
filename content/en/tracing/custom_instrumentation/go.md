@@ -217,20 +217,9 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
-### Resource filtering
+### Resource Filtering
 
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to the Datadog application. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
-
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [view the documentation here][9].
-
-This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
-
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
 
 ## OpenTracing
 
@@ -281,7 +270,7 @@ func main() {
 [6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/visualization/#trace
 [8]: https://github.com/openzipkin/b3-propagation
-[9]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[9]: /tracing/security
 [10]: https://github.com/opentracing/opentracing-go
 [11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [12]: http://opentracing.io

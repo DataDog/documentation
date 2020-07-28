@@ -110,23 +110,9 @@ using (var parentScope =
     }
 }
 ```
+## Resource Filtering
 
-<br>
-
-## Resource filtering
-
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
-
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
-
-Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
-
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
 
 ## OpenTracing
 
@@ -189,6 +175,6 @@ To trace code running in an asynchronous task, create a new scope within the bac
 [2]: /tracing/visualization/#span-tags
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/trace/?tab=spantags#more-information
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[5]: /tracing/security
 [6]: https://github.com/opentracing/opentracing-csharp
 [7]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing

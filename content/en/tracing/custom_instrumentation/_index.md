@@ -10,6 +10,8 @@ aliases:
     - /tracing/advanced/opentracing/
     - /tracing/opentracing/
     - /tracing/manual_instrumentation/
+    - /tracing/guide/adding_metadata_to_spans
+    - /tracing/advanced/adding_metadata_to_spans/
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -34,5 +36,5 @@ Select your language below:
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
 
-[1]: /tracing/guide/adding_metadata_to_spans/
+[1]: /tracing/guide/add_span_md_and_graph_it/
 [2]: /tracing/visualization

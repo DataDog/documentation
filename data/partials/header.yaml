@@ -32,7 +32,7 @@ left:
             title: "Network Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
           - name: product_synthetics
-            link: "https://www.datadoghq.com/product/synthetics-monitoring/"
+            link: "https://www.datadoghq.com/product/synthetic-monitoring/"
             title: "Synthetic Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
           - name: product_rum

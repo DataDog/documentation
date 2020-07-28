@@ -269,6 +269,8 @@ tracer.use('http', {
 })
 ```
 
+Additionally, traces can also be discarded at the Datadog Agent hecks from reporting traces to Datadog.  This and other security and fine-tuning Agent configurations can be found on the [Security][4] page.
+
 ## OpenTracing
 
 OpenTracing support is included in the `dd-trace` package.
@@ -288,7 +290,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io][4] for OpenTracing NodeJS usage.
+See [opentracing.io][5] for OpenTracing NodeJS usage.
 
 ## OpenTelemetry
 
@@ -412,7 +414,7 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [npm][5] or [github][6] for more OpenTelemetry NodeJS Datadog Exporter usage.
+- See [npm][6] or [github][7] for more OpenTelemetry NodeJS Datadog Exporter usage.
 
 ## Further Reading
 
@@ -421,6 +423,7 @@ Tags that are set directly on individual spans supersede conflicting tags define
 [1]: /tracing/compatibility_requirements/nodejs/
 [2]: /tracing/visualization/#spans
 [3]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
-[4]: https://opentracing.io/guides/javascript/
-[5]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
-[6]: https://github.com/Datadog/dd-opentelemetry-exporter-js
+[4]: /tracing/security
+[5]: https://opentracing.io/guides/javascript/
+[6]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
+[7]: https://github.com/Datadog/dd-opentelemetry-exporter-js
