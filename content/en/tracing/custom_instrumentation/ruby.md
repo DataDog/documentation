@@ -358,6 +358,10 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 
 OpenTelemetry support is available by using the `opentelemetry-exporters-datadog` gem to export traces from OpenTelemetry to Datadog.
 
+<div class="alert alert-warning">
+This feature is currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> if it doesn't work as you expect.
+</div>
+
 ### Installation
 
 - If you use [bundler][11], include the following in your `Gemfile`:
@@ -378,13 +382,13 @@ gem install opentelemetry-exporters-datadog
 
 ### Usage
 
-Install the datadog processor and exporter in your application and configure the options. Then use the OpenTelemetry interfaces to produces traces and other information:
+Install the Datadog processor and exporter in your application and configure the options. Then use the OpenTelemetry interfaces to produce traces and other information:
 
 ```ruby
 require 'opentelemetry/sdk'
 require 'opentelemetry-exporters-datadog'
 
-# Configure the sdk with custom export
+# Configure the SDK with custom export
 OpenTelemetry::SDK.configure do |c|
   c.add_span_processor(
     OpenTelemetry::Exporters::Datadog::DatadogSpanProcessor.new(
@@ -395,11 +399,11 @@ OpenTelemetry::SDK.configure do |c|
   )
 end
 
-# For propagation of datadog specific distibuted tracing headers,
-# set http propagation to the Composite Propagator
+# For propagation of Datadog-specific distributed tracing headers,
+# set HTTP propagation to the Composite Propagator
 OpenTelemetry::Exporters::Datadog::Propagator.auto_configure
 
-# To start a trace you need to get a Tracer from the TracerProvider
+# To start a trace, get a Tracer from the TracerProvider
 tracer = OpenTelemetry.tracer_provider.tracer('my_app_or_gem', '0.1.0')
 
 # create a span
@@ -416,16 +420,20 @@ tracer.in_span('foo') do |span|
 end
 ```
 
-### Configuration Options - Datadog Agent URL
+### Configuration Options
 
-By default the OpenTelemetry Datadog Exporter transmits traces to `http://localhost:8126`. You can configure the application to send traces to a diffent URL using the following environmennt variables:
+The Datadog Agent URL and span tag values can be configured if necessary or desired based upon your environment and Agent location.
 
- - `DD_TRACE_AGENT_URL`: The `<host>:<port:` where you Datadog Agent is listening for traces. (e.g. `http://agent-host:8126`)
+#### Datadog Agent URL
 
-These values can also be overridden at the trace exporter level:
+By default, the OpenTelemetry Datadog Exporter sends traces to `http://localhost:8126`. Send traces to a different URL by configuring the following environment variables:
+
+- `DD_TRACE_AGENT_URL`: The `<host>:<port>` where Datadog Agent is listening for traces, for example, `http://agent-host:8126`.
+
+You can override these values at the trace exporter level:
 
 ```ruby
-# Configure the sdk with custom export
+# Configure the SDK with custom export
 OpenTelemetry::SDK.configure do |c|
   c.add_span_processor(
     OpenTelemetry::Exporters::Datadog::DatadogSpanProcessor.new(
@@ -438,21 +446,21 @@ OpenTelemetry::SDK.configure do |c|
 end
 ```
 
-### Configuration Options - Tagging
+#### Tagging
 
-You can configure the application to automatically tag your Datadog exported traces, using the following environment variables:
+Configure the application to automatically tag your Datadog exported traces by setting the following environment variables:
 
- - `DD_ENV`: Your application environment (e.g. `production`, `staging`, etc.)
- - `DD_SERVICE`: Your application's default service name (e.g. `billing-api`)
- - `DD_VERSION`: Your application version (e.g. `2.5`, `202003181415`, `1.3-alpha`, etc.)
- - `DD_TAGS`: Custom tags in value pairs separated by `,` (e.g. `layer:api,team:intake`)
-    - If `DD_ENV`, `DD_SERVICE` or `DD_VERSION` are set, it will override any respective `env`/`service`/`version` tag defined in `DD_TAGS`.
-    - If `DD_ENV`, `DD_SERVICE` or `DD_VERSION` are NOT set, tags defined in `DD_TAGS` will be used to populate `env`/`service`/`version` respectively.
+- `DD_ENV`: Your application environment, for example `production`, `staging`.
+- `DD_SERVICE`: Your application's default service name, for example, `billing-api`.
+- `DD_VERSION`: Your application version, for example, `2.5`, `202003181415`, or `1.3-alpha`.
+- `DD_TAGS`: Custom tags in value pairs, separated by commas, for example, `layer:api,team:intake`.
+- If `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` is set, it will override any corresponding `env`, `service`, or `version` tag defined in `DD_TAGS`.
+- If `DD_ENV`, `DD_SERVICE` and `DD_VERSION` are _not_ set, you can configure environment, service, and version by using corresponding tags in `DD_TAGS`.
 
-These values can also be overridden at the trace exporter level:
+Tag values can also be overridden at the trace exporter level. This lets you set values on a per-application basis, so you can have multiple applications reporting for different environments on the same host:
 
 ```ruby
-# Configure the sdk with custom export
+# Configure the SDK with custom export
 OpenTelemetry::SDK.configure do |c|
   c.add_span_processor(
     OpenTelemetry::Exporters::Datadog::DatadogSpanProcessor.new(
@@ -468,9 +476,7 @@ OpenTelemetry::SDK.configure do |c|
 end
 ```
 
-This enables you to set this value on a per application basis, so you can have for example several applications reporting for different environments on the same host.
-
-Tags can also be set directly on individual spans, which will supersede any conflicting tags defined at the application level.
+Tags that are set directly on individual spans supersede conflicting tags defined at the application level.
 
 ### OpenTelemetry Links
 
