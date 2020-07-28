@@ -468,8 +468,6 @@
                                 <div class="code-button-wrapper position-absolute">
                                     <button class="btn text-primary js-copy-button">Copy</button>
                                 </div>
-                                {{ $pathParams := $.Scratch.Get "pathParams" }}
-                                {{ $queryStrings := $.Scratch.Get "queryStrings" }}
                                 <div class="highlight">
                                     <pre class="chroma">
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
@@ -480,7 +478,10 @@
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
                     {{- $exampleValue := $exampleDefinition.value | jsonify (dict "indent" "  ") -}}
-# {{ $exampleId }} - {{ $exampleDefinition.summary }}<br/>
+## {{ default $exampleId $exampleDefinition.summary }}
+{{- range split $exampleDefinition.description "\n" }}
+# {{ . }}
+{{- end }}
 {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $d.components.securitySchemes "dollarScratch" $.Scratch ) }}
                 {{- end -}}
             {{- else -}}
