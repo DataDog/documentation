@@ -255,19 +255,10 @@ function doRiskyThing() {
 
 {{% /tab %}}
 {{< /tabs >}}
-## Resource filtering
 
-The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
+## Resource Filtering
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
-
-Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][5] page.
 
 ## OpenTracing
 
@@ -669,7 +660,7 @@ dd_trace('CustomDriver', 'doWork', function (...$args) {
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/#span-tags
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[5]: /tracing/security
 [6]: https://github.com/opentracing/opentracing-php
 [7]: /api/v1/tracing/#send-traces
 [8]: https://www.php.net/func_get_args

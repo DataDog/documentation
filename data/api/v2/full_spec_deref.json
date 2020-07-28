@@ -5994,7 +5994,7 @@
             },
             "type": "array"
           },
-          "enabled": {
+          "isEnabled": {
             "description": "Whether the rule is enabled.",
             "example": true,
             "type": "boolean"
@@ -6140,7 +6140,7 @@
         },
         "required": [
           "name",
-          "enabled",
+          "isEnabled",
           "queries",
           "options",
           "cases",
@@ -6619,7 +6619,7 @@
             },
             "type": "array"
           },
-          "enabled": {
+          "isEnabled": {
             "description": "Whether the rule is enabled.",
             "type": "boolean"
           },
@@ -17909,7 +17909,7 @@
                     },
                     "type": "array"
                   },
-                  "enabled": {
+                  "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "example": true,
                     "type": "boolean"
@@ -18055,7 +18055,7 @@
                 },
                 "required": [
                   "name",
-                  "enabled",
+                  "isEnabled",
                   "queries",
                   "options",
                   "cases",
@@ -18747,7 +18747,7 @@
                     },
                     "type": "array"
                   },
-                  "enabled": {
+                  "isEnabled": {
                     "description": "Whether the rule is enabled.",
                     "type": "boolean"
                   },

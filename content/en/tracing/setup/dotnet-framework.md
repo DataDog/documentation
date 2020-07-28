@@ -218,7 +218,7 @@ The following tables list the supported configuration variables. Use the first n
 | `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Available for versions 1.17.0+                                                                                                                                              |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][7] documentation for recommendations on how to configure these environment variables.
 
 #### Instrumentation
 
@@ -258,4 +258,4 @@ The following table lists configuration variables that are available only when u
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /tracing/custom_instrumentation/dotnet/
-[9]: /getting_started/tagging/unified_service_tagging/
+[7]: /getting_started/tagging/unified_service_tagging/

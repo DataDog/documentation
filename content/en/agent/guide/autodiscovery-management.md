@@ -135,7 +135,7 @@ For example, if you only want to monitor `ubuntu` or `debian` images, and exclud
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
-In Agent v7.2+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In Agent v7.20+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME>"
@@ -168,7 +168,7 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 container_include: [name:<NAME>]
 ```
 
-In Agent v7.2+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In Agent v7.20+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 container_include_logs: [image:<IMAGE_NAME>]

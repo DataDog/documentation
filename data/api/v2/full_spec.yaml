@@ -1381,7 +1381,7 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
-        enabled:
+        isEnabled:
           description: Whether the rule is enabled.
           example: true
           type: boolean
@@ -1412,7 +1412,7 @@ components:
           type: array
       required:
       - name
-      - enabled
+      - isEnabled
       - queries
       - options
       - cases
@@ -1599,7 +1599,7 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
-        enabled:
+        isEnabled:
           description: Whether the rule is enabled.
           type: boolean
         message:

@@ -64,7 +64,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 7
-  - name: Synthetics
+  - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
@@ -533,25 +533,66 @@ main:
     parent: infrastructure
     weight: 6
   - name: Serverless
-    url: infrastructure/serverless/
-    parent: infrastructure
+    url: serverless
+    pre: nav_serverless
     identifier: serverless
-    weight: 7
+    weight: 100000
+  - name: Installation
+    url: serverless/installation
+    parent: serverless
+    identifier: serverless_installation
+    weight: 1
+  - name: Python
+    url: serverless/installation/python
+    parent: serverless_installation
+    identifier: serverless_installation_python
+    weight: 101
+  - name: Node
+    url: serverless/installation/nodejs
+    parent: serverless_installation
+    weight: 102
+  - name: Ruby
+    url: serverless/installation/ruby
+    parent: serverless_installation
+    weight: 103
+  - name: Java
+    url: serverless/installation/java
+    parent: serverless_installation
+    identifier: serverless_installation_java
+    weight: 104
+  - name: Go
+    url: serverless/installation/go
+    parent: serverless_installation
+    identifier: serverless_installation_go
+    weight: 105
+  - name: .NET
+    url: serverless/installation/dotnet
+    parent: serverless_installation
+    identifier: serverless_installation_dotnet
+    weight: 106
+  - name: Troubleshooting
+    url: serverless/troubleshooting
+    parent: serverless
+    identifier: serverless_troubleshooting
+    weight: 2
+  - name: Datadog Forwarder
+    url: serverless/troubleshooting/installing_the_forwarder
+    parent: serverless_troubleshooting
+    weight: 201
+  - name: Datadog Lambda Library
+    url: serverless/troubleshooting/installing_the_layer
+    parent: serverless_troubleshooting
+    weight: 202
   - name: Azure App Services Extension
-    url: infrastructure/serverless/azure_app_services/
+    url: serverless/azure_app_services
     parent: serverless
-    identifier: app_services_extension
-    weight: 701
-  - name: Datadog Lambda Layer
-    url: infrastructure/serverless/datadog_lambda_layer
-    parent: serverless
-    identifier: datadog_lambda_layer
-    weight: 701
+    identifier: serverless_app_services
+    weight: 5
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
-    weight: 100000
+    weight: 110000
   - name: Introduction
     url: metrics/introduction/
     parent: metrics_top_level
@@ -573,12 +614,12 @@ main:
     url: notebooks/
     identifier: notebooks
     pre: nav_notebooks
-    weight: 110000
+    weight: 120000
   - name: Alerting
     url: monitors/
     pre: nav_alerting
     identifier: alerting
-    weight: 120000
+    weight: 130000
   - name: Monitors
     url: monitors/monitor_types/
     parent: alerting
@@ -707,7 +748,7 @@ main:
     url: tracing/
     pre: nav_tracing
     identifier: tracing
-    weight: 130000
+    weight: 140000
   - name: Compatibility
     url: tracing/compatibility_requirements/
     identifier: tracing_compatibility_requirements
@@ -935,46 +976,51 @@ main:
     parent: tracing
     identifier: tracing_custom_instrumentation
     weight: 9
+  - name: Agent Customization
+    url: tracing/custom_instrumentation/agent_customization
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_agent_customization
+    weight: 901
   - name: Java
     url: tracing/custom_instrumentation/java
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_java
-    weight: 901
+    weight: 902
   - name: Python
     url: tracing/custom_instrumentation/python
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_python
-    weight: 902
+    weight: 903
   - name: Ruby
     url: tracing/custom_instrumentation/ruby
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_ruby
-    weight: 903
+    weight: 904
   - name: Go
     url: tracing/custom_instrumentation/go
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_go
-    weight: 904
+    weight: 905
   - name: NodeJS
     url: tracing/custom_instrumentation/nodejs
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_nodejs
-    weight: 905
+    weight: 906
   - name: PHP
     url: tracing/custom_instrumentation/php
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_php
-    weight: 906
+    weight: 907
   - name: C++
     url: tracing/custom_instrumentation/cpp
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_cpp
-    weight: 907
+    weight: 908
   - name: .NET
     url: tracing/custom_instrumentation/dotnet
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_dotnet
-    weight: 908
+    weight: 909
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
@@ -1034,7 +1080,7 @@ main:
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 130000
+    weight: 150000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -1190,7 +1236,7 @@ main:
     url: security_monitoring/
     pre: nav_security_monitoring
     identifier: security_monitoring
-    weight: 140000
+    weight: 160000
   - name: Getting Started
     url: security_monitoring/getting_started
     parent: security_monitoring
@@ -1211,11 +1257,11 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 4
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 150000
+    weight: 170000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -1248,7 +1294,7 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 301
-  - name: CI Integration
+  - name: CI Test Integration
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
@@ -1284,7 +1330,7 @@ main:
     url: real_user_monitoring/
     pre: nav_rum
     identifier: rum
-    weight: 160000
+    weight: 180000
   - name: Get Started
     url: real_user_monitoring/installation/
     parent: rum
@@ -1369,7 +1415,7 @@ main:
     url: network_performance_monitoring/
     pre: nav_network
     identifier: npm
-    weight: 170000
+    weight: 190000
   - name: Installation
     url: network_performance_monitoring/installation
     parent: npm
@@ -1389,7 +1435,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 180000
+    weight: 200000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -1551,12 +1597,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 190000
+    weight: 210000
   - name: Account Management
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 200000
+    weight: 220000
   - name: User management
     url: account_management/users/
     parent: account_management
@@ -1629,13 +1675,13 @@ main:
     url: security/
     pre: nav_security
     identifier: security
-    weight: 210000
+    weight: 230000
   - name: Agent
     url: security/agent/
     parent: security
     weight: 1
   - name: APM (Tracing)
-    url: security/tracing/
+    url: tracing/security/
     parent: security
     weight: 2
   - name: Log Management
@@ -1650,7 +1696,7 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 220000
+    weight: 240000
 api_v1:
   - name: Overview
     url: /api/v1/
@@ -2267,56 +2313,56 @@ api_v1:
     parent: Snapshots
     url: take-graph-snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: /api/v1/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic Monitoring
     generated: true
   - name: Get all locations (public and private)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-all-locations-public-and-private
     generated: true
   - name: Get a list of tests
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-list-of-tests
     generated: true
   - name: Create a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: create-a-test
     generated: true
   - name: Get a test configuration (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-configuration-browser
     generated: true
   - name: Get the test's latest results summaries (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-the-tests-latest-results-summaries-browser
     generated: true
   - name: Get a test result (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-result-browser
     generated: true
   - name: Delete tests
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: delete-tests
     generated: true
   - name: Get a test configuration (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-configuration-api
     generated: true
   - name: Edit a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: edit-a-test
     generated: true
   - name: Get the test's latest results summaries (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-the-tests-latest-results-summaries-api
     generated: true
   - name: Get a test result (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-result-api
     generated: true
   - name: Pause or start a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: pause-or-start-a-test
     generated: true
   - name: Tags
@@ -2423,15 +2469,15 @@ api_v1:
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Synthetics Checks
+  - name: Get hourly usage for Synthetic Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-checks
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
+  - name: Get hourly usage for Synthetic API Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-api-checks
     generated: true
-  - name: Get hourly usage for Synthetics Browser Checks
+  - name: Get hourly usage for Synthetic Browser Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-browser-checks
     generated: true
@@ -2803,9 +2849,9 @@ api_v2:
     url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: /api/v2/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic Monitoring
     generated: true
   - name: Tags
     url: /api/v2/tags/

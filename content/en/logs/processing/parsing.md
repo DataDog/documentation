@@ -241,17 +241,17 @@ rule %{data::keyvalue("=","/:")}
 
 Other examples:
 
-| **Raw string**               | **Parsing rule**                       | **Result**                            |
-|:-----------------------------|:---------------------------------------|:--------------------------------------|
-| key=valueStr                 | `%{data::keyvalue}`                    | {"key": "valueStr}                    |
-| key=\<valueStr>              | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
-| "key"="valueStr"             | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
-| key:valueStr                 | `%{data::keyvalue(":")}`               | {"key": "valueStr"}                   |
-| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`          | {"key": "/valueStr"}                  |
-| /key:/valueStr               | `%{data::keyvalue(":", "/")}`          | {"/key": "/valueStr"}                 |
-| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`    | {"key": "valueStr"}                   |
-| key1=value1\|key2=value2     | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
-| key1="value1"\|key2="value2" | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
+| **Raw string**               | **Parsing rule**                                      | **Result**                            |
+|:-----------------------------|:------------------------------------------------------|:--------------------------------------|
+| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr}                    |
+| key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
+| "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
 The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.

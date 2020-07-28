@@ -205,6 +205,9 @@ span.finish()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Resource Filtering
+
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][2] page.
 
 ## OpenTracing
 
@@ -240,7 +243,7 @@ init_tracer("<SERVICE_NAME>")
 my_operation()
 ```
 
-The tracer can now be used like in any other OpenTracing application. See [opentracing.io][2] for OpenTracing Python usage.
+The tracer can now be used like in any other OpenTracing application. See [opentracing.io][3] for OpenTracing Python usage.
 
 
 ## Further Reading
@@ -248,4 +251,5 @@ The tracer can now be used like in any other OpenTracing application. See [opent
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: https://opentracing.io/guides/python/
+[2]: /tracing/security
+[3]: https://opentracing.io/guides/python/

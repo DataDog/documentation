@@ -12,7 +12,7 @@ col1:
     title: "Dashboards"
   - name: logs
     link: "https://www.datadoghq.com/product/log-management/"
-    title: "Log Management" 
+    title: "Log Management"
   - name: apm
     link: "https://www.datadoghq.com/product/apm/"
     title: "APM"
@@ -23,7 +23,7 @@ col1:
     link: "https://www.datadoghq.com/product/network-performance-monitoring/"
     title: "Network Monitoring"
   - name: synthetics
-    link: "https://www.datadoghq.com/product/synthetics-monitoring/"
+    link: "https://www.datadoghq.com/product/synthetic-monitoring/"
     title: "Synthetic Monitoring"
   - name: rum
     link: "https://www.datadoghq.com/product/real-user-monitoring/"

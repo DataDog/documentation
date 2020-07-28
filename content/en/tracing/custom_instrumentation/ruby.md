@@ -310,20 +310,9 @@ The value of the environment variable is a comma separated list of header styles
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-### Resource filtering
+### Resource Filtering
 
-The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
-
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][6].
-
-This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
-```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck"]
-```
-
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][6] page.
 
 ## OpenTracing
 
@@ -363,7 +352,7 @@ However, additional instrumentation provided by Datadog can be activated alongsi
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: https://github.com/openzipkin/b3-propagation
-[6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[6]: /tracing/security
 [7]: /tracing/setup/ruby/#quickstart-for-opentracing
 [8]: /tracing/setup/ruby/#tracer-settings
 [9]: /tracing/visualization/#trace
