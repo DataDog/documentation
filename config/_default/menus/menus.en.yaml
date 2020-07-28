@@ -1257,7 +1257,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 4
-  - name: Synthetic Monitorings
+  - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
