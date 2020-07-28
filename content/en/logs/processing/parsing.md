@@ -250,7 +250,7 @@ Other examples:
 | key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
 | /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
 | key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
-| key1=value1\|key2=value2     | <code>%{data::keyvalue("=", "", "", "&#124;")}</co    | {"key1": "value1", "key2": "value2"}  |
+| key1=value1\|key2=value2     | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
