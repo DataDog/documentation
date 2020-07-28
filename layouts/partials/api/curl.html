@@ -1,3 +1,4 @@
+{{- $securitySchemes := .securitySchemes -}}
 {{- $pathParams := .dollarScratch.Get "pathParams" -}}
 {{- $queryStrings := .dollarScratch.Get "queryStrings" -}}
 {{- $count := 0 -}}
@@ -40,29 +41,29 @@
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- /* with .context.action.security -}}
+{{- with .context.action.security -}}
     {{- $i := 0 -}}
     {{- range . -}}
         {{- range $key, $val := . -}}
-            {{ $authSchema := (index .securitySchemes $key) }}
+            {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "query" -}}
                 <span class="o">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="n">{{ $authSchema.name }}</span><span class="o">=</span><span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>
                 {{- $i = add $count 1 -}}
             {{- end -}}
         {{- end -}}
     {{- end -}}
-{{- end */ -}}
+{{- end -}}
 
 {{- /* Content-Type header based on "requestBody" */ -}}
 &nbsp;\
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if not (isset .context.action "security") -}}
+{{- if isset .context.action "security" -}}
     {{- /* Find authentication per operationId */ -}}
     {{- range .context.action.security -}}
         {{- range $key, $val := . -}}
-            {{ $authSchema := (index .securitySchemes $key) }}
+            {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
                 &nbsp;\
 <span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
@@ -71,7 +72,6 @@
     {{- end -}}
 {{- else -}}
     {{- /* Use global authentication */ -}}
-    {{- $securitySchemes := .securitySchemes -}}
     &nbsp;\
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
