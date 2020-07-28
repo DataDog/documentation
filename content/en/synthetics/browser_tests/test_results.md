@@ -1,7 +1,7 @@
 ---
 title: Browser Test Results
 kind: documentation
-description: Synthetics browser test results
+description: Synthetic browser test results
 aliases:
  - "/synthetics/apm/browser_tests"
 further_reading:
@@ -43,7 +43,7 @@ Resources can be filtered by resource type. Also, a search can be performed over
 
 ### Traces
 
-The traces panel shows your traces associated with the browser synthetics test. The UI is similar to the APM [Trace View][1] except for the following difference.
+The traces panel shows your traces associated with the browser synthetic test. The UI is similar to the APM [Trace View][1] except for the following difference.
 
 One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (depending on your tracing setup and on the URLs you allowed in your [Settings][2]). Use the dropdown to choose the trace to view.
 

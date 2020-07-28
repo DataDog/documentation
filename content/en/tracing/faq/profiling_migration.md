@@ -4,7 +4,7 @@ kind: faq
 ---
 
 <div class="alert alert-warning">
-<b>Agentless profiling will no longer be supported when Continuous Profiling is generally available.</b>
+<b>Agentless profiling will no longer be supported from August 15th, 2020.</b>
 </div>
 ****
 

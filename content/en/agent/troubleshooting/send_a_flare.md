@@ -47,6 +47,7 @@ When using Agent v7.19+ and using the Datadog Helm Chart with the [latest versio
 * One container with the Agent process (Agent + Log Agent)
 * One container with the process-agent process
 * One container with the trace-agent process
+* One container with the system-probe process
 
 To get a flare from each container, run the following commands:
 
@@ -66,6 +67,12 @@ kubectl exec -it <agent-pod-name> -c process-agent -- agent flare <case-id> --lo
 
 {{< code-block lang="bash" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+{{< /code-block >}}
+  
+### system-probe
+
+{{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <agent-pod-name> -c system-probe -- agent flare <case-id> --local
 {{< /code-block >}}
 
 [1]: /agent/basic_agent_usage/#gui

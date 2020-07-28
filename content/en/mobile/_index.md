@@ -18,7 +18,7 @@ Download the app from the [Apple App Store][1] for your iOS device, or from the 
 
 ### Logging in
 
-You can log in using standard authentication, Google authentication, or [SAML][3]. 
+You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
 
 #### Enabling SAML
 
@@ -26,11 +26,11 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
     {{< img src="mobile/link-device.png" alt="monitor page">}}
-2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App and automatically insert the org UDID into the login screen.
+2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
 3. Optionally, you can manually enter the SAML ID by opening the Datadog Mobile app, clicking **login with SAML**, and entering the SAML ID manually.
 4. Now log in using your normal SAML login flow. By clicking **Authorize** when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: The mobile app does not support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][5] for more information or if you have issues with SAML login.
+**Note**: The mobile app does not currently support IdP-initiated login (authentication starting from the SAML identity provider). Contact [Datadog Support][5] for more information or if you have any issues with SAML authentication.
 
 ## Monitors
 

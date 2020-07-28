@@ -155,7 +155,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Note**: If you already have the Datadog Agent running, you may need to apply the [rbac-agent.yaml manifest](#step-1-set-configure-rbac-permissions-for-node-based-agents) before the Cluster Agent can start running.
+**Note**: If you already have the Datadog Agent running, you may need to apply the [agent-rbac.yaml manifest](#step-1-set-configure-rbac-permissions-for-node-based-agents) before the Cluster Agent can start running.
 
 ## Configure the Datadog Agent
 
@@ -165,9 +165,9 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 #### Step 1 - Set Configure RBAC permissions for node-based Agents
 
-1. Download the the [rbac-agent.yaml manifest][8]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
+1. Download the the [agent-rbac.yaml manifest][8]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
 
-2. Run: `kubectl apply -f rbac-agent.yaml`
+2. Run: `kubectl apply -f agent-rbac.yaml`
 
 #### Step 2 - Enable the Datadog Agent
 
