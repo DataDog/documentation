@@ -7,6 +7,7 @@ aliases:
     - /tracing/security
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation
+    - /tracing/guide/agent-obfuscation
 ---
 ## Overview
 
