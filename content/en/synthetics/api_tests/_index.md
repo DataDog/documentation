@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
@@ -48,8 +48,8 @@ Define the request you want to be executed by Datadog:
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 3. **Name**: The name of your API test.
-4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][2].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][4] to run a Synthetics API test on a private endpoint not accessible from the public internet.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][2].
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][4] to run a Synthetic API test on a private endpoint not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -66,8 +66,8 @@ Define the request you want to be executed by Datadog:
 1. **Choose request type**: `SSL`
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
 3. **Name**: The name of your API test.
-4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetics page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics API test on a private endpoint not accessible from the public internet.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -92,7 +92,7 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 The uptime bar is displayed differently on your test result: location uptime is displayed on a per-evaluation basis (whether the last test was up or down). Total uptime is displayed based on the configured alert conditions. Notifications sent are based on the total uptime bar.
 
-**Note**: You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetics tests do not retry after a failed result for a given location.
+**Note**: You can decide the number of retries needed to consider a location as *failed* before sending a notification alert. By default, Synthetic tests do not retry after a failed result for a given location.
 {{% /tab %}}
 {{% tab "SSL Test" %}}
 
@@ -189,7 +189,7 @@ Notifications example:
 
 ## Network timings
 
-The Synthetics details page displays the following network timings:
+The Synthetic test details page displays the following network timings:
 
 | Timing                      | Description                                                                                           |
 |-----------------------------|-------------------------------------------------------------------------------------------------------|

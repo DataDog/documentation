@@ -1,3 +1,3 @@
 ---
-title: Synthetics
+title: Synthetic Monitoring
 ---

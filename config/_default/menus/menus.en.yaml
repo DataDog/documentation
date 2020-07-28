@@ -64,7 +64,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 7
-  - name: Synthetics
+  - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
@@ -1257,7 +1257,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 4
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -2313,56 +2313,56 @@ api_v1:
     parent: Snapshots
     url: take-graph-snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: /api/v1/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic Monitoring
     generated: true
   - name: Get all locations (public and private)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-all-locations-public-and-private
     generated: true
   - name: Get a list of tests
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-list-of-tests
     generated: true
   - name: Create a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: create-a-test
     generated: true
   - name: Get a test configuration (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-configuration-browser
     generated: true
   - name: Get the test's latest results summaries (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-the-tests-latest-results-summaries-browser
     generated: true
   - name: Get a test result (browser)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-result-browser
     generated: true
   - name: Delete tests
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: delete-tests
     generated: true
   - name: Get a test configuration (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-configuration-api
     generated: true
   - name: Edit a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: edit-a-test
     generated: true
   - name: Get the test's latest results summaries (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-the-tests-latest-results-summaries-api
     generated: true
   - name: Get a test result (API)
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: get-a-test-result-api
     generated: true
   - name: Pause or start a test
-    parent: Synthetics
+    parent: Synthetic Monitoring
     url: pause-or-start-a-test
     generated: true
   - name: Tags
@@ -2469,15 +2469,15 @@ api_v1:
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Synthetics Checks
+  - name: Get hourly usage for Synthetic Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-checks
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
+  - name: Get hourly usage for Synthetic API Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-api-checks
     generated: true
-  - name: Get hourly usage for Synthetics Browser Checks
+  - name: Get hourly usage for Synthetic Browser Tests
     parent: Usage Metering
     url: get-hourly-usage-for-synthetics-browser-checks
     generated: true
@@ -2857,9 +2857,9 @@ api_v2:
     url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: /api/v2/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic Monitoring
     generated: true
   - name: Tags
     url: /api/v2/tags/
