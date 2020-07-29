@@ -196,7 +196,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file order to enable Kubernetes event collection.
+Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file in order to enable Kubernetes event collection.
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
