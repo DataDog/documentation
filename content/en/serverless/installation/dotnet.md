@@ -51,6 +51,6 @@ LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#ddfetchlambdatags
+[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
 [5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 [6]: https://app.datadoghq.com/functions

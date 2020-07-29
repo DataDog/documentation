@@ -40,10 +40,10 @@ Include the following dependency in your `pom.xml`:
   </repository>     
 </repositories>
 <dependency>
-	<groupId>com.datadoghq</groupId>
-	<artifactId>datadog-lambda-java</artifactId>
-	<version>0.0.5</version>
-	<type>pom</type>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-lambda-java</artifactId>
+  <version>0.0.5</version>
+  <type>pom</type>
 </dependency>
 ```
 
@@ -110,6 +110,6 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 [2]: https://github.com/DataDog/datadog-lambda-java/releases
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#ddfetchlambdatags
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 [7]: https://app.datadoghq.com/functions
