@@ -50,6 +50,7 @@ The following Datadog tracing libraries are supported:
 * [Ruby][7]
 * [JavaScript][8]
 * [PHP][9]
+* [.NET][12]
 
 ### How are traces linked to tests?
 
@@ -86,3 +87,4 @@ These traces are retained [just like your classical APM traces][11].
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [10]: /tracing/guide/trace_sampling_and_storage/#how-it-works
 [11]: /tracing/guide/trace_sampling_and_storage/#trace-storage
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
