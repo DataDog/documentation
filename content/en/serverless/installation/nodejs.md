@@ -140,7 +140,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below.
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
 ```javascript
 const { sendDistributionMetric } = require("datadog-lambda-js");

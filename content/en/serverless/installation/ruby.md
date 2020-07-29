@@ -57,7 +57,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, check out the sample code below to get started, and view metrics, logs and traces on the [Serverless page][8].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][8]. If you need to submit a custom metric, refer to the sample code below:
 
 ```ruby
 require 'ddtrace'

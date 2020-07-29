@@ -29,7 +29,7 @@ After you have [installed the AWS integration][1], use .NET to instrument your a
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][3].
 2. [Ensure the option DdFetchLambdaTags is enabled][4].
@@ -37,7 +37,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][6]. If you need to submit a custom metric, refer to the sample code below.
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][6]. If you want to submit a custom metric, refer to the sample code below:
 
 ```csharp
 var myMetric = new Dictionary<string, object>();
