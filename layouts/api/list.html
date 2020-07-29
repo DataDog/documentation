@@ -477,7 +477,10 @@
         {{- range $contentType, $requestBody := . -}}
             {{- with $requestBody.examples -}}
                 {{- range $exampleId, $exampleDefinition := . -}}
-                    {{- $exampleValue := $exampleDefinition.value | jsonify (dict "indent" "  ") -}}
+                    {{- $exampleValue := $exampleDefinition.value -}}
+                    {{- if hasPrefix $contentType "application/json" -}}
+                        {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                    {{- end -}}
 ## {{ default $exampleId $exampleDefinition.summary }}
 {{- range split $exampleDefinition.description "\n" }}
 # {{ . }}
