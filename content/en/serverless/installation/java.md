@@ -75,7 +75,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 2. [Ensure the option DdFetchLambdaTags is enabled][5].
 3. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
-## Quick Start
+## Explore Datadog Serverless Monitoring
 
 After you have configured your function following the steps above, check out the sample code below to get tarted, and view metrics, logs and traces on the [Serverless page][7].
 

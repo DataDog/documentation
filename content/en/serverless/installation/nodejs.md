@@ -10,7 +10,7 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], choose one of the following method to instrument your application to send metrics, logs, and traces to Datadog.
+After you have [installed the AWS integration][1], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -115,9 +115,9 @@ See the [latest release][3].
 ### Configure the Function
 
 1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
-1. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, e.g., `myfunc.handler`.
-1. Set environment variable `DD_TRACE_ENABLED` to `true`.
-1. Set environment variable `DD_FLUSH_TO_LOG` to `true`.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 ### Subscribe the Datadog Forwarder to the Log Groups
@@ -138,7 +138,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 {{% /tab %}}
 {{< /tabs >}}
 
-## Quick Start
+## Explore Datadog Serverless Monitoring
 
 After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below.
 

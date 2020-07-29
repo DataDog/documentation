@@ -10,7 +10,7 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], choose one of the following method to instrument your application to send metrics, logs, and traces to Datadog.
+After you have [installed the AWS integration][1], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -37,7 +37,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
         flushMetricsToLogs: true
         forwarder: # The Datadog Forwarder ARN goes here.
     ```
-    For more information on the Forwarder ARN, or to install the forwarder see the [forwarder documentation][2].
+    For more information on the Forwarder ARN, or to install the forwarder see the [Forwarder documentation][2].
 4. Redeploy your serverless application.
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
@@ -82,7 +82,7 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 
 #### Using the Layer
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format.
+[Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -107,16 +107,16 @@ Or add `datadog-lambda` to your project's `requirements.txt`. See the [latest re
 ### Configure the Function
 
 1. Set your function's handler to `datadog_lambda.handler.handler`.
-2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, e.g., `myfunc.handler`.
-3. Set environment variable `DD_TRACE_ENABLED` to `true`.
-4. Set environment variable `DD_FLUSH_TO_LOG` to `true`.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][4].
+1. [Install the Datadog Forwarder][4] if you haven't.
 2. [Ensure the option DdFetchLambdaTags is enabled][5].
 3. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
@@ -130,7 +130,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 {{% /tab %}} 
 {{< /tabs >}}
 
-## Quick Start
+## Explore Datadog Serverless Monitoring
 
 After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below.
 

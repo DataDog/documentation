@@ -22,7 +22,7 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 #### Using the Layer
 
-[Configure the layers][2] for your Lambda function using the ARN in the following format.
+[Configure the layers][2] for your Lambda function using the ARN in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
@@ -45,17 +45,17 @@ gem 'datadog-lambda'
 gem 'ddtrace'
 ```
 
-Keep in mind that `ddtrace` uses native extensions, which must be compiled for Amazon Linux before being packaged and uploaded to Lambda. For this reason we recommend using the layer.
+Keep in mind that `ddtrace` uses native extensions, which must be compiled for Amazon Linux before being packaged and uploaded to Lambda. For this reason, Datadog recommends using the layer.
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
-You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][5].
 2. [Ensure the option DdFetchLambdaTags is enabled][6].
 3. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
-## Quick Start
+## Explore Datadog Serverless Monitoring
 
 After you have configured your function following the steps above, check out the sample code below to get started, and view metrics, logs and traces on the [Serverless page][8].
 
