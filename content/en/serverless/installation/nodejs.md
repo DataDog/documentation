@@ -80,7 +80,7 @@ Deploy the macro to the same region as your Lambda functions. You need to deploy
 
  ```bash
     aws cloudformation package \
-        --template-file template.yml \
+        --template-file macro_template.yml \
         --s3-bucket <your bucket name here> \
         --output-template-file packaged.template
     ```
@@ -164,7 +164,7 @@ Deploy the macro to the same region as your Lambda functions. You need to deploy
 
     ```bash
     aws cloudformation package \
-        --template-file template.yml \
+        --template-file macro_template.yml \
         --s3-bucket <your bucket name here> \
         --output-template-file packaged.template
     ```
