@@ -116,13 +116,13 @@ Configure NXLog to gather logs from your host, containers, & services.
 
 1. Download the [CA certificate][1]
 
-2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 10516:
+2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 443:
 
     ```conf
     <Output out>
       Module  om_ssl
       Host    intake.logs.datadoghq.com
-      Port    10516
+      Port    443
       Exec    to_syslog_ietf();
       Exec    $raw_event="my_api_key " + $raw_event;
       CAFile  <CERT_DIR>/ca-certificates.crt

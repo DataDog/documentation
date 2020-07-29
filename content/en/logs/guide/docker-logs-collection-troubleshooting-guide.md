@@ -118,16 +118,16 @@ If you're using the Host Agent, the user `dd-agent` needs to be added to the Doc
 
 If the Logs Agent Status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
-* The required port (10516) for sending logs to Datadog is being blocked.
+* The required port (443) for sending logs to Datadog is being blocked.
 * Your container is using a different logging driver than the Agent expects.
 
-### Outbound traffic on port 10516 is blocked
+### Outbound traffic on port 443 is blocked
 
-The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over tcp via port 443. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
+* `openssl s_client -connect intake.logs.datadoghq.com:443`
 * `telnet intake.logs.datadoghq.com 10514`
 
 And then by sending a log like the following:
@@ -136,7 +136,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
+If opening the port 10514 or 443 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
 
 ### Your containers are not using the JSON logging driver
 
@@ -166,7 +166,7 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 ## Agent doesn't send logs from containers that have persisted a large volume of logs (> 1GB)
 
-The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon. 
+The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon.
 
 When it occurs, the Datadog Agent outputs a log containing `Restarting reader after a read timeout` for a given container every 30 seconds and stops sending logs from that container while it is actually logging messages.
 

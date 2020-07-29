@@ -51,10 +51,10 @@ var log = new LoggerConfiguration()  // using Serilog;
 
     // using Serilog.Formatting.Json;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    
+
     // using Serilog.Formatting.Compact;
     // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
-    
+
     .CreateLogger();
 
 // An example
@@ -334,7 +334,7 @@ You can also override the default behaviour and forward logs in TCP by manually 
 For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
 ```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
+var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 443, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",

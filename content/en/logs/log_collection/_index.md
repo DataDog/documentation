@@ -114,7 +114,7 @@ For more examples with JSON formats, multiple logs per request, or the use of qu
 
 {{< site-region region="us" >}}
 
-The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
+The secure TCP endpoint is `intake.logs.datadoghq.com:443` (or port `10514` for insecure connections).
 
 You must prefix the log entry with your [Datadog API Key][1], e.g.:
 
@@ -199,13 +199,13 @@ Endpoints that can be used to send logs to Datadog US region:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| `agent-intake.logs.datadoghq.com`       | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
 | `agent-http-intake.logs.datadoghq.com`  | `443`   | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
 | `http-intake.logs.datadoghq.com`        | `443`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                       |
-| `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
-| `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
+| `intake.logs.datadoghq.com`             | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| `lambda-intake.logs.datadoghq.com`      | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 | `lambda-http-intake.logs.datadoghq.com` | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| `functions-intake.logs.datadoghq.com`   | `10516` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
+| `functions-intake.logs.datadoghq.com`   | `443` | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 
 | Endpoint for unencrypted connections | Port    | Description                                                                                              |
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|

@@ -15,7 +15,7 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]). 
+As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]).
 If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][2] and use the same set of proxy settings as other data types.
 
 
@@ -40,7 +40,7 @@ The parameters above can also be set with the following environment variables:
 **Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
 
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
-    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
+    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `443` and activate SSL encryption.
     * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
 
 * Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
@@ -133,7 +133,7 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -141,7 +141,7 @@ frontend logs_frontend
     mode tcp
     option tcplog
     default_backend datadog-logs
-    
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -149,7 +149,7 @@ backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
+    server datadog agent-intake.logs.datadoghq.com:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
@@ -200,14 +200,14 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-    
+
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
     default_backend datadog-logs
-    
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -262,7 +262,7 @@ stream {
     server {
         listen 10514; #listen for logs
         proxy_ssl on;
-        proxy_pass agent-intake.logs.datadoghq.com:10516;
+        proxy_pass agent-intake.logs.datadoghq.com:443;
     }
 }
 ```

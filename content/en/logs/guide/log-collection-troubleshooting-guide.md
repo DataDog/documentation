@@ -24,13 +24,13 @@ There are a number of common issues that can get in the way when [sending new lo
 
 Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the Agent][3].
 
-## Outbound traffic on port 10516 is blocked
+## Outbound traffic on port 443 is blocked
 
-The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over tcp via port 443. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
+* `openssl s_client -connect intake.logs.datadoghq.com:443`
 * `telnet intake.logs.datadoghq.com 10514`
 
 And then by sending a log like the following:
@@ -39,7 +39,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
+- If opening the port 10514 or 443 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
 ```yaml
 logs_config:

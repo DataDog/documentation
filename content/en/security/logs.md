@@ -17,7 +17,7 @@ The Log Management product supports multiple [environments and formats][2], allo
 
 ## Information Security
 
-The Datadog Agent submits logs to datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][3]).
+The Datadog Agent submits logs to datadog either through HTTPS or through TLS-encrypted TCP connection on port 443, requiring outbound communication (see [Agent Transport for logs][3]).
 
 Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
 
@@ -45,11 +45,11 @@ The following sample configuration can be used with the Datadog Agent to submit 
 ```yaml
 logs_enabled: true
 logs_config:
-  logs_dd_url: tcp-encrypted-intake.logs.datadoghq.com:10516
+  logs_dd_url: tcp-encrypted-intake.logs.datadoghq.com:443
   logs_no_ssl: false
 ```
 
-With the Docker Agent, pass in `DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516` as an environment variable.
+With the Docker Agent, pass in `DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:443` as an environment variable.
 
 Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
 

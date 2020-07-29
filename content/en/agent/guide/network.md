@@ -140,7 +140,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
   - `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers)
   - `123/udp`: NTP - [More details on the importance of NTP][1].
-  - `10516/tcp`: port for the [Log collection][2] over TCP for Datadog US region, `443/tcp` for the Datadog EU region.
+  - `443/tcp`: port for the [Log collection][2] over TCP for Datadog US region, `443/tcp` for the Datadog EU region.
   - `10255/tcp`: port for the [Kubernetes http kubelet][3]
   - `10250/tcp`: port for the [Kubernetes https kubelet][3]
 
