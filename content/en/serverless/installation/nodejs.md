@@ -88,8 +88,6 @@ To install the Datadog Lambda Library with the CloudFormation macro, follow thes
   Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
 4. Redeploy your serverless application.
 
-
-
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 [3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
