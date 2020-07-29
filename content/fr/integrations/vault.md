@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Vault - Overview: assets/dashboards/vault_overview.json
+  logs: {}
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json

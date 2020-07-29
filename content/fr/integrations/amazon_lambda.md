@@ -1,6 +1,7 @@
 ---
 aliases:
   - /fr/integrations/awslambda/
+  - /fr/serverless/real-time-enhanced-metrics/
 categories:
   - cloud
   - aws
