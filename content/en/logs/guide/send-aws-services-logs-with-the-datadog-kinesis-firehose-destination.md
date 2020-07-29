@@ -21,19 +21,19 @@ You can set up a Kinesis Firehose Delivery Stream in the AWS Firehose console, o
 ​
 {{< tabs >}}
 {{% tab "Kinesis Firehose Delivery stream" %}}
-​
 ## Setup the Datadog Destination in the Kinesis Firehose Delivery Stream
 ​
 Datadog recommends using a Kinesis stream as input when using the Datadog Kinesis destination. It gives you the ability to forward your logs to multiple destinations in case Datadog is not the only consumer for those logs.
 ​
 If you only want to send logs to Datadog, or if you already have a Kinesis Datastream with your logs, ignore step 1.
 ​
+
 1. (Optional) Create a new Kinesis stream (see the [Kinesis documentation][1]). Name the stream something descriptive, like `DatadogLogStream`, and give it a shard count of 1 (increase the shard count for each MB/s throughput that you need).
 2. Create a [new delivery stream][2] and name it `DatadogLogsforwarder`.
 3. Set the source as "Kinesis stream" (or leave the source as `Direct PUT or other sources` if you don’t want to use a Kinesis stream) and select `DatadogLogStream` (or the existing Kinesis stream that already contains your logs).
 4. Disable the data transformation and record transformation and hit `next`.
 5. Select the `Datadog` destination and select the `Datadog US` or `Datadog EU` region, depending on the Datadog Region of your account.
-    {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
+  {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
 6. Paste your `APIKEY` into the `AccessKey` box. (You can get your API key from [your Datadog API settings page][3]).
 7. Configure the Delivery stream parameters. The two important parameters:
   * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
@@ -49,7 +49,6 @@ To ensure that logs that fail through the Delivery Stream are still sent to Data
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 {{% /tab %}}
 {{% tab "CloudFormation template" %}}
-​
 ## Upload with a CloudFormation Template
 ​
 Alternatively, customize this CloudFormation template and install it from the AWS Console:
@@ -63,6 +62,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 ​
 ## Send AWS logs to your Kinesis stream
 ​
+
 1. Check the `Subscriptions` column on the [log groups index page][1] to see current subscriptions to your relevant log groups. Because CloudWatch Log groups can only have one subscription, delete any existing subscriptions to the log groups before adding the new Kinesis stream as a subscriber.
   * **Note**: If you have something else you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
 2. Subscribe your new Kinesis stream to the CloudWatch log groups you want to ingest into Datadog. Refer to [this CloudWatch Logs documentation section][2] (step 3 to 6) to:
