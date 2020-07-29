@@ -29,7 +29,7 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 **Supported Monitor Types:**
 
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
-- Synthetics
+- Synthetic
 - Service Checks (open beta)
 
 **Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to track how often this host is down.
@@ -67,7 +67,7 @@ This can result in the overall status being lower than the average of the indivi
 
 SLOs based on the metric monitor types have a feature called SLO Replay that will backfill SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. This means that if you create a new Metric Monitor and set an SLO on that new monitor, rather than having to wait a full 7, 30 or 90 days for the SLO's status to fill out, SLO Replay will trigger and look at the underlying metric of that monitor and the monitor's query to get the status sooner. SLO Replay also triggers when the underlying metric monitor's query is changed (e.g. the threshold is changed) to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
 
-**Note:** SLO Replay is not supported for SLOs based on Synthetics tests or Service Checks.
+**Note:** SLO Replay is not supported for SLOs based on Synthetic tests or Service Checks.
 
 Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 

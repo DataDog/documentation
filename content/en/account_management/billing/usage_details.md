@@ -16,7 +16,7 @@ The Usage page provides the following information:
 
 ## Month-to-Date Summary
 
-This section summarizes your month-to-date usage of hosts, containers, custom metrics, APM hosts, Analyzed Spans, logs, synthetics and any other part of the platform you've used during the month.
+This section summarizes your month-to-date usage of hosts, containers, custom metrics, APM hosts, Analyzed Spans, logs, synthetic tests and any other part of the platform you've used during the month.
 
 {{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" >}}
 
@@ -40,8 +40,8 @@ This tab shows hourly, daily, monthly, and annual usage for:
 | Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                        |
 | Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                        |
 | Analyzed Spans           | Shows the sum of all Analyzed Spans indexed over all hours in the current month.                    |
-| Synthetics API Tests     | Shows the sum of all Synthetic API tests over all hours in the current month                        |
-| Synthetics Browser Tests | Shows the sum of all Synthetic browser tests over all hours in the current month                    |
+| Synthetic API Tests     | Shows the sum of all Synthetic API tests over all hours in the current month                        |
+| Synthetic Browser Tests | Shows the sum of all Synthetic browser tests over all hours in the current month                    |
 | Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month .                            |
 
 

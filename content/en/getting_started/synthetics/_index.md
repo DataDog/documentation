@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Synthetics
+title: Getting Started with Synthetic Monitoring
 kind: documentation
 further_reading:
     - link: '/synthetics/browser_tests'
@@ -13,18 +13,18 @@ further_reading:
       text: 'Create a browser subtest'
     - link: '/synthetics/settings/'
       tag: 'Documentation'
-      text: 'Configure advance Synthetics settings'
+      text: 'Configure advanced Synthetic Monitoring settings'
 ---
 
 ## Overview
 
-Datadog Synthetics offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetics helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
+Datadog Synthetic Monitoring offers two different ways to monitor your applications: API tests to monitor the uptime of your API endpoints and browser tests to check key user journeys. Your tests can be run either from managed locations or from private locations. Synthetic Monitoring helps you ensure uptime, identify regional issues, and make sure key web transactions can be performed on your application.
 
-{{< img src="synthetics/synthetics_home.png" alt="Synthetics home page" >}}
+{{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetics][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
+By unifying Synthetic Monitoring data with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing, as experienced by your users. The [Synthetic Monitoring][1] homepage details all of this information to give you real-time status updates, response times, and uptimes.
 
-The following guides show you how to set up your first Synthetics tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs.
+The following guides show you how to set up your first Synthetic tests with Datadog. Follow the sections below to learn how to create a browser or API test and configure a test with a private location to monitor internal-facing applications or any private URLs.
 
 ## Prerequisites
 
@@ -38,11 +38,11 @@ If you haven't already, create a [Datadog account][2].
 
 ## Next Steps
 
-{{< whatsnext desc="After you set up your first Synthetics test:">}}
+{{< whatsnext desc="After you set up your first Synthetic test:">}}
 {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
 {{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
+{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetic Monitoring settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/synthetics/list

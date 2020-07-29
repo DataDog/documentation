@@ -1,7 +1,7 @@
 ---
 title: Browser Test Steps
 kind: documentation
-description: Record Steps for a Synthetics Browser Test
+description: Record Steps for a Synthetic Browser Test
 further_reading:
 - link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
@@ -139,7 +139,7 @@ Refresh the current page of the scenario.
 
 ### Go to an email and click on a link
 
-This step allows you to access unique Synthetics mail inboxes after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on. This step brings your test to the corresponding page and allows you to move on with the rest of your journey from that specific page.
+This step allows you to access unique Synthetic mail inboxes after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on. This step brings your test to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
 ### Follow a specific link
 
@@ -232,11 +232,11 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### A Global Variable
 
-Pick any global variables that was defined through [Synthetics Settings][7].
+Pick any global variables that was defined through [Synthetic  Monitoring Settings][7].
 
 #### An Email
 
-Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
 #### A Pattern
 

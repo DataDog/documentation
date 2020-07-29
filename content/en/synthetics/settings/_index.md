@@ -1,10 +1,10 @@
 ---
-title: Synthetics Settings
+title: Synthetic Monitoring Settings
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
@@ -13,10 +13,10 @@ further_reading:
   text: "Configure a Browser Test"
 - link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
-  text: "Identify Synthetics Bots"
+  text: "Identify Synthetic Bots"
 ---
 
-On the [Synthetics settings page][1], you can adjust the following settings:
+On the [Synthetic Monitoring settings page][1], you can adjust the following settings:
 
 * [Global Variables](#global-variables)
 * [Private Locations][2]
@@ -24,7 +24,7 @@ On the [Synthetics settings page][1], you can adjust the following settings:
   * [Default Locations](#default-locations)
   * [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
-Only [Admin and Standard users][3] can access Synthetics `Settings` page.
+Only [Admin and Standard users][3] can access Synthetic Monitoring `Settings` page.
 
 ## Global Variables
 

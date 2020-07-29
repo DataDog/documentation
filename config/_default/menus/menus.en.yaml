@@ -64,7 +64,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 7
-  - name: Synthetics
+  - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
@@ -1262,7 +1262,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 4
-  - name: Synthetics
+  - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1299,7 +1299,7 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 301
-  - name: CI Integration
+  - name: CI Test Integration
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
@@ -2833,14 +2833,6 @@ api_v2:
   - name: Update an existing rule
     parent: Security Monitoring
     url: update-an-existing-rule
-    generated: true
-  - name: Get a quick list of security signals
-    parent: Security Monitoring
-    url: get-a-quick-list-of-security-signals
-    generated: true
-  - name: Get a list of security signals
-    parent: Security Monitoring
-    url: get-a-list-of-security-signals
     generated: true
   - name: Service Checks
     url: /api/v2/service-checks/
