@@ -3,10 +3,6 @@ title: Custom time frames
 kind: guide
 ---
 
-<div class="alert alert-warning">
-  Incrementing time frames via keyboard and entering custom time frames is in beta. If you have feedback, contact <a href="https://docs.datadoghq.com/help">Datadog support</a>.
-</div>
-
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 
 To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
