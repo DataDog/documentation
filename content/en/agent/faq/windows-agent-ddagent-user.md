@@ -79,7 +79,7 @@ If you’re using the Attach API, the change in user context means that the Agen
 
 ### Process check
 
-The Agent since v6.11 runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
 
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
