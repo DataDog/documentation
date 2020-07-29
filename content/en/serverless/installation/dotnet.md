@@ -1,5 +1,5 @@
 ---
-title: Monitoring .NET Applications
+title: Instrumenting .NET Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -23,32 +23,34 @@ After you have [installed the AWS integration][1], use .NET to instrument your a
 
 ## Configuration
 
-### Enable AWS X-Ray
+### Configure the Function
 
-Navigate to the Lambda function in the AWS console you want to instrument. In the debugging and error handling section, check the box to enable AWS X-Ray.
+1. Enable [AWS X-Ray active tracing][2] for your Lambda function.
 
-**Note**: If you’re using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your IAM policy where the Resource is the Customer Master Key used for X-Ray.
+### Subscribe the Datadog Forwarder to the Log Groups
 
-### Install the AWS X-Ray client library
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
 
-Install the [AWS X-Ray client library][2].
+1. [Install the Datadog Forwarder if you haven't][3].
+2. [Ensure the option DdFetchLambdaTags is enabled][4].
+3. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
-### Subscribe the Forwarder to log groups
+## Explore Datadog Serverless Monitoring
 
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send custom metrics and logs to Datadog.
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][6]. If you want to submit a custom metric, refer to the sample code below:
 
-You can quickly verify that you’ve installed the Datadog Forwarder in the [AWS console][3]. If you have not yet installed the Forwarder, you can follow the [installation instructions][4]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
-
-1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-
-The Datadog Forwarder sends logs and custom metrics from your function to Datadog.
-
-## Results
-
-Now you can view your metrics, logs, and traces on the [Serverless page][2].
+```csharp
+var myMetric = new Dictionary<string, object>();
+myMetric.Add("m", "coffee_house.order_value");
+myMetric.Add("v", 12.45);
+myMetric.Add("e", (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds);
+myMetric.Add("t", new string[] {"product:latte", "order:online"});
+LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
+```
 
 [1]: /serverless/#1-install-the-cloud-integration
-[2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[3]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[4]: /serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#ddfetchlambdatags
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[6]: https://app.datadoghq.com/functions
