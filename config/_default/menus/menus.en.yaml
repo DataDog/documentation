@@ -936,10 +936,10 @@ main:
     parent: tracing
     identifier: tracing_serverless_functions
     weight: 7
-  - name: Enable the Lambda Layer
+  - name: Enable Datadog APM
     url: serverless/
     parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_the_lambda_layer
+    identifier: tracing_serverless_functions_enable_datadog_apm
     weight: 701
   - name: Enable AWS X-Ray
     url: tracing/serverless_functions/enable_aws_xray

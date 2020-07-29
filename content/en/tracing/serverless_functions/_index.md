@@ -12,13 +12,11 @@ In hybrid architectures, Serverless functions can form an important core of requ
 
 ## Choose your Tracing Library
 
-Depending on your language and configuration, choose between using the Datadog Lambda Library or Amazon X-Ray for your traces.
+Depending on your language and configuration, choose between using the Datadog Lambda Library or AWS X-Ray for your traces.
 
-{{< img src="tracing/serverless_functions/LambdaLibraryXRay.png" alt="Lambda Library or X-Ray"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/LambdaLibraryXRay.png" alt="Lambda Library or AWS X-Ray"  style="width:100%;">}}
 
-**Note:** If you are tracing across lambda functions and hosts, you will need to do **both**.
-
-{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
+**Note:** If you are tracing across lambda functions and hosts, you will need to use **both** Datadog APM and AWS X-Ray.
 
 ## Enable Datadog APM
 
@@ -26,11 +24,13 @@ Instructions for enabling Datadog APM on your lambda functions are contained wit
 
 ## Enable AWS X-Ray
 
-Instructions for enabling AWS X-Ray on your lambda functions are contained within the [X-Ray Tracing][3] section of our documentation.  You will also need to [install the AWS integration][2].
+Instructions for enabling AWS X-Ray on your lambda functions are contained within the [AWS X-Ray Tracing][3] section of our documentation.  You will also need to [install the AWS integration][2].
 
 ## Tracing across AWS Lambda and hosts
 
 When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces. This means that your traces will show the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
 
 1. Enable the [AWS X-Ray integration][3] for tracing your Lambda functions.
 2. [Set up Datadog APM][4] on your Lambda functions.
@@ -40,7 +40,7 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 
-### Organizing your infrastructure with tags
+### Organizing your Serverless infrastructure with tags
 
 Any [tag][6] applied to your Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
 
