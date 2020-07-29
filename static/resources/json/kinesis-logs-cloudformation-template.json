@@ -98,7 +98,10 @@
             {
               "Effect": "Allow",
               "Action": [
-                "firehose:*"
+                "firehose:PutRecord",
+                "firehose:PutRecordBatch",
+                "kinesis:PutRecord",
+                "kinesis:PutRecordBatch"
               ],
               "Resource": [
                 {
