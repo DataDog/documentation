@@ -88,21 +88,21 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2]. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 ```
-
-The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2].
 
 #### Using the Package
 
+Install `datadog-lambda` and its dependencies locally to your function project folder. For more details, see [how to add dependencies to your function deployment package][3].
+
 ```
-pip install datadog-lambda
+pip install datadog-lambda -t ./
 ```
 
-Or add `datadog-lambda` to your project's `requirements.txt`. See the [latest release][3].
+See the [latest release][4]. 
 
 ### Configure the Function
 
@@ -116,17 +116,18 @@ Or add `datadog-lambda` to your project's `requirements.txt`. See the [latest re
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces and logs to Datadog.
 
-1. [Install the Datadog Forwarder][4] if you haven't.
-2. [Ensure the option DdFetchLambdaTags is enabled][5].
-3. [Subscribe the Datadog Forwarder to your function's log groups][6].
+1. [Install the Datadog Forwarder][5] if you haven't.
+2. [Ensure the option DdFetchLambdaTags is enabled][6].
+3. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[3]: https://pypi.org/project/datadog-lambda/
-[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[4]: https://pypi.org/project/datadog-lambda/
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[6]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 {{% /tab %}} 
 {{< /tabs >}}
 
