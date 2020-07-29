@@ -14,4 +14,5 @@ aliases:
     {{< nextlink href="logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent" >}}How to increase the number of log files tailed by the Agent files?{{< /nextlink >}}
     {{< nextlink href="logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors" >}}Why do my logs show up with an Info status even for Warnings or Errors?{{< /nextlink >}}
     {{< nextlink href="/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status" >}}How to remap custom severity values to the official log status{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/how-to-tail-logs-from-host-using-a-container-agent" >}}How to tail logs from host using a Container Agent{{< /nextlink >}}
 {{< /whatsnext >}}
