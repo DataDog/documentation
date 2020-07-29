@@ -323,7 +323,7 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [3]: /network_performance_monitoring/network_page#dns-resolution
-[4]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [5]: https://github.com/DataDog/chef-datadog
 [6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

@@ -115,4 +115,4 @@ If you use Autodiscovery from the DaemonSet, one of your Agents (the one running
 
 [1]: /getting_started/agent/autodiscovery/
 [2]: /agent/cluster_agent/clusterchecks/
-[3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md
+[3]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md

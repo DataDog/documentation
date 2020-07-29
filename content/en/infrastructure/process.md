@@ -106,7 +106,7 @@ datadog:
 ```
 
 
-[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 
 {{< /tabs >}}
