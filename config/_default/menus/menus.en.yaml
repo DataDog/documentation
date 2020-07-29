@@ -934,8 +934,18 @@ main:
   - name: Trace Serverless Functions
     url: tracing/serverless_functions/
     parent: tracing
-    identifier: serverless_functions
+    identifier: tracing_serverless_functions
     weight: 7
+  - name: Enable the Lambda Layer
+    url: serverless/
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_the_lambda_layer
+    weight: 701
+  - name: Enable AWS X-Ray
+    url: tracing/serverless_functions/enable_aws_xray
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_aws_xray
+    weight: 702
   - name: Runtime Metrics
     url: tracing/runtime_metrics/
     parent: tracing
