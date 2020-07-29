@@ -283,62 +283,61 @@
                             <p>{{ .action.requestBody.description | markdownify }}</p>
 
                             <div class="tab-content">
-                                {{ range $content := .action.requestBody.content }}
-                                    {{ range $itemKey, $schema := $content }}
-                                        {{ if eq $itemKey "schema" }}
-                                          {{ if $schema }}
+                                {{ range $contentType, $content := .action.requestBody.content }}
+                                    {{- if hasPrefix $contentType "application/json" -}}
+                                        {{ range $itemKey, $schema := $content }}
+                                            {{ if eq $itemKey "schema" }}
+                                                <!-- Get Json and HTML -->
+                                                {{ $dot.Scratch.Set "json" "" }}
+                                                {{ $dot.Scratch.Set "html" "" }}
+                                                {{ with $dot.Resources.Match "examples.json" }}
+                                                    {{ range . }}
+                                                      {{ $data := . | unmarshal}}
+                                                      {{ $req := (index (index $data $context.action.operationId) "request") }}
+                                                      {{ if $req }}
 
-                                          <!-- Get Json and HTML -->
-                                          {{ $dot.Scratch.Set "json" "" }}
-                                          {{ $dot.Scratch.Set "html" "" }}
-                                          {{ with $dot.Resources.Match "examples.json" }}
-                                              {{ range . }}
-                                                {{ $data := . | unmarshal}}
-                                                {{ $req := (index (index $data $context.action.operationId) "request") }}
-                                                {{ if $req }}
+                                                          {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                                          {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                    {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
-                                                    {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                          {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                                                          {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                    {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
-                                                    {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
-
-                                                    {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                                    {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
-                                                    {{ $dot.Scratch.Set "html" (index $req "html") }}
-                                                {{ else }}
-                                                    {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                                          {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                          {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                                                          {{ $dot.Scratch.Set "html" (index $req "html") }}
+                                                      {{ else }}
+                                                          {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                                      {{ end }}
+                                                    {{ end }}
                                                 {{ end }}
-                                              {{ end }}
-                                          {{ end }}
-                                          {{ $json := ($dot.Scratch.Get "json") }}
-                                          {{ $html := ($dot.Scratch.Get "html") }}
+                                                {{ $json := ($dot.Scratch.Get "json") }}
+                                                {{ $html := ($dot.Scratch.Get "html") }}
 
-                                          <ul class="nav nav-tabs border-none response-toggle">
-                                              <li class="nav-item">
-                                                  <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">Model</a>
-                                              </li>
-                                              <li class="nav-item">
-                                                  <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
-                                              </li>
-                                          </ul>
+                                                <ul class="nav nav-tabs border-none response-toggle">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">Model</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
+                                                    </li>
+                                                </ul>
 
-                                          <div class="tab-content">
-                                              <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
-                                                {{ $html | safeHTML }}
-                                              </div>
-                                              <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                                  <div class="code-snippet-wrapper js-code-block">
-                                                      <div class="code-snippet">
-                                                          <div class="code-button-wrapper position-absolute">
-                                                              <button class="btn text-primary js-copy-button">Copy</button>
-                                                          </div>
-                                                          {{ print $json | safeHTML }}
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          {{ end }}
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
+                                                      {{ $html | safeHTML }}
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
+                                                        <div class="code-snippet-wrapper js-code-block">
+                                                            <div class="code-snippet">
+                                                                <div class="code-button-wrapper position-absolute">
+                                                                    <button class="btn text-primary js-copy-button">Copy</button>
+                                                                </div>
+                                                                {{ print $json | safeHTML }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{ end }}
                                         {{ end }}
                                     {{ end }}
                                 {{ end }}
