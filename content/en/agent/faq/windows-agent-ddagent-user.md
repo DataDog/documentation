@@ -84,7 +84,7 @@ In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because o
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
 
-To restore the old behaviour and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
+To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
 
 ### Cassandra Nodetool integration
 
