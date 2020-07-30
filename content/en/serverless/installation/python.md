@@ -43,35 +43,211 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://github.com/DataDog/serverless-plugin-datadog
 [2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
 {{% /tab %}}
-<!--- {{% tab "SAM" %}}
+{{% tab "AWS SAM" %}}
+<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+
+### Deploy the Datadog CloudFormation Macro
+
+Use the [Datadog CloudFormation macro][1] to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the macro, follow these steps:
+
+1. Clone the Datadog CloudFormation macro repository in your local environment:
+```
+git clone https://github.com/DataDog/datadog-cloudformation-macro.git
+```
+2. Install the macro and it's dependencies:
+```
+yarn install # Yarn users
+npm install  # NPM users
+```
+3. Run the build script:
+```
+yarn build    # Yarn users
+npm run build # NPM users
+```
+
+Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you are monitoring Lambda functions:
+
+4. You will need an S3 bucket to store the CloudFormation artifacts for the macro. If you don't have one already, you can create one with:
+
+   ```bash
+      aws s3 mb s3://<bucket name>
+   ```
+5. Package the provided CloudFormation template (`macro_template.yml`). This includes a Lambda function and a CloudFormation macro resource. The provided template uses the AWS Serverless Application Model (SAM), so it must be transformed before deployment:
+
+  ```bash
+    aws cloudformation package \
+        --template-file macro_template.yml \
+        --s3-bucket <your bucket name here> \
+        --output-template-file packaged.template
+    ```
+
+6. Deploy the packaged CloudFormation template to a CloudFormation stack:
+
+    ```bash
+    aws cloudformation deploy \
+        --stack-name datadog-cfn-macro \
+        --template-file packaged.template \
+        --capabilities CAPABILITY_IAM
+    ```
+
+The macro is now deployed and ready to use.
 
 ### Install the Datadog Lambda Library
 
-Use the Datadog SAM macro to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+Use the Datadog CloudFormation macro to ingest traces, logs, and enhanced metrics from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
-To install the Datadog Lambda Library with the SAM macro, follow these steps:
+To install the Datadog Lambda Library with the CloudFormation macro, follow these steps:
 
 1. In your `template.yml`, add the following:
   ```
   Transform:
-	  DD::Serverless
-  ```
-2. In your `template.yml`, also add the following section:
-  ```
-  Mappings:
-	  Custom:
-		  Datadog:
+    - Name: DatadogCfnMacro
+      Parameters:
         enableDDTracing: true
-			  flushMetricsToLogs: true
-			  # The Datadog Forwarder ARN goes here.
-			  forwarder:
+        flushMetricsToLogs: true
+        stackName: !Ref "AWS::StackName"
+        forwarderArn: "arn:aws:lambda:<REGION>:<ACCOUNT-ID>:function:datadog-forwarder"
   ```
-  For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
-4. Redeploy your serverless application.
+  Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
+
+2. Redeploy your serverless application.
+
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+
+### Deploy the Datadog CloudFormation Macro
+
+Use the [Datadog CloudFormation macro][1] to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the macro, follow these steps:
+
+1. Clone the Datadog CloudFormation macro repository in your local environment:
+
+    ```
+    git clone https://github.com/DataDog/datadog-cloudformation-macro.git
+    ```
+
+2. Install the macro and it's dependencies:
+
+    ```
+    yarn install # Yarn users
+    npm install  # NPM users
+    ```
+
+3. Run the build script:
+
+    ```
+    yarn build    # Yarn users
+    npm run build # NPM users
+    ```
+
+Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you are monitoring Lambda functions.
+
+4. You will need an S3 bucket to store the CloudFormation artifacts for the macro. If you don't have one already, you can create one with:
+
+    ```bash
+      aws s3 mb s3://<bucket name>
+    ```
+
+5. Package the provided CloudFormation template (`macro_template.yml`). This includes a Lambda function and a CloudFormation macro resource. The provided template uses the AWS Serverless Application Model (SAM), so it must be transformed before deployment:
+
+    ```bash
+    aws cloudformation package \
+        --template-file macro_template.yml \
+        --s3-bucket <your bucket name here> \
+        --output-template-file packaged.template
+    ```
+
+6. Deploy the packaged CloudFormation template to a CloudFormation stack:
+
+    ```bash
+    aws cloudformation deploy \
+        --stack-name datadog-cfn-macro \
+        --template-file packaged.template \
+        --capabilities CAPABILITY_IAM
+    ```
+
+The macro is now deployed and ready to use.
+
+### Install the Datadog Lambda Library
+
+Use the Datadog CloudFormation macro to ingest traces, logs, and enhanced metrics from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the Datadog Lambda Library with the CloudFormation macro, follow these steps:
+
+1. Add a `CfnMapping` to your `Stack` object in your AWS CDK app:
+  ```python
+    from aws_cdk import core
+  ```
+
+  ```python
+
+        self.add_transform("DatadogCfnMacro")
+
+        mapping = core.CfnMapping(self, "Datadog",
+          mapping={
+            "Parameters": {
+              "forwarderArn": "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder",
+              "stackName": self.stackName,
+              "enableDDTracing": "true",
+              "flushMetricsToLogs": "true",
+            }
+          })
+  ```
+
+    Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
+
+2. Redeploy your serverless application.
+
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+
+{{% /tab %}}
+{{% tab "Zappa" %}}
+
+### Update the Zappa Settings
+
+1. Add the following settings to your `zappa_settings.json`:
+    ```json
+    {
+        "dev": {
+            "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>"],
+            "lambda_handler": "datadog_lambda.handler.handler",
+            "aws_environment_variables": {
+                "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+                "DD_TRACE_ENABLED": "true",
+                "DD_FLUSH_TO_LOG": "true",
+            },
+        }
+    }
+    ```
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][1]. For example:
+    ```
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+    ```
+
+### Subscribe the Datadog Forwarder to the Log Groups
+
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces and logs to Datadog.
+
+1. [Install the Datadog Forwarder][2] if you haven't.
+2. [Ensure the option DdFetchLambdaTags is enabled][3].
+3. [Subscribe the Datadog Forwarder to your function's log groups][4].
 
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-{{% /tab %}} --->
+[1]: https://github.com/DataDog/datadog-lambda-layer-python/releases
+[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 ### Install the Datadog Lambda Library
