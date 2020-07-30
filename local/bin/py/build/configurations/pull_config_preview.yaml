@@ -287,9 +287,10 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: main
+      branch: tanguy.lebarzic/markdown-default-rules
       globs:
         - "security-monitoring/*.json"
+        - "security-monitoring/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'
 
