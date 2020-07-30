@@ -175,12 +175,15 @@
       globs:
       - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/troubleshooting/'
+        dest_path: '/serverless/installation/'
         file_name: 'installing_the_forwarder.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
           title: Installing the Forwarder
           kind: documentation
+          aliases:
+            - /serverless/troubleshooting/installing_the_forwarder/
+
 
   - repo_name: datadog-cloudformation-resources
     contents:
