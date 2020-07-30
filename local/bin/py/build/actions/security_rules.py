@@ -32,6 +32,9 @@ def security_rules(content, content_dir):
     """
     logger.info("Starting security rules action...")
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
+        # Only loop over rules JSON files (not eg. Markdown files containing the messages)
+        if not file_name.endswith(".json"):
+            continue
         with open(file_name, mode="r+") as f:
             json_data = json.loads(f.read())
             p = Path(f.name)
@@ -44,25 +47,31 @@ def security_rules(content, content_dir):
                 else:
                     logger.info(f"skipping file {p.name}")
             else:
-                page_data = {
-                    "title": f"{json_data.get('name', '')}",
-                    "kind": "documentation",
-                    "type": "security_rules",
-                    "disable_edit": True,
-                    "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"]
-                }
+                # The message of a detection rule is located in a Markdown file next to the rule definition
+                message_file_name = file_name.rsplit(".", 1)[0] + ".md"
 
-                for tag in json_data.get('tags', []):
-                    key, value = tag.split(':')
-                    page_data[key] = value
+                with open(message_file_name, mode="r+") as message_file:
+                    message = message_file.read()
 
-                front_matter = yaml.dump(page_data, default_flow_style=False).strip()
-                output_content = TEMPLATE.format(front_matter=front_matter, content=json_data.get("message", "").strip())
+                    page_data = {
+                        "title": f"{json_data.get('name', '')}",
+                        "kind": "documentation",
+                        "type": "security_rules",
+                        "disable_edit": True,
+                        "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"]
+                    }
 
-                dest_dir = Path(f"{content_dir}{content['options']['dest_path']}")
-                dest_dir.mkdir(exist_ok=True)
-                dest_file = dest_dir.joinpath(p.name).with_suffix('.md')
-                logger.info(dest_file)
-                with open(dest_file, mode='w', encoding='utf-8') as out_file:
-                    out_file.write(output_content)
+                    for tag in json_data.get('tags', []):
+                        key, value = tag.split(':')
+                        page_data[key] = value
+
+                    front_matter = yaml.dump(page_data, default_flow_style=False).strip()
+                    output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
+
+                    dest_dir = Path(f"{content_dir}{content['options']['dest_path']}")
+                    dest_dir.mkdir(exist_ok=True)
+                    dest_file = dest_dir.joinpath(p.name).with_suffix('.md')
+                    logger.info(dest_file)
+                    with open(dest_file, mode='w', encoding='utf-8') as out_file:
+                        out_file.write(output_content)
 
