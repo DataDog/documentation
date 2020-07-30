@@ -22,14 +22,6 @@ TEMPLATE = """\
 """
 
 
-def get_tag(tag_list, key):
-    result_tag = ""
-    for tag in tag_list:
-        if tag.startswith(f"{key}:"):
-            result_tag = tag.replace(f"{key}:", "")
-    return result_tag
-
-
 def security_rules(content, content_dir):
     """
     Takes the content from a file from a github repo and
@@ -43,10 +35,6 @@ def security_rules(content, content_dir):
         with open(file_name, mode="r+") as f:
             json_data = json.loads(f.read())
             p = Path(f.name)
-
-            # get the source tag for this file
-            source_tag = get_tag(json_data.get('tags', []), "source")
-            scope_tag = get_tag(json_data.get('tags', []), "scope")
 
             # delete file or skip if staged
             if json_data.get('isStaged', False) or json_data.get('isDeleted', False) or not json_data.get('isEnabled', True):
