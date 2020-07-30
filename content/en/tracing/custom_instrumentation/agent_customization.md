@@ -246,6 +246,13 @@ DD_APM_REPLACE_TAGS=[
 
 [1]: /agent/kubernetes/?tab=daemonset
 {{% /tab %}}
+{{% tab "docker-compose" %}}
+
+```docker-compose.yaml
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Exclude Resources from being collected
