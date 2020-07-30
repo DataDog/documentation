@@ -48,7 +48,7 @@ The parameters above can also be set with the following environment variables:
     * `yum install ca-certificates` (CentOS, Redhat)
   And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
   
-  ## Examples of TCP proxy
+## Examples of TCP proxy
 
 ### Using HAProxy as a TCP Proxy for Logs
 
