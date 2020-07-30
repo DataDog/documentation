@@ -2637,6 +2637,10 @@ api_v2:
     url: /api/v2/logs/
     identifier: Logs
     generated: true
+  - name: Aggregate events
+    parent: Logs
+    url: aggregate-events
+    generated: true
   - name: Get a quick list of logs
     parent: Logs
     url: get-a-quick-list-of-logs
