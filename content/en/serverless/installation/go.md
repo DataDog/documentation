@@ -1,5 +1,5 @@
 ---
-title: Monitoring Go Applications
+title: Instrumenting Go Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -19,7 +19,7 @@ further_reading:
       text: 'Installing Java Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], use Go to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -31,50 +31,58 @@ You can install the [Datadog Lambda Library][2] locally by running the following
 go get github.com/DataDog/datadog-lambda-go
 ```
 
-Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
+### Configure the Function
 
-### Instrument your code
+1. Set environment variable `DD_FLUSH_TO_LOG` to `true`.
+1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
 
-Datadog needs to be able to read headers from the incoming Lambda event. Instrument each of your Lambda handler functions that you wish to trace as outlined below:
+### Subscribe the Datadog Forwarder to the Log Groups
 
-```
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
+
+1. [Install the Datadog Forwarder if you haven't][4].
+2. [Ensure the option DdFetchLambdaTags is enabled][5].
+3. [Subscribe the Datadog Forwarder to your function's log groups][6].
+
+## Explore Datadog Serverless Monitoring
+
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][7]. If you need to submit a custom metric, refer to the sample code below:
+
+```go
 package main
+
 import (
   "github.com/aws/aws-lambda-go/lambda"
   "github.com/DataDog/datadog-lambda-go"
 )
+
 func main() {
-  // Wrap your lambda handler like this
+  // Wrap your handler function
   lambda.Start(ddlambda.WrapHandler(myHandler, nil))
-  /* OR with manual configuration options
-  lambda.Start(ddlambda.WrapHandler(myHandler, &ddlambda.Config{
-    BatchInterval: time.Second * 15
-    APIKey: "my-api-key",
-  }))
-  */
 }
+
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
-  // ...
+  // Submit a custom metric
+  ddlambda.Metric(
+    "coffee_house.order_value", // Metric name
+    12.45, // Metric value
+    "product:latte", "order:online" // Associated tags
+  )
+
+  req, err := http.NewRequest("GET", "http://example.com/status")
+
+  // Add the datadog distributed tracing headers
+  ddlambda.AddTraceHeaders(ctx, req)
+
+  client := http.Client{}
+  client.Do(req)
 }
 ```
 
-### Subscribe the Forwarder to log groups
-
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
-
-You can quickly verify that you’ve installed the Datadog Forwarder [Using the AWS console][3]. If you have not yet installed the Forwarder, you can follow the [installation instructions][4]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
-
-1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-
-The Datadog Forwarder now sends enhanced metrics and traces from your function to Datadog.
-
-## Results
-
-Now you can view your metrics, logs, and traces on the [Serverless page][5].
-
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://github.com/DataDog/datadog-lambda-go
-[3]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[4]: /serverless/troubleshooting/installing_the_forwarder
-[5]: https://app.datadoghq.com/functions
+[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[7]: https://app.datadoghq.com/functions

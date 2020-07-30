@@ -1,0 +1,380 @@
+{
+  "Parameters": {
+    "DatadogHttpEndpointUrl": {
+      "Type": "String",
+      "Default": "https://aws-kinesis-http-intake.logs.datadoghq.com/v1/input",
+      "AllowedValues": [
+        "https://aws-kinesis-http-intake.logs.datadoghq.com/v1/input",
+        "https://aws-kinesis-http-intake.logs.datadoghq.eu/v1/input"
+      ]
+    },
+    "DatadogAPIKey": {
+      "Type": "String",
+      "NoEcho": "true"
+    },
+    "FailedLogDeliveryPrefix": {
+      "Type": "String",
+      "Default": ""
+    }
+  },
+  "Resources": {
+    "DeliveryStreamLogStream": {
+      "Type": "AWS::Logs::LogStream",
+      "Properties": {
+        "LogGroupName" : {"Ref": "DeliveryStreamLogGroup"},
+        "LogStreamName": {"Ref": "AWS::StackName"}
+      }
+    },
+    "DeliveryStreamLogGroup": {
+      "Type": "AWS::Logs::LogGroup"
+    },
+    "FailedDataBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "AuthenticatedRead",
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "-",
+            [
+              "datadog-failed-logs-delivery",
+              {
+                "Ref": "AWS::AccountId"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "CloudWatchLogsRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "",
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "logs.",
+                        { "Ref" : "AWS::Region" },
+                        ".amazonaws.com"
+                      ]
+                    ]
+                  }
+                },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          }
+        }
+    },
+    "CloudWatchLogsPolicy":{
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": {
+          "Fn::Join": [
+            "-",
+            [
+              "cloudwatch-firehose-policy",
+              {
+                "Ref": "AWS::StackName"
+              }
+            ]
+          ]
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "firehose:PutRecord",
+                "firehose:PutRecordBatch",
+                "kinesis:PutRecord",
+                "kinesis:PutRecordBatch"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:firehose:",
+                      { "Ref" : "AWS::Region" },
+                      ":",
+                      { "Ref" : "AWS::AccountId" },
+                      ":*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "iam:PassRole"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:iam::",
+                      { "Ref" : "AWS::AccountId" },
+                      ":role/",
+                      { "Ref": "CloudWatchLogsRole"}
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "CloudWatchLogsRole"
+          }
+        ]
+      }
+    },
+    "FirehoseLogsRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "firehose.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": {
+                    "Ref": "AWS::AccountId"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "FirehoseLogsPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": {
+          "Fn::Join": [
+            "-",
+            [
+              "datadog-firehose-delivery-policy",
+              {
+                "Ref": "AWS::StackName"
+              }
+            ]
+          ]
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:AbortMultipartUpload",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:ListBucketMultipartUploads",
+                "s3:PutObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "FailedDataBucket"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "FailedDataBucket"
+                      },
+                      "*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "logs:PutLogEvents"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:logs:",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":log-group:/aws/kinesisfirehose/",
+                      {
+                        "Ref": "AWS::StackName"
+                      },
+                      ":log-stream:*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "kinesis:DescribeStream",
+                "kinesis:GetShardIterator",
+                "kinesis:GetRecords"
+              ],
+              "Resource": {"Fn::GetAtt": ["DatadogDeliveryStream", "Arn"]}
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "FirehoseLogsRole"
+          }
+        ]
+      }
+    },
+    "DatadogDeliveryStream": {
+      "Type": "AWS::KinesisFirehose::DeliveryStream",
+      "DependsOn": [
+        "FirehoseLogsRole",
+        "FailedDataBucket"
+      ],
+      "Properties": {
+        "DeliveryStreamType": "DirectPut",
+        "HttpEndpointDestinationConfiguration": {
+          "RoleARN": {
+            "Fn::GetAtt": [
+              "FirehoseLogsRole",
+              "Arn"
+            ]
+          },
+          "EndpointConfiguration": {
+            "Url": {
+              "Ref": "DatadogHttpEndpointUrl"
+            },
+            "AccessKey": {
+              "Ref": "DatadogAPIKey"
+            },
+            "Name": {
+              "Fn::Join": [
+                "-",
+                [
+                  {
+                    "Ref": "AWS::StackName"
+                  },
+                  "datadog-logs-endpoint"
+                ]
+              ]
+            }
+          },
+          "RequestConfiguration": {
+            "ContentEncoding": "GZIP"
+          },
+          "CloudWatchLoggingOptions": {
+            "Enabled": true,
+            "LogGroupName": {"Ref": "DeliveryStreamLogGroup"},
+            "LogStreamName": {"Ref": "DeliveryStreamLogStream"}
+          },
+          "BufferingHints": {
+            "IntervalInSeconds": 60,
+            "SizeInMBs": 4
+          },
+          "RetryOptions": {
+            "DurationInSeconds": 60
+          },
+          "S3BackupMode": "FailedDataOnly",
+          "S3Configuration": {
+            "BucketARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:s3:::",
+                  {
+                    "Ref": "FailedDataBucket"
+                  }
+                ]
+              ]
+            },
+            "CompressionFormat": "UNCOMPRESSED",
+            "Prefix": {
+              "Ref": "FailedLogDeliveryPrefix"
+            },
+            "RoleARN": {
+              "Fn::GetAtt": [
+                "FirehoseLogsRole",
+                "Arn"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "FailedDataBucketName": {
+      "Description": "S3 Bucket where failed deliveries will be saved",
+      "Value": {
+        "Fn::Join": [
+          "-",
+          [
+            "datadog-failed-logs-delivery",
+            {
+              "Ref": "AWS::AccountId"
+            }
+          ]
+        ]
+      }
+    },
+    "DatadogDeliveryStreamARN": {
+      "Description": "The ARN for your Kinesis Firehose Delivery Stream, use this as the destination when adding CloudWatch Logs subscription filters",
+      "Value": {
+        "Fn::GetAtt": [
+          "DatadogDeliveryStream",
+          "Arn"
+        ]
+      }
+    },
+    "CloudWatchLogsRoleARN": {
+      "Description": "The ARN for your CloudWatch Logs role to write to your delivery stream, use this as the role-arn when adding CloudWatch Logs subscription filters",
+      "Value":{
+        "Fn::GetAtt":[
+          "CloudWatchLogsRole",
+          "Arn"
+        ]
+      }
+    }
+  }
+}

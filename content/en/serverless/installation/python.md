@@ -1,5 +1,5 @@
 ---
-title: Monitoring Python Applications
+title: Instrumenting Python Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -10,40 +10,38 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], use Python to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-### Install the Datadog Lambda Library
+Use the [Datadog Serverless Plugin][1] to send metrics, logs and traces from your application to Datadog without any code changes. The plugin automatically attaches the Datadog Lambda Library for Python to your functions using layers. At deploy time, it swaps your original function handler with the Datadog-provided handler that initializes the Datadog Lambda Library and invokes your original function handler. It also enables Datadog and X-Ray tracing for your Lambda functions.
 
-Use the [Datadog Serverless Plugin][1] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+To install and configure the Datadog Serverless Plugin, follow these steps:
 
-To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
-
-1. Install the Serverless Plugin in your application package: 
-	`yarn add --dev serverless-plugin-datadog`
+1. Install the Datadog Serverless Plugin: 
+	  ```
+    yarn add --dev serverless-plugin-datadog
+    ```
 2. In your `serverless.yml`, add the following:
     ```
     plugins:
-		    - serverless-plugin-datadog
+      - serverless-plugin-datadog
     ```
 3. In your `serverless.yml`, also add the following section:
     ```
     custom:
-        datadog:
-            enableDDTracing: true
-            flushMetricsToLogs: true
-            # The Datadog Forwarder ARN goes here.
-            forwarder:
+      datadog:
+        flushMetricsToLogs: true
+        forwarder: # The Datadog Forwarder ARN goes here.
     ```
-    For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][2].
+    For more information on the Forwarder ARN, or to install the forwarder see the [Forwarder documentation][2].
 4. Redeploy your serverless application.
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
-[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
 {{% /tab %}}
 <!--- {{% tab "SAM" %}}
 
@@ -74,120 +72,88 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}} --->
-{{% tab "AWS Console" %}}
+{{% tab "Custom" %}}
 
 ### Install the Datadog Lambda Library
 
-The Datadog Lambda Library can be imported as a layer. Its ARN includes a region, language runtime, and version. Construct yours in the following format:
+You can either install the Datadog Lambda library as a layer or as a Python package.
+
+The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
+
+#### Using the Layer
+
+[Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2]. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 ```
 
-The Python Datadog Lambda Library supports Python27, Python36, Python37, and Python38. For more information, see the [latest release][1].
+#### Using the Package
 
-To install the Datadog Lambda Library:
-
-1. Navigate to the Lambda function to which you want to add the layer in your AWS console.
-2. Click on **Layers** on the main page of your function.
-3. Scroll down, and click on **Add a Layer**.
-4. Select the option to *Provide a layer version ARN*.
-5. Enter the Datadog Lambda Library ARN from the example above.
-6. Navigate to the Environment Variables section of your function and add a new `DD_FLUSH_TO_LOG` variable set to `true`.
-
-These steps need to be repeated for every function you wish to trace.
-
-### Instrument your code
-
-Instrument your functions to ingest traces into Datadog:
+Install `datadog-lambda` and its dependencies locally to your function project folder. For more details, see [how to add dependencies to your function deployment package][3].
 
 ```
-from datadog_lambda.wrapper import datadog_lambda_wrapper
-from ddtrace import tracer
-
-@datadog_lambda_wrapper
-def hello(event, context):
-return {
-    "statusCode": 200,
-    "body": get_message()
-}
-
-@tracer.wrap()
-def get_message():
-return "Hello from serverless!"
+pip install datadog-lambda -t ./
 ```
 
-### Subscribe the Forwarder to Log Groups
+See the [latest release][4]. 
 
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
+### Configure the Function
 
-You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS Forwarder page][1] For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
+1. Set your function's handler to `datadog_lambda.handler.handler`.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
+5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
+### Subscribe the Datadog Forwarder to the Log Groups
 
-The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces and logs to Datadog.
+
+1. [Install the Datadog Forwarder][5] if you haven't.
+2. [Ensure the option DdFetchLambdaTags is enabled][6].
+3. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/DataDog/datadog-lambda-layer-python/releases
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[4]: https://pypi.org/project/datadog-lambda/
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[6]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 {{% /tab %}} 
-{{% tab "Other" %}}
-
-### Install the Datadog Lambda Library
-
-The Datadog Lambda Library can be installed from PyPI by running the following command
-or by adding `datadog-lambda` to your project's `requirements.txt`:
-
-```
-pip install datadog-lambda
-```
-
-Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
-
-### Instrument your code
-
-Instrument your functions to ingest traces into Datadog:
-
-```
-from datadog_lambda.wrapper import datadog_lambda_wrapper
-from ddtrace import tracer
-
-@datadog_lambda_wrapper
-def hello(event, context):
-return {
-    "statusCode": 200,
-    "body": get_message()
-}
-
-@tracer.wrap()
-def get_message():
-return "Hello from serverless!"
-```
-
-### Subscribe the Forwarder to log groups
-
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
-
-For more information on the Forwarder ARN, or to install the forwarder see the [documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
-
-1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-
-The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
-
-[1]: /serverless/troubleshooting/installing_the_forwarder
-{{% /tab %}}
 {{< /tabs >}}
 
-## Results
+## Explore Datadog Serverless Monitoring
 
-Now you can view your metrics, logs, and traces on the [Serverless page][2].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below:
+
+```python
+from ddtrace import tracer
+from datadog_lambda.metric import lambda_metric
+
+def lambda_handler(event, context):
+    lambda_metric(
+        "coffee_house.order_value",  # metric name
+        12.45,  # metric value
+        tags=['product:latte', 'order:online']  # tags
+    )
+    return {
+        "statusCode": 200,
+        "body": get_message()
+    }
+
+@tracer.wrap()
+def get_message():
+    return "Hello from serverless!"
+```
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://app.datadoghq.com/functions

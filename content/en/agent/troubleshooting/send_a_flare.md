@@ -60,19 +60,19 @@ kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
 ### process-agent
 
 {{< code-block lang="bash" filename="process-agent.sh" >}}
-kubectl exec -it <agent-pod-name> -c process-agent -- agent flare <case-id> --local
+kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
 {{< /code-block >}}
 
 ### trace-agent
 
 {{< code-block lang="bash" filename="trace-agent.sh" >}}
-kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
 {{< /code-block >}}
   
 ### system-probe
 
 {{< code-block lang="bash" filename="trace-agent.sh" >}}
-kubectl exec -it <agent-pod-name> -c system-probe -- agent flare <case-id> --local
+kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --local
 {{< /code-block >}}
 
 [1]: /agent/basic_agent_usage/#gui
