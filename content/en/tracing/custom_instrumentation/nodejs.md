@@ -228,8 +228,10 @@ Some of our integrations support span hooks that can be used to update the span 
 // at the top of the entry point right after tracer.init()
 tracer.use('express', {
   // hook will be executed right before the request span is finished
-  request: (span, req res) => {
-    span.setTag('customer.id', req.query.customer_id)
+  hooks: {
+    request: (span, req, res) => {
+      span.setTag('customer.id', req.query.customer_id)
+    }
   }
 })
 ```
