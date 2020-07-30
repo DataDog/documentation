@@ -182,10 +182,10 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the format:
 
 ```text
-{"foo", "bar_%%label%%"}
+{"foo": "bar_%%label%%"}
 ```
 
-For example, `{"app*", "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*", "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
+For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*": "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
 
 When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
@@ -309,6 +309,13 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 [1]: /integrations/amazon_web_services/
 {{% /tab %}}
+{{% tab "Service Level Objectives" %}}
+
+When creating an SLO, assign tags under step 3 *Add name and tags*:
+
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags"  style="width:80%;">}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### API
@@ -325,6 +332,7 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 * [Create][5] or [Edit][6] a monitor
 * [Add][7] or [Update][8] host tags
 * [Send traces][9]
+* [Create][10] or [Update][11] a Service Level Objective
 
 [1]: /api/v1/service-checks/#submit-a-service-check
 [2]: /api/v1/events/#post-an-event
@@ -335,6 +343,8 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 [7]: /api/v1/tags/#add-tags-to-a-host
 [8]: /api/v1/tags/#update-host-tags
 [9]: /api/v1/tracing/
+[10]: /api/v1/service-level-objectives/#create-a-slo-object
+[11]: /api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
 {{% tab "Example" %}}
 

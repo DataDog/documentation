@@ -167,6 +167,20 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
+  
+  - repo_name: datadog-serverless-functions
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'aws/logs_monitoring/README.md'
+      options:
+        dest_path: '/serverless/troubleshooting/'
+        file_name: 'installing_the_forwarder.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
+          title: Installing the Forwarder
+          kind: documentation
 
   - repo_name: datadog-cloudformation-resources
     contents:
@@ -275,7 +289,7 @@
     - action: security-rules
       branch: main
       globs:
-        - "*.json"
+        - "security-monitoring/*.json"
       options:
         dest_path: '/security_monitoring/default_rules/'
 

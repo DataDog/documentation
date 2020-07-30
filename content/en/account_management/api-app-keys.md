@@ -9,11 +9,11 @@ aliases:
 
 ## API keys
 
-API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog.
+API keys are unique to your organization. An [API key][1] is required by the Datadog Agent to submit metrics and events to Datadog.
 
 ## Application keys
 
-Application keys, in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
+[Application keys][1], in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
 
 ## Client tokens
 

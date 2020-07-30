@@ -10,7 +10,7 @@ updated_for_agent: 6.0
 description: 'Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run.'
 is_public: true
 public_title: Datadog-Pivotal Platform Integration
-short_description: 'Track the health of your Pivotal Platform (formerly Cloud Foundry) VMs and the jobs they run.'
+short_description: 'Track the health of Pivotal Platform VMs and the jobs they run.'
 categories:
     - provisioning
     - configuration & deployment

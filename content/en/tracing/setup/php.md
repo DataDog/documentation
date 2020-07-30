@@ -103,8 +103,12 @@ The PHP tracer can be configured using environment variables.
 For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the php tracer, for example:
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
+env[DD_SERVICE] = my-app
 ```
 
 Alternatively, you can use [`SetEnv`][14] from the server config, virtual host, directory, or `.htaccess` file.
@@ -115,12 +119,18 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-For NGINX, use the `env` directory in the php-fpm's `www.conf` file, for example:
+For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
+env[DD_SERVICE] = my-app
 ```
+
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][15] for more details.
 
 ### PHP CLI server
 
@@ -137,9 +147,10 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                                                            |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                                                            |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                                                          |
-| `DD_INTEGRATIONS_DISABLED`                | `null`      | A CSV list of integrations to disable, for example: `curl,mysqli` (see [Integration names](#integration-names)).                                      |
+| `DD_ENV`                                  | `null`      | Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.                                         |
+| `DD_INTEGRATIONS_DISABLED`                | `null`      | A CSV list of integrations to disable, for example: `curl,mysqli` (see [Integration names](#integration-names)).                               |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                                                            |
-| `DD_SERVICE_NAME`                         | `null`      | The default app name                                                                                                                           |
+| `DD_SERVICE`                              | `null`      | The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.                                                                          |
 | `DD_SERVICE_MAPPING`                      | `null`      | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                                                          |
@@ -153,17 +164,19 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
-| `DD_TRACE_GLOBAL_TAGS`                    | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`.                                                                                 |
+| `DD_TAGS`                                 | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`                                                 |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
-| `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                                                     |
-| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules, for example: `/foo/*,/bar/$*/baz` (see ["Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping)) |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions <0.36.0, this parameter is `DD_SAMPLING_RATE`.                                  |
+| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | CSV of regexes that identifies path fragments corresponding to IDs (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | CSV of URI mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions <0.36.0, this parameter is `DD_SAMPLING_RATE`.           |
 | `DD_TRACE_SAMPLING_RULES`                 | `null`      | A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `[{"sample_rate": 0.2}]`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (see [Integration names](#integration-names)). |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | A flag to enable app analytics for relevant spans in a specific integration (see [Integration names](#integration-names)).                       |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | A flag to enable app analytics for relevant spans in a specific integration (see [Integration names](#integration-names)).                     |
 | `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`  | `1.0`       | Set the app analytics sample rate for relevant spans in a specific integration (see [Integration names](#integration-names)).                  |
+| `DD_VERSION`                              | `null`      | Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.                    |
 
 #### Integration names
 
@@ -194,7 +207,13 @@ Use the name when setting integration-specific configuration such as, `DD_<INTEG
 
 #### Map resource names to normalized URI
 
-By default, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
+<div class="alert alert-warning">
+<strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the foreseeable future but it is strongly encouraged that you use the new settings outlined in this paragraph to avoid issues when legacy support is removed.
+
+Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
+</div>
+
+For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
 |:-----------------------------------|:--------------|
@@ -214,24 +233,33 @@ You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLE
 
 ##### Custom URL-To-Resource Mapping
 
-When [URL resource names are enabled](#map-resource-names-to-normalized-uri), custom URL mapping is configured via `DD_TRACE_RESOURCE_URI_MAPPING` which accepts a CSV list of mapping rules. The wildcards `*` and `$*` are supported, so `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz`. In this context, `*` is a greedy match with a replacement character `?`, and `$*` performs a greedy match without replacement
+There are a few cases that are not covered by the automatic normalization that is applied.
 
-Rules are applied in the same order as they appear in `DD_TRACE_RESOURCE_URI_MAPPING`. Less greedy rules should appear in the list before more greedy rules, e.g. `/foo/$*/bar,/foo/*`
+| URL (GET request)                | Expected Resource Name        |
+|:---------------------------------|:------------------------------|
+| `/using/prefix/id123/for/id`    | `GET /using/prefix/?/for/id`  |
+| `/articles/slug-of-title`        | `GET /articles/?`             |
+| `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
+| `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
 
-The `*` wildcard is replaced with `?`.
+There are two classes of scenarios that are not covered by automatic normalization:
 
-| Mapping Rule | URL (GET request)  | Resource Name    |
-|:-------------|:-------------------|:-----------------|
-| `/foo/*`     | `/foo/bar`         | `GET /foo/?`     |
-| `/foo/*/bar` | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
-| `/foo-*-bar` | `/foo-secret-bar`  | `GET /foo-?-bar` |
+  - The path fragment to normalize has a reproducible patter nand can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
+  - The path fragment can be anything, and the previous path fragment indicates that a value has to be normalized. For example `/cities/new-york` tells us that `new-york` has to be normalized as it is the name of a city. This scenario is covered by settings `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` for incoming and outgoing requests respectively.
 
-The `$*` wildcard matches without replacement.
+###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-| Mapping Rule        | URL (GET request)           | Resource Name              |
-|:--------------------|:----------------------------|:---------------------------|
-| `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
-| `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
+This setting is a CSV of regex that are applied to every path fragment independently. For example setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for the first example `/using/prefix/id123/for/id` would apply the regex to all framents `using`, `prefix`, `id123`, `for`, and `id`. The final normalized resorce name would be `GET /using/prefix/?/for/id`.
+
+Note that multiple regular expressions separated by a comma can be added `^id\d+$,code\d+$` and that the comma character `,` is not escaped, hence it cannot be used in the regular expression.
+
+###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+
+This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that everytime the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
+
+Patterns can be applied to a part of a specific fragment. For example `path/*-fix` would normalize the url `/some/path/changing-fix/nested` to `/some/path/?-fix/nested`
+
+Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requests (for example web frameworks) while `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` only applies to outgoing requests (for example `curl` and `guzzle` requests).
 
 ## Upgrading
 
@@ -267,3 +295,4 @@ To remove the PHP tracer:
 [12]: /tracing/faq/php-tracer-manual-installation
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: /tracing/setup/nginx/#nginx-and-fastcgi
