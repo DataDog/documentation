@@ -7174,6 +7174,18 @@ components:
             an alert.
           format: int64
           type: integer
+        monitor_options:
+          description: Object containing the options for a Synthetic test as a monitor
+            (e.g. renotification).
+          properties:
+            renotify_interval:
+              description: Time interval before renotifying if the test is still failing
+                (in minutes).
+              format: int64
+              maximum: 1440
+              minimum: 0
+              type: integer
+          type: object
         retry:
           description: Object describing the retry strategy to apply to a Synthetic
             test.
