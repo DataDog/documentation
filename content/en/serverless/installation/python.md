@@ -72,6 +72,43 @@ To install the Datadog Lambda Library with the SAM macro, follow these steps:
 
 [1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 {{% /tab %}} --->
+{{% tab "Zappa" %}}
+
+### Update the Zappa Settings
+
+1. Add the following settings to your `zappa_settings.json`:
+    ```json
+    {
+        "dev": {
+            "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>"],
+            "lambda_handler": "datadog_lambda.handler.handler",
+            "aws_environment_variables": {
+                "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+                "DD_TRACE_ENABLED": "true",
+                "DD_FLUSH_TO_LOG": "true",
+            },
+        }
+    }
+    ```
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][1]. For example:
+    ```
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+    ```
+
+### Subscribe the Datadog Forwarder to the Log Groups
+
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces and logs to Datadog.
+
+1. [Install the Datadog Forwarder][2] if you haven't.
+2. [Ensure the option DdFetchLambdaTags is enabled][3].
+3. [Subscribe the Datadog Forwarder to your function's log groups][4].
+
+
+[1]: https://github.com/DataDog/datadog-lambda-layer-python/releases
+[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 ### Install the Datadog Lambda Library
