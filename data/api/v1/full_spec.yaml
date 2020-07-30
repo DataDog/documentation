@@ -1688,6 +1688,31 @@ components:
       x-enum-varnames:
       - GROUP
     HTTPLog:
+      description: Structured log message.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPLogItem'
+      - description: List of log items.
+        items:
+          $ref: '#/components/schemas/HTTPLogItem'
+        type: array
+    HTTPLogError:
+      description: Invalid query performed.
+      properties:
+        code:
+          description: Error code.
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+        message:
+          description: Error message.
+          example: ''
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    HTTPLogItem:
       description: Logs that are sent over HTTP.
       properties:
         ddsource:
@@ -1730,23 +1755,6 @@ components:
           type: string
       required:
       - name
-      type: object
-    HTTPLogError:
-      description: Invalid query performed.
-      properties:
-        code:
-          description: Error code.
-          example: 0
-          format: int32
-          maximum: 2147483647
-          type: integer
-        message:
-          description: Error message.
-          example: ''
-          type: string
-      required:
-      - code
-      - message
       type: object
     HTTPMethod:
       description: The HTTP method.
@@ -8257,6 +8265,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         rum_session_count_sum:
           description: Shows the sum of all RUM Sessions over all hours in the current
             date for all organizations
@@ -8370,6 +8383,11 @@ components:
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         public_id:
@@ -8497,6 +8515,11 @@ components:
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
             all hours in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        profiling_host_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
@@ -14375,6 +14398,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              dynamic-points:
+                description: TODO.
+                summary: Dynamic Points
+                value:
+                  series:
+                  - metric: system.load.1
+                    points:
+                    - - ${NOW}
+                      - '1234.5'
+                x-variables:
+                  NOW: $(date +%s)
             schema:
               $ref: '#/components/schemas/MetricsPayload'
         required: true
@@ -16763,11 +16798,65 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ContentEncoding'
+      - description: Log tags can be passed as query parameters with `text/plain`
+          content type.
+        example: env:prod,user:my-user
+        in: query
+        name: ddtags
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
+            examples:
+              multi-json-messages:
+                description: Pass multiple log objects at once.
+                summary: Multi JSON Messages
+                value:
+                - message: hello
+                - message: world
+              simple-json-message:
+                description: Log attributes can be passed as `key:value` pairs in
+                  valid JSON messages.
+                summary: Simple JSON Message
+                value:
+                  ddsource: agent
+                  ddtags: env:prod,user:joe.doe
+                  hostname: fa1e1e739d95
+                  message: hello world
             schema:
               $ref: '#/components/schemas/HTTPLog'
+          application/logplex-1:
+            examples:
+              multi-raw-message:
+                description: Submit log messages.
+                summary: Multi Logplex Messages
+                value: 'hello
+
+                  world'
+              simple-logplex-message:
+                description: Submit log string.
+                summary: Simple Logplex Message
+                value: hello world
+            schema:
+              type: string
+          text/plain:
+            examples:
+              multi-raw-message:
+                description: Submit log string.
+                summary: Multi Raw Messages
+                value: 'hello
+
+                  world
+
+                  '
+              simple-raw-message:
+                description: Submit log string.
+                summary: Simple Raw Message
+                value: hello world
+            schema:
+              type: string
         description: Log to send (JSON format).
         required: true
       responses:
