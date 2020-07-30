@@ -61,6 +61,13 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 | `com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd` |
 
 {{% /tab %}}
+{{% tab "Traces" %}}
+
+| Datadog Trace Service Name                   |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 4. Hit the _verify_ button. If it does not return _Service name found_, reach out to the [Datadog support team][2].
@@ -169,7 +176,26 @@ To forward your processes metrics to Datadog using this new VPC endpoint, config
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Traces" %}}
+
+_Available for Agent 6.tktk+_
+
+To forward your processes metrics to Datadog using this new VPC endpoint, configure `trace-pvtlink.agent.datadoghq.com` as your new processes data destination:
+
+1. Update the `tktk` parameter in the [Agent `datadog.yaml` configuration file][1]:
+
+    ```yaml
+    tktk: https://trace-pvtlink.agent.datadoghq.com
+    ```
+
+2. [Restart your Agent][2] to send processes data to Datadog through AWS PrivateLink.
+
+**Note**: If you are using the container Agent, set the environment variable instead: `DD_tktk="https://trace-pvtlink.agent.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}{{< /tabs >}}
 
 ## Advanced Usage
 
