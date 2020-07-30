@@ -2,6 +2,7 @@
 aliases: []
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

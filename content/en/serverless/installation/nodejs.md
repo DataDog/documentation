@@ -233,13 +233,11 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Node8-10`, `Node10-x`, and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:11
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
-
-The available `RUNTIME` options are `Node8-10`, `Node10-x`, and `Node12-x`. For more information, see the [latest release][2].
 
 #### Using the Package
 
@@ -278,7 +276,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#ddfetchlambdatags
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 {{% /tab %}}
 {{< /tabs >}}

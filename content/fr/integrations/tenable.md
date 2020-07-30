@@ -3,6 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
