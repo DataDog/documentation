@@ -46,16 +46,18 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 
 1. [Install Helm][1].
 2. Download the [Datadog `values.yaml` configuration file][2].
-3. If this is a fresh install, add the Helm stable repo:
+3. If this is a fresh install, add the Helm Datadog repo and the Helm stable repo (for Kube State Metrics chart):
     ```bash
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/ && helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo update
     ```
 4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v3+**
 
     ```bash
-    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog --set targetSystem=<TARGET_SYSTEM>
+    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog --set targetSystem=<TARGET_SYSTEM>
     ```
 
     Replace `<TARGET_SYSTEM>` with the name of your OS: `linux` or `windows`.
@@ -63,7 +65,7 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 - **Helm v1/v2**
 
     ```bash
-    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog
     ```
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
@@ -80,13 +82,13 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 
 
 [1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
-[7]: https://github.com/helm/charts/tree/master/stable/datadog
-[8]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
+[7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
+[8]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -326,7 +328,7 @@ See the [Agent Commands guides][15] to discover all the Docker Agent commands.
 [1]: /agent/faq/kubernetes-legacy/
 [2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
 [3]: /agent/kubernetes/integrations/
-[4]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
 [5]: /agent/proxy/#agent-v6
 [6]: /agent/kubernetes/apm/
 [7]: /agent/kubernetes/log/

@@ -78,7 +78,7 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
 [3]: /agent/faq/heroku-troubleshooting/#send-a-flare
-[4]: https://github.com/helm/charts/blob/master/stable/datadog/CHANGELOG.md
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
