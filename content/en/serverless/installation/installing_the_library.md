@@ -7,6 +7,8 @@ aliases:
   - /infrastructure/serverless/lambda-layer
   - /infrastructure/serverless/datadog_lambda_layer
   - /infrastructure/serverless/datadog_lambda_layer/
+  - /serverless/troubleshooting/installing_the_layer
+  - /serverless/troubleshooting/installing_the_layer/
 further_reading:
 - link: "/integrations/amazon_lambda/"
   tag: "AWS Lambda Integration"
