@@ -1,7 +1,7 @@
 ---
 title: DNS Monitoring
 kind: documentation
-description: Diagnose and debug DNS server and managed service issues  
+description: Diagnose and debug DNS server issues  
 aliases:
     - /network_performance_monitoring/network_table
 further_reading:
@@ -27,7 +27,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 * When a DNS server’s response time to requests has gradually or suddenly increased   
 * Which DNS servers have a high error rate, and what kind of errors they they are emitting 
 
-##Setup
+## Setup
 
 DNS Monitoring metrics are collected automatically by the system probe. Once installed, a ‘DNS’ tab will be accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
 
