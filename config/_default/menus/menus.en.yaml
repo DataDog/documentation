@@ -869,28 +869,36 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: App Analytics
-    url: tracing/app_analytics/
+  - name: Trace Search and Analytics
+    url: tracing/trace_search_and_analytics/
     parent: tracing
-    identifier: app_analytics
+    identifier: trace_search_and_analytics
     weight: 4
-  - name: Viewing Analytics
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 403
-  - name: Trace Search
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 404
-  - name: Monitoring App Analytics
+  - name: Query Syntax
+    url: tracing/trace_search_and_analytics/syntax/
+    parent: trace_search_and_analytics
+    weight: 401
+  - name: Monitoring with Analytics
     url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 405
-  - name: Live Search
-    url: tracing/livesearch/
+    parent: trace_search_and_analytics
+    weight: 402
+  - name: Trace Ingestion and Indexing
+    url: tracing/trace_ingestion_and_indexing/
     parent: tracing
-    identifier: Live Search
+    identifier: trace_ingestion_and_indexing
     weight: 5
+  - name: Ingestion
+    url: tracing/trace_ingestion_and_indexing/ingestion
+    parent: trace_ingestion_and_indexing
+    weight: 501
+  - name: Indexing
+    url: tracing/trace_ingestion_and_indexing/indexing
+    parent: trace_ingestion_and_indexing
+    weight: 502
+  - name: Usage Metrics
+    url: tracing/trace_ingestion_and_indexing/usage_metrics
+    parent: trace_ingestion_and_indexing
+    weight: 503
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
