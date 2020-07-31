@@ -16,7 +16,7 @@ Start by installing the [AWS Integration][1]. This allows Datadog to ingest Amaz
 
 ### 2. Instrument your application
 
-These instructions walk you through installation of the [Datadog Forwarder][2] and the [Datadog Lambda Library][3], which you need regardless of language.
+In addition to setup for your language, these instructions walk you through installation of the [Datadog Forwarder][2] and the [Datadog Lambda Library][3], which you need regardless of language.
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
