@@ -14,9 +14,7 @@ In hybrid architectures, serverless functions are a key part of your application
 
 Depending on your language and configuration, choose between using the Datadog Lambda Library or AWS X-Ray for your traces.
 
-{{< img src="tracing/serverless_functions/LambdaLibraryXRay.png" alt="Lambda Library or AWS X-Ray"  style="width:100%;">}}
-
-**Note:** If you are tracing across lambda functions and hosts, you will need to use **both** Datadog APM and AWS X-Ray.
+{{< partial name="apm/apm-serverless.html" >}}
 
 ## Recommended: Enable Datadog APM
 

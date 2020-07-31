@@ -1,0 +1,16 @@
+{{ $dot := . }}
+<div class="apm-languages">
+  <div class="container cards-dd">
+    <div class="card-deck">
+      <a class="card" href="datadog_apm">
+        <div class="card-body text-center">
+          {{ partial "img.html" (dict "root" . "src" "tracing/serverless_functions/DatadogAPM.png" "class" "img-fluid" "alt" "Datadog APM" "width" "300") }}
+        </div>
+      </a>
+      <a class="card" href="enable_aws_xray">
+        <div class="card-body text-center">
+          {{ partial "img.html" (dict "root" . "src" "tracing/serverless_functions/AWSXRay.png" "class" "img-fluid" "alt" "AWS X-Ray" "width" "300") }}
+        </div>
+      </a>
+  </div>
+</div>

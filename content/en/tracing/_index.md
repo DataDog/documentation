@@ -102,7 +102,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Customize your Instrumentation or add OpenTracing
 
-[Seamlessly connect your instrumentation][10] between automatic instrumentation, dd-trace-api, and OpenTracing.
+[Seamlessly connect your instrumentation][10] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
 
 ## Further Reading
 
