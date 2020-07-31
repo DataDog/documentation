@@ -1699,7 +1699,7 @@ components:
       x-enum-varnames:
       - ROLES
     SecurityMonitoringListRulesResponse:
-      description: List of rules
+      description: List of rules.
       properties:
         data:
           description: TODO.
@@ -1713,8 +1713,8 @@ components:
       description: Case when signal is generated.
       properties:
         condition:
-          description: 'A rule case contains logical operations (>, >=, &&, ||) to
-            determine if a signal should be generated
+          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+            to determine if a signal should be generated
 
             based on the event counts in the previously defined queries.'
           type: string
@@ -1722,13 +1722,36 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case
+          description: Notification targets for each rule case.
           items:
-            description: Notification
+            description: Notification.
             type: string
           type: array
         status:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      type: object
+    SecurityMonitoringRuleCaseCreate:
+      description: Case when signal is generated.
+      properties:
+        condition:
+          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+            to determine if a signal should be generated
+
+            based on the event counts in the previously defined queries.'
+          type: string
+        name:
+          description: Name of the case.
+          type: string
+        notifications:
+          description: Notification targets for each rule case.
+          items:
+            description: Notification.
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - status
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
@@ -1737,7 +1760,7 @@ components:
           description: Cases for generating signals.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
         isEnabled:
           description: Whether the rule is enabled.
@@ -1748,7 +1771,7 @@ components:
           example: ''
           type: string
         name:
-          description: The name of the rule
+          description: The name of the rule.
           example: ''
           type: string
         options:
@@ -1757,7 +1780,7 @@ components:
           description: Queries for selecting logs which are part of the rule.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+            $ref: '#/components/schemas/SecurityMonitoringRuleQueryCreate'
           type: array
         tags:
           description: Tags for generated signals.
@@ -1765,7 +1788,7 @@ components:
           - env:prod
           - team:security
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
       required:
@@ -1775,7 +1798,6 @@ components:
       - options
       - cases
       - message
-      - tags
       type: object
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
@@ -1873,24 +1895,48 @@ components:
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
-            description: Field
+            description: Field.
             type: string
           type: array
         groupByFields:
           description: Fields to group by.
           items:
-            description: Field
+            description: Field.
             type: string
           type: array
         name:
-          description: Name of the query
+          description: Name of the query.
           type: string
         query:
-          description: Query to run on logs
+          description: Query to run on logs.
           type: string
       type: object
+    SecurityMonitoringRuleQueryCreate:
+      description: Query for matching rule.
+      properties:
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          type: string
+      required:
+      - query
+      type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule
+      description: Detection rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -1933,7 +1979,7 @@ components:
         tags:
           description: Tags for generated signals.
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
         version:
@@ -1982,7 +2028,7 @@ components:
         tags:
           description: Tags for generated signals.
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
       type: object
@@ -4206,7 +4252,7 @@ tags:
   name: Roles
 - description: '[See API version 1](/api/v1/screenboards/).'
   name: Screenboards
-- description: Detection Rules for generating signals
+- description: Detection Rules for generating signals.
   name: Security Monitoring
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
