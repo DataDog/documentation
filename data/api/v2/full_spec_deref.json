@@ -6905,12 +6905,12 @@
         ]
       },
       "SecurityMonitoringListRulesResponse": {
-        "description": "List of rules",
+        "description": "List of rules.",
         "properties": {
           "data": {
             "description": "TODO.",
             "items": {
-              "description": "Detection rule",
+              "description": "Detection rule.",
               "properties": {
                 "cases": {
                   "description": "Cases for generating signals.",
@@ -6918,7 +6918,7 @@
                     "description": "Case when signal is generated.",
                     "properties": {
                       "condition": {
-                        "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                        "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                         "type": "string"
                       },
                       "name": {
@@ -6926,9 +6926,9 @@
                         "type": "string"
                       },
                       "notifications": {
-                        "description": "Notification targets for each rule case",
+                        "description": "Notification targets for each rule case.",
                         "items": {
-                          "description": "Notification",
+                          "description": "Notification.",
                           "type": "string"
                         },
                         "type": "array"
@@ -7087,7 +7087,7 @@
                       "distinctFields": {
                         "description": "Field for which the cardinality is measured. Sent as an array.",
                         "items": {
-                          "description": "Field",
+                          "description": "Field.",
                           "type": "string"
                         },
                         "type": "array"
@@ -7095,17 +7095,17 @@
                       "groupByFields": {
                         "description": "Fields to group by.",
                         "items": {
-                          "description": "Field",
+                          "description": "Field.",
                           "type": "string"
                         },
                         "type": "array"
                       },
                       "name": {
-                        "description": "Name of the query",
+                        "description": "Name of the query.",
                         "type": "string"
                       },
                       "query": {
-                        "description": "Query to run on logs",
+                        "description": "Query to run on logs.",
                         "type": "string"
                       }
                     },
@@ -7116,7 +7116,7 @@
                 "tags": {
                   "description": "Tags for generated signals.",
                   "items": {
-                    "description": "Tag",
+                    "description": "Tag.",
                     "type": "string"
                   },
                   "type": "array"
@@ -7159,7 +7159,7 @@
         "description": "Case when signal is generated.",
         "properties": {
           "condition": {
-            "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+            "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
             "type": "string"
           },
           "name": {
@@ -7167,9 +7167,9 @@
             "type": "string"
           },
           "notifications": {
-            "description": "Notification targets for each rule case",
+            "description": "Notification targets for each rule case.",
             "items": {
-              "description": "Notification",
+              "description": "Notification.",
               "type": "string"
             },
             "type": "array"
@@ -7195,6 +7195,49 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringRuleCaseCreate": {
+        "description": "Case when signal is generated.",
+        "properties": {
+          "condition": {
+            "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the case.",
+            "type": "string"
+          },
+          "notifications": {
+            "description": "Notification targets for each rule case.",
+            "items": {
+              "description": "Notification.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "status": {
+            "description": "Severity of the Security Signal.",
+            "enum": [
+              "info",
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "INFO",
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringRuleCreatePayload": {
         "description": "Create a new rule.",
         "properties": {
@@ -7205,7 +7248,7 @@
               "description": "Case when signal is generated.",
               "properties": {
                 "condition": {
-                  "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                  "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                   "type": "string"
                 },
                 "name": {
@@ -7213,9 +7256,9 @@
                   "type": "string"
                 },
                 "notifications": {
-                  "description": "Notification targets for each rule case",
+                  "description": "Notification targets for each rule case.",
                   "items": {
-                    "description": "Notification",
+                    "description": "Notification.",
                     "type": "string"
                   },
                   "type": "array"
@@ -7239,6 +7282,9 @@
                   ]
                 }
               },
+              "required": [
+                "status"
+              ],
               "type": "object"
             },
             "type": "array"
@@ -7254,7 +7300,7 @@
             "type": "string"
           },
           "name": {
-            "description": "The name of the rule",
+            "description": "The name of the rule.",
             "example": "",
             "type": "string"
           },
@@ -7356,7 +7402,7 @@
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
@@ -7364,20 +7410,23 @@
                 "groupByFields": {
                   "description": "Fields to group by.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
                 },
                 "name": {
-                  "description": "Name of the query",
+                  "description": "Name of the query.",
                   "type": "string"
                 },
                 "query": {
-                  "description": "Query to run on logs",
+                  "description": "Query to run on logs.",
                   "type": "string"
                 }
               },
+              "required": [
+                "query"
+              ],
               "type": "object"
             },
             "type": "array"
@@ -7389,7 +7438,7 @@
               "team:security"
             ],
             "items": {
-              "description": "Tag",
+              "description": "Tag.",
               "type": "string"
             },
             "type": "array"
@@ -7401,8 +7450,7 @@
           "queries",
           "options",
           "cases",
-          "message",
-          "tags"
+          "message"
         ],
         "type": "object"
       },
@@ -7584,7 +7632,7 @@
           "distinctFields": {
             "description": "Field for which the cardinality is measured. Sent as an array.",
             "items": {
-              "description": "Field",
+              "description": "Field.",
               "type": "string"
             },
             "type": "array"
@@ -7592,24 +7640,57 @@
           "groupByFields": {
             "description": "Fields to group by.",
             "items": {
-              "description": "Field",
+              "description": "Field.",
               "type": "string"
             },
             "type": "array"
           },
           "name": {
-            "description": "Name of the query",
+            "description": "Name of the query.",
             "type": "string"
           },
           "query": {
-            "description": "Query to run on logs",
+            "description": "Query to run on logs.",
             "type": "string"
           }
         },
         "type": "object"
       },
+      "SecurityMonitoringRuleQueryCreate": {
+        "description": "Query for matching rule.",
+        "properties": {
+          "distinctFields": {
+            "description": "Field for which the cardinality is measured. Sent as an array.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "groupByFields": {
+            "description": "Fields to group by.",
+            "items": {
+              "description": "Field.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the query.",
+            "type": "string"
+          },
+          "query": {
+            "description": "Query to run on logs.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
       "SecurityMonitoringRuleResponse": {
-        "description": "Detection rule",
+        "description": "Detection rule.",
         "properties": {
           "cases": {
             "description": "Cases for generating signals.",
@@ -7617,7 +7698,7 @@
               "description": "Case when signal is generated.",
               "properties": {
                 "condition": {
-                  "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                  "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                   "type": "string"
                 },
                 "name": {
@@ -7625,9 +7706,9 @@
                   "type": "string"
                 },
                 "notifications": {
-                  "description": "Notification targets for each rule case",
+                  "description": "Notification targets for each rule case.",
                   "items": {
-                    "description": "Notification",
+                    "description": "Notification.",
                     "type": "string"
                   },
                   "type": "array"
@@ -7786,7 +7867,7 @@
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
@@ -7794,17 +7875,17 @@
                 "groupByFields": {
                   "description": "Fields to group by.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
                 },
                 "name": {
-                  "description": "Name of the query",
+                  "description": "Name of the query.",
                   "type": "string"
                 },
                 "query": {
-                  "description": "Query to run on logs",
+                  "description": "Query to run on logs.",
                   "type": "string"
                 }
               },
@@ -7815,7 +7896,7 @@
           "tags": {
             "description": "Tags for generated signals.",
             "items": {
-              "description": "Tag",
+              "description": "Tag.",
               "type": "string"
             },
             "type": "array"
@@ -7854,7 +7935,7 @@
               "description": "Case when signal is generated.",
               "properties": {
                 "condition": {
-                  "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                  "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                   "type": "string"
                 },
                 "name": {
@@ -7862,9 +7943,9 @@
                   "type": "string"
                 },
                 "notifications": {
-                  "description": "Notification targets for each rule case",
+                  "description": "Notification targets for each rule case.",
                   "items": {
-                    "description": "Notification",
+                    "description": "Notification.",
                     "type": "string"
                   },
                   "type": "array"
@@ -8001,7 +8082,7 @@
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
@@ -8009,17 +8090,17 @@
                 "groupByFields": {
                   "description": "Fields to group by.",
                   "items": {
-                    "description": "Field",
+                    "description": "Field.",
                     "type": "string"
                   },
                   "type": "array"
                 },
                 "name": {
-                  "description": "Name of the query",
+                  "description": "Name of the query.",
                   "type": "string"
                 },
                 "query": {
-                  "description": "Query to run on logs",
+                  "description": "Query to run on logs.",
                   "type": "string"
                 }
               },
@@ -8030,7 +8111,7 @@
           "tags": {
             "description": "Tags for generated signals.",
             "items": {
-              "description": "Tag",
+              "description": "Tag.",
               "type": "string"
             },
             "type": "array"
@@ -19503,12 +19584,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "List of rules",
+                  "description": "List of rules.",
                   "properties": {
                     "data": {
                       "description": "TODO.",
                       "items": {
-                        "description": "Detection rule",
+                        "description": "Detection rule.",
                         "properties": {
                           "cases": {
                             "description": "Cases for generating signals.",
@@ -19516,7 +19597,7 @@
                               "description": "Case when signal is generated.",
                               "properties": {
                                 "condition": {
-                                  "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                                  "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                                   "type": "string"
                                 },
                                 "name": {
@@ -19524,9 +19605,9 @@
                                   "type": "string"
                                 },
                                 "notifications": {
-                                  "description": "Notification targets for each rule case",
+                                  "description": "Notification targets for each rule case.",
                                   "items": {
-                                    "description": "Notification",
+                                    "description": "Notification.",
                                     "type": "string"
                                   },
                                   "type": "array"
@@ -19685,7 +19766,7 @@
                                 "distinctFields": {
                                   "description": "Field for which the cardinality is measured. Sent as an array.",
                                   "items": {
-                                    "description": "Field",
+                                    "description": "Field.",
                                     "type": "string"
                                   },
                                   "type": "array"
@@ -19693,17 +19774,17 @@
                                 "groupByFields": {
                                   "description": "Fields to group by.",
                                   "items": {
-                                    "description": "Field",
+                                    "description": "Field.",
                                     "type": "string"
                                   },
                                   "type": "array"
                                 },
                                 "name": {
-                                  "description": "Name of the query",
+                                  "description": "Name of the query.",
                                   "type": "string"
                                 },
                                 "query": {
-                                  "description": "Query to run on logs",
+                                  "description": "Query to run on logs.",
                                   "type": "string"
                                 }
                               },
@@ -19714,7 +19795,7 @@
                           "tags": {
                             "description": "Tags for generated signals.",
                             "items": {
-                              "description": "Tag",
+                              "description": "Tag.",
                               "type": "string"
                             },
                             "type": "array"
@@ -19804,7 +19885,7 @@
                       "description": "Case when signal is generated.",
                       "properties": {
                         "condition": {
-                          "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                          "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                           "type": "string"
                         },
                         "name": {
@@ -19812,9 +19893,9 @@
                           "type": "string"
                         },
                         "notifications": {
-                          "description": "Notification targets for each rule case",
+                          "description": "Notification targets for each rule case.",
                           "items": {
-                            "description": "Notification",
+                            "description": "Notification.",
                             "type": "string"
                           },
                           "type": "array"
@@ -19838,6 +19919,9 @@
                           ]
                         }
                       },
+                      "required": [
+                        "status"
+                      ],
                       "type": "object"
                     },
                     "type": "array"
@@ -19853,7 +19937,7 @@
                     "type": "string"
                   },
                   "name": {
-                    "description": "The name of the rule",
+                    "description": "The name of the rule.",
                     "example": "",
                     "type": "string"
                   },
@@ -19955,7 +20039,7 @@
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
                           "items": {
-                            "description": "Field",
+                            "description": "Field.",
                             "type": "string"
                           },
                           "type": "array"
@@ -19963,20 +20047,23 @@
                         "groupByFields": {
                           "description": "Fields to group by.",
                           "items": {
-                            "description": "Field",
+                            "description": "Field.",
                             "type": "string"
                           },
                           "type": "array"
                         },
                         "name": {
-                          "description": "Name of the query",
+                          "description": "Name of the query.",
                           "type": "string"
                         },
                         "query": {
-                          "description": "Query to run on logs",
+                          "description": "Query to run on logs.",
                           "type": "string"
                         }
                       },
+                      "required": [
+                        "query"
+                      ],
                       "type": "object"
                     },
                     "type": "array"
@@ -19988,7 +20075,7 @@
                       "team:security"
                     ],
                     "items": {
-                      "description": "Tag",
+                      "description": "Tag.",
                       "type": "string"
                     },
                     "type": "array"
@@ -20000,8 +20087,7 @@
                   "queries",
                   "options",
                   "cases",
-                  "message",
-                  "tags"
+                  "message"
                 ],
                 "type": "object"
               }
@@ -20013,7 +20099,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule",
+                  "description": "Detection rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -20021,7 +20107,7 @@
                         "description": "Case when signal is generated.",
                         "properties": {
                           "condition": {
-                            "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                            "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                             "type": "string"
                           },
                           "name": {
@@ -20029,9 +20115,9 @@
                             "type": "string"
                           },
                           "notifications": {
-                            "description": "Notification targets for each rule case",
+                            "description": "Notification targets for each rule case.",
                             "items": {
-                              "description": "Notification",
+                              "description": "Notification.",
                               "type": "string"
                             },
                             "type": "array"
@@ -20190,7 +20276,7 @@
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
@@ -20198,17 +20284,17 @@
                           "groupByFields": {
                             "description": "Fields to group by.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
                           },
                           "name": {
-                            "description": "Name of the query",
+                            "description": "Name of the query.",
                             "type": "string"
                           },
                           "query": {
-                            "description": "Query to run on logs",
+                            "description": "Query to run on logs.",
                             "type": "string"
                           }
                         },
@@ -20219,7 +20305,7 @@
                     "tags": {
                       "description": "Tags for generated signals.",
                       "items": {
-                        "description": "Tag",
+                        "description": "Tag.",
                         "type": "string"
                       },
                       "type": "array"
@@ -20387,7 +20473,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule",
+                  "description": "Detection rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -20395,7 +20481,7 @@
                         "description": "Case when signal is generated.",
                         "properties": {
                           "condition": {
-                            "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                            "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                             "type": "string"
                           },
                           "name": {
@@ -20403,9 +20489,9 @@
                             "type": "string"
                           },
                           "notifications": {
-                            "description": "Notification targets for each rule case",
+                            "description": "Notification targets for each rule case.",
                             "items": {
-                              "description": "Notification",
+                              "description": "Notification.",
                               "type": "string"
                             },
                             "type": "array"
@@ -20564,7 +20650,7 @@
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
@@ -20572,17 +20658,17 @@
                           "groupByFields": {
                             "description": "Fields to group by.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
                           },
                           "name": {
-                            "description": "Name of the query",
+                            "description": "Name of the query.",
                             "type": "string"
                           },
                           "query": {
-                            "description": "Query to run on logs",
+                            "description": "Query to run on logs.",
                             "type": "string"
                           }
                         },
@@ -20593,7 +20679,7 @@
                     "tags": {
                       "description": "Tags for generated signals.",
                       "items": {
-                        "description": "Tag",
+                        "description": "Tag.",
                         "type": "string"
                       },
                       "type": "array"
@@ -20666,7 +20752,7 @@
                       "description": "Case when signal is generated.",
                       "properties": {
                         "condition": {
-                          "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                          "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                           "type": "string"
                         },
                         "name": {
@@ -20674,9 +20760,9 @@
                           "type": "string"
                         },
                         "notifications": {
-                          "description": "Notification targets for each rule case",
+                          "description": "Notification targets for each rule case.",
                           "items": {
-                            "description": "Notification",
+                            "description": "Notification.",
                             "type": "string"
                           },
                           "type": "array"
@@ -20813,7 +20899,7 @@
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
                           "items": {
-                            "description": "Field",
+                            "description": "Field.",
                             "type": "string"
                           },
                           "type": "array"
@@ -20821,17 +20907,17 @@
                         "groupByFields": {
                           "description": "Fields to group by.",
                           "items": {
-                            "description": "Field",
+                            "description": "Field.",
                             "type": "string"
                           },
                           "type": "array"
                         },
                         "name": {
-                          "description": "Name of the query",
+                          "description": "Name of the query.",
                           "type": "string"
                         },
                         "query": {
-                          "description": "Query to run on logs",
+                          "description": "Query to run on logs.",
                           "type": "string"
                         }
                       },
@@ -20842,7 +20928,7 @@
                   "tags": {
                     "description": "Tags for generated signals.",
                     "items": {
-                      "description": "Tag",
+                      "description": "Tag.",
                       "type": "string"
                     },
                     "type": "array"
@@ -20858,7 +20944,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Detection rule",
+                  "description": "Detection rule.",
                   "properties": {
                     "cases": {
                       "description": "Cases for generating signals.",
@@ -20866,7 +20952,7 @@
                         "description": "Case when signal is generated.",
                         "properties": {
                           "condition": {
-                            "description": "A rule case contains logical operations (>, >=, &&, ||) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
+                            "description": "A rule case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries.",
                             "type": "string"
                           },
                           "name": {
@@ -20874,9 +20960,9 @@
                             "type": "string"
                           },
                           "notifications": {
-                            "description": "Notification targets for each rule case",
+                            "description": "Notification targets for each rule case.",
                             "items": {
-                              "description": "Notification",
+                              "description": "Notification.",
                               "type": "string"
                             },
                             "type": "array"
@@ -21035,7 +21121,7 @@
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
@@ -21043,17 +21129,17 @@
                           "groupByFields": {
                             "description": "Fields to group by.",
                             "items": {
-                              "description": "Field",
+                              "description": "Field.",
                               "type": "string"
                             },
                             "type": "array"
                           },
                           "name": {
-                            "description": "Name of the query",
+                            "description": "Name of the query.",
                             "type": "string"
                           },
                           "query": {
-                            "description": "Query to run on logs",
+                            "description": "Query to run on logs.",
                             "type": "string"
                           }
                         },
@@ -21064,7 +21150,7 @@
                     "tags": {
                       "description": "Tags for generated signals.",
                       "items": {
-                        "description": "Tag",
+                        "description": "Tag.",
                         "type": "string"
                       },
                       "type": "array"
@@ -24216,7 +24302,7 @@
       "name": "Screenboards"
     },
     {
-      "description": "Detection Rules for generating signals",
+      "description": "Detection Rules for generating signals.",
       "name": "Security Monitoring"
     },
     {
