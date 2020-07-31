@@ -887,18 +887,10 @@ main:
     parent: tracing
     identifier: trace_ingestion_and_indexing
     weight: 5
-  - name: Ingestion
-    url: tracing/trace_ingestion_and_indexing/ingestion
-    parent: trace_ingestion_and_indexing
-    weight: 501
-  - name: Indexing
-    url: tracing/trace_ingestion_and_indexing/indexing
-    parent: trace_ingestion_and_indexing
-    weight: 502
   - name: Usage Metrics
     url: tracing/trace_ingestion_and_indexing/usage_metrics
     parent: trace_ingestion_and_indexing
-    weight: 503
+    weight: 501
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
