@@ -163,7 +163,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
-(See below for each integration's name.)
+(See above for each integration's name.)
 
 
 ## Further Reading

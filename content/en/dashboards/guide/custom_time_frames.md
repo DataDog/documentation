@@ -3,25 +3,21 @@ title: Custom time frames
 kind: guide
 ---
 
-<div class="alert alert-warning">
-  Incrementing time frames via keyboard and entering custom time frames is in beta. If you have feedback, contact <a href="https://docs.datadoghq.com/help">Datadog support</a>.
-</div>
-
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 
 To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
 
-{{< img src="dashboards/guide/custom_time_frames/increment_time_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
 
 You can also type or paste custom dates and timestamps—including ones copied from elsewhere in Datadog:
 
-{{< img src="dashboards/guide/custom_time_frames/copy_and_paste_time_frame.mp4" alt="Copy and paste time frame" video="true" >}}
+{{< img src="dashboards/guide/custom_time_frames/copy_and_paste.mp4" alt="Copy and paste time frame" video="true" >}}
 
 Both fixed and relative custom time frames are supported:
 
-{{< img src="dashboards/guide/custom_time_frames/type_custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" width="500" >}}
 
-{{< img src="dashboards/guide/custom_time_frames/type_custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 
 ## Supported syntaxes
 

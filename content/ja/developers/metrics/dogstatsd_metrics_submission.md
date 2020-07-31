@@ -530,7 +530,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
 {{< /code-block >}}
@@ -590,7 +590,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
+    statsd.histogram('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}

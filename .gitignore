@@ -60,7 +60,7 @@ content/en/security_monitoring/default_rules/*.md
 npm-debug.log*
 
 # serverless
-!content/en/serverless/troubleshooting/installing_the_forwarder.md
+!content/en/serverless/installation/installing_the_forwarder.md
 
 # Runtime data
 pids

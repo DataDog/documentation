@@ -1037,6 +1037,95 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+  xit('should show oneOf', () => {
+    const mockSchema = {
+      "description": "Structured log message.",
+      "oneOf": [
+        {
+          "description": "Logs that are sent over HTTP.",
+          "properties": {
+            "ddsource": {
+              "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "nginx",
+              "type": "string"
+            },
+            "ddtags": {
+              "description": "Tags associated with your logs.",
+              "example": "env:staging,version:5.1",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "The name of the originating host of the log.",
+              "example": "i-012345678",
+              "type": "string"
+            },
+            "message": {
+              "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+              "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+              "type": "string"
+            },
+            "service": {
+              "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "payment",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        },
+        {
+          "description": "List of log items.",
+          "items": {
+            "description": "Logs that are sent over HTTP.",
+            "properties": {
+              "ddsource": {
+                "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                "example": "nginx",
+                "type": "string"
+              },
+              "ddtags": {
+                "description": "Tags associated with your logs.",
+                "example": "env:staging,version:5.1",
+                "type": "string"
+              },
+              "hostname": {
+                "description": "The name of the originating host of the log.",
+                "example": "i-012345678",
+                "type": "string"
+              },
+              "message": {
+                "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+                "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+                "type": "string"
+              },
+              "service": {
+                "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                "example": "payment",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      ]
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "ddsource": "nginx",
+      "ddtags": "env:staging,version:5.1",
+      "hostname": "i-012345678",
+      "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+      "service": "payment"
+    };
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`isReadOnlyRow`, () => {
@@ -1189,7 +1278,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const expected = `
     <div class="table-response schema-table row">
@@ -1207,7 +1296,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const actual = bp.addHasExpandClass(mockInput);
     expect(actual).toEqual(expected);
@@ -1230,7 +1319,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const expected = `
     <div class="table-response schema-table has-no-expands row">
@@ -1248,7 +1337,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const actual = bp.addHasExpandClass(mockInput);
     expect(actual).toEqual(expected);
@@ -1281,7 +1370,7 @@ describe(`schemaTable`, () => {
         </div>
       </div>
       FooBar
-    </div>  
+    </div>
   </div>`;
 
     expect(bp.rowRecursive).toHaveBeenCalledTimes(1);
@@ -1352,28 +1441,28 @@ describe(`schemaTable`, () => {
               <div class="col-2 column"><p>int64</p></div>
               <div class="col-6 column"><p>The duration of the request in nanoseconds.</p></div>
             </div>
-            
+
           </div>
             </div>
-            
+
             <div class="row   ">
               <div class="col-12 first-column">
                 <div class="row first-row  ">
-                  
+
               <div class="col-4 column">
       <p class="key">error</p>
     </div>
-      
+
                   <div class="col-2 column"><p>int32</p></div>
                   <div class="col-6 column"><p>Set this value to 1 to indicate if an error occured.</p>
     <p>If an error occurs, you should pass additional information,
     such as the error message, type and stack information in the meta property.</p></div>
                 </div>
-                
+
               </div>
             </div>
-            
-        </div>  
+
+        </div>
       </div>`.trim();
     expect(actual).toEqual(expected);
   });

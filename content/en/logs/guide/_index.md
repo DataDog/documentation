@@ -15,4 +15,6 @@ private: true
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Kinesis Firehose Destination{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Send AWS services logs with the Datadog Lambda function{{< /nextlink >}}
 {{< /whatsnext >}}

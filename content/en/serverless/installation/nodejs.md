@@ -1,5 +1,5 @@
 ---
-title: Monitoring Node.js Applications
+title: Instrumenting Node.js Applications
 kind: documentation
 further_reading:
     - link: 'serverless/installation/node'
@@ -10,147 +10,241 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], use Node.js to instrument your application to send metrics, logs, and traces to Datadog. 
+After you have [installed the AWS integration][1], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-### Install the Datadog Lambda Library
+Use the [Datadog Serverless Plugin][1] to send metrics, logs and traces from your application to Datadog without any code changes. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it swaps your original function handler with the Datadog-provided handler that initializes the Datadog Lambda Library and invokes your original function handler. It also enables Datadog and X-Ray tracing for your Lambda functions.
 
-Use the [Datadog Serverless Plugin][1] to ingest traces from your application without any code instrumentation. The plugin automatically attaches the Datadog Lambda Library for Node.js to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+To install and configure the Datadog Serverless Plugin, follow these steps:
 
-To install the Datadog Lambda Library with the Serverless Framework plugin, follow these steps:
-
-1. Install the Serverless Plugin in your application package: 
-	`yarn add --dev serverless-plugin-datadog`
+1. Install the Datadog Serverless Plugin: 
+	```
+    yarn add --dev serverless-plugin-datadog
+    ```
 2. In your `serverless.yml`, add the following:
     ```
     plugins:
-		    - serverless-plugin-datadog
+      - serverless-plugin-datadog
     ```
 3. In your `serverless.yml`, also add the following section:
     ```
     custom:
-        datadog:
-            enableDDTracing: true
-            flushMetricsToLogs: true
-            # The Datadog Forwarder ARN goes here.
-            forwarder:
+      datadog:
+        flushMetricsToLogs: true
+        forwarder: # The Datadog Forwarder ARN goes here.
     ```
-    For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
+    For more information on the Forwarder ARN, or to install the forwarder see the [forwarder documentation][2].
 4. Redeploy your serverless application.
 
-[1]:https://github.com/DataDog/serverless-plugin-datadog
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[1]: https://github.com/DataDog/serverless-plugin-datadog
+[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
 {{% /tab %}}
-<!--- {{% tab "SAM" %}}
+{{% tab "AWS SAM" %}}
+
+<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+
+### Deploy the Datadog CloudFormation Macro
+
+Use the [Datadog CloudFormation macro][1] to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the macro, follow these steps:
+
+1. Clone the Datadog CloudFormation macro repository in your local environment:
+```
+git clone https://github.com/DataDog/datadog-cloudformation-macro.git
+```
+2. Install the macro and it's dependencies:
+```
+yarn install # Yarn users
+npm install  # NPM users
+```
+3. Run the build script:
+```
+yarn build    # Yarn users
+npm run build # NPM users
+```
+
+Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you are monitoring Lambda functions:
+
+4. You will need an S3 bucket to store the CloudFormation artifacts for the macro. If you don't have one already, you can create one with:
+
+    ```bash
+      aws s3 mb s3://<bucket name>
+    ```
+
+5. Package the provided CloudFormation template (`macro_template.yml`). This includes a Lambda function and a CloudFormation macro resource. The provided template uses the AWS Serverless Application Model (SAM), so it must be transformed before deployment:
+
+ ```bash
+    aws cloudformation package \
+        --template-file macro_template.yml \
+        --s3-bucket <your bucket name here> \
+        --output-template-file packaged.template
+    ```
+
+6. Deploy the packaged CloudFormation template to a CloudFormation stack:
+
+    ```bash
+    aws cloudformation deploy \
+        --stack-name datadog-cfn-macro \
+        --template-file packaged.template \
+        --capabilities CAPABILITY_IAM
+    ```
+
+The macro is now deployed and ready to use.
 
 ### Install the Datadog Lambda Library
 
-Use the Datadog SAM macro to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+Use the Datadog CloudFormation macro to ingest traces, logs, and enhanced metrics from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
 
-To install the Datadog Lambda Library with the SAM macro, follow these steps:
+To install the Datadog Lambda Library with the CloudFormation macro, follow these steps:
 
 1. In your `template.yml`, add the following:
   ```
   Transform:
-	  DD::Serverless
-  ```
-2. In your `template.yml`, also add the following section:
-  ```   
-  Mappings:
-	  Custom:
-		  Datadog:
+	  - Name: DatadogCfnMacro
+      Parameters:
         enableDDTracing: true
 			  flushMetricsToLogs: true
-			  # The Datadog Forwarder ARN goes here.
-			  forwarder:
+        stackName: !Ref "AWS::StackName"
+			  forwarderArn: "arn:aws:lambda:<REGION>:<ACCOUNT-ID>:function:datadog-forwarder"
   ```
-  For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1].
-4. Redeploy your serverless application.
+  Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
+
+2. Redeploy your serverless application.
 
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-{{% /tab %}} --->
-{{% tab "AWS Console" %}}
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+
+<div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
+
+### Deploy the Datadog CloudFormation Macro
+
+Use the [Datadog CloudFormation macro][1] to ingest traces from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the macro, follow these steps:
+
+1. Clone the Datadog CloudFormation macro repository in your local environment:
+
+    ```
+    git clone https://github.com/DataDog/datadog-cloudformation-macro.git
+    ```
+
+2. Install the macro and it's dependencies:
+
+    ```
+    yarn install # Yarn users
+    npm install  # NPM users
+    ```
+
+3. Run the build script:
+
+    ```
+    yarn build    # Yarn users
+    npm run build # NPM users
+    ```
+
+Deploy the macro to the same region as your Lambda functions. You need to deploy the macro in every region where you are monitoring Lambda functions.
+
+4. You will need an S3 bucket to store the CloudFormation artifacts for the macro. If you don't have one already, you can create one with:
+
+    ```bash
+      aws s3 mb s3://<bucket name>
+    ```
+
+5. Package the provided CloudFormation template (`macro_template.yml`). This includes a Lambda function and a CloudFormation macro resource. The provided template uses the AWS Serverless Application Model (SAM), so it must be transformed before deployment:
+
+    ```bash
+    aws cloudformation package \
+        --template-file macro_template.yml \
+        --s3-bucket <your bucket name here> \
+        --output-template-file packaged.template
+    ```
+
+6. Deploy the packaged CloudFormation template to a CloudFormation stack:
+
+    ```bash
+    aws cloudformation deploy \
+        --stack-name datadog-cfn-macro \
+        --template-file packaged.template \
+        --capabilities CAPABILITY_IAM
+    ```
+
+The macro is now deployed and ready to use.
 
 ### Install the Datadog Lambda Library
 
-The Datadog Lambda Library can be imported as a layer. Its ARN includes a region, language runtime, and version. Construct yours in the following format:
+Use the Datadog CloudFormation macro to ingest traces, logs, and enhanced metrics from your application without any code instrumentation. The macro automatically attaches the Datadog Lambda Library for Node.js and Python to your functions using layers. At deploy time, it generates new handler functions that wrap your existing functions and initializes the Lambda Library.
+
+To install the Datadog Lambda Library with the CloudFormation macro, follow these steps:
+
+1. Add a `CfnMapping` to your `Stack` object in your AWS CDK app:
+  ```typescript
+      import * as cdk from "@aws-cdk/core";
+
+      class CdkStack extends cdk.Stack {
+        constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+          super(scope, id, props);
+          this.addTransform("DatadogCfnMacro");
+
+          new cdk.CfnMapping(this, "Datadog", {
+            mapping: {
+              Parameters: {
+                forwarderArn: "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder",
+                stackName: this.stackName,
+                enableDDTracing: true,
+                flushMetricsToLogs: true,
+              },
+            },
+          });
+        }
+      }
+  ```
+    Find your Datadog Forwarder ARN in the [AWS Console][2]. For more information on installing the Forwarder, see the [official documentation][3].
+
+2. Redeploy your serverless application.
+
+
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+{{% /tab %}}
+{{% tab "Custom" %}}
+
+### Install the Datadog Lambda Library
+
+The Datadog Lambda Library can be imported as a layer or JavaScript package.
+
+The minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
+
+#### Using the Layer
+
+[Configure the layers][1] for your Lambda function using the ARN in the following format.
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Node8-10`, `Node10-x`, and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:25
 ```
 
-The Python Datadog Lambda Library supports Node8-10, Node10-x, Node12-x. For more information, see the [latest release][1].
-
-To install the Datadog Lambda Library:
-
-1. Navigate to the Lambda function to which you want to add the layer in your AWS console.
-2. Click on **Layers** on the main page of your function.
-3. Scroll down, and click on **Add a Layer**.
-4. Select the option to *Provide a layer version ARN*.
-5. Enter the Datadog Lambda Library ARN from the example above.
-6. Navigate to the Environment Variables section of your function and add a new `DD_FLUSH_TO_LOG` variable set to `true`.
-
-These steps need to be repeated for every function you wish to trace.
-
-### Instrument your code
-
-Instrument your functions to ingest traces into Datadog:
-
-```
-const { datadog } = require('datadog-lambda-js');
-const tracer = require('dd-trace').init(); // Any manual tracer config goes here.
-
-// This function will be wrapped in a span
-const longCalculation = tracer.wrap('calculation-long-number', () => {
-    // An expensive calculation goes here
-});
-
-// This function will also be wrapped in a span
-module.exports.hello = datadog((event, context, callback) => {
-    longCalculation();
-
-    callback(null, {
-        statusCode: 200,
-        body: 'Hello from serverless!'
-    });
-});
-```
-
-### Subscribe the Forwarder to log groups
-
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
-
-For more information on the Forwarder ARN, or to install the forwarder see the [documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
-
-1. To start, navigate to your AWS Dashboard for the Datadog Forwarder. Then, manually add a function trigger.
-2. Configure the trigger to be linked to your function’s CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-
-The Datadog Forwarder will now send enhanced metrics and traces from your function to Datadog.
-
-
-[1]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-{{% /tab %}}
-{{% tab "Other" %}}
-
-### Install the Datadog Lambda Library
-
-The Datadog Lambda Library can be installed using NPM or Yarn by running one the following commands:
+#### Using the Package
 
 **NPM**:
 
 ```
-npm install datadog-lambda-js
+npm install --save datadog-lambda-js
 ```
 
 **Yarn**:
@@ -159,46 +253,62 @@ npm install datadog-lambda-js
 yarn add datadog-lambda-js
 ```
 
-Then, using the AWS Console or the AWS CLI, add a new `DD_FLUSH_TO_LOG` environment variable set to `true`. This step needs to be repeated for every function you wish to trace.
+See the [latest release][3].
 
-### Instrument your code
+### Configure the Function
 
-Instrument your functions to ingest traces into Datadog:
+1. Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
+5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-```
-const { datadog } = require('datadog-lambda-js');
-const tracer = require('dd-trace').init(); // Any manual tracer config goes here.
+### Subscribe the Datadog Forwarder to the Log Groups
 
-// This function will be wrapped in a span
-const longCalculation = tracer.wrap('calculation-long-number', () => {
-    // An expensive calculation goes here
-});
+You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
-// This function will also be wrapped in a span
-module.exports.hello = datadog((event, context, callback) => {
-    longCalculation();
-
-    callback(null, {
-        statusCode: 200,
-        body: 'Hello from serverless!'
-    });
-});
-```
-
-### Subscribe the Forwarder to log groups
-
-You need the Datadog Forwarder to subscribe to each of your function’s log groups to send traces and enhanced metrics to Datadog.
-
-You can quickly verify that you’ve installed the Datadog Forwarder on the [AWS Forwarder page][1] For more information on the Forwarder ARN, or to install the forwarder see the [official CloudFormation documentation][1]. Make sure the Datadog Forwarder is in the same AWS region as the Lambda functions you are monitoring.
+1. [Install the Datadog Forwarder if you haven't][4].
+2. [Ensure the option DdFetchLambdaTags is enabled][5].
+3. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
 
-[1]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
+[3]: https://www.npmjs.com/package/datadog-lambda-js
+[4]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-## Results
+## Explore Datadog Serverless Monitoring
 
-Now you can view your metrics, logs, and traces on the [Serverless page][2].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless page][2]. If you would like to submit a custom metric or manually instrument a function, see the sample code below:
+
+```javascript
+const { sendDistributionMetric } = require("datadog-lambda-js");
+const tracer = require("dd-trace");
+
+// This emits a span named "sleep"
+const sleep = tracer.wrap("sleep", (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+});
+
+exports.handler = async (event) => {
+  await sleep(1000);
+  sendDistributionMetric(
+    "coffee_house.order_value", // metric name
+    12.45, // metric Value
+    "product:latte", // tag
+    "order:online", // another tag
+  );
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify("Hello from serverless!"),
+  };
+  return response;
+};
+```
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://app.datadoghq.com/functions
