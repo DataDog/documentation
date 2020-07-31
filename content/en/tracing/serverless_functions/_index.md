@@ -8,7 +8,7 @@ further_reading:
 ---
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
 
-In hybrid architectures, Serverless functions can form an important core of requests your application processes. Including these functions in your Distributed Traces can be critical for detecting performance bottlenecks and service outages in your distributed systems.
+In hybrid architectures, serverless functions are a key part of your application. Including these functions in your Distributed Traces can be critical for detecting performance bottlenecks and service outages in your distributed systems.
 
 ## Choose your Tracing Library
 
@@ -18,23 +18,23 @@ Depending on your language and configuration, choose between using the Datadog L
 
 **Note:** If you are tracing across lambda functions and hosts, you will need to use **both** Datadog APM and AWS X-Ray.
 
-## Enable Datadog APM
+## Recommended: Enable Datadog APM
 
-Instructions for enabling Datadog APM on your lambda functions are contained within the [Serverless][1] section of our documentation.  You will also need to [install the AWS integration][2].
+Instructions for enabling Datadog APM on your AWS Lambda functions are contained within the [Serverless][1] section of our documentation. You will also need to [install the AWS integration][2].
 
 ## Enable AWS X-Ray
 
-Instructions for enabling AWS X-Ray on your lambda functions are contained within the [AWS X-Ray Tracing][3] section of our documentation.  You will also need to [install the AWS integration][2].
+Instructions for enabling AWS X-Ray on your lambda functions are contained within the [AWS X-Ray Tracing][3] section of our documentation. You will also need to [install the AWS integration][2].
 
 ## Augment AWS X-Ray Tracing with Datadog APM
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-There are some scenarios in which AWS X-Ray Tracing will be used side-by-side with Datadog APM.  Note that this will have an impact on your bill, and if you are unsure whether to use Datadog APM or AWS X-Ray, please reach out to [our support team][4] to discuss, or read about the [differences](#choose-your-Tracing-Library)
+There are some scenarios in which AWS X-Ray Tracing will be used side-by-side with Datadog APM.  Note that this will have an impact on your bill, and if you are unsure whether to use Datadog APM or AWS X-Ray, please reach out to [our support team][4] to discuss, or read about the [differences](#choose-your-Tracing-Library).
 
 ### Tracing in a serverless-first environment
 
-AWS X-ray is both a backend AWS service and a set of client libraries. The service gives you an Invocation span for your lambda functions and traces across api gateways and message queues.
+AWS X-Ray is both a backend AWS service and a set of client libraries. The service gives you an Invocation span for your AWS Lambda functions and traces across Amazon API Gateways and message queues.
 
 The client libraries trace your integrations in your code. If both of these are important to trace and visualize in your flame graphs, follow the below two steps.
 
@@ -54,7 +54,7 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 ### Organizing your Serverless infrastructure with tags
 
-Any [tag][7] applied to your Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
+Any [tag][7] applied to your AWS Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
 
 Tags are especially powerful for consistency across the Datadog platform, which has [first-class support][8] for the `env` and `service` tags.
 
@@ -64,7 +64,7 @@ Tags are especially powerful for consistency across the Datadog platform, which 
 
 Use `env` to separate out your staging, development, and production environments. This works for any kind of infrastructure, not just for your serverless functions. As an example, you could tag your production EU Lambda functions with `env:prod-eu`.
 
-By default, Lambda functions are tagged with `env:none` in Datadog. Add your own tag to override this.
+By default, AWS Lambda functions are tagged with `env:none` in Datadog. Add your own tag to override this.
 
 #### The service tag
 
