@@ -59,8 +59,8 @@ Your DNS metrics are displayed through the graphs and the associated table.
 **Note:** The default collection interval is five minutes and retention is seven days.
 The following DNS metrics are available:
 
-| Metric                    |  Description                                                                                                                           |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Metric                    |  Description                                                                                                                          |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------|
 | **DNS Requests**          | The number of DNS requests made from the source
 |
 | **DNS Requests/ Second**  | The rate of DNS requests made by the source
