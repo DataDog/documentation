@@ -26,15 +26,27 @@ Instructions for enabling Datadog APM on your lambda functions are contained wit
 
 Instructions for enabling AWS X-Ray on your lambda functions are contained within the [AWS X-Ray Tracing][3] section of our documentation.  You will also need to [install the AWS integration][2].
 
-## Tracing across AWS Lambda and hosts
-
-When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces. This means that your traces will show the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+## Augment AWS X-Ray Tracing with Datadog APM
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="architecture diagram for tracing AWS Lambda with Datadog" >}}
 
+There are some scenarios in which AWS X-Ray Tracing will be used side-by-side with Datadog APM.  Note that this will have an impact on your bill, and if you are unsure whether to use Datadog APM or AWS X-Ray, please reach out to [our support team][4] to discuss, or read about the [differences](#choose-your-Tracing-Library)
+
+### Tracing in a serverless-first environment
+
+AWS X-ray is both a backend AWS service and a set of client libraries. The service gives you an Invocation span for your lambda functions and traces across api gateways and message queues.
+
+The client libraries trace your integrations in your code. If both of these are important to trace and visualize in your flame graphs, follow the below two steps.
+
 1. Enable the [AWS X-Ray integration][3] for tracing your Lambda functions.
-2. [Set up Datadog APM][4] on your Lambda functions.
-3. [Set up Datadog APM][5] on your hosts and container-based infrastructure.
+2. [Set up Datadog APM][5] on your Lambda functions.
+
+### Tracing across AWS Lambda and hosts
+
+When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces. This means that your traces will show the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+
+1. Enable the [AWS X-Ray integration][3] for tracing your Lambda functions.
+2. [Set up Datadog APM][6] on your hosts and container-based infrastructure.
 
 **Note**: For X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the [same `env` tag](#the-env-tag).
 
@@ -42,9 +54,9 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 ### Organizing your Serverless infrastructure with tags
 
-Any [tag][6] applied to your Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
+Any [tag][7] applied to your Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
 
-Tags are especially powerful for consistency across the Datadog platform, which has [first-class support][7] for the `env` and `service` tags.
+Tags are especially powerful for consistency across the Datadog platform, which has [first-class support][8] for the `env` and `service` tags.
 
 **Note**: If you are tracing with Datadog APM, set the parameter `DdFetchLambdaTags` to `true` on the forwarder CloudFormation stack to ensure your traces are tagged with the resource tags on the originating Lambda function. Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
 
@@ -56,7 +68,7 @@ By default, Lambda functions are tagged with `env:none` in Datadog. Add your own
 
 #### The service tag
 
-Add the `service` [tag][8] in order to group related Lambda functions into a [service][9]. The [Service Map][8] and [Services List][10] use this tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map.
+Add the `service` [tag][9] in order to group related Lambda functions into a [service][10]. The [Service Map][9] and [Services List][11] use this tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map.
 
 By default, each Lambda function is treated as its own `service`. Add your own tag to override this.
 
@@ -68,10 +80,11 @@ By default, each Lambda function is treated as its own `service`. Add your own t
 [1]: /serverless/installation
 [2]: integrations/amazon_web_services/#setup
 [3]: /tracing/serverless-functions/enable_aws_xray/
-[4]: /serverless/
-[5]: /tracing/send_traces/
-[6]: /getting_stared/tagging/
-[7]: /getting_started/tagging/unified_service_tagging
-[8]: /tracing/visualization/services_map/#the-service-tag
-[9]: /tracing/visualization/#services
-[10]: /tracing/visualization/services_list/
+[4]: /help
+[5]: /serverless/
+[6]: /tracing/send_traces/
+[7]: /getting_stared/tagging/
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /tracing/visualization/services_map/#the-service-tag
+[10]: /tracing/visualization/#services
+[11]: /tracing/visualization/services_list/
