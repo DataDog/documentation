@@ -16,7 +16,7 @@ further_reading:
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodisocovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodiscovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
