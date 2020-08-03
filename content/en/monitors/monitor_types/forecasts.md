@@ -100,7 +100,27 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-To create forecast monitors programmatically, see the [Datadog API reference][7]. Datadog recommends [exporting a monitor's JSON][8] to build the query for the API.
+To create forecast monitors programmatically, see the [Datadog API reference][7]. Datadog **strongly recommends** [exporting a monitor's JSON][8] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+
+Forecast monitors are managed using the [same API][9] as other monitors, but the contents of the `query` property deserves further explanation.
+
+The `query` property in the request body should contain a query string in the following format:
+
+```text
+<aggregator>(<query_window>):forecast(<metric_query>, '<algorithm>', <deviations>, interval=<interval>[, history='<history>'][, model='<model>'][, seasonality='<seasonality>']) <comparator> <threshold>
+```
+
+* `aggregator`: `min` if the alert should trigger when the forecast goes below the threshold, and `max` if the alert should trigger when the forecast goes above the threshold 
+* `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
+* `metric_query`: a standard Datadog metric query (e.g., `min:system.disk.free{service:database,device:/data}by{host}`)
+* `algorithm`: `linear` or `seasonal`
+* `deviations`: a number greater than or equal to 1; controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive
+* `interval`: a positive integer representing the number of seconds in the rollup interval
+* `history`: a string representing the amount past data that should be used when making the forecast (e.g., `1w`, `3d`); this parameter is only for use with the `linear` algorithm
+* `model`: `default`, `simple`, or `reactive`; this parameter is only for use with the `linear` algorithm
+* `seasonality`: `hourly`, `daily`, or `weekly`; this parameter is only for use with the `seasonal` algorithm
+* `comparator`: `<=` to alert when the forecast goes below the threshold; `>=` to alert when the forecast goes above the threshold
+* `threshold`: a number; a critical alert will trigger when the confidence bounds around the forecast reach this threshold
 
 ## Troubleshooting
 
@@ -119,3 +139,4 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 [6]: /monitors/notifications/
 [7]: /api/v1/monitors/#create-a-monitor
 [8]: /monitors/monitor_status/#settings
+[9]: /api/v1/monitors/
