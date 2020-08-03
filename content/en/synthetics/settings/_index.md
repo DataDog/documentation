@@ -28,7 +28,7 @@ Only [Admin and Standard users][3] can access Synthetic Monitoring `Settings` pa
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the [**Global Variables** tab of your **Settings** page][6], and click **New Global Variable** in the upper right corner of your page.
+Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the [Global Variables][6] tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
 {{< tabs >}}
