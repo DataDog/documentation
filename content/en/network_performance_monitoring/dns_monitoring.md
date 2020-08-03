@@ -23,7 +23,7 @@ further_reading:
 
 DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
 
-* Which pods or services are making DNS requests, and to which servers
+* The pods or services making DNS requests and the servers receiving those requests.
 * Which endpoints are making the most requests, or making requests at the highest rate
 * When a DNS server’s response time to requests has gradually or suddenly increased
 * Which DNS servers have a high error rate, and what kind of errors they they are emitting
