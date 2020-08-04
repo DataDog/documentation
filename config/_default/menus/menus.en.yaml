@@ -740,6 +740,11 @@ main:
     parent: slos
     identifier: slos_metric
     weight: 702
+  - name: Error Budget Monitors
+    url: monitors/service_level_objectives/error_budget/
+    parent: slos
+    identifier: error_budget
+    weight: 703
   - name: Guides
     url: monitors/guide/
     weight: 100
