@@ -60,7 +60,7 @@ Use the New Incident modal to assemble your team and notify them. The graph from
 
 #### 3. Communicate and begin troubleshooting
 
-The Datadog Slack integration automatically creates a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
+If you have the [Datadog Slack app][2] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
 
 {{< img src="monitors/incidents/workflow-3-slack.png" alt="Communicate"  style="width:80%;">}}
 
@@ -79,3 +79,4 @@ Create a postmortem with notebooks, look back on exactly what went wrong, and ad
 
 
 [1]: https://app.datadoghq.com/incidents
+[2]: /integrations/slack
