@@ -2,7 +2,6 @@
 title: Error Budget Monitors
 kind: documentation
 description: "Use Monitors to define the Service Level Objective"
-beta: true
 ---
 
 <div class="alert alert-warning">
