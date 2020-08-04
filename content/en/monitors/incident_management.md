@@ -5,6 +5,8 @@ disable_toc: true
 description: Create and manage incidents
 ---
 
+{{< img src="monitors/incidents/incidents-top.png" alt="Incident Management"  style="width:80%;">}}
+
 ## Overview
 
 Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents. 
