@@ -60,4 +60,10 @@ The lower part of the Issue Panel gives you the ability to __navigate error samp
 - Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
 - Information about the user such as the browser or the OS with the related versions that were used when the error occurred.
 
+## Monitor your issues
+
+The __very first time issues are discovered is a critical moment__ as it gives you the chance to proactively identify and fix the ones that can become critical in the near future. Error Tracking generates a [Datadog event](/events) whenever an issue is first seen in a given __service__ and __environment__ and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors](/monitors/monitor_types/event).
+
+Each event generated is tagged with the __fingerprint__, the __service__ and the __environment__ so that you have a fine-grained control over issues you want to be alerted for.
+
 
