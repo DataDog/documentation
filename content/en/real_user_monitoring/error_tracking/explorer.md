@@ -21,7 +21,7 @@ further_reading:
 
 ## Explore your issues
 
-The Error Tracking Explorer allows you to explore all your different issues: an issue is a __group of similar errors related to the same bug__. We compute a fingerprint for each error using some of its attributes such as the __error type__, the __error message__ or the __stack trace__. __Errors with the same fingerprint are grouped together within the same issue.__ 
+The Error Tracking Explorer allows you to explore all your different __issues__: an __issue__ is a group of similar errors related to the same bug. We compute a __fingerprint__ for each error using some of its attributes such as the __error type__, the __error message__ or the __stack trace__. Errors with the same __fingerprint__ are grouped together within the same __issue__.
 
 Each item listed in the explorer is an issue and contains high-level information about it:
 
@@ -59,9 +59,5 @@ The lower part of the Issue Panel gives you the ability to __navigate error samp
 - The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
 - Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
 - Information about the user such as the browser or the OS with the related versions that were used when the error occurred.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 
