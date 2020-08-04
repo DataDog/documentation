@@ -91,7 +91,7 @@ Looking at the JSON, the query can be broken out by space aggregation, metric na
 
 * **Scope** is the set of tags used to choose time series for the query.
 * **Grouping** is the set of tags over which to apply space aggregation.
-* **Time aggregation** is done implicitly, but can be set manually with the rollup function:
+* **Space aggregation** is done implicitly, but can be set manually with the rollup function:
 
 {{< img src="metrics/introduction/color-query2.png" alt="Query explained"  style="width:70%;">}}
 
