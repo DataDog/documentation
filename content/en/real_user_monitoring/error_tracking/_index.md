@@ -35,14 +35,14 @@ __Error Tracking__ processes for now __errors collected from the browser by the 
 
 For __Error Tracking__ to properly work:
 
-- Download the `v1.11.5` version and onwards of the [RUM SDK](https://www.npmjs.com/package/@datadog/browser-rum).
+- Download the `v1.11.5` version and onwards of the [RUM Browser SDK](https://www.npmjs.com/package/@datadog/browser-rum).
 - Configure the __version__, the __environment__ and the __service__ when [initializing your SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters).
 
 ### Upload mapping files
 
-The source code of some applications is __obfuscated or minified when deployed to production for performance optimization and security concerns__. The consequence is that stack traces of errors fired from those applications are also obfuscated making the __troubleshooting process harder__: they cannot be used to understand which file and which line of code are responsible for a given error.
+The source code of some applications is __obfuscated or minified__ when deployed to production for performance optimization and security concerns. The consequence is that stack traces of errors fired from those applications are also obfuscated making the __troubleshooting process harder__: they cannot be used to understand which file and which line of code are responsible for a given error. 
 
-__Securely upload your source maps to access deobfuscated stack traces within Datadog.__
+__Datadog allows you to securely upload your source maps to deobfuscate your stack traces.__
 
 #### Javascript source maps
 
