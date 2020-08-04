@@ -1,0 +1,81 @@
+---
+title: Incident Management
+kind: documentation
+disable_toc: true
+description: Create and manage incidents
+---
+
+## Overview
+
+Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents. 
+
+In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
+
+* Something is happening that will affect customers.
+* Something is happening that you need help with.
+* You are unsure whether you should call an incident.
+
+## Usage
+
+Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page for a feed of all ongoing incidents.
+
+### Creating an incident
+
+You can declare an incident directly from a graph. You can also go to the upper right hand side of the Incidents page and click on “New Incident”. The following dialog box appears.
+
+{{< img src="monitors/incidents/create-1.png" alt="New Incident"  style="width:80%;">}}
+
+**Severity**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If the severity of your incident is unknown, select UNKNOWN.
+
+* SEV-1: Critical impact
+* SEV-2: High impact
+* SEV-3: Moderate impact
+* SEV-4: Low impact
+* SEV-5: Informational
+* UNKNOWN: Unknown
+
+**Title**: Give your incident a descriptive title.
+
+**Signals**: The reason(s) you are declaring the incident. These can be graphs, logs, or other key visuals.
+
+**Incident commander**: This person is assigned as the leader of the incident investigation.
+
+**Additional notifications**: Notify other teams or people.
+
+Click on “Declare Incident” to finish creating your incident.
+
+### Example workflow
+
+#### 1. Discover an issue
+
+Consider a scenario in which you are looking at a dashboard, and you notice that one particular service is showing an especially high error count. Using the Export button in the upper right of a widget, you can declare an incident.
+
+{{< img src="monitors/incidents/workflow-1-graph.png" alt="From Graph"  style="width:80%;">}}
+
+#### 2. Declare an incident and assemble your team
+
+Use the New Incident modal to assemble your team and notify them. The graph from which you created the incident is automatically attached as a signal. Attach any other signals that would give your team the necessary context to begin resolving this issue. The Slack and PagerDuty integrations enable you to send notifications through those services.
+
+{{< img src="monitors/incidents/workflow-2-modal.png" alt="New Incident"  style="width:80%;">}}
+
+#### 3. Communicate and begin troubleshooting
+
+The Datadog Slack integration automatically creates a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
+
+{{< img src="monitors/incidents/workflow-3-slack.png" alt="Communicate"  style="width:80%;">}}
+
+#### 4. Update incident status
+
+After resolving the issue, update the incident. Set the status to "Stable" to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers.
+
+{{< img src="monitors/incidents/workflow-4-update.png" alt="Update Incident"  style="width:80%;">}}
+
+#### 5. Create a postmortem
+
+Create a postmortem with notebooks, look back on exactly what went wrong, and add follow-up tasks.
+
+{{< img src="monitors/incidents/workflow-5-postmortem.png" alt="Postmortem"  style="width:80%;">}}
+
+
+
+[1]: https://app.datadoghq.com/incidents
