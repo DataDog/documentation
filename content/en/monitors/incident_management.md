@@ -56,7 +56,7 @@ Consider a scenario in which you are looking at a dashboard, and you notice that
 
 Use the New Incident modal to assemble your team and notify them. The graph from which you created the incident is automatically attached as a signal. Attach any other signals that would give your team the necessary context to begin resolving this issue. The Slack and PagerDuty integrations enable you to send notifications through those services.
 
-{{< img src="monitors/incidents/workflow-2-modal.png" alt="New Incident"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-2-modal.png" alt="New Incident"  style="width:60%;">}}
 
 #### 3. Communicate and begin troubleshooting
 
@@ -68,13 +68,13 @@ The Datadog Slack integration automatically creates a new channel dedicated to t
 
 After resolving the issue, update the incident. Set the status to "Stable" to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers.
 
-{{< img src="monitors/incidents/workflow-4-update.png" alt="Update Incident"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-4-update.png" alt="Update Incident"  style="width:60%;">}}
 
 #### 5. Create a postmortem
 
 Create a postmortem with notebooks, look back on exactly what went wrong, and add follow-up tasks.
 
-{{< img src="monitors/incidents/workflow-5-postmortem.png" alt="Postmortem"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-5-postmortem.png" alt="Postmortem"  style="width:60%;">}}
 
 
 
