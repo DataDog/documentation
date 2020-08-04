@@ -48,8 +48,8 @@ __Datadog allows you to securely upload your source maps to deobfuscate your sta
 
 Source maps are mapping files generated when minifying Javascript source code. The __Datadog CLI__ can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps along with their related minified files. Upload your source maps directly from your CI pipeline:
 
-1. Add `@datadog/datadog-ci` to your `package.json` file (you must use the `v0.5.2` version and onwards of the CLI)
-2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`
+1. Add `@datadog/datadog-ci` to your `package.json` file, you must use the `v0.5.2` version and onwards of the CLI.
+2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
    ```console
    datadog-ci sourcemaps upload /path/to/build/directory \
