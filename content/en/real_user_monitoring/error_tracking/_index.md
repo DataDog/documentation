@@ -35,8 +35,8 @@ __Error Tracking__ processes for now __errors collected from the browser by the 
 
 For __Error Tracking__ to properly work:
 
-- Set the __version__, the __environment__ and the __service__ when [initializing the RUM Browser SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters).
 - Download the `v1.11.5` version and onwards of the [RUM SDK](https://www.npmjs.com/package/@datadog/browser-rum).
+- Configure the __version__, the __environment__ and the __service__ when [initializing your SDK](/real_user_monitoring/installation/?tab=us#initialization-parameters).
 
 ### Upload mapping files
 
