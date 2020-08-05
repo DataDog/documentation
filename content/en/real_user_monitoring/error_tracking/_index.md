@@ -13,6 +13,12 @@ further_reading:
 
 {{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
 
+{{< site-region region="eu" >}}
+
+<div class="alert alert-warning"> The EU region is not yet available. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
+
+{{< /site-region >}}
+
 ## What is Error Tracking?
 
 Datadog collects a lot of errors. It's critical to the health of your system to monitor these errors, but there can be so many individual error events that it’s hard to identify which ones matter the most and should be fixed first. 

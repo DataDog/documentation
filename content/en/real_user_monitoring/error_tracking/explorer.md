@@ -6,6 +6,12 @@ beta: true
 
 {{< img src="real_user_monitoring/etracking_explorer.png" alt="Error Tracking Explorer"  >}}
 
+{{< site-region region="eu" >}}
+
+<div class="alert alert-warning"> The EU region is not yet available. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
+
+{{< /site-region >}}
+
 ## Explore your issues
 
 The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
