@@ -24,7 +24,7 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 | Java    |  0.59+  |
 | .NET | 1.18.2+  |
 | PHP | 0.47.0+  |
-| Go | 1.26.0 (once available)  |
+| Go | 1.26.0+  |
 | NodeJS | 0.23.0+  |
 | Python | 0.41 (once available)  |
 | Ruby | 0.38+  |
