@@ -84,11 +84,11 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 | `Active` to `Resolved` to `Completed`, `Active` to `Completed` to `Resolved` | Unchanged |
 | `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
-{{< img src="monitors/incidents/workflow-4-update-1.png" alt="Update Incident"  style="width:60%;">}}
+{{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
 
 #### 5. Follow up and learn from the incident
 
-Create a postmortem with [notebooks][5], look back on exactly what went wrong, and add follow-up tasks.
+Create a postmortem with [notebooks][5], look back on exactly what went wrong, and add follow-up tasks. Notebooks support live editing, so several people can work on a postmortem or other document at the same time.
 
 {{< img src="monitors/incidents/workflow-5-postmortem-1.png" alt="Postmortem"  style="width:60%;">}}
 
