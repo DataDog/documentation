@@ -25,7 +25,7 @@ Error Tracking makes it easier to monitor these errors by:
 
 ## Getting started
 
-Error Tracking processes errors collected from the browser by the RUM SDK (errors with [source origin][1].
+Error Tracking processes errors collected from the browser by the RUM SDK (errors with [source origin][1]).
 
 To quickly get started with error tracking:
 
