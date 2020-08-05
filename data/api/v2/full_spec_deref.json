@@ -14003,7 +14003,7 @@
           },
           "403": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
@@ -16172,7 +16172,7 @@
           },
           "400": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
@@ -16197,7 +16197,7 @@
           },
           "403": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
@@ -16424,7 +16424,7 @@
           },
           "403": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
@@ -22124,7 +22124,7 @@
           },
           "400": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
@@ -22149,7 +22149,7 @@
           },
           "403": {
             "content": {
-              "applcation/json": {
+              "application/json": {
                 "schema": {
                   "description": "API error response.",
                   "properties": {
