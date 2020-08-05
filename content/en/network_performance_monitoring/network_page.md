@@ -135,6 +135,22 @@ Select any row from the data table to see associated logs, traces, and processes
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Flow Details"  style="width:80%;">}}
 
+## Sidepanel
+
+The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to 
+- A spike in traffic volume from a particular port or IP
+- Heavy processes consuming the CPU or memory of the destination endpoint
+- Application errors in code of the source endpoint
+
+{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
+
+### Common Tags
+
+The top of the sidepanel displays common source and destination tags shared by the inspected dependency's most recent connections. You can use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface
+- Granular context such as the container, task, or host to which traffic is flowing, and 
+- Wider context such as the availability zone, cloud provider account, or deployment in which the service runs,
+so you can more quickly pinpoint the root cause. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
