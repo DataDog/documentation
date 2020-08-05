@@ -62,7 +62,7 @@ You can assign or remove Datadog roles based on a user's SAML-assigned attribute
 When a user logs in who has the specified identity provider attribute, they will automatically be assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they will also lose access to the role (unless another mapping adds it). 
 
 <div class="alert alert-warning">
-  <b>Important:</b> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions. 
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions. 
 </div>
 
 You can make changes to a mapping by clicking the pencil icon, or remove it by clicking the garbage icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
