@@ -6,11 +6,11 @@ aliases:
   - /fr/guides/markdown/
   - /fr/graphing/event_stream/
 further_reading:
-  - link: '/api/#evenements'
+  - link: /api/v1/events/
     tag: Documentation
     text: API d'événements Datadog
 ---
-Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (dev, op et responsables de la sécurité). Consultez la documentation consacrée au développeur pour en savoir plus sur l'[envoi d'événements][1] à Datadog.
+Un événement représente n'importe quelle activité pouvant s'avérer pertinente pour les équipes d'ingénierie (devs, ops et responsables de la sécurité). Consultez la documentation consacrée aux développeurs pour en savoir plus sur l'[envoi d'événements][1] à Datadog.
 
 ## Flux d'événements
 

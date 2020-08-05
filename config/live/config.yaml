@@ -3,26 +3,34 @@ buildfuture: false
 builddrafts: false
 enableGitInfo: true
 
-deployment: 
+deployment:
+    order:
+      - ".css$"
+      - ".js$"
+      - ".jpg$"
+      - ".png$"
+      - ".gif$"
+      - ".mp4$"
 
-    targets: 
+    targets:
     - name: "live"
       URL: "s3://datadog-docs-live-hugo?region=us-east-1"
-    #   cloudFrontDistributionID: E2B2OODXRYOXSA
+      exclude: "**.{go,java,sh,py,rb}"
+      # cloudFrontDistributionID: E2B2OODXRYOXSA
     - name: "liveAssets"
       URL: "s3://origin-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
 
-    # matchers:
-    # - pattern: "^.+\\.(js|css|svg)$"
-    #   cacheControl: "max-age=31536000, no-transform, public"
-    #   gzip: true
-    # - pattern: "^.+\\.(eot|ttf|woff|woff2|ico)$"
-    #   cacheControl: "max-age=31536000, no-transform, public"
-    #   gzip: false
-    # - pattern: "^.+\\.(png|jpg|jpeg|gif|mp4|zip|pdf|txt|csv)$"
-    #   cacheControl: "max-age=31536000, no-transform, public"
-    #   gzip: false
-    # - pattern: "^.+\\.(html|xml|json)$"
-    #   gzip: true
-    #   cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0" 
+    matchers:
+      - pattern: "^.+\\.(js|css|svg)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: true
+      - pattern: "^.+\\.(eot|ttf|woff|woff2|ico)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: false
+      - pattern: "^.+\\.(png|jpg|jpeg|gif|mp4|zip|pdf|txt|csv)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: false
+      - pattern: "^.+\\.(html|xml|json)$"
+        gzip: true
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"

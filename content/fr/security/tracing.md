@@ -39,28 +39,30 @@ Si vous utilisez la version 6, vous pouvez configurer l'Agent de façon à filt
 
 ## Filtrage de ressources
 
-Si vous utilisez la version 6, vous pouvez configurer l'Agent de façon à exclure une ressource spécifique des traces envoyées par l'Agent à l'application Datadog. Pour empêcher l'envoi de ressources spécifiques, utilisez le [paramètre][3] `ignore_resources`. Ce paramètre permet la création d'une liste contenant une ou plusieurs expressions régulières, qui indique à l'Agent de filtrer les traces en fonction du nom de leur ressource.
+Si vous utilisez la version 6, vous pouvez configurer l'Agent de façon à exclure une ressource spécifique des traces envoyées par l'Agent à l'application Datadog. Pour empêcher l'envoi de ressources spécifiques, utilisez le [paramètre][4] `ignore_resources`. Ce paramètre permet la création d'une liste contenant une ou plusieurs expressions régulières, qui indique à l'Agent de filtrer les traces en fonction du nom de leur ressource.
 
 ## Extensions de traceurs
 
 Les bibliothèques de tracing sont conçues pour être extensibles. Vous avez la possibilité d'écrire un post-processeur personnalisé pour intercepter des spans et ensuite les ajuster ou les ignorer en conséquence (par exemple, en fonction d'une expression régulière). Les constructions suivantes peuvent par exemple être utilisées à cette fin :
 
-* Java : [Interface TraceInterceptor][4]
-* Ruby : [Pipeline de processing][5]
-* Python : [Filtrage de traces][6]
+* Java : [Interface TraceInterceptor][5]
+* Ruby : [Pipeline de processing][6]
+* Python : [Filtrage de traces][7]
 
 ## Instrumentation personnalisée
 
-Si vous avez besoin d'une instrumentation personnalisée pour une application spécifique, nous vous conseillons d'utiliser l'API de tracing côté Agent pour sélectionner les spans  spécifiques à inclure les traces envoyées à Datadog. Consultez la [documentation relative à l'API][7] pour en savoir plus.
+Si vous avez besoin d'une instrumentation personnalisée pour une application spécifique, nous vous conseillons d'utiliser l'API de tracing côté Agent pour sélectionner les spans spécifiques à inclure dans les traces envoyées à Datadog. Consultez la [documentation relative à l'API][8] pour en savoir plus.
 
 ### Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /fr/security/
 [2]: /fr/tracing/setup/
 [3]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L472-L490
-[4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
-[5]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
-[6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
-[7]: /fr/api/v1/tracing/
+[4]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L492-L496
+[5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
+[6]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
+[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
+[8]: /fr/api/v1/tracing/

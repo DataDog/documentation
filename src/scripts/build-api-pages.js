@@ -7,7 +7,7 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
-const supportedLangs = ['en', 'fr', 'ja'];
+const supportedLangs = ['en'];
 
 /**
  * Update the menu yaml file with api
@@ -57,7 +57,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
   console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.${language}.yaml`);
   })
 
-  
+
 };
 
 
@@ -151,6 +151,11 @@ const createResources = (apiYaml, deref, apiVersion) => {
 const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
+  contentTypeKeys.forEach((key) => {
+    if(key.startsWith("application/json")) {
+      return content[key].schema;
+    }
+  });
   return content[firstContentType].schema;
 };
 
@@ -307,6 +312,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
 
 /**
  * Takes a value.type string and returns appropriate representation
+ * NOTE: These are types as they come through in the schema
  * e.g array should be []
  * @param {object} valueType - string of type
  * @param {object} format - value type formatting e.g int32, int64, date-time
@@ -328,9 +334,34 @@ const outputValueType = (valueType, format = "") => {
   }
 };
 
+
+/**
+ * Takes a value we are straight up trying to output and determines if we should wrap with quotes or not
+ * NOTE: These are javascript types retrieved through typeof
+ * e.g { key: value } or {key: [value, value]}
+ * @param {any} value can be of any type
+ * @param {boolean} trailingComma if it should have a , on the end. Useful for arrays
+ * returns formatted value for json
+ */
+const outputValue = (value, trailingComma = false) => {
+  const t = typeof value;
+  let out;
+  switch(t) {
+    case "boolean":
+    case "bigint":
+    case "number":
+      out = `${value}`;
+      break;
+    case "string":
+    default:
+      out = `"${value}"`;
+  }
+  return (trailingComma) ? `${out},` : out;
+};
+
 /**
  * Takes a chosen example object and formats it appropriately
- * @param {object} chosenExample - object schema
+ * @param {any} chosenExample - object schema
  * @param {string} inputkey - string key
  * returns formatted string
  */
@@ -341,13 +372,16 @@ const outputExample = (chosenExample, inputkey) => {
       // if array of strings use them
       // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
-        if(typeof item === 'object') {
-          // this needs to change, currently only output 1 level of example array
+        if(item instanceof Array) {
+          // if nested array pass back through
+          ex = `[${outputExample(item, inputkey)}]`;
+        } else if(typeof item === 'object') {
+          // output 1 level of example array
           if(inputkey && inputkey in item) {
-            ex = `"${item[inputkey]}"`;
+            ex = outputValue(item[inputkey]);
           }
         } else {
-          ex += `"${  item  }",`;
+          ex += outputValue(item, true);
           if (Object.is(arr.length - 1, key)) {
             ex = ex.slice(0, -1);
           }
@@ -356,18 +390,15 @@ const outputExample = (chosenExample, inputkey) => {
     } else if(typeof chosenExample === 'object') {
       if(chosenExample.value instanceof Array) {
         chosenExample.value.forEach((item, key, arr) => {
-          ex += `"${item}",`;
+          ex += outputValue(item, true);
           if (Object.is(arr.length - 1, key)) {
             ex = ex.slice(0, -1);
           }
         });
       }
-    } else if (typeof chosenExample === "boolean"){
-        // we don't want quotes on a bool
-        ex = `${chosenExample}`;
-      } else {
-        ex = `"${chosenExample}"`;
-      }
+    } else {
+      ex = outputValue(chosenExample);
+    }
   }
   return ex;
 };
@@ -412,6 +443,8 @@ const getInitialJsonData = (data) => {
       } else if (data.items.properties) {
         initialData = data.items.properties;
       }
+    } else if(data.oneOf && data.oneOf.length > 0) {
+      initialData = data.oneOf[0].properties;
     } else {
       initialData = data.properties;
     }
@@ -645,7 +678,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
-      
+
         // build html
         html += `
         <div class="row ${outerRowClasses}">
@@ -702,10 +735,12 @@ const schemaTable = (tableType, data) => {
       extraClasses = 'd-none';
     }
   } else if(data.additionalProperties) {
-      initialData = {"&lt;any-key&gt;": data.additionalProperties};
-    } else {
-      initialData = data.properties;
-    }
+    initialData = {"&lt;any-key&gt;": data.additionalProperties};
+  } else if(data.oneOf && data.oneOf.length > 0) {
+    initialData = data.oneOf[0].properties;
+  } else {
+    initialData = data.properties;
+  }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
     <div class="row">
@@ -785,4 +820,3 @@ module.exports = {
   outputExample,
   getJsonWrapChars
 };
-

@@ -88,7 +88,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 **Note**: 
 
-* **Log events can be submitted up to 6h in the past and 2h in the future**.
+* **Log events can be submitted up to 18h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
@@ -146,7 +146,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings beginning with **o** or matching **OK** or **Success** (case-insensitive) map to **OK**
+* Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
 **Note**: If multiple log status remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
@@ -274,7 +274,7 @@ Into this log:
 
 Constraints on the tag/attribute name are explained in the [Tagging documentation][5]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Long` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`) 
+If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`) 
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -298,7 +298,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
   "sources": ["<SOURCE_ATTRIBUTE>"],
   "target": "<TARGET_ATTRIBUTE>",
   "target_type": "tag",
-  "target_format": "long",
+  "target_format": "integer",
   "preserve_source": false,
   "override_on_conflict": false
 }
@@ -313,7 +313,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 | `sources`              | Array of Strings | yes      | Array of source attributes or tags                                             |
 | `target`               | String           | yes      | Final attribute or tag name to remap the sources to.                           |
 | `target_type`          | String           | no       | Defines if the target is a log `attribute` or a `tag`, default: `attribute`    |
-| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `double`, default: `auto`. When set to `auto`, no cast is applied.  |
+| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `integer`, default: `auto`. When set to `auto`, no cast is applied.  |
 | `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 

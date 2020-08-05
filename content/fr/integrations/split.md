@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - notification
 creates_events: true
@@ -71,7 +71,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: http://www.split.io
 [2]: http://www.split.io/articles/controlled-rollout
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/ilan/split-integration/split/images/in-split.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/ilan/split-integration/split/images/integrations-datadog.png
+[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/in-split.png
+[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/split/images/integrations-datadog.png
 [5]: https://docs.datadoghq.com/fr/events/
 [6]: https://docs.datadoghq.com/fr/help/

@@ -55,6 +55,16 @@ Find below the list of permissions for the monitor assets:
 | monitors_write    | Ability to change, mute, and delete monitors | false    |
 | monitors_downtime | Ability to set downtimes for your monitors   | false    |
 
+## Security Monitoring
+
+Find below the list of permissions for the Security Monitoring assets:
+
+| Name                             | Description                                         | Scopable |
+| -------------------------------- | --------------------------------------------------- | -------- |
+| security_monitoring_rules_read   | Ability to view detection rules                     | false    |
+| security_monitoring_rules_write  | Ability to create, edit, and delete detection rules | false    |
+| security_monitoring_signals_read | Ability to view security signals                    | false    |
+
 ## Log Management
 
 Find below the list of permissions for the log configuration assets and log data:
@@ -346,8 +356,9 @@ Read access to log data. If granted, other restrictions then apply such as `logs
 **Example**:
 
 * If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
-* If a user is restricted to service:sandbox through one role, and has is restricted to env:staging through another role, then the user can access all env:staging and service:sandbox logs.
+* If a user is restricted to `service:sandbox` through one role, and is restricted to `env:prod` through another role, then the user can access all `env:prod` and `service:sandbox` logs.
 
+{{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}

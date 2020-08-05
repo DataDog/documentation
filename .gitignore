@@ -23,6 +23,7 @@ content/en/agent/basic_agent_usage/saltstack.md
 # Tracing
 content/en/tracing/setup/ruby.md
 content/en/tracing/setup/android.md
+content/en/tracing/setup/ios.md
 
 # Log collection
 content/en/logs/log_collection/android.md
@@ -57,6 +58,9 @@ content/en/security_monitoring/default_rules/*.md
 /logs/*
 *.log
 npm-debug.log*
+
+# serverless
+!content/en/serverless/installation/installing_the_forwarder.md
 
 # Runtime data
 pids

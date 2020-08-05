@@ -48,7 +48,7 @@ Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, 
 
 Le check ActiveMQ de l'Agent est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
 
-Le check recueille des métriques via JMX, un JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][3]. Nous vous conseillons d'utiliser un JVM fourni par Oracle.
+Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][3]. Nous vous conseillons d'utiliser une JVM fournie par Oracle.
 
 ### Configuration
 
@@ -191,7 +191,7 @@ Le check ActiveMQ n'inclut aucun événement.
 ### Checks de service
 
 **activemq.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance ActiveMQ qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance ActiveMQ qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

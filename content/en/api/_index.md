@@ -19,7 +19,7 @@ Before you can use the API to send or view data, you need to [install the Datado
 
 {{< h2 >}}Send data to Datadog{{< /h2 >}}
 
-Once you have the Datadog Agent set up, use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also use the API to send Synthetics, Logs and Traces to Datadog.
+Once you have the Datadog Agent set up, use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also use the API to send Synthetic test data, Logs, and Traces to Datadog.
 
 **Integrations endpoints**
 
@@ -39,7 +39,7 @@ Use these endpoints to post and fetch data to and from other parts of the Datado
 
 - The [metrics][11] endpoints allow you to post [metrics][12] data so it can be graphed on Datadog’s dashboards and query metrics from any time period.
 - The [events][13] endpoints allow you to post and fetch events to and from the [Datadog event stream][14].
-- Use the [Synthetics][15] endpoints to create, start, stop and see [Synthetics tests][16] results.
+- Use the [Synthetic Monitoring][15] endpoints to create, start, stop and see [Synthetic tests][16] results.
 - Use the [Tracing Agent API][17] to send traces to your Datadog Agent, which then forwards them to Datadog.
 
 {{< h2 >}}Visualize your data{{< /h2 >}}

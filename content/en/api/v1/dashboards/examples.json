@@ -71,10 +71,10 @@
               "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "0",
-                "width": "0",
-                "x": "0",
-                "y": "0"
+                "height": 0,
+                "width": 0,
+                "x": 0,
+                "y": 0
               }
             }
           ]
@@ -111,10 +111,10 @@
           {
             "definition": "[object Object]",
             "layout": {
-              "height": "0",
-              "width": "0",
-              "x": "0",
-              "y": "0"
+              "height": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
             }
           }
         ]
@@ -148,10 +148,10 @@
             "definition": "[object Object]",
             "id": "integer",
             "layout": {
-              "height": "0",
-              "width": "0",
-              "x": "0",
-              "y": "0"
+              "height": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
             }
           }
         ]
@@ -227,10 +227,10 @@
               "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "0",
-                "width": "0",
-                "x": "0",
-                "y": "0"
+                "height": 0,
+                "width": 0,
+                "x": 0,
+                "y": 0
               }
             }
           ]
@@ -297,10 +297,10 @@
               "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "0",
-                "width": "0",
-                "x": "0",
-                "y": "0"
+                "height": 0,
+                "width": 0,
+                "x": 0,
+                "y": 0
               }
             }
           ]
@@ -345,10 +345,10 @@
           {
             "definition": "[object Object]",
             "layout": {
-              "height": "0",
-              "width": "0",
-              "x": "0",
-              "y": "0"
+              "height": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
             }
           }
         ]
@@ -382,10 +382,10 @@
             "definition": "[object Object]",
             "id": "integer",
             "layout": {
-              "height": "0",
-              "width": "0",
-              "x": "0",
-              "y": "0"
+              "height": 0,
+              "width": 0,
+              "x": 0,
+              "y": 0
             }
           }
         ]

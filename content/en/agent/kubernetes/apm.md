@@ -47,7 +47,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
  - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`.
 
- - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> stable/datadog`. Don't forget to set the API key in the YAML file. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
+ - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> datadog/datadog`. Don't forget to set the API key in the YAML file. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
@@ -68,7 +68,7 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
      # (...)
     ```
 
-- **If using an old agent version (7.17 or lower)**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
+- **If using an old agent version (7.17 or lower)**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` trace Agent manifest:
 
     ```yaml
      # (...)

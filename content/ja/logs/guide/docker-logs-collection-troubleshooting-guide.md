@@ -163,6 +163,19 @@ Docker のデフォルトのロギングドライバーは json-file であり�
 
 4. [Docker Agent のドキュメント][3]の説明に従って、YAML ファイルをコンテナにマウントする必要があります。Docker コンテナへのログドライバーの設定について詳しくは、[こちらのドキュメント][4]を参照してください。
 
+## Agent は、大量のログ (> 1GB) を保持しているコンテナからログを送信しません
+
+Docker デーモンは、ディスクに大きなログファイルがすでに格納されているコンテナのログを取得しようとしているときに、パフォーマンスの問題が発生する可能性があります。これにより、Datadog Agent が Docker デーモンからコンテナのログを収集しているときに、読み取りタイムアウトが発生する可能性があります。
+
+これが発生すると、Datadog Agent は、30 秒ごとに特定のコンテナに対して `Restarting reader after a read timeout` を含むログを出力し、実際にはメッセージをログに記録している間、そのコンテナからのログの送信を停止します。
+
+デフォルトの読み取りタイムアウトは 30 秒に設定されています。この値を大きくすると、Docker デーモンが Datadog Agent に応答するための時間が長くなります。この値は、`logs_config.docker_client_read_timeout` パラメーターを使用するか、環境変数 `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT` を使用して、`datadog.yaml` で設定できます。この値は秒単位の継続時間です。以下の例では 60 秒に増やしています。
+
+```yaml
+logs_config:
+  docker_client_read_timeout: 60
+```
+
 [1]: /ja/help/
 [2]: /ja/integrations/journald/#setup
 [3]: /ja/agent/docker/?tab=standard#mounting-conf-d

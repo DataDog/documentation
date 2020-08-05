@@ -200,8 +200,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment', array('environment'=>'dev'));
-    $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}
@@ -531,7 +531,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
 {{< /code-block >}}
@@ -591,7 +591,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
+    statsd.histogram('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}

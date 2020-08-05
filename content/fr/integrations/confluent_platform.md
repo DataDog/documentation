@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Confluent Platform Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -57,7 +58,7 @@ Cette intégration recueille des métriques JMX pour les composants suivants :
 
 Le check Confluent Platform est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer sur le serveur du composant Confluent Platform.
 
-**Remarque** : ce check recueille des métriques via JMX, un JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse exécuter [jmxfetch][2]. Nous vous conseillons d'utiliser un JVM fourni par Oracle.
+**Remarque** : ce check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse exécuter [jmxfetch][2]. Nous vous conseillons d'utiliser un JVM fourni par Oracle.
 
 
 ### Configuration

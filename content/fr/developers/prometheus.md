@@ -2,13 +2,13 @@
 title: Écrire un check OpenMetrics personnalisé
 kind: documentation
 further_reading:
-  - link: agent/prometheus
+  - link: /agent/prometheus/
     tag: Documentation
     text: Configurer un check OpenMetrics
-  - link: developers/agent_checks
+  - link: /developers/agent_checks/
     tag: Documentation
     text: Écrire un check custom
-  - link: developers/integrations/
+  - link: /developers/integrations/
     tag: Documentation
     text: Créer une intégration
 aliases:
@@ -65,7 +65,7 @@ instances:
 Tous les checks OpenMetrics héritent de la classe `OpenMetricsBaseCheck` qui se trouve dans `checks/openmetrics_check.py` :
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBasicCheck
+from datadog_checks.base import OpenMetricsBasicCheck
 
 class KubeDNSCheck(OpenMetricsBasicCheck):
 ```
@@ -75,7 +75,7 @@ class KubeDNSCheck(OpenMetricsBasicCheck):
 `NAMESPACE` correspond au préfixe des métriques. Il doit être codé en dur dans la classe de votre check :
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -89,14 +89,14 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 L'objectif du remplacement est de faire en sorte que les métriques envoyées par les checks OpenMetrics ne soient pas considérées comme des [métriques custom][5] :
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
         super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
         self.NAMESPACE = 'kubedns'
         self.metrics_mapper = {
-            #Les métriques ont été renommées par kubedns dans kubernetes 1.6.0
+            # Les métriques s'intitulent kubedns à partir de kubernetes 1.6.0
             'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
             'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
             'kubedns_kubedns_dns_request_count_total': 'request_count',
@@ -131,7 +131,7 @@ Si un check ne parvient pas à se lancer en raison d'une mauvaise configuration 
 Améliorez votre méthode `check ()` avec `CheckException` :
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -142,13 +142,13 @@ def check(self, instance):
 Ensuite, les données sont transmises dès qu'elles sont disponibles :
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
     if endpoint is None:
         raise CheckException("Unable to find prometheus_endpoint in config file.")
-    # Par défaut, nous envoyons les compartiments.
+    # Par défaut, les compartiments sont envoyés.
     if send_buckets is not None and str(send_buckets).lower() == 'false':
         send_buckets = False
     else:
@@ -160,8 +160,8 @@ def check(self, instance):
 ### Synthèse
 
 ```python
-from datadog_checks.errors import CheckException
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base.errors import CheckException
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     """
@@ -172,7 +172,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
         self.NAMESPACE = 'kubedns'
 
         self.metrics_mapper = {
-            # les métriques ont été renommées par kubedns dans kubernetes 1.6.0
+            # Les métriques s'intitulent kubedns à partir de kubernetes 1.6.0
             'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
             'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
             'kubedns_kubedns_dns_request_count_total': 'request_count',
@@ -186,7 +186,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
             raise CheckException("Unable to find prometheus_endpoint in config file.")
 
         send_buckets = instance.get('send_histograms_buckets', True)
-        # Par défaut, nous envoyons les compartiments.
+        # Par défaut, les compartiments sont envoyés.
         if send_buckets is not None and str(send_buckets).lower() == 'false':
             send_buckets = False
         else:
@@ -223,8 +223,8 @@ Voici les types disponibles : `counter`, `gauge`, `summary`, `untyped` et `hist
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /fr/agent/prometheus
+[2]: /fr/agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /fr/agent/agent_checks/#configuration
-[5]: /fr/developers/metrics/custom_metrics
+[5]: /fr/developers/metrics/custom_metrics/
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information

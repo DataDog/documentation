@@ -105,7 +105,7 @@ datadog:
 ```
 
 
-[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -186,6 +186,10 @@ Les processus des conteneurs Kubernetes se voient appliquer les tags suivants :
 - `kube_deployment`
 - `Kube_cluster`
 
+SI vous avez configuré le [tagging de service unifié][4], les tags `env`, `service`, et `version` sont également recueillis automatiquement.
+L'utilisation de ces tags vous permet d'assurer la cohésion des données de l'APM, des logs, des métriques et des processus.
+Veuillez noter que cette configuration s'applique uniquement aux environnements conteneurisés.
+
 ### Filtrage et pivotement
 
 Vous pouvez commencer par appliquer le filtre `role:McNulty-Query`, le service de requête frontal de Datadog, afin d'affiner la recherche. Ensuite, recherchez les processus NGINX maître et faites pivoter le tableau par zone de disponibilité pour vous assurer de la haute disponibilité du service.
@@ -206,7 +210,7 @@ Cet exemple est peut-être moins passionnant qu'on aurait pu l'espérer.
 
 Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles et ainsi mieux comprendre les performances de vos conteneurs.
 
-Pour accéder à l'analyse de nuage de points [dans la page Processes][4], cliquez sur le bouton _Show Summary graph_, puis sélectionnez l'onglet « Scatter Plot » :
+Pour accéder à l'analyse de nuage de points [dans la page Processes][5], cliquez sur le bouton _Show Summary graph_, puis sélectionnez l'onglet « Scatter Plot » :
 
 {{< img src="infrastructure/process/scatterplot_selection.png" alt="sélection de nuage de points"  style="width:60%;">}}
 
@@ -222,7 +226,7 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 
 ## Vue Live Containers enrichie
 
-Tout comme la fonctionnalité Live Processes vous offre une visibilité accrue sur vos déploiements de conteneur, [Live Containers][5] vous permet de visualiser en détail votre conteneur et l'environnement d'orchestration. Lorsque la fonctionnalité Live Processes est activée, l'arborescence des processus pour chaque conteneur est incluse dans le panneau d'inspection de conteneur sur cette page.
+Tout comme la fonctionnalité Live Processes vous offre une visibilité accrue sur vos déploiements de conteneur, les [Live Containers][6] vous permettent de visualiser en détail votre conteneur et l'environnement d'orchestration. Lorsque la fonctionnalité Live Processes est activée, l'arborescence des processus pour chaque conteneur est incluse dans le panneau d'inspection de conteneur sur cette page.
 
 {{< img src="infrastructure/process/containerinspect.png" alt="inspection de conteneur" style="width:80%;">}}
 
@@ -242,6 +246,7 @@ Lorsque vous utilisez activement la fonctionnalité Live Processes, les métriqu
 
 [1]: /fr/agent/
 [2]: /fr/agent/faq/agent-5-process-collection/
-[3]: /fr/tagging/
-[4]: https://app.datadoghq.com/process
-[5]: /fr/infrastructure/livecontainers/
+[3]: /fr/getting_started/tagging/
+[4]: /fr/getting_started/tagging/unified_service_tagging
+[5]: https://app.datadoghq.com/process
+[6]: /fr/infrastructure/livecontainers/

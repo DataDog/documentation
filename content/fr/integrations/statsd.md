@@ -92,7 +92,7 @@ Renvoie `CRITICAL` si le serveur StatsD ne répond pas à la requête de statut 
 
 **statsd.can_connect** :
 
-Renvoie CRITICAL si l'Agent n'est pas capable de recueillir des métriques à propos de StatsD. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à recueillir des métriques à propos de StatsD. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
 

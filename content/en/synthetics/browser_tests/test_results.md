@@ -1,7 +1,7 @@
 ---
 title: Browser Test Results
 kind: documentation
-description: Synthetics browser test results
+description: Synthetic browser test results
 aliases:
  - "/synthetics/apm/browser_tests"
 further_reading:
@@ -43,9 +43,9 @@ Resources can be filtered by resource type. Also, a search can be performed over
 
 ### Traces
 
-The traces panel shows your traces associated with the browser synthetics test. The UI is similar to the APM [Trace View][1] except for the following difference.
+The traces panel shows your traces associated with the browser synthetic test. The UI is similar to the APM [Trace View][1] except for the following difference.
 
-One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (dependent on tracing and whitelisting setup). Use the dropdown to choose the trace to view.
+One browser step can make multiple requests to different URLs/endpoints, which results in several associated traces (depending on your tracing setup and on the URLs you allowed in your [Settings][2]). Use the dropdown to choose the trace to view.
 
 ## Test failure and errors
 
@@ -58,12 +58,13 @@ Common failure reasons include:
 | `Element located but it's invisible` | The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.       |
 | `Cannot locate element`              | The element cannot be found in the HTML.                                                                             |
 | `Select did not have option`         | The specified option is missing from the dropdown menu.                                                              |
-| `Forbidden URL`                      | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][2] for further details. |
-| `General test failure`               | A general error message. [Contact support][2] for further details.                                                   |
+| `Forbidden URL`                      | The test likely encountered a protocol that is not supported. Reach out to [Datadog support][3] for further details. |
+| `General test failure`               | A general error message. [Contact support][3] for further details.                                                   |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/trace/
-[2]: /help/
+[2]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
+[3]: /help/

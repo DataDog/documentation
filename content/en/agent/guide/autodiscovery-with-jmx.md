@@ -16,7 +16,7 @@ further_reading:
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodisocovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodiscovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
@@ -32,7 +32,7 @@ The autodiscovery annotations logic consists in applying the JMX check configura
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.names: >-
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: >-
               '["<INTEGRATION_NAME>"]'
             ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
               '[{"is_jmx": true, "collect_default_metrics": true}]'
@@ -90,7 +90,7 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check.names: >-
+        ad.datadoghq.com/tomcat.check_names: >-
           '["tomcat"]'
         ad.datadoghq.com/tomcat.init_configs: >-
           '[{"is_jmx": true, "collect_default_metrics": true}]'

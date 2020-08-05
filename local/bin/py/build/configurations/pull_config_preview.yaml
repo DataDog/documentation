@@ -167,6 +167,22 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
+  
+  - repo_name: datadog-serverless-functions
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'aws/logs_monitoring/README.md'
+      options:
+        dest_path: '/serverless/installation/'
+        file_name: 'installing_the_forwarder.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
+          title: Installing the Forwarder
+          kind: documentation
+          aliases:
+            - /serverless/troubleshooting/installing_the_forwarder/
 
   - repo_name: datadog-cloudformation-resources
     contents:
@@ -217,7 +233,7 @@
           kind: documentation
           beta: true
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/dd-tracing/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
@@ -249,12 +265,34 @@
               tag: "Documentation"
               text: "Learn how to explore your logs"
 
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/trace_collection.md'
+      options:
+        dest_path: '/tracing/setup/'
+        file_name: 'ios.md'
+        front_matters:
+          title: iOS Trace Collection
+          kind: documentation
+          beta: true
+          description: "Collect traces from your iOS applications."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "tracing/visualization/"
+              tag: "Documentation"
+              text: "Explore your services, resources and traces"
+
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: master
+      branch: main
       globs:
-        - "*.json"
+        - "security-monitoring/*.json"
+        - "security-monitoring/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'
 

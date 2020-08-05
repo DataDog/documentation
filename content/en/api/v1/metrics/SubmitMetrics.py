@@ -3,6 +3,8 @@ import time
 
 options = {
     'api_key': '<DATADOG_API_KEY>'
+    ## EU costumers need to define 'api_host' as below
+    #'api_host': 'https://api.datadoghq.eu/'
 }
 
 initialize(**options)
@@ -13,7 +15,7 @@ future_10s = now + 10
 # Submit a single point with a timestamp of `now`
 api.Metric.send(metric='page.views', points=1000)
 
-# Submit a point with a timestamp (must be ~current)
+# Submit a point with a timestamp (must be current)
 api.Metric.send(metric='my.pair', points=(now, 15))
 
 # Submit multiple points.

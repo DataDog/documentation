@@ -27,12 +27,12 @@ By default, no sampling is applied on the number of collected sessions. To apply
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum';
+import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: 'us',
+    datacenter: Datacenter.US,
     sampleRate: 90,
 });
 ```

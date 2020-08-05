@@ -27,7 +27,9 @@ With these three tags you can:
 
 - Unified service tagging requires setup of the [Datadog Agent][2].
 
-- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] and [Assigning Tags][4] documentation before proceeding to configuration.
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
+
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][4] and [Assigning Tags][5] documentation before proceeding to configuration.
 
 ## Configuration
 
@@ -38,13 +40,13 @@ To begin configuration of unified service tagging, choose your environment:
 
 ### Containerized environment
 
-In containerized environments, `env`, `service`, and `versions` are set through environment variables or standard labels in your Datadog Agent configuration file. Since the agent associates data collected with a specific container, the configuration for these tags can reside within the container's metadata.
+In containerized environments, `env`, `service`, and `version` are set through environment variables or standard labels in your Datadog Agent configuration file. Since the agent associates data collected with a specific container, the configuration for these tags can reside within the container's metadata.
 
 To setup unified service tagging in a containerized environment:
 
-1. Enable [Autodiscovery][5]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
+1. Enable [Autodiscovery][6]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
-2. If you are using [Docker][6], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
+2. If you are using [Docker][7], make sure the Agent can access your container's [Docker socket][8]. This allows the Agent detect the environment variables and map them to the standard tags.
 
 4. Configure your environment based on either full configuration or partial configuration detailed below.
 
@@ -255,17 +257,15 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-<div class="alert alert-warning">Unified service tagging for non-containerized environments is in public beta. Contact <a href="/help/">Datadog Support</a> if you have questions or feedback.</div>
-
 Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][9], [logs][10], and [StatsD metrics][11], you can either:
 
 1. Export the environment variables in the command for your executable:
 
     `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
+2. Or use [Chef][12], [Ansible][13], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -288,7 +288,7 @@ When configuring your traces for unified service tagging:
 
 If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
 
-**Note**: The Java, PHP, and Go Tracer do not currently support configuration of unified service tagging for logs.
+**Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
 {{% /tab %}}
@@ -303,6 +303,57 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 
 [1]: /developers/metrics/
 {{% /tab %}}
+
+{{% tab "System Metrics" %}}
+
+`env` and `service` can also be added to your infrastructure metrics.
+
+The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
+Given that this configuration does not change for each invocation of a service's process, adding `version`
+to the configuration is not recommended.
+
+##### Single service per host
+
+Set the following configuration in the Agent's [main configuration file][1]:
+
+```yaml
+env: <ENV>
+  tags:
+    - service: <SERVICE>
+```
+
+This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
+
+##### Multiple services per host
+
+Set the following configuration in the Agent's [main configuration file][1]:
+
+```yaml
+env: <ENV>
+```
+
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+
+```yaml
+init_config:
+instances:
+    - name: web-app
+      search_string: ["/bin/web-app"]
+      exact_match: false
+      service: web-app
+    - name: nginx
+      search_string: ["nginx"]
+      exact_match: false
+      service: nginx-web-app
+```
+
+**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics
+will be tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended
+to configure the `service` tag only in the configuration of the process check.
+
+[1]: /agent/guide/agent-configuration-files
+[2]: /integrations/process
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
@@ -311,13 +362,14 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 
 [1]: /getting_started/tagging/#defining-tags
 [2]: /getting_started/agent
-[3]: /getting_started/tagging/
-[4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[5]: /getting_started/agent/autodiscovery
-[6]: /agent/docker/integrations/?tab=docker
-[7]: /agent/docker/?tab=standard#optional-collection-agents
-[8]: /getting_started/tracing/
-[9]: /getting_started/logs/
-[10]: /integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
+[3]: /tracing/setup
+[4]: /getting_started/tagging/
+[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /getting_started/agent/autodiscovery
+[7]: /agent/docker/integrations/?tab=docker
+[8]: /agent/docker/?tab=standard#optional-collection-agents
+[9]: /getting_started/tracing/
+[10]: /getting_started/logs/
+[11]: /integrations/statsd/
+[12]: https://www.chef.io/
+[13]: https://www.ansible.com/

@@ -114,7 +114,7 @@ Le check HDFS DataNode n'inclut aucun événement.
 ### Checks de service
 
 **hdfs.datanode.jmx.can_connect** :<br>
-Renvoie `Critical` si l'Agent n'est pas capable de se connecter à l'interface JMX de DataNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, impossibilité de parser la réponse JSON).
+Renvoie `Critical` si l'Agent ne parvient pas à se connecter à l'interface JMX de DataNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, impossibilité de parser la réponse JSON).
 
 ## Dépannage
 
@@ -240,7 +240,7 @@ Le check HDFS NameNode n'inclut aucun événement.
 ### Checks de service
 
 **hdfs.namenode.jmx.can_connect** :<br>
-Renvoie `Critical` si l'Agent n'est pas capable de se connecter à l'interface JMX de NameNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, impossibilité de parser la réponse JSON).
+Renvoie `Critical` si l'Agent ne parvient pas à se connecter à l'interface JMX de NameNode pour une raison quelconque (p. ex, mauvais port fourni, délai d'expiration dépassé, impossibilité de parser la réponse JSON).
 
 ## Dépannage
 

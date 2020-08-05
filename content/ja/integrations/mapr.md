@@ -2,6 +2,7 @@
 assets:
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

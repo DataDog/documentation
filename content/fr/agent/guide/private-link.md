@@ -41,9 +41,9 @@ Pour utiliser PrivateLink, vous devez configurer un endpoint interne dans votre 
 {{% tab "Logs" %}}
 
 | Forwarder | Nom de service des logs Datadog |
-| --------- | ------------------------------- |
+| --------- | ------------------------- |
 | Agent Datadog | `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
-| Lambda ou custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
+| Forwarder Lambda ou forwarder personnalisé | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -85,12 +85,12 @@ Pour transmettre vos métriques à Datadog à l'aide du nouvel endpoint de votre
 1. Mettez à jour le paramètre `dd_url` dans le [fichier de configuration `datadog.yaml` de l'Agent][1] :
 
     ```yaml
-    dd_url: pvtlink.agent.datadoghq.com
+    dd_url: https://pvtlink.agent.datadoghq.com
     ```
 
 2. [Redémarrez votre Agent][2] pour envoyer des métriques à Datadog via AWS PrivateLink.
 
-**Remarque** : si vous utilisez l'Agent de conteneur, définissez plutôt la variable d'environnement `DD_DD_URL="pvtlink.agent.datadoghq.com"`.
+**Remarque** : si vous utilisez l'Agent de conteneur, définissez plutôt la variable d'environnement `DD_DD_URL="https://pvtlink.agent.datadoghq.com"`. Celle-ci doit être configurée sur l'Agent de cluster _et_ sur l'Agent de nœud si vous utilisez l'Agent de cluster pour surveiller un environnement Kubernetes.
 
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -122,15 +122,19 @@ Pour transmettre vos logs à Datadog à l'aide du nouvel endpoint de votre VPC, 
 - `DD_LOGS_CONFIG_USE_HTTP=true`
 - `DD_LOGS_CONFIG_LOGS_DD_URL="pvtlink.logs.datadoghq.com:443"`
 
-**Avec le forwarder Lambda ou un custom forwarder** :
+**Avec le Forwarder Lambda ou un forwarder personnalisé** :
 
 Ajoutez `DD_URL: api-pvtlink.logs.datadoghq.com` à la variable d'environnement de votre [fonction Lambda Datadog][4] pour utiliser le PrivateLink lors de la transmission des logs des services AWS à Datadog.
 
+Par défaut, la clé d'API du forwarder est stockée dans Secrets Manager. L'endpoint de Secrets Manager doit être ajouté au VPC. Suivez les instructions [fournies ici pour ajouter des services AWS à un VPC][5].
+
+Si vous utilisez le modèle CloudFormation pour installer le Forwarder, activez 'DdUsePrivateLink' et définissez au moins un ID de sous-réseau et un groupe de sécurité.
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -139,9 +143,20 @@ Pour envoyer des données à l'API Datadog ou exploiter les données de l'API vi
 {{% /tab %}}
 {{< /tabs >}}
 
+## Utilisation avancée
+
+### Peering inter-régions
+
+Pour acheminer du trafic vers l'endpoint PrivateLink de Datadog sur `us-east-1` à partir d'autres régions, utilisez la fonctionnalité de [peering inter-régions d'Amazon VPC][3]. 
+
+Le peering de VPC inter-régions vous permet de connecter plusieurs VPC répartis sur diverses régions AWS les uns aux autres. Vos ressources VPC issues de différentes régions peuvent ainsi communiquer entre elles via des adresses IP privées.
+
+Pour en savoir plus, consultez la [documentation sur le peering d'Amazon VPC][3].
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /fr/help
+[2]: /fr/help/
+[3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

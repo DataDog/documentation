@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -32,7 +33,7 @@ supported_os:
 
 Red Hat OpenShift est une plateforme d'applications de conteneur open source basée sur l'orchestrateur de conteneurs Kubernetes pour le développement et le déploiement d'applications d'entreprise.
 
-> Il n'existe actuellement aucun check `openshift` distinct. Cette page décrit la configuration nécessaire pour activer la collecte des métriques propres à OpenShift dans l'Agent. Les données décrites ici sont recueillies par le [check `kube-apiserver-metrics`][1]. La configuration de ce check est nécessaire pour recueillir les métriques `openshift.*`.
+> Il n'existe actuellement aucun check `openshift` distinct. Cette page décrit la configuration nécessaire pour activer la collecte des métriques propres à OpenShift dans l'Agent. Les données décrites ici sont recueillies par le [check `kubernetes_apiserver`][1]. La configuration de ce check est nécessaire pour recueillir les métriques `openshift.*`.
 
 ## Configuration
 
@@ -67,11 +68,11 @@ Depuis la version 6.1, l'Agent Datadog prend en charge la surveillance des clus
 
 #### Collecte de logs
 
-Reportez-vous à la documentation relative à la [collecte de logs Kubernetes][12] pour en savoir plus.
+Reportez-vous à la documentation relative à la [collecte de logs Kubernetes][4] pour en savoir plus.
 
 #### Opérations avec SCC restreintes
 
-Ce mode ne nécessite pas l'octroi d'autorisations spéciales au [daemonset `datadog-agent`][4], à l'exception des autorisations [RBAC][5] qui permettent d'accéder à Kubelet et à l'APIserver. Pour commencer, utilisez ce [modèle destiné à Kubelet][6].
+Ce mode ne nécessite pas l'octroi d'autorisations spéciales au [daemonset `datadog-agent`][5], à l'exception des autorisations [RBAC][6] qui permettent d'accéder à Kubelet et à l'APIserver. Pour commencer, utilisez ce [modèle destiné à Kubelet][7].
 
 La méthode d'ingestion conseillée pour Dogstatsd, l'APM, et les logs consiste à binder l'Agent Datadog sur un port du host. Ainsi, l'IP cible reste fixe et peut facilement être identifiée par vos applications. Comme les SCC OpenShift restreintes par défaut ne permettent pas de binder sur un port du host, vous pouvez configurer l'Agent de façon à ce qu'il effectue l'écoute sur sa propre adresse IP. Toutefois, vous devrez vous-même configurer la détection de cette IP depuis votre application.
 
@@ -94,12 +95,12 @@ ports:
 #### SCC Datadog personnalisées pour un accès à toutes les fonctionnalités
 
 Si SELinux est en mode permissif ou désactivé, activez la SCC `hostaccess` pour profiter de toutes les fonctionnalités.
-Si SELinux est en mode strict, il est conseillé d'accorder le [type `spc_t`][7] au pod datadog-agent. Pour déployer votre Agent, Datadog a créé une [SCC datadog-agent][8] que vous pouvez appliquer après la [création du compte du service datadog-agent][5]. Cette SCC accorde les autorisations suivantes :
+Si SELinux est en mode strict, il est conseillé d'accorder le [type `spc_t`][8] au pod datadog-agent. Pour déployer votre Agent, Datadog a créé une [SCC datadog-agent][9] que vous pouvez appliquer après la [création du compte du service datadog-agent][6]. Cette SCC accorde les autorisations suivantes :
 
 - `allowHostPorts: true` : permet de binder les admissions Dogstatsd/APM/Logs sur l'IP du nœud.
 - `allowHostPID: true` : permet la détection de l'origine des métriques DogStatsD envoyées par le socket Unix.
 - `volumes: hostPath` : accède au socket Docker et aux dossiers `proc` et `cgroup` du host afin de recueillir les métriques.
-- `SELinux type: spc_t` : accède au socket Docker et aux dossiers `proc` et `cgroup` de tous les processus afin de recueillir les métriques. Pour en savoir plus, lisez [cet article de Red Hat][7] (en anglais).
+- `SELinux type: spc_t` : accède au socket Docker et aux dossiers `proc` et `cgroup` de tous les processus afin de recueillir les métriques. Pour en savoir plus, lisez [cet article de Red Hat][8] (en anglais).
 
 <div class="alert alert-info">
 N'oubliez pas d'ajouter le <a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">compte de service datadog-agent</a> à la <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">SCC datadog-agent</a> nouvellement créée en ajoutant <code>system:serviceaccount:<espace de nommage datadog-agent>:<nom du compte de service datadog-agent ></code> à la section <code>users</code>.
@@ -118,7 +119,7 @@ runAsUser:
 
 ### Validation
 
-Consultez [kube_apiserver_metrics][1]
+Consultez [kubernetes_apiserver][1]
 
 ## Données collectées
 
@@ -138,15 +139,14 @@ Le check OpenShift n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
-[1]: https://github.com/DataDog/integrations-core/tree/master/kube_apiserver_metrics
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/kubernetes_apiserver.d/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/
 [3]: https://docs.openshift.org/latest/admin_guide/manage_scc.html
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
-[6]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
-[7]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
-[8]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/agent-kubelet-only.yaml
+[8]: https://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept
+[9]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml
 [10]: https://github.com/DataDog/integrations-core/blob/master/openshift/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
+[11]: https://docs.datadoghq.com/fr/help/

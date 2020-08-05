@@ -8,43 +8,43 @@ left:
             title: "Features"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
           - name: product_integrations
-            link: "https://www.datadoghq.com/product/integrations/"
+            link: "https://www.datadoghq.com/product/platform/integrations/"
             title: "Integrations"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
           - name: product_dashboards
-            link: "https://www.datadoghq.com/dashboarding/"
+            link: "https://www.datadoghq.com/product/platform/dashboards/"
             title: "Dashboards"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
           - name: product_logs
-            link: "https://www.datadoghq.com/log-management/"
+            link: "https://www.datadoghq.com/product/log-management/"
             title: "Log Management"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
           - name: product_apm
-            link: "https://www.datadoghq.com/apm/"
+            link: "https://www.datadoghq.com/product/apm/"
             title: "APM"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
           - name: product_security
-            link: "https://www.datadoghq.com/security-monitoring/"
+            link: "https://www.datadoghq.com/product/security-monitoring/"
             title: "Security Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
           - name: product_network
-            link: "https://www.datadoghq.com/network/"
+            link: "https://www.datadoghq.com/product/network-performance-monitoring/"
             title: "Network Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
           - name: product_synthetics
-            link: "https://www.datadoghq.com/synthetics/"
+            link: "https://www.datadoghq.com/product/synthetic-monitoring/"
             title: "Synthetic Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
           - name: product_rum
-            link: "https://www.datadoghq.com/rum/"
+            link: "https://www.datadoghq.com/product/real-user-monitoring/"
             title: "Real User Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/rum.svg' alt='rum icon'>"
           - name: product_serverless
-            link: "https://www.datadoghq.com/serverless/"
+            link: "https://www.datadoghq.com/product/serverless-monitoring/"
             title: "Serverless"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
           - name: product_alerts
-            link: "https://www.datadoghq.com/alerts/"
+            link: "https://www.datadoghq.com/product/platform/alerts/"
             title: "Alerts"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
           - name: product_api

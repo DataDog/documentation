@@ -34,7 +34,7 @@ Les paramètres sont définis comme suit :
 | `<NOM_SPAN>`                | Le nom de l'opération ou `span.name` (par exemple : `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<SUFFIXE_MÉTRIQUE>`       | Le nom de la métrique (par exemple : `duration`, `hits`, `span_count`). Référez-vous à la section ci-dessous.                                                                                                                                               |
 | `<2E_TAG_PRIM>` | Si le nom de la métrique prend en compte le [deuxième tag primaire][4], ce tag fait partie du nom de la métrique.                                                                                                                       |
-| `<TAGS>`                | Tags des métriques de traces. Les tags possibles sont : `env`, `service`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). |
+| `<TAGS>`                | Tags des métriques de trace. Les tags possibles sont : `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class` et les tags de l'Agent Datadog (y compris le tag host et le deuxième tag primaire). |
 
 ## Suffixes des métriques
 
@@ -113,13 +113,13 @@ Les paramètres sont définis comme suit :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM.
   - *Description :* Représente le nombre d'erreurs pour une span donnée.
   - *Type de métrique :* [COUNT][8]
-  - *Tags :* `env`, `service`, `resource`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
+  - *Tags :* `env`, `service`, `version`, `resource`, `http.status_code`, tous les tags de l'Agent Datadog et le [deuxième tag primaire][4].
 
 - `trace.<NOM_SPAN>.errors.by_http_status` :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM.
   - *Description :* Représente le nombre d'erreurs pour une span donnée.
   - *Type de métrique :* [COUNT][8]
-  - *Tags :* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
+  - *Tags :* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
 
 ### Hits
 
@@ -127,15 +127,17 @@ Les paramètres sont définis comme suit :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM.
   - *Description :* Représente le nombre de hits pour une span donnée.
   - *Type de métrique :* [COUNT][8]
-  - *Tags :* `env`, `service`, `resource`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
+  - *Tags :* `env`, `service`, `version`, `resource`, `http.status_code`, tous les tags de l'Agent Datadog et le [deuxième tag primaire][4].
 
 - `trace.<NOM_SPAN>.hits.by_http_status`
   - *Prérequis :* Cette métrique est disponible pour les services APM HTTP/WEB si des métadonnées http existent.
   - *Description :* Représente le nombre de hits pour une span donnée et pour chaque code de statut HTTP.
   - *Type de métrique :* [COUNT][8]
-  - *Tags :* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
+  - *Tags :* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, tous les tags de l'Agent Datadog et [le deuxième tag primaire][4].
 
 ### Span count
+
+**Remarque** : cet espace de nommage est obsolète.
 
 - `trace.<NOM_SPAN>.span_count` :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM.
@@ -167,7 +169,7 @@ Les paramètres sont définis comme suit :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM HTTP/WEB.
   - *Description :* Mesure le score [Apdex][9] pour chaque combinaison de [deuxième tag primaire][4] et de service Web.
   - *Type de métrique :* [GAUGE][5]
-  - *Tags :* `env`, `service`, et le [deuxième tag primaire][4].
+  - *Tags :* `env`, `service` et le [deuxième tag primaire][4].
 
 - `trace.<NOM_SPAN>.apdex.by.service` :
   - *Prérequis :* Cette métrique est disponible pour tous les services APM HTTP/WEB.
