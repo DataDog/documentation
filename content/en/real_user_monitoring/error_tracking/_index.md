@@ -11,13 +11,13 @@ further_reading:
   text: "RUM Applications"
 ---
 
-{{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
-
 {{< site-region region="eu" >}}
 
-<div class="alert alert-warning"> The EU region is not yet available. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning"> The EU region is not yet available for Error Tracking. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
 
 {{< /site-region >}}
+
+{{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
 
 ## What is Error Tracking?
 
