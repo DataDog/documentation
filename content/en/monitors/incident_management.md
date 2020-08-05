@@ -11,6 +11,8 @@ description: Create and manage incidents
 
 Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents. 
 
+Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
+
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
 * Something is happening that will affect customers or impact services.
