@@ -5,7 +5,7 @@ disable_toc: true
 description: Create and manage incidents
 ---
 
-{{< img src="monitors/incidents/incidents-top.png" alt="Incident Management"  style="width:80%;">}}
+{{< img src="monitors/incidents/incidents-top-1.png" alt="Incident Management"  style="width:80%;">}}
 
 ## Overview
 
@@ -27,7 +27,7 @@ Incident Management requires no installation. To view your incidents, go to the 
 
 You can declare an incident directly from a graph. You can also go to the upper right hand side of the Incidents page and click on “New Incident”. The following dialog box appears.
 
-{{< img src="monitors/incidents/create-1.png" alt="New Incident"  style="width:80%;">}}
+{{< img src="monitors/incidents/create-1-1.png" alt="New Incident"  style="width:80%;">}}
 
 **Severity**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If the severity of your incident is unknown, select UNKNOWN.
 
@@ -54,13 +54,13 @@ Click on “Declare Incident” to finish creating your incident.
 
 Consider a scenario in which you are looking at a dashboard, and you notice that one particular service is showing an especially high error count. Using the Export button in the upper right of a widget, you can declare an incident.
 
-{{< img src="monitors/incidents/workflow-1-graph.png" alt="From Graph"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
 
 #### 2. Declare an incident and assemble your team
 
 Use the New Incident modal to assemble your team and notify them. The graph from which you created the incident is automatically attached as a signal. Attach any other signals that would give your team the necessary context to begin resolving this issue. The Slack and PagerDuty integrations enable you to send notifications through those services.
 
-{{< img src="monitors/incidents/workflow-2-modal.png" alt="New Incident"  style="width:60%;">}}
+{{< img src="monitors/incidents/workflow-2-modal-1.png" alt="New Incident"  style="width:60%;">}}
 
 #### 3. Communicate and begin troubleshooting
 
@@ -68,7 +68,7 @@ If you have the [Datadog Slack app][2] installed, the Slack integration can auto
 
 For non-EU customers who use Slack, [sign up for beta access][3] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
 
-{{< img src="monitors/incidents/workflow-3-slack.png" alt="Communicate"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-3-slack-1.png" alt="Communicate"  style="width:80%;">}}
 
 #### 4. Update the incident
 
@@ -84,13 +84,13 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 | `Active` to `Resolved` to `Completed`, `Active` to `Completed` to `Resolved` | Unchanged |
 | `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
-{{< img src="monitors/incidents/workflow-4-update.png" alt="Update Incident"  style="width:60%;">}}
+{{< img src="monitors/incidents/workflow-4-update-1.png" alt="Update Incident"  style="width:60%;">}}
 
 #### 5. Follow up and learn from the incident
 
 Create a postmortem with [notebooks][5], look back on exactly what went wrong, and add follow-up tasks.
 
-{{< img src="monitors/incidents/workflow-5-postmortem.png" alt="Postmortem"  style="width:60%;">}}
+{{< img src="monitors/incidents/workflow-5-postmortem-1.png" alt="Postmortem"  style="width:60%;">}}
 
 
 
