@@ -41,7 +41,7 @@ First [install and configure the Datadog Agent][7]. See the additional documenta
 Next, install the Go tracer from its canonical import path:
 
 ```go
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get gopkg.in/DataDog/dd-trace-go.v1/...
 ```
 
 You are now ready to import the tracer and start instrumenting your code.
