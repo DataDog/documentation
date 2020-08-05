@@ -51,7 +51,7 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 It's critical to see a new issue as soon as it happens, because it gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking generates a [Datadog event][1] whenever an issue is first seen in a given service and environment and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors][2].
 
-Each event generated is tagged with the fingerprint, the service and the environment so that you have a fine-grained control over issues you want to be alerted for. For example, as you can see below, you can be alerted whenever a new issue happens on your billing service in the production environment:
+Each event generated is tagged with the fingerprint, the service and the environment so that you have a fine-grained control over issues you want to be alerted for. For example, as you can see below, you can create an event monitor to be alerted whenever a new issue happens on your billing service in the production environment:
 
 {{< img src="real_user_monitoring/etracking_configure_event_monitor.png" alt="Configure Event Monitors With Error Tracking"  >}}
 
