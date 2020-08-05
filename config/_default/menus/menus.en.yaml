@@ -1346,31 +1346,16 @@ main:
     parent: browser
     identifier: rum_data_collected
     weight: 101
-  - name: Performance Metrics
-    url: real_user_monitoring/browser/performance_metrics/
-    parent: browser
-    identifier: rum_performance_metrics
-    weight: 102
   - name: Advanced Configuration
     url: real_user_monitoring/browser/advanced_configuration/
     parent: browser
     identifier: rum_advanced
-    weight: 103
+    weight: 102
   - name: Android Monitoring
     url: real_user_monitoring/android/
     parent: rum
     identifier: android
     weight: 2
-  - name: Data Collected
-    url: real_user_monitoring/android/data_collected/
-    parent: android
-    identifier: rum_android_data_collected
-    weight: 201
-  - name: Crash Reporting
-    url: real_user_monitoring/android/crash_reporting/
-    parent: android
-    identifier: rum_android_advanced
-    weight: 202
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum

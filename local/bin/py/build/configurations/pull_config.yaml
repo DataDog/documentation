@@ -183,7 +183,20 @@
           kind: documentation
           aliases:
             - /serverless/troubleshooting/installing_the_forwarder/
-
+          
+  - repo_name: dd-sdk-android
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_collection.md'
+      options:
+        dest_path: '/rum-mobile/real_user_monitoring/android/'
+        file_name: '_index.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
+          title: Getting Started with Android RUM Collection
+          kind: documentation
 
   - repo_name: datadog-cloudformation-resources
     contents:
