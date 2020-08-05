@@ -13,9 +13,9 @@ Any event that may lead to a disruption in your organization’s services can be
 
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
-* Something is happening that will affect customers.
+* Something is happening that will affect customers or impact services.
 * Something is happening that you need help with.
-* You are unsure whether you should call an incident.
+* You are unsure whether you should call an incident. Notify other people and increase severity appropriately.
 
 ## Usage
 
@@ -33,7 +33,7 @@ You can declare an incident directly from a graph. You can also go to the upper 
 * SEV-2: High impact
 * SEV-3: Moderate impact
 * SEV-4: Low impact
-* SEV-5: Informational
+* SEV-5: Minor issue
 * UNKNOWN: Unknown
 
 **Title**: Give your incident a descriptive title.
@@ -64,17 +64,29 @@ Use the New Incident modal to assemble your team and notify them. The graph from
 
 If you have the [Datadog Slack app][2] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
 
+For non-EU customers who use Slack, [sign up for beta access][3] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
+
 {{< img src="monitors/incidents/workflow-3-slack.png" alt="Communicate"  style="width:80%;">}}
 
-#### 4. Update incident status
+#### 4. Update the incident
 
-After resolving the issue, update the incident. Set the status to "Stable" to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers.
+Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed.
+
+There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][4].
+
+As the status of an incident changes, Datadog tracks time-to-resolution as follows:
+
+| Status Transition | Resolved Timestamp |
+| ------------------ | -----------|
+| `Active` to `Resolved`, `Active` to `Completed` | Current time |
+| `Active` to `Resolved` to `Completed`, `Active` to `Completed` to `Resolved` | Unchanged |
+| `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
 {{< img src="monitors/incidents/workflow-4-update.png" alt="Update Incident"  style="width:60%;">}}
 
-#### 5. Create a postmortem
+#### 5. Follow up and learn from the incident
 
-Create a postmortem with notebooks, look back on exactly what went wrong, and add follow-up tasks.
+Create a postmortem with [notebooks][5], look back on exactly what went wrong, and add follow-up tasks.
 
 {{< img src="monitors/incidents/workflow-5-postmortem.png" alt="Postmortem"  style="width:60%;">}}
 
@@ -82,3 +94,6 @@ Create a postmortem with notebooks, look back on exactly what went wrong, and ad
 
 [1]: https://app.datadoghq.com/incidents
 [2]: /integrations/slack
+[3]: https://app.datadoghq.com/incidents/ddslackapp
+[4]: https://app.datadoghq.com/incidents/settings
+[5]: https://app.datadoghq.com/notebook/list
