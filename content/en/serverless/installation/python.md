@@ -41,7 +41,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 4. Redeploy your serverless application.
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
-[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 <div class="alert alert-warning">This service is in public beta. If you have any feedback, contact <a href="/help">Datadog support</a>.</div>
@@ -116,7 +116,7 @@ To install the Datadog Lambda Library with the CloudFormation macro, follow thes
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -206,10 +206,10 @@ To install the Datadog Lambda Library with the CloudFormation macro, follow thes
 
 2. Redeploy your serverless application.
 
+
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-
+[3]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
@@ -244,9 +244,9 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[2]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[3]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[2]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
+[3]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -301,9 +301,9 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 [2]: https://github.com/DataDog/datadog-lambda-layer-python/releases
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [4]: https://pypi.org/project/datadog-lambda/
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[6]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[5]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
+[6]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}} 
 {{< /tabs >}}
 
