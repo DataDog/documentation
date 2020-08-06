@@ -225,7 +225,7 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 | `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
-If a test fails, the uptime directly considers the endpoint as `down`. It is not re-tested until the next test run.
+If a test fails, the uptime directly considers the endpoint to be `down`. It is not retested until the next test run.
 
 ## Further Reading
 
