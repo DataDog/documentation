@@ -153,7 +153,7 @@ Resources:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Collecting logs from S3 buckets
+### Collecting logs from S3 buckets
 
 If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][4] using one of the following method:
 
