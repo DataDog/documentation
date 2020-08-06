@@ -127,9 +127,13 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
-{{% tab "CloudFormation/SAM" %}}
+{{% tab "CloudFormation" %}}
 
-For AWS CloudFormation or SAM users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. The sample code also work for [Serverless Framework][2] users, put it under the [resources][3] section within your serverless.yml.
+For AWS CloudFormation users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. 
+
+The sample code also work for AWS [SAM][2] and [Serverless Framework][3]. For Serverless Framework, put the code under the [resources][4] section within your `serverless.yml`.
+
+
 
 ```yaml
 Resources:
@@ -143,8 +147,9 @@ Resources:
 
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
-[2]: https://www.serverless.com/
-[3]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
+[2]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
+[3]: https://www.serverless.com/
+[4]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -188,9 +193,9 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
 {{% /tab %}}
-{{% tab "CloudFormation/SAM" %}}
+{{% tab "CloudFormation" %}}
 
-For CloudFormation or SAM users, you can configure triggers using the CloudFormation [NotificationConfiguration][1] for your S3 bucket. See the sample code below.
+For CloudFormation users, you can configure triggers using the CloudFormation [NotificationConfiguration][1] for your S3 bucket. See the sample code below.
 
 ```yaml
 Resources:
