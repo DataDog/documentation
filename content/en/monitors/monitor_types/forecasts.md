@@ -110,17 +110,17 @@ The `query` property in the request body should contain a query string in the fo
 <aggregator>(<query_window>):forecast(<metric_query>, '<algorithm>', <deviations>, interval=<interval>[, history='<history>'][, model='<model>'][, seasonality='<seasonality>']) <comparator> <threshold>
 ```
 
-* `aggregator`: `min` if the alert should trigger when the forecast goes below the threshold, and `max` if the alert should trigger when the forecast goes above the threshold 
-* `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
-* `metric_query`: a standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`
+* `aggregator`: Use `min` if the alert should trigger when the forecast goes below the threshold. Use `max` if the alert should trigger when the forecast goes above the threshold.
+* `query_window`: A timeframe, for example: `last_4h` or `last_7d`. The timeframe is recommended to be around five times the `alert_window`, but it must be at least as large as `alert_window`. This parameter controls the time range displayed in graphs included in notifications. 
+* `metric_query`: A standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`.
 * `algorithm`: `linear` or `seasonal`
-* `deviations`: a number greater than or equal to 1; controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive
-* `interval`: a positive integer representing the number of seconds in the rollup interval
-* `history`: a string representing the amount of past data that should be used for making the forecast, for example: `1w`, `3d`. This parameter is only used with the `linear` algorithm.
+* `deviations`: A number greater than or equal to one. This parameter controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive.
+* `interval`: A positive integer representing the number of seconds in the rollup interval.
+* `history`: A string representing the amount of past data that should be used for making the forecast, for example: `1w`, `3d`. This parameter is only used with the `linear` algorithm.
 * `model`: The type of model to use: `default`, `simple`, or `reactive`. This parameter is only used with the `linear` algorithm.
 * `seasonality`: The seasonality to use: `hourly`, `daily`, or `weekly`. This parameter is only used with the `seasonal` algorithm
 * `comparator`: Use `<=` to alert when the forecast goes below the threshold. Use `>=` to alert when the forecast goes above the threshold.
-* `threshold`: a number; a critical alert will trigger when the confidence bounds around the forecast reach this threshold
+* `threshold`: A critical alert will trigger when the forecast's confidence bounds reach this threshold.
 
 ## Troubleshooting
 
