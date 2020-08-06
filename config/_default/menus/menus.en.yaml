@@ -2850,6 +2850,14 @@ api_v2:
     parent: Security Monitoring
     url: update-an-existing-rule
     generated: true
+  - name: Get a quick list of security signals
+    parent: Security Monitoring
+    url: get-a-quick-list-of-security-signals
+    generated: true
+  - name: Get a list of security signals
+    parent: Security Monitoring
+    url: get-a-list-of-security-signals
+    generated: true
   - name: Service Checks
     url: /api/v2/service-checks/
     identifier: Service Checks
