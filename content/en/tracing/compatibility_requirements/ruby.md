@@ -69,42 +69,42 @@ For a list of available integrations, and their configuration options, please re
 
  | Name                     | Key                        | Versions Supported: MRI  | Versions Supported: JRuby | How to configure                    | Gem source                                                                     |
  | ------------------------ | -------------------------- | ------------------------ | --------------------------| ----------------------------------- | ------------------------------------------------------------------------------ |
- | Action Cable             | `action_cable`             | `>= 5.0`                 | `>= 5.0`                  | *[Link][2]*             | *[Link][3]*                |
- | Action View              | `action_view`              | `>= 3.0`                 | `>= 3.0`                  | *[Link][4]*              | *[Link][5]*                 |
- | Active Model Serializers | `active_model_serializers` | `>= 0.9`                 | `>= 0.9`                  | *[Link][6]*  | *[Link][7]*                |
- | Action Pack              | `action_pack`              | `>= 3.0`                 | `>= 3.0`                  | *[Link][8]*              | *[Link][9]*                |
- | Active Record            | `active_record`            | `>= 3.0`                 | `>= 3.0`                  | *[Link][10]*            | *[Link][11]*               |
- | Active Support           | `active_support`           | `>= 3.0`                 | `>= 3.0`                  | *[Link][12]*            | *[Link][13]*             |
- | AWS                      | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | *[Link][14]*                     | *[Link][15]*                                   |
- | Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | *[Link][16]*          | *[Link][17]*                 |
- | Dalli                    | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | *[Link][18]*                   | *[Link][19]*                               |
- | DelayedJob               | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | *[Link][20]*               | *[Link][21]*                        |
- | Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | *[Link][22]*             | *[Link][23]*                        |
- | Ethon                    | `ethon`                    | `>= 0.11`                | `>= 0.11`                 | *[Link][24]*                    | *[Link][25]*                                  |
- | Excon                    | `excon`                    | `>= 0.50`                | `>= 0.50`                 | *[Link][26]*                   | *[Link][27]*                                       |
- | Faraday                  | `faraday`                  | `>= 0.14`                | `>= 0.14`                 | *[Link][28]*                   | *[Link][29]*                                 |
- | Grape                    | `grape`                    | `>= 1.0`                 | `>= 1.0`                  | *[Link][30]*                    | *[Link][31]*                                  |
- | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[Link][32]*                  | *[Link][33]*                             |
- | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem not available*       | *[Link][34]*                     | *[Link][35]*                   |
- | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link][36]*                   | *[Link][37]*                                        |
- | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[Link][38]*                    | *[Link][39]*                                |
- | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[Link][40]*                   | *[Link][41]*                         |
- | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem not available*       | *[Link][42]*                    | *[Link][43]*                                  |
- | Net/HTTP                 | `http`                     | *(Any supported Ruby)*   | *(Any supported Ruby)*    | *[Link][44]*                 | *[Link][45]* |
- | Presto                   | `presto`                   | `>= 0.5.14`              | `>= 0.5.14`               | *[Link][46]*                  |*[Link][47]*                  |
- | Racecar                  | `racecar`                  | `>= 0.3.5`               | `>= 0.3.5`                | *[Link][48]*                   | *[Link][49]*                                |
- | Rack                     | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[Link][50]*                     | *[Link][51]*                                         |
- | Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[Link][52]*                     | *[Link][53]*                                       |
- | Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[Link][54]*                     | *[Link][55]*                                         |
- | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[Link][56]*                     | *[Link][57]*                                     |
- | Resque                   | `resque`                   | `>= 1.0, < 2.0`          | `>= 1.0, < 2.0`           | *[Link][58]*                  | *[Link][59]*                                     |
- | Rest Client              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Link][60]*               | *[Link][61]*                           |
- | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[Link][62]*                   | *[Link][63]*                                 |
- | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[Link][64]*                | *[Link][65]*                                  |
- | Sidekiq                  | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[Link][66]*                | *[Link][67]*                                    |
- | Sinatra                  | `sinatra`                  | `>= 1.4`                 | `>= 1.4`                  | *[Link][68]*                  | *[Link][69]*                                   |
- | Sneakers                 | `sneakers`                 | `>= 2.12.0`              | `>= 2.12.0`               | *[Link][70]*                  | *[Link][71]*                                    |
- | Sucker Punch             | `sucker_punch`             | `>= 2.0`                 | `>= 2.0`                  | *[Link][72]*             | *[Link][73]*                       |
+ | Action Cable             | `action_cable`             | `>= 5.0`                 | `>= 5.0`                  | *[Link][2]*              | *[Link][3]*             |
+ | Action View              | `action_view`              | `>= 3.0`                 | `>= 3.0`                  | *[Link][4]*              | *[Link][5]*             |
+ | Active Model Serializers | `active_model_serializers` | `>= 0.9`                 | `>= 0.9`                  | *[Link][6]*              |  *[Link][7]*            |
+ | Action Pack              | `action_pack`              | `>= 3.0`                 | `>= 3.0`                  | *[Link][8]*              | *[Link][9]*             |
+ | Active Record            | `active_record`            | `>= 3.0`                 | `>= 3.0`                  | *[Link][10]*             | *[Link][11]*            |
+ | Active Support           | `active_support`           | `>= 3.0`                 | `>= 3.0`                  | *[Link][12]*             | *[Link][13]*            |
+ | AWS                      | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | *[Link][14]*             | *[Link][15]*            |
+ | Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | *[Link][16]*             | *[Link][17]*            |
+ | Dalli                    | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | *[Link][18]*             | *[Link][19]*            |
+ | DelayedJob               | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | *[Link][20]*             | *[Link][21]*            |
+ | Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | *[Link][22]*             | *[Link][23]*            |
+ | Ethon                    | `ethon`                    | `>= 0.11`                | `>= 0.11`                 | *[Link][24]*             | *[Link][25]*            |
+ | Excon                    | `excon`                    | `>= 0.50`                | `>= 0.50`                 | *[Link][26]*             | *[Link][27]*            |
+ | Faraday                  | `faraday`                  | `>= 0.14`                | `>= 0.14`                 | *[Link][28]*             | *[Link][29]*            |
+ | Grape                    | `grape`                    | `>= 1.0`                 | `>= 1.0`                  | *[Link][30]*             | *[Link][31]*            |
+ | GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[Link][32]*             | *[Link][33]*            |
+ | gRPC                     | `grpc`                     | `>= 1.7`                 | *gem not available*       | *[Link][34]*             | *[Link][35]*            |
+ | http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[Link][36]*             | *[Link][37]*            |
+ | Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[Link][38]*             | *[Link][39]*            |
+ | MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[Link][40]*             | *[Link][41]*            |
+ | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem not available*       | *[Link][42]*             | *[Link][43]*            |
+ | Net/HTTP                 | `http`                     | *(Any supported Ruby)*   | *(Any supported Ruby)*    | *[Link][44]*             | *[Link][45]*            |
+ | Presto                   | `presto`                   | `>= 0.5.14`              | `>= 0.5.14`               | *[Link][46]*             | *[Link][47]*            |
+ | Racecar                  | `racecar`                  | `>= 0.3.5`               | `>= 0.3.5`                | *[Link][48]*             | *[Link][49]*            |
+ | Rack                     | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[Link][50]*             | *[Link][51]*            |
+ | Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[Link][52]*             | *[Link][53]*            |
+ | Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[Link][54]*             | *[Link][55]*            |
+ | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[Link][56]*             | *[Link][57]*            |
+ | Resque                   | `resque`                   | `>= 1.0, < 2.0`          | `>= 1.0, < 2.0`           | *[Link][58]*             | *[Link][59]*            |
+ | Rest Client              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Link][60]*             | *[Link][61]*            |
+ | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[Link][62]*             | *[Link][63]*            |
+ | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[Link][64]*             | *[Link][65]*            |
+ | Sidekiq                  | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[Link][66]*             | *[Link][67]*            |
+ | Sinatra                  | `sinatra`                  | `>= 1.4`                 | `>= 1.4`                  | *[Link][68]*             | *[Link][69]*            |
+ | Sneakers                 | `sneakers`                 | `>= 2.12.0`              | `>= 2.12.0`               | *[Link][70]*             | *[Link][71]*            |
+ | Sucker Punch             | `sucker_punch`             | `>= 2.0`                 | `>= 2.0`                  | *[Link][72]*             | *[Link][73]*            |
 
 ## Further Reading
 
