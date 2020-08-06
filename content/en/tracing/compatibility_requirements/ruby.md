@@ -67,7 +67,7 @@ end
 
 For a list of available integrations, and their configuration options, please refer to the following:
 
-|| Name                     | Key                        | Versions Supported: MRI  | Versions Supported: JRuby | How to configure                    | Gem source                                                                     |
+ | Name                     | Key                        | Versions Supported: MRI  | Versions Supported: JRuby | How to configure                    | Gem source                                                                     |
  | ------------------------ | -------------------------- | ------------------------ | --------------------------| ----------------------------------- | ------------------------------------------------------------------------------ |
  | Action Cable             | `action_cable`             | `>= 5.0`                 | `>= 5.0`                  | *[Link][2]*             | *[Link][3]*                |
  | Action View              | `action_view`              | `>= 3.0`                 | `>= 3.0`                  | *[Link][4]*              | *[Link][5]*                 |
@@ -105,6 +105,7 @@ For a list of available integrations, and their configuration options, please re
  | Sinatra                  | `sinatra`                  | `>= 1.4`                 | `>= 1.4`                  | *[Link][68]*                  | *[Link][69]*                                   |
  | Sneakers                 | `sneakers`                 | `>= 2.12.0`              | `>= 2.12.0`               | *[Link][70]*                  | *[Link][71]*                                    |
  | Sucker Punch             | `sucker_punch`             | `>= 2.0`                 | `>= 2.0`                  | *[Link][72]*             | *[Link][73]*                       |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
