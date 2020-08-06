@@ -89,9 +89,9 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
 7. To stop collecting all AWS logs, press the _x_ next to each Lambda ARN. All triggers for that function are removed.
 8. Within a few minutes of this initial setup, your AWS Logs appear in your Datadog [log explorer page][5] in near real time.
 
-## Manually set up triggers
+### Manually set up triggers
 
-### Collecting logs from CloudWatch Log Group
+#### Collecting logs from CloudWatch Log Group
 
 If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
 
@@ -150,7 +150,7 @@ Resources:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collecting logs from S3 buckets
+#### Collecting logs from S3 buckets
 
 If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
 
