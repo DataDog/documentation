@@ -82,7 +82,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://github.com/DataDog/datadog-lambda-go
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/
-[5]: https://docs.datadoghq.com/serverless/installation/installing_the_forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/serverless/forwarder/
+[5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://app.datadoghq.com/functions

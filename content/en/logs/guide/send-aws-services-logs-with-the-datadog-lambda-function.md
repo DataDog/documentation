@@ -235,7 +235,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 [1]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#installation
 [2]: /agent/guide/private-link/?tab=logs
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html
-[4]: /serverless/installation/installing_the_forwarder/
+[4]: /serverless/forwarder/
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [6]: https://app.datadoghq.com/logs
 [7]: /integrations/amazon_api_gateway/

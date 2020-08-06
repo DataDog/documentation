@@ -28,7 +28,7 @@ Use the following table to help troubleshoot issues you might be experiencing wi
 If you’re still unsure about the issue, you may reach out to the [Datadog support team][9]. 
 
 [1]: /serverless/#getting-started
-[2]: /serverless/installation/installing_the_forwarder
+[2]: /serverless/forwarder
 [3]: /serverless/installation/installing_the_library
 [4]: /integrations/amazon_lambda/#metric-collection
 [5]: /integrations/amazon_lambda/#real-time-enhanced-lambda-metrics

@@ -571,8 +571,8 @@ main:
     identifier: serverless_installation_dotnet
     weight: 106
   - name: Datadog Forwarder
-    url: serverless/installation/installing_the_forwarder
-    parent: serverless_installation
+    url: serverless/forwarder
+    parent: serverless
     weight: 107
   - name: Datadog Lambda Library
     url: serverless/installation/installing_the_library
