@@ -8,7 +8,6 @@ kind: documentation
 | Billing Parameter  | Price                                      | Containers                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Profiler Host][2]      | $12 per [profiled host][2] per month | 4 profiled containers* per profiled host included in the price. Any additional profiled container is billed at $2 per container per month    | Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour. These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
-
 Additionally, Datadog measures the total number of containers that are being profiled. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count. |
 
 
@@ -26,7 +25,7 @@ Using 5 hosts running 1 application being profiled in each host. No containers.
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
 | Profiled containers  | 0 per host | $0 since there is no overage                                                              | 0 * $2        | $0                    |
-| Total          |            |                                                                                                 | $60 + $0      | **$$60 per month**    |
+| Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
 ### Case 2: Hosts with 4 Profiled Containers
@@ -37,7 +36,7 @@ Using 5 hosts with 4 profiled containers. A profiled container is a container th
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
 | Profiled containers  | 4 per host | $0 since 4 containers is right at the allotment limit, no overage charge is issued        | 0 * $2        | $0                    |
-| Total          |            |                                                                                                 | $60 + $0      | **$$60 per month**    |
+| Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
 ### Case 3: Hosts with 6 Profiled Containers
@@ -48,7 +47,7 @@ Using 5 hosts with 6 profiled containers per each host. A profiled container is 
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
 | Profiled containers  | 6 per host | $2 per overage container per host. In this case there are 6 - 4 = 2 overage containers for each host        | 2  * $2 * 5 hosts         | $20                   |
-| Total          |            |                                                                                                 | $60 + $20      | **$$80 per month**    |
+| Total          |            |                                                                                                 | $60 + $20      | **$80 per month**    |
 
 
 ### Case 4: Hosts with 5 Containers but only 2 are Profiled
@@ -59,14 +58,15 @@ Using 5 hosts with 5 containers per each host but only two of them are profiled 
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 5 * $12       | $60                   |
 | Profiled containers  | 2 per host | $0 since 2 containers is below the allotment limit, no overage charge is issued. The remaining 3 containers not reporting profile data are not counted towards the allotment.         | 0 * $2        | $0                    |
-| Total          |            |                                                                                                 | $60 + $0      | **$$60 per month**    |
+| Total          |            |                                                                                                 | $60 + $0      | **$60 per month**    |
 
 
 ### Case 5: Hosts with Varying Numbers of Profiled Containers
 
 Using 2 profiled hosts - Host A and Host B.
-  * Host A is running 8 containers
-  * Host B is running 2 containers         
+
+* Host A is running 8 containers
+* Host B is running 2 containers         
 
 All 10 containers are running application instances that are being profiled, meaning Host A has an overage of 4 containers and Host B can add 2 more containers.
 
@@ -77,7 +77,7 @@ In this scenario, we aggregate all containers across all hosts (i.e. 2 hosts, 10
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 2 * $12       | $24                   |
 | Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | 2 * $2 * 2 hosts        | $8                    |
-| Total          |            |                                                                                                 | $24 + $8      | **$$32 per month**    |
+| Total          |            |                                                                                                 | $24 + $8      | **$32 per month**    |
 
 
 ## FAQs
@@ -103,8 +103,9 @@ Continuous Profiler is billed on the basis of hosts deployed with agents sending
 
 **6. Can I use Continuous Profiling without APM?**
 
-Not yet. We would love to hear from you if you are interested in using just Continuous Profiling without APM. Please reachout to us through your Contact Sales or your Customer Success Manager.
+Not yet. We would love to hear from you if you are interested in using just Continuous Profiling without APM. Please reach out to us through your [Contact Sales][4] or your [Customer Success Manager][3].
 
 [1]: /tracing/profiling/
 [2]: /account_management/billing/pricing/#continuous-profiler
 [3]: mailto:success@datadoghq.com
+[4]: mailto:sales@datadoghq.com
