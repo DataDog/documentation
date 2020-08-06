@@ -17,7 +17,8 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-On top of executing your tests at predefined intervals, you can also execute Datadog Synthetic tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetic tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints. In addition to running Synthetic tests throughout the development cycle, you can also use Datadog Continuous Testing to execute tests as part of your CD process. Evaluating the state of your production application immediately after a deployment finishes enables you to detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
+On top of executing your tests at predefined intervals, you can also **execute Datadog Synthetic tests on-demand** using the dedicated API endpoints. You can execute **Datadog Synthetic tests in your continuous integration (CI) pipelines**, enabling you to block the deployment of branches which would break your key features and endpoints. 
+Datadog Continuous Testing can also be used to **run tests as part of your CD process**. Evaluating the state of your production application immediately after a deployment finishes enables you to detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
 
