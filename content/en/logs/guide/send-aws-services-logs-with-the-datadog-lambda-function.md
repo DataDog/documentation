@@ -211,7 +211,7 @@ Resources:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Enable logging for your AWS service
+## Enable logging for your AWS service
 
 Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group is supported. Find specific setup instructions for the most used services in the table below:
 
