@@ -4,12 +4,13 @@ aliases:
 assets:
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md'
 display_name: vSphere
@@ -44,7 +45,7 @@ supported_os:
 
 vSphere チェックは [Datadog Agent][2] パッケージに含まれています。vCenter サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 vCenter の **管理** セクションで、`datadog-readonly` という読み取り専用ユーザーを追加します。
 
@@ -54,10 +55,10 @@ vCenter の **管理** セクションで、`datadog-readonly` という読み�
 init_config:
 
 instances:
-  - name: main-vcenter # メトリクスを 'vcenter_server:main-vcenter' のようにタグ付けします。
-    host: <VCENTER_HOSTNAME>          # 例：myvcenter.example.com
-    username: <USER_YOU_JUST_CREATED> # 例：datadog-readonly@vsphere.local
-    password: <PASSWORD>
+  - name: main-vcenter
+    host: "<VCENTER_ホスト名>"
+    username: "<今作成したユーザー>"
+    password: "<パスワード>"
 ```
 
 [Agent を再起動][5]すると、vSphere メトリクスとイベントが Datadog に送信されます。
@@ -84,20 +85,22 @@ Agent バージョン 6.5.0/5.27.0 に付属しているバージョン 3.3.0 �
 
 | オプション                   | 必須 | 説明                                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ssl_verify`              | いいえ       | vCenter に接続する際の SSL 検証を無効にするには、false に設定します。                                                                                                                                                                                                                                                                                            |
-| `ssl_capath`              | いいえ       | PEM 形式の CA 証明書を含むディレクトリの絶対ファイルパスを設定します。                                                                                                                                                                                                                                                                           |
-| `host_include_only_regex` | いいえ       | このチェックで、これらの ESXi ホストとそこで実行されている VM のメトリクスのみを取得する場合は、このような正規表現を使用します。                                                                                                                                                                                                                                                |
-| `vm_include_only_regex`   | いいえ       | パターンに一致する VM のみを含めるために正規表現を使用します。                                                                                                                                                                                                                                                                                              |
-| `include_only_marked`     | いいえ       | 値 'DatadogMonitored' を使用してカスタムフィールドとしてマークされた vSphere VM のメトリクスのみを収集する場合は、true に設定します。カスタムフィールドを設定するには、UI を使用してタグを適用するか、[PowerCLI][6] で CLI を使用します。VSphere 5.1 で動作する例: `Get-VM VM | Set-CustomField -Name "DatadogMonitored" -Value "DatadogMonitored"`. |
-| `collection_level`        | いいえ       | 送信するメトリクスの数を指定する 1 ～ 4 の数値。1 は重要な監視メトリクスのみを送信し、4 は取得可能なすべてのメトリクスを送信することを意味します。                                                                                                                                                                                                                 |
-| `all_metrics`             | いいえ       | (非推奨) true に設定すると、vCenter からすべてのメトリクスが収集されます。この場合、メトリクスは大量になります。false に設定すると、監視対象として選択した一部のメトリクスだけが収集されます。                                                                                                                                                           |
-| `event_config`            | いいえ       | イベント構成は辞書です。現在、オンにできるスイッチは `collect_vcenter_alarms` だけです。これは、vCenter でイベントとして設定されているアラームを送信します。                                                                                                                                                                                                                  |
+| `ssl_verify`              | ✕       | vCenter に接続する際の SSL 検証を無効にするには、false に設定します。                                                                                                                                                                                                                                                                                            |
+| `ssl_capath`              | ✕       | PEM 形式の CA 証明書を含むディレクトリの絶対ファイルパスを設定します。                                                                                                                                                                                                                                                                           |
+| `host_include_only_regex` | ✕       | このチェックで、これらの ESXi ホストとそこで実行されている VM のメトリクスのみを取得する場合は、このような正規表現を使用します。                                                                                                                                                                                                                                                |
+| `vm_include_only_regex`   | ✕       | パターンに一致する VM のみを含めるために正規表現を使用します。                                                                                                                                                                                                                                                                                              |
+| `include_only_marked`     | ✕       | 値 'DatadogMonitored' を使用してカスタムフィールドとしてマークされた vSphere VM のメトリクスのみを収集する場合は、true に設定します。カスタムフィールドを設定するには、UI を使用してタグを適用するか、[PowerCLI][6] で CLI を使用します。VSphere 5.1 で動作する例: `Get-VM VM | Set-CustomField -Name "DatadogMonitored" -Value "DatadogMonitored"`. |
+| `collection_level`        | ✕       | 送信するメトリクスの数を指定する 1～4 の数値。1 は重要な監視メトリクスのみを送信し、4 は取得可能なすべてのメトリクスを送信することを意味します。データ収集レベルに関するドキュメントは、VMware の[ウェブサイト][7]をご覧ください。                                                                                                                                                                                                                |
+| `all_metrics`             | ✕       | (非推奨) true に設定すると、vCenter からすべてのメトリクスが収集されます。この場合、メトリクスは大量になります。false に設定すると、監視対象として選択した一部のメトリクスだけが収集されます。                                                                                                                                                           |
+| `event_config`            | ✕       | イベント構成は辞書です。現在、オンにできるスイッチは `collect_vcenter_alarms` だけです。これは、vCenter でイベントとして設定されているアラームを送信します。                                                                                                                                                                                                                  |
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `vsphere` を探します。
+[Agent の status サブコマンドを実行][8]し、Checks セクションで `vsphere` を探します。
 
 ## 収集データ
+
+チェックコンフィギュレーションで設定した `collection_level` の値によっては、以下のすべてのメトリクスが収集されるわけではありません。特定の収集レベルでどのメトリクスが収集されるかを確認するには、[Vsphere データ収集レベルのドキュメント][7]を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "vsphere" >}}
@@ -105,11 +108,10 @@ Agent バージョン 6.5.0/5.27.0 に付属しているバージョン 3.3.0 �
 
 ### イベント
 
-このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のタイプのイベントは送信されません。
+このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のイベントタイプを送信します。
 
 - AlarmStatusChangedEvent:Gray
 - VmBeingHotMigratedEvent
-- VmResumedEvent
 - VmReconfiguredEvent
 - VmPoweredOnEvent
 - VmMigratedEvent
@@ -131,11 +133,11 @@ Agent が vCenter に接続してメトリクスを収集できない場合は�
 
 ## トラブルシューティング
 
-- [VMWare インテグレーションを使用してプルされる VM の数を制限できますか][9]
+- [VMWare インテグレーションを使用してプルされる VM の数を制限できますか？][10]
 
 ## その他の参考資料
 
-Datadog を使用した vSphere 環境の監視については、Datadog の[ブログ記事][10]を参照してください。
+Datadog を使用した vSphere 環境の監視については、Datadog の[ブログ記事][11]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -143,7 +145,8 @@ Datadog を使用した vSphere 環境の監視については、Datadog の[ブ
 [4]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.powercli.cmdletref.doc%2FSet-CustomField.html
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
-[9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
-[10]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers
+[7]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.monitoring.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
+[10]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
+[11]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

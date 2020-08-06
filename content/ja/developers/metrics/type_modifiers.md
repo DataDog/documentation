@@ -5,10 +5,10 @@ aliases:
   - /ja/developers/metrics/metric_type_modifiers
   - /ja/graphing/faq/as_count_validation
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD について
-  - link: developers/libraries
+  - link: /developers/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
 ---
@@ -52,7 +52,7 @@ further_reading:
 
 **注**: 間隔が非常に短くて時間集計が発生しない場合、正規化は行われず、未加工のメトリクス値カウントが戻されます。
 
-[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained
+[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -64,7 +64,7 @@ further_reading:
   * [補間][1]を無効にします。
   * 時間集計関数を `SUM` に設定します。
 
-[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained
+[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -95,7 +95,7 @@ further_reading:
 
 **注**: Agent チェックの `self.increment` は、単調増加カウンターの増分を計算するのではなく、チェック実行時に渡された値を報告します。単調増加カウンターの増分値を送信する場合は、`self.monotonic_count` を使用してください。
 
-[1]: /ja/developers/metrics/types
+[1]: /ja/developers/metrics/types/
 [2]: /ja/metrics/introduction/#time-aggregation
-[3]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[3]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [4]: https://app.datadoghq.com/metric/summary

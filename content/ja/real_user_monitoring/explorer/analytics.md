@@ -6,7 +6,7 @@ aliases:
   - /ja/real_user_monitoring/rum_analytics
   - /ja/real_user_monitoring/analytics
 further_reading:
-  - link: /real_user_monitoring/explorer/search
+  - link: /real_user_monitoring/explorer/search/
     tag: ドキュメント
     text: Datadog でビューを検索する
 ---

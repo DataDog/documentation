@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -36,7 +37,7 @@ supported_os:
 
 Elastic Container Service for Kubernetes (EKS) est le service le plus récent d'AWS. Il s'agit d'un service Kubernetes géré qui automatise certains aspects des processus de déploiement et de maintenance de tous les environnements Kubernetes standard. Que vous effectuiez la migration d'une application Kubernetes existante vers EKS ou que vous déployiez un nouveau cluster, Datadog vous aide à surveiller votre environnement EKS en temps réel.
 
-## Implémentation
+## Configuration
 
 Datadog s'intègre déjà à Kubernetes et à AWS, ce qui en fait la solution idéale pour surveiller EKS. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers EKS, vous pouvez continuer à surveiller votre cluster avec Datadog. Notre solution prend également en charge les [groupes de nœuds gérés AWS EKS][2].
 

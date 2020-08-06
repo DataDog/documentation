@@ -7,19 +7,19 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
     tag: ブログ
     text: 'C# ログの収集、カスタマイズ、分析方法'
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: ログ分析の実行
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: ログ収集のトラブルシューティングガイド
 ---
@@ -46,8 +46,14 @@ PM> Install-Package Serilog.Sinks.File
 
 ```csharp
 // ロガーをインスタンス化します
-var log = new LoggerConfiguration()
-    .WriteTo.File(new JsonFormatter(), "log.json")
+var log = new LoggerConfiguration()  // using Serilog;
+
+    // Serilog.Formatting.Json; の使用
+    .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
+
+    // Serilog.Formatting.Compact; の使用
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")  
+
     .CreateLogger();
 
 // 例
@@ -59,13 +65,28 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 
 次に、`log.json` ファイルをチェックして、次のイベントがあることを確認します。
 
+- `JsonFormatter(renderMessage: true)` を使用する場合:
+
 ```json
 {
   "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
   "Level": "Information",
   "Timestamp": "2016-09-02T15:02:29.648Z",
   "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
   "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
+}
+```
+
+- `RenderedCompactJsonFormatter()` を使用する場合
+
+```json
+{
+  "@t": "2020-05-20T04:15:28.6898801Z",
+  "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+  "@i": "d1eb2146",
+  "Position": {"Latitude": 25, "Longitude": 134 },
+  "Elapsed": 34
 }
 ```
 
@@ -238,6 +259,12 @@ JSON でログを記録する方がメリットが多いですが、未加工の
 {{% /tab %}}
 {{< /tabs >}}
 
+## ログとトレース全体のサービスを接続
+
+APM が有効になっているアプリケーションの場合は、[APM .NET の指示に従い][2]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
+
+**注**: APM トレーサーがログに `service` を挿入する場合、Agent 構成で設定されている値は上書きされます。
+
 ## Datadog Agent の構成
 
 `conf.d/` フォルダーに次の内容の `csharp.d/conf.yaml` ファイルを作成します。
@@ -279,17 +306,30 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 次に、アプリケーションでロガーを直接初期化します。[ご使用の `<API_KEY>`][2] を忘れず追加してください。
 
+{{< site-region region="us" >}}
+
 ```csharp
-var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>")
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.com")
+    .WriteTo.DatadogLogs("<API_キー>")
     .CreateLogger();
 ```
 
-**注**: Datadog EU サイトにログを送信する場合は、`url` プロパティを `https://http-intake.logs.datadoghq.eu` に設定してください。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```csharp
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.eu")
+    .WriteTo.DatadogLogs("<API_キー>")
+    .CreateLogger();
+```
+
+{{< /site-region >}}
 
 デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、[オプションで、`source`、`service`、`host`、およびカスタムタグを指定][3]できます。
 
-たとえば、Datadog US サイトに TCP でログを転送する場合は、次のようなシンク構成を使用します。
+{{< site-region region="us" >}}
+
+たとえば、Datadog US リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
@@ -305,7 +345,55 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+たとえば、Datadog EU リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
+
+```csharp
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs(
+        "<API_キー>",
+        source: "<ソース名>",
+        service: "<サービス名>",
+        host: "<ホスト名>",
+        tags: new string[] {"<タグ_1>:<値_1>", "<タグ_2>:<値_2>"},
+        configuration: config
+    )
+    .CreateLogger();
+```
+
+{{< /site-region >}}
+
 これで、新しいログが Datadog に直接送信されるようになります。
+
+または、`0.2.0` 以降、`Serilog.Setting.Configuration` パッケージで `appsettings.json` ファイルを使用して Datadog シンクを構成できます。
+
+`Serilog.WriteTo` 配列で、`DatadogLogs` のエントリを追加します。以下に例を示します。
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<API_キー>",
+        "source": "<ソース名>",
+        "host": "<ホスト名>",
+        "tags": ["<タグ_1>:<値_1>", "<タグ_2>:<値_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
@@ -317,4 +405,5 @@ var log = new LoggerConfiguration()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/parsing
+[1]: /ja/logs/processing/parsing/
+[2]: /ja/tracing/connect_logs_and_traces/dotnet/

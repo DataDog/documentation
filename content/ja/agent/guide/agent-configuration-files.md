@@ -72,13 +72,15 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 
 ### Agent 6 のチェック構成ファイル
 
-各 Agent チェックの構成ファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれるすべての有効な YAML ファイルを読み込むため、複雑なコンフィギュレーションは複数ファイルに分割することができます。たとえば、`http_check` のコンフィギュレーションは次のようになります。
+各 Agent チェックのコンフィギュレーションファイルの例は、対応する `<CHECK_NAME>.d/` フォルダーの `conf.yaml.example` ファイルにあります。関連するチェックを有効にするには、このファイル名を `conf.yaml` に変更します。Agent は、フォルダー `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/` に含まれる有効な YAML ファイルを読み込むため、複雑なコンフィギュレーションは複数ファイルに分割することができます。たとえば、`http_check` のコンフィギュレーションは次のようになります。
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
 ```
+
+特別なケースは、YAML ファイルに `.default` のサフィックスがある場合です。このようなファイルは、デフォルトで Agent によりロードされ、常に有効であるチェックのコアセットの定義に役立ちます（CPU、メモリ、アップタイムなど）。チェックに別のコンフィギュレーションがあり、正常に無視することが可能な場合は、無視されます。デフォルトのチェックを無効にするには、該当ファイルを削除します。これらのチェックを構成するには、ベースとして `conf.yaml.example` を使用します。
 
 オートディスカバリーテンプレートファイルは、`auto_conf.yaml` ファイルのある構成フォルダーに保存されています。たとえば Redis チェックの場合、`redisdb.d/` のコンフィギュレーションは次のとおりです。
 
@@ -103,14 +105,14 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 | Fedora                               | `/etc/dd-agent/conf.d/`                                              |
 | macOS                                | `~/.datadog-agent/conf.d/`                                           |
 | RedHat                               | `/etc/dd-agent/conf.d/`                                              |
-| Source                               | `/etc/dd-agent/conf.d/`                                              |
+| ソース                               | `/etc/dd-agent/conf.d/`                                              |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              |
 | Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
 | Windows Server 2008/Vista 以降 | `\\ProgramData\Datadog\conf.d`                                       |
 | Windows Server 2003/XP 以前     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
-{{< tabs >}}
-{{% tab "Files" %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## JMX 構成ファイル
 

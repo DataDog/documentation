@@ -2,7 +2,8 @@
 assets:
   dashboards:
     ClickHouse Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: clickhouse
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

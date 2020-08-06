@@ -2,7 +2,8 @@
 assets:
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: vertica
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

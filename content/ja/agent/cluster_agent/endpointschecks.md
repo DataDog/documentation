@@ -5,9 +5,6 @@ aliases:
   - /ja/agent/autodiscovery/endpointchecks
   - /ja/agent/autodiscovery/endpointschecks
 further_reading:
-  - link: /agent/autodiscovery
-    tag: ドキュメント
-    text: オートディスカバリーの主要ドキュメント
   - link: /agent/cluster_agent/clusterchecks/
     tag: ドキュメント
     text: クラスターチェックのドキュメント
@@ -134,9 +131,20 @@ ad.datadoghq.com/endpoints.logs: '[<ログコンフィギュレーション>]'
 
 `%%host%%` の[テンプレート変数][7]がサポートされ、これがエンドポイントの IP に置き換えられます。`kube_namespace`、`kube_service`、`kube_endpoint_ip` のタグは、自動的にインスタンスに追加されます。
 
+### テンプレートソース: 標準ラベル
+
+```yaml
+tags.datadoghq.com/env: "<ENV>"
+tags.datadoghq.com/service: "<SERVICE>"
+tags.datadoghq.com/version: "<VERSION>"
+```
+
+`tags.datadoghq.com` ラベルは、チェックによって生成されたデータのタグとして、`env`、`service`、さらには `version` を設定します。
+これらの標準ラベルは、[統合サービスタグ付け][8]の一部です。
+
 #### 例: NGINX によってホストされるサービスの、NGINX チェックによるエンドポイントの HTTP チェック
 
-次のサービス定義は、`my-nginx` デプロイからポッドを公開します。続いて、[HTTP チェック][8]を実行して負荷分散型サービスのレイテンシーを測定し、サービスのエンドポイントをホストするポッド上で [NGINX チェック][9] を実行して `NGINX` のメトリクスを収集し、ポッドレベルでサービスチェックを実行します。
+次のサービス定義は、`my-nginx` デプロイからポッドを公開します。続いて、[HTTP チェック][9]を実行して負荷分散型サービスのレイテンシーを測定し、サービスのエンドポイントをホストするポッド上で [NGINX チェック][10]を実行して `NGINX` のメトリクスを収集し、ポッドレベルでサービスチェックを実行します。
 
 ```yaml
 apiVersion: v1
@@ -145,13 +153,16 @@ metadata:
     name: my-nginx
     labels:
         run: my-nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
     annotations:
-        ad.datadoghq.com/service.check_names: '["HTTPチェック"]'
+        ad.datadoghq.com/service.check_names: '["http_check"]'
         ad.datadoghq.com/service.init_configs: '[{}]'
         ad.datadoghq.com/service.instances: |
             [
               {
-                "name": "my-nginx サービス",
+                "name": "My Nginx Service",
                 "url": "http://%%host%%",
                 "timeout": 1
               }
@@ -161,7 +172,7 @@ metadata:
         ad.datadoghq.com/endpoints.instances: |
             [
               {
-                "name": "my-nginx サービスのエンドポイント",
+                "name": "My Nginx Service Endpoints",
                 "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
               }
             ]
@@ -176,7 +187,7 @@ spec:
 
 ## トラブルシューティング
 
-エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング][10]と似ています。唯一の違いは、クラスターチェックと同時にエンドポイントチェックをスケジューリングするノードベースの Agent に対して行われる点です。
+エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング][11]と似ています。唯一の違いは、クラスターチェックと同時にエンドポイントチェックをスケジューリングするノードベースの Agent に対して行われる点です。
 
 **注**: エンドポイントチェックは、監視されるサービスのエンドポイントをホストするポッドと同じノードで動作している Agent によってスケジューリングされます。エンドポイントがポッドをホストしない場合は、クラスター Agent がエンドポイントチェックをクラスター チェックに変換します。このクラスターチェックは、どのノードの Agent でも実行できます。
 
@@ -263,13 +274,14 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/kubernetes/cluster
-[2]: /ja/agent/autodiscovery/clusterchecks
-[3]: /ja/agent/autodiscovery
+[1]: /ja/agent/kubernetes/cluster/
+[2]: /ja/agent/cluster_agent/clusterchecks/
+[3]: /ja/agent/kubernetes/integrations/
 [4]: /ja/agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[5]: /ja/agent/guide/agent-commands
-[6]: /ja/agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[7]: /ja/agent/autodiscovery/?tab=kubernetes#supported-template-variables
-[8]: /ja/integrations/http_check
-[9]: /ja/integrations/nginx
-[10]: /ja/agent/cluster_agent/troubleshooting
+[5]: /ja/agent/guide/agent-commands/
+[6]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[7]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[8]: /ja/getting_started/tagging/unified_service_tagging
+[9]: /ja/integrations/http_check/
+[10]: /ja/integrations/nginx/
+[11]: /ja/agent/cluster_agent/troubleshooting/

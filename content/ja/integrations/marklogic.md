@@ -8,6 +8,8 @@ is_public: true
 kind: インテグレーション
 name: marklogic
 public_title: Datadog-Marklogic インテグレーション
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/marklogic.md'
 short_description: Marklogic からログを収集して Datadog に送信
 ---
 ## 概要
@@ -20,14 +22,11 @@ Marklogic からログを収集して Datadog に送信します。
 
 Marklogic インテグレーションは [Datadog Agent][1] パッケージに含まれています。ホストに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
-####         - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
+#### ログの収集
 
-**Agent 6 .0 以上で使用可能**
+_Agent バージョン 6.0 以降で利用可能_
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
@@ -37,13 +36,13 @@ Marklogic インテグレーションは [Datadog Agent][1] パッケージに�
 
 2. MarkLogic のログの収集を開始するには、次の構成ブロックを `marklogic.d/conf.yaml` ファイルに追加します。
 
-    ```
-      logs:
-          - type: file
-            path: <MARKLOGIC_LOG_FILE_PATH>
-            source: marklogic
-            sourcecategory: database
-            service: <SERVICE>
+    ```yaml
+    logs:
+        - type: file
+          path: '<MARKLOGIC_LOG_FILE_PATH>'
+          source: marklogic
+          sourcecategory: database
+          service: '<SERVICE>'
     ```
 
     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。

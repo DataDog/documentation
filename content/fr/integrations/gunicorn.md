@@ -1,7 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: gunicorn
   monitors: {}
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -44,7 +53,7 @@ Gunicorn peut fournir directement d'autres métriques via DogStatsD, y compris c
 - La durée des requêtes (moyenne, médiane, maximum, 95e centile, etc.)
 - Le taux de message de log par niveau de log (critical, error, warning, exception)
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -142,7 +151,7 @@ Le check Gunicorn n'inclut aucun événement.
 ### Checks de service
 
 **gunicorn.is_running** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de trouver le processus maître Gunicorn ou s'il ne trouve aucun worker, actif ou non. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à trouver le processus maître Gunicorn ou s'il ne trouve aucun worker, actif ou non. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
@@ -190,7 +199,7 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example
 [6]: https://docs.gunicorn.org/en/stable/settings.html#statsd-host
-[7]: https://docs.datadoghq.com/fr/guides/dogstatsd
+[7]: https://docs.datadoghq.com/fr/guides/dogstatsd/
 [8]: https://docs.gunicorn.org/en/stable/settings.html#accesslog
 [9]: https://docs.gunicorn.org/en/stable/settings.html#errorlog
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
