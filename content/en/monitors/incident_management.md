@@ -15,12 +15,12 @@ Incidents live in Datadog alongside the metrics, traces, and logs you are collec
 
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
-* An issue is potentially impacting customers or services
+* An issue is impacting customers or services
 * You do not know whether you should call an incident. Notify other people and increase severity appropriately.
 
 ## Usage
 
-Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page for a feed of all ongoing incidents.
+Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page for a feed of all ongoing incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
 ### Creating an incident
 
@@ -63,15 +63,15 @@ Use the New Incident modal to assemble your team and notify them. The graph from
 
 #### 3. Communicate and begin troubleshooting
 
-If you have the [Datadog Slack app][2] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
+If you have the [Datadog Slack app][3] installed, the Slack integration can automatically create a new channel dedicated to the incident, so you can consolidate communication with your team and begin troubleshooting.
 
-For non-EU customers who use Slack, [sign up for beta access][3] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
+For non-EU customers who use Slack, [sign up for beta access][4] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
 
 {{< img src="monitors/incidents/workflow-3-slack-1.png" alt="Communicate"  style="width:80%;">}}
 
 #### 4. Update the incident
 
-Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][4].
+Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][2].
 
 {{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
 
@@ -94,7 +94,7 @@ Link to a postmortem document, look back on exactly what went wrong, and add fol
 
 
 [1]: https://app.datadoghq.com/incidents
-[2]: /integrations/slack
-[3]: https://app.datadoghq.com/incidents/ddslackapp
-[4]: https://app.datadoghq.com/incidents/settings
+[2]: https://app.datadoghq.com/incidents/settings
+[3]: /integrations/slack
+[4]: https://app.datadoghq.com/incidents/ddslackapp
 [5]: https://app.datadoghq.com/notebook/list
