@@ -6,13 +6,13 @@ aliases:
   - /ja/monitors/monitor_types/app_analytics
   - /ja/monitors/monitor_types/trace_search
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスを確認
 ---
@@ -20,7 +20,7 @@ further_reading:
 
 APM メトリクスモニターは、通常の[メトリクスモニター][1]と同様に機能しますが、APM 専用に作られたコントロールを備えています。このモニターを使用して、サービスレベルのヒット数、エラー数、そしてさまざまなレイテンシー測定値についてアラートを受信します。
 
-App Analytics モニターを使用すると、APM データを経時的に視覚化し、分析スパンに基づきアラート設定を行えます。たとえば、App Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
+App Analytics モニターを使用すると、APM データを経時的に視覚化し、Analyzed Span に基づきアラート設定を行えます。たとえば、App Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
 
 ## モニターの作成
 
@@ -59,8 +59,8 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 * 過去 `5 minutes`、`15 minutes`、`1 hour` などの間の予測
 
 [1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /ja/tracing/visualization/service
-[3]: /ja/tracing/visualization/resource
+[2]: /ja/tracing/visualization/service/
+[3]: /ja/tracing/visualization/resource/
 {{% /tab %}}
 {{% tab "App Analytics" %}}
 
@@ -95,8 +95,8 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/monitor_types/metric
+[1]: /ja/monitors/monitor_types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
-[3]: /ja/monitors/notifications
+[3]: /ja/monitors/notifications/
 [4]: https://app.datadoghq.com/apm/services
 [5]: https://app.datadoghq.com/apm/map

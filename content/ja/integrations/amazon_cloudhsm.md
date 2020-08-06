@@ -1,11 +1,13 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - aws
   - ログの収集
-ddtype: クローラー
+ddtype: crawler
 description: Datadog オーガニゼーションの HSM 監査ログを収集
 has_logo: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md'
 integration_title: AWS Cloudhsm
 is_public: true
 kind: インテグレーション
@@ -21,10 +23,7 @@ Datadog は、CloudHSM ログを Datadog のログ管理ソリューションに
 
 ## セットアップ
 
-###         - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
+### ログの収集
 
 #### CloudHSM ログの有効化
 
@@ -34,9 +33,9 @@ CloudHSM では監査ログがデフォルトで有効になっています。
 
 1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で CloudHSM ログを含む Cloudwatch ロググループにトリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch ロググループ"  popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch トリガー"  popup="true" style="width:70%;">}}
 
 完了したら、[Datadog Log セクション][2]に移動し、ログを確認します。
 
@@ -46,4 +45,4 @@ CloudHSM では監査ログがデフォルトで有効になっています。
 
 [1]: /ja/integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs
-[3]: /ja/help
+[3]: /ja/help/

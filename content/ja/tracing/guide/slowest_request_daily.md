@@ -5,16 +5,16 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: 3 分
     text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: 2 分
     text: サービスのレイテンシーを前週と比較する
   - link: /tracing/guide/apm_dashboard/
     tag: 4 分
     text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: 7 分
     text: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: すべてのガイド
 ---
@@ -69,5 +69,5 @@ Datadog APM では、インフラストラクチャーメトリクスやログ�
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#spans
 [6]: /ja/tracing/visualization/trace/?tab=spanmetadata
-[7]: /ja/tracing/guide/adding_metadata_to_spans
-[8]: /ja/tracing/connect_logs_and_traces
+[7]: /ja/tracing/guide/adding_metadata_to_spans/
+[8]: /ja/tracing/connect_logs_and_traces/

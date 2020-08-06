@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,7 +46,7 @@ Serveurs NTP atteints par défaut :
 - `2.datadog.pool.ntp.org`
 - `3.datadog.pool.ntp.org`
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -2,7 +2,10 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Hazelcast Overview: assets/dashboards/overview.json
+  logs:
+    source: hazelcast
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

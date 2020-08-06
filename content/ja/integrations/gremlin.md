@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - コラボレーション
   - 問題追跡
@@ -34,8 +34,8 @@ Gremlin の攻撃の表示、再実行、停止を Datadog から直接行うこ
 
 Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog のワークフローに障害テストのコンテキストを効果的に追加できます。
 
-* ダッシュボードに攻撃イベントを重ねて表示することで、Gremlin がメトリクスにいつどのように影響しているかを正確に特定できます。
-* Datadog の[イベントストリーム][2]から Gremlin の攻撃を表示、再実行、停止できます。
+- ダッシュボードに攻撃イベントを重ねて表示することで、Gremlin がメトリクスにいつどのように影響しているかを正確に特定できます。
+- Datadog の[イベントストリーム][2]から Gremlin の攻撃を表示、再実行、停止できます。
 
 ![スナップショット][3]
 
@@ -45,7 +45,7 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
 
-* API key: <span class="hidden-api-key">${api_key}</span>
+- API キー: <span class="hidden-api-key">\${api_key}</span>
 
 これで、このインテグレーションからのイベントが[イベントストリーム][2]に表示されるようになります。
 
@@ -75,5 +75,5 @@ Gremlin インテグレーションには、サービスのチェック機能は
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
-[5]: https://docs.datadoghq.com/ja/help
+[5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog

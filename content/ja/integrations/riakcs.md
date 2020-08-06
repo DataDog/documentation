@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
 display_name: Riak CS
@@ -46,7 +47,7 @@ Datadog で RiakCS のメトリクスをキャプチャして、以下のこと�
 
 RiakCS チェックは [Datadog Agent][2] パッケージに含まれています。RiakCS ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riakcs.d/conf.yaml][4] を参照してください。
 
@@ -101,7 +102,7 @@ Agent が RiakCS エンドポイントに接続してメトリクスを収集で
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 

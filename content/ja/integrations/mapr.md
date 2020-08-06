@@ -2,7 +2,8 @@
 assets:
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
-  logs: {}
+  logs:
+    source: mapr
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -116,7 +117,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 {{< get-metrics-from-git "mapr" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 - `mapr.can_connect`:
   Agent がストリームトピックに接続してサブスクライブできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。

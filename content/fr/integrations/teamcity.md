@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -38,7 +39,7 @@ Ce check surveille les événements associés aux builds réussis et les envoie 
 
 Contrairement à la plupart des checks d'Agent, ce check ne recueille pas de métriques, seulement des événements.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -52,7 +53,7 @@ Suivez les étapes dans la [documentation de Teamcity][2] pour activer la connex
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 Modifiez le fichier `teamcity.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple teamcity.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 

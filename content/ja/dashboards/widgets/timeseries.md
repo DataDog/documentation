@@ -1,0 +1,199 @@
+---
+title: 時系列ウィジェット
+kind: documentation
+description: 1 つ以上のメトリクス、ログイベント、Analyzed Span、プロセスメトリクスなどの動きを経時的に表示する。
+aliases:
+  - /ja/graphing/widgets/timeseries/
+further_reading:
+  - link: /dashboards/timeboards/
+    tag: ドキュメント
+    text: Timeboards
+  - link: /dashboards/screenboards/
+    tag: ドキュメント
+    text: スクリーンボード
+  - link: /dashboards/graphing_json/
+    tag: ドキュメント
+    text: JSON を使用したダッシュボードの構築
+  - link: 'https://www.datadoghq.com/blog/full-screen-graphs'
+    tag: ブログ
+    text: 全画面モードでグラフを表示しデータを調べる
+---
+時系列可視化機能を使用すると、1 つ以上のメトリクス、ログイベント、Analyzed Span などの動きを経時的に表示できます。タイムウィンドウは、[タイムボード][1]または[スクリーンボード][2]で選択した内容によって異なります。
+
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="時系列" >}}
+
+## セットアップ
+
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ"  style="width:80%;" >}}
+
+### コンフィギュレーション
+
+1. グラフ化するデータを選択します。
+    * メトリクス:  メトリクスクエリの構成については、[クエリ][3]に関するドキュメントを参照してください。
+    * Analyzed Span : Analyzed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
+    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][5]を参照してください。
+
+2. [オプション](#options)を使用して、グラフをカスタマイズします。
+
+### オプション
+
+#### 折れ線グラフ
+
+折れ線グラフには、次の 2 つの追加パラメーターがあります。
+
+| パラメーター | オプション               |
+|-----------|-----------------------|
+| Style     | Solid (実線)、Dashed (破線)、Dotted (点線) |
+| Stroke    | Normal (標準)、Thin (細線)、Thick (太線)   |
+
+#### 外観
+
+グラフは、面グラフ、棒グラフ、または折れ線グラフとして表示できます。Datadog では、どの種類のグラフについても、同じグラフ内に表示された複数のメトリクスを識別できるように、さまざまなカラーオプションを提供しています。
+
+| パレット | 説明                                                                                              |
+|---------|----------------------------------------------------------------------------------------------------------|
+| Classic | 薄い青色、濃い青色、薄い紫色、薄い黄色、黄色 (以降、これの繰り返し) の単色を使用します。 |
+| Cool    | 緑色と青色のグラデーション。                                                        |
+| Warm    | 黄色とオレンジ色のグラデーション。                                                     |
+| Purple  | 紫色のグラデーション。                                                                |
+| Orange  | オレンジ色のグラデーション。                                                                |
+| Gray    | 灰色のグラデーション。                                                                  |
+
+折れ線グラフでは、JSON でクエリを分けることで、メトリクスごとにパレットを割り当てることができます。
+
+#### メトリクスのエイリアス作成
+
+クエリまたは式にエイリアスを作成できます。エイリアスは、グラフや凡例の表示を上書きし、メトリクス名が長い場合に便利です。クエリ/式の末尾にある **as...** をクリックして、メトリクスのエイリアスを入力します。
+
+{{< img src="dashboards/querying/metric_alias.png" alt="メトリクスエイリアス"  style="width:75%;" >}}
+
+##### イベントオーバーレイ
+
+関連するシステムからイベントを追加して、グラフにさらにコンテキストを追加できます。たとえば、GitHub のコミットイベント、Jenkins のデプロイイベント、Docker の作成イベントなどを追加できます。**Event Overlays** セクションを展開して、イベントを表示するためのクエリを入力します。[イベントストリーム][6]と同じクエリ書式を使用してください。以下に例を示します。
+
+| クエリ                       | 説明                                                |
+|-----------------------------|------------------------------------------------------------|
+| `sources:jenkins`           | Jenkins ソースから取得されたすべてのイベントを表示します。                  |
+| `tag:role:web`              | タグ `role:web` が付いたすべてのイベントを表示します。                  |
+| `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][7]から取得されたすべてのイベントを表示します。 |
+
+有効になると、イベントがグラフに赤いバーで重ねて表示されます。
+
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="イベントを重ねて表示"  style="width:75%;" >}}
+
+##### Y 軸コントロール
+
+Y 軸コントロールは、UI または JSON エディターから使用できます。以下を実行できます。
+
+* Y 軸を特定の範囲にクリップできます。
+* パーセンテージしきい値または絶対しきい値に基づいて Y 軸の境界を自動的に変更できます。このしきい値をグラフの両端 (下側と上側) の一方に適用することで、「外れ値」系列を除外できます。
+* Y 軸の目盛を線形から対数、累乗、または平方根に変更できます。
+
+Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開します。
+
+使用できる構成オプションは、次のとおりです。
+
+| オプション                | 必須 | 説明                                                                                                                                                                                                       |
+|-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Min`/`Max`           | ✕       | Y 軸に表示する最小値または最大値、またはその両方を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                     |
+| `Scale`               | ✕       | 目盛のタイプを指定します。使用可能な値:<br>- linear: 線形目盛 (デフォルト)<br>- log: 対数目盛<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)<br>- sqrt: 平方根目盛 |
+| `Always include zero` | ✕       | 常に 0 を含めるか、軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                     |
+
+**注**: 対数関数には負の値を適用できないため、Datadog の対数目盛は、値の符号がすべて同じ (すべて正またはすべて負) の場合にのみ機能します。そうでない場合は、空のグラフが返されます。
+
+## 全画面
+
+[標準の全画面オプション][8]のほかに、前回の期間と比較する、Y 軸の目盛を調整する、変更を保存する、新しいグラフとして保存するなどの簡単な関数を適用できます。
+
+詳しくは、[全画面モードでグラフを表示しデータを調べる][9]を参照してください。
+
+## API
+
+時系列ウィジェットの[ウィジェット JSON スキーマ定義][10]は次のとおりです。
+
+```text
+TIMESERIES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"enum": ["timeseries"]},
+        "requests": {
+            "type":    "array",
+            "items":   REQUEST_SCHEMA,
+            "minItems": 1
+        },
+        "yaxis":   AXIS_SCHEMA,
+        "events":  EVENTS_SCHEMA,
+        "markers": MARKERS_SCHEMA,
+        "title":   {"type": "string"},
+        "show_legend": {"type": "boolean"}
+    },
+    "required": ["type", "requests"],
+    "additionalProperties": false
+}
+```
+
+| パラメーター     | 型             | 必須 | 説明                                                                                                                                               |
+|---------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `type`        | 文字列           | はい      | ウィジェットのタイプ。時系列ウィジェットには `timeseries` を使用します。                                                                                               |
+| `requests`    | オブジェクトの配列 | はい      | ウィジェットに表示する `request` オブジェクトの配列。`REQUEST_SCHEMA` の作成方法については、[リクエスト JSON スキーマに関するドキュメント][11]を参照してください。 |
+| `yaxis`       | object           | いいえ       | Y 軸コントロールのオプション。`AXIS_SCHEMA` の作成方法については、[Y 軸 JSON スキーマに関するドキュメント][12]を参照してください。                                 |
+| `events`      | object           | いいえ       | イベントオーバーレイコントロールのオプション。`EVENTS_SCHEMA` の作成方法については、[イベント JSON スキーマに関するドキュメント][13]を参照してください。                         |
+| `markers`     | object           | いいえ       | マーカーオーバーレイコントロールのオプション。`MARKERS_SCHEMA` の作成方法については、[マーカー JSON スキーマに関するドキュメント][14]を参照してください。                     |
+| `title`       | 文字列           | いいえ       | ウィジェットのタイトル。                                                                                                                                     |
+| `show_legend` | boolean          | いいえ       | （スクリーンボードのみ）このウィジェットのレジェンドを表示                                                                                                        |
+
+`request` オブジェクトでは、以下のプロパティも使用できます。
+
+```json
+{
+  "style": {
+    "type": "object",
+    "properties": {
+      "palette": {"type": "string"},
+      "line_type": {"enum": ["dashed", "dotted", "solid"]},
+      "line_width": {"enum": ["normal", "thick", "thin"]}
+    },
+    "additionalProperties": false
+  },
+  "metadata": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "expression": {"type": "string"},
+        "alias_name": {"type": "string"}
+      },
+      "required": ["expression"],
+      "additionalProperties": false
+    }
+  },
+  "display_type": {"enum": ["area", "bars", "line"]}
+}
+```
+
+| パラメーター          | 型   | 必須 | 説明                                                                              |
+|--------------------|--------|----------|------------------------------------------------------------------------------------------|
+| `style.palette`    | 文字列 | いいえ       | ウィジェットに適用するカラーパレット。                                                    |
+| `style.line_type`  | 文字列 | いいえ       | 表示される線のタイプ。有効な値は `dashed`、`dotted`、`solid` です。           |
+| `style.line_width` | 文字列 | いいえ       | 表示される線の幅。有効な値は `normal`、`thick`、`thin` です。             |
+| `metadata`         | object | いいえ       | 式のエイリアスの定義に使用されます。                                                       |
+| `display_type`     | 文字列 | いいえ       | リクエストに対して使用する表示タイプ。有効な値は `area`、`bars`、`line` です。 |
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/dashboards/timeboard/
+[2]: /ja/dashboards/screenboard/
+[3]: /ja/dashboards/querying/
+[4]: /ja/tracing/app_analytics/search/#search-bar
+[5]: /ja/logs/search_syntax/
+[6]: /ja/events/
+[7]: /ja/dashboards/template_variables/
+[8]: /ja/dashboards/widgets/#full-screen
+[9]: https://www.datadoghq.com/blog/full-screen-graphs
+[10]: /ja/dashboards/graphing_json/widget_json/
+[11]: /ja/dashboards/graphing_json/request_json/
+[12]: /ja/dashboards/graphing_json/widget_json/#y-axis-schema
+[13]: /ja/dashboards/graphing_json/widget_json/#events-schema
+[14]: /ja/dashboards/graphing_json/widget_json/#markers-schema

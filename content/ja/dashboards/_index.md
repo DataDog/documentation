@@ -11,13 +11,13 @@ aliases:
   - /ja/graphing/
 description: データを可視化して詳細な情報を把握
 further_reading:
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードを強化
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: ドキュメント
     text: Datadogの外部でグラフを共有
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: ドキュメント
     text: ダッシュボードで利用可能なすべてのウィジェット
 ---
@@ -123,6 +123,6 @@ Datadog には、[スクリーンボード][4]と[タイムボード][3]の 2 �
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /ja/help
-[3]: /ja/dashboards/timeboard
-[4]: /ja/dashboards/screenboard
+[2]: /ja/help/
+[3]: /ja/dashboards/timeboard/
+[4]: /ja/dashboards/screenboard/
