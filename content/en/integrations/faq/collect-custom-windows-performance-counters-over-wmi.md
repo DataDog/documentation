@@ -53,4 +53,6 @@ instances:
       - [TestNameType, wmi.testnametype.count, gauge]
 ```
 
+**Note**: If you are submitting Windows Performance Counter metrics in languages other than English, these will be translated by Windows.  As such, please ensure to have the ddagentuser account set up with an English language pack.
+
 [1]: /integrations/faq/how-to-retrieve-wmi-metrics/
