@@ -36,7 +36,7 @@ Error Tracking processes errors collected from the browser by the RUM SDK (error
 To quickly get started with error tracking:
 
 1. Download the `v1.11.5+` version of the [RUM Browser SDK][2].
-2. Configure the __version__, the __environment__ and the __service__ when [initializing your SDK][3].
+2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][3].
 
 ### Upload mapping files
 
@@ -53,10 +53,10 @@ Source maps are mapping files generated when minifying Javascript source code. T
 2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
    {{< code-block lang="curl">}}
-   datadog-ci sourcemaps upload /path/to/build/directory \
-        --service=my-service \
-        --release-version=v35.2395005 \
-        --minified-path-prefix=https://hostname.com/static/js
+datadog-ci sourcemaps upload /path/to/build/directory \
+  --service=my-service \
+  --release-version=v35.2395005 \
+  --minified-path-prefix=https://hostname.com/static/js
     {{< /code-block >}}
   
 For more information about CLI parameters, see the [official Github repository][5].
