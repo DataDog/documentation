@@ -23,7 +23,7 @@ API tests are useful to help you monitor your API endpoints and alert you when t
 
 ## Configuration
 
-API tests configuration depends on the type of API test you want to create. There are two API test types: [HTTP test](?tab=httptest), [SSL test](?tab=ssltest), and [TCP test](?tab=tcptest).
+API tests configuration depends on the type of API test you want to create: [HTTP test](?tab=httptest), [SSL test](?tab=ssltest), or [TCP test](?tab=tcptest).
 
 ### Make a request
 
