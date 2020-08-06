@@ -29,7 +29,7 @@ Using 5 hosts running 1 application being profiled in each host. No containers.
 
 ### Case 2: Hosts with 4 Profiled Containers
 
-Using 5 hosts with 4 profiled containers. A profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled – i.e sending profiling data from the container to the Datadog Agent.  
+Using 5 hosts with 4 profiled containers each. A profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled – i.e sending profiling data from the container to the Datadog Agent.  
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
