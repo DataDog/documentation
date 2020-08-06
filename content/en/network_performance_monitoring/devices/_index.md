@@ -13,16 +13,11 @@ further_reading:
 
 ## Overview
 
-Datadog Network Device Monitoring is designed to give you visibility into your network-connected devices, such as routers, switches, servers, and firewalls with Simple Network Management Protocol (SNMP).
+Datadog Network Device Monitoring is designed to give you visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
+
+The Datadog Agent can be configured to automatically discover devices on any network and collect metrics such as bandwidth utilization, throughput, and up/down of devices. Graph the metrics on a Datadog [dashboard][1], or create a [monitor][2] to be alerted when issues arise.
 
 {{< img src="network_performance_monitoring/devices/snmp_dashboard.png" alt="SNMP Generic Dashboard" responsive="true" style="width:100%;">}}
-
-SNMP uses sysOIDs (System Object Identifiers) to uniquely identify devices, and OIDs (Object Identifiers) to uniquely identify managed objects. OIDs follow a hierarchical tree pattern: under the root is ISO, which is numbered 1. The next level is ORG and numbered 3 and so on, with each level being separated by a `.`.
-
-A MIB (Management Information Base) acts as a translator between OIDs and human readable names, and organizes a subset of the hierarchy. Because of the way the tree is structured, most SNMP values start with the same set of objects:
-
-* `1.3.6.1.1`: (MIB-II) A standard that holds system information like uptime, interfaces, and network stack.
-* `1.3.6.1.4.1`: A standard that holds vendor specific information.
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_performance_monitoring/devices/setup" >}}<u>Setup</u>: Configure the Agent to collect network device data.{{< /nextlink >}}
@@ -33,3 +28,6 @@ A MIB (Management Information Base) acts as a translator between OIDs and human 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /dashboards
+[2]: /monitors/monitor_types
