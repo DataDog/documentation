@@ -71,7 +71,7 @@ For non-EU customers who use Slack, [sign up for beta access][4] to the Datadog 
 
 #### 4. Update the incident
 
-Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][2].
+Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be used to track if all remediation steps are complete. This status can be enabled in [Incident Settings][2]. 
 
 {{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
 
