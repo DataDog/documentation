@@ -15,9 +15,8 @@ Incidents live in Datadog alongside the metrics, traces, and logs you are collec
 
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
-* Something is happening that will affect customers or impact services.
-* Something is happening that you need help with.
-* You are unsure whether you should call an incident. Notify other people and increase severity appropriately.
+* An issue is potentially impacting customers or services
+* You do not know whether you should call an incident. Notify other people and increase severity appropriately.
 
 ## Usage
 
@@ -75,6 +74,8 @@ For non-EU customers who use Slack, [sign up for beta access][3] to the Datadog 
 Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][4].
 
 {{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
+
+You can update the status and severity in the `Properties` section of each incident.
 
 As the status of an incident changes, Datadog tracks time-to-resolution as follows:
 
