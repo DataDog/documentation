@@ -78,7 +78,7 @@ Define the request you want to be executed by Datadog:
 
 {{% tab "TCP Test" %}}
 
-{{< img src="synthetics/api_tests/tcp_test.png" alt="Make SSL Request"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/tcp_test.png" alt="Make TCP Request"  style="width:80%;" >}}
 
 1. **Choose request type**: `TCP`
 2. Specify the `Host` and the TCP `Port`.
