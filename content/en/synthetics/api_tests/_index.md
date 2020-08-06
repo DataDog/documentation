@@ -110,7 +110,7 @@ When running an API test, you must define at least one assertion that should be 
 | Headers       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | Body          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 
-**Note**: HTTP tests are able to uncompress bodies with the following `content-encoding` header: `br`, `deflate`, `gzip`, and `identity`.
+**Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
