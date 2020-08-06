@@ -93,7 +93,7 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
 
 #### Collecting logs from CloudWatch Log Group
 
-If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
+If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
 
 {{< tabs >}}
 {{% tab "AWS Console" %}}
@@ -152,12 +152,12 @@ Resources:
 
 #### Collecting logs from S3 buckets
 
-If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
+If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following methods:
 
 {{< tabs >}}
 {{% tab "AWS Console" %}}
 
-1. Once the lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
+1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
    {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
 1. Select the bucket and then follow the AWS instructions:
