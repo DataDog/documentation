@@ -112,14 +112,14 @@ The `query` property in the request body should contain a query string in the fo
 
 * `aggregator`: `min` if the alert should trigger when the forecast goes below the threshold, and `max` if the alert should trigger when the forecast goes above the threshold 
 * `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`
-* `metric_query`: a standard Datadog metric query (e.g., `min:system.disk.free{service:database,device:/data}by{host}`)
+* `metric_query`: a standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`
 * `algorithm`: `linear` or `seasonal`
 * `deviations`: a number greater than or equal to 1; controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive
 * `interval`: a positive integer representing the number of seconds in the rollup interval
-* `history`: a string representing the amount past data that should be used when making the forecast (e.g., `1w`, `3d`); this parameter is only for use with the `linear` algorithm
-* `model`: `default`, `simple`, or `reactive`; this parameter is only for use with the `linear` algorithm
-* `seasonality`: `hourly`, `daily`, or `weekly`; this parameter is only for use with the `seasonal` algorithm
-* `comparator`: `<=` to alert when the forecast goes below the threshold; `>=` to alert when the forecast goes above the threshold
+* `history`: a string representing the amount of past data that should be used for making the forecast, for example: `1w`, `3d`. This parameter is only used with the `linear` algorithm.
+* `model`: The type of model to use: `default`, `simple`, or `reactive`. This parameter is only used with the `linear` algorithm.
+* `seasonality`: The seasonality to use: `hourly`, `daily`, or `weekly`. This parameter is only used with the `seasonal` algorithm
+* `comparator`: Use `<=` to alert when the forecast goes below the threshold. Use `>=` to alert when the forecast goes above the threshold.
 * `threshold`: a number; a critical alert will trigger when the confidence bounds around the forecast reach this threshold
 
 ## Troubleshooting
