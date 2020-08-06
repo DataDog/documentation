@@ -106,12 +106,14 @@ If you are collecting logs from a CloudWatch Log Group, configure the trigger to
 Select the corresponding CloudWatch Log Group, add a filter name (but feel free to leave the filter empty) and add the trigger:
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" popup="true" style="width:70%;">}}
 
-Once done, go into your [Datadog Log section][6] to start exploring your logs.
+Once done, go into your [Datadog Log section][1] to start exploring your logs.
 
+
+[1]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-For Terraform users, you can provision and manage your triggers using the [aws_cloudwatch_log_subscription_filter][7] resource. See sample code below.
+For Terraform users, you can provision and manage your triggers using the [aws_cloudwatch_log_subscription_filter][1] resource. See sample code below.
 
 ```conf
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
@@ -122,10 +124,12 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 }
 ```
 
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
 {{% tab "CloudFormation/SAM" %}}
 
-For AWS CloudFormation or SAM users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][109] resource. See sample code below.
+For AWS CloudFormation or SAM users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
 
 ```yaml
 Resources:
@@ -136,21 +140,9 @@ Resources:
       LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
       FilterPattern: ""
 ```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
 
-For Serverless Framework users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][109] resource. See sample code below.
 
-```yaml
-resources:
-  Resources:
-    MyLogSubscriptionFilter:
-      Type: "AWS::Logs::SubscriptionFilter"
-      Properties:
-        DestinationArn: "<DATADOG_FORWARDER_ARN>"
-        LogGroupName: "<CLOUDWATCH_LOG_GROUP_NAME>"
-        FilterPattern: ""
-```
+[1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -170,12 +162,14 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 1. Set the correct event type on S3 buckets:
    {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
-Once done, go into your [Datadog Log section][6] to start exploring your logs!
+Once done, go into your [Datadog Log section][1] to start exploring your logs!
 
+
+[1]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-For Terraform users, you can provision and manage your triggers using the [aws_s3_bucket_notification][8] resource. See the sample code below.
+For Terraform users, you can provision and manage your triggers using the [aws_s3_bucket_notification][1] resource. See the sample code below.
 
 ```conf
 resource "aws_s3_bucket_notification" "my_bucket_notification" {
@@ -188,16 +182,18 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
   }
 }
 ```
+
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
 {{% /tab %}}
 {{% tab "CloudFormation/SAM" %}}
 
-For CloudFormation or SAM users, you can configure triggers using the CloudFormation [NotificationConfiguration][9] for your S3 bucket. See the sample code below.
+For CloudFormation or SAM users, you can configure triggers using the CloudFormation [NotificationConfiguration][1] for your S3 bucket. See the sample code below.
 
 ```yaml
 Resources:
   Bucket:
     Type: AWS::S3::Bucket
-    DependsOn: BucketPermission
     Properties:
       BucketName: "<MY_BUCKET>"
       NotificationConfiguration:
@@ -205,6 +201,9 @@ Resources:
         - Event: 's3:ObjectCreated:*'
           Function: "<DATADOG_FORWARDER_ARN>"
 ```
+
+
+[1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
 {{% /tab %}}
 {{< /tabs >}}
 
