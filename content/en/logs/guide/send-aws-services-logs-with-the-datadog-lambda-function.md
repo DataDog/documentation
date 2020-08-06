@@ -17,29 +17,26 @@ AWS service logs can be collected with the Datadog Forwarder Lambda function. Th
 
 To start collecting logs from your AWS services:
 
-1. Set up the Datadog Forwarder Lambda function in your AWS account by following the instructions in the [DataDog/datadog-serverless-functions Github repository][1].
+1. Set up the [Datadog Forwarder Lambda function][1] in your AWS account.
 2. [Enable logging](#enable-logging-for-your-aws-service) for your AWS service (most AWS services can log to a S3 bucket or CloudWatch Log Group).
-3. Configure the triggers that cause the Lambda to execute. There are two ways to configure the triggers:
+3. [Set up the triggers](#set-up-triggers) that cause the Forwarder Lambda to execute when there are new logs to be forwarded. There are two ways to configure the triggers.
 
-    - [Automatically](#automatically-setup-triggers): Datadog automatically retrieves the logs for the selected AWS services and adds them as triggers on the Datadog Lambda function. Datadog also keeps the list up to date.
-    - [Manually](#manually-setup-triggers): Set up each trigger yourself via the AWS console.
-
-**Note**: If you are in AWS us-east-1 region, [leverage Datadog-AWS Private Link][2] to forward your logs to Datadog. If you do so, your forwarder function [must have the `VPCLambdaExecutionRole` permission][3].
+**Note**: If you are in AWS us-east-1 region, leverage [Datadog-AWS Private Link][2].
 
 
-## Send AWS service logs to Datadog
+## Set up triggers
 
-There are two options when configuring triggers on the Datadog Lambda function:
+There are two options when configuring triggers on the Datadog Forwarder Lambda function:
 
-- Manually set up triggers on S3 buckets, CloudWatch Log Groups, or CloudWatch Events.
-- Let Datadog automatically set and manage the list of triggers.
+- [Automatically](#automatically-set-up-triggers): Datadog automatically retrieves the log locations for the selected AWS services and adds them as triggers on the Datadog Forwarder Lambda function. Datadog also keeps the list up to date.
+- [Manually](#manually-set-up-triggers): Set up each trigger yourself.
 
 ### Automatically set up triggers
 
 If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can automatically manage triggers for you.
 
-1. If you haven't already, set up the [Datadog log collection AWS Lambda function][4].
-2. Ensure the policy of the IAM role used for [Datadog-AWS integration][5] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
+1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
+2. Ensure the policy of the IAM role used for [Datadog-AWS integration][3] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
 
     ```text
     "cloudfront:GetDistributionConfig",
@@ -83,20 +80,20 @@ If you are storing logs in many S3 buckets or CloudWatch Log groups, Datadog can
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
 
-3. Navigate to the _Collect Logs_ tab in the [AWS Integration tile][6].
+3. Navigate to the _Collect Logs_ tab in the [AWS Integration tile][4].
 4. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
    {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" popup="true" style="width:80%;" >}}
 5. Select the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, uncheck it.
    {{< img src="logs/aws/AWSLogStep2.png" alt="Select services" popup="true" style="width:80%;" >}}
 6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
 7. To stop collecting all AWS logs, press the _x_ next to each Lambda ARN. All triggers for that function are removed.
-8. Within a few minutes of this initial setup, your AWS Logs appear in your Datadog [log explorer page][7] in near real time.
+8. Within a few minutes of this initial setup, your AWS Logs appear in your Datadog [log explorer page][5] in near real time.
 
 ## Manually set up triggers
 
 ### Collecting logs from CloudWatch Log Group
 
-If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][4] using one of the following method:
+If you are collecting logs from a CloudWatch Log Group, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
 
 {{< tabs >}}
 {{% tab "AWS Console" %}}
@@ -155,7 +152,7 @@ Resources:
 
 ### Collecting logs from S3 buckets
 
-If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][4] using one of the following method:
+If you are collecting logs from an S3 bucket, configure the trigger to the [Datadog Forwarder Lambda function][1] using one of the following method:
 
 {{< tabs >}}
 {{% tab "AWS Console" %}}
@@ -220,64 +217,62 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 
 | AWS service                        | Activate AWS service logging                                                                    | Send AWS logs to Datadog                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][8]                  | [Enable AWS API Gateway logs][9]                                                               | [Manual][10] log collection                                                 |
-| [Cloudfront][11]                   | [Enable AWS Cloudfront logs][12]                                                                | [Manual][13] and [automatic](#automatically-setup-triggers) log collection  |
-| [Cloudtrail][8]                   | [Enable AWS Cloudtrail logs][14]                                                                | [Manual][15] log collection                                                 |
-| [DynamoDB][16]                     | [Enable AWS DynamoDB logs][17]                                                                  | [Manual][18] log collection                                                 |
-| [EC2][19]                          | `-`                                                                                             | Use the [Datadog Agent][19] to send your logs to Datadog                    |
-| [ECS][20]                          | `-`                                                                                             | [Use the docker agent to gather your logs][21]                              |
-| [Elastic Load Balancing (ELB)][22] | [Enable AWS ELB logs][23]                                                                       | [Manual][24] and [automatic](#automatically-setup-triggers) log collection  |
-| [Lambda][25]                       | `-`                                                                                             | [Manual][26] and [automatic](#automatically-setup-triggers) log collection |
-| [RDS][27]                         | [Enable AWS RDS logs][28]                                                                      | [Manual][29] log collection                                                |
-| [Route 53][30]                    | [Enable AWS Route 53 logs][31]                                                                 | [Manual][32] log collection                                                |
-| [S3][33]                          | [Enable AWS S3 logs][34]                                                                       | [Manual][35] and [automatic](#automatically-setup-triggers) log collection |
-| [SNS][36]                         | There is no "SNS Logs". Process logs and events that are transiting through to the SNS Service. | [Manual][37] log collection                                                |
-| [RedShift][38]                    | [Enable AWS Redshift logs][39]                                                                 | [Manual][40] and [automatic](#automatically-setup-triggers) log collection |
-| [VPC][41]                         | [Enable AWS VPC logs][42]                                                                      | [Manual][43] log collection                                                |
+| [API Gateway][6]                  | [Enable AWS API Gateway logs][7]                                                               | [Manual][8] log collection                                                 |
+| [Cloudfront][9]                   | [Enable AWS Cloudfront logs][10]                                                                | [Manual][11] and [automatic](#automatically-setup-triggers) log collection  |
+| [Cloudtrail][6]                   | [Enable AWS Cloudtrail logs][12]                                                                | [Manual][13] log collection                                                 |
+| [DynamoDB][14]                     | [Enable AWS DynamoDB logs][15]                                                                  | [Manual][16] log collection                                                 |
+| [EC2][17]                          | `-`                                                                                             | Use the [Datadog Agent][17] to send your logs to Datadog                    |
+| [ECS][18]                          | `-`                                                                                             | [Use the docker agent to gather your logs][19]                              |
+| [Elastic Load Balancing (ELB)][20] | [Enable AWS ELB logs][21]                                                                       | [Manual][22] and [automatic](#automatically-setup-triggers) log collection  |
+| [Lambda][23]                       | `-`                                                                                             | [Manual][24] and [automatic](#automatically-setup-triggers) log collection |
+| [RDS][25]                         | [Enable AWS RDS logs][26]                                                                      | [Manual][27] log collection                                                |
+| [Route 53][28]                    | [Enable AWS Route 53 logs][29]                                                                 | [Manual][30] log collection                                                |
+| [S3][31]                          | [Enable AWS S3 logs][32]                                                                       | [Manual][33] and [automatic](#automatically-setup-triggers) log collection |
+| [SNS][34]                         | There is no "SNS Logs". Process logs and events that are transiting through to the SNS Service. | [Manual][35] log collection                                                |
+| [RedShift][36]                    | [Enable AWS Redshift logs][37]                                                                 | [Manual][38] and [automatic](#automatically-setup-triggers) log collection |
+| [VPC][39]                         | [Enable AWS VPC logs][40]                                                                      | [Manual][41] log collection                                                |
 
 
 
 
-[1]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#installation
-[2]: /agent/guide/private-link/?tab=logs
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html
-[4]: /serverless/forwarder/
-[5]: /integrations/amazon_web_services/
-[6]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[7]: https://app.datadoghq.com/logs
-[8]: /integrations/amazon_api_gateway/
-[9]: /integrations/amazon_api_gateway/#log-collection
-[10]: /integrations/amazon_api_gateway/#send-logs-to-datadog
-[11]: /integrations/amazon_cloudfront/
-[12]: /integrations/amazon_cloudfront/#enable-cloudfront-logging
-[13]: /integrations/amazon_cloudfront/#send-logs-to-datadog
-[14]: /integrations/amazon_cloudtrail/#enable-cloudtrail-logging
-[15]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
-[16]: /integrations/amazon_dynamodb/#enable-dynamodb-logging
-[17]: /integrations/amazon_dynamodb/
-[18]: /integrations/amazon_dynamodb/#send-logs-to-datadog
-[19]: /integrations/amazon_ec2/
-[20]: /integrations/amazon_ecs/
-[21]: /integrations/amazon_ecs/#log-collection
-[22]: /integrations/amazon_elb/
-[23]: /integrations/amazon_elb/#enable-aws-elb-logging
-[24]: /integrations/amazon_elb/#manual-installation-steps
-[25]: /integrations/amazon_lambda/
-[26]: /integrations/amazon_lambda/#log-collection
-[27]: /integrations/amazon_rds/
-[28]: /integrations/amazon_rds/#enable-rds-logging
-[29]: /integrations/amazon_rds/#send-logs-to-datadog
-[30]: /integrations/amazon_route53/
-[31]: /integrations/amazon_route53/#enable-route53-logging
-[32]: /integrations/amazon_route53/#send-logs-to-datadog
-[33]: /integrations/amazon_s3/
-[34]: /integrations/amazon_s3/#enable-s3-access-logs
-[35]: /integrations/amazon_s3/#manual-installation-steps
-[36]: /integrations/amazon_sns/
-[37]: /integrations/amazon_sns/#send-logs-to-datadog
-[38]: /integrations/amazon_redshift/
-[39]: /integrations/amazon_redshift/#enable-aws-redshift-logging
-[40]: /integrations/amazon_redshift/#log-collection
-[41]: /integrations/amazon_vpc/
-[42]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
-[43]: /integrations/amazon_vpc/#log-collection
+[1]: /serverless/forwarder/
+[2]: /serverless/forwarder#aws-privatelink-support
+[3]: /integrations/amazon_web_services/
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[5]: https://app.datadoghq.com/logs
+[6]: /integrations/amazon_api_gateway/
+[7]: /integrations/amazon_api_gateway/#log-collection
+[8]: /integrations/amazon_api_gateway/#send-logs-to-datadog
+[9]: /integrations/amazon_cloudfront/
+[10]: /integrations/amazon_cloudfront/#enable-cloudfront-logging
+[11]: /integrations/amazon_cloudfront/#send-logs-to-datadog
+[12]: /integrations/amazon_cloudtrail/#enable-cloudtrail-logging
+[13]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
+[14]: /integrations/amazon_dynamodb/#enable-dynamodb-logging
+[15]: /integrations/amazon_dynamodb/
+[16]: /integrations/amazon_dynamodb/#send-logs-to-datadog
+[17]: /integrations/amazon_ec2/
+[18]: /integrations/amazon_ecs/
+[19]: /integrations/amazon_ecs/#log-collection
+[20]: /integrations/amazon_elb/
+[21]: /integrations/amazon_elb/#enable-aws-elb-logging
+[22]: /integrations/amazon_elb/#manual-installation-steps
+[23]: /integrations/amazon_lambda/
+[24]: /integrations/amazon_lambda/#log-collection
+[25]: /integrations/amazon_rds/
+[26]: /integrations/amazon_rds/#enable-rds-logging
+[27]: /integrations/amazon_rds/#send-logs-to-datadog
+[28]: /integrations/amazon_route53/
+[29]: /integrations/amazon_route53/#enable-route53-logging
+[30]: /integrations/amazon_route53/#send-logs-to-datadog
+[31]: /integrations/amazon_s3/
+[32]: /integrations/amazon_s3/#enable-s3-access-logs
+[33]: /integrations/amazon_s3/#manual-installation-steps
+[34]: /integrations/amazon_sns/
+[35]: /integrations/amazon_sns/#send-logs-to-datadog
+[36]: /integrations/amazon_redshift/
+[37]: /integrations/amazon_redshift/#enable-aws-redshift-logging
+[38]: /integrations/amazon_redshift/#log-collection
+[39]: /integrations/amazon_vpc/
+[40]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
+[41]: /integrations/amazon_vpc/#log-collection
