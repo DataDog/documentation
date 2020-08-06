@@ -129,7 +129,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filt
 {{% /tab %}}
 {{% tab "CloudFormation/SAM" %}}
 
-For AWS CloudFormation or SAM users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below.
+For AWS CloudFormation or SAM users, you can provision and manage your triggers using the CloudFormation [AWS::Logs::SubscriptionFilter][1] resource. See sample code below. The sample code also work for [Serverless Framework][2] users, put it under the [resources][3] section within your serverless.yml.
 
 ```yaml
 Resources:
@@ -143,6 +143,8 @@ Resources:
 
 
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
+[2]: https://www.serverless.com/
+[3]: https://www.serverless.com/framework/docs/providers/aws/guide/resources/
 {{% /tab %}}
 {{< /tabs >}}
 
