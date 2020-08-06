@@ -36,7 +36,7 @@ You can declare an incident directly from a graph. You can also go to the upper 
 * SEV-3: Moderate impact
 * SEV-4: Low impact
 * SEV-5: Minor issue
-* UNKNOWN: Unknown
+* UNKNOWN: Initial investigation
 
 **Title**: Give your incident a descriptive title.
 
@@ -72,9 +72,9 @@ For non-EU customers who use Slack, [sign up for beta access][3] to the Datadog 
 
 #### 4. Update the incident
 
-Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed.
+Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated, and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][4].
 
-There is an optional fourth status, `Completed`, that can be enabled in [Incident Settings][4].
+{{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
 
 As the status of an incident changes, Datadog tracks time-to-resolution as follows:
 
@@ -84,11 +84,9 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 | `Active` to `Resolved` to `Completed`, `Active` to `Completed` to `Resolved` | Unchanged |
 | `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
-{{< img src="monitors/incidents/workflow-4-update-2.png" alt="Update Incident"  style="width:60%;">}}
-
 #### 5. Follow up and learn from the incident
 
-Create a postmortem with [notebooks][5], look back on exactly what went wrong, and add follow-up tasks. Notebooks support live editing, so several people can work on a postmortem or other document at the same time.
+Link to a postmortem document, look back on exactly what went wrong, and add follow-up tasks. Postmortems created in Datadog [Notebooks][5] support live collaboration; to link to an existing notebook, click the plus under `Other Docs`. Click the linked notebook to edit with teammates in real-time.
 
 {{< img src="monitors/incidents/workflow-5-postmortem-1.png" alt="Postmortem"  style="width:60%;">}}
 
