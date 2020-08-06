@@ -54,6 +54,10 @@ data/integrations/
 content/en/security_monitoring/default_rules/*.md
 !content/en/security_monitoring/default_rules/_index.md
 
+# compliance rules
+content/en/compliance_monitoring/default_rules/*.md
+!content/en/compliance_monitoring/default_rules/_index.md
+
 # Logs
 /logs/*
 *.log

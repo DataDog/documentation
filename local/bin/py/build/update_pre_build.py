@@ -7,7 +7,7 @@ from pull_and_push_file import pull_and_push_file
 from pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content
 from integrations import Integrations
-from security_rules import security_rules
+from security_rules import security_rules, compliance_rules
 
 from collections import OrderedDict
 from optparse import OptionParser
@@ -71,6 +71,8 @@ class Build:
                     pull_and_push_file(content, self.content_dir)
                 elif content["action"] == "security-rules":
                     security_rules(content, self.content_dir)
+                elif content["action"] == "compliance-rules":
+                    compliance_rules(content, self.content_dir)
                 elif content["action"] == "Not Available":
                     if getenv("LOCAL") == 'True':
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(

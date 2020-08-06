@@ -295,4 +295,12 @@
         - "security-monitoring/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'
-
+    - action: compliance-rules
+      branch: main
+      globs:
+        - "configuration/*.json"
+        - "configuration/*.md"
+        - "runtime/compliance/main/*.json"
+        - "runtime/compliance/main/*.md"
+      options:
+        dest_path: '/compliance_monitoring/default_rules/'
