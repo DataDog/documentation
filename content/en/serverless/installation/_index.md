@@ -21,5 +21,5 @@ In addition to setup for your language, these instructions walk you through inst
 {{< partial name="serverless/getting-started-languages.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: /serverless/installation/installing_the_forwarder
+[2]: /serverless/forwarder
 [3]: /serverless/installation/installing_the_library
