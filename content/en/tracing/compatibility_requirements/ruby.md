@@ -146,7 +146,7 @@ For a list of available integrations, and their configuration options, please re
 [34]: /tracing/setup/ruby/#grpc
 [35]: https://github.com/grpc/grpc/tree/master/src/rubyc
 [36]: https://github.com/httprb/http
-[37]: /tracing/setup/ruby/#http.rb
+[37]: /tracing/setup/ruby/#http-rb
 [38]: https://github.com/zendesk/ruby-kafka
 [39]: /tracing/setup/ruby/#kafka
 [40]: /tracing/setup/ruby/#mongodb
