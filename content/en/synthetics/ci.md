@@ -22,7 +22,7 @@ Datadog Continuous Testing can also be used to **run tests as part of your CD pr
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. The Synthetic Continuous Testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
+On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. Synthetic Continuous Testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
 
 ## API usage
 
