@@ -95,6 +95,6 @@ Link to a postmortem document, look back on exactly what went wrong, and add fol
 
 [1]: https://app.datadoghq.com/incidents
 [2]: https://app.datadoghq.com/incidents/settings
-[3]: /integrations/slack
+[3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [4]: https://app.datadoghq.com/incidents/ddslackapp
 [5]: https://app.datadoghq.com/notebook/list
