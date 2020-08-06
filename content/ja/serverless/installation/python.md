@@ -40,7 +40,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 4. サーバーレスアプリケーションを再デプロイします。
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
-[2]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 <div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
@@ -115,7 +115,7 @@ CloudFormation マクロを使用して Datadog Lambda ライブラリをイン�
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -205,10 +205,10 @@ CloudFormation マクロを使用して Datadog Lambda ライブラリをイン�
 
 2. サーバーレスアプリケーションを再デプロイします。
 
+
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
@@ -243,9 +243,9 @@ CloudFormation マクロを使用して Datadog Lambda ライブラリをイン�
 
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[2]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -300,9 +300,9 @@ pip install datadog-lambda -t ./
 [2]: https://github.com/DataDog/datadog-lambda-layer-python/releases
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
 [4]: https://pypi.org/project/datadog-lambda/
-[5]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-[6]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[5]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[6]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}} 
 {{< /tabs >}}
 
