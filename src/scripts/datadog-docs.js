@@ -1084,6 +1084,8 @@ function loadPage(newUrl) {
                 redirectToRegion(regionSelector.value);
             }
 
+            initializeSecurityRules();
+
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 

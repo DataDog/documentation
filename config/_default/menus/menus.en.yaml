@@ -1277,11 +1277,6 @@ main:
     parent: compliance_monitoring
     identifier: compliance_monitoring_getting_started
     weight: 1
-  - name: Default Rules
-    url: compliance_monitoring/default_rules/
-    parent: compliance_monitoring
-    identifier: compliance_monitoring_default_detection_rules
-    weight: 2
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
