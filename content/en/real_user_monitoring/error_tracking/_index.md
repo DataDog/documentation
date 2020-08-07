@@ -17,7 +17,7 @@ further_reading:
 
 {{< /site-region >}}
 
-{{< img src="real_user_monitoring/etracking_page.png" alt="Error Tracking Page"  >}}
+{{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Page"  >}}
 
 ## What is Error Tracking?
 
