@@ -299,8 +299,12 @@
       branch: main
       globs:
         - "configuration/*.json"
+        - "configuration/*.yaml"
+        - "configuration/*.yml"
         - "configuration/*.md"
         - "runtime/**/*.json"
+        - "runtime/**/*.yaml"
+        - "runtime/**/*.yml"
         - "runtime/**/*.md"
       options:
-        dest_path: '/compliance_monitoring/default_rules/'
+        dest_path: '/security_monitoring/default_rules/'

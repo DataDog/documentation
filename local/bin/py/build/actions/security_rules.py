@@ -33,15 +33,27 @@ def security_rules(content, content_dir):
     """
     logger.info("Starting security rules action...")
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
-        # Only loop over rules JSON files (not eg. Markdown files containing the messages)
-        if not file_name.endswith(".json"):
-            continue
-        with open(file_name, mode="r+") as f:
-            json_data = json.loads(f.read())
-            p = Path(f.name)
 
+        data = None
+        if file_name.endswith(".json"):
+            with open(file_name, mode="r+") as f:
+                data = json.loads(f.read())
+        elif file_name.endswith(".yaml"):
+            with open(file_name, mode="r+") as f:
+                data = yaml.load(f.read(), Loader=yaml.FullLoader)
+
+        p = Path(f.name)
+        message_file_name = p.with_suffix('.md')
+
+        if data and message_file_name.exists():
             # delete file or skip if staged
-            if json_data.get('isStaged', False) or json_data.get('isDeleted', False) or not json_data.get('isEnabled', True):
+            # any() will return True when at least one of the elements is Truthy
+            if any([
+                data.get('isStaged', False),
+                data.get('isDeleted', False),
+                not data.get('isEnabled', True),
+                not data.get('enabled', True)
+            ]):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
                     p.unlink()
@@ -49,22 +61,42 @@ def security_rules(content, content_dir):
                     logger.info(f"skipping file {p.name}")
             else:
                 # The message of a detection rule is located in a Markdown file next to the rule definition
-                message_file_name = file_name.rsplit(".", 1)[0] + ".md"
-
-                with open(message_file_name, mode="r+") as message_file:
+                with open(str(message_file_name), mode="r+") as message_file:
                     message = message_file.read()
 
+                    # strip out [text] e.g "[CIS Docker] Ensure that.." becomes "Ensure that..."
+                    parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
                     page_data = {
-                        "title": f"{json_data.get('name', '')}",
+                        "title": parsed_title,
                         "kind": "documentation",
-                        "type": "security_rules",
                         "disable_edit": True,
-                        "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"]
+                        "aliases": [f"{data.get('defaultRuleId', '').strip()}"],
+                        "rule_category": []
                     }
 
-                    for tag in json_data.get('tags', []):
-                        key, value = tag.split(':')
-                        page_data[key] = value
+                    # we need to get the path relative to the repo root for comparisons
+                    extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
+                    # lets build up this categorization for filtering purposes
+                    if 'configuration' in relative_path:
+                        page_data['rule_category'].append('Cloud Configuration')
+                    if 'security-monitoring' in relative_path:
+                        page_data['rule_category'].append('Logs Detection')
+                    if 'runtime' in relative_path:
+                        page_data['rule_category'].append('Runtime Agent')
+
+                    tags = data.get('tags', [])
+                    if tags:
+                        for tag in tags:
+                            key, value = tag.split(':')
+                            page_data[key] = value
+                    else:
+                        # try build up manually
+                        if content['action'] == 'compliance-rules':
+                            page_data["source"] = f"{data.get('framework', {}).get('name', '').replace('cis-', '')}"
+                            page_data["security"] = "coming soon"
+                            page_data["framework"] = "coming soon"
+                            page_data["control"] = "coming soon"
+                            page_data["scope"] = "coming soon"
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
@@ -112,7 +144,7 @@ def compliance_rules(content, content_dir):
                     page_data = {
                         "title": f"{parsed_title}",
                         "kind": "documentation",
-                        "type": "compliance_rules",
+                        "type": "security_rules",
                         "disable_edit": True,
                         "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"],
                         "source": f"{json_data.get('framework', {}).get('name', '').replace('cis-','')}"

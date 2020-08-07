@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch';
 import Choices from 'choices.js';
 
 import { initializeIntegrations } from './components/integrations';
+import { initializeSecurityRules } from './components/security-rules';
 import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC, } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
@@ -689,6 +690,7 @@ $(document).ready(function () {
 
     // TODO: move integrations code to own file after webpack update
     initializeIntegrations();
+    initializeSecurityRules();
 });
 
 function updateMainContentAnchors() {
