@@ -6,9 +6,9 @@ further_reading:
 - link: "/real_user_monitoring/error_tracking/explorer"
   tag: "Documentation"
   text: "RUM Error Tracking Explorer"
-- link: "https://app.datadoghq.com/rum/"
+- link: "https://app.datadoghq.com/error-tracking"
   tag: "UI"
-  text: "RUM Applications"
+  text: "Error tracking"
 ---
 
 {{< site-region region="eu" >}}
