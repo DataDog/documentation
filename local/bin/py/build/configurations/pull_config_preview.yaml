@@ -300,7 +300,7 @@
       globs:
         - "configuration/*.json"
         - "configuration/*.md"
-        - "runtime/compliance/main/*.json"
-        - "runtime/compliance/main/*.md"
+        - "runtime/**/*.json"
+        - "runtime/**/*.md"
       options:
         dest_path: '/compliance_monitoring/default_rules/'
