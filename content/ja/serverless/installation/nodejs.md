@@ -40,7 +40,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 4. サーバーレスアプリケーションを再デプロイします。
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
-[2]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
@@ -118,7 +118,7 @@ CloudFormation マクロを使用して Datadog Lambda ライブラリをイン�
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 
 {{% tab "AWS CDK" %}}
@@ -214,7 +214,7 @@ CloudFormation マクロを使用して Datadog Lambda ライブラリをイン�
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
 [2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -274,9 +274,9 @@ yarn add datadog-lambda-js
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[4]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 

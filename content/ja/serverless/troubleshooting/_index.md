@@ -27,7 +27,7 @@ further_reading:
 それでも問題がはっきりしない場合は、[Datadog のサポートチーム][10]にご連絡ください。
 
 [1]: /ja/serverless/#getting-started
-[2]: /ja/serverless/installation/installing_the_forwarder
+[2]: /ja/serverless/forwarder
 [3]: /ja/serverless/installation/installing_the_library
 [4]: /ja/integrations/amazon_lambda/#metric-collection
 [5]: /ja/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
