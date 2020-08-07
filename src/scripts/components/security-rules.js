@@ -20,6 +20,28 @@ export function initializeSecurityRules() {
         });
     });
 
+    function filterByString(searchValue) {
+        if (searchValue) {
+            // Use an attribute wildcard selector to check for matches
+            mixer.filter(`[data-name*="${searchValue}"]`);
+        } else {
+            // If no searchValue, treat as filter('all')
+            mixer.filter('all');
+        }
+    }
+
+    function activateButton(activeButton, siblings) {
+        let button;
+        let i;
+
+        if (activeButton && siblings) {
+            for (i = 0; i < siblings.length; i++) {
+                button = siblings[i];
+                button.classList[button === activeButton ? 'add' : 'remove']('active');
+            }
+        }
+    }
+
     if(containerEl) {
         mixer = mixitup(containerEl, {
             animation: {duration: 350},
@@ -50,28 +72,6 @@ export function initializeSecurityRules() {
             });
         }
 
-        function filterByString(searchValue) {
-            if (searchValue) {
-                // Use an attribute wildcard selector to check for matches
-                mixer.filter(`[data-name*="${searchValue}"]`);
-            } else {
-                // If no searchValue, treat as filter('all')
-                mixer.filter('all');
-            }
-        }
-
-        function activateButton(activeButton, siblings) {
-            let button;
-            let i;
-
-            if (activeButton && siblings) {
-                for (i = 0; i < siblings.length; i++) {
-                    button = siblings[i];
-                    button.classList[button === activeButton ? 'add' : 'remove']('active');
-                }
-            }
-        }
-
         if (controls) {
             controls.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -88,7 +88,7 @@ export function initializeSecurityRules() {
         if(controls) {
             activateButton(controls.querySelector('[data-filter="all"]'), filters);
         }
-        /* if(keyword) { filterByString(keyword); } */
+        if(keyword) { filterByString(keyword); }
 
         $(window).on('hashchange', function () {
             let currentCat = '';
