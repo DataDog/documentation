@@ -20,5 +20,5 @@ further_reading:
 {{< partial name="serverless/getting-started-languages.html" >}}
 
 [1]: /ja/integrations/amazon_web_services/
-[2]: /ja/serverless/installation/installing_the_forwarder
+[2]: /ja/serverless/forwarder
 [3]: /ja/serverless/installation/installing_the_library
