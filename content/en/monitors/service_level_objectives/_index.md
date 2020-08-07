@@ -110,6 +110,21 @@ Hover over a saved view from the list and select the hyperlink icon to copy the 
 
 Once you are using a saved view, you can update it by selecting that saved view, modifying the query, and clicking the *Update* button below its name in the *Saved Views* panel. To change the saved view's name or delete a saved view, hover over its row in the *Saved Views* panel and click the pencil icon or trash can icon, respectively.
 
+## SLO Audit Events
+
+SLO audit events allow you to track the history of your SLOs' configurations using the Event Stream. Audit events will be added to the Event Stream every time you create, modify or delete an SLO. Each event will include information on an SLO's configuration and combined together give you a history of how the SLO's configuration changes over time. 
+
+The following information will be included:
+
+- Name
+- Description 
+- Target percentages and time windows
+- Datasources (monitor IDs or metric query)
+
+To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` instead with the ID of the desired SLO.
+
+{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
+
 ## SLO Widgets
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
