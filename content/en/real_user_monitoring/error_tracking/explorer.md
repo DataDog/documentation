@@ -16,11 +16,11 @@ beta: true
 
 The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
-Each item listed in the Explorer is an issue and contains high-level information about it:
+Each item listed in the Explorer is an issue and contains high-level information about the error:
 
 - The error type and the error message
 - The path to the file in which underlying errors are fired
-- Important information about issue’s lifetime:
+- Important information about the issue’s lifetime:
   - When it was first and last seen
   - Graph of occurrences over time
   - Number of occurrences in the selected time period
