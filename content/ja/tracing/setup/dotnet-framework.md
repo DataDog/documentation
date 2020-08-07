@@ -244,9 +244,9 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 | 設定名                                                            | 説明                                                                                                           |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
-| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
 
 ## その他の参考資料
 

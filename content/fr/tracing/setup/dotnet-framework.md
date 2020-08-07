@@ -235,9 +235,9 @@ Le tableau suivant énumère les variables de configuration qui sont uniquement 
 
 | Nom du paramètre                                                            | Description                                                                                                           |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Active ou désactive une intégration spécifique. Valeurs acceptées : `true` (par défaut) ou `false`.                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | Active ou désactive App Analytics pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
-| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | Définit le taux d'échantillonnage App Analytics pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Active ou désactive une intégration spécifique. Valeurs acceptées : `true` (par défaut) ou `false`.                            |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | Active ou désactive App Analytics pour une intégration spécifique. Valeurs acceptées : `true` ou `false` (par défaut).           |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | Définit le taux d'échantillonnage App Analytics pour une intégration spécifique. Doit être un nombre flottant entre `0.0` et `1.0` (par défaut). |
 
 ## Pour aller plus loin
 
