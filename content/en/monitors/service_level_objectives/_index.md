@@ -114,14 +114,20 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 SLO audit events allow you to track the history of your SLOs' configurations using the Event Stream. Audit events will be added to the Event Stream every time you create, modify or delete an SLO. Each event will include information on an SLO's configuration and combined together give you a history of how the SLO's configuration changes over time. 
 
-The following information will be included:
+The following SLO configuration information will be included:
 
 - Name
 - Description 
 - Target percentages and time windows
 - Datasources (monitor IDs or metric query)
 
-To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` instead with the ID of the desired SLO.
+Three different SLO audit events will appear in the Event Stream:
+
+1. `SLO Created` events will show all four pieces of configuration information at creation time of the SLO
+2. `SLO Modified` events will show a diff of only the aspects of the configuration that were changed during a modification
+3. `SLO Deleted` events will show all four pieces of configuration information the SLO had right before it was deleted
+
+To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, instead enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
