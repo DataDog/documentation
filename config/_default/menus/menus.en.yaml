@@ -1416,11 +1416,21 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 405
+  - name: Error Tracking
+    url: real_user_monitoring/error_tracking/
+    parent: rum
+    identifier: rum_error_tracking
+    weight: 5
+  - name: Explorer
+    url: real_user_monitoring/error_tracking/explorer
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_explorer
+    weight: 501
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 4
+    weight: 6
   - name: Network Monitoring
     url: network_performance_monitoring/
     pre: nav_network
