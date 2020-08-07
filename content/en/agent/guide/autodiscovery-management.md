@@ -25,13 +25,13 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+In **Agent v7.20+**, to remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_CONTAINER_EXCLUDE = "image:<IMAGE_NAME>"
 ```
 
-To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+In **Agent v7.20+**, to remove a given Docker container with the name `<NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_CONTAINER_EXCLUDE = "name:<NAME>"
@@ -51,7 +51,7 @@ DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/clean
 
 You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"`
 
-In Agent v7.20+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In **Agent v7.20+**, you can also use exclusion rules to exclude **only logs or only metrics**. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 DD_CONTAINER_EXCLUDE_LOGS = "image:<IMAGE_NAME>"
@@ -90,7 +90,7 @@ In Agent v7.20+, you can also use exclusion rules to exclude only logs or only m
 container_exclude_logs: [image:<IMAGE_NAME>]
 ```
 
-Similarly, to exclude metrics:
+Similarly, to exclude metrics with **Agent v7.20+**:
 
 ```shell
 container_exclude_metrics: [image:<IMAGE_NAME>]
@@ -168,7 +168,7 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 container_include: [name:<NAME>]
 ```
 
-In Agent v7.20+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+In **Agent v7.20+**, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
 
 ```shell
 container_include_logs: [image:<IMAGE_NAME>]
