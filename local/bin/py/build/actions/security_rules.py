@@ -48,12 +48,7 @@ def security_rules(content, content_dir):
         if data and message_file_name.exists():
             # delete file or skip if staged
             # any() will return True when at least one of the elements is Truthy
-            if any([
-                data.get('isStaged', False),
-                data.get('isDeleted', False),
-                not data.get('isEnabled', True),
-                not data.get('enabled', True)
-            ]):
+            if data.get('isStaged', False) or data.get('isDeleted', False) or not data.get('isEnabled', True):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
                     p.unlink()
@@ -69,6 +64,7 @@ def security_rules(content, content_dir):
                     page_data = {
                         "title": parsed_title,
                         "kind": "documentation",
+                        "type": "security_rules",
                         "disable_edit": True,
                         "aliases": [f"{data.get('defaultRuleId', '').strip()}"],
                         "rule_category": []
@@ -92,11 +88,12 @@ def security_rules(content, content_dir):
                     else:
                         # try build up manually
                         if content['action'] == 'compliance-rules':
-                            page_data["source"] = f"{data.get('framework', {}).get('name', '').replace('cis-', '')}"
-                            page_data["security"] = "coming soon"
-                            page_data["framework"] = "coming soon"
-                            page_data["control"] = "coming soon"
-                            page_data["scope"] = "coming soon"
+                            tech = data.get('framework', {}).get('name', '').replace('cis-', '')
+                            page_data["source"] = tech
+                            page_data["security"] = "compliance"
+                            page_data["framework"] = data.get('framework', {}).get('name', '')
+                            page_data["control"] = data.get('control', '')
+                            page_data["scope"] = tech
 
                     front_matter = yaml.dump(page_data, default_flow_style=False).strip()
                     output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
