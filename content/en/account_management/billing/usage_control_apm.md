@@ -8,7 +8,9 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 App Analytics is billed on the basis of [Indexed Span][3] count. You can choose to configure [App Analytics][4] per service to manually control the number of Indexed Spans being generated using the following tools. Note that this, however, limits App Analytics functionality on those services or integration.
 
-**Note:**
+<div class="alert alert-warning">
+This is no longer the recommended way to control APM Usage.  Visit  <a href="https://docs.datadoghq.com/tracing/trace_ingestion_and_indexing">the Trace Ingestion and Indexing page to learn more.</a>
+</div>
 
 ## Choose Indexed Span Retention
 
