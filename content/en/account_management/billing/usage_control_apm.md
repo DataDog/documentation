@@ -6,7 +6,7 @@ kind: documentation
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
-App Analytics is billed on the basis of [Analyzed Span][3] count. You can choose to configure [App Analytics][4] per service to manually control the number of Analyzed Spans being generated using the following tools. Note that this, however, limits App Analytics functionality on those services or integration.
+App Analytics is billed on the basis of [Indexed Span][3] count. You can choose to configure [App Analytics][4] per service to manually control the number of Analyzed Spans being generated using the following tools. Note that this, however, limits App Analytics functionality on those services or integration.
 
 ## Choose Analyzed Span Retention
 
