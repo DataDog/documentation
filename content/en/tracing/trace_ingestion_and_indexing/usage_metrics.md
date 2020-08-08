@@ -4,9 +4,9 @@ kind: documentation
 ---
 ## Overview
 
-This page details the ways you can monitor your APM and Indexing usage to ensure
+This page details the ways you can monitor your APM and Indexing usage.
 
-If the numbers you are seeing are not in line with your expectations, or you want to change your ingestion or indexing counts, refer to the [Indexing][1] or [Ingestion][2] documentation.
+If the numbers you are seeing are not in line with your expectations, or you want to change your ingestion or indexing rates, refer to the [Indexing][1] or [Ingestion][2] documentation.
 
 ## Usage Dashboard
 {{< img src="tracing/trace_indexing_and_ingestion/AppAnalyticsDashboard.png" style="width:100%;" alt="Indexed Span Dashboard" >}}
