@@ -3,12 +3,12 @@ title: APM Billing
 kind: documentation
 ---
 
-[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [App Analytics][2] feature with APM allows you to slice and dice your application data with Analyzed Spans using completely customizable tags.
+[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [App Analytics][2] feature with APM allows you to slice and dice your application data with Indexed Spans using completely customizable tags.
 
 | Billing Parameter  | Price                                      | App Analytics                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [APM Host][3]      | $31 per underlying [APM host][3] per month | 1 million additional Indexed Spans included per month with every APM host.   | Datadog records the number of [APM hosts][4] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][4] |
-| [Fargate][3]       | $2 per concurrent task per month           | No Analyzed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]              |
+| [Fargate][3]       | $2 per concurrent task per month           | No Indexed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]              |
 | [Indexed Span][4] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed Span is an individual request against an individual service in your stack. Datadog charges based on the total number of Indexed Spans retained by Datadog APM at the end of the month. [More information.][4]                                                                                          |
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent.
@@ -42,7 +42,7 @@ Using 5 hosts, retaining 20 million Indexed Spans, and have deployed APM on aver
 
 ### Case 3: Services, Containers and Indexed Spans
 
-Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and retaining 20 million Analyzed Spans on App Analytics.
+Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and retaining 20 million Indexed Spans on App Analytics.
 
 | Billable Unit  | Quantity   | Price                                                                                          | Formula      | Subtotal             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
