@@ -25,6 +25,10 @@ further_reading:
 
 ## Trace sampling
 
+<div class="alert alert-warning">
+These features are no longer recommend. Please review the <a href="https://docs.datadoghq.com/tracing/trace_ingestion_and_indexing/">Trace Ingestion and Indexing</a> section of documentation.
+</div>
+
 Trace Sampling is applicable for high-volume web-scale applications, where a sampled proportion of [traces][1] is kept in Datadog based on the following rules.
 
 Statistics (requests, errors, latency, etc.), are calculated based on the full volume of traces at the Agent level, and are therefore always accurate.
