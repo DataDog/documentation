@@ -98,7 +98,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%;" alt="Trace Journey" >}}
 
-GIF HERE
+{{< img src="tracing/live_search/LiveAnalytics.gif" alt="Live Analytics" >}}
 
 With Live Analytics mode, you can perform analytics on 100% of your ingested traces for the last 15 minutes.  Analytics is used to graph requests or errors corresponding to specified criteria, such as errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to drill directly into traces matching these criteria.
 
@@ -112,7 +112,7 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%;" alt="Trace Journey" >}}
 
-GIF HERE
+{{< img src="tracing/live_search/HistoricalAnalytics.gif" alt="Historical Analytics" >}}
 
 Historical Analytics Mode is accessed in the same way as Live Search mode.  To switch between the two, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched to Indexed Spans, and the data will no longer be a live feed.
 
