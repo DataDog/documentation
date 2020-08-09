@@ -8,7 +8,7 @@ aliases:
 ---
 ## Overview
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 With Tracing without Limits™, both the ingestion of traces to Datadog as well as the indexing of those traces for 15 days are fully customizable.  This page describes both the default experience and the customization options available.
 
@@ -18,7 +18,7 @@ These features are currently in beta. <a href="https://docs.datadoghq.com/help/"
 
 ## Ingestion Controls
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Ingestion Controls affect what is sent by your applications to Datadog.
 
@@ -53,7 +53,7 @@ Enable [App Analytics][2] on your integrations to continue sending Analyzed Span
 
 ## Indexing Controls
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Indexing Controls affect what is stored by Datadog for 15 days.
 

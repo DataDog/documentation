@@ -26,7 +26,7 @@ further_reading:
   text: "Analytics on your APM data at infinite cardinality"
 ---
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 ## Overview
 
@@ -39,7 +39,7 @@ Send and retain exactly the spans you care about. Any indexed span will have its
 
 ## Live Search Mode
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 In Live Search mode, Datadog displays spans as soon as they are sent by the Datadog Agent and before they are indexed by Datadog, and are available for 15 minutes. All spans ingested by Datadog are displayed without any sampling (Tracing without Limits™). With the APM Live Search you can:
 
@@ -60,7 +60,7 @@ The number of received spans per second is displayed at the top of the traces ta
 
 ## Historical Search Mode
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Historical Search Mode is accessed in the same way as Live Search mode.  To switch between the two, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched from live search mode to indexed spans.
 
@@ -94,7 +94,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 ## Live Analytics Mode
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 With Live Analytics mode, you can perform analytics on 100% of your ingested traces for the last 15 minutes.  Analytics is used to graph requests or errors corresponding to specified criteria, such as errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to drill directly into traces matching these criteria.
 
@@ -108,7 +108,7 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 ## Historical Analytics Mode
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%;" alt="Trace Journey" >}}
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Historical Analytics Mode is accessed in the same way as Live Search mode.  To switch between the two, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched to Indexed Spans, and the data will no longer be a live feed.
 
