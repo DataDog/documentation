@@ -113,7 +113,7 @@ Now that you've configured your application to send traces to Datadog, start get
 [3]: /tracing/visualization/service/
 [4]: /tracing/livesearch/
 [5]: /tracing/connect_logs_and_traces/
-[6]: /tracing/serverless_functions
+[6]: /tracing/serverless_functions/
 [7]: /tracing/app_analytics/
 [8]: /synthetics/apm/
 [9]: /tracing/profiling/

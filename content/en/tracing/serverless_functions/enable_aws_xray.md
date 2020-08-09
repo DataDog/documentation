@@ -5,30 +5,32 @@ description: 'Trace your Lambda functions with AWS X-Ray'
 ---
 ## Enable AWS X-Ray
 
-As a first step, make sure to [install the AWS integration][1] before proceeding.
+**Prerequisite:** [Install the AWS integration][1].
 
-Ensure the following permissions are present in the policy document for your AWS/Datadog Role:
+1. Ensure the following permissions are present in the policy document for your AWS/Datadog Role:
 
 ```text
 xray:BatchGetTraces,
 xray:GetTraceSummaries
 ```
 
-The `GetTraceSummaries` permission is used to get the list of recent traces. `BatchGetTraces` actually returns the full traces themselves.
+The `BatchGetTraces` permission is used to return the full traces. The `GetTraceSummaries` permission is used to get a list of summaries of recent traces.
 
-Then, [enable the X-Ray integration within Datadog][2].
+2. [Enable the X-Ray integration within Datadog][2].
 
-If you are using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
+3. If you are using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
 
-**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Analyzed Spans which can impact your bill.
+**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Analyzed Spans which can increase your bill.
 
 ### Enabling AWS X-Ray for your functions
 
-To get the most out of the AWS X-Ray integration, you'll need to enable it _on_ your Lambda functions and API Gateways, **and** install the tracing libraries _in_ your Lambda functions.
+To get the most out of the AWS X-Ray integration:
+ - Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
+ - Install the tracing libraries in your Lambda functions.
 
 #### Recommended: Using the Serverless Framework plugin
 
-The [Datadog Serverless Framework plugin][3] automatically enables X-Ray for your Lambda functions and API Gateway instances. The plugin also automatically adds the [Datadog Lambda Layer][4] to all of your Node and Python functions.
+The [Datadog Serverless Framework plugin][3] automatically enables X-Ray for your Lambda functions and API Gateway instances. The plugin also automatically adds the [Datadog Lambda Layer][4] to all of your Node.js and Python functions.
 
 [Get started with the Serverless Framework plugin][5] and [read the docs][3].
 
@@ -37,13 +39,15 @@ Lastly, [install and import the X-Ray client library in your Lambda function](#i
 #### Manual setup
 
 1. Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to **Enable active tracing**. This turns on X-Ray for that function.
-2. Navigate to the [API Gateway console][6]. Select your API and then the stage. Then on the **Logs/Tracing** tab, select **Enable X-Ray Tracing**. To make these changes take effect, go to **Resources** in the left navigation panel and select **Actions**. Then, click **Deploy API**.
+2. Navigate to the [API Gateway console][6]. Select your API and then the stage.
+3. On the **Logs/Tracing** tab, select **Enable X-Ray Tracing**.
+4. To make these changes take effect, go to **Resources** in the left navigation panel and select **Actions** and click **Deploy API**.
 
 **Note:** The Datadog Lambda Layer and client libraries include the X-Ray SDK as a dependency, so you don't need to explicitly install it in your projects.
 
 Lastly, [install and import the X-Ray client library in your Lambda function](#installing-the-x-ray-client-libraries).
 
-### Installing the X-Ray client libraries
+#### Installing the X-Ray client libraries
 
 The X-Ray client library offers insights into your HTTP requests to APIs and into calls to DynamoDB, S3, MySQL and PostgreSQL (self-hosted, Amazon RDS, and Amazon Aurora), SQS, and SNS.
 
@@ -94,8 +98,7 @@ var mysql = AWSXRay.captureMySQL(require('mysql'));
 var connection = mysql.createConnection(config);
 ```
 
-For further configuration, creating subsegments, and recording annotations, consult the [X-Ray Node.js docs][1].
-
+For further configuration, creating subsegments, and recording annotations, see the [X-Ray Node.js docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
 {{% /tab %}}
@@ -117,7 +120,7 @@ patch_all()
 
 Note that tracing `aiohttp` requires [specific instrumentation][2].
 
-For further configuration, creating subsegments, and recording annotations, consult the [X-Ray Python docs][3].
+For further configuration, creating subsegments, and recording annotations, see the [X-Ray Python docs][3].
 
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
@@ -126,7 +129,7 @@ For further configuration, creating subsegments, and recording annotations, cons
 {{% /tab %}}
 {{% tab "Go, Ruby, Java, .NET" %}}
 
-For all other runtimes, consult the X-Ray SDK docs:
+For all other runtimes, see the X-Ray SDK docs:
 
 - [X-Ray SDK for Go][1]
 - [X-Ray SDK for Ruby][2]

@@ -87,7 +87,7 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics/
 [6]: /agent/
-[7]: /tracing/serverless_functions
+[7]: /tracing/serverless_functions/
 [8]: /infrastructure/serverless/azure_app_services/#overview
 [9]: /agent/basic_agent_usage/heroku/#installation
 [10]: /integrations/cloud_foundry/#trace-collection
