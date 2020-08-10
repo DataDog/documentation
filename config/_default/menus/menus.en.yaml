@@ -1292,10 +1292,10 @@ main:
     parent: security_compliance_monitoring
     identifier: compliance_monitoring
     weight: 160000
-  - name: Getting Started
-    url: compliance_monitoring/getting_started
+  - name: Default Rules
+    url: compliance_monitoring/default_rules
     parent: compliance_monitoring
-    identifier: compliance_monitoring_getting_started
+    identifier: compliance_monitoring_default_rules
     weight: 1
   - name: Synthetic Monitoring
     url: synthetics/
