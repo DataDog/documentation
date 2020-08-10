@@ -14,8 +14,6 @@ Profiler is shipped within the following tracing libraries. Select your language
 
 If you are looking to profile **Ruby**, **PHP**, or **.NET** applications, [sign up][1] to be on the private beta access list. We will notify you when the beta is ready.
 
-[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -260,7 +258,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 ## Troubleshooting
 
-If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][2] and [open a support ticket][3] with debug files and the following information:
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version, and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
@@ -269,5 +267,6 @@ If you've configured the profiler and don't see profiles in the [profile search 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /tracing/troubleshooting/#tracer-debug-mode
-[2]: /help/
+[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[2]: /tracing/troubleshooting/#tracer-debug-mode
+[3]: /help/
