@@ -18,6 +18,10 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 * An issue is or may be impacting customers or services
 * You do not know whether you should call an incident. Notify other people and increase severity appropriately.
 
+<div class="alert alert-warning">
+Incident Management is currently in beta and available to all customers. For more information, reach out to sales@datadoghq.com.
+</div>
+
 ## Usage
 
 Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page for a feed of all ongoing incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
