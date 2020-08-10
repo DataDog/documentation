@@ -19,7 +19,7 @@ Depending on your language and configuration, choose between setting up Datadog 
 
 ## Distributed Tracing with Datadog APM
 
-Datadog APM sends trace data to Datadog in real time, allowing you to monitor traces with little to no latency in the Live Search view. Datadog APM also uses tail-based sampling to make better sampling decisions.
+Datadog APM sends trace data to Datadog in real-time, allowing you to monitor traces with little to no latency in the Live Search view. Datadog APM also uses tail-based sampling to make better sampling decisions.
 
 The Datadog Python, Node.js, and Ruby tracing libraries support distributed tracing for AWS Lambda, with more runtimes coming soon. The easiest way to add tracing to your application is with the [Datadog Lambda Library][2], which includes the Datadog tracing library as a dependency.
 
@@ -27,7 +27,7 @@ Visualize your traces on the [Serverless page][3], in [App Analytics][4], and on
 
 ### Correlate Logs and Traces
 
-The correlation between Datadog APM and Datadog Log Management is improved by the injection of trace IDs, span IDs, env, service, and version as attributes in your logs. With these fields you can find the exact logs associated with a specific service and version, or all logs correlated to an observed trace.
+The correlation between Datadog APM and Datadog Log Management is improved by the injection of trace IDs, span IDs, env, service, and version as attributes in your logs. With these fields, you can find the exact logs associated with a specific service and version or all logs correlated to an observed trace.
 
 ### Live Search
 

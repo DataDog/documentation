@@ -11,11 +11,11 @@ Distribution metrics are designed to instrument logical objects, like services, 
 
 ## Synchronous vs. Asynchronous Custom Metrics
 
-The Datadog Lambda Library supports submitting custom metrics in Lambda both synchronously and asynchronously.
+The Datadog Lambda Library supports submitting custom metrics in Lambda, both synchronously and asynchronously.
 
-**Synchronous**: The default behavior. This method submits your custom metrics to Datadog via HTTP periodically (every 10 seconds) and at the end of your Lambda invocation. So if the invocation lasts for less than 10 seconds, your custom metrics will be submitted at the end of the invocation.
+**Synchronous**: The default behavior. This method submits your custom metrics to Datadog via HTTP periodically (every 10 seconds) and at the end of your Lambda invocation. If the invocation lasts for less than 10 seconds, your custom metrics are submitted at the end of the invocation.
 
-**Asynchronous (recommended)**: It's possible to submit your custom metrics with zero latency overhead **and** have them appear in Datadog in near-real time. To accomplish this, the Lambda Library emits your custom metrics as a specially-formatted log line, which the [Datadog Forwarder][2] parses and submits to Datadog. Logging in AWS Lambda is 100% asynchronous, so this method ensures there is zero latency overhead to your function.
+**Asynchronous (recommended)**: It's possible to submit your custom metrics with zero latency overhead **and** have them appear in Datadog in near-real-time. To accomplish this, the Lambda Library emits your custom metrics as a specially-formatted log, which the [Datadog Forwarder][2] parses and submits to Datadog. Logging in AWS Lambda is 100% asynchronous, so this method ensures there is zero latency overhead to your function.
 
 ## Enabling Asynchronous Custom Metrics
 
@@ -195,7 +195,7 @@ To add Lambda resource tags to your custom metrics, set the parameter `DdFetchLa
 
 With distribution metrics, you select the aggregation when graphing or querying it instead of specifying it at submission time.
 
-If you previously submitted custom metrics from Lambda without using one of the Datadog Lambda Librarys, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric type.
+If you previously submitted custom metrics from Lambda without using one of the Datadog Lambda Librarys, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
 To enable percentile aggregations for your distribution metrics, consult the [Distribution Metrics][5] page.
 
@@ -203,7 +203,7 @@ To enable percentile aggregations for your distribution metrics, consult the [Di
 
 ### Running in a VPC
 
-The Datadog Lambda Library requires [access to the public internet][6] in order to submit custom metrics **synchronously**. If your Lambda function is associated with a VPC, ensure that it is instead submitting custom metrics **asynchronously** or that your function can reach the public internet.
+The Datadog Lambda Library requires [access to the public internet][6] to submit custom metrics **synchronously**. If your Lambda function is associated with a VPC, ensure that it is instead submitting custom metrics **asynchronously** or that your function can reach the public internet.
 
 ### Using Third-Party Libraries
 

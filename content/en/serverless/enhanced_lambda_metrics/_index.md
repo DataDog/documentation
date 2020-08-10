@@ -7,7 +7,7 @@ kind: documentation
 
 ## Overview
 
-Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java and Go runtimes. These metrics are enabled by default, but only get sent asynchronously. 
+Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java, and Go runtimes. These metrics are enabled by default, but only get sent asynchronously. 
 
 Using the [Datadog Lambda Library][1] and [Datadog Forwarder][2], Datadog can generate metrics with low latency, several second granularity, and detailed metadata for cold starts and custom tags. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.
 
@@ -17,7 +17,7 @@ Enhanced Lambda metrics give you a view above and beyond the default [Amazon Clo
 
 Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, and Ruby runtimes.
 
-Using the Datadog Lambda Layers and Datadog Forwarder, Datadog can generate metrics with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
+Using the Datadog Lambda Layers and Datadog Forwarder, Datadog can generate metrics with low latency, several second granularities, and detailed metadata for cold starts and custom tags.
 
 | Metric                                  | Description                                                                                                                                        |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,11 +33,11 @@ Using the Datadog Lambda Layers and Datadog Forwarder, Datadog can generate metr
 
 These metrics are tagged with the `functionname`, `cold_start`, `memorysize`, `region`, `account_id`, `allocated_memory`, `executedversion`, `resource` and `runtime`. These are [DISTRIBUTION][10] type metrics, so you can display their `count`, `min`, `max`, `sum`, and `avg`.
 
-**Note**: Enhanced metrics are sent to the Datadog Forwarder via CloudWatch Logs, meaning you’ll see an increased volume of logs in CloudWatch. This may affect your AWS bill. To opt out, set the DD_ENHANCED_METRICS environment variable to false on your AWS Lambda functions.
+**Note**: Enhanced metrics are sent to the Datadog Forwarder via CloudWatch Logs, meaning you’ll see an increased volume of logs in CloudWatch. This may affect your AWS bill. To opt-out, set the DD_ENHANCED_METRICS environment variable to false on your AWS Lambda functions.
 
 ## Enable Enhanced Lambda Metrics
 
-Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java and Go runtimes. To enable enhanced Lambda metrics on your functions, follow the [installation instructions][4].
+Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java, and Go runtimes. To enable enhanced Lambda metrics on your functions, follow the [installation instructions][4].
 
 To enable enhanced Lambda metrics without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder.
 
