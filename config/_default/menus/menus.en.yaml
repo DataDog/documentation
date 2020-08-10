@@ -587,16 +587,24 @@ main:
     url: tracing/serverless_functions
     parent: serverless_distributed_tracing
     weight: 301
+  - name: Custom Metrics
+    url: serverless/custom_metrics
+    parent: serverless
+    weight: 4
+  - name: Serverless Integrations
+    url: serverless/serverless_integrations
+    parent: serverless
+    weight: 5
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 3
+    weight: 6
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 5
+    weight: 7
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
