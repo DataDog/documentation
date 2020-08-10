@@ -578,33 +578,37 @@ main:
     url: serverless/forwarder
     parent: serverless
     weight: 2
+  - name: Enhanced Lambda Metrics
+    url: serverless/enhanced_lambda_metrics
+    parent: serverless
+    weight: 3  
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 3
+    weight: 4
   - name: Enable AWS X-Ray  
     url: tracing/serverless_functions
     parent: serverless_distributed_tracing
-    weight: 301
+    weight: 401
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
-    weight: 4
+    weight: 5
   - name: Serverless Integrations
     url: serverless/serverless_integrations
     parent: serverless
-    weight: 5
+    weight: 6
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 6
+    weight: 7
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 7
+    weight: 8
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
