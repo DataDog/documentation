@@ -12,7 +12,7 @@ In hybrid architectures, serverless functions are a key part of your application
 
 ## Choose your Tracing Library
 
-Depending on your language and configuration, choose between setting up Datadog APM or AWS X-Ray for your traces:
+Depending on your language and configuration, choose between setting up Datadog APM or AWS X-Ray for your traces. Click the link in the appropriate column heading to see set-up instructions for the solution that suits you:
 
 | [Datadog APM][1]          | [AWS X-Ray][2]                                                        |
 |---------------------------------|-------------------------------------------------------------------------|
