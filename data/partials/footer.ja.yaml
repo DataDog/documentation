@@ -16,6 +16,9 @@ col1:
   - name: apm
     link: 'https://www.datadoghq.com/product/apm/'
     title: APM
+  - name: profiler
+    link: "https://www.datadoghq.com/product/continuous-profiler/"
+    title: "Continuous Profiler"
   - name: security-monitoring
     link: 'https://www.datadoghq.com/product/security-monitoring/'
     title: セキュリティモニタリング
