@@ -32,7 +32,7 @@ You can declare an incident directly from a graph. You can also go to the upper 
 
 {{< img src="monitors/incidents/create-1-1.png" alt="New Incident"  style="width:80%;">}}
 
-**Severity**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If the severity of your incident is unknown, select UNKNOWN.
+**Severity**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN.
 
 * SEV-1: Critical impact
 * SEV-2: High impact
