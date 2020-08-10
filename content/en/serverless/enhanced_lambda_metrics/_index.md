@@ -3,9 +3,7 @@ title: Enhanced Lambda Metrics
 kind: documentation
 ---
 
-# Enhanced Lambda Metrics
-
-[Picture of real-time enhanced metrics default dashboard]
+{{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Lambda Enhanced Metrics Default Dashboard" >}}
 
 ## Overview
 
@@ -13,7 +11,7 @@ Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, P
 
 Using the [Datadog Lambda Library][1] and [Datadog Forwarder][2], Datadog can generate metrics with low latency, several second granularity, and detailed metadata for cold starts and custom tags. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.
 
-Enhanced Lambda metrics give you a view above and beyond the [CloudWatch metrics][3] that come out of the box with the Amazon Lambda integrations. 
+Enhanced Lambda metrics give you a view above and beyond the default [Amazon CloudWatch metrics][3] enabled with the AWS Lambda integration.
 
 ### Real-time enhanced Lambda metrics
 
@@ -39,13 +37,16 @@ These metrics are tagged with the `functionname`, `cold_start`, `memorysize`, `r
 
 ## Enable Enhanced Lambda Metrics
 
-[The high level view here is that the customer needs to set up the Forwarder, the Library and subscribe the Forwarder to the log groups. The customer does not need to do code instrumentation here. Lambda Library installation steps will depend on the runtime. For the forwarder installation, we should link to the Forwarder page. For the Library installation, I imagine we should link to the Lambda Library page. We can copy the instructions for log subscription from our setup docs.]
+Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java and Go runtimes. To enable enhanced Lambda metrics on your functions, follow the [installation instructions][4].
+
+To enable enhanced Lambda metrics without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder.
 
 ## Viewing your dashboard
 
-Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][4].
+Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][5].
 
 [1]: /serverless/installation/installing_the_library
 [2]: /serverless/forwarder/
 [3]: /integrations/amazon_lambda/?tab=nodejs#metric-collection
-[4]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[4]: /serverless/installation/
+[5]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
