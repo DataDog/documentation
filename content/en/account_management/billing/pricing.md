@@ -54,6 +54,13 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 * Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per ten thousand (10,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
+## Continuous Profiler
+
+* Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
+  * Each host is allowed up to 4 profiled containers for free. Overage containers will be priced at $2 per container. Note: this allotment is aggregated across all hosts so if you have 4 containers on average across all your hosts, you will not be charged overages on host-by-host basis.
+* Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][3].
