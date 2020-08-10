@@ -19,7 +19,7 @@ In the Datadog paradigm, any of the following are appropriate situations for dec
 * You do not know whether you should call an incident. Notify other people and increase severity appropriately.
 
 <div class="alert alert-warning">
-Incident Management is currently in beta and available to all customers. For more information, reach out to sales@datadoghq.com.
+<a href="https://app.datadoghq.com/incidents">Incident Management</a> is currently in beta and available to all customers. For more information, reach out to sales@datadoghq.com.
 </div>
 
 ## Usage
