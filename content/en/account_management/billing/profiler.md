@@ -76,7 +76,7 @@ In this scenario, we aggregate all containers across all hosts (i.e. 2 hosts, 10
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 2 * $12       | $24                   |
 | Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | 2 * $2 * 2 hosts        | $8                    |
-| Total          |            |                                                                                                 | $24 + $8      | **$32 per month**    |
+| Total          |            |                                                                                                 | $24 + $4      | **$28 per month**    |
 
 
 ## FAQs
