@@ -60,6 +60,14 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
+## Live Analytics
+
+<div class="alert alert-warning">
+These features are currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to request to be added to the beta.
+</div>
+
+With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes - Search for any tag on any span. Additionally, Datadog provides methods for controlling how many traces are sent to Datadog, and tag-based retention filters to keep the traces that matter most to you.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
