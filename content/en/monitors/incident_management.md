@@ -15,7 +15,7 @@ Incidents live in Datadog alongside the metrics, traces, and logs you are collec
 
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
-* An issue is or may be impacting customers or services
+* An issue is or may be impacting customers or services.
 * You do not know whether you should call an incident. Notify other people and increase severity appropriately.
 
 <div class="alert alert-warning">
