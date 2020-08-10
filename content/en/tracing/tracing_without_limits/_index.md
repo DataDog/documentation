@@ -1,10 +1,7 @@
 ---
 title: Tracing Without Limits
 kind: documentation
-aliases:
-    - /tracing/livetail
-    - /tracing/livesearch
-description: "See all your trace spans in real time."
+description: "Tracing Without Limits Beta Documentation"
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
@@ -74,7 +71,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 ### Live Analytics Mode
 
 <div class="alert alert-warning">
-These features are currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to be added to the beta.
+These features are currently in private beta. <a href="https://forms.gle/1FParyX49eNFPDsg9">Fill out the form</a> to request to be added to the beta.
 </div>
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
