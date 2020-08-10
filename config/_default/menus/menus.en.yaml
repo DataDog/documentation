@@ -1304,7 +1304,7 @@ main:
     parent: synthetics_private_location
     identifier: synthetics_private_location_configuration
     weight: 301
-  - name: Continuous Testing
+  - name: CI/CD Testing
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
