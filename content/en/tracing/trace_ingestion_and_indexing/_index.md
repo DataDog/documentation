@@ -78,10 +78,11 @@ You can also create any number of additional [tag-based retention filters](#crea
 Intelligent Sampling is always active for your services, and it will keep an assortment of traces to help you monitor the health of your applications.
 
 Intelligent Sampling retains:
-- Errors, including Error Diversity (response code 400s, 500s, etc).
-- High Latency in the different quartiles `p75`, `p90`, `p95`.
-- All Resources with any traffic will have associated Traces in the past for any time window selection.
-- True max duration trace for each time window.
+
+ - Errors, including Error Diversity (response code 400s, 500s, etc).
+ - High Latency in the different quartiles `p75`, `p90`, `p95`.
+ - All Resources with any traffic will have associated Traces in the past for any time window selection.
+ - True max duration trace for each time window.
 
 ### Create your own filter
 
