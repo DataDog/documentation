@@ -3,7 +3,7 @@ title: Distributed Tracing
 kind: documentation
 further_reading:
     - link: 'tracing/serverless_functions'
-      tag: 'Documentation'	
+      tag: 'Documentation'
       text: 'Installing AWS X-Ray'
 ---
 
