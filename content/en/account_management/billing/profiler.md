@@ -62,7 +62,7 @@ Using four hosts with five containers per host but only two of them are profiled
 
 ### Case 5: Hosts with Varying Numbers of Profiled Containers
 
-Using 2 profiled hosts - Host A and Host B.
+Using two profiled hosts - Host A and Host B.
 
 * Host A is running 8 containers
 * Host B is running 2 containers         
