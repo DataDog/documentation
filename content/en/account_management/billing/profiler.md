@@ -64,18 +64,18 @@ Using four hosts with five containers per host but only two of them are profiled
 
 Using two profiled hosts - Host A and Host B.
 
-* Host A is running 8 containers
-* Host B is running 2 containers         
+* Host A is running eight containers
+* Host B is running two containers         
 
-All 10 containers are running application instances that are being profiled, meaning Host A has an overage of 4 containers and Host B can add 2 more containers.
+All 10 containers are running application instances that are being profiled, meaning Host A has an overage of four containers and Host B can add two more containers.
 
-In this scenario, we aggregate all containers across all hosts (i.e. 2 hosts, 10 containers). Then we would have 8 containers included in price and an overage of 2 containers. Therefore, the breakdown would look as such:
+In this scenario, we aggregate all containers across all hosts (so two hosts, 10 containers). Then we would have eight containers included in price and an overage of two containers. Therefore, the breakdown would be:
 
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $12 per host                                                                                    | 2 * $12       | $24                   |
-| Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | 2 * $2 * 2 hosts        | $8                    |
+| Profiled containers  | 10 in aggregate of host A + host B | $2 per overage container. In this case 2 hosts would allow up to 8 containers but we have 2 containers summed across two hosts: 10-8 = 2 overage containers        | $2 * 2 hosts        | $4                    |
 | Total          |            |                                                                                                 | $24 + $4      | **$28 per month**    |
 
 
