@@ -981,7 +981,7 @@ main:
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
     weight: 904
-  - name: Continuous Profiling
+  - name: Continuous Profiler
     url: tracing/profiling/
     parent: tracing
     identifier: profiling
