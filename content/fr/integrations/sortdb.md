@@ -36,12 +36,14 @@ Recueillez des métriques du service [Sortdb][1] en temps réel pour :
 - Être informé des failovers Sortdb
 - Obtenez des statistiques concernant plusieurs instances et vérifiez leur santé
 
-## Installation
+## Implémentation
+
+### Installation
 
 Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Sortdb sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][2] pour installer des checks avec une [version < 6.8 de l'Agent][3] ou avec l'[Agent Docker][4] :
 
 1. Installez le [kit de développement][5].
-2. Clonez le dépôt integrations-extras :
+2. Clonez le référentiel integrations-extras :
 
    ```shell
    git clone https://github.com/DataDog/integrations-extras.git.
@@ -66,15 +68,15 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
    datadog-agent integration install -w <PATH_OF_SORTDB_ARTIFACT_>/<SORTDB_ARTIFACT_NAME>.whl
    ```
 
-7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
+7. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][7].
 
-## Configuration
+### Configuration
 
 1. Modifiez le fichier `sortdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Sortdb. Consultez le [fichier d'exemple sortdb.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
 
-## Validation
+### Validation
 
 [Lancez la sous-commande status de l'Agent][11] et cherchez `sortdb` dans la section Checks.
 
@@ -84,7 +86,7 @@ Le check SortDB est compatible avec toutes les principales plateformes.
 
 ## Données collectées
 
-### Métriques
+### Metrics
 {{< get-metrics-from-git "sortdb" >}}
 
 

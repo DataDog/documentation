@@ -5,13 +5,13 @@ aliases:
   - /ja/graphing/dashboards/timeboard/
   - /ja/dashboards/timeboard/
 further_reading:
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードの機能を強化
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: ドキュメント
     text: Datadog以外とグラフを共有
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: ドキュメント
     text: すべてのウィジェットをダッシュボードで体験できます
 ---
@@ -58,7 +58,7 @@ further_reading:
 
 | オプション                 | 説明                                                   |
 |------------------------|---------------------------------------------------------------|
-| Annotate this graph    | グラフについて、コメントやチームメンバーへの通知を記入します。 |
+| Annotate this graph    | イベントフィードに入力するコメントを記入したり、チームメンバーにグラフについて通知します。 |
 | View in full screen    | グラフを[全画面モード][12]で表示します。                     |
 | Copy tags to clipboard | マウスをかざすと表示されるタグをクリップボードにコピーします。        |
 | View related processes | グラフ参照範囲の[ライブプロセス][13]ページへジャンプします。   |
@@ -77,7 +77,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/screenboard
+[1]: /ja/dashboards/screenboard/
 [2]: /ja/dashboards/screenboards/#display-utc-time
 [3]: /ja/dashboards/screenboards/#notifications
 [4]: /ja/dashboards/screenboards/#permissions
@@ -85,9 +85,9 @@ further_reading:
 [6]: /ja/dashboards/screenboards/#copy-import-or-export-dashboard-json
 [7]: /ja/dashboards/screenboards/#delete-dashboard
 [8]: /ja/dashboards/#new-dashboard
-[9]: /ja/dashboards/widgets
+[9]: /ja/dashboards/widgets/
 [10]: /ja/events/#event-query-language
-[11]: /ja/logs/search_syntax
+[11]: /ja/logs/search_syntax/
 [12]: /ja/dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map

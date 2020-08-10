@@ -2,11 +2,10 @@
 title: Error Budget Monitors
 kind: documentation
 description: "Use Monitors to define the Service Level Objective"
-beta: true
 ---
 
 <div class="alert alert-warning">
-This feature is in closed beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to request access, to ask questions, or to provide feedback on this feature.
+This feature is in open beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to ask questions or to provide feedback on this feature.
 </div>
 
 ## Overview

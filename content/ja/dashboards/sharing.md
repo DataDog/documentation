@@ -9,10 +9,10 @@ further_reading:
   - link: /dashboards/
     tag: ドキュメント
     text: Datadog でダッシュボードを作成
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードの機能を強化
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: ドキュメント
     text: ダッシュボードのウィジェットについて
 ---
@@ -43,38 +43,38 @@ further_reading:
 2. 共有を停止するグラフの横にある **Revoke** ボタンをクリックします。
 3. グラフは **Revoked** リストに移動します。
 
-## スクリーンボード
+## ダッシュボード
 
 ### 共有
 
-公開 URL を生成して、スクリーンボード全体を共有します。
+公開 URL を生成して、ダッシュボード全体を共有します。
 
-1. スクリーンボードのページで、右上の設定歯車をクリックします。
+1. ダッシュボードのページで、右上の設定歯車をクリックします。
 2. **Generate public URL** オプションを選択します。
-3. [グローバルタイムセレクター][4]がアクティブな場合、パブリックスクリーンボードのグローバルタイム設定を選択します。
+3. "Allow changing timeframe" のコンフィギュレーションオプションおよび/またはテンプレート変数の表示対象タグを選択します。
 4. URL をコピーして、**Done** をクリックします。
 
-作成された URL には、その特定のスクリーンボードのコンテンツへのライブの読み取り専用アクセスがあります。
+作成された URL には、その特定のダッシュボードのコンテンツへのライブの読み取り専用アクセスが設定されています。
 
-**注**: スクリーンボード[テンプレート変数][5]セレクターは、パブリックスクリーンボードにはありません。テンプレート変数の値は、Datadog で設定されたデフォルト値です。さらに、APM およびログクエリに基づくウィジェットは、パブリックスクリーンボードにデータを表示しません。
+**注**: ダッシュボード[テンプレート変数][4]セレクターは、表示可能なタグの構成を行う際のダッシュボード上にのみ表示されます。テンプレート変数の値は Datadog で設定されたデフォルト値となります。また、APM トレースクエリに基づくウィジェットのデータは公開ダッシュボードに表示されません。ログベースのクエリの場合、ログストリームウィジェットを除いてすべてのデータが表示されます。
 
 ### 無効化
 
-共有スクリーンボードを無効にするには
+共有ダッシュボードを無効にするには
 
-1. [ダッシュボードリスト][6]に移動します。
-2. アクセスを無効にするスクリーンボードを選択します。
+1. [ダッシュボードリスト][5]に移動します。
+2. アクセスを無効にするダッシュボードを選択します。
 3. 右上の設定歯車をクリックします。
 4. **Configure sharing** をクリックします。
 5. **Revoke public URL** をクリックします。
 
 ### 制限の適用
 
-スクリーンボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][7]に電子メールを送り、IP アドレスホワイトリスト機能を有効にしてください。管理者はこの機能を使用して、共有スクリーンボードにアクセスできる IP アドレスのリストを提供できます。有効にしたら、組織の[セキュリティページ][8]に対する制限を管理します。
+ダッシュボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][6]にメールを送信し、IP アドレスにリスト機能が含まれるよう依頼すると、管理者はこの機能を使用して、共有ダッシュボードにアクセスできる IP アドレスのリストを提供できます。これが有効にした後に、組織の[セキュリティページ][7]に対する制限を管理します。
 
 ### ダークモード
 
-ダークモードは、個々のユーザーのパブリックスクリーンボードで利用できます。モードを切り替えるには、右上の太陽または月のアイコンをクリックします。さらに、URL パラメーター `theme` を使用できます。可能な値は `dark` と `light` です。
+ダークモードは、個々のユーザーの公開ダッシュボードで利用できます。モードを切り替えるには、右上の太陽または月のアイコンをクリックします。さらに、URL パラメーター `theme` も使用できます。可能な値は `dark` と `light` です。
 
 ### TV モード
 
@@ -82,31 +82,30 @@ TV モードは、パブリックスクリーンボードで利用できます�
 
 ## API
 
-Datadog には、共有グラフ（埋め込み）とやり取りするための[専用 API][9]が用意されています。
+Datadog には、共有グラフ（Embed）関連の処理を行うための[専用 API][8]が用意されています。
 
 | エンドポイント                 | 説明                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [すべての埋め込みの取得][10]     | これまでに作成された埋め込み可能なグラフのリストを取得します。                     |
-| [埋め込みの作成][11]       | 埋め込み可能なグラフを新しく作成します。                                         |
-| [特定の埋め込みの取得][12] | `embed_id` を指定して、以前に作成した埋め込みの HTML フラグメントを取得します。 |
-| [埋め込みの有効化][13]       | 特定の埋め込みを有効にします。                                             |
-| [埋め込みの無効化][14]       | 特定の埋め込みを無効にします。                                             |
+| [すべての Embed を取得][9]     | これまでに作成された埋め込み可能なグラフのリストを取得します。                     |
+| [Embed の作成][10]       | 埋め込み可能なグラフを新しく作成します。                                         |
+| [特定の Embed を取得][11] | `embed_id` を指定して、以前に作成した埋め込みの HTML フラグメントを取得します。 |
+| [Embed の有効化][12]       | 特定の埋め込みを有効にします。                                             |
+| [Embed の無効化][13]       | 特定の埋め込みを無効にします。                                             |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/timeboard
-[2]: /ja/dashboards/screenboard
+[1]: /ja/dashboards/timeboard/
+[2]: /ja/dashboards/screenboard/
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /ja/dashboards/screenboards/#global-time-selector
-[5]: /ja/dashboards/template_variables
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: /ja/help
-[8]: https://app.datadoghq.com/account/org_security
-[9]: /ja/api/?lang=python#embeddable-graphs
-[10]: /ja/api/?lang=python#get-all-embeds
-[11]: /ja/api/?lang=python#create-embed
-[12]: /ja/api/?lang=python#get-specific-embed
-[13]: /ja/api/?lang=python#enable-embed
-[14]: /ja/api/?lang=python#revoke-embed
+[4]: /ja/dashboards/template_variables/
+[5]: https://app.datadoghq.com/dashboard/lists
+[6]: /ja/help/
+[7]: https://app.datadoghq.com/account/org_security
+[8]: /ja/api/v1/embeddable-graphs/
+[9]: /ja/api/v1/embeddable-graphs/#get-all-embeds
+[10]: /ja/api/v1/embeddable-graphs/#create-embed
+[11]: /ja/api/v1/embeddable-graphs/#get-specific-embed
+[12]: /ja/api/v1/embeddable-graphs/#enable-embed
+[13]: /ja/api/v1/embeddable-graphs/#revoke-embed

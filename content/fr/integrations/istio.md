@@ -5,6 +5,8 @@ assets:
   dashboards:
     Istio Overview 1.5: assets/dashboards/istio_1_5_overview
     Istio base dashboard: assets/dashboards/istio_overview.json
+  logs:
+    source: istio
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -125,7 +127,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "istio", "service": "<NOM_SERVICE>"}` |
+| `<CONFIG_LOG>` | `{"source": "istio", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 

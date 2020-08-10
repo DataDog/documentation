@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /fr/tracing/visualization/search/
   - /fr/tracing/trace_search_and_analytics/
+  - /fr/tracing/advanced_usage/
 ---
 {{< wistia vrmqr812sz >}}
 </br>

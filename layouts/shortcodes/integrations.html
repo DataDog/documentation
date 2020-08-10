@@ -1,7 +1,11 @@
 {{ $dot := . }}
 
 <!-- From data file -->
-{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" "integration") ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
+{{ $kind := "integration" }}
+{{ if eq .Site.Language.Lang "ja"}}
+    {{ $kind = "インテグレーション"}}
+{{ end }}
+{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" $kind) ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}

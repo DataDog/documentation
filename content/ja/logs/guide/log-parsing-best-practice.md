@@ -4,13 +4,13 @@ kind: ガイド
 aliases:
   - /ja/logs/faq/log-parsing-best-practice
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: logs/faq/how-to-investigate-a-log-parsing-issue
+  - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
     tag: FAQ
     text: ログのパースに関する問題を調査する方法
 ---
@@ -64,6 +64,6 @@ Datadog では、ログからすべての関連情報を抽出するためのパ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/parsing
+[1]: /ja/logs/processing/parsing/
 [2]: /ja/logs/processing/parsing/?tab=matcher#matcher-and-filter
 [3]: /ja/logs/processing/parsing/#key-value

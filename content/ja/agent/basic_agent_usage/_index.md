@@ -146,7 +146,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [SUSE Enterprise Linux x86_64][7] (SysVinit を使用) | Agent 7.16.0 以上では SUSE 11 SP4                      |
 | [Fedora x86_64][8]                              | Fedora 26 以上                                        |
 | [macOS][9]                                      | macOS 10.12 以上                                      |
-| [Windows Server 64 ビット][10]                     | Server Core (Nano 以外) |
+| [Windows Server 64 ビット][10]                     | Windows Server 2008r2 以上と Server Core (Nano 以外) |
 | [Windows 64 ビット][10]                            | Windows 7 以上                                        |
 
 **注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
@@ -211,7 +211,7 @@ Agent v6 以上のコマンドラインインターフェイスはサブコマ�
 <AGENT_バイナリパス> <サブコマンド> <オプション>
 ```
 
-| サブコマンド        | Notes                                                                       |
+| サブコマンド        | 注                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | 指定されたチェックを実行します。                                                    |
 | `configcheck`     | 実行中の Agent のうち、ロード済みで解決済みの構成をすべて出力します。              |
@@ -274,7 +274,7 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 
 **ログ収集**:
 
-以下は、[HTTP フォワーダー][1]が有効になっている状態で*毎秒 110KB のログが記録される*ファイルから得た結果です。これは、使用可能な圧縮レベルに応じてリソース使用量がどのように増加するかを示しています。
+以下は、[HTTP フォワーダー][6]が有効になっている状態で*毎秒 110KB のログが記録される*ファイルから得た結果です。これは、使用可能な圧縮レベルに応じてリソース使用量がどのように増加するかを示しています。
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -312,43 +312,6 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 構成管理ツール
-
-構成管理ツールを使用して、Datadog Agent と[インテグレーション][6]を管理します。
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Chef GitHub プロジェクト][1]
-* [Chef で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Puppet GitHub プロジェクト][1]
-* [Puppet で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Ansible GitHub プロジェクト][1]
-* [Ansible で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Saltstack で Datadog Agent をインストールする[1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Datadog Agent の次のステップ
 
 ### Agent の更新
@@ -380,7 +343,7 @@ Agent データを [Datadog EU サイト][10]に送信するには、[Agent の�
 [3]: /ja/agent/guide/agent-commands/#start-the-agent
 [4]: /ja/agent/guide/agent-commands/#service-status
 [5]: /ja/agent/guide/agent-commands/#stop-the-agent
-[6]: /ja/integrations/
+[6]: /ja/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /ja/agent/guide/integration-management/
 [9]: /ja/agent/guide/agent-configuration-files/

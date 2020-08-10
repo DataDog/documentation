@@ -17,19 +17,24 @@ further_reading:
     - link: '/account_management/rbac/permissions'
       tag: 'Documentation'
       text: 'Discover the list of permissions available.'
+    - link: '/account_management/saml/'
+      tag: 'Documentation'
+      text: 'Enable single sign on with SAML'
 ---
 
 Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create [custom roles](#custom-roles) so you can define a better mapping between your users and their permissions.
 
 By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they have within a Datadog account.
 
+  **Note** If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [Single Sign On With SAML][1].
+
 ## Datadog Default Roles
 
 | Role                       | Description                                                                                                                                                                                                                                  |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][1]. They can also promote standard users to administrators.                                          |
-| **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][1], [monitors][2], [events][3], and [notebooks][4]. Standard users can also invite other users to organizations.                      |
-| **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][1] with someone outside their unit. |
+| **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][2]. They can also promote standard users to administrators.                                          |
+| **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5]. Standard users can also invite other users to organizations.                      |
+| **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][2] with someone outside their unit. |
 
 ## Custom Roles
 
@@ -37,7 +42,7 @@ By granting permissions to roles, any user who is associated with that role rece
 Creating and modifying custom roles is an Enterprise feature and is in private beta. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
 </div>
 
-Manage your custom roles through the Datadog application, the [Datadog Role API][5], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role permissions][6] documentation for more information about available permissions.
+Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role permissions][7] documentation for more information about available permissions.
 
 ### Create a custom role
 
@@ -133,9 +138,10 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/
-[2]: /monitors/
-[3]: /events/
-[4]: /notebooks/
-[5]: /api/v2/roles/
-[6]: /account_management/rbac/permissions/
+[1]: /account_management/saml/
+[2]: /dashboards/
+[3]: /monitors/
+[4]: /events/
+[5]: /notebooks/
+[6]: /api/v2/roles/
+[7]: /account_management/rbac/permissions/

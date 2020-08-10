@@ -63,7 +63,7 @@ npm-debug.log*
 !content/en/real_user_monitoring/android/_index.md
 
 # serverless
-!content/en/serverless/installation/installing_the_forwarder.md
+!content/en/serverless/forwarder.md
 
 # Runtime data
 pids

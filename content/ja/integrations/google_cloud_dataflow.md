@@ -39,10 +39,10 @@ Google Cloud Dataflow のログは Stackdriver により収集され、HTTP プ�
 これが完了したら、Google Cloud Dataflow のログを Stackdriver から Pub/Sub へエクスポートします。
 
 1. [Stackdriver ページ][3]に移動し、Google Cloud Dataflow のログを絞り込みます。
-2. **エクスポートを作成**をクリックし、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクトに置くこともできます。
+2. **シンクを作成**し、シンクに適宜名前を付けます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_dataflow/export_dataflow_step.png" alt="Dataflow のログを Pub Sub にエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

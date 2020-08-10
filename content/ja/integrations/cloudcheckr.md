@@ -5,12 +5,13 @@ kind: インテグレーション
 newhlevel: true
 is_public: true
 public_title: Datadog-CloudCheckr インテグレーション
-short_description: "Cloudcheckr が Datadog からインスタンスごとのメモリメトリクスを取得できるように支援"
+short_description: 'Cloudcheckr が Datadog からインスタンスごとのメモリメトリクスを取得できるように支援'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md']
 categories:
-- cloud
-- configuration & deployment
-- aws
-ddtype: クローラー
+    - cloud
+    - configuration & deployment
+ddtype: crawler
 ---
 
 {{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}
@@ -23,8 +24,8 @@ Datadog-CloudCheckr インテグレーションを使用し、現在と過去の
 
 Datadog アプリケーションを CloudCheckr アカウントにバインド手順は、以下のとおりです。
 
-* CloudCheckr 拡張機能をクリックします。
-* [Datadog API キーとアプリケーションキー][1]を追加します。
+- CloudCheckr 拡張機能をクリックします。
+- [Datadog API キーとアプリケーションキー][1]を追加します。
 
 ## その他の参考資料
 

@@ -94,7 +94,7 @@ end
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [3]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
 [4]: https://rubygems.org/gems/datadog-lambda
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[6]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[5]: https://docs.datadoghq.com/serverless/forwarder/
+[6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://app.datadoghq.com/functions

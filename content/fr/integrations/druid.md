@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Druid Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: druid
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

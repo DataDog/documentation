@@ -5,6 +5,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: elasticsearch
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -178,8 +180,8 @@ Variables d'environnement requises sur le conteneur de l'Agent :
 | Paramètre            | Valeur                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | oui                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | oui |
+| `<DD_APM_ENABLED>`      | true                                                              |
+| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
 Reportez-vous aux sections [Tracing d'applications Kubernetes][11] et [Configuration de DaemonSet Kubernetes][12] pour consulter la liste complète des variables d'environnement et configurations disponibles.
 

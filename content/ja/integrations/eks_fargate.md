@@ -3,6 +3,7 @@ aliases:
   - /ja/integrations/amazon_eks_fargate/
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -77,6 +78,8 @@ Fargate ノード上の AWS EKS Fargate で実行しているアプリケーシ�
 - [AWS EKS Fargate RBAC ルールをセットアップ](#aws-eks-fargate-rbac)。
 - [Agent をサイドカーとしてデプロイ](#Agent をサイドカーとして実行)。
 - Datadog の[メトリクス](#メトリクスの収集)、[イベント](#イベントの収集)、[トレース](#トレースの収集) の収集をセットアップします。
+
+Datadog Live Container View に EKS Fargate コンテナを表示するには、ポッド仕様で `shareProcessNamespace` を有効にします。[プロセス収集](#process-collection)を参照してください。
 
 #### AWS EKS Fargate RBAC
 
@@ -224,7 +227,10 @@ spec:
             cpu: "200m"
 ```
 
-**注**: `<DATADOG_API_キー>`を[組織の Datadog API キー][13]に置き換えることを忘れないでください。
+**注**:
+
+- `<DATADOG_API_キー>` を[組織の Datadog API キー][13]に置き換えることを忘れないでください。
+- ホストからの `cgroups` ボリュームを Agent にマウントできないため、Fargate ではコンテナメトリクスを使用できません。
 
 ### DogStatsD
 
@@ -349,6 +355,22 @@ AWS EKS Fargate API サーバーからイベントを収集するには、Kubern
 
 **注**: Fargate のポッドで Datadog Cluster Agent を実行する場合も、イベントを収集することができます。
 
+## プロセス収集
+
+Agent 6.19+/7.19+ の場合、[プロセス収集][20]を使用できます。ポッド仕様で `shareProcessNamespace` を有効にして、Fargate ポッドで実行されているすべてのプロセスを収集します。例:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <名前>
+spec:
+  shareProcessNamespace: true
+...
+```
+
+**注**: CPU とメモリのメトリクスは使用できません。
+
 ## 収集データ
 
 ### メトリクス
@@ -365,11 +387,11 @@ eks_fargate にはイベントが含まれていません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][20]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][21]までお問合せください。
 
-[1]: http://docs.datadoghq.com//integrations/amazon_eks/
-[2]: http://docs.datadoghq.com//integrations/system
-[3]: http://docs.datadoghq.com//agent/autodiscovery
+[1]: http://docs.datadoghq.com/integrations/amazon_eks/
+[2]: http://docs.datadoghq.com/integrations/system
+[3]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery/
 [4]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
 [5]: http://docs.datadoghq.com/integrations/amazon_eks/#setup
 [6]: http://docs.datadoghq.com/agent/kubernetes
@@ -380,10 +402,11 @@ eks_fargate にはイベントが含まれていません。
 [11]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2
 [12]: http://docs.datadoghq.com/integrations/kubernetes
 [13]: https://app.datadoghq.com/account/settings#api
-[14]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[14]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [15]: https://docs.datadoghq.com/ja/integrations/#cat-autodiscovery
-[16]: https://docs.datadoghq.com/ja/developers/dogstatsd
+[16]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [17]: http://docs.datadoghq.com/tracing/setup
 [18]: http://docs.datadoghq.com/agent/cluster_agent/setup
 [19]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
-[20]: https://docs.datadoghq.com/ja/help
+[20]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
+[21]: https://docs.datadoghq.com/ja/help/

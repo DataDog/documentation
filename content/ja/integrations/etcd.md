@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,7 +12,7 @@ categories:
   - orchestration
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
 display_name: etcd
@@ -24,7 +25,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: etcd.
-metric_to_check: etcd.store.watchers
+metric_to_check:
+  - etcd.store.watchers
+  - etcd.server.has_leader
 name: etcd
 process_signatures:
   - etcd
@@ -52,11 +55,11 @@ Etcd のメトリクスを収集して、以下のことができます。
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 1. Etcd のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `etcd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル etcd.d/conf.yaml][4] を参照してください。
 2. [Agent を再起動します][5]。
@@ -67,9 +70,9 @@ Etcdチェックは [Datadog Agent][2] パッケージに含まれています�
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `etcd`                                               |
-| `<INIT_CONFIG>`      | 空白または `{}`                                        |
-| `<INSTANCE_CONFIG>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
+| `<インテグレーション名>` | `etcd`                                               |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
 
 ### 検証
 
@@ -99,7 +102,7 @@ Agent が Etcd API エンドポイントからメトリクスを収集できな�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -110,8 +113,8 @@ Etcd のインテグレーションをより便利に行う方法 (または理�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/monitor-etcd-performance

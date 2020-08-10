@@ -16703,25 +16703,25 @@ paths:
       responses:
         '200':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/UserDisableResponse'
           description: User disabled
         '400':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
         '404':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found

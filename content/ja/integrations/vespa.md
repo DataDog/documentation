@@ -42,7 +42,7 @@ Vespa チェックは [Datadog Agent][2] パッケージに含まれていませ
 
 チェックをホストにインストールするには
 
-1. マシンに[開発ツールキット][7]をインストールします。
+1. マシンに[開発ツールキット][3]をインストールします。
 2. `ddev release build vespa` を実行してパッケージをビルドします。
 3. [Datadog Agent をダウンロードします][2]。
 4. ビルドの成果物を Agent をインストール済みのホストにアップロードし、実行します。
@@ -55,17 +55,17 @@ Vespa チェックは [Datadog Agent][2] パッケージに含まれていませ
 
 Vespa チェックを構成するには
 
-1. [Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーに `vespa.d/` フォルダーを作成します。
+1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーに `vespa.d/` フォルダーを作成します。
 2. 上記のステップで作成した `vespa.d/` フォルダーに `conf.yaml` ファイルを作成します。
-3. [vespa.d/conf.yaml のサンプル][10]ファイルを参考にして、`conf.yaml` ファイルのコンテンツをコピーします。
+3. [vespa.d/conf.yaml のサンプル][5]ファイルを参考にして、`conf.yaml` ファイルのコンテンツをコピーします。
 4. `conf.yaml` ファイルを編集して `consumer` を構成します。これにより、チェックによって転送されるメトリクスを決定します。
-   - `consumer`: Vespa アプリケーションの services.xml からメトリクスを収集するコンシューマー。`default` コンシューマーまたは[カスタムコンシューマー][9]の
+   - `consumer`: Vespa アプリケーションの services.xml からメトリクスを収集するコンシューマー。`default` コンシューマーまたは[カスタムコンシューマー][6]の
      いずれか。
-5. [Agent を再起動します][3]。
+5. [Agent を再起動します][7]。
 
 ### 検証
 
-[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `vespa` を探します。
+[Agent のステータスサブコマンドを実行][8]し、Checks セクションで `vespa` を探します。
 
 ## 収集データ
 
@@ -76,10 +76,10 @@ Vespa チェックを構成するには
 ### サービスチェック
 
 **vespa.metrics_health**:<br>
-Vespa [Node メトリクス API][11] からレスポンスがない場合、`CRITICAL`を返します。Vespa [Node メトリクス API][11] からレスポンスがあるものの処理中にエラーが発生した場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
+Vespa [Node メトリクス API][10] からレスポンスがない場合、`CRITICAL`を返します。Vespa [Node メトリクス API][10] からレスポンスがあるものの処理中にエラーが発生した場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
 
 **vespa.process_health**:<br>
-Vespa の各プロセスについて、プロセスがダウンしていると思われる (Vespa [Node メトリクス API][11] がプロセスに接続できない) 場合、`CRITICAL` を返します。プロセスのステータスが不明な (Vespa [Node メトリクス API][11] がプロセスに接続できるものの、レスポンスにエラーが含まれる) 場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
+Vespa の各プロセスについて、プロセスがダウンしていると思われる (Vespa [Node メトリクス API][10] がプロセスに接続できない) 場合、`CRITICAL` を返します。プロセスのステータスが不明な (Vespa [Node メトリクス API][10] がプロセスに接続できるものの、レスポンスにエラーが含まれる) 場合、`WARNING` を返します。それ以外の場合は `OK` を返します。
 
 ### イベント
 
@@ -87,16 +87,16 @@ Vespa インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://vespa.ai/
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help
-[6]: https://github.com/DataDog/integrations-extras/blob/master/vespa/metadata.csv
-[7]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[9]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
-[10]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
-[11]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
+[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-extras/blob/master/vespa/datadog_checks/vespa/data/conf.yaml.example
+[6]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-extras/blob/master/vespa/metadata.csv
+[10]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api
+[11]: https://docs.datadoghq.com/ja/help/

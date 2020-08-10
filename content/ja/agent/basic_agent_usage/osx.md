@@ -6,13 +6,13 @@ os: osx
 aliases:
   - /ja/guides/basic_agent_usage/osx/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
 ---
@@ -71,7 +71,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -83,7 +83,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -103,5 +103,5 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
-[2]: /ja/agent/troubleshooting
-[3]: /ja/developers/guide/custom-python-package
+[2]: /ja/agent/troubleshooting/
+[3]: /ja/developers/guide/custom-python-package/

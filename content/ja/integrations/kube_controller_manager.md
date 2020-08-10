@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,9 +47,7 @@ Kube_controller_manager チェックは [Datadog Agent][2] パッケージに含
 このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。通常、これは 
 Container-as-a-Service クラスターでは公開されません。
 
-1. kube_controller_manager パフォーマンスデータの収集を開始するには、Agent の構成ディレクトリの
-   ルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。
-   使用可能なすべての構成オプションの詳細については、[サンプル kube_controller_manager.d/conf.yaml][2] を参照してください。
+1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][2] を参照してください。
 
 2. [Agent を再起動します][3]。
 
@@ -62,12 +61,11 @@ Container-as-a-Service クラスターでは公開されません。
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### サービスのチェック
+### Service Checks
 
 `kube_controller_manager.prometheus.health`:
 
 Agent がメトリクスのエンドポイントに到達できない場合は、CRITICAL を返します。
-
 
 ### イベント
 
@@ -82,4 +80,4 @@ Kube_controller_manager には、イベントは含まれません。
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

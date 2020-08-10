@@ -2,19 +2,19 @@
 title: トレースビュー
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -72,7 +72,17 @@ further_reading:
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="トレースログ"  style="width:90%;">}}
 
-[1]: /ja/logs/explorer/search
+
+[1]: /ja/logs/explorer/search/
+{{% /tab %}}
+{{% tab "Processes" %}}
+
+サービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、[ライブプロセス ページ][1]が開きます。スパン固有のプロセスを表示するには、[プロセスの収集][2]を有効にします。現在、関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
+
+{{< img src="tracing/visualization/trace/trace_processes.png" alt="トレースのプロセス"  style="width:90%;">}}
+
+[1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
+[2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
 {{< /tabs >}}
 

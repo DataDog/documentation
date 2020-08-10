@@ -4,8 +4,8 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: 'Datadog の調査レポート: サーバーレスの状態'
-  mobile_message: 'レポート: サーバーレスの状態'
-  link: 'https://www.datadoghq.com/state-of-serverless/'
+  desktop_message: セキュリティモニタリングが使用可能です
+  mobile_message: セキュリティモニタリングが使用可能です
+  link: 'https://www.datadoghq.com/blog/announcing-security-monitoring/'
   exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
