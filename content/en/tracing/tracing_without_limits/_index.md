@@ -1,12 +1,16 @@
 ---
 title: Tracing Without Limits
 kind: documentation
-description: "Tracing Without Limits Beta Documentation"
+description: "Beta Documentation for Live Analytics, ingestion rules and retention filters."
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 ## Tracing Without Limits Overview
+
+<div class="alert alert-warning">
+If you are in the Beta for Live Analytics, ingestion rules and custom retention filters, use these instructions instead of the <a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#trace-sampling">trace sampling guide</a>.
+</div>
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or indexed spans using any tag on any span.  Depending on whether you are using Live (the last 15 minutes, rolling) or Historical (all indexed spans) mode, the data used to power your queries will change.
 
