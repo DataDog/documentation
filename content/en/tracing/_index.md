@@ -76,27 +76,33 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
+### Trace Serverless Functions
+
+[Trace across AWS Lambda and hosts][6] to view complete traces across your hybrid infrastructure.
+
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
+
 ### App Analytics
 
-[Analyze performance][6] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+[Analyze performance][7] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
 
 {{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Connect Synthetic Test Data and Traces
 
-[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][8] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
 ### Continuous Profiling
 
-[Improve code efficiency][8] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][9] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
 ### Customize your Instrumentation or add OpenTracing
 
-[Seamlessly connect your instrumentation][9] between automatic instrumentation, dd-trace-api, and OpenTracing.
+[Seamlessly connect your instrumentation][10] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
 
 ## Further Reading
 
@@ -107,7 +113,8 @@ Now that you've configured your application to send traces to Datadog, start get
 [3]: /tracing/visualization/service/
 [4]: /tracing/livesearch/
 [5]: /tracing/connect_logs_and_traces/
-[6]: /tracing/app_analytics/
-[7]: /synthetics/apm/
-[8]: /tracing/profiling/
-[9]: /tracing/manual_instrumentation/
+[6]: /tracing/serverless_functions/
+[7]: /tracing/app_analytics/
+[8]: /synthetics/apm/
+[9]: /tracing/profiling/
+[10]: /tracing/manual_instrumentation/
