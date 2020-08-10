@@ -18,7 +18,7 @@ These sample cases demonstrate common use cases using annual billing rates. Cont
 
 ### Case 1: Hosts with no Containers
 
-Using 5 hosts running 1 application being profiled in each host. No containers.  
+Using five hosts running one application being profiled in each host. No containers.  
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
