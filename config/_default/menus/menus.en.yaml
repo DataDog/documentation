@@ -578,6 +578,15 @@ main:
     url: serverless/forwarder
     parent: serverless
     weight: 2
+  - name: Distributed Tracing
+    url: serverless/distributed_tracing
+    identifier: serverless_distributed_tracing
+    parent: serverless
+    weight: 3
+  - name: Enable AWS X-Ray  
+    url: tracing/serverless_functions
+    parent: serverless_distributed_tracing
+    weight: 301
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
