@@ -98,7 +98,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **5. How is the host billing related to my services?**
 
-Continuous Profiler is billed on the basis of hosts deployed with agents sending profiles and not services.
+A Continuous Profiler is billed on the basis of hosts deployed with Agents sending profiles and not services.
 
 **6. Can I use Continuous Profiling without APM?**
 
