@@ -191,7 +191,7 @@
       globs:
       - 'docs/rum_collection.md'
       options:
-        dest_path: '/rum-mobile/real_user_monitoring/android/'
+        dest_path: '/real_user_monitoring/android/'
         file_name: '_index.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
