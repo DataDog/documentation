@@ -23,7 +23,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< whatsnext desc="By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends 5 main types of events to Datadog:">}}
+{{< whatsnext desc="By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:">}}
   {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=view#resource">}}<u>View</u>: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=view#resource">}}<u>Resource</u>: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=longtask#resource">}}<u>Long task</u>: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.{{< /nextlink >}}
@@ -47,11 +47,11 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG.[Learn more][8]                                                                                                |
-| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][9]                                                                                                               |
+| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG. [Learn more.][8]                                                                                                |
+| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][9] .                                                                                                              |
 | `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][10]. |
-| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][11]                                                                             |
-| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][12]                                                                                   |
+| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][11].                                                                             |
+| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][12].                                                                                   |
 | `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
 | `view.measures.long_task_count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.measures.resource_count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
@@ -75,7 +75,7 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 
 All of your website’s resources are collected by default: images, XHRs, [XMLHttpRequest][1], CSS files, JS assets, and font files.
 
-Detailed network timing data regarding the loading of an application’s resources are being collected with the [Performance Resource Timing API][2]
+Detailed network timing data regarding the loading of an application’s resources are being collected with the [Performance Resource Timing API][2].
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
