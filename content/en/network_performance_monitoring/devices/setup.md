@@ -16,7 +16,7 @@ Network Device Monitoring is included in the [Datadog Agent][1] package. No addi
 
 ## Configuration
 
-Datadog Network Device Monitoring auto-discovers network devices on a provided subnet, and collects metrics using Datadog's sysOID mapped device profiles.
+Datadog Network Device Monitoring automatically discovers network devices on a provided subnet, and collects metrics using Datadog's sysOID mapped device profiles.
 
 ### Standard
 
