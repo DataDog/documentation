@@ -1,14 +1,16 @@
 ---
-title: Continuous Profiling
+title: Continuous Profiler
 kind: Documentation
+aliases:
+    - /tracing/profiling
 further_reading:
-    - link: 'tracing/profiling/getting_started'
+    - link: 'tracing/profiler/getting_started'
       tag: 'Documentation'
-      text: 'Enable continuous profiling for your application.'
-    - link: 'tracing/profiling/runtime_metrics'
+      text: 'Enable continuous profiler for your application.'
+    - link: 'tracing/profiler/runtime_metrics'
       tag: 'Documentation'
       text: 'View runtime metrics.'  
-    - link: 'tracing/profiling/search_profiles'
+    - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
@@ -17,7 +19,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have feedback to share.
+Datadog Profiler is in beta. Reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have feedback to share.
 </div>
 
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Exploring profiling flame graph">}}
@@ -26,25 +28,27 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-Continuous profiling is designed to run in production across all services by leveraging technologies such as [JDK Flight Recorder][1] to have minimal impact on your host's CPU and memory usage.
+Continuous profiler is designed to run in production across all services by leveraging technologies such as [JDK Flight Recorder][1] to have minimal impact on your host's CPU and memory usage.
 
 ## Getting Started
 
-Profiling in your service to visualize all your stack traces in one place takes just minutes.
+Profiling your service to visualize all your stack traces in one place takes just minutes.
 
 ### 1. Instrument Your Application
 
-Add a profiling library to your application to start sending profiles to the Datadog Agent.
+Add a profiler library to your application to start sending profiles to the Datadog Agent.
+
+For **Ruby**, **PHP**, or **.NET** Profilers, [sign up][2] to be on the private beta access list. We will notify you when the beta is ready.
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-## Explore Datadog Profiling
+## Explore Datadog Profiler
 
 Now that you've configured your application to send profiles to Datadog, start getting insights into your code performance:
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
@@ -59,4 +63,5 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170
-[2]: /tracing/profiling/search_profiles
+[2]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[3]: /tracing/profiling/search_profiles

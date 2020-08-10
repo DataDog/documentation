@@ -1,8 +1,10 @@
 ---
 title: Getting Started
 kind: Documentation
+aliases:
+    - /tracing/profiling/getting_started
 further_reading:
-    - link: 'tracing/profiling/search_profiles'
+    - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
@@ -10,12 +12,14 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-Profiling is shipped within the following tracing libraries. Select your language below to learn how to enable profiling for your application:
+Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
+
+For **Ruby**, **PHP**, or **.NET** Profilers, [sign up][1] to be on the private beta access list. We will notify you when the beta is ready.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][2]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
@@ -25,7 +29,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling li
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.55+.
+     **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
@@ -51,7 +55,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling li
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiling.               |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
 | `DD_SERVICE`                                     | String        | Your [service][2] name, for example, `web-backend`.     |
 | `DD_ENV`                                         | String        | Your [environment][5] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
@@ -71,13 +75,13 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
-2. Install `ddtrace` which contains both tracing and profiling:
+2. Install `ddtrace` which contains both tracing and profiler:
 
     ```shell
     pip install ddtrace
     ```
 
-     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
+     **Note**: Profiler is available in the `ddtrace` library for versions 0.36+.
 
 3. To automatically profile your code, set `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
 
@@ -94,7 +98,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
     import ddtrace.profiling.auto
     ```
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiler page][2].
 
 **Note**:
 
@@ -108,7 +112,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling. Supported from tracker version 0.40+.              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracker version 0.40+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -158,7 +162,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     go get gopkg.in/DataDog/dd-trace-go.v1
     ```
 
-     **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
+     **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
 3. Import the [profiler][2] at the start of your application:
 
@@ -181,7 +185,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][3].
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][3].
 
 **Note**:
 
@@ -216,15 +220,15 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+.  
 
-2. Install `dd-trace` which contains both tracing and profiling:
+2. Install `dd-trace` which contains both tracing and profiler:
 
     ```shell
     npm install --save dd-trace
     ```
 
-    **Note**: Profiling is available in the `dd-trace` library in versions 0.23.2+.
+    **Note**: Profiler is available in the `dd-trace` library in versions 0.23.2+.
 
-3. To automatically profile your code, import and initialize `dd-trace` with profiling enabled:
+3. To automatically profile your code, import and initialize `dd-trace` with profiler enabled:
 
     ```javascript
     require('dd-trace').init({
@@ -232,7 +236,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
     })
     ```
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiler page][2].
 
 **Note**:
 
@@ -240,7 +244,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiling.               |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler.               |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |
@@ -256,7 +260,7 @@ The Datadog Profiler requires Node 10.12+. To begin profiling applications:
 
 ## Troubleshooting
 
-If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][2] and [open a support ticket][3] with debug files and the following information:
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version, and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
@@ -265,5 +269,6 @@ If you've configured the profiler and don't see profiles in the [profile search 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /tracing/troubleshooting/#tracer-debug-mode
-[2]: /help/
+[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[2]: /tracing/troubleshooting/#tracer-debug-mode
+[3]: /help/

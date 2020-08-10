@@ -94,9 +94,9 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
-### Continuous Profiling
+### Continuous Profiler
 
-[Improve code efficiency][9] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][9] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
@@ -116,5 +116,5 @@ Now that you've configured your application to send traces to Datadog, start get
 [6]: /tracing/serverless_functions/
 [7]: /tracing/app_analytics/
 [8]: /synthetics/apm/
-[9]: /tracing/profiling/
+[9]: /tracing/profiler/
 [10]: /tracing/manual_instrumentation/

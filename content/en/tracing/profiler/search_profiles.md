@@ -1,6 +1,8 @@
 ---
 title: Search Profiles
-kind: Documentation
+kind: documentation
+aliases:
+    - /tracing/profiling/search_profiles
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
@@ -44,7 +46,7 @@ Four tabs are below the profile header:
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | Profiles     | A flame graph and summary table of the profile you are looking at. You can switch between profile types (`CPU`, `Memory allocation`). |
 | Analysis     | A set of heuristics that suggest potential issues or areas of improvement in your code. Currently only available for Java.                   |
-| Metrics      | Profiling metrics coming from all profiles of the same service.                                                                              |
+| Metrics      | Profiler metrics coming from all profiles of the same service.                                                                              |
 | Runtime Info | Runtime properties in supported languages, and profile tags.                                                                                                     |
 
 **Note**: In the upper right corner of each profile, there are options to:
