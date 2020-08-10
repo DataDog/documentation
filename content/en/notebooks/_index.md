@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data by creating postmortems, investigations runbooks, documentation, and more.
+Notebooks combine graphs and text in a linear, cell-based format. They are designed to help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
 {{< img src="notebooks/demo_notebook.png" alt="demo notebook"  style="width:100%;">}}
 
@@ -26,7 +26,7 @@ Notebooks support real-time collaboration. Presence indicators show who is viewi
 
 Changes made to a notebook appear automatically, without the need to refresh.
 
-Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator.
+Everyone on your team can open or edit any notebook, but a notebook can only be deleted by the creator or by an administrator.
 
 ## Notebook List
 
@@ -47,7 +47,7 @@ Notebooks support visualizations and text cells.
 
 #### Visualization
 
-Graphs in notebooks support all Datadog datasources: metrics, log events, analyzed spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
+Graphs in notebooks support all Datadog data sources: metrics, log events, analyzed spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
 
 {{< img src="notebooks/data_sources.png" alt="live collaboration in notebooks"  style="width:50%;">}}
 
@@ -65,7 +65,7 @@ Text in a notebook is formatted with Markdown, which enables the use of headings
 
 ### Manipulating cells
 
-When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, double click on it or mouse over it and use `CMD + Click`. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Only one cell may be open at a time.
+When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, mouse over it and use `CMD + Click`, or click "Edit." To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Only one cell may be open at a time.
 
 To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover, or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 
