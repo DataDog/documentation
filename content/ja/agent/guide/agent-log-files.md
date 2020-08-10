@@ -4,13 +4,13 @@ kind: ガイド
 aliases:
   - /ja/agent/faq/agent-log-files
 further_reading:
-  - link: agent/troubleshooting/
+  - link: /agent/troubleshooting/
     tag: Documentation
     text: Agent のトラブルシューティング
-  - link: agent/guide/agent-configuration-files/
+  - link: /agent/guide/agent-configuration-files/
     tag: FAQ
     text: Agent 構成ファイル
-  - link: agent/guide/agent-commands/
+  - link: /agent/guide/agent-commands/
     tag: FAQ
     text: Agent のコマンド
 ---
@@ -67,6 +67,14 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent インストールログファイル
+
+| プラットフォーム                             | 場所とファイル名        |
+|--------------------------------------|-------------------------------|
+| Linux                                | `/tmp/dd_agent.log`           |
+| macOS                                | `/tmp/dd_agent.log`           |
+| Windows                              | `%TEMP%\MSI*.LOG`             |
 
 ## その他の参考資料
 

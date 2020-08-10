@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /fr/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Configurer SAML pour votre compte Datadog
-  - link: account_management/multi_organization
+  - link: /account_management/multi_organization/
     tag: Documentation
     text: Configurer des équipes et organisations avec plusieurs comptes
 ---

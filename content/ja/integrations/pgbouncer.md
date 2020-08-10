@@ -1,14 +1,20 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: pgbouncer
   monitors: {}
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    instance_overview: assets/saved_views/instance_overview.json
+    user_overview: assets/saved_views/user_overview.json
   service_checks: assets/service_checks.json
 categories:
   - data store
   - log collection
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md'
 display_name: PGBouncer
@@ -56,11 +62,11 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
    "datadog" "<PASSWORD>"
    ```
 
-### コンフィギュレーション
+### 構成
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 ##### メトリクスの収集
 
@@ -110,15 +116,15 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `<INTEGRATION_NAME>` | `oracle`                                                                                               |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                                          |
-| `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
+| `<インテグレーション名>` | `pgbouncer`                                                                                               |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                          |
+| `<インスタンスコンフィギュレーション>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集のドキュメント][7]を参照してください。
+Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
@@ -147,14 +153,14 @@ Agent が PgBouncer に接続してメトリクスを収集できない場合は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/docker/log/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [8]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/

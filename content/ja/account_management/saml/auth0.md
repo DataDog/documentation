@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントのための SAML の構成
 ---

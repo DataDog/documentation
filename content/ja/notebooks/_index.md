@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /ja/graphing/notebooks/
 further_reading:
-  - link: /dashboards/screenboard
+  - link: /dashboards/screenboard/
     tag: ドキュメント
     text: スクリーンボードの作成
-  - link: /dashboards/timeboard
+  - link: /dashboards/timeboard/
     tag: ドキュメント
     text: タイムボードの作成
 ---
@@ -107,8 +107,8 @@ further_reading:
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook
-[3]: /ja/dashboards/widgets/timeseries
-[4]: /ja/dashboards/widgets/heat_map
-[5]: /ja/dashboards/widgets/distribution
-[6]: /ja/dashboards/widgets/log_stream
+[3]: /ja/dashboards/widgets/timeseries/
+[4]: /ja/dashboards/widgets/heat_map/
+[5]: /ja/dashboards/widgets/distribution/
+[6]: /ja/dashboards/widgets/log_stream/
 [7]: /ja/dashboards/widgets/#full-screen

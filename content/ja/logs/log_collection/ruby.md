@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://github.com/roidrage/lograge'
     tag: Github
     text: Lograge ドキュメント
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: よくあるご質問
     text: ログ収集のトラブルシューティングガイド
 ---
@@ -106,9 +106,9 @@ Lograge による書式設定が完了すると、以下のように重要な情
 
 ## 補足説明
 
-### ログへのトレース ID の挿入
+### ログとトレースの接続
 
-APM が有効になっているアプリケーションでアプリケーションログとトレースの関連付けを改善したい場合は、[こちらの説明に従って][7]トレースおよびスパン ID をログに自動で追加します。
+このアプリケーションで APM が有効になっている場合、[APM Ruby ロギングの指示に従って][7]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
 
 次に、ファイルから Ruby ログを収集するよう [Datadog Agent を構成します](#Datadog Agent の構成)。
 
@@ -193,9 +193,9 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /ja/logs/?tab=ussite#reserved-attributes
+[2]: /ja/logs/processing/#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
-[5]: /ja/agent/logs
+[5]: /ja/agent/logs/
 [6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: /ja/tracing/connect_logs_and_traces/ruby
+[7]: /ja/tracing/connect_logs_and_traces/ruby/
