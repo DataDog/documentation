@@ -3,13 +3,13 @@ title: メトリクスモニター
 kind: documentation
 description: メトリクスの値をユーザー定義のしきい値と比較する
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスの参照
 ---
@@ -50,7 +50,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 詳細については、[異常検知モニター][1]のページを参照してください。
 
-[1]: /ja/monitors/monitor_types/anomaly
+[1]: /ja/monitors/monitor_types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -60,7 +60,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 詳細については、[外れ値モニター][1]のページを参照してください。
 
-[1]: /ja/monitors/monitor_types/outlier
+[1]: /ja/monitors/monitor_types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -70,7 +70,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 詳細については、[予測値モニター][1]のページを参照してください。
 
-[1]: /ja/monitors/monitor_types/forecasts
+[1]: /ja/monitors/monitor_types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -119,7 +119,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 **注**: `as_count()` を使用する場合は動作が異なります。詳しくは、[モニター評価での as_count()][1] を参照してください。
 
-[1]: /ja/monitors/guide/as-count-in-monitor-evaluations
+[1]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -154,6 +154,8 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 
 しきい値を変更すると、エディター内でプレビューグラフにカットオフポイントを示すマーカーが表示されます。
 
+**メモ**: しきい値を小数で入力する際、値が `<1` の場合は先頭に `0` を付けます。たとえば、`.5` ではなく `0.5` としてください。
+
 #### Data window
 
 評価の際に、データウィンドウが一杯であることを判断するかどうかを `Require` または `Do not require` で指定できます。
@@ -168,9 +170,15 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 
 データなしを通知しない場合は `Do not notify` を、データなしが `N` 分以上続いた時に通知する場合は `Notify` を設定します。
 
-通常の状況下で、メトリクスがデータを常に報告している必要がある場合に、データなしを通知すると便利です。たとえば、Agent を持つホストが継続的に稼働している必要がある場合、`system.cpu.idle` メトリクスはデータを常に報告しなくてはなりません。このような場合は、データなしを通知するように設定するべきです。**注**: データなしのウィンドウは、評価期間中に少なくとも 2 回動作する必要があります。
+正常な状態で、メトリクスが常にデータを報告するようにするには、「データなし」通知を利用すると便利です。たとえば、Agent を使用しているホストが継続的に稼働している必要がある場合、`system.cpu.idle` メトリクスがデータを常に報告することが期待されます。このような場合は、「データなし」を通知するように設定します。
 
-また、オートスケーリングが有効であり、起動と停止が自動で行われるホストグループに対してメトリクスをモニターする場合にこの設定を有効にすると、通知が数多く生成されるので、データなしの通知を有効にするべきではありません。
+**注**: 「データなし」ウィンドウは、評価期間中に最低 2 回設定することを推奨します。
+
+また、オートスケーリングが有効であり、起動と停止が自動で行われるホストグループに対してメトリクスをモニターする場合にこの設定を有効にすると、通知が数多く生成されるので、データなしの通知を有効にするべきではありません。データが長期間にわたって報告されていない場合、このオプションは有効であっても機能しません。
+
+##### グループ化
+
+「データなし」を通知しないモニターの場合、グループがデータを報告しないとモニターは評価をスキップし、最終的にグループをドロップします。この期間、結果ページのバーは緑のままです。データがありグループが報告を再開すると、グリーンバーには OK ステータスとバックフィルが表示され、中断がなかったかのように見せます。
 
 #### Auto Resolve
 
@@ -199,5 +207,5 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /ja/getting_started/tagging/using_tags/?tab=assignment
 [3]: /ja/dashboards/querying/#advanced-graphing
-[4]: /ja/monitors/faq/what-are-recovery-thresholds
-[5]: /ja/monitors/notifications
+[4]: /ja/monitors/faq/what-are-recovery-thresholds/
+[5]: /ja/monitors/notifications/

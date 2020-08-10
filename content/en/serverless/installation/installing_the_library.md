@@ -1,4 +1,4 @@
-  ---
+---
 title: Datadog Lambda Library
 kind: documentation
 aliases:

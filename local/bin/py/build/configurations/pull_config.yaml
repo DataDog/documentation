@@ -175,11 +175,11 @@
       globs:
       - 'aws/logs_monitoring/README.md'
       options:
-        dest_path: '/serverless/installation/'
-        file_name: 'installing_the_forwarder.md'
+        dest_path: '/serverless/'
+        file_name: 'forwarder.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
-          title: Installing the Forwarder
+          title: Datadog Forwarder
           kind: documentation
           aliases:
             - /serverless/troubleshooting/installing_the_forwarder/
@@ -290,7 +290,7 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: tanguy.lebarzic/markdown-default-rules
+      branch: main
       globs:
         - "security-monitoring/*.json"
         - "security-monitoring/*.md"

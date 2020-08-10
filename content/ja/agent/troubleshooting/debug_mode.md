@@ -5,10 +5,10 @@ aliases:
   - /ja/agent/faq/how-to-get-more-logging-from-the-agent
   - /ja/agent/faq/agent-5-container-more-log
 further_reading:
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Agent のトラブルシューティング
     text: Agent フレアの送信
-  - link: /agent/troubleshooting/agent_check_status
+  - link: /agent/troubleshooting/agent_check_status/
     tag: Agent のトラブルシューティング
     text: Agent チェックのステータスを確認
 ---

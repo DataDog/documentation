@@ -1,0 +1,66 @@
+---
+categories:
+  - cloud
+  - google cloud
+  - ログの収集
+ddtype: crawler
+dependencies: []
+description: Google Cloud TPU のキーメトリクスを追跡
+doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tpu/'
+git_integration_title: google_cloud_tpu
+has_logo: true
+integration_title: Google Cloud TPU
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: google_cloud_tpu
+public_title: Datadog-Google Cloud TPU インテグレーション
+short_description: Google Cloud TPU のキーメトリクスを追跡
+version: '1.0'
+---
+## 概要
+
+Google Cloud TPU 製品は、スケーラブルで使いやすいクラウドコンピューティングリソースを通じて Tensor Processing Unit (TPU) を利用できるようにします。ML 研究者、ML エンジニア、開発者、データサイエンティストの誰もが最先端の ML (機械学習) モデルを実行できます。
+
+Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud TPU からメトリクスを収集できます。
+
+## セットアップ
+
+### インストール
+
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+
+### ログの収集
+
+Google Cloud TPU のログは Stackdriver により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][2] をまだセットアップしていない場合は、これをセットアップしてください。
+
+セットアップが完了したら、Google Cloud TPU のログを Stackdriver から Pub/Sub へエクスポートします。
+
+1. [Stackdriver ページ][3]に移動し、Google Cloud TPU のログを絞り込みます。
+2. **Create Export** をクリックし、シンクに名前を付けます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+
+## 収集データ
+
+### メトリクス
+{{< get-metrics-from-git "google_cloud_tpu" >}}
+
+
+### イベント
+
+Google Cloud TPU インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+
+Google Cloud TPU インテグレーションには、サービスのチェック機能は含まれません。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
+[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_tpu/google_cloud_tpu_metadata.csv
+[5]: https://docs.datadoghq.com/ja/help/

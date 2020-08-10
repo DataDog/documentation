@@ -2,7 +2,7 @@
 title: Cluster Agent のカスタムメトリクスサーバー
 kind: ガイド
 further_reading:
-  - link: agent/kubernetes/cluster/
+  - link: agent/kubernetes/host_setup
     tag: ビデオ
     text: Datadog Cluster Agent
 ---
@@ -182,11 +182,11 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 ```
 
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
-[2]: /ja/agent/cluster_agent
+[2]: /ja/agent/cluster_agent/
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /ja/agent/kubernetes/integrations
-[5]: /ja/agent/cluster_agent/setup
-[6]: /ja/agent/kubernetes/cluster
+[4]: /ja/agent/kubernetes/integrations/
+[5]: /ja/agent/cluster_agent/setup/
+[6]: /ja/agent/kubernetes/cluster/
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
 [9]: /ja/agent/kubernetes/#template-source-kubernetes-pod-annotations

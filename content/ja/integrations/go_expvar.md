@@ -3,13 +3,14 @@ aliases:
   - /ja/integrations/goexpvar
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - languages
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
 display_name: Go-Expvar
@@ -46,7 +47,7 @@ Go サービスのメモリ使用量を追跡し、Go の expvar パッケージ
 
 Go Expvar チェックは Agent にパッケージ化されているため、メトリクスを収集するには、Go サービスを実行している場所に [Agent をインストール][3]します。
 
-### コンフィギュレーション
+### 構成
 
 #### Go サービスの準備
 
@@ -54,7 +55,7 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 ##### Agent の接続
 
@@ -72,9 +73,9 @@ Go サービスで [expvar パッケージ][4]をまだ使用していない場�
 
 | パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
-| `<INTEGRATION_NAME>` | `go_expvar`                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                            |
-| `<INSTANCE_CONFIG>`  | `{"expvar_url": "http://%%host%%:8080"}` |
+| `<インテグレーション名>` | `go_expvar`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                            |
+| `<インスタンスコンフィギュレーション>`  | `{"expvar_url": "http://%%host%%:8080"}` |
 
 ### 検証
 

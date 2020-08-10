@@ -309,7 +309,7 @@ La commande `status` de l'Agent devrait indiquer que l'instance de check est en 
 [1]: /fr/agent/kubernetes/integrations/
 [2]: /fr/agent/cluster_agent/
 [3]: /fr/agent/cluster_agent/setup/
-[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [5]: /fr/developers/write_agent_check/
 [6]: /fr/integrations/mysql/
 [7]: /fr/agent/faq/template_variables/

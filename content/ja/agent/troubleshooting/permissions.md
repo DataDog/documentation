@@ -6,10 +6,10 @@ aliases:
   - /ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
   - /ja/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: Agent のトラブルシューティング
     text: Agent デバッグモード
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Agent のトラブルシューティング
     text: Agent フレアの送信
 ---
@@ -125,7 +125,7 @@ Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] 
 
 3. [Agent を起動します][6]
 
-[1]: /ja/agent/guide/upgrade-to-agent-v6
+[1]: /ja/agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
 [3]: /ja/agent/guide/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
@@ -143,10 +143,10 @@ Agent v5 を実行している場合は、[最新バージョンの Agent 6][1] 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-commands
-[2]: /ja/agent/guide/agent-log-files
-[3]: /ja/agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[4]: /ja/agent/faq/network
+[1]: /ja/agent/guide/agent-commands/
+[2]: /ja/agent/guide/agent-log-files/
+[3]: /ja/agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
+[4]: /ja/agent/faq/network/
 [5]: /ja/agent/guide/agent-commands/#start-the-agent
-[6]: /ja/help
-[7]: /ja/integrations/process
+[6]: /ja/help/
+[7]: /ja/integrations/process/

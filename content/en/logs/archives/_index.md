@@ -36,7 +36,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation:
 
-1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS Cloudwatch.
+1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS S3.
 
 2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 

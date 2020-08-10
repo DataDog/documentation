@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -35,7 +36,7 @@ Recueillez des métriques d'ASP.NET en temps réel pour :
 - Visualiser et surveiller les états ASP.NET
 - Être informé des failovers et des événements d'ASP.NET
 
-## Implémentation
+## Configuration
 
 ### Installation
 

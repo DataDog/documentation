@@ -5,6 +5,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: apache
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json

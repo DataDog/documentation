@@ -42,23 +42,29 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 {{% /tab %}}
 {{% tab "Command line" %}}
 
-Optionally, install the Agent with the command line to add custom settings.
+To install the Agent with the command line:
 
 1. Download the [Datadog Agent installer][1].
 2. Run one of the following commands inside the directory where you downloaded the installer.
-   **Note**: The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 
-Command prompt:
+**Command prompt**
 
-```
+```shell
 start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
-Powershell:
+**Powershell**
 
 ```powershell
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
+
+**Notes**
+
+- The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
+- Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
+
+### Configuration
 
 Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
 

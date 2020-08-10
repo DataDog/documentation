@@ -1,12 +1,14 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    OpenStack Controller Overview: assets/dashboards/openstack-controller.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
 display_name: OpenStack
@@ -31,6 +33,10 @@ supported_os:
   - mac_os
   - windows
 ---
+<div class="alert alert-warning">
+<b>重要</b>: このインテグレーションは、OpenStack バージョン 12 以前（非コンテナ化 OpenStack）にのみ適用されます。OpenStack v13 以降（コンテナ化OpenStack）からのメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack_controller/">OpenStack コントローラーインテグレーション</a>をご利用ください。
+</div>
+
 ![OpenStack のデフォルトのダッシュボード][1]
 
 ## 概要
@@ -46,7 +52,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][2]します。
 
-### コンフィギュレーション
+### 構成
 
 #### OpenStack の準備
 
@@ -198,7 +204,7 @@ Datadog の以下のブログ記事も参照してください。
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones

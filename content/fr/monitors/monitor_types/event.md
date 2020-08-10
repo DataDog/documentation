@@ -3,13 +3,13 @@ title: Monitor d'événement
 kind: documentation
 description: Surveiller des événements recueillis par Datadog
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Vérifier le statut de votre monitor
 ---
@@ -76,5 +76,5 @@ La template variable est `{{event.tags.env}}`. Le résultat de l'utilisation de 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /fr/help
-[3]: /fr/monitors/notifications
+[2]: /fr/help/
+[3]: /fr/monitors/notifications/

@@ -5,16 +5,16 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: 3 分
     text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: 2 分
     text: サービスのレイテンシーを前週と比較する
   - link: /tracing/guide/slowest_request_daily/
     tag: 3 分
     text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: 7 分
     text: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: すべてのガイド
 ---
@@ -128,7 +128,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /ja/dashboards/widgets/timeseries
-[3]: /ja/tracing/guide/metrics_namespace
+[2]: /ja/dashboards/widgets/timeseries/
+[3]: /ja/tracing/guide/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/search/analytics
-[5]: /ja/events
+[5]: /ja/events/
