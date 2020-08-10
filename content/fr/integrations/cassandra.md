@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: cassandra
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +44,7 @@ Recueillez des métriques de Cassandra en temps réel pour :
 - Visualiser et surveiller les états de Cassandra
 - Être informé des failovers et des événements de Cassandra
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -52,7 +54,7 @@ Le check Cassandra est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 

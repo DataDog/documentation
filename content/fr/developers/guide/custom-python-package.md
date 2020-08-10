@@ -5,13 +5,13 @@ aliases:
   - /fr/agent/custom_python_package
   - /fr/agent/faq/custom_python_package
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
 ---
@@ -65,7 +65,7 @@ Ensuite, [redémarrez votre Agent][1].
 
 {{< img src="agent/windows_python_package.png" alt="Paquet python pour windows" >}}
 
-[1]: /fr/agent/basic_agent_usage/windows
+[1]: /fr/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 

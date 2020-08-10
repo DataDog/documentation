@@ -5,13 +5,13 @@ platform: Amazon Linux
 aliases:
   - /ja/guides/basic_agent_usage/amazonlinux/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
 ---
@@ -28,12 +28,27 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
+### Amazon Linux 2
+
 | 説明                        | コマンド                                                |
 |------------------------------------|--------------------------------------------------------|
-| Agent をサービスとして起動           | `sudo service datadog-agent start`                     |
-| サービスとして実行中の Agent の停止    | `sudo service datadog-agent stop`                      |
-| サービスとして実行中の Agent の再起動 | `sudo service datadog-agent restart`                   |
-| Agent サービスのステータス            | `sudo service datadog-agent status`                    |
+| Agent をサービスとして起動           | `sudo systemctl start datadog-agent`                   |
+| サービスとして実行中の Agent の停止    | `sudo systemctl stop datadog-agent`                    |
+| サービスとして実行中の Agent の再起動 | `sudo systemctl restart datadog-agent`                 |
+| Agent サービスのステータス            | `sudo systemctl status datadog-agent`                  |
+| 実行中の Agent のステータスページ       | `sudo datadog-agent status`                            |
+| フレアの送信                         | `sudo datadog-agent flare`                             |
+| コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
+| チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
+
+### Amazon Linux
+
+| 説明                        | コマンド                                                |
+|------------------------------------|--------------------------------------------------------|
+| Agent をサービスとして起動           | `sudo start datadog-agent`                             |
+| サービスとして実行中の Agent の停止    | `sudo stop datadog-agent`                              |
+| サービスとして実行中の Agent の再起動 | `sudo restart datadog-agent`                           |
+| Agent サービスのステータス            | `sudo status datadog-agent`                            |
 | 実行中の Agent のステータスページ       | `sudo datadog-agent status`                            |
 | フレアの送信                         | `sudo datadog-agent flare`                             |
 | コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
@@ -53,15 +68,15 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | コマンドの使用方法の表示              | `sudo service datadog-agent`                      |
 | チェックの実行                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
-{{< /tabs >}}
-
 **注**: ご使用のシステムで `service` ラッパーを使用できない場合は、以下を使用してください。
 
-* `upstart` ベースのシステムの場合: `sudo initctl start/stop/restart/status datadog-agent`
+* `upstart` ベースのシステムの場合: `sudo start/stop/restart/status datadog-agent`
 * `systemd` ベースのシステムの場合: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## コンフィギュレーション
 
@@ -75,7 +90,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -87,7 +102,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -107,5 +122,5 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 [1]: https://app.datadoghq.com/account/settings#agent/aws
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /ja/agent/troubleshooting
-[4]: /ja/developers/guide/custom-python-package
+[3]: /ja/agent/troubleshooting/
+[4]: /ja/developers/guide/custom-python-package/

@@ -3,12 +3,13 @@ aliases:
   - /ja/integrations/winservices
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md'
 display_name: Windows Service
@@ -38,7 +39,7 @@ supported_os:
 
 Windows Service チェックは [Datadog Agent][1] パッケージに含まれています。Windows ホストに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### 構成
 
 [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `windows_service.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル windows_service.d/conf.yaml][3] を参照してください。
 

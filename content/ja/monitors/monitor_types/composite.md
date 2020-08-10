@@ -5,13 +5,13 @@ aliases:
   - /ja/guides/composite_monitors
 description: 複数のモニターを組み合わせた式に対してアラートする
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスを確認
 ---
@@ -181,4 +181,4 @@ not (!) 演算子は、個別または複合条件モニターステータスを
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /ja/monitors/notifications
+[2]: /ja/monitors/notifications/

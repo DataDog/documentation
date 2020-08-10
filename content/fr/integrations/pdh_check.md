@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -32,7 +35,7 @@ Recueillez des métriques à partir des counters de performances Windows en temp
 
 - Visualiser et surveiller les compteurs de performances Windows via l'API PDH.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

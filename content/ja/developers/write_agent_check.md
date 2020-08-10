@@ -66,6 +66,8 @@ class HelloCheck(AgentCheck):
 
 チェックの収集間隔を変更するには、構成ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。この場合は、このクラスの `check` メソッドが Agent の他のインテグレーションと同じ間隔で呼び出されます。
 
+**注**: `min_collection_interval` パラメーターは、標準およびカスタムインテグレーションの両方で利用可能です。
+
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 Agent 6 では、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に設定する必要があります。

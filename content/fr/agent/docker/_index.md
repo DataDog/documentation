@@ -162,7 +162,7 @@ Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d
 | `DD_CONTAINER_EXCLUDE_METRICS` | Liste des conteneurs dont vous souhaitez exclure les métriques. |
 | `DD_CONTAINER_INCLUDE_LOGS` | Liste des conteneurs dont vous souhaitez inclure les logs.  |
 | `DD_CONTAINER_EXCLUDE_LOGS` | Liste des conteneurs dont vous souhaitez exclure les logs. |
-| `DD_AC_INCLUDE` | **Obsolète**. Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`.  |                                              
+| `DD_AC_INCLUDE` | **Obsolète**. Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`.  |
 | `DD_AC_EXCLUDE` | **Obsolète**. Liste des conteneurs à exclure (séparés par des espaces). Utilisez `.*` pour tous les exclure. Exemple : `"image:nom_image_3 image:nom_image_4"` (cette variable est seulement traitée pour Autodiscovery), `image:.*`. |
 
 Des exemples supplémentaires sont disponibles sur la page [Gestion de la découverte de conteneurs][22].
@@ -175,8 +175,6 @@ Des exemples supplémentaires sont disponibles sur la page [Gestion de la décou
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Remplace la détection automatique des sources de conteneurs par une source unique, comme `"docker"`, `"ecs_fargate"` ou `"kubelet"`. |
 | `DD_HEALTH_PORT`                    | Définissez cette variable sur `5555` pour exposer le check de santé de l'Agent sur le port `5555`.                                              |
-
-**Remarque** : si vous utilisez le runtime containerd, définissez `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` pour faire apparaître vos conteneurs sur la page des conteneurs.
 
 Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'aide des variables d'environnement `DD_EXTRA_LISTENERS` et `DD_EXTRA_CONFIG_PROVIDERS`. Elles viennent s'ajouter aux variables définies dans les sections `listeners` et `config_providers` du fichier de configuration `datadog.yaml`.
 
@@ -199,7 +197,7 @@ Par défaut, l'Agent Docker recueille les métriques associées aux checks princ
 | IO          | [Système][24]  |
 | Load        | [Système][24]  |
 | Memory      | [Système][24]  |
-| Network     | [Network][27] |
+| Réseau     | [Network][27] |
 | NTP         | [NTP][28]     |
 | Uptime      | [Système][24]  |
 

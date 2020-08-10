@@ -12,13 +12,15 @@ aliases:
 has_logo: true
 integration_title: nxlog
 is_public: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md'
 public_title: Datadog-NXlog インテグレーション
 supported_os:
   - windows
 ---
 ## 概要
 
-NXLog を構成して、ホスト、コンテナ、サービスからログを収集できます。
+NXLog を構成して、ホスト、コンテナ、サービスからログを収集
 
 ## セットアップ
 
@@ -27,8 +29,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 
-1. NXLog がログを Datadog プラットフォームへ送信するように構成します。
-    `C:\Program Files\nxlog\conf` のファイル全体を以下の内容に置き換えます。
+1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -71,10 +72,11 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
         Path        syslogs => out
     </Route>
     ```
-    上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
 
-2. NXLog のファイル監視モジュールを有効にします。
-    監視するファイルごとに、出力セクションの前に以下を追加します。
+     上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
+
+2. 監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
+
     ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
@@ -89,18 +91,20 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     ```
 
 3. それらのファイルを出力セクションに接続します。
+
     ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
     ```
 
-4. NXLog を再起動します。
-    サービス管理ツールを開きます。
-    `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
+4. NXLog を再起動します。サービス管理ツールを開きます。
 
-5. (オプション) 追加のパラメーターまたはタグを設定します。
-    NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
+    ```text
+    C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
+    ```
+
+5. （任意）追加のパラメーターまたはタグを設定します。NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
@@ -125,12 +129,12 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Output>
     ```
 
+
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-1. NXLog がログを Datadog プラットフォームへ送信するように構成します。
-    `C:\Program Files\nxlog\conf` のファイル全体を以下の内容に置き換えます。
+1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -173,10 +177,11 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
         Path        syslogs => out
     </Route>
     ```
-    上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
 
-2. NXLog のファイル監視モジュールを有効にします。
-    監視するファイルごとに、出力セクションの前に以下を追加します。
+     上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
+
+2.  監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
+
     ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
@@ -191,18 +196,20 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     ```
 
 3. それらのファイルを出力セクションに接続します。
+
     ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
     ```
 
-4. NXLog を再起動します。
-    サービス管理ツールを開きます。
-    `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
+4. NXLog を再起動します。サービス管理ツールを開きます。
 
-5. (オプション) 追加のパラメーターまたはタグを設定します。
-    NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
+    ```text
+    C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
+    ```
+
+5. （任意）追加のパラメーターまたはタグを設定します。NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
@@ -227,6 +234,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Output>
     ```
 
+
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{< /tabs >}}
@@ -235,4 +243,4 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-[1]: /ja/help
+[1]: /ja/help/

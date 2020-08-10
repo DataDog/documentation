@@ -3,7 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: tenable
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

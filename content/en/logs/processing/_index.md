@@ -28,7 +28,7 @@ To access the configuration panel use the left `Logs` menu then the configuratio
 Log configuration page allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
 
 * A [Pipeline][1] takes a filtered subset of incoming logs and applies a list of sequential processors.
-* A [Processor][2] executes within a [Pipeline][1] a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+* A [Processor][2] executes within a [Pipeline][1] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 [Pipelines][1] and [Processors][2] can be applied to any type of logs:
 

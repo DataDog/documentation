@@ -103,10 +103,10 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
 
 または、[EKS を使用した App Mesh][3]ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_eks
+
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
 [2]: /ja/agent/kubernetes/daemonset_setup/#log-collection
 [3]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
-
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
 
@@ -151,13 +151,13 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
 
 #### トレースの収集
 
-APM トレースは App Mesh に使用できません。詳細については、[Datadog サポート][4]までお問合せください。
+APM トレースは App Mesh に使用できません。詳細については、[Datadog サポートチーム][4]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate
-[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate
+
+[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/
+[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
 [4]: /ja/help
-
 {{% /tab %}}
 {{% tab "ECS EC2" %}}
 
@@ -204,11 +204,11 @@ APM トレースは App Mesh に使用できません。詳細については、
 
 APM トレースは App Mesh に使用できません。詳細については、[Datadog サポートチーム][4]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs
-[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate
+
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
+[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#log-collection
 [4]: /ja/help
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,7 +222,7 @@ APM トレースは App Mesh に使用できません。詳細については、
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 
@@ -236,4 +236,4 @@ AWS App Mesh インテグレーションには、サービスチェック機能�
 
 [1]: https://aws.amazon.com/app-mesh
 [2]: https://docs.datadoghq.com/ja/integrations/envoy/#metrics
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

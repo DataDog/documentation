@@ -2,13 +2,13 @@
 title: Gérer les monitors
 kind: documentation
 further_reading:
-  - link: monitors/monitor_types
+  - link: /monitors/monitor_types/
     tag: Documentation
     text: Apprendre à créer un monitor
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
 ---
@@ -119,7 +119,7 @@ Les tags de monitor sont séparés des tags envoyés par l'Agent ou les intégra
 [2]: /fr/monitors/monitor_status/#properties
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[5]: /fr/monitors/monitor_types
+[5]: /fr/monitors/monitor_types/
 [6]: /fr/monitors/monitor_status/#resolve
 [7]: https://app.datadoghq.com/monitors/triggered
 [8]: https://app.datadoghq.com/monitors#downtime

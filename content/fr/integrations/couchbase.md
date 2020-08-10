@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -44,9 +45,9 @@ Identifiez les compartiments occupés, surveillez les ratios de miss de cache, e
 - Le nombre d'opérations par seconde
 - La taille de la file d'attente d'écriture sur disque
 
-Et bien plus encore
+Et bien plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -56,7 +57,7 @@ Le check Couchbase est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 

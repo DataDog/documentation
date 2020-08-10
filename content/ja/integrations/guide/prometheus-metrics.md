@@ -10,8 +10,13 @@ further_reading:
   - link: /integrations/mysql/
     tag: Documentation
     text: Datadog-MySQL インテグレーション
+  - link: /agent/kubernetes/prometheus/
+    tag: Documentation
+    text: Kubernetes Prometheus および OpenMetrics メトリクスの収集
 ---
 Datadog の Prometheus または OpenMetrics チェックをお使いの場合に、これらのメトリクスが既存の Datadog メトリクスタイプにどのようにマッピングされるかをご説明します。
+
+詳細は、[Prometheus および OpenMetrics メトリクスの収集に関するドキュメント][1]を参照してください。
 
 ## Prometheus および OpenMetrics メトリクスのタイプ
 
@@ -22,41 +27,42 @@ Datadog の Prometheus または OpenMetrics チェックをお使いの場合�
 
 ## Datadog メトリクスにおける Prometheus/OpenMetrics メトリクスのマッピング方法
 
-Datadog のメトリクスタイプの詳細については、[Datadog メトリクスタイプのドキュメント][1]を参照してください。
+Datadog のメトリクスタイプの詳細については、[Datadog メトリクスタイプのドキュメント][2]を参照してください。
 
 ### Counter
 
-デフォルトでは、[Prometheus/OpenMetrics の `counter`][2] はDatadog の `gauge` にマッピングされます。
+デフォルトでは、[Prometheus/OpenMetrics の `counter`][3] はDatadog の `monotonic_count` にマッピングされます。
 
-しかし、パラメーター `send_monotonic_counter` が `true` の場合、このメトリクスは `monotonic_counter` として送信されます。[単調カウンターについての詳細はこちらを参照してください][8]。
+ただし、パラメーター `send_monotonic_counter` が `false` の場合、このメトリクスは `gauge` として送信されます。[単調カウンターの詳細についてはこちらを参照してください][4]。
 
 ### Gauge
 
-[Prometheus/OpenMetrics の `gauge`][3] は Datadog の `gauge` にマッピングされます。
+[Prometheus/OpenMetrics の `gauge`][5] は Datadog の `gauge` にマッピングされます。
 
 ### Histogram
 
-[Prometheus/OpenMetrics の `histogram`][4] については、histogram の `_count` および `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
+[Prometheus/OpenMetrics の `histogram`][6] については、histogram の `_count` と `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
 
 パラメーター `send_histograms_buckets` が `true` の場合、それぞれの `_bucket` 値もまた Datadog の `gauge` にマッピングされます。
 
-パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして簡単に監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][5] に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスについてのブログ記事][6]を参照してください。
+パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして簡単に監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][7]に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスに関するブログ記事][8]を参照してください。
 
-パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][8]。
+パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
 
 ### Summary
 
-[Prometheus/OpenMetrics の `summary`][7] については、summary の `_count` および `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
+[Prometheus/OpenMetrics の `summary`][9] については、summary の `_count` および `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
 
 パラメーター `send_distribution_buckets` が `true` の場合は、histogram がディストリビューションに変換され、それぞれの `_bucket` が `distribution` タグを使用してフェッチされます。
 
-パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][8]。
+パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
 
-[1]: /ja/developers/metrics/types/
-[2]: https://prometheus.io/docs/concepts/metric_types/#counter
-[3]: https://prometheus.io/docs/concepts/metric_types/#gauge
-[4]: https://prometheus.io/docs/concepts/metric_types/#histogram
-[5]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-[6]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
-[7]: https://prometheus.io/docs/concepts/metric_types/#summary
-[8]: /ja/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[1]: /ja/agent/kubernetes/prometheus/
+[2]: /ja/developers/metrics/types/
+[3]: https://prometheus.io/docs/concepts/metric_types/#counter
+[4]: /ja/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[5]: https://prometheus.io/docs/concepts/metric_types/#gauge
+[6]: https://prometheus.io/docs/concepts/metric_types/#histogram
+[7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[8]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
+[9]: https://prometheus.io/docs/concepts/metric_types/#summary
