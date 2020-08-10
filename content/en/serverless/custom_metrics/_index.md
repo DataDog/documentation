@@ -238,7 +238,9 @@ Where:
 - `<METRIC_NAME>` uniquely identifies your metric and adheres to the [metric naming policy][3].
 - `<TAG_LIST>` is optional, comma separated, and must be preceded by `#`. The tag `function_name:<name_of_the_function>` is automatically applied to custom metrics.
 
-**Note**: The sum for each timestamp is used for counts and the last value for a given timestamp is used for gauges. It is not recommended to print a log statement every time you increment a metric, as this increases the time it takes to parse your logs. Continually update the value of the metric in your code, and print one log statement for that metric before the function finishes.[1]: https://docs.datadoghq.com/metrics/distributions/
+**Note**: The sum for each timestamp is used for counts and the last value for a given timestamp is used for gauges. It is not recommended to print a log statement every time you increment a metric, as this increases the time it takes to parse your logs. Continually update the value of the metric in your code, and print one log statement for that metric before the function finishes.
+
+[1]: https://docs.datadoghq.com/metrics/distributions/
 [2]: /serverless/forwarder/
 [3]: /developers/metrics/
 [4]: /serverless/installation/installing_the_library/
