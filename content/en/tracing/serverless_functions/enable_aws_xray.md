@@ -38,6 +38,8 @@ Lastly, [install and import the X-Ray client library in your Lambda function](#i
 
 #### Manual setup
 
+If you do not use the Serverless Framework to deploy your serverless application, follow these instructions for manual setup:
+
 1. Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to **Enable active tracing**. This turns on X-Ray for that function.
 2. Navigate to the [API Gateway console][6]. Select your API and then the stage.
 3. On the **Logs/Tracing** tab, select **Enable X-Ray Tracing**.
