@@ -82,7 +82,7 @@ In this scenario, we aggregate all containers across all hosts (i.e. 2 hosts, 10
 ## FAQs
 **1. What is classified as a Continuous Profiler host for billing?**
 
-A host is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing Continuous Profiler, number of hosts with a Profiler library installed and sending profiles are calculated every hour. These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
+A host is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing a Continuous Profiler, the number of hosts with a Profiler library installed and sending profiles are calculated every hour. These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
 
 **2. How is billing calculated if I deploy one agent per container?**
 
