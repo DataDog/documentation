@@ -23,11 +23,7 @@ Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed lo
 
 ## Logs Filtering
 
-<<<<<<< HEAD
-For customers using release 6, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][4], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on a whitelist or blacklist.
-=======
 For customers using release 6 or above, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][4], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on the inclusion or exclusion rules supplied.
->>>>>>> master
 
 ## Logs Obfuscation
 
