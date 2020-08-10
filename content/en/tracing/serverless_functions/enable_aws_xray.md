@@ -25,8 +25,9 @@ xray:GetTraceSummaries
 ### Enabling AWS X-Ray for your functions
 
 To get the most out of the AWS X-Ray integration:
- - Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
- - Install the tracing libraries in your Lambda functions.
+
+- Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
+- Install the tracing libraries in your Lambda functions.
 
 #### Recommended: Using the Serverless Framework plugin
 
