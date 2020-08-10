@@ -10,12 +10,16 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-Profiling is shipped within the following tracing libraries. Select your language below to learn how to enable profiling for your application:
+Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
+
+If you are looking to profile **Ruby**, **PHP**, or **.NET** applications, [sign up][1] to be on the private beta access list. We will notify you when the beta is ready.
+
+[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][2]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
@@ -25,7 +29,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiling li
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.55+.
+     **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
