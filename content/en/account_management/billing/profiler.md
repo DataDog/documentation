@@ -14,7 +14,7 @@ kind: documentation
 
 ## Sample Deployment Scenarios
 
-**Sample cases illustrate annual billing rates. Contact Sales or your [Customer Success Manager][3] to discuss volume discounts for your account.**
+These sample cases demonstrate common use cases using annual billing rates. Contact Sales or your [Customer Success Manager][3] to discuss volume discounts for your account.
 
 ### Case 1: Hosts with no Containers
 
