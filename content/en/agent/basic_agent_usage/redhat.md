@@ -109,19 +109,18 @@ Configuration files for [Integrations][1]:
 
 ## Troubleshooting
 
-[Refer to the dedicated Agent Troubleshooting documentation][3].
+[Refer to the dedicated Agent Troubleshooting documentation][2].
 
 ## Working with the embedded Agent
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-See the instructions on how to [add packages to the embedded Agent][4] for more information.
+See the instructions on how to [add packages to the embedded Agent][3] for more information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/centos
-[2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /agent/troubleshooting/
-[4]: /developers/guide/custom-python-package/
+[2]: /agent/troubleshooting/
+[3]: /developers/guide/custom-python-package/

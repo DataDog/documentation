@@ -941,151 +941,166 @@ main:
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 7
+  - name: Trace Serverless Functions
+    url: tracing/serverless_functions/
+    parent: tracing
+    identifier: tracing_serverless_functions
+    weight: 8
+  - name: Enable Datadog APM
+    url: serverless/
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_datadog_apm
+    weight: 801
+  - name: Enable AWS X-Ray
+    url: tracing/serverless_functions/enable_aws_xray
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_aws_xray
+    weight: 802
   - name: Runtime Metrics
     url: tracing/runtime_metrics/
     parent: tracing
     identifier: tracing_runtime_metrics
-    weight: 8
+    weight: 9
   - name: Java
     url: tracing/runtime_metrics/java
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_java
-    weight: 801
+    weight: 901
   - name: Python
     url: tracing/runtime_metrics/python
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_python
-    weight: 802
+    weight: 902
   - name: Ruby
     url: tracing/runtime_metrics/ruby
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_ruby
-    weight: 803
+    weight: 903
   - name: NodeJS
     url: tracing/runtime_metrics/nodejs
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
-    weight: 804
+    weight: 904
   - name: Continuous Profiling
     url: tracing/profiling/
     parent: tracing
     identifier: profiling
-    weight: 9
+    weight: 10
   - name: Getting Started
     url: tracing/profiling/getting_started
     parent: profiling
     identifier: profiling_getting_started
-    weight: 901
+    weight: 1001
   - name: Search Profiles
     url: tracing/profiling/search_profiles
     parent: profiling
     identifier: profiling_search_profiles
-    weight: 902
+    weight: 1002
   - name: Custom Instrumentation
     url: tracing/custom_instrumentation/
     parent: tracing
     identifier: tracing_custom_instrumentation
-    weight: 10
+    weight: 11
   - name: Agent Customization
     url: tracing/custom_instrumentation/agent_customization
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_agent_customization
-    weight: 1001
+    weight: 1101
   - name: Java
     url: tracing/custom_instrumentation/java
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_java
-    weight: 1002
+    weight: 1102
   - name: Python
     url: tracing/custom_instrumentation/python
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_python
-    weight: 1003
+    weight: 1103
   - name: Ruby
     url: tracing/custom_instrumentation/ruby
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_ruby
-    weight: 1004
+    weight: 1104
   - name: Go
     url: tracing/custom_instrumentation/go
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_go
-    weight: 1005
+    weight: 1105
   - name: NodeJS
     url: tracing/custom_instrumentation/nodejs
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_nodejs
-    weight: 1006
+    weight: 1106
   - name: PHP
     url: tracing/custom_instrumentation/php
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_php
-    weight: 1007
+    weight: 1107
   - name: C++
     url: tracing/custom_instrumentation/cpp
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_cpp
-    weight: 1008
+    weight: 1108
   - name: .NET
     url: tracing/custom_instrumentation/dotnet
     parent: tracing_custom_instrumentation
     identifier: tracing_custom_instrumentation_dotnet
-    weight: 1009
+    weight: 1109
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 11
+    weight: 12
   - name: Services List
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1101
+    weight: 1201
   - name: Service Page
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1102
+    weight: 1202
   - name: Resource Page
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1103
+    weight: 1203
   - name: Trace View
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1104
+    weight: 1204
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1105
+    weight: 1205
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 13
+    weight: 14
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1301
+    weight: 1401
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1302
+    weight: 1402
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1303
+    weight: 1403
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1304
+    weight: 1404
   - name: Log Management
     url: logs/
     pre: nav_logs
