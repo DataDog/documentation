@@ -61,11 +61,11 @@ Graphs are created with the Datadog query editor. Notebooks support:
 
 #### Text
 
-Text in a notebook is formatted with Markdown, which enables the use of headings, subheadings, links, images, lists, and code blocks.
+Text in a notebook is formatted with [Markdown][8], which enables the use of headings, subheadings, links, images, lists, and code blocks.
 
 ### Manipulating cells
 
-When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, mouse over it and use `CMD + Click`, or click "Edit." To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Only one cell may be open at a time.
+When an existing notebook is opened, the cells are in a closed state. To open a cell for editing, mouse over it and use `CMD + Click`, or click **Edit**. To close a cell, click outside it, press `ESC`, or press `CMD + Enter`. Only one cell may be open at a time.
 
 To insert cells, use the **+** button that appears to the left of the cell. To share, clone, or delete cells, use the action tray that appears above the cell on hover, or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 
@@ -81,7 +81,7 @@ To set an individual time frame, click the clock icon in the top-right corner of
 
 ### Expand
 
-Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][8] page.
+Expand the graph by clicking on the expand icon on the right side of the cell. More details about full screen mode is available on the [Widgets][9] page.
 
 ### Layout options
 
@@ -89,7 +89,7 @@ The following layout options are available by clicking the grid icon on the righ
 
 * **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
 * **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
-* **Grouping**: Display one graph per source grouping.
+* **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
 {{< img src="notebooks/layout_options.png" alt="layout options"  style="width:50%;">}}
 
@@ -113,4 +113,5 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 [5]: /dashboards/widgets/heat_map/
 [6]: /dashboards/widgets/distribution/
 [7]: /dashboards/widgets/log_stream/
-[8]: /dashboards/widgets/#full-screen
+[8]: https://daringfireball.net/projects/markdown/
+[9]: /dashboards/widgets/#full-screen
