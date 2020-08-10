@@ -1,5 +1,8 @@
 ---
 title: Enhanced Lambda Metrics
+aliases:
+    - /serverless/real-time-enhanced-metrics
+    - /serverless/real_time_enhanced_metrics
 kind: documentation
 ---
 
