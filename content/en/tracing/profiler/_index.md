@@ -4,13 +4,13 @@ kind: Documentation
 aliases:
     - /tracing/profiling
 further_reading:
-    - link: 'tracing/profiler/getting_started'
+    - link: 'tracing/profiling/getting_started'
       tag: 'Documentation'
       text: 'Enable continuous profiler for your application.'
-    - link: 'tracing/profiler/runtime_metrics'
+    - link: 'tracing/profiling/runtime_metrics'
       tag: 'Documentation'
       text: 'View runtime metrics.'  
-    - link: 'tracing/profiler/search_profiles'
+    - link: 'tracing/profiling/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
