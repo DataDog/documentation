@@ -102,7 +102,7 @@ Continuous Profiler is billed on the basis of hosts deployed with agents sending
 
 **6. Can I use Continuous Profiling without APM?**
 
-Not yet. We would love to hear from you if you are interested in using just Continuous Profiling without APM. Please reach out to us through your [Contact Sales][4] or your [Customer Success Manager][3].
+No. Let us know if you are interested in using Continuous Profiling without enabling APM. Please reach out to us by contacting [Sales][4] or through your [Customer Success Manager][3].
 
 [1]: /tracing/profiling/
 [2]: /account_management/billing/pricing/#continuous-profiler
