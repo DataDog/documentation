@@ -1,6 +1,8 @@
 ---
 title: Continuous Profiler
 kind: Documentation
+aliases:
+    - /tracing/profiling
 further_reading:
     - link: 'tracing/profiler/getting_started'
       tag: 'Documentation'

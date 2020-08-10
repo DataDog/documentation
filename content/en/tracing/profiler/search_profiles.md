@@ -1,6 +1,8 @@
 ---
 title: Search Profiles
-kind: Documentation
+kind: documentation
+aliases:
+    - /tracing/profiling/search_profiles
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'

@@ -1,6 +1,8 @@
 ---
 title: Getting Started
 kind: Documentation
+aliases:
+    - /tracing/profiling/getting_started
 further_reading:
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
