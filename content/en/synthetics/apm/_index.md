@@ -50,7 +50,7 @@ The following Datadog tracing libraries are supported:
 * [Ruby][7]
 * [JavaScript][8]
 * [PHP][9]
-* [.NET][12]
+* [.NET][10]
 
 ### How are traces linked to tests?
 
@@ -62,7 +62,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | `x-datadog-parent-id: 0`               | To have Synthetic tests be the root span of the generated trace.                                                        |
 | `x-datadog-origin: synthetics`         | To make sure the generated traces from your API tests [don't affect your APM quotas](#how-are-apm-quotas-affected).     |
 | `x-datadog-origin: synthetics-browser` | To make sure the generated traces from your Browser tests [don't affect your APM quotas](#how-are-apm-quotas-affected). |
-| `x-datadog-sampling-priority: 1`       | [To make sure that the Agent keeps the trace][10].                                                                      |
+| `x-datadog-sampling-priority: 1`       | [To make sure that the Agent keeps the trace][11].                                                                      |
 
 ### How are APM quotas affected?
 
@@ -70,7 +70,7 @@ The `x-datadog-origin: synthetics` header specifies to the APM backend that the 
 
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][11].
+These traces are retained [just like your classical APM traces][12].
 
 ## Further Reading
 
@@ -85,6 +85,6 @@ These traces are retained [just like your classical APM traces][11].
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: /tracing/guide/trace_sampling_and_storage/#how-it-works
-[11]: /tracing/guide/trace_sampling_and_storage/#trace-storage
-[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[11]: /tracing/guide/trace_sampling_and_storage/#how-it-works
+[12]: /tracing/guide/trace_sampling_and_storage/#trace-storage

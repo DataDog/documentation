@@ -5,13 +5,13 @@ platform: Source
 aliases:
   - /ja/guides/basic_agent_usage/source/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
 ---
@@ -62,7 +62,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -74,7 +74,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,4 +87,4 @@ Agent の構成ファイルおよびフォルダーの場所
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /ja/agent/troubleshooting
+[2]: /ja/agent/troubleshooting/

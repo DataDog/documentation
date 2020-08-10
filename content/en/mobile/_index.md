@@ -50,7 +50,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Account
 
-Switch organizations and log out from the Account page.
+Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 

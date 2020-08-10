@@ -3,6 +3,7 @@ aliases:
   - /fr/integrations/winservices
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -32,7 +33,7 @@ supported_os:
 
 Ce check surveille l'état de n'importe quel service Windows et envoie un check de service à Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

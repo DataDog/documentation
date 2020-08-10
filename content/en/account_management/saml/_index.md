@@ -45,6 +45,30 @@ The Single Sign-on URL is also displayed on the [Team page][6]. Loading this URL
 
 **Note**: If you want to configure SAML for a multi-org, see the [multi-org documentation][7].
 
+## Mapping SAML attributes to Datadog roles
+
+You can assign or remove Datadog roles based on a user's SAML-assigned attributes:
+
+1. Go to Account Management and click the Mappings tab.
+
+2. Click the **New Mapping** button. 
+
+3. Specify the SAML identity provider key-value pair that you want to associate with an existing Datadog role (either default or custom). For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`: 
+
+    {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
+
+4. If you have not already done so, enable mappings by clicking **Enable Mappings**. 
+
+When a user logs in who has the specified identity provider attribute, they will automatically be assigned the Datadog role. Likewise, if someone has that identity provider attribute removed, they will also lose access to the role (unless another mapping adds it). 
+
+<div class="alert alert-warning">
+  <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously, and are prevented from logging into the org with SAML. Double-check your mapping definitions. 
+</div>
+
+You can make changes to a mapping by clicking the pencil icon, or remove it by clicking the garbage icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
+
+Alternatively, you can create and change mappings of SAML attributes to Datadog roles by using the `authn_mappings` endpoint. See [Federated Authentication to Role Mapping API][8] for more information.
+
 ## Datadog Service Provider Details
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
@@ -84,13 +108,13 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 For more information about configuring specific IdP's, refer to the following documentation:
 
-* [Active Directory][8]
-* [Auth0][9]
-* [Azure][10]
-* [Google][11]
-* [NoPassword][12]
-* [Okta][13]
-* [SafeNet][14]
+* [Active Directory][9]
+* [Auth0][10]
+* [Azure][11]
+* [Google][12]
+* [NoPassword][13]
+* [Okta][14]
+* [SafeNet][15]
 
 ## Additional Features
 
@@ -129,10 +153,11 @@ With SAML Strict mode enabled, all users must log in with SAML. An existing user
 [5]: https://app.datadoghq.com/account/saml/metadata.xml
 [6]: https://app.datadoghq.com/account/team
 [7]: /account_management/multi_organization/#setting-up-saml
-[8]: /account_management/saml/activedirectory/
-[9]: /account_management/saml/auth0/
-[10]: /account_management/saml/azure/
-[11]: /account_management/saml/google/
-[12]: /account_management/saml/nopassword/
-[13]: /account_management/saml/okta/
-[14]: /account_management/saml/safenet/
+[8]: /account_management/authn_mapping/
+[9]: /account_management/saml/activedirectory/
+[10]: /account_management/saml/auth0/
+[11]: /account_management/saml/azure/
+[12]: /account_management/saml/google/
+[13]: /account_management/saml/nopassword/
+[14]: /account_management/saml/okta/
+[15]: /account_management/saml/safenet/

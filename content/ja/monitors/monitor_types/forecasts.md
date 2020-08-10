@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /ja/guides/forecasts/
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスの参照
 ---
@@ -113,9 +113,9 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /ja/monitors/monitor_types/metric/#define-the-metric
-[3]: /ja/monitors/faq/what-are-recovery-thresholds
-[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /ja/dashboards/functions/rollup
-[6]: /ja/monitors/notifications
-[7]: /ja/api/#create-a-monitor
+[3]: /ja/monitors/faq/what-are-recovery-thresholds/
+[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /ja/dashboards/functions/rollup/
+[6]: /ja/monitors/notifications/
+[7]: /ja/api/v1/monitors/#create-a-monitor
 [8]: /ja/monitors/monitor_status/#settings

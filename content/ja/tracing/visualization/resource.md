@@ -2,16 +2,16 @@
 title: リソースステータス画面
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: 「Datadogのサービス詳細」
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -46,9 +46,7 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 
 ### Export to Timeboard
 
-グラフを既存の[タイムボード][4]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
-
-{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="タイムボードに保存"  style="width:40%;">}}
+グラフを既存の[タイムボード][4]にエクスポートするには、各グラフの右上隅にある上向き矢印をクリックします。
 
 ### レイテンシー分布
 
@@ -90,9 +88,9 @@ Datadog は、特定のリソースに対してすぐに使用できるグラフ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/visualization/#services
-[2]: /ja/tracing/visualization
+[2]: /ja/tracing/visualization/
 [3]: /ja/tracing/visualization/#trace
-[4]: /ja/dashboards/timeboard
+[4]: /ja/dashboards/timeboard/
 [5]: /ja/tracing/visualization/#spans
-[6]: /ja/tracing/visualization/trace
-[7]: /ja/tracing/search
+[6]: /ja/tracing/visualization/trace/
+[7]: /ja/tracing/search/

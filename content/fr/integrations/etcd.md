@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

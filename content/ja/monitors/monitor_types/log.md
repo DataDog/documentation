@@ -2,13 +2,13 @@
 title: ログモニター
 kind: documentation
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスを確認
 ---
@@ -24,13 +24,14 @@ Datadog で[ログモニター][2]を作成するには、メインナビゲー�
 
 検索クエリを定義すると、検索フィールドの上にあるグラフが更新されます。
 
-1. [ログインデックスが複数][3]ある場合は、検索するインデックスを選択してください。
-2. [ログエクスプローラーでの検索][4]と同じロジックを使用して検索クエリを作成します。
-3. ログカウント、[ファセット][5]、または[メジャー][6]に対するモニターを選択します。
+1. [ログエクスプローラーでの検索][3]と同じロジックを使用して検索クエリを作成します。
+2. ログカウント、[ファセット][4]、または[メジャー][4]のモニターを選択します。
     * **Monitor over a log count**: 検索バーを使用し（任意）、ファセットまたはメジャーを選択**しません**。選択されたタイムフレームで Datadog がログ数を評価し、それをしきい値の条件と比較します。
-    * **Monitor over a facet**: [ファセット][5]が選択されていると、モニターはファセットの `Unique value count` に対してアラートを出します。
-    * **Monitor over measure**: [メジャー][6]が選択されていると、モニターは (メトリクスモニターと同様に) ログファセットの数値に対してアラートを出します。また、集計を選択する必要があります（`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`）。
-4. アラートグループを定義します（任意）。**注**: アラートグループが定義されているかどうかにかかわらず、集計値が設定された条件を満たしたときに、アラートを **1 つ**受け取ります。クエリをホストで分割した場合でも、複数のホストが設定された条件を満たすと、通知が 1 つだけ送信されます。これは、通知ノイズを減らすためです。
+    * **Monitor over a facet**: [ファセット][4]を選択すると、モニターはファセットの `Unique value count` に対してアラートを発出します。
+    * **Monitor over measure**: [メジャー][4]が選択されている場合、モニターは (メトリクスモニターと同様に) ログファセットの数値に対してアラートを発出します。また、集計を選択する必要があります（`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`）。
+3. アラート設定のグループ化方法を構成します（任意）:
+    * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。これは、単一のホストから受け取るメトリクスまたは多くのホストからの合計メトリクスを監視する場合に最適です。通知件数を減らしたい場合にこの方法を選択します。
+    * **Multi-Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します（最大 100 件の一致するグループ）。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、`system.disk.in_use` を `device` でグループ化すると、容量不足のデバイスに対してアラートを個別に送信できます。
 
 ### アラートの条件を設定する
 
@@ -52,9 +53,9 @@ Datadog で[ログモニター][2]を作成するには、メインナビゲー�
 * このモニターは、サービス `backend` のログが存在しない場合にトリガーします。
   {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="バックエンドサービスの下限モニター"  style="width:60%;" >}}
 
-### Notifications
+### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][7] のページを参照してください。
+**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][5] のページを参照してください。
 
 #### ログのサンプル
 
@@ -81,10 +82,8 @@ Datadog で[ログモニター][2]を作成するには、メインナビゲー�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs
+[1]: /ja/logs/
 [2]: https://app.datadoghq.com/monitors#create/log
-[3]: /ja/logs/indexes
-[4]: /ja/logs/explorer/search
-[5]: /ja/logs/explorer/?tab=facets#setup
-[6]: /ja/logs/explorer/?tab=measures#setup
-[7]: /ja/monitors/notifications
+[3]: /ja/logs/explorer/search/
+[4]: /ja/logs/explorer/facets/
+[5]: /ja/monitors/notifications/

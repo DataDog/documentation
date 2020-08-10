@@ -18,5 +18,5 @@ further_reading:
 {{< nextlink href="/getting_started/tracing" >}}<u>トレーシング</u>: Agent をセットアップして小さなアプリケーションをトレースし、トレーシングの方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>タグ付け</u>: メトリクス、ログ、トレースのタグ付けを開始します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Datadog HTTP API を使用します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetics</u>: Synthetics テストを使用して、API エンドポイントと主要なビジネス処理を監視する方法を学びます。{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic モニタリング</u>: Synthetic テストを使用して、API エンドポイントと主要なビジネス処理を監視する方法を学びます。{{< /nextlink >}}
 {{< /whatsnext >}}

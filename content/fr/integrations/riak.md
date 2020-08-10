@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: riak
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +41,7 @@ supported_os:
 
 Ce check vous permet de suivre les métriques de performance node, vnode et ring de RiakKV ou RiakTS.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -47,7 +51,7 @@ Le check Riak est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez d
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 

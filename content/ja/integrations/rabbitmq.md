@@ -1,14 +1,19 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: rabbitmq
   monitors: {}
+  saved_views:
+    pid_overview: assets/saved_views/status_overview.json
+    rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
   service_checks: assets/service_checks.json
 categories:
   - processing
   - log collection
   - autodiscovery
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
 display_name: RabbitMQ
@@ -51,7 +56,7 @@ supported_os:
 
 RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### RabbitMQ の準備
 
@@ -75,7 +80,7 @@ rabbitmqctl set_user_tags datadog monitoring
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 ##### メトリクスの収集
 
@@ -137,15 +142,15 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
-| `<INTEGRATION_NAME>` | `rabbitmq`                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                |
-| `<INSTANCE_CONFIG>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/"}` |
+| `<インテグレーション名>` | `rabbitmq`                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                |
+| `<インスタンスコンフィギュレーション>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/","username": <ユーザー名>, "password": <パスワード>}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集のドキュメント][10]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][10]を参照してください。
 
 | パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -203,12 +208,12 @@ Agent が RabbitMQ に接続してメトリクスを収集できない場合は�
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
-[10]: https://docs.datadoghq.com/ja/agent/docker/log/
+[9]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[10]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help
+[13]: https://docs.datadoghq.com/ja/help/
 [14]: https://www.datadoghq.com/blog/rabbitmq-monitoring
 [15]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
 [16]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
-[17]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family
+[17]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family/

@@ -6,6 +6,7 @@ aliases:
   - /graphing/infrastructure/serverless_functions
   - /graphing/infrastructure/serverless/
   - /infrastructure/serverless/
+  - /tracing/serverless_functions/datadog_apm
 further_reading:
 - link: "/integrations/amazon_xray/"
   tag: "X-Ray Integration"

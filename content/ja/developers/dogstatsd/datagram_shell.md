@@ -6,10 +6,10 @@ aliases:
   - /ja/developers/dogstatsd/data_types/
 further_reading:
   - link: developers/dogstatsd
-    tag: Documentation
+    tag: ドキュメント
     text: DogStatsD 入門
   - link: developers/libraries
-    tag: Documentation
+    tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
     tag: GitHub
@@ -23,32 +23,33 @@ further_reading:
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
 | パラメーター                           | 必須 | 説明                                                                                                                                      |
-|-------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<METRIC_NAME>`                     | はい      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][1]を参照してください。                                    |
 | `<VALUE>`                           | はい      | 整数または浮動小数点数。                                                                                                                             |
-| `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`。[メトリクスタイプのドキュメント][2]を参照してください。                            |
+| `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。[メトリクスタイプのドキュメント][2]を参照してください。      |
 | `<SAMPLE_RATE>`                     | いいえ       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
 | `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグ付けのドキュメント][3]を参照してください。 |
 
 以下に、データグラムの例を示します。
 
-* `page.views:1|c` : `page.views` COUNT メトリクスを増やします。
-* `fuel.level:0.5|g`: 燃料タンクが半分空になったことを記録します。
-* `song.length:240|h|@0.5`: 半分の時間で `song.length` ヒストグラムをサンプリングします。
-* `users.uniques:1234|s`: サイトへのユニークビジターを追跡します。
-* `users.online:1|c|#country:china`: アクティブユーザー COUNT メトリクスを増やし、所属国ごとにタグ付けします。
-* `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
+- `page.views:1|c` : `page.views` COUNT メトリクスを増やします。
+- `fuel.level:0.5|g`: 燃料タンクが半分空になったことを記録します。
+- `song.length:240|h|@0.5`: 半分の時間で `song.length` ヒストグラムをサンプリングします。
+- `users.uniques:1234|s`: サイトへのユニークビジターを追跡します。
+- `users.online:1|c|#country:china`: アクティブユーザー COUNT メトリクスを増やし、所属国ごとにタグ付けします。
+- `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
+
 
 [1]: /ja/developers/metrics/#naming-metrics
-[2]: /ja/developers/metrics/types
-[3]: /ja/tagging
+[2]: /ja/developers/metrics/types/
+[3]: /ja/getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
 
 `_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
 | パラメーター                            | 必須 | 説明                                                                                                            |
-|--------------------------------------|----------|------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `_e`                                 | はい      | データグラムは `_e` で始まる必要があります。                                                                                     |
 | `<TITLE>`                            | はい      | イベントのタイトル。                                                                                                       |
 | `<TEXT>`                             | はい      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
@@ -76,7 +77,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
 | パラメーター                            | 必須 | 説明                                                                                                                             |
-|--------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `_sc`                                | はい      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
 | `<NAME>`                             | はい      | サービスチェック名。                                                                                                                 |
 | `<STATUS>`                           | はい      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
@@ -115,15 +116,15 @@ DogStatsD は、メトリクス、イベント、またはサービスチェッ�
 Linux の場合
 
 ```shell
-$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
+echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 ```
 
 ```shell
-$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
+echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
 ```
 
 ```shell
-$ echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
+echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 ```
 
 Windows の場合
@@ -134,13 +135,21 @@ PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 
 任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
 
+### Python 2
+
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-**注**: Agent の埋め込み Python インタープリターを使用できます。Windows では、これは、Agent バージョン <= 6.11 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` にあります。
+### Python 3
+
+```python
+import socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+```
 
 {{% /tab %}}
 {{% tab "Events" %}}
@@ -157,7 +166,9 @@ Linux の場合
 
 ```shell
 $ title="シェルからのイベント"
+
 $ text="これは Bash から送信されました！"
+
 $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
 
@@ -181,7 +192,7 @@ _sc|<名前>|<ステータス>|d:<タイムスタンプ>|h:<ホスト名>|#<タ�
 Linux の場合
 
 ```shell
-$ echo -n "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒後にタイムアウトしました" >/dev/udp/localhost/8125
+echo -n "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒後にタイムアウトしました" >/dev/udp/localhost/8125
 ```
 
 Windows の場合
@@ -193,17 +204,14 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒�
 {{% /tab %}}
 {{< /tabs >}}
 
-コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD に関するドキュメント][4]を参照してください。また、環境に応じて [DaemonSets][5] または [Helm][6] を使用して Kubernetes で APM を構成する手順も併せて参照してください。[Docker APM][7] のドキュメントも参考になります。
+コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD に関するドキュメント][3]を参照してください。また、環境に応じて [Kubernetes で APM を構成][4]する手順も併せて参照してください。[Docker APM][5] のドキュメントも参考になります。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
-[3]: /ja/developers/dogstatsd
-[4]: /ja/developers/dogstatsd/
-[5]: /ja/agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
-[6]: /ja/agent/kubernetes/helm/#enable-apm-and-distributed-tracing
-[7]: /ja/agent/docker/apm
+[3]: /ja/developers/dogstatsd/
+[4]: /ja/agent/kubernetes/apm/
+[5]: /ja/agent/docker/apm/
