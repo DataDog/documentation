@@ -982,19 +982,19 @@ main:
     identifier: tracing_runtime_metrics_nodejs
     weight: 904
   - name: Continuous Profiler
-    url: tracing/profiling/
+    url: tracing/profiler/
     parent: tracing
-    identifier: profiling
+    identifier: profiler
     weight: 10
   - name: Getting Started
-    url: tracing/profiling/getting_started
-    parent: profiling
-    identifier: profiling_getting_started
+    url: tracing/profiler/getting_started
+    parent: profiler
+    identifier: profiler_getting_started
     weight: 1001
   - name: Search Profiles
-    url: tracing/profiling/search_profiles
-    parent: profiling
-    identifier: profiling_search_profiles
+    url: tracing/profiler/search_profiles
+    parent: profiler
+    identifier: profiler_search_profiles
     weight: 1002
   - name: Custom Instrumentation
     url: tracing/custom_instrumentation/
