@@ -86,7 +86,7 @@ A host is a physical or virtual operating system instance. Datadog records the n
 
 **2. How is billing calculated if I deploy one agent per container?**
 
-It is recommended to setup running one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per Profiled host) * (Number of containers)
+Datadog recommends setting up one Agent per underlying host for container deployment. If you still choose to run one Agent per container, then each container is treated as a single host. The price is then (Price Per Profiled host) * (Number of containers).
 
 **3. What happens to my bill if I have to suddenly scale my environment?**
 
