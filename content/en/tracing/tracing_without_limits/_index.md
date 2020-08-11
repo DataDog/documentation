@@ -86,7 +86,7 @@ In addition to viewing analytics for requests matching arbitrary queries, Live A
 
 With Live Analytics, every tag on every span ingested over the rolling 15 minute window is available for querying.
 
-{{< img src="tracing/live_search/LiveAnalytics.gif" alt="Live Analytics" >}}
+{{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
 
 **Note:** Exporting to dashboards and monitors is only possible in Historical mode.
 
@@ -100,7 +100,7 @@ The root span of any trace with at least one indexed span is indexed. This means
 
 **Note:** The entire associated trace will appear whenever you are viewing the flame graph associated with any indexed span, but that only indexed spans are searchable.
 
-{{< img src="tracing/live_search/HistoricalAnalytics.gif" alt="Historical Analytics" >}}
+{{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
 
 **Note:** Only indexed spans can be searched in Historical Analytics Mode.
 
@@ -124,7 +124,7 @@ Ingestion Controls affect what is sent by your applications to Datadog.
 
 #### Span Ingestion
 
-{{< img src="tracing/trace_indexing_and_ingestion/DataIngestion.png" style="width:100%;" alt="Data Ingestion" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/DataIngestion2.png" style="width:100%;" alt="Data Ingestion" >}}
 
 Many instrumented services will send 100% of their traffic to Datadog by default.  High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
 
@@ -143,9 +143,15 @@ In the Datadog app, on the ['Data Ingestion' view][4], you can see the following
 
 #### Change the Default Ingestion Rate
 
-{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate2.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
 
 To specify that a specific percentage of a service's traffic should be sent, add a generated code snippet to your tracer configuration for that service.
+
+1. Select the service you want to change the ingested span percent for.
+2. Choose the service language.
+3. Choose the desired ingestion percentage.
+4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy.
+5. Confirm on the Data Ingestion page that your new percentage has been applied.
 
 ### Indexing Controls
 
@@ -159,7 +165,7 @@ After spans have been ingested by Datadog, they will be retained for 15 days acc
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-filter) for your services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing.png" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing2.png" style="width:100%;" alt="Span Indexing" >}}
 
 | Column                | Data |
 | ----------------------- | ---------- |
@@ -182,9 +188,14 @@ Intelligent Sampling retains:
 
 #### Create your own filter
 
-{{< img src="tracing/trace_indexing_and_ingestion/IndexFilter.gif" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
 To customize what spans are indexed and retained for 15 days, you can create, modify and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed the full trace context will be available.  In order to be searched by tag in [Historical Search and Analytics][3], however, the span containing the relevant tag must have been indexed.
+
+1. Name your filter.
+2. Set the relevant tags you would like to index spans that match ALL of.
+3. Set a percentage of spans matching these tags to be indexed.
+4. Save your new filter.
 
 ## Usage Metrics Overview
 
@@ -203,7 +214,7 @@ To create a custom dashboard or monitor, the key metrics to use are:
 
 ### Indexed Spans
 
-{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing.png" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing2.png" style="width:100%;" alt="Span Indexing" >}}
 
 Each retention filter set on your services, including the default [Datadog Intelligent Sampling Filter](#datadog-intelligent-sampling-filter), results in an _increase_ to the number of indexed spans for your Datadog account.
 
