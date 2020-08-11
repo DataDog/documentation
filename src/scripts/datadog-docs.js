@@ -1052,6 +1052,8 @@ function loadPage(newUrl) {
                 wistiaVidId = wistiaVid.dataset.wistiaId;
             }
 
+            initializeSecurityRules();
+
             // if newly requested TOC is NOT disabled
             if (newTOC.querySelector('#TableOfContents')) {
                 currentTOC.replaceWith(newTOC);
@@ -1083,8 +1085,6 @@ function loadPage(newUrl) {
             if (regionSelector) {
                 redirectToRegion(regionSelector.value);
             }
-
-            initializeSecurityRules();
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });

@@ -10,6 +10,9 @@ export function initializeSecurityRules() {
     let keyupTimeout;
     let filters;
     let mixer;
+
+    if (!containerEl) return;
+
     if(controls) {
        filters = controls.querySelectorAll('[data-ref="filter"]');
     }
@@ -24,6 +27,7 @@ export function initializeSecurityRules() {
         if (searchValue) {
             // Use an attribute wildcard selector to check for matches
             mixer.filter(`[data-name*="${searchValue}"]`);
+            activateButton(controls.querySelector('[data-filter="all"]'), filters);
         } else {
             // If no searchValue, treat as filter('all')
             mixer.filter('all');
@@ -40,17 +44,33 @@ export function initializeSecurityRules() {
                 button.classList[button === activeButton ? 'add' : 'remove']('active');
             }
         }
+
+        // enable all
+        ruleList.forEach(elm => {
+            elm.classList.add('active');
+        });
     }
 
     if(containerEl) {
         mixer = mixitup(containerEl, {
-            animation: {duration: 350},
+            animation: {
+                duration: 350,
+                enable: false
+            },
             callbacks: {
                 onMixClick() {
                     // Reset the search if a filter is clicked
                     if (this.matches('[data-filter]')) {
                         inputSearch.value = '';
                     }
+                },
+                onMixEnd(state){
+                    state.hide.forEach((x) => {
+                        x.closest(".js-group").style.display = 'none';
+                    });
+                    state.show.forEach((x) => {
+                        x.closest(".js-group").style.display = '';
+                    });
                 }
             }
         });
@@ -66,7 +86,7 @@ export function initializeSecurityRules() {
                 }
                 clearTimeout(keyupTimeout);
                 keyupTimeout = setTimeout(function () {
-                    window.history.replaceState({}, '', `?q=${searchValue}`);
+                    window.history.replaceState({q: searchValue}, '', `?q=${searchValue}`);
                     filterByString(searchValue);
                 }, 350);
             });
@@ -76,10 +96,15 @@ export function initializeSecurityRules() {
             controls.addEventListener('click', function (e) {
                 e.preventDefault();
                 inputSearch.value = '';
+                window.history.replaceState({q: ''}, '', `?q=`);
+                // If button is already active, or an operation is in progress, ignore the click
+                if (e.target.classList.contains('active') || !e.target.getAttribute('data-filter'))
+                    return;
                 activateButton(e.target, filters);
                 if (window.history.pushState) {
                     const href = e.target.getAttribute('href');
-                    window.history.pushState(null, document.title, href);
+                    const url = window.location.href.replace(window.location.hash, '');
+                    window.history.pushState({q: ''}, document.title, url + href);
                 }
             });
         }
@@ -90,7 +115,7 @@ export function initializeSecurityRules() {
         }
         if(keyword) { filterByString(keyword); }
 
-        $(window).on('hashchange', function () {
+        $(window).on('hashchange', function() {
             let currentCat = '';
             if (window.location.href.indexOf('#') > -1) {
                 currentCat = window.location.href.substring(
