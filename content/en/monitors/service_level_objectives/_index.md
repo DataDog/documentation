@@ -121,7 +121,7 @@ Each event includes the following SLO configuration information:
 - Target percentages and time windows
 - Datasources (monitor IDs or metric query)
 
-Three different SLO audit events will appear in the Event Stream:
+Three types of SLO audit events appear in the Event Stream:
 
 1. `SLO Created` events will show all four pieces of configuration information at creation time of the SLO
 2. `SLO Modified` events will show a diff of only the aspects of the configuration that were changed during a modification
