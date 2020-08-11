@@ -13,16 +13,20 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
+## Exigences de compatibilité
+
+Le traceur Java nécessite l'environnement Java JRE 1.7 ou une version ultérieure pour Oracle JDK et OpenJDK. Datadog ne prend pas officiellement en charge toute version de Java en accès anticipé. Pour obtenir la liste complète des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
+
 ## Installation et démarrage
 
-Si vous avez déjà un compte Datadog, vous trouverez des [instructions détaillées][1] dans nos guides intégrés à l'application pour les configurations basées sur un host et les configurations basées sur un conteneur.
+Si vous avez déjà un compte Datadog, vous trouverez des [instructions détaillées][2] dans nos guides intégrés à l'application pour les configurations basées sur un host et les configurations basées sur un conteneur.
 
-Sinon, pour commencer le tracing d'applications écrites dans n'importe quel langage, vous devez d'abord [installer et configurer l'Agent Datadog][2]. Pour obtenir davantage d'informations, consultez la documentation relative au [tracing d'applications Docker][3] ou au [tracing d'applications Kubernetes][4].
+Sinon, pour commencer le tracing d'applications écrites dans n'importe quel langage, vous devez d'abord [installer et configurer l'Agent Datadog][3]. Pour obtenir davantage d'informations, consultez la documentation relative au [tracing d'applications Docker][4] ou au [tracing d'applications Kubernetes][5].
 
 Téléchargez ensuite `dd-java-agent.jar`, qui contient les fichiers de classe de l'Agent :
 
 ```shell
-wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 ```
 
 Enfin, vous devez ajouter l'argument JVM suivant lors du démarrage de votre application dans votre script d'application IDE, Maven ou Gradle ou la commande `java -jar` :
@@ -33,14 +37,14 @@ Enfin, vous devez ajouter l'argument JVM suivant lors du démarrage de votre app
 
 **Remarques** :
 
-- Le `-javaagent` doit être exécuté avant le fichier `-jar` en l'ajoutant en tant qu'option JVM et non en tant qu'argument d'application. Pour en savoir plus, consultez la [documentation Oracle][5].
+- Le `-javaagent` doit être exécuté avant le fichier `-jar` en l'ajoutant en tant qu'option JVM et non en tant qu'argument d'application. Pour en savoir plus, consultez la [documentation Oracle][6].
 
-- Les artefacts de `dd-trace-java` (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) prennent en charge tous les langages basés sur JVM, tels que Scala, Groovy, Kotlin, Clojure, etc. Si vous avez besoin d'utiliser un framework spécifique, pensez à effectuer une [contribution open source][6].
+- Les artefacts de `dd-trace-java` (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) prennent en charge tous les langages basés sur JVM, tels que Scala, Groovy, Kotlin, Clojure, etc. Si vous avez besoin d'utiliser un framework spécifique, pensez à effectuer une [contribution open source][7].
 
 ## Instrumentation automatique
 
-L'instrumentation automatique pour Java utilise les fonctionnalités d'instrumentation `java-agent` [fournies par JVM][7]. Lorsqu'un `java-agent` est enregistré, celui-ci a la capacité de modifier les fichiers de classe durant le chargement.
-Le `java-agent` utilise le [framework Byte Buddy][8] pour trouver les classes définies pour l'instrumentation et modifier ces octets de classe en conséquence.
+L'instrumentation automatique pour Java utilise les fonctionnalités d'instrumentation `java-agent` [fournies par JVM][8]. Lorsqu'un `java-agent` est enregistré, il possède la capacité de modifier les fichiers de classe durant le chargement.
+Le `java-agent` utilise le [framework Byte Buddy][9] pour trouver les classes définies pour l'instrumentation et modifier ces octets de classe en conséquence.
 
 L'instrumentation peut provenir de l'instrumentation automatique, de l'API OpenTracing ou d'un mélange des deux. L'instrumentation capture généralement les informations suivantes :
 
@@ -48,148 +52,6 @@ L'instrumentation peut provenir de l'instrumentation automatique, de l'API OpenT
 - Les paires de tags clé/valeur
 - Les erreurs et les traces de pile non gérées par l'application
 - Le nombre total de traces (requêtes) transmises via le système
-
-## Compatibilité
-
-Datadog prend officiellement en charge l'environnement Java JRE 1.7 et versions ultérieures d'Oracle JDK et OpenJDK. Datadog ne prend pas officiellement en charge toute version de Java en accès anticipé.
-
-### Intégrations
-
-La plupart des intégrations sont activées par défaut. Le paramètre suivant peut être utilisé pour les désactiver par défaut.
-
-- Propriété système : `-Ddd.integrations.enabled=false`
-- Variable d'environnement : `DD_INTEGRATIONS_ENABLED=false`
-
-Les intégrations peuvent être activées ou désactivées individuellement (ce qui remplace le paramètre par défaut ci-dessus).
-
-- System Property: `-Ddd.integration.<NOM_INTÉGRATION>.enabled=true`
-- Variable d'environnement : `DD_INTEGRATION_<NOM_INTÉGRATION>_ENABLED=true`
-
-(Le nom de chaque intégration est affiché ci-dessous.)
-
-Les intégrations bêta sont désactivées par défaut, mais peuvent être activées individuellement.
-
-#### Compatibilité des frameworks Web
-
-`dd-java-agent` prend en charge le tracing automatique des frameworks Web suivants :
-
-| Serveur                  | Versions   | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration) |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- |
-| Serveur Akka-Http        | 10.0+      | Prise en charge complète | `akka-http`, `akka-http-server`                |
-| Finatra Web             | 2.9+       | Prise en charge complète | `finatra`                                      |
-| Grizzly                 | 2.0+       | [Bêta][9]       | `grizzly`                                      |
-| Grizzly-HTTP            | 2.3.20+    | [Bêta][9]       | `grizzly-filterchain`                          |
-| Servlet Java compatible | 2.3+, 3.0+ | Prise en charge complète | `servlet`, `servlet-2`, `servlet-3`            |
-| Annotations Jax-RS      | JSR311-API | Prise en charge complète | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty (hors servlet)     | 8+         | [Bêta][9]       | `jetty`, `jetty-8`                             |
-| Netty HTTP Server       | 3.8+       | Prise en charge complète | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.7.x  | Prise en charge complète | `play`, `play-action`                          |
-| Ratpack                 | 1.5+       | Prise en charge complète | `ratpack`                                      |
-| Spark Java              | 2.3+       | [Bêta][9]       | `sparkjava` (nécessite `jetty`)                 |
-| Spring Web (MVC)        | 4.0+       | Prise en charge complète | `spring-web`                                   |
-| Spring WebFlux          | 5.0+       | Prise en charge complète | `spring-webflux`                               |
-
-**Le tracing de frameworks Web permet :** le calcul du délai entre la requête HTTP et la réponse, l'application de tags à la requête HTTP (code de statut, méthode, etc.), la capture des erreurs et des traces de pile, la mise en corrélation des requêtes Web avec les opérations en backend ainsi que la mise en place d'un tracing distribué.
-
-_Remarque :_ de nombreux serveurs d'applications sont compatibles avec les servlets et sont automatiquement couverts par cette instrumentation. C'est le cas de Tomcat, Jetty, Websphere, Weblogic, JBoss, etc.
-En outre, certains frameworks comme Spring Boot sont automatiquement pris en charge, car ils utilisent généralement un serveur d'applications intégré compatible avec les servlets (Tomcat/Jetty/Netty).
-
-Les instrumentations en version bêta sont désactivées par défaut. Pour les activer, ajoutez l'une des configurations suivantes :
-
-- System Property: `-Ddd.integration.<NOM_INTÉGRATION>.enabled=true`
-- Variable d'environnement : `DD_INTEGRATION_<NOM_INTÉGRATION>_ENABLED=true`
-
-Vos frameworks Web préférés ne sont pas disponibles ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez [l'assistance Datadog][9] si vous avez besoin d'aide.
-
-#### Compatibilité des frameworks réseau
-
-`dd-java-agent` prend en charge le tracing automatique des frameworks réseau suivants :
-
-| Framework                | Versions    | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration) |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Apache HTTP Client       | 4.0+        | Prise en charge complète | `httpclient`, `apache-httpclient`, `apache-http-client` |
-| Apache HTTP Async Client | 4.0+        | Prise en charge complète | `httpasyncclient`, `apache-httpasyncclient`    |
-| Kit de développement Java AWS             | 1.11+, 2.2+ | Prise en charge complète | `aws-sdk`                                      |
-| Commons HTTP Client      | 2.0+        | Prise en charge complète | `commons-http-client`                          |
-| Google HTTP Client       | 1.19.0+     | Prise en charge complète | `google-http-client`                           |
-| Grizzly HTTP Client      | 1.9+        | [Bêta][9]         | `grizzly-client`                               |
-| gRPC                     | 1.5+        | Prise en charge complète | `grpc`, `grpc-client`, `grpc-server`           |
-| HttpURLConnection        | Toutes         | Prise en charge complète | `httpurlconnection`, `urlconnection`           |
-| Clients Kafka            | 0.11+       | Prise en charge complète | `kafka`                                        |
-| Kafka Streams            | 0.11+       | Prise en charge complète | `kafka`, `kafka-streams`                       |
-| Java RMI                 | Toutes         | Prise en charge complète | `rmi`, `rmi-client`, `rmi-server`              |
-| Clients Jax RS           | 2.0+        | Prise en charge complète | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| Jersey Client            | 1.9+        | Prise en charge complète | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| JMS                      | 1 et 2     | Prise en charge complète | `jms`, `jms-1`, `jms-2`                        |
-| Netty HTTP Client        | 4.0+        | Prise en charge complète | `netty`, `netty-4.0`, `netty-4.1`              |
-| Netty HTTP Client        | 4.0+        | Prise en charge complète | `netty`, `netty-4.0`, `netty-4.1`              |
-| Ning HTTP Client         | 1.9.0+      | [Bêta][9]         | `ning`                                         |
-| OkHTTP                   | 2.2+        | Prise en charge complète | `okhttp`, `okhttp-2`,`okhttp-3`                |
-| Play WSClient            | 1.0+        | Prise en charge complète | `play-ws`                                      |
-| Rabbit AMQP              | 2.7+        | Prise en charge complète | `amqp`, `rabbitmq`                             |
-| Spring WebClient         | 5.0+        | Prise en charge complète | `spring-webflux`, `spring-webflux-client`      |
-
-**Le tracing de frameworks réseau permet :** le calcul du délai entre la requête et la réponse, l'application de tags à la requête (par exemple le code de réponse), la capture des erreurs et des traces de pile, ainsi que la mise en place d'un tracing distribué.
-
-Votre framework réseau préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez [l'assistance Datadog][9] si vous avez besoin d'aide.
-
-#### Compatibilité des datastores
-
-`dd-java-agent` prend en charge le tracing automatique des frameworks/pilotes de base de données suivants :
-
-| Base de données                | Versions | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration)                                            |
-| ----------------------- | -------- | --------------- | ----------------------------------------------------------------------------------------- |
-| Couchbase               | 2.0+     | Prise en charge complète | `couchbase`                                                                               |
-| Cassandra               | 3.X      | Prise en charge complète | `cassandra`                                                                               |
-| Elasticsearch Transport | 2.0-6.x  | Prise en charge complète | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (choisir un nom)  |
-| Elasticsearch Rest      | 5.0-6.x  | Prise en charge complète | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`     |
-| JDBC                    | S. O.      | Prise en charge complète | `jdbc`, `jdbc-datasource`                                                                 |
-| Jedis                   | 1.4+     | Prise en charge complète | `jedis`, `redis`                                                                          |
-| Lettuce                 | 4.0+     | Prise en charge complète | `lettuce`, `lettuce-4`, `lettuce-4-async`, `lettuce-5`, `lettuce-5-async`, `lettuce-5-rx` |
-| MongoDB                 | 3.0+     | Prise en charge complète | `mongo`                                                                                   |
-| RediScala               | 1.5+     | Prise en charge complète | `rediscala`, `redis`                                                                      |
-| SpyMemcached            | 2.12+    | Prise en charge complète | `spymemcached`                                                                            |
-
-`dd-java-agent` est également compatible avec les pilotes JDBC courants, notamment :
-
-- Apache Derby
-- Firebird SQL
-- Moteur de base de données H2
-- HSQLDB
-- IBM DB2
-- MariaDB
-- MSSQL (Microsoft SQL Server)
-- MySQL
-- Oracle
-- Postgres SQL
-
-**Le tracing de datastores permet :** le calcul du délai entre la requête et la réponse, la récupération des informations sur la requête (par exemple, la chaîne de requête expurgée) ainsi que la capture des erreurs et des traces de pile.
-
-Vos datastores préférés ne sont pas disponibles ? Datadog élargit continuellement la liste des datastores pris en charge. Contactez [l'assistance Datadog][9] si vous avez besoin d'aide.
-
-#### Compatibilité avec les autres frameworks
-
-`dd-java-agent` prend en charge le tracing automatique des frameworks suivants :
-
-| Framework         | Versions | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration) |
-| ----------------- | -------- | --------------- | ---------------------------------------------- |
-| Dropwizard Views  | 0.7+     | Prise en charge complète | `dropwizard`, `dropwizard-view`                |
-| Hibernate         | 3.5+     | Prise en charge complète | `hibernate`, `hibernate-core`                  |
-| Hystrix           | 1.4+     | Prise en charge complète | `hystrix`                                      |
-| JSP Rendering     | 2.3+     | Prise en charge complète | `jsp`, `jsp-render`, `jsp-compile`             |
-| Slf4J MDC         | 1+       | Prise en charge complète | `mdc` (voir également la configuration pour `dd.logs.injection`) |
-| Project Reactor   | 3.1+     | Prise en charge complète | `reactor-core`                                 |
-| Spring Data       | 1.8+     | Prise en charge complète | `spring-data`                                  |
-| Spring Scheduling | 3.1+     | Prise en charge complète | `spring-scheduling`                            |
-| Twilio SDK        | 0+       | Prise en charge complète | `twilio-sdk`                                   |
-
-Votre framework préféré n'est pas disponible ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez [l'assistance Datadog][9] si vous avez besoin d'aide.
-
-Pour profiter d'une meilleure visibilité sur vos applications utilisant des frameworks non pris en charge, vous pouvez :
-
-- Ajouter une instrumentation personnalisée (avec OpenTracing ou l'annotation `@Trace`)
-- [Envoyer une pull request][11] avec l'instrumentation en vue de son ajout dans une version future.
-- Contacter l'[assistance Datadog][9] et envoyer une demande d'ajout de fonctionnalité.
 
 ## Configuration
 
@@ -201,27 +63,21 @@ Les propriétés système peuvent être définies en tant que flags JVM.
 
 | Propriété système                        | Variable d'environnement                   | Valeur par défaut                           | Description                                                                                                                                                                                                                                                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|`dd.env`                              | `DD_ENV`                              | `none`                            | L'environnement de votre application (p. ex. production, staging, etc.).                                                    |
-| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | Le nom d'un ensemble de processus qui effectuent la même tâche. Utilisé pour regrouper les statistiques de votre application.                                                                                                                                                                    |
-| `dd.version`                              | `DD_VERSION`                              | `null`                            | La version de votre application (p. ex. 2.5, 202003181415, 1.3-alpha, etc.).             |
-| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Exemple : `layer:api,team:intake`) La liste des tags par défaut à ajouter à chaque span, profil et métrique JMX. Si la variable DD_ENV ou DD_VERSION est utilisée, tout tag « env » ou de version défini dans DD_TAGS sera remplacé. |
-
-
-### Instrumentation
-
-
-| Propriété système                        | Variable d'environnement                   | Valeur par défaut                           | Description                                                                                                                                                                                                                                                           |
-| -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | faux                             | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][10] pour en savoir plus                                   |
+| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | Le nom d'un ensemble de processus qui effectuent la même tâche. Utilisé pour regrouper les statistiques de votre application. Disponible à partir de la version 0.50.1.                                                                                                                                                                    |
+| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Exemple : `layer:api,team:intake`) La liste des tags par défaut à ajouter à chaque span, profil et métrique JMX. Si la variable DD_ENV ou DD_VERSION est utilisée, tout tag « env » ou « version » défini dans DD_TAGS sera remplacé. Disponible à partir de la version 0.50.1.  |
+|`dd.env`                              | `DD_ENV`                              | `none`                            | L'environnement de votre application (p. ex. production, staging, etc.). Disponible à partir de la version 0.48+.                                                    |
+| `dd.version`                              | `DD_VERSION`                              | `null`                            | La version de votre application (p. ex. 2.5, 202003181415, 1.3-alpha, etc.). Disponible à partir de la version 0.48.             |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][10] pour en savoir plus.   |
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Chemin facultatif vers un fichier où les propriétés de configuration sont définies (une par ligne). Le chemin du fichier peut par exemple être spécifié via `-Ddd.trace.config=<CHEMIN_FICHIER>.properties`, en définissant le nom du service dans le fichier avec `dd.service.name=<NOM_SERVICE>`. |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Exemple : `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Renomme de façon dynamique les services via la configuration. Utile pour faire en sorte que les bases de données affichent des noms distincts d'un service à l'autre.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | La valeur par défaut active l'envoi des traces à l'Agent. Si vous utilisez `LoggingWriter` dans votre configuration, les traces sont écrites dans la console.                       |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname vers lequel envoyer les traces. Si vous utilisez un environnement conteneurisé, configurez cette propriété sur l'IP du host. Consultez la documentation relative au [tracing d'applications Docker][3] pour en savoir plus.                                                                                                  |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname vers lequel envoyer les traces. Si vous utilisez un environnement conteneurisé, configurez cette propriété sur l'IP du host. Consultez la documentation relative au [tracing d'applications Docker][4] pour en savoir plus.                                                                                                  |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Numéro du port sur lequel l'Agent effectue son écoute pour le host configuré.                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | Permet de faire passer des données de tracing par un proxy en vue de leur envoi vers un Agent Datadog distant.                                                            |
+| `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Délai d'expiration en secondes pour les interactions réseau avec l'Agent Datadog.                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Exemple : `en-tête-insensible-CASSE:nom-du-tag,User-ID:userId`.) Une liste des correspondances entre les clés d'en-tête et les noms de tag. Applique automatiquement les valeurs d'en-tête en tant que tags sur les traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([liste disponible ici][12])               | (Exemple : `com.some.Trace;io.other.Trace`.) Une liste des annotations de méthode à traiter en tant que `@Trace`.                                            |
-| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Exemple : `package.ClassName[method1,method2…];AnonymousClass$1[call]`.) Liste des classes/interfaces et méthodes à tracer. Semblable à l'ajout de `@Trace`, mais sans changer le code.                                                                                       |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([valeurs répertoriées ici][11])               | (Exemple : `com.some.Trace;io.other.Trace`.) Une liste des annotations de méthode à traiter en tant que `@Trace`.                                            |
+| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Exemple :`"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`.) Liste des classes/interfaces et méthodes à tracer. Semblable à l'ajout de `@Trace`, mais sans changer le code.                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Définit le nombre de spans partielles à partir duquel celles-ci doivent être vidées. Permet de réduire la charge de la mémoire en cas de traitement d'un trafic important ou de traces à exécution longue.     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Exemple : `aws.service`) Utilisé pour renommer les spans identifiées avec le tag de service correspondant                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | Lorsque cette option est définie sur `true`, les spans de base de données reçoivent le nom de l'instance en tant que nom du service.                                                                     |
@@ -240,16 +96,21 @@ Les propriétés système peuvent être définies en tant que flags JVM.
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | Fréquence d'actualisation de la liste des beans JMX disponibles (en secondes).                                                                             |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | identique à `agent.host`              | Host Statsd vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, utilisez un argument tel que 'unix://CHEMIN_VERS_SOCKET_UDS'. Par exemple : `unix:///var/datadog-agent/dsd.socket`                                                                                                            |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | Port StatsD vers lequel envoyer les métriques JMX. Si vous utilisez des sockets de domaine Unix, saisissez 0.                                                                                                                                                                                                                              |
+| `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | Par défaut, le client de tracing détecte si un GlobalTracer est en cours de chargement et enregistre un traceur dans celui-ci de manière dynamique. En définissant cette option sur false, toute dépendance entre le traceur et OpenTracing est supprimée.                                                                                                                                                                                                                              |
+| `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | Non | Par défaut, les tags associés au groupe, à la commande et au statut du circuit Hystrix sont désactivés. Cette propriété permet de les activer. |
 
 **Remarques** :
 
-Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][13].
-  - Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` est définie sur [`true`][14] et que le port `8125` est ouvert sur le conteneur de l'Agent.
-  - Dans Kubernetes, [bindez le port DogStatsD à un port du host][15] ; dans ECS, [définissez les flags appropriés dans la définition de votre tâche][16].
+- Si le même type de clé est défini pour les deux, la configuration de la propriété système est prioritaire.
+- Les propriétés système peuvent être utilisées comme paramètres JVM.
+- Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][12].
+
+  - Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur `true`][13] et que le port `8125` est ouvert sur le conteneur de l'Agent.
+  - Dans Kubernetes, [bindez le port DogStatsD à un port du host][14] ; dans ECS, [définissez les flags appropriés dans la définition de votre tâche][15].
 
 ### Intégrations
 
-Voir la configuration spécifique de l'intégration dans la section [Intégrations](#integrations) ci-dessus.
+Découvrez comment désactiver les intégrations dans la section relative à la compatibilité des [intégrations][16].
 
 ### Exemples
 
@@ -298,7 +159,7 @@ java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.tr
 **Exemple avec une propriété système** :
 
 ```shell
-java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar chemin/vers/application.jar
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_methods.png" alt="méthodes à tracer"  >}}
@@ -465,21 +326,21 @@ java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/install
-[2]: /fr/tracing/send_traces/
-[3]: /fr/tracing/setup/docker/
-[4]: /fr/agent/kubernetes/apm/
-[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[6]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
-[7]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[8]: http://bytebuddy.net
-[9]: /fr/help/
+[1]: /fr/tracing/compatibility_requirements/java
+[2]: https://app.datadoghq.com/apm/install
+[3]: /fr/tracing/send_traces/
+[4]: /fr/tracing/setup/docker/
+[5]: /fr/agent/kubernetes/apm/
+[6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[7]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: http://bytebuddy.net
 [10]: /fr/tracing/connect_logs_and_traces/java/
-[11]: https://github.com/DataDog/documentation#outside-contributors
-[12]: https://github.com/DataDog/dd-trace-java/blob/8c63d722884c2e9c7b1e237b312747ee0efa3e9a/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[13]: /fr/developers/dogstatsd/#setup
-[14]: /fr/agent/docker/#dogstatsd-custom-metrics
-[15]: /fr/developers/dogstatsd/
-[16]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[17]: /fr/integrations/java/
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[12]: /fr/developers/dogstatsd/#setup
+[13]: /fr/agent/docker/#dogstatsd-custom-metrics
+[14]: /fr/developers/dogstatsd/
+[15]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[16]: /fr/tracing/compatibility_requirements/java#disabling-integrations
+[17]: /fr/integrations/java/?tab=host#metric-collection
 [18]: https://github.com/openzipkin/b3-propagation

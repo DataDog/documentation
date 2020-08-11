@@ -98,6 +98,23 @@ Datadog Chef クックブックは 12.7 以降の `chef-client` と互換性が�
 
 5. 次に予定されている `chef-client` の実行を待つか、手動でこれをトリガーします。
 
+### Docker 化された環境
+
+Docker 環境を構築するには、`docker_test_env` の下のファイルを使用します。
+
+```
+cd docker_test_env
+docker build -t chef-datadog-container .
+```
+
+コンテナを実行するには、以下を使用します。
+
+```
+docker run -d -v /dev/vboxdrv:/dev/vboxdrv --privileged=true chef-datadog-container
+```
+
+次に、コンソールをコンテナにアタッチするか、VScode リモートコンテナ機能を使用してコンテナ内で開発します。
+
 #### Datadog の属性
 
 [Datadog API キーとアプリケーションキー][4]の追加には、下記のメソッドを使用できます。
