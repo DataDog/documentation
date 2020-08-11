@@ -66,7 +66,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 These features are currently in private beta. <a href="https://forms.gle/1FParyX49eNFPDsg9">Fill out the form</a> to request to be added to the beta.
 </div>
 
-With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes - Search for any tag on any span. Additionally, Datadog provides methods for controlling how many traces are sent to Datadog, and tag-based retention filters to keep the traces that matter most to you.
+With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes. Search for any tag on any span. Additionally, Datadog provides methods for controlling how many traces are sent to Datadog, and tag-based retention filters to keep the traces that matter most to you.
 
 {{< img src="tracing/live_search/LiveAnalytics.gif" alt="Live Analytics" >}}
 
