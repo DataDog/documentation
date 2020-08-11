@@ -515,26 +515,25 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 
 **Log**:
 
-{{< code-block lang="text" filename="log.txt" >}}
+{{< code-block lang="text" >}}
 John,Doe,120 Jefferson St.,Riverside,NJ,08075
 {{< /code-block >}}
 
 **Rule**:
 
-{{< code-block lang="text" filename="rule.txt" >}}
-myParsingRule %{data:user:csv("first_name,name,adress,city,state,postal_code")}
+{{< code-block lang="text" >}}
+myParsingRule %{data:user:csv("first_name,name,address,city,postal_code")}
 {{< /code-block >}}
 
 **Result:**
 
-{{< code-block lang="json" filename="result.json" >}}
+{{< code-block lang="json" >}}
 {
   "user": {
     "first_name": "John",
     "name": "Doe",
     "address": "120 Jefferson St.",
     "city": "Riverside",
-    "state": "NJ",
     "postal_code": "08075"
   }
 }
