@@ -510,19 +510,19 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 
 * Values containing a separator character must be quoted.
 * Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
-* If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones. 
-
+* If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones.
+* Intergers and Double are automatically casted if possible. 
 
 **Log**:
 
 {{< code-block lang="text" >}}
-John,Doe,120 Jefferson St.,Riverside,NJ,08075
+John,Doe,120,Jefferson St.,Riverside
 {{< /code-block >}}
 
 **Rule**:
 
 {{< code-block lang="text" >}}
-myParsingRule %{data:user:csv("first_name,name,address,city,postal_code")}
+myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 {{< /code-block >}}
 
 **Result:**
@@ -532,9 +532,9 @@ myParsingRule %{data:user:csv("first_name,name,address,city,postal_code")}
   "user": {
     "first_name": "John",
     "name": "Doe",
-    "address": "120 Jefferson St.",
-    "city": "Riverside",
-    "postal_code": "08075"
+    "st_nb": 120,
+    "st_name": "Jefferson St.",
+    "city": "Riverside"
   }
 }
 {{< /code-block >}}
