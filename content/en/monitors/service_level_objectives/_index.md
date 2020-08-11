@@ -131,7 +131,7 @@ To get a full list of all SLO audit events, enter the search query `tags:audit,s
 
 You can also query the Event Stream programmatically using the [Datadog Events API][8].
 
-**Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period like the past 7 days.
+**Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period, for example, the past 7 days.
 
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
 
