@@ -58,7 +58,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 ##### Related Dashboards
 
-To speed up further investigations, we may suggest some of your dashboards that are related to the story. In this case, we'll highlight which of the dashboard's metrics are related to the insights in the story. 
+To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 
 
 ##### Monitors
 
