@@ -37,9 +37,6 @@ col1:
   - name: alerts
     link: "https://www.datadoghq.com/product/platform/alerts/"
     title: "Alerts"
-  - name: synthetics
-    link: "https://www.datadoghq.com/product/synthetics-monitoring/"
-    title: "Synthetics"
 col2:
   - name: pricing
     link: "https://www.datadoghq.com/pricing/"
