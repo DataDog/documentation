@@ -1,0 +1,75 @@
+---
+title: Build custom reports with Log Analytics API
+kind: guide
+further_reading:
+- link: "/api/v2/logs/#aggregate-events"
+  tag: "Documentation"
+  text: "Check the Log Analytics syntax" 
+- link: "/logs/explorer/"
+  tag: "Documentation"
+  text: "Learn more about Log Explorer"
+
+
+---
+
+## Overview
+
+Somtimes you might want to build custom reports and dashboards for your teams. These reports may contain metrics based on log events as well as other business data.
+
+To build such custom reports, you can use the Log Analytics API in Datadog.
+
+The following examples are covered in this guide:
+
+* [Getting count](#getting-count)
+* [Getting stats](#getting-stats)
+* [Getting percentiles](#getting-percentiles)
+
+## Prerequisites
+
+Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
+
+Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
+
+This guide also assumes that you have a terminal with `CURL`. 
+
+## Getting count
+API call:
+
+```
+curl -X POST 
+
+Response:
+
+```
+{"data":
+```
+
+## Getting stats
+API call:
+
+```
+curl -X POST 
+
+Response:
+
+```
+{"data":
+```
+
+## Getting percentiles
+API call:
+
+```
+curl -X POST 
+
+Response:
+
+```
+{"data":
+```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: 
