@@ -88,8 +88,9 @@ def security_rules(content, content_dir):
                     else:
                         # try build up manually
                         if content['action'] == 'compliance-rules':
+                            source = data.get('source', None)
                             tech = data.get('framework', {}).get('name', '').replace('cis-', '')
-                            page_data["source"] = tech
+                            page_data["source"] = source or tech
                             page_data["security"] = "compliance"
                             page_data["framework"] = data.get('framework', {}).get('name', '')
                             page_data["control"] = data.get('control', '')
