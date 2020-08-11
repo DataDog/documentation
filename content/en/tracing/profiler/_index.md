@@ -6,10 +6,7 @@ aliases:
 further_reading:
     - link: 'tracing/profiler/getting_started'
       tag: 'Documentation'
-      text: 'Enable continuous profiler for your application.'
-    - link: 'tracing/profiler/runtime_metrics'
-      tag: 'Documentation'
-      text: 'View runtime metrics.'  
+      text: 'Enable continuous profiler for your application.'  
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
