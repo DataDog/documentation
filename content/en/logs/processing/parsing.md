@@ -503,7 +503,7 @@ Use the **csv** filter to more-easily map strings to attributes when separated b
 The csv filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
 
 * `headers`: Defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumerical character in addition to `-`, `_`, `@` and `$`.
-* `separator`: defines separators used to separate the different values. Only one character is accepted. Default: `,` . Note use `tab` to represent the tabulation character.
+* `separator`: Defines separators used to separate the different values. Only one character is accepted. Default: `,` . **Note**: Use `tab` to represent the tabulation character.
 * `quotingcharacter`: defines the quoting character. Only one character is accepted. Default: `"` 
 
 **Note**:
