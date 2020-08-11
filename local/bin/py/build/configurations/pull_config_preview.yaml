@@ -183,7 +183,6 @@
           kind: documentation
           aliases:
             - /serverless/troubleshooting/installing_the_forwarder/
-            - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
   
   - repo_name: dd-sdk-android
     contents:
