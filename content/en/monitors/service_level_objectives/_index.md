@@ -123,7 +123,7 @@ Each event includes the following SLO configuration information:
 
 Three types of SLO audit events appear in the Event Stream:
 
-1. `SLO Created` events will show all four pieces of configuration information at creation time of the SLO
+1. `SLO Created` events show all four pieces of SLO configuration information at creation time.
 2. `SLO Modified` events will show a diff of only the aspects of the configuration that were changed during a modification
 3. `SLO Deleted` events will show all four pieces of configuration information the SLO had right before it was deleted
 
