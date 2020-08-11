@@ -1266,7 +1266,17 @@ main:
     url: security_monitoring/
     parent: security_compliance_monitoring
     identifier: security_monitoring
-    weight: 160000
+    weight: 1
+  - name: Compliance Monitoring
+    url: compliance_monitoring/
+    parent: security_compliance_monitoring
+    identifier: compliance_monitoring
+    weight: 2
+  - name: Default Rules
+    url: security_monitoring/default_rules/
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_default_detection_rules
+    weight: 3
   - name: Getting Started
     url: security_monitoring/getting_started
     parent: security_monitoring
@@ -1282,21 +1292,6 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Default Rules
-    url: security_monitoring/default_rules/
-    parent: security_monitoring
-    identifier: security_monitoring_default_detection_rules
-    weight: 4
-  - name: Compliance Monitoring
-    url: compliance_monitoring/
-    parent: security_compliance_monitoring
-    identifier: compliance_monitoring
-    weight: 160000
-  - name: Default Rules
-    url: compliance_monitoring/default_rules
-    parent: compliance_monitoring
-    identifier: compliance_monitoring_default_rules
-    weight: 1
   - name: Synthetic Monitoring
     url: synthetics/
     pre: nav_synthetics
