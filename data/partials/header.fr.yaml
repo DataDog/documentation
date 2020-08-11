@@ -23,6 +23,10 @@ left:
         link: 'https://www.datadoghq.com/product/apm/'
         title: APM
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
+      - name: product_profiler
+        link: "https://www.datadoghq.com/product/code-profiling/"
+        title: "Continuous Profiler"
+        pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: Security Monitoring
