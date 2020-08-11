@@ -111,7 +111,7 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 
 [1]: /serverless/
-[2]: /integrations/amazon_xray/
+[2]: /tracing/serverless_functions/enable_aws_xray/
 [3]: /getting_stared/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /tracing/visualization/services_map/#the-service-tag
