@@ -856,6 +856,11 @@ function getPathElement() {
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
+    
+    if (path.includes('tracing/serverless_functions')) {
+        aPath = document.querySelectorAll('.side [data-path*="tracing/serverless_functions"]')[1];
+        maPath = document.querySelectorAll('header [data-path*="tracing/serverless_functions"]')[1];
+    }
 
     if (aPath) {
         aPath.classList.add('active');
