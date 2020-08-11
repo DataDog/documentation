@@ -127,7 +127,7 @@ Three types of SLO audit events appear in the Event Stream:
 2. `SLO Modified` events show a what configuration information changed during a modification
 3. `SLO Deleted` events show all four pieces of configuration information the SLO had right before it was deleted
 
-To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, instead enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
+To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
 You can also query the Event Stream programmatically using the [Datadog Events API][8].
 
