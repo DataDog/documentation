@@ -10,6 +10,9 @@ col1:
   - name: apm
     link: 'https://www.datadoghq.com/product/apm/'
     title: APM
+  - name: profiler
+    link: "https://www.datadoghq.com/product/code-profiling/"
+    title: "Continuous Profiler"
   - name: logs
     link: 'https://www.datadoghq.com/product/log-management/'
     title: Log Management
