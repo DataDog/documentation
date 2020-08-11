@@ -94,18 +94,13 @@ export function initializeSecurityRules() {
 
         if (controls) {
             controls.addEventListener('click', function (e) {
-                e.preventDefault();
                 inputSearch.value = '';
-                window.history.replaceState({q: ''}, '', `?q=`);
+                const url = window.location.href.replace(window.location.search, '');
+                window.history.replaceState({q: ''}, '', url);
                 // If button is already active, or an operation is in progress, ignore the click
                 if (e.target.classList.contains('active') || !e.target.getAttribute('data-filter'))
                     return;
                 activateButton(e.target, filters);
-                if (window.history.pushState) {
-                    const href = e.target.getAttribute('href');
-                    const url = window.location.href.replace(window.location.hash, '');
-                    window.history.pushState({q: ''}, document.title, url + href);
-                }
             });
         }
 
