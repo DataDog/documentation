@@ -7,7 +7,7 @@ from pull_and_push_file import pull_and_push_file
 from pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content
 from integrations import Integrations
-from security_rules import security_rules
+from security_rules import security_rules, compliance_rules
 
 from collections import OrderedDict
 from optparse import OptionParser
@@ -69,7 +69,7 @@ class Build:
 
                 elif content["action"] == "pull-and-push-file":
                     pull_and_push_file(content, self.content_dir)
-                elif content["action"] == "security-rules":
+                elif content["action"] in ("security-rules", "compliance-rules"):
                     security_rules(content, self.content_dir)
                 elif content["action"] == "Not Available":
                     if getenv("LOCAL") == 'True':
