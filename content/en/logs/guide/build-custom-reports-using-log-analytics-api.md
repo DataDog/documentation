@@ -522,6 +522,8 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 }
 ```
 
+**Note:** Paging is only supported if `sort` is `alphabetical`.
+
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
