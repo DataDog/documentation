@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.npmjs.com/package/@datadog/browser-logs"
   tag: "NPM"
   text: "@datadog/browser-logs NPM package"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -28,50 +28,47 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Setup
 
-1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [client token documentation][2].
+1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client token, see the [client token documentation][2].
 2. **Configure the Datadog browser log library** [through NPM](#npm-setup) or paste the [bundle](#bundle-setup) into the head tag directly.
 
 ### NPM setup
 
 After adding [`@datadog/browser-logs`][3] to your `package.json` file, initialize it with:
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { Datacenter, datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'us',
+  datacenter: Datacenter.US,
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { Datacenter, datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'eu',
+  datacenter: Datacenter.EU,
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Bundle setup
 
 In order to not miss any logs or errors, you should load and configure the library at the beginning of the head section of your pages.
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
@@ -89,8 +86,8 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
@@ -108,8 +105,7 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
@@ -121,6 +117,9 @@ The following parameters can be used to configure the Datadog browser log librar
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
+| `service`            | String  | No       | `` | The service name for this application.                             |
+| `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
+| `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
 
@@ -242,7 +241,7 @@ Assume that there is a `signupLogger` logger, defined with all the other loggers
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+datadogLogs.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 ```
 
 It can now be used in a different part of the code with:
@@ -259,7 +258,7 @@ signupLogger.info('Test sign up completed')
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 }
 ```
 
@@ -292,7 +291,7 @@ Once Datadog Browser log library is initialized, it is possible to:
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLoggerGlobalContext("{'env', 'staging'}");
+datadogLogs.setLoggerGlobalContext("{'env': 'staging'}");
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -301,7 +300,7 @@ datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -324,7 +323,7 @@ Once a logger is created, it is possible to:
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setContext("{'env', 'staging'}");
+datadogLogs.setContext("{'env': 'staging'}");
 
 datadogLogs.addContext('referrer', document.referrer);
 ```
@@ -333,7 +332,7 @@ datadogLogs.addContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}");
 
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 ```

@@ -1,22 +1,22 @@
 ---
-title: Synthetics Settings
+title: Synthetic Monitoring Settings
 kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
-- link: "synthetics/api_tests"
+  text: "Introducing Datadog Synthetic Monitoring"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/identify_synthetics_bots"
+- link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
-  text: "Identify Synthetics Bots"
+  text: "Identify Synthetic Bots"
 ---
 
-On the [Synthetics settings page][1], you can adjust the following settings:
+On the [Synthetic Monitoring settings page][1], you can adjust the following settings:
 
 * [Global Variables](#global-variables)
 * [Private Locations][2]
@@ -24,11 +24,11 @@ On the [Synthetics settings page][1], you can adjust the following settings:
   * [Default Locations](#default-locations)
   * [APM integration for Browser Tests](#apm-integration-for-browser-tests)
 
-Only [Admin and Standard users][3] can access Synthetics `Settings` page.
+Only [Admin and Standard users][3] can access Synthetic Monitoring `Settings` page.
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the [Global Variables][6] tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
 {{< tabs >}}
@@ -72,18 +72,19 @@ Choose the default locations for your browser and API tests details. Options inc
 
 ### APM integration for Browser Tests
 
-Whitelist URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
+Allow URLs to add APM integration headers to that URL. Datadog's APM integration headers allow Datadog to link browser tests with APM. Define which endpoints should be sent the APM headers by adding a URL into this section.
 
-Use `*` to whitelist wider domain names. For example, adding `https://*.datadoghq.com/*` whitelists everything on `https://datadoghq.com/`.
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`.
 
-If the endpoint is being traced and whitelisted, your browser test results are then automatically tied to its corresponding trace.
+If the endpoint is being traced and allowed, your browser test results are then automatically tied to its corresponding trace.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/settings
-[2]: /synthetics/private_locations
+[2]: /synthetics/private_locations/
 [3]: /account_management/users/default_roles/
 [4]: /synthetics/api_tests/#use-global-variables
 [5]: /synthetics/browser_tests/#use-global-variables
+[6]: https://app.datadoghq.com/synthetics/settings/variables

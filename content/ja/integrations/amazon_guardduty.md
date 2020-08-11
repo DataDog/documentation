@@ -4,10 +4,12 @@ categories:
   - aws
   - log collection
   - security
-ddtype: クローラー
+ddtype: crawler
 description: AWS GuardDuty ログを収集
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md'
 integration_title: AWS GuardDuty
 is_public: true
 kind: インテグレーション
@@ -22,22 +24,19 @@ Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリュー�
 
 ## セットアップ
 
-###         - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
+### ログの収集
 
 #### GuardDuty ログの有効化
 
 1. **GuardDuty Finding** イベントタイプを使用して Cloudwatch で新しい規則を作成します。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1"  style="width:75%;" >}}
 
 2. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 
 3. Lambda 関数が作成されたら、Datadog Lambda 関数をターゲットとして定義します。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2" responsive="true" style="width:75%;" >}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2"  style="width:75%;" >}}
 
 4. 規則を保存します。
 
@@ -47,7 +46,7 @@ Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリュー�
 
 2. Lambda 関数をセットアップしたら、**CloudWatch Events** をトリガーとして選択し、`GuardDutyRule` を作成することで、GuardDuty をトリガーとして追加します。
 
-    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" responsive="true" style="width:75%;">}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3"  style="width:75%;">}}
 
 3. 完了したら、[Datadog Log セクション][2]に移動し、ログを確認します。
 

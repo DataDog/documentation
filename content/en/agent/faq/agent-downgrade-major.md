@@ -16,16 +16,16 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 | Platform     | Command                                                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| CentOS       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Debian       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Fedora       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Red Hat      | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Ubuntu       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Amazon Linux | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| CentOS       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Debian       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Fedora       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Red Hat      | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| Ubuntu       | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
+| SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"` |
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent
-[2]: /agent/versions/upgrade_to_agent_v6
+[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -37,7 +37,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][4].
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent
+[1]: /agent/faq/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
@@ -49,11 +49,11 @@ First, [uninstall Agent v7 from your system][1].
 Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
-[1]: /agent/faq/how-do-i-uninstall-the-agent
-[2]: /agent/versions/upgrade_to_agent_v6
+[1]: /agent/faq/how-do-i-uninstall-the-agent/
+[2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -183,4 +183,4 @@ Run the agent installer package for the latest 5.x version,  instructions can be
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /agent/guide/upgrade-to-agent-v6
+[1]: /agent/guide/upgrade-to-agent-v6/

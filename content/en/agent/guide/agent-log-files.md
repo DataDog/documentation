@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /agent/faq/agent-log-files
 further_reading:
-- link: "agent/troubleshooting/"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/guide/agent-configuration-files/"
+- link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Agent configuration files"
-- link: "agent/guide/agent-commands/"
+- link: "/agent/guide/agent-commands/"
   tag: "FAQ"
   text: "Agent commands"
 ---
@@ -68,6 +68,14 @@ The Datadog Agent does a logs rollover every 10MB. When a rollover occurs, one b
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent Installation Log Files
+
+| Platform                             | Location and file name        |
+|--------------------------------------|-------------------------------|
+| Linux                                | `/tmp/dd_agent.log`           |
+| macOS                                | `/tmp/dd_agent.log`           |
+| Windows                              | `%TEMP%\MSI*.LOG`             |
 
 ## Further Reading
 

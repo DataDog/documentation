@@ -38,7 +38,7 @@ vagrant ssh
 To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 ### Validation
@@ -75,19 +75,12 @@ And in `trace-agent.log`:
 
 ### Environment name
 
-(Optional) - Name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
+For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
 
-```yaml
-apm_config:
-    enabled: true
-    env: hello_world
-```
+Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
+Read more about how this works in [Unified Service Tagging][11].
 
-Then, [restart][11] the Datadog Agent:
-
-```shell
-sudo service datadog-agent restart
-```
+Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][12].
 
 ## APM application
 
@@ -122,6 +115,7 @@ if __name__ == '__main__':
 Run `hello.py` with `ddtrace` which automatically instruments your application in Datadog:
 
 ```shell
+export DD_SERVICE=hello
 ddtrace-run python hello.py
 ```
 
@@ -148,7 +142,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][12] or [trace list][13].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][13] or [trace list][14].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -160,12 +154,13 @@ After a few minutes, your trace displays in Datadog under the `flask` service. C
 [2]: https://docs.datadoghq.com/tracing/setup/
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[5]: https://www.vagrantup.com/intro/getting-started/index.html
+[5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
-[12]: https://app.datadoghq.com/apm/services
-[13]: https://app.datadoghq.com/apm/traces
+[11]: /getting_started/tagging/unified_service_tagging
+[12]: /tracing/guide/setting_primary_tags_to_scope/
+[13]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/apm/traces

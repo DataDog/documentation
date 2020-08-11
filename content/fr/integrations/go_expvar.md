@@ -3,11 +3,11 @@ aliases:
   - /fr/integrations/goexpvar
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - languages
-  - log collection
   - autodiscovery
 creates_events: false
 ddtype: check
@@ -41,7 +41,7 @@ Surveillez l'utilisation de la mémoire de vos services Go et recueillez des mé
 
 Si vous préférez instrumenter votre Go en utilisant seulement [dogstats-go][2], vous pouvez tout de même utiliser cette intégration pour recueillir des métriques relatives à la mémoire.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -55,7 +55,7 @@ Si votre service Go n'utilise pas déjà le [paquet Expvar][4], importez-le (`im
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Associer l'Agent
 
@@ -111,10 +111,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[10]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[9]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[10]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[11]: https://docs.datadoghq.com/fr/help/
+[12]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/metadata.csv
 [15]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog

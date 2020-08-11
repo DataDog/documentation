@@ -12,7 +12,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
     tag: ブログ
     text: モニター入門 重要事項をアラート
-  - link: '/api/#monitors'
+  - link: /api/v1/monitors/
     tag: Documentation
     text: Datadog モニター API
 ---
@@ -27,6 +27,7 @@ further_reading:
     {{< nextlink href="/monitors/check_summary" >}}<u>チェック内容のサマリー</u>: すべてのインテグレーションチェックのステータスを 1 か所で確認します。{{< /nextlink >}}
     {{< nextlink href="/monitors/notifications" >}}<u>通知</u>: モニターが作成されると、その条件が満たされると通知されます。また、メール、サードパーティサービス（Pagerduty など）、または Webhook を使用した他のカスタムエンドポイントでチームメンバーに通知することもできます。{{< /nextlink >}}
     {{< nextlink href="/monitors/downtimes" >}}<u>ダウンタイム</u>: モニターをトリガーせずに、システムのシャットダウン、オフライン保守、またはアップグレードのダウンタイムをスケジュールします。{{< /nextlink >}}
+    {{< nextlink href="/monitors/service_level_objectives" >}}<u>サービスレベル目標</u>: メトリクスまたは既存の Datadog モニターを使用して、サービスレベル目標を作成、編集または表示します。{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>ガイド</u>: モニターとアラートに関するその他の役に立つ記事。{{< /nextlink >}}
 {{< /whatsnext >}}
 

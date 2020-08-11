@@ -2,7 +2,6 @@
 categories:
 - log collection
 - Security
-dependencies: []
 description: Ingest and process your Alcide logs
 doc_link: https://docs.datadoghq.com/integrations/alcide/
 dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md"]
@@ -53,4 +52,4 @@ Then, go to the _Selected Audit Entries Integration Configuration_ section, loca
 Need help? Contact [Datadog support][2].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /help
+[2]: /help/

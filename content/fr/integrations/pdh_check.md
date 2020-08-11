@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -32,7 +35,7 @@ Recueillez des métriques à partir des counters de performances Windows en temp
 
 - Visualiser et surveiller les compteurs de performances Windows via l'API PDH.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -67,5 +70,5 @@ Le check PDH n'inclut aucun check de service.
 [3]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[7]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
+[6]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[7]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/

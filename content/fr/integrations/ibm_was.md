@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: ibm_was
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +44,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 L'intégration Datadog/IBM WAS permet de recueillir les compteurs PMI activés depuis l'environnement WebSphere Application Server. Son implémentation nécessite d'activer le servlet PerfServlet, qui offre un moyen à Datadog de récupérer les données de performance issues de WAS.
 
-Par défaut, ce check recueille les métriques associées à JDBC, au JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][3] pour découvrir des exemples.
+Par défaut, ce check recueille les métriques associées à JDBC, à la JVM, au pool de threads et au gestionnaire de sessions du servlet. Il est également possible de recueillir des métriques supplémentaires en les spécifiant dans la section « custom_queries ». Consultez le [fichier d'exemple de configuration du check][3] pour découvrir des exemples.
 
 ### Installation
 
@@ -68,7 +70,7 @@ Une fois ce changement effectué, cliquez sur « Apply » pour enregistrer la 
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
@@ -114,7 +116,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][6].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
 
 | Paramètre      | Valeur                                                |
 | -------------- | ---------------------------------------------------- |
@@ -133,7 +135,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ### Checks de service
 
 **ibm_was.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au PerfServlet pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au PerfServlet pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
@@ -144,11 +146,11 @@ IBM WAS n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://www.ibm.com/cloud/websphere-application-platform
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/docker/log/
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/

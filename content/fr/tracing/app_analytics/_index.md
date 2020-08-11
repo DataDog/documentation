@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /fr/tracing/visualization/search/
   - /fr/tracing/trace_search_and_analytics/
+  - /fr/tracing/advanced_usage/
 ---
 {{< wistia vrmqr812sz >}}
 </br>
@@ -23,9 +24,6 @@ La fonction App Analytics est disponible à partir de la version 0.25.0 du clie
 * Propriété système : `-Ddd.trace.analytics.enabled=true`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
- Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -34,9 +32,6 @@ La fonction App Analytics est disponible à partir de la version 0.19.0 du clie
 * Configuration du traceur : `ddtrace.config.analytics_enabled = True`
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
- Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -51,9 +46,6 @@ Datadog.configure { |c| c.analytics_enabled = true }
 * `true` active les analyses pour tous les frameworks Web.
 * `false` ou `nil` désactive les analyses, sauf pour les intégrations qui l'activent automatiquement. (Par défaut)
 
- Une fois la fonction activée, la page [App Analytics][1] commence à afficher des informations.
-
-[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -63,10 +55,7 @@ La fonction App Analytics est disponible à partir de la version 1.11.0 du clie
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
-Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][2] pour démarrer.
-
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-[2]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -82,9 +71,6 @@ Vous pouvez également utiliser le paramètre de configuration suivant :
 
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -98,9 +84,6 @@ Ce paramètre peut également être défini dans le code :
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
-Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -108,11 +91,32 @@ La fonction App Analytics est disponible à partir de la version 0.17.0 du clie
 
 * Variable d'environnement : `DD_TRACE_ANALYTICS_ENABLED=true`
 
-Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
+{{% /tab %}}
+{{% tab "C++" %}}
 
-[1]: https://app.datadoghq.com/apm/search/analytics
+La fonction App Analytics est disponible à partir de la version 1.0.0 du client de tracing C++. Elle peut être activée de façon globale pour toutes les spans de premier niveau en définissant la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED` sur `true`. Notez que ce paramètre peut également être défini directement dans le code :
+
+```csharp
+datadog::opentracing::TracerOptions tracer_options;
+  tracer_options.agent_host = "dd-agent";
+  tracer_options.service = "<NOM_SERVICE>";
+  tracer_options.analytics_rate = 1.0;
+  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+```
+
+{{% /tab %}}
+{{% tab "Nginx" %}}
+
+Pour activer la fonction App Analytics pour Nginx :
+
+1. Définissez la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED` sur `true`.
+
+2. Ajoutez `env DD_TRACE_ANALYTICS_ENABLED;` en haut de votre fichier `nginx.conf`.
+
 {{% /tab %}}
 {{< /tabs >}}
+
+Une fois la fonction activée, l'interface App Analytics commence à afficher des résultats. Consultez la [page App Analytics][1] pour démarrer.
 
 ## Configurer d'autres services (facultatif)
 
@@ -165,7 +169,7 @@ Où `intégration` est le nom de l'intégration. Consultez la [liste des intégr
 
 * `true` active l'analyse pour cette intégration, quel que soit le paramètre global.
 * `false` désactive l'analyse pour cette intégration, quel que soit le paramètre global.
-* `nil` renvoie au paramètre global pour l'analyse.
+* `nil` applique le paramètre global pour l'analyse.
 
 [1]: /fr/tracing/setup/ruby/#library-compatibility
 {{% /tab %}}
@@ -229,9 +233,9 @@ Ou en code :
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
-Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
+Les noms des intégrations sont disponibles sur le [tableau des intégrations][1]. **Remarque :** sous Linux, les noms des variables d'environnement sont sensibles à la casse.
 
-[1]: /fr/tracing/setup/dotnet#integrations
+[1]: /fr/tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -282,7 +286,7 @@ Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple :
 
 ```go
-// Enregistrer le pilote de base de données avec l'analyse activée.
+// Enregistrer le pilote de base de données avec la fonction Analytics activée.
 sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
 ```
 
@@ -302,7 +306,7 @@ tracer.use('mysql', {
 
 Par défaut, le tracing de base de données n'est pas pris en charge par la fonction App Analytics. Vous devez activer la collecte manuellement pour chaque intégration. Par exemple, pour activer la fonction App Analytics pour ADO.NET :
 
-* Variable d'environnement ou AppSetting : `DD_ADONET_ANALYTICS_ENABLED=true`
+* Variable d'environnement ou AppSetting : `DD_AdoNet_ANALYTICS_ENABLED=true`
 
 Ou en code :
 
@@ -310,9 +314,9 @@ Ou en code :
 Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 ```
 
-Les noms des intégrations sont disponibles sur le [tableau des intégrations][1].
+Les noms des intégrations sont disponibles sur le [tableau des intégrations][1]. **Remarque :** sous Linux, les noms des variables d'environnement sont sensibles à la casse.
 
-[1]: /fr/tracing/setup/dotnet#integrations
+[1]: /fr/tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -335,7 +339,7 @@ Les noms des intégrations sont disponibles sur le [tableau des intégrations][1
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_SAMPLE_RATE` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_SAMPLE_RATE` à une span :
 
 ```java
 import datadog.trace.api.DDTags;
@@ -359,7 +363,7 @@ class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` à une span :
 
 ```python
 from ddtrace import tracer
@@ -374,7 +378,7 @@ def my_method():
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à une span :
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
@@ -397,7 +401,7 @@ Ce tag permet de définir la span comme un événement App Analytics.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS` à une span :
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -408,7 +412,7 @@ span.setTag(ANALYTICS, true)
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `Tags.Analytics` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `Tags.Analytics` à une span :
 
 ```csharp
 using Datadog.Trace;
@@ -424,7 +428,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `ANALYTICS_KEY` à une span :
 
 ```php
 <?php
@@ -436,7 +440,7 @@ Les applications utilisant une instrumentation personnalisée peuvent activer Ap
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `analytics_event` à la span racine du service :
+Les applications utilisant une instrumentation personnalisée peuvent activer App Analytics en appliquant le tag `analytics_event` à une span :
 
 ```cpp
 ...
@@ -457,9 +461,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## Filtrage des spans
 
-Une [span analysée][2] représente la [span][3] supérieure d'un [service][4], métadonnées incluses. Une fois activées, les spans analysées sont envoyées à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 spans analysées depuis ses spans `servlet.request`, car chaque span `servlet.request` génère une span analysée. Le [filtrage de spans analysées][5] offre l'avantage de réduire le nombre de spans analysées facturables sans pour autant affecter l'échantillonnage des [traces][6]. Lorsqu'un service est filtré et que moins de 100 % des spans sont envoyées, l'analyse des spans analysées est mise à l'échelle pour afficher une estimation par défaut, et vous avez la possibilité d'afficher la valeur filtrée.
+Une [span analysée][2] représente la [span][3] supérieure d'un [service][4], métadonnées incluses. Une fois activées, les spans analysées sont envoyées à un débit de 100 % par défaut. Par exemple, un service Java avec 100 requêtes générera 100 spans analysées depuis ses spans `servlet.request`, car chaque span `servlet.request` génère une span analysée. Le [filtrage de spans analysées][5] offre l'avantage de réduire le nombre de spans analysées facturables sans pour autant affecter l'échantillonnage des [traces][6]. Lorsqu'un service est filtré et que moins de 100 % des spans sont envoyées, les métriques Nombre total d'erreurs et Nombre total de requêtes générées par les spans analysées sont mises à l'échelle pour afficher une estimation par défaut, et vous avez la possibilité d'afficher la valeur filtrée.
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Filtrage des spans analysées" style="width:100%;">}}
+Les modifications apportées aux taux d'échantillonnage sont mises en file d'attente par service et par environnement, ce qui permet d'estimer leur incidence sur le volume global de spans. Les modifications peuvent ensuite être examinées, modifiées, approuvées ou rejetées. Une fois appliquées, les modifications prennent immédiatement effet et [ont une incidence sur votre facturation][7].
+
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Filtrage des spans analysées" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /fr/tracing/visualization/#apm-event
@@ -467,3 +473,4 @@ Une [span analysée][2] représente la [span][3] supérieure d'un [service][4], 
 [4]: /fr/tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /fr/tracing/visualization/#trace
+[7]: /fr/account_management/billing/apm_distributed_tracing/

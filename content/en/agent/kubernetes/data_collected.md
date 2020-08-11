@@ -3,11 +3,32 @@ title: Kubernetes Data Collected
 kind: documentation
 aliases:
  - /agent/kubernetes/metrics
+further_reading:
+- link: "/agent/kubernetes/log/"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/apm/"
+  tag: "Documentation"
+  text: "Collect your application traces"
+- link: "/agent/kubernetes/prometheus/"
+  tag: "Documentation"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/kubernetes/integrations/"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management/"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag/"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 ## Metrics
 
 Metrics collected by the Agent when deployed on your Kubernetes cluster:
+
+**Note**: The set of metrics collected by the Datadog Kubernetes integration may vary depending on the version of Kubernetes in use.
 
 ### Kubernetes
 
@@ -92,3 +113,7 @@ The Kubernetes check includes the following service checks:
 
 - `kubernetes_state.cronjob.on_schedule_check`:<br>
     Returns `CRITICAL` if a cron job scheduled time is in the past. Returns `OK` otherwise.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

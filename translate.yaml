@@ -11,21 +11,27 @@ sources:
   dst: "content/{lang}/**/*.md"
 - src: "data/partials/*.yaml"
   dst: "*.{lang}.yaml"
-- src: "data/service_checks/*.json"
-  dst: "*.{lang}.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/menus.en.yaml"
   dst: "config/_default/menus/menus.{lang}.yaml"
+- src: "content/en/agent/faq/agent_v6_changes.md"
+  dst: "content/{lang}/agent/faq/agent_v6_changes.md"
+- src: "content/en/agent/faq/certificate_verify_failed-error.md"
+  dst: "content/{lang}/agent/faq/certificate_verify_failed-error.md"
 
 ignores:
-  - "content/en/**/faq/*.md"
+  - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
   - "**/fr.json"
+  - "**/*.ja.md"
+  - "**/*.ja.yaml"
+  - "**/*.ja.json"
+  - "**/ja.json"
 filters:
 - src: "data/integrations/*.yaml"
   template: ".translate/templates/integrations.yaml"
@@ -49,4 +55,3 @@ reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
     slack_user: 'david.jones'
-  - github_user: 'l0k0ms'

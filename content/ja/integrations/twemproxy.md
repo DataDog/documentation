@@ -1,13 +1,14 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md'
 display_name: Twemproxy
@@ -38,15 +39,15 @@ supported_os:
 
 ### インストール
 
-Agent の Twemproxy チェックは [Datadog Agent][2] パッケージに含まれています。Twemproxy サーバーに追加でインストールする必要はありません。
+Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含まれています。Twemproxy サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
-1. [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル twemproxy.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][3] を参照してください。
 
    ```yaml
    init_config:
@@ -56,17 +57,17 @@ Agent の Twemproxy チェックは [Datadog Agent][2] パッケージに含ま�
        port: 22222
    ```
 
-2. [Agent を再起動][5]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
+2. [Agent を再起動][4]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<INTEGRATION_NAME>` | `twemproxy`                            |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22222"}` |
+| `<インテグレーション名>` | `twemproxy`                            |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
+| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22222"}` |
 
 ### 検証
 
@@ -92,11 +93,11 @@ Agent が Twemproxy 統計エンドポイントに接続してメトリクスを
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/

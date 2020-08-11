@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - cloud
 creates_events: false
@@ -82,4 +82,4 @@ Convox チェックには、サービスのチェック機能は含まれませ�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png
 [2]: https://docs.convox.com/external-services/datadog
 [3]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_cwet.html
-[4]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/help/

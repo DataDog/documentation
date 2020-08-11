@@ -166,42 +166,40 @@ The billable number of custom metrics is based on the average number of custom m
 
 The following standard integrations can potentially emit custom metrics.
 
-| Type of integrations                           | Integrations                                                                                                                             |
-|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                                                                     |
-| No default limit on custom metrics collection. | [Directory][13] /[Linux Proc Extras][14] /[Nagios][15] /[PDH Check][16] /[Prometheus][17] /[SNMP][18] /[Windows Services][19] /[WMI][20] |
-| Can be configured to collect custom metrics.   | [MySQL][21] /[Oracle][22] /[Postgres][23] /[SQL Server][24]                                                                              |
-| Custom metrics sent from cloud integrations    | [AWS][25]                                                                                                                                |
+| Type of integrations                           | Integrations                                                                                   |
+|------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                          |
+| No default limit on custom metrics collection. | [Nagios][13] /[PDH Check][14] /[Prometheus][15] /[SNMP][16] /[Windows Services][17] /[WMI][18] |
+| Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                                    |
+| Custom metrics sent from cloud integrations    | [AWS][23]                                                                                      |
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][26].
+For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][9] Manager.
 
-[1]: /integrations
-[2]: /developers/metrics/custom_metrics
+[1]: /integrations/
+[2]: /developers/metrics/custom_metrics/
 [3]: /developers/metrics/types/#metric-types
-[4]: /account_management/users/default_roles
+[4]: /account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
-[6]: /account_management/billing/usage_details
+[6]: /account_management/billing/usage_details/
 [7]: https://app.datadoghq.com/metric/summary
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
 [10]: /integrations/activemq/#activemq-xml-integration
-[11]: /integrations/go_expvar
+[11]: /integrations/go_expvar/
 [12]: /integrations/java/
-[13]: /integrations/directory
-[14]: /integrations/linux_proc_extras
-[15]: /integrations/nagios
-[16]: /integrations/pdh_check
-[17]: /integrations/prometheus
-[18]: /integrations/snmp
-[19]: /integrations/windows_service
-[20]: /integrations/wmi_check
-[21]: /integrations/mysql
-[22]: /integrations/oracle
-[23]: /integrations/postgres
-[24]: /integrations/sqlserver
-[25]: /integrations/amazon_web_services
-[26]: /help
+[13]: /integrations/nagios/
+[14]: /integrations/pdh_check/
+[15]: /integrations/prometheus/
+[16]: /integrations/snmp/
+[17]: /integrations/windows_service/
+[18]: /integrations/wmi_check/
+[19]: /integrations/mysql/
+[20]: /integrations/oracle/
+[21]: /integrations/postgres/
+[22]: /integrations/sqlserver/
+[23]: /integrations/amazon_web_services/
+[24]: /help/

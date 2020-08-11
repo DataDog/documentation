@@ -1,4 +1,6 @@
 ---
+dependencies:
+  - 'https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md'
 kind: documentation
 title: "Datadog/Amazon\_CloudFormation"
 ---

@@ -5,13 +5,13 @@ platform: SUSE
 aliases:
     - /guides/basic_agent_usage/suse/
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
 ---
@@ -28,6 +28,21 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
+
+### SUSE 12 and higher
+
+| Description                        | Command                                                |
+|------------------------------------|--------------------------------------------------------|
+| Start Agent as a service           | `sudo systemctl start datadog-agent`                   |
+| Stop Agent running as a service    | `sudo systemctl stop datadog-agent`                    |
+| Restart Agent running as a service | `sudo systemctl restart datadog-agent`                 |
+| Status of Agent service            | `sudo systemctl status datadog-agent`                  |
+| Status page of running Agent       | `sudo datadog-agent status`                            |
+| Send flare                         | `sudo datadog-agent flare`                             |
+| Display command usage              | `sudo datadog-agent --help`                            |
+| Run a check                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
+
+### SUSE 11
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -59,7 +74,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 
 **Note**: If the `service` wrapper is not available on your system, use:
 
-* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][2]
@@ -76,7 +91,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -88,7 +103,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -108,5 +123,5 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /agent/troubleshooting
-[4]: /developers/guide/custom-python-package
+[3]: /agent/troubleshooting/
+[4]: /developers/guide/custom-python-package/

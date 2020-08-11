@@ -78,7 +78,7 @@ Bitbucket インテグレーションには、メトリクスは含まれませ�
 
 ### イベント
 
-Bitbucket インテグレーションには、イベントは含まれません。
+Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog アプリケーションに転送されます。
 
 ### サービスのチェック
 
@@ -94,4 +94,4 @@ Bitbucket インテグレーションには、サービスのチェック機能�
 
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
 [2]: https://app.datadoghq.com/account/settings#integrations/bitbucket
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

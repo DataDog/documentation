@@ -1,7 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -34,41 +37,51 @@ supported_os:
 
 Recueillez des métriques de la base de données Aerospike en temps réel pour :
 
-* Visualiser et surveiller les états d'Aerospike
-* Être informé des failovers et des événements d'Aerospike
+- Visualiser et surveiller les états d'Aerospike
+- Être informé des failovers et des événements d'Aerospike
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Aerospike est inclus avec le paquet de l'[Agent Datadog][1].
+Le check Aerospike est inclus avec le paquet de l'Agent Datadog.
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 1. Modifiez le fichier `aerospike.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performances Aerospike. Consultez le [fichier d'exemple aerospike.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][2].
 
+[1]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
-##### Collecte de métriques
-
-| Paramètre            | Valeur                                                                               |
-|----------------------|-------------------------------------------------------------------------------------|
-| `<NOM_INTÉGRATION>` | `aerospike`                                                                         |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                       |
+| Paramètre            | Valeur                                |
+| -------------------- | ------------------------------------ |
+| `<NOM_INTÉGRATION>` | `aerospike`                          |
+| `<CONFIG_INIT>`      | vide ou `{}`                        |
 | `<CONFIG_INSTANCE>`  | `{"host":"%%host%%", "port":"3000"}` |
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][3] et cherchez `aerospike` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][1] et cherchez `aerospike` dans la section Checks.
 
 ## Données collectées
 
@@ -87,11 +100,8 @@ Aerospike n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/aerospike/metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/fr/help/

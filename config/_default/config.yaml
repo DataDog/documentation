@@ -6,6 +6,8 @@ canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
 
+publishDir: "./public"
+
 # taxonomies
 taxonomies:
   tag: "tags"

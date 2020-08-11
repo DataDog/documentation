@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /logs/languages/java
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 - link: "https://www.datadoghq.com/blog/java-logging-guide/"
@@ -75,7 +75,7 @@ Once this is done, the `ConversionPattern` to use becomes:
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /tracing/connect_logs_and_traces/java
+[1]: /tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -103,7 +103,7 @@ Once this is done, the `PatternLayout` to use becomes:
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /tracing/connect_logs_and_traces/java
+[1]: /tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -138,7 +138,7 @@ Once this is done, the `Pattern` to use becomes:
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /tracing/connect_logs_and_traces/java
+[1]: /tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,7 +182,7 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
-[1]: /tracing/connect_logs_and_traces/java
+[1]: /tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -286,7 +286,7 @@ Then edit your `logback.xml` file and update the encoder:
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /tracing/connect_logs_and_traces/java
+[2]: /tracing/connect_logs_and_traces/java/
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -419,6 +419,8 @@ To add Logback [logstash-logback-encoder][1] into your classpath, add the follow
 
 Configure the Logback logger to stream logs directly to Datadog by adding the following in your `logback.xml` file:
 
+{{< site-region region="us" >}}
+
 ```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
@@ -426,7 +428,7 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <remoteHost>intake.logs.datadoghq.com</remoteHost>
     <port>10514</port>
-    <keepAliveDuration>1 minute</keepAliveDuration>
+    <keepAliveDuration>20 seconds</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
@@ -441,11 +443,37 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 </root>
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```xml
+<appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+</appender>
+<appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
+    <port>1883</port>
+    <keepAliveDuration>20 seconds</keepAliveDuration>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+            </layout>
+          </prefix>
+    </encoder>
+</appender>
+<root level="debug">
+    <appender-ref ref="JSON_TCP" />
+    <appender-ref ref="JSON" />
+</root>
+```
+
+{{< /site-region >}}
+
 **Notes:**
 
 * Replace `<API_KEY>` with your Datadog API key value.
 * `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4].
-* See the list of [available endpoints for the EU site][5].
 
 More information available on the prefix parameter in the [Logback documentation][4].
 
@@ -455,7 +483,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the Key/Value parser
 
-The [Key/Value parser][6] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [Key/Value parser][5] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -471,7 +499,7 @@ You can change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser][6] enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the [Key/Value parser][5] enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {
@@ -513,8 +541,7 @@ To generate this final JSON document:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /logs/processing/parsing
+[2]: /logs/processing/parsing/
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /logs/log_collection/?tab=eusite#datadog-logs-endpoints
-[6]: /logs/processing/parsing/#key-value
+[5]: /logs/processing/parsing/#key-value

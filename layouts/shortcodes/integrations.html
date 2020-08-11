@@ -1,7 +1,11 @@
 {{ $dot := . }}
 
 <!-- From data file -->
-{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" "integration") ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
+{{ $kind := "integration" }}
+{{ if eq .Site.Language.Lang "ja"}}
+    {{ $kind = "インテグレーション"}}
+{{ end }}
+{{ $integration_list := sort (where (where (where .Site.Pages "Params.kind" "=" $kind) ".Params.beta" "!=" "true") ".Params.is_public" "=" true) ".File.BaseFileName" }}
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
@@ -114,7 +118,7 @@
                     <div class="text-center title">{{ $formatname }}</div>
                     <div class="card-body">
                         <a class="card-button" href="{{ (print "integrations/" ($urlname | lower)) | absLangURL }}">
-                            <h4 class="card-title">{{ $formatname }}</h4>
+                            <h4 class="card-title pt-2">{{ $formatname }}</h4>
                             <p class="card-text">{{ $v.Params.short_description }}</p>
                             <div class="btn-container"><button type="button" class="btn btn-sm btn-outline-primary btn-block">GO</button></div>
                         </a>

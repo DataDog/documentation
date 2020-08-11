@@ -1,0 +1,16 @@
+datadog:
+  kubeStateMetricsEnabled: false
+  logs:
+    enabled: true
+    containerCollectAll: true
+  apm:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+  systemProbe:
+    enabled: true
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent

@@ -7,7 +7,7 @@ aliases:
   - /ja/guides/logs/
   - /ja/logs/logging_without_limits
 further_reading:
-  - link: /logs/guide
+  - link: /logs/guide/
     tag: ガイド
     text: ログの収集および処理に役立つその他の記事
   - link: 'https://learn.datadoghq.com'
@@ -15,6 +15,8 @@ further_reading:
     text: Datadog でのログ収集
 ---
 {{< vimeo 293195142 >}}
+
+</br>
 
 インフラストラクチャーにより膨大な量のログイベントが生成されたり、インフラストラクチャーが著しく変動したりすることがあります。このような場合、ログ管理ソリューションに送信するログとアーカイブするログを決定しなければなりません。しかし、送信前にログを絞り込むと、カバレッジにギャップが生じ、有用なデータが除外されてしまう可能性があります。
 
@@ -47,4 +49,4 @@ Datadog のログ管理は、ログの取り込みをインデックスの作成
 <br>
 \*Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /ja/security_monitoring
+[1]: /ja/security_monitoring/

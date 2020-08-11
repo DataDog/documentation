@@ -83,11 +83,11 @@ Steps to free up disk space:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/monitor_types/metric
+[1]: /ja/monitors/monitor_types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
-[6]: /ja/integrations/disk
+[6]: /ja/integrations/disk/
 [7]: /ja/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /ja/monitors/notifications/#conditional-variables

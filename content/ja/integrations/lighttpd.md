@@ -1,13 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
 display_name: Lighttpd
@@ -46,11 +49,11 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 加えて、Lighttpd サーバーに `mod_status` をインストールします。
 
-### コンフィギュレーション
+### 構成
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `lighttpd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル lighttpd.d/conf.yaml][4] を参照してください。
 
@@ -72,9 +75,9 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 | パラメーター            | 値                                                           |
 | -------------------- | --------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `lighttpd`                                                      |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                   |
-| `<INSTANCE_CONFIG>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
+| `<インテグレーション名>` | `lighttpd`                                                      |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                   |
+| `<インスタンスコンフィギュレーション>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
 ### 検証
 
@@ -98,7 +101,7 @@ Agent が lighttpd に接続してメトリクスを収集できない場合は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -109,8 +112,8 @@ Lighttpd Web サーバーのメトリクスを監視する方法 (または理�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics

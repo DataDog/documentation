@@ -2,17 +2,19 @@
 title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
+aliases:
+  - /logs/faq/integration-pipeline-reference
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/logs/processing/pipelines/"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
-- link: "logs/processing/processors"
+- link: "/logs/processing/processors/"
   tag: "Documentation"
   text: "Consult the full list of available Processors."
-- link: "logs/processing/attributes_naming_convention"
+- link: "/logs/processing/attributes_naming_convention/"
   tag: "Documentation"
   text: "Datadog log attributes naming convention"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -26,7 +28,7 @@ To access the configuration panel use the left `Logs` menu then the configuratio
 Log configuration page allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
 
 * A [Pipeline][1] takes a filtered subset of incoming logs and applies a list of sequential processors.
-* A [Processor][2] executes within a [Pipeline][1] a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+* A [Processor][2] executes within a [Pipeline][1] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 [Pipelines][1] and [Processors][2] can be applied to any type of logs:
 
@@ -117,7 +119,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 
 ### *source* attribute
 
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
 
 **Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
 
@@ -149,21 +151,21 @@ To change the default values for each of the reserved attributes, go to the [Con
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/pipelines
-[2]: /logs/processing/processors
+[1]: /logs/processing/pipelines/
+[2]: /logs/processing/processors/
 [3]: /logs/processing/processors/#attribute-remapper
 [4]: /logs/processing/processors/#grok-parser
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: /logs/processing/attributes_naming_convention
+[6]: /logs/processing/attributes_naming_convention/
 [7]: /logs/processing/pipelines/#integration-pipelines
 [8]: /logs/processing/pipelines/#pipeline-filters
-[9]: /logs/processing/parsing
-[10]: /logs/faq/log-parsing-best-practice
-[11]: /logs/faq/how-to-investigate-a-log-parsing-issue
+[9]: /logs/processing/parsing/
+[10]: /logs/faq/log-parsing-best-practice/
+[11]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [12]: /logs/processing/processors/#log-date-remapper
 [13]: /logs/explorer/?tab=logstream#visualization
-[14]: /logs/explorer/search
+[14]: /logs/explorer/search/
 [15]: /logs/processing/processors/#log-status-remapper
-[16]: /logs/faq/integration-pipeline-reference
+[16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /agent/docker/log/#examples
 [18]: /tracing/connect_logs_and_traces/

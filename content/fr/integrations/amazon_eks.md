@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -36,7 +37,7 @@ supported_os:
 
 Elastic Container Service for Kubernetes (EKS) est le service le plus récent d'AWS. Il s'agit d'un service Kubernetes géré qui automatise certains aspects des processus de déploiement et de maintenance de tous les environnements Kubernetes standard. Que vous effectuiez la migration d'une application Kubernetes existante vers EKS ou que vous déployiez un nouveau cluster, Datadog vous aide à surveiller votre environnement EKS en temps réel.
 
-## Implémentation
+## Configuration
 
 Datadog s'intègre déjà à Kubernetes et à AWS, ce qui en fait la solution idéale pour surveiller EKS. Si vous exécutez l'Agent dans un cluster Kubernetes et que vous souhaitez migrer vers EKS, vous pouvez continuer à surveiller votre cluster avec Datadog. Notre solution prend également en charge les [groupes de nœuds gérés AWS EKS][2].
 
@@ -73,14 +74,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
-[3]: https://docs.datadoghq.com/fr/integrations/kubernetes
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_ec2
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_elb
+[3]: https://docs.datadoghq.com/fr/integrations/kubernetes/
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_ec2/
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_elb/
 [7]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [8]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#container-installation
 [9]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-container-installation
-[10]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/help/
 [11]: https://www.datadoghq.com/blog/announcing-eks
 [12]: https://www.datadoghq.com/blog/eks-cluster-metrics
 [13]: https://docs.datadoghq.com/fr/integrations/amazon_eks_fargate/

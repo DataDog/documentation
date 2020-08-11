@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
 display_name: Riak CS
@@ -46,7 +47,7 @@ Datadog で RiakCS のメトリクスをキャプチャして、以下のこと�
 
 RiakCS チェックは [Datadog Agent][2] パッケージに含まれています。RiakCS ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riakcs.d/conf.yaml][4] を参照してください。
 
@@ -101,7 +102,7 @@ Agent が RiakCS エンドポイントに接続してメトリクスを収集で
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -115,5 +116,5 @@ Riak CS のパフォーマンスと可用性を監視する方法 (または理�
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/riakcs/metadata.csv
 [8]: https://github.com/basho/riak_cs/wiki/Riak-cs-and-stanchion-metrics
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability

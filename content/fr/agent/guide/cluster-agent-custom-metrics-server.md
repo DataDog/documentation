@@ -34,14 +34,14 @@ Pour lancer [l'Agent de cluster Datadog][6], effectuez les étapes suivantes :
 
 1. Créez les règles RBAC appropriées. L'Agent de cluster Datadog agit en tant que proxy entre le serveur API et l'Agent de nœud : il doit par conséquent avoir accès à certaines ressources au niveau du cluster.
 
-    `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml"`
+    `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"`
 
     On obtient alors le résultat suivant :
 
     ```
-    clusterrole.rbac.authorization.k8s.io "dca" created
-    clusterrolebinding.rbac.authorization.k8s.io "dca" created
-    serviceaccount "dca" created
+    clusterrole.rbac.authorization.k8s.io "datadog-cluster-agent" created
+    clusterrolebinding.rbac.authorization.k8s.io "datadog-cluster-agent" created
+    serviceaccount "datadog-cluster-agent" created
     ```
 
 2. Créez l'Agent de cluster Datadog et ses services. Ajoutez votre `<CLÉ_API>` et votre `<CLÉ_APP>` dans le manifeste de déploiement de l'Agent de cluster Datadog.
@@ -49,9 +49,9 @@ Pour lancer [l'Agent de cluster Datadog][6], effectuez les étapes suivantes :
 3. Activez le processing de l'Autoscaler de pods horizontaux en configurant la variable `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` sur `true`.
 
 4. Lancez les ressources :
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml"`
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml"`
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-service.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/cluster-agent-hpa-svc.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml"`
 
 **Remarque** : le premier service est utilisé pour la communication entre les Agents de nœud et l'Agent de cluster Datadog, mais le second est utilisé par Kubernetes pour enregistrer le fournisseur de métriques externes.
 
@@ -75,7 +75,7 @@ default       datadog-cluster-agent           ClusterIP   192.168.254.197   <non
 
 Une fois l'Agent de cluster Datadog opérationnel, enregistrez-le en tant que fournisseur de métriques externes via le service, en exposant le port `443`. Pour ce faire, appliquez les règles RBAC suivantes :
 
-`kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml"`
+`kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml"`
 
 On obtient alors le résultat suivant :
 
@@ -114,10 +114,10 @@ Toutes les 30 secondes, Kubernetes interroge l'Agent de cluster Datadog pour ob
 Pour les cas d'utilisation avancés, il est possible de configurer plusieurs métriques dans le même Autoscaler de pods horizontaux, comme le décrit [la documentation sur l'autoscaling de pods horizontaux Kubernetes][8]. La plus grande des valeurs proposées est celle choisie.
 
 1. Créez le déploiement NGINX :
-  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml"`
+  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/nginx.yaml"`
 
 2. Appliquez ensuite le manifeste de l'Autoscaler de pods horizontaux.
-  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml"`
+  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml"`
 
 Votre pod NGINX devrait maintenant être exécuté avec le service correspondant :
 
@@ -184,9 +184,9 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: /fr/agent/cluster_agent
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /fr/agent/autodiscovery
+[4]: /fr/agent/kubernetes/integrations
 [5]: /fr/agent/cluster_agent/setup
 [6]: /fr/agent/kubernetes/cluster
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
-[9]: /fr/agent/autodiscovery/#template-source-kubernetes-pod-annotations
+[9]: /fr/agent/kubernetes/#template-source-kubernetes-pod-annotations

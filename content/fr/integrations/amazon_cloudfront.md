@@ -37,10 +37,8 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `CloudFront` est cochée dans la section concernant la collecte des métriques.
-
 2. Installez l'[intégration Datadog/AWS CloudFront][3].
-
-3. Facultatif : activez les [métriques de distribution CloudFront supplémentaires][9] pour analyser plus en détail les performances de votre trafic CloudFront.
+3. Facultatif : activez les [métriques de distribution CloudFront supplémentaires][4] pour analyser plus en détail les performances de votre trafic CloudFront.
 
 ### Collecte de logs
 
@@ -52,17 +50,17 @@ Lorsque vous activez la journalisation pour une distribution, indiquez le compar
 
 {{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Journalisation Cloudfront 1" popup="true" style="width:70%;">}}
 
-**Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe pour les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][4].
+**Remarque importante** : vous pouvez stocker des fichiers de log de plusieurs distributions dans un même compartiment. Lorsque vous activez la journalisation, vous pouvez indiquer `cloudfront` en tant que préfixe dans les noms de fichiers pour [déterminer à quelle distribution sont associés vos fichiers][5].
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][6].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 contenant vos logs Cloudfront dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs :
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
-    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudFront et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuration déclencheur S3" popup="true" style="width:70%;">}}
+   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs CloudFront et remplacez le type d'événement par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
+   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuration déclencheur Lambda S3" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Log de Datadog][6] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Logs de Datadog][7] pour commencer à explorer vos logs !
 
 ## Données collectées
 
@@ -82,14 +80,14 @@ L'intégration AWS CloudFront n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudfront
-[4]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[6]: https://app.datadoghq.com/logs
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html
+[4]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html
+[5]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[7]: https://app.datadoghq.com/logs
+[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cloudfront/amazon_cloudfront_metadata.csv
+[9]: https://docs.datadoghq.com/fr/help/

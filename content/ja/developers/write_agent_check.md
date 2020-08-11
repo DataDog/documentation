@@ -66,6 +66,8 @@ class HelloCheck(AgentCheck):
 
 チェックの収集間隔を変更するには、構成ファイルで `min_collection_interval` を使用します。デフォルト値は `15` です。この場合は、このクラスの `check` メソッドが Agent の他のインテグレーションと同じ間隔で呼び出されます。
 
+**注**: `min_collection_interval` パラメーターは、標準およびカスタムインテグレーションの両方で利用可能です。
+
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 Agent 6 では、`min_collection_interval` をインスタンスレベルで追加し、インスタンスごとに個別に設定する必要があります。
@@ -118,7 +120,7 @@ sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 
 コマンドラインプログラムを実行し、その出力をカスタムメトリクスとして取得するカスタムチェックを作成できます。たとえば、`vgs` コマンドを実行して、ボリュームグループに関する情報を報告するチェックが考えられます。便宜上、ラッパー関数が提供されています。これは、別のプロセスを呼び出してその出力や終了コードを収集することを避けるためです。
 
-チェック内でサブプロセスを実行するには、モジュール `datadog_checks.utils.subprocess_output` にある [`get_subprocess_output()` 関数][6]を使用します。`get_subprocess_output()` には、コマンドと引数をそれぞれ文字列としてリスト形式で渡します。たとえば、コマンドプロンプトで次のように入力されるコマンドは
+チェック内でサブプロセスを実行するには、モジュール `datadog_checks.base.utils.subprocess_output` にある [`get_subprocess_output()` 関数][6]を使用します。`get_subprocess_output()` には、コマンドと引数をそれぞれ文字列としてリスト形式で渡します。たとえば、コマンドプロンプトで次のように入力されるコマンドは
 
 ```text
 $ vgs -o vg_free
@@ -142,22 +144,22 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 ```python
 # ...
-from datadog_checks.utils.subprocess_output import get_subprocess_output
+from datadog_checks.base.utils.subprocess_output import get_subprocess_output
 
 class LSCheck(AgentCheck):
     def check(self, instance):
         files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
         file_count = len(files.split('\n')) - 1  #len() はデフォルトで int 値を返します
-        self.gauge("file.count", file_count,tags=['TAG_KEY:TAG_VALUE'])
+        self.gauge("file.count", file_count,tags=['タグキー:タグ値'])
 ```
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/integrations/new_check_howto
+[1]: /ja/developers/integrations/new_check_howto/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: /ja/help
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
+[4]: /ja/help/
+[5]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

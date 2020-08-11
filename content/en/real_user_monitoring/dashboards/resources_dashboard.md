@@ -29,6 +29,6 @@ For more information about the information displayed, check the [RUM Data Collec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/resource
+[1]: /real_user_monitoring/data_collected/resource/
 [2]: https://www.w3.org/TR/resource-timing-1/
 [3]: /real_user_monitoring/data_collected/

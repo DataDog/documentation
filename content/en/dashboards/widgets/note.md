@@ -20,7 +20,7 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 ## Setup
 
-{{< img src="dashboards/widgets/note/using_link_note_widget.gif" alt="Notes and links widget setup"   style="width:80%;">}}
+{{< img src="dashboards/widgets/note/using_link_note_widget.mp4" alt="Notes and links widget setup" video="true" style="width:80%;" >}}
 
 1. Enter the text you want to display. Note that Markdown is supported.
 2. Choose the text size and the note background color.
@@ -63,5 +63,5 @@ NOTE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/free_text
-[2]: /dashboards/graphing_json/widget_json
+[1]: /dashboards/widgets/free_text/
+[2]: /dashboards/graphing_json/widget_json/

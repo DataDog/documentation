@@ -74,13 +74,13 @@ Need help? Contact [Datadog support][12].
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
-[3]: /agent/faq/where-is-the-configuration-file-for-the-agent
+[3]: /agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://hub.docker.com/r/datadog/docker-dd-agent
-[7]: /tracing/docker
-[8]: /api/?lang=console#traces
-[9]: /agent
+[7]: /tracing/docker/
+[8]: /api/v1/tracing/
+[9]: /agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [11]: /tracing/setup/?tab=agent5250#trace-search
-[12]: /help
+[12]: /help/

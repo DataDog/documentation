@@ -68,7 +68,7 @@ Les ressources représentent un domaine particulier d'une application client. Il
 
 ## Trace
 
-Les traces servent à suivre le temps passé par une application à traiter une requête, ainsi que le statut de la requête. Chaque trace est composée d'une ou de plusieurs spans. Durant le cycle de vie de la requête, il est possible de visualiser les appels distribués au sein de vos services (grâce à [l'injection/l'extraction d'un ID de trace via les en-têtes HTTP][8]), de vos [bibliothèques instrumentées automatiquement][3] et de vos [instrumentations manuelles][9] à l'aide d'outils open source tels que [OpenTracing][10] sous forme de Flamegraph. La page Vue Trace présente des informations sur la trace issues d'autres sections de la plateforme, telles que [Connecter vos logs à vos traces][11], [Ajouter des tags à des spans][12] et [Recueillir des métriques de runtime][13].
+Les traces servent à suivre le temps passé par une application à traiter une requête, ainsi que le statut de la requête. Chaque trace est composée d'une ou de plusieurs spans. Durant le cycle de vie de la requête, il est possible de visualiser les appels distribués au sein de vos services (grâce à [l'injection/l'extraction d'un ID de trace via les en-têtes HTTP][8]), de vos [bibliothèques instrumentées automatiquement][3] et de vos [instrumentations manuelles][9] à l'aide d'outils open source tels que [OpenTracing][10] sous forme de Flamegraph. La page Vue Trace présente des informations sur la trace issues d'autres sections de la plateforme, telles que [Connecter vos logs à vos traces][11], [Ajouter des tags à des spans][12] et [Recueillir des métriques runtime][13].
 
 {{< img src="tracing/visualization/trace_view.png" alt="vue trace" >}}
 

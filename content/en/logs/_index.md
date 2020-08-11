@@ -7,7 +7,7 @@ aliases:
     - /guides/logs/
     - /logs/logging_without_limits
 further_reading:
-- link: "/logs/guide"
+- link: "/logs/guide/"
   tag: "Guide"
   text: Additional helpful articles about log collection and processing.
 - link: "https://learn.datadoghq.com"
@@ -16,6 +16,8 @@ further_reading:
 ---
 
 {{< vimeo 293195142 >}}
+
+</br>
 
 Sometimes, your infrastructure may generate a volume of log events that is too large or has significant fluctuations. In this situation, you may need to choose which logs to send to a log management solution, and which logs to archive. Filtering your logs before sending them, however, may lead to gaps in coverage or the accidental removal of valuable data.
 
@@ -47,4 +49,4 @@ Datadog's log management removes these limitations by decoupling log ingestion f
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /security_monitoring
+[1]: /security_monitoring/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
         {{ partial "header-scripts.html" . }}
@@ -59,7 +59,7 @@
                     <div class=" guide-col d-flex flex-column">
                             <div class="inner-content">
                             <div class="guide-no">{{ add $i 1}}.</div>
-                        <h5 class="text-black text-uppercase pt-0">{{ $guide.title}} </h5>
+                        <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
 
                             <p class="small">{{ $guide.desc }}</p>
                             <div class="mt-auto">

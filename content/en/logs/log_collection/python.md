@@ -7,16 +7,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/python-logging-best-practices/"
   tag: "Blog"
   text: "How to collect, customize, and centralize Python logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -25,7 +25,7 @@ further_reading:
 
 Use your favorite Python logger to log into a file on your host. Then monitor the file with the Datadog Agent to send your logs to Datadog.
 
-## Setup
+## Configure your logger
 
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.
 To address this use case it is strongly recommended to use a JSON formatter when logging in order to:
@@ -37,10 +37,13 @@ Here are setup examples for the following logging libraries:
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][3]
 
-### Inject trace IDs in your logs
+## Connect your service across logs and traces
 
-If APM is enabled for this application, improve the [correlation between application logs and traces][3] to automatically add trace and span IDs to your logs.
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
+
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
 Once this is done, the log should have the following format:
 
@@ -48,7 +51,7 @@ Once this is done, the log should have the following format:
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect python logs from the file.
+Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect Python logs from the file.
 
 ### Log into a file
 
@@ -157,7 +160,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Restart the Agent][4] to apply the configuration changes.
+[Restart the Agent][5] to apply the configuration changes.
 
 ## Further Reading
 
@@ -165,5 +168,6 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /tracing/connect_logs_and_traces/python
-[4]: /agent/guide/agent-commands
+[3]: https://pypi.org/project/django-datadog-logger/
+[4]: /tracing/connect_logs_and_traces/python
+[5]: /agent/guide/agent-commands/

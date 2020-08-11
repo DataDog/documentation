@@ -9,6 +9,7 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  FORCE_COLOR: '1'
 
 # ================== copy scripts =============== #
 before_script:
@@ -39,26 +40,60 @@ build_preview:
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    - version_static_assets
+    - touch Makefile.config
+    - make examples
     - sync_integration_descriptions
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - build_hugo_site_new
-    - collect_static_assets
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - push_site_to_s3
+    - in-isolation deploy_preview
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-    #- remove_static_from_repo
-    #- create_artifact
-    #- create_artifact_untracked
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+
+# build_preview_legacy:
+#   <<: *base_template
+#   stage: build
+#   environment: "preview"
+#   variables:
+#     URL: ${PREVIEW_DOMAIN}
+#     CONFIG: ${PREVIEW_CONFIG}
+#     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
+#     LOCAL: "False"
+#   script:
+#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+#     - version_static_assets
+#     - touch Makefile.config
+#     - make examples
+#     - sync_integration_descriptions
+#     #- sync_integration_descriptions_cached
+#     - placehold_translations
+#     - update_preview_baseurl
+#     - build_hugo_site_new
+#     - in-isolation deploy_preview
+#     - collect_static_assets
+#     # remove service_checks json as we don't need to s3 push that..
+#     - rm -rf data/service_checks
+#     - push_site_to_s3
+#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+#     #- remove_static_from_repo
+#     #- create_artifact
+#     #- create_artifact_untracked
+#   artifacts:
+#     paths:
+#       - ${ARTIFACT_RESOURCE}
+#       - ./integrations_data
+#   only:
+#     - /.+?\/[a-zA-Z0-9_-]+/
 
 link_checks_preview:
   <<: *base_template
@@ -68,7 +103,9 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+  after_script:
+    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -98,6 +135,19 @@ index_algolia_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+sourcemaps_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - upload_sourcemaps
+  dependencies:
+    - build_preview
+  allow_failure: true
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template
@@ -106,19 +156,20 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/real_user_monitoring/android/_index.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
-    - version_static_assets
+    - touch Makefile.config
+    - make examples
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - build_hugo_site_new
-    - collect_static_assets
-    - push_site_to_s3
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - yarn run build:live
+    - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked
   artifacts:
@@ -126,9 +177,60 @@ build_live:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - content/en
     expire_in: 1 week
   only:
     - master
+
+
+# build_live_legacy:
+#   <<: *base_template
+#   stage: build
+#   environment: "live"
+#   variables:
+#     CONFIG: ${LIVE_CONFIG}
+#     URL: ${LIVE_DOMAIN}
+#     UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules"
+#     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
+#     LOCAL: "False"
+#   script:
+#     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
+#     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
+#     - version_static_assets
+#     - touch Makefile.config
+#     - make examples
+#     - sync_integration_descriptions
+#     - sync_integration_metrics
+#     - placehold_translations
+#     - build_hugo_site_new
+#     - in-isolation deploy_live
+#     - collect_static_assets
+#     - push_site_to_s3
+#     - create_artifact
+#     - create_artifact_untracked
+#   artifacts:
+#     when: on_success
+#     paths:
+#       - ${ARTIFACT_RESOURCE}
+#       - ./integrations_data
+#       - content/en
+#     expire_in: 1 week
+#   only:
+#     - master
+
+
+index_internal_doc:
+  stage: post-deploy
+  environment: "live"
+  image: registry.ddbuild.io/datadoc/webapp:prod-released
+  dependencies:
+    - build_live
+  only:
+    - master
+  except: [ tags, schedules ]
+  tags: [ "runner:docker", "size:large" ]
+  script:
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
 test_live_link_checks:
   <<: *base_template
@@ -137,7 +239,9 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+  after_script:
+    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - master
 
@@ -153,6 +257,19 @@ index_algolia:
     - build_live
   only:
     - schedules
+
+sourcemaps_live:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - upload_sourcemaps
+  dependencies:
+    - build_live
+  allow_failure: true
+  only:
+    - master
 
 evaluate_missing_metrics:
   <<: *base_template

@@ -94,7 +94,7 @@ TOPLIST_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/querying/#configuring-a-graph
-[2]: /ja/logs/explorer/search/#search-syntax
-[3]: /ja/dashboards/graphing_json/widget_json
-[4]: /ja/dashboards/graphing_json/request_json
+[2]: /ja/logs/search_syntax/
+[3]: /ja/dashboards/graphing_json/widget_json/
+[4]: /ja/dashboards/graphing_json/request_json/
 [5]: /ja/dashboards/graphing_json/widget_json/#conditional-format-schema

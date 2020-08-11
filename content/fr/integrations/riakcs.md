@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,10 +38,11 @@ supported_os:
 
 Enregistrez vos métriques Riak CS dans Datadog pour :
 
-* Visualiser les métriques clés de Riak CS
-* Corréler les performances de Riak CS avec le reste de vos applications
+- Visualiser les métriques clés de Riak CS
+- Corréler les performances de Riak CS avec le reste de vos applications
 
-## Implémentation
+## Configuration
+
 ### Installation
 
 Le check RiakCS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds RiakCS.
@@ -49,21 +51,20 @@ Le check RiakCS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez
 
 1. Modifiez le fichier `riakcs.yamld/conf.` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple riakcs.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-        init_config:
+   ```yaml
+   init_config:
 
-        instances:
+   instances:
+     ## @param access_id - string - required
+     ## Enter you RiakCS access key.
+     #
+     - access_id: "<ACCESS_KEY>"
 
-            ## @param access_id - string - required
-            ## Enter you RiakCS access key.
-            #
-          - access_id: "<ACCESS_KEY>"
-
-            ## @param access_secret - string - required
-            ## Enter the corresponding RiakCS access secret.
-            #
-            access_secret: "<ACCESS_SECRET>"
-    ```
+       ## @param access_secret - string - required
+       ## Enter the corresponding RiakCS access secret.
+       #
+       access_secret: "<ACCESS_SECRET>"
+   ```
 
 2. [Redémarrez l'Agent][5].
 
@@ -72,16 +73,17 @@ Le check RiakCS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez
 [Lancez la sous-commande `status` de l'Agent][6] et cherchez `riakcs` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "riakcs" >}}
  La plupart des métriques d'API S3 sont incluses, ainsi que des statistiques relatives à la mémoire. Certaines ont été exclues :
 
-* bucket_acl_(get|put)
-* object_acl_(get|put)
-* bucket_policy_(get|put|delete)
-* _in_(one|total)
-* _time_error_*
-* _time_100
+- bucket*acl*(get|put)
+- object*acl*(get|put)
+- bucket*policy*(get|put|delete)
+- _in_(one|total)
+- _time_error_\*
+- \_time_100
 
 Toutes ces métriques exclues ainsi que de nombreuses autres (plus de 1 000 métriques au choix) peuvent être ajoutées en les spécifiant dans le
 fichier de configuration `riakcs.d/conf.yaml` avec la clé `metrics` dans `instance_config` ; la valeur doit être une liste de noms de métriques.
@@ -89,15 +91,17 @@ fichier de configuration `riakcs.d/conf.yaml` avec la clé `metrics` dans `insta
 [Consultez la liste complète des métriques disponibles][8].
 
 ### Événements
+
 Le check RiakCS n'inclut aucun événement.
 
 ### Checks de service
 
 **riakcs.can_connect** :
 
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'endpoint Riak CS pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'endpoint Riak CS pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
@@ -112,5 +116,5 @@ Pour mieux comprendre comment (ou pourquoi) surveiller la disponibilité et les 
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/riakcs/metadata.csv
 [8]: https://github.com/basho/riak_cs/wiki/Riak-cs-and-stanchion-metrics
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/
 [10]: https://www.datadoghq.com/blog/monitor-riak-cs-performance-and-availability

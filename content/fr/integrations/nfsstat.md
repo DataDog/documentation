@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -31,7 +34,7 @@ supported_os:
 
 L'intégration NFS recueille les métriques concernant les points de montage sur le client NFS. Elle repose sur l'outil `nfsiostat`, qui permet d'afficher les [statistiques][1] par montage du client NFS.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
 
@@ -71,5 +74,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
+[7]: https://docs.datadoghq.com/fr/help/
+[8]: https://docs.datadoghq.com/fr/monitors/monitor_types/network/

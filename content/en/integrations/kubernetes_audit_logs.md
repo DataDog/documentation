@@ -142,12 +142,12 @@ In the last section, for everything that was not explicitly configured by the pr
         - hostPath:
             path: /var/log/kubernetes/apiserver
           name: auditdir
-         - name: dd-agent-config
+        - name: dd-agent-config
             configMap:
               name: dd-agent-config
               items:
-              - key: kubernetes-audit-log
-                path: conf.yaml
+                - key: kubernetes-audit-log
+                  path: conf.yaml
       # (...)
     ```
 
@@ -187,4 +187,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
 [4]: /agent/kubernetes/log/
 [5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: /help
+[6]: /help/

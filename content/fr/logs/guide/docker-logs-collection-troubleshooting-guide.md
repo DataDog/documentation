@@ -87,7 +87,7 @@ Cela signifie que l'Agent de logging est en cours d'exécution, mais qu'il n'a p
 
 ### Le daemon Docker a démarré après l'Agent de host
 
-Si le daemon Docker démarre alors que l'Agent de host est déjà en cours d'exécution, redémarrez l'Agent pour relancer la collecte de logs de conteneur.
+Si vous utilisez une version < 7.17 de l'Agent et que le daemon Docker démarre alors que l'Agent de host est déjà en cours d'exécution, redémarrez l'Agent pour relancer la collecte de logs de conteneur.
 
 ### Le socket Docker n'a pas été monté au démarrage de l'Agent de conteneur
 
@@ -163,7 +163,7 @@ Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez configurer l'Ag
 
 4. Montez le fichier YAML sur votre conteneur en suivant les instructions disponibles dans la [documentation sur l'Agent Docker][3]. Pour découvrir comment définir le pilote de logging utilisé par un conteneur Docker, [consultez cette documentation][4].
 
-[1]: https://docs.datadoghq.com/fr/help
+[1]: /fr/help/
 [2]: /fr/integrations/journald/#setup
 [3]: /fr/agent/docker/?tab=standard#mounting-conf-d
 [4]: https://docs.docker.com/config/containers/logging/journald/

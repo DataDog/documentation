@@ -23,12 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-kerning: normal;
-  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1, ss03=1, ss06=1";
-  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1";
+  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
   /** "ss01" 1 is for the alternate 'a' character */
   /** "ss05" 1 is for alternate 'y' character */
   font-weight: 200;
@@ -118,7 +118,7 @@ a:focus {
 pre {
   display: block;
   padding: 10px;
-  margin: -0.8rem 0 10px;
+  margin: 0;
   position: relative;
   font-size: 14px;
   line-height: 1.428571429;
@@ -132,9 +132,9 @@ pre {
   word-wrap: normal;
   overflow: auto;
 
-  .api &{
-    border: 1px solid transparent;
-  }
+  // .api &{
+  //   border: 1px solid transparent;
+  // }
   code {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -258,7 +258,7 @@ h2 {
 }
 h4{
   text-transform: uppercase;
-  padding-top: 14px;
+  margin-top: 14px;
 }
 
 h5{
@@ -266,7 +266,18 @@ h5{
   > a{
     color: $ddpurple !important;
   }
-  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.announcement_banner.open ~ .container .main {
+
+  h2,h3,h4,h5 {
+    &:before {
+      margin-top: -110px; 
+      height: 110px; 
+    }
+  }
+
 }
 
 .main {
@@ -276,7 +287,7 @@ h5{
   }
   z-index: 1;
   padding-left: 29px;
-  padding-top: 29px;
+  // padding-top: 29px;
   padding-bottom: 100px;
   h2 > a,
   h3 > a,
@@ -284,10 +295,24 @@ h5{
   h5 > a {
     color: #000;
     border-bottom: 1px solid transparent;
+    pointer-events: initial;
     &:hover {
       border-bottom: 1px solid #000;
     }
   }
+
+  h2,h3,h4,h5 {
+    &:before {
+      display: block; 
+      content: ""; 
+      position: relative;
+      margin-top: -80px; 
+      height: 80px; 
+      visibility: hidden; 
+      pointer-events: none;
+    }
+  }
+
   .tab-content a,
   & > a,
   & p a,
@@ -330,31 +355,29 @@ h5{
   p + .highlight {
     position: relative;
   }
-  p + h1,
-  p + h2,
-  p + h3,
-  p + h4,
-  ol + h1,
-  ol + h2,
-  ol + h3,
-  ol + h4,
-  ul + h1,
-  ul + h2,
-  ul + h3,
-  ul + h4,
-  span + h1,
-  span + h2,
-  span + h3,
-  span + h4,
-  table + h1,
-  table + h2,
-  table + h3,
-  table + h4 {
-    padding-top: 14px;
+
+  // h1 spacing
+  p + h1, ol + h1, ul + h1, span + h1, table + h1 {
+    margin-top: 14px;
+  }
+
+  // h2 spacing
+  p + h2, ol + h2, ul + h2, span + h2, table + h2 {
+    margin-top: 30px;
+  }
+
+  // h3 spacing
+  p + h3, ol + h3, ul + h3, span + h3, table + h3 {
+    margin-top: 30px;
+  }
+
+  // h4 spacing
+  p + h4, ol + h4, ul + h4, span + h4, table + h4 {
+    margin-top: 30px;
   }
 
   h2 + h3 {
-    padding-top: 14px;
+    margin-top: 14px;
   }
 
   ul, ol {
@@ -376,6 +399,14 @@ h5{
   }
   p + ul, div + ul {
     margin-bottom: 1rem;
+  }
+}
+
+.mainContent-wrapper {
+  h1 {
+    @media (min-width: 992px) {
+      width: 85%;
+    }
   }
 }
 

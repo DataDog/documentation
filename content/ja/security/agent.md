@@ -9,6 +9,8 @@ further_reading:
     tag: Documentation
     text: Datadog に送信されるデータの主要カテゴリを確認する
 ---
+<div class="alert alert-info">このページは Datadog のセキュリティに関するものです。セキュリティ監視製品をお探しの場合は、<a href="/security_monitoring" target="_blank">セキュリティ監視セクション</a>をご覧ください。</div>
+
 この記事は、[データセキュリティに関するドキュメントシリーズ][1]の一部です。
 
 お客様は、ローカルにインストールされた [Agent][2] または [HTTP API][3] を使用して Datadog サービスにデータを送信できます。Datadog を使用する上で Datadog Agent を必ず使用しなければならないわけではありませんが、大半のお客様が Agent を利用しています。ここでは、安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。
@@ -51,12 +53,12 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security
-[2]: /ja/agent
-[3]: /ja/api
-[4]: /ja/agent/faq/network
-[5]: /ja/agent/proxy
-[6]: /ja/agent/troubleshooting
+[1]: /ja/security/
+[2]: /ja/agent/
+[3]: /ja/api/
+[4]: /ja/agent/faq/network/
+[5]: /ja/agent/proxy/
+[6]: /ja/agent/troubleshooting/
 [7]: https://coreos.com/clair
 [8]: https://snyk.io
 [9]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
@@ -64,4 +66,4 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[14]: /ja/agent/guide/secrets-management
+[14]: /ja/agent/guide/secrets-management/

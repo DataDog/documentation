@@ -2,6 +2,8 @@
 title: Integrations
 kind: documentation
 disable_toc: true
+aliases:
+    - /integrations/verisign_openhybrid/
 description: Gather data from all of your systems, apps, & services
 ---
 
@@ -11,4 +13,4 @@ What's an integration? See [Introduction to Integrations][1].
 
 {{< integrations >}}
 
-[1]: /getting_started/integrations
+[1]: /getting_started/integrations/

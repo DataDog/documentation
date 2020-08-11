@@ -16,8 +16,8 @@ categories:
 dependencies:
   - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/pivotal_platform.md'
 aliases:
-  - /integrations/cloud_foundry/
-doc_link: /integrations/pivotal_platform/
+  - /ja/integrations/cloud_foundry/
+doc_link: /ja/integrations/pivotal_platform/
 ddtype: check
 ---
 ## 概要
@@ -417,9 +417,11 @@ Datadog の[メトリクスエクスプローラー][23]ページで、`cloudfou
 
 ### メトリクス
 
-次のメトリクスが Datadog Firehose Nozzle (`cloudfoundry.nozzle`) によって送信されます。Datadog Agent リリースは、特殊な独自メトリクスを送信しません。Director ランタイム構成で構成した Agent チェックから通常のメトリクスだけ (およびデフォルトで[システム][24]、[ネットワーク][25]、[ディスク][26]、[ntp][27] の各メトリクス) が送信されます。
+次のメトリクスが Datadog Firehose Nozzle (`cloudfoundry.nozzle`) によって送信されます。Datadog Agent リリースは、特殊な独自メトリクスを送信しません。Director ランタイム構成で構成した Agent チェックから通常のメトリクスだけ (およびデフォルトで[システム][24]、[ネットワーク][25]、[ディスク][26]、[NTP][27] の各メトリクス) が送信されます。
 
 Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリクスとして)、ValueMetrics、および ContainerMetrics のみを収集します。ログメッセージとエラーは無視されます。
+
+メトリクスのリストは、PCF のバージョンおよびデプロイにより異なります。Datadog では、collects counter and gauge metrics emitted from the [Loggregator v2 API][28] から送信されるカウンターおよびゲージのメトリクスを収集します。デフォルトで送信されるメトリクスの一覧は、[PCF ドキュメント][29]を参照してください。
 
 {{< get-metrics-from-git "cloud_foundry" >}}
 
@@ -427,16 +429,16 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [2]: https://network.pivotal.io/products/datadog-application-monitoring
 [3]: /ja/integrations/pivotal_pks/
 [4]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
-[5]: /ja/developers/metrics/dogstatsd_metrics_submission
+[5]: /ja/developers/metrics/dogstatsd_metrics_submission/
 [6]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [7]: https://github.com/cloudfoundry/multi-buildpack
 [8]: https://github.com/cloudfoundry/multi-buildpack#usage
 [9]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
-[12]: /ja/tracing/setup
-[13]: /ja/agent/logs/proxy
-[14]: /ja/libraries
+[12]: /ja/tracing/setup/
+[13]: /ja/agent/logs/proxy/
+[14]: /ja/libraries/
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
 [17]: https://bosh.io/docs/runtime-config.html#addons
@@ -450,3 +452,5 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [25]: /ja/integrations/network/#metrics
 [26]: /ja/integrations/disk/#metrics
 [27]: /ja/integrations/ntp/#metrics
+[28]: https://github.com/cloudfoundry/loggregator-api
+[29]: https://docs.cloudfoundry.org/running/all_metrics.html

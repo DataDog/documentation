@@ -11,7 +11,6 @@ dependencies:
 categories:
     - cloud
     - configuration & deployment
-    - aws
 ddtype: crawler
 ---
 

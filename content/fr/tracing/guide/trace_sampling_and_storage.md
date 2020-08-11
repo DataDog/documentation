@@ -6,19 +6,19 @@ aliases:
   - /fr/tracing/faq/how-long-is-tracing-data-stored/
   - /fr/tracing/getting_further/trace_sampling_and_storage
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: En savoir plus sur les services dans Datadog
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
@@ -63,7 +63,7 @@ Concernant le cycle de vie d'une trace, les décisions sont prises au niveau du 
     | **AUTO_KEEP**   | Décision d'échantillonnage automatique | L'Agent conserve la trace.                                                                                                                                                                                                     |
     | **MANUAL_KEEP** | Entrée utilisateur                  | L'Agent conserve la trace, et le backend applique uniquement l'échantillonnage s'il dépasse le volume maximal autorisé. Veuillez noter qu'en cas d'utilisation conjointe avec le [filtrage App Analytics][3], toutes les spans `MANUAL_KEEP` sont considérées comme des spans facturables. |
 
-   Les traces se voient automatiquement attribuer une priorité AUTO_DROP ou AUTO_KEEP, et un quota est appliqué pour empêcher l'Agent de recueillir plus de traces qu'autorisé. Les utilisateurs peuvent [ajuster manuellement](#controler-manuellement-la-priorite-des-traces) cet attribut pour prioriser des types de traces précis ou supprimer filtrer qui ne sont pas intéressantes.
+   Les traces se voient automatiquement attribuer une priorité AUTO_DROP ou AUTO_KEEP, et un quota est appliqué pour empêcher l'Agent de recueillir plus de traces qu'autorisé. Les utilisateurs peuvent [ajuster manuellement](#controler-manuellement-la-priorite-des-traces) cet attribut pour prioriser des types de traces précis ou supprimer celles qui ne sont pas intéressantes.
 
 2. Agent de trace (au niveau du host ou du conteneur) : l'Agent reçoit des traces de plusieurs clients de tracing et des requêtes de filtrage basées sur deux règles :
     * S'assurer que les traces conservées correspondent à un échantillon représentatif (services, ressources, codes de statut HTTPS, erreurs).
@@ -380,6 +380,6 @@ Les traces individuelles sont stockées pendant 15 jours. Ainsi, toutes les tra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /fr/tracing/app_analytics/#span-filtering
 [4]: /fr/security/tracing/#resource-filtering

@@ -7,7 +7,7 @@ Ce document aborde la configuration d'un environnement Python permettant de trav
 
 ## Python 2 ou 3
 
-Les intégrations s'exécutent soit dans l'environnement Python intégré de l'Agent, soit dans l'environnement de test. La version actuelle de l'environnement intégré est enregistrée dans le [code Omnibus][1]. Les environnements de l'Agent et de test sont en Python 2, mais une mise à niveau éventuelle vers Python 3 est inévitable. Les nouvelles intégrations doivent donc être compatibles avec les deux versions.
+Les intégrations s'exécutent soit dans l'environnement Python intégré de l'Agent, soit dans l'environnement de test. La version actuelle de l'environnement intégré est enregistrée dans le [code Omnibus][1]. Les environnements de l'Agent et de test sont en Python 2 pour l'Agent v6, et en Python 3 pour l'Agent v7. Assurez-vous que vos intégrations sont compatibles avec les deux versions.
 
 ## Installation de Python
 
@@ -15,22 +15,22 @@ De nombreux systèmes d'exploitation sont livrés avec Python pré-installé. Si
 
 ### macOS
 
-Toutes les versions récentes de macOS sont livrées avec Python pré-installé. Sa version peut toutefois être plus ancienne que celle utilisée par l'Agent. Il se peut également que vous ne disposiez pas de tous les outils et de toutes les dépendances nécessaires. Vous devez installer un nouvel interpréteur Python. Vous n'avez *pas* besoin de passer par l'App Store pour y parvenir.
+Toutes les versions récentes de macOS sont livrées avec Python pré-installé. Sa version peut toutefois être plus ancienne que celle utilisée par l'Agent. Il se peut également que vous ne disposiez pas de tous les outils et de toutes les dépendances nécessaires. Vous devez installer un nouvel interpréteur Python qui peut être géré _sans_ passer par l'App Store.
 
 Options disponibles :
 
-* [[Homebrew][2]]: Follow the "[Doing it Right][3]" instructions.
-* [[Miniconda][4]]: Follow the "[Conda installation][5]" instructions.
+- [[Homebrew][2]]: Follow the "[Doing it Right][3]" instructions.
+- [[Miniconda][4]]: Follow the "[Conda installation][5]" instructions.
 
-Il est conseillé d'installer un [gestionnaire d'environnement][6] pour préserver un système Python sain.
+Nous vous conseillons d'installer un [gestionnaire d'environnement](#gestionnaire-d-environnement-virtuel) pour ne pas altérer l'installation système de Python.
 
 ### Linux
 
-Toutes les distributions populaires de Linux sont livrées avec Python pré-installé, et probablement avec une version acceptable. Il est recommandé d'installer un [gestionnaire d'environnement][6] pour préserver un système Python sain. Consultez la documentation relative à la gestion de paquet de votre distribution pour en savoir plus.
+Toutes les distributions populaires de Linux sont livrées avec Python pré-installé, et probablement avec une version suffisamment récente. Nous vous conseillons d'installer un [gestionnaire d'environnement](#gestionnaire-d-environnement-virtuel) pour ne pas altérer l'installation système de Python. Consultez la documentation relative à la gestion de paquet de votre distribution pour en savoir plus.
 
 ### Windows
 
-Windows ne dispose généralement pas d'un environnement Python. La [documentation Python officielle][7] contient des instructions d'installation détaillées et des liens vers des outils et des articles supplémentaires.
+Windows ne dispose généralement pas d'un environnement Python. La [documentation Python officielle][6] contient des instructions d'installation détaillées et des liens vers des outils et des articles supplémentaires.
 
 ## Gestionnaire d'environnement virtuel
 
@@ -38,20 +38,19 @@ Chaque intégration possède son propre ensemble de dépendances qui doit être 
 
 ### Virtualenv et Virtualenvwrapper
 
-Datadog recommande l'utilisation de [Virtualenv][8] pour gérer les environnements virtuels Python et de [virtualenvwrapper][9] pour faciliter le processus. Vous trouverez un [guide complet][10] dans le Hitchhiker's Guide to Python (en anglais), qui explique comment configurer ces deux outils.
+Datadog recommande l'utilisation de [Virtualenv][7] pour gérer les environnements virtuels Python et de [virtualenvwrapper][8] pour faciliter le processus. Vous trouverez un [guide complet][9] dans le Hitchhiker's Guide to Python (en anglais), qui explique comment configurer ces deux outils.
 
 ### Miniconda
 
-Miniconda dispose d'outil de gestion des environnements virtuels. Consultez le [guide officiel][11] pour en savoir plus.
+Miniconda intègre un outil de gestion des environnements virtuels. Consultez le [guide officiel][10] pour en savoir plus.
 
 [1]: https://github.com/DataDog/omnibus-software/blob/master/config/software/python.rb#L21
 [2]: https://brew.sh/#install
 [3]: https://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
 [4]: https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
 [5]: https://conda.io/docs/user-guide/install/macos.html
-[6]: #virtual-environment-manager
-[7]: https://docs.python.org/2.7/using/windows.html
-[8]: https://pypi.python.org/pypi/virtualenv
-[9]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html
-[10]: https://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
-[11]: https://conda.io/docs/user-guide/tasks/manage-environments.html
+[6]: https://docs.python.org/2.7/using/windows.html
+[7]: https://pypi.python.org/pypi/virtualenv
+[8]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html
+[9]: https://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
+[10]: https://conda.io/docs/user-guide/tasks/manage-environments.html

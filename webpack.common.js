@@ -18,6 +18,9 @@ const commonConfig = env => {
             writeToDisk: true,
             sortManifest: true,
             publicPath: 'static/'
+        }),
+        new webpack.DefinePlugin({
+            CI_COMMIT_SHORT_SHA: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA || '00000000')
         })
     ];
 
@@ -33,6 +36,8 @@ const commonConfig = env => {
             '@babel/polyfill': '@babel/polyfill',
             'main-dd-js': './scripts/main-dd-js.js',
             'lang-redirects': './scripts/lang-redirects.js',
+            'region-redirects': './scripts/region-redirects.js',
+            'api-redirect': './scripts/api-redirect.js',
             'main-dd-css': './styles/style.scss',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js'
         },

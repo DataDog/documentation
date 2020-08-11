@@ -51,15 +51,15 @@ Datadog は、以下の ServiceNow ツールと統合されます。
 
 ServiceNow で以下を実行します。
 
-- _Update Set (更新セット)_ を検索します。
-- メニューで、_取得された更新セット_を見つけます。
+- **Update Set (更新セット)** を検索します。
+- メニューで、**取得された更新セット**を見つけます。
 - `Datadog-SNow_Update_Set_vX.X.X.xml` ファイルを手動でインポートします。
 
 提供されている [Datadog XML 更新セット][1]をインポートします。
 
 {{< img src="integrations/servicenow/servicenow-import-update-set.png" alt="servicenow インテグレーション" >}}
 
-XML ファイルをアップロードすると、状態が _Loaded_ と表示されます。更新セットの名前をクリックして、コードをプレビューし、システムへコミットします。
+XML ファイルをアップロードすると、状態が `Loaded` と表示されます。更新セットの名前をクリックして、コードをプレビューし、システムへコミットします。
 
 {{< img src="integrations/servicenow/servicenow-loaded-update-set.png" alt="servicenow インテグレーション" >}}
 
@@ -67,11 +67,11 @@ XML ファイルをアップロードすると、状態が _Loaded_ と表示さ
 
 {{< img src="integrations/servicenow/servicenow-preview-update-set.png" alt="servicenow インテグレーション" >}}
 
-_Commit Update Set_ を選択して、アプリケーションをシステムにマージします。
+**Commit Update Set** を選択して、アプリケーションをシステムにマージします。
 
 {{< img src="integrations/servicenow/servicenow-commit-update-set.png" alt="servicenow インテグレーション" >}}
 
-これで、ナビゲーションメニューで _Datadog_ を検索すると、テーブルが表示されるようになります。
+これで、ナビゲーションメニューで **Datadog** を検索すると、テーブルが表示されるようになります。
 
 {{< img src="integrations/servicenow/servicenow-datadog-tables.png" alt="servicenow インテグレーション" >}}
 
@@ -79,13 +79,13 @@ _Commit Update Set_ を選択して、アプリケーションをシステムに
 
 インポートテーブルにアクセスして変換マップを適用するには、ServiceNow ユーザーに次のアクセス許可が必要です。
 
-- _x_datad_datadog.user_
-- _import_set_loader_
-- _import_transformer_
+- `x_datad_datadog.user`
+- `import_set_loader`
+- `import_transformer`
 
 ITOM および ITSM ユーザーの場合
 
-_Incident_ テーブルまたは _Event_ テーブルに直接通知を送信する場合は、_ITIL_ および _evt_mgmt_integration_ ロールが必要です。
+**Incident** テーブルまたは **Event** テーブルに直接通知を送信する場合は、`ITIL` および `evt_mgmt_integration` ロールが必要です。
 
 ### CMDB で使用するためのインテグレーションの構成
 
@@ -93,7 +93,7 @@ _Incident_ テーブルまたは _Event_ テーブルに直接通知を送信す
 
 **ディスカバリーソースとして Datadog を追加して、CI を一致させ、CMDB に追加します。**
 
-1. ServiceNow で、_System Definitions > Choice Lists_ に移動し、次の値を使用して新しいエントリを作成します。
+1. ServiceNow で、**System Definitions > Choice Lists** に移動し、次の値を使用して新しいエントリを作成します。
 
     - **Table**: Configuration Item [cmdb_ci]
     - **Element**: discovery_source
@@ -102,10 +102,12 @@ _Incident_ テーブルまたは _Event_ テーブルに直接通知を送信す
 
     {{< img src="integrations/servicenow/servicenow-cmdb-add-discovery-source.png" alt="ディスカバリーソースを追加" >}}
 
-2. Datadog インテグレーションを検索し、メニューの _Datadog Integration Settings_ をクリックします。
-3. _Enable adding Datadog hosts into ServiceNow CMDB_ の設定を有効にします。
+2. Datadog インテグレーションを検索し、メニューの **Datadog Integration Settings** をクリックします。
+3. **Enable adding Datadog hosts into ServiceNow CMDB** の設定を有効にします。
 
-    - これで、Datadog は構成データを ServiceNow CMDB へプッシュできるようになります。Datadog 内で ServiceNow CMDB の CI と一致しているホストにタグを追加できます。**注**: タグ同期機能が働くためには、&quot;Enable adding Datadog hosts into ServiceNow CMDB &quot;オプションが有効になっている必要があります。
+    - これで、Datadog はコンフィギュレーションデータを ServiceNow CMDB へプッシュできるようになります。Datadog 内で ServiceNow CMDB の CI と一致しているホストにタグを追加できます。
+
+      **注**: タグ同期機能が働くためには、"Enable adding Datadog hosts into ServiceNow CMDB" オプションが有効になっている必要があります。
 
     - デフォルトで、ServiceNow から Datadog へ同期されるタグはありません。タグのデータソースとしては、次の 3 つがあります。
 
@@ -126,7 +128,7 @@ _Incident_ テーブルまたは _Event_ テーブルに直接通知を送信す
 Datadog で @servicenow を使用する通知は、ServiceNow タイルで選択された中間テーブルに入力されます。以下の手順は、Datadog インテグレーションページで ServiceNow タイルを既にセットアップしていることを前提としています。それが完了したら、以下を行います。
 
 1. ドロップダウンから、ドロップダウンから通知を送信する中間テーブルを選択します。
-2. インテグレーションが正しくセットアップされているかを検証するには、モニターまたはイベント通知に @servicenow を追加します。未加工のデータが中間テーブルの行に挿入され、作成したマッピングと変換で指定されている ServiceNow テーブルに転送されます。
+2. インテグレーションが正しくセットアップされているかを検証するには、モニターまたはイベント通知に `@servicenow` を追加します。未加工のデータが中間テーブルの行に挿入され、作成したマッピングと変換で指定されている ServiceNow テーブルに転送されます。
 3. [変換マップを使用](#customize-data-with-transform-maps)して、テーブルに送信されるデータのフォーマットをカスタマイズします。
 4. [Datadog で ServiceNow インテグレーションタイルを構成します](#configure-the-servicenow-tile-in-datadog)
 
@@ -150,9 +152,9 @@ Datadog は、インシデントと CMDB 構成アイテムを作成する変換
 
 変換マップに移動するには、以下の手順に従います。
 
-1. _Datadog Tables_ または _Import hosts_ を検索します。
+1. **Datadog Tables** または **Import hosts** を検索します。
 2. サイドバーでテーブルを選択します。
-3. _Related Links_ セクションで _Transform Maps_ ボタンをクリックします。
+3. **Related Links** セクションで **Transform Maps** ボタンをクリックします。
 
 {{< img src="integrations/servicenow/servicenow-cmdb-navigate-to-transform-maps.png" alt="変換マップに移動" >}}
 
@@ -164,13 +166,13 @@ Datadog は、インシデントと CMDB 構成アイテムを作成する変換
 
 **ITOM および ITSM で使用する場合**
 
-_Datadog Incident_ および _Datadog Event_ テーブルは、変換マップを使用して、Datadog イベントを ServiceNow の対応するインシデントおよびイベントに変換します。
+**Datadog Incident** および **Datadog Event** テーブルは、変換マップを使用して、Datadog イベントを ServiceNow の対応するインシデントおよびイベントに変換します。
 
 ## トラブルシューティング
 
 ServiceNow のテーブルにイベントが表示されず、代わりに
 
-- Datadog インテグレーションタイルにエラーメッセージが表示される、または _Error while trying to post to your ServiceNow instance_ 通知を受け取った場合
+- Datadog インテグレーションタイルにエラーメッセージが表示される、または `Error while trying to post to your ServiceNow instance` 通知を受け取った場合
 
   - インスタンス名を入力したときに、サブドメインのみを使用したかを確認します。
   - 作成したユーザーが必要なアクセス許可を持っているかを確認します。
@@ -178,10 +180,10 @@ ServiceNow のテーブルにイベントが表示されず、代わりに
 
 - インテグレーションが構成され、アラートがトリガーされているが、チケットが作成されない場合
 
-  - 中間テーブルにデータが挿入されるかを確認します。データが挿入される場合、問題はマッピングと変換にあります。ServiceNow の _Transform Errors_ に移動し、マッピングとスクリプトをさらにデバッグします。
+  - 中間テーブルにデータが挿入されるかを確認します。データが挿入される場合、問題はマッピングと変換にあります。ServiceNow の **Transform Errors** に移動し、マッピングとスクリプトをさらにデバッグします。
   - タイルで指定した中間テーブルを使用していることを確認します。
 
-  ServiceNow ユーザーは、インポートテーブルにアクセスできるように、rest_service および x_datad_datadog.user ロールが必要です。インシデントテーブルまたはイベントテーブルのいずれかに直接通知を送信する従来の方法を使用している場合は、itil および evt_mgmt_integration のアクセス許可が必要です。
+  ServiceNow ユーザーは、インポートテーブルにアクセスできるように、`rest_service` および `x_datad_datadog.user` ロールが必要です。インシデントテーブルまたはイベントテーブルのいずれかに直接通知を送信する従来の方法を使用している場合は、`itil` および `evt_mgmt_integration` のアクセス許可が必要です。
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
@@ -189,7 +191,7 @@ ServiceNow のテーブルにイベントが表示されず、代わりに
 
 ### Datadog インポートホストの AutoFlush ルール
 
-インポートセットテーブル _x_datad_datadog_import_host_ が蓄積する行が増えすぎることを防ぐために、最後の 24 時間のデータのみを保持する AutoFlush ルールがテーブルクリーナーツールに追加されました。この構成設定は、必要に応じて、フィルターナビゲーターで _sys_auto_flush_list.do_ に移動し、_x_datad_datadog_import_host_ テーブルのルールに入ることで変更できます。必要に応じて _Age in seconds_ フィールドを更新できます。
+インポートセットテーブル `x_datad_datadog_import_host` が蓄積する行が増えすぎることを防ぐために、最後の 24 時間のデータのみを保持する AutoFlush ルールがテーブルクリーナーツールに追加されました。このコンフィギュレーション設定は、必要に応じて、フィルターナビゲーターで `sys_auto_flush_list.do` に移動し、`x_datad_datadog_import_host` テーブルのルールに入ることで変更できます。必要に応じて `Age in seconds` フィールドを更新できます。
 
 {{< img src="integrations/servicenow/servicenow-cmdb-autoflush-rule.png" alt="インテグレーション構成設定" >}}
 
@@ -219,7 +221,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 ### カスタムマッピングの定義
 
-たとえば、_Datadog Incident Tables_ をクリックしてレコードの下部に移動すると、関連付けられている変換マップへのリンクが表示されます。
+たとえば、**Datadog Incident Tables** をクリックしてレコードの下部に移動すると、関連付けられている変換マップへのリンクが表示されます。
 
 {{< img src="integrations/servicenow/servicenow-datadog-incident-table.png" alt="servicenow インテグレーション" >}}
 
@@ -229,7 +231,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 {{< img src="integrations/servicenow/servicenow-click-transform-map.png" alt="servicenow インテグレーション" >}}
 
-上部には、変換レコードに関する 2 つの重要なフィールド、_Source table_ と _Target table_ があります。
+上部には、変換レコードに関する 2 つの重要なフィールド、`Source table` と `Target table` があります。
 
 {{< img src="integrations/servicenow/servicenow-source-target-fields.png" alt="servicenow インテグレーション" >}}
 
@@ -240,7 +242,7 @@ ServiceNow が Datadog アカウントに接続されると、受信したアラ
 
 ### 新しいフィールドマッピングの追加
 
-_New_ をクリックします。
+**New** をクリックします。
 
 {{< img src="integrations/servicenow/servicenow-click-new.png" alt="servicenow インテグレーション" >}}
 
@@ -248,13 +250,22 @@ _New_ をクリックします。
 
 {{< img src="integrations/servicenow/servicenow-select-source-target.png" alt="servicenow インテグレーション" >}}
 
-または、_Use source script_ チェックボックスをオンにして、変換を定義します。
+または、**Use source script** チェックボックスをオンにして、変換を定義します。
 
 {{< img src="integrations/servicenow/servicenow-script-example.png" alt="servicenow インテグレーション" >}}
 
+**注:** インテグレーションタイルのカスタムフィールドをマッピングする場合、Datadog イベントマップとインシデント変換マップのいずれかに次のマッピングスクリプトを使用できます。この例では、フィールド `my_field` がインテグレーションタイルのカスタムフィールドとして定義されています。
+```
+answer = (function transformEntry(source)
+{
+    var additional_info = JSON.parse(source.additional_info);
+    return additional_info.custom_my_field;
+})(source);
+``` 
+
 ### 複数のマッピングを定義する
 
-_Mapping Assist_ (関連リンクの下にあります) を使用すると、複数のソースとターゲットフィールドを一度にマップできます。
+**Mapping Assist** (関連リンクの下にあります) を使用すると、複数のソースとターゲットフィールドを一度にマップできます。
 
 {{< img src="integrations/servicenow/servicenow-mapping-assist.png" alt="servicenow インテグレーション" >}}
 
@@ -266,6 +277,6 @@ _Mapping Assist_ (関連リンクの下にあります) を使用すると、複
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.0.0.xml
+[1]: https://s3.amazonaws.com/dd-servicenow-update-sets/Datadog-SNow_Update_Set_v2.2.1.xml
 [2]: https://app.datadoghq.com/account/settings#integrations/servicenow
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

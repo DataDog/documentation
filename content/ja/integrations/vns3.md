@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - network
 creates_events: false
@@ -79,4 +79,4 @@ VNS3 チェックには、サービスのチェック機能は含まれません
 [4]: https://cohesive.net/dnld/Cohesive-Networks_VNS3-DataDog-Container-Guide.pdf
 [5]: https://youtu.be/sTCgCG3m4vk
 [6]: https://github.com/DataDog/integrations-extras/blob/master/vns3/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/help/

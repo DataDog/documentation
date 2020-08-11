@@ -1,5 +1,5 @@
 ---
-title: Writing a custom Agent check
+title: Writing a Custom Agent Check
 kind: documentation
 aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
@@ -67,6 +67,8 @@ For more details about the interface provided by the base class, browse the [API
 
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
 
+**Note**: The `min_collection_interval` parameter is available for both standard and custom integrations.
+
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 For Agent 6, `min_collection_interval` must be added at an instance level and is configured individually for each instance.
@@ -119,7 +121,7 @@ sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 
 It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. A wrapper function is provided for convenience to avoid the boilerplate around shelling out another process and collecting its output and exit code.
 
-To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
+To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.base.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
 
 ```text
 $ vgs -o vg_free
@@ -143,7 +145,7 @@ Here is an example of a check that returns the results of a command line program
 
 ```python
 # ...
-from datadog_checks.utils.subprocess_output import get_subprocess_output
+from datadog_checks.base.utils.subprocess_output import get_subprocess_output
 
 class LSCheck(AgentCheck):
     def check(self, instance):
@@ -156,9 +158,9 @@ class LSCheck(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto
+[1]: /developers/integrations/new_check_howto/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
-[4]: /help
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
+[4]: /help/
+[5]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

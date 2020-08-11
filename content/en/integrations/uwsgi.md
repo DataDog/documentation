@@ -1,24 +1,24 @@
 ---
+title: uWSGI
+name: uwsgi
+kind: integration
+description: 'Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.'
+short_description: 'Collect logs to track requests per second, bytes served, request status, and more.'
 categories:
   - log collection
   - web
 doc_link: /integrations/uwsgi/
-description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
-short_description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md"]
+has_logo: true
+integration_title: uWSGI
+is_public: true
+public_title: Integration Datadog-uWSGI
 ddtype: check
 git_integration_title: uwsgi
-has_logo: true
-integration_title: uwsgi
-is_public: true
-kind: integration
-name: uwsgi
-public_title: Integration Datadog-uWSGI
-short_description:
 supported_os:
 - linux
 - mac_os
 - windows
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md"]
 ---
 
 ## Overview
@@ -74,4 +74,4 @@ Need help? Contact [Datadog Support][6].
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging
 [5]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#apache-style-combined-request-logging
-[6]: /help
+[6]: /help/

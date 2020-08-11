@@ -6,10 +6,10 @@ aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
   - /graphing/metrics/summary/
 further_reading:
-  - link: "/metrics/explorer"
+  - link: "/metrics/explorer/"
     tag: "Documentation"
     text: "Metrics Explorer"
-  - link: "/metrics/distributions"
+  - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---
@@ -29,7 +29,7 @@ Click on a metric name to display a panel with more detailed information. The me
 ### Metric name
 
 The name of your metric in the [metric explorer][2], [dashboards][3], etc.
- 
+
 ### Number of distinct metrics
 
 A metric can correspond to multiple distinct metrics depending on its associated tags. Learn more in the [custom metrics][4] documentation.
@@ -79,11 +79,11 @@ The collection interval for the metric in seconds.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /metrics/explorer
-[3]: /dashboards
-[4]: /developers/metrics/custom_metrics
-[5]: /tagging
-[6]: /api/?lang=python#edit-metric-metadata
-[7]: /integrations
-[8]: /developers/metrics/units
-[9]: /developers/metrics/types
+[2]: /metrics/explorer/
+[3]: /dashboards/
+[4]: /developers/metrics/custom_metrics/
+[5]: /getting_started/tagging/
+[6]: /api/v1/metrics/#edit-metric-metadata
+[7]: /integrations/
+[8]: /developers/metrics/units/
+[9]: /developers/metrics/types/

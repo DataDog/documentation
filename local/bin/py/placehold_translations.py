@@ -25,7 +25,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 def get_disclaimer_from_params(config_location, key):
     try:
         with open(os.path.dirname(config_location) + f'/params.{key}.yaml') as f:
-            c_yaml = yaml.load(f.read())
+            c_yaml = yaml.load(f.read(), Loader=yaml.FullLoader)
             return c_yaml.get('disclaimer', '') or ''
     except:
         print("\x1b[31mERROR\x1b[0m: Error getting disclaimer")
@@ -34,7 +34,7 @@ def get_disclaimer_from_params(config_location, key):
 def get_languages(config_location):
     with open(config_location) as config:
         c = config.read()
-        c_yaml = yaml.load(c)
+        c_yaml = yaml.load(c, Loader=yaml.FullLoader)
         d = {}
         if 'en' in c_yaml:
             # this is languages.yaml
@@ -99,9 +99,10 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
         split = boundary.split(content, 2)
+        new_yml = {}
         if len(split) == 3:
             _, fm, content = split
-            new_yml = yaml.load(fm)
+            new_yml = yaml.load(fm, Loader=yaml.FullLoader)
         elif len(split) == 1:
             content = split[0]
             new_yml = {}
@@ -109,6 +110,11 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         if new_yml.get('aliases', None):
             new_aliases = []
             for alias in new_yml.get('aliases'):
+                # if alias is relative e.g no leading slash we need to resolve its abs path to be able to prepend /lang/
+                # e.g alias 13a-810-14c in security_monitor/default_rules/file.md
+                # becomes /ja/security_monitor/default_rules/13a-810-14c/
+                if not alias.startswith("/"):
+                    alias = f"/{sub_path}{alias}"
                 new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
             new_yml['aliases'] = new_aliases
         if new_glob["disclaimer"]:

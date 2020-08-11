@@ -7,16 +7,16 @@ aliases:
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
   - /developers/faq/what-do-notifications-do-in-datadog
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/manage_monitor"
+- link: "/monitors/manage_monitor/"
   tag: "Documentation"
   text: "Manage your monitors"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime for your monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -85,11 +85,11 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
-See the [list of integrations][14] that can be used to notify your team. 
+See the [list of integrations][11] that can be used to notify your team. 
 
 ### Modifications
 
-An [event][11] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][12] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
 
 ### Edit restrictions
 
@@ -115,7 +115,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 #### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][12].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][13].
 
 ### Tag variables
 
@@ -152,7 +152,7 @@ The following conditional variables are available:
 | `{{#is_exact_match}}`      | The context exactly matches the provided string                    |
 | `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
 | `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
-| `{{^is_no_data}}`          | The monitor is notifies on missing data                            |
+| `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
 | `{{#is_warning}}`          | The monitor warns                                                  |
 | `{{^is_warning}}`          | The monitor does not warn                                          |
 | `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
@@ -256,7 +256,7 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][14] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
 
@@ -327,11 +327,11 @@ The monitors link is customizable with additional parameters. The most common ar
 
 | Parameter | Example        | Displays                                                                        |
 |-----------|----------------|---------------------------------------------------------------------------------|
-| `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO%20DATA`, and `OK`) |
+| `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO DATA`, and `OK`)   |
 | `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
 | `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
-[1]: /monitors/monitor_types
+[1]: /monitors/monitor_types/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -377,17 +377,17 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types
+[1]: /monitors/monitor_types/
 [2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /integrations/jira
+[3]: /integrations/jira/
 [4]: /integrations/jira/#use-cases
-[5]: /integrations/pagerduty
+[5]: /integrations/pagerduty/
 [6]: /integrations/pagerduty/#troubleshooting
-[7]: /integrations/slack
+[7]: /integrations/slack/
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[9]: /integrations/webhooks
+[9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
-[11]: /events
-[12]: /monitors/guide/template-variable-evaluation
-[13]: /monitors/faq/what-are-recovery-thresholds
-[14]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[11]: https://docs.datadoghq.com/integrations/#cat-collaboration
+[12]: /events/
+[13]: /monitors/guide/template-variable-evaluation/
+[14]: /monitors/faq/what-are-recovery-thresholds/

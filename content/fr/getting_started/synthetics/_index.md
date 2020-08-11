@@ -38,15 +38,14 @@ Si vous ne l'avez pas encore fait, créez un [compte Datadog][2].
 ## Étapes suivantes
 
 {{< whatsnext desc="Une fois votre premier test Synthetics configuré, consultez les sections suivantes :">}}
-    {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}En savoir plus sur les tests Browser{{< /nextlink >}}
-    {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}En savoir plus sur les tests API{{< /nextlink >}}
-    {{< nextlink href="/synthetics/browser_tests/#sous-tests" tag="Documentation" >}}Créer un sous-test Browser{{< /nextlink >}}
-    {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres Synthetics avancés{{< /nextlink >}}
-
+{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}En savoir plus sur les tests Browser{{< /nextlink >}}
+{{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}En savoir plus sur les tests API{{< /nextlink >}}
+{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Créer un sous-test Browser{{< /nextlink >}}
+{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer des paramètres Synthetics avancés{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/
-[3]: /fr/getting_started/synthetics/private_location
-[4]: /fr/getting_started/synthetics/browser_test
-[5]: /fr/getting_started/synthetics/api_test
+[3]: /fr/getting_started/synthetics/private_location/
+[4]: /fr/getting_started/synthetics/browser_test/
+[5]: /fr/getting_started/synthetics/api_test/

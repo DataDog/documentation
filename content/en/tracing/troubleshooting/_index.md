@@ -2,206 +2,98 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/tracing/troubleshooting/agent_apm_metrics"
+- link: "/tracing/troubleshooting/tracer_startup_logs/"
+  tag: "Documentation"
+  text: "Datadog tracer startup logs"
+- link: "/tracing/troubleshooting/tracer_debug_logs/"
+  tag: "Documentation"
+  text: "Datadog tracer debug logs"
+- link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-When experiencing unexpected behavior with Datadog APM, there are a few common issues you can look for before reaching out to [Datadog support][1]:
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance.
 
-1. **Make sure the Agent has APM enabled**:
+## Confirm APM setup and Agent status
 
-    Run the following command on the Agent host: `netstat -van | grep 8126`.
+During startup, all Datadog tracing libraries past the versions listed below emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  If your tracer version includes these [startup logs][2], start your troubleshooting there.
 
-    If you don't see an entry, then the Agent is not listening on port `8126`, which usually means either that the Agent is not running or that APM is not enabled in your `datadog.yaml` file. See the [APM Agent setup documentation][2] for more information.
+| Language | Version |
+|----------|---------|
+| Java    |  0.59+  |
+| .NET | 1.18.2+  |
+| PHP | 0.47.0+  |
+| Go | 1.26.0+  |
+| NodeJS | 0.23.0+  |
+| Python | 0.41+  |
+| Ruby | 0.38+  |
+| C++ | 1.2.0+ |
 
-2. **Ensure that the Agent is functioning properly**:
+## Tracer debug logs
 
-    In some cases the Agent may have issues sending traces to Datadog. [Enable Agent debug mode][3] and check the [Trace Agent logs][4] to see if there are any errors.
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because  Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
-3. **Verify that your tracer is running correctly**:
+These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
-    After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
+## APM rate limits
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][4].  If you have questions, before you change the limits, consult with our [support team][1].
 
-## Tracer debug mode
+## Modifying, discarding, or obfuscating spans
 
-Datadog debug settings are used to diagnose issues or audit trace data. Enabling debug mode in production systems is not recommended, as it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, please see the [Security and Agent Customization][5] page of the documentation.  While this offers representative examples, if you require assistance applying these options to your environment, please reach out to [Datadog Support][1] and provide us with details of your desired outcome.
 
-Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
+## Troubleshooting data requested by Datadog Support
 
-{{< tabs >}}
-{{% tab "Java" %}}
+When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
+1. **How are you confirming the issue? Provide links to a trace (preferrably) or screenshots, for example, and tell us what you expect to see.**
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger. As such, [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+    This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
-{{% /tab %}}
-{{% tab "Python" %}}
+2. **[Tracer Startup Logs](#tracer-startup-logs)**
 
-To enable debug mode for the Datadog Python Tracer, set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, we can identify areas where a setting is not being properly applied.
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+3. **[Tracer Debug Logs](#tracer-debug-logs)**
 
-To enable debug mode for the Datadog Ruby Tracer, set the `debug` option to `true` in the tracer initialization configuration:
+    Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-```ruby
-Datadog.configure do |c|
-  c.tracer debug: true
-end
-```
+4. **An [Agent flare][6] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Agent while in [debug or trace mode][7] depending on what information we are looking for in these logs.**
 
-**Application Logs**:
+    Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
+    When adjusting the log level to `debug` or `trace` mode, please take into consideration that these will significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). We recommend these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
 
-Datadog client log messages are marked with `[ddtrace]`, so you can isolate them from other messages.
+    **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
-Additionally, it is possible to override the default logger and replace it with a custom one. This is done using the ``log`` attribute of the tracer.
+    {{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+    {{< /code-block >}}
 
-```ruby
-f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
-Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Overriding the default tracer
-end
+5. **A description of your environment**
 
-Datadog::Tracer.log.info { "this is typically called by tracing code" }
-```
+    Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-See [the API documentation][1] for more details.
+6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][8], and adding span tags**
 
-[1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
-{{% /tab %}}
-{{% tab "Go" %}}
+    Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
-To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
+7. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
-```go
-package main
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    tracer.Start(tracer.WithDebugMode(true))
-    defer tracer.Stop()
-}
-```
-
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-
-To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
-
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
-
-**Application Logs**:
-
-By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][1] method.
-
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
-
-For example:
-
-```javascript
-const bunyan = require('bunyan')
-const logger = bunyan.createLogger({
-  name: 'dd-trace',
-  level: 'trace'
-})
-
-const tracer = require('dd-trace').init({
-  logger: {
-    debug: message => logger.trace(message),
-    error: err => logger.error(err)
-  },
-  debug: true
-})
-```
-
-Then check the Agent logs to see if there is more info about your issue:
-
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
-
-* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
-
-If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][3] and provide the relevant log entries with [a flare][4].
-
-For more tracer settings, check out the [API documentation][5].
-
-[1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /agent/troubleshooting
-[3]: /help
-[4]: /agent/troubleshooting/#send-a-flare
-[5]: https://datadog.github.io/dd-trace-js/#tracer-settings
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Debug mode can also be enabled in code by calling `GlobalSettings.SetDebugEnabled(true)`:
-
-```csharp
-using Datadog.Trace;
-
-// enable debug mode
-GlobalSettings.SetDebugEnabled(true);
-
-```
-
-Logs files are saved in the following directories by default. The `DD_TRACE_LOG_PATH` setting can be used to change these paths.
-
-| Platform | Path                                      |
-|----------|-------------------------------------------|
-| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/`                       |
-
-**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
-
-For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
-
-[1]: /tracing/setup/dotnet#configuration
-
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
-
-In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
-
-If you are using an Apache server, use the `ErrorLog` directive.
-If you are using an NGINX server, use the `error_log` directive.
-If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
-
-[1]: https://www.php-fig.org/psr/psr-3
-{{% /tab %}}
-{{% tab "C++" %}}
-
-The release binary libraries are all compiled with debug symbols added to the optimized release. It is possible to use gdb or lldb to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
-
-```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][9] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
-[4]: /agent/guide/agent-log-files
-[5]: /tracing/visualization/#trace
-[6]: /agent/troubleshooting/#send-a-flare
+[1]: /help/
+[2]: /tracing/troubleshooting/tracer_startup_logs/
+[3]: /tracing/troubleshooting/tracer_debug_logs/
+[4]: /tracing/troubleshooting/agent_rate_limits
+[5]: /tracing/custom_instrumentation/agent_customization
+[6]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[7]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[8]: /tracing/custom_instrumentation/
+[9]: /tracing/compatibility_requirements/

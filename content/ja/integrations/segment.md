@@ -30,6 +30,7 @@ Segment と接続して、以下のことができます。
 ### インストール
 
 [インテグレーションタイル][1]に移動し、`Add WorkSpace` リンクをクリックして Oauth2 フローを開始することで、Datadog にワークスペースへの `workspace:read` アクセス権を付与します。
+Datadog にワークスペースへのアクセスを付与するセグメントのユーザーには、`workspace owner` の役割がある必要があります。
 
 ## 収集データ
 
@@ -51,4 +52,4 @@ Segment インテグレーションには、サービスのチェック機能は
 
 [1]: https://app.datadoghq.com/account/settings#integrations/segment
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/segment/segment_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

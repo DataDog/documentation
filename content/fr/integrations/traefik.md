@@ -3,7 +3,7 @@ aliases: []
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - web
   - Collecte de logs
@@ -163,12 +163,12 @@ Lorsque vous interrogez Traefik, le code de statut renvoyé doit être `200`.
 Consultez la [documentation principale sur les outils de développement][15] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
 [1]: https://traefik.io
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [8]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/traefik/datadog_checks/traefik/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
@@ -176,4 +176,4 @@ Consultez la [documentation principale sur les outils de développement][15] pou
 [12]: https://docs.traefik.io/configuration/logs/#traefik-logs
 [13]: https://docs.traefik.io/configuration/logs/#clf-common-log-format
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[15]: https://docs.datadoghq.com/fr/developers
+[15]: https://docs.datadoghq.com/fr/developers/

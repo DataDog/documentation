@@ -1,8 +1,7 @@
-import { moveToAnchor } from '../helpers/moveToAnchor';
 import datadogLogs from './dd-browser-logs-rum';
 
 let sidenavMapping = [];
-let apiNavMapping = [];
+// let apiNavMapping = [];
 
 let tocContainer = document.querySelector('.js-toc-container');
 let tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
@@ -29,7 +28,6 @@ export function updateTOC() {
             closeMobileTOC();
         }
         if (href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), true);
             datadogLogs.logger.log(
                 'Toc used',
                 {
@@ -39,9 +37,7 @@ export function updateTOC() {
                 },
                 'info'
             );
-            return false;
         }
-        return true;
     });
 }
 
@@ -75,41 +71,10 @@ export function buildTOCMap() {
     });
 }
 
-export function buildAPIMap() {
-    apiNavMapping = [];
-    let link = null;
-    $('.sidenav-api ul a').each(function() {
-        const href = $(this).attr('href');
-        const id = href.replace('#', '').replace(' ', '-');
-        const header = $(`[id="${id}"]`);
-        const navParentLinks = $(this)
-            .parents('.sidenav-api')
-            .find('ul > li')
-            .has($(this))
-            .find('> a');
-
-        if (header.length) {
-            if (header.is('h2') || header.is('h3')) {
-                apiNavMapping.push({
-                    navLink: $(this),
-                    navLinkPrev: link,
-                    navParentLinks,
-                    id,
-                    header,
-                    isH2: header.is('h2'),
-                    isH3: header.is('h3')
-                });
-            }
-        } else {
-            // console.log('could not find h2[id="'+id+'"]');
-        }
-        link = $(this);
-    });
-}
 
 export function onScroll() {
     const winTop = $(window).scrollTop();
-    const localOffset = 120;
+    const localOffset = 110;
 
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
         // we are at the bottom of the screen  just highlight the last item
@@ -145,32 +110,32 @@ export function onScroll() {
         }
 
         // apiMapping
-        for (let i = 0; i < apiNavMapping.length; i++) {
-            const obj = apiNavMapping[i];
-            let j = i + 1;
-            if (j > apiNavMapping.length) {
-                j = 0;
-            }
-            const nextobj = apiNavMapping[j];
-            obj.navLink.removeClass('toc_scrolled');
+        // for (let i = 0; i < apiNavMapping.length; i++) {
+        //     const obj = apiNavMapping[i];
+        //     let j = i + 1;
+        //     if (j > apiNavMapping.length) {
+        //         j = 0;
+        //     }
+        //     const nextobj = apiNavMapping[j];
+        //     obj.navLink.removeClass('toc_scrolled');
 
-            if (
-                winTop >= obj.header.offset().top - localOffset &&
-                (typeof nextobj === 'undefined' ||
-                    winTop < nextobj.header.offset().top - localOffset)
-            ) {
-                obj.navLink.addClass('toc_scrolled');
-                // add toc open to parents of this toc_scrolled
-                obj.navParentLinks.each(function() {
-                    const href = $(this).attr('href');
-                    const id = href.replace('#', '').replace(' ', '-');
-                    const header = $(`[id="${id}"]`);
-                    if (header.is('h2')) {
-                        $(this).addClass('toc_open');
-                    }
-                });
-            }
-        }
+        //     if (
+        //         winTop >= obj.header.offset().top - localOffset &&
+        //         (typeof nextobj === 'undefined' ||
+        //             winTop < nextobj.header.offset().top - localOffset)
+        //     ) {
+        //         obj.navLink.addClass('toc_scrolled');
+        //         // add toc open to parents of this toc_scrolled
+        //         obj.navParentLinks.each(function() {
+        //             const href = $(this).attr('href');
+        //             const id = href.replace('#', '').replace(' ', '-');
+        //             const header = $(`[id="${id}"]`);
+        //             if (header.is('h2')) {
+        //                 $(this).addClass('toc_open');
+        //             }
+        //         });
+        //     }
+        // }
     }
 }
 

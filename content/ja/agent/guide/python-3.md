@@ -2,10 +2,10 @@
 title: Python 3 カスタムチェックの移行
 kind: ガイド
 further_reading:
-- link: agent/versions/upgrade_to_agent_v7
+- link: /agent/versions/upgrade_to_agent_v7/
   tag: ドキュメント
   text: Agent v7 へアップグレード
-- link: agent/guide/agent-v6-python-3
+- link: /agent/guide/agent-v6-python-3/
   tag: ドキュメント
   text: Datadog Agent v6 で Python 3 を使用する
 ---

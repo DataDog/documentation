@@ -3,7 +3,6 @@ categories:
 - log collection
 - Security
 ddtype: crawler
-dependencies: []
 description: Collect your Carbon Black Defense Logs
 doc_link: https://docs.datadoghq.com/integrations/carbon_black/
 dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md"]
@@ -93,4 +92,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://github.com/carbonblack/cb-defense-syslog-tls
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /help
+[3]: /help/

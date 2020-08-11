@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - network
 creates_events: false
@@ -35,7 +35,7 @@ Ce check permet de surveiller [Unbound][1] avec l'Agent Datadog.
 
 Recueillez des métriques du service Unbound en temps réel pour :
 
-* Visualiser et surveiller les états de Unbound
+- Visualiser et surveiller les états de Unbound
 
 ## Implémentation
 
@@ -48,7 +48,7 @@ Pour installer le check Unbound sur votre host :
 1. Installez le [kit de développement][3] sur n'importe quelle machine.
 2. Exécutez `ddev release build unbound` pour générer le paquet.
 3. [Installez l'Agent Datadog][4].
-4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w chemin/vers/unbound/dist/<NOM_ARTEFACT>.whl`.
+4. Importez l'artefact du build sur tous les hosts avec un Agent et exécutez `datadog-agent integration install -w path/to/unbound/dist/<ARTIFACT_NAshellME>.whl`.
 
 ### Configuration
 
@@ -82,11 +82,11 @@ Le check Unbound n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://nlnetlabs.nl/documentation/unbound/unbound-control/
-[2]: https://docs.datadoghq.com/fr/agent
+[2]: https://docs.datadoghq.com/fr/agent/
 [3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/unbound/datadog_checks/unbound/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/unbound/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/

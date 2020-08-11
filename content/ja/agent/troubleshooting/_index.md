@@ -5,22 +5,22 @@ aliases:
   - /ja/agent/faq/agent-s-are-no-longer-reporting-data
   - /ja/agent/faq/common-windows-agent-installation-error-1721
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: ドキュメント
     text: Agent デバッグモード
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: ドキュメント
     text: Agent フレアの送信
-  - link: /agent/troubleshooting/permissions
+  - link: /agent/troubleshooting/permissions/
     tag: ドキュメント
     text: Agent のアクセス許可に関する問題
-  - link: /agent/troubleshooting/site
+  - link: /agent/troubleshooting/site/
     tag: ドキュメント
     text: Agent サイトをチェック
-  - link: /agent/troubleshooting/ntp
+  - link: /agent/troubleshooting/ntp/
     tag: ドキュメント
     text: Agent の NTP 関連問題
-  - link: /agent/troubleshooting/agent_check_status
+  - link: /agent/troubleshooting/agent_check_status/
     tag: ドキュメント
     text: Agent チェックのステータスを確認
 ---
@@ -45,11 +45,11 @@ further_reading:
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
-[3]: /ja/agent/proxy
+[3]: /ja/agent/proxy/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /ja/agent/troubleshooting/site
+[5]: /ja/agent/troubleshooting/site/
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: /ja/agent/guide/agent-log-files
-[8]: /ja/agent/troubleshooting/debug_mode
-[9]: /ja/help
-[10]: /ja/agent/troubleshooting/send_a_flare
+[7]: /ja/agent/guide/agent-log-files/
+[8]: /ja/agent/troubleshooting/debug_mode/
+[9]: /ja/help/
+[10]: /ja/agent/troubleshooting/send_a_flare/

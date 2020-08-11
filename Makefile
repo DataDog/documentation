@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
+.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -34,6 +34,7 @@ clean-all: stop  ## Clean everything.
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
+	make clean-examples
 
 clean-build:  ## Remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
@@ -47,6 +48,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
 	    -a -not -name '*.ja.yaml' \
+		-a -not -name 'docker_daemon.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
@@ -60,6 +62,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'alcide.md' \
 		-a -not -name 'amazon_guardduty.md' \
 		-a -not -name 'amazon_cloudhsm.md' \
+		-a -not -name 'apigee.md' \
 		-a -not -name 'pivotal_platform.md' \
 		-a -not -name 'carbon_black.md' \
 		-a -not -name 'cloudability.md' \
@@ -81,20 +84,35 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'tcprtt.md' \
 		-a -not -name 'uwsgi.md' \
 		-exec rm -rf {} \;
+	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
+		-a -not -name '_index.md' \
+		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
+	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
 	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
+	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
+	@if [ content/en/serverless/forwarder.md ]; then \
+	rm -f content/en/serverless/forwarder.md ;fi
+	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/android/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/logs/log_collection/ios.md ]; then \
+	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 
@@ -117,7 +135,7 @@ source-helpers: hugpython  ## Source the helper functions used in build, test, d
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
 
-start: clean source-helpers ## Build the documentation with all external content.
+start: clean source-helpers examples ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -141,3 +159,38 @@ stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
 	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
+
+clean-go-examples:
+	@git clean -xdf content/en/api/**/*.go
+
+clean-java-examples:
+	@git clean -xdf content/en/api/**/*.java
+
+clean-examples: clean-go-examples clean-java-examples
+	@rm -rf examples
+
+examples/datadog-api-client-go:
+	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
+
+examples/datadog-api-client-java:
+	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
+
+.PHONY: examples/go examples/java examples
+
+examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extract-code-blocks-go.awk
+	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
+
+	#for f in examples/content/en/api/v*/*/*.go ; do \
+	#	gofmt -w $$f || rm $f; \
+	#done;
+
+	-cp -Rn examples/content ./
+
+examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
+	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
+
+	-cp -Rn examples/content ./
+
+examples: examples/go examples/java

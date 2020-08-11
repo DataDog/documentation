@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -33,7 +36,7 @@ supported_os:
 
 Recueillez les métriques relatives à l'utilisation du disque et aux E/S.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -72,4 +75,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/

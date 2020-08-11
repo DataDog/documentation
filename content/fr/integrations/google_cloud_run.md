@@ -78,10 +78,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
-[2]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/
 [3]: https://cloud.google.com/run/docs/audit-logging
 [4]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/help/

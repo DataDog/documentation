@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントのための SAML の構成
-  - link: account_management/multi_organization
+  - link: /account_management/multi_organization/
     tag: Documentation
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---
@@ -107,8 +107,8 @@ SAML アサーションを仲介するための 2 つの要求規則を追加す
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/saml
+[1]: /ja/account_management/saml/
 [2]: https://app.datadoghq.com/account/saml/metadata.xml
 [3]: https://app.datadoghq.com/account/team
 [4]: https://app.datadoghq.com/saml/saml_setup
-[5]: /ja/help
+[5]: /ja/help/

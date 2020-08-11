@@ -3,12 +3,13 @@ aliases:
   - /ja/integrations/winservices
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md'
 display_name: Windows Service
@@ -38,7 +39,7 @@ supported_os:
 
 Windows Service チェックは [Datadog Agent][1] パッケージに含まれています。Windows ホストに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### 構成
 
 [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `windows_service.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル windows_service.d/conf.yaml][3] を参照してください。
 
@@ -119,10 +120,10 @@ Agent は、`services` で構成された各 Windows Service に対して、'ser
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/windows_service/datadog_checks/windows_service/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics
-[6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics
+[5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
 [10]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [11]: https://www.datadoghq.com/blog/windows-server-monitoring

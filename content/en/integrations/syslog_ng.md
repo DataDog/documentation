@@ -185,4 +185,4 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/

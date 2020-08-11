@@ -136,4 +136,4 @@ Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing
 
 [Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
-[1]: /help
+[1]: /help/

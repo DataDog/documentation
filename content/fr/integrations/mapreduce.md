@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -39,7 +40,7 @@ Recueillez des métriques du service MapReduce en temps réel pour :
 - Visualiser et surveiller les statuts de MapReduce
 - Être informé des failovers et des événements de MapReduce
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -49,7 +50,7 @@ Le check MapReduce est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `mapreduce.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
@@ -83,12 +84,12 @@ Le check Mapreduce n'inclut aucun événement.
 
 **mapreduce.resource_manager.can_connect**
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Resource Manager.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Resource Manager.
 Si ce n'est pas le cas, renvoie `OK`.
 
 **mapreduce.application_master.can_connect**
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Application Master.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Application Master.
 Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
@@ -107,10 +108,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/
 [10]: https://www.datadoghq.com/blog/hadoop-architecture-overview
 [11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics

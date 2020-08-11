@@ -42,7 +42,9 @@ installp -aXYgd ./datadog-unix-agent-<VEERSION>.powerpc.bff -e dd-aix-install.lo
 
 This installs the Agent in `/opt/datadog-agent`.
 
-Note: Agent installation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
+### Installation Log Files
+
+You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the installation command.
 
 ## Commands
 

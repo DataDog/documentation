@@ -5,10 +5,10 @@ aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
 further_reading:
-- link: "/infrastructure/hostmap"
+- link: "/infrastructure/hostmap/"
   tag: "Graphing"
   text: "See all of your hosts together on one screen with the hostmap"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Graphing"
   text: "Understand what is going on at any level of your system"
 ---
@@ -158,6 +158,9 @@ Kubernetes containers are tagged by:
 * `kube_deployment`
 * `kube_cluster`
 
+If you have configuration for [Unified Service Tagging][9] in place, `env`, `service`, and `version` will also be picked up automatically.
+Having these tags available will let you tie together APM, logs, metrics, and live container data.
+
 ### Filtering and Pivoting
 
 The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 9 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
@@ -196,29 +199,26 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ## Include/Exclude containers
 
-*Note that Live Containers is not metered. Including or excluding containers does not affect billing.*
-
 It is possible to include and/or exclude containers from real-time collection:
 
-* Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
-* Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
+* Exclude containers either via passing the environment variable `DD_CONTAINER_EXCLUDE` or adding `container_exclude:` in your `datadog.yaml` main configuration file.
+* Include containers either via passing the environment variable `DD_CONTAINER_INCLUDE` or adding `container_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value; regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
 ```shell
-ac_exclude: ["image:debian"]
-ac_include: ["name:frontend.*"]
+container_exclude: ["image:debian"]
+container_include: ["name:frontend.*"]
 ```
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
 ## Notes/known issues
 
-* This feature does not support Windows containers at this time.
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][9].
+* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][10].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
 ## Further Reading
@@ -226,11 +226,12 @@ ac_include: ["name:frontend.*"]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /integrations/docker_daemon
-[3]: /agent/kubernetes
-[4]: /integrations/amazon_ecs
+[2]: /integrations/docker_daemon/
+[3]: /agent/kubernetes/
+[4]: /integrations/amazon_ecs/
 [5]: /agent/docker/#run-the-docker-agent
 [6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[7]: /logs/live_tail
-[8]: /tagging
-[9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[7]: /logs/live_tail/
+[8]: /getting_started/tagging/
+[9]: /getting_started/tagging/unified_service_tagging
+[10]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

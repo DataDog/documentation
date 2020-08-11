@@ -2,12 +2,9 @@
 title: Gestion des secrets
 kind: documentation
 further_reading:
-  - link: agent/autodiscovery
+  - link: /agent/autodiscovery/
     tag: Documentation
     text: Autodiscovery
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#troubleshooting'
-    tag: github
-    text: Dépannage des secrets
 ---
 Pour éviter de stocker des secrets en texte brut dans les fichiers de configuration de l'Agent, vous pouvez utiliser le paquet de gestion des secrets.
 
@@ -51,7 +48,7 @@ Tous les caractères peuvent être ajoutés entre les crochets, tant que la conf
 
 Dans l'exemple ci-dessus, le handle de secret est la chaîne `{"env": "prod", "check": "postgres", "id": "user_password"}`.
 
-Il n'est pas nécessaire d'échapper les caractères `[` et `]` situés à l'intérieur. Par exemple :
+Il n'est pas nécessaire d'échapper les caractères `[` et `]` de l'expression. Par exemple :
 
 ```text
 “ENC[user_array[1234]]”
@@ -74,7 +71,7 @@ Pour récupérer des secrets, vous devez fournir un exécutable capable de s'aut
 
 L'Agent met en mémoire cache interne les secrets pour réduire le nombre d'appels. Cela s'avère très utile dans un environnement conteneurisé, par exemple. L'Agent appelle l'exécutable chaque fois qu'il accède à un fichier de configuration de check qui contient au moins un handle de secret pour lequel le secret n'est pas encore chargé en mémoire. Ainsi, les secrets qui ont déjà été chargés en mémoire ne déclenchent pas d'appels supplémentaires de l'exécutable. En pratique, cela signifie que l'Agent appelle l'exécutable fourni par l'utilisateur une fois par fichier contenant un handle de secret au démarrage. Il peut effectuer ultérieurement des appels supplémentaires vers l'exécutable en cas de redémarrage de l'Agent ou de l'instance, ou si l'Agent charge de façon dynamique un nouveau check contenant un handle de secret (par exemple, via Autodiscovery).
 
-Étant donné que l'APM et la surveillance de processus s'exécutent dans leur propre processus/service, et étant donné que les processus ne partagent pas de mémoire, chacun doit être en mesure de charger/déchiffrer des secrets. De ce fait, si `datadog.yaml` contient des secrets, chaque processus peut appeler l'exécutable une fois. Par exemple, le stockage de `api_key` en tant que secret dans le fichier `datadog.yaml` avec l'APM et la surveillance de processus activés peuvent provoquer 3 appels vers le backend de secret.
+L'APM et la surveillance de processus s'exécutent dans leur propre processus/service, et les processus ne partagent pas de mémoire. Ainsi, chaque processus doit pouvoir charger/déchiffrer des secrets. De ce fait, si `datadog.yaml` contient des secrets, chaque processus peut appeler l'exécutable une fois. Par exemple, le stockage de `api_key` en tant que secret dans le fichier `datadog.yaml` avec l'APM et la surveillance de processus activés peuvent provoquer 3 appels vers le backend de secret.
 
 De par sa nature, l'exécutable fourni par l'utilisateur doit implémenter tout mécanisme de gestion d'erreurs qu'un utilisateur peut exiger. Inversement, l'Agent doit être redémarré si un secret doit être actualisé en mémoire (par exemple, en cas de révocation de mot de passe).
 
@@ -218,6 +215,48 @@ instances:
     password: decrypted_db_prod_password
 ```
 
+### Script auxiliaire pour Autodiscovery
+
+De nombreuses intégrations Datadog requièrent des identifiants pour récupérer des métriques. Pour éviter de coder en dur ces identifiants au sein d'un [modèle Autodiscovery][1], vous pouvez utiliser la fonction de gestion de secrets pour les dissocier du modèle.
+
+[Le script][2] `/readsecret.py` est disponible dans l'image Docker.
+
+#### Utilisation du script
+
+Pour utiliser le script, vous devez transmettre un dossier sous la forme d'un argument. Les handles de secret sont interprétés comme des noms de fichiers, dont la valeur est relative à ce dossier. Le script refuse d'accéder à un fichier en dehors du dossier racine (y compris les cibles d'URL symboliques) afin d'éviter de dévoiler des informations sensibles.
+
+Ce script n'est pas compatible avec [les opérations avec SCC restreintes OpenShift][3]. De plus, pour que le script fonctionne, l'Agent doit s'exécuter en tant qu'utilisateur `root`.
+
+Depuis la version 6.10.0, les tokens `ENC[]` dans les valeurs de configuration transmises en tant que variables d'environnement sont pris en charge. Les versions antérieures prennent uniquement en charge les tokens `ENC[]` stockés dans le fichier `datadog.yaml` et les modèles Autodiscovery.
+
+#### Exemples de configuration
+
+##### Secrets Docker Swarm
+
+Les [secrets Docker][4] sont montés dans le dossier `/run/secrets`. Passez les variables d'environnement suivantes au conteneur de votre Agent :
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
+DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
+```
+
+Pour utiliser la valeur de secret `db_prod_password`, exposée dans le fichier `/run/secrets/db_prod_password`, il vous suffit d'ajouter `ENC[db_prod_password]` à votre modèle.
+
+##### Secrets Kubernetes
+
+Kubernetes prend en charge l'[exposition de secrets en tant que fichiers][5] au sein d'un pod.
+
+Si vos secrets sont montés dans `/etc/secret-volume`, utilisez les variables d'environnement suivantes :
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+
+Dans l'exemple du lien ci-dessus, le champ de mot de passe est stocké dans le fichier `/etc/secret-volume/password` et accessible par l'intermédiaire du token `ENC[password]`.
+
+**Remarque** : nous vous recommandons d'utiliser un dossier distinct plutôt que `/var/run/secrets`. En effet, le script pourra accéder à l'ensemble des sous-dossiers, y compris le fichier `/var/run/secrets/kubernetes.io/serviceaccount/token` sensible.
+
 ## Dépannage
 
 ### Énumérer les secrets détectés
@@ -303,7 +342,7 @@ password: <déchiffré_motdepasse2>
 ===
 ```
 
-**Remarque** : vous devez [redémarrer][2] l'Agent pour prendre en compte les modifications apportées aux fichiers de configuration.
+**Remarque** : vous devez [redémarrer][6] l'Agent pour prendre en compte les modifications apportées aux fichiers de configuration.
 
 ### Débugging de secret_backend_command
 
@@ -350,17 +389,19 @@ Pour ce faire, suivez ces étapes :
 
 1. Supprimez `ddagentuser` de la liste `Local Policies/User Rights Assignement/Deny Log on locally` dans `Local Security Policy`.
 2. Définissez un nouveau mot de passe pour `ddagentuser` (car celui généré lors de l'installation n'est jamais enregistré nulle part). Dans Powershell, exécutez la commande suivante :
+
   ```powershell
   $user = [ADSI]"WinNT://./ddagentuser";
   $user.SetPassword("a_new_password")
   ```
 
 3. Mettez à jour le mot de passe à utiliser par le service `DatadogAgent` dans le gestionnaire de contrôle des services. Dans Powershell, exécutez la commande suivante :
+
   ```powershell
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-Vous pouvez désormais vous connecter en tant que `ddagentuser` pour tester votre exécutable. Datadog possède un [script Powershell][3] pour vous aider à tester votre exécutable à partir d'un autre utilisateur. Il vous permet de changer de contexte utilisateur et reproduire la façon dont votre Agent exécute l'exécutable.
+Vous pouvez désormais vous connecter en tant que `ddagentuser` pour tester votre exécutable. Datadog possède un [script Powershell][7] pour vous aider à tester votre exécutable à partir d'un autre utilisateur. Il vous permet de changer de contexte utilisateur et reproduire la façon dont votre Agent exécute l'exécutable.
 
 Exemple d'utilisation :
 
@@ -390,6 +431,10 @@ Si votre fichier `datadog.yaml` contient des secrets et que l'Agent refuse de d�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/autodiscovery
-[2]: /fr/agent/guide/agent-commands/#restart-the-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+[1]: /fr/agent/kubernetes/integrations/
+[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
+[3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
+[4]: https://docs.docker.com/engine/swarm/secrets/
+[5]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[6]: /fr/agent/guide/agent-commands/#restart-the-agent
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

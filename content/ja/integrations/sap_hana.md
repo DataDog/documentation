@@ -2,6 +2,7 @@
 assets:
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -20,7 +21,7 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: sap_hana.
-metric_to_check: sap_hana.connection.active
+metric_to_check: sap_hana.uptime
 name: sap_hana
 public_title: Datadog-SAP HANA インテグレーション
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
@@ -32,7 +33,7 @@ supported_os:
 ---
 ## 概要
 
-このチェックは、Datadog Agent を通じて [SAP HANA][1] を監視します。
+このチェックは、Datadog Agent を通じて [SAP HANA][1] 2.0, SPS 2 を監視します。
 
 ## セットアップ
 
@@ -133,9 +134,9 @@ SAP HANA には、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://www.sap.com/products/hana.html
-[2]: https://docs.datadoghq.com/ja/agent
+[2]: https://docs.datadoghq.com/ja/agent/
 [3]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/help/

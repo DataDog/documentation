@@ -3,10 +3,10 @@ title: Content Security Policy (CSP)
 kind: faq
 further_reading:
     - link: '/real_user_monitoring/installation/'
-      tag: 'FAQ'
-      text: 'How to Send Logs to Datadog via External Log Shippers?'
+      tag: 'Get Started'
+      text: 'Real User Monitoring'
     - link: '/logs/log_collection/javascript/'
-      tag: 'FAQ'
+      tag: 'Get Started'
       text: 'Browser Log Collection'
 ---
 
@@ -43,11 +43,24 @@ connect-src https://*.logs.datadoghq.eu
 
 ## NPM Setup
 
-If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `script-src` directive:
+If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `connect-src` directive:
+
+{{< tabs >}}
+{{% tab "US" %}}
 
 ```txt
-script-src https://www.datadoghq-browser-agent.com
+connect-src https://*.logs.datadoghq.com
 ```
+
+{{% /tab %}}
+{{% tab "EU" %}}
+
+```txt
+connect-src https://*.logs.datadoghq.eu
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

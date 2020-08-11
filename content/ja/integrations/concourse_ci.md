@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - コラボレーション
 creates_events: false
@@ -33,8 +33,8 @@ supported_os:
 
 Concourse CI で Datadog メトリクスエミッターを構成すると、以下のことができます。
 
-* パイプラインの処理時間、コンテナの数、およびマウントされたワーカーボリュームを可視化できます。
-* 低速なリクエストを識別してルートを構築できます。
+- パイプラインの処理時間、コンテナの数、およびマウントされたワーカーボリュームを可視化できます。
+- 低速なリクエストを識別してルートを構築できます。
 
 ## セットアップ
 
@@ -44,12 +44,13 @@ Concourse CI には Datadog メトリクスエミッターが付属していま�
 
 ### コンフィグレーション
 
-以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、```concourse.ci``` というプレフィックスを使用することが重要です。
+以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
 
 ### Datadog メトリクスエミッターのオプション
 
 詳細については、Concourse CI の[ドキュメント][4]を参照してください。
-```
+
+```text
 Metric Emitter (Datadog):
     --datadog-agent-host=       Datadog agent host to expose dogstatsd metrics [$CONCOURSE_DATADOG_AGENT_HOST]
     --datadog-agent-port=       Datadog agent port to expose dogstatsd metrics [$CONCOURSE_DATADOG_AGENT_PORT]
@@ -76,7 +77,7 @@ Metric Emitter (Datadog):
 
 [1]: https://concourse-ci.org/concepts.html
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics
+[3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

@@ -2,7 +2,7 @@
 title: NGINX
 kind: documentation
 further_reading:
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
 - link: "https://www.nginx.com/"
@@ -19,17 +19,23 @@ further_reading:
   text: "Datadog OpenTracing C++ Client"
 aliases:
   - /tracing/proxies/nginx
+  - /tracing/nginx/
 ---
 
 Support for Datadog APM is available for NGINX using a combination of plugins and configurations.
 The instructions below use NGINX from the official [Linux repositories][1] and pre-built binaries for the plugins.
 
-## Plugin Installation
+## NGINX Open Source
+
+### Plugin Installation
+
+**Note**: this plugin does not work on Linux distributions that use older versions of `libstdc++`. This includes RHEL/Centos 7 and AmazonLinux 1.
+A workaround for this is to run NGINX from a Docker container. An example Dockerfile is available [here][2].
 
 The following plugins must be installed:
 
-- NGINX plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz][2] - installed in `/usr/lib/nginx/modules`
-- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][3] - installed somewhere accessible to NGINX, eg `/usr/local/lib`
+- NGINX plugin for OpenTracing - [linux-amd64-nginx-${NGINX_VERSION}-ngx_http_module.so.tgz][3] - installed in `/usr/lib/nginx/modules`
+- Datadog OpenTracing C++ Plugin - [linux-amd64-libdd_opentracing_plugin.so.gz][4] - installed somewhere accessible to NGINX, eg `/usr/local/lib`
 
 Commands to download and install these modules:
 
@@ -40,7 +46,7 @@ get_latest_release() {
     grep '"tag_name":' |
     sed -E 's/.*"([^"]+)".*/\1/';
 }
-NGINX_VERSION=1.14.0
+NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
 # Install NGINX plugin for OpenTracing
@@ -51,7 +57,7 @@ wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTR
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-## NGINX Configuration
+### NGINX Configuration
 
 The NGINX configuration must load the OpenTracing module.
 
@@ -60,7 +66,7 @@ The NGINX configuration must load the OpenTracing module.
 load_module modules/ngx_http_opentracing_module.so;
 ```
 
-The `http` directive's block enables the OpenTracing module and loads the Datadog tracer:
+The `http` block enables the OpenTracing module and loads the Datadog tracer:
 
 ```nginx
     opentracing on; # Enable OpenTracing
@@ -68,14 +74,13 @@ The `http` directive's block enables the OpenTracing module and loads the Datado
     opentracing_trace_locations off; # Emit only one span per request.
 
     # Load the Datadog tracing implementation, and the given config file.
-    opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/dd-config.json;
+    opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
 The `location` block within the server where tracing is desired should add the following:
 
 ```nginx
             opentracing_operation_name "$request_method $uri";
-            opentracing_tag "resource.name" "/";
             opentracing_propagate_context;
 ```
 
@@ -83,6 +88,7 @@ A config file for the Datadog tracing implementation is also required:
 
 ```json
 {
+  "environment": "prod",
   "service": "nginx",
   "operation_name_override": "nginx.handle",
   "agent_host": "localhost",
@@ -95,14 +101,18 @@ The `agent_host` value may need to be changed if NGINX is running in a container
 
 Complete examples:
 
-* [nginx.conf][4]
-* [dd-config.json][5]
+* [nginx.conf][5]
+* [dd-config.json][6]
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
+#### NGINX and FastCGI
+
+When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
+
 ## NGINX Ingress Controller for Kubernetes
 
-The [Kubernetes ingress-nginx][6] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
+The [Kubernetes ingress-nginx][7] controller versions 0.23.0+ include the NGINX plugin for OpenTracing.
 
 To enable this plugin, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap will be cited explicitly by the nginx-ingress controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -137,13 +147,22 @@ Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST
       fieldPath: status.hostIP
 ```
 
+To set a different service name per Ingress using annotations:
+
+```yaml
+  nginx.ingress.kubernetes.io/configuration-snippet: |
+      opentracing_tag "service.name" "custom-service-name";
+```
+The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://nginx.org/en/linux_packages.html#stable
-[2]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
-[3]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
-[4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
-[5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
-[6]: https://github.com/kubernetes/ingress-nginx
+[2]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
+[3]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
+[4]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest
+[5]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/nginx.conf
+[6]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/dd-config.json
+[7]: https://github.com/kubernetes/ingress-nginx

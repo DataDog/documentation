@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -55,8 +56,8 @@ DaemonSets を利用して、すべてのノードで [Datadog Agent を自動�
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://pivotal.io/platform/pivotal-container-service
-[2]: https://docs.datadoghq.com/ja/integrations/kubernetes
+[2]: https://docs.datadoghq.com/ja/integrations/kubernetes/
 [3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [4]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
 [5]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

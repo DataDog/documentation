@@ -2,10 +2,12 @@
 assets:
   dashboards:
     MapR - Overview: assets/dashboards/mapr_overview.json
+  logs:
+    source: mapr
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - データストア
+  - data store
   - OS & システム
   - 処理
   - ログの収集
@@ -46,7 +48,7 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 #### 前提条件
 
 - [MapR モニタリング][3]が問題なく実行されている。
-- `/var/mapr/mapr.monitoring/metricstreams` ストリームで「コンシューム」を許可された利用可能な [MapR ユーザー][4] (ユーザー名、パスワード、UID、GID あり) がある。既存のユーザーの場合と、新規作成ユーザーの場合があります。ユーザーを `dd-agent` にする場合は、Agent をインストールする前にユーザーを作成します。
+- `/var/mapr/mapr.monitoring/metricstreams` ストリームで 'consume' を許可された利用可能な [MapR ユーザー][4] (ユーザー名、パスワード、UID、GID あり) がある。既存のユーザーの場合と、新規作成ユーザーの場合があります。ユーザーを `dd-agent` にする場合は、Agent をインストールする前にユーザーを作成します。
 - `dd-agent` ユーザーが読み出せるこのユーザー専用の[長期的なサービスチケット][5]を生成済みである。
 
 ノード別インストールステップ
@@ -56,7 +58,7 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 
     `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python`.
 
-   Python 3 で Agent v7 を使用されている場合は、`pip` を `pip3` に置き換えます。
+    Python 3 で Agent v7 を使用されている場合は、`pip` を `pip3` に置き換えます。
 
 3. `/etc/ld.so.conf` (または `/etc/ld.so.conf.d/` 内のファイル) に `/opt/mapr/lib/` を追加します。これは、Agent が使用する _mapr-streams-library_ で MapR 共有ライブラリを探すために必要です。
 4. `sudo ldconfig` を実行してライブラリを再読み込みします。
@@ -65,8 +67,8 @@ MapR チェックは [Datadog Agent][2] パッケージに含まれています�
 #### 補足
 
 - クラスターで「セキュリティ」が有効化されていない場合は、チケットがなくても続行できます。
-- 本番環境で gcc (mapr-streams-library の構築に必要) などのコンパイルツールを利用できない場合は、環境インスタンスでライブラリのコンパイル済み Wheel を生成して、本番ホストに配布できます。開発ホストと本番ホストは、双方でコンパイル済み Wheel を使用できるよう、同様である必要があります。`sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` を実行して、開発マシンで Wheel  ファイルを作成できます。次に、本番マシンで `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <THE_WHEEL_FILE>` を実行します。
--  Python 3 で Agent v7 を使用されている場合は、_mapr-streams-library_ をインストールする際に、必ず `pip` を `pip3` に置き換えてください。
+- 本番環境で gcc (mapr-streams-library の構築に必要) などのコンパイルツールを利用できない場合は、環境インスタンスでライブラリのコンパイル済み Wheel を生成して、本番ホストに配布できます。開発ホストと本番ホストは、双方でコンパイル済み Wheel を使用できるよう、同様である必要があります。`sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` を実行して、開発マシンで Wheel  ファイルを作成できます。次に、本番マシンで `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <WHEEL_ファイル>` を実行します。
+- Python 3 で Agent v7 を使用されている場合は、_mapr-streams-library_ をインストールする際に、必ず `pip` を `pip3` に置き換えてください。
 
 ### コンフィギュレーション
 
@@ -96,10 +98,10 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
     @type datadog
     @id dd_agent
     include_tag_key true
-    dd_source mapr
+    dd_source mapr  # Sets "source: mapr" on every log to allow automatic parsing on Datadog.
     dd_tags "<KEY>:<VALUE>"
-    service <YOUR_SERVICE_NAME>
-    api_key <YOUR_API_KEY>
+    service <サービス名>
+    api_key <API_キー>
   </store>
 ```
 
@@ -115,7 +117,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 {{< get-metrics-from-git "mapr" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 - `mapr.can_connect`:
   Agent がストリームトピックに接続してサブスクライブできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
@@ -151,4 +153,4 @@ MapR チェックには、イベントは含まれません。
 [8]: https://www.rubydoc.info/gems/fluent-plugin-datadog
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help
+[11]: https://docs.datadoghq.com/ja/help/

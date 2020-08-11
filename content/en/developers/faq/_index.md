@@ -26,14 +26,14 @@ private: true
 * [Hubot Script - Request snapshots in chat using the Datadog API][10]
 * [How do I collect metrics from Heroku with Datadog?][11]
 
-[1]: /developers/faq/data-collection-resolution-retention
-[2]: /developers/faq/use-our-webhook-integration-to-create-a-trello-card
-[3]: /developers/faq/how-to-post-appdynamics-events-to-datadog
-[4]: /developers/faq/data-aggregation-with-dogstatsd-threadstats
-[5]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats
-[6]: /developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script
-[7]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes
-[8]: /developers/faq/deploying-the-agent-on-raspberrypi
-[9]: /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
-[10]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api
-[11]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+[1]: /developers/faq/data-collection-resolution-retention/
+[2]: /developers/faq/use-our-webhook-integration-to-create-a-trello-card/
+[3]: /developers/faq/how-to-post-appdynamics-events-to-datadog/
+[4]: /developers/faq/data-aggregation-with-dogstatsd-threadstats/
+[5]: /developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats/
+[6]: /developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script/
+[7]: /developers/faq/is-it-possible-to-integrate-with-thousandeyes/
+[8]: /developers/faq/deploying-the-agent-on-raspberrypi/
+[9]: /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog/
+[10]: /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api/
+[11]: /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog/

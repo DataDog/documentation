@@ -141,12 +141,12 @@ Dans la dernière section, la politique est configurée de façon à loguer tous
         - hostPath:
             path: /var/log/kubernetes/apiserver
           name: auditdir
-         - name: dd-agent-config
+        - name: dd-agent-config
             configMap:
               name: dd-agent-config
               items:
-              - key: kubernetes-audit-log
-                path: conf.yaml
+                - key: kubernetes-audit-log
+                  path: conf.yaml
       # (...)
     ```
 
@@ -186,4 +186,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
 [4]: /fr/agent/kubernetes/log/
 [5]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: /fr/help
+[6]: /fr/help/

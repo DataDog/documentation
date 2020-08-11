@@ -39,6 +39,8 @@ For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied 
 
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
 
+**Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+
 ```shell
 Msiexec /i ddagent.msi <DDAGENTUSER_NAME>=<DOMAIN>\<USERNAME>
 ```
@@ -77,10 +79,12 @@ If you’re using the Attach API, the change in user context means that the Agen
 
 ### Process check
 
-Now that the Agent runs under `ddagentuser`, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
 
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
+
+To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
 
 ### Cassandra Nodetool integration
 
@@ -99,12 +103,12 @@ If you are using the [Datadog- Win 32 event log Integration][9], the Datadog use
 4. Click *Add* and enter `ddagentuser` -> *Check Names*.
 5. Click *OK* and *Apply*.
 
-[1]: /integrations/activemq
+[1]: /integrations/activemq/
 [2]: /integrations/activemq/#activemq-xml-integration
-[3]: /integrations/cassandra
-[4]: /integrations/java
-[5]: /integrations/presto
-[6]: /integrations/solr
-[7]: /integrations/tomcat
-[8]: /integrations/kafka
-[9]: /integrations/win32_event_log
+[3]: /integrations/cassandra/
+[4]: /integrations/java/
+[5]: /integrations/presto/
+[6]: /integrations/solr/
+[7]: /integrations/tomcat/
+[8]: /integrations/kafka/
+[9]: /integrations/win32_event_log/

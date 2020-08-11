@@ -9,10 +9,10 @@ aliases:
   - /logs/archives/gcs/
   - /logs/archives/gcp/
 further_reading:
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
 ---
@@ -36,7 +36,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation:
 
-1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS Cloudwatch.
+1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS S3.
 
 2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 
@@ -86,7 +86,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /logs/archives/rehydrating
+[5]: /logs/archives/rehydrating/
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 {{% /tab %}}
@@ -140,7 +140,10 @@ However, after creating or updating your archive configurations, it can take sev
 
 The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Under whatever prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, like so:
 
-`/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz`
+```
+/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
+/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<DATADOG_ID>.json.gz
+```
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
 
@@ -182,4 +185,4 @@ Logs enter the first archive whose filter they match on.
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/archives/rehydrating
+[1]: /logs/archives/rehydrating/

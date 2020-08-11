@@ -13,7 +13,7 @@ aliases:
 ---
 Datadog recommande certaines bonnes pratiques pour nommer les métriques et les tags.
 
-**Règles et bonnes pratiques pour nommer les métriques** :
+## Règles et bonnes pratiques pour nommer des métriques
 
 * Les noms des métriques doivent commencer par une lettre.
 * Ils doivent uniquement contenir des caractères alphanumériques ASCII, des underscores et des points. Les autres caractères sont convertis en underscores.
@@ -21,18 +21,21 @@ Datadog recommande certaines bonnes pratiques pour nommer les métriques et les 
 * La norme Unicode n'est pas prise en charge.
 * Il est conseillé d'éviter les espaces.
 
-Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique où chaque élément est séparé par un point (par exemple, `http.nginx.response_time`). Le format est pseudo hiérarchique car aucune hiérarchie n'est véritablement appliquée, mais la structure est utilisée pour déduire certaines relations (par exemple, si hostA et hostB renvoient tous les deux http.nginx.*, il doit s'agir de front-ends web).
+Les métriques renvoyées par l'Agent respectent un format pseudo hiérarchique où chaque élément est séparé par un point (par exemple, `http.nginx.response_time`). Le format est pseudo hiérarchique car aucune hiérarchie n'est véritablement appliquée, mais la structure est utilisée pour déduire certaines relations (par exemple, si hostA et hostB renvoient tous les deux `http.nginx.*`, il doit s'agir de front-ends web).
 
 **Remarque** : les noms de métrique sont sensibles à la casse dans Datadog.
 
-**Règles et bonnes pratiques pour nommer les tags** :
+## Règles et bonnes pratiques pour nommer des tags
 
 * Les tags doivent commencer par une lettre.
 * Ils peuvent contenir des caractères alphanumériques, des underscores, des signes moins, des deux-points, des points et des barres obliques. Les autres caractères sont convertis en underscores.
+* Lorsqu'un tag se termine par un underscore, que ce soit à la suite de la conversion d'un caractère ou tout simplement parce que son nom finit par un « _ », l'underscore est supprimé.
 * Les noms de tag peuvent comporter jusqu'à 200 caractères et prennent en charge la norme Unicode.
 * Les tags sont convertis en minuscule.
 * Pour un fonctionnement optimal, nous conseillons d'utiliser la syntaxe `key:value`.
 
 Les clés de tag de métrique fréquemment utilisées comprennent `env`, `instance`, `name` et `role`.
+
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

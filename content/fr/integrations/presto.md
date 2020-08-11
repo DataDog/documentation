@@ -107,7 +107,7 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Pr
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://docs.datadoghq.com/fr/integrations/presto
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/integrations/java

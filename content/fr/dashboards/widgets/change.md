@@ -5,19 +5,19 @@ description: Représentez graphiquement l'évolution d'une valeur sur une pério
 aliases:
   - /fr/graphing/widgets/change/
 further_reading:
-  - link: /dashboards/dashboards/timeboards/
+  - link: /dashboards/timeboards/
     tag: Documentation
     text: Timeboards
-  - link: /dashboards/dashboards/screenboards/
+  - link: /dashboards/screenboards/
     tag: Documentation
     text: Screenboard
   - link: /dashboards/graphing_json/
     tag: Documentation
     text: Créer des dashboards avec JSON
-  - link: /dashboards/graphing_json/widget_json
+  - link: /dashboards/graphing_json/widget_json/
     tag: Documentation
     text: Schéma JSON des widgets
-  - link: /dashboards/graphing_json/request_json
+  - link: /dashboards/graphing_json/request_json/
     tag: Documentation
     text: Schéma JSON des requêtes
 ---
@@ -126,5 +126,5 @@ Propriétés supplémentaires autorisées dans l'objet `request` :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json/widget_json
-[2]: /fr/dashboards/graphing_json/request_json
+[1]: /fr/dashboards/graphing_json/widget_json/
+[2]: /fr/dashboards/graphing_json/request_json/

@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## 概要
 
-サーバーレス機能は [Datadog Pro および Enterprise プラン][1]で購入します。請求は、アカウントの 1 か月間の 1 時間あたりの平均機能数に基づきます。Pro および Enterprise プランには、請求対象の機能ごとに 40 個のカスタムメトリクスが含まれます。アカウントにサーバーレスを追加する方法の詳細については、[営業担当者][2]または[カスタマーサクセスマネージャー][3]にお問い合わせください。
+サーバーレス機能は [Datadog Pro および Enterprise プラン][1]で購入します。請求は、アカウントの 1 か月間の 1 時間あたりの平均機能数に基づきます。Pro および Enterprise プランには、請求対象の機能ごとに 15 万個の分析スパンと 5 個のカスタムメトリクスが含まれます。アカウントにサーバーレスを追加する方法の詳細については、[営業担当者][2]または[カスタマーサクセスマネージャー][3]にお問い合わせください。
 
 ## サーバーレス機能
 
@@ -22,9 +22,9 @@ Datadog が監視している機能の数を制御するには、[UI](#ui) を�
 
 ### UI
 
-UI を使用して Datadog が監視している機能の数を制御するには、[AWS インテグレーションページ][5]に移動し、`key:value` セットとしてタグを **to Lambdas with tag:** フィールドに追加します。
+UI を使用して Datadog が監視している機能の上限を制御するには、[AWS インテグレーションページ][5]に移動し、`key:value` セットとしてタグを **to Lambdas with tag:** フィールドに追加します。
 
-ブラックリストに登録されたタグを追加するには、タグキーの前に `!` を含めます。例:
+特定のタグを持つ関数を除外するには、タグキーの前に `!` を追加します。例:
 
 `!env:staging,!env:test1`
 
@@ -65,4 +65,4 @@ curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_k
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[6]: /ja/help
+[6]: /ja/help/

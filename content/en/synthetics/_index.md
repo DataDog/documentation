@@ -1,80 +1,71 @@
 ---
-title: Synthetics
+title: Synthetic Monitoring
 kind: documentation
-description: "Make sure the most critical parts of your product are up and running from various locations around the world."
+description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
+disable_toc: true
 aliases:
   - /integrations/synthetics/
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
-- link: "synthetics/api_tests"
+  text: "Introduction to Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/browser-tests/"
+  tag: "Blog"
+  text: "User experience monitoring with Datadog Browser Tests"
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "/synthetics/guide/"
   tag: "Documentation"
-  text: "Configure an API Test"
-- link: "synthetics/browser_tests"
+  text: "Synthetic Monitoring Guides"
+- link: "/synthetics/troubleshooting/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
-- link: "synthetics/identify_synthetics_bots"
-  tag: "Documentation"
-  text: "Identify Synthetics Bots"
+  text: "Troubleshooting Synthetic Monitoring"
 ---
 
-## Overview
+{{< img src="synthetics/synthetics_home.png" alt="Synthetic Monitoring home page" >}}
 
-Datadog Synthetics gives you a new layer of visibility on the Datadog platform. By monitoring your applications and API endpoints via simulated user requests and browser rendering, Synthetics helps you ensure uptime, identify regional issues, and track application performance. By unifying Synthetics with your metrics, traces, and logs, Datadog allows you to observe how all your systems are performing as experienced by your users.
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog **tracks the performance of your webpages and APIs** from the backend to the frontend, and at various network levels (HTTP, TCP, SSL) in a controlled and stable way, alerting you in case of faulty behavior (regression, broken feature, high response time, unexpected status code, etc.). **End-to-end testing production and CI environments** increases development teams’ speed as it puts an end to the fear of defective code making it to production. **Computing SLOs** on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience. 
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" >}}
+## Getting Started
+Create your first Synthetic test and start monitoring web applications to improve their performance in just a few minutes.
+### Set up API tests
 
-## Search
+API tests allow you to launch requests and perform verifications on your web applications at various network levels: HTTP, TCP, SSL. Create your first [HTTP test][1], TCP test, and [SSL test][2] to get started with API and network monitoring.
 
-Advanced search lets you query checks by any combination of checks attributes:
+{{< img src="synthetics/api_test.png" alt="API tests"  style="width:100%;">}}
 
-* `title` and `message` - text search
-* `status` - Alert, No Data, Ok
-* `creator`
-* `region`
-* `muted`
-* `notification`
-* `tags`
+### Record Browser tests
 
-To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. The search bar updates with the equivalent query as you check the boxes. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+Record end-to-end tests to monitor how your customers experience your webpages from around the world using [Synthetic browser tests][3].
 
-### Write a query
+{{< img src="synthetics/browser_test.gif" alt="Browser tests"  style="width:100%;">}}
 
-To search for specific text across all checks, titles, and notification messages, enter your text in the search bar.
+### Launch Private Locations
 
-Otherwise, use Boolean operators (`AND`, `OR`, and `NOT`) and parentheses to write complex queries using any check field:
+Use [Synthetic private locations][4] to monitor internal APIs and websites or to create custom locations in areas that are mission-critical to your business.
 
-* Regular expressions are not supported
-* Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is
-* Proximity searches are not supported, but the [fuzzy][1] operator is
-* Ranges are not supported
-* Boosting is not supported
+{{< img src="synthetics/private_locations.png" alt="Private locations"  style="width:100%;">}}
 
-Finally, the following characters are reserved: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.`, and whitespace. To search check fields that include any of them, wrap the field string in quotes: `status:("OK") AND "doc-check"` is a valid query string; `status:("OK") AND doc check` is not.
+### Run tests with your integration and deployment processes
 
-## Create a check
+Leverage your Synthetic tests as [canaries][5] or run them directly within your [CI pipelines][5] to start shipping without fearing faulty code might impact your customers experience.
 
-Select **Create a New check +** in the upper right corner of the Synthetics page to create an [API tests][2] or a [browser test][3]. When a test fails, the endpoint is not retested: the uptime directly considers the endpoint as `down`.
+ {{< img src="synthetics/ci.png" alt="CI tests"  style="width:100%;">}}
 
-{{< img src="synthetics/create_a_check.png" alt="Create a check"  style="width:80%;">}}
+### Connect Synthetic Monitoring data and traces
 
-## Metrics
+Use the [out of the box integration between Synthetic tests and APM traces][6] to find the root cause of failures across frontend, network and backend requests.
 
-The following metrics are generated by Synthetics checks:
-
-* Metrics starting with `synthetics.browser.*` come from your [browser tests][3].
-* Metrics starting with `synthetics.http.*` come from your [API HTTP tests][4].
-* Metrics starting with `synthetics.ssl.*` come from your [API SSL tests][5].
-
-{{< get-metrics-from-git "synthetics" >}}
+{{< img src="synthetics/synthetics_traces.gif" alt="Synthetic Monitoring" style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[2]: /synthetics/api_tests
-[3]: /synthetics/browser_tests
-[4]: /synthetics/api_tests/?tab=httptest
-[5]: /synthetics/api_tests/?tab=ssltest
+[1]: /getting_started/synthetics/api_test
+[2]: /synthetics/api_tests/?tab=ssltest
+[3]: /getting_started/synthetics/browser_test
+[4]: /getting_started/synthetics/private_location
+[5]: /synthetics/ci/
+[6]: /synthetics/apm/

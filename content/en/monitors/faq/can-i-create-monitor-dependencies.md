@@ -2,13 +2,13 @@
 title: Can I create monitor dependencies?
 kind: faq
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---
@@ -60,9 +60,11 @@ That's alot of missing data - check first to see if there is an AWS outage?
 {{/is_alert_recovery}}
 ```
 
+**Note**: Recovery notifications are not triggered if a monitor transitions through a `NO_DATA` state. For example, `Alert` -> `No Data` -> `OK`.
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/composite
-[2]: /api/#downtimes
-[3]: /api/#cancel-downtime-by-scope
+[1]: /monitors/monitor_types/composite/
+[2]: /api/v1/downtimes/
+[3]: /api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

@@ -6,13 +6,13 @@ aliases:
   - /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
   - /ja/agent/faq/log-location
 further_reading:
-  - link: agent/faq/how-datadog-agent-determines-the-hostname
+  - link: /agent/faq/how-datadog-agent-determines-the-hostname/
     tag: よくあるご質問
     text: Datadog が Agent ホスト名を決定する方法
-  - link: agent/guide/agent-commands
+  - link: /agent/guide/agent-commands/
     tag: よくあるご質問
     text: すべての Agent コマンド
-  - link: agent/guide/agent-configuration-files
+  - link: /agent/guide/agent-configuration-files/
     tag: よくあるご質問
     text: すべての Agent 構成ファイルの場所
 ---
@@ -63,11 +63,11 @@ Agent フォワーダーは、メトリクスを HTTPS 経由で Datadog に送�
 v6 の DogStatsD は、[Etsy の StatsD][5] メトリクス集計デーモンの Go 言語実装です。UDP または Unix ソケット経由で任意のメトリクスを受信してロールアップするために使用され、構成要素の一部としてカスタムコードを組み込んでもレイテンシーが発生しません。DogStatsD についての詳細は[こちら][6]でご確認いただけます。
 
 [1]: /ja/developers/metrics/dogstatsd_metrics_submission/#metrics
-[2]: /ja/tracing/guide/terminology
+[2]: /ja/tracing/guide/terminology/
 [3]: /ja/agent/guide/network/#open-ports
 [4]: /ja/developers/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /ja/developers/metrics/dogstatsd_metrics_submission
+[6]: /ja/developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -103,11 +103,11 @@ v3.4.1 以上の Agent では、すべてのリスニングプロセスはデフ
 minfds = 100 # ハードウェア制限
 ```
 
-[1]: /ja/integrations
-[2]: /ja/developers/metrics/custom_metrics
+[1]: /ja/integrations/
+[2]: /ja/developers/metrics/custom_metrics/
 [3]: /ja/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /ja/agent/proxy/?tab=agentv5
-[5]: /ja/agent/faq/network
+[5]: /ja/agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -152,16 +152,16 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 **注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
 
 [1]: /ja/agent/basic_agent_usage/amazonlinux/
-[2]: /ja/agent/basic_agent_usage/deb
-[3]: /ja/agent/basic_agent_usage/ubuntu
-[4]: /ja/agent/basic_agent_usage/redhat
-[5]: /ja/agent/docker
-[6]: /ja/agent/basic_agent_usage/kubernetes
-[7]: /ja/agent/basic_agent_usage/suse
-[8]: /ja/agent/basic_agent_usage/fedora
-[9]: /ja/agent/basic_agent_usage/osx
-[10]: /ja/agent/basic_agent_usage/windows
-[11]: /ja/agent/basic_agent_usage/source
+[2]: /ja/agent/basic_agent_usage/deb/
+[3]: /ja/agent/basic_agent_usage/ubuntu/
+[4]: /ja/agent/basic_agent_usage/redhat/
+[5]: /ja/agent/docker/
+[6]: /ja/agent/basic_agent_usage/kubernetes/
+[7]: /ja/agent/basic_agent_usage/suse/
+[8]: /ja/agent/basic_agent_usage/fedora/
+[9]: /ja/agent/basic_agent_usage/osx/
+[10]: /ja/agent/basic_agent_usage/windows/
+[11]: /ja/agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -182,16 +182,16 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 **注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
 
 [1]: /ja/agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /ja/agent/basic_agent_usage/deb
-[3]: /ja/agent/basic_agent_usage/ubuntu
-[4]: /ja/agent/basic_agent_usage/redhat
-[5]: /ja/agent/docker
-[6]: /ja/agent/basic_agent_usage/kubernetes
-[7]: /ja/agent/basic_agent_usage/suse
-[8]: /ja/agent/basic_agent_usage/fedora
-[9]: /ja/agent/basic_agent_usage/osx
-[10]: /ja/agent/basic_agent_usage/windows
-[11]: /ja/agent/basic_agent_usage/source
+[2]: /ja/agent/basic_agent_usage/deb/
+[3]: /ja/agent/basic_agent_usage/ubuntu/
+[4]: /ja/agent/basic_agent_usage/redhat/
+[5]: /ja/agent/docker/
+[6]: /ja/agent/basic_agent_usage/kubernetes/
+[7]: /ja/agent/basic_agent_usage/suse/
+[8]: /ja/agent/basic_agent_usage/fedora/
+[9]: /ja/agent/basic_agent_usage/osx/
+[10]: /ja/agent/basic_agent_usage/windows/
+[11]: /ja/agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
@@ -199,7 +199,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
-[1]: /ja/agent/basic_agent_usage/aix
+[1]: /ja/agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -211,7 +211,7 @@ Agent v6 以上のコマンドラインインターフェイスはサブコマ�
 <AGENT_バイナリパス> <サブコマンド> <オプション>
 ```
 
-| サブコマンド        | Notes                                                                       |
+| サブコマンド        | 注                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | 指定されたチェックを実行します。                                                    |
 | `configcheck`     | 実行中の Agent のうち、ロード済みで解決済みの構成をすべて出力します。              |
@@ -274,7 +274,7 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 
 **ログ収集**:
 
-以下は、[HTTP フォワーダー][1]が有効になっている状態で*毎秒 110KB のログが記録される*ファイルから得た結果です。これは、使用可能な圧縮レベルに応じてリソース使用量がどのように増加するかを示しています。
+以下は、[HTTP フォワーダー][6]が有効になっている状態で*毎秒 110KB のログが記録される*ファイルから得た結果です。これは、使用可能な圧縮レベルに応じてリソース使用量がどのように増加するかを示しています。
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -312,43 +312,6 @@ JMX チェックを有効にすると、監視対象の JVM によって公開�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 構成管理ツール
-
-構成管理ツールを使用して、Datadog Agent と[インテグレーション][6]を管理します。
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Chef GitHub プロジェクト][1]
-* [Chef で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Puppet GitHub プロジェクト][1]
-* [Puppet で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Ansible GitHub プロジェクト][1]
-* [Ansible で Datadog Agent をインストールする[2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Saltstack で Datadog Agent をインストールする[1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Datadog Agent の次のステップ
 
 ### Agent の更新
@@ -380,10 +343,10 @@ Agent データを [Datadog EU サイト][10]に送信するには、[Agent の�
 [3]: /ja/agent/guide/agent-commands/#start-the-agent
 [4]: /ja/agent/guide/agent-commands/#service-status
 [5]: /ja/agent/guide/agent-commands/#stop-the-agent
-[6]: /ja/integrations
+[6]: /ja/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings#agent
-[8]: /ja/agent/guide/integration-management
-[9]: /ja/agent/guide/agent-configuration-files
+[8]: /ja/agent/guide/integration-management/
+[9]: /ja/agent/guide/agent-configuration-files/
 [10]: https://app.datadoghq.eu
 [11]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /ja/agent/guide/agent-log-files
+[12]: /ja/agent/guide/agent-log-files/

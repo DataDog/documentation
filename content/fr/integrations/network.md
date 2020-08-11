@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -36,7 +39,7 @@ supported_os:
 
 Le check Network recueille des statistiques TCP/IP à partir du système d'exploitation du host.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
 
@@ -118,5 +121,5 @@ Le check Network n'inclut aucun check de service.
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/network/CHANGELOG.md#1110--2019-05-14
-[9]: https://docs.datadoghq.com/fr/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api
-[10]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
+[9]: https://docs.datadoghq.com/fr/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api/
+[10]: https://docs.datadoghq.com/fr/monitors/monitor_types/network/

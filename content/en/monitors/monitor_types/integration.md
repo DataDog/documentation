@@ -3,13 +3,13 @@ title: Integration Monitor
 kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -34,6 +34,8 @@ Create an integration metric monitor by following the instructions in the [metri
 ### Integration Status
 
 If the integration has a service check, the **Integration Status** tab is active.
+
+**Note**: If the integration does not submit metrics or service checks, it will show up as "Misconfigured".
 
 #### Pick a check
 
@@ -93,11 +95,11 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
+[1]: /integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /monitors/monitor_types/metric
+[3]: /monitors/monitor_types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/monitor_types/metric/#no-data
 [6]: /monitors/monitor_types/metric/#auto-resolve
 [7]: /monitors/monitor_types/metric/#evaluation-delay
-[8]: /monitors/notifications
+[8]: /monitors/notifications/

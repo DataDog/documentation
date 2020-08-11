@@ -2,12 +2,9 @@
 title: 機密情報管理
 kind: documentation
 further_reading:
-  - link: agent/autodiscovery
+  - link: /agent/autodiscovery/
     tag: ドキュメント
     text: オートディスカバリー
-  - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#troubleshooting'
-    tag: github
-    text: シークレットのトラブルシューティング
 ---
 Agent の構成ファイルにプレーンテキストでシークレットを保存したくない場合は、シークレット管理パッケージを使用できます。
 
@@ -85,7 +82,7 @@ APM とプロセスモニタリングは独自のプロセス/サービスで実
 * ユーザーが Agent を再構築せずに任意のシークレット管理バックエンドを自由かつ柔軟に使用できる。
 * 各ユーザーが Agent から自分のシークレット管理バックエンドまでのイニシャルトラスト問題を解決できる。これは、各ユーザーの好みの認証方法を活用し、継続的なインテグレーションワークフローに適合する形で発生します。
 
-#### コンフィグレーション
+#### 構成
 
 `datadog.yaml` で次の変数を設定します。
 
@@ -218,6 +215,48 @@ instances:
     password: decrypted_db_prod_password
 ```
 
+### オートディスカバリーのヘルパースクリプト
+
+多くの Datadog インテグレーションは、メトリクスを取得するために資格情報を必要とします。[オートディスカバリーテンプレート][1]にこれらの資格情報を直接入力しないように、機密情報管理を使用し、資格情報をテンプレートと切り離すことができます。
+
+[スクリプト][2]は Docker イメージ（`/readsecret.py`）として入手できます。
+
+#### スクリプトの使用
+
+スクリプトにはフォルダを引数として渡す必要があります。シークレットのハンドルは、このフォルダに対する相対的なファイル名として識別されます。機密情報の漏えいを避けるために、スクリプトはルートフォルダ以外に置かれたすべてのファイルへのアクセスを（シンボリックリンクのターゲットを含む）拒否します。
+
+このスクリプトは [OpenShift の制限付き SCC オペレーション][3]との互換性を持たないため、Agent を `root` ユーザーとして実行する必要があります。
+
+バージョン 6.10.0 から、構成値に含まれる `ENC[]` トークンを環境変数として渡せるようになりました。以前のバージョンでは、`datadog.yaml` やオートディスカバリーテンプレートに含まれる `ENC[]` トークン以外はサポートされませんでした。
+
+#### セットアップの例
+
+##### Docker Swarm のシークレット
+
+[Docker シークレット][4]は `/run/secrets` フォルダ内でマウントされます。以下の環境変数を Agent コンテナに渡してください。
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
+DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
+```
+
+`db_prod_password` のシークレット値を使用するには、`/run/secrets/db_prod_password` ファイルで公開してから、テンプレートの `ENC[db_prod_password]` に挿入します。
+
+##### Kubernetes のシークレット
+
+Kubernetes では、ポッド内で[シークレットをファイルとして公開する][5]ことができます。
+
+シークレットが `/etc/secret-volume` 内でマウントされている場合は、以下の環境変数を使用してください。
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+
+この例のようにリンクさせると、パスワードフィールドが `/etc/secret-volume/password` ファイルに格納され、`ENC[password]` トークンを介してアクセス可能になります。
+
+**注**: `/var/run/secrets` ではなく、専用のフォルダを使用することをお勧めします。そうすれば、すべてのサブフォルダに（機密性の高い `/var/run/secrets/kubernetes.io/serviceaccount/token` ファイルを含む）スクリプトからアクセスできます。
+
 ## トラブルシューティング
 
 ### 検出されたシークレットのリスト
@@ -303,7 +342,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**注**: 構成ファイルの変更を取得するには、Agent を[再起動][2]する必要があります。
+**注**: 構成ファイルの変更を適用するには、Agent を[再起動][6]する必要があります。
 
 ### secret_backend_command のデバッグ
 
@@ -350,17 +389,19 @@ Agent と同じ条件で実行可能ファイルをテストするには、開�
 
 1. `Local Security Policy` の `Local Policies/User Rights Assignement/Deny Log on locally` リストから `ddagentuser` を削除します。
 2. `ddagentuser` に新しいパスワードを設定します（インストール時に生成されたパスワードはどこにも保存されないため）。Powershell で、次を実行します。
+
   ```powershell
   $user = [ADSI]"WinNT://./ddagentuser";
   $user.SetPassword("a_new_password")
   ```
 
 3. サービスコントロールマネージャーの `DatadogAgent` サービスで使用されるパスワードを更新します。Powershell で、次を実行します。
+
   ```powershell
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-これで、`ddagentuser` としてログインして実行可能ファイルをテストできます。Datadog には、実行可能ファイルを別のユーザーとしてテストするのに役立つ [Powershell スクリプト][3]があります。これはユーザーコンテキストを切り替え、Agent が実行可能ファイルを実行する方法を模倣します。
+これで、`ddagentuser` としてログインして実行可能ファイルをテストできます。Datadog には、実行可能ファイルを別のユーザーとしてテストするのに役立つ [Powershell スクリプト][7]があります。これはユーザーコンテキストを切り替え、Agent が実行可能ファイルを実行する方法を模倣します。
 
 使用方法の例
 
@@ -388,9 +429,12 @@ Agent が起動時に最初に行うことは、`datadog.yaml` をロードし�
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/autodiscovery
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+[1]: /ja/agent/kubernetes/integrations/
+[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
+[3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
+[4]: https://docs.docker.com/engine/swarm/secrets/
+[5]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[6]: /ja/agent/guide/agent-commands/#restart-the-agent
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
