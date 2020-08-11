@@ -509,25 +509,25 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 **Note**:
 
 * Values containing a separator character must be quoted.
-* Quoted Values containing a quoting character must be escaped with a quoting characters. ex: `""` within a quoted value represents `"`.
+* Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
 * If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones. 
 
 
 **Log**:
 
-```text
-John,Doe,120 Jefferson St.,Riverside, NJ, 08075
-```
+{{< code-block lang="text" filename="log.txt" >}}
+John,Doe,120 Jefferson St.,Riverside,NJ,08075
+{{< /code-block >}}
 
 **Rule**:
 
-```text
+{{< code-block lang="text" filename="rule.txt" >}}
 myParsingRule %{data:user:csv("first_name,name,adress,city,state,postal_code")}
-```
+{{< /code-block >}}
 
 **Result:**
 
-  ```json
+{{< code-block lang="json" filename="result.json" >}}
 {
   "user": {
     "first_name": "John",
@@ -538,7 +538,7 @@ myParsingRule %{data:user:csv("first_name,name,adress,city,state,postal_code")}
     "postal_code": "08075"
   }
 }
-  ```
+{{< /code-block >}}
 
 Other examples:
 
