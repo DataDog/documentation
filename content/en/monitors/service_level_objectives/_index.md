@@ -129,7 +129,15 @@ Three different SLO audit events will appear in the Event Stream:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, instead enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
+You can also query the Event Stream programmatically using the [Datadog Events API][8].
+
 {{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
+
+To proactively manage the configurations of your SLOs, you can also set an [Event Monitor][9] to notify you when events corresponding to these tags occur.
+
+**Example:** If you wish to be notified when a sepcific SLO's configuration is modifed, you can set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
+
+{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
 
 ## SLO Widgets
 
@@ -146,3 +154,5 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/#saved-views
+[8]: /api/v1/events/#query-the-event-stream
+[9]: /monitors/monitor_types/event/
