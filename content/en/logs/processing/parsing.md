@@ -498,7 +498,7 @@ rule %{data::xml}
 
 ### Parsing CSV
 
-Use the **csv** filter to more-easily map strings to attributes for csv or tsv formats:
+Use the **csv** filter to more-easily map strings to attributes for csv or tsv formats.
 This is the  core filter: `csv(headers[, separator[, quotingcharacter]])` where:
 
 * `headers`: defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumirical character in addition to `-`, `_`, `@` and `$`.
@@ -509,6 +509,7 @@ This is the  core filter: `csv(headers[, separator[, quotingcharacter]])` where:
 
 * Values containing a separator character must but quoted
 * Quoted Values containing a quoting character must be escaped with a quoting characters. ex: `""` represent `"` 
+* If the log doesn't contain the same number of value as the number of keys in the header, the csv parser will match the first ones. 
 
 
 **Log**:
@@ -540,12 +541,15 @@ myParsingRule %{data:user:csv("first_name,name,adress,city,state,postal_code")}
 
 Other examples:
 
-| **Raw string**               | **Parsing rule**                                                | **Result**                                       |
-|:-----------------------------|:----------------------------------------------------------------|:-------------------------------------------------|
-| `John,Doe`                   | `%{data::csv("firstname,name")}`                               | {"firstname": "John", "name":"Doe"}             |
-| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                               | {"firstname": "John \"Da Man\"", "name":"Doe"}    |
-| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                       | {"firstname": "John 'Da Man'", "name":"Doe"}    |
-| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code>           | {"firstname": "John", "name":"Doe"}             |
+| **Raw string**               | **Parsing rule**                                                         | **Result**                                      |
+|:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
+| `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
+| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                                 | {"firstname": "John 'Da Man'", "name":"Doe"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code> | {"firstname": "John", "name":"Doe"}             |
+| `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
+| `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
+| `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 
 
 ## Further Reading
