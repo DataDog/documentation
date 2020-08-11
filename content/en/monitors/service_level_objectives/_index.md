@@ -114,7 +114,7 @@ Once you are using a saved view, you can update it by selecting that saved view,
 
 SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time. 
 
-The following SLO configuration information will be included:
+Each event includes the following SLO configuration information:
 
 - Name
 - Description 
