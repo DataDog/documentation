@@ -121,11 +121,11 @@ It's also possible to copy an integration pipeline using the copy button.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /logs/processing/processors/
 [2]: /logs/explorer/search/
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-
 [6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [7]: /integrations/#cat-log-collection

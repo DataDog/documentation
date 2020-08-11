@@ -53,5 +53,3 @@ The lower part of the issue panel gives you the ability to navigate error sample
 - Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
 - Information about the user, such as their browser or their OS with the related versions that were used when the error occurred.
 
-[1]: /events
-[2]: /monitors/monitor_types/event

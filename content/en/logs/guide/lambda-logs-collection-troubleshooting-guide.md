@@ -3,20 +3,20 @@ title: Lambda Function Log Collection Troubleshooting Guide
 kind: documentation
 ---
 
-If you don't see logs forwarded from a Datadog forwarder Lambda function in the Log Explorer, follow the troubleshooting steps below. If you continue to have trouble after following these steps, [contact Datadog support][2] for further assistance.
+If you don't see logs forwarded from a Datadog forwarder Lambda function in the Log Explorer, follow the troubleshooting steps below. If you continue to have trouble after following these steps, [contact Datadog support][1] for further assistance.
 
 ## Are your logs sent to Datadog?
 
-1. Navigate to the [Log Explorer's Live Tail view][3].
+1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][4]. 
+    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
-3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][5] set up. These filters are filtering out your logs.
+3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
 
 ## Check the Lambda function monitoring tab
 
-[From the AWS console][6]
+[From the AWS console][5]
 
 1. Open your forwarder Lambda function.
 
@@ -44,7 +44,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.throttles`        | Count of invocation attempts that were throttled due to invocation rates exceeding customer limits |
 
-For more information on these and other AWS Lambda metrics, see [Amazon Lambda Metrics][7].
+For more information on these and other AWS Lambda metrics, see [Amazon Lambda Metrics][6].
 
 ### Manage your function triggers
 
@@ -62,7 +62,7 @@ For logs to be forwarded, the forwarder Lambda function needs to have triggers (
    aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
    ```
 
-4. Set triggers [automatically][8] or [manually][9].
+4. Set triggers [automatically][7] or [manually][8].
 
 Note, AWS doesn't allow for more than one resource to be subscribed to a log source. If your log source is already subscribed by a different resource, you need to remove that subscription first.
 
@@ -88,12 +88,11 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
 
-[1]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[2]: https://docs.datadoghq.com/help
-[3]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
-[5]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
-[6]: https://console.aws.amazon.com/lambda/home
-[7]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
-[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
-[9]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
+[1]: https://docs.datadoghq.com/help
+[2]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
+[3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
+[4]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
+[5]: https://console.aws.amazon.com/lambda/home
+[6]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
