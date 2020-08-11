@@ -542,10 +542,10 @@ Other examples:
 
 | **Raw string**               | **Parsing rule**                                                | **Result**                                       |
 |:-----------------------------|:----------------------------------------------------------------|:-------------------------------------------------|
-| `John,Doe`                   | `%{data::csv("first_name,name")}`                               | {"first_name": "John", "name":"Doe"}             |
-| `"John ""Da Man""",Doe`      | `%{data::csv("first_name,name")}`                               | {"first_name": "John "Da Man"", "name":"Doe"}    |
-| `'John ''Da Man''',Doe`      | `%{data::csv("first_name,name",",","'")}`                       | {"first_name": "John 'Da Man'", "name":"Doe"}    |
-| <code>John&#124;Doe</code>   | <code>%{data::csv("first_name,name","&#124;")}</code>           | {"first_name": "John", "name":"Doe"}             |
+| `John,Doe`                   | `%{data::csv("firstname,name")}`                               | {"firstname": "John", "name":"Doe"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                               | {"firstname": "John "Da Man"", "name":"Doe"}    |
+| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                       | {"firstname": "John 'Da Man'", "name":"Doe"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv("firstname,name","&#124;")}</code>           | {"firstname": "John", "name":"Doe"}             |
 
 
 ## Further Reading
