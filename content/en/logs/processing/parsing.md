@@ -498,8 +498,9 @@ rule %{data::xml}
 
 ### Parsing CSV
 
-Use the **csv** filter to more-easily map strings to attributes for csv or tsv formats.
-This is the  core filter: `csv(headers[, separator[, quotingcharacter]])` where:
+Use the **csv** filter to more-easily map strings to attributes when separated by a given character (`,` by default).
+
+The csv filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
 
 * `headers`: defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumirical character in addition to `-`, `_`, `@` and `$`.
 * `separator`: defines separators used to separate the different values. Only one character is accepted. Default: `,` . Note use `tab` to represent the tabulation character.
@@ -507,8 +508,8 @@ This is the  core filter: `csv(headers[, separator[, quotingcharacter]])` where:
 
 **Note**:
 
-* Values containing a separator character must but quoted
-* Quoted Values containing a quoting character must be escaped with a quoting characters. ex: `""` represent `"` 
+* Values containing a separator character must but quoted.
+* Quoted Values containing a quoting character must be escaped with a quoting characters. ex: `""` represent `"`.
 * If the log doesn't contain the same number of value as the number of keys in the header, the csv parser will match the first ones. 
 
 
