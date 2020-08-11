@@ -110,6 +110,37 @@ Hover over a saved view from the list and select the hyperlink icon to copy the 
 
 Once you are using a saved view, you can update it by selecting that saved view, modifying the query, and clicking the *Update* button below its name in the *Saved Views* panel. To change the saved view's name or delete a saved view, hover over its row in the *Saved Views* panel and click the pencil icon or trash can icon, respectively.
 
+## SLO Audit Events
+
+SLO audit events allow you to track the history of your SLO configurations using the Event Stream. Audit events are added to the Event Stream every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time. 
+
+Each event includes the following SLO configuration information:
+
+- Name
+- Description 
+- Target percentages and time windows
+- Datasources (monitor IDs or metric query)
+
+Three types of SLO audit events appear in the Event Stream:
+
+1. `SLO Created` events show all four pieces of SLO configuration information at creation time.
+2. `SLO Modified` events show a what configuration information changed during a modification
+3. `SLO Deleted` events show all four pieces of configuration information the SLO had right before it was deleted
+
+To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Stream. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
+
+You can also query the Event Stream programmatically using the [Datadog Events API][8].
+
+**Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Stream to a longer period, for example, the past 7 days.
+
+{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
+
+To proactively manage the configurations of your SLOs, set an [Event Monitor][9] to notify you when events corresponding to certain tags occur.
+
+For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
+
+{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
+
 ## SLO Widgets
 
 After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
@@ -125,3 +156,5 @@ After creating your SLO, you can use the SLO Summary dashboard widget to visuali
 [5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
 [6]: /monitors/service_level_objectives/metric/#define-queries
 [7]: /monitors/service_level_objectives/#saved-views
+[8]: /api/v1/events/#query-the-event-stream
+[9]: /monitors/monitor_types/event/
