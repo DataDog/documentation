@@ -38,7 +38,7 @@ Use the following API call to build a `table` with `count` of log events grouped
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -66,7 +66,7 @@ Response:
 
 The result dataset comprises of the `buckets` object as shown below. 
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -102,7 +102,7 @@ Use the following API call to build a `timeseries` with `count` of log events gr
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -130,7 +130,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -191,7 +191,7 @@ Use the following API call to build a `table` with `avg` of values in a `metric`
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -218,7 +218,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -265,7 +265,7 @@ Use the following API call to build a `table` with `sum` of values in a `metric`
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -293,7 +293,7 @@ Similarly, you can build an `sum` timeseries by setting `type` as `timeseries`.
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -330,7 +330,7 @@ Use the following API call to build a `table` with `min` of values in a `metric`
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -358,7 +358,7 @@ Similarly, you can build an `min` timeseries by setting `type` as `timeseries`.
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -395,7 +395,7 @@ Use the following API call to build a `table` with `max` of values in a `metric`
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -423,7 +423,7 @@ Similarly, you can build an `max` timeseries by setting `type` as `timeseries`.
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -462,7 +462,7 @@ Use the following API call to build a `table` with `percentiles` of values in a 
 
 API call:
 
-```
+```bash
 curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
    "compute":[
    {
@@ -489,7 +489,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 
 Response:
 
-```
+```json
 {
     "meta": {
         "status": "done",
@@ -519,7 +519,7 @@ Response:
 }
 ```
 
-## Further Reading
+### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
