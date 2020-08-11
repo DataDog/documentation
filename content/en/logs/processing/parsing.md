@@ -113,7 +113,8 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).                                                         |
-| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                          |  
+| `xml`                                                          |  Parses properly formatted XML. See the [XML filter examples](#parsing-xml).                                                                                | 
+| `csv(headers[, separator[, quotingcharacter]])`                | Parses properly formatted CSV or TSV lines. See the [CSV filter examples](#parsing-csv).                                                                    |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -494,6 +495,58 @@ rule %{data::xml}
 
 * If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Harry Potter</title>` is converted to `{"title": {"lang": "en", "value": "Harry Potter" } }`
 * Repeated tags are automatically converted to arrays. For example: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` is converted to `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+
+### Parsing CSV
+
+Use the **csv** filter to more-easily map strings to attributes for csv or tsv formats:
+This is the  core filter: `csv(headers[, separator[, quotingcharacter]])` where:
+
+* `headers`: defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumirical character in addition to `-`, `_`, `@` and `$`.
+* `separator`: defines separators used to separate the different values. Only one character is accepted. Default: `,` . Note use `tab` to represent the tabulation character.
+* `quotingcharacter`: defines the quoting character. Only one character is accepted. Default: `"` 
+
+**Note**:
+
+* Values containing a separator character must but quoted
+* Quoted Values containing a quoting character must be escaped with a quoting characters. ex: `""` represent `"` 
+
+
+**Log**:
+
+```text
+John,Doe,120 jefferson st.,Riverside, NJ, 08075
+```
+
+**Rule**:
+
+```text
+myParsingRule %{data:user:csv("first_name,name,adress,city,state,postal_code")}
+```
+
+**Result:**
+
+  ```json
+{
+  "user": {
+    "first_name": "John",
+    "name": "Doe",
+    "adress": "120 jefferson st.",
+    "city": "Riverside",
+    "state": "NJ",
+    "postal_code": "08075"
+  }
+}
+  ```
+
+Other examples:
+
+| **Raw string**               | **Parsing rule**                                                | **Result**                                       |
+|:-----------------------------|:----------------------------------------------------------------|:-------------------------------------------------|
+| `John,Doe`                   | `%{data::csv("first_name,name")}`                               | {"first_name": "John", "name":"Doe"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("first_name,name")}`                               | {"first_name": "John "Da Man"", "name":"Doe"}    |
+| `'John ''Da Man''',Doe`      | `%{data::csv("first_name,name",",","'")}`                       | {"first_name": "John 'Da Man'", "name":"Doe"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv("first_name,name","&#124;")}</code>           | {"first_name": "John", "name":"Doe"}             |
+
 
 ## Further Reading
 
