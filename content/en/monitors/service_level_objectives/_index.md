@@ -137,7 +137,7 @@ You can also query the Event Stream programmatically using the [Datadog Events A
 
 To proactively manage the configurations of your SLOs, set an [Event Monitor][9] to notify you when events corresponding to certain tags occur.
 
-**Example:** If you wish to be notified when a sepcific SLO's configuration is modifed, you can set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
+For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
 {{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
 
