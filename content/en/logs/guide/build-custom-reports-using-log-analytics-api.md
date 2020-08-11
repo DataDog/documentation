@@ -523,7 +523,7 @@ Response:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/
+[1]: https://docs.datadoghq.com/api/v2/logs/
 [2]: https://docs.datadoghq.com/api/v1/authentication/
 [3]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
 
