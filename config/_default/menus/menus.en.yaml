@@ -585,13 +585,13 @@ main:
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 3  
+    weight: 3
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 4
-  - name: Enable AWS X-Ray  
+  - name: Enable AWS X-Ray
     url: tracing/serverless_functions
     parent: serverless_distributed_tracing
     weight: 401
@@ -2419,6 +2419,10 @@ api_v1:
   - name: Delete tests
     parent: Synthetics
     url: delete-tests
+    generated: true
+  - name: Trigger some Synthetics tests for CI
+    parent: Synthetics
+    url: trigger-some-synthetics-tests-for-ci
     generated: true
   - name: Get a test configuration (API)
     parent: Synthetics
