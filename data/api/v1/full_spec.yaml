@@ -367,6 +367,37 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
+    ApmResourcesQueryDefinition:
+      description: The APM resources (stats) query for Table Widget.
+      properties:
+        columns:
+          description: Column names used by front end for display.
+          items:
+            description: Column header.
+            example: MeanLatency
+            type: string
+          type: array
+        env:
+          description: Environment name.
+          example: prod
+          type: string
+        name:
+          description: Operation name associated with service.
+          example: rack.request
+          type: string
+        resource:
+          description: Resource name.
+          example: CartsController
+          type: string
+        service:
+          description: Service name.
+          example: web-store
+          type: string
+      required:
+      - service
+      - env
+      - name
+      type: object
     ApplicationKey:
       description: An application key with its associated metadata.
       properties:
@@ -1323,11 +1354,8 @@ components:
           format: int64
           type: integer
         device_name:
-          description: A list of device names to post the event with.
-          items:
-            description: A device name.
-            type: string
-          type: array
+          description: A device name.
+          type: string
         host:
           description: 'Host name to associate with the event.
 
@@ -5535,7 +5563,8 @@ components:
           type: string
         points:
           description: Points relating to a metric. All points must be tuples with
-            timestamp and a scalar value (cannot be a string).
+            timestamp and a scalar value (cannot be a string). Timestamps cannot be
+            more than ten minutes in the future or more than one hour in the past.
           example:
           - - 1575317847
             - 0.5
@@ -6388,6 +6417,21 @@ components:
       - CERTIFICATE
       - RESPONSE_TIME
       - PROPERTY
+    SyntheticsBasicAuth:
+      description: Object to handle basic authentication when performing the test.
+      properties:
+        password:
+          description: Password to use for the basic authentication.
+          example: ''
+          type: string
+        username:
+          description: Username to use for the basic authentication.
+          example: ''
+          type: string
+      required:
+      - password
+      - username
+      type: object
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -6569,6 +6613,83 @@ components:
       - EMAIL
       - GLOBAL
       - TEXT
+    SyntheticsCITest:
+      description: Test configuration for Synthetics CI
+      properties:
+        allowInsecureCertificates:
+          description: Disable certificate checks in API tests.
+          type: boolean
+        basicAuth:
+          $ref: '#/components/schemas/SyntheticsBasicAuth'
+        body:
+          description: Body to include in the test.
+          type: string
+        bodyType:
+          description: Type of the data sent in a synthetics API test.
+          type: string
+        cookies:
+          description: Cookies for the request.
+          type: string
+        deviceIds:
+          description: For browser test, array with the different device IDs used
+            to run the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsDeviceID'
+          type: array
+        followRedirects:
+          description: For API HTTP test, whether or not the test should follow redirects.
+          type: boolean
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        locations:
+          description: Array of locations used to run the test.
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        metadata:
+          description: Metadata for the Synthetics tests run
+          properties:
+            ci:
+              properties:
+                pipeline:
+                  type: string
+                provider:
+                  type: string
+              type: object
+            git:
+              properties:
+                branch:
+                  type: string
+                commit_sha:
+                  type: string
+              type: object
+          type: object
+        public_id:
+          description: The public ID of the Synthetics test to trigger.
+          type: string
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        startUrl:
+          description: Starting URL for the browser test.
+          type: string
+        variables:
+          additionalProperties:
+            description: A single variable.
+            type: string
+          description: Variables to replace in the test.
+          type: object
+      required:
+      - public_id
+    SyntheticsCITestBody:
+      description: Object describing the synthetics tests to trigger.
+      properties:
+        tests:
+          description: Individual synthetics test.
+          items:
+            $ref: '#/components/schemas/SyntheticsCITest'
+          type: array
+      type: object
     SyntheticsCheckType:
       description: Type of assertion to apply in an API test.
       enum:
@@ -6602,8 +6723,10 @@ components:
       properties:
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
+          example: []
           items:
             description: A Synthetic test ID to delete.
+            example: abc-def-123
             type: string
           type: array
       type: object
@@ -7169,6 +7292,12 @@ components:
       x-enum-varnames:
       - API
       - BROWSER
+    SyntheticsTestHeaders:
+      additionalProperties:
+        description: A single Header.
+        type: string
+      description: Headers to include when performing the test.
+      type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
 
@@ -7228,22 +7357,23 @@ components:
               type: integer
           type: object
         retry:
-          description: Object describing the retry strategy to apply to a Synthetic
-            test.
-          properties:
-            count:
-              description: Number of times a test needs to be retried before marking
-                a location as failed. Defaults to 0.
-              format: int64
-              type: integer
-            interval:
-              description: Time interval between retries (in milliseconds). Defaults
-                to 300ms.
-              format: double
-              type: number
-          type: object
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
           $ref: '#/components/schemas/SyntheticsTickInterval'
+      type: object
+    SyntheticsTestOptionsRetry:
+      description: Object describing the retry strategy to apply to a Synthetic test.
+      properties:
+        count:
+          description: Number of times a test needs to be retried before marking a
+            location as failed. Defaults to 0.
+          format: int64
+          type: integer
+        interval:
+          description: Time interval between retries (in milliseconds). Defaults to
+            300ms.
+          format: double
+          type: number
       type: object
     SyntheticsTestPauseStatus:
       description: Define whether you want to start (`live`) or pause (`paused`) a
@@ -7274,29 +7404,12 @@ components:
       description: Object describing the Synthetic test request.
       properties:
         basicAuth:
-          description: Object to handle basic authentication when performing the test.
-          properties:
-            password:
-              description: Password to use for the basic authentication.
-              example: ''
-              type: string
-            username:
-              description: Username to use for the basic authentication.
-              example: ''
-              type: string
-          required:
-          - password
-          - username
-          type: object
+          $ref: '#/components/schemas/SyntheticsBasicAuth'
         body:
           description: Body to include in the test.
           type: string
         headers:
-          additionalProperties:
-            description: A single Header.
-            type: string
-          description: Headers to include when performing the test.
-          type: object
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
           description: Host name to perform the test with.
           type: string
@@ -7384,6 +7497,46 @@ components:
           format: double
           type: number
       type: object
+    SyntheticsTriggerCITestsResponse:
+      description: Object containing information about the tests triggered.
+      properties:
+        locations:
+          description: List of Synthetics locations.
+          items:
+            description: Synthetics location.
+            properties:
+              id:
+                description: Unique identifier of the location.
+                type: number
+              name:
+                description: Name of the location.
+                type: string
+            type: object
+          type: array
+        results:
+          description: Information about the tests runs.
+          items:
+            properties:
+              device:
+                $ref: '#/components/schemas/SyntheticsDeviceID'
+              location:
+                description: The location ID of the test run.
+                type: number
+              public_id:
+                description: The public ID of the Synthetics test.
+                type: string
+              result_id:
+                description: ID of the result.
+                type: string
+            type: object
+          type: array
+        triggered_check_ids:
+          description: The public IDs of the Synthetics test triggered.
+          items:
+            description: The public ID of the Synthetics test.
+            type: string
+          type: array
+      type: object
     SyntheticsUpdateTestPauseStatusPayload:
       description: Object to start or pause an existing Synthetic test.
       properties:
@@ -7443,6 +7596,8 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        apm_resources_query:
+          $ref: '#/components/schemas/ApmResourcesQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -15263,6 +15418,34 @@ paths:
 
             - Synthetics is not activated for the user'
       summary: Delete tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/trigger/ci:
+    post:
+      description: Trigger a set of Synthetics tests for continuous integration
+      operationId: TriggerCITests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsCITestBody'
+        description: Details of the test to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong
+      summary: Trigger some Synthetics tests for CI
       tags:
       - Synthetics
       x-codegen-request-body-name: body
