@@ -23,6 +23,8 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
+By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:
+
 - [View][4]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
 - [Resource][5]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
 - [Long task][6]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
