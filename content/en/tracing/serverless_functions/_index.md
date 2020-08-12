@@ -23,7 +23,7 @@ Depending on your language and configuration, choose between setting up Datadog 
 
 ## Organizing your Serverless infrastructure with tags
 
-Any [tag][3] applied to your AWS Lambda function automatically becomes a new dimension on which your can slice and dice your traces.
+Any [tag][3] applied to your AWS Lambda function automatically becomes a new dimension on which you can slice and dice your traces.
 
 Tags are especially powerful for consistency across the Datadog platform, which has [first-class support][4] for the `env` and `service` tags.
 
@@ -104,6 +104,8 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 1. Enable the [AWS X-Ray integration][2] for tracing your Lambda functions.
 2. [Set up Datadog APM][9] on your hosts and container-based infrastructure.
+
+**Note**: Distributed Tracing is supported for any runtime for your host or container-based applications.
 
 **Note**: For X-Ray and Datadog APM traces to appear in the same flame graph, all services must have the [same `env` tag](#the-env-tag).
 

@@ -4,8 +4,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English, we are working on its translation. <br> May you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: "Security Monitoring is now available"
-  mobile_message: 'Security Monitoring is now available'
-  link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
-  exclude: []
+  desktop_message: "New announcements from Dash: Incident Management, Continuous Profiler, and more!"
+  mobile_message: 'New announcements from Dash!'
+  link: "https://www.datadoghq.com/blog/dash-2020-new-feature-roundup/"
+exclude: []
 translate_status_banner: "This translation isn't up to date, for the latest english version click here"

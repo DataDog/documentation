@@ -7,6 +7,7 @@ aliases:
   - /graphing/infrastructure/serverless/
   - /infrastructure/serverless/
   - /tracing/serverless_functions/datadog_apm
+  - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
 - link: "/integrations/amazon_xray/"
   tag: "X-Ray Integration"
