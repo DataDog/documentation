@@ -585,13 +585,13 @@ main:
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 3  
+    weight: 3
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 4
-  - name: Enable AWS X-Ray  
+  - name: Enable AWS X-Ray
     url: tracing/serverless_functions
     parent: serverless_distributed_tracing
     weight: 401
