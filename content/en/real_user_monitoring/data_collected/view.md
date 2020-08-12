@@ -39,7 +39,7 @@ To account for modern web applications, loading time watches for network request
 
 ### Hash SPA navigation
 
-Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
+Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Hash changes coming from an HTML anchor tag are ignored.
 
 ## Metrics collected
 
