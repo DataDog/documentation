@@ -96,7 +96,7 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 - The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
 - All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
-[1]: https://www.getpostman.com
+[1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/json/datadog_collection.json
 [4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
