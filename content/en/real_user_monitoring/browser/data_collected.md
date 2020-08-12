@@ -23,13 +23,13 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< whatsnext desc="By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:">}}
-  {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=view#resource">}}<u>View</u>: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute .{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=view#resource">}}<u>Resource</u>: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=longtask#resource">}}<u>Long task</u>: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=error#resource">}}<u>Error</u>: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/data_collected/?tab=useraction#resource">}}<u>User Action</u>: A User Action event is a custom event that can be generated for a given user action.{{< /nextlink >}}
-{{< /whatsnext >}}
+By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:
+
+- [View][4]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
+- [Resource][5]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
+- [Long task][6]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
+- [Error][7]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
+- [User Action][8]: A User Action event is a custom event that can be generated for a given user action.
 
 {{< tabs >}}
 {{% tab "View" %}}
@@ -223,3 +223,9 @@ In addition to default attributes, you can add your [specific global context][3]
 [1]: /logs/processing/attributes_naming_convention/
 [2]: /logs/processing/attributes_naming_convention/#user-agent-attributes
 [3]: /real_user_monitoring/installation/advanced_configuration/
+[4]: /real_user_monitoring/browser/data_collected/?tab=view
+[5]: /real_user_monitoring/browser/data_collected/?tab=resource
+[6]: /real_user_monitoring/browser/data_collected/?tab=longtask
+[7]: /real_user_monitoring/browser/data_collected/?tab=error
+[8]: /real_user_monitoring/browser/data_collected/?tab=useraction
+
