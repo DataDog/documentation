@@ -2420,6 +2420,10 @@ api_v1:
     parent: Synthetics
     url: delete-tests
     generated: true
+  - name: Trigger some Synthetics tests for CI
+    parent: Synthetics
+    url: trigger-some-synthetics-tests-for-ci
+    generated: true
   - name: Get a test configuration (API)
     parent: Synthetics
     url: get-a-test-configuration-api
