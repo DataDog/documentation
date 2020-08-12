@@ -141,8 +141,8 @@ Datadog Agent のステータスを表示するためのコマンドを以下に
 | macOS           | `launchctl list com.datadoghq.agent` または systray アプリを使用                 |
 | ソース          | `sudo service datadog-agent status`                                           |
 
-[1]: /ja/agent/
 
+[1]: /ja/agent/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

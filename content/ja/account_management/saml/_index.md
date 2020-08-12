@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/guides/saml
 further_reading:
-  - link: account_management/multi_organization
+  - link: /account_management/multi_organization/
     tag: Documentation
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---
@@ -43,6 +43,30 @@ Datadog で SAML を構成し、Datadog からのリクエストを受け付け�
 <mrk mid="26" mtype="seg">シングルサインオン URL は、[Team ページ][6]にも表示されます。</mrk><mrk mid="27" mtype="seg">この URL をロードすると、IdP に対する SAML 認証が開始されます。</mrk><mrk mid="28" mtype="seg">**注**:</mrk> <mrk mid="29" mtype="seg">この URL は、アカウントで SAML が有効にならないと表示されません。</mrk>
 
 <mrk mid="30" mtype="seg">**注**:</mrk> <mrk mid="31" mtype="seg">マルチオーガニゼーションに対して SAML を構成する必要がある場合は、[マルチオーガニゼーションに関するドキュメント][7]を参照してください。</mrk>
+
+## SAML 属性の Datadog ロールへのマッピング
+
+ユーザーの SAML 属性に基づき、Datadog のロールを割り当てまたは削除することができます。
+
+1. Account Management で Mappings タブをクリックします。
+
+2. **New Mapping** ボタンをクリックします。
+
+3. 既存の Datadog ロール（デフォルトまたはカスタム）と関連付ける SAML ID プロバイダーのキー/値ペアを指定します。たとえば、`member_of` 属性に `Development` の値を持つすべてのユーザーに `Devs` という Datadog のカスタムロールを割り当てたい場合は、以下のようにします。
+
+    {{< img src="account_management/saml/create_mapping.png" alt="SAML の Datadog ロールへのマッピング作成"  >}}
+
+4. まだの場合は、**Enable Mappings** をクリックしてマッピングを有効化します。
+
+指定された ID プロバイダー属性を持つユーザーがログインすると、自動的に Datadog ロールが割り当てられます。同様に、ユーザーの ID プロバイダー属性が削除されると、ロールへのアクセスも失います（別のマッピングが追加された場合を除く）。
+
+<div class="alert alert-warning">
+  <strong>重要:</strong> いずれのマッピングにも一致<i>しない</i>ユーザーは、それまで割り当てられていたロールを失い、SAML で組織にログインすることができなくなります。マッピング定義をよく確認してください。 
+</div>
+
+マッピングに変更を加えるには鉛筆アイコンを、マッピングを削除する場合はゴミ箱アイコンをクリックします。この操作はマッピングのみに適用され、ID プロバイダー属性または Datadog ロールへの影響はありません。
+
+`authn_mappings` エンドポイントを使用して、SAML 属性の Datadog ロールへのマッピングを作成および変更することも可能です。詳しくは、[フェデレーション認証からロールマッピング API へ][8] をご確認ください。
 
 ## Datadog サービスプロバイダーの詳細
 
@@ -83,13 +107,13 @@ IdP が基本 NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` を
 
 個別の IdP の構成方法については、以下のドキュメントを参照してください。
 
-* [Active Directory][8]
-* [Auth0][9]
-* [Azure][10]
-* [Google][11]
-* [NoPassword][12]
-* [Okta][13]
-* [SafeNet][14]
+* [アクティブディレクトリ][9]
+* [Auth0][10]
+* [Azure][11]
+* [Google][12]
+* [NoPassword][13]
+* [Okta][14]
+* [SafeNet][15]
 
 ## その他の機能
 
@@ -122,16 +146,17 @@ JIT プロビジョニングを使用すると、初めてログインしよう�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
-[2]: /ja/help
-[3]: /ja/account_management/users/default_roles
+[2]: /ja/help/
+[3]: /ja/account_management/users/default_roles/
 [4]: https://app.datadoghq.com/saml/saml_setup
 [5]: https://app.datadoghq.com/account/saml/metadata.xml
 [6]: https://app.datadoghq.com/account/team
-[7]: /ja/account_management/multi_organization#setting-up-saml
-[8]: /ja/account_management/saml/activedirectory
-[9]: /ja/account_management/saml/auth0
-[10]: /ja/account_management/saml/azure
-[11]: /ja/account_management/saml/google
-[12]: /ja/account_management/saml/nopassword
-[13]: /ja/account_management/saml/okta
-[14]: /ja/account_management/saml/safenet
+[7]: /ja/account_management/multi_organization/#setting-up-saml
+[8]: /ja/account_management/authn_mapping/
+[9]: /ja/account_management/saml/activedirectory/
+[10]: /ja/account_management/saml/auth0/
+[11]: /ja/account_management/saml/azure/
+[12]: /ja/account_management/saml/google/
+[13]: /ja/account_management/saml/nopassword/
+[14]: /ja/account_management/saml/okta/
+[15]: /ja/account_management/saml/safenet/
