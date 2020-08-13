@@ -34,12 +34,12 @@ After adding [`@datadog/browser-rum`][4] to your `package.json` file, initialize
 {{% tab "US" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: Datacenter.US,
+    site: 'datadoghq.com',
     sampleRate: 100,
 });
 ```
@@ -48,12 +48,12 @@ datadogRum.init({
 {{% tab "EU" %}}
 
 ```javascript
-import { Datacenter, datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: Datacenter.EU,
+    site: 'datadoghq.eu',
     sampleRate: 100,
 });
 ```
@@ -70,7 +70,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ```html
 <script
-    src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
+    src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
     type="text/javascript"
 ></script>
 <script>
@@ -78,6 +78,7 @@ Paste the generated code snippet into the head tag (in front of any other script
         window.DD_RUM.init({
             clientToken: '<CLIENT_TOKEN>',
             applicationId: '<APPLICATION_ID>',
+            site: 'datadoghq.com',
             sampleRate: 100,
         });
 </script>
@@ -88,7 +89,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ```html
 <script
-    src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
+    src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
     type="text/javascript"
 ></script>
 <script>
@@ -96,6 +97,7 @@ Paste the generated code snippet into the head tag (in front of any other script
         window.DD_RUM.init({
             clientToken: '<CLIENT_TOKEN>',
             applicationId: '<APPLICATION_ID>',
+            site: 'datadoghq.eu',
             sampleRate: 100,
         });
 </script>
@@ -112,7 +114,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 | -------------------- | ------- | -------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `applicationId`      | String  | Yes      | `` | The RUM application ID.                                                       |
 | `clientToken`        | String  | Yes      | `` | A [Datadog Client Token][5].                                                  |
-| `datacenter`         | String  | Yes      | `us`                                                                               | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.                   |
+| `site`               | String  | Yes      | `datadoghq.com`                                                                    | The Datadog Site of your organization. `datadoghq.com` for Datadog US site, `datadoghq.eu` for Datadog EU site.                   |
 | `service`            | String  | No       | `` | The service name for this application.                             |
 | `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
 | `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
