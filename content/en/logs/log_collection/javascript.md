@@ -38,11 +38,11 @@ After adding [`@datadog/browser-logs`][3] to your `package.json` file, initializ
 {{< site-region region="us" >}}
 
 ```javascript
-import { Datacenter, datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: Datacenter.US,
+  site: 'datadoghq.com',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -52,11 +52,11 @@ datadogLogs.init({
 {{< site-region region="eu" >}}
 
 ```javascript
-import { Datacenter, datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: Datacenter.EU,
+  site: 'datadoghq.eu',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -74,10 +74,11 @@ In order to not miss any logs or errors, you should load and configure the libra
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.com',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -93,10 +94,11 @@ In order to not miss any logs or errors, you should load and configure the libra
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.eu',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -116,7 +118,7 @@ The following parameters can be used to configure the Datadog browser log librar
 | Parameter             | Type    | Required | Default | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
-| `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
+| `site`               | String  | Yes      | `datadoghq.com`    | The Datadog Site of your organization. `datadoghq.com` for Datadog US site, `datadoghq.eu` for Datadog EU site.               |
 | `service`            | String  | No       | `` | The service name for this application.                             |
 | `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
 | `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
