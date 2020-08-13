@@ -23,7 +23,7 @@ Datadog APM sends trace data to Datadog in real-time, allowing you to monitor tr
 
 The Datadog Python, Node.js, and Ruby tracing libraries support distributed tracing for AWS Lambda, with more runtimes coming soon. The easiest way to add tracing to your application is with the [Datadog Lambda Library][2], which includes the Datadog tracing library as a dependency.
 
-Visualize your traces on the [Serverless page][3], in [App Analytics][4], and on the [Service Map][5].
+Visualize your traces on the [Serverless Homepage][3], in [App Analytics][4], and on the [Service Map][5].
 
 ### Correlate Logs and Traces
 
