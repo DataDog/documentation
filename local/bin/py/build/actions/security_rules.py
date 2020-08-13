@@ -83,8 +83,9 @@ def security_rules(content, content_dir):
                     tags = data.get('tags', [])
                     if tags:
                         for tag in tags:
-                            key, value = tag.split(':')
-                            page_data[key] = value
+                            if ':' in tag:
+                                key, value = tag.split(':')
+                                page_data[key] = value
                     else:
                         # try build up manually
                         if content['action'] == 'compliance-rules':
