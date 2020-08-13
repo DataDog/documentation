@@ -250,7 +250,7 @@ If you would like to submit a custom metric or manually instrument a function, s
 
 ```javascript
 const { sendDistributionMetric } = require("datadog-lambda-js");
-const tracer = require("dd-trace");
+const tracer = require("dd-trace").init();
 
 // Submit a custom APM span named "sleep"
 const sleep = tracer.wrap("sleep", (ms) => {
