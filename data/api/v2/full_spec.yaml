@@ -510,6 +510,7 @@ components:
       - min
       - max
       - avg
+      example: pc90
       type: string
       x-enum-varnames:
       - COUNT
@@ -790,11 +791,6 @@ components:
       type: object
     LogsCompute:
       description: A compute rule to compute metrics or timeseries
-      example:
-        aggregation: pc90
-        interval: 20m
-        metric: '@score'
-        type: timeseries
       properties:
         aggregation:
           $ref: '#/components/schemas/LogsAggregationFunction'
@@ -825,15 +821,6 @@ components:
       - TOTAL
     LogsGroupBy:
       description: A group by rule
-      example:
-        facet: host
-        limit: 50
-        missing: missing_host
-        sort:
-          order: asc
-          type: alphabetical
-        total: true
-        type: facet
       properties:
         facet:
           description: The name of the facet to use (required)
