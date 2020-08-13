@@ -19,7 +19,15 @@ The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJ
 
 ## Installation and Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app Documentation (Recommended)
+
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+
+{{< partial name="apm/apm-inapp.html" >}}
 
 Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
@@ -327,7 +335,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/send_traces/
 [4]: /tracing/setup/docker/
 [5]: /agent/kubernetes/apm/
