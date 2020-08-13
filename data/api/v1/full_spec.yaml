@@ -9378,22 +9378,9 @@ components:
       x-enum-varnames:
       - ORDERED
     WidgetLegendSize:
-      description: Available legend sizes for a widget.
-      enum:
-      - '0'
-      - '2'
-      - '4'
-      - '8'
-      - '16'
-      - auto
+      description: Available legend sizes for a widget. Should be one of "0", "2",
+        "4", "8", "16", or "auto".
       type: string
-      x-enum-varnames:
-      - ZERO
-      - TWO
-      - FOUR
-      - EIGHT
-      - SIXTEEN
-      - AUTO
     WidgetLineType:
       description: Type of lines displayed.
       enum:
