@@ -19,6 +19,8 @@ The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJ
 
 ## Installation and Getting Started
 
+### Follow the in-app Documentation (Recommended)
+
 Follow the [Quickstart Instructions][2] within the Datadog App for the best experience, including:
 
 - Step by Step instructions scoped to your deployment configuration (Hosts, Docker, Kubernetes, or Amazon ECS).
