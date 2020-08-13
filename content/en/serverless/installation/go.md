@@ -19,13 +19,13 @@ further_reading:
       text: 'Installing Java Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
 ### Install the Datadog Lambda Library
 
-You can install the [Datadog Lambda Library][2] locally by running the following command:
+You can install the [Datadog Lambda Library][3] locally by running the following command:
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -34,19 +34,21 @@ go get github.com/DataDog/datadog-lambda-go
 ### Configure the Function
 
 1. Set environment variable `DD_FLUSH_TO_LOG` to `true`.
-1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
+1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][4].
+1. [Install the Datadog Forwarder if you haven't][2].
 2. [Ensure the option DdFetchLambdaTags is enabled][5].
 3. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][7]. If you need to submit a custom metric, refer to the sample code below:
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][7].
+
+If you would like to submit a custom metric, see the sample code below:
 
 ```go
 package main
@@ -80,9 +82,9 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 ```
 
 [1]: /serverless/#1-install-the-cloud-integration
-[2]: https://github.com/DataDog/datadog-lambda-go
-[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.datadoghq.com/serverless/forwarder/
+[2]: https://docs.datadoghq.com/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://app.datadoghq.com/functions
