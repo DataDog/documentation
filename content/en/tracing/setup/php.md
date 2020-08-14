@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
-## Compatibilty Requirements
+## Compatibility Requirements
 
 For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
