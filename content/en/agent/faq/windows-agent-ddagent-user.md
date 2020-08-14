@@ -35,6 +35,10 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD
 
 For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
 
+Additonally the installer will add the user to the following groups:
+- Performance Monitoring
+- Event Log Viewer
+
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
