@@ -71,18 +71,18 @@ In the `dd-agent.yaml` manifest used to create the [DaemonSet][1], add the follo
 ```yaml
   env:
     - name: DD_LOGS_ENABLED
-        value: "true"
+      value: "true"
     - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-        value: "true"
+      value: "true"
 
   volumeMounts:
     - name: pointerdir
-        mountPath: /opt/datadog-agent/run
+      mountPath: /opt/datadog-agent/run
 
 volumes:
   - hostPath:
       path: /opt/datadog-agent/run
-      name: pointerdir
+    name: pointerdir
 
 ```
 
