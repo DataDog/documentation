@@ -138,6 +138,8 @@ Run this command to boot your private location worker by mounting your configura
 docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
+Ensure that youre `<MY_WORKER_CONFIG_FILE_NAME>.json` file is not in the root home folder (`/root`), but in `/etc/docker`.
+
 **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **We recommend running the container in detached mode with proper restart policy.**
