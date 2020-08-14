@@ -356,5 +356,5 @@ The CloudFormation Stack creates following IAM roles:
 [9]: https://www.datadoghq.com/support/
 [10]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
 [11]: https://github.com/Datadog/cloudformation-template/tree/master/aws
-[12]: template.yaml
+[12]: https://github.com/DataDog/datadog-serverless-functions/edit/master/aws/logs_monitoring/template.yaml
 [13]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
