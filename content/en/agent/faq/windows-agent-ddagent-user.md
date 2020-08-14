@@ -36,7 +36,7 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD
 
 For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
 
-Additonally the installer will add the user to the following groups:
+Additionally, the installer adds the user to the following groups:
 
 * Performance Monitoring
 * Event Log Viewer
