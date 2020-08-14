@@ -69,7 +69,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 
 **Response:**
 
-The result dataset comprises of the `buckets` object as shown in the following sample response. 
+The result dataset comprises of the `buckets` object as shown in the following sample response. In this example, `c0` represents the total `count`.
 
 ```json
 {
@@ -527,7 +527,7 @@ Similarly, you can build a `percentile` timeseries by setting `type` as `timeser
 
 ### Multiple groupbys, unique counts, and metrics
 
-With the following API call, you can build a `table` to display the breakdown of log data by `OS` and `Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg` of metric `network.bytes_written`, and the total `count` of log events.
+With the following API call, you can build a `table` to display the breakdown of your log data by `facets` such as `OS` and `Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg` of metric `network.bytes_written`, and the total `count` of log events.
 
 **API call:**
 
