@@ -23,7 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
-* [Multiple groupbys, unique counts, and metrics] (#multiple-groupbys) 
+* [Multiple groupbys, unique counts, and metrics] (#multiple-groupbys-unique-counts-and-metrics) 
 
 ## Prerequisites
 
@@ -524,9 +524,9 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 ```
 Similarly, you can build a `percentile` timeseries by setting `type` as `timeseries`.
 
-### Multiple group-bys, unique counts, and metrics
+### Multiple groupbys, unique counts, and metrics
 
-With the following API call, you can build a `table` to display the breakdown of log data by `OS` and '`Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg' of metric `network.bytes_written`, and the total `count` of log events.
+With the following API call, you can build a `table` to display the breakdown of log data by `OS` and `Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg` of metric `network.bytes_written`, and the total `count` of log events.
 
 **API call:**
 
@@ -651,7 +651,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 }
 
 ```
-In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg' of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
+In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg` of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
 
 **Note:** Paging is only supported if `sort` is `alphabetical`.
 
