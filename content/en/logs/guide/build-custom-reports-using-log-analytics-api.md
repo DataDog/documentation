@@ -23,6 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
+* [Getting percentiles](#getting-percentiles)
 * [Multiple groupbys, unique counts, and metrics] (#multiple-groupbys-unique-counts-and-metrics) 
 
 ## Prerequisites
