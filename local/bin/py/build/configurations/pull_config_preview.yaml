@@ -47,7 +47,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: kaylyn/tabs
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
