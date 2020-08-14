@@ -101,6 +101,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
+	@if [ content/en/real_user_monitoring/android/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/android/_index.md ;
 	@if [ content/en/serverless/forwarder.md ]; then \
 	rm -f content/en/serverless/forwarder.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
