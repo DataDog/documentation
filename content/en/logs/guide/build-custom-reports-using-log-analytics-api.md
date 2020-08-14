@@ -23,6 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
+* [Multiple groupbys, unique counts, and metrics] (#multiple-groupbys) 
 
 ## Prerequisites
 
@@ -37,7 +38,7 @@ This guide also assumes that you have a terminal with `CURL`.
 {{< tabs >}}
 {{% tab "Table" %}}
 
-Use the following API call to build a `table` with `count` of log events grouped by the field `status`. The `type` must be `total`.
+With the following API call, you can build a `table` with `count` of log events grouped by the field `status`. The `type` must be `total`.
 
 **API call:**
 
@@ -101,7 +102,7 @@ The result dataset comprises of the `buckets` object as shown in the following s
 ```
 {{% /tab %}}
 {{% tab "Timeseries" %}}
-Use the following API call to build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
+With the following API call, you can build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
 
 **API call:**
 
@@ -190,7 +191,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 {{< tabs >}}
 {{% tab "Average" %}}
 
-Use the following API call to build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
+With the following API call, you can build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
 
 **API call:**
 
@@ -264,7 +265,7 @@ Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Sum" %}}
 
-Use the following API call to build a `table` with `sum` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, you can build a `table` with `sum` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -292,7 +293,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    ]
 }'
 ```
-Similarly, you can build an `sum` timeseries by setting `type` as `timeseries`.
+Similarly, you can build a `sum` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -329,7 +330,7 @@ Similarly, you can build an `sum` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Min" %}}
 
-Use the following API call to build a `table` with `min` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, you can build a `table` with `min` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -357,7 +358,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    ]
 }'
 ```
-Similarly, you can build an `min` timeseries by setting `type` as `timeseries`.
+Similarly, you can build a `min` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -394,7 +395,7 @@ Similarly, you can build an `min` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Max" %}}
 
-Use the following API call to build a `table` with `max` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, you can build a `table` with `max` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -422,7 +423,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    ]
 }'
 ```
-Similarly, you can build an `max` timeseries by setting `type` as `timeseries`.
+Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -461,7 +462,7 @@ Similarly, you can build an `max` timeseries by setting `type` as `timeseries`.
 
 ### Getting percentiles
 
-Use the following API call to build a `table` with `percentiles` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
+With the following API call, you can build a `table` with `percentiles` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
 
 **API call:**
 
@@ -521,6 +522,135 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
     }
 }
 ```
+
+### Multiple group-bys, unique counts, and metrics
+
+With the following API call, you can build a `table` to display the breakdown of log data by `OS` and '`Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg' of metric `network.bytes_written`, and the total `count` of log events.
+
+**API call:**
+
+```bash
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+   "compute":[
+   {
+       "type":"total",
+       "aggregation":"cardinality",
+       "metric":"@http.useragent"
+   },
+   {
+       "type":"total",
+       "aggregation":"pc90",
+       "metric":"@duration"
+   },
+   {
+       "type":"total",
+       "aggregation":"avg",
+       "metric":"@network.bytes_written"
+   },
+   {
+       "type":"total",
+       "aggregation":"count"
+   }
+   ],
+   "filter": {
+       "from":"1597428000000",
+       "to":"1597428180000",
+       "query":"*"
+           },
+   "group_by":[
+       {
+           "type":"facet",
+           "facet":"@http.useragent_details.os.family",
+           "limit":2,
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"cardinality",
+               "metric":"@http.useragent"
+           }
+       },
+       {
+           "type":"facet",
+           "facet":"@http.useragent_details.browser.family",
+           "limit":2,
+           "sort":{
+               "order":"desc",
+               "type":"measure",
+               "aggregation":"cardinality",
+               "metric":"@http.useragent"
+           }
+       }
+   ]
+}
+'
+
+```
+
+**Response:**
+
+```json
+{
+    "meta": {
+        "status": "done",
+        "request_id": "dkt3bGhON0lSOEdCVWFqa3pyUEtNUXxzU0p5RG1qN3MwNk45aExrazFGTTR3",
+        "elapsed": 1299
+    },
+    "data": {
+        "buckets": [
+            {
+                "computes": {
+                    "c3": 534310,
+                    "c2": 29855.686900195342,
+                    "c1": 289880482.9557167,
+                    "c0": 430
+                },
+                "by": {
+                    "@http.useragent_details.browser.family": "Chrome",
+                    "@http.useragent_details.os.family": "Mac OS X"
+                }
+            },
+            {
+                "computes": {
+                    "c3": 47973,
+                    "c2": 25117.50770936209,
+                    "c1": 270379443.2579185,
+                    "c0": 64
+                },
+                "by": {
+                    "@http.useragent_details.browser.family": "Firefox",
+                    "@http.useragent_details.os.family": "Mac OS X"
+                }
+            },
+            {
+                "computes": {
+                    "c3": 901506,
+                    "c2": 9170.975124352715,
+                    "c1": 235075236.08510733,
+                    "c0": 342
+                },
+                "by": {
+                    "@http.useragent_details.browser.family": "Other",
+                    "@http.useragent_details.os.family": "Other"
+                }
+            },
+            {
+                "computes": {
+                    "c3": 2734,
+                    "c2": 953181.3177150192,
+                    "c1": 200800000.00000006,
+                    "c0": 45
+                },
+                "by": {
+                    "@http.useragent_details.browser.family": "Apache-HttpClient",
+                    "@http.useragent_details.os.family": "Other"
+                }
+            }
+        ]
+    }
+}
+
+```
+In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg' of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
 
 **Note:** Paging is only supported if `sort` is `alphabetical`.
 
