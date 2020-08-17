@@ -21,7 +21,7 @@ Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live c
 
 Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
-{{< img src="infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers with summaries"  >}}
+{{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="Live containers with summaries"  >}}
 
 ### Kubernetes Resources
 
@@ -34,6 +34,7 @@ If you're using Kubernetes, enable Kubernetes Resources for Live Containers to g
 Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Container metrics are available without additional configuration after installation.
 
 **Kubernetes Resources for Live Containers requires installation of**:
+
 * [Datadog Agent][8] version 7.21.1 (or above)
 * [Datadog Cluster Agent][9] 1.8.0 (or above)
 
@@ -225,6 +226,7 @@ You can see logs that you have chosen to index and persist by selecting a corres
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
 ### Kubernetes Resources
+
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [add link][20] for more details.
 
