@@ -33,7 +33,7 @@ For customers using release 6, the Agent can be configured to obfuscate specific
 
 Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog’s Log Management Service.
 
-Some features are not available at the moment to customers who have signed Datadog's BAA, notably:
+These features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support via chat
 * Rehydration from Log Archives is disabled
@@ -48,12 +48,12 @@ If you have any questions about how the Log Management Service satisfies the app
 
 HIPAA-enabled custommer used to require the use of specific endpoints to submit logs in order to enforce some specific encryptions. This is not needed anymore as that those encryptions are now enabled on all log submission endpoints.
 
-Here are the historical endpoints which are now deprecated : 
+These are the legacy endpoints that are not supported after version {edit suggestion to add version}:
 
-* tcp-encrypted-intake.logs.datadoghq.com
-* lambda-tcp-encrypted-intake.logs.datadoghq.com
-* gcp-encrypted-intake.logs.datadoghq.com
-* http-encrypted-intake.logs.datadoghq.com
+* `tcp-encrypted-intake.logs.datadoghq.com`
+* `lambda-tcp-encrypted-intake.logs.datadoghq.com`
+* `gcp-encrypted-intake.logs.datadoghq.com`
+* `http-encrypted-intake.logs.datadoghq.com`
 
 ### Further Reading
 
