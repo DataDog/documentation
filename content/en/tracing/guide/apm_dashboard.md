@@ -83,7 +83,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 
         {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true"  style="width:90%;">}}
 
-    This setup can show whether a spike in latency is assocaited with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
+    This setup can show whether a spike in latency is associated with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
 
 7. **Go to [App Analytics][4]**.
 

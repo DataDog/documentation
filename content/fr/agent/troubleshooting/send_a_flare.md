@@ -4,27 +4,27 @@ kind: documentation
 aliases:
   - /fr/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: Dépannage de l'Agent
     text: Mode debugging de l'Agent
-  - link: /agent/troubleshooting/agent_check_status
+  - link: /agent/troubleshooting/agent_check_status/
     tag: Dépannage de l'Agent
     text: Obtenir le statut d'un check de l'Agent
 ---
 Si vous utilisez l'Agent 5.3+, vous pouvez envoyer les informations de dépannage nécessaires à l'équipe d'assistance Datadog avec une seule commande flare.
 
-La commande `flare` rassemble tous les fichiers de configuration et tous les logs de l'Agent dans un fichier d'archive. Elle supprime les informations sensibles, y compris les mots de passe, les clés d'API, les authentifiants de proxy et les chaînes de communauté SNMP.
-**Confirmez l'importation de l'archive pour l'envoyer immédiatement à l'assistance Datadog**.
+La commande `flare` rassemble tous les fichiers de configuration et tous les logs de l'Agent dans un fichier d'archive. Elle supprime les informations sensibles, y compris les mots de passe, les clés d'API, les authentifiants de proxy et les chaînes de communauté SNMP. **Confirmez l'importation de l'archive pour l'envoyer immédiatement à l'assistance Datadog**.
+
 L'Agent Datadog est entièrement open source, ce qui vous permet de [vérifier le comportement du code][1]. Une demande de confirmation s'affiche avant l'envoi des informations, ce qui signifie que vous pouvez les passer en revue si vous le souhaitez.
 
 Dans les commandes ci-dessous, remplacez `<ID_TICKET>` par l'ID de votre ticket d'assistance Datadog (le cas échéant), puis saisissez l'adresse e-mail associée.
-Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail que vous utilisez pour vous connecter à Datadog afin de créer un ticket d'assistance.
 
+Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail que vous utilisez pour vous connecter à Datadog afin de créer un ticket d'assistance.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme   | Commandes                                                 |
+| Plateforme   | Commande                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <ID_TICKET>`                         |
 | Docker     | `docker exec -it datadog-agent agent flare <ID_TICKET>`   |
@@ -39,13 +39,49 @@ Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail
 | Windows    | Consultez la [documentation relative à Windows][2]        |
 | Heroku     | Consultez la [documentation relative à Heroku][3]         |
 
+## Conteneurs dédiés
+
+Si vous utilisez l'Agent v7.19 ou version ultérieure ainsi que le chart Helm Datadog avec la [dernière version][4], ou un DaemonSet dans lequel l'Agent Datadog et l'Agent de trace sont dans des conteneurs séparés, vous déploierez un pod de l'Agent qui contient :
+
+* Un conteneur avec le processus Agent (Agent + Agent de log)
+* Un conteneur avec le processus process-agent
+* Un conteneur avec le processus trace-agent
+* Un conteneur avec le processus system-probe
+
+Pour obtenir un flare de chaque container, exécutez les commandes suivantes :
+
+### Agent
+
+{{< code-block lang="bash" filename="agent.sh" >}}
+kubectl exec -it <nom-pod-agent> -c agent -- agent flare <id-ticket>
+{{< /code-block >}}
+
+### process-agent
+
+{{< code-block lang="bash" filename="process-agent.sh" >}}
+kubectl exec -it <NOM_POD_AGENT> -c process-agent -- agent flare <ID_TICKET> --local
+{{< /code-block >}}
+
+### trace-agent
+
+{{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <NOM_POD_AGENT> -c trace-agent -- agent flare <ID_TICKET> --local
+{{< /code-block >}}
+
+### system-probe
+
+{{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <NOM_POD_AGENT> -c system-probe -- agent flare <ID_TICKET> --local
+{{< /code-block >}}
+
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#agent-v6
 [3]: /fr/agent/faq/heroku-troubleshooting/#send-a-flare
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme   | Commandes                                                                 |
+| Plateforme   | Commande                                                                 |
 |------------|-------------------------------------------------------------------------|
 | Docker     | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <ID_TICKET>`    |
 | macOS      | `datadog-agent flare <ID_TICKET>`                                         |
@@ -63,9 +99,10 @@ Si vous ne disposez pas d'un ID de ticket, saisissez simplement l'adresse e-mail
 [1]: /fr/agent/basic_agent_usage/windows/#agent-v5
 [2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
+
 {{% tab "Agent de cluster" %}}
 
-| Plateforme   | Commandes                                                             |
+| Plateforme   | Commande                                                             |
 |------------|---------------------------------------------------------------------|
 | Kubernetes | `kubectl exec <NOM_POD> -it datadog-cluster-agent flare <ID_TICKET>` |
 

@@ -13754,7 +13754,7 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
-  /api/v1/monitor/group/search:
+  /api/v1/monitor/groups/search:
     get:
       description: Search and filter your monitor groups details.
       operationId: SearchMonitorGroups
