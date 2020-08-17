@@ -27,13 +27,17 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 
 If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, pre-workload detailed view, and visualized maps.
 
+## Requirements
+* [Datadog Agent][5] version 7.21.1 (or above)
+* [Datadog Cluster Agent][6] 1.8.0 (or above)
+
 ## Installation
 
-After deploying the [Docker Agent][5], container metrics are available without additional configuration.
+Follow the [Docker][7] or [Kubernetes][8] Agent installation instructions. Container metrics are available without additional configuration after installation.
 
 ### Kubernetes Resources
 
-To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][6] and add the following changes to your `values.yaml` file:
+To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][9] and add the following changes to your `values.yaml` file:
 
 {{< code-block lang="yaml" >}}
 datadog:
@@ -53,78 +57,6 @@ tag: 1.7.0
 pullPolicy: Always
    ...
 {{< /code-block >}}
-
-### Log collection
-To enable log collection follow these steps:
-
-{{< tabs >}}
-
-{{% tab "Linux/Windows" %}}
-Once the [Datadog Agent][1] is installed, enable log collection by editing the [Agent main configuration file][2] and updating the following parameters:
-
-```yaml
-logs_enabled: true
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
-
-**Notes**:
-
-* To collect container information in the standard install rather than with the [Docker Agent][1], the `dd-agent` user must have permissions to access **docker.sock**.
-* Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
-
-[1]: /agent/docker/log/?tab=hostinstallation
-[2]: /agent/guide/agent-configuration-files/
-{{% /tab %}}
-
-{{% tab "Docker" %}}
-
-Follow the instructions for the [Docker Agent][1], passing in the following attributes, in addition to any other custom settings as appropriate:
-
-```shell
--e DD_LOGS_ENABLED=true
--e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-```
-
-**Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexing and uniquely receiving Live Tail data.
-
-[1]: /agent/docker/log/?tab=containerinstallation
-[2]: /logs/indexes/#exclusion-filters
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-In the `dd-agent.yaml` manifest used to create the [DaemonSet][1], add the following environment variables, volume mount, and volume:
-
-```yaml
-  env:
-    - name: DD_LOGS_ENABLED
-        value: "true"
-    - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-        value: "true"
-
-  volumeMounts:
-    - name: pointerdir
-        mountPath: /opt/datadog-agent/run
-
-volumes:
-  - hostPath:
-      path: /opt/datadog-agent/run
-      name: pointerdir
-
-```
-
-**Note**: Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
-
-
-[1]: /agent/kubernetes/
-[2]: /logs/indexes/#exclusion-filters
-{{% /tab %}}
-{{< /tabs >}}
-
-For more information about activating log integrations, see the [ Log collection documentation][7].
 
 ## Configuration
 
@@ -187,7 +119,7 @@ For Kubernetes resources, select Datadog tags such as `environment`, `service`, 
 
 ## Tagging
 
-Containers are [tagged][8] with all existing host-level tags, as well as with metadata associated with individual containers.
+Containers are [tagged][10] with all existing host-level tags, as well as with metadata associated with individual containers.
 
 All containers are tagged by `image_name`, including integrations with popular orchestrators, such as [ECS][4] and [Kubernetes][3], which provide further container-level tags. Additionally, each container is decorated with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
@@ -209,14 +141,14 @@ Kubernetes containers are tagged by:
 * `kube_deployment`
 * `kube_cluster`
 
-If you have configuration for [Unified Service Tagging][9] in place, `env`, `service`, and `version` will also be picked up automatically.
+If you have configuration for [Unified Service Tagging][11] in place, `env`, `service`, and `version` will also be picked up automatically.
 Having these tags available will let you tie together APM, logs, metrics, and live container data.
 
 ## Views
 
 ### Containers View
 
-The **Containers** view includes [Scatter Plot](#scatter-plots) and [Timeseries][10] views, and a table to better organize your container data by fields such as container name, status, and start time.
+The **Containers** view includes [Scatter Plot](#scatter-plots) and [Timeseries][12] views, and a table to better organize your container data by fields such as container name, status, and start time.
 
 #### Scatter Plot
 
@@ -250,47 +182,49 @@ A Kubernetes Cluster Map gives you a bigger picture of your pods and Kubernetes 
 
 Drill down into resources from Cluster Maps by click on any circle or group to populate a detailed panel.
 
-## Details Panel
+### Details Panel
 
 Click on any row in the table or on any object in a Cluster Map to view information about a specific container or resource. A new side panel is opened with several tabs to help you troubleshoot and find information about your selected resource:
 
 * **YAML**: View the detailed YAML of the resource.
-* **Logs**: View logs from your resource. Click on any log to view related logs content in Logs Explorer.
-* **Metrics**: View live metrics for your resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
+* [**Logs**][13]: View logs from your resource. Click on any log to view related logs content in Logs Explorer.
+* [**Metrics**][14]: View live metrics for your resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
 * **Processes**: View all processes running in containers of this resource.
 * **Network**: View your resource’s network performance, including source, destination, sent and received volume, and throughput fields. Use the Destination field to search by tags like DNS or ip_type, or use the Group by filter in this view to group network data by tags, like pod_name or service.
-* **Traces**: View traces for your resource, including the date, service, duration, method, and status code of a trace.
-* **Events**: View all Kubernetes events for your resource.
+* [**Traces**][15]: View traces for your resource, including the date, service, duration, method, and status code of a trace.
+* [**Events**][16]: View all Kubernetes events for your resource.
 
 For a detailed dashboard of this resource, click the View Pods Dashboard in the top right corner of this panel.
 
 ### Container Logs
 
-View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][11] or indexed logs for any time in the past.
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][17] or indexed logs for any time in the past.
 
 #### Live Tail
 
 With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; un-pause to continue streaming.
 
-Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][11].
+Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][17].
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
 {{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Sidepanel" video="true"  >}}
 
-#### Indexed Logs
+#### Indexed logs
 
 You can see logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an `Error` status, type `status:error` into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
 {{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Sidepanel"  style="width:100%;">}}
 
-## Notes/known issues
+## Notes/Known Issues
 
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][12].
+* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][18].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
+
+### Kubernetes Resources
 * Data is updated automatically in constant intervals. Update intervals may change during the private beta.
-* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [add link][13] for more details.
+* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [add link][19] for more details.
 
 
 ## Further Reading
@@ -301,12 +235,18 @@ You can see logs that you have chosen to index and persist by selecting a corres
 [2]: /integrations/docker_daemon/
 [3]: /agent/kubernetes/
 [4]: /integrations/amazon_ecs/
-[5]: /agent/docker/#run-the-docker-agent
-[6]: https://docs.datadoghq.com/agent/kubernetes/?tab=helm#installation
-[7]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[8]: /getting_started/tagging/
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: https://docs.datadoghq.com/dashboards/widgets/timeseries/
-[11]: /logs/live_tail/
-[12]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
-[13]: https://github.com/DataDog/helm-charts
+[5]: /agent/
+[6]: /agent/cluster_agent/setup/?tab=secret
+[7]: /agent/docker/#run-the-docker-agent
+[8]: /agent/kubernetes/?tab=helm
+[9]: /agent/kubernetes/?tab=helm#installation
+[10]: /getting_started/tagging/
+[11]: /getting_started/tagging/unified_service_tagging
+[12]: /dashboards/widgets/timeseries/
+[13]: /logs
+[14]: /metrics
+[15]: /tracing
+[16]: /events
+[17]: /logs/live_tail/
+[18]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[19]: https://github.com/DataDog/helm-charts
