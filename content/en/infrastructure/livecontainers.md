@@ -67,8 +67,8 @@ pullPolicy: Always
 
 It is possible to include and/or exclude containers from real-time collection:
 
-* Exclude containers either via passing the environment variable `DD_CONTAINER_EXCLUDE` or adding `container_exclude:` in your `datadog.yaml` main configuration file.
-* Include containers either via passing the environment variable `DD_CONTAINER_INCLUDE` or adding `container_include:` in your `datadog.yaml` main configuration file.
+* Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
+* Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value; regular expressions are also supported.
 
@@ -106,7 +106,7 @@ Navigate to the [Containers page][1]. This will automatically bring you to the *
 
 Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
-If you've enabled Kubernetes Resources, strings such as Pod, deployment, ReplicaSet, and service name and Kubernetes labels are searchable in a [Kubernetes Resources view](#kubernetes-resources-views).
+If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `ReplicaSet`, and `service name`, as well as Kubernetes labels are searchable in a [Kubernetes Resources view](#kubernetes-resources-views).
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
@@ -121,11 +121,11 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 ### Filtering and Pivoting
 
-The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 9 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
+The screenshot below displays a system that has been filtered down to a Kubernetes cluster of nine nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
 {{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned"  style="width:80%;">}}
 
-Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivotted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
+Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivoted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 
 {{< img src="infrastructure/livecontainers/hostxservice.png" alt="Host x services"  style="width:80%;">}}
 
@@ -220,7 +220,7 @@ View streaming logs for any container like `docker logs -f` or `kubectl logs -f`
 
 #### Live Tail
 
-With Live Tail, all container logs are streamed -- pausing the stream allows you to easily read logs that are quickly being written; un-pause to continue streaming.
+With Live Tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
 
 Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][18].
 
