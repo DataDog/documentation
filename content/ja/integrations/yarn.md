@@ -106,7 +106,7 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
 
     ```yaml
     logs_enabled: true
-  ```
+    ```
 
 2. `yarn.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル yarn.d/conf.yaml][4] を参照してください。
 
@@ -121,7 +121,7 @@ YARN チェックは [Datadog Agent][2] パッケージに含まれています�
         #   - type: multi_line
         #     pattern: \d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2},\d{3}
         #     name: new_log_start_with_date
-  ```
+    ```
 
 3. [Agent を再起動します][5]。
 
