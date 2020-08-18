@@ -108,19 +108,18 @@ Agent の構成ファイルおよびフォルダーの場所
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングドキュメントは、こちらを参照してください][3]。
+[Agent のトラブルシューティングドキュメントは、こちらを参照してください][2]。
 
 ## 埋め込み Agent の使用
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
-詳細については、[埋め込み Agent へのパッケージの追加方法][4]の手順を参照してください。
+詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/aws
-[2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /ja/agent/troubleshooting/
-[4]: /ja/developers/guide/custom-python-package/
+[2]: /ja/agent/troubleshooting/
+[3]: /ja/developers/guide/custom-python-package/
