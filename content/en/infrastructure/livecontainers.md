@@ -55,9 +55,9 @@ datadog:
         pullPolicy: Always
    ...
    clusterAgent:
-	repository: datadog/cluster-agent
-tag: 1.7.0
-pullPolicy: Always
+	    repository: datadog/cluster-agent
+      tag: latest
+      pullPolicy: Always
    ...
 {{< /code-block >}}
 
@@ -268,4 +268,4 @@ You can see logs that you have chosen to index and persist by selecting a corres
 [17]: /events
 [18]: /logs/live_tail/
 [19]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
-[20]: https://github.com/DataDog/helm-charts
+[20]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
