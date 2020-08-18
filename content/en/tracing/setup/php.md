@@ -73,7 +73,7 @@ If you can't find your distribution, you can [manually install][12] the PHP exte
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Datadog supports all web frameworks out of the box. Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods to trace them. The PHP tracer supports automatic instrumentation for [several libraries][16].
+Datadog supports all web frameworks out of the box. Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods to trace them. The PHP tracer supports automatic instrumentation for several libraries.
 
 Automatic instrumentation captures:
 
@@ -297,4 +297,3 @@ To remove the PHP tracer:
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [15]: /tracing/setup/nginx/#nginx-and-fastcgi
-[16]: /tracing/compatibility_requirements/php
