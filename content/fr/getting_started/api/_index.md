@@ -95,7 +95,7 @@ Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de
 - L'esperluette (&) et les deux-points (:) ne sont pas nécessaires dans le tableau de paramètres. Postman les ajoute pour vous.
 - Tous les placeholders respectent le format : `<PLACEHOLDER>` . Ils doivent être remplacés avant de lancer une requête.
 
-[1]: https://www.getpostman.com
+[1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/json/datadog_collection.json
 [4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
