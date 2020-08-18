@@ -88,6 +88,7 @@ volumes:
   - hostPath:
       path: /opt/datadog-agent/run
     name: pointerdir
+```
 
 ```shell
 container_exclude: ["image:debian"]
