@@ -34,6 +34,8 @@ Throughout this article, you will need to replace all occurrences of `<DATADOG_A
 
 This guide also assumes that you have a terminal with `CURL`. 
 
+## Examples
+
 ### Getting counts
 
 {{< tabs >}}
