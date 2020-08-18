@@ -44,7 +44,7 @@ With the following API call, you can build a `table` with `count` of log events 
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -108,7 +108,7 @@ With the following API call, you can build a `timeseries` with `count` of log ev
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"timeseries",
@@ -197,7 +197,7 @@ With the following API call, you can build a `table` with `avg` of values in a `
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -271,7 +271,7 @@ With the following API call, you can build a `table` with `sum` of values in a `
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -336,7 +336,7 @@ With the following API call, you can build a `table` with `min` of values in a `
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -401,7 +401,7 @@ With the following API call, you can build a `table` with `max` of values in a `
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -468,7 +468,7 @@ With the following API call, you can build a `table` with `percentiles` of value
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
@@ -532,7 +532,7 @@ With the following API call, you can build a `table` to display the breakdown of
 **API call:**
 
 ```bash
-curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' -H 'Cookie: DD-PSHARD=99' --data-raw '{
+curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H 'Content-Type: application/json' -H 'DD-API-KEY: <DATADOG_API_KEY>' -H 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' --data-raw '{
    "compute":[
    {
        "type":"total",
