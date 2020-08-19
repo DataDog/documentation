@@ -5,24 +5,32 @@ beta: true
 aliases:
   - /ja/account_management/authen_mapping/
 further_reading:
-  - link: account_management/rbac/log_management/
+  - link: /account_management/rbac/log_management/
     tag: ドキュメント
     text: ログ管理のための RBAC
 ---
-<div class="alert alert-warning">
-Federated Authentication to Role Mapping API は、現在クローズドベータ版です。機能やパフォーマンスに最適ではない部分があるため、Datadog はこの機能を予告なく随時変更する権利を留保します。この機能を有効にするには、カスタマーサクセスマネージャーまたは<a href="/help">Datadog サポート</a>に依頼してください。
-</div>
-
 フェデレーション認証メカニズムを使用する場合、この API を利用することにより、Datadog 内で ID プロバイダーから送信される属性を使用してユーザーグループをロールに自動的にマッピングできます。
 
 **注**: SAML ユーザーであり、既存のベータ版フェデレーションマッピングメカニズム (`roles_v2_saml`) を使用している方には、この API に移行することを強くお勧めします。
 
+Datadog アプリの UI（User Management の **Mappings** タブ）からも、マッピングを作成および管理できます。詳しくは [SAML 属性の Datadog ロールへのマッピング][1]を参照してください。
+
 ## リクエスト
 
-以下のすべての API エンドポイントで、2 つの異なるホストエンドポイントを持つことができます。
+{{< site-region region="us" >}}
 
-* Datadog US サイトを使用する場合は、`https://api.datadoghq.com/api/`
-* Datadog EU サイトを使用する場合は、`https://api.datadoghq.eu/api/`
+下記のすべての API エンドポイントで、次のホストエンドポイントを使用できます。
+
+* Datadog US リージョンの場合、`https://api.datadoghq.com/api/` 。
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+下記のすべての API エンドポイントで、次のホストエンドポイントを使用できます。
+
+* Datadog EU リージョンの場合、`https://api.datadoghq.eu/api/` 。
+
+{{< /site-region >}}
 
 ### 新しい認証マッピングを作成する
 
@@ -34,35 +42,75 @@ AuthN Mapping を JSON の本文から新しく作成します。新規作成さ
 
 ##### 引数
 
-* **`role_uuid`** [*必須*, *デフォルト*=なし]:
-  マッピング先のロールの `UUID` です。Roles API を使用して Datadog のロールを作成し、管理 (グローバルなアクセス許可の付与、含めるユーザーの決定など) することができます。作成するロールには UUID が割り当てられます。マッピングするロールの `role_uuid` を探す方法について詳しくは、[Role API ドキュメント][1]を参照してください。
-* **`attribute_key`** [*必須*, *デフォルト*=なし]:
- `attribute_key` は、ID プロバイダーから送信される属性を表すキー/値ペアのキーの部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
-* **`attribute_value`** [*必須*, *デフォルト*=なし]:
+* **`role["data"]["id"]`** [*必須*, デフォルトなし]:
+ マッピング先のロールの `ID`。Roles API は、Datadog ロール、ロールに付与するグローバルアクセス許可、そのロールに属するユーザーを作成し、管理するために使用できます。
+ **注**: この属性はリクエストされた `role` 関係を有するブロックの一部として提示する必要があります。詳しくは以下の例を参照してください。作成するロールには ID が割り当てられます。マッピングするロールの `ID` を探す方法について詳しくは、[Role API ドキュメント][2]を参照してください。
+* **`attributes["attribute_key"]`** [*必須*, デフォルトなし]:
+ `attribute_key` は、ID プロバイダーから送信される属性を表すキー/値ペアのキーの部分です。各ユーザーのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
+* **`attributes["attribute_value"]`** [*必須*, デフォルトなし]:
  `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X POST \
-         "https://api.datadoghq.com/api/v2/authn_mappings" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_APIキー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-         -d '{
-             "data": {
-                 "type": "authn_mappings",
-                 "attributes": {
-                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-                      "attribute_key": "member-of",
-                      "attribute_value": "Development"
+    "https://api.datadoghq.com/api/v2/authn_mappings" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_API_キー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                },
+                "relationships": {
+                    "role": {
+                        "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655445555",
+                            "type": "roles"
+                        }
+                    }
                 }
-             }
-         }'
+            }
+        }'
 ```
 
-`<DATADOG_APIキー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[オーガニゼーションの API キーとアプリケーションキー][1]に置き換えてください。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X POST \
+    "https://api.datadoghq.eu/api/v2/authn_mappings" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_API_キー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                },
+                "relationships": {
+                    "role": {
+                        "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655445555",
+                            "type": "roles"
+                        }
+                    }
+                }
+            }
+        }'
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -70,61 +118,64 @@ curl -X POST \
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attributes": {
-        "data": {
-          "id": 0,
-          "type": "saml_assertion_attributes"
-        }
-      },
-      "roles": {
-        "data": {
-          "id": "123e4567-e89b-12d3-a456-426655440000",
-          "type": "roles"
-        }
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "role_uuid": "00000000-0000-0000-0000-000000000000",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655441000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Development"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "permissions": {
+                        "data": [
+                            {
+                                "id": "123e4567-e89b-12d3-a456-426655441000",
+                                "type": "permissions"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 {{< /code-block >}}
 
@@ -141,17 +192,19 @@ AuthN Mapping のリストを返します
 
 ##### 引数
 
-* **`sort`** [*オプション*, *デフォルト*=**+**]:
-  属性を指定した方向で並べ替えます。デフォルトでは昇順に、`-` を指定すると降順に並べ替えます。
+* **`sort`** [*オプション*, *デフォルト*=**created\_at**]:
+  属性を指定した方向で並べ替えます。デフォルトでは昇順に、`-<attribute>` を指定すると降順に並べ替えます。また、関連属性 `role.name`、`saml_assertion_attribute.attribute_key`、`saml_assertion_attribute.attribute_value` でも並べ替えが可能です。
 * **`page[number]`** [*任意*, *デフォルト*=**0**, *最小値*=**0**]:
   結果を返すページの数です。
-* **`page[size]`** [*任意*, *デフォルト*=**10**]:
+* **`page[サイズ]`** [*任意*、*デフォルト*=**10**]:
   各ページに表示する結果の数です。
-* **`filter`** [*任意*, デフォルトなし]:
+* **`filter`** [*オプション*, デフォルト =none]:
   タグの文字列 (`Billing Users` など) でフィルタリングします。
 
 {{< tabs >}}
 {{% tab "Example" %}}
+
+{{< site-region region="us" >}}
 
 ```sh
 curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
@@ -159,7 +212,18 @@ curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
      -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
 ```
 
-`<DATADOG_APIキー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[オーガニゼーションの API キーとアプリケーションキー][1]に置き換えます。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings" \
+     -H "DD-API-KEY: <DATADOG_API_キー>" \
+     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -167,61 +231,68 @@ curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
 
 ```json
 {
-  "data": [
-    {
-      "type": "authn_mapping",
-      "id": "123e4567-e89b-12d3-a456-426655440000",
-      "relationships": {
-        "saml_assertion_attributes": {
-          "data": {"id": 0, "type": "saml_assertion_attributes"}
+    "data": [
+      {
+        "type": "authn_mapping",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
+        "relationships": {
+          "saml_assertion_attribute": {
+            "data": {"id": 0, "type": "saml_assertion_attributes"}
+          },
+          "role": {
+            "data": {
+              "id": "123e4567-e89b-12d3-a456-426655440000",
+              "type": "roles"
+            }
+          }
         },
-        "roles": {
-          "data": {
-            "id": "123e4567-e89b-12d3-a456-426655440000",
-            "type": "roles"
+        "attributes": {
+          "created_at": "2019-11-04 17:41:29.015504",
+          "modified_at": "2019-11-04 17:41:29.015504",
+          "saml_assertion_attribute_id": 0
+        }
+      }
+    ],
+    "included": [
+      {
+        "data": {
+          "id": "123e4567-e89b-12d3-a456-426655440000",
+          "type": "roles",
+          "attributes": {
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-06 17:41:29.015504",
+            "name": "Developer Role"
+          },
+          "relationships": {
+            "permissions": {
+                "data": [
+                  {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "permissions"
+                  }
+                ]
+            }
           }
         }
       },
-      "attributes": {
-        "created_at": "2019-11-04 17:41:29.015504",
-        "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-        "saml_assertion_attribute_id": 0
-      }
-    }
-  ],
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
-        "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "Developer Role"
-        },
-        "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
+      {
+        "data": {
           "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+          "type": "saml_assertion_attributes",
+          "attributes": {
+            "id": 6,
+            "attribute_key": "member-of",
+            "attribute_value": "Developer"
+          }
         }
       }
+    ],
+    "meta": {
+      "page": {
+        "total_count": 1,
+        "total_filtered_count": 1,
+      }
     }
-  ],
-  "meta": {"page": {"total": 0, "page_number": 0, "page_size": 0}}
 }
 ```
 
@@ -234,23 +305,36 @@ UUID で指定した AuthN Mapping を返します。
 
 | メソッド | エンドポイントのパス            | ペイロードの要件 |
 |--------|--------------------------|------------------|
-| `GET`  | `/authn_mappings/{UUID}` | URL パラメーター    |
+| `GET`  | `/authn_mappings/{authn_mapping_id}` | URL パラメーター    |
 
 ##### 引数
 
-* **`{UUID}`** [*必須*, デフォルトなし]:
-  `{UUID}` を、参照したい AuthN Mapping の UUID に置き換えます。
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、参照したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
-curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{authn_mapping_id}" \
      -H "DD-API-KEY: <DATADOG_APIキー>" \
      -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
 ```
 
-`<DATADOG_APIキー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[オーガニゼーションの API キーとアプリケーションキー][1]に置き換えます。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings/{authn_mapping_id}" \
+     -H "DD-API-KEY: <DATADOG_API_キー>" \
+     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -258,57 +342,65 @@ curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
 
 ```json
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "uuid": "123e4567-e89b-12d3-a456-426655440000",
-      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attributes": {
-        "data": {"id": 0, "type": "saml_assertion_attributes"}
-      },
-      "roles": {
-        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "uuid": "123e4567-e89b-12d3-a456-426655440000",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "uuid": "123e4567-e89b-12d3-a456-426655440000",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "permissions": {
+                        "data": [
+                            {
+                                "id": "123e4567-e89b-12d3-a456-426655440000",
+                                "type": "permissions"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -319,46 +411,85 @@ curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
 
 AuthN Mapping の `role`、`saml_assertion_attribute_id`、あるいはその両方を JSON の本文から更新します。更新された AuthN Mapping を返します。
 
-| メソッド  | エンドポイントのパス               | ペイロードの要件    |
-|---------|-----------------------------|---------------------|
-| `PATCH` | `/v2/authn_mappings/{UUID}` | URL パラメーター、JSON |
+| メソッド  | エンドポイントのパス                           | ペイロードの要件    |
+|---------|-----------------------------------------|---------------------|
+| `PATCH` | `/v2/authn_mappings/{authn_mapping_id}` | URL パラメーター、JSON |
 
 ##### 引数
 
-* **`{UUID}`** [*必須*, デフォルトなし]:
-  `{UUID}` を、更新したい AuthN Mapping の UUID に置き換えます。
-* **`id`** [*必須*, *デフォルト*=なし]:
-  更新される AuthN Mapping の UUID です。このプロパティはリクエスト内で `{UUID}` パスのパラメーターと一致させる必要があります。
-* **`role_uuid`** [*required*, *default*=none]:
-  Roles API を使用して Datadog のロールを作成し、管理 (グローバルなアクセス許可の付与、含めるユーザーの決定など) することができます。作成するロールには UUID が割り当てられます。更新するロールの `role_uuid` を探す方法について詳しくは、[Role API ドキュメント][1]を参照してください。
-* **`attribute_key`** [*必須*, *デフォルト*=なし]:
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、更新したい AuthN Mapping の ID に置き換えます。リクエストのパスと、リクエスト本文の両方でこの設定を行ってください。
+* **`role["data"]["id"]`** [*オプション*, *デフォルト*=none]:
+ マッピング先のロールの `ID`。Roles API は、Datadog ロール、ロールに付与するグローバルアクセス許可、そのロールに属するユーザーを作成し、管理するために使用できます。
+ **注**: この属性はリクエストされた `role` 関係を有するブロックの一部として提示する必要があります。詳しくは以下の例を参照してください。作成するロールには ID が割り当てられます。マッピングするロールの `ID` を探す方法について詳しくは、[Role API ドキュメント][2]を参照してください。
+* **`attributes["attribute_key"]`** [*オプション*, *デフォルト*=none]:
  `attribute_key` は、ID プロバイダーから送信される属性を表すキー/値ペアのキーの部分です。各ユーザーのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
-* **`attribute_value`** [*必須*, *デフォルト*=なし]:
+* **`attributes["attribute_value"]`** [*オプション*, *デフォルト*=none]:
  `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X PATCH \
-         "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_APIキー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-         -d '{
-             "data": {
-                 "type": "authn_mappings",
-                 "id": "{UUID}",
-                 "attributes": {
-                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-                      "attribute_key": "member-of",
-                      "attribute_value": "Developer"
+    "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_API_キー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "id": "{authn_mapping_id}",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
                 }
-             }
-         }'
+                "relationships": {
+                "role": {
+                    "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "roles"
+                        }
+                    }
+                }
+            }
+        }'
 ```
 
-`<DATADOG_APIキー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[オーガニゼーションの API キーとアプリケーションキー][1]に置き換えます。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X PATCH \
+    "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_API_キー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "id": "{authn_mapping_id}",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+                "relationships": {
+                "role": {
+                    "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "roles"
+                        }
+                    }
+                }
+            }
+        }'
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -366,56 +497,62 @@ curl -X PATCH \
 
 ```json
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attributes": {
-        "data": {"id": 0, "type": "saml_assertion_attributes"}
-      },
-      "roles": {
-        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "uuid": "123e4567-e89b-12d3-a456-426655440000",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "data": [
+                        {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "permissions"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -426,17 +563,19 @@ curl -X PATCH \
 
 指定した AuthN Mapping を削除します。
 
-| メソッド   | エンドポイントのパス               | ペイロードの要件 |
-|----------|-----------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{UUID}` | URL パラメーター    |
+| メソッド   | エンドポイントのパス                           | ペイロードの要件 |
+|----------|-----------------------------------------|------------------|
+| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | URL パラメーター    |
 
 ##### 引数
 
-* **`{UUID}`** [*必須*, デフォルトなし]:
-  `{UUID}` を、削除したい AuthN Mapping の UUID に置き換えます。
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、削除したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
+
+{{< site-region region="us" >}}
 
 ```sh
 curl -X DELETE "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
@@ -445,7 +584,19 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
 ```
 
-`<DATADOG_APIキー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[オーガニゼーションの API キーとアプリケーションキー][1]に置き換えます。
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X DELETE "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <DATADOG_API_キー>" \
+         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -458,8 +609,152 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
+### Authn Mapping を有効にする
+
+Authn Mapping 機能が有効または無効のどちらに設定されているかを確認します。
+
+| メソッド   | エンドポイントのパス              | ペイロードの要件 |
+|----------|----------------------------|------------------|
+| `GET`    | `/v1/org_preferences`      | なし             |
+
+{{< tabs >}}
+{{% tab "Example" %}}
+
+{{< site-region region="us" >}}
+
+```sh
+curl -X GET \
+         "https://api.datadoghq.com/api/v1/org_preferences" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <DATADOG_APIキー>" \
+         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET \
+         "https://api.datadoghq.eu/api/v1/org_preferences" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <DATADOG_API_キー>" \
+         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+
+[1]: https://api.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Response" %}}
+
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+{
+  "data": {
+    "attributes": {
+        "preference_data": "saml_authn_mapping_roles",
+        "preference_type": true
+    },
+    "type": "org_preferences",
+    "id": 1,
+  },
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### 全マッピングの有効化/無効化
+
+<div class="alert alert-warning">
+すべてのユーザーの SAML ログインを有効にすると、それらのユーザーが現在保持するロールが消去され、各 SAML のアサーション値に基づいてロールの再割り当てが行われます。マッピング機能を有効化する前に、ログインに関して想定通りの SAML アサーションを受領していることを必ず確認してください。
+</div>
+
+すべての AuthN マッピングの実行を有効/無効にします。
+
+| メソッド   | エンドポイントのパス               | ペイロードの要件 |
+|----------|-----------------------------|------------------|
+| `POST`   | `/v1/org_preferences`       | JSON             |
+
+##### 引数
+
+* **`{preference_type}`** [*必須*, デフォルトなし]:
+  アップデートに関する設定です。値は "saml_authn_mapping_roles" となります。
+* **`{preference_data}`** [*必須*, デフォルトなし]:
+  設定を更新するデータで、true または false を設定します。true の場合はすべてのマッピングを有効化し、false だと無効化します。
+
+{{< tabs >}}
+{{% tab "Example" %}}
+
+{{< site-region region="us" >}}
+
+```sh
+curl -X POST \
+    "https://api.datadoghq.com/api/v1/org_preferences" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_APIキー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+        "data": {
+            "type": "org_preferences",
+            "attributes": {
+                "preference_type": "saml_authn_mapping_roles",
+                "preference_data": true
+            }
+        }
+    }'
+`
+```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X POST \
+    "https://api.datadoghq.eu/api/v1/org_preferences" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <DATADOG_API_キー>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -d '{
+        "data": {
+            "type": "org_preferences",
+            "attributes": {
+                "preference_type": "saml_authn_mapping_roles",
+                "preference_data": true
+            }
+        }
+    }'
+`
+```
+
+{{< /site-region >}}
+
+`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+
+[1]: https://api.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Response" %}}
+
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+{
+  "data": {
+    "attributes": {
+        "preference_type": "saml_authn_mapping_roles",
+        "preference_data": true
+    },
+    "type": "org_preferences",
+    "id": 1,
+  },
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/#get-all-roles
+[1]: /ja/account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[2]: /ja/api/v2/roles/#list-roles

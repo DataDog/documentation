@@ -15,10 +15,6 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-<div class="alert alert-info">
-Datadog Profiler is in beta. Reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have feedback to share.
-</div>
-
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Exploring profiling flame graph">}}
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.

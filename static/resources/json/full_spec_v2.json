@@ -1033,12 +1033,6 @@
             "description": "The list of metrics or timeseries to compute for the retrieved buckets.",
             "items": {
               "description": "A compute rule to compute metrics or timeseries",
-              "example": {
-                "aggregation": "pc90",
-                "interval": "20m",
-                "metric": "@score",
-                "type": "timeseries"
-              },
               "properties": {
                 "aggregation": {
                   "description": "An aggregation function",
@@ -1055,6 +1049,7 @@
                     "max",
                     "avg"
                   ],
+                  "example": "pc90",
                   "type": "string",
                   "x-enum-varnames": [
                     "COUNT",
@@ -1144,17 +1139,6 @@
             "description": "The rules for the group by",
             "items": {
               "description": "A group by rule",
-              "example": {
-                "facet": "host",
-                "limit": 50,
-                "missing": "missing_host",
-                "sort": {
-                  "order": "asc",
-                  "type": "alphabetical"
-                },
-                "total": true,
-                "type": "facet"
-              },
               "properties": {
                 "facet": {
                   "description": "The name of the facet to use (required)",
@@ -1231,6 +1215,7 @@
                         "max",
                         "avg"
                       ],
+                      "example": "pc90",
                       "type": "string",
                       "x-enum-varnames": [
                         "COUNT",
@@ -1511,6 +1496,7 @@
               "max",
               "avg"
             ],
+            "example": "pc90",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -1588,6 +1574,7 @@
           "max",
           "avg"
         ],
+        "example": "pc90",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -3806,12 +3793,6 @@
       },
       "LogsCompute": {
         "description": "A compute rule to compute metrics or timeseries",
-        "example": {
-          "aggregation": "pc90",
-          "interval": "20m",
-          "metric": "@score",
-          "type": "timeseries"
-        },
         "properties": {
           "aggregation": {
             "description": "An aggregation function",
@@ -3828,6 +3809,7 @@
               "max",
               "avg"
             ],
+            "example": "pc90",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -3887,17 +3869,6 @@
       },
       "LogsGroupBy": {
         "description": "A group by rule",
-        "example": {
-          "facet": "host",
-          "limit": 50,
-          "missing": "missing_host",
-          "sort": {
-            "order": "asc",
-            "type": "alphabetical"
-          },
-          "total": true,
-          "type": "facet"
-        },
         "properties": {
           "facet": {
             "description": "The name of the facet to use (required)",
@@ -3974,6 +3945,7 @@
                   "max",
                   "avg"
                 ],
+                "example": "pc90",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -11307,12 +11279,6 @@
                     "description": "The list of metrics or timeseries to compute for the retrieved buckets.",
                     "items": {
                       "description": "A compute rule to compute metrics or timeseries",
-                      "example": {
-                        "aggregation": "pc90",
-                        "interval": "20m",
-                        "metric": "@score",
-                        "type": "timeseries"
-                      },
                       "properties": {
                         "aggregation": {
                           "description": "An aggregation function",
@@ -11329,6 +11295,7 @@
                             "max",
                             "avg"
                           ],
+                          "example": "pc90",
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
@@ -11418,17 +11385,6 @@
                     "description": "The rules for the group by",
                     "items": {
                       "description": "A group by rule",
-                      "example": {
-                        "facet": "host",
-                        "limit": 50,
-                        "missing": "missing_host",
-                        "sort": {
-                          "order": "asc",
-                          "type": "alphabetical"
-                        },
-                        "total": true,
-                        "type": "facet"
-                      },
                       "properties": {
                         "facet": {
                           "description": "The name of the facet to use (required)",
@@ -11505,6 +11461,7 @@
                                 "max",
                                 "avg"
                               ],
+                              "example": "pc90",
                               "type": "string",
                               "x-enum-varnames": [
                                 "COUNT",

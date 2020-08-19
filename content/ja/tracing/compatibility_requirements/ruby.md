@@ -27,7 +27,7 @@ Ruby Datadog Trace ライブラリはオープンソースです。詳細につ�
 |       |                            | 2.0     | フル                                 | 最新              |
 |       |                            | 1.9.3   | メンテナンス（2020 年 8 月 6 日まで） | < 0.27.0            |
 |       |                            | 1.9.1   | メンテナンス（2020 年 8 月 6 日まで） | < 0.27.0            |
-| JRuby | http://jruby.org/          | 9.2.0.0 | アルファ                                | 最新              |
+| JRuby | https://www.jruby.org      | 9.2     | フル                                | 最新              |
 
 **サポートされるウェブサーバー**:
 
@@ -66,41 +66,44 @@ end
 
 利用可能なインテグレーションとそのコンフィギュレーションオプションのリストについては、以下を参照してください。
 
-| 名前                     | キー                        | サポートされるバージョン       | 構成方法                    | Gem ソース                                                                     |
-| ------------------------ | -------------------------- | ------------------------ | ----------------------------------- | ------------------------------------------------------------------------------ |
-| Action Cable             | `action_cable`             | `>= 5.0`                 | *[リンク][2]*             | *[リンク][3]*               |
-| Action View              | `action_view`              | `>= 3.0`                 | *[リンク][4]*              | *[リンク][5]*                |
-| Active Model Serializers | `active_model_serializers` | `>= 0.9`                 | *[リンク][6]* | *[リンク][7]*                |
-| Action Pack              | `action_pack`              | `>= 3.0`                 | *[リンク][8]*              | *[リンク][9]*                |
-| Active Record            | `active_record`            | `>= 3.0`                 | *[リンク][10]*            | *[リンク][11]*              |
-| Active Support           | `active_support`           | `>= 3.0`                 | *[リンク][12]*           | *[リンク][13]*             |
-| AWS                      | `aws`                      | `>= 2.0`                 | *[リンク][14]*                      | *[リンク][15]*                                  |
-| Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | *[リンク][16]*          | *[リンク][17]*                  |
-| Dalli                    | `dalli`                    | `>= 2.0`                 | *[リンク][18]*                    | *[リンク][19]*                              |
-| DelayedJob               | `delayed_job`              | `>= 4.1`                 | *[リンク][20]*               | *[リンク][21]*                        |
-| Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | *[リンク][22]*            | *[リンク][23]*                        |
-| Ethon                    | `ethon`                    | `>= 0.11`                | *[リンク][24]*                    | *[リンク][25]*                                    |
-| Excon                    | `excon`                    | `>= 0.50`                | *[リンク][26]*                    | *[リンク][27]*                                       |
-| Faraday                  | `faraday`                  | `>= 0.14`                | *[リンク][28]*                  | *[リンク][29]*                                |
-| Grape                    | `grape`                    | `>= 1.0`                 | *[リンク][30]*                    | *[リンク][31]*                                  |
-| GraphQL                  | `graphql`                  | `>= 1.7.9`               | *[リンク][32]*                  | *[リンク][33]*                             |
-| gRPC                     | `grpc`                     | `>= 1.7`                 | *[リンク][34]*                     | *[リンク][35]*                   |
-| MongoDB                  | `mongo`                    | `>= 2.1`                 | *[リンク][36]*                  | *[リンク][37]*                         |
-| MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *[リンク][38]*                   | *[リンク][39]*                                 |
-| Net/HTTP                 | `http`                     | *（サポートされているすべての Ruby）*   | *[リンク][40]*                  | *[リンク][41]* |
-| Presto                   | `presto`                   | `>= 0.5.14`              | *[リンク][42]*                   | *[リンク][43]*                  |
-| Racecar                  | `racecar`                  | `>= 0.3.5`               | *[リンク][44]*                  | *[リンク][45]*                                   |
-| Rack                     | `rack`                     | `>= 1.1`                 | *[リンク][46]*                     | *[リンク][47]*                                         |
-| Rails                    | `rails`                    | `>= 3.0`                 | *[リンク][48]*                    | *[リンク][49]*                                       |
-| Rake                     | `rake`                     | `>= 12.0`                | *[リンク][50]*                     | *[リンク][51]*                                         |
-| Redis                    | `redis`                    | `>= 3.2`                 | *[リンク][52]*                    | *[リンク][53]*                                    |
-| Resque                   | `resque`                   | `>= 1.0, < 2.0`          | *[リンク][54]*                   | *[リンク][55]*                                     |
-| Rest Client              | `rest-client`              | `>= 1.8`                 | *[リンク][56]*              | *[リンク][57]*                           |
-| Sequel                   | `sequel`                   | `>= 3.41`                | *[リンク][58]*                   | *[リンク][59]*                                |
-| Shoryuken                | `shoryuken`                | `>= 3.2`                 | *[リンク][60]*                | *[リンク][61]*                                   |
-| Sidekiq                  | `sidekiq`                  | `>= 3.5.4`               | *[リンク][62]*                  | *[リンク][63]*                                   |
-| Sinatra                  | `sinatra`                  | `>= 1.4`                 | *[リンク][64]*                  | *[リンク][65]*                                   |
-| Sucker Punch             | `sucker_punch`             | `>= 2.0`                 | *[リンク][66]*             | *[リンク][67]*                       |
+| 名前                     | キー                        | 対応バージョン: MRI  | 対応バージョン: JRuby | 構成方法                    | Gem ソース                                                                     |
+| ------------------------ | -------------------------- | ------------------------ | --------------------------| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Action Cable             | `action_cable`             | `>= 5.0`                 | `>= 5.0`                  | *[リンク][2]*              | *[リンク][3]*             |
+| Action View              | `action_view`              | `>= 3.0`                 | `>= 3.0`                  | *[リンク][4]*              | *[リンク][5]*             |
+| Active Model Serializers | `active_model_serializers` | `>= 0.9`                 | `>= 0.9`                  | *[リンク][6]*              |  *[リンク][7]*            |
+| Action Pack              | `action_pack`              | `>= 3.0`                 | `>= 3.0`                  | *[リンク][8]*              | *[リンク][9]*             |
+| Active Record            | `active_record`            | `>= 3.0`                 | `>= 3.0`                  | *[リンク][10]*             | *[リンク][11]*            |
+| Active Support           | `active_support`           | `>= 3.0`                 | `>= 3.0`                  | *[リンク][12]*             | *[リンク][13]*            |
+| AWS                      | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | *[リンク][14]*             | *[リンク][15]*            |
+| Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | *[リンク][16]*             | *[リンク][17]*            |
+| Dalli                    | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | *[リンク][18]*             | *[リンク][19]*            |
+| DelayedJob               | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | *[リンク][20]*             | *[リンク][21]*            |
+| Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | *[リンク][22]*             | *[リンク][23]*            |
+| Ethon                    | `ethon`                    | `>= 0.11`                | `>= 0.11`                 | *[リンク][24]*             | *[リンク][25]*            |
+| Excon                    | `excon`                    | `>= 0.50`                | `>= 0.50`                 | *[リンク][26]*             | *[リンク][27]*            |
+| Faraday                  | `faraday`                  | `>= 0.14`                | `>= 0.14`                 | *[リンク][28]*             | *[リンク][29]*            |
+| Grape                    | `grape`                    | `>= 1.0`                 | `>= 1.0`                  | *[リンク][30]*             | *[リンク][31]*            |
+| GraphQL                  | `graphql`                  | `>= 1.7.9`               | `>= 1.7.9`                | *[リンク][32]*             | *[リンク][33]*            |
+| gRPC                     | `grpc`                     | `>= 1.7`                 | *gem の利用不可*       | *[リンク][34]*             | *[リンク][35]*            |
+| http.rb                  | `httprb`                   | `>= 2.0`                 | `>= 2.0`                  | *[リンク][36]*             | *[リンク][37]*            |
+| Kafka                    | `ruby-kafka`               | `>= 0.7.10`              | `>= 0.7.10`               | *[リンク][38]*             | *[リンク][39]*            |
+| MongoDB                  | `mongo`                    | `>= 2.1`                 | `>= 2.1`                  | *[リンク][40]*             | *[リンク][41]*            |
+| MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク][42]*             | *[リンク][43]*            |
+| Net/HTTP                 | `http`                     | *（サポートされているすべての Ruby）*   | *（サポートされているすべての Ruby）*    | *[リンク][44]*             | *[リンク][45]*            |
+| Presto                   | `presto`                   | `>= 0.5.14`              | `>= 0.5.14`               | *[リンク][46]*             | *[リンク][47]*            |
+| Racecar                  | `racecar`                  | `>= 0.3.5`               | `>= 0.3.5`                | *[リンク][48]*             | *[リンク][49]*            |
+| Rack                     | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[リンク][50]*             | *[リンク][51]*            |
+| Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[リンク][52]*             | *[リンク][53]*            |
+| Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[リンク][54]*             | *[リンク][55]*            |
+| Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[リンク][56]*             | *[リンク][57]*            |
+| Resque                   | `resque`                   | `>= 1.0, < 2.0`          | `>= 1.0, < 2.0`           | *[リンク][58]*             | *[リンク][59]*            |
+| Rest Client              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[リンク][60]*             | *[リンク][61]*            |
+| Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[リンク][62]*             | *[リンク][63]*            |
+| Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[リンク][64]*             | *[リンク][65]*            |
+| Sidekiq                  | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[リンク][66]*             | *[リンク][67]*            |
+| Sinatra                  | `sinatra`                  | `>= 1.4`                 | `>= 1.4`                  | *[リンク][68]*             | *[リンク][69]*            |
+| Sneakers                 | `sneakers`                 | `>= 2.12.0`              | `>= 2.12.0`               | *[リンク][70]*             | *[リンク][71]*            |
+| Sucker Punch             | `sucker_punch`             | `>= 2.0`                 | `>= 2.0`                  | *[リンク][72]*             | *[リンク][73]*            |
 
 ## その他の参考資料
 
@@ -141,35 +144,41 @@ end
 [33]: https://github.com/rmosolgo/graphql-ruby
 [34]: /ja/tracing/setup/ruby/#grpc
 [35]: https://github.com/grpc/grpc/tree/master/src/rubyc
-[36]: /ja/tracing/setup/ruby/#mongodb
-[37]: https://github.com/mongodb/mongo-ruby-driver
-[38]: /ja/tracing/setup/ruby/#mysql2
-[39]: https://github.com/brianmario/mysql2
-[40]: /ja/tracing/setup/ruby/#nethttp
-[41]: https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html
-[42]: /ja/tracing/setup/ruby/#presto
-[43]: https://github.com/treasure-data/presto-client-ruby
-[44]: /ja/tracing/setup/ruby/#racecar
-[45]: https://github.com/zendesk/racecar
-[46]: /ja/tracing/setup/ruby/#rack
-[47]: https://github.com/rack/rack
-[48]: /ja/tracing/setup/ruby/#rails
-[49]: https://github.com/rails/rails
-[50]: /ja/tracing/setup/ruby/#rake
-[51]: https://github.com/ruby/rake
-[52]: /ja/tracing/setup/ruby/#redis
-[53]: https://github.com/redis/redis-rb
-[54]: /ja/tracing/setup/ruby/#resque
-[55]: https://github.com/resque/resque
-[56]: /ja/tracing/setup/ruby/#rest-client
-[57]: https://github.com/rest-client/rest-client
-[58]: /ja/tracing/setup/ruby/#sequel
-[59]: https://github.com/jeremyevans/sequel
-[60]: /ja/tracing/setup/ruby/#shoryuken
-[61]: https://github.com/phstc/shoryuken
-[62]: /ja/tracing/setup/ruby/#sidekiq
-[63]: https://github.com/mperham/sidekiq
-[64]: /ja/tracing/setup/ruby/#sinatra
-[65]: https://github.com/sinatra/sinatra
-[66]: /ja/tracing/setup/ruby/#sucker-punch
-[67]: https://github.com/brandonhilkert/sucker_punch
+[36]: https://github.com/httprb/http
+[37]: /ja/tracing/setup/ruby/#http-rb
+[38]: https://github.com/zendesk/ruby-kafka
+[39]: /ja/tracing/setup/ruby/#kafka
+[40]: /ja/tracing/setup/ruby/#mongodb
+[41]: https://github.com/mongodb/mongo-ruby-driver
+[42]: /ja/tracing/setup/ruby/#mysql2
+[43]: https://github.com/brianmario/mysql2
+[44]: /ja/tracing/setup/ruby/#nethttp
+[45]: https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html
+[46]: /ja/tracing/setup/ruby/#presto
+[47]: https://github.com/treasure-data/presto-client-ruby
+[48]: /ja/tracing/setup/ruby/#racecar
+[49]: https://github.com/zendesk/racecar
+[50]: /ja/tracing/setup/ruby/#rack
+[51]: https://github.com/rack/rack
+[52]: /ja/tracing/setup/ruby/#rails
+[53]: https://github.com/rails/rails
+[54]: /ja/tracing/setup/ruby/#rake
+[55]: https://github.com/ruby/rake
+[56]: /ja/tracing/setup/ruby/#redis
+[57]: https://github.com/redis/redis-rb
+[58]: /ja/tracing/setup/ruby/#resque
+[59]: https://github.com/resque/resque
+[60]: /ja/tracing/setup/ruby/#rest-client
+[61]: https://github.com/rest-client/rest-client
+[62]: /ja/tracing/setup/ruby/#sequel
+[63]: https://github.com/jeremyevans/sequel
+[64]: /ja/tracing/setup/ruby/#shoryuken
+[65]: https://github.com/phstc/shoryuken
+[66]: /ja/tracing/setup/ruby/#sidekiq
+[67]: https://github.com/mperham/sidekiq
+[68]: /ja/tracing/setup/ruby/#sinatra
+[69]: https://github.com/sinatra/sinatra
+[70]: https://github.com/jondot/sneakers
+[71]: /ja/tracing/setup/ruby/#sneakers
+[72]: /ja/tracing/setup/ruby/#sucker-punch
+[73]: https://github.com/brandonhilkert/sucker_punch

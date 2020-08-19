@@ -177,6 +177,7 @@ Some examples demonstrating how to use parsers:
 * [List and Arrays](#list-and-arrays)
 * [Glog format](#glog-format)
 * [XML](#parsing-xml)
+* [CSV](#parsing-csv)
 
 ### Key value or logfmt
 

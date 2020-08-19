@@ -167,7 +167,7 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
-  
+
   - repo_name: datadog-serverless-functions
     contents:
     - action: pull-and-push-file
@@ -183,7 +183,7 @@
           kind: documentation
           aliases:
             - /serverless/troubleshooting/installing_the_forwarder/
-          
+
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
@@ -191,8 +191,8 @@
       globs:
       - 'docs/rum_collection.md'
       options:
-        dest_path: '/real_user_monitoring/android/'
-        file_name: '_index.md'
+        dest_path: '/real_user_monitoring/'
+        file_name: 'android.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
           title: Getting Started with Android RUM Collection
