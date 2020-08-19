@@ -100,7 +100,7 @@ func main() {
         "1234",
     )
     tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop()
+    defer tracer.Stop() // Make sure this line stays in your main function.
 }
 ```
 
