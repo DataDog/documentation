@@ -121,4 +121,4 @@ The call stack is limited on PHP 5. See the [troubleshooting page][3] for more d
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: /help
-[3]: /tracing/troubleshooting/php/deep_call_stacks
+[3]: /tracing/troubleshooting/php_5_deep_call_stacks
