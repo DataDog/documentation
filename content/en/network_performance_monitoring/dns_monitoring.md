@@ -79,7 +79,7 @@ Narrow down the traffic in your view with the `Filter Traffic` [options][1].
 
 The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server’s high number of incoming requests, response time, or failure rate is due to 
 * Heavy processes consuming the resources of its underlying infrastructure 
-* Application errors in code on the client side 
+* Application errors in the code on the client side
 * A high number of requests originating from a particular port or IP
 
 {{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel"  style="width:100%;">}}
