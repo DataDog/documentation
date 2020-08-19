@@ -60,7 +60,7 @@ The following DNS metrics are available:
 
 | Metric                   | Description                                                                                                             |
 |--------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **DNS Requests**         | The number of DNS requests made from the source                                                                         |
+| **DNS requests**         | The number of DNS requests made from the source.                                                                         |
 | **DNS Requests/ Second** | The rate of DNS requests made by the source                                                                             |
 | **DNS Response Time**    | The average response time of the DNS server to a request from the source                                                |
 | **Timeouts**             | The number of timed out DNS requests from the source, displayed as a percentage of all DNS responses                    |
