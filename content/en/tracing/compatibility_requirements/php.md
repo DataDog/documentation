@@ -111,9 +111,14 @@ To request support for additional datastores, contact our awesome [support team]
 
 To request support for additional libraries, contact our awesome [support team][2].
 
+#### Deep call stacks on PHP 5
+
+The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][3] for more details.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: /help
+[3]: /tracing/troubleshooting/php_5_deep_call_stacks
