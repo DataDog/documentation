@@ -42,7 +42,7 @@ To refine your search to a particular client, aggregate and filter DNS traffic u
 
 To refine your search to a particular DNS server, filter the destination search bar using tags. To configure your destination display, select one of the following options from the **Group by** dropdown menu:
 
-* `dns_server`: The server receiving DNS requests. This tag has the same value as pod_name or task_name, or host_name if the former tags are not available.
+* `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
 * `host`: The host name of the DNS server.
 * `service`: The service running on the DNS server.
 * `IP`: The IP of the DNS server.
