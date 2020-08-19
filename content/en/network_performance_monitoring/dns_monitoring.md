@@ -26,7 +26,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 * The pods or services making DNS requests and the servers receiving those requests.
 * The endpoints making the most requests or making requests at the highest rate.
 * When a DNS server’s response time to requests has gradually or suddenly increased
-* Which DNS servers have a high error rate, and what kind of errors they they are emitting
+* The DNS servers with a high error rate and the type of errors being emitted.
 
 ## Setup
 
