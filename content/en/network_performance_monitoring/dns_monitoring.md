@@ -73,7 +73,7 @@ The network table breaks down the above metrics by each _source_ and _destinatio
 
 You can configure the columns in your table using the `Customize` button at the top right of the table.
 
-Narrow down the traffic in your view with the `Filter Traffic` [options][1].
+Narrow down the traffic in your view with the **Filter Traffic** [options][1].
 
 ## Sidepanel
 
