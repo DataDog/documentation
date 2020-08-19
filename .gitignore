@@ -64,7 +64,7 @@ content/en/compliance_monitoring/default_rules/*.md
 npm-debug.log*
 
 # RUM
-content/en/real_user_monitoring/android/_index.md
+content/en/real_user_monitoring/android.md
 
 # serverless
 content/en/serverless/forwarder.md
