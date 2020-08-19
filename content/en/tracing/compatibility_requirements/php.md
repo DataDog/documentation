@@ -113,7 +113,7 @@ To request support for additional libraries, contact our awesome [support team][
 
 #### Deep call stacks on PHP 5
 
-The call stack is limited on PHP 5. See the [troubleshooting page][3] for more details.
+The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][3] for more details.
 
 ## Further Reading
 
