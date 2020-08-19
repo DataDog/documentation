@@ -30,7 +30,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-DNS Monitoring metrics are collected automatically by the system probe. Once installed, a ‘DNS’ tab will be accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
+DNS Monitoring metrics are collected automatically by the system probe. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product by default - no extra steps are necessary.
 
 ## Queries
 
