@@ -35,7 +35,12 @@ usermod -a -G systemd-journal dd-agent
 
 ### Configuration
 
-Create the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
+{{< tabs >}}
+{{% tab "Host" %}}
+
+To configure this check for an Agent running on a host:
+
+Edit the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
 
 #### Log collection
 
@@ -59,7 +64,30 @@ To fill `source` and `service` attributes, the Agent collects `SYSLOG_IDENTIFIER
 
 **Note**: With Agent 7.17+, if `container_mode` is set to `true`, the default behavior changes for logs coming from docker containers. The `source` attribute of your logs is automatically set to the corresponding short image name of the container instead of simply `docker`.
 
-Finally, [restart the agent][2].
+Finally, [restart the Agent][1].
+
+[1]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+
+#### Log collection
+
+_Available for Agent versions >6.0_
+
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection documentation][2].
+
+| Parameter      | Value                                                  |
+| -------------- | ------------------------------------------------------ |
+| `<LOG_CONFIG>` | `{"source": "journald", "service": "<YOUR_APP_NAME>"}` |
+
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 #### Advanced features
 
@@ -100,13 +128,12 @@ This works automatically when the Agent is running from the host. If you are usi
 
 ## Troubleshooting
 
-Need help? Contact [Datadog Support][3].
+Need help? Contact [Datadog Support][2].
 
 ## Further Reading
 
-Learn more about infrastructure monitoring and all Datadog integrations on [our blog][4]
+Learn more about infrastructure monitoring and all Datadog integrations on [our blog][3]
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/guide/agent-commands/#start-stop-restart-the-agent
-[3]: /help/
-[4]: https://www.datadoghq.com/blog
+[2]: /help/
+[3]: https://www.datadoghq.com/blog
