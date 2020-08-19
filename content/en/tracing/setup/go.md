@@ -75,6 +75,9 @@ func main() {
         tracer.WithService("test-go"),
         tracer.WithVersion("abc123"),
     )
+    
+    // When the tracer is stopped, it will flush everything it has to the Datadog agent before quitting.
+    // Make sure this line stays in your main function.
     defer tracer.Stop()
 }
 ```
@@ -100,7 +103,7 @@ func main() {
         "1234",
     )
     tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop() // Make sure this line stays in your main function.
+    defer tracer.Stop()
 }
 ```
 
