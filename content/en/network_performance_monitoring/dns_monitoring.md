@@ -40,7 +40,7 @@ To refine your search to a particular client, aggregate and filter DNS traffic u
 
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view"  style="width:100%;">}}
 
-To refine your search to a particular DNS server, filter the destination search bar using tags. To configure your destination display, select one of the following options from the ‘Group by’ dropdown menu:
+To refine your search to a particular DNS server, filter the destination search bar using tags. To configure your destination display, select one of the following options from the **Group by** dropdown menu:
 
 * `dns_server`: The server receiving DNS requests. This tag has the same value as pod_name or task_name, or host_name if the former tags are not available.
 * `host`: The host name of the DNS server.
