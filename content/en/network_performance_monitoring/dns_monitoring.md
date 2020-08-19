@@ -65,7 +65,7 @@ The following DNS metrics are available:
 | **DNS requests / second** | The rate of DNS requests made by the source.                                                                             |
 | **DNS response time**    | The average response time of the DNS server to a request from the source.                                                |
 | **Timeouts**             | The number of timed out DNS requests from the source (displayed as a percentage of all DNS responses).                    |
-| **Errors**               | The number of requests from the source that generated DNS error codes, displayed as a percentage of all DNS responses   |
+| **Errors**               | The number of requests from the source that generated DNS error codes (displayed as a percentage of all DNS responses).   |
 | **Failures**             | The total number of timeouts and errors in DNS requests from the source (displayed as a percentage of all DNS responses). |
 
 ## Table
