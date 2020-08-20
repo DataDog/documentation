@@ -119,9 +119,12 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* The main executable name is `agent.exe`.
+* The main executable name is `agent.exe`. The location is as follows depending on the Agent version:
+	- Agent versions <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
+	- Agent versions >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the command line `"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" <COMMAND>` for Agent versions >= 6.12 or `"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" <COMMAND>` for Agent versions <= 6.11. Command-line options are below:
+* Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`. 
+* Command-line options are below:
 
 | Command         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -142,6 +145,23 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | status          | Print the current status.                                                        |
 | stopservice     | Stops the Agent within the service control manager.                              |
 | version         | Prints the version info.                                                         |
+
+* Examples:
+  - PowerShell (`powershell.exe`)
+
+	```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" flare
+	```
+
+  - Command Prompt (`cmd.exe`)
+
+	```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
+"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" flare
+	```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -196,7 +216,9 @@ To verify the Agent is running, check if the `DatadogAgent` service in the Servi
 To receive more information about the Agent's state, start the Datadog Agent Manager:
 
 * Right click on the Datadog Agent system tray icon -> Configure, or
-* Run  `& "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui` for agent version >= 6.12 or `& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` for agent version <= 6.11 from an admin Powershell prompt
+* Run `launch-gui` command from an **elevated(run as Admin)** command line
+	- PowerShell: `& "<PATH_TO_AGENT.EXE>" launch-gui`
+	- cmd: `"<PATH_TO_AGENT.EXE>" launch-gui`
 
 Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
@@ -204,7 +226,7 @@ Get more information on running checks in *Status* -> *Collector* and *Checks* -
 The status command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
 
 or cmd.exe:
@@ -228,7 +250,7 @@ For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/stat
 The info command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
