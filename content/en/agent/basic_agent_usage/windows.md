@@ -350,9 +350,12 @@ or cmd.exe:
 
 #### Flare fails to upload
 
-On Linux and macOS, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
+The output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email. Common locations flare files are stored:
+- Linux: `\tmp\`
+- MacOS: `$TMPDIR`
+- Windows: `C:\Users\<DDAGENTUSER>\AppData\Local\Temp\`
 
-For Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
+For older Agent versions on Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
 
 **Step 1**:
 
