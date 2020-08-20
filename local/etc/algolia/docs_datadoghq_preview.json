@@ -70,6 +70,15 @@
             "page_rank": 200
         },
         {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/security_monitoring/default_rules/",
+            "selectors_key": "default_rules",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["default_rules"],
+            "page_rank": -50
+        },
+        {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
             "selectors_key": "integrations",
             "variables": {
