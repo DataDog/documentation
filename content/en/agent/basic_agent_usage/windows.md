@@ -150,17 +150,17 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
   - PowerShell (`powershell.exe`)
 
 	```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" status
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" flare
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
 	```
 
   - Command Prompt (`cmd.exe`)
 
 	```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" flare
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
 	```
 
 {{% /tab %}}
@@ -226,13 +226,13 @@ Get more information on running checks in *Status* -> *Collector* and *Checks* -
 The status command is available for Powershell:
 
 ```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 or cmd.exe:
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 {{% /tab %}}
@@ -304,6 +304,18 @@ Need help? Contact [Datadog support][1].
 
 * Press Submit.
 
+The flare command is available for Powershell:
+
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
+or cmd.exe:
+
+```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
@@ -327,7 +339,7 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 The flare command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 or cmd.exe:
