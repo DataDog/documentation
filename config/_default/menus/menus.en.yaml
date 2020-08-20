@@ -2553,6 +2553,10 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-network-hosts
     generated: true
+  - name: Get hourly usage for profiled hosts
+    parent: Usage Metering
+    url: get-hourly-usage-for-profiled-hosts
+    generated: true
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
