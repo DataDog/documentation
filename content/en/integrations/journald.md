@@ -14,6 +14,10 @@ name: journald
 ddtype: check
 supported_os:
     - linux
+further_reading:
+    - link: "logs/guide/docker-logs-collection-troubleshooting-guide"
+      tag: "Documentation"
+      text: "Docker Log Collection"
 ---
 
 ## Overview
@@ -26,7 +30,7 @@ Systemd-journald is a system service that collects and stores logging data. It c
 
 Journal files are, by default, owned and readable by the `systemd-journal` system group. To start collecting your journal logs, you need to:
 
-1. [Install the agent][1] on the instance running the journal
+1. [Install the Agent][1] on the instance running the journal
 2. Add the `dd-agent` user to the `systemd-journal` group by running:
 
 ```text
@@ -132,8 +136,8 @@ Need help? Contact [Datadog Support][2].
 
 ## Further Reading
 
-Learn more about infrastructure monitoring and all Datadog integrations on [our blog][3]
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /help/
-[3]: https://www.datadoghq.com/blog
