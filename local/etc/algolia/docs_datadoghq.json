@@ -75,8 +75,8 @@
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
             },
-            "tags": ["getting_started"],
-            "page_rank": 20
+            "tags": ["default_rules"],
+            "page_rank": -50
         },
         {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
