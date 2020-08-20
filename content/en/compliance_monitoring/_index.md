@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 <div class="alert alert-warning">
-Compliance Monitoring is currently available for private beta. Contact <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaoqr9Pgievq7f2WE6wcQMF1YjsOwiXHbmO2FehUlQwmNu0A/viewform?usp=sf_link">support</a> for more details.
+Compliance Monitoring is currently available for private beta. Contact <a href="https://docs.google.com/forms/d/e/1FAIpQLScTA913tNGptcAeNNdWlvgECjekYoDVJwR-OkMtZYnJnq-FWw/viewform">support</a> for more details.
 </div>
 
 ## Overview
