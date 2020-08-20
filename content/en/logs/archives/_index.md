@@ -90,7 +90,7 @@ To enable it, go to the **Properties** tab in your S3 bucket and select **Defaul
 Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][9]. To enable it, take the following steps:
 
 1. Create your CMK
-2. Attach a CMK policy to your CMK with the following content, replacing the AWS accont number and Datadog IAM role name approproiately:
+2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name approproiately:
 
 ```
 {
