@@ -168,19 +168,13 @@ Use the [Datadog Agent Manager][5] to enable, disable, and configure checks. Res
 {{% tab "Agent v6 & v7" %}}
 The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.yaml`
-
-Configuration files for [integrations][1] are in:
-`C:\ProgramData\Datadog\conf.d\` OR
-`C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
-
-**Note**: `ProgramData` is a hidden folder.
-
-[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.conf`
+{{% /tab %}}
+{{< /tabs >}}
 
 Configuration files for [integrations][1] are in:
 `C:\ProgramData\Datadog\conf.d\` OR
@@ -189,8 +183,6 @@ Configuration files for [integrations][1] are in:
 **Note**: `ProgramData` is a hidden folder.
 
 [1]: /integrations/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Troubleshooting
 
