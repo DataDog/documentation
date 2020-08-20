@@ -78,9 +78,72 @@ You can [set a lifecycle configuration on your S3 bucket][7] to automatically tr
 
 ### Server side encryption (SSE)
 
-To add server side encryption to your S3 log archives, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
+#### SSE-S3
+
+The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][8]. 
+To enable it, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
+
+#### SSE-KMS
+
+Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][9]. To enable it, take the following steps:
+
+1. Create your CMK
+2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name approproiately:
+
+```
+{
+    "Id": "key-consolepolicy-3",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Enable IAM User Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow use of the key",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:DescribeKey"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow attachment of persistent resources",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:CreateGrant",
+                "kms:ListGrants",
+                "kms:RevokeGrant"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "kms:GrantIsForAWSResource": "true"
+                }
+            }
+        }
+    ]
+}
+```
+
+3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
@@ -89,6 +152,8 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [5]: /logs/archives/rehydrating/
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -131,6 +196,8 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [7]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 {{< /tabs >}}
+
+## Validation
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
