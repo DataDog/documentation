@@ -73,7 +73,7 @@ func main() {
     tracer.Start(
         tracer.WithEnv("prod"),
         tracer.WithService("test-go"),
-        tracer.WithVersion("abc123"),
+        tracer.WithServiceVersion("abc123"),
     )
     
     // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
