@@ -61,6 +61,17 @@ datadog:
    ...
 {{< /code-block >}}
 
+In cases where the agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml` as well:
+
+{{< code-block lang="yaml" >}}
+datadog:
+   ...
+   clusterName: "<your Kubernetes cluster's name>"
+   ...
+{{< /code-block >}}
+
+On Google's GKE, AWS EKS, and Azure AKS, this is unnecessary, unless the agent and the cluster agent don't have access to the cloud metadata APIs.
+
 ## Configuration
 
 ### Include or exclude containers
