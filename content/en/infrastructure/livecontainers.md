@@ -44,21 +44,26 @@ To enable Kubernetes Resources for Live Containers, follow the [Helm instruction
 
 {{< code-block lang="yaml" >}}
 datadog:
-   ...
-   orchestratorExplorer:
-      enabled: true
-   ...
-   agents:
-      image:
-        repository: datadog/agent
-        tag: latest
-        pullPolicy: Always
-   ...
-   clusterAgent:
-      repository: datadog/cluster-agent
-      tag: latest
-      pullPolicy: Always
-   ...
+  ...
+  processAgent:
+    enabled: true
+  ...
+  orchestratorExplorer:
+    enabled: true
+...
+clusterAgent:
+  enabled: true
+  image:
+    repository: datadog/cluster-agent
+    tag: latest
+    pullPolicy: Always
+...
+agents:
+  image:
+    repository: datadog/agent
+    tag: latest
+    pullPolicy: Always
+...
 {{< /code-block >}}
 
 In cases where the agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml` as well:
