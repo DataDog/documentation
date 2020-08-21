@@ -603,16 +603,20 @@ main:
     url: serverless/serverless_integrations
     parent: serverless
     weight: 6
+  - name: Serverless Tagging
+    url: serverless/serverless_tagging
+    parent: serverless
+    weight: 7
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 7
+    weight: 8
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 8
+    weight: 9
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
