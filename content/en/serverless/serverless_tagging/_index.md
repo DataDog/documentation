@@ -9,19 +9,19 @@ kind: documentation
 
 Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can slice and dice your traces.
 
-Tags are especially powerful when consistent across the Datadog platform. First-class support is currently offered for the following tags: `env`, `service`, `version`.
+Tags are especially powerful when consistent across the Datadog platform. First-class support is offered for the following tags: `env`, `service`, and `version`.
 
 With these three tags, you can:
 
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
 - View service data based on environment or version in a unified fashion within the Datadog app
 
-There are a few best practices we recommend for tagging in your serverless environment to keep tags consistent across your traces, metrics and logs.
+There are a few best practices Datadog recommends for tagging in your serverless environment to keep tags consistent across your traces, metrics, and logs.
 
 
-## Directly Tag your Serverless Functions
+## Directly tag your serverless functions
 
-To surface tags from your Lambda functions across metrics, traces and logs, we recommend you directly tag your Lambda functions with the appropriate `env` and `service`. Below are some sample tagging configurations for common serverless developer tools:
+To surface tags from your Lambda functions across metrics, traces, and logs, Datadog recommends that you directly tag your Lambda functions with the appropriate `env` and `service`. Below are some sample tagging configurations for common serverless developer tools:
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
