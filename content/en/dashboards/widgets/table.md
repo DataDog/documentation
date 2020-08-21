@@ -48,8 +48,7 @@ TABLE_SCHEMA = {
         "requests": {
             "type":     "array",
             "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
+            "minItems": 1
         },
         "title": {"type": "string"}
     },
