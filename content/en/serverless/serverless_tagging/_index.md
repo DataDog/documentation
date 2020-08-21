@@ -28,45 +28,45 @@ To surface tags from your Lambda functions across metrics, traces, and logs, Dat
 
 If you are using the Serverless Framework, you can choose one of several options to apply tags across Datadog:
 
-1- Tags directly added at the provider scope will be applied across Datadog:
+1. Tags directly added at the provider scope will be applied across Datadog:
 
-```yaml
-provider:
-  name: aws
-  runtime: nodejs12.x
-  tags:
-	service: shopist-cart-confirmation
-  	env: prod
-  	version: 1.01
-```
-
-2- Tags directly added on each individual Lambda resource will be applied across Datadog:
-
-```yaml
-functions:
-  confirmCart:
-    handler: cart.confirm
+  ```yaml
+  provider:
+    name: aws
+    runtime: nodejs12.x
     tags:
-      service: shopist-cart-confirmation
-      env: prod
-      version: 1.01
-    events:
-      - http:
-          path: ping
-          method: get
+  	service: shopist-cart-confirmation
+    	env: prod
+    	version: 1.01
+  ```
 
-```
+2. Tags directly added on each individual Lambda resource will be applied across Datadog:
 
-3- If you are using the Datadog Serverless Framework Plugin, native Serverless Framework `service` and `stage` tags will be surfaced as `service` and `env` across Datadog:
+  ```yaml
+  functions:
+    confirmCart:
+      handler: cart.confirm
+      tags:
+        service: shopist-cart-confirmation
+        env: prod
+        version: 1.01
+      events:
+        - http:
+            path: ping
+            method: get
 
-```yaml
-service: shopist-cart-confirmation
+  ```
 
-provider:
-  name: aws
-  runtime: nodejs12.x
-  stage: prod
-```
+3. If you are using the Datadog Serverless Framework Plugin, native Serverless Framework `service` and `stage` tags will be surfaced as `service` and `env` across Datadog:
+
+  ```yaml
+  service: shopist-cart-confirmation
+
+  provider:
+    name: aws
+    runtime: nodejs12.x
+    stage: prod
+  ```
 
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -74,42 +74,42 @@ provider:
 If you are using the AWS SAM, you can choose one of several options to apply tags across Datadog:
 
 
-1- Tags directly added on each individual Lambda resource will be applied across Datadog:
+1. Tags directly added on each individual Lambda resource will be applied across Datadog:
 
-```yaml
-Resources:
-  confirmCart:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/handlers/cart.confirm
-      Tags:
-      	env: prod
-      	service: shopist-cart-confirmation
-```
+  ```yaml
+  Resources:
+    confirmCart:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: src/handlers/cart.confirm
+        Tags:
+          env: prod
+          service: shopist-cart-confirmation
+  ```
 
-2- If you are using the Datadog CloudFormation Macro, tags directly added in the `Transform` scope will be applied across Datadog:
+2. If you are using the Datadog CloudFormation Macro, tags directly added in the `Transform` scope will be applied across Datadog:
 
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters: 
-        nodeLayerVersion: 25
-        forwarderArn: "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
-        stackName: !Ref "AWS::StackName"
-        service: "shopist-cart-confirmation"
-        env: "prod"
-```
+  ```yaml
+  Transform:
+    - AWS::Serverless-2016-10-31
+    - Name: DatadogServerless
+      Parameters: 
+          nodeLayerVersion: 25
+          forwarderArn: "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
+          stackName: !Ref "AWS::StackName"
+          service: "shopist-cart-confirmation"
+          env: "prod"
+  ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Import Resource Tags from your Serverless Functions
+### Import resource tags from your serverless Ffnctions
 
-We strongly recommend you enable the `DdFetchLambdaTags` option on the Datadog Forwarder. Setting the parameter `DdFetchLambdaTags` to `true` on the Forwarder CloudFormation stack to ensure your traces are tagged with the resource tags on the originating Lambda function. Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
+Datadog strongly recommends you enable the `DdFetchLambdaTags` option on the Datadog Forwarder. Setting the parameter `DdFetchLambdaTags` to `true` on the Forwarder CloudFormation stack to ensure your traces are tagged with the resource tags on the originating Lambda function. Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
 
-## Organize your Service Map
+## Organize your service map
 
 {{< img src="serverless/serverless_service_map.png" alt="Service Map" >}}
 
