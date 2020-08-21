@@ -41,6 +41,14 @@ To remove a Datadog API key or application key or client token, navigate to [Int
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys"  >}}
 
+## Using multiple API keys
+
+Consider setting up multiple API keys for your organization. For example, use different API keys for each of your various deployment methods: one for deploying an Agent on Kubernetes in AWS, one for deploying it on prem with Chef, one for Terraform scripts that automate your dashboards or monitors, and one for developers deploying locally.
+
+Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with. 
+
+If your organization needs more than the built-in limit of five API keys, contact [Support][4] to ask about increasing your limit.
+
 ## Disabling a User Account
 
 If a user's account is disabled, any application keys that the user created are deleted. Any API keys that were created by the disabled account are not deleted, and are still valid.
