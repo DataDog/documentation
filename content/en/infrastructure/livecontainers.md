@@ -27,7 +27,7 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 
 [Kubernetes Resources for Live Containers][1] is currently in private beta. Fill out [this form][5] to request access.
 
-If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, pre-workload detailed view, and visualized maps.
+If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, per-workload detailed view, and visualized maps.
 
 ## Installation
 
