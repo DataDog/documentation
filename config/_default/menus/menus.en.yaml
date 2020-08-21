@@ -448,6 +448,10 @@ main:
     url: dashboards/functions/count/
     parent: dashboards_functions
     weight: 503
+  - name: Exclusion
+    url: dashboards/functions/exclusion/
+    parent: dashboards_functions
+    weight: 503
   - name: Interpolation
     url: dashboards/functions/interpolation/
     parent: dashboards_functions
