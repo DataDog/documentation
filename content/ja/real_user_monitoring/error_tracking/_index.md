@@ -5,24 +5,24 @@ beta: true
 further_reading:
   - link: /real_user_monitoring/error_tracking/explorer
     tag: Documentation
-    text: RUM エラー追跡エクスプローラー
+    text: RUM Error Tracking Explorer
   - link: 'https://app.datadoghq.com/error-tracking'
     tag: UI
     text: エラー追跡
 ---
 {{< site-region region="eu" >}}
 
-<div class="alert alert-warning"> EU リージョンは、現在エラー追跡の対象外です。フィードバックまたはご質問は、<a href="/help">Datadog サポート</a>までお問い合わせください。</div>
+<div class="alert alert-warning"> EU リージョンは、現在 Error Tracking の対象外です。フィードバックまたはご質問は、<a href="/help">Datadog サポート</a>までお問い合わせください。</div>
 
 {{< /site-region >}}
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="エラー追跡ページ"  >}}
 
-## エラー追跡とは？
+## Error Tracking とは？
 
 Datadog では、非常に多くのエラーが収集されます。システムの正常性維持には、このエラーを監視することが不可欠ですが、件数が多いため個々のエラーイベントを重要度により特定し修正の順序を見極めることは大変困難です。
 
-エラー追跡を使用すると、以下の機能により簡単にエラーを監視できます。
+Error Tracking を使用すると、以下の機能により簡単にエラーを監視できます。
 
 - __同様のエラーを問題としてグループ化する__ ため、ノイズがなくなり最も重要なエラーを特定することができます。
 - __経時的に問題を監視する__ ため、開始のタイミングや継続した場合の頻度を把握できます。
@@ -30,7 +30,7 @@ Datadog では、非常に多くのエラーが収集されます。システム
 
 ## はじめに
 
-エラー追跡では、RUM SDK によりブラウザから収集されたエラー ([ソース元][1]のあるエラー) を処理します。
+Error Tracking では、RUM SDK によりブラウザから収集されたエラー ([ソース元][1]のあるエラー) を処理します。
 
 エラー追跡を素早く開始するには:
 
