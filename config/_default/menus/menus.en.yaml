@@ -1782,18 +1782,15 @@ api_v1:
     url: /api/v1/
     identifier: API V1 overview
     weight: -10
-  - name: Page 1
-    url: /api/v1/page-1/
-    parent: API V1 overview
-    weight: 6
-  - name: Authentication
-    url: authentication
-    parent: API V1 overview
-  - name: Rate Limiting
-    url: '/api/v1/#rate-limiting'
+  - name: Using the API
+    url: /api/v1/using-the-api/
     parent: API V1 overview
     weight: 5
-    identifier: rate-limiting
+  - name: Rate Limits
+    url: '/api/v1/rate-limits/'
+    parent: API V1 overview
+    weight: 6
+    identifier: rate-limits
   - name: AWS Integration
     url: /api/v1/aws-integration/
     identifier: AWS Integration
@@ -2659,13 +2656,15 @@ api_v2:
     url: /api/v2/
     identifier: API V2 overview
     weight: -10
-  - name: Authentication
-    url: authentication
-    parent: API V2 overview
-  - name: Rate Limiting
-    url: rate-limiting
+  - name: Using the API
+    url: /api/v2/using-the-api/
     parent: API V2 overview
     weight: 5
+  - name: Rate Limits
+    url: '/api/v2/rate-limits/'
+    parent: API V2 overview
+    weight: 6
+    identifier: rate-limits
   - name: AWS Integration
     url: /api/v2/aws-integration/
     identifier: AWS Integration
