@@ -213,6 +213,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [4]: /tracing/visualization/#services
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
+
 {{% /tabs %}}
 
 
