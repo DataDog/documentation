@@ -16,7 +16,7 @@ This page describes specific ways you can use the version tag to better monitor 
 
 ## Version Deployment Strategies
 
-Datadog's Version Tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies or others to detect bad code deployments, contain the impact of changes and respond faster to incidents.
+Datadog's Version Tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
 
 ### Rolling deploys
 
