@@ -71,7 +71,7 @@ In cases where the agent is not able to automatically detect the Kubernetes clus
 {{< code-block lang="yaml" >}}
 datadog:
    ...
-   clusterName: "<your Kubernetes cluster's name>"
+   clusterName: <PLACEHOLDER>
    ...
 {{< /code-block >}}
 
