@@ -52,10 +52,6 @@ Shadow deploys allow you to test a potential release against real production tra
 
 Version tags can be used anywhere within Datadog, whether to filter a search view to a specific version, or to compare metrics from different versions.
 
-### The Service and Resource pages
-
-When version tags are present, the Service and Resource pages have te
-
 ### Service page
 
 {{< img src="tracing/version_tracking/ServicePage.png" alt="Versions on the Service Page"  style="width:100%;">}}
