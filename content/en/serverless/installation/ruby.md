@@ -22,19 +22,21 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 #### Using the Layer
 
-[Configure the layers][3] for your Lambda function using the ARN in the following format:
+[Configure the layers][3] for your Lambda function using the ARN in the following format.
 
 ```
+# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# For us-gov regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For `VERSION`, see the [latest release][4]. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 ```
-
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For more information, see the [latest release][4].
 
 #### Using the Gem
 
