@@ -75,7 +75,7 @@ datadog:
    ...
 {{< /code-block >}}
 
-**Note**: the cluster name must be 40-character long or less. We are working on relaxing this constraint.
+**Note**: The cluster name must be 40-characters or less.
 
 On Google's GKE, AWS EKS, and Azure AKS, this is unnecessary, unless the agent and the cluster agent don't have access to the cloud metadata APIs, or the cluster name is longer than 40 characters.
 
