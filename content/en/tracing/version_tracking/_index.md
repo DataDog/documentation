@@ -10,7 +10,7 @@ further_reading:
 ---
 ## The Version Tag
 
-`Version` is a [reserved tag][1] within Datadog, and because of Unified Service Tagging, the 'Version` tag is applied across infrastructure, traces, trace metrics, profiles, and logs.
+`Version` is a [reserved tag][1] within Datadog, and because of Unified Service Tagging, the `Version` tag is applied across infrastructure, traces, trace metrics, profiles, and logs.
 
 This page describes specific ways you can use the version tag to better monitor deployments and service behavior. See the [Unified Service Tagging][1] docs for instructions for setting up the tags.
 
@@ -57,6 +57,7 @@ Version tags can be used anywhere within Datadog, whether to filter a search vie
 {{< img src="tracing/version_tracking/ServicePage.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
 On the Service page, if the version tag is available, the requests widget can be scoped to either of:
+
 - Total Requests by Version
 - Requests per second by Version
 
@@ -73,6 +74,7 @@ All of these can be exported to dashboards and monitors.
 {{< img src="tracing/version_tracking/ResourcePage.png" alt="Versions on the Resource Page"  style="width:100%;">}}
 
 On the Resource page, if the version tag is available, the requests widget can be scoped to either of:
+
 - Total Requests by Version
 - Requests per second by Version
 
