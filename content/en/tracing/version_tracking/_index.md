@@ -10,11 +10,13 @@ further_reading:
 ---
 ## The Version Tag
 
-`Version` is one of three [reserved tags][1] within Datadog, and through [Unified Service Tagging][1], is applied across infrastructure, traces, trace metrics, profiles, and logs.
+`Version` is one of three [reserved tags][1] within Datadog, and through Unified Service Tagging, is applied across infrastructure, traces, trace metrics, profiles, and logs.
+
+Instructions for how to set these tags can be found in the [Unified Service Tagging][1] section of the documentation, while this page details specific ways you can use the version tag within Datadog to better monitor deployments and service behavior.
 
 ## Version Deployment Strategies
 
-There are a variety of version deployment strategies employed, all with the goal of minimizing downtime, measuring the effectiveness of new code in production, and minimizing impact to customers from outages or bugs.  Using the version tag for your services with Datadog allows you to monitor your deployments.
+A myriad of deployment tactics exist in the wild, many of them can be classified as implementations of consistent strategies. These strategies aim to contain the impact of a deployed service (maintaining a "blast radius") and allow for faster response to incidents. Implementing any of these modern strategies requires deep observability into the performance of the deployed code. Using Datadog's Version Tracking allows you to achieve just that.
 
 ### Rolling Deploys
 
