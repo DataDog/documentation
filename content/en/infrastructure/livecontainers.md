@@ -68,7 +68,7 @@ agents:
 
 In cases where the Agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml`:
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="values.yaml" >}}
 datadog:
    ...
    clusterName: <PLACEHOLDER>
