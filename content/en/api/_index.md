@@ -20,7 +20,7 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][4]: `brew install coreutils`
 
-To quickly get started with the Datadog API, see [Using the API], or check out our [Datadog Postman collection][5].
+To quickly get started with the Datadog API, see [Using the API][7], or check out our [Datadog Postman collection][5].
 
 Trying to get started with the application instead? Check out our general [Getting Started docs][6].
 
@@ -34,3 +34,4 @@ Trying to get started with the application instead? Check out our general [Getti
 [4]: https://brew.sh
 [5]: /getting_started/api
 [6]: /getting_started/application/
+[7]: /api/v1/using-the-api/
