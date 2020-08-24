@@ -33,9 +33,7 @@ Install the [AWS integration][2]. This allows Datadog to ingest Lambda metrics f
 
 ### 2. Install the Datadog Forwarder
 
-Install the [Datadog Forwarder Lambda function][3], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-Note, if you installed the AWS integration by using the Datadog-provided CloudFormation template, then you already have the Forwarder function installed as part of the AWS integration CloudFormation stack.
+Skip this step if you already have the Forwarder function installed as part of the [AWS integration][2] CloudFormation stack. Otherwise, install the [Datadog Forwarder Lambda function][3], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
 ### 3. Instrument Your Application
 
