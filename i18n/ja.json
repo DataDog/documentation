@@ -249,5 +249,44 @@
   },
   "edit": {
     "other": "編集"
+  },
+  "overview": {
+    "other": "Overview"
+  },
+  "arguments": {
+    "other": "Arguments"
+  },
+  "path_parameters": {
+    "other": "Path Parameters"
+  },
+  "query_strings": {
+    "other": "Query Strings"
+  },
+  "header_parameters": {
+    "other": "Header Parameters"
+  },
+  "request": {
+    "other": "Request"
+  },
+  "model": {
+    "other": "Model"
+  },
+  "example": {
+    "other": "Example"
+  },
+  "copy": {
+    "other": "Copy"
+  },
+  "response": {
+    "other": "Response"
+  },
+  "code_example": {
+    "other": "Code Example"
+  },
+  "name": {
+    "other": "Name"
+  },
+  "description": {
+    "other": "Description"
   }
 }

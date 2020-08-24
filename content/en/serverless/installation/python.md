@@ -157,7 +157,11 @@ More information and additional parameters can be found in the [macro documentat
     ```
 1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][1]. For example:
     ```
+    # For regular regions
     arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+    
+    # For us-gov regions
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
     ```
 
 ### Subscribe the Datadog Forwarder to the Log Groups
@@ -226,7 +230,11 @@ The minor version of the `datadog-lambda` package always matches the layer versi
 [Configure the layers][1] for your Lambda function using the ARN in the following format:
 
 ```
+# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# For us-gov regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
 The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the [latest release][2]. For example:

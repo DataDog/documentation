@@ -13481,7 +13481,7 @@ paths:
 
         - anomaly: `query alert`
 
-        - APM: `query alert`
+        - APM: `query alert` or `trace-analytics alert`
 
         - composite: `composite`
 
@@ -13497,7 +13497,7 @@ paths:
 
         - live process: `process alert`
 
-        - logs: `logs alert`
+        - logs: `log alert`
 
         - metric: `metric alert`
 
@@ -13505,9 +13505,9 @@ paths:
 
         - outlier: `query alert`
 
-        - process: `service query`
+        - process: `service check`
 
-        - rum: `alert`
+        - rum: `rum alert`
 
         - watchdog: `event alert`
 
