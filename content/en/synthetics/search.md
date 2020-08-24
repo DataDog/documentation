@@ -4,20 +4,13 @@ kind: documentation
 description: Search and manage your Synthetic tests.
 ---
 
-Search, access, and manage all of your tests in one location with the [Synthetic Tests page][1]. Here you can view tests that are alerting, get an overview of the state of your application with features like uptime and response time graphs, and more.
+## Overview
 
-## Search
+Search, access, and manage all of your tests in one location on the [Synthetic Tests page][1]. View tests that are alerting, get an overview of the state of your application with features like uptime and response time graphs, and more.
 
-There are two ways to query Synthetic tests:
+The facets and tags panel on the left side of the page lists several default facets and custom tags you can use to create a query.
 
-* Using existing or newly created facets and tags to create queries
-* Writing your own queries
-
-### Facets and Tags
-
-The facets and tags panel on the left side of this page lists several default facets and your custom created tags that you can use to create custom queries.
-
-Default facets are available under the **Synthetic Filters** section:
+Default facets include:
 
 * `Type`
 * `Status`
@@ -27,17 +20,28 @@ Default facets are available under the **Synthetic Filters** section:
 * `Notification`
 * `Env`
 
-Tags populate based on the existing tags you created when creating a [Synthetic test][2]. To add new tags for querying, hover over any row in the table and click the pencil **Edit** button. Add tags under the `Additional Tags` section.
+These are available under the **Synthetic Filters** section. There is also a **Tags** section that populates based on your existing [Synthetic test][2] tags. To add new tags for querying, hover over any Synthetic test row in the table and click the pencil **Edit** button. You can add tags under the `Additional Tags` section.
 
-There are three ways to create a query using the facets and tags in this panel:
+As you select and deselect facet and tag checkboxes, or as you select facets and tags in the search bar, the search bar will automatically update with the equivalent query. When selecting several facets, the search performs an `AND` or `OR` automatically. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-* Hover over a facet or tag under and click `only` to create search query that includes only that facet or tag.
-* Hover over the same option and click `all` to include all facets and tags in a search query.
-* Click on an existing filled checkbox to deselect a facet or tag and exclude it from a search query.
+## Search
 
-The search bar updates with the equivalent query as you check the boxes or type in the search bar. When selecting several facets, the search performs an `AND` or `OR` automatically. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+There are two ways to search Synthetic tests:
 
-You can also click within the search bar at the top of the page and it will populate the same default facets and tags visible in the left panel. You can then use these facets to create your own autocompleted query.
+* Use existing or newly created facets and tags to create queries
+* Write your own custom query
+
+### Facets and Tags
+
+There are three ways to create a query using the facets and tags in the left panel:
+
+* Hover over a facet value and click `only` to create a search query that includes only that facet value.
+* Hover over the same facet value again and click `all` to include all facet values again in the search query.
+* Click on an existing filled checkbox to deselect a facet value and exclude it from the search query.
+
+For example, if you want to create a query to return only Browser Test, hover over **Browser Test** in the left panel and select `only`. Hover again to reselect `all`.
+
+{{< img src="synthetics/search/facet-selection.gif" alt="Facet Search" >}}
 
 ### Write a query
 
