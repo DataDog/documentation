@@ -42,7 +42,7 @@ Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Conta
 
 To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][10] and add the following changes to your `values.yaml` file:
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="values.yaml" >}}
 datadog:
   ...
   processAgent:
