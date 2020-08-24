@@ -42,7 +42,7 @@ The first step in creating any dashboard is figuring out what you want it to sho
 
 So, talk amongst your team. Find out what people most frequently need to find out that today they have to dig for.
 
-Second, for the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, for example `RUM`. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
+SLO and SLI details makes for an excellent team dashboard
 
 ## Executive dashboards
 
@@ -72,6 +72,14 @@ Add event overlays
 Correlations
 
 Use links to create an action for runbook-like solutions
+
+## Explore out-of-the-box dashboards
+
+For the infrastructure you monitor, check out the out-of-the-box dashboards that are provided with Datadog:
+
+1. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, for example `RUM`. 
+2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
+3. Click **Clone** to create a copy of the out-of-the-box dashboard so that you can change and customize it.
 
 ## How to
 
