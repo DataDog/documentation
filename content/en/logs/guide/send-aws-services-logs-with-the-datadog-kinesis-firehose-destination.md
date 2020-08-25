@@ -35,10 +35,10 @@ If you only want to send logs to Datadog, or if you already have a Kinesis Datas
 5. Select the `Datadog` destination and select the `Datadog US` or `Datadog EU` region, depending on the Datadog Region of your account.
   {{< img src="logs/guide/choose-destination.png" alt="Choose your destination" style="width:100%;">}}
 6. Paste your `APIKEY` into the `AccessKey` box. (You can get your API key from [your Datadog API settings page][3]).
-7. (Optional) Add custom `parameters`—these get added as custom tags on your logs.
+7. (Optional) Add custom `parameters`, which are added as custom tags to your logs.
 {{< img src="logs/guide/kinesis_logs_datadog_destination.png" alt="Datadog destination configuration" style="width:100%;">}}
 8. Choose to backup failed events to an S3 bucket.
-9. Configure the Delivery stream parameters. The two important parameters:
+9. Configure the delivery stream parameters. The two important parameters are:
   * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
   * Batch size: Datadog recommends a value between 1MB and 4MB. The logs are sent by the delivery stream if the batch size or the linger time (minimum 60 seconds)
   is reached. Datadog recommends reducing the batch size to be as close to real-time as possible.
