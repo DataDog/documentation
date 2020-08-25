@@ -14,15 +14,19 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
+## Overview
+
 {{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
 
 A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 **Note**: Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][5] feature.
 
+As a best practice, we recommend using at most 20 Processors per Pipeline.
+
 ## Grok Parser
 
-Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3].
+Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, we recommend using at most 10 parsing rules within a grok Processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
