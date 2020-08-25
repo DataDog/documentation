@@ -88,13 +88,13 @@ To request support for additional CLI libraries, contact our awesome [support te
 | MongoDB                          | 1.4.x                      | Fully Supported |
 | MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
+| PHPRedis                         | 3, 4, 5                    | Fully Supported |
 | Predis                           | 1.1                        | Fully Supported |
 | AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
 | AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
 | AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
 | Doctrine ORM                     | 2                          | _Coming Soon_   |
 | ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
-| PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
 To request support for additional datastores, contact our awesome [support team][2].
