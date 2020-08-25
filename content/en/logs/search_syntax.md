@@ -64,7 +64,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 `@url:www.datadoghq.com`
 
-**Note**: 
+**Notes**: 
 
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser during parsing so that you get case insensitive results during search.
 
