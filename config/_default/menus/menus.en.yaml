@@ -558,10 +558,12 @@ main:
   - name: Node.js
     url: serverless/installation/nodejs
     parent: serverless_installation
+    identifier: serverless_installation_nodejs
     weight: 102
   - name: Ruby
     url: serverless/installation/ruby
     parent: serverless_installation
+    identifier: serverless_installation_ruby
     weight: 103
   - name: Java
     url: serverless/installation/java
@@ -581,7 +583,33 @@ main:
   - name: Datadog Lambda Library
     url: serverless/datadog_lambda_library
     parent: serverless
+    identifier: serverless_datadog_lambda_library
     weight: 2
+  - name: Python
+    url: serverless/datadog_lambda_library/python
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_python
+    weight: 201
+  - name: Node.js
+    url: serverless/datadog_lambda_library/nodejs
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_nodejs
+    weight: 202
+  - name: Ruby
+    url: serverless/datadog_lambda_library/ruby
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_ruby
+    weight: 203
+  - name: Go
+    url: serverless/datadog_lambda_library/go
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_go
+    weight: 204
+  - name: Java
+    url: serverless/datadog_lambda_library/java
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_java
+    weight: 205
   - name: Datadog Forwarder
     url: serverless/forwarder
     parent: serverless

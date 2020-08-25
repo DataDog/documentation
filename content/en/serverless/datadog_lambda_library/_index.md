@@ -27,7 +27,7 @@ The Datadog Lambda Library is responsible for:
 - Submitting [custom metrics][2] (synchronously and asynchronously).
 - Enabling [Datadog APM and Distributed Tracing][3], currently available for Node.js, Python, and Ruby with more runtimes coming soon.
 
-The Datadog Lambda Library is **NOT** responsible for:
+The Datadog Lambda Library is NOT responsible for:
 
 - Collecting Lambda metrics from CloudWatch (see [AWS Lambda Integration][4])
 - Collecting Lambda traces from X-Ray (see [AWS X-Ray integration][5])
@@ -35,7 +35,9 @@ The Datadog Lambda Library is **NOT** responsible for:
 
 Datadog distributes the Lambda library as a package for Python, Node.js, Ruby, Go and Java, which can be installed through the common package managers, such as pip, npm, gem, maven and etc.
 
-The Lambda library is also available as [Lambda layers][7] for Python, Node.js, and Ruby.
+The Datadog Lambda library is also available as [Lambda layers][7] for Python, Node.js, and Ruby.
+
+To install the Datadog Lambda library and instrument your serverless applications, see the [installation instructions][8].
 
 ## Further Reading
 
@@ -49,3 +51,4 @@ The Lambda library is also available as [Lambda layers][7] for Python, Node.js, 
 [5]: /integrations/amazon_xray/
 [6]: /serverless/forwarder/
 [7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[8]: /serverless/installation/
