@@ -1,0 +1,51 @@
+---
+title: Datadog Lambda Library
+kind: documentation
+further_reading:
+- link: "/serverless/datadog_lambda_library/python"
+  tag: "Datadog Lambda Library for Python"
+  text: "Datadog Lambda Library for Python"
+- link: "/serverless/datadog_lambda_library/nodejs"
+  tag: "Datadog Lambda Library for Node.js"
+  text: "Datadog Lambda Library for Node.js"
+- link: "/serverless/datadog_lambda_library/ruby"
+  tag: "Datadog Lambda Library for Ruby"
+  text: "Datadog Lambda Library for Ruby"
+- link: "/serverless/datadog_lambda_library/go"
+  tag: "Datadog Lambda Library for Go"
+  text: "Datadog Lambda Library for Go"
+- link: "/serverless/datadog_lambda_library/java"
+  tag: "Datadog Lambda Library for Java"
+  text: "Datadog Lambda Library for Java"
+---
+
+{{< img src="serverless/datadog_lambda_library.png" alt="Datadog Lambda Library"  style="width:100%;">}}
+
+The Datadog Lambda Library is responsible for:
+
+- Generating real-time [enhanced Lambda metrics][1] for invocations, errors, cold starts, estimated costs, etc.
+- Submitting [custom metrics][2] (synchronously and asynchronously).
+- Enabling [Datadog APM and Distributed Tracing][3], currently available for Node.js, Python, and Ruby with more runtimes coming soon.
+
+The Datadog Lambda Library is **NOT** responsible for:
+
+- Collecting Lambda metrics from CloudWatch (see [AWS Lambda Integration][4])
+- Collecting Lambda traces from X-Ray (see [AWS X-Ray integration][5])
+- Collecting Lambda logs from CloudWatch (see [Datadog Forwarder][6])
+
+Datadog distributes the Lambda library as a package for Python, Node.js, Ruby, Go and Java, which can be installed through the common package managers, such as pip, npm, gem, maven and etc.
+
+The Lambda library is also available as [Lambda layers][7] for Python, Node.js, and Ruby.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /serverless/enhanced_lambda_metrics/
+[2]: /serverless/custom_metrics/
+[3]: /tracing/
+[4]: /integrations/amazon_lambda/
+[5]: /integrations/amazon_xray/
+[6]: /serverless/forwarder/
+[7]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
