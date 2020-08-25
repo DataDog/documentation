@@ -26,16 +26,16 @@ If you’ve been tasked with creating a dashboard about a certain aspect of your
 
 Consider the following three distinct types of dashboards that many Datadog users create: team dashboards, executive dashboards, and troubleshooting dashboards. These aren't formal types of dashboards; there's no "Create an Executive Dashboard" button anywhere in the Datadog app. But these three types reflect major use cases for dashboards, represent three and each suggests a different approach to creating the dashboards themselves.
 
- - **Team dashboards** - A team dashboard is one that helps you and you teammates focus on the right work. It reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details makes for an excellent team dashboard.
+ - **Team dashboards** - A team dashboard is one that helps you and you teammates focus on the right work. It reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
- - **Executive dashboards** - Having a dashboard, connected to realtime data, is a powerful tool for guiding conversations with managers and executives. A good executive dashboard can show that you are working on the most important things, how much a service you use is costing or helping, and whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level, and are interconnected to enable drilling down should a conversation about 
+ - **Executive dashboards** - A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good executive dashboard can show that you are working on the most important things, how much a service you use is costing or helping, and whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to enable drilling down.
 
- - **Troubleshooting dashboards** -  Questions you might ask and answer
+ - **Troubleshooting dashboards** -  Troubleshooting dashboards often start as a scratch pad of things you know, and gradually builds as you discover more. Questions you might ask and answer:
 
- - What parts of our infrastructure need replacing?
- - Why does our app performance always suffer Wednesdays at 3ET? 
- - What action link can we build into the DB to repair that each week? (Runbook)
- - Why are so many users dropping off at X point?
+   - What parts of our infrastructure need replacing?
+   - Why does our app performance always suffer Wednesdays at 3ET? 
+   - What action link can we build into the DB to repair that each week? (Runbook)
+   - Why are so many users dropping off at X point?
 
 This guide gets you started on a path to making dashboards that can guide real conversations, not just fill screen space. These basic dashboards will help your team talk about things that really matter to you, show your managers the value you (and Datadog) bring to your organization, and get to the bottom of problems quickly.
 
