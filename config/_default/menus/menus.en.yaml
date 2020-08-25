@@ -558,10 +558,12 @@ main:
   - name: Node.js
     url: serverless/installation/nodejs
     parent: serverless_installation
+    identifier: serverless_installation_nodejs
     weight: 102
   - name: Ruby
     url: serverless/installation/ruby
     parent: serverless_installation
+    identifier: serverless_installation_ruby
     weight: 103
   - name: Java
     url: serverless/installation/java
@@ -579,48 +581,74 @@ main:
     identifier: serverless_installation_dotnet
     weight: 106
   - name: Datadog Lambda Library
-    url: serverless/installation/installing_the_library
-    parent: serverless_installation
-    weight: 108
+    url: serverless/datadog_lambda_library
+    parent: serverless
+    identifier: serverless_datadog_lambda_library
+    weight: 2
+  - name: Python
+    url: serverless/datadog_lambda_library/python
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_python
+    weight: 201
+  - name: Node.js
+    url: serverless/datadog_lambda_library/nodejs
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_nodejs
+    weight: 202
+  - name: Ruby
+    url: serverless/datadog_lambda_library/ruby
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_ruby
+    weight: 203
+  - name: Go
+    url: serverless/datadog_lambda_library/go
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_go
+    weight: 204
+  - name: Java
+    url: serverless/datadog_lambda_library/java
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_java
+    weight: 205
   - name: Datadog Forwarder
     url: serverless/forwarder
     parent: serverless
-    weight: 2
+    weight: 3
   - name: Enhanced Lambda Metrics
     url: serverless/enhanced_lambda_metrics
     parent: serverless
-    weight: 3
+    weight: 4
   - name: Distributed Tracing
     url: serverless/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless
-    weight: 4
+    weight: 5
   - name: Enable AWS X-Ray
     url: tracing/serverless_functions
     parent: serverless_distributed_tracing
-    weight: 401
+    weight: 501
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
-    weight: 5
+    weight: 6
   - name: Serverless Integrations
     url: serverless/serverless_integrations
     parent: serverless
-    weight: 6
+    weight: 7
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 8
+    weight: 9
   - name: Azure App Services Extension
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 9
+    weight: 10
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
