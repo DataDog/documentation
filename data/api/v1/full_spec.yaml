@@ -8059,10 +8059,8 @@ components:
           format: int64
           type: integer
         container_count:
-          description: 'Contains the total number of billable infrastructure hosts
-            reporting during a given hour.
-
-            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
+          description: Shows the total number of containers reported by the Docker
+            integration during the hour.
           format: int64
           type: integer
         gcp_host_count:
@@ -8073,8 +8071,10 @@ components:
           format: int64
           type: integer
         host_count:
-          description: Shows the total number of containers reporting via the Docker
-            integration during the hour.
+          description: 'Contains the total number of billable infrastructure hosts
+            reporting during a given hour.
+
+            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
           format: int64
           type: integer
         hour:
