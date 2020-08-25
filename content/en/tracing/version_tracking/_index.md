@@ -50,7 +50,7 @@ Shadow deploys allow you to test a potential release against real production tra
 
 ## Using Version Tags within Datadog
 
-The `version` tags can be used anywhere within Datadog, whether to filter a search view to a specific version, or to compare metrics from different versions.
+The `version` tag can be used anywhere within Datadog, whether to filter a search view to a specific version, or to compare metrics from different versions.
 
 ### Service page
 
