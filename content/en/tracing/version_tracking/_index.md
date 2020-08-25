@@ -24,7 +24,7 @@ Rolling deploys provide zero-downtime by directing traffic to other instances wh
 
 Using Datadog, you can monitor your rolling deploys and detect any resulting error increases.
 
-{{< img src="tracing/version_tracking/rolling.png" alt="versions on the Service Page"  style="width:100%;">}}
+{{< img src="tracing/version_tracking/rolling.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
 ### Blue/green deploys
 
