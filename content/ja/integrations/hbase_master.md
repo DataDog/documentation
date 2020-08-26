@@ -1,12 +1,14 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md'
 display_name: HBase master
@@ -69,7 +71,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Hbase_master の[メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `hbase_master.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_master.d/conf.yaml][8] を参照してください。
 
@@ -145,7 +147,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Hbase RegionServer の[メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `hbase_regionserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_regionserver.d/conf.yaml][12] を参照してください。
 
