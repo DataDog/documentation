@@ -26,7 +26,7 @@ As a best practice, it is recommended to use at most 20 Processors per Pipeline.
 
 ## Grok Parser
 
-Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, it is recommend to use at most 10 parsing rules within a grok Processor.
+Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
