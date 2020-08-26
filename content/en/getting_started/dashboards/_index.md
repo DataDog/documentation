@@ -39,8 +39,6 @@ Consider the following three distinct types of dashboards that many Datadog user
 
 This guide gets you started on a path to making dashboards that can guide real conversations, not just fill screen space. These basic dashboards will help your team talk about things that really matter to you, show your managers the value you (and Datadog) bring to your organization, and get to the bottom of problems quickly.
 
-After you've had some success creating basic dashboards, you can explore mixing and matching the approaches to meet your needs.
-
 ## Prerequisites
 
 If you haven't already, create a [Datadog account][1]. Install an agent on a host, and an integration for something running on that host.
