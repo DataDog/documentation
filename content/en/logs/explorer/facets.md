@@ -153,6 +153,8 @@ The easiest way to create a facet is to add it from the log side panel, where mo
 
 {{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Create Facet from attribute" style="width:30%;">}}
 
+**Note**: As a best practice, it is recommended to use no more than 1000 facets.
+
 #### From the facet list
 
 In case finding a matching log is not an option, create a new facet directly from the facet panel using the _add facet_ button.
