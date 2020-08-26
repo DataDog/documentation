@@ -199,6 +199,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | Mongo             | `mongo`           |
 | Mysqli            | `mysqli`          |
 | PDO               | `pdo`             |
+| PhpRedis          | `phpredis`        |
 | Predis            | `predis`          |
 | Slim              | `slim`            |
 | Symfony           | `symfony`         |
