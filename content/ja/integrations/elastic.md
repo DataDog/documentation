@@ -55,13 +55,16 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. Elasticsearch の[メトリクス](#metrics)を収集するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `elastic.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル elastic.d/conf.yaml][4] を参照してください。
+1. Elasticsearch の[メトリクス](#metrics)を収集するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `elastic.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル elastic.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -78,16 +81,16 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
       - クラスターの外で実行されている 1 つの Datadog Agent からのみ Elasticsearch メトリクスを収集する場合は (ホステッド Elasticsearch を使用する場合など)、`cluster_stats` を true に設定します。
       - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
-      - Amazon ES コンフィギュレーション API へのリクエストは全て、署名されなければなりません。詳細は、[AWS ドキュメント][5]を参照してください。
+      - Amazon ES コンフィギュレーション API へのリクエストは全て、署名されなければなりません。詳細は、[AWS ドキュメント][3]を参照してください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][4]。
 
 ##### トレースの収集
 
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][7]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][8]。
+1. [Datadog でトレースの収集を有効にします][5]。
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][6]。
 
 ##### ログの収集
 
@@ -99,7 +102,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][9]します。デフォルトでは、スローログは有効になっていません。
+2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][7]します。デフォルトでは、スローログは有効になっていません。
 
    - 特定のインデックス `<インデックス>` のインデックススローログを構成するには
 
@@ -157,11 +160,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-4. [Agent を再起動します][6]。
+4. [Agent を再起動します][4]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
+[3]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[6]: https://docs.datadoghq.com/ja/tracing/setup/
+[7]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][10]をガイドとして参照し、次のパラメーターを適用します。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -183,23 +196,31 @@ Agent コンテナで必要な環境変数
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][11]および [Kubernetes Daemon のセットアップ][12]を参照してください。
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
 
-次に、[アプリケーションコンテナをインスツルメント][8]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
+次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][13]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
 
 | パラメーター      | 値                                                      |
 | -------------- | ---------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "elasticsearch", "service": "<サービス名>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/ja/tracing/setup/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][14]し、Checks セクションで `elastic` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `elastic` を探します。
 
 ## 収集データ
 
@@ -209,7 +230,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
 
-バージョン 6.3.0 以降で、すべての `elasticsearch.thread_pool.write.*` メトリクスを収集するには、Elasticsearch コンフィギュレーションで `xpack.monitoring.collection.enabled` コンフィギュレーションを `true` に設定します。[Elasticsearch のリリースノートで Monitoring セクション][15]を参照してください。
+バージョン 6.3.0 以降で、すべての `elasticsearch.thread_pool.write.*` メトリクスを収集するには、Elasticsearch 構成で `xpack.monitoring.collection.enabled` 構成を `true` に設定します。[Elasticsearch のリリースノートで Monitoring のセクション][4]を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}
@@ -231,28 +252,18 @@ Agent が Elasticsearch に接続してメトリクスを収集できない場�
 
 ## トラブルシューティング
 
-- [Agent が接続できない][17]
-- [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][9]
+- [Agent が接続できない][5]
+- [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][6]
 
 ## その他の参考資料
 
-Elasticsearch クラスターを Datadog と統合する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][18]を参照してください。
+Elasticsearch クラスターを Datadog と統合する方法 (または理由) について理解するには、Datadog の[ブログ記事][7]を参照してください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/elastic/images/elasticsearch-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
-[5]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[8]: https://docs.datadoghq.com/ja/tracing/setup/
-[9]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
-[10]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[12]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[13]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[15]: https://www.elastic.co/guide/en/elasticsearch/reference/6.3/release-notes-6.3.0.html
-[16]: https://github.com/DataDog/integrations-core/blob/master/elastic/metadata.csv
-[17]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
-[18]: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://www.elastic.co/guide/en/elasticsearch/reference/6.3/release-notes-6.3.0.html
+[5]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
+[6]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[7]: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics

@@ -13,6 +13,8 @@ further_reading:
 kind: ドキュメント
 title: iOSトレースの収集
 ---
+<div class="alert alert-info">iOS トレースの収集は公開ベータ版です。ご質問がございましたら、<a href="https://docs.datadoghq.com/help/" target="_blank">サポートチーム</a>までお問い合わせください。</div>
+
 [Datadog の `dd-sdk-ios` クライアント側トレーシングライブラリ][2]を使用すると、iOS アプリケーションから Datadog へ[トレース][1]を送信すると共に、次の機能を利用できます。
 
 * アプリケーションでのさまざまな操作用にカスタム[スパン][3]を作成する。
@@ -144,7 +146,9 @@ Datadog.initialize(
     )
     ```
 
-8. (任意) フロントエンドとバックエンドなど、複数の環境間でトレースを分散させるには、クライアントリクエストにトレーサーコンテキストを挿入します。
+8. (オプション) フロントエンド - バックエンドなど、環境間でトレースを手動で分散するには、手動で行うか、自動インスツルメンテーションを利用できます。
+
+    * トレースを手動で伝播するには、スパンコンテキストを `URLRequest` ヘッダーに挿入します。
 
     ```swift
     import Datadog
@@ -160,7 +164,22 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-    これにより、リクエストにトレーシングヘッダーが追加されるため、バックエンドで抽出して分散型トレーシングを続行できます。また、バックエンドが [Datadog APM と分散型トレーシング][10]でインスツルメントされている場合、Datadog ダッシュボードにフロントエンドからバックエンドのすべてのトレースが表示されます。リクエストが完了したら、完了ハンドラー内で `span.finish()` をコールします。
+     これにより、リクエストにトレーシングヘッダーが追加されるため、バックエンドで抽出して分散型トレーシングを続行できます。リクエストが完了したら、完了ハンドラー内で `span.finish()` をコールします。また、バックエンドが [Datadog APM と分散型トレーシング][10]でインスツルメントされている場合、Datadog ダッシュボードにフロントエンドからバックエンドのすべてのトレースが表示されます。
+
+    * SDK が特定のホストに対して行われたすべてのネットワークリクエストを自動的にトレースするようにするには、Datadog の初期化中に `tracedHosts` 配列を指定します。
+
+    ```swift
+    Datadog.initialize(
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+            .set(tracedHosts: ["example.com", "api.yourdomain.com"])
+            .build()
+    )
+    ```
+    これは、 `example.com` と `api.yourdomain.com` (たとえば、`https://api.yourdomain.com/v2/users` または `https://subdomain.example.com/image.png`) に対して行われたすべてのリクエストをトレースします。
+
+    **注**: 自動インスツルメンテーションは、`URLSession.dataTask(request:completionHandler:)` および `URLSession.dataTask(url:completionHandler:)` で作成されたリクエストのみをサポートします。`URLSession` スウィズリングを使用します。このスウィズリングは完全にオプトインです。`tracedHosts` を指定しない場合、スウィズリングは適用されません。
 
 
 ## バッチコレクション
