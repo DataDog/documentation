@@ -37,7 +37,7 @@ As an example, the following configuration instructs the Agent to ignore some co
 DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"`
+You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/.*"`
 
 In **Agent <= v7.19+**, to remove a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
