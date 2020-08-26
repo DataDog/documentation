@@ -52,12 +52,13 @@ For example, if some of your hosts are running on AWS, the following AWS-specifi
 * `security-group`
 * any EC2 tags you might use, such as `name`
 
-The Datadog Agent also collects host metadata, some of which can be used as a filter or for grouping terms. Host metadata fields include:
+The Datadog Agent also collects host metadata and application information, some of which can be used as a filter or for grouping terms. Those fields include:
 
 - `field:metadata_agent_version`
 - `field:metadata_platform`
 - `field:metadata_processor`
 - `field:metadata_machine`
+- `field:apps`
 
 ### Zoom in
 
