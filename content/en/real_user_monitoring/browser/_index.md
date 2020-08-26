@@ -40,7 +40,11 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: 'datadoghq.com',
+//  service: 'my-web-application',
+//  env: 'production',
+//  version: '1.0.0',
     sampleRate: 100,
+    trackInteractions:true,
 });
 ```
 
@@ -54,12 +58,18 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: 'datadoghq.eu',
+//  service: 'my-web-application',
+//  env: 'production',
+//  version: '1.0.0',
     sampleRate: 100,
+    trackInteractions:true,
 });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: The `trackInteractions` initialization parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
 ## Bundle Setup
 
@@ -79,7 +89,11 @@ Paste the generated code snippet into the head tag (in front of any other script
             clientToken: '<CLIENT_TOKEN>',
             applicationId: '<APPLICATION_ID>',
             site: 'datadoghq.com',
+        //  service: 'my-web-application',
+        //  env: 'production',
+        //  version: '1.0.0',
             sampleRate: 100,
+            trackInteractions:true,
         });
 </script>
 ```
@@ -98,13 +112,19 @@ Paste the generated code snippet into the head tag (in front of any other script
             clientToken: '<CLIENT_TOKEN>',
             applicationId: '<APPLICATION_ID>',
             site: 'datadoghq.eu',
+        //  service: 'my-web-application',
+        //  env: 'production',
+        //  version: '1.0.0',
             sampleRate: 100,
+            trackInteractions:true,
         });
 </script>
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: The `trackInteractions` initialization parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
 **Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the RUM SDK.
 
