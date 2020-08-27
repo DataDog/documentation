@@ -23,7 +23,7 @@
             <div class="col">
                 <ul class="nav navbar-left">
                     {{ range $datafile.left }}
-                        {{ if eq .title "Solutions" }}
+                        {{ if eq .name "solutions" }}
                             <li class="nav-item {{ if .children }}dropdown{{ end }}">
                                 <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                                 {{ if .children }}

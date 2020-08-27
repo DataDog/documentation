@@ -58,73 +58,86 @@ left:
     link: 'https://www.datadoghq.com/ja/pricing/'
     title: 料金
   - name: solutions
-    link: '#'
-    title: お客様事例
+    link: "#"
+    title: "お客様事例"
     children:
       - name: solutions_financial
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/financial-services/'
         title: 金融サービス
       - name: solutions_manufacturing
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
         title: 製造 / 物流
       - name: solutions_healthcare
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/healthcare/'
         title: 医療 / ライフサイエンス
       - name: solutions_retail
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
         title: 小売業 / e コマース
       - name: solutions_publicsector
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/solutions/public-sector'
         title: 官業
       - name: solutions_media
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
         title: メディア / エンターテインメント
       - name: solutions_technology
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/solutions/technology/'
         title: テクノロジー
+      - name: "Amazon Web Services"
+        category: "technology"
+        link: "https://www.datadoghq.com/ja/solutions/aws/"
+        title: "Amazon Web Services"
+      - name: "Google Cloud Platform"
+        category: "technology"
+        link: "https://www.datadoghq.com/ja/solutions/gcp/"
+        title: "Google Cloud Platform"
+      - name: "Kubernetes"
+        category: "technology"
+        link: "https://www.datadoghq.com/ja/solutions/kubernetes/"
+        title: "Kubernetes"
       - name: solutions_gaming
-        category: 業種
+        category: industry
         link: 'https://www.datadoghq.com/ja/solutions/gaming/'
         title: ゲーム業界
       - name: solutions_cloudmigration
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
         title: クラウド移行
       - name: solutions_monitoringconsolidation
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
         title: 統合監視
       - name: solutions_devops
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/ja/solutions/devops/'
         title: DevOps
       - name: solutions_securityanalytics
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/security-analytics/'
         title: セキュリティ分析
       - name: solutions_hybridcloudmonitoring
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
         title: ハイブリッドクラウドモニタリング
       - name: solutions_iotmonitoring
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
         title: IoT モニタリング
       - name: solutions_machinelearning
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/machine-learning/'
         title: 機械学習
       - name: solutions_businessanalytics
-        category: ユースケース
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/business-analytics/'
         title: リアルタイム BI
+
 right:
   - name: about
     link: 'https://www.datadoghq.com/ja/about/'
