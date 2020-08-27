@@ -42,12 +42,15 @@ If you haven't already, create a [Datadog account][1]. Install an agent on a hos
 
 The first step in creating any dashboard is figuring out what you want it to show. That might sound obvious, but when you first start looking at Datadog dashboard options, you may get stuck either on a blank screen with nowhere to begin, or with an unending list of dashboards with infinite graphs and charts and numbers, none of which on its own answers the specific questions you have.
 
-Decide if timeboard or screenboard
+Decide if timeboard or screenboard. 
+
+For a troubleshooting dashboard, start with what you know: a graph or widget from another dashboard or view that shows a problem--you'll be drilling down from there to find your solution.
 
 ## Copy or steal
 
 - individual graphs/widgets Ctrl+C/V
 - Export to dashboard option on many pages/features
+- clone
 
 ## Explore out-of-the-box dashboards
 
