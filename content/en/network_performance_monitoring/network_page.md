@@ -80,7 +80,7 @@ The following network load metrics are available:
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
 |  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
-|  **Established Connections**         | Number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
+|  **Established Connections**         | The number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
 |  **Closed Connections**         | Number of TCP connections in a closed state. Measured in connections per second from the `source`.                                                                                                            |
 #### TCP
 
