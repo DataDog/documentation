@@ -39,4 +39,4 @@ api.Dashboard.create(title=title,
                      is_read_only=is_read_only,
                      notify_list=notify_list,
                      template_variables=template_variables,
-                     template_variable_presets=saved_views)
+                     template_variable_presets=saved_view)
