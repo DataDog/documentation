@@ -43,11 +43,14 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][3] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `twemproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twemproxy.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -57,11 +60,17 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
        port: 22222
    ```
 
-2. [Agent を再起動][4]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
+2. [Agent を再起動][3]すると、Datadog へ Twemproxy メトリクスの送信が開始します。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
@@ -69,9 +78,13 @@ Agent の Twemproxy チェックは [Datadog Agent][1] パッケージに含ま�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                          |
 | `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22222"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `twemproxy` を探します。
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `twemproxy` を探します。
 
 ## 収集データ
 
@@ -91,13 +104,9 @@ Agent が Twemproxy 統計エンドポイントに接続してメトリクスを
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

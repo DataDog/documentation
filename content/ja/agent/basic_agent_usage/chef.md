@@ -370,8 +370,9 @@ Datadog インテグレーションの特定のバージョンをインストー
 
 ```ruby
 datadog_integration 'name' do
-  version                      String # インストールするバージョン :install action
-  action                       Symbol # デフォルトに設定 :install
+  version                      String         # インストールするバージョン :install action
+  action                       Symbol         # デフォルトに設定 :install
+  third_party                  [true, false]  # デフォルトに設定 :false
 end
 ```
 
@@ -379,6 +380,7 @@ end
 
 - `'name'`: インストールする Agent インテグレーションの名前。例: `datadog-apache`。
 - `version`: インストールするインテグレーションのバージョン (`:install` アクションでのみ必須)。
+- `third_party`: Datadog インテグレーションをインストールする場合は false に設定し、それ以外の場合は true に設定します。Datadog Agent バージョン 6.21/7.21 以降でのみ使用できます。
 
 #### 例
 
