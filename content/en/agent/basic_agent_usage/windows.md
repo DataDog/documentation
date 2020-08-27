@@ -235,6 +235,34 @@ or cmd.exe:
 "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
+If you see Agent status shows below loading error and due to Python3 runtime issue, it could because your Windows system environment is old and you can try to use below URL to upgrade your system environment. 
+https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows
+```cmd
+  Collector
+  =========
+    Error initializing Python
+  =========================
+    - could not load runtime python for version 3: Unable to open library libdatadog-agent-three.dll, error code: 126
+    
+  Loading Errors
+  ==============
+    disk
+    ----
+      Core Check Loader:
+        Check disk not found in Catalog
+      JMX Check Loader:
+        check is not a jmx check, or unable to determine if it's so
+      Python Check Loader:
+        python is not initialized
+    network
+    -------
+      Core Check Loader:
+        Check network not found in Catalog
+      JMX Check Loader:
+        check is not a jmx check, or unable to determine if it's so
+      Python Check Loader:
+        python is not initialized
+```
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
