@@ -27,7 +27,7 @@ template_variables = [{
     'default': 'my-host'
 }]
 
-saved_view = [{
+saved_views = [{
     'name': 'Saved views for hostname 2',
     'template_variables': [{'name': 'host', 'value': '<HOSTNAME_2>'}]}
 ]
