@@ -20,6 +20,9 @@ further_reading:
 - link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
+- link: "/mobile/#dashboards"
+  tag: "Documentation"
+  text: "View your Dashboards on the Mobile App"
 ---
 
 ## Overview
