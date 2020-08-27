@@ -4267,8 +4267,14 @@ paths:
             schema:
               $ref: '#/components/schemas/UserUpdateRequest'
       responses:
-        '204':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
           description: OK
+        '204':
+          description: No changes
         '400':
           content:
             application/json:
