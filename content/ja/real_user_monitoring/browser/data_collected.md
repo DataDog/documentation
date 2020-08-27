@@ -24,11 +24,11 @@ further_reading:
 ---
 デフォルトでは、収集されたすべてのデータは詳細な粒度で 15 日間保持されます。Datadog リアルユーザーモニタリングのスクリプトが、Datadog に 5 種類の主なイベントタイプを送信します。
 
-- [[ビュー][4]]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
-- [[リソース][5]]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
-- [[ロングタスク][6]]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
-- [[エラー][7]]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
-- [[ユーザーアクション][8]]: A User Action event is a custom event that can be generated for a given user action.
+- [View][4]: ユーザーがセットアップアプリケーションのページにアクセスするたびに、ビューイベントが作成されます。ユーザーがそのビューにとどまっている間、収集されたすべてのデータは、`view.id` 属性でそのビューにアタッチされます。
+- [Resource][5]: 画像、XHR/Fetch、CSS、または JS ライブラリのリソースイベントを生成できます。名前や関連付けられている読み込み時間など、リソースに関する情報が含まれています。
+- [Long task][6]: メインスレッドを 50 ミリ秒以上ブロックするブラウザのタスクはすべて、ロングタスクと見なされ、特定のイベントが生成されます。
+- [Error][7]: ブラウザによってフロントエンドエラーが発生するたびに、RUM はそれをキャッチし、Error Event として Datadog に送信します。
+- [User Action][8]: User Action イベントは、特定のユーザーアクションに対して生成できるカスタムイベントです。
 
 {{< tabs >}}
 {{% tab "ビュー" %}}

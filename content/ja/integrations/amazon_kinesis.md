@@ -51,17 +51,20 @@ Amazon Kinesis は、膨大な分散型データストリームをリアルタ�
 
 #### ログの有効化
 
-Amazon Kinesis から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Datadog は、Amazon Kinesis Delivery ストリームのデフォルトの宛先の 1 つです。 AWS は Amazon Kinesis Data Firehose を完全に管理しているため、ストリーミングログ用の追加のインフラストラクチャーや転送構成を維持する必要はありません。
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_kinesis` に設定されているかを確認してください。
+AWS Firehose コンソールで Kinesis Firehose Delivery Stream を設定するか、CloudFormation テンプレートを使用して宛先を自動的に設定できます。
 
-#### Datadog へのログの送信
+- [AWS Firehose コンソール][6]
+- [CloudFormation テンプレート][7]
 
-1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
+ただし、S3 バケットにログを送る場合は、AWS Lambda 関数を使用します。`amazon_kinesis` が _Target prefix_ として設定されていることを確認します。
+
+1. [Datadog ログ コレクション AWS Lambda 関数][8]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Kinesis ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
-    - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [S3 バケットに手動トリガーを追加][9]
+    - [Cloudwatch ロググループに手動トリガーを追加][10]
 
 ## 収集データ
 
@@ -81,15 +84,17 @@ AWS AWS Kinesis インテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_kinesis.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_kinesis
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=cloudformationtemplate
+[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[10]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_kinesis/amazon_kinesis_metadata.csv
+[12]: https://docs.datadoghq.com/ja/help/

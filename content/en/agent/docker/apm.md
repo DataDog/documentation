@@ -37,7 +37,7 @@ To make it available from _any host_, use `-p 8126:8126/tcp` instead.
 For example, the following command allows the Agent to receive traces from your host only:
 
 {{< tabs >}}
-{{% tab "Standard" %}}
+{{% tab "Linux" %}}
 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \

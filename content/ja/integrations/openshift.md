@@ -78,7 +78,7 @@ DogStatsD、APM、およびログの収集には、Datadog Agent をホストの
 
 Agent を `sidecar` モードで実行できます。Agent をアプリケーションのポッド内で実行し、簡単に検出することが可能です。
 
-#### ホストネットワーク SCC オペレーション
+#### ホスト
 
 `allowHostPorts` のアクセス許可をポッドに（標準の `hostnetwork`、`hostaccess`、あるいは自作の SCC を使用して）追加します。その場合、関連するポートバインディングを、ポッドの仕様に追加してください。
 
