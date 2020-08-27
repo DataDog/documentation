@@ -8,6 +8,10 @@ aliases:
 
 ## Overview
 
+<div class="alert alert-warning">
+Usage Attribution is an advanced feature included in the  Enterprise plan. For all other plans, contact your account representative or success@datadoghq.com to request this feature.
+</div>
+
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 * Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
