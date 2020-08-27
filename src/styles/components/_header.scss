@@ -169,6 +169,10 @@ body > header {
         &.solutions-menu {
           width: 480px;
 
+          @include media-breakpoint-up(lg) {
+            width: 720px;
+          }
+
           p {
             padding: 8px 11px 8px;
           }
