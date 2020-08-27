@@ -46,7 +46,7 @@ If you have any questions about how the Log Management Service satisfies the app
 
 **Note:**
 
-HIPAA-enabled custommer used to require the use of specific endpoints to submit logs in order to enforce some specific encryptions. This is not needed anymore as that those encryptions are now enabled on all log submission endpoints.
+Previously, HIPAA-enabled customers needed to use specific endpoints to submit logs in order to enforce specific encryptions. This is no longer necessary. The encryptions are enabled on all log submission endpoints.
 
 These are the legacy endpoints that are not supported after version {edit suggestion to add version}:
 
