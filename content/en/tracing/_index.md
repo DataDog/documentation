@@ -66,7 +66,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Version Tracking
 
-[Monitor service performance][4] and deployments with version tags applied across infrastructure, traces, trace metrics, profiles, and logs.
+[Monitor service performance][4] with version tags for rolling, blue/green, shadow, or canary deployments.
 
 {{< img src="tracing/version_tracking/rolling.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
