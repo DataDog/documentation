@@ -51,11 +51,16 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-1. ProxySQL のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4] のルートにある `conf.d/` フォルダーの `proxysql.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][5] を参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-2. [Agent を再起動します][6]。
+1. ProxySQL のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1] のルートにある `conf.d/` フォルダーの `proxysql.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][2] を参照してください。
+
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -88,13 +93,19 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
          service: "<SERVICE_NAME>"
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][5] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][2] を参照してください。
 
-3. [Agent を再起動します][6]。
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 #### メトリクスの収集
 
@@ -106,16 +117,20 @@ ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含
 
 ##### ログの収集
 
-Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "proxysql", "service": "<サービス名>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `proxysql` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `proxysql` を探します。
 
 ## 収集データ
 
@@ -135,15 +150,11 @@ ProxySQL チェックにはイベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://proxysql.com/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/proxysql/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help

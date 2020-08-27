@@ -50,6 +50,14 @@ kubectl label namespace example-ns istio-injection=enabled
 
 デフォルトの場合、トレース作成時に用いられるサービス名はデプロイ名とネームスペースをもとに生成されます。これは
 デプロイのポッドテンプレートに `app` ラベルを追加することで手動で設定できます。
+
+```yaml
+template:
+  metadata:
+    labels:
+      app: <SERVICE_NAME>
+```
+
 [CronJobs][5] では、`app` ラベルはジョブテンプレートに追加されます。これは生成される名称が、より高い階層に位置する `CronJob` ではなく
 `Job` に由来するためです。
 

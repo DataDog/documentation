@@ -38,7 +38,7 @@ Datadog Cluster Agent を実行するには、適切な RBAC が必要です。
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
   ```
 
-  これにより、Cluster Agent に適切な `ServiceAccount`、`ClusterRole`、`ClusterRoleBinding` が作成されます。
+  これにより、Cluster Agent に適切な `ServiceAccount`、`ClusterRole`、`ClusterRoleBinding` が作成され、ノード Agent の `ClusterRole` が更新されます。
 
 Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要になる可能性もあります。[DCA のため AKS で RBAC][3] に関する「よくあるご質問」を参照してください。
 
@@ -114,7 +114,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 
 1. 以下のマニフェストをダウンロードします。
 
-  * [`agent-service.yaml`: Cluster Agent サービスマニフェスト][4]
+  * [`agent-services.yaml`: Cluster Agent サービスマニフェスト][4]
   * [`secrets.yaml`: Datadog API キーを含むシークレット][5]
   * [`cluster-agent-deployment.yaml`: Cluster Agent マニフェスト][6]
 
@@ -125,7 +125,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
     ```
 
 3. `cluster-agent-deployment.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#手順-2-Agent-間通信のセキュリティ保護)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
-4. 実行: `kubectl apply -f agent-service.yaml`
+4. 実行: `kubectl apply -f agent-services.yaml`
 5. 実行: `kubectl apply -f secrets.yaml`
 6. 最後に Datadog Cluster Agent `kubectl apply -f cluster-agent-deployment.yaml` をデプロイします。
 
