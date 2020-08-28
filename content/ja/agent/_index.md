@@ -40,6 +40,16 @@ Datadog Agent は、ホストで実行されるソフトウェアです。ホス
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
+<div class="alert alert-info"><p>
+Datadog は、Datadog Agent をマイナーリリースとパッチリリースごとに、または少なくとも毎月更新することをお勧めします。</p>
+<p>
+Datadog Agent のメジャーバージョンにアップグレードして最新の状態に保つことが、最新の Agent 機能と修正を入手するためにサポートされている唯一の方法です。ただし、Agent は頻繁にアップデートをリリースしており、エンタープライズ規模でアップデートを管理することは困難な場合があります。これは、メジャーリリースまで更新を待つべきであるあるという意味ではありません。組織に適した更新の頻度は、インフラストラクチャーと構成管理の方法によって異なりますが、毎月が目標です。</p>
+<p>
+特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="https://app.datadoghq.com/account/settings#agent">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
+<p>
+Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a> の規則に従います。</p>
+</div>
+
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
   {{< nextlink href="/agent/basic_agent_usage">}}<u>基本的なエージェントの利用方法</u>: アーキテクチャの詳細、CLI、オーバーヘッド、構成管理ツールなど、Datadog Agent について詳しく説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Datadog Agent を Docker にインストールして構成します。{{< /nextlink >}}

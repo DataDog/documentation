@@ -3,6 +3,8 @@ aliases:
   - /ja/522-190-266
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.gce.firewall.rule
 security: コンプライアンス
 source: gcp

@@ -3,6 +3,8 @@ aliases:
   - /ja/c19-1d0-3b1
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.service.account
 security: コンプライアンス
 source: gcp

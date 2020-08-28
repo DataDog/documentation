@@ -79,7 +79,7 @@ Datadog アカウントを構成して、クラウドストレージシステム
 
 #### SSE-S3
 
-サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][8] を利用することです。有効化するには **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
+サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][8] を利用することです。有効化するには S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="AES-256 オプションを選択し、保存します。"  style="width:75%;">}}
 

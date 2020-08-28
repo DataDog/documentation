@@ -3,7 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards:
-    Istio Overview 1.5: assets/dashboards/istio_1_5_overview
+    Istio Overview 1.5: assets/dashboards/istio_1_5_overview.json
     Istio base dashboard: assets/dashboards/istio_overview.json
   logs:
     source: istio

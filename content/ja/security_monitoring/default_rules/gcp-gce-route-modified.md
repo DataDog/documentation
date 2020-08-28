@@ -3,6 +3,8 @@ aliases:
   - /ja/3b3-32c-73c
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.gce.route
 security: コンプライアンス
 source: gcp

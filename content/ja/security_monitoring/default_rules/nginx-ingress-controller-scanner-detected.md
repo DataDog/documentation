@@ -3,6 +3,8 @@ aliases:
   - /ja/9e5-69f-a68
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: nginx-ingress-controller
 security: attack
 source: nginx-ingress-controller

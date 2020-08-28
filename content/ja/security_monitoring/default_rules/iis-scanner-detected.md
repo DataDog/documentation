@@ -3,6 +3,8 @@ aliases:
   - /ja/76c-cbb-28a
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: iis
 security: attack
 source: iis

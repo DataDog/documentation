@@ -3,6 +3,8 @@ aliases:
   - /ja/216-b0c-f83
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: fastly
 security: attack
 source: fastly

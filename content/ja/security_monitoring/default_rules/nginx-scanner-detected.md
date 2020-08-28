@@ -3,6 +3,8 @@ aliases:
   - /ja/25c-d30-507
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: nginx
 security: attack
 source: nginx
