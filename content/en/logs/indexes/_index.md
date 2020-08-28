@@ -100,7 +100,12 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 To ensure sampling consistency across multiple indexes:
 
-* use the same sampling rate 
+* create one exclusion filter in each index,
+* use the **same sampling rate** and the **same attribute** defining the higher level entity,
+* double-check exclusion filters **respective order** (logs only pass through the first matching exclusion filter)
+
+{{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters"  style="width:80%;">}}
+
 
 ## Update log retention
 
