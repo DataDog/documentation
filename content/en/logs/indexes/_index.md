@@ -98,6 +98,22 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
+To ensure sampling consistency across multiple indexes:
+
+1. Create one exclusion rule in each index.
+2. Use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules.
+3. Double-check exclusion rules, **filters**, and **respective order** (logs only pass through the first matching exclusion rule).
+
+In the following example:
+
+{{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters"  style="width:80%;">}}
+
+* In general, all logs with a specific `request_id` are either kept or excluded (with 50% probability).
+* Logs with a `threat:true` or `compliance:true` tag are kept regardless of the `request_id`.
+* `DEBUG` logs are indexed consistently with the `request_id` sampling rule, unless the debug logs exclusion filter is enabled in which case they are sampled.
+* 50% of the `2XX` web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
+
+
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
