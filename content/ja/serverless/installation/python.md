@@ -156,7 +156,11 @@ class CdkStack(core.Stack):
     ```
 1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。`VERSION` については、[最新リリース][1]をご確認ください。例:
     ```
+    # For regular regions
     arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+
+    # For us-gov regions
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
     ```
 
 ### Datadog Forwarder をロググループにサブスクライブ
@@ -225,7 +229,11 @@ Datadog Lambda ライブラリをレイヤーまたは Python パッケージと
 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
 
 ```
+# 通常のリージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# 米国政府リージョンの場合
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
 使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。`VERSION` については、[最新リリース][2]を参照してください。例:

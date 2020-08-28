@@ -172,7 +172,7 @@ API テストの実行中は、少なくとも 1 つのアサーションを定�
 
 ### グローバル変数を使用する
 
-[`Settings` で定義したグローバル変数][3]は、URL、高度なオプション、API テストのアサーションで使用できます。変数の一覧を表示するには、フィールドに `{{` と入力します。
+[`Settings` で定義したグローバル変数][2]は、URL、高度なオプション、API テストのアサーションで使用できます。変数の一覧を表示するには、フィールドに `{{` と入力します。
 
 {{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="API テストで変数を使用する" video="true"  width="80%" >}}
 
@@ -180,8 +180,8 @@ API テストの実行中は、少なくとも 1 つのアサーションを定�
 
 <mrk mid="151" mtype="seg"/><mrk mid="152" mtype="seg"/>
 
-1. 通知を受け取るユーザーおよび/または[サービス][4]を選択します。**注**: [`@-notifications`][5] は、モニターと同様に、**メッセージ**フィールドで使用できます。
-2. API テストの**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][7]を使用できます。
+1. 通知を受け取るユーザーおよび/または[サービス][3]を選択します。**注**: [`@-notifications`][4] は、モニターと同様に、**メッセージ**フィールドで使用できます。
+2. API テストの**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][5]のほか、以下の[条件付き変数][6]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -221,7 +221,7 @@ Synthetic テストの詳細ページには、ネットワークに関する以�
 | `CONNRESET`       | 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。                                                                                                                                                                                                                                                         |
 | DNS               | <mrk mid="139" mtype="seg">チェック URL に対応する DNS エントリが見つかりませんでした。</mrk><mrk mid="140" mtype="seg">チェック URL の構成の誤り、DNS エントリの構成の誤りなどの原因が考えられます。</mrk>                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | チェックのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | <mrk mid="144" mtype="seg">SSL 接続を実行できませんでした。</mrk><mrk mid="145" mtype="seg">[詳細については、個別のエラーページを参照してください。][2].</mrk>                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][7]。                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。`TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、タイムアウトが TCP ソケットの接続レベルで発生したことを示します。`TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` は、タイムアウトがリクエストの実行全体 (TCP ソケット接続、データ転送、アサーション) で発生したことを示します。 |
 
 テストが失敗した場合、アップタイムはエンドポイントが `down` であるとみなします。次のテストランまで再テストされません。
@@ -231,9 +231,9 @@ Synthetic テストの詳細ページには、ネットワークに関する以�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/#get-available-locations
-[2]: /ja/synthetics/api_tests/errors/#ssl-errors
-[3]: /ja/synthetics/settings/#global-variables
-[4]: /ja/integrations/#cat-notification
-[5]: /ja/monitors/notifications/#notification
-[6]: http://daringfireball.net/projects/markdown/syntax
-[7]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[2]: /ja/synthetics/settings/#global-variables
+[3]: /ja/integrations/#cat-notification
+[4]: /ja/monitors/notifications/#notification
+[5]: http://daringfireball.net/projects/markdown/syntax
+[6]: /ja/monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /ja/synthetics/api_tests/errors/#ssl-errors

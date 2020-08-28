@@ -50,22 +50,25 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
 1. HiveMQ パフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリの
    ルートにある `conf.d/` フォルダーの `hivemq.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][3] を参照してください。
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][1] を参照してください。
 
    このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。
    以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
-    収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][4]で詳細な手順を参照してください。
-   制限数以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][2]で詳細な手順を参照してください。
+    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][3]までお問い合わせください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][4]。
 
 ##### ログの収集
 
@@ -75,7 +78,7 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
    logs_enabled: true
    ```
 
-2. 次のコンフィギュレーションブロックを `hivemq.d/conf.yaml` ファイルに追加します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][3] を参照してください。
+2. 次のコンフィギュレーションブロックを `hivemq.d/conf.yaml` ファイルに追加します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][1] を参照してください。
 
    ```yaml
    logs:
@@ -89,17 +92,24 @@ HiveMQ チェックは [Datadog Agent][2] パッケージに含まれていま�
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-3. [Agent を再起動します][6]。
+3. [Agent を再起動します][4]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/integrations/java
+[3]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
 ##### メトリクスの収集
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][7]のガイドを参照してください。
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][8]を参照してください。
+Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
 | パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
@@ -107,7 +117,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、**JMXFetch** セクションで `hivemq` を探します。
+[Agent の status サブコマンドを実行][3]し、**JMXFetch** セクションで `hivemq` を探します。
 
 ```text
 ========
@@ -122,6 +132,12 @@ JMXFetch
       service_check_count : 0
       status : OK
 ```
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/ja/agent/docker/log/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+{{% /tab %}}
+{{< /tabs >}}
 
 ## 収集データ
 
@@ -140,15 +156,9 @@ HiveMQ には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://www.hivemq.com/hivemq/
 [2]: https://docs.datadoghq.com/ja/agent/
-[3]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/integrations/java
-[5]: https://docs.datadoghq.com/ja/help
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/ja/agent/docker/log/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/hivemq/metadata.csv
+[3]: https://docs.datadoghq.com/ja/help

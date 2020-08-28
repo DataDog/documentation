@@ -3,6 +3,8 @@ aliases:
   - /ja/a7b-dbc-bdd
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.pubsub.subscription
 security: コンプライアンス
 source: gcp

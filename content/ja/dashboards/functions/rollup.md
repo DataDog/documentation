@@ -28,6 +28,20 @@ aliases:
 
 {{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2"  style="width:60%;" >}}
 
+## ロールアップの移動
+
+
+| 関数        | 説明                                    | 例 |
+|------------------|------------------------------------------------|------------------|
+| `moving_rollup` | ロールアップして最後の X 秒中のポイントを結合します。 | `moving_rollup(<METRIC_NAME>, <TIME> , <METHOD>)` |
+
+`.moving_rollup()` 関数をクエリの最後に付加することで、「最後の X 秒」など最も直近の特定の時間範囲にあるポイントを結合することができます。この関数には `<TIME>` および `<METHOD>`: `.moving_rollup(<TIME>,<METHOD>)` という 2 種類のパラメーターがあります。
+
+| パラメーター        | 説明                                   |
+------------------|------------------------------------------------|
+| `<TIME>` | ポイントを結合する時間間隔を秒で指定します。 |
+| `<METHOD>` | `sum`/`min`/`max`/`count`/`avg` から選択し、指定した時間間隔でのデータポイントの集計方法を定義します。 |
+
 ## ロールアップ間隔の制限
 
 Datadog では、グラフごとに表示できるデータポイントは最大 350 に制限されています。そのため、`avg` メソッドによってデータポイントが自動的にロールアップされ、メトリクスのすべてのデータポイントが時間間隔の平均値で表示されます。
@@ -50,11 +64,12 @@ Datadog では、グラフごとに表示できるデータポイントは最大
     {{< nextlink href="/dashboards/functions/algorithms" >}}アルゴリズム: メトリクスに異常値や外れ値の検出機能を実装します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}算術: メトリクスに対して算術演算を実行します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}カウント: メトリクスの 0 以外または null 以外の値をカウントします。{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}除外: メトリクスの特定の値を除外します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}補間: メトリクスにデフォルト値を挿入または設定します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}ランク: メトリクスの一部のみを選択します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}レート: メトリクスに対してカスタム微分係数を計算します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/regression" >}}回帰: メトリクスに何らかの機械学習関数を適用します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。
+    {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 

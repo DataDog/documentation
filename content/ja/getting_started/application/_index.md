@@ -14,7 +14,7 @@ further_reading:
 
 {{< img src="getting_started/integrations.png" alt="インテグレーション"  >}}
 
-- Datadog では、400 種以上のインテグレーションを[公式にサポートしています][3]。
+- Datadog では、{{< translate key="integration_count" >}} 個以上のインテグレーションが[公式にリストされています][3]。
 - [Datadog API の使用による][4]カスタムインテグレーションも使用可能です。
 - Agent は[オープンソース][5]です。
 - インテグレーションの構成後は、データセンターやオンラインサービス内のすべてのデータが Datadog で一元管理されます。

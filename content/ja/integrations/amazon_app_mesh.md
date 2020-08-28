@@ -151,13 +151,16 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
 
 #### トレースの収集
 
-APM トレースは App Mesh に使用できません。詳細については、[Datadog サポートチーム][4]までお問合せください。
+1. [ECS Fargate インテグレーション][4]ドキュメントの説明に従って、トレースの収集を有効化します。
+
+AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADOG_TRACER_PORT` を ECS Fargate タスク定義の環境変数として設定します。詳細は [AWS App Mesh][5] ドキュメントを参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/
 [2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
-[4]: /ja/help
+[4]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#trace-collection
+[5]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{% tab "ECS EC2" %}}
 
@@ -202,13 +205,16 @@ APM トレースは App Mesh に使用できません。詳細については、
 
 #### トレースの収集
 
-APM トレースは App Mesh に使用できません。詳細については、[Datadog サポートチーム][4]までお問合せください。
+1. [ECS インテグレーション][4]ドキュメントの説明に従って、トレースの収集を有効化します。
+
+2. AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADOG_TRACER_PORT` を ECS タスク定義の環境変数として設定します。詳細は [AWS App Mesh][5] ドキュメントを参照してください。
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
 [2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#log-collection
-[4]: /ja/help
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#trace-collection
+[5]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,7 +228,7 @@ APM トレースは App Mesh に使用できません。詳細については、
 
 AWS  App Mesh インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
 
