@@ -35,6 +35,10 @@ To get an overview of all the possible settings for APM, take a look at the Agen
 
 See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
+### Follow the in-app Documentation (Recommended)
+
+For step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS), follow the [Quickstart instructions][7] within the Datadog app.
+
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.
@@ -43,11 +47,11 @@ Note: After having instrumented your application, the tracing client sends trace
 
 ### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][7] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][8] documentation.
 
 ### Azure App Services
 
-The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][8].
+The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][9].
 
 ### Google App Engine
 
@@ -59,23 +63,23 @@ There are alternatives to the Agent and containers that you can use to collect t
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][9].
+Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][10].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][10].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][11].
 
 ### AWS Elastic Beanstalk
 
-Tracing is enabled by default when monitoring with AWS Elastic Beanstalk. For more information about configuring tracing for AWS Elastic Beanstalk, see the [AWS Elastic Beanstalk documentation][11].
+Tracing is enabled by default when monitoring with AWS Elastic Beanstalk. For more information about configuring tracing for AWS Elastic Beanstalk, see the [AWS Elastic Beanstalk documentation][12].
 
 ## Configure your environment
 
-See our guide on setting the [`env` tag and an additional primary tag for scoping APM data][12].
+See our guide on setting the [`env` tag and an additional primary tag for scoping APM data][13].
 
 ## Next steps
 
-Next, [Instrument your application][13]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
+Next, [Instrument your application][14]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
 
 ## Further Reading
 
@@ -87,10 +91,11 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics/
 [6]: /agent/
-[7]: /tracing/serverless_functions/
-[8]: /infrastructure/serverless/azure_app_services/#overview
-[9]: /agent/basic_agent_usage/heroku/#installation
-[10]: /integrations/cloud_foundry/#trace-collection
-[11]: /integrations/amazon_elasticbeanstalk/
-[12]: /tracing/guide/setting_primary_tags_to_scope/#definition
-[13]: /tracing/setup/
+[7]: https://app.datadoghq.com/apm/docs
+[8]: /tracing/serverless_functions/
+[9]: /infrastructure/serverless/azure_app_services/#overview
+[10]: /agent/basic_agent_usage/heroku/#installation
+[11]: /integrations/cloud_foundry/#trace-collection
+[12]: /integrations/amazon_elasticbeanstalk/
+[13]: /tracing/guide/setting_primary_tags_to_scope/#definition
+[14]: /tracing/setup/

@@ -53,9 +53,18 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 ## Datadog APM
 
+### Follow the in-app Documentation (Recommended)
+
+For the remaining steps, it is recommended to follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (in this case, a host-based deployment).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+
+
 ### Enable APM
 
-For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][10]:
+For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
 
 ```yaml
 # apm_config:
@@ -78,11 +87,19 @@ And in `trace-agent.log`:
 For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
 
 Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
-Read more about how this works in [Unified Service Tagging][11].
+Read more about how this works in [Unified Service Tagging][12].
 
-Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][12].
+Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][13].
 
 ## APM application
+
+### Follow the in-app Documentation (Recommended)
+
+Follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable App Analytics, and Trace ID injection into logs during setup.
 
 ### Installation
 
@@ -142,7 +159,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][13] or [trace list][14].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][14] or [trace list][15].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -159,8 +176,9 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /getting_started/tagging/unified_service_tagging
-[12]: /tracing/guide/setting_primary_tags_to_scope/
-[13]: https://app.datadoghq.com/apm/services
-[14]: https://app.datadoghq.com/apm/traces
+[10]: https://app.datadoghq.com/apm/docs
+[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[12]: /getting_started/tagging/unified_service_tagging
+[13]: /tracing/guide/setting_primary_tags_to_scope/
+[14]: https://app.datadoghq.com/apm/services
+[15]: https://app.datadoghq.com/apm/traces

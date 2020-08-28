@@ -27,7 +27,13 @@ The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.
 
 ## Installation And Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app Documentation (Recommended)
+
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable App Analytics, and Trace ID injection into logs during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
@@ -128,7 +134,7 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/visualization/
 [4]: https://datadog.github.io/dd-trace-js
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
