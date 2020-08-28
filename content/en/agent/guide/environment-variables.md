@@ -60,30 +60,34 @@ In general, use the following rules:
 
 ### Exceptions
 
-* Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+- Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
-* Component-specific environment variables not listed in [config.go][4] may also be supported.
-  * APM Trace Agent
-    - [Docker APM Agent Environment Variables][5]
-    - [trace-agent env.go][6]
-    - example
-      ```yaml
-        apm_config:
-          enabled: true
-          env: dev
-        # DD_APM_ENABLED=true
-        # DD_APM_ENV=dev
-      ```
-  * Live Process Agent
-    - [process-agent config.go][7]
-    - example
-      ```yaml
-        process_config:
-          enabled: true
-          process_dd_url: https://process.datadoghq.com
-        # DD_PROCESS_AGENT_ENABLED=true
-        # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
-      ```
+- Component-specific environment variables not listed in [config.go][4] may also be supported.
+ 
+  - **APM Trace Agent**
+
+      - [Docker APM Agent Environment Variables][5]
+      - [trace-agent env.go][6]
+      - example
+        ```yaml
+          apm_config:
+            enabled: true
+            env: dev
+          # DD_APM_ENABLED=true
+          # DD_APM_ENV=dev
+        ```
+
+  - **Live Process Agent**
+  
+      - [process-agent config.go][7]
+      - example
+        ```yaml
+          process_config:
+            enabled: true
+            process_dd_url: https://process.datadoghq.com
+          # DD_PROCESS_AGENT_ENABLED=true
+          # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+        ```
     
 
 ## Further Reading
