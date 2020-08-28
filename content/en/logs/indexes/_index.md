@@ -98,6 +98,10 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
+To ensure sampling consistency across multiple indexes:
+
+* use the same sampling rate 
+
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
