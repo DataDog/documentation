@@ -48,7 +48,7 @@ If you have any questions about how the Log Management Service satisfies the app
 
 Previously, HIPAA-enabled customers needed to use specific endpoints to submit logs in order to enforce specific encryptions. This is no longer necessary. The encryptions are enabled on all log submission endpoints.
 
-These are the legacy endpoints that are not supported after version {edit suggestion to add version}:
+These legacy endpoints are still supported:
 
 * `tcp-encrypted-intake.logs.datadoghq.com`
 * `lambda-tcp-encrypted-intake.logs.datadoghq.com`
