@@ -1177,6 +1177,11 @@ main:
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
     weight: 1505
+  - name: IIS .NET Framework
+    url: tracing/troubleshooting/iis_dotnet_framework
+    identifier: tracing_troubleshooting_iis_dotnet_framework
+    parent: tracing_troubleshooting
+    weight: 1507    
   - name: Log Management
     url: logs/
     pre: nav_logs
