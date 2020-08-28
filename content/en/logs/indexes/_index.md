@@ -100,9 +100,15 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 To ensure sampling consistency across multiple indexes:
 
-* create one exclusion filter in each index,
-* use the **same sampling rate** and the **same attribute** defining the higher level entity,
-* double-check exclusion filters **respective order** (logs only pass through the first matching exclusion filter)
+1. create one exclusion rule in each index,
+2. use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules,
+3. double-check exclusion rules **filters** and **respective order** (logs only pass through the first matching exclusion rule).
+
+In the following example:
+
+* in the general case all logs with a specific `request_id` are either kept or excluded (with 50% probability). 
+* logs with a `threat:true` or a `compliance:true` will be kept, whatever the `request_id`
+* `DEBUG` logs will be kept consistently with request_id sampling rule, unless the Debug Logs exclusion filter is enabled in which case there'll be sampled anyway.
 
 {{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters"  style="width:80%;">}}
 
