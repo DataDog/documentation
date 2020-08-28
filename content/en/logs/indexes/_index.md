@@ -110,7 +110,7 @@ In the following example:
 
 * In the general case: all logs with a specific `request_id` are either kept or excluded (with 50% probability),
 * Logs with a `threat:true` tag or a `compliance:true` tag are all kept, whatever the `request_id`,
-* `DEBUG` logs are indexed consistently with `request_id` sampling rule, unless the Debug Logs exclusion filter is enabled in which case there are sampled anyway,
+* `DEBUG` logs are indexed consistently with `request_id` sampling rule, unless the Debug Logs exclusion filter is enabled in which case they are sampled anyway,
 * 50% of `2XX` Web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
 
 
