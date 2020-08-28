@@ -53,12 +53,12 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 ## Datadog APM
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
-For the remaining steps, it is recommended to follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
+For the remaining steps, follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (in this case, a host-based deployment).
-- Dynamically set `service`, `env` and `version` tags.
+- Dynamically set `service`, `env`, and `version` tags.
 - Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
 
 
@@ -93,13 +93,13 @@ Alternatively, name your environment by updating `datadog.yaml` to set `env` und
 
 ## APM application
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 Follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
-- Enable App Analytics, and Trace ID injection into logs during setup.
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable App Analytics and Trace ID injection into logs during setup.
 
 ### Installation
 

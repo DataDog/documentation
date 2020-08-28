@@ -23,7 +23,7 @@ further_reading:
 
 For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
-## Installation and Getting Started
+## Installation and getting started
 
 ### Follow the in-app Documentation (Recommended)
 

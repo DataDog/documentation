@@ -23,14 +23,14 @@ further_reading:
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Installation and Getting Started
+## Installation and getting Started
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
+- Dynamically set `service`, `env`, and `version` tags.
 - Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in Python, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].

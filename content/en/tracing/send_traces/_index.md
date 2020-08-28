@@ -35,7 +35,7 @@ To get an overview of all the possible settings for APM, take a look at the Agen
 
 See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 For step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS), follow the [Quickstart instructions][7] within the Datadog app.
 

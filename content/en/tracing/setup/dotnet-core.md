@@ -25,15 +25,15 @@ further_reading:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1 and 3.1, as well as Microsoft-deprecated versions 2.0, 2.2 and 3.0.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Getting Started
+## Getting started
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
-- Enable App Analytics, and Trace ID injection into logs during setup.
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable App Analytics and Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
