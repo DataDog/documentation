@@ -1,5 +1,5 @@
 ---
-title: Configuring Azure AD as a SAML IdP
+title: Azure Active Directory SAML IdP
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
@@ -12,80 +12,72 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog:
-**Note**: an Azure AD Premium Subscription is required to set this up
+Follow these steps to configure Azure AD as a SAML identity provider (IdP) within Datadog. **Note**: An Azure AD premium subscription is required.
 
 ## Configuration
+### Azure
 
-1. Navigate to `https://portal.azure.com/`.
+1. Open the [Azure portal][1] and sign in as a global administrator or co-admin.
 
-2. When logged into Azure, go to the *Azure Active Directory* tab on the left hand menu.
+2. Navigate to _Azure Active Directory_ -> _Enterprise applications_ -> _New application_.
 
-3. Select the **Enterprise applications** service.
+3. Select **Non-gallery application** in the **Add your own app** section.
 
-4. Click on the **New application** button.
+4. Enter the name of your application in the **Name** textbox and click **Add**.
 
-5. Select the **Non-gallery application**.
+5. Once your application is added, go to **Single sign-on** from the application's left-side navigation menu.
 
-    {{< img src="account_management/saml/non_gallery_application.png" alt="Non Gallery application"  style="width:20%;">}}
+6. Select **SAML-based Sign-on** in the **Single Sign-on Mode** drop-down.
 
-6. Name it (e.g **DatadogSSO_test**).
+7. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
 
-7. Click on **Add**.
+    |                                |                                                                            |
+    |--------------------------------|----------------------------------------------------------------------------|
+    | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
 
-8. Once your application is successfully added, go in **Configure single sign-on (required)**.
+8. In Azure, add the values retrieved above:
 
-9. Select the **SAML-based Sign-on** as Single Sign-on Mode.
+    `Service Provider Entity ID` to **Identifier**<br>
+    `Assertion Consumer Service URL` to **Reply URL**
 
-    {{< img src="account_management/saml/saml_based_sign_on.png" alt="Saml Based Sign on"  style="width:70%;">}}
+9. Set the **User Identifier** to `user.mail`.
 
-10. Navigate to the [Datadog SAML page][1], find the **Service Provider Entity ID** & **Assertion Consumer Service** URL on the right hand of the page.  Copy and paste those values in the **Identifier** and **Reply URL** text forms respectively:
-    In Datadog:
+10. Enter your **Notification Email** at the bottom of the page. When the active signing certificate approaches its expiration date, notifications are sent to this email address with instructions on how to update the certificate.
 
-    {{< img src="account_management/saml/Step10Redo.png" alt="Step10Redo"  style="width:70%;">}}
+11. Go to the **SAML Signing Certificate** section and download the **SAML XML Metadata** file.
 
-    In the Azure portal:
+12. Go to the top of your **SSO Configuration section** and click **Save**.
 
-    {{< img src="account_management/saml/set_values_azure.png" alt="Set value azure"  style="width:70%;">}}
+### Datadog
 
-11. Set `user.mail` as the value for **User Identifier**:
+1. Go to the [Datadog SAML page][2].
 
-    {{< img src="account_management/saml/user_identifier.png" alt="User Identifier"  style="width:70%;">}}
+2. Choose and upload the **SAML XML Metadata** file downloaded from Azure.
 
-12. Enter your **Notification Email** at the bottom of the page. When the active signing certificate approaches its expiration date, notifications are sent to this email address with instructions on how to update the certificate:
-
-    {{< img src="account_management/saml/notification_email.png" alt="Notification email"  style="width:70%;">}}
-
-13. Click at the bottom of the page on Step 5, **Configure DatadogSSO_test**.
-
-14. Scroll down to Step 3 of the *Configure DatadogSSO_test* for single sign on section, and download the **SAML XML Metadata** file.
-
-15. Go to the top of your **SSO Configuration section** and click **Save**.
-
-16. Navigate back to [Datadog SAML page][1] and upload the **SAML XML Metadata** file downloaded in Step 14:
-
-    {{< img src="account_management/saml/SAML_Configuration___Datadog10.png" alt="SAML_Configuration___Datadog10"  style="width:70%;">}}
-
-17. Make sure to press the **Upload File** button after having chosen the XML file to upload.
-
-18. And that's it! It should now say *SAML is ready* and that valid IdP metadata is installed.
+3. You should see the messages **SAML is ready** and **Valid IdP metadata installed**:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11"  style="width:70%;">}}
 
-19. Begin to log in to Datadog via Azure AD by pressing **Enable**:
+4. Click **Enable** to start using Azure AD single sign-on with SAML:
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12"  style="width:70%;">}}
 
-## Optional
+## Advanced URL
 
-If you are using an SSO via a Datadog button or link, you need to add a Sign-on URL. To do this, navigate back to the SSO Configuration section of the Azure Application (Step 8) and check off **Show advanced URL settings**:
+If you are using SSO with a Datadog button or link, a sign-on URL is required:
 
-Then paste the Single Sign-on URL that is displayed in the [Datadog SAML page][1].
+1. Retrieve your Single Sign-on URL from the [Datadog SAML page][2]:
 
-{{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:60%;">}}
+    {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:70%;">}}
+
+2. In Azure, navigate to the SSO Configuration section of your Azure Application, check **Show advanced URL settings**, and add your single sign-on URL.
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/saml/saml_setup
+
+[1]: https://portal.azure.com
+[2]: https://app.datadoghq.com/saml/saml_setup
