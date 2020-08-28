@@ -37,7 +37,7 @@
                                                     {{ end }}
                                                 {{ end }}
                                             </div>
-                                            <div class="col-4">
+                                            <div class="{{ if eq $dot.Page.Lang "ja"}}col-3 {{else}} col-4 {{ end}}">
                                                 <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Technology</p>
                                                 {{ range .children }}
                                                     {{ if eq .category "technology" }}

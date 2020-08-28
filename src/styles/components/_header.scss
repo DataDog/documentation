@@ -171,14 +171,14 @@ body > header {
 
           @include media-breakpoint-up(lg) {
             width: 720px;
+            &:lang(ja) {
+              width: 800px;
+            }
+
           }
 
           p {
             padding: 8px 11px 8px;
-          }
-
-          &:lang(ja) {
-            width: 630px;
           }
         }
 
