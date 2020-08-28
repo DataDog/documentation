@@ -12,7 +12,7 @@ further_reading:
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
 
-Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog. **Note**: an Azure AD premium subscription is required.
+Follow these steps to configure Azure AD as a SAML identity provider (IdP) within Datadog. **Note**: An Azure AD premium subscription is required.
 
 ## Configuration
 ### Azure
@@ -27,7 +27,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 
 5. Once your application is added, go to **Single sign-on** from the application's left-side navigation menu.
 
-6. Select the **SAML-based Sign-on** in the **Single Sign-on Mode** drop-down.
+6. Select **SAML-based Sign-on** in the **Single Sign-on Mode** drop-down.
 
 7. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
 
@@ -53,7 +53,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 
 1. Go to the [Datadog SAML page][2].
 
-2. Choose and upload the **SAML XML Metadata** downloaded from Azure.
+2. Choose and upload the **SAML XML Metadata** file downloaded from Azure.
 
 3. You should see the messages **SAML is ready** and **Valid IdP metadata installed**:
 
