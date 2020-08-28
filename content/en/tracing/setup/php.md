@@ -25,12 +25,12 @@ For a full list of supported libraries and language versions, visit the [Compati
 
 ## Installation and getting started
 
-### Follow the in-app Documentation (Recommended)
+### Follow the in-app documentation (Recommended)
 
 Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env` and `version` tags.
+- Dynamically set `service`, `env`, and `version` tags.
 - Enable App Analytics during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
