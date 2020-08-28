@@ -100,18 +100,18 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 To ensure sampling consistency across multiple indexes:
 
-1. create one exclusion rule in each index,
-2. use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules,
-3. double-check exclusion rules **filters** and **respective order** (logs only pass through the first matching exclusion rule).
+1. Create one exclusion rule in each index.
+2. Use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules.
+3. Double-check exclusion rules, **filters**, and **respective order** (logs only pass through the first matching exclusion rule).
 
 In the following example:
 
 {{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters"  style="width:80%;">}}
 
-* In the general case: all logs with a specific `request_id` are either kept or excluded (with 50% probability),
-* Logs with a `threat:true` tag or a `compliance:true` tag are all kept, whatever the `request_id`,
-* `DEBUG` logs are indexed consistently with `request_id` sampling rule, unless the Debug Logs exclusion filter is enabled in which case they are sampled anyway,
-* 50% of `2XX` Web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
+* In general, all logs with a specific `request_id` are either kept or excluded (with 50% probability).
+* Logs with a `threat:true` or `compliance:true` tag are kept regardless of the `request_id`.
+* `DEBUG` logs are indexed consistently with the `request_id` sampling rule, unless the debug logs exclusion filter is enabled in which case they are sampled.
+* 50% of the `2XX` web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
 
 
 ## Update log retention
