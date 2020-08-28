@@ -326,7 +326,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 
