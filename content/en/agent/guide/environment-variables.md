@@ -60,14 +60,31 @@ In general, use the following rules:
 
 ### Exceptions
 
-* For the collection Agents (APM, process, and logs), drop the `_config` in the option name, for example:
-    ```yaml
-      apm_config:
-        enabled: true
-      # DD_APM_ENABLED=true
-    ```
-
 * Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+
+* Component-specific environment variables not listed in [config.go][4] may also be supported.
+  * APM Trace Agent
+    - [Docker APM Agent Environment Variables][5]
+    - [trace-agent env.go][6]
+    - example
+      ```yaml
+        apm_config:
+          enabled: true
+          env: dev
+        # DD_APM_ENABLED=true
+        # DD_APM_ENV=dev
+      ```
+  * Live Process Agent
+    - [process-agent config.go][7]
+    - example
+      ```yaml
+        process_config:
+          enabled: true
+          process_dd_url: https://process.datadoghq.com
+        # DD_PROCESS_AGENT_ENABLED=true
+        # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+      ```
+    
 
 ## Further Reading
 
@@ -77,3 +94,6 @@ In general, use the following rules:
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env.go
+[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go
