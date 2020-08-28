@@ -23,7 +23,7 @@ further_reading:
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Installation and getting Started
+## Installation and getting started
 
 ### Follow the in-app documentation (Recommended)
 
