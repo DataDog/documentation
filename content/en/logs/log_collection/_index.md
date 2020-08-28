@@ -283,6 +283,15 @@ For integration frameworks, Datadog provides guidelines on how to log JSON into 
 
 Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, it is recommended to format these logs as JSON to avoid the need for custom parsing rules.
 
+### Limits applied to ingested log events
+
+* For an optimal use of the platform, we recommend that the size of a log event should not exceed 25K bytes. When using the Datadog Agent, log events larger than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted by the API.
+* Log events can be submitted up to 18h in the past and 2h in the future.
+* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+
+Log events which do not comply with these limits might be transformed or truncated by the system-or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
