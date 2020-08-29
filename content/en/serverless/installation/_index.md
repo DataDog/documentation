@@ -24,5 +24,5 @@ Select the Lambda runtime below for instructions to instrument your serverless a
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[1]: /integrations/amazon_web_services/
+[1]: /integrations/amazon_web_services/#setup
 [2]: /serverless/forwarder

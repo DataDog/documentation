@@ -623,10 +623,6 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
-  - name: Enable AWS X-Ray
-    url: tracing/serverless_functions
-    parent: serverless_distributed_tracing
-    weight: 501
   - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
