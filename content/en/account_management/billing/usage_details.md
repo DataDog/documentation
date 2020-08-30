@@ -32,27 +32,27 @@ In product specific tabs, you will see your month-to-date usage of the products 
 
 This section contains hourly, daily, monthly, and annual usage. In the "All" tab, you will see hourly, daily, monthly, and annual usage for:  
 
-| Column                   | Description                                                                                                                |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Infra. Hosts             | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month.                        |
-| Containers               | Shows the high watermark of all distinct containers over all hours in the current month.                                   |
-| APM Hosts                | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.                                   |
-| Analyzed Spans           | Shows the sum of all Analyzed Spans indexed over all hours in the current month.                                           |
-| Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                              |
-| Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                 |
-| Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                              |
-| Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month (Metrics Without Limits). |
-| Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                               |
-| Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                               |
-| Analyzed Logs (Security) | Shows the sum of all analyzed log bytes ingested over all hours in the current month.                                      |
-| Serverless Functions     | Shows the average of the number of functions that are executed 1 or more times each hour in the current month.             |
-| Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month.                                                    |
-| Network Hosts            | Shows the 99th percentile of all distinct Network hosts over all hours in the current month.                               |
-| Network Flows            | Shows the sum of all Network flows indexed over all hours in the current month.                                            |
-| Network Devices          | Shows the 99th percentile of all distinct Network devices over all hours in the current month.                             |
-| Synthetic API Tests      | Shows the sum of all Synthetic API tests over all hours in the current month.                                              |
-| Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                          |
-| RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                            |
+| Column                   | Description                                                                                                                 |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Infra. Hosts             | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month.                         |
+| Containers               | Shows the high watermark of all distinct containers over all hours in the current month.                                    |
+| APM Hosts                | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.                                    |
+| Analyzed Spans           | Shows the sum of all Analyzed Spans indexed over all hours in the current month.                                            |
+| Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                               |
+| Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                  |
+| Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                               |
+| Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month (Metrics Without Limits™). |
+| Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                                |
+| Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                                |
+| Analyzed Logs (Security) | Shows the sum of all analyzed log bytes ingested over all hours in the current month.                                       |
+| Serverless Functions     | Shows the average of the number of functions that are executed 1 or more times each hour in the current month.              |
+| Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month.                                                     |
+| Network Hosts            | Shows the 99th percentile of all distinct Network hosts over all hours in the current month.                                |
+| Network Flows            | Shows the sum of all Network flows indexed over all hours in the current month.                                             |
+| Network Devices          | Shows the 99th percentile of all distinct Network devices over all hours in the current month.                              |
+| Synthetic API Tests      | Shows the sum of all Synthetic API tests over all hours in the current month.                                               |
+| Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                           |
+| RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                             |
 
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
