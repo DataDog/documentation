@@ -41,7 +41,7 @@ This section contains hourly, daily, monthly, and annual usage. In the "All" tab
 | Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                               |
 | Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                  |
 | Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                               |
-| Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month (Metrics Without Limits™). |
+| Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month.                           |
 | Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                                |
 | Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                                |
 | Analyzed Logs (Security) | Shows the sum of all analyzed log bytes ingested over all hours in the current month.                                       |
