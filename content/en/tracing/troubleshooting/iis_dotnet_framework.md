@@ -28,7 +28,7 @@ Verify the Datadog .NET tracer been installed locally. If not, visit our [Datado
 
 ### Automatic instrumentation 
 
-#### Verify Required Environment Variables
+#### Environment variables
 
 For Automatic Instrumentation for IIS application(s), the required environment variables must be set within the `W3SVC` & `WAS` Windows Registry paths. 
 
