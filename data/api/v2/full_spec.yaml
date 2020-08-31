@@ -3531,7 +3531,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleResponse'
-          description: OK for get role
+          description: OK
         '403':
           content:
             application/json:
@@ -4273,8 +4273,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: OK
-        '204':
-          description: No changes
         '400':
           content:
             application/json:

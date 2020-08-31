@@ -17137,7 +17137,7 @@
                 }
               }
             },
-            "description": "OK for get role"
+            "description": "OK"
           },
           "403": {
             "content": {
@@ -24533,9 +24533,6 @@
               }
             },
             "description": "OK"
-          },
-          "204": {
-            "description": "No changes"
           },
           "400": {
             "content": {
