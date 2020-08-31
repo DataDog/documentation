@@ -40,16 +40,27 @@ These metrics are tagged with the `functionname`, `cold_start`, `memorysize`, `r
 
 ## Enable Enhanced Lambda Metrics
 
-Datadog generates real-time Lambda runtime metrics out-of-the-box for Node.js, Python, Ruby, Java, and Go runtimes. To enable enhanced Lambda metrics on your functions, follow the [installation instructions][4].
+{{< img src="serverless/integration/lambda_metrics.png" alt="Lambda Metrics Collection" >}}
 
-To enable enhanced Lambda metrics without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder.
+Datadog generates real-time enhanced Lambda metrics out-of-the-box for Node.js, Python, Ruby, Java, and Go runtimes. The [installation instructions][4] provide a guided walkthrough of the steps required to enable enhanced Lambda metrics on your functions:
+
+1. Install the [AWS integration][5].
+2. Install the [Datadog Forwarder][6].
+3. Install the [Datadog Lambda Library][7].
+4. Subscribe the [Datadog Forwarder to Function Log Groups][8]. 
+
+To enable enhanced Lambda metrics without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on the [Datadog Forwarder][6].
 
 ## Viewing your dashboard
 
-Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][5].
+Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][9].
 
 [1]: /serverless/installation/installing_the_library
 [2]: /serverless/forwarder/
 [3]: /integrations/amazon_lambda/?tab=nodejs#metric-collection
 [4]: /serverless/installation/
-[5]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[5]: /integrations/amazon_web_services/#setup
+[6]: /serverless/forwarder
+[7]: /serverless/datadog_lambda_library
+[8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[9]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
