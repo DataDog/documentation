@@ -42,7 +42,7 @@ HKLM:SYSTEM\CurrentControlSet\Services\WAS
 ```
 3. Create a multi-string value: 
     * Set the value name to "Environment".
-    * Ensure the Value data contains the following:
+    * Ensure the value data contains the following:
 {{< code-block lang="default">}}
 COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
