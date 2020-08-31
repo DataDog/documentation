@@ -17344,7 +17344,9 @@ paths:
 
                   '
               simple-raw-message:
-                description: Submit log string.
+                description: 'Submit log string. Log attributes can be passed as query
+                  parameters in the URL. This enables the addition of tags or the
+                  source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
                 summary: Simple Raw Message
                 value: hello world
             schema:
