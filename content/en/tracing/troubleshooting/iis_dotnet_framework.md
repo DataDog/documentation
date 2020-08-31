@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting - Not seeing .NET Framework traces
+title: Troubleshooting .NET Framework Traces
 kind: documentation
 ---
 
