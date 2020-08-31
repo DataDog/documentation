@@ -32,13 +32,16 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+
 ### Create a S3 Bucket
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
 #### Storage Class
 
-You can [set a lifecycle configuration on your S3 bucket][7] to automatically transition your log archives to optimal storage classes. [Rehydration][5] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+You can [set a lifecycle configuration on your S3 bucket][7] to automatically transition your log archives to optimal storage classes. 
+
+[Rehydration][5] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
 #### Server side encryption (SSE)
 
@@ -109,7 +112,6 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-
 ### Configure a Log Archive
 
 #### Set AWS Integration
@@ -117,7 +119,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 If not already configured, set up the [AWS integration][3] for the AWS account that holds your S3 bucket. 
 
 * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
-* Specifically for AWS GovCloud or China accounts, use Access Key alternative.
+* Specifically for AWS GovCloud or China accounts, use Access Keys as an alternative to Role Delegation.
 
 #### Create an Archive
 
@@ -127,9 +129,7 @@ Select the appropriate AWS account + role combination for your S3 bucket. Input 
 
     {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
-### Permissions
-
-Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation.
+### Set Permissions
 
 Add the following two permission statements to the IAM policies. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 
