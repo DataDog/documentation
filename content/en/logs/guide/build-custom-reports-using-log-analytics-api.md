@@ -267,7 +267,7 @@ Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Sum" %}}
 
-With the following API call, build a `table` with `sum` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `sum` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -277,7 +277,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"sum",
-       "metric":"@duration"
+       "metric":"@http.response_time"
    }],
    "filter": {
        "from":"1597086000000",
@@ -332,7 +332,7 @@ Similarly, build a `sum` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Min" %}}
 
-With the following API call, build a `table` with `min` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `min` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -342,7 +342,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"min",
-       "metric":"@duration"
+       "metric":"@http.response_time"
    }],
    "filter": {
        "from":"1597086000000",
@@ -397,7 +397,7 @@ Similarly, build a `min` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Max" %}}
 
-With the following API call, build a `table` with `max` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `max` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -407,7 +407,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"max",
-       "metric":"@duration"
+       "metric":"@http.response_time"
    }],
    "filter": {
        "from":"1597086000000",
@@ -464,7 +464,7 @@ Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 
 ### Getting percentiles
 
-With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
+With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
 
 **API call:**
 
@@ -474,7 +474,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"pc99",
-       "metric":"@duration"
+       "metric":"@http.response_time"
    }],
    "filter": {
        "from":"1597086000000",
