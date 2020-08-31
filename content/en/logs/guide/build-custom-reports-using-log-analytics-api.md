@@ -70,7 +70,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 
 **Response:**
 
-The result dataset comprises of the `buckets` object as shown in the following sample response. In this example, `c0` represents the total `count`.
+The result dataset comprises the `buckets` object as shown in the following sample response. In this example, `c0` represents the total `count`.
 
 ```json
 {
