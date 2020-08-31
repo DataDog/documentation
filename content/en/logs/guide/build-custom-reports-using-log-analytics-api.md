@@ -40,7 +40,7 @@ This guide also assumes that you have a terminal with `CURL`.
 {{< tabs >}}
 {{% tab "Table" %}}
 
-With the following API call, you can build a `table` with `count` of log events grouped by the field `status`. The `type` must be `total`.
+With the following API call, build a `table` with `count` of log events grouped by the field `status`. The `type` must be `total`.
 
 **API call:**
 
