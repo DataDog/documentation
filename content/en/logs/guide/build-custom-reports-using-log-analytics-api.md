@@ -193,7 +193,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 {{< tabs >}}
 {{% tab "Average" %}}
 
-With the following API call, you can build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
+With the following API call, build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
 
 **API call:**
 
