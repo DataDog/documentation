@@ -24,7 +24,7 @@ Verify the Datadog Agent for Windows OS been installed locally. If not, visit th
 
 #### Datadog .NET tracer
 
-Has the Datadog .NET tracer been installed locally? If not, please visit our [Datadog .NET APM release page][2].
+Verify the Datadog .NET tracer been installed locally. If not, visit our [Datadog .NET APM release page][2].
 
 ### Automatic Instrumentation 
 
