@@ -23,7 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
-* [Multiple group-bys, unique counts, and metrics](#multiple-groupbys-unique-counts-and-metrics) 
+* [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics) 
 
 ## Prerequisites
 
@@ -267,7 +267,7 @@ Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Sum" %}}
 
-With the following API call, build a `table` with `sum` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `sum` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -277,7 +277,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"sum",
-       "metric":"@scan_d"
+       "metric":"@duration"
    }],
    "filter": {
        "from":"1597086000000",
@@ -332,7 +332,7 @@ Similarly, build a `sum` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Min" %}}
 
-With the following API call, build a `table` with `min` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `min` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -342,7 +342,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"min",
-       "metric":"@scan_d"
+       "metric":"@duration"
    }],
    "filter": {
        "from":"1597086000000",
@@ -397,7 +397,7 @@ Similarly, build a `min` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Max" %}}
 
-With the following API call, build a `table` with `max` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `max` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -407,7 +407,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"max",
-       "metric":"@scan_d"
+       "metric":"@duration"
    }],
    "filter": {
        "from":"1597086000000",
@@ -464,7 +464,7 @@ Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 
 ### Getting percentiles
 
-With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
+With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@duration` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
 
 **API call:**
 
@@ -474,7 +474,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    {
        "type":"total",
        "aggregation":"pc99",
-       "metric":"@scan_d"
+       "metric":"@duration"
    }],
    "filter": {
        "from":"1597086000000",
@@ -526,7 +526,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
 ```
 Similarly, build a `percentile` timeseries by setting `type` as `timeseries`.
 
-### Multiple groupbys, unique counts, and metrics
+### Multiple group-bys, unique counts, and metrics
 
 With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `OS` and `Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg` of metric `network.bytes_written`, and the total `count` of log events.
 
