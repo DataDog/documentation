@@ -24534,9 +24534,6 @@
             },
             "description": "OK"
           },
-          "204": {
-            "description": "No changes"
-          },
           "400": {
             "content": {
               "application/json": {
