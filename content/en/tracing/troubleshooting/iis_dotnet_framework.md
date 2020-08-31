@@ -9,7 +9,7 @@ kind: documentation
 
 ## Solution
 
-If .NET Framework APM traces are not showing within Datadog, please review the possible reasons below.
+If .NET Framework APM traces are not showing within Datadog, review the possible reasons below.
 
 ### Compatability 
 
