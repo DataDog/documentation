@@ -41,7 +41,7 @@ HKLM:SYSTEM\CurrentControlSet\Services\W3SVC
 HKLM:SYSTEM\CurrentControlSet\Services\WAS
 ```
 3. Create a multi-string value: 
-    * With the Value name set to "Environment"
+    * Set the value name to "Environment".
     * Ensure the Value data contains the following:
 {{< code-block lang="default">}}
 COR_ENABLE_PROFILING=1
