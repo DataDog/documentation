@@ -59,6 +59,8 @@ net start w3svc
 
 When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 
+If [custom instrumented][5] spans are not appearing correctly in the Datadog UI, compare your instrumentation against the provided examples.  If you have any questions about or need help with your custom instrumented spans, [create a support ticket][4] and provide the custom code written to generate the spans.
+
 
 [1]:/agent/basic_agent_usage/windows/?tab=gui
 [2]:https://github.com/DataDog/dd-trace-dotnet/releases/latest
