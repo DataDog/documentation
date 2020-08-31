@@ -20,7 +20,7 @@ The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and abo
 
 #### Datadog Agent
 
-Has the Datadog Agent for Windows OS been installed locally? If not, please visit our [Datadog Windows agent][1] guide.
+Verify the Datadog Agent for Windows OS been installed locally. If not, visit the [Datadog Windows Agent][1] guide.
 
 #### Datadog .NET Tracer 
 
