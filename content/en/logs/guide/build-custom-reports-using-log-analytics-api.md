@@ -267,7 +267,7 @@ Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Sum" %}}
 
-With the following API call, you can build a `table` with `sum` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `sum` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
