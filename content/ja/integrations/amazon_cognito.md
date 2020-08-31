@@ -41,9 +41,11 @@ Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダー�
 
 Amazon Cognito から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
+**注**: ユーザープールのログのみが送信可能です。Amazon はその他の Cognito ログの送信をサポートしていません。
+
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_cognito` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Cognito ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

@@ -10,11 +10,11 @@ Datadog では、Datadog Agent を実行している AWS ホスト、および D
 
 他の AWS リソース (ELB、EBS、RDS、Dynamo など) は毎月の請求に含まれません。また、構成の除外は適用されません。
 
-## AWS メトリクスの除外
+## AWS リソースの除外
 
-メトリクスの収集を制御するには、[Datadog-AWS インテグレーションタイル][1]を使用します。**Configuration** タブに移動し、アカウントを選択するか、新しいアカウントを追加します。各アカウントは、**Optionally limit metrics collection** の設定に基づいて制御されます。[ホストタグ][2]またはネームスペースに基づいてメトリクスを制限します。
+メトリクスの収集を制御するには、[Datadog-AWS インテグレーションタイル][1]を使用します。**Configuration** タブに移動し、アカウントを選択するか、新しいアカウントを追加します。各アカウントは、**Optionally limit resource collection** の設定に基づいて制御されます。[ホストタグ][2]、Lambda タグ、またはネームスペースに基づいてメトリクスを制限します。
 
-{{< img src="account_management/billing/aws01.png" alt="AWS" >}}
+{{< img src="account_management/billing/aws02.png" alt="AWS" >}}
 
 **注**: ELB メトリクスはフィルターで除外できないため、ELB メトリクスは課金されません。
 

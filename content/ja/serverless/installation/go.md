@@ -18,13 +18,13 @@ further_reading:
     tag: Documentation
     text: Java サーバーレスモニタリングのインストール
 ---
-[AWS インテグレーションをインストール][1]したら、以下のいずれかの方法に従いアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下の手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
 ## 構成
 
 ### Datadog Lambda ライブラリのインストール
 
-以下のコマンドを実行し、[Datadog Lambda ライブラリ][2]をローカルでインポートできます。
+以下のコマンドを実行し、[Datadog Lambda ライブラリ][3]をローカルでインポートできます。
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -33,19 +33,21 @@ go get github.com/DataDog/datadog-lambda-go
 ### 関数の構成
 
 1. 環境変数 `DD_FLUSH_TO_LOG` を `true` に設定します。
-1. Lambda 関数の [AWS X-Ray アクティブトレース][3]を有効にします。
+1. Lambda 関数の [AWS X-Ray アクティブトレース][4]を有効にします。
 
 ### Datadog Forwarder をロググループにサブスクライブ
 
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
 
-1. [まだの場合は、Datadog Forwarder をインストールします][4]。
+1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [DdFetchLambdaTags のオプションが有効であることを確認します[5]。
 3. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
 
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless ページ][7]でメトリクス、ログ、トレースを確認できるようになるはずです。カスタムメトリクスを送信する必要がある場合は、以下のコード例をご参照ください。
+以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+
+カスタムメトリクスの送信をご希望の場合は、以下のコード例をご参照ください。
 
 ```go
 package main
@@ -79,9 +81,9 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 ```
 
 [1]: /ja/serverless/#1-install-the-cloud-integration
-[2]: https://github.com/DataDog/datadog-lambda-go
-[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://app.datadoghq.com/functions
