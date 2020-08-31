@@ -42,7 +42,7 @@ This guide also assumes that you have a terminal with `CURL`.
 {{< tabs >}}
 {{% tab "Table" %}}
 
-With the following API call, build a `table` with `count` of log events grouped by the field `status`. The `type` must be `total`.
+With the following API call, build a `table` with `count` of log events grouped by the field `status` and showing the top 3 items. The `type` must be `total`.
 
 **API call:**
 
@@ -64,7 +64,8 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
            "facet":"status",
            "sort":{
                "order":"desc"
-           }
+           },
+           "limit":3
        }
    ]
 }'
@@ -78,25 +79,36 @@ The result dataset comprises the `buckets` object as shown in the following samp
 {
     "meta": {
         "status": "done",
-        "request_id": "OFMxRnFydUdUSWlpVGxLTGRNVW5YUXxoNnB0by1veUhBWjdhVVBUTUl6SXpB",
-        "elapsed": 116
+        "request_id": "MlNkM2lwdXpSMXExVndrWldqV2F0d3xYU1dqejF1Qm9QbU1STnF6RVQ4M3Jn",
+        "page": {
+            "after": "eyJhZnRlciI6eyJzdGF0dXMiOlsid2FybiIsIm5vdGljZSIsImluZm8iXX19"
+        },
+        "elapsed": 399
     },
     "data": {
         "buckets": [
             {
                 "computes": {
-                    "c0": 3470
+                    "c0": 644291
                 },
                 "by": {
-                    "status": "info"
+                    "status": "warn"
                 }
             },
             {
                 "computes": {
-                    "c0": 49
+                    "c0": 223652
                 },
                 "by": {
-                    "status": "error"
+                    "status": "notice"
+                }
+            },
+            {
+                "computes": {
+                    "c0": 2886959
+                },
+                "by": {
+                    "status": "info"
                 }
             }
         ]
