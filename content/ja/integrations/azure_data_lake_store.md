@@ -37,7 +37,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Store か�
 {{< get-metrics-from-git "azure_data_lake_store" >}}
 
 
-**注**: このインテグレーションは、Data Lake Storage Gen 1 のメトリクスのみを収集します。Data Lake Storage Gen 2 は Azure Blob Storage に構築されているため、そのメトリクスは Datadog の Blob ストレージネームスペース、`azure.storage_storageaccounts_blobservices.*` に収集されます。詳細については、[Azure Data Lake Storage Gen 2][4]に関するドキュメントを参照してください。
+**注**: このインテグレーションは、Data Lake Storage Gen 1 のメトリクスのみを収集します。Data Lake Storage Gen 2 は Azure Blob Storage に構築されているため、そのメトリクスは Datadog の Blob ストレージネームスペース、`azure.storage_storageaccounts_blobservices.*` に収集されます。詳細については、[Azure Data Lake Storage Gen 2][3]に関するドキュメントを参照してください。
 
 ### イベント
 
@@ -49,9 +49,9 @@ Azure Data Lake Store インテグレーションには、サービスのチェ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_store/azure_data_lake_store_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+[3]: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+[4]: https://docs.datadoghq.com/ja/help/

@@ -22,11 +22,13 @@ int_ignore = ['_index.png',
               'kube_proxy.png',
               'logos.png',
               'mesos_slave.png',
+              'oom_kill.png',
               'riak_repl.png',
               'sendmail.png',                     # No logo available
               'sortdb.png',
               'snmpwalk.png',
               'stunnel.png',
+              'tcp_queue_length.png',
               'unbound.png',                      # No logo available
               'upsc.png'
               ]

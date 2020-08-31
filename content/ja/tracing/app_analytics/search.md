@@ -8,24 +8,25 @@ aliases:
   - /ja/tracing/search
   - /ja/tracing/getting_further/apm_events/
   - /ja/tracing/trace_search_and_analytics/search/
-  - /ja/tracing/search
+  - /ja/tracing/search/
+  - /ja/tracing/advanced/search/
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: ドキュメント
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: ドキュメント
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: ドキュメント
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: ドキュメント
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: ドキュメント
     text: Datadog トレースの読み方を理解する
-  - link: tracing/app_analytics/analytics
+  - link: /tracing/app_analytics/analytics/
     tag: ドキュメント
     text: 無制限のカーディナリティでの APM データの分析
 ---
@@ -118,23 +119,23 @@ further_reading:
 
 ## タイムレンジ
 
-タイムレンジを使用すると、特定の期間内のトレースを表示できます。タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します。
+タイムレンジを使用すると、特定の期間内のトレースを表示できます。タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します（または、[カスタムタイムフレームを入力します][3]):
 
-{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="タイムレンジ"  >}}
+{{< img src="tracing/app_analytics/search/time_frame.png" style="width:50%;" alt="タイムフレームを選択" >}}
 
 ## トレースストリーム
 
 トレースストリームは、選択されたコンテキストに一致するトレースのリストです。コンテキストは、[検索バー](#search-bar)のフィルターと[タイムレンジ](#time-range)で定義されます。
 
-### トレースと分析スパン
+### トレースと Analyzed Span
 
-トレースストリームの右上隅にあるトグルを使用して、トレーススチーム内の分析スパンに関連付けられたサンプリングトレースを表示することを選択します。
+トレースストリームで、**App Analytics で表示**を選択しトレースと Analyzed Span を表示します。右上の **Traces** ボタンをクリックし、Analyzed Span に関連付けられたサンプリングトレースを表示することを選択します。
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
-**Traces** が選択された場合、トレースストリームにリストされている分析スパンには、サンプリングトレースが関連付けられています。**Analyzed Spans** が選択された場合、解析スパンのみがトレースストリームにリストされます。
+**Traces** が選択された場合、トレースストリームにリストされている Analyzed Span には、サンプリングトレースが関連付けられています。**Analyzed Spans** が選択された場合、Analyzed Span のみがトレースストリームにリストされます。
 
-リクエストが[サービス][3]（ウェブサーバー、データベースなど）にヒットすると、Datadog Agent は分析スパンを作成します。これは期間、応答コード、[カスタムメタデータ][4]を含むリクエストの記録です。分析スパンは、処理されたリクエストのメタデータが添付された単一のスパンで表されます。リクエストを受け取った各サービスに対して、Agent は分析スパンを作成します。リクエストがウェブサービス、リストサービス、データベースサービスを介して実行される場合、リクエストは 3 つの分析スパンを生成します。生成される分析スパンの量を減らすには、[特定のサービスの分析スパンコレクションを明示的にオン/オフにします][5]。分析スパンの収集を開始するには、[サービスの App Analytics を有効にします][5]。
+リクエストが[サービス][4]（ウェブサーバー、データベースなど）にヒットすると、Datadog Agent は Analyzed Span を作成します。これは期間、応答コード、[カスタムメタデータ][5]を含むリクエストの記録です。Analyzed Span は、処理されたリクエストのメタデータが添付された単一のスパンで表されます。リクエストを受け取った各サービスに対して、Agent は Analyzed Span を作成します。リクエストがウェブサービス、リストサービス、データベースサービスを介して実行される場合、リクエストは 3 つの Analyzed Span を生成します。生成される Analyzed Span の量を減らすには、[特定のサービスの Analyzed Span コレクションを明示的にオン/オフにします][6]。Analyzed Span の収集を開始するには、[サービスの App Analytics を有効にします][6]。
 
 ### 完全なトレースの表示
 
@@ -144,9 +145,13 @@ further_reading:
 
 ### 列
 
-リストにトレースの詳細を追加するには、**Columns** ボタンをクリックして、表示するファセットを選択します。
+リストにトレースの詳細を追加するには、**Options** ボタンをクリックして、表示するファセットを選択します。
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト"  style="width:80%;">}}
+
+オリジンリソースは、指定されたトレースのルートにあるリソースを表示するデフォルトの列です。オリジンサーバーまたはオリジンオペレーション名を追加するには、**Options** ボタンをクリックし `@trace.origin.operation_name` または `@trace.origin.service` を選択します。
+
+{{< img src="tracing/app_analytics/search/trace_origin_column.png" alt="オリジン列を含むトレースリスト"  style="width:80%;">}}
 
 ### 複数行表示
 
@@ -165,11 +170,28 @@ further_reading:
 
 ## ファセット
 
-ファセットは、1 つの属性またはタグの個別値をすべて表示すると共に、示されたトレースの量などのいくつかの基本分析も提供します。また、データを簡単に絞り込むためのスイッチにもなります。
+ファセットは、1 つの属性またはタグの個別値をすべて表示すると共に、示されたトレースの量などのいくつかの基本分析も提供します。また、データを絞り込むためのスイッチにもなります。
 
 ファセットを使用すると、特定の属性に基づいてデータセットを絞り込んだり、データセットの切り口を変えることができます。ファセットには、ユーザーやサービスなどがあります。
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ"  style="width:80%;">}}
+
+### 定量的ファセット：メジャー
+
+**必要に応じてメジャーを使用します。**
+* 複数のトレースから値を集計する。たとえば、Cassandra の行数にメジャーを作成し、リクエストされたファイルサイズの合計ごとに最上位の参照元または P95 を表示します。
+* ショッピングカートの値が $1000 を超えるサービスの最もレイテンシーの高いものを数値的に計算します。
+* 連続する値をフィルタリングします。たとえば、ビデオストリームの各ペイロードチャンクのサイズ（バイト単位）。
+
+**タイプ**
+
+メジャーには、同等の機能のために、（長）整数またはダブル値が付属しています。
+
+**単位**
+
+メジャーは、クエリ時間と表示時間の桁数を処理するための単位（秒単位の時間またはバイト単位のサイズ）をサポートします。単位は、フィールドではなく、メジャー自体のプロパティです。たとえば、ナノ秒単位の duration メジャーを考えてみます。`duration:1000` が 1000 ミリ秒を表す `service:A` からのスパンタグと、`duration:500` が 500 マイクロ秒を表す `service:B` からの他のスパンタグがあるとします。
+算術演算プロセッサーで流入するすべてのスパンタグの期間をナノ秒にスケーリングします。`service:A` のスパンタグには `*1000000` 乗数を使用し、`service:B` のスパンタグには `*1000` 乗数を使用します。
+`duration:>20ms`（検索構文を参照）を使用して、両方のサービスから一度に一貫してスパンタグにクエリを実行し、最大 1 分の集計結果を確認します。
 
 ### ファセットの作成
 
@@ -181,7 +203,7 @@ further_reading:
 
 ### ファセットパネル
 
-ファセットを使用すると、トレースを簡単にフィルタリングできます。検索バーと URL には、選択内容が自動的に反映されます。
+ファセットを使用し、トレースをフィルタリングします。検索バーと URL には、選択内容が自動的に反映されます。
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="ファセットパネル"  style="width:30%;">}}
 
@@ -189,8 +211,9 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations
+[1]: /ja/tracing/setup/java/#integrations
 [2]: /ja/getting_started/tagging/#tags-best-practices
-[3]: /ja/tracing/visualization/#services
-[4]: /ja/tracing/guide/adding_metadata_to_spans/
-[5]: /ja/tracing/app_analytics/#configure-additional-services-optional
+[3]: /ja/dashboards/guide/custom_time_frames
+[4]: /ja/tracing/visualization/#services
+[5]: /ja/tracing/guide/adding_metadata_to_spans/
+[6]: /ja/tracing/app_analytics/#configure-additional-services-optional

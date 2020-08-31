@@ -56,6 +56,10 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
+##### Related Dashboards
+
+To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 
+
 ##### Monitors
 
 Monitors associated with your stories are displayed at the bottom. Each monitor displayed has the metric of the current story and its associated tags included in its scope.

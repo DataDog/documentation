@@ -77,22 +77,22 @@ Some standard fields—for instance, `error.stack`, `http.method`, or `duration`
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-Click on the **Metrics Tab** and access underlying infrastructure metrics in a 30 minutes timeframe around the log. 
+Click on the **Metrics Tab** and access underlying infrastructure metrics in a 30 minutes timeframe around the log.
 
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][10] or [network page][11]. Interact with **Container** sections to jump to the [container page][19] scoped with the underlying parameters.
+Interact with **Host** in the upper reserved attributes section, the related [host dashboard][10] or [network page][11]. Interact with **Container** sections to jump to the [container page][12] scoped with the underlying parameters.
 
 {{< img src="logs/explorer/log_side_panel_infra.gif" alt="Hub to Infra" style="width:60%;">}}
 
-In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][20]. 
+In case logs comes from a serverless source, the Host Section is replaced with a Serverless section that links jump to the corresponding [serverless page][13].
 
 {{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="Hub to Serverless" style="width:60%;">}}
 
 
 #### Correlation with APM data
 
-Make sure you enable [trace injection in logs][13] and follow our [Unified Service Tagging][15] best practices to benefit from all the capabilities of Logs and APM correlation.
+Make sure you enable [trace injection in logs][14] and follow our [Unified Service Tagging][15] best practices to benefit from all the capabilities of Logs and APM correlation.
 
-Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][12]. 
+Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][16].
 
 Interact with the **Service** section to refocus the search in the log explorer and see all other logs from the same trace.
 
@@ -108,7 +108,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 {{< img src="logs/explorer/side_panel_context.gif" alt="Side Panel context"  style="width:60%;">}}
 
-- Build or edit a facet or measure from an attribute. See [Log Facets][16].
+- Build or edit a facet or measure from an attribute. See [Log Facets][17].
 
 {{< img src="logs/explorer/side_panel_facets.gif" alt="Side Panel Facets"  style="width:60%;">}}
 
@@ -117,7 +117,7 @@ Interact with the attributes names and values in the lower JSON section to:
 Use the **Share** button to share the log opened in side panel to other contexts.
 
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][17] available.
+- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][18] available.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
 
@@ -132,7 +132,7 @@ Build up a context to explore your logs in your log explorer view. First, select
 The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
 It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
 
-Quickly change the time range by selecting a preset range from the dropdown:
+Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][19]):
 
 {{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
 
@@ -144,7 +144,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 ### Saved views
 
-Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][18] to learn more.
+Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][20] to learn more.
 
 ## Further Reading
 
@@ -161,12 +161,12 @@ Use saved views to automatically configure your log explorer with a preselected 
 [9]: /logs/processing/attributes_naming_convention/
 [10]: /dashboards/#preset-lists
 [11]: /network_performance_monitoring/network_page/
-[12]: /tracing/app_analytics/search/#displaying-a-full-trace
-[13]: /tracing/connect_logs_and_traces/
-[14]: /tracing/visualization/service/#overview
+[12]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
+[13]: /infrastructure/serverless/#function-detail-view
+[14]: /tracing/connect_logs_and_traces/
 [15]: /getting_started/tagging/unified_service_tagging
-[16]: /logs/explorer/facets/#overview
-[17]: /logs/processing/
-[18]: /logs/explorer/saved_views/
-[19]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
-[20]: /infrastructure/serverless/#function-detail-view
+[16]: /tracing/app_analytics/search/#displaying-a-full-trace
+[17]: /logs/explorer/facets/#overview
+[18]: /logs/processing/
+[19]: /dashboards/guide/custom_time_frames
+[20]: /logs/explorer/saved_views/

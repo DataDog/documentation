@@ -54,6 +54,20 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 | `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |
 
 {{% /tab %}}
+{{% tab "Processes" %}}
+
+| Datadog Process Monitoring Service Name                   |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-05316fe237f6d8ddd` |
+
+{{% /tab %}}
+{{% tab "Traces" %}}
+
+| Datadog Trace Service Name                                |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-07672d13af0033c24` |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 4. Hit the _verify_ button. If it does not return _Service name found_, reach out to the [Datadog support team][2].
@@ -141,6 +155,42 @@ When installing the forwarder with the CloudFormation template, enable 'DdUsePri
 
 To send data to the Datadog API or consume data from it through this new endpoint, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com/api/`.
 
+{{% /tab %}}
+{{% tab "Processes" %}}
+
+To forward your processes metrics to Datadog using this new VPC endpoint, configure `pvtlink.process.datadoghq.com` as your new processes data destination:
+
+1. Update the `process_dd_url` in the `process_config:` section of the [Agent `datadog.yaml` configuration file][1]:
+
+    ```yaml
+    process_dd_url: https://pvtlink.process.datadoghq.com
+    ```
+
+2. [Restart your Agent][2] to send processes data to Datadog through AWS PrivateLink.
+
+**Note**: If you are using the container Agent, set the environment variable instead: `DD_PROCESS_AGENT_URL="https://pvtlink.process.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Traces" %}}
+
+To forward your trace metrics to Datadog using this new VPC endpoint, configure `trace-pvtlink.agent.datadoghq.com` as your new trace destination:
+
+1. Update the `apm_dd_url` parameter in the `apm_config` section of the [Agent `datadog.yaml` configuration file][1]:
+
+    ```yaml
+    apm_dd_url: https://trace-pvtlink.agent.datadoghq.com
+    ```
+
+2. [Restart your Agent][2] to send traces to Datadog through AWS PrivateLink.
+
+**Note**: If you are using the container Agent, set the environment variable instead: `DD_APM_DD_URL="https://trace-pvtlink.agent.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 

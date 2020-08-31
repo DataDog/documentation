@@ -23,13 +23,13 @@ The `top()` function has three parameters:
     - `max`: Maximum of all metrics values.
     - `mean`: Mean of all metrics values.
     - `min`: Min of all metrics values.
-    - `sum`: Sum of all metrics values. 
+    - `sum`: Sum of all metrics values.
     - `last`: Last metrics value.
     - `l2norm`: Uses the [norm][1]) of the timeseries, which is always positive, to rank the series.
     - `area`: Signed area under the curve being graphed, which can be negative
-    
+
 * `DIR`: The direction of ranking; choose between:
-    - `asc`: Rank the results in ascending order. 
+    - `asc`: Rank the results in ascending order.
     - `desc`: Rank the results in descending order.
 
 The `top()` method also has convenience functions of the following form, all of which take a single series list as input:
@@ -44,6 +44,7 @@ For example, `bottom10_min()` retrieves the 10 lowest-valued series using the `m
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}

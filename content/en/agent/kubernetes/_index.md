@@ -46,16 +46,18 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 
 1. [Install Helm][1].
 2. Download the [Datadog `values.yaml` configuration file][2].
-3. If this is a fresh install, add the Helm stable repo:
+3. If this is a fresh install, add the Helm Datadog repo and the Helm stable repo (for Kube State Metrics chart):
     ```bash
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/ && helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo update
     ```
 4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v3+**
 
     ```bash
-    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog --set targetSystem=<TARGET_SYSTEM>
+    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog --set targetSystem=<TARGET_SYSTEM>
     ```
 
     Replace `<TARGET_SYSTEM>` with the name of your OS: `linux` or `windows`.
@@ -63,7 +65,7 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 - **Helm v1/v2**
 
     ```bash
-    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog
     ```
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
@@ -80,13 +82,13 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 
 
 [1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
-[7]: https://github.com/helm/charts/tree/master/stable/datadog
-[8]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
+[7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
+[8]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -109,7 +111,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
     ```shell
-    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
     ```
 
      **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
@@ -196,7 +198,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file order to enable Kubernetes event collection.
+Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to `true` in your `value.yaml` file in order to enable Kubernetes event collection.
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -253,7 +255,7 @@ Optional collection Agents are disabled by default for security or performance r
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][8] with the Process Agent. The [live container view][9] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][8] and the [live container view][9] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well. |
 
-To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`. 
+To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`.
 
 ### DogStatsD (custom metrics)
 
@@ -297,7 +299,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude. |
 | `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs you wish to include.  |
 | `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs you wish to exclude. |
-| `DD_AC_INCLUDE` | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |                                              
+| `DD_AC_INCLUDE` | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
 | `DD_AC_EXCLUDE` | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
 Additional examples are available on the [Container Discover Management][14] page.
@@ -310,8 +312,6 @@ Additional examples are available on the [Container Discover Management][14] pag
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"` |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                              |
-
-**Note**: If you are using the containerd runtime, set `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` in order to see your containers on the containers page.
 
 You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
@@ -326,7 +326,7 @@ See the [Agent Commands guides][15] to discover all the Docker Agent commands.
 [1]: /agent/faq/kubernetes-legacy/
 [2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
 [3]: /agent/kubernetes/integrations/
-[4]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
 [5]: /agent/proxy/#agent-v6
 [6]: /agent/kubernetes/apm/
 [7]: /agent/kubernetes/log/

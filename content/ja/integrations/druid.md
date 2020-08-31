@@ -1,12 +1,17 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Druid Overview: assets/dashboards/overview.json
+  logs:
+    source: druid
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - 処理
   - data store
+  - ログの収集
 creates_events: false
 ddtype: check
 dependencies:
@@ -158,7 +163,7 @@ Druid チェックには イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/assets/images/druid_dashboard_overview.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://druid.apache.org/docs/latest/operations/metrics.html
 [4]: https://docs.datadoghq.com/ja/agent/

@@ -7,19 +7,19 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/go-logging/'
     tag: ブログ
     text: Golang ログの収集、標準化、一元化方法
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: ログ分析の実行
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: ログ収集のトラブルシューティングガイド
 ---
@@ -77,6 +77,10 @@ func main() {
 }
 ```
 
+**ログとトレースの接続**
+
+このアプリケーションで APM が有効になっている場合、[APM Go ロギングの指示に従って][3]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
+
 ## Datadog Agent の構成
 
 `conf.d/` フォルダーに次の内容の `go.d/conf.yaml` ファイルを作成します。
@@ -106,4 +110,5 @@ logs:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /ja/logs/processing/parsing
+[2]: /ja/logs/processing/parsing/
+[3]: /ja/tracing/connect_logs_and_traces/go/

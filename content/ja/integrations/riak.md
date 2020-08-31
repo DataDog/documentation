@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: riak
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -8,7 +12,7 @@ categories:
   - log collection
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riak/README.md'
 display_name: Riak
@@ -43,15 +47,18 @@ supported_os:
 
 Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル riak.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル riak.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -63,7 +70,7 @@ Riak チェックは [Datadog Agent][2] パッケージに含まれています�
      - url: http://127.0.0.1:8098/stats
    ```
 
-2. [Agent を再起動][5]すると、Datadog への Riak メトリクスの送信が開始されます。
+2. [Agent を再起動][3]すると、Datadog への Riak メトリクスの送信が開始されます。
 
 ##### ログの収集
 
@@ -103,33 +110,44 @@ _Agent バージョン 6.0 以降で利用可能_
              pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<INTEGRATION_NAME>` | `riak`                                 |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
-| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8098/stats"}` |
+| `<インテグレーション名>` | `riak`                                 |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
+| `<インスタンスコンフィギュレーション>`  | `{"url":"http://%%host%%:8098/stats"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集のドキュメント][7]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "riak", "service": "riak", "log_processing_rules": {"type": "multi_line", "name": "new_log_Start_with_date", "pattern": "\d{4}\-\d{2}\-\d{2}"}}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `riak` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `riak` を探します。
 
 ## 収集データ
 
@@ -148,15 +166,10 @@ Agent が Riak 統計エンドポイントに接続してメトリクスを収�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/docker/log/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/riak/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

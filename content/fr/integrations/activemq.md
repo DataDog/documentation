@@ -3,6 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: activemq
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

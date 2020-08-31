@@ -2,7 +2,8 @@
 aliases: []
 assets:
   dashboards: {}
-  logs: {}
+  logs:
+    source: openldap
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +38,7 @@ supported_os:
 
 Utilisez l'intégration OpenLDAP pour recueillir des métriques à partir du backend `cn=Monitor` de vos serveurs OpenLDAP.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -101,7 +102,7 @@ Si le backend `cn=Monitor` n'est pas configuré sur votre serveur, suivez ces é
 
 ##### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ###### Collecte de métriques
 

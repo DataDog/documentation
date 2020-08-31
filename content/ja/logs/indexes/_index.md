@@ -5,35 +5,45 @@ description: Datadog でインデックス化するログの量を制御する
 aliases:
   - /ja/logs/dynamic_volume_control
 further_reading:
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: ドキュメント
     text: ログ分析の実行
-  - link: logs/processing
+  - link: /logs/processing/
     tag: ドキュメント
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: ドキュメント
     text: パースの詳細
   - link: 'https://www.datadoghq.com/blog/logging-without-limits/'
     tag: ブログ
     text: Logging without Limits*
 ---
-インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
+ログインデックスでは、さまざまな保持、割り当て、使用状況の監視、および課金のためにデータを値グループにセグメント化できるようにすることで、ログ管理予算をきめ細かく制御できます。インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
 
 {{< img src="logs/indexes/index_details.png" alt="インデックスの詳細"  style="width:70%;">}}
 
 インデックス化されたログは、[ファセット検索][2]、[パターン][3]、[分析][4]、[ダッシュボード][5]、および[監視][6]に使用できます。
 
-## インデックス
+## 複数のインデックス
 
-デフォルトで、ログエクスプローラーは一意なログインデックスを 1 つ持ちますが、Datadog で以下の要件を満たすために、複数のインデックスを使用することもできます。
+デフォルトでは、各アカウントには、すべてのログのモノリシックセットを表す単一のインデックスがあります。Datadog では、次が必要な場合に複数のインデックスも提供します。
 
-* 保存期間や [1 日の割り当て](#日別の割り当てを設定)を複数使用して、バジェットをより細かく管理したい場合。
-* アクセス許可を複数使用して、ユーザーの[ロールベースのアクセス制御 (RBAC)][7] をより細かく行いたい場合。
+* 複数の[保持期間](#update-log-retention) 
+* [1日の割り当て](#日別の割り当てを設定)を複数使用して、バジェットをより細かく管理したい場合。
+
+Log Explorer は、[複数のインデックスにわたるクエリ][7]をサポートしています。
 
 <div class="alert alert-info">
-複数のインデックス機能は非公開ベータ版です。ご使用のアカウントでこの機能を有効にしたい場合は、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
+<a href="/help">アカウントで複数のインデックスを有効にするには、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
 </div>
+
+### インデックスを追加
+
+複数のインデックスがアクティブになっている場合は、"New Index" ボタンを使用して新しいインデックスを作成します。
+
+{{< img src="logs/indexes/add-index.png" alt="インデックスを追加"  style="width:70%;">}}
+
+**注**: インデックス名は文字で始まる必要があり、小文字、数字、または '-' のみを含めることができます。
 
 ## インデックスフィルター
 
@@ -72,7 +82,7 @@ further_reading:
 #### 傾向を注視する
 
 たとえば、Web アクセスサーバーリクエストからのすべてのログを保持するのではなく、3xx、4xx、5xx のログをすべてインデックス化し、2xx のログの 95% を除外したい場合は、`source:nginx AND http.status_code:[200 TO 299]` を設定することで全体の傾向を追跡できます。
-**ヒント**: [ログから生成されるメトリクス][10]を使用し、リクエストの数をカウントして、ステータスコード、[ブラウザ][13]、[国][14]でタグ付けすることにより、Web アクセスログを有益な KPI に変換することができます。
+**ヒント**: [ログから生成されるメトリクス][9]を使用し、リクエストの数をカウントして、ステータスコード、[ブラウザ][13]、[国][14]でタグ付けすることにより、Web アクセスログを有益な KPI に変換することができます。
 
 {{< img src="logs/indexes/sample_200.png" alt="インデックスフィルターの有効化"  style="width:80%;">}}
 
@@ -87,10 +97,17 @@ further_reading:
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="インデックスフィルターの有効化"  style="width:80%;">}}
 
+## ログの保持を更新
+
+インデックス保持設定は、ログが Datadog に保存され、検索できる期間を決定します。保持は、アカウントコンフィギュレーションで許可されている任意の値に設定できます。
+現在の契約にない保持を追加するには、[Datadog サポート][17]にお問い合わせください。
+
+{{< img src="logs/indexes/log_retention.png" alt="インデックスの詳細"  style="width:70%;">}}
+
 ## 日別の割り当てを設定する
 
 1 日の割り当てを設定して、インデックスに格納されるログの数を日別に制限することができます。この割り当ては、格納されるべき (除外フィルターが適用された後の) すべてのログに対して適用されます。
-1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][17] では利用できるほか、[アーカイブにも送信][18]されるので、[ログからメトリクスを生成する][19]ために使用できます。
+1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][18] では利用できるほか、[アーカイブにも送信][10]されるので、[ログからメトリクスを生成する][9]ために使用できます。
 
 この割り当ては、インデックスを編集していつでも更新または削除できます。
 
@@ -104,22 +121,21 @@ further_reading:
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /ja/logs/indexes
-[2]: /ja/logs/explorer/?tab=facets#visualization
-[3]: /ja/logs/explorer/patterns
-[4]: /ja/logs/explorer/analytics
+[1]: /ja/logs/indexes/
+[2]: /ja/logs/explorer/#visualization
+[3]: /ja/logs/explorer/patterns/
+[4]: /ja/logs/explorer/analytics/
 [5]: /ja/logs/explorer/analytics/#dashboard
-[6]: /ja/monitors/monitor_types/log
-[7]: /ja/account_management/rbac
-[8]: /ja/logs/live_tail
-[9]: /ja/logs/archives
-[10]: /ja/logs/logs_to_metrics
-[11]: /ja/logs/explorer/search/
-[12]: /ja/api/?lang=bash#update-an-index
+[6]: /ja/monitors/monitor_types/log/
+[7]: /ja/logs/explorer/facets/#the-index-facet
+[8]: /ja/logs/live_tail/
+[9]: /ja/logs/logs_to_metrics/
+[10]: /ja/logs/archives/
+[11]: /ja/logs/search_syntax/
+[12]: /ja/api/v1/logs-indexes/#update-an-index
 [13]: /ja/logs/processing/processors/?tab=ui#user-agent-parser
 [14]: /ja/logs/processing/processors/?tab=ui#geoip-parser
 [15]: /ja/tracing/connect_logs_and_traces/
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
-[17]: /ja/logs/live_tail/#overview
-[18]: /ja/logs/archives/
-[19]: /ja/logs/logs_to_metrics/
+[17]: /ja/help/
+[18]: /ja/logs/live_tail/#overview

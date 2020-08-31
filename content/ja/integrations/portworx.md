@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - モニター
 creates_events: false
@@ -42,59 +42,48 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. [開発ツールキット][4]をインストールします。
 2. integrations-extras リポジトリを複製します。
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. `portworx` パッケージをビルドします。
 
-    ```
-    ddev -e release build portworx
-    ```
+   ```shell
+   ddev -e release build portworx
+   ```
 
 5. [Datadog Agent をダウンロードして起動][5]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-    ```
-    datadog-agent integration install -w <PATH_OF_PORTWORX_ARTIFACT_>/<PORTWORX_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_PORTWORX_ARTIFACT_>/<PORTWORX_ARTIFACT_NAME>.whl
+   ```
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
 ### コンフィグレーション
 
-1. Portworx の[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。
-  使用可能なすべての構成オプションの詳細については、[サンプル portworx.d/conf.yaml][8] を参照してください。
+1. Portworx の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル portworx.d/conf.yaml][8] を参照してください。
+
+    ```yaml
+    init_config:
+
+    instances:
+     # url of the metrics endpoint of prometheus
+     - prometheus_endpoint: http://localhost:9001/metrics
+    ```
 
 2. [Agent を再起動します][9]
 
-#### メトリクスの収集
-
-- portworx メトリクスの収集を開始するには、`portworx.yaml` ファイルに次の構成設定を追加します。
-
-```
-init_config:
-
-instances:
- # Prometheus のメトリクスエンドポイントの URL
- - prometheus_endpoint: http://localhost:9001/metrics
-```
-
-サーバーとポートを指定するように構成します。
-
-使用可能なすべての構成オプションの詳細については、[portworx.yaml のサンプル][10]を参照してください。
-
-* [Agent を再起動][11]すると、Datadog への Portworx メトリクスの送信が開始されます。
-
 ### 検証
 
-[Agent の `info` サブコマンドを実行すると][12]、以下のような内容が表示されます。
+[Agent の `info` サブコマンドを実行すると][10]、以下のような内容が表示されます。
 
 ## 互換性
 
@@ -114,7 +103,7 @@ Portworx チェックには、イベントは含まれません。
 
 ### Agent が接続できない
 
-```
+```text
     portworx
     -------
       - instance #0 [ERROR]: "('Connection aborted.', error(111, 'Connection refused'))"
@@ -125,19 +114,17 @@ Portworx チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][14]を参照してください。
+インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][12]を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/ja/getting_started/integrations
+[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
-[12]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information
-[13]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
-[14]: https://www.datadoghq.com/blog
+[10]: https://docs.datadoghq.com/ja/agent/faq/agent-status-and-information/
+[11]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
+[12]: https://www.datadoghq.com/blog

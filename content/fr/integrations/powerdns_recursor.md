@@ -3,6 +3,7 @@ aliases:
   - /fr/integrations/powerdns
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,9 +47,9 @@ Analysez les performances de votre PowerDNS Recursor et surveillez le trafic in
 - Le nombre de réponses de chaque type (SRVFAIL, NXDOMAIN, NOERROR)
 - Les paquets ignorés ou perdus
 
-Et bien plus encore
+Et bien plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -76,7 +77,7 @@ Redémarrez votre recursor pour activer l'API de statistiques.
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `powerdns_recursor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple powerdns_recursor.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 

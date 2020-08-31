@@ -4,13 +4,13 @@ kind: ガイド
 aliases:
   - /ja/logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
-  - link: logs/guide/log-parsing-best-practice
+  - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: ログのパース - ベストプラクティス
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
 ---
@@ -95,9 +95,9 @@ drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 
         daily
         rotate 7
-        missing ok
+        missingok
         create 644 mysql adm
-        Compress
+        compress
 }
 ```
 

@@ -114,6 +114,13 @@ class GitHub:
                     listing = self.extract(
                         tree_response.json()
                     )
+        else:
+            msg = sha_response.json().get('message', '') or sha_response.text
+            print(
+                "\x1b[33mWARNING\x1b[0m: Could not get latest sha from {}/{} response {}, {}..".format(
+                    repo, branch, sha_response.status_code, msg
+                )
+            )
 
         if globs:
             filtered_listing = []

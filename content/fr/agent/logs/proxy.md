@@ -47,23 +47,6 @@ Les paramètres ci-dessus peuvent également être configurés avec les variable
     * `yum install ca-certificates` (CentOS, Redhat)
   Ensuite, utilisez le fichier certificat situé dans `/etc/ssl/certs/ca-certificates.crt` (Debian, Ubuntu) ou `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-Pour envoyer vos logs à votre compte Datadog avec un serveur proxy SOCKS5, utilisez les paramètres suivants dans votre fichier de configuration `datadog.yaml` :
-
-```yaml
-logs_config:
-  socks5_proxy_address: "<URL_DU_PROXY_SOCKS5>:<PORT_DU_PROXY_SOCKS5>"
-```
-
-Le paramètre ci-dessus peut également être configuré avec la variable d'environnement suivante :
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Exemples de proxy TCP
 
 ### Utiliser HAProxy en tant que proxy TCP pour les logs
@@ -287,6 +270,24 @@ stream {
 ```
 
 {{< /site-region >}}
+
+{{% /tab %}}
+{{% tab "SOCKS5" %}}
+
+Pour envoyer vos logs à votre compte Datadog avec un serveur proxy SOCKS5, utilisez les paramètres suivants dans votre fichier de configuration `datadog.yaml` :
+
+```yaml
+logs_config:
+  socks5_proxy_address: "<URL_DU_PROXY_SOCKS5>:<PORT_DU_PROXY_SOCKS5>"
+```
+
+Le paramètre ci-dessus peut également être configuré avec la variable d'environnement suivante :
+
+* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 
 ## Pour aller plus loin

@@ -510,6 +510,7 @@ components:
       - min
       - max
       - avg
+      example: pc90
       type: string
       x-enum-varnames:
       - COUNT
@@ -790,11 +791,6 @@ components:
       type: object
     LogsCompute:
       description: A compute rule to compute metrics or timeseries
-      example:
-        aggregation: pc90
-        interval: 20m
-        metric: '@score'
-        type: timeseries
       properties:
         aggregation:
           $ref: '#/components/schemas/LogsAggregationFunction'
@@ -825,15 +821,6 @@ components:
       - TOTAL
     LogsGroupBy:
       description: A group by rule
-      example:
-        facet: host
-        limit: 50
-        missing: missing_host
-        sort:
-          order: asc
-          type: alphabetical
-        total: true
-        type: facet
       properties:
         facet:
           description: The name of the facet to use (required)
@@ -1699,7 +1686,7 @@ components:
       x-enum-varnames:
       - ROLES
     SecurityMonitoringListRulesResponse:
-      description: List of rules
+      description: List of rules.
       properties:
         data:
           description: TODO.
@@ -1713,8 +1700,8 @@ components:
       description: Case when signal is generated.
       properties:
         condition:
-          description: 'A rule case contains logical operations (>, >=, &&, ||) to
-            determine if a signal should be generated
+          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+            to determine if a signal should be generated
 
             based on the event counts in the previously defined queries.'
           type: string
@@ -1722,13 +1709,36 @@ components:
           description: Name of the case.
           type: string
         notifications:
-          description: Notification targets for each rule case
+          description: Notification targets for each rule case.
           items:
-            description: Notification
+            description: Notification.
             type: string
           type: array
         status:
           $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      type: object
+    SecurityMonitoringRuleCaseCreate:
+      description: Case when signal is generated.
+      properties:
+        condition:
+          description: 'A rule case contains logical operations (`>`,`>=`, `&&`, `||`)
+            to determine if a signal should be generated
+
+            based on the event counts in the previously defined queries.'
+          type: string
+        name:
+          description: Name of the case.
+          type: string
+        notifications:
+          description: Notification targets for each rule case.
+          items:
+            description: Notification.
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      required:
+      - status
       type: object
     SecurityMonitoringRuleCreatePayload:
       description: Create a new rule.
@@ -1737,7 +1747,7 @@ components:
           description: Cases for generating signals.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
           type: array
         isEnabled:
           description: Whether the rule is enabled.
@@ -1748,7 +1758,7 @@ components:
           example: ''
           type: string
         name:
-          description: The name of the rule
+          description: The name of the rule.
           example: ''
           type: string
         options:
@@ -1757,7 +1767,7 @@ components:
           description: Queries for selecting logs which are part of the rule.
           example: []
           items:
-            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+            $ref: '#/components/schemas/SecurityMonitoringRuleQueryCreate'
           type: array
         tags:
           description: Tags for generated signals.
@@ -1765,7 +1775,7 @@ components:
           - env:prod
           - team:security
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
       required:
@@ -1775,7 +1785,6 @@ components:
       - options
       - cases
       - message
-      - tags
       type: object
     SecurityMonitoringRuleEvaluationWindow:
       description: 'A time window is specified to match when at least one of the cases
@@ -1873,24 +1882,48 @@ components:
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
-            description: Field
+            description: Field.
             type: string
           type: array
         groupByFields:
           description: Fields to group by.
           items:
-            description: Field
+            description: Field.
             type: string
           type: array
         name:
-          description: Name of the query
+          description: Name of the query.
           type: string
         query:
-          description: Query to run on logs
+          description: Query to run on logs.
           type: string
       type: object
+    SecurityMonitoringRuleQueryCreate:
+      description: Query for matching rule.
+      properties:
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
+        name:
+          description: Name of the query.
+          type: string
+        query:
+          description: Query to run on logs.
+          type: string
+      required:
+      - query
+      type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule
+      description: Detection rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -1933,7 +1966,7 @@ components:
         tags:
           description: Tags for generated signals.
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
         version:
@@ -1982,10 +2015,150 @@ components:
         tags:
           description: Tags for generated signals.
           items:
-            description: Tag
+            description: Tag.
             type: string
           type: array
       type: object
+    SecurityMonitoringSignal:
+      description: Object description of a security signal.
+      properties:
+        attributes:
+          description: The JSON object containing all signal attributes and their
+            associated values.
+          properties:
+            attributes:
+              additionalProperties: {}
+              description: A JSON object of attributes in the security signal.
+              example:
+                workflow:
+                  first_seen: '2020-06-23T14:46:01.000Z'
+                  last_seen: '2020-06-23T14:46:49.000Z'
+                  rule:
+                    id: 0f5-e0c-805
+                    name: 'Brute Force Attack Grouped By User '
+                    version: 12
+              type: object
+            message:
+              description: The message in the security signal defined by the rule
+                that generated the signal.
+              example: Detect Account Take Over (ATO) through brute force attempts
+              type: string
+            tags:
+              description: An array of tags associated with the security signal.
+              example:
+              - security:attack
+              - technique:T1110-brute-force
+              format: array
+              items:
+                description: The tag associated with the security signal.
+                format: string
+            timestamp:
+              description: The timestamp of the security signal.
+              example: '2019-01-02T09:42:36.320Z'
+              format: date-time
+              type: string
+          type: object
+        id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalType'
+      type: object
+    SecurityMonitoringSignalListRequest:
+      description: The request for a security signal list.
+      properties:
+        filter:
+          description: Search filters for listing security signals.
+          properties:
+            from:
+              description: The minimum timestamp for requested security signals.
+              example: '2019-01-02T09:42:36.320Z'
+              format: date-time
+              type: string
+            query:
+              description: Search query for listing security signals.
+              example: security:attack status:high
+              type: string
+            to:
+              description: The maximum timestamp for requested security signals.
+              example: '2019-01-03T09:42:36.320Z'
+              format: date-time
+              type: string
+          type: object
+        page:
+          description: The paging attributes for listing security signals.
+          properties:
+            cursor:
+              description: A list of results using the cursor provided in the previous
+                query.
+              example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+              type: string
+            limit:
+              default: 10
+              description: The maximum number of security signals in the response.
+              example: 25
+              format: int32
+              maximum: 1000
+              type: integer
+          type: object
+        sort:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      type: object
+    SecurityMonitoringSignalType:
+      default: signal
+      description: The type of event.
+      enum:
+      - signal
+      example: signal
+      type: string
+      x-enum-varnames:
+      - SIGNAL
+    SecurityMonitoringSignalsListResponse:
+      description: The response object with all security signals matching the request
+        and pagination information.
+      properties:
+        data:
+          description: An array of security signals matching the request.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignal'
+          type: array
+        links:
+          description: Links attributes.
+          properties:
+            next:
+              description: 'The link for the next set of results. **Note**: The request
+                can also be made using the
+
+                POST endpoint.'
+              example: https://app.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+              type: string
+          type: object
+        meta:
+          description: Meta attributes.
+          properties:
+            page:
+              description: Paging attributes.
+              properties:
+                after:
+                  description: 'The cursor used to get the next results, if any. To
+                    make the next request, use the same
+
+                    parameters with the addition of the `page[cursor]`.'
+                  example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+                  type: string
+              type: object
+          type: object
+      type: object
+    SecurityMonitoringSignalsSort:
+      description: The sort parameters used for querying security signals.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
     User:
       description: User object returned by the API.
       properties:
@@ -2743,7 +2916,7 @@ paths:
           description: OK
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
@@ -3237,13 +3410,13 @@ paths:
           description: OK
         '400':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
@@ -3284,7 +3457,7 @@ paths:
           description: OK
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
@@ -3764,6 +3937,111 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+  /api/v2/security_monitoring/signals:
+    get:
+      description: 'The list endpoint returns security signals that match a search
+        query.
+
+        Both this endpoint and the POST endpoint can be used interchangeably when
+        listing
+
+        security signals.'
+      operationId: ListSecurityMonitoringSignals
+      parameters:
+      - description: The search query for security signals.
+        example: security:attack status:high
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: The minimum timestamp for requested security signals.
+        example: '2019-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: The maximum timestamp for requested security signals.
+        example: '2019-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: The order of the security signals in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSignalsSort'
+      - description: A list of results using the cursor provided in the previous query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of security signals in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Get a quick list of security signals
+      tags:
+      - Security Monitoring
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/signals/search:
+    post:
+      description: 'Returns security signals that match a search query.
+
+        Both this endpoint and the GET endpoint can be used interchangeably for listing
+
+        security signals.'
+      operationId: SearchSecurityMonitoringSignals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalListRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalsListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Get a list of security signals
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -3878,13 +4156,13 @@ paths:
           description: OK
         '400':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
@@ -3989,8 +4267,14 @@ paths:
             schema:
               $ref: '#/components/schemas/UserUpdateRequest'
       responses:
-        '204':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
           description: OK
+        '204':
+          description: No changes
         '400':
           content:
             application/json:
@@ -4179,7 +4463,8 @@ tags:
     \ team tag. Tags can be applied to log events in many ways, and a log event can\
     \ have multiple tags with the same key (like team)\nand different values\u2014\
     in this way the same log event can be visible to roles whose restriction queries\
-    \ are scoped to different team values."
+    \ are scoped to different team values.\n\nYou need an API and application key\
+    \ with Admin rights to interact with this endpoint."
   name: Logs Restriction Queries
 - description: '[See API version 1](/api/v1/metrics/).'
   name: Metrics
@@ -4206,7 +4491,7 @@ tags:
   name: Roles
 - description: '[See API version 1](/api/v1/screenboards/).'
   name: Screenboards
-- description: Detection Rules for generating signals
+- description: Detection rules for generating signals and listing of generated signals
   name: Security Monitoring
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks

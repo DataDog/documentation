@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -35,7 +36,7 @@ supported_os:
 
 Le check KyotoTycoon de l'Agent surveille les opérations get, set et delete et vous permet de mesurer le délai de réplication.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

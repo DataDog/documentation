@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - モニター
 creates_events: false
@@ -32,7 +32,8 @@ supported_os:
 
 Bind9 DNS サーバーからメトリクスを取得すると、以下のことができます。
 
-* bind9 統計を視覚化および監視できます。
+- bind9 統計を視覚化および監視できます。
+
 ![スナップ][1]
 
 ## セットアップ
@@ -46,52 +47,47 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 1. [開発ツールキット][6]をインストールします。
 2. integrations-extras リポジトリを複製します。
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. `bind9` パッケージをビルドします。
 
-    ```
-    ddev -e release build bind9
-    ```
+   ```shell
+   ddev -e release build bind9
+   ```
 
 5. [Datadog Agent をダウンロードして起動][2]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-    ```
-    datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
+   ```
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
 ### コンフィグレーション
 
-1. Bind9 の[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。
-  使用可能なすべての構成オプションの詳細については、[サンプル bind9.d/conf.yaml][9] を参照してください。
+1. Bind9 の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル bind9.d/conf.yaml][9] を参照してください。
 
-2. [Agent を再起動します][10]。
+   ```yaml
+   init_config:
 
-#### メトリクスの収集
+   instances:
+     - URL: "<BIND_9_STATS_URL>"
+   ```
 
-[メトリクス][11]の収集を開始するには、`conf.yaml` ファイルに次の構成設定を追加します。
-
-```
-init_config:
-
-instances:
-  - URL : <BIND_9_STATS_URL>
-```
+2. [Agent を再起動します][10]
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][12]し、Checks セクションで `bind9` を探します。
+[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `bind9` を探します。
 
 ## 互換性
 
@@ -107,26 +103,25 @@ instances:
 
 現時点で、bind9_check チェックには、イベントは含まれません。
 
-### サービスのチェック
+### Service Checks
 
 `bind9_check.BIND_SERVICE_CHECK`: DNS の統計チャンネル URL がインスタンスに存在する場合は、`OK` を返します。
 `bind9_check.BIND_SERVICE_CHECK`: URL エラーが発生した場合は、`CRITICAL` を返します。
 
 ## 開発
 
-Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][14]を参照してください。
+Agent ベースのインテグレーションのテストおよび開発方法の詳細については、[メインドキュメント][13]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [6]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
-[7]: https://docs.datadoghq.com/ja/getting_started/integrations
+[7]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: #metrics
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
-[13]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
-[14]: https://docs.datadoghq.com/ja/developers
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[12]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
+[13]: https://docs.datadoghq.com/ja/developers/

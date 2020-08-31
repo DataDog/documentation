@@ -3,13 +3,13 @@ title: イベントモニター
 kind: documentation
 description: Datadog によって収集されたイベントを監視する
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスを確認
 ---
@@ -77,5 +77,5 @@ Datadog で[イベントモニター][1]を作成するには、メインナビ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /ja/help
-[3]: /ja/monitors/notifications
+[2]: /ja/help/
+[3]: /ja/monitors/notifications/

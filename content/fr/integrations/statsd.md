@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -36,7 +37,7 @@ Ce check surveille la disponibilité et l'uptime des serveurs StatsD hors Datado
 
 Ce check ne transfère **PAS** les métriques d'application des serveurs StatsD vers Datadog. Il recueille les métriques concernant StatsD même.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -46,7 +47,7 @@ Le check StatsD est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Agent conteneurisé](#agent-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `statsd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple statsd.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 

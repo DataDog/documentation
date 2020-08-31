@@ -40,45 +40,47 @@ further_reading:
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | ページビューごとにランダムに生成された ID。                                                                      |
 | `view.url`                     | string | ビューの URL。                                                                                                  |
+| `view.loading_type`                     | string | ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント][1]を参照してください。|
 | `view.referrer`                | string | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。               |
 | `view.url_details.host`        | string | URL の HTTP ホスト部分。                                                                                 |
 | `view.url_details.path`        | string | URL の HTTP パス部分。                                                                                 |
-| `view.url_details.path_group`  | string | 同様の URL に対して生成された自動 URL グループ。（例: `/dashboard/123` と `/dashboard/456` に対する `/dashboard/?`） |
-| `view.url_details.queryString` | object | クエリパラメーターの key/value 属性として分解された、URL の HTTP クエリ文字列部分。                        |
+| `view.url_details.path_group`  | 文字列 | 同様の URL に対して生成された自動 URL グループ。（例: `/dashboard/123` と `/dashboard/456` に対する `/dashboard/?`） |
+| `view.url_details.queryString` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL の HTTP クエリ文字列部分。                        |
 
 ### ユーザーエージェント
 
-[Datadog 標準属性][1]ロジックに続く次のコンテキストは、Datadog に送信されるすべてのイベントに自動的にアタッチされます。
+[Datadog 標準属性][2]ロジックに続く次のコンテキストは、Datadog に送信されるすべてのイベントに自動的にアタッチされます。
 
-| 属性名                           | 種類   | 説明                                     |
+| 属性名                           | タイプ   | 説明                                     |
 |------------------------------------------|--------|-------------------------------------------------|
 | `http.useragent_details.os.family`       | string | User-Agent によって報告された OS ファミリー。       |
 | `http.useragent_details.browser.family`  | string | User-Agent によって報告されたブラウザファミリー。  |
 | `http.useragent_details.device.family`   | string | User-Agent によって報告されたデバイスファミリー。   |
-| `http.useragent_details.device.category` | string | User-Agent によって報告されたデバイスカテゴリ。 |
+| `http.useragent_details.device.category` | 文字列 | User-Agent によって報告されたデバイスカテゴリ。 |
 
 ### 位置情報
 
-以下は、ネットワーク通信で使用される IP アドレスの位置情報に関連する属性です。すべてのフィールドの先頭に `network.client.geoip` または `network.destination.geoip` が付与されます。
+以下は、ネットワーク通信で使用される IP アドレスの位置情報に関連する属性です。すべてのフィールドに `network.client.geoip` または `network.destination.geoip` というプレフィックスが付きます。
 
-| 完全名                                    | 種類   | 説明                                                                                                                          |
+| 完全名                                    | タイプ   | 説明                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `network.client.geoip.country.name`         | string | 国の名前。                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | string | 国の [ISO コード][2] (米国は `US`、フランスは `FR` など)。                                                  |
+| `network.client.geoip.country.iso_code`     | string | 国の [ISO コード][3] (米国は `US`、フランスは `FR` など)。                                                  |
 | `network.client.geoip.continent.code`       | string | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)                                                                 |
 | `network.client.geoip.continent.name`       | string | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antartica`、`South America`、`Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | string | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など) |
-| `network.client.geoip.subdivision.iso_code` | string | その国で最大規模の地方区分の [ISO コード][2] (米国は `CA`、フランスは `SA` など)    |
-| `network.client.geoip.city.name`            | string | 都市名 (`Paris`、`New York` など)                                                                                   |
+| `network.client.geoip.subdivision.iso_code` | string | その国で最大規模の地方区分の [ISO コード][3] (米国は `CA`、フランスは `SA` など)    |
+| `network.client.geoip.city.name`            | 文字列 | 都市名 (`Paris`、`New York` など)                                                                                   |
 
 ## 追加属性
 
-デフォルトの属性に加えて、収集されたすべてのイベントに[特定のグローバルコンテキスト][3]を追加できます。これにより、ユーザーのサブセットのデータを分析することができます。ユーザーメール別のグループエラー、パフォーマンスが最も悪い顧客の把握などです。
+デフォルトの属性に加えて、収集されたすべてのイベントに[特定のグローバルコンテキスト][4]を追加します。これにより、ユーザーのサブセットのデータを分析することができます。たとえば、ユーザーメール別のグループエラー、パフォーマンスが最も悪い顧客の把握などです。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/attributes_naming_convention/
-[2]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes
-[3]: /ja/real_user_monitoring/installation/advanced_configuration/
+[1]: /ja/real_user_monitoring/data_collected/view#single-page-applications
+[2]: /ja/logs/processing/attributes_naming_convention/
+[3]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes
+[4]: /ja/real_user_monitoring/installation/advanced_configuration/

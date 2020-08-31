@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Confluent Platform Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: confluent_platform
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

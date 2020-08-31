@@ -24,7 +24,7 @@ Le user-agent dans les en-têtes HTTP est inspecté pour déterminer si une adre
 2. Si l'adresse IP effectue des requêtes authentifiées vers l'application :
  * Analysez les logs HTTP et déterminez si l'utilisateur attaque votre application.
 
-Les en-têtes HTTP de la requête proviennent du [gist][2] de [darkqusar][1] 
+Les en-têtes HTTP de la requête proviennent du [gist][2] de [darkqusar][1]
 
 [1]: https://gist.github.com/darkquasar
 [2]: https://gist.github.com/darkquasar/84fb2cec6cc1668795bd97c02302d380

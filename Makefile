@@ -101,8 +101,20 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
-	@if [ content/en/serverless/troubleshooting/installing_the_forwarder.md ]; then \
-	rm -f content/en/serverless/troubleshooting/installing_the_forwarder.md ;fi
+	@if [ content/en/serverless/forwarder.md ]; then \
+	rm -f content/en/serverless/forwarder.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/python.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/python.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/nodejs.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/nodejs.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/ruby.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/ruby.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/go.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
+	@if [ content/en/real_user_monitoring/android.md ]; then \
+	rm -f content/en/real_user_monitoring/android.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \

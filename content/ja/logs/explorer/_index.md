@@ -18,212 +18,154 @@ further_reading:
     tag: Documentation
     text: ログ内のパターン検出
 ---
+## 概要
+
 ログエクスプローラーを起点として、トラブルシューティングと調査を行うことができます。
 
-{{< img src="logs/explorer/explore_view_with_comments.png" alt="コメントの付いたエクスプローラービュー"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="コメントの付いた Log Explorer ビュー" style="width:80%;" >}}
 
-このビューで、以下の処理を行うことができます。
+さまざまな視点により、[検索クエリ][1]と一致するログデータからの色々な種類のインサイトが得られます。
 
-* [ログ調査のコンテキストを構築する](#context)。
-* [ログをフィルターしてログストリームまたはログ分析として視覚化する](#visualization)。
-* [ファセットを作成してログエクスプローラービューを設定し、ログを評価する](#setup)。
-* [Datadog 内、または外部にある別のページにエクスプローラービューのコンテンツをシェアする。](#share-views)
+### Live Tail
 
-## コンテキスト
+Live Tail は Datadog に入る時にログを表示します。Live Tail ログは残りませんが、そのビューは、インデックス化されているかに関わらず**すべて**のログを表示します。詳細は、[Log Live Tail セクション][2]を参照してください。
 
-最初に、ログエクスプローラービューでログを調査するためのコンテキストを構築します。それには、適切なタイムレンジを選択し、検索バーを使用してログストリームやログ分析を絞り込みます。
+{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail" style="width:60%;" >}}
 
-### タイムレンジ
+### ログリスト
+
+Log List はインデックス化されたログを表示し、**個々の結果**に移動するための権限を持つツールを提供します。詳細は、[ログリストのセクション][3]を参照してください。
+
+{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="ログリスト" style="width:60%;" >}}
+
+### ログパターン
+
+Log Patterns はインデックス化されたログを同じような構造を持つ**一握りのグループ**に自動的に集約します。詳細は、[Log Patterns セクション][4]を参照してください。
+
+{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
+
+### ログ分析
+
+Log Analytics はログクエリを**グラフ**し、最大値、平均値、パーセンタイル、ユニーク数などを表示します。グラフの作成方法のオプションに関する詳細は、[ログのグラフガイド][5]を参照してください。
+
+{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics" style="width:60%;" >}}
+
+## Log Side Panel
+
+Datadog は次の一般的なサイドパネルレイアウトに従い、個々のログを表示します。
+
+{{< img src="logs/explorer/log_side_panel.png" alt="Log Side Panel"  style="width:60%;">}}
+
+### ログの構造化された情報
+
+- パネルの上部には、一般的な**コンテンツ**情報が表示されます。
+- パネルの下部には、ログの実際の**コンテンツ**が表示されます。
+
+**コンテキスト**とは、ログが生成されたインフラストラクチャーとアプリケーションコンテキストのことです。情報はタグから収集され、自動的に添付（ホスト名、コンテナ名、ログファイル名、サーバーレス関数名など）される方法と、Datadog Agent または Log Forwarder によりログのカスタムタグ（担当チーム、環境、アプリケーションのバージョンなど）で追加される方法があります。
+
+**コンテンツ**はログそのものを指します。これには、ログメッセージと [Log Pipelines][6]を介してログから抽出され強化された構造化情報も含まれます。技術的スタックの一般的なコンポーネントから生成されたログは、すぐにパースして補完することができます。
+
+- ファイルログ収集の場合、ファイルログ収集をトリガーするソースフィールドが正しく設定されていることを確認してください。詳細は Datadog の [100 以上のログインテグレーション][7]を参照してください。
+- コンテナログの収集には、[オートディスカバリー][8]を使用します。
+
+ログパネルは、`error.stack`、`http.method`、`duration` などの一部の標準フィールドが拡張され、読みやすくなっています。ログから対応する情報を抽出し、[標準の属性リマッパー][9]を使用して属性を再マップしてください。
+
+### 他のデータソースへのハブ
+
+#### インフラストラクチャー（ホスト、コンテナ、サーバーレス）データとの相関
+
+**View in context** ボタンをクリックすると、検索リクエストが更新され、選択したログの直前と直後の日付のログ行が、フィルターに一致しないログ行も含めて表示されます。Datadog は、ログの適切なコンテキストを探すために、タグと共に `Hostname`、`Service`、`filename`、`container_id` の各属性を使用するため、このコンテキストは状況によって異なります。
+
+**メトリクスタブ** をクリックし、ログの 30 分の時間枠で基底のインフラストラクチャーメトリクスにアクセスします。
+
+上部の予約済み属性セクション、関連する[ホストダッシュボード][10]、[ネットワークページ][11]の  **ホスト** を操作します。**コンテナ**セクションを操作し、基底のパラメータにスコープされた[コンテナページ][12]に移動します。 
+
+{{< img src="logs/explorer/log_side_panel_infra.gif" alt="インフラへのハブ" style="width:60%;">}}
+
+サーバレスのソースからのログの場合、ホストセクションは対応する[サーバレスページ][13]へのリンクを持つサーバレスセクションに置き換えられます。
+
+{{< img src="logs/explorer/log_side_panel_infra-serverless.png" alt="サーバレスへのハブ" style="width:60%;">}}
+
+
+#### APM データとの相関
+
+[ログへのトレース挿入][14]が有効であることを確認し、[統合サービスタグ付け][15]のベストプラクティスに従い、ログと APM 相関の全機能を活用します。
+
+**APM タブ**をクリックし、アップストリームおよびダウンストリームのサービスが実行されている状態で、トレース全体のコンテキストでログを確認します。APM データおよび [APM のトレース][16]を深く掘り下げます。
+
+**サービス**セクションを操作して、ログエクスプローラでの検索に再注目し同じトレースからのすべてのログを確認します。
+
+{{< img src="logs/explorer/log_side_panel_infra.gif" alt="APM へのハブ" style="width:60%;">}}
+
+
+### トラブルシューティングのコンテキストを構成
+
+下部の JSON セクションで、属性の名前と値を利用して以下の操作を行います。
+
+- ログテーブルに列を追加または削除します。
+- 検索リクエストに特定の値 (include または exclude) を付加します。
+
+{{< img src="logs/explorer/side_panel_context.gif" alt="サイドパネルコンテキスト"  style="width:60%;">}}
+
+- 属性からファセットまたはメジャーを作成/編集します。[ログファセット][17]を参照してください。
+
+{{< img src="logs/explorer/side_panel_facets.gif" alt="サイドパネルファセット"  style="width:60%;">}}
+
+### ログの共有
+
+**Share** ボタンを使用すると、サイドパネルで開いているログを他のコンテキストと共有できます。
+
+- **Copy to clipboard** または `Ctrl+C` / `Cmd+C` を使用して、ログの JSON をクリップボードにコピーします。
+- **Share Event** では、電子メールや Slack などを使って、ログを (基底のビューと一緒に) チームメイトと共有できます。使用可能なすべての [Datadog 通知インテグレーション][18]を参照してください。
+
+{{< img src="logs/explorer/upper_log_panel.png" alt="上部ログパネル"  style="width:50%;">}}
+
+## トラブルシューティングのコンテキスト
+
+### 検索フィルター
+
+ログエクスプローラービューでログを調査するためのコンテキストを構築します。それには、適切なタイムレンジを選択し、検索バーを使用してログストリームやログ分析を絞り込みます。
+
+**タイムレンジ**
 
 <mrk mid="27" mtype="seg">タイムレンジ機能を使用して、特定の期間内のログをログストリームやログ分析に表示できます。</mrk>
 <mrk mid="28" mtype="seg">タイムレンジは、検索バーのすぐ下にタイムラインとして表示されます。</mrk><mrk mid="29" mtype="seg">タイムラインは、ログストリームオプションパネルの **Show timeline** チェックボックスを使用して、展開したり折りたたんだりすることができます。</mrk>
 
-タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します。
+タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンから選択します (または、[カスタムタイムフレームを入力します][19]):
 
 {{< img src="logs/explorer/timerange.png" style="width:50%;" alt="タイムレンジ"  >}}
 
-### 検索
+**検索**
 
 ファセット、メジャー、タグ、または[フリーテキスト検索][1]を使用して、ログストリームやログ分析をコンテキストで絞り込むことができます。検索バーと URL には、選択内容が自動的に反映されます。
 
 ログエクスプローラーのすべての検索機能 (ワイルドカードの使用、数値のクエリなど) の詳細は、[ログ検索ガイド][1]を参照してください。
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="ログの検索" video="true"  >}}
-
 ### 保存済みビュー
 
-保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にログエクスプローラーを構成できます。詳細については、[保存済みビューに関するドキュメント][2]を参照してください。
-
-### 共有ビュー
-
-*共有*機能を使用して、現在のログ表示をエクスポートします。
-
-{{< img src="logs/explorer/send_view_to.png" alt="ビューを送信"  style="width:60%;">}}
-
-*共有*ボタンを使用して、現在のログエクスプローラービューを CSV ファイルやチームメンバーに送信したり、モニターを作成したりします。
-
-{{< tabs >}}
-{{% tab "Log Search" %}}
-
-| ボタン            | 説明                                                                                                          |
-|-------------------|----------------------------------------------------------------------------------------------------------------------|
-| Export to Monitor | 新しい[ログモニター][1]用のクエリを作成するために、ログストリームに適用されるクエリをエクスポートします。       |
-| Export to CSV     | 選択された列と共に現在のログストリームビューを CSV ファイルにエクスポートします。一度に最大 5,000 個のログをエクスポートできます。 |
-| Share View     | 現在のビューへのリンクを、電子メールや Slack などを使ってチームメイトと共有します。使用可能なすべての [Datadog 通知インテグレーション][2]を参照してください。 |
-
-[1]: /ja/monitors/monitor_types/log
-[2]: /ja/integrations/#cat-notification
-{{% /tab %}}
-{{% tab "Log Analytics" %}}
-
-| ボタン              | 説明                                                                                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Export to Monitor   | 新しい[ログモニター][1]用のクエリを作成するために、ログ分析に適用されるクエリをエクスポートします。 |
-| Export to Dashboard | 現在の分析をウィジェットとして既存または新しい[ダッシュボード][2]にエクスポートします。 |
-| Generate new Metric | 現在の分析クエリから[新しいメトリクスを生成][3]します。  |
-
-
-[1]: /ja/monitors/monitor_types/log
-[2]: /ja/dashboards/
-[3]: /ja/logs/logs_to_metrics/
-{{% /tab %}}
-{{< /tabs >}}
-
-## 視覚化
-
-ログ検索モードとログ分析モードを切り替えるには、ページの左上にある **Log Mode** ボタンをクリックします。
-
-{{< tabs >}}
-{{% tab "Log Search" %}}
-
-ログ検索は、選択されたコンテキストに一致するログのリストです。コンテキストは、[検索バー][1]のフィルターと[タイムレンジ](#time-range)で定義されます。
-
-### ログテーブル
-
-ログ検索はログテーブルに表示されます。
-
-"Options" ボタンを使用して、ログテーブルの内容をニーズと好みに合わせて構成します。カスタム属性のうち列として使用できる属性は、ファセットとメジャーだけです。
-
-ログの結果は日付順で並べ替えられ、デフォルトでは最新の結果が先頭に表示されます。日付のソート順を逆にして、タイムレンジ内で最も古い結果を先頭に表示することもできます。
-
-{{< img src="logs/explorer/logtable_config.png" alt="表示テーブルを構成"  style="width:50%;">}}
-
-### ログパネル
-
-任意のログ行をクリックするとログパネルが開き、ログの元メッセージ、抽出された属性、タグ (先頭にホスト、サービス、ソースのタグ) などの詳細が表示されます。
-
-ログパネルは、`error.stack`、`http.method`、`duration` などの一部の標準属性がハイライトされ、読みやすくなっています。ログから対応する情報を抽出し、[標準の属性リマッパー][2]を使用して属性を再マップしてください。
-
-下部の JSON セクションで、属性の名前と値を利用して以下の操作を行います。
-
-* 属性からファセットまたはメジャーを作成/編集します。このアクションは、前のログには適用されません。
-* ログテーブルに列を追加または削除します。
-* 検索リクエストに特定の値 (include または exclude) を付加します。
-
-{{< img src="logs/explorer/attribute_actions.png" alt="表示テーブルを構成"  style="width:20%;">}}
-
-上部の予約済み属性セクションで、以下の操作を行います。
-
-* **Host**: ホストのダッシュボードにアクセスするか、検索リクエストにログの `host` を付加します。
-* **Service**: APM にトレースを表示するか、検索リクエストにトレース ID を付加するか (どちらの場合も、ログに `trace_id` 属性が必要。[ログへのトレース挿入][3]を参照)、検索リクエストにログの `service` を付加します。
-* **Source**: 検索リクエストにログの `source` を付加します。
-
-**View in context** ボタンをクリックすると、検索リクエストが更新され、選択したログの直前と直後の日付のログ行が、フィルターに一致しないログ行も含めて表示されます。Datadog は、ログの適切なコンテキストを探すために、タグと共に `Hostname`、`Service`、`filename`、`container_id` の各属性を使用するため、このコンテキストは状況によって異なります。
-
-**Share** ボタンを使用すると、サイドパネルで開いているログを他のコンテキストと共有できます。
-
-* **クリップボードにコピー** または `Ctrl+C` / `Cmd+C`を使用して、ログの JSON をクリップボードにコピーします。
-* **Share Event** では、電子メールや Slack などを使って、ログを (基底のビューと一緒に) チームメイトと共有できます。使用可能なすべての [Datadog 通知インテグレーション][2]を参照してください。
-
-{{< img src="logs/explorer/upper_log_panel.png" alt="表示テーブルを構成"  style="width:50%;">}}
-
-[1]: /ja/logs/explorer/search
-[2]: /ja/logs/processing/attributes_naming_convention
-[3]: /ja/tracing/connect_logs_and_traces
-{{% /tab %}}
-{{% tab "Log Analytics" %}}
-
-[Datadog の処理][1] (ログのパース) が終了し、重要な属性に対して[ファセット](#setup)と[メジャー](#setup)を設定したら、ログクエリをグラフにしたり、最大値、平均値、パーセンタイル、ユニーク数などを表示することができます。
-
-すべてのグラフ作成オプションについては、[ログのグラフ作成ガイド][2]を参照してください。
-
-{{< img src="logs/explorer/log_analytics.png" alt="ログ分析"  style="width:70%;">}}
-
-[1]: /ja/logs/processing
-[2]: /ja/logs/explorer/analytics
-{{% /tab %}}
-{{% tab "Log Patterns" %}}
-
-大量のログデータを調査するには、膨大な時間がかかることがあります。調査に数時間かけても、ログの一部しか解析できないこともあります。ただし実際のログは、その一部が異なる他は、ほぼ内容が同じであることがよくあります。これをパターンと呼びます。
-
-ログエクスプローラーでは、パターンを自動的に表面化し、問題を浮き彫りにすることができます。これは、重要な事項をすばやく明らかにすると共に、無関係な事項を除外します。
-
-詳細については、[ログパターンのセクション][1]を参照してください。
-
-{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns"  style="width:70%;">}}
-
-[1]: /ja/logs/explorer/patterns
-{{% /tab %}}
-{{< /tabs >}}
-
-## セットアップ
-
-パイプラインとプロセッサーを使用して処理を行うと、ログ属性にファセットまたはメジャーのインデックスを付けることで、[コンテキスト](#context)の作成時または[ログの分析][3]時に利用できるようになります。
-
-**注**:
-
-* ログエクスプローラービューを最大限に活用するには、ログ属性が[Datadog の属性命名規則][4]に従っていることを確認してください。
-
-* [予約済み属性][5]のファセットは、デフォルトで使用可能です。
-
-{{< tabs >}}
-{{% tab "Facets" %}}
-
-ファセットは、1 つの属性またはタグの個別メンバーをすべて表示すると共に、示されたログの数などのいくつかの基本分析も提供します。ファセットを使用すると、特定の属性に基づいてデータセットを絞り込んだり、データセットの切り口を変えることができます。絞り込むには、表示させたい値を選択します。
-
-{{< img src="logs/explorer/facets_demo.png" alt="ファセットのデモ"  style="width:80%;">}}
-
-**ファセットの作成**:
-
-属性をファセットとして使用したり、検索で使用したりするには、属性をクリックしてファセットとして追加します。
-
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="ファセットの作成"  >}}
-
-これで、この属性の値が**すべての新しいログに**格納され、[検索バー][1]、ファセットパネル、および[ログ分析クエリ][2]で使用できるようになります。
-
-[1]: /ja/logs/explorer/search
-[2]: /ja/logs/explorer/analytics
-{{% /tab %}}
-
-{{% tab "Measures" %}}
-
-メジャーは、ログに含まれる数値を持つ属性です。
-
-**メジャーの作成**:
-
-属性をメジャーとして使用するには、ログの数値属性をクリックします。
-
-{{< img src="logs/explorer/create_a_mesure.png" alt="メジャーの作成"  style="width:30%;">}}
-
-これで、この属性の値が**すべての新しいログに**格納され、[検索バー][1]、ファセットパネル、および[ログ分析クエリ][2]で使用できるようになります。
-
-**メジャー単位の選択**:
-
-各メジャーは独自の単位を持ち、ログエクスプローラーの列、ダッシュボードのログストリームウィジェット、およびログ分析への表示に使用されます。
-
-{{< img src="logs/explorer/edit_a_measure.png" alt="メジャーの編集"  style="width:50%;">}}
-
-[1]: /ja/logs/explorer/search
-[2]: /ja/logs/explorer/analytics
-{{% /tab %}}
-{{< /tabs >}}
+保存済みビューを使用すると、事前に選択したファセット、メジャー、検索、タイムレンジ、および可視化方法の組み合わせで、自動的にログエクスプローラーを構成できます。詳細については、[保存済みビューに関するドキュメント][20]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/search
-[2]: /ja/logs/explorer/saved_views
-[3]: /ja/logs/explorer/analytics
-[4]: /ja/logs/processing/attributes_naming_convention
-[5]: /ja/logs/processing/#reserved-attributes
+[1]: /ja/logs/search-syntax/
+[2]: /ja/logs/explorer/live_tail/
+[3]: /ja/logs/explorer/list/
+[4]: /ja/logs/explorer/patterns/
+[5]: /ja/logs/explorer/analytics/
+[6]: /ja/logs/processing/pipelines/
+[7]: /ja/integrations/#cat-log-collection
+[8]: /ja/agent/autodiscovery/integrations/?tab=kubernetes
+[9]: /ja/logs/processing/attributes_naming_convention/
+[10]: /ja/dashboards/#preset-lists
+[11]: /ja/network_performance_monitoring/network_page/
+[12]: /ja/infrastructure/livecontainers/?tab=linuxwindows#introduction
+[13]: /ja/infrastructure/serverless/#function-detail-view
+[14]: /ja/tracing/connect_logs_and_traces/
+[15]: /ja/getting_started/tagging/unified_service_tagging
+[16]: /ja/tracing/app_analytics/search/#displaying-a-full-trace
+[17]: /ja/logs/explorer/facets/#overview
+[18]: /ja/logs/processing/
+[19]: /ja/dashboards/guide/custom_time_frames
+[20]: /ja/logs/explorer/saved_views/

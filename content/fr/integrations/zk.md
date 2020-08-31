@@ -2,7 +2,11 @@
 aliases:
   - /fr/integrations/zookeeper
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: zookeeper
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +46,7 @@ supported_os:
 
 Le check ZooKeeper vérifie les connexions client et les latences, surveille le nombre de requêtes non traitées et bien plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -56,7 +60,7 @@ Depuis la version 3.5 de Zookeeper, le paramètre `4lw.commands.whitelist` (voi
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `zk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) ZooKeeper.
    Consultez le [fichier d'exemple zk.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.

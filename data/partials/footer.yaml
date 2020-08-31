@@ -16,6 +16,9 @@ col1:
   - name: apm
     link: "https://www.datadoghq.com/product/apm/"
     title: "APM"
+  - name: profiler
+    link: "https://www.datadoghq.com/product/code-profiling/"
+    title: "Continuous Profiler"
   - name: security-monitoring
     link: "https://www.datadoghq.com/product/security-monitoring/"
     title: "Security Monitoring"
@@ -34,9 +37,6 @@ col1:
   - name: alerts
     link: "https://www.datadoghq.com/product/platform/alerts/"
     title: "Alerts"
-  - name: synthetics
-    link: "https://www.datadoghq.com/product/synthetics-monitoring/"
-    title: "Synthetics"
 col2:
   - name: pricing
     link: "https://www.datadoghq.com/pricing/"

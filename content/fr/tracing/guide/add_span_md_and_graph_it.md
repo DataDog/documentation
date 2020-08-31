@@ -5,7 +5,7 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
     text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
     text: Comparer la latence d'un service avec celle de la semaine précédente
   - link: /tracing/guide/apm_dashboard/
@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/guide/slowest_request_daily/
     tag: "3\_minutes"
     text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: Tous les guides
 ---
@@ -288,7 +288,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /fr/tracing/app_analytics/search
+[7]: /fr/tracing/app_analytics/search/
 [8]: https://app.datadoghq.com/apm/search/analytics
-[9]: /fr/tracing/app_analytics/analytics
-[10]: /fr/tracing/guide/alert_anomalies_p99_database
+[9]: /fr/tracing/app_analytics/analytics/
+[10]: /fr/tracing/guide/alert_anomalies_p99_database/

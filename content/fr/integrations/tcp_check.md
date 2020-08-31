@@ -4,6 +4,7 @@ aliases:
   - /fr/integrations/tcpcheck
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -39,7 +40,7 @@ supported_os:
 
 Surveillez la connectivité TCP et le délai de réponse pour n'importe quel host ou port.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -49,7 +50,7 @@ Le check TCP est inclus avec le package de [l'Agent Datadog][2] : vous n'avez d
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 Modifiez le fichier `tcp_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple tcp_check.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
 

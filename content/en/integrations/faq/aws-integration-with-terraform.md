@@ -64,4 +64,4 @@ resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
 
 [1]: https://www.terraform.io
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: /integrations/amazon_web_services/#datadog-aws-iam-policy
+[3]: /integrations/amazon_web_services/?tab=manual#all-permissions

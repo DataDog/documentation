@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.npmjs.com/package/@datadog/browser-logs'
     tag: NPM
     text: '@datadog/browser-logs NPM パッケージ'
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
 ---
@@ -34,52 +34,50 @@ Datadog のクライアント側 JavaScript ロギングライブラリ `datadog
 
 `package.json` ファイルに [`@datadog/browser-logs`][3] を追加したら、以下を使い初期化します。
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'us',
+  site: 'datadoghq.com',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'eu',
+  site: 'datadoghq.eu',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### バンドルの設定
 
 ログやエラーを取りこぼさないよう、ライブラリのロードと構成をページのヘッドセクションの先頭で行います。
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.com',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -88,17 +86,18 @@ datadogLogs.init({
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.eu',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -107,8 +106,7 @@ datadogLogs.init({
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
 
@@ -119,7 +117,10 @@ datadogLogs.init({
 | パラメーター             | 種類    | 必須 | デフォルト | 説明                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | 文字列  | はい      | `-`     | [Datadog クライアントトークン][2]。                                                                             |
-| `datacenter`          | 文字列  | はい      | `us`    | 所属する組織の Datadog サイト。`us` はアメリカの Datadog のサイト、 `eu` は EU の Datadog サイト。               |
+| `site`               | 文字列  | はい      | `datadoghq.com`    | 所属する組織の Datadog サイト。`datadoghq.com` はアメリカの Datadog のサイト、 `datadoghq.eu` は EU の Datadog サイト。               |
+| `service`            | 文字列  | ✕       | `` | このアプリケーションのサービス名。                             |
+| `env`                | 文字列  | ✕       | `` | アプリケーションの環境 (例: prod、pre-prod、staging)                   |
+| `version`            | 文字列  | ✕       | `` | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                   |
 | `forwardErrorsToLogs` | Boolean | いいえ       | `true`  | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。 |
 | `sampleRate`          | 数値  | いいえ       | `100`   | 追跡するセッションの割合。追跡されたセッションのみログを送信します。`100` は全てを、`0` は皆無を意味します。   |
 
@@ -241,7 +242,7 @@ createLogger (name: string, conf?: {
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+datadogLogs.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 ```
 
 これで、次のように、このロガーをコードの別の場所で使用できます。
@@ -258,7 +259,7 @@ signupLogger.info('Test sign up completed')
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 }
 ```
 
@@ -291,7 +292,7 @@ Datadog ブラウザのログライブラリを初期化すると、以下のこ
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLoggerGlobalContext("{'env', 'staging'}");
+datadogLogs.setLoggerGlobalContext("{'env': 'staging'}");
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -300,7 +301,7 @@ datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -323,7 +324,7 @@ window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setContext("{'env', 'staging'}");
+datadogLogs.setContext("{'env': 'staging'}");
 
 datadogLogs.addContext('referrer', document.referrer);
 ```
@@ -332,7 +333,7 @@ datadogLogs.addContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}");
 
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 ```

@@ -5,23 +5,38 @@ col1:
     link: 'https://www.datadoghq.com/ja/product/'
     title: 機能
   - name: integrations
-    link: 'https://www.datadoghq.com/ja/product/integrations/'
+    link: 'https://www.datadoghq.com/product/platform/integrations/'
     title: インテグレーション
-  - name: apm
-    link: 'https://www.datadoghq.com/ja/apm/'
-    title: APM
+  - name: ダッシュボード
+    link: 'https://www.datadoghq.com/product/platform/dashboards/'
+    title: ダッシュボード
   - name: logs
-    link: 'https://www.datadoghq.com/ja/log-management/'
+    link: 'https://www.datadoghq.com/product/log-management/'
     title: ログ管理
-  - name: dashboards
-    link: 'https://www.datadoghq.com/ja/dashboarding/'
-    title: 'ダッシュボード  '
+  - name: apm
+    link: 'https://www.datadoghq.com/product/apm/'
+    title: APM
+  - name: security-monitoring
+    link: 'https://www.datadoghq.com/product/security-monitoring/'
+    title: セキュリティモニタリング
+  - name: ネットワーク
+    link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
+    title: ネットワークモニタリング
   - name: synthetics
-    link: 'https://www.datadoghq.com/ja/synthetics/'
-    title: Synthetics
+    link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    title: Synthetic の監視
+  - name: rum
+    link: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    title: リアルユーザーモニタリング
+  - name: サーバーレス
+    link: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    title: サーバーレス
   - name: alerts
-    link: 'https://www.datadoghq.com/ja/alerts/'
+    link: 'https://www.datadoghq.com/product/platform/alerts/'
     title: アラート
+  - name: synthetics
+    link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
+    title: Synthetics
 col2:
   - name: pricing
     link: 'https://www.datadoghq.com/ja/pricing/'
@@ -80,11 +95,11 @@ col4:
     link: 'https://www.instagram.com/datadoghq/'
     title: Instagram
   - name: linkedin
-    link: "https://www.LinkedIn.com/company/datadog/"
-    title: "LinkedIn"
+    link: 'https://www.LinkedIn.com/company/datadog/'
+    title: LinkedIn
   - name: twitter
-    link: "https://twitter.com/datadoghq"
-    title: "Twitter"
+    link: 'https://twitter.com/datadoghq'
+    title: Twitter
   - name: youtube
-    link: "https://www.youtube.com/user/DatadogHQ/"
-    title: "YouTube"
+    link: 'https://www.youtube.com/user/DatadogHQ/'
+    title: YouTube

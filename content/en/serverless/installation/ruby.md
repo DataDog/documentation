@@ -10,7 +10,7 @@ further_reading:
       text: 'Installing Ruby Serverless Monitoring'
 ---
 
-After you have [installed the AWS integration][1], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -22,23 +22,25 @@ The minor version of the `datadog-lambda` gem always matches the layer version. 
 
 #### Using the Layer
 
-[Configure the layers][2] for your Lambda function using the ARN in the following format:
+[Configure the layers][3] for your Lambda function using the ARN in the following format.
 
 ```
+# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# For us-gov regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-For example:
+The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For `VERSION`, see the [latest release][4]. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 ```
 
-The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For more information, see the [latest release][3].
-
 #### Using the Gem
 
-Add the following line to your Gemfile. See the [latest release][4].
+Add the following line to your Gemfile. See the [latest release][5].
 
 ```
 gem 'datadog-lambda'
@@ -51,13 +53,15 @@ Keep in mind that `ddtrace` uses native extensions, which must be compiled for A
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
 
-1. [Install the Datadog Forwarder if you haven't][5].
+1. [Install the Datadog Forwarder if you haven't][2].
 2. [Ensure the option DdFetchLambdaTags is enabled][6].
 3. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless page][8]. If you need to submit a custom metric, refer to the sample code below:
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][8].
+
+If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
 ```ruby
 require 'ddtrace'
@@ -91,10 +95,10 @@ end
 
 
 [1]: /serverless/#1-install-the-cloud-integration
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[3]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
-[4]: https://rubygems.org/gems/datadog-lambda
-[5]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder
-[6]: https://docs.datadoghq.com/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[2]: https://docs.datadoghq.com/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[4]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
+[5]: https://rubygems.org/gems/datadog-lambda
+[6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://app.datadoghq.com/functions

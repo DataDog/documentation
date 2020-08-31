@@ -28,7 +28,7 @@ Only [Admin and Standard users][3] can access Synthetic Monitoring `Settings` pa
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the [Global Variables][6] tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
 {{< tabs >}}
@@ -87,3 +87,4 @@ If the endpoint is being traced and allowed, your browser test results are then 
 [3]: /account_management/users/default_roles/
 [4]: /synthetics/api_tests/#use-global-variables
 [5]: /synthetics/browser_tests/#use-global-variables
+[6]: https://app.datadoghq.com/synthetics/settings/variables

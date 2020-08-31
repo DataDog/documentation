@@ -25,9 +25,9 @@ Once the threshold is defined and your requests are categorized, the apdex is de
 
 {{< img src="tracing/faq/apdex_formula.png" alt="Apdex formula"  >}}
 
-Selecting the correct threshold is really important since the Frustrated requests are 4 times slower than "normal". If T=3 you can wait 3 seconds for a page to load by you might not tolerate waiting until 12 seconds.
+Selecting the correct threshold is really important since the Frustrated requests are 4 times slower than "normal". If T=3 you can wait 3 seconds for a page to load but you might not tolerate waiting until 12 seconds.
 
-That's why the default Apdex threshold value used by your Datadog application is 0.5 second But you can change its value directly on your service board.
+That's why the Apdex thresholds need to be set by admins, per service, before they are calculated.
 
 ## Set your Apdex for your traces
 

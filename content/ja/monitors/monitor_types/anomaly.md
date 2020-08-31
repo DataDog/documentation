@@ -5,13 +5,13 @@ aliases:
   - /ja/guides/anomalies
 description: メトリクスの異常動作を履歴データに基づいて検出する
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスの参照
 ---
@@ -42,7 +42,7 @@ Datadog で[異常検知モニター][1]を作成するには、メインナビ�
 * 直近 `15 minutes`、`1 hour`、`2 hours` などの範囲
 * 値が最低 `15 minutes`、`1 hour`、`2 hours` などの範囲内の場合、リカバリする
 
-**異常検知** - デフォルト (`above or below`) では、メトリクスが灰色の範囲外にある場合、異常とみなされます。範囲の `above` または `below` にある場合のみを異常とみなすよう指定することもできます。
+**異常検知** - デフォルト (`above or below`) では、メトリクスが灰色の範囲外にある場合、異常とみなされます。範囲の `above` または `below` にある場合のみを異常とみなすよう任意で指定することもできます。
 
 **トリガーウィンドウ** - メトリクスの異常が検知されアラートを発するまでに必要な時間。**注意**: アラート設定ウィンドウがあまりに短いと、疑似ノイズにより不正アラームが発せられることがあります。
 
@@ -112,7 +112,30 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 ## API
 
-エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][9]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][10]して API のクエリを作成することを推奨しています。
+エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][9]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][10]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
+
+**注**: 異常検知モニターは、エンタープライズレベルのお客様専用のサービスです。プロレベルのお客様で、異常検知モニターのご利用を希望される場合は、カスタマーサクセス担当者にお問い合わせいただくか、[Datadog 請求担当チーム][11]にメールでお問い合わせください。
+
+異常モニターは、他のモニターと[同じ API][12] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
+
+### `query`
+
+リクエストの本文の `query` プロパティには、次の形式のクエリ文字列を含める必要があります。
+
+```text
+avg(<query_window>):anomalies(<metric_query>, ‘<algorithm>’, <deviations>, direction=’<direction>’, alert_window=’<alert_window>’, interval=<interval>, count_default_zero=’<default_zero>’ [, seasonality=’<seasonality>’]) >= <threshold>
+```
+
+* `query_window`: `last_4h` や `last_7d` などのタイムフレーム。通知のグラフに表示される時間ウィンドウ。少なくとも `alert_window` と同じ大きさでなければならず、`alert_window` の約 5 倍にすることをお勧めします
+* `metric_query`: 標準の Datadog メトリクスクエリ (例: `sum:trace.flask.request.hits{service:web-app}.as_count()`)
+* `algorithm`: `basic`、`agile`、または `robust`
+* `deviations`: 正の数。異常検出の感度を制御します
+* `direction`: アラートをトリガーする異常の方向性。`above`、`below`、または `both`
+* `alert_window`: 異常をチェックするタイムフレーム (例: `last_5m`、`last_1h`)
+* `interval`:ロールアップ間隔の秒数を表す正の整数。`interval` は少なくとも `alert_window` 期間の 5 分の 1 にすることをお勧めします
+* `default_zero`: ほとんどのモニターでは `true` を使用します。値の欠如をゼロとして解釈してはならないカウントメトリクスを送信する場合にのみ、`false` に設定します
+* `seasonality`: `hourly`、`daily`、または `weekly`。`basic` アルゴリズムを使用するときはこのパラメーターを除外します
+* `threshold`: 1 以下の正の数。クリティカルアラートをトリガーするために異常である必要がある `alert_window` 内のポイントの割合
 
 下記の例は、異常検知モニターのクエリを示したものです。Cassandra ノードの平均 CPU が直近 5 分間で通常値を上回る 3 つの標準偏差である場合にアラートを発します。
 
@@ -120,28 +143,56 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
-**注**: 異常検知モニターは、エンタープライズレベルのお客様専用のサービスです。プロレベルのお客様で、異常検知モニターのご利用を希望される場合は、カスタマーサクセス担当者にお問い合わせいただくか、[Datadog 請求担当チーム][11]にメールでお問い合わせください。
+### `options`
+
+`thresholds` と `threshold_windows` を除いて、リクエスト本文の `options` にあるほとんどのプロパティは、他のクエリアラートと同じです。
+
+**`thresholds`**
+
+異常モニターは、`critical`、`critical_recovery`、`warning`、`warning_recovery` のしきい値をサポートします。しきい値は 0 から 1 までの数値で表され、異常である関連ウィンドウの割合として解釈されます。たとえば、`critical` のしきい値が `0.9` の場合、`trigger_window` (以下で説明) のポイントの少なくとも 90％ に異常があると、クリティカルアラートがトリガーされます。または、`warning_recovery` の値が 0 の場合、`recovery_window` のポイントの 0％ が異常である場合にのみ、モニターが警告状態から回復します。
+
+`critical` `threshold` は、`query` で使用される `threshold` と一致する必要があります。
+
+**`threshold_windows`**
+
+異常モニターでは、`options` に `threshold_windows` プロパティがあります。`threshold_windows` には、`trigger_window` と `recovery_window` の 2 つのプロパティの両方を含める必要があります。これらのウィンドウは、`last_10m` や `last_1h` などのタイムフレーム文字列として表現されます。`trigger_window` は、`query` の `alert_window` と一致する必要があります。`trigger_window` は、モニターをトリガーする必要があるかどうかを評価するときに異常について分析される時間範囲です。`recovery_window` は、トリガーされたモニターを回復する必要があるかどうかを評価するときに異常を分析した時間範囲です。
+
+しきい値としきい値ウィンドウの標準コンフィギュレーションは次のようになります。
+
+```json
+"options": {
+  ...
+  "thresholds": {
+    "critical": 1,
+    "critical_recovery": 0
+  },
+  "threshold_windows": {
+    "trigger_window": "last_30m",
+    "recovery_window": "last_30m"
+  }
+}
+```
 
 ## トラブルシューティング
 
-* [異常検知モニターに関する FAQ][12]
-* [Datadog サポートへのお問合せ][13]
+* [異常検知モニターに関する FAQ][13]
+* [Datadog サポートへのお問い合わせ][14]
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /ja/monitors/monitor_types/metric/#define-the-metric
 [3]: /ja/dashboards/functions/algorithms/#anomalies
-[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /ja/dashboards/functions/rollup
+[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /ja/dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /ja/monitors/notifications
-[9]: /ja/api/#monitor-create
+[8]: /ja/monitors/notifications/
+[9]: /ja/api/v1/monitors/#create-a-monitor
 [10]: /ja/monitors/monitor_status/#settings
 [11]: mailto:billing@datadoghq.com
-[12]: /ja/monitors/faq/anomaly-monitor
-[13]: /ja/help
+[12]: /ja/api/v1/monitors/
+[13]: /ja/monitors/faq/anomaly-monitor/
+[14]: /ja/help/

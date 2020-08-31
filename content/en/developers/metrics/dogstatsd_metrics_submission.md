@@ -169,7 +169,7 @@ public class DogStatsdClient
             dogStatsdService.Configure(dogstatsdConfig);
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i--)
             {
                 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
                 dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
@@ -350,7 +350,7 @@ public class DogStatsdClient
             dogStatsdService.Configure(dogstatsdConfig);
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i--)
             {
                 dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(100000);
@@ -499,7 +499,7 @@ public class DogStatsdClient
             dogStatsdService.Configure(dogstatsdConfig);
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i--)
             {
                 dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
@@ -676,7 +676,7 @@ public class DogStatsdClient
             dogStatsdService.Configure(dogstatsdConfig);
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i--)
             {
                 dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -961,7 +961,7 @@ public class DogStatsdClient
             dogStatsdService.Configure(dogstatsdConfig);
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i--)
             {
                 dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);

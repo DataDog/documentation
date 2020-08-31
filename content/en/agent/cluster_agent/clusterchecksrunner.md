@@ -85,4 +85,4 @@ Use `podAntiAffinity` to avoid having multiple Cluster Checks Runners on the sam
 [2]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [3]: https://docs.datadoghq.com/agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/datadog-operator
-[5]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml

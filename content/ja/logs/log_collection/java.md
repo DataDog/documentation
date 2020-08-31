@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /ja/logs/languages/java
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: ログ分析の実行
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: ログ収集のトラブルシューティングガイド
   - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
@@ -74,7 +74,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /ja/tracing/connect_logs_and_traces/java
+[1]: /ja/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -102,7 +102,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /ja/tracing/connect_logs_and_traces/java
+[1]: /ja/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -137,7 +137,7 @@ APM が有効になっているアプリケーションで、アプリケーシ�
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /ja/tracing/connect_logs_and_traces/java
+[1]: /ja/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -181,7 +181,7 @@ log4j-over-slf4j が正しく機能するには、slf4j 連結とその依存関
 
 APM が有効になっているアプリケーションで、アプリケーションログとトレースの関連付けを改善したい場合は、[こちらの説明に従い][1]、[MDC (マップされた診断コンテキスト)][2] を使用して JSON ログに自動的にトレースおよびスパン ID が追加されるように設定します。
 
-[1]: /ja/tracing/connect_logs_and_traces/java
+[1]: /ja/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -285,7 +285,7 @@ Logback 用の JSON ライブラリとしては [logstash-logback-encoder][1] �
 APM が有効になっているアプリケーションで、アプリケーションログとトレースの関連付けを改善したい場合は、[こちらの説明に従い][2]、[MDC (マップされた診断コンテキスト)][3] を使用して JSON ログに自動的にトレースおよびスパン ID が追加されるように設定します。
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /ja/tracing/connect_logs_and_traces/java
+[2]: /ja/tracing/connect_logs_and_traces/java/
 [3]: http://logback.qos.ch/manual/mdc.html
 {{< tabs >}}
 {{% tab "Files" %}}
@@ -418,6 +418,8 @@ Logback [logstash-logback-encoder][1] をクラスパスに追加するには、
 
 ログを Datadog に直接ストリーミングするように Logback ロガーを構成するには、`logback.xml` ファイルに以下のコードを追加します。
 
+{{< site-region region="us" >}}
+
 ```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
@@ -425,7 +427,7 @@ Logback [logstash-logback-encoder][1] をクラスパスに追加するには、
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <remoteHost>intake.logs.datadoghq.com</remoteHost>
     <port>10514</port>
-    <keepAliveDuration>1 minute</keepAliveDuration>
+    <keepAliveDuration>20 seconds</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
@@ -440,11 +442,37 @@ Logback [logstash-logback-encoder][1] をクラスパスに追加するには、
 </root>
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```xml
+<appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+</appender>
+<appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
+    <port>1883</port>
+    <keepAliveDuration>20 seconds</keepAliveDuration>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
+            </layout>
+          </prefix>
+    </encoder>
+</appender>
+<root level="debug">
+    <appender-ref ref="JSON_TCP" />
+    <appender-ref ref="JSON" />
+</root>
+```
+
+{{< /site-region >}}
+
 **注:**
 
 * `<API_キー>` を Datadog API キー値に置き換えてください。
 * `%mdc{keyThatDoesNotExist}` が追加されているのは、[こちら][4]で説明されているように、この XML 構成ではスペースが削除されてしまうためです。
-* [EU サイトで使用可能なエンドポイント][5]のリストを参照してください。
 
 prefix パラメーターの詳細については、[Logback に関するドキュメント][4]を参照してください。
 
@@ -454,7 +482,7 @@ prefix パラメーターの詳細については、[Logback に関するドキ�
 
 ### キー/値パーサーの使用
 
-[キー/値パーサー][6]は、ログイベント内で認識された `<キー>=<値>` パターンを抽出します。
+[キー/値パーサー][5]は、ログイベント内で認識された `<キー>=<値>` パターンを抽出します。
 
 Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
 
@@ -470,7 +498,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds for customer scope
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-[キー/値パーサー][6]を有効にすると、**Datadog** は、最終的な JSON ドキュメントからこれらのキー/値ペアを自動的に抽出します。
+[キー/値パーサー][5]を有効にすると、**Datadog** は、最終的な JSON ドキュメントからこれらのキー/値ペアを自動的に抽出します。
 
 ```json
 {
@@ -512,8 +540,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /ja/logs/processing/parsing
+[2]: /ja/logs/processing/parsing/
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /ja/logs/log_collection/?tab=eusite#datadog-logs-endpoints
-[6]: /ja/logs/processing/parsing/#key-value
+[5]: /ja/logs/processing/parsing/#key-value

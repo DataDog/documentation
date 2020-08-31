@@ -135,7 +135,7 @@
                             <p class="alert-warning">{{ . | markdownify }}</p>
                         </div>
                         {{ end }}
-                        <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
+                        <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType | upper }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
                         </p>
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>

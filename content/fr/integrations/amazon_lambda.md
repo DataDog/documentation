@@ -384,7 +384,10 @@ La couche Lambda Datadog prend en charge l'envoi de métriques custom de façon 
 ##### Activer les métriques custom asynchrones
 
 1. Définissez la variable d'environnement `DD_FLUSH_TO_LOG` sur `True` pour votre fonction Lambda.
-2. Installez la version 1.4.0 (ou une version supérieure) du [Forwarder Datadog][9].
+1. Si vous ne l'avez pas encore fait, configurez le Forwarder Datadog sur votre compte AWS en suivant les instructions figurant dans le [référentiel Github DataDog/datadog-serverless-functions][9].
+1. Configurez les déclencheurs entraînant l'exécution du Lambda. Il existe deux façons de les configurer :
+    - [Automatiquement][19]: We manage the log collection Lambda triggers for you if you grant us a set of permissions.
+    - [Manuellement][20]: Set up each trigger yourself via the AWS console.
 
 Si vous n'utilisez pas les logs Datadog, vous avez quand même la possibilité d'envoyer vos métriques custom de façon asynchrone. Définissez la variable d'environnement `DD_FORWARD_LOG` sur `False` pour la [fonction AWS Lambda de collecte de logs Datadog][9]. De cette façon, seules les métriques custom seront transmises à Datadog. Aucun log classique ne sera envoyé.
 
@@ -604,7 +607,7 @@ La couche Lambda Datadog est utilisée pour :
 
 ## Données collectées
 
-### Metrics
+### Métriques
 {{< get-metrics-from-git "amazon_lambda" >}}
 
 
@@ -638,9 +641,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][45].
 [8]: https://docs.datadoghq.com/fr/metrics/distributions/
 [9]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#installation
 [10]: /fr/infrastructure/serverless/datadog_lambda_layer/
-[11]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[12]: https://github.com/DataDog/datadog-lambda-layer-js/releases
-[13]: https://github.com/DataDog/datadog-lambda-layer-rb/releases
+[11]: https://github.com/DataDog/datadog-lambda-python/releases
+[12]: https://github.com/DataDog/datadog-lambda-js/releases
+[13]: https://github.com/DataDog/datadog-lambda-rb/releases
 [14]: https://github.com/DataDog/datadog-lambda-go/releases
 [15]: https://github.com/datadog/datadog-lambda-java
 [16]: https://github.com/datadog/serverless-plugin-datadog

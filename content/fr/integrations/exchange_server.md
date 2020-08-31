@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Exchange Server Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -34,7 +35,7 @@ Recueillez des métriques de Microsoft Exchange Server pour :
 
 - Visualiser et surveiller les performances d'Exchange Server
 
-## Implémentation
+## Configuration
 
 ### Installation
 

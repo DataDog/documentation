@@ -2,10 +2,10 @@
 title: Agent チェックのステータス
 kind: documentation
 further_reading:
-  - link: /agent/troubleshooting/debug_mode
+  - link: /agent/troubleshooting/debug_mode/
     tag: Agent のトラブルシューティング
     text: Agent デバッグモード
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Agent のトラブルシューティング
     text: Agent フレアの送信
 ---
@@ -137,6 +137,6 @@ sudo journalctl -u dd-agent.service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help
-[2]: /ja/agent/troubleshooting/send_a_flare
+[1]: /ja/help/
+[2]: /ja/agent/troubleshooting/send_a_flare/
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

@@ -190,7 +190,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 2. Mettez à jour la configuration de votre Agent :
 
     ``` shell
-    helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog
+    helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
 3. Mettez à jour les pods de votre application : votre application doit maintenant pouvoir déterminer de façon fiable l'adresse IP de son host. La version 1.7 de Kubernetes vous permet d'y parvenir facilement, en élargissant l'ensemble d'attributs que vous pouvez transmettre à vos pods sous la forme de variables d'environnement. Dans cette version, et les versions supérieures, vous pouvez transmettre l'IP du host à n'importe quel pod en ajoutant une variable d'environnement au PodSpec. Voici un exemple de manifeste d'application :
@@ -206,7 +206,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
      Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD via le port `8125` sur `$DD_AGENT_HOST`.
 
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 {{% /tab %}}

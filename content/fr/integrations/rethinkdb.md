@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     RethinkDB Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: rethinkdb
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

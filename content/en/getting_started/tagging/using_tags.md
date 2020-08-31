@@ -160,7 +160,7 @@ Some integrations allow you to optionally limit metrics using tags.
 
 The [AWS integration tile][1] has the tag filters `to hosts with tag` and `to Lambdas with tag`.
 
-These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting your EC2 or Lambda resources. You can use these `<KEY>:<VALUE>` to both include and exclude functions based from monitoring based on tags. To specificy tag should be excluded, add a `!` before the tag key. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters).
+These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting your EC2 or Lambda resources. You can use these `<KEY>:<VALUE>` to both include and exclude functions based from monitoring based on tags. To specify that tag should be excluded, add a `!` before the tag key. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters).
 
 The filters include resources where any inclusion tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
 

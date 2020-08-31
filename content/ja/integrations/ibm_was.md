@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: ibm_was
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -68,7 +70,7 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 ##### メトリクスの収集
 
@@ -106,15 +108,15 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `ibm_was`                                                                     |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                 |
-| `<INSTANCE_CONFIG>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
+| `<インテグレーション名>` | `ibm_was`                                                                     |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                 |
+| `<インスタンスコンフィギュレーション>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][6]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][6]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
@@ -141,14 +143,14 @@ IBM WAS には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://www.ibm.com/cloud/websphere-application-platform
-[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/docker/log/
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/

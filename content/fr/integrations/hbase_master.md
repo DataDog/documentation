@@ -35,12 +35,14 @@ Recueillez des métriques du service Hbase_master en temps réel pour :
 - Visualiser et surveiller les états de Hbase_master
 - Être informé des failovers et des événements de Hbase_master
 
+## Implémentation
+
 ### Installation
 
 Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructions ci-dessous pour installer le check Hbase_master sur votre host. Consultez notre guide relatif à l'[installation d'intégrations développées par la communauté][1] pour installer des checks avec une [version < 6.8 de l'Agent][2] ou avec l'[Agent Docker][3] :
 
 1. Installez le [kit de développement][4].
-2. Clonez le dépôt integrations-extras :
+2. Clonez le référentiel integrations-extras :
 
    ```shell
    git clone https://github.com/DataDog/integrations-extras.git.
@@ -73,13 +75,13 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 2. [Redémarrez l'Agent][9].
 
-## Validation
+### Validation
 
 [Lancez la sous-commande `status` de l'Agent][10] et cherchez `hbase_master` dans la section Checks.
 
 ## Données collectées
 
-### Métriques
+### Metrics
 {{< get-metrics-from-git "hbase_master" >}}
 
 
@@ -155,7 +157,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 ## Données collectées
 
-### Métriques
+### Metrics
 {{< get-metrics-from-git "hbase_regionserver" >}}
 
 

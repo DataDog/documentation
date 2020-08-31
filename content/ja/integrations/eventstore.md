@@ -3,7 +3,7 @@ aliases: []
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false

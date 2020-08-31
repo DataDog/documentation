@@ -3,13 +3,13 @@ title: パイプライン
 kind: documentation
 description: Grok プロセッサーを使用してログをパースする
 further_reading:
-  - link: logs/processing/processors
+  - link: /logs/processing/processors/
     tag: Documentation
     text: 使用可能なプロセッサーのリスト
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: 無制限のログ
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
   - link: 'https://learn.datadoghq.com/course/view.php?id=10'
@@ -103,38 +103,28 @@ Datadog には、`timestamp`、`status`、`host`、`service`、さらにはロ�
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="パイプラインの複製"  style="width:80%;">}}
 
-すべてのインテグレーションパイプラインについては、[インテグレーションパイプラインのリファレンス][6]ページを参照してください。
+### インテグレーションパイプラインライブラリ
 
-## パイプラインの制限
+Datadog で利用可能なインテグレーションパイプラインの一覧については、[インテグレーションパイプラインライブラリ][6]をご覧ください。
+パイプラインライブラリにて、Datadog がデフォルトで各ログフォーマットを処理する方法をご確認いただけます。
 
-ログ管理ソリューションを最適に機能させるために、ログイベントと一部の製品機能に対して次のような技術的制限と規則が設定されています。これらの制限は到達できないように設計されています。
+{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="インテグレーションパイプラインライブラリ"  style="width:80%;">}}
 
-### 収集されたログイベントに適用される制限
+インテグレーションパイプラインをひとつ使用する場合、Datadog は対応するログの `source` を構成し、インテグレーションをインストールすることを推奨しています。Datadog がこのソースから初回のログを受信すると、インストールが自動でトリガーされ、インテグレーションパイプラインが処理対象のパイプラインリストに追加されます。ログソースの構成については、対応する[インテグレーションのドキュメント][7]を参照してください。
 
-* ログイベントのサイズは 25K バイトを超えてはなりません。
-* 過去 6 時間および未来 2 時間までのログイベントを送信できます。
-* JSON 形式に変換された後の 1 つのログイベントが保持できる属性数は 256 未満です。各属性のキーは 50 文字未満、ネストのレベルは連続 10 未満、それぞれの値はファセットに昇格された場合に 1024 文字未満です。
-* 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
+コピーボタンをクリックしてインテグレーションパイプラインをコピーすることもできます。
 
-上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合は単にインデックス化されません。ただし、Datadog は、提供されるユーザーデータを可能な限り維持するために常に最善を尽くします。
-
-### 提供される機能に適用される制限
-
-* ファセットの最大数は 100 です。
-* プラットフォーム上の処理パイプラインの最大数は 100 です。
-* パイプラインあたりのプロセッサーの最大数は 20 です。
-* Grok プロセッサーあたりのパース規則の最大数は 10 です。Datadog は、Datadog のサービスパフォーマンスに悪影響を与える可能性があるパース規則を無効化する権利を留保します。
-
-これらの制限のいずれかに達し、上限の引き上げをご希望される場合は[サポートにお問い合わせください][7]。
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="ライブラリからパイプラインを複製"  style="width:80%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/processors
-[2]: /ja/logs/explorer/search
+
+[1]: /ja/logs/processing/processors/
+[2]: /ja/logs/explorer/search/
 [3]: /ja/logs/processing/#reserved-attributes
 [4]: /ja/logs/processing/processors/#log-status-remapper
 [5]: /ja/logs/processing/processors/#log-date-remapper
-[6]: /ja/logs/faq/integration-pipeline-reference
-[7]: /ja/help
+[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[7]: /ja/integrations/#cat-log-collection

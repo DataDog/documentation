@@ -3,6 +3,8 @@ aliases:
   - /fr/integrations/memcached
 assets:
   dashboards: {}
+  logs:
+    source: memcached
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -39,7 +41,7 @@ supported_os:
 
 Le check Memcache de l'Agent vous permet de surveiller l'utilisation de la mémoire, les hits, les miss, les expulsions, le pourcentage de remplissage et d'autres métriques pour Memcache.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

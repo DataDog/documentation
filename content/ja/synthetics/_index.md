@@ -1,80 +1,70 @@
 ---
-title: Synthetics
+title: Synthetic の監視
 kind: documentation
-description: 製品の最も重要な部分が世界各地で正常に稼働していることを確認します。
+description: 自動テストを使用して、システムとアプリケーションの最も重要な部分が世界各地で正常に稼働していることを確認します。
+disable_toc: true
 aliases:
   - /ja/integrations/synthetics/
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
-    text: Datadog Synthetics の紹介
-  - link: synthetics/api_tests
+    text: Datadog Synthetic モニタリングの紹介
+  - link: 'https://www.datadoghq.com/blog/browser-tests/'
+    tag: ブログ
+    text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+    tag: ブログ
+    text: エンドツーエンドテスト作成のベストプラクティス
+  - link: /synthetics/guide/
     tag: Documentation
-    text: APIテストの設定
-  - link: synthetics/browser_tests
+    text: Synthetics モニタリングガイド
+  - link: /synthetics/troubleshooting/
     tag: Documentation
-    text: ブラウザーテストの設定
-  - link: synthetics/identify_synthetics_bots
-    tag: Documentation
-    text: Synthetics ボットの特定
+    text: Synthetic モニタリングのトラブルシューティング
 ---
-## 概要
+{{< img src="synthetics/synthetics_home.png" alt="Synthetic モニタリングのホームページ" >}}
 
-Datadog Synthetics により、Datadog プラットフォームに新たな可視性を実現するレイヤーが追加されました。Synthetics では、ユーザーリクエストのシミュレーションとブラウザーのレンダリングを通してアプリケーションと API エンドポイントを監視することで、稼働時間を確保し、局所的な問題を特定して、アプリケーションのパフォーマンスを追跡できます。Synthetics をメトリクス、トレース、ログと統合することにより、Datadog はユーザーが経験しているとおりにすべてのシステムの動作状況を観察することができます。
+Synthetics テストでは、**世界中のシミュレートされたリクエストとアクション**を使用して、システムとアプリケーションのパフォーマンスを観察できます。Datadog は、バックエンドからフロントエンドまで、およびさまざまなネットワークレベル (HTTP、TCP、SSL) で、制御された安定した方法を使って **Web ページと API のパフォーマンスを追跡**し、異常な動作 (回帰、機能障害、応答時間が長い、予期しないステータスコードなど) がある場合に警告します。**本番環境と CI 環境をエンドツーエンドでテストする**ことにより、欠陥のあるコードが本番環境に移行する恐れをなくすことができるため、開発チームのスピードが向上します。主要なエンドポイントとユーザージャーニーで **SLO を計算する**ことにより、アプリケーションのパフォーマンス目標に専念し、最終的に一貫した顧客体験を提供することが容易になります。
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Synthetics ホームページ" >}}
+## はじめに
+たった数分で最初の Synthetics テストを作成し、Web アプリケーションの監視を開始して、パフォーマンスを向上させることができます。
+### API テストを設定する
 
-## 検索
+API テストを使用すると、HTTP、TCP、SSL などのさまざまなネットワークレベルでリクエストを起動し、Web アプリケーションで検証を実行できます。最初の [HTTP テスト][1]、TCP テスト、[SSL テスト][2]を作成して、API とネットワークの監視を開始しましょう。
 
-高度な検索では、以下のチェック属性を組み合わせてチェックをクエリすることができます。
+{{< img src="synthetics/api_test.png" alt="API テスト"  style="width:100%;">}}
 
-* `title` および `message` - テキスト検索
-* `status` - アラート、データなし、Ok
-* `creator`
-* `region`
-* `muted`
-* `notification`
-* `tags`
+### ブラウザテストを記録する
 
-検索を実行するには、左側のチェックボックスまたは上部の検索バー、またはその両方を使用してクエリを作成します。チェックボックスをオンにすると、検索バーが更新され、そのクエリが表示されます。同様に、検索バーのクエリを変更すると (またはクエリを最初から記述すると)、チェックボックスが更新され、その変更が反映されます。クエリを編集すると、その結果がリアルタイムに更新されます。Search ボタンはありません。
+[Synthetic ブラウザテスト][3]を使用すれば、エンドツーエンドのテストを記録して、顧客が世界中の Web ページをどのように体験しているかを監視できます。
 
-### クエリの記述
+{{< img src="synthetics/browser_test.gif" alt="ブラウザテスト"  style="width:100%;">}}
 
-すべてのチェック、タイトル、および通知メッセージから特定のテキストを検索するには、検索バーにテキストを入力します。
+### プライベートロケーションを起動する
 
-また、ブール演算子 (`AND`、`OR`、および `NOT`) とかっこを使用して、チェックフィールドを使用する複雑なクエリを記述することもできます。
+[Synthetic プライベートロケーション][4]を使用すれば、内部 API と Web サイトを監視したり、ビジネスにミッションクリティカルな領域にカスタムロケーションを作成したりすることができます。
 
-* 正規表現はサポートされていません
-* 単一文字のワイルドカード (`?`) はサポートされていませんが、通常のワイルドカード (`*`) はサポートされています
-* 近接検索はサポートされていませんが、[fuzzy][1] 演算子はサポートされています
-* 範囲はサポートされていません
-* ブースティングはサポートされていません
+{{< img src="synthetics/private_locations.png" alt="プライベートロケーション"  style="width:100%;">}}
 
-また、`-`、`(`、`)`、`"`、`~`、`*`、`:`、`.`、およびスペースは予約されています。これらの文字を含むチェックフィールドを検索するには、そのフィールド文字列を引用符で囲みます。`status:("OK") AND "doc-check"` は有効なクエリ文字列ですが、`status:("OK") AND doc check` は有効ではありません。
+### インテグレーションとデプロイプロセスでテストを実行する
 
-## チェックの作成
+Synthetics テストを[カナリア][5]として活用するか、[CI パイプライン][5]内で直接実行すれば、欠陥のあるコードが顧客の体験に影響を与えることを恐れずに出荷を開始できます。
 
-[API tests][2] または[browser test][3]を作成するために、Syntheticsページの右上にある**Create a New check +** iを選択肢します。テストが失敗した場合、エンドポイントは再テストされません。稼働時間はエンドポイントを直接`down`と見なします。
+ {{< img src="synthetics/ci.png" alt="CI テスト"  style="width:100%;">}}
 
-{{< img src="synthetics/create_a_check.png" alt="チェックを作成する"  style="width:80%;">}}
+### Synthetic モニタリングデータとトレースを接続する
 
-## メトリクス
+[Synthetics テストと APM トレース間のすぐに使えるインテグレーション][6]を利用すれば、フロントエンド、ネットワーク、バックエンドリクエスト全体の障害の根本的な原因を見つけることができます。
 
-次のメトリクスは、Synthetics チェックによって生成されます。
-
-* `synthetics.browser.*` で始まるメトリクスは、[ブラウザテスト][3]から取得されます。
-* `synthetics.http.*` で始まるメトリクスは、[API HTTP テスト][4]から取得されます。
-* `synthetics.ssl.*` で始まるメトリクスは、[API SSL テスト][5]から取得されます。
-
-{{< get-metrics-from-git "synthetics" >}}
+{{< img src="synthetics/synthetics_traces.gif" alt="Synthetic モニタリング" style="width:100%;">}}
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[2]: /ja/synthetics/api_tests
-[3]: /ja/synthetics/browser_tests
-[4]: /ja/synthetics/api_tests/?tab=httptest
-[5]: /ja/synthetics/api_tests/?tab=ssltest
+[1]: /ja/getting_started/synthetics/api_test
+[2]: /ja/synthetics/api_tests/?tab=ssltest
+[3]: /ja/getting_started/synthetics/browser_test
+[4]: /ja/getting_started/synthetics/private_location
+[5]: /ja/synthetics/ci/
+[6]: /ja/synthetics/apm/

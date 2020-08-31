@@ -4,6 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Gitlab Overview: assets/dashboards/overview.json
+  logs:
+    source: gitlab
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -122,7 +124,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 | Paramètre      | Valeur                                       |
 | -------------- | ------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "gitlab", "service": "gitlab"}` |
+| `<CONFIG_LOG>` | `{"source": "gitlab", "service": "gitlab"}` |
 
 ### Validation
 

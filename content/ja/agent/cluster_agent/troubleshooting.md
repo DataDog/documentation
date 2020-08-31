@@ -8,13 +8,13 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: ブログ
     text: Datadog メトリクスを使用して Kubernetes のワークロードをオートスケーリングする
-  - link: /agent/autodiscovery/clusterchecks
+  - link: /agent/cluster_agent/clusterchecks/
     tag: ドキュメント
     text: Autodiscovery によるクラスターチェックの実行
-  - link: agent/kubernetes/daemonset_setup
+  - link: /agent/kubernetes/daemonset_setup/
     tag: ドキュメント
     text: Kubernetes DaemonSet のセットアップ
-  - link: agent/kubernetes/integrations
+  - link: /agent/kubernetes/integrations/
     tag: ドキュメント
     text: カスタムインテグレーション
   - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'

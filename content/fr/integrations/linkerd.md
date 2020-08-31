@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -35,7 +36,7 @@ supported_os:
 
 Ce check recueille les métriques d'observation de systèmes distribués de [Linkerd][1].
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -45,7 +46,7 @@ Le check Linkerd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `linkerd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple linkerd.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 

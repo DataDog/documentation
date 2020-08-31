@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントのための SAML の構成
-  - link: account_management/multi_organization
+  - link: /account_management/multi_organization/
     tag: Documentation
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---

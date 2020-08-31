@@ -1,7 +1,7 @@
 ---
-title: Synthetic CI Test Integration
+title: Synthetic CI/CD Testing
 kind: documentation
-description: Run Synthetic tests on-demand in your CI.
+description: Run Synthetic tests on-demand in your CI/CD pipelines.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -17,15 +17,12 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-<div class="alert alert-warning">
-This feature is in private beta. To request access, contact <a href="/help/">Datadog Support</a>.
-</div>
-
-On top of executing your tests at predefined intervals, you can also execute Datadog Synthetic tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetic tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints.
+In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product. 
+Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling.
+On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. Synthetic CI/CD testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
 
 ## API usage
 
@@ -241,9 +238,7 @@ curl -G \
 
 ### Package installation
 
-The package is published privately under [@datadog/datadog-ci][1] in the NPM registry.
-
-Until it is made public, an NPM token is needed to access it. If you do not have an NPM token to access the package, reach out to [Datadog support][2].
+The package is published under [@datadog/datadog-ci][2] in the NPM registry.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -517,7 +512,7 @@ You can also see the results of your tests listed on your Datadog test details p
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /help/
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test

@@ -3,12 +3,29 @@
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
 
+<!-- From data file -->
+{{ $list := sort .Pages }}
+
+<!-- build filters -->
+{{ $.Scratch.Set "filters" (slice)}}
+{{ range $index, $element := $list }}
+    {{ range $e := $element.Params.rule_category }}
+        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
+            {{ $.Scratch.Add "filters" ($e | lower) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
 <h1 id="pagetitle">{{ .Title }}</h1>
 
 {{ .Content }}
 <form id="rules">
+    <div class="controls" data-ref="controls">
+        <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
+        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    </div>
     <div class="form-group clearfix">
-        <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
+        <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
     </div>
     <div class="list-group">
         {{ range $i, $v := .Pages.GroupByParam "source" }}
@@ -20,7 +37,7 @@
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                                <svg width="40" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.6426 7.75645C15.4861 7.75645 15.3272 7.77823 15.1756 7.75282 14.2222 7.59676 13.5599 8.05405 12.9267 8.70007 11.4226 10.2353 9.88447 11.7366 8.34638 13.2367 8.11106 13.4665 8.08801 13.7206 8.07345 14.0085 8.03585 14.7562 7.98854 15.5026 7.93396 16.249 7.92304 16.4014 7.87695 16.5539 7.83085 16.7015 7.57127 17.5519 7.15157 17.904 6.27821 17.9814 5.99436 18.0068 5.70567 18.0056 5.42183 17.9814 4.47083 17.9016 4.11057 17.5979 3.8425 16.6761 3.69815 16.1801 3.54774 15.6841 3.41552 15.1844 3.31848 14.8179 3.11712 14.64 2.72168 14.5723 2.11154 14.4694 1.51595 14.2783.914305 14.1235.466706 14.0085.20955 13.6891.0749062 13.2802-.200446 12.4443.321146 10.8329 1.02226 10.3006 1.31581 10.0768 1.63119 9.905 2.02299 9.9425 2.40873 9.97879 2.80659 9.96185 3.1802 10.049 3.89465 10.2159 4.46962 10.0949 4.99485 9.53844 6.19694 8.26576 7.43905 7.02938 8.66904 5.78332 8.94196 5.50629 9.22095 5.2353 9.5145 4.98004 10.1234 4.45137 10.4728 3.85979 10.229 3.00328 10.1186 2.61494 10.1622 2.18064 10.1489 1.76811 10.1307 1.19589 10.4073.741015 10.8646.461559 11.6821-.0368644 12.5737-.203812 13.441.326066 13.7285.501482 14.0087.81965 14.1154 1.13298 14.3131 1.71488 14.4175 2.33549 14.4902 2.94763 14.5776 3.67712 14.5582 3.67591 15.3357 3.7243 15.7991 3.75333 16.2661 3.81019 16.7173 3.91544 17.5713 4.11384 18.0177 4.72478 17.9995 5.6067 17.9934 5.89099 17.9679 6.17408 17.9534 6.45837 17.9109 7.33545 17.5215 7.72984 16.6567 7.75524 16.3182 7.7625 15.981 7.75524 15.6426 7.75645 15.6426 7.75524 15.6426 7.75524 15.6426 7.75645z" fill="url(#paint0_linear1)"></path><defs><linearGradient id="paint0_linear1" x1="490513e-12" y1="18" x2="18.0421" y2=".0422687" gradientUnits="userSpaceOnUse"><stop stop-color="#ae25b4"></stop><stop offset="1" stop-color="#632ca6"></stop></linearGradient></defs></svg>
                             {{ end }}
                         {{ end }}
                     </div>
@@ -35,12 +52,12 @@
                 </div>
                 <div class="group-{{ .Key }} mb-2 ml-5 d-none">
                     {{ range $v.Pages }}
-                        <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
+                        <a class="mb-1 font-semibold mix {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                                <svg width="40" height="17" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.6426 7.75645C15.4861 7.75645 15.3272 7.77823 15.1756 7.75282 14.2222 7.59676 13.5599 8.05405 12.9267 8.70007 11.4226 10.2353 9.88447 11.7366 8.34638 13.2367 8.11106 13.4665 8.08801 13.7206 8.07345 14.0085 8.03585 14.7562 7.98854 15.5026 7.93396 16.249 7.92304 16.4014 7.87695 16.5539 7.83085 16.7015 7.57127 17.5519 7.15157 17.904 6.27821 17.9814 5.99436 18.0068 5.70567 18.0056 5.42183 17.9814 4.47083 17.9016 4.11057 17.5979 3.8425 16.6761 3.69815 16.1801 3.54774 15.6841 3.41552 15.1844 3.31848 14.8179 3.11712 14.64 2.72168 14.5723 2.11154 14.4694 1.51595 14.2783.914305 14.1235.466706 14.0085.20955 13.6891.0749062 13.2802-.200446 12.4443.321146 10.8329 1.02226 10.3006 1.31581 10.0768 1.63119 9.905 2.02299 9.9425 2.40873 9.97879 2.80659 9.96185 3.1802 10.049 3.89465 10.2159 4.46962 10.0949 4.99485 9.53844 6.19694 8.26576 7.43905 7.02938 8.66904 5.78332 8.94196 5.50629 9.22095 5.2353 9.5145 4.98004 10.1234 4.45137 10.4728 3.85979 10.229 3.00328 10.1186 2.61494 10.1622 2.18064 10.1489 1.76811 10.1307 1.19589 10.4073.741015 10.8646.461559 11.6821-.0368644 12.5737-.203812 13.441.326066 13.7285.501482 14.0087.81965 14.1154 1.13298 14.3131 1.71488 14.4175 2.33549 14.4902 2.94763 14.5776 3.67712 14.5582 3.67591 15.3357 3.7243 15.7991 3.75333 16.2661 3.81019 16.7173 3.91544 17.5713 4.11384 18.0177 4.72478 17.9995 5.6067 17.9934 5.89099 17.9679 6.17408 17.9534 6.45837 17.9109 7.33545 17.5215 7.72984 16.6567 7.75524 16.3182 7.7625 15.981 7.75524 15.6426 7.75645 15.6426 7.75524 15.6426 7.75524 15.6426 7.75645z" fill="url(#paint0_linear1)"></path><defs><linearGradient id="paint0_linear1" x1="490513e-12" y1="18" x2="18.0421" y2=".0422687" gradientUnits="userSpaceOnUse"><stop stop-color="#ae25b4"></stop><stop offset="1" stop-color="#632ca6"></stop></linearGradient></defs></svg>
                             {{ end }}
                             {{ .Title }}<br />
                         </a>
@@ -50,58 +67,4 @@
         {{ end }}
     </div>
 </form>
-
-<script type="text/javascript">
-    const group = Array.prototype.slice.call(document.getElementsByClassName('js-group'));
-    const urlParams = new URLSearchParams(window.location.search);
-    const keyword = urlParams.get('q');
-
-    document.getElementById("rules").addEventListener("submit", function (event) {
-        event.preventDefault();
-    });
-
-    filterRules = () => {
-        const input = document.getElementById('keywords').value.toLowerCase();
-        window.history.replaceState({}, '', `?q=${input}`);
-
-        for (let i = 0; i < group.length; i++) {
-            // Filtering individual rules
-            const rules = Array.prototype.slice.call(document.querySelectorAll(`.js-group-${i} .js-page`));
-            let count = 0;
-            rules.forEach(elm => {
-                elm.classList.remove('d-none');
-                if (!elm.dataset.name.includes(input)) {
-                    elm.classList.add('d-none');
-                } else {
-                    elm.classList.remove('d-none');
-                    count += 1;
-                }
-            });
-
-            // Hiding group when there is no matching entry
-            if (count === 0) {
-                document.querySelector(`.js-group-${i}`).classList.add('d-none');
-            } else {
-                document.querySelector(`.js-group-${i}`).classList.remove('d-none');
-                document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
-            }
-        }
-    };
-
-    document.getElementById("keywords").addEventListener('keyup', filterRules, false);
-
-    if (keyword) {
-        document.getElementById("keywords").value = keyword;
-        filterRules();
-    };
-
-    // Accordion js
-    const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
-
-    ruleList.forEach(elm => {
-        elm.addEventListener("click", e => {
-            e.currentTarget.classList.toggle('active');
-        });
-    });
-</script>
 {{ end }}

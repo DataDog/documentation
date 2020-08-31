@@ -1,4 +1,8 @@
 {
+  "integration_count": {
+    "other": "400"
+  },
+
   "beta_sentence": {
     "other": "　ベータ - 問題についてのお問い合わせまたは報告は"
   },
@@ -32,7 +36,7 @@
   },
 
   "apm_sentence": {
-    "other": " <br> パフォーマンス向上のためにコードを操作する"
+    "other": " <br> パフォーマンス向上のためにコードをインスツルメントする"
   },
 
   "developer_tools_sentence": {
@@ -44,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "サポートチームへのお問い合わせは support@datadoghq.com まで"
+    "other": "Datadog サポートチームには、メール（<a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>）でお問い合わせいただけます。"
   },
 
   "live_chat_support_sentence": {
-    "other": "ライブチャットサポートチームへのチャット（英語のみ）でのお問い合わせは、当社営業日 10 時～ 19 時 (東部標準時) に受け付けています。アプリ内チャットまたは<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>からご利用いただけます。"
+    "other": "また、月曜から金曜の 10:00 から 19:00 ET までは、アプリ内チャットまたは <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> を使ってサポートチームにお問い合わせいただけます。"
   },
 
   "event_stream_support_sentence": {
-    "other": " <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a> のメッセージに @support-datadog を含めると、サポートチームにも送信されます。グラフのスナップショットを参照する場合に便利な方法です。\n"
+    "other": "Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a>のメッセージに <code>@support-datadog</code> を含めた場合は、サポートチームのチケットが作成されます。これは、グラフのスナップショットを参照する場合に便利です。"
   },
 
   "agent_started_sentence": {
@@ -84,7 +88,7 @@
   },
 
   "crawler": {
-    "other": "クローラー"
+    "other": "Crawler"
   },
 
   "library_check": {
@@ -234,5 +238,59 @@
 
   "type": {
     "other": "種類"
+  },
+  "feel_free_contribute": {
+    "other": "ぜひご協力ください"
+  },
+  "mistake_in_docs": {
+    "other": "ドキュメントの間違い"
+  },
+  "groups_return_to_": {
+    "other": "戻る"
+  },
+  "table_of_contents_heading": {
+    "other": "このページ"
+  },
+  "edit": {
+    "other": "編集"
+  },
+  "overview": {
+    "other": "概要"
+  },
+  "arguments": {
+    "other": "引数"
+  },
+  "path_parameters": {
+    "other": "パスパラメーター"
+  },
+  "query_strings": {
+    "other": "クエリ文字列"
+  },
+  "header_parameters": {
+    "other": "ヘッダーパラメーター"
+  },
+  "request": {
+    "other": "リクエスト"
+  },
+  "model": {
+    "other": "モデル"
+  },
+  "example": {
+    "other": "例"
+  },
+  "copy": {
+    "other": "コピー"
+  },
+  "response": {
+    "other": "応答"
+  },
+  "code_example": {
+    "other": "コード例"
+  },
+  "name": {
+    "other": "名前"
+  },
+  "description": {
+    "other": "説明"
   }
 }

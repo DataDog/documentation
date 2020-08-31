@@ -25,14 +25,14 @@ Use the following table to help troubleshoot issues you might be experiencing wi
 | [Lambda Custom Metrics][7]	| Custom metrics ingestion from your Lambda functions.|
 | [Datadog APM][8]       		| Distributed tracing using the Datadog Tracer or AWS X-Ray.|
 
-If you’re still unsure about the issue, you may reach out to the [Datadog support team][9]. 
+If you’re still unsure about the issue, you may reach out to the [Datadog support team][9].
 
 [1]: /serverless/#getting-started
-[2]: /serverless/troubleshooting/installing_the_forwarder
-[3]: /serverless/troubleshooting/installing_the_layer
+[2]: /serverless/forwarder
+[3]: /serverless/installation/installing_the_library
 [4]: /integrations/amazon_lambda/#metric-collection
 [5]: /integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /integrations/amazon_lambda/#log-collection
 [7]: /integrations/amazon_lambda/#custom-metrics
-[8]: /integrations/amazon_lambda/#trace-collection
+[8]: /tracing/serverless_functions/
 [9]: /help/

@@ -18,4 +18,4 @@ For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name 
 **Note**: You can manually set this cluster name value with Agent v6.5+ thanks to the Agent configuration parameter [`clusterName`][2] or the `DD_CLUSTER_NAME` environment variable.
 
 [1]: /integrations/amazon_ec2/#configuration
-[2]: https://github.com/helm/charts/blob/a744ff8c90730d6d36698412150875fa96882b9d/stable/datadog/values.yaml#L58
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L66

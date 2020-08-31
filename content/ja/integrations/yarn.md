@@ -1,13 +1,18 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: yarn
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - processing
   - autodiscovery
+  - log collection
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/yarn/README.md'
 display_name: Yarn
@@ -48,15 +53,18 @@ supported_os:
 
 ### インストール
 
-YARN チェックは [Datadog Agent][3] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
+YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `yarn.d/conf.yaml` ファイルを編集します。
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `yarn.d/conf.yaml` ファイルを編集します。
 
    ```yaml
    init_config:
@@ -81,23 +89,63 @@ YARN チェックは [Datadog Agent][3] パッケージに含まれています�
        cluster_name: default_cluster
    ```
 
-    <mrk mid="36" mtype="seg">すべてのチェックオプションの一覧と説明については、[チェック構成の例][5]を参照してください。</mrk>
+    すべてのチェックオプションの一覧と説明については、[チェックコンフィギュレーションの例][2]を参照してください。
 
-2. [Agent を再起動][6]すると、Datadog への YARN メトリクスの送信が開始されます。
+2. [Agent を再起動][3]すると、Datadog への YARN メトリクスの送信が開始されます。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                                   |
 | -------------------- | --------------------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `yarn`                                                                                  |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                           |
-| `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<クラスター名>"}` |
+| `<インテグレーション名>` | `yarn`                                                                                  |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                           |
+| `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<クラスター名>"}` |
+
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. `yarn.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル yarn.d/conf.yaml][2] を参照してください。
+
+    ```yaml
+    logs:
+      - type: file
+        path: <LOG_FILE_PATH>
+        source: yarn
+        service: <SERVICE_NAME>
+        # To handle multi line that starts with yyyy-mm-dd use the following pattern
+        # log_processing_rules:
+        #   - type: multi_line
+        #     pattern: \d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2},\d{3}
+        #     name: new_log_start_with_date
+    ```
+
+3. [Agent を再起動します][3]。
+
+Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: 
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `yarn` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `yarn` を探します。
 
 ## 収集データ
 
@@ -117,29 +165,26 @@ Agent が ResourceManager URI に接続してメトリクスを収集できな�
 
 **yarn.application.status**:
 
-[`conf.yaml`][5] ファイルで指定されたマッピングに応じて、アプリケーションのステータスごとに返します。
+[`conf.yaml`][4] ファイルで指定されたマッピングに応じて、アプリケーションのステータスごとに返します。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-- [Hadoop アーキテクチャの概要][10]
-- [Hadoop メトリクスの監視方法][11]
-- [Hadoop メトリクスの収集方法][12]
-- [Datadog を使用した Hadoop の監視方法][13]
+- [Hadoop アーキテクチャの概要][6]
+- [Hadoop メトリクスの監視方法][7]
+- [Hadoop メトリクスの収集方法][8]
+- [Datadog を使用した Hadoop の監視方法][9]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/yarn/images/yarn_dashboard.png
-[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/yarn/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
-[10]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[7]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[8]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[9]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog

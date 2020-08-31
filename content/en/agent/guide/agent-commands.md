@@ -142,8 +142,8 @@ List of commands to display the status of the Datadog Agent:
 | macOS           | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
 | Source          | `sudo service datadog-agent status`                                           |
 
-[1]: /agent/
 
+[1]: /agent/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 

@@ -3,13 +3,13 @@ title: Monitor de host
 kind: documentation
 description: Vérifier si un ou plusieurs hosts transmettent des données à Datadog
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
@@ -66,4 +66,4 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host
-[2]: /fr/monitors/notifications
+[2]: /fr/monitors/notifications/

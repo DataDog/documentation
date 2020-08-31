@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     ProxySQL Overview: assets/dashboards/overview.json
-  logs: {}
+  logs:
+    source: proxysql
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

@@ -113,7 +113,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in the Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
 **Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
 
@@ -124,7 +124,7 @@ Anomaly monitors are managed using the [same API][12] as other monitors. These f
 The `query` property in the request body should contain a query string in the following format:
 
 ```text
-avg(<query_window>):anomalies(<metric_query>, ‘<algorithm>’, <deviations>, direction=’<direction>’, alert_window=’<alert_window>’, interval=<interval>, count_default_zero=’<default_zero>’ [, seasonality=’<seasonality>’]) >= <threshold>
+avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 * `query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`

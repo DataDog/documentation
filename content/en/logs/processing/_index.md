@@ -28,7 +28,7 @@ To access the configuration panel use the left `Logs` menu then the configuratio
 Log configuration page allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
 
 * A [Pipeline][1] takes a filtered subset of incoming logs and applies a list of sequential processors.
-* A [Processor][2] executes within a [Pipeline][1] a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+* A [Processor][2] executes within a [Pipeline][1] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 [Pipelines][1] and [Processors][2] can be applied to any type of logs:
 
@@ -69,6 +69,9 @@ To discover the full list of Processors available, refer to the dedicated [Proce
 
 If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][9]. There is also a [parsing best practice][10] and [parsing troubleshooting][11] guide.
 
+For optimal usage of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor. 
+Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
+
 ## Reserved attributes
 
 If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog and are faceted by default:
@@ -88,7 +91,7 @@ By default Datadog generates a timestamp and appends it in a date attribute when
 
 You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][12].
 
-**Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
+**Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
 <div class="alert alert-warning">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.

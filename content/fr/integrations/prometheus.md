@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +38,7 @@ Toutes les métriques récupérées par cette intégration sont considérées co
 
 **Consultez la section [Collecte de métriques Prometheus[2] pour découvrir comment configurer un check Prometheus.**
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 

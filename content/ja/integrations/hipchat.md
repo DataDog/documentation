@@ -44,7 +44,7 @@ HipChat API V1 トークンを使用している場合、チャットハンド�
 
 #### HipChat サーバー
 
-独自の HipChat サーバーをホストしている場合は、サーバーのホスト名を [Datadog-Hipchat タイル][3]に入力します。サーバーは、インターネットからアクセスできる必要があります。
+独自の HipChat サーバーをホストしている場合は、サーバーのホスト名を [Datadog-Hipchat タイル][2]に入力します。サーバーは、インターネットからアクセスできる必要があります。
 
 HipChat サーバーの証明書が自己署名の場合にのみ、**Ignore SSL** チェックボックスをオンにします。
 
@@ -66,9 +66,8 @@ Hipchat インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://www.hipchat.com/admin/api
 [2]: https://app.datadoghq.com/account/settings#integrations/hipchat
-[3]: https://app.datadoghq.com/account/settings#integrations/hipchat
-[4]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

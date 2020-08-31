@@ -4,110 +4,55 @@ categories:
   - log collection
 ddtype: ライブラリ
 dependencies: []
-description: Datadogpy で Python アプリケーションからのカスタムメトリクスをインスツルメントします。
+description: Python アプリケーションからメトリクス、トレース、ログを収集。
 doc_link: 'https://docs.datadoghq.com/integrations/python/'
 further_reading:
   - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
     tag: ブログ
     text: Datadog APM による非同期 Python のトレーシング
+  - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
+    tag: ブログ
+    text: Python ログの収集、カスタマイズ、一元化方法
 git_integration_title: python
 has_logo: true
 integration_title: Python
 is_public: true
-kind: インテグレーション
+kind: integration
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション
-short_description: Datadogpy で Python アプリケーションからのカスタムメトリクスをインスツルメントします。
+short_description: Python アプリケーションからメトリクス、トレース、ログを収集。
 version: '1.0'
 ---
 ## 概要
-Python インテグレーションを使用すると、Python アプリケーションに数行のコードを追加することで、カスタムメトリクスを監視できます。たとえば、ページビューや関数呼び出しの回数を返すメトリクスです。
+
+Python インテグレーションを利用して、Python アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
 ## セットアップ
 
-Datadog は、Python アプリケーションメトリクスの実装を支援するライブラリを提供しています。詳細については、[GitHub][1] でライブラリを参照してください。
+### メトリクスの収集
 
-### インストール
-
-次のように、pip から Datadog Python ライブラリをインストールします。
-
-```
-pip install datadog
-```
-
-### メトリックの収集
-
-Python インテグレーションでは、すべてのメトリクスが[カスタムメトリクス][2]です。カスタムメトリクスの収集の詳細については、以下を参照してください。
-
-* [メトリクスの開発者ガイド][3]
-* [datadogpy][1] リポジトリ内のドキュメント
-* [API ドキュメント][4]
-
-以下に、Datadog API を使用してコードをインスツルメントする例を示します。
-
-```python
-
-from datadog import initialize
-
-options = {
-    'api_key':'<YOUR_DD_API_KEY>',
-    'app_key':'<YOUR_DD_APP_KEY>'
-}
-
-initialize(**options)
-
-# Datadog REST API クライアントを使用します
-from datadog import api
-
-title = "Something big happened!"
-text = 'And let me tell you all about it here!'
-tags = ['version:1', 'application:web']
-
-api.Event.create(title=title, text=text, tags=tags)
-```
-
-以下に、DogStatsD クライアントを使用してコードを実装する例を示します。
-
-```python
-# DogStatsd 用の Python クライアント Statsd を使用します
-from datadog import statsd
-
-statsd.increment('whatever')
-statsd.gauge('foo', 42)
-```
-
-以下に、ThreadStats を使用してコードをインスツルメントする例を示します。
-
-```python
-# ThreadStats は、Datadog REST API を使用してメトリクスを収集およびフラッシュする別のツールです
-from datadog import ThreadStats
-stats = ThreadStats()
-stats.start()
-stats.increment('home.page.hits')
-```
+[DogStatsD を使用した Python カスタムメトリクスの収集][1]に関するドキュメントを参照してください。
 
 ### トレースの収集
 
-[Python アプリケーションのトレーシング][5]に関する Datadog のドキュメントを参照してください。
+トレースを Datadog に送信するには、[Python アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
 
 ### ログの収集
 
-**Agent v6.0 以上で使用可能**
+_Agent v6.0 以上で使用可能_
 
-[Python ログ収集][6]に関する Datadog のドキュメントを参照してください。
+ログを Datadog に転送するには、[Python ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
 
 ## トラブルシューティング
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-## その他の参照先
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadogpy
-[2]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics
-[3]: https://docs.datadoghq.com/ja/developers/metrics
-[4]: https://docs.datadoghq.com/ja/api/?lang=python
-[5]: https://docs.datadoghq.com/ja/tracing/setup/python
-[6]: https://docs.datadoghq.com/ja/logs/log_collection/python
-[7]: https://docs.datadoghq.com/ja/help
+[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=python
+[2]: https://docs.datadoghq.com/ja/tracing/setup/python/
+[3]: https://docs.datadoghq.com/ja/logs/log_collection/python/
+[4]: https://docs.datadoghq.com/ja/help/

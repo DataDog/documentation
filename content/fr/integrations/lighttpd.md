@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -38,7 +41,7 @@ supported_os:
 
 Le check lighttpd de l'Agent surveille la disponibilité, les octets traités, les requêtes par seconde, les codes de réponse et bien plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -50,7 +53,7 @@ En outre, vous pouvez installer `mod_status` sur vos serveurs lighttpd.
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `lighttpd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple lighttpd.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 

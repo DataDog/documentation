@@ -1,7 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Envoy - Overview: assets/dashboards/envoy_overview.json
+  logs:
+    source: envoy
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +41,7 @@ supported_os:
 
 Ce check recueille les métriques d'observation système distribuées d'[Envoy][1].
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -120,7 +124,7 @@ static_resources:
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 

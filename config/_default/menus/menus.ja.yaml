@@ -9,6 +9,11 @@ main:
     url: getting_started/agent/
     parent: getting_started
     weight: 1
+  - name: オートディスカバリー
+    identifier: getting_started_agent_autodiscovery
+    url: getting_started/agent/autodiscovery
+    parent: getting_started_agent
+    weight: 101
   - name: インテグレーション
     identifier: getting_started_integrations
     url: getting_started/integrations/
@@ -34,48 +39,55 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 5
+  - name: タグ
+    identifier: tagging_
+    url: getting_started/tagging/
+    parent: getting_started
+    weight: 6
+  - name: タグの付け方
+    identifier: assigning_tags
+    url: getting_started/tagging/assigning_tags
+    parent: tagging_
+    weight: 601
+  - name: 統合サービスタグ付け
+    identifier: unified_service_tagging
+    url: getting_started/tagging/unified_service_tagging
+    parent: tagging_
+    weight: 602
+  - name: タグの使用方法
+    identifier: using_tags
+    url: getting_started/tagging/using_tags
+    parent: tagging_
+    weight: 603
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 6
-  - name: Synthetics
+    weight: 7
+  - name: Synthetic の監視
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 7opl
+    weight: 8
   - name: プライベートロケーション
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 701
+    weight: 801
   - name: ブラウザテスト
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 702
+    weight: 802
   - name: API テスト
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 703
+    weight: 803
   - name: ラーニングセンター
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 8
-  - name: タグ付け
-    url: tagging/
-    pre: nav_tagging
-    identifier: tagging_
-    weight: 20000
-  - name: タグの付け方
-    url: tagging/assigning_tags/
-    parent: tagging_
-    weight: 1
-  - name: タグの使用方法
-    url: tagging/using_tags/
-    parent: tagging_
-    weight: 2
+    weight: 9
   - name: エージェント
     url: agent/
     pre: nav_agent
@@ -96,92 +108,117 @@ main:
     url: agent/basic_agent_usage/amazonlinux/
     weight: 102
     parent: basic_agent_usage
+  - name: Ansible
+    identifier: basic_agent_usage_ansible
+    url: agent/basic_agent_usage/ansible/
+    parent: basic_agent_usage
+    weight: 103
   - name: CentOS
     identifier: basic_agent_usage_centos
     url: agent/basic_agent_usage/centos/
-    weight: 103
+    weight: 104
+    parent: basic_agent_usage
+  - name: Chef
+    identifier: basic_agent_usage_chef
+    url: agent/basic_agent_usage/chef/
+    weight: 105
     parent: basic_agent_usage
   - name: Debian
     identifier: basic_agent_usage_deb
     url: agent/basic_agent_usage/deb/
-    weight: 104
+    weight: 106
     parent: basic_agent_usage
   - name: Fedora
     identifier: basic_agent_usage_fedora
     url: agent/basic_agent_usage/fedora/
-    weight: 106
+    weight: 107
     parent: basic_agent_usage
   - name: Heroku
     identifier: basic_agent_usage_heroku
     url: agent/basic_agent_usage/heroku/
-    weight: 107
+    weight: 108
     parent: basic_agent_usage
   - name: Mac OS X
     identifier: basic_agent_usage_osx
     url: agent/basic_agent_usage/osx/
-    weight: 108
+    weight: 109
     parent: basic_agent_usage
   - name: Puppet
     identifier: basic_agent_usage_puppet
     url: agent/basic_agent_usage/puppet/
-    weight: 109
+    weight: 110
     parent: basic_agent_usage
   - name: Red Hat
     identifier: basic_agent_usage_redhat
     url: agent/basic_agent_usage/redhat/
-    weight: 110
+    weight: 111
+    parent: basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
     parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
-    weight: 111
+    weight: 113
     parent: basic_agent_usage
   - name: Ubuntu
     identifier: basic_agent_usage_ubuntu
     url: agent/basic_agent_usage/ubuntu/
-    weight: 112
+    weight: 114
     parent: basic_agent_usage
   - name: Windows
     identifier: basic_agent_usage_windows
     url: agent/basic_agent_usage/windows/
-    weight: 113
+    weight: 115
     parent: basic_agent_usage
   - name: ソースから
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 114
+    weight: 116
     parent: basic_agent_usage
   - name: Docker
     url: agent/docker/
     parent: agent
     identifier: agent_docker
     weight: 2
+  - name: オートディスカバリー
+    url: agent/docker/integrations/
+    parent: agent_docker
+    identifier: agent_docker_integrations
+    weight: 201
   - name: APM
-    identifier: agent_docker_apm
     url: agent/docker/apm/
     parent: agent_docker
+    identifier: agent_docker_apm
     weight: 201
   - name: ログの収集
-    identifier: agent_docker_log
     url: agent/docker/log/
     parent: agent_docker
+    identifier: agent_docker_log
     weight: 203
+  - name: タグの抽出
+    url: agent/docker/tag/
+    parent: agent_docker
+    identifier: agent_docker_tag
+    weight: 204
   - name: Prometheus
     url: agent/docker/prometheus/
     parent: agent_docker
     identifier: agent_docker_prometheus
-    weight: 204
+    weight: 205
   - name: 収集データ
     url: agent/docker/data_collected/
     parent: agent_docker
     identifier: agent_docker_data_collected
-    weight: 205
+    weight: 206
   - name: Kubernetes
     url: agent/kubernetes/
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-  - name: ログ
+  - name: ログの収集
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
@@ -191,7 +228,7 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
     weight: 302
-  - name: インテグレーション
+  - name: オートディスカバリー
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
@@ -201,11 +238,16 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_prometheus
     weight: 304
+  - name: タグの抽出
+    url: agent/kubernetes/tag/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_tag
+    weight: 305
   - name: 収集データ
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 305
+    weight: 306
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
@@ -234,63 +276,35 @@ main:
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
     weight: 405
+  - name: Admission Controller
+    url: agent/cluster_agent/admission_controller/
+    parent: agent_cluster
+    weight: 406
   - name: コマンドとオプション
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 406
+    weight: 407
   - name: クラスターメタデータプロバイダー
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 407
+    weight: 408
   - name: ビルド
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 408
+    weight: 409
+  - name: クラスターチェックランナー
+    url: agent/cluster_agent/clusterchecksrunner
+    identifier: cluster_agent_clcr
+    parent: agent_cluster
+    weight: 410
   - name: トラブルシューティング
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 409
-  - name: オートディスカバリー
-    url: agent/autodiscovery/
-    identifier: agent_autodiscovery
-    parent: agent
-    weight: 5
-  - name: 基本のオートディスカバリー
-    url: agent/autodiscovery/basic_autodiscovery
-    parent: agent_autodiscovery
-    weight: 500
-  - name: 自動構成
-    url: agent/autodiscovery/auto_conf/
-    parent: agent_autodiscovery
-    weight: 502
-  - name: インテグレーションテンプレート
-    url: agent/autodiscovery/integrations/
-    parent: agent_autodiscovery
-    weight: 502
-  - name: コンテナ識別子
-    url: agent/autodiscovery/ad_identifiers/
-    parent: agent_autodiscovery
-    weight: 503
-  - name: テンプレート変数
-    url: agent/autodiscovery/template_variables/
-    parent: agent_autodiscovery
-    weight: 504
-  - name: タグ抽出
-    url: agent/autodiscovery/tag/
-    parent: agent_autodiscovery
-    weight: 505
-  - name: ディスカバリー管理
-    url: agent/autodiscovery/management/
-    parent: agent_autodiscovery
-    weight: 506
-  - name: トラブルシューティング
-    url: agent/autodiscovery/troubleshooting/
-    parent: agent_autodiscovery
-    weight: 509
+    weight: 411
   - name: ログの収集
     url: agent/logs/
     identifier: agent_logs
@@ -304,6 +318,10 @@ main:
     url: agent/logs/proxy
     parent: agent_logs
     weight: 602
+  - name: 転送
+    url: agent/logs/log_transport
+    parent: agent_logs
+    weight: 603
   - name: プロキシ
     url: agent/proxy/
     parent: agent
@@ -355,6 +373,18 @@ main:
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
     weight: 907
+  - name: オートディスカバリーに関する問題
+    url: agent/troubleshooting/autodiscovery/
+    parent: agent_troubleshooting
+    weight: 908
+  - name: Windows コンテナ問題
+    url: agent/troubleshooting/windows_containers
+    weight: 909
+    parent: agent_troubleshooting
+  - name: Agent ランタイムコンフィギュレーション
+    url: agent/troubleshooting/config
+    weight: 910
+    parent: agent_troubleshooting
   - name: ガイド
     url: agent/guide/
     identifier: agent_guides
@@ -387,15 +417,15 @@ main:
     weight: 70000
   - name: スクリーンボード
     url: dashboards/screenboards/
-    parent: 'ダッシュボード  '
+    parent: ダッシュボード
     weight: 1
   - name: タイムボード
     url: dashboards/timeboards/
-    parent: 'ダッシュボード  '
+    parent: ダッシュボード
     weight: 2
   - name: ウィジェット
     url: dashboards/widgets/
-    parent: 'ダッシュボード  '
+    parent: ダッシュボード
     weight: 3
   - name: クエリ
     url: dashboards/querying/
@@ -416,6 +446,10 @@ main:
     weight: 502
   - name: カウント
     url: dashboards/functions/count/
+    parent: dashboards_functions
+    weight: 503
+  - name: 除外
+    url: dashboards/functions/exclusion/
     parent: dashboards_functions
     weight: 503
   - name: 補間
@@ -452,11 +486,11 @@ main:
     weight: 511
   - name: 相関性
     url: dashboards/correlations/
-    parent: 'ダッシュボード  '
+    parent: ダッシュボード
     weight: 6
   - name: テンプレート変数
     url: dashboards/template_variables/
-    parent: 'ダッシュボード  '
+    parent: ダッシュボード
     weight: 7
     identifier: dashboards_temp_variables
   - name: 共有
@@ -476,40 +510,150 @@ main:
     url: dashboards/graphing_json/request_json/
     parent: graphing_json
     weight: 902
-  - name: インフラストラクチャー
+  - name: モバイル
+    url: mobile/
+    identifier: モバイル
+    pre: nav_mobile
+    weight: 80000
+  - name: Infrastructure
     url: infrastructure/
     identifier: インフラストラクチャー
     pre: nav_infrastructure
-    weight: 80000
+    weight: 90000
   - name: インフラストラクチャーリスト
     url: infrastructure/list/
-    parent: infrastructure
+    parent: インフラストラクチャー
     weight: 2
   - name: ホストマップ
     url: infrastructure/hostmap/
-    parent: infrastructure
+    parent: インフラストラクチャー
     weight: 3
   - name: コンテナマップ
     url: infrastructure/containermap/
-    parent: infrastructure
+    parent: インフラストラクチャー
     weight: 4
   - name: ライブプロセス
     url: infrastructure/process/
-    parent: infrastructure
+    parent: インフラストラクチャー
     weight: 5
   - name: ライブコンテナ
     url: infrastructure/livecontainers/
     parent: インフラストラクチャー
     weight: 6
   - name: サーバーレス
-    url: infrastructure/serverless/
-    parent: インフラストラクチャー
+    url: サーバーレス
+    pre: nav_serverless
+    identifier: サーバーレス
+    weight: 100000
+  - name: インストール
+    url: serverless/installation
+    parent: サーバーレス
+    identifier: serverless_installation
+    weight: 1
+  - name: Python
+    url: serverless/installation/python
+    parent: serverless_installation
+    identifier: serverless_installation_python
+    weight: 101
+  - name: Node.js
+    url: serverless/installation/nodejs
+    parent: serverless_installation
+    identifier: serverless_installation_nodejs
+    weight: 102
+  - name: Ruby
+    url: serverless/installation/ruby
+    parent: serverless_installation
+    identifier: serverless_installation_ruby
+    weight: 103
+  - name: Java
+    url: serverless/installation/java
+    parent: serverless_installation
+    identifier: serverless_installation_java
+    weight: 104
+  - name: Go
+    url: serverless/installation/go
+    parent: serverless_installation
+    identifier: serverless_installation_go
+    weight: 105
+  - name: .NET
+    url: serverless/installation/dotnet
+    parent: serverless_installation
+    identifier: serverless_installation_dotnet
+    weight: 106
+  - name: Datadog Lambda ライブラリ
+    url: serverless/datadog_lambda_library
+    parent: サーバーレス
+    identifier: serverless_datadog_lambda_library
+    weight: 2
+  - name: Python
+    url: serverless/datadog_lambda_library/python
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_python
+    weight: 201
+  - name: Node.js
+    url: serverless/datadog_lambda_library/nodejs
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_nodejs
+    weight: 202
+  - name: Ruby
+    url: serverless/datadog_lambda_library/ruby
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_ruby
+    weight: 203
+  - name: Go
+    url: serverless/datadog_lambda_library/go
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_go
+    weight: 204
+  - name: Java
+    url: serverless/datadog_lambda_library/java
+    parent: serverless_datadog_lambda_library
+    identifier: serverless_datadog_lambda_library_java
+    weight: 205
+  - name: Datadog Forwarder
+    url: serverless/forwarder
+    parent: サーバーレス
+    weight: 3
+  - name: 拡張 Lambda メトリクス
+    url: serverless/enhanced_lambda_metrics
+    parent: サーバーレス
+    weight: 4
+  - name: 分散型トレーシング
+    url: serverless/distributed_tracing
+    identifier: serverless_distributed_tracing
+    parent: サーバーレス
+    weight: 5
+  - name: AWS X-Ray を有効にする
+    url: tracing/serverless_functions
+    parent: serverless_distributed_tracing
+    weight: 501
+  - name: カスタムメトリクス
+    url: serverless/custom_metrics
+    parent: サーバーレス
+    weight: 6
+  - name: サーバーレスインテグレーション
+    url: serverless/serverless_integrations
+    parent: サーバーレス
     weight: 7
+  - name: サーバーレスタグ付け
+    url: serverless/serverless_tagging
+    parent: サーバーレス
+    weight: 8
+  - name: トラブルシューティング
+    url: serverless/troubleshooting
+    parent: サーバーレス
+    identifier: serverless_troubleshooting
+    weight: 9
+  - name: Azure App Service 拡張機能
+    url: serverless/azure_app_services
+    parent: サーバーレス
+    identifier: serverless_app_services
+    weight: 10
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
     pre: nav_metrics
-    weight: 90000
+    weight: 110000
   - name: はじめに
     url: metrics/introduction/
     parent: metrics_top_level
@@ -518,7 +662,7 @@ main:
     url: metrics/explorer/
     parent: metrics_top_level
     weight: 902
-  - name: サマリー
+  - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
     weight: 903
@@ -531,12 +675,12 @@ main:
     url: notebooks/
     identifier: ノートブック
     pre: nav_notebooks
-    weight: 100000
+    weight: 120000
   - name: アラート設定
     url: monitors/
     pre: nav_alerting
     identifier: アラート設定
-    weight: 110000
+    weight: 130000
   - name: モニター
     url: monitors/monitor_types/
     parent: アラート設定
@@ -647,14 +791,26 @@ main:
     weight: 7
     parent: アラート設定
     identifier: SLO
+  - name: インシデント管理
+    url: monitors/incident_management
+    parent: アラート設定
+    identifier: インシデント
+    weight: 8
   - name: モニターベース SLO
     url: monitors/service_level_objectives/monitor/
     parent: SLO
-    weight: 7.1
-  - name: イベントベース SLO
-    url: monitors/service_level_objectives/event/
+    identifier: slos_monitor
+    weight: 701
+  - name: メトリクスベース SLO
+    url: monitors/service_level_objectives/metric/
     parent: SLO
-    weight: 7.2
+    identifier: slos_metric
+    weight: 702
+  - name: エラーバジェットモニター
+    url: monitors/service_level_objectives/error_budget/
+    parent: SLO
+    identifier: error_budget
+    weight: 703
   - name: ガイド
     url: monitors/guide/
     weight: 100
@@ -663,299 +819,369 @@ main:
     url: tracing/
     pre: nav_tracing
     identifier: トレーシング
-    weight: 120000
-  - name: トレースの収集を有効化
+    weight: 140000
+  - name: 互換性
+    url: tracing/compatibility_requirements/
+    identifier: tracing_compatibility_requirements
+    parent: トレーシング
+    weight: 1
+  - name: Java
+    url: tracing/compatibility_requirements/java
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_java
+    weight: 101
+  - name: Python
+    url: tracing/compatibility_requirements/python
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_python
+    weight: 102
+  - name: Ruby
+    url: tracing/compatibility_requirements/ruby
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_ruby
+    weight: 103
+  - name: Go
+    url: tracing/compatibility_requirements/go
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/compatibility_requirements/nodejs
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/compatibility_requirements/php
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_php
+    weight: 106
+  - name: C++
+    url: tracing/compatibility_requirements/cpp
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_cpp
+    weight: 107
+  - name: .NET コア
+    url: tracing/compatibility_requirements/dotnet-core
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_core
+    weight: 108
+  - name: .NET フレームワーク
+    url: tracing/compatibility_requirements/dotnet-framework
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_framework
+    weight: 109
+  - name: Agent 構成
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: トレーシング
-    weight: 1
+    weight: 2
   - name: アプリケーションのインスツルメンテーション
     url: tracing/setup/
     parent: トレーシング
     identifier: tracing_setup
-    weight: 2
+    weight: 3
   - name: Java
     url: tracing/setup/java/
     parent: tracing_setup
     identifier: tracing_setup_java
-    weight: 201
+    weight: 301
   - name: Python
     url: tracing/setup/python/
     parent: tracing_setup
     identifier: tracing_setup_python
-    weight: 202
+    weight: 302
   - name: Ruby
     url: tracing/setup/ruby/
     parent: tracing_setup
     identifier: tracing_setup_ruby
-    weight: 203
+    weight: 303
   - name: Go
     url: tracing/setup/go/
     parent: tracing_setup
     identifier: tracing_setup_go
-    weight: 204
+    weight: 304
   - name: Node.js
     url: tracing/setup/nodejs/
     parent: tracing_setup
     identifier: tracing_setup_nodejs
-    weight: 205
+    weight: 305
   - name: .NET フレームワーク
     url: tracing/setup/dotnet-framework/
     parent: tracing_setup
     identifier: tracing_setup_dotnet_framework
-    weight: 206
+    weight: 306
   - name: .NET コア
     url: tracing/setup/dotnet-core/
     parent: tracing_setup
     identifier: tracing_setup_dotnet_core
-    weight: 207
+    weight: 307
   - name: PHP
     url: tracing/setup/php/
     parent: tracing_setup
     identifier: tracing_setup_php
-    weight: 208
+    weight: 308
   - name: C++
     url: tracing/setup/cpp/
     parent: tracing_setup
     identifier: tracing_setup_cpp
-    weight: 209
+    weight: 309
   - name: Envoy
     url: tracing/setup/envoy/
     parent: tracing_setup
     identifier: tracing_setup_envoy
-    weight: 211
+    weight: 311
   - name: NGINX
     url: tracing/setup/nginx/
     parent: tracing_setup
     identifier: tracing_setup_nginx
-    weight: 212
+    weight: 312
   - name: Istio
     url: tracing/setup/istio/
     identifier: tracing_setup_istio
     parent: tracing_setup
-    weight: 213
+    weight: 313
+  - name: バージョン追跡
+    url: tracing/version_tracking/
+    parent: トレーシング
+    identifier: version_tracking
+    weight: 4
   - name: App Analytics
     url: tracing/app_analytics/
     parent: トレーシング
     identifier: app_analytics
-    weight: 3
+    weight: 5
   - name: ビュー分析
     url: tracing/app_analytics/analytics/
     parent: app_analytics
-    weight: 303
+    weight: 503
   - name: トレース検索
     url: tracing/app_analytics/search/
     parent: app_analytics
-    weight: 304
+    weight: 504
   - name: App Analytics のモニタリング
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: app_analytics
-    weight: 305
-  - name: Live Tail
-    url: tracing/livetail/
+    weight: 505
+  - name: Live Search
+    url: tracing/livesearch/
     parent: トレーシング
-    identifier: livetail
-    weight: 4
+    identifier: Live Search
+    weight: 6
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/
-    parent: tracing
+    parent: トレーシング
     identifier: tracing_connect_logs_and_traces
-    weight: 5
+    weight: 7
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 501
+    weight: 701
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 502
+    weight: 702
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 503
+    weight: 703
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 504
+    weight: 704
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 505
+    weight: 705
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 506
+    weight: 706
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 507
+    weight: 707
+  - name: "\_Synthetics とトレースの接続"
+    url: synthetics/apm
+    parent: トレーシング
+    identifier: tracing_connect_synthetics_and_traces
+    weight: 8
+  - name: サーバーレス関数のトレース
+    url: tracing/serverless_functions/
+    parent: トレーシング
+    identifier: tracing_serverless_functions
+    weight: 9
+  - name: Datadog APM を有効にする
+    url: serverless/
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_datadog_apm
+    weight: 901
+  - name: AWS X-Ray を有効にする
+    url: tracing/serverless_functions/enable_aws_xray
+    parent: tracing_serverless_functions
+    identifier: tracing_serverless_functions_enable_aws_xray
+    weight: 902
   - name: ランタイムメトリクス
     url: tracing/runtime_metrics/
-    parent: tracing
+    parent: トレーシング
     identifier: tracing_runtime_metrics
-    weight: 6
+    weight: 10
   - name: Java
     url: tracing/runtime_metrics/java
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_java
-    weight: 601
+    weight: 1001
   - name: Python
     url: tracing/runtime_metrics/python
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_python
-    weight: 602
+    weight: 1002
   - name: Ruby
     url: tracing/runtime_metrics/ruby
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_ruby
-    weight: 603
+    weight: 1003
   - name: NodeJS
     url: tracing/runtime_metrics/nodejs
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
-    weight: 604
-  - name: Profiling
-    url: tracing/profiling/
+    weight: 1004
+  - name: 継続的なプロファイラー
+    url: tracing/profiler/
     parent: トレーシング
-    identifier: プロファイリング
-    weight: 7
-  - name: 手動インスツルメンテーション
-    url: tracing/manual_instrumentation/
-    parent: tracing
-    identifier: tracing_manual_instrumentation
-    weight: 8
+    identifier: プロファイラー
+    weight: 11
+  - name: はじめに
+    url: tracing/profiler/getting_started
+    parent: プロファイラー
+    identifier: profiler_getting_started
+    weight: 1101
+  - name: プロファイルの検索
+    url: tracing/profiler/search_profiles
+    parent: プロファイラー
+    identifier: profiler_search_profiles
+    weight: 1102
+  - name: カスタムインスツルメンテーション
+    url: tracing/custom_instrumentation/
+    parent: トレーシング
+    identifier: tracing_custom_instrumentation
+    weight: 12
+  - name: Agent のカスタマイズ
+    url: tracing/custom_instrumentation/agent_customization
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_agent_customization
+    weight: 1201
   - name: Java
-    url: tracing/manual_instrumentation/java
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_java
-    weight: 801
+    url: tracing/custom_instrumentation/java
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_java
+    weight: 1202
   - name: Python
-    url: tracing/manual_instrumentation/python
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_python
-    weight: 802
+    url: tracing/custom_instrumentation/python
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_python
+    weight: 1203
   - name: Ruby
-    url: tracing/manual_instrumentation/ruby
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_ruby
-    weight: 803
+    url: tracing/custom_instrumentation/ruby
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_ruby
+    weight: 1204
   - name: Go
-    url: tracing/manual_instrumentation/go
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_go
-    weight: 804
+    url: tracing/custom_instrumentation/go
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_go
+    weight: 1205
   - name: NodeJS
-    url: tracing/manual_instrumentation/nodejs
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_nodejs
-    weight: 805
+    url: tracing/custom_instrumentation/nodejs
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_nodejs
+    weight: 1206
   - name: PHP
-    url: tracing/manual_instrumentation/php
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_php
-    weight: 806
+    url: tracing/custom_instrumentation/php
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_php
+    weight: 1207
   - name: C++
-    url: tracing/manual_instrumentation/cpp
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_cpp
-    weight: 807
+    url: tracing/custom_instrumentation/cpp
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_cpp
+    weight: 1208
   - name: .NET
-    url: tracing/manual_instrumentation/dotnet
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_dotnet
-    weight: 808
-  - name: OpenTracing
-    url: tracing/opentracing/
-    parent: tracing
-    identifier: tracing_opentracing
-    weight: 9
-  - name: Java
-    url: tracing/opentracing/java
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_java
-    weight: 901
-  - name: Python
-    url: tracing/opentracing/python
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_python
-    weight: 902
-  - name: Go
-    url: tracing/opentracing/go
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_go
-    weight: 903
-  - name: PHP
-    url: tracing/opentracing/php
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_php
-    weight: 904
-  - name: Ruby
-    url: tracing/opentracing/ruby
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_ruby
-    weight: 905
-  - name: .NET
-    url: tracing/opentracing/dotnet
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_dotnet
-    weight: 906
-  - name: NodeJS
-    url: tracing/opentracing/nodejs
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_nodejs
-    weight: 907
+    url: tracing/custom_instrumentation/dotnet
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_dotnet
+    weight: 1209
   - name: APM 用語集
     url: tracing/visualization/
-    parent: tracing
+    parent: トレーシング
     identifier: tracing_vis
-    weight: 10
+    weight: 13
   - name: サービス一覧画面
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1001
+    weight: 1301
   - name: サービス詳細画面
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1002
+    weight: 1302
   - name: リソースステータス画面
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1003
+    weight: 1303
   - name: トレースビュー
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1004
+    weight: 1304
   - name: サービスマップ
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1005
+    weight: 1305
   - name: ガイド
     url: tracing/guide/
     identifier: tracing_guides
     parent: トレーシング
-    weight: 11
+    weight: 14
   - name: トラブルシューティング
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
-    parent: tracing
-    weight: 12
+    parent: トレーシング
+    weight: 15
+  - name: トレーサー起動ログ
+    url: tracing/troubleshooting/tracer_startup_logs
+    identifier: tracing_troubleshooting_startup_logs
+    parent: tracing_troubleshooting
+    weight: 1501
+  - name: トレーサーデバッグログ
+    url: tracing/troubleshooting/tracer_debug_logs
+    identifier: tracing_troubleshooting_debug_logs
+    parent: tracing_troubleshooting
+    weight: 1502
+  - name: Agent 率制限
+    url: tracing/troubleshooting/agent_rate_limits
+    identifier: tracing_troubleshooting_rate_limits
+    parent: tracing_troubleshooting
+    weight: 1503
   - name: Agent APM メトリクス
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 13
+    weight: 1504
+  - name: PHP 5 深いコールスタック
+    url: tracing/troubleshooting/php_5_deep_call_stacks
+    identifier: tracing_troubleshooting_php_5_deep_call_stacks
+    parent: tracing_troubleshooting
+    weight: 1505
   - name: ログ管理
     url: logs/
     pre: nav_logs
     identifier: log_management
-    weight: 130000
+    weight: 150000
   - name: ログの収集とインテグレーション
     url: logs/log_collection/
     parent: log_management
@@ -971,44 +1197,49 @@ main:
     url: logs/log_collection/android/
     parent: log_collection
     weight: 102
+  - name: iOS
+    identifier: log_ios
+    url: logs/log_collection/ios/
+    parent: log_collection
+    weight: 103
   - name: Csharp
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 103
+    weight: 104
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 104
+    weight: 105
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 105
+    weight: 106
   - name: Nodejs
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 108
+    weight: 109
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 109
+    weight: 110
   - name: その他のインテグレーション
-    url: integrations/#cat-log-collection
+    url: 'integrations/#cat-log-collection'
     identifier: other_integrations
     parent: log_collection
-    weight: 110
+    weight: 111
   - name: 処理
     url: logs/processing/
     parent: log_management
@@ -1089,7 +1320,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: ログとメトリクスの相関
-    url: dashboards/timeboards/#graph-menu
+    url: 'dashboards/timeboards/#graph-menu'
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1102,11 +1333,26 @@ main:
     url: security/logs/
     parent: log_management
     weight: 11
-  - name: セキュリティモニタリング
+  - name: セキュリティ & コンプライアンス
     url: security_monitoring/
     pre: nav_security_monitoring
+    identifier: security_compliance_monitoring
+    weight: 160000
+  - name: セキュリティモニタリング
+    url: security_monitoring/
+    parent: security_compliance_monitoring
     identifier: security_monitoring
-    weight: 135000
+    weight: 1
+  - name: コンプライアンスのモニタリング
+    url: compliance_monitoring/
+    parent: security_compliance_monitoring
+    identifier: compliance_monitoring
+    weight: 2
+  - name: デフォルトの規則
+    url: security_monitoring/default_rules/
+    parent: security_compliance_monitoring
+    identifier: security_monitoring_default_detection_rules
+    weight: 3
   - name: はじめに
     url: security_monitoring/getting_started
     parent: security_monitoring
@@ -1117,16 +1363,16 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_explorer
     weight: 2
-  - name: 検出ルール
+  - name: 脅威検知の規則
     url: security_monitoring/detection_rules
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Synthetics
+  - name: Synthetic の監視
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
-    weight: 140000
+    weight: 170000
   - name: API テスト
     url: synthetics/api_tests/
     parent: synthetics
@@ -1137,7 +1383,7 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
-  - name: アクション
+  - name: ステップ
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
@@ -1154,92 +1400,102 @@ main:
     parent: synthetics
     identifier: synthetics_private_location
     weight: 3
+  - name: コンフィギュレーション
+    url: synthetics/private_locations/configuration
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_configuration
+    weight: 301
+  - name: CI/CD テスト
+    url: /synthetics/ci/
+    parent: synthetics
+    identifier: synthetics_ci
+    weight: 4
   - name: APM インテグレーション
     url: synthetics/apm/
     parent: synthetics
     identifier: synthetics_apm
-    weight: 4
-  - name: Synthetics ボットの特定
-    url: synthetics/identify_synthetics_bots/
-    parent: synthetics
     weight: 5
+  - name: 検索
+    url: synthetics/search/
+    parent: synthetics
+    weight: 6
+  - name: メトリクス
+    url: synthetics/metrics/
+    parent: synthetics
+    weight: 7
   - name: 設定
     url: synthetics/settings/
     parent: synthetics
-    weight: 6
+    weight: 8
   - name: ガイド
     url: synthetics/guide/
     parent: synthetics
-    weight: 7
+    identifier: synthetics_guides
+    weight: 9
   - name: トラブルシューティング
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 8
+    weight: 10
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
     pre: nav_rum
     identifier: rum
     weight: 150000
-  - name: 開始する
-    url: real_user_monitoring/installation/
+  - name: ブラウザのモニタリング
+    url: real_user_monitoring/browser/
     parent: rum
-    identifier: rum_install
+    identifier: ブラウザ
     weight: 1
-  - name: 高度なコンフィギュレーション
-    url: real_user_monitoring/installation/advanced_configuration/
-    parent: rum_install
-    identifier: rum_advanced
+  - name: 収集データ
+    url: real_user_monitoring/browser/data_collected/
+    parent: ブラウザ
+    identifier: rum_data_collected
     weight: 101
-  - name: 'ダッシュボード  '
+  - name: 高度なコンフィギュレーション
+    url: real_user_monitoring/browser/advanced_configuration/
+    parent: ブラウザ
+    identifier: rum_advanced
+    weight: 102
+  - name: Android モニタリング
+    url: real_user_monitoring/android/
+    parent: rum
+    identifier: android
+    weight: 2
+  - name: ダッシュボード
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 2
+    weight: 3
   - name: パフォーマンス概要
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 201
+    weight: 301
   - name: リソース
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 202
+    weight: 302
   - name: Errors
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 203
+    weight: 303
   - name: エクスプローラー
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 3
+    weight: 4
   - name: 検索
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 301
+    weight: 401
   - name: 分析
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 302
-  - name: 収集データ
-    url: real_user_monitoring/data_collected/
-    parent: rum
-    identifier: rum_data_collected
-    weight: 4
-  - name: ビュー
-    url: real_user_monitoring/data_collected/view
-    parent: rum_data_collected
-    identifier: rum_data_collected_views
-    weight: 401
-  - name: Resource
-    url: real_user_monitoring/data_collected/resource
-    parent: rum_data_collected
-    identifier: rum_data_collected_resource
     weight: 402
   - name: ロングタスク
     url: real_user_monitoring/data_collected/long_task
@@ -1256,11 +1512,26 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 405
+  - name: Error Tracking
+    url: real_user_monitoring/error_tracking/
+    parent: rum
+    identifier: rum_error_tracking
+    weight: 5
+  - name: エクスプローラー
+    url: real_user_monitoring/error_tracking/explorer
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_explorer
+    weight: 501
+  - name: ガイド
+    url: real_user_monitoring/guide
+    parent: rum
+    identifier: rum_guides
+    weight: 6
   - name: ネットワークモニタリング
     url: network_performance_monitoring/
     pre: nav_network
     identifier: npm
-    weight: 160000
+    weight: 190000
   - name: インストール
     url: network_performance_monitoring/installation
     parent: npm
@@ -1280,7 +1551,7 @@ main:
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 170000
+    weight: 200000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -1306,217 +1577,232 @@ main:
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
     weight: 105
+  - name: マーケットプレイス
+    url: developers/marketplace/
+    parent: dev_tools
+    identifier: マーケットプレイス
+    weight: 2
   - name: カスタムメトリクス
     url: developers/metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
-    weight: 2
+    weight: 3
   - name: メトリクスタイプ
     url: developers/metrics/types/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
-    weight: 201
+    weight: 301
   - name: 送信 - Agent チェック
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
-    weight: 202
+    weight: 302
   - name: 送信 - DogStatsD
     url: developers/metrics/dogstatsd_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 203
+    weight: 303
   - name: 送信 - Powershell
     url: developers/metrics/powershell_metrics_submission
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 204
+    weight: 304
   - name: '送信 - API '
-    url: api/#post-timeseries-points
+    url: 'api/v1/metrics/#submit-metrics'
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
-    weight: 205
+    weight: 305
   - name: メトリクスタイプのモディファイアー
     url: developers/metrics/type_modifiers/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_modifiers
-    weight: 206
+    weight: 306
   - name: メトリクスのユニット
     url: developers/metrics/units/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_units
-    weight: 207
+    weight: 307
   - name: イベント
     url: developers/events/
     parent: dev_tools
     identifier: dev_tools_events
-    weight: 3
+    weight: 4
   - name: カスタム Agent チェック
     url: developers/events/agent/
     parent: dev_tools_events
     identifier: dev_tools_events_agent
-    weight: 301
+    weight: 401
   - name: DogStatsD
     url: developers/events/dogstatsd/
     parent: dev_tools_events
     identifier: dev_tools_events_dogstatsd
-    weight: 302
+    weight: 402
   - name: Email
     url: developers/events/email/
     parent: dev_tools_events
     identifier: dev_tools_events_mail
-    weight: 303
+    weight: 403
   - name: API
-    url: api/#post-an-event
+    url: 'api/v1/events/#post-an-event'
     parent: dev_tools_events
     identifier: dev_tools_events_api
-    weight: 304
-  - name: サービスチェック
+    weight: 404
+  - name: サービスのチェック
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 4
+    weight: 5
   - name: 送信 - Agent チェック
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 401
+    weight: 501
   - name: 送信 - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 402
+    weight: 502
   - name: '送信 - API '
-    url: 'https://docs.datadoghq.com/api/#service-checks'
+    url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 403
+    weight: 503
   - name: ライブラリ
     url: developers/libraries/
     parent: dev_tools
-    weight: 5
+    weight: 6
   - name: Community Office Hours
     url: developers/office_hours/
     parent: dev_tools
-    weight: 6
+    weight: 7
   - name: カスタムチェックの書き方
     url: developers/write_agent_check/
     parent: dev_tools
-    weight: 7
+    weight: 8
   - name: OpenMetrics チェックの書き方
     url: developers/prometheus/
     parent: dev_tools
-    weight: 8
+    weight: 9
   - name: インテグレーション
     url: developers/integrations/
     parent: dev_tools
     identifier: dev_tools_integrations
-    weight: 9
+    weight: 10
   - name: 新しいインテグレーションの作成
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 901
+  - name: インテグレーションアセットリファレンス
+    url: developers/integrations/check_references/
+    parent: dev_tools_integrations
+    weight: 1002
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 902
+    weight: 1003
   - name: レガシー
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 903
+    weight: 1004
   - name: Amazon CloudFormation
     url: developers/amazon_cloudformation/
     parent: dev_tools
     identifier: dev_tools_aws_cloudformation
-    weight: 10
+    weight: 11
   - name: ガイド
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 11
+    weight: 12
   - name: API
     url: api/
     pre: nav_api
     identifier: api
-    weight: 180000
+    weight: 210000
   - name: アカウントの管理
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 190000
+    weight: 220000
   - name: ユーザー管理
     url: account_management/users/
     parent: account_management
     identifier: account_management_users
     weight: 1
-  - name: Datadog 所定の役割
-    url: account_management/users/default_roles/
-    parent: account_management_users
-    weight: 101
+  - name: RBAC
+    url: account_management/rbac/
+    parent: account_management
+    identifier: account_management_rbac
+    weight: 2
+  - name: アクセス許可
+    url: account_management/rbac/permissions
+    parent: account_management_rbac
+    identifier: account_management_rbac_permissions
+    weight: 201
   - name: オーガニゼーションの設定
     url: account_management/org_settings/
     parent: account_management
-    weight: 2
+    weight: 3
   - name: SAML を使用した SSO
     url: account_management/saml/
     identifier: account_management_saml
     parent: account_management
-    weight: 3
+    weight: 4
   - name: Active Directory
     url: account_management/saml/activedirectory/
     parent: account_management_saml
-    weight: 301
+    weight: 401
   - name: Auth0
     url: account_management/saml/auth0/
     parent: account_management_saml
-    weight: 302
+    weight: 402
   - name: Azure
     url: account_management/saml/azure/
     parent: account_management_saml
-    weight: 303
+    weight: 403
   - name: Google
     url: account_management/saml/google/
     parent: account_management_saml
-    weight: 304
+    weight: 404
   - name: NoPassword
     url: account_management/saml/nopassword/
     parent: account_management_saml
-    weight: 305
+    weight: 405
   - name: Okta
     url: account_management/saml/okta/
     parent: account_management_saml
-    weight: 306
+    weight: 406
   - name: SafeNet
     url: account_management/saml/safenet/
     parent: account_management_saml
-    weight: 307
+    weight: 407
   - name: マルチオーガニゼーションのアカウント
     url: account_management/multi_organization/
     parent: account_management
-    weight: 4
+    weight: 5
   - name: オーガニゼーションの切り替え
     url: account_management/org_switching/
     parent: account_management
-    weight: 5
+    weight: 6
   - name: 課金
     url: account_management/billing/
     parent: account_management
-    weight: 6
+    weight: 7
   - name: API キーとアプリケーションキー
     url: account_management/api-app-keys/
     parent: account_management
-    weight: 7
+    weight: 8
   - name: セキュリティ
     url: security/
     pre: nav_security
     identifier: セキュリティ
-    weight: 200000
+    weight: 230000
   - name: エージェント
     url: security/agent/
     parent: セキュリティ
     weight: 1
   - name: APM（トレース）
-    url: security/tracing/
+    url: tracing/security/
     parent: セキュリティ
     weight: 2
   - name: ログ管理
@@ -1531,1246 +1817,1252 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 210000
+    weight: 240000
 api_v1:
-  - name: Overview
-    url: /ja/api/v1/
-    identifier: API V1 overview
+  - name: 概要
+    url: /api/v1/
+    identifier: API V1 概要
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V1 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V1 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V1 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
-    parent: API V1 overview
+  - name: Authentication
+    url: 認証
+    parent: API V1 概要
   - name: Rate Limiting
     url: rate-limiting
-    parent: API V1 overview
+    parent: API V1 概要
     weight: 5
-  - name: AWS Integration
-    url: /ja/api/v1/aws-integration/
-    identifier: AWS Integration
+  - name: AWS インテグレーション
+    url: /api/v1/aws-integration/
+    identifier: AWS インテグレーション
     generated: true
-  - name: Delete an AWS integration
-    parent: AWS Integration
+  - name: AWS インテグレーションの削除
+    parent: AWS インテグレーション
     url: delete-an-aws-integration
     generated: true
-  - name: List all AWS integrations
-    parent: AWS Integration
+  - name: すべての AWS インテグレーションのリスト
+    parent: AWS インテグレーション
     url: list-all-aws-integrations
     generated: true
-  - name: Create an AWS integration
-    parent: AWS Integration
+  - name: AWS インテグレーションの作成
+    parent: AWS インテグレーション
     url: create-an-aws-integration
     generated: true
-  - name: Update an AWS integration
-    parent: AWS Integration
+  - name: AWS インテグレーションの更新
+    parent: AWS インテグレーション
     url: update-an-aws-integration
     generated: true
-  - name: List namespace rules
-    parent: AWS Integration
+  - name: ネームスペース規則のリスト
+    parent: AWS インテグレーション
     url: list-namespace-rules
     generated: true
-  - name: Generate a new external ID
-    parent: AWS Integration
+  - name: 新しい外部 ID を生成する
+    parent: AWS インテグレーション
     url: generate-a-new-external-id
     generated: true
-  - name: AWS Logs Integration
-    url: /ja/api/v1/aws-logs-integration/
-    identifier: AWS Logs Integration
+  - name: AWS ログインテグレーション
+    url: /api/v1/aws-logs-integration/
+    identifier: AWS ログインテグレーション
     generated: true
-  - name: Delete an AWS Logs integration
-    parent: AWS Logs Integration
+  - name: AWS ログインテグレーションの削除
+    parent: AWS ログインテグレーション
     url: delete-an-aws-logs-integration
     generated: true
-  - name: List all AWS Logs integrations
-    parent: AWS Logs Integration
+  - name: すべての AWS ログインテグレーションのリスト
+    parent: AWS ログインテグレーション
     url: list-all-aws-logs-integrations
     generated: true
-  - name: Add AWS Log Lambda ARN
-    parent: AWS Logs Integration
+  - name: AWS ログ Lambda ARN の追加
+    parent: AWS ログインテグレーション
     url: add-aws-log-lambda-arn
     generated: true
-  - name: Check that an AWS Lambda Function exists
-    parent: AWS Logs Integration
+  - name: AWS Lambda 関数の存在を確認
+    parent: AWS ログインテグレーション
     url: check-that-an-aws-lambda-function-exists
     generated: true
-  - name: Get list of AWS log ready services
-    parent: AWS Logs Integration
+  - name: AWS ログレディサービスのリストを取得
+    parent: AWS ログインテグレーション
     url: get-list-of-aws-log-ready-services
     generated: true
-  - name: Enable an AWS Logs integration
-    parent: AWS Logs Integration
+  - name: AWS ログインテグレーションの有効化
+    parent: AWS ログインテグレーション
     url: enable-an-aws-logs-integration
     generated: true
-  - name: Check permissions for log services
-    parent: AWS Logs Integration
+  - name: ログサービスのアクセス許可を確認する
+    parent: AWS ログインテグレーション
     url: check-permissions-for-log-services
     generated: true
   - name: Authentication
-    url: /ja/api/v1/authentication/
+    url: /api/v1/authentication/
     identifier: Authentication
     generated: true
-  - name: Validate API key
+  - name: API キーを検証する
     parent: Authentication
     url: validate-api-key
     generated: true
-  - name: Azure Integration
-    url: /ja/api/v1/azure-integration/
-    identifier: Azure Integration
+  - name: Azure インテグレーション
+    url: /api/v1/azure-integration/
+    identifier: Azure インテグレーション
     generated: true
-  - name: Delete an Azure integration
-    parent: Azure Integration
+  - name: Azure インテグレーションの削除
+    parent: Azure インテグレーション
     url: delete-an-azure-integration
     generated: true
-  - name: List all Azure integrations
-    parent: Azure Integration
+  - name: すべての Azure インテグレーションのリスト
+    parent: Azure インテグレーション
     url: list-all-azure-integrations
     generated: true
-  - name: Create an Azure integration
-    parent: Azure Integration
+  - name: Azure インテグレーションの作成
+    parent: Azure インテグレーション
     url: create-an-azure-integration
     generated: true
-  - name: Update an Azure integration
-    parent: Azure Integration
+  - name: Azure インテグレーションの更新
+    parent: Azure インテグレーション
     url: update-an-azure-integration
     generated: true
-  - name: Update Azure integration host filters
-    parent: Azure Integration
+  - name: Azure インテグレーションホストフィルターを更新する
+    parent: Azure インテグレーション
     url: update-azure-integration-host-filters
     generated: true
-  - name: Dashboard Lists
-    url: /ja/api/v1/dashboard-lists/
-    identifier: Dashboard Lists
+  - name: ダッシュボードリスト
+    url: /api/v1/dashboard-lists/
+    identifier: ダッシュボードリスト
     generated: true
-  - name: Get all dashboard lists
-    parent: Dashboard Lists
+  - name: すべてのダッシュボードリストを取得する
+    parent: ダッシュボードリスト
     url: get-all-dashboard-lists
     generated: true
-  - name: Create a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストを作成する
+    parent: ダッシュボードリスト
     url: create-a-dashboard-list
     generated: true
-  - name: Delete a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストを削除する
+    parent: ダッシュボードリスト
     url: delete-a-dashboard-list
     generated: true
-  - name: Get a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストを取得する
+    parent: ダッシュボードリスト
     url: get-a-dashboard-list
     generated: true
-  - name: Update a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストを更新する
+    parent: ダッシュボードリスト
     url: update-a-dashboard-list
     generated: true
-  - name: Dashboards
-    url: /ja/api/v1/dashboards/
-    identifier: Dashboards
+  - name: ダッシュボード
+    url: /api/v1/dashboards/
+    identifier: ダッシュボード
     generated: true
-  - name: Get all dashboards
-    parent: Dashboards
+  - name: すべてのダッシュボードを取得する
+    parent: ダッシュボード
     url: get-all-dashboards
     generated: true
-  - name: Create a new dashboard
-    parent: Dashboards
+  - name: 新しいダッシュボードを作成する
+    parent: ダッシュボード
     url: create-a-new-dashboard
     generated: true
-  - name: Delete a dashboard
-    parent: Dashboards
+  - name: ダッシュボードを削除する
+    parent: ダッシュボード
     url: delete-a-dashboard
     generated: true
-  - name: Get a dashboard
-    parent: Dashboards
+  - name: ダッシュボードを取得する
+    parent: ダッシュボード
     url: get-a-dashboard
     generated: true
-  - name: Update a dashboard
-    parent: Dashboards
+  - name: ダッシュボードを更新する
+    parent: ダッシュボード
     url: update-a-dashboard
     generated: true
-  - name: Downtimes
-    url: /ja/api/v1/downtimes/
-    identifier: Downtimes
+  - name: ダウンタイム
+    url: /api/v1/downtimes/
+    identifier: ダウンタイム
     generated: true
-  - name: Get all downtimes
-    parent: Downtimes
+  - name: すべてのダウンタイムを取得する
+    parent: ダウンタイム
     url: get-all-downtimes
     generated: true
-  - name: Schedule a downtime
-    parent: Downtimes
+  - name: ダウンタイムをスケジュールする
+    parent: ダウンタイム
     url: schedule-a-downtime
     generated: true
-  - name: Cancel downtimes by scope
-    parent: Downtimes
+  - name: スコープごとにダウンタイムをキャンセルする
+    parent: ダウンタイム
     url: cancel-downtimes-by-scope
     generated: true
-  - name: Cancel a downtime
-    parent: Downtimes
+  - name: ダウンタイムをキャンセルする
+    parent: ダウンタイム
     url: cancel-a-downtime
     generated: true
-  - name: Get a downtime
-    parent: Downtimes
+  - name: ダウンタイムを取得する
+    parent: ダウンタイム
     url: get-a-downtime
     generated: true
-  - name: Update a downtime
-    parent: Downtimes
+  - name: ダウンタイムを更新する
+    parent: ダウンタイム
     url: update-a-downtime
     generated: true
-  - name: Embeddable Graphs
-    url: /ja/api/v1/embeddable-graphs/
-    identifier: Embeddable Graphs
+  - name: 埋め込み可能なグラフ
+    url: /api/v1/embeddable-graphs/
+    identifier: 埋め込み可能なグラフ
     generated: true
-  - name: Get all embeds
-    parent: Embeddable Graphs
+  - name: すべての Embed を取得
+    parent: 埋め込み可能なグラフ
     url: get-all-embeds
     generated: true
-  - name: Create embed
-    parent: Embeddable Graphs
+  - name: Embed の作成
+    parent: 埋め込み可能なグラフ
     url: create-embed
     generated: true
-  - name: Get specific embed
-    parent: Embeddable Graphs
+  - name: 特定の Embed を取得
+    parent: 埋め込み可能なグラフ
     url: get-specific-embed
     generated: true
-  - name: Enable embed
-    parent: Embeddable Graphs
+  - name: Embed の有効化
+    parent: 埋め込み可能なグラフ
     url: enable-embed
     generated: true
-  - name: Revoke embed
-    parent: Embeddable Graphs
+  - name: Embed の無効化
+    parent: 埋め込み可能なグラフ
     url: revoke-embed
     generated: true
-  - name: Events
-    url: /ja/api/v1/events/
-    identifier: Events
+  - name: イベント
+    url: /api/v1/events/
+    identifier: イベント
     generated: true
-  - name: Query the event stream
-    parent: Events
+  - name: イベントストリームのクエリ
+    parent: イベント
     url: query-the-event-stream
     generated: true
-  - name: Post an event
-    parent: Events
+  - name: イベントのポスト
+    parent: イベント
     url: post-an-event
     generated: true
-  - name: Get an event
-    parent: Events
+  - name: イベントの取得
+    parent: イベント
     url: get-an-event
     generated: true
-  - name: GCP Integration
-    url: /ja/api/v1/gcp-integration/
-    identifier: GCP Integration
+  - name: GCP インテグレーション
+    url: /api/v1/gcp-integration/
+    identifier: GCP インテグレーション
     generated: true
-  - name: Delete a GCP integration
-    parent: GCP Integration
+  - name: GCP インテグレーションの削除
+    parent: GCP インテグレーション
     url: delete-a-gcp-integration
     generated: true
-  - name: List all GCP integrations
-    parent: GCP Integration
+  - name: すべての GCP インテグレーションのリスト
+    parent: GCP インテグレーション
     url: list-all-gcp-integrations
     generated: true
-  - name: Create a GCP integration
-    parent: GCP Integration
+  - name: GCP インテグレーションの作成
+    parent: GCP インテグレーション
     url: create-a-gcp-integration
     generated: true
-  - name: Update a GCP integration
-    parent: GCP Integration
+  - name: GCP インテグレーションを更新する
+    parent: GCP インテグレーション
     url: update-a-gcp-integration
     generated: true
-  - name: Hosts
-    url: /ja/api/v1/hosts/
-    identifier: Hosts
+  - name: ホスト
+    url: /api/v1/hosts/
+    identifier: ホスト
     generated: true
-  - name: Mute a host
-    parent: Hosts
+  - name: ホストのミュート
+    parent: ホスト
     url: mute-a-host
     generated: true
-  - name: Unmute a host
-    parent: Hosts
+  - name: ホストのミュートを解除
+    parent: ホスト
     url: unmute-a-host
     generated: true
-  - name: Get all hosts for your organization
-    parent: Hosts
+  - name: 組織のすべてのホストを取得する
+    parent: ホスト
     url: get-all-hosts-for-your-organization
     generated: true
-  - name: Get the total number of active hosts
-    parent: Hosts
+  - name: アクティブなホストの総数を取得する
+    parent: ホスト
     url: get-the-total-number-of-active-hosts
     generated: true
-  - name: IP Ranges
-    url: /ja/api/v1/ip-ranges/
-    identifier: IP Ranges
+  - name: IP 範囲
+    url: /api/v1/ip-ranges/
+    identifier: IP 範囲
     generated: true
-  - name: List IP Ranges
-    parent: IP Ranges
+  - name: IP 範囲を一覧表示する
+    parent: IP 範囲
     url: list-ip-ranges
     generated: true
   - name: Key Management
-    url: /ja/api/v1/key-management/
+    url: /api/v1/key-management/
     identifier: Key Management
     generated: true
-  - name: Get all API keys
+  - name: すべての API キーを取得
     parent: Key Management
     url: get-all-api-keys
     generated: true
-  - name: Create an API key
+  - name: API キーの作成
     parent: Key Management
     url: create-an-api-key
     generated: true
-  - name: Delete an API key
+  - name: API キーの削除
     parent: Key Management
     url: delete-an-api-key
     generated: true
-  - name: Get API key
+  - name: API キーを取得する
     parent: Key Management
     url: get-api-key
     generated: true
-  - name: Edit an API key
+  - name: API キーの編集
     parent: Key Management
     url: edit-an-api-key
     generated: true
-  - name: Get all application keys
+  - name: すべてのアプリケーションキーを取得
     parent: Key Management
     url: get-all-application-keys
     generated: true
-  - name: Create an application key
+  - name: アプリケーションキーの作成
     parent: Key Management
     url: create-an-application-key
     generated: true
-  - name: Delete an application key
+  - name: アプリケーションキーの削除
     parent: Key Management
     url: delete-an-application-key
     generated: true
-  - name: Get an application key
+  - name: アプリケーションキーの取得
     parent: Key Management
     url: get-an-application-key
     generated: true
-  - name: Edit an application key
+  - name: アプリケーションキーの編集
     parent: Key Management
     url: edit-an-application-key
     generated: true
-  - name: Logs
-    url: /ja/api/v1/logs/
-    identifier: Logs
+  - name: ログ
+    url: /api/v1/logs/
+    identifier: ログ
     generated: true
-  - name: Get a list of logs
-    parent: Logs
+  - name: ログのリストの取得
+    parent: ログ
     url: get-a-list-of-logs
     generated: true
-  - name: Send logs
-    parent: Logs
+  - name: ログを送信する
+    parent: ログ
     url: send-logs
     generated: true
-  - name: Logs Archives
-    url: /ja/api/v1/logs-archives/
-    identifier: Logs Archives
+  - name: ログアーカイブ
+    url: /api/v1/logs-archives/
+    identifier: ログアーカイブ
     generated: true
-  - name: Logs Indexes
-    url: /ja/api/v1/logs-indexes/
-    identifier: Logs Indexes
+  - name: ログインデックス
+    url: /api/v1/logs-indexes/
+    identifier: ログインデックス
     generated: true
-  - name: Get indexes order
-    parent: Logs Indexes
+  - name: インデックス順序を取得する
+    parent: ログインデックス
     url: get-indexes-order
     generated: true
-  - name: Update indexes order
-    parent: Logs Indexes
+  - name: インデックス順序を更新する
+    parent: ログインデックス
     url: update-indexes-order
     generated: true
-  - name: Get all indexes
-    parent: Logs Indexes
+  - name: すべてのインデックスを取得する
+    parent: ログインデックス
     url: get-all-indexes
     generated: true
-  - name: Get an index
-    parent: Logs Indexes
+  - name: インデックスを取得する
+    parent: ログインデックス
     url: get-an-index
     generated: true
-  - name: Update an index
-    parent: Logs Indexes
+  - name: インデックスを更新する
+    parent: ログインデックス
     url: update-an-index
     generated: true
-  - name: Logs Pipelines
-    url: /ja/api/v1/logs-pipelines/
-    identifier: Logs Pipelines
+  - name: "ログパイプライン\n\_"
+    url: /api/v1/logs-pipelines/
+    identifier: "ログパイプライン\n\_"
     generated: true
-  - name: Get pipeline order
-    parent: Logs Pipelines
+  - name: パイプライン順序を取得する
+    parent: "ログパイプライン\n\_"
     url: get-pipeline-order
     generated: true
-  - name: Update pipeline order
-    parent: Logs Pipelines
+  - name: パイプライン順序を更新する
+    parent: "ログパイプライン\n\_"
     url: update-pipeline-order
     generated: true
-  - name: Get all pipelines
-    parent: Logs Pipelines
+  - name: すべてのパイプラインを取得する
+    parent: "ログパイプライン\n\_"
     url: get-all-pipelines
     generated: true
-  - name: Create a pipeline
-    parent: Logs Pipelines
+  - name: パイプラインを作成する
+    parent: "ログパイプライン\n\_"
     url: create-a-pipeline
     generated: true
-  - name: Delete a pipeline
-    parent: Logs Pipelines
+  - name: パイプラインを削除する
+    parent: "ログパイプライン\n\_"
     url: delete-a-pipeline
     generated: true
-  - name: Get a pipeline
-    parent: Logs Pipelines
+  - name: パイプラインを取得する
+    parent: "ログパイプライン\n\_"
     url: get-a-pipeline
     generated: true
-  - name: Update a pipeline
-    parent: Logs Pipelines
+  - name: パイプラインを更新する
+    parent: "ログパイプライン\n\_"
     url: update-a-pipeline
     generated: true
-  - name: Logs Restriction Queries
-    url: /ja/api/v1/logs-restriction-queries/
-    identifier: Logs Restriction Queries
+  - name: ログ制限クエリ
+    url: /api/v1/logs-restriction-queries/
+    identifier: ログ制限クエリ
     generated: true
-  - name: Metrics
-    url: /ja/api/v1/metrics/
-    identifier: Metrics
+  - name: メトリクス
+    url: /api/v1/metrics/
+    identifier: メトリクス
     generated: true
-  - name: Get active metrics list
-    parent: Metrics
+  - name: アクティブメトリクスのリストを取得する
+    parent: メトリクス
     url: get-active-metrics-list
     generated: true
-  - name: Get metric metadata
-    parent: Metrics
+  - name: メトリクスのメタデータを取得する
+    parent: メトリクス
     url: get-metric-metadata
     generated: true
-  - name: Edit metric metadata
-    parent: Metrics
+  - name: メトリクスのメタデータを編集
+    parent: メトリクス
     url: edit-metric-metadata
     generated: true
-  - name: Query timeseries points
-    parent: Metrics
+  - name: 時系列ポイントのクエリ
+    parent: メトリクス
     url: query-timeseries-points
     generated: true
-  - name: Search metrics
-    parent: Metrics
+  - name: メトリクスの検索
+    parent: メトリクス
     url: search-metrics
     generated: true
-  - name: Submit metrics
-    parent: Metrics
+  - name: メトリクスを送信する
+    parent: メトリクス
     url: submit-metrics
     generated: true
-  - name: Monitors
-    url: /ja/api/v1/monitors/
-    identifier: Monitors
+  - name: モニター
+    url: /api/v1/monitors/
+    identifier: モニター
     generated: true
-  - name: Get all monitor details
-    parent: Monitors
+  - name: 全モニターの詳細を取得
+    parent: モニター
     url: get-all-monitor-details
     generated: true
-  - name: Create a monitor
-    parent: Monitors
+  - name: モニターの作成
+    parent: モニター
     url: create-a-monitor
     generated: true
-  - name: Check if a monitor can be deleted
-    parent: Monitors
+  - name: モニターの削除が可能かどうか確認
+    parent: モニター
     url: check-if-a-monitor-can-be-deleted
     generated: true
-  - name: Monitors group search
-    parent: Monitors
+  - name: モニターグループの検索
+    parent: モニター
     url: monitors-group-search
     generated: true
-  - name: Monitors search
-    parent: Monitors
+  - name: モニターの検索
+    parent: モニター
     url: monitors-search
     generated: true
-  - name: Validate a monitor
-    parent: Monitors
+  - name: モニターの検証
+    parent: モニター
     url: validate-a-monitor
     generated: true
-  - name: Delete a monitor
-    parent: Monitors
+  - name: モニターの削除
+    parent: モニター
     url: delete-a-monitor
     generated: true
-  - name: Get a monitor's details
-    parent: Monitors
+  - name: モニターの詳細を取得
+    parent: モニター
     url: get-a-monitors-details
     generated: true
-  - name: Edit a monitor
-    parent: Monitors
+  - name: モニターの編集
+    parent: モニター
     url: edit-a-monitor
     generated: true
-  - name: Mute a monitor
-    parent: Monitors
+  - name: モニターのミュート
+    parent: モニター
     url: mute-a-monitor
     generated: true
-  - name: Unmute a monitor
-    parent: Monitors
+  - name: モニターのミュートを解除
+    parent: モニター
     url: unmute-a-monitor
     generated: true
-  - name: Resolve Monitor
-    parent: Monitors
+  - name: モニターを解決する
+    parent: モニター
     url: resolve-monitor
     generated: true
-  - name: Mute all monitors
-    parent: Monitors
+  - name: 全モニターのミュート
+    parent: モニター
     url: mute-all-monitors
     generated: true
-  - name: Unmute all monitors
-    parent: Monitors
+  - name: 全モニターのミュートを解除
+    parent: モニター
     url: unmute-all-monitors
     generated: true
   - name: Organizations
-    url: /ja/api/v1/organizations/
+    url: /api/v1/organizations/
     identifier: Organizations
     generated: true
-  - name: List your managed organizations
+  - name: 管理している組織を一覧表示する
     parent: Organizations
     url: list-your-managed-organizations
     generated: true
-  - name: Create a child organization
+  - name: 子組織を作成する
     parent: Organizations
     url: create-a-child-organization
     generated: true
-  - name: Get organization information
+  - name: 組織情報を取得する
     parent: Organizations
     url: get-organization-information
     generated: true
-  - name: Update your organization
+  - name: 組織を更新する
     parent: Organizations
     url: update-your-organization
     generated: true
-  - name: Upload IdP metadata
+  - name: IdP メタデータをアップロード
     parent: Organizations
     url: upload-idp-metadata
     generated: true
-  - name: PagerDuty Integration
-    url: /ja/api/v1/pagerduty-integration/
-    identifier: PagerDuty Integration
+  - name: PagerDuty インテグレーション
+    url: /api/v1/pagerduty-integration/
+    identifier: PagerDuty インテグレーション
     generated: true
-  - name: Create a new service object
-    parent: PagerDuty Integration
+  - name: 新しいサービスオブジェクトを作成する
+    parent: PagerDuty インテグレーション
     url: create-a-new-service-object
     generated: true
-  - name: Delete a single service object
-    parent: PagerDuty Integration
+  - name: 単一のサービスオブジェクトを削除する
+    parent: PagerDuty インテグレーション
     url: delete-a-single-service-object
     generated: true
-  - name: Get a single service object
-    parent: PagerDuty Integration
+  - name: 単一のサービスオブジェクトを取得する
+    parent: PagerDuty インテグレーション
     url: get-a-single-service-object
     generated: true
-  - name: Update a single service object
-    parent: PagerDuty Integration
+  - name: 単一のサービスオブジェクトを更新する
+    parent: PagerDuty インテグレーション
     url: update-a-single-service-object
     generated: true
-  - name: Roles
-    url: /ja/api/v1/roles/
-    identifier: Roles
+  - name: ロール
+    url: /api/v1/roles/
+    identifier: ロール
     generated: true
-  - name: Screenboards
-    url: /ja/api/v1/screenboards/
-    identifier: Screenboards
+  - name: スクリーンボード
+    url: /api/v1/screenboards/
+    identifier: スクリーンボード
     generated: true
-  - name: Security Monitoring
-    url: /ja/api/v1/security-monitoring/
-    identifier: Security Monitoring
+  - name: セキュリティモニタリング
+    url: /api/v1/security-monitoring/
+    identifier: セキュリティモニタリング
     generated: true
-  - name: Service Checks
-    url: /ja/api/v1/service-checks/
-    identifier: Service Checks
+  - name: サービスのチェック
+    url: /api/v1/service-checks/
+    identifier: サービスのチェック
     generated: true
-  - name: Submit a Service Check
-    parent: Service Checks
+  - name: サービスチェックを送信する
+    parent: サービスのチェック
     url: submit-a-service-check
     generated: true
-  - name: Service Dependencies
-    url: /ja/api/v1/service-dependencies/
-    identifier: Service Dependencies
+  - name: サービスの依存関係
+    url: /api/v1/service-dependencies/
+    identifier: サービスの依存関係
     generated: true
-  - name: Get all service dependencies
-    parent: Service Dependencies
+  - name: すべてのサービスの依存関係を取得する
+    parent: サービスの依存関係
     url: get-all-service-dependencies
     generated: true
-  - name: Get one service's dependencies
-    parent: Service Dependencies
+  - name: 1 つのサービスの依存関係を取得する
+    parent: サービスの依存関係
     url: get-one-services-dependencies
     generated: true
-  - name: Service Level Objectives
-    url: /ja/api/v1/service-level-objectives/
-    identifier: Service Level Objectives
+  - name: サービスレベル目標
+    url: /api/v1/service-level-objectives/
+    identifier: サービスレベル目標
     generated: true
-  - name: Search SLOs
-    parent: Service Level Objectives
+  - name: SLO を検索する
+    parent: サービスレベル目標
     url: search-slos
     generated: true
-  - name: Create a SLO object
-    parent: Service Level Objectives
+  - name: SLO オブジェクトを作成する
+    parent: サービスレベル目標
     url: create-a-slo-object
     generated: true
-  - name: Bulk Delete SLO Timeframes
-    parent: Service Level Objectives
+  - name: SLO タイムフレームを一括削除する
+    parent: サービスレベル目標
     url: bulk-delete-slo-timeframes
     generated: true
-  - name: Check if SLOs can be safely deleted
-    parent: Service Level Objectives
+  - name: SLO を安全に削除できるかどうかを確認する
+    parent: サービスレベル目標
     url: check-if-slos-can-be-safely-deleted
     generated: true
-  - name: Delete a SLO
-    parent: Service Level Objectives
+  - name: SLO を削除する
+    parent: サービスレベル目標
     url: delete-a-slo
     generated: true
-  - name: Get a SLO's details
-    parent: Service Level Objectives
+  - name: SLO の詳細を取得する
+    parent: サービスレベル目標
     url: get-a-slos-details
     generated: true
-  - name: Update a SLO
-    parent: Service Level Objectives
+  - name: SLO を更新する
+    parent: サービスレベル目標
     url: update-a-slo
     generated: true
-  - name: Get an SLO's history
-    parent: Service Level Objectives
+  - name: SLO の履歴を取得する
+    parent: サービスレベル目標
     url: get-an-slos-history
     generated: true
-  - name: Slack Integration
-    url: /ja/api/v1/slack-integration/
-    identifier: Slack Integration
+  - name: Slack インテグレーション
+    url: /api/v1/slack-integration/
+    identifier: Slack インテグレーション
     generated: true
-  - name: Delete a Slack integration
-    parent: Slack Integration
+  - name: Slack インテグレーションの削除
+    parent: Slack インテグレーション
     url: delete-a-slack-integration
     generated: true
-  - name: Get info about a Slack integration
-    parent: Slack Integration
+  - name: Slack インテグレーションに関する情報を取得する
+    parent: Slack インテグレーション
     url: get-info-about-a-slack-integration
     generated: true
-  - name: Create a Slack integration
-    parent: Slack Integration
+  - name: Slack インテグレーションの作成
+    parent: Slack インテグレーション
     url: create-a-slack-integration
     generated: true
-  - name: Add channels to Slack integration
-    parent: Slack Integration
+  - name: Slack インテグレーションにチャネルを追加
+    parent: Slack インテグレーション
     url: add-channels-to-slack-integration
     generated: true
-  - name: Snapshots
-    url: /ja/api/v1/snapshots/
-    identifier: Snapshots
+  - name: スナップショット
+    url: /api/v1/snapshots/
+    identifier: スナップショット
     generated: true
-  - name: Take graph snapshots
-    parent: Snapshots
+  - name: グラフのスナップショットを撮る
+    parent: スナップショット
     url: take-graph-snapshots
     generated: true
   - name: Synthetics
-    url: /ja/api/v1/synthetics/
+    url: /api/v1/synthetics/
     identifier: Synthetics
     generated: true
-  - name: Get all locations (public and private)
+  - name: ロケーションをすべて取得する（パブリックおよびプライベート）
     parent: Synthetics
     url: get-all-locations-public-and-private
     generated: true
-  - name: Get a list of tests
+  - name: テストのリストを取得する
     parent: Synthetics
     url: get-a-list-of-tests
     generated: true
-  - name: Create a test
+  - name: テストの作成
     parent: Synthetics
     url: create-a-test
     generated: true
-  - name: Get a test configuration (browser)
+  - name: テストコンフィギュレーションを取得する（ブラウザ）
     parent: Synthetics
     url: get-a-test-configuration-browser
     generated: true
-  - name: Get the test's latest results summaries (browser)
+  - name: テストの最新結果の要約を取得する (ブラウザ)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
     generated: true
-  - name: Get a test result (browser)
+  - name: テスト結果を取得する (ブラウザ)
     parent: Synthetics
     url: get-a-test-result-browser
     generated: true
-  - name: Delete tests
+  - name: テストの削除
     parent: Synthetics
     url: delete-tests
     generated: true
-  - name: Get a test configuration (API)
+  - name: CI の Synthetic テストのトリガー
+    parent: Synthetics
+    url: trigger-some-synthetics-tests-for-ci
+    generated: true
+  - name: テストコンフィギュレーションを取得する（API）
     parent: Synthetics
     url: get-a-test-configuration-api
     generated: true
-  - name: Edit a test
+  - name: テストの編集
     parent: Synthetics
     url: edit-a-test
     generated: true
-  - name: Get the test's latest results summaries (API)
+  - name: テストの最新結果の要約を取得する (API)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-api
     generated: true
-  - name: Get a test result (API)
+  - name: テスト結果を取得する (API)
     parent: Synthetics
     url: get-a-test-result-api
     generated: true
-  - name: Pause or start a test
+  - name: テストを一時停止または開始する
     parent: Synthetics
     url: pause-or-start-a-test
     generated: true
-  - name: Tags
-    url: /ja/api/v1/tags/
-    identifier: Tags
+  - name: グローバル変数を作成する
+    parent: Synthetics
+    url: create-a-global-variable
     generated: true
-  - name: Get Tags
-    parent: Tags
+  - name: グローバル変数を削除する
+    parent: Synthetics
+    url: delete-a-global-variable
+    generated: true
+  - name: グローバル変数を編集する
+    parent: Synthetics
+    url: edit-a-global-variable
+    generated: true
+  - name: タグ
+    url: /api/v1/tags/
+    identifier: タグ
+    generated: true
+  - name: タグを取得する
+    parent: タグ
     url: get-tags
     generated: true
-  - name: Remove host tags
-    parent: Tags
+  - name: ホストタグの削除
+    parent: タグ
     url: remove-host-tags
     generated: true
-  - name: Get host tags
-    parent: Tags
+  - name: ホストタグの取得
+    parent: タグ
     url: get-host-tags
     generated: true
-  - name: Add tags to a host
-    parent: Tags
+  - name: ホストへのタグの追加
+    parent: タグ
     url: add-tags-to-a-host
     generated: true
-  - name: Update host tags
-    parent: Tags
+  - name: ホストタグの更新
+    parent: タグ
     url: update-host-tags
     generated: true
-  - name: Timeboards
-    url: /ja/api/v1/timeboards/
-    identifier: Timeboards
+  - name: タイムボード
+    url: /api/v1/timeboards/
+    identifier: タイムボード
     generated: true
-  - name: Tracing
-    url: /ja/api/v1/tracing/
-    identifier: Tracing
+  - name: トレーシング
+    url: /api/v1/tracing/
+    identifier: トレーシング
     generated: true
-  - name: Send traces
-    parent: Tracing
+  - name: トレースの送信
+    parent: トレーシング
     url: send-traces
     generated: true
-  - name: Usage Metering
-    url: /ja/api/v1/usage-metering/
-    identifier: Usage Metering
+  - name: 使用料のメータリング
+    url: /api/v1/usage-metering/
+    identifier: 使用料のメータリング
     generated: true
-  - name: Get the list of available daily custom reports
-    parent: Usage Metering
+  - name: 利用可能な日刊カスタムレポートのリストを取得します
+    parent: 使用料のメータリング
     url: get-the-list-of-available-daily-custom-reports
     generated: true
-  - name: Get specified daily custom reports
-    parent: Usage Metering
+  - name: 特定の日刊カスタムレポートを取得します
+    parent: 使用料のメータリング
     url: get-specified-daily-custom-reports
     generated: true
-  - name: Get the list of available monthly custom reports
-    parent: Usage Metering
+  - name: 利用可能な月刊カスタムレポートのリストを取得します
+    parent: 使用料のメータリング
     url: get-the-list-of-available-monthly-custom-reports
     generated: true
-  - name: Get specified monthly custom reports
-    parent: Usage Metering
+  - name: 特定の月刊カスタムレポートを取得します
+    parent: 使用料のメータリング
     url: get-specified-monthly-custom-reports
     generated: true
-  - name: Get hourly usage for analyzed logs
-    parent: Usage Metering
+  - name: 分析されたログの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-analyzed-logs
     generated: true
-  - name: Get hourly usage for Lambda
-    parent: Usage Metering
+  - name: Lambda の 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-lambda
     generated: true
-  - name: Get billable usage across your multi-org account
-    parent: Usage Metering
+  - name: マルチオーガニゼーションのアカウント全体の請求対象使用量を取得します
+    parent: 使用料のメータリング
     url: get-billable-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Fargate
-    parent: Usage Metering
+  - name: Fargate の 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-fargate
     generated: true
-  - name: Get hourly usage for hosts and containers
-    parent: Usage Metering
+  - name: ホストとコンテナの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-hosts-and-containers
     generated: true
-  - name: Get hourly usage for Logs
-    parent: Usage Metering
+  - name: ログの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-logs
     generated: true
-  - name: Get hourly usage for Logs by Index
-    parent: Usage Metering
+  - name: インデックスごとにログの 1 時間あたり使用量を取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-logs-by-index
     generated: true
-  - name: Get hourly usage for Network Flows
-    parent: Usage Metering
+  - name: ネットワークフローの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-network-flows
     generated: true
-  - name: Get hourly usage for Network Hosts
-    parent: Usage Metering
+  - name: ネットワークホストの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-network-hosts
     generated: true
-  - name: Get hourly usage for RUM Sessions
-    parent: Usage Metering
+  - name: プロファイルされたホストの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
+    url: get-hourly-usage-for-profiled-hosts
+    generated: true
+  - name: RUM セッションの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-rum-sessions
     generated: true
-  - name: Get hourly usage for SNMP devices
-    parent: Usage Metering
+  - name: SNMP デバイスの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-snmp-devices
     generated: true
-  - name: Get usage across your multi-org account
-    parent: Usage Metering
+  - name: マルチオーガニゼーションのアカウント全体の使用量の取得
+    parent: 使用料のメータリング
     url: get-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Synthetics Checks
-    parent: Usage Metering
+  - name: Synthetics チェックの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-synthetics-checks
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
-    parent: Usage Metering
+  - name: Synthetics API チェックの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-synthetics-api-checks
     generated: true
-  - name: Get hourly usage for Synthetics Browser Checks
-    parent: Usage Metering
+  - name: Synthetics Browser チェックの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-synthetics-browser-checks
     generated: true
-  - name: Get hourly usage for custom metrics
-    parent: Usage Metering
+  - name: カスタムメトリクスの 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-custom-metrics
     generated: true
-  - name: Get top 500 custom metrics by hourly average
-    parent: Usage Metering
+  - name: 時間平均に基づくカスタムメトリクス上位 500 の取得
+    parent: 使用料のメータリング
     url: get-top-500-custom-metrics-by-hourly-average
     generated: true
-  - name: Get hourly usage for Trace Search
-    parent: Usage Metering
+  - name: トレース検索の 1 時間あたり使用量の取得
+    parent: 使用料のメータリング
     url: get-hourly-usage-for-trace-search
     generated: true
-  - name: Users
-    url: /ja/api/v1/users/
-    identifier: Users
+  - name: ユーザー
+    url: /api/v1/users/
+    identifier: ユーザー
     generated: true
-  - name: Get all users
-    parent: Users
+  - name: すべてのユーザーの取得
+    parent: ユーザー
     url: get-all-users
     generated: true
-  - name: Create a user
-    parent: Users
+  - name: ユーザーを作成する
+    parent: ユーザー
     url: create-a-user
     generated: true
-  - name: Disable a user
-    parent: Users
+  - name: ユーザーを無効にする
+    parent: ユーザー
     url: disable-a-user
     generated: true
-  - name: Get user details
-    parent: Users
+  - name: ユーザーの詳細を取得する
+    parent: ユーザー
     url: get-user-details
     generated: true
-  - name: Update a user
-    parent: Users
+  - name: ユーザーを更新する
+    parent: ユーザー
     url: update-a-user
     generated: true
-  - name: Webhooks Integration
-    url: /ja/api/v1/webhooks-integration/
-    identifier: Webhooks Integration
+  - name: Webhook インテグレーション
+    url: /api/v1/webhooks-integration/
+    identifier: Webhook インテグレーション
     generated: true
-  - name: Create a custom variable
-    parent: Webhooks Integration
+  - name: カスタム変数を作成する
+    parent: Webhook インテグレーション
     url: create-a-custom-variable
     generated: true
-  - name: Delete a custom variable
-    parent: Webhooks Integration
+  - name: カスタム変数を削除する
+    parent: Webhook インテグレーション
     url: delete-a-custom-variable
     generated: true
-  - name: Get a custom variable
-    parent: Webhooks Integration
+  - name: カスタム変数を取得する
+    parent: Webhook インテグレーション
     url: get-a-custom-variable
     generated: true
-  - name: Update a custom variable
-    parent: Webhooks Integration
+  - name: カスタム変数を更新する
+    parent: Webhook インテグレーション
     url: update-a-custom-variable
     generated: true
-  - name: Create a webhooks integration
-    parent: Webhooks Integration
+  - name: Webhook インテグレーションを作成する
+    parent: Webhook インテグレーション
     url: create-a-webhooks-integration
     generated: true
-  - name: Delete a webhook
-    parent: Webhooks Integration
+  - name: Webhook を削除する
+    parent: Webhook インテグレーション
     url: delete-a-webhook
     generated: true
-  - name: Get a webhook integration
-    parent: Webhooks Integration
+  - name: Webhook インテグレーションを取得する
+    parent: Webhook インテグレーション
     url: get-a-webhook-integration
     generated: true
-  - name: Update a webhook
-    parent: Webhooks Integration
+  - name: Webhook を更新する
+    parent: Webhook インテグレーション
     url: update-a-webhook
     generated: true
 api_v2:
-  - name: Overview
-    url: /ja/api/v2/
-    identifier: API V2 overview
+  - name: 概要
+    url: /api/v2/
+    identifier: API V2 概要
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V2 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V2 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V2 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
-    parent: API V2 overview
+  - name: Authentication
+    url: 認証
+    parent: API V2 概要
   - name: Rate Limiting
     url: rate-limiting
-    parent: API V2 overview
+    parent: API V2 概要
     weight: 5
-  - name: AWS Integration
-    url: /ja/api/v2/aws-integration/
-    identifier: AWS Integration
+  - name: AWS インテグレーション
+    url: /api/v2/aws-integration/
+    identifier: AWS インテグレーション
     generated: true
-  - name: AWS Logs Integration
-    url: /ja/api/v2/aws-logs-integration/
-    identifier: AWS Logs Integration
+  - name: AWS ログインテグレーション
+    url: /api/v2/aws-logs-integration/
+    identifier: AWS ログインテグレーション
     generated: true
   - name: Authentication
-    url: /ja/api/v2/authentication/
+    url: /api/v2/authentication/
     identifier: Authentication
     generated: true
-  - name: Azure Integration
-    url: /ja/api/v2/azure-integration/
-    identifier: Azure Integration
+  - name: Azure インテグレーション
+    url: /api/v2/azure-integration/
+    identifier: Azure インテグレーション
     generated: true
-  - name: Dashboard Lists
-    url: /ja/api/v2/dashboard-lists/
-    identifier: Dashboard Lists
+  - name: ダッシュボードリスト
+    url: /api/v2/dashboard-lists/
+    identifier: ダッシュボードリスト
     generated: true
-  - name: Delete items from a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストからアイテムを削除する
+    parent: ダッシュボードリスト
     url: delete-items-from-a-dashboard-list
     generated: true
-  - name: Get a Dashboard List
-    parent: Dashboard Lists
+  - name: ダッシュボードリストの取得
+    parent: ダッシュボードリスト
     url: get-a-dashboard-list
     generated: true
-  - name: Add Items to a Dashboard List
-    parent: Dashboard Lists
+  - name: ダッシュボードリストへの項目の追加
+    parent: ダッシュボードリスト
     url: add-items-to-a-dashboard-list
     generated: true
-  - name: Update items of a dashboard list
-    parent: Dashboard Lists
+  - name: ダッシュボードリストのアイテムを更新する
+    parent: ダッシュボードリスト
     url: update-items-of-a-dashboard-list
     generated: true
-  - name: Dashboards
-    url: /ja/api/v2/dashboards/
-    identifier: Dashboards
+  - name: ダッシュボード
+    url: /api/v2/dashboards/
+    identifier: ダッシュボード
     generated: true
-  - name: Downtimes
-    url: /ja/api/v2/downtimes/
-    identifier: Downtimes
+  - name: ダウンタイム
+    url: /api/v2/downtimes/
+    identifier: ダウンタイム
     generated: true
-  - name: Embeddable Graphs
-    url: /ja/api/v2/embeddable-graphs/
-    identifier: Embeddable Graphs
+  - name: 埋め込み可能なグラフ
+    url: /api/v2/embeddable-graphs/
+    identifier: 埋め込み可能なグラフ
     generated: true
-  - name: Events
-    url: /ja/api/v2/events/
-    identifier: Events
+  - name: イベント
+    url: /api/v2/events/
+    identifier: イベント
     generated: true
-  - name: GCP Integration
-    url: /ja/api/v2/gcp-integration/
-    identifier: GCP Integration
+  - name: GCP インテグレーション
+    url: /api/v2/gcp-integration/
+    identifier: GCP インテグレーション
     generated: true
-  - name: Hosts
-    url: /ja/api/v2/hosts/
-    identifier: Hosts
+  - name: ホスト
+    url: /api/v2/hosts/
+    identifier: ホスト
     generated: true
-  - name: IP Ranges
-    url: /ja/api/v2/ip-ranges/
-    identifier: IP Ranges
+  - name: IP 範囲
+    url: /api/v2/ip-ranges/
+    identifier: IP 範囲
     generated: true
   - name: Key Management
-    url: /ja/api/v2/key-management/
+    url: /api/v2/key-management/
     identifier: Key Management
     generated: true
-  - name: Logs
-    url: /ja/api/v2/logs/
-    identifier: Logs
+  - name: ログ
+    url: /api/v2/logs/
+    identifier: ログ
     generated: true
-  - name: Get a quick list of logs
-    parent: Logs
+  - name: イベントを集計する
+    parent: ログ
+    url: aggregate-events
+    generated: true
+  - name: ログの簡易リストの取得
+    parent: ログ
     url: get-a-quick-list-of-logs
     generated: true
-  - name: Get a list of logs
-    parent: Logs
+  - name: ログのリストの取得
+    parent: ログ
     url: get-a-list-of-logs
     generated: true
-  - name: Logs Archives
-    url: /ja/api/v2/logs-archives/
-    identifier: Logs Archives
+  - name: ログアーカイブ
+    url: /api/v2/logs-archives/
+    identifier: ログアーカイブ
     generated: true
-  - name: Get all archives
-    parent: Logs Archives
+  - name: すべてのアーカイブを取得する
+    parent: ログアーカイブ
     url: get-all-archives
     generated: true
-  - name: Create an archive
-    parent: Logs Archives
+  - name: アーカイブを作成する
+    parent: ログアーカイブ
     url: create-an-archive
     generated: true
-  - name: Delete an archive
-    parent: Logs Archives
+  - name: アーカイブを削除する
+    parent: ログアーカイブ
     url: delete-an-archive
     generated: true
-  - name: Get an archive
-    parent: Logs Archives
+  - name: アーカイブを取得する
+    parent: ログアーカイブ
     url: get-an-archive
     generated: true
-  - name: Update an archive
-    parent: Logs Archives
+  - name: アーカイブを更新する
+    parent: ログアーカイブ
     url: update-an-archive
     generated: true
-  - name: Revoke role from an archive
-    parent: Logs Archives
+  - name: アーカイブからロールを取り消す
+    parent: ログアーカイブ
     url: revoke-role-from-an-archive
     generated: true
-  - name: List read roles for an archive
-    parent: Logs Archives
+  - name: アーカイブの読み取りロールを一覧表示する
+    parent: ログアーカイブ
     url: list-read-roles-for-an-archive
     generated: true
-  - name: Grant role to an archive
-    parent: Logs Archives
+  - name: アーカイブにロールを付与する
+    parent: ログアーカイブ
     url: grant-role-to-an-archive
     generated: true
-  - name: Logs Indexes
-    url: /ja/api/v2/logs-indexes/
-    identifier: Logs Indexes
+  - name: ログインデックス
+    url: /api/v2/logs-indexes/
+    identifier: ログインデックス
     generated: true
-  - name: Logs Pipelines
-    url: /ja/api/v2/logs-pipelines/
-    identifier: Logs Pipelines
+  - name: "ログパイプライン\n\_"
+    url: /api/v2/logs-pipelines/
+    identifier: "ログパイプライン\n\_"
     generated: true
-  - name: Logs Restriction Queries
-    url: /ja/api/v2/logs-restriction-queries/
-    identifier: Logs Restriction Queries
+  - name: ログ制限クエリ
+    url: /api/v2/logs-restriction-queries/
+    identifier: ログ制限クエリ
     generated: true
-  - name: List restriction queries
-    parent: Logs Restriction Queries
+  - name: 制限クエリを一覧表示する
+    parent: ログ制限クエリ
     url: list-restriction-queries
     generated: true
-  - name: Create a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリを作成する
+    parent: ログ制限クエリ
     url: create-a-restriction-query
     generated: true
-  - name: Get restriction query for a given role
-    parent: Logs Restriction Queries
+  - name: 特定のロールの制限クエリを取得する
+    parent: ログ制限クエリ
     url: get-restriction-query-for-a-given-role
     generated: true
-  - name: Get all restriction queries for a given user
-    parent: Logs Restriction Queries
+  - name: 特定のユーザーのすべての制限クエリを取得する
+    parent: ログ制限クエリ
     url: get-all-restriction-queries-for-a-given-user
     generated: true
-  - name: Delete a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリを削除する
+    parent: ログ制限クエリ
     url: delete-a-restriction-query
     generated: true
-  - name: Get a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリを取得する
+    parent: ログ制限クエリ
     url: get-a-restriction-query
     generated: true
-  - name: Update a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリを更新する
+    parent: ログ制限クエリ
     url: update-a-restriction-query
     generated: true
-  - name: Revoke role from a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリからロールを取り消す
+    parent: ログ制限クエリ
     url: revoke-role-from-a-restriction-query
     generated: true
-  - name: List roles for a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリのロールを一覧表示する
+    parent: ログ制限クエリ
     url: list-roles-for-a-restriction-query
     generated: true
-  - name: Grant role to a restriction query
-    parent: Logs Restriction Queries
+  - name: 制限クエリにロールを付与する
+    parent: ログ制限クエリ
     url: grant-role-to-a-restriction-query
     generated: true
-  - name: Metrics
-    url: /ja/api/v2/metrics/
-    identifier: Metrics
+  - name: メトリクス
+    url: /api/v2/metrics/
+    identifier: メトリクス
     generated: true
-  - name: Monitors
-    url: /ja/api/v2/monitors/
-    identifier: Monitors
+  - name: モニター
+    url: /api/v2/monitors/
+    identifier: モニター
     generated: true
   - name: Organizations
-    url: /ja/api/v2/organizations/
+    url: /api/v2/organizations/
     identifier: Organizations
     generated: true
-  - name: PagerDuty Integration
-    url: /ja/api/v2/pagerduty-integration/
-    identifier: PagerDuty Integration
+  - name: PagerDuty インテグレーション
+    url: /api/v2/pagerduty-integration/
+    identifier: PagerDuty インテグレーション
     generated: true
-  - name: Roles
-    url: /ja/api/v2/roles/
-    identifier: Roles
+  - name: ロール
+    url: /api/v2/roles/
+    identifier: ロール
     generated: true
-  - name: List permissions
-    parent: Roles
+  - name: アクセス許可を一覧表示する
+    parent: ロール
     url: list-permissions
     generated: true
-  - name: List roles
-    parent: Roles
+  - name: ロールを一覧表示する
+    parent: ロール
     url: list-roles
     generated: true
-  - name: Create role
-    parent: Roles
+  - name: ロールを作成する
+    parent: ロール
     url: create-role
     generated: true
-  - name: Delete role
-    parent: Roles
+  - name: ロールの削除
+    parent: ロール
     url: delete-role
     generated: true
-  - name: Get a role
-    parent: Roles
+  - name: ロールを取得する
+    parent: ロール
     url: get-a-role
     generated: true
-  - name: Update a role
-    parent: Roles
+  - name: ロールを更新する
+    parent: ロール
     url: update-a-role
     generated: true
-  - name: Revoke permission
-    parent: Roles
+  - name: アクセス許可の取り消し
+    parent: ロール
     url: revoke-permission
     generated: true
-  - name: List permissions for a role
-    parent: Roles
+  - name: ロールのアクセス許可を一覧表示する
+    parent: ロール
     url: list-permissions-for-a-role
     generated: true
-  - name: Grant permission to a role
-    parent: Roles
+  - name: ロールにアクセス許可を付与する
+    parent: ロール
     url: grant-permission-to-a-role
     generated: true
-  - name: Remove a user from a role
-    parent: Roles
+  - name: ロールからユーザーを削除
+    parent: ロール
     url: remove-a-user-from-a-role
     generated: true
-  - name: Get all users of a role
-    parent: Roles
+  - name: ロールのすべてのユーザーの取得
+    parent: ロール
     url: get-all-users-of-a-role
     generated: true
-  - name: Add a user to a role
-    parent: Roles
+  - name: ロールにユーザーを追加する
+    parent: ロール
     url: add-a-user-to-a-role
     generated: true
-  - name: Screenboards
-    url: /ja/api/v2/screenboards/
-    identifier: Screenboards
+  - name: スクリーンボード
+    url: /api/v2/screenboards/
+    identifier: スクリーンボード
     generated: true
-  - name: Security Monitoring
-    url: /ja/api/v2/security-monitoring/
-    identifier: Security Monitoring
+  - name: セキュリティモニタリング
+    url: /api/v2/security-monitoring/
+    identifier: セキュリティモニタリング
     generated: true
-  - name: List rules
-    parent: Security Monitoring
+  - name: 規則のリスト
+    parent: セキュリティモニタリング
     url: list-rules
     generated: true
-  - name: Create a detection rule
-    parent: Security Monitoring
+  - name: 検出ルールを作成する
+    parent: セキュリティモニタリング
     url: create-a-detection-rule
     generated: true
-  - name: Delete an existing rule
-    parent: Security Monitoring
+  - name: 既存の規則を削除します
+    parent: セキュリティモニタリング
     url: delete-an-existing-rule
     generated: true
-  - name: Get a rule's details
-    parent: Security Monitoring
+  - name: 規則の詳細を取得する
+    parent: セキュリティモニタリング
     url: get-a-rules-details
     generated: true
-  - name: Update an existing rule
-    parent: Security Monitoring
+  - name: 既存の規則を更新します
+    parent: セキュリティモニタリング
     url: update-an-existing-rule
     generated: true
-  - name: Service Checks
-    url: /ja/api/v2/service-checks/
-    identifier: Service Checks
+  - name: セキュリティシグナルの簡易リストの取得
+    parent: セキュリティモニタリング
+    url: get-a-quick-list-of-security-signals
     generated: true
-  - name: Service Dependencies
-    url: /ja/api/v2/service-dependencies/
-    identifier: Service Dependencies
+  - name: セキュリティシグナルのリストの取得
+    parent: セキュリティモニタリング
+    url: get-a-list-of-security-signals
     generated: true
-  - name: Service Level Objectives
-    url: /ja/api/v2/service-level-objectives/
-    identifier: Service Level Objectives
+  - name: サービスのチェック
+    url: /api/v2/service-checks/
+    identifier: サービスのチェック
     generated: true
-  - name: Slack Integration
-    url: /ja/api/v2/slack-integration/
-    identifier: Slack Integration
+  - name: サービスの依存関係
+    url: /api/v2/service-dependencies/
+    identifier: サービスの依存関係
     generated: true
-  - name: Snapshots
-    url: /ja/api/v2/snapshots/
-    identifier: Snapshots
+  - name: サービスレベル目標
+    url: /api/v2/service-level-objectives/
+    identifier: サービスレベル目標
+    generated: true
+  - name: Slack インテグレーション
+    url: /api/v2/slack-integration/
+    identifier: Slack インテグレーション
+    generated: true
+  - name: スナップショット
+    url: /api/v2/snapshots/
+    identifier: スナップショット
     generated: true
   - name: Synthetics
-    url: /ja/api/v2/synthetics/
+    url: /api/v2/synthetics/
     identifier: Synthetics
     generated: true
-  - name: Tags
-    url: /ja/api/v2/tags/
-    identifier: Tags
+  - name: タグ
+    url: /api/v2/tags/
+    identifier: タグ
     generated: true
-  - name: Timeboards
-    url: /ja/api/v2/timeboards/
-    identifier: Timeboards
+  - name: タイムボード
+    url: /api/v2/timeboards/
+    identifier: タイムボード
     generated: true
-  - name: Tracing
-    url: /ja/api/v2/tracing/
-    identifier: Tracing
+  - name: トレーシング
+    url: /api/v2/tracing/
+    identifier: トレーシング
     generated: true
-  - name: Usage Metering
-    url: /ja/api/v2/usage-metering/
-    identifier: Usage Metering
+  - name: 使用料のメータリング
+    url: /api/v2/usage-metering/
+    identifier: 使用料のメータリング
     generated: true
-  - name: Users
-    url: /ja/api/v2/users/
-    identifier: Users
+  - name: ユーザー
+    url: /api/v2/users/
+    identifier: ユーザー
     generated: true
-  - name: Send invitation emails
-    parent: Users
+  - name: 招待メールを送信する
+    parent: ユーザー
     url: send-invitation-emails
     generated: true
-  - name: Get a user invitation
-    parent: Users
+  - name: ユーザー招待を取得
+    parent: ユーザー
     url: get-a-user-invitation
     generated: true
-  - name: List all users
-    parent: Users
+  - name: すべてのユーザーを一覧表示する
+    parent: ユーザー
     url: list-all-users
     generated: true
-  - name: Create a user
-    parent: Users
+  - name: ユーザーを作成する
+    parent: ユーザー
     url: create-a-user
     generated: true
-  - name: Disable a user
-    parent: Users
+  - name: ユーザーを無効にする
+    parent: ユーザー
     url: disable-a-user
     generated: true
-  - name: Get a user
-    parent: Users
+  - name: ユーザーを取得する
+    parent: ユーザー
     url: get-a-user
     generated: true
-  - name: Update a user
-    parent: Users
+  - name: ユーザーを更新する
+    parent: ユーザー
     url: update-a-user
     generated: true
-  - name: Get a user organization
-    parent: Users
+  - name: ユーザー組織を取得する
+    parent: ユーザー
     url: get-a-user-organization
     generated: true
-  - name: Get a user permissions
-    parent: Users
+  - name: ユーザーアクセス許可を取得する
+    parent: ユーザー
     url: get-a-user-permissions
     generated: true
-  - name: Webhooks Integration
-    url: /ja/api/v2/webhooks-integration/
-    identifier: Webhooks Integration
+  - name: Webhook インテグレーション
+    url: /api/v2/webhooks-integration/
+    identifier: Webhook インテグレーション
     generated: true

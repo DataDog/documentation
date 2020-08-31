@@ -1,7 +1,5 @@
 ---
 title: Serverless Monitoring Guides
-aliases:
-  - /infrastructure/serverless/azure_app_services/
 kind: guide
 ---
 

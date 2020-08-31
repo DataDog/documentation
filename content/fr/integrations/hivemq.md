@@ -4,7 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     HiveMQ: assets/dashboards/hivemq.json
-  logs: {}
+  logs:
+    source: hivemq
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -60,7 +61,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
    Consultez le [fichier d'exemple hivemq.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
    Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations.
-   Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous.
+   Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
    Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées.
    Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][5].
 

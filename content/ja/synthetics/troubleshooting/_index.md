@@ -1,46 +1,68 @@
 ---
-title: Synthetics のトラブルシューティング
+title: Synthetic モニタリングのトラブルシューティング
 kind: documentation
-description: Synthetics でよくある問題のトラブルシューティング。
+description: Synthetic モニタリングでよくある問題のトラブルシューティング。
 further_reading:
-  - link: synthetics/
+  - link: /synthetics/
     tag: ドキュメント
-    text: Synthetics テストの管理
-  - link: synthetics/browser_tests
+    text: Synthetic テストの管理
+  - link: /synthetics/browser_tests/
     tag: ドキュメント
     text: ブラウザテストの設定
-  - link: synthetics/api_tests
+  - link: /synthetics/api_tests/
     tag: ドキュメント
     text: APIテストの設定
 ---
-Datadog Synthetics のセットアップや構成で問題が発生した場合は、こちらの情報を参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[サポートチームまでお問い合わせ][1]ください。
+Datadog Synthetic モニタリングのセットアップや構成で問題が発生した場合は、こちらの情報を参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[サポートチームまでお問い合わせ][1]ください。
 
-## API テスト
+## ブラウザテスト
 
-### 稼働中エンドポイントでのリクエストの失敗
+### レコーダーにログインページが表示されません。なぜですか？
 
-ブラウザでウェブサイトを訪問 (または cURL) すると、`2xx` ステータスコードが返されるため、エンドポイントが稼働中であることがわかります。しかし、速度テストを実施するためにこのエンドポイントで API テストを設定したり、`Test URL` を入力したりすると、`5xx` や `4xx` といったステータスコードが返されることがあります。
+デフォルトでは、レコーダーの iframe/ポップアップは独自のブラウザを使用します。これは、すでにアプリケーションにログインしている場合、iframe/ポップアップがログイン後のページを直接表示する可能性があるため、最初にログアウトせずにログイン手順を記録できないということです。
 
-これは、cURL では `user-agent` が自動的にリクエストヘッダーとして (ブラウザとして) 設定されますが、Datadog API  テストでは自動的に設定されないためです。
-一部のウェブサイトでは、`user-agent` が設定されていないリクエストを禁止するためこれが問題となり、Datadog API テストで `5xx` または `4xx` ステータスコードが返されることになります。
+アプリケーションからログアウトせずに手順を記録できるようにするには、レコーダーの**シークレットモード**を利用します。
 
-この問題を解決するには、API テストに `user-agent` を手動で設定します。API テストに `user-agent` を手動で設定するには、**Make a request** > **Advanced Options** > **Header** > **Request Header** の順に選択して、`user-agent` に **Name** を設定します。次に、`Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` など、Safari ブラウザを使用する Mac OS X ベースのコンピューターを示す有効な `user-agent`  値に **Value** を設定します。
+{{< img src="synthetics/incognito_mode.mp4" alt="シークレットモードのブラウザテストの使用" video="true"  width="90%" >}}
 
+**シークレットモードでポップアップを開く**と、独自のブラウザのメインセッションとユーザーデータから完全に分離されたセッションで、テストコンフィギュレーションに設定された開始 URL からテストの記録を開始できます。
 
-{{< img src="synthetics/user-agent.gif" alt="Synthetics ホームページ" >}}
+新しく開いたシークレットポップアップは、以前のブラウザ履歴 (Cookie やローカルデータなど) をすべて無視します。その結果、アカウントから自動的にログアウトされ、初めてウェブサイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
 
 ## API およびブラウザのテスト
 
+### 不正なエラー
+
+Synthetics テストの 1 つが 401 をスローしている場合は、エンドポイントで認証できないことを意味している可能性が高いです。そのエンドポイント (Datadog 外) での認証に使用するメソッドを使用し、Synthetic テストを構成するときにそれを複製する必要があります。
+
+* エンドポイントは**ヘッダーベース認証**を使用していますか？
+  * **基本認証**: [HTTP][2] または[ブラウザテスト][3]の**高度なオプション**で関連する認証情報を指定します。
+  * **トークンベース認証**: 最初の [HTTP テスト][2]でトークンを抽出し、その最初のテストの応答をパースして[グローバル変数][4]を作成し、その変数を認証トークンを必要とする 2 回目の [HTTP][5] または[ブラウザテスト][6]に再挿入します。
+  * **セッションベース認証**: [HTTP][2] または[ブラウザテスト][3]の**高度なオプション**に必要なヘッダーまたはクッキーを追加します。
+
+* このエンドポイントは**認証用のクエリパラメーター**を使用していますか (たとえば、URL パラメーターに特定の API キーを追加する必要がありますか)？
+
+* このエンドポイントは **IP ベース認証**を使用していますか？その場合は、[Synthetic テストの元となる IP][7] の一部またはすべてを許可する必要があります。
+
 ### Forbidden エラー
 
-Synthetics テストを作成する際、最初に `403 Forbidden` エラーが返されることがあります。これは、Datadog により自動的に送信される `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <テスト_ID>` ヘッダーから返されています。
-このエラーを除去するには、このヘッダーがサーバーによってブラックリスト化されていないことを確認します。
-さらに、Datadog サーバーが確実にインフラストラクチャーにリクエストを送信できるように、[Datadog Synthetics IP レンジ][2]をホワイトリスト化する必要がある場合もあります。
+Synthetic テストによって返された `403 Forbidden` エラーが確認された場合は、`Sec-Datadog` ヘッダーを含むリクエストを Web サーバーがブロックまたはフィルタリングした結果である可能性があります。このヘッダーは、Datadog が開始する各 Synthetic リクエストに追加され、トラフィックのソースを識別し、Datadog サポートが特定のテスト実行を識別するのを支援します。
+
+さらに、[Datadog Synthetic モニタリングの IP 範囲][7]がファイアウォールによってトラフィックソースとして許可されていることを確認する必要がある場合もあります。
+
+### 通知の欠落
+
+デフォルト設定では、Synthetic テストは [再通知][8]しません。これは、トランジション（たとえば、テストがアラート状態になる、または直近のアラートから回復するなど）が生成された後に通知ハンドル（メールアドレスや Slack ハンドルなど）を追加しても、そのトランジションの通知は送信されないことを意味します。次のトランジションから通知が送信されます。
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help
-[2]: https://ip-ranges.datadoghq.com/synthetics.json
+[1]: /ja/help/
+[2]: /ja/synthetics/api_tests/?tab=httptest#make-a-request
+[3]: /ja/synthetics/browser_tests/#test-details
+[4]: /ja/synthetics/settings/?tab=createfromhttptest#global-variables
+[5]: /ja/synthetics/api_tests/?tab=httptest#use-global-variables
+[6]: /ja/synthetics/browser_tests/#use-global-variables
+[7]: https://ip-ranges.datadoghq.com/synthetics.json
+[8]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team

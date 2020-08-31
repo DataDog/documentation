@@ -3,7 +3,6 @@ categories:
   - Source Control
   - Collaboration
   - issue tracking
-ddtype: crawler
 dependencies: []
 description: サービスのパフォーマンスに影響するコミットとプルリクエストを特定。
 doc_link: 'https://docs.datadoghq.com/integrations/github/'
@@ -56,7 +55,14 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
     - 作成と削除 (タグ用)
     - プルリクエスト
     - 問題
-    - すべてのコメント
+    - 問題のコメント
+    - コミットのコメント
+    - プルリクエストレビューのコメント
+    - インストール
+    - メンバーシップ
+    - 公開
+    - セキュリティ勧告
+    - チーム追加
 
 #### Datadog
 
@@ -80,4 +86,4 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/account/settings#integrations/github
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

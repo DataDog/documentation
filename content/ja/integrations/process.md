@@ -1,12 +1,15 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/process/README.md'
 display_name: プロセス
@@ -42,11 +45,11 @@ supported_os:
 
 プロセスチェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 他のチェックとは異なり、デフォルトのプロセスチェックは、特に役立つ監視を行いません。どのプロセスをどのように監視するかを構成する必要があります。
 
-1. 標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][3] を参照してください。
+1. 標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -72,19 +75,18 @@ supported_os:
    dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
    ```
 
-2. [Agent を再起動します][7]。
+2. [Agent を再起動します][3]。
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][8]し、Checks セクションで `process` を探します。
+[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `process` を探します。
 
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "process" >}}
-
-
-すべてのメトリクスは process.yaml で構成された `instance` ごとに収集され、`process_name:<instance_name>` のタグが付きます。
+は、30 秒間以上存在する処理でのみ正確です。
+それ以下の短い処理の場合、その値は正確でない場合があります。
 
 ### イベント
 
@@ -117,20 +119,17 @@ Agent は、`process.up` のタグを付けた `process:my_worker_process` を�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
-プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][12]を参照してください。
+プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][8]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/monitoring/#process
-[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
-[3]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
-[4]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/process.py#L117
-[5]: https://github.com/DataDog/docker-dd-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-[10]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help
-[12]: https://www.datadoghq.com/blog/process-check-monitoring
+[2]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
+[6]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/process-check-monitoring

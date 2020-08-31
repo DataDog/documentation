@@ -34,7 +34,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 
 ## Monitors
 
-{{< img src="mobile/monitors.png" alt="monitor page" style="width:50%;">}}
+{{< img src="mobile/monitors_doc2.png" alt="monitor page">}}
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
@@ -42,7 +42,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 ## Dashboards
 
-{{< img src="mobile/dashboards.png" alt="dashboard page" style="width:50%;">}}
+{{< img src="mobile/dashboards_doc.png" alt="dashboard page">}}
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
@@ -50,7 +50,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Account
 
-Switch organizations and log out from the Account page.
+Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 

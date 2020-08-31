@@ -3,13 +3,13 @@ title: インテグレーションモニター
 kind: documentation
 description: 特定のインテグレーションのメトリクス値または健全性ステータスを監視する
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスを確認
 ---
@@ -33,6 +33,8 @@ Datadog で[インテグレーションモニター][2]を作成するには
 ### インテグレーションステータス
 
 インテグレーションにサービスチェックが含まれている場合、**Integration Status** タブのステータスはアクティブです。
+
+**注**: インテグレーションがメトリクスまたはサービスチェックを送信しない場合、"Misconfigured" と表示されます。
 
 #### チェックを選択する
 
@@ -86,18 +88,17 @@ Datadog で[インテグレーションモニター][2]を作成するには
 
 #### 通知
 
-**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご参照ください。
+**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご確認ください。
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /ja/monitors/monitor_types/metric
+[3]: /ja/monitors/monitor_types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /ja/monitors/monitor_types/metric/#no-data
 [6]: /ja/monitors/monitor_types/metric/#auto-resolve
 [7]: /ja/monitors/monitor_types/metric/#evaluation-delay
-[8]: /ja/monitors/notifications
+[8]: /ja/monitors/notifications/

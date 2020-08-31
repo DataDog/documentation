@@ -2,8 +2,8 @@
 title: Fluent Bit
 name: fluentbit
 kind: インテグレーション
-description: Fluent Bit を構成し、ログデータを複数の異なるソースから収集してパースし、Datadog に転送して監視します。
-short_description: ログデータを複数の異なるソースから収集してパースし、Datadog に転送して監視します。
+description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
+short_description: ログデータを複数ソースから収集してパースし、転送します。
 categories:
   - ログの収集
 doc_link: /integrations/fluentbit/
@@ -41,6 +41,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 | ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | US - `http-intake.logs.datadoghq.com`、EU - `http-intake.logs.datadoghq.eu` |
 | TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。Datadog ではこれを `on` に設定するよう推奨しています。              | `off`                                                                       |
 | apikey         | _必須_ - [Datadog API キー][4]。                                                                                  |                                                                             |
+| 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。           |                                                                             |
 | dd_service     | _推奨_ - ログを生成するサービス (アプリケーションまたはデータベース) の名前。人間が解読可能であること。 |                                                                             |
 | dd_source      | _推奨_ - サービスの基盤となるテクノロジーの名前。人間が解読可能であること。たとえば `postgres` や `nginx` など。 |                                                                             |
 | dd_message_key | _推奨_ - ログメッセージを保存するために属性を使用するように設定します。                                                      |                                                                             |
@@ -55,8 +56,9 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
     Match             *
     Host              http-intake.logs.datadoghq.com
     TLS               on
+    compress          gzip
     apikey            <DATADOG_API_キー>
-    dd_service        <アプリケーション_サービス>
+    dd_service       <アプリケーション_サービス> 
     dd_source         <ソース>
     dd_message_key    log
     dd_tags           env:dev,<タグキー>:<タグ値>
@@ -73,11 +75,11 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 [1]: https://docs.fluentbit.io/manual/output/datadog
 [2]: /ja/integrations/ecs_fargate/#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
-[4]: /ja/account_management/api-app-keys
+[4]: /ja/account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
-[6]: https://docs.fluentbit.io/manual/installation
-[7]: https://docs.fluentbit.io/manual/configuration
-[8]: https://docs.fluentbit.io/manual/configuration/file
+[6]: https://docs.fluentbit.io/manual/installation/sources/build-and-install
+[7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
+[8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
 [9]: https://app.datadoghq.com/logs
-[10]: /ja/tagging
-[11]: /ja/help
+[10]: /ja/getting_started/tagging/
+[11]: /ja/help/

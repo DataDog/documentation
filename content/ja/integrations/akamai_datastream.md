@@ -34,6 +34,8 @@ Datadog の [Akamai インテグレーションタイル][1]を使用して、�
 
 ### コンフィグレーション
 
+#### メトリクスの収集
+
 最初に、Akamai アカウントを追加します。
 
 1. Luna Control Center で、Configure > Organization > Manage APIs にアクセスし、「DataStream」API への「読み取り専用」以上のアクセス権を持つ新しいクライアントを作成します。
@@ -48,6 +50,26 @@ Datadog の [Akamai インテグレーションタイル][1]を使用して、�
 <div class="alert alert-warning">
 「Aggregated metrics」タイプのストリームだけがサポートされています。
 </div>
+
+#### ログの収集
+
+Akamai DataStream 1.0 および 2.0 では、HTTP(s) エンドポイントを介して gzip 形式のログを Datadog に送信できます。Datadog へログをストリームするには、Akamai 内で以下のフィールドに入力します。
+
+1. **Name**: エンドポイントのわかりやすい説明を入力します。
+
+2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: `https://http-intake.logs.datadoghq.com/v1/input`.
+
+3. **Tags** (任意): Datadogでログのフィルタリングおよびグループ化に使用する、タグの一覧（カンマ区切り）を入力します。
+
+4. **Source**: ソース名として `akamai` を入力します。
+
+5. **Service** (任意): Datadog アカウントに関連付けられたログイベントを生成するアプリケーション名またはサービス名を入力します。
+
+6. **API key**: [Datadog API キー][2]を入力します。
+
+7. **Send compressed data** (任意): 宛先に送信されたログを gzip 形式で圧縮するにはこのチェックボックスを選択します。
+
+8. **Validate & Save**: 宛先への接続を検証し詳細を保存するには、これをクリックします。
 
 ## 収集データ
 
@@ -65,8 +87,9 @@ Akamai インテグレーションには、サービスのチェック機能は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/

@@ -41,7 +41,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: getTagSlug(action.summary),
+          url: `#` + getTagSlug(action.summary),
           generated: true
         });
     });
@@ -57,7 +57,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
   console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.${language}.yaml`);
   })
 
-  
+
 };
 
 
@@ -151,6 +151,11 @@ const createResources = (apiYaml, deref, apiVersion) => {
 const getSchema = (content) => {
   const contentTypeKeys = Object.keys(content);
   const [firstContentType] = contentTypeKeys;
+  contentTypeKeys.forEach((key) => {
+    if(key.startsWith("application/json")) {
+      return content[key].schema;
+    }
+  });
   return content[firstContentType].schema;
 };
 
@@ -438,6 +443,8 @@ const getInitialJsonData = (data) => {
       } else if (data.items.properties) {
         initialData = data.items.properties;
       }
+    } else if(data.oneOf && data.oneOf.length > 0) {
+      initialData = data.oneOf[0].properties;
     } else {
       initialData = data.properties;
     }
@@ -671,7 +678,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
-      
+
         // build html
         html += `
         <div class="row ${outerRowClasses}">
@@ -728,10 +735,12 @@ const schemaTable = (tableType, data) => {
       extraClasses = 'd-none';
     }
   } else if(data.additionalProperties) {
-      initialData = {"&lt;any-key&gt;": data.additionalProperties};
-    } else {
-      initialData = data.properties;
-    }
+    initialData = {"&lt;any-key&gt;": data.additionalProperties};
+  } else if(data.oneOf && data.oneOf.length > 0) {
+    initialData = data.oneOf[0].properties;
+  } else {
+    initialData = data.properties;
+  }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
     <div class="row">

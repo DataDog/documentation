@@ -16,7 +16,7 @@ further_reading:
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodisocovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodiscovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
@@ -223,8 +223,8 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [16]: /integrations/tomcat/
-[17]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/metrics.yaml
-[18]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
+[18]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [19]: /integrations/solr/
 [20]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
 [21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example

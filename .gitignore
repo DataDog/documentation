@@ -54,13 +54,25 @@ data/integrations/
 content/en/security_monitoring/default_rules/*.md
 !content/en/security_monitoring/default_rules/_index.md
 
+# compliance rules
+content/en/compliance_monitoring/default_rules/*.md
+!content/en/compliance_monitoring/default_rules/_index.md
+
 # Logs
 /logs/*
 *.log
 npm-debug.log*
 
+# RUM
+content/en/real_user_monitoring/android.md
+
 # serverless
-!content/en/serverless/troubleshooting/installing_the_forwarder.md
+content/en/serverless/forwarder.md
+content/en/serverless/datadog_lambda_library/python.md
+content/en/serverless/datadog_lambda_library/nodejs.md
+content/en/serverless/datadog_lambda_library/ruby.md
+content/en/serverless/datadog_lambda_library/go.md
+content/en/serverless/datadog_lambda_library/java.md
 
 # Runtime data
 pids
