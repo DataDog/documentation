@@ -3,7 +3,7 @@ title: .NET Troubleshooting
 kind: documentation
 ---
 
-If you experience unexpected behavior with Datadog's .NET APM, there are a few common issues you can investigate and this guide may help resolve issues quickly.
+If your .NET application's traces are not showing up within Datadog UI after install, there are a few common troubleshooting items to look into.
 
 ## .NET Framework
 
@@ -23,13 +23,11 @@ Verify the Datadog Agent for Windows OS been installed locally. If not, visit th
 
 Verify the Datadog .NET tracer been installed locally. If not, visit our [Datadog .NET APM release page][4].
 
-### Automatic instrumentation 
-
-#### Environment variables
+### Confirm environment variables are correct
 
 For automatic instrumentation of IIS applications, the required environment variables must be set within the `W3SVC` & `WAS` Windows registry paths. 
 
-##### Automatic Steps
+#### Automatic Steps
 
 We recommend to use the [.NET APM .msi installer][4] to repair/reinstall to restore the required environment variables. 
 
@@ -40,7 +38,7 @@ net stop was /y
 net start w3svc
 ```
 
-##### Manual Steps
+#### Manual Steps
 
 1. Run `regedit.exe` to open the Windows Registry Editor.
 2. Check the following paths: 
