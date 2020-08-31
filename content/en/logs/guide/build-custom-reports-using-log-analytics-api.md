@@ -33,6 +33,8 @@ Throughout this article, you will need to replace all occurrences of `<DATADOG_A
 
 This guide also assumes that you have a terminal with `CURL`. 
 
+**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/ as the endpoint.
+
 ## Examples
 
 ### Getting counts
