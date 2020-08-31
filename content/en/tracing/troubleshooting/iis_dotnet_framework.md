@@ -16,7 +16,7 @@ If .NET Framework APM traces are not showing within Datadog, review the possible
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above.   Additionally, only [supported frameworks][3] are automatically instrumented.  If you are are missing spans from a part of your application, please confirm the integration and version are supported and [open a support ticket][4] with this information provided to expedite our review.
 
 
-### Confirm Installation 
+### Confirm installation 
 
 #### Datadog Agent
 
