@@ -6,6 +6,9 @@ further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'
       text: 'Instrument Your Application'
+    - link: 'tracing/troubleshooting/dotnet_troubleshooting'
+      tag: 'Troubleshooting'
+      text: '.NET Troubleshooting'
 ---
 
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.

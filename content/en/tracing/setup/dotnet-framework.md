@@ -23,6 +23,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
+    - link: 'tracing/troubleshooting/dotnet_troubleshooting'
+      tag: 'Troubleshooting'
+      text: '.NET Troubleshooting'
 ---
 ## Compatibility
 
