@@ -55,7 +55,7 @@ net stop was /y
 net start w3svc
 ```
 
-### Hybrid Instrumentation, (Custom & Automatic)
+### Hybrid instrumentation
 
 When using both custom and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 
