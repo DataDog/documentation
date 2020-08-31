@@ -332,7 +332,7 @@ Similarly, you can build a `sum` timeseries by setting `type` as `timeseries`.
 {{% /tab %}}
 {{% tab "Min" %}}
 
-With the following API call, you can build a `table` with `min` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
+With the following API call, build a `table` with `min` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
