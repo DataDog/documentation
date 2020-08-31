@@ -85,7 +85,7 @@ export default tracer;
 | version        | `DD_VERSION`            | `null`      | アプリケーションのバージョン番号。デフォルトは、package.json のバージョンフィールドの値です。バージョン 0.20 以降で利用可能。
 | tags           | `DD_TAGS`                    | `{}`        | すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数として渡される場合、フォーマットは `key:value, key:value` となります。バージョン 0.20 以降で利用可能。                                                                                                                            |
 
-サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][9]のドキュメントをご参照ください。
+サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][10]のドキュメントをご参照ください。
 
 ### インスツルメンテーション
 
@@ -101,7 +101,7 @@ export default tracer;
 | sampleRate     | -                            | `1`         | スパンのサンプリング率: `0` ～ `1` 間の浮動小数点。                                                                                                                                                                                                              |
 | flushInterval  | -                            | `2000`      | トレーサーが Agent へトレースを送信する際のインターバル (ミリセカンド)。                                                                                                                                                                                                |
 | runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | ランタイムメトリクスのキャプチャを有効にするかどうか。ポート `8125` (または `dogstatsd.port` で構成) が UDP 用に Agent で開いている必要があります。                                                                                                                                        |
-| experimental   | -                            | `{}`        | 試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][10]までお問い合わせください。                                                                                   |
+| experimental   | -                            | `{}`        | 試験機能は、 Boolean の true を使用して一度に、またはキー/値のペアを使用して個々に有効にできます。試験機能に関する詳細は、[サポート][11]までお問い合わせください。                                                                                   |
 | plugins        | -                            | `true`      | ビルトインプラグインを使用して、外部ライブラリの自動インスツルメンテーションを有効にするかどうか。                                                                                                                                                                       |
 | - | `DD_TRACE_DISABLED_PLUGINS` | - | トレーサーが初期化された際に自動で無効となるインテグレーション名のカンマ区切り文字列。`DD_TRACE_DISABLED_PLUGINS=express,dns` などの環境変数のみとなります。 |
 | clientToken    | `DD_CLIENT_TOKEN`            | `null`      | ブラウザーのトレーシング用クライアントトークン。Datadog の **Integrations** -> **APIs** で生成できます。                                                                                                                                                                             |
@@ -136,3 +136,5 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH>ノードサーバー
 [7]: /ja/tracing/setup/docker/
 [8]: /ja/agent/kubernetes/apm/
 [9]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[10]: /ja/getting_started/tagging/unified_service_tagging/
+[11]: /ja/help/

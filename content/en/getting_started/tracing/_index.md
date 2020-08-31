@@ -93,14 +93,6 @@ Alternatively, name your environment by updating `datadog.yaml` to set `env` und
 
 ## APM application
 
-### Follow the in-app documentation (Recommended)
-
-Follow the [Quickstart instructions][10] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable App Analytics and Trace ID injection into logs during setup.
-
 ### Installation
 
 Before setting up the application, install `pip` then `flask` and `ddtrace` on your Ubuntu VM:

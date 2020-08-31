@@ -13,7 +13,7 @@ further_reading:
 ---
 Profiler は、次のトレースライブラリに同梱されています。アプリケーションのプロファイラを有効にする方法を確認するには、以下で言語を選択してください。
 
-**Ruby**、**PHP**、**.NET** プロファイラでは、プライベートベータアクセスリストに掲載するために[新規登録][1]が必要です。 ベータ版の準備が完了次第、ご連絡いたします。
+**Node**、**Ruby**、**PHP**、**.NET** プロファイラでは、プライベートベータアクセスリストに掲載するために[新規登録][1]が必要です。 ベータ版の準備が完了次第、ご連絡いたします。
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -211,48 +211,6 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 [3]: https://app.datadoghq.com/profiling
 [4]: /ja/tracing/visualization/#services
 [5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
-
-{{% tab "Node" %}}
-
-Datadog Profiler には Node 10.12 以降が必要です。アプリケーションのプロファイリングを開始するには、
-
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][1] 以降または [6.20.2][1] 以降にアップグレードしてください。　
-
-2. トレースとプロファイラの両方を含む `dd-trace` をインストールします。
-
-    ```shell
-    npm install --save dd-trace
-    ```
-
-    **注**: プロファイラは、バージョン 0.23.2 以降の `dd-trace` ライブラリで利用できます。
-
-3. コードを自動的にプロファイルするには、プロファイラが有効な状態で `dd-trace` をインポートして初期化します。
-
-    ```javascript
-    require('dd-trace').init({
-      profiling: true
-    })
-    ```
-
-4. 1〜2 分後、[Datadog APM > Profiler ページ][2]でプロファイルを視覚化します。
-
-**注**:
-
-- `service` や `version` などのタグも利用できます。環境変数を使用してパラメーターを設定します。
-
-| 環境変数                             | タイプ          | 説明                                                                                      |
-| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | プロファイラを有効にするには、`true` に設定します。               |
-| `DD_SERVICE`                                     | 文字列        | Datadog [サービス][3]名。     |
-| `DD_ENV`                                         | 文字列        | Datadog [環境][4]名前（例、`production`）。|
-| `DD_VERSION`                                     | 文字列        | アプリケーションのバージョン                              |
-| `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
-
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/profiling
-[3]: /ja/tracing/visualization/#services
-[4]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{< /tabs >}}

@@ -19,8 +19,12 @@ image_map:
       - cloudtrail
       - ec2
       - ecs
-      - s3
+      - elasticache
       - elb
+      - iam
+      - rds
+      - redshift
+      - s3
     image: amazon_
     append: true
   - source:

@@ -70,7 +70,7 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million Analyzed Spans
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
 | APM Hosts (Nodes) | 20         | $31 per host                                                                | 20 * $31  | $620               |
 | Analyzed Spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional Analyzed Spans | 0 * $1.70 | 0                  |
-| Total             |            |                                                                             | $720 + $0 | **$620 per month** |
+| Total             |            |                                                                             | $620 + $0 | **$620 per month** |
 
 For Kubernetes, APM is priced by nodes not by pods.
 

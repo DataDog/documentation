@@ -9,15 +9,15 @@ kind: documentation
 
 Any tag applied to your AWS Lambda function automatically becomes a new dimension on which you can slice and dice your traces.
 
-Tags are especially powerful when consistent across the Datadog platform. First-class support is offered for the following tags: `env`, `service`, and `version`.
+Tags are especially powerful when consistent across the Datadog platform. First-class support is offered for the following tags: `env` and `service`.
 
-With these three tags, you can:
+With these two tags, you can:
 
-- Navigate seamlessly across traces, metrics, and logs with consistent tags
+- Navigate seamlessly across metrics, traces, and logs with consistent tags
 - View service data based on environment or version in a unified fashion within the Datadog app
+- Filter your functions on the Serverless Homepage
 
 There are a few best practices Datadog recommends for tagging in your serverless environment to keep tags consistent across your traces, metrics, and logs.
-
 
 ## Directly tag your serverless functions
 
@@ -105,9 +105,11 @@ If you are using the AWS SAM, you can choose one of several options to apply tag
 {{< /tabs >}}
 
 
-### Import resource tags from your serverless Ffnctions
+### Import resource tags from your serverless Functions
 
-Datadog strongly recommends you enable the `DdFetchLambdaTags` option on the Datadog Forwarder. Setting the parameter `DdFetchLambdaTags` to `true` on the Forwarder CloudFormation stack to ensure your traces are tagged with the resource tags on the originating Lambda function. Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
+Datadog strongly recommends you enable the `DdFetchLambdaTags` option on the Datadog Forwarder. Setting the parameter `DdFetchLambdaTags` to `true` on the Forwarder CloudFormation stack will ensure your traces are tagged with the resource tags on the originating Lambda function. 
+
+Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
 
 ## Organize your service map
 

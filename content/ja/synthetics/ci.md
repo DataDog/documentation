@@ -1,5 +1,5 @@
 ---
-title: Synthetic Continuous Testing
+title: Synthetic CI/CD テスト
 kind: ドキュメント
 description: CI/CD パイプラインでオンデマンドの Synthetics テストを実行します。
 further_reading:
@@ -17,11 +17,11 @@ further_reading:
     text: APIテストの設定
 ---
 事前定義された間隔でテストを実行するだけでなく、API エンドポイントを使用して Datadog Synthetic テストをオンデマンドで実行することもできます。Datadog Synthetic テストを継続的インテグレーション (CI) パイプラインで実行して、製品を破壊する恐れのあるブランチのデプロイをブロックできます。
-Datadog Continuous Testing を使用して、**CD プロセスの一部としてテストを実行**し、デプロイが完了した直後に本番アプリケーションの状態を評価することもできます。これにより、ユーザーに影響を与える可能性のある潜在的な回帰を検出し、重要なテストが失敗したときに自動的にロールバックをトリガーできます。
+Synthetic CI/CD テストを使用して、**CD プロセスの一部としてテストを実行**し、デプロイが完了した直後に本番アプリケーションの状態を評価することもできます。これにより、ユーザーに影響を与える可能性のある潜在的な回帰を検出し、重要なテストが失敗したときに自動的にロールバックをトリガーできます。
 
 この関数により、本番システムの問題修正に時間を割く必要がなくなり、プロセスの早期でバグと回帰を検出できます。
 
-これらの API エンドポイントに加え、Datadog ではコマンドラインインターフェース (CLI) を提供および管理しているため、Datadog Synthetic テストを CI ツールに容易に統合できます。Synthetic Continuous Testing はオープンソースで、そのソースコードは GitHub の [DataDog/datadog-ci][1] から入手できます。
+これらの API エンドポイントに加え、Datadog ではコマンドラインインターフェース (CLI) を提供および管理しているため、Datadog Synthetic テストを CI ツールに容易に統合できます。Synthetic CI/CD テストはオープンソースで、そのソースコードは GitHub の [DataDog/datadog-ci][1] から入手できます。
 
 ## API の使用
 

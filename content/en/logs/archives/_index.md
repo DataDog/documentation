@@ -32,62 +32,29 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+
+### Create a S3 Bucket
+
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to. Be careful not to make your bucket publicly readable.
 
-Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation:
+#### Storage Class
 
-1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS S3.
+You can [set a lifecycle configuration on your S3 bucket][3] to automatically transition your log archives to optimal storage classes. 
 
-2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
+[Rehydration][4] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
-    ```json
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "DatadogUploadAndRehydrateLogArchives",
-          "Effect": "Allow",
-          "Action": ["s3:PutObject", "s3:GetObject"],
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-          ]
-        },
-        {
-          "Sid": "DatadogRehydrateLogArchivesListBucket",
-          "Effect": "Allow",
-          "Action": "s3:ListBucket",
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-          ]
-        }
-      ]
-    }
-    ```
+#### Server side encryption (SSE)
 
-3. Go to your [Archives page][6] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+##### SSE-S3
 
-4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
-
-    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
-
-### Storage Class
-
-You can [set a lifecycle configuration on your S3 bucket][7] to automatically transition your log archives to optimal storage classes. [Rehydration][5] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
-
-### Server side encryption (SSE)
-
-#### SSE-S3
-
-The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][8]. 
+The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][5]. 
 To enable it, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
 
-#### SSE-KMS
+##### SSE-KMS
 
-Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][9]. To enable it, take the following steps:
+Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][6]. To enable it, take the following steps:
 
 1. Create your CMK
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name approproiately:
@@ -145,15 +112,62 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
+### Configure a Log Archive
+
+#### Set AWS Integration
+
+If not already configured, set up the [AWS integration][7] for the AWS account that holds your S3 bucket. 
+
+* In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
+* Specifically for AWS GovCloud or China accounts, use Access Keys as an alternative to Role Delegation.
+
+#### Create an Archive
+
+Go to your [Archives page][8] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+
+Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
+
+  {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
+
+### Set Permissions
+
+Add the following two permission statements to the IAM policies. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][4]. The `PutObject` permission is sufficient for uploading archives.
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DatadogUploadAndRehydrateLogArchives",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:GetObject"],
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+          ]
+        },
+        {
+          "Sid": "DatadogRehydrateLogArchivesListBucket",
+          "Effect": "Allow",
+          "Action": "s3:ListBucket",
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+          ]
+        }
+      ]
+    }
+    ```
+
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[4]: /integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /logs/archives/rehydrating/
-[6]: https://app.datadoghq.com/logs/pipelines/archives
-[7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-[8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-[9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[4]: /logs/archives/rehydrating/
+[5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[7]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
+[8]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
