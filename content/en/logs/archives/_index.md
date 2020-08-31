@@ -36,7 +36,9 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 Next, grant Datadog permissions to write log archives to your S3 bucket with role delegation:
 
-1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. This involves [creating a role][4] that Datadog can use to integrate with AWS S3.
+### Configure Accesses
+
+1. Set up the [AWS integration][3] for the AWS account that holds your S3 bucket. In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
 
 2. Add the following two permission statements to [the IAM policies of your Datadog role][4]. Edit the bucket names and, if desired, specify the paths that contain your log archives. The `GetObject` and `ListBucket` permissions allow for [Rehydrating from Archives][5]. The `PutObject` permission is sufficient for uploading archives.
 
@@ -66,9 +68,14 @@ Next, grant Datadog permissions to write log archives to your S3 bucket with rol
     }
     ```
 
-3. Go to your [Archives page][6] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
+https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html
 
-4. Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
+### Datadog Log Archive 
+
+Go to your [Archives page][6] in Datadog and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+
+Select the appropriate AWS account + role combination for your S3 bucket. Input your bucket name. Optionally input a prefix directory for all the content of your log archives. Save your archive, and you are finished.
 
     {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
@@ -147,7 +154,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
+[3]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [5]: /logs/archives/rehydrating/
 [6]: https://app.datadoghq.com/logs/pipelines/archives
