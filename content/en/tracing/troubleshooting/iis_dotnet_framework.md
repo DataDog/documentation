@@ -40,7 +40,7 @@ For automatic instrumentation of IIS applications, the required environment vari
 HKLM:SYSTEM\CurrentControlSet\Services\W3SVC
 HKLM:SYSTEM\CurrentControlSet\Services\WAS
 ```
-3. Create a Multi-String Value. 
+3. Create a multi-string value: 
     * With the Value name set to "Environment"
     * Ensure the Value data contains the following:
 {{< code-block lang="default">}}
