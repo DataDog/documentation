@@ -104,7 +104,7 @@ The result dataset comprises the `buckets` object as shown in the following samp
 ```
 {{% /tab %}}
 {{% tab "Timeseries" %}}
-With the following API call, you can build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
+With the following API call, build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
 
 **API call:**
 
