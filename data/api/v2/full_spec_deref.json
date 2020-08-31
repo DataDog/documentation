@@ -17137,7 +17137,7 @@
                 }
               }
             },
-            "description": "OK for get role"
+            "description": "OK"
           },
           "403": {
             "content": {
