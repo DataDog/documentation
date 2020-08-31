@@ -360,7 +360,7 @@ curl -L -X POST 'https://api.datadoghq.com/api/v2/logs/analytics/aggregate' -H '
    ]
 }'
 ```
-Similarly, you can build a `min` timeseries by setting `type` as `timeseries`.
+Similarly, build a `min` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
