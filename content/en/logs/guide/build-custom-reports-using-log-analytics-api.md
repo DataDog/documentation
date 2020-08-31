@@ -23,7 +23,7 @@ The following examples are covered in this guide:
 * [Getting counts](#getting-counts)
 * [Getting stats](#getting-stats)
 * [Getting percentiles](#getting-percentiles)
-* [Multiple groupbys, unique counts, and metrics](#multiple-groupbys-unique-counts-and-metrics) 
+* [Multiple group-bys, unique counts, and metrics](#multiple-groupbys-unique-counts-and-metrics) 
 
 ## Prerequisites
 
@@ -664,4 +664,3 @@ In the response, `c0` represents the unique count of `useragent`, `c1` represent
 [1]: https://docs.datadoghq.com/api/v2/logs/
 [2]: https://docs.datadoghq.com/api/v1/authentication/
 [3]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
-
