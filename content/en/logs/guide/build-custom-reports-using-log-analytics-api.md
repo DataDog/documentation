@@ -464,7 +464,7 @@ Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 
 ### Getting percentiles
 
-With the following API call, you can build a `table` with `percentiles` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
+With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@scan_d` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
 
 **API call:**
 
