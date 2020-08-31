@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-You may want to build custom reports and dashboards for your team by combining information from your business and other services alongside log data. To quickly build such reports with metrics from your log data, use the [Log Analytics API][1].
+Use the [Log Analytics API][1] to quickly build custom reports and dashboards for your team by combining information from your business and other services alongside log data.
 
 The following examples are covered in this guide:
 
