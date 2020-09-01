@@ -1563,6 +1563,11 @@ main:
     parent: ndm
     identifier: ndm_data
     weight: 403
+  - name: Troubleshooting
+    url: network_performance_monitoring/devices/troubleshooting
+    parent: ndm
+    identifier: ndm_trouble
+    weight: 404
   - name: Developer Tools
     url: developers/
     pre: nav_developers
