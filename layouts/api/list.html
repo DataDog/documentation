@@ -447,11 +447,13 @@
                                 {{ range . }}
 
                                 {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+                                {{ $lang := index $dot.Site.Data.highlighting.languages (cond (eq $file_extension "py3") "py" $file_extension) }}
+                                {{ $title := cond (eq $file_extension "py3") "python (beta)" $lang.pygments_name }}
+                                {{ $block := cond (eq $file_extension "py3") "python-beta" $lang.pygments_name }}
 
                                 {{ if ne $file_extension "sh"}}
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
+                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $block }}"  href="#" data-toggle="tab">{{ $title }}</a>
                                 </li>
 
                                 {{ $count = add $count 1 }}
@@ -508,10 +510,11 @@
 
                                     {{ $file_content := .Content }}
                                     {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages (cond (eq $file_extension "py3") "py" $file_extension) }}
+                                    {{ $block := cond (eq $file_extension "py3") "python-beta" $lang.pygments_name }}
 
                                     {{ if ne $file_extension "sh"}}
-                                    <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                    <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $block }}" >
                                         <div class="code-button-wrapper position-absolute">
                                             <button class="btn text-primary js-copy-button">Copy</button>
                                         </div>
