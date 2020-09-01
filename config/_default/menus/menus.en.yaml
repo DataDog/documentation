@@ -1179,7 +1179,7 @@ main:
     weight: 1505
   - name: .NET Troubleshooting
     url: tracing/troubleshooting/dotnet_troubleshooting
-    identifier: tracing_troubleshooting_iis_dotnet_framework
+    identifier: tracing_troubleshooting_dotnet_troubleshooting
     parent: tracing_troubleshooting
     weight: 1507    
   - name: Log Management
