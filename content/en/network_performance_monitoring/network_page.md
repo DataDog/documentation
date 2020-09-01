@@ -149,7 +149,6 @@ The sidepanel provides contextual telemetry to help you debug network dependenci
 The top of the sidepanel displays common source and destination tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface:
 - Granular context such as the container, task, or host to which traffic is flowing, and 
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs,
-so you can more quickly pinpoint the root cause. 
 
 ## Further Reading
 
