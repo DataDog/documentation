@@ -10,7 +10,7 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-Many of your application journeys you need to monitor might be located behind a login. This means you need to ensure your Datadog Browser tests are first able to go through the login steps of your application to perform validation on post login pages. There are two ways to do this:
+You might need to monitor something that is located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
 
 - [Include the login steps in your recording](#include-the-login-in-your-recording)
 - [Leverage browser test configuration options][#leverage-browser-test-configuration-options]
@@ -36,7 +36,7 @@ Opening a pop up in incognito mode allows you to start your test's recording fro
 
 If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default "Navigate to URL" step.
 
-Some SSO providers might detect our browser tests as bots and prevent them from logging in, for example, by adding a re-Captcha. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
+Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
 
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
@@ -44,7 +44,7 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 Browser tests can reproduce any actions a regular user can take inside their Chrome browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a Chrome browser, you can record the required steps to set up browser tests. 
 
-Some MFA providers might detect our Browser tests as bots and prevent them from logging in, for example, by adding a re-Captcha. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
+Some MFA providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
 
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off for a specific set of credentials for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][3] could help to work around that.
@@ -57,7 +57,7 @@ Store your credentials as [global variables][4] (for example, one global variabl
 
 Once you create the secure variables, you can then [import these global variables][5] into your browser tests and leverage them for your login steps: 
 
-**Note:** Although Datadog global variables are securely stored and encrypted, we strongly recommend using an account dedicated to testing with dummy credentials as a general testing best practice.
+**Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 
 ## Further Reading
 
