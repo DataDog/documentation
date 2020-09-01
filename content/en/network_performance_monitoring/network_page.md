@@ -144,7 +144,7 @@ The sidepanel provides contextual telemetry to help you debug network dependenci
 
 {{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
 
-### Common Tags
+### Common tags
 
 The top of the sidepanel displays common source and destination tags shared by the inspected dependency's most recent connections. You can use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface
 - Granular context such as the container, task, or host to which traffic is flowing, and 
