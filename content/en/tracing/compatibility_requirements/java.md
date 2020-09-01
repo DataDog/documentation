@@ -126,6 +126,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 - MySQL
 - Oracle
 - Postgres SQL
+- ScalikeJDBC
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
