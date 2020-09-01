@@ -54,6 +54,10 @@ To account for modern web applications, loading time watches for network request
 
 * **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring)
 
+### Hash SPA navigation
+
+Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
+
 ## Metrics collected
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
