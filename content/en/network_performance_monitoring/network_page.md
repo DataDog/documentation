@@ -139,7 +139,7 @@ Select any row from the data table to see associated logs, traces, and processes
 
 The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to 
 - A spike in traffic volume from a particular port or IP
-- Heavy processes consuming the CPU or memory of the destination endpoint
+- Heavy processes consuming the CPU or memory of the destination endpoint.
 - Application errors in code of the source endpoint
 
 {{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
