@@ -2,12 +2,15 @@
 title: Instrumenting Ruby Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: 'Tagging Serverless Applications'
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: 'Tracing Serverless Applications'
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: 'Submitting Custom Metrics from Serverless Applications'
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
@@ -92,6 +95,10 @@ def some_operation()
     end
 end
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /serverless/#1-install-the-cloud-integration

@@ -2,21 +2,15 @@
 title: Instrumenting .NET Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
-    - link: 'serverless/installation/python'
-      tag: 'Documentation'
-      text: 'Installing Python Serverless Monitoring'
-    - link: 'serverless/installation/go'
-      tag: 'Documentation'
-      text: 'Installing Go Serverless Monitoring'
-    - link: 'serverless/installation/java'
-      tag: 'Documentation'
-      text: 'Installing Java Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: "Serverless"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Serverless"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Serverless"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
@@ -49,6 +43,10 @@ myMetric.Add("e", (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds
 myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/

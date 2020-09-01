@@ -73,6 +73,9 @@ content/en/serverless/datadog_lambda_library/nodejs.md
 content/en/serverless/datadog_lambda_library/ruby.md
 content/en/serverless/datadog_lambda_library/go.md
 content/en/serverless/datadog_lambda_library/java.md
+content/en/serverless/serverless_integrations/plugin.md
+content/en/serverless/serverless_integrations/macro.md
+content/en/serverless/serverless_integrations/cli.md
 
 # Runtime data
 pids

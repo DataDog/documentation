@@ -113,6 +113,12 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
 	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
 	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
+	@if [ content/en/serverless/serverless_integrations/plugin.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/plugin.md ;fi
+	@if [ content/en/serverless/serverless_integrations/macro.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
+	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
 	@if [ content/en/real_user_monitoring/android.md ]; then \
 	rm -f content/en/real_user_monitoring/android.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \

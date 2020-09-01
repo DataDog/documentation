@@ -629,8 +629,24 @@ main:
     weight: 6
   - name: Serverless Integrations
     url: serverless/serverless_integrations
+    identifier: serverless_integrations
     parent: serverless
     weight: 7
+  - name: Datadog Serverless Plugin
+    url: serverless/serverless_integrations/plugin
+    parent: serverless_integrations
+    identifier: serverless_integrations_plugin
+    weight: 701
+  - name: Datadog Serverless Macro
+    url: serverless/serverless_integrations/macro
+    parent: serverless_integrations
+    identifier: serverless_integrations_macro
+    weight: 702
+  - name: Datadog Serverless CLI
+    url: serverless/serverless_integrations/cli
+    parent: serverless_integrations
+    identifier: serverless_integrations_cli
+    weight: 703
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless

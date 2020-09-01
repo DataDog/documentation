@@ -2,12 +2,24 @@
 title: Instrumenting Node.js Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+- link: "/serverless/serverless_integrations/plugin/"
+  tag: "Serverless"
+  text: "Datadog Serverless Plugin"
+- link: "/serverless/serverless_integrations/macro/"
+  tag: "Serverless"
+  text: "Datadog Serverless Macro"
+- link: "/serverless/serverless_integrations/cli/"
+  tag: "Serverless"
+  text: "Datadog Serverless CLI"
+- link: 'serverless/serverless_tagging/'
+  tag: "Serverless"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Serverless"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Serverless"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
@@ -278,6 +290,10 @@ exports.handler = async (event) => {
   return response;
 };
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/functions
