@@ -80,8 +80,7 @@ The following network load metrics are available:
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
 |  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
-|  **Established Connections**         | The number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
-|  **Closed Connections**         | The number of TCP connections in a closed state. Measured in connections per second from the `source`.                                                                                                            |
+
 #### TCP
 
 TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available:
@@ -91,6 +90,8 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Retransmits**           | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
 | **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged.                          |
 |  **RTT Variance**         | RTT is a proxy for jitter.                                                                                                             |
+|  **Established Connections**         | The number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
+|  **Closed Connections**         | The number of TCP connections in a closed state. Measured in connections per second from the `source`.                                                                                                            |
 
 ### DNS Resolution
 
