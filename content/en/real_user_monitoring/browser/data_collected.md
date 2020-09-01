@@ -26,10 +26,10 @@ further_reading:
 By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:
 
 - [View][1]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
-- [Resource][5]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
-- [Long task][6]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
-- [Error][7]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
-- [User Action][8]: A User Action event is a custom event that can be generated for a given user action.
+- [Resource][6]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
+- [Long task][7]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
+- [Error][8]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
+- [User Action][9]: A User Action event is a custom event that can be generated for a given user action.
 
 {{< tabs >}}
 {{% tab "View" %}}
@@ -257,3 +257,8 @@ In addition to default attributes, add [specific global context][1] to all event
 [2]: /real_user_monitoring/data_collected/view#single-page-applications
 [3]: /logs/processing/attributes_naming_convention/
 [4]: /logs/processing/attributes_naming_convention/#user-agent-attributes
+[5]: /real_user_monitoring/browser/data_collected/?tab=view
+[6]: /real_user_monitoring/browser/data_collected/?tab=resource
+[7]: /real_user_monitoring/browser/data_collected/?tab=longtask
+[8]: /real_user_monitoring/browser/data_collected/?tab=error
+[9]: /real_user_monitoring/browser/data_collected/?tab=useraction
