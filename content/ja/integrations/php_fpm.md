@@ -58,9 +58,14 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-1. [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `php_fpm.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[php_fpm.d/conf.yaml のサンプル][5]を参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
+
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `php_fpm.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[php_fpm.d/conf.yaml のサンプル][2]を参照してください。
 
    ```yaml
    init_config:
@@ -100,11 +105,17 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
        ping_reply: pong
    ```
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -153,9 +164,13 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 
 **注**: オートディスカバリーを使用する場合、個別のコンテナ/タスク/ポッドで稼働する Agent は、FPM プールの Unix ソケットファイルにアクセスできません。アクセスするためには、Agent をサイドカーとして実行する必要があります。
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `php_fpm` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `php_fpm` を探します。
 
 ## 収集データ
 
@@ -175,14 +190,10 @@ PHP-FPM チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/php_fpm/images/phpfpmoverview.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

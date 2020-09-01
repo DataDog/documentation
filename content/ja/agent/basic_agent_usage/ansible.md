@@ -181,7 +181,7 @@ system_probe_config:
 変更が終わったら、以下の手順に従ってください。
 
 1. システムプローブを起動します: `sudo service datadog-agent-sysprobe start` **注**: ご使用のシステムで service ラッパーを使用できない場合は、代わりに次のコマンドを使用してください: `sudo initctl start datadog-agent-sysprobe`。
-2. [Agent を再起動します][8]: `sudo service datadog-agent restart`.
+2. [Agent を再起動します][8]: `sudo service datadog-agent restart`
 3. システムプローブがブートから起動されるようにします: `sudo service enable datadog-agent-sysprobe`。
 
 手動でセットアップする場合は、[NPM][9] のドキュメントを参照してください。
@@ -287,6 +287,16 @@ Datadog インテグレーションを、バージョンを指定してインス
     <INTEGRATION_NAME>:
       action: <アクション>
       version: <インストールするバージョン>
+```
+
+サードパーティインテグレーションをインストールするには、`third_party` を true に設定します。
+
+```yml
+  datadog_integration:
+    <INTEGRATION_NAME>:
+      action: <ACTION>
+      version: <VERSION_TO_INSTALL>
+      third_party: true
 ```
 
 ##### 例

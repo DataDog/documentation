@@ -46,15 +46,18 @@ Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれ�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `squid.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル squid.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `squid.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル squid.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -82,11 +85,17 @@ _Agent バージョン 6.0 以降で利用可能_
 
     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -100,15 +109,20 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "squid", "service": "<YOUR_APP_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `squid` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `squid` を探します。
 
 ## 収集データ
 
@@ -127,15 +141,10 @@ Agent が Squid に接続してメトリクスを収集できない場合は、`
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+
 
 [1]: http://www.squid-cache.org/
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/squid/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/

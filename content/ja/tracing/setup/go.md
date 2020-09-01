@@ -72,8 +72,11 @@ func main() {
     tracer.Start(
         tracer.WithEnv("prod"),
         tracer.WithService("test-go"),
-        tracer.WithVersion("abc123"),
+        tracer.WithServiceVersion("abc123"),
     )
+
+    // トレーサーが停止すると、終了する前にトレーサー内のすべてのデータが Datadog Agent にフラッシュされます。
+    // この行は主要な関数内に残すようにしてください。
     defer tracer.Stop()
 }
 ```

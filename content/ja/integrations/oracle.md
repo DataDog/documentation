@@ -112,11 +112,14 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `oracle.d/conf.yaml` ファイルを編集します。`server` と `port` を更新し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[oracle.d/conf.yaml のサンプル][5] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `oracle.d/conf.yaml` ファイルを編集します。`server` と `port` を更新し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル oracle.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -145,7 +148,7 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=true;
        password: "<PASSWORD>"
    ```
 
-2. [Agent を再起動します][7]。
+2. [Agent を再起動します][3]。
 
 #### カスタムクエリのみ
 
@@ -184,9 +187,15 @@ instances:
     only_custom_queries: true
 ```
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -194,9 +203,13 @@ instances:
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                             |
 | `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%:1521", "service_name":"<サービス名>", "user":"datadog", "password":"<パスワード>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `oracle` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `oracle` を探します。
 
 ## カスタムクエリ
 
@@ -257,16 +270,13 @@ Oracle Database チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
 [2]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 [3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
