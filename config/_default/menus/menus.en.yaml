@@ -1844,7 +1844,7 @@ api_v1:
     parent: API V1 overview
     weight: 5
   - name: Rate Limits
-    url: '/api/v1/rate-limits/'
+    url: /api/v1/rate-limits/
     parent: API V1 overview
     weight: 6
     identifier: rate-limits
@@ -2614,7 +2614,7 @@ api_v1:
     generated: true
   - name: Get hourly usage for profiled hosts
     parent: Usage Metering
-    url: get-hourly-usage-for-profiled-hosts
+    url: '#get-hourly-usage-for-profiled-hosts'
     generated: true
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
@@ -2651,6 +2651,10 @@ api_v1:
   - name: Get hourly usage for Trace Search
     parent: Usage Metering
     url: '#get-hourly-usage-for-trace-search'
+    generated: true
+  - name: Get hourly usage for tracing without limits
+    parent: Usage Metering
+    url: '#get-hourly-usage-for-tracing-without-limits'
     generated: true
   - name: Users
     url: /api/v1/users/
@@ -2722,7 +2726,7 @@ api_v2:
     parent: API V2 overview
     weight: 5
   - name: Rate Limits
-    url: '/api/v2/rate-limits/'
+    url: /api/v2/rate-limits/
     parent: API V2 overview
     weight: 6
     identifier: rate-limits

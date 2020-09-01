@@ -8476,6 +8476,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for all organizations.
@@ -8568,6 +8573,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -8667,7 +8677,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            in the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -8691,6 +8701,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -8720,6 +8735,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
@@ -8830,6 +8850,11 @@ components:
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_agg_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         usage:
@@ -8984,6 +9009,30 @@ components:
             organization.
           items:
             $ref: '#/components/schemas/UsageTraceHour'
+          type: array
+      type: object
+    UsageTracingWithoutLimitsHour:
+      description: Tracing without limits usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageTracingWithoutLimitsResponse:
+      description: Response containing the tracing without limits usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for tracing without limits.
+          items:
+            $ref: '#/components/schemas/UsageTracingWithoutLimitsHour'
           type: array
       type: object
     User:
@@ -16946,6 +16995,51 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for Trace Search
+      tags:
+      - Usage Metering
+  /api/v1/usage/tracing-without-limits:
+    get:
+      description: Get hourly usage for tracing without limits.
+      operationId: GetTracingWithoutLimits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTracingWithoutLimitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
   /api/v1/user:
