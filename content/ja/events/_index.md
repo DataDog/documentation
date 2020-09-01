@@ -9,6 +9,9 @@ further_reading:
   - link: /api/v1/events/
     tag: ドキュメント
     text: Datadog イベント API
+  - link: /dashboards/widgets/event_stream/
+    tag: Documentation
+    text: イベントストリームウィジェットをダッシュボードに追加する
 ---
 イベントは、エンジニア（開発、運用、セキュリティ）にとって注目に値するアクティビティの記録です。Datadog へ[イベントを送信][1]する方法については、 開発者用ドキュメントを参照してください。
 
@@ -80,7 +83,7 @@ sources:nagios,chef status:error cassandra
 
 {{< img src="events/event_stream_aggregated.png" alt="集計されたイベントストリーム"  style="width:50%;" >}}
 
-### Notifications
+### 通知
 
 Datadog はイベントストリームで `@notifications` をサポートします。たとえば、
 

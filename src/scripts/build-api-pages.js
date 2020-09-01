@@ -41,7 +41,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: getTagSlug(action.summary),
+          url: `#` + getTagSlug(action.summary),
           generated: true
         });
     });

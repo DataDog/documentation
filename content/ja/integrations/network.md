@@ -55,7 +55,9 @@ sudo modprobe nf_conntrack_ipv4
 sudo modprobe nf_conntrack_ipv6
 ```
 
-### 構成
+*注*: Agent イメージに conntrack バイナリをインストールする必要がある場合があります。
+
+### コンフィギュレーション
 
 1. Agent はデフォルトでネットワークチェックを有効にしますが、チェックを自分で構成する場合は、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `network.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル network.d/conf.yaml][4] を参照してください。
 

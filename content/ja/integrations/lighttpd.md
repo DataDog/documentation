@@ -51,11 +51,14 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `lighttpd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル lighttpd.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `lighttpd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル lighttpd.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -67,11 +70,17 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
      - lighttpd_status_url: http://localhost/server-status?auto
    ```
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                           |
 | -------------------- | --------------------------------------------------------------- |
@@ -79,9 +88,13 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                   |
 | `<インスタンスコンフィギュレーション>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `lighttpd` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `lighttpd` を探します。
 
 ## 収集データ
 
@@ -101,19 +114,15 @@ Agent が lighttpd に接続してメトリクスを収集できない場合は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-Lighttpd Web サーバーのメトリクスを監視する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][10]を参照してください。
+Lighttpd Web サーバーのメトリクスを監視する方法 (または理由) について理解するには、Datadog の[一連のブログ記事][5]を参照してください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics

@@ -530,6 +530,11 @@ components:
       description: The Change graph shows you the change in a value over the time
         period chosen.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -1808,6 +1813,11 @@ components:
         tags, such as hosts. The more hosts that have a particular value, the darker
         that square is.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         events:
           description: List of widget events.
           items:
@@ -2022,6 +2032,11 @@ components:
       description: The host map widget graphs any metric across your hosts using the
         same visualization available from the main Host Map page.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         group:
           description: List of tag prefixes to group by.
           items:
@@ -4919,6 +4934,11 @@ components:
         autoscale:
           description: Whether to use auto-scaling or not.
           type: boolean
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         custom_unit:
           description: Display a unit of your choice on the widget.
           type: string
@@ -5495,6 +5515,11 @@ components:
             description: Group name.
             type: string
           type: array
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: Widget definition.
           example:
@@ -5924,6 +5949,11 @@ components:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         filters:
           description: Your environment and primary tag (or * if enabled for your
             account).
@@ -7554,6 +7584,11 @@ components:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: Widget definition.
           example:
@@ -7645,6 +7680,11 @@ components:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Analyzed Spans over time.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         events:
           description: List of widget events.
           items:
@@ -7741,6 +7781,11 @@ components:
         value like hostname or service with the most or least of any metric value,
         such as highest consumers of CPU, hosts with the least disk space, etc.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: List of top list widget requests.
           example:
@@ -8059,10 +8104,8 @@ components:
           format: int64
           type: integer
         container_count:
-          description: 'Contains the total number of billable infrastructure hosts
-            reporting during a given hour.
-
-            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
+          description: Shows the total number of containers reported by the Docker
+            integration during the hour.
           format: int64
           type: integer
         gcp_host_count:
@@ -8073,8 +8116,10 @@ components:
           format: int64
           type: integer
         host_count:
-          description: Shows the total number of containers reporting via the Docker
-            integration during the hour.
+          description: 'Contains the total number of billable infrastructure hosts
+            reporting during a given hour.
+
+            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
           format: int64
           type: integer
         hour:
@@ -8236,6 +8281,33 @@ components:
           description: Get hourly usage for NPM hosts.
           items:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
+          type: array
+      type: object
+    UsageProfilingHour:
+      description: The number of profiled hosts for each hour for a given organization.
+      properties:
+        avg_container_agent_count:
+          description: Get average number of container agents for that hour.
+          format: int64
+          type: integer
+        host_count:
+          description: Contains the total number of profiled hosts reporting during
+            a given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageProfilingResponse:
+      description: Response containing the number of profiled hosts for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for profiled hosts.
+          items:
+            $ref: '#/components/schemas/UsageProfilingHour'
           type: array
       type: object
     UsageReportsType:
@@ -8404,6 +8476,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for all organizations.
@@ -8496,6 +8573,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -8595,7 +8677,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            in the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -8619,6 +8701,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -8648,6 +8735,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
@@ -8725,6 +8817,11 @@ components:
             all hours in the current month(s) for all organizations.
           format: int64
           type: integer
+        profiling_container_agent_count_avg:
+          description: Shows the average number of profiled containers over all hours
+            in the current month(s) for all organizations.
+          format: int64
+          type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current month(s) for all organizations.
@@ -8753,6 +8850,11 @@ components:
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_agg_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         usage:
@@ -8907,6 +9009,30 @@ components:
             organization.
           items:
             $ref: '#/components/schemas/UsageTraceHour'
+          type: array
+      type: object
+    UsageTracingWithoutLimitsHour:
+      description: Tracing without limits usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageTracingWithoutLimitsResponse:
+      description: Response containing the tracing without limits usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for tracing without limits.
+          items:
+            $ref: '#/components/schemas/UsageTracingWithoutLimitsHour'
           type: array
       type: object
     User:
@@ -9235,6 +9361,24 @@ components:
       - comparator
       - value
       - palette
+      type: object
+    WidgetCustomLink:
+      description: Custom links help you connect a data value to a URL, like a Datadog
+        page or your AWS console.
+      properties:
+        label:
+          description: The label for the custom link URL. Keep the label short and
+            descriptive. Use metrics and tags as variables.
+          example: Search logs for {{host}}
+          type: string
+        link:
+          description: The URL of the custom link. URL must include `http` or `https`.
+            A relative URL must start with `/`.
+          example: https://app.datadoghq.com/logs?query={{host}}
+          type: string
+      required:
+      - label
+      - link
       type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
@@ -11442,6 +11586,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Delete an AWS integration
       tags:
       - AWS Integration
@@ -11495,7 +11645,9 @@ paths:
 
         Using the `POST` method updates your integration configuration
 
-        by adding your new configuration to the existing one in your Datadog organization.'
+        by adding your new configuration to the existing one in your Datadog organization.
+
+        A unique AWS Account ID for role based authentication.'
       operationId: CreateAWSAccount
       requestBody:
         content:
@@ -11523,6 +11675,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Create an AWS integration
       tags:
       - AWS Integration
@@ -11579,6 +11737,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Update an AWS integration
       tags:
       - AWS Integration
@@ -16388,6 +16552,51 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+  /api/v1/usage/profiling:
+    get:
+      description: Get hourly usage for profiled hosts.
+      operationId: GetUsageProfiling
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageProfilingResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for profiled hosts
+      tags:
+      - Usage Metering
   /api/v1/usage/rum_sessions:
     get:
       description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
@@ -16788,6 +16997,51 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+  /api/v1/usage/tracing-without-limits:
+    get:
+      description: Get hourly usage for tracing without limits.
+      operationId: GetTracingWithoutLimits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTracingWithoutLimitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for tracing without limits
+      tags:
+      - Usage Metering
   /api/v1/user:
     get:
       description: Get all users for your organization.
@@ -17184,7 +17438,9 @@ paths:
 
                   '
               simple-raw-message:
-                description: Submit log string.
+                description: 'Submit log string. Log attributes can be passed as query
+                  parameters in the URL. This enables the addition of tags or the
+                  source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
                 summary: Simple Raw Message
                 value: hello world
             schema:

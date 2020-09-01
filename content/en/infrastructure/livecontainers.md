@@ -27,7 +27,7 @@ Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other 
 
 [Kubernetes Resources for Live Containers][1] is currently in private beta. Fill out [this form][5] to request access.
 
-If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, pre-workload detailed view, and visualized maps.
+If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, per-workload detailed view, and visualized maps.
 
 ## Installation
 
@@ -42,24 +42,42 @@ Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Conta
 
 To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][10] and add the following changes to your `values.yaml` file:
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="values.yaml" >}}
+datadog:
+  ...
+  processAgent:
+    enabled: true
+  ...
+  orchestratorExplorer:
+    enabled: true
+...
+clusterAgent:
+  enabled: true
+  image:
+    repository: datadog/cluster-agent
+    tag: latest
+    pullPolicy: Always
+...
+agents:
+  image:
+    repository: datadog/agent
+    tag: latest
+    pullPolicy: Always
+...
+{{< /code-block >}}
+
+In cases where the Agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml`:
+
+{{< code-block lang="yaml" filename="values.yaml" >}}
 datadog:
    ...
-   orchestratorExplorer:
-      enabled: true
-   ...
-   agents:
-      image:
-        repository: datadog/agent
-        tag: latest
-        pullPolicy: Always
-   ...
-   clusterAgent:
-      repository: datadog/cluster-agent
-      tag: latest
-      pullPolicy: Always
+   clusterName: <PLACEHOLDER>
    ...
 {{< /code-block >}}
+
+**Note**: The cluster name must be 40-characters or less.
+
+On Google's GKE, AWS EKS, and Azure AKS, this is unnecessary, unless the Agent and the cluster Agent don't have access to the cloud metadata APIs, or the cluster name is longer than 40 characters.
 
 ## Configuration
 

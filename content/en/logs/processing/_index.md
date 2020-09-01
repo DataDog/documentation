@@ -69,6 +69,9 @@ To discover the full list of Processors available, refer to the dedicated [Proce
 
 If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][9]. There is also a [parsing best practice][10] and [parsing troubleshooting][11] guide.
 
+For optimal usage of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor. 
+Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
+
 ## Reserved attributes
 
 If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog and are faceted by default:

@@ -7,6 +7,9 @@ further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
+- link: "/tracing/version_tracking"
+  tag: "Documentation"
+  text: "Use Version tags within Datadog APM to monitor deployments"
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
@@ -323,7 +326,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 

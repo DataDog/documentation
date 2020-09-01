@@ -88,12 +88,15 @@ TokuMX チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 MongoDB でのユーザーの作成と管理の詳細については、[MongoDB のドキュメント][2]を参照してください。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `tokumx.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tokumx.d/conf.yaml][4] を参照してください。
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `tokumx.d/conf.yaml` ファイルを編集します。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tokumx.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -102,11 +105,17 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
      - server: "mongodb://<USER>:<PASSWORD>@localhost:27017"
    ```
 
-2. [Agent を再起動][5]すると、Datadog への TokuMX メトリクスの送信が開始されます。
+2. [Agent を再起動][3]すると、Datadog への TokuMX メトリクスの送信が開始されます。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/tokumx/datadog_checks/tokumx/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                      |
 | -------------------- | ---------------------------------------------------------- |
@@ -114,9 +123,13 @@ MongoDB でのユーザーの作成と管理の詳細については、[MongoDB 
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
 | `<インスタンスコンフィギュレーション>`  | `{"server": "mongodb://<ユーザー>:<パスワード>@%%host%%:27017"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `tokumx` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `tokumx` を探します。
 
 ## 収集データ
 
@@ -138,19 +151,15 @@ Agent が TokuMX に接続してメトリクスを収集できない場合は、
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [MongoDB アプリケーションの TokuMX キーメトリクスの監視][10]
+- [MongoDB アプリケーションの TokuMX キーメトリクスの監視][5]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.mongodb.org/display/DOCS/Security+and+Authentication
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/tokumx/datadog_checks/tokumx/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/tokumx/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-key-tokumx-metrics-mongodb-applications

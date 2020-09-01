@@ -142,7 +142,7 @@ The index facet is a specific facet that appears only if your organization has [
 
 As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
-**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index.
+**Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
 #### From log side panel
 
@@ -152,6 +152,8 @@ The easiest way to create a facet is to add it from the log side panel, where mo
 - If the field has a numerical value, both facet and measure creation are available.
 
 {{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Create Facet from attribute" style="width:30%;">}}
+
+**Note**: As a best practice, it is recommended to use no more than 1000 facets.
 
 #### From the facet list
 

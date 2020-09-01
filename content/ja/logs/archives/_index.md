@@ -77,9 +77,71 @@ Datadog アカウントを構成して、クラウドストレージシステム
 
 ### サーバー側の暗号化 (SSE)
 
-サーバー側の暗号化を S3 ログアーカイブに追加するには、S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
+#### SSE-S3
+
+サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][8] を利用することです。有効化するには S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="AES-256 オプションを選択し、保存します。"  style="width:75%;">}}
+
+#### SSE-KMS
+
+また、Datadog は CMK を利用した [AWS KMS][9] からのサーバーサイド暗号化もサポートしています。有効化するには次の手順に従ってください。
+
+1. CMK の作成
+2. CMK に付随する CMK ポリシーに以下のコンテンツを添加して、AWS アカウント番号と Datadog IAM ロール名を適切なものに置き換えます。
+
+```
+{
+    "Id": "key-consolepolicy-3",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Enable IAM User Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow use of the key",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:DescribeKey"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow attachment of persistent resources",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:CreateGrant",
+                "kms:ListGrants",
+                "kms:RevokeGrant"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "kms:GrantIsForAWSResource": "true"
+                }
+            }
+        }
+    ]
+}
+```
+
+3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
@@ -88,6 +150,8 @@ Datadog アカウントを構成して、クラウドストレージシステム
 [5]: /ja/logs/archives/rehydrating/
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -130,6 +194,8 @@ Datadog アカウントを構成して、クラウドストレージシステム
 [7]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 {{< /tabs >}}
+
+## 検証
 
 Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog が収集したすべてのログを加工し始めます。その後アーカイブに転送されます。
 

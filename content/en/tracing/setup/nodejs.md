@@ -25,9 +25,15 @@ further_reading:
 
 The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Installation And Getting Started
+## Installation and getting started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app documentation (Recommended)
+
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable App Analytics and Trace ID injection into logs during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
@@ -83,7 +89,7 @@ Tracer settings can be configured as a parameter to the `init()` method or as en
 | env            | `DD_ENV`                     | `null`      | Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc. Available for versions 0.20+                                                                                                                                                                                                     |
 | service        | `DD_SERVICE`            | `null`      | The service name to be used for this program. Available for versions 0.20+                                                                                                                                                                                                                              |
 | version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
-| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`. Available for versions 0.20+                                                                                                                            |
+| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+                                                                                                                            |
 
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables.
 
@@ -128,7 +134,7 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/visualization/
 [4]: https://datadog.github.io/dd-trace-js
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development

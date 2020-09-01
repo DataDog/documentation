@@ -17,6 +17,8 @@ Example: `count_nonzero(system.cpu.user{*} by {host})` returns a timeseries repr
 
 {{< img src="dashboards/functions/count/count_nonzero.png" alt="count non zero"  style="width:80%;">}}
 
+Note: `count_nonzero_finite()` can be used as an alias for `count_nonzero()`.
+
 ## Count not null
 
 | Function           | Description                           | Example                            |
@@ -34,6 +36,7 @@ Example: `count_not_null(system.cpu.user{*} by {host})` returns a timeseries rep
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}

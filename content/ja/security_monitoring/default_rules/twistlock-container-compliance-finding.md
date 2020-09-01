@@ -3,6 +3,8 @@ aliases:
   - /ja/c6a-b25-2e9
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 source: twistlock
 title: コンプライアンス基準違反のコンテナ
 type: security_rules

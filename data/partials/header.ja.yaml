@@ -23,6 +23,10 @@ left:
         link: 'https://www.datadoghq.com/product/apm/'
         title: APM
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''APM アイコン''>'
+      - name: product_profiler
+        link: 'https://www.datadoghq.com/product/code-profiling/'
+        title: 継続的なプロファイラー
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''プロファイラーアイコン''>'
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: セキュリティモニタリング
@@ -89,6 +93,18 @@ left:
         category: 業種
         link: 'https://www.datadoghq.com/solutions/technology/'
         title: テクノロジー
+      - name: Amazon Web Services
+        category: テクノロジー
+        link: 'https://www.datadoghq.com/solutions/aws/'
+        title: Amazon Web Services
+      - name: Google Cloud Platform
+        category: テクノロジー
+        link: 'https://www.datadoghq.com/solutions/gcp/'
+        title: Google Cloud Platform
+      - name: Kubernetes
+        category: テクノロジー
+        link: 'https://www.datadoghq.com/solutions/kubernetes/'
+        title: Kubernetes
       - name: solutions_gaming
         category: 業種
         link: 'https://www.datadoghq.com/ja/solutions/gaming/'

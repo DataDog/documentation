@@ -55,9 +55,10 @@ var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddso
 // calculate response times for client, target and total
 var request_start_time = context.getVariable('client.received.start.timestamp');
 var request_end_time = context.getVariable('client.received.end.timestamp');
+var system_timestamp = context.getVariable('system.timestamp');
 var target_start_time = context.getVariable('target.sent.start.timestamp');
 var target_end_time = context.getVariable('target.received.end.timestamp');
-var total_request_time = request_end_time - request_start_time;
+var total_request_time = system_timestamp - request_start_time;
 var total_target_time = target_end_time - target_start_time;
 var total_client_time = total_request_time - total_target_time;
 

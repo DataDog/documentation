@@ -41,11 +41,11 @@ Watchdog がシステムのサービスまたはその子リソースの異常�
 
 インフラストラクチャー全体のストーリーには、次のインテグレーションに関する問題が含まれる場合があります。
 
-* [システム][1]: Host-level memory usage (memory leak), TCP retransmit rate, etc.
+* [システム][1]: ホストレベルのメモリ使用量（メモリリーク）、TCP 再送率、など。
 * [Redis][2]
 * [PostgreSQL][3]
 * [NGINX][4]
-* [Amazon Web Services][5]: For the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
+* [Amazon Web Services][5]:（[S3][6]、[ELB/ALB/NLB][7]、[CloudFront][8]、[DynamoDB][9] Amazon サービス）
 
 インフラストラクチャーの選択後、モニター作成ページの上部にあるグラフに、Watchdog イベントとイベントのリストが経時的に表示されます。
 

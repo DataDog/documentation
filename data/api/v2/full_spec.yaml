@@ -3531,7 +3531,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RoleResponse'
-          description: OK for get role
+          description: OK
         '403':
           content:
             application/json:
@@ -4267,7 +4267,11 @@ paths:
             schema:
               $ref: '#/components/schemas/UserUpdateRequest'
       responses:
-        '204':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
           description: OK
         '400':
           content:
@@ -4457,7 +4461,8 @@ tags:
     \ team tag. Tags can be applied to log events in many ways, and a log event can\
     \ have multiple tags with the same key (like team)\nand different values\u2014\
     in this way the same log event can be visible to roles whose restriction queries\
-    \ are scoped to different team values."
+    \ are scoped to different team values.\n\nYou need an API and application key\
+    \ with Admin rights to interact with this endpoint."
   name: Logs Restriction Queries
 - description: '[See API version 1](/api/v1/metrics/).'
   name: Metrics

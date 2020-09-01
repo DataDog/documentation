@@ -111,6 +111,9 @@ Lambda 関数で `DD_MERGE_DATADOG_XRAY_TRACES` 環境変数を `True` に設定
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="ホストから Lambda 関数へのリクエストのトレース" >}}
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/serverless/
 [2]: /ja/tracing/serverless_functions/enable_aws_xray/

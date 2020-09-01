@@ -16,9 +16,7 @@ Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics f
 
 ### 2. Install the Datadog Forwarder
 
-Install the [Datadog Forwarder Lambda function][2], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs.
-
-Note, if you installed the AWS integration by using the Datadog-provided CloudFormation template, then you already have the Forwarder function installed as part of the AWS integration CloudFormation stack.
+Install the [Datadog Forwarder Lambda function][2], which is required for ingestion of AWS Lambda traces, enhanced metrics, custom metrics, and logs. **Note**: Skip this step if you already have the Forwarder function installed as part of the [AWS integration][1] CloudFormation stack.
 
 ### 3. Instrument Your Application
 
@@ -26,5 +24,5 @@ Select the Lambda runtime below for instructions to instrument your serverless a
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[1]: /integrations/amazon_web_services/
+[1]: /integrations/amazon_web_services/#setup
 [2]: /serverless/forwarder

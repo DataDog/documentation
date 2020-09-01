@@ -87,7 +87,7 @@ Datadog アプリケーションのパース機能自体の詳細については
 
 [ログ日付リマッパープロセッサー][12]を設定することで、別の属性を指定してログの日付のソースとして使用することもできます。
 
-**注**: ログエントリの正式な日付が 6 時間以上前だった場合、Datadog はそのエントリを拒否します。
+**注**: ログエントリの正式な日付が 18 時間以上前だった場合、Datadog はそのエントリを拒否します。
 
 <div class="alert alert-warning">
 認識される日付の形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒エポック形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。

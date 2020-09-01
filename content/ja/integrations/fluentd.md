@@ -68,13 +68,16 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Fluentd メトリクス](#メトリクス)を収集するには、[Agent 構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `fluentd.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル fluentd.d/conf.yaml][4] を参照してください。
+1. [Fluentd メトリクス](#メトリクス)を収集するには、[Agent コンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `fluentd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル fluentd.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -86,20 +89,20 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
      - monitor_agent_url: http://example.com:24220/api/plugins.json
    ```
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
-[Datadog の FluentD プラグイン][6]を使用して FluentD から Datadog アカウントへログを直接転送することができます。
+[Datadog の FluentD プラグイン][4]を使用して FluentD から Datadog アカウントへログを直接転送することができます。
 
 ###### ログへのメタデータの追加
 
-適切なメタデータ (ホスト名、ソースなど) は、Datadog でログの可能性をフルに引き出すためのカギです。デフォルトでは、ホスト名およびタイムスタンプフィールドが、[予約済み属性の再マップ][7]によって適切に再マップされます。
+適切なメタデータ (ホスト名、ソースなど) は、Datadog でログの可能性をフルに引き出すためのカギです。デフォルトでは、ホスト名およびタイムスタンプフィールドが、[予約済み属性の再マップ][5]によって適切に再マップされます。
 
 ###### ソースとカスタムタグ
 
-Datadog で[インテグレーションの自動セットアップ][9]をトリガーするには、ログに `ddsource` 属性を追加して、[ログのインテグレーションの名前][8]を設定します。
-[インフラストラクチャーリスト][11]に一致するホスト名があれば、[ホストタグ][10]がログに自動的に設定されます。ログにカスタムタグを追加する場合は、`ddtags` 属性を使用します。
+Datadog で[インテグレーションの自動セットアップ][7]をトリガーするには、ログに `ddsource` 属性を追加して、[ログのインテグレーションの名前][6]を設定します。
+[インフラストラクチャーリスト][9]に一致するホスト名があれば、[ホストタグ][8]がログに自動的に設定されます。ログにカスタムタグを追加する場合は、`ddtags` 属性を使用します。
 
 セットアップ例:
 
@@ -169,7 +172,7 @@ Datadog で[インテグレーションの自動セットアップ][9]をトリ�
 - `kubernetes.pod_name`
 - `docker.container_id`
 
-Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][12] を使用することをお勧めします。
+Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することをお勧めします。
 
 構成例:
 
@@ -180,9 +183,22 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
  </filter>
 ```
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/fluentd/datadog_checks/fluentd/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: http://www.rubydoc.info/gems/fluent-plugin-datadog
+[5]: https://docs.datadoghq.com/ja/logs/processing/#edit-reserved-attributes
+[6]: https://docs.datadoghq.com/ja/integrations/#cat-log-collection
+[7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
+[8]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/
+[9]: https://app.datadoghq.com/infrastructure
+[10]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][13]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -192,9 +208,13 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                     |
 | `<インスタンスコンフィギュレーション>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][14]し、Checks セクションで `fluentd` を検索します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `fluentd` を検索します。
 
 ## 収集データ
 
@@ -213,26 +233,15 @@ Agent が FluentD に接続してメトリクスを収集できない場合は `
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog を使用した Fluentd の監視方法][17]
+- [Datadog を使用した Fluentd の監視方法][5]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/fluentd/datadog_checks/fluentd/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: http://www.rubydoc.info/gems/fluent-plugin-datadog
-[7]: https://docs.datadoghq.com/ja/logs/processing/#edit-reserved-attributes
-[8]: https://docs.datadoghq.com/ja/integrations/#cat-log-collection
-[9]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-[10]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/
-[11]: https://app.datadoghq.com/infrastructure
-[12]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
-[13]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[15]: https://github.com/DataDog/integrations-core/blob/master/fluentd/metadata.csv
-[16]: https://docs.datadoghq.com/ja/help/
-[17]: https://www.datadoghq.com/blog/monitor-fluentd-datadog
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-fluentd-datadog

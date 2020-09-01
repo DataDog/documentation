@@ -53,9 +53,16 @@ Memcache チェックは [Datadog Agent][1] パッケージに含まれていま
 
 #### メトリクスの収集
 
-##### ホスト
+#{{< tabs >}}
+{{% tab "Host" %}}
+#{{% /tab %}}
+{{% tab "Containerized" %}}
 
-1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `mcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mcache.d/conf.yaml][3] を参照してください。
+#### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
+
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mcache.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -67,62 +74,26 @@ Memcache チェックは [Datadog Agent][1] パッケージに含まれていま
      - url: localhost
    ```
 
-2. [Agent を再起動][4]すると、Datadog への Memcache メトリクスの送信が開始されます。
+2. [Agent を再起動][3]すると、Datadog への Memcache メトリクスの送信が開始されます。
 
 ##### トレースの収集
 
 Datadog APM は、Memcache と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][5]。
-2. [Memcache へのリクエストを作成するアプリケーションをインスツルメントします][6]。
+1. [Datadog でトレースの収集を有効にします][4]。
+2. [Memcache へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][7]をガイドとして参照して、次のパラメーターを適用します。
-
-| パラメーター            | 値                                 |
-| -------------------- | ------------------------------------- |
-| `<インテグレーション名>` | `mcache`                              |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                         |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "%%host%%","port": "11211"}` |
-
-##### トレースの収集
-
-コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
-
-Agent コンテナで必要な環境変数
-
-| パラメーター            | 値                                                                      |
-| -------------------- | -------------------------------------------------------------------------- |
-| `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | true                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
-
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][8]および [Kubernetes Daemon のセットアップ][9]を参照してください。
-
-次に、[アプリケーションコンテナをインスツルメント][6]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
-
-#### ログの収集
-
-_Agent バージョン 6.0 以降で利用可能_
-
-1. このコンフィギュレーションブロックを `mcache.d/conf.yaml` ファイルに追加すると、Memcached ログの収集を開始します。
-
-   ```yaml
-   logs:
-     - type: file
-       path: /var/log/memcached.log
-       source: memcached
-       service: mcache
-   ```
-
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
-
-2. [Agent を再起動][4]して、変更を検証します。
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][10]し、Checks セクションで `mcache` を探します。
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `mcache` を探します。
 
 ## 収集データ
 
@@ -144,26 +115,18 @@ Agent が memcache に接続してメトリクスを収集できない場合は 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 ## その他の参考資料
 
-- [Memcached 監視を使用して Web アプリケーションをスピードアップ][13]
-- [DogStatsD を使用した Memcached パフォーマンスメトリクスの実装][14]
-- [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][15]
+- [Memcached 監視を使用した Web アプリケーションのスピードアップ][4]
+- [DogStatsD を使用した Memcached パフォーマンスメトリクスの実装][5]
+- [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[6]: https://docs.datadoghq.com/ja/tracing/setup/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/mcache/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
-[13]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
-[14]: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
-[15]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached
+[5]: https://www.datadoghq.com/blog/instrument-memcached-performance-metrics-dogstatsd
+[6]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached

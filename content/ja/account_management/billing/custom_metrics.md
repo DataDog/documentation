@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
-メトリクスが [400 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスは[カスタムメトリクス][2]<sup>[(1)](#標準インテグレーション)</sup>とみなされます。
+メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスは[カスタムメトリクス][2]<sup>[(1)](#標準インテグレーション)</sup>とみなされます。
 
 **カスタムメトリクスはメトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます。**
 

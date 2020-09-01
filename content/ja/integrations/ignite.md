@@ -55,16 +55,21 @@ JMX メトリクスエクスポーターはデフォルトで有効になって�
 
 ロギングについては、[log4j][3] を有効にして、完全な日付のログ形式を利用することを強くお勧めします。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-1. ignite のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ignite.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ignite.d/conf.yaml][4] を参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
+
+1. ignite のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ignite.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ignite.d/conf.yaml][1] を参照してください。
 
    このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。
    以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
-    収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][5]で詳細な手順を参照してください。
-    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][6]までお問い合わせください。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][2]で詳細な手順を参照してください。
+    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][3]までお問い合わせください。
 
-2. [Agent を再起動します][7]。
+2. [Agent を再起動します][4]。
 
 ##### ログの収集
 
@@ -90,32 +95,44 @@ _Agent バージョン 6.0 以降で利用可能_
              pattern: \[\d{4}\-\d{2}\-\d{2}
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ignite.d/conf.yaml][4] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ignite.d/conf.yaml][1] を参照してください。
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][4]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/integrations/java/
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
-Datadog-Ignite インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][9]ガイドを参照してください。
+Datadog-Ignite インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。これを有効にするには、[Docker log collection][10] を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][3]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ignite", "service": "<サービス名>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[3]: https://docs.datadoghq.com/ja/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `ignite` を探します。
+[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `ignite` を探します。
 
 ## 収集データ
 
@@ -134,18 +151,12 @@ Ignite インテグレーションには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 
 [1]: https://ignite.apache.org/
 [2]: https://docs.datadoghq.com/ja/agent/
 [3]: https://apacheignite.readme.io/docs/logging#section-log4j
-[4]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/integrations/java/
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[10]: https://docs.datadoghq.com/ja/agent/docker/log/
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/ignite/metadata.csv
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example

@@ -3,8 +3,10 @@ aliases:
   - /ja/cf4-844-4a0
 control: cis-3.5
 disable_edit: true
-framework: cis
+framework: cis-aws
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: cloudtrail
 security: コンプライアンス
 source: cloudtrail

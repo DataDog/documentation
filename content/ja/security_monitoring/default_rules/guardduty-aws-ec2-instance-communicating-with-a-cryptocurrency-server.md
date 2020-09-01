@@ -3,6 +3,8 @@ aliases:
   - /ja/ecb-6e7-738
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: ec2
 security: attack
 source: guardduty

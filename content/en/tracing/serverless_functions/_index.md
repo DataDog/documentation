@@ -111,6 +111,9 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/
 [2]: /tracing/serverless_functions/enable_aws_xray/
