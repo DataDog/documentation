@@ -30,7 +30,7 @@ data:
       enable_oom_kill: false
       collect_dns_stats: false
 ---
-# Source: datadog/templates/system-probe-configmap.yaml
+# Source: datadog/templates/security-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
