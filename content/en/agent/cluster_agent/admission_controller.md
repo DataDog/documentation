@@ -67,7 +67,7 @@ To enable the admission controller for the Datadog operator, set the parameter `
 
 To enable the admission controller without using Helm or the Datadog operator, you'll need to add a few things to your configuration:
 
-1. Download the [Cluster Agent RBAC permissions][3] manifest, and add the following under `rules`:
+First, Download the [Cluster Agent RBAC permissions][3] manifest, and add the following under `rules`:
 
 {{< code-block lang="yaml" filename="cluster-agent-rbac.yaml" disable_copy="true" >}}
 - apiGroups:
@@ -86,7 +86,7 @@ To enable the admission controller without using Helm or the Datadog operator, y
   verbs: ["get"]
 {{< /code-block >}}
 
-2. Add the following to the bottom of `agent-services.yaml`:
+Add the following to the bottom of `agent-services.yaml`:
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
 ---
@@ -106,7 +106,7 @@ spec:
 
 {{< /code-block >}}
 
-3. Add environment variables to the Cluster Agent deployment which enable the Admission Controller. 
+Add environment variables to the Cluster Agent deployment which enable the Admission Controller:
 
 {{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" disable_copy="true" >}}
 - name: DD_ADMISSION_CONTROLLER_ENABLED
@@ -117,9 +117,11 @@ spec:
   value: "datadog-cluster-agent-admission-controller"
 {{< /code-block >}}
 
-4. Run: `kubectl apply -f cluster-agent-rbac.yaml`
-5. Run: `kubectl apply -f agent-services.yaml`
-6. Run: `kubectl apply -f cluster-agent-deployment.yaml`
+Finally, run the following commands:
+
+- `kubectl apply -f cluster-agent-rbac.yaml`
+- `kubectl apply -f agent-services.yaml`
+- `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### APM and DogStatsD
 
