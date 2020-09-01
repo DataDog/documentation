@@ -1,8 +1,8 @@
 ---
 aliases:
   - /ja/2fa-56b-77b
+cloud: AWS
 disable_edit: true
-framework: pci_aws
 kind: ドキュメント
 rule_category:
   - クラウドコンフィギュレーション

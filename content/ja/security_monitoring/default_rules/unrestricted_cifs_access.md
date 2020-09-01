@@ -1,8 +1,8 @@
 ---
 aliases:
   - /ja/3ce-77d-28a
+cloud: AWS
 disable_edit: true
-framework: pci_aws
 kind: ドキュメント
 rule_category:
   - クラウドコンフィギュレーション

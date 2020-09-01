@@ -191,13 +191,16 @@ All valid MQSC commands were processed.
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. IBM MQ のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_mq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_mq.d/conf.yaml][5] を参照してください。
+1. IBM MQ のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_mq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_mq.d/conf.yaml][1] を参照してください。
    IBM MQ を構成するオプションはいくつかあり、使用方法によって構成は変わります。
 
    - `channel`: IBM MQ チャンネル
@@ -215,7 +218,7 @@ All valid MQSC commands were processed.
       - ADMIN.QUEUE.1
     ```
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][2]。
 
 ##### ログの収集
 
@@ -241,11 +244,16 @@ _Agent バージョン 6.0 以降で利用可能_
              pattern: "\d{2}/\d{2}/\d{4}"
    ```
 
-3. [Agent を再起動します][6]。
+3. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][7]をガイドとして参照して、次のパラメーターを適用します。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -259,15 +267,20 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][8]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "ibm_mq", "service": "<サービス名>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{2}/\d{2}/\d{4}"}}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `ibm_mq` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `ibm_mq` を探します。
 
 ## 収集データ
 
@@ -298,23 +311,19 @@ IBM MQ には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM MQ メトリクスおよびログの監視][12]
+- [Datadog を使用した IBM MQ メトリクスおよびログの監視][7]
+
 
 [1]: https://www.ibm.com/products/mq
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://developer.ibm.com/messaging/mq-downloads
 [4]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html#//apple_ref/doc/uid/TP40016462-CH3-SW1
-[5]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
