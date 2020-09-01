@@ -55,7 +55,7 @@ Depending on the type of MFA leveraged by your application, [JavaScript steps][3
 
 Store your credentials as [global variables][4] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog:
 
-Once you create the secure variables, you can then import these global variables into your browser tests and leverage them for your login steps: 
+Once you create the secure variables, you can then [import these global variables][5] into your browser tests and leverage them for your login steps: 
 
 **Note:** Although Datadog global variables are securely stored and encrypted, we strongly recommend using an account dedicated to testing with dummy credentials as a general testing best practice.
 
@@ -67,3 +67,4 @@ Once you create the secure variables, you can then import these global variables
 [2]: /synthetics/browser_tests/actions/#subtests
 [3]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
+[5]: /synthetics/browser_tests/actions#a-global-variable
