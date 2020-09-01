@@ -47,7 +47,7 @@ To create a query using the facet values in the left panel:
 
 For example, if you want to exclusively search for browser tests, hover over **Browser Test** in the left panel and select `only`. Hover again to reselect `all`.
 
-{{< img src="synthetics/search/facet-selection.gif" alt="Facet Search" >}}
+{{< img src="synthetics/search/facet-search.gif" alt="Facet Search" >}}
 
 ### Write a query
 
