@@ -20,9 +20,9 @@ Datadog は、ホスト、コンテナ、カスタムメトリクスの数を毎
 
 ### サーバーレス
 
-請求は、アカウントの 1 か月間の 1 時間あたりの平均機能数に基づきます。1 時間ごとに、Datadog は 1 回以上実行され、Datadog アカウントによって監視された機能の数を記録します。月末に、Datadog は、記録された機能の 1 時間ごとの数の平均を計算することにより課金します。
+請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。
 
-Pro および Enterprise プランには、請求対象の機能ごとに 150,000 件の Analyzed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Analyzed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
+Pro および Enterprise プランには、請求対象の関数ごとに 150,000 件の Analyzed Span と 5 個のカスタムメトリクスが含まれます。サーバーレス APM の請求は、Datadog APM サービスに送信された [Analyzed Span][4] のうち、バンドルされた数量を超過した総数に基づき、月末に課金されます。サーバーレス使用時は、請求可能な [APM ホスト][4]はありません。
 
 詳細については、[サーバーレス請求ページ][5]および[Datadog 料金ページ][6]を参照してください。
 
@@ -42,7 +42,7 @@ Pro および Enterprise プランには、請求対象の機能ごとに 150,00
 
 ## その他の参考資料
 
-{{< whatsnext desc="課金に関するトピック:">}}
+{{< whatsnext desc="請求に関するトピック:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}使用料の詳細{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
@@ -53,6 +53,7 @@ Pro および Enterprise プランには、請求対象の機能ごとに 150,00
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM と分散型トレース{{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリングに関するよくあるご質問{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/profiler/" >}}継続的なプロファイリングに関するよくあるご質問{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}

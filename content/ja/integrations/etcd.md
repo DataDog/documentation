@@ -9,8 +9,8 @@ categories:
   - orchestration
   - containers
   - configuration & deployment
-  - orchestration
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -57,16 +57,51 @@ Etcdチェックは [Datadog Agent][2] パッケージに含まれています�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. Etcd のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `etcd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル etcd.d/conf.yaml][4] を参照してください。
-2. [Agent を再起動します][5]。
+##### メトリクスの収集
+
+1. Etcd のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `etcd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル etcd.d/conf.yaml][2] を参照してください。
+2. [Agent を再起動します][3]。
+
+##### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. `etcd.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: "<LOG_FILE_PATH>"
+        source: etcd
+        service: "<SERVICE_NAME>"
+    ```
+
+    `path` パラメーターと `service` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[etcd.d/conf.yaml のサンプル][2]を参照してください。
+
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+
+##### メトリクスの収集
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
@@ -74,9 +109,22 @@ Etcdチェックは [Datadog Agent][2] パッケージに含まれています�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
 | `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
 
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+
+| パラメーター      | 値                                             |
+| -------------- | ------------------------------------------------- |
+| `<LOG_CONFIG>` | `{"source": "etcd", "service": "<SERVICE_NAME>"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `etcd` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `etcd` を探します。
 
 ## 収集データ
 
@@ -102,19 +150,15 @@ Agent が Etcd API エンドポイントからメトリクスを収集できな�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-Etcd のインテグレーションをより便利に行う方法 (または理由) について理解するには、Datadog の[ブログ記事][10]を参照してください。
+Etcd のインテグレーションをより便利に行う方法 (または理由) について理解するには、Datadog の[ブログ記事][5]を参照してください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/etcd/images/etcd_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-etcd-performance
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-etcd-performance

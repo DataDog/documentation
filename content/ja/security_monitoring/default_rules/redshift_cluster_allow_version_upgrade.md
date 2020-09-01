@@ -1,8 +1,8 @@
 ---
 aliases:
   - /ja/4da-22a-46b
+cloud: AWS
 disable_edit: true
-framework: pci_aws
 kind: ドキュメント
 rule_category:
   - クラウドコンフィギュレーション
