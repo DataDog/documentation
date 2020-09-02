@@ -226,7 +226,6 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
 DD_DOTNET_TRACER_HOME=/opt/datadog
-DD_TRACE_DEBUG=true
 # any other environment variable used by the application
 ```
 
