@@ -20,7 +20,7 @@ To collect all logs written by running applications in your ECS containers and s
 1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs.json][1] file [datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI) with the following configuration:
 
-    ```json
+    ```text
     {
         "containerDefinitions": [
         (...)
@@ -72,39 +72,35 @@ To collect all logs written by running applications in your ECS containers and s
 1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs-win.json][1] file with the following configuration:
 
-    ```json
+    ```text
     {
       "containerDefinitions": [
-      (...)
-        "mountPoints": [
-          (...)
-          {
-            "containerPath": "c:\\programdata\\datadog\\run",
-            "sourceVolume": "pointdir",
-            "readOnly": false
-          },
-          (...)
-        ],
-        "environment": [
-          (...)
-          {
-            "name": "DD_LOGS_ENABLED",
-            "value": "true"
-          },
-          {
-            "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
-            "value": "true"
-          },
-          (...)
-        ]
+        (...)
+          "mountPoints": [
+            (...)
+            {
+              "containerPath": "/etc/passwd",
+              "sourceVolume": "passwd",
+              "readOnly": true
+            },
+            (...)
+          ],
+          "environment": [
+            (...)
+            {
+              "name": "DD_PROCESS_AGENT_ENABLED",
+              "value": "true"
+            }
+          ]
+        }
       ],
       "volumes": [
         (...)
         {
           "host": {
-            "sourcePath": "c:\\programdata\\datadog\\run"
+            "sourcePath": "/etc/passwd"
           },
-          "name": "pointdir"
+          "name": "passwd"
         },
         (...)
       ],
