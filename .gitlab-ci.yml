@@ -149,15 +149,22 @@ missing_tms_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
 
 index_algolia_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: [ "runner:main","size:large" ]
   stage: post-deploy
   cache:
     <<: *cache
     policy: pull
   environment: "preview"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
-    - index_docsearch_algolia_preview
+    - |-
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        export DISPLAY=:99
+        Xvfb :99 -ac &
+        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
   when: manual
@@ -283,16 +290,22 @@ test_live_link_checks:
     - master
 
 index_algolia:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: ["runner:main","size:large"]
   stage: post-deploy
   cache:
     <<: *cache
     policy: pull
   environment: "live"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
-    - cat /etc/docs_datadoghq.com
-    - index_docsearch_algolia
+    - |-
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+      export DISPLAY=:99
+      Xvfb :99 -ac &
+      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
   dependencies:
     - build_live
   only:
