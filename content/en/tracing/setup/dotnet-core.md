@@ -237,7 +237,7 @@ In the service configuration file, reference this as an [`EnvironmentFile`][2] i
 EnvironmentFile=/path/to/environment.env
 ExecStart=<command used to start the application>
 ```
-After setting setting, restart the .NET service for the environment variables to take effect.
+After setting these variables, restart the .NET service for the environment variables to take effect.
 
 #### Systemctl (All Service)
 
