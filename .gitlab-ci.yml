@@ -20,9 +20,9 @@ before_script:
 
 
 cache: &cache
-key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
-paths:
-- node_modules/
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  paths:
+  - node_modules/
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -35,15 +35,15 @@ paths:
 
 # ================== Install Node Dependencies ================== #
 install_dependencies:
-  <<: *build_template
+  <<: *base_template
   stage: bootstrap
   cache: 
     <<: *cache
   script:
     - yarn install --frozen-lockfile
-  only:
-    changes:
-      - yarn.lock
+  # only:
+  #   changes:
+  #     - yarn.lock
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
