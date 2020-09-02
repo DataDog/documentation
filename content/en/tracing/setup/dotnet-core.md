@@ -213,7 +213,49 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
+
+#### Systemctl (Per Service)
+
+When using `systemctl` to run .NET applications as a service, you can add the required environment variables to be loaded for a specific service.
+
+Create a file called `environment.env` containing:
+
+```bat
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
+DD_TRACE_DEBUG=true
+# any other environment variable used by the application
+```
+
+In the service configuration file, reference this as an [`EnvironmentFile`][2] in the service block:
+
+```bat
+[Service]
+EnvironmentFile=/path/to/environment.env
+ExecStart=<command used to start the application>
+```
+After setting these variables, restart the .NET service for the environment variables to take effect.
+
+#### Systemctl (All Services)
+
+When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services under `systemctl` using [`systemctl show-environment`][2] in the service block. Before using this approach, see the note below about this instrumenting all .NET processes. 
+
+```bat
+systemctl set-environment CORECLR_ENABLE_PROFILING=1
+systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
+systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+Once this is set, verify that the environment variables were set with `systemctl show-environment`.
+
 [1]: https://docs.docker.com/engine/reference/builder/#env
+[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
+[3]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{% /tab %}}
 
 {{< /tabs >}}
