@@ -23,5 +23,5 @@ AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[1]: /ja/integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/#setup
 [2]: /ja/serverless/forwarder
