@@ -1,5 +1,5 @@
 ---
-title: Amazon ECS Data Collected
+title: Amazon ECS Data Collection
 kind: documentation
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
@@ -25,11 +25,11 @@ Each of the metrics retrieved from AWS is assigned the same tags that appear in 
 
 ### Events
 
-To reduce noise, the AWS ECS integration is automatically whitelisted to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
+To reduce noise, the Amazon ECS integration is automatically whitelisted to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 
-To remove the whitelist and receive all events from your Datadog AWS ECS integration, reach out to [Datadog support][3].
+To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][3].
 
 ### Service checks
 
