@@ -10,6 +10,7 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   FORCE_COLOR: '1'
+  GIT_DEPTH: 50
 
 # ================== copy scripts =============== #
 before_script:
@@ -17,20 +18,41 @@ before_script:
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
 
+
+cache: &cache
+key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+paths:
+- node_modules/
+
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_deps-fix
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_use-node-cache
   tags:
     - "runner:main"
     - "size:large"
   only:
     - branches
 
+# ================== Install Node Dependencies ================== #
+install_dependencies:
+  <<: *build_template
+  stage: bootstrap
+  cache: 
+    <<: *cache
+  script:
+    - yarn install --frozen-lockfile
+  only:
+    changes:
+      - yarn.lock
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -98,6 +120,9 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -112,6 +137,7 @@ link_checks_preview:
 missing_tms_preview:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "preview"
   variables:
     GIT_STRATEGY: none
@@ -125,6 +151,9 @@ missing_tms_preview:
 index_algolia_preview:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   script:
     - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
@@ -138,6 +167,7 @@ index_algolia_preview:
 sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "preview"
   script:
     - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
@@ -152,6 +182,9 @@ sourcemaps_preview:
 build_live:
   <<: *base_template
   stage: build
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}
@@ -221,6 +254,7 @@ build_live:
 
 index_internal_doc:
   stage: post-deploy
+  cache: {}
   environment: "live"
   image: registry.ddbuild.io/datadoc/webapp:prod-released
   dependencies:
@@ -235,6 +269,9 @@ index_internal_doc:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
@@ -248,6 +285,9 @@ test_live_link_checks:
 index_algolia:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   script:
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
@@ -261,6 +301,9 @@ index_algolia:
 sourcemaps_live:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   script:
     - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
@@ -274,6 +317,7 @@ sourcemaps_live:
 evaluate_missing_metrics:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "live"
   script:
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
@@ -284,6 +328,7 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -311,6 +356,7 @@ manage_translations:on-schedule:
 test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
@@ -324,6 +370,9 @@ test_missing_tms_live:
 test_pa11y:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   dependencies:
     - build_live
@@ -346,6 +395,7 @@ test_pa11y:
 tag_successful_live_pipeline:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   when: on_success
   script:
@@ -356,6 +406,7 @@ tag_successful_live_pipeline:
 post_success_event_to_dd_live:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
@@ -369,6 +420,7 @@ post_success_event_to_dd_live:
 post_failure_event_to_dd_live:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
