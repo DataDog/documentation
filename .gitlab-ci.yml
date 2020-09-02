@@ -42,9 +42,9 @@ install_dependencies:
     <<: *cache
   script:
     - yarn install --frozen-lockfile
-  # only:
-  #   changes:
-  #     - yarn.lock
+  only:
+    changes:
+      - yarn.lock
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
