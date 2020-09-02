@@ -239,9 +239,9 @@ ExecStart=<command used to start the application>
 ```
 After setting these variables, restart the .NET service for the environment variables to take effect.
 
-#### Systemctl (All Service)
+#### Systemctl (All Services)
 
-When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services under systemctl using [`systemctl show-environment`][2] in the service block:. Before using this approach, see the note below about this instrumenting all .NET processes. 
+When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services under `systemctl` using [`systemctl show-environment`][2] in the service block. Before using this approach, see the note below about this instrumenting all .NET processes. 
 
 ```bat
 systemctl set-environment CORECLR_ENABLE_PROFILING=1
