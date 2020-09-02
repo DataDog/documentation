@@ -69,7 +69,6 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -129,7 +128,7 @@ link_checks_preview:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node ./node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   after_script:
     - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
@@ -171,7 +170,6 @@ sourcemaps_preview:
   cache: {}
   environment: "preview"
   script:
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - upload_sourcemaps
   dependencies:
     - build_preview
@@ -201,7 +199,6 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
@@ -277,7 +274,7 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node ./node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   after_script:
     - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
@@ -307,7 +304,6 @@ sourcemaps_live:
     policy: pull
   environment: "live"
   script:
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - upload_sourcemaps
   dependencies:
     - build_live
@@ -378,7 +374,6 @@ test_pa11y:
   dependencies:
     - build_live
   script:
-    - cp -r /etc/node_modules .
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
   only:
     - schedules
