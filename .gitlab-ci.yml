@@ -327,7 +327,9 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
-  cache: {}
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}

@@ -2,7 +2,7 @@
     "name": "docs",
     "version": "1.0.0",
     "description": "Datadog Docs built on HUGO",
-    "private": false,
+    "private": true,
     "scripts": {
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public",
