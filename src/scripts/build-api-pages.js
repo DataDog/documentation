@@ -791,11 +791,7 @@ const processSpecs = (specs) => {
           // the postman copy needs to not include the empty "tags" that we
           // included to ensure redirection in the docs page from v2 <-> v1
           const derefStripEmptyTags = lodash.cloneDeep(deref);
-          for (let i = derefStripEmptyTags.tags.length - 1; i >= 0; i -= 1) {
-              if (derefStripEmptyTags.tags[i].description.toLowerCase().includes("see api version")) {
-                derefStripEmptyTags.tags.splice(i, 1);
-              }
-          }
+          derefStripEmptyTags.tags = derefStripEmptyTags.tags.filter((tag) => !tag.description.toLowerCase().includes("see api version"));
           const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
           fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
 
