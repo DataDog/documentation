@@ -10,6 +10,12 @@ further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
+- link: "/account_management/billing/usage_details"
+  tag: "Documentation"
+  text: "Understand Usage Details"
+- link: "/account_management/billing/usage_details"
+  tag: "Documentation"
+  text: "Set-up Usage Attribution"
 ---
 
 It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends and identify unexpected spikes in usage.
@@ -57,16 +63,21 @@ To configure SAML for multi-organizations, use the following procedure:
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left, then navigating to: `Plan & Usage`--> `Multi-Org Usage`. 
 
 The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
+
 * Month-to-date Usage
 * Long-Term Trends
 
-### Month-to-date Usage
+### Month-to-Date Usage
 
 This view contains an Overall Usage section and an Individual Organization Usage section. 
 
 The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations. 
 
+{{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
+
 The Individual Organization Usage section contains two tabs that breaks down your month-to-date usage of products by organization. The All tab contains a table that lists by product the unadjusted usage of your parent-organization and all child-organizations. To view the [Usage details][9] of a child-organization, you can click on the child-organization's name.
+
+{{< img src="account_management/managing-multiorgs-02.png" alt="Month-to-Date Usage" >}}
 
 To view only the usage that will count toward your bill, you can switch to the Billable tab. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
 
@@ -80,18 +91,17 @@ For more information on the usage metrics shown in the graphs, please refer to o
 
 ## Usage Attribution
 
-<div class="alert alert-warning">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
-
 The parent-organization can view the usage of child-organizations by existing tag keys in the Usage Attribution page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution will show usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
 Functionalities include:
+
 * Changing and adding new tag keys (up to three).
 * Accessing monthly usage in both the UI and as a .tsv download (tab separated values) 
 * Accessing daily usage in a .tsv file for most usage types.
+
+{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level are not rolled-up and are not viewable in the parent-organization. 
 
@@ -99,6 +109,8 @@ Note: the following usage types are not supported in this tool:
 * Indexed Log Events
 * Ingested Logs
 * Analyzed Spans
+
+Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 
 For more information and to get started, please refer to our doc on [Usage Attribution][10].
 
@@ -114,5 +126,5 @@ For more information and to get started, please refer to our doc on [Usage Attri
 [6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [7]: /dashboards/screenboards/#backup-my-screenboard
 [8]: /monitors/manage_monitor/
-[9]: account_management/billing/usage_details/
-[10]: account_management/billing/usage_attribution/
+[9]: /account_management/billing/usage_details/
+[10]: /account_management/billing/usage_attribution/
