@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const marked = require('marked');
@@ -766,7 +766,7 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
       ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
-    </div>  
+    </div>
   </div>`.trim();
   return addHasExpandClass(output);
 };
@@ -786,11 +786,20 @@ const processSpecs = (specs) => {
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
+
           // make a copy in static for postman
-          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
-            if (err) throw err;
-            console.log(`full_spec_${version}.json copied to /static/resources/json/`);
-          });
+          // the postman copy needs to not include the empty "tags" that we
+          // included to ensure redirection in the docs page from v2 <-> v1
+          var i;
+          var derefStripEmptyTags = lodash.cloneDeep(deref);
+          for (i = derefStripEmptyTags.tags.length - 1; i >= 0; i -= 1) {
+              if (derefStripEmptyTags.tags[i].description.toLowerCase().includes("see api version")) {
+                derefStripEmptyTags.tags.splice(i, 1);
+              }
+          }
+          const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
+          fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
+
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
