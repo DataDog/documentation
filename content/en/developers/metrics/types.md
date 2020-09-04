@@ -140,7 +140,7 @@ The Agent adds all the values received in one time interval and submits the tota
 
 Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval.In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
+The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
