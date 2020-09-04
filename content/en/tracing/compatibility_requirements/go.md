@@ -139,6 +139,6 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [59]: https://github.com/jinzhu/gorm
 [60]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm
 [61]: https://github.com/kubernetes/client-go
-[62]: https://godoc.org/k8s.io/client-go/kubernetes
+[62]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes
 [63]: https://github.com/bradfitz/gomemcache/memcache
 [64]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
