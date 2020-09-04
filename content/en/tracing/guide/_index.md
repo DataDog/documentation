@@ -2,6 +2,8 @@
 title: Tracing Guides
 kind: guide
 private: true
+aliases:
+- /tracing/getting_further/
 ---
 
 
