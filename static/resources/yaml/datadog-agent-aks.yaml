@@ -82,6 +82,8 @@ spec:
               value: "true"
             - name: DD_HEALTH_PORT
               value: "5555"
+            - name: DD_KUBELET_CLIENT_CA
+              value: /etc/kubernetes/certs/kubeletserver.crt
           volumeMounts:
             - name: installinfo
               subPath: install_info
@@ -101,6 +103,9 @@ spec:
               mountPath: /host/sys/fs/cgroup
               mountPropagation: None
               readOnly: true
+            - mountPath: /etc/kubernetes/certs/
+              name: kubeletserver
+              readOnly: true
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -118,51 +123,6 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
-            timeoutSeconds: 5
-        - name: trace-agent
-          image: "datadog/agent:7.21.1"
-          imagePullPolicy: IfNotPresent
-          command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-          resources: {}
-          ports:
-            - containerPort: 8126
-              hostPort: 8126
-              name: traceport
-              protocol: TCP
-          env:
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog-agent"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-            - name: DOCKER_HOST
-              value: unix:///host/var/run/docker.sock
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_APM_ENABLED
-              value: "true"
-            - name: DD_APM_NON_LOCAL_TRAFFIC
-              value: "true"
-            - name: DD_APM_RECEIVER_PORT
-              value: "8126"
-          volumeMounts:
-            - name: config
-              mountPath: /etc/datadog-agent
-            - name: runtimesocketdir
-              mountPath: /host/var/run
-              mountPropagation: None
-              readOnly: true
-          livenessProbe:
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            tcpSocket:
-              port: 8126
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
@@ -224,6 +184,9 @@ spec:
           name: cgroups
         - name: s6-run
           emptyDir: {}
+        - hostPath:
+            path: /etc/kubernetes/certs
+          name: kubeletserver
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"

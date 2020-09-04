@@ -11,6 +11,22 @@ data:
 
 # APP Key
 ---
+# Source: datadog/templates/install_info-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-agent-installinfo
+  labels: {}
+  annotations:
+    checksum/install_info: ee293ccedf116ce1ed6e0d9c7f7f9adabd0c230618089bb173c7acffa487e020
+data:
+  install_info: |
+    ---
+    install_method:
+      tool: kubernetes sample manifests
+      tool_version: kubernetes sample manifests
+      installer_version: kubernetes sample manifests
+---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -29,6 +45,14 @@ data:
       enable_tcp_queue_length: false
       enable_oom_kill: false
       collect_dns_stats: false
+    runtime_security_config:
+      enabled: false
+      debug: false
+      socket: /var/run/sysprobe/runtime-security.sock
+      policies:
+        dir: /etc/datadog-agent/runtime-security.d
+      syscall_monitor:
+        enabled: false
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
@@ -70,6 +94,8 @@ data:
             "epoll_wait",
             "epoll_wait",
             "epoll_wait_old",
+            "eventfd",
+            "eventfd2",
             "execve",
             "execveat",
             "exit",
@@ -275,10 +301,15 @@ spec:
             - name: DD_HEALTH_PORT
               value: "5555"
           volumeMounts:
+            - name: installinfo
+              subPath: install_info
+              mountPath: /etc/datadog-agent/install_info
+              readOnly: true
             - name: config
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: sysprobe-socket-dir
               mountPath: /var/run/sysprobe
@@ -288,17 +319,22 @@ spec:
               subPath: system-probe.yaml
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
               readOnly: true
             - name: pointerdir
               mountPath: /opt/datadog-agent/run
+              mountPropagation: None
             - name: logpodpath
               mountPath: /var/log/pods
+              mountPropagation: None
               readOnly: true
             - name: logdockercontainerpath
               mountPath: /var/lib/docker/containers
+              mountPropagation: None
               readOnly: true
           livenessProbe:
             failureThreshold: 6
@@ -355,6 +391,7 @@ spec:
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
           livenessProbe:
             initialDelaySeconds: 15
@@ -387,19 +424,24 @@ spec:
               value: "INFO"
             - name: DD_SYSTEM_PROBE_ENABLED
               value: "true"
+            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+              value: "false"
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
               readOnly: true
             - name: passwd
               mountPath: /etc/passwd
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
             - name: sysprobe-socket-dir
               mountPath: /var/run/sysprobe
@@ -412,7 +454,7 @@ spec:
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
-              add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN", "IPC_LOCK"]
+              add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN", "NET_BROADCAST", "IPC_LOCK"]
           command: ["/opt/datadog-agent/embedded/bin/system-probe", "--config=/etc/datadog-agent/system-probe.yaml"]
           env:
             - name: DD_LOG_LEVEL
@@ -421,18 +463,15 @@ spec:
           volumeMounts:
             - name: debugfs
               mountPath: /sys/kernel/debug
+              mountPropagation: None
             - name: sysprobe-config
-              mountPath: /etc/datadog-agent
+              mountPath: /etc/datadog-agent/system-probe.yaml
+              subPath: system-probe.yaml
             - name: sysprobe-socket-dir
               mountPath: /var/run/sysprobe
             - name: procdir
               mountPath: /host/proc
-              readOnly: true
-            - name: modules
-              mountPath: /lib/modules
-              readOnly: true
-            - name: src
-              mountPath: /usr/src
+              mountPropagation: None
               readOnly: true
       initContainers:
         - name: init-volume
@@ -456,9 +495,11 @@ spec:
               mountPath: /etc/datadog-agent
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: sysprobe-config
               mountPath: /etc/datadog-agent/system-probe.yaml
@@ -489,8 +530,12 @@ spec:
               mountPath: /etc/config
             - name: seccomp-root
               mountPath: /host/var/lib/kubelet/seccomp
+              mountPropagation: None
           resources: {}
       volumes:
+        - name: installinfo
+          configMap:
+            name: datadog-agent-installinfo
         - name: config
           emptyDir: {}
         - hostPath:
@@ -518,12 +563,6 @@ spec:
           name: debugfs
         - name: sysprobe-socket-dir
           emptyDir: {}
-        - hostPath:
-            path: /lib/modules
-          name: modules
-        - hostPath:
-            path: /usr/src
-          name: src
         - hostPath:
             path: /etc/passwd
           name: passwd
