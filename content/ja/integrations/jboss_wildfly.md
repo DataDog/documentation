@@ -49,13 +49,16 @@ JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれて�
 
 このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][4]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. JBoss または WildFly アプリケーションサーバーのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `jboss_wildfly.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[jboss_wildfly.d/conf.yaml のサンプル][6] を参照してください。
+1. JBoss または WildFly アプリケーションサーバーのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `jboss_wildfly.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[jboss_wildfly.d/conf.yaml のサンプル][1] を参照してください。
 
    サーバーのセットアップによっては（特に `remote+http` JMX スキームを使用している場合は）、サーバーに接続するためにカスタムな JAR を指定する必要がでてきます。Agent と同じマシンに JAR を配置し、`jboss_wildfly.d/conf.yaml` ファイルの`custom_jar_paths` オプションにパスを追加します。
 
@@ -64,9 +67,9 @@ JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれて�
    - Wildfly 9 以降: `service:jmx:http-remoting-jmx://<ホスト>:<ポート> `
    - Wildfly 10 以降: `service:jmx:remote+http://<ホスト>:<ポート>`
 
-    詳細については、[WildFly JMX サブシステム構成ページ][7]を参照してください。
+    詳細については、[WildFly JMX サブシステムコンフィギュレーションページ][2]を参照してください。
 
-2. [Agent を再起動します][8]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -88,27 +91,38 @@ _Agent バージョン 6.0 以降で利用可能_
        service: '<APPLICATION_NAME>'
    ```
 
-3. [Agent を再起動します][8]。
+3. [Agent を再起動します][3]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
+[2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
 ##### メトリクスの収集
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][9]のガイドを参照してください。
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][10]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                      |
 | -------------- | ---------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "jboss_wildfly", "service": "<サービス名>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][11]し、Checks セクションで `jboss_wildfly` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `jboss_wildfly` を探します。
 
 ## 収集データ
 
@@ -129,15 +143,10 @@ Agent が監視対象の JBoss/WildFly インスタンスに接続できず、�
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
+
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/integrations/java/
 [5]: https://docs.datadoghq.com/ja/help/
-[6]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[7]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[10]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/metadata.csv
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

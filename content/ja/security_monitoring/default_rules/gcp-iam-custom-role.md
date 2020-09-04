@@ -3,6 +3,8 @@ aliases:
   - /ja/d24-0f0-62d
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.iam.role
 security: コンプライアンス
 source: gcp

@@ -117,38 +117,15 @@ It's also possible to copy an integration pipeline using the copy button.
 
 {{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloning pipeline from Library"  style="width:80%;">}}
 
-
-## Pipelines limitations
-
-To make sure the Log Management solution functions in an optimal way, we set the following technical limits and rules to your log events, as well as to some product features. These have been designed so that you may never reach them.
-
-### Limits applied to ingested log events
-
-* For an optimal use of the platform, we recommend that the size of a log event should not exceed 25K bytes. When using the Datadog Agent, log events larger than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted by the API.
-* Log events can be submitted up to 18h in the past and 2h in the future.
-* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
-* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-
-Log events which do not comply with these limits might be transformed or truncated by the system-or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
-
-### Limits applied to provided features
-
-* The maximum number of facets is 1000.
-* We recommend using at most 20 Processors per Pipeline.
-* We recommend using at most 10 parsing rules within a grok Processor. We reserve the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
-
-[Contact support][8] if you reach one of these limits as Datadog might be able to provide you more.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /logs/processing/processors/
 [2]: /logs/explorer/search/
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-
 [6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [7]: /integrations/#cat-log-collection
-[8]: /help/

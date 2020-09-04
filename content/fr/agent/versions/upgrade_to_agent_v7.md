@@ -2,7 +2,7 @@
 title: "Upgrade vers l'Agent\_v7 de Datadog"
 kind: documentation
 further_reading:
-  - link: /agent/guide/python-3
+  - link: /agent/guide/python-3/
     tag: Documentation
     text: "Migrer vos checks custom de Python\_2 vers Python\_3"
 ---
@@ -12,10 +12,10 @@ L'Agent v7 prend uniquement en charge les checks custom écrits en Python 3. <
 
 ## Passer de l'Agent v6 à l'Agent v7
 
-Pour passer de la version 6 à la version 7 de l'Agent, exécutez la commande d'installation de l'Agent avec la variable d'environnement `DD_AGENT_MAJOR_VERSION=7` :
-
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Pour passer de la version 6 à la version 7 de l'Agent, exécutez la commande d'installation de l'Agent avec la variable d'environnement `DD_AGENT_MAJOR_VERSION=7` :
 
 | Plateforme     | Commande                                                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -43,6 +43,8 @@ Pour passer de la version 6 à la version 7 de l'Agent, exécutez la commande 
 {{% /tab %}}
 {{% tab "macOS" %}}
 
+Pour passer de la version 6 à la version 7 de l'Agent, exécutez la commande d'installation de l'Agent avec la variable d'environnement `DD_AGENT_MAJOR_VERSION=7` :
+
 ```shell
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<CLÉ_API_DATADOG>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
@@ -52,10 +54,10 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<CLÉ_API_DATADOG>" bash -c "$(curl -L http
 
 ## Passer de l'Agent v5 à l'Agent v7
 
-Pour passer de la version 5 à la version 7 de l'Agent, exécutez la commande d'installation avec les variables d'environnement `DD_AGENT_MAJOR_VERSION=7` et `DD_UPGRADE="true"`. Le programme d'installation de l'Agent v7 peut automatiquement convertir les configurations v5 durant l'upgrade :
-
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Pour passer de la version 5 à la version 7 de l'Agent, exécutez la commande d'installation avec les variables d'environnement `DD_AGENT_MAJOR_VERSION=7` et `DD_UPGRADE="true"`. Le programme d'installation de l'Agent v7 peut automatiquement convertir les configurations v5 durant l'upgrade :
 
 | Plateforme     | Commande                                                                                                                                                      |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -77,6 +79,8 @@ Pour passer de la version 5 à la version 7 de l'Agent, exécutez la commande 
 {{% /tab %}}
 {{% tab "macOS" %}}
 
+Pour passer de la version 5 à la version 7 de l'Agent, exécutez la commande d'installation avec les variables d'environnement `DD_AGENT_MAJOR_VERSION=7` et `DD_UPGRADE="true"`. Le programme d'installation de l'Agent v7 peut automatiquement convertir les configurations v5 durant l'upgrade :
+
 ```shell
 DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
@@ -90,4 +94,4 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://s3.amazona
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/guide/python-3
+[1]: /fr/agent/guide/python-3/

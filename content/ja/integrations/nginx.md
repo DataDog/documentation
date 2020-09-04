@@ -106,6 +106,9 @@ server {
 
     # NGINX Plus でのみ使用できます
     # status;
+
+   # バージョン情報を取得できるようにします
+   server_tokens on;
   }
 }
 ```
@@ -143,17 +146,23 @@ sudo nginx -t && sudo nginx -s reload
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化セクション](#containerized)を参照してください。
 
 ##### メトリクスの収集
 
-1. [NGINX メトリクス](#metrics)の収集を開始するには、`nginx.d/conf.yaml` ファイルで `nginx_status_url` パラメーターを `http://localhost:81/nginx_status/` に設定します。使用可能なすべての構成オプションの詳細については、[サンプル nginx.d/conf.yaml][6] を参照してください。
+1. [NGINX メトリクス](#metrics)の収集を開始するには、`nginx.d/conf.yaml` ファイルで `nginx_status_url` パラメーターを `http://localhost:81/nginx_status/` に設定します。使用可能なすべての構成オプションの詳細については、[サンプル nginx.d/conf.yaml][1] を参照してください。
 
     **NGINX Plus**:
 
       - NGINX Plus リリース 13 以降の場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `use_plus_api` を `true` に設定します。
+      - ストリーム統計 API 呼び出しは、NGINX Plus のデフォルトで含まれています。これを無効にしたい場合は、`nginx.d/conf.yaml` コンフィギュレーションファイルでパラメーター `use_plus_api_stream` を `false` に設定します。
       - `http_api_module` を使用する場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `nginx_status_url` をサーバーの `/api` の場所に設定します。以下に例を示します。
 
           ```yaml
@@ -162,7 +171,7 @@ sudo nginx -t && sudo nginx -s reload
 
 2. オプション - NGINX の `vhost_traffic_status module` を使用する場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `use_vts` を `true` に設定します。
 
-3. [Agent を再起動][7]すると、Datadog への NGINX メトリクスの送信が開始されます。
+3. [Agent を再起動][2]すると、Datadog への NGINX メトリクスの送信が開始されます。
 
 ##### ログの収集
 
@@ -189,9 +198,9 @@ _Agent バージョン 6.0 以降で利用可能_
        source: nginx
    ```
 
-    `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx.d/conf.yaml][6] を参照してください。
+    `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx.d/conf.yaml][1] を参照してください。
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][2]。
 
 **注**: NGINX のデフォルトのログ形式には、リクエスト応答時間が含まれていません。これをログに含めるには、NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の `http` セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
 
@@ -206,9 +215,14 @@ http {
 }
 ```
 
+[1]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -224,15 +238,20 @@ http {
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][9]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                     |
 | -------------- | ----------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "nginx", "service": "nginx"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `nginx` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `nginx` を探します。
 
 ## 収集データ
 
@@ -275,31 +294,27 @@ Agent が NGINX に接続してメトリクスを収集できない場合は、`
 
 ## トラブルシューティング
 
-- [あるはずのタイムスタンプがログに含まれないのはなぜですか][12]
+- [あるはずのタイムスタンプがログに含まれないのはなぜですか？][7]
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [NGINX の監視方法][14]
-- [NGINX メトリクスの収集方法][15]
-- [Datadog を使用した NGINX の監視方法][16]
+- [NGINX の監視方法][9]
+- [NGINX メトリクスの収集方法][10]
+- [Datadog を使用した NGINX の監視方法][11]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/nginx/images/nginx_dashboard.png
 [2]: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
 [3]: https://nginx.org/en/docs/http/ngx_http_status_module.html
 [4]: https://www.nginx.com/blog/nginx-plus-r13-released
 [5]: https://nginx.org/en/docs/http/ngx_http_api_module.html
-[6]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/nginx/metadata.csv
-[12]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-[13]: https://docs.datadoghq.com/ja/help/
-[14]: https://www.datadoghq.com/blog/how-to-monitor-nginx
-[15]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
-[16]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/how-to-monitor-nginx
+[10]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
+[11]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html

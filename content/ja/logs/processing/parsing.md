@@ -112,7 +112,8 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 | `lowercase`                                                    | 小文字に変換した文字列を返します。                                                                                                                            |
 | `uppercase`                                                    | 大文字に変換した文字列を返します。                                                                                                                            |
 | `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | キー値のパターンを抽出し、JSON オブジェクトを返します。[キー値フィルターの例](#キー値またはlogfmt)を参照してください。                                                         |
-| `xml`                                                    |  適切にフォーマット化された XML をパースします。[XML フィルターの例](#parsing-xml)を参照してください。                                                                                          |  
+| `xml`                                                          |  適切にフォーマット化された XML をパースします。[XML フィルターの例](#parsing-xml)を参照してください。                                                                                | 
+| `csv(headers[, separator[, quotingcharacter]])`                | 適切にフォーマット化された CSV または TSV の行をパースします。[CSV フィルターの例](#CSV をパースする)を参照してください。                                                                    |
 | `scale(factor)`                                                | 抽出された数値を指定された factor で乗算します。                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | 文字列トークンシーケンスをパースして配列として返します。                                                                                             |
 | `url`                                                          | URL をパースし、トークン化されたすべてのメンバー (ドメイン、クエリパラメーター、ポートなど) を 1 つの JSON オブジェクトとして返します。[URL のパース方法を参照してください][2]。               |
@@ -175,6 +176,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * [リストと配列](#list-and-arrays)
 * [GLog 形式](#glog-format)
 * [XML](#parsing-xml)
+* [CSV](#parsing-csv)
 
 ### キー値または logfmt
 
@@ -249,8 +251,8 @@ rule %{data::keyvalue("=","/:")}
 | key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
 | /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
 | key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
-| key1=value1\|key2=value2     | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
-| key1="value1"\|key2="value2" | <code>%{data::keyvalue("=", "", "", "&#124;")}</code> | {"key1": "value1", "key2": "value2"}  |
+| key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString の例**: 複数の引用文字列が定義されると、デフォルトの挙動が定義された引用文字に置き換えられます。
 `quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterWhiteList` は無視されます。
@@ -493,6 +495,62 @@ rule %{data::xml}
 
 * XML に、前後のタグの間に属性と文字列値の両方が存在するタグが含まれている場合、`value` 属性が生成されます。例えば、`<title lang="en">Harry Potter</title>` は `{"title": {"lang": "en", "value": "Harry Potter" } }` に変換されます。
 * 繰り返しタグは自動的に配列に変換されます。例えば、`<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` は `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }` に変換されます。
+
+### CSV をパースする
+
+**CSV** フィルターを使用して、文字列を属性に簡単にマップできます。対象のデータは任意の文字で区切る必要があります (デフォルトでは `,` ) 。
+
+CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義されます。それぞれの内容は以下の通りです。
+
+* `headers`: `,` で区切られたキーの名前を定義します。キー名にはアルファベットと `_` を使用できますが、冒頭の文字はアルファベットでなければなりません。
+* `separator`: それぞれの値を区切るために使用する区切り文字を定義します。種類は 1 つのみ指定でき、デフォルトは `,` です。**注意**: タブ文字を表すには `tab` を使用します。
+* `quotingcharacter`: 引用符を定義します。種類は 1 つのみ指定でき、デフォルトは `"` です。
+
+**注**:
+
+* 区切り文字を含む値は引用符で囲む必要があります。
+* 引用符で囲まれた (引用符を含む) 値は引用符でエスケープする必要があります。たとえば、引用符を含む値における `""` は `"` を意味します。
+* ヘッダーに含まれるキー数と同じ個数の値がログに含まれていない場合、CSV パーサーは最初に出現する値とのマッチングを行います。
+* 整数と浮動小数点数は、可能な場合自動でキャストされます。
+
+**ログの例**
+
+{{< code-block lang="text" >}}
+John,Doe,120,Jefferson St.,Riverside
+{{< /code-block >}}
+
+**規則の例**
+
+{{< code-block lang="text" >}}
+myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
+{{< /code-block >}}
+
+**結果:**
+
+{{< code-block lang="json" >}}
+{
+  "user": {
+    "first_name": "John",
+    "name": "Doe",
+    "st_nb": 120,
+    "st_name": "Jefferson St.",
+    "city": "Riverside"
+  }
+}
+{{< /code-block >}}
+
+その他の例
+
+| **文字列の例**               | **パース規則**                                                         | **結果**                                      |
+|:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
+| `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
+| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                                 | {"firstname": "John 'Da Man'", "name":"Doe"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code> | {"firstname": "John", "name":"Doe"}             |
+| `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
+| `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
+| `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
+
 
 ## その他の参考資料
 

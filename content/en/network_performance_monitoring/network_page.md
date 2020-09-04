@@ -90,6 +90,8 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | **Retransmits**           | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
 | **Round-trip Time (RTT)** | Round-trip time is a proxy for latency. Measured as the time between a TCP frame being sent and acknowledged.                          |
 |  **RTT Variance**         | RTT is a proxy for jitter.                                                                                                             |
+|  **Established Connections**         | The number of TCP connections in an established state. Measured in connections per second from the `source`.                                                                                                              |
+|  **Closed Connections**         | The number of TCP connections in a closed state. Measured in connections per second from the `source`.                                                                                                            |
 
 ### DNS Resolution
 
@@ -134,6 +136,21 @@ Use the _Show Unresolved Flows_ toggle in the upper right corner of the data tab
 Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ flow:
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Flow Details"  style="width:80%;">}}
+
+## Sidepanel
+
+The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
+- A spike in traffic volume from a particular port or IP.
+- Heavy processes consuming the CPU or memory of the destination endpoint.
+- Application errors in the code of the source endpoint.
+
+{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
+
+### Common tags
+
+The top of the sidepanel displays common source and destination tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface:
+- Granular context such as the container, task, or host to which traffic is flowing.
+- Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
 ## Further Reading
 

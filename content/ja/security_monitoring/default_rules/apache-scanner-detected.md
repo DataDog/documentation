@@ -3,6 +3,8 @@ aliases:
   - /ja/13a-810-14c
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: apache
 security: attack
 source: apache

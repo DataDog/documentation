@@ -64,39 +64,51 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
+### Version Tracking
+
+[Monitor service performance][4] with version tags for rolling, blue/green, shadow, or canary deployments.
+
+{{< img src="tracing/version_tracking/rolling.png" alt="Versions on the Service Page"  style="width:100%;">}}
+
 ### Live Search
 
-[Search on any span][4] by any tag on 100% of your ingested traces live with no sampling for 15 minutes.
+[Search on any span][5] by any tag on 100% of your ingested traces live with no sampling for 15 minutes.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 ### Connect Logs and Distributed Traces
 
-[View your application logs][5] side-by-side with the trace for a single distributed request with automatic trace-id injection.
+[View your application logs][6] side-by-side with the trace for a single distributed request with automatic trace-id injection.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
+### Trace Serverless Functions
+
+[Trace across AWS Lambda and hosts][7] to view complete traces across your hybrid infrastructure.
+
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
+
 ### App Analytics
 
-[Analyze performance][6] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+[Analyze performance][8] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
 
 {{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Connect Synthetic Test Data and Traces
 
-[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][9] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
-### Continuous Profiling
+### Continuous Profiler
 
-[Improve code efficiency][8] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][10] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
 ### Customize your Instrumentation or add OpenTracing
 
-[Seamlessly connect your instrumentation][9] between automatic instrumentation, dd-trace-api, and OpenTracing.
+[Seamlessly connect your instrumentation][11] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
 
 ## Further Reading
 
@@ -105,9 +117,11 @@ Now that you've configured your application to send traces to Datadog, start get
 [1]: /tracing/send_traces/
 [2]: /tracing/visualization/services_map/
 [3]: /tracing/visualization/service/
-[4]: /tracing/livesearch/
-[5]: /tracing/connect_logs_and_traces/
-[6]: /tracing/app_analytics/
-[7]: /synthetics/apm/
-[8]: /tracing/profiling/
-[9]: /tracing/manual_instrumentation/
+[4]: /tracing/version_tracking/
+[5]: /tracing/livesearch/
+[6]: /tracing/connect_logs_and_traces/
+[7]: /tracing/serverless_functions/
+[8]: /tracing/app_analytics/
+[9]: /synthetics/apm/
+[10]: /tracing/profiler/
+[11]: /tracing/manual_instrumentation/

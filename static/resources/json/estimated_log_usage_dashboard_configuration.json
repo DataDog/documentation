@@ -241,6 +241,7 @@
                         "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count(), 50, 'sum', 'desc')"
                     }
                 ],
+                "custom_links":[{"link":"https://app.datadoghq.com/logs?index={{datadog_index.value}}","label":"See Logs in Explorer"}],
                 "title": "Indexed logs by index",
                 "title_size": "16",
                 "title_align": "left"
@@ -274,6 +275,7 @@
                     "max": "auto",
                     "include_zero": true
                 },
+                "custom_links":[{"link":"https://app.datadoghq.com/logs?index={{datadog_index.value}}","label":"See Logs in Explorer"}],
                 "title": "Indexed logs per index",
                 "title_size": "16",
                 "title_align": "left",

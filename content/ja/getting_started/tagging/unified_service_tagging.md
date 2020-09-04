@@ -7,6 +7,9 @@ further_reading:
   - link: /getting_started/tagging/using_tags
     tag: Documentation
     text: Datadog アプリでのタグの使用方法
+  - link: /tracing/version_tracking
+    tag: Documentation
+    text: Datadog APM 内の Version タグを使用してデプロイを監視する
   - link: 'https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/'
     tag: ブログ
     text: オートディスカバリーの詳細
@@ -30,7 +33,7 @@ further_reading:
 
 - 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][4]および[タグの付け方][5]のドキュメントをお読みください。
 
-## 構成
+## コンフィギュレーション
 
 統合サービスタグ付けのコンフィギュレーションを開始するには、環境を選択します。
 
@@ -49,7 +52,7 @@ further_reading:
 
 4. 以下に詳述する完全なコンフィギュレーションまたは部分的なコンフィギュレーションのいずれかに基づいて環境を構成します。
 
-#### 構成
+#### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -116,28 +119,32 @@ tags.datadoghq.com/<container-name>.version
 
 ###### ステートメトリクス
 
-[Kubernetes ステートメトリクス][2]を構成するには、同じ標準ラベルを親リソース (デプロイなど) のラベルのコレクションに追加します。
+[Kubernetes ステートメトリクス][2]を構成するには:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-spec:
-  template:
-    metadata:
-      labels:
-        tags.datadoghq.com/env: "<ENV>"
-        tags.datadoghq.com/service: "<SERVICE>"
-        tags.datadoghq.com/version: "<VERSION>"
-```
+1. [コンフィギュレーションファイル][3]で `join_standard_tags` を `true` に設定します。
+
+2. 同じ標準ラベルを親リソース (デプロイなど) のラベルのコレクションに追加します。
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+  spec:
+    template:
+      metadata:
+        labels:
+          tags.datadoghq.com/env: "<ENV>"
+          tags.datadoghq.com/service: "<SERVICE>"
+          tags.datadoghq.com/version: "<VERSION>"
+  ```
 
 ###### APM トレーサー / StatsD クライアント
 
-[APM トレーサー][3]および [StatsD クライアント][4]環境変数を構成するには、[Kubernetes の Downward API][1] を以下の形式で使用します。
+[APM トレーサー][4]および [StatsD クライアント][5]環境変数を構成するには、[Kubernetes の Downward API][1] を以下の形式で使用します。
 
 ```yaml
 containers:
@@ -159,8 +166,9 @@ containers:
 
 [1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
 [2]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
-[3]: /ja/tracing/send_traces/
-[4]: /ja/integrations/statsd/
+[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: /ja/tracing/send_traces/
+[5]: /ja/integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -357,6 +365,7 @@ instances:
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /ja/getting_started/tagging/#defining-tags
 [2]: /ja/getting_started/agent

@@ -78,7 +78,7 @@ La méthode d'ingestion conseillée pour Dogstatsd, l'APM, et les logs consiste 
 
 L'Agent peut être lancé en mode `sidecar`, ce qui vous permet de l'exécuter dans le pod de votre application pour une identification simplifiée.
 
-#### Opérations avec SCC de réseau host
+#### Host
 
 Ajoutez l'autorisation `allowHostPorts` au pod (via la SCC `hostnetwork` ou `hostaccess` standard, ou en créant votre propre SCC). Dans ce cas, vous pouvez ajouter les bindings de port appropriés dans les spécifications de vos pods :
 

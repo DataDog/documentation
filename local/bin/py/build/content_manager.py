@@ -140,7 +140,7 @@ def extract_config(configuration):
                 ]
                 content_temp["globs"] = content["globs"]
 
-                if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules"):
+                if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules"):
                     content_temp["options"] = content["options"]
 
                 list_of_contents.append(

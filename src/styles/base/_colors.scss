@@ -125,25 +125,25 @@ $color-var: (
 );
 
 @each $name, $color in $color-var {
-  .border-#{$name} {
+  .border-#{"" + $name} {
     border-color: $color!important;
   }
 }
 
 @each $name, $color in $color-var {
-  .text-#{$name} {
+  .text-#{"" + $name} {
     color: $color!important;
   }
 }
 
 @each $name, $color in $color-var {
-  .font-#{$name} {
+  .font-#{"" + $name} {
     color: $color!important;
   }
 }
 
 @each $name, $color in $color-var {
-  .bg-#{$name} {
+  .bg-#{"" + $name} {
     background-color: $color !important;
   }
 }

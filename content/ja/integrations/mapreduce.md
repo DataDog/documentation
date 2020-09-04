@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   monitors: {}
@@ -7,6 +9,7 @@ assets:
 categories:
   - processing
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -46,19 +49,28 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `mapreduce.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル mapreduce.d/conf.yaml][4] を参照してください。
+1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mapreduce.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル mapreduce.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -66,9 +78,13 @@ Mapreduce チェックは [Datadog Agent][2] パッケージに含まれてい�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                 |
 | `<インスタンスコンフィギュレーション>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<MAPREDUCE_CLUSTER_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `mapreduce` を検索します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `mapreduce` を検索します。
 
 ## 収集データ
 
@@ -94,25 +110,21 @@ Agent が Application Master に接続できない場合は、`CRITICAL` を返�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [Hadoop アーキテクチャの概要][10]
-- [Hadoop メトリクスの監視方法][11]
-- [Hadoop メトリクスの収集方法][12]
-- [Datadog を使用した Hadoop の監視方法][13]
+- [Hadoop アーキテクチャの概要][5]
+- [Hadoop メトリクスの監視方法][6]
+- [Hadoop メトリクスの収集方法][7]
+- [Datadog を使用した Hadoop の監視方法][8]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[6]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[7]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog

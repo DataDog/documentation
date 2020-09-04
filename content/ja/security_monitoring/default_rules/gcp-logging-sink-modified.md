@@ -3,6 +3,8 @@ aliases:
   - /ja/e74-752-b34
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.project
 security: コンプライアンス
 source: gcp

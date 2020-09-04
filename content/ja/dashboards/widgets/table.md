@@ -40,15 +40,14 @@ further_reading:
 テーブルウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
 
 ```text
-TOPLIST_SCHEMA = {
+TABLE_SCHEMA = {
     "type": "object",
     "properties": {
         "type": {"enum": ["query_table"]},
         "requests": {
             "type":     "array",
             "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
+            "minItems": 1
         },
         "title": {"type": "string"}
     },

@@ -1,7 +1,7 @@
 ---
-title: Synthetic CI テストインテグレーション
+title: Synthetic CI/CD テスト
 kind: ドキュメント
-description: CI でオンデマンドの Synthetics テストを実行します。
+description: CI/CD パイプラインでオンデマンドの Synthetics テストを実行します。
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: ブログ
@@ -16,15 +16,12 @@ further_reading:
     tag: ドキュメント
     text: APIテストの設定
 ---
-<div class="alert alert-warning">
-この機能は非公開ベータ版です。アクセス権をリクエストする場合は、<a href="/help/">Datadog サポート</a>にお問い合わせください。
-</div>
-
-事前に定義された間隔でテストを実行するだけでなく、専用の API エンドポイントを使用してオンデマントで Datadog Synthetic テストを実行することもできます。主要な機能とエンドポイントを破壊する恐れのあるブランチへのデプロイメントを遮断しつつ、Datadog Synthetic テストを継続的なインテグレーション (CI) パイプラインで実行できます。
+事前定義された間隔でテストを実行するだけでなく、API エンドポイントを使用して Datadog Synthetic テストをオンデマンドで実行することもできます。Datadog Synthetic テストを継続的インテグレーション (CI) パイプラインで実行して、製品を破壊する恐れのあるブランチのデプロイをブロックできます。
+Synthetic CI/CD テストを使用して、**CD プロセスの一部としてテストを実行**し、デプロイが完了した直後に本番アプリケーションの状態を評価することもできます。これにより、ユーザーに影響を与える可能性のある潜在的な回帰を検出し、重要なテストが失敗したときに自動的にロールバックをトリガーできます。
 
 この関数により、本番システムの問題修正に時間を割く必要がなくなり、プロセスの早期でバグと回帰を検出できます。
 
-これらの API エンドポイントに加え、Datadog ではコマンドラインインターフェース (CLI) を提供および管理しているため、Datadog Synthetic テストを CI ツールに容易に統合できます。
+これらの API エンドポイントに加え、Datadog ではコマンドラインインターフェース (CLI) を提供および管理しているため、Datadog Synthetic テストを CI ツールに容易に統合できます。Synthetic CI/CD テストはオープンソースで、そのソースコードは GitHub の [DataDog/datadog-ci][1] から入手できます。
 
 ## API の使用
 
@@ -44,7 +41,7 @@ further_reading:
 {{< site-region region="eu" >}}
 
 * **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
-* **メソッド**: `POST`
+* **Method**: `POST`
 * **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
 
 {{< /site-region >}}
@@ -163,8 +160,8 @@ curl -X POST \
 {{< site-region region="eu" >}}
 
 * **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
-* **メソッド**: `GET`
-* **パラメーター**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
+* **Method**: `GET`
+* **Parameters**: 結果の入手元となる結果識別子のリストを含む JSON 配列。
 
 {{< /site-region >}}
 
@@ -240,9 +237,7 @@ curl -G \
 
 ### パッケージのインストール
 
-パッケージは NPM レジストリの [@datadog/datadog-ci][1] に非公開で提供されています。
-
-公開されるまでは、アクセスするには NPM トークンが必要です。NPMトークンをお持ちでない場合は、[Datadog サポート][2]までお問合せください。
+パッケージは NPM レジストリの [@datadog/datadog-ci][2] で公開されています。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -516,7 +511,7 @@ Datadog のテスト詳細ページでも一覧表示されたテスト結果を
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /ja/help/
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /ja/api/v1/synthetics/#get-test

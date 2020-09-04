@@ -11,14 +11,17 @@ further_reading:
 ---
 ### 1. AWS インテグレーションをインストール
 
-[AWS インテグレーション][1] をインストールすることから始めます。これにより、Datadog は AWS Lambda から Amazon CloudWatch メトリクスを取り込めるようになります。AWS インテグレーションをインストールすることで、AWS Lambda トレース、拡張メトリクス、カスタムカスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder][2] も構成されます。
+[AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS CloudWatch から Lambda メトリクスを取り込むことができます。
 
-### 2. アプリケーションをインスツルメント
+### 2. Datadog Forwarder のインストール
 
-これらの手順では、言語の設定に加えて、どの言語でも必要となる [Datadog Forwarder][2] と [Datadog Lambda ライブラリ][3] のインストールについてご説明します。
+AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。**注**: [AWS インテグレーション][1] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
+
+### 3. アプリケーションのインスツルメンテーション
+
+サーバーレスアプリケーションをインスツルメントする手順については、以下の Lambda ランタイムを選択してください。
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-[1]: /ja/integrations/amazon_web_services/
-[2]: /ja/serverless/installation/installing_the_forwarder
-[3]: /ja/serverless/installation/installing_the_library
+[1]: /ja/integrations/amazon_web_services/#setup
+[2]: /ja/serverless/forwarder

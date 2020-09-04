@@ -2,8 +2,7 @@
 assets:
   dashboards:
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
-  monitors:
-    Long Latency in Kafka Queue: assets/recommended_monitors/federatorai_kafka_queue_latency.json
+  monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:

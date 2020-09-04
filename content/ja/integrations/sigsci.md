@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    Signal Sciences Overview: assets/dashboards/overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -68,7 +69,7 @@ Signal Sciences からメトリクスとイベントをリアルタイムに取�
 
 Signal Sciences-Datadog インテグレーションを使用するには、Signal Sciences ユーザーである必要があります。Signal Sciences の詳細については、<https://www.signalsciences.com> にアクセスしてください。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -146,7 +147,6 @@ Signal Sciences インテグレーションには、サービスのチェック�
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
-
 
 アプリケーションセキュリティ、DevOps、SecOps、およびすべての操作については、[Signal Sciences ブログ][11]を参照してください。
 

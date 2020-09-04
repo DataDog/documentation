@@ -3,6 +3,8 @@ aliases:
   - /ja/4ec-343-f90
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: signal_sciences
 source: signal_sciences
 title: Signal Sciences が IP にフラグを立てます

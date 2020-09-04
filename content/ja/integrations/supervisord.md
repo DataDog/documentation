@@ -87,11 +87,14 @@ Supervisor がルートとして実行されている場合は、非ルートユ
 
 `supervisord` を再度読み込みます。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `supervisord.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル supervisord.d/conf.yaml][4] を参照してください。
+[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `supervisord.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル supervisord.d/conf.yaml][2] を参照してください。
 
 ```yaml
 init_config:
@@ -108,13 +111,19 @@ instances:
 
 `proc_names` オプションや `proc_regex` オプションを使用して、Agent がメトリクスを収集してサービスチェックを作成する対象プロセスのリストを作成します。どちらのオプションも指定しなかった場合、Agent は Supervisor の _すべて_ の子プロセスを追跡します。両方のオプションを指定した場合、Agent は両方のリストのプロセスを追跡します (2 つのオプションは相互排他ではありません) 。
 
-他のチェックオプションの詳細については、[チェックコンフィギュレーションの例][4]を参照してください。
+他のチェックオプションの詳細については、[チェック構成の例][2]を参照してください。
 
-[Agent を再起動][5]すると、Datadog への Supervisor メトリクスの送信が開始されます。
+[Agent を再起動][3]すると、Datadog への Supervisor メトリクスの送信が開始されます。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -122,9 +131,13 @@ instances:
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                      |
 | `<インスタンスコンフィギュレーション>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "user":"<USERNAME>", "pass":"<PASSWORD>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `supervisord` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `supervisord` を探します。
 
 ## 収集データ
 
@@ -161,19 +174,15 @@ Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_r
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [ Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][10]
+- [ Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][5]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/supervisord/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor

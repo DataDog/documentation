@@ -209,6 +209,8 @@ This produces the following result in the [Log Explorer Page][2]:
 
 {{< img src="getting_started/logs/file_log_example.png" alt="File log example" >}}
 
+**Note**: When using the Datadog Agent, log events larger than 256KB are split into multiple entries.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

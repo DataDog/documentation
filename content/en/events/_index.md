@@ -9,6 +9,9 @@ further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
+- link: "/dashboards/widgets/event_stream/"
+  tag: "Documentation"
+  text: "Add an Event Stream widget to a dashboard"
 ---
 
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). See the developer documentation to learn about [submitting events][1] to Datadog.

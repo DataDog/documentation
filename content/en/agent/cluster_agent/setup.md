@@ -36,10 +36,10 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
   ```shell
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
   ```
 
-  This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent.
+  This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent and updates the `ClusterRole` for the node Agent.
 
 If you are using Azure Kubernetes Service (AKS), you may require extra permissions. See the [RBAC for DCA on AKS][3] FAQ.
 
@@ -115,7 +115,7 @@ Setting the value without a secret results in the token being readable in the `P
 
 1. Download the following manifests:
 
-  * [`agent-service.yaml`: The Cluster Agent Service manifest][4]
+  * [`agent-services.yaml`: The Cluster Agent Service manifest][4]
   * [`secrets.yaml`: The secret holding the Datadog API key][5]
   * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][6]
 
@@ -126,7 +126,7 @@ Setting the value without a secret results in the token being readable in the `P
     ```
 
 3. In the `cluster-agent-deployment.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
-4. Run: `kubectl apply -f agent-service.yaml`
+4. Run: `kubectl apply -f agent-services.yaml`
 5. Run: `kubectl apply -f secrets.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
 
@@ -211,7 +211,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
+[1]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [2]: /agent/kubernetes/
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml

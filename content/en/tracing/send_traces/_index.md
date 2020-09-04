@@ -35,6 +35,10 @@ To get an overview of all the possible settings for APM, take a look at the Agen
 
 See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
+### Follow the in-app documentation (Recommended)
+
+For step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS), follow the [Quickstart instructions][7] within the Datadog app.
+
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 Note: After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.
@@ -43,7 +47,7 @@ Note: After having instrumented your application, the tracing client sends trace
 
 ### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][7]. Alternatively, you can use [AWS X-Ray][8] to trace your Lambda functions.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][8] documentation.
 
 ### Azure App Services
 
@@ -87,8 +91,8 @@ Next, [Instrument your application][14]. For the full overview of all of the ste
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics/
 [6]: /agent/
-[7]: /integrations/amazon_lambda/#trace-collection
-[8]: /integrations/amazon_xray/#overview
+[7]: https://app.datadoghq.com/apm/docs
+[8]: /tracing/serverless_functions/
 [9]: /infrastructure/serverless/azure_app_services/#overview
 [10]: /agent/basic_agent_usage/heroku/#installation
 [11]: /integrations/cloud_foundry/#trace-collection

@@ -23,7 +23,7 @@ The access to this feature is restricted - if you don't have access, reach out t
 Private locations allow you to **monitor internal-facing applications or any private URLs** that aren’t accessible from the public internet. They can also be used to:
 
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetic CI test integration][1].
+* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetic CI/CD testing][1].
 * **Compare application performance** from both inside & outside your internal network.
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
@@ -132,7 +132,7 @@ Launch your private location on:
 
 {{% tab "Docker" %}}
 
-Run this command to boot your private location worker by mounting your configuration file to the container:
+Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
 docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest

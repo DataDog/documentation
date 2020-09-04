@@ -1,6 +1,8 @@
 ---
 title: サービスのプライマリオペレーション
 kind: ガイド
+aliases:
+  - /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
   - link: /tracing/setup/
     tag: ドキュメント

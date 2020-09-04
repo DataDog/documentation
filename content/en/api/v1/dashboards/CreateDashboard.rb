@@ -33,9 +33,9 @@ saved_view = [{
   ]
 
 dog.create_board(title, widgets, layout_type, {
-    'description' => description,
-    'is_read_only' => is_read_only,
-    'notify_list' => notify_list,
-    'template_variables' => template_variables,
-    'template_variable_presets' => saved_view
+    :description => description,
+    :is_read_only => is_read_only,
+    :notify_list => notify_list,
+    :template_variables => template_variables,
+    :template_variable_presets => saved_view
     })

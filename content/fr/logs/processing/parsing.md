@@ -5,16 +5,16 @@ description: Parser vos logs à l'aide du processeur Grok
 aliases:
   - /fr/logs/parsing/
 further_reading:
-  - link: logs/processing/processors
+  - link: /logs/processing/processors/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/faq/how-to-investigate-a-log-parsing-issue
+  - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
     tag: FAQ
     text: "Comment étudier un problème de parsing de log\_?"
   - link: /logs/guide/log-parsing-best-practice/
     tag: FAQ
     text: "Parsing de log\_: bonnes pratiques à adopter"
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: Contrôler le volume de logs indexés par Datadog
 ---
@@ -111,7 +111,9 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `decodeuricomponent`                                           | Ce filtre décode les composants d'un URI. Par exemple, il permet de transformer `%2Fservice%2Ftest` en `/service/test`.                                                              |
 | `lowercase`                                                    | Renvoie la chaîne en minuscules.                                                                                                                            |
 | `uppercase`                                                    | Renvoie la chaîne en majuscules.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extrait un pattern key/value et renvoie un objet JSON. [Consulter les exemples de filtres clé/valeur](#cle-valeur).                                                         |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extrait une expression clé/valeur et renvoie un objet JSON. Consulter les [exemples de filtres clé/valeur](#key-value-ou-logfmt).                                                         |
+| `xml`                                                          |  Parse du XML correctement formaté. Consulter les [exemples de filtres XML](#parser-du-xml).                                                                                | 
+| `csv(headers[, separator[, quotingcharacter]])`                | Parse des lignes CSV ou TSV correctement formatées. Consulter les [exemples de filtres CSV](#parser-des-csv).                                                                    |
 | `scale(facteur)`                                                | Multiplie la valeur numérique attendue par le coefficient spécifié.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parse une séquence de tokens et la renvoie en tant que tableau.                                                                                             |
 | `url`                                                          | Parse une URL et renvoie tous les membres tokenisés (domaine, paramètres de requête, port, etc.) dans un objet JSON. [En savoir plus sur le parsing d'URL][2].               |
@@ -167,10 +169,14 @@ Voici des exemples d'utilisation des parsers :
 
 * [Key/value ou logfmt](#key-value-or-logfmt)
 * [Parsing de dates](#parsing-dates)
-* [Modèles avec alternative](#alternating-pattern)
+* [Attributs alternés](#alternating-pattern)
 * [Attribut facultatif](#optional-attribute)
 * [JSON imbriqué](#nested-json)
 * [Regex](#regex)
+* [Liste et tableaux](#list-and-arrays)
+* [Format Glog](#glog-format)
+* [XML](#parsing-xml)
+* [Format CSV](#parsing-csv)
 
 ### Key/value ou logfmt
 
@@ -236,17 +242,17 @@ rule %{data::keyvalue("=","/:")}
 
 Autres exemples :
 
-| **Chaîne brute**               | **Règle de parsing**                       | **Résultat**                            |
-|:-----------------------------|:---------------------------------------|:--------------------------------------|
-| key=valueStr                 | `%{data::keyvalue}`                    | {"key": "valueStr}                    |
-| key=\<valueStr>              | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
-| "key"="valueStr"             | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
-| key:valueStr                 | `%{data::keyvalue(":")}`               | {"key": "valueStr"}                   |
-| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`          | {"key": "/valueStr"}                  |
-| /key:/valueStr               | `%{data::keyvalue(":", "/")}`          | {"/key": "/valueStr"}                 |
-| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`    | {"key": "valueStr"}                   |
-| key1=value1\|key2=value2     | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
-| key1="value1"\|key2="value2" | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
+| **Chaîne brute**               | **Règle de parsing**                                      | **Résultat**                            |
+|:-----------------------------|:------------------------------------------------------|:--------------------------------------|
+| key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr}                    |
+| key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
+| "key"="valueStr"             | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`                              | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`                         | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`                         | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`                   | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
 **Exemple avec plusieurs QuotingString** : lorsque plusieurs QuotingString sont définies, le comportement par défaut est ignoré, et seul le guillemet défini est autorisé.
 Le filtre key/value met toujours en correspondance des entrées sans guillemet, peu importe la valeur de `quotingStr`. Lorsque des guillemets sont utilisés, le paramètre `characterWhiteList` est ignoré, puisque tout le contenu entre les guillemets est extrait.
@@ -273,7 +279,7 @@ Le filtre key/value met toujours en correspondance des entrées sans guillemet, 
 
 * Les valeurs vides (`key=`) ou `null` (`key=null`) ne sont pas affichées dans la sortie JSON.
 * Si vous définissez un filtre *keyvalue* sur un objet `data` et que ce filtre n'est pas mis en correspondance, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
-* La définition de `""` en tant que `quotingStr` conserve la configuration par défaut des guillemets.
+* Si vous définissez `""` en tant que `quotingStr`, la configuration par défaut des guillemets est conservée.
 
 ### Parsing de dates
 
@@ -290,14 +296,22 @@ Le matcher de date convertit votre timestamp au format EPOCH (unité de mesure 
 | 2016-11-29T16:21:36.431+0000         | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
 | 2016-11-29T16:21:36.431+00:00        | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
 | 06/Feb/2009:12:14:14.655             | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
-| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT          | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188598942427} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
+| Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Utilisez ce format si vous effectuez vos propres localisations et que vos timestamps ne sont _pas_ au fuseau UTC. Les identifiants de fuseaux horaires sont extraits de la base de données TZ. Pour en savoir plus, consultez les [noms de la base de données TZ][1].
+<sup>1</sup> Utilisez le paramètre `timezone` si vous effectuez vos propres localisations et que vos timestamps ne sont _pas_ au fuseau UTC. 
+Les formats de fuseaux horaires pris en charge sont les suivants :
+
+* `GMT`, `UTC`, `UT` ou `Z`
+* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` ou `-hhmmss`. La plage la plus étendue prise en charge est de +18:00 à -18:00 (inclus). 
+* Fuseaux horaires commençant par `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` ou `UT-`. La plage la plus étendue prise en charge est de +18:00 à -18:00 (inclus). 
+* Les identifiants de fuseaux horaires sont extraits de la base de données TZ. Pour en savoir plus, consultez les [noms de la base de données TZ][1].
 
 **Remarque** : le parsing d'une date ne définit **pas** sa valeur comme étant la date officielle du log. Pour cela, utilisez le [remappeur de dates de log][2] dans un processeur ultérieur.
 
-### Modèle avec alternative
+### Attributs alternés
 
 Si vous avez des logs qui se présentent dans deux formats différents, avec un unique attribut comme seule différence, définissez une seule règle en utilisant une alternative avec `(<REGEX_1>|<REGEX_2>)`. Cette règle équivaut à un OR booléen.
 
@@ -378,6 +392,165 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Exemple de parsing 6"  style="width:80%;" >}}
+
+### Liste et tableaux
+
+Utilisez le matcher `array` pour extraire une liste sous la forme d'un tableau dans un attribut unique.
+
+**Log** :
+
+```text
+Users [John, Oliver, Marc, Tom] have been added to the database
+```
+
+**Règle** :
+
+```text
+myParsingRule Users %{data:users:array(“[]“,”,“)} have been added to the database
+```
+
+{{< img src="logs/processing/parsing/array_parsing.png" alt="Exemple de parsing 6"  style="width:80%;" >}}
+
+
+**Log** :
+
+```text
+Users {John-Oliver-Marc-Tom} have been added to the database
+```
+
+**Règle** :
+
+```text
+myParsingRule Users %{data:users:array("{}","-")} have been added to the database
+```
+
+### Format Glog
+
+Certains composants Kubernetes génèrent leurs logs au format `glog`. Cet exemple est tiré du composant Kube Scheduler dans la bibliothèque de pipelines.
+
+Exemple de ligne de log :
+
+```text
+W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
+```
+
+Règles de parsing :
+
+```text
+kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
+```
+
+JSON extrait :
+
+```json
+{
+  "level": "W",
+  "timestamp": 1587728861605,
+  "logger": {
+    "thread_id": 1,
+    "name": "authorization.go"
+  },
+  "lineno": 47,
+  "msg": "Authorization is disabled"
+}
+```
+
+### Parser du XML
+
+Le parser de XML permet de transformer des messages au format XML en JSON.
+
+**Log :**
+
+```text
+<book category="CHILDREN">  
+  <title lang="en">Harry Potter</title>  
+  <author>J K. Rowling</author>  
+  <year>2005</year>  
+</book>
+```
+
+**Règle :**
+
+```text
+rule %{data::xml}
+```
+
+**Résultat :**
+
+  ```json
+{
+  "book": {
+    "year": "2005",
+    "author": "J K. Rowling",
+    "category": "CHILDREN",
+    "title": {
+      "lang": "en",
+      "value": "Harry Potter"
+    }
+  }
+}
+  ```
+
+**Remarques** :
+
+* Si le XML contient des tags qui ont à la fois un attribut et une valeur de type chaîne entre les deux tags, un attribut `value` est généré. Par exemple : `<title lang="en">Harry Potter</title>` devient `{"title": {"lang": "en", "value": "Harry Potter" } }`
+* Les tags qui se répètent sont automatiquement convertis en tableaux. Par exemple : `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` devient `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+
+### Parser des CSV
+
+Utilisez le filtre **CSV** pour mapper plus facilement les chaînes de caractères aux attributs lorsqu'elles sont séparées par un caractère donné (`,` par défaut).
+
+Le filtre CSV correspond à `csv(headers[, separator[, quotingcharacter]])`, où :
+
+* `headers` définit le nom des clés séparées par `,`. Les noms des clés doivent commencer par un caractère alphabétique et peuvent contenir n'importe quel caractère alphanumérique en plus de `_`.
+* `separator` définit le séparateur utilisé pour séparer les différentes valeurs. Seul un caractère est accepté. Valeur par défaut : `,`. **Remarque** : utilisez `tab` pour représenter le caractère de tabulation.
+* `quotingcharacter` définit le caractère des guillemets. Seul un caractère est accepté. Valeur par défaut : `"` 
+
+**Remarques** :
+
+* Les valeurs contenant un séparateur doivent être entourées de guillemets.
+* Les valeurs entre guillemets qui contiennent un guillemet doivent être échappées à l'aide de guillemets. Par exemple, dans une valeur entre guillemets, `""` représente `"`.
+* Si le log ne contient pas le même nombre de valeurs que le nombre de clés dans l'en-tête, le parser CSV se limitera aux premières.
+* Les entiers et les valeurs doubles sont automatiquement convertis lorsque cela est possible.
+
+**Log** :
+
+{{< code-block lang="text" >}}
+John,Doe,120,Jefferson St.,Riverside
+{{< /code-block >}}
+
+**Règle** :
+
+{{< code-block lang="text" >}}
+myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
+{{< /code-block >}}
+
+**Résultat :**
+
+{{< code-block lang="json" >}}
+{
+  "user": {
+    "first_name": "John",
+    "name": "Doe",
+    "st_nb": 120,
+    "st_name": "Jefferson St.",
+    "city": "Riverside"
+  }
+}
+{{< /code-block >}}
+
+Autres exemples :
+
+| **Chaîne brute**               | **Règle de parsing**                                                         | **Résultat**                                      |
+|:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
+| `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
+| `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
+| `'John ''Da Man''',Doe`      | `%{data::csv("firstname,name",",","'")}`                                 | {"firstname": "John 'Da Man'", "name":"Doe"}    |
+| <code>John&#124;Doe</code>   | <code>%{data::csv(&quot;firstname,name&quot;,&quot;&#124;&quot;)}</code> | {"firstname": "John", "name":"Doe"}             |
+| `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
+| `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
+| `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
+
 
 ## Pour aller plus loin
 

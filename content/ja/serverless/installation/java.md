@@ -18,13 +18,13 @@ further_reading:
     tag: Documentation
     text: Go サーバーレスモニタリングのインストール
 ---
-[AWS インテグレーションをインストール][1]したら、以下のいずれかの方法に従いアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下の手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
 ## 構成
 
 ### Datadog Lambda ライブラリのインストール
 
-プロジェクトのコンフィギュレーションに基づき以下のいずれかのコマンドを実行することで、Datadog Lambda ライブラリをローカルにインストールできます。最新のバージョンに関しては、[最新のリリース][2]を参照してください。
+プロジェクトのコンフィギュレーションに基づき以下のいずれかのコマンドを実行することで、Datadog Lambda ライブラリをローカルにインストールできます。最新のバージョンに関しては、[最新のリリース][3]を参照してください。
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -64,19 +64,21 @@ dependencies {
 
 ### 関数の構成
 
-1. Lambda 関数の [AWS X-Ray アクティブトレース][3]を有効にします。
+1. Lambda 関数の [AWS X-Ray アクティブトレース][4]を有効にします。
 
 ### Datadog Forwarder をロググループにサブスクライブ
 
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
 
-1. [まだの場合は、Datadog Forwarder をインストールします][4]。
+1. [まだの場合は、Datadog Forwarder をインストールします][2]。
 2. [DdFetchLambdaTags のオプションが有効であることを確認します[5]。
 3. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
 
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless ページ][7]でメトリクス、ログ、トレースを確認できるようになるはずです。カスタムメトリクスを送信する必要がある場合は、以下のコード例をご参照ください。
+以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+
+カスタムメトリクスの送信をご希望の場合は、以下のコード例をご参照ください。
 
 
 ```java
@@ -106,9 +108,9 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 ```
 
 [1]: /ja/serverless/#1-install-the-cloud-integration
-[2]: https://github.com/DataDog/datadog-lambda-java/releases
-[3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-java/releases
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
+[5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://app.datadoghq.com/functions

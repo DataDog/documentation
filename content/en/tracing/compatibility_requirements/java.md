@@ -85,7 +85,10 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
+| Spring SessionAwareMessageListener              | 3.1+        | Fully Supported | `spring-jms-3.1`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
+
+**Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
@@ -124,6 +127,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 - MySQL
 - Oracle
 - Postgres SQL
+- ScalikeJDBC
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 

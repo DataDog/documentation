@@ -3,15 +3,15 @@ import algoliasearch from 'algoliasearch';
 import Choices from 'choices.js';
 
 import { initializeIntegrations } from './components/integrations';
-import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC, } from './components/table-of-contents';
+import { initializeSecurityRules } from './components/security-rules';
+import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
-import datadogLogs from './components/dd-browser-logs-rum';
-import { moveToAnchor } from './helpers/moveToAnchor';
-import { redirectToRegion } from './region-redirects';
 import configDocs from './config/config-docs';
+import {loadPage} from './components/async-loading';
+import {updateMainContentAnchors, gtag} from './helpers/helpers';
 
 const { env } = document.documentElement.dataset;
-const { img_url } = configDocs[env];
+const { imgUrl, gaTag } = configDocs[env];
 
 // custom region and API version selector dropdown
 const versionSelect = document.querySelector('.js-api-version-select');
@@ -23,10 +23,9 @@ const regionChoiceOptions = {
     shouldSort: false,
     itemSelectText: '',
     renderSelectedChoices: false,
-    callbackOnCreateTemplates: function (template){
+    callbackOnCreateTemplates (template){
         return {
-            item: (classNames, data) => {
-              return template(`
+            item: (classNames, data) => template(`
                 <div class="${classNames.item} ${
                 data.highlighted
                   ? classNames.highlightedState
@@ -36,12 +35,10 @@ const regionChoiceOptions = {
               }" data-item data-id="${data.id}" data-value="${data.value}" ${
                 data.active ? 'aria-selected="true"' : ''
               } ${data.disabled ? 'aria-disabled="true"' : ''}>
-                   ${data.label}<img alt="${data.value} region selector icon" src="${img_url}images/icons/region-flag-${data.value}.png">
+                   ${data.label}<img alt="${data.value} region selector icon" src="${imgUrl}images/icons/region-flag-${data.value}.png">
                 </div>
-              `);
-            },
-            choice: (classNames, data) => {
-              return template(`
+              `),
+            choice: (classNames, data) => template(`
                 <div class="${classNames.item} ${classNames.itemChoice} ${
                 data.disabled ? classNames.itemDisabled : classNames.itemSelectable
               }" data-select-text="${this.config.itemSelectText}" data-choice ${
@@ -53,8 +50,7 @@ const regionChoiceOptions = {
               }>
                    ${data.label}
                 </div>
-              `);
-            },
+              `)
           };
     }
 }
@@ -63,7 +59,7 @@ const versionChoiceOptions = {
     searchEnabled: false,
     placeholder: false,
     itemSelectText: '',
-    renderSelectedChoices: false,
+    renderSelectedChoices: false
 }
 if (versionSelect) {
     const choices = new Choices(versionSelect, versionChoiceOptions);
@@ -79,21 +75,14 @@ window.dataLayer = window.dataLayer || [];
 
 const siteEnv = document.querySelector('html').dataset.env;
 
-let gaTag = '';
 let indexName = '';
 if (siteEnv === 'preview' || siteEnv === 'development') {
-    gaTag = 'UA-21102638-9';
     indexName = 'docsearch_docs_preview';
 } else if (siteEnv === 'live') {
-    gaTag = 'UA-21102638-5';
     indexName = 'docsearch_docs_prod';
 }
 
-function gtag() {
-    dataLayer.push(arguments);
-}
 gtag('js', new Date());
-
 gtag('config', gaTag);
 
 $(document).ready(function () {
@@ -140,7 +129,7 @@ $(document).ready(function () {
         const results = new RegExp('[?&]' + 's' + '=([^&#]*)').exec(
             window.location.href
         );
-        const $pagination = $('#tipue_search_content');
+        
         let query = '';
         try {
             query = results[1];
@@ -181,9 +170,9 @@ $(document).ready(function () {
                     params: {
                         hitsPerPage: 200,
                         attributesToRetrieve: '*',
-                        facetFilters: [`language:${lang}`],
-                    },
-                },
+                        facetFilters: [`language:${lang}`]
+                    }
+                }
             ],
             function (err, results) {
                 if (!err) {
@@ -455,7 +444,7 @@ $(document).ready(function () {
                         function addHistory(page) {
                             let pageName = `?s=${query}`;
                             if (page !== 1) pageName += `&p=${page}`;
-                            history.pushState({ page }, '', pageName);
+                            window.history.pushState({ page }, '', pageName);
                         }
 
                         function changePage(page) {
@@ -541,7 +530,7 @@ $(document).ready(function () {
                         );
                         if (searchParams.get('p') !== null)
                             current_page = parseInt(searchParams.get('p'));
-                        history.replaceState({ page: current_page }, '', '');
+                            window.history.replaceState({ page: current_page }, '', '');
                         changePage(current_page);
                     }
                 } else {
@@ -556,36 +545,18 @@ $(document).ready(function () {
         );
     }
 
-    // docs on mobile dropdown trigger move to anchor
-    // $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
-    //     const href = $(this).attr('href');
-    //     if(href.substr(0, 1) === '#') {
-    //         moveToAnchor(href.substr(1), false);
-    //         return false;
-    //     }
-    // });
-
-    // $('.sidenav-api a').on('click', function(e) {
-    //     const href = $(this).attr('href');
-    //     if(href.substr(0, 1) === '#') {
-    //         moveToAnchor(href.substr(1), false);
-    //         return false;
-    //     }
-    // });
-
     const searchParam = getParameterByName('s');
     if (searchParam) {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
 
     if (!document.body.classList.contains('api')){
-        $(window).on('resize scroll', function(e) {
-            const header_h = $('body > header').height();
-            const footer_h = $('body > footer').height();
+        $(window).on('resize scroll', function() {
+            const headerHeight = $('body > header').height();
             const padding = 200;
             $('.sidenav-nav').css(
                 'maxHeight',
-                document.documentElement.clientHeight - header_h - padding
+                document.documentElement.clientHeight - headerHeight - padding
             );
         });
     }
@@ -597,23 +568,6 @@ $(document).ready(function () {
     // sticky polyfill trigger
     const elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
-
-    // Polyfill `includes` for Internet Explorer
-    if (!String.prototype.includes) {
-        Object.defineProperty(String.prototype, 'includes', {
-            value(search, start) {
-                if (typeof start !== 'number') {
-                    start = 0;
-                }
-
-                if (start + search.length > this.length) {
-                    return false;
-                } else {
-                    return this.indexOf(search, start) !== -1;
-                }
-            },
-        });
-    }
 
     // add targer-blank to external links
     const newLinks = document.getElementsByTagName('a');
@@ -628,59 +582,6 @@ $(document).ready(function () {
 
     codeTabs();
 
-    // API page
-    if ($('.api').length) {
-        // When language buttons are clicked, show all the code snippets
-        // from that language.
-        // const code_blocks = $('.code-block');
-        // const lang_blocks = $('.lang-specific');
-        // const hs = $('h2[id]');
-        // $('.lang-btn').on('click', function (e) {
-        //     const el = $(this);
-
-        //     // Find the element currently in the view port
-        //     let scrollElement;
-        //     hs.each(function () {
-        //         if ($(this).offset().top >= window.scrollY) {
-        //             scrollElement = $(this);
-        //             return false;
-        //         }
-        //     });
-
-        //     // Show this language's code blocks and language-specific elements
-        //     // const lang = el.data('lang');
-        //     // code_blocks.hide();
-        //     // $(`.code-block-${  lang}`).show();
-        //     // lang_blocks.hide();
-        //     // $(`.lang-specific-${  lang}`).show();
-
-        //     // // Highlight the active button.
-        //     // $('.lang-btn').removeClass('active');
-        //     // el.addClass('active');
-
-        //     // Scroll to the element that was in the viewport (ie retain location).
-        //     if(scrollElement) {
-        //         const id = scrollElement.attr('id');
-        //         moveToAnchor(id, false);
-        //     }
-
-        //     // Add the language selection to the current URL.
-        //     if (history.pushState) {
-        //         const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-        //         history.pushState(null, null, `${url  }?lang=${  lang  }${window.location.hash}`)
-        //     }
-
-        //     return false;
-        // });
-    } else if(window.location.hash) {
-        // moveToAnchor(window.location.hash.substr(1), true);
-    }
-
-    // For sidenav links with anchor tag refs
-    // $(".sidenav-nav a[href^='#']").click(function(){
-    //     moveToAnchor($(this).attr('href').substr(1), true);
-    // });
-
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
     updateTOC();
@@ -689,15 +590,10 @@ $(document).ready(function () {
 
     // TODO: move integrations code to own file after webpack update
     initializeIntegrations();
+    initializeSecurityRules();
 });
 
-function updateMainContentAnchors() {
-    // make header tags with ids and make clickable as anchors
-    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
-        const id = $(this).attr('id');
-        $(this).wrapInner(`<a href="#${id}"></a>`);
-    });
-}
+
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -856,6 +752,11 @@ function getPathElement() {
             'header .nav-top-level > [data-path*="integrations"]'
         );
     }
+    
+    if (path.includes('tracing/serverless_functions')) {
+        aPath = document.querySelectorAll('.side [data-path*="tracing/serverless_functions"]')[1];
+        maPath = document.querySelectorAll('header [data-path*="tracing/serverless_functions"]')[1];
+    }
 
     if (aPath) {
         aPath.classList.add('active');
@@ -903,8 +804,8 @@ function updateSidebar(event) {
         // Condition to update sidebar nav and sub items if click event came from a non-navbar link
         const navMenuItems = document.querySelectorAll('.sidenav-nav .nav-top-level .sub-menu a');
         // Path string to find correct nav top-level and sub item
-        let currentLocation = window.location;
-        let navMenuMatch = currentLocation.pathname;
+        const currentLocation = window.location;
+        const navMenuMatch = currentLocation.pathname;
 
         navMenuItems.forEach(element => {
             // Find anchor that has a data-path attr that matches current pathName
@@ -932,204 +833,9 @@ function updateSidebar(event) {
     }
 }
 
-function loadPage(newUrl) {
-    // scroll to top of page on new page load
-    window.scroll(0, 0);
 
-    let mainContent = document.getElementById('mainContent');
 
-    if (mainContent) {
-        const currentTOC = document.querySelector('.js-toc-container');
 
-        const httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = function () {
-            // cancel httprequest if hash is changed to prevent page replacing
-            window.addEventListener('hashchange', function (e) {
-                httpRequest.abort();
-            });
-
-            if (httpRequest.readyState !== XMLHttpRequest.DONE) {
-                return;
-            }
-
-            const newDocument = httpRequest.responseXML;
-            
-            if (newDocument === null) {
-                return;
-            }
-
-            const mainContentWrapper = document.querySelector(
-                '.mainContent-wrapper'
-            );
-            const newmainContentWrapper = httpRequest.responseXML.querySelector(
-                '.mainContent-wrapper'
-            );
-
-            const newContent = httpRequest.responseXML.getElementById(
-                'mainContent'
-            );
-            const newTOC = httpRequest.responseXML.querySelector(
-                '.js-toc-container'
-            );
-
-            if (newContent === null) {
-                return;
-            }
-
-            document.title = newDocument.title;
-
-            const meta = {
-                itemprop: ['name', 'description'],
-                name: [
-                    'twitter\\:site',
-                    'twitter\\:title',
-                    'twitter\\:description',
-                    'twitter\\:creator',
-                ],
-                property: [
-                    'og\\:title',
-                    'og\\:type',
-                    'og\\:url',
-                    'og\\:image',
-                    'og\\:description',
-                    'og\\:site_name',
-                    'article\\:author',
-                ],
-            };
-
-            const keys = Object.keys(meta);
-            for (let i = 0; i < keys.length; i++) {
-                const key = keys[i];
-                for (let k = 0; k < meta[key].length; k++) {
-                    const selectorPart = meta[key][k];
-                    try {
-                        if (
-                            newDocument.head.querySelector(
-                                `[${key}=${selectorPart}]`
-                            )
-                        ) {
-                            const { content } = newDocument.head.querySelector(
-                                `[${key}=${selectorPart}][content]`
-                            );
-                            document.head.querySelector(
-                                `[${key}=${selectorPart}][content]`
-                            ).content = content;
-                        }
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-            }
-
-            // update data-relPermalink
-            document.documentElement.dataset.relpermalink =
-                newDocument.documentElement.dataset.relpermalink;
-
-            const start = window.performance.now();
-
-            // check if loaded page has inline JS. if so, we want to return as script will not execute
-            const hasScript = newContent.getElementsByTagName('script').length;
-
-            // if there is error finding the element, reload page at requested url
-            if (mainContent.parentElement && !hasScript) {
-                mainContent.parentElement.replaceChild(newContent, mainContent);
-                mainContent = newContent;
-
-                // update mainContent-wrapper classes
-                mainContentWrapper.className = `${newmainContentWrapper.classList}`;
-            } else {
-                window.location.href = newUrl;
-            }
-
-            const wistiaVid = document.querySelector(
-                '.wistia [data-wistia-id]'
-            );
-
-            let wistiaVidId;
-            if (wistiaVid) {
-                wistiaVidId = wistiaVid.dataset.wistiaId;
-            }
-
-            // if newly requested TOC is NOT disabled
-            if (newTOC.querySelector('#TableOfContents')) {
-                currentTOC.replaceWith(newTOC);
-                buildTOCMap();
-                updateTOC();
-                updateMainContentAnchors();
-                reloadWistiaVidScripts(wistiaVidId);
-                initializeIntegrations();
-            } else if (
-                document.querySelector('.js-toc-container #TableOfContents')
-            ) {
-                // toc is disabled, but old TOC exists and needs to be removed.
-                document
-                    .querySelector('.js-toc-container #TableOfContents')
-                    .remove();
-                updateTOC();
-            }
-
-            const end = window.performance.now();
-            const time = end - start;
-
-            const pathName = new URL(newUrl).pathname;
-
-            // sets query params if code tabs are present
-
-            codeTabs();
-
-            const regionSelector = document.querySelector('.js-region-selector');
-            if (regionSelector) {
-                redirectToRegion(regionSelector.value);
-            }
-
-            // Gtag virtual pageview
-            gtag('config', gaTag, { page_path: pathName });
-
-            // Marketo
-            if (typeof window.Munchkin !== 'undefined') {
-                Munchkin.munchkinFunction('clickLink', { href: newUrl });
-            } else {
-                datadogLogs.logger.info('Munchkin called before ready..');
-            }
-        }; // end onreadystatechange
-
-        httpRequest.responseType = 'document';
-        httpRequest.open('GET', newUrl);
-        httpRequest.send();
-    } else {
-        window.location.href = newUrl;
-    }
-}
-
-// when navigating to asynced nav with a Wistia video, the video script tags need to be removed and readded for the video to load
-function reloadWistiaVidScripts(vidId) {
-    const oldWistiaScripts = document.querySelectorAll('.wistia script');
-    const wistiaCont = document.querySelector('.wistia');
-    const i = 0;
-
-    if (wistiaCont && vidId) {
-        // remove current script tags
-        for (let i; i < oldWistiaScripts.length; i += 1) {
-            oldWistiaScripts[i].remove();
-        }
-
-        // create new script tags
-        const wistaVideoScript = document.createElement('script');
-        const wistaVideoScript2 = document.createElement('script');
-
-        wistaVideoScript.setAttribute(
-            'src',
-            'https://fast.wistia.com/assets/external/E-v1.js'
-        );
-        wistaVideoScript2.setAttribute(
-            'src',
-            `https://fast.wistia.com/embed/medias/${vidId}.jsonp`
-        );
-
-        wistiaCont.appendChild(wistaVideoScript);
-        wistiaCont.appendChild(wistaVideoScript2);
-    }
-}
 
 const sideNav = document.querySelector('.side .sidenav-nav-main');
 const mobileNav = document.querySelector('header .sidenav-nav-main');
@@ -1168,7 +874,7 @@ function navClickEventHandler(event) {
     //     return;
 
     // History API needed to make sure back and forward still work
-    if (history === null) return;
+    if (window.history === null) return;
 
     // External links should instead open in a new tab
 
@@ -1182,7 +888,7 @@ function navClickEventHandler(event) {
     } else if (loadViaAjax(event.target)) {
         loadPage(newUrl);
         event.preventDefault();
-        history.pushState({}, '', newUrl);
+        window.history.pushState({}, '', newUrl);
         updateSidebar(event);
     } else {
         window.location.href = newUrl;
@@ -1215,11 +921,11 @@ function loadViaAjax(element) {
 function rulesListClickHandler(event, pathString) {
     if (event.target.matches('#rules .list-group .js-group a.js-page')) {
         event.preventDefault();
-        let targetURL = event.target.href;
+        const targetURL = event.target.href;
         
         if (targetURL.includes(pathString)) {
             loadPage(targetURL);
-            history.pushState({}, '' /* title */, targetURL);
+            window.history.pushState({}, '' /* title */, targetURL);
             updateSidebar(event);
         }
     }
@@ -1244,14 +950,14 @@ function replacePath(inputPath) {
     return inputPath;
 }
 
-function replaceURL(input_url) {
+function replaceURL(inputUrl) {
     let thisurl = `${window.location.protocol}//${window.location.host}`;
     if (thisurl.indexOf('docs-staging') > -1) {
         const path = window.location.pathname.split('/').slice(0, -3).join('/');
         thisurl = `${window.location.protocol}//${window.location.host}${path}`;
         return thisurl;
     }
-    return input_url.replace('https://www.docs.datadoghq.com', thisurl);
+    return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
 }
 
 window.addEventListener(

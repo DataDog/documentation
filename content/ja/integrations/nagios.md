@@ -48,17 +48,30 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-1. `nagios.d/conf.yaml` ファイル ([Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダー内) を編集します。使用可能なすべての構成オプションの詳細については、[サンプル nagios.d/conf.yaml][3] を参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-2. [Agent を再起動][4]すると、Datadog への Nagios イベントおよび (オプションで) パフォーマンスデータメトリクスの送信が開始されます。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `nagios.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nagios.d/conf.yaml][2] を参照してください。
 
-**注**: Nagios チェックでは[カスタムメトリクス][5]を送信することができますが、これはお客様の[課金][6]に影響します。
+2. [Agent を再起動][3]すると、Datadog への Nagios イベントおよび (オプションで) パフォーマンスデータメトリクスの送信が開始されます。
+
+**注**: Nagios チェックでは[カスタムメトリクス][4]を送信することができますが、これはお客様の[課金][5]に影響します。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][7]をガイドとして参照して、次のパラメーターを適用します。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
@@ -68,9 +81,13 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 **注**: コンテナ化された Agent から `/etc/nagios3/nagios.cfg` ファイルにアクセスして Datadog-Nagios インテグレーションを有効化できます。
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `nagios` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `nagios` を探します。
 
 ## 収集データ
 
@@ -98,19 +115,14 @@ Nagios チェックには、サービスのチェック機能は含まれませ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog を使用した Nagios アラートの把握][10]
+- [Datadog を使用した Nagios アラートの把握][4]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
-[6]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/nagios-monitoring
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.datadoghq.com/blog/nagios-monitoring

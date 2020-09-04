@@ -55,13 +55,16 @@ Kong チェックは [Datadog Agent][1] パッケージに含まれています�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Kong メトリクス](#metrics)の収集を開始するには、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `kong.d/conf.yaml` ファイルにこの構成ブロックを追加します。使用可能なすべての構成オプションについては、[サンプル kong.d/conf.yaml][3] を参照してください。
+1. [Kong メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `kong.d/conf.yaml` ファイルにこのコンフィギュレーションブロックを追加します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kong.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -73,7 +76,7 @@ Kong チェックは [Datadog Agent][1] パッケージに含まれています�
      - kong_status_url: http://localhost:8001/status/
    ```
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -102,13 +105,19 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
        source: kong
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル kong.d/conf.yaml][2] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル kong.d/conf.yaml][1] を参照してください。
 
-3. [Agent を再起動します][4]。
+3. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -122,15 +131,20 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][6]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                             |
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "kong", "service": "<サービス名>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `kong` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `kong` を探します。
 
 ## 収集データ
 
@@ -149,19 +163,14 @@ Agent が Kong に接続してメトリクスを収集できない場合は、`C
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 ## その他の参考資料
 
-- [新しい Datadog インテグレーションを使用した Kong の監視][10]
+- [新しい Datadog インテグレーションを使用した Kong の監視][4]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-kong-datadog
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.datadoghq.com/blog/monitor-kong-datadog

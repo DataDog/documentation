@@ -86,8 +86,6 @@ instances:
 
 バージョン 19.1 以降の Gunicorn では、[DogStatsD][7] のような StatsD プロトコルを実装するデーモンにメトリクスを送信する[オプションが提供][6]されるようになりました。Gunicorn の多くのオプションと同様に、このオプションは CLI (`--statsd-host`) で `gunicorn` に渡すか、アプリの構成ファイル (`statsd_host`) で設定できます。`"localhost:8125"` で DogStatsD へメトリクスを送信するようにアプリを構成し、アプリを再起動します。
 
-**注**: このオプションを使用する場合は、`gunicorn.d/conf.yaml` にメトリクス収集の構成ブロックを**追加しない**でください。つまり、Gunicorn を DogStatsD に接続する場合は、このドキュメントの[メトリクスの収集](#metric-collection)セクションの説明は無視してください。
-
 #### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_

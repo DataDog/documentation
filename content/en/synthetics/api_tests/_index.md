@@ -173,7 +173,7 @@ You can decide the number of retries needed to consider a location as *failed*. 
 
 ### Use global variables
 
-You can use the [global variables defined in the `Settings`][3] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the `Settings`][2] in the URL, Advanced Options, and in the assertions of your API tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/usingvariablesapi.mp4" alt="Using Variables in API tests" video="true"  width="80%" >}}
 
@@ -181,8 +181,8 @@ You can use the [global variables defined in the `Settings`][3] in the URL, Adva
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][4] to receive notifications. **Note**: [`@-notifications`][5] are available in the **message** field, similar to monitors.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+1. Select users and/or [services][3] to receive notifications. **Note**: [`@-notifications`][4] are available in the **message** field, similar to monitors.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -222,7 +222,7 @@ A test is considered `FAILED` if it does not satisfy its assertions or if the re
 | `CONNRESET`       | The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.                                                                                                                                                                                                                                                         |
 | DNS               | DNS entry not found for the check URL. Possible causes include misconfigured check URL, wrong configuration of your DNS entries, etc.                                                                                                                                                                                                                                                                                                                  |
 | `INVALID_REQUEST` | The configuration of the check is invalid (for example, a typo in the URL).                                                                                                                                                                                                                                                                                                                                                                                     |
-| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][2].                                                                                                                                                                                                                                                                                                                                                      |
+| `SSL`             | The SSL connection couldn't be performed. [See the dedicated error page for more information][7].                                                                                                                                                                                                                                                                                                                                                      |
 | `TIMEOUT`         | The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen. `TIMEOUT: The request couldn’t be completed in a reasonable time.` indicates that the timeout happened at the TCP socket connection level. `TIMEOUT: Retrieving the response couldn’t be completed in a reasonable time.` indicates that the timeout happened on the overall run (which includes TCP socket connection, data transfer, and assertions). |
 
 If a test fails, the uptime directly considers the endpoint to be `down`. It is not retested until the next test run.
@@ -232,9 +232,9 @@ If a test fails, the uptime directly considers the endpoint to be `down`. It is 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/#get-available-locations
-[2]: /synthetics/api_tests/errors/#ssl-errors
-[3]: /synthetics/settings/#global-variables
-[4]: /integrations/#cat-notification
-[5]: /monitors/notifications/#notification
-[6]: http://daringfireball.net/projects/markdown/syntax
-[7]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[2]: /synthetics/settings/#global-variables
+[3]: /integrations/#cat-notification
+[4]: /monitors/notifications/#notification
+[5]: http://daringfireball.net/projects/markdown/syntax
+[6]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /synthetics/api_tests/errors/#ssl-errors

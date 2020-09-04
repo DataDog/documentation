@@ -23,6 +23,10 @@ left:
             link: "https://www.datadoghq.com/product/apm/"
             title: "APM"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
+          - name: product_profiler
+            link: "https://www.datadoghq.com/product/code-profiling/"
+            title: "Continuous Profiler"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
           - name: product_security
             link: "https://www.datadoghq.com/product/security-monitoring/"
             title: "Security Monitoring"
@@ -89,6 +93,18 @@ left:
         category: industry
         link: "https://www.datadoghq.com/solutions/technology/"
         title: "Technology"
+      - name: "Amazon Web Services"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/aws/"
+        title: "Amazon Web Services"
+      - name: "Google Cloud Platform"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/gcp/"
+        title: "Google Cloud Platform"
+      - name: "Kubernetes"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/kubernetes/"
+        title: "Kubernetes"
       - name: solutions_gaming
         category: industry
         link: "https://www.datadoghq.com/solutions/gaming/"

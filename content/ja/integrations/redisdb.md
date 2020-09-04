@@ -55,13 +55,16 @@ Redis チェックは [Datadog Agent][1] パッケージに含まれています
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `redisdb.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.d/conf.yaml のサンプル][3]を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `redisdb.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.d/conf.yaml のサンプル][2]を参照してください。
 
    ```yaml
    init_config:
@@ -84,9 +87,9 @@ Redis チェックは [Datadog Agent][1] パッケージに含まれています
        # password: <PASSWORD>
    ```
 
-2. Redis 6+ および ACL を使用している場合は、ユーザーが少なくともデータベースレベルで `DB  Viewer` 権限を、クラスター環境で実行している場合は `Cluster Viewer` 権限を所有していることを確認します。詳細は、[関連ドキュメント][4]を参照してください。
+2. Redis 6+ および ACL を使用している場合は、ユーザーが少なくともデータベースレベルで `DB  Viewer` 権限を、クラスター環境で実行している場合は `Cluster Viewer` 権限を所有していることを確認します。詳細は、[関連ドキュメント][3]を参照してください。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][4]。
 
 ##### ログの収集
 
@@ -108,21 +111,30 @@ _Agent バージョン 6.0 以降で利用可能_
        service: myapplication
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.yaml のサンプル][3]を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.yaml のサンプル][2]を参照してください。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][4]。
 
 ##### トレースの収集
 
 Datadog APM は、Redis と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][6]。
-2. [Redis へのリクエストを作成するアプリケーションをインスツルメントします][7]。
+1. [Datadog でトレースの収集を有効にします][5]。
+2. [Redis へのリクエストを作成するアプリケーションをインスツルメントします][6]。
 
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[3]: https://docs.redislabs.com/latest/rs/administering/access-control/user-roles/#cluster-management-roles
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[6]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -136,7 +148,7 @@ Datadog APM は、Redis と統合して分散システム全体のトレース�
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][9]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
@@ -154,14 +166,21 @@ Agent コンテナで必要な環境変数
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][10]および [Kubernetes Daemon のセットアップ][11]を参照してください。
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][3]および [Kubernetes Daemon のセットアップ][4]を参照してください。
 
-次に、[アプリケーションコンテナをインスツルメント][7]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
+次に、[アプリケーションコンテナをインスツルメント][5]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[5]: https://docs.datadoghq.com/ja/tracing/setup/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][12]し、Checks セクションで `redisdb` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `redisdb` を探します。
 
 ## 収集データ
 
@@ -183,7 +202,7 @@ Agent が Redis に接続してメトリクスを収集できない場合は、`
 
 ## トラブルシューティング
 
-- [Redis インテグレーションエラー: "unknown command 'CONFIG'"][14]
+- [Redis インテグレーションエラー: "unknown command 'CONFIG'"][3]
 
 ### Agent が接続できない
 
@@ -211,20 +230,10 @@ Agent が Redis に接続してメトリクスを収集できない場合は、`
 
 お役に立つドキュメント、リンクや記事:
 
-- [Redis パフォーマンスメトリクスの監視方法][15]
+- [Redis パフォーマンスメトリクスの監視方法][4]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[4]: https://docs.redislabs.com/latest/rs/administering/access-control/user-roles/#cluster-management-roles
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[7]: https://docs.datadoghq.com/ja/tracing/setup/
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[10]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/metadata.csv
-[14]: https://docs.datadoghq.com/ja/integrations/faq/redis-integration-error-unknown-command-config/
-[15]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/integrations/faq/redis-integration-error-unknown-command-config/
+[4]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

@@ -147,6 +147,14 @@ Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST
       fieldPath: status.hostIP
 ```
 
+To set a different service name per Ingress using annotations:
+
+```yaml
+  nginx.ingress.kubernetes.io/configuration-snippet: |
+      opentracing_tag "service.name" "custom-service-name";
+```
+The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -26,7 +26,7 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 | PHP | 0.47.0+  |
 | Go | 1.26.0+  |
 | NodeJS | 0.23.0+  |
-| Python | 0.41 (once available)  |
+| Python | 0.41+  |
 | Ruby | 0.38+  |
 | C++ | 1.2.0+ |
 
@@ -48,7 +48,7 @@ There are a number of configuration options available to scrub sensitive data or
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace (preferrably) or screenshots, for example, and tell us what you expect to see.**
+1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell us what you expect to see.**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 

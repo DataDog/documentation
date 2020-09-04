@@ -56,11 +56,14 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `spark.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][5] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `spark.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル spark.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -81,11 +84,17 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
        # spark_proxy_enabled: true # if you have enabled the spark UI proxy
    ```
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][7]をガイドとして参照して、次のパラメーターを適用します。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                             |
 | -------------------- | ----------------------------------------------------------------- |
@@ -102,7 +111,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
        logs_enabled: true
      ```
 
-2. `spark.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][5] を参照してください。
+2. `spark.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][2] を参照してください。
 
       ```yaml
        logs:
@@ -117,14 +126,20 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
            #     name: new_log_start_with_date
      ```
 
-3. [Agent を再起動します][6]。
+3. [Agent を再起動します][3]。
 
-Docker環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][8]を参照してください。
+Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: 
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-Agent の [status サブコマンド][9]を実行し、Checks セクションで `spark` を探します。
+Agent の [status サブコマンド][4]を実行し、Checks セクションで `spark` を探します。
 
 ## 収集データ
 
@@ -159,25 +174,20 @@ Agent が Spark インスタンスの ResourceManager に接続できない場�
 
 ### AWS EMR 上の Spark
 
-AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][11]して [Datadog Agent][12] をインストールし、[各 EMR ノードに正しい値が指定][13]された `/etc/dd-agent/conf.d/spark.yaml` コンフィギュレーションファイルを作成します。
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][5]して [Datadog Agent][6] をインストールし、[各 EMR ノードに正しい値が指定][7]された `/etc/dd-agent/conf.d/spark.yaml` コンフィギュレーションファイルを作成します。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Hadoop と Spark の監視][14]
+- [Datadog を使用した Hadoop と Spark の監視][8]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
 [2]: https://spark.apache.org/
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[8]: 
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/spark/metadata.csv
-[11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[12]: https://docs.datadoghq.com/ja/agent/
-[13]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[14]: https://www.datadoghq.com/blog/monitoring-spark
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
+[6]: https://docs.datadoghq.com/ja/agent/
+[7]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[8]: https://www.datadoghq.com/blog/monitoring-spark

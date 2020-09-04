@@ -64,13 +64,16 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `pgbouncer.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル pgbouncer.d/conf.yaml][3] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `pgbouncer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -82,7 +85,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -104,13 +107,20 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル pgbouncer.d/conf.yaml][3] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][4]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -124,15 +134,20 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
 | `<LOG_CONFIG>` | {"source": "pgbouncer", "service": "pgbouncer"} |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `pgbouncer` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `pgbouncer` を探します。
 
 ## 収集データ
 
@@ -153,14 +168,9 @@ Agent が PgBouncer に接続してメトリクスを収集できない場合は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

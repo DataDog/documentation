@@ -27,7 +27,7 @@ Utilisez le tableau suivant pour dépanner les éventuels problèmes que vous po
 Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[équipe d'assistance Datadog][9].
 
 [1]: /fr/serverless/#getting-started
-[2]: /fr/serverless/installation/installing_the_forwarder
+[2]: /fr/serverless/forwarder
 [3]: /fr/serverless/installation/installing_the_library
 [4]: /fr/integrations/amazon_lambda/#metric-collection
 [5]: /fr/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics

@@ -307,8 +307,8 @@ Resource Group Tagging API の主な用途は、カスタム タグの収集に�
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose 宛先][70]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog 
-- [Cloudformation][71]: Deploy the Datadog Lambda function which subscribes to S3 buckets or Cloudwatch log group and forward logs to Datadog
+- [Kinesis Firehose destination][70]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します
+- [Cloudformation][71]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Lambda 関数をデプロイし、ログを Datadog に転送します
 
 ログを**複数の宛先**に送信する場合、Kinesis Firehose 宛先の利用を強くお勧めします。CloudWatch Log グループは 1 つのサブスクライバーしか持てませんが、Kinesis ストリームは複数のサブスクライバーを持つことができます。Kinesis ストリームをロググループにサブスクライブさせることで、Kinesisストリームをサブスクライブしているログデータのコンシューマーを複数持つことができます。
 

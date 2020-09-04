@@ -1,5 +1,5 @@
 ---
-title: Kubernetes trace collection
+title: Kubernetes Trace Collection
 kind: documentation
 aliases:
     - /agent/kubernetes/apm
@@ -85,7 +85,10 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
 {{< /tabs >}}
    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
+2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**:
+
+  - Automatically with the [Datadog Admission Controller][2], or
+  - Manually using the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
     ```yaml
         apiVersion: apps/v1
@@ -102,19 +105,19 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
                         fieldPath: status.hostIP
     ```
 
-3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][2] for more examples.
+3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][3] for more examples.
 
 ## Agent Environment Variables
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
 
 List of all environment variables available for tracing within the Agent running in Kubernetes:
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API Key][2]                                                                                                                                                                                                                                                                                                        |
+| `DD_API_KEY`               | [Datadog API Key][3]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
-| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][4].                                                                                                                                                                                                                                                                            |
+| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][5].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_RECEIVER_SOCKET`  | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                            |
@@ -126,8 +129,8 @@ List of all environment variables available for tracing within the Agent running
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                           |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when tracing from other containers. Default value is `true` (Agent 7.18+)                                                                                                                                                                                                                               |
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                          |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][5] with the configuration parameter in the Tracing Client. |
-| `DD_ENV`               | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable will be used. See [APM environment setup][6] for more details.                                                                                                                                                                                                                                                                         |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][6] with the configuration parameter in the Tracing Client. |
+| `DD_ENV`               | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable will be used. See [APM environment setup][7] for more details.                                                                                                                                                                                                                                                                         |
 | `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                               |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second. Default is 10 traces per second.                                                                                                                                                                                                                                                        |
 
@@ -136,8 +139,9 @@ List of all environment variables available for tracing within the Agent running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/kubernetes/
-[2]: /tracing/setup/
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /tracing/guide/security/#replace-rules
-[5]: /tracing/app_analytics/#automatic-configuration
-[6]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[2]: /agent/cluster_agent/admission_controller/
+[3]: /tracing/setup/
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /tracing/guide/security/#replace-rules
+[6]: /tracing/app_analytics/#automatic-configuration
+[7]: /tracing/guide/setting_primary_tags_to_scope/#environment

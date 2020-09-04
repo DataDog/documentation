@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     CockroachDB Overview: assets/dashboards/overview.json
   logs: {}
@@ -44,29 +46,42 @@ CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健
 CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cockroachdb.d/conf.yaml][4] を参照してください。
+1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                    |
 | -------------------- | -------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `cockroachdb`                                            |
-| `<INIT_CONFIG>`      | 空白または `{}`                                            |
-| `<INSTANCE_CONFIG>`  | `{"prometheus_url":"http://%%host%%:8080/_status/vars"}` |
+| `<インテグレーション名>` | `cockroachdb`                                            |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                            |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url":"http://%%host%%:8080/_status/vars"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `cockroachdb` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cockroachdb` を探します。
 
 ## 収集データ
 
@@ -74,7 +89,7 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 {{< get-metrics-from-git "cockroachdb" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 CockroachDB チェックには、サービスのチェック機能は含まれません。
 
@@ -84,21 +99,17 @@ CockroachDB チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した CockroachDB パフォーマンスメトリクスの監視][10]
+- [Datadog を使用した CockroachDB パフォーマンスメトリクスの監視][5]
+
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[4]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog

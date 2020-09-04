@@ -13,19 +13,6 @@ $footer-font-color: rgba(255, 255, 255, 0.5);
 $footer-font-color-hover: rgba(255, 255, 255, 1);
 
 body {
-    &.fr,
-    &.ja {
-        /* Margin bottom by footer height on fr page */
-        footer {
-            height: 100%;
-            @media (min-width: 992px) {
-                height: 580px;
-            }
-            @media (min-width: 1200px) {
-                height: 520px;
-            }
-        }
-    }
     footer {
         position: absolute;
         z-index: 3;

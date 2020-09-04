@@ -98,6 +98,23 @@ Datadog Chef クックブックは 12.7 以降の `chef-client` と互換性が�
 
 5. 次に予定されている `chef-client` の実行を待つか、手動でこれをトリガーします。
 
+### Docker 化された環境
+
+Docker 環境を構築するには、`docker_test_env` の下のファイルを使用します。
+
+```
+cd docker_test_env
+docker build -t chef-datadog-container .
+```
+
+コンテナを実行するには、以下を使用します。
+
+```
+docker run -d -v /dev/vboxdrv:/dev/vboxdrv --privileged=true chef-datadog-container
+```
+
+次に、コンソールをコンテナにアタッチするか、VScode リモートコンテナ機能を使用してコンテナ内で開発します。
+
 #### Datadog の属性
 
 [Datadog API キーとアプリケーションキー][4]の追加には、下記のメソッドを使用できます。
@@ -353,8 +370,9 @@ Datadog インテグレーションの特定のバージョンをインストー
 
 ```ruby
 datadog_integration 'name' do
-  version                      String # インストールするバージョン :install action
-  action                       Symbol # デフォルトに設定 :install
+  version                      String         # インストールするバージョン :install action
+  action                       Symbol         # デフォルトに設定 :install
+  third_party                  [true, false]  # デフォルトに設定 :false
 end
 ```
 
@@ -362,6 +380,7 @@ end
 
 - `'name'`: インストールする Agent インテグレーションの名前。例: `datadog-apache`。
 - `version`: インストールするインテグレーションのバージョン (`:install` アクションでのみ必須)。
+- `third_party`: Datadog インテグレーションをインストールする場合は false に設定し、それ以外の場合は true に設定します。Datadog Agent バージョン 6.21/7.21 以降でのみ使用できます。
 
 #### 例
 

@@ -28,6 +28,7 @@ further_reading:
     {{< nextlink href="/monitors/notifications" >}}<u>通知</u>: モニターが作成されると、その条件が満たされると通知されます。また、メール、サードパーティサービス（Pagerduty など）、または Webhook を使用した他のカスタムエンドポイントでチームメンバーに通知することもできます。{{< /nextlink >}}
     {{< nextlink href="/monitors/downtimes" >}}<u>ダウンタイム</u>: モニターをトリガーせずに、システムのシャットダウン、オフライン保守、またはアップグレードのダウンタイムをスケジュールします。{{< /nextlink >}}
     {{< nextlink href="/monitors/service_level_objectives" >}}<u>サービスレベル目標</u>: メトリクスまたは既存の Datadog モニターを使用して、サービスレベル目標を作成、編集または表示します。{{< /nextlink >}}
+   {{< nextlink href="/monitors/incident_management" >}}<u>インシデント管理</u>: インシデントを宣言して管理します。{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>ガイド</u>: モニターとアラートに関するその他の役に立つ記事。{{< /nextlink >}}
 {{< /whatsnext >}}
 

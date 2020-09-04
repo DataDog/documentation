@@ -3,6 +3,8 @@ aliases:
   - /ja/088-a06-67c
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: elb
 security: attack
 source: elb

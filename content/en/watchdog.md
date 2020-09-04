@@ -66,6 +66,10 @@ The screenshot below shows a Watchdog story, starting with a summary of the issu
 
 {{< img src="watchdog/watchdog_dep_map.png" alt="Watchdog dependency map"  style="width:75%;">}}
 
+##### Related Dashboards
+
+To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 
+
 ##### Monitors
 
 Monitors associated with your stories are displayed at the bottom. Each monitor displayed has the metric of the current story and its associated tags included in its scope.

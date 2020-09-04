@@ -9,14 +9,14 @@ further_reading:
     tag: Documentation
     text: Ruby サーバーレスモニタリングのインストール
 ---
-[AWS インテグレーションをインストール][1]したら、以下のいずれかの方法を選択してアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下のいずれかの方法を選択してアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
 ## 構成
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-コードを変更せずにメトリクス、ログ、トレースをアプリケーションから Datadog へ送信するには、[Datadog サーバーレスプラグイン][1]を使用します。プラグインにより、Node.js 用 Datadog Lambda ライブラリがレイヤーを使用した関数に自動的にアタッチされます。そしてデプロイ時に、元の関数ハンドラーは、Datadog Lambda ライブラリを初期化し元の関数ハンドラーを呼び出す Datadog 提供ハンドラーに置き換えられます。また、これにより Lambda 関数の Datadog および X-Ray トレーシングが可能になります。
+[Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
 Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
 
@@ -36,185 +36,146 @@ Datadog サーバーレスプラグインをインストールして構成する
         flushMetricsToLogs: true
         forwarder: # The Datadog Forwarder ARN goes here.
     ```
-    Forwarder ARN について、および Forwarder のインストール方法に関する詳細は、[Forwarder ドキュメント][2]をご参照ください。
-4. サーバーレスアプリケーションを再デプロイします。
+   Datadog Forwarder ARN またはインストールの詳細については、[こちら][2]を参照してください。追加の設定については、[プラグインのドキュメント][1]を参照してください。
 
 [1]: https://github.com/DataDog/serverless-plugin-datadog
-[2]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
-
 <div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
-### Datadog CloudFormation マクロのデプロイ
+[Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-コードをインスツルメントせずにアプリケーションからトレースを取り込むには、[Datadog CloudFormation マクロ][1]を使用します。マクロは、Node.js と Python 用の Datadog Lambda ライブラリを関数に自動的にアタッチします。デプロイ時に、既存の関数をラップする新しいハンドラー関数を生成し、Lambda ライブラリを初期化します。
+### Datadog CloudFormation マクロのインストール
 
-マクロをインストールするには、次の手順に従います。
+[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに一度だけマクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
-1. ローカル環境で Datadog CloudFormation マクロレポジトリのクローンを作成します。
+```sh
+aws cloudformation create-stack \
+  --stack-name datadog-serverless-macro \
+  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
-git clone https://github.com/DataDog/datadog-cloudformation-macro.git
-```
-2. マクロとその依存関係をインストールします。
-```
-yarn install # Yarn users
-npm install  # NPM users
-```
-3. ビルドスクリプトを実行します。
-```
-yarn build    # Yarn users
-npm run build # NPM users
-```
-
-Lambda 関数と同じリージョンにマクロをデプロイします。Lambda 関数を監視するすべてのリージョンにマクロをデプロイする必要があります。
-
-4. マクロ用に CloudFormation アーティファクトを保存するには S3 バケットが必要です。まだバケットがない場合は、作成できます。
-
-    ```bash
-      aws s3 mb s3://<bucket name>
-    ```
-
-5. 提供されている CloudFormation テンプレート (`macro_template.yml`) のパッケージを実行します。これには、Lambda 関数および CloudFormation マクロソースが含まれます。このテンプレートは AWS Serverless Application Model (SAM) を使用するため、デプロイ前に変化する必要があります。
-
- ```bash
-    aws cloudformation package \
-        --template-file macro_template.yml \
-        --s3-bucket <your bucket name here> \
-        --output-template-file packaged.template
-    ```
-
-6. パッケージ化された CloudFormation テンプレートを CloudFormation スタックにデプロイします。
-
-    ```bash
-    aws cloudformation deploy \
-        --stack-name datadog-cfn-macro \
-        --template-file packaged.template \
-        --capabilities CAPABILITY_IAM
-    ```
 
 マクロが表示され、使用を開始できます。
 
-### Datadog Lambda ライブラリのインストール
+### 関数をインスツルメントする
 
-コードをインスツルメントせずにアプリケーションからトレース、ログ、拡張メトリクスを取り込むには、Datadog CloudFormation マクロを使用します。マクロは、Node.js と Python 用の Datadog Lambda ライブラリを関数に自動的にアタッチします。デプロイ時に、既存の関数をラップする新しいハンドラー関数を生成し、Lambda ライブラリを初期化します。
+`template.yml` で、SAM の `AWS::Serverless` 変換の**後に**、`Transform` セクションの下に以下を追加します。
 
-CloudFormation マクロを使用して Datadog Lambda ライブラリをインストールするには、次の手順に従います。
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      stackName: !Ref "AWS::StackName"
+      nodeLayerVersion: "<LAYER_VERSION>"
+      forwarderArn: "<FORWARDER_ARN>"
+      service: "<SERVICE>" # オプション
+      env: "<ENV>" # オプション
+```
 
-1. `template.yml` に以下を追加します。
-  ```
-  Transform:
-      - Name: DatadogCfnMacro
-      Parameters:
-        enableDDTracing: true
-              flushMetricsToLogs: true
-        stackName: !Ref "AWS::StackName"
-              forwarderArn: "arn:aws:lambda:<REGION>:<ACCOUNT-ID>:function:datadog-forwarder"
-  ```
-  Datadog Forwarder ARN は、[AWS コンソール][2]にあります。Forwarder のインストールに関する詳細は、[公式ドキュメント][3]をご参照ください。
+`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 
-2. サーバーレスアプリケーションを再デプロイします。
-
+[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
-[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://github.com/DataDog/datadog-lambda-js/releases
 {{% /tab %}}
-
 {{% tab "AWS CDK" %}}
 
 <div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
-### Datadog CloudFormation マクロのデプロイ
+[Datadog CloudFormation マクロ][1]は、AWS CDK によって生成された CloudFormation テンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-コードをインスツルメントせずにアプリケーションからトレースを取り込むには、[Datadog CloudFormation マクロ][1]を使用します。マクロは、Node.js と Python 用の Datadog Lambda ライブラリを関数に自動的にアタッチします。デプロイ時に、既存の関数をラップする新しいハンドラー関数を生成し、Lambda ライブラリを初期化します。
+### Datadog CloudFormation マクロのインストール
 
-マクロをインストールするには、次の手順に従います。
+[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定の地域に**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
-1. ローカル環境で Datadog CloudFormation マクロレポジトリのクローンを作成します。
-
-    ```
-    git clone https://github.com/DataDog/datadog-cloudformation-macro.git
-    ```
-
-2. マクロとその依存関係をインストールします。
-
-    ```
-    yarn install # Yarn users
-    npm install  # NPM users
-    ```
-
-3. ビルドスクリプトを実行します。
-
-    ```
-    yarn build    # Yarn users
-    npm run build # NPM users
-    ```
-
-Lambda 関数と同じリージョンにマクロをデプロイします。Lambda 関数を監視するすべてのリージョンにマクロをデプロイする必要があります。
-
-4. マクロ用に CloudFormation アーティファクトを保存するには S3 バケットが必要です。まだバケットがない場合は、作成できます。
-
-    ```bash
-      aws s3 mb s3://<bucket name>
-    ```
-
-5. 提供されている CloudFormation テンプレート (`macro_template.yml`) のパッケージを実行します。これには、Lambda 関数および CloudFormation マクロソースが含まれます。このテンプレートは AWS Serverless Application Model (SAM) を使用するため、デプロイ前に変化する必要があります。
-
-    ```bash
-    aws cloudformation package \
-        --template-file macro_template.yml \
-        --s3-bucket <your bucket name here> \
-        --output-template-file packaged.template
-    ```
-
-6. パッケージ化された CloudFormation テンプレートを CloudFormation スタックにデプロイします。
-
-    ```bash
-    aws cloudformation deploy \
-        --stack-name datadog-cfn-macro \
-        --template-file packaged.template \
-        --capabilities CAPABILITY_IAM
-    ```
+```sh
+aws cloudformation create-stack \
+  --stack-name datadog-serverless-macro \
+  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+```
 
 マクロが表示され、使用を開始できます。
 
-### Datadog Lambda ライブラリのインストール
+### 関数をインスツルメントする
 
-コードをインスツルメントせずにアプリケーションからトレース、ログ、拡張メトリクスを取り込むには、Datadog CloudFormation マクロを使用します。マクロは、Node.js と Python 用の Datadog Lambda ライブラリを関数に自動的にアタッチします。デプロイ時に、既存の関数をラップする新しいハンドラー関数を生成し、Lambda ライブラリを初期化します。
+AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の TypeScript のサンプルコードを参照してください (他の言語での使用方法も同様です)。
 
-CloudFormation マクロを使用して Datadog Lambda ライブラリをインストールするには、次の手順に従います。
+```typescript
+import * as cdk from "@aws-cdk/core";
 
-1. AWS CDK アプリで、`CfnMapping` を `Stack` オブジェクトに追加します。
-  ```typescript
-      import * as cdk from "@aws-cdk/core";
+class CdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    this.addTransform("DatadogServerless");
 
-      class CdkStack extends cdk.Stack {
-        constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-          super(scope, id, props);
-          this.addTransform("DatadogCfnMacro");
+    new cdk.CfnMapping(this, "Datadog", {
+      mapping: {
+        Parameters: {
+          nodeLayerVersion: "<LAYER_VERSION>",
+          forwarderArn: "<FORWARDER_ARN>",
+          stackName: this.stackName,
+          service: "<SERVICE>", // オプション
+          env: "<ENV>", // オプション
+        },
+      },
+    });
+  }
+}
+```
 
-          new cdk.CfnMapping(this, "Datadog", {
-            mapping: {
-              Parameters: {
-                forwarderArn: "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder",
-                stackName: this.stackName,
-                enableDDTracing: true,
-                flushMetricsToLogs: true,
-              },
-            },
-          });
-        }
-      }
-  ```
-    Datadog Forwarder ARN は、[AWS コンソール][2]にあります。Forwarder のインストールに関する詳細は、[公式ドキュメント][3]をご参照ください。
+`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][3]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 
-2. サーバーレスアプリケーションを再デプロイします。
-
+[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://github.com/DataDog/datadog-cloudformation-macro
-[2]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=forwarder
-[3]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-js/releases
+{{% /tab %}}
+{{% tab "Datadog CLI" %}}
+
+<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+
+Datadog CLI を使用して、CI/CD パイプラインの Lambda 関数にインスツルメンテーションを設定します。CLI コマンドは、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、メトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+
+### Datadog CLI のインストール
+
+NPM または Yarn を使用して Datadog CLI をインストールします。
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
+```
+
+### 関数をインスツルメントする
+
+[AWS 認証情報][1]を使用して次のコマンドを実行します。`<functionname>` と `<another_functionname>` を Lambda 関数名に置き換え、`<aws_region>` を AWS リージョン名に置き換え、`<layer_version>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][2]を参照)、`<forwarder_arn>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][3]を参照)。
+
+```sh
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder <forwarder_arn>
+```
+
+例:
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 26 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+```
+
+[CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://github.com/DataDog/datadog-lambda-js/releases
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -229,7 +190,11 @@ Datadog Lambda ライブラリは、レイヤーまたは JavaScript パッケ�
 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
 
 ```
+# 通常のリージョンの場合
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# 米国政府リージョンの場合
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
 使用できる `RUNTIME` オプションは、`Node8-10`、`Node10-x`、`Node12-x` です。`VERSION` については、[最新リリース][2]を参照してください。例:
@@ -274,32 +239,36 @@ yarn add datadog-lambda-js
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder
-[5]: https://docs.datadoghq.com/ja/serverless/troubleshooting/installing_the_forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#send-aws-service-logs-to-datadog
+[4]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless ページ][2]でメトリクス、ログ、トレースを確認できるようになります。カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
+以上の方法で関数を構成すると、[Serverless Homepage][2] でメトリクス、ログ、トレースを確認できるようになります。
+
+カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
 
 ```javascript
 const { sendDistributionMetric } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// これにより、"sleep" という名前のスパンが生成
+// "sleep" という名前のカスタム APM スパンを送信します
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
   await sleep(1000);
+
+  // カスタムメトリクスを送信します
   sendDistributionMetric(
-    "coffee_house.order_value", // metric name
+    "coffee_house.order_value", // メトリクス名
     12.45, // metric Value
-    "product:latte", // tag
-    "order:online", // another tag
+    "product:latte", // タグ
+    "order:online", // 別のタグ
   );
   const response = {
     statusCode: 200,
@@ -309,5 +278,5 @@ exports.handler = async (event) => {
 };
 ```
 
-[1]: /ja/serverless/#1-install-the-cloud-integration
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/functions

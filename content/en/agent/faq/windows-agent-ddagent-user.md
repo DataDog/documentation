@@ -11,6 +11,7 @@ The user `ddagentuser` is created at install time for the Datadog Windows Agent.
 * It becomes a member of the “Performance Monitor Users” group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
+* It becomes a member of the “Event Log Readers” group
 * It has local login disabled
 * It has remote login disabled
 * It has network login disabled
@@ -34,6 +35,11 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD
 ```
 
 For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
+
+Additionally, the installer adds the user to the following groups:
+
+* Performance Monitoring
+* Event Log Viewer
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
