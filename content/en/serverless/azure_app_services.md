@@ -57,9 +57,13 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 8. Restart the main application: click **Stop**, wait for a full stop, then click **Start**.
     {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
 
-### Logs and traces
+### Logging from Azure Web Apps
 
-Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][8]. **Note**: Agentless logging is not available for this extension.
+Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][8]. **Note**: The Eventhub must be located in the same region as your web application.
+
+Once the Eventhub and forwarder function are configured, create a diagnostic setting for your web application. Select the logs you want to send to Datadog:
+
+{{< img src="serverless/azure_diagnostics.png" alt="Diagnostics Settings" >}}
 
 Once you establish the logging pipeline for your application, Trace ID injection allows you to [connect logs and traces][9] in Datadog. To enable this with the extension, add an application setting `DD_LOGS_INJECTION:true`.
 
@@ -99,7 +103,7 @@ Still need help? Contact [Datadog support][11].
 [5]: /tracing/setup/dotnet/
 [6]: https://portal.azure.com
 [7]: https://app.datadoghq.com/account/settings#api
-[8]: /integrations/azure/?tab=eventhub
+[8]: /integrations/azure/?tab=eventhub#log-collection
 [9]: /tracing/connect_logs_and_traces/
 [10]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
 [11]: /help/
