@@ -118,9 +118,12 @@ Agent の実行は、Windows サービスコントロールマネージャーに
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* メインの実行可能ファイル名は `agent.exe` です。
+* メインの実行可能ファイルは `agent.exe` です。場所は以下の通り、Agent のバージョンにより異なります。
+    - Agent バージョン 6.11 以前: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
+    - Agent バージョン 6.12 以降: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * 構成 GUI は、ブラウザベースの構成アプリケーションです (Windows 64 ビット版のみ)。
-* コマンドは、コマンドライン `"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" <コマンド>` (Agent バージョンが >= 6.12 の場合) または `"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" <コマンド>` (Agent バージョンが <= 6.11 の場合) から実行できます。コマンドラインのオプションは次のとおりです:
+* コマンドは**管理者特権 (管理者として実行)**のコマンドライン (PowerShell  またはコマンドプロンプト) から、構文 `<PATH_TO_AGENT.EXE> <COMMAND>` を使用して実行できます。
+* コマンドラインのオプションは次の通りです。
 
 | コマンド         | 説明                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -141,6 +144,23 @@ Agent の実行は、Windows サービスコントロールマネージャーに
 | status          | 現在のステータスを出力します。                                                        |
 | stopservice     | サービスコントロールマネージャー内で Agent を停止します。                              |
 | version         | バージョン情報を出力します。                                                         |
+
+* 例:
+  - PowerShell (`powershell.exe`)
+
+    ```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
+    ```
+
+  - コマンドプロンプト (`cmd.exe`)
+
+    ```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+    ```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -167,19 +187,13 @@ Windows Powershell で、次のコマンドを使用することもできます�
 {{% tab "Agent v6 & v7" %}}
 メインの Agent 構成ファイルの場所:
 `C:\ProgramData\Datadog\datadog.yaml`
-
-[インテグレーション][1]用構成ファイルの場所:
-`C:\ProgramData\Datadog\conf.d\` または
-`C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
-
-**注**: `ProgramData` は隠しフォルダーです。
-
-[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 メインの Agent 構成ファイルの場所:
 `C:\ProgramData\Datadog\datadog.conf`
+{{% /tab %}}
+{{< /tabs >}}
 
 [インテグレーション][1]用構成ファイルの場所:
 `C:\ProgramData\Datadog\conf.d\` または
@@ -188,8 +202,6 @@ Windows Powershell で、次のコマンドを使用することもできます�
 **注**: `ProgramData` は隠しフォルダーです。
 
 [1]: /ja/integrations/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## トラブルシューティング
 
@@ -203,7 +215,9 @@ Agent が実行されていることを確認するには、サービスパネ�
 Agent の状態に関する詳細な情報が必要な場合は、次のようにして Datadog Agent Manager を起動します。
 
 * Datadog Agent のシステムトレイアイコンを右クリックし、"構成" を選択します。
-* 管理者 Powershell プロンプトから `& "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui` (Agent バージョンが >= 6.12 の場合) または `& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` (Agent バージョンが <= 6.11 の場合) を実行します
+* **管理者特権 (管理者として実行)**のコマンドラインから `launch-gui` コマンドを実行
+    - PowerShell: `& "<PATH_TO_AGENT.EXE>" launch-gui`
+    - cmd: `"<PATH_TO_AGENT.EXE>" launch-gui`
 
 次に、Status -> General と移動して、ステータスページを開きます。
 Status -> Collector および Checks -> Summary で、チェックの実行に関する詳細な情報を取得します。
@@ -211,13 +225,13 @@ Status -> Collector および Checks -> Summary で、チェックの実行に�
 Powershell では、次の status コマンドを使用できます。
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 cmd.exe では、次のようにします。
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 {{% /tab %}}
@@ -235,7 +249,7 @@ Agent v3.9.1 ～ v5.1 のステータスを確認する場合は、`http://local
 Powershell では、次の info コマンドを使用できます。
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded<PYTHON_メジャーバージョン>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 cmd.exe では、次のようにします。
@@ -289,6 +303,18 @@ Windows Server 2008/Vista 以降のシステムでは、Agent のログは `C:\P
 
 * Submit を押します。
 
+Powershell では、次の flare コマンドを使用できます。
+
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
+cmd.exe では、次のようにします。
+
+```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Agent 6 を使用した Windows フレア"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
@@ -312,7 +338,7 @@ Datadog のサポートチームに Windows のログと構成のコピーを送
 Powershell では、次の flare コマンドを使用できます。
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <ケース_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 cmd.exe では、次のようにします。
@@ -323,9 +349,12 @@ cmd.exe では、次のようにします。
 
 #### フレアのアップロードの失敗
 
-Linux と macOS では、flare コマンドの出力で、圧縮されたフレアアーカイブが保存されているディレクトリがわかります。Datadog へのファイルアップロードに失敗した場合は、このディレクトリからファイルを取得して、メールの添付ファイルとして手動で追加することができます。
+flare コマンドの出力で、圧縮されたフレアアーカイブが保存されているディレクトリがわかります。Datadog へのファイルアップロードに失敗した場合は、このディレクトリからファイルを取得して、メールの添付ファイルとして手動で追加することができます。フレアファイルの保存場所 (共通) :
+- Linux: `\tmp\`
+- MacOS: `$TMPDIR`
+- Windows: `C:\Users\<DDAGENTUSER>\AppData\Local\Temp\`
 
-Windows の場合、このファイルの場所を見つけるには、Agent の Python コマンドプロンプトから以下を実行します。
+Windows で古いバージョンの Agent を使用している場合、このファイルの場所を見つけるには、Agent の Python コマンドプロンプトから以下を実行します。
 
 **ステップ 1**:
 
