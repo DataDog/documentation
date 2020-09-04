@@ -65,17 +65,21 @@ LOG_STREAM_SCHEMA = {
 }
 ```
 
-| Paramètre     | Type   | Obligatoire | Description                                                                                                                |
-|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| `type`        | chaîne | oui      | Type du widget (utilisez `log_stream` pour le widget Flux de logs)                                                             |
-| `indexes`     | chaîne | non       | Tableau des noms des index à inclure dans le flux.                                                                            |
-| `logset`      | chaîne | non       | Obsolète : utiliser `indexes` à la place. L'ID de l'index à inclure dans le flux.                                             |
-| `query`       | chaîne | non       | Requête à l'aide de laquelle le flux de logs est filtré                                                                                        |
-| `columns`     | tableau  | non       | Les colonnes à afficher sur le widget                                                                                     |
-| `title`       | chaîne | non       | Titre du widget.                                                                                                        |
-| `title_size`  | chaîne | non       | Taille du titre.                                                                                                          |
-| `title_align` | chaîne | non       | Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`.                                                 |
-| `time`        | objet | non       | Définit l'intervalle de temps affiché sur le widget. Consultez la [documentation relative au schéma JSON d'intervalle][5] pour apprendre à élaborer le `TIME_SCHEMA` |
+| Paramètre             | Type    | Obligatoire | Description                                                                                |
+|-----------------------|---------|----------|--------------------------------------------------------------------------------------------|
+| `type`                | Chaîne  | Oui      | Type du widget (utilisez `log_stream` pour le widget Flux de logs).                            |
+| `logset`              | Chaîne  | Non       | (Obsolète) Utiliser `indexes` à la place. L'ID de l'index à inclure dans le flux.            |
+| `indexes`             | Tableau   | Non       | Tableau des noms des index à inclure dans le flux. Utiliser `[]` pour interroger tous les index en même temps.       |
+| `query`               | Chaîne  | Non       | Requête à l'aide de laquelle le flux de logs est filtré.                                                        |
+| `columns`             | Tableau   | Non       | Les colonnes à afficher sur le widget.                                                      |
+| `show_date_column`    | Booléen | Non       | Permet d'afficher ou non la colonne de date.                                                    |
+| `show_message_column` | Booléen | Non       | Permet d'afficher ou non la colonne de message.                                                 |
+| `message_display`     | Chaîne  | Non       | Le nombre de lignes de log à afficher.                                                        |
+| `sort`                | Objet  | Non       | La colonne et l'ordre de tri.                                                           |
+| `title`               | Chaîne  | Non       | Le titre du widget.                                                                   |
+| `title_size`          | Chaîne  | Non       | La taille du titre.                                                                     |
+| `title_align`         | Chaîne  | Non       | Définit comment aligner le titre. Les valeurs disponibles sont `center`, `left` ou `right`.             |
+| `time`                | Objet  | Non       | Définit l'intervalle de temps affiché sur le widget. Pour en savoir plus, consultez la [documentation relative au schéma JSON d'intervalle][4]. |
 
 ## Pour aller plus loin
 
