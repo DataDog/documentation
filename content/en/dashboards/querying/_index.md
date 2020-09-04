@@ -85,6 +85,8 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 Datadog also supports the ability to graph your metrics with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
+To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
+
 #### Metric arithmetic using an integer
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
