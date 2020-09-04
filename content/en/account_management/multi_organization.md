@@ -12,13 +12,13 @@ further_reading:
   text: "Configure SAML for your Datadog account"
 - link: "/account_management/billing/usage_details"
   tag: "Documentation"
-  text: "Understand Usage Details"
+  text: "Learn about Usage Details"
 - link: "/account_management/billing/usage_details"
   tag: "Documentation"
   text: "Set-up Usage Attribution"
 ---
 
-It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends and identify unexpected spikes in usage.
+It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends and manage chargebacks.
 
 Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
 
@@ -60,7 +60,7 @@ To configure SAML for multi-organizations, use the following procedure:
 
 ## Multi-Org Usage
 
-The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left, then navigating to: `Plan & Usage`--> `Multi-Org Usage`. 
+The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`. 
 
 The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
 
@@ -75,23 +75,23 @@ The Overall Usage section summarizes your month-to-date usage of hosts, containe
 
 {{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
 
-The Individual Organization Usage section contains two tabs that breaks down your month-to-date usage of products by organization. The All tab contains a table that lists by product the unadjusted usage of your parent-organization and all child-organizations. To view the [Usage details][9] of a child-organization, you can click on the child-organization's name.
+The Individual Organization Usage section contains two views that breaks down your month-to-date usage of products by organization. The "All" view is a table that lists by product the unadjusted, raw usage of your parent-organization and all child-organizations. To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
 
 {{< img src="account_management/managing-multiorgs-02.png" alt="Month-to-Date Usage" >}}
 
-To view only the usage that will count toward your bill, you can switch to the Billable tab. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
+To view only the usage that will count toward your bill, you can switch to the "Billable" view. This removes organizations that are not billable such as trial organizations in addition to other adjustments that will provide a more accurate summary of what drives your bill.
 
 The month-to-date usage and last month’s usage can be downloaded as a CSV file.
 
 ### Long-Term Trends
 
-This tab shows monthly trends in the aggregate usage across all organizations over the past 6 months. The usage shown is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
+This tab shows the monthly aggregate usage across all organizations over the past 6 months. Similar to the graphs on the [Usage Details][9] page, the usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
 
-For more information on the usage metrics shown in the graphs, please refer to our doc on [Usage Details][9].
+This information can be downloaded as a CSV file.
 
 ## Usage Attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the Usage Attribution page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution will show usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -103,7 +103,7 @@ Functionalities include:
 
 {{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
 
-Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level are not rolled-up and are not viewable in the parent-organization. 
+Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization. 
 
 Note: the following usage types are not supported in this tool:
 * Indexed Log Events
@@ -111,8 +111,6 @@ Note: the following usage types are not supported in this tool:
 * Analyzed Spans
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-
-For more information and to get started, please refer to our doc on [Usage Attribution][10].
 
 ## Further Reading
 
