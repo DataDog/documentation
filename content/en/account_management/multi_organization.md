@@ -13,12 +13,12 @@ further_reading:
 - link: "/account_management/billing/usage_details"
   tag: "Documentation"
   text: "Learn about Usage Details"
-- link: "/account_management/billing/usage_details"
+- link: "/account_management/billing/usage_attribution"
   tag: "Documentation"
   text: "Set-up Usage Attribution"
 ---
 
-It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends and manage chargebacks.
+It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and switch between them from the [user account settings menu][1]. The parent-organization can view the usage of individual child-organizations, allowing them to track trends in usage.
 
 Account settings, such as whitelisted IP addresses, are not inherited by child-organizations from their parent-organization.
 
@@ -85,7 +85,7 @@ The month-to-date usage and last month’s usage can be downloaded as a CSV file
 
 ### Long-Term Trends
 
-This tab shows the monthly aggregate usage across all organizations over the past 6 months. Similar to the graphs on the [Usage Details][9] page, the usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
+This tab shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill.
 
 This information can be downloaded as a CSV file.
 
