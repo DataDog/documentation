@@ -292,5 +292,8 @@
   },
   "description": {
     "other": "説明"
+  },
+  "field": {
+    "other": "Field"
   }
 }
