@@ -119,9 +119,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                 border-left: 2px solid $studioViolet !important;
             }
 
-            // level 1 list
-            & > ul {
-                & > li {
+           
                     // level 2 list
                     & > ul {
                         & > li {
@@ -182,8 +180,8 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                             }
                         }
                     }
-                }
-            }
+                
+            
         }
     }
     @media (min-width: 992px) {
