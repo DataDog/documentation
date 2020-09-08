@@ -68,7 +68,7 @@ RUN ddev -e release build <INTEGRATION_NAME>
 
 FROM datadog/agent:latest
 COPY --from=wheel_builder /wheels/integrations-extras/<INTEGRATION_NAME>/dist/ /dist
-RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
+RUN agent integration install -r -w /dist/*.whl
 ```
 
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
