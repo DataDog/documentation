@@ -23,15 +23,16 @@ Search, access, and manage all of your tests on one page with the [Synthetic Tes
 
 The **Synthetics Filters** panel on the left side of the page lists several default facets you can use to search through your tests. Default facets include:
 
-| Facet | Description |
-| `Type` | The type of Synthetic test: `browser`, `api`, `api-ssl`, `api-tcp`, `api-dns` |
-| `Status` | The Synthetic test status: `OK`, `Alert`, `No Data` |
-| `Creator` | The creator of the Synthetic test |
-| `Region` | The (managed and private) locations the Synthetic test is running from |
-| `State` | The state of the Synthetic test: `live`, `paused` |
-| `Notification` | The handle used by the Synthetic test for notifications |
-| `Env` | The environment the Synthetic test is running on |
-| `Tag` | The tag assigned to the Synthetic test |
+| Facet          | Description                                                                   |     
+|----------------|-------------------------------------------------------------------------------|
+| `Type`         | The type of Synthetic test: `browser`, `api`, `api-ssl`, `api-tcp`, `api-dns` |
+| `Status`       | The Synthetic test status: `OK`, `Alert`, `No Data`                           |
+| `Creator`      | The creator of the Synthetic test                                             |
+| `Region`       | The (managed and private) locations the Synthetic test is running from        |
+| `State`        | The state of the Synthetic test: `live`, `paused`                             |
+| `Notification` | The handle used by the Synthetic test for notifications                       |
+| `Env`          | The environment the Synthetic test is running on                              |
+| `Tag`          | The tag assigned to the Synthetic test                                        |
 
 ### Create your query
 
