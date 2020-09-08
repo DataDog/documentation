@@ -67,7 +67,7 @@ RUN ddev -e release build  <インテグレーション名>
 
 FROM datadog/agent:latest
 COPY --from=wheel_builder /wheels/integrations-extras/<インテグレーション名>/dist/ /dist
-RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
+RUN agent integration install -r -w /dist/*.whl
 ```
 
 次に、この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<インテグレーション名>` チェックを有効にします。
