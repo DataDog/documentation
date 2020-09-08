@@ -38,31 +38,32 @@ supported_os:
 
 ## 概要
 
-このチェックを使用して、SQL Server インスタンスのパフォーマンスを追跡できます。ユーザー接続の数、SQL のコンパイル率などのメトリクスを収集できます。
+SQL Server チェックを使用して、SQL Server インスタンスのパフォーマンスを追跡できます。ユーザー接続の数、SQL のコンパイル率などのメトリクスを収集できます。
 
 チェックでカスタムクエリを実行することで、独自のメトリクスを作成することもできます。
 
 ## セットアップ
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
-
 ### インストール
 
-SQL Server チェックは [Datadog Agent][3] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
+SQL Server チェックは [Datadog Agent][2] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 
-サーバーのプロパティで "SQL Server and Windows Authentication mode" を有効にして、SQL Server インスタンスが SQL Server 認証をサポートするようにします。
-それには、**Server Properties** -> **Security** -> **SQL Server and Windows Authentication mode** を指定します。
+サーバーのプロパティで "SQL Server and Windows Authentication mode" を有効にして、SQL Server インスタンスが SQL Server 認証をサポートするよう、次のように指定します。
+
+_Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode_
 
 ### 前提条件
 
-読み取り専用ログインを作成してサーバーに接続します。
+1. 読み取り専用ログインを作成してサーバーに接続します。
 
-   ```text
-       CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-       CREATE USER datadog FOR LOGIN datadog;
-       GRANT SELECT on sys.dm_os_performance_counters to datadog;
-       GRANT VIEW SERVER STATE to datadog;
-   ```
+    ```text
+        CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
+        CREATE USER datadog FOR LOGIN datadog;
+        GRANT SELECT on sys.dm_os_performance_counters to datadog;
+        GRANT VIEW SERVER STATE to datadog;
+    ```
+
+2. SQL Server インスタンスが、特定の固定ポートをリッスンしていることを確認します。デフォルトでは、名前付きインスタンスおよび SQL Server Express は動的ポート用に構成されています。詳細は、[Microsoft のドキュメント][3] をご参照ください。
 
 ### コンフィギュレーション
 
@@ -73,8 +74,7 @@ SQL Server チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `sqlserver.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sqlserver.d/conf.yaml][2] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `sqlserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sqlserver.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -173,7 +173,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションの `sqlserver` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションの `sqlserver` を探します。
 
 ## 収集データ
 
@@ -189,8 +189,7 @@ SQL Server チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**sqlserver.can_connect**:
-
+**sqlserver.can_connect**:<br>
 Agent が SQL Server に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
 
 ## トラブルシューティング
@@ -201,50 +200,23 @@ Agent が SQL Server に接続してメトリクスを収集できない場合�
 
 Agent ベースのインテグレーションのテストおよび開発方法については、[メインドキュメント][6]を参照してください。
 
-### テストのガイドライン
-
-#### Windows
-
-Windows でテストを実行する際は、MSSQL のインスタンスがホストで実行されることが必要です。データベースインスタンスの名前と認証情報は、CI 環境にある情報が使用されます。このため、ローカルの開発環境では、これらをそのまま使用できない場合があります。
-
-#### Linux
-
-Linux では、MSSQL インスタンスを実行する Docker コンテナが、テストの実行前に自動的に起動されます。データベースとの対話には unixODBC と [FreeTDS][7] が使用されます。このため、Linux ディストリビューションによっては、テストを実行する前に、ローカルの開発環境に追加の依存関係をインストールする必要があります。たとえば、Ubuntu 14.04 の場合のインストール手順は以下のとおりです。
-
-```shell
-sudo apt-get install unixodbc unixodbc-dev tdsodbc
-```
-
-#### OSX
-
-Linux と同様に、MSSQL は Docker コンテナで実行され、データベースとの対話には unixODBC と [FreeTDS][7] が使用されます。[homebrew][8] を使用して必要なパッケージをインストールできます。
-
-```shell
-brew install unixodbc freetds
-```
-
 ## その他の参考資料
 
-- [Datadog を使用した Azure SQL Database の監視][9]
-- [SQL Server 監視のためのキーメトリクス][10]
-- [SQL Server 監視ツール][11]
-- [Datadog を使用した SQL Server パフォーマンスの監視][12]
-- [カスタム SQL Server メトリクスによる詳細な監視][13]
-
-
-
+- [Datadog を使用した Azure SQL Database の監視][7]
+- [SQL Server 監視のためのキーメトリクス][8]
+- [SQL Server 監視ツール][9]
+- [Datadog を使用した SQL Server パフォーマンスの監視][10]
+- [カスタム SQL Server メトリクスによる詳細な監視][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/
 [6]: https://docs.datadoghq.com/ja/developers/integrations/
-[7]: http://www.freetds.org
-[8]: https://brew.sh
-[9]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
-[10]: https://www.datadoghq.com/blog/sql-server-monitoring
-[11]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
-[12]: https://www.datadoghq.com/blog/sql-server-performance
-[13]: https://www.datadoghq.com/blog/sql-server-metrics
+[7]: https://www.datadoghq.com/blog/monitor-azure-sql-databases-datadog
+[8]: https://www.datadoghq.com/blog/sql-server-monitoring
+[9]: https://www.datadoghq.com/blog/sql-server-monitoring-tools
+[10]: https://www.datadoghq.com/blog/sql-server-performance
+[11]: https://www.datadoghq.com/blog/sql-server-metrics

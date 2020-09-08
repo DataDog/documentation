@@ -122,7 +122,7 @@ Agent の実行は、Windows サービスコントロールマネージャーに
     - Agent バージョン 6.11 以前: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
     - Agent バージョン 6.12 以降: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * 構成 GUI は、ブラウザベースの構成アプリケーションです (Windows 64 ビット版のみ)。
-* コマンドは**管理者特権 (管理者として実行)**のコマンドライン (PowerShell  またはコマンドプロンプト) から、構文 `<PATH_TO_AGENT.EXE> <COMMAND>` を使用して実行できます。
+* コマンドは**管理者特権 (管理者として実行)**のコマンドライン (PowerShell またはコマンドプロンプト) から、構文 `<PATH_TO_AGENT.EXE> <COMMAND>` を使用して実行できます。
 * コマンドラインのオプションは次の通りです。
 
 | コマンド         | 説明                                                                      |

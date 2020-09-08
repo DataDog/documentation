@@ -63,6 +63,18 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `solr.d/conf.yaml` ファイルを編集します。使用可能な全コンフィギュレーションオプションの詳細については、[サンプル solr.d/conf.yaml][2] を参照してください。
 
    ```yaml
+   init_config:
+
+     ## @param is_jmx - boolean - required
+     ## Whether or not this file is a configuration for a JMX integration.
+     #
+     is_jmx: true
+
+     ## @param collect_default_metrics - boolean - required
+     ## Whether or not the check should collect all default metrics.
+     #
+     collect_default_metrics: true
+
    instances:
      ## @param host - string - required
      ## Solr host to connect to.

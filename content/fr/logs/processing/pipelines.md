@@ -103,38 +103,28 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour cert
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="cloner un pipeline" style="width:80%;">}}
 
-Pour afficher la liste complète des pipelines d'intégration, consultez la page des [références relatives aux pipelines d'intégration][6].
+### Bibliothèque de pipelines d'intégration
 
-## Limites des pipelines
+Pour afficher la liste complète des pipelines d'intégration proposés par Datadog, consultez la [Bibliothèque de pipelines d'intégration][6].
+La Bibliothèque de pipelines indique comment Datadog traite les différents formats de log par défaut.
 
-Pour assurer le bon fonctionnement de la solution Log Management, vos événements de log et certaines fonctionnalités sont soumis aux règles et aux limitations techniques suivantes. Ces limites ont été conçues de façon à ce qu'elles ne soient jamais atteintes.
+{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Bibliothèque de pipelines d'intégration"  style="width:80%;">}}
 
-### Limites appliquées aux événements de log ingérés
+Pour utiliser un pipeline d'intégration, nous vous conseillons d'installer l'intégration en configurant la `source` de log correspondante. Lorsque Datadog reçoit le premier log avec cette source, l'installation se déclenche automatiquement et le pipeline d'intégration est ajouté à la liste des pipelines de traitement. Pour configurer la source de log, consultez la [documentation relative à l'intégration][7] correspondante.
 
-* La taille d'un événement de log ne doit pas dépasser 25 000 octets.
-* Les événements de log peuvent être envoyés jusqu'à 6 h avant ou 2 h après la réalisation de l'événement.
-* Une fois converti au format JSON, un événement de log doit contenir moins de 256 attributs. La clé de chacun de ces attributs doit être inférieure à 50 caractères, être imbriquée dans moins de 10 niveaux successifs, et leur valeur respective doit être inférieure à 1 024 caractères si elle est présentée en tant que facette.
-* Un événement de log ne doit pas avoir plus de 100 tags, et chaque tag ne doit pas dépasser 256 caractères pour un maximum de 10 millions de tags uniques par jour.
+Il est également possible de copier un pipeline d'intégration à l'aide du bouton Copy. 
 
-Les événements de log qui ne respectent pas ces limitations sont susceptibles d'être modifiés ou tronqués par le système. Ils peuvent aussi ne pas être indexés s'ils sont envoyés en dehors de l'intervalle de temps spécifié. Toutefois, Datadog s'efforce toujours de préserver au maximum les données utilisateur fournies.
-
-### Limites appliquées aux fonctionnalités fournies
-
-* Le nombre maximum de facettes est de 100.
-* Le nombre maximum de pipelines de processing sur une plateforme est de 100.
-* Le nombre maximum de processeurs par pipeline est de 20.
-* Le nombre maximum de règles de parsing au sein d'un processeur Grok est de 10. Nous nous réservons le droit de désactiver les règles de parsing moins performantes qui pourraient avoir une incidence sur les performances du service de Datadog.
-
-[Contactez l'assistance][7] si vous atteignez l'une de ces limites. Datadog pourra peut-être vous proposer une solution mieux adaptée à vos besoins.
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloner un pipeline à partir de la bibliothèque"  style="width:80%;">}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /fr/logs/processing/processors/
 [2]: /fr/logs/explorer/search/
 [3]: /fr/logs/processing/#reserved-attributes
 [4]: /fr/logs/processing/processors/#log-status-remapper
 [5]: /fr/logs/processing/processors/#log-date-remapper
-[6]: /fr/logs/faq/integration-pipeline-reference/
-[7]: /fr/help/
+[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[7]: /fr/integrations/#cat-log-collection

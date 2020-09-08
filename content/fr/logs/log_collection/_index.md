@@ -7,21 +7,21 @@ aliases:
   - /fr/logs/languages
   - /fr/integrations/windows_event_log/
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Découvrir comment traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/live_tail
+  - link: /logs/live_tail/
     tag: Documentation
     text: Fonctionnalité Live Tail de Datadog
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Découvrir comment explorer vos logs
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
-    text: Collecte illimitée de logs
+    text: Logging Without Limits*
 ---
 Suivez les [instructions d'installation de l'Agent Datadog][1] pour commencer à transmettre des logs avec vos métriques et vos traces. L'Agent peut [suivre des fichiers de log][2] ou [effectuer une écoute afin d'identifier des logs envoyés via UDP/TCP][2]. Vous pouvez également le configurer de façon à [exclure des logs][3], [nettoyer les données sensibles][3] ou agréger des [logs multiligne][4]. Enfin, choisissez le langage de votre application ci-dessous afin d'obtenir les meilleures pratiques en matière de journalisation.
 Si vous utilisez déjà un daemon log-shipper, consultez la documentation relative à [Rsyslog][5], [Syslog-ng][6], [NXlog][7], [FluentD][8] et [Logstash][9].
@@ -50,7 +50,7 @@ Après avoir [activé la collecte de logs][1], configurez le langage de votre ap
 
 {{< partial name="logs/logs-languages.html" >}}
 
-## Collecte de logs depuis un conteneur
+## Collecte de logs de conteneur
 
 L'Agent Datadog peut [recueillir des logs directement à partir des flux stdout/stderr du conteneur][13] sans utiliser de pilote de log. Lorsque le check Docker de l'Agent est activé, les métadonnées du conteneur et de l'orchestrateur sont automatiquement ajoutées à vos logs en tant que tags.
 Il est possible de recueillir les logs de tous vos conteneurs ou [d'un sous-ensemble filtré selon une image de conteneur, une étiquette ou un nom][14]. Autodiscovery peut également être utilisé pour [configurer la collecte de logs directement dans les étiquettes de conteneur][15]. Dans les environnements Kubernetes, vous pouvez également tirer parti de [l'installation via un DaemonSet][16].
@@ -69,16 +69,18 @@ Sélectionnez votre fournisseur de Cloud ci-dessous pour savoir comment recueill
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-## Redirecteur de logs personnalisé
+## Forwarder de logs personnalisé
 
-Vous pouvez utiliser un processus ou une [bibliothèque de journalisation][18] personnalisé(e) capable de transmettre des logs via **TCP** ou **HTTP** pour gérer vos logs Datadog. Choisissez ci-dessous le site Datadog vers lequel vous souhaitez transférer vos logs :
+Vous pouvez utiliser un processus ou une [bibliothèque de journalisation][18] personnalisé(e) capable de transmettre des logs via **TCP** ou **HTTP** pour gérer vos logs Datadog.
 
 {{< tabs >}}
-{{% tab "Site américain via HTTP" %}}
+{{% tab "HTTP" %}}
+
+{{< site-region region="us" >}}
 
 L'endpoint public est `http-intake.logs.datadoghq.com`. La clé d'API doit être ajoutée dans le chemin ou en tant qu'étiquette. Exemple :
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <CLÉ_API>" \
@@ -87,13 +89,14 @@ curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
 
 Pour obtenir davantage d'exemples au format JSON, avec plusieurs logs par requête ou avec des paramètres de requête, consultez la [documentation relative à l'API HTTP de log Datadog][1].
 
-[1]: https://docs.datadoghq.com/fr/api/?lang=bash#send-logs-over-http
-{{% /tab %}}
-{{% tab "Site européen via HTTP" %}}
+[1]: /fr/api/v1/logs/#send-logs
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 L'endpoint public est `http-intake.logs.datadoghq.eu`. La clé d'API doit être ajoutée dans le chemin ou en tant qu'étiquette. Exemple :
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <CLÉ_API>" \
@@ -102,9 +105,13 @@ curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
 
 Pour obtenir davantage d'exemples au format JSON, avec plusieurs logs par requête ou avec des paramètres de requête, consultez la [documentation relative à l'API HTTP de log Datadog][1].
 
-[1]: https://docs.datadoghq.com/fr/api/?lang=bash#send-logs-over-http
+[1]: /fr/api/v1/logs/#send-logs
+
+{{< /site-region >}}
 {{% /tab %}}
-{{% tab "Site américain via TCP" %}}
+{{% tab "TCP" %}}
+
+{{< site-region region="us" >}}
 
 L'endpoint TCP sécurisé est `intake.logs.datadoghq.com:10516` (utilisez le port `10514` pour les connexions non sécurisées).
 
@@ -138,8 +145,10 @@ telnet intake.logs.datadoghq.com 10514
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-{{% /tab %}}
-{{% tab "TCP (site européen)" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
 
 L'endpoint TCP sécurisé est `tcp-intake.logs.datadoghq.eu:443` (utilisez le port `1883` pour les connexions non sécurisées).
 
@@ -173,6 +182,8 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
+
+{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,10 +192,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 Datadog fournit des endpoints de log pour les connexions avec chiffrement SSL et les connexions non chiffrées.
 Utilisez l'endpoint chiffré si vous le pouvez. L'Agent Datadog utilise l'endpoint chiffré pour envoyer les logs à Datadog. Pour en savoir plus, consultez la [documentation sur la sécurité de Datadog][19]).
 
-Les endpoints suivants peuvent être utilisés pour l'envoi de logs à Datadog :
+{{< site-region region="us" >}}
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+Les endpoints suivants peuvent être utilisés pour l'envoi de logs au site américain de Datadog :
 
 | Endpoints pour connexions avec chiffrement SSL | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -201,8 +211,12 @@ Les endpoints suivants peuvent être utilisés pour l'envoi de logs à Datadog 
 | `intake.logs.datadoghq.com`          | `10514` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP non chiffrée. |
 
 [1]: /fr/agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+Les endpoints suivants peuvent être utilisés pour l'envoi de logs au site européen de Datadog :
 
 | Endpoints pour connexions avec chiffrement SSL | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -219,8 +233,8 @@ Les endpoints suivants peuvent être utilisés pour l'envoi de logs à Datadog 
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP non chiffrée. |
 
 [1]: /fr/agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## Attributs réservés
 
@@ -237,6 +251,10 @@ Voici quelques attributs clés auxquels vous devez prêter attention lors de la 
 Vos logs sont recueillis et rassemblés dans la vue [Log Explorer][21]. Vous pouvez également rechercher et enrichir vos logs, et recevoir des alertes les concernant.
 
 {{< img src="logs/log_explorer_view.png" alt="Vue Log Explorer"  >}}
+
+### Tagging de service unifié
+
+Pour la collecte de logs, Datadog vous conseille de configurer le tagging de service unifié afin de lier les données de télémétrie Datadog entre elles via trois tags standard : `env`, `service` et `version`. Reportez-vous à la documentation relative au [tagging de service unifié][22] pour en effectuer la configuration.
 
 ### Comment tirer le meilleur parti de vos logs d'application
 
@@ -264,28 +282,41 @@ Pour les frameworks d'intégration, Datadog propose des instructions relatives �
 
 Les logs au format JSON sont automatiquement parsés par Datadog. Si vous pouvez choisir le format de log envoyé à Datadog, nous vous conseillons donc d'opter pour ce format : de cette façon, vous n'aurez pas besoin de créer de règles de parsing personnalisées.
 
+### Limites appliquées aux événements de log ingérés
+
+* Pour des performances optimales, Datadog vous conseille de limiter la taille d'un événement de log à 25 000 octets. Lorsque l'Agent Datadog est utilisé, les événements de log de plus de 256 Ko sont divisés en plusieurs entrées. Si vous utilisez directement l'API TCP ou HTTP de Datadog, la taille maximale d'un événement de log est de 1 Mo.
+* Les événements de log peuvent être envoyés jusqu'à 18 h avant ou 2 h après la réalisation de l'événement.
+* Les événements de log convertis au format JSON doivent contenir moins de 256 attributs. Les clés de chacun de ces attributs doit être inférieure à 50 caractères, être imbriquée dans moins de 10 niveaux successifs, et leur valeur respective doit être inférieure à 1 024 caractères si elle est présentée en tant que facette.
+* Un événement de log ne doit pas avoir plus de 100 tags, et chaque tag ne doit pas dépasser 256 caractères pour un maximum de 10 millions de tags uniques par jour.
+
+Les événements de log qui ne respectent pas ces limitations sont susceptibles d'être modifiés ou tronqués par le système. Ils peuvent aussi ne pas être indexés s'ils sont envoyés en dehors de l'intervalle de temps spécifié. Toutefois, Datadog s'efforce de préserver autant de données utilisateur que possible.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/logs
+
+\*Logging without Limits est une marque déposée de Datadog, Inc.
+
+[1]: /fr/agent/logs/
 [2]: /fr/agent/logs/#custom-log-collection
 [3]: /fr/agent/logs/advanced_log_collection/#filter-logs
 [4]: /fr/agent/logs/advanced_log_collection/#multi-line-aggregation
-[5]: /fr/integrations/rsyslog
-[6]: /fr/integrations/syslog_ng
-[7]: /fr/integrations/nxlog
+[5]: /fr/integrations/rsyslog/
+[6]: /fr/integrations/syslog_ng/
+[7]: /fr/integrations/nxlog/
 [8]: /fr/integrations/fluentd/#log-collection
 [9]: /fr/integrations/logstash/#log-collection
-[10]: /fr/logs/processing
-[11]: /fr/logs/processing/parsing
-[12]: /fr/logs/explorer/facets
-[13]: /fr/agent/docker/log
-[14]: /fr/agent/kubernetes/management
-[15]: /fr/agent/kubernetes/integrations
+[10]: /fr/logs/processing/
+[11]: /fr/logs/processing/parsing/
+[12]: /fr/logs/explorer/facets/
+[13]: /fr/agent/docker/log/
+[14]: /fr/agent/guide/autodiscovery-management/
+[15]: /fr/agent/kubernetes/integrations/
 [16]: /fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /fr/integrations/amazon_lambda/#log-collection
 [18]: /fr/logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /fr/security/logs/#information-security
-[20]: /fr/logs/explorer/patterns
-[21]: /fr/logs/explore
+[20]: /fr/logs/explorer/patterns/
+[21]: /fr/logs/explore/
+[22]: /fr/getting_started/tagging/unified_service_tagging

@@ -11,7 +11,9 @@ further_reading:
 
 Sélectionnez une source de monitors pour définir votre SLO en fonction de monitors Datadog. Vous pouvez sélectionner des monitors existants ou en créer d'autres directement. Pour en savoir plus sur les monitors, consultez la [documentation dédiée][1]. Les SLO basés sur des monitors sont particulièrement utiles pour identifier les comportements positifs et négatifs à partir d'un flux de données temporelles. Il est possible de diviser la durée cumulée des comportements positifs par la durée totale pour obtenir un Service Level Indicator (ou SLI).
 
-## Implémentation
+{{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="exemple de SLO basé sur des monitors"  >}}
+
+## Configuration
 
 Sur la [page de statut des SLO][2], sélectionnez **New SLO +**, puis [**Monitor**][3].
 
@@ -21,25 +23,50 @@ Pour commencer, vous devez avoir configuré des monitors Datadog. Pour configure
 
 1. Sélectionner un seul monitor, ou
 2. Sélectionner plusieurs monitors (jusqu'à 20), ou
-3. Sélectionner un monitor à alertes multiples et sélectionner des groupes de monitors spécifiques (jusqu'à 20) à inclure dans le calcul du SLO.
+3. Sélectionner un monitor à alertes multiples et sélectionner des groupes de monitors spécifiques (jusqu'à 20) à inclure dans le calcul du SLO en utilisant le bouton **Calculate on selected groups**.
+
+**Types de monitors pris en charge** :
+
+- Types de monitors de métrique (métrique, intégration, APM, anomalie, prévision, outlier)
+- Synthetics
+- Checks de service (fonction en bêta ouverte)
 
 **Exemple :** vous surveillez l'uptime d'un appareil physique. Vous avez déjà configuré un monitor de métrique pour `host:foo` à l'aide d'une métrique custom. Ce monitor prévient également l'équipe d'intervention si le host n'est plus disponible. Pour éviter que l'équipe ne soit trop sollicitée, vous souhaitez surveiller la fréquence de survenue d'un downtime pour ce host.
 
 ### Définir les cibles de votre SLO
 
-La cible d'un SLO est la valeur utilisée pour déterminer si l'objectif d'uptime est satisfait.
+Une cible de SLO est composée du pourcentage cible et de l'intervalle de temps. Lorsque vous définissez une cible pour un SLO basé sur des monitors, le pourcentage cible indique la portion de l'intervalle de temps durant laquelle le ou les monitors sous-jacents du SLO doivent présenter un statut OK, tandis que l'intervalle de temps indique la période glissante pendant laquelle la cible doit être suivie.
 
-Commencez par sélectionner votre valeur cible. Exemple : `95 % des requêtes HTTP doivent avoir satisfait l'objectif de latence au cours des 7 derniers jours`.
+Exemple : 99 % du temps, les requêtes doivent présenter une latence inférieure à 300 ms sur les 7 derniers jours.
 
-Vous pouvez également spécifier une valeur d'avertissement supérieure à la valeur cible afin de savoir lorsque le SLO est sur le point de ne plus être satisfait.
+Tant que le SLO reste au-dessus du pourcentage cible, le statut du SLO s'affiche en vert. En cas de violation du pourcentage cible, le statut du SLO s'affiche en rouge. Vous pouvez également spécifier une valeur d'avertissement supérieure à la valeur cible afin de savoir lorsque le SLO est sur le point de ne plus être satisfait. En cas de violation du pourcentage d'avertissement (mais pas du pourcentage cible), le statut du SLO s'affiche en jaune.
 
 ### Identifier cet indicateur
 
-Cette section vous permet d'ajouter des informations contextuelles sur l'intérêt de votre SLO. Vous pouvez notamment spécifier une description ainsi que les tags à associer au SLO.
+Cette section vous permet d'ajouter des informations contextuelles sur l'intérêt de votre SLO. Vous pouvez notamment spécifier une description, les ressources connexes, ainsi que les tags à associer au SLO.
 
-### Monitor sous-jacent et historiques de SLO
+## Calcul du statut global
 
-Lorsque vous apportez des changements au monitor utilisé par un SLO, cela recalcule l'historique du SLO. Ainsi, il est possible que l'historique du monitor et que l'historique du SLO ne correspondent pas.
+{{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="calcul de la disponibilité globale" >}}
+
+Le statut global peut être considéré comme le pourcentage de temps durant lequel **tous** les monitors affichaient un statut `OK`. Il ne s'agit pas de la moyenne pour les monitors agrégés.
+
+Prenons l'exemple suivant pour 3 monitors :
+
+| Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
+|--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
+| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90 %    |
+| Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90 %    |
+| Monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80 %    |
+| **Statut global** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70 %    |
+
+On constate que le statut global peut être inférieur à la moyenne des statuts de chaque monitor.
+
+## Monitor sous-jacent et historiques de SLO
+
+Les SLO basés sur les types de monitors de métrique disposent d'une fonctionnalité appelée SLO Replay, qui récupère les précédents statuts des SLO avec des données historiques issues des métriques et des requêtes des monitors sous-jacents. Cela signifie que si vous créez un monitor de métrique et configurez un SLO sur ce nouveau monitor, plutôt que d'attendre 7, 30 ou 90 jours entiers pour que le statut du LSO soit calculé, la fonctionnalité SLO Replay se déclenche et examine la métrique sous-jacente ainsi que la requête du monitor afin d'obtenir le statut sans attendre. La fonctionnalité SLO Replay se déclenche également lorsque la requête du monitor de métrique sous-jacent est modifiée (par exemple, en cas de modification du seuil) afin de corriger le statut en fonction de la nouvelle configuration du monitor. L'historique du statut d'un SLO étant recalculé par la fonctionnalité SLO Replay, il est possible que l'historique du statut du monitor et l'historique du statut du SLO ne correspondent pas après une mise à jour du monitor.
+
+**Remarque** : la fonctionnalité SLO Replay n'est pas prise en charge pour les SLO basés sur des tests Synthetics ou des checks de service.
 
 Nous vous recommandons de ne pas utiliser les monitors caractérisés par un `Alert Recovery Threshold` ou un `Warning Recovery Threshold`. En effet, ils peuvent avoir une incidence sur les calculs de votre SLO et vous empêchent de distinguer clairement les bons comportements des mauvais comportements d'un SLI.
 
