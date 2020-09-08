@@ -433,20 +433,6 @@
                         <div class="code-snippet-wrapper js-code-snippet-wrapper" >
 
                             {{ $codeLangs := slice "curl" }}
-                            
-
-                       
-
-                            
-
-                            {{/*<ul class="nav nav-tabs border-none response-toggle code-lang-list-container">
-                                {{ $count := 0}}
-                                {{ $lang := index $dot.Site.Params.code_languages "sh" }}
-
-                                <li class="nav-item">
-                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}"  href="#" data-toggle="tab">{{ $lang.name }}</a>
-                                </li>
-                                */}}
 
                             {{/* match all Page Resource code examples by operationId */}}
                             {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
@@ -457,27 +443,7 @@
 
                                 {{  $codeLangs = $codeLangs | append $lang.name }}
                                 {{ end }}
-
-                                {{/* $count := 1}}
-                                {{ range . }}
-
-                                {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
-
-                                {{ if ne $file_extension "sh"}}
-                                <li class="nav-item">
-                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}"  href="#" data-toggle="tab">{{ $lang.name }}</a>
-                                </li>
-
-                                {{ $count = add $count 1 }}
-                                {{ end }}
-
-                                {{ end */}}
                             {{ end }}
-
-               
-
-                            {{/*</ul>*/}}
 
                             {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
 
