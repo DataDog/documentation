@@ -248,63 +248,88 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Amazon ECS
+    url: agent/amazon_ecs/
+    parent: agent
+    identifier: agent_amazon_ecs
+    weight: 4
+  - name: Log collection
+    url: agent/amazon_ecs/logs/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_logs
+    weight: 401
+  - name: APM
+    url: agent/amazon_ecs/apm/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_apm
+    weight: 402
+  - name: Tag extraction
+    url: agent/amazon_ecs/tags/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_tags
+    weight: 403
+  - name: Data collected
+    url: agent/amazon_ecs/data_collected/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_data_collected
+    weight: 404
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
-    weight: 4
+    weight: 5
   - name: Setup
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
-    weight: 401
+    weight: 501
   - name: Event Collection
     url: agent/cluster_agent/event_collection/
     parent: agent_cluster
     identifier: cluster_agent_event_collection
-    weight: 402
+    weight: 502
   - name: Custom & External Metrics
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
-    weight: 403
+    weight: 503
   - name: Cluster Checks
     url: agent/cluster_agent/clusterchecks/
     parent: agent_cluster
-    weight: 404
+    weight: 504
   - name: Endpoints Checks
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
-    weight: 405
+    weight: 505
   - name: Admission Controller
     url: agent/cluster_agent/admission_controller/
     parent: agent_cluster
-    weight: 406
+    weight: 506
   - name: Commands & Options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 407
+    weight: 507
   - name: Cluster metadata provider
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 408
+    weight: 508
   - name: Build
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 409
+    weight: 509
   - name: Cluster Checks Runner
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 410
+    weight: 510
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 411
+    weight: 511
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
