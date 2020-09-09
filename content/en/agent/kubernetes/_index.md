@@ -174,11 +174,61 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://operatorhub.io/operator/datadog-operator
+## Prerequisites
+
+Using the Datadog Operator requires the following prerequisites:
+
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, due to limited CRD support, the operator may not work as expected.
+- [`Helm`][2] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+
+## Deploy an Agent with the operator
+
+To deploy a Datadog Agent with the operator in the minimum number of steps, use the [`datadog-agent-with-operator`][4] Helm chart.
+
+
+1. [Download the chart][5]:
+
+   ```shell
+   curl -Lo datadog-agent-with-operator.tar.gz https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+   ```
+
+2. Create a file with the spec of your agent. The simplest configuration is:
+
+   ```yaml
+   credentials:
+     apiKey: <DATADOG_API_KEY>
+     appKey: <DATADOG_APP_KEY>
+   agent:
+     image:
+       name: "datadog/agent:latest"
+   ```
+
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
+
+3. Deploy the Datadog agent with the above configuration file:
+   ```shell
+   helm install --set-file agent_spec=/path/to/your/datadog-agent.yaml datadog datadog-agent-with-operator.tar.gz
+   ```
+
+## Cleanup
+
+The following command deletes all the Kubernetes resources created by the above instructions:
+
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog
+```
+
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
+[5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+[6]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
