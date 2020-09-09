@@ -38,9 +38,11 @@ Service check function parameters:
 
 Choose your language for a service check code example:
 
+{{< multi-code-snippet-wrapper >}}
+
 {{< code-lang-tabs langs="python,ruby,go,java,.NET,php">}}
 
-{{< code-wrapper lang="python" filename="service_check.py" >}}
+{{< code-block lang="python" filename="service_check.py" >}}
 ```python
 from datadog import initialize, statsd
 
@@ -54,9 +56,9 @@ statsd.service_check(
     message="Application is OK",
 )
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="ruby" filename="service_check.rb" >}}
+{{< code-block lang="ruby" filename="service_check.rb" >}}
 ```ruby
 require 'datadog/statsd'
 
@@ -64,36 +66,36 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="go" filename="service_check.go" >}}
+{{< code-block lang="go" filename="service_check.go" >}}
 ```go
 package main
 
 import (
-	"log"
-	"time"
+    "log"
+    "time"
 
-	"github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 
-	dogstatsdClient, err := statsd.New("127.0.0.1:8125")
+    dogstatsdClient, err := statsd.New("127.0.0.1:8125")
 
-	if err != nil {
-		log.Fatal(err)
-	}
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	for {
-		dogstatsdClient.SimpleServiceCheck("application.service_check", 0)
-		time.Sleep(10 * time.Second)
-	}
+    for {
+        dogstatsdClient.SimpleServiceCheck("application.service_check", 0)
+        time.Sleep(10 * time.Second)
+    }
 }
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="java" filename="service_check.java" >}}
+{{< code-block lang="java" filename="service_check.java" >}}
 ```java
 import com.timgroup.statsd.ServiceCheck;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -118,9 +120,9 @@ public class DogStatsdClient {
     }
 }
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang=".NET" filename="service_check.cs" >}}
+{{< code-block lang=".NET" filename="service_check.cs" >}}
 ```csharp
 using StatsdClient;
 
@@ -142,9 +144,9 @@ public class DogStatsdClient
     }
 }
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="php" filename="service_check.php" >}}
+{{< code-block lang="php" filename="service_check.php" >}}
 ```php
 <?php
 
@@ -160,7 +162,9 @@ $statsd = new DogStatsd(
 
 $statsd->service_check('Service.check.name', 0);
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
+
+{{< /multi-code-snippet-wrapper >}}
 
 After a service check is reported, use it to trigger a [custom check monitor][2].
 
