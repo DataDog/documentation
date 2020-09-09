@@ -188,7 +188,7 @@ Using the Datadog Operator requires the following prerequisites:
 
 To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
 
-1. Download the [Datadog Operator project zip ball][4]. Source code can be found at [`DataDog/datadog-operator`][5].
+1. Download the [Datadog Operator project zip ball][4]. Source code can be found at [`DataDog/datadog-operator`][1].
 2. Unzip the project, and go into the `./datadog-operator` folder.
 3. Define your namespace and operator:
 
@@ -223,14 +223,14 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 
 Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-* [Manifest with Logs, APM, process, and metrics collection enabled.][6]
-* [Manifest with Logs, APM, and metrics collection enabled.][7]
-* [Manifest with Logs and metrics collection enabled.][8]
-* [Manifest with APM and metrics collection enabled.][9]
-* [Manifest with Cluster Agent.][10]
-* [Manifest with tolerations.][11]
+* [Manifest with Logs, APM, process, and metrics collection enabled.][5]
+* [Manifest with Logs, APM, and metrics collection enabled.][6]
+* [Manifest with Logs and metrics collection enabled.][7]
+* [Manifest with APM and metrics collection enabled.][8]
+* [Manifest with Cluster Agent.][9]
+* [Manifest with tolerations.][10]
 
-Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][12], then trigger the Agent installation with the following command:
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][11], then trigger the Agent installation with the following command:
 
 ```shell
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -299,6 +299,7 @@ agent-datadog-operator-d897fc9b-7wbsf        1/1     Running    0          15h
 datadog-agent-5ctrq                          1/1     Running    0          7m43s
 datadog-agent-lkfqt                          0/1     Running    0          15s
 datadog-agent-zvdbw                          1/1     Running    0          8m1s
+```
 
 ## Cleanup
 
@@ -310,19 +311,18 @@ helm delete datadog
 ```
 
 
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/datadog-operator/releases/latest
-[5]: https://github.com/DataDog/datadog-operator
-[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs-apm.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
-[10]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
-[11]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-tolerations.yaml
-[12]: https://app.datadoghq.com/account/settings#api
-
+[5]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs-apm.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
+[10]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-tolerations.yaml
+[11]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
