@@ -174,11 +174,155 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://operatorhub.io/operator/datadog-operator
+## Prerequisites
+
+Using the Datadog Operator requires the following prerequisites:
+
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, due to limited CRD support, the operator may not work as expected.
+- [`Helm`][2] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+
+## Deploy the Datadog Operator
+
+To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
+
+1. Download the [Datadog Operator project zip ball][4]. Source code can be found at [`DataDog/datadog-operator`][1].
+2. Unzip the project, and go into the `./datadog-operator` folder.
+3. Define your namespace and operator:
+
+   ```shell
+   DD_NAMESPACE="datadog"
+   DD_NAMEOP="ddoperator"
+   ```
+
+4. Create the namespace:
+
+   ```shell
+   kubectl create ns $DD_NAMESPACE
+   ```
+
+5. Install the operator with Helm:
+
+   - Helm v2:
+
+   ```shell
+   helm install --name $DD_NAMEOP -n $DD_NAMESPACE ./chart/datadog-operator
+   ```
+
+   - Helm v3:
+
+   ```shell
+   helm install $DD_NAMEOP -n $DD_NAMESPACE ./chart/datadog-operator
+   ```
+
+## Deploy the Datadog Agents with the operator
+
+After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
+
+Create the `datadog-agent.yaml` manifest out of one of the following templates:
+
+* [Manifest with Logs, APM, process, and metrics collection enabled.][5]
+* [Manifest with Logs, APM, and metrics collection enabled.][6]
+* [Manifest with Logs and metrics collection enabled.][7]
+* [Manifest with APM and metrics collection enabled.][8]
+* [Manifest with Cluster Agent.][9]
+* [Manifest with tolerations.][10]
+
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][11], then trigger the Agent installation with the following command:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+datadogagent.datadoghq.com/datadog created
+```
+
+You can check the state of the `DatadogAgent` ressource with:
+
+```shell
+kubectl get -n $DD_NAMESPACE dd datadog
+NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER   AGE
+datadog-agent   True     Running (2/2/2)                                           110m
+```
+
+In a 2-worker-nodes cluster, you should see the Agent pods created on each node.
+
+```shell
+$ kubectl get -n $DD_NAMESPACE daemonset
+NAME            DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+datadog-agent   2         2         2       2            2           <none>          5m30s
+
+$ kubectl get -n $DD_NAMESPACE pod -owide
+NAME                                         READY   STATUS    RESTARTS   AGE     IP            NODE
+agent-datadog-operator-d897fc9b-7wbsf        1/1     Running   0          1h      10.244.2.11   kind-worker
+datadog-agent-k26tp                          1/1     Running   0          5m59s   10.244.2.13   kind-worker
+datadog-agent-zcxx7                          1/1     Running   0          5m59s   10.244.1.7    kind-worker2
+```
+### Tolerations
+
+Update your `datadog-agent.yaml` file with the following configuration to add the toleration in the `Daemonset.spec.template` of your `DaemonSet` :
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: "<DATADOG_API_KEY>"
+    appKey: "<DATADOG_APP_KEY>"
+  agent:
+    image:
+      name: "datadog/agent:latest"
+    config:
+      tolerations:
+       - operator: Exists
+```
+
+Apply this new configuration:
+
+```shell
+$ kubectl apply -f datadog-agent.yaml
+datadogagent.datadoghq.com/datadog updated
+```
+
+The DaemonSet update can be validated by looking at the new desired pod value:
+
+```shell
+$ kubectl get -n $DD_NAMESPACE daemonset
+NAME            DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+datadog-agent   3         3         3       3            3           <none>          7m31s
+
+$ kubectl get -n $DD_NAMESPACE pod
+NAME                                         READY   STATUS     RESTARTS   AGE
+agent-datadog-operator-d897fc9b-7wbsf        1/1     Running    0          15h
+datadog-agent-5ctrq                          1/1     Running    0          7m43s
+datadog-agent-lkfqt                          0/1     Running    0          15s
+datadog-agent-zvdbw                          1/1     Running    0          8m1s
+```
+
+## Cleanup
+
+The following command deletes all the Kubernetes resources created by the above instructions:
+
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog
+```
+
+
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/datadog-operator/releases/latest
+[5]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs-apm.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
+[10]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-tolerations.yaml
+[11]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 

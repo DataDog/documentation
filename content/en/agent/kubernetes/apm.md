@@ -82,6 +82,28 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
     ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+Update your `datadog-agent.yaml` manifest with:
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  apm:
+    enabled: true
+```
+
+See the sample [manifest with APM and metrics collection enabled][1] for a complete example.
+
+Then apply the new configuration:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+{{% /tab %}}
 {{< /tabs >}}
    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
