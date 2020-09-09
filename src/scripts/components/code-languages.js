@@ -155,8 +155,6 @@ addCodeTabEventListeners();
 
 function toggleCodeBlocks(activeLang) {
 
-    console.log('activeLang: ', activeLang)
-
     const codeLinks = document.querySelectorAll('.js-code-example-link');
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
@@ -239,8 +237,6 @@ function toggleCodeBlocks(activeLang) {
             }
         });
     }
-
-    console.log('codeWrappers: ', codeWrappers)
 
     if (codeWrappers.length) {
         codeWrappers.forEach((codeWrapper) => {
