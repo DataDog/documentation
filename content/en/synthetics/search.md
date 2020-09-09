@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Search, access, and manage all of your tests on one page with the [Synthetic Tests page][1]. Quickly find the tests that matter to you using facets, get an overview of the state of your application thanks to the global uptime and response time graph, and manage your tests through bulk functionalities.
+Search, access, and manage all of your tests on one page with the [Synthetic Tests page][1]. Quickly find the tests that matter to you using facets, get an overview of the state of your application with the global uptime and response time graph, and manage your tests through bulk functionalities.
 
 {{< img src="synthetics/search/search.png" alt="Synthetic Tests Search" >}}
 
@@ -36,22 +36,22 @@ The **Synthetics Filters** panel on the left side of the page lists several defa
 
 ### Create your query
 
-You can search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+Search through your Synthetic tests by clicking on the facets on the left panel or by writing your own custom query using the search bar. As you select and deselect facet values in the panel or in the search bar, the search bar will automatically update with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the facets checkboxes update to reflect that change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-* **Search on free text**: enter your text in the search bar to search on test name;
-* **Search on a single facet**: click a facet value to create a search query that includes only that facet value, e.g. `type:api`. To add another value of the same facet to your search, click that other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses, e.g. `type:("api" OR "api-ssl")`.
-* **Search on multiple terms** (multiple facets and/or text): click values of different facets to create a search query that includes filtering for multiple facets, e.g. `type:api``region:aws:us-east-2`. You can also mix facets and text, e.g. `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
-* **Exclude terms**: click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, e.g. `-state:paused`.
-* **Perform custom matches**: use wildcards (`*`), e.g. `valid*`.
+* **Search on free text**: Enter your text in the search bar to search on a test name.
+* **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click the other value checkbox or add the other value with an `OR` Boolean operator and wrap values with quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
+* **Search on multiple facets and text**: Click on values of different facets to create a search query that includes filtering for multiple facets. For example, `type:api``region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
+* **Exclude facets or text**: Click on an existing filled checkbox to deselect a facet value or prepend your term with `-` to exclude it from the search query, e.g. `-state:paused`.
+* **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
-For example, if you want to exclusively search for browser tests, click **Browser Test** in the left panel. Click again to reselect all your tests, regardless of their type.
+If you want to exclusively search for browser tests, click **Browser Test** in the left panel. Click again to reselect all your tests, regardless of their type.
 
 {{< img src="synthetics/search/facet-search.gif" alt="Facet Search" >}}
 
 ## Manage tests
 
-You can bulk manage your Synthetic tests from the list page by clicking multiple individual test checkboxes in the table or by clicking on the checkbox next to `State` to select all the test checkboxes of the page.  
-Once selected, you can choose `Run Tests Now` or `Delete`, which will bulk run or delete all of the selected Synthetic tests.
+Bulk manage your Synthetic tests from the list page by clicking multiple individual test checkboxes in the table or by clicking on the checkbox next to `State` to select all the test checkboxes of the page.  
+Once selected, choose `Run Tests Now` or `Delete`, which will bulk run or delete all of the selected Synthetic tests.
 
 {{< img src="synthetics/search/bulk-edit.png" alt="Bulk editing" >}}
 
@@ -65,11 +65,11 @@ For example, if you wish to edit browser test steps, hover over a browser test i
 
 ### Audit events
 
-The creation, edition, and deletion of Synthetic tests and global variables create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
+The creation, addition, and deletion of Synthetic tests and global variables create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
 
-You can find all Synthetic Monitoring related changes searching the event stream for `#audit synthetics`. You can retrieve changes that were done on a specific test by searching on the id of your test, for example: `tags:public_id:4m7-bqy-mxq`.
+Find all Synthetic Monitoring related changes by searching the event stream for `#audit synthetics`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:public_id:4m7-bqy-mxq`.
 
-{{< img src="synthetics/search/audit_events" alt="Synthetic Monitoring audit events" >}}
+{{< img src="synthetics/search/audit_events.png" alt="Synthetic Monitoring audit events" >}}
 
 ## Further Reading
 
