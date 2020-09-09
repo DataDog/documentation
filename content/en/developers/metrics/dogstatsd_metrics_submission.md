@@ -48,9 +48,7 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php,">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< code-block lang="python" filename="count_metric.py" >}}
 ```python
@@ -216,9 +214,7 @@ Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about th
 
 Run the following code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php,">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< code-block lang="python" filename="gauge_metric.py" >}}
 ```python
@@ -378,9 +374,7 @@ Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
 Run the following code to submit a DogStatsD `SET` metric to Datadog:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,.NET,php">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,.NET,php" >}}
 
 {{< code-block lang="python" filename="set_metric.py" >}}
 ```python
@@ -523,9 +517,7 @@ The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric�
 
 Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,.NET,php">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,.NET,php" >}}
 
 {{< code-block lang="python" filename="histogram_metric.py" >}}
 ```python
@@ -693,9 +685,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,php">}}
+{{< multi-code-snippet-wrapper langs="python,php" >}}
 
 {{< code-block lang="python" filename="timers.py" >}}
 In Python, timers are created with a decorator:
@@ -796,9 +786,7 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 
 Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php,">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< code-block lang="python" filename="distribution_metric.py" >}}
 ```python
@@ -959,9 +947,7 @@ Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correc
 
 The following code only sends points half of the time:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php,">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< code-block lang="python" >}}
 ```python
@@ -1010,9 +996,7 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
 The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php,">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< code-block lang="python" >}}
 ```python

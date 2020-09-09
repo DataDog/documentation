@@ -44,9 +44,7 @@ View errors and exceptions in Datadog with a DogStatsD event:
 
 
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby">}}
+{{< multi-code-snippet-wrapper langs="python,ruby" >}}
 
 {{< code-block lang="python" filename="event.py" >}}
 ```python
@@ -79,9 +77,7 @@ statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['
 
 
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,php">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,php" >}}
 
 {{< code-block lang="python" filename="event.py" >}}
 ```python

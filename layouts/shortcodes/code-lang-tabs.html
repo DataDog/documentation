@@ -1,4 +1,0 @@
-{{ $codeLangs := split (.Get "langs") "," }}
-
-{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
-

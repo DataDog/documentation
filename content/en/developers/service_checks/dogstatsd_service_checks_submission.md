@@ -38,9 +38,7 @@ Service check function parameters:
 
 Choose your language for a service check code example:
 
-{{< multi-code-snippet-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,.NET,php">}}
+{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php"  >}}
 
 {{< code-block lang="python" filename="service_check.py" >}}
 ```python
