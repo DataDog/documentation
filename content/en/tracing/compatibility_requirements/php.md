@@ -85,8 +85,8 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Elasticsearch                                                           | 1.x                        | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
-| MongoDB - via [mongo][3] extension     | 1.4.x                      | Fully Supported |
-| MongoDB - via [mongodb][4] extension | *(Any Supported PHP)*      | _Coming Soon_   |
+| MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
+| MongoDB - via [mongodb][4] extension                                    | *(Any Supported PHP)*      | _Coming Soon_   |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
 | PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | Fully Supported |
