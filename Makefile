@@ -125,6 +125,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
+	@if [ content/en/agent/kubernetes/operator_configuration.md ]; then \
+	rm -f content/en/agent/kubernetes/operator_configuration.md ;fi
 
 clean-node:  ## Remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
