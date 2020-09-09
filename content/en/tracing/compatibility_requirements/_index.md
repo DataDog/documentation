@@ -304,6 +304,8 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 {{< /code-wrapper >}}
 
+{{< code-lang-tabs langs="python,ruby,go,java,php,.NET Core,.NET Framework,nodejs,cpp">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
