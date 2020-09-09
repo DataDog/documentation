@@ -41,10 +41,14 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 View errors and exceptions in Datadog with a DogStatsD event:
 
 
-{{< code-lang-tabs langs="python,ruby,go,java,php,csharp">}}
 
 
-{{< code-wrapper lang="python" filename="event.py" >}}
+
+{{< multi-code-snippet-wrapper >}}
+
+{{< code-lang-tabs langs="python,ruby">}}
+
+{{< code-block lang="python" filename="event.py" >}}
 ```python
 from datadog import initialize, statsd
 
@@ -58,9 +62,9 @@ initialize(**options)
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 ```
 
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="ruby" filename="event.rb" >}}
+{{< code-block lang="ruby" filename="event.rb" >}}
 ```ruby
 require 'datadog/statsd'
 
@@ -68,9 +72,45 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
+{{< /multi-code-snippet-wrapper >}}
 
-{{< code-wrapper lang="go" filename="event.go" >}}
+
+
+
+
+{{< multi-code-snippet-wrapper >}}
+
+{{< code-lang-tabs langs="python,ruby,go,java,php">}}
+
+{{< code-block lang="python" filename="event.py" >}}
+```python
+from datadog import initialize, statsd
+
+options = {
+    'statsd_host':'127.0.0.1',
+    'statsd_port':8125
+}
+
+initialize(**options)
+
+statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+```
+
+{{< /code-block >}}
+
+{{< code-block lang="ruby" filename="event.rb" >}}
+```ruby
+require 'datadog/statsd'
+
+statsd = Datadog::Statsd.new('localhost', 8125)
+
+statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
+```
+{{< /code-block >}}
+
+
+{{< code-block lang="go" filename="event.go" >}}
 ```go
 package main
 
@@ -94,9 +134,9 @@ func main() {
 	}
 }
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="java" filename="event.java" >}}
+{{< code-block lang="java" filename="event.java" >}}
 ```java
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -122,33 +162,9 @@ public class DogStatsdClient {
     }
 }
 ```
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="csharp" filename="event.cs" >}}
-```csharp
-using StatsdClient;
-
-public class DogStatsdClient
-{
-    public static void Main()
-    {
-        var dogstatsdConfig = new StatsdConfig
-        {
-            StatsdServerName = "127.0.0.1",
-            StatsdPort = 8125,
-        };
-
-        using (var dogStatsdService = new DogStatsdService())
-        {
-            dogStatsdService.Configure(dogstatsdConfig);
-            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });
-        }
-    }
-}
-```
-{{< /code-wrapper >}}
-
-{{< code-wrapper lang="php" filename="event.php"  >}}
+{{< code-block lang="php" filename="event.php"  >}}
 ```php
 <?php
 
@@ -174,9 +190,9 @@ To use this, you must configure the library with your [Datadog API and applicati
 
 [1]: /developers/dogstatsd/
 
-{{< /code-wrapper >}}
+{{< /code-block >}}
 
-{{< code-wrapper lang="php" filename="event_through_api.php" >}}
+{{< code-block lang="php" filename="event_through_api.php" >}}
 ```php
 <?php
 
@@ -196,20 +212,19 @@ $statsd->event('An error occurred.',
     )
   );
 ```
-{{< /code-wrapper >}}
-
-{{< code-lang-tabs langs="python,ruby,go,java,php,csharp">}}
+{{< /code-block >}}
+{{< /multi-code-snippet-wrapper >}}
 
 **Note**:
 
 * Sending events with this method uses cURL for API requests.
 * You should use a `try`/`catch` code block to avoid warnings or errors on communication issues with the Datadog API.
 
-[1]: https://app.datadoghq.com/account/settings#api
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+[1]: https://app.datadoghq.com/account/settings#api
 [2]: /events/

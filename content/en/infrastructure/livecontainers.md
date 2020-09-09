@@ -43,6 +43,7 @@ Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Conta
 To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][10] and add the following changes to your `values.yaml` file:
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
+```yaml
 datadog:
   ...
   processAgent:
@@ -64,15 +65,18 @@ agents:
     tag: latest
     pullPolicy: Always
 ...
+```
 {{< /code-block >}}
 
 In cases where the Agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml`:
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
+```yaml
 datadog:
    ...
    clusterName: <PLACEHOLDER>
    ...
+```
 {{< /code-block >}}
 
 **Note**: The cluster name must be 40-characters or less.

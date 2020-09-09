@@ -39,7 +39,7 @@ To use Autodiscovery with Network Device Monitoring:
 The following sample config provides required parameters, default values, and examples for Autodiscovery.
 
 {{< code-block lang="yaml" filename="snmp.d/conf.yaml" disable_copy="true" >}}
-
+```yaml
 init_config:
 instances:
     ## @param network_address - string - optional
@@ -68,7 +68,7 @@ instances:
     tags:
        - "<KEY_1>:<VALUE_1>"
        - "<KEY_2>:<VALUE_2>"
-
+```
 {{< /code-block >}}
 
 ## Validation

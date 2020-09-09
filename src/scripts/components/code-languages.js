@@ -155,6 +155,8 @@ addCodeTabEventListeners();
 
 function toggleCodeBlocks(activeLang) {
 
+    console.log('activeLang: ', activeLang)
+
     const codeLinks = document.querySelectorAll('.js-code-example-link');
     if (codeLinks.length) {
         codeLinks.forEach((codeLink) => {
@@ -167,23 +169,37 @@ function toggleCodeBlocks(activeLang) {
     }
 
     // non-api page code blocks
-    const codeBlocks = document.querySelectorAll(
-        ':not(.api) [class*=js-code-block]'
+    const codeWrappers = document.querySelectorAll(
+        'body:not(.api) [class*=js-code-snippet-wrapper]'
     );
+
+    const allCodeBlocksInWrappers = document.querySelectorAll(
+        '.js-code-snippet-wrapper .js-code-block'
+    );
+
+    if (allCodeBlocksInWrappers.length) {
+        allCodeBlocksInWrappers.forEach((codeBlock) => {
+            if (codeBlock.dataset.codeLangBlock === activeLang) {
+                codeBlock.style.display = 'block';
+            } else {
+                codeBlock.style.display = 'none';
+            }
+        });
+    }
 
     const apiCodeWrappers = document.querySelectorAll(
         '.api [class*=js-code-snippet-wrapper]'
     );
 
-    if (codeBlocks.length) {
-        codeBlocks.forEach((codeBlock) => {
-            if (codeBlock.classList.contains(`js-code-block-${activeLang}`)) {
-                codeBlock.classList.remove('d-none');
-            } else {
-                codeBlock.classList.add('d-none');
-            }
-        });
-    }
+    // if (codeBlocks.length) {
+    //     codeBlocks.forEach((codeBlock) => {
+    //         if (codeBlock.classList.contains(`js-code-block-${activeLang}`)) {
+    //             codeBlock.classList.remove('d-none');
+    //         } else {
+    //             codeBlock.classList.add('d-none');
+    //         }
+    //     });
+    // }
 
     // there are multiple code wrappers on API pages for each endpoint, need to loop through each wrapper
     // if the active lang, from cookie, or selection does not have an associated code block, default to curl
@@ -191,27 +207,28 @@ function toggleCodeBlocks(activeLang) {
     if (apiCodeWrappers.length) {
         apiCodeWrappers.forEach((apiCodeWrapper) => {
             const apiCodeBlocks = apiCodeWrapper.querySelectorAll(
-                `.js-code-block-${activeLang}`
+                `[data-code-lang-block="${activeLang}"`
             );
+
             const apiCurlCodeBlocks = apiCodeWrapper.querySelectorAll(
-                '.js-code-block-curl'
+                '[data-code-lang-block="curl"'
             );
 
             if (apiCodeBlocks.length) {
                 // loop through code blocks and check if they contain the active lang
                 apiCodeBlocks.forEach((apiCodeBlock) => {
-                    apiCodeBlock.classList.remove('d-none');
+                    apiCodeBlock.style.display = 'block';
                 });
                 if (activeLang !== 'curl') {
                     apiCurlCodeBlocks.forEach((apiCurlCodeBlock) => {
-                        apiCurlCodeBlock.classList.add('d-none');
+                        apiCurlCodeBlock.style.display = 'none';
                     });
                 }
             } else {
 
                 // turn on curl code block for this Code Example wrapper
                 apiCurlCodeBlocks.forEach((apiCurlCodeBlock) => {
-                    apiCurlCodeBlock.classList.remove('d-none');
+                    apiCurlCodeBlock.style.display = 'block';
 
                     apiCodeWrapper
                         .querySelectorAll("[data-code-lang-trigger='curl']")
@@ -219,6 +236,49 @@ function toggleCodeBlocks(activeLang) {
                             curlTab.classList.add('active');
                         });
                 });
+            }
+        });
+    }
+
+    console.log('codeWrappers: ', codeWrappers)
+
+    if (codeWrappers.length) {
+        codeWrappers.forEach((codeWrapper) => {
+            const codeBlocks = codeWrapper.querySelectorAll(
+                `[data-code-lang-block="${activeLang}"`
+            );
+            // const apiCurlCodeBlocks = codeWrapper.querySelectorAll(
+            //     '.js-code-block-curl'
+            // );
+
+            if (codeBlocks.length) {
+                // loop through code blocks and check if they contain the active lang
+                codeBlocks.forEach((codeBlock) => {
+                    codeBlock.style.display = 'block';
+                });
+                // if (activeLang !== 'curl') {
+                //     apiCurlCodeBlocks.forEach((apiCurlCodeBlock) => {
+                //         apiCurlCodeBlock.classList.add('d-none');
+                //     });
+                // }
+            } else {
+                // find the first code block in the code wrapper and turn on
+                const firstCodeBlock = codeWrapper.querySelector('.js-code-block');
+                firstCodeBlock.style.display = 'block';
+                codeWrapper.querySelector('[data-code-lang-trigger]').classList.add('active');
+                
+
+
+                // turn on curl code block for this Code Example wrapper
+                // apiCurlCodeBlocks.forEach((apiCurlCodeBlock) => {
+                //     apiCurlCodeBlock.classList.remove('d-none');
+
+                //     apiCodeWrapper
+                //         .querySelectorAll("[data-code-lang-trigger='curl']")
+                //         .forEach((curlTab) => {
+                //             curlTab.classList.add('active');
+                //         });
+                // });
             }
         });
     }
