@@ -23,7 +23,7 @@ Search, access, and manage all of your tests on one page with the [Synthetic Tes
 
 The **Synthetics Filters** panel on the left side of the page lists several default facets you can use to search through your tests. Default facets include:
 
-| Facet          | Description                                                                   |     
+| Facet          | Description                                                                   |
 |----------------|-------------------------------------------------------------------------------|
 | `Type`         | The type of Synthetic test: `browser`, `api`, `api-ssl`, `api-tcp`, `api-dns` |
 | `Status`       | The Synthetic test status: `OK`, `Alert`, `No Data`                           |
@@ -50,7 +50,7 @@ If you want to exclusively search for browser tests, click **Browser Test** in t
 
 ## Manage tests
 
-Bulk manage your Synthetic tests from the list page by clicking multiple individual test checkboxes in the table or by clicking on the checkbox next to `State` to select all the test checkboxes of the page.  
+Bulk manage your Synthetic tests from the list page by clicking multiple individual test checkboxes in the table or by clicking on the checkbox next to `State` to select all the test checkboxes of the page.
 Once selected, choose `Run Tests Now` or `Delete`, which will bulk run or delete all of the selected Synthetic tests.
 
 {{< img src="synthetics/search/bulk-edit.png" alt="Bulk editing" >}}
