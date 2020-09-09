@@ -19,13 +19,13 @@ further_reading:
 
 See [metadata.csv][1] for a list of metrics provided by this integration.
 
-Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to hostname, security-groups, and more.
 
 **Note**: Metrics prefixed with `ecs.containerinsights.*` come from the [AWS CloudWatch agent][2].
 
 ### Events
 
-To reduce noise, the Amazon ECS integration is automatically whitelisted to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
+To reduce noise, the Amazon ECS integration is automatically set up to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 

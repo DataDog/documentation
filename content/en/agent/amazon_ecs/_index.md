@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Amazon ECS on EC2 is a highly scalable, high performance container management service for Docker containers running on EC2 instances.
+Amazon ECS on EC2 is a highly scalable, high-performance container management service for Docker containers running on EC2 instances.
 
 This page covers Amazon ECS setup with [Datadog Container Agent v6][1]. For other setups, see:
 
@@ -42,15 +42,19 @@ This task launches the Datadog container. When you need to modify the configurat
 
 If you're [using APM][5], [DogStatsD][6], or [log management][7], set the appropriate flags in the task definition:
 
-- If you are using APM, set `portMappings` so your downstream containers can ship traces to the Agent service. APM uses `TCP` on port `8126` to receive traces, so set this as the `hostPort` in your task's definition. Note that in order to enable trace collection from other containers, you must ensure that the `DD_APM_NON_LOCAL_TRAFFIC` environment variable is set to `true`. Learn more about [APM with containers][8].
+- If you are using APM, set `portMappings` so your downstream containers can ship traces to the Agent service. APM uses `TCP` on port `8126` to receive traces, so set this as the `hostPort` in your task's definition. 
 
-- If you are using DogStatsD, set the `hostPort` as `UDP` on port `8125` in your task's definition. Note that in order to enable DogStatsD metrics collection from other containers, you must ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
+**Note**: To enable trace collection from other containers, ensure that the `DD_APM_NON_LOCAL_TRAFFIC` environment variable is set to `true`. Learn more about [APM with containers][8].
+
+- If you are using DogStatsD, set the `hostPort` as `UDP` on port `8125` in your task's definition. 
+
+**Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
 - If you are using log management, refer to the dedicated [Log collection documentation][5].
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
-You may either configure the task using the [AWS CLI tools][9] or using the Amazon Web Console.
+Configure the task using either the [AWS CLI tools][9] or using the Amazon Web Console.
 
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
@@ -129,7 +133,7 @@ Add the following permissions to your [Datadog IAM policy][10] to collect Amazon
 
 #### Run the Agent as a Daemon Service
 
-Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][12].
+Ideally, you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][12].
 
 ##### Schedule a Daemon Service in AWS using Datadog's ECS Task
 
@@ -142,7 +146,7 @@ Ideally you want the Datadog Agent to load on one container on each EC2 instance
 
 #### Dynamic detection and monitoring of running services
 
-Datadog's [Autodiscovery][13] can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
+Datadog's [Autodiscovery][13] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
 #### AWSVPC Mode
 

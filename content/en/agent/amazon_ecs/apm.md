@@ -69,7 +69,7 @@ After following the [Amazon ECS agent installation instructions][1], enable trac
 
 ## Launch time variables
 
-In cases where variables on your ECS application are set at launch time, you **must** set the hostname as an environment variable with `DD_AGENT_HOST`. Otherwise, you can set the hostname in your application's source code for Python, Javascript, or Ruby. For Java and .NET you can set the hostname in the ECS task. For example:
+In cases where variables on your ECS application are set at launch time, you **must** set the hostname as an environment variable with `DD_AGENT_HOST`. Otherwise, you can set the hostname in your application's source code for Python, Javascript, or Ruby. For Java and .NET, you can set the hostname in the ECS task. For example:
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -86,7 +86,7 @@ def get_aws_ip():
 tracer.configure(hostname=get_aws_ip())
 {{< /code-block >}}
 
-For more examples of how to set the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
+For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 
 [1]: https://docs.datadoghq.com/tracing/setup/python/#change-agent-hostname
@@ -107,7 +107,7 @@ request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
 });
 {{< /code-block >}}
 
-For more examples of how to set the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
+For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 [1]: https://docs.datadoghq.com/tracing/setup/nodejs/#change-agent-hostname
 {{% /tab %}}
@@ -161,7 +161,7 @@ Copy this script into the `entryPoint` field of your ECS task definition, updati
 ]
 {{< /code-block >}}
 
-For more examples of how to set the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
+For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
 [1]: https://docs.datadoghq.com/tracing/setup/java/#change-agent-hostname
 {{% /tab %}}

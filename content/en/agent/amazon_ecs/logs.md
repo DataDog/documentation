@@ -117,7 +117,7 @@ To collect all logs written by running applications in your ECS containers and s
 
 ## Activate log integrations
 
-The `source` attribute is used to identify the integration to use for each container. Override it directly in your containers labels to start using [log integrations][1]. Read Datadog's [Autodiscovery guide for logs][2] in order to learn more about this process.
+The `source` attribute is used to identify the integration to use for each container. Override it directly in your containers labels to start using [log integrations][1]. Read Datadog's [Autodiscovery guide for logs][2] to learn more about this process.
 
 ## Further reading
 
