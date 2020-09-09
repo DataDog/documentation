@@ -10459,7 +10459,7 @@
       "url": "https://www.datadoghq.com/support/"
     },
     "description": "Collection of all Datadog Public endpoints.",
-    "title": "Datadog API Collection",
+    "title": "Datadog API V2 Collection",
     "version": "1.0"
   },
   "openapi": "3.0.0",

@@ -118,6 +118,7 @@ Setting the value without a secret results in the token being readable in the `P
   * [`agent-services.yaml`: The Cluster Agent Service manifest][4]
   * [`secrets.yaml`: The secret holding the Datadog API key][5]
   * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][6]
+  * [`install_info-configmap.yaml`: Install Info Configmap][10]
 
 2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][7] encoded in base64:
 
@@ -128,6 +129,7 @@ Setting the value without a secret results in the token being readable in the `P
 3. In the `cluster-agent-deployment.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 4. Run: `kubectl apply -f agent-services.yaml`
 5. Run: `kubectl apply -f secrets.yaml`
+6. Run: `kubectl apply -f install_info-configmap.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### Step 4 - Verification
@@ -211,7 +213,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
+[1]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [2]: /agent/kubernetes/
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
@@ -220,3 +222,4 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml
 [9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
+[10]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml

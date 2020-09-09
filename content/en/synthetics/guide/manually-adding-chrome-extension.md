@@ -26,4 +26,4 @@ If you’re unable to download applications directly from the Chrome Web Store f
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa?hl=en
-[2]: synthetics/browser_tests
+[2]: /synthetics/browser_tests

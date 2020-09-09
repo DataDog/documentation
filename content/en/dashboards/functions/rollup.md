@@ -36,7 +36,7 @@ The following bar graph displays the same metric, graphed using a day-long rollu
 |------------------|------------------------------------------------|------------------|
 | `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <TIME> , <METHOD>)` |
 
-Appending the `.moving_rollup()` function at the end of a query allows you to combine points from the most recent specified time range, i.e. the last X seconds. The function takes two parameters, `<TIME>` and `<METHOD>`: `.moving_rollup(<TIME>,<METHOD>)`.
+Applying the `.moving_rollup()` function to a query allows you to combine points from the most recent specified time range, i.e. the last X seconds. The function takes two parameters, `<TIME>` and `<METHOD>`: `.moving_rollup(<TIME>,<METHOD>)`.
 
 | Parameter        | Description                                   |
 ------------------|------------------------------------------------|
