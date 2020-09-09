@@ -95,7 +95,7 @@ If you need to change the port used to collect StatsD metrics, use the `DD_DOGST
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To start collected your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
+To start collecting your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
 
 1. Add a `hostPort` to your `datadog-agent.yaml` manifest:
 
