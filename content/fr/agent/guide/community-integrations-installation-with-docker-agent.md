@@ -19,55 +19,27 @@ Les intégrations développées par la communauté pour l'Agent Datadog sont sto
 
 Pour installer le check `<NOM_INTÉGRATION>` sur votre host :
 
-1. Installez le [kit de développement logiciel][1].
-2. Clonez le dépôt integrations-extras :
+1. [Téléchargez et lancez l'Agent Datadog][1].
+2. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    datadog-agent integration install -t <NOM_INTÉGRATION>==<VERSION_INTEGRATION>
     ```
 
-3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
+3. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][2].
+4. [Redémarrez l'Agent][3].
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
-
-4. Pour créer le paquet `<NOM_INTÉGRATION>`, exécutez :
-
-    ```
-    ddev -e release build <INTEGRATION_NAME>
-    ```
-
-5. [Téléchargez et lancez l'Agent Datadog][2].
-6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
-
-    ```
-    datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl
-    ```
-
-7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][3].
-8. [Redémarrez l'Agent][4].
-
-[1]: /fr/developers/integrations/new_check_howto/#developer-toolkit
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: /fr/getting_started/integrations/
-[4]: /fr/agent/guide/agent-commands/#restart-the-agent
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /fr/getting_started/integrations/
+[3]: /fr/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 Le meilleur moyen d'utiliser une intégration provenant du dépôt integrations-extra avec l'Agent Docker est de générer une image de l'Agent avec cette intégration installée. Utilisez le Dockerfile suivant pour créer une version mise à jour de l'Agent comprenant l'intégration `<NOM_INTÉGRATION>` issue de integrations-extras.
 
-```text
-FROM python:3.8 AS wheel_builder
-WORKDIR /wheels
-RUN pip install "datadog-checks-dev[cli]"
-RUN git clone https://github.com/DataDog/integrations-extras.git
-RUN ddev config set extras ./integrations-extras
-RUN ddev -e release build <NOM_INTÉGRATION>
-
+```dockerfile
 FROM datadog/agent:latest
-COPY --from=wheel_builder /wheels/integrations-extras/<NOM_INTÉGRATION>/dist/ /dist
-RUN agent integration install -r -w /dist/*.whl
+RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
 Utilisez ensuite la nouvelle image de l'Agent en combinaison avec [Autodiscovery][1] pour activer le check `<NOM_INTÉGRATION>`.
