@@ -55,7 +55,7 @@ To enable enhanced Lambda metrics without enabling logging for your functions, e
 
 Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][9].
 
-[1]: /serverless/installation/installing_the_library
+[1]: /serverless/datadog_lambda_library
 [2]: /serverless/forwarder/
 [3]: /integrations/amazon_lambda/?tab=nodejs#metric-collection
 [4]: /serverless/installation/
