@@ -125,8 +125,8 @@ The following parameters can be used to configure the Datadog browser log librar
 | `forwardErrorsToLogs`          | Boolean | no       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`                   | Number  | no       | `100`           | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
 | `trackSessionAcrossSubdomains` | Boolean | no       | `false`         | Set to `true` to preserve session across subdomains of the same site. **Configuration must match when using RUM SDK**  |
-| `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will disable session tracking on insecure (non-HTTPS) connections. **Configuration must match when using RUM SDK** |
-| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the Logs SDK to run when the site is loaded from another one (ex: via an iframe). Implies useSecureSessionCookie. **Configuration must match when using RUM SDK** |
+| `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will prevent session tracking on insecure (non-HTTPS) connections. **Configuration must match when using RUM SDK** |
+| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the Logs SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **Configuration must match when using RUM SDK** |
 
 ## Send a custom log entry
 
