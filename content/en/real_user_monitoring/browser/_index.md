@@ -145,7 +145,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 | `proxyHost`                    | String  | No       | ``              | Optional proxy URL. See the full [proxy setup guide][7] for more information.                                     |
 | `trackSessionAcrossSubdomains` | Boolean | no       | `false`         | Set to `true` to preserve session across subdomains of the same site. **Configuration must match when using RUM SDK**  |
 | `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will prevent RUM events from sending on insecure (non-HTTPS) connections. **Configuration must match when using RUM SDK** |
-| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the RUM SDK to run when the site is loaded from another one (ex: via an iframe). Implies useSecureSessionCookie. **Configuration must match when using RUM SDK** |
+| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the RUM SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **Configuration must match when using RUM SDK** |
 
 
 ## Further Reading
