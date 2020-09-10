@@ -17,7 +17,7 @@ further_reading:
 
 ### Metrics
 
-See [metadata.csv][1] for a list of metrics provided by this integration.
+See [the Amazon ECS integration documentation][1] for a list of metrics provided by this integration.
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to hostname, security-groups, and more.
 
@@ -39,6 +39,6 @@ To remove the whitelist and receive all events from your Datadog Amazon ECS inte
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
+[1]: /integrations/amazon_ecs/#data-collected
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
 [3]: https://docs.datadoghq.com/help/
