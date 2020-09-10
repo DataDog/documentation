@@ -40,43 +40,6 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 View errors and exceptions in Datadog with a DogStatsD event:
 
-
-
-
-
-{{< multi-code-snippet-wrapper langs="python,ruby" >}}
-
-{{< code-block lang="python" filename="event.py" >}}
-```python
-from datadog import initialize, statsd
-
-options = {
-    'statsd_host':'127.0.0.1',
-    'statsd_port':8125
-}
-
-initialize(**options)
-
-statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
-```
-
-{{< /code-block >}}
-
-{{< code-block lang="ruby" filename="event.rb" >}}
-```ruby
-require 'datadog/statsd'
-
-statsd = Datadog::Statsd.new('localhost', 8125)
-
-statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
-```
-{{< /code-block >}}
-{{< /multi-code-snippet-wrapper >}}
-
-
-
-
-
 {{< multi-code-snippet-wrapper langs="python,ruby,go,java,php" >}}
 
 {{< code-block lang="python" filename="event.py" >}}

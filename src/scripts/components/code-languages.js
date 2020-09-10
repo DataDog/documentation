@@ -87,6 +87,7 @@ function redirectCodeLang(codeLang = '') {
 
         newCodeLang = queryParams.get('code-lang');
 
+        Cookies.set('code-lang', newCodeLang, { path: '/' });
         toggleCodeBlocks(newCodeLang);
 
     } else if (Cookies.get('code-lang')) {
