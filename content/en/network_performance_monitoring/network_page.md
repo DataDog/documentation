@@ -133,7 +133,7 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 
 Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) sources or destinations.
 
-Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connections:
+Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connection:
 
 {{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
 
