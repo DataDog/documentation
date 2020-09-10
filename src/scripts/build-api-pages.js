@@ -798,7 +798,10 @@ const processSpecs = (specs) => {
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
-        }).catch((e) => console.log(e));
+        }).catch((e) => {
+          console.log(e);
+          process.exitCode = 1;
+        })
     });
 };
 
