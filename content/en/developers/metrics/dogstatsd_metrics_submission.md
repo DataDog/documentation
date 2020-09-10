@@ -688,7 +688,6 @@ Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Lear
 {{< multi-code-snippet-wrapper langs="python,php" >}}
 
 {{< code-block lang="python" filename="timers.py" >}}
-In Python, timers are created with a decorator:
 ```python
 from datadog import initialize, statsd
 import time
@@ -708,10 +707,10 @@ def my_function():
 while(1):
   my_function()
 ```
+In Python, timers are created with a decorator.
 {{< /code-block >}}
 
 {{< code-block lang="python" filename="context_manager.py" >}}
-or with a context manager:
 ```python
 from datadog import statsd
 import time
@@ -730,6 +729,7 @@ def my_function():
 while(1):
   my_function()
 ```
+or with a context manager.
 {{< /code-block >}}
 
 {{< code-block lang="php" filename="timer.php" >}}

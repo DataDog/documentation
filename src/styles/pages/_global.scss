@@ -187,10 +187,10 @@ code {
     .code-snippet {
         position: relative;
         padding-right: 0 !important;
-        p {
-            margin: 0 0 10px 0;
-            padding: 0 10px;
-        }
+        // p {
+        //     margin: 0 0 10px 0;
+        //     padding: 0 10px;
+        // }
         pre {
             padding: 30px 10px;
         }
@@ -250,12 +250,12 @@ code {
         border-radius: 0;
       }
 
-      p {
-        margin: 0;
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        padding: 0 10px;
-      }
+    //   p {
+    //     margin: 0;
+    //     border-left: 1px solid #ddd;
+    //     border-right: 1px solid #ddd;
+    //     padding: 0 10px;
+    //   }
       
   }
 }
