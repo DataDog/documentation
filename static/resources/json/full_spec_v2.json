@@ -7000,7 +7000,9 @@
                         900,
                         1800,
                         3600,
-                        7200
+                        7200,
+                        10800,
+                        21600
                       ],
                       "format": "int32",
                       "type": "integer",
@@ -7012,7 +7014,9 @@
                         "FIFTEEN_MINUTES",
                         "THIRTY_MINUTES",
                         "ONE_HOUR",
-                        "TWO_HOURS"
+                        "TWO_HOURS",
+                        "THREE_HOURS",
+                        "SIX_HOURS"
                       ]
                     },
                     "maxSignalDuration": {
@@ -7314,7 +7318,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7326,7 +7332,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -7461,7 +7469,9 @@
           900,
           1800,
           3600,
-          7200
+          7200,
+          10800,
+          21600
         ],
         "format": "int32",
         "type": "integer",
@@ -7473,7 +7483,9 @@
           "FIFTEEN_MINUTES",
           "THIRTY_MINUTES",
           "ONE_HOUR",
-          "TWO_HOURS"
+          "TWO_HOURS",
+          "THREE_HOURS",
+          "SIX_HOURS"
         ]
       },
       "SecurityMonitoringRuleMaxSignalDuration": {
@@ -7547,7 +7559,9 @@
               900,
               1800,
               3600,
-              7200
+              7200,
+              10800,
+              21600
             ],
             "format": "int32",
             "type": "integer",
@@ -7559,7 +7573,9 @@
               "FIFTEEN_MINUTES",
               "THIRTY_MINUTES",
               "ONE_HOUR",
-              "TWO_HOURS"
+              "TWO_HOURS",
+              "THREE_HOURS",
+              "SIX_HOURS"
             ]
           },
           "maxSignalDuration": {
@@ -7780,7 +7796,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7792,7 +7810,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -7995,7 +8015,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -8007,7 +8029,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -19922,7 +19946,9 @@
                                   900,
                                   1800,
                                   3600,
-                                  7200
+                                  7200,
+                                  10800,
+                                  21600
                                 ],
                                 "format": "int32",
                                 "type": "integer",
@@ -19934,7 +19960,9 @@
                                   "FIFTEEN_MINUTES",
                                   "THIRTY_MINUTES",
                                   "ONE_HOUR",
-                                  "TWO_HOURS"
+                                  "TWO_HOURS",
+                                  "THREE_HOURS",
+                                  "SIX_HOURS"
                                 ]
                               },
                               "maxSignalDuration": {
@@ -20194,7 +20222,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -20206,7 +20236,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -20432,7 +20464,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20444,7 +20478,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -20806,7 +20842,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20818,7 +20856,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -21055,7 +21095,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -21067,7 +21109,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -21277,7 +21321,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -21289,7 +21335,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
