@@ -17,6 +17,8 @@ further_reading:
 
 ### Metrics
 
+Metrics collected by the Agent when using Amazon ECS on EC2 instances:
+
 {{< get-metrics-from-git "amazon_ecs" >}}
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to hostname, security-groups, and more.
