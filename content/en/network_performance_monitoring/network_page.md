@@ -131,7 +131,7 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
 
-Use the _Show Unresolved Flows_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) sources or destinations.
+Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) sources or destinations.
 
 Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connections:
 
