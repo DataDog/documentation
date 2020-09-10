@@ -130,19 +130,23 @@ Paste the generated code snippet into the head tag (in front of any other script
 
 ## Initialization parameters
 
-| Parameter            | Type    | Required | Default                                                                            | Description                                                                                                  |
-| -------------------- | ------- | -------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `applicationId`      | String  | Yes      | `` | The RUM application ID.                                                       |
-| `clientToken`        | String  | Yes      | `` | A [Datadog Client Token][5].                                                  |
-| `site`               | String  | Yes      | `datadoghq.com`                                                                    | The Datadog Site of your organization. `datadoghq.com` for Datadog US site, `datadoghq.eu` for Datadog EU site.                   |
-| `service`            | String  | No       | `` | The service name for this application.                             |
-| `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
-| `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
-| `trackInteractions`          | Boolean  | No       | `false` | Enables [automatic collection of Users Actions][6] |
-| `resourceSampleRate` | Number  | No       | `100`                                                                              | Percentage of tracked sessions with resources collection. `100` for all, `0` for none of them.               |
-| `sampleRate`         | Number  | No       | `100`                                                                              | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them. |
-| `silentMultipleInit` | Boolean | No       | `false`                                                                            | Initialization fails silently if Datadog's RUM is already initialized on the page                            |
-| `proxyHost`          | String  | No       | `` | Optional proxy URL. See the full [proxy setup guide][7] for more information. |
+| Parameter                      | Type    | Required | Default         | Description                                                                                                       |
+| ------------------------------ | ------- | -------- | --------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `applicationId`                | String  | Yes      | ``              | The RUM application ID.                                                                                           |
+| `clientToken`                  | String  | Yes      | ``              | A [Datadog Client Token][5].                                                                                      |
+| `site`                         | String  | Yes      | `datadoghq.com` | The Datadog Site of your organization. `datadoghq.com` for Datadog US site, `datadoghq.eu` for Datadog EU site.   |
+| `service`                      | String  | No       | ``              | The service name for this application.                                                                            |
+| `env`                          | String  | No       | ``              | The application’s environment e.g. prod, pre-prod, staging.                                                       |
+| `version`                      | String  | No       | ``              | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                                                       |
+| `trackInteractions`            | Boolean | No       | `false`         | Enables [automatic collection of Users Actions][6]                                                                |
+| `resourceSampleRate`           | Number  | No       | `100`           | Percentage of tracked sessions with resources collection. `100` for all, `0` for none of them.                    |
+| `sampleRate`                   | Number  | No       | `100`           | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them.      |
+| `silentMultipleInit`           | Boolean | No       | `false`         | Initialization fails silently if Datadog's RUM is already initialized on the page                                 |
+| `proxyHost`                    | String  | No       | ``              | Optional proxy URL. See the full [proxy setup guide][7] for more information.                                     |
+| `trackSessionAcrossSubdomains` | Boolean | no       | `false`         | Set to `true` to preserve session across subdomains of the same site. **Configuration must match when using RUM SDK**  |
+| `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will disable rum events sending on insecure (non-HTTPS) connections. **Configuration must match when using RUM SDK** |
+| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the RUM SDK to run when the site is loaded from another one (ex: via an iframe). Implies useSecureSessionCookie. **Configuration must match when using RUM SDK** |
+
 
 ## Further Reading
 
