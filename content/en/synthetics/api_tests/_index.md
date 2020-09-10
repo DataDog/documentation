@@ -68,7 +68,7 @@ Define the request you want to be executed by Datadog:
 3. **Name**: The name of your SSL test.
 4. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/
@@ -84,8 +84,8 @@ Define the request you want to be executed by Datadog:
 2. Specify the `Host` and the TCP `Port`.
 3. **Name**: The name of your TCP test.
 4. **Select your tags**: The tags attached to your TCP test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic TCP test on a private port not accessible from the public internet.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click **Test URL** to try the request configuration and see a response preview on the righthand side.
 
 [1]: /synthetics/
@@ -102,7 +102,7 @@ Define the request you want to be executed by Datadog:
 3. **Name**: The name of your DNS test.
 4. **Select your tags**: The tags attached to your DNS test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
 5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click **Test URL** to try the request configuration and see a response preview on the righthand side.
 
 [1]: /synthetics/
