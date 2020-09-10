@@ -111,10 +111,12 @@ Add environment variables to the Cluster Agent deployment which enable the Admis
 {{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" disable_copy="true" >}}
 - name: DD_ADMISSION_CONTROLLER_ENABLED
   value: "true"
-- name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
-  value: "false"
 - name: DD_ADMISSION_CONTROLLER_SERVICE_NAME
   value: "datadog-cluster-agent-admission-controller"
+
+# Uncomment this to configure APM tracers automatically (see below)
+# - name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
+#   value: "true"
 {{< /code-block >}}
 
 Finally, run the following commands:
