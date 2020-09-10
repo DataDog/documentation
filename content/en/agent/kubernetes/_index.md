@@ -180,7 +180,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, due to limited CRD support, the operator may not work as expected.
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the operator may not work as expected.
 - [`Helm`][2] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
