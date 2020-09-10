@@ -37,7 +37,7 @@ Define the `HTTP`, `SSL`, `TCP`, or `DNS` request you want to be executed by Dat
 
 Define the request you want to be executed by Datadog:
 
-1. **Choose request type**: `HTTP`
+1. **Choose a request type**: `HTTP`.
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
     * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
         * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
@@ -63,7 +63,7 @@ Define the request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/make-ssl-request.png" alt="Define SSL Request"  style="width:80%;" >}}
 
-1. **Choose request type**: `SSL`
+1. **Choose a request type**: `SSL`.
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
 3. **Name**: The name of your SSL test.
 4. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
@@ -80,7 +80,7 @@ Define the request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/tcp_test.png" alt="Define TCP Request"  style="width:80%;" >}}
 
-1. **Choose request type**: `TCP`
+1. **Choose a request type**: `TCP`.
 2. Specify the `Host` and the TCP `Port`.
 3. **Name**: The name of your TCP test.
 4. **Select your tags**: The tags attached to your TCP test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
@@ -97,7 +97,7 @@ Define the request you want to be executed by Datadog:
 
 {{< img src="synthetics/api_tests/dns_test.png" alt="Define DNS Request"  style="width:80%;" >}}
 
-1. **Choose request type**: `DNS`
+1. **Choose a request type**: `DNS`.
 2. Specify the `Domain` and optional `DNS Server` to use.
 3. **Name**: The name of your DNS test.
 4. **Select your tags**: The tags attached to your DNS test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
