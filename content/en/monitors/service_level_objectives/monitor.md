@@ -20,7 +20,9 @@ On the [SLO status page][2], select **New SLO +**. Then select [**Monitor**][3].
 
 ### Define queries
 
-To start, you need to be using Datadog monitors. To set up a new monitor, go to the [monitor creation page][4] and select one of the monitor types that are supported by SLOs (listed below). Search for monitors by name and click on it to add it to the source list. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
+To start, you need to be using Datadog monitors. To set up a new monitor, go to the [monitor creation page][4] and select one of the monitor types that are supported by SLOs (listed below). Search for monitors by name and click on it to add it to the source list.
+
+For example, if you have a Metric Monitor that is configured to alert when user request latency is greater than 250ms, you could set a monitor-based SLO on that monitor. Let’s say you choose an SLO target of 99% over the past 30 days. What this means is that the latency of user requests should be less than 250ms 99% of the time over the past 30 days. To set this up, you would:
 
 1. Select a single monitor or,
 2. Select multiple monitors (up to 20) or,
