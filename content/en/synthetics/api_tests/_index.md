@@ -67,7 +67,7 @@ Define the request you want to be executed by Datadog:
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
 3. **Name**: The name of your SSL test.
 4. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic SSL test on a private host not accessible from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
@@ -101,7 +101,7 @@ Define the request you want to be executed by Datadog:
 2. Specify the `Domain` and optional `DNS Server` to use.
 3. **Name**: The name of your DNS test.
 4. **Select your tags**: The tags attached to your DNS test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic DNS test on a private domain that cannot be resolved from the public internet.
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click **Test URL** to try the request configuration and see a response preview on the righthand side.
 
@@ -168,7 +168,7 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 
 {{% tab "DNS Test" %}}
 
-| Type                | Subtypes                | Operator                                           | Value type                 |
+| Type                | Record type             | Operator                                           | Value type                 |
 |---------------------|-------------------------|----------------------------------------------------|----------------------------|
 | response time       |                         | `is less than`                                     | _Integer (ms)_             |
 | every record        | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
