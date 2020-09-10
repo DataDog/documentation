@@ -210,7 +210,7 @@ Datadog アカウントに Kubernetes イベントが流れ込み始め、Agent 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent
+[1]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
 [2]: /ja/agent/kubernetes/
 [3]: /ja/agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml

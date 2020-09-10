@@ -6,6 +6,8 @@ aliases:
   - /ja/graphing/infrastructure/serverless_functions
   - /ja/graphing/infrastructure/serverless/
   - /ja/infrastructure/serverless/
+  - /ja/tracing/serverless_functions/datadog_apm
+  - /ja/integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
   - link: /integrations/amazon_xray/
     tag: X-Ray インテグレーション
@@ -26,21 +28,27 @@ further_reading:
 
 ### 1. AWS インテグレーションをインストール
 
-[AWS インテグレーション][2] をインストールすることから始めます。これにより、Datadog は AWS Lambda から Amazon CloudWatch メトリクスを取り込めるようになります。AWS インテグレーションをインストールすることで、AWS Lambda トレース、拡張メトリクス、カスタムカスタムメトリクス、ログの取り込みに必要な Datadog Forwarder も構成されます。
+[AWS インテグレーション][2]をインストールします。これにより、Datadog は AWS CloudWatch から Lambda メトリクスを取り込むことができます。
 
-### 2. アプリケーションをインスツルメント
+### 2. Datadog Forwarder のインストール
+
+AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][3]をインストールします。**注**: [AWS インテグレーション][2] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
+
+### 3. アプリケーションのインスツルメンテーション
+
+サーバーレスアプリケーションをインスツルメントする手順については、以下の Lambda ランタイムを選択してください。
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-## AWS Lambda をお使いではありませんか？
+## その他のサービス
 
 ### Azure App Service
 
-Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service 拡張機能についてのドキュメント][3]を参照してください。
+Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service 拡張機能についてのドキュメント][4]を参照してください。
 
 ### Google Cloud Functions
 
-Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][4]を有効にします。
+Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][5]を有効にします。
 
 ## その他の参考資料
 
@@ -48,5 +56,6 @@ Google Cloud Functions は、単一目的の小規模な関数を作成できる
 
 [1]: http://app.datadoghq.com/functions
 [2]: /ja/integrations/amazon_web_services/
-[3]: /ja/infrastructure/serverless/azure_app_services/#overview
-[4]: /ja/integrations/google_cloud_platform/
+[3]: /ja/serverless/forwarder
+[4]: /ja/infrastructure/serverless/azure_app_services/#overview
+[5]: /ja/integrations/google_cloud_platform/
