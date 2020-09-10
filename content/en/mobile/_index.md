@@ -52,7 +52,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 {{< img src="mobile/quick_actions.png" alt="dashboard page">}}
 
-Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. For iOS, access your top 5 “Frequently Viewed By Me” preset dashboards, and for Android, access your top 5 viewed dashboards on mobile.
+Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. On iOS, it shows your top five “Frequently Viewed By Me” preset dashboards. On Android, it shows your top five viewed dashboards on mobile.
 
 ## Account
 
