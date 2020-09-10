@@ -70,23 +70,14 @@ DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-#### Configuration
-
-```text
-[2020-07-01T17:42:50Z] DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtrace.request_init_hook_reachable":false,"date":"2020-07-01T17:42:50Z","os_name":"Linux 49b1cb4bdd12 4.19.76-linuxkit #1 SMP Tue May 26 11:42:35 UTC 2020 x86_64","os_version":"4.19.76-linuxkit","version":"1.0.0-nightly","lang":"php","lang_version":"7.4.5","env":null,"enabled":true,"service":null,"enabled_cli":false,"agent_url":"https://localhost:8126","debug":false,"analytics_enabled":false,"sample_rate":1.000000,"sampling_rules":null,"tags":null,"service_mapping":null,"distributed_tracing_enabled":true,"priority_sampling_enabled":true,"dd_version":null,"architecture":"x86_64","sapi":"cgi-fcgi","ddtrace.request_init_hook":null,"open_basedir_configured":false,"uri_fragment_regex":null,"uri_mapping_incoming":null,"uri_mapping_outgoing":null,"auto_flush_enabled":false,"generate_root_span":true,"http_client_split_by_domain":false,"measure_compile_time":true,"report_hostname_on_root_span":false,"traced_internal_functions":null,"auto_prepend_file_configured":false,"integrations_disabled":null,"enabled_from_env":true,"opcache.file_cache":null}
-```
-
-#### Diagnostics
-
-Diagnostics for the PHP tracer print if the tracer is in DEBUG mode. They are also available through the other options below.
-
-```text
-[2020-07-01T17:35:25Z] DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
-[2020-07-01T17:35:25Z] DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
-```
-
 #### PHP Info
-Obtain the JSON string from the PHP info page. Diagnostic information is be displayed in a separate table to help diagnose common issues.
+Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRACER CONFIGURATION". Create the following PHP file and access it from a browser on the host machine.
+
+```php
+<?php phpinfo(); ?>
+```
+
+Diagnostic information is displayed in a separate table to help diagnose common issues.
 
 {{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info"  >}}
 
@@ -115,13 +106,31 @@ ddtrace.disable => Off => Off
 ...
 ```
 
+#### Configuration
+
+If the tracer is in [DEBUG mode][1], the startup logs will appear in the `error_log` once per process on the first request.
+
+```text
+DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtrace.request_init_hook_reachable":false,"date":"2020-07-01T17:42:50Z","os_name":"Linux 49b1cb4bdd12 4.19.76-linuxkit #1 SMP Tue May 26 11:42:35 UTC 2020 x86_64","os_version":"4.19.76-linuxkit","version":"1.0.0-nightly","lang":"php","lang_version":"7.4.5","env":null,"enabled":true,"service":null,"enabled_cli":false,"agent_url":"https://localhost:8126","debug":false,"analytics_enabled":false,"sample_rate":1.000000,"sampling_rules":null,"tags":null,"service_mapping":null,"distributed_tracing_enabled":true,"priority_sampling_enabled":true,"dd_version":null,"architecture":"x86_64","sapi":"cgi-fcgi","ddtrace.request_init_hook":null,"open_basedir_configured":false,"uri_fragment_regex":null,"uri_mapping_incoming":null,"uri_mapping_outgoing":null,"auto_flush_enabled":false,"generate_root_span":true,"http_client_split_by_domain":false,"measure_compile_time":true,"report_hostname_on_root_span":false,"traced_internal_functions":null,"auto_prepend_file_configured":false,"integrations_disabled":null,"enabled_from_env":true,"opcache.file_cache":null}
+```
+
+#### Diagnostics
+
+Failed diagnostics for the PHP tracer print in the `error_log` if the tracer is in [DEBUG mode][1].
+
+```text
+DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
+DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
+```
+
 #### Runtime
 
-Access the JSON string at runtime with `\DDTrace\startup_logs()`.
+Access the startup logs as a JSON string at runtime with `\DDTrace\startup_logs()`.
 
 ```php
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
+[1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{% /tab %}}
 
 {{% tab "Go" %}}
