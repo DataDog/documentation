@@ -50,9 +50,9 @@ To account for modern web applications, loading time watches for network request
 * **Initial Load**: Loading Time is equal to *whichever is longer*:
 
     - The difference between `navigationStart` and `loadEventEnd`.
-    - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring).
+    - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests or a DOM mutation).
 
-* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring)
+* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or a DOM mutation).
 
 ### Hash SPA navigation
 
@@ -66,9 +66,9 @@ Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK autom
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation][8]|
-| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
-| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
-| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
+| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
+| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
+| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
 | `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
 | `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
 | `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
@@ -94,7 +94,7 @@ Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK autom
 
 All of your website’s resources are collected by default: images, XHRs, [XMLHttpRequest][1], CSS files, JS assets, and font files.
 
-Detailed network timing data regarding the loading of an application’s resources are being collected with the [Performance Resource Timing API][2]
+Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][2].
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
@@ -142,27 +142,27 @@ Detailed network timing data regarding the loading of an application’s resourc
 {{% /tab %}}
 {{% tab "Error" %}}
 
-Front-end errors are automatically collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 ## Error Origins
 Front-end errors are split in 3 different categories depending on their `error.origin`:
 
-- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1]
-- **source**: unhandled exceptions or unhandled promise rejections (source-code related)
-- **console**: console.error() API calls
+- **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1].
+- **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
+- **console**: `console.error()` API calls.
 
 ## Facet Collected
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.origin`  | string | Where the error originates from (i.e. console, network, etc.)          |
+| `error.origin`  | string | Where the error originates from (for example, the console or network).     |
 | `error.kind`    | string | The error type or kind (or code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 
-### Network Errors
+### Network errors
 
-Network errors include information about the failing HTTP request. Hence, the following facets are also collected:
+Network errors include information about failing HTTP requests. The following facets are also collected:
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -173,9 +173,9 @@ Network errors include information about the failing HTTP request. Hence, the fo
 | `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
 | `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
 
-### Source Errors
+### Source errors
 
-Source Errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -187,17 +187,17 @@ Source Errors include code-level information about the error. More information a
 {{% tab "User Action" %}}
 
 ## Automatic Collection of User Actions
-Real User Monitoring (RUM) SDKs automatically detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][5] to `true` to enable this feature.
+Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][5] to `true` to enable this feature.
 
-**Note**:  The trackInteractions initialization parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
+**Note**:  The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
-Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered as finished. The user action also benefits from its parent view attributes: browser information, geolocation data, [global context][1], etc.
+Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered finished. The user action also benefits from its parent view attributes such as browser information, geolocation data, [global context][1].
 
 ### How is the User Action duration calculated?
-Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring).
+Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Custom User Actions
-Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][2]. They are useful to send information relative to an event occuring during a user journey: a custom timing, customer cart information, etc.
+Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][2]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
 ## Measures Collected
 
