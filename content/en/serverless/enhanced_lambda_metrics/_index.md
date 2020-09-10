@@ -64,3 +64,4 @@ Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the
 [7]: /serverless/datadog_lambda_library
 [8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [9]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[10]: /metrics/distributions/
