@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   monitors: {}
@@ -43,7 +45,7 @@ supported_os:
 
 StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

@@ -45,7 +45,7 @@ JavaScript は、必須のフロー変数を Datadog のログ属性としてキ
 ```
 // ここに Datadog API URL を設定します。
 // 注: Datadog EU サイト (app.datadoghq.eu) にいる場合、HTTP ログエンドポイントは http-intake.logs.datadoghq.eu です。
-var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_キー>?ddsource=apigee";
+var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddsource=apigee";
 
 // デバッグ
 // print(dd_api_url);
@@ -54,12 +54,12 @@ var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_キー>?d
 // クライアント、ターゲット、合計の応答時間を計算します
 var request_start_time = context.getVariable('client.received.start.timestamp');
 var request_end_time = context.getVariable('client.received.end.timestamp');
+var system_timestamp = context.getVariable('system.timestamp');
 var target_start_time = context.getVariable('target.sent.start.timestamp');
 var target_end_time = context.getVariable('target.received.end.timestamp');
-var total_request_time = request_end_time - request_start_time;
+var total_request_time = system_timestamp - request_start_time;
 var total_target_time = target_end_time - target_start_time;
 var total_client_time = total_request_time - total_target_time;
-
 var timestamp = crypto.dateFormat('YYYY-MM-dd HH:mm:ss.SSS');
 var organization = context.getVariable("organization.name");
 var networkClientIP = context.getVariable("client.ip");
@@ -99,20 +99,19 @@ var logObject = {
     "targetLatency": targetLatency,
     "totalLatency": totalLatency,
     "http.client.start_time_ms": request_start_time,
-    "http.client.end_time_ms": request_end_time,
+    "http.client.end_time_ms": request_end_time, 
     "http.useragent": userAgent,
     "message": messageContent,
 };
 
 
 var headers = {
-    'Content-Type': 'application/json'
+ 'Content-Type': 'application/json'
 };
 
 
 // デバッグ
 // print('ロギングオブジェクト' + JSON.stringify(logObject));
-
 var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(logObject));
 
 // Datadog にログを送信します

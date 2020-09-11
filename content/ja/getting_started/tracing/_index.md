@@ -52,9 +52,18 @@ sudo datadog-agent status
 
 ## Datadog APM
 
+### アプリ内のドキュメントに従ってください (推奨)
+
+残りのステップを実行し、Datadog アプリ内の[クイックスタート手順][10]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (この場合はホストベースのデプロイメント) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に Continuous Profiler、App Analytics、およびトレース ID 挿入を有効にします。
+
+
 ### APM を有効にする
 
-最新バージョンの Agent v6 と v7 では、APM はデフォルトで有効化されています。これは、Agent の [`datadog.yaml` コンフィギュレーションファイル][10]で確認できます。
+最新バージョンの Agent v6 と v7 では、APM はデフォルトで有効化されています。これは、Agent の [`datadog.yaml` コンフィギュレーションファイル][11]で確認できます。
 
 ```yaml
 # apm_config:
@@ -77,9 +86,9 @@ sudo datadog-agent status
 最高の体験になるよう、環境変数 `DD_ENV` を使用して、サービスのトレーサーを通じて `env` を構成することをお勧めします。
 
 さらに、トレーサーでログの挿入が有効になっている場合、`env` はトレースとログ全体で一貫しています。
-これがどのように機能するかについては、[統合サービスタグ付け][11]を参照してください。
+これがどのように機能するかについては、[統合サービスタグ付け][12]を参照してください。
 
-または、`datadog.yaml` を更新して環境に名前を付けて、`apm_config` で `env` を設定します。APM の `env` の設定の詳細については、[スコープへのプライマリタグの設定に関するガイド][12]を参照してください。
+または、`datadog.yaml` を更新して環境に名前を付けて、`apm_config` で `env` を設定します。APM の `env` の設定の詳細については、[スコープへのプライマリタグの設定に関するガイド][13]を参照してください。
 
 ## APM アプリケーション
 
@@ -141,7 +150,7 @@ curl http://0.0.0.0:5050/
 hello world
 ```
 
-数分経過すると、Datadog の `hello` サービスの下にトレースが表示されます。[サービスページ][13]または[トレースの一覧][14]をご確認ください。
+数分経過すると、Datadog の `hello` サービスの下にトレースが表示されます。[サービスページ][14]または[トレースの一覧][15]をご確認ください。
 
 {{< img src="getting_started/tracing-services-list.png" alt="トレースサービス一覧" >}}
 
@@ -158,8 +167,9 @@ hello world
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /ja/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /ja/getting_started/tagging/unified_service_tagging
-[12]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[13]: https://app.datadoghq.com/apm/services
-[14]: https://app.datadoghq.com/apm/traces
+[10]: https://app.datadoghq.com/apm/docs
+[11]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[12]: /ja/getting_started/tagging/unified_service_tagging
+[13]: /ja/tracing/guide/setting_primary_tags_to_scope/
+[14]: https://app.datadoghq.com/apm/services
+[15]: https://app.datadoghq.com/apm/traces

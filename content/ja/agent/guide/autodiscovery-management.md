@@ -36,7 +36,7 @@ DD_CONTAINER_EXCLUDE = "image:<IMAGE_NAME>"
 DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-正規表現 `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"` を使用してすべてのコンテナを無視することもできます。
+正規表現 `DD_CONTAINER_EXCLUDE = "image:dockercloud/.*"` を使用してすべてのコンテナを無視することもできます。
 
 **Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
 
