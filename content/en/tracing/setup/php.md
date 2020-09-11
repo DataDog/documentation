@@ -71,7 +71,7 @@ export DD_TRACE_PHP_BIN=$(which php-fpm7)
 
 Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][10] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][11] from the host machine to help identify any issues.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [create a `phpinfo()` page][11] from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
 
 If you can't find your distribution, you can [manually install][12] the PHP extension.
 
@@ -299,7 +299,7 @@ To remove the PHP tracer:
 [8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/latest
 [10]: https://app.datadoghq.com/apm/services
-[11]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[11]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
 [12]: /tracing/faq/php-tracer-manual-installation
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
