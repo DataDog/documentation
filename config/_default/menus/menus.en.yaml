@@ -1436,7 +1436,7 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 5
-  - name: Search
+  - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
     weight: 6
