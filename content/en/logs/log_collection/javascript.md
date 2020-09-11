@@ -122,11 +122,11 @@ The following parameters can be used to configure the Datadog browser log librar
 | `service`                      | String  | No       | ``              | The service name for this application.                                                                    |
 | `env`                          | String  | No       | ``              | The application’s environment e.g. prod, pre-prod, staging.                   |
 | `version`                      | String  | No       | ``              | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
-| `forwardErrorsToLogs`          | Boolean | no       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
-| `sampleRate`                   | Number  | no       | `100`           | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
-| `trackSessionAcrossSubdomains` | Boolean | no       | `false`         | Set to `true` to preserve session across subdomains of the same site. **If you use both Logs and RUM SDKs, this config must match.**  |
-| `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will prevent session tracking on insecure (non-HTTPS) connections. **If you use both Logs and RUM SDKs, this config must match.** |
-| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the Logs SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **If you use both Logs and RUM SDKs, this config must match.** |
+| `forwardErrorsToLogs`          | Boolean | No       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
+| `sampleRate`                   | Number  | No       | `100`           | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
+| `trackSessionAcrossSubdomains` | Boolean | No       | `false`         | Set to `true` to preserve session across subdomains of the same site. **If you use both Logs and RUM SDKs, this config must match.**  |
+| `useSecureSessionCookie`       | Boolean | No       | `false`         | Set to `true` to use a secure session cookie. This will prevent session tracking on insecure (non-HTTPS) connections. **If you use both Logs and RUM SDKs, this config must match.** |
+| `useCrossSiteSessionCookie`    | Boolean | No       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the Logs SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **If you use both Logs and RUM SDKs, this config must match.** |
 
 ## Send a custom log entry
 

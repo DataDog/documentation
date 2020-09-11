@@ -143,9 +143,9 @@ Paste the generated code snippet into the head tag (in front of any other script
 | `sampleRate`                   | Number  | No       | `100`           | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them.      |
 | `silentMultipleInit`           | Boolean | No       | `false`         | Initialization fails silently if Datadog's RUM is already initialized on the page                                 |
 | `proxyHost`                    | String  | No       | ``              | Optional proxy URL. See the full [proxy setup guide][7] for more information.                                     |
-| `trackSessionAcrossSubdomains` | Boolean | no       | `false`         | Set to `true` to preserve session across subdomains of the same site. **If you use both Logs and RUM SDKs, this config must match.**  |
-| `useSecureSessionCookie`       | Boolean | no       | `false`         | Set to `true` to use a secure session cookie. This will prevent RUM events from sending on insecure (non-HTTPS) connections. **If you use both Logs and RUM SDKs, this config must match.** |
-| `useCrossSiteSessionCookie`    | Boolean | no       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the RUM SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **If you use both Logs and RUM SDKs, this config must match.** |
+| `trackSessionAcrossSubdomains` | Boolean | No       | `false`         | Set to `true` to preserve session across subdomains of the same site. **If you use both Logs and RUM SDKs, this config must match.**  |
+| `useSecureSessionCookie`       | Boolean | No       | `false`         | Set to `true` to use a secure session cookie. This will prevent RUM events from sending on insecure (non-HTTPS) connections. **If you use both Logs and RUM SDKs, this config must match.** |
+| `useCrossSiteSessionCookie`    | Boolean | No       | `false`         | Set to `true` to use a secure cross-site session cookie. This will allow the RUM SDK to run when the site is loaded from another one (for example, in an `iframe`). Implies useSecureSessionCookie. **If you use both Logs and RUM SDKs, this config must match.** |
 
 
 ## Further Reading
