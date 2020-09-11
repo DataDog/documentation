@@ -32,14 +32,10 @@ The autodiscovery annotations logic consists in applying the JMX check configura
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: >-
-              '["<INTEGRATION_NAME>"]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
-              '[{"is_jmx": true, "collect_default_metrics": true}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: >-
-              '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
-              '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '["<INTEGRATION_NAME>"]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
         # (...)
 
     spec:
@@ -90,14 +86,10 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check_names: >-
-          '["tomcat"]'
-        ad.datadoghq.com/tomcat.init_configs: >-
-          '[{"is_jmx": true, "collect_default_metrics": true}]'
-        ad.datadoghq.com/tomcat.instances: >-
-          '[{"host": "%%host%%","port":"9012"}]'
-        ad.datadoghq.com/tomcat.logs: >-
-          '[{"source":"Tomcat","service":"Tomcat"}]'
+        ad.datadoghq.com/tomcat.check_names: '["tomcat"]'
+        ad.datadoghq.com/tomcat.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+        ad.datadoghq.com/tomcat.instances: '[{"host": "%%host%%","port":"9012"}]'
+        ad.datadoghq.com/tomcat.logs: '[{"source":"Tomcat","service":"Tomcat"}]'
 
 spec:
     containers:
