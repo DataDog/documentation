@@ -70,9 +70,9 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 - Wait until a specified number of the groups are failing (default: 1)
 - Retry a specified number of times before a location's test is considered a failure (default: 0)
 
-{{< img src="monitors/service_level_objectives/synthetic_alert_conditions.png" alt="synthetic test alert conditions"  >}}
-
 By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups. 
+
+For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][7].
 
 ## Underlying monitor and SLO histories
 
@@ -96,3 +96,4 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 [4]: https://app.datadoghq.com/monitors#create
 [5]: /monitors/service_level_objectives/metric/
 [6]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[7]: /synthetics/api_tests/?tab=httptest#alert-conditions
