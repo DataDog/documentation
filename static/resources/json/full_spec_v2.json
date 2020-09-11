@@ -7000,7 +7000,9 @@
                         900,
                         1800,
                         3600,
-                        7200
+                        7200,
+                        10800,
+                        21600
                       ],
                       "format": "int32",
                       "type": "integer",
@@ -7012,7 +7014,9 @@
                         "FIFTEEN_MINUTES",
                         "THIRTY_MINUTES",
                         "ONE_HOUR",
-                        "TWO_HOURS"
+                        "TWO_HOURS",
+                        "THREE_HOURS",
+                        "SIX_HOURS"
                       ]
                     },
                     "maxSignalDuration": {
@@ -7314,7 +7318,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7326,7 +7332,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -7461,7 +7469,9 @@
           900,
           1800,
           3600,
-          7200
+          7200,
+          10800,
+          21600
         ],
         "format": "int32",
         "type": "integer",
@@ -7473,7 +7483,9 @@
           "FIFTEEN_MINUTES",
           "THIRTY_MINUTES",
           "ONE_HOUR",
-          "TWO_HOURS"
+          "TWO_HOURS",
+          "THREE_HOURS",
+          "SIX_HOURS"
         ]
       },
       "SecurityMonitoringRuleMaxSignalDuration": {
@@ -7547,7 +7559,9 @@
               900,
               1800,
               3600,
-              7200
+              7200,
+              10800,
+              21600
             ],
             "format": "int32",
             "type": "integer",
@@ -7559,7 +7573,9 @@
               "FIFTEEN_MINUTES",
               "THIRTY_MINUTES",
               "ONE_HOUR",
-              "TWO_HOURS"
+              "TWO_HOURS",
+              "THREE_HOURS",
+              "SIX_HOURS"
             ]
           },
           "maxSignalDuration": {
@@ -7780,7 +7796,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7792,7 +7810,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -7995,7 +8015,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -8007,7 +8029,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -19922,7 +19946,9 @@
                                   900,
                                   1800,
                                   3600,
-                                  7200
+                                  7200,
+                                  10800,
+                                  21600
                                 ],
                                 "format": "int32",
                                 "type": "integer",
@@ -19934,7 +19960,9 @@
                                   "FIFTEEN_MINUTES",
                                   "THIRTY_MINUTES",
                                   "ONE_HOUR",
-                                  "TWO_HOURS"
+                                  "TWO_HOURS",
+                                  "THREE_HOURS",
+                                  "SIX_HOURS"
                                 ]
                               },
                               "maxSignalDuration": {
@@ -20194,7 +20222,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -20206,7 +20236,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -20432,7 +20464,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20444,7 +20478,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -20806,7 +20842,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20818,7 +20856,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -21055,7 +21095,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -21067,7 +21109,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -21277,7 +21321,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -21289,7 +21335,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -25336,60 +25384,8 @@
   ],
   "tags": [
     {
-      "description": "[See API version 1](/api/v1/aws-integration/).",
-      "name": "AWS Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/aws-logs-integration/).",
-      "name": "AWS Logs Integration"
-    },
-    {
-      "description": "All requests to Datadog’s API must be authenticated.\nRequests that write data require reporting access and require an `API key`.\nRequests that read data require full access and also require an `application key`.\n\n**Note:** All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly when creating your client.\n\n[Manage your account’s API and application keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\n[See API version 1](/api/v1/authentication/#validate-api-key).",
-      "name": "Authentication"
-    },
-    {
-      "description": "[See API version 1](/api/v1/azure-integration/).",
-      "name": "Azure Integration"
-    },
-    {
       "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
-    },
-    {
-      "description": "[See API version 1](/api/v1/dashboards/).",
-      "name": "Dashboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/downtimes/).",
-      "name": "Downtimes"
-    },
-    {
-      "description": "[See API version 1](/api/v1/embeddable-graphs/).",
-      "name": "Embeddable Graphs"
-    },
-    {
-      "description": "[See API version 1](/api/v1/events/).",
-      "name": "Events"
-    },
-    {
-      "description": "[See API version 1](/api/v1/gcp-integration/).",
-      "name": "GCP Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/hosts/).",
-      "name": "Hosts"
-    },
-    {
-      "description": "[See API version 1](/api/v1/ip-ranges/).",
-      "name": "IP Ranges"
-    },
-    {
-      "description": "[See API version 1](/api/v1/key-management/).",
-      "name": "Key Management"
-    },
-    {
-      "description": "Search your logs in the Datadog platform over HTTP.\n\n[See API version 1](/api/v1/logs/) for sending logs.",
-      "name": "Logs"
     },
     {
       "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",
@@ -25400,84 +25396,16 @@
       "name": "Logs Archives"
     },
     {
-      "description": "[See API version 1](/api/v1/logs-indexes/).",
-      "name": "Logs Indexes"
-    },
-    {
-      "description": "[See API version 1](/api/v1/logs-pipelines/).",
-      "name": "Logs Pipelines"
-    },
-    {
       "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint.",
       "name": "Logs Restriction Queries"
-    },
-    {
-      "description": "[See API version 1](/api/v1/metrics/).",
-      "name": "Metrics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/monitors/).",
-      "name": "Monitors"
-    },
-    {
-      "description": "[See API version 1](/api/v1/organizations/).",
-      "name": "Organizations"
-    },
-    {
-      "description": "[See API version 1](/api/v1/pagerduty-integration/).",
-      "name": "PagerDuty Integration"
     },
     {
       "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).",
       "name": "Roles"
     },
     {
-      "description": "[See API version 1](/api/v1/screenboards/).",
-      "name": "Screenboards"
-    },
-    {
       "description": "Detection rules for generating signals and listing of generated signals",
       "name": "Security Monitoring"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-checks/).",
-      "name": "Service Checks"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-dependencies/).",
-      "name": "Service Dependencies"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-level-objectives/).",
-      "name": "Service Level Objectives"
-    },
-    {
-      "description": "[See API version 1](/api/v1/slack-integration/).",
-      "name": "Slack Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/snapshots/).",
-      "name": "Snapshots"
-    },
-    {
-      "description": "[See API version 1](/api/v1/synthetics/).",
-      "name": "Synthetics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tags/).",
-      "name": "Tags"
-    },
-    {
-      "description": "[See API version 1](/api/v1/timeboards/).",
-      "name": "Timeboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tracing/).",
-      "name": "Tracing"
-    },
-    {
-      "description": "[See API version 1](/api/v1/usage-metering/).",
-      "name": "Usage Metering"
     },
     {
       "description": "Create, edit, and disable users.",
@@ -25485,10 +25413,6 @@
         "url": "https://docs.datadoghq.com/account_management/users"
       },
       "name": "Users"
-    },
-    {
-      "description": "[See API version 1](/api/v1/webhooks-integration/).",
-      "name": "Webhooks Integration"
     }
   ],
   "x-group-parameters": true

@@ -21,9 +21,11 @@ before_script:
 
 
 cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  key:
+    files:
+      - yarn.lock
   paths:
-  - node_modules/
+    - node_modules/
 
 # ================== templates ================== #
 .base_template: &base_template
@@ -31,6 +33,8 @@ cache: &cache
   tags:
     - "runner:main"
     - "size:large"
+  except:
+    - tags
   only:
     - branches
 

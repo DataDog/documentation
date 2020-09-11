@@ -1823,6 +1823,8 @@ components:
       - 1800
       - 3600
       - 7200
+      - 10800
+      - 21600
       format: int32
       type: integer
       x-enum-varnames:
@@ -1834,6 +1836,8 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+      - THREE_HOURS
+      - SIX_HOURS
     SecurityMonitoringRuleMaxSignalDuration:
       description: "A signal will \u201Cclose\u201D regardless of the query being\
         \ matched once the time exceeds the maximum duration.\nThis time is calculated\
