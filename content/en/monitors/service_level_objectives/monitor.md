@@ -64,7 +64,7 @@ Consider the following example for 3 monitors (this is also applicable to a moni
 This can result in the overall status being lower than the average of the individual statuses.
 
 ### Exceptions for Synthetic Tests
-In certain cases there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic Test. Synthetic Tests have special alerting conditions that will change the behavior of when the test will enter the ALERT state. These conditions include:
+In certain cases, there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic test. Synthetic tests have optional special alerting conditions that will change the behavior of when the test will enter the ALERT state and consequently impact the overall uptime:
 
 - Wait until the groups are failing for a specified number of minutes (default: 0)
 - Wait until a specified number of the groups are failing (default: 1)
