@@ -28,7 +28,7 @@ The Docker API is optimized to get logs from one container at a time, when there
 
 ## Log collection
 
-In order to start collecting your application logs you must be [runing the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
+In order to start collecting your application logs you must be [running the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
 
 {{< tabs >}}
 {{% tab "DaemonSet " %}}
