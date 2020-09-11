@@ -72,7 +72,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 
 {{< img src="monitors/service_level_objectives/synthetic_alert_conditions.png" alt="synthetic test alert conditions"  >}}
 
-By changing these any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic Test will appear to be better than the aggregated statuses of the Synthetic Test's individual groups. 
+By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups. 
 
 ## Underlying monitor and SLO histories
 
