@@ -1,4 +1,5 @@
 stages:
+  - bootstrap
   - build
   - post-deploy
   - cleanup
@@ -10,6 +11,7 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   FORCE_COLOR: '1'
+  GIT_DEPTH: 50
 
 # ================== copy scripts =============== #
 before_script:
@@ -17,20 +19,45 @@ before_script:
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
 
+
+cache: &cache
+  key:
+    files:
+      - yarn.lock
+  paths:
+    - node_modules/
+
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_use-node-cache
   tags:
     - "runner:main"
     - "size:large"
+  except:
+    - tags
   only:
     - branches
+
+# ================== Install Node Dependencies ================== #
+install_dependencies:
+  <<: *base_template
+  stage: bootstrap
+  cache: 
+    <<: *cache
+  script:
+    - yarn install --frozen-lockfile
+  only:
+    changes:
+      - yarn.lock
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -46,7 +73,6 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -98,12 +124,15 @@ build_preview:
 link_checks_preview:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node ./node_modules/link-checker/dd-link-checker.js --env preview --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   after_script:
     - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
@@ -112,6 +141,7 @@ link_checks_preview:
 missing_tms_preview:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "preview"
   variables:
     GIT_STRATEGY: none
@@ -123,12 +153,22 @@ missing_tms_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
 
 index_algolia_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: [ "runner:main","size:large" ]
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
-    - index_docsearch_algolia_preview
+    - |-
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        export DISPLAY=:99
+        Xvfb :99 -ac &
+        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
   when: manual
@@ -138,9 +178,11 @@ index_algolia_preview:
 sourcemaps_preview:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   script:
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - upload_sourcemaps
   dependencies:
     - build_preview
@@ -152,11 +194,14 @@ sourcemaps_preview:
 build_live:
   <<: *base_template
   stage: build
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/real_user_monitoring/android/_index.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -167,7 +212,6 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
@@ -221,6 +265,7 @@ build_live:
 
 index_internal_doc:
   stage: post-deploy
+  cache: {}
   environment: "live"
   image: registry.ddbuild.io/datadoc/webapp:prod-released
   dependencies:
@@ -235,24 +280,36 @@ index_internal_doc:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node ./node_modules/link-checker/dd-link-checker.js --env production --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
   after_script:
     - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - master
 
 index_algolia:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: ["runner:main","size:large"]
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
-    - cat /etc/docs_datadoghq.com
-    - index_docsearch_algolia
+    - |-
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+      export DISPLAY=:99
+      Xvfb :99 -ac &
+      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
   dependencies:
     - build_live
   only:
@@ -261,9 +318,11 @@ index_algolia:
 sourcemaps_live:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   script:
-    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - upload_sourcemaps
   dependencies:
     - build_live
@@ -274,6 +333,7 @@ sourcemaps_live:
 evaluate_missing_metrics:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "live"
   script:
     - chmod +x ./local/bin/py/missing_metrics.py && ./local/bin/py/missing_metrics.py -k $(get_secret 'dd-demo-api-key') -p $(get_secret 'dd-demo-app-key') -a $(get_secret 'dd_api_key') -b $(get_secret 'dd-app-key')
@@ -284,6 +344,9 @@ evaluate_missing_metrics:
 manage_translations:on-schedule:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -311,6 +374,7 @@ manage_translations:on-schedule:
 test_missing_tms_live:
   <<: *base_template
   stage: post-deploy
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
@@ -324,11 +388,13 @@ test_missing_tms_live:
 test_pa11y:
   <<: *base_template
   stage: post-deploy
+  cache:
+    <<: *cache
+    policy: pull
   environment: "live"
   dependencies:
     - build_live
   script:
-    - cp -r /etc/node_modules .
     - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd_api_key')
   only:
     - schedules
@@ -346,6 +412,7 @@ test_pa11y:
 tag_successful_live_pipeline:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   when: on_success
   script:
@@ -356,6 +423,7 @@ tag_successful_live_pipeline:
 post_success_event_to_dd_live:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none
@@ -369,6 +437,7 @@ post_success_event_to_dd_live:
 post_failure_event_to_dd_live:
   <<: *base_template
   stage: cleanup
+  cache: {}
   environment: "live"
   variables:
     GIT_STRATEGY: none

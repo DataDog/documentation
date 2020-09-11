@@ -48,6 +48,12 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5].
 
+## Quick Actions
+
+{{< img src="mobile/quick_actions.png" alt="dashboard page">}}
+
+Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. On iOS, it shows your top five “Frequently Viewed By Me” preset dashboards. On Android, it shows your top five viewed dashboards on mobile.
+
 ## Account
 
 Switch organizations or log out from the Account page.

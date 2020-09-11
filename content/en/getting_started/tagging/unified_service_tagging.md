@@ -7,6 +7,9 @@ further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
+- link: "/tracing/version_tracking"
+  tag: "Documentation"
+  text: "Use Version tags within Datadog APM to monitor deployments"
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
@@ -117,28 +120,32 @@ tags.datadoghq.com/<container-name>.version
 
 ###### State metrics
 
-To configure [Kubernetes State Metrics][2], add the same standard labels to the collection of labels for the parent resource (e.g., Deployment).
+To configure [Kubernetes State Metrics][2]:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-spec:
-  template:
-    metadata:
-      labels:
-        tags.datadoghq.com/env: "<ENV>"
-        tags.datadoghq.com/service: "<SERVICE>"
-        tags.datadoghq.com/version: "<VERSION>"
-```
+1. Set `join_standard_tags` to `true` in your [configuration file][3].
+
+2. Add the same standard labels to the collection of labels for the parent resource (e.g., Deployment).
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+  spec:
+    template:
+      metadata:
+        labels:
+          tags.datadoghq.com/env: "<ENV>"
+          tags.datadoghq.com/service: "<SERVICE>"
+          tags.datadoghq.com/version: "<VERSION>"
+  ```
 
 ###### APM Tracer / StatsD client
 
-To configure [APM Tracer][3] and [StatsD client][4] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM Tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
 
 ```yaml
 containers:
@@ -160,8 +167,9 @@ containers:
 
 [1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
 [2]: /agent/kubernetes/data_collected/#kube-state-metrics
-[3]: /tracing/send_traces/
-[4]: /integrations/statsd/
+[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: /tracing/send_traces/
+[5]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -318,7 +326,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 
@@ -359,6 +367,7 @@ to configure the `service` tag only in the configuration of the process check.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /getting_started/tagging/#defining-tags
 [2]: /getting_started/agent

@@ -45,12 +45,20 @@ A simple example is grouping your hosts by AWS availability zone. If you add a s
 
 For example, if some of your hosts are running on AWS, the following AWS-specific tags are available to you right now:
 
-* availability-zone
-* region
-* image
-* instance-type
-* security-group
-* any EC2 tags you might use, such as 'name'
+* `availability-zone`
+* `region`
+* `image`
+* `instance-type`
+* `security-group`
+* any EC2 tags you might use, such as `name`
+
+The Datadog Agent also collects host metadata and application information, some of which can be used as a filter or for grouping terms. Those fields include:
+
+- `field:metadata_agent_version`
+- `field:metadata_platform`
+- `field:metadata_processor`
+- `field:metadata_machine`
+- `field:apps`
 
 ### Zoom in
 

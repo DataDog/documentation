@@ -108,13 +108,16 @@ CREATE VIEW pg_stat_activity_dd AS SELECT * FROM pg_stat_activity();
 grant SELECT ON pg_stat_activity_dd to datadog;
 ```
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[サンプル postgres.d/conf.yaml][3] を参照してください。
+1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
 
    ```yaml
    init_config:
@@ -149,20 +152,20 @@ grant SELECT ON pg_stat_activity_dd to datadog;
        dbname: "<DB_NAME>"
    ```
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][2]。
 
 ##### トレースの収集
 
 Datadog APM は Postgres を統合して、分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][5]。
-2. [Postgres へのリクエストを作成するアプリケーションをインスツルメントします][6]。
+1. [Datadog でトレースの収集を有効にします][3]。
+2. [Postgres へのリクエストを作成するアプリケーションをインスツルメントします][4]。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-PostgreSQL のデフォルトのログは `stderr` に記録され、ログに詳細な情報は含まれません。ログ行のプレフィックスに指定された詳細を追加してファイルに記録することをお勧めします。詳細については、このトピックに関する PostgreSQL [ドキュメント][7]を参照してください。
+PostgreSQL のデフォルトのログは `stderr` に記録され、ログに詳細な情報は含まれません。ログ行のプレフィックスに指定された詳細を追加してファイルに記録することをお勧めします。詳細については、このトピックに関する PostgreSQL [ドキュメント][5]を参照してください。
 
 1. ロギングはファイル `/etc/postgresql/<バージョン>/main/postgresql.conf` 内で構成されます。ステートメント出力を含む通常のログ結果の場合、ログセクションの次のパラメーターのコメントを外します。
 
@@ -179,7 +182,7 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
      #log_destination = 'eventlog'
    ```
 
-2. 詳細な期間メトリクスを収集し、Datadog インターフェースで検索可能にするには、ステートメント自体を使用してインラインで構成する必要があります。上記の例と推奨コンフィギュレーションとの違いについては、以下を参照してください。また、`log_statement` オプションと `log_duration` オプションの両方がコメントアウトされているので注意してください。このトピックに関する議論は[こちら][8]をご覧ください。
+2. 詳細な期間メトリクスを収集し、Datadog インターフェースで検索可能にするには、ステートメント自体を使用してインラインで構成する必要があります。上記の例と推奨コンフィギュレーションとの違いについては、以下を参照してください。また、`log_statement` オプションと `log_duration` オプションの両方がコメントアウトされているので注意してください。このトピックに関する議論は[こちら][6]をご覧ください。
 
    この構成はすべてのステートメントをログしますが、出力を特定の期間を持つものに減らすには、`log_min_duration_statement` の値を目的の最小期間（ミリ秒単位）に設定します。
 
@@ -213,13 +216,22 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
        #    name: new_log_start_with_date
    ```
 
-   `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル postgres.d/conf.yaml][3] を参照してください。
+      `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
 
-5. [Agent を再起動します][4]。
+5. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[4]: https://docs.datadoghq.com/ja/tracing/setup/
+[5]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[6]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][9]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -241,27 +253,35 @@ Agent コンテナで必要な環境変数
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][10]および [Kubernetes Daemon のセットアップ][11]を参照してください。
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
 
-次に、[アプリケーションコンテナをインスツルメント][6]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
+次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][12]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
 
 | パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "postgresql", "service": "postgresql"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/ja/tracing/setup/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][13]し、Checks セクションで `postgres` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `postgres` を探します。
 
 ## 収集データ
 
-以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべての構成オプションについては、[サンプル postgres.d/conf.yaml][3] を参照してください。
+以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][4] を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "postgres" >}}
@@ -282,31 +302,22 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ### よくあるご質問
 
-- [PostgreSQL カスタムメトリクスの収集の説明][15]
+- [PostgreSQL カスタムメトリクスの収集の説明][5]
 
 ### ブログ記事
 
-- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][16]
-- [PostgreSQL 監視のキーメトリクス][17]
-- [PostgreSQL 監視ツールでメトリクスを収集][18]
-- [Datadog で PostgreSQL データを収集および監視する方法][19]
+- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][6]
+- [PostgreSQL 監視のキーメトリクス][7]
+- [PostgreSQL 監視ツールでメトリクスを収集][8]
+- [Datadog で PostgreSQL データを収集および監視する方法][9]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[6]: https://docs.datadoghq.com/ja/tracing/setup/
-[7]: https://www.postgresql.org/docs/11/runtime-config-logging.html
-[8]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[10]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[12]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[14]: https://github.com/DataDog/integrations-core/blob/master/postgres/metadata.csv
-[15]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
-[16]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[17]: https://www.datadoghq.com/blog/postgresql-monitoring
-[18]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[19]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
+[6]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[7]: https://www.datadoghq.com/blog/postgresql-monitoring
+[8]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[9]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog

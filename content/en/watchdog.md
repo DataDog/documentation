@@ -56,6 +56,16 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
+##### Dependency Map
+
+When an anomaly appears in one service, there's often a corresponding anomaly in a related service. For example, if one service's database queries get throttled, any downstream service will experience elevated latency. You need to troubleshoot this not as two separate issues, but rather as one issue stemming from a single root cause. 
+
+Watchdog helps you do that by automatically grouping related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story then includes a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This allows you to quickly understand the impact of the issue and provides insight on where to look for the root cause. 
+
+The screenshot below shows a Watchdog story, starting with a summary of the issue and a graph highlighting the anomaly. Below that, a dependency map illustrates the full scope of the problem: the issue is rooted in the  `ad-server-http-client` service, and it also affects the downstream services  `web-store` and `web-store-mongo`. Below the dependency map, a table lists the affected services and displays hit rate, latency, and error rate metrics. In this case, the data in the table indicates that latency in the downstream services also increased.
+
+{{< img src="watchdog/watchdog_dep_map.png" alt="Watchdog dependency map"  style="width:75%;">}}
+
 ##### Related Dashboards
 
 To speed up further investigations, Datadog may suggest some of your dashboards that are related to the story. In this case, Datadog will highlight which of the dashboard's metrics are related to the insights in the story. 

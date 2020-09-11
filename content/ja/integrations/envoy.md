@@ -122,13 +122,16 @@ static_resources:
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. Envoy のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `envoy.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル envoy.d/conf.yaml][8] を参照してください。
+1. Envoy のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `envoy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル envoy.d/conf.yaml][2] を参照してください。
 
     ```yaml
     init_config:
@@ -143,14 +146,14 @@ static_resources:
       - stats_url: http://localhost:80/stats
     ```
 
-2. Datadog Agent が Envoy の[管理エンドポイント][4]にアクセスできるかを確認します。
-3. [Agent を再起動します][9]。
+2. Datadog Agent が Envoy の[管理エンドポイント][3]にアクセスできるかを確認します。
+3. [Agent を再起動します][4]。
 
 ###### メトリクスの絞り込み
 
 メトリクスは、正規表現 `metric_whitelist` または `metric_blacklist` を使用して絞り込むことができます。両方を使用した場合は、生成されたセットに対して、最初にホワイトリストが適用され、次にブラックリストが適用されます。
 
-絞り込みはタグの抽出前に行われるため、一部のタグでは、メトリクスを保持するかどうか、または無視するかどうかを決定することもできます。すべてのメトリクスとタグの完全なリストについては、[metrics.py][10] を参照してください。以下では、Envoy メトリクスのタグ付けの例を説明します。
+絞り込みはタグの抽出前に行われるため、一部のタグでは、メトリクスを保持するかどうか、または無視するかどうかを決定することもできます。すべてのメトリクスとタグの完全なリストについては、[metrics.py][5] を参照してください。以下では、Envoy メトリクスのタグ付けの例を説明します。
 
 ```python
 ...
@@ -193,33 +196,46 @@ _Agent バージョン 6.0 以降で利用可能_
        service: envoy
    ```
 
-3. [Agent を再起動します][9]。
+3. [Agent を再起動します][4]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
+[3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][11]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
-| パラメーター            | 値                                      |
-| -------------------- | ------------------------------------------ |
-| `<インテグレーション名>` | `envoy`                                    |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                              |
-| `<インスタンスコンフィギュレーション>`  | `{"stats_url": "http://%%host%%:80/stats}` |
+| パラメーター            | 値                                       |
+| -------------------- | ------------------------------------------- |
+| `<インテグレーション名>` | `envoy`                                     |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                               |
+| `<インスタンスコンフィギュレーション>`  | `{"stats_url": "http://%%host%%:80/stats"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][12]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "envoy", "service": "<サービス名>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][13]し、Checks セクションで `envoy` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `envoy` を探します。
 
 ## 収集データ
 
@@ -227,7 +243,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "envoy" >}}
 
 
-各メトリクスによって送信されるタグのリストについては、[metrics.py][10] を参照してください。
+各メトリクスによって送信されるタグのリストについては、[metrics.py][8] を参照してください。
 
 ### イベント
 
@@ -240,7 +256,8 @@ Agent が Envoy に接続してメトリクスを収集できない場合は、`
 
 ## トラブルシューティング
 
-ご不明な点は [Datadog サポート][15]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+
 
 [1]: https://www.envoyproxy.io
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -248,12 +265,6 @@ Agent が Envoy に接続してメトリクスを収集できない場合は、`
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://istio.io/docs/reference/config
 [6]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[12]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
-[15]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
+[9]: https://docs.datadoghq.com/ja/help/

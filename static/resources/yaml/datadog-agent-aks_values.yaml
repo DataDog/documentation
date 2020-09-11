@@ -1,0 +1,21 @@
+datadog:
+  kubeStateMetricsEnabled: false
+  processAgent:
+    enabled: false
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent
+  volumes:
+    - name: kubeletserver
+      hostPath:
+        path: /etc/kubernetes/certs
+  volumeMounts:
+    - name: kubeletserver
+      mountPath: /etc/kubernetes/certs/
+      readOnly: true
+  containers:
+    agent:
+      env:
+        - name: DD_KUBELET_CLIENT_CA
+          value: /etc/kubernetes/certs/kubeletserver.crt

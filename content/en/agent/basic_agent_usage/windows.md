@@ -27,6 +27,8 @@ For installation and configuration to the Datadog EU site, use the `SITE=` param
 
 Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
+If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
+
 **Note**: There are special considerations for [domain controllers][4].
 
 {{< tabs >}}
@@ -119,9 +121,12 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-* The main executable name is `agent.exe`.
+* The main executable name is `agent.exe`. The location is as follows depending on the Agent version:
+	- Agent versions <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
+	- Agent versions >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the command line `"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" <COMMAND>` for Agent versions >= 6.12 or `"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" <COMMAND>` for Agent versions <= 6.11. Command-line options are below:
+* Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`. 
+* Command-line options are below:
 
 | Command         | Description                                                                      |
 |-----------------|----------------------------------------------------------------------------------|
@@ -142,6 +147,23 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | status          | Print the current status.                                                        |
 | stopservice     | Stops the Agent within the service control manager.                              |
 | version         | Prints the version info.                                                         |
+
+* Examples:
+  - PowerShell (`powershell.exe`)
+
+	```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
+	```
+
+  - Command Prompt (`cmd.exe`)
+
+	```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+	```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -168,19 +190,13 @@ Use the [Datadog Agent Manager][5] to enable, disable, and configure checks. Res
 {{% tab "Agent v6 & v7" %}}
 The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.yaml`
-
-Configuration files for [integrations][1] are in:
-`C:\ProgramData\Datadog\conf.d\` OR
-`C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
-
-**Note**: `ProgramData` is a hidden folder.
-
-[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 The main Agent configuration file is located at:
 `C:\ProgramData\Datadog\datadog.conf`
+{{% /tab %}}
+{{< /tabs >}}
 
 Configuration files for [integrations][1] are in:
 `C:\ProgramData\Datadog\conf.d\` OR
@@ -189,8 +205,6 @@ Configuration files for [integrations][1] are in:
 **Note**: `ProgramData` is a hidden folder.
 
 [1]: /integrations/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Troubleshooting
 
@@ -204,7 +218,9 @@ To verify the Agent is running, check if the `DatadogAgent` service in the Servi
 To receive more information about the Agent's state, start the Datadog Agent Manager:
 
 * Right click on the Datadog Agent system tray icon -> Configure, or
-* Run  `& "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui` for agent version >= 6.12 or `& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" launch-gui` for agent version <= 6.11 from an admin Powershell prompt
+* Run `launch-gui` command from an **elevated(run as Admin)** command line
+	- PowerShell: `& "<PATH_TO_AGENT.EXE>" launch-gui`
+	- cmd: `"<PATH_TO_AGENT.EXE>" launch-gui`
 
 Then, open the status page by going to *Status* -> *General*.
 Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
@@ -212,13 +228,13 @@ Get more information on running checks in *Status* -> *Collector* and *Checks* -
 The status command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 or cmd.exe:
 
 ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
 ```
 
 {{% /tab %}}
@@ -236,7 +252,7 @@ For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/stat
 The info command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "$env:ProgramFiles\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
@@ -290,6 +306,18 @@ Need help? Contact [Datadog support][1].
 
 * Press Submit.
 
+The flare command is available for Powershell:
+
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
+or cmd.exe:
+
+```cmd
+"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>
+```
+
 {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6"  style="width:75%;">}}
 
 [1]: http://127.0.0.1:5002
@@ -313,7 +341,7 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 The flare command is available for Powershell:
 
 ```powershell
-& "$env:Programfiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 or cmd.exe:
@@ -324,9 +352,12 @@ or cmd.exe:
 
 #### Flare fails to upload
 
-On Linux and macOS, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
+The output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email. Common locations flare files are stored:
+- Linux: `\tmp\`
+- MacOS: `$TMPDIR`
+- Windows: `C:\Users\<DDAGENTUSER>\AppData\Local\Temp\`
 
-For Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
+For older Agent versions on Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
 
 **Step 1**:
 
@@ -415,3 +446,4 @@ After configuration is complete, [restart the Agent][11].
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/guide/agent-commands/#restart-the-agent
+

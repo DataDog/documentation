@@ -24,7 +24,7 @@ further_reading:
 | [Lambda カスタムメトリクス][7]    | Lambda 関数からのカスタムメトリクスの取り込み。|
 | [Datadog APM][8]              | Datadog Tracer または AWS X-Ray を使用する分散型トレーシング|
 
-それでも問題がはっきりしない場合は、[Datadog のサポートチーム][10]にご連絡ください。
+それでも問題がはっきりしない場合は、[Datadog のサポートチーム][9]にご連絡ください。
 
 [1]: /ja/serverless/#getting-started
 [2]: /ja/serverless/forwarder
@@ -33,5 +33,5 @@ further_reading:
 [5]: /ja/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /ja/integrations/amazon_lambda/#log-collection
 [7]: /ja/integrations/amazon_lambda/#custom-metrics
-[8]: /ja/integrations/amazon_lambda/#trace-collection
+[8]: /ja/tracing/serverless_functions/
 [9]: /ja/help/

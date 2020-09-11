@@ -12,7 +12,7 @@ function slug(value) {
     tail = value;
     while ( match(tail,/[[:upper:]][[:lower:]]/) ) {
         tgt = substr(tail,RSTART,1);
-        if ( substr(tail,RSTART-1,1) ~ /[[:lower:]]/ ) {
+        if ( substr(tail,RSTART-1,1) ~ /[[:lower:]]/ || RSTART > 1 ) {
             tgt = "-" tolower(tgt);
         }
         head = head substr(tail,1,RSTART-1) tgt;

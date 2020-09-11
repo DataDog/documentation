@@ -109,17 +109,6 @@ Once enabled, the following profile types are collected:
 
 {{% /tab %}}
 
-{{% tab "Node" %}}
-
-Once enabled, the following profile types are collected:
-
-| Profile type | Definition |
-| ------------ | ---------- |
-| Allocation   | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. |
-| Wall         | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
-
-{{% /tab %}}
-
 {{< /tabs >}}
 
 ## Further Reading

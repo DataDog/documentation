@@ -5,37 +5,37 @@ col1:
     link: 'https://www.datadoghq.com/ja/product/'
     title: 機能
   - name: integrations
-    link: 'https://www.datadoghq.com/ja/product/platform/integrations/'
+    link: 'https://www.datadoghq.com/product/platform/integrations/'
     title: インテグレーション
   - name: ダッシュボード
-    link: 'https://www.datadoghq.com/ja/product/platform/dashboards/'
+    link: 'https://www.datadoghq.com/product/platform/dashboards/'
     title: ダッシュボード
   - name: logs
-    link: 'https://www.datadoghq.com/ja/product/log-management/'
+    link: 'https://www.datadoghq.com/product/log-management/'
     title: ログ管理
   - name: apm
-    link: 'https://www.datadoghq.com/ja/product/apm/'
+    link: 'https://www.datadoghq.com/product/apm/'
     title: APM
-  - name: profiler
-    link: "https://www.datadoghq.com/ja/product/code-profiling/"
-    title: "Continuous Profiler"
+  - name: プロファイラー
+    link: 'https://www.datadoghq.com/product/code-profiling/'
+    title: 継続的なプロファイラー
   - name: security-monitoring
-    link: 'https://www.datadoghq.com/ja/product/security-monitoring/'
+    link: 'https://www.datadoghq.com/product/security-monitoring/'
     title: セキュリティモニタリング
   - name: ネットワーク
-    link: 'https://www.datadoghq.com/ja/product/network-performance-monitoring/'
+    link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
     title: ネットワークモニタリング
   - name: synthetics
-    link: 'https://www.datadoghq.com/ja/product/synthetic-monitoring/'
+    link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
     title: Synthetic の監視
   - name: rum
-    link: 'https://www.datadoghq.com/ja/product/real-user-monitoring/'
+    link: 'https://www.datadoghq.com/product/real-user-monitoring/'
     title: リアルユーザーモニタリング
   - name: サーバーレス
-    link: 'https://www.datadoghq.com/ja/product/serverless-monitoring/'
+    link: 'https://www.datadoghq.com/product/serverless-monitoring/'
     title: サーバーレス
   - name: alerts
-    link: 'https://www.datadoghq.com/ja/product/platform/alerts/'
+    link: 'https://www.datadoghq.com/product/platform/alerts/'
     title: アラート
 col2:
   - name: pricing

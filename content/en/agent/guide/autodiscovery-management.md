@@ -37,7 +37,7 @@ As an example, the following configuration instructs the Agent to ignore some co
 DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"`
+You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/.*"`
 
 In **Agent <= v7.19+**, to remove a given Docker container with the **image** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
@@ -51,7 +51,7 @@ As before, the following configuration instructs the Agent to ignore some contai
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-Note that `DD_AC_EXCLUDE` is **depreciated for Agent >= v7.20+**. 
+Note that `DD_AC_EXCLUDE` is **deprecated for Agent >= v7.20+**. 
 
 In **Agent v7.20+**, to remove a given Docker container with the **name** `<NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
@@ -155,7 +155,7 @@ In **Agent <= v7.19+**, to remove a given Docker container with the **image** `<
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-Note that `DD_AC_INCLUDE` is **depreciated for Agent >= v7.20+**.
+Note that `DD_AC_INCLUDE` is **deprecated for Agent >= v7.20+**.
 
 In **Agent v7.20+**, to include a given Docker container with the **name** `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 

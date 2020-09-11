@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Cilium Overview: assets/dashboards/overview.json
   logs: {}
@@ -73,19 +75,24 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cilium.d/conf.yaml` ファイルを編集し、Cilium のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[cilium.d/conf.yaml のサンプル][4]を参照してください。
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cilium.d/conf.yaml` ファイルを編集し、Cilium のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[cilium.d/conf.yaml のサンプル][1]を参照してください。
 
    - `cilium-agent` メトリクスを収集するには、`agent_endpoint` オプションを有効にします。
    - `cilium-operator` メトリクスを収集するには、`operator_endpoint` オプションを有効にします。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][2]。
 
 ##### ログの収集
 
 Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあります。
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[DaemonSet コンフィギュレーション][4]でこれを有効にします。
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[DaemonSet コンフィギュレーション][1]でこれを有効にします。
 
    ```yaml
      # (...)
@@ -98,34 +105,44 @@ Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあ�
      # (...)
    ```
 
-2. [こちらのマニフェスト][6]のように、Docker ソケットを Datadog Agent にマウントします。Docker を使用していない場合は `/var/log/pods` ディレクトリをマウントします。
+2. [こちらのマニフェスト][3]のように、Docker ソケットを Datadog Agent にマウントします。Docker を使用していない場合は `/var/log/pods` ディレクトリをマウントします。
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#create-manifest
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
-| `<INTEGRATION_NAME>` | `cilium`                                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                              |
-| `<INSTANCE_CONFIG>`  | `{"agent_endpoint": "http://%%host%%:9090/metrics"}`       |
+| `<インテグレーション名>` | `cilium`                                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
+| `<インスタンスコンフィギュレーション>`  | `{"agent_endpoint": "http://%%host%%:9090/metrics"}`       |
 
 ##### ログの収集
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][7]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "cilium-agent", "service": "cilium-agent"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `cilium` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `cilium` を探します。
 
 ## 収集データ
 
@@ -133,7 +150,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 {{< get-metrics-from-git "cilium" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 `cilium.prometheus.health`: Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
@@ -143,15 +160,11 @@ Cilium には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://cilium.io
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/ja/agent/
-[4]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#create-manifest
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/cilium/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/

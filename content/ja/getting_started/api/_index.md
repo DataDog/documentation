@@ -95,7 +95,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 - params テーブルでは、アンパサンド (&) とコロン (:) は不要です。Postman によって挿入されます。
 - すべてのプレースホルダーは `<PLACEHOLDER>` の形式に従います。プレースホルダーはクエリを実行する前に置き換える必要があります。
 
-[1]: https://www.getpostman.com
+[1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/json/datadog_collection.json
 [4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman

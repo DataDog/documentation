@@ -354,7 +354,7 @@ class MyClass {
     final Span span = GlobalTracer.get().activeSpan();
     // Span provided by @Trace annotation.
     if (span != null) {
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }

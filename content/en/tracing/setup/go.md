@@ -34,9 +34,15 @@ Consult the [migration document][5] if you need to migrate from an older version
 
 ### Installation
 
-If you already have a Datadog account you can find [step-by-step instructions][6] in our in-app guides for either host-based or container-based set ups.
+#### Follow the in-app documentation (Recommended)
 
-First [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
+Follow the [Quickstart instructions][6] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+
+Otherwise, [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 
 Next, install the Go tracer from its canonical import path:
 
@@ -73,8 +79,11 @@ func main() {
     tracer.Start(
         tracer.WithEnv("prod"),
         tracer.WithService("test-go"),
-        tracer.WithVersion("abc123"),
+        tracer.WithServiceVersion("abc123"),
     )
+
+    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
+    // Make sure this line stays in your main function.
     defer tracer.Stop()
 }
 ```
@@ -139,8 +148,8 @@ extracted value is used.
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /tracing/send_traces/
-[7]: https://app.datadoghq.com/apm/install
+[6]: https://app.datadoghq.com/apm/docs
+[7]: /tracing/send_traces/
 [8]: /tracing/setup/docker/
 [9]: /agent/kubernetes/apm/
 [10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption

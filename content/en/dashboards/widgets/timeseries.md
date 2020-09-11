@@ -86,9 +86,12 @@ Once enabled, events are overlayed on your graphs with red bars:
 
 Y-axis controls are available via the UI and the JSON editor. They allow you to:
 
+* Add a second y-axis for visualizations that include more than one data set.
 * Clip the y-axis to specific ranges.
 * Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
+
+If your visualization includes more than one data set, you can add a second y-axis by expanding the *Y-axis controls* button. Click on *+ Add right y-axis* and then specify which side each metric’s y-axis will correspond to under each metric’s configuration options. On the graph, you can isolate which part of the visualization corresponds with which y-axis by hovering over the y-axis of interest.
 
 Change the Y-axis scale by expanding the *Y-Axis Controls* button.
 

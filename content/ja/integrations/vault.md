@@ -109,11 +109,14 @@ vault {
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. vault のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `vault.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル vault.d/conf.yaml][6] を参照してください。
+1. vault のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `vault.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル vault.d/conf.yaml][2] を参照してください。
 
    トークンなしでインテグレーションを実行するためのコンフィギュレーション (vault コンフィギュレーション `unauthenticated_metrics_access` が true に設定されている場合):
 
@@ -155,11 +158,17 @@ vault {
         # client_token_path: <CLIENT_TOKEN_PATH>
     ```
 
-2. [Agent を再起動します][7]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
@@ -181,13 +190,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
 2. Vault を構成し、監査とサーバーログを有効にします。
 
-   - 監査ログは、適切なポリシーを持つ特権ユーザーが有効にする必要があります。詳細は、[監査デバイスの有効化][9]を参照してください。
+   - 監査ログは、適切なポリシーを持つ特権ユーザーが有効にする必要があります。詳細は、[監査デバイスの有効化][2]を参照してください。
 
      ```shell
      vault audit enable file file_path=/vault/vault-audit.log
      ```
 
-   - [サーバーログ][10]がファイルに必ず書き込まれるようにしてください。[Vault systemd 起動スクリプト][11]で静的サーバーログを構成することができます。
+   - [サーバーログ][3]がファイルに必ず書き込まれるようにしてください。[Vault systemd 起動スクリプト][4]で静的サーバーログを構成することができます。
      以下のスクリプトは、`/var/log/vault.log`へログを出力します。
 
      ```text
@@ -212,9 +221,16 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
+[3]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
+[4]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][12]し、Checks セクションで `vault` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `vault` を探します。
 
 ## 収集データ
 
@@ -243,26 +259,19 @@ Vault がまだ初期化されていない場合は、CRITICAL を返します�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した HashiCorp Vault の監視][15]
+- [Datadog を使用した HashiCorp Vault の監視][7]
+
 
 [1]: https://www.vaultproject.io
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
 [4]: https://www.vaultproject.io/docs/auth
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
-[10]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
-[11]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/vault/metadata.csv
-[14]: https://docs.datadoghq.com/ja/help/
-[15]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog

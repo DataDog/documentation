@@ -3,6 +3,8 @@ aliases:
   - /ja/a6b-6c9-419
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.gcs.bucket
 security: attack
 source: gcp

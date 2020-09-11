@@ -146,6 +146,14 @@ data:
       fieldPath: status.hostIP
 ```
 
+アノテーションを使用して Ingress ごとに異なるサービス名を設定するには
+
+```yaml
+  nginx.ingress.kubernetes.io/configuration-snippet: |
+      opentracing_tag "service.name" "custom-service-name";
+```
+上記はデフォルトの `nginx-ingress-controller.ingress-nginx` サービス名をオーバーライドします。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

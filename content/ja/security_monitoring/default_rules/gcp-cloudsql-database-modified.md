@@ -3,6 +3,8 @@ aliases:
   - /ja/60f-89d-fee
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gcp.cloudsql.database
 security: コンプライアンス
 source: gcp

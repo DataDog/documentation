@@ -2,20 +2,20 @@
 title: Lambda 関数によるログ収集のトラブルシューティングガイド
 kind: documentation
 ---
-ログエクスプローラーに、Datadog Forwarder の Lambda 関数から転送されたログが表示されない場合は、以下のトラブルシューティングを実行してください。それでも問題が解決しない場合は、[Datadog サポート][2]までお問い合わせください。
+ログエクスプローラーに、Datadog Forwarder の Lambda 関数から転送されたログが表示されない場合は、以下のトラブルシューティングを実行してください。それでも問題が解決しない場合は、[Datadog サポート][1]までお問い合わせください。
 
 ## Datadog にログが送信されたかを確認する
 
-1. [ログエクスプローラーの Live Tail ビュー][3]を開きます。
+1. [ログエクスプローラーの Live Tail ビュー][2]を開きます。
 2. 検索バーで Live Tail ビューにフィルターを適用し、Lambda 関数経由で送られたログのみを表示します。検索には以下のようなクエリを利用できます。
-    * ソースで検索: ソースは通常 `source:lambda`、`source:aws` または `source:cloudwatch` に設定されています。[Lambda 関数][4]の `parse_event_source` 関数にあるソースも設定可能です。
+    * ソースで検索: ソースは通常 `source:lambda`、`source:aws` または `source:cloudwatch` に設定されています。[Lambda 関数][3]の `parse_event_source` 関数にあるソースも設定可能です。
     * Forwarder 名で検索: Lambda 関数は転送するすべてのログに対して `forwardername` タグを付加します。このタグを `forwardername:*` または `forwardername:<FORWARDER_FUNCTION_NAME>` で絞り込み、検索できます。
-3. ログエクスプローラーではなく Live Tail にログが表示される場合は、ログインデックスに[除外フィルター][5]が設定されています。このフィルターによりログが除外されているのです。
+3. ログエクスプローラーではなく Live Tail にログが表示される場合は、ログインデックスに[除外フィルター][4]が設定されています。このフィルターによりログが除外されているのです。
 4. Live Tail にログが表示されない場合は、ログが Datadog に到達していません。
 
 ## Lambda 関数の Monitoring タブを確認する
 
-[AWS コンソールから][6]
+[AWS コンソールから][5]
 
 1. Forwarder の Lambda 関数を開きます。
 
@@ -43,7 +43,7 @@ AWS Lambda 関数を有効にすると、Datadog 内での Lambda 関数の呼�
 | `aws.lambda.duration.maximum` | Lambda 関数の実行完了までに要した最大時間 (ミリ秒)  |
 | `aws.lambda.throttles`        | 呼び出し率が既定の上限を超えたために抑制された呼び出し試行回数 |
 
-これらおよびその他の AWS Lambda メトリクスについては、[Amazon Lambda のメトリクス][7]を参照してください。
+これらおよびその他の AWS Lambda メトリクスについては、[Amazon Lambda のメトリクス][6]を参照してください。
 
 ### 関数のトリガーを管理する
 
@@ -61,7 +61,7 @@ AWS Lambda 関数を有効にすると、Datadog 内での Lambda 関数の呼�
    aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
    ```
 
-4. トリガーを[自動][8]または[手動][9]で設定します。
+4. トリガーを[自動][7]または[手動][8]で設定します。
 
 AWS では、1 つのログソースに 2 つ以上のリソースをサブスクライブできませんのでご注意ください。ログソースにすでに異なるリソースがサブスクライブしている場合は、まずそのサブスクリプションを削除する必要があります。
 
@@ -87,12 +87,11 @@ CloudWatch ロググループの場合は、Datadog のプラットフォーム�
 4. Forwarder の Lambda 関数で、環境変数 "DD_LOG_LEVEL" を "debug" に設定してデバッグログを有効にし、さらなるデバッグを実行します。デバッグログは非常に詳細になるため、デバッグが終了したら無効にしましょう。
 
 
-[1]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[2]: https://docs.datadoghq.com/ja/help
-[3]: https://docs.datadoghq.com/ja/logs/live_tail/#live-tail-view
-[4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
-[5]: https://docs.datadoghq.com/ja/logs/indexes/#exclusion-filters
-[6]: https://console.aws.amazon.com/lambda/home
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=awsconsole#metrics
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
+[1]: https://docs.datadoghq.com/ja/help
+[2]: https://docs.datadoghq.com/ja/logs/live_tail/#live-tail-view
+[3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
+[4]: https://docs.datadoghq.com/ja/logs/indexes/#exclusion-filters
+[5]: https://console.aws.amazon.com/lambda/home
+[6]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=awsconsole#metrics
+[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
+[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers

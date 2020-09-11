@@ -5,7 +5,7 @@ aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
 
-If a metric is not submitted from one of the [400+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 
@@ -143,7 +143,7 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
 

@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Speedtest: assets/dashboards/speedtest.json
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -52,7 +53,7 @@ Speedtest チェックをホストにインストールするには
 
 注: すべてのホストについて、ホストに [Speedtest CLI][1] をインストールし、使用前に Datadog Agent ユーザー (例: `sudo -u dd-agent speedtest`) として契約に同意する必要があります。
 
-### 構成
+### コンフィギュレーション
 
 1. Speedtest のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `speedtest.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[speedtest.d/conf.yaml のサンプル][5]を参照してください。
 

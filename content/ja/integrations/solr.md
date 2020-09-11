@@ -53,13 +53,28 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `solr.d/conf.yaml` ファイルを編集します。使用可能な全コンフィギュレーションオプションの詳細については、[サンプル solr.d/conf.yaml][5] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `solr.d/conf.yaml` ファイルを編集します。使用可能な全コンフィギュレーションオプションの詳細については、[サンプル solr.d/conf.yaml][2] を参照してください。
 
    ```yaml
+   init_config:
+
+     ## @param is_jmx - boolean - required
+     ## Whether or not this file is a configuration for a JMX integration.
+     #
+     is_jmx: true
+
+     ## @param collect_default_metrics - boolean - required
+     ## Whether or not the check should collect all default metrics.
+     #
+     collect_default_metrics: true
+
    instances:
      ## @param host - string - required
      ## Solr host to connect to.
@@ -70,7 +85,7 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
        port: 9999
    ```
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][3]。
 
 #### メトリクスのリスト
 
@@ -150,9 +165,15 @@ mydomain:attr0=val0,attr1=val1
       bean: second_bean_name
 ```
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
+
 #### コンテナ化
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][7]のガイドを参照してください。
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
 ##### ログの収集
 
@@ -162,13 +183,13 @@ mydomain:attr0=val0,attr1=val1
        logs_enabled: true
      ```
 
-2. Solr はデフォルトで `log4j` ロガーを使用します。ログ出力のフォーマットをカスタマイズするには、[`server/resources/log4j2.xml`][8] ファイルを編集します。デフォルトでは、Datadog のインテグレーションパイプラインが以下のコンバージョン[パターン][9]をサポートします。
+2. Solr はデフォルトで `log4j` ロガーを使用します。ログ出力のフォーマットをカスタマイズするには、[`server/resources/log4j2.xml`][2] ファイルを編集します。デフォルトでは、Datadog のインテグレーションパイプラインが以下のコンバージョン[パターン][3]をサポートします。
 
    ```text
    %maxLen{%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%notEmpty{ =>%ex{short}}}{10240}%n
    ```
 
-    フォーマットが異なる場合は、[インテグレーションパイプライン][10]を複製して編集してください。
+    フォーマットが異なる場合は、[インテグレーションパイプライン][4]を複製して編集してください。
 
 
 3. `solr.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル solr.d/solr.yaml][5] を参照してください。
@@ -187,12 +208,21 @@ mydomain:attr0=val0,attr1=val1
 
 4. [Agent を再起動します][6]。
 
-Docker環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][11]を参照してください。
+Docker環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][7]を参照してください。
 
+[1]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
+[3]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
+[4]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
+[5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][12]し、Checks セクションで `solr` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `solr` を探します。
 
 ## 収集データ
 
@@ -252,16 +282,8 @@ attribute:
       "true": 1
 ```
 
+
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/solr/images/solrgraph.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/ja/integrations/java/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
-[9]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
-[10]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-[11]: https://docs.datadoghq.com/ja/agent/docker/log/
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

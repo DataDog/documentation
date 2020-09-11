@@ -1033,12 +1033,6 @@
             "description": "The list of metrics or timeseries to compute for the retrieved buckets.",
             "items": {
               "description": "A compute rule to compute metrics or timeseries",
-              "example": {
-                "aggregation": "pc90",
-                "interval": "20m",
-                "metric": "@score",
-                "type": "timeseries"
-              },
               "properties": {
                 "aggregation": {
                   "description": "An aggregation function",
@@ -1055,6 +1049,7 @@
                     "max",
                     "avg"
                   ],
+                  "example": "pc90",
                   "type": "string",
                   "x-enum-varnames": [
                     "COUNT",
@@ -1144,17 +1139,6 @@
             "description": "The rules for the group by",
             "items": {
               "description": "A group by rule",
-              "example": {
-                "facet": "host",
-                "limit": 50,
-                "missing": "missing_host",
-                "sort": {
-                  "order": "asc",
-                  "type": "alphabetical"
-                },
-                "total": true,
-                "type": "facet"
-              },
               "properties": {
                 "facet": {
                   "description": "The name of the facet to use (required)",
@@ -1231,6 +1215,7 @@
                         "max",
                         "avg"
                       ],
+                      "example": "pc90",
                       "type": "string",
                       "x-enum-varnames": [
                         "COUNT",
@@ -1511,6 +1496,7 @@
               "max",
               "avg"
             ],
+            "example": "pc90",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -1588,6 +1574,7 @@
           "max",
           "avg"
         ],
+        "example": "pc90",
         "type": "string",
         "x-enum-varnames": [
           "COUNT",
@@ -3806,12 +3793,6 @@
       },
       "LogsCompute": {
         "description": "A compute rule to compute metrics or timeseries",
-        "example": {
-          "aggregation": "pc90",
-          "interval": "20m",
-          "metric": "@score",
-          "type": "timeseries"
-        },
         "properties": {
           "aggregation": {
             "description": "An aggregation function",
@@ -3828,6 +3809,7 @@
               "max",
               "avg"
             ],
+            "example": "pc90",
             "type": "string",
             "x-enum-varnames": [
               "COUNT",
@@ -3887,17 +3869,6 @@
       },
       "LogsGroupBy": {
         "description": "A group by rule",
-        "example": {
-          "facet": "host",
-          "limit": 50,
-          "missing": "missing_host",
-          "sort": {
-            "order": "asc",
-            "type": "alphabetical"
-          },
-          "total": true,
-          "type": "facet"
-        },
         "properties": {
           "facet": {
             "description": "The name of the facet to use (required)",
@@ -3974,6 +3945,7 @@
                   "max",
                   "avg"
                 ],
+                "example": "pc90",
                 "type": "string",
                 "x-enum-varnames": [
                   "COUNT",
@@ -7028,7 +7000,9 @@
                         900,
                         1800,
                         3600,
-                        7200
+                        7200,
+                        10800,
+                        21600
                       ],
                       "format": "int32",
                       "type": "integer",
@@ -7040,7 +7014,9 @@
                         "FIFTEEN_MINUTES",
                         "THIRTY_MINUTES",
                         "ONE_HOUR",
-                        "TWO_HOURS"
+                        "TWO_HOURS",
+                        "THREE_HOURS",
+                        "SIX_HOURS"
                       ]
                     },
                     "maxSignalDuration": {
@@ -7342,7 +7318,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7354,7 +7332,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -7489,7 +7469,9 @@
           900,
           1800,
           3600,
-          7200
+          7200,
+          10800,
+          21600
         ],
         "format": "int32",
         "type": "integer",
@@ -7501,7 +7483,9 @@
           "FIFTEEN_MINUTES",
           "THIRTY_MINUTES",
           "ONE_HOUR",
-          "TWO_HOURS"
+          "TWO_HOURS",
+          "THREE_HOURS",
+          "SIX_HOURS"
         ]
       },
       "SecurityMonitoringRuleMaxSignalDuration": {
@@ -7575,7 +7559,9 @@
               900,
               1800,
               3600,
-              7200
+              7200,
+              10800,
+              21600
             ],
             "format": "int32",
             "type": "integer",
@@ -7587,7 +7573,9 @@
               "FIFTEEN_MINUTES",
               "THIRTY_MINUTES",
               "ONE_HOUR",
-              "TWO_HOURS"
+              "TWO_HOURS",
+              "THREE_HOURS",
+              "SIX_HOURS"
             ]
           },
           "maxSignalDuration": {
@@ -7808,7 +7796,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -7820,7 +7810,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -8023,7 +8015,9 @@
                   900,
                   1800,
                   3600,
-                  7200
+                  7200,
+                  10800,
+                  21600
                 ],
                 "format": "int32",
                 "type": "integer",
@@ -8035,7 +8029,9 @@
                   "FIFTEEN_MINUTES",
                   "THIRTY_MINUTES",
                   "ONE_HOUR",
-                  "TWO_HOURS"
+                  "TWO_HOURS",
+                  "THREE_HOURS",
+                  "SIX_HOURS"
                 ]
               },
               "maxSignalDuration": {
@@ -10487,7 +10483,7 @@
       "url": "https://www.datadoghq.com/support/"
     },
     "description": "Collection of all Datadog Public endpoints.",
-    "title": "Datadog API Collection",
+    "title": "Datadog API V2 Collection",
     "version": "1.0"
   },
   "openapi": "3.0.0",
@@ -11307,12 +11303,6 @@
                     "description": "The list of metrics or timeseries to compute for the retrieved buckets.",
                     "items": {
                       "description": "A compute rule to compute metrics or timeseries",
-                      "example": {
-                        "aggregation": "pc90",
-                        "interval": "20m",
-                        "metric": "@score",
-                        "type": "timeseries"
-                      },
                       "properties": {
                         "aggregation": {
                           "description": "An aggregation function",
@@ -11329,6 +11319,7 @@
                             "max",
                             "avg"
                           ],
+                          "example": "pc90",
                           "type": "string",
                           "x-enum-varnames": [
                             "COUNT",
@@ -11418,17 +11409,6 @@
                     "description": "The rules for the group by",
                     "items": {
                       "description": "A group by rule",
-                      "example": {
-                        "facet": "host",
-                        "limit": 50,
-                        "missing": "missing_host",
-                        "sort": {
-                          "order": "asc",
-                          "type": "alphabetical"
-                        },
-                        "total": true,
-                        "type": "facet"
-                      },
                       "properties": {
                         "facet": {
                           "description": "The name of the facet to use (required)",
@@ -11505,6 +11485,7 @@
                                 "max",
                                 "avg"
                               ],
+                              "example": "pc90",
                               "type": "string",
                               "x-enum-varnames": [
                                 "COUNT",
@@ -17180,7 +17161,7 @@
                 }
               }
             },
-            "description": "OK for get role"
+            "description": "OK"
           },
           "403": {
             "content": {
@@ -19965,7 +19946,9 @@
                                   900,
                                   1800,
                                   3600,
-                                  7200
+                                  7200,
+                                  10800,
+                                  21600
                                 ],
                                 "format": "int32",
                                 "type": "integer",
@@ -19977,7 +19960,9 @@
                                   "FIFTEEN_MINUTES",
                                   "THIRTY_MINUTES",
                                   "ONE_HOUR",
-                                  "TWO_HOURS"
+                                  "TWO_HOURS",
+                                  "THREE_HOURS",
+                                  "SIX_HOURS"
                                 ]
                               },
                               "maxSignalDuration": {
@@ -20237,7 +20222,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -20249,7 +20236,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -20475,7 +20464,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20487,7 +20478,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -20849,7 +20842,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -20861,7 +20856,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -21098,7 +21095,9 @@
                           900,
                           1800,
                           3600,
-                          7200
+                          7200,
+                          10800,
+                          21600
                         ],
                         "format": "int32",
                         "type": "integer",
@@ -21110,7 +21109,9 @@
                           "FIFTEEN_MINUTES",
                           "THIRTY_MINUTES",
                           "ONE_HOUR",
-                          "TWO_HOURS"
+                          "TWO_HOURS",
+                          "THREE_HOURS",
+                          "SIX_HOURS"
                         ]
                       },
                       "maxSignalDuration": {
@@ -21320,7 +21321,9 @@
                             900,
                             1800,
                             3600,
-                            7200
+                            7200,
+                            10800,
+                            21600
                           ],
                           "format": "int32",
                           "type": "integer",
@@ -21332,7 +21335,9 @@
                             "FIFTEEN_MINUTES",
                             "THIRTY_MINUTES",
                             "ONE_HOUR",
-                            "TWO_HOURS"
+                            "TWO_HOURS",
+                            "THREE_HOURS",
+                            "SIX_HOURS"
                           ]
                         },
                         "maxSignalDuration": {
@@ -24149,7 +24154,432 @@
           }
         },
         "responses": {
-          "204": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response containing information about a single user.",
+                  "properties": {
+                    "data": {
+                      "description": "User object returned by the API.",
+                      "properties": {
+                        "attributes": {
+                          "description": "Attributes of user object returned by the API.",
+                          "properties": {
+                            "created_at": {
+                              "description": "Creation time of the user.",
+                              "format": "date-time",
+                              "type": "string"
+                            },
+                            "disabled": {
+                              "description": "Whether the user is disabled.",
+                              "type": "boolean"
+                            },
+                            "email": {
+                              "description": "Email of the user.",
+                              "type": "string"
+                            },
+                            "handle": {
+                              "description": "Handle of the user.",
+                              "type": "string"
+                            },
+                            "icon": {
+                              "description": "URL of the user's icon.",
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the user.",
+                              "type": "string"
+                            },
+                            "status": {
+                              "description": "Status of the user.",
+                              "type": "string"
+                            },
+                            "title": {
+                              "description": "Title of the user.",
+                              "type": "string"
+                            },
+                            "verified": {
+                              "description": "Whether the user is verified.",
+                              "type": "boolean"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "id": {
+                          "description": "ID of the user.",
+                          "type": "string"
+                        },
+                        "relationships": {
+                          "description": "Relationships of the user object returned by the API.",
+                          "properties": {
+                            "org": {
+                              "description": "Relationship to an organization.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationship to organization object.",
+                                  "properties": {
+                                    "id": {
+                                      "description": "ID of the organization.",
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "default": "orgs",
+                                      "description": "Organizations resource type.",
+                                      "enum": [
+                                        "orgs"
+                                      ],
+                                      "example": "orgs",
+                                      "type": "string",
+                                      "x-enum-varnames": [
+                                        "ORGS"
+                                      ]
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "other_orgs": {
+                              "description": "Relationship to organizations.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationships to organization objects.",
+                                  "items": {
+                                    "description": "Relationship to organization object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the organization.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "orgs",
+                                        "description": "Organizations resource type.",
+                                        "enum": [
+                                          "orgs"
+                                        ],
+                                        "example": "orgs",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ORGS"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "other_users": {
+                              "description": "Relationship to users.",
+                              "properties": {
+                                "data": {
+                                  "description": "Relationships to user objects.",
+                                  "items": {
+                                    "description": "Relationship to user object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the user.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "users",
+                                        "description": "Users type.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "roles": {
+                              "description": "Relationship to roles.",
+                              "properties": {
+                                "data": {
+                                  "description": "An array containing type and ID of a role.",
+                                  "items": {
+                                    "description": "Relationship to role object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the role.",
+                                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "roles",
+                                        "description": "Roles type.",
+                                        "enum": [
+                                          "roles"
+                                        ],
+                                        "example": "roles",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ROLES"
+                                        ]
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": "array"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "users",
+                          "description": "Users resource type.",
+                          "enum": [
+                            "users"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "USERS"
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "included": {
+                      "description": "Array of objects related to the user.",
+                      "items": {
+                        "description": "An object related to a user.",
+                        "oneOf": [
+                          {
+                            "description": "Organization object.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the organization.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the organization.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "description": "Description of the organization.",
+                                    "type": "string"
+                                  },
+                                  "disabled": {
+                                    "description": "Whether or not the organization is disabled.",
+                                    "type": "boolean"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last organization modification.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the organization.",
+                                    "type": "string"
+                                  },
+                                  "public_id": {
+                                    "description": "Public ID of the organization.",
+                                    "type": "string"
+                                  },
+                                  "sharing": {
+                                    "description": "Sharing type of the organization.",
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "description": "URL of the site that this organization exists at.",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the organization.",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "orgs",
+                                "description": "Organizations resource type.",
+                                "enum": [
+                                  "orgs"
+                                ],
+                                "example": "orgs",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ORGS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Permission object.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of a permission.",
+                                "properties": {
+                                  "created": {
+                                    "description": "Creation time of the permission.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "description": "Description of the permission.",
+                                    "type": "string"
+                                  },
+                                  "display_name": {
+                                    "description": "Displayed name for the permission.",
+                                    "type": "string"
+                                  },
+                                  "display_type": {
+                                    "description": "Display type.",
+                                    "type": "string"
+                                  },
+                                  "group_name": {
+                                    "description": "Name of the permission group.",
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the permission.",
+                                    "type": "string"
+                                  },
+                                  "restricted": {
+                                    "description": "Whether or not the permission is restricted.",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the permission.",
+                                "type": "string"
+                              },
+                              "type": {
+                                "default": "permissions",
+                                "description": "Permissions resource type.",
+                                "enum": [
+                                  "permissions"
+                                ],
+                                "example": "permissions",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "PERMISSIONS"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "description": "Role object returned by the API.",
+                            "properties": {
+                              "attributes": {
+                                "description": "Attributes of the role.",
+                                "properties": {
+                                  "created_at": {
+                                    "description": "Creation time of the role.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "modified_at": {
+                                    "description": "Time of last role modification.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the role.",
+                                    "type": "string"
+                                  },
+                                  "user_count": {
+                                    "description": "Number of users with that role.",
+                                    "format": "int64",
+                                    "readOnly": true,
+                                    "type": "integer"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "id": {
+                                "description": "ID of the role.",
+                                "type": "string"
+                              },
+                              "relationships": {
+                                "description": "Relationships of the role object returned by the API.",
+                                "properties": {
+                                  "permissions": {
+                                    "description": "Relationship to multiple permissions objects.",
+                                    "properties": {
+                                      "data": {
+                                        "description": "Relationships to permission objects.",
+                                        "items": {
+                                          "description": "Relationship to permission object.",
+                                          "properties": {
+                                            "id": {
+                                              "description": "ID of the permission.",
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "default": "permissions",
+                                              "description": "Permissions resource type.",
+                                              "enum": [
+                                                "permissions"
+                                              ],
+                                              "example": "permissions",
+                                              "type": "string",
+                                              "x-enum-varnames": [
+                                                "PERMISSIONS"
+                                              ]
+                                            }
+                                          },
+                                          "type": "object"
+                                        },
+                                        "type": "array"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": {
+                                "default": "roles",
+                                "description": "Roles type.",
+                                "enum": [
+                                  "roles"
+                                ],
+                                "example": "roles",
+                                "type": "string",
+                                "x-enum-varnames": [
+                                  "ROLES"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "type"
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
             "description": "OK"
           },
           "400": {
@@ -24954,60 +25384,8 @@
   ],
   "tags": [
     {
-      "description": "[See API version 1](/api/v1/aws-integration/).",
-      "name": "AWS Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/aws-logs-integration/).",
-      "name": "AWS Logs Integration"
-    },
-    {
-      "description": "All requests to Datadog’s API must be authenticated.\nRequests that write data require reporting access and require an `API key`.\nRequests that read data require full access and also require an `application key`.\n\n**Note:** All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly when creating your client.\n\n[Manage your account’s API and application keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\n[See API version 1](/api/v1/authentication/#validate-api-key).",
-      "name": "Authentication"
-    },
-    {
-      "description": "[See API version 1](/api/v1/azure-integration/).",
-      "name": "Azure Integration"
-    },
-    {
       "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
-    },
-    {
-      "description": "[See API version 1](/api/v1/dashboards/).",
-      "name": "Dashboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/downtimes/).",
-      "name": "Downtimes"
-    },
-    {
-      "description": "[See API version 1](/api/v1/embeddable-graphs/).",
-      "name": "Embeddable Graphs"
-    },
-    {
-      "description": "[See API version 1](/api/v1/events/).",
-      "name": "Events"
-    },
-    {
-      "description": "[See API version 1](/api/v1/gcp-integration/).",
-      "name": "GCP Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/hosts/).",
-      "name": "Hosts"
-    },
-    {
-      "description": "[See API version 1](/api/v1/ip-ranges/).",
-      "name": "IP Ranges"
-    },
-    {
-      "description": "[See API version 1](/api/v1/key-management/).",
-      "name": "Key Management"
-    },
-    {
-      "description": "Search your logs in the Datadog platform over HTTP.\n\n[See API version 1](/api/v1/logs/) for sending logs.",
-      "name": "Logs"
     },
     {
       "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in our UI.",
@@ -25018,84 +25396,16 @@
       "name": "Logs Archives"
     },
     {
-      "description": "[See API version 1](/api/v1/logs-indexes/).",
-      "name": "Logs Indexes"
-    },
-    {
-      "description": "[See API version 1](/api/v1/logs-pipelines/).",
-      "name": "Logs Pipelines"
-    },
-    {
-      "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.",
+      "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint.",
       "name": "Logs Restriction Queries"
-    },
-    {
-      "description": "[See API version 1](/api/v1/metrics/).",
-      "name": "Metrics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/monitors/).",
-      "name": "Monitors"
-    },
-    {
-      "description": "[See API version 1](/api/v1/organizations/).",
-      "name": "Organizations"
-    },
-    {
-      "description": "[See API version 1](/api/v1/pagerduty-integration/).",
-      "name": "PagerDuty Integration"
     },
     {
       "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).",
       "name": "Roles"
     },
     {
-      "description": "[See API version 1](/api/v1/screenboards/).",
-      "name": "Screenboards"
-    },
-    {
       "description": "Detection rules for generating signals and listing of generated signals",
       "name": "Security Monitoring"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-checks/).",
-      "name": "Service Checks"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-dependencies/).",
-      "name": "Service Dependencies"
-    },
-    {
-      "description": "[See API version 1](/api/v1/service-level-objectives/).",
-      "name": "Service Level Objectives"
-    },
-    {
-      "description": "[See API version 1](/api/v1/slack-integration/).",
-      "name": "Slack Integration"
-    },
-    {
-      "description": "[See API version 1](/api/v1/snapshots/).",
-      "name": "Snapshots"
-    },
-    {
-      "description": "[See API version 1](/api/v1/synthetics/).",
-      "name": "Synthetics"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tags/).",
-      "name": "Tags"
-    },
-    {
-      "description": "[See API version 1](/api/v1/timeboards/).",
-      "name": "Timeboards"
-    },
-    {
-      "description": "[See API version 1](/api/v1/tracing/).",
-      "name": "Tracing"
-    },
-    {
-      "description": "[See API version 1](/api/v1/usage-metering/).",
-      "name": "Usage Metering"
     },
     {
       "description": "Create, edit, and disable users.",
@@ -25103,10 +25413,6 @@
         "url": "https://docs.datadoghq.com/account_management/users"
       },
       "name": "Users"
-    },
-    {
-      "description": "[See API version 1](/api/v1/webhooks-integration/).",
-      "name": "Webhooks Integration"
     }
   ],
   "x-group-parameters": true

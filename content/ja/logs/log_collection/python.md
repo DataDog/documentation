@@ -40,7 +40,7 @@ Python ログの処理はかなり複雑ですが、その主な原因はトレ�
 
 ## ログとトレースにおけるサービスを接続
 
-APM が有効になっているアプリケーションの場合は、[APM Python の指示に従い][5]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
+APM が有効になっているアプリケーションの場合は、[APM Python の指示に従い][4]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
 
 **注**: APM トレーサーがログに `service` を挿入する場合、Agent 構成で設定されている値は上書きされます。
 
@@ -159,7 +159,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Agent を再起動][4]すると、構成が適用されます。
+[Agent を再起動][5]して、コンフィギュレーションへの変更を適用します。
 
 ## その他の参考資料
 
@@ -168,5 +168,5 @@ logs:
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /ja/agent/guide/agent-commands/
-[5]: /ja/tracing/connect_logs_and_traces/python
+[4]: /ja/tracing/connect_logs_and_traces/python
+[5]: /ja/agent/guide/agent-commands/

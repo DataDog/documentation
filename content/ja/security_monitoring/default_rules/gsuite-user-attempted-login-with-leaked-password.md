@@ -3,6 +3,8 @@ aliases:
   - /ja/dc3-7b8-f07
 disable_edit: true
 kind: ドキュメント
+rule_category:
+  - ログの検出
 scope: gsuite
 security: threat-intel
 source: gsuite

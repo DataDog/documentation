@@ -167,7 +167,7 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
-  
+
   - repo_name: datadog-serverless-functions
     contents:
     - action: pull-and-push-file
@@ -183,7 +183,77 @@
           kind: documentation
           aliases:
             - /serverless/troubleshooting/installing_the_forwarder/
-  
+
+  - repo_name: datadog-lambda-python
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'python.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-python/blob/master/README.md"]
+          title: Datadog Lambda Library for Python
+          kind: documentation
+
+  - repo_name: datadog-lambda-js
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'nodejs.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-js/blob/master/README.md"]
+          title: Datadog Lambda Library for Node.js
+          kind: documentation
+
+  - repo_name: datadog-lambda-rb
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'ruby.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md"]
+          title: Datadog Lambda Library for Ruby
+          kind: documentation
+
+  - repo_name: datadog-lambda-go
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'go.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-go/blob/master/README.md"]
+          title: Datadog Lambda Library for Go
+          kind: documentation
+
+  - repo_name: datadog-lambda-java
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'java.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-java/blob/master/README.md"]
+          title: Datadog Lambda Library for Java
+          kind: documentation
+
   - repo_name: dd-sdk-android
     contents:
     - action: pull-and-push-file
@@ -191,8 +261,8 @@
       globs:
       - 'docs/rum_collection.md'
       options:
-        dest_path: '/real_user_monitoring/android/'
-        file_name: '_index.md'
+        dest_path: '/real_user_monitoring/'
+        file_name: 'android.md'
         front_matters:
           dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
           title: Getting Started with Android RUM Collection

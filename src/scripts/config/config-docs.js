@@ -8,7 +8,8 @@ export default {
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
-        img_url: 'https://datadog-docs.imgix.net/'
+        imgUrl: 'https://datadog-docs.imgix.net/',
+        gaTag: 'UA-21102638-5'
     },
     preview: {
         ddClientToken: 'pub36877d3864fab670b5ae7e1d5d26cb08',
@@ -19,7 +20,8 @@ export default {
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
-        img_url: 'https://datadog-docs-staging.imgix.net/'
+        imgUrl: 'https://datadog-docs-staging.imgix.net/',
+        gaTag: 'UA-21102638-9'
     },
     development: {
         ddClientToken: 'pub36877d3864fab670b5ae7e1d5d26cb0',
@@ -29,6 +31,7 @@ export default {
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
-        img_url: 'http://localhost:1313/'
+        imgUrl: 'http://localhost:1313/',
+        gaTag: 'UA-21102638-9'
     }
 };

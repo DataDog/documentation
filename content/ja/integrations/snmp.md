@@ -70,12 +70,12 @@ SNMP インテグレーションを開始する最も簡単な方法は、SNMP �
 
 SNMPv2 デバイスの場合:
 
-1. i) デバイスの IP アドレス、ii) デバイスの `community` 文字列を指定してインスタンスを構成します。
+1. i) デバイスの IP アドレス、ii) デバイスの_コミュニティ文字列_を指定してインスタンスを構成します。
 
     ```yaml
     instances:
       - ip_address: "<IP_ADDRESS>"
-        community: "<COMMUNITY>"
+        community_string: "<COMMUNITY_STRING>"
     ```
 
 2. [Agent を再起動します][4]。

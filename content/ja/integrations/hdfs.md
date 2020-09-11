@@ -39,9 +39,12 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 #### Agent の接続
 
-##### ホスト
+##<!-- xxx tabs xxx -->
+<!-- xxx tab "ホスト" xxx -->
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+#### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. [Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `hdfs_datanode.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル hdfs_datanode.d/conf.yaml][5] を参照してください。
 
@@ -63,15 +66,18 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 2. [Agent を再起動します][6]。
 
+<!-- xxz tab xxx -->
+<!-- xxx tab "コンテナ化" xxx -->
+
 #### コンテナ化
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `hdfs_datanode`                                      |
-| `<INIT_CONFIG>`      | 空白または `{}`                                        |
-| `<INSTANCE_CONFIG>`  | `{"hdfs_datanode_jmx_uri": "http://%%host%%:50075"}` |
+| `<インテグレーション名>` | `hdfs_datanode`                                      |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
+| `<インスタンスコンフィギュレーション>`  | `{"hdfs_datanode_jmx_uri": "http://%%host%%:50075"}` |
 
 #### ログの収集
 
@@ -93,9 +99,12 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
           service: <SERVICE_NAME>
     ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
 3. [Agent を再起動します][6]。
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### 検証
 
@@ -111,7 +120,7 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 HDFS-datanode チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 **hdfs.datanode.jmx.can_connect**:<br>
 何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が DataNode の JMX インターフェイスに接続できない場合は、`Critical` を返します。
@@ -165,9 +174,12 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 #### Agent の接続
 
-##### ホスト
+##<!-- xxx tabs xxx -->
+<!-- xxx tab "ホスト" xxx -->
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+#### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `hdfs_namenode.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hdfs_namenode.d/conf.yaml][14] を参照してください。
 
@@ -189,15 +201,18 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 2. [Agent を再起動します][6]。
 
+<!-- xxz tab xxx -->
+<!-- xxx tab "コンテナ化" xxx -->
+
 #### コンテナ化
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                 |
 | -------------------- | ----------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `hdfs_namenode`                                       |
-| `<INIT_CONFIG>`      | 空白または `{}`                                         |
-| `<INSTANCE_CONFIG>`  | `{"hdfs_namenode_jmx_uri": "https://%%host%%:50070"}` |
+| `<インテグレーション名>` | `hdfs_namenode`                                       |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                         |
+| `<インスタンスコンフィギュレーション>`  | `{"hdfs_namenode_jmx_uri": "https://%%host%%:50070"}` |
 
 #### ログの収集
 
@@ -219,9 +234,12 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
           service: <SERVICE_NAME>
     ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
 3. [Agent を再起動します][6]。
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### 検証
 
@@ -237,7 +255,7 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
 
 HDFS-namenode チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 **hdfs.namenode.jmx.can_connect**:<br>
 何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が NameNode の JMX インターフェイスに接続できない場合は、`Critical` を返します。

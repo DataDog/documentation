@@ -79,23 +79,24 @@ To request support for additional CLI libraries, contact our awesome [support te
 
 #### Datastore Compatibility
 
-| Module                           | Versions                   | Support Type    |
-|:---------------------------------|:---------------------------|:----------------|
-| Amazon RDS (using PDO or MySQLi) | *(Any Supported PHP)*      | Fully Supported |
-| Elasticsearch                    | 1.x                        | Fully Supported |
-| Eloquent                         | Laravel supported versions | Fully Supported |
-| Memcached                        | *(Any Supported PHP)*      | Fully Supported |
-| MongoDB                          | 1.4.x                      | Fully Supported |
-| MySQLi                           | *(Any Supported PHP)*      | Fully Supported |
-| PDO (MySQL, PostgreSQL, MariaDB) | *(Any Supported PHP)*      | Fully Supported |
-| Predis                           | 1.1                        | Fully Supported |
-| AWS Couchbase                    | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS DynamoDB                     | AWS PHP SDK 3              | _Coming Soon_   |
-| AWS ElastiCache                  | AWS PHP SDK 3              | _Coming Soon_   |
-| Doctrine ORM                     | 2                          | _Coming Soon_   |
-| ODBC                             | *(Any Supported PHP)*      | _Coming Soon_   |
-| PHPredis                         | 4                          | _Coming Soon_   |
-| Solarium                         | 4.2                        | _Coming Soon_   |
+| Module                                                                  | Versions                   | Support Type    |
+|-------------------------------------------------------------------------|----------------------------|-----------------|
+| Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
+| Elasticsearch                                                           | 1.x                        | Fully Supported |
+| Eloquent                                                                | Laravel supported versions | Fully Supported |
+| Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
+| MongoDB - via [mongo][3] extension                                      | 1.4.x                      | Fully Supported |
+| MongoDB - via [mongodb][4] extension                                    | *(Any Supported PHP)*      | _Coming Soon_   |
+| MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
+| PDO (MySQL, PostgreSQL, MariaDB)                                        | *(Any Supported PHP)*      | Fully Supported |
+| PhpRedis                                                                | 3, 4, 5                    | Fully Supported |
+| Predis                                                                  | 1.1                        | Fully Supported |
+| AWS Couchbase                                                           | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS DynamoDB                                                            | AWS PHP SDK 3              | _Coming Soon_   |
+| AWS ElastiCache                                                         | AWS PHP SDK 3              | _Coming Soon_   |
+| Doctrine ORM                                                            | 2                          | _Coming Soon_   |
+| ODBC                                                                    | *(Any Supported PHP)*      | _Coming Soon_   |
+| Solarium                                                                | 4.2                        | _Coming Soon_   |
 
 To request support for additional datastores, contact our awesome [support team][2].
 
@@ -111,9 +112,16 @@ To request support for additional datastores, contact our awesome [support team]
 
 To request support for additional libraries, contact our awesome [support team][2].
 
+#### Deep call stacks on PHP 5
+
+The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: /help
+[3]: https://pecl.php.net/package/mongo
+[4]: https://pecl.php.net/package/mongodb
+[5]: /tracing/troubleshooting/php_5_deep_call_stacks
