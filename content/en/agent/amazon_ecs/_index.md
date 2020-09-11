@@ -40,7 +40,7 @@ If you don't have a working EC2 Container Service cluster configured, review the
 
 #### Create an ECS Task
 
-This task launches the Datadog container. When you need to modify the configuration, update this task definition as described [further down in this guide][#create-or-modify-your-iam-policy].
+This task launches the Datadog container. When you need to modify the configuration, update this task definition as described [further down in this guide](#create-or-modify-your-iam-policy).
 
 If you're [using APM][6], [DogStatsD][7], or [log management][8], set the appropriate flags in the task definition:
 
