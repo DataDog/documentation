@@ -41,7 +41,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<TOKEN_CLIENT_DATADOG>',
-  datacenter: 'us',
+  site: 'datadoghq.com',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -55,7 +55,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<TOKEN_CLIENT_DATADOG>',
-  datacenter: 'eu',
+  site: 'datadoghq.eu',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -73,10 +73,11 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<TOKEN_CLIENT>',
+        site: 'datadoghq.com',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -92,10 +93,11 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<TOKEN_CLIENT>',
+        site: 'datadoghq.eu',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -115,9 +117,12 @@ Les paramètres suivants peuvent être utilisés pour configurer l'envoi des log
 | Paramètre             | Type    | Obligatoire | Valeur par défaut | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | Chaîne  | Oui      | `-`     | Un [token client Datadog][2].                                                                             |
-| `datacenter`          | Chaîne  | Oui      | `us`    | Le site Datadog associé à votre organisation. Choisissez `us` pour le site américain ou `eu` pour le site européen.               |
+| `site`               | Chaîne  | Oui      | `datadoghq.com`    | Le site Datadog associé à votre organisation. Choisissez  `datadoghq.com` pour le site américain ou `datadoghq.eu` pour le site européen.               |
+| `service`            | Chaîne  | Non       | `` | Le nom de service pour cette application.                             |
+| `env`                | Chaîne  | Non       | `` | L'environnement de l'application, p. ex. prod, pre-prod ou encore staging.                   |
+| `version`            | Chaîne  | Non       | `` | La version de votre application, p. ex. 1.2.3, 6c44da20, 2020.02.13.                   |
 | `forwardErrorsToLogs` | Booléen | non       | `true`  | Définissez ce paramètre sur `false` pour désactiver l'envoi des logs console.error, des exceptions non interceptées et des erreurs réseau à Datadog. |
-| `sampleRate`          | Numéro  | non       | `100`   | Le pourcentage de sessions à surveiller. Les logs sont uniquement envoyés pour les sessions surveillées. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).   |
+| `sampleRate`          | Nombre  | non       | `100`   | Le pourcentage de sessions à surveiller. Les logs sont uniquement envoyés pour les sessions surveillées. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).   |
 
 ## Envoyer une entrée de log personnalisée
 
@@ -237,7 +242,7 @@ Imaginons que vous disposez d'un logger `signupLogger`, défini avec tous les au
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+datadogLogs.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 ```
 
 Vous pouvez à présent l'utiliser dans une autre partie du code avec :
@@ -254,7 +259,7 @@ signupLogger.info('Test sign up completed')
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 }
 ```
 
@@ -287,7 +292,7 @@ Une fois la bibliothèque de collecte de logs à partir des navigateurs lancée,
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLoggerGlobalContext("{'env', 'staging'}");
+datadogLogs.setLoggerGlobalContext("{'env': 'staging'}");
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -319,7 +324,7 @@ Une fois votre logger créé, vous pouvez :
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setContext("{'env', 'staging'}");
+datadogLogs.setContext("{'env': 'staging'}");
 
 datadogLogs.addContext('referrer', document.referrer);
 ```
@@ -328,7 +333,7 @@ datadogLogs.addContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}");
 
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 ```

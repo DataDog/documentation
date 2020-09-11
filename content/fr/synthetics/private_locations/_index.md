@@ -1,7 +1,7 @@
 ---
-title: Exécuter des tests Synthetics à partir d'emplacements privés
+title: Exécuter des tests Synthetic à partir d'emplacements privés
 kind: documentation
-description: Exécuter des tests API et Browser Synthetics à partir d'emplacements privés
+description: Exécuter des tests API et Browser Synthetic à partir d'emplacements privés
 further_reading:
   - link: /getting_started/synthetics/private_location
     tag: Documentation
@@ -21,21 +21,21 @@ L'accès à cette fonctionnalité est restreint. Si vous n'êtes pas autorisé �
 
 Les emplacements privés vous permettent de **surveiller des applications internes ou des URL privées** qui ne sont pas accessibles sur l’Internet public. Ils servent également à effectuer les actions suivantes :
 
-* **Créer de nouveaux emplacements Synthetics personnalisés** dans des zones stratégiques pour votre entreprise
-* **Vérifier les performances des applications dans votre environnement d'intégration continue interne** avant de mettre en production de nouvelles fonctionnalités avec une [intégration continue Synthetics][1]
+* **Créer des emplacements Synthetic personnalisés** dans des zones stratégiques pour votre entreprise
+* **Vérifier les performances des applications dans votre environnement d'intégration continue interne** avant de mettre en production de nouvelles fonctionnalités avec les [tests CI/CD Synthetic][1].
 * **Comparer les performances des applications** à l'intérieur et à l'extérieur de votre réseau interne
 
-Les emplacements privés sont des conteneurs Docker que vous pouvez installer partout où cela s'avère judicieux dans votre réseau privé. Une fois créés et installés, vous pouvez assigner des [tests Synthetics][2] à vos emplacements privés, comme vous le feriez pour un emplacement géré standard.
+Les emplacements privés sont des conteneurs Docker que vous pouvez installer partout où cela s'avère judicieux dans votre réseau privé. Une fois créés et installés, vous pouvez assigner des [tests Synthetic][2] à vos emplacements privés, comme vous le feriez pour un emplacement géré standard.
 
 Votre worker d'emplacement privé récupère vos configurations de test à partir des serveurs Datadog via HTTPS, exécute le test selon un programme ou à la demande et renvoie les résultats du test aux serveurs Datadog. Vous pouvez ensuite visualiser les résultats des tests effectués sur vos emplacements privés exactement de la même façon que pour les tests exécutés à partir d'emplacements gérés :
 
-{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assigner un test synthétique à un emplacement privé"  style="width:100%;">}}
+{{< img src="synthetics/private_locations/test_results_pl.png" alt="Assigner un test Synthetic à un emplacement privé"  style="width:100%;">}}
 
 ## Prérequis
 
 ### Docker
 
-Le worker de l'emplacement privé est envoyé en tant que conteneur Docker. Il peut s'exécuter sur un système d'exploitation basé sur Linux ou Windows si le [Docker Engine][3] est disponible sur votre host. Il peut également s'exécuter avec le mode conteneurs de Linux.
+Le worker de l'emplacement privé est envoyé en tant que conteneur Docker. L'[image Docker][3] officielle est disponible sur Docker Hub. Le worker peut s'exécuter sur un système d'exploitation basé sur Linux ou Windows si le [Docker Engine][4] est disponible sur votre host. Il peut également s'exécuter avec le mode conteneurs de Linux.
 
 ### Endpoints des emplacements privés Datadog
 
@@ -71,7 +71,7 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 ### Créer votre emplacement privé
 
-Accédez à _Synthetics_ -> _Settings_ -> _Private Locations_ et cliquez sur **Add Private Location** :
+Accédez à _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ et cliquez sur **Add Private Location** :
 
 {{< img src="synthetics/private_locations/add_pl.png" alt="créer un emplacement privé"  style="width:100%;">}}
 
@@ -95,21 +95,21 @@ Si le trafic entre votre emplacement privé et Datadog doit passer par un proxy,
 
 {{< img src="synthetics/private_locations/pl_proxy.png" alt="Ajouter un proxy au fichier de configuration de votre emplacement privé"  style="width:90%;">}}
 
-[Des options de configuration de proxy avancées][4] sont disponibles.
+[Des options de configuration de proxy avancées][5] sont disponibles.
 
 #### Bloquer des IP réservées
 
-Par défaut, les utilisateurs de Synthetics peuvent créer des tests Synthetics sur des endpoints avec n'importe quelle IP. Si vous souhaitez empêcher les utilisateurs de créer des tests sur des IP internes sensibles de votre réseau, activez le bouton **Block reserved IPs** pour bloquer un ensemble de plages d'IP réservées par défaut ([Registre d'adresses IPv4][5] et [Registre d'adresses IPv6][6]), puis définissez le paramètre `enableDefaultBlockedIpRanges` associé sur `true` dans le fichier de configuration généré.
+Par défaut, les utilisateurs de Synthetic peuvent créer des tests Synthetic sur des endpoints avec n'importe quelle IP. Si vous souhaitez empêcher les utilisateurs de créer des tests sur des IP internes sensibles de votre réseau, activez le bouton **Block reserved IPs** pour bloquer un ensemble de plages d'IP réservées par défaut ([Registre d'adresses IPv4][6] et [Registre d'adresses IPv6][7]), puis définissez le paramètre `enableDefaultBlockedIpRanges` associé sur `true` dans le fichier de configuration généré.
 
 Si certains des endpoints que vous voulez tester se trouvent dans une ou plusieurs des plages d'IP réservées bloquées, vous pouvez mettre leurs IP et/ou leurs CIDR sur liste blanche afin d'ajouter les paramètres `allowedIPRanges` associés à votre fichier de configuration généré.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configurer les IP réservées"  style="width:90%;">}}
 
-[Des options avancées de configuration d'IP réservées][7] sont disponibles.
+[Des options avancées de configuration d'IP réservées][8] sont disponibles.
 
 #### Configuration avancée
 
-[Des options de configuration avancées][8] sont disponibles. Pour les afficher, exécutez la commande `help` ci-dessous : 
+[Des options de configuration avancées][9] sont disponibles. Pour les afficher, exécutez la commande `help` ci-dessous : 
 
 ```shell
 docker run --rm datadog/synthetics-private-location-worker --help
@@ -131,7 +131,7 @@ Lancez votre emplacement privé sur :
 
 {{% tab "Docker" %}}
 
-Exécutez cette commande pour démarrer votre worker d'emplacement privé en montant votre fichier de configuration dans le conteneur :
+Exécutez cette commande pour démarrer votre worker d'emplacement privé en montant votre fichier de configuration dans le conteneur. Assurez-vous que votre fichier `<NOM_FICHIER_CONFIGURATION_WORKER>.json` est placé dans `/etc/docker` et non dans le dossier de base :
 
 ```shell
 docker run --rm -v $PWD/<NOM_FICHIER_CONFIGURATION_WORKER>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
@@ -453,23 +453,23 @@ Vous pouvez ensuite commencer à tester votre premier endpoint interne en lança
 
 {{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Test rapide sur un emplacement privé" video="true" width="80%">}}
 
-## Lancer des tests Synthetics à partir de vos emplacements privés
+## Lancer des tests Synthetic à partir de vos emplacements privés
 
 Si votre emplacement privé communique normalement avec Datadog, le statut de santé `OK` devrait s'afficher dans la liste de vos emplacements privés sur la page **Settings** :
 
 {{< img src="synthetics/private_locations/pl_health.png" alt="Santé de l'emplacement privé"  style="width:90%;">}}
 
-Vous pouvez ensuite vous rendre sur n'importe quel formulaire de création de tests API ou Browser, et cocher les **emplacements privés** qui vous intéressent afin qu'ils exécutent votre test Synthetics en temps et en heure :
+Vous pouvez ensuite vous rendre sur n'importe quel formulaire de création de tests API ou Browser, et cocher les **emplacements privés** qui vous intéressent afin qu'ils exécutent votre test Synthetic en temps et en heure :
 
-{{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assigner un test Synthetics à un emplacement privé"  style="width:80%;">}}
+{{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assigner un test Synthetic à un emplacement privé"  style="width:80%;">}}
 
-Vos emplacements privés peuvent être utilisés de la même manière que les autres emplacements gérés par Datadog : assignez des [tests Synthetic][2] à des emplacements privés, visualisez les résultats des tests, récupérez des [métriques Synthetic][9], etc.
+Vos emplacements privés peuvent être utilisés de la même manière que les autres emplacements gérés par Datadog : assignez des [tests Synthetic][2] à des emplacements privés, visualisez les résultats des tests, récupérez des [métriques Synthetic][10], etc.
 
 ## Redimensionner vos emplacements privés
 
 Vous pouvez facilement procéder à un **scaling horizontal** de vos emplacements privés en y ajoutant ou en supprimant des workers. Il est possible d'exécuter plusieurs conteneurs pour un même emplacement privé avec un seul fichier de configuration. Chaque worker demande alors à exécuter `N` tests en fonction du nombre de tests autorisés. Lorsque le worker 1 traite des tests, le worker 2 demande les tests suivants, etc.
 
-Vous pouvez également utiliser la valeur du [paramètre `concurrency`][10] pour ajuster le nombre de tests que les workers de vos emplacements privés peuvent exécuter simultanément.
+Vous pouvez également utiliser la valeur du [paramètre `concurrency`][11] pour ajuster le nombre de tests que les workers de vos emplacements privés peuvent exécuter simultanément.
 
 ### Configuration matérielle requise
 
@@ -485,7 +485,7 @@ Vous pouvez également utiliser la valeur du [paramètre `concurrency`][10] pour
 | Emplacement privé exécutant uniquement des tests API             | Entre 1 et 200                 | 20 mCores/5 MiB par slot    |
 | Emplacement privé exécutant uniquement des tests Browser         | Entre 1 et 50                  | 150 mCores/1 GiB par slot   |
 
-**Exemple :** pour un emplacement privé exécutant à la fois des tests API et Browser, et dont la valeur `concurrency` est définie par défaut sur `10`, les exigences recommandées sont les suivantes : environ 1,5 core `(150 mCores + (150 mCores * 10 slots))` et 10 GiB de mémoire `(150 M + (1 G * 10 slots))`.
+**Exemple :** pour un emplacement privé exécutant à la fois des tests API et Browser, et dont la valeur [`concurrency`][11] est définie par défaut sur `10`, les exigences recommandées sont les suivantes : environ 1,5 core `(150 mCores + (150 mCores * 10 slots))` et 10 GiB de mémoire `(150 M + (1 G * 10 slots))`.
 
 #### Disk
 
@@ -497,11 +497,12 @@ Concernant l'espace disque, nous vous conseillons d'allouer environ 10 MiB/slot
 
 [1]: /fr/synthetics/ci
 [2]: /fr/synthetics/
-[3]: https://docs.docker.com/engine/install/
-[4]: /fr/synthetics/private_locations/configuration/#proxy-configuration
-[5]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[6]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[7]: /fr/synthetics/private_locations/configuration/#reserved-ips-configuration
-[8]: /fr/synthetics/private_locations/configuration/
-[9]: /fr/synthetics/metrics
-[10]: /fr/synthetics/private_locations/configuration/#parallelization-configuration
+[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[4]: https://docs.docker.com/engine/install/
+[5]: /fr/synthetics/private_locations/configuration/#proxy-configuration
+[6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[8]: /fr/synthetics/private_locations/configuration/#reserved-ips-configuration
+[9]: /fr/synthetics/private_locations/configuration/
+[10]: /fr/synthetics/metrics
+[11]: /fr/synthetics/private_locations/configuration/#parallelization-configuration

@@ -44,12 +44,20 @@ further_reading:
 
 たとえば、一部のホストが AWS 上で動作している場合、以下の AWS 固有のタグをすぐに利用できます。
 
-* availability-zone
-* region
-* image
-* instance-type
-* security-group
-* 使用している EC2 タグ ('name' など)
+* `availability-zone`
+* `region`
+* `image`
+* `instance-type`
+* `security-group`
+* 使用している EC2 タグ (`name` など)
+
+Datadog Agent では、ホストメタデータおよびアプリケーション情報も収集されます。この一部は、フィルターまたはグループ化のための語句として使用できます。そのようなフィールドには以下が含まれます。
+
+- `field:metadata_agent_version`
+- `field:metadata_platform`
+- `field:metadata_processor`
+- `field:metadata_machine`
+- `field:apps`
 
 ### ズームイン
 

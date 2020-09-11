@@ -123,7 +123,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 リクエストの本文の `query` プロパティには、次の形式のクエリ文字列を含める必要があります。
 
 ```text
-avg(<query_window>):anomalies(<metric_query>, ‘<algorithm>’, <deviations>, direction=’<direction>’, alert_window=’<alert_window>’, interval=<interval>, count_default_zero=’<default_zero>’ [, seasonality=’<seasonality>’]) >= <threshold>
+avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 * `query_window`: `last_4h` や `last_7d` などのタイムフレーム。通知のグラフに表示される時間ウィンドウ。少なくとも `alert_window` と同じ大きさでなければならず、`alert_window` の約 5 倍にすることをお勧めします
