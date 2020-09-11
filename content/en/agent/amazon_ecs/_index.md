@@ -44,15 +44,15 @@ This task launches the Datadog container. When you need to modify the configurat
 
 If you're [using APM][6], [DogStatsD][7], or [log management][8], set the appropriate flags in the task definition:
 
-- If you are using APM, set `portMappings` so your downstream containers can ship traces to the Agent service. APM uses `TCP` on port `8126` to receive traces, so set this as the `hostPort` in your task's definition.
+  - If you are using APM, set `portMappings` so your downstream containers can ship traces to the Agent service. APM uses `TCP` on port `8126` to receive traces, so set this as the `hostPort` in your task's definition.
 
 **Note**: To enable trace collection from other containers, ensure that the `DD_APM_NON_LOCAL_TRAFFIC` environment variable is set to `true`. Learn more about [APM with containers][9].
 
-- If you are using DogStatsD, set the `hostPort` as `UDP` on port `8125` in your task's definition.
+  - If you are using DogStatsD, set the `hostPort` as `UDP` on port `8125` in your task's definition.
 
 **Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
-- If you are using log management, refer to the dedicated [Log collection documentation][6].
+  - If you are using log management, refer to the dedicated [Log collection documentation][6].
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
