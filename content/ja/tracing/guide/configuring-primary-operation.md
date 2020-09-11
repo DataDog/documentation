@@ -90,5 +90,5 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/getting_further/metrics_namespace/
+[1]: /ja/tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings

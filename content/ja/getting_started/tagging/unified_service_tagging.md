@@ -324,7 +324,7 @@ Agent の[メインコンフィギュレーションファイル][1]に、以下
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 

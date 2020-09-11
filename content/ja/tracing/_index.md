@@ -62,39 +62,51 @@ AWS、GCP、Azure、Kubernetes、ECS、Fargate、PCF、Heroku、オンプレミ�
 
 {{< img src="tracing/index/ServicePage.gif" alt="サービスページ"  style="width:100%;">}}
 
+### バージョン追跡
+
+ローリング、ブルー/グリーン、シャドウ、またはカナリアデプロイに対し、バージョンタグで[サービスパフォーマンスを監視][4]します。
+
+{{< img src="tracing/version_tracking/rolling.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
+
 ### Live Search
 
-取り込まれたトレースの 100% がサンプリングなしで 15 分間生存している任意のタグで[スパンを検索][4]します。
+取り込まれたトレースの 100% がサンプリングなしで 15 分間生存している任意のタグで[スパンを検索][5]します。
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 ### ログと分散型トレースの接続
 
-自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][5]します。
+自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][6]します。
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースをつなげる"  style="width:100%;">}}
 
+### サーバーレス関数のトレース
+
+[AWS Lambda およびホストをトレース][7]し、ハイブリッドインフラストラクチャーのすべてにおける完全トレースを確認します。
+
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数"  style="width:100%;">}}
+
 ### App Analytics
 
-アプリケーション、インフラストラクチャー、またはデータセンター、アベイラビリティーゾーン、デプロイバージョン、ドメイン、ユーザー、チェックアウト金額、顧客などのカスタムタグごとに[パフォーマンスを分析][6]します。
+アプリケーション、インフラストラクチャー、またはデータセンター、アベイラビリティーゾーン、デプロイバージョン、ドメイン、ユーザー、チェックアウト金額、顧客などのカスタムタグごとに[パフォーマンスを分析][8]します。
 
 {{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Synthetic テストデータとトレースの接続
 
-トレースに[シュミレーションされた API テストをリンクして][7]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
+トレースに[シュミレーションされた API テストをリンクして][9]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic テスト"  style="width:100%;">}}
 
-### 継続的なプロファイリング
+### 継続的なプロファイラー
 
-CPU、メモリ、または I/O を最も多く消費するコード行を特定するために、常時稼働の本番環境プロファイリングにより[コードの効率を向上][8]させます。
+CPU、メモリ、または I/O を最も多く消費するコード行を特定するため、常時稼働の本番環境プロファイラーにより[コードの効率を向上][10]します。
 
 {{< img src="tracing/index/Profiling.png" alt="プロファイリング"  style="width:100%;">}}
 
 ### インスツルメンテーションをカスタマイズまたは OpenTracing を追加
 
-自動インスツルメンテーション、dd-trace-api、OpenTracing 間で[インスツルメンテーションとシームレスに接続][9]します。
+自動インスツルメンテーション、dd-trace-api、OpenTracing および OpenTelemetry エクスポーター間で[インスツルメンテーションとシームレスに接続][11]します。
 
 ## その他の参考資料
 
@@ -103,9 +115,11 @@ CPU、メモリ、または I/O を最も多く消費するコード行を特定
 [1]: /ja/tracing/send_traces/
 [2]: /ja/tracing/visualization/services_map/
 [3]: /ja/tracing/visualization/service/
-[4]: /ja/tracing/livesearch/
-[5]: /ja/tracing/connect_logs_and_traces/
-[6]: /ja/tracing/app_analytics/
-[7]: /ja/synthetics/apm/
-[8]: /ja/tracing/profiling/
-[9]: /ja/tracing/manual_instrumentation/
+[4]: /ja/tracing/version_tracking/
+[5]: /ja/tracing/livesearch/
+[6]: /ja/tracing/connect_logs_and_traces/
+[7]: /ja/tracing/serverless_functions/
+[8]: /ja/tracing/app_analytics/
+[9]: /ja/synthetics/apm/
+[10]: /ja/tracing/profiler/
+[11]: /ja/tracing/manual_instrumentation/

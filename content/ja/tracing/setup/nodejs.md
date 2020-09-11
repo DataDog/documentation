@@ -27,7 +27,13 @@ NodeJS トレーサーはバージョン `8 以降`を公式にサポートし�
 
 ## インストールと利用開始
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に App Analytics およびトレース ID の挿入を有効にします。
 
 APM で使用される用語の説明は、[公式ドキュメント][3]を参照してください。
 
@@ -72,7 +78,7 @@ export default tracer;
 
 初期化のオプションについては、[トレーサー設定][9]を参照してください。
 
-## 構成
+## コンフィギュレーション
 
 トレーサーの設定は、パラメーターを `init()` メソッドとして、または環境変数として構成できます。
 
@@ -83,7 +89,7 @@ export default tracer;
 | env            | `DD_ENV`                     | `null`      | アプリケーションの環境 (例: `prod`、`pre-prod`、`stage`) を設定します。バージョン 0.20 以降で利用可能。                                                                                                                                                                                                     |
 | サービス        | `DD_SERVICE`            | `null`      | このプログラムで使用するサービス名。バージョン 0.20 以降で利用可能。                                                                                                                                                                                                                              |
 | version        | `DD_VERSION`            | `null`      | アプリケーションのバージョン番号。デフォルトは、package.json のバージョンフィールドの値です。バージョン 0.20 以降で利用可能。
-| tags           | `DD_TAGS`                    | `{}`        | すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数として渡される場合、フォーマットは `key:value, key:value` となります。バージョン 0.20 以降で利用可能。                                                                                                                            |
+| tags           | `DD_TAGS`                    | `{}`        | すべてのスパンおよびメトリクスに適用されるべきグローバルタグを設定します。環境変数として渡される場合、フォーマットは `key:value, key:value` となります。プログラムで設定する場合は `tracer.init({ tags: { foo: 'bar' } })`。バージョン 0.20 以降で利用可能。                                                                                                                            |
 
 サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][10]のドキュメントをご参照ください。
 
@@ -128,7 +134,7 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH>ノードサーバー
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/visualization/
 [4]: https://datadog.github.io/dd-trace-js
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development

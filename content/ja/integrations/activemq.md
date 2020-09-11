@@ -141,7 +141,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. Riak のログの収集を開始するには、次の構成ブロックを `activemq.d/conf.yaml` ファイルに追加します。
+2. ActiveMQ のログ収集を開始するには、次のコンフィギュレーションブロックを `activemq.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
