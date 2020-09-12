@@ -221,7 +221,7 @@ More information and additional parameters can be found in the [CLI documentatio
 
 ### Install the Datadog Lambda Library
 
-You can either install the Datadog Lambda library as a layer or as a Python package.
+You can either install the Datadog Lambda library as a layer (recommended) or as a Python package.
 
 The minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
@@ -245,7 +245,7 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 
 #### Using the Package
 
-Install `datadog-lambda` and its dependencies locally to your function project folder. For more details, see [how to add dependencies to your function deployment package][3].
+Install `datadog-lambda` and its dependencies locally to your function project folder. Note, `datadog-lambda` depends on `ddtrace` that uses native extensions, therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][8] for Serverless Framework and [--use-container][9] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][3].
 
 ```
 pip install datadog-lambda -t ./
@@ -277,6 +277,8 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 [5]: https://docs.datadoghq.com/serverless/forwarder/
 [6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[9]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
 {{% /tab %}}
 {{< /tabs >}}
 
