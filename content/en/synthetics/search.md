@@ -61,7 +61,7 @@ Once selected, choose `Run Tests Now` or `Delete`, which will bulk run or delete
 
 Hover over a test in the table to populate options such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The option `Edit Recording` is also available for browser tests.
 
-{{< img src="synthetics/browser_tests/action_tray.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
+{{< img src="synthetics/search/action_tray.mp4" alt="Action tray options" video="true" width="100%">}}
 
 ### Audit events
 
