@@ -271,7 +271,7 @@
   - repo_name: browser-sdk
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: ruth/docs-1217
       globs:
       - 'packages/rum/README.md'
       options:
