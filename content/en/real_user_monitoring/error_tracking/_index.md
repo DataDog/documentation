@@ -54,16 +54,16 @@ Source maps are mapping files generated when minifying Javascript source code. T
 3. Run the following command:
    {{< code-block lang="curl">}}
 ```curl
-   datadog-ci sourcemaps upload /path/to/build/directory \
+datadog-ci sourcemaps upload /path/to/build/directory \
   --service=my-service \
   --release-version=v35.2395005 \
   --minified-path-prefix=https://hostname.com/static/js
 ```
-   {{< /code-block >}}
+  {{< /code-block >}}
 
 For more information about CLI parameters, see the [official Github repository][5].
 
-<div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourceContent</code> attribute in your source maps is not empty before uploading them.</div>
+<div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourcesContent</code> attribute in your source maps is not empty before uploading them.</div>
 
 ## Further Reading
 
