@@ -65,7 +65,7 @@ Setting the value without a secret results in the token being readable in the `P
 2. Run this one line command:
 
     ```shell
-    kubectl create secret generic datadog-agent-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
+    kubectl create secret generic datadog-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
     ```
 
     Alternatively, modify the value of the secret in the `agent-secret.yaml` file located in the [manifest/cluster-agent directory][1] or create it with:
