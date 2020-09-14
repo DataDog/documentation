@@ -58,13 +58,13 @@ Datadog collects generic base-line metrics from all devices. If there are unsupp
 If you send a feature request, Datadog support needs a `snmpwalk` from the requested device. Run the following and send the output:
 
 ```
-snmpwalk -v2 -c -Obef <COMMUNITY_STRING> <IP_ADDRESS> 1.3.6
+snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 ```
 
 #### Why am I only seeing one metric collected for my networks and it’s the number of devices collected at zero?
 
 1. Try loosening ACLs/firewall rules for your devices.
-2. Run `snmpwalk -v2c -ObentU -c <COMMUNITY_STRING> <IP_ADDRESS> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
+2. Run `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
 
 
 ## Further Reading
