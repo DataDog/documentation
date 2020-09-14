@@ -95,17 +95,19 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 ### Test your UI with custom JavaScript
 
-Test a custom assertion on the active page using your own JavaScript code. JavaScript assertions support both synchronous and asynchronous code.
+Test a custom assertion on the active page using your own JavaScript code. 
+
+**Note**: JavaScript assertions support both synchronous and asynchronous code.
 
 The JavaScript assertion function comes with the following parameters and requires a return statement.
 
-* `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+* The `return` (mandatory) statement should reflect the condition the assertion needs to meet for your browser test step to be successful. Any type can be returned, but the value is automatically casted as a boolean.
 
-* `element`: The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+* `vars` (optional): A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+
+* `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
-
-* The `return` statement should reflect the condition the assertion needs to meet for your browser test step to be successful. Any type can be returned, but the value is automatically casted as a boolean.
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
@@ -196,23 +198,36 @@ By default, the **Scroll** step scrolls on the whole page. If you need to scroll
 
 To create a variable, first give it a name then define its value from:
 
+#### A Pattern
+
+Create a variable by defining its value from one of the below available builtins: 
+
+| Pattern                 | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`      | Generates a numeric string with n digits.                                                               |
+| `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.                                                           |
+| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters.                                                     |
+| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + n days. |
+
 #### An Element
 
 Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
 
 #### JavaScript
 
-Generate custom variables using your own JavaScript code. JavaScript steps support both synchronous and asynchronous code.
+Write the custom JavaScript code returning the value you want your variable to be assigned to.
+
+**Note**: JavaScript steps support both synchronous and asynchronous code.
 
 The JavaScript function comes with the following parameters and requires a return statement.
 
-* `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+* The `return` (mandatory) statement should return the value you want to associate to your JavaScript variable. Any type can be returned, but the value is automatically casted as a string.
 
-* `element`: The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+* `vars` (optional): A string containing any existing browser test [variables][5] you would want to leverage inside of your code. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test already features a `PRICE` variable, call it in your JavaScript snippet using `vars.PRICE`.
+
+* `element` (optional): The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
-
-* The `return` statement should return the value associated to your JavaScript variable. Any type can be returned, but the value is automatically casted as a string.
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
@@ -238,30 +253,24 @@ Pick any global variables that was defined through [Synthetic  Monitoring Settin
 
 Generate a random Synthetic email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 
-#### A Pattern
-
-| Pattern                 | Description                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Generates a numeric string with n digits.                                                               |
-| `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.                                                           |
-| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters.                                                     |
-| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + n days. |
-
 ### Use the variable
 
-Once created, you can use the little hand on your variable box to inject your variable on the website being tested:
+All steps input fields with a `{{` indication support variables.
+
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
+
+If you want to record a step leveraging a variable, you can use the little hand on your variable box:
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="100%" >}}
 
-This generates an input text step with a content that is always replaced by `{{ <YOUR_VARIABLE> }}` value at test execution.
+At recording, this translates into the actual value of the variable being injected on your website's input (consequently allowing you to move on with the rest of your steps) and creates an associated `Type text` step featuring `{{ <YOUR_VARIABLE_NAME> }}`. At test execution, `{{ <YOUR_VARIABLE_NAME> }}` is systematically replaced by your variable's associated value.
 
-In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). You can inject your variable by using `{{ <YOUR_VARIABLE> }}` directly on your website at recording. The browser test automatically populates that field at test execution with the variable value generated in the previous steps.
+**Note**: In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). To move on with the recording of the following steps, you might consequently need to either input `{{ <YOUR_VARIABLE_NAME> }}` directly on your website or to use an actual value.   
+If you go for that second option, make sure to replace the actual value with `{{ <YOUR_VARIABLE_NAME> }}` on your step before saving your test in order to have the browser test automatically run the step with the variable value generated in the previous step.
 
 {{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="100%" >}}
 
-**Note**: all fields with a `{{` indication support variables autocompletion.
-
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
+Here the form allowed us to mov
 
 ## Wait
 
