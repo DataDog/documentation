@@ -15,9 +15,7 @@ further_reading:
 If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces: for a given error, you will then get access to the file path, the line number as well as a code snippet for each frame of the related stack trace.
 
 ## Instrument your code
-You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute.
-
-Check below some configurations for popular Javascript bundlers.
+You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. Check below some configurations for popular Javascript bundlers.
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
@@ -93,7 +91,7 @@ A minified stack trace is almost useless as you don't have access to the file pa
 
 On the contrary, an unminified stack trace gives you all the context you need for a fast and seamless troubleshooting:
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Error Tracking Unminified Stack Trace"  >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.gif" alt="Error Tracking Unminified Stack Trace"  >}}
 
 
 ## Further Reading
