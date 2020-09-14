@@ -1408,7 +1408,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
-  - name: Steps Advanced Options
+  - name: Advanced Options for Steps
     url: synthetics/browser_tests/advanced_options
     parent: synthetics_browser_tests
     weight: 203

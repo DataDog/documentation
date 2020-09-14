@@ -5,7 +5,7 @@ description: Search and manage your Synthetic tests.
 further_reading:
 - link: "/getting_started/synthetics/"
   tag: "Documentation"
-  text: "Getting Started with Synthetic Monitoring"
+  text: "Getting started with Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
