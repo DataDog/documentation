@@ -20,28 +20,6 @@ body:not(.api) {
         }
     }
 
-    .code-lang-selector-container {
-        .choices {
-
-            @media (min-width: 992px) {
-                position: absolute;
-                right: -60px;
-                top: 40px;
-            }
-            @media (min-width: 1200px) {
-                right: -60px;
-                top: 40px;
-            }
-        }
-    }
-
-    .code-lang-selector-container {
-        padding: 10px 15px 0 15px;
-        @media (min-width: 992px) {
-            padding: 0;
-        }
-    }
-
     .choices {
         width: 100px;
         margin: 0;

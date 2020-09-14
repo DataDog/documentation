@@ -1,0 +1,64 @@
+{{ $dot := $.context }}
+
+{{ $file := $.file }}
+
+{{ if (in $.file "/") }}
+  {{ $.context.Scratch.Set "snipfile" .file}}
+{{ else }}
+  {{ $.context.Scratch.Set "snipfile" (printf "code_snippets/%s" .file)}}
+{{ end }}
+{{ $file := $.context.Scratch.Get "snipfile" }}
+
+{{ $ext_index := (sub (len (split $file ".")) 1) }}
+{{ $file_ext := (index (split $file ".") $ext_index) }}
+
+{{ $highlight := $.highlight }}
+{{ $static := $.static }}
+
+{{ $ext_to_lang := (dict "php" "php" "py" "python" "rb" "ruby" "sh" "console" "js" "javascript" "json" "json" "go" "golang")}}
+
+{{ $nocomments := $.nocomments }}
+
+  {{- range $k, $v := $ext_to_lang -}}
+
+    {{- $binsh := "#!/bin/sh\n" -}}
+
+    {{- $apicomment := print "# " (i18n "api_account_sentence1") "\n# " (i18n "api_account_sentence2") "\n\n" -}}
+
+    {{- $file_content := readFile ($file) -}}
+
+    {{- if eq $k $file_ext -}}
+
+      {{- if and (eq $k "sh") (ne $nocomments true) -}}
+
+        {{ $.context.Scratch.Set "file" (printf "%s%s%s" $binsh $apicomment $file_content ) }}
+
+      {{- else -}}
+
+        {{ $.context.Scratch.Set "file" (printf "%s%s" $apicomment $file_content ) }}
+
+      {{- end -}}
+
+      {{ if or ($static) (eq $nocomments "true") }}
+
+        {{ $.context.Scratch.Set "file" (printf "%s" $file_content ) }}
+
+      {{ end }}
+
+      {{ if (or (eq $static true) (eq $static "true")) }}
+<pre lang="{{$v}}">
+<code>
+{{- $.context.Scratch.Get "file" -}}
+</code>
+</pre>
+      {{ else if and $highlight (not (eq $v "console"))}}
+        <div class="code-block code-block-{{$v}}">
+        {{- highlight ($.context.Scratch.Get "file") $v "" -}}
+        </div>
+      {{ else }}
+        <div class="code-block code-block-{{$v}}"><pre><code>{{- $.context.Scratch.Get "file" -}}</code></pre></div>
+      {{ end }}
+
+    {{- end -}}
+
+  {{- end -}}

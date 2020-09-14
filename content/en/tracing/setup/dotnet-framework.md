@@ -90,10 +90,8 @@ This can be done either through the Registry Editor as in the image below, or th
 {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Registry Editor"  >}}
 
 {{< code-block lang="powershell" filename="add-env-var.ps1" >}}
-```powershell
 [String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
-```
 {{< /code-block >}}
 
 #### Console Apps

@@ -46,12 +46,12 @@ After [installing DogStatsD][1], the functions below are available for submittin
 
 Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
 
-Run the following code to submit a DogStatsD `COUNT` metric to Datadog:
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
+Run the following Python code to submit a DogStatsD `COUNT` metric to Datadog:
 
 {{< code-block lang="python" filename="count_metric.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 
@@ -66,11 +66,14 @@ while(1):
   statsd.increment('example_metric.increment', tags=["environment:dev"])
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run the following Ruby code to submit a DogStatsD `COUNT` metric to Datadog:
+
 {{< code-block lang="ruby" filename="count_metric.rb" >}}
-```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -81,11 +84,14 @@ while true do
     statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Run the following Go code to submit a DogStatsD `COUNT` metric to Datadog:
+
 {{< code-block lang="go" filename="count_metric.go" >}}
-```go
 package main
 
 import (
@@ -108,11 +114,14 @@ func main() {
 		time.Sleep(10 * time.Second)
 	}
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
+
 {{< code-block lang="java" filename="count_metric.java" >}}
-```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -134,11 +143,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
 {{< /code-block >}}
 
-{{< code-block lang=".NET" filename="count_metric.cs" >}}
-```csharp
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Run the following .NET code to submit a DogStatsD `COUNT` metric to Datadog:
+
+{{< code-block lang="csharp" filename="count_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -167,11 +179,14 @@ public class DogStatsdClient
         }
     }
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Run the following PHP code to submit a DogStatsD `COUNT` metric to Datadog:
+
 {{< code-block lang="php" filename="count_metric.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -189,10 +204,10 @@ while (TRUE) {
     $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
     sleep(10);
 }
-```
 {{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 After running the code above, your metrics data is available to graph in Datadog:
 
@@ -212,12 +227,12 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 
 Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
-Run the following code to submit a DogStatsD `GAUGE` metric to Datadog:
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
+Run the following Python code to submit a DogStatsD `GAUGE` metric to Datadog:
 
 {{< code-block lang="python" filename="gauge_metric.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 
@@ -234,11 +249,14 @@ while(1):
   i += 1
   statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run the following Ruby code to submit a DogStatsD `GAUGE` metric to Datadog:
+
 {{< code-block lang="ruby" filename="gauge_metric.rb" >}}
-```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -250,11 +268,14 @@ while true do
     statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Run the following Go code to submit a DogStatsD `GAUGE` metric to Datadog:
+
 {{< code-block lang="go" filename="gauge_metric.go" >}}
-```go
 package main
 
 import (
@@ -276,11 +297,14 @@ func main() {
 		time.Sleep(10 * time.Second)
 	}
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Run the following Java code to submit a DogStatsD `GAUGE` metric to Datadog:
+
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -300,11 +324,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
 {{< /code-block >}}
 
-{{< code-block lang=".NET" filename="gauge_metric.cs" >}}
-```csharp
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Run the following .NET code to submit a DogStatsD `GAUGE` metric to Datadog:
+
+{{< code-block lang="csharp" filename="gauge_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -331,11 +358,14 @@ public class DogStatsdClient
         }
     }
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Run the following PHP code to submit a DogStatsD `GAUGE` metric to Datadog:
+
 {{< code-block lang="php" filename="gauge_metric.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -354,9 +384,10 @@ while (TRUE) {
     $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
-```
 {{< /code-block >}}
-{{< /multi-code-snippet-wrapper >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 After running the code above, your metric data is available to graph in Datadog:
 
@@ -372,12 +403,12 @@ After running the code above, your metric data is available to graph in Datadog:
 
 Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
-Run the following code to submit a DogStatsD `SET` metric to Datadog:
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,.NET,php" >}}
+Run the following Python code to submit a DogStatsD `SET` metric to Datadog:
 
 {{< code-block lang="python" filename="set_metric.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 import random
@@ -393,11 +424,14 @@ while(1):
   i += 1
   statsd.set('example_metric.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run the following Ruby code to submit a DogStatsD `SET` metric to Datadog:
+
 {{< code-block lang="ruby" filename="set_metric.rb" >}}
-```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -408,11 +442,14 @@ while true do
     statsd.set('example_metric.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Run the following Go code to submit a DogStatsD `SET` metric to Datadog:
+
 {{< code-block lang="go" filename="set_metric.go" >}}
-```go
 package main
 
 import (
@@ -436,11 +473,14 @@ func main() {
 		time.Sleep(rand.Intn(10) * time.Second)
 	}
 }
-```
 {{< /code-block >}}
 
-{{< code-block lang=".NET" filename="set_metric.cs" >}}
-```csharp
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Run the following .NET code to submit a DogStatsD `SET` metric to Datadog:
+
+{{< code-block lang="csharp" filename="set_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -467,11 +507,14 @@ public class DogStatsdClient
         }
     }
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Run the following PHP code to submit a DogStatsD `SET` metric to Datadog:
+
 {{< code-block lang="php" filename="set_metric.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -491,9 +534,10 @@ while (TRUE) {
     $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
-```
 {{< /code-block >}}
-{{< /multi-code-snippet-wrapper >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 After running the code above, your metrics data is available to graph in Datadog:
 
@@ -514,13 +558,12 @@ After running the code above, your metrics data is available to graph in Datadog
 
 The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
+{{< tabs >}}
+{{% tab "Python" %}}
 
-Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
-
-{{< multi-code-snippet-wrapper langs="python,ruby,go,.NET,php" >}}
+Run the following Python code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
 {{< code-block lang="python" filename="histogram_metric.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 import random
@@ -535,11 +578,14 @@ initialize(**options)
 while(1):
   statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run the following Ruby code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+
 {{< code-block lang="ruby" filename="histogram_metric.rb" >}}
-```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -548,11 +594,14 @@ while true do
     statsd.histogram('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Run the following Go code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+
 {{< code-block lang="go" filename="histogram_metric.go" >}}
-```go
 package main
 
 import (
@@ -574,11 +623,14 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Run the following Java code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -598,11 +650,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
 {{< /code-block >}}
 
-{{< code-block lang=".NET" filename="histogram_metric.cs" >}}
-```csharp
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Run the following .NET code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+
+{{< code-block lang="csharp" filename="histogram_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -629,11 +684,14 @@ public class DogStatsdClient
         }
     }
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Run the following PHP code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
+
 {{< code-block lang="php" filename="histogram_metric.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -650,10 +708,10 @@ while (TRUE) {
     $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
 {{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 The above instrumentation produces the following metrics:
 
@@ -685,10 +743,12 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
-{{< multi-code-snippet-wrapper langs="python,php" >}}
+{{< tabs >}}
+{{% tab "Python" %}}
+
+In Python, timers are created with a decorator:
 
 {{< code-block lang="python" filename="timers.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 import random
@@ -706,12 +766,11 @@ def my_function():
 
 while(1):
   my_function()
-```
-In Python, timers are created with a decorator.
 {{< /code-block >}}
 
+or with a context manager:
+
 {{< code-block lang="python" filename="context_manager.py" >}}
-```python
 from datadog import statsd
 import time
 import random
@@ -728,12 +787,12 @@ def my_function():
 
 while(1):
   my_function()
-```
-or with a context manager.
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
 {{< code-block lang="php" filename="timer.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -755,10 +814,10 @@ while (TRUE) {
   runfunction();
   $statsd->microtiming('example_metric.timer', microtime(TRUE) - $start_time);
 }
-```
 {{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 As DogStatsD receives the timer metric data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
@@ -784,12 +843,12 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
-Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
+Run the following Python code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
 {{< code-block lang="python" filename="distribution_metric.py" >}}
-```python
 from datadog import initialize, statsd
 import time
 import random
@@ -804,11 +863,14 @@ initialize(**options)
 while(1):
   statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+Run the following Ruby code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+
 {{< code-block lang="ruby" filename="distribution_metric.rb" >}}
-```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -817,11 +879,14 @@ while true do
     statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Run the following Go code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+
 {{< code-block lang="go" filename="distribution_metric.go" >}}
-```go
 package main
 
 import (
@@ -843,11 +908,14 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Run the following Java code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -867,11 +935,14 @@ public class DogStatsdClient {
         }
     }
 }
-```
 {{< /code-block >}}
 
-{{< code-block lang=".NET" filename="distribution_metric.cs" >}}
-```csharp
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Run the following .NET code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+
+{{< code-block lang="csharp" filename="distribution_metric.cs" >}}
 using StatsdClient;
 using System;
 
@@ -898,11 +969,14 @@ public class DogStatsdClient
         }
     }
 }
-```
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Run the following PHP code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
+
 {{< code-block lang="php" filename="distribution_metric.php" >}}
-```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -919,10 +993,10 @@ while (TRUE) {
     $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-```
 {{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 The above instrumentation calculates the `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores.
 
@@ -947,46 +1021,51 @@ Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correc
 
 The following code only sends points half of the time:
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< code-block lang="python" >}}
 ```python
 statsd.increment('loop.count', sample_rate=0.5)
 ```
-{{< /code-block >}}
 
-{{< code-block lang="ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
 ```ruby
 statsd.increment('loop.count', :sample_rate => 0.5)
 ```
-{{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{% /tab %}}
+{{% tab "Go" %}}
+
 ```go
 statsd.Incr("example_metric.increment", []string{}, 0.5)
 ```
-{{< /code-block >}}
 
-{{< code-block lang="java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+
 ```java
 Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 ```
-{{< /code-block >}}
 
-{{< code-block lang=".NET" >}}
+{{% /tab %}}
+{{% tab ".NET" %}}
+
 ```csharp
 dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
-{{< /code-block >}}
 
-{{< code-block lang="php" >}}
+{{% /tab %}}
+{{% tab "PHP" %}}
+
 ```php
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
-{{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Metric tagging
 
@@ -996,55 +1075,60 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
 The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< tabs >}}
+{{% tab "Python" %}}
 
-{{< code-block lang="python" >}}
 ```python
 statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
 ```
-{{< /code-block >}}
 
-{{< code-block lang="ruby" >}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
 ```ruby
 statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
 ```
-{{< /code-block >}}
 
-{{< code-block lang="go" >}}
+{{% /tab %}}
+{{% tab "Go" %}}
+
 ```go
 statsd.Incr("example_metric.increment", []string{"environment:dev","account:local"}, 1)
 ```
-{{< /code-block >}}
 
-{{< code-block lang="java" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+
 ```java
 Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
 ```
-{{< /code-block >}}
 
-{{< code-block lang=".NET" >}}
+{{% /tab %}}
+{{% tab ".NET" %}}
+
 ```csharp
 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
-{{< /code-block >}}
 
-{{< code-block lang="php" >}}
+{{% /tab %}}
+{{% tab "PHP" %}}
+
 The `tags` argument can be a string:
 
 ```php
 $statsd->increment('example_metric.increment', "environment:dev,account:local");
 ```
-{{< /code-block >}}
 
-{{< code-block lang="php" >}}
 or an array:
+
 ```php
 <?php
 $statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
-```
-{{< /code-block >}}
 
-{{< /multi-code-snippet-wrapper >}}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Host tag
 
