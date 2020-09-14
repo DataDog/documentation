@@ -29,7 +29,6 @@ Datadog's admission controller is `MutatingAdmissionWebhook` type. For more deta
 To enable the admission controller for Helm chart, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="true" >}}
-```yaml
 [...]
  clusterAgent:
 [...]
@@ -47,7 +46,6 @@ To enable the admission controller for Helm chart, set the parameter `clusterAge
     #
     mutateUnlabelled: false
 [...]
-```
 {{< /code-block >}}
 
 ### Datadog operator

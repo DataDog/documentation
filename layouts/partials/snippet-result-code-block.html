@@ -1,0 +1,37 @@
+{{ $dot := $.context }}
+
+{{ if (in $.file "/") }}
+    {{ $.context.Scratch.Set "snipfile" .file}}
+{{ else }}
+    {{ $.context.Scratch.Set "snipfile" (printf "code_snippets/results/result.%s" .file)}}
+{{ end }}
+{{ $file := $.context.Scratch.Get "snipfile" }}
+
+{{ $ext_index := (sub (len (split $file ".")) 1) }}
+{{ $file_ext := (index (split $file ".") $ext_index) }}
+
+{{ $disable_highlight := $.disable_highlight }}
+{{ $static := $.static }}
+
+{{ $ext_to_lang := (dict "php" "php" "py" "python" "rb" "ruby" "sh" "console" "js" "javascript" "json" "json" "go" "golang")}}
+
+
+{{- range $k, $v := $ext_to_lang -}}
+
+  {{- $file_content := readFile ($file) -}}
+
+  {{- if eq $k $file_ext -}}
+
+      {{ $.context.Scratch.Set "file" (printf "%s" $file_content ) }}
+
+      {{- if or (eq $k "json") (eq $file_ext "console") -}}
+        <div class="code-block code-block-{{$v}}"><pre><code>{{- $.context.Scratch.Get "file" -}}</code></pre></div>
+      {{- else -}}
+        <div class="code-block code-block-{{$v}}">
+        {{- highlight ($.context.Scratch.Get "file") $v "" -}}
+        </div>
+      {{- end -}}
+
+  {{- end -}}
+
+{{- end -}}

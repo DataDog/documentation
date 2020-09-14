@@ -39,9 +39,7 @@ Agent v5 `datadog.conf` --> Agent v6 `datadog.yaml`
 
 To transition between Agent configuration paths and formats, use the Agent command:
 {{< code-block lang="bash" >}}
-```bash
 sudo -u dd-agent -- datadog-agent import
-```
 {{< /code-block >}}
 
 This command parses an existing `datadog.conf` and converts supported parameters to the new format in `datadog.yaml`. The command also copies configuration files for checks that are currently enabled. For more details, see [Upgrade to Datadog Agent v6][2].
@@ -105,11 +103,9 @@ Agent v6 loads any valid YAML file in: `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.d/
 
 For example, configuration files for the `http_check` could be:
 {{< code-block lang="text" >}}
-```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
-```
 {{< /code-block >}}
 
 The Agent doesn't load configuration files from any sub-directories within the `<CHECK_NAME>.d` folder. For example, this configuration is **NOT** loaded:

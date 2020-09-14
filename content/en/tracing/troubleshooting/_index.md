@@ -69,9 +69,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
     **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
-```bash
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
-```
     {{< /code-block >}}
 
 5. **A description of your environment**

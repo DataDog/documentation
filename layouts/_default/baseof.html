@@ -60,19 +60,6 @@
         </div>
       </div>
 
-      {{/*  turns on code lang selector, off for now
-        
-        block "code-lang" . }}
-        <div class="code-lang-selector-container">
-          <select class="js-code-lang-selector d-none" placeholder="Site">
-            <option value="" disabled>Code Language</option>
-            {{ range $key, $value := .Site.Params.code_languages }}
-                <option value="{{ $value.name }}">{{ $value.name }}</option>
-            {{ end }}
-          </select>
-        </div>
-      {{ end */}}
-
       <div class="region-selector-container">
         <select class="js-region-selector d-none" placeholder="Site">
           <option value="" disabled>Site</option>
