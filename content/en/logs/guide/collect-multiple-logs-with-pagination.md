@@ -30,9 +30,10 @@ To retrieve a log list longer than the maximum 1000 logs limit returned by the [
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
         "limit": 50,
         "query": "*",
@@ -62,9 +63,10 @@ The `logs` parameter is an array of Log objects and at maximum it contains as ma
 To retrieve the next page of logs, re-send your query, but this time with the `startAt` parameter that takes the `nextLogId` value from the previous call:
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'Content-Type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
         "limit": 1000,
         "query": "*",
@@ -98,9 +100,10 @@ To see every page of your logs, continue to resend your query where the `startAt
 Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
       "filter": 
               {
@@ -140,9 +143,10 @@ The `data` parameter is an array of Log objects and at maximum it contains as ma
 To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
       "filter": 
               {
