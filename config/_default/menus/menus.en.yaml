@@ -69,17 +69,17 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 8
-  - name: Private Location
+  - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
     weight: 801
-  - name: Browser Test
+  - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
     weight: 802
-  - name: API Test
+  - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
@@ -1028,7 +1028,7 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 707
-  - name: Connect Synthetics and Traces
+  - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
@@ -1408,14 +1408,14 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
+  - name: Steps Advanced Options
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 203
   - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
-  - name: Advanced Options
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
