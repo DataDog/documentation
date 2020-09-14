@@ -245,7 +245,7 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 
 #### Using the Package
 
-Install `datadog-lambda` and its dependencies locally to your function project folder. Note, `datadog-lambda` depends on `ddtrace` that uses native extensions, therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][8] for Serverless Framework and [--use-container][9] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][3].
+Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][8] for the Serverless Framework and [--use-container][9] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][3].
 
 ```
 pip install datadog-lambda -t ./
