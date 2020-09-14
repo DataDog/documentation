@@ -109,7 +109,7 @@ The JavaScript assertion function comes with the following parameters and requir
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
 
-Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
+Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise. For example:
 
 ```javascript
 const script = document.createElement('script');
@@ -204,10 +204,10 @@ Create a variable by defining its value from one of the below available builtins
 
 | Pattern                 | Description                                                                                             |
 |-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Generates a numeric string with n digits.                                                               |
-| `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.                                                           |
-| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters.                                                     |
-| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + n days. |
+| `{{ numeric(n) }}`      | Generates a numeric string with `n` digits.                                                               |
+| `{{ alphabetic(n) }}`   | Generates an alphabetic string with `n` letters.                                                           |
+| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with `n` characters.                                                     |
+| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days. |
 
 #### An Element
 
