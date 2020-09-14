@@ -1,0 +1,11 @@
+{{ $codeLangs := split (.Get "langs") "," }}
+
+{{ if  not (.Get "langs") }}
+    {{ errorf "Multi Lang Code Snippet shortcode error: Missing value for param 'langs': %s" .Position }}
+{{ end }}
+
+<div class="multi-code-snippet-wrapper js-code-snippet-wrapper">
+    
+    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
+    {{ .Inner }}
+</div>

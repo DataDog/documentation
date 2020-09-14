@@ -48,7 +48,7 @@ There are a number of configuration options available to scrub sensitive data or
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell us what you expect to see.**
+1. **How are you confirming the issue? Provide links to a trace (preferrably) or screenshots, for example, and tell us what you expect to see.**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
@@ -69,7 +69,9 @@ When you open a [support ticket][1], our support team may ask for some combinati
     **Note**: If you are using Agent v7.19+ and the Datadog Helm Chart with the [latest version][4], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+```
     {{< /code-block >}}
 
 5. **A description of your environment**

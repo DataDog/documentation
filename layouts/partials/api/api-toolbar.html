@@ -50,6 +50,20 @@
                         </div>
                         
                     </div>
+                    {{/* Turns on code lang selector in API toolbar nav, off for now
+                        
+                        <div class="col-4 px-0">
+                        <div class="d-flex justify-content-start justify-content-lg-end">
+                            <select class="js-code-lang-selector d-none" placeholder="Site">
+                                <option value="" disabled>Code Language</option>
+                                {{ range $key, $value := .Site.Params.code_languages }}
+                                    <option value="{{ $value.name }}">{{ $value.name }}</option>
+                                {{ end }}
+                              </select>
+                        </div>
+                        
+                    </div>
+                    */}}
 
                 </div>
             </div>
