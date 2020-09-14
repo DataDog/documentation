@@ -271,8 +271,6 @@ If you go for that second option, make sure to replace the actual value with `{{
 
 {{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="100%" >}}
 
-Here the form allowed us to mov
-
 ## Wait
 
 By default, Datadog waits for a page to be fully loaded before performing a step or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
