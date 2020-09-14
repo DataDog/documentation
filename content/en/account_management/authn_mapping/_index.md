@@ -118,6 +118,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
     "data": {
         "attributes": {
@@ -178,6 +179,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
         }
     ]
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -651,6 +653,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -661,6 +664,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -738,6 +742,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -748,6 +753,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}

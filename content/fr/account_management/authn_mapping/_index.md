@@ -115,6 +115,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 {{% tab "Réponse" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
     "data": {
         "attributes": {
@@ -175,6 +176,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
         }
     ]
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -648,6 +650,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 {{% tab "Réponse" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -658,6 +661,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -735,6 +739,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 {{% tab "Réponse" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -745,6 +750,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}

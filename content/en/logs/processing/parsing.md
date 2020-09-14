@@ -517,18 +517,23 @@ The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` whe
 **Log**:
 
 {{< code-block lang="text" >}}
+```text
 John,Doe,120,Jefferson St.,Riverside
+```
 {{< /code-block >}}
 
 **Rule**:
 
 {{< code-block lang="text" >}}
+```text
 myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
+```
 {{< /code-block >}}
 
 **Result:**
 
 {{< code-block lang="json" >}}
+```json
 {
   "user": {
     "first_name": "John",
@@ -538,6 +543,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
     "city": "Riverside"
   }
 }
+```
 {{< /code-block >}}
 
 Other examples:

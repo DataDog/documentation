@@ -39,6 +39,7 @@ Here is an example of a dummy Agent check sending only one service check periodi
 4. Within this folder, create a custom check file named `service_check_example.py` with the content below:
 
     {{< code-block lang="python" filename="service_check_example.py" >}}
+```python
 from datadog_checks.base import AgentCheck
 
 __version__ = "1.0.0"
@@ -46,6 +47,7 @@ __version__ = "1.0.0"
 class MyClass(AgentCheck):
     def check(self, instance):
         self.service_check('example_service_check', 0, message='Example application is up and running.')
+```
     {{< /code-block >}}
 
 5. [Restart the Agent][3]

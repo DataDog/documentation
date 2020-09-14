@@ -58,23 +58,25 @@ This is an example of using a custom Agent check to send one event periodically.
 3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
 4. In this folder, create a custom check file named `event_example.py` with the following content:
 
-    {{< code-block lang="python" filename="event_example.py" >}}
-    from datadog_checks.base import AgentCheck
+   {{< code-block lang="python" filename="event_example.py" >}}
+```python
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-        def check(self, instance):
-            self.event(
-                {
-                    "timestamp": time.time(),
-                    "event_type": "Error",
-                    "msg_title": "Example Event",
-                    "msg_text": "This is an example event coming from Datadog.",
-                    "alert_type": "error",
-                }
-            )
-    {{< /code-block >}}
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.event(
+            {
+                "timestamp": time.time(),
+                "event_type": "Error",
+                "msg_title": "Example Event",
+                "msg_text": "This is an example event coming from Datadog.",
+                "alert_type": "error",
+            }
+        )
+```
+   {{< /code-block >}}
 
 5. [Restart the Agent][3].
 6. For validation, run the [Agent's status command][4] and look for `event_example` under the Checks section:
