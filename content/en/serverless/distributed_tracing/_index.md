@@ -41,7 +41,7 @@ The Datadog Python, Node.js, and Ruby tracing libraries support distributed trac
 
 To enable Datadog APM without enabling logging for your functions, ensure the `DdForwarderLog` environment variable is set to `false` on your Datadog Forwarder. 
 [1]: /tracing/serverless_functions/
-[2]: /serverless/installation/installing_the_library/
+[2]: /serverless/datadog_lambda_library/
 [3]: https://app.datadoghq.com/functions
 [4]: https://app.datadoghq.com/apm/analytics
 [5]: https://app.datadoghq.com/apm/map
