@@ -39,8 +39,8 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
         "query": "*",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -73,8 +73,8 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
         "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -107,8 +107,8 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  
@@ -150,8 +150,8 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  
