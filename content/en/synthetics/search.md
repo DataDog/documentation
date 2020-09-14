@@ -50,22 +50,22 @@ If you want to exclusively search for browser tests, click **Browser Test** in t
 
 ## Manage tests
 
+### Bulk management
+
 Bulk manage your Synthetic tests from the list page by clicking multiple individual test checkboxes in the table or by clicking on the checkbox next to `State` to select all the test checkboxes of the page.
 Once selected, choose `Run Tests Now` or `Delete`, which will bulk run or delete all of the selected Synthetic tests.
 
 {{< img src="synthetics/search/bulk-edit.png" alt="Bulk editing" >}}
 
-### Hover options
+### Action tray options
 
 Hover over a test in the table to populate options such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The option `Edit Recording` is also available for browser tests.
 
-For example, if you wish to edit browser test steps, hover over a browser test in the table and select `Edit Recording`. This will take you to the [browser test recorder][2], where you can edit [steps][3].
-
-{{< img src="synthetics/search/test-steps.gif" alt="Browser test editing" >}}
+{{< img src="synthetics/browser_tests/action_tray.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
 
 ### Audit events
 
-The creation, addition, and deletion of Synthetic tests and global variables create events in the [event stream][4]. Generated events explain the change and display the user who performed the change.
+The creation, addition, and deletion of Synthetic tests and global variables create events in the [event stream][2]. Generated events explain the change and display the user who performed the change.
 
 Find all Synthetic Monitoring related changes by searching the event stream for `#audit synthetics`. Retrieve changes that were done on a specific test by searching on the id of your test. For example, `tags:public_id:4m7-bqy-mxq`.
 
@@ -76,6 +76,4 @@ Find all Synthetic Monitoring related changes by searching the event stream for 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
-[2]: /synthetics/browser_tests/#record-test
-[3]: /synthetics/browser_tests/actions
-[4]: /events/
+[2]: /events/
