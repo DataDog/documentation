@@ -103,6 +103,7 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 | [Logs][18]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
 | [SLOs][19]           | Search for SLOs, grouped metric-based SLOs, grouped monitor-based SLOs                           |
 | [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |
+| [Billing][/account_management/billing/usage_attribution/] | Report on Datadog usage by up to three tags of your choosing like `env`, `team`, `account_id`... |
 
 ### Further Reading
 
