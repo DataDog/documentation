@@ -21,7 +21,7 @@ The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can 
 
 #### Supported browsers
 
-| Browser       | Supported Version (or later) | Comment                 |
+| Browser       | Supported version (or later) | Comment                 |
 |---------------|------------------------------|-------------------------|
 | IE            | 11                           |                         |
 | Edge          | 12                           |  Pre-Chromium Edge |
