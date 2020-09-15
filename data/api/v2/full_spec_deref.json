@@ -7060,6 +7060,22 @@
                   "items": {
                     "description": "Query for matching rule.",
                     "properties": {
+                      "aggregation": {
+                        "description": "The aggregation type.",
+                        "enum": [
+                          "count",
+                          "cardinality",
+                          "sum",
+                          "max"
+                        ],
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "COUNT",
+                          "CARDINALITY",
+                          "SUM",
+                          "MAX"
+                        ]
+                      },
                       "distinctFields": {
                         "description": "Field for which the cardinality is measured. Sent as an array.",
                         "items": {
@@ -7075,6 +7091,10 @@
                           "type": "string"
                         },
                         "type": "array"
+                      },
+                      "metric": {
+                        "description": "The target field to aggregate over when using the sum or max aggregations.",
+                        "type": "string"
                       },
                       "name": {
                         "description": "Name of the query.",
@@ -7379,6 +7399,22 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "aggregation": {
+                  "description": "The aggregation type.",
+                  "enum": [
+                    "count",
+                    "cardinality",
+                    "sum",
+                    "max"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "COUNT",
+                    "CARDINALITY",
+                    "SUM",
+                    "MAX"
+                  ]
+                },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
@@ -7394,6 +7430,10 @@
                     "type": "string"
                   },
                   "type": "array"
+                },
+                "metric": {
+                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "type": "string"
                 },
                 "name": {
                   "description": "Name of the query.",
@@ -7617,6 +7657,22 @@
       "SecurityMonitoringRuleQuery": {
         "description": "Query for matching rule.",
         "properties": {
+          "aggregation": {
+            "description": "The aggregation type.",
+            "enum": [
+              "count",
+              "cardinality",
+              "sum",
+              "max"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "COUNT",
+              "CARDINALITY",
+              "SUM",
+              "MAX"
+            ]
+          },
           "distinctFields": {
             "description": "Field for which the cardinality is measured. Sent as an array.",
             "items": {
@@ -7632,6 +7688,10 @@
               "type": "string"
             },
             "type": "array"
+          },
+          "metric": {
+            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "type": "string"
           },
           "name": {
             "description": "Name of the query.",
@@ -7644,9 +7704,41 @@
         },
         "type": "object"
       },
+      "SecurityMonitoringRuleQueryAggregation": {
+        "description": "The aggregation type.",
+        "enum": [
+          "count",
+          "cardinality",
+          "sum",
+          "max"
+        ],
+        "type": "string",
+        "x-enum-varnames": [
+          "COUNT",
+          "CARDINALITY",
+          "SUM",
+          "MAX"
+        ]
+      },
       "SecurityMonitoringRuleQueryCreate": {
         "description": "Query for matching rule.",
         "properties": {
+          "aggregation": {
+            "description": "The aggregation type.",
+            "enum": [
+              "count",
+              "cardinality",
+              "sum",
+              "max"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "COUNT",
+              "CARDINALITY",
+              "SUM",
+              "MAX"
+            ]
+          },
           "distinctFields": {
             "description": "Field for which the cardinality is measured. Sent as an array.",
             "items": {
@@ -7662,6 +7754,10 @@
               "type": "string"
             },
             "type": "array"
+          },
+          "metric": {
+            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "type": "string"
           },
           "name": {
             "description": "Name of the query.",
@@ -7856,6 +7952,22 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "aggregation": {
+                  "description": "The aggregation type.",
+                  "enum": [
+                    "count",
+                    "cardinality",
+                    "sum",
+                    "max"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "COUNT",
+                    "CARDINALITY",
+                    "SUM",
+                    "MAX"
+                  ]
+                },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
@@ -7871,6 +7983,10 @@
                     "type": "string"
                   },
                   "type": "array"
+                },
+                "metric": {
+                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "type": "string"
                 },
                 "name": {
                   "description": "Name of the query.",
@@ -8075,6 +8191,22 @@
             "items": {
               "description": "Query for matching rule.",
               "properties": {
+                "aggregation": {
+                  "description": "The aggregation type.",
+                  "enum": [
+                    "count",
+                    "cardinality",
+                    "sum",
+                    "max"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "COUNT",
+                    "CARDINALITY",
+                    "SUM",
+                    "MAX"
+                  ]
+                },
                 "distinctFields": {
                   "description": "Field for which the cardinality is measured. Sent as an array.",
                   "items": {
@@ -8090,6 +8222,10 @@
                     "type": "string"
                   },
                   "type": "array"
+                },
+                "metric": {
+                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "type": "string"
                 },
                 "name": {
                   "description": "Name of the query.",
@@ -20006,6 +20142,22 @@
                             "items": {
                               "description": "Query for matching rule.",
                               "properties": {
+                                "aggregation": {
+                                  "description": "The aggregation type.",
+                                  "enum": [
+                                    "count",
+                                    "cardinality",
+                                    "sum",
+                                    "max"
+                                  ],
+                                  "type": "string",
+                                  "x-enum-varnames": [
+                                    "COUNT",
+                                    "CARDINALITY",
+                                    "SUM",
+                                    "MAX"
+                                  ]
+                                },
                                 "distinctFields": {
                                   "description": "Field for which the cardinality is measured. Sent as an array.",
                                   "items": {
@@ -20021,6 +20173,10 @@
                                     "type": "string"
                                   },
                                   "type": "array"
+                                },
+                                "metric": {
+                                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                                  "type": "string"
                                 },
                                 "name": {
                                   "description": "Name of the query.",
@@ -20283,6 +20439,22 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
+                        "aggregation": {
+                          "description": "The aggregation type.",
+                          "enum": [
+                            "count",
+                            "cardinality",
+                            "sum",
+                            "max"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "COUNT",
+                            "CARDINALITY",
+                            "SUM",
+                            "MAX"
+                          ]
+                        },
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
                           "items": {
@@ -20298,6 +20470,10 @@
                             "type": "string"
                           },
                           "type": "array"
+                        },
+                        "metric": {
+                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "type": "string"
                         },
                         "name": {
                           "description": "Name of the query.",
@@ -20524,6 +20700,22 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "aggregation": {
+                            "description": "The aggregation type.",
+                            "enum": [
+                              "count",
+                              "cardinality",
+                              "sum",
+                              "max"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COUNT",
+                              "CARDINALITY",
+                              "SUM",
+                              "MAX"
+                            ]
+                          },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
@@ -20539,6 +20731,10 @@
                               "type": "string"
                             },
                             "type": "array"
+                          },
+                          "metric": {
+                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "type": "string"
                           },
                           "name": {
                             "description": "Name of the query.",
@@ -20902,6 +21098,22 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "aggregation": {
+                            "description": "The aggregation type.",
+                            "enum": [
+                              "count",
+                              "cardinality",
+                              "sum",
+                              "max"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COUNT",
+                              "CARDINALITY",
+                              "SUM",
+                              "MAX"
+                            ]
+                          },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
@@ -20917,6 +21129,10 @@
                               "type": "string"
                             },
                             "type": "array"
+                          },
+                          "metric": {
+                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "type": "string"
                           },
                           "name": {
                             "description": "Name of the query.",
@@ -21155,6 +21371,22 @@
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
+                        "aggregation": {
+                          "description": "The aggregation type.",
+                          "enum": [
+                            "count",
+                            "cardinality",
+                            "sum",
+                            "max"
+                          ],
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "COUNT",
+                            "CARDINALITY",
+                            "SUM",
+                            "MAX"
+                          ]
+                        },
                         "distinctFields": {
                           "description": "Field for which the cardinality is measured. Sent as an array.",
                           "items": {
@@ -21170,6 +21402,10 @@
                             "type": "string"
                           },
                           "type": "array"
+                        },
+                        "metric": {
+                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "type": "string"
                         },
                         "name": {
                           "description": "Name of the query.",
@@ -21381,6 +21617,22 @@
                       "items": {
                         "description": "Query for matching rule.",
                         "properties": {
+                          "aggregation": {
+                            "description": "The aggregation type.",
+                            "enum": [
+                              "count",
+                              "cardinality",
+                              "sum",
+                              "max"
+                            ],
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "COUNT",
+                              "CARDINALITY",
+                              "SUM",
+                              "MAX"
+                            ]
+                          },
                           "distinctFields": {
                             "description": "Field for which the cardinality is measured. Sent as an array.",
                             "items": {
@@ -21396,6 +21648,10 @@
                               "type": "string"
                             },
                             "type": "array"
+                          },
+                          "metric": {
+                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "type": "string"
                           },
                           "name": {
                             "description": "Name of the query.",
