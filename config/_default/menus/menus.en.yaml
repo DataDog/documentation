@@ -1593,6 +1593,11 @@ main:
     parent: ndm
     identifier: ndm_trouble
     weight: 404
+  - name: Guides
+    url: network_performance_monitoring/devices/guide/
+    parent: ndm
+    identifier: ndm_guide
+    weight: 405
   - name: Developer Tools
     url: developers/
     pre: nav_developers
