@@ -42,6 +42,11 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
 
+#### Add Tags on rehydrated logs 
+
+See [Archives][8]
+
+
 ### View historical view content
 
 #### From the historical view page
@@ -145,3 +150,5 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [5]: /logs/processing/#reserved-attributes
 [6]: /integrations/#cat-notification
 [7]: /logs/archives/
+[8]: /logs/archives/
+
