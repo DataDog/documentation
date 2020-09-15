@@ -118,7 +118,7 @@
     "responses": {
       "200": {
         "json": {
-          "success": "Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c successfully enabled."
+          "success": "Embed 00000000000 successfully enabled."
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">success</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Message.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>\n  </div>"
       },
@@ -149,7 +149,7 @@
     "responses": {
       "200": {
         "json": {
-          "success": "Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c successfully revoked."
+          "success": "Embed 0000000000000 successfully revoked."
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">success</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Message.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>\n  </div>"
       },
