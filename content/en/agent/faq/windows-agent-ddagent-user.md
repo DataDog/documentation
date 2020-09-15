@@ -48,7 +48,7 @@ Additionally, the installer adds the user to the following groups:
 **Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
 ```shell
-Msiexec /i ddagent.msi <DDAGENTUSER_NAME>=<DOMAIN>\<USERNAME>
+Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME>
 ```
 
 ### Installation with Chef
