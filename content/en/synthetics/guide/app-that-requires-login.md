@@ -1,13 +1,17 @@
 ---
-title: Using Synthetics to monitor an application that requires a login
+title: Using Synthetic tests to monitor an application that requires a login
 kind: guide
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
-      tag: 'Blog'
-      text: 'Introducing Datadog Synthetics'
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Configure a Browser Test'
+    - link: '/synthetics/browser_tests/actions'
+      tag: 'Documentation'
+      text: 'Create Browser Test Steps'
+    - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+      tag: 'Blog'
+      text: 'Best practices for creating end-to-end tests'
+
 ---
 
 You might need to monitor something that is located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
@@ -79,7 +83,7 @@ Once you create the secure variables, you can then [import these global variable
 
 [1]: /synthetics/browser_tests/actions/
 [2]: /synthetics/browser_tests/actions/#subtests
-[3]  /synthetics/guide/identify_synthetics_bots/
+[3]: /synthetics/guide/identify_synthetics_bots/
 [4]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [5]: /synthetics/settings/?tab=specifyvalue#global-variables
 [6]: /synthetics/browser_tests/actions#a-global-variable
