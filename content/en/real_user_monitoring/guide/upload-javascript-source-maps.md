@@ -67,7 +67,7 @@ After building your application, bundlers generate a directory, most of the time
 
 ## Upload your source maps
 
-The best way to upload source maps is to add an extra-step in your CI pipeline and to run the dedicated command from the [Datadog CLI][2]: it scans the `dist` directory and its subdirectories to automatically upload the source maps with their related minified files. The flow is the following:
+The best way to upload source maps is to add an extra-step in your CI pipeline and to run the dedicated command from the [Datadog CLI][2]. It scans the `dist` directory and its subdirectories to automatically upload the source maps with their related minified files. The flow is the following:
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
 2. [Create a new and dedicated Datadog API key][3] and export it as an environment variable named `DATADOG_API_KEY`.
