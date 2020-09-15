@@ -14,7 +14,9 @@ You might need to monitor something that is located behind a login. There are tw
 
 - [Include the login steps in your recording](#include-the-login-in-your-recording)
 - [Leverage browser test configuration options][#leverage-browser-test-configuration-options]
+
 You can also ensure your credentials are securely stored and obfuscated across the application [using secured global variables][#account-security].
+
 ## Include the login steps in your recording
 
 The first method is to record the steps that are needed to perform the login at the beginning of your browser tests: input your username, input your password, hit log in. You can then go on and [start recording subsequent steps][1].
@@ -34,28 +36,40 @@ Opening a pop up in incognito mode allows you to start your test's recording fro
 
 ### SSO login
 
-If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default "Navigate to URL" step.
+If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default **Navigate to URL** step.
 
-Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
+Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
 ### Multi-factor authentication
 
-Browser tests can reproduce any actions a regular user can take inside their Chrome browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a Chrome browser, you can record the required steps to set up browser tests. 
+Browser tests can reproduce any actions a regular user can take inside their Chrome browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a Chrome browser, you can record it when setting up your browser test.
 
-Some MFA providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
+Some MFA providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
-If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off for a specific set of credentials for testing purposes.
-Depending on the type of MFA leveraged by your application, [JavaScript steps][3] could help to work around that.
+If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
+
+## Leverage browser test configuration options
+
+The second way to ensure that your Datadog Browser tests can login into your applications is to leverage one or several of the available browser test configurations. You can indeed decide to apply:
+
+- Specific header
+- Cookies
+- Basic Auth credentials
+
+These are set at every test execution and consequently allow you to start the recording of your steps directly post login. 
+
+{{< img src="synthetics/guide/app_that_requires_login/browser_test_conf.png" alt="Login to your app with browser test configuration options">}}
 
 ## Account security
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][4] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog:
+Store your credentials as [global variables][5] (for example, one global variable for username, another one for password) and  set these variables as secure to obfuscate their values from anyone else who has access to your instance of Datadog.
 
-Once you create the secure variables, you can then [import these global variables][5] into your browser tests and leverage them for your login steps: 
+Once you create the secure variables, you can then [import these global variables][6] into your browser tests and leverage them for your login steps. 
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 
@@ -65,6 +79,7 @@ Once you create the secure variables, you can then [import these global variable
 
 [1]: /synthetics/browser_tests/actions/
 [2]: /synthetics/browser_tests/actions/#subtests
-[3]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
-[4]: /synthetics/settings/?tab=specifyvalue#global-variables
-[5]: /synthetics/browser_tests/actions#a-global-variable
+[3]  /synthetics/guide/identify_synthetics_bots/
+[4]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
+[5]: /synthetics/settings/?tab=specifyvalue#global-variables
+[6]: /synthetics/browser_tests/actions#a-global-variable
