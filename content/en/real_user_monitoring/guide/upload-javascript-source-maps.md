@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces: for a given error, you will then get access to the file path, the line number as well as a code snippet for each frame of the related stack trace.
+If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces. For a given error, you will then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
 
 ## Instrument your code
 You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. Check below some configurations for popular Javascript bundlers.
