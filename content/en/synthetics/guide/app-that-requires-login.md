@@ -42,7 +42,7 @@ Opening a pop up in incognito mode allows you to start your test's recording fro
 
 If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default **Navigate to URL** step.
 
-Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
@@ -50,9 +50,9 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 
 Browser tests can reproduce any actions a regular user can take inside their Chrome browser. If you perform the multi-factor (or 2FA, or TFA) authentication step inside of a Chrome browser, you can record it when setting up your browser test.
 
-Some MFA providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+Some MFA providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 
-If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (e.g. for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
+If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
 
 ## Leverage browser test configuration options
