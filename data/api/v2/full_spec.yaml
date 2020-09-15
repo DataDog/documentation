@@ -1883,6 +1883,8 @@ components:
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -1895,6 +1897,10 @@ components:
             description: Field.
             type: string
           type: array
+        metric:
+          description: The target field to aggregate over when using the sum or max
+            aggregations.
+          type: string
         name:
           description: Name of the query.
           type: string
@@ -1902,9 +1908,24 @@ components:
           description: Query to run on logs.
           type: string
       type: object
+    SecurityMonitoringRuleQueryAggregation:
+      description: The aggregation type.
+      enum:
+      - count
+      - cardinality
+      - sum
+      - max
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - SUM
+      - MAX
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -1917,6 +1938,10 @@ components:
             description: Field.
             type: string
           type: array
+        metric:
+          description: The target field to aggregate over when using the sum or max
+            aggregations.
+          type: string
         name:
           description: Name of the query.
           type: string
