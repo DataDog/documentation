@@ -1,8 +1,14 @@
 ---
 assets:
   dashboards:
+    ProphetStor Federator.ai Application Overview: assets/dashboards/application-overview.json
+    ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
+    ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
-  monitors: {}
+  monitors:
+    Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
+    Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
+    Recommended Replica Number Reaches Max Limit: assets/recommended_monitors/federatorai_recommended_replica_num.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:
@@ -40,39 +46,124 @@ supported_os:
 
 ProphetStor Federator.ai のインテグレーションにより、ユーザーは Federator.ai ダッシュボードから Kafka メッセージの生成率/消費率、およびメッセージ生成率の予測を簡単に追跡できます。Federator.ai は、予測またはメッセージ生成率に基づいて、Kafka コンシューマーレプリカを自動的にスケーリングして、ワークロードを処理します。これを視覚化できる Federator.ai ダッシュボードには、推奨されるコンシューマーレプリカと現在のコンシューマーレプリカの数が表示さます。さらにダッシュボードには、全体的なコンシューマーラグと、メッセージがコンシューマーによって受信されるまでの平均レイテンシーも表示され、パフォーマンスを監視しやすくなっています。
 
-* **Federator.ai ダッシュボードの概要**
 
-![dashboard_overview][3]
+**ProphetStor Federator.ai クラスターの概要**
 
-* **推奨レプリカと現在/必要なレプリカ**
+![cluster_overview_dashboard][3]
+
+* クラスターのリソース使用量予測と推奨
+   - この表は、クラスターのリソース計画のための、CPU/メモリの負荷予測の最大値/最小値/平均値、および Federator.ai からの CPU/メモリリソースの推奨使用量を示しています。
+
+* クラスターノードのリソース使用量予測と推奨
+   - この表は、ノードのリソース計画のための、CPU/メモリの負荷予測の最大値/最小値/平均値、および Federator.ai からの CPU/メモリリソースの推奨使用量を示しています。
+
+* ノードの現在/予測メモリ使用量 (日次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（日次）を示しています。
+
+* ノードの現在/予測メモリ使用量 (週次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（週次）を示しています。
+
+* ノードの現在/予測メモリ使用量 (月次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（月次）を示しています。
+
+* ノードの現在/予測 CPU 使用量 (日次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（日次）を示しています。
+
+* ノードの現在/予測 CPU 使用量 (週次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（週次）を示しています。
+
+* ノードの現在/予測 CPU 使用量 (月次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（月次）を示しています。
+
+
+**ProphetStor Federator.ai アプリケーションの概要**
+
+![application_overview_dashboard][4]
+
+* 今後 24 時間の負荷予測
+   - この表は、コントローラーのリソース計画のための、今後 24 時間の CPU/メモリの負荷予測の最大値/最小値/平均値、および Federator.ai からの CPU/メモリリソースの推奨使用量を示しています。
+
+* 今後 7 日間の負荷予測
+   - この表は、コントローラーのリソース計画のための、今後 7 日間の CPU/メモリの負荷予測の最大値/最小値/平均値、および Federator.ai からの CPU/メモリリソースの推奨使用量を示しています。
+
+* 今後 30 日間の負荷予測
+   - この表は、コントローラーのリソース計画のための、今後 30 日間の CPU/メモリの負荷予測の最大値/最小値/平均値、および Federator.ai からの CPU/メモリリソースの推奨使用量を示しています。
+
+* 現在/予測 CPU 使用量 (日次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（日次）を示しています。
+
+* 現在/予測 CPU 使用量 (週次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（週次）を示しています。
+
+* 現在/予測 CPU 使用量 (月次)
+   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（月次）を示しています。
+
+* 現在/予測メモリ使用量 (日次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（日次）を示しています。
+
+* 現在/予測メモリ使用量 (週次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（週次）を示しています。
+
+* 現在/予測メモリ使用量 (月次)
+   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（月次）を示しています。
+
+* 現在/理想/推奨のレプリカ
+   - このグラフは、Federator.ai からの推奨レプリカと、コントローラーの理想的なレプリカおよび現在のレプリカを示しています。
+
+* メモリの使用量/リクエスト/上限 vs 推奨メモリ上限
+   - このグラフは、Federator.ai からの推奨メモリ上限と、コントローラーの現在のメモリ使用量、要求された使用量、および制限された使用量を示しています。
+
+* CPU 使用量/リクエスト/上限 vs 推奨 CPU 上限
+   - このグラフは、Federator.ai からの推奨 CPU 上限と、コントローラーの現在の CPU 使用量、要求された使用量、および制限された使用量を示しています。
+
+* CPU 使用量/使用率上限
+   - このグラフは、コントローラーの CPU 使用率と、CPU 使用率が上限を上回っている/下回っていることを視覚的にを示しています。
+
+
+**ProphetStor Federator.ai Kafka の概要**
+
+![dashboard_overview][5]
+
+* 推奨レプリカと現在/理想的なレプリカ
    - この時系列グラフは、Federator.ai からの推奨レプリカと、システム内の必要なレプリカと現在のレプリカを示しています。
 
-![dashboard_recommended_replicas][4]
-
-* **生成と消費と生成予測**
+* 生成と消費と生成予測
    - この時系列グラフは、Kafka メッセージの生成率と消費率、および Federated.ai によって予測された生成率を示しています。
 
-![dashboard_production_consumption][5]
-
-* **Kafka コンシューマーラグ**
+* Kafka コンシューマーラグ
    - この時系列グラフは、すべてのパーティションからのコンシューマーラグの合計を示しています。
 
-![dashboard_consumer_lag][6]
-
-* **コンシューマーキューレイテンシー (ミリ秒)**
+* コンシューマーキューレイテンシー (ミリ秒)
    - この時系列グラフは、コンシューマーが受信するまでのメッセージキュー内のメッセージの平均レイテンシーを示しています。
 
-![dashboard_queue_latency][7]
-
-* **デプロイメモリ使用量**
+* デプロイメモリ使用量
    - この時系列グラフは、コンシューマーのメモリ使用量を示しています。
 
-![dashboard_memory_usage][8]
-
-* **デプロイ CPU 使用量**
+* デプロイ CPU 使用量
    - この時系列グラフは、コンシューマーの CPU 使用量を示しています。
 
-![dashboard_cpu_usage][9]
+
+**ProphetStor Federator.ai コスト分析の概要**
+
+![cost_analysis_overview][6]
+
+* 現在のクラスターコストおよび現在のクラスターコンフィギュレーション
+   - この表は、クラスターの現在のコストと環境コンフィギュレーションを示しています。
+
+* 推奨クラスター - AWS および推奨クラスターコンフィギュレーション - AWS
+   - この表は、Federator.ai からの推奨 AWS インスタンスコンフィギュレーションと、推奨 AWS インスタンスのコストを示しています。
+
+* 推奨クラスター - Azure および推奨クラスターコンフィギュレーション - Azure
+   - この表は、Federator.ai からの推奨 Azure インスタンスコンフィギュレーションと、推奨 Azure インスタンスのコストを示しています。
+
+* 推奨クラスター - GCP および推奨クラスターコンフィギュレーション - GCP
+   - この表は、Federator.ai からの推奨 GCP インスタンスコンフィギュレーションと、推奨 GCP インスタンスのコストを示しています。
+
+* 最高コストのネームスペース ($/日)
+   - このグラフは、現在のクラスターのネームスペースの最高コスト（日次）を示しています。
+
+* 最高予測コストのネームスペース ($/月)
+   - このグラフは、現在のクラスターのネームスペースの最高予測コスト（月次）を示しています。
 
 
 ## セットアップ
@@ -83,30 +174,45 @@ ProphetStor Federator.ai のインテグレーションにより、ユーザー�
 2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします
 
    ```shell
-   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/datadog/deploy/install.sh |bash
+   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
    ```
 
    ```shell
-   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/datadog/deploy/install.sh |bash
+   curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
+   Please input Federator.ai version tag: datadog
+
+   Downloading scripts ...
+   Done
+   Do you want to use private repository URL? [default: n]:
+   Do you want to launch Federator.ai installation script? [default: y]:
+
+   Executing install.sh ...
    Checking environment version...
    ...Passed
-   Please input Federator.ai Operator tag: datadog
    Enter the namespace you want to install Federator.ai [default: federatorai]:
    .........
    (snipped)
    .........
-   You can now access GUI through https://federatorai-dashboard-frontend-federatorai.apps.jc-ocp4.172-31-17-84.nip.io
+   All federatorai pods are ready.
+
+   ========================================
+   You can now access GUI through https://<YOUR IP>:31012
    Default login credential is admin/admin
 
-   Also, you can start to apply alamedascaler CR for the namespace you would like to monitor.
-   Review administration guide for further details.
+   Also, you can start to apply alamedascaler CR for the target you would like to monitor.
+   Review administration guide for further details.Review administration guide for further details.
    ========================================
    .........
    (snipped)
    .........
-   Install Alameda successfully
+   Install Federator.ai successfully
+   Do you want to monitor this cluster? [default: y]:
+   Use "cluster-demo" as cluster name and DD_TAGS
+   Applying file alamedascaler_federatorai.yaml ...
+   alamedascaler.autoscaling.containers.ai/clusterscaler created
+   Done
 
-   Downloaded YAML files are located under /tmp/install-op
+   Downloaded YAML files are located under /tmp/install-op 
    ```
 
 3. Federator.ai ポッドが正しく実行されていることを確認します
@@ -119,63 +225,67 @@ ProphetStor Federator.ai のインテグレーションにより、ユーザー�
 
 ### コンフィギュレーション
 
-1. Datadog に接続して使用するには、Datadog アカウントが必要です。アカウントをお持ちでない場合は、[Datadog Web サイト][10]にアクセスして、無料のトライアルアカウントにサインアップしてください。
+1. Datadog に接続して使用するには、Datadog アカウントが必要です。アカウントをお持ちでない場合は、[Datadog Web サイト][7]にアクセスして、無料のトライアルアカウントにサインアップしてください。
 
-2. お使いのアカウントで Datadog にログインし、Datadog API を使用するための [API キーとアプリケーションキー][11]を取得します。
+2. お使いのアカウントで Datadog にログインし、Datadog API を使用するための [API キーとアプリケーションキー][8]を取得します。
 
 3. Federator.ai Data-Adapter を構成します。
-   - Github から Data-Adapter コンフィギュレーションスクリプトをダウンロードします。
+   - Data-Adapter のコンフィギュレーションスクリプトは、すでに /tmp/federatorai-scripts/datadog/ ディレクトリにダウンロードされています。まだの場合は、インストール手順のステップ 2 のとおり（Federator.ai インストールスクリプトを再び実行せずに）federatorai-launcher.sh スクリプトを再度実行します。
 
    ```shell
-   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/datadog/deploy/federatorai-setup-for-datadog.sh -O
+   $ curl https://raw.githubusercontent.com/containers-ai/federatorai-operator/master/deploy/federatorai-launcher.sh | bash
+   Please input Federator.ai version tag: datadog
+
+   Downloading scripts ...
+   Done
+   Do you want to use private repository URL? [default: n]:
+   Do you want to launch Federator.ai installation script? [default: y]: n
    ```
 
    - 実行権限を変更します。
 
    ```shell
-   $ chomd +x federatorai-setup-for-datadog.sh
-   ```
-
-   - .kubeconfig (sh -c "export KUBECONFIG=.kubeconfig; oc login <K8s_LOGIN_URL>") を準備するか、既存のものを使用します。例:
-
-   ```shell
-   $ sh -c "export KUBECONFIG=.kubeconfig; oc login https://api.ocp4.example.com:6443"
+   $ chomd +x /tmp/federatorai-scripts/datadog/federatorai-setup-for-datadog.sh
    ```
 
    - コンフィギュレーションスクリプトを実行し、手順に従ってコンフィギュレーションパラメーターを入力します。
 
    ```shell
    $ ./federatorai-setup-for-datadog.sh -k .kubeconfig
-   ```
-
-   ```shell
-   $ ./federatorai-setup-for-datadog.sh -k .kubeconfig
-   You are connecting to cluster: https://api.jc-ocp4.172-31-17-84.nip.io:6443
+   Checking environment version...
+   ...Passed
+   You are connecting to cluster: https://<YOUR IP>:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
    Getting Datadog info...
    Input a Datadog API Key []:xxxxx9273dxxcbc155xx3a7331xxxxx
    Input a Datadog Application Key []:xxxxx7220db1478xxxxxcb5c323fcb02a11xxxxx
 
-   Getting the Kafka info... No.1
-   Input Kafka consumer deployment name []: consumer
-   Input Kafka consumer deeployment namespace []: myproject
-   Input Kafka consumer minimum replica number []: 1
-   Input Kafka consumer maximum replica number []: 30
-   Input Kafka consumer group name []: group0001
+   Getting Kafka info... No.1
+
+   You can use command "kubectl get cm cluster-info -n <namespace> --template={{.metadata.uid}}" to get cluster name
+   Where '<namespace>' is either 'default' or 'kube-public' or 'kube-service-catalog'.
+   If multiple cluster-info exist, pick either one would work as long as you always use the same one to configure Datadog Agent/Cluster Agent/WPA and other data source agents.
+   Input cluster name []: cluster-demo
+   Input Kafka exporter namespace []: myproject
+   Input Kafka consumer group kind (Deployment/DeploymentConfig/StatefulSet) []: Deployment
+   Input Kafka consumer group kind name []: consumer1-topic0001-group-0001
    Input Kafka consumer group namespace []: myproject
    Input Kafka consumer topic name []: topic0001
-   Input Kafka consumer topic namespace []: myproject
 
-   Do you want to input another set? [default: n]:
-   Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
-   secret/federatorai-data-adapter-secret configured
-   Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
-   configmap/federatorai-data-adapter-config configured
+   You can use Kafka command-line tool 'kafka-consumer-group.sh' (download separately or enter into a broker pod, in /bin directory) to list consumer groups.
+   e.g.: "/bin/kafka-consumer-groups.sh --bootstrap-server <kafka-bootstrap-service>:9092 --describe --all-groups --members"
+   The first column of output is the 'kafkaConsumerGroupId'.
+   Input Kafka consumer group id []: group0001
+   Input Kafka consumer minimum replica number []: 1
+   Input Kafka consumer maximum replica number []: 20
 
-   Setup Federator.ai for datadog successfully
+   Do you want to input another set? [default: n]: 
+   .........
+   (snipped)
+   .........
    ```
 
-4. 詳細については、[Federator.ai と Datadog のインテグレーション - インストールおよびコンフィギュレーションガイド][12]を参照してください。
+4. 詳細については、[Federator.ai と Datadog のインテグレーション - インストールおよびコンフィギュレーションガイド][9]を参照してください。
 
 
 ## 収集データ
@@ -195,20 +305,17 @@ Federator.ai には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[ProphetStor Federator.ai ドキュメント][14]をご覧いただくか、[Datadog サポート][15]までお問い合わせください。
+ご不明な点は、[ProphetStor Federator.ai ドキュメント][11]をご覧いただくか、[Datadog サポート][12]までお問い合わせください。
 
 [1]: https://www.prophetstor.com/federator-ai-for-aiops/federator-ai-datadog-integration/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_overview.png
-[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_recommended_replicas.png
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_production_consumption.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_consumer_lag.png
-[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_queue_latency.png
-[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_memory_usage.png
-[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_cpu_usage.png
-[10]: https://www.datadoghq.com/
-[11]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[12]: http://www.prophetstor.com/wp-content/uploads/2020/05/Federator.ai%20for%20Datadog%20-%20Installation%20and%20Configuration%20Guide.pdf
-[13]: https://github.com/DataDog/integrations-extras/blob/master/federatorai/metadata.csv
-[14]: https://github.com/containers-ai/federatorai-operator
-[15]: https://docs.datadoghq.com/ja/help/
+[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cluster_overview_dashboard.png
+[4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_overview.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cost_analysis_overview.png
+[7]: https://www.datadoghq.com/
+[8]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[9]: http://www.prophetstor.com/wp-content/uploads/2020/05/Federator.ai%20for%20Datadog%20-%20Installation%20and%20Configuration%20Guide.pdf
+[10]: https://github.com/DataDog/integrations-extras/blob/master/federatorai/metadata.csv
+[11]: https://github.com/containers-ai/federatorai-operator
+[12]: https://docs.datadoghq.com/ja/help/
