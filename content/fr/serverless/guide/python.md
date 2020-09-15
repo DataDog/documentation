@@ -84,7 +84,7 @@ custom:
 
 4. Déployez à nouveau votre application sans serveur.
 
-Si vous préférez inclure la couche Lambda directement dans votre projet, [suivez les instructions liées à partir de ce référentiel Github][2] pour effectuer l'installation en utilisant la couche Lambda open-source pour Python.
+Si vous préférez inclure la couche Lambda directement dans votre projet, [suivez les instructions figurant dans ce référentiel Github][2] pour effectuer l'installation en utilisant la couche Lambda open-source pour Python.
 
 La couche Lambda devrait désormais être installée automatiquement sur toutes vos fonctions. Pour en savoir plus sur les différents champs de configuration de la couche Lambda Datadog, [consultez cette documentation][3].
 
@@ -175,7 +175,7 @@ Si vous avez suivi la procédure, le Forwarder Datadog est déjà activé, et le
 Si une ressource est déjà abonnée à un groupe de logs que vous souhaitez surveiller à l'aide de la fonction Lambda de Datadog, vous pouvez la supprimer depuis la console AWS :
 
 1. Sélectionnez la source de log sur votre fonction Lambda.
-2. Sélectionner Remove Subscription Filter dans le menu déroulant Actions.
+2. Sélectionnez Remove Subscription Filter dans le menu déroulant Actions.
 
 [1]: https://docs.datadoghq.com/fr/logs/guide/lambda-logs-collection-troubleshooting-guide/
 

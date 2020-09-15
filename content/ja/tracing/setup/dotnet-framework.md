@@ -30,7 +30,13 @@ further_reading:
 
 ## はじめに
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に App Analytics およびトレース ID お挿入を有効にします。
 
 それ以外の場合、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストール、構成します][3]。.NET トレーサーはプロセス中に実行し、アプリケーションをインスツルメントし、トレースをアプリケーションから Agent に送信します。
 
@@ -111,7 +117,7 @@ example.exe
 
 **注:** 手動と自動両方のインスツルメンテーションを使用する場合、MSI インストーラーと NuGet パッケージのバージョンの同期を保つ必要があります。
 
-## 構成
+## コンフィギュレーション
 
 .NET トレーサーを構成する方法は複数あります:
 
@@ -244,16 +250,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 | 設定名                                                            | 説明                                                                                                           |
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
-| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/dotnet-framework
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/send_traces/
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: https://www.nuget.org/packages/Datadog.Trace

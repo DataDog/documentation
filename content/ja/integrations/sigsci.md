@@ -1,7 +1,7 @@
 ---
 assets:
   dashboards:
-    Signal Sciences Overview: assets/dashboards/overview.json
+    sigsci: assets/dashboards/overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
