@@ -2,6 +2,8 @@
 aliases:
   - /ja/integrations/vmware/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
   logs: {}
@@ -45,7 +47,7 @@ supported_os:
 
 vSphere チェックは [Datadog Agent][2] パッケージに含まれています。vCenter サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 vCenter の **管理** セクションで、`datadog-readonly` という読み取り専用ユーザーを追加します。
 
