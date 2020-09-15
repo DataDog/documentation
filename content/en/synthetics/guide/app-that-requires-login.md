@@ -14,7 +14,7 @@ further_reading:
 
 ---
 
-You might need to monitor something that is located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
+You might need to monitor journeys located behind a login. There are two ways to ensure that your Datadog Browser tests can go through the login steps of your application to perform validation on post login pages:
 
 - [Include the login steps in your recording](#include-the-login-in-your-recording)
 - [Leverage browser test configuration options][#leverage-browser-test-configuration-options]
