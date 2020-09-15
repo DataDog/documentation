@@ -11223,8 +11223,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully enabled.
+                    example: Embed 00000000000 successfully enabled.
                     type: string
                 type: object
           description: OK
@@ -11263,8 +11262,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully revoked.
+                    example: Embed 0000000000000 successfully revoked.
                     type: string
                 type: object
           description: OK
