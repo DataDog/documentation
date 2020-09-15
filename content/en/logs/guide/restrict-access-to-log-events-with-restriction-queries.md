@@ -56,7 +56,7 @@ Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
 API call:
 
 ```
-curl -X POST "https://app.datadoghq.com/api/v2/role" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-backend"}}}'
+curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-backend"}}}'
 ```
 
 Response:
@@ -71,7 +71,7 @@ Response:
 API call:
 
 ```
-curl -X POST "https://app.datadoghq.com/api/v2/role" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-frontend"}}}'
+curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-frontend"}}}'
 ```
 
 Response:
