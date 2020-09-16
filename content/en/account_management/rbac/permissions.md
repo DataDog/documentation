@@ -124,8 +124,7 @@ Grants a role the ability to create and modify log indexes. This includes:
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_modify_indexes_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Modify Indexes permission on the `Other` column. 
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -148,9 +147,8 @@ Grants a role the ability to create or modify exclusion filters within an index.
 
 **Global access**:
 
-Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for the wanted role:
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Write Exclusion Filters permission on the `Write` column.
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 **Subset of indexes**:
 
@@ -179,8 +177,7 @@ Grants a role the ability to create and modify log processing pipelines. This in
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_write_pipeline_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Write Pipelines permission on the `Other` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -227,9 +224,8 @@ Grants a role the ability to create or modify the processors within a processing
 
 **Global access**:
 
-Go to your [Datadog Roles page][1] and select the checkbox `write` as below for the wanted role:
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Write Processors permission on the `Write` column.
 
-{{< img src="account_management/rbac/logs_write_processors_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 **Subset of Pipelines**:
 
@@ -258,8 +254,7 @@ Grants the ability to create or modify log archives.
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_write_archives_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Archives permission on the `Write` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -281,8 +276,7 @@ Grants the ability to rehydrate from archives, and access the details of the arc
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `read`, as shown below, for the wanted role:
-{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Archives permission on the `Read` column.
 
 Then assign that role to the archive. Proceed to archive creation, or update at any moment while editing the archive. 
 {{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
@@ -320,28 +314,14 @@ Grants the ability to rehydrate from archives, and access the details of the arc
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `read`, as shown below, for the wanted role:
-{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-Then assign that role to the archive. Proceed to archive creation, or update at any moment while editing the archive. 
-{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
-
-An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
-
-In the following example, assuming all roles but `Guest` have the `logs_read_archive` permission:
-
-* Staging is accessible to all users, except users that **only** belong to the `Guest` role.
-* Prod is accessible to all users belonging to `Customer Support`.
-* Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
-
-{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Historical View permission on the `Write` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-The `logs_read_archive` permission can be granted or revoked from a role via [the Roles API][1].
+The `logs_write_historical_view` permission can be granted or revoked from a role via [the Roles API][1].
 
 An archive can be scoped to a subset of roles using the [Archive API][2].
 
@@ -359,8 +339,7 @@ Grants the ability to create or modify log configuration through the Datadog API
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_public_config_api_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Logs Public Config API permission on the `Other` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
@@ -406,9 +385,8 @@ Read access to log data. If granted, other restrictions then apply such as `logs
 
 **Grant global read access to log data**:
 
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Logs Read Data permission on the `Read` column.
 
-{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:70%;">}}
 
 **Restrict read access to a subset of logs**:
 
@@ -419,7 +397,6 @@ This configuration is only supported through the API.
 
 Revoke or grant this permission from a role via [the Roles API][1]. 
 Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
-
 
 
 [1]: /api/#roles
@@ -438,9 +415,8 @@ When using `logs_read_data` and restriction queries, the `logs_read_index_data` 
 
 **Global access**:
 
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Read Index Data permission on the `Read` column.
 
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Read Index Data Access"  style="width:90%;">}}
 
 **Subset of Indexes**:
 
@@ -493,8 +469,7 @@ Grants a role the ability to use the Live Tail feature.
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Logs Live Tail permission on the `Read` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
