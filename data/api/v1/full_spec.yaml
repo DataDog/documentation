@@ -7453,7 +7453,7 @@ components:
           description: Query to use for the test.
           type: object
         timeout:
-          description: Timeout in millisecond for the test.
+          description: Timeout in seconds for the test.
           format: double
           type: number
         url:
