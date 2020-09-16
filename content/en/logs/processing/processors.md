@@ -762,5 +762,5 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [7]: /logs/search_syntax/
 [8]: /logs/processing/processors/?tab=ui#log-status-remapper
 [9]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[10]: /tracing/connect_logs_and_traces/
-[11]: /logs/guide/enrichment-tables/
+[10]: /logs/guide/enrichment-tables/
+[11]: /tracing/connect_logs_and_traces/
