@@ -20,7 +20,7 @@ You must configure your Javascript bundler so that, when minifying your source c
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][1]. Check below how to configure it in your `webpack.config.js` file:
+You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][https://webpack.js.org/plugins/source-map-dev-tool-plugin/]. Check below how to configure it in your `webpack.config.js` file:
 
 ```javascript
 // ...
@@ -67,10 +67,10 @@ After building your application, bundlers generate a directory, most of the time
 
 ## Upload your source maps
 
-The best way to upload source maps is to add an extra-step in your CI pipeline and to run the dedicated command from the [Datadog CLI][2]. It scans the `dist` directory and its subdirectories to automatically upload the source maps with their related minified files. The flow is the following:
+The best way to upload source maps is to add an extra-step in your CI pipeline and to run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and its subdirectories to automatically upload the source maps with their related minified files. The flow is the following:
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][3] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
 ```bash
 datadog-ci sourcemaps upload /path/to/dist \
@@ -97,6 +97,5 @@ On the contrary, an unminified stack trace gives you all the context you need fo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[3]: https://app.datadoghq.com/account/settings#api
+[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[2]: https://app.datadoghq.com/account/settings#api
