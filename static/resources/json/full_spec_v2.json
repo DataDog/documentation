@@ -837,11 +837,11 @@
                 "example": [
                   "team:A"
                 ],
-                "format": "array",
                 "items": {
                   "description": "Tag associated with your log.",
-                  "format": "string"
-                }
+                  "type": "string"
+                },
+                "type": "array"
               },
               "timestamp": {
                 "description": "Timestamp of your log.",
@@ -4212,11 +4212,11 @@
                       "example": [
                         "team:A"
                       ],
-                      "format": "array",
                       "items": {
                         "description": "Tag associated with your log.",
-                        "format": "string"
-                      }
+                        "type": "string"
+                      },
+                      "type": "array"
                     },
                     "timestamp": {
                       "description": "Timestamp of your log.",
@@ -15955,11 +15955,11 @@
                                 "example": [
                                   "team:A"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "Tag associated with your log.",
-                                  "format": "string"
-                                }
+                                  "type": "string"
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "Timestamp of your log.",
@@ -16284,11 +16284,11 @@
                                 "example": [
                                   "team:A"
                                 ],
-                                "format": "array",
                                 "items": {
                                   "description": "Tag associated with your log.",
-                                  "format": "string"
-                                }
+                                  "type": "string"
+                                },
+                                "type": "array"
                               },
                               "timestamp": {
                                 "description": "Timestamp of your log.",
