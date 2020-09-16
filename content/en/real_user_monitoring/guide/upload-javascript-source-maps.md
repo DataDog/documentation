@@ -20,7 +20,7 @@ You must configure your Javascript bundler so that, when minifying your source c
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][https://webpack.js.org/plugins/source-map-dev-tool-plugin/]. Check below how to configure it in your `webpack.config.js` file:
+You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin](https://webpack.js.org/plugins/source-map-dev-tool-plugin/). Check below how to configure it in your `webpack.config.js` file:
 
 ```javascript
 // ...
