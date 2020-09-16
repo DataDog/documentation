@@ -31,7 +31,7 @@ supported_os:
 ---
 ## Présentation
 
-Ce check permet de surveiller les éliminations de processus OOM (Out of Memory) du noyau par l'intermédiaire de l'Agent Datadog et du system probe.
+Ce check permet de surveiller les processus tués par le mécanisme OOM Killer (Out of Memory Killer) du kernel par l'intermédiaire de l'Agent Datadog et du system probe.
 
 ## Configuration
 
@@ -39,29 +39,29 @@ Ce check permet de surveiller les éliminations de processus OOM (Out of Memory)
 
 Le check OOM Kill est inclus avec le package de l'[Agent Datadog][1]. Il repose sur un programme eBPF intégré au system probe.
 
-Le programme eBPF utilisé par le system probe est compilé au runtime. Vous devez avoir accès aux en-têtes de noyau appropriés.
+Le programme eBPF utilisé par le system probe est compilé au runtime. Vous devez avoir accès aux en-têtes de kernel appropriés.
 
-Sur les distributions dérivées de Debian, installez les en-têtes de noyau à l'aide de la commande suivante :
+Sur les distributions dérivées de Debian, installez les en-têtes de kernel à l'aide de la commande suivante :
 ```sh
 apt install -y linux-headers-$(uname -r)
 ```
 
-Sur les distributions dérivées de RHEL, installez les en-têtes de noyau à l'aide de la commande suivante :
+Sur les distributions dérivées de RHEL, installez les en-têtes de kernel à l'aide de la commande suivante :
 ```sh
 yum install -y kernel-headers-$(uname -r)
 ```
 
 ### Configuration
 
-1. Assurez-vous que le fichier `oom_kill.d/conf.yaml` se trouve dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir des métriques OOM Kill.
+1. Dans le fichier `system-probe.yaml` situé à la racine du répertoire de configuration de votre Agent, ajoutez la configuration suivante :
 
-2. Vérifiez que la configuration suivante est définie dans `system_probe.yaml` :
+    ```yaml
+    system_probe_config:
+        enabled: true
+        enable_oom_kill: true
+    ```
 
-```yaml
-system_probe_config:
-    enabled: true
-    enable_oom_kill: true
-```
+2. Assurez-vous que le fichier `oom_kill.d/conf.yaml` se trouve dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir des métriques OOM Kill.
 
 3. [Redémarrez l'Agent][2].
 
@@ -85,7 +85,7 @@ Le check OOM Kill n'inclut aucun check de service.
 
 ### Événements
 
-Le check OOM Kill envoie un événement pour chaque élimination OOM. Celui-ci inclut l'ID et le nom du processus éliminé, ainsi que l'ID et le nom du processus à l'origine du déclenchement.
+Le check OOM Kill envoie un événement pour chaque OOM Kill. Celui-ci inclut l'ID et le nom du processus éliminé, ainsi que l'ID et le nom du processus à l'origine du déclenchement.
 
 ## Dépannage
 
