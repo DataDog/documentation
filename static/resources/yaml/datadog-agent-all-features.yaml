@@ -54,7 +54,7 @@ data:
       syscall_monitor:
         enabled: false
 ---
-# Source: datadog/templates/system-probe-configmap.yaml
+# Source: datadog/templates/security-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
