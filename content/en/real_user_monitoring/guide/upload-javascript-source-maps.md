@@ -93,7 +93,6 @@ On the contrary, an unminified stack trace gives you all the context you need fo
 
 {{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.gif" alt="Error Tracking Unminified Stack Trace"  >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
