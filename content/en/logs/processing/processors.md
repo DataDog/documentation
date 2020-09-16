@@ -712,7 +712,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][11] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][10] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -762,5 +762,4 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [7]: /logs/search_syntax/
 [8]: /logs/processing/processors/?tab=ui#log-status-remapper
 [9]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[10]: /tracing/connect_logs_and_traces/
-[11]: /logs/guide/enrichment-tables/
+[10]: /logs/guide/enrichment-tables/
