@@ -84,7 +84,7 @@ Find below the list of permissions for the log configuration assets and log data
 | `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
 | `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
 
-{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_permissions.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
 More details about these permissions below.
 
