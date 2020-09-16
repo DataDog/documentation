@@ -79,12 +79,12 @@ Find below the list of permissions for the log configuration assets and log data
 | `logs_write_pipelines`         | Update a subset of the log pipelines       | true     |
 | `logs_write_processors`        | Update the log processors in an index      | true     |
 | `logs_write_archives`          | Update the external archives configuration | false    |
-| `logs_read_archives`           | See archive configuration details. Rehydrate from that archive (in addition to `logs_write_historical_view`) | true    |
-| `logs_write_historical_views`  | Update the external archives configuration | false    |
+| `logs_read_archives`           | See archive configuration details, acces content from the archive | true     |
+| `logs_write_historical_views`  | Rehydrate data from Archives               | false    |
 | `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
 | `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
 
-{{< img src="account_management/rbac/logs_permissions.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions"  style="width:75%;" >}}
 
 More details about these permissions below.
 
@@ -273,7 +273,9 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 #### logs_read_archives
 
-Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of archives. 
+Grants the ability to access the details of the archive configuration. In conjunction with `logs_write_historical_view` (see [Logs Write Historical Views](#logs-write-historical-views)), this permission also grants the ability to trigger a Rehydration from Archives. 
+
+This permission can be scoped to a subset of archives. 
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -325,8 +327,6 @@ Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Histo
 {{% tab "API" %}}
 
 The `logs_write_historical_view` permission can be granted or revoked from a role via [the Roles API][1].
-
-An archive can be scoped to a subset of roles using the [Archive API][2].
 
 
 [1]: /api/v2/roles/
