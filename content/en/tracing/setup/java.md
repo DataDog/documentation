@@ -105,6 +105,8 @@ System properties can be set as JVM flags.
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.                                                                                                                                                                                                                              |
 | `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.                                                                                                                                                                                                                              |
 | `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | False | By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them. |
+| `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | True | By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests. |
+
 
 **Note**:
 
