@@ -211,7 +211,7 @@ Endpoints that can be used to send logs to Datadog US region:
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
-[1]: /agent/logs/#send-logs-over-https
+[1]: /api/v1/logs/#send-logs
 
 {{< /site-region >}}
 
