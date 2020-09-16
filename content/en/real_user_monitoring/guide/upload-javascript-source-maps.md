@@ -46,7 +46,6 @@ module.exports = {
 
 **Note**: If you are using TypeScript, make sure to set `compilerOptions.sourceMap` to `true` when configuring your `tsconfig.json` file.
 
-
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
 {{% /tab %}}
 {{% tab "ParcelJS" %}}
