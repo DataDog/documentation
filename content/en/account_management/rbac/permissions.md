@@ -71,20 +71,23 @@ Find below the list of permissions for the log configuration assets and log data
 
 | Name                         | Description                                | Scopable |
 | ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries).       | true     |
-| logs_read_index_data         | Read a subset log data (index based)       | true     |
-| logs_modify_indexes          | Update the definition of log indexes       | false    |
-| logs_live_tail               | Access the live tail feature               | false    |
-| logs_write_exclusion_filters | Update a subset of the exclusion filters   | true     |
-| logs_write_pipelines         | Update a subset of the log pipelines       | true     |
-| logs_write_processors        | Update the log processors in an index      | true     |
-| logs_write_archives          | Update the external archives configuration | false    |
-| logs_read_archives           | Rehydrate logs from that archive; see archive configuration details | true    |
-| logs_write_historical_views  | Update the external archives configuration | false    |
-| logs_public_config_api       | Access the Logs Public Config API (r/w)    | false    |
-| logs_generate_metrics        | Access the Generate Metrics feature        | false    |
+| `logs_read_data`               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries).       | true     |
+| `logs_read_index_data`         | Read a subset log data (index based)       | true     |
+| `logs_modify_indexes`          | Update the definition of log indexes       | false    |
+| `logs_live_tail`               | Access the live tail feature               | false    |
+| `logs_write_exclusion_filters` | Update a subset of the exclusion filters   | true     |
+| `logs_write_pipelines`         | Update a subset of the log pipelines       | true     |
+| `logs_write_processors`        | Update the log processors in an index      | true     |
+| `logs_write_archives`          | Update the external archives configuration | false    |
+| `logs_read_archives`           | See archive configuration details. Rehydrate from that archive (in addition to `logs_write_historical_view`) | true    |
+| `logs_write_historical_views`  | Update the external archives configuration | false    |
+| `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
+| `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
+
+{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
 More details about these permissions below.
+
 
 ### Log Configuration Access
 
@@ -309,7 +312,8 @@ An archive can be scoped to a subset of roles using the [Archive API][2].
 
 #### logs_write_historical_view
 
-Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of archives. 
+Grants the ability to write historical views, meaning to trigger a Log Rehydration. This permission only enables to trigger a rehydration for Archives you have Read Access on (see [Logs Read Archive](#logs-read-archives))
+
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
