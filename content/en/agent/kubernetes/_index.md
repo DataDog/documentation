@@ -116,18 +116,18 @@ To install the Datadog Agent on your Kubernetes cluster:
 
      **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
 
-3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
+3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates
 
-    | Metrics   | Logs      | APM       | Process   | NPM       | Linux                  | Windows                 |
-    |-----------|-----------|-----------|-----------|-----------|------------------------|-------------------------|
-    | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |           | [Manifest template][3] | [Manifest template][4] |
-    | {{< X >}} | {{< X >}} | {{< X >}} |           |           | [Manifest template][5] | [Manifest template][6] |
-    | {{< X >}} | {{< X >}} |           |           |           | [Manifest template][7] | [Manifest template][8] |
-    | {{< X >}} |           | {{< X >}} |           |           | [Manifest template][9] | [Manifest template][10] |
-    |           |           |           |           | {{< X >}} | [Manifest template][11] | no template             |
-    | {{< X >}} |           |           |           |           | [Manifest template][12] | [Manifest template][13] |
+    | Metrics | Logs | APM | Process | NPM | Linux                  | Windows                 |
+    |---------|------|-----|---------|-----|------------------------|-------------------------|
+    | X       | X    | X   | X       |     | [Manifest template][3] | [Manifest template][4] |
+    | X       | X    | X   |         |     | [Manifest template][5] | [Manifest template][6] |
+    | X       | X    |     |         |     | [Manifest template][7] | [Manifest template][8] |
+    | X       |      | X   |         |     | [Manifest template][9] | [Manifest template][10] |
+    |         |      |     |         | X   | [Manifest template][11] | no template             |
+    | X       |      |     |         |     | [Manifest template][12] | [Manifest template][13] |
 
-     To enable trace collection completely, [extra steps are required on your application pod configuration][14]. Refer also to the [logs][15], [APM][16], [processes][17], and [Network Performance Monitoring][18] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application pod configuration][14]. Refer also to the [logs][15], [APM][4], [processes][6], and [Network Performance Monitoring][8] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
@@ -152,7 +152,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][19] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][20]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][10] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][13]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -161,23 +161,18 @@ To install the Datadog Agent on your Kubernetes cluster:
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
-[4]: /resources/yaml/datadog-agent-windows-all-features.yaml
-[5]: /resources/yaml/datadog-agent-logs-apm.yaml
-[6]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
-[7]: /resources/yaml/datadog-agent-logs.yaml
-[8]: /resources/yaml/datadog-agent-windows-logs.yaml
-[9]: /resources/yaml/datadog-agent-apm.yaml
-[10]: /resources/yaml/datadog-agent-windows-apm.yaml
-[11]: /resources/yaml/datadog-agent-npm.yaml
-[12]: /resources/yaml/datadog-agent-vanilla.yaml
-[13]: /resources/yaml/datadog-agent-windows-vanilla.yaml
+[4]: /agent/kubernetes/apm/
+[5]: /resources/yaml/datadog-agent-windows-all-features.yaml
+[6]: /infrastructure/process/?tab=kubernetes#installation
+[7]: /resources/yaml/datadog-agent-logs-apm.yaml
+[8]: /network_performance_monitoring/installation/
+[9]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
+[10]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[11]: /resources/yaml/datadog-agent-logs.yaml
+[12]: /resources/yaml/datadog-agent-windows-logs.yaml
+[13]: /agent/kubernetes/data_collected/#kube-state-metrics
 [14]: /agent/kubernetes/apm/#setup
 [15]: /agent/kubernetes/log/
-[16]: /agent/kubernetes/apm/
-[17]: /infrastructure/process/?tab=kubernetes#installation
-[18]: /network_performance_monitoring/installation/
-[19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[20]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
