@@ -79,7 +79,8 @@ Find below the list of permissions for the log configuration assets and log data
 | logs_write_pipelines         | Update a subset of the log pipelines       | true     |
 | logs_write_processors        | Update the log processors in an index      | true     |
 | logs_write_archives          | Update the external archives configuration | false    |
-| logs_read_archives          | Rehydrate logs from that archive; see archive configuration details | true    |
+| logs_read_archives           | Rehydrate logs from that archive; see archive configuration details | true    |
+| logs_write_historical_views  | Update the external archives configuration | false    |
 | logs_public_config_api       | Access the Logs Public Config API (r/w)    | false    |
 | logs_generate_metrics        | Access the Generate Metrics feature        | false    |
 
@@ -310,6 +311,46 @@ An archive can be scoped to a subset of roles using the [Archive API][2].
 [2]: /api/v2/logs-archives/
 {{% /tab %}}
 {{< /tabs >}}
+
+
+#### logs_write_historical_view
+
+Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of archives. 
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+Go to your [Datadog Roles page][1] and select the checkbox `read`, as shown below, for the wanted role:
+{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+Then assign that role to the archive. Proceed to archive creation, or update at any moment while editing the archive. 
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+
+An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
+
+In the following example, assuming all roles but `Guest` have the `logs_read_archive` permission:
+
+* Staging is accessible to all users, except users that **only** belong to the `Guest` role.
+* Prod is accessible to all users belonging to `Customer Support`.
+* Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
+
+{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+The `logs_read_archive` permission can be granted or revoked from a role via [the Roles API][1].
+
+An archive can be scoped to a subset of roles using the [Archive API][2].
+
+
+[1]: /api/v2/roles/
+[2]: /api/v2/logs-archives/
+{{% /tab %}}
+{{< /tabs >}}
+
 
 #### logs_public_config_api
 
