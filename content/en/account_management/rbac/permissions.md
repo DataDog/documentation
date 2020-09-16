@@ -98,8 +98,7 @@ Grants a role the ability to use the Generate Metrics feature. This permission i
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_generate_metrics_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Generate Metrics permission on the `Other` column.
 
 
 [1]: https://app.datadoghq.com/access/roles
