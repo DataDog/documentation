@@ -21,33 +21,33 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 2. Navigate to _Azure Active Directory_ -> _Enterprise applications_ -> _New application_.
 
-3. Select **Non-gallery application** in the **Add your own app** section.
+3. Scroll down to the **Add from the gallery** section, type **Datadog** in the search box.
+   
+4. Select **Datadog** from the results panel.
 
-4. Enter the name of your application in the **Name** textbox and click **Add**.
+5. Enter the name of your application in the **Name** textbox and click **Add**.
 
-5. Once your application is added, go to **Single sign-on** from the application's left-side navigation menu.
+6. Once your application is added, go to **Single sign-on** from the application's left-side navigation menu.
 
-6. Select **SAML-based Sign-on** in the **Single Sign-on Mode** drop-down.
+7. On the **Select a single sign-on method** page, click on **SAML**. 
 
-7. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
+8. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
 
     |                                |                                                                            |
     |--------------------------------|----------------------------------------------------------------------------|
     | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
     | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
 
-8. In Azure, add the values retrieved above:
+9.  In Azure, add the values retrieved above and click save:
 
     `Service Provider Entity ID` to **Identifier**<br>
     `Assertion Consumer Service URL` to **Reply URL**
 
-9. Set the **User Identifier** to `user.mail`.
+10. Set the **User Identifier** to `user.mail` and click save.
 
-10. Enter your **Notification Email** at the bottom of the page. When the active signing certificate approaches its expiration date, notifications are sent to this email address with instructions on how to update the certificate.
+11. Go to **SAML Signing Certificate** section and check that your **Notification Email** is correct. When the active signing certificate approaches its expiration date, notifications are sent to this email address with instructions on how to update the certificate.
 
-11. Go to the **SAML Signing Certificate** section and download the **SAML XML Metadata** file.
-
-12. Go to the top of your **SSO Configuration section** and click **Save**.
+12. In the same **SAML Signing Certificate** section, find **Federation Metadata XML** and select Download to download the certificate and save it.
 
 ### Datadog
 

@@ -23,15 +23,15 @@ further_reading:
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network flows **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page.
+To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page.
 
-The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-to-service flows when aggregated over a one hour time period.
+The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
 {{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context"  style="width:80%;">}}
 
-The next example shows all flows from IP addresses representing services in region `us-east-1` to availability zones:
+The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Flow table filtered"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered"  style="width:80%;">}}
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
@@ -66,7 +66,7 @@ Your network metrics are displayed through the graphs and the associated table. 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
 
-Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the flows that originate at `destination` include those bytes, but the flows that originate at `source` do not see them as received.
+Values displayed might be different for `sent_metric(source to destination)` and `received_metric(destination to source)` if there is a large number of packet drops. In this case, if the `destination` sends a lot of bytes to the `source`, the aggregate connections that originate at `destination` include those bytes, but the aggregate connections that originate at `source` do not see them as received.
 
 **Note**: The default collection interval is five minutes and retention is seven days.
 
@@ -131,11 +131,11 @@ Unresolved source and destination tags are marked as `N/A`. A traffic source or 
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
 
-Use the _Show Unresolved Flows_ toggle in the upper right corner of the data table to filter out flows with unresolved (`N/A`) sources or destinations.
+Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) sources or destinations.
 
-Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ flow:
+Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connection:
 
-{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
 
 ## Sidepanel
 

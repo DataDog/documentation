@@ -46,10 +46,10 @@ Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][2
 Depuis la version 6.1, l'Agent Datadog prend en charge la surveillance des clusters OpenShift Origin et Enterprise. En fonction de vos besoins et des [contraintes de sécurité][3] de votre cluster, trois scénarios de déploiement sont pris en charge :
 
 - [Opérations avec SCC restreintes](#restricted-scc-operations)
-- [Opérations avec SCC de réseau host](#host-network-scc-operations)
+- [Opérations avec SCC de réseau host](#host)
 - [SCC Datadog personnalisées pour un accès à toutes les fonctionnalités](#custom-datadog-scc-for-all-features)
 
-| Contraintes de contexte de sécurité (SCC)   | [Restreintes](#restricted-scc-operations) | [Réseau host](#host-network-scc-operations) | [Personnalisées](#custom-datadog-scc-for-all-features) |
+| Contraintes de contexte de sécurité (SCC)   | [Restreintes](#restricted-scc-operations) | [Réseau host](#host) | [Personnalisées](#custom-datadog-scc-for-all-features) |
 | ------------------------------ | ---------------------------------------- | -------------------------------------------- | ---------------------------------------------- |
 | Surveillance de la couche Kubernetes    | ✅                                       | ✅                                           | ✅                                             |
 | Autodiscovery basé sur Kubernetes | ✅                                       | ✅                                           | ✅                                             |

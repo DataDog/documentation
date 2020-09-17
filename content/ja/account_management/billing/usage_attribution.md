@@ -7,6 +7,10 @@ aliases:
 ---
 ## 概要
 
+<div class="alert alert-warning">
+Usage Attribution は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
+</div>
+
 管理者は Datadog の Plan & Usage セクションから Usage Attribution タブにアクセスできます。Usage Attribution ページでは、以下の情報と機能が確認できます。
 
 * 使用方法が分類されている既存のタグキーを一覧表示し、新しいタグキー（最大 3 つ）を変更および追加する機能を提供します。

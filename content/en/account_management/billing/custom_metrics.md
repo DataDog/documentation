@@ -143,7 +143,7 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 
 ## Tracking custom metrics
 
-Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
+Administrative users (those with [Datadog Admin roles][4]) can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account on the [usage details page][5]. See the [Usage Details][6] documentation for more information.
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
 

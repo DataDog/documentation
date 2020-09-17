@@ -69,17 +69,17 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 8
-  - name: Private Location
+  - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
     weight: 801
-  - name: Browser Test
+  - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
     weight: 802
-  - name: API Test
+  - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
@@ -248,63 +248,88 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Amazon ECS
+    url: agent/amazon_ecs/
+    parent: agent
+    identifier: agent_amazon_ecs
+    weight: 4
+  - name: Log collection
+    url: agent/amazon_ecs/logs/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_logs
+    weight: 401
+  - name: APM
+    url: agent/amazon_ecs/apm/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_apm
+    weight: 402
+  - name: Tag extraction
+    url: agent/amazon_ecs/tags/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_tags
+    weight: 403
+  - name: Data collected
+    url: agent/amazon_ecs/data_collected/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_data_collected
+    weight: 404
   - name: Cluster Agent
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
-    weight: 4
+    weight: 5
   - name: Setup
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
-    weight: 401
+    weight: 501
   - name: Event Collection
     url: agent/cluster_agent/event_collection/
     parent: agent_cluster
     identifier: cluster_agent_event_collection
-    weight: 402
+    weight: 502
   - name: Custom & External Metrics
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
-    weight: 403
+    weight: 503
   - name: Cluster Checks
     url: agent/cluster_agent/clusterchecks/
     parent: agent_cluster
-    weight: 404
+    weight: 504
   - name: Endpoints Checks
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
-    weight: 405
+    weight: 505
   - name: Admission Controller
     url: agent/cluster_agent/admission_controller/
     parent: agent_cluster
-    weight: 406
+    weight: 506
   - name: Commands & Options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 407
+    weight: 507
   - name: Cluster metadata provider
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 408
+    weight: 508
   - name: Build
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 409
+    weight: 509
   - name: Cluster Checks Runner
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 410
+    weight: 510
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 411
+    weight: 511
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
@@ -1003,7 +1028,7 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 707
-  - name: Connect Synthetics and Traces
+  - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
@@ -1383,14 +1408,14 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
+  - name: Advanced Options for Steps
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 203
   - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
-  - name: Advanced Options
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
@@ -1411,7 +1436,7 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 5
-  - name: Search
+  - name: Search and Manage
     url: synthetics/search/
     parent: synthetics
     weight: 6
@@ -1563,6 +1588,11 @@ main:
     parent: ndm
     identifier: ndm_data
     weight: 403
+  - name: Troubleshooting
+    url: network_performance_monitoring/devices/troubleshooting
+    parent: ndm
+    identifier: ndm_trouble
+    weight: 404
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -1818,7 +1848,7 @@ main:
     parent: security
     weight: 1
   - name: APM (Tracing)
-    url: tracing/security/
+    url: tracing/custom_instrumentation/agent_customization/
     parent: security
     weight: 2
   - name: Log Management

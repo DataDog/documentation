@@ -59,7 +59,7 @@ Source maps are mapping files generated when minifying Javascript source code. T
 
 For more information about CLI parameters, see the [official Github repository][5].
 
-<div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourceContent</code> attribute in your source maps is not empty before uploading them.</div>
+<div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourcesContent</code> attribute in your source maps is not empty before uploading them.</div>
 
 ## Further Reading
 

@@ -450,7 +450,8 @@ process_config:
 
 logs_config:
     use_http: true
-    logs_dd_url: http://haproxy.example.com:3837
+    logs_dd_url: haproxy.example.com:3837
+    logs_no_ssl: true
 ```
 
 次に、`datadog.yaml` Agent 構成ファイルを編集して、`skip_ssl_validation` を `true` に設定します。これは、SSL 証明書 (`app.datadoghq.com` または `app.datadoghq.eu`) のホスト名と HAProxy のホスト名の不一致を Agent が無視するようにするために必要です。
@@ -630,9 +631,9 @@ Datadog Agent v6/7.16 以降をログコレクターとして使用するには�
 
 ```yaml
 logs_config:
-  logs_no_ssl: true
-  logs_dd_url: "<プロキシサーバードメイン>:3837"
   use_http: true
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
+  logs_no_ssl: true
 ```
 
 TCP 経由でログを送信する場合は、<a href="/agent/logs/proxy">ログの TCP プロキシ</a>ページを参照してください。

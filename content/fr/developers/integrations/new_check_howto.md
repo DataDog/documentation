@@ -38,7 +38,7 @@ git clone https://github.com/DataDog/integrations-extras.git
 Le [kit de développement][4] est complet et intègre de nombreuses fonctionnalités. Pour démarrer, exécutez cette commande :
 
 ```bash
-pip install "datadog-checks-dev[cli]"
+pip3 install "datadog-checks-dev[cli]"
 ```
 
 Si vous avez choisi de cloner ce référentiel à un emplacement autre que `$HOME/dd/`, vous devrez modifier le fichier de configuration :
@@ -68,7 +68,7 @@ L'une des fonctionnalités du kit de développement est la commande `create`, qu
 Pour effectuer un test d'exécution, utilisez le flag `-n/--dry-run`, qui n'effectue aucune écriture sur le disque.
 
 ```bash
-ddev create -n awesome
+ddev create -n Awesome
 ```
 
 Cette commande affiche le chemin où les fichiers auraient été écrits, ainsi que la structure. Pour le moment, contentez-vous de vérifier que le chemin dans la _première ligne_ de la sortie correspond à l'emplacement de votre référentiel Extras.
@@ -78,7 +78,7 @@ Cette commande affiche le chemin où les fichiers auraient été écrits, ainsi 
 Le mode interactif est un assistant conçu pour vous aider à créer des intégrations. Il suffit de répondre à quelques questions pour que l'architecture soit automatiquement définie et préconfigurée.
 
 ```bash
-ddev create awesome
+ddev create Awesome
 ```
 
 Après avoir répondu aux questions, la sortie correspond à celle du test d'exécution ci-dessus, à la différence près que l'architecture de votre nouvelle intégration existe vraiment.
@@ -99,7 +99,7 @@ Les checks se présentent sous la forme de paquets Python classiques stockés da
 
 Supposons que vous souhaitez créer un check d'Agent composé uniquement d'un check de service appelé `awesome.search` qui recherche une chaîne sur une page Web. Il renverra `OK` si la chaîne est présente, `WARNING` si la page est accessible mais que la chaîne est absente, et `CRITICAL` si la page est inaccessible. Consultez la section [Envoi de métriques : check custom d'Agent][5] pour découvrir comment envoyer des métriques à l'aide de votre check d'Agent.
 
-Le code contenu dans `awesome/datadog_checks/awesome/awesome.py` ressemblerait à ceci :
+Le code contenu dans `awesome/datadog_checks/awesome/check.py` ressemble à ceci :
 
 ```python
 import requests
@@ -268,58 +268,57 @@ Le check est quasiment fini. Apportons la touche finale en ajoutant les configur
 
 Pour qu'un check puisse être inclus, l'ensemble des ressources créées par l'architecture ddev doit être complet :
 
-- **`README.md`** : ce fichier contient la documentation de son check. Il explique sa configuration, les données qu'il recueille, etc.
-- **`conf.yaml`** : ce fichier contient toutes les options de configuration de votre check d'Agent. [Consultez la documentation relative aux fichiers de configuration pour mieux comprendre sa logique.][10]
-- **`manifest.json`** : ce fichier contient les métadonnées de votre check d'Agent, telles que son titre, ses catégories, etc. [Consultez la documentation relative aux manifestes pour en savoir plus.][11]
+- **`README.md`** : ce fichier contient la documentation de votre check. Il explique sa configuration, les données qu'il recueille, etc.
+- **`spec.yaml`** : ce fichier permet de générer un `conf.yaml.example` à l'aide de l'outil `ddev` (consultez l'onglet « Modèle de configuration » ci-dessous). [Pour en savoir plus, consultez la documentation sur les spécifications de configuration][16].
+- **`conf.yaml.example`** : ce fichier contient les options de configuration par défaut (ou des exemples) pour votre check d'Agent. Ne modifiez pas ce fichier manuellement ! Il est généré à partir du contenu du fichier `spec.yaml`. [Consultez la documentation relative aux fichiers de configuration pour mieux comprendre sa logique.][10]
+- **`manifest.json`** : ce fichier contient les métadonnées de votre check d'Agent, telles que le titre, les catégories, etc. [Consultez la documentation relative aux manifestes pour en savoir plus.][11]
 - **`metadata.csv`** : ce fichier contient la liste de toutes les métriques recueillies par votre check d'Agent. [Consultez la documentation relative aux métadonnées des métriques pour en savoir plus.][12]
 - **`service_check.json`** : ce fichier contient la liste de tous les checks de service recueillis par votre check d'Agent. [Consultez la documentation relative aux checks de service pour en savoir plus.][13]
 
 Dans cet exemple, ces fichiers ressembleraient à ce qui suit :
 
 {{< tabs >}}
-{{% tab "Fichier de configuration" %}}
+{{% tab "Modèle de configuration " %}}
 
-Voici le fichier `awesome/datadog_checks/awesome/data/conf.yaml.example` pour le check de service Awesome :
+Le fichier `awesome/assets/configuration/spec.yaml` utilisé pour générer `awesome/datadog_checks/awesome/data/conf.yaml.example` :
 
 ```yaml
-init_config:
-  ## Commentaire de bloc dans la partie
-  ## init_config.
-
-## Commentaire de bloc en dehors de
-## la partie init_config.
-
-instances:
-  ## @param url  : chaîne (obligatoire)
-  ## L'URL à vérifier
-  ## (notez l'indentation avec le trait d'union)
-  #
-  - url: http://example.org
-
-    ## @param search_string : chaîne (obligatoire)
-    ## La chaîne  à rechercher
-    #
-    search_string: "Exemple de domaine"
-
-    ## @param user  : objet (facultatif)
-    ## L'utilisateur doit respecter la structure
-    ## {'name': ['<PRÉNOM>', '<NOM>'], 'username': <NOMUTILISATEUR>, 'password': <MOTDEPASSE>}
-    #
-    # user:
-    #   name:
-    #     - <PRÉNOM>
-    #     - <NOM>
-    #   username: <NOMUTILISATEUR>
-    #   password: <MOTDEPASSE>
-
-    ## @param options : objet (obligatoire)
-    ## Les flags que vous souhaitez définir
-    #
+name: Awesome
+files:
+- name: awesome.yaml
+  options:
+  - template: init_config
     options:
-      ## @param follow_redirects : booléen (facultatif) ; valeur par défaut : false
-      ## Définir sur true pour suivre la redirection 301
-      #
-      # follow_redirects: false
+    - template: init_config/default
+  - template: instances
+    options:
+    - name: url
+      required: true
+      description: The URL to check.
+      value:
+        type: string
+        example: http://example.org
+    - name: search_string
+      required: true
+      description: The string to search for.
+      value:
+        type: string
+        example: Example Domain
+    - name: flag_follow_redirects
+      # required: false est implicite ; mettez-le en commentaire pour voir ce qui se passe !
+      required: false
+      description: Follow 301 redirects.
+      value:
+        type: boolean
+        example: false
+    # Essayez de supprimer la mise en commentaire de ce modèle pour voir ce qui se passe !
+    #- template: instances/default
+```
+
+Générez le fichier `conf.yaml.example` à l'aide de `ddev` :
+
+```bash
+ddev validate config --sync awesome
 ```
 
 {{% /tab %}}
@@ -441,3 +440,4 @@ Pour les versions >= 6.12 de l'Agent :
 [13]: /fr/developers/integrations/check_references#service-check-file
 [14]: https://packaging.python.org/tutorials/distributing-packages
 [15]: https://docs.datadoghq.com/fr/agent/
+[16]: https://datadoghq.dev/integrations-core/meta/config-specs/

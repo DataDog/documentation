@@ -339,10 +339,10 @@ components:
               description: Array of tags associated with your log.
               example:
               - team:A
-              format: array
               items:
                 description: Tag associated with your log.
-                format: string
+                type: string
+              type: array
             timestamp:
               description: Timestamp of your log.
               example: '2019-01-02T09:42:36.320Z'
@@ -1823,6 +1823,8 @@ components:
       - 1800
       - 3600
       - 7200
+      - 10800
+      - 21600
       format: int32
       type: integer
       x-enum-varnames:
@@ -1834,6 +1836,8 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+      - THREE_HOURS
+      - SIX_HOURS
     SecurityMonitoringRuleMaxSignalDuration:
       description: "A signal will \u201Cclose\u201D regardless of the query being\
         \ matched once the time exceeds the maximum duration.\nThis time is calculated\
@@ -1879,6 +1883,8 @@ components:
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -1891,6 +1897,10 @@ components:
             description: Field.
             type: string
           type: array
+        metric:
+          description: The target field to aggregate over when using the sum or max
+            aggregations.
+          type: string
         name:
           description: Name of the query.
           type: string
@@ -1898,9 +1908,24 @@ components:
           description: Query to run on logs.
           type: string
       type: object
+    SecurityMonitoringRuleQueryAggregation:
+      description: The aggregation type.
+      enum:
+      - count
+      - cardinality
+      - sum
+      - max
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - SUM
+      - MAX
     SecurityMonitoringRuleQueryCreate:
       description: Query for matching rule.
       properties:
+        aggregation:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -1913,6 +1938,10 @@ components:
             description: Field.
             type: string
           type: array
+        metric:
+          description: The target field to aggregate over when using the sum or max
+            aggregations.
+          type: string
         name:
           description: Name of the query.
           type: string
@@ -2417,7 +2446,7 @@ info:
     name: Datadog Support
     url: https://www.datadoghq.com/support/
   description: Collection of all Datadog Public endpoints.
-  title: Datadog API Collection
+  title: Datadog API V2 Collection
   version: '1.0'
 openapi: 3.0.0
 paths:

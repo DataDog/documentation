@@ -34,11 +34,14 @@ Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kine
 5. アカウントの Datadog リージョンに応じて、`Datadog` 宛先を選択し、`Datadog US` または `Datadog EU` リージョンを選択します。
   {{< img src="logs/guide/choose-destination.png" alt="宛先を選ぶ" style="width:100%;">}}
 6. `APIKEY` を `AccessKey` ボックスに貼り付けます ([Datadog API 設定ページ][3]から API キーを取得できます)。
-7. 配信ストリームパラメーターを構成します。重要なパラメーターが 2 つあります。
+7. (オプション) ログにカスタムタグとして追加されるカスタム `parameters` を追加します。
+{{< img src="logs/guide/kinesis_logs_datadog_destination.png" alt="Datadog 送信先のコンフィギュレーション" style="width:100%;">}}
+8. 失敗したイベントを S3 バケットにバックアップすることを選択します。
+9. 配信ストリームパラメーターを構成します。重要なパラメーターが 2 つあります。
   * Retry time: イベントをバックアップ S3 バケットに送信する前に配信ストリームが再試行する時間。
-  * Batch size: Datadog は 1MB から 4MB の間の値を推奨します。バッチサイズまたは残存時間 (最小 60 秒) に達した場合、ログは配信ストリームによって送信されます。Datadog は、バッチサイズをできるだけリアルタイムに近づけるように縮小することを推奨しています。
-8. (オプション) カスタム `parameters` を追加します。これらはログにカスタムタグとして追加されます。
-9. (オプション) 失敗したイベントを S3 バケットにバックアップすることを選択します。
+  * Batch size: Datadog は 1MB から 4MB の間の値を推奨します。バッチサイズまたは残存時間 (最小 60 秒) に達した場合、ログは配信ストリームによって送信されます。
+  Datadog では、バッチサイズをできるだけリアルタイムに近づけるように縮小することを推奨しています。
+    {{< img src="logs/guide/kinesis_logs_datadog_batch.png" alt="バッチコンフィギュレーション" style="width:100%;">}}
 ​
 Delivery Stream で失敗したログが引き続き Datadog に送信されるようにするには、[この S3 バケットでトリガーするように Datadog Lambda 関数を構成します][4]。
 ​

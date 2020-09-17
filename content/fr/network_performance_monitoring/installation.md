@@ -24,21 +24,21 @@ Les plates-formes suivantes sont prises en charge :
 - Amazon AMI 2016.03+
 - Amazon Linux 2
 
-L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS/RHEL 7.6+][2].
+L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS/RHEL 7.6+][2]. La fonction [Résolution DNS][3] n'est pas prise en charge par CentOS/RHEL 7.6.
 
-**Remarque** : Windows et macOS ne sont pas compatibles avec la surveillance des performances réseau pour le moment.
+**Remarque** : la surveillance des performances réseau n'est pas disponible sur Windows et macOS pour le moment.
 
 Les systèmes de provisionnement suivants sont pris en charge :
 
-- Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][3]
-- Chef 12.7+ : voir la [recette Chef pour Datadog][4]
-- Ansible 2.6+ : voir le [rôle Ansible pour Datadog][5]
+- Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][4]
+- Chef 12.7+ : voir la [recette Chef pour Datadog][5]
+- Ansible 2.6+ : voir le [rôle Ansible pour Datadog][6]
 
 ## Implémentation
 
-Pour activer la solution Network Performance Monitoring, configurez-la dans le [fichier de configuration principal de votre Agent][6] en fonction de la configuration de votre système :
+Pour activer la solution Network Performance Monitoring, configurez-la dans le [fichier de configuration principal de votre Agent][7] en fonction de la configuration de votre système.
 
-Cet outil a été conçu dans l'optique d'analyser le trafic _entre_ des endpoints réseau et de mapper des dépendances réseau. Il est donc recommandé de l'installer sur un sous-ensemble pertinent de votre infrastructure ainsi que sur **_deux hosts au minimum_** pour en tirer pleinement profit.
+Cet outil a été conçu dans l'optique d'analyser le trafic _entre_ des endpoints réseau et de mapper des dépendances réseau. Il est donc conseillé de l'installer sur un sous-ensemble pertinent de votre infrastructure ainsi que sur **_deux hosts au minimum_** pour en tirer pleinement profit.
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -153,7 +153,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Activez la collecte de processus et le system-probe pour le conteneur de l'Agent, avec les variables d'environnement suivantes :
+2. Activez la collecte de processus et le system-probe pour le conteneur de l'Agent avec les variables d'environnement suivantes. Si tous les Agents s'exécutent dans un même conteneur, utilisez :
 
     ```yaml
       # (...)
@@ -168,6 +168,8 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
     ```
+
+    Si l'Agent de processus s'exécute dans un conteneur distinct, les variables d'environnement ci-dessus doivent être définies dans ce conteneur.
 
 3. Montez les volumes supplémentaires suivants dans votre conteneur `datadog-agent` :
 
@@ -216,8 +218,6 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
-                          - name: DD_SYSTEM_PROBE_ENABLED
-                            value: 'true'
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
                       resources:
@@ -279,18 +279,50 @@ datadog/agent:latest
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
 
+Si vous utilisez `docker-compose`, faites les ajouts suivants au service de l'Agent Datadog.
+
+```
+version: '3'
+services:
+  ..
+  datadog:
+    image: "datadog/agent:latest"
+    environment:
+       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_PROCESS_AGENT_ENABLED: 'true'
+       DD_API_KEY: '<CLÉ_API_DATADOG>'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    - /sys/kernel/debug:/sys/kernel/debug
+    cap_add:
+    - SYS_ADMIN
+    - SYS_RESOURCE
+    - SYS_PTRACE
+    - NET_ADMIN
+    - IPC_LOCK
+    security_opt:
+    - apparmor:unconfined
+```
 
 [1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "ECS" %}}
+Pour une configuration sur AWS ECS, consultez la page de documentation relative à [AWS ECS][1].
+
+
+[1]: /fr/integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
-[4]: https://github.com/DataDog/chef-datadog
-[5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[6]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /fr/network_performance_monitoring/network_page#dns-resolution
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[5]: https://github.com/DataDog/chef-datadog
+[6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[7]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file

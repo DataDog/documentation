@@ -11,6 +11,22 @@ data:
 
 # APP Key
 ---
+# Source: datadog/templates/install_info-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-agent-installinfo
+  labels: {}
+  annotations:
+    checksum/install_info: ee293ccedf116ce1ed6e0d9c7f7f9adabd0c230618089bb173c7acffa487e020
+data:
+  install_info: |
+    ---
+    install_method:
+      tool: kubernetes sample manifests
+      tool_version: kubernetes sample manifests
+      installer_version: kubernetes sample manifests
+---
 # Source: datadog/templates/daemonset.yaml
 apiVersion: apps/v1
 kind: DaemonSet
@@ -67,16 +83,23 @@ spec:
             - name: DD_HEALTH_PORT
               value: "5555"
           volumeMounts:
+            - name: installinfo
+              subPath: install_info
+              mountPath: /etc/datadog-agent/install_info
+              readOnly: true
             - name: config
               mountPath: /etc/datadog-agent
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
             - name: cgroups
               mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
               readOnly: true
           livenessProbe:
             failureThreshold: 6
@@ -118,9 +141,11 @@ spec:
               mountPath: /etc/datadog-agent
             - name: procdir
               mountPath: /host/proc
+              mountPropagation: None
               readOnly: true
             - name: runtimesocketdir
               mountPath: /host/var/run
+              mountPropagation: None
               readOnly: true
           env:
             - name: DD_API_KEY
@@ -138,6 +163,9 @@ spec:
               value: unix:///host/var/run/docker.sock
           resources: {}
       volumes:
+        - name: installinfo
+          configMap:
+            name: datadog-agent-installinfo
         - name: config
           emptyDir: {}
         - hostPath:

@@ -39,9 +39,9 @@ The recommended way of deploying the Datadog Agent on a mixed cluster is to perf
 
 The Datadog Agent uses a `nodeSelector` to automatically select Linux or Windows nodes based on `targetSystem`.
 
-However it's not the case for Kube State Metrics (which is installed by default), leading to situations where Kube State Metrics could be scheduled on Windows nodes.
+However it's not the case for Kube State Metrics (which is installed by default), leading to situations where Kube State Metrics cannot be scheduled on Windows nodes.
 
-Two options are available to avoid this issue:
+Three options are available to avoid this issue:
 
 * Taint your Windows nodes. On Windows, the Agent always allows the `node.kubernetes.io/os=windows:NoSchedule` taint.
 * Set Kube State Metrics node selector through Datatog Helm chart `values.yaml`:

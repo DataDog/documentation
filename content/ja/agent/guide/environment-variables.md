@@ -59,14 +59,36 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 
 ### 例外
 
-* 収集 Agent（APM、プロセス、ログ）の場合、オプション名に `_config` をドロップします。例:
-    ```yaml
-      apm_config:
-        enabled: true
-      # DD_APM_ENABLED=true
-    ```
+- すべての `datadog.yaml` オプションが環境変数で使用できるわけではありません。Datadog Agent GitHub リポジトリの [config.go][4] を参照してください。環境変数を持つオプションは、`config.BindEnv*` で始まります。
 
-* すべての `datadog.yaml` オプションが環境変数で使用できるわけではありません。Datadog Agent GitHub リポジトリの [config.go][4] を参照してください。環境変数を持つオプションは、`config.BindEnv*` で始まります。
+- [config.go][4] にリストアップされていない、コンポーネント固有の環境変数もサポートされる場合があります。
+
+  - **APM Trace Agent**
+
+      - [Docker APM Agent の環境変数][5]
+      - [trace-agent env.go][6]
+      - 例
+
+          ```yaml
+             apm_config:
+                 enabled: true
+                 env: dev
+             # DD_APM_ENABLED=true
+             # DD_APM_ENV=dev
+          ```
+
+  - **ライブプロセスエージェント**
+
+      - [process-agent config.go][7]
+      - 例
+
+          ```yaml
+             process_config:
+                 enabled: true
+                 process_dd_url: https://process.datadoghq.com
+             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+          ```
 
 ## その他の参考資料
 
@@ -76,3 +98,6 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 [2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: /ja/agent/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[5]: https://docs.datadoghq.com/ja/agent/docker/apm/#docker-apm-agent-environment-variables
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env.go
+[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go

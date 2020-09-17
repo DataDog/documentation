@@ -91,10 +91,11 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
             ...
         ]
     },
+    "api": {...}, // <-- 重要でない Agent 機能と同様 (API からの情報のクエリ)
     "apm": {...},                       // <-- APM Agent データに使用される IP ("agents" と同構造)
     "logs": {...},                      // <-- Agent データのログと同様
     "process": {...},                   // <-- Agent データのプロセスと同様
-    "api": {...},                       // <-- 重要でない Agent 機能と同様 (API からの情報のクエリ)
+    "synthetics": {...},                 // <-- Agent のトラフィックでは不使用 (Synthetic テストのためのボットの Datadog ソース IP)
     "webhooks": {...}                   // <-- Agent のトラフィックでは不使用 (webhook を送信する Datadog のソース IP)
 }
 ```

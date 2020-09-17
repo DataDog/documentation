@@ -12,7 +12,7 @@ further_reading:
 
 Datadog Agent auto-discovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
-**Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
+**Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
 If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Agent](?tab=agent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
@@ -51,7 +51,7 @@ As before, the following configuration instructs the Agent to ignore some contai
 DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-Note that `DD_AC_EXCLUDE` is **depreciated for Agent >= v7.20+**. 
+Note that `DD_AC_EXCLUDE` is **deprecated for Agent >= v7.20+**. 
 
 In **Agent v7.20+**, to remove a given Docker container with the **name** `<NAME>` from Autodiscovery, and thus exclude the **logs and metrics**, add the following environment variable to the Datadog Agent:
 
@@ -155,7 +155,7 @@ In **Agent <= v7.19+**, to remove a given Docker container with the **image** `<
 DD_AC_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-Note that `DD_AC_INCLUDE` is **depreciated for Agent >= v7.20+**.
+Note that `DD_AC_INCLUDE` is **deprecated for Agent >= v7.20+**.
 
 In **Agent v7.20+**, to include a given Docker container with the **name** `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 

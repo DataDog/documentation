@@ -7453,7 +7453,7 @@ components:
           description: Query to use for the test.
           type: object
         timeout:
-          description: Timeout in millisecond for the test.
+          description: Timeout in seconds for the test.
           format: double
           type: number
         url:
@@ -9895,7 +9895,7 @@ info:
     name: Datadog Support
     url: https://www.datadoghq.com/support/
   description: Collection of all Datadog Public endpoints.
-  title: Datadog API Collection
+  title: Datadog API V1 Collection
   version: '1.0'
 openapi: 3.0.0
 paths:
@@ -11223,8 +11223,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully enabled.
+                    example: Embed 00000000000 successfully enabled.
                     type: string
                 type: object
           description: OK
@@ -11263,8 +11262,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully revoked.
+                    example: Embed 0000000000000 successfully revoked.
                     type: string
                 type: object
           description: OK

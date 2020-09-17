@@ -77,7 +77,7 @@ Once you have the Datadog Cluster Agent running and the service registered, crea
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
       metricName: "<METRIC_NAME>"
@@ -113,7 +113,7 @@ spec:
 Note in this manifest that:
 
 - The HPA is configured to autoscale the deployment called `nginx`.
-- The maximum number of replicas created is `5`, and the minimum is `1`.
+- The maximum number of replicas created is `3`, and the minimum is `1`.
 - The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This metric format corresponds to the Datadog one.
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][9], the largest of the proposed values is the one chosen.
@@ -147,7 +147,7 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
 2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
     ```
 
 3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
@@ -184,7 +184,7 @@ Once your `DatadogMetric` is created, you need to configure your HPA to use this
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
       metricName: "datadogmetric@<namespace>:<datadogmetric_name>"

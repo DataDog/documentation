@@ -1,21 +1,21 @@
 ---
-title: Paramètres Synthetics
+title: Paramètres de la surveillance Synthetic
 kind: documentation
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: "Présentation de Datadog\_Synthetics"
-  - link: synthetics/api_tests
+    text: Présentation de la surveillance Datadog Synthetic
+  - link: /synthetics/api_tests/
     tag: Documentation
     text: Configurer un test API
-  - link: synthetics/browser_tests
+  - link: /synthetics/browser_tests/
     tag: Documentation
     text: Configurer un test Browser
-  - link: synthetics/identify_synthetics_bots
+  - link: /synthetics/identify_synthetics_bots/
     tag: Documentation
-    text: Identifier les Bots Synthetics
+    text: Identifier les bots Synthetic
 ---
-Vous pouvez définir les paramètres suivants via la [page des paramètres Synthetics][1] :
+La [page des paramètres de la surveillance Synthetic][1] vous permet de définir les paramètres suivants :
 
 * [Variables globales](#global-variables)
 * [Localisations privées][2]
@@ -23,11 +23,11 @@ Vous pouvez définir les paramètres suivants via la [page des paramètres Synth
   * [Localisations par défaut](#default-locations)
   * [Intégration APM pour les tests Browser](#apm-integration-for-browser-tests)
 
-Seuls les [utilisateurs Admin et Standard][3] peuvent accéder à la page `Settings` de Synthetics.
+Seuls les [utilisateurs Admin et Standard][3] peuvent accéder à la page `Settings` de la surveillance Synthetic.
 
 ## Variables globales
 
-Les variables ont un fonctionnement global et peuvent être utilisées par plusieurs [tests API][4] et [tests Browser][5] à la fois. Pour créer une variable globale, accédez à l'onglet **Global Variables** de votre page **Settings**, puis cliquez sur **New Global Variable** en haut à droite.  
+Les variables sont globales et peuvent être utilisées par plusieurs [tests API][4] et [tests Browser][5] à la fois. Pour créer une variable globale, accédez à l'onglet [Global Variables][6] de votre page **Settings**, puis cliquez sur **New Global Variable** en haut à droite.
 Choisissez le type de variable que vous souhaitez créer :
 
 {{< tabs >}}
@@ -73,16 +73,17 @@ Sélectionnez les localisations par défaut des informations de tests API et Bro
 
 Ajoutez une URL pour inclure des en-têtes d'intégration APM dans cette URL. Les en-têtes d'intégration APM de Datadog permettent à Datadog de lier les tests Browser aux données d’APM. Définissez les endpoints devant recevoir les en-têtes APM en ajoutant une URL dans cette section.
 
-Utilisez `*` pour inclure des noms de domaine entiers. Par exemple, ajoutez `https://*.datadoghq.com/*` pour inclure toutes les adresses `https://datadoghq.com/`.
+Utilisez `*` pour autoriser des noms de domaine entiers. Par exemple, ajoutez `https://*.datadoghq.com/*` pour autoriser toutes les adresses `https://datadoghq.com/`.
 
-Si l'endpoint est tracé et inclus dans la liste, les résultats du test Browser sont automatiquement liés à la trace correspondante.
+Si l'endpoint est tracé et autorisé, les résultats du test Browser sont automatiquement liés à la trace correspondante.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/settings
-[2]: /fr/synthetics/private_locations
+[2]: /fr/synthetics/private_locations/
 [3]: /fr/account_management/users/default_roles/
 [4]: /fr/synthetics/api_tests/#use-global-variables
 [5]: /fr/synthetics/browser_tests/#use-global-variables
+[6]: https://app.datadoghq.com/synthetics/settings/variables

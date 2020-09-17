@@ -26,18 +26,19 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 ### Configure the Function
 
 1. Enable [AWS X-Ray active tracing][3] for your Lambda function.
+2. Install the [AWS X-Ray SDK for .NET][4].
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
-2. [Ensure the option DdFetchLambdaTags is enabled][4].
-3. [Subscribe the Datadog Forwarder to your function's log groups][5].
+2. [Ensure the option DdFetchLambdaTags is enabled][5].
+3. [Subscribe the Datadog Forwarder to your function's log groups][6].
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][6].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][7].
 
 If you would like to submit a custom metric, see the sample code below:
 
@@ -53,6 +54,7 @@ LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[4]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: https://app.datadoghq.com/functions
+[4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
+[5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
+[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[7]: https://app.datadoghq.com/functions

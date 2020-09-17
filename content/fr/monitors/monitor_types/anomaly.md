@@ -3,15 +3,15 @@ title: Monitor d'anomalies
 kind: documentation
 aliases:
   - /fr/guides/anomalies
-description: Détecte les comportements anormaux pour une métrique basée sur des données historiques
+description: Détecte les comportements anormaux pour une métrique en fonction des données historiques
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
@@ -42,7 +42,7 @@ Une fois la métrique définie, le monitor de détection des anomalies génère 
 * les limites durant `15 minutes`, `1 hour`, `2 hours`, etc.
 * Rétablir le monitor si les valeurs restent dans les limites pendant au moins `15 minutes`, `1 hour`, `2 hours`, etc.
 
-**Direction des anomalies** : avec l'option par défaut (`above or below`), une métrique est considérée comme anormale si elle sort de la bande grise représentant les valeurs normales. Choisissez l'option `above` ou `below` pour être alerté uniquement si la métrique passe au-dessus ou en dessous de la bande grise.
+**Détection des anomalies** : avec l'option par défaut (`above ou below`), une métrique est considérée comme anormale si elle sort de la bande grise représentant les valeurs normales. Choisissez l'option `above` ou `below` pour être alerté uniquement si la métrique passe au-dessus ou en dessous de la bande grise.
 
 **Période de déclenchement** : la durée pendant laquelle une métrique doit être anormale pour qu'une alerte se déclenche. **Remarque** : si la période d'alerte est trop courte, vous risquez de recevoir de fausses alertes pour de simples irrégularités.
 
@@ -112,7 +112,30 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 
 ## API
 
-Les clients Enterprise peuvent créer un monitor de détection d'anomalies avec l'[endpoint d'API create-monitor][9]. Datadog vous conseille d'[exporter le JSON d'un monitor][10] pour créer la requête de l'API.
+Les clients Enterprise peuvent créer un monitor de détection d'anomalies avec l'[endpoint d'API create-monitor][9]. Datadog vous **conseille fortement** d'[exporter le JSON d'un monitor][10] pour créer la requête de l'API. Grâce à la [page de création de monitors][1] de Datadog, les clients ont accès au graphique d'aperçu et peuvent ajuster les paramètres automatiques, afin de rattraper toute erreur de configuration.
+
+**Remarque** : les monitors de détection d'anomalies sont uniquement disponibles pour les clients Enterprise. Si vous disposez d'un abonnement Pro et que vous souhaitez utiliser la fonctionnalité de détection d'anomalies, contactez votre chargé de compte ou envoyez un e-mail à l'[équipe de facturation Datadog][11].
+
+Les monitors d'anomalies sont gérés à l'aide de la [même API][12] que les autres monitors. Les champs suivants sont uniquement disponibles pour les monitors d'anomalies :
+
+### `query`
+
+La propriété `query` dans le corps de la requête doit contenir une chaîne de requête au format suivant :
+
+```text
+avg(<période_requête>):anomalies(<requête_métrique>, '<algorithme>', <déviations>, direction='<direction>', alert_window='<période_alerte>', interval=<intervalle>, count_default_zero='<zéro_défaut>' [, seasonality='<caractère_saisonnier>']) >= <seuil>
+```
+
+* `période_requête` : intervalle, par exemple `last_4h` ou `last_7d`. Correspond à l'intervalle affiché dans les graphiques des notifications. Cette valeur ne doit pas être inférieure à `période_alerte`. Valeur recommandée : environ 5 fois la valeur de `période_alerte`.
+* `requête_métrique` : requête de métrique standard de Datadog. Exemple : `sum:trace.flask.request.hits{service:web-app}.as_count()`.
+* `algorithme` : `basic`, `agile` ou `robust`.
+* `déviations` : nombre positif permettant de régler la réactivité de la détection des anomalies.
+* `direction` : indique si l'alerte doit être déclenchée lorsque les points se trouvent au-dessus de la bande de valeurs autorisées (`above`), en dessous (`below`) ou au-dessus et en dessous (`both`).
+* `période_alerte`: intervalle de vérification des anomalies (p. ex., `last_5m` ou `last_1h`).
+* `intervalle` : nombre entier positif représentant le nombre de secondes de l'intervalle de cumul. Valeur recommandée : au moins un cinquième de la durée de `alert_window`.
+* `zéro_défaut` : indiquez la valeur `true` pour la plupart des monitors. Définissez uniquement la valeur `false` si l'envoi d'une métrique count sans valeur ne doit _pas_ être considérée comme une valeur nulle.
+* `caractère_saisonnier`: `hourly`, `daily` ou `weekly`. Excluez ce paramètre si vous utilisez l'algorithme `basic`.
+* `seuil` : nombre positif inférieur ou égal à 1. Correspond à la fraction de points de `période_alerte` qui doivent être anormaux pour déclencher une alerte critique.
 
 Vous trouverez ci-dessous un exemple pour un monitor de détection d'anomalies qui vous informe lorsque la charge processeur moyenne de votre nœud Cassandra dépasse la valeur ordinaire par plus de trois fois l'écart type au cours des 5 dernières minutes :
 
@@ -120,12 +143,40 @@ Vous trouverez ci-dessous un exemple pour un monitor de détection d'anomalies q
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
-**Remarque** : les monitors de détection d'anomalies sont uniquement disponibles pour les clients Enterprise. Si vous disposez d'un abonnement Pro et que vous souhaitez utiliser la fonctionnalité de détection d'anomalies, contactez votre chargé de compte ou envoyez un e-mail à l'[équipe de facturation Datadog][11].
+### `options`
+
+La plupart des propriétés sous `options` dans le corps de requête sont identiques aux autres alertes de requête, à l'exception de `thresholds` et `threshold_windows`.
+
+**`thresholds`**
+
+Les monitors d'anomalies prennent en charge les seuils `critical`, `critical_recovery`, `warning` et `warning_recovery`. Les seuils sont exprimés sous la forme de chiffres compris entre 0 et 1. Ces valeurs représentent la fraction d'anomalies de la période associée. Par exemple, si le seuil `critical` a pour valeur `0.9`, une alerte critique se déclenche lorsque 90 % des points de `trigger_window` (décrit ci-dessous) sont anormaux. De même, si la valeur de `warning_recovery` est définie sur 0, le monitor passe de l'état d'avertissement à l'état normal uniquement lorsque 0 % des points de `recovery_window` sont anormaux.
+
+Le seuil `critical` doit correspondre au seuil utilisé dans la `query`.
+
+**`threshold_windows`**
+
+Les monitors d'anomalies possèdent une propriété `threshold_windows` dans `options`. Celle-ci doit inclure les deux propriétés suivantes : `trigger_window` et `recovery_window`. Ces périodes sont exprimées sous la forme de chaînes d'intervalle, par exemple `last_10m` ou `last_1h`. `trigger_window` doit correspondre à la propriété `alert_window` de `query`. `trigger_window` correspond à l'intervalle d'analyse des anomalies utilisé pour initier ou non le déclenchement d'un monitor. `recovery_window` correspond à l'intervalle d'analyse des anomalies utilisé pour initier ou non le rétablissement d'un monitor déclenché.
+
+Voici à quoi ressemble une configuration standard des seuils et périodes de seuil :
+
+```json
+"options": {
+  ...
+  "thresholds": {
+    "critical": 1,
+    "critical_recovery": 0
+  },
+  "threshold_windows": {
+    "trigger_window": "last_30m",
+    "recovery_window": "last_30m"
+  }
+}
+```
 
 ## Dépannage
 
-* [FAQ sur les monitors d'anomalies][12]
-* [Contacter l'assistance Datadog][13]
+* [FAQ sur les monitors d'anomalies][13]
+* [Contacter l'assistance Datadog][14]
 
 ## Pour aller plus loin
 
@@ -134,13 +185,14 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /fr/monitors/monitor_types/metric/#define-the-metric
 [3]: /fr/dashboards/functions/algorithms/#anomalies
-[4]: /fr/monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /fr/dashboards/functions/rollup
+[4]: /fr/monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /fr/dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /fr/monitors/notifications
-[9]: /fr/api/#monitor-create
+[8]: /fr/monitors/notifications/
+[9]: /fr/api/v1/monitors/#create-a-monitor
 [10]: /fr/monitors/monitor_status/#settings
 [11]: mailto:billing@datadoghq.com
-[12]: /fr/monitors/faq/anomaly-monitor
-[13]: /fr/help
+[12]: /fr/api/v1/monitors/
+[13]: /fr/monitors/faq/anomaly-monitor/
+[14]: /fr/help/

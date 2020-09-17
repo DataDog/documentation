@@ -1,24 +1,24 @@
 ---
-title: APM Synthetics
+title: APM Synthetic
 kind: documentation
-description: APM et tracing distribué avec Synthetics
+description: APM et tracing distribué avec la surveillance Synthetic
 aliases:
   - /fr/synthetics/apm
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: "Présentation de Datadog\_Synthetics"
+    text: Présentation de la surveillance Datadog Synthetic
   - link: /tracing/
     tag: Documentation
     text: APM et tracing distribué
 ---
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et Synthetics" video="true" >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM et surveillance Synthetic" video="true"  >}}
 
 ## Présentation
 
-L'intégration d'APM avec Synthetics vous permet de passer d'un test qui a éventuellement échoué vers la cause racine du problème en regardant la trace générée par ce test spécifique.
+L'intégration de l'APM avec la surveillance Synthetic vous permet d'identifier la cause de l'échec d'un test en visualisant les traces générées durant son exécution.
 
-En ayant à votre disposition les détails associés au réseau (grâce à votre test), ainsi qu'un backend, une infrastructure et des informations de journalisation (grâce à votre trace), vous pouvez accéder à un niveau de détails supérieur en ce qui concerne le comportement de votre application, tel que constaté par votre utilisateur.
+En accédant à des données réseau (grâce à votre test) ainsi qu'à des informations sur le backend, l'infrastructure et les logs (grâce à votre trace), vous avez la possibilité d'analyser en détail le comportement de votre application, tel que constaté par votre utilisateur.
 
 ## Utilisation
 
@@ -30,9 +30,9 @@ Les déclarations sur cette page s'appliquent [aux tests API][1] et aux [tests B
 * Votre service utilise un serveur HTTP.
 * Votre serveur HTTP utilise une bibliothèque qui prend en charge le tracing distribué.
 
-Créez un test qui s'applique à votre serveur HTTP soumis à un tracing, et Datadog associe automatiquement la trace générée par votre serveur au résultat de check correspondant.
+Créez un test qui s'applique à votre serveur HTTP tracé, et Datadog associera automatiquement la trace générée par votre serveur au résultat de test correspondant.
 
-Pour associer des résultats de test Browser, ajoutez à la liste blanche les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Utilisez `*` pour les caractères génériques :
+Pour associer des résultats de test Browser, autorisez les URL auxquelles vous souhaitez ajouter les en-têtes d'intégration APM. Utilisez `*` pour les caractères génériques :
 
 ```text
 https://*.datadoghq.com/*
@@ -48,6 +48,7 @@ Les bibliothèques de tracing Datadog suivantes sont prises en charge :
 * [Ruby][7]
 * [JavaScript][8]
 * [PHP][9]
+* [.NET][10]
 
 ### Comment les traces sont-elles associées aux tests ?
 
@@ -55,19 +56,19 @@ Datadog utilise le protocole de tracing distribué et configure les en-têtes HT
 
 | Header                                 | Description                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `x-datadog-trace-id`                   | Généré à partir du backend Synthetics. Permet à Datadog d'associer la trace au résultat du test.                           |
-| `x-datadog-parent-id: 0`               | Permet à Synthetics d'être la span racine de la trace générée.                                                             |
-| `x-datadog-origin: synthetics`         | S'assure que les traces générées à partir des tests API [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas).     |
-| `x-datadog-origin: synthetics-browser` | S'assure que les traces générées à partir des tests Browser [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas). |
-| `x-datadog-sampling-priority: 1`       | [S'assure que l'Agent conserve la trace][10].                                                                      |
+| `x-datadog-trace-id`                   | Généré à partir du backend de surveillance Synthetic. Permet à Datadog d'associer la trace au résultat du test.                 |
+| `x-datadog-parent-id: 0`               | Permet aux tests Synthetic d'être la span racine de la trace générée.                                                        |
+| `x-datadog-origin: synthetics`         | Permet de s'assurer que les traces générées à partir des tests API [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas-de-l-apm).     |
+| `x-datadog-origin: synthetics-browser` | Permet de s'assurer que les traces générées à partir des tests Browser [ne rentrent pas en compte dans le calcul de vos quotas de l'APM](#cela-a-t-il-une-incidence-sur-les-quotas-de-l-apm). |
+| `x-datadog-sampling-priority: 1`       | [Permet de s'assurer que l'Agent conserve la trace][11].                                                                      |
 
 ### Cela a-t-il une incidence sur les quotas de l'APM ?
 
-L'en-tête `x-datadog-origin: synthetics` indique au backend APM que les traces sont générées par Synthetics. Les traces générées n'ont par conséquent aucune incidence sur les quotas standard de l'APM.
+L'en-tête `x-datadog-origin: synthetics` indique au backend APM que les traces sont générées par Synthetic. Les traces générées n'ont par conséquent aucune incidence sur les quotas standard de l'APM.
 
 ### Combien de temps les traces sont-elles conservées ?
 
-Ces traces sont conservées [de la même manière que vos traces APM standard][11].
+Ces traces sont conservées [de la même manière que vos traces APM standard][12].
 
 ## Pour aller plus loin
 
@@ -82,5 +83,6 @@ Ces traces sont conservées [de la même manière que vos traces APM standard][1
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: /fr/tracing/guide/trace_sampling_and_storage/#how-it-works
-[11]: /fr/tracing/guide/trace_sampling_and_storage/#trace-storage
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[11]: /fr/tracing/guide/trace_sampling_and_storage/#how-it-works
+[12]: /fr/tracing/guide/trace_sampling_and_storage/#trace-storage
