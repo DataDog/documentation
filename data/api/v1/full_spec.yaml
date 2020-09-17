@@ -15311,24 +15311,15 @@ paths:
       - Synthetics
   /api/v1/synthetics/tests:
     get:
-      description: Get the list of all Synthetic tests (can be filtered by type).
+      description: Get the list of all Synthetic tests.
       operationId: ListTests
-      parameters:
-      - description: API or browser to filter the list by test type, undefined to
-          get the unfiltered list.
-        in: query
-        name: check_type
-        required: false
-        schema:
-          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyntheticsListTestsResponse'
-          description: OK - Returns the list of all Synthetic tests (properly filtered
-            by type).
+          description: OK - Returns the list of all Synthetic tests.
         '403':
           content:
             application/json:
@@ -15341,7 +15332,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Synthetics is not activated for the user.
-      summary: Get a list of tests
+      summary: Get the list of all tests
       tags:
       - Synthetics
     post:

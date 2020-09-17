@@ -2490,9 +2490,9 @@ api_v1:
     parent: Synthetics
     url: '#get-all-locations-public-and-private'
     generated: true
-  - name: Get a list of tests
+  - name: Get the list of all tests
     parent: Synthetics
-    url: '#get-a-list-of-tests'
+    url: '#get-the-list-of-all-tests'
     generated: true
   - name: Create a test
     parent: Synthetics
