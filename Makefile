@@ -14,7 +14,7 @@ IMAGE_VERSION="latest"
 # config
 CONFIG_FILE := Makefile.config
 ifeq ($(wildcard $(CONFIG_FILE)),)
-	$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+	_ := $(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
 include $(CONFIG_FILE)
 
