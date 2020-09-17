@@ -18,25 +18,25 @@ further_reading:
 
 ## Overview
 
-The key to getting started with dashboards is knowing what kinds of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution? 
+The key to getting started with dashboards is knowing what kind of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution? 
 
-Creating a good dashboard is about bringing the answers to these questions to the surface. Also, it is important not to cram all of those conversations into the same dashboard. Create separate dashboards to show answers to different kinds of questions.
+Creating a good dashboard is about bringing the answers to these questions to the surface. Also, it is important not to cram all of those thoughts into the same dashboard. Creating separate dashboards to pinpoint different issues can help you quickly find your answers.
 
-This guide gets you started on a path to making dashboards. These basic dashboards will help your team talk about things that really matter and get to the bottom of problems quickly.
+This guide gets you started on a path to creating dashboards. The basic dashboards will help your team talk about things that really matter and get to the bottom of problems quickly.
 
 ## Prerequisites
 
-If you haven't already, create a [Datadog account][1]. Install an agent on a host, and an integration for something running on that host.
+If you haven't already, create a [Datadog account][1]. Install the Agent on a host, and an integration for something running on that host.
 
 ## Plan
 
 Decide if your dashboard will be a timeboard (all graphs on the same time scale) or screenboard (wider variety of widgets, different time scales). Read more about [timeboards and screenboards][2] if you're not sure.
 
-Also think about what purpose you're creating the dashboard for. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
+Also, determine the purpose of the dashboard you're creating. A dashboard can help you and your teammates focus on the right work. A _team dashboard_ reminds you what's high priority, what needs attention now, and what you're succeeding at. Make a team dashboard (or multiple) with the information that people most frequently need they have to dig for. SLO and SLI details make for an excellent team dashboard.
 
-A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service you use is costing or helping, and whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to enable drilling down.
+A dashboard connected to real-time data is a powerful tool for guiding conversations with managers and executives. A good _executive dashboard_ can show that you are working on the most important things, how much a service is costing you, or whether you're progressing toward goals, meeting your SLOs, and scaling effectively. Executive dashboards are most effective when they answer these questions at the highest level and are interconnected to drill down into the answer.
 
-Dashboards can also help you track down persistent problems and fix them. _Troubleshooting dashboards_ often start as a scratch pad of things you know, and gradually build as you discover more. For example, start with a graph or widget from another dashboard or view that shows a problem-you'll be drilling down from there to find your solution.
+Dashboards can also help you track down persistent problems and fix them. _Troubleshooting dashboards_ often start as a scratch pad of things you know, and gradually build as you discover more. For example, start with a graph or widget from another dashboard or view that shows a problem. You can then drill down from there to find your solution.
 
 ## Explore out-of-the-box dashboards
 
@@ -46,24 +46,24 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
 3. Explore the links in the out-of-the-box dashboard's title drop-down to find more information about how people are using them.
 
-## Start by reusing good things
+## Start by reusing other dashboards
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
 1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
 2. Edit the clone by opening it and clicking **Edit widgets**. 
-3. Delete widgets you don't use by selecting **Delete** from the widget's Settings menu.
+3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
 5. Copy in widgets you like from other dashboards by hovering over the widget and typing Command + C (Ctrl + C on Windows). Paste it into your dashboard by opening the dashboard and typing Command + V (Ctrl + V on Windows).
 5. Use the **Export to Dashboard** option provided by many Datadog views for data they show. For example, the Logs Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
 
 ## Figuring out what a metric means
 
-Through integrations, Datadog collects [metrics][3] about your infrastructure and applications. The collected metrics are documented in the integration's Readme files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric means, look it up in the Integrations docs. 
+Through integrations, Datadog collects [metrics][3] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
-For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the AWS S3 integration Readme to see its description: 
+For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the AWS S3 integration README to see its description: 
 
-    The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond
+    `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 
@@ -83,7 +83,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
  - **Heat maps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
- - **Top lists**: Show, for example, which hosts have the least free space, or which services are throwing the most errors or which URLs are returning the most 404s.
+ - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
  - **Host map**: Show a diagram of, for example, the hosts in your infrastructure with colors that show status of their integrations or services.
  - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO summary widget, and group it additional widgets that show details for SLI metrics.
  - **Distributions**: Show, for example, a histogram of number of different types of events in a containerized environment, the number of critical errors in each service, website flow (number of users getting to page 2, page 3, page 4), or latency percentile buckets.
