@@ -40,7 +40,7 @@ Datadog Python、Node.js、Ruby トレースライブラリは、AWS Lambda の�
 
 ご使用の関数のログを有効にせずに Datadog APM を有効にするには、Datadog Forwarder で `DdForwarderLog` 環境変数が `false` に設定することをご確認ください。
 [1]: /ja/tracing/serverless_functions/
-[2]: /ja/serverless/installation/installing_the_library/
+[2]: /ja/serverless/datadog_lambda_library/
 [3]: https://app.datadoghq.com/functions
 [4]: https://app.datadoghq.com/apm/analytics
 [5]: https://app.datadoghq.com/apm/map
