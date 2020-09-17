@@ -13,10 +13,12 @@ IMAGE_VERSION="latest"
 
 # config
 CONFIG_FILE := Makefile.config
+ifneq (${MAKECMDGOALS}, start-docker)
 ifeq ($(wildcard $(CONFIG_FILE)),)
-	$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+	_ := $(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
 include $(CONFIG_FILE)
+endif
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -164,6 +166,11 @@ start-no-pre-build: clean source-helpers ## Build the documentation without auto
 		RUN_SERVER=${RUN_SERVER} \
 		run-site-no-pre-build.sh; \
 	else @echo "\033[31m\033[1mPython 3 must be available to Build the documentation.\033[0m" ; fi
+
+start-docker:
+	if ! [ -f Makefile.config ]; then cp Makefile.config.example Makefile.config; fi
+	docker build --tag datadog-docs - < Dockerfile
+	docker run --rm -it --name datadog-docs -v $$PWD:/docs -p 127.0.0.1:1313:1313/tcp datadog-docs
 
 stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
