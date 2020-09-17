@@ -178,7 +178,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}
