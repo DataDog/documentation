@@ -75,7 +75,7 @@ Find below the list of permissions for the log configuration assets and log data
 | `logs_modify_indexes`          | Update the definition of log indexes       | false    |
 | `logs_write_exclusion_filters` | Update indexes exclusion filters           | true     |
 | `logs_write_pipelines`         | Update log pipelines                       | false    |
-| `logs_write_processors`        | Update the log processors in an index      | true     |
+| `logs_write_processors`        | Update the log processors in a pipeline    | true     |
 | `logs_write_archives`          | Update the external archives configuration | false    |
 | `logs_read_archives`           | See archive configuration details, access content from the archive | true     |
 | `logs_write_historical_views`  | Rehydrate data from Archives               | false    |
