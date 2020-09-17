@@ -245,8 +245,10 @@ Proceed to archive creation, or update at any moment while editing the archive.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the Logs Archive API either to [assign][17] or [revoke][18] a role from a given Archive.
+Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a given Archive.
 
+[1]: /api/v2/logs-archives/#grant-role-to-an-archive
+[2]: /api/v2/logs-archives/#revoke-role-from-an-archive
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -388,5 +390,4 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [14]: /api/v1/logs-pipelines/
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
-[17]: /api/v2/logs-archives/#grant-role-to-an-archive
-[18]: /api/v2/logs-archives/#revoke-role-from-an-archive
+
