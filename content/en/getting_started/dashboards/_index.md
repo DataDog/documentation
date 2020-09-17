@@ -51,6 +51,7 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
 1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+    {{< img src="getting_started/dashboards/cloning_dashboard.gif" alt="Cloning a dashboard"  >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
@@ -61,9 +62,7 @@ A common way to start a dashboard is by encountering a similar dashboard already
 
 Through integrations, Datadog collects [metrics][3] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
-For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the AWS S3 integration README to see its description: 
-
-    `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
+For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][5] section of the AWS S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 
@@ -81,6 +80,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
  - **Heat maps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
@@ -97,7 +97,8 @@ Move graphs around so they create a flow for the work you do or conversations yo
 There are two ways to create links from a dashboard to any target URL:
 
  - Add a Notes and Links widget, which can contain Markdown formatted text, including links. The widget editor includes Markdown formatting tips.
- - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for drilling down into data. 
+ - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for drilling down into data or taking corrective action. 
+     {{< img src="getting_started/dashboards/opening_custom_link.gif" alt="Opening a custom link"  >}}
 
 ## What's next 
 
