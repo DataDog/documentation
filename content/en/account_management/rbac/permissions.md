@@ -224,7 +224,7 @@ This permission is global and enables the creation of new archives, and the edit
 
 #### logs_read_archives
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-views), this permission also grants the ability to trigger a [Rehydration][17] from Archives. 
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][17] from Archives. 
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
