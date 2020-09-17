@@ -1223,6 +1223,9 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToOrganizations:
       description: Relationship to organizations.
@@ -1295,10 +1298,10 @@ components:
           description: ID of the user.
           type: string
         type:
-          default: users
-          description: Users type.
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToUsers:
       description: Relationship to users.
@@ -2424,6 +2427,7 @@ components:
       description: Users resource type.
       enum:
       - users
+      example: users
       type: string
       x-enum-varnames:
       - USERS
