@@ -47,7 +47,15 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 ### Filter
 
-Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. To learn more about tags, refer to the [Tagging][6] documentation.
+Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. 
+
+{{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
+
+You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as 
+
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
+
+To learn more about tags, refer to the [Tagging][6] documentation.
 
 ### Aggregate and rollup
 
