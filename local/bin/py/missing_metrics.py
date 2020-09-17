@@ -40,7 +40,7 @@ def get_dd_metrics(csv_metrics, keys, t):
             '.p7',
             '.p9',
             'aws.ec2.iam_credentials_expiration_seconds',
-            'azure.operationalinsights_workspaces.'
+            'azure.operationalinsights_workspaces.',
             'cloudfoundry.nozzle',
             'gcp.logging.user.',
             'gcp.custom.',
