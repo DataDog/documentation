@@ -160,8 +160,9 @@ This configuration is only supported through the UI.
 
 Grants a role the ability to create and modify [log processing pipelines][10]. This includes:
 
-- Setting [pipelines filters][16] for what logs should enter the processing pipeline, along with the name of that pipeline
 - Setting the name of the pipeline, 
+- Setting [pipelines filters][16] for what logs should enter the processing pipeline,
+- Reorder pipelines,
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline.
 
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
@@ -209,17 +210,16 @@ curl -X POST \
 {{< /tabs >}}
 
 
-**Subset of Pipelines**:
-
-1. Remove the `logs_write_processors` and `logs_write_pipelines` permissions on the role.
-2. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][4] by editing a processing pipeline and adding a role to the "Grant editing Processors of this index to" field (screenshot below).
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Grant write access for processors to specific roles"  style="width:75%;" >}}
-
-
 #### logs_write_archives
 
-Grants the ability to create, edit or delete [Log Archives][13].
+Grants the ability to create, edit or delete [Log Archives][13]. This includes:
+
+- Setting [archives filters][16] for what logs should be routed to the archive,
+- Setting the name of the archive,
+- Reordering archives,
+- Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
+
+This permission is global and enables the creation of new archives, and the edition and deletion of existing ones.
 
 
 #### logs_read_archives
@@ -247,7 +247,7 @@ Proceed to archive creation, or update at any moment while editing the archive.
 {{% /tab %}}
 {{% tab "API" %}}
 
-%%TODO%%
+Restricting archives to a subset of roles is only available through UI.
 
 [1]: /api/#roles
 [2]: /api/?lang=bash#roles-restriction-queries-for-logs
@@ -277,15 +277,9 @@ The Log Public Configuration API permission only grants the permission to operat
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
-* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission to access indexed data).
+* [Logs Read Data](#logs-read-data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
+* [Logs Read Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
 
-These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
-
-**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`.
-When looking in Log Explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
-
-In addition, access to the Live Tail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
 
 #### logs_read_data
 
@@ -321,37 +315,38 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 ### Legacy Permissions
 
+These permissions are globally enabled by default for all users. 
+
+[Logs Read Data](#logs-read-data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
+
+* If this user has scoped [Read Index Data](#logs-read-index-data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
+* If this user has [livetail](#logs-livetail) permission, this users sees only sees `service:api` logs in the livetail.
+
 
 #### logs_read_index_data
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
-When using `logs_read_data` and restriction queries, the `logs_read_index_data` permission **must** be set globally to access indexed logs.
+
+To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "UI" %}}
 
-**Global access**:
-
-Go to your [Datadog Roles page][1], pick the wanted role and adapt the Log Read Index Data permission on the `Read` column.
-
-
-**Subset of Indexes**:
-
-1. Remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role.
-2. This permission can be granted to a role in [the Index Configuration page of the Datadog app][2] by editing an index and adding a role to the "Grant access of this index's content to" field.
+Grant this role access to the index in [Configuration page][1].
 
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
+[1]: https://app.datadoghq.com/logs/indexes
 
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1].
-For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
+* [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+* [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+* [Get the Index ID(s)][3] of the pipeline(s) you want to assign this role on.
+* Grant permission to that role with the following call:
 
-1. Remove the global `logs_read_index_data` permission on the role if already assigned.
+
 2. Get the UUID of the role you want to modify.
 3. Use the [Get Permission][2] API to find the `logs_read_index_data` permission UUID for your region.
 4. Grant permission to that role with the following call:
@@ -364,17 +359,15 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "indexes": [
-                        "main",
-                        "support"
-                    ]
+                    "indexes": ["<INDEX-1_ID>",["<INDEX-2_ID>"]
                 }
             }'
 ```
 
-
-[1]: /api/v2/roles/
+[1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
+[3]: /api/v1/logs-indexes/#get-all-indexes
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -382,6 +375,8 @@ curl -X POST \
 #### logs_live_tail
 
 Grants a role the ability to use the [Live Tail][14] feature.
+
+This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
 
 ## Further Reading
