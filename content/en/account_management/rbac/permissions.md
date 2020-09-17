@@ -245,7 +245,8 @@ Proceed to archive creation, or update at any moment while editing the archive.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Restricting archives to a subset of roles is only available through UI.
+Use the Logs Archive API either to [assign][17] or [revoke][18] a role from a given Archive.
+
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -338,11 +339,6 @@ Grant this role access to the index in [Configuration page][1].
 * [Get the Index ID(s)][3] of the pipeline(s) you want to assign this role on.
 * Grant permission to that role with the following call:
 
-
-2. Get the UUID of the role you want to modify.
-3. Use the [Get Permission][2] API to find the `logs_read_index_data` permission UUID for your region.
-4. Grant permission to that role with the following call:
-
 ```bash
 curl -X POST \
         https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
@@ -392,3 +388,5 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [14]: /api/v1/logs-pipelines/
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
+[17]: /api/v2/logs-archives/#grant-role-to-an-archive
+[18]: /api/v2/logs-archives/#revoke-role-from-an-archive
