@@ -112,6 +112,9 @@ Every dashboard has a JSON representation that you can copy or export from the S
 
 Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][15], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/
 [2]: /dashboards/#screenboard-vs-timeboard
