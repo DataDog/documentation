@@ -51,7 +51,7 @@ Your chosen metric can be filtered by host or tag using the **from** dropdown to
 
 {{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
 
-You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as 
+You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as:
 
 {{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
 
