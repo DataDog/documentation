@@ -73,19 +73,22 @@ Find below the list of permissions for the log configuration assets and log data
 | ------------------------------ | ------------------------------------------ | -------- |
 | `logs_read_data`               | Read access to log data.                   | true     |
 | `logs_modify_indexes`          | Update the definition of log indexes       | false    |
-| `logs_write_exclusion_filters` | Update a subset of the exclusion filters   | true     |
-| `logs_write_pipelines`         | Update a subset of the log pipelines       | true     |
+| `logs_write_exclusion_filters` | Update indexes exclusion filters           | true     |
+| `logs_write_pipelines`         | Update log pipelines                       | false    |
 | `logs_write_processors`        | Update the log processors in an index      | true     |
 | `logs_write_archives`          | Update the external archives configuration | false    |
 | `logs_read_archives`           | See archive configuration details, acces content from the archive | true     |
 | `logs_write_historical_views`  | Rehydrate data from Archives               | false    |
 | `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
 | `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
+
+
+Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive `logs_read_data` permission :
+
+| Name                           | Description                                | Scopable |
 | ------------------------------ | ------------------------------------------ | -------- |
-| Legacy Permissions             | ------------------------------------------ | -------- |
 | `logs_live_tail`               | Access the live tail feature               | false    |
 | `logs_read_index_data`         | Read a subset log data (index based)       | true     |
-
 
 
 {{< tabs >}}
@@ -121,11 +124,11 @@ Grants a role the ability to create and modify [log indexes][15]. This includes:
 
 - Setting [indexes filters][7] for which logs should be routed into an index.
 - Setting [log retention][8] for an index.
-- Granting a role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific for an index.
+- Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions.
+**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
 
 
 #### logs_write_exclusion_filters
@@ -159,24 +162,32 @@ Grants a role the ability to create and modify [log processing pipelines][10]. T
 
 - Setting [pipelines filters][16] for what logs should enter the processing pipeline, along with the name of that pipeline
 - Setting the name of the pipeline, 
-- Granting a role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline.
+- Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline.
 
-To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively:
+**Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 
-1. Remove the global `logs_write_pipelines` permission on the role if already assigned, then:
+
+#### logs_write_processors
+
+Grants a role the ability to create, edit or delete processors and nested pipelines[12].
+
+This permission can be assigned either globally or restricted to a subset of pipelines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Assign the role 
+Assign the role(s) in the modal of a specific pipeline.
+
 {{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors"  style="width:75%;" >}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-2. Get the UUID of the role you want to modify.
-3. Use the [Get Permission][2] API to find the `logs_write_pipelines` permission UUID for your region.
-4. Grant permission to that role with the following call:
+Preliminary,  
+* [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+* [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+* [Get the Pipeline ID(s)][3] of the pipeline(s) you want to assign this role on.
+* Grant permission to that role with the following call:
 
 ```sh
 curl -X POST \
@@ -186,23 +197,17 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "pipelines": [
-                        "abcd-1234",
-                        "bcde-2345"
-                    ]
+                    "pipelines": [ "<PIPELINE-X_ID>", "<PIPELINE-Y_ID>"]
                 }
             }'
 ```
 
-[1]: /api/#roles
-[2]: /api/?lang=bash#roles-restriction-queries-for-logs
+[1]: /api/v2/roles/#list-roles
+[2]: /api/v2/roles/#list-permissions
+[3]: /api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
-
-#### logs_write_processors
-
-Grants a role the ability to create, edit or delete processors and nested pipelines[12] within a processing pipeline.
 
 **Subset of Pipelines**:
 
