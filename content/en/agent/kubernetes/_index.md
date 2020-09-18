@@ -120,12 +120,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 
     | Metrics | Logs | APM | Process | NPM | Linux                  | Windows                 |
     |---------|------|-----|---------|-----|------------------------|-------------------------|
-    | X       | X    | X   | X       |     | [Manifest template][3] | [Manifest template][4] |
-    | X       | X    | X   |         |     | [Manifest template][5] | [Manifest template][6] |
-    | X       | X    |     |         |     | [Manifest template][7] | [Manifest template][8] |
-    | X       |      | X   |         |     | [Manifest template][9] | [Manifest template][10] |
-    |         |      |     |         | X   | [Manifest template][11] | no template             |
-    | X       |      |     |         |     | [Manifest template][12] | [Manifest template][13] |
+    | X       | X    | X   | X       |     | [Manifest template][3] | [Manifest template][5] |
+    | X       | X    | X   |         |     | [Manifest template][7] | [Manifest template][9] |
+    | X       | X    |     |         |     | [Manifest template][11] | [Manifest template][12] |
+    | X       |      | X   |         |     | [Manifest template][16] | [Manifest template][17] |
+    |         |      |     |         | X   | [Manifest template][18] | no template             |
+    | X       |      |     |         |     | [Manifest template][19] | [Manifest template][20] |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][14]. Refer also to the [logs][15], [APM][4], [processes][6], and [Network Performance Monitoring][8] documentation pages to learn how to enable each feature individually.
 
@@ -173,6 +173,11 @@ To install the Datadog Agent on your Kubernetes cluster:
 [13]: /agent/kubernetes/data_collected/#kube-state-metrics
 [14]: /agent/kubernetes/apm/#setup
 [15]: /agent/kubernetes/log/
+[16]: /resources/yaml/datadog-agent-apm.yaml
+[17]: /resources/yaml/datadog-agent-windows-apm.yaml
+[18]: /resources/yaml/datadog-agent-npm.yaml
+[19]: /resources/yaml/datadog-agent-vanilla.yaml
+[20]: /resources/yaml/datadog-agent-windows-vanilla.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
