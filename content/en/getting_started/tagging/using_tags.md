@@ -47,7 +47,7 @@ Use `AND`, `ORs` to look at a metric across specific tags:
 
 {{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Boolean Filter with AND/OR"  style="width:80%;">}}
 
-USE IN/NOT IN to quickly filter a metric down to specific tags:
+Use `IN`, `NOT IN` to quickly filter a metric down to specific tags:
 
 {{< img src="tagging/using_tags/dashboard_boolean_2.png" alt="Boolean Filter with IN/NOT IN"  style="width:80%;">}}
 
