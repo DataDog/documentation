@@ -43,7 +43,7 @@ Advanced tag value filtering is also available with boolean filters. The followi
 * `key IN (tag_value1, tag_value2,...)`
 * `key NOT IN (tag_value1, tag_value2,...)`
 
-Use AND/ORs to look at a metric across specific tags:
+Use `AND`, `ORs` to look at a metric across specific tags:
 
 {{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Boolean Filter with AND/OR"  style="width:80%;">}}
 
