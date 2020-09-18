@@ -306,9 +306,22 @@ Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.creat
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-If you want to collect events from your kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
+If you want to collect events from your Kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
 
 [1]: /agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Set `agent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
+
+For example:
+
+```
+agent:
+  config:
+    collectEvents: true
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
