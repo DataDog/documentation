@@ -83,7 +83,7 @@ spec:
       metricName: "<METRIC_NAME>"
       metricSelector:
         matchLabels:
-          "<TAG_KEY>:<TAG_VALUE>"
+          <TAG_KEY>: <TAG_VALUE>
 ```
 
 **Example**: An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:
