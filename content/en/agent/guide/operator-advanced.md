@@ -2,9 +2,9 @@
 title: Advanced setup for Datadog Operator
 kind: faq
 further_reading:
-	- link: 'agent/kubernetes/log'
-	  tag: 'Documentation'
-	  text: 'Datadog and Kubernetes'
+  - link: 'agent/kubernetes/log'
+    tag: 'Documentation'
+    text: 'Datadog and Kubernetes'
 ---
 
 [The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
