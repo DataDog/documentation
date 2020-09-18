@@ -275,7 +275,7 @@ The Log Public Configuration API permission only grants the permission to operat
 Grant the following permissions to manage read access on subsets of log data:
 
 * [Logs Read Data](#logs-read-data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries.
-* [Logs Read Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
+* [Logs Read Index Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
 
 #### logs_read_data
 
