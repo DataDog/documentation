@@ -95,9 +95,9 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### DNS Resolution
 
-Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **Domain is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
+{{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Domain aggregation" >}}
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
