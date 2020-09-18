@@ -41,7 +41,7 @@ Advanced tag value filtering is also available with boolean filters. The followi
 * `AND`, `,`
 * `OR`
 * `key IN (tag_value1, tag_value2,...)`
-* key NOT IN (tag_value1, tag_value2,...)
+* `key NOT IN (tag_value1, tag_value2,...)`
 
 Use AND/ORs to look at a metric across specific tags:
 
