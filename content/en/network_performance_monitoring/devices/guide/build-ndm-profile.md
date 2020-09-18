@@ -3,13 +3,17 @@ title: Build a NDM Profile
 kind: guide
 ---
 
-Datadog Network Device Monitoring uses profiles for certain makes and models of network devices. This tutorial shows the steps from building a basic NDM profile that collects OID metrics from HP iLO4 devices.
+Datadog Network Device Monitoring uses profiles for certain makes and models of network devices. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
 
-**Note**: NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
+NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
+
+<div class="alert alert-warning">
+This guide is for advanced users. Most devices can be configured using the <a href="/network_performance_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
+</div>
 
 ## Research
 
-The first step to building a NDM profile is doing basic research about the device and determining the metrics you want to collect.
+The first step to building a NDM profile is researching the device and determining the metrics to collect.
 
 ### Device information
 
@@ -31,33 +35,28 @@ Next, decide the metrics to collect. Devices often expose thousands of metrics a
 
 Some guidelines to help you in this process:
 
-- 10-40 metrics is a good amount already.
+- Keep the number of metrics between 10 and 40.
 - Explore base profiles to see which ones could be applicable to the device.
 - Explore manufacturer-specific MIB files looking for metrics such as:
-    - General health: status gauges...
-    - Network traffic: bytes in/out, errors in/out, ...
-    - CPU and memory usage.
-    - Temperature: temperature sensors, thermal condition, ...
-    - Power supply.
-    - Storage.
-    - Field-replaceable units ([FRU][5]).
-    - ...
+    - General health: status gauges
+    - Network traffic: bytes in/out, errors in/out
+    - CPU and memory usage
+    - Temperature: temperature sensors, thermal condition
+    - Power supply
+    - Storage
+    - Field-replaceable units ([FRU][5])
 
 ## Implementation
 
-It might be tempting to gather as many metrics as possible, and only then start building the profile and writing tests.
+Datadog recommends following this development workflow:
 
-But we recommend you **start small**. This will allow you to quickly gain confidence on the various components of the SNMP development workflow:
+- Add a profile
+- Write tests
+- Use simulation data
 
-- Editing profile files.
-- Writing tests.
-- Building and using simulation data.
+### Add a profile
 
-### Add a profile file
-
-Add a `.yaml` file for the profile with the `sysobjectid` and a metric (you'll be able to add more later).
-
-For example:
+Add a profile by creating a `.yaml` file with the `sysobjectid` and metrics, for example:
 
 ```yaml
 sysobjectid: 1.3.6.1.4.1.232.9.4.10
@@ -69,28 +68,23 @@ metrics:
       name: cpqHeSysUtilLifeTime
 ```
 
-!!! tip
-    `sysobjectid` can also be a wildcard pattern to match a sub-tree of devices, eg `1.3.6.1.131.12.4.*`.
+**Note**: `sysobjectid` can be a wildcard pattern to match a sub-tree of devices, for example: `1.3.6.1.131.12.4.*`.
 
-### Add unit tests
+### Write tests
 
-Add a unit test in `test_profiles.py` to verify that the metric is successfully collected by the integration when the profile is enabled. (These unit tests are mostly used to prevent regressions and will help with maintenance.)
+Add a unit test to `test_profiles.py` to verify the metric is successfully collected by the integration when the profile is enabled. Unit tests are used to prevent regressions and help with maintenance.
 
-For example:
-
-```python
+{{< code-block lang="python" filename="test_profiles.py" wrap="false">}}
 def test_hp_ilo4(aggregator):
     run_profile_check('hp_ilo4')
-
     common_tags = common.CHECK_TAGS + ['snmp_profile:hp-ilo4']
-
     aggregator.assert_metric('snmp.cpqHeSysUtilLifeTime', metric_type=aggregator.MONOTONIC_COUNT, tags=common_tags, count=1)
     aggregator.assert_all_metrics_covered()
-```
+{{< /code-block >}}
 
-We don't have simulation data yet, so the test should fail. Let's make sure it does:
+If you run this test without simulation data yet, it fails:
 
-```console
+{{< code-block lang="console" disable_copy="true" wrap="false">}}
 $ ddev test -k test_hp_ilo4 snmp:py38
 [...]
 ======================================= FAILURES ========================================
@@ -103,9 +97,7 @@ tests/test_profiles.py:1464: in test_hp_ilo4
     assert condition, new_msg
 E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime', got 0
 [...]
-```
-
-Good. Now, onto adding simulation data.
+{{< /code-block >}}
 
 ### Add simulation data
 
@@ -124,29 +116,25 @@ Add lines to the `.snmprec` file to specify the `sysobjectid` and the OID listed
 
 Run the test again, and make sure it passes this time:
 
-```console
+{{< code-block lang="console" disable_copy="true" wrap="false">}}
 $ ddev test -k test_hp_ilo4 snmp:py38
 [...]
 
-tests/test_profiles.py::test_hp_ilo4 PASSED                                                                                        [100%]
+tests/test_profiles.py::test_hp_ilo4 PASSED                       [100%]
 
-=================================================== 1 passed, 107 deselected in 9.87s ====================================================
-________________________________________________________________ summary _________________________________________________________________
+================== 1 passed, 107 deselected in 9.87s ===================
+__________________________________ summary _____________________________
   py38: commands succeeded
   congratulations :)
-```
+{{< /code-block >}}
 
-### Rinse and repeat
-
-We have now covered the basic workflow — add metrics, expand tests, add simulation data. You can now go ahead and add more metrics to the profile!
+That covers the basic workflow — add metrics, write tests, and use simulation data. You can add more metrics to the profile by repeating the process.
 
 ## Next steps
 
-Congratulations! You should now be able to write a basic SNMP profile.
+This tutorial explains basic concepts, but profiles offer many more options to collect metrics from SNMP devices.
 
-We kept this tutorial as simple as possible, but profiles offer many more options to collect metrics from SNMP devices.
-
-- To learn more about what can be done in profiles, read the [Profile format reference][6].
+- To learn more about profiles, see the [Profile format reference][6].
 - To learn more about `.snmprec` files, see the [Simulation data format reference][7].
 
 [1]: /network_performance_monitoring/devices/troubleshooting#terminology
@@ -154,5 +142,5 @@ We kept this tutorial as simple as possible, but profiles offer many more option
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware
 [5]: https://en.wikipedia.org/wiki/Field-replaceable_unit
-[6]: ./profile-format.md
-[7]: ./sim-format.md
+[6]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+[7]: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
