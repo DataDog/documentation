@@ -25,4 +25,5 @@ aliases:
     {{< nextlink href="agent/faq/auto_conf" >}}Auto-configuration for Autodiscovery.{{< /nextlink >}}
     {{< nextlink href="agent/faq/template_variables" >}}Template variables used for Autodiscovery{{< /nextlink >}}
     {{< nextlink href="agent/faq/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
+    {{< nextlink href="agent/faq/operator-tolerations" >}}Using tolerations with Datadog Operator{{< /nextlink >}}
 {{< /whatsnext >}}
