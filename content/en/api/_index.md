@@ -16,13 +16,15 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 Authenticate to the API with an [API key][1], and depending on the endpoint, and [Application key][2].
 
-By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][3] languages in each endpoint to see code examples from that library.
+By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][3] languages in each endpoint to see code examples from that library:
 
+{{< partial name="api/sdk-languages.html" >}}
+</br>
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][4]: `brew install coreutils`
 
-To quickly get started with the Datadog API, see [Using the API][7], or check out our [Datadog Postman collection][5].
+To quickly get started with the Datadog API, see [Using the API][5], or [![Run in Postman][6]](https://app.getpostman.com/run-collection/39109d43cad6e7fb423b)
 
-Trying to get started with the application instead? Check out our general [Getting Started docs][6].
+Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 
 ## Further Reading
 
@@ -32,6 +34,6 @@ Trying to get started with the application instead? Check out our general [Getti
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
 [3]: https://docs.datadoghq.com/developers/libraries/
 [4]: https://brew.sh
-[5]: /getting_started/api
-[6]: /getting_started/application/
-[7]: /api/v1/using-the-api/
+[5]: /api/v1/using-the-api/
+[6]: https://run.pstmn.io/button.svg
+[7]: /getting_started/application/
