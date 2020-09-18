@@ -8535,6 +8535,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for all organizations
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -8556,8 +8561,8 @@ components:
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for all organizations
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for all organizations
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -8662,6 +8667,11 @@ components:
             current date for the given org.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         name:
           description: The organization name.
           type: string
@@ -8684,8 +8694,8 @@ components:
           description: The organization public id.
           type: string
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for the given org.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -8807,6 +8817,11 @@ components:
             all organizations for which all usages were calculated.
           format: date-time
           type: string
+        mobile_rum_session_count_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current month(s) for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current month(s) for all organizations.
@@ -8828,8 +8843,8 @@ components:
           format: int64
           type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            month(s) for all organizations.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current month(s) for all organizations.
           format: int64
           type: integer
         start_date:
@@ -16607,6 +16622,12 @@ paths:
         required: false
         schema:
           format: date-time
+          type: string
+      - description: 'RUM type: `[browser, mobile]`. Defaults to `browser`.'
+        in: query
+        name: type
+        required: false
+        schema:
           type: string
       responses:
         '200':
