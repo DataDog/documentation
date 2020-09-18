@@ -38,7 +38,7 @@ Use tags to filter metrics to display in a [dashboard graph][1], or to create ag
 Advanced tag value filtering is also available with boolean filters. The following boolean syntax is supported:
 
 * `NOT`, `!`
-* AND, `,`
+* `AND`, `,`
 * `OR`
 * key IN (tag_value1, tag_value2,...)
 * key NOT IN (tag_value1, tag_value2,...)
