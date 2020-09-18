@@ -30,7 +30,8 @@ main:
     parent: getting_started
     weight: 3
   - name: Dashboards
-    identifier: getting_started/dashboards/
+    identifier: getting_started_dashboards
+    url: getting_started/dashboards/
     parent: getting_started
     weight: 4
   - name: Logs
