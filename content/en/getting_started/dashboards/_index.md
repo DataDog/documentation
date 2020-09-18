@@ -22,7 +22,7 @@ The key to getting started with dashboards is knowing what kind of questions you
 
 Creating a good dashboard is about bringing the answers to these questions to the surface. Also, it is important not to cram all of those thoughts into the same dashboard. Creating separate dashboards to pinpoint different issues can help you quickly find your answers.
 
-This guide gets you started on a path to creating dashboards. The basic dashboards will help your team talk about things that really matter and get to the bottom of problems quickly.
+This guide gets you started on a path to creating dashboards. These basic dashboards will help your team talk about things that really matter and get to the bottom of problems quickly.
 
 ## Prerequisites
 
@@ -55,10 +55,10 @@ A common way to start a dashboard is by encountering a similar dashboard already
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
-5. Copy in widgets you like from other dashboards by hovering over the widget and typing Command + C (Ctrl + C on Windows). Paste it into your dashboard by opening the dashboard and typing Command + V (Ctrl + V on Windows).
+5. Copy in widgets you like from other dashboards by hovering over the widget and typing `Command + C` (`Ctrl + C` on Windows). Paste it into your dashboard by opening the dashboard and typing `Command + V` (`Ctrl + V` on Windows).
 5. Use the **Export to Dashboard** option provided by many Datadog views for data they show. For example, the Logs Explorer and Log Analytics views have share options to export logs lists and metrics to dashboards.
 
-## Figuring out what a metric means
+## Learn more about metrics
 
 Through integrations, Datadog collects [metrics][3] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][4] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
@@ -74,7 +74,7 @@ You can make graphs easier to read by adjusting Y-axis ranges, colors, or legend
 
 For more details and examples of these techniques, sign up for the online learning course [Building Better Dashboards][13].
 
-## Try something not strictly timeseries metrics
+## Try out other widgets
 
 Timeseries graphs of metrics are useful, but dashboards can contain many types of widgets to communicate important information. Try:
 
@@ -102,7 +102,7 @@ There are two ways to create links from a dashboard to any target URL:
 
 ## What's next 
 
-### Share your dashboards outside the Datadog app
+### Share your dashboards outside of the Datadog app
 
 Click **Generate Public URL** in a dashboard's Settings (gear) menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account.
 
