@@ -16,7 +16,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-Alert graphs are timeseries graphs showing the current status of any monitor defined on your system:
+Alert graphs are timeseries graphs showing the current status of most monitors defined on your system:
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Alert Graph" >}}
 
