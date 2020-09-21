@@ -15,7 +15,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 ### Fargate
 
-Fargate is charged based on the concurrent number of tasks. For pricing, see the [Serverless][4] section on the pricing page.
+Fargate is charged based on the concurrent number of tasks. For pricing, see the [Infrastructure][4] section on the pricing page.
 
 ## Troubleshooting
 
@@ -26,5 +26,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: https://www.datadoghq.com/pricing/#section-infrastructure
+[4]: https://www.datadoghq.com/pricing/#section-infra
 [5]: /help/
