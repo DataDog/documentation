@@ -9,7 +9,7 @@ further_reading:
   - link: 'https://github.com/DataDog/dd-trace-py'
     tag: GitHub
     text: Code source
-  - link: 'http://pypi.datadoghq.com/trace/docs/'
+  - link: 'https://ddtrace.readthedocs.io/en/stable/'
     tag: Pypi
     text: Documentation relative à l'API
   - link: tracing/visualization/
@@ -103,9 +103,9 @@ tracer.configure(
 [4]: /fr/tracing/setup/docker/
 [5]: /fr/agent/kubernetes/apm/
 [6]: http://pypi.datadoghq.com/trace/docs
-[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
+[7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [8]: /fr/getting_started/tagging/unified_service_tagging
 [9]: /fr/tracing/guide/setting_primary_tags_to_scope/
-[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
+[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#priority-sampling
 [11]: /fr/tracing/connect_logs_and_traces/python/
 [12]: /fr/tracing/app_analytics/?tab=python#automatic-configuration

@@ -56,5 +56,5 @@ Pour consulter des informations sur une configuration et une utilisation plus av
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#opentracing
 [2]: https://github.com/opentracing/opentracing-python
