@@ -3053,6 +3053,30 @@ api_v2:
     url: /api/v2/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
+  - name: Services
+    url: /api/v2/services/
+    identifier: Services
+    generated: true
+  - name: Get a list of all services
+    parent: Services
+    url: '#get-a-list-of-all-services'
+    generated: true
+  - name: Create a new service
+    parent: Services
+    url: '#create-a-new-service'
+    generated: true
+  - name: Delete an existing service
+    parent: Services
+    url: '#delete-an-existing-service'
+    generated: true
+  - name: Get details of a service
+    parent: Services
+    url: '#get-details-of-a-service'
+    generated: true
+  - name: Update an existing service
+    parent: Services
+    url: '#update-an-existing-service'
+    generated: true
   - name: Slack Integration
     url: /api/v2/slack-integration/
     identifier: Slack Integration
@@ -3068,6 +3092,30 @@ api_v2:
   - name: Tags
     url: /api/v2/tags/
     identifier: Tags
+    generated: true
+  - name: Teams
+    url: /api/v2/teams/
+    identifier: Teams
+    generated: true
+  - name: Get a list of all teams
+    parent: Teams
+    url: '#get-a-list-of-all-teams'
+    generated: true
+  - name: Create a new team
+    parent: Teams
+    url: '#create-a-new-team'
+    generated: true
+  - name: Delete an existing team
+    parent: Teams
+    url: '#delete-an-existing-team'
+    generated: true
+  - name: Get details of a team
+    parent: Teams
+    url: '#get-details-of-a-team'
+    generated: true
+  - name: Update an existing team
+    parent: Teams
+    url: '#update-an-existing-team'
     generated: true
   - name: Timeboards
     url: /api/v2/timeboards/
