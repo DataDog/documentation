@@ -76,7 +76,7 @@ Datadog reserves the right to disable underperforming parsing rules, processors,
 
 JSON Logs preprocessing comes with a default configuration that work for standard log forwarders. Edit this configuration at any time to adapt to custom or specifc log forwarding approaches. To change the default values, go to the [Configuration page][5] and edit the `JSON Logs Preprocessing`:
 
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile"  style="width:80%;">}}
+{{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
 
 
 If your logs are formatted as JSON, use JSON Logs preprocessing to make sure the **Host** and the **Source** of your logs are properly mapped:
