@@ -1,6 +1,13 @@
 ---
 title: Build a NDM Profile
 kind: guide
+further_reading:
+- link: "https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/"
+  tag: "Documentation"
+  text: "Profile format reference"
+- link: "https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/"
+  tag: "Documentation"
+  text: "Simulation data format reference"
 ---
 
 Datadog Network Device Monitoring uses profiles for certain makes and models of network devices. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
@@ -101,13 +108,13 @@ E   AssertionError: Needed exactly 1 candidates for 'snmp.cpqHeSysUtilLifeTime',
 
 ### Add simulation data
 
-Add a `.snmprec` file named after the `community_string`, which is the value we gave to `run_profile_check()`:
+Add a `.snmprec` file named after the `community_string`. This is the same value given to `run_profile_check()` in the example above:
 
 ```
 $ touch snmp/tests/compose/data/hp_ilo4.snmprec
 ```
 
-Add lines to the `.snmprec` file to specify the `sysobjectid` and the OID listed in the profile:
+Inside the `.snmprec` file, add lines for the `sysobjectid` and OID listed in the profile:
 
 ```console
 1.3.6.1.2.1.1.2.0|6|1.3.6.1.4.1.232.9.4.10
@@ -130,17 +137,13 @@ __________________________________ summary _____________________________
 
 That covers the basic workflow — add metrics, write tests, and use simulation data. You can add more metrics to the profile by repeating the process.
 
-## Next steps
+## Further Reading
 
-This tutorial explains basic concepts, but profiles offer many more options to collect metrics from SNMP devices.
+{{< partial name="whats-next/whats-next.html" >}}
 
-- To learn more about profiles, see the [Profile format reference][6].
-- To learn more about `.snmprec` files, see the [Simulation data format reference][7].
 
 [1]: /network_performance_monitoring/devices/troubleshooting#terminology
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware
 [5]: https://en.wikipedia.org/wiki/Field-replaceable_unit
-[6]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
-[7]: https://datadoghq.dev/integrations-core/tutorials/snmp/sim-format/
