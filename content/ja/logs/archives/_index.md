@@ -31,61 +31,28 @@ Datadog アカウントを構成して、クラウドストレージシステム
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+
+### S3 バケットを作成する
+
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。バケットを一般が閲覧できないように設定してください。
 
-次に、ロールの委任を持つ S3 バケットにログアーカイブを書き込む権限をDatadogに付与します。
+#### ストレージクラス
 
-1. S3 バケットを持つ AWS アカウントの [AWS インテグレーション][3]をセットアップします。これには、AWS S3 と統合するために Datadog が使用する[ロールの作成][4]も含まれます。
+[S3 バケットにライフサイクルコンフィギュレーションを設定][3]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-2. 次の 2 つのアクセス許可ステートメントを [Datadog ロールの IAM ポリシー][4]に追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][5]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
+[リハイドレート][4]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
 
-    ```json
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "DatadogUploadAndRehydrateLogArchives",
-          "Effect": "Allow",
-          "Action": ["s3:PutObject", "s3:GetObject"],
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-          ]
-        },
-        {
-          "Sid": "DatadogRehydrateLogArchivesListBucket",
-          "Effect": "Allow",
-          "Action": "s3:ListBucket",
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-          ]
-        }
-      ]
-    }
-    ```
+#### サーバー側の暗号化 (SSE)
 
-3. Datadog の[アーカイブページ][6]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+##### SSE-S3
 
-4. S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
-
-    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
-
-### ストレージクラス
-
-[S3 バケットにライフサイクルコンフィギュレーションを設定][7]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。[リハイドレート][5]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
-
-### サーバー側の暗号化 (SSE)
-
-#### SSE-S3
-
-サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][8] を利用することです。有効化するには S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
+サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][5] を利用することです。有効化するには S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="AES-256 オプションを選択し、保存します。"  style="width:75%;">}}
 
-#### SSE-KMS
+##### SSE-KMS
 
-また、Datadog は CMK を利用した [AWS KMS][9] からのサーバーサイド暗号化もサポートしています。有効化するには次の手順に従ってください。
+また、Datadog は CMK を利用した [AWS KMS][6] からのサーバーサイド暗号化もサポートしています。有効化するには次の手順に従ってください。
 
 1. CMK の作成
 2. CMK に付随する CMK ポリシーに以下のコンテンツを添加して、AWS アカウント番号と Datadog IAM ロール名を適切なものに置き換えます。
@@ -143,15 +110,62 @@ Datadog アカウントを構成して、クラウドストレージシステム
 
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
+### ログアーカイブを構成する
+
+#### AWS インテグレーションを設定する
+
+まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][7]をセットアップします。
+
+* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
+* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+
+#### アーカイブを作成する
+
+Datadog の[アーカイブページ][8]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+
+S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
+
+ {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
+
+### アクセス許可を設定する
+
+次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][4]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DatadogUploadAndRehydrateLogArchives",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:GetObject"],
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+          ]
+        },
+        {
+          "Sid": "DatadogRehydrateLogArchivesListBucket",
+          "Effect": "Allow",
+          "Action": "s3:ListBucket",
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+          ]
+        }
+      ]
+    }
+    ```
+
+
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[4]: /ja/integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /ja/logs/archives/rehydrating/
-[6]: https://app.datadoghq.com/logs/pipelines/archives
-[7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-[8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-[9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[4]: /ja/logs/archives/rehydrating/
+[5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[7]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
+[8]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
