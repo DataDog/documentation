@@ -40,9 +40,10 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 View errors and exceptions in Datadog with a DogStatsD event:
 
-{{< multi-code-snippet-wrapper langs="python,ruby,go,java,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,php" >}}
 
-{{< code-block lang="python" filename="event.py" >}}
+{{< programming-lang lang="python" >}}
+
 ```python
 from datadog import initialize, statsd
 
@@ -55,10 +56,9 @@ initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 ```
+{{< /programming-lang >}}
 
-{{< /code-block >}}
-
-{{< code-block lang="ruby" filename="event.rb" >}}
+{{< programming-lang lang="ruby" >}}
 ```ruby
 require 'datadog/statsd'
 
@@ -66,10 +66,10 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 ```
-{{< /code-block >}}
+{{< /programming-lang >}}
 
 
-{{< code-block lang="go" filename="event.go" >}}
+{{< programming-lang lang="go" >}}
 ```go
 package main
 
@@ -93,9 +93,9 @@ func main() {
 	}
 }
 ```
-{{< /code-block >}}
+{{< /programming-lang >}}
 
-{{< code-block lang="java" filename="event.java" >}}
+{{< programming-lang lang="java" >}}
 ```java
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -121,9 +121,13 @@ public class DogStatsdClient {
     }
 }
 ```
-{{< /code-block >}}
+{{< /programming-lang >}}
 
-{{< code-block lang="php" filename="event.php"  >}}
+{{< programming-lang lang="php" >}}
+
+With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
+To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
+
 ```php
 <?php
 
@@ -144,9 +148,6 @@ $statsd->event('An error occurred.',
   );
 ```
 
-{{< /code-block >}}
-
-{{< code-block lang="php" filename="event_through_api.php" >}}
 ```php
 <?php
 
@@ -167,12 +168,11 @@ $statsd->event('An error occurred.',
   );
 ```
 
-With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
-To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
-
 [1]: /developers/dogstatsd/
-{{< /code-block >}}
-{{< /multi-code-snippet-wrapper >}}
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 **Note**:
 
