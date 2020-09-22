@@ -58,7 +58,7 @@ Additionally, fields can be added or removed from this overview table and your s
 
 Clicking on any version row in the Version Summary table will open a detailed version comparison page, allowing you to compare two specific version of the same service.  By default, the comparison will compare the version clicked to the immediately previous version, but this can be changed to compare any two versions within the past 30 days.
 
-There are three main components of the version
+There are three main components of the version comparison page, detailed below:
 
 ### Comparison Graphs
 
@@ -76,7 +76,7 @@ This section will list error types that appear in either or both versions of the
 
 This section shows all the endpoints for the service, along with a comparison between the performance of requests to these endpoints between the two versions.  The table can be sorted up or down according to latency, request volume or error rate to surface the most meaning potential performance improvement or degredation, and also filtered to show common or new endpoints.
 
-{{< img src="tracing/version_tracking/ErrorComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
+{{< img src="tracing/version_tracking/EndpointComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
 
 ## Version Deployment Strategies
 
