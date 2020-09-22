@@ -33,9 +33,10 @@ All of these can be exported to dashboards and monitors.
 
 ## Version Summary Table
 
-Services configured with version tags will have a `Version` section on the Service page, immediately below the main service health graphs discussed above.  This table will show all versions of the service that were active during the selected time interval, with currently active services at the top.
+Services configured with version tags will have a `version` section on the Service page, immediately below the main service health graphs.  This table will show all versions of the service that were active during the selected time interval, with currently active services at the top.
 
 By default you will see:
+
 - The version name(s) deployed for this service over the timeframe.
 - The times traces corresponding to this version was first and last seen.
 - An indication of how many types of errors appear in each version that did not appear in the immediately previous version.  Note that this is a not a guarantee the version introduced these errors, but an indication that this error was not seen for the previous version.  Based on how you are performing deployments, it can be a great way to begin investigating errors.
@@ -58,7 +59,11 @@ Additionally, fields can be added or removed from this overview table and your s
 
 Clicking on any version row in the Version Summary table will open a detailed version comparison page, allowing you to compare two specific version of the same service.  By default, the comparison will compare the version clicked to the immediately previous version, but this can be changed to compare any two versions within the past 30 days.
 
-There are three main components of the version comparison page, detailed below:
+There are three main components of version comparison:
+
+- [Comparison Graphs](#comparison-graphs) for a visualization of requests and errors to services, useful for watching various types of [deployments](#version-deployment-strategies).
+- [Error Comparison](#error-comparison) to see errors that may have been introduced or solved by a deployment.
+- [Endpoint Comparison](#endpoint-comparison) to see how endpoint latency and error rates are performing in different versions of the service.
 
 ### Comparison Graphs
 
