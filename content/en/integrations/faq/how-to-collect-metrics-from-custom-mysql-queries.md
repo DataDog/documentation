@@ -1,15 +1,17 @@
 ---
-title: MySQL Metrics from Custom Queries
+title: MySQL Custom Queries
 kind: faq
+further_reading:
+- link: "/integrations/mysql"
+  tag: "Documentation"
+  text: "Datadog MySQL integration"
 ---
 
-The Datadog MySQL integration can collect metrics from custom queries by following the configuration details in the [MySQL conf.yaml][1] file.
-
-<div class="alert alert-warning">
-Metrics queried with <code>custom_proc</code> must have the type <code>FLOAT</code>.
-</div>
+The Datadog MySQL integration can collect metrics from custom queries.
 
 ## Configuration
+
+Follow the configuration details in the [MySQL conf.yaml][1] file. Additional items of consideration are below.
 
 ### Qualify your database
 
@@ -23,11 +25,11 @@ If you omit the database name, the Agent fails to run the query with the error: 
 
 ### Name your metric
 
-The names applied to your query metrics are taken exactly as provided. It's recommended, but not required, to begin your custom query metrics with the `mysql.` namespace. Doing so, includes the metrics in your MySQL summary dashboards on the infrastructure list and hostmap.
+The names applied to your query metrics are taken as provided. It's recommended, but not required, to begin your custom query metrics with the `mysql.` namespace. Doing so, includes the metrics in your MySQL summary dashboards on the infrastructure list and hostmap.
 
 ### Collection frequency
 
-By default your metrics are collected by the MySQL check every 15-20 seconds. To query these metrics at a different frequency, reduce the frequency of the entire MySQL check (this affect the frequency of your general `mysql.*` metrics), or run a custom scheduled CRON script to submit metrics with the [API][2] or [DogStatsD][3].
+By default your metrics are collected by the MySQL check every 15-20 seconds. To query these metrics at a different frequency, reduce the frequency of the entire MySQL check (this affects the frequency of your general `mysql.*` metrics), or run a custom scheduled CRON script to submit metrics with the [API][2] or [DogStatsD][3].
 
 ### Number of custom queries
 
@@ -45,7 +47,7 @@ col_1 | col_2 | col_3
 3     | c     | c
 ```
 
-If you were to add a custom query to your mysql.yaml with the following configuration setup:
+Adding the following custom query to your MySQL `conf.yaml` collects the metric `mysql.custom_query.test.b` with a value of `2`.
 
 ```yaml
     custom_queries:
@@ -54,12 +56,16 @@ If you were to add a custom query to your mysql.yaml with the following configur
         - name: mysql.custom_query.test.b
           type: gauge
         tags:
-        - test:mysql
+        - tester:mysql
 ```
 
-Then your Agent's MySQL check would run that query to collect a metric called `mysql.custom_query.test.b` with a value of `2`, as shown below:
+Result in Datadog:
 
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query"  >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [2]: /api/
