@@ -4,6 +4,7 @@ assets:
     IBM Db2 Overview: assets/dashboards/overview.json
   logs:
     source: ibm_db2
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

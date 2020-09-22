@@ -6,6 +6,7 @@ assets:
     Confluent Platform Overview: assets/dashboards/overview.json
   logs:
     source: confluent_platform
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
