@@ -245,13 +245,13 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 
 #### Using the Package
 
-Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][8] for the Serverless Framework and [--use-container][9] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][3].
+Install `datadog-lambda` and its dependencies locally to your function project folder. **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore they must be installed and compiled in a Linux environment. For example, you can use [dockerizePip][3] for the Serverless Framework and [--use-container][4] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][5].
 
 ```
 pip install datadog-lambda -t ./
 ```
 
-See the [latest release][4]. 
+See the [latest release][6]. 
 
 ### Configure the Function
 
@@ -265,26 +265,28 @@ See the [latest release][4].
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
 
-1. [Install the Datadog Forwarder][5] if you haven't.
-2. [Ensure the option DdFetchLambdaTags is enabled][6].
-3. [Subscribe the Datadog Forwarder to your function's log groups][7].
+1. [Install the Datadog Forwarder][7] if you haven't.
+2. [Ensure the option DdFetchLambdaTags is enabled][8].
+3. [Subscribe the Datadog Forwarder to your function's log groups][9].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[4]: https://pypi.org/project/datadog-lambda/
-[5]: https://docs.datadoghq.com/serverless/forwarder/
-[6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[8]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[9]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[6]: https://pypi.org/project/datadog-lambda/
+[7]: https://docs.datadoghq.com/serverless/forwarder/
+[8]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
+[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Explore Datadog Serverless Monitoring
 
 After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][3].
+
+### Monitor Custom Serverless Metrics
 
 If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
@@ -310,6 +312,16 @@ def get_message():
     return "Hello from serverless!"
 ```
 
+Learn more about submitting custom metrics [here][4].
+
+### Enable the AWS X-Ray Integration
+
+Datadog’s integration with AWS X-Ray allows you to visualize serverless trace data, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, choose between setting up Datadog APM or the AWS X-Ray integration for your tracing needs. Learn more about configuring distributed tracing [here][5].
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
+
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder
 [3]: https://app.datadoghq.com/functions
+[4]: /serverless/custom_metrics
+[5]: /serverless/distributed_tracing
