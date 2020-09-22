@@ -31,7 +31,7 @@ The following metric submission types are accepted:
 - [RATE](?tab=rate#metric-types)
 - [GAUGE](?tab=gauge#metric-types)
 - [SET][4]
-- [HISTOGRAM](?tab=hisogram#metric-types)
+- [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
 These different metric submission types are mapped to four in-app metric types found within the Datadog web application:
