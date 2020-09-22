@@ -16,6 +16,9 @@ col1:
   - name: apm
     link: 'https://www.datadoghq.com/product/apm/'
     title: APM
+  - name: プロファイラー
+    link: 'https://www.datadoghq.com/product/code-profiling/'
+    title: 継続的なプロファイラー
   - name: security-monitoring
     link: 'https://www.datadoghq.com/product/security-monitoring/'
     title: セキュリティモニタリング
@@ -34,9 +37,6 @@ col1:
   - name: alerts
     link: 'https://www.datadoghq.com/product/platform/alerts/'
     title: アラート
-  - name: synthetics
-    link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
-    title: Synthetics
 col2:
   - name: pricing
     link: 'https://www.datadoghq.com/ja/pricing/'

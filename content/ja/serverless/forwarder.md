@@ -15,6 +15,8 @@ Datadog Forwarder は、ログ、カスタムメトリクス、トレースを�
 - CloudWatch ログを使用して AWS Lambda 関数からトレースを転送する
 - AWS REPORT ログから解析された拡張 Lambda メトリクス (`aws.lambda.enhanced.*`) を生成して送信する: duration、billed_duration、max_memory_used、timeouts、out_of_memory、and estimated_cost
 
+Datadog Forwarder で AWS サービスログを送信する方法について、詳細は[こちら](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/)をご覧ください。
+
 ## インストール
 
 Datadog は、[CloudFormation](#cloudformation) を使用して Forwarder を自動的にインストールすることをお勧めします。[Terraform](#terraform) を使用するか、[手動](#manually)でセットアッププロセスを完了することもできます。
@@ -104,19 +106,20 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
+## 他の Lambda 関数へのログ送信
+
+Cloudformation パラメーター `AdditionalTargetLambdaARNs` を使用して、ログを他の Lambda 関数に送信することができます。この追加の Lambda 関数は、Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出されます。
+
 ## AWS PrivateLink サポート
 
-AWS PrivateLink を使用して、VPC で Forwarder を実行できます。
+AWS PrivateLink 使用して、VPC で Forwarder を実行し Datadog に接続します。AWS PrivateLink は、Datadog US サイト (datadoghq.com。datadoghq.eu は不可) を使用している Datadog 組織にのみ構成が可能です。
 
-1. [セットアップ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **API** エンドポイントを VPC に追加します。
-2. [同じ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **Logs** エンドポイントを VPC に追加します。
-3. デフォルトで、Forwarder の API キーは Secrets Manager に保存されます。Secrets Manager のエンドポイントを VPC に追加する必要があります。手順に従い、[AWS サービスを VPC に追加](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint)してください。
-4. CloudFormation テンプレートで Forwarder をインストールする際は、'DdUsePrivateLink' を有効にして 1 つ以上の Subnet ID と Security Group を設定してください。
+1. [セットアップ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **API** サービス用のエンドポイントを VPC に追加します。
+2. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **ログ** サービス用に 2 つ目のエンドポイントを VPC に追加します。
+3. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **トレース** サービス用に 3 つ目のエンドポイントを VPC に追加します。
+4. デフォルトで、Forwarder の API キーは Secrets Manager に保存されます。Secrets Manager のエンドポイントを VPC に追加する必要があります。AWS サービスを VPC に追加するには、[こちら](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint)の手順に従ってください。
+5. CloudFormation テンプレートで Forwarder をインストールする際は、'DdUsePrivateLink' を有効にして 1 つ以上の Subnet ID と Security Group を設定してください。
 
-### AWS PrivateLink の制限
-
-* AWS PrivateLink は、Datadog US リージョンの Datadog 組織でのみ構成できます。
-* 現在、トレース転送は AWS PrivateLink を介してサポートされていません。
 
 ## トラブルシューティング
 
@@ -157,7 +160,7 @@ Forwarder および、Forwarder CloudFormation スタックによって作成さ
 2. 現在のテンプレートを使用してスタックを更新します。
 3. パラメーター値を調整します。
 
-**注:** Datadog は、Lambda 関数を直接編集するのではなく、CloudFormation を介して Forwarder 設定を調整することをお勧めします。スタックを起動するときに、[template.yaml](template.yaml) と CloudFormation スタック作成ユーザーインターフェイスで設定の説明を確認してください。追加の設定をテンプレートで調整できるように、お気軽にプルリクエストを送信してください。
+**注:** Datadog は、Lambda 関数を直接編集するのではなく、CloudFormation を介して Forwarder 設定を調整することをお勧めします。スタックを起動するときに、[template.yaml](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/template.yaml) と CloudFormation スタック作成ユーザーインターフェイスで設定の説明を確認してください。追加の設定をテンプレートで調整できるように、お気軽にプルリクエストを送信してください。
 
 ## アクセス許可
 
@@ -343,3 +346,4 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 - `VPCSecurityGroupIds` - VPC セキュリティグループ ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に
   使用されます。
 - `VPCSubnetIds` - VPC サブネット ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に使用されます。
+- `AdditionalTargetLambdaARNs` - Datadog Forwarder が受信するのと同一の `event` と非同期で呼び出される Lambda ARN のコンマ区切りリスト。

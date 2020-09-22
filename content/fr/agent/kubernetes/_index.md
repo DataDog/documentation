@@ -32,7 +32,7 @@ further_reading:
     tag: Documentation
     text: Attribuer des tags à toutes les données émises par un conteneur
 ---
-Exécutez l'Agent Datadog directement dans votre cluster Kubernetes pour commencer à recueillir des métriques, des traces et des logs sur votre cluster et vos applications. Vous pouvez déployer l'Agent à l'aide d'un [chart Helm](?tab=helm) ou d'un [DaemonSet](?tab=daemonset).
+Exécutez l'Agent Datadog dans votre cluster Kubernetes en tant que DaemonSet pour commencer à recueillir des métriques, des traces et des logs sur votre cluster et vos applications. Vous pouvez déployer l'Agent à l'aide d'un [chart Helm](?tab=helm) ou directement avec une définition YAML d'objet [DaemonSet](?tab=daemonset).
 
 **Remarque** : les versions 6.0 et ultérieures de l'Agent prennent seulement en charge les versions de Kubernetes ultérieures à 1.7.6. Pour les versions antérieures de Kubernetes, consultez la [section Versions antérieures de Kubernetes][1].
 
@@ -45,16 +45,18 @@ Pour installer le chart avec un nom de version `<RELEASE_NAME>` personnalisé (p
 
 1. [Installez Helm][1].
 2. Téléchargez le [fichier de configuration `values.yaml` Datadog][2].
-3. S'il s'agit d'une nouvelle installation, ajoutez le référentiel stable Helm :
+3. S'il s'agit d'une nouvelle installation, ajoutez le référentiel du Helm Datadog et le référentiel de Helm stable (pour le chart Kube State Metrics) :
     ```bash
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/ && helm repo update
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo update
     ```
 4. Récupérez votre clé d'API Datadog à partir des [instructions d'installation de l'Agent][3] et exécutez ce qui suit :
 
 - **Helm v3 et ultérieur**
 
     ```bash
-    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog --set targetSystem=<TARGET_SYSTEM>
+    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog --set targetSystem=<TARGET_SYSTEM>
     ```
 
     Remplacez `<TARGET_SYSTEM>` par le nom de votre système d'exploitation : `linux` ou `windows`.
@@ -62,7 +64,7 @@ Pour installer le chart avec un nom de version `<RELEASE_NAME>` personnalisé (p
 - **Helm v1 ou v2**
 
     ```bash
-    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog
     ```
 
 Ce chart ajoute l'Agent Datadog à l'ensemble des nœuds dans votre cluster via un DaemonSet. Il peut également déployer le [chart kube-state-metrics][4] et l'utiliser comme source supplémentaire de métriques concernant le cluster. Quelques minutes après l'installation, Datadog commence à transmettre les hosts et les métriques.
@@ -79,13 +81,13 @@ Si vous déployez actuellement un chart antérieur à `v2.0.0`, suivez le [guide
 
 
 [1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [5]: /fr/agent/kubernetes/apm?tab=helm
 [6]: /fr/agent/kubernetes/log?tab=helm
-[7]: https://github.com/helm/charts/tree/master/stable/datadog
-[8]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
+[7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
+[8]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -108,7 +110,7 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
 2. **Créez un secret qui contient votre clé d'API Datadog**. Remplacez `<DATADOG_API_KEY>` ci-dessous par [la clé d'API de votre organisation][2]. Ce secret est utilisé dans le manifeste pour déployer l'Agent Datadog.
 
     ```shell
-    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
+    kubectl create secret generic datadog-agent --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
     ```
 
      **Remarque** : cette opération crée un secret dans l'espace de nommage `default`. SI vous utilisez un espace de nommage personnalisé, modifiez le paramètre `namespace` de la commande avant de l'exécuter.
@@ -153,7 +155,6 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
     ```
 
-
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
@@ -180,6 +181,17 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
 {{% /tab %}}
 {{< /tabs >}}
 
+### Sans privilèges
+
+(Facultatif) Pour exécuter une installation sans privilèges, ajoutez le bloc suivant à votre [modèle de pod][2] :
+
+```text
+  spec:
+    securityContext:
+      runAsUser: <ID_UTILISATEUR>
+      fsGroup: <ID_GROUPE_DOCKER>
+```
+
 ## Collecte d'événements
 
 {{< tabs >}}
@@ -199,17 +211,18 @@ Si vous souhaitez recueillir des événements à partir de votre cluster Kuberne
 
 ## Intégrations
 
-Dès lors que votre Agent s'exécute dans votre cluster, vous pouvez utiliser la [fonctionnalité Autodiscovery de Datadog][2] pour recueillir automatiquement des métriques et des logs à partir de vos pods.
+Dès lors que votre Agent s'exécute dans votre cluster, vous pouvez utiliser la [fonctionnalité Autodiscovery de Datadog][3] pour recueillir automatiquement des métriques et des logs à partir de vos pods.
 
 ## Variables d'environnement
 
-Vous trouverez ci-dessous la liste des variables d'environnement disponibles pour l'Agent Datadog. Si vous souhaitez configurer ces variables avec Helm, consultez la liste complète des options de configuration pour le fichier `datadog-value.yaml` dans le [référentiel helm/charts GitHub][3].
+Vous trouverez ci-dessous la liste des variables d'environnement disponibles pour l'Agent Datadog. Si vous souhaitez configurer ces variables avec Helm, consultez la liste complète des options de configuration pour le fichier `datadog-value.yaml` dans le [référentiel helm/charts GitHub][4].
 
 ### Options globales
 
 | Variable d'environnement       | Description                                                                                                                                                                                                                                                                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `DD_API_KEY`       | Votre clé d'API Datadog (**obligatoire**).                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`          | Définit le tag `env` global pour toutes les données émises.                                                                                                                                                                                                                                                                 |
 | `DD_HOSTNAME`      | Le hostname à utiliser pour les métriques (si la détection automatique échoue).                                                                                                                                                                                                                                                                                             |
 | `DD_TAGS`          | Tags de host séparés par des espaces. Exemple : `tag-simple-0 clé-tag-1:valeur-tag-1`.                                                                                                                                                                                                                                                                 |
 | `DD_SITE`          | Le site auquel vous transmettez vos métriques, traces et logs. Vous pouvez choisir entre `datadoghq.com` pour le site américain de Datadog et `datadoghq.eu` pour le site européen.                                                                                                                                                                                      |
@@ -226,8 +239,9 @@ Vous trouverez ci-dessous la liste des variables d'environnement disponibles pou
 | `DD_PROXY_HTTP`     | URL HTTP à utiliser comme proxy pour les requêtes `http`.                |
 | `DD_PROXY_HTTPS`    | URL HTTPS à utiliser comme proxy pour les requêtes `https`.              |
 | `DD_PROXY_NO_PROXY` | Une liste d'URL, séparées par des espaces, pour lesquelles aucun proxy ne doit être utilisé. |
+| `DD_SKIP_SSL_VALIDATION` | Option de test permettant de savoir si l'Agent a des difficultés à se connecter à Datadog. |
 
-Pour en savoir plus sur les paramètres de proxy, consultez la [documentation relative au proxy de l'Agent v6][4].
+Pour en savoir plus sur les paramètres de proxy, consultez la [documentation relative au proxy de l'Agent v6][5].
 
 ### Agents de collecte facultatifs
 
@@ -235,14 +249,16 @@ Par défaut, les Agents de collecte facultatifs sont désactivés pour des raiso
 
 | Variable d'environnement               | Description                                                                                                                                                                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_APM_ENABLED`           | Active la [collecte de traces][5] via l'Agent de trace.                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`          | Active la [collecte de logs][6] via l'Agent de log.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED` | Active la [collecte de live processes][7] via l'Agent de processus. Par défaut, la [vue Live Container][8] est déjà activée si le socket Docker est disponible. Si définie sur `false`, la [collecte de live processes][7] et la [vue Live Container][8] sont désactivées. |
+| `DD_APM_ENABLED`           | Active la [collecte de traces][6] via l'Agent de trace.                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`          | Active la [collecte de logs][7] via l'Agent de log.                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED` | Active la [collecte de live processes][8] via l'Agent de processus. Par défaut, la [vue Live Container][9] est déjà activée si le socket Docker est disponible. Si définie sur `false`, la [collecte de live processes][8] et la [vue Live Container][9] sont désactivées. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Active la collecte d'événements via l'Agent. Si vous exécutez plusieurs Agents dans votre cluster, définissez également `DD_LEADER_ELECTION` sur `true`. |
+
+Pour activer la vue Live Container, assurez-vous d'exécuter l'Agent de processus en ayant défini DD_PROCESS_AGENT_ENABLED sur `true`.
 
 ### DogStatsD (métriques custom)
 
-Envoyez des métriques custom avec le [protocole StatsD][9] :
+Envoyez des métriques custom avec le [protocole StatsD][10] :
 
 | Variable d'environnement                     | Description                                                                                                                                                |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -253,7 +269,7 @@ Envoyez des métriques custom avec le [protocole StatsD][9] :
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Active la détection de conteneurs et l'ajout de tags pour les métriques de socket Unix.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Les tags supplémentaires à ajouter à l'ensemble des métriques, événements et checks de service reçus par ce serveur DogStatsD. Par exemple : `["env:golden", "group:retrievers"]`. |
 
-En savoir plus sur l'utilisation de [DogStatsD sur des sockets de domaine Unix][10].
+En savoir plus sur l'utilisation de [DogStatsD sur des sockets de domaine Unix][11].
 
 ### Tagging
 
@@ -261,25 +277,31 @@ Datadog recueille automatiquement les tags courants à partir de Kubernetes. Pou
 
 | Variable d'environnement                            | Description             |
 | --------------------------------------- | ----------------------- |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrait les étiquettes de pod.      |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extrait les étiquettes de pod      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extrait les annotations de pod. |
 
-Consultez la documentation relative à [l'extraction de tags Kubernetes][11] pour en savoir plus.
+Consultez la documentation relative à [l'extraction de tags Kubernetes][12] pour en savoir plus.
 
 ### Utiliser des secrets
 
-Les identifiants des intégrations peuvent être conservés dans des secrets Docker ou Kubernetes et utilisés dans les modèles Autodiscovery. Pour en savoir plus, consultez la [documentation sur la gestion des secrets][12].
+Les identifiants des intégrations peuvent être conservés dans des secrets Docker ou Kubernetes et utilisés dans les modèles Autodiscovery. Pour en savoir plus, consultez la [documentation sur la gestion des secrets][13].
 
 ### Ignorer des conteneurs
 
-Excluez des conteneurs de la collecte de logs, de la collecte de métriques et d'Autodiscovery. Par défaut, Datadog exclut les conteneurs `pause` de Kubernetes et d'OpenShift.
+Excluez les conteneurs de la collecte de logs, de la collecte de métriques et d'Autodiscovery. Par défaut, Datadog exclut les conteneurs `pause` de Kubernetes et d'OpenShift. Ces listes d'inclusion et d'exclusion s'appliquent uniquement à Autodiscovery. Elles n'ont aucun impact sur les traces ni sur DogStatsD.
 
 | Variable d'environnement    | Description                                                                                                                                                                                                        |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_CONTAINER_INCLUDE` | Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`                                                              |
-| `DD_CONTAINER_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Utilisez `.*` pour tous les exclure. Exemple : `"image:nom_image_3 image:nom_image_4"`. (**Remarque** : cette variable est seulement traitée pour Autodiscovery.), `image:.*` |
+| `DD_CONTAINER_INCLUDE` | Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`.  |
+| `DD_CONTAINER_EXCLUDE` | Liste des conteneurs à exclure (séparés par des espaces). Utilisez `.*` pour tous les exclure. Exemple : `"image:nom_image_3 image:nom_image_4"` (cette variable est seulement traitée pour Autodiscovery), `image:.*`. |
+| `DD_CONTAINER_INCLUDE_METRICS` | Liste des conteneurs dont vous souhaitez inclure les métriques.  |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Liste des conteneurs dont vous souhaitez exclure les métriques. |
+| `DD_CONTAINER_INCLUDE_LOGS` | Liste des conteneurs dont vous souhaitez inclure les logs.  |
+| `DD_CONTAINER_EXCLUDE_LOGS` | Liste des conteneurs dont vous souhaitez exclure les logs. |
+| `DD_AC_INCLUDE` | **Obsolète**. Liste des conteneurs à inclure (séparés par des espaces). Utilisez `.*` pour tous les inclure. Exemple : `"image:nom_image_1 image:nom_image_2"`, `image:.*`.  |
+| `DD_AC_EXCLUDE` | **Obsolète**. Liste des conteneurs à exclure (séparés par des espaces). Utilisez `.*` pour tous les exclure. Exemple : `"image:nom_image_3 image:nom_image_4"` (cette variable est seulement traitée pour Autodiscovery), `image:.*`. |
 
-Des exemples supplémentaires sont disponibles sur la page [Gestion de la découverte de conteneurs][13].
+Des exemples supplémentaires sont disponibles sur la page [Gestion de la découverte de conteneurs][14].
 
 **Remarque** : ces paramètres n'ont aucun effet sur les métriques `docker.containers.running`, `.stopped`, `.running.total` et `.stopped.total`, qui prennent en compte l'ensemble des conteneurs. Cela n'a aucune incidence sur le nombre de conteneurs facturés.
 
@@ -288,31 +310,30 @@ Des exemples supplémentaires sont disponibles sur la page [Gestion de la décou
 | Variable d'environnement                        | Description                                                                                                      |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Remplace la détection automatique des sources de conteneurs par une source unique, comme `"docker"`, `"ecs_fargate"` ou `"kubelet"`. |
-| `DD_HEALTH_PORT`                    | Définir cette variable sur `5555` pour exposer le check de santé de l'Agent sur le port `5555`.                                              |
-
-**Remarque** : si vous utilisez le runtime containerd, définissez `DD_PROCESS_AGENT_CONTAINER_SOURCE="kubelet"` pour faire apparaître vos conteneurs sur la page des conteneurs.
+| `DD_HEALTH_PORT`                    | Définissez cette variable sur `5555` pour exposer le check de santé de l'Agent sur le port `5555`.                                              |
 
 Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'aide des variables d'environnement `DD_EXTRA_LISTENERS` et `DD_EXTRA_CONFIG_PROVIDERS`. Elles viennent s'ajouter aux variables définies dans les sections `listeners` et `config_providers` du fichier de configuration `datadog.yaml`.
 
 ## Commandes
 
-Consultez les [guides sur les commandes de l'Agent][14] pour découvrir toutes les commandes de l'Agent Docker.
+Consultez les [guides sur les commandes de l'Agent][15] pour découvrir toutes les commandes de l'Agent Docker.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/faq/kubernetes-legacy/
-[2]: /fr/agent/kubernetes/integrations/
-[3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
-[4]: /fr/agent/proxy/#agent-v6
-[5]: /fr/agent/kubernetes/apm/
-[6]: /fr/agent/kubernetes/log/
-[7]: /fr/infrastructure/process/
-[8]: /fr/infrastructure/livecontainers/
-[9]: /fr/developers/dogstatsd/
-[10]: /fr/developers/dogstatsd/unix_socket/
-[11]: /fr/agent/kubernetes/tag/
-[12]: /fr/security/agent/#secrets-management
-[13]: /fr/agent/guide/autodiscovery-management/
-[14]: /fr/agent/guide/agent-commands/
+[2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
+[3]: /fr/agent/kubernetes/integrations/
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
+[5]: /fr/agent/proxy/#agent-v6
+[6]: /fr/agent/kubernetes/apm/
+[7]: /fr/agent/kubernetes/log/
+[8]: /fr/infrastructure/process/
+[9]: /fr/infrastructure/livecontainers/
+[10]: /fr/developers/dogstatsd/
+[11]: /fr/developers/dogstatsd/unix_socket/
+[12]: /fr/agent/kubernetes/tag/
+[13]: /fr/security/agent/#secrets-management
+[14]: /fr/agent/guide/autodiscovery-management/
+[15]: /fr/agent/guide/agent-commands/

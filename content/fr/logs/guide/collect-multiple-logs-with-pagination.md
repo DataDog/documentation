@@ -20,7 +20,11 @@ further_reading:
 ---
 ## Présentation
 
-Pour récupérer une liste de logs contenant plus de 1 000 logs (soit la limite maximale) avec l'[API Log List][1], vous devez utiliser la fonctionnalité Pagination.
+Pour récupérer une liste de logs contenant plus de 1 000 logs (soit la limite maximale) avec l'[API Logs][1], vous devez utiliser la fonctionnalité Pagination.
+
+{{< tabs >}}
+
+{{% tab "API V1" %}}
 
 Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
 
@@ -86,6 +90,97 @@ On obtient alors ces résultats :
 Pour voir toutes vos pages de logs, continuez à renvoyer votre requête avec le paramètre `startAt` défini sur la valeur `nextLogId` de l'appel précédent. Lorsque `nextLogId` renvoie `null`, cela signifie que vous avez renvoyé toutes les pages de logs associées à votre requête.
 
 **Remarque** : pour mieux contrôler les résultats de pagination, utilisez un paramètre `time` absolu. N'utilisez pas le mot-clé `now`.
+
+{{% /tab %}}
+
+{{% tab "API V2" %}}
+Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
+
+```bash
+curl -X POST \
+'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
+-H 'content-type: application/json' \
+-d '{
+      "filter": 
+              {
+                "from": "2019-08-07T00:00:00Z",
+                "to": "2019-08-06T00:00:00Z",
+                "query": "@datacenter:us @role:db"
+               },
+      "page":  
+              {
+                  "limit":50   
+        }
+}'
+```
+Exemple de résultat :
+
+```json
+{
+  "meta": {
+    "page": {
+      "after": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0"
+    }
+  },
+  "data": [
+    {
+      "attributes": {"..."},
+      "id": "AQAAAXN-WFUo6EDdggAAAABBWE4tV0ZpTmczX0E2TF9ZV0FBQQ",
+      "type": "log"
+    }
+  ],
+  "links": {
+    "next": "https://api.datadoghq.com/api/v2/logs/events?filter%5Bto%5D=1595552587369&page%5Bcursor%5D=eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0&page%5Blimit%5D=1&filter%5Bfrom%5D=1595552579929"
+  }
+}
+```
+Le paramètre `data` est un tableau d'objets Log qui peut contenir autant de logs que la limite définie via le paramètre `limit` dans votre requête. Cette limite est définie sur `50` par défaut, mais il est possible de la rehausser jusqu'à `1000`. 
+
+Pour voir la page suivante de vos logs, continuez à renvoyer votre requête avec le paramètre `cursor` défini sur la valeur `after` de l'appel précédent. Lorsque `data` renvoie `null`, cela signifie que vous avez renvoyé toutes les pages de logs associées à votre requête.
+
+```bash
+curl -X POST \
+'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
+-H 'content-type: application/json' \
+-d '{
+      "filter": 
+              {
+                "from": "2019-08-07T00:00:00Z",
+                "to": "2019-08-06T00:00:00Z",
+                "query": "@datacenter:us @role:db"
+               },
+      "page":  
+              {
+                  "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
+                  "limit": 50   
+        }
+}'
+```
+On obtient alors ces résultats :
+
+```json
+{
+  "meta": {
+    "page": {
+      "after": "eyJhZnRlciI6IkFRQUFBWE4tV0VsdzZFRGRnUUFBQUFCQldFNHRWMFV5UzJjelgwRTJURjlaY1d0QlFRIn0"
+    }
+  },
+  "data": [
+    {
+      "attributes": {"..."},
+      "id": "AQAAAXN-WElw6EDdgQAAAABBWE4tV0UyS2czX0E2TF9ZcWtBQQ",
+      "type": "log"
+    }
+  ],
+  "links": {
+    "next": "https://api.datadoghq.com/api/v2/logs/events?filter%5Bto%5D=1595552587369&page%5Bcursor%5D=eyJhZnRlciI6IkFRQUFBWE4tV0VsdzZFRGRnUUFBQUFCQldFNHRWMFV5UzJjelgwRTJURjlaY1d0QlFRIn0&page%5Blimit%5D=10&filter%5Bfrom%5D=1595552579929"
+  }
+}
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Pour aller plus loin
 

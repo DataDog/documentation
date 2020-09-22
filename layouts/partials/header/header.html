@@ -23,13 +23,13 @@
             <div class="col">
                 <ul class="nav navbar-left">
                     {{ range $datafile.left }}
-                        {{ if eq .title "Solutions" }}
+                        {{ if eq .name "solutions" }}
                             <li class="nav-item {{ if .children }}dropdown{{ end }}">
                                 <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                                 {{ if .children }}
                                     <div class="dropdown-menu p-2 solutions-menu" aria-labelledby="navbarDropdown">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Industry</p>
                                                 {{ range .children }}
                                                     {{ if eq .category "industry" }}
@@ -37,7 +37,15 @@
                                                     {{ end }}
                                                 {{ end }}
                                             </div>
-                                            <div class="col-6">
+                                            <div class="{{ if eq $dot.Page.Lang "ja"}}col-3 {{else}} col-4 {{ end}}">
+                                                <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Technology</p>
+                                                {{ range .children }}
+                                                    {{ if eq .category "technology" }}
+                                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                                    {{ end }}
+                                                {{ end }}
+                                            </div>
+                                            <div class="col-4">
                                                 <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Use-case</p>
                                                 {{ range .children }}
                                                     {{ if eq .category "usecase" }}

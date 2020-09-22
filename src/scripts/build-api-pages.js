@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const marked = require('marked');
@@ -41,7 +41,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: getTagSlug(action.summary),
+          url: `#` + getTagSlug(action.summary),
           generated: true
         });
     });
@@ -633,7 +633,16 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
-  let newRequiredFields = data.required || requiredFields;
+  let newRequiredFields;
+
+  // data.required must be an array of required fields e.g ['foo', 'bar']
+  // if its not then we possible have a field called required that is actually an object
+  // and we don't want this so pass in previous requirements
+  if(data.required && data.required instanceof Array) {
+    newRequiredFields = data.required;
+  } else {
+    newRequiredFields = requiredFields;
+  }
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -766,7 +775,7 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
       ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
-    </div>  
+    </div>
   </div>`.trim();
   return addHasExpandClass(output);
 };
@@ -786,15 +795,22 @@ const processSpecs = (specs) => {
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
+
           // make a copy in static for postman
-          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
-            if (err) throw err;
-            console.log(`full_spec_${version}.json copied to /static/resources/json/`);
-          });
+          // the postman copy needs to not include the empty "tags" that we
+          // included to ensure redirection in the docs page from v2 <-> v1
+          const derefStripEmptyTags = lodash.cloneDeep(deref);
+          derefStripEmptyTags.tags = derefStripEmptyTags.tags.filter((tag) => !tag.description.toLowerCase().includes("see api version"));
+          const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
+          fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
+
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
-        }).catch((e) => console.log(e));
+        }).catch((e) => {
+          console.log(e);
+          process.exitCode = 1;
+        })
     });
 };
 

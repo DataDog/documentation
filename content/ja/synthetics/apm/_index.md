@@ -48,7 +48,7 @@ https://*.datadoghq.com/*
 * [Ruby][7]
 * [JavaScript][8]
 * [PHP][9]
-* [.NET][12]
+* [.NET][10]
 
 ### トレースとテストのリンク方法
 
@@ -60,7 +60,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 | `x-datadog-parent-id: 0`               | Synthetic テストを生成されたトレースのルートスパンにします。                                                        |
 | `x-datadog-origin: synthetics`         | API テストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected)ようにします。     |
 | `x-datadog-origin: synthetics-browser` | ブラウザテストによって生成されたトレースが [APM クオータに影響しない](#how-are-apm-quotas-affected)ようにします。 |
-| `x-datadog-sampling-priority: 1`       | [Agent がトレースを維持するようにします][10]。                                                                      |
+| `x-datadog-sampling-priority: 1`       | [Agent がトレースを維持するようにします][11]。                                                                      |
 
 ### APM クオータへの影響
 
@@ -68,7 +68,7 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 
 ### トレースの保持期間
 
-これらのトレースは、[従来の APM トレースと同様に][11]保持されます。
+これらのトレースは、[従来の APM トレースと同様に][12]保持されます。
 
 ## その他の参考資料
 
@@ -83,6 +83,6 @@ Datadog は、分散型トレーシングプロトコルを使用し、以下の
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: /ja/tracing/guide/trace_sampling_and_storage/#how-it-works
-[11]: /ja/tracing/guide/trace_sampling_and_storage/#trace-storage
-[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[11]: /ja/tracing/guide/trace_sampling_and_storage/#how-it-works
+[12]: /ja/tracing/guide/trace_sampling_and_storage/#trace-storage

@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog-agent-windows
+spec:
+  selector:
+    matchLabels:
+      app: datadog-agent-windows
+  template:
+    metadata:
+      labels:
+        app: datadog-agent-windows
+      name: datadog-agent-windows
+    spec:
+      containers:
+        - name: agent
+          image: "datadog/agent:latest"
+          imagePullPolicy: Always
+          command: ["agent", "start"]
+          resources: {}
+          ports:
+            - containerPort: 8125
+              name: dogstatsdport
+              protocol: UDP
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent-windows"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_DOGSTATSD_PORT
+              value: "8125"
+            - name: DD_APM_ENABLED
+              value: "false"
+            - name: DD_LOGS_ENABLED
+              value: "false"
+            - name: DD_HEALTH_PORT
+              value: "5555"
+          volumeMounts:
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /health
+              port: 5555
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+        - name: trace-agent
+          image: "datadog/agent:latest"
+          imagePullPolicy: Always
+          command:
+            [
+              "trace-agent",
+              "-foreground",
+              "-config=C:/ProgramData/Datadog/datadog.yaml",
+            ]
+          resources: {}
+          ports:
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent-windows"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_APM_ENABLED
+              value: "true"
+            - name: DD_APM_NON_LOCAL_TRAFFIC
+              value: "true"
+            - name: DD_APM_RECEIVER_PORT
+              value: "8126"
+          livenessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            tcpSocket:
+              port: 8126
+            timeoutSeconds: 5
+      volumes:
+        - hostPath:
+            path: \\.\pipe\docker_engine
+          name: runtimesocket
+      tolerations:
+        - effect: NoSchedule
+          key: node.kubernetes.io/os
+          value: windows
+          operator: Equal
+      serviceAccountName: datadog-agent-windows
+      nodeSelector:
+        kubernetes.io/os: windows
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 10%
+    type: RollingUpdate

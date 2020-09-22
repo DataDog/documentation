@@ -98,7 +98,7 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
            match_type: "regex"
            tags:
              worker: "$1"
-        - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+         - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
            name: "sidekiq.jobs.worker.$2"
            match_type: "regex"
            tags:

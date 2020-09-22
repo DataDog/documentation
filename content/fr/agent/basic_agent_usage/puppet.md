@@ -71,7 +71,18 @@ Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppet
     - Pour envoyer des données, le gem [dogapi][3] doit être installé sur votre master Puppet. Pour ce faire, exécutez l'Agent Puppet sur votre master avec cette configuration. Vous pouvez également effectuer une installation manuelle avec `gem`. Vous devrez peut-être redémarrer votre service `puppetserver` après avoir installé le gem `dogapi`.
     - Le paramètre `puppetserver_gem` est défini comme une dépendance de module. Il est installé automatiquement en même temps que le module.
 
-4. (Facultatif) Ajoutez les intégrations à utiliser avec l'Agent, par exemple :
+4. (Facultatif) Activer le tagging de rapports avec des faits
+    Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits. Par exemple, `["virtual","trusted.extensions.pp_role","operatingsystem"]` donne trois tags distincts par événement de rapport.
+
+    REMARQUE : la modification de ces paramètres nécessite un redémarrage de pe-puppetserver (ou de puppetserver) pour lancer une relecture du processeur de rapports. Assurez-vous que les changements sont déployés avant de redémarrer le(s) service(s).
+
+    Conseils :
+    - Utilisez l'index des points pour spécifier un fait cible ; sinon, l'ensemble des données de fait devient la valeur sous forme de chaîne (pas très utile)
+    - Ne dupliquez pas les données de surveillance courantes comme le nom de l'host, l'uptime, la mémoire, etc.
+    - Coordonnez les faits essentiels comme le rôle, le propriétaire, le modèle, le centre de données, etc. pour établir des corrélations pertinentes avec les mêmes tags à partir de métriques
+
+
+5. (Facultatif) Ajoutez les intégrations à utiliser avec l'Agent, par exemple :
 
    ```conf
    include 'datadog_agent::integrations::mongo'
@@ -102,6 +113,7 @@ datadog_agent::install_integration { "mongo-1.9":
     ensure => present,
     integration_name => 'datadog-mongo',
     version => '1.9.0',
+    third_party => false,
 }
 ```
 
@@ -109,6 +121,8 @@ datadog_agent::install_integration { "mongo-1.9":
 
 - `present` (valeur par défaut)
 - `absent` (supprime une version préalablement imposée d'une intégration)
+
+Pour installer une intégration tierce, définissez le paramètre `third_party` sur `true`.
 
 ### Envoi de données
 
@@ -253,6 +267,17 @@ datadog_agent::tags:
 - 'keyname:value'
 - 'anotherkey:%{factname}'
 ```
+Pour générer des tags à partir de faits personnalisés, classez vos nœuds en spécifiant les faits Puppet sous forme de tableau associé au paramètre```facts_to_tags```, soit via la console Puppet Enterprise, soit via Hiera. Voici un exemple :
+
+```conf
+class { "datadog_agent":
+  api_key            => "<VOTRE_CLÉ_API_DD>",
+  facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
+}
+```
+Conseils :
+1. Pour les faits structurés, effectuez l'indexation dans la valeur de fait spécifique ; sinon, le tableau entier sera défini comme une chaîne, rendant difficile son utilisation.
+2. Les faits dynamiques tels que la charge processeur, l'uptime et autres changent généralement à chaque exécution et ne sont donc pas conseillés pour le tagging, contrairement aux faits statiques, qui restent généralement identiques pendant toute la durée de vie d'un nœud.
 
 ### Variables de configuration
 

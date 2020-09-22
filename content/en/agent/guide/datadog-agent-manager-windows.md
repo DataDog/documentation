@@ -19,6 +19,18 @@ The Datadog Agent v6 Manager GUI is browser-based. The port the GUI runs on can 
 
 3. For security reasons, the GUI can only be accessed from the local network interface (localhost/127.0.0.1), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or container and access it from the host machine.
 
+#### Supported browsers
+
+| Browser       | Supported version (or later) | Comment                 |
+|---------------|------------------------------|-------------------------|
+| IE            | 11                           |                         |
+| Edge          | 12                           |  Pre-Chromium Edge |
+| Edge-chromium | 79                           |                         |
+| Firefox       | 38                           |                         |
+| Chrome        | 60                           |                         |
+| Safari        | 8                            |                         |
+| IOS           | 12                           |  Mobile Safari          |
+ 
 ### Start the Datadog Agent Manager
 
 After the Agent is [installed][1] on your Windows host, start the Datadog Agent Manager to manage the Agent graphically.

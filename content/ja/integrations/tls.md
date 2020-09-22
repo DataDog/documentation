@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     TLS Overview: assets/dashboards/overview.json
   logs: {}
@@ -49,19 +51,27 @@ supported_os:
 TLS チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. TLS データの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `tls.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル tls.d/conf.yaml][3] を参照してください。
+1. TLS データの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tls.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tls.d/conf.yaml][1] を参照してください。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
@@ -69,9 +79,13 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                          |
 | `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "port":"443"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `tls` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `tls` を探します。
 
 ## 収集データ
 
@@ -85,7 +99,7 @@ TLS には、イベントは含まれません。
 
 ### サービスのチェック
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][8] を参照してください。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][4] を参照してください。
 
 - `tls.can_connect` - 監視対象のエンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 - `tls.version` - 許可されていないプロトコルバージョンで接続が行われた場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
@@ -94,14 +108,11 @@ TLS には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/tls/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/tls/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://github.com/DataDog/integrations-core/blob/master/tls/assets/service_checks.json
+[5]: https://docs.datadoghq.com/ja/help/

@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    PerimeterX Overview: assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -43,7 +44,7 @@ supported_os:
 
 ホストでのインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 1. [Datadog ポータル][2]で新しいインテグレーションの API キーを生成します。
 2. [PerimeterX サポート][3]でサポートチケットを開き、Datadog のログエクスポートとのインテグレーションをリクエストします。このとき、サポートに以下の情報を提供する必要があります。

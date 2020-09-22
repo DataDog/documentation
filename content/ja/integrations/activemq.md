@@ -54,12 +54,15 @@ Agent の ActiveMQ チェックは [Datadog Agent][2] パッケージに含ま�
 
 ### 構成
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. **ActiveMQ サーバーで [JMX Remote が有効になっている][4]ことを確認します。**
-2. ActiveMQ に接続するように Agent を構成します。[Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `activemq.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq.d/conf.yaml][6] を参照してください。
+1. **ActiveMQ サーバーで [JMX Remote が有効になっている][1]ことを確認します。**
+2. ActiveMQ に接続するように Agent を構成します。[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `activemq.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq.d/conf.yaml][3] を参照してください。
 
    ```yaml
    instances:
@@ -126,7 +129,7 @@ Agent の ActiveMQ チェックは [Datadog Agent][2] パッケージに含ま�
              metric_type: gauge
    ```
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][4]。
 
 ##### ログの収集
 
@@ -138,7 +141,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. Riak のログの収集を開始するには、次の構成ブロックを `activemq.d/conf.yaml` ファイルに追加します。
+2. ActiveMQ のログ収集を開始するには、次のコンフィギュレーションブロックを `activemq.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -152,11 +155,18 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-3. [Agent を再起動します][7]。
+3. [Agent を再起動します][4]。
+
+[1]: https://activemq.apache.org/jmx.html
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -170,15 +180,20 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][9]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "activemq", "service": "<YOUR_APP_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `activemq` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `activemq` を探します。
 
 ## 収集データ
 
@@ -197,14 +212,14 @@ Agent が監視対象の ActiveMQ インスタンスに接続できず、メト�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [ActiveMQ のアーキテクチャとキーメトリクス][12]
-- [ActiveMQ のメトリクスとパフォーマンスの監視][13]
+- [ActiveMQ のアーキテクチャとキーメトリクス][6]
+- [ActiveMQ のメトリクスとパフォーマンスの監視][7]
 
 
 
@@ -224,25 +239,36 @@ ActiveMQ XML からメトリクスをリアルタイムに取得すると、以�
 
 ActiveMQ XML チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
+<!-- xxx tabs xxx -->
+<!-- xxx tab "Host" xxx -->
+
 #### ホスト
 
-1. ご使用の統計 `url` で、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `activemq_xml.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル activemq_xml.d/conf.yaml][14] を参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-   **注**: ActiveMQ XML インテグレーションでは[カスタムメトリクス][15]を送信することができますが、これはお客様の[請求][16]に影響します。デフォルトでは、メトリクス数は 350 に制限されています。メトリクスの追加が必要な場合は、[Datadog のサポートチーム][11]にお問い合わせください。
+1. ご使用の統計 `url` で、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `activemq_xml.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq_xml.d/conf.yaml][9] を参照してください。
 
-2. [Agent を再起動します][7]。
+   **注**: ActiveMQ XML インテグレーションでは[カスタムメトリクス][10]を送信することができますが、これはお客様の[請求][11]に影響します。デフォルトでは、メトリクス数は 350 に制限されています。メトリクスの追加が必要な場合は、[Datadog のサポートチーム][5]にお問い合わせください。
+
+2. [Agent を再起動します][12]。
+
+<!-- xxz tab xxx -->
+<!-- xxx tab "コンテナ化" xxx -->
 
 #### コンテナ化
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][17]のガイドを参照してください。
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][13]のガイドを参照してください。
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `activemq_xml` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `activemq_xml` を検索します。
 
 ## 収集データ
 
@@ -260,27 +286,23 @@ ActiveMQ XML チェックには、サービスのチェック機能は含まれ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-- [ActiveMQ のメトリクスとパフォーマンスの監視][13]
+- [ActiveMQ のメトリクスとパフォーマンスの監視][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/jmxfetch
-[4]: https://activemq.apache.org/jmx.html
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
-[13]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
-[14]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[15]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
-[16]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
-[17]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+[7]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[13]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

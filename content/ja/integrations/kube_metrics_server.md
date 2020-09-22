@@ -44,23 +44,35 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 ### コンフィグレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. kube_metrics_server のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_metrics_server.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_metrics_server.d/conf.yaml][2] を参照してください。
+1. kube_metrics_server のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_metrics_server.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_metrics_server.d/conf.yaml][1] を参照してください。
 
-2. [Agent を再起動します][3]。
+2. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[Kubernetes におけるオートディスカバリーのインテグレーションテンプレート][4]ガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[Kubernetes オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
 | `<インテグレーション名>` | `kube_metrics_server `                                         |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                        |
 | `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "https://%%host%%:443/metrics"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 #### SSL
 
@@ -70,11 +82,11 @@ Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含ま�
 
 2. 関連する証明書ファイルを Agent ポッドにマウントします。
 
-3. SSL 構成を適用します。詳細については、[デフォルトの構成ファイル][5]を参照してください。
+3. SSL 構成を適用します。詳細については、[デフォルトの構成ファイル][3]を参照してください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `kube_metrics_server` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `kube_metrics_server` を探します。
 
 ## 収集データ
 
@@ -94,13 +106,11 @@ kube_metrics_server には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[5]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/

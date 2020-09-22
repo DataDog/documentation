@@ -30,9 +30,9 @@ To generate a new log-based metric, go to the [Configuration page][3] of your Da
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Create a Logs to metric"  style="width:80%;">}}
 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][5]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][6], the value of the metric is the value of the log attribute. 
-3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][7]. Log-based metrics are considered [custom metrics][8]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing.
-4. **Name your metric**: Log-based metric names must follow the [naming metric convention][9].
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (e.g., `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][6], the value of the metric is the value of the log attribute.
+3. **Add dimensions to `group by`**: By default, metrics generated from logs will not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs can be used to create metric [Tags][7]. Log-based metrics are considered [custom metrics][8]. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avert impacting your billing. See the [Log Security][9] page for more information on using this feature for HIPAA-enabled customers.
+4. **Name your metric**: Log-based metric names must follow the [naming metric convention][10].
 
 **Note**: Data points for Log-based metrics are generated at ten second intervals.
 
@@ -80,4 +80,5 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [6]: /logs/explorer/facets/#quantitative-facets-measures
 [7]: /getting_started/tagging/
 [8]: /developers/metrics/custom_metrics/
-[9]: /developers/metrics/#naming-metrics
+[9]: /security/logs/#hipaa-enabled-customers
+[10]: /developers/metrics/#naming-metrics

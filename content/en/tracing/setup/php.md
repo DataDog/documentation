@@ -23,9 +23,15 @@ further_reading:
 
 For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
-## Installation and Getting Started
+## Installation and getting started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app documentation (Recommended)
+
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable App Analytics during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
@@ -65,7 +71,7 @@ export DD_TRACE_PHP_BIN=$(which php-fpm7)
 
 Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][10] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][11] from the host machine to help identify any issues.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [create a `phpinfo()` page][11] from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
 
 If you can't find your distribution, you can [manually install][12] the PHP extension.
 
@@ -199,6 +205,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | Mongo             | `mongo`           |
 | Mysqli            | `mysqli`          |
 | PDO               | `pdo`             |
+| PhpRedis          | `phpredis`        |
 | Predis            | `predis`          |
 | Slim              | `slim`            |
 | Symfony           | `symfony`         |
@@ -283,7 +290,7 @@ To remove the PHP tracer:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: /tracing/send_traces/
@@ -292,7 +299,7 @@ To remove the PHP tracer:
 [8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/latest
 [10]: https://app.datadoghq.com/apm/services
-[11]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[11]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
 [12]: /tracing/faq/php-tracer-manual-installation
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv

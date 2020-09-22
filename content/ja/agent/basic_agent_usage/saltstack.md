@@ -132,6 +132,7 @@ file_roots:
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config`  | チェックのコンフィギュレーションファイルに書き込むためのコンフィギュレーションオプションを追加します。<br>Agent v6 & v7: <confd_path>/<check>.d/conf.yaml`<br>Agent v5: `<confd_path>/<check>.yaml` |
 | `version` | Agent v6 & v7 環境でインストールするチェックのバージョン (デフォルトは Agent にバンドルされたバージョンとなります) 。                                                                |
+| `third_party` | Agent v6 と v7（バージョン v6.21.0/v7.21.0 以降のみ）の場合、インストールするインテグレーションがサードパーティインテグレーションであることを示すブール値。`version` オプションとペアで使用する必要があります。                                                                |
 
 以下は `/srv/pillar` ディレクトリを監視する[ディレクトリ][3]インテグレーション の v1.4.0 を使用した例です。
 
@@ -148,6 +149,23 @@ datadog:
           - directory: "/srv/pillar"
             name: "pillars"
       version: 1.4.0
+```
+
+以下は、「サードパーティインテグレーション」と名付けられたサンプルのサードパーティインテグレーションの v1.0.0 を使用した例です。
+
+```
+datadog:
+  config:
+    api_key: <YOUR_DD_API_KEY>
+  install_settings:
+    agent_version: <AGENT7_VERSION>
+  checks:
+    third-party-integration:
+      config:
+        instances:
+          - some_config: "some value"
+      version: 1.0.0
+      third_party: true
 ```
 
 ##### ログ

@@ -46,10 +46,10 @@ Agent のインストールには、Kubernetes の [Agent のインストール�
 バージョン 6.1 から、Datadog Agent は、OpenShift Origin および Enterprise のクラスターの監視をサポートするようになりました。お客様のニーズとクラスターの[セキュリティ上の制約][3]に応じて、次の 3 つのデプロイシナリオがサポートされています。
 
 - [制限付き SCC オペレーション](#restricted-scc-operations)
-- [ホストネットワーク SCC オペレーション](#host-network-scc-operations)
+- [ホストネットワーク SCC オペレーション](#host)
 - [すべての機能に使用できるカスタム Datadog SCC](#custom-datadog-scc-for-all-features)
 
-| Security Context Constraints   | [制限付き](#restricted-scc-operations) | [ホストネットワーク](#host-network-scc-operations) | [カスタム](#custom-datadog-scc-for-all-features) |
+| Security Context Constraints   | [制限付き](#restricted-scc-operations) | [ホストネットワーク](#host) | [カスタム](#custom-datadog-scc-for-all-features) |
 | ------------------------------ | ---------------------------------------- | -------------------------------------------- | ---------------------------------------------- |
 | Kubernetes レイヤーの監視    | ✅                                       | ✅                                           | ✅                                             |
 | Kubernetes ベースのオートディスカバリー | ✅                                       | ✅                                           | ✅                                             |
@@ -78,7 +78,7 @@ DogStatsD、APM、およびログの収集には、Datadog Agent をホストの
 
 Agent を `sidecar` モードで実行できます。Agent をアプリケーションのポッド内で実行し、簡単に検出することが可能です。
 
-#### ホストネットワーク SCC オペレーション
+#### ホスト
 
 `allowHostPorts` のアクセス許可をポッドに（標準の `hostnetwork`、`hostaccess`、あるいは自作の SCC を使用して）追加します。その場合、関連するポートバインディングを、ポッドの仕様に追加してください。
 

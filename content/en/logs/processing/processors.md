@@ -14,15 +14,19 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
+## Overview
+
 {{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
 
 A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 **Note**: Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][5] feature.
 
+As a best practice, it is recommended to use at most 20 Processors per Pipeline.
+
 ## Grok Parser
 
-Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3].
+Create custom grok rules to parse the full message or [a specific attribute of your raw event][1]. For more information, see the [parsing section][3]. As a best practice, it is recommended to use at most 10 parsing rules within a grok Processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -140,7 +144,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
-* Strings beginning with **err** (case-insensitive) map to **error (3)**
+* Strings beginning with **e** (case-insensitive)—that do not match `emerg`—map to **error (3)**
 * Strings beginning with **w** (case-insensitive) map to **warning (4)**
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
@@ -653,7 +657,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 
 ## Lookup Processor
 
-Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in the processors mapping table.
+Use the Lookup Processor to define a mapping between a log attribute and a human readable value saved in an [Enrichment Table (beta)][10] or the processors mapping table.
 For example, you can use the Lookup Processor to map an internal service ID into a human readable service name.
 Alternatively, you could also use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
@@ -669,9 +673,9 @@ The processor performs the following actions:
   * If it does, creates the target attribute with the corresponding value in the table.
   * Optionally, if it does not find the value in the mapping table, creates a target attribute with the filled default value.
 
-You can fill the mapping table by manually entering a list of `source_key,target_value` pairs, or by uploading a CSV file.
+You can fill the mapping table by selecting an enrichment table or manually by entering a list of `source_key,target_value` pairs, or uploading a CSV file.
 
-The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform.
+The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Enrichment tables support larger file sizes.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -708,7 +712,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a trace id in the application logs][10] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][11] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -758,4 +762,5 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [7]: /logs/search_syntax/
 [8]: /logs/processing/processors/?tab=ui#log-status-remapper
 [9]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[10]: /tracing/connect_logs_and_traces/
+[10]: /logs/guide/enrichment-tables/
+[11]: /tracing/connect_logs_and_traces/

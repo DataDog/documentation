@@ -430,7 +430,7 @@ Le système [Autodiscovery][7] a été repensé dans l'Agent v6. De plus, les r
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-Lorsque vous utilisez Kubernetes, Autodiscovery extrait les informations du kubelet au lieu du daemon Docker. Autodiscovery peut ainsi fonctionner sans accéder au socket Docker. De plus, par défaut, les modèles Autodiscovery sont récupérés à partir des annotations des pods. Vous pouvez activer le config-provider `docker` pour utiliser les étiquettes de conteneurs, et remplacer l'écouteur `kubelet` par l'écouteur `docker` si vous avez besoin d'utiliser Autodiscovery sur des conteneurs à court de pods.
+Lorsque vous utilisez Kubernetes, Autodiscovery extrait les informations du kubelet au lieu du daemon Docker. Autodiscovery peut ainsi fonctionner sans accéder au socket Docker. De plus, par défaut, les modèles Autodiscovery sont récupérés à partir des annotations des pods. Vous pouvez activer le config-provider `docker` pour utiliser les étiquettes de conteneurs, et remplacer l'écouteur `kubelet` par l'écouteur Docker si vous avez besoin d'utiliser Autodiscovery sur des conteneurs à court de pods.
 
 Lorsque vous spécifiez des [modèles Autodiscovery][1] dans des annotations des pods, le préfixe du nom de l'annotation est `ad.datadoghq.com/`. Le préfixe d'annotation précédent (`service-discovery.datadoghq.com/`) est toujours pris en charge dans l'Agent v6, mais cette compatibilité sera supprimée dans une version future.
 

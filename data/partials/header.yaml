@@ -93,6 +93,18 @@ left:
         category: industry
         link: "https://www.datadoghq.com/solutions/technology/"
         title: "Technology"
+      - name: "Amazon Web Services"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/aws/"
+        title: "Amazon Web Services"
+      - name: "Google Cloud Platform"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/gcp/"
+        title: "Google Cloud Platform"
+      - name: "Kubernetes"
+        category: "technology"
+        link: "https://www.datadoghq.com/solutions/kubernetes/"
+        title: "Kubernetes"
       - name: solutions_gaming
         category: industry
         link: "https://www.datadoghq.com/solutions/gaming/"

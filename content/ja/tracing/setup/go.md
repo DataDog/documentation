@@ -33,9 +33,15 @@ APM で使用される用語の説明については、[「APM を開始する�
 
 ### インストール
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][6]をご確認いただけます。
+#### アプリ内のドキュメントに従ってください (推奨)
 
-まず [Datadog Agent をインストール、構成][7]します。[Docker アプリケーションのトレース][8]または [Kubernetes アプリケーションのトレース][9]に関する追加ドキュメントを確認します。
+Datadog アプリ内の[クイックスタート手順][6]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に Continuous Profiler、App Analytics、およびトレース ID 挿入を有効にします。
+
+あるいは [Datadog Agent をインストール、構成][7]します。[Docker アプリケーションのトレース][8]または [Kubernetes アプリケーションのトレース][9]に関する追加ドキュメントを確認します。
 
 次に、正規のインポートパスから Go トレーサーをインストールします。
 
@@ -51,7 +57,7 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 
 
 
-## 構成
+## コンフィギュレーション
 
 Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
 [コンフィギュレーションドキュメント][10]で利用可能なすべてのオプションを参照してください。
@@ -72,8 +78,11 @@ func main() {
     tracer.Start(
         tracer.WithEnv("prod"),
         tracer.WithService("test-go"),
-        tracer.WithVersion("abc123"),
+        tracer.WithServiceVersion("abc123"),
     )
+
+    // トレーサーが停止すると、終了する前にトレーサー内のすべてのデータが Datadog Agent にフラッシュされます。
+    // この行は主要な関数内に残すようにしてください。
     defer tracer.Stop()
 }
 ```
@@ -132,8 +141,8 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /ja/tracing/send_traces/
-[7]: https://app.datadoghq.com/apm/install
+[6]: https://app.datadoghq.com/apm/docs
+[7]: /ja/tracing/send_traces/
 [8]: /ja/tracing/setup/docker/
 [9]: /ja/agent/kubernetes/apm/
 [10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption

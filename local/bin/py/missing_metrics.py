@@ -35,7 +35,18 @@ def get_csv_metrics(tempdir):
 def get_dd_metrics(csv_metrics, keys, t):
   print(t)
   cloud = ('aws','azure', 'gcp')
-  ignore = ['isatap', '.p5', '.p7', '.p9', 'gcp.logging.user.', 'gcp.custom.', 'aws.ec2.iam_credentials_expiration_seconds', 'cloudfoundry.nozzle', 'vsphere.']
+  ignore = [
+            '.p5',
+            '.p7',
+            '.p9',
+            'aws.ec2.iam_credentials_expiration_seconds',
+            'azure.operationalinsights_workspaces.',
+            'cloudfoundry.nozzle',
+            'gcp.logging.user.',
+            'gcp.custom.',
+            'isatap',
+            'vsphere.'
+    ]
 
   # Datadog Demo account
   options = {

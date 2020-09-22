@@ -47,7 +47,15 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 ### Filter
 
-Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. To learn more about tags, refer to the [Tagging][6] documentation.
+Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. 
+
+{{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
+
+You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as:
+
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
+
+To learn more about tags, refer to the [Tagging][6] documentation.
 
 ### Aggregate and rollup
 
@@ -84,6 +92,8 @@ For more about using the JSON view, see [Graphing with JSON][1].
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][9].
 
 Datadog also supports the ability to graph your metrics with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+
+To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
 #### Metric arithmetic using an integer
 

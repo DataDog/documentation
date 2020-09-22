@@ -3,6 +3,8 @@ aliases:
   - /ja/guides/network_checks
   - /ja/integrations/tcpcheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   monitors: {}
@@ -46,13 +48,16 @@ supported_os:
 
 TCP チェックは [Datadog Agent][2] パッケージに含まれているため、TCP ポートを調査するホストに追加で何かをインストールする必要はありません。メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適な実行方法ですが、リモート接続をテストする場合などに、監視対象の TCP サービスを実行していないホストからこのチェックを実行する方が望ましい場合があります。
 
-### 構成
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `tcp_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tcp_check.d/conf.yaml][4] を参照してください。
+[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `tcp_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tcp_check.d/conf.yaml][2] を参照してください。
 
 ```yaml
 init_config:
@@ -73,11 +78,17 @@ instances:
 - `collect_response_time` (オプション) - デフォルトは false。このオプションを true に設定しなかった場合、応答時間メトリクスは収集されません。これを true に設定した場合は、メトリクス `network.tcp.response_time` が返されます。
 - `tags` (オプション) - メトリクスに割り当てるタグ。
 
-[Agent を再起動][5]すると、Datadog への TCP サービスチェックと応答時間の送信が開始されます。
+[Agent を再起動][3]すると、Datadog への TCP サービスチェックと応答時間の送信が開始されます。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
@@ -85,9 +96,13 @@ instances:
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                                 |
 | `<インスタンスコンフィギュレーション>`  | `{"name": "<TCP_CHECK_INSTANCE_NAME>", "host":"%%host%%", "port":"%%port%%"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `tcp_check` を探します。
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `tcp_check` を探します。
 
 ## 収集データ
 
@@ -105,19 +120,15 @@ TCP チェックには、イベントは含まれません。
 
 設定した`ホスト`および`ポート`に Agent が接続できない場合は、DOWN を返します。それ以外の場合は、UP を返します。
 
-Datadog でこのサービスチェックのアラート条件を作成するには、[Create Monitor][9] ページで **Integration** ではなく **Network** をクリックしてください。
+Datadog でこのサービスチェックのアラート条件を作成するには、[Create Monitor][4] ページで **Integration** ではなく **Network** をクリックしてください。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/metadata.csv
-[9]: https://app.datadoghq.com/monitors#/create
-[10]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://app.datadoghq.com/monitors#/create
+[5]: https://docs.datadoghq.com/ja/help/

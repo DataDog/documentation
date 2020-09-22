@@ -191,7 +191,11 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 [Configure the layers][1] for your Lambda function using the ARN in the following format.
 
 ```
+# For regular regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# For us-gov regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
 The available `RUNTIME` options are `Node8-10`, `Node10-x`, and `Node12-x`. For `VERSION`, see the [latest release][2]. For example:

@@ -26,7 +26,13 @@ further_reading:
 
 ## はじめに
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に App Analytics およびトレース ID お挿入を有効にします。
 
 それ以外の場合、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストール、構成します][3]。.NET トレーサーはプロセス中に実行し、アプリケーションをインスツルメントし、トレースをアプリケーションから Agent に送信します。
 
@@ -206,7 +212,48 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
+
+#### Systemctl (サービスごと)
+
+`systemctl` を使用して、サービスとして .NET アプリケーションを実行する場合、特定のサービスに必要な環境変数がロードされるよう追加することができます。
+
+以下を含む、`environment.env` というファイルを作成します。
+
+```bat
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
+# アプリケーションで使用されるその他の環境変数
+```
+
+サービスのコンフィギュレーションファイルで、サービスブロックの [`EnvironmentFile`][2] としてこれを参照します。
+
+```bat
+[Service]
+EnvironmentFile=/path/to/environment.env
+ExecStart=<アプリケーションを起動するために使用するコマンド>
+```
+変数を設定したら、.NET サービスを再起動して環境変数を有効にします。
+
+#### Systemctl (すべてのサービス)
+
+`systemctl` を使用して、サービスとして .NET アプリケーションを実行する場合、`systemctl` を通じて実行されるすべてのサービスにロードされるよう環境変数を設定することも可能です。この変数が設定されていることを確認するには、[`systemctl show-environment`][2] を使用します。この方法を実行する前に、すべての .NET プロセスのインスツルメンテーションに関する注意を以下でご確認ください。
+
+```bat
+systemctl set-environment CORECLR_ENABLE_PROFILING=1
+systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
+systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+設定できたら、環境変数が`systemctl show-environment` でセットされていることを確認します。
+
 [1]: https://docs.docker.com/engine/reference/builder/#env
+[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
+[3]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -223,7 +270,7 @@ CMD ["dotnet", "example.dll"]
 
 **注:** 手動と自動両方のインスツルメンテーションを使用する場合、MSI インストーラーと NuGet パッケージのバージョンの同期を保つ必要があります。
 
-## 構成
+## コンフィギュレーション
 
 .NET トレーサーを構成する方法は複数あります:
 
@@ -340,9 +387,9 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 | `DD_AGENT_HOST`                                     | トレースが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルト値は `localhost` です。                                       |
 | `DD_TRACE_AGENT_PORT`                               | トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルト値は `8126` です。                                                     |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | アプリケーションログへの相関識別子の自動挿入を有効または無効にします。                                                                                                                         |
-| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | 指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します。                                                                                                                                              |
+| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | 指定された場合、指定されたすべてのタグを生成されたすべてのスパンに追加します。                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | デバッグのロギングを有効または無効にします。有効な値は `true` または `false` (デフォルト) です。                                                                                                                                 |
-| `DD_TRACE_HEADER_TAGS`                                    | 名前をタグ付けするヘッダーキー（大文字小文字の区別なし）のマップを受け入れ、一致するヘッダー値がルートスパンのタグとして自動的に提供されます。(例、`CASE-insensitive-Header:my-tag-name,User-ID:userId`)。バージョン 1.18.3 以降で使用可能。  | 
+| `DD_TRACE_HEADER_TAGS`                              | 名前をタグ付けするヘッダーキー（大文字小文字の区別なし）のマップを受け入れ、一致するヘッダー値がルートスパンのタグとして自動的に提供されます。(例、`CASE-insensitive-Header:my-tag-name,User-ID:userId`)。バージョン 1.18.3 以降で使用可能。  |
 
 次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧です。
 
@@ -350,24 +397,24 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` (デフォルト) または `false` です。 |
 | `DD_TRACE_DEBUG`                                               | トレーサーのデバッグログを有効または無効にします。有効な値は、`true` または `false`（デフォルト）です。これを環境変数として設定すると、CLR プロファイラーのデバッグログも有効になります。                                                                                                        |
-| `DD_TRACE_LOG_PATH`                                            | CLR プロファイラーのログファイルのパスを設定します。<br/><br/>Windows のデフォルト: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux のデフォルト: `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                                     |
+| `DD_TRACE_LOG_PATH`                                            | CLR プロファイラーのログファイルのパスを設定します。<br/><br/>Windows のデフォルト: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux のデフォルト: `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | 無効にするインテグレーションのリストを設定します。他のインテグレーションはすべて有効のままになります。設定しなかった場合、すべてのインテグレーションが有効になります。セミコロンで区切ることで複数の値がサポートされます。有効な値は、上記の[インテグレーション](#integrations)セクションでリストされているインテグレーション名です。           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | ウェブフレームワークインテグレーションのデフォルトの App Analytics 設定を有効にする省略表現。有効な値は `true` または `false` (デフォルト) です。                                                                                                                                                     |
 
 次の表は、自動インスツルメンテーションの使用時にのみ利用できる構成変数の一覧で、インテグレーションごとに設定できます。環境変数またはコンフィギュレーションファイルの設定には最初の名前 (`DD_<INTEGRATION>_ENABLED` など) を使用します。2 つ目の名前 (`Enabled` など) は、コードの設定を変更する際に使用する `IntegrationSettings` プロパティの名前を示します。これらのプロパティには `TracerSettings.Integrations[]` インデクサを通じてアクセスします。インテグレーション名については、[インテグレーション][1]セクションを参照してください。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
-| 設定名                                                            | 説明                                                                                                           |
-|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
-| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
+| 設定名                                                                  | 説明                                                                                                           |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | 特定のインテグレーションを有効または無効にします。有効な値は `true` (デフォルト) または `false` です。                            |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | 特定のインテグレーションの App Analytics を有効または無効にします。有効な値は `true` または `false` (デフォルト) です。           |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | 特定のインテグレーションの App Analytics サンプリングレートを設定します。`0.0`〜`1.0` (デフォルト) の浮動小数点数。 |
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /ja/tracing/custom_instrumentation/dotnet/

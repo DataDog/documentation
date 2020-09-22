@@ -19,26 +19,36 @@ further_reading:
     tag: Documentation
     text: Utilisation avancée
 ---
+## Exigences de compatibilité
+
+Pour obtenir la liste complète des versions de langage et des bibliothèques prises en charge, consultez la page [Exigences de compatibilité][1].
+
 ## Installation et démarrage
 
-Si vous avez déjà un compte Datadog, vous trouverez des [instructions détaillées][1] dans nos guides intégrés à l'application pour les configurations basées sur un host et les configurations basées sur un conteneur.
+### Suivre la documentation intégrée à l'application (conseillé)
 
-Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][2].
+Suivez les [instructions de démarrage rapide][2] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
 
-Pour découvrir comment effectuer des contributions open source au traceur PHP, consultez le [guide relatif aux contributions][3].
+- Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS) ;
+- Définir les tags `service`, `env` et `version` de façon dynamique ;
+- Activer la fonctionnalité App Analytics durant la configuration.
+
+Pour connaître la définition des termes utilisés dans l'APM, consultez la [documentation officielle][3].
+
+Pour découvrir comment effectuer des contributions open source au traceur PHP, consultez le [guide relatif aux contributions][4].
 
 ### Configurer l'Agent Datadog
 
 Le traceur de l'APM PHP envoie les données de trace par l'intermédiaire de l'Agent Datadog.
 
-[Installez et configurez l'Agent Datadog][4]. Consultez la documentation supplémentaire relative au [tracing d'applications Docker][5] ou au [tracing d'applications Kubernetes][6].
+[Installez et configurez l'Agent Datadog][5]. Consultez la documentation supplémentaire relative au [tracing d'applications Docker][6] ou au [tracing d'applications Kubernetes][7].
 
-Pour les versions [7.18.0][7] et ultérieures de l'Agent, l'APM est activé par défaut pour tous les environnements.
-Si vous exécutez une version plus ancienne de l'Agent, vérifiez que vous avez **[activé l'APM][4]** pour l'Agent.
+Pour les versions [7.18.0][8] et ultérieures de l'Agent, l'APM est activé par défaut pour tous les environnements.
+Si vous exécutez une version plus ancienne de l'Agent, vérifiez que vous avez **[activé l'APM][5]** pour l'Agent.
 
 ### Installer l'extension
 
-Installez l'extension PHP à l'aide de l'un des [paquets pré-compilés pour les distributions prises en charge][8].
+Installez l'extension PHP à l'aide de l'un des [paquets pré-compilés pour les distributions prises en charge][9].
 
 Une fois le paquet téléchargé, installez-le avec l'une des commandes ci-dessous.
 
@@ -59,17 +69,17 @@ L'extension sera installée pour la version de PHP par défaut. Si vous souhaite
 export DD_TRACE_PHP_BIN=$(which php-fpm7)
 ```
 
-Redémarrez PHP (PHP-FPM ou le SAPI Apache), puis consultez un endpoint de votre application pour lequel le tracing est activé. Affichez l'[interface de l'APM][9] pour visualiser les traces.
+Redémarrez PHP (PHP-FPM ou le SAPI Apache), puis consultez un endpoint de votre application pour lequel le tracing est activé. Affichez l'[interface de l'APM][10] pour visualiser les traces.
 
-**Remarque** : quelques minutes peuvent s'écouler avant que les traces soient visibles dans l'UI. Si elles n'apparaissent toujours pas une fois ce délai passé, [exécutez le script de diagnostic dd-doctor.php][10] depuis la machine du host afin d'identifier les éventuels problèmes.
+**Remarque** : quelques minutes peuvent s'écouler avant que les traces soient visibles dans l'interface utilisateur. Si elles n'apparaissent toujours pas une fois ce délai passé, [exécutez le script de diagnostic dd-doctor.php][11] depuis la machine du host afin d'identifier les éventuels problèmes.
 
-Si vous ne trouvez pas votre distribution, vous pouvez [installer manuellement][11] l'extension PHP.
+Si vous ne trouvez pas votre distribution, vous pouvez [installer manuellement][12] l'extension PHP.
 
 ## Instrumentation automatique
 
 Par défaut, le tracing est automatiquement activé. Une fois l'extension installée, **ddtrace** trace votre application et envoie les traces à l'Agent.
 
-Par défaut, Datadog prend en charge tous les frameworks Web. L'instrumentation automatique fonctionne en modifiant l'exécution de PHP pour wrapper certaines fonctions et méthodes afin de les tracer. Le traceur PHP prend en charge l'instrumentation automatique pour [plusieurs bibliothèques](#compatibilite-des-bibliotheques).
+Par défaut, Datadog prend en charge tous les frameworks Web. L'instrumentation automatique fonctionne en modifiant l'exécution de PHP pour wrapper certaines fonctions et méthodes afin de les tracer. Le traceur PHP prend en charge l'instrumentation automatique pour plusieurs bibliothèques.
 
 L'instrumentation automatique capture :
 
@@ -86,108 +96,7 @@ Configurez vos traceurs d'applications de façon à envoyer des traces à un hos
 
 Le traceur PHP recherche automatiquement les variables ENV `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` puis s'initialise avec celles-ci.
 
-Consultez la [configuration du traceur][12] pour découvrir comment définir ces variables.
-
-## Compatibilité
-
-L'APM PHP prend en charge les versions suivantes de PHP :
-
-| Version | Type de prise en charge    |
-|:--------|:----------------|
-| 7.4.x   | Prise en charge complète |
-| 7.3.x   | Prise en charge complète |
-| 7.2.x   | Prise en charge complète |
-| 7.1.x   | Prise en charge complète |
-| 7.0.x   | Prise en charge complète |
-| 5.6.x   | Prise en charge complète |
-| 5.4.x   | Prise en charge complète |
-
-L'APM PHP prend en charge les SAPI suivants :
-
-| SAPI           | Type de prise en charge    |
-|:---------------|:----------------|
-| apache2handler | Prise en charge complète |
-| cli            | Prise en charge complète |
-| fpm-fcgi       | Prise en charge complète |
-| cgi-fcgi       | Prise en charge complète |
-
-### Intégrations
-
-#### Compatibilité des frameworks Web
-
-Par défaut, Datadog **prend en charge tous les frameworks Web PHP**. Vous pouvez ainsi visualiser les traces des spans des bibliothèques prises en charge, par exemple pour des clients de base de données et HTTP.
-
-Le tableau suivant énumère plusieurs frameworks et versions pour lesquels Datadog peut surveiller des traces.
-
-**Fraweworks Web** :
-
-| Module         | Versions      | Type de prise en charge               |
-|:---------------|:--------------|:---------------------------|
-| CakePHP        | 2.x           | Toutes les versions PHP |
-| CodeIgniter    | 2.x, 3.x      | PHP 7+                     |
-| Laravel        | 4.2, 5.x, 6.x | Toutes les versions PHP |
-| Lumen          | 5.2+          | Toutes les versions PHP |
-| Slim           | 3.x           | Toutes les versions PHP |
-| Symfony        | 3.3, 3.4, 4.x | Toutes les versions PHP |
-| WordPress      | 4.x, 5.x      | PHP 7+                     |
-| Zend Framework | 1.12          | Toutes les versions PHP |
-| Yii            | 1.1, 2.0      | Toutes les versions PHP |
-| Drupal         |               | Toutes les versions PHP |
-| Magento        | 2             | Toutes les versions PHP |
-| Phalcon        | 1.3, 3.4      | Toutes les versions PHP |
-| Slim           | 2.x           | Toutes les versions PHP |
-| Neos Flow      | 1.1           | Toutes les versions PHP |
-| FuelPHP        | 1.1           | PHP 7+                     |
-
-Attention : même si votre framework Web n'est pas répertorié, il est par défaut pris en charge avec la dernière version du traceur.
-
-Vous souhaitez utiliser davantage de métadonnées de span et de fonctionnalités internes des frameworks ? Datadog élargit continuellement la prise en charge du tracing avancé pour les frameworks Web PHP. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
-
-#### Compatibilité des bibliothèques CLI
-
-Le tracing depuis le CLI SAPI est désactivé par défaut. Pour activer le tracing des scripts CLI PHP, définissez `DD_TRACE_CLI_ENABLED=true`.
-
-| Module          | Versions | Type de prise en charge    |
-|:----------------|:---------|:----------------|
-| Console CakePHP | 2.x      | Prise en charge complète |
-| Laravel Artisan | 5.x      | Prise en charge complète |
-| Console Symfony |          | _Disponible prochainement_   |
-
-Votre bibliothèque CLI préférée n'est pas disponible ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
-
-#### Compatibilité des datastores
-
-| Module                           | Versions                   | Type de prise en charge    |
-|:---------------------------------|:---------------------------|:----------------|
-| Amazon RDS (avec PDO ou MySQLi) | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| Elasticsearch                    | 1.x                        | Prise en charge complète |
-| Eloquent                         | Versions prises en charge par Laravel | Prise en charge complète |
-| Memcached                        | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| MongoDB                          | 1.4.x                      | Prise en charge complète |
-| MySQLi                           | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| PDO (MySQL, PostgreSQL, MariaDB) | *(Toute version de PHP prise en charge)*      | Prise en charge complète |
-| Predis                           | 1.1                        | Prise en charge complète |
-| AWS Couchbase                    | AWS PHP SDK 3              | _Disponible prochainement_   |
-| AWS DynamoDB                     | AWS PHP SDK 3              | _Disponible prochainement_   |
-| AWS ElastiCache                  | AWS PHP SDK 3              | _Disponible prochainement_   |
-| Doctrine ORM                     | 2                          | _Disponible prochainement_   |
-| ODBC                             | *(Toute version de PHP prise en charge)*      | _Disponible prochainement_   |
-| PHPredis                         | 4                          | _Disponible prochainement_   |
-| Solarium                         | 4.2                        | _Disponible prochainement_   |
-
-Votre datastore préféré n'est pas disponible ? Datadog élargit continuellement la liste des datastores pris en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
-
-#### Compatibilité des bibliothèques
-
-| Module     | Versions              | Type de prise en charge    |
-|:-----------|:----------------------|:----------------|
-| Curl       | *(Toute version de PHP prise en charge)* | Prise en charge complète |
-| Guzzle     | 5.x                   | Prise en charge complète |
-| Guzzle     | 6.x                   | Prise en charge complète |
-| Beanstalkd |                       | _Disponible prochainement_   |
-| ReactPHP   |                       | _Disponible prochainement_   |
-
-Vos bibliothèques préférées ne sont pas disponibles ? Datadog élargit continuellement la liste des bibliothèques prises en charge. Contactez l'[équipe Datadog][13] pour obtenir de l'aide.
+Consultez la [configuration du traceur][13] pour découvrir comment définir ces variables.
 
 ## Configuration
 
@@ -200,8 +109,12 @@ Le traceur PHP peut être configuré à l'aide de variables d'environnement.
 Pour Apache avec php-fpm, utilisez le répertoire `env` de votre fichier de configuration `www.conf` pour configurer le traceur PHP. Exemple :
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
+env[DD_SERVICE] = my-app
 ```
 
 Vous pouvez également utiliser [`SetEnv`][14] depuis la configuration du serveur, le host virtuel, le répertoire ou le fichier `.htaccess`.
@@ -212,12 +125,18 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-Pour NGINX, utilisez le répertoire `env` dans le fichier `www.conf` de php-fpm. Exemple :
+Pour NGINX, utilisez la directive `env` dans le fichier `www.conf` de php-fpm. Exemple :
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
+env[DD_SERVICE] = my-app
 ```
+
+**Remarque** : si vous avez activé l'APM pour votre serveur NGINX, assurez-vous d'avoir correctement configuré le paramètre `opentracing_fastcgi_propagate_context` pour que le tracing distribué fonctionne correctement. Consultez la [configuration de l'APM NGINX][15] pour obtenir plus d'informations.
 
 ### Serveur CLI PHP
 
@@ -234,9 +153,9 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                           | `localhost` | Nom du host de l'Agent                                                                                                                            |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé                                                                            |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Définit si le tracing distribué doit être activé ou non                                                                                                          |
-| `DD_INTEGRATIONS_DISABLED`                | `null`      | Liste au format CSV des intégrations à désactiver, p. ex. : `curl,mysqli` (voir la section [Noms des intégrations](#noms-des-integrations)).                                      |
+| `DD_ENV`                                  | `null`      | Définit l'environnement de l'application, par exemple `prod`, `pre-prod` ou encore `stage`. Ajouté dans la version `0.47.0`.                                         |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Active ou désactive l'échantillonnage prioritaire                                                                                                            |
-| `DD_SERVICE_NAME`                         | `null`      | Nom par défaut de l'application                                                                                                                           |
+| `DD_SERVICE`                              | `null`      | Le nom de l'app par défaut. Pour les versions < 0.47.0, il s'agit de `DD_SERVICE_NAME`.                                                                          |
 | `DD_SERVICE_MAPPING`                      | `null`      | Modifie le nom par défaut d'une intégration APM. Vous pouvez remplacer le nom de plusieurs intégrations à la fois. Utilisez par exemple `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (voir la section [Noms des intégrations](#noms-des-integrations)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | Délai de nouvelle tentative du disjoncteur configurable basé sur IPC (en millisecondes)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Délai maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)                                                                          |
@@ -244,29 +163,33 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_MAX_CONSECUTIVE_FAILURES` | `3`         | Nombre maximal de tentatives du disjoncteur configurable basé sur IPC (en millisecondes)                                                                                |
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | Port de l'Agent                                                                                                                          |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | Délai d'expiration du transfert de la requête de l'Agent (en millisecondes)                                                                                           |
+| `DD_TRACE_AGENT_URL`                      | `null`      | L'URL de l'Agent, qui l'emporte sur `DD_AGENT_HOST` et sur `DD_TRACE_AGENT_PORT`. Exemple : `https://localhost:8126`. Ajoutée dans la version `0.47.1`. |
 | `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag pour activer la fonction App Analytics pour les spans pertinentes dans les intégrations Web                                                                            |
 | `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | Vider automatiquement le traceur lorsque toutes les spans sont finalisées ; définir sur `true` conjointement à `DD_TRACE_GENERATE_ROOT_SPAN=0` pour tracer les processus à exécution longue |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | Active le tracing de scripts PHP depuis le CLI                                                                                                     |
 | `DD_TRACE_DEBUG`                          | `false`     | Active le [mode debugging](#mappage-personnalisé-de-l-URL-a-la-ressource) pour le traceur                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Active le traceur partout                                                                                                                     |
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Générer automatiquement une span de premier niveau ; définir sur `false` conjointement à `DD_TRACE_AUTO_FLUSH_ENABLED=1` pour tracer les processus à exécution longue    |
-| `DD_TRACE_GLOBAL_TAGS`                    | `null`      | Tags à appliquer à toutes les spans, p. ex. : `key1:value1,key2:value2`.                                                                                 |
+| `DD_TAGS`                                 | `null`      | Tags à appliquer à toutes les spans, p. ex. : `key1:value1,key2:value2`. Ajoutés dans la version `0.47.0`                                                 |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Définir le nom de service des requêtes HTTP sur `host-<hostname>`. Par exemple, un appel `curl_exec()` vers `https://datadoghq.com` prendra le nom de service `host-datadoghq.com` au lieu du nom de service par défaut `curl`. |
+| `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED` | `false`    | Flag pour activer App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)). Pour les versions antérieures à la version `0.47.1`, il s'agit du paramètre `DD_<INTÉGRATION>_ANALYTICS_ENABLED`. |
+| `DD_TRACE_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` | `1.0`  | Définit le taux d'échantillonnage d'App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)). Pour les versions antérieures à la version `0.47.1`, il s'agit du paramètre `DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE`. |
+| `DD_TRACE_<INTÉGRATION>_ENABLED`          | `true`      | Active ou désactive une intégration. Par défaut, toutes les intégrations sont activées (voir la section [Noms des intégration](#nom-des-integrations)). Pour les versions antérieures à la version `0.47.1`, il s'agit du paramètre `DD_INTEGRATIONS_DISABLED`, qui accepte une liste d'intégrations à désactiver au format CSV, p. ex. : `curl,mysqli`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Enregistre la durée de compilation de la requête (en millisecondes) dans la span de premier niveau                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Définissez cette variable d'environnement sur `true` afin d'activer l'instrumentation automatique pour les applications qui n'utilisent pas de chargeur automatique                                                    |
-| `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Active la transmission du hostname sur la span racine                                                                                                     |
-| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | Règles de mappage de l'URL au nom de la ressource au format CSV, par exemple : `/foo/*,/bar/$*/baz` (voir la section [Mappage personnalisé de l'URL à la ressource](#mappage-personnalise-de-l-URL-a-la-ressource)) |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | Taux d'échantillonnage des traces (entre `0.0` et `1.0` par défaut). Pour les versions inférieures à 0.36.0, ce paramètre est `DD_SAMPLING_RATE`.                                  |
+| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | Liste d'expressions regex au format CSV qui identifie les fragments de chemin correspondant aux ID (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | Liste de mappages d'URI au format CSV afin de normaliser les noms de ressources pour les requêtes entrantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | Liste de mappages d'URI au format CSV afin de normaliser les noms de ressources pour les requêtes sortantes (voir la section [Mapper les noms de ressources à un URI normalisé](#mapper-les-noms-de-ressources-a-un-uri-normalise)). |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | Taux d'échantillonnage des traces (entre `0.0` et `1.0` par défaut). Pour les versions inférieures à `0.36.0`, ce paramètre est `DD_SAMPLING_RATE`.           |
 | `DD_TRACE_SAMPLING_RULES`                 | `null`      | Chaîne encodée au format JSON pour configurer le taux d'échantillonnage. Exemples : définir le taux d'échantillonnage sur 20 % : `[{"sample_rate": 0.2}]`. Définir le taux d'échantillonnage sur 10 % pour les services commençant par « a » et pour les noms de span commençant par « b » et définir le taux d'échantillonnage sur 20 % pour tous les autres services : `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (voir la section [Noms des intégrations](#noms-des-integrations)). |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Activer les URL en tant que noms de ressources (voir la section [Mapper les noms de ressources à une URL normalisée](#mapper-les-noms-de-ressources-a-une-url-normalisee)).                            |
-| `DD_<INTÉGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag pour activer App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)).                       |
-| `DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE`  | `1.0`       | Définir le taux d'échantillonnage App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)).                  |
+| `DD_VERSION`                              | `null`      | Définit la version d'une application dans les traces et logs, par exemple : `1.2.3`, `6c44da20`, `2020.02.13`. Ajoutée dans la version `0.47.0`.                    |
 
 #### Noms des intégrations
 
 Le tableau ci-dessous répertorie les noms de service par défaut pour chaque intégration. Modifiez les noms de service avec `DD_SERVICE_MAPPING`.
 
-Utilisez ces noms lorsque vous définissez un paramètre pour une intégration spécifique, tel que `DD_<INTÉGRATION>_ANALYTICS_ENABLED`. Exemple pour Laravel : `DD_LARAVEL_ANALYTICS_ENABLED`.
+Utilisez ces noms lorsque vous définissez un paramètre pour une intégration spécifique, tel que `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED`. Exemple pour Laravel : `DD_TRACE_LARAVEL_ANALYTICS_ENABLED`.
 
 | Intégration       | Service Name      |
 |-------------------|-------------------|
@@ -282,6 +205,7 @@ Utilisez ces noms lorsque vous définissez un paramètre pour une intégration s
 | Mongo             | `mongo`           |
 | Mysqli            | `mysqli`          |
 | PDO               | `pdo`             |
+| PhpRedis          | `phpredis`        |
 | Predis            | `predis`          |
 | Slim              | `slim`            |
 | Symfony           | `symfony`         |
@@ -291,7 +215,13 @@ Utilisez ces noms lorsque vous définissez un paramètre pour une intégration s
 
 #### Mapper les noms de ressources à une URL normalisée
 
-Par défaut, l'URL est utilisée afin de créer le nom de ressource de la trace, en suivant le format `<MÉTHODE_REQUÊTE_HTTP> <URL_NORMALISÉE>`. La chaîne de requête est supprimée de l'URL. Cela vous permet de gagner en visibilité sur les frameworks personnalisés qui ne sont pas instrumentés automatiquement en normalisant les URL et en regroupant les endpoints génériques sous une unique ressource.
+<div class="alert alert-warning">
+<strong>Paramètre obsolète :</strong> À partir de la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a>, l'ancien paramètre <code>DD_TRACE_RESOURCE_URI_MAPPING</code> est obsolète. Il continuera à fonctionner pendant un certain temps, mais nous vous conseillons vivement d'utiliser les nouveaux paramètres spécifiés dans ce paragraphe pour éviter tout problème une fois l'ancien paramètre supprimé.
+
+Notez que la configuration de l'un des paramètres suivants : <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> ou <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> activera la nouvelle approche de normalisation des ressources, et toutes les valeurs spécifiées dans <code>DD_TRACE_RESOURCE_URI_MAPPING</code> seront ignorées.
+</div>
+
+Pour les intégrations de serveur et client HTTP, l'URL est utilisée afin de créer le nom de ressource de la trace, en suivant le format `<MÉTHODE_REQUÊTE_HTTP> <URL_NORMALISÉE>`. La chaîne de requête est supprimée de l'URL. Cela vous permet de gagner en visibilité sur les frameworks personnalisés qui ne sont pas instrumentés automatiquement en normalisant les URL et en regroupant les endpoints génériques sous une unique ressource.
 
 | Requête HTTP                       | Nom de la ressource |
 |:-----------------------------------|:--------------|
@@ -311,28 +241,37 @@ Vous pouvez désactiver cette fonctionnalité avec `DD_TRACE_URL_AS_RESOURCE_NAM
 
 ##### Mappage personnalisé de l'URL à la ressource
 
-Lorsque [les noms de ressources d'URL sont activés](#mappage-des-noms-de-ressources-aux-URI-normalisees), le mappage d'URL personnalisé se configure via `DD_TRACE_RESOURCE_URI_MAPPING`. Ce paramètre accepte une liste CSV de règles de mappage. Les wildcards `*` et `$*` sont pris en charge. `DD_TRACE_RESOURCE_URI_MAPPING=/foo/*,/bar/$*/baz` est donc valide. Dans ce contexte, `*` est une correspondance gourmande avec un caractère de remplacement `?`, et `$*` forme une correspondance gourmande sans remplacement.
+Certains cas ne sont pas couverts par la normalisation automatique appliquée.
 
-Les règles sont appliquées dans leur ordre d'affichage dans `DD_TRACE_RESOURCE_URI_MAPPING`. Les règles moins gourmandes doivent figurer avant les règles gourmandes. Exemple : `/foo/$*/bar,/foo/*`. 
+| URL (requête GET)                | Nom de la ressource attendu        |
+|:---------------------------------|:------------------------------|
+| `/using/prefix/id123/for/id`    | `GET /using/prefix/?/for/id`  |
+| `/articles/slug-of-title`        | `GET /articles/?`             |
+| `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
+| `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
 
-Le wildcard `*` wildcard est remplacé par `?`.
+Deux catégories de scénarios ne sont pas couvertes par la normalisation automatique :
 
-| Règle de mappage | URL (requête GET)  | Nom de la ressource    |
-|:-------------|:-------------------|:-----------------|
-| `/foo/*`     | `/foo/bar`         | `GET /foo/?`     |
-| `/foo/*/bar` | `/foo/baz/faz/bar` | `GET /foo/?/bar` |
-| `/foo-*-bar` | `/foo-secret-bar`  | `GET /foo-?-bar` |
+  - Le fragment de chemin à normaliser présente un format reproductible et peut se trouver partout dans l'URL, par exemple `id<number>` dans l'exemple ci-dessus. Ce scénario est couvert par le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` ci-dessous.
+  - Le fragment de chemin peut être n'importe quoi, et le fragment de chemin précédent indique qu'une valeur doit être normalisée. Par exemple, `/cities/new-york` nous indique que `new-york` doit être normalisé, car c'est le nom d'une ville. Ce scénario est couvert par les paramètres `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` et `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` respectivement pour les requêtes entrantes et sortantes.
 
-Le wildcard `$*` est mis en correspondance sans être remplacé.
+###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-| Règle de mappage        | URL (requête GET)           | Nom de la ressource              |
-|:--------------------|:----------------------------|:---------------------------|
-| `/state/$*/show`    | `/state/kentucky/show`      | `GET /state/kentucky/show` |
-| `/widget/*/type/$*` | `/widget/foo-id/type/green` | `GET /widget/?/type/green` |
+Ce paramètre est une liste au format CSV d'expressions regex appliquées indépendamment à chaque fragment de chemin. Par exemple, si le paramètre `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` est défini sur `^id\d+$` pour le premier exemple `/using/prefix/id123/for/id`, les expressions regex seront appliquées à tous les fragments `using`, `prefix`, `id123`, `for` et `id`. Le nom de ressource normalisé final sera `GET /using/prefix/?/for/id`.
+
+Notez que plusieurs expressions régulières séparées par une virgule peuvent être ajoutées : `^id\d+$,code\d+$`. La virgule `,` n'étant pas échappée, elle ne peut pas être utilisée dans l'expression régulière.
+
+###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` et `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+
+Ce paramètre est une liste d'expressions au format CSV qui peut contenir une wildcard `*`. Par exemple, si vous ajoutez l'expression `cities/*`, cela signifie que chaque fois que le fragment `cities` est trouvé lors de l'analyse d'une URL, alors le fragment suivant (le cas échéant) sera remplacé par `?`. Les expressions sont appliquées à toutes les profondeurs ; par conséquent, la règle suivante entraînera la normalisation de `/cities/new-york` et `/nested/cities/new-york` dans le tableau ci-dessus.
+
+Les expressions peuvent être appliquées à une partie d'un fragment spécifique. Par exemple, `path/*-fix` normalisera l'URL `/some/path/changing-fix/nested` en `/some/path/?-fix/nested`
+
+Notez que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` s'applique uniquement aux requêtes entrantes (par exemple, les frameworks Web), tandis que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` s'applique uniquement aux requêtes sortantes (par exemple, les requêtes `curl` et `guzzle`).
 
 ## Mise à niveau
 
-Pour mettre à niveau le traceur PHP, [téléchargez la dernière version][8] et suivez les mêmes étapes que lors de l'[installation de l'extension](#installer-l-extension).
+Pour mettre à niveau le traceur PHP, [téléchargez la dernière version][9] et suivez les mêmes étapes que lors de l'[installation de l'extension](#installer-l-extension).
 
 **Remarque** : si vous utilisez une mise en cache secondaire dans OPcache en définissant le paramètre `opcache.file_cache`, supprimez le dossier de cache.
 
@@ -350,17 +289,18 @@ Pour supprimer le tracer PHP :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/install
-[2]: /fr/tracing/visualization/
-[3]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[4]: /fr/tracing/send_traces/
-[5]: /fr/tracing/setup/docker/
-[6]: /fr/agent/kubernetes/apm/
-[7]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
-[8]: https://github.com/DataDog/dd-trace-php/releases/latest
-[9]: https://app.datadoghq.com/apm/services
-[10]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[11]: /fr/tracing/faq/php-tracer-manual-installation
-[12]: /fr/tracing/setup/php/#environment-variable-configuration
-[13]: /fr/help
+[1]: /fr/tracing/compatibility_requirements/php
+[2]: https://app.datadoghq.com/apm/docs
+[3]: /fr/tracing/visualization/
+[4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
+[5]: /fr/tracing/send_traces/
+[6]: /fr/tracing/setup/docker/
+[7]: /fr/agent/kubernetes/apm/
+[8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
+[9]: https://github.com/DataDog/dd-trace-php/releases/latest
+[10]: https://app.datadoghq.com/apm/services
+[11]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[12]: /fr/tracing/faq/php-tracer-manual-installation
+[13]: /fr/tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: /fr/tracing/setup/nginx/#nginx-and-fastcgi

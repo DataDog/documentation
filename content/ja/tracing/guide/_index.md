@@ -2,9 +2,9 @@
 title: トレースガイド
 kind: ガイド
 private: true
+aliases:
+  - /ja/tracing/getting_further/
 ---
-
-
 {{< whatsnext desc="APM の概要" >}}
     {{< nextlink href="tracing/guide/alert_anomalies_p99_database" >}}1. データベースサービスの異常な p99 レイテンシーに関するアラート [3 分]{{< /nextlink >}}
     {{< nextlink href="tracing/guide/week_over_week_p50_comparison" >}}2. サービスの p50 レイテンシーを前週と比較する [2 分]{{< /nextlink >}}

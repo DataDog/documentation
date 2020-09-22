@@ -176,7 +176,7 @@ from ddtrace import tracer
 from myapp import __version__
 
 # これは各スパンに適用されます
-tracer.set_tag("version", __version__)
+tracer.set_tags({"version": __version__, "<TAG_KEY_2>": "<TAG_VALUE_2>"})
 ```
 {{% /tab %}}
 {{% tab "エラー" %}}

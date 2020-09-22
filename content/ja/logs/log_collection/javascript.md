@@ -37,11 +37,11 @@ Datadog のクライアント側 JavaScript ロギングライブラリ `datadog
 {{< site-region region="us" >}}
 
 ```javascript
-import { Datacenter, datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: Datacenter.US,
+  site: 'datadoghq.com',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -51,11 +51,11 @@ datadogLogs.init({
 {{< site-region region="eu" >}}
 
 ```javascript
-import { Datacenter, datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: Datacenter.EU,
+  site: 'datadoghq.eu',
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -73,10 +73,11 @@ datadogLogs.init({
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-us.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.com',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -92,10 +93,11 @@ datadogLogs.init({
 <html>
   <head>
     <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-eu.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
+        site: 'datadoghq.eu',
         forwardErrorsToLogs: true,
         sampleRate: 100
       });
@@ -115,7 +117,7 @@ datadogLogs.init({
 | パラメーター             | 種類    | 必須 | デフォルト | 説明                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | 文字列  | はい      | `-`     | [Datadog クライアントトークン][2]。                                                                             |
-| `datacenter`          | 文字列  | はい      | `us`    | 所属する組織の Datadog サイト。`us` はアメリカの Datadog のサイト、 `eu` は EU の Datadog サイト。               |
+| `site`               | 文字列  | はい      | `datadoghq.com`    | 所属する組織の Datadog サイト。`datadoghq.com` はアメリカの Datadog のサイト、 `datadoghq.eu` は EU の Datadog サイト。               |
 | `service`            | 文字列  | ✕       | `` | このアプリケーションのサービス名。                             |
 | `env`                | 文字列  | ✕       | `` | アプリケーションの環境 (例: prod、pre-prod、staging)                   |
 | `version`            | 文字列  | ✕       | `` | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                   |

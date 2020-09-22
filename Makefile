@@ -14,7 +14,7 @@ IMAGE_VERSION="latest"
 # config
 CONFIG_FILE := Makefile.config
 ifeq ($(wildcard $(CONFIG_FILE)),)
-	$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+	_ := $(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
 include $(CONFIG_FILE)
 
@@ -72,7 +72,6 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'integration_sdk.md' \
 		-a -not -name 'journald.md' \
 		-a -not -name 'kubernetes.md' \
-		-a -not -name 'marklogic.md' \
 		-a -not -name 'nxlog.md' \
 		-a -not -name 'rss.md' \
 		-a -not -name 'rsyslog.md' \
@@ -103,6 +102,16 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
 	@if [ content/en/serverless/forwarder.md ]; then \
 	rm -f content/en/serverless/forwarder.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/python.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/python.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/nodejs.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/nodejs.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/ruby.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/ruby.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/go.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
+	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
+	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
 	@if [ content/en/real_user_monitoring/android.md ]; then \
 	rm -f content/en/real_user_monitoring/android.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \

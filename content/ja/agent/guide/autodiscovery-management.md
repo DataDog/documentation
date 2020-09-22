@@ -24,13 +24,35 @@ Agent をホスト上のバイナリとして実行する場合は、[Agent](?ta
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**でオートディスカバリーから**画像** `<IMAGE_NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
 
 ```shell
 DD_CONTAINER_EXCLUDE = "image:<IMAGE_NAME>"
 ```
 
-オートディスカバリーから名前`<NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+たとえば、以下のコンフィギュレーションは Docker Cloud にあるこれらのコンテナを除外するように Agent に指示します。
+
+```shell
+DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
+```
+
+正規表現 `DD_CONTAINER_EXCLUDE = "image:dockercloud/.*"` を使用してすべてのコンテナを無視することもできます。
+
+**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+
+```shell
+DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
+```
+
+上記の通り、以下のコンフィギュレーションは Docker Cloud にあるこれらのコンテナを除外するように Agent に指示します。
+
+```shell
+DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
+```
+
+`DD_AC_EXCLUDE` は **Agent v7.20 以降では推奨されません**。
+
+**Agent v7.20 以降**でオートディスカバリーから**名前** `<NAME>` を持つ任意の Docker コンテナを削除し、**ログとメトリクス**を除外するには、Datadog Agent に以下の環境変数を追加してください。
 
 ```shell
 DD_CONTAINER_EXCLUDE = "name:<NAME>"
@@ -42,15 +64,19 @@ DD_CONTAINER_EXCLUDE = "name:<NAME>"
 DD_CONTAINER_EXCLUDE = "name:dd-agent"
 ```
 
-別の例：以下の構成は、Docker Cloud にあるこれらのコンテナを除外するように Agent に指示します。
+**Agent v7.19 以前**でオートディスカバリーから**名前**`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
-DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
+DD_AC_EXCLUDE = "name:<NAME>"
 ```
 
-正規表現 `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"` を使用してすべてのコンテナを無視することもできます。
+たとえば、除外ルールを使用して、Agentコンテナそのものを除外します。
 
-Agent v7.20 以降では、除外条件を使いログのみまたはメトリクスのみを除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
+```shell
+DD_AC_EXCLUDE = "name:dd-agent"
+```
+
+**Agent v7.20 以降**では、除外条件を使い**ログのみまたはメトリクスのみ**を除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_EXCLUDE_LOGS = "image:<IMAGE_NAME>"
@@ -83,13 +109,13 @@ container_exclude: [image:<IMAGE_NAME>]
 container_exclude: [name:<NAME>]
 ```
 
-Agent vv7.20 以降では、除外条件を使いログのみまたはメトリクスのみを除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**では、除外条件を使いログのみまたはメトリクスのみを除外することもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナからログを除外するには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 container_exclude_logs: [image:<IMAGE_NAME>]
 ```
 
-同様に、メトリクスを除外するには、
+同様に、**Agent v7.20 以降**でメトリクスを除外するには、
 
 ```shell
 container_exclude_metrics: [image:<IMAGE_NAME>]
@@ -116,13 +142,21 @@ container_exclude: [kube_namespace:<NAMESPACE>]
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
-オートディスカバリーから画像`<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
-オートディスカバリーから名前`<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.19 以前**でオートディスカバリーから**画像** `<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+
+```shell
+DD_AC_INCLUDE = "image:<IMAGE_NAME>"
+```
+
+`DD_AC_INCLUDE` は **Agent v7.20 以降では推奨されません**。
+
+**Agent v7.20 以前**でオートディスカバリーから**名前** `<NAME>`を持つ特定のDockerコンテナを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE = "name:<NAME>"
@@ -134,7 +168,21 @@ DD_CONTAINER_INCLUDE = "name:<NAME>"
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
-Agent v7.20 以降では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
+
+**Agent v7.19 以前**でオートディスカバリーから**名前**`<IMAGE_NAME>`を持つ特定のDockerコンテナを削除するには、次の環境変数を Datadog Agent に追加します。
+
+```shell
+DD_AC_INCLUDE = "name:<NAME>"
+```
+
+上記の通り、`Ubuntu` や `Debian` 画像のみをモニターして残りを削除したい場合、次のように指定します。
+
+```shell
+DD_AC_EXCLUDE = "image:.*"
+DD_AC_INCLUDE = "image:ubuntu image:debian"
+```
+
+**Agent v7.20 以降**では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME>"
@@ -167,7 +215,7 @@ container_include: [image:<IMAGE_NAME>]
 container_include: [name:<NAME>]
 ```
 
-Agent v7.20 以降では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
+**Agent v7.20 以降**では、包含条件を使いログのみまたはメトリクスのみを含めることもできます。たとえば、画像 `<IMAGE_NAME>`を持つコンテナのログを含めるには、次の環境変数を Datadog Agent に追加します。
 
 ```shell
 container_include_logs: [image:<IMAGE_NAME>]

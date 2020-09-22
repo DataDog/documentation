@@ -3,6 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: ibm_mq
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -31,6 +33,7 @@ short_description: "IBM\_MQ est un système de gestion de file d'attente de mess
 support: core
 supported_os:
   - linux
+  - mac_os
 ---
 ## Présentation
 
@@ -55,12 +58,14 @@ export C_INCLUDE_PATH=/opt/mqm/inc
 
 ```
 
-**Remarque** : l'Agent v6+ utilise Upstart ou systemd pour orchestrer le service datadog-agent. Il est possible que des variables d'environnement doivent être ajoutées aux fichiers de configuration du service, dont les emplacements par défaut sont :
+**Remarque** : l'Agent v6+ utilise `upstart`, `systemd` ou `launchd` pour orchestrer le service datadog-agent. Il est possible que des variables d'environnement doivent être ajoutées aux fichiers de configuration du service, dont les emplacements par défaut sont :
 
-- Upstart : `/etc/init/datadog-agent.conf`
-- Systemd : `/lib/systemd/system/datadog-agent.service`
+- Upstart (Linux) : `/etc/init/datadog-agent.conf`
+- Systemd (Linux) : `/lib/systemd/system/datadog-agent.service`
+- Launchd (MacOS) : `~/Library/LaunchAgents/com.datadoghq.agent.plist`
+  - Cela ne fonctionne que si le SIP macOS est désactivé (peut ne pas être conseillé en fonction de votre politique de sécurité). Cette situation est due à la [suppression de la variable d'environnement `LD_LIBRARY_PATH` par SIP][4].
 
-Voici un exemple de configuration utilisée pour systemd :
+Exemple de configuration pour `systemd` :
 
 ```yaml
 [Unit]
@@ -82,7 +87,7 @@ ExecStart=/opt/datadog-agent/bin/agent/agent run -p /opt/datadog-agent/run/agent
 WantedBy=multi-user.target
 ```
 
-Voici un exemple de configuration upstart :
+Exemple de configuration pour `upstart` :
 
 ```conf
 description "Datadog Agent"
@@ -107,6 +112,42 @@ end script
 post-stop script
   rm -f /opt/datadog-agent/run/agent.pid
 end script
+```
+
+Exemple de configuration pour `launchd` :
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>KeepAlive</key>
+        <dict>
+            <key>SuccessfulExit</key>
+            <false/>
+        </dict>
+        <key>Label</key>
+        <string>com.datadoghq.agent</string>
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>DD_LOG_TO_CONSOLE</key>
+            <string>false</string>
+            <key>LD_LIBRARY_PATH</key>
+            <string>/opt/mqm/lib64:/opt/mqm/lib</string>
+        </dict>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/opt/datadog-agent/bin/agent/agent</string>
+            <string>run</string>
+        </array>
+        <key>StandardOutPath</key>
+        <string>/var/log/datadog/launchd.log</string>
+        <key>StandardErrorPath</key>
+        <string>/var/log/datadog/launchd.log</string>
+        <key>ExitTimeOut</key>
+        <integer>10</integer>
+    </dict>
+</plist>
 ```
 
 À chaque mise à jour de l'Agent, ces fichiers sont effacés et doivent à nouveau être modifiés.
@@ -150,13 +191,16 @@ All valid MQSC commands were processed.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `ibm_mq.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance IBM MQ. Consultez le [fichier d'exemple ibm_mq.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `ibm_mq.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance IBM MQ. Consultez le [fichier d'exemple ibm_mq.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
    Plusieurs options sont disponibles pour configurer IBM MQ, selon la façon dont vous l'utilisez.
 
    - `channel` : le canal IBM MQ
@@ -174,7 +218,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
       - ADMIN.QUEUE.1
     ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][2].
 
 ##### Collecte de logs
 
@@ -200,11 +244,16 @@ _Disponible à partir des versions > 6.0 de l'Agent_
              pattern: "\d{2}/\d{2}/\d{4}"
    ```
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -218,15 +267,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "ibm_mq", "service": "<NOM_SERVICE>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{2}/\d{2}/\d{4}"}}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `ibm_mq` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][5] et cherchez `ibm_mq` dans la section Checks.
 
 ## Données collectées
 
@@ -257,22 +311,19 @@ IBM MQ n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller les métriques et les logs d'IBM MQ avec Datadog][11]
+- [Surveiller les métriques et les logs d'IBM MQ avec Datadog][7]
+
 
 [1]: https://www.ibm.com/products/mq
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://developer.ibm.com/messaging/mq-downloads
-[4]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
-[11]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[4]: https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html#//apple_ref/doc/uid/TP40016462-CH3-SW1
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog

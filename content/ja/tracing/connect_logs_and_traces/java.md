@@ -20,13 +20,13 @@ further_reading:
 
 `-Ddd.logs.injection=true` を jvm スタートアップ引数として追加するか、環境変数 `DD_LOGS_INJECTION=true` を通じて、Java トレースの[コンフィギュレーション][1]の挿入を有効にします。
 
+ログが JSON 形式で Logback を使っている場合、すべきことは残っていません。一方、他のロギングライブラリの場合は、ログに対する MDC 属性の自動挿入を有効にする必要があります。
+
 ログが Raw 形式の場合、フォーマッタを更新してロガーコンフィギュレーションに `dd.trace_id` and `dd.span_id` を含めます:
 
 ```xml
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
-
-ログが JSON 形式で Logback を使っている場合、すべきことは残っていません。一方、他のロギングライブラリの場合は、ログに対する MDC 属性の自動挿入を有効にする必要があります。
 
 **注**: トレース ID の `attribute.path` が `dd.trace_id` **でない**場合は、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは[このトピックについてのよくあるご質問][2]を参照してください。
 

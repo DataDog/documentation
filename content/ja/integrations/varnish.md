@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: varnish
@@ -60,11 +62,14 @@ supported_os:
 
 Varnish チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### Varnish の準備
 
@@ -76,7 +81,7 @@ sudo usermod -G varnish -a dd-agent
 
 ##### メトリクスの収集
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `varnish.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.d/conf.yaml][4] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `varnish.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -92,7 +97,7 @@ sudo usermod -G varnish -a dd-agent
      dd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
    ```
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -130,20 +135,31 @@ _Agent バージョン 6.0 以降で利用可能_
        service: varnish
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に応じて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.yaml][4] を参照してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に応じて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル varnish.yaml][2] を参照してください。
 
-6. [Agent を再起動します][5]。
+6. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
 コンテナ環境では、オートディスカバリーを使用した Varnish チェックの構成はサポートされていません。このような環境でメトリクスを収集するには、StatsD プラグインを使用してメトリクスを DogStatsD へプッシュします。次のサードパーティ製プラグインがあります。
 
-- [libvmod-statsd][6]
-- [prometheus_varnish_exporter][7]
+- [libvmod-statsd][1]
+- [prometheus_varnish_exporter][2]
+
+[1]: https://github.com/jib/libvmod-statsd
+[2]: https://github.com/jonnenauha/prometheus_varnish_exporter
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `varnish` を探します。
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `varnish` を探します。
 
 ## 収集データ
 
@@ -162,26 +178,21 @@ Varnish チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Varnish の主要なパフォーマンスメトリクス][11]
-- [Varnish メトリクスの収集方法][12]
-- [Datadog を使用した Varnish の監視][13]
+- [Varnish の主要なパフォーマンスメトリクス][5]
+- [Varnish メトリクスの収集方法][6]
+- [Datadog を使用した Varnish の監視][7]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/varnish/images/varnish.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://github.com/jib/libvmod-statsd
-[7]: https://github.com/jonnenauha/prometheus_varnish_exporter
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/varnish/metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://www.datadoghq.com/blog/top-varnish-performance-metrics
-[12]: https://www.datadoghq.com/blog/how-to-collect-varnish-metrics
-[13]: https://www.datadoghq.com/blog/monitor-varnish-using-datadog
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/top-varnish-performance-metrics
+[6]: https://www.datadoghq.com/blog/how-to-collect-varnish-metrics
+[7]: https://www.datadoghq.com/blog/monitor-varnish-using-datadog

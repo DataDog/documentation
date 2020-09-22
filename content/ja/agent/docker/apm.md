@@ -36,7 +36,7 @@ _任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp
 たとえば、次のコマンドを使用すると、Agent はユーザーのホストからのみトレースを受信します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{% tab "Linux" %}}
 
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \

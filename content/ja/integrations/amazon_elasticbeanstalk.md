@@ -150,19 +150,33 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
 {{< tabs >}}
 
 {{% tab "Amazon Linux AMI" %}}
-1.  [アプリケーションソースバンドル][10]のルートに `.ebextensions` という名前のフォルダーを作成します。
-2. [99datadog.config][11] を `.ebextensions` にダウンロードします。
-3. `99datadog.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][4]に変更します。
+1. [アプリケーションソースバンドル][1]のルートに `.ebextensions` という名前のフォルダーを作成します。
+2. [99datadog.config][2] を `.ebextensions` にダウンロードします。
+3. `99datadog.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][3]に変更します。
 4. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定することをお勧めします。
-5. [Elastic Beanstalk コンソール][12]、[EB CLI][13]、または [AWS CLI][13] でアプリケーションをデプロイします。
+5. [Elastic Beanstalk コンソール][4]、[EB CLI][5]、または [AWS CLI][5] でアプリケーションをデプロイします。
+
+
+[1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[2]: https://docs.datadoghq.com/ja/config/99datadog.config
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.
 {{% /tab %}}
 
 {{% tab "Amazon Linux 2" %}}
-1.  [アプリケーションソースバンドル][10]のルートに `.ebextensions` という名前のフォルダーを作成します。
-2. [99datadog-amazon-linux-2.config][17] を `.ebextensions` にダウンロードします。
-3. `99datadog-amazon-linux-2.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][4]に変更します。
+1. [アプリケーションソースバンドル][1]のルートに `.ebextensions` という名前のフォルダーを作成します。
+2. [99datadog-amazon-linux-2.config][2] を `.ebextensions` にダウンロードします。
+3. `99datadog-amazon-linux-2.config` の `option_settings` 内の `DD_API_KEY` の値を [Datadog API キー][3]に変更します。
 4. すべてのホストが同じバージョンの Agent を実行するように、`option_settings` の下に `DD_AGENT_VERSION` を設定して特定の Agent バージョンを固定することをお勧めします。
-5. [Elastic Beanstalk コンソール][12]、[EB CLI][13]、または [AWS CLI][13] でアプリケーションをデプロイします。
+5. [Elastic Beanstalk コンソール][4]、[EB CLI][5]、または [AWS CLI][5] でアプリケーションをデプロイします。
+
+
+[1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
+[2]: https://docs.datadoghq.com/ja/config/99datadog-amazon-linux-2.config
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
+[5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
 {{% /tab %}}
 
 {{< /tabs >}}

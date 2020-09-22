@@ -253,5 +253,44 @@
   },
   "edit": {
     "other": "編集"
+  },
+  "overview": {
+    "other": "概要"
+  },
+  "arguments": {
+    "other": "引数"
+  },
+  "path_parameters": {
+    "other": "パスパラメーター"
+  },
+  "query_strings": {
+    "other": "クエリ文字列"
+  },
+  "header_parameters": {
+    "other": "ヘッダーパラメーター"
+  },
+  "request": {
+    "other": "リクエスト"
+  },
+  "model": {
+    "other": "モデル"
+  },
+  "example": {
+    "other": "例"
+  },
+  "copy": {
+    "other": "コピー"
+  },
+  "response": {
+    "other": "応答"
+  },
+  "code_example": {
+    "other": "コード例"
+  },
+  "name": {
+    "other": "名前"
+  },
+  "description": {
+    "other": "説明"
   }
 }

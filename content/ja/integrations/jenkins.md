@@ -24,7 +24,9 @@ Jenkins プラグインを使用して、Datadog のアカウントにメトリ�
 
 ### インストール
 
-_このプラグインは Java 8+ および [Jenkins 1.632][2] 以上のバージョンで動作します。_
+_このプラグインには [Jenkins 2.164.1][2] が必要です。_
+
+_それ以前のバージョン (1.632+) の Jenkins をご使用の場合は、[こちら](https://updates.jenkins.io/download/plugins/datadog/)からプラグインの 1.2.0 バージョンをご利用ください。_
 
 このプラグインはお使いの Jenkins の[アップデートセンター][3] (`Manage Jenkins -> Manage Plugins`) からインストールが可能です。
 
@@ -56,14 +58,14 @@ Datadog のプラグインを構成するには、お使いの Jenkins の `Mana
 1. **Use Datadog API URL and Key to report to Datadog** (デフォルトで選択されています) の横のラジオボタンを選択します。
 2. Jenkins コンフィギュレーション画面の `API Key` テキストボックスに [Datadog の API キー][4] を貼り付けます。
 3. Jenkins コンフィギュレーション画面の `Test Key` ボタンをクリックして、入力した Datadog の API キーをテストします。ボタンは API Key テキストボックスのすぐ下にあります。
-4. (オプション) [Datadog ログインテーク URL][15] を入力します。
+4. (オプション) [Datadog ログインテーク URL][15] を入力し、Advanced タブで "Enable Log Collection" を選択します。
 5. 構成を保存します。
 
 ##### DogStatsD 転送{#dogstatsd-forwarding-plugin}
 
 1. **Use the Datadog Agent to report to Datadog** の横のラジオボタンを選択します。
 2. DogStatsD サーバーの `hostname` と `port` を指定します。
-3. (オプション) ログ収集ポートを入力し、[ログ収集](#log-collection)を構成します。
+3. (オプション) ログ収集ポートを入力し、[ログ収集](#ログ収集)を構成してから Advanced タブで "Enable Log Collection" を選択します。
 4. 構成を保存します。
 
 #### Groovy スクリプト
@@ -141,6 +143,37 @@ d.save()
 
 ## 内容
 
+### パイプラインのカスタマイズ
+
+Datadog プラグインにより "datadog" のステップが追加され、パイプラインベースのジョブに対するコンフィギュレーションオプションが提供されます。
+宣言型パイプラインでは、トップレベルのオプションブロックにステップを追加します。
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+スクリプト化されたパイプラインでは、関連セクションを Datadog ステップでラップします。
+```groovy
+datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
 ### グローバルカスタマイズ
 
 グローバルコンフィギュレーションをカスタマイズするには、Jenkins で `Manage Jenkins -> Configure System` に移動し、**Advanced** ボタンをクリックします。次のオプションを使用できます。
@@ -212,53 +245,57 @@ d.save()
 
 ### メトリクス
 
-| メトリクス名                            | 説明                                                    | デフォルトのタグ                                                |
-|----------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------|
-| `jenkins.computer.launch_failure`      | コンピューターの起動失敗レート                              | `jenkins_url`                                               |
-| `jenkins.computer.offline`             | コンピューターのオフラインレート                                | `jenkins_url`                                               |
-| `jenkins.computer.online`              | コンピューターのオンラインレート                                 | `jenkins_url`                                               |
-| `jenkins.computer.temporarily_offline` | コンピューターの一時的なオフラインレート                    | `jenkins_url`                                               |
-| `jenkins.computer.temporarily_online`  | コンピューターの一時的なオンラインレート                     | `jenkins_url`                                               |
-| `jenkins.config.changed`               | 変更された構成レート                                 | `jenkins_url`, `user_id`                                    |
-| `jenkins.executor.count`               | エグゼキューター総数                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.executor.free`                | 使用されていないエグゼキューター数                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.executor.in_use`              | アイドル状態のエグゼキューター数                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.item.copied`                  | アイテムのコピーレート                                    | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.created`                 | アイテムの作成レート                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.deleted`                 | アイテムの削除レート                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.location_changed`        | アイテムの移動レート                                     | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.updated`                 | アイテムの更新レート                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.job.aborted`                  | ジョブの中止レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.job.completed`                | ジョブの完了レート                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.cycletime`                | ビルドのサイクル時間                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.duration`                 | ビルドの所要時間 (秒単位)                                    | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.feedbacktime`             | コードのコミットからジョブの失敗までのフィードバック時間                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.leadtime`                 | ビルドのリードタイム                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.mtbf`                     | MTBF: 最後に成功したジョブから現在失敗したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.mttr`                     | MTTR: 最後に失敗したジョブから現在成功したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.started`                  | ジョブの開始レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (ミリ秒単位)            | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.node.count`                   | ノード総数                                          | `jenkins_url`                                               |
-| `jenkins.node.offline`                 | オフラインのノード数                                           | `jenkins_url`                                               |
-| `jenkins.node.online`                  | オンラインのノード数                                            | `jenkins_url`                                               |
-| `jenkins.node_status.count`            | このノードが存在する場合。                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。                                    | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.plugin.count`                 | プラグイン総数                                                 | `jenkins_url`                                               |
-| `jenkins.project.count`                | プロジェクト総数                                                 | `jenkins_url`                                               |
-| `jenkins.queue.size`                   | キューサイズ                                                    | `jenkins_url`                                               |
-| `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                             | `jenkins_url`                                               |
-| `jenkins.queue.pending`                | キュー内の保留アイテム数                               | `jenkins_url`                                               |
-| `jenkins.queue.stuck`                  | キュー内の立ち往生 (スタック) アイテム数                                 | `jenkins_url`                                               |
-| `jenkins.queue.blocked`                | キュー内のブロックされたアイテム数                               | `jenkins_url`                                               |
+| メトリクス名                            | 説明                                                    | デフォルトのタグ                                                               |
+|----------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------|
+| `jenkins.computer.launch_failure`      | コンピューターの起動失敗レート                              | `jenkins_url`                                                              |
+| `jenkins.computer.offline`             | コンピューターのオフラインレート                                | `jenkins_url`                                                              |
+| `jenkins.computer.online`              | コンピューターのオンラインレート                                 | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_offline` | コンピューターの一時的なオフラインレート                    | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_online`  | コンピューターの一時的なオンラインレート                     | `jenkins_url`                                                              |
+| `jenkins.config.changed`               | 変更された構成レート                                 | `jenkins_url`, `user_id`                                                   |
+| `jenkins.executor.count`               | エグゼキューター総数                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.free`                | 使用されていないエグゼキューター数                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.in_use`              | アイドル状態のエグゼキューター数                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.item.copied`                  | アイテムのコピーレート                                    | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.created`                 | アイテムの作成レート                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.deleted`                 | アイテムの削除レート                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.location_changed`        | アイテムの移動レート                                     | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.updated`                 | アイテムの更新レート                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.job.aborted`                  | ジョブの中止レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.build_duration`           | 一時停止なしのビルドの所要時間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.completed`                | ジョブの完了レート                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.cycletime`                | ビルドのサイクル時間                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.duration`                 | ビルドの所要時間 (秒単位)                                    | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.feedbacktime`             | コードのコミットからジョブの失敗までのフィードバック時間                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.leadtime`                 | ビルドのリードタイム                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mtbf`                     | MTBF: 最後に成功したジョブから現在失敗したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mttr`                     | MTTR: 最後に失敗したジョブから現在成功したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.pause_duration`            | ビルドジョブの一時停止期間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.started`                  | ジョブの開始レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.stage_duration`           | 個々のステージの期間。                                 | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
+| `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (ミリ秒単位)            | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.node.count`                   | ノード総数                                          | `jenkins_url`                                                              |
+| `jenkins.node.offline`                 | オフラインのノード数                                           | `jenkins_url`                                                              |
+| `jenkins.node.online`                  | オンラインのノード数                                            | `jenkins_url`                                                              |
+| `jenkins.node_status.count`            | このノードが存在する場合。                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.plugin.count`                 | プラグイン総数                                                 | `jenkins_url`                                                              |
+| `jenkins.project.count`                | プロジェクト総数                                                 | `jenkins_url`                                                              |
+| `jenkins.queue.size`                   | キューサイズ                                                    | `jenkins_url`                                                              |
+| `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                             | `jenkins_url`                                                              |
+| `jenkins.queue.pending`                | キュー内の保留アイテム数                               | `jenkins_url`                                                              |
+| `jenkins.queue.stuck`                  | キュー内の立ち往生 (スタック) アイテム数                                 | `jenkins_url`                                                              |
+| `jenkins.queue.blocked`                | キュー内のブロックされたアイテム数                               | `jenkins_url`                                                              |
 | `jenkins.queue.job.in_queue`                   | ジョブがキューに入れられた回数。                                                     | `jenkins_url`、`job_name`                                               |
 | `jenkins.queue.job.buildable`              | ジョブがキューでビルド可能になった回数。                             | `jenkins_url`、`job_name`                                               |
 | `jenkins.queue.job.pending`                | ジョブがキューで保留された回数。                             | `jenkins_url`、`job_name`                                               |
 | `jenkins.queue.job.stuck`                  | ジョブがキューでスタックした回数。                                  | `jenkins_url`、`job_name`                                               |
 | `jenkins.queue.job.blocked`                | ジョブがキューでブロックされた回数。                           | `jenkins_url`、`job_name`                                               |
-| `jenkins.scm.checkout`                 | SCM チェックアウトのレート                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.user.access_denied`           | 認証に失敗したユーザーレート                         | `jenkins_url`, `user_id`                                    |
-| `jenkins.user.authenticated`           | 認証したユーザーレート                                  | `jenkins_url`, `user_id`                                    |
-| `jenkins.user.logout`                  | ログアウトしたユーザーレート                                     | `jenkins_url`, `user_id`                                    |
+| `jenkins.scm.checkout`                 | SCM チェックアウトのレート                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.user.access_denied`           | 認証に失敗したユーザーレート                         | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.authenticated`           | 認証したユーザーレート                                  | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.logout`                  | ログアウトしたユーザーレート                                     | `jenkins_url`, `user_id`                                                   |
+
 
 #### Agent のログ収集
 

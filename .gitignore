@@ -68,6 +68,11 @@ content/en/real_user_monitoring/android.md
 
 # serverless
 content/en/serverless/forwarder.md
+content/en/serverless/datadog_lambda_library/python.md
+content/en/serverless/datadog_lambda_library/nodejs.md
+content/en/serverless/datadog_lambda_library/ruby.md
+content/en/serverless/datadog_lambda_library/go.md
+content/en/serverless/datadog_lambda_library/java.md
 
 # Runtime data
 pids

@@ -6,15 +6,20 @@
 ### Motivation
 <!-- What inspired you to submit this pull request?-->
 
-### Preview link
+### Preview
 <!-- Impacted pages preview links-->
 
-<!-- This is the base preview link. This currently only works if you are in the Datadog organization and working off of a branch - it will not work with a fork.
+<!-- This only works if you are part of the Datadog organization and working off of a branch - it will not work with a fork.
 
 Replace the branch name and add the complete path: -->
 https://docs-staging.datadoghq.com/<BRANCH_NAME>/<PATH>
 
-Check preview base path using the URL in details in `preview` status check.
-
 ### Additional Notes
 <!-- Anything else we should know when reviewing?-->
+
+---
+
+### Reviewer checklist
+- [ ] Review the changed files.
+- [ ] Review the URLs listed in the [Preview](#preview) section.
+- [ ] Review any mentions of "Contact Datadog support" for internal support documentation.

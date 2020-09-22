@@ -59,6 +59,16 @@ APM の [Live Search][1] を使用すると、過去 15 分間に収集された
 - 検索クエリバー、`@customer.id:584959` に "customer.id" と入力して、すべてのスパンを `customer.id` 属性で絞り込みます。
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search フィルター" >}}
 
+## Live Analytics
+
+<div class="alert alert-warning">
+これらの機能は現在非公開ベータ版です。<a href="https://forms.gle/1FParyX49eNFPDsg9">フォームに記入</a>して、ベータ版への追加をリクエストしてください。
+</div>
+
+Live Analytics を使用すると、過去 15 分間に取り込まれたトレースの 100% で分析を実行できます。任意のスパンで任意のタグを検索します。さらに Datadog には、Datadog に送信されるトレースの数を制御する手段と、最も重要なトレースを保持するためのタグベースの保持フィルターも用意されています。
+
+{{< img src="tracing/live_search/LiveAnalytics.gif" alt="Live Analytics" >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
