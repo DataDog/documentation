@@ -102,7 +102,7 @@ tracer.configure(
 [3]: /fr/tracing/send_traces/
 [4]: /fr/tracing/setup/docker/
 [5]: /fr/agent/kubernetes/apm/
-[6]: http://pypi.datadoghq.com/trace/docs
+[6]: https://ddtrace.readthedocs.io/en/stable/
 [7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [8]: /fr/getting_started/tagging/unified_service_tagging
 [9]: /fr/tracing/guide/setting_primary_tags_to_scope/
