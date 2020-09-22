@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: jboss_wildfly
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

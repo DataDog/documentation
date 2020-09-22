@@ -6,6 +6,7 @@ assets:
     Ignite Overview: assets/dashboards/ignite_overview.json
   logs:
     source: ignite
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

@@ -6,6 +6,7 @@ assets:
     RethinkDB Overview: assets/dashboards/overview.json
   logs:
     source: rethinkdb
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

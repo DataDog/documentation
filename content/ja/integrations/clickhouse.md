@@ -6,6 +6,7 @@ assets:
     ClickHouse Overview: assets/dashboards/overview.json
   logs:
     source: clickhouse
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

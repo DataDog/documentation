@@ -4,6 +4,7 @@ assets:
     Scylla Overview: assets/dashboards/overview.json
   logs:
     source: Scylla
+  metrics_metadata: metadata.csv
   monitors:
     '[Scylla] Server is shutting down': assets/monitors/instance_down.json
   saved_views: {}

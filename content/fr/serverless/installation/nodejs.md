@@ -105,7 +105,7 @@ La macro est désormais déployée et utilisable.
 
 ### Instrumenter la fonction
 
-Ajoutez la transformation `DatadogServerless` ainsi que `CfnMapping` à votre objet `Stack` dans l'app AWS CDK. Consultez l'exemple de code ci-dessous en TypeScript (le fonctionnement est similaire dans d'autres langages).
+Ajoutez la transformation `DatadogServerless` ainsi que `CfnMapping` à votre objet `Stack` dans votre application AWS CDK. Consultez l'exemple de code ci-dessous en TypeScript (le fonctionnement est similaire dans d'autres langages).
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
