@@ -48,7 +48,7 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following code to submit a DogStatsD `COUNT` metric to Datadog:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -170,7 +170,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -214,7 +214,7 @@ Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about th
 
 Run the following code to submit a DogStatsD `GAUGE` metric to Datadog:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -334,7 +334,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -374,7 +374,7 @@ Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
 Run the following code to submit a DogStatsD `SET` metric to Datadog:
 
-{{< programming-lang-wrapper langs="python,ruby,go,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -470,7 +470,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -517,7 +517,7 @@ The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric�
 
 Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
-{{< programming-lang-wrapper langs="python,ruby,go,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -632,7 +632,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -685,7 +685,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
-{{< programming-lang-wrapper langs="python,php" >}}
+{{< programming-lang-wrapper langs="python,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
@@ -733,7 +733,7 @@ while(1):
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -787,7 +787,7 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 
 Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -902,7 +902,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <?php
 
@@ -948,7 +948,7 @@ Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correc
 
 The following code only sends points half of the time:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -980,7 +980,7 @@ dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 ```php
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
@@ -997,7 +997,7 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
 The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1029,7 +1029,7 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
+{{< programming-lang lang="PHP" >}}
 The `tags` argument can be a string:
 
 ```php
