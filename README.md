@@ -27,7 +27,7 @@ To run the documentation site locally, execute:
 | Command                   | Description                                                                                                                                                                                                                             |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `make start-no-pre-build` | Build the lightweight version of the documentation with no extra content                                                                                                                                                                |
-| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localised content...). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available localy. |
+| `make start`              | Build the full documentation with all extra content (integrations, extra pulled files, localised content...). Only useful if you have a Github personal token setup in your `Makefile.config` or the extra content is available localy. If you are working with local content, the repo must be downloaded to the same folder as the documentation repo. |
 
 **Documentation is then available at `http://localhost:1313`**
 
@@ -79,7 +79,7 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 ## Releasing
 
-Within 5 minutes of merging to master, it deploys automatically.
+Within 10 minutes of merging to master, it deploys automatically.
 
 ## How to add a new integration
 
