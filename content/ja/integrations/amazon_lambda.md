@@ -211,5 +211,5 @@ Datadog Lambda ライブラリをインストールし、カスタムメトリ�
 [30]: /ja/serverless/custom_metrics/#running-in-a-vpc
 [31]: /ja/serverless/custom_metrics/#using-third-party-libraries
 [32]: /ja/serverless/custom_metrics/#deprecated-using-cloudwatch-logs
-[33]: /ja/serverless/installation/installing_the_library/
+[33]: /ja/serverless/installation/
 [34]: https://docs.datadoghq.com/ja/help/

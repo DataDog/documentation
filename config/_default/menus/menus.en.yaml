@@ -4,90 +4,95 @@ main:
     url: getting_started/
     pre: nav_start
     weight: 10000
-  - name: Agent
-    identifier: getting_started_agent
-    url: getting_started/agent/
-    parent: getting_started
-    weight: 1
-  - name: Autodiscovery
-    identifier: getting_started_agent_autodiscovery
-    url: getting_started/agent/autodiscovery
-    parent: getting_started_agent
-    weight: 101
-  - name: Integrations
-    identifier: getting_started_integrations
-    url: getting_started/integrations/
-    parent: getting_started
-    weight: 2
   - name: Datadog
     identifier: getting_started_datadog
     url: getting_started/application/
     parent: getting_started
-    weight: 3
+    weight: 1
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/application/monitors
     parent: getting_started_datadog
-    weight: 301
+    weight: 101
+  - name: Agent
+    identifier: getting_started_agent
+    url: getting_started/agent/
+    parent: getting_started
+    weight: 2
+  - name: Autodiscovery
+    identifier: getting_started_agent_autodiscovery
+    url: getting_started/agent/autodiscovery
+    parent: getting_started_agent
+    weight: 201
+  - name: Integrations
+    identifier: getting_started_integrations
+    url: getting_started/integrations/
+    parent: getting_started
+    weight: 3
+  - name: Dashboards
+    identifier: getting_started_dashboards
+    url: getting_started/dashboards/
+    parent: getting_started
+    weight: 4
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 4
+    weight: 5
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 5
+    weight: 6
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 601
+    weight: 701
   - name: Unified Service Tagging
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 602
+    weight: 702
   - name: Using Tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 603
+    weight: 703
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 8
-  - name: Private Location
+    weight: 9
+  - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 801
-  - name: Browser Test
+    weight: 901
+  - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 802
-  - name: API Test
+    weight: 902
+  - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 803
+    weight: 903
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -1028,7 +1033,7 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 707
-  - name: Connect Synthetics and Traces
+  - name: Connect Synthetic Tests and Traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
@@ -1408,14 +1413,14 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
+  - name: Advanced Options for Steps
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 203
   - name: Test Results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
-  - name: Advanced Options
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
   - name: Private Locations
     url: synthetics/private_locations
     parent: synthetics
@@ -1588,6 +1593,11 @@ main:
     parent: ndm
     identifier: ndm_data
     weight: 403
+  - name: Troubleshooting
+    url: network_performance_monitoring/devices/troubleshooting
+    parent: ndm
+    identifier: ndm_trouble
+    weight: 404
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -2485,9 +2495,9 @@ api_v1:
     parent: Synthetics
     url: '#get-all-locations-public-and-private'
     generated: true
-  - name: Get a list of tests
+  - name: Get the list of all tests
     parent: Synthetics
-    url: '#get-a-list-of-tests'
+    url: '#get-the-list-of-all-tests'
     generated: true
   - name: Create a test
     parent: Synthetics
@@ -3043,6 +3053,30 @@ api_v2:
     url: /api/v2/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
+  - name: Services
+    url: /api/v2/services/
+    identifier: Services
+    generated: true
+  - name: Get a list of all services
+    parent: Services
+    url: '#get-a-list-of-all-services'
+    generated: true
+  - name: Create a new service
+    parent: Services
+    url: '#create-a-new-service'
+    generated: true
+  - name: Delete an existing service
+    parent: Services
+    url: '#delete-an-existing-service'
+    generated: true
+  - name: Get details of a service
+    parent: Services
+    url: '#get-details-of-a-service'
+    generated: true
+  - name: Update an existing service
+    parent: Services
+    url: '#update-an-existing-service'
+    generated: true
   - name: Slack Integration
     url: /api/v2/slack-integration/
     identifier: Slack Integration
@@ -3058,6 +3092,30 @@ api_v2:
   - name: Tags
     url: /api/v2/tags/
     identifier: Tags
+    generated: true
+  - name: Teams
+    url: /api/v2/teams/
+    identifier: Teams
+    generated: true
+  - name: Get a list of all teams
+    parent: Teams
+    url: '#get-a-list-of-all-teams'
+    generated: true
+  - name: Create a new team
+    parent: Teams
+    url: '#create-a-new-team'
+    generated: true
+  - name: Delete an existing team
+    parent: Teams
+    url: '#delete-an-existing-team'
+    generated: true
+  - name: Get details of a team
+    parent: Teams
+    url: '#get-details-of-a-team'
+    generated: true
+  - name: Update an existing team
+    parent: Teams
+    url: '#update-an-existing-team'
     generated: true
   - name: Timeboards
     url: /api/v2/timeboards/

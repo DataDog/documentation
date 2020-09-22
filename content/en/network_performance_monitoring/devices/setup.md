@@ -12,7 +12,7 @@ further_reading:
 
 ## Installation
 
-Network Device Monitoring is included in the [Datadog Agent][1] package. No additional installation is necessary.
+Network Device Monitoring uses the SNMP protocol included in the [Datadog Agent][1] package. No additional installation is necessary.
 
 ## Configuration
 
@@ -83,7 +83,15 @@ To use Autodiscovery with Network Device Monitoring:
 
 2. Edit the [snmp.d/conf.yaml][4] file in the `conf.d/` folder at the root of your [Agent's configuration directory][3].
 
-#### Sample config
+#### Minimal config
+
+```yaml
+instances:
+  - network_address: "<NETWORK_ADDRESS>"
+    community_string: "<COMMUNITY_STRING>"
+```
+
+#### Extended config
 
 The following sample config provides required parameters, default values, and examples for Autodiscovery.
 

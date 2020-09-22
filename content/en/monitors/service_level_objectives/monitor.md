@@ -26,7 +26,7 @@ For example, if you have a Metric Monitor that is configured to alert when user 
 
 1. Select a single monitor or,
 2. Select multiple monitors (up to 20) or,
-3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation using the **Calculate on selected groups** toggle.
+3. Select a single [multi-alert monitor][6] and select specific monitor groups (up to 20) to be included in SLO calculation using the **Calculate on selected groups** toggle.
 
 **Supported Monitor Types:**
 
@@ -52,9 +52,9 @@ Here you can add contextual information about the purpose of the SLO, including 
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
-The overall status can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors.
+The overall status can be considered as a percentage of the time where **all** monitors or **all** the calculated groups in a single multi-alert monitor are in the `OK` state. It is not the average of the aggregated monitors or the aggregated groups, respectively.
 
-Consider the following example for 3 monitors:
+Consider the following example for 3 monitors (this is also applicable to a monitor-based SLO based on a single multi-alert monitor):
 
 | Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Status |
 |--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
@@ -64,6 +64,17 @@ Consider the following example for 3 monitors:
 | **Overall Status** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70%    |
 
 This can result in the overall status being lower than the average of the individual statuses.
+
+### Exceptions for Synthetic Tests
+In certain cases, there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic test. Synthetic tests have optional special alerting conditions that change the behavior of when the test enters the ALERT state and consequently impact the overall uptime:
+
+- Wait until the groups are failing for a specified number of minutes (default: 0)
+- Wait until a specified number of the groups are failing (default: 1)
+- Retry a specified number of times before a location's test is considered a failure (default: 0)
+
+By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups. 
+
+For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][7].
 
 ## Underlying monitor and SLO histories
 
@@ -86,3 +97,5 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
 [5]: /monitors/service_level_objectives/metric/
+[6]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[7]: /synthetics/api_tests/?tab=httptest#alert-conditions

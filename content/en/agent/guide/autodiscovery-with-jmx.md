@@ -287,53 +287,9 @@ If your Agent is running on a host and you want to autodiscover your container t
 
 ### Container Preparation
 
-Once the Agent is configured and running, use the `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` label/annotations for your application container to apply the check configuration through Autodiscovery:
+#### Docker
 
-{{< tabs >}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-    name: '<POD_NAME>'
-    annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: '<CUSTOM_AD_IDENTIFIER>'
-        # (...)
-spec:
-    containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-          # (...)
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-
-            - name: JAVA_OPTS
-              value: >-
-                -Xms256m -Xmx6144m
-                -Dcom.sun.management.jmxremote
-                -Dcom.sun.management.jmxremote.authenticate=false
-                -Dcom.sun.management.jmxremote.ssl=false
-                -Dcom.sun.management.jmxremote.local.only=false
-                -Dcom.sun.management.jmxremote.port=<JMX_PORT>
-                -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
-                -Djava.rmi.server.hostname=$(POD_IP)
-# (...)
-```
-
-**Note**:
-
-- To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, _not_ by image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
-- If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, ReplicaSets, or deployments, add pod annotations under `.spec.template.metadata`.
-- The `JAVA_OPTS` environment variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
-- `<JMX_PORT>` references the port that exposes JMX metrics.
-- In the example above, the connection to the RMI registry is not in SSL if you want to use SSL, use `"rmi_registry_ssl": true` in the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` annotation and remove the corresponding `Dcom.sun.management.jmxremote` from `JAVA_OPTS`.
-
-{{% /tab %}}
-{{% tab "Docker" %}}
+Once the Agent is configured and running, use the `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` label for your application container to apply the check configuration through Autodiscovery:
 
 **Dockerfile**:
 
@@ -369,9 +325,6 @@ project:
 ```
 
 **Note**: If the Agent and your JMX container are on the same network bridge, you need to instantiate your JMX server with `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` where `<CONTAINER_NAME>` is your JMX-application container name.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 

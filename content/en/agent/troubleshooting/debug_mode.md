@@ -53,25 +53,13 @@ To enable the Agent full debug mode:
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-**Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
+To enable debug mode for the container Agent, use `DD_LOG_LEVEL=debug` when starting your Agent.
 
-If your container is already running:
+For Agent v6.19+ / v7.19+, set the Agent log level at runtime using:
 
-1. To prevent your process from being restarted by S6, run:
-
-    `rm /var/run/s6/services/agent/finish`
-
-2. Then stop the Agent:
-
-    ```shell
-    s6-svc -d /var/run/s6/services/agent/
-    ```
-
-3. Restart then the Agent with debug log level by running:
-
-    ```text
-    DD_LOG_LEVEL=debug agent start
-    ```
+```
+agent config set log_level debug
+```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

@@ -20,33 +20,33 @@ further_reading:
 
 2. _Azure Active Directory_ -> _Enterprise applications_ -> _New application_ に移動します。
 
-3. **Add your own app** セクションで **Non-gallery application** を選択します。
+3. **Add from the gallery** セクションまでスクロールし、検索ボックスに **Datadog** と入力します。
 
-4. **Name** テキストボックスにアプリケーションの名前を入力し、**Add** をクリックします。
+4. 結果パネルから **Datadog** を選択します。
 
-5. アプリケーションを追加したら、アプリケーションの左側のナビゲーションメニューから **Single sign-on** に移動します。
+5. **Name** テキストボックスにアプリケーションの名前を入力し、**Add** をクリックします。
 
-6. **Single Sign-on Mode** ドロップダウンで **SAML-based Sign-on** を選択します。
+6. アプリケーションを追加したら、アプリケーションの左側のナビゲーションメニューから **Single sign-on** に移動します。
 
-7. [Datadog SAML ページ][2]から `Service Provider Entity ID` と `Assertion Consumer Service URL` を取得します。デフォルト値は次のとおりです。
+7. **Select a single sign-on method** ページで、**SAML** をクリックします。
+
+8. [Datadog SAML ページ][2]から `Service Provider Entity ID` と `Assertion Consumer Service URL` を取得します。デフォルト値は次のとおりです。
 
     |                                |                                                                            |
     |--------------------------------|----------------------------------------------------------------------------|
     | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
     | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
 
-8. Azure で、上記で取得した値を追加します。
+9.  Azure で、上記で取得した値を追加し、保存をクリックします。
 
     `Service Provider Entity ID` を **Identifier** に<br>
     `Assertion Consumer Service URL` を **Reply URL** に
 
-9. **User Identifier** を `user.mail` に設定します。
+10. **User Identifier** を `user.mail` に設定し、保存をクリックします。
 
-10. ページ下部の **Notification Email** に入力します。アクティブな署名証明書の有効期限が近づくと、証明書の更新手順が記載された通知が、この電子メールアドレスに送信されます。
+11. **SAML Signing Certificate** セクションに移動し、**Notification Email** が正しいことを確認します。アクティブな署名証明書の有効期限が近づくと、証明書の更新手順が記載された通知が、この電子メールアドレスに送信されます。
 
-11. **SAML Signing Certificate** セクションに移動し、**SAML XML Metadata** ファイルをダウンロードします。
-
-12. **SSO 構成セクション**のトップに移動し、**保存**をクリックします。
+12. 同じ **SAML Signing Certificate** セクションで、**Federation Metadata XML** を見つけ、Download を選択して証明書をダウンロードし、保存します。
 
 ### Datadog
 

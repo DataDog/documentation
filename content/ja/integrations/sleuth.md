@@ -20,7 +20,7 @@
 "guid": "294cd3d0-1412-475a-9c85-d8369719b805"
 "integration_id": "sleuth"
 "integration_title": "Sleuth"
-"is_public": !!bool "false"
+"is_public": !!bool "true"
 "kind": "インテグレーション"
 "maintainer": "support@sleuth.io"
 "manifest_version": "1.0.0"

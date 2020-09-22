@@ -633,7 +633,16 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
-  let newRequiredFields = data.required || requiredFields;
+  let newRequiredFields;
+
+  // data.required must be an array of required fields e.g ['foo', 'bar']
+  // if its not then we possible have a field called required that is actually an object
+  // and we don't want this so pass in previous requirements
+  if(data.required && data.required instanceof Array) {
+    newRequiredFields = data.required;
+  } else {
+    newRequiredFields = requiredFields;
+  }
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';

@@ -65,12 +65,74 @@ To enable the admission controller for the Datadog operator, set the parameter `
 [...]
 ```
 
+### Manual setup
+
+To enable the admission controller without using Helm or the Datadog operator, you'll need to add a few things to your configuration:
+
+First, download the [Cluster Agent RBAC permissions][2] manifest, and add the following under `rules`:
+
+{{< code-block lang="yaml" filename="cluster-agent-rbac.yaml" disable_copy="true" >}}
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  verbs: ["get", "list", "watch", "update", "create"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch", "update", "create"]
+- apiGroups: ["batch"]
+  resources: ["jobs", "cronjobs"]
+  verbs: ["get"]
+- apiGroups: ["apps"]
+  resources: ["statefulsets", "replicasets", "deployments"]
+  verbs: ["get"]
+{{< /code-block >}}
+
+Add the following to the bottom of `agent-services.yaml`:
+
+{{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datadog-cluster-agent-admission-controller
+  labels:
+    app: "datadog"
+    app.kubernetes.io/name: "datadog"
+spec:
+  selector:
+    app: datadog-cluster-agent
+  ports:
+  - port: 443
+    targetPort: 8000
+
+{{< /code-block >}}
+
+Add environment variables to the Cluster Agent deployment which enable the Admission Controller:
+
+{{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" disable_copy="true" >}}
+- name: DD_ADMISSION_CONTROLLER_ENABLED
+  value: "true"
+- name: DD_ADMISSION_CONTROLLER_SERVICE_NAME
+  value: "datadog-cluster-agent-admission-controller"
+
+# Uncomment this to configure APM tracers automatically (see below)
+# - name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
+#   value: "true"
+{{< /code-block >}}
+
+Finally, run the following commands:
+
+- `kubectl apply -f cluster-agent-rbac.yaml`
+- `kubectl apply -f agent-services.yaml`
+- `kubectl apply -f cluster-agent-deployment.yaml`
+
 ### APM and DogStatsD
 
 To configure DogstatsD clients and APM tracers automatically, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by using one of the following:
 
 - Add the label `admission.datadoghq.com/enabled: "true"` to your pod.
-- Configure the Cluster Agent admission controller by setting `mutateUnlabelled: true`.
+- Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
 To prevent pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
@@ -90,7 +152,7 @@ Possible options:
 - The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
 - The admission controller doesn't inject the environment variables `DD_VERSION, DD_ENV`, and `DD_SERVICE` if they already exist.
 - To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
-- By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][2]).
+- By using the Datadog admission controller, users can skip configuring the application pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
 
 
 ## Further Reading
@@ -98,4 +160,5 @@ Possible options:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
+[2]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
+[3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup

@@ -72,9 +72,35 @@ If you want to learn more about pure parsing possibilities of the Datadog applic
 For optimal usage of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor. 
 Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-## Reserved attributes
 
-If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog and are faceted by default:
+## JSON Logs Pre processing
+
+JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
+
+* Trigger new [log integrations][16] based on the **source** of incoming logs.
+* Append incoming logs with all [**host** tags][22].
+* Apply reserved attribute remapper processors (namely [**date** remapper][12], [**status** remapper][15], [**service** remapper][19], [**message** remapper][20] and [**trace ID** remapper][21]) for the related JSON attributes of all incoming JSON logs.
+
+JSON Logs pre processing comes with a default configuration that works for standard log forwarders. Edit this configuration at any time to adapt to custom or specific log forwarding approaches. To change the default values, go to the [configuration page][5] and edit `Pre processing for JSON logs`:
+
+{{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
+
+
+### *source* attribute
+
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
+
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
+
+
+### *host* attribute
+
+Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
+
+* `host`
+* `hostname`
+* `syslog.hostname`
+
 
 ### *date* attribute
 
@@ -112,20 +138,6 @@ Each log entry may specify a status level which is made available for faceted se
 
 If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][15].
 
-### *host* attribute
-
-Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
-
-* `host`
-* `hostname`
-* `syslog.hostname`
-
-### *source* attribute
-
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
-
-**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
-
 ### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
@@ -140,15 +152,6 @@ By default, [Datadog tracers can automatically inject trace and span IDs in the 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
 
-### Edit reserved attributes
-
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing Pipelines. This is useful if logs are sent in JSON or from an external Agent.
-
-{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute"  style="width:80%;">}}
-
-To change the default values for each of the reserved attributes, go to the [Configuration page][5] and edit the `Reserved Attribute mapping`:
-
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile"  style="width:80%;">}}
 
 ## Further Reading
 
@@ -172,3 +175,7 @@ To change the default values for each of the reserved attributes, go to the [Con
 [16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /agent/docker/log/#examples
 [18]: /tracing/connect_logs_and_traces/
+[19]: /logs/processing/processors/?tab=ui#service-remapper
+[20]: /logs/processing/processors/?tab=ui#log-message-remapper
+[21]: /logs/processing/processors/?tab=ui#trace-remapper
+[22]: /getting_started/tagging/#introduction

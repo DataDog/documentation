@@ -3,18 +3,16 @@ title: Synthetic CI/CD Testing
 kind: documentation
 description: Run Synthetic tests on-demand in your CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
-- link: "/synthetics/"
-  tag: "Documentation"
-  text: "Manage your checks"
+  text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
+  
 ---
 
 In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product. 
@@ -180,7 +178,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}
