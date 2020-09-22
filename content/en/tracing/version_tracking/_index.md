@@ -64,7 +64,7 @@ There are three main components of the version
 
 Similar graphs to the main service page will appear, however all other versions than the two being specifically compared will be combined and labelled as 'Other versions', allowing a quick overview of a deployment or difference in error rate to be quickly noticed.
 
-{{< img src="tracing/version_tracking/ComparisonGraphs.png" alt="Version Comparison Graphs  style="width:100%;">}}
+{{< img src="tracing/version_tracking/ComparisonGraphs.png" alt="Version Comparison Graphs" style="width:100%;">}}
 
 ### Error Comparison
 
