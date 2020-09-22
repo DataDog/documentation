@@ -7,7 +7,7 @@ RUN_SERVER := true
 RUN_WEBPACK := true
 CONFIGURATION_FILE := "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
-# Uncomment to fetch integration documentation from other repos (for Datadog employees)
+# Uncomment and update to fetch integrations from other repos (for Datadog employees)
 # FETCH_INTEGRATIONS := true
 # DOGWEB := "<LOCAL_FILE_PATH>"
 # INTEGRATIONS_CORE := "<LOCAL_FILE_PATH>"
