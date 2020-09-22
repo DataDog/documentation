@@ -73,15 +73,15 @@ For optimal usage of the Log Management solution, Datadog recommends using at mo
 Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
 
-## JSON Logs Preprocessing
+## JSON Logs Pre processing
 
-JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operation based on reserved attributes:
+JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
 
 * Trigger new [log integrations][16] based on the **source** of incoming logs.
 * Append incoming logs with all [**host** tags][22].
-* Apply Reserved Attribute Remappers Processors (namely [**Date** Remapper][12], [**Status** Remapper][15], [**Service** Remapper][19], [**Message** Remapper][20] and [**Trace ID** Remapper][21]) for the related JSON attributes of all incoming JSON logs.
+* Apply reserved attribute remapper processors (namely [**date** remapper][12], [**status** remapper][15], [**service** remapper][19], [**message** remapper][20] and [**trace ID** remapper][21]) for the related JSON attributes of all incoming JSON logs.
 
-JSON Logs preprocessing comes with a default configuration that work for standard log forwarders. Edit this configuration at any time to adapt to custom or specifc log forwarding approaches. To change the default values, go to the [Configuration page][5] and edit the `JSON Logs Preprocessing`:
+JSON Logs pre processing comes with a default configuration that works for standard log forwarders. Edit this configuration at any time to adapt to custom or specific log forwarding approaches. To change the default values, go to the [configuration page][5] and edit `Pre processing for JSON logs`:
 
 {{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
 
