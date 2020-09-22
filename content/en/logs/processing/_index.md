@@ -72,21 +72,26 @@ If you want to learn more about pure parsing possibilities of the Datadog applic
 For optimal usage of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor. 
 Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
+
 ## JSON Logs Preprocessing
+
+JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operation based on reserved attributes:
+
+* Trigger new [log integrations][16] based on the **source** of incoming logs.
+* Append incoming logs with all [**host** tags][22].
+* Apply Reserved Attribute Remappers Processors (namely [**Date** Remapper][12], [**Status** Remapper][15], [**Service** Remapper][19], [**Message** Remapper][20] and [**Trace ID** Remapper][21]) for the related JSON attributes of all incoming JSON logs.
 
 JSON Logs preprocessing comes with a default configuration that work for standard log forwarders. Edit this configuration at any time to adapt to custom or specifc log forwarding approaches. To change the default values, go to the [Configuration page][5] and edit the `JSON Logs Preprocessing`:
 
 {{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
 
 
-If your logs are formatted as JSON, use JSON Logs preprocessing to make sure the **Host** and the **Source** of your logs are properly mapped:
+### *source* attribute
 
-* **Host remapping** is required to make sure your logs inherit from all other [host tags][22].
-* **Source Remapping** is required to trigger [Log Integrations][16].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
 
-JSON Logs preprocessing is also a handy alternative to apply Reserved Attribute Remappers Processors (namely [Date Remapper][12], [Status Remapper][15], [Service Remapper][19], [Message Remapper][20] and [Trace Remapper][21]) once for all.
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
 
-This Preprocessing applies before logs actually enter [Log Pipelines][1] processing.
 
 ### *host* attribute
 
@@ -95,12 +100,6 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 * `host`
 * `hostname`
 * `syslog.hostname`
-
-### *source* attribute
-
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
-
-**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
 
 
 ### *date* attribute
