@@ -250,7 +250,7 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][2].
 
-### Monitor Custom Serverless Metrics
+### Monitor Custom Business Metrics
 
 If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
@@ -280,11 +280,11 @@ exports.handler = async (event) => {
   return response;
 };
 ```
-Learn more about submitting custom metrics [here][3].
+[Enable custom metric submission][3] to get started.
 
 ### Enable the AWS X-Ray Integration
 
-Datadog’s integration with AWS X-Ray allows you to visualize serverless trace data, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, choose between setting up Datadog APM or the AWS X-Ray integration for your tracing needs. Learn more about configuring distributed tracing [here][4].
+Datadog’s integration with AWS X-Ray allows you to visualize end-to-end serverless transactions, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, [choose between setting up Datadog APM or the AWS X-Ray integration][4] for your tracing needs.
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
