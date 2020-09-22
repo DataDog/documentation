@@ -292,5 +292,8 @@
   },
   "description": {
     "other": "Description"
+  },
+  "field": {
+    "other": "Field"
   }
 }
