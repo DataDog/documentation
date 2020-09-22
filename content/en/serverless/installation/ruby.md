@@ -61,6 +61,8 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][8].
 
+### Monitor Custom Business Metrics
+
 If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
 ```ruby
@@ -92,7 +94,13 @@ def some_operation()
     end
 end
 ```
+[Enable custom metric submission][3] to get started.
 
+### Enable the AWS X-Ray Integration
+
+Datadog’s integration with AWS X-Ray allows you to visualize end-to-end serverless transactions, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, [choose between setting up Datadog APM or the AWS X-Ray integration][5] for your tracing needs.
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/
@@ -102,3 +110,5 @@ end
 [6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://app.datadoghq.com/functions
+[9]: /serverless/custom_metrics
+[10]: /serverless/distributed_tracing
