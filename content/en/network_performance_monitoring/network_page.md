@@ -113,9 +113,9 @@ To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table
 
 NPM users may configure their networks to have overlapping IP spaces. For instance, you may want to deploy in multiple VPCs (virtual private clouds) which have overlapping address ranges and communicate only through load balancers or cloud gateways.
 
-To correctly classify traffic destinations, NPM uses the concept of a Network ID, which is represented as a tag.  A Network ID is an alphanumeric identifier for a set of IP addresses which can communicate with one another. When an IP address mapping to several hosts with different Network IDs is detected, this identifier is used to determine the particular host to which network traffic is going or coming from. 
+To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from. 
 
-In AWS and GCP,  the  Network ID is automatically set to the VPC ID. For other environments, the Network ID may be set manually either in `datadog.yaml` as shown below, or by adding the  DD_NETWORK_ID  to the process and core Agent containers.
+In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
   ```shell 
   network:
