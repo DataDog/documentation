@@ -37,7 +37,7 @@ The following bar graph displays the same metric, graphed using a day-long rollu
 | `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <TIME> , <METHOD>)` |
 
 
-Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range, i.e. the last X seconds. Like with `.rollup()`, `<METHOD>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
+Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<METHOD>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
 
 ## Rollup Interval: Enforced vs Custom
 
