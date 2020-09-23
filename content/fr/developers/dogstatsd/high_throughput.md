@@ -17,7 +17,7 @@ DogStatsD transmet des métriques générées à partir de votre application à 
 
 Lorsque DogStatsD est utilisé pour transmettre un volume important de métriques à un seul Agent, si vous ne prenez pas les mesures appropriées, il est courant de rencontrer les problèmes suivants :
 
-- Utilisation intensive du processeur de l'Agent
+- Utilisation intensive du processeur par l'Agent
 - Datagrammes/métriques perdus
 - Erreurs (UDS) renvoyées par la bibliothèque client DogStatsD 
 
