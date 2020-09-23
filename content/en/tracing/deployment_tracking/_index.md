@@ -103,7 +103,7 @@ This section lets you compare the performance (requests, latency, and errors) of
 
 ## Deployment Strategies
 
-Datadog's version tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
+Datadog's deployment tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
 
 ### Rolling deploys
 
