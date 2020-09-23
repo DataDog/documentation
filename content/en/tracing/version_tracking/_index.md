@@ -4,48 +4,50 @@ kind: documentation
 description: 'Use Datadog to track version during and after deployments'
 further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'
+    - tag: "Documentation"
       text: 'Learn about Unified Service Tagging and reserved tags'
     - link: 'tracing/app_analytics'
+    - tag: "Documentation"
       text: 'Use version as a dimension in your App Analytics queries'
 ---
-## The Version Tag
+## The version tag
 
 `version` is a [reserved tag][1] within Datadog. It is part of the Unified Service Tagging system and is applied to infrastructure metrics (host, container, process and NPM checks), trace metrics, traces, profiles and logs.
 
 This page describes specific ways you can use the `version` tag to better monitor deployments and service behavior. See the [Unified Service Tagging][1] docs for instructions for setting up the tags.
 
-## Using Version Tags on the Service Page
+## Using version tags on the Service page
 
-{{< img src="tracing/version_tracking/ServicePageRequestsErrorsByVersion.png" alt="Versions on the Service Page"  style="width:100%;">}}
+{{< img src="tracing/version_tracking/ServicePageRequestsErrorsByVersion.png" alt="Versions on the Service page"  style="width:100%;">}}
 
-On the Service page, if the `version` tag is available, the requests widget can be scoped to either of:
+On the Service page, if the `version` tag is available, you can scope the Requests widget to:
 
-- Total Requests by Version
-- Requests per second by Version
+- Total Requests by Version, or
+- Requests Per Second by Version
 
-The errors widget can be scoped to one of three options that involve the `version` tag:
+You can scope the errors widget to:
 
 - Total Errors by Version
-- Errors per second by Version
-- % Error rate by Version
+- Errors Per Second by Version, or
+- % Error Rate by Version
 
-Both of these can be exported to dashboards and monitors.
+Requests and Errors widgets can both be exported to dashboards and monitors.
 
-## Version Summary Table
+## Version summary table
 
-Services configured with `version` tags have a version section on the Service page, immediately below the main service health graphs. This section shows all versions of the service that were active during the selected time interval, with currently active services at the top.
+A service configured with `version` tags has a version section on its Service page, below the main service health graphs. The version section shows all versions of the service that were active during the selected time interval, with active services at the top.
 
 By default you will see:
 
-- The version name(s) deployed for this service over the timeframe.
-- The times traces corresponding to this version were first and last seen.
+- The version names deployed for this service over the timeframe.
+- The times at which traces that correspond to this version were first and last seen.
 - An indication of how many types of errors appear in each version that did not appear in the immediately previous version.
 - Requests per second.
 - Error rate as a percentage of total requests.
 
 **Note:** The 'Error Types' column is not a guarantee the version introduced these errors, but rather an indication that this error was not seen in traces from the previous version.  Based on how you are performing deployments, it can be a great way to begin investigating errors.
 
-Additionally, fields can be added or removed from this overview table and your selections will be saved.  The additional fields are:
+You can add columns to or remove columns from this overview table and your selections will be saved.  The additional available columns are:
 
 - Endpoints that are active in a version that were not in the previous version.
 - Time active, showing the length of time from the first trace to the last trace sent to Datadog for that version.
@@ -55,35 +57,41 @@ Additionally, fields can be added or removed from this overview table and your s
 
 {{< img src="tracing/version_tracking/VersionComparison.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
-**Note:** The `version` section of of the service page will only appear if there is more than one version reporting in the selected time interval at the top of the page.
+**Note:** The version section appears only if there is more than one version reporting during the time interval that is selected at the top of the page.
 
-## Version Comparison
+## Version comparison
 
-Clicking on any version row in the Version Summary table will open a detailed version comparison page, allowing you to compare two specific version of the same service.  By default, the selected version will be compared to the immediately previous version but this can be changed to compare any two versions within the past 30 days.
+Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service.  By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
 
-There are three main components of version comparison:
+You can find the following information on version comparison page:
 
 - [Comparison Graphs](#comparison-graphs) for a visualization of requests and errors to services, useful for watching various types of [deployments](#version-deployment-strategies).
-- [Error Comparison](#error-comparison) to see errors that may have been introduced or solved by a deployment.
-- [Endpoint Comparison](#endpoint-comparison) to see how endpoint latency and error rates are performing in different versions of the service.
+- [Error Comparison](#error-comparison): Errors that may have been introduced or solved by a version.
+- [Endpoint Comparison](#endpoint-comparison): How endpoint latency and error rates perform in each version.
 
-### Comparison Graphs
+### Comparison graphs
 
 Requests and Error graphs are available in this section, much like the graphs on the Service Page. These graphs highlight the selected versions for comparison but leave all other versions in gray for additional context. These allow for a quick overview of a deployment rollout or the identification of a spike in error rates.
 
 {{< img src="tracing/version_tracking/ComparisonGraphs.png" alt="Version Comparison Graphs" style="width:100%;">}}
 
-### Error Comparison
+### Error comparison
 
-This section lists differences in error types detected for each version, highlighting error types appearing only in the source version for easy troubleshooting, error types no longer appearing there for easy validation of fixes and error types active in both.  From this table, you can pivot immediately into live or historical traces corresponding to the selected error for further investigation.
+This section lists differences in error types detected for each the two versions, highlighting:
 
-**Note:** This is based on observed error types and if one error type is rare it might be represented as no longer appearing just because it has not been seen yet.
+ - Error types appearing only in the source version, useful for troubleshooting it;
+ - Error types no longer appearing in the source version, useful for validating fixes; and 
+ - Error types active in both.  
+ 
+From this table, you can pivot into live or historical traces corresponding to the selected error for further investigation.
+
+**Note:** Error comparison is based on _observed_ error types. If an error type is rare, it might be listed as no longer appearing only because it has not been seen _yet_.
 
 {{< img src="tracing/version_tracking/ErrorComparison.gif" alt="Error Comparison"  style="width:100%;">}}
 
-### Endpoint Comparison
+### Endpoint comparison
 
-This section lets you compare the performance (requests, latency and errors) of each endpoint in the service. The table can be sorted by absolute values or by the change between versions allowing to easily detect large swings in latency or error rates or to validate that the highest throughput endpoints are still healthy following a deploy.
+This section lets you compare the performance (requests, latency, and errors) of each endpoint in the service. Sort the table by Value to validate that the highest-throughput endpoints are still healthy following a deploy, or by % Change to spot large changes in latency or error rates.
 
 {{< img src="tracing/version_tracking/EndpointComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
 
@@ -123,7 +131,7 @@ In a shadow deployment, a release candidate version is deployed alongside the pr
 
 Shadow deploys allow you to test a potential release against real production traffic. Tagging shadows with a `version` tag lets you compare error rates, traces, and service behavior between the two versions to determine if the shadow version should be released.
 
-## Using Version Tags elsewhere within Datadog
+## Using version tags elsewhere within Datadog
 
 The `version` tag can be used anywhere within Datadog, whether to filter a search view to a specific version, or to compare metrics from different versions.
 
@@ -152,7 +160,7 @@ When available, `version` can be used as a tag for both Trace Search and Analyti
 
 Analytics, including filtering on the `version` tag, can be exported to dashboards and monitors.
 
-### Profiles by Version
+### Profiles by version
 
 In addition to being able to search for Profiles corresponding to a specific version, profiles corresponding to versions being compared can be loaded in a single click using the 'View Profiles' link on the top right of the [Version Comparison](#version-comparison) page.
 
