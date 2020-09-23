@@ -25,7 +25,13 @@ further_reading:
 
 ## インストールと利用開始
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に App Analytics を有効にします。
 
 APM で使用される用語の説明は、[公式ドキュメント][3]を参照してください。
 
@@ -65,7 +71,7 @@ export DD_TRACE_PHP_BIN=$(which php-fpm7)
 
 PHP (PHP-FPM または Apache SAPI) を再起動し、アプリケーションのトレース可能なエンドポイントにアクセスします。[APM UI][10] でトレースを確認できます。
 
-**注**: UI にトレースが表示されるまでに時間がかかる場合があります。数分経ってもトレースが表示されない場合は、ホストマシンで[dd-doctor.php 診断スクリプトを実行][11]し問題を見つけます。
+**注**: トレースが UI に表示されるまでに数分かかる場合があります。数分たってもトレースが表示されない場合は、ホストマシンから [`phpinfo()` ページを作成][11]して、"ddtrace" セクションまでスクロールします。失敗した診断チェックがここに表示され、問題を特定するのに役立ちます。
 
 ディストリビューションが見つからない場合は、PHP 拡張機能を[手動でインストール][12]します。
 
@@ -92,7 +98,7 @@ PHP トレーサーが自動的に検索し環境変数の `DD_AGENT_HOST` や `
 
 変数の設定方法については、[トレーサーコンフィギュレーション][13]を参照してください。
 
-## 構成
+## コンフィギュレーション
 
 PHP トレーサーは環境変数で設定できます。
 
@@ -284,7 +290,7 @@ PHPトレーサーを削除するには:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: /ja/tracing/send_traces/
@@ -293,7 +299,7 @@ PHPトレーサーを削除するには:
 [8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/latest
 [10]: https://app.datadoghq.com/apm/services
-[11]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[11]: /ja/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
 [12]: /ja/tracing/faq/php-tracer-manual-installation
 [13]: /ja/tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv

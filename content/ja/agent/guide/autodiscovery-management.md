@@ -11,7 +11,7 @@ further_reading:
 ---
 Datadog Agent は、利用可能なすべてのコンテナを自動検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
 
-**注**: `docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
+**注**: `docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。
 
 Agent をホスト上のバイナリとして実行する場合は、[Agent](?tab=agent) タブの説明に従ってオートディスカバリー境界を構成してください。Agent をコンテナとして実行する場合は、[コンテナ化 Agent](?tab=containerizedagent) タブの説明に従ってオートディスカバリー境界を構成してください。
 

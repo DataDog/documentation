@@ -33,10 +33,10 @@
 {{- end -}}
 
 <span class="c1"># Curl command</span>
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ .context.actionType | upper }}</span> {{ range .dollarScratch.Get "serverURLS" }}{{ if ne .region "local" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ else }}<span class="kn">{{ .url }}</span>{{ end }}{{ end }}<span class="n">{{ replace .context.pathKey "{" "${" }}</span>
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ .context.actionType | upper }}</span> {{ range .dollarScratch.Get "serverURLS" }}{{ if ne .region "local" }}<span class="kn d-none" data-region="{{ .region }}">"{{ .url }}</span>{{ else }}<span class="kn">"{{ .url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace .context.pathKey "{" "${" }}</span>
 {{- range $qi, $q := $queryStrings -}}
     {{- if eq .required true -}}
-        <span class="o">{{ cond (gt $qi 0) "&" "?" }}</span><span class="n">{{ $q.name }}</span><span class="o">=</span><span class="s1">${ {{- $q.name -}} }</span>
+        <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>
     {{- end -}}
 {{- end -}}
 
@@ -47,12 +47,13 @@
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "query" -}}
-                <span class="o">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="n">{{ $authSchema.name }}</span><span class="o">=</span><span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>
+                <span class="kn">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="kn">{{ $authSchema.name }}</span><span class="kn">=</span><span class="kn">${ {{- index $authSchema "x-env-name" -}} }</span>
                 {{- $i = add $count 1 -}}
             {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
+<span class="kn">"</span>
 
 {{- /* Content-Type header based on "requestBody" */ -}}
 &nbsp;\

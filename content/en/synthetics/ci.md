@@ -241,14 +241,7 @@ The package is published under [@datadog/datadog-ci][2] in the NPM registry.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Set the below in your `~/.npmrc` file:
-
-```conf
-registry=https://registry.npmjs.org/
-//registry.npmjs.org/:_authToken=<TOKEN>
-```
-
-Then, install the package through NPM:
+Install the package through NPM:
 
 ```bash
 npm install --save-dev @datadog/datadog-ci
@@ -257,16 +250,7 @@ npm install --save-dev @datadog/datadog-ci
 {{% /tab %}}
 {{% tab "Yarn" %}}
 
-In Yarn v2, you can scope the token to the `@datadog` scope in the `.yarnrc` file:
-
-```yaml
-npmScopes:
-  datadog:
-    npmRegistryServer: "https://registry.npmjs.org"
-    npmAuthToken: "<TOKEN>"
-```
-
-Then, install the package through Yarn:
+Install the package through Yarn:
 
 ```bash
 yarn add --dev @datadog/datadog-ci
