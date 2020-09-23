@@ -48,26 +48,30 @@ Source maps are mapping files generated when minifying Javascript source code. T
 
 {{< site-region region="eu" >}}
 
-1. Add `@datadog/datadog-ci` to your `package.json` file, you must use the `v0.5.2` version and onwards of the CLI.
-2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`.
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the EU region by exporting two additonal environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
 4. Run the following command:
-   {{< code-block lang="curl">}}datadog-ci sourcemaps upload /path/to/build/directory \
-  --service=my-service \
-  --release-version=v35.2395005 \
-  --minified-path-prefix=https://hostname.com/static/js{{< /code-block >}}
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
 
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
 
-1. Add `@datadog/datadog-ci` to your `package.json` file, you must use the `v0.5.2` version and onwards of the CLI.
-2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`.
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
-   {{< code-block lang="curl">}}datadog-ci sourcemaps upload /path/to/build/directory \
-  --service=my-service \
-  --release-version=v35.2395005 \
-  --minified-path-prefix=https://hostname.com/static/js{{< /code-block >}}
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
 
 {{< /site-region >}}
 
