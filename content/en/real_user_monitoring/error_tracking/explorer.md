@@ -4,12 +4,6 @@ kind: documentation
 beta: true
 ---
 
-{{< site-region region="eu" >}}
-
-<div class="alert alert-warning"> The EU region is not yet available for Error Tracking. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
-
-{{< /site-region >}}
-
 {{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
 
 ## Explore your issues
