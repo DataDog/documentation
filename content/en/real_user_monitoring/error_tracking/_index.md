@@ -49,7 +49,7 @@ Source maps are mapping files generated when minifying Javascript source code. T
 {{< site-region region="eu" >}}
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][5] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the EU region by exporting two additonal environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
 4. Run the following command:
 ```bash
@@ -59,12 +59,13 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][5] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
 ```bash
 datadog-ci sourcemaps upload /path/to/dist \
@@ -73,9 +74,10 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 
-For more information about CLI parameters, see the [official Github repository][6].
+For more information about CLI parameters, see the [official Github repository][5].
 
 <div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourcesContent</code> attribute in your source maps is not empty before uploading them.</div>
 
@@ -87,5 +89,4 @@ For more information about CLI parameters, see the [official Github repository][
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: /real_user_monitoring/installation/?tab=us#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/
-[5]: https://app.datadoghq.com/account/settings#api
-[6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps

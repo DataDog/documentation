@@ -73,7 +73,7 @@ The best way to upload source maps is to add an extra-step in your CI pipeline a
 {{< site-region region="eu" >}}
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the EU region by exporting two additonal environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
 4. Run the following command:
 ```bash
@@ -82,13 +82,13 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--release-version=v35.2395005 \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
-
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
 ```bash
 datadog-ci sourcemaps upload /path/to/dist \
@@ -97,6 +97,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /site-region >}}
 
 **Note**: The CLI has been optimized to upload as many source maps as you need in a very short amount of time (typically a few seconds) to minimize the overhead on your CI's performance.
@@ -118,4 +119,3 @@ On the contrary, an unminified stack trace gives you all the context you need fo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://app.datadoghq.com/account/settings#api
