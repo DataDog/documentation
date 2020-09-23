@@ -710,22 +710,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
 
 /**
- * Takes the schema table output string and checks if we had any expand collapse sections
- * if we had none then inject the class "has-no-expands" onto the output wrapper div
- * @param {string} schema table output string
- * returns html table string
- */
-const addHasExpandClass = (output) => {
-  if(!output.includes('js-collapse-trigger')) {
-    const regex = /(\s+schema-table\s+)/m;
-    const subst = ` schema-table has-no-expands `;
-    return output.replace(regex, subst);
-  }
-  return output;
-};
-
-
-/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
@@ -741,7 +725,7 @@ const schemaTable = (tableType, data) => {
       initialData = data.items.properties;
     } else {
       initialData = data.items;
-      extraClasses = 'd-none';
+      extraClasses = 'hide-table';
     }
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
@@ -750,7 +734,7 @@ const schemaTable = (tableType, data) => {
   } else {
     initialData = data.properties;
   }
-  extraClasses = (initialData) ? extraClasses : 'd-none';
+  extraClasses = (initialData) ? extraClasses : 'hide-table';
   const emptyRow = `
     <div class="row">
       <div class="col-12 first-column">
@@ -759,25 +743,7 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
     </div>`.trim();
-  const output = `
-  <div class="table-${tableType} schema-table row ${extraClasses}">
-    <p class="expand-all js-expand-all text-primary">Expand All</p>
-    <div class="col-12">
-      <div class="row table-header">
-        <div class="col-4 column">
-          <p class="font-semibold">Field</p>
-        </div>
-        <div class="col-2 column">
-          <p class="font-semibold">Type</p>
-        </div>
-        <div class="col-6 column">
-          <p class="font-semibold">Description</p>
-        </div>
-      </div>
-      ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
-    </div>
-  </div>`.trim();
-  return addHasExpandClass(output);
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}</div>`;
 };
 
 
@@ -832,7 +798,6 @@ module.exports = {
   filterExampleJson,
   getSchema,
   getTagSlug,
-  addHasExpandClass,
   outputExample,
   getJsonWrapChars
 };

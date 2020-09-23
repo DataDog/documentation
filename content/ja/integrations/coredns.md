@@ -4,6 +4,7 @@ assets:
   dashboards: {}
   logs:
     source: coredns
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

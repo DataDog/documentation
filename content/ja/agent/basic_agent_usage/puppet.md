@@ -8,8 +8,6 @@ title: Puppet
 
 このモジュールは、Datadog Agent をインストールし、Puppet レポートを Datadog に送信します。
 
-## セットアップ
-
 ### 要件
 
 Datadog Puppet モジュールは Linux および Windows をサポートし、Puppet >= 4.6.x または Puppet Enterprise バージョン >= 2016.4 と互換性があります。互換性の詳細については、[Puppet Forge のモジュールページ][1]を確認してください。
@@ -20,14 +18,6 @@ Datadog Puppet モジュールは Linux および Windows をサポートし、P
 
 ```shell
 puppet module install datadog-datadog_agent
-```
-
-**注**: CentOS/RHEL バージョン <7.0 と Ubuntu < 15.04 の場合は、サービスプロバイダーを `upstart` と指定します。
-
-```conf
-class{ 'datadog_agent':
-    service_provider => 'upstart'
-  }
 ```
 
 #### アップグレード
@@ -45,68 +35,65 @@ class{ 'datadog_agent':
 `datadog_agent` モジュールが `puppetserver`/`puppetmaster`（またはマスターレスホスト）にインストールされたら、次の構成手順に従います。
 
 1. [Datadog API キー][2]を取得します。
-2. ノードに Datadog Agent をインストールするモジュールを指定します。
+2. Datadog クラスをノードマニフェストに追加します (例: `/etc/puppetlabs/code/environments/production/manifests/site.pp`)。
 
-   ```conf
-   include datadog_agent
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+    }
+    ```
 
-   または、Puppet スタイルの Parameterized クラスを使用してこのモジュールを割り当てます。
+   デフォルトの 'datadoghq.com' 以外の Datadog サイトを使用している場合は、ここにも設定します。
 
-   ```conf
-   class { 'datadog_agent':
-       api_key => "<YOUR_DD_API_KEY>",
-   }
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+        datadog_site => "datadoghq.eu",
+    }
+    ```
 
-3. `puppetserver` でレポートを有効にします。
+   CentOS/RHEL バージョン <7.0 と Ubuntu < 15.04 の場合は、サービスプロバイダーを `upstart` と指定します。
 
-   ```conf
-   class { 'datadog_agent':
-       api_key            => "<YOUR_DD_API_KEY>",
-       puppet_run_reports => true,
-   }
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+        service_provider => 'upstart'
+    }
+    ```
 
-    - レポートをサポートするには、Puppet マスターに [dogapi][3] gem がインストールされている必要があります。この構成でマスター上で Puppet Agent を実行するか、`gem` を使用して手動でインストールします。`dogapi` gem をインストールした後、`puppetserver` サービスを再起動する必要がある場合があります。
-    - `puppetserver_gem` はモジュールの依存関係として定義されます。モジュールのインストール時に自動的にインストールされます。
+   ここで使用できる引数のリストについては、[コンフィギュレーション変数](#configuration-variables)セクションを参照してください。
 
-4. (オプション) レポートとファクトのタグ付けを有効にする
-   Datadog にイベントとして送られたレポートにタグを追加することができます。これらのタグの源泉は、レポートが関連付けられている任意のノードについての Puppet ファクトです。必ず 1:1 の関係であるものとし、可読性を確保するために構造化ファクト (ハッシュ、配列など) を含むことは禁止されています。タグ付けを有効にするには、パラメーター `datadog_agent::reports::report_fact_tags` をファクトの配列値に設定します。たとえば、 `["virtual","trusted.extensions.pp_role","operatingsystem"]` は 3 つの個別のタグを各レポートイベントに追加する際の例です。
+4. (オプション) Agent で使用するインテグレーションを含めます。次の例では、mongo インテグレーションをインストールします。
 
-   例: これらの設定を変更するには、pe-puppetserver (または puppetserver) を再起動してレポートのプロセッサを再読み込みする必要があります。サービスを再起動する前に、変更がデプロイされていることをご確認ください。
+    ```conf
+    class { 'datadog_agent::integrations::mongo':
+        # integration arguments go here
+    }
+    ```
 
-   ヒント: 
-    - ドットインデックスを使用してターゲットファクトを指定します。これを行わない場合、ファクトデータセット全体がひとつの文字列の値として扱われます (あまり有用とは言えません) 。
-    - ホスト名、アップタイム、メモリーなど、モニタリングの汎用データを複製しないでください。
-    - ロール、所有者、テンプレート、データセンターなどのコアファクトを調整します。これらはメトリクスから取得した同じタグに意義ある相関関係を構築するのに役立ちます。
+   特定のインテグレーションで使用できるすべての引数については、[コード内のコメント][6]を参照してください。
 
+   インテグレーションに[専用クラスのマニフェスト][7]がない場合でも、その構成を追加できます。以下は `ntp` チェックの例です。
 
-5. （オプション）Agent で使用するインテグレーションを含めます。次に例を示します。
+    ```conf
+    class { 'datadog_agent':
+        api_key      => "<YOUR_DD_API_KEY>",
+        integrations => {
+            "ntp" => {
+                init_config => {},
+                instances => [{
+                    offset_threshold => 30,
+                }],
+            },
+        },
+    }
+    ```
 
-   ```conf
-   include 'datadog_agent::integrations::mongo'
-   ```
+5. (オプション) Puppet 自体に関するメトリクスとイベントを収集するには、[レポート](#reporting)に関するセクションを参照してください。
 
-   インテグレーションに[専用クラスのマニフェスト][6]がない場合でも、その構成を追加できます。以下は `ntp` チェックの例です。
+### インテグレーションのアップグレード
 
-   ```conf
-   class { 'datadog_agent':
-       api_key      => "<YOUR_DD_API_KEY>",
-       integrations => {
-           "ntp" => {
-               init_config => {},
-               instances => [{
-                   offset_threshold => 30,
-               }],
-           },
-       },
-   }
-   ```
-
-#### インテグレーションバージョン
-
-特定のインテグレーションバージョンをインストールして固定するには、`datadog_agent::install_integration` を使用してインテグレーションとバージョン番号を指定します。これは、`datadog-agent integration` コマンドを使用して、特定のインテグレーションが確実にインストールまたはアンインストールされるようにします。次に例を示します。
+特定のインテグレーションバージョンをインストールして固定するには、`datadog_agent::install_integration` を使用します。これは、`datadog-agent integration` コマンドを呼び出して、特定のインテグレーションが確実にインストールまたはアンインストールされるようにします。次に例を示します。
 
 ```conf
 datadog_agent::install_integration { "mongo-1.9":
@@ -117,114 +104,81 @@ datadog_agent::install_integration { "mongo-1.9":
 }
 ```
 
-`ensure` には 2 つのオプションがあります。
+`ensure` 引数は次の 2 つの値を取ることができます。
 
 - `present`（デフォルト）
 - `absent`（以前に固定されたバージョンのインテグレーションを削除します）
 
-サードパーティインテグレーションをインストールするには、`third_party` パラメーターを `true` に設定します。
+サードパーティのインテグレーションをインストールするには (たとえば、マーケットプレイスから)、`third_party` 引数を `true` に設定します。
+
+インテグレーションを、Agent にバンドルされているバージョンより古いバージョンにダウングレードすることはできませんのでご注意ください。
 
 ### レポート
 
-[dogapi][3] gem がシステムで使用できることを確認します。
+Datadog タイムラインへの Puppet 実行のレポートを有効にするには、Puppet マスターのレポートプロセッサとクライアントのレポートを有効にします。クライアントは、各チェックイン後に実行レポートをマスターに送り返します。
 
-Datadog タイムラインへの変更のレポートを有効にするには、Puppet マスターのレポートプロセッサとクライアントのレポートを有効にします。クライアントは、各チェックイン後に実行レポートをマスターに送り返します。
+1. [dogapi][3] gem をシステムにインストールします。
 
-マスターのノード構成マニフェストで `puppet_run_reports` オプションを true に設定します。
+2. マスターのノード構成マニフェストで `puppet_run_reports` オプションを true に設定します。
 
-```ruby
-class { "datadog-agent":
-    api_key => "<DD_API_キー>",
-    puppet_run_reports => true
-    # ...
-}
-```
+    ```ruby
+    class { "datadog-agent":
+        api_key => "<YOUR_DD_API_KEY>",
+        puppet_run_reports => true
+        # ...
+    }
+    ```
 
-Puppet 構成ファイルは `/etc/puppetlabs/puppet/puppet.conf` にあります。
-
-
-これらの構成オプションを適切な場所に追加します。
-
-```ini
-[main]
-# このセクションを変更する必要はありません
-# ...
-
-[master]
-# Datadog へのレポートを有効にします
-reports=datadog_reports
-# 他のレポートを使用する場合は、datadog_reports を末尾に追加します。
-# 例: reports=store,log,datadog_reports
-# ...
-
-[agent]
-# ...
-pluginsync=true
-report=true
-```
-
-すべての Puppet クライアントノードで、同じ場所に以下を追加します。
-
-```ini
-[agent]
-# ...
-report=true
-```
-
-#### トラブルシューティング
-
-次のエラーが表示される場合は、`[main]` ではなく `[master]` で `reports=datadog_reports` が定義されていることを確認してください。
-
-```text
-err: Could not send report:
-Error 400 on SERVER: Could not autoload datadog_reports:
-Class Datadog_reports is already defined in Puppet::Reports
-```
-
-### 手順
-
-これは、始めるための最小限の変更です。
-
-1. `/etc/puppetlabs/puppet/puppet.conf` を編集して Puppet Agent を追加します。
+3. 次のコンフィギュレーションオプションを Puppet マスターコンフィギュレーションに追加します (例: `/etc/puppetlabs/puppet/puppet.conf`)。
 
     ```ini
+    [main]
+    # No modification needed to this section
+    # ...
+
     [master]
-    report = true
-    reports = datadog_reports
-    pluginsync = true
+    # Enable reporting to Datadog
+    reports=datadog_reports
+    # If you use other reports, add datadog_reports to the end,
+    # for example: reports=store,log,datadog_reports
+    # ...
 
     [agent]
-    report = true
-    pluginsync = true
+    # ...
+    report=true
     ```
 
+4. すべての Puppet クライアントノードで、同じ場所に以下を追加します。
 
-2. `/etc/puppetlabs/code/environments/production/manifests/10_nodes.pp` を編集して Agent を構成します。
-
-    ```conf
-    node "default" {
-        class { "datadog_agent":
-            api_key => "<YOUR_DD_API_KEY>",
-        }
-    }
-    node "puppetmaster" {
-        class { "datadog_agent":
-            api_key            => "<YOUR_DD_API_KEY>",
-            puppet_run_reports => true
-        }
-    }
+    ```ini
+    [agent]
+    # ...
+    report=true
     ```
 
-   **注**: 古いバージョンの Puppet 場合は、`/etc/puppet/manifests/nodes.pp` を編集します。
+5. (オプション) レポートとファクトのタグ付けを有効にします。
 
-3. Puppet Agent を実行します。
+   Datadog にイベントとして送られたレポートにタグを追加することができます。これらのタグの源泉は、レポートが関連付けられている任意のノードについての Puppet ファクトです。必ず 1:1 の関係であるものとし、可読性を確保するために構造化ファクト (ハッシュ、配列など) を含むことは禁止されています。タグ付けを有効にするには、パラメーター `datadog_agent::reports::report_fact_tags` をファクトの配列値に設定します。たとえば、 `["virtual","trusted.extensions.pp_role","operatingsystem"]` は 3 つの個別のタグを各レポートイベントに追加する際の例です。
+
+   例: これらの設定を変更するには、pe-puppetserver (または puppetserver) を再起動してレポートのプロセッサを再読み込みする必要があります。サービスを再起動する前に、変更がデプロイされていることをご確認ください。
+
+   ヒント: 
+    - ドットインデックスを使用してターゲットファクトを指定します。これを行わない場合、ファクトデータセット全体がひとつの文字列の値として扱われます (あまり有用とは言えません) 。
+    - ホスト名、アップタイム、メモリーなど、モニタリングの汎用データを複製しないでください。
+    - ロール、所有者、テンプレート、データセンターなどのコアファクトを調整します。これらはメトリクスから取得した同じタグに意義ある相関関係を構築するのに役立ちます。
+
+6. [Event Stream][5] で `sources:puppet` を検索して、Puppet データが Datadog にあることを確認します。
+
+### トラブルシューティング
+
+Puppet Agent を手動で実行して、出力のエラーを確認できます。
 
     ```shell
     sudo systemctl restart puppetserver
     sudo puppet agent --onetime --no-daemonize --no-splay --verbose
     ```
 
-   応答例
+     Example response:
 
     ```text
     info: Retrieving plugin
@@ -233,9 +187,15 @@ Class Datadog_reports is already defined in Puppet::Reports
     notice: Finished catalog run in 0.81 seconds
     ```
 
-4. [Event Stream][5] で `sources:puppet` を検索して、Puppet データが Datadog にあることを確認します。
+次のエラーが表示される場合は、`[main]` ではなく `[master]` で `reports=datadog_reports` が定義されていることを確認してください。
 
-## マスターレス Puppet
+    ```text
+    err: Could not send report:
+    Error 400 on SERVER: Could not autoload datadog_reports:
+    Class Datadog_reports is already defined in Puppet::Reports
+    ```
+
+### マスターレス Puppet
 
 1. Datadog モジュールとその依存関係は、マスターレスで実行しているすべてのノードにインストールする必要があります。
 2. これを各ノードの `site.pp` ファイルに追加します。
@@ -246,17 +206,10 @@ Class Datadog_reports is already defined in Puppet::Reports
     }
    ```
 
-3. `puppet.conf` の `[main]` セクションでレポートを構成します。
-    ```conf
-    [main]
-    reports=datadog_reports
-    ```
-4. マスターレス構成で Puppet を実行します。
+3. マスターレス構成で Puppet を実行します。
     ```shell
     puppet apply --modulepath <path_to_modules> <path_to_site.pp>
     ```
-
-## クライアント設定
 
 ### クライアントノードのタグ付け
 
@@ -281,7 +234,7 @@ class { "datadog_agent":
 
 ### 構成変数
 
-これらの変数は、`datadog_agent` クラスで設定して、Agent の設定を制御できます。
+これらの変数は、`datadog_agent` クラスで設定して、Agent の設定を制御できます。サポートされている引数の完全なリストについては、[コード内のコメント][8]を参照してください。
 
 | 変数名                           | 説明                                                                                                                                                                                      |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -289,7 +242,7 @@ class { "datadog_agent":
 | `agent_version`                         | インストールする Agent の特定のマイナーバージョンを固定できます（例: `1:7.16.0-1`）。空のままにすると、最新バージョンがインストールされます。                                                             |
 | `collect_ec2_tags`                      | `true` を使用することで、インスタンスのカスタム EC2 タグを Agent タグとして収集します。                                                                                                                             |
 | `collect_instance_metadata`             | `true` を使用することで、インスタンスの EC2 メタデータを Agent タグとして収集します。                                                                                                                                |
-| `datadog_site`                          | レポート先の Datadog サイト。デフォルトは `datadoghq.com` で、EU サイトにレポートするには `datadoghq.eu` に設定します（Agent v6 および v7 のみ）。                                                               |
+| `datadog_site`                          | レポート先の Datadog サイト (Agent v6 および v7 のみ)。デフォルトは `datadoghq.com` で、`datadoghq.eu` または `us3.datadoghq.com` に設定できます。                                                         |
 | `dd_url`                                | Datadog インテークサーバーの URL。これを変更する必要はほとんどありません。`datadog_site` をオーバーライドします                                                                                                 |
 | `host`                                  | ノードのホスト名をオーバーライドします。                                                                                                                                                                  |
 | `local_tags`                            | ノードのタグとして設定される `<キー:値>` 文字列の配列。                                                                                                                             |
@@ -313,4 +266,6 @@ class { "datadog_agent":
 [3]: https://github.com/DataDog/dogapi-rb
 [4]: https://app.datadoghq.com/account/settings#integrations
 [5]: https://app.datadoghq.com/event/stream
-[6]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
+[6]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/integrations/mongo.pp
+[7]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
+[8]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/init.pp

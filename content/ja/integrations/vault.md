@@ -6,6 +6,7 @@ assets:
     Vault - Overview: assets/dashboards/vault_overview.json
   logs:
     source: vault
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json

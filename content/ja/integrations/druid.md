@@ -6,6 +6,7 @@ assets:
     Druid Overview: assets/dashboards/overview.json
   logs:
     source: druid
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -95,7 +96,7 @@ spec:
 {{< get-metrics-from-git "cri" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 CRI には、サービスのチェック機能は含まれません。
 
