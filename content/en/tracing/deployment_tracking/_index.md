@@ -1,7 +1,9 @@
 ---
-title: Version Tracking
+title: Deployment  Tracking
 kind: documentation
-description: 'Use Datadog to track version during and after deployments'
+description: 'Use Datadog to track your deployments through version tags'
+aliases:
+    - /tracing/version_tracking
 further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'
     - tag: "Documentation"
@@ -35,7 +37,7 @@ You can scope the errors widget to:
 
 Requests and Errors widgets can both be exported to dashboards and monitors.
 
-## Version summary table
+## Versions deployed
 
 A service configured with `version` tags has a version section on its Service page, below the main service health graphs. The version section shows all versions of the service that were active during the selected time interval, with active services at the top.
 
@@ -63,7 +65,7 @@ You can add columns to or remove columns from this overview table and your selec
 
 **Note:** The version section appears only if there is more than one version reporting during the time interval that is selected at the top of the page.
 
-## Version comparison
+## Deployment tracking
 
 Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service.  By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
 
@@ -99,7 +101,7 @@ This section lets you compare the performance (requests, latency, and errors) of
 
 {{< img src="tracing/version_tracking/EndpointComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
 
-## Version Deployment Strategies
+## Deployment Strategies
 
 Datadog's version tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
 

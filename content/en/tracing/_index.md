@@ -64,7 +64,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
-### Version Tracking
+### Deployment Tracking
 
 [Monitor service performance][4] and compare between versions for rolling, blue/green, shadow, or canary deployments.
 
@@ -117,7 +117,7 @@ Now that you've configured your application to send traces to Datadog, start get
 [1]: /tracing/send_traces/
 [2]: /tracing/visualization/services_map/
 [3]: /tracing/visualization/service/
-[4]: /tracing/version_tracking/
+[4]: /tracing/deployment_tracking/
 [5]: /tracing/livesearch/
 [6]: /tracing/connect_logs_and_traces/
 [7]: /tracing/serverless_functions/
