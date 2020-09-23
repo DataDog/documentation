@@ -12,9 +12,11 @@ further_reading:
 ---
 ## The version tag
 
-`version` is a [reserved tag][1] within Datadog. It is part of the Unified Service Tagging system and is applied to infrastructure metrics (host, container, process and NPM checks), trace metrics, traces, profiles and logs.
+The `version` tag is reserved within Unified Service Tagging. It's applied to infrastructure metrics (host, container, process, and NPM checks), trace metrics, traces, profiles, and logs.
 
-This page describes specific ways you can use the `version` tag to better monitor deployments and service behavior. See the [Unified Service Tagging][1] docs for instructions for setting up the tags.
+You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy. 
+
+If you have not set up the `version` tag refer to the [Unified Service Tagging documentation][1] for setup information.
 
 ## Using version tags on the Service page
 
