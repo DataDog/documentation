@@ -37,8 +37,8 @@ Define the configuration of your browser test.
 3. **Name**: The name of your browser test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
 5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on. 
-6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up [private locations][2] to run a your browser test from custom locations or from inside private networks.
-7. **How often should Datadog run the test?** Intervals are available between every 5 minutes to once per week. The 1 minute frequency is available [upon request][3].
+6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up [private locations][2] to run your browser test from custom locations or from inside private networks.
+7. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week. The one minute frequency is available [upon request][3].
 
 ### Use global variables
 
