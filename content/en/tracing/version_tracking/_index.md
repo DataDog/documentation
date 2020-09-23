@@ -14,7 +14,7 @@ further_reading:
 
 The `version` tag is reserved within Unified Service Tagging. It's applied to infrastructure metrics (host, container, process, and NPM checks), trace metrics, traces, profiles, and logs.
 
-You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy. 
+You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy.
 
 If you have not set up the `version` tag refer to the [Unified Service Tagging documentation][1] for setup information.
 
@@ -43,9 +43,9 @@ By default you will see:
 
 - The version names deployed for this service over the timeframe.
 - The times at which traces that correspond to this version were first and last seen.
+- An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version.
 
-- An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version. 
-   **Note:** This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
+    > **Note:** This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
 
 - Requests per second.
 - Error rate as a percentage of total requests.
@@ -84,9 +84,9 @@ Similar to the graphs on the Service page, Requests and Errors graphs show an ov
 This section lists differences in error types detected for each the two versions, highlighting:
 
  - Error types appearing only in the source version, useful for troubleshooting it;
- - Error types no longer appearing in the source version, useful for validating fixes; and 
- - Error types active in both.  
- 
+ - Error types no longer appearing in the source version, useful for validating fixes; and
+ - Error types active in both.
+
 From this table, you can pivot into live or historical traces corresponding to the selected error for further investigation.
 
 **Note:** Error comparison is based on _observed_ error types. If an error type is rare, it might be listed as no longer appearing only because it has not been seen _yet_.
