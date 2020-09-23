@@ -6,10 +6,10 @@ aliases:
     - /tracing/version_tracking
 further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'
-    - tag: "Documentation"
+      tag: "Documentation"
       text: 'Learn about Unified Service Tagging and reserved tags'
     - link: 'tracing/app_analytics'
-    - tag: "Documentation"
+      tag: "Documentation"
       text: 'Use version as a dimension in your App Analytics queries'
 ---
 ## The version tag
@@ -65,13 +65,13 @@ You can add columns to or remove columns from this overview table and your selec
 
 **Note:** The version section appears only if there is more than one version reporting during the time interval that is selected at the top of the page.
 
-## Deployment tracking
+## Deployment comparison
 
 Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service.  By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
 
 You can find the following information on version comparison page:
 
-- [Comparison Graphs](#comparison-graphs): A visualization of requests and errors to services, useful for watching various types of [deployments](#version-deployment-strategies).
+- [Comparison Graphs](#comparison-graphs): A visualization of requests and errors to services, useful for watching various types of [deployments](#deployment-strategies).
 - [Error Comparison](#error-comparison): Errors that may have been introduced or solved by a version.
 - [Endpoint Comparison](#endpoint-comparison): How endpoint latency and error rates perform in each version.
 
@@ -168,7 +168,7 @@ Analytics, including filtering on the `version` tag, can be exported to dashboar
 
 ### Profiles by version
 
-You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Version Comparison](#version-comparison) page to open the Continuous Profiler scoped to either version being compared.
+You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Deployment Comparison](#deployment-comparison) page to open the Continuous Profiler scoped to either version being compared.
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
 
