@@ -966,10 +966,10 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Version Tracking
-    url: tracing/version_tracking/
+  - name: Deployment Tracking
+    url: tracing/deployment_tracking/
     parent: tracing
-    identifier: version_tracking
+    identifier: deployment_tracking
     weight: 4
   - name: App Analytics
     url: tracing/app_analytics/
