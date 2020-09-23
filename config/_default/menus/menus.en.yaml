@@ -966,7 +966,7 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Version Tracking
+  - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking

@@ -79,7 +79,7 @@ You can find the following information on version comparison page:
 
 Similar to the graphs on the Service page, Requests and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
 
-{{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Version Comparison Graphs" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Deployment Comparison Graphs" style="width:100%;">}}
 
 ### Error comparison
 
