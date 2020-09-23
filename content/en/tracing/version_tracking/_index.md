@@ -43,11 +43,13 @@ By default you will see:
 
 - The version names deployed for this service over the timeframe.
 - The times at which traces that correspond to this version were first and last seen.
-- An indication of how many types of errors appear in each version that did not appear in the immediately previous version.
+
+- An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version. 
+   **Note:** This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
+
 - Requests per second.
 - Error rate as a percentage of total requests.
 
-**Note:** The 'Error Types' column is not a guarantee the version introduced these errors, but rather an indication that this error was not seen in traces from the previous version.  Based on how you are performing deployments, it can be a great way to begin investigating errors.
 
 You can add columns to or remove columns from this overview table and your selections will be saved.  The additional available columns are:
 
@@ -67,13 +69,13 @@ Click on any version row in the version summary table to open a version comparis
 
 You can find the following information on version comparison page:
 
-- [Comparison Graphs](#comparison-graphs) for a visualization of requests and errors to services, useful for watching various types of [deployments](#version-deployment-strategies).
+- [Comparison Graphs](#comparison-graphs): A visualization of requests and errors to services, useful for watching various types of [deployments](#version-deployment-strategies).
 - [Error Comparison](#error-comparison): Errors that may have been introduced or solved by a version.
 - [Endpoint Comparison](#endpoint-comparison): How endpoint latency and error rates perform in each version.
 
 ### Comparison graphs
 
-Requests and Error graphs are available in this section, much like the graphs on the Service Page. These graphs highlight the selected versions for comparison but leave all other versions in gray for additional context. These allow for a quick overview of a deployment rollout or the identification of a spike in error rates.
+Similar to the graphs on the Service page, Requests and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
 
 {{< img src="tracing/version_tracking/ComparisonGraphs.png" alt="Version Comparison Graphs" style="width:100%;">}}
 
@@ -164,7 +166,7 @@ Analytics, including filtering on the `version` tag, can be exported to dashboar
 
 ### Profiles by version
 
-In addition to being able to search for Profiles corresponding to a specific version, profiles corresponding to versions being compared can be loaded in a single click using the 'View Profiles' link on the top right of the [Version Comparison](#version-comparison) page.
+You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Version Comparison](#version-comparison) page to open the Continuous Profiler scoped to either version being compared.
 
 {{< img src="tracing/version_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
 
