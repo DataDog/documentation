@@ -117,6 +117,8 @@ sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 {{% /tab %}}
 {{< /tabs >}}
 
+Once verified, restart the Agent to include it and start reporting data into Datadog.
+
 ## Writing checks that run command line programs
 
 It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. A wrapper function is provided for convenience to avoid the boilerplate around shelling out another process and collecting its output and exit code.
