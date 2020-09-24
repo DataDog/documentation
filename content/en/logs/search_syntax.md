@@ -64,11 +64,14 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 
 `@url:www.datadoghq.com`
 
-**Notes**: 
+Note:
+The current workaround to match spaces in a facet value is to use the single character wildcard ?. So, for a facet my_facet and a value hello world today is a new day, you can match spaces like so: @my_facet:hello?world*.
+
+**Notes**:
 
 1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
-2. Searching on a facet value that contains special characters requires escaping or double quotes. The same logic is applied to spaces within log facet names. Log facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`.
+2. Searching on a facet value that contains special characters requires escaping or double quotes. Log facets should not contain spaces, but if they do, spaces must be escaped. If a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first?name:myvalue`. You can also use `?` to escape spaces in a search query string. For example, `@error.message:Error?message?here`
 
 Examples:
 
