@@ -114,10 +114,10 @@ sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 sudo -u dd-agent -- dd-agent check <CHECK_NAME>
 ```
 
-Once verified, restart the agent to include it and start reporting data into the Datadog UI.
-
 {{% /tab %}}
 {{< /tabs >}}
+
+Once verified, restart the agent to include it and start reporting data into the Datadog UI.
 
 ## Writing checks that run command line programs
 
