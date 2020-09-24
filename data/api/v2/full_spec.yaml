@@ -1269,6 +1269,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToOrganizationData'
+      required:
+      - data
       type: object
     RelationshipToOrganizationData:
       description: Relationship to organization object.
@@ -1290,6 +1292,8 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToOrganizationData'
           type: array
+      required:
+      - data
       type: object
     RelationshipToPermission:
       description: Relationship to a permissions object.
@@ -1345,12 +1349,15 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToUserData'
+      required:
+      - data
       type: object
     RelationshipToUserData:
       description: Relationship to user object.
       properties:
         id:
-          description: ID of the user.
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -1366,6 +1373,8 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToUserData'
           type: array
+      required:
+      - data
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -1596,6 +1605,8 @@ components:
         name:
           description: Name of the role.
           type: string
+      required:
+      - name
       type: object
     RoleCreateData:
       description: Data related to the creation of a role.
@@ -1606,12 +1617,16 @@ components:
           $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
+      required:
+      - attributes
       type: object
     RoleCreateRequest:
       description: Create a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleCreateData'
+      required:
+      - data
       type: object
     RoleCreateResponse:
       description: Response containing information about a created role.
@@ -1679,12 +1694,18 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/RolesType'
+      required:
+      - attributes
+      - type
+      - id
       type: object
     RoleUpdateRequest:
       description: Update a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleUpdateData'
+      required:
+      - data
       type: object
     RoleUpdateResponse:
       description: Response containing information about an updated role.
@@ -2286,9 +2307,9 @@ components:
       description: The service's relationships.
       properties:
         created_by:
-          $ref: '#/components/schemas/UserRelationship'
+          $ref: '#/components/schemas/RelationshipToUser'
         last_modified_by:
-          $ref: '#/components/schemas/UserRelationship'
+          $ref: '#/components/schemas/RelationshipToUser'
       readOnly: true
       type: object
     ServiceResponse:
@@ -2465,9 +2486,9 @@ components:
       description: The team's relationships.
       properties:
         created_by:
-          $ref: '#/components/schemas/UserRelationship'
+          $ref: '#/components/schemas/RelationshipToUser'
         last_modified_by:
-          $ref: '#/components/schemas/UserRelationship'
+          $ref: '#/components/schemas/RelationshipToUser'
       readOnly: true
       type: object
     TeamResponse:
@@ -2659,6 +2680,8 @@ components:
         title:
           description: The title of the user.
           type: string
+      required:
+      - email
       type: object
     UserCreateData:
       description: Object to create a user.
@@ -2669,12 +2692,17 @@ components:
           $ref: '#/components/schemas/UserRelationships'
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - attributes
+      - type
       type: object
     UserCreateRequest:
       description: Create a user.
       properties:
         data:
           $ref: '#/components/schemas/UserCreateData'
+      required:
+      - data
       type: object
     UserInvitationData:
       description: Object to create a user invitation.
@@ -2683,6 +2711,9 @@ components:
           $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
+      required:
+      - type
+      - relationships
       type: object
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
@@ -2707,6 +2738,8 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/RelationshipToUser'
+      required:
+      - user
       type: object
     UserInvitationResponse:
       description: User invitation as returned by the API.
@@ -2733,6 +2766,8 @@ components:
           items:
             $ref: '#/components/schemas/UserInvitationData'
           type: array
+      required:
+      - data
       type: object
     UserInvitationsResponse:
       description: User invitations as returned by the API.
@@ -2748,23 +2783,10 @@ components:
       description: User invitations type.
       enum:
       - user_invitations
+      example: user_invitations
       type: string
       x-enum-varnames:
       - USER_INVITATIONS
-    UserRelationship:
-      description: A relationship reference for users.
-      properties:
-        data:
-          description: The User relationship data.
-          properties:
-            id:
-              description: A unique identifier that represents the user.
-              example: 00000000-0000-0000-0000-000000000000
-              type: string
-            type:
-              $ref: '#/components/schemas/UsersType'
-          type: object
-      type: object
     UserRelationships:
       description: Relationships of the user object.
       properties:
@@ -2824,12 +2846,18 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - attributes
+      - type
+      - id
       type: object
     UserUpdateRequest:
       description: Update a user.
       properties:
         data:
           $ref: '#/components/schemas/UserUpdateData'
+      required:
+      - data
       type: object
     UsersResponse:
       description: Response containing information about multiple users.
@@ -2846,6 +2874,7 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      readOnly: true
       type: object
     UsersType:
       default: users
