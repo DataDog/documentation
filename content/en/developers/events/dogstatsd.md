@@ -40,7 +40,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 View errors and exceptions in Datadog with a DogStatsD event:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
@@ -119,6 +119,30 @@ public class DogStatsdClient {
 
         Statsd.recordEvent(event);
     }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+```csharp
+using StatsdClient;	
+
+public class DogStatsdClient	
+{	
+    public static void Main()	
+    {	
+        var dogstatsdConfig = new StatsdConfig	
+        {	
+            StatsdServerName = "127.0.0.1",	
+            StatsdPort = 8125,	
+        };	
+
+        using (var dogStatsdService = new DogStatsdService())	
+        {	
+            dogStatsdService.Configure(dogstatsdConfig);	
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });	
+        }	
+    }	
 }
 ```
 {{< /programming-lang >}}
