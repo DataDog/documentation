@@ -31,7 +31,7 @@ Go アプリケーションのトレースを開始するには、まず環境�
 | [Gorilla Mux][5] | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][6]                |
 | [gRPC][7]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][8]     |
 | [gRPC v1.2][7]   | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][9] |
-| [chi][10]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][11] |
+| [chi][10]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][11] |
 | [echo][12]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][13]              |
 
 #### ライブラリの互換性
@@ -139,6 +139,6 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 [59]: https://github.com/jinzhu/gorm
 [60]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm
 [61]: https://github.com/kubernetes/client-go
-[62]: https://godoc.org/k8s.io/client-go/kubernetes
+[62]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes
 [63]: https://github.com/bradfitz/gomemcache/memcache
 [64]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
