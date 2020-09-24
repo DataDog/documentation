@@ -281,7 +281,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
 
-"Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
+Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
 **Example**:
 
@@ -390,4 +390,3 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [14]: /api/v1/logs-pipelines/
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
-
