@@ -33,6 +33,7 @@ Watchdog is an algorithmic feature for APM performances and infrastructure metri
   * [PostgreSQL][3]
   * [NGINX][4]
   * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
+  * [Alerting][16]
 
 Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
@@ -60,7 +61,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 When an anomaly appears in one service, there's often a corresponding anomaly in a related service. For example, if one service's database queries get throttled, any downstream service will experience elevated latency. You need to troubleshoot this not as two separate issues, but rather as one issue stemming from a single root cause. 
 
-Watchdog helps you do that by automatically grouping related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story then includes a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This allows you to quickly understand the impact of the issue and provides insight on where to look for the root cause. 
+Watchdog automatically groups related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story then includes a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This allows you to quickly understand the impact of the issue and provides insight on where to look for the root cause. 
 
 The screenshot below shows a Watchdog story, starting with a summary of the issue and a graph highlighting the anomaly. Below that, a dependency map illustrates the full scope of the problem: the issue is rooted in the  `ad-server-http-client` service, and it also affects the downstream services  `web-store` and `web-store-mongo`. Below the dependency map, a table lists the affected services and displays hit rate, latency, and error rate metrics. In this case, the data in the table indicates that latency in the downstream services also increased.
 
@@ -131,3 +132,4 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 [13]: /tracing/guide/setting_primary_tags_to_scope/
 [14]: /tracing/visualization/#services
 [15]: /tracing/visualization/services_list/
+[16]: /monitors/
