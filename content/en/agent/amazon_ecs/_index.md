@@ -114,7 +114,7 @@ Add the following to your ECS task definition to create an Agent health check:
 16. Scroll down to the **Storage and Logging** section.
 17. In **Mount points** select the **docker_sock** source volume and enter as Container path `/var/run/docker.sock` on Linux or `\\.\pipe\docker_engine` on Windows. Check the **Read only** checkbox.
 18. For Linux only, add another mount point for **proc** and enter `/host/proc/` in the Container path. Check the **Read only** checkbox.
-19. For Linux only, add a third mount point for **cgroup** and enter `/host/sys/fs/cgroup` in the Container path. Check the **Read only** checkbox (use `/host/cgroup/` if you are using an original Amazon Linux AMI).
+19. For Linux only, add a third mount point for **cgroup** and enter `/host/sys/fs/cgroup` in the Container path. Check the **Read only** checkbox.
 
 **Note**: Setting the Datadog task definition to use 10 CPU units can cause the `aws.ecs.cpuutilization` for `service:datadog-agent` to display as running at 1000%. This is a peculiarity of how AWS displays CPU utilization. You can add more CPU units to avoid skewing your graph.
 
