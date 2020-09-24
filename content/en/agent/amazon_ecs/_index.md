@@ -65,9 +65,9 @@ Configure the task using either the [AWS CLI tools][10] or using the Amazon Web 
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
 3. Optionally - Add an [Agent health check](#agent-health-check).
 4. Optionally - If you are in Datadog EU site, edit `datadog-agent-ecs.json` and set `DD_SITE` to `DD_SITE:datadoghq.eu`.
-5. Optionally - See [log collection][18] to activate log collection.
+5. Optionally - See [log collection][5] to activate log collection.
 6. Optionally - See [process collection](#process-collection) to activate process collection.
-7. Optionally - See [trace collection (APM)][16] to activate trace collection.
+7. Optionally - See [trace collection (APM)][6] to activate trace collection.
 8. Optionally - See [network performance monitoring (NPM)](#network-performance-monitoring-collection) to activate network collection
 9. Execute the following command:
 
@@ -93,6 +93,8 @@ Add the following to your ECS task definition to create an Agent health check:
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
+[5]: /agent/amazon_ecs/logs/
+[6]: /agent/amazon_ecs/apm/
 {{% /tab %}}
 {{% tab "Web UI" %}}
 
