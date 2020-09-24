@@ -43,6 +43,8 @@ FROM datadog/agent:latest
 RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
+The `agent integration install` command run inside docker will issue the following harmless warning: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. This warning can be ignored.
+
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 
 [1]: /agent/autodiscovery/
