@@ -129,8 +129,8 @@ When running an API test, you must define at least one assertion that should be 
 
 | Type          | Operator                                                                                     | Value type                 |
 |---------------|----------------------------------------------------------------------------------------------|----------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `jsonpath` | _String_ <br> _[Regex][1]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`             | _String_ <br> _[Regex][1]_ |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `jsonpath` | _String_ <br> _[Regex][2]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`             | _String_ <br> _[Regex][2]_ |
 | response time | `is less than`                                                                               | _Integer (ms)_             |
 | status code   | `is`, `is not`                                                                               | _Integer_                  |
 
@@ -142,7 +142,8 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `status code` _is_ "returned value"
 - `header` `content-type` _is_ "returned value"
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[1]: https://restfulapi.net/json-jsonpath/
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
