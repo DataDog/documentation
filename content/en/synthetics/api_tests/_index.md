@@ -127,12 +127,12 @@ When running an API test, you must define at least one assertion that should be 
 
 {{% tab "HTTP Test" %}}
 
-| Type          | Operator                                                                                     | Value type                 |
-|---------------|----------------------------------------------------------------------------------------------|----------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `jsonpath` | _String_ <br> _[Regex][2]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`             | _String_ <br> _[Regex][2]_ |
-| response time | `is less than`                                                                               | _Integer (ms)_             |
-| status code   | `is`, `is not`                                                                               | _Integer_                  |
+| Type          | Operator                                                                                               | Value type                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1] | _String_ <br> _[Regex][2]_ <br> _string_, _[Regex][2]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][2]_                                      |
+| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -151,7 +151,7 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 | Type          | Operator                                                                         | Value type                 |
 |---------------|----------------------------------------------------------------------------------|----------------------------|
 | certificate   | `expires in more than`, `expires in less than`                                   | _Integer (number of days)_ |
-| property      | `contains`, `does not contain`, `is`, <br> `is not`, `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | response time | `is less than`                                                                   | _Integer (ms)_             |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
@@ -179,8 +179,8 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 | Type                | Record type             | Operator                                           | Value type                 |
 |---------------------|-------------------------|----------------------------------------------------|----------------------------|
 | response time       |                         | `is less than`                                     | _Integer (ms)_             |
-| every record        | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
-| at least one record | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
+| every record        | of type A, of type AAAA | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| at least one record | of type A, of type AAAA | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
