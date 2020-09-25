@@ -7,6 +7,9 @@ further_reading:
     - link: 'tracing/profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types.'
+    - link: 'tracing/profiler/profiler_troubleshooting'
+      tag: 'Documentation'
+      text: 'Fix problems you encounter while using the profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
@@ -19,9 +22,9 @@ For **Node**, **Ruby**, **PHP**, or **.NET** Profilers, [sign up][1] to be on th
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, Zulu Java 8+ (minor version 1.8.0_212+), and [certain OpenJDK 8 vendor versions][2]. All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][2]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][3]+ or [6.20.2][3]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -37,12 +40,12 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][3].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][4].
 
 
 **Note**:
 
-- The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][4]:
+- The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][5]:
 
     ```shell
     # Good:
@@ -56,17 +59,18 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
-| `DD_SERVICE`                                     | String        | Your [service][2] name, for example, `web-backend`.     |
-| `DD_ENV`                                         | String        | Your [environment][5] name, for example: `production`.|
+| `DD_SERVICE`                                     | String        | Your [service][3] name, for example, `web-backend`.     |
+| `DD_ENV`                                         | String        | Your [environment][6] name, for example: `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/profiling
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/profiling
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -216,17 +220,8 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 {{< /tabs >}}
 
-## Troubleshooting
-
-If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][2] and [open a support ticket][3] with debug files and the following information:
-
-- OS type and version (e.g Linux Ubuntu 14.04.3)
-- Runtime type, version, and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
-
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /tracing/troubleshooting/#tracer-debug-mode
-[3]: /help/
