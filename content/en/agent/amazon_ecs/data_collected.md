@@ -17,7 +17,7 @@ further_reading:
 
 ### Metrics
 
-Amazon ECS metrics can be collected by the Agent or when using the [AWS integration][1].
+Amazon ECS metrics are collected through the Datadog Agent or [AWS integration][1].
 
 Metrics collected using the AWS integration are prefixed with `aws.*`. Metrics collected by the Agent are prefixed with `ecs.*`. See the table below:
 
