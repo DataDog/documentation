@@ -114,6 +114,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
 	@if [ content/en/real_user_monitoring/android.md ]; then \
 	rm -f content/en/real_user_monitoring/android.md ;fi
+	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
