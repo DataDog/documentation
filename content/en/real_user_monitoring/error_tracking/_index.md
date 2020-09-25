@@ -46,7 +46,23 @@ Datadog allows you to securely upload your source maps to deobfuscate your stack
 
 Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][4] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
 
-{{< site-region region="eu" >}}
+{{< tabs >}}
+{{% tab "US" %}}
+
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+3. Run the following command:
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
+
+[1]: https://app.datadoghq.com/account/settings#api
+
+{{% /tab %}}
+{{% tab "EU" %}}
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
 2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
@@ -60,22 +76,9 @@ datadog-ci sourcemaps upload /path/to/dist \
 ```
 
 [1]: https://app.datadoghq.com/account/settings#api
-{{< /site-region >}}
 
-{{< site-region region="us" >}}
-
-1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
-3. Run the following command:
-```bash
-datadog-ci sourcemaps upload /path/to/dist \
-	--service=my-service \
-	--release-version=v35.2395005 \
-	--minified-path-prefix=https://hostname.com/static/js
-```
-
-[1]: https://app.datadoghq.com/account/settings#api
-{{< /site-region >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information about CLI parameters, see the [official Github repository][5].
 
