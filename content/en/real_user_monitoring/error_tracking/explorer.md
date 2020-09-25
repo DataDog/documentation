@@ -49,12 +49,11 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 ## Get alerted on new errors
 
-It's critical to see a new issue as soon as it happens, because it gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking generates a [Datadog event][1] whenever an issue is first seen in a given service and environment and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors][2].
+Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking generates a [Datadog event][1] whenever an issue is first seen in a given service and environment and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors][2].
 
-Each event generated is tagged with the version, the service and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
+Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
 
 {{< img src="real_user_monitoring/error_tracking/export_to_monitor.gif" alt="Export to monitor in Error Tracking"  >}}
 
 [1]: /events
 [2]: /monitors/monitor_types/event/
-
