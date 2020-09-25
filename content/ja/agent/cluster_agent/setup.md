@@ -64,7 +64,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 2. この 1 行コマンドを実行します。
 
     ```shell
-    kubectl create secret generic datadog-agent-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
+    kubectl create secret generic datadog-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
     ```
 
     または、[manifest/cluster-agent ディレクトリ][1]にある `agent-secret.yaml` ファイルのシークレットの値を変更するか、以下を使い作成します。
@@ -117,8 +117,9 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
   * [`agent-services.yaml`: Cluster Agent サービスマニフェスト][4]
   * [`secrets.yaml`: Datadog API キーを含むシークレット][5]
   * [`cluster-agent-deployment.yaml`: Cluster Agent マニフェスト][6]
+  * [`install_info-configmap.yaml`: Configmap のインストール][7]
 
-2. `secrets.yaml` マニフェストで、`PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` を base64 でエンコードされた [Datadog API キー][7]に置き換えます。
+2. `secrets.yaml` マニフェストで、`PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` を base64 でエンコードされた [Datadog API キー][8]に置き換えます。
 
     ```shell
     echo -n '<Your API key>' | base64
@@ -127,6 +128,7 @@ Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要�
 3. `cluster-agent-deployment.yaml` マニフェストで、[手順 2 - Cluster Agent - Agent 間通信のセキュリティ保護](#手順-2-Agent-間通信のセキュリティ保護)のトークンを設定します。その形式は、シークレットの設定方法により異なります。手順はマニフェストを参照してください。
 4. 実行: `kubectl apply -f agent-services.yaml`
 5. 実行: `kubectl apply -f secrets.yaml`
+6. 実行: `kubectl apply -f install_info-configmap.yaml`
 6. 最後に Datadog Cluster Agent `kubectl apply -f cluster-agent-deployment.yaml` をデプロイします。
 
 ### 手順 4 - 検証
@@ -164,13 +166,13 @@ Datadog Cluster Agent の設定が終了したら、Datadog Agent と Datadog Cl
 
 #### 手順 1 - ノードベースの Agent に対する RBAC アクセス許可の構成
 
-1. [agent-rbac.yaml マニフェスト][8]をダウンロードします。**注**: Cluster Agent を使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
+1. [agent-rbac.yaml マニフェスト][9]をダウンロードします。**注**: Cluster Agent を使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
 
 2. 実行: `kubectl apply -f agent-rbac.yaml`
 
 #### 手順 2 - Datadog Agent の有効化
 
-1. [daemonset.yaml マニフェスト][9]をダウンロードします。
+1. [daemonset.yaml マニフェスト][10]をダウンロードします。
 
 3. `daemonset.yaml` マニフェストで、`<DD_SITE>` を使用中の Datadog サイト（`datadoghq.com` や `datadoghq.eu` など）と置き換えます。この値の初期設定は `datadoghq.com` です。
 
@@ -216,6 +218,7 @@ Datadog アカウントに Kubernetes イベントが流れ込み始め、Agent 
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secrets.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
-[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
+[7]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
+[8]: https://app.datadoghq.com/account/settings#api
+[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
+[10]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml

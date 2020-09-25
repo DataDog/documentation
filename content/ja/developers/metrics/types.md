@@ -30,7 +30,7 @@ Datadog に送信される各メトリクスにはタイプが必要です。メ
 - [RATE](?tab=rate#metric-types)
 - [GAUGE](?tab=gauge#metric-types)
 - [SET][4]
-- [HISTOGRAM](?tab=hisogram#metric-types)
+- [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
 次の各種メトリクス送信タイプは、Datadog ウェブアプリケーション内にある 4 つのアプリ内メトリクスタイプにマッピングされます。
