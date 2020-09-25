@@ -2835,7 +2835,8 @@ components:
           type: string
         target_type:
           default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
+          description: Defines if the final attribute or tag name is from log `attribute`
+            or `tag`.
           type: string
         type:
           $ref: '#/components/schemas/LogsAttributeRemapperType'
@@ -7441,16 +7442,19 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: The sub-type of the Synthetic API test, `http`, `ssl`, or `tcp`.
+      description: The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+        `dns`.
       enum:
       - http
       - ssl
       - tcp
+      - dns
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
       - TCP
+      - DNS
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
