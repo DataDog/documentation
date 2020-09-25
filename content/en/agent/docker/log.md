@@ -116,7 +116,7 @@ logs_config:
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][1] documentation for more information on parameters for filtering.
 
 ## Log Integrations
 
@@ -249,3 +249,4 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 [8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 [9]: /agent/guide/autodiscovery-management/
 [10]: /agent/kubernetes/log/#short-lived-containers
+[11]: /integrations/journald/?tab=host#filter-journal-units
