@@ -17,13 +17,15 @@ further_reading:
 
 ### Metrics
 
-Metrics collected by the Agent when using Amazon ECS on EC2 instances:
+Amazon ECS metrics can be collected by the Agent or when using the [AWS integration][1].
+
+In the table below, metrics collected when using the AWS integration are prefixed with `aws.*`. Metrics collected by the Agent are prefixed with `ecs.*`.
 
 {{< get-metrics-from-git "amazon_ecs" >}}
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to hostname, security-groups, and more.
 
-**Note**: Metrics prefixed with `ecs.containerinsights.*` come from the [AWS CloudWatch agent][1].
+**Note**: Metrics prefixed with `ecs.containerinsights.*` come from the [AWS CloudWatch agent][2].
 
 ### Events
 
@@ -31,7 +33,7 @@ To reduce noise, the Amazon ECS integration is automatically set up to include o
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 
-To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
+To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][3].
 
 ### Service checks
 
@@ -41,5 +43,6 @@ To remove the whitelist and receive all events from your Datadog Amazon ECS inte
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
-[2]: https://docs.datadoghq.com/help/
+[1]: /integrations/amazon_web_services/
+[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
+[3]: https://docs.datadoghq.com/help/
