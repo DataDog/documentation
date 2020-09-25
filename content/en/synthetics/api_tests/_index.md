@@ -127,12 +127,12 @@ When running an API test, you must define at least one assertion that should be 
 
 {{% tab "HTTP Test" %}}
 
-| Type          | Operator                                                                         | Value type                 |
-|---------------|----------------------------------------------------------------------------------|----------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| response time | `is less than`                                                                   | _Integer (ms)_             |
-| status code   | `is`, `is not`                                                                   | _Integer_                  |
+| Type          | Operator                                                                                     | Value type                 |
+|---------------|----------------------------------------------------------------------------------------------|----------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `jsonpath` | _String_ <br> _[Regex][1]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`             | _String_ <br> _[Regex][1]_ |
+| response time | `is less than`                                                                               | _Integer (ms)_             |
+| status code   | `is`, `is not`                                                                               | _Integer_                  |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
