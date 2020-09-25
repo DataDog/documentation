@@ -29,23 +29,118 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
+Otherwise, to begin tracing applications written in any language: 
 
-Next, download `dd-java-agent.jar` that contains the Agent class files:
+1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
-```shell
+2. Download `dd-java-agent.jar` that contains the Agent class files:
+
+   ```shell
 wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
-```
+   ```
 
-Finally, add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
+3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
+
+   ```text
+-javaagent:/path/to/the/dd-java-agent.jar
+   ```
+
+4. Add [Configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics---all the metrics you intend to use. See the examples below. Note that using the in-app Quickstart instructions generates these for you.
+
+**Notes**:
+
+- Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+
+    {{< tabs >}}
+    {{% tab "WebSphere" %}}
+
+In the administrative console:
+
+1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
+2. Select **Java and Process Management > Process Definition**.
+3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+4. In the **Generic JVM arguments** text field, enter:
 
 ```text
--javaagent:/path/to/the/dd-java-agent.jar
+-javaagent:/path/to/dd-java-agent.jar
 ```
 
-**Note**:
+For additional details and options, see the [WebSphere docs][1].
 
-- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][6].
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+    {{% /tab %}}
+    {{% tab "Spring Boot" %}}
+
+If your app is called `my_app.jar`, create a `my_app.conf`, containing:
+
+```text
+JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
+```
+
+For more information, see the [Spring Boot documentation][1].
+
+
+[1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+    {{% /tab %}}
+    {{% tab "Tomcat" %}}
+
+Open your Tomcat startup script file, for example `catalina.sh`, and add:
+
+```text
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+Or on Windows, `catalina.bat`:
+
+```text
+set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+```
+
+    {{% /tab %}}
+    {{% tab "JBoss" %}}
+
+Add the following line to the end of `standalone.sh`:
+
+```text
+JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+On Windows, add the following line to the end of `standalone.conf.bat`:
+
+```text
+set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
+```
+
+For more details, see the [JBoss documentation][1].
+
+
+[1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+    {{% /tab %}}
+    {{% tab "Jetty" %}}
+
+If you use `jetty.sh` to start Jetty as a service, edit it to add:
+
+```text
+JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
+```
+
+If you use `start.ini` to start Jetty, add the following line (under `--exec`, or add `--exec` line if it isn't there yet):
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+    {{% /tab %}}
+    {{< /tabs >}}
+
+
+- If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
+   
+   ```text
+   java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
+   ```
+   
+     For more information, see the [Oracle documentation][6].
 
 - `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].
 
