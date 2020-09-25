@@ -19,7 +19,7 @@ further_reading:
 
 Amazon ECS metrics can be collected by the Agent or when using the [AWS integration][1].
 
-In the table below, metrics collected when using the AWS integration are prefixed with `aws.*`. Metrics collected by the Agent are prefixed with `ecs.*`.
+Metrics collected using the AWS integration are prefixed with `aws.*`. Metrics collected by the Agent are prefixed with `ecs.*`. See the table below:
 
 {{< get-metrics-from-git "amazon_ecs" >}}
 
