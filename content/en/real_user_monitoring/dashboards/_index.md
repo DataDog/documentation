@@ -2,19 +2,16 @@
 title: RUM Dashboards
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/installation/advanced_configuration'
-      tag: 'Documentation'
-      text: 'Advanced configuration for RUM data collection'
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
       text: 'Explore your views within Datadog'
 ---
 
-When you [create a RUM application][1] dashboards are created within Datadog to analyze all the [data collected][2]. RUM dashboards can be found in the dashboards list and have the Datadog logo:
+When you create a RUM application dashboards are created within Datadog to analyze all the [data collected][1]. RUM dashboards can be found in the dashboards list and have the Datadog logo:
 
 {{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="RUM Dashboard in dash list" >}}
 
-You can also access these dashboards through your [RUM application page][3]. Click on the **Dashboard** links associated with your application:
+You can also access these dashboards through your [RUM application page][2]. Click on the **Dashboard** links associated with your application:
 
 {{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM applications" >}}
 
@@ -26,7 +23,7 @@ You can also access these dashboards through your [RUM application page][3]. Cli
 
 ## Dashboard interactions
 
-You can customize your dashboards as you would with [any other one][4], or directly explore the underlying data in [your RUM explorer][2].
+You can customize your dashboards as you would with [any other one][3], or directly explore the underlying data in [your RUM explorer][1].
 
 ### Template variables
 
@@ -50,7 +47,6 @@ Clone your RUM dashboards and customize them to fit your needs. You can add widg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/installation/
-[2]: /real_user_monitoring/data_collected/
-[3]: https://app.datadoghq.com/rum/list
-[4]: /dashboards/
+[1]: /real_user_monitoring/data_collected/
+[2]: https://app.datadoghq.com/rum/list
+[3]: /dashboards/

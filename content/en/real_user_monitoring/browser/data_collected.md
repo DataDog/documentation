@@ -216,9 +216,10 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
 | `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
 
-[1]: /real_user_monitoring/installation/?tab=us#initialization-parameters
-[2]: /real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[3]: /real_user_monitoring/installation/advanced_configuration/?tab=npm#custom-user-actions
+
+[1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#custom-user-actions
 [4]: /real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
 [5]: /real_user_monitoring/data_collected/user_action#custom-user-actions
 {{% /tab %}}
@@ -282,7 +283,7 @@ In addition to default attributes, add [specific global context][1] to all event
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/installation/advanced_configuration/
+[1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /real_user_monitoring/browser/data_collected/?tab=resource
 [3]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [4]: /real_user_monitoring/browser/data_collected/?tab=error

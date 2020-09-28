@@ -2,9 +2,6 @@
 title: Send RUM Custom User Actions
 kind: guide
 further_reading:
-- link: '/real_user_monitoring/installation'
-  tag: 'Documentation'
-  text: 'Get started with RUM data collection'
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
@@ -50,5 +47,5 @@ As an example, the following screenshot shows the total cart amount per country 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[2]: /real_user_monitoring/explorer/?tab=facets
+[1]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[2]: /real_user_monitoring/explorer
