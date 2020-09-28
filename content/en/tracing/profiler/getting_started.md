@@ -22,7 +22,7 @@ For **Node**, **Ruby**, **PHP**, or **.NET** Profilers, [sign up][1] to be on th
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, Zulu Java 8+ (minor version 1.8.0_212+), and [certain OpenJDK 8 vendor versions][2]. All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
+The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler library is supported in OpenJDK 11+, Oracle Java 11+, [OpenJDK 8 for most vendors (version 8u262)][2] and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, and Clojure are supported. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][3]+ or [6.20.2][3]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
