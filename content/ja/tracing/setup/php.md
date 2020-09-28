@@ -155,7 +155,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | 分散型トレーシングの有効にするかどうか                                                                                                          |
 | `DD_ENV`                                  | `null`      | アプリケーションの環境 (例: `prod`、`pre-prod`、`stage`) を設定します。バージョン `0.47.0` で追加されました。                                         |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | 優先度付きサンプリングを有効にするかどうか                                                                                                            |
-| `DD_SERVICE`                              | `null`      | デフォルトのアプリ名。バージョン 0.47.0 以降では、`DD_SERVICE_NAME` になります。                                                                          |
+| `DD_SERVICE`                              | `null`      | デフォルトのアプリ名。バージョン 0.47.0 未満では、`DD_SERVICE_NAME` になります。                                                                          |
 | `DD_SERVICE_MAPPING`                      | `null`      | APM インテグレーションのデフォルトの名前を変更します。一度に 1 つ以上のインテグレーションの名前を変更できます。例: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` ([インテグレーション名](#インテグレーション名)を参照してください) |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC ベースの構成可能なサーキットブレーカーの再試行時間（ミリ秒）                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Agent の接続設定に使える最大時間（ミリ秒）                                                                          |
