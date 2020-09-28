@@ -61,7 +61,7 @@ Configure the task using either the [AWS CLI tools][10] or using the Amazon Web 
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
 
-1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI). For Windows, download [datadog-agent-ecs-win.json][3].
+1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux 1 AMI). For Windows, download [datadog-agent-ecs-win.json][3].
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
 3. Optionally - Add an [Agent health check](#agent-health-check).
 4. Optionally - If you are in Datadog EU site, edit `datadog-agent-ecs.json` and set `DD_SITE` to `DD_SITE:datadoghq.eu`.
@@ -105,7 +105,7 @@ Add the following to your ECS task definition to create an Agent health check:
 5. Click on the **Add volume** link.
 6. For **Name** enter `docker_sock`. For **Source Path**, enter `/var/run/docker.sock` on Linux or `\\.\pipe\docker_engine` on Windows. Click **Add**.
 7. For Linux only, add another volume with the name `proc` and source path of `/proc/`.
-8. For Linux only, add another volume with the name `cgroup` and source path of `/sys/fs/cgroup/` (or `/cgroup/` if you are using an original Amazon Linux AMI).
+8. For Linux only, add another volume with the name `cgroup` and source path of `/sys/fs/cgroup/` (or `/cgroup/` if you are using an original Amazon Linux 1 AMI).
 9. Click the large **Add container** button.
 10. For **Container name** enter `datadog-agent`.
 11. For **Image** enter `datadog/agent:latest`.
