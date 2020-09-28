@@ -4,26 +4,26 @@ kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
   tag: "Datadog Serverless Plugin"
-  text: "Datadog Serverless Plugin"
+  text: "Documentation"
 - link: "/serverless/serverless_integrations/macro/"
-  tag: "Datadog Serverless Macro"
+  tag: "Documentation"
   text: "Datadog Serverless Macro"
 - link: "/serverless/serverless_integrations/cli/"
-  tag: "Datadog Serverless CLI"
+  tag: "Documentation"
   text: "Datadog Serverless CLI"
 ---
 
 ## Datadog Serverless Plugin
 
-The Datadog serverless framework plugin automatically installs the Datadog Lambda library to your Python and Node.js serverless applications, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. See [more details][1].
+The Datadog serverless framework plugin automatically installs the Datadog Lambda library to your Python and Node.js serverless applications, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. For more information, see the [plugin page][1].
 
 ## Datadog Serverless Macro
 
-The Datadog Serverless macro for AWS CloudFormation automatically installs the Datadog Lambda library to your Python and Node.js serverless applications that are deployed using AWS CloudFormation, SAM or CDK, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. See [more details][2].
+The Datadog Serverless macro for AWS CloudFormation automatically installs the Datadog Lambda library to your Python and Node.js serverless applications that are deployed using AWS CloudFormation, SAM or CDK, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. For more information, see the [macro page][2].
 
 ## Datadog Serverless CLI
 
-The Datadog serverless CLI allows you to set up the instrumentation of your serverless applications from the command line or a CI/CD pipeline. The CLI automatically installs the Datadog Lambda library to your Python and Node.js serverless applications, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. See [more details][3].
+The Datadog serverless CLI allows you to set up the instrumentation of your serverless applications from the command line or a CI/CD pipeline. The CLI automatically installs the Datadog Lambda library to your Python and Node.js serverless applications, and enables the collection of enhanced Lambda metrics, custom metrics, traces, and logs from your Lambda functions. For more information, see the [CLI page][3].
 
 ## AWS Step Functions
 

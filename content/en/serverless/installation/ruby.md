@@ -3,13 +3,13 @@ title: Instrumenting Ruby Applications
 kind: documentation
 further_reading:
 - link: 'serverless/serverless_tagging/'
-  tag: 'Tagging Serverless Applications'
+  tag: 'Documentation'
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
-  tag: 'Tracing Serverless Applications'
+  tag: 'Documentation'
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: 'Submitting Custom Metrics from Serverless Applications'
+  tag: 'Documentation'
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 

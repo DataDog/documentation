@@ -3,22 +3,22 @@ title: Instrumenting Node.js Applications
 kind: documentation
 further_reading:
 - link: "/serverless/serverless_integrations/plugin/"
-  tag: "Serverless"
+  tag: "Documentation"
   text: "Datadog Serverless Plugin"
 - link: "/serverless/serverless_integrations/macro/"
-  tag: "Serverless"
+  tag: "Documentation"
   text: "Datadog Serverless Macro"
 - link: "/serverless/serverless_integrations/cli/"
-  tag: "Serverless"
+  tag: "Documentation"
   text: "Datadog Serverless CLI"
 - link: 'serverless/serverless_tagging/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 

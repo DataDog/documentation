@@ -3,13 +3,13 @@ title: Instrumenting Java Applications
 kind: documentation
 further_reading:
 - link: 'serverless/serverless_tagging/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Tagging Serverless Applications'
 - link: 'serverless/distributed_tracing/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Tracing Serverless Applications'
 - link: 'serverless/custom_metrics/'
-  tag: "Serverless"
+  tag: "Documentation"
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
