@@ -23,21 +23,21 @@ API tests are useful to help you monitor your API endpoints and alert you when t
 
 ## Configuration
 
-API tests configuration depends on the type of API test you want to create: [HTTP test](?tab=httptest), [SSL test](?tab=ssltest), or [TCP test](?tab=tcptest).
+API tests configuration depends on the type of API test you want to create: [HTTP test](?tab=httptest), [SSL test](?tab=ssltest), [TCP test](?tab=tcptest), or [DNS test](?tab=dnstest).
 
 ### Make a request
 
-Define the `HTTP`, `SSL`, or `TCP` request you want to be executed by Datadog:
+Define the `HTTP`, `SSL`, `TCP`, or `DNS` request you want to be executed by Datadog:
 
 {{< tabs >}}
 
 {{% tab "HTTP Test" %}}
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="Make HTTP Request"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-http-request.png" alt="Define HTTP Request"  style="width:80%;" >}}
 
 Define the request you want to be executed by Datadog:
 
-1. **Choose request type**: `HTTP`
+1. **Choose a request type**: `HTTP`.
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
     * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
         * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
@@ -61,14 +61,14 @@ Define the request you want to be executed by Datadog:
 
 {{% tab "SSL Test" %}}
 
-{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Make SSL Request"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-ssl-request.png" alt="Define SSL Request"  style="width:80%;" >}}
 
-1. **Choose request type**: `SSL`
+1. **Choose a request type**: `SSL`.
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
-3. **Name**: The name of your API test.
+3. **Name**: The name of your SSL test.
 4. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic SSL test on a private host not accessible from the public internet.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/
@@ -78,14 +78,31 @@ Define the request you want to be executed by Datadog:
 
 {{% tab "TCP Test" %}}
 
-{{< img src="synthetics/api_tests/tcp_test.png" alt="Make TCP Request"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/tcp_test.png" alt="Define TCP Request"  style="width:80%;" >}}
 
-1. **Choose request type**: `TCP`
+1. **Choose a request type**: `TCP`.
 2. Specify the `Host` and the TCP `Port`.
-3. **Name**: The name of your API test.
+3. **Name**: The name of your TCP test.
 4. **Select your tags**: The tags attached to your TCP test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic TCP test on a private host or port not accessible from the public internet.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
+7. Click **Test URL** to try the request configuration and see a response preview on the righthand side.
+
+[1]: /synthetics/
+[2]: /api/#get-available-locations
+[3]: /synthetics/private_locations/
+{{% /tab %}}
+
+{{% tab "DNS Test" %}}
+
+{{< img src="synthetics/api_tests/dns_test.png" alt="Define DNS Request"  style="width:80%;" >}}
+
+1. **Choose a request type**: `DNS`.
+2. Specify the `Domain` and optional `DNS Server` to use.
+3. **Name**: The name of your DNS test.
+4. **Select your tags**: The tags attached to your DNS test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetic DNS test on a private domain that cannot be resolved from the public internet.
+6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click **Test URL** to try the request configuration and see a response preview on the righthand side.
 
 [1]: /synthetics/
@@ -103,34 +120,36 @@ When running an API test, you must define at least one assertion that should be 
 
 {{% tab "HTTP Test" %}}
 
-| Type          | Operator                                                                        | Value type                 |
-|---------------|---------------------------------------------------------------------------------|----------------------------|
-| Status Code   | `is`, `is not`                                                                  | _Integer_                  |
-| Response time | `lessThan`                                                                      | _Integer (ms)_             |
-| Headers       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| Body          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| Type          | Operator                                                                         | Value type                 |
+|---------------|----------------------------------------------------------------------------------|----------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| response time | `is less than`                                                                   | _Integer (ms)_             |
+| status code   | `is`, `is not`                                                                   | _Integer_                  |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
-- `Response time` _lessThan_ 2000 ms
-- `Header content-type` _is_ "returned value"
-- `Status code` _is_ "returned value"
+- `response time` _is less than_ 1000 ms
+- `status code` _is_ "returned value"
+- `header` `content-type` _is_ "returned value"
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
 
-| Type        | Operator                                                                        | Value type                 |
-|-------------|---------------------------------------------------------------------------------|----------------------------|
-| certificate | `expires in more than`                                                          | _Integer (number of days)_ |
-| property    | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_  |
+| Type          | Operator                                                                         | Value type                 |
+|---------------|----------------------------------------------------------------------------------|----------------------------|
+| certificate   | `expires in more than`, `expires in less than`                                   | _Integer (number of days)_ |
+| property      | `contains`, `does not contain`, `is`, <br> `is not`, `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| response time | `is less than`                                                                   | _Integer (ms)_             |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
 
 - `certificate` _expires in more than_ 10 days
+- `response time` _is less than_ 1000 ms.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
@@ -143,8 +162,25 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
 
-- `response time` _is less than_ 2000 ms.
+- `response time` _is less than_ 1000 ms.
 
+{{% /tab %}}
+
+{{% tab "DNS Test" %}}
+
+| Type                | Record type             | Operator                                           | Value type                 |
+|---------------------|-------------------------|----------------------------------------------------|----------------------------|
+| response time       |                         | `is less than`                                     | _Integer (ms)_             |
+| every record        | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
+| at least one record | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
+
+If you click on **Test URL**, then the basic assertions are automatically filled:
+
+- `response time` _is less than_ 1000 ms
+- `at least one record` `of type A` _is_ "returned value" (when returned)
+- `at least one record` `of type AAAA` _is_ "returned value" (when returned)
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{< /tabs >}}

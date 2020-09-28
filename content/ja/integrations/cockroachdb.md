@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     CockroachDB Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -44,7 +47,7 @@ CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健
 CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

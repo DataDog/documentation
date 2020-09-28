@@ -188,7 +188,7 @@ Apache インテグレーションで問題が発生する場合の多くは、A
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/ja/agent/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/integrations/faq/apache-ssl-certificate-issues/

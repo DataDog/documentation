@@ -50,11 +50,15 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
+App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
+* the [`WithAnalytics`][1] tracer start option, for example:
+
+  ```go
+  tracer.Start(tracer.WithAnalytics(true))
+  ```
+
+* starting in version 1.26.0 using environment variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{% /tab %}}
@@ -354,7 +358,7 @@ class MyClass {
     final Span span = GlobalTracer.get().activeSpan();
     // Span provided by @Trace annotation.
     if (span != null) {
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }

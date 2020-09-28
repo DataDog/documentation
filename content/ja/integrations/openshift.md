@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,10 +47,10 @@ Agent のインストールには、Kubernetes の [Agent のインストール�
 バージョン 6.1 から、Datadog Agent は、OpenShift Origin および Enterprise のクラスターの監視をサポートするようになりました。お客様のニーズとクラスターの[セキュリティ上の制約][3]に応じて、次の 3 つのデプロイシナリオがサポートされています。
 
 - [制限付き SCC オペレーション](#restricted-scc-operations)
-- [ホストネットワーク SCC オペレーション](#host-network-scc-operations)
+- [ホストネットワーク SCC オペレーション](#host)
 - [すべての機能に使用できるカスタム Datadog SCC](#custom-datadog-scc-for-all-features)
 
-| Security Context Constraints   | [制限付き](#restricted-scc-operations) | [ホストネットワーク](#host-network-scc-operations) | [カスタム](#custom-datadog-scc-for-all-features) |
+| Security Context Constraints   | [制限付き](#restricted-scc-operations) | [ホストネットワーク](#host) | [カスタム](#custom-datadog-scc-for-all-features) |
 | ------------------------------ | ---------------------------------------- | -------------------------------------------- | ---------------------------------------------- |
 | Kubernetes レイヤーの監視    | ✅                                       | ✅                                           | ✅                                             |
 | Kubernetes ベースのオートディスカバリー | ✅                                       | ✅                                           | ✅                                             |
@@ -131,7 +132,7 @@ runAsUser:
 
 OpenShift チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 OpenShift チェックには、サービスのチェック機能は含まれません。
 

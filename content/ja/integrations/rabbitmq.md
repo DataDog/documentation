@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: rabbitmq
@@ -56,7 +58,7 @@ supported_os:
 
 RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### RabbitMQ の準備
 

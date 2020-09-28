@@ -25,7 +25,13 @@ Python のバージョン `2.7+` および `3.5+` 以降がサポートされて
 
 ## インストールと利用開始
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に Continuous Profiler、App Analytics、およびトレース ID 挿入を有効にします。
 
 または、Python で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストールして構成し][3]、[Docker アプリケーションのトレース][4]または [Kubernetes アプリケーション][5]に関する追加ドキュメントを確認します。
 
@@ -45,7 +51,7 @@ ddtrace-run python app.py
 
 より高度な使用方法、コンフィギュレーション、細かい制御については、Datadog の [API ドキュメント][6]を参照してください。
 
-## 構成
+## コンフィギュレーション
 
 **ddtrace-run** を使用する場合、次の[環境変数 (オプション)][7] を利用できます。
 
@@ -92,7 +98,7 @@ tracer.configure(
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/send_traces/
 [4]: /ja/tracing/setup/docker/
 [5]: /ja/agent/kubernetes/apm/

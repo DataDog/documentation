@@ -9,6 +9,7 @@ assets:
 categories:
   - processing
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:

@@ -39,7 +39,7 @@ error_budget("slo_id").over("time_window") > 75
 
 In addition, SLO error budget monitors can also be created using the [datadog_monitor resource in Terraform][5]. Below is an example `.tf` for configuring an error budget monitor for a metric-based SLO using the same example query as above.
 
-**Note:** SLO error budget monitors are only supported in Terraform provider v2.7.0 or earlier.
+**Note:** SLO error budget monitors are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
 ```
 resource "datadog_monitor" "metric-based-slo" {

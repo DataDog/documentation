@@ -6,6 +6,7 @@ assets:
     Sidekiq Overview: assets/dashboards/overview.json
   logs:
     source: sidekiq
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -98,7 +99,7 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
            match_type: "regex"
            tags:
              worker: "$1"
-        - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+         - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
            name: "sidekiq.jobs.worker.$2"
            match_type: "regex"
            tags:

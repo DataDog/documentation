@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: varnish
@@ -60,7 +62,7 @@ supported_os:
 
 Varnish チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

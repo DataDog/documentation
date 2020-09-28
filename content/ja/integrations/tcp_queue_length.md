@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

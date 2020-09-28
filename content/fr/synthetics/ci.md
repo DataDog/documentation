@@ -1,11 +1,11 @@
 ---
-title: Intégration continue Synthetics
+title: Tests CI/CD Synthetics
 kind: documentation
-description: Exécutez un test Synthetics à la demande dans vos pipelines d'intégration continue (CI).
+description: Exécutez des tests Synthetics à la demande dans vos pipelines de CI/CD.
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: "Présentation de Datadog\_Synthetics"
+    text: Présentation de la surveillance Datadog Synthetics
   - link: /synthetics/
     tag: Documentation
     text: Gérer vos checks
@@ -16,15 +16,12 @@ further_reading:
     tag: Documentation
     text: Configurer un test API
 ---
-<div class="alert alert-warning">
-Cette fonctionnalité est en version bêta privée.
-</div>
-
-Vous pouvez non seulement exécuter des tests à des intervalles prédéfinis, mais également des tests Datadog Synthetics à la demande à l'aide des endpoints des API dédiées. Les tests Datadog Synthetics peuvent être exécutés au sein de vos pipelines d'intégration continue (CI), afin de bloquer le déploiement des branches susceptibles de perturber le fonctionnement de vos fonctionnalités et de vos endpoints clés.
+En plus d'exécuter des tests à des intervalles prédéfinis, vous avez la possibilité d'exécuter des tests Datadog Synthetics ponctuellement à l'aide d'endpoints d'API. Ces tests peuvent être exécutés au sein de vos pipelines d'intégration continue (CI), de façon à bloquer le déploiement des branches susceptibles de nuire au bon fonctionnement de votre produit.
+Les tests CI/CD Synthetics peuvent également être utilisés pour **exécuter des tests dans le cadre de votre processus CD**, afin d'évaluer l'état de votre application de production dès la fin d'un déploiement. Cela vous permet de détecter les régressions éventuelles susceptibles d'avoir un impact sur vos utilisateurs et de déclencher automatiquement un rollback si un test critique échoue.
 
 Cette fonction réduit les pertes de temps liées à la correction de problèmes en production et vous aide à identifier le plus tôt possible les bugs et régressions qui surviennent.
 
-Les endpoints d'API Datadog sont accompagnés d'une interface de ligne de commande facilitant l'intégration de Datadog Synthetics avec vos outils CI.
+Les endpoints d'API Datadog sont accompagnés d'une interface de ligne de commande facilitant l'intégration des tests Datadog Synthetics avec vos outils CI. Cette fonctionnalité est open source, et son code source est disponible sur GitHub sur la page [DataDog/datadog-ci][1].
 
 ## Utilisation de l'API
 
@@ -238,16 +235,14 @@ curl -G \
 
 ## Utilisation de l'interface de ligne de commande
 
-### Installation de package
+### Installation du package
 
-Le package est publié en mode privé sous [@datadog/datadog-ci][1] dans le registre NPM.
-
-Tant qu'il n'est pas rendu public, vous devez utiliser un token NPM pour y accéder. Si vous ne disposez pas d'un tel token NPM, contactez l'[assistance Datadog][2].
+Le package est publié sous [@datadog/datadog-ci][2] dans le registre NPM.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Saisissez les lignes suivantes dans votre fichier `~/.npmrc` :
+Ajoutez les lignes suivantes dans votre fichier `~/.npmrc` :
 
 ```conf
 registry=https://registry.npmjs.org/
@@ -283,7 +278,7 @@ yarn add --dev @datadog/datadog-ci
 
 ### Configurer le client
 
-Pour configurer votre client, les clés de l'API et de l'application Datadog doivent être configurées. Ces clés peuvent être définies de trois manières différentes :
+Pour configurer votre client, les clés d'API et d'application Datadog doivent être définies. Ces clés peuvent être définies de trois manières différentes :
 
 1. En tant que variables d'environnement :
 
@@ -309,7 +304,6 @@ Pour configurer votre client, les clés de l'API et de l'application Datadog doi
     * **global** : les configurations à appliquer à tous les tests Synthetics ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
     * **proxy** : le proxy à utiliser pour les connexions sortantes vers Datadog. Les clés `host` et `port` sont des arguments obligatoires. Par défaut, la clé `protocol` a pour valeur `http`. Elle peut prendre pour valeur `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` ou `pac+https`. La bibliothèque [proxy-agent][3] est utilisée pour configurer le proxy.
     * **subdomain** : le nom du sous-domaine personnalisé permettant d'accéder à votre application Datadog. Si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, la valeur de `subdomain` doit alors être définie sur `myorg`.
-    * **timeout** : la durée après laquelle les tests Synthetics sont considérés comme des échecs (en millisecondes).
 
     **Exemple de fichier de configuration globale** :
 
@@ -332,7 +326,8 @@ Pour configurer votre client, les clés de l'API et de l'application Datadog doi
             "retry": { "count": 2, "interval": 300 },
             "executionRule": "skipped",
             "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" }
+            "variables": { "titleVariable": "new value" },
+            "pollingTimeout": 180000
         },
         "proxy": {
           "auth": {
@@ -343,8 +338,7 @@ Pour configurer votre client, les clés de l'API et de l'application Datadog doi
           "port": 3128,
           "protocol": "http"
         },
-        "subdomain": "subdomainname",
-        "timeout": 120000
+        "subdomain": "subdomainname"
     }
     ```
 
@@ -358,10 +352,10 @@ Par défaut, le client découvre et exécute automatiquement tous les tests spé
 {
     "tests": [
         {
-            "id": "<ID_PUBLIC_TEST>"
+            "id": "<ID_TEST_PUBLIC>"
         },
         {
-            "id": "<ID_PUBLIC_TEST>"
+            "id": "<ID_TEST_PUBLIC>"
         }
     ]
 }
@@ -393,8 +387,9 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
      * **skipped** : le test n'est pas du tout exécuté.
 * **startUrl** (_chaîne_) : nouvelle URL de départ à fournir au test.
 * **variables** (_objet_) : variables à remplacer dans le test. La clé de cet objet est définie sur le nom de la variable à remplacer, et sa valeur sur la nouvelle valeur de la variable.
+* **pollingTimeout** (_entier_) : la durée après laquelle un test Synthetics est considéré comme un échec (en millisecondes).
 
-**Remarque** : les nouvelles configurations de test sont prioritaires aux configurations globales.
+**Remarque** : les nouvelles configurations de test sont prioritaires sur les configurations globales.
 
 **Exemple de fichier de configuration de test avancé** :
 
@@ -402,11 +397,11 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
 {
     "tests": [
         {
-            "id": "<ID_PUBLIC_TEST>",
+            "id": "<ID_TEST_PUBLIC>",
             "config": {
                 "allowInsecureCertificates": true,
                 "basicAuth": { "username": "test", "password": "test" },
-                "body": "{\"contenuFictif\":true}",
+                "body": "{\"fakeContent\":true}",
                 "bodyType": "application/json",
                 "cookies": "name1=value1;name2=value2;",
                 "deviceIds": ["laptop_large"],
@@ -415,8 +410,9 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
             "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
-                "startUrl": "{{URL}}?static_hash={{HASH_STATIQUE}}",
-                "variables": { "titleVariable": "nouvelle valeur" }
+                "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
+                "variables": { "titleVariable": "new value" },
+                "pollingTimeout": 180000
             }
         }
     ]
@@ -425,7 +421,7 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
 
 #### Règle d'exécution
 
-La _règle d'exécution_ de chaque test peut également être définie dans l'application, au niveau du test. Utilisez le menu déroulant en regard de l'option **CI Execution**.
+La _règle d'exécution_ de chaque test peut également être définie dans l'application, au niveau du test. Utilisez le menu déroulant à proximité de l'option **CI Execution**.
 
 {{< img src="synthetics/ci/execution_rule.mp4" alt="Règle d'exécution CI" video="true" width="100%">}}
 
@@ -501,7 +497,7 @@ Vous pouvez consulter les résultats des tests directement dans vos pipelines CI
 
 {{< img src="synthetics/ci/successful_test_result.png" alt="Résultat de test ayant réussi"  style="width:80%;">}}
 
-Vous pouvez identifier la cause de l'échec d'un test en observant les logs d'exécution et en recherchant les causes de l'assertion ayant échoué :
+Vous pouvez identifier la cause de l'échec d'un test en consultant les logs d'exécution et en recherchant les causes de l'assertion ayant échoué :
 
 {{< img src="synthetics/ci/failed_test_result.png" alt="Résultat de test ayant échoué" style="width:80%;">}}
 
@@ -515,7 +511,7 @@ Vous pouvez également consulter les résultats de vos tests répertoriés sur l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /fr/help/
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /fr/api/v1/synthetics/#get-test

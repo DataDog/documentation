@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const marked = require('marked');
@@ -633,7 +633,16 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
-  let newRequiredFields = data.required || requiredFields;
+  let newRequiredFields;
+
+  // data.required must be an array of required fields e.g ['foo', 'bar']
+  // if its not then we possible have a field called required that is actually an object
+  // and we don't want this so pass in previous requirements
+  if(data.required && data.required instanceof Array) {
+    newRequiredFields = data.required;
+  } else {
+    newRequiredFields = requiredFields;
+  }
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -701,22 +710,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
 
 /**
- * Takes the schema table output string and checks if we had any expand collapse sections
- * if we had none then inject the class "has-no-expands" onto the output wrapper div
- * @param {string} schema table output string
- * returns html table string
- */
-const addHasExpandClass = (output) => {
-  if(!output.includes('js-collapse-trigger')) {
-    const regex = /(\s+schema-table\s+)/m;
-    const subst = ` schema-table has-no-expands `;
-    return output.replace(regex, subst);
-  }
-  return output;
-};
-
-
-/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
@@ -732,7 +725,7 @@ const schemaTable = (tableType, data) => {
       initialData = data.items.properties;
     } else {
       initialData = data.items;
-      extraClasses = 'd-none';
+      extraClasses = 'hide-table';
     }
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
@@ -741,7 +734,7 @@ const schemaTable = (tableType, data) => {
   } else {
     initialData = data.properties;
   }
-  extraClasses = (initialData) ? extraClasses : 'd-none';
+  extraClasses = (initialData) ? extraClasses : 'hide-table';
   const emptyRow = `
     <div class="row">
       <div class="col-12 first-column">
@@ -750,25 +743,7 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
     </div>`.trim();
-  const output = `
-  <div class="table-${tableType} schema-table row ${extraClasses}">
-    <p class="expand-all js-expand-all text-primary">Expand All</p>
-    <div class="col-12">
-      <div class="row table-header">
-        <div class="col-4 column">
-          <p class="font-semibold">Field</p>
-        </div>
-        <div class="col-2 column">
-          <p class="font-semibold">Type</p>
-        </div>
-        <div class="col-6 column">
-          <p class="font-semibold">Description</p>
-        </div>
-      </div>
-      ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
-    </div>  
-  </div>`.trim();
-  return addHasExpandClass(output);
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}</div>`;
 };
 
 
@@ -786,15 +761,22 @@ const processSpecs = (specs) => {
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
+
           // make a copy in static for postman
-          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
-            if (err) throw err;
-            console.log(`full_spec_${version}.json copied to /static/resources/json/`);
-          });
+          // the postman copy needs to not include the empty "tags" that we
+          // included to ensure redirection in the docs page from v2 <-> v1
+          const derefStripEmptyTags = lodash.cloneDeep(deref);
+          derefStripEmptyTags.tags = derefStripEmptyTags.tags.filter((tag) => !tag.description.toLowerCase().includes("see api version"));
+          const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
+          fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
+
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
-        }).catch((e) => console.log(e));
+        }).catch((e) => {
+          console.log(e);
+          process.exitCode = 1;
+        })
     });
 };
 
@@ -816,7 +798,6 @@ module.exports = {
   filterExampleJson,
   getSchema,
   getTagSlug,
-  addHasExpandClass,
   outputExample,
   getJsonWrapChars
 };

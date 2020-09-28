@@ -16,28 +16,23 @@ short_description: 'Transmettez automatiquement vos métriques, événements et 
 ---
 Ce plug-in Jenkins transmet automatiquement des métriques, des événements et des checks de service à un compte Datadog.
 
+![Dashboard Jenkins dans Datadog][16]
+
 **Remarque** : la [page du plug-in d'intégration continue Jenkins][1] (disponible en anglais) reprend les informations de cette page.
 
 ## Configuration
 
 ### Installation
 
-_Ce plug-in nécessite [Jenkins 2.164.1][2] ou une version ultérieure._
+_Ce plug-in nécessite [Jenkins 2.164.1][2]._
+
+_Pour les anciennes versions de Jenkins (c'est-à-dire 1.632+), vous trouverez la version 1.2.0 du plug-in [ici](https://updates.jenkins.io/download/plugins/datadog/)._
 
 Installez le plug-in depuis l'[Update Center][3] (disponible en accédant à `Manage Jenkins -> Manage Plugins`) dans votre installation Jenkins :
 
 1. Sélectionnez l'onglet `Available`, cherchez `Datadog`, puis cochez la case en regard de l'option `Datadog Plugin`.
 2. Installez le plug-in en cliquant sur l'un des deux boutons en bas de l'écran.
 3. Pour vérifier que le plug-in est installé, cherchez `Datadog Plugin` dans l'onglet `Installed`.
-4. Créez un [fichier source de collecte de logs personnalisé][13]. Pour ce faire, créez un fichier `conf.yaml` au sein de `conf.d/jenkins.d` avec le contenu suivant :
-  ```
-  logs:
-
-    -type: tcp 
-     port: 10518 
-     service: <SERVICE>
-     source: jenkins
-  ```
 
   Poursuivez votre lecture pour découvrir comment configurer le plug-in.
 
@@ -61,15 +56,17 @@ Pour configurer votre plug-in Datadog, accédez à `Manage Jenkins -> Configure 
 ##### Transmission via HTTP {plug-in-transmission-http}
 
 1. Cliquez sur le bouton radio en regard de l'option **Use Datadog API URL and Key to report to Datadog** (sélectionnée par défaut).
-2. Indiquez votre [clé d'API Datadog][4] dans la zone de texte `API Key`, sur l'écran de configuration de Jenkins.
+2. Collez votre [clé d'API Datadog][4] dans la zone de texte `API Key` sur l'écran de configuration de Jenkins.
 3. Testez votre clé d'API Datadog à l'aide du bouton `Test Key` situé en dessous, sur ce même écran.
-4. Enregistrez votre configuration.
+4. (Facultatif) Saisissez votre [URL d'admission des logs Datadog][15] et sélectionnez Enable Log Collection dans l'onglet Advanced.
+5. Enregistrez votre configuration.
 
 ##### Transmission avec DogStatsD {#plug-in-transmission-dogstatsd}
 
-1. Cliquez sur le bouton radio en regard de l'option **Use a DogStatsD Server to report to Datadog**.
+1. Cliquez sur le bouton radio correspondant à l'option **Use the Datadog Agent to report to Datadog**.
 2. Indiquez le `hostname` et le `port` de votre serveur DogStatsD.
-3. Enregistrez votre configuration.
+3. (Facultatif) Spécifiez votre port de collecte des logs et configurez la [collecte de logs](#collecte-de-logs), puis sélectionnez Enable Log Collection dans l'onglet Advanced.
+4. Enregistrez votre configuration.
 
 #### Script Groovy
 
@@ -84,13 +81,16 @@ import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 def j = Jenkins.getInstance()
 def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
 
-//Si vous souhaitez utiliser l'URL et la clé de l'API Datadog pour transmettre vos données à Datadog
+// Si vous souhaitez utiliser l'URL et la clé de l'API Datadog pour transmettre vos données à Datadog
 d.setReportWith('HTTP')
 d.setTargetApiURL('https://api.datadoghq.com/api/')
 d.setTargetApiKey('<CLÉ_API_DATADOG>')
 
-// Personnalisation, voir la section ci-dessous à ce sujet
-d.setBlacklist('job1,job2')
+// Personnalisation, voir la section dédiée ci-dessous
+d.setExcluded('job1,job2')
+
+// Si vous souhaitez recueillir les logs
+d.setLogIntakeUrl('https://http-intake.logs.datadoghq.com/v1/input/')
 
 // Enregistrer la configuration
 d.save()
@@ -109,8 +109,11 @@ d.setReportWith('DSD')
 d.setTargetHost('localhost')
 d.setTargetPort(8125)
 
-// Personnalisation, voir la section ci-dessous à ce sujet
-d.setBlacklist('job1,job2')
+// Si vous souhaitez recueillir les logs
+d.setLogCollectionPort(8125)
+
+// Personnalisation, voir la section dédiée ci-dessous
+d.setExcluded('job1,job2')
 
 // Enregistrer la configuration
 d.save()
@@ -140,14 +143,45 @@ La journalisation repose sur l'utilisation de `java.util.Logger`, un logger qui 
 
 ## Personnalisation
 
+### Personnalisation des pipelines
+
+Le plug-in Datadog ajoute une étape "datadog" qui offre certaines options de configuration pour vos tâches basées sur des pipelines.
+Dans les pipelines déclaratifs, ajoutez l'étape à un bloc d'options de premier niveau comme suit :
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+Dans un pipeline scripté, incorporez la section concernée dans l'étape Datadog comme suit :
+```groovy
+datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
 ### Personnalisation globale
 
 Pour personnaliser votre configuration globale, dans Jenkins, accédez à `Manage Jenkins -> Configure System`, puis cliquez sur le bouton **Advanced**. Voici la liste des options disponibles :
 
 | Personnalisation              | Description                                                                                                                                                                                                                                 | Variable d'environnement                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
-| Blacklisted jobs           | Une liste d'expressions régulières séparées par des virgules servant à exclure certains noms de tâches de la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                      | `DATADOG_JENKINS_PLUGIN_BLACKLIST`            |
-| Whitelisted jobs           | Une liste d'expressions régulières séparées par des virgules servant à inclure certains noms de tâches dans la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                          | `DATADOG_JENKINS_PLUGIN_WHITELIST`            |
+| Tâches exclues           | Une liste d'expressions régulières séparées par des virgules servant à exclure certains noms de tâches de la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                      | `DATADOG_JENKINS_PLUGIN_EXCLUDED`            |
+| Tâches incluses           | Une liste d'expressions régulières séparées par des virgules servant à inclure certains noms de tâches dans la surveillance. Exemple : `susans-job,johns-.*,prod_folder/prod_release`.                                                                                                          | `DATADOG_JENKINS_PLUGIN_INCLUDED`            |
 | Global tag file            | Chemin vers un fichier d'espace de travail contenant une liste de tags séparés par des virgules (fonctionnalité non compatible avec les tâches de pipeline).                                                                                                                                   | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAG_FILE`      |
 | Global tags                | Une liste de tags séparés par des virgules à appliquer à l'ensemble des métriques, événements et checks de service.                                                                                                                                                         | `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`          |
 | Global job tags            | Une liste d'expressions régulières séparées par des virgules permettant d'identifier une tâche, et une liste de tags à appliquer à cette tâche. **Remarque** : les tags peuvent faire référence à des groupes de correspondance dans l'expression régulière, à l'aide du caractère `$`. Exemple : `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3`. | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
@@ -211,50 +245,85 @@ REMARQUE : `event_type` est toujours défini sur `security` pour les métriques
 
 ### Métriques
 
-| Nom de la métrique                            | Description                                                    | Tags par défaut                                                |
-|----------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------|
-| `jenkins.computer.launch_failure`      | Taux d'échec des lancements d'ordinateur.                              | `jenkins_url`                                               |
-| `jenkins.computer.offline`             | Taux d'ordinateurs en cours de déconnexion.                                | `jenkins_url`                                               |
-| `jenkins.computer.online`              | Taux d'ordinateurs en cours de connexion.                                 | `jenkins_url`                                               |
-| `jenkins.computer.temporarily_offline` | Taux d'ordinateurs en cours de déconnexion temporaire.                    | `jenkins_url`                                               |
-| `jenkins.computer.temporarily_online`  | Taux d'ordinateurs en cours de connexion temporaire.                     | `jenkins_url`                                               |
-| `jenkins.config.changed`               | Taux de configurations en cours de modification.                                 | `jenkins_url`, `user_id`                                    |
-| `jenkins.executor.count`               | Nombre d'exécuteurs.                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.executor.free`                | Nombre d'exécuteurs non utilisés.                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.executor.in_use`              | Nombre d'exécuteurs inactifs.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
-| `jenkins.item.copied`                  | Taux d'éléments en cours de copie.                                    | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.created`                 | Taux d'éléments en cours de création.                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.deleted`                 | Taux d'éléments en cours de suppression.                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.location_changed`        | Taux d'éléments en cours de déplacement.                                     | `jenkins_url`, `user_id`                                    |
-| `jenkins.item.updated`                 | Taux d'éléments en cours de mise à jour.                                   | `jenkins_url`, `user_id`                                    |
-| `jenkins.job.aborted`                  | Taux de tâches abandonnées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.job.completed`                | Taux de tâches terminées.                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.cycletime`                | Durée du cycle de conception.                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.duration`                 | Durée de la conception (en secondes).                                   | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.feedbacktime`             | Durée de retour entre le commit du code et l'échec d'une tâche.                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.leadtime`                 | Délai de conception.                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.mtbf`                     | MTBF : durée entre la dernière réussite de tâche et l'échec de la tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.mttr`                     | MTTR : durée entre le dernier échec de tâche et la réussite de tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
-| `jenkins.job.started`                  | Taux de tâches commencées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                               |
-| `jenkins.node.offline`                 | Nombre de nœuds hors ligne.                                           | `jenkins_url`                                               |
-| `jenkins.node.online`                  | Nombre de nœuds en ligne.                                            | `jenkins_url`                                               |
-| `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                               |
-| `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                               |
-| `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                               |
-| `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                               |
-| `jenkins.queue.pending`                | Nombre d'éléments en attente dans la file d'attente.                               | `jenkins_url`                                               |
-| `jenkins.queue.stuck`                  | Nombre d'éléments coincés dans la file d'attente.                                 | `jenkins_url`                                               |
-| `jenkins.queue.blocked`                | Nombre d'éléments bloqués dans la file d'attente.                               | `jenkins_url`                                               |
-| `jenkins.scm.checkout`                 | Taux de basculements SCM.                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
-| `jenkins.user.access_denied`           | Taux d'échecs de l'authentification d'utilisateurs.                         | `jenkins_url`, `user_id`                                    |
-| `jenkins.user.authenticated`           | Taux d'utilisateurs en cours d'authentification.                                  | `jenkins_url`, `user_id`                                    |
-| `jenkins.user.logout`                  | Taux d'utilisateurs en cours de déconnexion.                                     | `jenkins_url`, `user_id`                                    |
+| Nom de la métrique                            | Description                                                    | Tags par défaut                                                               |
+|----------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------|
+| `jenkins.computer.launch_failure`      | Taux d'échec des lancements d'ordinateur.                              | `jenkins_url`                                                              |
+| `jenkins.computer.offline`             | Taux d'ordinateurs en cours de déconnexion.                                | `jenkins_url`                                                              |
+| `jenkins.computer.online`              | Taux d'ordinateurs en cours de connexion.                                 | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_offline` | Taux d'ordinateurs en cours de déconnexion temporaire.                    | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_online`  | Taux d'ordinateurs en cours de connexion temporaire.                     | `jenkins_url`                                                              |
+| `jenkins.config.changed`               | Taux de configurations en cours de modification.                                 | `jenkins_url`, `user_id`                                                   |
+| `jenkins.executor.count`               | Nombre d'exécuteurs.                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.free`                | Nombre d'exécuteurs non utilisés.                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.in_use`              | Nombre d'exécuteurs inactifs.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.item.copied`                  | Taux d'éléments en cours de copie.                                    | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.created`                 | Taux d'éléments en cours de création.                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.deleted`                 | Taux d'éléments en cours de suppression.                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.location_changed`        | Taux d'éléments en cours de déplacement.                                     | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.updated`                 | Taux d'éléments en cours de mise à jour.                                   | `jenkins_url`, `user_id`                                                   |
+| `jenkins.job.aborted`                  | Taux de tâches abandonnées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.build_duration`           | Durée du build, pauses non comprises (en secondes).                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.completed`                | Taux de tâches terminées.                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.cycletime`                | Durée du cycle de conception.                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.duration`                 | Durée de la conception (en secondes).                                   | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.feedbacktime`             | Durée de retour entre le commit du code et l'échec d'une tâche.                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.leadtime`                 | Délai de conception.                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mtbf`                     | MTBF : durée entre la dernière réussite de tâche et l'échec de la tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mttr`                     | MTTR : durée entre le dernier échec de tâche et la réussite de tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.pause_duration`            | Durée pendant laquelle le build était en pause (en secondes).                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.started`                  | Taux de tâches commencées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.stage_duration`           | Durée des différentes étapes.                                 | `jenkins_url`, `job`, `user_id`, `stage_name`, `stage_depth`, `stage_parent`, `result` |
+| `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                                              |
+| `jenkins.node.offline`                 | Nombre de nœuds hors ligne.                                           | `jenkins_url`                                                              |
+| `jenkins.node.online`                  | Nombre de nœuds en ligne.                                            | `jenkins_url`                                                              |
+| `jenkins.node_status.count`            | Indique si le nœud est présent ou non.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.node_status.up`               | Une valeur de 1 indique que le nœud est en ligne. Une valeur de 0 indique qu'il ne l'est pas.              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                                              |
+| `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                                              |
+| `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                                              |
+| `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                                              |
+| `jenkins.queue.pending`                | Nombre d'éléments en attente dans la file d'attente.                               | `jenkins_url`                                                              |
+| `jenkins.queue.stuck`                  | Nombre d'éléments coincés dans la file d'attente.                                 | `jenkins_url`                                                              |
+| `jenkins.queue.blocked`                | Nombre d'éléments bloqués dans la file d'attente.                               | `jenkins_url`                                                              |
+| `jenkins.queue.job.in_queue`                   | Nombre de fois qu'une tâche a été mise dans une file d'attente.                                                     | `jenkins_url`, `job_name`                                               |
+| `jenkins.queue.job.buildable`              | Nombre de fois qu'une tâche a affiché le statut Buildable dans une file d'attente.                             | `jenkins_url`, `job_name`                                               |
+| `jenkins.queue.job.pending`                | Nombre de fois qu'une tâche a affiché le statut Pending dans une file d'attente.                             | `jenkins_url`, `job_name`                                               |
+| `jenkins.queue.job.stuck`                  | Nombre de fois qu'une tâche a affiché le statut Stuck dans une file d'attente.                                  | `jenkins_url`, `job_name`                                               |
+| `jenkins.queue.job.blocked`                | Nombre de fois qu'une tâche a affiché le statut Blocked dans une file d'attente.                           | `jenkins_url`, `job_name`                                               |
+| `jenkins.scm.checkout`                 | Taux de basculements SCM.                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.user.access_denied`           | Taux d'échecs de l'authentification d'utilisateurs.                         | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.authenticated`           | Taux d'utilisateurs en cours d'authentification.                                  | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.logout`                  | Taux d'utilisateurs en cours de déconnexion.                                     | `jenkins_url`, `user_id`                                                   |
+
+
+#### Collecte de logs avec l'Agent
+
+**Remarque** : cette configuration est uniquement valable si vous utilisez la [Configuration de l'Agent Datadog](#plug-in-transmission-dogstatsd).
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+
+2. Pour recueillir vos logs Jenkins, créez un [fichier source de collecte de logs personnalisé][13] pour votre Agent. Pour ce faire, créez un fichier `conf.yaml` au sein de `conf.d/jenkins.d` avec le contenu suivant :
+    ```
+    logs:
+      - type: tcp 
+        port: <PORT> 
+        service: <SERVICE>
+        source: jenkins
+    ```
+
+3. Dans Jenkins, définissez le port spécifié ci-dessus en tant que `Log Collection Port`. Pour ce faire, utilisez les [variables d'environnement](#variable-environnement-transmission-dogstatsd), un [script groovy](#script-groovy-transmission-dogstatsd) ou [l'interface Jenkins](#plug-in-transmission-dogstatsd).
+
+4. [Redémarrez l'Agent][14].
 
 ### Checks de service
 
-Le statut du build `jenkins.job.status` avec les tags par défaut : `jenkins_url`, `job`, `node`, `result` et `user_id`.
+Le statut du build `jenkins.job.status` avec les tags par défaut : `jenkins_url`, `job`, `node` et `user_id`.
 
 ## Suivi des problèmes
 
@@ -288,3 +357,6 @@ Consultez le [document relatif au développement][12] (en anglais) pour obtenir 
 [11]: https://github.com/jenkinsci/datadog-plugin/blob/master/CONTRIBUTING.md
 [12]: https://github.com/jenkinsci/datadog-plugin/blob/master/DEVELOPMENT.md
 [13]: https://docs.datadoghq.com/fr/agent/logs/?tab=tcpudp#custom-log-collection
+[14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[15]: https://docs.datadoghq.com/fr/logs/log_collection/?tab=http
+[16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png

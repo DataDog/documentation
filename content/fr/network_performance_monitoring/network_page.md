@@ -92,9 +92,9 @@ TCP est un protocole orienté connexion qui assure la transmission des paquets d
 
 ### Résolution DNS
 
-Depuis la version 7.17, l'Agent convertit les adresses IP en noms de domaine lisibles pour le trafic interne et externe. Le DNS vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un serveur C&C, peuvent être le signe d'une menace pour la sécurité réseau. **Le DNS est encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans les volets de facettes afin d'agréger et de filtrer le trafic.
+Depuis la version 7.17, l'Agent convertit les adresses IP en noms de domaine lisibles pour le trafic interne et externe. Le Domaine vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un serveur C&C, peuvent être le signe d'une menace pour la sécurité réseau. **Le Domaine est encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans les volets de facettes afin d'agréger et de filtrer le trafic.
 
-{{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="Agrégation DNS" >}}
+{{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Agrégation Domaine" >}}
 
 **Remarque** : la résolution DNS fonctionne sur les hosts pour lesquels le system probe s'exécute sur l'espace de nommage réseau à la racine. Cela se produit généralement lorsque le system probe est exécuté dans un conteneur, sans passer par le réseau host.
 

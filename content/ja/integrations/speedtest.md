@@ -24,7 +24,7 @@ kind: インテグレーション
 maintainer: cody.lee@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: speedtest.
-metric_to_check: ''
+metric_to_check: speedtest.download.bandwidth
 name: speedtest
 public_title: Datadog-speedtest インテグレーション
 short_description: speedtest-cli を使用して Speedtest の結果を実行します

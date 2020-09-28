@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -59,7 +60,7 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 {{< get-metrics-from-git "crio" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 CRI-O には、メトリクスエンドポイントの到達可能性に関するサービスのチェック機能が含まれています。
 

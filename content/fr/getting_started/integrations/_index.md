@@ -19,37 +19,37 @@ Au plus haut niveau, une intégration correspond à l'assemblage d'un système u
 
 Datadog propose trois grands types d'intégrations :
 
-- **Les intégrations basées sur l'Agent** sont installées avec l'Agent Datadog et utilisent une méthode de classe Python appelée `check` pour définir les métriques à recueillir.
-- **Les intégrations basées sur un système d'authentification (crawler)** sont configurées dans l'[application Datadog][2], où vous entrez des identifiants pour récupérer des métriques avec l'API. Il s'agit notamment d'intégrations populaires telles que [Slack][3], [AWS][4], [Azure][5], et [PagerDuty][6].
-- **Les intégrations de bibliothèque** utilisent l'[API Datadog][7] pour vous permettre de surveiller des applications en fonction du langage dans lequel elles sont écrites, comme [Node.js][8] ou [Python][9].
+- Les intégrations **basées sur l'Agent** sont installées avec l'Agent Datadog et utilisent une méthode de classe Python appelée `check` pour définir les métriques à recueillir.
+- Les intégrations **basées sur un système d'authentification (crawler)** sont configurées dans l'[application Datadog][2], où vous entrez des identifiants pour récupérer des métriques avec l'API. Il s'agit notamment d'intégrations populaires telles que [Slack][3], [AWS][4], [Azure][5], et [PagerDuty][6].
+- Les intégrations de **bibliothèque** utilisent l'[API Datadog][7] pour vous permettre de surveiller des applications en fonction du langage dans lequel elles sont écrites, comme [Node.js][8] ou [Python][9].
 
 Vous pouvez aussi créer un [check custom][10] pour définir et envoyer des métriques à Datadog depuis un système interne unique.
 
 ## Configurer une intégration
 
-Le paquet de l'Agent Datadog inclut les intégrations officiellement prises en charge par Datadog. Celles-ci se trouvent dans [integrations-core][11]. Pour utiliser ces intégrations officielles, téléchargez l'Agent Datadog. Les intégrations développées par la communauté se trouvent dans [integrations-extras][12] et nécessitent de télécharger le [kit de développement logiciel][13] pour être utilisées. Pour en savoir plus sur l'installation ou la gestion de ces intégrations, consultez le [guide de gestion des intégrations][14].
+Le paquet de l'Agent Datadog inclut les intégrations officiellement prises en charge par Datadog dans [integrations-core][11]. Pour utiliser ces intégrations, téléchargez l'Agent Datadog. Les intégrations développées par la communauté se trouvent dans [integrations-extras][12] et nécessitent de télécharger le [kit de développement logiciel][13] pour être utilisées. Pour en savoir plus sur l'installation ou la gestion de ces intégrations, consultez le [guide de gestion des intégrations][14].
 
 ### Clés d'API et d'application
 
-Pour [installer l'Agent Datadog][15], vous devez disposer d'une [clé d'API][16]. Si l'Agent est déjà téléchargé, veillez à configurer votre clé d'API dans le fichier `datadog.yaml`. Pour utiliser la plupart des fonctionnalités Datadog et envoyer des métriques et des événements, vous devez disposer d'une [clé d'application][16]. Accédez à la page [API Settings][17] de l'interface pour gérer vos clés d'API et d'application.
+Pour [installer l'Agent Datadog][15], vous devez disposer d'une [clé d'API][16]. Si l'Agent est déjà téléchargé, veillez à configurer votre clé d'API dans le fichier `datadog.yaml`. Pour utiliser la plupart des fonctionnalités Datadog et envoyer des métriques et des événements, vous devez disposer d'une [clé d'application][16]. Accédez à la page [API Settings][17] pour gérer vos clés d'API et d'application.
 
 ### Installation
 
-Si vous souhaitez connecter une intégration basée sur une bibliothèque ou un crawler, des instructions spécifiques à chaque fournisseur sont disponibles sur la [page Intégrations][18]. Pour les autres intégrations prises en charge, installez l'[Agent Datadog][19]. La plupart des intégrations sont prises en charge sur nos agents conteneurisés : [Docker][20] et [Kubernetes][21]. Une fois l'Agent téléchargé, accédez à la [page Intégrations][18] pour consulter les instructions dédiées à votre intégration.
+Si vous souhaitez connecter une intégration basée sur une bibliothèque ou un crawler, des instructions spécifiques à chaque fournisseur sont disponibles sur la [page Intégrations][18]. Pour les autres intégrations prises en charge, installez l'[Agent Datadog][15]. La plupart des intégrations sont prises en charge sur nos Agents conteneurisés : [Docker][19] et [Kubernetes][20]. Une fois l'Agent téléchargé, accédez à la [page Intégrations][18] pour consulter les instructions dédiées à votre intégration.
 
 ### Configurer les intégrations de l'Agent
 
-[Chaque intégration][18] dispose de sa propre configuration. Dans le dossier `conf.d/<NOM_INTÉGRATION>.d` situé à la racine du répertoire de configuration de votre Agent, vous trouverez un dossier appelé `<NOM_INTÉGRATION>.d` pour chaque intégration officiellement prise en charge par l'Agent. Ce dossier contient un exemple de fichier `conf.yaml.example` qui énumère toutes les options de configuration disponibles pour l'intégration concernée.
+La plupart des paramètres de configuration sont spécifiques à [chaque intégration][18]. Configurez les intégrations de l'Agent en accédant au dossier `conf.d` à la racine du répertoire de configuration de votre Agent. Chaque intégration dispose d'un dossier nommé `<NOM_INTÉGRATION>.d`, contenant le fichier `conf.yaml.example`. Cet exemple de fichier énumère toutes les options de configuration disponibles pour cette intégration spécifique.
 
 Pour activer une intégration donnée :
 
 1. Renommez le fichier `conf.yaml.example` (dans le dossier `<NOM_INTÉGRATION>.d` correspondant) en `conf.yaml`.
 2. Dans le nouveau fichier de configuration, modifiez les paramètres requis avec les valeurs correspondant à votre environnement.
-3. [Redémarrez l'Agent Datadog][22].
+3. [Redémarrez l'Agent Datadog][21].
 
-**Remarque** : tous les fichiers de configuration respectent le format décrit dans la [documentation des paramètres][23].
+**Remarque** : tous les fichiers de configuration respectent le format décrit dans la [documentation des paramètres][22].
 
-Par exemple, voici le fichier de configuration `conf.yaml` minimal nécessaire pour recueillir des métriques et des logs via l'[intégration Apache][24] :
+Par exemple, voici le fichier de configuration `conf.yaml` minimal nécessaire pour recueillir des métriques et des logs de l'[intégration apache][23] :
 
 ```yaml
 init_config:
@@ -69,7 +69,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-Pour créer plusieurs instances dans un même check d'Agent et surveiller deux services Apache, créez une nouvelle instance avec un `-` dans la section `instances:` :
+Pour créer plusieurs instances dans un même check d'Agent et surveiller deux services Apache, créez une nouvelle instance avec un `-` dans la section `instances` :
 
 ```yaml
 init_config:
@@ -81,6 +81,10 @@ instances:
     - apache_status_url: "http://<ENDPOINT_APACHE_DISTANT>/server-status?auto"
       service: remote-apache
 ```
+
+#### Intervalle de collecte
+
+L'intervalle de collecte par défaut pour toutes les intégrations Datadog standard est de 15 secondes. Pour modifier l'intervalle de collecte, utilisez le paramètre `min_collection_interval`. Pour en savoir plus, consultez la [documentation dédiée aux développeurs][24].
 
 ### Tagging
 
@@ -121,7 +125,7 @@ Pour en savoir plus sur la manière dont Datadog traite vos données et sur d'au
 
 Maintenant que vos premières intégrations sont configurées, vous pouvez commencer à [explorer toutes les métriques][30] envoyées par votre application à Datadog et à utiliser ces métriques pour configurer des [dashboards][31] et des [alertes][32] afin de surveiller vos données.
 
-Découvrez également nos solutions [Log Management][33], [APM][34] et [Synthetics][35].
+Découvrez également nos solutions [Log Management][33], [APM][34] et [Synthetic Monitoring][35].
 
 ## Dépannage
 
@@ -164,16 +168,16 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /fr/developers/integrations/new_check_howto/#developer-toolkit
 [14]: /fr/agent/guide/integration-management/
-[15]: https://github.com/DataDog/dd-agent
+[15]: https://app.datadoghq.com/account/settings#agent
 [16]: /fr/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/account/settings#api
 [18]: /fr/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent
-[20]: https://app.datadoghq.com/account/settings#agent/docker
-[21]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[22]: /fr/agent/guide/agent-commands/#restart-the-agent
-[23]: /fr/developers/integrations/new_check_howto/#param-specification
-[24]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[19]: https://app.datadoghq.com/account/settings#agent/docker
+[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[21]: /fr/agent/guide/agent-commands/#restart-the-agent
+[22]: /fr/developers/integrations/new_check_howto/#param-specification
+[23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[24]: /fr/developers/write_agent_check/#collection-interval
 [25]: /fr/getting_started/tagging/
 [26]: /fr/getting_started/agent/#setup
 [27]: /fr/agent/guide/agent-commands/#agent-status-and-information

@@ -132,7 +132,7 @@ Autodiscovery is enabled by default on Kubernetes.
 To verify this, ensure the following environment variable is set:
 
 ```shell
-KUBERNETES=true
+KUBERNETES=yes
 ```
 
 {{% /tab %}}

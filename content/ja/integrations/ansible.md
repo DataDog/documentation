@@ -45,9 +45,9 @@ Datadog の Ansible インテグレーションの使用方法については、
 3. `datadog_callback.py` をプレイブックのコールバックディレクトリ (デフォルトでは、プレイブックのルートディレクトリにある callback_plugins/) にコピーします。このディレクトリがない場合は、作成してください。
 4. `datadog_callback.py` と同じ場所に `datadog_callback.yml` ファイルを作成し、このファイルで次のように API キーを設定します。
 
-        ```yaml
-        api_key: <DATADOG_API_キー>
-        ```
+
+        api_key: <YOUR_DATADOG_API_KEY>
+
 
 5. プレイブックが実行されると、Ansible のイベントおよびメトリクスが Datadog に表示されます。
 

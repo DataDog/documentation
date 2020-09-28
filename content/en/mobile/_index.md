@@ -46,7 +46,13 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5]. 
+
+<!--- ## Quick Actions  --->
+
+<!--- {{< img src="mobile/quick_actions.png" alt="dashboard page">}}  --->
+
+<!--- Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. On iOS, it shows your top five “Frequently Viewed By Me” preset dashboards. On Android, it shows your top five viewed dashboards on mobile.  --->
 
 ## Account
 

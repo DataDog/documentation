@@ -36,10 +36,10 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 These features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support via chat
-* Generation of metrics from logs is disabled
+* Group-by dimensions are limited to host tags, source, service, and status for [Log-based Metrics][6]
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
-* You cannot [share][8] logs (nor traces) from the explorer through web integrations.
+* You cannot [share][7] logs (nor traces) from the explorer through web integrations.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
 
@@ -63,6 +63,5 @@ These legacy endpoints are still supported:
 [3]: /agent/logs/log_transport
 [4]: /agent/logs/advanced_log_collection/#filter-logs
 [5]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-[6]: /integrations/amazon_lambda/#log-collection
-[7]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
-[8]: /logs/explorer/#share-views
+[6]: /logs/logs_to_metrics/
+[7]: /logs/explorer/#share-views

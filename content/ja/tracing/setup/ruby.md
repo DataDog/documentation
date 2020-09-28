@@ -55,6 +55,7 @@ title: Ruby アプリケーションのトレース
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
      - [Presto](#presto)
+     - [Que](#que)
      - [Racecar](#racecar)
      - [Rack](#rack)
      - [Rails](#rails)
@@ -76,7 +77,6 @@ title: Ruby アプリケーションのトレース
          - [優先度サンプリング](#priority-sampling)
      - [分散型トレーシング](#distributed-tracing)
      - [HTTP リクエストのキューイング](#http-request-queuing)
-     - [RUM インジェクション](#rum-injection)
      - [処理パイプライン](#processing-pipeline)
          - [フィルタリング](#filtering)
          - [処理](#processing)
@@ -360,6 +360,7 @@ end
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *gem の利用不可*       | *[リンク](#mysql2)*                   | *[リンク](https://github.com/brianmario/mysql2)*                                 |
 | Net/HTTP                 | `http`                     | *（サポートされているすべての Ruby）*   | *（サポートされているすべての Ruby）*    | *[リンク](#nethttp)*                  | *[リンク](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html)* |
 | Presto                   | `presto`                   | `>= 0.5.14`              | `>= 0.5.14`               | *[リンク](#presto)*                   | *[リンク](https://github.com/treasure-data/presto-client-ruby)*                  |
+| Que                      | `que`                      | `>= 1.0.0.beta2`         | `>= 1.0.0.beta2`          | *[リンク](#que)*                      | *[リンク](https://github.com/que-rb/que)*                                        |
 | Racecar                  | `racecar`                  | `>= 0.3.5`               | `>= 0.3.5`                | *[リンク](#racecar)*                  | *[リンク](https://github.com/zendesk/racecar)*                                   |
 | Rack                     | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[リンク](#rack)*                     | *[リンク](https://github.com/rack/rack)*                                         |
 | Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[リンク](#rails)*                    | *[リンク](https://github.com/rails/rails)*                                       |
@@ -1118,6 +1119,30 @@ client.run("select * from system.nodes")
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `presto` インスツルメンテーションに使用されるサービス名 | `'presto'` |
 
+### Que
+
+Que インテグレーションは、ジョブの実行をトレースするミドルウェアです。
+
+`Datadog.configure` で有効にできます。
+
+```ruby
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.use :que, options
+end
+```
+
+ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
+| `enabled` | Que をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
+| `service_name` | `que` インスツルメンテーションに使用されるサービス名 | `'que'` |
+| `tag_args` | ジョブの引数フィールドのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
+| `tag_data` | ジョブのデータフィールドのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
+
 ### Racecar
 
 Racecar インテグレーションは、Racecar ジョブのトレースを提供します。
@@ -1177,11 +1202,8 @@ run app
 | `quantize.query.exclude` | 完全に削除する値を定義します。デフォルトでは何も除外しません。文字列の配列、またはクエリ文字列を完全に削除するには `:all` を指定できます。オプションは `query` オプション内にネストする必要があります。 | `nil` |
 | `quantize.fragment` | URL フラグメントの動作を定義します。デフォルトではフラグメントを削除します。URL フラグメントを表示するには `:show` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
 | `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。 有効にするには、`true` に設定します。 | `false` |
-| `rum_injection_enabled` | Datadog のトレース ID を含む HTML コメントを自動挿入することで RUM (リアルユーザーモニタリング) [`browser-sdk`](https://docs.datadoghq.com/real_user_monitoring/installation/?tab=us) からのフロントエンドトレースをバックエンドトレースに接続します。これは HTTP レスポンスヘッダーに定義される通り、キャッシュされていない HTML および XHTML ページにのみ適用されます。設定の詳細は [RUM インジェクション](#RUM インジェクション)を参照してください。有効化するには `true` に設定します。環境変数: `DD_TRACE_RUM_INJECT_TRACE` *試験運用* | `false` |
-| `rum_injection_disabled_paths` | Datadog のトレース ID を含む HTML コメントの自動挿入対象から除外するページを定義します。設定の詳細は [RUM インジェクション](#RUM インジェクション)を参照してください。`['/admin', 'api/**/update']` のようなグロブパスなど、パス値の配列を受け入れます。環境変数: `DD_TRACE_CACHED_PAGES`、CSV 形式の文字列を受け入れます。*試験運用* | `[]` |
 | `service_name` | `rack` インスツルメンテーションに使用されるサービス名 | `'rack'` |
 | `web_service_name` | フロントエンドサーバーリクエストのキュースパンのサービス名。（例: `'nginx'`） | `'web-server'` |
-
 
 **URL 量子化動作の構成**
 
@@ -1242,6 +1264,7 @@ end
 | `middleware_names` | 短絡したミドルウェアリクエストがトレースのリソースとしてミドルウェア名を表示できるようにします。 | `false` |
 | `service_name` | アプリケーションのリクエストをトレースするときに使用されるサービス名（`rack` レベル） | `'<アプリ名>'`（Rails アプリケーションのネームスペースから推測） |
 | `template_base_path` | テンプレート名がパースされるときに使用されます。テンプレートを `views/` フォルダーに保存しない場合、この値を変更する必要があるかもしれません | `'views/'` |
+| `log_injection` | `dd.trace_id` などのインジェクションの[トレース相関](#トレース相関)情報を Rails ログに自動的に有効化します。デフォルトのロガー (`ActiveSupport::TaggedLogging`) および `Lograge` をサポートします。トレース相関情報のフォーマットに関する詳細は、[トレース相関](#トレース相関)セクションを参照してください。  | `false` |
 
 **サポートされるバージョン**
 
@@ -1731,8 +1754,7 @@ end
 - `DD_TRACE_<INTEGRATION>_ENABLED`: **アクティブ化された**インテグレーションを有効または無効にします。デフォルトは `true` です。例: `DD_TRACE_RAILS_ENABLED=false`。このオプションは、コードで明示的にアクティブ化されていないインテグレーション (例: `Datadog.configure{ |c| c.use :integration }`) には影響しません。この環境変数は、インテグレーションを無効にするためにのみ使用できます。
 - `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`: 特定のインテグレーションに対して App Analytics を有効または無効にします。有効な値は、true または false (デフォルト) です。例: `DD_TRACE_ACTION_CABLE_ANALYTICS_ENABLED=true`
 - `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`: 特定のインテグレーションの App Analytics サンプリングレートを設定します。0.0〜1.0 (デフォルト) の浮動小数点数。例: `DD_TRACE_ACTION_CABLE_ANALYTICS_SAMPLE_RATE=0.5`
-- `DD_TRACE_RUM_INJECT_TRACE`: Datadog のトレース ID を含む HTML コメントを自動挿入することで RUM (リアルユーザーモニタリング) [`browser-sdk`](https://docs.datadoghq.com/real_user_monitoring/installation/?tab=us) からのフロントエンドトレースをバックエンドトレースに接続します。設定の詳細は [RUM インジェクション](#RUM インジェクション)を参照してください。有効化するには `true` に設定します。`DD_TRACE_RUM_INJECT_TRACE=true` などの Boolean (デフォルト: `false`) を受け入れます。*試験運用*
-- `DD_TRACE_CACHED_PAGES`: Datadog のトレース ID を含む HTML コメントの自動挿入対象から除外するページを定義します。設定の詳細は [RUM インジェクション](#RUM インジェクション)を参照してください。`DD_TRACE_CACHED_PAGES=/admin,api/**/update` のようなグロブパスなど、パス値の CSV 形式の文字列 (デフォルト `''`) を受け入れます。*試験運用*
+- `DD_LOGS_INJECTION`: `dd.trace_id` などのインジェクションの[トレース相関](#トレース相関)情報を Rails ログに自動的に有効化します。デフォルトのロガー (`ActiveSupport::TaggedLogging`) および `Lograge` をサポートします。トレース相関情報のフォーマットに関する詳細は、[トレース相関](#トレース相関)セクションを参照してください。有効な値は `true` または `false`(default) です（例: `DD_LOGS_INJECTION=true`）。
 
 ### サンプリング
 
@@ -1948,92 +1970,6 @@ server {
 
 Rack ベースのアプリケーションの場合、この機能を有効にする方法の詳細については、[ドキュメント](#rack)を参照してください。
 
-### RUM インジェクション
-
-この機能は Datadog [リアルユーザーモニタリング (RUM)] (https://docs.datadoghq.com/real_user_monitoring/) とともに使用されます。Web およびモバイルアプリケーションにおける個別ユーザーのリアルタイムアクティビティをエンドツーエンドで可視化できます。初回リクエストのページ読み込み時間を取得するには、フロントエンドとバックエンドのトレーシングを接続する必要があります。接続は RUM インジェクションのラックミドルウェアを使用し、ラックベースアプリケーションの HTML コメント経由でトレース ID を適切な HTML レスポンスに挿入することで実行可能です。その後、トレース ID を利用して、初回リクエストに関連するトレースとユーザーの残りの RUM セッションを接続します。
-
-この機能は**試験的**なもので、デフォルトでは無効になっています。
-
-この機能を有効にするには、まず `rack` インテグレーションで RUM インジェクションのコンフィギュレーションオプション `rum_injection_enabled` を `true` に設定する必要があります。また、`rack` コンフィギュレーションオプション `rum_injection_disabled_paths` を使用して、キャッシュされた HTML を含む (および、トレース ID を挿入するべきではない) あらゆるパスのリストを指定することができます。`rum_injection_disabled_paths` は、グロブ URL などの URL パスの配列に設定してください。例は以下の通りです。
-
-```ruby
-    Datadog.configure do |c|
-      c.use :rack, rum_injection_enabled: true, rum_injection_disabled_paths: ['/api', '/blog/**/**']
-    end
-```
-
-コンフィギュレーションについて、詳しくは Rack の[ドキュメント](#rack)を参照してください。
-
-Rack の RUM インジェクションミドルウェアを Ruby on Rails のインスツルメンテーションと併用している場合、ミドルウェアは自動で適切な場所にあるアプリケーションのラックミドルウェアスタックに挿入されます。コンフィギュレーションの例は以下の通りです。
-
-
-```ruby
-    Datadog.configure do |c|
-      c.use :rack, rum_injection_enabled: true, rum_injection_disabled_paths: ['/api', '/blog/**/**']
-      c.use :rails
-    end
-```
-
-しかし、Rack をスタンドアロンのアプリケーションとして使用している、または Sinatra などのその他 Web フレームワークと併用している場合は、`use Datadog::Contrib::Rack::RumInjection` を介して Rack RUM インジェクションミドルウェアをミドルウェアスタックの適切な場所に手動で挿入する必要があります。この場合、これはスタック内の_最後の_ミドルウェアで、`Rack::Deflater` などの圧縮ミドルウェアよりも_後に_位置していなければなりません。
-
-```ruby
-# config.ru の例
-require 'ddtrace'
-
-Datadog.configure do |c|
-  c.use :rack, options
-end
-
-use Datadog::Contrib::Rack::TraceMiddleware
-use Rack::Deflater
-use Datadog::Contrib::Rack::RumInjection
-
-app = proc do |env|
-  [ 200, {'Content-Type' => 'text/plain'}, ['OK'] ]
-end
-
-run app
-```
-
-最後に、フロントエンド Web アプリケーションで [`browser-sdk`](https://docs.datadoghq.com/real_user_monitoring/installation/?tab=us) が正しく設定されていることを確認します。
-
-RUM インジェクションミドルウェアは HTML コメントを`Content-Type` `html` または `xhtml` に該当するレスポンスのみに挿入します。いずれかのブラウザまたは CDN レベルでキャッシュされておらず、ストリーミング型でない、および挿入時に圧縮または gzip 形式にされていない HTML レスポンスが対象となります。
-
-#### RUM の手動インジェクション
-
-HTML に、CDN、VCL を利用するキャッシングストラテジー、またはカスタムキャッシング規則を持つユーザーは、キャッシュしない HTML テンプレートの決定に RUM の自動インジェクションは使用せず、トレース ID を挿入することをおすすめします。Datadog では、トレース ID を挿入すべき HTML テンプレートを指定する構成ができるよう、手動インジェクションのオプションを提供しています。手動インジェクションテンプレートヘルパーにより、`dd-trace-id` および `dd-trace-time` を含む HTML `<meta>` タグが挿入されます。これにより、[`browser-sdk`](https://docs.datadoghq.com/real_user_monitoring/installation/?tab=us) がフロントエンドセッションとバックエンドトレースを接続します。テンプレートを変更するには、テンプレートヘルパーを追加して RUM インジェクションメタタグを生成します (追加先は、テンプレートの `<head>` セクションが推奨されますが、どこへでも追加可能です)。
-
-テンプレートに、自動 RUM インジェクションの HTML コメント挿入 Rack Middleware も無効になっていることを確認するため、オプションで Rack 環境をヘルパーに渡します。Rack 環境変数は、フレームワークごとに異なりますが、通常はあらゆる Rack 対応ウェブフレームワークで利用可能です。以下は、一般的なフレームワークの例です。
-
-##### Rails を使用した Rack の RUM 手動インジェクション
-
-```
-  # application.html.erb
-
-  <head>
-    <%= ::Datadog::Contrib::Rack::RumInjection.inject_rum_data(request.env) %>
-    ... existing template code ...
-  </head>
-```
-
-##### Sinatra を使用した Rack の RUM 手動インジェクション
-
-```
-  <head>
-    <%= ::Datadog::Contrib::Rack::RumInjection.inject_rum_data(env) %>
-    ... existing template code ...
-  </head>
-```
-
-##### 一般的なウェブフレームワークを使用した Rack の RUM 手動インジェクション
-
-```
-  <head>
-    <%= ::Datadog::Contrib::Rack::RumInjection.inject_rum_data(<RACK_ENVIRONMENT>) %>
-    ... existing template code ...
-  </head>
-```
-
 ### 処理パイプライン
 
 一部のアプリケーションでは、トレースを上流に送信する前に、トレースを変更またはフィルタリングする必要がある場合があります。処理パイプラインを使用すると、このような動作を定義する*プロセッサー*を作成できます。
@@ -2099,34 +2035,26 @@ Datadog::Pipeline.before_flush(
 
 ### トレース相関
 
-ロギングなどの多くの場合において、相互参照を容易にするために、トレース ID を他のイベントまたはデータストリームに関連付けると便利です。トレーサーは、`active_correlation` を介して現在アクティブなトレースの相関識別子を生成できます。これは、これらの他のデータソースを修飾するために使用できます。
+ロギングなどの多くの場合において、相互参照を容易にするために、トレース ID を他のイベントまたはデータストリームに関連付けると便利です。
+
+#### Rails アプリケーションにロギングする場合
+
+##### 自動
+
+Rails アプリケーションの場合は、デフォルトのロガー (`ActiveSupport::TaggedLogging`) または `lograge` を使用し、`rails` インスツルメンテーションのコンフィギュレーションオプション `log_injection` を `true` に設定するか、環境変数を `DD_LOGS_INJECTION=true` に設定することでトレース相関インジェクションを自動的に有効化できます。
 
 ```ruby
-# トレースがアクティブな場合...
-Datadog.tracer.trace('correlation.example') do
-  # #<Datadog::Correlation::Identifier> を返します
-  correlation = Datadog.tracer.active_correlation
-  correlation.trace_id # => 5963550561812073440
-  correlation.span_id # => 2232727802607726424
-  correlation.env # => 'production' (DD_ENV から派生)
-  correlation.service # => 'billing-api' (DD_SERVICE から派生)
-  correlation.version # => '2.5.17' (DD_VERSION から派生)
-end
+# config/initializers/datadog.rb
+require 'ddtrace'
 
-# トレースがアクティブでない場合...
-correlation = Datadog.tracer.active_correlation
-# #<Datadog::Correlation::Identifier> を返します
-correlation = Datadog.tracer.active_correlation
-correlation.trace_id # => 0
-correlation.span_id # => 0
-correlation.env # => 'production' (DD_ENV から派生)
-correlation.service # => 'billing-api' (DD_SERVICE から派生)
-correlation.version # => '2.5.17' (DD_VERSION から派生)
+Datadog.configure do |c|
+  c.use :rails, log_injection: true
+end
 ```
 
-#### Lograge を使用して Rails アプリケーションにロギングする場合（推奨）
+##### 手動 (Lograge)
 
-[Rails アプリケーションで Lograge をセットアップ](https://docs.datadoghq.com/logs/log_collection/ruby/)した後、環境コンフィギュレーションファイル (例: `config/environments/production.rb`) の `custom_options` ブロックを変更してトレース ID を追加します:
+[Rails アプリケーションで Lograge をセットアップ](https://docs.datadoghq.com/logs/log_collection/ruby/)した後、環境コンフィギュレーションファイル (例: `config/environments/production.rb`) の `custom_options` ブロックを手動で変更してトレース ID を追加します。
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -2149,11 +2077,9 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-#### Rails アプリケーションにロギングする場合
+##### 手動 (ActiveSupport::TaggedLogging)
 
-`ActiveSupport::TaggedLogging` ロガーで構成された Rails アプリケーションは相関 ID をタグとしてログ出力に付加することができます。デフォルトの Rails ロガーはこのタグ付けロギングを実装し、相関タグの追加を簡単にしています。
-
-Rails 環境コンフィギュレーションファイルに、以下を追加します。
+デフォルトの `ActiveSupport::TaggedLogging` ロガーで構成された Rails アプリケーションは相関 ID をタグとしてログ出力に付加することができます。`ActiveSupport::TaggedLogging` でトレース相関を有効にするには、Rails の環境コンフィギュレーションファイルで以下を追加します。
 
 ```ruby
 Rails.application.configure do

@@ -6,6 +6,7 @@ assets:
     Ambari base dashboard: assets/dashboards/base_dashboard.json
   logs:
     source: ambari
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

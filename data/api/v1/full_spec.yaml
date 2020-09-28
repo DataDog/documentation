@@ -1341,6 +1341,87 @@ components:
     Event:
       description: Object representing an event.
       properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
+
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
+    EventAlertType:
+      description: 'If an alert event is enabled, set its type.
+
+        For example, `error`, `warning`, `info`, and `success`.'
+      enum:
+      - error
+      - warning
+      - info
+      - success
+      example: info
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+    EventCreateRequest:
+      description: Object representing an event.
+      properties:
         aggregation_key:
           description: 'An arbitrary string to use for aggregation. Limited to 100
             characters.
@@ -1419,22 +1500,79 @@ components:
       - title
       - text
       type: object
-    EventAlertType:
-      description: 'If an alert event is enabled, set its type.
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
 
-        For example, `error`, `warning`, `info`, and `success`.'
-      enum:
-      - error
-      - warning
-      - info
-      - success
-      example: info
-      type: string
-      x-enum-varnames:
-      - ERROR
-      - WARNING
-      - INFO
-      - SUCCESS
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: ID of the parent event. Must be sent as an integer (i.e. no
+            quotes).
+          format: int64
+          type: integer
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        status:
+          description: A status.
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
     EventListResponse:
       description: An event list response.
       properties:
@@ -7453,7 +7591,7 @@ components:
           description: Query to use for the test.
           type: object
         timeout:
-          description: Timeout in millisecond for the test.
+          description: Timeout in seconds for the test.
           format: double
           type: number
         url:
@@ -8476,6 +8614,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
             current date for all organizations.
@@ -8530,6 +8673,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for all organizations
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -8551,8 +8699,8 @@ components:
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for all organizations
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for all organizations
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -8568,6 +8716,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -8652,6 +8805,11 @@ components:
             current date for the given org.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         name:
           description: The organization name.
           type: string
@@ -8667,15 +8825,15 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            in the current date for the given org.
           format: int64
           type: integer
         public_id:
           description: The organization public id.
           type: string
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for the given org.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -8691,6 +8849,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -8720,6 +8883,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
@@ -8787,6 +8955,11 @@ components:
             all organizations for which all usages were calculated.
           format: date-time
           type: string
+        mobile_rum_session_count_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current month(s) for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current month(s) for all organizations.
@@ -8808,8 +8981,8 @@ components:
           format: int64
           type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            month(s) for all organizations.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current month(s) for all organizations.
           format: int64
           type: integer
         start_date:
@@ -8830,6 +9003,11 @@ components:
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_agg_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         usage:
@@ -8984,6 +9162,30 @@ components:
             organization.
           items:
             $ref: '#/components/schemas/UsageTraceHour'
+          type: array
+      type: object
+    UsageTracingWithoutLimitsHour:
+      description: Tracing without limits usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageTracingWithoutLimitsResponse:
+      description: Response containing the tracing without limits usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for tracing without limits.
+          items:
+            $ref: '#/components/schemas/UsageTracingWithoutLimitsHour'
           type: array
       type: object
     User:
@@ -9846,7 +10048,7 @@ info:
     name: Datadog Support
     url: https://www.datadoghq.com/support/
   description: Collection of all Datadog Public endpoints.
-  title: Datadog API Collection
+  title: Datadog API V1 Collection
   version: '1.0'
 openapi: 3.0.0
 paths:
@@ -11001,7 +11203,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/EventCreateRequest'
         description: Event request object
         required: true
       responses:
@@ -11009,7 +11211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventResponse'
+                $ref: '#/components/schemas/EventCreateResponse'
           description: OK
         '400':
           content:
@@ -11174,8 +11376,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully enabled.
+                    example: Embed 00000000000 successfully enabled.
                     type: string
                 type: object
           description: OK
@@ -11214,8 +11415,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully revoked.
+                    example: Embed 0000000000000 successfully revoked.
                     type: string
                 type: object
           description: OK
@@ -14697,13 +14897,14 @@ paths:
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that\
-        \ can be graphed on Datadog\u2019s dashboards.\nThe limit for compressed payloads\
-        \ is 3.2 megabytes (3200000), and 62 megabytes (62914560) for decompressed\
-        \ payloads.\n\nIf you\u2019re submitting metrics directly to the Datadog API\
-        \ without using DogStatsD, expect\n\n- 64 bits for the timestamp\n- 64 bits\
-        \ for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n\
-        - The full payload is approximately ~ 100 bytes. However, with the DogStatsD\
-        \ API,\ncompression is applied, which reduces the payload size."
+        \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
+        \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
+        \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
+        \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
+        \ timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50\
+        \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
+        \ However, with the DogStatsD API,\ncompression is applied, which reduces\
+        \ the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
@@ -15264,24 +15465,15 @@ paths:
       - Synthetics
   /api/v1/synthetics/tests:
     get:
-      description: Get the list of all Synthetic tests (can be filtered by type).
+      description: Get the list of all Synthetic tests.
       operationId: ListTests
-      parameters:
-      - description: API or browser to filter the list by test type, undefined to
-          get the unfiltered list.
-        in: query
-        name: check_type
-        required: false
-        schema:
-          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyntheticsListTestsResponse'
-          description: OK - Returns the list of all Synthetic tests (properly filtered
-            by type).
+          description: OK - Returns the list of all Synthetic tests.
         '403':
           content:
             application/json:
@@ -15294,7 +15486,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Synthetics is not activated for the user.
-      summary: Get a list of tests
+      summary: Get the list of all tests
       tags:
       - Synthetics
     post:
@@ -16570,6 +16762,12 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'RUM type: `[browser, mobile]`. Defaults to `browser`.'
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -16946,6 +17144,51 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for Trace Search
+      tags:
+      - Usage Metering
+  /api/v1/usage/tracing-without-limits:
+    get:
+      description: Get hourly usage for tracing without limits.
+      operationId: GetTracingWithoutLimits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTracingWithoutLimitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
   /api/v1/user:

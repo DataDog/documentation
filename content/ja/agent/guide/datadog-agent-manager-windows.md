@@ -18,6 +18,18 @@ Datadog Agent v6 Manager GUI はブラウザベースです。GUI が実行さ�
 
 3. セキュリティ上の理由から、GUI はローカルネットワークインターフェイス (localhost/127.0.0.1) からのみアクセスできます。そのため、Agent を同じホストで実行する必要があります。したがって、Agent を VM やコンテナーで実行してホストマシンからアクセスすることはできません。
 
+#### サポートされるブラウザ
+
+| ブラウザ       | サポートされるバージョン (以降) | コメント                 |
+|---------------|------------------------------|-------------------------|
+| IE            | 11                           |                         |
+| Edge          | 12                           |  Pre-Chromium Edge |
+| Edge-chromium | 79                           |                         |
+| Firefox       | 38                           |                         |
+| Chrome        | 60                           |                         |
+| Safari        | 8                            |                         |
+| IOS           | 12                           |  Mobile Safari          |
+
 ### Datadog Agent Manager を起動する
 
 Agent を Windows ホストに[インストール][1]した後、Datadog Agent Manager を起動して Agent をグラフィカルに管理します。
@@ -53,7 +65,7 @@ Datadog Agent Manager を起動すると、デフォルトで一般ステータ�
 | ホスト情報   | OS、プラットフォーム、プロシージャ、稼働時間などのホストに関する情報を提供します。     |
 | ホスト名   | Agent が検出したホスト名とホストタグを表示します。                        |
 | JMX Status  | JMX チェックのリストとそのステータス。                                         |
-| フォワーダー   | API キーのステータスなど、Agent の Forwarder に関する情報。       |
+| Forwarder   | API キーのステータスなど、Agent の Forwarder に関する情報。       |
 | エンドポイント   | Agent が使用中のエンドポイント。                                                  |
 | ログ Agent  | Logs Agent に関する情報（有効な場合）。                                     |
 | Aggregator  | Agent のデータ Aggregator に関する情報。                                     |
@@ -126,7 +138,6 @@ Agent に問題がある場合、フレアページは [Datadog サポート][4]
 左側のナビゲーションバーで **Restart Agent** をクリックすると、Agent が即座に再起動します。ページや確認プロンプトはありません。Agent を再起動すると、[一般ステータス](#general)ページに転送されます。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

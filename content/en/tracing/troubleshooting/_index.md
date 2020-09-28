@@ -48,7 +48,7 @@ There are a number of configuration options available to scrub sensitive data or
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace (preferrably) or screenshots, for example, and tell us what you expect to see.**
+1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell us what you expect to see.**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 

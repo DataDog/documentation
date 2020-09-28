@@ -140,7 +140,18 @@ class SampleApplication : Application() {
 
 ## 高度なロギング
 
-### 初期化
+### ライブラリの初期化
+
+ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`DatadogConfig.Builder` の以下のメソッドを使用できます。
+
+| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setServiceName(<サービス名>)` | Datadog に送信されるすべてのログに添付される `service` [標準属性][4] のデフォルト値として `<SERVICE_NAME>` を設定します（各ロガーで上書きすることが可能です）。                                                                                                                                                           |
+| `setLogsEnabled(true)`     | Datadog へのログ送信を有効にするには、`true` に設定します。                                                                                                                                                                                                                                  |
+| `addPlugin(DatadogPlugin, Feature)`   | 特定の機能 (CRASH、LOG、TRACE、RUM) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。 |
+
+
+### ロガーの初期化
 
 ログを Datadog に送信するようにロガーを初期化する際に、`Logger.Builder` の次のメソッドを使用できます。
 
@@ -150,7 +161,8 @@ class SampleApplication : Application() {
 | `setServiceName(<サービス名>)` | Datadog に送信されるすべてのログに添付される `service` [標準属性][4] の値として `<サービス名>` を設定します。                                                                                                                                                           |
 | `setLogcatLogsEnabled(true)`     | Logcat をロガーとして使用するには、`true` とします。                                                                                                                                                                                                                                  |
 | `setDatadogLogsEnabled(true)`    | Datadog にログを送信するには、`true` とします。                                                                                                                                                                                                                                  |
-| `setBundleWithTraceEnabled(true)`| アプリケーションでアクティブなトレースとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターは、Datadog ダッシュボードを使い指定されたトレース中に送信されたすべてのログを表示します。                                                        |
+| `setBundleWithTraceEnabled(true)`| アプリケーションでアクティブなトレースとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog ダッシュボードを使い指定されたトレース中に送信されたすべてのログを表示できます。                                                        |
+| `setBundleWithRumEnabled(true)`| アプリケーションで現在の RUM コンテキストとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog RUM Explorer 使い指定されたビューがアクティブの間に送信されたすべてのログを表示できます。                                                        |
 | `setLoggerName(<ロガー名>)`   | Datadog に送信されるすべてのログに添付される `logger.name` 標準属性の値として `<ロガー名>` を設定します。                                                                                                                                                                  |
 | `setVerbosity(Log.INFO)`         | ロガーの詳細度を設定します。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージがAndroid の Logcat に記録されます。
 
@@ -158,7 +170,6 @@ class SampleApplication : Application() {
     Datadog.verbosityLevel = .debug
     ```                                                                                                       |
 | `setSampleRate(<サンプルレート>)`   | このロガーのサンプリングレートを設定します。ロガーインスタンスが生成するすべてのログは、指定されたサンプリングレートに従いランダムにサンプリングされます (デフォルト 1.0 = すべてのログ)。**注**: Logcat ログはサンプリングされません。            |
-| `addPlugin(DatadogPlugin, Feature)`   | 特定の機能 (CRASH、LOG、TRACE、RUM) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。 |
 | `build()`                        | すべてのオプションを設定して新しいロガーインスタンスをビルドします。                                                                                                                                                                                                                       |
 
 ### グローバルコンフィギュレーション
@@ -235,7 +246,9 @@ logger.removeAttribute("version_name")
 
 ## 拡張
 
-既存のコードベースが Timber を使用している場合、 [専用ライブラリ](timber_integration.md) を使用してすべてのログを自動的に Datadog へ転送できます。
+### Timber 
+
+既存のコードベースが Timber を使用している場合、[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-timber) を使用してすべてのログを自動的に Datadog へ転送できます。
 
 ## その他の参考資料
 

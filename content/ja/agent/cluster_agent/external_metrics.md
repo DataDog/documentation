@@ -76,13 +76,13 @@ Datadog Cluster Agent を実行してサービスを登録したら、[HPA][8] �
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
-      metricName: "<メトリクス名>"
+      metricName: "<METRIC_NAME>"
       metricSelector:
         matchLabels:
-          "<タグキー>:<タグ値>"
+          <TAG_KEY>: <TAG_VALUE>
 ```
 
 **例**: Datadog メトリクス `nginx.net.request_per_s` に基づいて NGINX デプロイを自動スケーリングする HPA マニフェスト
@@ -112,7 +112,7 @@ spec:
 このマニフェストで次のことに注意してください。
 
 - HPAは、`nginx` と呼ばれるデプロイを自動スケーリングするように構成されています。
-- 作成されるレプリカの最大数は `5` で、最小数は `1` です。
+- 作成されるレプリカの最大数は `3` で、最小数は `1` です。
 - 使用されるメトリクスは `nginx.net.request_per_s` であり、スコープは `kube_container_name: nginx` です。このメトリクス形式は、Datadog の形式に対応しています。
 
 Kubernetes は 30 秒ごとに Datadog Cluster Agent にクエリを実行してこのメトリクスの値を取得し、必要に応じて比例的に自動スケーリングします。高度なユースケースでは、同じ HPA に複数のメトリクスを含めることができます。[Kubernetes 水平ポッド自動スケーリングのドキュメント][9]で確認できるように、提案された値の最大値は選択された値です。
@@ -146,7 +146,7 @@ Kubernetes は 30 秒ごとに Datadog Cluster Agent にクエリを実行して
 2. Datadog Cluster Agent RBAC マニフェストを更新します (`DatadogMetric` CRD の使用を許可するために更新されています)。
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
     ```
 
 3. Datadog Cluster Agent のデプロイで、`DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` を `true` に設定します。
@@ -183,7 +183,7 @@ spec:
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
       metricName: "datadogmetric@<namespace>:<datadogmetric_name>"

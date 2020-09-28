@@ -44,9 +44,9 @@ Follow the [installation instructions][3] to set up instrumentation of your serv
 
 Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][6].
 
-[1]: /serverless/datadog_lambda_library/
+[1]: /serverless/datadog_lambda_library
 [2]: /serverless/forwarder/
-[3]: /serverless/installation/
-[4]: /metrics/distributions/
-[5]: /serverless/forwarder/#log-forwarding-optional
-[6]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[3]: /integrations/amazon_lambda/?tab=nodejs#metric-collection
+[4]: /serverless/installation/
+[5]: /integrations/amazon_web_services/#setup
+[6]: /serverless/forwarder

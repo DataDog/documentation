@@ -3,6 +3,7 @@ assets:
   dashboards: {}
   logs:
     source: ibm_was
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

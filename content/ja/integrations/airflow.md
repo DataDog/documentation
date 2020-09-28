@@ -6,6 +6,7 @@ assets:
     Airflow Overview: assets/dashboards/overview.json
   logs:
     source: airflow
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

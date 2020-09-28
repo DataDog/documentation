@@ -4,6 +4,7 @@ assets:
     IBM Db2 Overview: assets/dashboards/overview.json
   logs:
     source: ibm_db2
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -102,15 +103,18 @@ update dbm cfg using DFT_MON_BUFPOOL on
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. `ibm_db2` のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `ibm_db2.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル ibm_db2.d/conf.yaml][5] を参照してください。
+1. `ibm_db2` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_db2.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_db2.d/conf.yaml][1] を参照してください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][2]。
 
 ##### ログの収集
 
@@ -136,11 +140,16 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: \d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])
    ```
 
-3. [Agent を再起動します][6]。
+3. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][7]をガイドとして参照して、次のパラメーターを適用します。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -154,15 +163,20 @@ _Agent バージョン 6.0 以降で利用可能_
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][8]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                                                                                |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ibm_db2", "service": "<SERVICE_NAME>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])"}}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `ibm_db2` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `ibm_db2` を探します。
 
 ## 収集データ
 
@@ -184,23 +198,19 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM DB2 の監視][12]
+- [Datadog を使用した IBM DB2 の監視][7]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
 [3]: https://docs.datadoghq.com/ja/agent/
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
-[5]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
