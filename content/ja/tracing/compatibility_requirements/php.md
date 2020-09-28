@@ -79,23 +79,24 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 
 #### データストアの互換性
 
-| モジュール                           | バージョン                   | サポートの種類    |
-|:---------------------------------|:---------------------------|:----------------|
-| Amazon RDS (PDO または MySQLi 使用) | *(対応する PHP)*      | 完全対応 |
-| Elasticsearch                    | 1.x                        | 完全対応 |
-| Eloquent                         | Laravel 対応バージョン | 完全対応 |
-| Memcached                        | *(対応する PHP)*      | 完全対応 |
-| MongoDB                          | 1.4.x                      | 完全対応 |
-| MySQLi                           | *(対応する PHP)*      | 完全対応 |
-| PDO (MySQL、PostgreSQL、MariaDB) | *(対応する PHP)*      | 完全対応 |
-| PhpRedis                         | 3、4、5                    | 完全対応 |
-| Predis                           | 1.1                        | 完全対応 |
-| AWS Couchbase                    | AWS PHP SDK 3              | _近日公開予定_   |
-| AWS DynamoDB                     | AWS PHP SDK 3              | _近日公開予定_   |
-| AWS ElastiCache                  | AWS PHP SDK 3              | _近日公開予定_   |
-| Doctrine ORM                     | 2                          | _近日公開予定_   |
-| ODBC                             | *(対応する PHP)*      | _近日公開予定_   |
-| Solarium                         | 4.2                        | _近日公開予定_   |
+| モジュール                                                                  | バージョン                   | サポートの種類    |
+|-------------------------------------------------------------------------|----------------------------|-----------------|
+| Amazon RDS (PDO または MySQLi 使用)                                        | *(対応する PHP)*      | 完全対応 |
+| Elasticsearch                                                           | 1.x                        | 完全対応 |
+| Eloquent                                                                | Laravel 対応バージョン | 完全対応 |
+| Memcached                                                               | *(対応する PHP)*      | 完全対応 |
+| MongoDB - [mongo][3] 拡張機能を使用                                      | 1.4.x                      | 完全対応 |
+| MongoDB - [mongodb][4] 拡張機能を使用                                    | *(対応する PHP)*      | _近日公開予定_   |
+| MySQLi                                                                  | *(対応する PHP)*      | 完全対応 |
+| PDO (MySQL、PostgreSQL、MariaDB)                                        | *(対応する PHP)*      | 完全対応 |
+| PhpRedis                                                                | 3、4、5                    | 完全対応 |
+| Predis                                                                  | 1.1                        | 完全対応 |
+| AWS Couchbase                                                           | AWS PHP SDK 3              | _近日公開予定_   |
+| AWS DynamoDB                                                            | AWS PHP SDK 3              | _近日公開予定_   |
+| AWS ElastiCache                                                         | AWS PHP SDK 3              | _近日公開予定_   |
+| Doctrine ORM                                                            | 2                          | _近日公開予定_   |
+| ODBC                                                                    | *(対応する PHP)*      | _近日公開予定_   |
+| Solarium                                                                | 4.2                        | _近日公開予定_   |
 
 追加データストアに関するサポートをご希望の場合は、[サポートチーム][2]までお気軽にお問い合わせください。
 
@@ -113,7 +114,7 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 
 #### PHP 5 の深いコールスタック
 
-コールスタックは PHP 5 のみに限定されます。詳細は[深いコールスタックのトラブルシューティングページ][3]を参照してください。 
+コールスタックは PHP 5 のみに限定されます。詳細は[深いコールスタックのトラブルシューティングページ][5]を参照してください。 
 
 ## その他の参考資料
 
@@ -121,4 +122,6 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 
 [1]: https://github.com/DataDog/dd-trace-php
 [2]: /ja/help
-[3]: /ja/tracing/troubleshooting/php_5_deep_call_stacks
+[3]: https://pecl.php.net/package/mongo
+[4]: https://pecl.php.net/package/mongodb
+[5]: /ja/tracing/troubleshooting/php_5_deep_call_stacks

@@ -2,7 +2,7 @@
 title: Datadog Agent Manager pour Windows
 kind: guide
 further_reading:
-  - link: /agent/basic_agent_usage/windows
+  - link: /agent/basic_agent_usage/windows/
     tag: Documentation
     text: Utilisation de base de l'Agent pour l'Agent Windows
 ---
@@ -17,6 +17,18 @@ L'interface graphique de Datadog Agent Manager v6 repose sur l'utilisation d'un 
 2. L'interface graphique se lance uniquement si l'utilisateur dispose des autorisations nécessaires. Si vous parvenez à ouvrir `datadog.yaml`, vous pouvez utiliser l'interface graphique.
 
 3. Pour des raisons de sécurité, l'interface graphique est uniquement accessible à partir de l'interface réseau locale (localhost/127.0.0.1). Vous devez donc utiliser le même host que celui exécuté par l'Agent. Ainsi, vous ne pouvez pas exécuter l'Agent sur une machine virtuelle ou un conteneur et y accéder à partir de la machine du host.
+
+#### Navigateurs pris en charge
+
+| Browser       | Version prise en charge (ou ultérieure) | Publier des commentaires                 |
+|---------------|------------------------------|-------------------------|
+| IE            | 11                           |                         |
+| Edge          | 12                           |  Edge pré-Chromium |
+| Edge-chromium | 79                           |                         |
+| Firefox       | 38                           |                         |
+| Chrome        | 60                           |                         |
+| Safari        | 8                            |                         |
+| IOS           | 12                           |  Safari mobile          |
 
 ### Démarrer Datadog Agent Manager
 
@@ -38,9 +50,9 @@ Datadog Agent Manager se lance dans votre navigateur Web par défaut. L'adresse 
 
 ## Options
 
-Les sections suivantes contiennent des informations sur les options de la barre de navigation de gauche.
+Les sections suivantes décrivent les options de la barre de navigation de gauche.
 
-### Statut
+### Status
 
 #### General
 
@@ -99,7 +111,7 @@ La page Log affiche les logs de l'Agent renvoyés au sein de `agent.log`. Les lo
 2019-07-10 17:48:02 EDT | INFO | (transaction.go:114 in Process) | Successfully posted payload to "https://6-2-1-app.agent.datadoghq.com/api/v1/check_run?api_key=*************************12345"
 ```
 
-### Settings
+### Paramètres
 
 La page Settings affiche le contenu du fichier de configuration principal de l'Agent, `datadog.yaml`. Vous pouvez modifier directement ce fichier depuis Datadog Agent Manager. Après l'avoir modifié, cliquez sur **Save** dans le coin supérieur droit, puis [redémarrez l'Agent](#redemarrer-l-agent).
 
@@ -119,7 +131,7 @@ Le sommaire des checks contient la liste des checks en cours d'exécution, le no
 
 ### Flare
 
-Si vous rencontrez des difficultés avec l'Agent, la page Flare facilite le dépannage avec l'équipe d'[assistance Datadog][4]. Entrez votre numéro de ticket (facultatif) et votre adresse e-mail, puis cliquez sur **Submit**. Cela envoie une copie des logs et des fichiers de configuration de votre Agent à l'assistance Datadog. La documentation sur le [Flare de l'Agent][5] contient davantage d'informations sur les flares.
+Si vous rencontrez des difficultés avec l'Agent, la page Flare facilite le dépannage avec l'équipe d'[assistance Datadog][4]. Entrez votre numéro de ticket (facultatif) et votre adresse e-mail, puis cliquez sur **Submit**. Une copie des logs et des fichiers de configuration de votre Agent est alors envoyée à l'assistance Datadog. Pour en savoir plus sur la fonctionnalité Flare de l'Agent, consultez la [documentation dédiée][5].
 
 ### Redémarrer l'Agent
 
@@ -131,6 +143,6 @@ Cliquez sur **Restart Agent** dans la barre de navigation de gauche pour redéma
 
 [1]: /fr/agent/basic_agent_usage/windows/#installation
 [2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[3]: /fr/integrations
-[4]: /fr/help
-[5]: /fr/agent/troubleshooting/send_a_flare
+[3]: /fr/integrations/
+[4]: /fr/help/
+[5]: /fr/agent/troubleshooting/send_a_flare/
