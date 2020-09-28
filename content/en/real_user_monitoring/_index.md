@@ -3,6 +3,8 @@ title: Real User Monitoring
 kind: documentation
 description: "Visualize and analyze the performance of your front end applications as seen by your users."
 disable_toc: true
+aliases:
+  - /real_user_monitoring/installation
 further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
@@ -25,7 +27,8 @@ Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the re
 * **Support**: retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors…)
 
 {{< whatsnext desc="Get started with RUM:">}}
-  {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u>: Create your first application and configure the browser SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/browser">}}<u>Browser Monitoring</u>: Create an application by configuring the browser SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/android">}}<u>Android Monitoring</u>: Create an application by configuring the Android SDK.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/dashboards">}}<u>Dashboards</u>: Discover all data collected out of the box within an out of the box Dashboard.{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="Explore your RUM events:">}}

@@ -1,10 +1,6 @@
 ---
 title: Proxy Real User Monitoring Data
 kind: faq
-further_reading:
-    - link: '/real_user_monitoring/installation/'
-      tag: 'Get Started'
-      text: 'Real User Monitoring'
 ---
 
 The Real User Monitoring (RUM) SDK can be configured to send requests through a proxy. Requests made still need to be forwarded to Datadog.
@@ -54,8 +50,4 @@ To successfully proxy request to Datadog:
 
 **Note:** The request body must remain unchanged.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/installation/?tab=us#initialization-parameters
+[1]: /real_user_monitoring/browser/#initialization-parameters
