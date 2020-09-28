@@ -59,8 +59,8 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "EU" %}}
 
@@ -75,8 +75,8 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -90,6 +90,6 @@ For more information about CLI parameters, see the [official Github repository][
 
 [1]: /real_user_monitoring/data_collected/error#error-origins
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
-[3]: /real_user_monitoring/installation/?tab=us#initialization-parameters
+[3]: /real_user_monitoring/browser/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
