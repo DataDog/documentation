@@ -247,9 +247,9 @@ Proceed to archive creation, or update at any moment while editing the archive.
 
 Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a given Archive.
 
+
 [1]: /api/v2/logs-archives/#grant-role-to-an-archive
 [2]: /api/v2/logs-archives/#revoke-role-from-an-archive
-
 {{% /tab %}}
 {{< /tabs >}}
 

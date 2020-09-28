@@ -216,6 +216,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
 | `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
 
+
 [1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
 [3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#custom-user-actions

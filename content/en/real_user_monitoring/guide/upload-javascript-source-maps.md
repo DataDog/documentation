@@ -83,8 +83,8 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "EU" %}}
 
@@ -99,8 +99,8 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
-[1]: https://app.datadoghq.com/account/settings#api
 
+[1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{< /tabs >}}
 

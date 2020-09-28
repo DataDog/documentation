@@ -2,12 +2,15 @@
 title: Instrumenting Ruby Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: 'Documentation'
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: 'Documentation'
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: 'Documentation'
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
@@ -102,6 +105,10 @@ Datadog’s integration with AWS X-Ray allows you to visualize end-to-end server
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
@@ -110,5 +117,3 @@ Datadog’s integration with AWS X-Ray allows you to visualize end-to-end server
 [6]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://app.datadoghq.com/functions
-[9]: /serverless/custom_metrics
-[10]: /serverless/distributed_tracing

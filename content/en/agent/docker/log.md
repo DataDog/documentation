@@ -249,4 +249,3 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 [8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
 [9]: /agent/guide/autodiscovery-management/
 [10]: /agent/kubernetes/log/#short-lived-containers
-[11]: /integrations/journald/?tab=host#filter-journal-units
