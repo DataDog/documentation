@@ -65,6 +65,7 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 **iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create a “Open Mobile App Screenboard” shortcut, you must first open the Mobile App Screenboard in your mobile app at least once.
 
 With the shortcut, you can access your dashboards and monitors through three key actions:
+
 * Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
 * Siri Voice: say your shortcut name, such as “Open HAproxy and Bunk” in the image below.
 * Siri suggestions: suggestions for frequently opened dashboards will appear in iPhone Search.
