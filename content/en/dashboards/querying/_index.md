@@ -47,7 +47,7 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 ### Filter
 
-Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. 
+Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
 {{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
 
@@ -140,11 +140,7 @@ To configure your graph using APM Stats data, follow these steps:
 Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
 
 ### APM Stats parameters
-Select the following parameters from the graphing editor:
-* Environment (`env`)
-* Primary tag (`primary_tag`)
-* Service (`service`)
-* Operation name (`name`)
+Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
 
 If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
