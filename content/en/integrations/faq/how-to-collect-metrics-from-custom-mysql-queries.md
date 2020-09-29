@@ -25,7 +25,7 @@ If you omit the database name, the Agent fails to run the query with the error: 
 
 ### Name your metric
 
-The names applied to your query metrics are taken as provided. It's recommended, but not required, to begin your custom query metrics with the `mysql.` namespace. Doing so, includes the metrics in your MySQL summary dashboards on the infrastructure list and hostmap.
+The names applied to your query metrics are taken as provided. It's recommended, but not required, to begin your custom query metrics with the `mysql.` namespace. Doing so includes the metrics in your MySQL summary dashboards on the infrastructure list and hostmap.
 
 ### Collection frequency
 
