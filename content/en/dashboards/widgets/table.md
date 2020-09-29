@@ -28,6 +28,7 @@ The table visualization is available on timeboards and screenboards. It displays
 * Choose the data to graph (add additional columns as needed):
   * Metric: See the [main graphing documentation][1] to configure a metric query.
   * Log Events: See the [log search documentation][2] to configure a log event query.
+  * APM Statistics: See the [APM stats documentation][6] to configure an APM stats query.
 * You can rename column headers by setting metric aliases.
 * For the **Rows**, choose the tag key to **Group by**. The example below displays `service` rows.
 * Choose a limit for the number results (defaults to 10).
@@ -89,6 +90,8 @@ Additional properties allowed in a `request` object:
 
 To get multiple columns for metrics queries, you need multiple request objects, one object per column. For log queries, you only need one request object, which contains a `multi_compute` array of `compute` objects. Each `compute` object provides one column.
 
+APM Stats queries contain multiple columns in a single request object. When you choose this data source, the table will pre-populate with suggested columns. You can add, remove, and alias these columns.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +101,4 @@ To get multiple columns for metrics queries, you need multiple request objects, 
 [3]: /dashboards/graphing_json/widget_json/
 [4]: /dashboards/graphing_json/request_json/
 [5]: /dashboards/graphing_json/widget_json/#conditional-format-schema
+[6]: /dashboards/querying/#configuring-an-apm-stats-graph
