@@ -56,13 +56,13 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 ## Home Screen Search
 
-{{< img src="mobile/home-screen-search.png" alt="Home Screen Search" style="width:60%;">>}}
+{{< img src="mobile/home-screen-search.png" alt="Home Screen Search" style="width:60%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
 
 ## Siri Shortcuts and Suggestions
 
-**iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create a “Open Mobile App Screenboard” shortcut, you must first open the Mobile App Screenboard in your mobile app at least once.
+**iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create an “Open Mobile App Screenboard” shortcut, you must first open the Mobile App Screenboard in your mobile app at least once.
 
 With the shortcut, you can access your dashboards and monitors through three key actions:
 
