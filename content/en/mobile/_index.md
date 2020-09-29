@@ -50,13 +50,13 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Quick Actions
 
-{{< img src="mobile/quick_actions.png" alt="Quick Actions">}}
+{{< img src="mobile/quick-actions-3.png" alt="Quick Actions">}}
 
 Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
 ## Home Screen Search
 
-{{< img src="mobile/home-screen-search.png" alt="Home Screen Search" style="width:60%;">}}
+{{< img src="mobile/home-screen-search-2.png" alt="Home Screen Search" style="width:40%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
 
@@ -70,7 +70,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 * Siri Voice: say your shortcut name, such as “Open HAproxy and Bunk” in the image below.
 * Siri suggestions: suggestions for frequently opened dashboards will appear in iPhone Search.
 
-{{< img src="mobile/shortcuts.png" alt="Shortcuts">}}
+{{< img src="mobile/shortcuts-3.png" alt="Shortcuts">}}
 
 For more information on Siri Shortcuts and Suggestion, refer to the [Apple Documentation][11].
 
