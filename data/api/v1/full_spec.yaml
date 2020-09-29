@@ -367,8 +367,8 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
-    ApmResourcesQueryDefinition:
-      description: The APM resources (stats) query for Table Widget.
+    ApmStatsQueryDefinition:
+      description: The APM stats query for table and distributions widgets.
       properties:
         columns:
           description: Column names used by front end for display.
@@ -385,10 +385,16 @@ components:
           description: Operation name associated with service.
           example: rack.request
           type: string
+        primary_tag:
+          description: The organization's host group name and value.
+          example: datacenter:*
+          type: string
         resource:
           description: Resource name.
           example: CartsController
           type: string
+        row_type:
+          $ref: '#/components/schemas/ApmStatsQueryRowType'
         service:
           description: Service name.
           example: web-store
@@ -397,7 +403,21 @@ components:
       - service
       - env
       - name
+      - primary_tag
+      - row_type
       type: object
+    ApmStatsQueryRowType:
+      description: The level of detail for the request.
+      enum:
+      - service
+      - resource
+      - span
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+      - RESOURCE
+      - SPAN
     ApplicationKey:
       description: An application key with its associated metadata.
       properties:
@@ -2835,7 +2855,8 @@ components:
           type: string
         target_type:
           default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
+          description: Defines if the final attribute or tag name is from log `attribute`
+            or `tag`.
           type: string
         type:
           $ref: '#/components/schemas/LogsAttributeRemapperType'
@@ -6577,6 +6598,8 @@ components:
       - certificate
       - responseTime
       - property
+      - recordEvery
+      - recordSome
       type: string
       x-enum-varnames:
       - BODY
@@ -6585,6 +6608,8 @@ components:
       - CERTIFICATE
       - RESPONSE_TIME
       - PROPERTY
+      - RECORD_EVERY
+      - RECORD_SOME
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -7051,7 +7076,8 @@ components:
           description: Determines if the variable is secure.
           type: boolean
         value:
-          description: Value of the global variable.
+          description: Value of the global variable. When reading a global variable,
+            the value will not be present if the variable is secure.
           type: string
       required:
       - value
@@ -7441,16 +7467,19 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: The sub-type of the Synthetic API test, `http`, `ssl`, or `tcp`.
+      description: The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+        `dns`.
       enum:
       - http
       - ssl
       - tcp
+      - dns
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
       - TCP
+      - DNS
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -7769,8 +7798,8 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
-        apm_resources_query:
-          $ref: '#/components/schemas/ApmResourcesQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -16048,6 +16077,38 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+    get:
+      description: Get the detailed configuration of a global variable.
+      operationId: GetGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a global variable
+      tags:
+      - Synthetics
     put:
       description: Edit a Synthetics global variable.
       operationId: EditGlobalVariable
@@ -17193,7 +17254,7 @@ paths:
       - Usage Metering
   /api/v1/user:
     get:
-      description: Get all users for your organization.
+      description: List all users for your organization.
       operationId: ListUsers
       responses:
         '200':
@@ -17208,7 +17269,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Get all users
+      summary: List all users
       tags:
       - Users
     post:
