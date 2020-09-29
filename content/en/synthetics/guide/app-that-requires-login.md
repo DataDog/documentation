@@ -59,9 +59,9 @@ Depending on the type of MFA leveraged by your application, [JavaScript steps][4
 
 The second way to ensure that your Datadog Browser tests can login into your applications is to leverage one or several of the available browser test configurations. You can indeed decide to apply:
 
-- Specific header
+- Specific headers
 - Cookies
-- Basic Auth credentials
+- Basic Auth or NTLM credentials
 
 These are set at every test execution and consequently allow you to start the recording of your steps directly post login. 
 
