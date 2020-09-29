@@ -48,11 +48,30 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5]. 
 
-<!--- ## Quick Actions  --->
+## Quick Actions
 
-<!--- {{< img src="mobile/quick_actions.png" alt="dashboard page">}}  --->
+{{< img src="mobile/quick_actions.png" alt="Quick Actions">}}
 
-<!--- Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. On iOS, it shows your top five “Frequently Viewed By Me” preset dashboards. On Android, it shows your top five viewed dashboards on mobile.  --->
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+
+## Home Screen Search
+
+{{< img src="mobile/home-screen-search.png" alt="Home Screen Search">}}
+
+**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
+
+## Siri Shortcuts and Suggestions
+
+**iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create a “Open Mobile App Screenboard” shortcut, you must first open the Mobile App Screenboard in your mobile app at least once.
+
+With the shortcut, you can access your dashboards and monitors through three key actions:
+* Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
+* Siri Voice: say your shortcut name, such as “Open HAproxy and Bunk” in the image below.
+* Siri suggestions: suggestions for frequently opened dashboards will appear in iPhone Search.
+
+{{< img src="mobile/shortcuts.png" alt="Shortcuts">}}
+
+For more information on Siri Shortcuts and Suggestion, refer to the [Apple Documentation][11].
 
 ## Account
 
@@ -60,7 +79,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][10]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
+For help with troubleshooting, [contact Datadog support][12]. You can also send a message in the [Datadog public Slack][13] [#mobile-app][14] channel. 
 
 ### Further Reading
 
@@ -75,6 +94,8 @@ For help with troubleshooting, [contact Datadog support][10]. You can also send 
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /help/
-[11]: https://chat.datadoghq.com/
-[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[10]: https://app.datadoghq.com/dashboard/lists/preset/5
+[11]: https://support.apple.com/en-us/HT209055
+[12]: /help/
+[13]: https://chat.datadoghq.com/
+[14]: https://datadoghq.slack.com/archives/C0114D5EHNG
