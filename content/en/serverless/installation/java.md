@@ -36,7 +36,7 @@ Include the following dependency in your `pom.xml`:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <type>pom</type>
 </dependency>
 ```
@@ -51,7 +51,7 @@ repositories {
   maven { url "https://dl.bintray.com/datadog/datadog-maven" }
 }
 dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:0.0.5'
+  implementation 'com.datadoghq:datadog-lambda-java:0.0.6'
 }
 ```
 {{% /tab %}}
