@@ -60,7 +60,7 @@ EC2 インスタンスでセキュリティグループ設定を再度チェッ�
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
 
-1. Linux コンテナで [datadog-agent-ecs.json][1] (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][2]) をダウンロードします。Windows の場合は [datadog-agent-ecs-win.json][3] をダウンロードします。
+1. Linux コンテナで [datadog-agent-ecs.json][1] (オリジナルの Amazon Linux 1 AMI を使用している場合は [datadog-agent-ecs1.json][2]) をダウンロードします。Windows の場合は [datadog-agent-ecs-win.json][3] をダウンロードします。
 2. `datadog-agent-ecs.json` を編集し、アカウントの [Datadog API キー][4]を使用して `<YOUR_DATADOG_API_KEY>` を設定します。
 3. オプション - [Agent 健全性チェック](#agent-health-check)を追加します。
 4. オプション - Datadog EU サイトをご利用の場合は、`datadog-agent-ecs.json` を編集して `DD_SITE` を `DD_SITE:datadoghq.eu` に設定します。
@@ -102,7 +102,7 @@ ECS タスク定義に次を追加して、Agent 健全性チェックを作成�
 5. **Add volume** リンクをクリックします。
 6. **Name** に `docker_sock` と入力します。**Source Path** に、Linux の場合は `/var/run/docker.sock`、Windows の場合は `\\.\pipe\docker_engine` と入力し、**Add** をクリックします。
 7. Linux に限り、ボリュームをもう 1 つ追加して、名前を `proc`、ソースパスを `/proc/` に設定します。
-8. Linux に限り、ボリュームをもう 1 つ追加して、名前を `cgroup`、ソースパスを `/sys/fs/cgroup/` (オリジナルの Amazon Linux AMI を使用している場合は `/cgroup/`) に設定します。
+8. Linux に限り、ボリュームをもう 1 つ追加して、名前を `cgroup`、ソースパスを `/sys/fs/cgroup/` (オリジナルの Amazon Linux 1 AMI を使用している場合は `/cgroup/`) に設定します。
 9. **Add container** ボタンをクリックします。
 10. **Container name** に `datadog-agent` と入力します。
 11. **Image** に `datadog/agent:latest` と入力します。
@@ -113,7 +113,7 @@ ECS タスク定義に次を追加して、Agent 健全性チェックを作成�
 16. **Storage and Logging** セクションまで下へスクロールします。
 17. **Mount points** で **docker_sock** ソースボリュームを選択し、コンテナのパスに Linux の場合は `/var/run/docker.sock`、Windows の場合は `\\.\pipe\docker_engine` と入力します。**Read only** のチェックボックスをオンにします。
 18. Linux に限り、**proc** 用に別のマウントポイントを追加し、コンテナのパスに `/host/proc/` と入力します。**Read only** チェックボックスをオンにします。
-19. Linux に限り、**cgroup** 用に 3 つ目のマウントポイントを追加して、コンテナのパスに `/host/sys/fs/cgroup` と入力します。**Read only** チェックボックスをオンにします (オリジナルの Amazon Linux AMI を使用している場合は `/host/cgroup/` を使用してください)。
+19. Linux に限り、**cgroup** 用に 3 つ目のマウントポイントを追加して、コンテナのパスに `/host/sys/fs/cgroup` と入力します。**Read only** チェックボックスをオンにします。
 
 **注**: Datadog タスク定義で CPU を 10 台使用するように設定すると、`service:datadog-agent` の `aws.ecs.cpuutilization` が 1000% と表示されることがあります。これは AWS が CPU 使用率を表示する際の独特な現象です。CPU の台数を増やすことで、グラフの歪曲を回避できます。
 
