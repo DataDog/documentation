@@ -19,7 +19,7 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 ### Install the Datadog Lambda Library
 
-You can install the Datadog Lambda Library locally by running one of the following commands based on your project’s configuration. For latest version, see the [latest release][3].
+You can install the Datadog Lambda Library locally by adding one of the following blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `n.n.n` below with the latest release (omitting the preceeding `v`): ![Bintray](https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java)
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -36,7 +36,7 @@ Include the following dependency in your `pom.xml`:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
-  <version>0.0.5</version>
+  <version>n.n.n</version>
   <type>pom</type>
 </dependency>
 ```
@@ -51,7 +51,7 @@ repositories {
   maven { url "https://dl.bintray.com/datadog/datadog-maven" }
 }
 dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:0.0.5'
+  implementation 'com.datadoghq:datadog-lambda-java:n.n.n'
 }
 ```
 {{% /tab %}}
