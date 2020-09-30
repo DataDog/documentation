@@ -5038,7 +5038,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
-      summary: Get a user
+      summary: Get user details
       tags:
       - Users
       x-codegen-request-body-name: body
@@ -5193,7 +5193,9 @@ tags:
 
     organize, find, and share all of your dashboards with your team and
 
-    organization.'
+    organization. Note that you can add API v1 Dashboards to Dashboard Lists
+
+    that you create with API v2.'
   name: Dashboard Lists
 - description: '[See API version 1](/api/v1/dashboards/).'
   name: Dashboards

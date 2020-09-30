@@ -33434,7 +33434,7 @@
             "description": "Not found"
           }
         },
-        "summary": "Get a user",
+        "summary": "Get user details",
         "tags": [
           "Users"
         ],
@@ -34803,7 +34803,7 @@
   ],
   "tags": [
     {
-      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization.",
+      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization. Note that you can add API v1 Dashboards to Dashboard Lists\nthat you create with API v2.",
       "name": "Dashboard Lists"
     },
     {
