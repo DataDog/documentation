@@ -20,7 +20,7 @@ This guide is for advanced users. Most devices can be configured using the <a hr
 
 ## Research
 
-The first step to building a NDM profile is researching the device and determining the metrics to collect.
+The first step to building an NDM profile is researching the device and determining the metrics to collect.
 
 ### Device information
 
@@ -28,7 +28,7 @@ Refer to the manufacturer's website or search the web to find the following info
 
 - Device name, manufacturer, and [system object identifier][1].
 
-- Understand the device and its use case. Metrics vary between routers, switches, bridges, etc. For example, according to the [HP iLO wikipedia page][2], iLO4 devices are used by system administrators for remote management of embedded servers.
+- Understand the device and its use case. Metrics vary between routers, switches, bridges, etc. For example, according to the [HP iLO Wikipedia page][2], iLO4 devices are used by system administrators for remote management of embedded servers.
 
 - Available versions of the device, and the versions to target. For example, HP iLO devices exist in multiple versions. This tutorial is specifically targeting HP iLO4.
 
