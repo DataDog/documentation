@@ -21,6 +21,7 @@ La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris
 
 | Framework                 | Version prise en charge | Documentation PyPi de Datadog                                         |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
+| [asgi][43]               | >= 2.0         |  http://pypi.datadoghq.com/trace/docs/web_integrations.html#asgi |
 | [aiohttp][3]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][4]              | >= 0.11           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][5]              | >= 1.8            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
@@ -123,3 +124,4 @@ La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 [40]: https://kombu.readthedocs.io/en/latest
 [41]: https://www.makotemplates.org
 [42]: http://docs.python-requests.org/en/master
+[43]: http://asgi.readthedocs.io/
