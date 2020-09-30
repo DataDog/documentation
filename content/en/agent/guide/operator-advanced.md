@@ -21,49 +21,30 @@ Using the Datadog Operator requires the following prerequisites:
 
 To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
 
-1. Download the [Datadog Operator project zip ball][4]. Source code can be found at [`DataDog/datadog-operator`][1].
-2. Unzip the project, and go into the `./datadog-operator` folder.
-3. Define your namespace and operator:
+1. Add the Datadog Helm repo:
+  ```
+  helm repo add datadog https://helm.datadoghq.com
+  ```
 
-   ```shell
-   DD_NAMESPACE="datadog"
-   DD_NAMEOP="ddoperator"
-   ```
-
-4. Create the namespace:
-
-   ```shell
-   kubectl create ns $DD_NAMESPACE
-   ```
-
-5. Install the operator with Helm:
-
-   - Helm v2:
-
-   ```shell
-   helm install --name $DD_NAMEOP -n $DD_NAMESPACE ./chart/datadog-operator
-   ```
-
-   - Helm v3:
-
-   ```shell
-   helm install $DD_NAMEOP -n $DD_NAMESPACE ./chart/datadog-operator
-   ```
-
+2. Install the Datadog Operator:
+  ```
+  helm install datadog/datadog-operator
+  ```
+  
 ## Deploy the Datadog Agents with the operator
 
 After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
 
 Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-* [Manifest with Logs, APM, process, and metrics collection enabled.][5]
-* [Manifest with Logs, APM, and metrics collection enabled.][6]
-* [Manifest with Logs and metrics collection enabled.][7]
-* [Manifest with APM and metrics collection enabled.][8]
-* [Manifest with Cluster Agent.][9]
-* [Manifest with tolerations.][10]
+* [Manifest with Logs, APM, process, and metrics collection enabled.][4]
+* [Manifest with Logs, APM, and metrics collection enabled.][5]
+* [Manifest with Logs and metrics collection enabled.][6]
+* [Manifest with APM and metrics collection enabled.][7]
+* [Manifest with Cluster Agent.][8]
+* [Manifest with tolerations.][9]
 
-Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][11], then trigger the Agent installation with the following command:
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][10], then trigger the Agent installation with the following command:
 
 ```shell
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -152,11 +133,10 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/releases/latest
-[5]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs-apm.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
-[10]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-tolerations.yaml
-[11]: https://app.datadoghq.com/account/settings#api
+[4]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs-apm.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-tolerations.yaml
+[10]: https://app.datadoghq.com/account/settings#api
