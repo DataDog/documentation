@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,7 +47,7 @@ supported_os:
 
 Prometheus チェックは、Agent のバージョン 6.1.0 以降にパッケージ化されています。
 
-### 構成
+### コンフィギュレーション
 
 `prometheus.d/conf.yaml` ファイルを編集して、OpenMetrics/Prometheus エンドポイントを公開するアプリケーションからメトリクスを取得します。
 

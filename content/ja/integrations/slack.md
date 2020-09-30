@@ -151,13 +151,13 @@ Slack インテグレーションをセットアップした後、通知メッ�
 
 `<!here>` または `<!channel>` を使用して、それぞれ **@here** または **@channel** をメンションできます。
 
-メッセージの送信時にチャンネル内のすべてのユーザーに通知するには、`<!subteam^GROUP_ID>` を使用します。
+メッセージの送信時にグループ内のすべてのユーザーに通知するには、`<!subteam^GROUP_ID>` を使用します。
 
 <mrk mid="196" mtype="seg">ユーザーグループに
 は、`&lt;!subteam^GROUP_ID|GROUP_NAME&gt;` を使用します。</mrk><mrk mid="197" mtype="seg">`GROUP_ID` は、[Slack の `usergroups.list` API エンドポイント][2]を検索して見つけられます。</mrk><mrk mid="198" mtype="seg">たとえば、`testers` というユーザーグループでは、次の構文を使用します。</mrk>
 
 ```text
-<!subteam^12345|testers>
+<!subteam^GROUP_ID>
 ```
 
 注: Slack @ 通知の場合、チャンネル名の後に特殊文字を付けることはサポートされていません。

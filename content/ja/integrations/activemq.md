@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: activemq
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -52,7 +53,7 @@ Agent の ActiveMQ チェックは [Datadog Agent][2] パッケージに含ま�
 
 このチェックは、メトリクスを JMX 経由で収集するため、Agent が [jmxfetch][3] をフォークできるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -244,7 +245,7 @@ ActiveMQ XML チェックは [Datadog Agent][2] パッケージに含まれて�
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 <!-- xxx tabs xxx -->
-<!-- xxx tab "Host" xxx -->
+<!-- xxx tab "ホスト" xxx -->
 
 #### ホスト
 

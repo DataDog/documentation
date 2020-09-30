@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -39,7 +40,7 @@ Network Time Protocol (NTP) インテグレーションはデフォルトで有�
 - メトリクスの遅延
 - メトリクスのグラフの途切れ
 
-デフォルトで利用される NTP サーバー
+デフォルトでは、エージェントが実行されているクラウドプロバイダーがチェックにより検出され、可能な場合はそのクラウドプロバイダーのプライベート NTP サーバーが使用されます。クラウドプロバイダーが検出されない場合は、エージェントで以下の NTP サーバーをデフォルトとします。
 
 - `0.datadog.pool.ntp.org`
 - `1.datadog.pool.ntp.org`
@@ -52,7 +53,7 @@ Network Time Protocol (NTP) インテグレーションはデフォルトで有�
 
 NTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 Agent はデフォルトで  NTP チェックを有効にしますが、チェックを自分で構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーで `ntp.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ntp.d/conf.yaml][3] を参照してください。
 

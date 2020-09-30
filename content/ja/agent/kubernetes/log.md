@@ -51,7 +51,7 @@ DaemonSet によるログの収集を有効にするには
      # (...)
     ```
 
-    **注**: `DD_CONTAINER_EXCLUDE` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナのディスカバリー管理][1]を参照してください。
+    **注**: `DD_CONTAINER_EXCLUDE` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナのディスカバリー管理][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE` にコンテナの `name` を設定してログを収集します。
 
 2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
 

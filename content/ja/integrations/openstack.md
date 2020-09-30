@@ -3,6 +3,7 @@ assets:
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -52,7 +53,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][2]します。
 
-### 構成
+### コンフィギュレーション
 
 #### OpenStack の準備
 

@@ -4,6 +4,7 @@ aliases:
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -48,7 +49,7 @@ supported_os:
 
 Supervisor チェックは [Datadog Agent][2] パッケージに含まれています。Supervisor が実行されているサーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### supervisord の準備
 

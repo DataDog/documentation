@@ -60,6 +60,8 @@ gem 'ddtrace'
 
 以上の方法で関数を構成すると、[Serverless Homepage][8] でメトリクス、ログ、トレースを確認できるようになるはずです。
 
+### カスタムビジネスメトリクスの監視
+
 カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
 
 ```ruby
@@ -91,7 +93,13 @@ def some_operation()
     end
 end
 ```
+[カスタムメトリクスの送信を有効化][3]してはじめます。
 
+### AWS X-Ray インテグレーションを有効にする
+
+Datadog の AWS X-Ray インテグレーションはエンドツーエンドのサーバーレストランザクションを可視化します。発生したエラーや遅延に的を絞り、関数のパフォーマンスがユーザーエクスペリエンスにどう影響しているかを確認することができます。言語とコンフィギュレーションに応じて、[Datadog APM または AWS X-Ray インテグレーションの中から選択][5]してトレースを実行してください。 
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="AWS Lambda を Datadog でトレースするためのアーキテクチャダイアグラム" >}}
 
 [1]: /ja/serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
@@ -101,3 +109,5 @@ end
 [6]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://app.datadoghq.com/functions
+[9]: /ja/serverless/custom_metrics
+[10]: /ja/serverless/distributed_tracing

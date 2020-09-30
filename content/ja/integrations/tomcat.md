@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: tomcat
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -55,7 +56,7 @@ Tomcat チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 このチェックは JMX ベースなので、Tomcat サーバーで JMX リモートを有効にする必要があります。この方法については、[Tomcat のドキュメント][3]の手順に従ってください。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
