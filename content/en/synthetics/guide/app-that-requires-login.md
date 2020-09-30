@@ -61,7 +61,7 @@ The second way to ensure that your Datadog Browser tests can login into your app
 
 - Specific headers
 - Cookies
-- Basic Auth or NTLM credentials
+- Basic authentication or NTLM credentials
 
 These are set at every test execution and consequently allow you to start the recording of your steps directly post login. 
 
