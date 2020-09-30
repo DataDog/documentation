@@ -669,6 +669,15 @@ table, .table {
   }
 }
 
+.break-word {
+  table {
+    td {
+      word-break: break-word;
+    }
+  }
+  
+}
+
 // external link logos
 
 .link-logo {
