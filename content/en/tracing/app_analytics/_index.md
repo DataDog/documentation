@@ -254,7 +254,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/php/#integrations
+[1]: /tracing/setup/php/#integration-names
 {{% /tab %}}
 {{< /tabs >}}
 
