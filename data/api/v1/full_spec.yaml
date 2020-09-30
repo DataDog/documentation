@@ -367,8 +367,8 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
-    ApmResourcesQueryDefinition:
-      description: The APM resources (stats) query for Table Widget.
+    ApmStatsQueryDefinition:
+      description: The APM stats query for table and distributions widgets.
       properties:
         columns:
           description: Column names used by front end for display.
@@ -385,10 +385,16 @@ components:
           description: Operation name associated with service.
           example: rack.request
           type: string
+        primary_tag:
+          description: The organization's host group name and value.
+          example: datacenter:*
+          type: string
         resource:
           description: Resource name.
           example: CartsController
           type: string
+        row_type:
+          $ref: '#/components/schemas/ApmStatsQueryRowType'
         service:
           description: Service name.
           example: web-store
@@ -397,7 +403,21 @@ components:
       - service
       - env
       - name
+      - primary_tag
+      - row_type
       type: object
+    ApmStatsQueryRowType:
+      description: The level of detail for the request.
+      enum:
+      - service
+      - resource
+      - span
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+      - RESOURCE
+      - SPAN
     ApplicationKey:
       description: An application key with its associated metadata.
       properties:
@@ -7778,8 +7798,8 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
-        apm_resources_query:
-          $ref: '#/components/schemas/ApmResourcesQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
         conditional_formats:
           description: List of conditional formats.
           items:
