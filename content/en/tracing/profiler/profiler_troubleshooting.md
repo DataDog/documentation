@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting the profiler
+title: Profiler Troubleshooting
 kind: documentation
 further_reading:
     - link: '/tracing/troubleshooting'
@@ -26,7 +26,7 @@ The following OpenJDK 8 vendors are supported for Continuous Profiling because t
 | Bell-Soft (Liberica)        | u262                                                           |
 | Upstream builds             | u272                                                           |
 
-If your vendor is not on the list, [open a support ticket][2] to ask if your vendor is supported.
+If your vendor is not on the list, [open a support ticket][2], we can let you know if we're planning to support it or if we already offer beta support.
 
 ## Removing sensitive information from profiles
 
