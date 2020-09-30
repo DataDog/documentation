@@ -392,29 +392,3 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'
-
-  - repo_name: datadog-operator
-    contents:
-
-    - action: pull-and-push-file
-      branch: master
-      globs:
-      - 'docs/configuration.md'
-      options:
-        dest_path: '/agent/kubernetes/'
-        file_name: 'operator_configuration.md'
-        front_matters:
-          title: Datadog Operator Configuration
-          kind: documentation
-          description: "Configuration options for the Datadog Operator."
-          dependencies: ["https://github.com/DataDog/datadog-operator/blob/master/docs/configuration.md"]
-          further_reading:
-            - link: 'agent/kubernetes'
-              tag: 'Documentation'
-              text: 'Deploy Datadog with Kubernetes'
-            - link: 'agent/kubernetes/log'
-              tag: 'Documentation'
-              text: 'Collect your application logs'
-            - link: '/agent/kubernetes/apm'
-              tag: 'Documentation'
-              text: 'Collect your application traces'
