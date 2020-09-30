@@ -13,7 +13,7 @@ further_reading:
 
 Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the operator may not work as expected.
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
 - [`Helm`][2] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
@@ -31,7 +31,7 @@ To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a
   helm install datadog/datadog-operator
   ```
   
-## Deploy the Datadog Agents with the operator
+## Deploy the Datadog Agents with the Operator
 
 After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
 
