@@ -1109,6 +1109,11 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
+  - name: Profiler Troubleshooting
+    url: tracing/profiler/profiler_troubleshooting
+    parent: profiler
+    identifier: profiler_profiler_troubleshooting
+    weight: 1103
   - name: Custom Instrumentation
     url: tracing/custom_instrumentation/
     parent: tracing
