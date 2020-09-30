@@ -27,7 +27,7 @@ further_reading:
 
   - [APM][1] data is `trace.agent.datadoghq.com`
   - [Live Containers][2] data is `process.datadoghq.com`
-  - [Logs][3] data is `agent-intake.logs.datadoghq.com` for TCP traffic
+  - [Logs][3] data is `agent-intake.logs.datadoghq.com` for TCP traffic, `agent-http-intake.logs.datadoghq.eu` in HTTP. Review the list of [logs endpoints][5] for more information.
   - All other Agent data:
       - **Agents < 5.2.0** `app.datadoghq.com`
       - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
@@ -47,6 +47,7 @@ All of these domains are **CNAME** records pointing to a set of static IP addres
 [2]: /infrastructure/livecontainers/
 [3]: /logs/
 [4]: https://ip-ranges.datadoghq.com
+[5]: /logs/log_collection/?tab=http#datadog-logs-endpoints
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
