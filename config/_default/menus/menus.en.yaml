@@ -2567,6 +2567,10 @@ api_v1:
     parent: Synthetics
     url: '#delete-a-global-variable'
     generated: true
+  - name: Get a global variable
+    parent: Synthetics
+    url: '#get-a-global-variable'
+    generated: true
   - name: Edit a global variable
     parent: Synthetics
     url: '#edit-a-global-variable'
@@ -2711,9 +2715,9 @@ api_v1:
     url: /api/v1/users/
     identifier: Users
     generated: true
-  - name: Get all users
+  - name: List all users
     parent: Users
-    url: '#get-all-users'
+    url: '#list-all-users'
     generated: true
   - name: Create a user
     parent: Users
@@ -3169,9 +3173,9 @@ api_v2:
     parent: Users
     url: '#disable-a-user'
     generated: true
-  - name: Get a user
+  - name: Get user details
     parent: Users
-    url: '#get-a-user'
+    url: '#get-user-details'
     generated: true
   - name: Update a user
     parent: Users
