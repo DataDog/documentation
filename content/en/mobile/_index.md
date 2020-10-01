@@ -50,7 +50,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Quick Actions
 
-{{< img src="mobile/quick-actions-3.png" alt="Quick Actions">}}
+{{< img src="mobile/quick-actions-final.png" alt="Quick Actions">}}
 
 Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
@@ -62,15 +62,15 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 ## Siri Shortcuts and Suggestions
 
-**iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create an “Open Mobile App Screenboard” shortcut, you must first open the Mobile App Screenboard in your mobile app at least once.
+**iOS Only**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create an “Open AWS Overview Dashboard” shortcut, you must first open the AWS Overview Dashboard in your mobile app at least once.
 
 With the shortcut, you can access your dashboards and monitors through three key actions:
 
 * Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
-* Siri Voice: say your shortcut name, such as “Open HAproxy and Bunk” in the image below.
-* Siri suggestions: suggestions for frequently opened dashboards will appear in iPhone Search.
+* Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
+* Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widget.
 
-{{< img src="mobile/shortcuts-3.png" alt="Shortcuts">}}
+{{< img src="mobile/shortcuts-final.png" alt="Shortcuts">}}
 
 For more information on Siri Shortcuts and Suggestion, refer to the [Apple Documentation][11].
 
