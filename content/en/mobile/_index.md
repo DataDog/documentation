@@ -86,7 +86,7 @@ For Handoff to work, each device must:
 * Have Wi-Fi enabled
 * Have Handoff enabled
 
-For more information on Handoff, refer to the [Apple Handoff Documentation][12]
+For more information on Handoff, refer to the [Apple Handoff Documentation][12].
 
 ## Account
 
