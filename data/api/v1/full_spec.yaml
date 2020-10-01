@@ -6693,8 +6693,9 @@ components:
           description: Whether or not a thumbnail is associated with the browser test.
           type: boolean
         timeToInteractive:
-          description: Time in second to wait before the browser test starts after
-            reaching the start URL.
+          description: 'Time in second to wait before the browser test starts after
+
+            reaching the start URL.'
           format: double
           type: number
       type: object
@@ -6844,22 +6845,29 @@ components:
           description: Metadata for the Synthetics tests run
           properties:
             ci:
+              description: Describe CI provider.
               properties:
                 pipeline:
+                  description: Name of the pipeline.
                   type: string
                 provider:
+                  description: Name of the CI provider.
                   type: string
               type: object
             git:
+              description: Git information.
               properties:
                 branch:
+                  description: Branch name.
                   type: string
                 commit_sha:
+                  description: Commit SHA.
                   type: string
               type: object
           type: object
         public_id:
           description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
           type: string
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
@@ -6911,8 +6919,9 @@ components:
       - LOWER_EQUALS
       - MATCH_REGEX
     SyntheticsDeleteTestsPayload:
-      description: A JSON list of the ID or IDs of the Synthetic tests that you want
-        to delete.
+      description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
+
+        to delete.'
       properties:
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
@@ -6927,11 +6936,13 @@ components:
       description: Response object for deleting Synthetic tests.
       properties:
         deleted_tests:
-          description: Array of objects containing a deleted Synthetic test ID with
-            the associated deletion timestamp.
+          description: 'Array of objects containing a deleted Synthetic test ID with
+
+            the associated deletion timestamp.'
           items:
-            description: Object containing a deleted Synthetic test ID with the associated
-              deletion timestamp.
+            description: 'Object containing a deleted Synthetic test ID with the associated
+
+              deletion timestamp.'
             properties:
               deleted_at:
                 description: Deletion timestamp of the Synthetic test ID.
@@ -7044,6 +7055,7 @@ components:
       properties:
         description:
           description: Description of the global variable.
+          example: Example description
           type: string
         id:
           description: Unique identifier of the global variable.
@@ -7051,9 +7063,13 @@ components:
           type: string
         name:
           description: Name of the global variable.
+          example: MY_VARIABLE
           type: string
         tags:
           description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
           items:
             description: Tag name.
             type: string
@@ -7076,8 +7092,10 @@ components:
           description: Determines if the variable is secure.
           type: boolean
         value:
-          description: Value of the global variable. When reading a global variable,
-            the value will not be present if the variable is secure.
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is secure.'
+          example: example-value
           type: string
       required:
       - value
@@ -7091,8 +7109,9 @@ components:
           type: array
       type: object
     SyntheticsLocation:
-      description: Synthetics location that can be used when creating or editing a
-        test.
+      description: 'Synthetic location that can be used when creating or editing a
+
+        test.'
       properties:
         id:
           description: Unique identifier of the location.
@@ -7467,8 +7486,9 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
-        `dns`.
+      description: 'The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+
+        `dns`.'
       enum:
       - http
       - ssl
@@ -7517,8 +7537,9 @@ components:
       description: Object describing the extra options for a Synthetic test.
       properties:
         accept_self_signed:
-          description: For SSL test, whether or not the test should allow self signed
-            certificates.
+          description: 'For SSL test, whether or not the test should allow self signed
+
+            certificates.'
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request.
@@ -7537,17 +7558,21 @@ components:
           format: int64
           type: integer
         min_location_failed:
-          description: Minimum number of locations in failure required to trigger
-            an alert.
+          description: 'Minimum number of locations in failure required to trigger
+
+            an alert.'
           format: int64
           type: integer
         monitor_options:
-          description: Object containing the options for a Synthetic test as a monitor
-            (e.g. renotification).
+          description: 'Object containing the options for a Synthetic test as a monitor
+
+            (for example, renotification).'
           properties:
             renotify_interval:
-              description: Time interval before renotifying if the test is still failing
-                (in minutes).
+              description: 'Time interval before renotifying if the test is still
+                failing
+
+                (in minutes).'
               format: int64
               maximum: 1440
               minimum: 0
@@ -7562,19 +7587,25 @@ components:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
         count:
-          description: Number of times a test needs to be retried before marking a
-            location as failed. Defaults to 0.
+          description: 'Number of times a test needs to be retried before marking
+            a
+
+            location as failed. Defaults to 0.'
           format: int64
           type: integer
         interval:
-          description: Time interval between retries (in milliseconds). Defaults to
-            300ms.
+          description: 'Time interval between retries (in milliseconds). Defaults
+            to
+
+            300ms.'
           format: double
           type: number
       type: object
     SyntheticsTestPauseStatus:
-      description: Define whether you want to start (`live`) or pause (`paused`) a
-        Synthetic test.
+      description: 'Define whether you want to start (`live`) or pause (`paused`)
+        a
+
+        Synthetic test.'
       enum:
       - live
       - paused
@@ -7713,6 +7744,7 @@ components:
         results:
           description: Information about the tests runs.
           items:
+            description: Information about a single test run.
             properties:
               device:
                 $ref: '#/components/schemas/SyntheticsDeviceID'
@@ -15479,8 +15511,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/locations:
     get:
-      description: Get the list of public and private locations available for Synthetics
-        tests. No arguments required.
+      description: 'Get the list of public and private locations available for Synthetic
+
+        tests. No arguments required.'
       operationId: ListLocations
       responses:
         '200':
@@ -15561,8 +15594,9 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
-      description: Get the detailed configuration (including steps) associated with
-        a Synthetics browser test.
+      description: 'Get the detailed configuration (including steps) associated with
+
+        a Synthetic browser test.'
       operationId: GetBrowserTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -15601,8 +15635,9 @@ paths:
         test.
       operationId: GetBrowserTestLatestResults
       parameters:
-      - description: The public ID of the browser test for which to search results
-          for.
+      - description: 'The public ID of the browser test for which to search results
+
+          for.'
         in: path
         name: public_id
         required: true
@@ -15660,8 +15695,9 @@ paths:
       description: Get a specific full result from a given (browser) Synthetic test.
       operationId: GetBrowserTestResult
       parameters:
-      - description: The public ID of the browser test to which the target result
-          belongs.
+      - description: 'The public ID of the browser test to which the target result
+
+          belongs.'
         in: path
         name: public_id
         required: true
