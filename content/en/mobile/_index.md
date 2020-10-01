@@ -84,7 +84,7 @@ For Handoff to work, each device must:
 * Be signed in to iCloud with the same Apple ID
 * Have Bluetooth enabled
 * Have Wi-Fi enabled
-* have Handoff turned on.
+* Have Handoff enabled
 
 For more information on Handoff, refer to the [Apple Handoff Documentation][12]
 
