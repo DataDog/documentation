@@ -130,14 +130,14 @@
               "relationships": {
                 "org": {
                   "data": {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
-                      "id": "string",
+                      "id": "00000000-0000-0000-0000-000000000000",
                       "type": "orgs"
                     }
                   ]
@@ -215,14 +215,14 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string",
+                  "id": "00000000-0000-0000-0000-000000000000",
                   "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 ]
@@ -271,7 +271,7 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "email": null
+            "email": "joe.doe@example.com"
           },
           "type": "users"
         }
@@ -279,7 +279,7 @@
       "json": {
         "data": {
           "attributes": {
-            "email": "string",
+            "email": "joe.doe@example.com",
             "name": "string",
             "title": "string"
           },
@@ -344,14 +344,14 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string",
+                  "id": "00000000-0000-0000-0000-000000000000",
                   "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 ]
@@ -422,14 +422,14 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string",
+                  "id": "00000000-0000-0000-0000-000000000000",
                   "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 ]
@@ -494,7 +494,7 @@
       "json_curl": {
         "data": {
           "attributes": {},
-          "id": null,
+          "id": "00000000-0000-0000-0000-000000000000",
           "type": "users"
         }
       },
@@ -505,7 +505,7 @@
             "email": "string",
             "name": "string"
           },
-          "id": "string",
+          "id": "00000000-0000-0000-0000-000000000000",
           "type": "users"
         }
       },
@@ -532,14 +532,14 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string",
+                  "id": "00000000-0000-0000-0000-000000000000",
                   "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 ]
