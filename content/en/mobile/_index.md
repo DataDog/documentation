@@ -81,7 +81,7 @@ For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri
 **iOS Only**: Use Apple Handoff to continue your task across Apple devices. While in use, the icon of the Datadog mobile app appears on your Mac at the left end of the Dock. Click on the icon to open your current dashboard or monitor on your Mac.
 
 For Handoff to work, each device must 
-* be signed in to iCloud with the same Apple ID.
+* Be signed in to iCloud with the same Apple ID
 * have Bluetooth turned on.
 * have Wi-Fi turned on.
 * have Handoff turned on.
