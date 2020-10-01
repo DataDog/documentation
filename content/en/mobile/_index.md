@@ -34,7 +34,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 
 ## Monitors
 
-{{< img src="mobile/monitors_doc2.png" alt="monitor page">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page" >}}
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
@@ -42,7 +42,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 ## Dashboards
 
-{{< img src="mobile/dashboards_doc.png" alt="dashboard page">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
@@ -50,7 +50,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Quick Actions
 
-{{< img src="mobile/quick-actions-final.png" alt="Quick Actions">}}
+{{< img src="mobile/quick-actions-final.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
 Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
@@ -72,7 +72,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 * Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
 * Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
-{{< img src="mobile/shortcuts-final.png" alt="Shortcuts">}}
+{{< img src="mobile/shortcuts-final.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
 For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][11].
 
