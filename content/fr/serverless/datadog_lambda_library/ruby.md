@@ -21,7 +21,7 @@ Suivez les [instructions d'installation](https://docs.datadoghq.com/serverless/i
 
 Une fois la bibliothèque [installée](#installation), vous devriez pouvoir envoyer des métriques custom à partir de votre fonction Lambda.
 
-Consultez les instructions relatives à l'[envoi de métriques custom à partir de fonctions Lambda AWS](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=ruby#metriques-custom).
+Consultez les instructions relatives à l'[envoi de métriques custom à partir de fonctions AWS Lambda](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=ruby#metriques-custom).
 
 ## Tracing
 

@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -58,7 +59,7 @@ System.Diagnostics の詳細については、[MSDN のドキュメント][3]を
 
 メトリクスが WMI に表示されない場合は、`winmgmt /resyncperf` を実行して、WMI に強制的にパフォーマンスライブラリを登録してみてください。
 
-## 構成
+## コンフィギュレーション
 
 1. WMI インテグレーションタイルの **Install Integration** ボタンをクリックします。
 2. Windows サーバーで Datadog Agent Manager を開きます。

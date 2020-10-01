@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -49,7 +50,7 @@ Lighttpd チェックは [Datadog Agent][2] パッケージに含まれていま
 
 加えて、Lighttpd サーバーに `mod_status` をインストールします。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

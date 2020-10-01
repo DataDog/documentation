@@ -6,6 +6,7 @@ assets:
     Gitlab Overview: assets/dashboards/overview.json
   logs:
     source: gitlab
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -54,7 +55,7 @@ Gitlab および Prometheus とのインテグレーションの詳細につい�
 
 Gitlab チェックは [Datadog Agent][2] パッケージに含まれています。Gitlab サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -211,6 +212,37 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
 {{< get-metrics-from-git "gitlab_runner" >}}
 
 
+### ログの収集
+
+
+1. `gitlab_runner` [コンフィギュレーションファイル][9]で、ログフォーマットを `json` に変更します (_Gitlab Runner のバージョン 11.4.0 以降で利用可能_) :
+   ```toml
+   log_format = "json"
+   ```
+
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+3. 以下を実行して、`systemd-journal` グループに `dd-agent` ユーザーを追加します。
+   ```text
+   usermod -a -G systemd-journal dd-agent
+   ```
+
+4. CouchDB のログの収集を開始するには、次の構成ブロックを `gitlab_runner.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: jounrald
+       source: gitlab-runner
+   ```
+
+    使用可能なすべての構成オプションの詳細については、[サンプル gitlab_runner.d/conf.yaml][7] を参照してください。
+
+5. [Agent を再起動します][8]。
+
 ### イベント
 
 Gitlab Runner チェックには、イベントは含まれません。
@@ -233,3 +265,4 @@ Gitlab Runner チェックは、Runner が Gitlab マスターと通信できる
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/datadog_checks/gitlab_runner/data/conf.yaml.example
+[9]: https://docs.gitlab.com/runner/configuration/advanced-configuration.html

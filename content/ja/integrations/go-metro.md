@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -62,7 +63,7 @@ sudo yum install compat-libcap1
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### 構成
+### コンフィギュレーション
 
 Agent の `conf.d` ディレクトリにある `go-metro.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル go-metro.yaml][3] を参照してください。以下のサンプルファイルは、app.datadoghq.com と 192.168.0.22 の TCP RTT 回数を表示します。
 
