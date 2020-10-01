@@ -56,7 +56,7 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 ## Home Screen Search
 
-{{< img src="mobile/home-screen-search-2.png" alt="Home Screen Search" style="width:40%;">}}
+{{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
 
@@ -68,11 +68,11 @@ With the shortcut, you can access your dashboards and monitors through three key
 
 * Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
 * Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
-* Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widget.
+* Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
 {{< img src="mobile/shortcuts-final.png" alt="Shortcuts">}}
 
-For more information on Siri Shortcuts and Suggestion, refer to the [Apple Documentation][11].
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Documentation][11].
 
 ## Account
 
