@@ -1277,6 +1277,7 @@ components:
       properties:
         id:
           description: ID of the organization.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
@@ -1289,6 +1290,7 @@ components:
       properties:
         data:
           description: Relationships to organization objects.
+          example: []
           items:
             $ref: '#/components/schemas/RelationshipToOrganizationData'
           type: array
@@ -1370,6 +1372,7 @@ components:
       properties:
         data:
           description: Relationships to user objects.
+          example: []
           items:
             $ref: '#/components/schemas/RelationshipToUserData'
           type: array
@@ -1604,6 +1607,7 @@ components:
           type: string
         name:
           description: Name of the role.
+          example: developers
           type: string
       required:
       - name
@@ -1691,6 +1695,7 @@ components:
           $ref: '#/components/schemas/RoleUpdateAttributes'
         id:
           description: ID of the role.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/RolesType'
@@ -1977,8 +1982,9 @@ components:
             type: string
           type: array
         metric:
-          description: The target field to aggregate over when using the sum or max
-            aggregations.
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
           type: string
         name:
           description: Name of the query.
@@ -2018,14 +2024,16 @@ components:
             type: string
           type: array
         metric:
-          description: The target field to aggregate over when using the sum or max
-            aggregations.
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
           type: string
         name:
           description: Name of the query.
           type: string
         query:
           description: Query to run on logs.
+          example: a < 3
           type: string
       required:
       - query
@@ -2131,8 +2139,9 @@ components:
       description: Object description of a security signal.
       properties:
         attributes:
-          description: The JSON object containing all signal attributes and their
-            associated values.
+          description: 'The object containing all signal attributes and their
+
+            associated values.'
           properties:
             attributes:
               additionalProperties: {}
@@ -2410,6 +2419,9 @@ components:
       properties:
         data:
           description: An array of services.
+          example:
+          - id: 00000000-0000-0000-0000-000000000000
+            type: services
           items:
             $ref: '#/components/schemas/ServiceResponseData'
           type: array
@@ -2586,6 +2598,11 @@ components:
       properties:
         data:
           description: An array of teams.
+          example:
+          - attributes:
+              name: team name
+            id: 00000000-0000-0000-0000-000000000000
+            type: teams
           items:
             $ref: '#/components/schemas/TeamResponseData'
           type: array
@@ -2673,6 +2690,7 @@ components:
       properties:
         email:
           description: The email of the user.
+          example: joe.doe@example.com
           type: string
         name:
           description: The name of the user.
@@ -2763,6 +2781,7 @@ components:
       properties:
         data:
           description: List of user invitations.
+          example: []
           items:
             $ref: '#/components/schemas/UserInvitationData'
           type: array
@@ -2843,6 +2862,7 @@ components:
           $ref: '#/components/schemas/UserUpdateAttributes'
         id:
           description: ID of the user.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
@@ -4894,15 +4914,21 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users:
     get:
-      description: Get the list of all users in the organization. This list includes
-        all users even if they are disabled or unverified.
+      description: 'Get the list of all users in the organization. This list includes
+
+        all users even if they are deactivated or unverified.'
       operationId: ListUsers
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
       - description: 'User attribute to order results by. Sort order is ascending
-          by default. Sort order is descending if the field is prefixed by a negative
-          sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.'
+          by default.
+
+          Sort order is descending if the field
+
+          is prefixed by a negative sign, for example `sort=-name`. Options: `name`,
+
+          `modified_at`, `user_count`.'
         in: query
         name: sort
         required: false
@@ -4987,8 +5013,9 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}:
     delete:
-      description: Disable a user. Can only be used with an application key belonging
-        to an administrator user.
+      description: 'Disable a user. Can only be used with an application key belonging
+
+        to an administrator user.'
       operationId: DisableUser
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -5040,8 +5067,9 @@ paths:
       - Users
       x-codegen-request-body-name: body
     patch:
-      description: Edit a user. Can only be used with an application key belonging
-        to an administrator user.
+      description: 'Edit a user. Can only be used with an application key belonging
+
+        to an administrator user.'
       operationId: UpdateUser
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -5087,8 +5115,10 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}/orgs:
     get:
-      description: Get a user organization. Returns the user information and all organizations
-        joined by this user.
+      description: 'Get a user organization. Returns the user information and all
+        organizations
+
+        joined by this user.'
       operationId: ListUserOrganizations
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -5117,8 +5147,8 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}/permissions:
     get:
-      description: "Get a user permission set. Returns a list of the user\u2019s permissions\
-        \ granted by the associated user's roles."
+      description: "Get a user permission set. Returns a list of the user\u2019s permissions\n\
+        granted by the associated user's roles."
       operationId: ListUserPermissions
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -5275,7 +5305,9 @@ tags:
   name: Roles
 - description: '[See API version 1](/api/v1/screenboards/).'
   name: Screenboards
-- description: Detection rules for generating signals and listing of generated signals
+- description: 'Detection rules for generating signals and listing of generated
+
+    signals.'
   name: Security Monitoring
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
