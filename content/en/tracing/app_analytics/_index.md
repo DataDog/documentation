@@ -483,7 +483,5 @@ Changes to the filtering rates are queued, by service & environment, allowing to
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /tracing/visualization/#trace
 [7]: /account_management/billing/apm_distributed_tracing/
-[8]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
 [9]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
-
 
