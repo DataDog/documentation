@@ -83,7 +83,7 @@ For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri
 For Handoff to work, each device must:
 * Be signed in to iCloud with the same Apple ID
 * Have Bluetooth enabled
-* have Wi-Fi turned on.
+* Have Wi-Fi enabled
 * have Handoff turned on.
 
 For more information on Handoff, refer to the [Apple Handoff Documentation][12]
