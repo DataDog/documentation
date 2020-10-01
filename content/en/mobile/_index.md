@@ -42,7 +42,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 ## Dashboards
 
-{{< img src="mobile/dashboards_doc.png" alt="dashboard page">}}
+{{< img src="mobile/dashboards_doc.png" alt="dashboard page" style="border:0px;">}}
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
@@ -56,7 +56,7 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 ## Home Screen Search
 
-{{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
+{{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}} 
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
 
