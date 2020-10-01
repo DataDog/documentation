@@ -62,7 +62,7 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 ## Shortcuts and Siri Suggestions
 
-**Android**: You can create shortcut icons for your dashboards. To create the shortcut, touch and hold the Datadog app icon, then lift your finger. If the app has shorcuts, it will surface a list. Touch and hold the desired shortcut, and drag and drop it to another location of your screen to create a unique shortcut icon.
+**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
 **iOS**: You can create Siri Shortcuts for Datadog dashboards and monitors. To do so, create a shortcut through the Shortcuts App. For a shortcut to be available to create, you must first execute the desired action at least once in the app. For example, to create an “Open AWS Overview Dashboard” shortcut, you must first open the AWS Overview Dashboard in your mobile app at least once.
 
