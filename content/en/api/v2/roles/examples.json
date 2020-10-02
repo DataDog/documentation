@@ -102,7 +102,7 @@
             "attributes": {
               "created_at": "2019-09-19T10:00:00.000Z",
               "modified_at": "2019-09-19T10:00:00.000Z",
-              "name": "string"
+              "name": "developers"
             },
             "id": "string",
             "relationships": {
@@ -141,7 +141,7 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "name": null
+            "name": "developers"
           },
           "relationships": {
             "users": {
@@ -158,7 +158,7 @@
       "json": {
         "data": {
           "attributes": {
-            "name": "string"
+            "name": "developers"
           },
           "relationships": {
             "permissions": {
@@ -322,7 +322,7 @@
       "json_curl": {
         "data": {
           "attributes": {},
-          "id": null,
+          "id": "00000000-0000-0000-0000-000000000000",
           "type": "roles"
         }
       },
@@ -331,7 +331,7 @@
           "attributes": {
             "name": "string"
           },
-          "id": "string",
+          "id": "00000000-0000-0000-0000-000000000000",
           "type": "roles"
         }
       },
@@ -520,14 +520,14 @@
               "relationships": {
                 "org": {
                   "data": {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
-                      "id": "string",
+                      "id": "00000000-0000-0000-0000-000000000000",
                       "type": "orgs"
                     }
                   ]
@@ -624,14 +624,14 @@
               "relationships": {
                 "org": {
                   "data": {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
-                      "id": "string",
+                      "id": "00000000-0000-0000-0000-000000000000",
                       "type": "orgs"
                     }
                   ]
@@ -710,14 +710,14 @@
               "relationships": {
                 "org": {
                   "data": {
-                    "id": "string",
+                    "id": "00000000-0000-0000-0000-000000000000",
                     "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
-                      "id": "string",
+                      "id": "00000000-0000-0000-0000-000000000000",
                       "type": "orgs"
                     }
                   ]
