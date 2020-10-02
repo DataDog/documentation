@@ -50,7 +50,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Quick Actions
 
-{{< img src="mobile/quick-actions-final.png" alt="Quick Actions">}}
+{{< img src="mobile/shortcut_shadow.png" alt="Quick Actions">}}
 
 Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
 
@@ -72,7 +72,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 - Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
 - Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
-{{< img src="mobile/shortcuts-final.png" alt="Shortcuts">}}
+{{< img src="mobile/siri_shadow.png" alt="Shortcuts">}}
 
 For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][11].
 
