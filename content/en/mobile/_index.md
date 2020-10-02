@@ -68,9 +68,9 @@ Long-press on the app icon to surface a quick-action sheet of your top five [Fre
 
 With the shortcut, you can access your dashboards and monitors through three key actions:
 
-* Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
-* Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
-* Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
+- Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
+- Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
+- Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
 {{< img src="mobile/shortcuts-final.png" alt="Shortcuts">}}
 
@@ -81,10 +81,11 @@ For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri
 **iOS Only**: Use Apple Handoff to continue your task across Apple devices. While in use, the icon of the Datadog mobile app appears on your Mac at the left end of the Dock. Click on the icon to open your current dashboard or monitor on your Mac.
 
 For Handoff to work, each device must:
-* Be signed in to iCloud with the same Apple ID
-* Have Bluetooth enabled
-* Have Wi-Fi enabled
-* Have Handoff enabled
+
+- Be signed in to iCloud with the same Apple ID
+- Have Bluetooth enabled
+- Have Wi-Fi enabled
+- Have Handoff enabled
 
 For more information on Handoff, refer to the [Apple Handoff Documentation][12].
 
