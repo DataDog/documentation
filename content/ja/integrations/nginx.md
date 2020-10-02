@@ -34,7 +34,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nginx.
-metric_to_check: nginx.net.connections
+metric_to_check:
+  - nginx.net.connections
+  - nginx.connections.active
 name: nginx
 process_signatures:
   - 'nginx: マスタープロセス'

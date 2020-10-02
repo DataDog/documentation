@@ -2,9 +2,6 @@
 title: RUM パフォーマンス概要ダッシュボード
 kind: documentation
 further_reading:
-  - link: /real_user_monitoring/installation/advanced_configuration
-    tag: ドキュメント
-    text: RUM データ収集の高度なコンフィギュレーション
   - link: /real_user_monitoring/explorer
     tag: ドキュメント
     text: Datadog でビューを検索する

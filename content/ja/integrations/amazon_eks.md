@@ -30,6 +30,7 @@ support: コア
 supported_os:
   - linux
   - mac_os
+  - windows
 ---
 ![EKS ダッシュボード][1]
 

@@ -4,8 +4,6 @@ dependencies:
 kind: ドキュメント
 title: Chef
 ---
-
-
 Datadog Chef レシピは Datadog のコンポーネントとコンフィギュレーションを自動的にデプロイするために使用します。クックブックは次のバージョンに対応しています。
 
 * Datadog Agent v7.x (デフォルト)

@@ -39,7 +39,7 @@ L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et
 {{< tabs >}}
 {{% tab "Tags de span" %}}
 
-Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la trace de pile est fournie :
+Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la stack trace est fournie :
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Erreur de trace" style="width:90%;">}}
 
@@ -52,7 +52,7 @@ Certains attributs ont des significations particulières qui se traduisent par u
 | `sql.query`   | Permet l'affichage des requêtes SQL dans un format spécial dans l'interface de Datadog.                                                                                                                     |
 | `error.msg`   | Permet l'affichage des messages d'erreur dans un format spécial.                                                                                                                                        |
 | `error.type`  | Permet l'affichage des types d'erreur dans un format spécial. Exemples de types disponibles : `ValueError` ou `Exception` dans Python, et `ClassNotFoundException` ou `NullPointerException` dans Java. |
-| `error.stack` | Permet un affichage plus clair de la trace de pile d'une exception dans l'interface de Datadog (zones rouges, etc.)                                                                                         |
+| `error.stack` | Permet un affichage plus clair de la stack trace d'une exception dans l'interface de Datadog (zones rouges, etc.)                                                                                         |
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Formatage des erreurs"  >}}
 
