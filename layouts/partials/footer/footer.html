@@ -13,6 +13,8 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
 {{ $datafile := ($.Scratch.Get "data") }}
+
+{{/*}}
 <footer>
     <div class="container">
         <div class="row pt-3 pb-0 pb-lg-6">
@@ -97,6 +99,234 @@
         </div>
     </div>
 </footer>
+*/}}
+
+<footer class="pt-3">
+    <div class="container">
+        <div class="row mb-0 mb-lg-5">
+            <div class="col-12 col-lg-3 footer-side">
+                <a href="#" class="mb-2 mb-lg-4 js-cta-footer {{ if .Params.bottom_footer_trigger }} {{ .Params.bottom_footer_trigger }} {{ else }} sign-up-trigger {{ end }} btn btn-white btn-outline btn-block" data-event-category="Signup" data-event-action="Step 1 Footer Initiated" data-event-label="{{ "{{url path}}" }}">
+                    {{ if .Params.custom_footer_cta }}
+                        {{ .Params.custom_footer_cta }}
+                    {{ else }}
+                        {{ i18n "free_trial" $ }}
+                    {{ end}}
+                </a>
+                <p class="font-weight-semibold text-center text-lg-left mb-0">Download mobile app</p>
+                
+                <div class="d-flex d-lg-none justify-content-center ">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1">
+                        {{ partial "svg" (dict "context" $dot "src" "app-store-badge.svg" )}}
+                    </a>             
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                        {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}  
+                    </a>
+                </div>
+
+                <div class="d-none d-lg-flex justify-content-lg-start">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2">
+                        {{ partial "svg" (dict "context" $dot "src" "apple.svg" )}}
+                    </a>             
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                        {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}  
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6  mt-3 mt-lg-0">
+                <p class="border-bottom border-gray mb-0">{{ i18n "product" $ }}</p>
+
+                {{ $lenFooterProduct := len .Site.Menus.footer_product }}
+                {{ $secondHalfFooterProduct := div $lenFooterProduct 2 }}
+                {{ $firstHalfFooterProduct := sub $lenFooterProduct  $secondHalfFooterProduct }}
+
+                <div class="row">
+                    <div class="col-6 col-lg-4">
+                        <ul class="footer-menu mt-1">
+                            {{ range first $firstHalfFooterProduct .Site.Menus.footer_product }}
+                                <li>
+                                    {{ if eq $.Site.Params.full_translation true }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                    {{ else }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ end }}
+                                </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-4">
+                        <ul class="footer-menu mt-1">
+                            {{ range last $secondHalfFooterProduct .Site.Menus.footer_product }}
+                                <li>
+                                    {{ if eq $.Site.Params.full_translation true }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                    {{ else }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ end }}
+                                </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    <div class="col-12 d-block d-lg-none">
+                        <hr class="mb-0  border-top border-gray">
+                    </div>
+
+                    <div class="d-none d-lg-block col-lg-4 ">
+                        <ul class="footer-menu mt-1">
+                            {{ range .Site.Menus.footer_product_three }}
+                            <li>
+                                {{ if eq $.Site.Params.full_translation true }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                {{ else }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                {{ end }}
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    
+                    <div class="col-6 d-lg-none">
+                        <ul class="footer-menu mt-1">
+                            {{ range first 3 .Site.Menus.footer_product_three }}
+                            <li>
+                                {{ if eq $.Site.Params.full_translation true }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                {{ else }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                {{ end }}
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    <div class="col-6 d-lg-none">
+                        <ul class="footer-menu mt-1">
+                            {{ range last 2 .Site.Menus.footer_product_three }}
+                            <li>
+                                {{ if eq $.Site.Params.full_translation true }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                {{ else }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                {{ end }}
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 mt-3 mt-lg-0">
+                <div class="row">
+                    <div class="col-6 col-lg-8">
+                        <p class="border-bottom border-gray">{{ i18n "about" }}</p>
+                        <ul class="footer-menu mt-1">
+                            {{ range .Site.Menus.footer_about }}
+                            <li>
+                                {{ if eq $.Site.Params.full_translation true }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                {{ else }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                {{ end }}
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-4">
+                        <p class="border-bottom border-gray">{{ i18n "blog" }}</p>
+                        <ul class="footer-menu mt-1">
+                            {{ range .Site.Menus.footer_blog }}
+                            <li>
+                                {{ if eq (substr .URL 0 1) "/" }}
+                                    <!-- to specifig lang page e.g /es/blog -->
+                                    {{ if $.Site.Params.branch }}
+                                        {{ $.Scratch.Set "flink" ( (print "/" $.Site.Params.branch .URL) | absURL) }}
+                                    {{ else }}
+                                        {{ $.Scratch.Set "flink" ( .URL | absURL) }}
+                                    {{ end }}
+                                    {{ partial "footer_link" (dict "footer_link" . "base_url" ($.Scratch.Get "flink") ) }}
+                                {{ else }}
+                                    {{ if eq $.Site.Params.full_translation true }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absLangURL) ) }}
+                                    {{ else }}
+                                        {{ partial "footer_link" (dict "footer_link" . "base_url" ( .URL | absURL) ) }}
+                                    {{ end }}
+                                {{ end }}
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+    <div class="mt-3 mt-lg-0">
+        <div>
+            <div class="my-1 border-top border-gray-darker"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row mb-1 align-items-center">
+                        <div class="col-6 col-lg-1 offset-lg-3 mb-1 mb-lg-0">
+                            <div class="footer-menu d-flex align-items-center">
+                                <!-- languages to be displayed -->
+                                {{ $dot.Scratch.Add "translated_lang" (slice "en" "ja" ) }}
+                                <!--/ languages to be displayed -->
+        
+                                <!-- As we disable ja and build seperately in pipeline this causes issues like empty nav, so bit more manual for now.. -->
+                                {{ if or (eq $dot.Page.Lang "en") (eq $dot.Page.Lang "es") }}
+                                    {{ $baseLink := strings.TrimPrefix "/" (replace $dot.RelPermalink (print "/" $.Site.Language.Lang "/") "") }}
+                                    <a style="font-size: 15px;" class="d-flex align-items-center button is-small is-danger is-rounded text-white" href="{{ (print "/ja/" $baseLink) }}?lang_pref=ja">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span>日本語</span></a>
+        
+                                    
+                                {{ else }}
+                                    {{ range .Translations }}
+                                        {{ if in ($dot.Scratch.Get "translated_lang") .Language.Lang }}
+                                            <a class="button is-small is-danger is-rounded d-flex align-items-center text-white" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span style="transform: translateY(-1px);">{{ .Language.LanguageName }}</span></a>
+                                        {{ end }}
+                                    {{ end }}
+        
+                                    <!-- we have some ja blog posts without english equivalents, to avoid empty language navigator or linking to 404's this links directly to the blog in english -->
+                                    {{ if eq (len .Translations) 0 }}
+                                        <a class="button is-small is-danger is-rounded text-white" href="{{ "blog/" | absURL }}?lang_pref=en">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span style="transform: translateY(-1px);">English</span></a>
+                                    {{ end }}
+                                {{ end }}
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-2 mb-1 mb-lg-0 d-flex justify-content-lg-end">
+                            <ul class="footer-menu d-flex  align-items-center">
+                                {{ range $index, $value := .Site.Menus.footer_social }}
+                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 {{end}}">
+                                    <a class="d-flex align-items-center" href="{{ .URL }}">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
+                                </li>
+                                {{end}}
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-6 order-lg-first d-flex align-items-center" style="transform: translateY(-2px);">
+                            <span class="copyright">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}} &nbsp;</span>
+                            <ul class="footer-menu d-flex align-items-center">
+                                {{ range $index, $v := .Site.Menus.footer_sub }}
+                                    <li class="d-flex align-items-center">
+                                        {{ if eq $.Site.Params.full_translation true }}
+                                            <a href="{{ "" | absLangURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                        {{ else }}
+                                            <a href="{{ "" | absURL }}{{.URL}}">{{$v.Name}}</a>{{ if ne $index ( sub (len $.Site.Menus.footer_sub) 1 ) }}<span style="font-size: 16px; transform: translateY(-1px);">&nbsp;|&nbsp;</span>{{end}}
+                                        {{ end }}
+                                    </li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</footer>
+
+
 
 <!--- global modals --->
 {{ partial "global-modals/global-modals.html" . }}

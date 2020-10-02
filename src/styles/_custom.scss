@@ -72,6 +72,13 @@ $h5-font-size: 16px;
 $h6-font-size: 1rem;
 $headings-font-weight:600;
 
+$container-max-widths: (
+  // sm: 540px,
+  md: 750px,
+  lg: 970px,
+  xl: 1170px
+);
+
 h2{
   font-weight: 200 !important;
 }
@@ -91,7 +98,6 @@ h2{
     }
   }
 }
-
 // this button is generated from theme colors but we want to have slight variant colors
 .btn-outline-secondary {
   border-color: #D6D6D6;
@@ -237,5 +243,25 @@ table {
   table,
   .table {
     background-color: $body-bg;
+  }
+}
+
+.btn-white.btn-outline{
+  color: $white;
+  border: 1px solid $white;
+  background-color: transparent;
+
+  &:hover, &:active, &:focus,
+  &:not(:disabled):not(.disabled):hover,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled):focus {
+    opacity: 1;
+    border: 1px solid $white;
+    background-color: $white;
+    color: $ddpurple;
+
+    a {
+      color: $white;
+    }
   }
 }

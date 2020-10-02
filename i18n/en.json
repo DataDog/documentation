@@ -295,5 +295,15 @@
   },
   "field": {
     "other": "Field"
+  },
+  "product": {
+    "other": "Product"
+  },
+  "blog": {
+    "other": "Blog"
+  },
+  "about": {
+    "other": "About"
   }
+  
 }
