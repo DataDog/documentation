@@ -13,9 +13,19 @@ further_reading:
 ---
 ## Présentation
 
-Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils sont conçus pour explorer vos données et partager des histoires : enquêtes à la suite d'incidents, analyses de fin de projet, runbooks ou encore documentation d'infrastructure.
+Les notebooks combinent des graphiques et du texte au sein d'un format linéaire basé sur des cellules. Ils sont conçus pour explorer vos données et partager des histoires en créant des analyses de fin de projet, des enquêtes, des runbooks, des documents, etc.
 
 {{< img src="notebooks/demo_notebook.png" alt="notebook de démonstration" style="width:100%;">}}
+
+## Collaboration en direct
+
+Les notebooks prennent en charge la collaboration en temps réel. Les indicateurs de présence indiquent à tout moment qui consulte votre notebook ; les indicateurs apparaissent également à côté de toute cellule en cours de modification par un autre utilisateur.
+
+{{< img src="notebooks/live_editing.png" alt="collaboration en direct dans les notebooks"  style="width:100%;">}}
+
+Les modifications apportées à un notebook s'affichent automatiquement, sans qu'une actualisation soit nécessaire.
+
+Tous les membres de votre équipe peuvent ouvrir ou modifier un notebook. Cependant, un notebook peut uniquement être supprimé par le créateur ou un administrateur.
 
 ## Notebook List
 
@@ -23,12 +33,6 @@ La [Notebook List][1] vous permet de consulter et de rechercher les notebooks pr
 
 * **My Notebooks** : les notebooks que vous avez créés.
 * **Other Notebooks** : les notebooks créés par d'autres membres de votre équipe.
-
-### Partage et autorisations
-
-Tous les membres de votre équipe peuvent ouvrir ou modifier un notebook. Cependant, seul le créateur d'un notebook peut le supprimer.
-
-Les modifications apportées au notebook d'un autre utilisateur ne sont pas enregistrées automatiquement. Si vous essayez d'enregistrer des modifications effectuées sur le notebook de quelqu'un d'autre, cela crée une copie, sauf si vous indiquez clairement que vous souhaitez remplacer l'original.
 
 ## Nouveau notebook
 
@@ -42,22 +46,27 @@ Les notebooks prennent en charge les visualisations et les cellules de texte.
 
 #### Visualisation
 
-Les métriques des notebooks sont représentées graphiquement à l'aide de l'éditeur de requête de Datadog. Les notebooks prennent en charge les éléments suivants :
+Les graphiques dans les notebooks prennent en charge toutes les sources de données Datadog : métriques, événements de log, spans analysées, live processes, trafic réseau, événements RUM, métriques de profiling et signaux de sécurité.
+
+{{< img src="notebooks/data_sources.png" alt="collaboration en direct dans les notebooks"  style="width:50%;">}}
+
+Les graphiques sont créés à l'aide de l'éditeur de requête de Datadog. Les notebooks prennent en charge les éléments suivants :
 
 * [Série temporelle][3]
-* [Carte thermique][4]
-* [Distribution][5]
-* [Flux de log][6]
+* [Top List][4]
+* [Carte thermique][5]
+* [Distribution][6]
+* [Flux de logs][7]
 
 #### Texte
 
-Le texte d'un notebook bénéficie du format Markdown, qui permet l'utilisation de titres, de sous-titres, de liens, d'images, de listes et de blocs de code.
+Le texte d'un notebook prend en charge le format [Markdown][8], qui permet l'utilisation de titres, de sous-titres, de liens, d'images, de listes et de blocs de code.
 
 ### Manipulation de cellules
 
-Lorsque vous ouvrez un notebook existant, les cellules sont « fermées ». Pour ouvrir une cellule afin de la modifier, cliquez dessus ou naviguez jusqu'à celle-ci avec les touches fléchées, puis appuyez sur la touche `Entrée`. Pour fermer une cellule, cliquez en dehors de celle-ci ou appuyez sur `CMD + Entrée`. Une seule cellule peut être ouverte à la fois.
+Lorsque vous ouvrez un notebook existant, ses cellules sont « fermées ». Pour ouvrir une cellule afin de la modifier, placez le curseur de la souris dessus et utilisez `CMD + clic`, ou cliquez sur **Edit**. Pour fermer une cellule, cliquez en dehors de celle-ci, appuyez sur `Échap` ou appuyez sur `CMD + Entrée`. Une seule cellule peut être ouverte à la fois.
 
-Pour insérer, dupliquer ou supprimer des cellules, cliquez sur l'icône en forme d'engrenage qui apparaît à gauche du numéro de cellule, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton en forme de clavier dans l'en-tête du notebook.
+Pour insérer des cellules, utilisez le bouton **+** qui apparaît à gauche de la cellule. Pour partager, dupliquer ou supprimer des cellules, utilisez la barre d'action qui s'affiche au-dessus de la cellule lorsque vous passez le curseur de la souris dessus, ou utilisez un raccourci clavier. Accédez à liste de tous les raccourcis clavier en cliquant sur le bouton en forme de clavier dans l'en-tête du notebook.
 
 ### Intervalles de temps
 
@@ -71,35 +80,26 @@ Pour définir un intervalle de temps spécifique, cliquez sur l'icône en forme 
 
 ### Agrandir un notebook
 
-Développez le graphique en cliquant sur l'icône d'agrandissement située à droite de la cellule. Consultez la page [Widgets][7] pour en savoir plus sur le mode plein écran.
+Développez le graphique en cliquant sur l'icône d'agrandissement située à droite de la cellule. Consultez la page [Widgets][9] pour en savoir plus sur le mode plein écran.
 
 ### Options de disposition
 
-Pour afficher les options de disposition suivantes, cliquez sur l'icône en forme de grille à droite de la cellule :
+Pour afficher les options de disposition suivantes, cliquez sur l'icône en forme de grille à droite de la cellule dans l'éditeur :
 
 * **Graph size** : sélectionnez la taille du graphique parmi `XS`, `S`, `M` (par défaut), `L` et `XL`.
 * **Graph legend** : décochez cette case pour masquer la légende. Les légendes sont automatiquement désactivées pour les graphiques `XS` et `S`.
-* **Grouping** : permet d'afficher un graphique par regroupement de sources.
+* **Grouping** : permet d'afficher un graphique par valeur de tag pour voir de petits multiples de votre visualisation.
 
 {{< img src="notebooks/layout_options.png" alt="options de disposition" style="width:50%;">}}
 
 **Remarque** : si vous modifiez l'un de ces paramètres, le changement s'applique uniquement à la cellule sélectionnée.
 
-### Liens vers des cellules précises
+<!--- KEEP- WILL RE-IMPLEMENT
+### Link to individual cells
 
-Copiez l'URL d'une cellule spécifique en cliquant sur l'icône de lien située à droite de la cellule. Vous pouvez créer des liens directs pour les visualisations ainsi que pour les cellules Markdown.
+Pour copier l'URL d'une cellule spécifique, cliquez sur l'icône en forme de chaîne située à droite de la cellule. Un lien direct est disponible pour les cellules de visualisation et Markdown.
 
-Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, le notebook s'ouvre afin de présenter la cellule en haut de la fenêtre d'affichage. Les liens sont absolus, ce qui signifie que l'URL d'une cellule reste inchangée même si elle est déplacée vers un nouvel emplacement dans le notebook.
-
-### Enregistrer, renommer, dupliquer et supprimer des notebooks
-
-Pour enregistrer un notebook, appuyez sur `CMD + S` ou cliquez sur le bouton **Save** dans l'en-tête du notebook. Une fois le premier enregistrement effectué, le notebook continue de s'enregistrer automatiquement à intervalles réguliers. Un notebook peut également être enregistré manuellement à tout moment entre deux enregistrements automatiques. Pour ne pas perdre votre travail, vous recevez une invite de confirmation chaque fois que vous tentez de quitter un notebook avec des modifications non enregistrées.
-
-Pour renommer un notebook, cliquez sur le champ de nom dans l'en-tête du notebook.
-
-Pour dupliquer un notebook spécifique, utilisez l'icône en forme d'engrenage dans le coin supérieur droit.
-
-Pour supprimer un notebook depuis son éditeur ou à partir de la page Notebook List, utilisez l'icône en forme d'engrenage dans le coin supérieur droit. Vous pouvez uniquement supprimer les notebooks que vous avez créés.
+Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, le notebook s'ouvre et affiche la cellule en haut de la fenêtre d'affichage. Les liens sont absolus : l'URL d'une cellule reste inchangée si elle est déplacée vers un nouvel emplacement dans le notebook.--->
 
 ## Pour aller plus loin
 
@@ -108,7 +108,9 @@ Pour supprimer un notebook depuis son éditeur ou à partir de la page Notebook 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook
 [3]: /fr/dashboards/widgets/timeseries/
-[4]: /fr/dashboards/widgets/heat_map/
-[5]: /fr/dashboards/widgets/distribution/
-[6]: /fr/dashboards/widgets/log_stream/
-[7]: /fr/dashboards/widgets/#full-screen
+[4]: /fr/dashboards/widgets/top_list/
+[5]: /fr/dashboards/widgets/heat_map/
+[6]: /fr/dashboards/widgets/distribution/
+[7]: /fr/dashboards/widgets/log_stream/
+[8]: https://daringfireball.net/projects/markdown/
+[9]: /fr/dashboards/widgets/#full-screen

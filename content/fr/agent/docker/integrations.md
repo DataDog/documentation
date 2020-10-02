@@ -352,3 +352,4 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [8]: /fr/integrations/gunicorn/
 [9]: /fr/integrations/apache/#setup
 [10]: /fr/integrations/http_check/#setup
+[11]: /fr/getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment

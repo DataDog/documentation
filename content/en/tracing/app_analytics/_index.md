@@ -364,7 +364,11 @@ class MyClass {
   }
 }
 ```
+**Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
+
+[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 {{% /tab %}}
 {{% tab "Python" %}}
 

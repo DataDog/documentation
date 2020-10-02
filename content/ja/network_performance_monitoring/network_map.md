@@ -46,8 +46,8 @@ further_reading:
     - 文字列のファジーマッチに基づいてタグをフィルタリングするかどうか。
       {{< img src="network_performance_monitoring/network_map/filtering_npm_map_search.mp4" alt="ネットワークマップを検索でフィルタリング" video="true" >}}
 
-    - **未解決のフローを表示するかどうか**。
-    - アクティブなネットワークメトリクスの指定されたパーセンタイル範囲外にある、ネットワークフローを非表示にするかどうか。
+    - **未解決のトラフィックを表示するかどうか**。
+    - アクティブなネットワークメトリクスの指定されたパーセンタイル範囲外にある、ネットワークトラフィックを非表示にするかどうか。
         {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="ネットワークマップのフローのフィルタリング" video="true"  width="50%" >}}
 
 ## 検査

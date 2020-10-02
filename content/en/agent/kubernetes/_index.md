@@ -181,11 +181,66 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://operatorhub.io/operator/datadog-operator
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+## Prerequisites
+
+Using the Datadog Operator requires the following prerequisites:
+
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- [`Helm`][2] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+
+
+## Deploy an Agent with the Operator
+
+To deploy a Datadog Agent with the Operator in the minimum number of steps, use the [`datadog-agent-with-operator`][4] Helm chart.
+Here are the steps:
+
+1. [Download the chart][5]:
+
+   ```shell
+   curl -Lo datadog-agent-with-operator.tar.gz https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+   ```
+
+2. Create a file with the spec of your Agent. The simplest configuration is:
+
+   ```yaml
+   credentials:
+     apiKey: <DATADOG_API_KEY>
+     appKey: <DATADOG_APP_KEY>
+   agent:
+     image:
+       name: "datadog/agent:latest"
+   ```
+
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
+
+3. Deploy the Datadog Agent with the above configuration file:
+   ```shell
+   helm install --set-file agent_spec=/path/to/your/datadog-agent.yaml datadog datadog-agent-with-operator.tar.gz
+   ```
+
+## Cleanup
+
+The following command deletes all the Kubernetes resources created by the above instructions:
+
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog
+```
+
+For further details on setting up Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][7].
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
+[5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+[6]: https://app.datadoghq.com/account/settings#api
+[7]: /agent/guide/operator-advanced
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -210,9 +265,22 @@ Set the `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.creat
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-If you want to collect events from your kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
+If you want to collect events from your Kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
 
 [1]: /agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Set `agent.config.collectEvents` to `true` in your `datadog-agent.yaml` manifest.
+
+For example:
+
+```
+agent:
+  config:
+    collectEvents: true
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -6,6 +6,7 @@ assets:
     Envoy - Overview: assets/dashboards/envoy_overview.json
   logs:
     source: envoy
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -120,7 +121,7 @@ static_resources:
             port_value: 8001
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

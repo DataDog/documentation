@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -68,7 +69,7 @@ sudo yum install rrdtool-devel
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ```
 
-### 構成
+### コンフィギュレーション
 
 #### Datadog ユーザーの作成
 

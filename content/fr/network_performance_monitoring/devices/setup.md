@@ -7,7 +7,7 @@ further_reading:
     text: Utiliser des profils avec le Network Device Monitoring
   - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
     tag: Blog
-    text: Surveiller SNMP avec Datadog
+    text: Surveiller des périphériques SNMP avec Datadog
 ---
 ## Installation
 

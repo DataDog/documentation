@@ -5,6 +5,7 @@ assets:
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -47,7 +48,7 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 Aerospike チェックは Datadog Agent パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

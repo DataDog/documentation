@@ -305,32 +305,32 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
     kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. デプロイを利用して、プライベートロケーションに関連付けられている望ましい状態を記述します。次を作成します。
+2. デプロイを利用して、プライベートロケーションに関連付けられている望ましい状態を記述します。次の `private-location-worker-deployment.yaml `ファイルを作成します。
 
     ```yaml
-    private-location-worker-deployment.yaml file:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: datadog-private-location-worker
-    namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-    selector:
-      matchLabels:
-        app: private-location
-    template:
-      metadata:
-        name: datadog-private-location-worker
-        labels:
+      selector:
+        matchLabels:
           app: private-location
-      spec:
-        containers:
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
+        spec:
+          containers:
           - name: datadog-private-location-worker
             image: datadog/synthetics-private-location-worker
             volumeMounts:
-              - mountPath: /etc/datadog/
-                name: worker-config
-        volumes:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
           - name: worker-config
             configMap:
               name: private-location-worker-config

@@ -2,7 +2,7 @@
 title: Serveur de métriques custom pour l'Agent de cluster
 kind: guide
 further_reading:
-  - link: agent/kubernetes/cluster/
+  - link: /agent/kubernetes/cluster/
     tag: Documentation
     text: Agent de cluster Datadog
 ---
@@ -49,7 +49,7 @@ Pour lancer [l'Agent de cluster Datadog][6], effectuez les étapes suivantes :
 3. Activez le processing de l'Autoscaler de pods horizontaux en configurant la variable `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` sur `true`.
 
 4. Lancez les ressources :
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-service.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml"`
   * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/cluster-agent-hpa-svc.yaml"`
   * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml"`
 
@@ -182,11 +182,11 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 ```
 
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
-[2]: /fr/agent/cluster_agent
+[2]: /fr/agent/cluster_agent/
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /fr/agent/kubernetes/integrations
-[5]: /fr/agent/cluster_agent/setup
-[6]: /fr/agent/kubernetes/cluster
+[4]: /fr/agent/kubernetes/integrations/
+[5]: /fr/agent/cluster_agent/setup/
+[6]: /fr/agent/kubernetes/cluster/
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
 [9]: /fr/agent/kubernetes/#template-source-kubernetes-pod-annotations

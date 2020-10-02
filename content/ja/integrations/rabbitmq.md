@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: rabbitmq
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
