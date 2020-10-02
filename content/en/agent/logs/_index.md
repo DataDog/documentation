@@ -73,7 +73,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-**Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
+**Note**: When tailing files for logs, the Datadog Agent v6/v7 for **Windows** requires the log files have UTF8 encoding.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
