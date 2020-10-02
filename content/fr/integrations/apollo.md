@@ -34,16 +34,16 @@ supported_os:
 ---
 ## Présentation
 
-L'intégration Apollo/Datadog vous permet de transmettre les métriques de performance disponibles dans le Graph Manager à Datadog. Les équipes peuvent également exploiter l'API dédiée aux fonctions avancées pour créer des graphiques et des alertes à partir des métriques GraphQL.
+L'intégration Apollo/Datadog vous permet de transmettre les métriques de performance Studio à votre compte Datadog. Vous pouvez également exploiter l'API dédiée aux fonctions avancées pour créer des graphiques et des alertes concernant les métriques GraphQL.
 
 ![Métriques][1]
 
-Voici les différentes métriques Datadog transmises par Graph Manager :
+Studio transfère les métriques suivantes à Datadog :
 
 - `apollo.engine.operations.count` : le nombre d'opérations GraphQL exécutées. Ce nombre comprend les requêtes, les mutations et les opérations ayant généré une erreur.
-- `apollo.engine.operations.error_count` : le nombre d'opérations GraphQL ayant généré une erreur. Ce nombre comprend les erreurs d'exécution GraphQL et les erreurs HTTP survenues lorsque Graph Manager ne parvient pas à se connecter à votre serveur.
-- `apollo.engine.operations.cache_hit_count` : le nombre de requêtes GraphQL dont le résultat a été traité depuis le cache de requêtes complètes d'Apollo Server.
-- Un histogramme des temps de réponse des opérations GraphQL, mesurés en millisecondes. En raison de la méthode d'agrégation utilisée par Graph Manager (compartimentage logarithmique), la précision de ces valeurs est de l'ordre de +/- 5 % :
+- `apollo.engine.operations.error_count` : le nombre d'opérations GraphQL ayant généré une erreur. Ce nombre comprend les erreurs d'exécution GraphQL et les erreurs HTTP survenues lorsque Studio ne parvient pas à se connecter à votre serveur.
+- `apollo.engine.operations.cache_hit_count` : le nombre de requêtes GraphQL dont le résultat a été traité depuis le cache de requêtes complètes d'Apollo Server.
+- Un histogramme des temps de réponse des opérations GraphQL, mesurés en millisecondes. En raison de la méthode d'agrégation utilisée par Studio (compartimentage logarithmique), la précision de ces valeurs est de l'ordre de +/- 5 % :
 
   - `apollo.engine.operations.latency.min`
   - `apollo.engine.operations.latency.median`
@@ -52,35 +52,37 @@ Voici les différentes métriques Datadog transmises par Graph Manager :
   - `apollo.engine.operations.latency.max`
   - `apollo.engine.operations.latency.avg`
 
-Toutes les métriques transférées à Datadog sont agrégées dans des intervalles de 60 secondes et taguées avec le nom de l'opération GraphQL, au format `operation:<NOM_REQUÊTE>`. Les signatures de requêtes uniques avec le même nom d'opération sont fusionnées, et les requêtes sans nom d'opération sont ignorées.
+Ces métriques sont agrégées selon des intervalles de 60 secondes et taguées avec le nom de l'opération GraphQL, au format `operation:<nom-requête>`. Les signatures de requêtes uniques avec le même nom d'opération sont fusionnées, et les requêtes sans nom d'opération sont ignorées. 
 
-Toutes les métriques sont également taguées avec l'ID de graphique Graph Manager, `service:<ID_GRAPHIQUE>`, et le nom de la variante, `variant:<NOM_VARIANTE>`. Ainsi, plusieurs graphiques Graph Manager peuvent envoyer des données au même compte Datadog. Si vous n'avez pas défini de nom de variante, la valeur « current » est utilisée.
-
-Si vous transmettez des métriques à Graph Manager grâce au proxy Engine, Datadog fusionnera vos statistiques sur plusieurs instances du proxy (les métriques par hôte ne sont pas disponibles). Comme dans l'IU de Graph Manager, chaque opération dans un lot de requêtes est prise en compte individuellement.
+Ces métriques sont également taguées avec l'ID de graphique Studio, `service:<id-graphique>`, et le nom de la variante associée, `variant:<nom-variante>`. Ainsi, plusieurs graphiques Studio peuvent envoyer des données au même compte Datadog. Si vous n'avez pas défini de nom de variante, la valeur `current` est utilisée.
 
 ## Configuration
 
 ### Configuration
 
-Il vous suffit de fournir la clé d'API Datadog à Graph Manager pour configurer l'intégration Apollo/Datadog. Aucune autre étape de configuration n'est requise.
+Il vous suffit de fournir la clé et la région d'API Datadog à Studio pour configurer l'intégration Apollo/Datadog. Aucune autre étape de configuration n'est requise.
 
-1. Accédez à la [page Integrations de Datadog][2] et cliquez sur le carré Apollo. Accédez ensuite à l'onglet **Configuration**, faites défiler l'écran vers le bas, puis choisissez **Install Integration**.
+1. Accédez à la [page Integrations de Datadog][2] et cliquez sur le carré Apollo. Accédez ensuite à l'onglet **Configuration** puis cliquez sur **Install Integration** au bas de la page.
 
 2. Accédez à la [page API de Datadog][3] et créez une clé d'API.
 
-3. Dans [Graph Manager][4], accédez à la page des intégrations pour votre graphique.
+3. Identifiez votre région pour l'API Datadog en regardant la barre d'adresse de votre navigateur :
+- Si le nom de domaine correspond à `app.datadoghq.com`, alors votre région est `US`.
+- Si le nom de domaine correspond à `app.datadoghq.eu`, alors votre région est `EU`.
+
+4. Dans [Studio][4], accédez à la page des intégrations de votre graphique :
 
    ![Page des intégrations][5]
 
-4. Activez l'intégration Datadog. Collez la clé d'API et cliquez sur **Save**. Vous pouvez utiliser la même clé d'API pour tous vos graphiques, car toutes les métriques se voient attribuer un tag spécifiant l'ID du graphique (`service:<ID_GRAPHIQUE>`).
+5. Dans la section Datadog Forwarding, cliquez sur **Configure**. Renseignez votre clé d'API et votre région, puis cliquez sur **Enable**. Étant donné que toutes les métriques transférées reçoivent l'ID de graphique en tant que tag (`service:<id-graphique>`), vous pouvez utiliser la même clé d'API pour tous vos graphiques.
 
    ![Activation des intégrations][6]
 
-5. Accédez à la page Metrics Explorer sur Datadog pour commencer à consulter les métriques transmises. Les métriques apparaissent dans un délai de cinq minutes.
+6. Accédez à la page Metrics Explorer sur Datadog pour commencer à consulter les métriques transmises. Les métriques apparaissent dans un délai de cinq minutes.
 
 ### Utilisation
 
-Consultez la [documentation relative aux intégrations Apollo][7] pour obtenir davantage d'informations sur son utilisation.
+Consultez la [documentation sur les intégrations Apollo][7] pour en savoir plus sur son utilisation.
 
 ## Données collectées
 
@@ -107,10 +109,10 @@ Pour en savoir plus sur la surveillance d'infrastructure et pour découvrir tout
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
 [2]: https://app.datadoghq.com/account/settings
 [3]: https://app.datadoghq.com/account/settings#api
-[4]: https://www.apollographql.com/docs/graph-manager/#viewing-graph-information
+[4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png
-[7]: https://www.apollographql.com/docs/graph-manager/datadog-integration/
+[7]: https://www.apollographql.com/docs/studio/datadog-integration/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help/
 [10]: https://www.datadoghq.com/blog

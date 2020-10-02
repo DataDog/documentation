@@ -4,8 +4,6 @@ dependencies:
 kind: documentation
 title: Puppet
 ---
-
-
 このモジュールは、Datadog Agent をインストールし、Puppet レポートを Datadog に送信します。
 
 ### 要件

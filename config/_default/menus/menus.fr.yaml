@@ -34,7 +34,7 @@ main_left:
     weight: 5
     parent: 'product'
   - identifier: 'profiler'
-    name: 'Continuous Profiler'
+    name: 'Profiler en continu'
     pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 6
@@ -64,8 +64,8 @@ main_left:
     weight: 10
     parent: 'product'
   - identifier: 'serverless'
-    name: 'Environnement sans serveur'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
+    name: 'Informatique sans serveur'
+    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='icône sans serveur'>"
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 11
     parent: 'product'

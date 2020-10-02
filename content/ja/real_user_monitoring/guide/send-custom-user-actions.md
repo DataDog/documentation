@@ -2,9 +2,6 @@
 title: RUM カスタムユーザーアクションの送信
 kind: ガイド
 further_reading:
-  - link: /real_user_monitoring/installation
-    tag: Documentation
-    text: RUM データ収集の開始
   - link: /real_user_monitoring/explorer
     tag: Documentation
     text: RUM データを Explorer で確認
@@ -49,5 +46,5 @@ RUM コンテキスト全体が、[グローバルコンテキスト API][1] に
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[2]: /ja/real_user_monitoring/explorer/?tab=facets
+[1]: /ja/real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[2]: /ja/real_user_monitoring/explorer
