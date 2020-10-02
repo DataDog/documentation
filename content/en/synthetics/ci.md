@@ -249,7 +249,7 @@ curl -G \
       "orgID": 2,
       "result": {
         "runType": 2,
-        "artifactsBucketKey": "156932/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/artifacts__1601639913277.json",
+        "artifactsBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/artifacts__1601639913277.json",
         "browserType": "chrome",
         "eventType": "finished",
         "stepDetails": [
@@ -262,7 +262,7 @@ curl -G \
             "value": "https://example.com",
             "duration": 1002,
             "allowFailure": false,
-            "screenshotBucketKey": "156932/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-0__1601639913294.jpeg",
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-0__1601639913294.jpeg",
             "type": "goToUrlAndMeasureTti",
             "stepId": -1
           },
@@ -286,7 +286,7 @@ curl -G \
             "value": "Example Domain",
             "duration": 204,
             "allowFailure": false,
-            "screenshotBucketKey": "156932/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-1__1601639913410.jpeg",
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-1__1601639913410.jpeg",
             "type": "assertElementContent",
             "stepId": 2275176
           }
