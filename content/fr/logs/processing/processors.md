@@ -13,21 +13,24 @@ further_reading:
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
+## Présentation
+
 {{< img src="logs/processing/processors/processors_overview.png" alt="log d'origine" >}}
 
-Un processeur exécute dans un [pipeline][1] une action de structuration de données sur un log ([remappage d'un attribut](#remapper), [parsing Grok](#parser-grok), etc.).
+Un [processeur][1] s'exécute dans un [pipeline][2] pour effectuer une action de structuration de données sur un log ([remappage d'un attribut][3], [parsing Grok][4], etc.).
 
-Les différents types de processeurs sont expliqués ci-dessous.
+**Remarque** : les logs structurés doivent être envoyés dans un format valide. Si la structure contient des caractères impossibles à parser, il est nécessaire de les supprimer au niveau de l'Agent avec la fonctionnalité [mask_sequences][5].
 
-## Parser grok
+Nous vous conseillons de ne pas utiliser plus de 20 processeurs par pipeline.
 
-Créez des règles grok personnalisées pour parser l'intégralité du message ou [un attribut spécifique de votre événement brut][2]. Pour en savoir plus, consultez la [section sur le parsing][3].
+## Parser Grok
+
+Créez des règles Grok personnalisées pour parser l'intégralité du message ou [un attribut spécifique de votre événement brut][1]. Pour en savoir plus, consultez la [section sur le parsing][3]. Nous vous conseillons de ne pas utiliser plus de 10 règles de parsing par processeur Grok.
 
 {{< tabs >}}
 {{% tab "IU" %}}
 
 Définissez le processeur Grok depuis la [page de configuration des logs Datadog][1] :
-
 
 {{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
 
@@ -54,7 +57,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre            | Type             | Obligatoire | Description                                             |
 |----------------------|------------------|----------|---------------------------------------------------------|
-| `type`               | Chaîne           | oui      | Le type du processeur.                                  |
+| `type`               | Chaîne           | oui      | Le type de processeur.                                  |
 | `name`               | Chaîne           | non       | Le nom du processeur.                                  |
 | `is_enabled`         | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.  |
 | `source`             | Chaîne           | oui      | Le nom de l'attribut de log à parser. Valeur par défaut : `message`. |
@@ -85,9 +88,9 @@ Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-
 </div>
 
 
-**Remarque** :
+**Remarques** :
 
-* **Les événements de log peuvent être envoyés jusqu'à 6 h avant ou 2 h après la réalisation de l'événement.**
+* **Les événements de log peuvent être envoyés jusqu'à 18 h avant ou 2 h après la réalisation de l'événement.**
 * Si vos logs ne comprennent aucun des attributs par défaut et que vous n'avez pas défini votre propre attribut date, Datadog utilise la date de réception des logs comme timestamp.
 * Si plusieurs processeurs de remappage de dates de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
@@ -115,7 +118,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
@@ -140,12 +143,12 @@ Chaque valeur de statut entrant est mappée comme suit :
 * Les chaînes de caractères commençant par **emerg** ou **f** (insensible à la casse) mappent vers **emerg (0)**.
 * Les chaînes de caractères commençant par **a** (insensible à la casse) mappent vers **alert (1)**.
 * Les chaînes de caractères commençant par **c** (insensible à la casse) mappent vers **critical (2)**.
-* Les chaînes de caractères commençant par **err** (insensible à la casse) mappent vers **error (3)**.
+* Les chaînes de caractères commençant par **e** (insensible à la casse) et ne correspondant pas à `emerg` mappent vers **error (3)**.
 * Les chaînes de caractères commençant par **w** (insensible à la casse) mappent vers **warning (4)**.
 * Les chaînes de caractères commençant par **n** (insensible à la casse) mappent vers **notice (5)**.
 * Les chaînes de caractères commençant par **i** (insensible à la casse) mappent vers **info (6)**.
 * Les chaînes de caractères commençant par **d**, **trace** ou **verbose** (insensible à la casse) mappent vers **debug (7)**.
-* Les chaînes de caractères commençant par **o** ou correspondant à **OK** ou **Success** (insensible à la casse) mappent vers **OK**.
+* Les chaînes de caractères commençant par **o** ou **s**, ou correspondant à **OK** ou **Success** (insensible à la casse) mappent vers **OK**
 * Toutes les autres chaînes de caractères mappent vers **info (6)**.
 
 **Remarque** : si plusieurs processeurs de remappage du statut de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
@@ -174,7 +177,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
@@ -213,7 +216,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
@@ -252,7 +255,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources. Valeur par défaut : `msg`            |
@@ -271,9 +274,9 @@ En ce log :
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribut après remappage"  style="width:40%;">}}
 
-Les contraintes relatives aux noms de tag ou d'attribut sont expliquées dans la [documentation sur le tagging][5]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
+Les contraintes relatives aux noms de tag ou d'attribut sont expliquées dans la [documentation sur le tagging][6]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
 
-Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Long` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`) 
+Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Integer` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`) 
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -297,7 +300,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
   "sources": ["<ATTRIBUT_SOURCE>"],
   "target": "<ATTRIBUT_CIBLE>",
   "target_type": "tag",
-  "target_format": "long",
+  "target_format": "integer",
   "preserve_source": false,
   "override_on_conflict": false
 }
@@ -305,14 +308,14 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre              | Type             | Obligatoire | Description                                                                    |
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
-| `type`                 | Chaîne           | oui      | Le type du processeur.                                                         |
+| `type`                 | Chaîne           | oui      | Le type de processeur.                                                         |
 | `name`                 | Chaîne           | non       | Le nom du processeur.                                                         |
 | `is_enabled`           | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                          |
 | `source_type`          | Chaîne           | non       | Définit si les sources sont de type `attribute` ou `tag`. Valeur par défaut : `attribute` |
 | `sources`              | Tableau de chaînes | oui      | Tableau des tags ou attributs sources.                                             |
 | `target`               | Chaîne           | oui      | Le nom final de l'attribut ou du tag pour le remappage des sources.                           |
 | `target_type`          | Chaîne           | non       | Définit si la cible est de type `attribute` ou `tag`. Valeur par défaut : `attribute`    |
-| `target_format`        | Chaîne           | non       | Définit si la valeur de l'attribut doit être convertie en valeur d'un autre type. Valeurs possibles : `auto`, `string`, `long` et `double`. Valeur par défaut : `auto`. Lorsque défini sur `auto`, aucune conversion n'est effectuée.  |
+| `target_format`        | Chaîne           | non       | Définit si la valeur de l'attribut doit être convertie en valeur d'un autre type. Valeurs possibles : `auto`, `string`, `long` et `integer`. Valeur par défaut : `auto`. Lorsque défini sur `auto`, aucune conversion n'est effectuée.  |
 | `preserve_source`      | Booléen          | non       | Indique si l'élément source remappé doit être préservé ou supprimé. Valeur par défaut : `false`               |
 | `override_on_conflict` | Booléen          | non       | Indique si l'élément cible est remplacé ou non si celui-ci est déjà défini. Valeur par défaut : `false`.            |
 
@@ -349,7 +352,7 @@ Définissez le processeur de parsing d'URL depuis la [page de configuration des 
 
 | Paramètre    | Type             | Obligatoire | Description                                                                                                          |
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                                                                               |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                                                                               |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                                                                               |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                |
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `http.url`.                                                                      |
@@ -392,7 +395,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                                                                                                 |
 |--------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                                                                                      |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                                                                                      |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                                                                                      |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                      |
 | `sources`    | Tableau de chaînes | non       | Un tableau des attributs sources. Valeur par défaut : `http.useragent`.                                                                      |
@@ -410,10 +413,10 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 
 **Remarques** :
 
-* La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][6]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
+* La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][7]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
 * Une fois que l'une des requêtes du processeur a renvoyé un log, celle-ci s'arrête. Assurez-vous de spécifier les requêtes dans l'ordre adéquat si un log correspond à plusieurs requêtes.
 * Les catégories doivent avoir un nom unique.
-* Une fois le processeur de catégories défini, vous pouvez mapper les catégories à des statuts de log à l'aide du [remappeur de statuts de log][7].
+* Une fois le processeur de catégories défini, vous pouvez mapper les catégories à des statuts de log à l'aide du [remappeur de statuts de log][8].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -447,7 +450,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type            | Obligatoire | Description                                                                                                |
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
-| `type`       | Chaîne          | oui      | Le type du processeur.                                                                                     |
+| `type`       | Chaîne          | oui      | Le type de processeur.                                                                                     |
 | `name`       | Chaîne          | non       | Le nom du processeur.                                                                                     |
 | `is_enabled` | Booléen         | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                      |
 | `categories` | Tableau d'objets | oui      | Un tableau de filtres pour inclure ou exclure un log et son attribut `name` correspondant pour attribuer une valeur personnalisée au log. |
@@ -472,7 +475,7 @@ Un attribut est considéré comme manquant s'il est introuvable dans les attribu
 * L'opérateur `-` doit être séparé par une espace dans la formule, car il peut également être présent dans les noms d'attributs.
 * Si l'attribut cible existe déjà, il est remplacé par le résultat de la formule.
 * Les résultats sont arrondis à la 9e décimale. Par exemple, si le résultat de la formule est `0.1234567891`, la valeur stockée pour l'attribut est alors `0.123456789`.
-* Si vous devez mettre à l'échelle une unité de mesure, consultez la section [Filtre][8].
+* Si vous souhaitez modifier l'échelle d'une unité de mesure, consultez la section [Filtre][9].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -500,7 +503,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre            | Type    | Obligatoire | Description                                                                                                                                  |
 |----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | Chaîne  | oui      | Le type du processeur.                                                                                                                       |
+| `type`               | Chaîne  | oui      | Le type de processeur.                                                                                                                       |
 | `name`               | Chaîne  | non       | Le nom du processeur.                                                                                                                       |
 | `is_enabled`         | Booléen | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                                       |
 | `expression`         | Chaîne  | oui      | Une opération arithmétique entre un ou plusieurs attributs de log.                                                                                     |
@@ -554,7 +557,7 @@ Avec le log suivant :
 Vous pouvez utiliser le modèle `Request %{http.method} %{http.url} a obtenu la réponse %{http.status_code}`, qui renvoie le résultat suivant :
 
 ```text
-Request GET https://app.datadoghq.com/users a obtenu la réponse 200
+Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
 **Objets** :
@@ -595,7 +598,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre            | Type    | Obligatoire | Description                                                                                                                                       |
 |----------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | Chaîne  | Oui      | Le type du processeur.                                                                                                                            |
+| `type`               | Chaîne  | Oui      | Le type de processeur.                                                                                                                            |
 | `name`               | Chaîne  | Non       | Le nom du processeur.                                                                                                                            |
 | `is_enabled`         | Booléen | Non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                                          |
 | `template`           | Chaîne  | Oui      | Une formule avec un ou plusieurs attributs et du texte brut.                                                                                               |
@@ -641,7 +644,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                                                                                               |
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                                                                                    |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                                                                                    |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                                                                                    |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                     |
 | `sources`    | Tableau de chaînes | non       | Un tableau des attributs sources. Valeur par défaut : `network.client.ip`.                                                                  |
@@ -653,8 +656,8 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 ## Processeur de correspondances
 
-Utilisez le Lookup Processor (processeur de correspondances) pour mapper un attribut de log à une valeur lisible enregistrée dans la table de mappage des processeurs.
-Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus facilement lisible. 
+Utilisez le Lookup Processor (processeur de correspondances) pour mapper un attribut de log à une valeur lisible enregistrée dans une [table d'enrichissement (bêta][10] ou dans la table de mappage des processeurs.
+Il peut par exemple être utilisé pour mapper un ID de service interne à un nom de service plus lisible. 
 Vous pouvez également vous en servir pour vérifier si l'adresse MAC qui vient d'essayer de se connecter à votre environnement de production fait partie d'une liste de machines volées.
 
 {{< tabs >}}
@@ -669,9 +672,9 @@ Le processeur effectue les actions suivantes :
   * S'il est présent, le processeur crée l'attribut source avec la valeur correspondante dans la table.
   * S'il ne parvient pas à trouver la valeur dans la table de mappage, il crée un attribut cible avec la valeur par défaut (facultatif).
 
-Vous pouvez renseigner la table de mappage en ajoutant manuellement une liste de paires `source_key,target_value` ou en important un fichier CSV.
+Vous pouvez renseigner la table de mappage en sélectionnant une table d'enrichissement, en ajoutant manuellement une liste de paires `source_key,target_value` ou en important un fichier CSV.
 
-La limite de poids pour la table de mappage est de 100 Ko. Cette limite s'applique à l'ensemble des processeurs de correspondances sur la plateforme.
+La limite de poids pour la table de mappage est de 100 Ko. Cette limite s'applique à l'ensemble des processeurs de correspondances sur la plateforme. Toutefois, les tables d'enrichissement prennent en charge les fichiers plus volumineux.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -692,7 +695,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre        | Type             | Obligatoire | Description                                                                                                                                                              |
 |------------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`           | Chaîne           | oui      | Le type du processeur.                                                                                                                                                   |
+| `type`           | Chaîne           | oui      | Le type de processeur.                                                                                                                                                   |
 | `name`           | Chaîne           | non       | Le nom du processeur.                                                                                                                                                   |
 | `is_enabled`     | Booléen          | oui      | Indique si le processeur est activé ou non. Valeur par défaut : `false`                                                                                                                     |
 | `source`         | Chaîne           | oui      | L'attribut source utilisé pour la mise en correspondance.                                                                                                                             |
@@ -708,7 +711,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Il existe deux façons d'améliorer la corrélation entre les traces et les logs d'application :
 
-1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][9] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
+1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][11] et sur l'utilisation des intégrations de log par défaut pour terminer la configuration.
 
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
@@ -736,7 +739,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 | Paramètre    | Type             | Obligatoire | Description                                            |
 |--------------|------------------|----------|--------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                 |
+| `type`       | Chaîne           | oui      | Le type de processeur.                                 |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                 |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `dd.trace_id`.    |
@@ -749,12 +752,14 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/processing/pipelines/
-[2]: /fr/logs/processing/parsing/#advanced-settings
+[1]: /fr/logs/processing/parsing/#advanced-settings
+[2]: /fr/logs/processing/pipelines/
 [3]: /fr/logs/processing/parsing/
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /fr/logs/guide/log-parsing-best-practice/
-[6]: /fr/logs/search_syntax/
-[7]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
-[8]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[9]: /fr/tracing/connect_logs_and_traces/
+[5]: https://docs.datadoghq.com/fr/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
+[6]: /fr/logs/guide/log-parsing-best-practice/
+[7]: /fr/logs/search_syntax/
+[8]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
+[9]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
+[10]: /fr/logs/guide/enrichment-tables/
+[11]: /fr/tracing/connect_logs_and_traces/

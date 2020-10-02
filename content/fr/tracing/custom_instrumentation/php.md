@@ -223,7 +223,7 @@ function doRiskyThing() {
     'doRiskyThing',
     function() {
         // La span est signalée comme étant erronée et comporte
-        // la trace de pile et les message de l'exception sous forme de tags
+        // la stack trace et le message de l'exception sous forme de tags
     }
 );
 ```

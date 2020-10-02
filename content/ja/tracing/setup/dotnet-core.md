@@ -253,7 +253,6 @@ systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
 [1]: https://docs.docker.com/engine/reference/builder/#env
 [2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
-[3]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{% /tab %}}
 
 {{< /tabs >}}

@@ -5,7 +5,7 @@ cloud: aws
 disable_edit: true
 kind: documentation
 rule_category:
-  - Configuration de cloud
+  - Configuration du cloud
 scope: redshift
 security: compliance
 source: redshift
