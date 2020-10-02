@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Logs might contain sensitive information that could either get [scrubbed][1]) or be accessible only to authorized users of your organization.
+Logs might contain sensitive information that could either get [scrubbed][1] or be accessible only to authorized users of your organization.
 
 To limit access of a subset of logs for a given user or group of users, you can define restriction queries in Datadog.
 
