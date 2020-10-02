@@ -3477,40 +3477,40 @@ api_v2:
       generated: true
 footer_product:
     - name: 'Features'
-      url: 'product/'
+      url: 'https://www.datadoghq.com/product/'
       weight: 100
     - name: 'Integrations'
-      url: 'product/platform/integrations/'
+      url: 'https://www.datadoghq.com/product/platform/integrations/'
       weight: 105
     - name: 'Dashboards'
-      url: 'product/platform/dashboards/'
+      url: 'https://www.datadoghq.com/product/platform/dashboards/'
       weight: 110
     - name: 'Log Management'
-      url: 'product/log-management/'
+      url: 'https://www.datadoghq.com/product/log-management/'
       weight: 115
     - name: 'APM'
-      url: 'product/apm/'
+      url: 'https://www.datadoghq.com/product/apm/'
       weight: 120
     - name: 'Continuous Profiler'
-      url: 'product/code-profiling/'
+      url: 'https://www.datadoghq.com/product/code-profiling/'
       weight: 121
     - name: 'Security Monitoring'
-      url: 'product/security-monitoring/'
+      url: 'https://www.datadoghq.com/product/security-monitoring/'
       weight: 123
     - name: 'Network Monitoring'
-      url: 'product/network-monitoring/'
+      url: 'https://www.datadoghq.com/product/network-monitoring/'
       weight: 125
     - name: 'Synthetic Monitoring'
-      url: 'product/synthetic-monitoring/'
+      url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
       weight: 130
     - name: 'Real User Monitoring'
-      url: 'product/real-user-monitoring/'
+      url: 'https://www.datadoghq.com/product/real-user-monitoring/'
       weight: 135
     - name: 'Serverless'
-      url: 'product/serverless-monitoring/'
+      url: 'https://www.datadoghq.com/product/serverless-monitoring/'
       weight: 140
     - name: 'Alerts'
-      url: 'product/platform/alerts/'
+      url: 'https://www.datadoghq.com/product/platform/alerts/'
       weight: 145
     - name: 'API'
       url: 'https://docs.datadoghq.com/api/'
@@ -3518,13 +3518,13 @@ footer_product:
 
 footer_product_two:
     - name: 'Real User Monitoring'
-      url: 'product/real-user-monitoring/'
+      url: 'https://www.datadoghq.com/product/real-user-monitoring/'
       weight: 135
     - name: 'Serverless'
-      url: 'product/serverless-monitoring/'
+      url: 'https://www.datadoghq.com/product/serverless-monitoring/'
       weight: 140
     - name: 'Alerts'
-      url: 'product/platform/alerts/'
+      url: 'https://www.datadoghq.com/product/platform/alerts/'
       weight: 145
     - name: 'API'
       url: 'https://docs.datadoghq.com/api/'
@@ -3532,60 +3532,59 @@ footer_product_two:
 
 footer_product_three:
     - name: 'Pricing'
-      url: 'pricing/'
+      url: 'https://www.datadoghq.com/pricing/'
       weight: 100
     - name: 'Documentation'
       url: 'https://docs.datadoghq.com/'
-      target: '_blank'
       weight: 105
     - name: 'Support'
-      url: 'support/'
+      url: 'https://www.datadoghq.com/support/'
       weight: 110
     - name: 'Resources'
-      url: 'resources/'
+      url: 'https://www.datadoghq.com/resources/'
       weight: 150
     - name: 'Security'
-      url: 'security/'
+      url: 'https://www.datadoghq.com/security/'
       weight: 180
 
 footer_about:
     - name: 'COVID-19 Update'
-      url: 'coronavirus/'
+      url: 'https://www.datadoghq.com/coronavirus/'
       weight: 90
     - name: 'Contact Us'
-      url: 'about/contact/'
+      url: 'https://www.datadoghq.com/about/contact/'
       weight: 100
     - name: 'Partners'
-      url: 'partner-with-datadog/'
+      url: 'https://www.datadoghq.com/partner-with-datadog/'
       weight: 120
     - name: 'Press'
-      url: 'about/press/'
+      url: 'https://www.datadoghq.com/about/press/'
       weight: 130
     - name: 'Leadership'
-      url: 'about/leadership/'
+      url: 'https://www.datadoghq.com/about/leadership/'
       weight: 140
     - name: 'Careers'
-      url: 'careers/'
+      url: 'https://www.datadoghq.com/careers/'
       weight: 160
     - name: 'Legal'
-      url: 'legal/'
+      url: 'https://www.datadoghq.com/legal/'
       weight: 170
     - name: 'Investor Relations'
       url: 'https://investors.datadoghq.com/'
       weight: 175
     - name: 'Analyst Reports'
-      url: 'about/analyst/'
+      url: 'https://www.datadoghq.com/about/analyst/'
       weight: 180
 
 footer_blog:
     - name: 'English'
-      url: 'blog/'
+      url: 'https://www.datadoghq.com/blog/'
       weight: 100
     - name: 'Español'
-      url: '/es/blog/'
+      url: 'https://www.datadoghq.com/es/blog/'
       weight: 110
     - name: '日本語'
-      url: '/ja/blog/'
+      url: 'https://www.datadoghq.com/ja/blog/'
       weight: 120
 
 footer_social:
@@ -3608,11 +3607,11 @@ footer_social:
 
 footer_sub:
     - name: 'Terms'
-      url: 'legal/terms/'
+      url: 'https://www.datadoghq.com/legal/terms/'
       weight: 100
     - name: 'Privacy'
-      url: 'legal/privacy/'
+      url: 'https://www.datadoghq.com/legal/privacy/'
       weight: 120
     - name: 'Cookies'
-      url: 'legal/cookies/'
+      url: 'https://www.datadoghq.com/legal/cookies/'
       weight: 130
