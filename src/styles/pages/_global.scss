@@ -326,6 +326,14 @@ h5{
     }
   }
 
+  ol {
+    li {
+      &:before {
+        content: "" !important;
+      }
+    }
+  }
+
   ul{
     list-style-type: none;
     -webkit-padding-start: 22px;
