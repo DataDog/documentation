@@ -82,6 +82,28 @@ To enable APM trace collection, open the DaemonSet configuration file and edit t
     ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+Update your `datadog-agent.yaml` manifest with:
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  apm:
+    enabled: true
+```
+
+See the sample [manifest with APM and metrics collection enabled][1] for a complete example.
+
+Then apply the new configuration:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-apm.yaml
+{{% /tab %}}
 {{< /tabs >}}
    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
@@ -134,9 +156,20 @@ List of all environment variables available for tracing within the Agent running
 | `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                               |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second. Default is 10 traces per second.                                                                                                                                                                                                                                                        |
 
+### Operator environment variables
+| Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agent.apm.enabled`                                                                                          | Enable this to enable APM and tracing, on port 8126. See the [Datadog Docker documentation][8].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `agent.apm.env`                                                                                              | The Datadog Agent supports many [environment variables][9].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `agent.apm.hostPort`                                                                                         | Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If `HostNetwork` is specified, this must match `ContainerPort`. Most containers do not need this.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `agent.apm.resources.limits`                                                                                 | Limits describes the maximum amount of compute resources allowed. For more info, see the [Kubernetes documentation][10].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `agent.apm.resources.requests`                                                                               | Requests describes the minimum amount of compute resources required. If `requests` is omitted for a container, it defaults to `limits` if that is explicitly specified, otherwise to an implementation-defined value. For more info, see the [Kubernetes documentation][10].     |                                                                                                                                                                                                                                                                                                                               |
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /agent/kubernetes/
 [2]: /agent/cluster_agent/admission_controller/
@@ -145,3 +178,6 @@ List of all environment variables available for tracing within the Agent running
 [5]: /tracing/guide/security/#replace-rules
 [6]: /tracing/app_analytics/#automatic-configuration
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[8]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
+[9]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
+[10]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/

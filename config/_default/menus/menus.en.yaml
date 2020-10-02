@@ -253,6 +253,11 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Operator configuration
+    url: agent/kubernetes/operator_configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_operator_configuration
+    weight: 307
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent

@@ -116,6 +116,28 @@ datadog:
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+Update your `datadog-agent.yaml` manifest with:
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  log:
+    enabled: true
+```
+
+See the sample [manifest with logs and metrics collection enabled][1] for a complete example.
+
+Then apply the new configuration:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
