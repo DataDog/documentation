@@ -22,6 +22,7 @@ Logs might contain sensitive information that could either get [scrubbed][1] or 
 
 To limit access of a subset of logs for a given user or group of users, you can define restriction queries in Datadog.
 
+
 In this guide, assume that there are two teams, **backend** and **frontend**, and each team can only see their own logs that have the `team:frontend` and `team:backend` tags on them.
 
 The following steps are covered for each team:
@@ -32,7 +33,16 @@ The following steps are covered for each team:
 * [Attach roles to the users](#attach-role-to-the-user)
 * [Remove users from the default Datadog roles](#remove-default-roles)
 
+
 ## Prerequisites
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+This configuraiton is not yet available through the UI.
+
+{{% /tab %}}
+{{% tab "API" %}}
 
 Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
 
@@ -40,11 +50,17 @@ Throughout this article, you will need to replace all occurrences of `<DATADOG_A
 
 This guide also assumes that you have a terminal with `CURL`. 
 
-## Role creation
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Attach your Users to Role(s)
 
 Roles can be created through Datadog, as shown in [the RBAC documentation][3].
 
 You can also use the API and the following steps to create a role.
+
+
 
 ### Create a role
 
@@ -106,6 +122,34 @@ curl -X POST \
 
 By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
 Keep note of the Role IDs that you got in the reponse, as they are necessary to for when you want to assign permissions to these roles.
+
+## Attach role to the user
+
+Finally, now that your roles are configured with their permissions and restriction queries, you can give these roles to your users.
+
+### Get the user IDs
+
+The first step is to [get the list of users][11]:
+
+```
+curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
+
+Focus on the `data` object within the response, and extract the user IDs of the users that should belong to the `Backend` and `Frontend` role.
+
+Also, check if they already have roles and their IDs.
+
+### Attach the role to the user
+
+For each user, [assign the created backend and frontend end role][12]:
+
+```
+curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
+```
+
+
+
+
 
 ### List available permissions
 
@@ -259,7 +303,7 @@ You have now created both the role and the query for the frontend and the backen
 
 Next, restrict access to the backend and frontend by [attaching the restriction query to the created role][9] with the role IDs and query IDs.
 
-## Attach queries to the role
+### Attach queries to the role
 
 You have the role ID and query ID from the response of the creation call. Use them when attaching the query to the role.
 Note that the IDs are specific to this example; doing this on your account would give different role and query IDs. Check the [permission documentation][10] for more information about restrictions in Datadog.
@@ -336,43 +380,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 {{% /tab %}}
 {{< /tabs >}}
 
-## Attach role to the user
 
-Finally, now that your roles are configured with their permissions and restriction queries, you can give these roles to your users.
-
-### Get the user IDs
-
-The first step is to [get the list of users][11]:
-
-```
-curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-Focus on the `data` object within the response, and extract the user IDs of the users that should belong to the `Backend` and `Frontend` role.
-
-Also, check if they already have roles and their IDs.
-
-### Attach the role to the user
-
-For each user, [assign the created backend and frontend end role][12]:
-
-```
-curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
-```
-
-### Remove default roles
-
-Users have a default Datadog role (admin, standard, read only). If this is the first time you are creating custom roles and assigning users to them, users might still have their default Datadog role, which would let them access the data.
-
-When you got the list of users, you also got the list of their roles. For the other roles that your user belongs to, double check if this is a standard role or not:
-
-```
-curl -X GET "https://api.datadoghq.com/api/v2/roles/{role_id}" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-If the name of that role is Datadog Standard Role or Datadog Admin Role, [remove it from that user][13] to make sure they only belong to the newly created role and not the default Datadog ones.
-
-Note that a user can belong to multiple roles.
 
 ## Further Reading
 
