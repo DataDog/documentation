@@ -449,19 +449,14 @@ If applications logs are written in UTF-16 format, from Datadog Agent **v6.23/v7
 
 Configuration example:
 
-```
+```yaml
 logs:
  - type: file
-   path:  /tmp/plop/hello-world.log
-   tags: dev:prognant
-   service: test-file-tailing
-   source: multiline
+   path:  /test/log/hello-world.log
+   tags: key:value
+   service: utf-16-logs
+   source: mysql
    encoding: utf-16-be
-   start_position: beginning
-   log_processing_rules:
-      - type: multi_line
-        name: new_log_start_with_date
-        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 **Note**: `encoding` parameter is only applicable when the `type` parameter is set to `file`.
