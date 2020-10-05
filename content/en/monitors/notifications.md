@@ -139,7 +139,7 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 
 #### Log facet variables
 
-In Log monitor, you can group by facets. In that case, that facets can be used as a variable. 
+Log monitors can use facets as variables if the monitor is grouped by the facets.
 For example, if your facet is `@facet` and your monitor is grouped by that, use:
 
 ```text
