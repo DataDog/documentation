@@ -78,6 +78,7 @@ Check by yourself in the [Datadog App][86] that you do have all these permission
 
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
@@ -85,8 +86,6 @@ You're all set! You need these Application and API Keys only when interacting th
 
 {{% /tab %}}
 {{% tab "API" %}}
-
-**Application and API Keys**
 
 Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][1]. More details available in the [API and APP Keys][2] section of our documentation.
 
@@ -319,7 +318,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 		"type": "logs_restriction_queries",
 		"id": "76b2c0e6-98fa-11ea-93e6-775bd9258d59",
 		"attributes": {
-			"restriction_query": "team:backend",
+			"restriction_query": "team:acme",
 			"created_at": "2020-05-18T11:26:48.887750+00:00",
 			"modified_at": "2020-05-18T11:26:48.887750+00:00"
 		}
