@@ -2,7 +2,6 @@
 title: Restrict access to log events with restriction queries
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
-  
 kind: guide
 further_reading:
 - link: "/logs/explorer/"
@@ -21,37 +20,56 @@ further_reading:
 
 ## Overview
 
-Logs might contain sensitive information that could either get [scrubbed][1] or be accessible only to authorized users of your organization.
+Logs might contain sensitive information that could either get [scrubbed][1] or be accessible only to authorized users of your organization. 
 
-To limit access of a subset of logs for a given user or group of users, you can define restriction queries in Datadog.
+This guides aims at sharing good practices on how to setup permissions in such context. We'll assume that you org consist of multiple teams, one of which being the **Sandbox** team whose members have to deal with Sandbox Logs. Members of the Sandbox team **can** also be members of other teams across your organisation.
+
+As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the Sandbox Team:
+
+* **Sandbox Admins**: the users in charge of Sandox log collection, in charge of pipelines and exclusion filters.
+* **Sandbox Users** : the users to access Sandbox logs and create Monitor or Dashboards out of these logs.
+
+But you can adapt for one single Sandbox Role (concentrating permissions from Sandbox Admins and Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
 
 
-In this guide, assume that there are two teams, **backend** and **frontend**, and each team can only see their own logs that have the `team:frontend` and `team:backend` tags on them.
+We'll explore how, as a Datadog Admin, you can approach how to: 
 
-The following steps are covered for each team:
-
-* [Create the role](#role-creation)
-* [Create the restriction query](#create-restriction-queries)
-* [Attach the restriction query to the role](#attach-queries-to-the-role)
-* [Attach roles to the users](#attach-role-to-the-user)
-* [Remove users from the default Datadog roles](#remove-default-roles)
+* **Set up Roles** for the Sandbox team and **assign members**,
+* Configure permissions on **Log Assets** (namely Pipelines, Indexes and Archives),
+* **Limit access to logs** all across Datadog Application with Restriction Queries
 
 
 ## Prerequisites
 
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
-This configuraiton is not yet available through the UI.
+{{% /tab %}}
+{{% tab "API" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+You should belong to an Admin Role.
+https://app.datadoghq.com/account/settings#api
+https://docs.datadoghq.com/account_management/api-app-keys/
+
+{{< img src="static/images/logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+
 
 {{% /tab %}}
 {{% tab "API" %}}
 
 Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
 
-Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
+Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`. 
 
-This guide also assumes that you have a terminal with `CURL`. 
+More details on how to user our APIs: [here][80] for V2 APIs (most of the API used in this guide) and [here][81] for V1 APIs.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -64,67 +82,37 @@ Roles can be created through Datadog, as shown in [the RBAC documentation][3].
 You can also use the API and the following steps to create a role.
 
 
-
 ### Create a role
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+https://docs.datadoghq.com/account_management/users/
+https://app.datadoghq.com/access/roles
+
+{{< img src="static/images/logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+
+{{% /tab %}}
+{{% tab "API" %}}
 
 Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
 
-{{< tabs >}}
-{{% tab "Backend" %}}
-
 API call:
 
 ```
-curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-backend"}}}'
+curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-sandbox"}}}'
 ```
 
 Response:
 
 ```
-{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-backend","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
-```
-
-{{% /tab %}}
-{{% tab "Frontend" %}}
-
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-frontend"}}}'
-```
-
-Response:
-
-```
-{"data":{"type":"roles","id":"63b970ea-99ca-11ea-93e6-e32eb84de6d6","attributes":{"name":"team-frontend","created_at":"2020-05-19T12:15:12.375425+00:00","modified_at":"2020-05-19T12:15:12.375425+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
-```
-
-{{% /tab %}}
-{{% tab "Generic API" %}}
-
-API call:
-
-```
-curl -X POST \
-        "https://app.datadoghq.com/api/v2/roles" \
-        -H "Content-Type: application/json" \
-        -H "DD-API-KEY: <DATADOG_API_KEY>" \
-        -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
-        -d '{
-            "data": {
-                "type": "roles",
-                    "attributes": {
-                        "name": <ROLE_NAME>
-                    }
-            }
-        }'
+{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-sandbox","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
-Keep note of the Role IDs that you got in the reponse, as they are necessary to for when you want to assign permissions to these roles.
 
 ## Attach role to the user
 
@@ -151,7 +139,8 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Conten
 ```
 
 
-
+By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
+Keep note of the Role IDs that you got in the reponse, as they are necessary to for when you want to assign permissions to these roles.
 
 
 ### List available permissions
@@ -402,3 +391,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [11]: /api/v2/users/#list-all-users
 [12]: /api/v2/roles/#add-a-user-to-a-role
 [13]: /api/v2/roles/#remove-a-user-from-a-role
+
+[80]: /api/v2/
+[81]: /api/v1/
+
