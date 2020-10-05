@@ -2888,6 +2888,14 @@ api_v2:
     url: /api/v2/logs-archives/
     identifier: Logs Archives
     generated: true
+  - name: Get archive order
+    parent: Logs Archives
+    url: '#get-archive-order'
+    generated: true
+  - name: Update archive order
+    parent: Logs Archives
+    url: '#update-archive-order'
+    generated: true
   - name: Get all archives
     parent: Logs Archives
     url: '#get-all-archives'
