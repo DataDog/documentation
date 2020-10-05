@@ -234,8 +234,8 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 
 ## Scrubbing and filtering
 
-Scrub emails or ip address from logs sent by the Lambda function or define a custom scrubbing rule [in the Lambda parameters][42].
-It is also possible to exclude logs matching a specific pattern or only send the one matching thanks to the [filtering option][43].
+You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][42].
+You can also exclude or send only those logs that match a specific pattern by using the [filtering option][43].
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
