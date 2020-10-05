@@ -20,22 +20,35 @@ further_reading:
 
 ## Overview
 
-Logs might contain sensitive information that could either get [scrubbed][1] or be accessible only to authorized users of your organization. 
 
-This guides aims at sharing good practices on how to setup permissions in such context. We'll assume that you org consist of multiple teams, one of which being the **Sandbox** team whose members have to deal with Sandbox Logs. Members of the Sandbox team **can** also be members of other teams across your organisation.
+Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. Besides, you probably want to segment your users so that they **don't interfere one with another** as far as configuration and budget control is concerned. 
 
-As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the Sandbox Team:
+This guides aims at sharing good practices on how to setup permissions in such context. 
 
-* **Sandbox Admins**: the users in charge of Sandox log collection, in charge of pipelines and exclusion filters.
-* **Sandbox Users** : the users to access Sandbox logs and create Monitor or Dashboards out of these logs.
 
-But you can adapt for one single Sandbox Role (concentrating permissions from Sandbox Admins and Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
+### The "ACME" Team
+
+Let's assume that your organisation consists of multiple teams, one of which being the **ACME** (Applicative Component Making Errors) team whose members have to deal with ACME Logs for troubleshooting and auditing purpose. As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the ACME Team:
+
+* **ACME Admins**: the users in charge of ACME log collection, in charge of pipelines and exclusion filters.
+* **ACME Users** : the users to access ACME logs and create Monitor or Dashboards out of these logs.
+
+*Note : You can adapt this guide for one single Sandbox Role (concentrating permissions from both ACME Admins and ACME Users) for the sake of simplicity, or more roles for the sake of more granular permissions.*
+
+Although this guide focuses on the ACME Team, whatever you setup for the ACME team is replicable to every other team you have in your organisation. Members of the ACME team **can** also be members of other teams across your organisation: as permissions are additive in Datadog, such multi-team users will benefit from permissions inherited from every single team they belong to.
+
+
+### The "ACME" Playground
+
 
 We'll explore how, as a Datadog Admin, you can approach how to: 
 
 * **Set up Roles** for the Sandbox team and **assign members**,
 * Configure permissions on **Log Assets** (namely Pipelines, Indexes and Archives),
 * **Limit access to logs** all across Datadog Application with Restriction Queries
+
+Eventually, this 
+
 
 
 ## Prerequisites
