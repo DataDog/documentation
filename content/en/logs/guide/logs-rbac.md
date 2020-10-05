@@ -86,11 +86,10 @@ Check by yourself in the [Datadog App][86] that you do have all these permission
 
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
-
 {{< tabs >}}
 {{% tab "UI" %}}
 
-You're all set!
+You're all set! You need these Application and API Keys only when interacting through API.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -103,17 +102,27 @@ Since this guide describes usage of the API, you will need an API key and an app
 
 Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`. 
 
-**Permission IDs**
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: /account_management/api-app-keys/
 
-Use the [Permissions API][3] to get the list of all existing permissions, which will be further required to assign the permissions to roles.
+{{% /tab %}}
+{{< /tabs >}}
+
+### Get Permission IDs
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+You're all set! You need these IDs only when interacting through API.
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Permissions API][1] to get the list of all existing permissions, which will be further required to assign the permissions to roles. For such calls, the answer is an array of permissions such as the one below (the `logs_read_data` permission has the id `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` which is all you need to know about that permission).
 
 ```
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
 
-For such calls, the answer is an array of permissions such as the one below (the `logs_read_data` permission has the id `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` which is all you need to know about that permission).
-
-```
 {
     "type": "permissions",
     "id": "1af86ce4-7823-11ea-93dc-d7cad1b1c6cb",
@@ -131,14 +140,10 @@ For such calls, the answer is an array of permissions such as the one below (the
 
 **Note**: The permission IDs change depending on the Datadog site (Datadog US, Datadog EU...) you are using.
 
-
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: /account_management/api-app-keys/
-[3]: /api/v2/roles/#list-permissions
+[1]: /api/v2/roles/#list-permissions
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Set up Roles
 
@@ -146,9 +151,9 @@ Roles can be created through Datadog, as shown in [the RBAC documentation][3].
 
 The purpose of that series of step is:
 
-* To create the two Roles: `Sandbox Admin` and `Sandbox Users`,
+* To create the two Roles: `ACME Admin` and `ACME Users`, 
+* Grant both roles with minimal log permissions (we'll extend permissions step by step in this guide),
 * To assign users to either Role,
-
 
 
 ### Create a role
@@ -156,30 +161,76 @@ The purpose of that series of step is:
 {{< tabs >}}
 {{% tab "UI" %}}
 
-https://docs.datadoghq.com/account_management/users/
-https://app.datadoghq.com/access/roles
+In the [Team Section][1] of the Datadog App, use the Add Role button within the Role tab to create the new `ACME Admins` and `ACME Users` Roles.  
 
-{{< img src="logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Add a new role"  style="width:60%;">}}
+
+When creating a new Role:
+
+* Create with Standard Access
+* Grant Read Index Data and Livetail permissions - these are [legacy permissions][2] that you can safely (and ought to) enable.
+
+{{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
+
+[1]: https://app.datadoghq.com/access/roles
+[2]: /account_management/rbac/permissions?tab=ui#legacy-permissions
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
+Repeat the following steps for `ACME Admins` and `ACME Users` roles: 
 
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-sandbox"}}}'
-```
-
-Response:
+1. If the Role doesn't already exist, create ot the Role with [Role creation API][1]
 
 ```
-{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-sandbox","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
+curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "ACME Admin"}}}'
+
+{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"ACME Admin","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
-Keep track of that Role ID (`dcf7c550-99cb-11ea-93e6-376cebac897c` in the example) for later, as they are necessary to for when you want to assign permissions to these roles.
+2. **Alternatively** if the Role does already exist, use the [Role List API][2] to get its Role ID.
 
+```
+
+curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0&sort=name&filter=ACME" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"'
+
+[...]
+"type": "roles",
+  "id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
+  "attributes": {
+    "name": "ACME Admin",
+    "created_at": "2020-10-05T16:48:47.146439+00:00",
+    "modified_at": "2020-10-05T16:48:47.146439+00:00",
+    "user_count": 3
+  }
+[...]
+```
+
+3. Check the existing permissions for the Role (it should be only Read Monitors and Read Dashboards for newly created roles). 
+
+```
+curl -X GET "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+
+```
+
+3. Assign the `standard`, `logs_read_index_data` and `logs_live_tail` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding IDs. In the following example, `dcf7c550-99cb-11ea-93e6-376cebac897c` is the Role ID and `5e605652-dd12-11e8-9e53-375565b8970e` is the permission ID. 
+
+```
+curl -X POST "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "5e605652-dd12-11e8-9e53-375565b8970e"}}'
+
+```
+
+4. If needed, revoke all other Log permissions with the [Revoke Permissions API][4].
+
+```
+curl -X DELETE "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "979df720-aed7-11e9-99c6-a7eb8373165a"}}'
+
+```
+
+[1]: /api/v2/roles/#create-role
+[2]: /api/v2/roles/#list-roles
+[3]: /api/v2/roles/#grant-permission-to-a-role
+[4]: /api/v2/roles/#revoke-permission
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -191,6 +242,8 @@ Finally, now that your roles are configured with their permissions and restricti
 
 {{< tabs >}}
 {{% tab "UI" %}}
+
+https://docs.datadoghq.com/account_management/users/
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -467,7 +520,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 
 [3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
-[4]: /api/v2/roles/#create-role
+
 
 [6]: /account_management/rbac/permissions?tab=datadogapplication#general-permissions
 [7]: /account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
