@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: couchdb
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -28,7 +29,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: couch.
-metric_to_check: couchdb.couchdb.request_time
+metric_to_check:
+  - couchdb.couchdb.request_time.n
+  - couchdb.couchdb.request_time
 name: couch
 process_signatures:
   - couchjs
@@ -57,7 +60,7 @@ Datadog で CouchDB データをキャプチャすると、以下のことが可
 
 CouchDB チェックは [Datadog Agent][2] パッケージに含まれています。CouchDB サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

@@ -41,9 +41,9 @@ Find below the list of permissions for the dashboard assets:
 
 | Name                    | Description                             | Scopable |
 | ----------------------- | --------------------------------------- | -------- |
-| dashboards_read         | Ability to view dashboards              | false    |
-| dashboards_write        | Ability to create and change dashboards | false    |
-| dashboards_public_share | Ability to share dashboards externally  | false    |
+| `dashboards_read`         | Ability to view dashboards              | false    |
+| `dashboards_write`        | Ability to create and change dashboards | false    |
+| `dashboards_public_share` | Ability to share dashboards externally  | false    |
 
 ## Monitors
 
@@ -51,9 +51,9 @@ Find below the list of permissions for the monitor assets:
 
 | Name              | Description                                  | Scopable |
 | ----------------- | -------------------------------------------- | -------- |
-| monitors_read     | Ability to view monitors                     | false    |
-| monitors_write    | Ability to change, mute, and delete monitors | false    |
-| monitors_downtime | Ability to set downtimes for your monitors   | false    |
+| `monitors_read`     | Ability to view monitors                     | false    |
+| `monitors_write`    | Ability to change, mute, and delete monitors | false    |
+| `monitors_downtime` | Ability to set downtimes for your monitors   | false    |
 
 ## Security Monitoring
 
@@ -61,139 +61,135 @@ Find below the list of permissions for the Security Monitoring assets:
 
 | Name                             | Description                                         | Scopable |
 | -------------------------------- | --------------------------------------------------- | -------- |
-| security_monitoring_rules_read   | Ability to view detection rules                     | false    |
-| security_monitoring_rules_write  | Ability to create, edit, and delete detection rules | false    |
-| security_monitoring_signals_read | Ability to view security signals                    | false    |
+| `security_monitoring_rules_read`   | Ability to view detection rules                     | false    |
+| `security_monitoring_rules_write`  | Ability to create, edit, and delete detection rules | false    |
+| `security_monitoring_signals_read` | Ability to view security signals                    | false    |
 
 ## Log Management
 
 Find below the list of permissions for the log configuration assets and log data:
 
-| Name                         | Description                                | Scopable |
-| ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries).       | true     |
-| logs_read_index_data         | Read a subset log data (index based)       | true     |
-| logs_modify_indexes          | Update the definition of log indexes       | false    |
-| logs_live_tail               | Access the live tail feature               | false    |
-| logs_write_exclusion_filters | Update a subset of the exclusion filters   | true     |
-| logs_write_pipelines         | Update a subset of the log pipelines       | true     |
-| logs_write_processors        | Update the log processors in an index      | true     |
-| logs_write_archives          | Update the external archives configuration | false    |
-| logs_read_archives          | Rehydrate logs from that archive; see archive configuration details | true    |
-| logs_public_config_api       | Access the Logs Public Config API (r/w)    | false    |
-| logs_generate_metrics        | Access the Generate Metrics feature        | false    |
+| Name                           | Description                                | Scopable |
+| ------------------------------ | ------------------------------------------ | -------- |
+| `logs_read_data`               | Read access to log data                   | true     |
+| `logs_modify_indexes`          | Update the definition of log indexes       | false    |
+| `logs_write_exclusion_filters` | Update indexes exclusion filters           | true     |
+| `logs_write_pipelines`         | Update log pipelines                       | false    |
+| `logs_write_processors`        | Update the log processors in a pipeline    | true     |
+| `logs_write_archives`          | Update the external archives configuration | false    |
+| `logs_read_archives`           | See archive configuration details, access content from the archive | true     |
+| `logs_write_historical_views`  | Rehydrate data from Archives               | false    |
+| `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
+| `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
+
+
+Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive `logs_read_data` permission:
+
+| Name                           | Description                                | Scopable |
+| ------------------------------ | ------------------------------------------ | -------- |
+| `logs_live_tail`               | Access the live tail feature               | false    |
+| `logs_read_index_data`         | Read a subset log data (index based)       | true     |
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Once your roles are created, assign or remove permission to this role directly by [updating the role in the Datadog application][1].
+
+{{< img src="account_management/rbac/logs_permissions.png" alt="Logs Permissions"  style="width:75%;" >}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+Once your roles are created, assign or remove permission to this role directly through the [Datadog Permission API][1].
+
+
+[1]: /api/v2/roles/
+{{% /tab %}}
+{{< /tabs >}}
 
 More details about these permissions below.
 
-### Log Configuration Access
+### Log configuration access
 
 #### logs_generate_metrics
 
-Grants a role the ability to use the Generate Metrics feature. This permission is global and applies to the configuration of all the metrics generated from logs.
+Grants a role the ability to use the [Generate Metrics][3] feature.
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_generate_metrics_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
+This permission is global and enables both the creation of new metrics, and the edition or deletion of existing ones.
 
 #### logs_modify_indexes
 
-Grants a role the ability to create and modify log indexes. This includes:
+Grants a role the ability to create and modify [log indexes][4]. This includes:
 
-- Setting inclusion queries for which logs should be routed into an index.
-- Setting log retention for an index.
-- Limiting which roles have read access on an index (`logs_read_index_data`).
-- Which roles can modify exclusion filters for an index (`logs_write_exclusion_filters`).
+- Setting [indexes filters][5] for which logs should be routed into an index.
+- Setting [log retention][6] for an index.
+- Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclsion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
 
-**Note**: This permission also grants read access on all log indexes and write permissions on all index exclusion filters.
+This permission is global and enables both the creation of new indexes, and the edition of existing ones.
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+**Note**: This permission also grants [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exlcusion Filters](#logs-write-exclusion-filters) permissions behind the scenes.
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_modify_indexes_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
 
 #### logs_write_exclusion_filters
 
-Grants a role the ability to create or modify exclusion filters within an index. This can be assigned either globally or restricted to a subset of indexes.
+Grants a role the ability to create or modify [exclusion filters][7] within an index.
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**Global access**:
-
-Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for the wanted role:
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters_access.png" alt="Create a custom Role"  style="width:90%;">}}
+This permission can be assigned either globally or restricted to a subset of indexes.
 
 **Subset of indexes**:
 
+{{< tabs >}}
+{{% tab "UI" %}}
+
 1. Remove the global permission on the role.
-2. Grant this permission to the role in [the Processing Pipelines page of the Datadog app][2] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
+2. Grant this permission to the role in [the Index page of the Datadog app][2] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Grant write access on index exclusion filters to specific roles"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Logs Write Exclusion Filters"  style="width:75%;" >}}
 
-
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1].
+This configuration is only supported through the UI.
 
-
-[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
 #### logs_write_pipelines
 
-Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`).
+Grants a role the ability to create and modify [log processing pipelines][8]. This includes:
+
+- Setting the name of the pipeline
+- Setting [pipelines filters][9] for what logs should enter the processing pipeline
+- Reorder pipelines
+- Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
+
+**Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
+
+#### logs_write_processors
+
+Grants a role the ability to create, edit or delete processors and nested pipelines[12].
+
+This permission can be assigned either globally or restricted to a subset of pipelines.
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "UI" %}}
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_write_pipeline_access.png" alt="Create a custom Role"  style="width:90%;">}}
+Assign the role(s) in the modal of a specific pipeline.
 
+{{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors"  style="width:75%;" >}}
 
-[1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1].
+Preliminary,
 
-To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively:
-
-1. Remove the global `logs_write_pipelines` permission on the role if already assigned.
-2. Get the UUID of the role you want to modify.
-3. Use the [Get Permission][2] API to find the `logs_write_pipelines` permission UUID for your region.
-4. Grant permission to that role with the following call:
+* [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+* [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+* [Get the Pipeline ID(s)][3] of the pipeline(s) you want to assign this role on.
+* Grant permission to that role with the following call:
 
 ```sh
 curl -X POST \
@@ -203,90 +199,33 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "pipelines": [
-                        "abcd-1234",
-                        "bcde-2345"
-                    ]
+                    "pipelines": [ "<PIPELINE-X_ID>", "<PIPELINE-Y_ID>"]
                 }
             }'
 ```
 
-
-[1]: /api/v2/roles/
+[1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
-{{% /tab %}}
-{{< /tabs >}}
-
-#### logs_write_processors
-
-Grants a role the ability to create or modify the processors within a processing pipeline.
-
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**Global access**:
-
-Go to your [Datadog Roles page][1] and select the checkbox `write` as below for the wanted role:
-
-{{< img src="account_management/rbac/logs_write_processors_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-**Subset of Pipelines**:
-
-1. Remove the `logs_write_processors` and `logs_write_pipelines` permissions on the role.
-2. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][2] by editing a processing pipeline and adding a role to the "Grant editing Processors of this index to" field (screenshot below).
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Grant write access for processors to specific roles"  style="width:75%;" >}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/v2/roles/
+[3]: /api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
 #### logs_write_archives
 
-Grants the ability to create or modify log archives.
+Grants the ability to create, edit or delete [Log Archives][10]. This includes:
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+- Setting [archives filters][9] for what logs should be routed to the archive
+- Setting the name of the archive
+- Reordering archives
+- Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_write_archives_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
-
+This permission is global and enables the creation of new archives, and the edition and deletion of existing ones.
 
 #### logs_read_archives
 
-Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of archives. 
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][11] from Archives.
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-Go to your [Datadog Roles page][1] and select the checkbox `read`, as shown below, for the wanted role:
-{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-Then assign that role to the archive. Proceed to archive creation, or update at any moment while editing the archive. 
-{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
-
-An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
+This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
 In the following example, assuming all roles but `Guest` have the `logs_read_archive` permission:
 
@@ -296,62 +235,53 @@ In the following example, assuming all roles but `Guest` have the `logs_read_arc
 
 {{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
 
+{{< tabs >}}
+{{% tab "UI" %}}
 
-[1]: https://app.datadoghq.com/access/roles
+Proceed to archive creation, or update at any moment while editing the archive.
+
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+
 {{% /tab %}}
 {{% tab "API" %}}
 
-The `logs_read_archive` permission can be granted or revoked from a role via [the Roles API][1].
-
-An archive can be scoped to a subset of roles using the [Archive API][2].
+Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a given Archive.
 
 
-[1]: /api/v2/roles/
-[2]: /api/v2/logs-archives/
+[1]: /api/v2/logs-archives/#grant-role-to-an-archive
+[2]: /api/v2/logs-archives/#revoke-role-from-an-archive
 {{% /tab %}}
 {{< /tabs >}}
+
+#### logs_write_historical_view
+
+Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][11].
+
+This permission is global, but only enables to trigger a rehydration for Archives users have [Logs Read Archive](#logs-read-archives) permission.
 
 #### logs_public_config_api
 
-Grants the ability to create or modify log configuration through the Datadog API.
+Grants the ability to create or modify log configuration through the Datadog API:
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+* Configure [Archives][12] through the API
+* Configure [Indexes][13] through the API
+* Configure [Pipelines][14] through the API
+* Configure [Restriction Queries][15] through the API
 
-Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
-{{< img src="account_management/rbac/logs_public_config_api_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
+The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
 ### Log Data Access
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
-* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission to access indexed data).
-
-These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
-
-**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`.
-When looking in Log Explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
-
-In addition, access to the Live Tail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
+* [Logs Read Data](#logs-read-data) (Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries.
+* [Logs Read Index Data](#logs-read-index-data) is the legacy approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission enabled to access indexed data).
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][3].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
 
-"Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
+Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
 **Example**:
 
@@ -360,67 +290,56 @@ Read access to log data. If granted, other restrictions then apply such as `logs
 
 {{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
 
+**Restrict read access to a subset of logs**
+
 {{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**Grant global read access to log data**:
-
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-
-{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:70%;">}}
-
-**Restrict read access to a subset of logs**:
+{{% tab "UI" %}}
 
 This configuration is only supported through the API.
-[1]: https://app.datadoghq.com/access/roles
+
 {{% /tab %}}
 {{% tab "API" %}}
 
-Revoke or grant this permission from a role via [the Roles API][1]. 
-Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
-
-
+Revoke or grant this permission from a role via [the Roles API][1].
+Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 
 [1]: /api/#roles
 [2]: /api/?lang=bash#roles-restriction-queries-for-logs
 {{% /tab %}}
 {{< /tabs >}}
 
+### Legacy Permissions
+
+These permissions are globally enabled by default for all users.
+
+[Logs Read Data](#logs-read-data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
+
+* If this user has scoped [Read Index Data](#logs-read-index-data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
+* If this user has [livetail](#logs-livetail) permission, this users sees only sees `service:api` logs in the livetail.
+
 
 #### logs_read_index_data
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
-When using `logs_read_data` and restriction queries, the `logs_read_index_data` permission **must** be set globally to access indexed logs.
+
+To scope this permission to a subset of indexes, first remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role. Then
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "UI" %}}
 
-**Global access**:
-
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Read Index Data Access"  style="width:90%;">}}
-
-**Subset of Indexes**:
-
-1. Remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role.
-2. This permission can be granted to a role in [the Index Configuration page of the Datadog app][2] by editing an index and adding a role to the "Grant access of this index's content to" field.
+Grant this role access to the index in [Configuration page][1].
 
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines/indexes
+[1]: https://app.datadoghq.com/logs/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1].
-For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
-
-1. Remove the global `logs_read_index_data` permission on the role if already assigned.
-2. Get the UUID of the role you want to modify.
-3. Use the [Get Permission][2] API to find the `logs_read_index_data` permission UUID for your region.
-4. Grant permission to that role with the following call:
+* [Get the Roles ID][1] of the role you want to assign to specific pipelines.
+* [Get the Permission ID][2] for the `logs_write_processors` permission API for your region.
+* [Get the Index ID(s)][3] of the pipeline(s) you want to assign this role on.
+* Grant permission to that role with the following call:
 
 ```bash
 curl -X POST \
@@ -430,47 +349,44 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "indexes": [
-                        "main",
-                        "support"
-                    ]
+                    "indexes": ["<INDEX-1_ID>",["<INDEX-2_ID>"]
                 }
             }'
 ```
 
 
-[1]: /api/v2/roles/
+[1]: /api/v2/roles/#list-roles
 [2]: /api/v2/roles/#list-permissions
+[3]: /api/v1/logs-indexes/#get-all-indexes
 {{% /tab %}}
 {{< /tabs >}}
-
 
 #### logs_live_tail
 
-Grants a role the ability to use the Live Tail feature.
+Grants a role the ability to use the [Live Tail][16] feature.
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/#roles
-{{% /tab %}}
-{{< /tabs >}}
+This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>
+\*Log Rehydration is a trademark of Datadog, Inc.
+
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/v2/roles/#list-permissions
-[3]: /api/v2/logs-restriction-queries/
+[3]: /logs/logs_to_metrics/
+[4]: /logs/indexes
+[5]: /logs/indexes#indexes-filters
+[6]: /logs/indexes#update-log-retention
+[7]: /logs/indexes#exclusion-filters
+[8]: /logs/processing/pipelines/
+[9]: /logs/processing/pipelines/#pipeline-filters
+[10]: /logs/archives
+[11]: /logs/archives/rehydrating
+[12]: /api/v2/logs-archives/
+[13]: /api/v1/logs-indexes/
+[14]: /api/v1/logs-pipelines/
+[15]: /api/v2/logs-restriction-queries/
+[16]: /logs/explorer/live_tail/

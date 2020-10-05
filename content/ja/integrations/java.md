@@ -68,72 +68,72 @@ JMX を使用して、接続する Agent を構成し、必要に合わせて編
 ```yaml
 init_config:
   #custom_jar_paths:
-  #  - <カスタム_JAR_ファイルパス>.jar
+  #  - <CUSTOM_JAR_FILE_PATH>.jar
   #is_jmx: true
 
 instances:
-  - host: "<JMX_インスタンスエンドポイント>"
-    port: "<JMX_ポート>"
-    user: "<ユーザー名>"
-    password: "<パスワード>"
+  - host: "<JMX_INSTANCE_ENDPOINT>"
+    port: "<JMX_PORT>"
+    user: "<USER_NAME>"
+    password: "<PASSWORD>"
 
-    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/<カスタムパス>" # オプション
+    jmx_url: "service:jmx:rmi:///jndi/rmi://myhost.host:9999/<CUSTOM_PATH>" # optional
 
-    name: "<JMX_インスタンス名>"
-    java_bin_path: "<JAVA_パス>"
+    name: "<JMX_INSTANCE_NAME>"
+    java_bin_path: "<JAVA_PATH>"
     java_options: "-Xmx200m -Xms50m"
-    trust_store_path: "<トラストストアパス>.jks"
-    trust_store_password: "<パスワード>"
+    trust_store_path: "<TRUST_STORE_PATH>.jks"
+    trust_store_password: "<PASSWORD>"
 
-    rmi_connection_timeout: 20
+    rmi_connection_timeout: 20000
     rmi_client_timeout: 15000
 
-    process_name_regex: ".*<プロセス名>.*"
+    process_name_regex: ".*<PROCESS_NAME>.*"
     tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
     refresh_beans: 600
     tags:
-      env: dev
-      "<タグキー>":"<タグ値>"
+      - "env:dev"
+      - "<TAG_KEY>:<TAG_VALUE>"
 
     conf:
       - include:
-          domain: "<ドメイン名_1>"
+          domain: "<DOMAIN_NAME_1>"
           tags:
               simple: $attr0
-              raw_value: "<選択値>"
+              raw_value: "<CHOOSEN_VALUE>"
               multiple: $attr0-$attr1
           bean:
-            - "<BEAN_名_1>"
-            - "<BEAN_名_2>"
+            - "<BEAN_NAME_1>"
+            - "<BEAN_NAME_2>"
           attribute:
             attribute1:
               metric_type: counter
-              alias: "jmx.<メトリクス名属性_1>"
+              alias: "jmx.<METRIC_NAME_ATTRIBUTE_1>"
             attribute2:
               metric_type: gauge
-              alias: "jmx.<メトリクス名属性_2>"
+              alias: "jmx.<METRIC_NAME_ATTRIBUTE_2>"
             attribute3:
               metric_type: monotonic_count
-              alias: "jmx.<メトリクス名属性_3>"
+              alias: "jmx.<METRIC_NAME_ATTRIBUTE_3>"
 
       - include:
-          domain: "<ドメイン名_2>"
+          domain: "<DOMAIN_NAME_2>"
         exclude:
           bean:
-            - "<除外された_BEAN_名>"
+            - "<EXCLUDED_BEAN_NAME>"
       - include:
-          domain_regex: "<ドメイン正規表現>"
+          domain_regex: "<DOMAIN_REGEX>"
         exclude:
           bean_regex:
-            - "<除外された_BEAN_名の正規表現>"
+            - "<EXCLUDED_BEAN_NAME_REGEX>"
       - include:
           bean_regex: regex_topic=(.*?)
           attribute:
             attribute1:
               metric_type: gauge
-              alias: "jmx.<正規表現タグ付きの属性名>"
+              alias: "jmx.<ATTRIBUTE_NAME_WITH_REGEX_TAG>"
 
-          ## 以下は、タグ付きの jmx.<正規表現タグ付きの属性名> bean を送信します。
+          ## The following submits jmx.<ATTRIBUTE_NAME_WITH_REGEX_TAG> bean with tags:
           ## `hostregex:<beanParameter>`
           ## `typeregex:<beanParameter>`
           ## `contextregex<beanParameter>`
@@ -192,7 +192,7 @@ instances:
 | `process_name_regex`                          | ✕       | ホストとポートまたは `jmx_url` を指定する代わりに、Agent は接続 API を使用して接続できます。これには、JDK をインストールして `tools.jar` のパスを設定する必要があります。                                                                                                                                                              |
 | `tools_jar_path`                              | ✕       | `process_name_regex` が設定される場合に設定されます。                                                                                                                                                                                                                                                                                               |
 | `refresh_beans`                               | ✕       | 一致する MBeans リストを更新する更新期間。デフォルトは 600 秒です。この値を小さくすると、CPU 使用率が増加する場合があります。                                                                                                                                                                                                  |
-| `rmi_connection_timeout`                      | ✕       | `host` と `port` または `jmx_url` を使用して JVM に接続するときの接続タイムアウト (秒単位)。                                                                                                                                                                                                                                      |
+| `rmi_connection_timeout`                      | ✕       | `host` と `port` または `jmx_url` を使用して JVM に接続するときの接続タイムアウト (ミリ秒単位)。                                                                                                                                                                                                                                 |
 | `rmi_client_timeout`                          | ✕       | 接続された JVM からの応答がない期間をミリ秒単位で指定します。その後、Agent は既存の接続を放棄して再試行します。                                                                                                                                                                                        |
 
 `conf` パラメーターは、辞書のリストです。この辞書では、次の 2 つのキーのみが許可されます。

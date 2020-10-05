@@ -35,6 +35,22 @@ Use tags to filter metrics to display in a [dashboard graph][1], or to create ag
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags in Dashboards from textbox"  style="width:80%;">}}
 
+Advanced tag value filtering is also available with boolean filters. The following boolean syntax is supported:
+
+* `NOT`, `!`
+* `AND`, `,`
+* `OR`
+* `key IN (tag_value1, tag_value2,...)`
+* `key NOT IN (tag_value1, tag_value2,...)`
+
+Use `AND`, `ORs` to look at a metric across specific tags:
+
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Boolean Filter with AND/OR"  style="width:80%;">}}
+
+Use `IN`, `NOT IN` to quickly filter a metric down to specific tags:
+
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Boolean Filter with IN/NOT IN"  style="width:80%;">}}
+
 To create an aggregated group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged with the key `service`, such as `service:coffee-house`, enter `service` in the **avg by** textbox to show one line for each `service` tag value. Each line represents the average metric value across all sources that share that `service` tag value.
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags in Dashboards avg by textbox"  style="width:80%;">}}

@@ -195,7 +195,7 @@ Datadog Lambda ライブラリをインストールし、カスタムメトリ�
 [14]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
 [15]: https://docs.datadoghq.com/ja/tracing/setup/python/
 [16]: https://docs.datadoghq.com/ja/tracing/setup/ruby/
-[17]: /ja/infrastructure/serverless/datadog_lambda_layer/
+[17]: /ja/serverless/datadog_lambda_library/
 [18]: /ja/tracing/serverless_functions/#tracing-across-aws-lambda-and-hosts
 [19]: https://docs.datadoghq.com/ja/tagging/
 [20]: /ja/tracing/serverless_functions/#organizing-your-serverless-infrastructure-with-tags
@@ -211,5 +211,5 @@ Datadog Lambda ライブラリをインストールし、カスタムメトリ�
 [30]: /ja/serverless/custom_metrics/#running-in-a-vpc
 [31]: /ja/serverless/custom_metrics/#using-third-party-libraries
 [32]: /ja/serverless/custom_metrics/#deprecated-using-cloudwatch-logs
-[33]: /ja/serverless/installation/installing_the_library/
+[33]: /ja/serverless/installation/
 [34]: https://docs.datadoghq.com/ja/help/

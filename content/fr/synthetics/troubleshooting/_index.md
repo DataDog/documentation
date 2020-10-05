@@ -1,11 +1,11 @@
 ---
-title: Dépannage de Synthetics
+title: Dépannage de la surveillance Synthetic
 kind: documentation
-description: Résolvez les problèmes courants rencontrés avec Synthetics.
+description: Résolvez les problèmes courants rencontrés avec la surveillance Synthetic.
 further_reading:
   - link: /synthetics/
     tag: Documentation
-    text: Gérer vos tests Synthetics
+    text: Gérer vos tests Synthetic
   - link: /synthetics/browser_tests/
     tag: Documentation
     text: Configurer un test Browser
@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: Configurer un test API
 ---
-Si vous rencontrez un problème durant la configuration de Synthetics, utilisez cette page pour effectuer un premier dépannage. Si votre problème persiste, [contactez notre formidable équipe d'assistance][1].
+Si vous rencontrez un problème durant la configuration de la surveillance Datadog Synthetic, utilisez cette page pour effectuer un premier dépannage. Si votre problème persiste, [contactez notre formidable équipe d'assistance][1].
 
 ## Tests Browser
 
@@ -33,7 +33,7 @@ La fenêtre de navigation privée qui s'ouvre alors ignore toutes vos anciennes 
 
 ### Erreurs Unauthorized
 
-Si l'un de vos tests Synthetics renvoie une erreur 401, c'est probablement qu'il ne parvient pas à s'authentifier auprès de l'endpoint. Lorsque vous configurez votre test Synthetics, assurez-vous d'utiliser la même méthode d'authentification que celle que vous utilisez en dehors de Datadog.
+Si l'un de vos tests Synthetic renvoie une erreur 401, c'est probablement qu'il ne parvient pas à s'authentifier auprès de l'endpoint. Lorsque vous configurez votre test Synthetic, assurez-vous d'utiliser la même méthode d'authentification que celle que vous utilisez en dehors de Datadog.
 
 * Votre endpoint utilise-t-il une **authentification par en-têtes** ?
   * **Authentification basique** : spécifiez les identifiants requis dans les **Advanced options** de votre [test HTTP][2] ou [test Browser][3].
@@ -42,13 +42,17 @@ Si l'un de vos tests Synthetics renvoie une erreur 401, c'est probablement qu'il
 
 * L'endpoint utilise-t-il les **paramètres de requête pour l'authentification** ? (Avez-vous besoin d'ajouter une clé d'API spécifique dans vos paramètres d'URL ?)
 
-* L'endpoint utilise-t-il une **authentification en fonction de l'IP** ? Dans ce cas, vous devrez peut-être autoriser une partie ou l'ensemble des [IP à l'origine des tests Synthetics][7].
+* L'endpoint utilise-t-il une **authentification en fonction de l'IP** ? Dans ce cas, vous devrez peut-être autoriser une partie ou l'ensemble des [IP à l'origine des tests Synthetic][7].
 
 ### Erreurs Forbidden
 
-Lorsque vous créez un test Synthetics, il est possible d'obtenir une erreur `403 Forbidden`. Cette erreur est causée par l'en-tête `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <ID_TEST>` qui est automatiquement envoyé par Datadog.
-Vérifiez que vos serveurs ne rejettent pas automatiquement les requêtes contenant cet en-tête.
-Vous devrez peut-être également autoriser les [plages d'IP utilisées par Datadog Synthetics][7] pour vous assurer que votre infrastructure accepte les requêtes envoyées par les serveurs Datadog.
+Si les tests Synthetic renvoient des erreurs `403 Forbidden`, il est possible que votre serveur Web bloque ou filtre les requêtes qui comprennent l'en-tête `Sec-Datadog`. Cet en-tête est ajouté à chaque requête Synthetic envoyée par Datadog pour identifier la source du trafic et aider l'assistance Datadog à identifier l'exécution de test spécifique. 
+
+En outre, vous devrez peut-être vous assurer que vos pare-feu autorisent les [plages d'IP utilisées par la surveillance Datadog Synthetic][7] comme sources de trafic.
+
+### Notifications manquantes
+
+Par défaut, les tests Synthetic ne procèdent à aucun [renvoi de notifications][8]. Cela signifie que si vous ajoutez votre handle de notification (adresse e-mail, handle Slack, etc.) après la création d'une transition (par exemple, un test entrant en alerte ou se rétablissant à partir d'une alerte précédente), aucune notification ne sera envoyée pour cette transition. Une notification sera envoyée pour la transition suivante.
 
 ## Pour aller plus loin
 
@@ -61,3 +65,4 @@ Vous devrez peut-être également autoriser les [plages d'IP utilisées par Data
 [5]: /fr/synthetics/api_tests/?tab=httptest#use-global-variables
 [6]: /fr/synthetics/browser_tests/#use-global-variables
 [7]: https://ip-ranges.datadoghq.com/synthetics.json
+[8]: /fr/synthetics/api_tests/?tab=httptest#notify-your-team

@@ -2,9 +2,6 @@
 title: Content Security Policy (CSP)
 kind: faq
 further_reading:
-    - link: '/real_user_monitoring/installation/'
-      tag: 'Get Started'
-      text: 'Real User Monitoring'
     - link: '/logs/log_collection/javascript/'
       tag: 'Get Started'
       text: 'Browser Log Collection'
@@ -65,8 +62,10 @@ connect-src https://*.logs.datadoghq.eu
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-[2]: /real_user_monitoring/installation/?tab=us#bundle-setup
-[3]: /logs/log_collection/javascript/?tab=us#bundle-setup
-[4]: /real_user_monitoring/installation/?tab=us#npm-setup
-[5]: /logs/log_collection/javascript/?tab=us#npm-setup
+[2]: /real_user_monitoring/browser/#bundle
+[3]: /logs/log_collection/javascript/#bundle-setup
+[4]: /real_user_monitoring/browser/#npm
+[5]: /logs/log_collection/javascript/#npm-setup

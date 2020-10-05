@@ -21,16 +21,20 @@ before_script:
 
 
 cache: &cache
-  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  key:
+    files:
+      - yarn.lock
   paths:
-  - node_modules/
+    - node_modules/
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_use-node-cache
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
+  except:
+    - tags
   only:
     - branches
 
@@ -38,7 +42,7 @@ cache: &cache
 install_dependencies:
   <<: *base_template
   stage: bootstrap
-  cache: 
+  cache:
     <<: *cache
   script:
     - yarn install --frozen-lockfile
@@ -149,15 +153,22 @@ missing_tms_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
 
 index_algolia_preview:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [""] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: [ "runner:main","size:large" ]
   stage: post-deploy
   cache:
     <<: *cache
     policy: pull
   environment: "preview"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
-    - index_docsearch_algolia_preview
+    - |-
+        echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+        echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+        export DISPLAY=:99
+        Xvfb :99 -ac &
+        echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq_preview.json
   dependencies:
     - build_preview
   when: manual
@@ -190,7 +201,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -283,16 +294,22 @@ test_live_link_checks:
     - master
 
 index_algolia:
-  <<: *base_template
+  image:
+    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/docsearch-scraper:v2978988-4692ed5-0.8
+    entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
+  tags: ["runner:main","size:large"]
   stage: post-deploy
   cache:
     <<: *cache
     policy: pull
   environment: "live"
   script:
-    - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
-    - cat /etc/docs_datadoghq.com
-    - index_docsearch_algolia
+    - |-
+      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
+      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
+      export DISPLAY=:99
+      Xvfb :99 -ac &
+      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
   dependencies:
     - build_live
   only:

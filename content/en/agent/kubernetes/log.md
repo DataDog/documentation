@@ -28,7 +28,7 @@ The Docker API is optimized to get logs from one container at a time, when there
 
 ## Log collection
 
-In order to start collecting your application logs you must be [runing the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
+In order to start collecting your application logs you must be [running the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
 
 {{< tabs >}}
 {{% tab "DaemonSet " %}}
@@ -52,7 +52,7 @@ To enable log collection with your DaemonSet:
      # (...)
     ```
 
-    **Note**: Setting `DD_CONTAINER_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more.
+    **Note**: Setting `DD_CONTAINER_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE` with the container `name` to collect logs.
 
 2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
@@ -115,6 +115,28 @@ datadog:
 ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+Update your `datadog-agent.yaml` manifest with:
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  log:
+    enabled: true
+```
+
+See the sample [manifest with logs and metrics collection enabled][1] for a complete example.
+
+Then apply the new configuration:
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 

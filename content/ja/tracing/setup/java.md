@@ -67,7 +67,6 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 両方に同じキータイプが設定されている場合は、システムプロパティコンフィギュレーションが優先されます。
 システムプロパティは、JVM フラグとして設定できます。
 
-### タグ付け
 
 | システムプロパティ                        | 環境変数                   | デフォルト                           | 説明                                                                                                                                                                                                                                                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,7 +75,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 |`dd.env`                              | `DD_ENV`                              | `none`                            | アプリケーション環境（例、production、staging など）。0.48+ 以降のバージョンで利用可能。                                                    |
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | アプリケーションバージョン（例、2.5、202003181415、1.3-alpha など）。0.48+ 以降のバージョンで利用可能。             |
 | `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][10]を参照してください。   |
-| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | 構成プロパティが行ごとに 1 つ提供されている、ファイルへのオプションパス。たとえば、ファイルパスは `-Ddd.trace.config=<ファイルパス>.properties` 経由として、ファイルのサービス名に `dd.service.name=<サービス名>` を設定して提供することができます。 |
+| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | 構成プロパティが行ごとに 1 つ提供されている、ファイルへのオプションパス。たとえば、ファイルパスは `-Ddd.trace.config=<ファイルパス>.properties` 経由として、ファイルのサービス名に `dd.service=<SERVICE_NAME>` を設定して提供することができます。 |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (例: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) コンフィギュレーション経由でサービス名を動的に変更します。サービス間でデータベースの名前を区別する場合に便利です。                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | デフォルト値はトレースを Agent に送信します。代わりに `LoggingWriter` で構成すると、トレースがコンソールに書き出されます。                       |
 | `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | トレースの送信先のホスト名。コンテナ化された環境を使う場合は、これを構成してホスト IP にします。詳しくは、[Docker アプリケーションのトレース][4]を参照してください。                                                                                                  |
@@ -106,6 +105,8 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使用している場合、0 を入力します。                                                                                                                                                                                                                              |
 | `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | デフォルトで、トレーシングクライアントは GlobalTracer がロードされており、トレーサーを動的に登録しているかどうかを検知します。これを false に設定すると、OpenTracing 上のトレーサーの依存関係がすべて消去されます。                                                                                                                                                                                                                              |
 | `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | 偽 | デフォルトでは、Hystrix のグループ、コマンド、サーキット状態のタグは有効になっていません。このプロパティにより有効になります。 |
+| `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | 真 | デフォルトでは、長時間実行されている非同期リクエストはエラーとしてマークされます。この値を false に設定すると、すべてのタイムアウトを成功したリクエストとしてマークできます。 |
+
 
 **注**:
 
@@ -127,7 +128,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 **システムプロパティの例**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング"  >}}
@@ -137,7 +138,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.servic
 **スパンと JMX メトリクスにグローバルな env を設定**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=env:dev -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース"  >}}
@@ -147,7 +148,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=e
 **すべてのスパンに project:test を追加する例**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース"  >}}
@@ -157,7 +158,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 **JMX メトリクスに custom.type:2 を設定**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース"  >}}
@@ -177,7 +178,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 システムプロパティの例:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
 ```
 
 これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
@@ -195,7 +196,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.s
 システムプロパティの例:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列"  >}}

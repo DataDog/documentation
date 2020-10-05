@@ -254,7 +254,6 @@ Once this is set, verify that the environment variables were set with `systemctl
 
 [1]: https://docs.docker.com/engine/reference/builder/#env
 [2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
-[3]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{% /tab %}}
 
 {{< /tabs >}}

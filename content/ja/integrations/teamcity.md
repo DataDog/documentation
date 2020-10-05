@@ -1,7 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,7 +48,7 @@ supported_os:
 
 Teamcity チェックは [Datadog Agent][1] パッケージに含まれています。Teamcity サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### Teamcity の準備
 

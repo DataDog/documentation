@@ -1256,6 +1256,77 @@ describe(`descColumn`, () => {
 
 describe(`rowRecursive`, () => {
 
+  it('should handle fields named required (properties->required)', () => {
+    /*
+    Required fields are usually an array of string e.g ['foo'.'bar']
+    If a field is named required then the logic should recognise this is a field object and not the array to check against
+    */
+    const mockData = {
+      "description": "A customized field defined by users and attached to a certain object type (incidents, etc).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "a91169ea3eb950dd85cc2a58c5a2d2c6",
+          "description": "The field's ID."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The field's attributes.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "state",
+              "description": "Name of the field."
+            },
+            "required": {
+              "type": "boolean",
+              "description": "If true, this field is required to create an object of the field's assigned `table_id` type.",
+              "default": false
+            },
+            "created_by_user": {
+              "description": "JSON API relationship for users.",
+              "properties": {
+                "data": {
+                  "description": "The User relationship data.",
+                  "properties": {
+                    "id": {
+                      "description": "A unique identifier that represents the user.",
+                      "example": "00000000-0000-0000-0000-000000000000",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "users",
+                      "description": "Users resource type.",
+                      "enum": [
+                        "users"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "USERS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "type": "object"
+    };
+    const mockInitialData = mockData.properties;
+    const t = () => {
+      bp.rowRecursive("request", mockInitialData, false, mockInitialData.required || []);
+    };
+    expect(t).not.toThrow(Error);
+
+  });
 
 });
 

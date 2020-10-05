@@ -7,6 +7,7 @@ assets:
     Istio base dashboard: assets/dashboards/istio_overview.json
   logs:
     source: istio
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -56,7 +57,7 @@ Datadog Agent を使用して Istio のパフォーマンス状況を監視し�
 
 Istio は Datadog Agent に含まれています。Istio サーバーまたはクラスターに [Datadog Agent をインストール][2]し、Istio で Agent を指定します。
 
-### 構成
+### コンフィギュレーション
 
 Istio に接続するには、`istio.d/conf.yaml` ファイル ([Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダー内) を編集します。使用可能なすべての構成オプションの詳細については、[サンプル istio.d/conf.yaml][4] を参照してください。
 

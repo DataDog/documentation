@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +43,7 @@ supported_os:
 
 ディスクチェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ディスクチェックはデフォルトで有効になっています。Agent は、すべてのローカルパーティションに関するメトリクスを収集します。
 カスタムオプション付きでチェックを構成する場合は、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `disk.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル disk.d/conf.yaml][3] を参照してください。

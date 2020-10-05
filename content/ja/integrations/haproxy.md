@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: haproxy
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -79,7 +82,7 @@ Agent は、メトリクスを統計エンドポイント経由で収集しま�
 
 2. [HAProxy を再起動して、統計エンドポイントを有効にします][3]。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

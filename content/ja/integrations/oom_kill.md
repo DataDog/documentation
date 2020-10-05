@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -51,17 +52,17 @@ RHEL 系のディストリビューションでは、以下のようにカーネ
 yum install -y kernel-headers-$(uname -r)
 ```
 
-### 構成
+### コンフィギュレーション
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーに `oom_kill.d/conf.yaml` ファイルが存在することを確認し、OOM Killer メトリクスの収集を開始します。
+1. Agent のコンフィギュレーションディレクトリのルートにある `system-probe.yaml` フォルダーで、以下のコンフィギュレーションを追加します。
 
-2. 以下のコンフィギュレーションが `system_probe.yaml` に設定されていることを確認します。
+    ```yaml
+    system_probe_config:
+        enabled: true
+        enable_oom_kill: true
+    ```
 
-```yaml
-system_probe_config:
-    enabled: true
-    enable_oom_kill: true
-```
+2. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーに `oom_kill.d/conf.yaml` ファイルが存在することを確認し、OOM Killer メトリクスの収集を開始します。
 
 3. [Agent を再起動します][2]。
 

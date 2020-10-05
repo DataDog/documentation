@@ -1,9 +1,12 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Vertica Overview: assets/dashboards/overview.json
   logs:
     source: vertica
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

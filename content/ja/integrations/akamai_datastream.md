@@ -59,7 +59,7 @@ Akamai DataStream 1.0 および 2.0 では、HTTP(s) エンドポイントを介
 
 2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: `https://http-intake.logs.datadoghq.com/v1/input`.
 
-3. **Tags** (任意): Datadogでログのフィルタリングおよびグループ化に使用する、タグの一覧（カンマ区切り）を入力します。
+3. **Tags** (任意): Datadogでログのフィルタリングおよびグループ化に使用する、カンマ区切りのタグ一覧（例: `env:staging,team:web`）を入力します。
 
 4. **Source**: ソース名として `akamai` を入力します。
 

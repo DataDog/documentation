@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: riak
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -47,7 +48,7 @@ supported_os:
 
 Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

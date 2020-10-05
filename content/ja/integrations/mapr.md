@@ -4,6 +4,7 @@ assets:
     MapR - Overview: assets/dashboards/mapr_overview.json
   logs:
     source: mapr
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

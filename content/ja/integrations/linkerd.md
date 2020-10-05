@@ -3,11 +3,13 @@ assets:
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -42,7 +44,7 @@ supported_os:
 
 Linkerd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -81,7 +83,19 @@ Linkerd チェックは [Datadog Agent][2] パッケージに含まれていま�
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                         |
 | `<インスタンスコンフィギュレーション>`  | `{"prometheus_url": "http://%%host%%:4191/metrics"}`                  |
 
+##### ログの収集
+
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+
+| パラメーター      | 値                                                |
+| -------------- | ---------------------------------------------------- |
+| `<LOG_CONFIG>` | `{"source": "linkerd", "service": "<SERVICE_NAME>"}` |
+
+データプレーンログの詳細度を増加するには、[Linkerd 公式ドキュメント][3]を参照してください。
+
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[3]: https://linkerd.io/2/tasks/modifying-proxy-log-level/
 {{% /tab %}}
 {{< /tabs >}}
 

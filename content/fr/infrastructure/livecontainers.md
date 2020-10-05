@@ -16,111 +16,115 @@ further_reading:
 
 [Les live containers de Datadog][1] vous permettent de bénéficier d'une réelle visibilité sur l'ensemble des conteneurs de votre environnement.
 
-Inspirés d'outils Bedrock comme *htop*, *ctop* et *kubectl*, les live containers vous offrent une vue d'ensemble globale de votre infrastructure de conteneurs. Leur tableau, régulièrement mis à jour, présente les métriques de ressources actualisées toutes les deux secondes, dispose d'une fonction de recherche à facettes et inclut les logs de conteneur de diffusion.
+Inspirés d'outils Bedrock comme *htop*, *ctop* et *kubectl*, les live containers vous offrent une vue d'ensemble globale de votre infrastructure de conteneurs. Leur tableau, régulièrement mis à jour, présente les métriques de ressources actualisées toutes les deux secondes, dispose d'une fonction de recherche à facettes et affiche les logs de conteneur sous forme de flux.
 
 Associée à des intégrations pour [Docker][2], [Kubernetes][3], [ECS][4] ou d'autres technologies de conteneur, ainsi qu'à la fonction intégrée d'ajout de tags à des composants dynamiques, la vue des live containers fournit une présentation détaillée de la santé de vos conteneurs, de leur consommation en ressources, de leurs logs et de leur déploiement en temps réel :
 
-{{< img src="infrastructure/livecontainers/livecontainerssummaries.png" alt="Live containers avec résumés" >}}
+{{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="Live containers avec résumés"  >}}
+
+### Ressources Kubernetes
+
+La fonctionnalité [Ressources Kubernetes pour Live Containers][1] est actuellement en version bêta privée. Remplissez [ce formulaire][5] pour demander à y accéder.
+
+Si vous utilisez Kubernetes, activez la fonctionnalité Ressources Kubernetes pour Live Containers pour obtenir une visibilité multidimensionnelle sur toutes les charges de travail Kubernetes dans vos clusters. Inspirée de l'outil `kubectl`, cette fonctionnalité vous offre une vue d'ensemble globale de votre infrastructure Kubernetes avec un tableau mis à jour en continu qui comprend une sélection de métriques sur vos ressources, une fonction de recherche à facettes, une vue détaillée par charge de travail et des cartes de visualisation.
 
 ## Installation
 
-Après avoir déployé l'[Agent Docker][5], vous pouvez accéder aux métriques de conteneur sans avoir à effectuer la moindre configuration supplémentaire. Pour activer la collecte de logs, suivez les étapes ci-dessous :
+Suivez les instructions d'installation de l'Agent [Docker][6] ou [Kubernetes][7]. Une fois l'Agent installé, aucune autre configuration n'est nécessaire pour accéder aux métriques de conteneur.
 
-{{< tabs >}}
+**La fonctionnalité Ressources Kubernetes pour Live Containers nécessite l'installation des Agents suivants** :
 
-{{% tab "Linux/Windows" %}}
-Une fois l'[Agent Datadog][1] installé, activez la collecte de logs en modifiant le [fichier de configuration principal de l'Agent][2]. Changez les paramètres suivants :
+* [Agent Datadog][8] version 7.21.1 (ou supérieure)
+* [Agent de cluster Datadog][9] version 1.8.0 (ou supérieure)
 
-```yaml
-logs_enabled: true
-listeners:
-  - name: docker
-config_providers:
-  - name: docker
-    polling: true
-```
+### Ressources Kubernetes
 
-**Remarques :**
+Pour activer la fonctionnalité Ressources Kubernetes pour Live Containers, suivez les [instructions d'installation de Helm][10] et modifiez votre fichier `values.yaml` comme suit :
 
-* Pour recueillir les informations relatives aux conteneurs dans l'installation standard, plutôt qu'avec l'[Agent Docker][1], l'utilisateur `dd-agent` doit disposer des autorisations pour accéder à **docker.sock**.
-* Par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur l'indexation et recevoir uniquement des données Live Tail.
+{{< code-block lang="yaml" filename="values.yaml" >}}
+datadog:
+  ...
+  processAgent:
+    enabled: true
+  ...
+  orchestratorExplorer:
+    enabled: true
+...
+clusterAgent:
+  enabled: true
+  image:
+    repository: datadog/cluster-agent
+    tag: latest
+    pullPolicy: Always
+...
+agents:
+  image:
+    repository: datadog/agent
+    tag: latest
+    pullPolicy: Always
+...
+{{< /code-block >}}
 
-[1]: /fr/agent/docker/log/?tab=hostinstallation
-[2]: /fr/agent/guide/agent-configuration-files/
-{{% /tab %}}
+Si l'Agent n'est pas en mesure de détecter automatiquement le nom du cluster Kubernetes, vous devez le spécifier dans `values.yaml` :
 
-{{% tab "Docker" %}}
+{{< code-block lang="yaml" filename="values.yaml" >}}
+datadog:
+   ...
+   clusterName: <PLACEHOLDER>
+   ...
+{{< /code-block >}}
 
-Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de tout autre paramètre personnalisé, les attributs suivants (selon les cas) :
+**Remarque** : le nom du cluster ne doit pas comporter plus de 40 caractères.
 
-```shell
--e DD_LOGS_ENABLED=true
--e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-```
+Cette étape n'est pas nécessaire sur Google GKE, AWS EKS et Azure AKS, sauf si l'Agent et l'Agent de cluster n'ont pas accès aux API des métadonnées cloud, ou que le nom du cluster comporte plus de 40 caractères.
 
-**Remarque** : par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur l'indexation et recevoir uniquement des données Live Tail.
+## Configuration
 
-[1]: /fr/agent/docker/log/?tab=containerinstallation
-[2]: /fr/logs/indexes/#exclusion-filters
-{{% /tab %}}
+### Inclure ou exclure des conteneurs
 
-{{% tab "Kubernetes" %}}
-Dans le manifeste `dd-agent.yaml` utilisé pour créer le [Daemonset][1], ajoutez les variables d'environnement, le montage de volume et le volume suivants :
+Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
+* Pour exclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_EXCLUDE` ou ajoutez `container_exclude:` dans le fichier de configuration principal `datadog.yaml`.
+* Pour inclure des conteneurs, passez la variable d'environnement `DD_CONTAINER_INCLUDE` ou ajoutez `container_include:` dans le fichier de configuration principal `datadog.yaml`.
+
+Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
+
+Par exemple, pour exclure toutes les images Debian à l'exception des conteneurs dont le nom commence par *frontend*, ajoutez les deux lignes de configuration suivantes dans votre fichier `datadog.yaml` :
 ```yaml
   env:
     - name: DD_LOGS_ENABLED
-        value: "true"
+      value: "true"
     - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-        value: "true"
+      value: "true"
 
   volumeMounts:
     - name: pointerdir
-        mountPath: /opt/datadog-agent/run
+      mountPath: /opt/datadog-agent/run
 
 volumes:
   - hostPath:
       path: /opt/datadog-agent/run
-      name: pointerdir
-
+    name: pointerdir
 ```
 
-**Remarques** :
+```shell
+container_exclude: ["image:debian"]
+container_include: ["name:frontend.*"]
+```
 
-* Par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur les index et les données Live Tail uniquement.
+**Remarque** : pour la version 5 de l'Agent, au lieu d'ajouter les lignes ci-dessus dans le fichier de configuration principal `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouvent à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
 
-[1]: /fr/agent/kubernetes/
-[2]: /fr/logs/indexes/#exclusion-filters
-{{% /tab %}}
-{{< /tabs >}}
+## Prise en main
 
-Pour en savoir plus sur l'activation de la collecte de logs pour les intégrations, consultez la [documentation à ce sujet][6].
+Rendez-vous sur la [page Containers][1] pour accéder automatiquement à la vue des **Conteneurs**.
 
-## Logs de conteneur
-
-Consultez les logs de diffusion pour n'importe quel conteneur, tels que `docker logs -f` ou `kubectl logs -f`, dans Datadog. Cliquez sur un conteneur dans le tableau pour afficher davantage d'informations. Cliquez sur l'onglet *Logs* pour visualiser en temps réel les données de [Live Tail][7] ou les logs indexés historiques, peu importe leur date.
-
-### Live Tail
-
-Grâce à Live Tail, tous les logs de conteneur sont diffusés. Si vous choisissez d'interrompre la diffusion, vous pouvez facilement lire le contenu des logs en cours d'écriture. Vous pouvez ensuite reprendre la diffusion.
-
-Vous pouvez effectuer des recherches sur le contenu des logs de diffusion à l'aide d'une simple correspondance de chaîne. Pour en savoir plus sur Live Tail, consultez la [documentation dédiée][7].
-
-**Remarque** : les logs de diffusion ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, cela efface le contenu de la diffusion.
-
-{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" >}}
-
-### Logs indexés
-
-Choisissez un intervalle pour afficher les logs correspondants que vous avez choisis d'indexer et de rendre persistants. L'indexation vous permet de filtrer vos logs à l'aide de tags et de facettes. Par exemple, pour rechercher des logs affichant le statut `Error`, saisissez `status:error` dans la zone de recherche. La fonction de saisie automatique peut vous aider à trouver le tag que vous souhaitez utiliser. Les attributs clés de vos logs sont déjà stockés dans des tags, ce qui vous permet de les rechercher, filtrer et agréger en cas de besoin.
-
-{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Aperçu logs volet latéral" style="width:100%;">}}
-
-## Recherche, filtrage et pivotement
+## Rechercher, filtrer et faire pivoter
 
 ### Recherche textuelle
 
-Les conteneurs sont, de par leur nature, des objets avec une très forte cardinalité. La recherche de texte flexible de Datadog cherche des correspondances dans les sous-chaînes du nom, de l'ID ou des champs d'image du conteneur.
+Les conteneurs sont, de par leur nature, des objets avec une très forte cardinalité. La recherche de texte flexible de Datadog permet de rechercher des sous-chaînes correspondantes dans le champ name, ID ou image d'un conteneur.
+
+Si vous avez activé la fonctionnalité Ressources Kubernetes, vous avez la possibilité d'effectuer des recherches parmi les chaînes `pod`, `deployment`, `ReplicaSet` et `service name` ainsi que parmi les étiquettes Kubernetes dans une [vue Ressources Kubernetes](#vues-ressources-kubernetes).
 
 Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants :
 
@@ -128,14 +132,30 @@ Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, v
 |:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
 | **Opérateur** | **Description**                                                                                                                  | **Exemple**                                                     |
 | `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut).                           | java AND elasticsearch                                          |
-| `OR`         | **Union** : un des deux termes est inclus dans les événements sélectionnés.                                                                       | java OR python                                                  |
+| `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                                                       | java OR python                                                  |
 | `NOT` / `!`  | **Exclusion** : le terme suivant n'est PAS dans l'événement. Vous pouvez utiliser le mot `NOT` ou le caractère `!` pour effectuer la même opération. | java NOT elasticsearch <br> **équivalent** : java !elasticsearch |
 
 Utilisez des parenthèses pour regrouper les opérateurs. Par exemple, `(NOT (elasticsearch OR kafka) java) OR python`.
 
-### Tagging
+### Filtrer et faire pivoter
 
-Les conteneurs sont [tagués][8] avec tous les tags des hosts existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
+La capture d'écran ci-dessous illustre un système filtré de façon à visualiser un cluster Kubernetes composé de neuf nœuds. La charge RSS et la charge processeur des conteneurs sont affichées et comparées aux limites provisionnées pour les conteneurs (le cas échéant). Dans cet exemple, on constate que les conteneurs de ce cluster sont surprovisionnés. Vous pouvez définir des limites plus strictes et faire appel au bin packing pour optimiser l'utilisation des ressources.
+
+{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Sur-approvisionnement" style="width:80%;">}}
+
+Les environnements de conteneur sont dynamiques et peuvent être difficiles à surveiller. La capture d'écran ci-dessous illustre une vue qui a été pivotée par `kube_service` et `host`, et filtrée par `kube_namespace:default` dans le but de réduire les données parasite liées au système. Vous pouvez voir où les différents services sont exécutés, ainsi que le degré de saturation des métriques clés : 
+
+{{< img src="infrastructure/livecontainers/hostxservice.png" alt="Host x services"  style="width:80%;">}}
+
+Pour analyser l'évolution de l'utilisation des ressources entre les différentes mises à jour, vous pouvez faire pivoter les données en fonction des paramètres `ecs_task_name` et `ecs_task_version` d'ECS.
+
+{{< img src="infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" style="width:80%;">}}
+
+Pour les ressources Kubernetes, sélectionnez les tags Datadog à utiliser pour filtrer les données, par exemple `environment`, `service` ou `pod_phase`. Vous pouvez également utiliser les facettes de conteneur sur la gauche pour visualiser une ressource Kubernetes spécifique. Regroupez vos pods en fonction de tags Datadog pour obtenir une vue agrégée et retrouver des informations plus rapidement.
+
+## Tagging
+
+Les conteneurs sont [tagués][11] avec tous les tags de host existants, ainsi qu'avec les métadonnées associées à chaque conteneur.
 
 Le tag `image_name` est ajouté à tous les conteneurs, y compris les intégrations avec des orchestrateurs couramment utilisés, telles que [ECS][4] et [Kubernetes][3], qui fournissent davantage de tags au niveau des conteneurs. De plus, chaque conteneur est doté d'une icône Docker, ECS ou Kubernetes afin de pouvoir identifier en quelques secondes les conteneurs orchestrés. 
 
@@ -157,21 +177,16 @@ Les conteneurs Kubernetes possèdent les tags suivants :
 * `kube_deployment`
 * `kube_cluster`
 
-### Filtrage et pivotement
+SI vous avez configuré le [tagging de service unifié][12], les tags `env`, `service`, et `version` sont également recueillis automatiquement.
+L'utilisation de ces tags vous permet d'assurer la cohésion des données de l'APM, des logs, des métriques et des données Live Containers.
 
-La capture d'écran ci-dessous illustre un système filtré de façon à obtenir un cluster Kubernetes composé de neuf nœuds. L'utilisation RSS et du processeur des conteneurs est transmise et comparée aux limites définies pour les conteneurs (le cas échéant). Dans cet exemple, il semblerait que les conteneurs de ce cluster soient en sur-approvisionnement. Vous pouvez définir des limites plus strictes et rassembler les ressources pour optimiser leur utilisation.
+## Vues
 
-{{< img src="infrastructure/livecontainers/overprovisioned.png" alt="Sur-approvisionnement" style="width:80%;">}}
+### Vue Conteneurs
 
-Les environnements de conteneur sont dynamiques et peuvent être difficiles à surveiller. La capture d'écran ci-dessous comporte une vue qui a été pivotée par `kube_service` et `host`, et filtrée par `kube_namespace:default` dans le but de réduire les données parasite liées au système. Vous pouvez voir où les services s'exécutent, ainsi que le degré de saturation des métriques clés : 
+La vue **Conteneurs** vous permet de visualiser vos données sous forme de [Nuage de points](#nuages-de-points) ou de [Série temporelle][13]. Elle comprend également un tableau pour mieux organiser les données de vos conteneurs par nom de conteneur, statut et date de démarrage ainsi que d'autres champs.
 
-{{< img src="infrastructure/livecontainers/hostxservice.png" alt="Host x services"  style="width:80%;">}}
-
-Pour bien comprendre les changements d'utilisation des ressources entre chaque mise à jour, vous pouvez effectuer un pivotement avec les paramètres `ecs_task_name` et `ecs_task_version` d'ECS.
-
-{{< img src="infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" style="width:80%;">}}
-
-## Nuages de points
+#### Nuage de points
 
 Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles et ainsi mieux comprendre les performances de vos conteneurs.
 
@@ -189,34 +204,67 @@ La requête en haut de la fenêtre vous permet de contrôler les différentes op
 
 {{< img src="infrastructure/livecontainers/scatterplot.png" alt="nuage de points" style="width:80%;">}}
 
-## Surveillance en temps réel
+#### Surveillance en temps réel
 
 Lorsque vous utilisez activement la page des conteneurs, les métriques sont recueillies toutes les deux secondes. Cet aspect est très important pour les métriques hautement volatiles, telles que l'utilisation du processeur. En arrière-plan, pour le contexte historique, les métriques sont recueillies toutes les 10 secondes.
 
-## Inclure ou exclure des conteneurs
+### Vue Ressources Kubernetes
 
-Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
+Si vous avez activé la fonctionnalité Ressources Kubernetes pour Live Containers, utilisez le menu déroulant **View** en haut à gauche de chaque page pour basculer entre les vues **Pods**, **Deployments**, **ReplicaSets** et **Services** . Chacune de ces vues comprend un tableau de données pour vous aider à mieux organiser vos données par champ (nom, statut, etc.) et par étiquettes Kubernetes, ainsi qu'une Cluster Map détaillée pour obtenir une vue d'ensemble de vos pods et clusters Kubernetes.
 
-* Pour exclure des conteneurs, transmettez la variable d'environnement `DD_CONTAINER_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
-* Pour inclure des conteneurs, transmettez la variable d'environnement `DD_CONTAINER_INCLUDE` ou ajoutez `ac_include:` dans le fichier de configuration principal `datadog.yaml`.
+#### Cluster Map
 
-Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
+Les Cluster Maps Kubernetes vous offrent une vue d'ensemble de vos pods et clusters Kubernetes. Vous pouvez visualiser toutes vos ressources depuis un seul écran en définissant des groupes et des filtres personnalisés, et choisir les métriques à utiliser pour colorer les pods.
 
-Par exemple, pour exclure toutes les images Debian à l'exception des conteneurs dont le nom commence par *frontend*, ajoutez les deux lignes de configuration suivantes dans votre fichier `datadog.yaml` :
+Pour analyser en détail une ressource spécifique depuis la Cluster Map, cliquez sur un cercle ou un groupe. Les détails apparaîtront alors dans un volet distinct.
 
-```shell
-ac_exclude: ["image:debian"]
-ac_include: ["name:frontend.*"]
-```
+#### Volet d'informations
 
-**Remarque** : pour la version 5 de l'Agent, au lieu d'ajouter les lignes ci-dessus dans le fichier de configuration principal `datadog.conf`, ajoutez explicitement un fichier `datadog.yaml` dans `/etc/datadog-agent/`. En effet, l'Agent de processus exige que toutes les options de configuration se trouvent à cet emplacement. Cette configuration exclut uniquement les conteneurs de la collecte en temps réel, et **non** de la fonction Autodiscovery.
+Cliquez sur une ligne du tableau ou sur un objet de la Cluster Map pour afficher des informations sur une ressource spécifique dans un volet latéral. Ce volet est utile pour le dépannage et pour trouver des informations sur un conteneur ou une ressource, comme par exemple :
+
+* [**Logs**][14] : Visualisez les logs de votre conteneur ou de votre ressource. Cliquez sur l'un de ces logs pour afficher les logs associés dans le Log Explorer.
+* [**Metrics**][15] : Visualisez les métriques de votre conteneur ou ressource, mises à jour en temps réel. Vous avez la possibilité d'afficher n'importe quel graphique en plein écran et d'en partager un snapshot ou de l'exporter depuis cet onglet.
+* **Network** : Visualisez les performances réseau d'un conteneur ou d'une ressource, y compris la source, la destination, le volume envoyé/reçu et le débit. Utilisez le champ **Destination** pour effectuer une recherche par tag tel que `DNS` ou `ip_type`, ou utilisez le filtre **Group by** dans cette vue pour regrouper vos données réseau par tag, tel que `pod_name` ou `service`.
+* [**Traces**][16] : Visualisez les traces de votre conteneur ou ressource, y compris la date, le service, la durée, la méthode et le code de statut d'une trace.
+
+Les vues Ressources Kubernetes comprennent également les onglets suivants :
+
+* **Processes** : Visualisez tous les processus en cours d'exécution dans le conteneur de cette ressource.
+* **YAML** : Vue d'ensemble détaillée de la ressource au format YAML.
+* [**Events**][17] : Visualisez tous les événements Kubernetes pour votre ressource.
+
+Pour obtenir un dashboard détaillé de cette ressource, cliquez sur l'option **View Dashboard** en haut à droite de ce volet.
+
+### Logs de conteneur
+
+Visualisez le flux de logs d'un conteneur, tel que `docker logs -f` ou `kubectl logs -f`, dans Datadog. Cliquez sur un conteneur dans le tableau pour afficher davantage d'informations. Cliquez sur l'onglet *Logs* pour visualiser en temps réel les données [Live Tail][18] ou les logs indexés historiques, peu importe leur date.
+
+#### Live Tail
+
+Avec la fonctionnalité Live Tail, tous les logs de conteneur sont diffusés sous forme de flux. Mettez un flux en pause pour lire facilement le contenu des logs en cours d'écriture. Vous pouvez ensuite réactiver la mise à jour du flux.
+
+Vous pouvez effectuer des recherches parmi les logs du flux à l'aide d'une simple correspondance textuelle. Pour en savoir plus sur Live Tail, consultez la [documentation dédiée][7].
+
+**Remarque** : les logs diffusés ne sont pas persistants. Si vous saisissez une nouvelle recherche ou actualisez la page, le contenu du flux est effacé.
+
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Aperçu logs volet latéral" video="true" >}}
+
+#### Logs indexés
+
+Choisissez un intervalle pour afficher les logs correspondants que vous avez choisis d'indexer et de rendre persistants. L'indexation vous permet de filtrer vos logs à l'aide de tags et de facettes. Par exemple, pour rechercher des logs affichant le statut `Error`, saisissez `status:error` dans la zone de recherche. La fonction de saisie automatique peut vous aider à trouver le tag que vous souhaitez utiliser. Les attributs clés de vos logs sont déjà stockés dans des tags, ce qui vous permet de les rechercher, filtrer et agréger en cas de besoin.
+
+{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Aperçu logs volet latéral" style="width:100%;">}}
 
 ## Remarques et problèmes connus
 
-* Cette fonctionnalité ne prend actuellement pas en charge les conteneurs Windows.
 * La collecte de données en temps réel (toutes les 2 s) est désactivée après 30 minutes. Pour reprendre la collecte en temps réel, actualisez la page.
-* Les réglages RBAC peuvent restreindre la collecte de métadonnées Kubernetes. Consultez les [entités RBAC pour l'Agent Datadog][9].
+* Les réglages RBAC peuvent restreindre la collecte de métadonnées Kubernetes. Consultez les [entités RBAC pour l'Agent Datadog][19].
 * Dans Kubernetes, la valeur de `health` correspond à la sonde de disponibilité des conteneurs, et non à leur sonde d'activité.
+
+### Ressources Kubernetes
+
+* Les données sont mises à jour automatiquement à des intervalles constants. Les intervalles de mises à jour sont susceptibles de changer durant la bêta.
+* Dans les clusters comprenant plus de 1000 déploiements ou ReplicaSets, l'Agent de cluster est susceptible de fortement solliciter le processeur. Vous avez la possibilité de désactiver le nettoyage des conteneurs dans le chart Helm. Consultez [ce lien][20] pour en savoir plus.
 
 ## Pour aller plus loin
 
@@ -226,8 +274,19 @@ ac_include: ["name:frontend.*"]
 [2]: /fr/integrations/docker_daemon/
 [3]: /fr/agent/kubernetes/
 [4]: /fr/integrations/amazon_ecs/
-[5]: /fr/agent/docker/#run-the-docker-agent
-[6]: /fr/agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[7]: /fr/logs/live_tail/
-[8]: /fr/tagging/
-[9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[5]: https://app.datadoghq.com/containers/kubernetes-beta
+[6]: /fr/agent/docker/#run-the-docker-agent
+[7]: /fr/agent/kubernetes/?tab=helm
+[8]: /fr/agent/
+[9]: /fr/agent/cluster_agent/setup/?tab=secret
+[10]: /fr/agent/kubernetes/?tab=helm#installation
+[11]: /fr/getting_started/tagging/
+[12]: /fr/getting_started/tagging/unified_service_tagging
+[13]: /fr/dashboards/widgets/timeseries/
+[14]: /fr/logs
+[15]: /fr/metrics
+[16]: /fr/tracing
+[17]: /fr/events
+[18]: /fr/logs/live_tail/
+[19]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[20]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog

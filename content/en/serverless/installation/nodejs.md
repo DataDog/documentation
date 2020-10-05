@@ -2,12 +2,24 @@
 title: Instrumenting Node.js Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+- link: "/serverless/serverless_integrations/plugin/"
+  tag: "Documentation"
+  text: "Datadog Serverless Plugin"
+- link: "/serverless/serverless_integrations/macro/"
+  tag: "Documentation"
+  text: "Datadog Serverless Macro"
+- link: "/serverless/serverless_integrations/cli/"
+  tag: "Documentation"
+  text: "Datadog Serverless CLI"
+- link: 'serverless/serverless_tagging/'
+  tag: "Documentation"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Documentation"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Documentation"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
@@ -250,6 +262,8 @@ You need to subscribe the Datadog Forwarder Lambda function to each of your func
 
 After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][2].
 
+### Monitor Custom Business Metrics
+
 If you would like to submit a custom metric or manually instrument a function, see the sample code below:
 
 ```javascript
@@ -278,6 +292,19 @@ exports.handler = async (event) => {
   return response;
 };
 ```
+[Enable custom metric submission][3] to get started.
+
+### Enable the AWS X-Ray Integration
+
+Datadog’s integration with AWS X-Ray allows you to visualize end-to-end serverless transactions, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, [choose between setting up Datadog APM or the AWS X-Ray integration][4] for your tracing needs.
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/functions
+[2]: /serverless/forwarder
+[3]: /serverless/custom_metrics
+[4]: /serverless/distributed_tracing

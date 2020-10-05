@@ -5,6 +5,7 @@ aliases:
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -44,7 +45,7 @@ Win 32 Event Log は、Windows のイベントログを監視して Datadog に�
 
 Windows Event Log チェックは [Datadog Agent][1] パッケージに含まれています。追加のインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `win32_event_log.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル win32_event_log.d/conf.yaml][3] を参照してください。
 

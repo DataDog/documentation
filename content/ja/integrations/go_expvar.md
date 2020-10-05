@@ -4,6 +4,7 @@ aliases:
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -47,7 +48,7 @@ Go サービスのメモリ使用量を追跡し、Go の expvar パッケージ
 
 Go Expvar チェックは Agent にパッケージ化されているため、メトリクスを収集するには、Go サービスを実行している場所に [Agent をインストール][3]します。
 
-### 構成
+### コンフィギュレーション
 
 #### Go サービスの準備
 

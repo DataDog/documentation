@@ -18,7 +18,7 @@ integration_title: Eventstore
 is_public: true
 kind: インテグレーション
 maintainer: '@xorima'
-manifest_version: 1.0.0
+manifest_version: 1.1.0
 metric_prefix: eventstore.
 name: eventstore
 public_title: Datadog-Eventstore インテグレーション

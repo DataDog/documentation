@@ -3,6 +3,7 @@ assets:
   dashboards:
     Kubernetes Metrics Server - Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +43,7 @@ supported_os:
 
 Kube_metrics_server チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

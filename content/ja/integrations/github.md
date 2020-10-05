@@ -76,6 +76,8 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
 
     {{< img src="integrations/github/get_all_branches.png" alt="github すべてのブランチ" popup="true" style="width:50%;">}}
 
+    ブランチにワイルドカードを使用することも可能です（例: `dev-*` には `dev-` で開始するすべてのブランチが含まれます）。
+
 ## 収集データ
 
 インテグレーションが完了すると、選択したイベントが Datadog イベントストリームに表示されるようになります。ダッシュボードの左上の検索バーに `sources:github` と入力すると、GitHub のイベントがダッシュボードのグラフに重ねて表示されます。

@@ -26,7 +26,13 @@ further_reading:
 
 ## はじめに
 
-すでに Datadog アカウントをお持ちの場合は、ホストベースまたはコンテナベースのセットアップ向けのアプリ内ガイドで[詳細な手順][2]をご確認いただけます。
+### アプリ内のドキュメントに従ってください (推奨)
+
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
+
+- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
+- `service`、`env`、`version` タグを動的に設定します。
+- セットアップ中に App Analytics およびトレース ID お挿入を有効にします。
 
 それ以外の場合、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストール、構成します][3]。.NET トレーサーはプロセス中に実行し、アプリケーションをインスツルメントし、トレースをアプリケーションから Agent に送信します。
 
@@ -206,7 +212,47 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
+
+#### Systemctl (サービスごと)
+
+`systemctl` を使用して、サービスとして .NET アプリケーションを実行する場合、特定のサービスに必要な環境変数がロードされるよう追加することができます。
+
+以下を含む、`environment.env` というファイルを作成します。
+
+```bat
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
+# アプリケーションで使用されるその他の環境変数
+```
+
+サービスのコンフィギュレーションファイルで、サービスブロックの [`EnvironmentFile`][2] としてこれを参照します。
+
+```bat
+[Service]
+EnvironmentFile=/path/to/environment.env
+ExecStart=<アプリケーションを起動するために使用するコマンド>
+```
+変数を設定したら、.NET サービスを再起動して環境変数を有効にします。
+
+#### Systemctl (すべてのサービス)
+
+`systemctl` を使用して、サービスとして .NET アプリケーションを実行する場合、`systemctl` を通じて実行されるすべてのサービスにロードされるよう環境変数を設定することも可能です。この変数が設定されていることを確認するには、[`systemctl show-environment`][2] を使用します。この方法を実行する前に、すべての .NET プロセスのインスツルメンテーションに関する注意を以下でご確認ください。
+
+```bat
+systemctl set-environment CORECLR_ENABLE_PROFILING=1
+systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
+systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+設定できたら、環境変数が`systemctl show-environment` でセットされていることを確認します。
+
 [1]: https://docs.docker.com/engine/reference/builder/#env
+[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -223,7 +269,7 @@ CMD ["dotnet", "example.dll"]
 
 **注:** 手動と自動両方のインスツルメンテーションを使用する場合、MSI インストーラーと NuGet パッケージのバージョンの同期を保つ必要があります。
 
-## 構成
+## コンフィギュレーション
 
 .NET トレーサーを構成する方法は複数あります:
 
@@ -367,7 +413,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /ja/tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /ja/tracing/custom_instrumentation/dotnet/

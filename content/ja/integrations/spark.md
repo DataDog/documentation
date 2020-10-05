@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: spark
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -54,7 +55,7 @@ supported_os:
 
 Spark チェックは [Datadog Agent][3] パッケージに含まれています。Mesos マスター（Mesos の Spark）、YARN ResourceManager（YARN の Spark）、Spark マスター（Spark Standalone）に追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -103,7 +104,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 | `<インスタンスコンフィギュレーション>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<CLUSTER_NAME>"}` |
 
 
-##### ログの収集
+#### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 

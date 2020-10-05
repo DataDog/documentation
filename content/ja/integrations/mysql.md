@@ -5,9 +5,8 @@ assets:
   dashboards: {}
   logs:
     source: mysql
-  monitors:
-    Replication Behind Master: assets/monitors/mysql_replication_seconds_behind_master.json
-    Slave Replication Not Running: assets/monitors/mysql_replication_slave.json
+  metrics_metadata: metadata.csv
+  monitors: {}
   saved_views:
     operations: assets/saved_views/operations.json
     operations_overview: assets/saved_views/operations_overview.json
@@ -128,7 +127,7 @@ mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 

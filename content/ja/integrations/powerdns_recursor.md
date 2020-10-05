@@ -4,6 +4,7 @@ aliases:
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -55,7 +56,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### PowerDNS の準備
 

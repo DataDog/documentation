@@ -3,8 +3,11 @@ aliases:
   - /ja/guides/network_checks
   - /ja/integrations/tcpcheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,7 +49,7 @@ supported_os:
 
 TCP チェックは [Datadog Agent][2] パッケージに含まれているため、TCP ポートを調査するホストに追加で何かをインストールする必要はありません。メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適な実行方法ですが、リモート接続をテストする場合などに、監視対象の TCP サービスを実行していないホストからこのチェックを実行する方が望ましい場合があります。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

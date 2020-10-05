@@ -208,6 +208,8 @@ $ echo "ログファイルのログの新しい行" >> log_file_to_monitor.log
 
 {{< img src="getting_started/logs/file_log_example.png" alt="ファイルログ例" >}}
 
+**注**: Datadog Agent を使用している場合、256KB 以上のログイベントは複数のエントリに分割されます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

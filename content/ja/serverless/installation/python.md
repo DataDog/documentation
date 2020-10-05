@@ -220,7 +220,7 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 
 
 ### Datadog Lambda ライブラリのインストール
 
-Datadog Lambda ライブラリをレイヤーまたは Python パッケージとしてインポートすることができます。
+Datadog Lambda ライブラリをレイヤー (推奨) または Python パッケージとしてインポートすることができます。
 
 `datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
 
@@ -244,13 +244,13 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 
 #### パッケージの使用
 
-`datadog-lambda` とその依存関係を、ローカルで関数プロジェクトフォルダーにインストールします。詳しくは、[関数デプロイメントパッケージに依存関係を追加する方法][3]をご参照ください。
+`datadog-lambda` とその依存関係を、ローカルで関数プロジェクトフォルダーにインストールします。**注**: `datadog-lambda` はネイティブ拡張機能である `ddtrace` に依存するため、これらは Linux 環境でインストールおよびコンパイルを行う必要があります。例えば、Serverless Framework には [dockerizePip][3] を、AWS SAM には [--use-container][4] を使用することができます。詳しくは、[関数デプロイメントパッケージに依存関係を追加する方法][5]をご参照ください。
 
 ```
 pip install datadog-lambda -t ./
 ```
 
-[最新リリース][4]を参照。
+[最新リリース][6]を参照。
 
 ### 関数の構成
 
@@ -264,24 +264,28 @@ pip install datadog-lambda -t ./
 
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
 
-1. [まだの場合は、Datadog Forwarder をインストールします][5]。
-2. [DdFetchLambdaTags のオプションが有効であることを確認します][6]。
-3. [Datadog Forwarder を関数のロググループにサブスクライブします][7]。
+1. [まだの場合は、Datadog Forwarder をインストールします][7]。
+2. [DdFetchLambdaTags のオプションが有効であることを確認します][8]。
+3. [Datadog Forwarder を関数のロググループにサブスクライブします][9]。
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-python/releases
-[3]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[4]: https://pypi.org/project/datadog-lambda/
-[5]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[6]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[6]: https://pypi.org/project/datadog-lambda/
+[7]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[8]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog サーバーレスモニタリングの利用
 
 以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
+
+### カスタムビジネスメトリクスの監視
 
 カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
 
@@ -307,6 +311,16 @@ def get_message():
     return "Hello from serverless!"
 ```
 
+[カスタムメトリクスの送信を有効化][3]してはじめます。
+
+### AWS X-Ray インテグレーションを有効にする
+
+Datadog の AWS X-Ray インテグレーションはエンドツーエンドのサーバーレストランザクションを可視化します。発生したエラーや遅延に的を絞り、関数のパフォーマンスがユーザーエクスペリエンスにどう影響しているかを確認することができます。言語とコンフィギュレーションに応じて、[Datadog APM または AWS X-Ray インテグレーションの中から選択][5]してトレースを実行してください。
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="AWS Lambda を Datadog でトレースするためのアーキテクチャダイアグラム" >}}
+
 [1]: /ja/integrations/amazon_web_services/
 [2]: /ja/serverless/forwarder
 [3]: https://app.datadoghq.com/functions
+[4]: /ja/serverless/custom_metrics
+[5]: /ja/serverless/distributed_tracing

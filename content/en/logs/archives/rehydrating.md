@@ -58,7 +58,7 @@ Alternatively, teams can find the historical view from the Log Explorer directly
 
 ### Deleting historical views
 
-Historical views stay in Datadog until you opt to delete them. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
+Historical views stay in Datadog until they have exceeded the selected retention period, or you can opt to delete them sooner if you no longer need the view. You can mark a historical view to be deleted by selecting and confirming the delete icon at the far right of the historical view.
 
 One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 

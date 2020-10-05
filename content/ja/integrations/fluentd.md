@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -66,7 +67,7 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 </source>
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

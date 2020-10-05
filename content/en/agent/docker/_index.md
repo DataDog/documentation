@@ -7,6 +7,7 @@ aliases:
   - /agent/basic_agent_usage/docker/
   - /integrations/docker_daemon/
   - /integrations/docker/
+  - /docker/
 further_reading:
 - link: "/agent/docker/log/"
   tag: "Documentation"
@@ -157,7 +158,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 | Env Variable    | Description                                                                                                                                                                                                        |
 |-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
+| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example:"name:container_name_1 name:container_name_2", name:.*|
 | `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 | `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.  |
 | `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude. |

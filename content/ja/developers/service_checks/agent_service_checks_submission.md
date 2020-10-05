@@ -38,13 +38,13 @@ self.service_check(name, status, tags=None, hostname=None, message=None)
 4. このフォルダー内に次の内容でカスタムチェックファイルを作成し、`service_check_example.py` と名付けます。
 
     {{< code-block lang="python" filename="service_check_example.py" >}}
-    from datadog_checks.base import AgentCheck
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-      def check(self, instance):
-          self.service_check('example_service_check', 0, message='サンプルアプリケーションが稼働しています。')
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.service_check('example_service_check', 0, message='サンプルアプリケーションが稼働しています。')
     {{< /code-block >}}
 
 5. [Agent を再起動します][3]。

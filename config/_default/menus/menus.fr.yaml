@@ -248,63 +248,88 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Amazon ECS
+    url: agent/amazon_ecs/
+    parent: agent
+    identifier: agent_amazon_ecs
+    weight: 4
+  - name: Collecte de logs
+    url: agent/amazon_ecs/logs/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_logs
+    weight: 401
+  - name: APM
+    url: agent/amazon_ecs/apm/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_apm
+    weight: 402
+  - name: Extraction de tag
+    url: agent/amazon_ecs/tags/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_tags
+    weight: 403
+  - name: Données collectées
+    url: agent/amazon_ecs/data_collected/
+    parent: agent_amazon_ecs
+    identifier: agent_amazon_ecs_data_collected
+    weight: 404
   - name: Agent de cluster
     url: agent/cluster_agent/
     parent: agent
     identifier: agent_cluster
-    weight: 4
+    weight: 5
   - name: Configuration
     url: agent/cluster_agent/setup/
     parent: agent_cluster
     identifier: cluster_agent_setup
-    weight: 401
+    weight: 501
   - name: Collecte d'événements
     url: agent/cluster_agent/event_collection/
     parent: agent_cluster
     identifier: cluster_agent_event_collection
-    weight: 402
+    weight: 502
   - name: Métriques externes et custom
     url: agent/cluster_agent/external_metrics/
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
-    weight: 403
+    weight: 503
   - name: Checks de cluster
     url: agent/cluster_agent/clusterchecks/
     parent: agent_cluster
-    weight: 404
+    weight: 504
   - name: Checks d'endpoints
     url: agent/cluster_agent/endpointschecks/
     parent: agent_cluster
-    weight: 405
+    weight: 505
   - name: Contrôleur d'admission
     url: agent/cluster_agent/admission_controller/
     parent: agent_cluster
-    weight: 406
+    weight: 506
   - name: Commandes et options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 407
+    weight: 507
   - name: Fournisseur de métadonnées sur le cluster
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 408
+    weight: 508
   - name: Créer l'image
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 409
+    weight: 509
   - name: Exécuteur de checks de cluster
     url: agent/cluster_agent/clusterchecksrunner
     identifier: cluster_agent_clcr
     parent: agent_cluster
-    weight: 410
+    weight: 510
   - name: Dépannage
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 411
+    weight: 511
   - name: Collecte de logs
     url: agent/logs/
     identifier: agent_logs
@@ -365,7 +390,7 @@ main:
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
     weight: 905
-  - name: Problèmes relatifs aux intégrations
+  - name: Problèmes avec les intégrations
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
     weight: 906
@@ -373,11 +398,11 @@ main:
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
     weight: 907
-  - name: Problèmes relatifs à Autodiscovery
+  - name: Problèmes avec Autodiscovery
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
     weight: 908
-  - name: Problèmes relatifs aux conteneurs Windows
+  - name: Problèmes avec les conteneurs Windows
     url: agent/troubleshooting/windows_containers
     weight: 909
     parent: agent_troubleshooting
@@ -488,7 +513,7 @@ main:
     url: dashboards/correlations/
     parent: dashboards
     weight: 6
-  - name: Template Variables
+  - name: Template variables
     url: dashboards/template_variables/
     parent: dashboards
     weight: 7
@@ -623,10 +648,6 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
-  - name: Activer AWS X-Ray
-    url: tracing/serverless_functions
-    parent: serverless_distributed_tracing
-    weight: 501
   - name: Métriques custom
     url: serverless/custom_metrics
     parent: serverless
@@ -1547,6 +1568,26 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: Appareils
+    url: network_performance_monitoring/devices
+    parent: npm
+    identifier: ndm
+    weight: 400
+  - name: Configuration
+    url: network_performance_monitoring/devices/setup
+    parent: ndm
+    identifier: ndm_setup
+    weight: 401
+  - name: Profiles
+    url: network_performance_monitoring/devices/profiles
+    parent: ndm
+    identifier: ndm_profiles
+    weight: 402
+  - name: Données collectées
+    url: network_performance_monitoring/devices/data
+    parent: ndm
+    identifier: ndm_data
+    weight: 403
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -1802,7 +1843,7 @@ main:
     parent: security
     weight: 1
   - name: APM (tracing)
-    url: tracing/security/
+    url: tracing/custom_instrumentation/agent_customization/
     parent: security
     weight: 2
   - name: Log Management
@@ -1823,40 +1864,42 @@ api_v1:
     url: /api/v1/
     identifier: Présentation de l'API V1
     weight: -10
-  - name: Authentification
-    url: authentification
-    parent: Présentation de l'API V1
-  - name: Limites de débit
-    url: rate-limiting
+  - name: Utiliser l'API
+    url: /api/v1/using-the-api/
     parent: Présentation de l'API V1
     weight: 5
+  - name: Limites de débit
+    url: /api/v1/rate-limits/
+    parent: Présentation de l'API V1
+    weight: 6
+    identifier: rate-limits
   - name: Intégration AWS
     url: /api/v1/aws-integration/
     identifier: Intégration AWS
     generated: true
   - name: Supprimer une intégration AWS
     parent: Intégration AWS
-    url: delete-an-aws-integration
+    url: '#supprimer-une-integration-aws'
     generated: true
   - name: Énumérer toutes les intégrations AWS
     parent: Intégration AWS
-    url: list-all-aws-integrations
+    url: '#enumerer-toutes-les-integrations-aws'
     generated: true
   - name: Créer une intégration AWS
     parent: Intégration AWS
-    url: create-an-aws-integration
+    url: '#creer-une-integration-aws'
     generated: true
   - name: Mettre à jour une intégration AWS
     parent: Intégration AWS
-    url: update-an-aws-integration
+    url: '#mettre-a-jour-une-integration-aws'
     generated: true
   - name: Énumérer les règles d'espace de nommage
     parent: Intégration AWS
-    url: list-namespace-rules
+    url: '#enumerer-les-regles-d-espace-de-nommage'
     generated: true
   - name: Générer un nouvel ID externe
     parent: Intégration AWS
-    url: generate-a-new-external-id
+    url: '#generer-un-nouvel-id-externe'
     generated: true
   - name: Intégration de logs AWS
     url: /api/v1/aws-logs-integration/
@@ -1864,31 +1907,31 @@ api_v1:
     generated: true
   - name: Supprimer une intégration de logs AWS
     parent: Intégration de logs AWS
-    url: delete-an-aws-logs-integration
+    url: '#supprimer-une-integration-de-logs-aws'
     generated: true
   - name: Énumérer toutes les intégrations de logs AWS
     parent: Intégration de logs AWS
-    url: list-all-aws-logs-integrations
+    url: '#enumerer-toutes-les-integrations-de-logs-aws'
     generated: true
   - name: Ajouter l'ARN de Lambda aux logs AWS
     parent: Intégration de logs AWS
-    url: add-aws-log-lambda-arn
+    url: '#ajouter-l-arn-de-lambda-pour-les-logs-aws'
     generated: true
   - name: Vérifier qu'une fonction Lambda AWS existe
     parent: Intégration de logs AWS
-    url: check-that-an-aws-lambda-function-exists
+    url: '#verifier-qu-une-fonction-lambda-aws-existe'
     generated: true
   - name: Obtenir la liste des services AWS compatibles avec la collecte de logs
     parent: Intégration de logs AWS
-    url: get-list-of-aws-log-ready-services
+    url: '#obtenir-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
     generated: true
   - name: Activer une intégration de logs AWS
     parent: Intégration de logs AWS
-    url: enable-an-aws-logs-integration
+    url: '#activer-une-integration-de-logs-aws'
     generated: true
   - name: Vérifier les autorisations pour les services qui génèrent des logs
     parent: Intégration de logs AWS
-    url: check-permissions-for-log-services
+    url: '#verifier-les-autorisations-pour-les-services-qui-generent-des-logs'
     generated: true
   - name: Authentification
     url: /api/v1/authentication/
@@ -1896,7 +1939,7 @@ api_v1:
     generated: true
   - name: Valider la clé d'API
     parent: Authentification
-    url: validate-api-key
+    url: '#valider-la-cle-d-api'
     generated: true
   - name: Intégration Azure
     url: /api/v1/azure-integration/
@@ -1904,23 +1947,23 @@ api_v1:
     generated: true
   - name: Supprimer une intégration Azure
     parent: Intégration Azure
-    url: delete-an-azure-integration
+    url: '#supprimer-une-integration-azure'
     generated: true
   - name: Énumérer toutes les intégrations Azure
     parent: Intégration Azure
-    url: list-all-azure-integrations
+    url: '#enumerer-toutes-les-integrations-azure'
     generated: true
   - name: Créer une intégration Azure
     parent: Intégration Azure
-    url: create-an-azure-integration
+    url: '#creer-une-integration-azure'
     generated: true
   - name: Mettre à jour une intégration Azure
     parent: Intégration Azure
-    url: update-an-azure-integration
+    url: '#mettre-a-jour-une-integration-azure'
     generated: true
   - name: Mettre à jour les filtres de host d'une intégration Azure
     parent: Intégration Azure
-    url: update-azure-integration-host-filters
+    url: '#mettre-a-jour-les-filtres-de-host-d-une-integration-azure'
     generated: true
   - name: Listes de dashboards
     url: /api/v1/dashboard-lists/
@@ -1928,23 +1971,23 @@ api_v1:
     generated: true
   - name: Récupérer toutes les listes de dashboards
     parent: Listes de dashboards
-    url: get-all-dashboard-lists
+    url: '#recuperer-toutes-les-listes-de-dashboards'
     generated: true
   - name: Créer une liste de dashboards
     parent: Listes de dashboards
-    url: create-a-dashboard-list
+    url: '#creer-une-liste-de-dashboards'
     generated: true
   - name: Supprimer une liste de dashboards
     parent: Listes de dashboards
-    url: delete-a-dashboard-list
+    url: '#supprimer-une-liste-de-dashboards'
     generated: true
   - name: Récupérer une liste de dashboards
     parent: Listes de dashboards
-    url: get-a-dashboard-list
+    url: '#recuperer-une-liste-de-dashboards'
     generated: true
   - name: Mettre à jour une liste de dashboards
     parent: Listes de dashboards
-    url: update-a-dashboard-list
+    url: '#mettre-a-jour-une-liste-de-dashboards'
     generated: true
   - name: Dashboards
     url: /api/v1/dashboards/
@@ -1952,23 +1995,23 @@ api_v1:
     generated: true
   - name: Récupérer tous les dashboards
     parent: Dashboards
-    url: get-all-dashboards
+    url: '#recuperer-tous-les-dashboards'
     generated: true
   - name: Créer un dashboard
     parent: Dashboards
-    url: create-a-new-dashboard
+    url: '#creer-un-dashboard'
     generated: true
   - name: Supprimer un dashboard
     parent: Dashboards
-    url: delete-a-dashboard
+    url: '#supprimer-un-dashboard'
     generated: true
   - name: Récupérer un dashboard
     parent: Dashboards
-    url: get-a-dashboard
+    url: '#recuperer-un-dashboard'
     generated: true
   - name: Mettre à jour un dashboard
     parent: Dashboards
-    url: update-a-dashboard
+    url: '#mettre-a-jour-un-dashboard'
     generated: true
   - name: Downtimes
     url: /api/v1/downtimes/
@@ -1976,27 +2019,27 @@ api_v1:
     generated: true
   - name: Récupérer tous les downtimes
     parent: Downtimes
-    url: get-all-downtimes
+    url: '#recuperer-tous-les-downtimes'
     generated: true
   - name: Planifier un downtime
     parent: Downtimes
-    url: schedule-a-downtime
+    url: '#planifier-un-downtime'
     generated: true
   - name: Annuler les downtimes selon le contexte
     parent: Downtimes
-    url: cancel-downtimes-by-scope
+    url: '#annuler-les-downtimes-selon-le-contexte'
     generated: true
   - name: Annuler un downtime
     parent: Downtimes
-    url: cancel-a-downtime
+    url: '#annuler-un-downtime'
     generated: true
   - name: Récupérer un downtime
     parent: Downtimes
-    url: get-a-downtime
+    url: '#recuperer-un-downtime'
     generated: true
   - name: Mettre à jour un downtime
     parent: Downtimes
-    url: update-a-downtime
+    url: '#mettre-a-jour-un-downtime'
     generated: true
   - name: Graphiques intégrables
     url: /api/v1/embeddable-graphs/
@@ -2004,23 +2047,23 @@ api_v1:
     generated: true
   - name: Récupérer tous les embeds
     parent: Graphiques intégrables
-    url: get-all-embeds
+    url: '#recuperer-tous-les-embeds'
     generated: true
   - name: Créer un embed
     parent: Graphiques intégrables
-    url: create-embed
+    url: '#creer-un-embed'
     generated: true
   - name: Récupérer un embed spécifique
     parent: Graphiques intégrables
-    url: get-specific-embed
+    url: '#recuperer-un-embed-specifique'
     generated: true
   - name: Activer un embed
     parent: Graphiques intégrables
-    url: enable-embed
+    url: '#activer-un-embed'
     generated: true
   - name: Révoquer un embed
     parent: Graphiques intégrables
-    url: revoke-embed
+    url: '#revoquer-un-embed'
     generated: true
   - name: Événements
     url: /api/v1/events/
@@ -2028,15 +2071,15 @@ api_v1:
     generated: true
   - name: Interroger le flux d'événements
     parent: Événements
-    url: query-the-event-stream
+    url: '#interroger-le-flux-d-evenements'
     generated: true
   - name: Envoyer un événement
     parent: Événements
-    url: post-an-event
+    url: '#envoyer-un-evenement'
     generated: true
   - name: Récupérer un événement
     parent: Événements
-    url: get-an-event
+    url: '#recuperer-un-evenement'
     generated: true
   - name: Intégration GCP
     url: /api/v1/gcp-integration/
@@ -2044,19 +2087,19 @@ api_v1:
     generated: true
   - name: Supprimer une intégration GCP
     parent: Intégration GCP
-    url: delete-a-gcp-integration
+    url: '#supprimer-une-integration-gcp'
     generated: true
   - name: Énumérer toutes les intégrations GCP
     parent: Intégration GCP
-    url: list-all-gcp-integrations
+    url: '#enumerer-toutes-les-integrations-gcp'
     generated: true
   - name: Créer une intégration GCP
     parent: Intégration GCP
-    url: create-a-gcp-integration
+    url: '#creer-une-integration-gcp'
     generated: true
   - name: Mettre à jour une intégration GCP
     parent: Intégration GCP
-    url: update-a-gcp-integration
+    url: '#mettre-a-jour-une-integration-gcp'
     generated: true
   - name: Hosts
     url: /api/v1/hosts/
@@ -2064,19 +2107,19 @@ api_v1:
     generated: true
   - name: Désactiver un host
     parent: Hosts
-    url: mute-a-host
+    url: '#desactiver-un-host'
     generated: true
   - name: Réactiver un host
     parent: Hosts
-    url: unmute-a-host
+    url: '#reactiver-un-host'
     generated: true
   - name: Récupérer tous les hosts de votre organisation
     parent: Hosts
-    url: get-all-hosts-for-your-organization
+    url: '#recuperer-tous-les-hosts-de-votre-organisation'
     generated: true
   - name: Récupérer le nombre total de hosts actifs
     parent: Hosts
-    url: get-the-total-number-of-active-hosts
+    url: '#recuperer-le-nombre-total-de-hosts-actifs'
     generated: true
   - name: Plages d'IP
     url: /api/v1/ip-ranges/
@@ -2084,7 +2127,7 @@ api_v1:
     generated: true
   - name: Énumérer les plages d'IP
     parent: Plages d'IP
-    url: list-ip-ranges
+    url: '#enumerer-les-plages-d-ip'
     generated: true
   - name: Gestion des clés
     url: /api/v1/key-management/
@@ -2092,55 +2135,55 @@ api_v1:
     generated: true
   - name: Obtenir toutes les clés d'API
     parent: Gestion des clés
-    url: get-all-api-keys
+    url: '#obtenir-toutes-les-cles-d-api'
     generated: true
   - name: Créer une clé d'API
     parent: Gestion des clés
-    url: create-an-api-key
+    url: '#creer-une-cle-d-api'
     generated: true
   - name: Supprimer une clé d'API
     parent: Gestion des clés
-    url: delete-an-api-key
+    url: '#supprimer-une-cle-d-api'
     generated: true
   - name: Obtenir la clé d'API
     parent: Gestion des clés
-    url: get-api-key
+    url: '#obtenir-une-cle-d-api'
     generated: true
   - name: Modifier une clé d'API
     parent: Gestion des clés
-    url: edit-an-api-key
+    url: '#modifier-une-cle-d-api'
     generated: true
   - name: Obtenir toutes les clés d'application
     parent: Gestion des clés
-    url: get-all-application-keys
+    url: '#obtenir-toutes-les-cles-d-application'
     generated: true
   - name: Créer une clé d'application
     parent: Gestion des clés
-    url: create-an-application-key
+    url: '#creer-une-cle-d-application'
     generated: true
   - name: Supprimer une clé d'application
     parent: Gestion des clés
-    url: delete-an-application-key
+    url: '#supprimer-une-cle-d-application'
     generated: true
   - name: Obtenir une clé d'application
     parent: Gestion des clés
-    url: get-an-application-key
+    url: '#obtenir-une-cle-d-application'
     generated: true
   - name: Modifier une clé d'application
     parent: Gestion des clés
-    url: edit-an-application-key
+    url: '#modifier-une-cle-d-application'
     generated: true
   - name: Logs
     url: /api/v1/logs/
     identifier: Logs
     generated: true
-  - name: Récupérer la liste des logs
+  - name: Récupérer une liste de logs
     parent: Logs
-    url: get-a-list-of-logs
+    url: '#recuperer-une-liste-de-logs'
     generated: true
   - name: Envoyer des logs
     parent: Logs
-    url: send-logs
+    url: '#envoyer-des-logs'
     generated: true
   - name: Archives de logs
     url: /api/v1/logs-archives/
@@ -2152,23 +2195,23 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des index
     parent: Index de logs
-    url: get-indexes-order
+    url: '#obtenir-la-sequence-des-index'
     generated: true
   - name: Mettre à jour la séquence des index
     parent: Index de logs
-    url: update-indexes-order
+    url: '#mettre-a-jour-la-sequence-des-index'
     generated: true
   - name: Récupérer tous les index
     parent: Index de logs
-    url: get-all-indexes
+    url: '#obtenir-tous-les-index'
     generated: true
   - name: Obtenir un index
     parent: Index de logs
-    url: get-an-index
+    url: '#obtenir-un-index'
     generated: true
   - name: Mettre à jour un index
     parent: Index de logs
-    url: update-an-index
+    url: '#mettre-a-jour-un-index'
     generated: true
   - name: Pipelines de logs
     url: /api/v1/logs-pipelines/
@@ -2176,31 +2219,31 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des pipelines
     parent: Pipelines de logs
-    url: get-pipeline-order
+    url: '#obtenir-la-sequence-des-pipelines'
     generated: true
   - name: Mettre à jour la séquence des pipelines
     parent: Pipelines de logs
-    url: update-pipeline-order
+    url: '#mettre-a-jour-la-sequence-des-pipelines'
     generated: true
   - name: Récupérer tous les pipelines
     parent: Pipelines de logs
-    url: get-all-pipelines
+    url: '#obtenir-tous-les-pipelines'
     generated: true
   - name: Créer un pipeline
     parent: Pipelines de logs
-    url: create-a-pipeline
+    url: '#creer-un-pipeline'
     generated: true
   - name: Supprimer un pipeline
     parent: Pipelines de logs
-    url: delete-a-pipeline
+    url: '#supprimer-un-pipeline'
     generated: true
   - name: Récupérer un pipeline
     parent: Pipelines de logs
-    url: get-a-pipeline
+    url: '#obtenir-un-pipeline'
     generated: true
   - name: Mettre à jour un pipeline
     parent: Pipelines de logs
-    url: update-a-pipeline
+    url: '#mettre-a-jour-un-pipeline'
     generated: true
   - name: Requêtes de restriction de logs
     url: /api/v1/logs-restriction-queries/
@@ -2212,27 +2255,27 @@ api_v1:
     generated: true
   - name: Obtenir la liste des métriques actives
     parent: Métriques
-    url: get-active-metrics-list
+    url: '#recuperer-la-liste-des-metriques-actives'
     generated: true
   - name: Obtenir les métadonnées d'une métrique
     parent: Métriques
-    url: get-metric-metadata
+    url: '#obtenir-les-metadonnees-d-une-metrique'
     generated: true
   - name: Modifier les métadonnées d'une métrique
     parent: Métriques
-    url: edit-metric-metadata
+    url: '#modifier-les-metadonnees-d-une-metrique'
     generated: true
   - name: Interroger les points de séries temporelles
     parent: Métriques
-    url: query-timeseries-points
+    url: '#interroger-les-points-de-series-temporelles'
     generated: true
   - name: Rechercher des métriques
     parent: Métriques
-    url: search-metrics
+    url: '#rechercher-des-metriques'
     generated: true
   - name: Envoyer des métriques
     parent: Métriques
-    url: submit-metrics
+    url: '#envoyer-des-metriques'
     generated: true
   - name: Monitors
     url: /api/v1/monitors/
@@ -2240,59 +2283,59 @@ api_v1:
     generated: true
   - name: Récupérer tous les détails d'un monitor
     parent: Monitors
-    url: get-all-monitor-details
+    url: '#recuperer-tous-les-details-d-un-monitor'
     generated: true
   - name: Créer un monitor
     parent: Monitors
-    url: create-a-monitor
+    url: '#creer-un-monitor'
     generated: true
   - name: Vérifier si un monitor peut être supprimé
     parent: Monitors
-    url: check-if-a-monitor-can-be-deleted
+    url: '#verifier-si-un-monitor-peut-etre-supprime'
     generated: true
   - name: Rechercher des groupes de monitors
     parent: Monitors
-    url: monitors-group-search
+    url: '#rechercher-des-groupes-de-monitors'
     generated: true
   - name: Rechercher des monitors
     parent: Monitors
-    url: monitors-search
+    url: '#rechercher-des-monitors'
     generated: true
   - name: Valider un monitor
     parent: Monitors
-    url: validate-a-monitor
+    url: '#valider-un-monitor'
     generated: true
   - name: Supprimer un monitor
     parent: Monitors
-    url: delete-a-monitor
+    url: '#supprimer-un-monitor'
     generated: true
   - name: Récupérer les détails d'un monitor
     parent: Monitors
-    url: get-a-monitors-details
+    url: '#recuperer-les-details-d-un-monitor'
     generated: true
   - name: Modifier un monitor
     parent: Monitors
-    url: edit-a-monitor
+    url: '#modifier-un-monitor'
     generated: true
   - name: Désactiver un monitor
     parent: Monitors
-    url: mute-a-monitor
+    url: '#desactiver-un-monitor'
     generated: true
   - name: Réactiver un monitor
     parent: Monitors
-    url: unmute-a-monitor
+    url: '#reactiver-un-monitor'
     generated: true
   - name: Résoudre un monitor
     parent: Monitors
-    url: resolve-monitor
+    url: '#resoudre-un-monitor'
     generated: true
   - name: Désactiver tous les monitors
     parent: Monitors
-    url: mute-all-monitors
+    url: '#desactiver-tous-les-monitors'
     generated: true
   - name: Réactiver tous les monitors
     parent: Monitors
-    url: unmute-all-monitors
+    url: '#reactiver-tous-les-monitors'
     generated: true
   - name: Organisations
     url: /api/v1/organizations/
@@ -2300,23 +2343,23 @@ api_v1:
     generated: true
   - name: Énumérer les organisations que vous gérez
     parent: Organisations
-    url: list-your-managed-organizations
+    url: '#enumerer-les-organisations-que-vous-gerez'
     generated: true
   - name: Créer une organisation enfant
     parent: Organisations
-    url: create-a-child-organization
+    url: '#creer-une-organisation-enfant'
     generated: true
   - name: Récupérer les informations sur une organisation
     parent: Organisations
-    url: get-organization-information
+    url: '#recuperer-les-informations-sur-une-organisation'
     generated: true
   - name: Mettre à jour votre organisation
     parent: Organisations
-    url: update-your-organization
+    url: '#mettre-a-jour-votre-organisation'
     generated: true
   - name: Importer les métadonnées IdP
     parent: Organisations
-    url: upload-idp-metadata
+    url: '#importer-les-metadonnees-IdP'
     generated: true
   - name: Intégration PagerDuty
     url: /api/v1/pagerduty-integration/
@@ -2324,19 +2367,19 @@ api_v1:
     generated: true
   - name: Créer un objet de service
     parent: Intégration PagerDuty
-    url: create-a-new-service-object
+    url: '#creer-un-objet-de-service'
     generated: true
   - name: Supprimer un objet de service unique
     parent: Intégration PagerDuty
-    url: delete-a-single-service-object
+    url: '#supprimer-un-objet-de-service-unique'
     generated: true
   - name: Récupérer un objet de service unique
     parent: Intégration PagerDuty
-    url: get-a-single-service-object
+    url: '#recuperer-un-objet-de-service-unique'
     generated: true
   - name: Mettre à jour un objet de service unique
     parent: Intégration PagerDuty
-    url: update-a-single-service-object
+    url: '#mettre-a-jour-un-objet-de-service-unique'
     generated: true
   - name: Rôles
     url: /api/v1/roles/
@@ -2356,7 +2399,7 @@ api_v1:
     generated: true
   - name: Envoyer un check de service
     parent: Checks de service
-    url: submit-a-service-check
+    url: '#envoyer-un-check-de-service'
     generated: true
   - name: Dépendances de service
     url: /api/v1/service-dependencies/
@@ -2364,11 +2407,11 @@ api_v1:
     generated: true
   - name: Récupérer toutes les dépendances de service
     parent: Dépendances de service
-    url: get-all-service-dependencies
+    url: '#recuperer-toutes-les-dependances-de-service'
     generated: true
   - name: Récupérer les dépendances d'un service
     parent: Dépendances de service
-    url: get-one-services-dependencies
+    url: '#recuperer-les-dependances-d-un-service'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
@@ -2376,35 +2419,35 @@ api_v1:
     generated: true
   - name: Rechercher des SLO
     parent: Service Level Objectives
-    url: search-slos
+    url: '#rechercher-des-slo'
     generated: true
   - name: Créer un objet SLO
     parent: Service Level Objectives
-    url: create-a-slo-object
+    url: '#creer-un-objet-slo'
     generated: true
   - name: Supprimer plusieurs intervalles de SLO
     parent: Service Level Objectives
-    url: bulk-delete-slo-timeframes
+    url: '#supprimer-plusieurs-intervalles-de-slo'
     generated: true
   - name: Vérifier si des SLO peuvent être supprimés
     parent: Service Level Objectives
-    url: check-if-slos-can-be-safely-deleted
+    url: '#verifier-si-des-slo-peuvent-etre-supprimes'
     generated: true
   - name: Supprimer un SLO
     parent: Service Level Objectives
-    url: delete-a-slo
+    url: '#supprimer-un-slo'
     generated: true
   - name: Récupérer les détails d'un SLO
     parent: Service Level Objectives
-    url: get-a-slos-details
+    url: '#recuperer-les-details-d-un-slo'
     generated: true
   - name: Mettre à jour un SLO
     parent: Service Level Objectives
-    url: update-a-slo
+    url: '#mettre-a-jour-un-slo'
     generated: true
   - name: Récupérer l'historique d'un SLO
     parent: Service Level Objectives
-    url: get-an-slos-history
+    url: '#recuperer-l-historique-d-un-slo'
     generated: true
   - name: Intégration Slack
     url: /api/v1/slack-integration/
@@ -2412,19 +2455,19 @@ api_v1:
     generated: true
   - name: Supprimer une intégration Slack
     parent: Intégration Slack
-    url: delete-a-slack-integration
+    url: '#supprimer-une-integration-slack'
     generated: true
   - name: Récupérer les informations sur une intégration Slack
     parent: Intégration Slack
-    url: get-info-about-a-slack-integration
+    url: '#recuperer-les-informations-sur-une-integration-slack'
     generated: true
   - name: Créer une intégration Slack
     parent: Intégration Slack
-    url: create-a-slack-integration
+    url: '#creer-une-integration-slack'
     generated: true
   - name: Ajouter des canaux à l'intégration Slack
     parent: Intégration Slack
-    url: add-channels-to-slack-integration
+    url: '#ajouter-des-canaux-a-l-integration-slack'
     generated: true
   - name: Snapshots
     url: /api/v1/snapshots/
@@ -2432,7 +2475,7 @@ api_v1:
     generated: true
   - name: Prendre des snapshots de graphiques
     parent: Snapshots
-    url: take-graph-snapshots
+    url: '#prendre-des-snapshots-de-graphiques'
     generated: true
   - name: Synthetics
     url: /api/v1/synthetics/
@@ -2440,67 +2483,67 @@ api_v1:
     generated: true
   - name: Récupérer tous les emplacements (publics et privés)
     parent: Synthetics
-    url: get-all-locations-public-and-private
+    url: '#recuperer-tous-les-emplacements-publics-et-prives'
     generated: true
   - name: Récupérer la liste des tests
     parent: Synthetics
-    url: get-a-list-of-tests
+    url: '#recuperer-la-liste-des-tests'
     generated: true
   - name: Créer un test
     parent: Synthetics
-    url: create-a-test
+    url: '#creer-un-test'
     generated: true
   - name: Récupérer une configuration de test (Browser)
     parent: Synthetics
-    url: get-a-test-configuration-browser
+    url: '#recuperer-une-configuration-de-test-browser'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (Browser)
     parent: Synthetics
-    url: get-the-tests-latest-results-summaries-browser
+    url: '#recuperer-les-resumes-des-derniers-resultats-de-test-browser'
     generated: true
   - name: Récupérer un résultat de test (Browser)
     parent: Synthetics
-    url: get-a-test-result-browser
+    url: '#recuperer-un-resultat-de-test-browser'
     generated: true
   - name: Supprimer des tests
     parent: Synthetics
-    url: delete-tests
+    url: '#supprimer-des-tests'
     generated: true
   - name: Déclencher des tests Synthetics pour CI
     parent: Synthetics
-    url: trigger-some-synthetics-tests-for-ci
+    url: '#declencher-des-tests-synthetics-pour-ci'
     generated: true
   - name: Récupérer une configuration de test (API)
     parent: Synthetics
-    url: get-a-test-configuration-api
+    url: '#recuperer-une-configuration-de-test-api'
     generated: true
   - name: Modifier un test
     parent: Synthetics
-    url: edit-a-test
+    url: '#modifier-un-test'
     generated: true
   - name: Récupérer les résumés des derniers résultats de test (API)
     parent: Synthetics
-    url: get-the-tests-latest-results-summaries-api
+    url: '#recuperer-les-resumes-des-derniers-resultats-de-test-api'
     generated: true
   - name: Récupérer un résultat de test (API)
     parent: Synthetics
-    url: get-a-test-result-api
+    url: '#recuperer-un-resultat-de-test-api'
     generated: true
   - name: Interrompre ou démarrer un test
     parent: Synthetics
-    url: pause-or-start-a-test
+    url: '#interrompre-ou-demarrer-un-test'
     generated: true
   - name: Créer une variable globale
     parent: Synthetics
-    url: create-a-global-variable
+    url: '#creer-une-variable-globale'
     generated: true
   - name: Supprimer une variable globale
     parent: Synthetics
-    url: delete-a-global-variable
+    url: '#supprimer-une-variable-globale'
     generated: true
   - name: Modifier une variable globale
     parent: Synthetics
-    url: edit-a-global-variable
+    url: '#modifier-une-variable-globale'
     generated: true
   - name: Tags
     url: /api/v1/tags/
@@ -2508,23 +2551,23 @@ api_v1:
     generated: true
   - name: Récupérer des tags
     parent: Tags
-    url: get-tags
+    url: '#recuperer-des-tags'
     generated: true
   - name: Supprimer les tags d'un host
     parent: Tags
-    url: remove-host-tags
+    url: '#supprimer-les-tags-d-un-host'
     generated: true
   - name: Récupérer les tags d'un host
     parent: Tags
-    url: get-host-tags
+    url: '#recuperer-les-tags-d-un-host'
     generated: true
   - name: Ajouter des tags à un host
     parent: Tags
-    url: add-tags-to-a-host
+    url: '#ajouter-des-tags-a-un-host'
     generated: true
   - name: Mettre à jour les tags d'un host
     parent: Tags
-    url: update-host-tags
+    url: '#mettre-a-jour-les-tags-d-un-host'
     generated: true
   - name: Timeboards
     url: /api/v1/timeboards/
@@ -2536,7 +2579,7 @@ api_v1:
     generated: true
   - name: Envoyer des traces
     parent: Tracing
-    url: send-traces
+    url: '#envoyer-des-traces'
     generated: true
   - name: Mesure de l'utilisation
     url: /api/v1/usage-metering/
@@ -2544,95 +2587,99 @@ api_v1:
     generated: true
   - name: Obtenir la liste des rapports personnalisés journaliers disponibles
     parent: Mesure de l'utilisation
-    url: get-the-list-of-available-daily-custom-reports
+    url: '#obtenir-la liste-des-rapports-personnalises-journaliers-disponibles'
     generated: true
   - name: Obtenir les rapports personnalisés journaliers spécifiés
     parent: Mesure de l'utilisation
-    url: get-specified-daily-custom-reports
+    url: '#obtenir-les-rapports-personnalises-journaliers-specifies'
     generated: true
   - name: Obtenir la liste des rapports personnalisés mensuels disponibles
     parent: Mesure de l'utilisation
-    url: get-the-list-of-available-monthly-custom-reports
+    url: '#obtenir-la liste-des-rapports-personnalises-mensuels-disponibles'
     generated: true
   - name: Obtenir les rapports personnalisés mensuels spécifiés
     parent: Mesure de l'utilisation
-    url: get-specified-monthly-custom-reports
+    url: '#obtenir-les-rapports-personnalises-mensuels-specifies'
     generated: true
   - name: Obtenir l'utilisation horaire pour les logs analysés
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-analyzed-logs
+    url: '#obtenir-l-utilisation-horaire-pour-les-logs-analyses'
     generated: true
   - name: Obtenir l'utilisation horaire pour Lambda
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-lambda
+    url: '#obtenir-l-utilisation-horaire-pour-lambda'
     generated: true
   - name: Obtenir l'utilisation facturable de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: get-billable-usage-across-your-multi-org-account
+    url: '#obtenir-l-utilisation-facturable-de-votre-compte-multi-org'
     generated: true
   - name: Obtenir l'utilisation horaire pour Fargate
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-fargate
+    url: '#obtenir-l-utilisation-horaire-pour-fargate'
     generated: true
   - name: Obtenir l'utilisation horaire pour les hosts et conteneurs
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-hosts-and-containers
+    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
     generated: true
   - name: Obtenir l'utilisation horaire pour les logs
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-logs
+    url: '#obtenir-l-utilisation-horaire-pour-des-logs'
     generated: true
   - name: Obtenir l'utilisation horaire pour les logs par index
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-logs-by-index
+    url: '#obtenir-l-utilisation-horaire-pour-des-logs-par-index'
     generated: true
   - name: Obtenir l'utilisation horaire pour les flux réseau
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-network-flows
+    url: '#obtenir-l-utilisation-horaire-pour-les-flux-reseau'
     generated: true
   - name: Obtenir l'utilisation horaire pour les hosts réseau
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-network-hosts
+    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-reseau'
     generated: true
   - name: Obtenir l'utilisation horaire pour les hosts profilés
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-profiled-hosts
+    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-profiles'
     generated: true
   - name: Obtenir l'utilisation horaire pour les sessions RUM
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-rum-sessions
+    url: '#obtenir-l-utilisation-horaire-pour-les-sessions-rum'
     generated: true
   - name: Obtenir l'utilisation horaire pour les appareils SNMP
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-snmp-devices
+    url: '#obtenir-l-utilisation-horaire-pour-les-appareils-snmp'
     generated: true
   - name: Obtenir l'utilisation de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: get-usage-across-your-multi-org-account
+    url: '#obtenir-l-utilisation-de-votre-compte-multi-org'
     generated: true
   - name: Obtenir l'utilisation horaire pour les checks Synthetics
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-synthetics-checks
+    url: '#obtenir-l-utilisation-horaire-pour-les-checks-synthetics'
     generated: true
   - name: Obtenir l'utilisation horaire pour les API checks Synthetics
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-synthetics-api-checks
+    url: '#obtenir-l-utilisation-horaire-pour-les-api-checks-synthetics'
     generated: true
   - name: Obtenir l'utilisation horaire pour les browser checks Synthetics
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-synthetics-browser-checks
+    url: '#obtenir-l-utilisation-horaire-pour-les-browser-checks-synthetics'
     generated: true
   - name: Obtenir l'utilisation horaire pour les métriques custom
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-custom-metrics
+    url: '#obtenir-l-utilisation-horaire-pour-des-metriques-custom'
     generated: true
   - name: "Obtenir les 500\_principales métriques custom selon la moyenne horaire"
     parent: Mesure de l'utilisation
-    url: get-top-500-custom-metrics-by-hourly-average
+    url: '#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
     generated: true
   - name: Obtenir l'utilisation horaire pour la recherche de traces
     parent: Mesure de l'utilisation
-    url: get-hourly-usage-for-trace-search
+    url: '#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces'
+    generated: true
+  - name: Obtenir l'utilisation horaire pour le Tracing without Limits
+    parent: Mesure de l'utilisation
+    url: '#obtenir-l-utilisation-horaire-pour-le-tracing-without-limits'
     generated: true
   - name: Utilisateurs
     url: /api/v1/users/
@@ -2640,23 +2687,23 @@ api_v1:
     generated: true
   - name: Récupérer tous les utilisateurs
     parent: Utilisateurs
-    url: get-all-users
+    url: '#recuperer-tous-les-utilisateurs'
     generated: true
   - name: Créer un utilisateur
     parent: Utilisateurs
-    url: create-a-user
+    url: '#creer-un-utilisateur'
     generated: true
   - name: Désactiver un utilisateur
     parent: Utilisateurs
-    url: disable-a-user
+    url: '#desactiver-un-utilisateur'
     generated: true
   - name: Récupérer les détails d'un utilisateur
     parent: Utilisateurs
-    url: get-user-details
+    url: '#recuperer-les-details-d-un-utilisateur'
     generated: true
   - name: Mettre à jour un utilisateur
     parent: Utilisateurs
-    url: update-a-user
+    url: '#mettre-a-jour-un-utilisateur'
     generated: true
   - name: Intégration Webhooks
     url: /api/v1/webhooks-integration/
@@ -2664,48 +2711,50 @@ api_v1:
     generated: true
   - name: Créer une variable personnalisée
     parent: Intégration Webhooks
-    url: create-a-custom-variable
+    url: '#creer-une-variable-personnalisee'
     generated: true
   - name: Supprimer une variable personnalisée
     parent: Intégration Webhooks
-    url: delete-a-custom-variable
+    url: '#supprimer-une-variable-personnalisee'
     generated: true
   - name: Récupérer une variable personnalisée
     parent: Intégration Webhooks
-    url: get-a-custom-variable
+    url: '#recuperer-une-variable-personnalisee'
     generated: true
   - name: Mettre à jour une variable personnalisée
     parent: Intégration Webhooks
-    url: update-a-custom-variable
+    url: '#mettre-a-jour-une-variable-personnalisee'
     generated: true
   - name: Créer une intégration Webhooks
     parent: Intégration Webhooks
-    url: create-a-webhooks-integration
+    url: '#creer-une-integration-webhooks'
     generated: true
   - name: Supprimer un webhook
     parent: Intégration Webhooks
-    url: delete-a-webhook
+    url: '#supprimer-un-webhook'
     generated: true
   - name: Obtenir une intégration Webhook
     parent: Intégration Webhooks
-    url: get-a-webhook-integration
+    url: '#obtenir-une-integration-webhook'
     generated: true
   - name: Mettre à jour un webhook
     parent: Intégration Webhooks
-    url: update-a-webhook
+    url: '#mettre-a-jour-un-webhook'
     generated: true
 api_v2:
   - name: Présentation
     url: /api/v2/
     identifier: Présentation de l'API V2
     weight: -10
-  - name: Authentification
-    url: authentification
-    parent: Présentation de l'API V2
-  - name: Limites de débit
-    url: limites de débit
+  - name: Utiliser l'API
+    url: /api/v2/using-the-api/
     parent: Présentation de l'API V2
     weight: 5
+  - name: Limites de débit
+    url: /api/v2/rate-limits/
+    parent: Présentation de l'API V2
+    weight: 6
+    identifier: rate-limits
   - name: Intégration AWS
     url: /api/v2/aws-integration/
     identifier: Intégration AWS
@@ -2728,19 +2777,19 @@ api_v2:
     generated: true
   - name: Supprimer des éléments d'une liste de dashboards
     parent: Listes de dashboards
-    url: delete-items-from-a-dashboard-list
+    url: '#supprimer-des-elements-d-une-liste-de-dashboards'
     generated: true
   - name: Récupérer une liste de dashboards
     parent: Listes de dashboards
-    url: get-a-dashboard-list
+    url: '#recuperer-une-liste-de-dashboards'
     generated: true
   - name: Ajouter des éléments à une liste de dashboards
     parent: Listes de dashboards
-    url: add-items-to-a-dashboard-list
+    url: '#ajouter-des-elements-a-une-liste-de-dashboards'
     generated: true
   - name: Mettre à jour les éléments d'une liste de dashboards
     parent: Listes de dashboards
-    url: update-items-of-a-dashboard-list
+    url: '#mettre-a-jour-les-elements-d-une-liste-de-dashboards'
     generated: true
   - name: Dashboards
     url: /api/v2/dashboards/
@@ -2780,15 +2829,15 @@ api_v2:
     generated: true
   - name: Événements agrégés
     parent: Logs
-    url: aggregate-events
+    url: '#evenements-agreges'
     generated: true
-  - name: Récupérer une liste des logs
+  - name: Récupérer une liste de logs rapide
     parent: Logs
-    url: get-a-quick-list-of-logs
+    url: '#recuperer-une-liste-de-logs-rapide'
     generated: true
-  - name: Récupérer la liste des logs
+  - name: Récupérer une liste de logs
     parent: Logs
-    url: get-a-list-of-logs
+    url: '#recuperer-une-liste-de-logs'
     generated: true
   - name: Archives de logs
     url: /api/v2/logs-archives/
@@ -2796,35 +2845,35 @@ api_v2:
     generated: true
   - name: Récupérer toutes les archives
     parent: Archives de logs
-    url: get-all-archives
+    url: '#recuperer-toutes-les-archives'
     generated: true
   - name: Créer une archive
     parent: Archives de logs
-    url: create-an-archive
+    url: '#creer-une-archive'
     generated: true
   - name: Supprimer une archive
     parent: Archives de logs
-    url: delete-an-archive
+    url: '#supprimer-une-archive'
     generated: true
   - name: Récupérer une archive
     parent: Archives de logs
-    url: get-an-archive
+    url: '#recuperer-une-archive'
     generated: true
   - name: Mettre à jour une archive
     parent: Archives de logs
-    url: update-an-archive
+    url: '#mettre-a-jour-une-archive'
     generated: true
   - name: Révoquer le rôle d'une archive
     parent: Archives de logs
-    url: revoke-role-from-an-archive
+    url: '#revoquer-le-role-d-une-archive'
     generated: true
   - name: Énumérer les rôles de lecture pour une archive
     parent: Archives de logs
-    url: list-read-roles-for-an-archive
+    url: '#enumerer-les-roles-de-lecture-pour-une-archive'
     generated: true
   - name: Accorder un rôle à une archive
     parent: Archives de logs
-    url: grant-role-to-an-archive
+    url: '#accorder-un-role-a-une-archive'
     generated: true
   - name: Index de logs
     url: /api/v2/logs-indexes/
@@ -2840,43 +2889,43 @@ api_v2:
     generated: true
   - name: Énumérer les requêtes de restriction
     parent: Requêtes de restriction de logs
-    url: list-restriction-queries
+    url: '#enumerer-les-requetes-de-restriction'
     generated: true
   - name: Créer une requête de restriction
     parent: Requêtes de restriction de logs
-    url: create-a-restriction-query
+    url: '#creer-une-requete-de-restriction'
     generated: true
   - name: Récupérer une requête de restriction pour un rôle donné
     parent: Requêtes de restriction de logs
-    url: get-restriction-query-for-a-given-role
+    url: '#recuperer-une-requete-de-restriction-pour-un-role-donne'
     generated: true
   - name: Récupérer toutes les requêtes de restriction pour un utilisateur donné
     parent: Requêtes de restriction de logs
-    url: get-all-restriction-queries-for-a-given-user
+    url: '#recuperer-toutes-les-requetes-de-restriction-pour-un-role-donne'
     generated: true
   - name: Supprimer une requête de restriction
     parent: Requêtes de restriction de logs
-    url: delete-a-restriction-query
+    url: '#supprimer-une-requete-de-restriction'
     generated: true
   - name: Récupérer une requête de restriction
     parent: Requêtes de restriction de logs
-    url: get-a-restriction-query
+    url: '#recuperer-une-requete-de-restriction'
     generated: true
   - name: Mettre à jour une requête de restriction
     parent: Requêtes de restriction de logs
-    url: update-a-restriction-query
+    url: '#mettre-a-jour-une-requete-de-restriction'
     generated: true
   - name: Révoquer un rôle d'une requête de restriction
     parent: Requêtes de restriction de logs
-    url: revoke-role-from-a-restriction-query
+    url: '#revoquer-un-role-d-une-requete-de-restriction'
     generated: true
   - name: Énumérer les rôles d'une requête de restriction
     parent: Requêtes de restriction de logs
-    url: list-roles-for-a-restriction-query
+    url: '#enumerer-les-roles-d-une-requete-de-restriction'
     generated: true
   - name: Accorder un rôle à une requête de restriction
     parent: Requêtes de restriction de logs
-    url: grant-role-to-a-restriction-query
+    url: '#accorder-un-role-a-une-requete-de-restriction'
     generated: true
   - name: Métriques
     url: /api/v2/metrics/
@@ -2900,51 +2949,51 @@ api_v2:
     generated: true
   - name: Énumérer les autorisations
     parent: Rôles
-    url: list-permissions
+    url: '#enumerer-les-autorisations'
     generated: true
   - name: Énumérer les rôles
     parent: Rôles
-    url: list-roles
+    url: '#enumerer-les-roles'
     generated: true
   - name: Créer un rôle
     parent: Rôles
-    url: create-role
+    url: '#creer-un-role'
     generated: true
   - name: Supprimer un rôle
     parent: Rôles
-    url: delete-role
+    url: '#supprimer-un-role'
     generated: true
   - name: Récupérer un rôle
     parent: Rôles
-    url: get-a-role
+    url: '#recuperer-un-role'
     generated: true
   - name: Mettre à jour un rôle
     parent: Rôles
-    url: update-a-role
+    url: '#mettre-a-jour-un-role'
     generated: true
   - name: Révoquer une autorisation
     parent: Rôles
-    url: revoke-permission
+    url: '#revoquer-une-autorisation'
     generated: true
   - name: Énumérer les autorisations d'un rôle
     parent: Rôles
-    url: list-permissions-for-a-role
+    url: '#enumerer-les-autorisations-d-un-role'
     generated: true
   - name: Accorder une autorisation à un rôle
     parent: Rôles
-    url: grant-permission-to-a-role
+    url: '#accorder-une-autorisation-a-un-role'
     generated: true
   - name: Supprimer un utilisateur d'un rôle
     parent: Rôles
-    url: remove-a-user-from-a-role
+    url: '#supprimer-un-utilisateur-d-un-role'
     generated: true
   - name: Récupérer tous les utilisateurs associés à un rôle
     parent: Rôles
-    url: get-all-users-of-a-role
+    url: '#recuperer-tous-les-utilisateurs-associes-a-un-role'
     generated: true
   - name: Ajouter un utilisateur à un rôle
     parent: Rôles
-    url: add-a-user-to-a-role
+    url: '#ajouter-un-utilisateur-a-un-role'
     generated: true
   - name: Screenboards
     url: /api/v2/screenboards/
@@ -2956,31 +3005,31 @@ api_v2:
     generated: true
   - name: Énumérer les règles
     parent: Security Monitoring
-    url: list-rules
+    url: '#enumerer-les-regles'
     generated: true
   - name: Créer une règle de détection
     parent: Security Monitoring
-    url: create-a-detection-rule
+    url: '#creer-une-regle-de-detection'
     generated: true
   - name: Supprimer une règle existante
     parent: Security Monitoring
-    url: delete-an-existing-rule
+    url: '#supprimer-une-regle-existante'
     generated: true
   - name: Récupérer les détails d'une règle
     parent: Security Monitoring
-    url: get-a-rules-details
+    url: '#recuperer-les-details-d-une-regle'
     generated: true
   - name: Mettre à jour une règle existante
     parent: Security Monitoring
-    url: update-an-existing-rule
+    url: '#mettre-a-jour-une-regle-existante'
     generated: true
-  - name: Obtenir une liste rapide des signaux de sécurité
+  - name: Obtenir une liste rapide de signaux de sécurité
     parent: Security Monitoring
-    url: get-a-quick-list-of-security-signals
+    url: '#obtenir-une-liste-rapide-de-signaux-de-securite'
     generated: true
-  - name: Obtenir une liste des signaux de sécurité
+  - name: Obtenir une liste de signaux de sécurité
     parent: Security Monitoring
-    url: get-a-list-of-security-signals
+    url: '#obtenir-une-liste-de-signaux-de-securite'
     generated: true
   - name: Checks de service
     url: /api/v2/service-checks/
@@ -3028,39 +3077,39 @@ api_v2:
     generated: true
   - name: Envoyer des invitations par e-mail
     parent: Utilisateurs
-    url: send-invitation-emails
+    url: '#envoyer-des-invitations-par-e-mail'
     generated: true
   - name: Récupérer une invitation d'utilisateur
     parent: Utilisateurs
-    url: get-a-user-invitation
+    url: '#recuperer-une-invitation-d-utilisateur'
     generated: true
   - name: Énumérer tous les utilisateurs
     parent: Utilisateurs
-    url: list-all-users
+    url: '#enumerer-tous-les-utilisateurs'
     generated: true
   - name: Créer un utilisateur
     parent: Utilisateurs
-    url: create-a-user
+    url: '#creer-un-utilisateur'
     generated: true
   - name: Désactiver un utilisateur
     parent: Utilisateurs
-    url: disable-a-user
+    url: '#desactiver-un-utilisateur'
     generated: true
   - name: Récupérer un utilisateur
     parent: Utilisateurs
-    url: get-a-user
+    url: '#recuperer-un-utilisateur'
     generated: true
   - name: Mettre à jour un utilisateur
     parent: Utilisateurs
-    url: update-a-user
+    url: '#mettre-a-jour-un-utilisateur'
     generated: true
   - name: Récupérer l'organisation d'un utilisateur
     parent: Utilisateurs
-    url: get-a-user-organization
+    url: '#recuperer-l-organisation-d-un-utilisateur'
     generated: true
   - name: Récupérer les autorisations d'un utilisateur
     parent: Utilisateurs
-    url: get-a-user-permissions
+    url: '#recuperer-les-autorisations-d-un-utilisateur'
     generated: true
   - name: Intégration Webhooks
     url: /api/v2/webhooks-integration/

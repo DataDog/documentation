@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: pgbouncer
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
@@ -62,7 +65,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
    "datadog" "<PASSWORD>"
    ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
