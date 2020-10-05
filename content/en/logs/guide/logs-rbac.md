@@ -129,11 +129,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
     "attributes": {
         "name": "logs_read_data",
         "display_name": "Logs Read Data",
-        "description": "The ability to read log data. Can be restricted with restriction queries.",
-        "created": "2020-04-06T16:24:35.989108+00:00",
-        "group_name": "Logs",
-        "display_type": "read",
-        "restricted": false
+        [...]
     }
 }
 ```
@@ -180,7 +176,7 @@ When creating a new Role:
 
 Repeat the following steps for `ACME Admins` and `ACME Users` roles: 
 
-1. If the Role doesn't already exist, create ot the Role with [Role creation API][1]
+1. If the Role doesn't already exist, create ot the Role with [Role creation API][1]. In the following Example, `dcf7c550-99cb-11ea-93e6-376cebac897c` would be the Role ID.
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "ACME Admin"}}}'
@@ -191,7 +187,6 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: applicat
 2. **Alternatively** if the Role does already exist, use the [Role List API][2] to get its Role ID.
 
 ```
-
 curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0&sort=name&filter=ACME" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"'
 
 [...]
@@ -209,21 +204,21 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0
 3. Check the existing permissions for the Role (it should be only Read Monitors and Read Dashboards for newly created roles). 
 
 ```
-curl -X GET "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 
 ```
 
-3. Assign the `standard`, `logs_read_index_data` and `logs_live_tail` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding IDs. In the following example, `dcf7c550-99cb-11ea-93e6-376cebac897c` is the Role ID and `5e605652-dd12-11e8-9e53-375565b8970e` is the permission ID. 
+3. Assign the `standard`, `logs_read_index_data` and `logs_live_tail` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding IDs.
 
 ```
-curl -X POST "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "5e605652-dd12-11e8-9e53-375565b8970e"}}'
+curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
 
-4. If needed, revoke all other Log permissions with the [Revoke Permissions API][4].
+4. **If needed**, revoke all other Log permissions with the [Revoke Permissions API][4].
 
 ```
-curl -X DELETE "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "979df720-aed7-11e9-99c6-a7eb8373165a"}}'
+curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
 
@@ -238,37 +233,61 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-3
 
 ### Attach user to a role
 
-Finally, now that your roles are configured with their permissions and restriction queries, you can give these roles to your users.
+Now that your roles are configured with their permissions, assign these roles to your users.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-https://docs.datadoghq.com/account_management/users/
+In the [Team Section][1] of the Datadog App, in the User tab, pick a user and assign them either `ACME Admin` or `ACME User Role` on top of his (possibly) already assigned Roles. More details on User Management in the [Account Management][2] section.
+
+{{< img src="logs/guide/rbac/assign_user.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+
+[1]: https://app.datadoghq.com/access/users
+[2]: /account_management/users/
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-**Get User ID**
 
-The first step is to [get the list of users][11]:
+Using the [List Users API][1], get the User ID of the user you want to assign to the either `ACME Admin` or `ACME User` Role. As this API is paginated, you might need to filter results, using for instance the last name of the user as a query param. In the following example, User ID is `1581e993-eba0-11e9-a77a-7b9b056a262c`.
 
 ```
-curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0&sort=name&filter=smith" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+
+[...]
+"type": "users",
+"id": "1581e993-eba0-11e9-a77a-7b9b056a262c",
+"attributes": {
+    "name": "John Smith",
+    "handle": "john.smith@company.com",
+    [...]
+},
+[...]
 ```
 
-Focus on the `data` object within the response, and extract the user IDs of the users that should belong to the `Backend` and `Frontend` role.
+**Attach User to Role**
 
-Also, check if they already have roles and their IDs.
-
-**Attach User to Role **
-
-For each user, [assign the created backend and frontend end role][12]:
+For each user, user the [Assign Role API][2] to add this user to this Role.
 
 ```
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
-By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
+**Unassign Defaut Roles from the User**
+
+Also, check if they already have roles and their IDs. You might want to remove Default Datadog Roles from these users, as they would grant additional permissions to user you don't want to grant.
+
+
+```
+curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
+```
+
+
+[1]: /api/v2/users/#list-all-users
+[2]: /api/v2/roles/#add-a-user-to-a-role
+[3]: /api/v2/roles/#remove-a-user-from-a-role
+
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -527,9 +546,6 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [8]: /api/v2/roles/#grant-permission-to-a-role
 [9]: /api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
 [10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
-[11]: /api/v2/users/#list-all-users
-[12]: /api/v2/roles/#add-a-user-to-a-role
-[13]: /api/v2/roles/#remove-a-user-from-a-role
 
 
 [84]: /getting_started/tagging/
