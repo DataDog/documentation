@@ -38,17 +38,17 @@ Let's assume that your organisation consists of multiple teams, one of which bei
 Although this guide focuses on the ACME Team, whatever you setup for the ACME team is replicable to every other team you have in your organisation. Members of the ACME team **can** also be members of other teams across your organisation: as permissions are additive in Datadog, such multi-team users will benefit from permissions inherited from every single team they belong to.
 
 
-### The "ACME" Playground
+### The role of Datadog Admin
 
+Eventually, the purpose of that guide is to explain how you, as a Datadog Admin, set up a safe playground for ACME Team Members to safely interact with their logs (whithout interfering with other team logs) whilst also restricting access to these logs only to ACME users.
 
-We'll explore how, as a Datadog Admin, you can approach how to: 
+*Note: You can adapt this guide to consider that ACME admins are also Datadog Admins, which is a common practice for smaller organisations.*
+
+More concretely, we'll explore in this guide how, as a Datadog Admin, you can approach how to: 
 
 * **Set up Roles** for the Sandbox team and **assign members**,
 * Configure permissions on **Log Assets** (namely Pipelines, Indexes and Archives),
 * **Limit access to logs** all across Datadog Application with Restriction Queries
-
-Eventually, this 
-
 
 
 ## Prerequisites
@@ -64,6 +64,10 @@ Eventually, this
 
 ### Tags on incoming logs
 
+As this will be useful to triage your logs as they flow throughout Datadog, make sure to tag ACME incoming logs with a `team:acme` tag. 
+
+
+As a matter of example in the context of Docker Log Collection, attach the `team:acme` tag to logs flowing from that container with [docker labels as tags][85].  Refer to our [Tagging Section][84] for a more general overview.
 
 
 ### Log in as a Datadog Admin
@@ -74,7 +78,7 @@ The actions you have to perform in that guy require you belong to a Datadog Admi
 * permissions to create [Log Pipelines][90], [Log Indexes][91] and [Log Archives][92]
 * permissions to interact through the [Log Configuration API][93] in case you perform those operations through API rather than UI.
 
-{{< img src="static/images/logs/guide/rbac/admin_permissions.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/admin_permissions.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -82,7 +86,7 @@ The actions you have to perform in that guy require you belong to a Datadog Admi
 https://app.datadoghq.com/account/settings#api
 https://docs.datadoghq.com/account_management/api-app-keys/
 
-{{< img src="static/images/logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 
 
 {{% /tab %}}
@@ -149,7 +153,7 @@ The purpose of that series of step is:
 https://docs.datadoghq.com/account_management/users/
 https://app.datadoghq.com/access/roles
 
-{{< img src="static/images/logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -470,6 +474,9 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 
 [80]: /api/v2/
 [81]: /api/v1/
+
+[84]: /getting_started/tagging/
+[85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 
 [90]: /account_management/rbac/permissions?tab=ui#logs-write-pipelines
 [91]: /account_management/rbac/permissions?tab=ui#logs-modify-indexes
