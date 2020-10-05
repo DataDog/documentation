@@ -232,8 +232,10 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [RedShift][36]                    | [Enable AWS Redshift logs][37]                                                                 | [Manual][38] and [automatic](#automatically-setup-triggers) log collection |
 | [VPC][39]                         | [Enable AWS VPC logs][40]                                                                      | [Manual][41] log collection                                                |
 
+## Filtering and scrubing
 
-
+Scrub emails or ip address from logs sent by the Lambda function or define a custom scrubbing rule [in the Lambda parameters][42].
+It is also possible to exclude logs matching a specific pattern or only send the one matching thanks to the [filtering option][43].
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
@@ -276,3 +278,5 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 [39]: /integrations/amazon_vpc/
 [40]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [41]: /integrations/amazon_vpc/#log-collection
+[42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[43]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
