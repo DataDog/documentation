@@ -308,7 +308,7 @@ TODO
 {{% /tab %}}
 {{% tab "API" %}}
 
-Use the [Create Restriction Query API][50] to create a new Restriction Query. Keep track of the Restriction Query ID (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` in the following example).
+Use the [Create Restriction Query API][1] to create a new Restriction Query. Keep track of the Restriction Query ID (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` in the following example).
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:acme"}}}'
@@ -328,111 +328,32 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 
 ```
 
-Next, attach the previous restriction query to ACME roles with the [Restriction Query API][9] - repeat that operation with `ACME Admin` and `ACME User` Roles ID. 
+Next, attach the previous restriction query to ACME roles with the [Restriction Query API][2] - repeat that operation with `ACME Admin` and `ACME User` Roles ID. 
 
 ```
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
 ```
 
-Confirm that it is attached by getting the list of roles attached to the query with the [Get Restriction Query API][1]: 
+Finally, enable the `logs_read_data` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding ID for that permission. 
 
 ```
-curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-Reponse:
+curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
-{
-	"data": [{
-		"type": "roles",
-		"id": "63b970ea-99ca-11ea-93e6-e32eb84de6d6",
-		"attributes": {
-			"name": "team-frontend"
-		}
-	}]
-}
+
+Optionally, confirm that the set up is properly done: 
+
+* Getting the list of roles attached to the query with the [Get Roles API][4]. You should see only `ACME Admin` and `ACME Users` in the results.
+* Conversely, getting the restriction query attached to either role with the [Get Restriction Query API][5]. You should see the `team:acme` restriction query. 
+
+[1]: /api/v2/logs-restriction-queries/#create-a-restriction-query
+[2]: /api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
+[3]: /api/v2/roles/#grant-permission-to-a-role
+[4]: /api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
+[5]: /api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
 
 {{% /tab %}}
 {{< /tabs >}}
-
-
-
-
-### Attach queries to the role
-
-You have the role ID and query ID from the response of the creation call. Use them when attaching the query to the role.
-Note that the IDs are specific to this example; doing this on your account would give different role and query IDs. Check the [permission documentation][10] for more information about restrictions in Datadog.
-
-{{< tabs >}}
-{{% tab "Backend" %}}
-
-API call:
-
-
-Confirm that it is attached by [getting the list of roles attached to the query][1]: 
-
-```
-curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/76b2c0e6-98fa-11ea-93e6-775bd9258d59/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-Reponse:
-
-```
-{
-	"data": [{
-		"type": "roles",
-		"id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
-		"attributes": {
-			"name": "team-backend"
-		}
-	}]
-}
-```
-
-[1]: https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{% /tab %}}
-{{% tab "Frontend" %}}
-
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/b3228a0c-98fa-11ea-93e6-d30e1d2c52ee/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "63b970ea-99ca-11ea-93e6-e32eb84de6d6"}}'
-```
-
-Confirm that it is attached by [getting the list of roles attached to the query][1]: 
-
-```
-curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/b3228a0c-98fa-11ea-93e6-d30e1d2c52ee/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-Reponse:
-
-```
-{
-	"data": [{
-		"type": "roles",
-		"id": "63b970ea-99ca-11ea-93e6-e32eb84de6d6",
-		"attributes": {
-			"name": "team-frontend"
-		}
-	}]
-}
-```
-
-[1]: https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
-{{% /tab %}}
-{{% tab "Generic API" %}}
-
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 
 
 ## Set up Log Assets
@@ -489,12 +410,10 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 
 [6]: /account_management/rbac/permissions?tab=datadogapplication#general-permissions
 [7]: /account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
-[8]: /api/v2/roles/#grant-permission-to-a-role
-[9]: /api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
+
+
 [10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
 
-
-[50]: /api/v2/logs-restriction-queries/#create-a-restriction-query
 
 [60]: /logs/processing/pipelines/
 [61]: /logs/indexes/
