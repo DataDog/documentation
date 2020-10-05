@@ -45,7 +45,12 @@ def get_dd_metrics(csv_metrics, keys, t):
             'gcp.logging.user.',
             'gcp.custom.',
             'isatap',
-            'vsphere.'
+            'vsphere.',
+            'zookeeper.avg_',
+            'zookeeper.cnt_',
+            'zookeeper.max_',
+            'zookeeper.min_',
+            'zookeeper.sum_'
     ]
 
   # Datadog Demo account
