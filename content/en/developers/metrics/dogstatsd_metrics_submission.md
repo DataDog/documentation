@@ -619,7 +619,7 @@ func main() {
 	}
 
 	for {
-		statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
+		statsd.Histogram("example_metric.histogram", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
 		time.Sleep(2 * time.Second)
 	}
 }
