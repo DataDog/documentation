@@ -1,5 +1,5 @@
 ---
-title: Restrict access to log events with restriction queries
+title: How to set up Logs RBAC 
 aliases:
   - /logs/guide/restrict-access-to-log-events-with-restriction-queries
 kind: guide
@@ -28,7 +28,10 @@ This guides aims at sharing good practices on how to setup permissions in such c
 
 ### The "ACME" Team
 
-Let's assume that your organisation consists of multiple teams, one of which being the **ACME** (Applicative Component Making Errors) team whose members have to deal with ACME Logs for troubleshooting and auditing purpose. As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the ACME Team:
+Let's assume that your organisation consists of multiple teams, one of which being the **ACME** (Applicative Component Making Errors) team whose members have to deal with ACME Logs for troubleshooting and auditing purpose. 
+
+
+As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the ACME Team:
 
 * **ACME Admins**: the users in charge of ACME log collection, in charge of pipelines and exclusion filters.
 * **ACME Users** : the users to access ACME logs and create Monitor or Dashboards out of these logs.
@@ -66,38 +69,43 @@ More concretely, we'll explore in this guide how, as a Datadog Admin, you can ap
 
 As this will be useful to triage your logs as they flow throughout Datadog, make sure to tag ACME incoming logs with a `team:acme` tag. 
 
+{{< img src="logs/guide/rbac/team_tag.png" alt="Apply a team tag to your logs"  style="width:60%;">}}
 
 As a matter of example in the context of Docker Log Collection, attach the `team:acme` tag to logs flowing from that container with [docker labels as tags][85].  Refer to our [Tagging Section][84] for a more general overview.
 
 
 ### Log in as a Datadog Admin
 
-The actions you have to perform in that guy require you belong to a Datadog Admin Role. More specifically, you neeed:
+The actions you have to perform in that guide require you belong to a Datadog Admin Role. More specifically, you neeed:
 
 * permissions to create roles and assign users to role (actual Priviledged Access).
 * permissions to create [Log Pipelines][90], [Log Indexes][91] and [Log Archives][92]
 * permissions to interact through the [Log Configuration API][93] in case you perform those operations through API rather than UI.
 
-{{< img src="logs/guide/rbac/admin_permissions.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+Check by yourself in the [Datadog App][86] that you do have all these permissions. If you happen to miss one of these permissions, ask an Admin user to set it for yourself.
+
+{{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
+
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-https://app.datadoghq.com/account/settings#api
-https://docs.datadoghq.com/account_management/api-app-keys/
-
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
-
+You're all set!
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
+**Application and API Keys**
+
+Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2]. More details available in the [API and APP Keys][87] section of our documentation.
+
+
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+
 
 Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`. 
 
-More details on how to user our APIs: [here][80] for V2 APIs (most of the API used in this guide) and [here][81] for V1 APIs.
-
+**Permissions ID**
 
 Get the [list of all existing permissions][5]:
 
@@ -472,11 +480,12 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [12]: /api/v2/roles/#add-a-user-to-a-role
 [13]: /api/v2/roles/#remove-a-user-from-a-role
 
-[80]: /api/v2/
-[81]: /api/v1/
 
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
+[86]: https://app.datadoghq.com/access/users
+[87]: /account_management/api-app-keys/
+
 
 [90]: /account_management/rbac/permissions?tab=ui#logs-write-pipelines
 [91]: /account_management/rbac/permissions?tab=ui#logs-modify-indexes
