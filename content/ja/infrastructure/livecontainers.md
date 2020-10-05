@@ -42,6 +42,7 @@ Kubernetes を使用している場合は、ライブコンテナ向け Kubernet
 ライブコンテナ向け Kubernetes Resources を有効にするには、[Helm の手順][10]に従い、`values.yaml` ファイルに次の変更を追加します。
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
+```yaml
 datadog:
   ...
   processAgent:
@@ -63,15 +64,18 @@ agents:
     tag: latest
     pullPolicy: Always
 ...
+```
 {{< /code-block >}}
 
 Agent が自動的に Kubernetes クラスター名を検出しない場合は、`values.yaml` に設定します。
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
+```yaml
 datadog:
    ...
    clusterName: <PLACEHOLDER>
    ...
+```
 {{< /code-block >}}
 
 **注**: クラスター名は 40 文字以下である必要があります。

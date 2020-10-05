@@ -43,6 +43,7 @@ DogStatsD イベントによる Datadog 内でのエラーと例外を表示し�
 {{% tab "Python" %}}
 
 {{< code-block lang="python" filename="event.py" >}}
+```python
 from datadog import initialize, statsd
 
 options = {
@@ -53,23 +54,27 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 {{< code-block lang="ruby" filename="event.rb" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 {{< code-block lang="go" filename="event.go" >}}
+```go
 package main
 
 import (
@@ -91,12 +96,14 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 {{< code-block lang="java" filename="event.java" >}}
+```java
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -120,12 +127,14 @@ public class DogStatsdClient {
         Statsd.recordEvent(event);
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 {{< code-block lang="csharp" filename="event.cs" >}}
+```csharp
 using StatsdClient;
 
 public class DogStatsdClient
@@ -145,12 +154,14 @@ public class DogStatsdClient
         }
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 {{< code-block lang="php" filename="event.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -168,11 +179,13 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
+```
 {{< /code-block >}}
 
 DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -190,6 +203,7 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
+```
 {{< /code-block >}}
 
 **注**:

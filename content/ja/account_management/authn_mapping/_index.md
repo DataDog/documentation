@@ -117,6 +117,7 @@ curl -X POST \
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
     "data": {
         "attributes": {
@@ -177,6 +178,7 @@ curl -X POST \
         }
     ]
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -650,6 +652,7 @@ curl -X GET \
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -660,6 +663,7 @@ curl -X GET \
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -737,6 +741,7 @@ curl -X POST \
 {{% tab "Response" %}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+```json
 {
   "data": {
     "attributes": {
@@ -747,6 +752,7 @@ curl -X POST \
     "id": 1,
   },
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}

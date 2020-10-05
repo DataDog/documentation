@@ -151,8 +151,10 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディター"  >}}
 
 {{< code-block lang="powershell" filename="add-env-var.ps1" >}}
+```powershell
 [String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+```
 {{< /code-block >}}
 
 #### コンソールアプリ

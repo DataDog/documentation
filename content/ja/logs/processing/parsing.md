@@ -516,18 +516,23 @@ CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義
 **ログの例**
 
 {{< code-block lang="text" >}}
+```text
 John,Doe,120,Jefferson St.,Riverside
+```
 {{< /code-block >}}
 
 **規則の例**
 
 {{< code-block lang="text" >}}
+```text
 myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
+```
 {{< /code-block >}}
 
 **結果:**
 
 {{< code-block lang="json" >}}
+```json
 {
   "user": {
     "first_name": "John",
@@ -537,6 +542,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
     "city": "Riverside"
   }
 }
+```
 {{< /code-block >}}
 
 その他の例

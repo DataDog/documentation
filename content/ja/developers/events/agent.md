@@ -58,21 +58,23 @@ self.event(
 4. このフォルダーに次の内容でカスタムチェックファイルを作成し、`event_example.py` と名付けます。
 
     {{< code-block lang="python" filename="event_example.py" >}}
-    from datadog_checks.base import AgentCheck
+```python
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-        def check(self, instance):
-            self.event(
-                {
-                    "timestamp": time.time(),
-                    "event_type": "Error",
-                    "msg_title": "サンプルイベント",
-                    "msg_text": "これは Datadog から送られたサンプルのイベントです。",
-                    "alert_type": "error",
-                }
-            )
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.event(
+            {
+                "timestamp": time.time(),
+                "event_type": "Error",
+                "msg_title": "サンプルイベント",
+                "msg_text": "これは Datadog から送られたサンプルのイベントです。",
+                "alert_type": "error",
+            }
+        )
+```
     {{< /code-block >}}
 
 5. [Agent を再起動します][3]。

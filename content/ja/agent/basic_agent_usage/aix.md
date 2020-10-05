@@ -37,7 +37,9 @@ Datadog の [Agent ダウンロードページ][1]に、ワンステップの ks
 インストーラは次のように実行できます (ルートとして実行)。
 
 {{< code-block lang="bash" wrap="true" >}}
+```bash
 installp -aXYgd ./datadog-unix-agent-<バージョン>.powerpc.bff -e dd-aix-install.log datadog-unix-agent
+```
 {{< /code-block >}}
 
 これで、Agent が `/opt/datadog-agent` にインストールされます。
@@ -98,11 +100,13 @@ DogStatsD は、Agent と同じ構成ファイルに依存し、このファイ�
 DogStatsD を有効にするには、`/etc/datadog-agent/datadog.yaml` を編集し、関連する構成オプションを設定します。
 
 {{< code-block lang="yaml" filename="/etc/datadog-agent/datadog.yaml" >}}
+```yaml
 dogstatsd:                        # DogStatsD 構成オプション
   enabled: true                   # デフォルトでは無効
   bind_host: localhost            # 連結先のアドレス
   port: 8125                      # DogStatsD UDP リスニングポート
   non_local_traffic: false        # 非ローカルトラフィックのリスニング
+```
 {{< /code-block >}}
 
 **注**: DogStatsD はデーモン化されずに、フォアグラウンドで実行されます。
@@ -114,7 +118,9 @@ dogstatsd:                        # DogStatsD 構成オプション
 インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
 
 {{< code-block lang="bash" >}}
+```bash
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
+```
 {{< /code-block >}}
 
 注: Agent のアンインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、アンインストールコマンドの `-e` パラメーターを削除します。

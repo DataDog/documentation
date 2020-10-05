@@ -41,9 +41,11 @@ Datadog ログ管理は、アプリケーションからログを収集するた
 セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
 
 {{< code-block lang="text" >}}
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
+```
 {{< /code-block >}}
 
 {{< /site-region >}}
@@ -53,9 +55,11 @@ telnet intake.logs.datadoghq.com 10514
 セキュア TCP エンドポイントは {{< region-param key="tcp_endpoint" code="true" >}} (または非セキュア接続の場合はポート {{< region-param key="tcp_endpoint_port" code="true" >}}) です 。
 
 {{< code-block lang="text" >}}
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_キー> TCP を介して送信されるプレーンテキストログ
+```
 {{< /code-block >}}
 
 {{< /site-region >}}

@@ -68,7 +68,9 @@ Datadog Agent またはトレースクライアント (一部の言語のみ) �
     **注**: Agent v7.19+ および Datadog Helm チャートの[最新版][4]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+```
     {{< /code-block >}}
 
 5. **環境の詳細**

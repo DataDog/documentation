@@ -95,7 +95,7 @@ instances:
 以下のサンプルコンフィグレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
 
 {{< code-block lang="yaml" filename="snmp.d/conf.yaml" disable_copy="true" >}}
-
+```yaml
 init_config:
 instances:
     ## @param network_address - string - optional
@@ -124,7 +124,7 @@ instances:
     tags:
        - "<KEY_1>:<VALUE_1>"
        - "<KEY_2>:<VALUE_2>"
-
+```
 {{< /code-block >}}
 
 ## 検証

@@ -42,6 +42,7 @@ instances: [{}]
 チェック自体は `AgentCheck` を継承し、呼び出しごとに `hello.world` のゲージ `1` を送信します。`checks.d/hello.py` は以下のようになります。
 
 {{< code-block lang="python" filename="hello.py" >}}
+```python
 # 次の try/except ブロックを使うと、カスタムチェックがどの Agent バージョンとも互換性を持つようになります
 try:
     # 最初に、古いバージョンの Agent から基本クラスのインポートを試みます...
@@ -56,6 +57,7 @@ __version__ = "1.0.0"
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
+```
 {{< /code-block >}}
 
 基本クラスから提供されるインターフェイスの詳細については、[API のドキュメント][5]を参照してください。

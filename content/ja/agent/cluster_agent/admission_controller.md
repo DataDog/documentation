@@ -28,6 +28,7 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 Admission Controller で Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="true" >}}
+```yaml
 [...]
  clusterAgent:
 [...]
@@ -45,6 +46,7 @@ Admission Controller で Helm チャートを有効にするには、パラメ�
     #
     mutateUnlabelled: false
 [...]
+```
 {{< /code-block >}}
 
 ### Datadog 演算子
@@ -69,6 +71,7 @@ Helm または Datadog 演算子を使用せずに Admission Controller を有�
 まず、[Cluster Agent RBAC アクセス許可][2]のマニフェストをダウンロードし、`rules` の下に以下を追加します。
 
 {{< code-block lang="yaml" filename="cluster-agent-rbac.yaml" disable_copy="true" >}}
+```yaml
 - apiGroups:
   - admissionregistration.k8s.io
   resources:
@@ -83,11 +86,13 @@ Helm または Datadog 演算子を使用せずに Admission Controller を有�
 - apiGroups: ["apps"]
   resources: ["statefulsets", "replicasets", "deployments"]
   verbs: ["get"]
+```
 {{< /code-block >}}
 
 `agent-services.yaml` の下に以下を追加します。
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -102,12 +107,13 @@ spec:
   ports:
   - port: 443
     targetPort: 8000
-
+```
 {{< /code-block >}}
 
 Cluster Agent のデプロイに環境変数を追加し、Admission Controller を有効にします。
 
 {{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" disable_copy="true" >}}
+```yaml
 - name: DD_ADMISSION_CONTROLLER_ENABLED
   value: "true"
 - name: DD_ADMISSION_CONTROLLER_SERVICE_NAME
@@ -116,6 +122,7 @@ Cluster Agent のデプロイに環境変数を追加し、Admission Controller 
 # このコメントを解除して自動的に APM トレーサーを構成します (以下を参照)
 # - name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
 #   value: "true"
+```
 {{< /code-block >}}
 
 最期に、次のコマンドを実行します。

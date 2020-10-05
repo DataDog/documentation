@@ -51,10 +51,14 @@ Datadog では、ソースマップを安全にアップロードして、スタ
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します。CLI の `v0.5.2` バージョン以降を使用する必要があります。
 2. `DATADOG_API_KEY` という名の環境変数として、Datadog API キーをエクスポートします。
 3. 次のコマンドを実行します。
-   {{< code-block lang="curl">}}datadog-ci sourcemaps upload /path/to/build/directory \
+   {{< code-block lang="curl">}}
+```bash
+datadog-ci sourcemaps upload /path/to/build/directory \
   --service=my-service \
   --release-version=v35.2395005 \
-  --minified-path-prefix=https://hostname.com/static/js{{< /code-block >}}
+  --minified-path-prefix=https://hostname.com/static/js
+```
+{{< /code-block >}}
 
 CLI パラメーターの詳細については、[公式 Github リポジトリ][5]を参照してください。
 

@@ -95,7 +95,7 @@ instances:
 L'exemple de configuration suivant indique les paramètres obligatoires, les valeurs par défaut et des exemples pour Autodiscovery.
 
 {{< code-block lang="yaml" filename="snmp.d/conf.yaml" disable_copy="true" >}}
-
+```yaml
 init_config:
 instances:
     ## @param network_address - chaîne - facultatif
@@ -124,7 +124,7 @@ instances:
     tags:
        - "<KEY_1>:<VALUE_1>"
        - "<KEY_2>:<VALUE_2>"
-
+```
 {{< /code-block >}}
 
 ## Validation
