@@ -133,6 +133,7 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 {{% /tab %}}
 {{< /tabs >}}
 
+
 ## Set up Roles
 
 Roles can be created through Datadog, as shown in [the RBAC documentation][3].
@@ -285,36 +286,34 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 
 ## Set up Log Access
 
-### Restriction Queries
+The purpose of that section is to detail how to grant ACME Team members (eventually both `ACME Admin` and `ACME User` members) access to `team:acme` logs, and only `team:acme` logs. It uses the [Log Read Data][74] permission scoped with Restriction Queries.
 
-There are many ways to identify which logs correspond to each team. For example, you can use the service value, or add a `team` tag on your data.
+As a good practice for maximum granularity and easier maintenance, you should **not** extend permissions of ACME Users to access more logs. Neither should you restrict other Roles to the same `team:acme` restriction query. Instead, consider assign users to multiple Roles based on what each of them, individually, needs to access.
 
-This guide assumes that there is a `team` tag associated with the backend and frontend logs.
 
+This section details how to:
+
+1. create a `team:acme` restriction query.
+2. attach that restriction query to ACME Roles.
+
+
+Note that Roles can have no more than one restriction query attached. Meaning if you attach a restriction query to a role, it also removes whichever restriction query already attached to this role.
 
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
+TODO
+
 {{% /tab %}}
 {{% tab "API" %}}
 
-{{% /tab %}}
-{{< /tabs >}}
-
-
-
-{{< tabs >}}
-{{% tab "Backend" %}}
-
-API call:
-```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:backend"}}}'
-```
-
-Response:
+Use the [Create Restriction Query API][50] to create a new Restriction Query. Keep track of the Restriction Query ID (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` in the following example).
 
 ```
+curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:acme"}}}'
+
+
 {
 	"data": {
 		"type": "logs_restriction_queries",
@@ -326,46 +325,39 @@ Response:
 		}
 	}
 }
-```
-
-{{% /tab %}}
-{{% tab "Frontend" %}}
-
-API call:
 
 ```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:frontend"}}}'
+
+Next, attach the previous restriction query to ACME roles with the [Restriction Query API][9] - repeat that operation with `ACME Admin` and `ACME User` Roles ID. 
+
+```
+curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
 ```
 
-Response: 
+Confirm that it is attached by getting the list of roles attached to the query with the [Get Restriction Query API][1]: 
+
+```
+curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
+
+Reponse:
 
 ```
 {
-	"data": {
-		"type": "logs_restriction_queries",
-		"id": "b3228a0c-98fa-11ea-93e6-d30e1d2c52ee",
+	"data": [{
+		"type": "roles",
+		"id": "63b970ea-99ca-11ea-93e6-e32eb84de6d6",
 		"attributes": {
-			"restriction_query": "team:frontend",
-			"created_at": "2020-05-18T11:28:30.284202+00:00",
-			"modified_at": "2020-05-18T11:28:30.284202+00:00"
+			"name": "team-frontend"
 		}
-	}
+	}]
 }
-```
-
-{{% /tab %}}
-{{% tab "Generic API" %}}
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "<QUERY>"}}}'
-```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-You have now created both the role and the query for the frontend and the backend team. 
 
-Next, restrict access to the backend and frontend by [attaching the restriction query to the created role][9] with the role IDs and query IDs.
+
 
 ### Attach queries to the role
 
@@ -377,9 +369,6 @@ Note that the IDs are specific to this example; doing this on your account would
 
 API call:
 
-```
-curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/76b2c0e6-98fa-11ea-93e6-775bd9258d59/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "dcf7c550-99cb-11ea-93e6-376cebac897c"}}'
-```
 
 Confirm that it is attached by [getting the list of roles attached to the query][1]: 
 
@@ -505,6 +494,8 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 [10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
 
 
+[50]: /api/v2/logs-restriction-queries/#create-a-restriction-query
+
 [60]: /logs/processing/pipelines/
 [61]: /logs/indexes/
 [62]: /logs/archives/
@@ -513,6 +504,8 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 [71]: /account_management/rbac/permissions?tab=ui#logs-write-exclusion-filters
 [72]: /account_management/rbac/permissions?tab=ui#logs-read-archives
 [73]: /account_management/rbac/permissions?tab=ui#logs-write-historical-view
+
+[74]: /account_management/rbac/permissions?tab=ui#logs-read-data
 
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
