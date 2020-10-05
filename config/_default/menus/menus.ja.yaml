@@ -3329,17 +3329,18 @@ api_v2:
       url: /api/v2/webhooks-integration/
       identifier: Webhook インテグレーション
       generated: true
+
 footer_product:
-    - name: 'Features'
+    - name: '機能'
       url: 'https://www.datadoghq.com/ja/product/'
       weight: 100
-    - name: 'Integrations'
+    - name: 'インテグレーション'
       url: 'https://www.datadoghq.com/ja/product/platform/integrations/'
       weight: 105
-    - name: 'Dashboards'
+    - name: 'ダッシュボード'
       url: 'https://www.datadoghq.com/ja/product/platform/dashboards/'
       weight: 110
-    - name: 'Log Management'
+    - name: 'ログ管理'
       url: 'https://www.datadoghq.com/ja/product/log-management/'
       weight: 115
     - name: 'APM'
@@ -3363,7 +3364,7 @@ footer_product:
     - name: 'Serverless'
       url: 'https://www.datadoghq.com/ja/product/serverless-monitoring/'
       weight: 140
-    - name: 'Alerts'
+    - name: 'アラート'
       url: 'https://www.datadoghq.com/ja/product/platform/alerts/'
       weight: 145
     - name: 'API'
@@ -3377,7 +3378,7 @@ footer_product_two:
     - name: 'Serverless'
       url: 'https://www.datadoghq.com/ja/product/serverless-monitoring/'
       weight: 140
-    - name: 'Alerts'
+    - name: 'アラート'
       url: 'https://www.datadoghq.com/ja/product/platform/alerts/'
       weight: 145
     - name: 'API'
@@ -3385,11 +3386,11 @@ footer_product_two:
       weight: 150
 
 footer_product_three:
-    - name: 'Pricing'
+    - name: '料金'
       url: 'https://www.datadoghq.com/ja/pricing/'
       weight: 100
-    - name: 'Documentation'
-      url: 'https://docs.datadoghq.com/'
+    - name: 'ドキュメント'
+      url: 'https://docs.datadoghq.com/ja/'
       target: '_blank'
       weight: 105
     - name: 'Support'
@@ -3398,7 +3399,7 @@ footer_product_three:
     - name: 'Resources'
       url: 'https://www.datadoghq.com/ja/resources/'
       weight: 150
-    - name: 'Security'
+    - name: 'セキュリティ'
       url: 'https://www.datadoghq.com/ja/security/'
       weight: 180
 
@@ -3406,28 +3407,28 @@ footer_about:
     - name: 'COVID-19 Update'
       url: 'https://www.datadoghq.com/ja/coronavirus/'
       weight: 90
-    - name: 'Contact Us'
+    - name: 'お問い合わせ'
       url: 'https://www.datadoghq.com/ja/about/contact/'
       weight: 100
-    - name: 'Partners'
+    - name: 'パートナー'
       url: 'https://www.datadoghq.com/ja/partner-with-datadog/'
       weight: 120
-    - name: 'Press'
+    - name: 'プレス'
       url: 'https://www.datadoghq.com/ja/about/press/'
       weight: 130
-    - name: 'Leadership'
+    - name: '経営陣'
       url: 'https://www.datadoghq.com/ja/about/leadership/'
       weight: 140
-    - name: 'Careers'
+    - name: '採用情報'
       url: 'https://www.datadoghq.com/ja/careers/'
       weight: 160
-    - name: 'Legal'
+    - name: '各種規約'
       url: 'https://www.datadoghq.com/ja/legal/'
       weight: 170
     - name: 'Investor Relations'
       url: 'https://investors.datadoghq.com/'
       weight: 175
-    - name: 'Analyst Reports'
+    - name: 'アナリストレポート'
       url: 'https://www.datadoghq.com/ja/about/analyst/'
       weight: 180
 
@@ -3461,12 +3462,12 @@ footer_social:
       pre: 'youtube.svg'
 
 footer_sub:
-    - name: 'Terms'
+    - name: '用語'
       url: 'https://www.datadoghq.com/ja/legal/terms/'
       weight: 100
-    - name: 'Privacy'
+    - name: 'プライバシー'
       url: 'https://www.datadoghq.com/ja/legal/privacy/'
       weight: 120
-    - name: 'Cookies'
+    - name: 'クッキー'
       url: 'https://www.datadoghq.com/ja/legal/cookies/'
       weight: 130

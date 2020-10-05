@@ -1,269 +1,268 @@
 main_left:
-  - identifier: 'product'
-    name: 'Produit'
-    url: 'https://www.datadoghq.com/product/'
-    weight: -500
-  - identifier: 'features'
-    name: 'Fonctionnalités'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
-    url: 'https://www.datadoghq.com/product/'
-    weight: 1
-    parent: 'product'
-  - identifier: 'integrations'
-    name: 'Intégrations'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
-    url: 'https://www.datadoghq.com/product/platform/integrations/'
-    weight: 2
-    parent: 'product'
-  - identifier: 'dashboarding'
-    name: 'Dashboards'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
-    url: 'https://www.datadoghq.com/product/platform/dashboards/'
-    weight: 3
-    parent: 'product'
-  - identifier: 'logs'
-    name: 'Log Management'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
-    url: 'https://www.datadoghq.com/product/log-management/'
-    weight: 4
-    parent: 'product'
-  - identifier: 'apm'
-    name: 'APM'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
-    url: 'https://www.datadoghq.com/product/apm/'
-    weight: 5
-    parent: 'product'
-  - identifier: 'profiler'
-    name: 'Profiler en continu'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
-    url: 'https://www.datadoghq.com/product/code-profiling/'
-    weight: 6
-    parent: 'product'
-  - identifier: 'security'
-    name: 'Security Monitoring'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
-    url: 'https://www.datadoghq.com/product/security-monitoring/'
-    weight: 7
-    parent: 'product'
-  - identifier: 'network'
-    name: 'Surveillance réseau'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
-    url: 'https://www.datadoghq.com/product/network-monitoring/'
-    weight: 8
-    parent: 'product'
-  - identifier: 'synthetics'
-    name: 'Synthetic Monitoring'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
-    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
-    weight: 9
-    parent: 'product'
-  - identifier: 'rum'
-    name: 'Real User Monitoring'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum.svg' alt='rum icon'>"
-    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
-    weight: 10
-    parent: 'product'
-  - identifier: 'serverless'
-    name: 'Informatique sans serveur'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='icône sans serveur'>"
-    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
-    parent: 'product'
-  - identifier: 'alerts'
-    name: 'Alerts'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
-    url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
-    parent: 'product'
-  - identifier: 'api'
-    name: 'API'
-    pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='api icon'>"
-    url: 'https://docs.datadoghq.com/api'
-    weight: 13
-    parent: 'product'
-  - identifier: 'customers'
-    name: 'Clients'
-    url: 'https://www.datadoghq.com/https://www.datadoghq.com/customers/'
-    weight: -480
-  - identifier: 'pricing'
-    name: 'Pricing'
-    url: 'https://www.datadoghq.com/pricing/'
-    weight: -480
-  - identifier: 'solutions'
-    name: 'Solutions'
-    url: '#'
-    weight: -460
-  - name: 'Services financiers'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/financial-services/'
-    weight: -460
-  - name: 'Production et logistique'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
-    weight: -459
-  - name: 'Santé et sciences de la vie'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/healthcare/'
-    weight: -458
-  - name: 'Commerce de détail et électronique'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
-    weight: -457
-  - name: 'Secteur public'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/public-sector/'
-    weight: -456
-  - name: 'Médias et divertissement'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/media-entertainment/'
-    weight: -455
-  - name: 'Technologies'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/technology/'
-    weight: -454
-  - name: 'Jeux vidéo'
-    parent: 'solutions'
-    title: 'industry'
-    url: 'https://www.datadoghq.com/solutions/gaming/'
-    weight: -453
-  - name: 'Amazon Web Services'
-    parent: 'solutions'
-    title: 'technology'
-    url: 'https://www.datadoghq.com/solutions/aws/'
-    weight: -452
-  - name: 'Azure'
-    parent: 'solutions'
-    title: 'technology'
-    url: 'https://www.datadoghq.com/solutions/azure/'
-    weight: -451
-  - name: 'Google Cloud Platform'
-    parent: 'solutions'
-    title: 'technology'
-    url: 'https://www.datadoghq.com/solutions/gcp/'
-    weight: -450
-  - name: 'Kubernetes'
-    parent: 'solutions'
-    title: 'technology'
-    url: 'https://www.datadoghq.com/solutions/kubernetes/'
-    weight: -449
-  - name: 'Migration vers le cloud'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -448
-  - name: 'Unification de la surveillance'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -447
-  - name: 'DevOps'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -446
-  - name: 'Analyse de la sécurité'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
-  - name: 'Surveillance Cloud hybride'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
-  - name: 'Surveillance IoT'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
-  - name: 'Apprentissage automatique'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
-  - name: 'BI en temps réel'
-    parent: 'solutions'
-    title: 'usecase'
-    url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    - identifier: 'product'
+      name: 'Produit'
+      url: 'https://www.datadoghq.com/product/'
+      weight: -500
+    - identifier: 'features'
+      name: 'Fonctionnalités'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
+      url: 'https://www.datadoghq.com/product/'
+      weight: 1
+      parent: 'product'
+    - identifier: 'integrations'
+      name: 'Intégrations'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
+      url: 'https://www.datadoghq.com/product/platform/integrations/'
+      weight: 2
+      parent: 'product'
+    - identifier: 'dashboarding'
+      name: 'Dashboards'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
+      url: 'https://www.datadoghq.com/product/platform/dashboards/'
+      weight: 3
+      parent: 'product'
+    - identifier: 'logs'
+      name: 'Log Management'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
+      url: 'https://www.datadoghq.com/product/log-management/'
+      weight: 4
+      parent: 'product'
+    - identifier: 'apm'
+      name: 'APM'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
+      url: 'https://www.datadoghq.com/product/apm/'
+      weight: 5
+      parent: 'product'
+    - identifier: 'profiler'
+      name: 'Profiler en continu'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
+      url: 'https://www.datadoghq.com/product/code-profiling/'
+      weight: 6
+      parent: 'product'
+    - identifier: 'security'
+      name: 'Security Monitoring'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
+      url: 'https://www.datadoghq.com/product/security-monitoring/'
+      weight: 7
+      parent: 'product'
+    - identifier: 'network'
+      name: 'Surveillance réseau'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
+      url: 'https://www.datadoghq.com/product/network-monitoring/'
+      weight: 8
+      parent: 'product'
+    - identifier: 'synthetics'
+      name: 'Synthetic Monitoring'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
+      url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+      weight: 9
+      parent: 'product'
+    - identifier: 'rum'
+      name: 'Real User Monitoring'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/rum.svg' alt='rum icon'>"
+      url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+      weight: 10
+      parent: 'product'
+    - identifier: 'serverless'
+      name: 'Informatique sans serveur'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='icône sans serveur'>"
+      url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+      weight: 11
+      parent: 'product'
+    - identifier: 'alerts'
+      name: 'Alerts'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
+      url: 'https://www.datadoghq.com/product/platform/alerts/'
+      weight: 12
+      parent: 'product'
+    - identifier: 'api'
+      name: 'API'
+      pre: "<img class='menu-icon' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='api icon'>"
+      url: 'https://docs.datadoghq.com/api'
+      weight: 13
+      parent: 'product'
+    - identifier: 'customers'
+      name: 'Clients'
+      url: 'https://www.datadoghq.com/https://www.datadoghq.com/customers/'
+      weight: -480
+    - identifier: 'pricing'
+      name: 'Pricing'
+      url: 'https://www.datadoghq.com/pricing/'
+      weight: -480
+    - identifier: 'solutions'
+      name: 'Solutions'
+      url: '#'
+      weight: -460
+    - name: 'Services financiers'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/financial-services/'
+      weight: -460
+    - name: 'Production et logistique'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+      weight: -459
+    - name: 'Santé et sciences de la vie'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/healthcare/'
+      weight: -458
+    - name: 'Commerce de détail et électronique'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
+      weight: -457
+    - name: 'Secteur public'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/public-sector/'
+      weight: -456
+    - name: 'Médias et divertissement'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/media-entertainment/'
+      weight: -455
+    - name: 'Technologies'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/technology/'
+      weight: -454
+    - name: 'Jeux vidéo'
+      parent: 'solutions'
+      title: 'industry'
+      url: 'https://www.datadoghq.com/solutions/gaming/'
+      weight: -453
+    - name: 'Amazon Web Services'
+      parent: 'solutions'
+      title: 'technology'
+      url: 'https://www.datadoghq.com/solutions/aws/'
+      weight: -452
+    - name: 'Azure'
+      parent: 'solutions'
+      title: 'technology'
+      url: 'https://www.datadoghq.com/solutions/azure/'
+      weight: -451
+    - name: 'Google Cloud Platform'
+      parent: 'solutions'
+      title: 'technology'
+      url: 'https://www.datadoghq.com/solutions/gcp/'
+      weight: -450
+    - name: 'Kubernetes'
+      parent: 'solutions'
+      title: 'technology'
+      url: 'https://www.datadoghq.com/solutions/kubernetes/'
+      weight: -449
+    - name: 'Migration vers le cloud'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/cloud-migration/'
+      weight: -448
+    - name: 'Unification de la surveillance'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
+      weight: -447
+    - name: 'DevOps'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/devops/'
+      weight: -446
+    - name: 'Analyse de la sécurité'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/security-analytics/'
+      weight: -445
+    - name: 'Surveillance Cloud hybride'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
+      weight: -444
+    - name: 'Surveillance IoT'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
+      weight: -443
+    - name: 'Apprentissage automatique'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/machine-learning/'
+      weight: -442
+    - name: 'BI en temps réel'
+      parent: 'solutions'
+      title: 'usecase'
+      url: 'https://www.datadoghq.com/solutions/business-analytics/'
+      weight: -441
 
 main_right:
-  - identifier: 'about'
-    name: 'À propos de'
-    url: 'about/leadership/'
-    weight: -490
-  - name: 'Contact'
-    parent: 'about'
-    url: 'about/contact/'
-    weight: -490
-  - name: 'Partenaires'
-    parent: 'about'
-    url: 'partner'
-    weight: -480
-  - name: 'Latest News'
-    parent: 'about'
-    url: 'about/latest-news/'
-    weight: -460
-  - name: 'Leadership'
-    parent: 'about'
-    url: 'about/leadership/'
-    weight: -440
-  - name: "Offres d'emploi"
-    parent: 'about'
-    url: 'careers/'
-    weight: -420
-  - name: "Rapports d'analystes"
-    parent: 'about'
-    url: 'about/analyst/'
-    weight: -415
-  - name: 'Relations avec les investisseurs'
-    parent: 'about'
-    url: 'https://investors.datadoghq.com/'
-    weight: -410
-  - name: 'Awards'
-    parent: 'about'
-    url: 'about/awards/'
-    weight: -405
-  - identifier: 'blog'
-    name: 'Blog'
-    url: 'blog/'
-    weight: -480
-  - name: 'Le monitor'
-    url: 'blog/'
-    weight: 100
-    parent: 'blog'
-  - name: 'Ingénierie'
-    url: 'blog/engineering/'
-    parent: 'blog'
-    weight: 200
-  - name: 'Actualité'
-    url: 'blog/pup-culture/'
-    parent: 'blog'
-    weight: 300
-  - name: 'Communauté'
-    url: 'blog/community/'
-    parent: 'blog'
-    weight: 400
-  - identifier: 'docs'
-    name: 'Docs'
-    url: 'https://docs.datadoghq.com/'
-    weight: -470
-  - identifier: 'login'
-    name: 'Connexion'
-    url: 'https://app.datadoghq.com/'
-    weight: -460
-  - identifier: 'get_started'
-    name: 'Get Started Free'
-    url: '#'
-    weight: -440
-
+    - identifier: 'about'
+      name: 'À propos de'
+      url: 'about/leadership/'
+      weight: -490
+    - name: 'Contact'
+      parent: 'about'
+      url: 'about/contact/'
+      weight: -490
+    - name: 'Partenaires'
+      parent: 'about'
+      url: 'partner'
+      weight: -480
+    - name: 'Latest News'
+      parent: 'about'
+      url: 'about/latest-news/'
+      weight: -460
+    - name: 'Leadership'
+      parent: 'about'
+      url: 'about/leadership/'
+      weight: -440
+    - name: "Offres d'emploi"
+      parent: 'about'
+      url: 'careers/'
+      weight: -420
+    - name: "Rapports d'analystes"
+      parent: 'about'
+      url: 'about/analyst/'
+      weight: -415
+    - name: 'Relations avec les investisseurs'
+      parent: 'about'
+      url: 'https://investors.datadoghq.com/'
+      weight: -410
+    - name: 'Awards'
+      parent: 'about'
+      url: 'about/awards/'
+      weight: -405
+    - identifier: 'blog'
+      name: 'Blog'
+      url: 'blog/'
+      weight: -480
+    - name: 'Le monitor'
+      url: 'blog/'
+      weight: 100
+      parent: 'blog'
+    - name: 'Ingénierie'
+      url: 'blog/engineering/'
+      parent: 'blog'
+      weight: 200
+    - name: 'Actualité'
+      url: 'blog/pup-culture/'
+      parent: 'blog'
+      weight: 300
+    - name: 'Communauté'
+      url: 'blog/community/'
+      parent: 'blog'
+      weight: 400
+    - identifier: 'docs'
+      name: 'Docs'
+      url: 'https://docs.datadoghq.com/'
+      weight: -470
+    - identifier: 'login'
+      name: 'Connexion'
+      url: 'https://app.datadoghq.com/'
+      weight: -460
+    - identifier: 'get_started'
+      name: 'Get Started Free'
+      url: '#'
+      weight: -440
 
 main:
     - name: Débuter
@@ -3382,11 +3381,12 @@ api_v2:
       url: /api/v2/webhooks-integration/
       identifier: Intégration Webhooks
       generated: true
+
 footer_product:
-    - name: 'Features'
+    - name: 'Fonctionnalités'
       url: 'https://www.datadoghq.com/product/'
       weight: 100
-    - name: 'Integrations'
+    - name: 'Intégrations'
       url: 'https://www.datadoghq.com/product/platform/integrations/'
       weight: 105
     - name: 'Dashboards'
@@ -3398,13 +3398,13 @@ footer_product:
     - name: 'APM'
       url: 'https://www.datadoghq.com/product/apm/'
       weight: 120
-    - name: 'Continuous Profiler'
+    - name: 'Profiler en continu'
       url: 'https://www.datadoghq.com/product/code-profiling/'
       weight: 121
     - name: 'Security Monitoring'
       url: 'https://www.datadoghq.com/product/security-monitoring/'
       weight: 123
-    - name: 'Network Monitoring'
+    - name: 'Surveillance réseau'
       url: 'https://www.datadoghq.com/product/network-monitoring/'
       weight: 125
     - name: 'Synthetic Monitoring'
@@ -3413,7 +3413,7 @@ footer_product:
     - name: 'Real User Monitoring'
       url: 'https://www.datadoghq.com/product/real-user-monitoring/'
       weight: 135
-    - name: 'Serverless'
+    - name: 'Informatique sans serveur'
       url: 'https://www.datadoghq.com/product/serverless-monitoring/'
       weight: 140
     - name: 'Alerts'
@@ -3427,7 +3427,7 @@ footer_product_two:
     - name: 'Real User Monitoring'
       url: 'https://www.datadoghq.com/product/real-user-monitoring/'
       weight: 135
-    - name: 'Serverless'
+    - name: 'Informatique sans serveur'
       url: 'https://www.datadoghq.com/product/serverless-monitoring/'
       weight: 140
     - name: 'Alerts'
@@ -3450,7 +3450,7 @@ footer_product_three:
     - name: 'Resources'
       url: 'https://www.datadoghq.com/resources/'
       weight: 150
-    - name: 'Security'
+    - name: 'Sécurité'
       url: 'https://www.datadoghq.com/security/'
       weight: 180
 
@@ -3458,10 +3458,10 @@ footer_about:
     - name: 'COVID-19 Update'
       url: 'https://www.datadoghq.com/coronavirus/'
       weight: 90
-    - name: 'Contact Us'
+    - name: 'Contact'
       url: 'https://www.datadoghq.com/about/contact/'
       weight: 100
-    - name: 'Partners'
+    - name: 'Partenaires'
       url: 'https://www.datadoghq.com/partner-with-datadog/'
       weight: 120
     - name: 'Press'
@@ -3470,16 +3470,16 @@ footer_about:
     - name: 'Leadership'
       url: 'https://www.datadoghq.com/about/leadership/'
       weight: 140
-    - name: 'Careers'
+    - name: "Offres d'emploi"
       url: 'https://www.datadoghq.com/careers/'
       weight: 160
     - name: 'Legal'
       url: 'https://www.datadoghq.com/legal/'
       weight: 170
-    - name: 'Investor Relations'
+    - name: 'Relations avec les investisseurs'
       url: 'https://investors.datadoghq.com/'
       weight: 175
-    - name: 'Analyst Reports'
+    - name: "Rapports d'analystes"
       url: 'https://www.datadoghq.com/about/analyst/'
       weight: 180
 
@@ -3513,10 +3513,10 @@ footer_social:
       pre: 'youtube.svg'
 
 footer_sub:
-    - name: 'Terms'
+    - name: 'Conditions'
       url: 'https://www.datadoghq.com/legal/terms/'
       weight: 100
-    - name: 'Privacy'
+    - name: 'Confidentialité'
       url: 'https://www.datadoghq.com/legal/privacy/'
       weight: 120
     - name: 'Cookies'

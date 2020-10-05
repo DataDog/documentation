@@ -70,7 +70,7 @@ body > header {
         border-radius: 5px;
         padding: 8.5px 8px 9.5px;
         @include media-breakpoint-up(lg) {
-          padding: 8.5px 12px 9.5px 8px;
+          padding: 8.5px 8px 9.5px 8px;
         }
         
         &:hover,
