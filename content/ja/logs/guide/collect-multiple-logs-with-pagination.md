@@ -29,16 +29,17 @@ further_reading:
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_キー>&application_key=<DATADOG_アプリケーションキー>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
         "limit": 50,
         "query": "*",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -61,17 +62,18 @@ curl -X POST \
 ログの次のページを取得するにはクエリを再送信しますが、今回は、前の呼び出しから `nextLogId` 値を取得する `startAt` パラメーターを使用します。
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<DATADOG_API_キー>&application_key=<DATADOG_アプリケーションキー>' \
--H 'Content-Type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
         "limit": 1000,
         "query": "*",
         "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -97,14 +99,15 @@ curl -X POST \
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  
@@ -139,14 +142,15 @@ curl -X POST \
 ログの次のページを見るには、前の呼び出しから `after` 値を取得する `cursor` パラメーターを含めてクエリを再送信し続けます。`data` が `null` を返したら、クエリに関連付けられたログのすべてのページが返ったことになります。
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<DATADOG_API_KEY>&application_key=<DATADOG_APPLICATION_KEY>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  

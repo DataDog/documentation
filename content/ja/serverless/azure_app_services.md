@@ -57,9 +57,13 @@ Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する 
 8. メインのアプリケーションを再起動して **Stop** をクリックします。その後、完全にアプリケーションが停止してから **Start** をクリックします。
     {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="このページで停止および再起動を実行" >}}
 
-### ログとトレース
+### Azure Web Apps からのロギング
 
-Azure Web Apps のログは、[Azure インテグレーションドキュメント][8] に記載するプロセスを使用して、Eventhub 経由で Datadog に送信できます。この拡張機能では、エージェントレスのログ収集はご利用になれません。
+Azure Web Apps のログは、[Azure インテグレーションドキュメント][8] に記載するプロセスを使用して、Eventhub 経由で Datadog に送信できます。**注**: Eventhub はお使いの Web アプリケーションと同じリージョンに所在している必要があります。
+
+Eventhub と Forwarder の機能設定が完了したら、Web アプリケーション向けの診断設定を作成します。以下のように、Datadog に送信したいログを選択します。
+
+{{< img src="serverless/azure_diagnostics.png" alt="診断設定" >}}
 
 アプリケーションに対するロギングパイプラインを構築したら、トレース ID を挿入して Datadog で[ログとトレースを接続][9]します。拡張機能でこれを有効にするには、アプリケーション設定 `DD_LOGS_INJECTION:true` を追加します。
 
@@ -99,7 +103,7 @@ Azure Web Apps のログは、[Azure インテグレーションドキュメン�
 [5]: /ja/tracing/setup/dotnet/
 [6]: https://portal.azure.com
 [7]: https://app.datadoghq.com/account/settings#api
-[8]: /ja/integrations/azure/?tab=eventhub
+[8]: /ja/integrations/azure/?tab=eventhub#log-collection
 [9]: /ja/tracing/connect_logs_and_traces/
 [10]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
 [11]: /ja/help/

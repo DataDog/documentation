@@ -37,16 +37,20 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 ### DNS Configuration 
 
+* The two below parameters can be used to customize DNS resolution on your **API tests**:
+
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
 | `dnsUseHost` | Boolean | `true` | Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any. |
 | `dnsServer` | Array of Strings | `["8.8.8.8","1.1.1.1"]` | DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`). |
 
+* On **browser tests**, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (e.g., using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
+
 ### Reserved IPs Configuration
 
 | Option | Type | Default | Description |
 | -------| ---- | ------- | ----------- |
-| `enableDefaultBlockedIpRanges`| Boolean | `false` | Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][1] and [IPv6][2] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter. |
+| `enableDefaultBlockedIpRanges`| Boolean | `false` | Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter. |
 | `allowedIPRanges` | Array of Strings | `none` | Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (e.g., `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
 | `blockedIPRanges` | Array of Strings | `none` | Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
@@ -83,5 +87,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[2]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[1]: https://docs.docker.com/config/containers/container-networking/#dns-services
+[2]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
+[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[4]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml

@@ -7,6 +7,7 @@ assets:
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

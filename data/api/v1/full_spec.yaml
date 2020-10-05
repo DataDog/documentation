@@ -367,8 +367,8 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
-    ApmResourcesQueryDefinition:
-      description: The APM resources (stats) query for Table Widget.
+    ApmStatsQueryDefinition:
+      description: The APM stats query for table and distributions widgets.
       properties:
         columns:
           description: Column names used by front end for display.
@@ -385,10 +385,16 @@ components:
           description: Operation name associated with service.
           example: rack.request
           type: string
+        primary_tag:
+          description: The organization's host group name and value.
+          example: datacenter:*
+          type: string
         resource:
           description: Resource name.
           example: CartsController
           type: string
+        row_type:
+          $ref: '#/components/schemas/ApmStatsQueryRowType'
         service:
           description: Service name.
           example: web-store
@@ -397,7 +403,21 @@ components:
       - service
       - env
       - name
+      - primary_tag
+      - row_type
       type: object
+    ApmStatsQueryRowType:
+      description: The level of detail for the request.
+      enum:
+      - service
+      - resource
+      - span
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+      - RESOURCE
+      - SPAN
     ApplicationKey:
       description: An application key with its associated metadata.
       properties:
@@ -1341,6 +1361,87 @@ components:
     Event:
       description: Object representing an event.
       properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
+
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
+    EventAlertType:
+      description: 'If an alert event is enabled, set its type.
+
+        For example, `error`, `warning`, `info`, and `success`.'
+      enum:
+      - error
+      - warning
+      - info
+      - success
+      example: info
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+    EventCreateRequest:
+      description: Object representing an event.
+      properties:
         aggregation_key:
           description: 'An arbitrary string to use for aggregation. Limited to 100
             characters.
@@ -1419,22 +1520,79 @@ components:
       - title
       - text
       type: object
-    EventAlertType:
-      description: 'If an alert event is enabled, set its type.
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
 
-        For example, `error`, `warning`, `info`, and `success`.'
-      enum:
-      - error
-      - warning
-      - info
-      - success
-      example: info
-      type: string
-      x-enum-varnames:
-      - ERROR
-      - WARNING
-      - INFO
-      - SUCCESS
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: ID of the parent event. Must be sent as an integer (i.e. no
+            quotes).
+          format: int64
+          type: integer
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        status:
+          description: A status.
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
     EventListResponse:
       description: An event list response.
       properties:
@@ -2695,9 +2853,12 @@ components:
           description: Final attribute or tag name to remap the sources to.
           example: operation_id
           type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
         target_type:
           default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
+          description: Defines if the final attribute or tag name is from log `attribute`
+            or `tag`.
           type: string
         type:
           $ref: '#/components/schemas/LogsAttributeRemapperType'
@@ -6439,6 +6600,8 @@ components:
       - certificate
       - responseTime
       - property
+      - recordEvery
+      - recordSome
       type: string
       x-enum-varnames:
       - BODY
@@ -6447,6 +6610,8 @@ components:
       - CERTIFICATE
       - RESPONSE_TIME
       - PROPERTY
+      - RECORD_EVERY
+      - RECORD_SOME
     SyntheticsBasicAuth:
       description: Object to handle basic authentication when performing the test.
       properties:
@@ -6530,8 +6695,9 @@ components:
           description: Whether or not a thumbnail is associated with the browser test.
           type: boolean
         timeToInteractive:
-          description: Time in second to wait before the browser test starts after
-            reaching the start URL.
+          description: 'Time in second to wait before the browser test starts after
+
+            reaching the start URL.'
           format: double
           type: number
       type: object
@@ -6681,22 +6847,29 @@ components:
           description: Metadata for the Synthetics tests run
           properties:
             ci:
+              description: Describe CI provider.
               properties:
                 pipeline:
+                  description: Name of the pipeline.
                   type: string
                 provider:
+                  description: Name of the CI provider.
                   type: string
               type: object
             git:
+              description: Git information.
               properties:
                 branch:
+                  description: Branch name.
                   type: string
                 commit_sha:
+                  description: Commit SHA.
                   type: string
               type: object
           type: object
         public_id:
           description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
           type: string
         retry:
           $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
@@ -6748,8 +6921,9 @@ components:
       - LOWER_EQUALS
       - MATCH_REGEX
     SyntheticsDeleteTestsPayload:
-      description: A JSON list of the ID or IDs of the Synthetic tests that you want
-        to delete.
+      description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
+
+        to delete.'
       properties:
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
@@ -6764,11 +6938,13 @@ components:
       description: Response object for deleting Synthetic tests.
       properties:
         deleted_tests:
-          description: Array of objects containing a deleted Synthetic test ID with
-            the associated deletion timestamp.
+          description: 'Array of objects containing a deleted Synthetic test ID with
+
+            the associated deletion timestamp.'
           items:
-            description: Object containing a deleted Synthetic test ID with the associated
-              deletion timestamp.
+            description: 'Object containing a deleted Synthetic test ID with the associated
+
+              deletion timestamp.'
             properties:
               deleted_at:
                 description: Deletion timestamp of the Synthetic test ID.
@@ -6881,6 +7057,7 @@ components:
       properties:
         description:
           description: Description of the global variable.
+          example: Example description
           type: string
         id:
           description: Unique identifier of the global variable.
@@ -6888,9 +7065,13 @@ components:
           type: string
         name:
           description: Name of the global variable.
+          example: MY_VARIABLE
           type: string
         tags:
           description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
           items:
             description: Tag name.
             type: string
@@ -6913,7 +7094,10 @@ components:
           description: Determines if the variable is secure.
           type: boolean
         value:
-          description: Value of the global variable.
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is secure.'
+          example: example-value
           type: string
       required:
       - value
@@ -6927,8 +7111,9 @@ components:
           type: array
       type: object
     SyntheticsLocation:
-      description: Synthetics location that can be used when creating or editing a
-        test.
+      description: 'Synthetic location that can be used when creating or editing a
+
+        test.'
       properties:
         id:
           description: Unique identifier of the location.
@@ -7303,16 +7488,20 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: The sub-type of the Synthetic API test, `http`, `ssl`, or `tcp`.
+      description: 'The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+
+        `dns`.'
       enum:
       - http
       - ssl
       - tcp
+      - dns
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
       - TCP
+      - DNS
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -7350,8 +7539,9 @@ components:
       description: Object describing the extra options for a Synthetic test.
       properties:
         accept_self_signed:
-          description: For SSL test, whether or not the test should allow self signed
-            certificates.
+          description: 'For SSL test, whether or not the test should allow self signed
+
+            certificates.'
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request.
@@ -7370,17 +7560,21 @@ components:
           format: int64
           type: integer
         min_location_failed:
-          description: Minimum number of locations in failure required to trigger
-            an alert.
+          description: 'Minimum number of locations in failure required to trigger
+
+            an alert.'
           format: int64
           type: integer
         monitor_options:
-          description: Object containing the options for a Synthetic test as a monitor
-            (e.g. renotification).
+          description: 'Object containing the options for a Synthetic test as a monitor
+
+            (for example, renotification).'
           properties:
             renotify_interval:
-              description: Time interval before renotifying if the test is still failing
-                (in minutes).
+              description: 'Time interval before renotifying if the test is still
+                failing
+
+                (in minutes).'
               format: int64
               maximum: 1440
               minimum: 0
@@ -7395,19 +7589,25 @@ components:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
         count:
-          description: Number of times a test needs to be retried before marking a
-            location as failed. Defaults to 0.
+          description: 'Number of times a test needs to be retried before marking
+            a
+
+            location as failed. Defaults to 0.'
           format: int64
           type: integer
         interval:
-          description: Time interval between retries (in milliseconds). Defaults to
-            300ms.
+          description: 'Time interval between retries (in milliseconds). Defaults
+            to
+
+            300ms.'
           format: double
           type: number
       type: object
     SyntheticsTestPauseStatus:
-      description: Define whether you want to start (`live`) or pause (`paused`) a
-        Synthetic test.
+      description: 'Define whether you want to start (`live`) or pause (`paused`)
+        a
+
+        Synthetic test.'
       enum:
       - live
       - paused
@@ -7546,6 +7746,7 @@ components:
         results:
           description: Information about the tests runs.
           items:
+            description: Information about a single test run.
             properties:
               device:
                 $ref: '#/components/schemas/SyntheticsDeviceID'
@@ -7580,6 +7781,17 @@ components:
       type: string
       x-enum-varnames:
       - USER_LOCATOR
+    TableWidgetCellDisplayMode:
+      default: number
+      description: Define a display mode for the table cell.
+      enum:
+      - number
+      - bar
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
+      - BAR
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
@@ -7589,6 +7801,8 @@ components:
           items:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
+        has_search_bar:
+          $ref: '#/components/schemas/TableWidgetHasSearchBar'
         requests:
           description: Widget definition.
           example:
@@ -7621,6 +7835,19 @@ components:
       type: string
       x-enum-varnames:
       - QUERY_TABLE
+    TableWidgetHasSearchBar:
+      default: auto
+      description: Controls the display of the search bar.
+      enum:
+      - always
+      - never
+      - auto
+      example: auto
+      type: string
+      x-enum-varnames:
+      - ALWAYS
+      - NEVER
+      - AUTO
     TableWidgetRequest:
       description: Updated table widget.
       properties:
@@ -7631,8 +7858,13 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
-        apm_resources_query:
-          $ref: '#/components/schemas/ApmResourcesQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
+        cell_display_mode:
+          description: A list of display modes for each table cell.
+          items:
+            $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+          type: array
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -7676,6 +7908,24 @@ components:
           description: A list of tags to apply to the host.
           type: object
       type: object
+    TargetFormatType:
+      default: auto
+      description: 'If the target of the remapper is an attribute, try to cast the
+        value to a new specific type.
+
+        If the cast is not possible, the original type is kept. `string`, `integer`,
+        or `double` are the possible types.'
+      enum:
+      - auto
+      - string
+      - integer
+      - double
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - STRING
+      - INTEGER
+      - DOUBLE
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Analyzed Spans over time.
@@ -7705,6 +7955,8 @@ components:
             $ref: '#/components/schemas/TimeseriesWidgetRequest'
           minItems: 1
           type: array
+        right_yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
         show_legend:
           description: (screenboard only) Show the legend for this widget.
           type: boolean
@@ -7764,6 +8016,9 @@ components:
           type: array
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        on_right_yaxis:
+          description: Whether or not to display a second y-axis on the right.
+          type: boolean
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
@@ -11065,7 +11320,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/EventCreateRequest'
         description: Event request object
         required: true
       responses:
@@ -11073,7 +11328,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventResponse'
+                $ref: '#/components/schemas/EventCreateResponse'
           description: OK
         '400':
           content:
@@ -15312,8 +15567,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/locations:
     get:
-      description: Get the list of public and private locations available for Synthetics
-        tests. No arguments required.
+      description: 'Get the list of public and private locations available for Synthetic
+
+        tests. No arguments required.'
       operationId: ListLocations
       responses:
         '200':
@@ -15394,8 +15650,9 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
-      description: Get the detailed configuration (including steps) associated with
-        a Synthetics browser test.
+      description: 'Get the detailed configuration (including steps) associated with
+
+        a Synthetic browser test.'
       operationId: GetBrowserTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -15434,8 +15691,9 @@ paths:
         test.
       operationId: GetBrowserTestLatestResults
       parameters:
-      - description: The public ID of the browser test for which to search results
-          for.
+      - description: 'The public ID of the browser test for which to search results
+
+          for.'
         in: path
         name: public_id
         required: true
@@ -15493,8 +15751,9 @@ paths:
       description: Get a specific full result from a given (browser) Synthetic test.
       operationId: GetBrowserTestResult
       parameters:
-      - description: The public ID of the browser test to which the target result
-          belongs.
+      - description: 'The public ID of the browser test to which the target result
+
+          belongs.'
         in: path
         name: public_id
         required: true
@@ -15908,6 +16167,38 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
       summary: Delete a global variable
+      tags:
+      - Synthetics
+    get:
+      description: Get the detailed configuration of a global variable.
+      operationId: GetGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a global variable
       tags:
       - Synthetics
     put:
@@ -17055,7 +17346,7 @@ paths:
       - Usage Metering
   /api/v1/user:
     get:
-      description: Get all users for your organization.
+      description: List all users for your organization.
       operationId: ListUsers
       responses:
         '200':
@@ -17070,7 +17361,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Get all users
+      summary: List all users
       tags:
       - Users
     post:

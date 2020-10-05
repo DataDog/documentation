@@ -88,7 +88,7 @@ aliases:
 * [MySQL Localhost Error - Localhost VS 127.0.0.1][37]
 * [Can I use a named instance in the SQL Server integration?][38]
 * [Can I set up the dd-agent MySQL check on my Google CloudSQL?][39]
-* [How to collect metrics from custom MySQL queries][40]
+* [MySQL Custom Queries][40]
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table?][41]
 * [How can I collect more metrics from my SQL Server integration?][42]
 * [Database user lacks privileges][43]

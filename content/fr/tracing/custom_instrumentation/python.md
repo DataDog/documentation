@@ -190,7 +190,7 @@ with tracer.trace("throws.an.error") as span:
     raise Exception("Oups !")
 
 # `span` renvoie une erreur.
-# La trace de pile et le message d'exception sont alors ajoutés à la span en tant que tags.
+# La stack trace et le message de l'exception sont alors ajoutés à la span en tant que tags.
 ```
 
 Vous pouvez également signaler manuellement qu'une span est erronée :

@@ -249,6 +249,8 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, vous devez abonn
 
 Après avoir configuré votre fonction en suivant la procédure ci-dessus, vous pouvez visualiser vos métriques, logs et traces sur la [page Serverless principale][2].
 
+### Surveiller des métriques métier custom
+
 Si vous souhaitez envoyer une métrique custom ou instrumenter manuellement une fonction, consultez l'exemple de code ci-dessous :
 
 ```javascript
@@ -272,11 +274,20 @@ exports.handler = async (event) => {
   );
   const response = {
     statusCode: 200,
-    body: JSON.stringify("Hello, sans serveur !"),
+    body: JSON.stringify("Hello from serverless!"),
   };
   return response;
 };
 ```
+[Activez l'envoi de métriques custom][3] pour commencer.
+
+### Activer l'intégration AWS X-Ray
+
+L'intégration de Datadog à AWS X-Ray vous permet de visualiser les transactions sans serveur de bout en bout afin d'identifier la cause des erreurs ou ralentissement et d'évaluer l'incidence des performances de vos fonctions sur l'expérience de vos utilisateurs. En fonction de votre langage et de votre configuration, [choisissez d'installer l'APM Datadog ou l'intégration AWS X-Ray][4] pour répondre à vos besoins en matière de tracing.
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Diagramme de l'architecture de tracing d'AWS Lambda avec Datadog" >}}
 
 [1]: /fr/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/functions
+[2]: /fr/serverless/forwarder
+[3]: /fr/serverless/custom_metrics
+[4]: /fr/serverless/distributed_tracing

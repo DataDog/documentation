@@ -4940,6 +4940,7 @@
             "properties": {
               "id": {
                 "description": "ID of the organization.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -4962,6 +4963,9 @@
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RelationshipToOrganizationData": {
@@ -4969,6 +4973,7 @@
         "properties": {
           "id": {
             "description": "ID of the organization.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -4995,11 +5000,13 @@
         "properties": {
           "data": {
             "description": "Relationships to organization objects.",
+            "example": [],
             "items": {
               "description": "Relationship to organization object.",
               "properties": {
                 "id": {
                   "description": "ID of the organization.",
+                  "example": "00000000-0000-0000-0000-000000000000",
                   "type": "string"
                 },
                 "type": {
@@ -5024,6 +5031,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RelationshipToPermission": {
@@ -5200,7 +5210,8 @@
             "description": "Relationship to user object.",
             "properties": {
               "id": {
-                "description": "ID of the user.",
+                "description": "A unique identifier that represents the user.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -5223,13 +5234,17 @@
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RelationshipToUserData": {
         "description": "Relationship to user object.",
         "properties": {
           "id": {
-            "description": "ID of the user.",
+            "description": "A unique identifier that represents the user.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -5256,11 +5271,13 @@
         "properties": {
           "data": {
             "description": "Relationships to user objects.",
+            "example": [],
             "items": {
               "description": "Relationship to user object.",
               "properties": {
                 "id": {
-                  "description": "ID of the user.",
+                  "description": "A unique identifier that represents the user.",
+                  "example": "00000000-0000-0000-0000-000000000000",
                   "type": "string"
                 },
                 "type": {
@@ -5285,6 +5302,9 @@
             "type": "array"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "ResponseMetaAttributes": {
@@ -6149,9 +6169,13 @@
           },
           "name": {
             "description": "Name of the role.",
+            "example": "developers",
             "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       },
       "RoleCreateData": {
@@ -6174,9 +6198,13 @@
               },
               "name": {
                 "description": "Name of the role.",
+                "example": "developers",
                 "type": "string"
               }
             },
+            "required": [
+              "name"
+            ],
             "type": "object"
           },
           "relationships": {
@@ -6219,11 +6247,13 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to user objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to user object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the user.",
+                          "description": "A unique identifier that represents the user.",
+                          "example": "00000000-0000-0000-0000-000000000000",
                           "type": "string"
                         },
                         "type": {
@@ -6248,6 +6278,9 @@
                     "type": "array"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -6266,6 +6299,9 @@
             ]
           }
         },
+        "required": [
+          "attributes"
+        ],
         "type": "object"
       },
       "RoleCreateRequest": {
@@ -6291,9 +6327,13 @@
                   },
                   "name": {
                     "description": "Name of the role.",
+                    "example": "developers",
                     "type": "string"
                   }
                 },
+                "required": [
+                  "name"
+                ],
                 "type": "object"
               },
               "relationships": {
@@ -6336,11 +6376,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the user.",
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -6365,6 +6407,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -6383,9 +6428,15 @@
                 ]
               }
             },
+            "required": [
+              "attributes"
+            ],
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RoleCreateResponse": {
@@ -6411,9 +6462,13 @@
                   },
                   "name": {
                     "description": "Name of the role.",
+                    "example": "developers",
                     "type": "string"
                   }
                 },
+                "required": [
+                  "name"
+                ],
                 "type": "object"
               },
               "id": {
@@ -6519,11 +6574,13 @@
             "properties": {
               "data": {
                 "description": "Relationships to user objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to user object.",
                   "properties": {
                     "id": {
-                      "description": "ID of the user.",
+                      "description": "A unique identifier that represents the user.",
+                      "example": "00000000-0000-0000-0000-000000000000",
                       "type": "string"
                     },
                     "type": {
@@ -6548,6 +6605,9 @@
                 "type": "array"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           }
         },
@@ -6737,6 +6797,7 @@
           },
           "id": {
             "description": "ID of the role.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -6752,6 +6813,11 @@
             ]
           }
         },
+        "required": [
+          "attributes",
+          "type",
+          "id"
+        ],
         "type": "object"
       },
       "RoleUpdateRequest": {
@@ -6784,6 +6850,7 @@
               },
               "id": {
                 "description": "ID of the role.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -6799,9 +6866,17 @@
                 ]
               }
             },
+            "required": [
+              "attributes",
+              "type",
+              "id"
+            ],
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "RoleUpdateResponse": {
@@ -7268,7 +7343,7 @@
                         "type": "array"
                       },
                       "metric": {
-                        "description": "The target field to aggregate over when using the sum or max aggregations.",
+                        "description": "The target field to aggregate over when using the sum or max\naggregations.",
                         "type": "string"
                       },
                       "name": {
@@ -7607,7 +7682,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -7616,6 +7691,7 @@
                 },
                 "query": {
                   "description": "Query to run on logs.",
+                  "example": "a < 3",
                   "type": "string"
                 }
               },
@@ -7865,7 +7941,7 @@
             "type": "array"
           },
           "metric": {
-            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
           },
           "name": {
@@ -7931,7 +8007,7 @@
             "type": "array"
           },
           "metric": {
-            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
           },
           "name": {
@@ -7940,6 +8016,7 @@
           },
           "query": {
             "description": "Query to run on logs.",
+            "example": "a < 3",
             "type": "string"
           }
         },
@@ -8160,7 +8237,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -8399,7 +8476,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -8430,7 +8507,7 @@
         "description": "Object description of a security signal.",
         "properties": {
           "attributes": {
-            "description": "The JSON object containing all signal attributes and their associated values.",
+            "description": "The object containing all signal attributes and their\nassociated values.",
             "properties": {
               "attributes": {
                 "additionalProperties": {},
@@ -8575,7 +8652,7 @@
               "description": "Object description of a security signal.",
               "properties": {
                 "attributes": {
-                  "description": "The JSON object containing all signal attributes and their associated values.",
+                  "description": "The object containing all signal attributes and their\nassociated values.",
                   "properties": {
                     "attributes": {
                       "additionalProperties": {},
@@ -8719,10 +8796,10 @@
             "description": "The service's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -8742,16 +8819,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -8771,9 +8855,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -8822,10 +8913,10 @@
                 "description": "The service's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -8845,16 +8936,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -8874,9 +8972,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -8971,6 +9076,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -8993,6 +9099,9 @@
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_orgs": {
@@ -9000,11 +9109,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -9029,6 +9140,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_users": {
@@ -9036,11 +9150,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the user.",
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -9065,6 +9181,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "roles": {
@@ -9125,10 +9244,10 @@
         "description": "The service's relationships.",
         "properties": {
           "created_by": {
-            "description": "A relationship reference for users.",
+            "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "The User relationship data.",
+                "description": "Relationship to user object.",
                 "properties": {
                   "id": {
                     "description": "A unique identifier that represents the user.",
@@ -9148,16 +9267,23 @@
                     ]
                   }
                 },
+                "required": [
+                  "id",
+                  "type"
+                ],
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           },
           "last_modified_by": {
-            "description": "A relationship reference for users.",
+            "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "The User relationship data.",
+                "description": "Relationship to user object.",
                 "properties": {
                   "id": {
                     "description": "A unique identifier that represents the user.",
@@ -9177,9 +9303,16 @@
                     ]
                   }
                 },
+                "required": [
+                  "id",
+                  "type"
+                ],
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           }
         },
@@ -9224,10 +9357,10 @@
                 "description": "The service's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -9247,16 +9380,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -9276,9 +9416,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -9370,6 +9517,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -9392,6 +9540,9 @@
                               "type": "object"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_orgs": {
@@ -9399,11 +9550,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -9428,6 +9581,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_users": {
@@ -9435,11 +9591,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the user.",
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -9464,6 +9622,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "roles": {
@@ -9587,10 +9748,10 @@
             "description": "The service's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -9610,16 +9771,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -9639,9 +9807,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -9719,10 +9894,10 @@
             "description": "The service's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -9742,16 +9917,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -9771,9 +9953,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -9828,10 +10017,10 @@
                 "description": "The service's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -9851,16 +10040,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -9880,9 +10076,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -9919,6 +10122,12 @@
         "properties": {
           "data": {
             "description": "An array of services.",
+            "example": [
+              {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "services"
+              }
+            ],
             "items": {
               "description": "Service data from responses.",
               "properties": {
@@ -9954,10 +10163,10 @@
                   "description": "The service's relationships.",
                   "properties": {
                     "created_by": {
-                      "description": "A relationship reference for users.",
+                      "description": "Relationship to user.",
                       "properties": {
                         "data": {
-                          "description": "The User relationship data.",
+                          "description": "Relationship to user object.",
                           "properties": {
                             "id": {
                               "description": "A unique identifier that represents the user.",
@@ -9977,16 +10186,23 @@
                               ]
                             }
                           },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     },
                     "last_modified_by": {
-                      "description": "A relationship reference for users.",
+                      "description": "Relationship to user.",
                       "properties": {
                         "data": {
-                          "description": "The User relationship data.",
+                          "description": "Relationship to user object.",
                           "properties": {
                             "id": {
                               "description": "A unique identifier that represents the user.",
@@ -10006,9 +10222,16 @@
                               ]
                             }
                           },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     }
                   },
@@ -10102,6 +10325,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -10124,6 +10348,9 @@
                               "type": "object"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_orgs": {
@@ -10131,11 +10358,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -10160,6 +10389,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_users": {
@@ -10167,11 +10399,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the user.",
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -10196,6 +10430,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "roles": {
@@ -10327,10 +10564,10 @@
             "description": "The team's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -10350,16 +10587,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -10379,9 +10623,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -10430,10 +10681,10 @@
                 "description": "The team's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -10453,16 +10704,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -10482,9 +10740,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -10579,6 +10844,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -10601,6 +10867,9 @@
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_orgs": {
@@ -10608,11 +10877,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -10637,6 +10908,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_users": {
@@ -10644,11 +10918,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the user.",
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -10673,6 +10949,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "roles": {
@@ -10733,10 +11012,10 @@
         "description": "The team's relationships.",
         "properties": {
           "created_by": {
-            "description": "A relationship reference for users.",
+            "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "The User relationship data.",
+                "description": "Relationship to user object.",
                 "properties": {
                   "id": {
                     "description": "A unique identifier that represents the user.",
@@ -10756,16 +11035,23 @@
                     ]
                   }
                 },
+                "required": [
+                  "id",
+                  "type"
+                ],
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           },
           "last_modified_by": {
-            "description": "A relationship reference for users.",
+            "description": "Relationship to user.",
             "properties": {
               "data": {
-                "description": "The User relationship data.",
+                "description": "Relationship to user object.",
                 "properties": {
                   "id": {
                     "description": "A unique identifier that represents the user.",
@@ -10785,9 +11071,16 @@
                     ]
                   }
                 },
+                "required": [
+                  "id",
+                  "type"
+                ],
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           }
         },
@@ -10832,10 +11125,10 @@
                 "description": "The team's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -10855,16 +11148,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -10884,9 +11184,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -10974,6 +11281,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -10996,6 +11304,9 @@
                               "type": "object"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_orgs": {
@@ -11003,11 +11314,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -11032,6 +11345,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_users": {
@@ -11039,11 +11355,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the user.",
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -11068,6 +11386,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "roles": {
@@ -11191,10 +11512,10 @@
             "description": "The team's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -11214,16 +11535,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -11243,9 +11571,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -11319,10 +11654,10 @@
             "description": "The team's relationships.",
             "properties": {
               "created_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -11342,16 +11677,23 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "last_modified_by": {
-                "description": "A relationship reference for users.",
+                "description": "Relationship to user.",
                 "properties": {
                   "data": {
-                    "description": "The User relationship data.",
+                    "description": "Relationship to user object.",
                     "properties": {
                       "id": {
                         "description": "A unique identifier that represents the user.",
@@ -11371,9 +11713,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "id",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
@@ -11428,10 +11777,10 @@
                 "description": "The team's relationships.",
                 "properties": {
                   "created_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -11451,16 +11800,23 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "last_modified_by": {
-                    "description": "A relationship reference for users.",
+                    "description": "Relationship to user.",
                     "properties": {
                       "data": {
-                        "description": "The User relationship data.",
+                        "description": "Relationship to user object.",
                         "properties": {
                           "id": {
                             "description": "A unique identifier that represents the user.",
@@ -11480,9 +11836,16 @@
                             ]
                           }
                         },
+                        "required": [
+                          "id",
+                          "type"
+                        ],
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   }
                 },
@@ -11519,6 +11882,15 @@
         "properties": {
           "data": {
             "description": "An array of teams.",
+            "example": [
+              {
+                "attributes": {
+                  "name": "team name"
+                },
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "teams"
+              }
+            ],
             "items": {
               "description": "Team data from a response.",
               "properties": {
@@ -11554,10 +11926,10 @@
                   "description": "The team's relationships.",
                   "properties": {
                     "created_by": {
-                      "description": "A relationship reference for users.",
+                      "description": "Relationship to user.",
                       "properties": {
                         "data": {
-                          "description": "The User relationship data.",
+                          "description": "Relationship to user object.",
                           "properties": {
                             "id": {
                               "description": "A unique identifier that represents the user.",
@@ -11577,16 +11949,23 @@
                               ]
                             }
                           },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     },
                     "last_modified_by": {
-                      "description": "A relationship reference for users.",
+                      "description": "Relationship to user.",
                       "properties": {
                         "data": {
-                          "description": "The User relationship data.",
+                          "description": "Relationship to user object.",
                           "properties": {
                             "id": {
                               "description": "A unique identifier that represents the user.",
@@ -11606,9 +11985,16 @@
                               ]
                             }
                           },
+                          "required": [
+                            "id",
+                            "type"
+                          ],
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     }
                   },
@@ -11698,6 +12084,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -11720,6 +12107,9 @@
                               "type": "object"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_orgs": {
@@ -11727,11 +12117,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -11756,6 +12148,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "other_users": {
@@ -11763,11 +12158,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
-                                    "description": "ID of the user.",
+                                    "description": "A unique identifier that represents the user.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -11792,6 +12189,9 @@
                               "type": "array"
                             }
                           },
+                          "required": [
+                            "data"
+                          ],
                           "type": "object"
                         },
                         "roles": {
@@ -11949,6 +12349,7 @@
                     "properties": {
                       "id": {
                         "description": "ID of the organization.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -11971,6 +12372,9 @@
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "other_orgs": {
@@ -11978,11 +12382,13 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to organization objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to organization object.",
                       "properties": {
                         "id": {
                           "description": "ID of the organization.",
+                          "example": "00000000-0000-0000-0000-000000000000",
                           "type": "string"
                         },
                         "type": {
@@ -12007,6 +12413,9 @@
                     "type": "array"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "other_users": {
@@ -12014,11 +12423,13 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to user objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to user object.",
                       "properties": {
                         "id": {
-                          "description": "ID of the user.",
+                          "description": "A unique identifier that represents the user.",
+                          "example": "00000000-0000-0000-0000-000000000000",
                           "type": "string"
                         },
                         "type": {
@@ -12043,6 +12454,9 @@
                     "type": "array"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               },
               "roles": {
@@ -12144,6 +12558,7 @@
         "properties": {
           "email": {
             "description": "The email of the user.",
+            "example": "joe.doe@example.com",
             "type": "string"
           },
           "name": {
@@ -12155,6 +12570,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "email"
+        ],
         "type": "object"
       },
       "UserCreateData": {
@@ -12165,6 +12583,7 @@
             "properties": {
               "email": {
                 "description": "The email of the user.",
+                "example": "joe.doe@example.com",
                 "type": "string"
               },
               "name": {
@@ -12176,6 +12595,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "email"
+            ],
             "type": "object"
           },
           "relationships": {
@@ -12230,6 +12652,10 @@
             ]
           }
         },
+        "required": [
+          "attributes",
+          "type"
+        ],
         "type": "object"
       },
       "UserCreateRequest": {
@@ -12243,6 +12669,7 @@
                 "properties": {
                   "email": {
                     "description": "The email of the user.",
+                    "example": "joe.doe@example.com",
                     "type": "string"
                   },
                   "name": {
@@ -12254,6 +12681,9 @@
                     "type": "string"
                   }
                 },
+                "required": [
+                  "email"
+                ],
                 "type": "object"
               },
               "relationships": {
@@ -12308,9 +12738,16 @@
                 ]
               }
             },
+            "required": [
+              "attributes",
+              "type"
+            ],
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "UserInvitationData": {
@@ -12326,7 +12763,8 @@
                     "description": "Relationship to user object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the user.",
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -12349,9 +12787,15 @@
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             },
+            "required": [
+              "user"
+            ],
             "type": "object"
           },
           "type": {
@@ -12360,12 +12804,17 @@
             "enum": [
               "user_invitations"
             ],
+            "example": "user_invitations",
             "type": "string",
             "x-enum-varnames": [
               "USER_INVITATIONS"
             ]
           }
         },
+        "required": [
+          "type",
+          "relationships"
+        ],
         "type": "object"
       },
       "UserInvitationDataAttributes": {
@@ -12402,7 +12851,8 @@
                 "description": "Relationship to user object.",
                 "properties": {
                   "id": {
-                    "description": "ID of the user.",
+                    "description": "A unique identifier that represents the user.",
+                    "example": "00000000-0000-0000-0000-000000000000",
                     "type": "string"
                   },
                   "type": {
@@ -12425,9 +12875,15 @@
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           }
         },
+        "required": [
+          "user"
+        ],
         "type": "object"
       },
       "UserInvitationResponse": {
@@ -12470,6 +12926,7 @@
                 "enum": [
                   "user_invitations"
                 ],
+                "example": "user_invitations",
                 "type": "string",
                 "x-enum-varnames": [
                   "USER_INVITATIONS"
@@ -12518,6 +12975,7 @@
             "enum": [
               "user_invitations"
             ],
+            "example": "user_invitations",
             "type": "string",
             "x-enum-varnames": [
               "USER_INVITATIONS"
@@ -12531,6 +12989,7 @@
         "properties": {
           "data": {
             "description": "List of user invitations.",
+            "example": [],
             "items": {
               "description": "Object to create a user invitation.",
               "properties": {
@@ -12544,7 +13003,8 @@
                           "description": "Relationship to user object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the user.",
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -12567,9 +13027,15 @@
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     }
                   },
+                  "required": [
+                    "user"
+                  ],
                   "type": "object"
                 },
                 "type": {
@@ -12578,17 +13044,25 @@
                   "enum": [
                     "user_invitations"
                   ],
+                  "example": "user_invitations",
                   "type": "string",
                   "x-enum-varnames": [
                     "USER_INVITATIONS"
                   ]
                 }
               },
+              "required": [
+                "type",
+                "relationships"
+              ],
               "type": "object"
             },
             "type": "array"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "UserInvitationsResponse": {
@@ -12633,6 +13107,7 @@
                   "enum": [
                     "user_invitations"
                   ],
+                  "example": "user_invitations",
                   "type": "string",
                   "x-enum-varnames": [
                     "USER_INVITATIONS"
@@ -12652,39 +13127,11 @@
         "enum": [
           "user_invitations"
         ],
+        "example": "user_invitations",
         "type": "string",
         "x-enum-varnames": [
           "USER_INVITATIONS"
         ]
-      },
-      "UserRelationship": {
-        "description": "A relationship reference for users.",
-        "properties": {
-          "data": {
-            "description": "The User relationship data.",
-            "properties": {
-              "id": {
-                "description": "A unique identifier that represents the user.",
-                "example": "00000000-0000-0000-0000-000000000000",
-                "type": "string"
-              },
-              "type": {
-                "default": "users",
-                "description": "Users resource type.",
-                "enum": [
-                  "users"
-                ],
-                "example": "users",
-                "type": "string",
-                "x-enum-varnames": [
-                  "USERS"
-                ]
-              }
-            },
-            "type": "object"
-          }
-        },
-        "type": "object"
       },
       "UserRelationships": {
         "description": "Relationships of the user object.",
@@ -12789,6 +13236,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -12811,6 +13259,9 @@
                         "type": "object"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_orgs": {
@@ -12818,11 +13269,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -12847,6 +13300,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "other_users": {
@@ -12854,11 +13310,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
                             "id": {
-                              "description": "ID of the user.",
+                              "description": "A unique identifier that represents the user.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -12883,6 +13341,9 @@
                         "type": "array"
                       }
                     },
+                    "required": [
+                      "data"
+                    ],
                     "type": "object"
                   },
                   "roles": {
@@ -13398,6 +13859,7 @@
                 "properties": {
                   "id": {
                     "description": "ID of the organization.",
+                    "example": "00000000-0000-0000-0000-000000000000",
                     "type": "string"
                   },
                   "type": {
@@ -13420,6 +13882,9 @@
                 "type": "object"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           },
           "other_orgs": {
@@ -13427,11 +13892,13 @@
             "properties": {
               "data": {
                 "description": "Relationships to organization objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to organization object.",
                   "properties": {
                     "id": {
                       "description": "ID of the organization.",
+                      "example": "00000000-0000-0000-0000-000000000000",
                       "type": "string"
                     },
                     "type": {
@@ -13456,6 +13923,9 @@
                 "type": "array"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           },
           "other_users": {
@@ -13463,11 +13933,13 @@
             "properties": {
               "data": {
                 "description": "Relationships to user objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to user object.",
                   "properties": {
                     "id": {
-                      "description": "ID of the user.",
+                      "description": "A unique identifier that represents the user.",
+                      "example": "00000000-0000-0000-0000-000000000000",
                       "type": "string"
                     },
                     "type": {
@@ -13492,6 +13964,9 @@
                 "type": "array"
               }
             },
+            "required": [
+              "data"
+            ],
             "type": "object"
           },
           "roles": {
@@ -13571,6 +14046,7 @@
           },
           "id": {
             "description": "ID of the user.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -13586,6 +14062,11 @@
             ]
           }
         },
+        "required": [
+          "attributes",
+          "type",
+          "id"
+        ],
         "type": "object"
       },
       "UserUpdateRequest": {
@@ -13614,6 +14095,7 @@
               },
               "id": {
                 "description": "ID of the user.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -13629,9 +14111,17 @@
                 ]
               }
             },
+            "required": [
+              "attributes",
+              "type",
+              "id"
+            ],
             "type": "object"
           }
         },
+        "required": [
+          "data"
+        ],
         "type": "object"
       },
       "UsersResponse": {
@@ -13700,6 +14190,7 @@
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -13722,6 +14213,9 @@
                           "type": "object"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     },
                     "other_orgs": {
@@ -13729,11 +14223,13 @@
                       "properties": {
                         "data": {
                           "description": "Relationships to organization objects.",
+                          "example": [],
                           "items": {
                             "description": "Relationship to organization object.",
                             "properties": {
                               "id": {
                                 "description": "ID of the organization.",
+                                "example": "00000000-0000-0000-0000-000000000000",
                                 "type": "string"
                               },
                               "type": {
@@ -13758,6 +14254,9 @@
                           "type": "array"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     },
                     "other_users": {
@@ -13765,11 +14264,13 @@
                       "properties": {
                         "data": {
                           "description": "Relationships to user objects.",
+                          "example": [],
                           "items": {
                             "description": "Relationship to user object.",
                             "properties": {
                               "id": {
-                                "description": "ID of the user.",
+                                "description": "A unique identifier that represents the user.",
+                                "example": "00000000-0000-0000-0000-000000000000",
                                 "type": "string"
                               },
                               "type": {
@@ -13794,6 +14295,9 @@
                           "type": "array"
                         }
                       },
+                      "required": [
+                        "data"
+                      ],
                       "type": "object"
                     },
                     "roles": {
@@ -14098,6 +14602,7 @@
             "type": "object"
           }
         },
+        "readOnly": true,
         "type": "object"
       },
       "UsersType": {
@@ -14945,7 +15450,7 @@
     },
     "/api/v2/logs/analytics/aggregate": {
       "post": {
-        "description": "The public API endpoint to aggregate events into buckets and compute metrics and timeseries.",
+        "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
         "operationId": "AggregateLogs",
         "requestBody": {
           "content": {
@@ -15451,8 +15956,7 @@
         "tags": [
           "Logs"
         ],
-        "x-codegen-request-body-name": "body",
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        "x-codegen-request-body-name": "body"
       }
     },
     "/api/v2/logs/config/archives": {
@@ -20375,9 +20879,13 @@
                           },
                           "name": {
                             "description": "Name of the role.",
+                            "example": "developers",
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "name"
+                        ],
                         "type": "object"
                       },
                       "relationships": {
@@ -20420,11 +20928,13 @@
                             "properties": {
                               "data": {
                                 "description": "Relationships to user objects.",
+                                "example": [],
                                 "items": {
                                   "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the user.",
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -20449,6 +20959,9 @@
                                 "type": "array"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           }
                         },
@@ -20467,9 +20980,15 @@
                         ]
                       }
                     },
+                    "required": [
+                      "attributes"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -20502,9 +21021,13 @@
                             },
                             "name": {
                               "description": "Name of the role.",
+                              "example": "developers",
                               "type": "string"
                             }
                           },
+                          "required": [
+                            "name"
+                          ],
                           "type": "object"
                         },
                         "id": {
@@ -20931,6 +21454,7 @@
                       },
                       "id": {
                         "description": "ID of the role.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -20946,9 +21470,17 @@
                         ]
                       }
                     },
+                    "required": [
+                      "attributes",
+                      "type",
+                      "id"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -21753,7 +22285,8 @@
                     "description": "Relationship to user object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the user.",
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -21776,6 +22309,9 @@
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -21851,6 +22387,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -21873,6 +22410,9 @@
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_orgs": {
@@ -21880,11 +22420,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -21909,6 +22451,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_users": {
@@ -21916,11 +22461,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the user.",
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -21945,6 +22492,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "roles": {
@@ -22249,6 +22799,7 @@
                       "type": "object"
                     }
                   },
+                  "readOnly": true,
                   "type": "object"
                 }
               }
@@ -22462,6 +23013,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -22484,6 +23036,9 @@
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_orgs": {
@@ -22491,11 +23046,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -22520,6 +23077,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_users": {
@@ -22527,11 +23087,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the user.",
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -22556,6 +23118,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "roles": {
@@ -22860,6 +23425,7 @@
                       "type": "object"
                     }
                   },
+                  "readOnly": true,
                   "type": "object"
                 }
               }
@@ -22946,7 +23512,8 @@
                     "description": "Relationship to user object.",
                     "properties": {
                       "id": {
-                        "description": "ID of the user.",
+                        "description": "A unique identifier that represents the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -22969,6 +23536,9 @@
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -23044,6 +23614,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -23066,6 +23637,9 @@
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_orgs": {
@@ -23073,11 +23647,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -23102,6 +23678,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_users": {
@@ -23109,11 +23688,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the user.",
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -23138,6 +23719,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "roles": {
@@ -23442,6 +24026,7 @@
                       "type": "object"
                     }
                   },
+                  "readOnly": true,
                   "type": "object"
                 }
               }
@@ -23780,7 +24365,7 @@
                                   "type": "array"
                                 },
                                 "metric": {
-                                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                                   "type": "string"
                                 },
                                 "name": {
@@ -24077,7 +24662,7 @@
                           "type": "array"
                         },
                         "metric": {
-                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
                         },
                         "name": {
@@ -24086,6 +24671,7 @@
                         },
                         "query": {
                           "description": "Query to run on logs.",
+                          "example": "a < 3",
                           "type": "string"
                         }
                       },
@@ -24338,7 +24924,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -24736,7 +25322,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -25009,7 +25595,7 @@
                           "type": "array"
                         },
                         "metric": {
-                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
                         },
                         "name": {
@@ -25255,7 +25841,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -25490,7 +26076,7 @@
                         "description": "Object description of a security signal.",
                         "properties": {
                           "attributes": {
-                            "description": "The JSON object containing all signal attributes and their associated values.",
+                            "description": "The object containing all signal attributes and their\nassociated values.",
                             "properties": {
                               "attributes": {
                                 "additionalProperties": {},
@@ -25732,7 +26318,7 @@
                         "description": "Object description of a security signal.",
                         "properties": {
                           "attributes": {
-                            "description": "The JSON object containing all signal attributes and their associated values.",
+                            "description": "The object containing all signal attributes and their\nassociated values.",
                             "properties": {
                               "attributes": {
                                 "additionalProperties": {},
@@ -25941,6 +26527,12 @@
                   "properties": {
                     "data": {
                       "description": "An array of services.",
+                      "example": [
+                        {
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "services"
+                        }
+                      ],
                       "items": {
                         "description": "Service data from responses.",
                         "properties": {
@@ -25976,10 +26568,10 @@
                             "description": "The service's relationships.",
                             "properties": {
                               "created_by": {
-                                "description": "A relationship reference for users.",
+                                "description": "Relationship to user.",
                                 "properties": {
                                   "data": {
-                                    "description": "The User relationship data.",
+                                    "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
                                         "description": "A unique identifier that represents the user.",
@@ -25999,16 +26591,23 @@
                                         ]
                                       }
                                     },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "last_modified_by": {
-                                "description": "A relationship reference for users.",
+                                "description": "Relationship to user.",
                                 "properties": {
                                   "data": {
-                                    "description": "The User relationship data.",
+                                    "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
                                         "description": "A unique identifier that represents the user.",
@@ -26028,9 +26627,16 @@
                                         ]
                                       }
                                     },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               }
                             },
@@ -26124,6 +26730,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -26146,6 +26753,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -26153,11 +26763,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -26182,6 +26794,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -26189,11 +26804,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -26218,6 +26835,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -26455,10 +27075,10 @@
                         "description": "The service's relationships.",
                         "properties": {
                           "created_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -26478,16 +27098,23 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           },
                           "last_modified_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -26507,9 +27134,16 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           }
                         },
@@ -26587,10 +27221,10 @@
                           "description": "The service's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -26610,16 +27244,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -26639,9 +27280,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -26733,6 +27381,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -26755,6 +27404,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -26762,11 +27414,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -26791,6 +27445,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -26798,11 +27455,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -26827,6 +27486,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -27199,10 +27861,10 @@
                           "description": "The service's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -27222,16 +27884,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -27251,9 +27920,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -27345,6 +28021,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -27367,6 +28044,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -27374,11 +28054,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -27403,6 +28085,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -27410,11 +28095,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -27439,6 +28126,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -27661,10 +28351,10 @@
                         "description": "The service's relationships.",
                         "properties": {
                           "created_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -27684,16 +28374,23 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           },
                           "last_modified_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -27713,9 +28410,16 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           }
                         },
@@ -27794,10 +28498,10 @@
                           "description": "The service's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -27817,16 +28521,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -27846,9 +28557,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -27940,6 +28658,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -27962,6 +28681,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -27969,11 +28691,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -27998,6 +28722,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -28005,11 +28732,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -28034,6 +28763,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -28261,6 +28993,15 @@
                   "properties": {
                     "data": {
                       "description": "An array of teams.",
+                      "example": [
+                        {
+                          "attributes": {
+                            "name": "team name"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "teams"
+                        }
+                      ],
                       "items": {
                         "description": "Team data from a response.",
                         "properties": {
@@ -28296,10 +29037,10 @@
                             "description": "The team's relationships.",
                             "properties": {
                               "created_by": {
-                                "description": "A relationship reference for users.",
+                                "description": "Relationship to user.",
                                 "properties": {
                                   "data": {
-                                    "description": "The User relationship data.",
+                                    "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
                                         "description": "A unique identifier that represents the user.",
@@ -28319,16 +29060,23 @@
                                         ]
                                       }
                                     },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "last_modified_by": {
-                                "description": "A relationship reference for users.",
+                                "description": "Relationship to user.",
                                 "properties": {
                                   "data": {
-                                    "description": "The User relationship data.",
+                                    "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
                                         "description": "A unique identifier that represents the user.",
@@ -28348,9 +29096,16 @@
                                         ]
                                       }
                                     },
+                                    "required": [
+                                      "id",
+                                      "type"
+                                    ],
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               }
                             },
@@ -28440,6 +29195,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -28462,6 +29218,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -28469,11 +29228,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -28498,6 +29259,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -28505,11 +29269,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -28534,6 +29300,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -28771,10 +29540,10 @@
                         "description": "The team's relationships.",
                         "properties": {
                           "created_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -28794,16 +29563,23 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           },
                           "last_modified_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -28823,9 +29599,16 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           }
                         },
@@ -28903,10 +29686,10 @@
                           "description": "The team's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -28926,16 +29709,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -28955,9 +29745,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -29045,6 +29842,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -29067,6 +29865,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -29074,11 +29875,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29103,6 +29906,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -29110,11 +29916,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29139,6 +29947,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -29511,10 +30322,10 @@
                           "description": "The team's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -29534,16 +30345,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -29563,9 +30381,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -29653,6 +30478,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -29675,6 +30501,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -29682,11 +30511,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29711,6 +30542,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -29718,11 +30552,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29747,6 +30583,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -29969,10 +30808,10 @@
                         "description": "The team's relationships.",
                         "properties": {
                           "created_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -29992,16 +30831,23 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           },
                           "last_modified_by": {
-                            "description": "A relationship reference for users.",
+                            "description": "Relationship to user.",
                             "properties": {
                               "data": {
-                                "description": "The User relationship data.",
+                                "description": "Relationship to user object.",
                                 "properties": {
                                   "id": {
                                     "description": "A unique identifier that represents the user.",
@@ -30021,9 +30867,16 @@
                                     ]
                                   }
                                 },
+                                "required": [
+                                  "id",
+                                  "type"
+                                ],
                                 "type": "object"
                               }
                             },
+                            "required": [
+                              "data"
+                            ],
                             "type": "object"
                           }
                         },
@@ -30102,10 +30955,10 @@
                           "description": "The team's relationships.",
                           "properties": {
                             "created_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -30125,16 +30978,23 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "last_modified_by": {
-                              "description": "A relationship reference for users.",
+                              "description": "Relationship to user.",
                               "properties": {
                                 "data": {
-                                  "description": "The User relationship data.",
+                                  "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
                                       "description": "A unique identifier that represents the user.",
@@ -30154,9 +31014,16 @@
                                       ]
                                     }
                                   },
+                                  "required": [
+                                    "id",
+                                    "type"
+                                  ],
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
@@ -30244,6 +31111,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -30266,6 +31134,9 @@
                                         "type": "object"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_orgs": {
@@ -30273,11 +31144,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -30302,6 +31175,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "other_users": {
@@ -30309,11 +31185,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
                                             "id": {
-                                              "description": "ID of the user.",
+                                              "description": "A unique identifier that represents the user.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -30338,6 +31216,9 @@
                                         "type": "array"
                                       }
                                     },
+                                    "required": [
+                                      "data"
+                                    ],
                                     "type": "object"
                                   },
                                   "roles": {
@@ -30528,6 +31409,7 @@
                 "properties": {
                   "data": {
                     "description": "List of user invitations.",
+                    "example": [],
                     "items": {
                       "description": "Object to create a user invitation.",
                       "properties": {
@@ -30541,7 +31423,8 @@
                                   "description": "Relationship to user object.",
                                   "properties": {
                                     "id": {
-                                      "description": "ID of the user.",
+                                      "description": "A unique identifier that represents the user.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -30564,9 +31447,15 @@
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             }
                           },
+                          "required": [
+                            "user"
+                          ],
                           "type": "object"
                         },
                         "type": {
@@ -30575,17 +31464,25 @@
                           "enum": [
                             "user_invitations"
                           ],
+                          "example": "user_invitations",
                           "type": "string",
                           "x-enum-varnames": [
                             "USER_INVITATIONS"
                           ]
                         }
                       },
+                      "required": [
+                        "type",
+                        "relationships"
+                      ],
                       "type": "object"
                     },
                     "type": "array"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -30637,6 +31534,7 @@
                             "enum": [
                               "user_invitations"
                             ],
+                            "example": "user_invitations",
                             "type": "string",
                             "x-enum-varnames": [
                               "USER_INVITATIONS"
@@ -30771,6 +31669,7 @@
                           "enum": [
                             "user_invitations"
                           ],
+                          "example": "user_invitations",
                           "type": "string",
                           "x-enum-varnames": [
                             "USER_INVITATIONS"
@@ -30846,7 +31745,7 @@
     },
     "/api/v2/users": {
       "get": {
-        "description": "Get the list of all users in the organization. This list includes all users even if they are disabled or unverified.",
+        "description": "Get the list of all users in the organization. This list includes\nall users even if they are deactivated or unverified.",
         "operationId": "ListUsers",
         "parameters": [
           {
@@ -30872,7 +31771,7 @@
             }
           },
           {
-            "description": "User attribute to order results by. Sort order is ascending by default. Sort order is descending if the field is prefixed by a negative sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.",
+            "description": "User attribute to order results by. Sort order is ascending by default.\nSort order is descending if the field\nis prefixed by a negative sign, for example `sort=-name`. Options: `name`,\n`modified_at`, `user_count`.",
             "in": "query",
             "name": "sort",
             "required": false,
@@ -30989,6 +31888,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -31011,6 +31911,9 @@
                                     "type": "object"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_orgs": {
@@ -31018,11 +31921,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -31047,6 +31952,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "other_users": {
@@ -31054,11 +31962,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
                                         "id": {
-                                          "description": "ID of the user.",
+                                          "description": "A unique identifier that represents the user.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -31083,6 +31993,9 @@
                                     "type": "array"
                                   }
                                 },
+                                "required": [
+                                  "data"
+                                ],
                                 "type": "object"
                               },
                               "roles": {
@@ -31387,6 +32300,7 @@
                       "type": "object"
                     }
                   },
+                  "readOnly": true,
                   "type": "object"
                 }
               }
@@ -31467,6 +32381,7 @@
                         "properties": {
                           "email": {
                             "description": "The email of the user.",
+                            "example": "joe.doe@example.com",
                             "type": "string"
                           },
                           "name": {
@@ -31478,6 +32393,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "email"
+                        ],
                         "type": "object"
                       },
                       "relationships": {
@@ -31532,9 +32450,16 @@
                         ]
                       }
                     },
+                    "required": [
+                      "attributes",
+                      "type"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -31608,6 +32533,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -31630,6 +32556,9 @@
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_orgs": {
@@ -31637,11 +32566,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -31666,6 +32597,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_users": {
@@ -31673,11 +32607,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the user.",
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -31702,6 +32638,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "roles": {
@@ -32048,7 +32987,7 @@
     },
     "/api/v2/users/{user_id}": {
       "delete": {
-        "description": "Disable a user. Can only be used with an application key belonging to an administrator user.",
+        "description": "Disable a user. Can only be used with an application key belonging\nto an administrator user.",
         "operationId": "DisableUser",
         "parameters": [
           {
@@ -32204,6 +33143,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -32226,6 +33166,9 @@
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_orgs": {
@@ -32233,11 +33176,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -32262,6 +33207,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_users": {
@@ -32269,11 +33217,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the user.",
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -32298,6 +33248,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "roles": {
@@ -32635,14 +33588,14 @@
             "description": "Not found"
           }
         },
-        "summary": "Get a user",
+        "summary": "Get user details",
         "tags": [
           "Users"
         ],
         "x-codegen-request-body-name": "body"
       },
       "patch": {
-        "description": "Edit a user. Can only be used with an application key belonging to an administrator user.",
+        "description": "Edit a user. Can only be used with an application key belonging\nto an administrator user.",
         "operationId": "UpdateUser",
         "parameters": [
           {
@@ -32684,6 +33637,7 @@
                       },
                       "id": {
                         "description": "ID of the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -32699,9 +33653,17 @@
                         ]
                       }
                     },
+                    "required": [
+                      "attributes",
+                      "type",
+                      "id"
+                    ],
                     "type": "object"
                   }
                 },
+                "required": [
+                  "data"
+                ],
                 "type": "object"
               }
             }
@@ -32775,6 +33737,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -32797,6 +33760,9 @@
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_orgs": {
@@ -32804,11 +33770,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -32833,6 +33801,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_users": {
@@ -32840,11 +33811,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the user.",
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -32869,6 +33842,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "roles": {
@@ -33265,7 +34241,7 @@
     },
     "/api/v2/users/{user_id}/orgs": {
       "get": {
-        "description": "Get a user organization. Returns the user information and all organizations joined by this user.",
+        "description": "Get a user organization. Returns the user information and all organizations\njoined by this user.",
         "operationId": "ListUserOrganizations",
         "parameters": [
           {
@@ -33346,6 +34322,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -33368,6 +34345,9 @@
                                   "type": "object"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_orgs": {
@@ -33375,11 +34355,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -33404,6 +34386,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "other_users": {
@@ -33411,11 +34396,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
                                       "id": {
-                                        "description": "ID of the user.",
+                                        "description": "A unique identifier that represents the user.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -33440,6 +34427,9 @@
                                   "type": "array"
                                 }
                               },
+                              "required": [
+                                "data"
+                              ],
                               "type": "object"
                             },
                             "roles": {
@@ -33786,7 +34776,7 @@
     },
     "/api/v2/users/{user_id}/permissions": {
       "get": {
-        "description": "Get a user permission set. Returns a list of the user’s permissions granted by the associated user's roles.",
+        "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
         "operationId": "ListUserPermissions",
         "parameters": [
           {
@@ -33976,7 +34966,7 @@
   ],
   "tags": [
     {
-      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization.",
+      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization. Note that you can add API v1 Dashboards to Dashboard Lists\nthat you create with API v2.",
       "name": "Dashboard Lists"
     },
     {
@@ -33996,7 +34986,7 @@
       "name": "Roles"
     },
     {
-      "description": "Detection rules for generating signals and listing of generated signals",
+      "description": "Detection rules for generating signals and listing of generated\nsignals.",
       "name": "Security Monitoring"
     },
     {

@@ -253,6 +253,11 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Operator configuration
+    url: agent/kubernetes/operator_configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_operator_configuration
+    weight: 307
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
@@ -659,8 +664,24 @@ main:
     weight: 6
   - name: Serverless Integrations
     url: serverless/serverless_integrations
+    identifier: serverless_integrations
     parent: serverless
     weight: 7
+  - name: Datadog Serverless Plugin
+    url: serverless/serverless_integrations/plugin
+    parent: serverless_integrations
+    identifier: serverless_integrations_plugin
+    weight: 701
+  - name: Datadog Serverless Macro
+    url: serverless/serverless_integrations/macro
+    parent: serverless_integrations
+    identifier: serverless_integrations_macro
+    weight: 702
+  - name: Datadog Serverless CLI
+    url: serverless/serverless_integrations/cli
+    parent: serverless_integrations
+    identifier: serverless_integrations_cli
+    weight: 703
   - name: Serverless Tagging
     url: serverless/serverless_tagging
     parent: serverless
@@ -966,10 +987,10 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Version Tracking
-    url: tracing/version_tracking/
+  - name: Deployment Tracking
+    url: tracing/deployment_tracking/
     parent: tracing
-    identifier: version_tracking
+    identifier: deployment_tracking
     weight: 4
   - name: App Analytics
     url: tracing/app_analytics/
@@ -1093,6 +1114,11 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
+  - name: Profiler Troubleshooting
+    url: tracing/profiler/profiler_troubleshooting
+    parent: profiler
+    identifier: profiler_profiler_troubleshooting
+    weight: 1103
   - name: Custom Instrumentation
     url: tracing/custom_instrumentation/
     parent: tracing
@@ -1598,6 +1624,11 @@ main:
     parent: ndm
     identifier: ndm_trouble
     weight: 404
+  - name: Guides
+    url: network_performance_monitoring/devices/guide/
+    parent: ndm
+    identifier: ndm_guide
+    weight: 405
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -2551,6 +2582,10 @@ api_v1:
     parent: Synthetics
     url: '#delete-a-global-variable'
     generated: true
+  - name: Get a global variable
+    parent: Synthetics
+    url: '#get-a-global-variable'
+    generated: true
   - name: Edit a global variable
     parent: Synthetics
     url: '#edit-a-global-variable'
@@ -2695,9 +2730,9 @@ api_v1:
     url: /api/v1/users/
     identifier: Users
     generated: true
-  - name: Get all users
+  - name: List all users
     parent: Users
-    url: '#get-all-users'
+    url: '#list-all-users'
     generated: true
   - name: Create a user
     parent: Users
@@ -3153,9 +3188,9 @@ api_v2:
     parent: Users
     url: '#disable-a-user'
     generated: true
-  - name: Get a user
+  - name: Get user details
     parent: Users
-    url: '#get-a-user'
+    url: '#get-user-details'
     generated: true
   - name: Update a user
     parent: Users

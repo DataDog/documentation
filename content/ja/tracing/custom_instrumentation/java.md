@@ -206,7 +206,7 @@ class SomeClass {
 
         // スパンの作成時にタグを設定できます
         Span span = tracer.buildSpan("<OPERATION_NAME>")
-            .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
+            .withTag(DDTags.SERVICE, "<SERVICE_NAME>")
             .start()
         try (Scope scope = tracer.activateSpan(span)) {
             // タグは作成後に設定することもできます

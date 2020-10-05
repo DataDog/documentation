@@ -2,12 +2,15 @@
 title: Instrumenting Ruby Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: 'Documentation'
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: 'Documentation'
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: 'Documentation'
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
@@ -101,6 +104,10 @@ end
 Datadog’s integration with AWS X-Ray allows you to visualize end-to-end serverless transactions, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, [choose between setting up Datadog APM or the AWS X-Ray integration][5] for your tracing needs.
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/

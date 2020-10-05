@@ -62,16 +62,14 @@ Usage example with [JSON-log-formatter][1]:
 
 ```python
 import logging
+from pythonjsonlogger import jsonlogger
 
-import json_log_formatter
+logger = logging.getLogger()
 
-formatter = json_log_formatter.JSONFormatter()
-
-json_handler = logging.FileHandler(filename='/var/log/my-log.json')
-json_handler.setFormatter(formatter)
-
-logger = logging.getLogger('my_json')
-logger.addHandler(json_handler)
+logHandler = logging.FileHandler(filename='/var/log/my-log.json')
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
 logger.setLevel(logging.INFO)
 
 logger.info('Sign up', extra={'referral_code': '52d6ce'})

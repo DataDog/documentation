@@ -38,9 +38,9 @@ Click on any view to open the views panel and see more details (resources, trace
 
 ## Setup - Facets & Measures
 
-After [being collected][3], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][4].
+After being collected, your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 
-Note: to leverage the most out from your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][5].
+Note: to leverage the most out from your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][4].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
@@ -89,6 +89,5 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 
 [1]: /real_user_monitoring/explorer/search/#search-syntax
 [2]: /dashboards/guide/custom_time_frames
-[3]: /real_user_monitoring/installation/
-[4]: /real_user_monitoring/explorer/analytics/
-[5]: /logs/processing/attributes_naming_convention/
+[3]: /real_user_monitoring/explorer/analytics/
+[4]: /logs/processing/attributes_naming_convention/

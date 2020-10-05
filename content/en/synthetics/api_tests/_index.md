@@ -39,19 +39,22 @@ Define the request you want to be executed by Datadog:
 
 1. **Choose a request type**: `HTTP`.
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
-    * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
-        * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
-        * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
-        * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-        * Authentication: HTTP basic authentication with username and password
-        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
-        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+3. Add **Advanced Options** (optional) to your test: 
+  * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
+  * Allow insecure server certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
+  * Client certificate: Authenticate through mTLS by uploading your client certificate and associated private key.
+  * Request headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+  * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+  * HTTP Basic Auth: HTTP basic authentication with username and password.
+  * Request body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
+  * Proxy URL: URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+  * Proxy Header: Headers to include in the HTTP request to the proxy.
 
-3. **Name**: The name of your API test.
-4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][2].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][4] to run a Synthetic API test on a private endpoint not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
-7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+4. **Name**: The name of your API test.
+5. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][2].
+6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][3]. You can also set up a [Private Location][4] to run a Synthetic API test on a private endpoint not accessible from the public internet.
+7. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
+8. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/identify_synthetics_bots/
 [2]: /synthetics/
@@ -65,11 +68,15 @@ Define the request you want to be executed by Datadog:
 
 1. **Choose a request type**: `SSL`.
 2. Specify the `Host` and the SSL `Port`. By default, the port is set to _443_.
-3. **Name**: The name of your SSL test.
-4. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic SSL test on a private host not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
-7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+3. Add **Advanced Options** (optional) to your test: 
+  * Accept self-signed certificates: Bypass errors related to self-signed certificate.
+  * Client certificate: Authenticate through mTLS by uploading your client certificate and associated private key.
+
+4. **Name**: The name of your SSL test.
+5. **Select your tags**: The tags attached to your SSL test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the [Synthetic Monitoring page][1].
+6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run your Synthetic SSL test on a private host not accessible from the public internet.
+7. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
+8. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics/
 [2]: /api/#get-available-locations
@@ -120,12 +127,12 @@ When running an API test, you must define at least one assertion that should be 
 
 {{% tab "HTTP Test" %}}
 
-| Type          | Operator                                                                         | Value type                 |
-|---------------|----------------------------------------------------------------------------------|----------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| response time | `is less than`                                                                   | _Integer (ms)_             |
-| status code   | `is`, `is not`                                                                   | _Integer_                  |
+| Type          | Operator                                                                                               | Value type                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1] | _String_ <br> _[Regex][2]_ <br> _String_, _[Regex][2]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][2]_                                      |
+| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 **Note**: HTTP tests can uncompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -135,7 +142,8 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `status code` _is_ "returned value"
 - `header` `content-type` _is_ "returned value"
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[1]: https://restfulapi.net/json-jsonpath/
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
@@ -143,7 +151,7 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 | Type          | Operator                                                                         | Value type                 |
 |---------------|----------------------------------------------------------------------------------|----------------------------|
 | certificate   | `expires in more than`, `expires in less than`                                   | _Integer (number of days)_ |
-| property      | `contains`, `does not contain`, `is`, <br> `is not`, `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | response time | `is less than`                                                                   | _Integer (ms)_             |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
@@ -171,8 +179,8 @@ If you click on **Test URL**, then the basic assertion is automatically filled:
 | Type                | Record type             | Operator                                           | Value type                 |
 |---------------------|-------------------------|----------------------------------------------------|----------------------------|
 | response time       |                         | `is less than`                                     | _Integer (ms)_             |
-| every record        | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
-| at least one record | of type A, of type AAAA | `is`, `contains`, `matches`, <br> `does not match` | _String_ <br> _[Regex][1]_ |
+| every record        | of type A, of type AAAA | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+| at least one record | of type A, of type AAAA | `is`, `contains`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 

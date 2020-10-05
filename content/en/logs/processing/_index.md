@@ -77,9 +77,9 @@ Datadog reserves the right to disable underperforming parsing rules, processors,
 
 JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
 
-* Trigger new [log integrations][16] based on the **source** of incoming logs.
-* Append incoming logs with all [**host** tags][22].
-* Apply reserved attribute remapper processors (namely [**date** remapper][12], [**status** remapper][15], [**service** remapper][19], [**message** remapper][20] and [**trace ID** remapper][21]) for the related JSON attributes of all incoming JSON logs.
+* Trigger new [log integrations][12] based on the **source** of incoming logs.
+* Append incoming logs with all [**host** tags][13].
+* Apply reserved attribute remapper processors (namely [**date** remapper][14], [**status** remapper][15], [**service** remapper][16], [**message** remapper][17] and [**trace ID** remapper][18]) for the related JSON attributes of all incoming JSON logs.
 
 JSON Logs pre processing comes with a default configuration that works for standard log forwarders. Edit this configuration at any time to adapt to custom or specific log forwarding approaches. To change the default values, go to the [configuration page][5] and edit `Pre processing for JSON logs`:
 
@@ -88,9 +88,9 @@ JSON Logs pre processing comes with a default configuration that works for stand
 
 ### *source* attribute
 
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][12].
 
-**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][19] to override the default source and service values.
 
 
 ### *host* attribute
@@ -115,7 +115,7 @@ By default Datadog generates a timestamp and appends it in a date attribute when
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][12].
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][14].
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
@@ -125,7 +125,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][13], where it is indexed for [full text search][14].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][20], where it is indexed for [full text search][21].
 
 ### *status* attribute
 
@@ -147,7 +147,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 ### *trace_id* attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs in the logs][18]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog tracers can automatically inject trace and span IDs in the logs][22]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -168,14 +168,14 @@ By default, [Datadog tracers can automatically inject trace and span IDs in the 
 [9]: /logs/processing/parsing/
 [10]: /logs/faq/log-parsing-best-practice/
 [11]: /logs/faq/how-to-investigate-a-log-parsing-issue/
-[12]: /logs/processing/processors/#log-date-remapper
-[13]: /logs/explorer/?tab=logstream#visualization
-[14]: /logs/explorer/search/
+[12]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[13]: /getting_started/tagging/#introduction
+[14]: /logs/processing/processors/#log-date-remapper
 [15]: /logs/processing/processors/#log-status-remapper
-[16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[17]: /agent/docker/log/#examples
-[18]: /tracing/connect_logs_and_traces/
-[19]: /logs/processing/processors/?tab=ui#service-remapper
-[20]: /logs/processing/processors/?tab=ui#log-message-remapper
-[21]: /logs/processing/processors/?tab=ui#trace-remapper
-[22]: /getting_started/tagging/#introduction
+[16]: /logs/processing/processors/?tab=ui#service-remapper
+[17]: /logs/processing/processors/?tab=ui#log-message-remapper
+[18]: /logs/processing/processors/?tab=ui#trace-remapper
+[19]: /agent/docker/log/#examples
+[20]: /logs/explorer/?tab=logstream#visualization
+[21]: /logs/explorer/search/
+[22]: /tracing/connect_logs_and_traces/

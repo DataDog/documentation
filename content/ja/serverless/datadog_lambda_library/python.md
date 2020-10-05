@@ -4,8 +4,6 @@ dependencies:
 kind: ドキュメント
 title: Datadog Lambda Library for Python
 ---
-
-
 [![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-python)](https://circleci.com/gh/DataDog/datadog-lambda-python)
 [![PyPI](https://img.shields.io/pypi/v/datadog-lambda)](https://pypi.org/project/datadog-lambda/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datadog-lambda)

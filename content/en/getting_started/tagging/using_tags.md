@@ -49,7 +49,7 @@ Use `AND`, `ORs` to look at a metric across specific tags:
 
 Use `IN`, `NOT IN` to quickly filter a metric down to specific tags:
 
-{{< img src="tagging/using_tags/dashboard_boolean_2.png" alt="Boolean Filter with IN/NOT IN"  style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Boolean Filter with IN/NOT IN"  style="width:80%;">}}
 
 To create an aggregated group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged with the key `service`, such as `service:coffee-house`, enter `service` in the **avg by** textbox to show one line for each `service` tag value. Each line represents the average metric value across all sources that share that `service` tag value.
 

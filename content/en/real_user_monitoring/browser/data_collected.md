@@ -26,10 +26,10 @@ further_reading:
 By default, all data collected is kept at full granularity for 15 days. The Datadog Real User Monitoring script sends five main types of events to Datadog:
 
 - [View][1]: Each time a user goes on a page of the setup application, a view event is created. While the user remains on that view, all data collected is attached to that view with the `view.id` attribute.
-- [Resource][6]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
-- [Long task][7]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
-- [Error][8]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
-- [User Action][9]: A User Action event is a custom event that can be generated for a given user action.
+- [Resource][2]: A resource event can be generated for images, XHR/Fetch, CSS, or JS libraries. It contains information about the resource, like its name and its associated loading duration.
+- [Long task][3]: Any task in a browser that blocks the main thread for more than 50ms is considered a long task and gets a specific event generation.
+- [Error][4]: Every time a frontend error is emitted by the browser, RUM catches it and sends it as an Error Event to Datadog.
+- [User Action][5]: A User Action event is a custom event that can be generated for a given user action.
 
 {{< tabs >}}
 {{% tab "View" %}}
@@ -187,23 +187,23 @@ Source errors include code-level information about the error. More information a
 {{% tab "User Action" %}}
 
 ## Automatic Collection of User Actions
-Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][5] to `true` to enable this feature.
+Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
 **Note**:  The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
-Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered finished. The user action also benefits from its parent view attributes such as browser information, geolocation data, [global context][1].
+Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered finished. The user action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
 
 ### How is the User Action duration calculated?
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Custom User Actions
-Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][2]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
+Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
 ## Measures Collected
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `duration` | number (ns) | The length of the user action. See how it is calculated in the [User Action documentation][3]. |
+| `duration` | number (ns) | The length of the user action. See how it is calculated in the [User Action documentation][4]. |
 | `user_action.measures.long_task_count`        | number      | Count of all long tasks collected for this user action. |
 | `user_action.measures.resource_count`         | number      | Count of all resources collected for this user action. |
 | `user_action.measures.user_action_count`      | number      | Count of all user actions collected for this user action.|
@@ -213,14 +213,15 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `user_action.id` | string | UUID of the user action. |
-| `user_action.type` | string | Type of the user action. For [Custom User Actions][4], it is set to `custom`. |
+| `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
 | `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
 
-[1]: /real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[2]: /real_user_monitoring/installation/advanced_configuration/?tab=npm#custom-user-actions
-[3]: /real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
-[4]: /real_user_monitoring/data_collected/user_action#custom-user-actions
-[5]: /real_user_monitoring/installation/?tab=us#initialization-parameters
+
+[1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#custom-user-actions
+[4]: /real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
+[5]: /real_user_monitoring/data_collected/user_action#custom-user-actions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -241,7 +242,7 @@ These five event categories have attributes attached by default:
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
 | `view.url`                     | string | The view URL.                                                                                                  |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][2].|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][6].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url_details.host`        | string | The HTTP host part of the URL.                                                                                 |
 | `view.url_details.path`        | string | The HTTP path part of the URL.                                                                                 |
@@ -250,7 +251,7 @@ These five event categories have attributes attached by default:
 
 ### User Agent
 
-The following contexts—following the [Datadog Standard Attributes][3] logic—are attached automatically to all events sent to Datadog:
+The following contexts—following the [Datadog Standard Attributes][7] logic—are attached automatically to all events sent to Datadog:
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
@@ -266,11 +267,11 @@ The following attributes are related to the geolocation of IP addresses used in 
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `network.client.geoip.country.name`         | string | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | string | [ISO Code][4] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.country.iso_code`     | string | [ISO Code][8] of the country (example: `US` for the United States, `FR` for France)                                                  |
 | `network.client.geoip.continent.code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][4] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][8] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ## Extra Attribute
@@ -282,12 +283,11 @@ In addition to default attributes, add [specific global context][1] to all event
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/installation/advanced_configuration/
-[2]: /real_user_monitoring/data_collected/view#single-page-applications
-[3]: /logs/processing/attributes_naming_convention/
-[4]: /logs/processing/attributes_naming_convention/#user-agent-attributes
-[5]: /real_user_monitoring/browser/data_collected/?tab=view
-[6]: /real_user_monitoring/browser/data_collected/?tab=resource
-[7]: /real_user_monitoring/browser/data_collected/?tab=longtask
-[8]: /real_user_monitoring/browser/data_collected/?tab=error
-[9]: /real_user_monitoring/browser/data_collected/?tab=useraction
+[1]: /real_user_monitoring/browser/advanced_configuration/
+[2]: /real_user_monitoring/browser/data_collected/?tab=resource
+[3]: /real_user_monitoring/browser/data_collected/?tab=longtask
+[4]: /real_user_monitoring/browser/data_collected/?tab=error
+[5]: /real_user_monitoring/browser/data_collected/?tab=useraction
+[6]: /real_user_monitoring/data_collected/view#single-page-applications
+[7]: /logs/processing/attributes_naming_convention/
+[8]: /logs/processing/attributes_naming_convention/#user-agent-attributes

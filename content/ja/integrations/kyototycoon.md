@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +43,7 @@ Agent の KyotoTycoon チェックは、取得/設定/削除の操作を追跡�
 
 KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれています。KyotoTycoon サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `kyototycoon.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kyototycoon.d/conf.yaml][3] を参照してください。
 

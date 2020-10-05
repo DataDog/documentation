@@ -17,11 +17,13 @@ image_map:
     append: false
   - source:
       - cloudtrail
+      - cloudfront
       - ec2
       - ecs
       - elasticache
       - elb
       - iam
+      - kms
       - rds
       - redshift
       - s3

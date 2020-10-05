@@ -4,14 +4,12 @@ dependencies:
 kind: documentation
 title: Bibliothèque Lambda Datadog pour Ruby
 ---
-
-
 [![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-rb)](https://circleci.com/gh/DataDog/workflows/datadog-lambda-rb)
 [![RubyGem](https://img.shields.io/gem/v/datadog-lambda)](https://rubygems.org/gems/datadog-lambda)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-lambda-rb/blob/master/LICENSE)
 
-La bibliothèque Lambda Datadog pour Ruby (2.5 et 2.7) permet de recueillir des métriques Lambda optimisées, d'activer le tracing distribué et d'envoyer des métriques custom à partir de fonctions Lambda AWS.
+La bibliothèque Lambda Datadog pour Ruby (2.5 et 2.7) permet de recueillir des métriques Lambda optimisées, d'activer le tracing distribué et d'envoyer des métriques custom à partir de fonctions AWS Lambda.
 
 ## Installation
 
@@ -21,7 +19,7 @@ Suivez les [instructions d'installation](https://docs.datadoghq.com/serverless/i
 
 Une fois la bibliothèque [installée](#installation), vous devriez pouvoir envoyer des métriques custom à partir de votre fonction Lambda.
 
-Consultez les instructions relatives à l'[envoi de métriques custom à partir de fonctions Lambda AWS](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=ruby#metriques-custom).
+Consultez les instructions relatives à l'[envoi de métriques custom à partir de fonctions AWS Lambda](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=ruby#metriques-custom).
 
 ## Tracing
 

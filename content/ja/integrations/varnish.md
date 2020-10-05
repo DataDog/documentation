@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: varnish
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json

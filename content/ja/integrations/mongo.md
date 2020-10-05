@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: mongodb
+  metrics_metadata: metadata.csv
   monitors:
     '[MongoDB] High incoming connections': assets/monitors/high_connections.json
   saved_views:
@@ -64,7 +65,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 

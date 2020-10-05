@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: gunicorn
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -68,7 +69,11 @@ Gunicorn の[メトリクス](#metric-collection)と[ログ](#log-collection)の
 
 #### メトリクスの収集
 
-1. [Gunicorn のメトリクス](#metrics)の収集を開始するには、`gunicorn.d/conf.yaml` ファイルに次の構成ブロックを追加します。
+##### Gunicorn の DogStatsD への接続
+
+1. バージョン 19.1 以降の Gunicorn では、[DogStatsD][7] のような StatsD プロトコルを実装するデーモンにメトリクスを送信する[オプションが提供][6]されるようになりました。Gunicorn の多くのオプションと同様に、このオプションは CLI (`--statsd-host`) で `gunicorn` に渡すか、アプリの構成ファイル (`statsd_host`) で設定できます。**すべての Gunicorn メトリクス**を収集するには、`"localhost:8125"` で [DogStatsD][7] へメトリクスを送信するようにアプリを構成し、アプリを再起動します。
+
+2. [Gunicorn のメトリクス](#メトリクス)の収集を開始するには、`gunicorn.d/conf.yaml` ファイルに次の構成ブロックを追加します。
 
 ```yaml
 init_config:
@@ -81,10 +86,6 @@ instances:
 ```
 
 2. [Agent を再起動][2]すると、Datadog への Gunicorn メトリクスの送信が開始されます。
-
-#### Gunicorn の DogStatsD への接続
-
-バージョン 19.1 以降の Gunicorn では、[DogStatsD][7] のような StatsD プロトコルを実装するデーモンにメトリクスを送信する[オプションが提供][6]されるようになりました。Gunicorn の多くのオプションと同様に、このオプションは CLI (`--statsd-host`) で `gunicorn` に渡すか、アプリの構成ファイル (`statsd_host`) で設定できます。`"localhost:8125"` で DogStatsD へメトリクスを送信するようにアプリを構成し、アプリを再起動します。
 
 #### ログの収集
 

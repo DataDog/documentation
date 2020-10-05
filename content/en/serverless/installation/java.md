@@ -2,21 +2,15 @@
 title: Instrumenting Java Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
-    - link: 'serverless/installation/python'
-      tag: 'Documentation'
-      text: 'Installing Python Serverless Monitoring'
-    - link: 'serverless/installation/dotnet'
-      tag: 'Documentation'
-      text: 'Installing .NET Serverless Monitoring'
-    - link: 'serverless/installation/go'
-      tag: 'Documentation'
-      text: 'Installing Go Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: "Documentation"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Documentation"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Documentation"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
 After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
@@ -25,7 +19,7 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 ### Install the Datadog Lambda Library
 
-You can install the Datadog Lambda Library locally by running one of the following commands based on your project’s configuration. For latest version, see the [latest release][3].
+You can install the Datadog Lambda Library locally by adding one of the following blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `n.n.n` below with the latest release (omitting the preceeding `v`): ![Bintray][3]
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -42,7 +36,7 @@ Include the following dependency in your `pom.xml`:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
-  <version>0.0.5</version>
+  <version>n.n.n</version>
   <type>pom</type>
 </dependency>
 ```
@@ -57,7 +51,7 @@ repositories {
   maven { url "https://dl.bintray.com/datadog/datadog-maven" }
 }
 dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:0.0.5'
+  implementation 'com.datadoghq:datadog-lambda-java:n.n.n'
 }
 ```
 {{% /tab %}}
@@ -108,9 +102,13 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /serverless/#1-install-the-cloud-integration
 [2]: https://docs.datadoghq.com/serverless/forwarder/
-[3]: https://github.com/DataDog/datadog-lambda-java/releases
+[3]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
 [6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group

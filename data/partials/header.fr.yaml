@@ -24,9 +24,9 @@ left:
         title: APM
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
       - name: product_profiler
-        link: "https://www.datadoghq.com/product/code-profiling/"
-        title: "Continuous Profiler"
-        pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg' alt='profiler icon'>"
+        link: 'https://www.datadoghq.com/product/code-profiling/'
+        title: Profiler en continu
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: Security Monitoring
@@ -36,7 +36,7 @@ left:
         title: Surveillance réseau
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
       - name: product_synthetics
-        link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
+        link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
         title: Surveillance Synthetics
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
       - name: product_rum
@@ -45,8 +45,8 @@ left:
         pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
       - name: product_serverless
         link: 'https://www.datadoghq.com/product/serverless-monitoring/'
-        title: Environnement sans serveur
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône informatique sans serveur''>'
+        title: Informatique sans serveur
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
       - name: product_alerts
         link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: Alertes
@@ -66,67 +66,83 @@ left:
     title: Solutions
     children:
       - name: solutions_financial
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/financial-services/'
         title: Services financiers
       - name: solutions_manufacturing
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
         title: Production et logistique
       - name: solutions_healthcare
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/healthcare/'
         title: Santé et sciences de la vie
       - name: solutions_retail
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
         title: Commerce de détail et électronique
       - name: solutions_publicsector
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/public-sector'
         title: Secteur public
       - name: solutions_media
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/media-entertainment/'
         title: Médias et divertissement
       - name: solutions_technology
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/technology/'
         title: Technologies
+      - name: "Amazon\_Web\_Services"
+        category: technology
+        link: 'https://www.datadoghq.com/solutions/aws/'
+        title: "Amazon\_Web\_Services"
+      - name: Azure
+        category: technology
+        link: 'https://www.datadoghq.com/solutions/azure/'
+        title: Azure
+      - name: "Google\_Cloud\_Platform"
+        category: technology
+        link: 'https://www.datadoghq.com/solutions/gcp/'
+        title: "Google\_Cloud\_Platform"
+      - name: Kubernetes
+        category: technology
+        link: 'https://www.datadoghq.com/solutions/kubernetes/'
+        title: Kubernetes
       - name: solutions_gaming
-        category: secteur
+        category: industry
         link: 'https://www.datadoghq.com/solutions/gaming/'
         title: Jeux vidéo
       - name: solutions_cloudmigration
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/cloud-migration/'
         title: Migration vers le cloud
       - name: solutions_monitoringconsolidation
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
         title: Unification de la surveillance
       - name: solutions_devops
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/devops/'
         title: DevOps
       - name: solutions_securityanalytics
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/security-analytics/'
         title: Analyse de la sécurité
       - name: solutions_hybridcloudmonitoring
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
         title: Surveillance Cloud hybride
       - name: solutions_iotmonitoring
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
         title: Surveillance IoT
       - name: solutions_machinelearning
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/machine-learning/'
         title: Apprentissage automatique
       - name: solutions_businessanalytics
-        category: cas d'utilisation
+        category: usecase
         link: 'https://www.datadoghq.com/solutions/business-analytics/'
         title: BI en temps réel
 right:

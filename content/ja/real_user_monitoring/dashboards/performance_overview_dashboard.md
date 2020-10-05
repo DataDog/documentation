@@ -2,14 +2,11 @@
 title: RUM パフォーマンス概要ダッシュボード
 kind: documentation
 further_reading:
-  - link: /real_user_monitoring/installation/advanced_configuration
-    tag: ドキュメント
-    text: RUM データ収集の高度なコンフィギュレーション
   - link: /real_user_monitoring/explorer
     tag: ドキュメント
     text: Datadog でビューを検索する
 ---
-パフォーマンス概要ダッシュボードで、RUM applicアプリケーションの全体像を把握できます。ダッシュボードは3つのセクションに分かれています。
+パフォーマンスの概要ダッシュボードで、RUM アプリケーションの全体像を把握できます。ダッシュボードは 3 つのセクションに分かれています。
 
 - **パフォーマンスメトリクス**:
     すべてのビューで、Loading Time、First Contentful Paint、DOM Content Loaded、Load Event の 4 つのブラウザメトリクスが強調表示されます。これらのメトリクスのそれぞれについて、中央値、75 パーセンタイル、90 パーセンタイルがウィジェットで表示されます。
