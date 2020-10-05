@@ -368,6 +368,7 @@ class MyClass {
 
 [8]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
 [9]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
+
 {{% /tab %}}
 {{% tab "Python" %}}
 
