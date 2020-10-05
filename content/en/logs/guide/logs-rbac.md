@@ -97,46 +97,44 @@ You're all set!
 
 **Application and API Keys**
 
-Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2]. More details available in the [API and APP Keys][87] section of our documentation.
-
+Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][1]. More details available in the [API and APP Keys][2] section of our documentation.
 
 {{< img src="logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 
-
 Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`. 
 
-**Permissions ID**
+**Permission IDs**
 
-Get the [list of all existing permissions][5]:
+Use the [Permissions API][3] to get the list of all existing permissions, which will be further required to assign the permissions to roles.
 
 ```
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
-The answer is an array of permissions with each item of the array shown below:
+For such calls, the answer is an array of permissions such as the one below (the `logs_read_data` permission has the id `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` which is all you need to know about that permission).
 
 ```
 {
-  "data": [
-    {
-      "attributes": {
-        "created": "2019-09-19T10:00:00.000Z",
-        "description": "string",
-        "display_name": "string",
-        "display_type": "string",
-        "group_name": "string",
-        "name": "string",
+    "type": "permissions",
+    "id": "1af86ce4-7823-11ea-93dc-d7cad1b1c6cb",
+    "attributes": {
+        "name": "logs_read_data",
+        "display_name": "Logs Read Data",
+        "description": "The ability to read log data. Can be restricted with restriction queries.",
+        "created": "2020-04-06T16:24:35.989108+00:00",
+        "group_name": "Logs",
+        "display_type": "read",
         "restricted": false
-      },
-      "id": "string",
-      "type": "string"
     }
-  ]
 }
 ```
 
-**Note**: The permission IDs change depending on whether you are using the Datadog US or EU site. Make sure to recover the IDs through the API call in the first section.
+**Note**: The permission IDs change depending on the Datadog site (Datadog US, Datadog EU...) you are using.
 
+
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: /account_management/api-app-keys/
+[3]: /api/v2/roles/#list-permissions
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -467,10 +465,10 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[2]: https://app.datadoghq.com/account/settings#api
+
 [3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [4]: /api/v2/roles/#create-role
-[5]: /api/v2/roles/#list-permissions
+
 [6]: /account_management/rbac/permissions?tab=datadogapplication#general-permissions
 [7]: /account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
 [8]: /api/v2/roles/#grant-permission-to-a-role
@@ -484,7 +482,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [86]: https://app.datadoghq.com/access/users
-[87]: /account_management/api-app-keys/
+
 
 
 [90]: /account_management/rbac/permissions?tab=ui#logs-write-pipelines
