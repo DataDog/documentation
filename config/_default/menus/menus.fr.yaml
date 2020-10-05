@@ -83,7 +83,7 @@ main_left:
       parent: 'product'
     - identifier: 'customers'
       name: 'Clients'
-      url: 'https://www.datadoghq.com/https://www.datadoghq.com/customers/'
+      url: 'https://www.datadoghq.com/customers/'
       weight: -480
     - identifier: 'pricing'
       name: 'Pricing'
