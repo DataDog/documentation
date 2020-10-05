@@ -291,5 +291,11 @@
   },
   "field": {
     "other": "Field"
+  },
+  "footer_blurb_heading": {
+    "other": "Besoin d'aide?"
+  },
+  "footer_blurb_desc": {
+    "other": "Nos ingénieurs sont là pour vous aider!"
   }
 }

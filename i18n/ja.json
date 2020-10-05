@@ -295,5 +295,11 @@
   },
   "field": {
     "other": "フィールド"
+  },
+  "footer_blurb_heading": {
+    "other": "お困りですか？"
+  },
+  "footer_blurb_desc": {
+    "other": "知識豊富なエンジニアがサポートします。"
   }
 }
