@@ -12,101 +12,9 @@ html {
 $footer-font-color: rgba(255, 255, 255, 0.5);
 $footer-font-color-hover: rgba(255, 255, 255, 1);
 
-body {
-    // footer {
-    //     position: absolute;
-    //     z-index: 3;
-    //     width: 100%;
-    //     /* Set the fixed height of the footer here */
-    //     background-color: $footer_bg_color;
-    //     color: $footer-font-color;
-    //     p {
-    //         border-bottom: 1px solid $footer-font-color;
-    //         margin-bottom: 10px;
-    //         font-weight: 600;
-    //         color: $footer-font-color;
-    //         font-size: 16px;
-    //         padding-bottom: 6px;
-
-    //         &:lang(ja) {
-    //             font-size: 14px;
-    //         }
-    //     }
-    //     a {
-    //         font-size: 16px;
-    //         color: $footer-font-color;
-    //         &:lang(ja) {
-    //             font-size: 14px;
-    //         }
-    //         &:hover {
-    //             color: $footer-font-color-hover;
-    //         }
-    //     }
-    //     ul {
-    //         margin: 0;
-    //         li {
-    //             padding: 0;
-    //             margin: 0;
-    //             line-height: 24px;
-    //             font-size: 16px;
-
-    //             &:lang(ja) {
-    //                 font-size: 14px;
-    //             }
-    //         }
-    //     }
-    //     .contact-btn-container {
-    //         .btn {
-    //             width: 100%;
-    //             max-width: auto;
-    //             @media (min-width: 992px) {
-    //                 max-width: 170px;
-    //             }
-    //         }
-    //     }
-    //     .dd-logo {
-    //         max-width: 155px;
-    //     }
-    //     .footer-legal {
-    //         font-weight: 600;
-    //         text-align: center;
-    //         font-size: 16px;
-
-    //         &:lang(ja) {
-    //             font-size: 14px;
-    //         }
-    //         a {
-    //             display: inline-block;
-    //             color: #fff;
-    //             padding: 0 5px;
-    //         }
-    //     }
-    //     .footer-side {
-    //         .btn {
-    //             text-transform: uppercase;
-    //             cursor: pointer;
-    //             font-size: 18px;
-    //             color: #fff;
-    //             &:hover {
-    //                 color: $ddpurple;
-    //             }
-    //         }
-    //         .copyright {
-    //             display: block;
-    //             font-size: 16px;
-                
-    //             &:lang(ja) {
-    //                 font-size: 14px;
-    //             }
-    //         }
-    //     }
-    // }
-}
-
 footer {
   display: block;
   width: 100%;
-  // height: 400px;
   color: rgba(255, 255, 255, 0.5);
   background: #110617;
 
@@ -119,6 +27,16 @@ footer {
   .list-inline {
     margin: 0;
     padding: 0;
+  }
+
+  .contact-btn-container {
+    .btn {
+        width: 100%;
+        max-width: auto;
+        @media (min-width: 992px) {
+            max-width: 170px;
+        }
+    }
   }
 
   .copyright {
@@ -179,7 +97,6 @@ footer {
 
   .footer-side {
     .btn {
-      padding: 11px 20px 12px;
       text-transform: uppercase;
       width: 170px;
       cursor: pointer;
