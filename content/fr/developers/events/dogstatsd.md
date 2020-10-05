@@ -43,6 +43,7 @@ Visualisez les erreurs et les exceptions dans Datadog avec un événement DogSta
 {{% tab "Python" %}}
 
 {{< code-block lang="python" filename="event.py" >}}
+```python
 from datadog import initialize, statsd
 
 options = {
@@ -53,23 +54,26 @@ options = {
 initialize(**options)
 
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 {{< code-block lang="ruby" filename="event.rb" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
-
 {{< code-block lang="go" filename="event.go" >}}
+```go
 package main
 
 import (
@@ -91,12 +95,14 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 {{< code-block lang="java" filename="event.java" >}}
+```java
 import com.timgroup.statsd.Event;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -120,12 +126,14 @@ public class DogStatsdClient {
         Statsd.recordEvent(event);
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 {{< code-block lang="csharp" filename="event.cs" >}}
+```csharp
 using StatsdClient;
 
 public class DogStatsdClient
@@ -145,12 +153,14 @@ public class DogStatsdClient
         }
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 {{< code-block lang="php" filename="event.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -168,12 +178,14 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
+```
 {{< /code-block >}}
 
 La bibliothèque DogStatsD-PHP vous permet d'envoyer des événements à l'API Datadog directement via TCP. Cette méthode est plus lente mais aussi plus fiable que lorsque vous faites appel à l'instance DogStatsD de l'Agent, les événements étant transmis de votre application à l'Agent via UDP.
 Pour l'utiliser, vous devez configurer la bibliothèque avec vos [clés d'API et d'application Datadog][1] au lieu de l'instance DogStatsD locale :
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -191,6 +203,7 @@ $statsd->event('An error occurred.',
            'alert_type' => 'error'
     )
   );
+```
 {{< /code-block >}}
 
 **Remarques** :

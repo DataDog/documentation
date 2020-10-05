@@ -41,6 +41,7 @@ Choisissez votre langage pour obtenir un exemple de code de check de service :
 {{% tab "Python" %}}
 
 {{< code-block lang="python" filename="service_check.py" >}}
+```python
 from datadog import initialize, statsd
 
 options = {"statsd_host": "127.0.0.1", "statsd_port": 8125}
@@ -52,23 +53,27 @@ statsd.service_check(
     status="O",
     message="Application is OK",
 )
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 {{< code-block lang="ruby" filename="service_check.rb" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 {{< code-block lang="go" filename="service_check.go" >}}
+```go
 package main
 
 import (
@@ -91,12 +96,14 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 {{< code-block lang="java" filename="service_check.java" >}}
+```java
 import com.timgroup.statsd.ServiceCheck;
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
@@ -119,12 +126,14 @@ public class DogStatsdClient {
         Statsd.serviceCheck(sc);
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 {{< code-block lang="csharp" filename="service_check.cs" >}}
+```csharp
 using StatsdClient;
 
 public class DogStatsdClient
@@ -144,12 +153,14 @@ public class DogStatsdClient
         }
     }
 }
+```
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
 {{< code-block lang="php" filename="service_check.php" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -163,6 +174,7 @@ $statsd = new DogStatsd(
   );
 
 $statsd->service_check('Service.check.name', 0);
+```
 {{< /code-block >}}
 
 {{% /tab %}}

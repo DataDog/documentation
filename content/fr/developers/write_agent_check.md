@@ -42,6 +42,7 @@ instances: [{}]
 Le check hérite des valeurs de `AgentCheck` et envoie un gauge de valeur `1` pour `hello.world` sur chaque appel. Voici ce qui est indiqué dans le fichier `checks.d/hello.py` :
 
 {{< code-block lang="python" filename="hello.py" >}}
+```python
 # le bloc try/except suivant rend le check custom compatible avec toutes les versions de l'Agent
 try:
     # essayer d'abord d'importer la classe de base à partir des nouvelles versions de l'Agent…
@@ -56,6 +57,7 @@ __version__ = "1.0.0"
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1, tags=['TAG_KEY:TAG_VALUE'])
+```
 {{< /code-block >}}
 
 Pour en savoir plus sur l'interface fournie par la classe de base, consultez la [documentation relative à l'API][5].

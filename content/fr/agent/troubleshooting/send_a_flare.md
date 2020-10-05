@@ -53,25 +53,33 @@ Pour obtenir un flare de chaque container, exécutez les commandes suivantes :
 ### Agent
 
 {{< code-block lang="bash" filename="agent.sh" >}}
+```bash
 kubectl exec -it <nom-pod-agent> -c agent -- agent flare <id-ticket>
+```
 {{< /code-block >}}
 
 ### process-agent
 
 {{< code-block lang="bash" filename="process-agent.sh" >}}
+```bash
 kubectl exec -it <NOM_POD_AGENT> -c process-agent -- agent flare <ID_TICKET> --local
+```
 {{< /code-block >}}
 
 ### trace-agent
 
 {{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <NOM_POD_AGENT> -c trace-agent -- agent flare <ID_TICKET> --local
+```
 {{< /code-block >}}
 
 ### system-probe
 
 {{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <NOM_POD_AGENT> -c system-probe -- agent flare <ID_TICKET> --local
+```
 {{< /code-block >}}
 
 [1]: /fr/agent/basic_agent_usage/#gui

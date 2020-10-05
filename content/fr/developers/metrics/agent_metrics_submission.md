@@ -143,57 +143,59 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
 3. À un niveau supérieur du dossier `conf.d/`, accédez au dossier `checks.d/`. Créez un fichier de check custom `metrics_example.py` avec le contenu ci-dessous :
 
     {{< code-block lang="python" filename="metrics_example.py" >}}
-    import random
+```python
+import random
 
-    from datadog_checks.base import AgentCheck
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-        def check(self, instance):
-            self.count(
-                "example_metric.count",
-                2,
-                tags=["env:dev","metric_submission_type:count"],
-            )
-            self.count(
-                "example_metric.decrement",
-                -1,
-                tags=["env:dev","metric_submission_type:count"],
-            )
-            self.count(
-                "example_metric.increment",
-                1,
-                tags=["env:dev","metric_submission_type:count"],
-            )
-            self.rate(
-                "example_metric.rate",
-                1,
-                tags=["env:dev","metric_submission_type:rate"],
-            )
-            self.gauge(
-                "example_metric.gauge",
-                random.randint(0, 10),
-                tags=["env:dev","metric_submission_type:gauge"],
-            )
-            self.monotonic_count(
-                "example_metric.monotonic_count",
-                2,
-                tags=["env:dev","metric_submission_type:monotonic_count"],
-            )
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.count(
+            "example_metric.count",
+            2,
+            tags=["env:dev","metric_submission_type:count"],
+        )
+        self.count(
+            "example_metric.decrement",
+            -1,
+            tags=["env:dev","metric_submission_type:count"],
+        )
+        self.count(
+            "example_metric.increment",
+            1,
+            tags=["env:dev","metric_submission_type:count"],
+        )
+        self.rate(
+            "example_metric.rate",
+            1,
+            tags=["env:dev","metric_submission_type:rate"],
+        )
+        self.gauge(
+            "example_metric.gauge",
+            random.randint(0, 10),
+            tags=["env:dev","metric_submission_type:gauge"],
+        )
+        self.monotonic_count(
+            "example_metric.monotonic_count",
+            2,
+            tags=["env:dev","metric_submission_type:monotonic_count"],
+        )
 
-            # Calling the functions below twice simulates
-            # several metrics submissions during one Agent run.
-            self.histogram(
-                "example_metric.histogram",
-                random.randint(0, 10),
-                tags=["env:dev","metric_submission_type:histogram"],
-            )
-            self.histogram(
-                "example_metric.histogram",
-                random.randint(0, 10),
-                tags=["env:dev","metric_submission_type:histogram"],
-            )
+        # Calling the functions below twice simulates
+        # several metrics submissions during one Agent run.
+        self.histogram(
+            "example_metric.histogram",
+            random.randint(0, 10),
+            tags=["env:dev","metric_submission_type:histogram"],
+        )
+        self.histogram(
+            "example_metric.histogram",
+            random.randint(0, 10),
+            tags=["env:dev","metric_submission_type:histogram"],
+        )
+```
     {{< /code-block >}}
 
 4. [Redémarrez l'Agent][4].

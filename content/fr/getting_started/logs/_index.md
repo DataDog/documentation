@@ -38,9 +38,11 @@ Les logs peuvent prendre la forme d'un message en texte intégral :
 L'endpoint TCP sécurisé est {{< region-param key="tcp_endpoint" code="true" >}} (ou le port {{< region-param key="tcp_endpoint_port" code="true" >}} pour les connexions non sécurisées).
 
 {{< code-block lang="text" >}}
+```text
 telnet intake.logs.datadoghq.com 10514
 
 <CLÉ_API_DATADOG> Log en texte brut envoyé via TCP
+```
 {{< /code-block >}}
 
 {{< /site-region >}}
@@ -50,9 +52,11 @@ telnet intake.logs.datadoghq.com 10514
 L'endpoint TCP sécurisé est {{< region-param key="tcp_endpoint" code="true" >}} (ou le port {{< region-param key="tcp_endpoint_port" code="true" >}} pour les connexions non sécurisées).
 
 {{< code-block lang="text" >}}
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <CLÉ_API_DATADOG> Log en texte brut envoyé via TCP
+```
 {{< /code-block >}}
 
 {{< /site-region >}}

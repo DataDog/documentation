@@ -58,21 +58,23 @@ Voici un exemple d'utilisation d'un check custom d'Agent permettant d'envoyer r�
 4. Dans ce dossier, créez un fichier de check custom `event_example.py` avec le contenu suivant :
 
     {{< code-block lang="python" filename="event_example.py" >}}
-    from datadog_checks.base import AgentCheck
+```python
+from datadog_checks.base import AgentCheck
 
-    __version__ = "1.0.0"
+__version__ = "1.0.0"
 
-    class MyClass(AgentCheck):
-        def check(self, instance):
-            self.event(
-                {
-                    "timestamp": time.time(),
-                    "event_type": "Error",
-                    "msg_title": "Exemple d'événement",
-                    "msg_text": "Voici un exemple d'événement provenant de Datadog.",
-                    "alert_type": "error",
-                }
-            )
+class MyClass(AgentCheck):
+    def check(self, instance):
+        self.event(
+            {
+                "timestamp": time.time(),
+                "event_type": "Error",
+                "msg_title": "Exemple d'événement",
+                "msg_text": "Voici un exemple d'événement provenant de Datadog.",
+                "alert_type": "error",
+            }
+        )
+```
     {{< /code-block >}}
 
 5. [Redémarrez l'Agent][3].

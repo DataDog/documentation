@@ -28,6 +28,7 @@ Le contrôleur d'admission de Datadog est de type `MutatingAdmissionWebhook`. Po
 Pour utiliser le contrôleur d'admission avec le chart Helm, définissez le paramètre `clusterAgent.admissionController.enabled` sur `true` :
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="true" >}}
+```yaml
 [...]
  clusterAgent:
 [...]
@@ -45,6 +46,7 @@ Pour utiliser le contrôleur d'admission avec le chart Helm, définissez le para
     #
     mutateUnlabelled: false
 [...]
+```
 {{< /code-block >}}
 
 ### Operator Datadog
