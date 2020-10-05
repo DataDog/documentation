@@ -1,5 +1,8 @@
 ---
 title: Restrict access to log events with restriction queries
+aliases:
+  - /logs/guide/restrict-access-to-log-events-with-restriction-queries
+  
 kind: guide
 further_reading:
 - link: "/logs/explorer/"
