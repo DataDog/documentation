@@ -56,14 +56,6 @@ More concretely, we'll explore in this guide how, as a Datadog Admin, you can ap
 
 ## Prerequisites
 
-{{< tabs >}}
-{{% tab "UI" %}}
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Tags on incoming logs
 
@@ -266,7 +258,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0
 [...]
 ```
 
-**Attach User to Role**
+**Attach Users to ACME Role**
 
 For each user, user the [Assign Role API][2] to add this user to this Role.
 
@@ -274,96 +266,18 @@ For each user, user the [Assign Role API][2] to add this user to this Role.
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
-**Unassign Defaut Roles from the User**
+**Remove Users from Defaut Roles**
 
 Also, check if they already have roles and their IDs. You might want to remove Default Datadog Roles from these users, as they would grant additional permissions to user you don't want to grant.
 
-
 ```
-curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
+curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
-
 
 [1]: /api/v2/users/#list-all-users
 [2]: /api/v2/roles/#add-a-user-to-a-role
 [3]: /api/v2/roles/#remove-a-user-from-a-role
 
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-
-### Grant permissions to the role
-
-Permissions are added one by one through the [Roles API][8]). 
-
-For each permission ID obtained by listing all available permissions, grant them to each role as shown below:
-
-{{< tabs >}}
-{{% tab "Backend" %}}
-
-API call (replace the role ID by yours and fill the permission ID):
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles/dcf7c550-99cb-11ea-93e6-376cebac897c/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
-```
-
-{{% /tab %}}
-{{% tab "Frontend" %}}
-
-API call (replace the role ID by yours and fill the permission ID):
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles/63b970ea-99ca-11ea-93e6-e32eb84de6d6/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
-```
-{{% /tab %}}
-{{% tab "Generic API" %}}
-
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": <PERMISSION_ID>}}'
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Set up Log Assets
-
-
-### Log Pipelines
-
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Log Indexes
-
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Log Archives
-
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-{{% /tab %}}
-{{% tab "API" %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -532,6 +446,49 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 
 
 
+## Set up Log Assets
+
+### Log Pipelines
+
+Create one [Pipeline][60] for `team:acme` Logs. 
+
+{{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
+
+Assign the [Write Processor][70] permission to members of `ACME Admin`, but **scoped** to that ACME "root" Pipeline. As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Pipeline. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
+
+Doing so, `ACME Admin` members - and only these ones - are able to create processors and Nested Pipelines within the ACME root pipeline. `ACME Users` members won't be allowed to edit (and potentially mess up with) the ACME root pipeline - but this wouldn't anyhow preventing them from accessing the content of the `team:acme`logs. 
+
+
+### Log Indexes
+
+Create one or multiple [Indexes][61] for `team:acme` Logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance indexes with different retentions, or indexes with different quotas).
+
+{{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes"  style="width:60%;">}}
+
+Assign the [Write Exclusion Filters][71] permission to members of `ACME Admin`, but **scoped** to that ACME Index(es). As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Indexes. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
+
+Doing so, `ACME Admin` members - and only these ones - are able to create exclusion filters within the ACME indexes. `ACME Users` members won't be allowed to edit (and potentially mess up with) the ACME indexes - but this wouldn't anyhow preventing them from accessing the content of the `team:acme`logs. 
+
+
+### Log Archives
+
+Create one or multiple [Archives][62] for `team:acme` Logs. Multiple archives can be useful if you have different lifecycle policies depending on logs (for instance for Prod and Staging Logs). Keep in mind that Rehydration is intended to work for only one archive at a time - although you can trigger multiple rehydration on multiple archives at once.
+
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Archives"  style="width:60%;">}}
+
+Assign the [Read Archives][72] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s). As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Archives. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
+
+Besides, assign the [Write Historical View][73] permission to members of `ACME Admin`. This permission grants the ability to perform Rehydrations. 
+
+
+Finally and **optionally**, set up your log Archives so that all logs rehydrated from that archive would eventually have the `team:acme` tag whether they did have it or not in the Archive.
+
+{{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
+
+Doing so, `ACME Admin` members - and only these ones - are able to perform rehydration from the ACME indexes. `ACME Users` members won't be allowed to perform Rehydrations - but this wouldn't anyhow preventing them from accessing the content of the `team:acme` logs.
+
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -548,10 +505,18 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
 
 
+[60]: /logs/processing/pipelines/
+[61]: /logs/indexes/
+[62]: /logs/archives/
+
+[70]: /account_management/rbac/permissions?tab=ui#logs-write-processors
+[71]: /account_management/rbac/permissions?tab=ui#logs-write-exclusion-filters
+[72]: /account_management/rbac/permissions?tab=ui#logs-read-archives
+[73]: /account_management/rbac/permissions?tab=ui#logs-write-historical-view
+
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [86]: https://app.datadoghq.com/access/users
-
 
 
 [90]: /account_management/rbac/permissions?tab=ui#logs-write-pipelines
