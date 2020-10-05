@@ -31,7 +31,6 @@ As this is a pretty common practice among our customers, this guide also assumes
 
 But you can adapt for one single Sandbox Role (concentrating permissions from Sandbox Admins and Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
 
-
 We'll explore how, as a Datadog Admin, you can approach how to: 
 
 * **Set up Roles** for the Sandbox team and **assign members**,
@@ -40,7 +39,6 @@ We'll explore how, as a Datadog Admin, you can approach how to:
 
 
 ## Prerequisites
-
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -51,11 +49,23 @@ We'll explore how, as a Datadog Admin, you can approach how to:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Tags on incoming logs
+
+
+
+### Log in as a Datadog Admin
+
+The actions you have to perform in that guy require you belong to a Datadog Admin Role. More specifically, you neeed:
+
+* permissions to create roles and assign users to role (actual Priviledged Access).
+* permissions to create [Log Pipelines][90], [Log Indexes][91] and [Log Archives][92]
+* permissions to interact through the [Log Configuration API][93] in case you perform those operations through API rather than UI.
+
+{{< img src="static/images/logs/guide/rbac/admin_permissions.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-You should belong to an Admin Role.
 https://app.datadoghq.com/account/settings#api
 https://docs.datadoghq.com/account_management/api-app-keys/
 
@@ -71,79 +81,6 @@ Throughout this article, you will need to replace all occurrences of `<DATADOG_A
 
 More details on how to user our APIs: [here][80] for V2 APIs (most of the API used in this guide) and [here][81] for V1 APIs.
 
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## Attach your Users to Role(s)
-
-Roles can be created through Datadog, as shown in [the RBAC documentation][3].
-
-You can also use the API and the following steps to create a role.
-
-
-### Create a role
-
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-https://docs.datadoghq.com/account_management/users/
-https://app.datadoghq.com/access/roles
-
-{{< img src="static/images/logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
-
-API call:
-
-```
-curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-sandbox"}}}'
-```
-
-Response:
-
-```
-{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-sandbox","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## Attach role to the user
-
-Finally, now that your roles are configured with their permissions and restriction queries, you can give these roles to your users.
-
-### Get the user IDs
-
-The first step is to [get the list of users][11]:
-
-```
-curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-Focus on the `data` object within the response, and extract the user IDs of the users that should belong to the `Backend` and `Frontend` role.
-
-Also, check if they already have roles and their IDs.
-
-### Attach the role to the user
-
-For each user, [assign the created backend and frontend end role][12]:
-
-```
-curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
-```
-
-
-By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
-Keep note of the Role IDs that you got in the reponse, as they are necessary to for when you want to assign permissions to these roles.
-
-
-### List available permissions
 
 Get the [list of all existing permissions][5]:
 
@@ -175,21 +112,92 @@ The answer is an array of permissions with each item of the array shown below:
 
 **Note**: The permission IDs change depending on whether you are using the Datadog US or EU site. Make sure to recover the IDs through the API call in the first section.
 
-There are two types of permissions:
 
-* [General permissions][6] (Admin, Standard, Read-only)
-* [Advanced permissions][7]
+{{% /tab %}}
+{{< /tabs >}}
 
-This guide assumes that the users should not be restricted except for their access to the data, so they will be granted all the permissions—including the admin general permission.
 
-To access logs within Datadog, the following permissions are critical:
+## Set up Roles
 
-* `logs_read_data`: Global switch that gives access to logs data (including Live Tail and rehydrated logs).
-* `logs_read_index_data`: Specific permissions for indexed data (available in Log Explorer).
-* `logs_live_tail`: Access to the Live Tail feature.
+Roles can be created through Datadog, as shown in [the RBAC documentation][3].
 
-Users must have these three permissions activated to see both ingested and indexed logs. 
-Access is then restricted with a restriction query, as shown below.
+The purpose of that series of step is:
+
+* To create the two Roles: `Sandbox Admin` and `Sandbox Users`,
+* To assign users to either Role,
+
+
+
+### Create a role
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+https://docs.datadoghq.com/account_management/users/
+https://app.datadoghq.com/access/roles
+
+{{< img src="static/images/logs/guide/rbac/add_role.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
+
+API call:
+
+```
+curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "team-sandbox"}}}'
+```
+
+Response:
+
+```
+{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"team-sandbox","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
+```
+
+Keep track of that Role ID (`dcf7c550-99cb-11ea-93e6-376cebac897c` in the example) for later, as they are necessary to for when you want to assign permissions to these roles.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Attach user to a role
+
+Finally, now that your roles are configured with their permissions and restriction queries, you can give these roles to your users.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+**Get User ID**
+
+The first step is to [get the list of users][11]:
+
+```
+curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
+
+Focus on the `data` object within the response, and extract the user IDs of the users that should belong to the `Backend` and `Frontend` role.
+
+Also, check if they already have roles and their IDs.
+
+**Attach User to Role **
+
+For each user, [assign the created backend and frontend end role][12]:
+
+```
+curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
+```
+
+By default, the roles are created with read-only permissions. The next step involves adding permissions to these roles.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 ### Grant permissions to the role
 
@@ -226,11 +234,66 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 {{% /tab %}}
 {{< /tabs >}}
 
-## Create Restriction Queries
+## Set up Log Assets
+
+
+### Log Pipelines
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Log Indexes
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Log Archives
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Set up Log Access
+
+### Restriction Queries
 
 There are many ways to identify which logs correspond to each team. For example, you can use the service value, or add a `team` tag on your data.
 
 This guide assumes that there is a `team` tag associated with the backend and frontend logs.
+
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 {{< tabs >}}
 {{% tab "Backend" %}}
@@ -395,3 +458,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 [80]: /api/v2/
 [81]: /api/v1/
 
+[90]: /account_management/rbac/permissions?tab=ui#logs-write-pipelines
+[91]: /account_management/rbac/permissions?tab=ui#logs-modify-indexes
+[92]: /account_management/rbac/permissions?tab=ui#logs-write-archives
+[93]: /account_management/rbac/permissions?tab=ui#logs-public-config-api
