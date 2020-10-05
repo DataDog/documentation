@@ -146,7 +146,7 @@ For example, if your facet is `@facet` and your monitor is grouped by that, use:
 {{@facet.name}}
 ```
 
-If your facet is with periods, let's say `@facet.with.dot` use:
+If your facet has periods, use brackets around the facet, for example:
 ```text
 {{[@facet.with.dot].name}}
 ```
