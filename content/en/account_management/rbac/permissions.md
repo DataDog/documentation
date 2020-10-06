@@ -262,6 +262,7 @@ This permission is global, but only enables to trigger a rehydration for Archive
 {{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
 
 On the example above:
+
 * `ADMIN` Role members **can** rehydrate from the `Audit Archive`, as they have the Write Historical View (Rehydrate) permission on along with the Read Archive permission on that Archive.
 * `AUDIT` Role members **cannot** rehydrate from the `Audit Archive`, as they don't have the Write Historical View (Rehydrate) permission on.
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they don't have Read Archive permission on that Archive.
