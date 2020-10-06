@@ -313,7 +313,7 @@ This section details how to:
 {{< tabs >}}
 {{% tab "UI" %}}
 
-TODO
+This configuration is not yet available through the UI.
 
 {{% /tab %}}
 {{% tab "API" %}}
