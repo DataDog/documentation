@@ -41,7 +41,7 @@ Although this guide focuses on the ACME Team, your setup is replicable to every 
 
 ### The role of Datadog admin
 
-This guide explains how you, as a Datadog admin, can set up a safe playground for ACME team members to interact with their logs (whithout interfering with other team logs) while also restricting access to these logs only to ACME Users.
+This guide explains how you, as a Datadog admin, can set up a safe playground for ACME team members to interact with their logs (whithout interfering with other team logs) while also restricting access to these logs only to ACME users.
 
 *Note*: You can adapt this guide to consider that ACME admins are also Datadog admins.
 
