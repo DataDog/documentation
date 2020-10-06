@@ -23,7 +23,7 @@ further_reading:
 
 Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. You may also wish to segment your users so that they **don't interfere one with another** as far as configuration and budget control is concerned. 
 
-This guides shares good practices on how to set up permissions in this context. 
+This guide shares good practices on how to set up permissions in this context. 
 
 
 ### The "ACME" Team
@@ -41,7 +41,7 @@ Although this guide focuses on the ACME Team, your setup is replicable to every 
 
 ### The role of Datadog admin
 
-This guide explains how you, as a Datadog admin, can set up a safe playground for ACME team members to interact with their logs (whithout interfering with other team logs) while also restricting access to these logs only to ACME users.
+This guide explains how you, as a Datadog admin, can set up a safe playground for ACME team members to interact with their logs (without interfering with other team logs) while also restricting access to these logs only to ACME users.
 
 *Note*: You can adapt this guide to consider that ACME admins are also Datadog admins.
 
@@ -66,7 +66,7 @@ For example, in the context of Docker Log Collection, attach the `team:acme` tag
 
 ### Log in as a Datadog admin
 
-The actions you have to perform in that guide require you belong to a Datadog admin Rrle. More specifically, you neeed:
+The actions you have to perform in that guide require you belong to a Datadog admin role. More specifically, you need:
 
 * Permissions to create roles and assign users to roles (actual privileged access).
 * Permissions to create [Log Pipelines][90], [Log Indexes][91], and [Log Archives][92].
@@ -82,7 +82,7 @@ Check in [Datadog][86] that you have all these permissions. If you are missing a
 
 API keys and app keys are available in your [Datadog account API key page][94]. More details available in the [API and app keys][95] section of the documentation.
 
-Make sure that the app Key you use is attach to your own user, or to a user who has similar permissions.
+Make sure that the app key you use is attached to your own user, or to a user who has similar permissions.
 
 {{< img src="logs/guide/rbac/app-api_keys.png" alt="Check API and APP Keys"  style="width:60%;">}}
 
@@ -135,7 +135,7 @@ When creating a new role:
 
 {{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
 
-More information on how to create roles is available in the [Account Management][3] section. 
+More information on creating roles is available in the [Account Management][3] section. 
 
 [1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/rbac/permissions?tab=ui#legacy-permissions
@@ -223,7 +223,7 @@ In the [Team Section][1] of Datadog, go to the User tab. Pick a user and assign 
 {{% tab "API" %}}
 
 
-Using the [List Users API][1], get the user ID of the user you want to assign to the either the `ACME Admin` or `ACME User` role. As this API is paginated, you might need to filter results, using—for instance—the last name of the user as a query parameter. In the following example, the user ID is `1581e993-eba0-11e9-a77a-7b9b056a262c`.
+Using the [List Users API][1], get the user ID of the user you want to assign to either the `ACME Admin` or the `ACME User` role. As this API is paginated, you might need to filter results, using—for instance—the last name of the user as a query parameter. In the following example, the user ID is `1581e993-eba0-11e9-a77a-7b9b056a262c`.
 
 ``` bash
 curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0&sort=name&filter=smith" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -249,9 +249,9 @@ For each user, use the [Assign Role API][2] to add this them to this role.
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
-**Remove users from defaut roles**
+**Remove users from default roles**
 
-Check if the user already has roles and their IDs. You might want to remove default Datadog roles from these users, as they may grant additional permissions to user you do not wish to grant.
+Check if the user already has roles and their IDs. You might want to remove default Datadog roles from these users, as they may grant additional permissions to the user you do not wish to grant.
 
 ``` bash
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
@@ -278,7 +278,7 @@ This section details how to:
 2. Attach that restriction query to ACME roles.
 
 
-*Note*: Roles can have **no more than one** restriction query attached. If you attach a restriction query to a role, it also removes whichever restriction query already attached to this role.
+*Note*: Roles can have **no more than one** restriction query attached. If you attach a restriction query to a role, it removes any restriction queries already attached to this role.
 
 
 {{< tabs >}}
@@ -380,7 +380,7 @@ Multiple archives can be useful if you have different lifecycle policies dependi
 
 Assign the [Write Historical View][73] permission to members of `ACME Admin`. This permission grants the ability to perform rehydrations. 
 
-**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether whether or not they had the tag in the archive. This option enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
+**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. This option enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
