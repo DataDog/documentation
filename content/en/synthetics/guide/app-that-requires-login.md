@@ -55,7 +55,7 @@ Browser tests can reproduce any actions a regular user can take inside their Chr
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, also consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off when [identifying requests as coming from Synthetic browser tests][3] (for example, for a specific set of credentials, Synthetic tests specific headers, etc.) for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][4] could help to work around that.
 
-<div class="alert alert-info">We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by filling that <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">form</a>.</div>
+<div class="alert alert-info">We are constantly adding features to help you record test scenarios more easily. Help us work on the MFA systems that matter the most to you by <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">sending us feedback</a>.</div>
 
 ## Leverage browser test configuration options
 
