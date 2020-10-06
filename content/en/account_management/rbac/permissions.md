@@ -257,7 +257,17 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][11].
 
-This permission is global, but only enables to trigger a rehydration for Archives users have [Logs Read Archive](#logs-read-archives) permission.
+This permission is global, but only enables to trigger a rehydration for Archives users have [Logs Read Archive](r#logs-read-archives) permission.
+
+{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
+
+On the example above:
+* `ADMIN` Role members **can** rehydrate from the `Audit Archive`, as they have the Write Historical View (Rehydrate) permission on along with the Read Archive permission on that Archive.
+* `AUDIT` Role members **cannot** rehydrate from the `Audit Archive`, as they don't have the Write Historical View (Rehydrate) permission on.
+* `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they don't have Read Archive permission on that Archive.
+
+Find more details on Rehydration in [this section][11]. 
+
 
 #### logs_public_config_api
 
