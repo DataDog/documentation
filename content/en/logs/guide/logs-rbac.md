@@ -33,8 +33,8 @@ Let's assume that your organisation consists of multiple teams, one of which bei
 
 As this is a pretty common practice among our customers, this guide also assumes that you have 2 categories of users in the ACME Team:
 
-* **ACME Admins**: the users in charge of ACME log collection, in charge of pipelines and exclusion filters.
-* **ACME Users** : the users to access ACME logs and create Monitor or Dashboards out of these logs.
+* **`ACME Admin`**: the role for users in charge of ACME log collection, in charge of pipelines and exclusion filters.
+* **`ACME User`** : the role for users to access ACME logs and create Monitor or Dashboards out of these logs.
 
 *Note : You can adapt this guide for one single ACME Role (concentrating permissions from both ACME Admins and ACME Users) for the sake of simplicity, or more roles for the sake of more granular permissions.*
 
@@ -43,9 +43,9 @@ Although this guide focuses on the ACME Team, whatever you setup for the ACME te
 
 ### The role of Datadog Admin
 
-Eventually, the purpose of that guide is to explain how you, as a Datadog Admin, set up a safe playground for ACME Team Members to interact with their logs (whithout interfering with other team logs) whilst also restricting access to these logs only to ACME users.
+Eventually, the purpose of that guide is to explain how you, as a Datadog Admin, set up a safe playground for ACME Team Members to interact with their logs (whithout interfering with other team logs) whilst also restricting access to these logs only to ACME Users.
 
-*Note: You can adapt this guide to consider that ACME admins are also Datadog Admins, which is a common practice for smaller organisations.*
+*Note: You can adapt this guide to consider that ACME Admins are also Datadog Admins, which is a common practice for smaller organisations.*
 
 More concretely, we'll explore in this guide how, as a Datadog Admin, you can approach how to: 
 
@@ -74,22 +74,25 @@ The actions you have to perform in that guide require you belong to a Datadog Ad
 * permissions to create [Log Pipelines][90], [Log Indexes][91] and [Log Archives][92]
 * permissions to interact through the [Log Configuration API][93] in case you perform those operations through API rather than UI.
 
-Check by yourself in the [Datadog App][86] that you do have all these permissions. If you happen to miss one of these permissions, ask an Admin user to set it for yourself.
+Check by yourself in the [Datadog App][86] that you do have all these permissions. If you happen to miss one of these permissions, ask a Datadog Admin user to set it for yourself.
 
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
+### Get an API key and an APP key
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-You're all set if you plan to set up RBAC only through UI! But check the API tab if you plan to interact through API.
+You don't need API or APP keys if you plan to set up RBAC only through UI.
 
 {{% /tab %}}
 {{% tab "API" %}}
 
 Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][1]. More details available in the [API and APP Keys][2] section of our documentation.
 
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="Delete invite on the grid view"  style="width:60%;">}}
+Also, make sure that the APP Key you use is attach to your own User, or to a user who has similar permissions.
+
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="Check API and APP Keys"  style="width:60%;">}}
 
 Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively. This guide also assumes that you have a terminal with `CURL`. 
 
@@ -104,7 +107,7 @@ Throughout this article, you will need to replace all occurrences of `<DATADOG_A
 {{< tabs >}}
 {{% tab "UI" %}}
 
-You're all set! You need these IDs only when interacting through API.
+You don't need Permission IDs if you plan to set up RBAC only through UI.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -141,9 +144,9 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 
 The purpose of that series of step is:
 
-1. To create the two Roles: `ACME Admin` and `ACME Users`, 
+1. To create the two Roles: `ACME Admin` and `ACME User`, 
 2. Grant both roles with minimal log permissions (we'll extend permissions step by step in this guide),
-3. To assign users to either Role,
+3. To assign users either Role,
 
 
 ### Create a role
@@ -151,7 +154,7 @@ The purpose of that series of step is:
 {{< tabs >}}
 {{% tab "UI" %}}
 
-In the [Team Section][1] of the Datadog App, use the Add Role button within the Role tab to create the new `ACME Admins` and `ACME Users` Roles.  
+In the [Team Section][1] of the Datadog App, use the Add Role button within the Role tab to create the new `ACME Admin` and `ACME User` Roles.  
 
 {{< img src="logs/guide/rbac/add_role.png" alt="Add a new role"  style="width:60%;">}}
 
@@ -171,7 +174,7 @@ More information on how to Create Roles in the [Account Management][3] section.
 {{% /tab %}}
 {{% tab "API" %}}
 
-Repeat the following steps for `ACME Admins` and `ACME Users` roles: 
+Repeat the following steps for `ACME Admin` and `ACME User` roles: 
 
 1. If the Role doesn't already exist, create ot the Role with [Role creation API][1]. In the following Example, `dcf7c550-99cb-11ea-93e6-376cebac897c` would be the Role ID.
 
@@ -179,8 +182,12 @@ Repeat the following steps for `ACME Admins` and `ACME Users` roles:
 curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "ACME Admin"}}}'
 ```
 
-```json
-{"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"ACME Admin","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
+``` json
+[...]
+"type": "roles",
+"id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
+"attributes": { "name": "ACME Admin", [...] }
+[...]
 ```
 
 2. **Alternatively** if the Role does already exist, use the [Role List API][2] to get its Role ID.
@@ -192,13 +199,8 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0
 ``` json
 [...]
 "type": "roles",
-  "id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
-  "attributes": {
-    "name": "ACME Admin",
-    "created_at": "2020-10-05T16:48:47.146439+00:00",
-    "modified_at": "2020-10-05T16:48:47.146439+00:00",
-    "user_count": 3
-  }
+"id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
+"attributes": { "name": "ACME Admin", [...] }
 [...]
 ```
 
@@ -239,7 +241,7 @@ Now that your roles are configured with their permissions, assign these roles to
 {{< tabs >}}
 {{% tab "UI" %}}
 
-In the [Team Section][1] of the Datadog App, in the User tab, pick a user and assign them either `ACME Admin` or `ACME User Role` on top of his (possibly) already assigned Roles. More details on User Management in the [Account Management][2] section.
+In the [Team Section][1] of the Datadog App, in the User tab, pick a user and assign them either `ACME Admin` or `ACME User` Role on top of his (possibly) already assigned Roles. More details on User Management in the [Account Management][2] section.
 
 {{< img src="logs/guide/rbac/assign_user.png" alt="Delete invite on the grid view"  style="width:60%;">}}
 {{< img src="logs/guide/rbac/assign_user2.png" alt="Delete invite on the grid view"  style="width:60%;">}}
@@ -269,7 +271,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0
 [...]
 ```
 
-**Attach Users to ACME Role**
+**Attach Users to ACME Roles**
 
 For each user, user the [Assign Role API][2] to add this user to this Role.
 
@@ -354,7 +356,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 Optionally, confirm that the set up is properly done: 
 
-* Getting the list of roles attached to the query with the [Get Roles API][4]. You should see only `ACME Admin` and `ACME Users` in the results.
+* Getting the list of roles attached to the query with the [Get Roles API][4]. You should see only `ACME Admin` and `ACME User` in the results.
 * Conversely, getting the restriction query attached to either role with the [Get Restriction Query API][5]. You should see the `team:acme` restriction query. 
 
 [1]: /api/v2/logs-restriction-queries/#create-a-restriction-query
@@ -369,44 +371,50 @@ Optionally, confirm that the set up is properly done:
 
 ## Restrict access to Log Assets
 
+The purpose of that section is to detail how to grant `ACME Admin` role members the permission to interact with ACME Log Assets (namely Log Pipelines, Log Indexes and Log Archives). Doing so, you ensure that:
+
+* `ACME Admin` members, and only them, are able to interact ACME Log Assets. 
+* Neither `ACME Admin` nor `ACME User` members can interfere with assets from other teams.
+* Neither `ACME Admin` nor `ACME User` members can interfere with higher level "Admin" configuration, such as which logs flow into their assets, budget limitations or [Log Access Restriction rules](#restrict-access-to-logs).
+
+
+As a good practice for maximum granularity and easier maintainability, you should **not** grant other Roles the permission to edit the ACME Log Assets . Instead, consider adding (some) users from those other Roles to the `ACME Admin` role as well.
+
+
 ### Log Pipelines
 
-Create one [Pipeline][60] for `team:acme` Logs. 
+Create one [Pipeline][60] for `team:acme` Logs. Assign the [Write Processor][70] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" Pipeline. 
 
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
 
-Assign the [Write Processor][70] permission to members of `ACME Admin`, but **scoped** to that ACME "root" Pipeline. As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Pipeline. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
-
-Doing so, `ACME Admin` members - and only these ones - are able to create processors and Nested Pipelines within the ACME root pipeline. `ACME Users` members won't be allowed to edit (and potentially mess up with) the ACME root pipeline - but this wouldn't anyhow preventing them from accessing the content of the `team:acme`logs. 
 
 
 ### Log Indexes
 
-Create one or multiple [Indexes][61] for `team:acme` Logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance indexes with different retentions, or indexes with different quotas).
+Create one or multiple [Indexes][61] for `team:acme` Logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][71] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es). 
 
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes"  style="width:60%;">}}
-
-Assign the [Write Exclusion Filters][71] permission to members of `ACME Admin`, but **scoped** to that ACME Index(es). As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Indexes. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
-
-Doing so, `ACME Admin` members - and only these ones - are able to create exclusion filters within the ACME indexes. `ACME Users` members won't be allowed to edit (and potentially mess up with) the ACME indexes - but this wouldn't anyhow preventing them from accessing the content of the `team:acme`logs. 
 
 
 ### Log Archives
 
-Create one or multiple [Archives][62] for `team:acme` Logs. Multiple archives can be useful if you have different lifecycle policies depending on logs (for instance for Prod and Staging Logs). Keep in mind that Rehydration is intended to work for only one archive at a time - although you can trigger multiple rehydration on multiple archives at once.
+#### Read Log Archives
+
+Create one or multiple [Archives][62] for `team:acme` Logs. Assign the [Read Archives][72] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Archives"  style="width:60%;">}}
 
-Assign the [Read Archives][72] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s). As a good practice for maximum granularity and easier maintenance, you should **not** grant other Roles the permission to edit the ACME Archives. Instead, consider adding (some) users from those other Roles to the `ACME Admin` Role as well.
+Multiple archives can be useful if you have different lifecycle policies depending on logs (for instance for Prod and Staging Logs). Keep in mind that Rehydration is intended to work for only one archive at a time - although you can trigger multiple rehydration on multiple archives at once. 
+
+#### Write Historical Views
 
 Besides, assign the [Write Historical View][73] permission to members of `ACME Admin`. This permission grants the ability to perform Rehydrations. 
 
-
-Finally and **optionally**, set up your log Archives so that all logs rehydrated from that archive would eventually have the `team:acme` tag whether they did have it or not in the Archive.
+**Optionally**, set up your log Archives so that all logs rehydrated from that archive would eventually have the `team:acme` tag whether they did have it or not in the Archive.
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
-Doing so, `ACME Admin` members - and only these ones - are able to perform rehydration from the ACME indexes. `ACME Users` members won't be allowed to perform Rehydrations - but this wouldn't anyhow preventing them from accessing the content of the `team:acme` logs.
+Doing so, `ACME Admin` members - and only these ones - are able to perform rehydration from the ACME indexes. `ACME User` members won't be allowed to perform Rehydrations - but this wouldn't anyhow preventing them from accessing the content of the `team:acme` logs.
 
 
 
@@ -422,7 +430,6 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 
 
 [10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
-
 
 [60]: /logs/processing/pipelines/
 [61]: /logs/indexes/
