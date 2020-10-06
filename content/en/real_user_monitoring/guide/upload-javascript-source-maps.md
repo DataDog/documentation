@@ -110,7 +110,7 @@ By running this command against our example `dist` directory (see previous secti
 
 ## Troubleshoot errors with ease
 
-A minified stack trace is not helpful as you don't have access to the file path and the line number. It's hard to know where something is happening in your code base. In addition, the code snippet is still minified (one long line of transformed code) which makes the troubleshooting process even harder. See below an example of an unminified stack trace:
+A minified stack trace is not helpful as you don't have access to the file path and the line number. It's hard to know where something is happening in your code base. In addition, the code snippet is still minified (one long line of transformed code) which makes the troubleshooting process even harder. See below an example of an minified stack trace:
 
 {{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace"  >}}
 
