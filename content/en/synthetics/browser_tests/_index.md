@@ -33,6 +33,7 @@ Define the configuration of your browser test.
      * Headers: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
      * Authentication: Authenticate through HTTP basic authentication or NTLM with a username and a password.
      * Cookies: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+     * Proxy URL: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
 3. **Name**: The name of your browser test.
 4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
