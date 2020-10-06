@@ -146,8 +146,7 @@ The purpose of that series of step is:
 
 1. To create the two Roles: `ACME Admin` and `ACME User`, 
 2. Grant both roles with minimal log permissions (we'll extend permissions step by step in this guide),
-3. To assign users either Role,
-
+3. To assign users either Role.
 
 ### Create a role
 
@@ -302,14 +301,13 @@ The purpose of that section is to detail how to grant ACME Team members (eventua
 
 As a good practice for maximum granularity and easier maintenance, you should **not** extend permissions of ACME Users to access more logs. Neither should you restrict other Roles to the same `team:acme` restriction query. Instead, consider assign users to multiple Roles based on what each of them, individually, needs to access.
 
-
 This section details how to:
 
 1. create a `team:acme` restriction query.
 2. attach that restriction query to ACME Roles.
 
 
-Note that Roles can have no more than one restriction query attached. Meaning if you attach a restriction query to a role, it also removes whichever restriction query already attached to this role.
+*Note: Roles can have **no more than one** restriction query attached. Meaning if you attach a restriction query to a role, it also removes whichever restriction query already attached to this role.*
 
 
 {{< tabs >}}
@@ -388,7 +386,6 @@ Create one [Pipeline][60] for `team:acme` Logs. Assign the [Write Processor][70]
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
 
 
-
 ### Log Indexes
 
 Create one or multiple [Indexes][61] for `team:acme` Logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][71] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es). 
@@ -410,12 +407,13 @@ Multiple archives can be useful if you have different lifecycle policies dependi
 
 Besides, assign the [Write Historical View][73] permission to members of `ACME Admin`. This permission grants the ability to perform Rehydrations. 
 
-**Optionally**, set up your log Archives so that all logs rehydrated from that archive would eventually have the `team:acme` tag whether they did have it or not in the Archive.
+**Optionally**, set up your log Archives so that all logs rehydrated from that archive would eventually have the `team:acme` tag whether they did have it or not in the Archive, back in time. Take advantage of that option in case you need to enforce consistency with your existing restriction policies, and also to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
-Doing so, `ACME Admin` members - and only these ones - are able to perform rehydration from the ACME indexes. `ACME User` members won't be allowed to perform Rehydrations - but this wouldn't anyhow preventing them from accessing the content of the `team:acme` logs.
+*Note: **If** you use the [Legacy Read Index Data Permission][75], add add the `ACME User` Role to ACME Archive(s) alongside `ACME User` role. As `ACME User` Role members don't have the permission to perform rehydration this wouldn't actually give them sensitive permission. But this automatically scope the read index data permission to the resulting Historical View, so that they can access the content.*
 
+{{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission"  style="width:60%;">}}
 
 
 ## Further Reading
@@ -441,6 +439,8 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 [73]: /account_management/rbac/permissions?tab=ui#logs-write-historical-view
 
 [74]: /account_management/rbac/permissions?tab=ui#logs-read-data
+[75]: /account_management/rbac/permissions?tab=ui#logs-read-index-data
+
 
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
