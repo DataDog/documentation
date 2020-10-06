@@ -111,7 +111,7 @@ You're all set! You need these IDs only when interacting through API.
 
 Use the [Permissions API][1] to get the list of all existing permissions, which will be further required to assign the permissions to roles. For such calls, the answer is an array of permissions such as the one below (the `logs_read_data` permission has the `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb`, which is all you need to know about that permission).
 
-```
+```bash 
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
@@ -139,13 +139,11 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 
 ## Set up Roles
 
-Roles can be created through Datadog, as shown in [the RBAC documentation][3].
-
 The purpose of that series of step is:
 
-* To create the two Roles: `ACME Admin` and `ACME Users`, 
-* Grant both roles with minimal log permissions (we'll extend permissions step by step in this guide),
-* To assign users to either Role,
+1. To create the two Roles: `ACME Admin` and `ACME Users`, 
+2. Grant both roles with minimal log permissions (we'll extend permissions step by step in this guide),
+3. To assign users to either Role,
 
 
 ### Create a role
@@ -164,8 +162,11 @@ When creating a new Role:
 
 {{< img src="logs/guide/rbac/minimal_permissions.png" alt="Grant minimal permissions"  style="width:60%;">}}
 
+More information on how to Create Roles in the [Account Management][3] section. 
+
 [1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/rbac/permissions?tab=ui#legacy-permissions
+[3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -174,17 +175,21 @@ Repeat the following steps for `ACME Admins` and `ACME Users` roles:
 
 1. If the Role doesn't already exist, create ot the Role with [Role creation API][1]. In the following Example, `dcf7c550-99cb-11ea-93e6-376cebac897c` would be the Role ID.
 
-```
+```bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","attributes": {"name": "ACME Admin"}}}'
+```
 
+```json
 {"data":{"type":"roles","id":"dcf7c550-99cb-11ea-93e6-376cebac897c","attributes":{"name":"ACME Admin","created_at":"2020-05-19T12:25:45.284949+00:00","modified_at":"2020-05-19T12:25:45.284949+00:00"},"relationships":{"permissions":{"data":[{"type":"permissions","id":"d90f6830-d3d8-11e9-a77a-b3404e5e9ee2"},{"type":"permissions","id":"4441648c-d8b1-11e9-a77a-1b899a04b304"}]}}}}
 ```
 
 2. **Alternatively** if the Role does already exist, use the [Role List API][2] to get its Role ID.
 
-```
+``` bash
 curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0&sort=name&filter=ACME" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"'
+```
 
+``` json
 [...]
 "type": "roles",
   "id": "dcf7c550-99cb-11ea-93e6-376cebac897c",
@@ -199,21 +204,21 @@ curl -X GET "https://app.datadoghq.com/api/v2/roles?page[size]=10&page[number]=0
 
 3. Check the existing permissions for the Role (it should be only Read Monitors and Read Dashboards for newly created roles). 
 
-```
+``` bash
 curl -X GET "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 
 ```
 
 3. Assign the `standard`, `logs_read_index_data` and `logs_live_tail` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding IDs.
 
-```
+``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
 
 4. **If needed**, revoke all other Log permissions with the [Revoke Permissions API][4].
 
-```
+``` bash
 curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
@@ -248,9 +253,11 @@ In the [Team Section][1] of the Datadog App, in the User tab, pick a user and as
 
 Using the [List Users API][1], get the User ID of the user you want to assign to the either `ACME Admin` or `ACME User` Role. As this API is paginated, you might need to filter results, using for instance the last name of the user as a query param. In the following example, User ID is `1581e993-eba0-11e9-a77a-7b9b056a262c`.
 
-```
+``` bash
 curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0&sort=name&filter=smith" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
 
+``` json
 [...]
 "type": "users",
 "id": "1581e993-eba0-11e9-a77a-7b9b056a262c",
@@ -266,7 +273,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users?page[size]=10&page[number]=0
 
 For each user, user the [Assign Role API][2] to add this user to this Role.
 
-```
+``` bash
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
@@ -274,7 +281,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Conten
 
 Also, check if they already have roles and their IDs. You might want to remove Default Datadog Roles from these users, as they would grant additional permissions to user you don't want to grant.
 
-```
+``` bash
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
@@ -313,10 +320,11 @@ TODO
 
 Use the [Create Restriction Query API][1] to create a new Restriction Query. Keep track of the Restriction Query ID (`76b2c0e6-98fa-11ea-93e6-775bd9258d59` in the following example).
 
-```
+``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "logs_restriction_queries","attributes": {"restriction_query": "team:acme"}}}'
+```
 
-
+``` json
 {
 	"data": {
 		"type": "logs_restriction_queries",
@@ -333,13 +341,13 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries" 
 
 Next, attach the previous restriction query to ACME roles with the [Restriction Query API][2] - repeat that operation with `ACME Admin` and `ACME User` Roles ID. 
 
-```
+``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<RESTRICTION_QUERY_ID>/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "<ROLE_ID>"}}'
 ```
 
 Finally, enable the `logs_read_data` permissions to the Role thanks to the [Grant Permissions API][3]. Refer to the [Get Permission IDs](#get-permission-ids) section to get corresponding ID for that permission. 
 
-```
+``` bash
 curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"permissions","id": "<PERMISSION_ID>"}}'
 
 ```
@@ -407,8 +415,6 @@ Doing so, `ACME Admin` members - and only these ones - are able to perform rehyd
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-
-[3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 
 
 [6]: /account_management/rbac/permissions?tab=datadogapplication#general-permissions
