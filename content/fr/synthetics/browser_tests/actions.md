@@ -94,17 +94,19 @@ Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`str
 
 ### Test your UI with custom JavaScript
 
-Testez une assertion personnalisée sur la page active en utilisant votre propre code JavaScript. Les assertions JavaScript prennent en charge le code synchrone et asynchrone.
+Testez une assertion personnalisée sur la page active en utilisant votre propre code JavaScript. 
+
+**Remarque** : les assertions JavaScript prennent en charge le code synchrone et asynchrone.
 
 La fonction d'assertion JavaScript accepte les paramètres suivants et nécessite une instruction return.
 
-* `vars` : une chaîne contenant les [variables][5] de votre test Browser. Utilisez `vars.<VOTRE_VARIABLE>` pour appeler une variable de test Browser dans votre snippet JavaScript. Par exemple, si votre test Browser contient une variable `USERNAME`, appelez-la dans votre snippet JavaScript avec `vars.USERNAME`.
+* L'instruction `return` (obligatoire) doit correspondre à la condition que l'assertion doit remplir pour que l'étape de votre test Browser réussisse. N'importe quel type peut être renvoyé, mais la valeur est automatiquement convertie en booléen.
 
-* `element` : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
+* `vars` (facultatif) : une chaîne contenant les [variables][5] de votre test Browser. Utilisez `vars.<VOTRE_VARIABLE>` pour appeler une variable de test Browser dans votre snippet JavaScript. Par exemple, si votre test Browser contient une variable `USERNAME`, appelez-la dans votre snippet JavaScript avec `vars.USERNAME`.
+
+* `element` (facultatif) : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Assertion JavaScript dans un test Browser" video="true" width="100%">}}
-
-* L'instruction `return` doit correspondre à la condition que l'assertion doit remplir pour que l'étape de votre test Browser réussisse. N'importe quel type peut être renvoyé, mais la valeur est automatiquement convertie en booléen.
 
 Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (bibliothèques, builtins, variables globales, etc.). Pour charger des bibliothèques externes, utilisez une promise. Par exemple :
 
@@ -138,7 +140,7 @@ Actualiser la page actuelle du scénario.
 
 ### Go to email and click link
 
-Cette étape vous permet d'accéder à des boîtes de messagerie Synthetics uniques après avoir créé une [variable d'e-mail][4]. Choisissez un e-mail et cliquez sur le lien sur lequel le test Browser doit cliquer. Votre test accédera alors à la page correspondante, à partir de laquelle vous pourrez continuer le parcours utilisateur.
+Cette étape vous permet d'accéder à des boîtes de messagerie Synthetic uniques après avoir créé une [variable d'e-mail][4]. Choisissez un e-mail et cliquez sur le lien sur lequel le test Browser doit cliquer. Votre test accédera alors à la page correspondante, à partir de laquelle vous pourrez continuer le parcours utilisateur.
 
 ### Follow this link
 
@@ -195,23 +197,36 @@ Par défaut, l'étape **Scroll** fait défiler la page entière. Si vous souhait
 
 Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur parmi les propositions suivantes :
 
+#### Pattern
+
+Créez une variable en définissant sa valeur sur l'un des builtins disponibles ci-dessous :
+
+| Pattern                 | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`      | Génère une chaîne numérique de `n` chiffres.                                                               |
+| `{{ alphabetic(n) }}`   | Génère une chaîne alphabétique de `n` lettres.                                                           |
+| `{{ alphanumeric(n) }}` | Génère une chaîne alphanumérique de `n` caractères.                                                     |
+| `{{ date(n, format) }}` | Génère une date dans l'un de nos formats acceptés, sa valeur étant la date d'initiation du test + `n` jours. |
+
 #### Element
 
 Créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
 
 #### JavaScript
 
-Générez des variables personnalisées en utilisant votre propre code JavaScript. Les étapes JavaScript prennent en charge le code synchrone et asynchrone.
+Écrivez le code JavaScript personnalisé qui renvoie la valeur à laquelle vous souhaitez que votre variable soit assignée.
+
+**Remarque** : les étapes JavaScript prennent en charge le code synchrone et asynchrone.
 
 La fonction JavaScript accepte les paramètres suivants et nécessite une instruction return.
 
-* `vars` : une chaîne contenant les [variables][5] de votre test Browser. Utilisez `vars.<VOTRE_VARIABLE>` pour appeler une variable de test Browser dans votre snippet JavaScript. Par exemple, si votre test Browser contient une variable `USERNAME`, appelez-la dans votre snippet JavaScript avec `vars.USERNAME`.
+* L'instruction `return` (obligatoire) doit renvoyer la valeur que vous souhaitez associer à votre variable JavaScript. N'importe quel type peut être renvoyé, mais la valeur est automatiquement convertie en chaîne.
 
-* `element` : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
+* `vars` (facultatif) : une chaîne contenant les [variables][5] de votre test Browser dont vous souhaitez vous servir dans votre code. Utilisez `vars.<VOTRE_VARIABLE>` pour appeler une variable de test Browser dans votre snippet JavaScript. Par exemple, si votre test Browser contient déjà une variable `PRICE`, appelez-la dans votre snippet JavaScript avec `vars.PRICE`.
+
+* `element` (facultatif) : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test Browser" video="true" width="100%">}}
-
-* L'instruction `return` doit renvoyer la valeur associée à votre variable JavaScript. N'importe quel type peut être renvoyé, mais la valeur est automatiquement convertie en chaîne.
 
 Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (bibliothèques, builtins, variables globales, etc.). Pour charger des bibliothèques externes, utilisez une promise. Par exemple :
 
@@ -231,36 +246,29 @@ return jQuery().jquery.startsWith('3.5.1')
 
 #### Global Variable
 
-Choisissez n'importe quelle variable globale définie à l'aide des [paramètres de surveillance Synthetics][7].
+Choisissez n'importe quelle variable globale définie à l'aide des [paramètres de surveillance Synthetic][7].
 
 #### Email
 
-Générez une adresse e-mail Synthetics aléatoire et utilisez-la dans vos étapes de test pour [vérifier si un e-mail a bien été envoyé][8] ou pour [accéder à un lien présent dans l'e-mail][9] (par exemple, cliquer sur un lien de confirmation). Une boîte de messagerie unique est générée à chaque exécution du test pour éviter tout conflit d'une exécution à l'autre.
-
-#### Pattern
-
-| Pattern                 | Description                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Génère une chaîne numérique de n chiffres.                                                               |
-| `{{ alphabetic(n) }}`   | Génère une chaîne alphabétique de n lettres.                                                           |
-| `{{ alphanumeric(n) }}` | Génère une chaîne alphanumérique de n caractères.                                                     |
-| `{{ date(n, format) }}` | Génère une date dans l'un de nos formats acceptés, sa valeur étant la date d'initiation du test + n jours. |
+Générez une adresse e-mail Synthetic aléatoire et utilisez-la dans vos étapes de test pour [vérifier si un e-mail a bien été envoyé][8] ou pour [accéder à un lien présent dans l'e-mail][9] (par exemple, cliquer sur un lien de confirmation). Une boîte de messagerie unique est générée à chaque exécution du test pour éviter tout conflit d'une exécution à l'autre.
 
 ### Utiliser la variable
 
-Une fois votre variable créée, utilisez l'icône en forme de main dans la case de votre variable pour l'injecter sur le site Web testé :
+Tous les champs comportant l'indicateur `{{` prennent en charge des variables :
+
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Indicateur d'autocomplétion de variable"  style="width:70%;">}}
+
+Si vous souhaitez enregistrer une étape utilisant une variable, vous pouvez utiliser l'icône en forme de main dans la case de votre variable :
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Saisie via une variable" video="true"  width="100%" >}}
 
-Une étape de saisie de texte est alors générée, dont le contenu est toujours remplacé par la valeur de `{{ <VOTRE_VARIABLE> }}` à l'exécution du test.
+Lors de l'enregistrement, cette action entraîne l'injection de la valeur réelle de la variable dans le champ de saisie de votre site Web (ce qui vous permet ensuite de passer aux étapes restantes) et crée une étape `Type text` associée contenant `{{ <VOTRE_NOM_VARIABLE> }}`.   
+Lors de l'exécution du test, `{{ <VOTRE_NOM_VARIABLE> }}` est systématiquement remplacé par la valeur associée de votre variable.
 
-Dans certains cas, la valeur de votre variable n'est calculée qu'à l'exécution du test (par exemple lorsque la variable est créée à partir d'une requête HTTP ou extraite d'une étape JavaScript). Vous pouvez injecter votre variable en utilisant `{{ <VOTRE_VARIABLE> }}`  directement sur votre site Web lors de l'enregistrement. Lorsqu'il est exécuté, le test Browser ajoute automatiquement la valeur de la variable générée lors des étapes précédentes dans ce champ.
+**Remarque** : dans certains cas, la valeur de votre variable n'est calculée qu'à l'exécution du test (par exemple lorsque la variable est créée à partir d'une requête HTTP ou extraite d'une étape JavaScript). Pour passer à l'enregistrement des étapes suivantes, il sera peut-être nécessaire d'entrer `{{ <VOTRE_NOM_VARIABLE> }}` directement sur votre site Web ou d'utiliser une valeur réelle.   
+Si vous choisissez cette seconde option, assurez-vous de remplacer la valeur réelle par `{{ <VOTRE_NOM_VARIABLE> }}` dans votre étape avant d'enregistrer votre test. De cette façon, le test Browser exécutera automatiquement l'étape avec la valeur de variable générée à l'étape précédente.
 
 {{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Exemple d'autocomplétion de variable" video="true"  width="100%" >}}
-
-**Remarque** : tous les champs comportant l'indicateur `{{` prennent en charge l'autocomplétion des variables.
-
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Indicateur d'autocomplétion de variable"  style="width:70%;">}}
 
 ## Wait
 
@@ -312,8 +320,8 @@ Si vous le souhaitez, vous pouvez également évaluer la réussite de l'étape e
 Si vous cliquez sur **Test URL**, les assertions de base sont automatiquement renseignées :
 
 - `Response time` _lessThan_ 2000 ms
-- `Header content-type` _is_ « valeur renvoyée »
-- `Status code` _is_ « valeur renvoyée »
+- `Header content-type` _is_ "valeur renvoyée"
+- `Status code` _is_ "valeur renvoyée"
 
 ### Extraire une variable depuis la réponse
 
