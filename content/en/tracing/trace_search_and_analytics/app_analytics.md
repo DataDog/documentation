@@ -7,8 +7,6 @@ aliases:
   - /tracing/advanced_usage/
 ---
 
-{{< wistia vrmqr812sz >}}
-</br>
 [App Analytics][1], formerly known as Trace Search & Analytics, is used to filter Analyzed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
@@ -364,11 +362,11 @@ class MyClass {
   }
 }
 ```
-**Note:** App analytics for [dd.trace.methods][8] or [trace annotations][9] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
+**Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
-[8]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
-[9]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 
+[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 {{% /tab %}}
 {{% tab "Python" %}}
 
