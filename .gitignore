@@ -151,3 +151,6 @@ Temporary Items
 
 /DataDog-dogweb-*/
 Makefile.config
+
+hugo_stats.json
+resources/

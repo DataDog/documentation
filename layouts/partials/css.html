@@ -1,0 +1,9 @@
+{{ $options := dict }}
+{{ if .Site.IsServer }}
+    {{ $options = (dict "enableSourceMap" true) }}
+    {{ $style := resources.Get "styles/main.scss" | toCSS $options | postCSS | minify | fingerprint | resources.PostProcess }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ else }}
+    {{ $style := resources.Get "styles/main.scss" | toCSS $options | postCSS | minify | fingerprint | resources.PostProcess   }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end }}

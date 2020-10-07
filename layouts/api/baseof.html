@@ -20,7 +20,15 @@
   {{- partial "hreflang.html" . -}}
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" type="image/png" href="https://docs.datadoghq.com/favicon.ico">
-  <link rel="stylesheet" href="{{ (index $.Site.Data.manifest "main-dd-css.css") | relURL}}">
+  {{ $options := dict }}
+  {{ if .Site.IsServer }}
+        {{ $options = (dict "enableSourceMap" true) }}
+        {{ $style := resources.Get "styles/main.scss" | toCSS $options }}
+        <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ else }}
+        {{ $style := resources.Get "styles/main.scss" | toCSS $options | postCSS | minify | fingerprint | resources.PostProcess   }}
+        <link rel="stylesheet" href="{{ $style.Permalink }}">
+    {{ end }}
   {{- if ne $.Params.disable_opengraph_meta_tags true -}}
   {{- partial "meta.html" . -}}
   {{- end -}}
