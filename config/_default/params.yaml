@@ -16,9 +16,6 @@ code_languages:
   'sh':
     extension: sh
     name: curl
-  'sh':
-    extension: sh
-    name: curl
   'go':
     extension: go
     name: go
