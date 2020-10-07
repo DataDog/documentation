@@ -69,50 +69,6 @@ function versionSelectHandler(event) {
     }
 }
 
-$('.js-code-example-link').click(function () {
-    // get current position of element in order to keep the scroll position after the size of a code block changes
-    const $this = $(this);
-
-    const selectedCodeLang = $this.data('codeLang');
-
-    const $document = $(document);
-    const currentOffset = $this.offset().top - $document.scrollTop();
-
-    $('.js-code-example-link').each(function () {
-        $(this).removeClass('active');
-
-        if ($(this).data('codeLang') === selectedCodeLang) {
-            $(this).addClass('active');
-        }
-    });
-
-    toggleCodeBlocks(selectedCodeLang);
-
-    // set scroll position so the page doesn't jump when a code lang is changed.
-    $document.scrollTop($this.offset().top - currentOffset);
-});
-
-function toggleCodeBlocks(activeLang) {
-    const codeContainers = $('.js-code-snippet-wrapper');
-
-    codeContainers.find('.js-code-block').removeClass('d-block');
-    codeContainers.find('.js-code-block').addClass('d-none');
-
-    codeContainers.each(function () {
-        if ($(this).find(`.code-block-${activeLang}`).length) {
-            $(this).find(`.code-block-${activeLang}`).removeClass('d-none');
-            $(this).find(`.code-block-${activeLang}`).addClass('d-block');
-        } else {
-            // choose default code language (curl)
-            $(this).find(`.default`).removeClass('d-none');
-            $(this).find(`.default`).addClass('d-block');
-            $(this)
-                .find('.js-code-example-link[data-code-lang="curl"]')
-                .addClass('active');
-        }
-    });
-}
-
 $('.js-expand-all').click(function () {
     $(this).toggleClass('expanded');
     const schemaTable = $(this).closest('.schema-table');

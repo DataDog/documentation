@@ -368,7 +368,7 @@
 
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                                        <div class="code-snippet-wrapper js-code-block">
+                                                        <div class="code-snippet-wrapper">
                                                             <div class="code-snippet">
                                                                 <div class="code-button-wrapper position-absolute">
                                                                     <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
@@ -474,7 +474,7 @@
 
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
-                                                        <div class="code-snippet-wrapper js-code-block">
+                                                        <div class="code-snippet-wrapper">
                                                             <div class="code-snippet">
                                                                 <div class="code-button-wrapper position-absolute">
                                                                     <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
@@ -496,42 +496,27 @@
 
 
                         <h3 class="mb-2">{{ i18n "code_example" }}</h3>
+                        <div class="programming-lang-wrapper js-code-snippet-wrapper" >
 
-                        <div class="code-snippet-wrapper js-code-snippet-wrapper" >
-                            <ul class="nav nav-tabs border-none response-toggle">
-                                {{ $count := 0}}
-                                {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
-
-                                <li class="nav-item">
-                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
-                                </li>
+                            {{ $codeLangs := slice "curl" }}
 
                             {{/* match all Page Resource code examples by operationId */}}
                             {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
 
-                                {{ $count := 1}}
                                 {{ range . }}
-
                                 {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+                                {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
 
-                                {{ if ne $file_extension "sh"}}
-                                <li class="nav-item">
-                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
-                                </li>
-
-                                {{ $count = add $count 1 }}
-                                {{ end }}
-
+                                {{  $codeLangs = $codeLangs | append $lang.name }}
                                 {{ end }}
                             {{ end }}
 
-                            </ul>
+                            {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
 
                             {{ $count := 0 }}
                             {{ $file_extension := "sh" }}
-                            {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
-                            <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                            {{ $lang := index $dot.Site.Params.code_languages "sh" }}
+                            <div class="code-snippet-wrapper code-snippet js-code-block" data-code-lang-block="{{ $lang.name }}" >
                                 <div class="code-button-wrapper position-absolute">
                                     <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                 </div>
@@ -574,14 +559,14 @@
 
                                     {{ $file_content := .Content }}
                                     {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+                                    {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
 
                                     {{ if ne $file_extension "sh"}}
-                                    <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                    <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
                                         <div class="code-button-wrapper position-absolute">
                                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                         </div>
-                                        {{ highlight $file_content $lang.pygments_name "" }}
+                                        {{ highlight $file_content $lang.name "" }}
                                     </div>
                                     {{ $count = add $count 1 }}
                                     {{ end }}
