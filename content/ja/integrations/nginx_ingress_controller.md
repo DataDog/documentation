@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    nginx_ingress_controller: assets/dashboards/overview.json
   logs:
     source: nginx-ingress-controller
   metrics_metadata: metadata.csv

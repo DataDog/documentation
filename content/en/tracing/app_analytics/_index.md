@@ -254,7 +254,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/php/#integrations
+[1]: /tracing/setup/php/#integration-names
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -364,6 +364,10 @@ class MyClass {
   }
 }
 ```
+**Note:** App analytics for [dd.trace.methods][8] or [trace annotations][9] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
+
+[8]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[9]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 
 {{% /tab %}}
 {{% tab "Python" %}}

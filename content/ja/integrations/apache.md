@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: apache
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -63,7 +64,7 @@ Apache チェックは Agent にパッケージ化されています。Apache �
 
 2. Apache サーバーに `mod_status` をインストールし、`ExtendedStatus` を有効にします。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

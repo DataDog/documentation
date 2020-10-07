@@ -116,7 +116,7 @@
   },
 
   "get_started_free_short": {
-    "other": "GET STARTED FREE"
+    "other": "FREE TRIAL"
   },
 
   "documentation_search": {
@@ -295,5 +295,21 @@
   },
   "field": {
     "other": "Field"
+  },
+  "product": {
+    "other": "Product"
+  },
+  "blog": {
+    "other": "Blog"
+  },
+  "about": {
+    "other": "About"
+  },
+  "footer_blurb_heading": {
+    "other": "Can't find something?"
+  },
+  "footer_blurb_desc": {
+    "other": "Our friendly, knowledgeable solutions engineers are here to help!"
   }
+  
 }

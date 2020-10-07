@@ -6,7 +6,9 @@ disable_edit: true
 kind: ドキュメント
 rule_category:
   - クラウドコンフィギュレーション
+scope: ec2
 security: コンプライアンス
+source: ec2
 title: 各 VPC のデフォルトのセキュリティグループがすべてのトラフィックを制限
 type: security_rules
 ---

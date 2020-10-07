@@ -746,6 +746,52 @@ const schemaTable = (tableType, data) => {
   return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}</div>`;
 };
 
+/**
+ * Create translation strings files
+ */
+const createTranslations = (apiYaml, deref, apiVersion) => {
+  const tags = apiYaml.tags.map((tag) => {
+    const name = getTagSlug(tag.name);
+    return {[name]: {"name": tag.name, "description": tag.description}};
+  }).reduce((obj, item) => ({...obj, ...item}) ,{});
+
+  const tagsFilePath = `./data/api/${apiVersion}/translate_tags.json`;
+  fs.writeFileSync(tagsFilePath, safeJsonStringify(tags, null, 2), 'utf8');
+
+  const actions = {};
+  Object.keys(deref.paths)
+    .forEach((path) => {
+      Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
+        const item = {
+          description: action.description,
+          summary: action.summary,
+          // responses: {}
+        }
+        if (action.requestBody) {
+          item['request_description'] = action.requestBody.description || '';
+          if (action.requestBody.content && action.requestBody.content["application/json"]) {
+            item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+          }
+        }
+        /*
+        if (action.responses) {
+          Object.entries(action.responses).forEach(([responseKey, resp]) => {
+            const respObj = {
+              description: resp.description
+            }
+            if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
+              respObj["schema_description"] = resp.content["application/json"].schema.description;
+            }
+            item['responses'][responseKey] = respObj;
+          });
+        } */
+        actions[action.operationId] = item;
+      });
+    });
+  const actionsFilePath = `./data/api/${apiVersion}/translate_actions.json`;
+  fs.writeFileSync(actionsFilePath, safeJsonStringify(actions, null, 2), 'utf8');
+};
+
 
 /**
  * Takes an array of spec file paths and processes them
@@ -761,6 +807,9 @@ const processSpecs = (specs) => {
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
+
+          // create translation ready datafiles
+          createTranslations(fileData, deref, version);
 
           // make a copy in static for postman
           // the postman copy needs to not include the empty "tags" that we

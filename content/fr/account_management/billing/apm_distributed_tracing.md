@@ -36,7 +36,7 @@ Utilisation de 5 hosts, envoi de 20 millions de spans analysées et déploieme
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
 | Hosts d'APM      | 5          | 31 $ par host                                                                                    | 5 * 31 $             | 155 $                  |
 | Tâches Fargate  | 20         | 2 $ par tâche                                                                                     | 20 * 2 $             | 40 $                   |
-| Spans analysées | 20 millions | 5 millions incluses avec 5 hosts d'APM. 1,70 $ par million pour 15 millions de spans analysées supplémentaires | 25 * 1,70 $          | 25,50 $                |
+| Spans analysées | 20 millions | 5 millions incluses avec 5 hosts d'APM. 1,70 $ par million pour 15 millions de spans analysées supplémentaires | 15 * 1,70 $          | 25,50 $                |
 | Total          |            |                                                                                                 | 155 $ + 40 $ + 25,50 $ | **220,50 $ par mois** |
 
 ### Cas nº 3 : services, conteneurs et spans analysées
@@ -55,9 +55,9 @@ Application 1 est exécutée sur 20 à 40 conteneurs déployés sur 4 à 8 in
 
 | Unité de facturation | Quantité | Prix        | Formule    | Sous-total           |
 |---------------|----------|--------------|------------|--------------------|
-| Hosts d'APM     | 7        | 31 $ par host | 7 * 31 $    | 252 $               |
-| Tâches Fargate | 28       | 2 $ par tâche  | 28 * 2 $    | 256 $               |
-| Total         |          |              | 252 $ + 56 $ | **308 $ par mois** |
+| Hosts d'APM     | 7        | 31 $ par host | 7 * 31 $    | 217 $               |
+| Tâches Fargate | 28       | 2 $ par tâche  | 28 * 2 $    | 56 $                |
+| Total         |          |              | 217 $ + 56 $ | **273 $ par mois** |
 
 Remarque : le nombre de conteneurs n'est pas pris en compte si l'Agent est déployé sur les instances EC2.
 
@@ -67,9 +67,9 @@ Agent exécuté sur 20 nœuds worker dans Kubernetes et envoi de 20 millions d
 
 | Unité de facturation     | Quantité   | Prix                                                                       | Formule   | Sous-total           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Hosts d'APM (nœuds) | 20         | 31 $ par host                                                                | 20 * 31 $  | 720 $               |
+| Hosts d'APM (nœuds) | 20         | 31 $ par host                                                                | 20 * 31 $  | 620 $               |
 | Spans analysées    | 20 millions | 20 millions incluses avec 20 hosts d'APM (nœuds). Aucune span analysée supplémentaire | 0 * 1,70 $ | 0                  |
-| Total             |            |                                                                             | 720 $ + 0 $ | **720 $ par mois** |
+| Total             |            |                                                                             | 620 $ + 0 $ | **620 $ par mois** |
 
 Dans le cas de Kubernetes, l'APM est facturé par nœud et non par pod.
 

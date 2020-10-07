@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,7 +43,7 @@ NFS インテグレーションは、マウントごとの NFS クライアン�
 
 NFSstat チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `nfsstat.d/conf.yaml` ファイルを編集して、nfsiostat バイナリスクリプトを指定するか、バイナリインストーラーに含まれているスクリプトを使用します。使用可能なすべてのコンフィギュレーションオプションについては、[nfsstat.d/conf.yaml のサンプル][4]を参照してください。
 

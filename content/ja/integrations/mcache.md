@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: memcached
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -47,7 +48,7 @@ Agent の Memcache チェックを使用して、Memcache のメモリ使用量�
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
 

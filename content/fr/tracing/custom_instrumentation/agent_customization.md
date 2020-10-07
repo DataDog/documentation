@@ -151,9 +151,9 @@ apm_config:
 * `remove_paths_with_digits` : si ce paramètre est défini sur true, les segments de chemin des URL contenant des chiffres sont remplacés par le caractère « ? ».
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
-{{% tab "Traces de pile" %}}
+{{% tab "Stack traces" %}}
 
-Définissez le paramètre `remove_stack_traces` sur true afin de supprimer les traces de pile et de les remplacer par le caractère `?`.
+Définissez le paramètre `remove_stack_traces` sur true afin de supprimer les stack traces et de les remplacer par le caractère `?`.
 
 ```yaml
 apm_config:

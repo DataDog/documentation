@@ -3630,6 +3630,134 @@
         ],
         "type": "object"
       },
+      "LogsArchiveOrder": {
+        "description": "A ordered list of archive IDs.",
+        "properties": {
+          "data": {
+            "description": "The definition of an archive order.",
+            "properties": {
+              "attributes": {
+                "description": "The attributes associated with the archive order.",
+                "properties": {
+                  "archive_ids": {
+                    "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                    "example": [
+                      "a2zcMylnM4OCHpYusxIi1g",
+                      "a2zcMylnM4OCHpYusxIi2g",
+                      "a2zcMylnM4OCHpYusxIi3g"
+                    ],
+                    "items": {
+                      "description": "A given archive ID.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "archive_ids"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "archive_order",
+                "description": "Type of the archive order definition.",
+                "enum": [
+                  "archive_order"
+                ],
+                "example": "archive_order",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ARCHIVE_ORDER"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "LogsArchiveOrderAttributes": {
+        "description": "The attributes associated with the archive order.",
+        "properties": {
+          "archive_ids": {
+            "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+            "example": [
+              "a2zcMylnM4OCHpYusxIi1g",
+              "a2zcMylnM4OCHpYusxIi2g",
+              "a2zcMylnM4OCHpYusxIi3g"
+            ],
+            "items": {
+              "description": "A given archive ID.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "archive_ids"
+        ],
+        "type": "object"
+      },
+      "LogsArchiveOrderDefinition": {
+        "description": "The definition of an archive order.",
+        "properties": {
+          "attributes": {
+            "description": "The attributes associated with the archive order.",
+            "properties": {
+              "archive_ids": {
+                "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                "example": [
+                  "a2zcMylnM4OCHpYusxIi1g",
+                  "a2zcMylnM4OCHpYusxIi2g",
+                  "a2zcMylnM4OCHpYusxIi3g"
+                ],
+                "items": {
+                  "description": "A given archive ID.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "archive_ids"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "archive_order",
+            "description": "Type of the archive order definition.",
+            "enum": [
+              "archive_order"
+            ],
+            "example": "archive_order",
+            "type": "string",
+            "x-enum-varnames": [
+              "ARCHIVE_ORDER"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "LogsArchiveOrderDefinitionType": {
+        "default": "archive_order",
+        "description": "Type of the archive order definition.",
+        "enum": [
+          "archive_order"
+        ],
+        "example": "archive_order",
+        "type": "string",
+        "x-enum-varnames": [
+          "ARCHIVE_ORDER"
+        ]
+      },
       "LogsArchiveState": {
         "description": "The state of the archive.",
         "enum": [
@@ -4940,6 +5068,7 @@
             "properties": {
               "id": {
                 "description": "ID of the organization.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -4972,6 +5101,7 @@
         "properties": {
           "id": {
             "description": "ID of the organization.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -4998,11 +5128,13 @@
         "properties": {
           "data": {
             "description": "Relationships to organization objects.",
+            "example": [],
             "items": {
               "description": "Relationship to organization object.",
               "properties": {
                 "id": {
                   "description": "ID of the organization.",
+                  "example": "00000000-0000-0000-0000-000000000000",
                   "type": "string"
                 },
                 "type": {
@@ -5267,6 +5399,7 @@
         "properties": {
           "data": {
             "description": "Relationships to user objects.",
+            "example": [],
             "items": {
               "description": "Relationship to user object.",
               "properties": {
@@ -6164,6 +6297,7 @@
           },
           "name": {
             "description": "Name of the role.",
+            "example": "developers",
             "type": "string"
           }
         },
@@ -6192,6 +6326,7 @@
               },
               "name": {
                 "description": "Name of the role.",
+                "example": "developers",
                 "type": "string"
               }
             },
@@ -6240,6 +6375,7 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to user objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to user object.",
                       "properties": {
@@ -6319,6 +6455,7 @@
                   },
                   "name": {
                     "description": "Name of the role.",
+                    "example": "developers",
                     "type": "string"
                   }
                 },
@@ -6367,6 +6504,7 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
@@ -6452,6 +6590,7 @@
                   },
                   "name": {
                     "description": "Name of the role.",
+                    "example": "developers",
                     "type": "string"
                   }
                 },
@@ -6563,6 +6702,7 @@
             "properties": {
               "data": {
                 "description": "Relationships to user objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to user object.",
                   "properties": {
@@ -6785,6 +6925,7 @@
           },
           "id": {
             "description": "ID of the role.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -6837,6 +6978,7 @@
               },
               "id": {
                 "description": "ID of the role.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -7329,7 +7471,7 @@
                         "type": "array"
                       },
                       "metric": {
-                        "description": "The target field to aggregate over when using the sum or max aggregations.",
+                        "description": "The target field to aggregate over when using the sum or max\naggregations.",
                         "type": "string"
                       },
                       "name": {
@@ -7668,7 +7810,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -7677,6 +7819,7 @@
                 },
                 "query": {
                   "description": "Query to run on logs.",
+                  "example": "a < 3",
                   "type": "string"
                 }
               },
@@ -7926,7 +8069,7 @@
             "type": "array"
           },
           "metric": {
-            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
           },
           "name": {
@@ -7992,7 +8135,7 @@
             "type": "array"
           },
           "metric": {
-            "description": "The target field to aggregate over when using the sum or max aggregations.",
+            "description": "The target field to aggregate over when using the sum or max\naggregations.",
             "type": "string"
           },
           "name": {
@@ -8001,6 +8144,7 @@
           },
           "query": {
             "description": "Query to run on logs.",
+            "example": "a < 3",
             "type": "string"
           }
         },
@@ -8221,7 +8365,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -8460,7 +8604,7 @@
                   "type": "array"
                 },
                 "metric": {
-                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                   "type": "string"
                 },
                 "name": {
@@ -8491,7 +8635,7 @@
         "description": "Object description of a security signal.",
         "properties": {
           "attributes": {
-            "description": "The JSON object containing all signal attributes and their associated values.",
+            "description": "The object containing all signal attributes and their\nassociated values.",
             "properties": {
               "attributes": {
                 "additionalProperties": {},
@@ -8636,7 +8780,7 @@
               "description": "Object description of a security signal.",
               "properties": {
                 "attributes": {
-                  "description": "The JSON object containing all signal attributes and their associated values.",
+                  "description": "The object containing all signal attributes and their\nassociated values.",
                   "properties": {
                     "attributes": {
                       "additionalProperties": {},
@@ -9060,6 +9204,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -9092,11 +9237,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -9131,6 +9278,7 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
@@ -9497,6 +9645,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -9529,11 +9678,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -9568,6 +9719,7 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
@@ -10098,6 +10250,12 @@
         "properties": {
           "data": {
             "description": "An array of services.",
+            "example": [
+              {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "services"
+              }
+            ],
             "items": {
               "description": "Service data from responses.",
               "properties": {
@@ -10295,6 +10453,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -10327,11 +10486,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -10366,6 +10527,7 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
@@ -10810,6 +10972,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -10842,11 +11005,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -10881,6 +11046,7 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
@@ -11243,6 +11409,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -11275,11 +11442,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -11314,6 +11483,7 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
@@ -11840,6 +12010,15 @@
         "properties": {
           "data": {
             "description": "An array of teams.",
+            "example": [
+              {
+                "attributes": {
+                  "name": "team name"
+                },
+                "id": "00000000-0000-0000-0000-000000000000",
+                "type": "teams"
+              }
+            ],
             "items": {
               "description": "Team data from a response.",
               "properties": {
@@ -12033,6 +12212,7 @@
                               "properties": {
                                 "id": {
                                   "description": "ID of the organization.",
+                                  "example": "00000000-0000-0000-0000-000000000000",
                                   "type": "string"
                                 },
                                 "type": {
@@ -12065,11 +12245,13 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to organization objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to organization object.",
                                 "properties": {
                                   "id": {
                                     "description": "ID of the organization.",
+                                    "example": "00000000-0000-0000-0000-000000000000",
                                     "type": "string"
                                   },
                                   "type": {
@@ -12104,6 +12286,7 @@
                           "properties": {
                             "data": {
                               "description": "Relationships to user objects.",
+                              "example": [],
                               "items": {
                                 "description": "Relationship to user object.",
                                 "properties": {
@@ -12294,6 +12477,7 @@
                     "properties": {
                       "id": {
                         "description": "ID of the organization.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -12326,11 +12510,13 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to organization objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to organization object.",
                       "properties": {
                         "id": {
                           "description": "ID of the organization.",
+                          "example": "00000000-0000-0000-0000-000000000000",
                           "type": "string"
                         },
                         "type": {
@@ -12365,6 +12551,7 @@
                 "properties": {
                   "data": {
                     "description": "Relationships to user objects.",
+                    "example": [],
                     "items": {
                       "description": "Relationship to user object.",
                       "properties": {
@@ -12499,6 +12686,7 @@
         "properties": {
           "email": {
             "description": "The email of the user.",
+            "example": "joe.doe@example.com",
             "type": "string"
           },
           "name": {
@@ -12523,6 +12711,7 @@
             "properties": {
               "email": {
                 "description": "The email of the user.",
+                "example": "joe.doe@example.com",
                 "type": "string"
               },
               "name": {
@@ -12608,6 +12797,7 @@
                 "properties": {
                   "email": {
                     "description": "The email of the user.",
+                    "example": "joe.doe@example.com",
                     "type": "string"
                   },
                   "name": {
@@ -12927,6 +13117,7 @@
         "properties": {
           "data": {
             "description": "List of user invitations.",
+            "example": [],
             "items": {
               "description": "Object to create a user invitation.",
               "properties": {
@@ -13173,6 +13364,7 @@
                         "properties": {
                           "id": {
                             "description": "ID of the organization.",
+                            "example": "00000000-0000-0000-0000-000000000000",
                             "type": "string"
                           },
                           "type": {
@@ -13205,11 +13397,13 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to organization objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to organization object.",
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -13244,6 +13438,7 @@
                     "properties": {
                       "data": {
                         "description": "Relationships to user objects.",
+                        "example": [],
                         "items": {
                           "description": "Relationship to user object.",
                           "properties": {
@@ -13792,6 +13987,7 @@
                 "properties": {
                   "id": {
                     "description": "ID of the organization.",
+                    "example": "00000000-0000-0000-0000-000000000000",
                     "type": "string"
                   },
                   "type": {
@@ -13824,11 +14020,13 @@
             "properties": {
               "data": {
                 "description": "Relationships to organization objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to organization object.",
                   "properties": {
                     "id": {
                       "description": "ID of the organization.",
+                      "example": "00000000-0000-0000-0000-000000000000",
                       "type": "string"
                     },
                     "type": {
@@ -13863,6 +14061,7 @@
             "properties": {
               "data": {
                 "description": "Relationships to user objects.",
+                "example": [],
                 "items": {
                   "description": "Relationship to user object.",
                   "properties": {
@@ -13975,6 +14174,7 @@
           },
           "id": {
             "description": "ID of the user.",
+            "example": "00000000-0000-0000-0000-000000000000",
             "type": "string"
           },
           "type": {
@@ -14023,6 +14223,7 @@
               },
               "id": {
                 "description": "ID of the user.",
+                "example": "00000000-0000-0000-0000-000000000000",
                 "type": "string"
               },
               "type": {
@@ -14117,6 +14318,7 @@
                           "properties": {
                             "id": {
                               "description": "ID of the organization.",
+                              "example": "00000000-0000-0000-0000-000000000000",
                               "type": "string"
                             },
                             "type": {
@@ -14149,11 +14351,13 @@
                       "properties": {
                         "data": {
                           "description": "Relationships to organization objects.",
+                          "example": [],
                           "items": {
                             "description": "Relationship to organization object.",
                             "properties": {
                               "id": {
                                 "description": "ID of the organization.",
+                                "example": "00000000-0000-0000-0000-000000000000",
                                 "type": "string"
                               },
                               "type": {
@@ -14188,6 +14392,7 @@
                       "properties": {
                         "data": {
                           "description": "Relationships to user objects.",
+                          "example": [],
                           "items": {
                             "description": "Relationship to user object.",
                             "properties": {
@@ -15373,7 +15578,7 @@
     },
     "/api/v2/logs/analytics/aggregate": {
       "post": {
-        "description": "The public API endpoint to aggregate events into buckets and compute metrics and timeseries.",
+        "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
         "operationId": "AggregateLogs",
         "requestBody": {
           "content": {
@@ -15879,8 +16084,302 @@
         "tags": [
           "Logs"
         ],
-        "x-codegen-request-body-name": "body",
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v2/logs/config/archive-order": {
+      "get": {
+        "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
+        "operationId": "GetLogsArchiveOrder",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "A ordered list of archive IDs.",
+                  "properties": {
+                    "data": {
+                      "description": "The definition of an archive order.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes associated with the archive order.",
+                          "properties": {
+                            "archive_ids": {
+                              "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                              "example": [
+                                "a2zcMylnM4OCHpYusxIi1g",
+                                "a2zcMylnM4OCHpYusxIi2g",
+                                "a2zcMylnM4OCHpYusxIi3g"
+                              ],
+                              "items": {
+                                "description": "A given archive ID.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "archive_ids"
+                          ],
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "archive_order",
+                          "description": "Type of the archive order definition.",
+                          "enum": [
+                            "archive_order"
+                          ],
+                          "example": "archive_order",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ARCHIVE_ORDER"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Get archive order",
+        "tags": [
+          "Logs Archives"
+        ]
+      },
+      "put": {
+        "description": "Update the order of your archives. Since logs are processed sequentially, reordering an archive may change\nthe structure and content of the data processed by other archives.\n\n**Note**: Using the `PUT` method updates your archive's order by replacing the current order\nwith the new one.",
+        "operationId": "UpdateLogsArchiveOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "A ordered list of archive IDs.",
+                "properties": {
+                  "data": {
+                    "description": "The definition of an archive order.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The attributes associated with the archive order.",
+                        "properties": {
+                          "archive_ids": {
+                            "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                            "example": [
+                              "a2zcMylnM4OCHpYusxIi1g",
+                              "a2zcMylnM4OCHpYusxIi2g",
+                              "a2zcMylnM4OCHpYusxIi3g"
+                            ],
+                            "items": {
+                              "description": "A given archive ID.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "archive_ids"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "archive_order",
+                        "description": "Type of the archive order definition.",
+                        "enum": [
+                          "archive_order"
+                        ],
+                        "example": "archive_order",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ARCHIVE_ORDER"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "description": "An object containing the new ordered list of archive IDs.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "A ordered list of archive IDs.",
+                  "properties": {
+                    "data": {
+                      "description": "The definition of an archive order.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes associated with the archive order.",
+                          "properties": {
+                            "archive_ids": {
+                              "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                              "example": [
+                                "a2zcMylnM4OCHpYusxIi1g",
+                                "a2zcMylnM4OCHpYusxIi2g",
+                                "a2zcMylnM4OCHpYusxIi3g"
+                              ],
+                              "items": {
+                                "description": "A given archive ID.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "archive_ids"
+                          ],
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "archive_order",
+                          "description": "Type of the archive order definition.",
+                          "enum": [
+                            "archive_order"
+                          ],
+                          "example": "archive_order",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ARCHIVE_ORDER"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Update archive order",
+        "tags": [
+          "Logs Archives"
+        ],
+        "x-codegen-request-body-name": "body"
       }
     },
     "/api/v2/logs/config/archives": {
@@ -20803,6 +21302,7 @@
                           },
                           "name": {
                             "description": "Name of the role.",
+                            "example": "developers",
                             "type": "string"
                           }
                         },
@@ -20851,6 +21351,7 @@
                             "properties": {
                               "data": {
                                 "description": "Relationships to user objects.",
+                                "example": [],
                                 "items": {
                                   "description": "Relationship to user object.",
                                   "properties": {
@@ -20943,6 +21444,7 @@
                             },
                             "name": {
                               "description": "Name of the role.",
+                              "example": "developers",
                               "type": "string"
                             }
                           },
@@ -21375,6 +21877,7 @@
                       },
                       "id": {
                         "description": "ID of the role.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -22307,6 +22810,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -22339,11 +22843,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -22378,6 +22884,7 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
@@ -22929,6 +23436,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -22961,11 +23469,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -23000,6 +23510,7 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
@@ -23526,6 +24037,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -23558,11 +24070,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -23597,6 +24111,7 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
@@ -24273,7 +24788,7 @@
                                   "type": "array"
                                 },
                                 "metric": {
-                                  "description": "The target field to aggregate over when using the sum or max aggregations.",
+                                  "description": "The target field to aggregate over when using the sum or max\naggregations.",
                                   "type": "string"
                                 },
                                 "name": {
@@ -24570,7 +25085,7 @@
                           "type": "array"
                         },
                         "metric": {
-                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
                         },
                         "name": {
@@ -24579,6 +25094,7 @@
                         },
                         "query": {
                           "description": "Query to run on logs.",
+                          "example": "a < 3",
                           "type": "string"
                         }
                       },
@@ -24831,7 +25347,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -25229,7 +25745,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -25502,7 +26018,7 @@
                           "type": "array"
                         },
                         "metric": {
-                          "description": "The target field to aggregate over when using the sum or max aggregations.",
+                          "description": "The target field to aggregate over when using the sum or max\naggregations.",
                           "type": "string"
                         },
                         "name": {
@@ -25748,7 +26264,7 @@
                             "type": "array"
                           },
                           "metric": {
-                            "description": "The target field to aggregate over when using the sum or max aggregations.",
+                            "description": "The target field to aggregate over when using the sum or max\naggregations.",
                             "type": "string"
                           },
                           "name": {
@@ -25983,7 +26499,7 @@
                         "description": "Object description of a security signal.",
                         "properties": {
                           "attributes": {
-                            "description": "The JSON object containing all signal attributes and their associated values.",
+                            "description": "The object containing all signal attributes and their\nassociated values.",
                             "properties": {
                               "attributes": {
                                 "additionalProperties": {},
@@ -26225,7 +26741,7 @@
                         "description": "Object description of a security signal.",
                         "properties": {
                           "attributes": {
-                            "description": "The JSON object containing all signal attributes and their associated values.",
+                            "description": "The object containing all signal attributes and their\nassociated values.",
                             "properties": {
                               "attributes": {
                                 "additionalProperties": {},
@@ -26434,6 +26950,12 @@
                   "properties": {
                     "data": {
                       "description": "An array of services.",
+                      "example": [
+                        {
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "services"
+                        }
+                      ],
                       "items": {
                         "description": "Service data from responses.",
                         "properties": {
@@ -26631,6 +27153,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -26663,11 +27186,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -26702,6 +27227,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -27278,6 +27804,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -27310,11 +27837,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -27349,6 +27878,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -27914,6 +28444,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -27946,11 +28477,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -27985,6 +28518,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -28547,6 +29081,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -28579,11 +29114,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -28618,6 +29155,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -28878,6 +29416,15 @@
                   "properties": {
                     "data": {
                       "description": "An array of teams.",
+                      "example": [
+                        {
+                          "attributes": {
+                            "name": "team name"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000000",
+                          "type": "teams"
+                        }
+                      ],
                       "items": {
                         "description": "Team data from a response.",
                         "properties": {
@@ -29071,6 +29618,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -29103,11 +29651,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29142,6 +29692,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -29714,6 +30265,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -29746,11 +30298,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -29785,6 +30339,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -30346,6 +30901,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -30378,11 +30934,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -30417,6 +30975,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -30975,6 +31534,7 @@
                                         "properties": {
                                           "id": {
                                             "description": "ID of the organization.",
+                                            "example": "00000000-0000-0000-0000-000000000000",
                                             "type": "string"
                                           },
                                           "type": {
@@ -31007,11 +31567,13 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to organization objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to organization object.",
                                           "properties": {
                                             "id": {
                                               "description": "ID of the organization.",
+                                              "example": "00000000-0000-0000-0000-000000000000",
                                               "type": "string"
                                             },
                                             "type": {
@@ -31046,6 +31608,7 @@
                                     "properties": {
                                       "data": {
                                         "description": "Relationships to user objects.",
+                                        "example": [],
                                         "items": {
                                           "description": "Relationship to user object.",
                                           "properties": {
@@ -31269,6 +31832,7 @@
                 "properties": {
                   "data": {
                     "description": "List of user invitations.",
+                    "example": [],
                     "items": {
                       "description": "Object to create a user invitation.",
                       "properties": {
@@ -31604,7 +32168,7 @@
     },
     "/api/v2/users": {
       "get": {
-        "description": "Get the list of all users in the organization. This list includes all users even if they are disabled or unverified.",
+        "description": "Get the list of all users in the organization. This list includes\nall users even if they are deactivated or unverified.",
         "operationId": "ListUsers",
         "parameters": [
           {
@@ -31630,7 +32194,7 @@
             }
           },
           {
-            "description": "User attribute to order results by. Sort order is ascending by default. Sort order is descending if the field is prefixed by a negative sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.",
+            "description": "User attribute to order results by. Sort order is ascending by default.\nSort order is descending if the field\nis prefixed by a negative sign, for example `sort=-name`. Options: `name`,\n`modified_at`, `user_count`.",
             "in": "query",
             "name": "sort",
             "required": false,
@@ -31747,6 +32311,7 @@
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -31779,11 +32344,13 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to organization objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to organization object.",
                                       "properties": {
                                         "id": {
                                           "description": "ID of the organization.",
+                                          "example": "00000000-0000-0000-0000-000000000000",
                                           "type": "string"
                                         },
                                         "type": {
@@ -31818,6 +32385,7 @@
                                 "properties": {
                                   "data": {
                                     "description": "Relationships to user objects.",
+                                    "example": [],
                                     "items": {
                                       "description": "Relationship to user object.",
                                       "properties": {
@@ -32236,6 +32804,7 @@
                         "properties": {
                           "email": {
                             "description": "The email of the user.",
+                            "example": "joe.doe@example.com",
                             "type": "string"
                           },
                           "name": {
@@ -32387,6 +32956,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -32419,11 +32989,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -32458,6 +33030,7 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
@@ -32837,7 +33410,7 @@
     },
     "/api/v2/users/{user_id}": {
       "delete": {
-        "description": "Disable a user. Can only be used with an application key belonging to an administrator user.",
+        "description": "Disable a user. Can only be used with an application key belonging\nto an administrator user.",
         "operationId": "DisableUser",
         "parameters": [
           {
@@ -32993,6 +33566,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -33025,11 +33599,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -33064,6 +33640,7 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
@@ -33441,7 +34018,7 @@
         "x-codegen-request-body-name": "body"
       },
       "patch": {
-        "description": "Edit a user. Can only be used with an application key belonging to an administrator user.",
+        "description": "Edit a user. Can only be used with an application key belonging\nto an administrator user.",
         "operationId": "UpdateUser",
         "parameters": [
           {
@@ -33483,6 +34060,7 @@
                       },
                       "id": {
                         "description": "ID of the user.",
+                        "example": "00000000-0000-0000-0000-000000000000",
                         "type": "string"
                       },
                       "type": {
@@ -33582,6 +34160,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -33614,11 +34193,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -33653,6 +34234,7 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
@@ -34082,7 +34664,7 @@
     },
     "/api/v2/users/{user_id}/orgs": {
       "get": {
-        "description": "Get a user organization. Returns the user information and all organizations joined by this user.",
+        "description": "Get a user organization. Returns the user information and all organizations\njoined by this user.",
         "operationId": "ListUserOrganizations",
         "parameters": [
           {
@@ -34163,6 +34745,7 @@
                                   "properties": {
                                     "id": {
                                       "description": "ID of the organization.",
+                                      "example": "00000000-0000-0000-0000-000000000000",
                                       "type": "string"
                                     },
                                     "type": {
@@ -34195,11 +34778,13 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to organization objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to organization object.",
                                     "properties": {
                                       "id": {
                                         "description": "ID of the organization.",
+                                        "example": "00000000-0000-0000-0000-000000000000",
                                         "type": "string"
                                       },
                                       "type": {
@@ -34234,6 +34819,7 @@
                               "properties": {
                                 "data": {
                                   "description": "Relationships to user objects.",
+                                  "example": [],
                                   "items": {
                                     "description": "Relationship to user object.",
                                     "properties": {
@@ -34613,7 +35199,7 @@
     },
     "/api/v2/users/{user_id}/permissions": {
       "get": {
-        "description": "Get a user permission set. Returns a list of the user’s permissions granted by the associated user's roles.",
+        "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
         "operationId": "ListUserPermissions",
         "parameters": [
           {
@@ -34823,7 +35409,7 @@
       "name": "Roles"
     },
     {
-      "description": "Detection rules for generating signals and listing of generated signals",
+      "description": "Detection rules for generating signals and listing of generated\nsignals.",
       "name": "Security Monitoring"
     },
     {

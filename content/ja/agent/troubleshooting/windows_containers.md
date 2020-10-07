@@ -39,9 +39,9 @@ Hyper-V 分離モードはサポートされていません。
 
 Datadog Agent は `nodeSelector` を使用して、`targetSystem` に基づき Linux または Windows ノードを自動的に選択します。
 
-ただし、Kube State メトリクス (デフォルトでインストール済み) が Windows ノードにスケジュールされる状況につながるような場合は、この限りではありません。
+ただし、Kube State メトリクス (デフォルトでインストール済み) が Windows ノードにスケジュールできない状況につながるような場合は、この限りではありません。
 
-この問題を回避するには、2 つのオプションがあります。
+この問題を回避するには、3 つのオプションがあります。
 
 * Windows ノードに taint を適用します。Windows では、Agent は常に `node.kubernetes.io/os=windows:NoSchedule` taint を許可します。
 * Datatog Helm チャート `values.yaml` を使用して、Kube State メトリクスノードセレクタを設定します。

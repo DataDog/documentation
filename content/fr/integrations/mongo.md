@@ -5,7 +5,11 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  monitors: {}
+  logs:
+    source: mongodb
+  metrics_metadata: metadata.csv
+  monitors:
+    '[MongoDB] High incoming connections': assets/monitors/high_connections.json
   saved_views:
     operations_by_type_overview: assets/saved_views/operations_by_type_overview.json
     queries: assets/saved_views/queries.json
@@ -65,13 +69,18 @@ Le check MongoDB est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez 
 
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Préparer MongoDB
 
 Dans un shell Mongo, créez un utilisateur en lecture seule pour l'Agent Datadog dans la base de données `admin` :
 
-```
+```shell
 # S'authentifier en tant qu'administrateur.
 use admin
 db.auth("admin", "<VOTRE_MOTDEPASSE_ADMIN_MONGODB>")
@@ -81,59 +90,69 @@ db.addUser("datadog", "<MOTDEPASSEUNIQUE>", true)
 
 # Sur MongoDB 3.x ou une version ultérieure, utiliser la commande createUser.
 db.createUser({
-  "user":"datadog",
+  "user": "datadog",
   "pwd": "<MOTDEPASSEUNIQUE>",
-  "roles" : [
-    {role: 'read', db: 'admin' },
-    {role: 'clusterMonitor', db: 'admin'},
-    {role: 'read', db: 'local' }
+  "roles": [
+    { role: "read", db: "admin" },
+    { role: "clusterMonitor", db: "admin" },
+    { role: "read", db: "local" }
   ]
 })
 ```
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `mongo.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple mongo.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `mongo.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple mongo.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
-   instances:
-     ## @param server - string - required
-     ## Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
-     ## E.g. mongodb://datadog:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27016/admin
-     #
-     - server: "mongodb://datadog:<UNIQUEPASSWORD>@<HOST>:<PORT>/<DB_NAME>"
 
-       ## @param replica_check - boolean - required - default: true
+   instances:
+       ## @param hosts - list of strings - required
+       ## Hosts to collect metrics from, as is appropriate for your deployment topology.
+       ## E.g. for a standalone deployment, specify the hostname and port of the mongod instance.
+       ## For replica sets or sharded clusters, see instructions in the sample conf.yaml.
+       #
+     - hosts:
+         - <HOST>:<PORT>
+
+       ## @param username - string - optional
+       ## The username to use for authentication.
+       #
+       username: datadog
+
+       ## @param password - string - optional
+       ## The password to use for authentication.
+       #
+       password: <UNIQUEPASSWORD>
+
+       ## @param database - string - optional
+       ## The database to collect metrics from.
+       #
+       database: <DATABASE>
+
+       ## @param options - mapping - optional
+       ## Connection options. For a complete list, see:
+       ## https://docs.mongodb.com/manual/reference/connection-string/#connections-connection-options
+       #
+       options:
+         authSource: admin
+
+       ## @param replica_check - boolean - optional - default: true
        ## Whether or not to read from available replicas.
-       ## Disable this if any replicas are inaccessible to the agent.
+       ## Disable this if any replicas are inaccessible to the Agent.
        #
        replica_check: true
-
-       ## @param additional_metrics - list of strings - optional
-       ## By default, the check collects a sample of metrics from MongoDB.
-       ## This  parameter instructs the check to collect additional metrics on specific topics.
-       ## Available options are:
-       ##   * `metrics.commands` - Use of database commands
-       ##   * `tcmalloc` -  TCMalloc memory allocator
-       ##   * `top` - Usage statistics for each collection
-       ##   * `collection` - Metrics of the specified collections
-       #
-       additional_metrics:
-         - metrics.commands
-         - tcmalloc
-         - top
-         - collection
    ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
 
 ##### Collecte de traces
 
-L'APM Datadog s'intègre à Mongo pour visualiser les traces sur l'ensemble de votre système distribué. La collecte de traces est activée par défaut dans les versions 6 et ultérieures de l'Agent Datadog. Pour commencer à recueillir des traces :
+L'APM Datadog s'intègre à Mongo pour vous permettre de visualiser les traces sur l'ensemble de votre système distribué. La collecte de traces est activée par défaut dans les versions 6 et ultérieures de l'Agent Datadog. Pour commencer à recueillir des traces :
 
-1. [Activez la collecte de traces dans Datadog][6].
-2. [Instrumentez l'application qui envoie des requêtes à Mongo][7].
+1. [Activez la collecte de trace dans Datadog][4].
+2. [Instrumentez l'application qui envoie des requêtes à Mongo][5].
 
 ##### Collecte de logs
 
@@ -155,52 +174,68 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        source: mongodb
    ```
 
-    Modifiez les valeurs des paramètres `service` et `path` en fonction de votre environnement. Consultez le [fichier d'exemple mongo.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `service` et `path` en fonction de votre environnement. Consultez le [fichier d'exemple mongo.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/tracing/send_traces/
+[5]: https://docs.datadoghq.com/fr/tracing/setup/
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                                                                                                                                                           |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `mongo`                                                                                                                                                                         |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                                                                                                                   |
-| `<CONFIG_INSTANCE>`  | `{"server": "mongodb://datadog:<MOTDEPASSEUNIQUE>@%%host%%:%%port%%/<NOM_BDD>", "replica_check": true, "additional_metrics": "metrics.commands","tcmalloc","top","collection"]}` |
+| Paramètre            | Valeur                                                                                                                                     |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `mongo`                                                                                                                                   |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                                                             |
+| `<CONFIG_INSTANCE>`  | `{"hosts": ["%%hosts%%:%%port%%], "username": "datadog", "password : "<MOTDEPASSEUNIQUE>", "database": "<BASEDEDONNÉES>", "replica_check": true}` |
 
 ##### Collecte de traces
 
-L'APM pour applications conteneurisées est pris en charge sur les hosts exécutant les versions 6 et ultérieures de l'Agent, mais nécessite une configuration supplémentaire pour commencer à recueillir des traces.
+L'APM dédié aux applications conteneurisées est pris en charge par les hosts exécutant les versions 6 et ultérieures de l'Agent, mais nécessite une configuration supplémentaire pour recueillir des traces.
 
 Variables d'environnement requises sur le conteneur de l'Agent :
 
-| Paramètre            | Valeur                                                                      |
-| -------------------- | -------------------------------------------------------------------------- |
-| `<DD_API_KEY>` | `api_key`                                                                  |
-| `<DD_APM_ENABLED>`      | true                                                              |
-| `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
+| Paramètre                    | Valeur     |
+| ---------------------------- | --------- |
+| `<DD_API_KEY>`               | `api_key` |
+| `<DD_APM_ENABLED>`           | true      |
+| `<DD_APM_NON_LOCAL_TRAFFIC>` | true      |
 
-Consultez les sections [Tracing d'applications Kubernetes][9] et [Configuration de DaemonSet Kubernetes][11] pour consulter la liste complète des variables d'environnement et configurations disponibles.
+Consultez les sections [Tracing d'applications Kubernetes][2] et [Configuration de DaemonSet Kubernetes][3] pour consulter la liste complète des variables d'environnement et configurations disponibles.
 
-Ensuite, [instrumentez votre conteneur d'application][7] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
+Ensuite, [instrumentez votre conteneur d'application][4] et définissez `DD_AGENT_HOST` sur le nom du conteneur de votre Agent.
 
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][11].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
 
 | Paramètre      | Valeur                                       |
 | -------------- | ------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "mongodb", "service": "mongo"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[4]: https://docs.datadoghq.com/fr/tracing/setup/
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][12] et cherchez `mongo` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `mongo` dans la section Checks.
 
 ## Données collectées
 
@@ -208,7 +243,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "mongo" >}}
 
 
-Consultez la [documentation sur MongoDB 3.0][14] (en anglais) pour en savoir plus sur certaines de ces métriques.
+Consultez la [documentation sur MongoDB 3.0][4] (en anglais) pour en savoir plus sur certaines de ces métriques.
 
 **REMARQUE** : les métriques suivantes ne sont PAS recueillies par défaut. Utilisez le paramètre `additional_metrics` dans votre fichier `mongo.d/conf.yaml` pour les recueillir :
 
@@ -236,33 +271,24 @@ Ce check émet un événement chaque fois que le statut de réplication d'un nœ
 ### Checks de service
 
 **mongodb.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à MongoDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à MongoDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][15].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
 Lisez notre série d'articles de blog à propos de la collecte de métriques MongoDB avec Datadog :
 
-- [Surveillance des métriques de performance MongoDB (WiredTiger)][16]
-- [Surveillance des métriques de performance MongoDB (MMAP)][17]
+- [Surveillance des métriques de performance MongoDB (WiredTiger)][6]
+- [Surveillance des métriques de performance MongoDB (MMAP)][7]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/tracing/send_traces/
-[7]: https://docs.datadoghq.com/fr/tracing/setup/
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/fr/agent/kubernetes/apm/?tab=java
-[10]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[11]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/mongo/metadata.csv
-[14]: https://docs.mongodb.org/manual/reference/command/dbStats
-[15]: https://docs.datadoghq.com/fr/help/
-[16]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
-[17]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.mongodb.org/manual/reference/command/dbStats
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
+[7]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap

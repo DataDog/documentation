@@ -91,9 +91,11 @@ further_reading:
 
 個別のモニターを編集するには、該当する行にカーソルを合わせて右端にある Edit、Clone、Mute、Delete の各ボタンを選択します。モニターの詳細を表示するには、名前をクリックしてステータスページにアクセスします。
 
+**注**: [Datadog モバイルアプリ][7]を使用して、モバイル端末でモニターの閲覧、ミュート、ミュート解除を行うことができます。
+
 ### トリガー構成済のモニター
 
-[トリガー構成済のモニター][7]ページから、トリガーされたモニターを一括でミュートまたは[解決][6]できます。このページにはトリガー済のステータス (Alert、Warn、No Data) にあるモニターのみが表示されます。
+[トリガー構成済のモニター][8]ページから、トリガーされたモニターを一括でミュートまたは[解決][6]できます。このページにはトリガー済のステータス (Alert、Warn、No Data) にあるモニターのみが表示されます。
 
 #### グループ結果
 
@@ -109,7 +111,7 @@ further_reading:
 
 ### モニタータグ
 
-モニタータグは Agent またはインテグレーションから送信されたタグとは別の独立したタグです。モニターに直接タグを追加することで、[モニターの管理][1]、[トリガー構成済のモニター][7]、[ダウンタイムの管理][8]ページのフィルタリングが可能です。モニタータグについての詳細は、[タグ付けについてのドキュメント][9]をご参照ください。
+モニタータグは Agent またはインテグレーションから送信されたタグとは別の独立したタグです。モニターに直接タグを追加することで、[モニターの管理][1]、[トリガー構成済のモニター][8]、[ダウンタイムの管理][9]ページのフィルタリングが可能です。モニタータグについての詳細は、[タグ付けについてのドキュメント][10]をご参照ください。
 
 ## その他の参考資料
 
@@ -121,6 +123,7 @@ further_reading:
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [5]: /ja/monitors/monitor_types/
 [6]: /ja/monitors/monitor_status/#resolve
-[7]: https://app.datadoghq.com/monitors/triggered
-[8]: https://app.datadoghq.com/monitors#downtime
-[9]: /ja/getting_started/tagging/assigning_tags/?tab=monitors#ui
+[7]: /ja/mobile/#monitors
+[8]: https://app.datadoghq.com/monitors/triggered
+[9]: https://app.datadoghq.com/monitors#downtime
+[10]: /ja/getting_started/tagging/assigning_tags/?tab=monitors#ui

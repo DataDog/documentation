@@ -88,7 +88,7 @@ Then click **Save Location and Generate Configuration File** to create your priv
 
 ### Configure your private location
 
-Depending on your internal network set up, you can add initial configuration parameters (proxy and reserved IPs configuration) to your private location configuration file. The parameters added in **Step 2** are automatically reflected in the **Step 3** configuration file. 
+Configure your private location by customizing the generated configuration file. Initial configuration parameters like [proxy] (#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) are added in **Step 2** and are automatically reflected in the **Step 3** configuration file. Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
 
 #### Proxy Configuration
 
@@ -110,7 +110,7 @@ If some of the endpoints you are willing to test are located within one or sever
 
 #### Advanced Configuration
 
-[Advanced configuration options][9] are available and can be found by running the below `help` command: 
+[Advanced configuration options][9] are available and can be found by running the below `help` command:
 
 ```shell
 docker run --rm datadog/synthetics-private-location-worker --help

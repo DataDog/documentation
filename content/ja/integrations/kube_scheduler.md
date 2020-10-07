@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    kube_scheduler: assets/dashboards/overview.json
   logs:
     source: kube_scheduler
   metrics_metadata: metadata.csv
