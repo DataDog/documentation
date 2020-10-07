@@ -31,4 +31,4 @@ markup:
     guessSyntax: true
 
 # so we can access images as resources
-# assetDir: "static"
+assetDir: "static"
