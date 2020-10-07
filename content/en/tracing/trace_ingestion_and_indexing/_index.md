@@ -10,10 +10,6 @@ description: "Learn how to control Ingestion and Indexing rates with Tracing wit
 
 With Tracing without Limits™, both the ingestion of traces to Datadog as well as the indexing of those traces for 15 days are fully customizable.
 
-<div class="alert alert-warning">
-These features are currently in beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to be added to the beta.
-</div>
-
 ### Ingestion Controls
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}

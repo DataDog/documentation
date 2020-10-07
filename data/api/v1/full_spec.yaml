@@ -7943,7 +7943,7 @@ components:
       - DOUBLE
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
-        of one or more metrics, log events, or Analyzed Spans over time.
+        of one or more metrics, log events, or indexed spans over time.
       properties:
         custom_links:
           description: List of custom links.
@@ -8846,7 +8846,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
+          description: Shows the sum of all indexed spans indexed over all hours
             in the current date for all organizations.
           format: int64
           type: integer
@@ -8979,7 +8979,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
+          description: Shows the sum of all indexed spans indexed over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -9133,7 +9133,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
+          description: Shows the sum of all indexed spans indexed over all hours
             in the current month(s) for all organizations.
           format: int64
           type: integer
@@ -9282,7 +9282,7 @@ components:
           format: date-time
           type: string
         indexed_events_count:
-          description: Contains the number of Analyzed Spans indexed.
+          description: Contains the number of indexed spans indexed.
           format: int64
           type: integer
       type: object

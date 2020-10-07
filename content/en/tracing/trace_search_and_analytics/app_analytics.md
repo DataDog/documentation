@@ -7,7 +7,7 @@ aliases:
   - /tracing/advanced_usage/
 ---
 
-[App Analytics][1], formerly known as Trace Search & Analytics, is used to filter Analyzed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+[App Analytics][1], formerly known as Trace Search & Analytics, is used to filter indexed spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
@@ -468,11 +468,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## Span filtering
 
-An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Analyzed Span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [indexed span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, indexed spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 indexed spans from its `servlet.request` spans, as each `servlet.request` span generates an indexed span. [Filtering indexed spans][5] has the benefit of reducing the number of billable indexed spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the indexed span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
 Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" >}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="indexed span Filtering" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event

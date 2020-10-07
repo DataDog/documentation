@@ -247,7 +247,7 @@ The bottom part of the view includes additional information about the trace or a
 
 4) **Navigate to the [Trace Search page][6]**.
 
-The Trace Search page allows you to identify specific [Traces][1] and Analyzed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][7]).
+The Trace Search page allows you to identify specific [Traces][1] and indexed spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][7]).
 
 5) **Find a trace that has the new tag**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
 

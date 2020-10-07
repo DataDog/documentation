@@ -22,7 +22,7 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 - インデックス化されたログイベント
 - 収集されたログ
-- Analyzed Span
+- indexed span
 
 ### はじめに
 

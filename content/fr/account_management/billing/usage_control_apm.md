@@ -22,12 +22,12 @@ Les tarifs correspondent à une facturation annuelle. Contactez le [service comm
 
 ### Estimateur de spans analysées
 
-L'outil [Analyzed Span Estimator][7] est conçu pour vous aider à choisir les services pour lesquels activer App Analytics afin de mieux maîtriser votre utilisation et vos coûts.
+L'outil [indexed span Estimator][7] est conçu pour vous aider à choisir les services pour lesquels activer App Analytics afin de mieux maîtriser votre utilisation et vos coûts.
 
 Pour estimer le nombre total de spans analysées qui devraient être envoyées chaque jour ou chaque mois par un service, suivez ces étapes :
 
 1. Activez l'APM sur tous les hosts pour lesquels vous souhaitez estimer le volume de spans analysées.
-2. Dans la [vue **Analyzed Span Estimator**][7], sélectionnez les services pour lesquels vous souhaitez activer APM Analytics.
+2. Dans la [vue **indexed span Estimator**][7], sélectionnez les services pour lesquels vous souhaitez activer APM Analytics.
 3. La valeur **Total Estimated APM Volume** représente le volume total estimé de spans analysées pour tous les services, par jour et par mois. Chaque ligne correspondant au service représente le volume estimé de spans analysées pour ce service, par jour.
 
   {{< img src="tracing/faq/apm_span_estimator.png" alt="Estimateur de spans analysées">}}

@@ -60,7 +60,7 @@ To configure SAML for multi-organizations, use the following procedure:
 
 ## Multi-Org Usage
 
-The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`. 
+The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username at the bottom left and then navigating to: `Plan & Usage`--> `Multi-Org Usage`.
 
 The Multi-Org Usage tab shows the aggregate usage of the parent-organization and all its child-organizations. There are two sub-tabs on the Multi-Org Usage tab:
 
@@ -69,9 +69,9 @@ The Multi-Org Usage tab shows the aggregate usage of the parent-organization and
 
 ### Month-to-Date Usage
 
-This view contains an Overall Usage section and an Individual Organization Usage section. 
+This view contains an Overall Usage section and an Individual Organization Usage section.
 
-The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations. 
+The Overall Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
 
 {{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
 
@@ -98,18 +98,18 @@ When enabled at the parent-organization level, usage attribution will show usage
 Functionalities include:
 
 * Changing and adding new tag keys (up to three).
-* Accessing monthly usage in both the UI and as a .tsv download (tab separated values) 
+* Accessing monthly usage in both the UI and as a .tsv download (tab separated values)
 * Accessing daily usage in a .tsv file for most usage types.
 
 {{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
 
-Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization. 
+Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
 
 Note: the following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
-* Analyzed Spans
+* indexed spans
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 

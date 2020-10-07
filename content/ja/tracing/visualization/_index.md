@@ -31,8 +31,8 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 | [トレース](#trace)                 | トレースは、アプリケーションがリクエストを処理するのにかかった時間とこのリクエストのステータスを追跡するために使用されます。各トレースは、1 つ以上のスパンで構成されます。                                                             |
 | [スパン](#spans)                  | スパンは、特定の期間における分散システムの論理的な作業単位を表します。複数のスパンでトレースが構成されます。                                                                                          |
 | [トレースメトリクス](#trace-metrics) | トレースメトリクスは自動的に収集され、他の [Datadog メトリクス][2]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。                       |
-| [App Analytics](#app-analytics) | App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで Analyzed Span をフィルターするために使用されます。                                                                                |
-| [Analyzed Span](#analyzed-span) | Analyzed Span は、リクエストの 100% のスループットを表し、App Analytics での検索、クエリ、監視に使用できます。                                                                                                |
+| [App Analytics](#app-analytics) | App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで indexed span をフィルターするために使用されます。                                                                                |
+| [indexed span](#analyzed-span) | indexed span は、リクエストの 100% のスループットを表し、App Analytics での検索、クエリ、監視に使用できます。                                                                                                |
 | [スパンタグ](#span-tags)         | *Trace View* でリクエストを関連付けたり、*App Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。                                                                                                    |
 
 ## サービス
@@ -85,7 +85,7 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 {{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="トレースメトリクス" >}}
 
-### ダッシュボード  
+### ダッシュボード
 
 トレースメトリクスは、*Service* または *Resource* ページからダッシュボードにエクスポートできます。さらに、既存のダッシュボードからトレースメトリクスを照会できます。
 
@@ -99,16 +99,16 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 ## App Analytics
 
-App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで [Analyzed Span](#analyzed-span) をフィルターするために使用されます。これにより、ヒット、エラー、レイテンシーの 100% スループットで検索、グラフ化、監視できるとともに、サービスを流れるウェブリクエストを詳細に調べることができます。この機能は、[自動構成][17]で有効にできます。
+App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで [indexed span](#analyzed-span) をフィルターするために使用されます。これにより、ヒット、エラー、レイテンシーの 100% スループットで検索、グラフ化、監視できるとともに、サービスを流れるウェブリクエストを詳細に調べることができます。この機能は、[自動構成][17]で有効にできます。
 
 {{< wistia vrmqr812sz >}}
 
-## Analyzed Span
+## indexed span
 
-Analyzed Span は、リクエストの 100% のスループットを表し、スパンに含まれる[タグ](#span-tags)による App Analytics の検索、クエリ、監視に使用できます。App Analytics を有効にすると、トレースクライアントは、デフォルトでウェブサービスのエントリポイントスパンを分析し、アプリケーションで[追加のサービスを構成][18]できるようになります。たとえば、100 個のリクエストを持つ Java サービスは、`servlet.request` スパンから 100 個の Analyzed Span を生成します。`DD_TRACE_ANALYTICS_ENABLED=true` を設定すると、`web-store` サービスはすべての `rack.request` スパンを分析し、App Analytics で利用できるようにします。この例では、99 パーセンタイルでレイテンシーが最も高い上位 10 マーチャントをグラフ化できます。`merchant_name` は、アプリケーションのスパンに適用されたユーザー定義のタグです。
+indexed span は、リクエストの 100% のスループットを表し、スパンに含まれる[タグ](#span-tags)による App Analytics の検索、クエリ、監視に使用できます。App Analytics を有効にすると、トレースクライアントは、デフォルトでウェブサービスのエントリポイントスパンを分析し、アプリケーションで[追加のサービスを構成][18]できるようになります。たとえば、100 個のリクエストを持つ Java サービスは、`servlet.request` スパンから 100 個の indexed span を生成します。`DD_TRACE_ANALYTICS_ENABLED=true` を設定すると、`web-store` サービスはすべての `rack.request` スパンを分析し、App Analytics で利用できるようにします。この例では、99 パーセンタイルでレイテンシーが最も高い上位 10 マーチャントをグラフ化できます。`merchant_name` は、アプリケーションのスパンに適用されたユーザー定義のタグです。
 
 <div class="alert alert-info">
-<a href="https://app.datadoghq.com/apm/docs/trace-search">Analyzed Span Estimator</a> を使用して、サービスから生成される Analyzed Span の数を見積もることができます。取り込み後、<a href="https://app.datadoghq.com/apm/settings">APM 設定</a>のサービス別レベルで、Analyzed Span を 100% からそれより低いパーセンテージまでフィルターできます。これにより、課金対象の Analyzed Span が減少します。
+<a href="https://app.datadoghq.com/apm/docs/trace-search">indexed span Estimator</a> を使用して、サービスから生成される indexed span の数を見積もることができます。取り込み後、<a href="https://app.datadoghq.com/apm/settings">APM 設定</a>のサービス別レベルで、indexed span を 100% からそれより低いパーセンテージまでフィルターできます。これにより、課金対象の indexed span が減少します。
 </div>
 
 ## スパンタグ

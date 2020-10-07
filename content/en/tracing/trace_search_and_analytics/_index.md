@@ -8,16 +8,11 @@ description: "Beta Documentation for Live Analytics, ingestion rules and retenti
 
 ## Tracing Without Limits Overview
 
-<div class="alert alert-warning">
-If you are in the Beta for Live Analytics, ingestion rules and custom retention filters, use these instructions instead of the <a href="https://docs.datadoghq.com/tracing/guide/trace_sampling_and_storage/?tab=java#trace-sampling">trace sampling guide</a>.
-</div>
-
 [Trace Search and Analytics][1] gives you the ability to search all ingested or indexed spans using any tag on any span.  Depending on whether you are using Live (the last 15 minutes, rolling) or Historical (all indexed spans) mode, the data used to power your queries will change.
 
 Live data is all [Ingested spans](#ingestion-controls) and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  Historical data is all [Indexed spans](#indexing-controls).  You can customize settings for both [Ingestion and Indexing](#ingestion-and-indexing-overview).
 
 Send and retain exactly the spans you care about. Any indexed span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
-
 
 ### Live Search Mode
 
