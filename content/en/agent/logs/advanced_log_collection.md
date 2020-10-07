@@ -452,7 +452,7 @@ Configuration example:
 ```yaml
 logs:
  - type: file
-   path:  /test/log/hello-world.log
+   path: /test/log/hello-world.log
    tags: key:value
    service: utf-16-logs
    source: mysql
