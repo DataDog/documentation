@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: albertvaka/windows-ecs
+      branch: kaylyn/slack-ga
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
