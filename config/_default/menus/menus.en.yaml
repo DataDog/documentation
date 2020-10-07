@@ -1274,6 +1274,11 @@ main:
     parent: tracing
     identifier: trace_ingestion_and_indexing
     weight: 6
+  - name:  Usage Metrics
+    url: tracing/trace_ingestion_and_indexing/usage_metrics
+    parent: trace_ingestion_and_indexing
+    identifier: trace_ingestion_and_indexing_usage_metrics
+    weight: 601
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
