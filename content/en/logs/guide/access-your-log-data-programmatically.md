@@ -460,6 +460,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 }'
 
 ```
+**Response:**
 
 ```json
 
