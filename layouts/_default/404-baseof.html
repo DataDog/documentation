@@ -4,12 +4,12 @@
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
-  {{ partial "header-scripts.html" . }}
+  {{ partialCached "header-scripts.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "dd-browser-logs-rum.js") | relURL }}"></script>
 
   <meta charset="utf-8">
-  {{ partial "prefetch.html" . }}
+  {{ partialCached "prefetch.html" . }}
   {{ partial "preload.html" . }}
   <title>{{ .Title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,8 +57,7 @@
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
 
-  {{ partial "footer-scripts.html" . }}
-  {{ partial "footer-js-dd-docs-methods" . }}
+  {{ partialCached "footer-scripts.html" . }}
   {{ partial "preview_banner/preview_banner" . }}
 
 </body>
