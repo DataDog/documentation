@@ -162,4 +162,4 @@ Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
-[19]: https://docs.datadoghq.com/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
+[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold
