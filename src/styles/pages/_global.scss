@@ -326,14 +326,6 @@ h5{
     }
   }
 
-  ol {
-    li {
-      &:before {
-        content: "" !important;
-      }
-    }
-  }
-
   ul{
     list-style-type: none;
     -webkit-padding-start: 22px;
@@ -347,6 +339,13 @@ h5{
         margin-right: 10px;
         margin-left: -20px;
         float: left;
+      }
+      ol {
+        li {
+          &:before {
+            content: '';
+          }
+        }
       }
       p {
         margin-bottom: 0;
