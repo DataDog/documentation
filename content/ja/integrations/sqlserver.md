@@ -121,6 +121,7 @@ _Agent バージョン 6.0 以降で利用可能_
     ```yaml
     logs:
       - type: file
+        encoding: utf-16-le
         path: "<LOG_FILE_PATH>"
         source: sqlserver
         service: "<SERVICE_NAME>"
