@@ -2,7 +2,7 @@
 title: SafeNet を SAML IdP として構成する方法
 kind: documentation
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントのための SAML の構成
 ---

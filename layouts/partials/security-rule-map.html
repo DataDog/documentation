@@ -3,12 +3,11 @@
 {{ $img_map := $data.image_map }}
 {{ $img_path := "images/integrations_logos/" }}
 {{ $img_url := printf "%s%s" $dot.ctx.Site.Params.img_url $img_path }}
-{{ $docs_url := $data.base_integrations_url }}
 {{ $source := .source }}
 {{ $scope := .scope }}
 
 {{ $src_img := printf "%s" $source }}
-{{ $src_link := printf "%s%s" $docs_url $src_img }}
+{{ $src_link := printf "integrations/%s" $src_img }}
 
 {{ range $key, $value := $img_map }}
     {{ if intersect $value.source (slice $source $scope) }}
@@ -23,9 +22,9 @@
             {{ end }}
             
             {{ if .link }}
-                {{ $src_link = printf "%s%s" $docs_url .link }}
+                {{ $src_link = printf "integrations/%s" .link }}
             {{ else }}
-                {{ $src_link = printf "%s%s" $docs_url $src_img }}
+                {{ $src_link = printf "integrations/%s" $src_img }}
             {{ end }}
         {{ end }}
     {{ end }}
@@ -39,4 +38,4 @@
     {{ $src_img = "" }}
 {{ end }}
 
-{{- return (dict "image" $src_img "link" $src_link "path" $local_img) -}}
+{{- return (dict "image" $src_img "link" ($src_link | absLangURL) "path" $local_img "rellink" $src_link ) -}}

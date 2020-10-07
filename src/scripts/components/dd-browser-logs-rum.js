@@ -31,7 +31,7 @@ if (env === 'preview' || env === 'live') {
         clientToken: ddClientToken,
         env,
         service: 'docs',
-        version: CI_COMMIT_SHORT_SHA
+        version: ''
     });
 }
 

@@ -1,7 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: nginx-ingress-controller
   monitors: {}
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
@@ -37,7 +46,7 @@ supported_os:
 
 Ce check surveille le [NGINX Ingress Controller][1] Kubernetes.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -45,36 +54,11 @@ Le check `nginx-ingress-controller` est inclus avec le paquet de l'[Agent Datado
 
 ### Configuration
 
+Si votre Agent s'exécute sur un host, modifiez le fichier `nginx_ingress_controller.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos métriques NGINX Ingress Controller. Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles. Ensuite, [redémarrez l'Agent][3].
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
 #### Collecte de métriques
-
-1. Modifiez le fichier `nginx_ingress_controller.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos métriques NGINX Ingress Controller. Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
-
-2. [Redémarrez l'Agent][3].
-
-#### Collecte de logs
-
-Rassemblez vos logs de NGINX Ingress Controller, y compris Weave NPC et Weave Kube, et envoyez-les à Datadog.
-
-_Disponible à partir des versions > 6.0 de l'Agent_
-
-1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
-
-   ```yaml
-       (...)
-       env:
-           (...)
-         - name: DD_LOGS_ENABLED
-             value: "true"
-         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-             value: "true"
-       (...)
-   ```
-
-2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
-
-3. [Redémarrez l'Agent][3].
-
-### Configuration du check NGINX (facultative)
 
 Par défaut, les métriques NGINX sont recueillies par le check `nginx-ingress-controller`, mais nous vous conseillons d'exécuter le check `nginx` sur le contrôleur Ingress.
 
@@ -82,12 +66,13 @@ Pour ce faire, faites en sorte que la page d'état NGINX soit accessible depuis 
 
 Par exemple, ces annotations activent les checks `nginx` et `nginx-ingress-controller` et la collecte de logs :
 
-```text
-ad.datadoghq.com/nginx-ingress-controller.check_names: '["nginx","nginx_ingress_controller"]'
-ad.datadoghq.com/nginx-ingress-controller.init_configs: '[{},{}]'
-ad.datadoghq.com/nginx-ingress-controller.instances: '[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]'
-ad.datadoghq.com/nginx-ingress-controller.logs: '[{"service": "controller", "source":"nginx-ingress-controller"}]'
-```
+| Paramètre            | Valeur                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `<NOM_INTÉGRATION>` | `["nginx","nginx_ingress_controller"]`                                                                             |
+| `<CONFIG_INIT>`      | `[{},{}]`                                                                                                          |
+| `<CONFIG_INSTANCE>`  | `[{"nginx_status_url": "http://%%host%%:18080/nginx_status"},{"prometheus_url": "http://%%host%%:10254/metrics"}]` |
+
+Consultez le [fichier d'exemple nginx_ingress_controller.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
 **Remarque** : à partir de la version 0.23.0 de `nginx-ingress-controller`, le serveur `nginx` qui effectuait son écoute sur le port `18080` a été supprimé. Il peut être rétabli en ajoutant le `http-snippet` suivant à la ConfigMap de configuration :
 
@@ -106,6 +91,16 @@ ad.datadoghq.com/nginx-ingress-controller.logs: '[{"service": "controller", "sou
       }
     }
 ```
+
+#### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
+
+| Paramètre      | Valeur                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| `<CONFIG_LOG>` | `[{"service": "controller", "source": "nginx-ingress-controller"}]` |
 
 ### Validation
 
@@ -132,8 +127,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://kubernetes.github.io/ingress-nginx
 [2]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

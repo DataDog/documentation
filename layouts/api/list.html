@@ -26,6 +26,21 @@
 
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
+    <!-- get lang specific data file -->
+    {{ $tagSlug := path.Base .File.Dir }}
+    {{ $.Scratch.Set "translate_tags" (dict) }}
+    {{ $.Scratch.Set "translate_actions" (dict) }}
+    {{ if ne $.Page.Lang "en"}}
+        {{ if (fileExists (print "data/api/" $apiVersion "/translate_tags." $.Page.Lang ".json")) }}
+          {{ $.Scratch.Set "translate_tags" (index (index $.Site.Data.api $apiVersion) (print "translate_tags." $.Page.Lang)) }}
+        {{ end }}
+        {{ if (fileExists (print "data/api/" $apiVersion "/translate_actions." $.Page.Lang ".json")) }}
+          {{ $.Scratch.Set "translate_actions" (index (index $.Site.Data.api $apiVersion) (print "translate_actions." $.Page.Lang)) }}
+        {{ end }}
+    {{ end }}
+    {{ $translate_tags := ($.Scratch.Get "translate_tags") }}
+    {{ $translate_actions := ($.Scratch.Get "translate_actions") }}
+
     <!-- Get the general API server url -->
     {{ $servers := index (index $d "servers") 0 }}
     {{ $.Scratch.Set "serverURLS" slice }}
@@ -40,12 +55,13 @@
             {{ $region = "us"}}
         {{ end }}
 
-        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
+        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region) }}
 
     {{ end }}
 
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $ParamTitleEn $v.name }}
+            {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
             {{ $.Scratch.Set "tagObject" (slice)}}
 
@@ -62,7 +78,7 @@
 
             {{ $tagObject := $.Scratch.Get "tagObject"  }}
 
-            <h1>{{ $v.name }}</h1>
+            <h1>{{ $translate_tag.name | default $v.name }}</h1>
 
             <div class="row">
                 <div class="col-12 col-lg-9">
@@ -70,13 +86,13 @@
                     <!-- If endpoint is deprecated -->
                     {{ if eq (index $v "x-deprecated") true}}
                         <div class="alert alert-danger">
-                            {{$v.description | markdownify}}
+                            {{ $translate_tag.description | default $v.description | markdownify}}
                             {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
                         </div>
                     {{ else }}
 
 
-                        {{ $markdown := $v.description | markdownify }}
+                        {{ $markdown := $translate_tag.description | default $v.description | markdownify }}
 
                         <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
                         {{ if not ( strings.Contains $markdown "<p>" ) }}
@@ -92,7 +108,10 @@
 
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
-                {{ $context := .}}
+                {{ $context := . }}
+
+                <!-- get action strings from params, why? because they are translated here -->
+                {{ $translate_action := (index $translate_actions .action.operationId) | default (dict) }}
 
                 <!-- check if endpoint has own `server` object and set those as the server urls -->
                 {{ with .action.servers }}
@@ -128,17 +147,17 @@
                 <div class="row">
                     <div class="col-12 col-lg-9">
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
-                            <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
+                            <a href="#{{ .action.summary | urlize }}">{{- $translate_action.summary | default .action.summary -}}</a>
                         </h2>
                         {{ with index .action "x-unstable"}}
                         <div class="alert alert-warning mb-2">
                             <p class="alert-warning">{{ . | markdownify }}</p>
                         </div>
                         {{ end }}
-                        <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
+                        <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType | upper }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
                         </p>
-                        <h3 class="mt-2">Overview</h3>
-                        <p>{{.action.description | markdownify }}</p>
+                        <h3 class="mt-2">{{ i18n "overview" }}</h3>
+                        <p>{{ $translate_action.description | default .action.description | markdownify }}</p>
 
                         {{ $.Scratch.Set "queryStrings" slice }}
                         {{ $.Scratch.Set "pathParams" slice }}
@@ -146,7 +165,7 @@
 
                         {{ with .action.parameters }}
 
-                            <h3 class="mb-2">Arguments</h3>
+                            <h3 class="mb-2">{{ i18n "arguments" }}</h3>
 
                             {{ range . }}
                                 {{ if eq .in "query"}}
@@ -163,18 +182,18 @@
                             {{ $headerParams := $.Scratch.Get "headerParams" }}
 
                             {{ with $pathParams }}
-                                <h4 class="text-capitalize">Path Parameters</h4>
+                                <h4 class="text-capitalize">{{ i18n "path_parameters" }}</h4>
                                 <div class=" schema-table row">
                                     <div class="col-12">
                                       <div class="row table-header">
                                         <div class="col-4 column">
-                                          <p class="font-semibold">Name</p>
+                                          <p class="font-semibold">{{ i18n "name" }}</p>
                                         </div>
                                         <div class="col-2 column">
-                                          <p class="font-semibold">Type</p>
+                                          <p class="font-semibold">{{ i18n "type" }}</p>
                                         </div>
                                         <div class="col-6 column">
-                                          <p class="font-semibold">Description</p>
+                                          <p class="font-semibold">{{ i18n "description" }}</p>
                                         </div>
                                       </div>
                                       {{ range . }}
@@ -199,18 +218,18 @@
                             {{ end }}
 
                             {{ with $queryStrings }}
-                                <h4 class="text-capitalize">Query Strings</h4>
+                                <h4 class="text-capitalize">{{ i18n "query_strings" }}</h4>
                                 <div class=" schema-table row">
                                     <div class="col-12">
                                       <div class="row table-header">
                                         <div class="col-4 column">
-                                          <p class="font-semibold">Name</p>
+                                          <p class="font-semibold">{{ i18n "name" }}</p>
                                         </div>
                                         <div class="col-2 column">
-                                          <p class="font-semibold">Type</p>
+                                          <p class="font-semibold">{{ i18n "type" }}</p>
                                         </div>
                                         <div class="col-6 column">
-                                          <p class="font-semibold">Description</p>
+                                          <p class="font-semibold">{{ i18n "description" }}</p>
                                         </div>
                                       </div>
                                       {{ range . }}
@@ -236,18 +255,18 @@
 
 
                             {{ with $headerParams }}
-                                <h4 class="text-capitalize">Header Parameters</h4>
+                                <h4 class="text-capitalize">{{ i18n "header_parameters" }}</h4>
                                 <div class=" schema-table row">
                                     <div class="col-12">
                                       <div class="row table-header">
                                         <div class="col-4 column">
-                                          <p class="font-semibold">Name</p>
+                                          <p class="font-semibold">{{ i18n "name" }}</p>
                                         </div>
                                         <div class="col-2 column">
-                                          <p class="font-semibold">Type</p>
+                                          <p class="font-semibold">{{ i18n "type" }}</p>
                                         </div>
                                         <div class="col-6 column">
-                                          <p class="font-semibold">Description</p>
+                                          <p class="font-semibold">{{ i18n "description" }}</p>
                                         </div>
                                       </div>
                                       {{ range . }}
@@ -276,67 +295,90 @@
 
                         {{ if .action.requestBody }}
 
-                            <h3 class="mt-2 mb-3">Request</h3>
+                            <h3 class="mt-2 mb-3">{{ i18n "request" }}</h3>
 
                             <h4 class="text-capitalize mt-0 mb-1 py-0">Body Data <span class='text-capitalize'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
-                            <p>{{ .action.requestBody.description | markdownify }}</p>
+                            <p>{{ $translate_action.request_description | default .action.requestBody.description | markdownify }}</p>
 
                             <div class="tab-content">
-                                {{ range $content := .action.requestBody.content }}
-                                    {{ range $schema := $content }}
-                                        {{ if $schema }}
+                                {{ range $contentType, $content := .action.requestBody.content }}
+                                    {{- if hasPrefix $contentType "application/json" -}}
+                                        {{ range $itemKey, $schema := $content }}
+                                            {{ if eq $itemKey "schema" }}
+                                                <!-- Get Json and HTML -->
+                                                {{ $dot.Scratch.Set "json" "" }}
+                                                {{ $dot.Scratch.Set "html" "" }}
+                                                {{ with $dot.Resources.Match "examples.json" }}
+                                                    {{ range . }}
+                                                      {{ $data := . | unmarshal}}
+                                                      {{ $req := (index (index $data $context.action.operationId) "request") }}
+                                                      {{ if $req }}
 
-                                        <!-- Get Json and HTML -->
-                                        {{ $dot.Scratch.Set "json" "" }}
-                                        {{ $dot.Scratch.Set "html" "" }}
-                                        {{ with $dot.Resources.Match "examples.json" }}
-                                            {{ range . }}
-                                              {{ $data := . | unmarshal}}
-                                              {{ $req := (index (index $data $context.action.operationId) "request") }}
-                                              {{ if $req }}
+                                                          {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                                          {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                  {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
-                                                  {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                          {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                                                          {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
 
-                                                  {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
-                                                  {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
+                                                          {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                          {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                                                          {{ $dot.Scratch.Set "html" (index $req "html") }}
+                                                      {{ else }}
+                                                          {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                                      {{ end }}
+                                                    {{ end }}
+                                                {{ end }}
+                                                {{ $json := ($dot.Scratch.Get "json") }}
+                                                {{ $html := ($dot.Scratch.Get "html") }}
 
-                                                  {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                                  {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
-                                                  {{ $dot.Scratch.Set "html" (index $req "html") }}
-                                              {{ else }}
-                                                  {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
-                                              {{ end }}
-                                            {{ end }}
-                                        {{ end }}
-                                        {{ $json := ($dot.Scratch.Get "json") }}
-                                        {{ $html := ($dot.Scratch.Get "html") }}
+                                                <ul class="nav nav-tabs border-none response-toggle">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">{{ i18n "example" }}</a>
+                                                    </li>
+                                                </ul>
 
-                                        <ul class="nav nav-tabs border-none response-toggle">
-                                            <li class="nav-item">
-                                                <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">Model</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
-                                            </li>
-                                        </ul>
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
 
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
-                                              {{ $html | safeHTML }}
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                                <div class="code-snippet-wrapper js-code-block">
-                                                    <div class="code-snippet">
-                                                        <div class="code-button-wrapper position-absolute">
-                                                            <button class="btn text-primary js-copy-button">Copy</button>
+                                                        {{ if in $html "schema-table" }}
+                                                            {{ $html | safeHTML }}
+                                                        {{ else }}
+                                                            <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+                                                              <p class="expand-all js-expand-all text-primary">Expand All</p>
+                                                              <div class="col-12">
+                                                                <div class="row table-header">
+                                                                  <div class="col-4 column">
+                                                                    <p class="font-semibold">{{ i18n "field" }}</p>
+                                                                  </div>
+                                                                  <div class="col-2 column">
+                                                                    <p class="font-semibold">{{ i18n "type" }}</p>
+                                                                  </div>
+                                                                  <div class="col-6 column">
+                                                                    <p class="font-semibold">{{ i18n "description" }}</p>
+                                                                  </div>
+                                                                </div>
+                                                                {{ $html | safeHTML }}
+                                                              </div>
+                                                            </div>
+                                                        {{ end }}
+
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
+                                                        <div class="code-snippet-wrapper js-code-block">
+                                                            <div class="code-snippet">
+                                                                <div class="code-button-wrapper position-absolute">
+                                                                    <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                                                                </div>
+                                                                {{ print $json | safeHTML }}
+                                                            </div>
                                                         </div>
-                                                        {{ print $json | safeHTML }}
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            {{ end }}
                                         {{ end }}
                                     {{ end }}
                                 {{ end }}
@@ -344,7 +386,7 @@
 
                         {{ end }}
 
-                        <h3 class="mt-3 mb-2">Response</h3>
+                        <h3 class="mt-3 mb-2">{{ i18n "response" }}</h3>
 
                         <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
                             {{ $count := 0}}
@@ -359,10 +401,14 @@
                         <div class="tab-content mb-3">
                             {{ $count := 0}}
                             {{ range $response_code, $response := .action.responses }}
+                                {{ $translate_action_response := (dict) }}
+                                {{ with $translate_action.responses }}
+                                  {{ $translate_action_response = (index $translate_action.responses $response_code) }}
+                                {{ end }}
                                 <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
                                     {{ with $response.content }}
 
-                                        <p class="mb-2">{{$response.description}}</p>
+                                        <p class="mb-2">{{ $translate_action_response.description | default $response.description }}</p>
 
                                         {{ range $content := . }}
                                             {{ range $schema := $content }}
@@ -389,10 +435,10 @@
 
                                                 <ul class="nav nav-tabs border-none response-toggle">
                                                     <li class="nav-item">
-                                                        <a class="nav-link mr-1  js-model-link active"  href="#" data-toggle="tab">Model</a>
+                                                        <a class="nav-link mr-1  js-model-link active"  href="#" data-toggle="tab">{{ i18n "model" }}</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
+                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">{{ i18n "example" }}</a>
                                                     </li>
                                                 </ul>
 
@@ -403,14 +449,35 @@
                                                             <p>{{- . | markdownify -}}</p>
                                                         {{ end }}
 
-                                                    {{ $html | safeHTML }}
+
+                                                        {{ if in $html "schema-table" }}
+                                                            {{ $html | safeHTML }}
+                                                        {{ else }}
+                                                            <div class="table-response schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+                                                              <p class="expand-all js-expand-all text-primary">Expand All</p>
+                                                              <div class="col-12">
+                                                                <div class="row table-header">
+                                                                  <div class="col-4 column">
+                                                                    <p class="font-semibold">{{ i18n "field" }}</p>
+                                                                  </div>
+                                                                  <div class="col-2 column">
+                                                                    <p class="font-semibold">{{ i18n "type" }}</p>
+                                                                  </div>
+                                                                  <div class="col-6 column">
+                                                                    <p class="font-semibold">{{ i18n "description" }}</p>
+                                                                  </div>
+                                                                </div>
+                                                                {{ $html | safeHTML }}
+                                                              </div>
+                                                            </div>
+                                                        {{ end }}
 
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
                                                         <div class="code-snippet-wrapper js-code-block">
                                                             <div class="code-snippet">
                                                                 <div class="code-button-wrapper position-absolute">
-                                                                    <button class="btn text-primary js-copy-button">Copy</button>
+                                                                    <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                                                 </div>
                                                                 {{ $json }}
                                                             </div>
@@ -428,7 +495,7 @@
                         </div>
 
 
-                        <h3 class="mb-2">Code Example</h3>
+                        <h3 class="mb-2">{{ i18n "code_example" }}</h3>
 
                         <div class="code-snippet-wrapper js-code-snippet-wrapper" >
                             <ul class="nav nav-tabs border-none response-toggle">
@@ -466,95 +533,34 @@
                             {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
                             <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
                                 <div class="code-button-wrapper position-absolute">
-                                    <button class="btn text-primary js-copy-button">Copy</button>
+                                    <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                 </div>
-                                {{ $pathParams := $.Scratch.Get "pathParams" }}
-                                {{ $queryStrings := $.Scratch.Get "queryStrings" }}
                                 <div class="highlight">
                                     <pre class="chroma">
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
                                         <code class="language-fallback" data-lang="fallback">
-{{- with $pathParams -}}
-    <span class="c1"># Path parameters</span><br/>
-    {{- range . -}}
-        <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
-    {{- end -}}
-{{- end -}}
-
-{{- with $queryStrings -}}
-    {{- $i := 0 -}}
-    {{- range . -}}
-        {{- if eq .required true -}}
-            {{- if eq $i 0 -}}
-                <span class="c1"># Required query arguments</span><br/>
-            {{- end -}}
-            <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
-            {{- $i = add $count 1 -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}
-
-<span class="c1"># Curl command</span>
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}{{ if ne .region "local" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ else }}<span class="kn">{{ .url }}</span>{{ end }}{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span>
-{{- range $qi, $q := $queryStrings -}}
-    {{- if eq .required true -}}
-        <span class="o">{{ cond (gt $qi 1) "&" "?" }}</span><span class="n">{{ $q.name }}</span><span class="o">=</span><span class="s1">${ {{- $q.name -}} }</span>
-    {{- end -}}
-{{- end -}}
-
-{{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- with $context.action.security -}}
-    {{- $i := 0 -}}
-    {{- range . -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $d.components.securitySchemes $key) }}
-            {{- if eq $authSchema.in "query" -}}
-                <span class="o">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="n">{{ $authSchema.name }}</span><span class="o">=</span><span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>
-                {{- $i = add $count 1 -}}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}
-
-{{- /* Content-Type header based on "requestBody" */ -}}
 {{- with $context.action.requestBody -}}
     {{- with .content -}}
-        {{- range $key, $val := . -}}
-            &nbsp;\
-<span class="o">-H</span> <span class="s1">"Content-Type: {{ $key }}"</span>
-        {{- end -}}
-    {{- end -}}
-{{- else -}}
-&nbsp;\
-<span class="o">-H</span> <span class="s1">"Content-Type: application/json"</span>
-{{- end -}}
-
-{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $context.action "security" -}}
-    {{- /* Find authentication per operationId */ -}}
-    {{- range $context.action.security -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $d.components.securitySchemes $key) }}
-            {{- if eq $authSchema.in "header" -}}
-                &nbsp;\
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
+        {{- range $contentType, $requestBody := . -}}
+            {{- with $requestBody.examples -}}
+                {{- range $exampleId, $exampleDefinition := . -}}
+                    {{- $exampleValue := $exampleDefinition.value -}}
+                    {{- if hasPrefix $contentType "application/json" -}}
+                        {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                    {{- end -}}
+## {{ default $exampleId $exampleDefinition.summary }}
+{{- range split $exampleDefinition.description "\n" }}
+# {{ . }}
+{{- end }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $d.components.securitySchemes "dollarScratch" $.Scratch ) }}
+                {{- end -}}
+            {{- else -}}
+{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $d.components.securitySchemes "dollarScratch" $.Scratch ) }}
             {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- else -}}
-    {{- /* Use global authentication */ -}}
-    {{- $securitySchemes := $d.components.securitySchemes -}}
-    &nbsp;\
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
-{{- end -}}
-
-{{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-{{- if $context.action.requestBody -}}
-&nbsp;\
-<span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
-<span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
-<span class="n">EOF</span>
+{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $d.components.securitySchemes "dollarScratch" $.Scratch ) }}
 {{- end -}}
                                             </code>
 {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
@@ -573,7 +579,7 @@
                                     {{ if ne $file_extension "sh"}}
                                     <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
                                         <div class="code-button-wrapper position-absolute">
-                                            <button class="btn text-primary js-copy-button">Copy</button>
+                                            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                         </div>
                                         {{ highlight $file_content $lang.pygments_name "" }}
                                     </div>

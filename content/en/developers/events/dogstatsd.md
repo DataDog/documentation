@@ -142,7 +142,7 @@ public class DogStatsdClient
         using (var dogStatsdService = new DogStatsdService())
         {
             dogStatsdService.Configure(dogstatsdConfig);
-            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" });
         }
     }
 }

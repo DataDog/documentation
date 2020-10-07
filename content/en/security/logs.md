@@ -23,44 +23,36 @@ Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed lo
 
 ## Logs Filtering
 
-For customers using release 6, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][4], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on a whitelist or blacklist.
+For customers using release 6 or above, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][4], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on the inclusion or exclusion rules supplied.
 
 ## Logs Obfuscation
 
 For customers using release 6, the Agent can be configured to obfuscate specific patterns within logs sent by the Agent to the Datadog application. To mask sensitive sequences within your logs, use the `log_processing_rules` [setting][5], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your logs.
 
-## Configuration Requirements for HIPAA-enabled Customers
+## HIPAA-enabled Customers
 
 Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog’s Log Management Service.
 
-Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Management Service must implement the following configurations:
-
-* The Datadog Agent must be configured to submit logs to `tcp-encrypted-intake.logs.datadoghq.com`
-* The Datadog [log collection AWS Lambda function][6] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable as well as setting `DD_USE_TCP` to `true`
-* The [GCP push forwarder][7] must be configured to submit logs to `gcp-encrypted-intake.logs.datadoghq.com`
-* Other log sources besides the Datadog Agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
-
-The following sample configuration can be used with the Datadog Agent to submit logs to a HIPAA-ready endpoint directly (i.e. without a proxy):
-
-```yaml
-logs_enabled: true
-logs_config:
-  logs_dd_url: tcp-encrypted-intake.logs.datadoghq.com:10516
-  logs_no_ssl: false
-```
-
-With the Docker Agent, pass in `DD_LOGS_CONFIG_LOGS_DD_URL=tcp-encrypted-intake.logs.datadoghq.com:10516` as an environment variable.
-
-Additionally, certain features are not available at the moment to customers who have signed Datadog's BAA, notably:
+These features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support via chat
-* Rehydration from Log Archives is disabled
-* Generation of metrics from logs is disabled
+* Group-by dimensions are limited to host tags, source, service, and status for [Log-based Metrics][6]
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
-* You cannot [share][8] logs (nor traces) from the explorer through web integrations.
+* You cannot [share][7] logs (nor traces) from the explorer through web integrations.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
+
+**Note:**
+
+Previously, HIPAA-enabled customers needed to use specific endpoints to submit logs in order to enforce specific encryptions. This is no longer necessary. The encryptions are enabled on all log submission endpoints.
+
+These legacy endpoints are still supported:
+
+* `tcp-encrypted-intake.logs.datadoghq.com`
+* `lambda-tcp-encrypted-intake.logs.datadoghq.com`
+* `gcp-encrypted-intake.logs.datadoghq.com`
+* `http-encrypted-intake.logs.datadoghq.com`
 
 ### Further Reading
 
@@ -71,6 +63,5 @@ If you have any questions about how the Log Management Service satisfies the app
 [3]: /agent/logs/log_transport
 [4]: /agent/logs/advanced_log_collection/#filter-logs
 [5]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-[6]: /integrations/amazon_lambda/#log-collection
-[7]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
-[8]: /logs/explorer/#share-views
+[6]: /logs/logs_to_metrics/
+[7]: /logs/explorer/#share-views

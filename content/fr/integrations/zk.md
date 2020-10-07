@@ -2,7 +2,11 @@
 aliases:
   - /fr/integrations/zookeeper
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: zookeeper
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,26 +46,26 @@ supported_os:
 
 Le check ZooKeeper vérifie les connexions client et les latences, surveille le nombre de requêtes non traitées et bien plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check ZooKeeper est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs ZooKeeper.
+Le check ZooKeeper est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs ZooKeeper.
 
 ### Configuration
 
 #### Liste blanche Zookeeper
 
-Depuis la version 3.5 de Zookeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation Zookeeper][7]) permet d'ajouter des [commandes à 4 lettres][8] à la liste blanche. Par défaut, seul la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
+Depuis la version 3.5 de Zookeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation Zookeeper][3]) permet d'ajouter des [commandes à 4 lettres][4] à la liste blanche. Par défaut, seul la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-1. Modifiez le fichier `zk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) ZooKeeper.
-   Consultez le [fichier d'exemple zk.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `zk.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos [métriques](#collecte-de-metriques) et [logs](#collecte-de-logs) ZooKeeper.
+   Consultez le [fichier d'exemple zk.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][7].
 
 #### Collecte de logs
 
@@ -108,13 +112,13 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple zk.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple zk.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-5. [Redémarrez l'Agent][6].
+5. [Redémarrez l'Agent][7].
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -128,15 +132,15 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][12].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][9].
 
 | Paramètre      | Valeur                                           |
 | -------------- | ----------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "zk", "service": "<NOM_SERVICE>"}` |
+| `<CONFIG_LOG>` | `{"source": "zookeeper", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `zk` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `zk` dans la section Checks.
 
 ## Données collectées
 
@@ -165,17 +169,17 @@ L'Agent envoie ce check de service si `expected_mode` est configuré dans `zk.ya
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
-[8]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/zk/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://docs.datadoghq.com/fr/agent/docker/log/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
+[4]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[9]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/zk/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help/

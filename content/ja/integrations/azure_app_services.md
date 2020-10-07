@@ -32,6 +32,8 @@ Azure App Service からメトリクスを取得すると、以下のことが�
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
+ログおよびトレース ID 挿入など、その他のモニタリングオプションについては、[Azure App Service 拡張機能][2]をご覧ください。
+
 ## 収集データ
 
 ### メトリクス
@@ -48,8 +50,9 @@ Azure App Service インテグレーションには、サービスのチェッ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_services/azure_app_services_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/infrastructure/serverless/azure_app_services/
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_services/azure_app_services_metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/

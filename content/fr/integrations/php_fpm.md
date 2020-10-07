@@ -3,6 +3,7 @@ aliases:
   - /fr/integrations/phpfpm
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -47,7 +48,7 @@ supported_os:
 
 Le check PHP-FPM permet de surveiller l'état de votre pool FPM ainsi que les performances de vos requêtes.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -55,7 +56,7 @@ Le check PHP-FPM est inclus avec le paquet de l'[Agent Datadog][2] : vous n'ave
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 

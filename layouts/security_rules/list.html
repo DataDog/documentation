@@ -3,12 +3,29 @@
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
 
+<!-- From data file -->
+{{ $list := sort .Pages }}
+
+<!-- build filters -->
+{{ $.Scratch.Set "filters" (slice)}}
+{{ range $index, $element := $list }}
+    {{ range $e := $element.Params.rule_category }}
+        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
+            {{ $.Scratch.Add "filters" ($e | lower) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
 <h1 id="pagetitle">{{ .Title }}</h1>
 
 {{ .Content }}
 <form id="rules">
+    <div class="controls" data-ref="controls">
+        <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
+        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    </div>
     <div class="form-group clearfix">
-        <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
+        <input type="input" data-ref="search" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
     </div>
     <div class="list-group">
         {{ range $i, $v := .Pages.GroupByParam "source" }}
@@ -20,7 +37,7 @@
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                                <img width="40" height="20" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
                             {{ end }}
                         {{ end }}
                     </div>
@@ -35,12 +52,12 @@
                 </div>
                 <div class="group-{{ .Key }} mb-2 ml-5 d-none">
                     {{ range $v.Pages }}
-                        <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
+                        <a class="mb-1 font-semibold mix {{ range $i, $e := .Params.rule_category }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
                             {{ if $this_img.image }}
                                 <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
                             {{ else }}
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                                <img width="40" height="17" src="{{ partial "img-resource.html" (dict "context" $dot "src" (print "images/svg-icons/agent.svg")) }}" />
                             {{ end }}
                             {{ .Title }}<br />
                         </a>
@@ -50,58 +67,4 @@
         {{ end }}
     </div>
 </form>
-
-<script type="text/javascript">
-    const group = Array.prototype.slice.call(document.getElementsByClassName('js-group'));
-    const urlParams = new URLSearchParams(window.location.search);
-    const keyword = urlParams.get('q');
-
-    document.getElementById("rules").addEventListener("submit", function (event) {
-        event.preventDefault();
-    });
-
-    filterRules = () => {
-        const input = document.getElementById('keywords').value.toLowerCase();
-        window.history.replaceState({}, '', `?q=${input}`);
-
-        for (let i = 0; i < group.length; i++) {
-            // Filtering individual rules
-            const rules = Array.prototype.slice.call(document.querySelectorAll(`.js-group-${i} .js-page`));
-            let count = 0;
-            rules.forEach(elm => {
-                elm.classList.remove('d-none');
-                if (!elm.dataset.name.includes(input)) {
-                    elm.classList.add('d-none');
-                } else {
-                    elm.classList.remove('d-none');
-                    count += 1;
-                }
-            });
-
-            // Hiding group when there is no matching entry
-            if (count === 0) {
-                document.querySelector(`.js-group-${i}`).classList.add('d-none');
-            } else {
-                document.querySelector(`.js-group-${i}`).classList.remove('d-none');
-                document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
-            }
-        }
-    };
-
-    document.getElementById("keywords").addEventListener('keyup', filterRules, false);
-
-    if (keyword) {
-        document.getElementById("keywords").value = keyword;
-        filterRules();
-    };
-
-    // Accordion js
-    const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
-
-    ruleList.forEach(elm => {
-        elm.addEventListener("click", e => {
-            e.currentTarget.classList.toggle('active');
-        });
-    });
-</script>
 {{ end }}

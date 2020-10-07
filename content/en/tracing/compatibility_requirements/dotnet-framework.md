@@ -12,6 +12,8 @@ The .NET Datadog Trace library is open source - view the [Github repository][1] 
 
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][2].
 
+**Note:** When using both manual and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
+
 ## Integrations
 
 The .NET Tracer can instrument the following libraries automatically:

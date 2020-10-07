@@ -2,7 +2,12 @@
 aliases:
   - /ja/integrations/zookeeper
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: zookeeper
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,7 +16,7 @@ categories:
   - log collection
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/zk/README.md'
 display_name: ZooKeeper
@@ -46,22 +51,25 @@ Zookeeper チェックは、クライアント接続とレイテンシーの追�
 
 ### インストール
 
-Zookeeper チェックは [Datadog Agent][3] パッケージに含まれています。Zookeeper サーバーに追加でインストールする必要はありません。
+Zookeeper チェックは [Datadog Agent][2] パッケージに含まれています。Zookeeper サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
 #### Zookeepr のホワイトリスト
 
-バージョン 3.5 以降、Zookeeper で [4 文字コマンド][8]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([Zookeeper のドキュメント][7]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストされています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
+バージョン 3.5 以降、Zookeeper で [4 文字コマンド][4]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([Zookeeper のドキュメント][3]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストされています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. Zookeeper の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `zk.d/conf.yaml` ファイルを編集します。
-   使用可能なすべての構成オプションの詳細については、[サンプル zk.d/conf.yaml][5] を参照してください。
+1. Zookeeper の[メトリクス](#メトリクスの収集)と[ログ](#ログ収集)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `zk.d/conf.yaml` ファイルを編集します。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zk.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][6]。
+2. [Agent を再起動します][3]。
 
 #### ログの収集
 
@@ -108,35 +116,46 @@ _Agent バージョン 6.0 以降で利用可能_
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    ```
 
-    `path` および `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zk.d/conf.yaml][5] を参照してください。
+    `path` および `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zk.d/conf.yaml][2] を参照してください。
 
-5. [Agent を再起動します][6]。
+5. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<INTEGRATION_NAME>` | `zk`                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "2181"}` |
+| `<インテグレーション名>` | `zk`                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
+| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "2181"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent でのログの収集はデフォルトで無効になっています。有効にするには、[Docker ログの収集][12] を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "zk", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "zookeeper", "service": "<サービス名>"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `zk` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `zk` を探します。
 
 ## 収集データ
 
@@ -165,17 +184,12 @@ Zookeeper チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/zk/images/zk_dashboard.png
-[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
-[8]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/zk/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help
-[12]: https://docs.datadoghq.com/ja/agent/docker/log/
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_clusterOptions
+[4]: https://zookeeper.apache.org/doc/r3.5.4-beta/zookeeperAdmin.html#sc_4lw
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

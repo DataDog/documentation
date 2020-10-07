@@ -1,12 +1,14 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md'
 display_name: Riak CS
@@ -101,7 +103,7 @@ Agent が RiakCS エンドポイントに接続してメトリクスを収集で
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 

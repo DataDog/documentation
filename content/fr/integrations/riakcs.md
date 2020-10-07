@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -40,7 +41,7 @@ Enregistrez vos métriques Riak CS dans Datadog pour :
 - Visualiser les métriques clés de Riak CS
 - Corréler les performances de Riak CS avec le reste de vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 

@@ -32,7 +32,7 @@ annotations:
   ad.datadoghq.com/tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-If you want to apply a `<TAG_KEY>":<TAG_VALUE>` tag to an individual container `<CONTAINER_IDENTIFIER>` within a pod, use the following annotation on your pod:
+If you want to apply a `<TAG_KEY>:<TAG_VALUE>` tag to an individual container `<CONTAINER_IDENTIFIER>` within a pod, use the following annotation on your pod:
 
 ```yaml
 annotations:

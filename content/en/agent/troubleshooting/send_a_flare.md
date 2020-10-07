@@ -14,13 +14,13 @@ further_reading:
 
 If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
-`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.
-**Confirm the upload of the archive to immediately send it to Datadog support**.
-Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
+`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings. **Confirm the upload of the archive to immediately send it to Datadog support**.
+
+The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
-If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
+If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -40,9 +40,45 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Windows    | Consult the dedicated [Windows documentation][2]        |
 | Heroku     | Consult the dedicated [Heroku documentation][3]         |
 
+## Dedicated containers
+
+When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog Agent and Trace Agent are in separate containers, you will deploy an Agent Pod containing:
+
+* One container with the Agent process (Agent + Log Agent)
+* One container with the process-agent process
+* One container with the trace-agent process
+* One container with the system-probe process
+
+To get a flare from each container, run the following commands:
+
+### Agent
+
+{{< code-block lang="bash" filename="agent.sh" >}}
+kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
+{{< /code-block >}}
+
+### process-agent
+
+{{< code-block lang="bash" filename="process-agent.sh" >}}
+kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
+{{< /code-block >}}
+
+### trace-agent
+
+{{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
+{{< /code-block >}}
+  
+### system-probe
+
+{{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --local
+{{< /code-block >}}
+
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
 [3]: /agent/faq/heroku-troubleshooting/#send-a-flare
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -64,6 +100,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 [1]: /agent/basic_agent_usage/windows/#agent-v5
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 {{% /tab %}}
+
 {{% tab "Cluster Agent" %}}
 
 | Platform   | Command                                                             |

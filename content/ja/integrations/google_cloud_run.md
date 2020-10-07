@@ -49,12 +49,21 @@ Google Cloud Run のログは、Stackdriver を使用して収集され、HTTP �
 これが完了したら、Google Cloud Run のログを Stackdriver から Pub/Sub へエクスポートします。
 
 1. [Stackdriver のページ][5]に移動し、Google Cloud Run のログを絞り込みます。
-2. **エクスポートを作成**をクリックし、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクトに置くこともできます。
+2. **シンクを作成**し、シンクに適宜名前を付けます。
+3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_run/export_cloud_run_revision.png" alt="Google Cloud Run のログを Pub Sub にエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+
+### APM および DogStatsD
+
+[Datadog Admission Controller][6] を使用して、APM トレーサーと DogStatsD クライアントを自動的に構成します。次のいずれかを使用して、環境変数 `DD_AGENT_HOST` および `DD_ENTITY_ID` を挿入します。
+
+- ラベル `admission.datadoghq.com/enabled: "true"` をポッドに追加する。
+- `mutateUnlabelled: true` を設定して Cluster Agent の Admission Controller を構成します。
+
+ポッドで環境変数を受信しないようにするには、ラベル `admission.datadoghq.com/enabled: "false"` を追加します。これは `mutateUnlabelled: true` を設定している場合でも機能します。詳細については、[Datadog Admission Controller][6] のドキュメントを参照してください。
 
 ## 収集データ
 
@@ -72,7 +81,7 @@ Google Cloud Functions インテグレーションには、サービスのチェ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
@@ -83,5 +92,6 @@ Google Cloud Functions インテグレーションには、サービスのチェ
 [3]: https://cloud.google.com/run/docs/audit-logging
 [4]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
 [5]: https://console.cloud.google.com/logs/viewer
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

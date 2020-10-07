@@ -7,16 +7,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
     tag: ブログ
     text: Python ログの収集、カスタマイズ、一元化方法
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: ログ収集のトラブルシューティングガイド
 ---
@@ -24,7 +24,7 @@ further_reading:
 
 任意の Python ロガーを使用して、ホスト上のファイルにログを記録します。次に、Datadog Agent でファイルを監視して、ログを Datadog に送信します。
 
-## セットアップ
+## ロガーの構成
 
 Python ログの処理はかなり複雑ですが、その主な原因はトレースバックです。トレースバックが複数行に分割されるため、元のログイベントとの関連付けが難しくなります。
 この問題に対応するには、ログの収集時に JSON フォーマッタを使用して次の処理を行うことを強くお勧めします。
@@ -36,10 +36,13 @@ Python ログの処理はかなり複雑ですが、その主な原因はトレ�
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][3]
 
-### ログへのトレース ID の挿入
+## ログとトレースにおけるサービスを接続
 
-APM が有効になっているアプリケーションの場合は、[アプリケーションログとトレースの関連付け][3]を強化して、自動的にログにトレース ID とスパン ID を追加できます。
+APM が有効になっているアプリケーションの場合は、[APM Python の指示に従い][4]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
+
+**注**: APM トレーサーがログに `service` を挿入する場合、Agent 構成で設定されている値は上書きされます。
 
 これで、ログは次のような形式になります。
 
@@ -47,7 +50,7 @@ APM が有効になっているアプリケーションの場合は、[アプリ
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-次に、ファイルから python ログを収集するように、[Datadog Agent を構成します](#configure-the-datadog-agent)。
+次に、ファイルから Python ログを収集するように、[Datadog Agent を構成します](#configure-the-datadog-agent)。
 
 ### ファイルへのログの記録
 
@@ -156,7 +159,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Agent を再起動][4]すると、構成が適用されます。
+[Agent を再起動][5]して、コンフィギュレーションへの変更を適用します。
 
 ## その他の参考資料
 
@@ -164,5 +167,6 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /ja/tracing/connect_logs_and_traces/python
-[4]: /ja/agent/guide/agent-commands
+[3]: https://pypi.org/project/django-datadog-logger/
+[4]: /ja/tracing/connect_logs_and_traces/python
+[5]: /ja/agent/guide/agent-commands/

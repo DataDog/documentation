@@ -2,13 +2,13 @@
 title: コミュニティインテグレーションのインストール
 kind: ガイド
 further_reading:
-  - link: agent/troubleshooting/
+  - link: /agent/troubleshooting/
     tag: ドキュメント
     text: Agent のトラブルシューティング
-  - link: agent/guide/agent-configuration-files/
+  - link: /agent/guide/agent-configuration-files/
     tag: よくあるご質問
     text: Agent 構成ファイル
-  - link: agent/guide/agent-commands/
+  - link: /agent/guide/agent-commands/
     tag: よくあるご質問
     text: Agent のコマンド
 ---
@@ -50,7 +50,7 @@ Datadog Agent のコミュニティ開発のインテグレーションは、[In
 
 [1]: /ja/developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: /ja/getting_started/integrations
+[3]: /ja/getting_started/integrations/
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -63,16 +63,16 @@ WORKDIR /wheels
 RUN pip install "datadog-checks-dev[cli]"
 RUN git clone https://github.com/DataDog/integrations-extras.git
 RUN ddev config set extras ./integrations-extras
-RUN ddev -e release build <インテグレーション名>
+RUN ddev -e release build  <インテグレーション名>
 
 FROM datadog/agent:latest
 COPY --from=wheel_builder /wheels/integrations-extras/<インテグレーション名>/dist/ /dist
-RUN agent integration install -r -w /dist/*.whl
+RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
 ```
 
 次に、この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<インテグレーション名>` チェックを有効にします。
 
-[1]: /ja/agent/autodiscovery
+[1]: /ja/agent/autodiscovery/
 {{% /tab %}}
 {{% tab "Agent prior to 6.8" %}}
 
@@ -91,7 +91,7 @@ RUN agent integration install -r -w /dist/*.whl
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
 [3]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /ja/getting_started/integrations
+[4]: /ja/getting_started/integrations/
 [5]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}

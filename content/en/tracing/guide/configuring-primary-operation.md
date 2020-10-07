@@ -1,6 +1,8 @@
 ---
 title: Primary Operations in Services
 kind: guide
+aliases:
+- /tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
@@ -89,5 +91,5 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/getting_further/metrics_namespace/
+[1]: /tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings

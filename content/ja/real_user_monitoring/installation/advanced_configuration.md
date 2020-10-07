@@ -24,13 +24,13 @@ further_reading:
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum';
+import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'us',
-  sampleRate: 90
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    datacenter: Datacenter.US,
+    sampleRate: 90,
 });
 ```
 
@@ -38,11 +38,12 @@ datadogRum.init({
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  sampleRate: 90
-});
+window.DD_RUM &&
+    window.DD_RUM.init({
+        clientToken: '<クライアントトークン>',
+        applicationId: '<アプリケーション_ID>',
+        sampleRate: 90,
+    });
 ```
 
 {{% /tab %}}
@@ -52,9 +53,9 @@ window.DD_RUM && window.DD_RUM.init({
 
 ## 利用可能な API
 
-### グローバルメタデータを追加する
+### グローバルコンテキストを追加
 
-リアルユーザーモニタリング (RUM) を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにメタデータを追加します。
+リアルユーザーモニタリング (RUM) を初期化したら、`addRumGlobalContext(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -62,15 +63,26 @@ window.DD_RUM && window.DD_RUM.init({
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+datadogRum.addRumGlobalContext('<コンテキストキー>', <コンテキスト値>);
+
+// Code example
+datadogRum.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// グローバルメタデータ属性を追加--一度に1つずつ属性を追加
-window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<コンテキストキー>', <コンテキスト値>);
+
+// コード例
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
@@ -78,9 +90,9 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 **注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
 
-### デフォルトコンテキストを置換する
+### グローバルコンテキストを置換
 
-リアルユーザーモニタリング (RUM) を初期化したら、`setRumGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換できます。
+リアルユーザーモニタリング (RUM) を初期化したら、`setRumGlobalContext(context: Context)` API を使用してすべての RUM イベントのデフォルトコンテキストを置換します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -88,15 +100,26 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+datadogRum.setRumGlobalContext({ '<コンテキストキー>', <コンテキスト値>' });
+
+// Code example
+datadogRum.setRumGlobalContext({
+    codeVersion: 34,
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// すべてのビューのデフォルトコンテンツを完全に置換
-window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({ '<コンテキストキー>', <コンテキスト値>' });
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({
+        codeVersion: 34,
+    });
 ```
 
 {{% /tab %}}
@@ -114,35 +137,16 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction("<NAME>","<JSON_OBJECT>");
-```
+datadogRum.addUserAction('<名前>', '<JSON_オブジェクト>');
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
-
-```javascript
-// 名前と全データを含むオブジェクトを設定
-window.DD_RUM && DD_RUM.addUserAction("<NAME>","<JSON_OBJECT>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-例えば、カート内のアイテム数、中身、カート全体の総額を収集するには、下記の例のように構築します。
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
+// Code example
+datadogRum.addUserAction('checkout', {
+    cart: {
+        amount: 42,
+        currency: '$',
+        nb_items: 2,
+        items: ['socks', 't-shirt'],
+    },
 });
 ```
 
@@ -150,18 +154,24 @@ datadogRum.addUserAction("Cart Payed", {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
-});
+window.DD_RUM && DD_RUM.addUserAction('<名前>', '<JSON_オブジェクト>');
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.addUserAction('checkout', {
+        cart: {
+            amount: 42,
+            currency: '$',
+            nb_items: 2,
+            items: ['socks', 't-shirt'],
+        },
+    });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+上記の例では、RUM SDK がカート内のアイテム数、中身、カート全体の総額を収集します。
 
 ## その他の参考資料
 

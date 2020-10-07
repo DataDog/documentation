@@ -25,21 +25,21 @@ Supported platforms include:
 - Amazon AMI 2016.03+
 - Amazon Linux 2
 
-There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2].
+There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
 **Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
 The following provisioning systems are supported:
 
-- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][3]
-- Chef 12.7+: See the [Datadog Chef recipe][4]
-- Ansible 2.6+: See the [Datadog Ansible role][5]
+- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][4]
+- Chef 12.7+: See the [Datadog Chef recipe][5]
+- Ansible 2.6+: See the [Datadog Ansible role][6]
 
 ## Setup
 
-To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup. 
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][7] based on your system setup.
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommend to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -154,7 +154,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe for the Agent container with the following environment variables:
+2. Enable process collection and the system probe with the following environment variables in the Agent container. If all Agents are running in a single container, use:
 
     ```yaml
       # (...)
@@ -169,6 +169,8 @@ If you already have the [Agent running with a manifest][3]:
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
     ```
+
+    If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
 
 3. Mount the following extra volumes into the `datadog-agent` container:
 
@@ -193,7 +195,7 @@ If you already have the [Agent running with a manifest][3]:
                         mountPath: /var/run/s6
     ```
 
-4. Add a new system-prob as a side car to the Agent:
+4. Add a new system-probe as a side car to the Agent:
 
     ```yaml
      # (...)
@@ -217,8 +219,6 @@ If you already have the [Agent running with a manifest][3]:
                       command:
                           - /opt/datadog-agent/embedded/bin/system-probe
                       env:
-                          - name: DD_SYSTEM_PROBE_ENABLED
-                            value: 'true'
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
                       resources:
@@ -309,15 +309,21 @@ services:
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
+{{% tab "ECS" %}}
+To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+
+
+[1]: /integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md#enabling-system-probe-collection
-[4]: https://github.com/DataDog/chef-datadog
-[5]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
-[6]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /network_performance_monitoring/network_page#dns-resolution
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[5]: https://github.com/DataDog/chef-datadog
+[6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

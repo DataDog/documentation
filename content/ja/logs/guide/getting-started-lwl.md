@@ -2,16 +2,16 @@
 title: Logging Without Limits™ ガイド
 kind: ガイド
 further_reading:
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: ドキュメント
     text: ログエクスプローラーの詳細
-  - link: logs/explorer/patterns/
+  - link: /logs/explorer/patterns/
     tag: ドキュメント
     text: ログパターンビューの概要
-  - link: logs/live_tail
+  - link: /logs/live_tail/
     tag: ドキュメント
     text: Live Tail のご紹介
-  - link: logs/logs_to_metrics
+  - link: /logs/logs_to_metrics/
     tag: ドキュメント
     text: 収集されたログからメトリクスを生成する方法
 ---
@@ -70,7 +70,7 @@ further_reading:
 
 **注**: ログが複数の除外フィルターに一致した場合は、最初の除外フィルター規則だけが適用されます。複数の除外フィルターによってログが何度もサンプリングされたり除外されることはありません。
 
-ここでは、サービスステータス `INFO` パターン `Updating recommendations with customer_id=* & url=shops/*/*` が除外フィルターで絞り込まれます。これに似た大量のログパターンをログエクスポローラーから除外することで、問題を素早く見つけ特定するのに役立ちます。ただし、これらのログはログエクスポローラービューから**のみ**削除されるだけなので、収集およびインデックス化され、[ライブテイル][5]での表示、[ログアーカイブ][6]への送信、[メトリクスの生成][7]に使用することができます。
+ここでは、サービスステータス `INFO` パターン `Updating recommendations with customer_id=* & url=shops/*/*` が除外フィルターで絞り込まれます。これに似た大量のログパターンをログエクスポローラーから除外することで、問題を素早く見つけ特定するのに役立ちます。ただし、これらのログはログエクスポローラービューから**のみ**削除されるだけなので、収集し、[ライブテイル][5]での表示、[ログアーカイブ][6]への送信、[メトリクスの生成][7]に使用することができます。
 
 {{< img src="logs/guide/getting-started-lwl/live_tail.gif" alt="Live Tail" style="width:100%;">}}
 
@@ -110,10 +110,11 @@ further_reading:
 ## まとめ
 
 ここでは、Logging without Limits™ を以下に適用する方法について説明しました：
-* [1. 最多ログのサービスステータスを特定](#1-identify-your-most-logging-service-status)
-* [2. 大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
-* [3. 除外フィルターログパターンを作成](#3-create-a-log-pattern-exclusion-filter)
-* [4. メトリクスを生成し除外されたログを追跡](#4-generate-metrics-to-track-excluded-logs)
+
+1. [最多ログのサービスステータスを特定](#1-identify-your-most-logging-service-status)
+2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
+3. [除外フィルターログパターンを作成](#3-create-a-log-pattern-exclusion-filter)
+4. [メトリクスを生成し除外されたログを追跡](#4-generate-metrics-to-track-excluded-logs)
   * [新しいログベースのメトリクスを追加](#add-a-new-log-based-metric)
   * [異常検知モニターの作成](#create-an-anomaly-detection-monitor)
 
@@ -130,6 +131,6 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [5]: /ja/logs/live_tail/
 [6]: /ja/logs/archives/
 [7]: /ja/developers/metrics/
-[8]: /ja/logs/logs_to_metrics
+[8]: /ja/logs/logs_to_metrics/
 [9]: /ja/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

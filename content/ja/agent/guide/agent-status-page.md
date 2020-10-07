@@ -2,13 +2,13 @@
 title: Agent v6 ステータスページ
 kind: ガイド
 further_reading:
-  - link: agent/troubleshooting/
+  - link: /agent/troubleshooting/
     tag: ドキュメント
     text: Agent のトラブルシューティング
-  - link: agent/guide/agent-configuration-files/
+  - link: /agent/guide/agent-configuration-files/
     tag: ガイド
     text: Agent 構成ファイル
-  - link: agent/guide/agent-commands/
+  - link: /agent/guide/agent-commands/
     tag: ガイド
     text: Agent のコマンド
 ---
@@ -227,17 +227,21 @@ Forwarder は複数のワーカーを使用して Datadog にペイロードを�
   Series Flushed: 273
   Service Check: 20
   Service Checks Flushed: 20
+  Sketches Flushed: 8
+  Checks Histogram Bucket Metric Sample: 24
 ```
 
 用語と説明
 
-| 用語                    | 説明                                                                              |
-|-------------------------|------------------------------------------------------------------------------------------|
-| Checks Metric Sample    | チェックから Aggregator へ送信されたメトリクスの総数。                      |
-| Dogstatsd Metric Sample | DogStatsD サーバーから Aggregator へ送信されたメトリクスの総数。            |
-| イベント                   | Aggregator へ送信されたイベントの総数。                                       |
-| Service Check           | Aggregator へ送信されたサービスチェックの総数。                               |
-| Flush                   | 集計されたメトリクスが Datadog へ送信するために Forwarder へフラッシュされた回数。 |
+| 用語                                         | 説明                                                                                           |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| Checks Metric Sample                         | チェックから Aggregator へ送信されたメトリクスの総数。                                   |
+| Dogstatsd Metric Sample                      | DogStatsD サーバーから Aggregator へ送信されたメトリクスの総数。                         |
+| イベント                                        | Aggregator へ送信されたイベントの総数。                                                    |
+| Service Check                                | Aggregator へ送信されたサービスチェックの総数。                                            |
+| Flush                                        | 集計されたメトリクスが Datadog へ送信するために Forwarder へフラッシュされた回数。              |
+| Sketches Flushed                             | 集計されたディストリビューションメトリクスが Datadog へ送信するために Forwarder へフラッシュされた回数。 |
+| Checks Histogram Bucket Metric Sample        | チェックから Aggregator に送信されたヒストグラムバケットメトリクスの数。                        |
 
 ## DogStatsD
 
@@ -261,9 +265,8 @@ Forwarder は複数のワーカーを使用して Datadog にペイロードを�
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/guide/agent-commands/#agent-information
-[2]: /ja/agent/troubleshooting/ntp
-[3]: /ja/agent/faq/how-datadog-agent-determines-the-hostname
+[2]: /ja/agent/troubleshooting/ntp/
+[3]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/

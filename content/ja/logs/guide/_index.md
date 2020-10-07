@@ -13,7 +13,9 @@ private: true
     {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}ログリスト API とページネーションで複数のログを収集{{< /nextlink >}}
     {{< nextlink href="logs/guide/restrict-access-to-log-events-with-restriction-queries" >}}ログデータのサブセットへのアクセスを権限のあるユーザーに制限{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログの収集{{< /nextlink >}}
-    {{< nextlink href="logs/guide/integration-pipeline-reference" >}}インテグレーションパイプラインリファレンス{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}ログパースのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}ログローテーションのためのファイルアクセス許可の設定 (Linux){{< /nextlink >}}
-{{< /whatsnext >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/build-custom-reports-using-log-analytics-api/?tab=table" >}}ログ分析 API を使用したカスタムレポートの構築{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 関数で AWS サービスログを送信{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/enrichment-tables/" >}}エンリッチメントテーブルを含むログにカスタムメタデータを追加{{< /nextlink >}}{{< /whatsnext >}}

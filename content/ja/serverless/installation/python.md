@@ -1,0 +1,326 @@
+---
+title: Python アプリケーションのインスツルメンテーション
+kind: ドキュメント
+further_reading:
+  - link: serverless/installation/node
+    tag: Documentation
+    text: Node.js サーバーレスモニタリングのインストール
+  - link: serverless/installation/ruby
+    tag: Documentation
+    text: Ruby サーバーレスモニタリングのインストール
+---
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下のいずれかの方法を選択してアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+
+## 構成
+
+{{< tabs >}}
+{{% tab "Serverless Framework" %}}
+
+[Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+
+Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
+
+1. Datadog サーバーレスプラグインをインストールします。
+      ```
+    yarn add --dev serverless-plugin-datadog
+    ```
+2. `serverless.yml` に以下を追加します。
+    ```
+    plugins:
+      - serverless-plugin-datadog
+    ```
+3. `serverless.yml` に、以下のセクションも追加します。
+    ```
+    custom:
+      datadog:
+        flushMetricsToLogs: true
+        forwarder: # The Datadog Forwarder ARN goes here.
+    ```
+   Datadog Forwarder ARN またはインストールの詳細については、[こちら][2]を参照してください。追加の設定については、[プラグインのドキュメント][1]を参照してください。
+
+[1]: https://github.com/DataDog/serverless-plugin-datadog
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+
+[Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+
+### Datadog CloudFormation マクロのインストール
+
+[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
+
+```sh
+aws cloudformation create-stack \
+  --stack-name datadog-serverless-macro \
+  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+```
+
+マクロが表示され、使用を開始できます。
+
+### 関数をインスツルメントする
+
+`template.yml` で、SAM の `AWS::Serverless` 変換の**後に**、`Transform` セクションの下に以下を追加します。
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      pythonLayerVersion: "<LAYER_VERSION>"
+      stackName: !Ref "AWS::StackName"
+      forwarderArn: "<FORWARDER_ARN>"
+      service: "<SERVICE>" # オプション
+      env: "<ENV>" # オプション
+```
+
+`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+
+[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
+
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://github.com/DataDog/datadog-lambda-python/releases
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+
+[Datadog CloudFormation マクロ][1]は、AWS CDK によって生成された CloudFormation テンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+
+### Datadog CloudFormation マクロのインストール
+
+[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定の地域に**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
+
+```sh
+aws cloudformation create-stack \
+  --stack-name datadog-serverless-macro \
+  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+```
+
+マクロが表示され、使用を開始できます。
+
+### 関数をインスツルメントする
+
+AWS CDK アプリの `Stack` オブジェクトに `DatadogServerless` 変換と `CfnMapping` を追加します。以下の Python のサンプルコードを参照してください (他の言語での使用方法も同様です)。
+
+```python
+from aws_cdk import core
+
+class CdkStack(core.Stack):
+  def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+    super().__init__(scope, id, **kwargs)
+    self.add_transform("DatadogServerless")
+
+    mapping = core.CfnMapping(self, "Datadog",
+      mapping={
+        "Parameters": {
+          "pythonLayerVersion": "<LAYER_VERSION>",
+          "forwarderArn": "<FORWARDER_ARN>",
+          "stackName": self.stackName,
+          "service": "<SERVICE>",  # オプション
+          "env": "<ENV>",  # オプション
+        }
+      })
+```
+
+`<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
+
+[マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
+
+[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://github.com/DataDog/datadog-lambda-python/releases
+{{% /tab %}}
+{{% tab "Zappa" %}}
+
+### Zappa 設定の更新
+
+1. `zappa_settings.json` に下記の設定を追加します。
+    ```json
+    {
+        "dev": {
+            "layers": ["arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>"],
+            "lambda_handler": "datadog_lambda.handler.handler",
+            "aws_environment_variables": {
+                "DD_LAMBDA_HANDLER": "handler.lambda_handler",
+                "DD_TRACE_ENABLED": "true",
+                "DD_FLUSH_TO_LOG": "true",
+            },
+        }
+    }
+    ```
+1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。`VERSION` については、[最新リリース][1]をご確認ください。例:
+    ```
+    # For regular regions
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+
+    # For us-gov regions
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
+    ```
+
+### Datadog Forwarder をロググループにサブスクライブ
+
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+
+1. [まだの場合は、Datadog Forwarder をインストールします][2]。
+2. [DdFetchLambdaTags のオプションが有効であることを確認します][3]。
+3. [Datadog Forwarder を関数のロググループにサブスクライブします][4]。
+
+
+[1]: https://github.com/DataDog/datadog-lambda-python/releases
+[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+{{% /tab %}}
+{{% tab "Datadog CLI" %}}
+
+<div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+
+Datadog CLI を使用して、CI/CD パイプラインの Lambda 関数にインスツルメンテーションを設定します。CLI コマンドは、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、メトリクス、トレース、ログを Datadog に送信するように関数を構成します。
+
+### Datadog CLI のインストール
+
+NPM または Yarn を使用して Datadog CLI をインストールします。
+
+```sh
+# NPM
+npm install -g @datadog/datadog-ci
+
+# Yarn
+yarn global add @datadog/datadog-ci
+```
+
+### 関数をインスツルメントする
+
+[AWS 認証情報][1]を使用して次のコマンドを実行します。`<functionname>` と `<another_functionname>` を Lambda 関数名に置き換え、`<aws_region>` を AWS リージョン名に置き換え、`<layer_version>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][2]を参照)、`<forwarder_arn>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][3]を参照)。
+
+```sh
+datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder <forwarder_arn>
+```
+
+例:
+
+```sh
+datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
+```
+
+[CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://github.com/DataDog/datadog-lambda-python/releases
+[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda
+{{% /tab %}}
+{{% tab "Custom" %}}
+
+### Datadog Lambda ライブラリのインストール
+
+Datadog Lambda ライブラリをレイヤー (推奨) または Python パッケージとしてインポートすることができます。
+
+`datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。例: datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致。
+
+#### レイヤーの使用
+
+以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+```
+# 通常のリージョンの場合
+arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+
+# 米国政府リージョンの場合
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+```
+
+使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。`VERSION` については、[最新リリース][2]を参照してください。例:
+
+```
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
+```
+
+#### パッケージの使用
+
+`datadog-lambda` とその依存関係を、ローカルで関数プロジェクトフォルダーにインストールします。**注**: `datadog-lambda` はネイティブ拡張機能である `ddtrace` に依存するため、これらは Linux 環境でインストールおよびコンパイルを行う必要があります。例えば、Serverless Framework には [dockerizePip][3] を、AWS SAM には [--use-container][4] を使用することができます。詳しくは、[関数デプロイメントパッケージに依存関係を追加する方法][5]をご参照ください。
+
+```
+pip install datadog-lambda -t ./
+```
+
+[最新リリース][6]を参照。
+
+### 関数の構成
+
+1. 関数のハンドラーを `datadog_lambda.handler.handler` に設定します。
+2. 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+3. 環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
+4. 環境変数 `DD_FLUSH_TO_LOG` を `true` に設定します。
+5. オプションで、関数に `service` および `env` タグを適切な値とともに追加します。
+
+### Datadog Forwarder をロググループにサブスクライブ
+
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+
+1. [まだの場合は、Datadog Forwarder をインストールします][7]。
+2. [DdFetchLambdaTags のオプションが有効であることを確認します][8]。
+3. [Datadog Forwarder を関数のロググループにサブスクライブします][9]。
+
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/DataDog/datadog-lambda-python/releases
+[3]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[4]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[6]: https://pypi.org/project/datadog-lambda/
+[7]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[8]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+{{% /tab %}}
+{{< /tabs >}}
+
+## Datadog サーバーレスモニタリングの利用
+
+以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
+
+### カスタムビジネスメトリクスの監視
+
+カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
+
+```python
+from ddtrace import tracer
+from datadog_lambda.metric import lambda_metric
+
+def lambda_handler(event, context):
+    # カスタムメトリクスを送信する
+    lambda_metric(
+        "coffee_house.order_value",  # メトリクス名
+        12.45,  # メトリクス値
+        tags=['product:latte', 'order:online']  # タグ
+    )
+    return {
+        "statusCode": 200,
+        "body": get_message()
+    }
+
+# カスタムスパンを送信する
+@tracer.wrap()
+def get_message():
+    return "Hello from serverless!"
+```
+
+[カスタムメトリクスの送信を有効化][3]してはじめます。
+
+### AWS X-Ray インテグレーションを有効にする
+
+Datadog の AWS X-Ray インテグレーションはエンドツーエンドのサーバーレストランザクションを可視化します。発生したエラーや遅延に的を絞り、関数のパフォーマンスがユーザーエクスペリエンスにどう影響しているかを確認することができます。言語とコンフィギュレーションに応じて、[Datadog APM または AWS X-Ray インテグレーションの中から選択][5]してトレースを実行してください。
+
+{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="AWS Lambda を Datadog でトレースするためのアーキテクチャダイアグラム" >}}
+
+[1]: /ja/integrations/amazon_web_services/
+[2]: /ja/serverless/forwarder
+[3]: https://app.datadoghq.com/functions
+[4]: /ja/serverless/custom_metrics
+[5]: /ja/serverless/distributed_tracing

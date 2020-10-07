@@ -1,6 +1,12 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    kube_scheduler: assets/dashboards/overview.json
+  logs:
+    source: kube_scheduler
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -42,34 +48,23 @@ supported_os:
 Kubernetes Scheduler チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
+
+[オートディスカバリーのインテグレーションテンプレート][3]のガイドを参照して、次のパラメーターを適用してください。
 
 #### メトリクスの収集
 
 1. kube_scheduler のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_scheduler.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_scheduler.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][3]。
+2. [Agent を再起動します][4]。
 
 #### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][5]を参照してください。
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[daemonset 構成][4]でこれを有効にします。
-
-   ```yaml
-     # (...)
-     env:
-       # (...)
-       - name: DD_LOGS_ENABLED
-           value: "true"
-       - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-           value: "true"
-     # (...)
-   ```
-
-2. [こちらのマニフェスト][5]のように、Docker ソケットを Datadog Agent にマウントします。
-
-3. [Agent を再起動します][3]。
+| パラメーター      | 値                                     |
+|----------------|-------------------------------------------|
+| `<LOG_CONFIG>` | `{"source": "kube_scheduler", "service": "<サービス名>"}` |
 
 ### 検証
 
@@ -96,9 +91,9 @@ Kube Scheduler には、イベントは含まれません。
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#create-manifest
+[3]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

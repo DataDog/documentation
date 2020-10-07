@@ -164,16 +164,16 @@ Besoin d'aide ? Contactez [l'assistance Rigor][11].
 
 Consultez le site [Rigor][12] pour obtenir plus d'informations sur Rigor et sur la façon dont nous pouvons contribuer à optimiser les performances de votre site web.
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_timeboard_with_metrics.png
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_admin_menu.png
-[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_integration_configuration.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_timeboard_with_metrics.png
+[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_admin_menu.png
+[3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_integration_configuration.png
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_add_integration_to_check.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_webhooks_menu.png
-[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_webhooks_chooser.png
-[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_webhooks_configuration.png
-[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_add_webhook_to_check.png
-[10]: https://raw.githubusercontent.com/DataDog/integrations-extras/rigor/rigor/images/rigor_events_example.png
+[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_add_integration_to_check.png
+[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_webhooks_menu.png
+[7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_webhooks_chooser.png
+[8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_webhooks_configuration.png
+[9]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_add_webhook_to_check.png
+[10]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/rigor/images/rigor_events_example.png
 [11]: mailto:support@rigor.com
 [12]: https://rigor.com
 

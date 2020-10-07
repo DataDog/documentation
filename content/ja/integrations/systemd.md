@@ -2,6 +2,8 @@
 assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -39,9 +41,18 @@ supported_os:
 
 ### インストール
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+ホストで実行中の Agent に対してこのチェックを構成するには:
+
+Systemd チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+
+[1]: https://app.datadoghq.com/account/settings#agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
@@ -60,13 +71,18 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
    Systemd パフォーマンスデータの収集を開始します。
-   使用可能なすべての構成オプションの詳細については、[サンプル systemd.d/conf.yaml][3] を参照してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル systemd.d/conf.yaml][1] を参照してください。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションの `systemd` を探します。
+[Agent の status サブコマンドを実行][2]し、Checks セクションの `systemd` を探します。
 
 ## 収集データ
 
@@ -103,12 +119,9 @@ Systemd チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/systemd/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

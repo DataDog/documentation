@@ -51,7 +51,7 @@ After you have [enabled log collection][1], configure your application language 
 
 {{< partial name="logs/logs-languages.html" >}}
 
-## Container Log collection
+## Container Log Collection
 
 The Datadog Agent can [collect logs directly from container stdout/stderr][13] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
 It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][14]. Autodiscovery can also be used to [configure log collection directly in the container labels][15]. In Kubernetes environments you can also leverage [the daemonset installation][16].
@@ -60,17 +60,17 @@ Choose your environment below to get dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
 
-## Serverless Log collection
+## Serverless Log Collection
 
 Datadog collects logs from AWS Lambda. To enable this, refer to the [AWS Lambda integration documentation][17].
 
-## Cloud Providers Log collection
+## Cloud Providers Log Collection
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-## Custom Log forwarder
+## Custom Log Forwarder
 
 Any custom process or [logging library][18] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs.
 
@@ -222,8 +222,8 @@ Endpoints that can be used to send logs to Datadog EU region:
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
-| `http-intake.logs.datadoghq.eu`         | `443` | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                       |
+| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in JSON format over HTTPS. See the [Agent logs documentation][1].                                                        |
+| `http-intake.logs.datadoghq.eu`         | `443` | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Agent logs documentation][1].                                       |
 | `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 | `lambda-http-intake.logs.datadoghq.eu`  | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
@@ -239,8 +239,6 @@ Endpoints that can be used to send logs to Datadog EU region:
 
 ## Reserved attributes
 
-**Note**: As a best practice for log collection, Datadog recommends using unified service tagging when assigning tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][22] documentation.
-
 Here are some key attributes you should pay attention to when setting up your project:
 
 | Attribute | Description                                                                                                                                                                                                                                |
@@ -254,6 +252,10 @@ Here are some key attributes you should pay attention to when setting up your pr
 Your logs are collected and centralized into the [Log Explorer][21] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
+
+### Unified service tagging
+
+As a best practice for log collection, Datadog recommends configuring unified service tagging to tie Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. Refer to the dedicated [unified service tagging][22] documentation to configure unified service tagging.
 
 ### How to get the most of your application logs
 
@@ -280,6 +282,15 @@ For integration frameworks, Datadog provides guidelines on how to log JSON into 
 #### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, it is recommended to format these logs as JSON to avoid the need for custom parsing rules.
+
+### Limits applied to ingested log events
+
+* For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
+* Log events can be submitted up to 18h in the past and 2h in the future.
+* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+
+Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
 ## Further Reading
 

@@ -1,7 +1,7 @@
 ---
-title: Run Synthetics Tests from Private Locations
+title: Run Synthetic Tests from Private Locations
 kind: documentation
-description: Run Synthetics API and browser tests from private locations
+description: Run Synthetic API and browser tests from private locations
 further_reading:
     - link: /getting_started/synthetics/private_location
       tag: 'Documentation'
@@ -15,15 +15,15 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access to this feature.
+The access to this feature is restricted - if you don't have access, reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a>.
 </div>
 
 ## Overview
 
 Private locations allow you to **monitor internal-facing applications or any private URLs** that aren’t accessible from the public internet. They can also be used to:
 
-* **Create new custom Synthetics locations** in areas that are mission-critical to your business.
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetics CI integration][1].
+* **Create custom Synthetic locations** in areas that are mission-critical to your business.
+* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetic CI/CD testing][1].
 * **Compare application performance** from both inside & outside your internal network.
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
@@ -36,7 +36,7 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 ### Docker
 
-The private location worker is shipped as a Docker container. It can run on a Linux based OS or Windows OS if the [Docker engine][3] is available on your host and can run in Linux containers mode.
+The private location worker is shipped as a Docker container. The official [Docker image][3] is available on Docker Hub. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog Private Locations Endpoints
 
@@ -72,7 +72,7 @@ To pull test configurations and push test results, the private location worker n
 
 ### Create your private location
 
-Go in _Synthetics_ -> _Settings_ -> _Private Locations_ and click **Add Private Location**:
+Go in _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ and click **Add Private Location**:
 
 {{< img src="synthetics/private_locations/add_pl.png" alt="create a private locations"  style="width:100%;">}}
 
@@ -88,7 +88,7 @@ Then click **Save Location and Generate Configuration File** to create your priv
 
 ### Configure your private location
 
-Depending on your internal network set up, you can add initial configuration parameters (proxy and reserved IPs configuration) to your private location configuration file. The parameters added in **Step 2** are automatically reflected in the **Step 3** configuration file. 
+Configure your private location by customizing the generated configuration file. Initial configuration parameters like [proxy] (#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) are added in **Step 2** and are automatically reflected in the **Step 3** configuration file. Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
 
 #### Proxy Configuration
 
@@ -96,21 +96,21 @@ If the traffic between your private location and Datadog has to go through a pro
 
 {{< img src="synthetics/private_locations/pl_proxy.png" alt="Add a proxy to your private location configuration file"  style="width:90%;">}}
 
-[Advanced proxy configuration options][4] are available.
+[Advanced proxy configuration options][5] are available.
 
 #### Blocking Reserved IPs
 
-By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][5] and [IPv6 address registry][6]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
+By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
 
 If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configure reserved IPs"  style="width:90%;">}}
 
-[Advanced reserved IPs configuration options][7] are available.
+[Advanced reserved IPs configuration options][8] are available.
 
 #### Advanced Configuration
 
-[Advanced configuration options][8] are available and can be found by running the below `help` command: 
+[Advanced configuration options][9] are available and can be found by running the below `help` command:
 
 ```shell
 docker run --rm datadog/synthetics-private-location-worker --help
@@ -132,7 +132,7 @@ Launch your private location on:
 
 {{% tab "Docker" %}}
 
-Run this command to boot your private location worker by mounting your configuration file to the container:
+Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
 docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
@@ -184,28 +184,29 @@ docker-compose -f docker-compose.yml up
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-        name: datadog-private-location-worker
-        namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-        selector:
-            matchLabels:
-                app: private-location
-        template:
-            metadata:
-                name: datadog-private-location-worker
-                labels:
-                    app: private-location
+      selector:
+        matchLabels:
+          app: private-location
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
         spec:
-            containers:
-                - name: datadog-private-location-worker
-                  image: datadog/synthetics-private-location-worker
-                  volumeMounts:
-                      - mountPath: /etc/datadog/
-                        name: worker-config
-            volumes:
-                - name: worker-config
-                  configMap:
-                      name: private-location-worker-config
+          containers:
+          - name: datadog-private-location-worker
+            image: datadog/synthetics-private-location-worker
+            volumeMounts:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
+          - name: worker-config
+            configMap:
+              name: private-location-worker-config
     ```
 
     **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
@@ -305,32 +306,32 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
     kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. Take advantage of deployments to describe the desired state associated with your private locations. Create the following 
+2. Take advantage of deployments to describe the desired state associated with your private locations. Create the following `private-location-worker-deployment.yaml` file:
 
     ```yaml
-    private-location-worker-deployment.yaml file:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: datadog-private-location-worker
-    namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-    selector:
-      matchLabels:
-        app: private-location
-    template:
-      metadata:
-        name: datadog-private-location-worker
-        labels:
+      selector:
+        matchLabels:
           app: private-location
-      spec:
-        containers:
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
+        spec:
+          containers:
           - name: datadog-private-location-worker
             image: datadog/synthetics-private-location-worker
             volumeMounts:
-              - mountPath: /etc/datadog/
-                name: worker-config
-        volumes:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
           - name: worker-config
             configMap:
               name: private-location-worker-config
@@ -345,6 +346,99 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### Set up healthchecks
+
+Add a healthcheck mechanism so your orchestrator can ensure the workers are running correctly.
+
+The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (500ms by default). The container is considered unhealthy if no poll has been performed in a while, for example: no fetch in the last minute.
+
+Use the below configuration to set up healthchecks on your containers with:
+
+{{< tabs >}}
+
+{{% tab "Docker Compose" %}}
+
+```yaml
+healthcheck:
+  retries: 3
+  test: [
+    "CMD", "/bin/sh", "-c", "'[ $$(expr $$(cat /tmp/liveness.date) + 300000) -gt $$(date +%s%3N) ]'"
+  ]
+  timeout: 2s
+  interval: 10s
+  start_period: 30s
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Fargate" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "EKS" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
 
 {{% /tab %}}
 
@@ -370,13 +464,13 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Assign Synthetic test to private location"  style="width:80%;">}}
 
-Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][9], etc.
+Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
 
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
-You can also leverage the [`concurrency` parameter][10] value to adjust the number of tests your private location workers can run in parallel.
+You can also leverage the [`concurrency` parameter][11] value to adjust the number of tests your private location workers can run in parallel.
 
 ### Hardware Requirements
 
@@ -392,7 +486,7 @@ You can also leverage the [`concurrency` parameter][10] value to adjust the numb
 | Private location running API tests only             | From 1 to 200                 | 20mCores/5MiB per slot    |
 | Private location running Browser tests only         | From 1 to 50                  | 150mCores/1GiB per slot   |
 
-**Example:** For a private location running both API and Browser tests, and with a `concurrency` set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
+**Example:** For a private location running both API and Browser tests, and with a [`concurrency`][11] set to the default `10`, recommendation for a safe usage is ~ 1.5 core `(150mCores + (150mCores*10 slots))` and ~ 10GiB memory `(150M + (1G*10 slots))`.
 
 #### Disk
 
@@ -404,11 +498,12 @@ The recommendation for disk size is to allocate ~ 10MiB/slot (1MiB/slot for API-
 
 [1]: /synthetics/ci
 [2]: /synthetics/
-[3]: https://docs.docker.com/engine/install/
-[4]: /synthetics/private_locations/configuration/#proxy-configuration
-[5]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[6]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[7]: /synthetics/private_locations/configuration/#reserved-ips-configuration
-[8]: /synthetics/private_locations/configuration/
-[9]: /synthetics/metrics
-[10]: /synthetics/private_locations/configuration/#parallelization-configuration
+[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[4]: https://docs.docker.com/engine/install/
+[5]: /synthetics/private_locations/configuration/#proxy-configuration
+[6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
+[9]: /synthetics/private_locations/configuration/
+[10]: /synthetics/metrics
+[11]: /synthetics/private_locations/configuration/#parallelization-configuration

@@ -41,7 +41,7 @@ Here are setup examples for the following logging libraries:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][5].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -62,16 +62,14 @@ Usage example with [JSON-log-formatter][1]:
 
 ```python
 import logging
+from pythonjsonlogger import jsonlogger
 
-import json_log_formatter
+logger = logging.getLogger()
 
-formatter = json_log_formatter.JSONFormatter()
-
-json_handler = logging.FileHandler(filename='/var/log/my-log.json')
-json_handler.setFormatter(formatter)
-
-logger = logging.getLogger('my_json')
-logger.addHandler(json_handler)
+logHandler = logging.FileHandler(filename='/var/log/my-log.json')
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
 logger.setLevel(logging.INFO)
 
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
@@ -160,7 +158,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Restart the Agent][4] to apply the configuration changes.
+[Restart the Agent][5] to apply the configuration changes.
 
 ## Further Reading
 
@@ -169,5 +167,5 @@ logs:
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /agent/guide/agent-commands/
-[5]: /tracing/connect_logs_and_traces/python
+[4]: /tracing/connect_logs_and_traces/python
+[5]: /agent/guide/agent-commands/

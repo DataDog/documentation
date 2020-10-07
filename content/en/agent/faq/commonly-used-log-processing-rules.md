@@ -19,7 +19,7 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Find on this page exemples of commonly used log processing rules.
+Find on this page examples of commonly used log processing rules.
 
 ## Generic String: "sensitive-info"
 

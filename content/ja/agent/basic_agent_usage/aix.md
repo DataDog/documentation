@@ -42,7 +42,9 @@ installp -aXYgd ./datadog-unix-agent-<バージョン>.powerpc.bff -e dd-aix-ins
 
 これで、Agent が `/opt/datadog-agent` にインストールされます。
 
-注: Agent のインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、インストールコマンドの `-e` パラメーターを削除します。
+### インストールログファイル
+
+Agent のインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、インストールコマンドの `-e` パラメーターを削除します。
 
 ## コマンド
 
@@ -55,7 +57,7 @@ installp -aXYgd ./datadog-unix-agent-<バージョン>.powerpc.bff -e dd-aix-ins
 | フレアの送信                      | `datadog-agent flare`       |
 | コマンドの使用方法の表示           | `datadog-agent --help`      |
 
-## コンフィグレーション
+## 構成
 
 Agent の構成ファイルおよびフォルダーは、
 `/etc/datadog-agent/datadog.yaml` にあります。
@@ -83,7 +85,7 @@ Agent の構成ファイルおよびフォルダーは、
 * process
 * lparstats
 * disk
-* network
+* ネットワーク
 
 上記のインテグレーションを有効にするには、提供されている構成ファイルサンプルをコピーして編集します。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML 構成ファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、その構成を設定します。
 

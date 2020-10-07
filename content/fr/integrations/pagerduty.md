@@ -23,16 +23,18 @@ version: '1.0'
 
 Associez PagerDuty à Datadog pour :
 
-  * Déclencher et résoudre des incidents depuis votre flux en mentionnant `@pagerduty` dans votre publication
-  * Visualiser les incidents et réaffectations de votre flux lorsqu'ils se produisent
-  * Être informé quotidiennement des personnes en service
+- Déclencher et résoudre des incidents depuis votre flux en mentionnant `@pagerduty` dans votre publication
+- Visualiser les incidents et actions d'escalade en temps réel depuis votre flux
+- Être informé quotidiennement des personnes en service
 
 ## Implémentation
+
 Consultez [cette documentation][1] sur le site de PagerDuty.
 
 Une fois l'intégration de PagerDuty configurée, vous pouvez consulter les [tendances des incidents Pagerduty][2] personnalisées de Datadog.
 
 ## Données collectées
+
 ### Métriques
 
 L'intégration PagerDuty n'inclut aucune métrique.
@@ -42,14 +44,16 @@ L'intégration PagerDuty n'inclut aucune métrique.
 Vos événements PagerDuty résolus/déclenchés s'affichent dans votre [flux d'événements][3].
 
 ### Checks de service
+
 L'intégration PagerDuty n'inclut aucun check de service.
 
 ## Dépannage
+
 ### Comment résoudre automatiquement un service PagerDuty lors du rétablissement d'un monitor ?
 
 Vous devez inclure la notification PagerDuty dans le contexte `{{#is_recovery}}` de la section **Say what's happening** de votre monitor, comme suit :
 
-```
+```text
 {{#is_recovery}}
 
     Cette notification ne surviendra que lors de la résolution du monitor.
@@ -70,4 +74,4 @@ La longueur des notifications de votre monitor envoyées à PagerDuty est limit�
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
 [2]: https://app.datadoghq.com/report/pagerduty
-[3]: https://docs.datadoghq.com/fr/events
+[3]: https://docs.datadoghq.com/fr/events/

@@ -1,6 +1,8 @@
 ---
 title: Configuration de l'Agent pour un proxy
 kind: documentation
+aliases:
+  - /fr/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 further_reading:
   - link: /logs/
     tag: Documentation
@@ -29,8 +31,7 @@ Les proxys Web traditionnels sont pris en charge de manière native par l'Agent.
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-Définissez différents serveurs de proxy pour les requêtes `https` et `http` dans le fichier de configuration `datadog.yaml` de votre Agent.
-L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
+Définissez différents serveurs de proxy pour les requêtes `https` et `http` dans le fichier de configuration `datadog.yaml` de votre Agent. L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
 
 <div class="alert alert-warning">
 Si la collecte de logs est activée, assurez-vous qu'un transport spécifique est <a href="/agent/logs/log_transport?tab=https#imposer-un-transport-specifique">imposé</a>.
@@ -74,6 +75,23 @@ proxy:
       - host2
 ```
 
+**Remarque** : toutes les intégrations qui envoient des requêtes HTTP(S) utilisent les paramètres de proxy définis dans le fichier de configuration `datadog.yaml` si aucun paramètre n'est spécifié au niveau de l'intégration. Pour modifier ce comportement, définissez `skip_proxy` sur true dans la configuration de chaque instance ou dans la configuration de secours `init_config` de votre intégration.
+
+##### Valeurs acceptées pour NO_PROXY
+
+* Un nom de domaine englobe ce nom et tous les sous-domaines.
+  - Par ex, `datadoghq.com` englobe `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, mais **pas** `www.notdatadoghq.com`
+  - Par ex., `datadoghq` englobe `frontend.datadoghq`, `backend.datadoghq`, mais **pas** `www.datadoghq.com` ou `www.datadoghq.eu`
+* Un nom de domaine qui commence par un « . » englobe uniquement les sous-domaines.
+  - Par ex., `.datadoghq.com` englobe `app.agent.datadoghq.com`, `www.datadoghq.com`, mais **pas** `datadoghq.com`
+* Une plage CIDR englobe les adresses IP au sein du sous-réseau.
+  - Par ex., `192.168.1.0/24` englobe la plage d'IP comprise entre `192.168.1.1` et `192.168.1.254`
+* Une adresse IP exacte
+  - Par ex., `169.254.169.254`
+* Un hostname
+  - Par ex., `webserver1`
+
+
 #### Variables d'environnement
 
 À partir de l'Agent v6.4, vous pouvez définir vos paramètres de proxy via des variables d'environnement :
@@ -93,7 +111,7 @@ L'Agent utilise les valeurs suivantes par ordre de priorité :
 3. Les valeurs spécifiées dans `datadog.yaml`
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
 <div class="alert alert-warning">
 Le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit PAS être utilisé pour le proxy des logs. Consultez la section <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
@@ -121,7 +139,7 @@ N'oubliez pas de [redémarrer l'Agent][1] pour que les nouveaux paramètres soie
 
 Il s'agit de la meilleure option si vous ne disposez pas d'un proxy web facilement disponible sur votre réseau et que vous souhaitez appliquer un proxy à un grand nombre d'Agents. Dans certains cas, une seule instance HAProxy suffit à gérer le trafic local de l'Agent sur votre réseau. Chaque proxy peut prendre en charge jusqu'à 1 000 Agents. (À noter qu'il s'agit d'une estimation modeste basée sur les performances d'instances m3.xl. Plusieurs variables liées au réseau peuvent influencer la charge sur les proxys. Comme toujours, effectuez le déploiement avec prudence. Consultez la [documentation relative à HAProxy][2] pour en savoir plus.)
 
-`agent ---> haproxy ---> Datadog`
+`Agent ---> haproxy ---> Datadog`
 
 ### Redirection vers un proxy avec HAProxy
 
@@ -433,7 +451,8 @@ process_config:
 
 logs_config:
     use_http: true
-    logs_dd_url: http://haproxy.example.com:3837
+    logs_dd_url: haproxy.example.com:3837
+    logs_no_ssl: true
 ```
 
 Ensuite, modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `skip_ssl_validation` sur `true`. Ceci est nécessaire pour faire en sorte que l'Agent ignore la différence entre le hostname du certificat SSL (`app.datadoghq.com` ou `app.datadoghq.eu`) et le hostname de votre HAProxy :
@@ -614,9 +633,9 @@ Pour utiliser l'Agent Datadog v6/7.16 ou une version ultérieure comme collecte
 
 ```yaml
 logs_config:
-  logs_no_ssl: true
-  logs_dd_url: "<DOMAINE_SERVEUR_PROXY>:3837"
   use_http: true
+  logs_dd_url: "<DOMAINE_SERVEUR_PROXY>:3837"
+  logs_no_ssl: true
 ```
 
 Pour envoyer logs via TCP, consultez la page relative au <a href="/agent/logs/proxy">proxy TCP pour les logs</a>.

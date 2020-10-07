@@ -1,6 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    cri: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -41,17 +44,52 @@ CRI はコア Agent 6 チェックです。`datadog.yaml` と `cri.d/conf.yaml` 
 
 コンテナで Agent を使用している場合は、`DD_CRI_SOCKET_PATH` 環境変数を設定すると、デフォルト構成の `CRI` チェックが自動的に有効になります。
 
-### コンフィグレーション
+#### コンテナへのインストール
 
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集して、
-   crio パフォーマンスデータの収集を開始します。
-   使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][1] を参照してください。
+コンテナで Agent を使用している場合は、`DD_CRI_SOCKET_PATH` 環境変数を CRI ソケットに設定すると、デフォルト構成の `CRI` インテグレーションが自動的に有効になります。
+
+たとえば、Kubernetes でインテグレーションをインストールするには、daemonset を編集して、CRI ソケットをホストノードから Agent コンテナにマウントし、`DD_CRI_SOCKET_PATH` 環境変数を DaemonSet の mountPath に設定します。
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: datadog-agent
+spec:
+  template:
+    spec:
+      containers:
+        - name: datadog-agent
+          # ...
+          env:
+            - name: DD_CRI_ソケットパス
+              value: /var/run/crio/crio.sock
+          volumeMounts:
+            - name: crisocket
+              mountPath: /var/run/crio/crio.sock
+            - mountPath: /host/var/run
+              name: var-run
+              readOnly: true
+          volumes:
+            - hostPath:
+                path: /var/run/crio/crio.sock
+              name: crisocket
+            - hostPath:
+                path: /var/run
+              name: var-run
+```
+
+**注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
+
+### コンフィギュレーション
+
+1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][1] を参照してください。
 
 2. [Agent を再起動します][2]
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `cri` を探します。
 
 ## 収集データ
 
@@ -69,10 +107,9 @@ CRI には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help
+[3]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/

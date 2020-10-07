@@ -1,0 +1,100 @@
+---
+title: プライマリタグをスコープに設定
+kind: documentation
+aliases:
+  - /ja/tracing/advanced/setting_primary_tags_to_scope/
+further_reading:
+  - link: /tracing/connect_logs_and_traces/
+    tags: トレースの加工
+    text: ログとトレースの接続
+  - link: /tracing/manual_instrumentation/
+    tags: トレースの加工
+    text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+  - link: /tracing/opentracing/
+    tags: トレースの加工
+    text: アプリケーション全体に Opentracing を実装します。
+  - link: /tracing/visualization/
+    tag: APM の UI を利用する
+    text: サービス、リソース、トレースの詳細
+---
+## 定義
+
+Datadog APM アプリケーション全体をスコープに設定するために使用できるディメンションが複数あります。これには、集計統計（リクエスト/秒、レイテンシー、エラー率、Apdex スコアなど）および表示可能な[トレース][1]が含まれます。こうしたディメンションは、アプリケーションの動作をさらに詳細に把握できるプライマリタグを介して設定されます。プライマリタグのユースケースには、環境、アベイラビリティゾーン、データセンターなどがあります。
+
+プライマリタグは、従来の [Datadog タグ][2]とは異なるルールセットに従う必要があります。
+
+## セットアップ
+
+### 環境
+
+デフォルトの必須プライマリタグは、トレースの収集元の環境です。タグキーは `env` で、タグなしデータのデフォルト値は `env:none` です。
+
+#### トレーサーで環境を設定する
+
+トレーサーに `env` を設定することをお勧めします。`env` の定義はサービスの実際のランタイム内に存在するため、これにより柔軟性も向上します。
+
+`DD_ENV` がサービスのプロセスに公開されている場合、トレーサーはそれを自動的に使用します。`DD_ENV` およびその他の標準サービス環境変数の設定については、[統合サービスタグ付け][3]を参照してください。
+
+コードでトレーサーのグローバルタグとして `env` を手動で設定することもできます。詳細については、[APM でのタグの割り当て][4]を参照してください。
+
+#### Agent で環境を設定する
+
+`env` タグは Agent コンフィギュレーションで設定できます。
+**ただし、`env` がすでにトレースデータに存在する場合、Agent で設定されたすべての `env` をオーバーライドします。**
+
+オプション
+
+1. トップレベル Agent コンフィギュレーション:
+
+    ```yaml
+    env: <ENVIRONMENT>
+    ...
+    ```
+
+    **コンテナ化環境**: Agent は、環境変数 `DD_ENV` によるトップレベルの `env` のコンフィギュレーションもサポートしています。
+
+2. Agent ホストタグ:
+
+    ```yaml
+    tags:
+        env: <ENVIRONMENT>
+        ...
+    ```
+
+    **コンテナ化環境**: Agent は、環境変数 `DD_TAGS` によるトップレベルの `tags` のコンフィギュレーションもサポートしています。
+
+#### 環境ごとのデータの表示
+
+環境は、APM ページの上部に表示されます。 ドロップダウンを使用して、現在のページに表示されるデータのスコープを設定します。
+
+{{< img src="tracing/guide/setting_primary_tags/envs_tracing_screen.png" alt="環境のトレース"  style="width:80%;">}}
+
+## Datadog に 2 番目のプライマリタグを追加する
+
+`env:<環境>` 以外のホストタグをトレースに追加した場合は、環境タグとともにプライマリタグとして設定できます。[APM 設定][5]ページに移動して、プライマリタグを定義、変更、または削除します。
+
+注:
+
+* 組織管理者のみがこのページにアクセスできます。
+* 変更が UI に反映されるまでに最大 2 時間かかる場合があります。
+
+以前に設定したプライマリタグを変更する場合は、次のことに注意してください。
+
+* 以前に設定されたタグによって集計された履歴 APM データにはアクセスできなくなります。
+* 前のタグをスコープとする APM モニターには、_No Data_ のステータスが表示されます。
+
+### プライマリタグごとのデータの表示
+
+プライマリタグは、APM ページの上部に表示されます。これらのセレクターを使用して、現在のページに表示されるデータを分類します。プライマリタグに依存しないすべてのデータを表示するには、（下の画像のように）ドロップダウンから `<タグ名>:*` を選択します。
+
+{{< img src="tracing/guide/setting_primary_tags/primary_tags_ui.png" alt="プライマリタグ UI"  style="width:80%;">}}
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/tracing/visualization/#trace
+[2]: /ja/getting_started/tagging/
+[3]: /ja/getting_started/tagging/unified_service_tagging
+[4]: /ja/getting_started/tagging/assigning_tags/#traces
+[5]: https://app.datadoghq.com/apm/settings

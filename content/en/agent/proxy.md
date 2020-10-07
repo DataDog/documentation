@@ -1,6 +1,8 @@
 ---
-title: Agent proxy configuration
+title: Agent Proxy Configuration
 kind: documentation
+aliases:
+- /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -450,7 +452,8 @@ process_config:
 
 logs_config:
     use_http: true
-    logs_dd_url: http://haproxy.example.com:3837
+    logs_dd_url: haproxy.example.com:3837
+    logs_no_ssl: true
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
@@ -631,9 +634,9 @@ To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to u
 
 ```yaml
 logs_config:
-  logs_no_ssl: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
   use_http: true
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
+  logs_no_ssl: true
 ```
 
 When sending logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.

@@ -4,16 +4,17 @@ kind: documentation
 aliases:
   - /ja/tracing/visualization/search/
   - /ja/tracing/trace_search_and_analytics/
+  - /ja/tracing/advanced_usage/
 ---
 {{< wistia vrmqr812sz >}}
 </br>
-[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで分析スパンを絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
+[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Analyzed Span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
 
 * サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムインスツルメンテーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
 
 **注**: App Analytics を使用するには、Agent v6.7 以上を使用してください。
 
-## 自動構成
+## 自動コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -23,9 +24,6 @@ App Analytics は、Java トレースクライアントのバージョン 0.25.0
 * システムプロパティ: `-Ddd.trace.analytics.enabled=true`
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
- 有効にすると、App Analytics UI に結果が表示されます。[App Analytics ページ][1]にアクセスして使用を開始します。
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -34,9 +32,6 @@ App Analytics は、Python トレースクライアントのバージョン 0.19
 * トレーサー構成: `ddtrace.config.analytics_enabled = True`
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
- 有効にすると、App Analytics UI には結果が表示され始めます。[App Analytics ページ][1]にアクセスして開始します。
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -51,22 +46,20 @@ Datadog.configure { |c| c.analytics_enabled = true }
 * `true` は、すべての Web フレームワークで分析を有効にします。
 * `false` または `nil` は、明示的に有効にされているインテグレーションを除いて分析を無効にします。(デフォルト)
 
- 有効にすると、[App Analytics][1] ページが表示されます。
-
-[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
-App Analytics は、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。[`WithAnalytics`][1] のトレーサー開始オプションを使用することで、すべての **web** インテグレーションに対してグローバルに有効にすることができます。例:
+App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
 
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
+* [`WithAnalytics`][1] トレーサー開始オプション。例:
 
-有効にすると、App Analytics UI に結果が表示されます。[App Analytics ページ][2]にアクセスして使用を開始します。
+  ```go
+  tracer.Start(tracer.WithAnalytics(true))
+  ```
+
+* バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-[2]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -82,9 +75,6 @@ tracer.init({
 
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-有効にすると、App Analytics UI には結果が表示され始めます。[App Analytics ページ][1]にアクセスして開始します。
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -98,9 +88,6 @@ App Analytics は、.NET トレースクライアントのバージョン 1.1.0 
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
-有効にすると、App Analytics UI には結果が表示され始めます。[App Analytics ページ][1]にアクセスして開始します。
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -108,11 +95,32 @@ App Analytics は、PHP トレースクライアントのバージョン 0.17.0 
 
 * <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
 
-有効にすると、App Analytics UI には結果が表示され始めます。[App Analytics ページ][1]にアクセスして開始します。
+{{% /tab %}}
+{{% tab "C++" %}}
 
-[1]: https://app.datadoghq.com/apm/search/analytics
+App Analytics は、C++ トレースクライアントのバージョン 1.0.0 以降で使用できます。環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定することで、すべてのトップレベルスパンに対してグローバルに有効にすることができます。なお、この設定は、コードで直接設定することもできます。
+
+```csharp
+datadog::opentracing::TracerOptions tracer_options;
+  tracer_options.agent_host = "dd-agent";
+  tracer_options.service = "<サービス名>";
+  tracer_options.analytics_rate = 1.0;
+  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+```
+
+{{% /tab %}}
+{{% tab "Nginx" %}}
+
+Nginx で App Analytics を有効にするには
+
+1. 環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定します。
+
+2. `nginx.conf` ファイルの先頭に `env DD_TRACE_ANALYTICS_ENABLED;` を追加します。
+
 {{% /tab %}}
 {{< /tabs >}}
+
+有効にすると、App Analytics UI に結果が表示されます。[App Analytics ページ][1]にアクセスして使用を開始します。
 
 ## その他のサービスの構成 (オプション)
 
@@ -137,7 +145,7 @@ App Analytics は、PHP トレースクライアントのバージョン 0.17.0 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-グローバルに設定することに加えて、次の設定を使用して、個々のインテグレーションに対して App Analytics を有効または無効にすることができます:
+グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
 
 * トレーサー構成: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
@@ -209,7 +217,7 @@ tracer.use('express', {
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-グローバルに設定することに加えて、個々のインテグレーションに対して App Analytics を有効または無効にすることができます。
+グローバル設定に加えて、個別のインテグレーションで App Analytics を有効または無効にできます。
 
 * 環境変数または AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
@@ -229,13 +237,13 @@ Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
-[1]: /ja/tracing/setup/dotnet#integrations
+[1]: /ja/tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-グローバルに設定することに加えて、次の設定を使用して、個々のインテグレーションに対して App Analytics を有効または無効にすることができます:
+グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
 
 * 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
@@ -262,7 +270,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 {{% /tab %}}
 {{% tab "Python" %}}
 
-デフォルトでは App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 * トレーサー構成: `ddtrace.config.postgres.analytics_enabled = True`
 * 環境変数: `DD_POSTGRES_ANALYTICS_ENABLED=true`
@@ -270,7 +278,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-デフォルトでは App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 ```ruby
 Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
@@ -288,7 +296,7 @@ Datadog.configure { |c| c.use :mongo, analytics_enabled: true }
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-デフォルトでは App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
 
 ```javascript
 tracer.use('mysql', {
@@ -301,7 +309,7 @@ tracer.use('mysql', {
 
 デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例えば、ADO.NET に対して App Analytics を有効にするには以下のようにします。
 
-* 環境変数または AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+* 環境変数または AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
 
 コードの場合は次のようになります。
 
@@ -309,9 +317,9 @@ tracer.use('mysql', {
 Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 ```
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
 
-[1]: /ja/tracing/setup/dotnet#integrations
+[1]: /ja/tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -348,7 +356,7 @@ class MyClass {
     final Span span = GlobalTracer.get().activeSpan();
     // @Trace アノテーションにより送信されるスパン。
     if (span != null) {
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
@@ -456,11 +464,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## スパンのフィルタリング
 
-[分析スパン][2]は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで分析スパンが送信されます。例えば、各 `servlet.request` スパンが分析スパンを生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の分析スパンを生成します。[分析スパンのフィルタリング][5]は、請求可能な分析スパンの数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは分析スパンの生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
+[Analyzed Span][2] は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで Analyzed Span が送信されます。例えば、各 `servlet.request` スパンが Analyzed Span を生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の Analyzed Span を生成します。[Analyzed Span のフィルタリング][5]は、請求可能な Analyzed Span の数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは Analyzed Span の生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
 
 フィルターレートへの変更は、サービスおよび環境別にキューに配置されるため、全体的なスパンボリュームへの影響を予測できます。変更は、確認、編集、承認または拒否することが可能です。適用された変更は、直ちに有効となり[請求書にも反映されます][7]。
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="分析スパンのフィルタリング" >}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span のフィルタリング" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /ja/tracing/visualization/#apm-event

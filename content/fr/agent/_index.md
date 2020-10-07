@@ -3,16 +3,16 @@ title: Agent
 kind: documentation
 description: Installer et configurer l'Agent pour recueillir des données
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing/
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
-  - link: agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
     tag: Documentation
     text: "Pourquoi installer l'Agent sur des instances dans le cloud\_?"
   - link: 'https://www.datadoghq.com/blog/dont-fear-the-agent/'
@@ -40,16 +40,15 @@ Les paquets sont également disponibles en versions pour architectures x86 64 b
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
-  {{< nextlink href="/agent/basic_agent_usage">}}Utilisation de base de l'Agent : apprenez-en plus sur l'Agent Datadog, y compris les détails d'architecture, l'interface de ligne de commande, le traitement et les outils de gestion de configuration.{{< /nextlink >}}
-  {{< nextlink href="/agent/docker">}}Docker : installez et configurez l'Agent Datadog sur Docker. {{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes">}}Kubernetes : installez et configurez l'Agent Datadog sur Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/autodiscovery">}}Autodiscovery : surveillez automatiquement où s'exécutent vos différents services.{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}Collecte de logs : activez et configurez la collecte de logs dans l'Agent Datadog.{{< /nextlink >}}
-  {{< nextlink href="/agent/proxy">}}Proxy : si votre configuration réseau limite le trafic sortant, utilisez un proxy pour le trafic de l'Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}Mise à niveau vers l'Agent v7 : l'Agent 7 est la dernière version majeure de l'Agent Datadog. Découvrez comment mettre l'Agent à niveau.{{< /nextlink >}}
-  {{< nextlink href="/agent/troubleshooting">}}Dépannage : trouvez des informations de dépannage pour l'Agent Datadog.{{< /nextlink >}}
-  {{< nextlink href="/agent/guide">}}Guides : consultez des tutoriels détaillés et avancés concernant l'utilisation de l'Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/security">}}Sécurité : parcourez des informations sur les principales fonctionnalités de sécurité proposées aux clients afin de vous assurer que leur environnement est sécurisé.{{< /nextlink >}}
+  {{< nextlink href="/agent/basic_agent_usage">}}<u>Utilisation de base de l'Agent </u>: apprenez-en plus sur l'Agent Datadog, notamment sur son architecture, son interface de ligne de commande, sa charge système et ses outils de gestion de configuration.{{< /nextlink >}}
+  {{< nextlink href="/agent/docker">}}<u>Docker </u>: installez et configurez l'Agent Datadog sur Docker. {{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes </u>: installez et configurez l'Agent Datadog sur Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>Collecte de logs </u>: activez et configurez la collecte de logs dans l'Agent Datadog.{{< /nextlink >}}
+  {{< nextlink href="/agent/proxy">}}<u>Proxy </u>: si votre configuration réseau limite le trafic sortant, utilisez un proxy pour le trafic de l'Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}<u>Upgrade vers l'Agent v7 </u>: l'Agent 7 est la dernière version majeure de l'Agent Datadog. Découvrez comment mettre à jour l'Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/troubleshooting">}}<u>Dépannage </u>: trouvez des informations de dépannage pour l'Agent Datadog.{{< /nextlink >}}
+  {{< nextlink href="/agent/guide">}}<u>Guides </u>: consultez des tutoriels détaillés et avancés concernant l'utilisation de l'Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u>Securité </u>: parcourez des informations sur les principales fonctionnalités de sécurité proposées aux clients afin de vous assurer que leur environnement est sécurisé.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

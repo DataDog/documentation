@@ -2,6 +2,8 @@
 title: Tracing Guides
 kind: guide
 private: true
+aliases:
+- /tracing/getting_further/
 ---
 
 
@@ -14,23 +16,14 @@ private: true
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic. [8 mins]{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="APM Video Feature Tour" >}}
-    {{< nextlink href="videos/apm_overview/" >}}APM Overview{{< /nextlink >}}
-    {{< nextlink href="videos/apm_traces_flame_graph/" >}}APM Traces and Flamegraph{{< /nextlink >}}
-    {{< nextlink href="videos/apm_dashboards_trace_metrics/" >}}Datadog Dashboards and Trace Metrics{{< /nextlink >}}
-{{< /whatsnext >}}
-<br>
 {{< whatsnext desc="Advanced Guides" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configure Apdex score by service{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/security" >}}Scrub Sensitive information from your traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Primary Operations in Services {{< /nextlink >}}
     {{< nextlink href="tracing/guide/resource_monitor" >}}Build monitor upon your resource metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
     {{< nextlink href="/api/v1/tracing/" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Adding Span Tags{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configuring App Analytics via the Agent{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}

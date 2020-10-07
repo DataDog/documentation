@@ -32,7 +32,7 @@ Datadog と Azure DevOps を統合して、次のことを行います。
 
 ### インストール
 
-Datadog で、[Azure DevOps インテグレーションタイル][7]のインストールボタンをクリックします。
+Datadog で、[Azure DevOps インテグレーションタイル][1]のインストールボタンをクリックします。
 
 ### コンフィギュレーション
 
@@ -44,18 +44,18 @@ Datadog で、[Azure DevOps インテグレーションタイル][7]のインス
 2. **Create subscription** をクリックします。
 3. Datadog サービスを選択します。
 4. トリガーする Visual Studio イベントを構成します。
-5. [Datadog API キー][4]を必須フィールドに入力します。
+5. [Datadog API キー][2]を必須フィールドに入力します。
 6. Datadog 組織サイトが `US` か `EU` かを示します。
 7. サービスフックサブスクリプションをテストし、ウィザードを終了します。
 8. Datadog に送信するイベントタイプごとにステップ 4〜7 を繰り返します。すべてのイベントタイプが受け入れられます。
 
 サービスフックを構成したら、Datadog に移動して、Azure DevOps のイベントとメトリクスを確認します。
 
-Azure 側の他の参照先: [Create a service hook for Azure DevOps Services and TFS with Datadog][6]
+Azure 側の他の参照先: [Create a service hook for Azure DevOps Services and TFS with Datadog][3]
 
 #### プログラマティック
 
-[Azure ドキュメント][5]および Datadog のエンドポイントを使用して、プログラムでサービスフックサブスクリプションを作成します。
+[Azure ドキュメント][4]および Datadog のエンドポイントを使用して、プログラムでサービスフックサブスクリプションを作成します。
 
 {{< tabs >}}
 {{% tab "US site" %}}
@@ -76,9 +76,9 @@ https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<DATADOG_API_キー>
 
 ### Datadog モニターを Azure Pipelines のゲートとして使用する
 
-Datadog モニターを、Azure Pipelines の[リリースデプロイをコントロール][8]するためのゲートとして使用することもできます。このオプションを使用すると、Datadog で異常な状態が検出された場合、問題のあるデプロイを自動的に停止できます。
+Datadog モニターを、Azure Pipelines の[リリースデプロイをコントロール][5]するためのゲートとして使用することもできます。このオプションを使用すると、Datadog で異常な状態が検出された場合、問題のあるデプロイを自動的に停止できます。
 
-1. [DataGate Monitors as Deployment Gates][9] 拡張機能を Azure DevOps 組織に追加します。
+1. [Datadog Monitors as Deployment Gates][6] 拡張機能を Azure DevOps 組織に追加します。
 
     {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="拡張サービス接続" >}}
 
@@ -93,9 +93,9 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 
 8. ステップ 5〜7 を繰り返して、デプロイパイプラインの必要に応じてゲートを追加します。
 
-**注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][10]を使用します。
+**注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][7]を使用します。
 
-ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][11]にアクセスします。
+ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][8]にアクセスします。
 
 ## 収集データ
 
@@ -113,7 +113,7 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ### よくあるご質問
 
@@ -136,14 +136,13 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 **注**: `Done` の作業項目が再度開かれた場合は、次回 `Done` に移行したときに別のデータポイントが生成されます。初期データポイントは変更されず、新しいデータポイントは、やはり作業項目が最初に作成された時点から測定されます。
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
-[6]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
-[7]: https://app.datadoghq.com/account/settings#integrations/azuredevops
-[8]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
-[9]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
-[10]: /ja/monitors/monitor_types/composite/
-[11]: https://github.com/DataDog/azure-devops-monitor-gate-extension
+[1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
+[4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
+[5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
+[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
+[7]: /ja/monitors/monitor_types/composite/
+[8]: https://github.com/DataDog/azure-devops-monitor-gate-extension
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
+[10]: https://docs.datadoghq.com/ja/help/

@@ -4,6 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Hive Overview: assets/dashboards/overview.json
+  logs:
+    source: hive
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

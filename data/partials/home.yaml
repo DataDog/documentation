@@ -63,11 +63,19 @@ nav_sections:
       - title: Real User Monitoring
         link: real_user_monitoring/
         icon: rum.svg
-        desc: Visualize and analyze the performance of your front end applications.
+        desc: Visualize and analyze the performance of your front end applications
       - title: Network Monitoring
         link: network_performance_monitoring/
         icon: network.svg
-        desc: Gain visibiliy into your network traffic using tagged objects
+        desc: Gain visibility into your network traffic using tagged objects
+      - title: Serverless
+        link: serverless/
+        icon: serverless.svg
+        desc: End-to-end visibility into your serverless development lifecycle
+      - title: Mobile application
+        link: mobile/
+        icon: mobile.svg
+        desc: View Datadog alerts and dashboards on your mobile device
       - title: Watchdog
         link: watchdog/
         icon: watchdog.svg

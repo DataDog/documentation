@@ -5,13 +5,13 @@ platform: Ubuntu
 aliases:
   - /ja/guides/basic_agent_usage/ubuntu/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
 ---
@@ -60,7 +60,7 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 
 **注**: ご使用のシステムで `service` ラッパーを使用できない場合は、以下を使用してください。
 
-* `upstart` ベースのシステムの場合: `sudo initctl start/stop/restart/status datadog-agent`
+* `upstart` ベースのシステムの場合: `sudo start/stop/restart/status datadog-agent`
 * `systemd` ベースのシステムの場合: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
@@ -77,7 +77,7 @@ Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -89,7 +89,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /ja/integrations
+[1]: /ja/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -109,5 +109,5 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 [1]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /ja/agent/troubleshooting
-[4]: /ja/developers/guide/custom-python-package
+[3]: /ja/agent/troubleshooting/
+[4]: /ja/developers/guide/custom-python-package/

@@ -951,6 +951,181 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should show nested array when curl', () => {
+    const mockSchema = {
+      "description": "The metrics' payload.",
+      "properties": {
+        "series": {
+          "description": "A list of time series to submit to Datadog.",
+          "items": {
+            "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+            "properties": {
+              "host": {
+                "description": "The name of the host that produced the metric.",
+                "example": "test.example.com",
+                "type": "string"
+              },
+              "interval": {
+                "default": null,
+                "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                "example": 20,
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
+              },
+              "metric": {
+                "description": "The name of the timeseries.",
+                "example": "system.load.1",
+                "type": "string"
+              },
+              "points": {
+                "description": "Points relating to a metric. All points must be tuples with timestamp and a scalar value (cannot be a string).",
+                "example": [
+                  [
+                    1575317847,
+                    0.5
+                  ]
+                ],
+                "items": {
+                  "description": "Array of timeseries points.",
+                  "example": [
+                    1575317847,
+                    0.5
+                  ],
+                  "items": {
+                    "description": "Each point is of the form `[POSIX_timestamp, numeric_value]`.\nThe timestamp should be in seconds and current.\nThe numeric value format should be a 32bit float gauge-type value.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "tags": {
+                "description": "A list of tags associated with the metric.",
+                "example": [
+                  "environment:test"
+                ],
+                "items": {
+                  "description": "Individual tags.",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "default": "gauge",
+                "description": "The type of the metric.",
+                "example": "rate",
+                "type": "string"
+              }
+            },
+            "required": [
+              "metric",
+              "points"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('curl', mockSchema);
+    const expected = {"series": [{"metric": "system.load.1", "points": [[1575317847, 0.5]]}]};
+    expect(actual).toEqual(expected);
+  });
+
+  xit('should show oneOf', () => {
+    const mockSchema = {
+      "description": "Structured log message.",
+      "oneOf": [
+        {
+          "description": "Logs that are sent over HTTP.",
+          "properties": {
+            "ddsource": {
+              "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "nginx",
+              "type": "string"
+            },
+            "ddtags": {
+              "description": "Tags associated with your logs.",
+              "example": "env:staging,version:5.1",
+              "type": "string"
+            },
+            "hostname": {
+              "description": "The name of the originating host of the log.",
+              "example": "i-012345678",
+              "type": "string"
+            },
+            "message": {
+              "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+              "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+              "type": "string"
+            },
+            "service": {
+              "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+              "example": "payment",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        },
+        {
+          "description": "List of log items.",
+          "items": {
+            "description": "Logs that are sent over HTTP.",
+            "properties": {
+              "ddsource": {
+                "description": "The integration name associated with your log: the technology from which the log originated.\nWhen it matches an integration name, Datadog automatically installs the corresponding parsers and facets.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                "example": "nginx",
+                "type": "string"
+              },
+              "ddtags": {
+                "description": "Tags associated with your logs.",
+                "example": "env:staging,version:5.1",
+                "type": "string"
+              },
+              "hostname": {
+                "description": "The name of the originating host of the log.",
+                "example": "i-012345678",
+                "type": "string"
+              },
+              "message": {
+                "description": "The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)\nof your log. By default, Datadog ingests the value of the message attribute as the body of the log entry.\nThat value is then highlighted and displayed in the Logstream, where it is indexed for full text search.",
+                "example": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+                "type": "string"
+              },
+              "service": {
+                "description": "The name of the application or service generating the log events.\nIt is used to switch from Logs to APM, so make sure you define the same value when you use both products.\nSee [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).",
+                "example": "payment",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      ]
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "ddsource": "nginx",
+      "ddtags": "env:staging,version:5.1",
+      "hostname": "i-012345678",
+      "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
+      "service": "payment"
+    };
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`isReadOnlyRow`, () => {
@@ -1081,6 +1256,77 @@ describe(`descColumn`, () => {
 
 describe(`rowRecursive`, () => {
 
+  it('should handle fields named required (properties->required)', () => {
+    /*
+    Required fields are usually an array of string e.g ['foo'.'bar']
+    If a field is named required then the logic should recognise this is a field object and not the array to check against
+    */
+    const mockData = {
+      "description": "A customized field defined by users and attached to a certain object type (incidents, etc).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "a91169ea3eb950dd85cc2a58c5a2d2c6",
+          "description": "The field's ID."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The field's attributes.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "state",
+              "description": "Name of the field."
+            },
+            "required": {
+              "type": "boolean",
+              "description": "If true, this field is required to create an object of the field's assigned `table_id` type.",
+              "default": false
+            },
+            "created_by_user": {
+              "description": "JSON API relationship for users.",
+              "properties": {
+                "data": {
+                  "description": "The User relationship data.",
+                  "properties": {
+                    "id": {
+                      "description": "A unique identifier that represents the user.",
+                      "example": "00000000-0000-0000-0000-000000000000",
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "users",
+                      "description": "Users resource type.",
+                      "enum": [
+                        "users"
+                      ],
+                      "type": "string",
+                      "x-enum-varnames": [
+                        "USERS"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "type": "object"
+    };
+    const mockInitialData = mockData.properties;
+    const t = () => {
+      bp.rowRecursive("request", mockInitialData, false, mockInitialData.required || []);
+    };
+    expect(t).not.toThrow(Error);
+
+  });
 
 });
 
@@ -1103,7 +1349,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const expected = `
     <div class="table-response schema-table row">
@@ -1121,7 +1367,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const actual = bp.addHasExpandClass(mockInput);
     expect(actual).toEqual(expected);
@@ -1144,7 +1390,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const expected = `
     <div class="table-response schema-table has-no-expands row">
@@ -1162,7 +1408,7 @@ describe(`addHasExpandClass`, () => {
           </div>
         </div>
         <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>  
+      </div>
     </div>`.trim();
     const actual = bp.addHasExpandClass(mockInput);
     expect(actual).toEqual(expected);
@@ -1195,7 +1441,7 @@ describe(`schemaTable`, () => {
         </div>
       </div>
       FooBar
-    </div>  
+    </div>
   </div>`;
 
     expect(bp.rowRecursive).toHaveBeenCalledTimes(1);
@@ -1266,28 +1512,28 @@ describe(`schemaTable`, () => {
               <div class="col-2 column"><p>int64</p></div>
               <div class="col-6 column"><p>The duration of the request in nanoseconds.</p></div>
             </div>
-            
+
           </div>
             </div>
-            
+
             <div class="row   ">
               <div class="col-12 first-column">
                 <div class="row first-row  ">
-                  
+
               <div class="col-4 column">
       <p class="key">error</p>
     </div>
-      
+
                   <div class="col-2 column"><p>int32</p></div>
                   <div class="col-6 column"><p>Set this value to 1 to indicate if an error occured.</p>
     <p>If an error occurs, you should pass additional information,
     such as the error message, type and stack information in the meta property.</p></div>
                 </div>
-                
+
               </div>
             </div>
-            
-        </div>  
+
+        </div>
       </div>`.trim();
     expect(actual).toEqual(expected);
   });

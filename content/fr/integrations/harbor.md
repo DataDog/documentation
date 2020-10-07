@@ -2,6 +2,8 @@
 assets:
   dashboards:
     Harbor Overview: assets/dashboards/overview.json
+  logs:
+    source: harbor
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -46,7 +48,7 @@ Le check Harbor est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez d
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 

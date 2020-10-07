@@ -131,7 +131,7 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 | Utilize              | Don't utilize utilize when you can use use.                                                |
 
 
-## Formating
+## Formatting
 
 ### Headers
 
@@ -148,7 +148,7 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 
 Use text formatting to clarify and enhance content.
 
-| Formating         | Rule                                                                                                                    | Example                                               |
+| Formatting         | Rule                                                                                                                    | Example                                               |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `` `backquote` `` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
 | `**Bold**`        | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |

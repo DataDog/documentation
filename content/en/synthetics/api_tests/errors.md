@@ -5,7 +5,7 @@ description: Detailed description of API test errors
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"

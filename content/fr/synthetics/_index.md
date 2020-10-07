@@ -1,79 +1,70 @@
 ---
-title: Synthetics
+title: Surveillance Synthetics
 kind: documentation
-description: Assurez-vous que les aspects les plus importants de votre produit fonctionnent correctement à différents endroits du monde.
+description: Utilisez des tests automatisés pour vous assurer que les aspects les plus importants de vos systèmes et applications fonctionnent correctement à différents endroits du monde.
+disable_toc: true
 aliases:
   - /fr/integrations/synthetics/
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: "Présentation de Datadog\_Synthetics"
-  - link: synthetics/api_tests
+    text: Présentation de la surveillance Datadog Synthetics
+  - link: 'https://www.datadoghq.com/blog/browser-tests/'
+    tag: Blog
+    text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
+  - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
+    tag: Blog
+    text: Pratiques recommandées pour la création de tests de bout en bout
+  - link: /synthetics/guide/
     tag: Documentation
-    text: Configurer un test API
-  - link: synthetics/browser_tests
+    text: Guides d'utilisation de la surveillance Synthetics
+  - link: /synthetics/troubleshooting/
     tag: Documentation
-    text: Configurer un test Browser
-  - link: synthetics/identify_synthetics_bots
-    tag: Documentation
-    text: Identifier les Bots Synthetics
+    text: Dépannage de la surveillance Synthetics
 ---
-## Présentation
+{{< img src="synthetics/synthetics_home.png" alt="Page d'accueil Surveillance Synthetics" >}}
 
-Datadog Synthetics vous offre encore plus de visibilité sur la plateforme Datadog. En surveillant vos applications et les endpoints de l'API grâce à des simulations de requêtes utilisateur et au rendu de votre navigateur, Synthetics vous aide à garantir la disponibilité, à identifier les problèmes par région et à suivre les performances de l'application. En associant Synthetics à vos métriques, vos traces et vos logs, Datadog vous permet d'observer le fonctionnement de tous vos systèmes du point de vue de vos utilisateurs.
+Les tests Synthetics vous permettent d'observer le fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog **surveille fonctionnement de vos pages Web et de vos API** du backend au frontend, et à différents niveaux du réseau (HTTP, TCP, SSL) de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé, code de statut inattendu, etc.). **Les tests de bout en bout dans les environnements de production et d'intégration continue** améliorent la rapidité des équipes de développement, car ils éliminent tout risque que le code défectueux soit mis en production. **La configuration de SLO** sur les principaux endpoints et parcours utilisateurs permet de mieux répondre aux objectifs de performance de l'application et, à terme, de proposer une expérience client robuste.
 
-{{< img src="synthetics/synthetics_home_page.png" alt="Page d'accueil de Synthetics" >}}
+## Prise en main
+Créez votre premier test Synthetics et commencez à surveiller des applications Web pour améliorer leurs performances en quelques minutes seulement.
+### Configurer des tests API
 
-## Recherche
+Les tests API vous permettent de lancer des requêtes et d'effectuer des vérifications sur vos applications Web à différents niveaux du réseau : HTTP, TCP et SSL. Créez votre premier [test HTTP][1], test TCP et [test SSL][2] pour commencer à surveiller vos API et votre réseau.
 
-La recherche avancée vous permet d'interroger les checks en combinant différents attributs :
+{{< img src="synthetics/api_test.png" alt="Tests API"  style="width:100%;">}}
 
-* `title` et `message` : recherche de texte
-* `status` : Alert, No Data, Ok
-* `creator`
-* `region`
-* `muted`
-* `notification`
-* `tags`
+### Enregistrer des tests Browser
 
-Pour lancer une recherche, rédigez votre requête en utilisant les cases à cocher sur la gauche et/ou la barre de recherche en haut. La barre de recherche est mise à jour avec la requête équivalente lorsque vous cochez des cases. De même, lorsque vous modifiez la requête de la barre de recherche (ou rédigez vous-même votre propre requête), les cases à cocher se mettent à jour pour refléter ces modifications. Les résultats de la requête sont toujours mis à jour en temps réel lorsque vous modifiez la requête. Vous n'avez pas besoin de cliquer sur un bouton « Rechercher ».
+Enregistrez des tests de bout en bout pour surveiller l'expérience de vos clients sur vos pages Web dans le monde entier en utilisant des [tests Browser Synthetics][3].
 
-### Rédiger une requête
+{{< img src="synthetics/browser_test.gif" alt="Tests Browser"  style="width:100%;">}}
 
-Pour rechercher un texte précis dans tous les checks, titres et messages de notification, saisissez-le dans la barre de recherche.
+### Lancer des emplacements privés
 
-Vous pouvez également utiliser des opérateurs booléens (`AND`, `OR` et `NOT`) ainsi que des parenthèses pour rédiger des requêtes complexes avec n'importe quel champ de check :
+Utilisez des [Emplacements privés Synthetic][4] pour surveiller des API et sites web internes ou pour créer des emplacements personnalisés dans des zones stratégiques pour votre entreprise.
 
-* Les expressions régulières ne sont pas prises en charge.
-* Le wildcard de caractère unique (`?`) n'est pas pris en charge, mais le wildcard global (`*`) l'est.
-* Les recherches de proximité ne sont pas prises en charge, mais l'opérateur [fuzzy][1] l'est.
-* Les plages ne sont pas prises en charge.
-* Le boosting n'est pas pris en charge.
+{{< img src="synthetics/private_locations.png" alt="Emplacements privés"  style="width:100%;">}}
 
-Enfin, les caractères suivants sont réservés : `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.` et les espaces. Pour rechercher des champs de check qui incluent l'un d'entre eux, ajoutez des guillemets entre le nom du champ. `status:("OK") AND "doc-check"` est une chaîne de requête valide, mais `status:("OK") AND doc check` ne l'est pas.
+### Exécuter des tests au sein de vos processus d'intégration et de déploiement
 
-## Créer un check
+Utilisez vos tests Synthetics comme [tests Canary][5] ou exécutez-les directement dans vos [pipelines d'intégration continue][5] pour déployer votre code sans crainte de dégrader l'expérience de vos utilisateurs.
 
-Sélectionnez **Create a New check +** dans le coin supérieur droit de la page Synthetics pour créer un [test API][2] ou un [test Browser][3]. Si un test échoue, l'endpoint n'est pas testé une seconde fois : l'uptime considère directement que l'endpoint est `down`.
+ {{< img src="synthetics/ci.png" alt="Tests d'intégration continue"  style="width:100%;">}}
 
-{{< img src="synthetics/create_a_check.png" alt="Créer un check" style="width:80%;">}}
+### Associer vos données de surveillance Synthetics à vos traces
 
-## Métriques
+Datadog vous permet d'[intégrer vos tests Synthetics à vos traces d'APM][6] pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
-Les métriques suivantes sont générées par les checks Synthetics :
-
-* Les métriques qui commencent par `synthetics.browser.*` proviennent de vos [tests Browser][3].
-* Les métriques qui commencent par `synthetics.http.*` proviennent de vos [tests API HTTP][4].
-* Les métriques qui commencent par `synthetics.ssl.*` proviennent de vos [test API SSL][5].
-
-{{< get-metrics-from-git "synthetics" >}}
+{{< img src="synthetics/synthetics_traces.gif" alt="Surveillance Synthetics" style="width:100%;">}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[2]: /fr/synthetics/api_tests
-[3]: /fr/synthetics/browser_tests
-[4]: /fr/synthetics/api_tests/?tab=httptest
-[5]: /fr/synthetics/api_tests/?tab=ssltest
+[1]: /fr/getting_started/synthetics/api_test
+[2]: /fr/synthetics/api_tests/?tab=ssltest
+[3]: /fr/getting_started/synthetics/browser_test
+[4]: /fr/getting_started/synthetics/private_location
+[5]: /fr/synthetics/ci/
+[6]: /fr/synthetics/apm/

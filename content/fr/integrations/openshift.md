@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,10 +46,10 @@ Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][2
 Depuis la version 6.1, l'Agent Datadog prend en charge la surveillance des clusters OpenShift Origin et Enterprise. En fonction de vos besoins et des [contraintes de sécurité][3] de votre cluster, trois scénarios de déploiement sont pris en charge :
 
 - [Opérations avec SCC restreintes](#restricted-scc-operations)
-- [Opérations avec SCC de réseau host](#host-network-scc-operations)
+- [Opérations avec SCC de réseau host](#host)
 - [SCC Datadog personnalisées pour un accès à toutes les fonctionnalités](#custom-datadog-scc-for-all-features)
 
-| Contraintes de contexte de sécurité (SCC)   | [Restreintes](#restricted-scc-operations) | [Réseau host](#host-network-scc-operations) | [Personnalisées](#custom-datadog-scc-for-all-features) |
+| Contraintes de contexte de sécurité (SCC)   | [Restreintes](#restricted-scc-operations) | [Réseau host](#host) | [Personnalisées](#custom-datadog-scc-for-all-features) |
 | ------------------------------ | ---------------------------------------- | -------------------------------------------- | ---------------------------------------------- |
 | Surveillance de la couche Kubernetes    | ✅                                       | ✅                                           | ✅                                             |
 | Autodiscovery basé sur Kubernetes | ✅                                       | ✅                                           | ✅                                             |
@@ -77,7 +78,7 @@ La méthode d'ingestion conseillée pour Dogstatsd, l'APM, et les logs consiste 
 
 L'Agent peut être lancé en mode `sidecar`, ce qui vous permet de l'exécuter dans le pod de votre application pour une identification simplifiée.
 
-#### Opérations avec SCC de réseau host
+#### Host
 
 Ajoutez l'autorisation `allowHostPorts` au pod (via la SCC `hostnetwork` ou `hostaccess` standard, ou en créant votre propre SCC). Dans ce cas, vous pouvez ajouter les bindings de port appropriés dans les spécifications de vos pods :
 

@@ -141,12 +141,12 @@ Dans la dernière section, la politique est configurée de façon à loguer tous
         - hostPath:
             path: /var/log/kubernetes/apiserver
           name: auditdir
-         - name: dd-agent-config
+        - name: dd-agent-config
             configMap:
               name: dd-agent-config
               items:
-              - key: kubernetes-audit-log
-                path: conf.yaml
+                - key: kubernetes-audit-log
+                  path: conf.yaml
       # (...)
     ```
 

@@ -95,7 +95,7 @@ If you need to change the port used to collect StatsD metrics, use the `DD_DOGST
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To start collected your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
+To start collecting your StatsD metrics, you need to bind the DogStatsD port to a host port. You can also configure DogStatsD to use a [Unix domain socket][1].
 
 1. Add a `hostPort` to your `datadog-agent.yaml` manifest:
 
@@ -191,7 +191,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 2. Upgrade your Agent configuration:
 
     ``` shell
-    helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog
+    helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
 3. Update your application pods: Your application needs now a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
@@ -207,7 +207,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
      With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 {{% /tab %}}

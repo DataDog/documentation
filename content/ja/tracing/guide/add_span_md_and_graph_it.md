@@ -5,7 +5,7 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: 3 分
     text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: 2 分
     text: サービスのレイテンシーを前週と比較する
   - link: /tracing/guide/apm_dashboard/
@@ -14,7 +14,7 @@ further_reading:
   - link: /tracing/guide/slowest_request_daily/
     tag: 3 分
     text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: すべてのガイド
 ---
@@ -246,7 +246,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 4) **[トレース検索ページ][6]**に移動します。
 
-トレース検索ページでは、関心のある特定の[トレース][1]と分析済みのスパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
+トレース検索ページでは、関心のある特定の[トレース][1]と Analyzed Span を特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
 
 5) **新しいタグが設定されたトレースを探す**。トレースを探すには、左側のファセット検索を使用して本ガイドの始めで設定したリソース名を見つけ、そのうちの 1 行をクリックします。
 
@@ -289,7 +289,7 @@ App Analytics は、クエリを作成し無限濃度でトレースの調査を
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /ja/tracing/app_analytics/search
+[7]: /ja/tracing/app_analytics/search/
 [8]: https://app.datadoghq.com/apm/search/analytics
-[9]: /ja/tracing/app_analytics/analytics
-[10]: /ja/tracing/guide/alert_anomalies_p99_database
+[9]: /ja/tracing/app_analytics/analytics/
+[10]: /ja/tracing/guide/alert_anomalies_p99_database/

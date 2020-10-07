@@ -29,7 +29,7 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
-* Multiple [retention periods](#update-log-retention)
+* Multiple [retention periods](#update-log-retention) 
 * Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
 The Log Explorer supports [queries across multiple indexes][7].
@@ -98,6 +98,22 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
+To ensure sampling consistency across multiple indexes:
+
+1. Create one exclusion rule in each index.
+2. Use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules.
+3. Double-check exclusion rules, **filters**, and **respective order** (logs only pass through the first matching exclusion rule).
+
+In the following example:
+
+{{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters"  style="width:80%;">}}
+
+* In general, all logs with a specific `request_id` are either kept or excluded (with 50% probability).
+* Logs with a `threat:true` or `compliance:true` tag are kept regardless of the `request_id`.
+* `DEBUG` logs are indexed consistently with the `request_id` sampling rule, unless the debug logs exclusion filter is enabled in which case they are sampled.
+* 50% of the `2XX` web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
+
+
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
@@ -107,7 +123,7 @@ To add retentions that are not in your current contract contact [Datadog support
 
 ## Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
 Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
 Update or remove this quota at any time when editing the Index:
@@ -116,21 +132,11 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
-## Data and index deletion
+An event is generated when the daily quota is reached:
 
-You can request deletion of data within a time frame, or an entire index, by clicking on the deletion icon next to an index name.
+{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
 
-{{< img src="logs/indexes/delete_button.png" alt="index details"  style="width:70%;">}}
-
-You will be presented with a modal containing two options:
-
-  - Delete data within a specific time frame
-  - Delete an entire index, along with all of its contained data
-
-{{< img src="logs/indexes/delete_modal.png" alt="index details"  style="width:70%;">}}
-
-When you request the deletion of data, a support ticket is automatically generated on your behalf to support@datadoghq.com. Someone
-from Datadog may follow up with you to confirm the request and learn more about the data that you need removed.
+Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
 
 ## Further Reading
 
@@ -156,3 +162,4 @@ from Datadog may follow up with you to confirm the request and learn more about 
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
+[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

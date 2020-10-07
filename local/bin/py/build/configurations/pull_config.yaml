@@ -168,6 +168,162 @@
           - /tracing/languages/ruby/
           - /agent/apm/ruby/
 
+  - repo_name: datadog-serverless-functions
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'aws/logs_monitoring/README.md'
+      options:
+        dest_path: '/serverless/'
+        file_name: 'forwarder.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
+          title: Datadog Forwarder
+          kind: documentation
+          aliases:
+            - /serverless/troubleshooting/installing_the_forwarder/
+
+  - repo_name: datadog-lambda-python
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'python.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-python/blob/master/README.md"]
+          title: Datadog Lambda Library for Python
+          kind: documentation
+
+  - repo_name: datadog-lambda-js
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'nodejs.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-js/blob/master/README.md"]
+          title: Datadog Lambda Library for Node.js
+          kind: documentation
+
+  - repo_name: datadog-lambda-rb
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'ruby.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-rb/blob/master/README.md"]
+          title: Datadog Lambda Library for Ruby
+          kind: documentation
+
+  - repo_name: datadog-lambda-go
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'go.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-go/blob/master/README.md"]
+          title: Datadog Lambda Library for Go
+          kind: documentation
+
+  - repo_name: datadog-lambda-java
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/datadog_lambda_library/'
+        file_name: 'java.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-lambda-java/blob/master/README.md"]
+          title: Datadog Lambda Library for Java
+          kind: documentation
+
+  - repo_name: serverless-plugin-datadog
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/serverless/serverless_integrations/'
+        file_name: 'plugin.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+          title: Datadog Serverless Plugin
+          kind: documentation
+
+  - repo_name: datadog-cloudformation-macro
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'serverless/README.md'
+      options:
+        dest_path: '/serverless/serverless_integrations/'
+        file_name: 'macro.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
+          title: Datadog Serverless Macro
+          kind: documentation
+
+  - repo_name: datadog-ci
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'src/commands/lambda/README.md'
+      options:
+        dest_path: '/serverless/serverless_integrations/'
+        file_name: 'cli.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
+          title: Datadog Serverless CLI
+          kind: documentation
+
+  - repo_name: dd-sdk-android
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/rum_collection.md'
+      options:
+        dest_path: '/real_user_monitoring/'
+        file_name: 'android.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_collection.md"]
+          title: Getting Started with Android RUM Collection
+          kind: documentation
+
+  - repo_name: browser-sdk
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'packages/rum/README.md'
+      options:
+        dest_path: '/real_user_monitoring/browser/'
+        file_name: '_index.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md"]
+          title: RUM Browser Monitoring
+          kind: documentation
+
   - repo_name: datadog-cloudformation-resources
     contents:
     - action: pull-and-push-file
@@ -275,6 +431,20 @@
     - action: security-rules
       branch: main
       globs:
-        - "*.json"
+        - "security-monitoring/*.json"
+        - "security-monitoring/*.md"
+      options:
+        dest_path: '/security_monitoring/default_rules/'
+    - action: compliance-rules
+      branch: main
+      globs:
+        - "configuration/*.json"
+        - "configuration/*.yaml"
+        - "configuration/*.yml"
+        - "configuration/*.md"
+        - "runtime/**/*.json"
+        - "runtime/**/*.yaml"
+        - "runtime/**/*.yml"
+        - "runtime/**/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'

@@ -70,6 +70,15 @@
             "page_rank": 200
         },
         {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/security_monitoring/default_rules/",
+            "selectors_key": "default_rules",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["default_rules"],
+            "page_rank": 20
+        },
+        {
             "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
             "selectors_key": "integrations",
             "variables": {
@@ -86,20 +95,21 @@
                 "section": [
                     "account_management",
                     "agent",
-                    "developers",
                     "dashboards",
-                    "infrastructure",
-                    "metrics",
+                    "developers",
                     "events",
-                    "notebooks",
+                    "infrastructure",
                     "logs",
+                    "metrics",
+                    "mobile",
                     "monitors",
+                    "network_performance_monitoring",
+                    "notebooks",
+                    "real_user_monitoring",
                     "security",
                     "security_monitoring",
+                    "serverless",
                     "synthetics",
-                    "real_user_monitoring",
-                    "network_performance_monitoring",
-                    "tagging",
                     "tracing",
                     "watchdog"
                 ]

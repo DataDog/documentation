@@ -52,10 +52,22 @@ In full screen mode, you can:
 
 Additional options are available for [timeseries widgets][1].
 
-## Custom Links
-Most widgets have the ability to have custom links in the on-click context menu. To add this functionality, click edit and select the Custom Link tab.
+## Custom links
+Most widgets have the custom link option in the on-click context menu. To add this functionality, edit your widget and select the **Custom Links** tab or choose **New custom link** from the on-click context menu.
 
-Custom links support template variables as well as any tags/attributes that you've grouped by. 
+Custom links help you connect a data value to a URL, like a Datadog page or your AWS console. They support template variables and tags or attributes used in the `group by` field.
+
+### Examples
+
+View related logs for a graph grouped by `region`:
+```text
+http://app.datadoghq.com/logs?query={{region}}
+```
+
+View related logs for a graph on a dashboard with the template variable `region`:
+```text
+http://app.datadoghq.com/logs?query={{$region.value}}
+```
 
 ## Copy / paste widgets
 

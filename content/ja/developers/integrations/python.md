@@ -19,8 +19,8 @@ macOS の最新バージョンには Python がプレインストールされて
 
 以下の選択肢があります。
 
-- [Homebrew][2]: Follow the "[Doing it Right][3]" instructions.
-- [Miniconda][4]: Follow the "[Conda installation][5]" instructions.
+- [Homebrew][2]: 「[基本の使用手順][3]」ガイドを参照してください。
+- [Miniconda][4]: 「[Conda のインストール][5]」ガイドに従ってください。
 
 システム上でクリーンな Python 環境を維持するには、[環境マネージャー](#仮想環境マネージャー)のインストールをお勧めします。
 

@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-  - link: tracing/connect_logs_and_traces
+  - link: /tracing/connect_logs_and_traces/
     tags: Enrichir vos traces
     text: Associer vos logs à vos traces
-  - link: tracing/manual_instrumentation
+  - link: /tracing/manual_instrumentation/
     tags: Enrichir vos traces
     text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
+  - link: /tracing/opentracing/
     tags: Enrichir vos traces
     text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
+  - link: /tracing/visualization/
     tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
 ---
@@ -28,21 +28,40 @@ Les tags primaires respectent un autre ensemble de règles que celles des [tags 
 ### Environnement
 
 L'environnement à partir duquel vous recueillez vos traces constitue le tag primaire obligatoire par défaut. Sa clé de tag est `env`. Par défaut, sa valeur pour des données sans tag est `env:none`.
-Il existe différentes façons de spécifier un environnement lors de l'envoi de données :
 
-1. Tag de host :
-  Utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour taguer l'ensemble des traces de l'Agent correspondant.
+#### Définition de l'environnement dans le traceur
 
-2. Configuration de l'Agent :
-  Remplacez le tag par défaut utilisé par l'Agent dans [le fichier de configuration de l'Agent][3]. Cela permet de taguer toutes les traces transmises à l'Agent, ce qui ignore la valeur du tag du host.
+Nous vous conseillons d'utiliser le traceur pour définir le tag `env`. Cette méthode offre une plus grande flexibilité, car la définition du tag `env` réside dans le runtime réel du service.
+
+Si la variable `DD_ENV` est exposée au processus de votre service, le traceur l'utilisera automatiquement. Consultez la section [Tagging de service unifié][3] pour en savoir plus sur la définition de `DD_ENV` et d'autres variables d'environnement de service standard.
+
+Vous pouvez également définir manuellement le tag `env` comme tag global pour le traceur dans le code. Pour en savoir plus, consultez la [documentation relative à l'assignation de tags dans l'APM][4].
+
+#### Définition de l'environnement dans l'Agent
+
+Le tag `env` peut être défini dans la configuration de votre Agent.
+**Toutefois, si `env` est déjà présent dans les données de trace, alors il remplacera tout tag `env` défini dans l'Agent.**
+
+Options :
+
+1. Configuration de l'Agent de premier niveau :
 
     ```yaml
-    apm_config:
-      env: "<ENVIRONMENT>"
+    env: <ENVIRONMENT>
+    ...
     ```
 
-3. Par trace :
-  Lorsque vous envoyez une seule trace, spécifiez un environnement en taguant l'une de ses spans avec la clé de métadonnées `env`. Cela ignore la configuration de l'Agent et la valeur du tag du host (le cas échéant). Consultez la [documentation relative aux tags des traces][4] pour découvrir comment assigner un tag à vos traces.
+    **Environnements conteneurisés** : l'Agent prend également en charge la configuration du tag `env` de premier niveau par le biais de la variable d'environnement `DD_ENV`.
+
+2. Tag du host de l'Agent :
+
+    ```yaml
+    tags:
+        env: <ENVIRONMENT>
+        ...
+    ```
+
+    **Environnements conteneurisés** : l'Agent prend également en charge la configuration de `tags` de premier niveau par le biais de la variable d'environnement `DD_TAGS`.
 
 #### Afficher les données selon un environnement
 
@@ -75,7 +94,7 @@ Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/tagging
-[3]: /fr/agent/guide/agent-configuration-files/
+[2]: /fr/getting_started/tagging/
+[3]: /fr/getting_started/tagging/unified_service_tagging
 [4]: /fr/getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings

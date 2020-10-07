@@ -46,8 +46,8 @@ Use the page header to configure your network map:
     - Filter your tags based on a fuzzy string match.
       {{< img src="network_performance_monitoring/network_map/filtering_npm_map_search.mp4" alt="Filtering network map with search" video="true" >}}
 
-    - **Show unresolved flows**.
-    - Hide network flows outside a specified percentile range of the active network metric.
+    - **Show unresolved traffic**.
+    - Hide network traffic outside a specified percentile range of the active network metric.
         {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true"  width="50%" >}}
 
 ## Inspection

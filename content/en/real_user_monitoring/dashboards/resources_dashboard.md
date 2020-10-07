@@ -2,9 +2,6 @@
 title: RUM Resources Dashboard
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/installation/advanced_configuration'
-      tag: 'Documentation'
-      text: 'Advanced configuration for RUM data collection'
     - link: '/real_user_monitoring/explorer'
       tag: 'Documentation'
       text: 'Explore your views within Datadog'

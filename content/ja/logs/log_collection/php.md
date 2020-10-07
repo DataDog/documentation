@@ -7,16 +7,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/php-logging-guide'
     tag: ブログ
     text: PHP ログの収集、カスタマイズ、分析方法
-  - link: /logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: ログの処理方法
-  - link: /logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: パースの詳細
-  - link: /logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: ログの調査方法
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: ログ分析の実行
   - link: /logs/faq/log-collection-troubleshooting-guide
@@ -158,7 +158,7 @@ services:
 
 次に、[ログファイルを Datadog にストリーミングします][1]。
 
-[1]: /ja/logs/log_collection
+[1]: /ja/logs/log_collection/
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -177,6 +177,10 @@ Monolog 構成でフォーマッタを構成します。以下のフォーマッ
 {{% /tab %}}
 {{< /tabs >}}
 
+**ログとトレースの接続**
+
+このアプリケーションで APM が有効になっている場合、[APM PHP ロギングの指示に従って][2]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
+
 ### Agent 構成
 
 `conf.d/` フォルダーに次の内容の `php.d/conf.yaml` ファイルを作成します。
@@ -186,7 +190,7 @@ init_config:
 
 instances:
 
-## Log section
+## Log セクション
 logs:
 
   - type: file
@@ -358,7 +362,7 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 
 3. [生成された JSON ファイルを Datadog にストリーミングします][1]。
 
-[1]: /ja/logs/log_collection
+[1]: /ja/logs/log_collection/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -366,12 +370,12 @@ Monolog にはプリプロセッサー機能が付属しています。これは
 
 Monolog は次のフレームワークに含まれます。
 
-* [Symfony2、Symfony3][2]
-* [PPI][3]
-* [Laravel 4 および 5][4]
-* [Silex][5]
-* [Lumen][6]
-* [CakePHP][7]
+* [Symfony2、Symfony3][3]
+* [PPI][4]
+* [Laravel 4 および 5][5]
+* [Silex][6]
+* [Lumen][7]
+* [CakePHP][8]
 
 Monolog をフレームワークに統合し、次にロガーを構成します。
 
@@ -533,12 +537,12 @@ CakeLog::config('debug', array(
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /ja/agent/logs
-[2]: /ja/logs/log_collection/php/#symfony-v2-v3
-[3]: /ja/logs/log_collection/php/#ppi
-[4]: /ja/logs/log_collection/php/#laravel
-[5]: /ja/logs/log_collection/php/#silex
-[6]: /ja/logs/log_collection/php/#lumen
-[7]: /ja/logs/log_collection/php/#cakephp
+[1]: /ja/agent/logs/
+[2]: /ja/tracing/connect_logs_and_traces/php/
+[3]: /ja/logs/log_collection/php/#symfony-v2-v3
+[4]: /ja/logs/log_collection/php/#ppi
+[5]: /ja/logs/log_collection/php/#laravel
+[6]: /ja/logs/log_collection/php/#silex
+[7]: /ja/logs/log_collection/php/#lumen
+[8]: /ja/logs/log_collection/php/#cakephp

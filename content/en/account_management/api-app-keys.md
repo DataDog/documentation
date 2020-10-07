@@ -9,11 +9,11 @@ aliases:
 
 ## API keys
 
-API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog.
+API keys are unique to your organization. An [API key][1] is required by the Datadog Agent to submit metrics and events to Datadog.
 
 ## Application keys
 
-Application keys, in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
+[Application keys][1], in conjunction with your org's API key, give you full access to Datadog's programmatic API. Application keys are associated with the user account that created them and must be named. The application key is used to log all requests made to the API.
 
 ## Client tokens
 
@@ -40,6 +40,14 @@ To add a Datadog API key, application key, or client token, navigate to [Integra
 To remove a Datadog API key or application key or client token, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key or token you want to remove:
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Application Keys"  >}}
+
+## Using multiple API keys
+
+Consider setting up multiple API keys for your organization. For example, use different API keys for each of your various deployment methods: one for deploying an Agent on Kubernetes in AWS, one for deploying it on prem with Chef, one for Terraform scripts that automate your dashboards or monitors, and one for developers deploying locally.
+
+Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with. 
+
+If your organization needs more than the built-in limit of five API keys, contact [Support][4] to ask about increasing your limit.
 
 ## Disabling a User Account
 

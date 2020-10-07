@@ -4,6 +4,8 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Kong Overview: assets/dashboards/kong_overview.json
+  logs:
+    source: kong
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json

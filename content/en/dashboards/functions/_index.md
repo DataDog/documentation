@@ -29,6 +29,7 @@ Functions can be applied to your queries by using the `Formula` box in the graph
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement anomaly or outlier detection.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform arithmetic operations.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}Count: Count non-zero or non-null values.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate a custom derivative over your metric.{{< /nextlink >}}

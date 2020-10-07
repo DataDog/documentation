@@ -2,16 +2,16 @@
 title: サービス詳細画面
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -105,9 +105,9 @@ Datadog は、特定のサービスに対してすぐに使用できるグラフ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization
-[2]: /ja/tracing/visualization/resource
-[3]: /ja/monitors/monitor_types/apm
-[4]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[5]: /ja/dashboards/timeboard
+[1]: /ja/tracing/visualization/
+[2]: /ja/tracing/visualization/resource/
+[3]: /ja/monitors/monitor_types/apm/
+[4]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[5]: /ja/dashboards/timeboard/
 [6]: /ja/tracing/visualization/#resources

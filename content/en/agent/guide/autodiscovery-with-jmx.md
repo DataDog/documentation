@@ -16,7 +16,7 @@ further_reading:
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodisocovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodiscovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
@@ -32,14 +32,10 @@ The autodiscovery annotations logic consists in applying the JMX check configura
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: >-
-              '["<INTEGRATION_NAME>"]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
-              '[{"is_jmx": true, "collect_default_metrics": true}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: >-
-              '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
-              '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '["<INTEGRATION_NAME>"]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
         # (...)
 
     spec:
@@ -90,14 +86,10 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check_names: >-
-          '["tomcat"]'
-        ad.datadoghq.com/tomcat.init_configs: >-
-          '[{"is_jmx": true, "collect_default_metrics": true}]'
-        ad.datadoghq.com/tomcat.instances: >-
-          '[{"host": "%%host%%","port":"9012"}]'
-        ad.datadoghq.com/tomcat.logs: >-
-          '[{"source":"Tomcat","service":"Tomcat"}]'
+        ad.datadoghq.com/tomcat.check_names: '["tomcat"]'
+        ad.datadoghq.com/tomcat.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+        ad.datadoghq.com/tomcat.instances: '[{"host": "%%host%%","port":"9012"}]'
+        ad.datadoghq.com/tomcat.logs: '[{"source":"Tomcat","service":"Tomcat"}]'
 
 spec:
     containers:
@@ -223,8 +215,8 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 [14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [16]: /integrations/tomcat/
-[17]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/metrics.yaml
-[18]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
+[18]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
 [19]: /integrations/solr/
 [20]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
 [21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
@@ -295,53 +287,9 @@ If your Agent is running on a host and you want to autodiscover your container t
 
 ### Container Preparation
 
-Once the Agent is configured and running, use the `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` label/annotations for your application container to apply the check configuration through Autodiscovery:
+#### Docker
 
-{{< tabs >}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-    name: '<POD_NAME>'
-    annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: '<CUSTOM_AD_IDENTIFIER>'
-        # (...)
-spec:
-    containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-          # (...)
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-
-            - name: JAVA_OPTS
-              value: >-
-                -Xms256m -Xmx6144m
-                -Dcom.sun.management.jmxremote
-                -Dcom.sun.management.jmxremote.authenticate=false
-                -Dcom.sun.management.jmxremote.ssl=false
-                -Dcom.sun.management.jmxremote.local.only=false
-                -Dcom.sun.management.jmxremote.port=<JMX_PORT>
-                -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
-                -Djava.rmi.server.hostname=$(POD_IP)
-# (...)
-```
-
-**Note**:
-
-- To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, _not_ by image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
-- If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, ReplicaSets, or deployments, add pod annotations under `.spec.template.metadata`.
-- The `JAVA_OPTS` environment variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
-- `<JMX_PORT>` references the port that exposes JMX metrics.
-- In the example above, the connection to the RMI registry is not in SSL if you want to use SSL, use `"rmi_registry_ssl": true` in the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` annotation and remove the corresponding `Dcom.sun.management.jmxremote` from `JAVA_OPTS`.
-
-{{% /tab %}}
-{{% tab "Docker" %}}
+Once the Agent is configured and running, use the `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` label for your application container to apply the check configuration through Autodiscovery:
 
 **Dockerfile**:
 
@@ -377,9 +325,6 @@ project:
 ```
 
 **Note**: If the Agent and your JMX container are on the same network bridge, you need to instantiate your JMX server with `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` where `<CONTAINER_NAME>` is your JMX-application container name.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 

@@ -6,19 +6,19 @@ aliases:
   - /fr/tracing/faq/how-long-is-tracing-data-stored/
   - /fr/tracing/getting_further/trace_sampling_and_storage
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: En savoir plus sur les services dans Datadog
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
@@ -380,6 +380,6 @@ Les traces individuelles sont stockées pendant 15 jours. Ainsi, toutes les tra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /fr/tracing/app_analytics/#span-filtering
 [4]: /fr/security/tracing/#resource-filtering

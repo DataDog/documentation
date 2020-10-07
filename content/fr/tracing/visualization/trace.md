@@ -2,19 +2,19 @@
 title: Vue Trace
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: En savoir plus sur les services dans Datadog
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
@@ -39,7 +39,7 @@ L'affichage sous forme de liste regroupe les [ressources][4] par [service][3] et
 {{< tabs >}}
 {{% tab "Tags de span" %}}
 
-Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la trace de pile est fournie :
+Cliquez sur une span dans le graphique de performances pour afficher ses métadonnées en dessous du graphique. En cas d'erreur, la stack trace est fournie :
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Erreur de trace" style="width:90%;">}}
 
@@ -52,7 +52,7 @@ Certains attributs ont des significations particulières qui se traduisent par u
 | `sql.query`   | Permet l'affichage des requêtes SQL dans un format spécial dans l'interface de Datadog.                                                                                                                     |
 | `error.msg`   | Permet l'affichage des messages d'erreur dans un format spécial.                                                                                                                                        |
 | `error.type`  | Permet l'affichage des types d'erreur dans un format spécial. Exemples de types disponibles : `ValueError` ou `Exception` dans Python, et `ClassNotFoundException` ou `NullPointerException` dans Java. |
-| `error.stack` | Permet un affichage plus clair de la trace de pile d'une exception dans l'interface de Datadog (zones rouges, etc.)                                                                                         |
+| `error.stack` | Permet un affichage plus clair de la stack trace d'une exception dans l'interface de Datadog (zones rouges, etc.)                                                                                         |
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Formatage des erreurs"  >}}
 
@@ -71,7 +71,17 @@ Consultez les logs associés à votre service au moment où la trace s'est produ
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Logs de trace"  style="width:90%;">}}
 
-[1]: /fr/logs/explorer/search
+
+[1]: /fr/logs/explorer/search/
+{{% /tab %}}
+{{% tab "Processus" %}}
+
+Cliquez sur la span d'un service pour voir les processus qui s'exécutent sur son infrastructure sous-jacente. Les processus d'une span de service sont mis en corrélation avec les hosts ou pods sur lesquels le service s'exécute au moment de la requête. Vous pouvez analyser des métriques de processus, comme le processeur et la mémoire RSS, avec des erreurs au niveau du code. Vous pourrez ainsi distinguer les problèmes spécifiques à l'application des problèmes d'infrastructure globaux. Lorsque vous cliquez sur un processus, vous êtes redirigé vers la [page Live Processes][1]. Pour afficher des processus spécifiques à une span, activez la [collecte de processus][2]. Les processus associés ne sont actuellement pas pris en charge pour les traces sans serveur et Browser. 
+
+{{< img src="tracing/visualization/trace/trace_processes.png" alt="Processus de trace"  style="width:90%;">}}
+
+[1]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows
+[2]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
 {{< /tabs >}}
 

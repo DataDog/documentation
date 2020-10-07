@@ -35,7 +35,7 @@ Then, deploy the Cluster Checks Runner using either [Datadog Operator][4] or [He
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Using the Operator, you can launch and manage all of these resources with a single manifest like the one shown in [this example][6] (**datadog-agent-with-dca-clusterchecksrunner.yaml**). 
+Using the Operator, you can launch and manage all of these resources with a single manifest like the one shown in [this example][1].
 
 Deploy these resources into your cluster:
 
@@ -43,19 +43,21 @@ Deploy these resources into your cluster:
 kubectl apply -f datadog-agent-with-dca-clusterchecksrunner.yaml
 ```
 
-You'll see the following output, confirming that the configuration was applied successfully: 
+You'll see the following output, confirming that the configuration was applied successfully:
 
 ```
 datadogagent.datadoghq.com/datadog created
 ```
 
-See the [Datadog Operator documentation][4] for more information about the Datadog Operator.
+See the [Datadog Operator repo][2] for more information about the Datadog Operator.
 
 
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-dca-clusterchecksrunner.yaml
+[2]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-You can update the relevant sections of the chart, as shown below, to enable cluster checks, the Cluster Agent, and the Cluster Checks Runners at the same time: 
+You can update the relevant sections of the chart, as shown below, to enable cluster checks, the Cluster Agent, and the Cluster Checks Runners at the same time:
 
 ```
 [...]
@@ -83,4 +85,4 @@ Use `podAntiAffinity` to avoid having multiple Cluster Checks Runners on the sam
 [2]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [3]: https://docs.datadoghq.com/agent/cluster_agent/setup/
 [4]: https://github.com/DataDog/datadog-operator
-[5]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[5]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml

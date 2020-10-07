@@ -1,5 +1,5 @@
 ---
-title: Widget SLO
+title: Widget Résumé des SLO
 kind: documentation
 description: Faites un suivi de vos SLO.
 aliases:
@@ -8,73 +8,53 @@ aliases:
   - /fr/graphing/widgets/slo/
   - /fr/dashboards/faq/how-can-i-graph-host-uptime-percentage/
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/slo-monitoring-widget/'
+  - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
     tag: Blog
-    text: Suivez le statut de vos SLO avec le nouveau widget Disponibilité des monitors
+    text: Faire un suivi du statut de tous vos SLO dans Datadog
 ---
 ## Configuration
 
-Utilisez le widget dédié aux SLO et à la disponibilité pour surveiller vos SLO (Service Level Objectives) et la disponibilité à partir d'un screenboard ou timeboard. Pour utiliser les SLO, ajoutez un widget à un dashboard ou accédez à la [page Service Level Objectives[1] pour afficher les SLO existants et en créer d'autres. Sélectionnez un SLO actif dans le menu déroulant et affichez-le sur n'importe quel dashboard.
+Utilisez le widget Résumé des SLO pour surveiller vos [SLO (Service Level Objectives)][1] à partir de screenboards et de timeboards. Vous pouvez utiliser la [page des Service Level Objectives][2] de Datadog pour afficher les SLO existants et en créer d'autres. Vous pouvez ensuite sélectionner un SLO actif et utiliser le widget Résumé des SLO pour l'afficher sur n'importe quel dashboard.
 
-L'*uptime* ou la disponibilité correspond à la durée pendant laquelle un monitor affichait un statut *up* (OK) comparé à un statut *down* (non OK). Le statut est représenté par des barres de couleur verte (disponible) et rouge (non disponible).
-
-Vous pouvez également surveiller le taux de réussite et les SLI (Service Level Indicators) basés sur des événements. Par exemple : `99 % du temps, la latence est inférieure à 200 ms` :
-
-{{< img src="dashboards/widgets/slo/summary_editor.png" alt="widget disponibilité des monitors" >}}
+{{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="widget Résumé des SLO"  >}}
 
 ### Configuration
 
-1. Sur la page du dashboard, ajoutez un widget SLO. La disponibilité des monitors peut être consultée dans le menu déroulant des SLI basés sur le temps dans le widget. Vous êtes ainsi informé de la durée pendant laquelle le statut d'un élément était OK.
-2. Sélectionnez un ou plusieurs monitors.
-3. Sélectionnez la façon dont vous souhaitez afficher la disponibilité par groupes de monitors.
-4. Définissez un intervalle de temps.
-5. Définissez une mise en forme conditionnelle : choisissez le pourcentage de disponibilité attendu ainsi qu'un seuil d'avertissement.
-6. Définissez les options d'affichage du SLO.
+1. Sur la page du dashboard, ajoutez un widget Résumé des SLO.
+2. Sélectionnez un SLO dans le menu déroulant.
+3. Sélectionnez jusqu'à trois intervalles de temps différents.
 
-Une fois les monitors configurés, vous avez la possibilité de consulter le pourcentage global de disponibilité uniquement ou le pourcentage global ainsi que la disponibilité pour chaque monitor.
-
-{{< img src="dashboards/widgets/slo/slo_uptime-view_mode2.png" alt="Mode de visualisation"  >}}
+**Remarque :** les SLO peuvent être configurés avec des intervalles de temps de 7, 30 ou 90 jours. Pour tous les SLO, vous pouvez également sélectionner `Week to date` comme intervalle de temps. Si un intervalle de temps de 30 jours au moins est configuré pour un SLO, vous pouvez également sélectionner `Previous week` comme intervalle de temps. Si un intervalle de temps de 90 jours est configuré pour un SLO, vous pouvez également sélectionner `Month to date` ou `Previous month` comme intervalle de temps.
 
 ### Options
 
-#### Sélectionner des monitors
+#### Préférences d'affichage
 
-Vous pouvez sélectionner jusqu'à 20 monitors à la fois. Il est possible de rechercher un groupe de monitors et d'utiliser la requête de recherche pour sélectionner les monitors qui vous intéressent. Datadog vous conseille d'utiliser les [tags de monitor][2] pour votre recherche. Par exemple, pour rechercher les monitors d'un service, utilisez : `service:<NOM_SERVICE>`.
+Choisissez d'afficher ou de masquer le budget d'indisponibilité restant en cliquant sur l'option `Show error budget`. Si vous visualisez un SLO basé sur un monitor avec plusieurs groupes ou monitors, sélectionnez votre mode de visualisation via l'option `View mode` :
 
-{{< img src="dashboards/widgets/slo/slo_uptime-choose_a_monitor.png" alt="Choisir un monitor" >}}
+- Pour les SLO basés sur des monitors configurés avec un seul monitor divisé en plusieurs groupes, les trois modes de visualisation suivants sont proposés :
+  - `Status` : affiche les pourcentages de statuts et les cibles du SLO global
+  - `Groups` : affiche un tableau des pourcentages de statuts pour chaque groupe
+  - `Both` : affiche les pourcentages de statuts et les cibles du SLO global ainsi qu'un tableau des pourcentages de statuts pour chaque groupe
 
-#### Disponibilité par groupe
+- Pour les SLO basés sur des monitors configurés avec plusieurs monitors, les trois modes de visualisation suivants sont proposés :
+  - `Status` : affiche les pourcentages de statuts et les cibles du SLO global
+  - `Monitors` : affiche un tableau des pourcentages de statuts pour chaque monitor
+  - `Both` : affiche les pourcentages de statuts et les cibles du SLO global ainsi qu'un tableau des pourcentages de statuts pour chaque monitor
 
-Vous pouvez afficher la disponibilité par groupes de monitors de trois manières différentes :
+{{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="mode de visualisation"  >}}
 
-- Les cinq groupes les plus performants
-- Les cinq groupes les moins performants
-- Personnalisé (sélectionnez jusqu'à 20 groupes)
+#### Titre
 
-#### Intervalle de temps
+Affichez un titre personnalisé pour votre widget en cochant la case `Show a title` :
 
-Il est possible d'afficher le pourcentage de disponibilité pour l'ensemble du monitor, pour des groupes spécifiques, ou les deux. Le pourcentage total de disponibilité peut être calculé en fonction du groupe sélectionné, de l'ensemble des monitors (tous les groupes, peu importe les éléments sélectionnés) ou des groupes sélectionnés uniquement.
+{{< img src="dashboards/widgets/slo/slo_summary-show_title.png" alt="titre du widget"  >}}
 
-**Remarque** : la disponibilité globale correspond à la part de temps pendant laquelle aucun des groupes inclus dans le widget n'affichait un statut ALERT.
-
-{{< img src="dashboards/widgets/slo/slo_uptime-view_mode.png" alt="Mode de visualisation"  >}}
-
-#### Mise en forme conditionnelle
-
-| Option              | Description                                                               |
-| ------------------- | ------------------------------------------------------------------------- |
-| SLO                 | Définissez le pourcentage de disponibilité attendu pour votre service.                               |
-| Warning threshold   | Définissez le seuil à partir duquel vous souhaitez être informé par Datadog de la disponibilité de votre service.   |
-
-### Options d'affichage
-
-Pour les monitors basés sur des SLO, vous pouvez choisir d'afficher le pourcentage de disponibilité du monitor, ses groupes les moins performants, ou les deux. Ces options ont également disponibles pour les SLO qui regroupent plusieurs monitors, vous permettant ainsi de consulter un monitor spécifique plutôt qu'un groupe entier.
-
-Les groupes (ou les monitors agrégés dans le cas des SLO avec plusieurs monitors) sont triés en fonction du pire statut dans l'intervalle de temps le plus court. Pour modifier l'intervalle de temps de tri, cliquez sur le libellé de cet intervalle dans l'aperçu.
+Vous pouvez aussi définir sa taille et son alignement si vous le souhaitez.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo
-[2]: /fr/getting_started/tagging/using_tags/?tab=assignment#monitors
+[1]: /fr/monitors/service_level_objectives/
+[2]: https://app.datadoghq.com/slo

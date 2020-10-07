@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -29,6 +31,10 @@ supported_os:
   - mac_os
   - windows
 ---
+<div class="alert alert-warning">
+<b>重要</b>: このインテグレーションは、OpenStack バージョン 13 以降 (コンテナ化 OpenStack) にのみ適用されます。OpenStack v12 以前 (非コンテナ化 OpenStack) からメトリクスを収集する場合は、<a href="https://docs.datadoghq.com/integrations/openstack/">OpenStack インテグレーション</a>をご利用ください。
+</div>
+
 ## 概要
 
 このチェックは、コントローラーノードから [OpenStack][1] を監視します。
@@ -122,4 +128,4 @@ OpenStack Controller には、イベントは含まれません。
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/openstack_controller/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

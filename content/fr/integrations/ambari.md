@@ -1,7 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Ambari base dashboard: assets/dashboards/base_dashboard.json
+  logs:
+    source: ambari
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,7 +49,7 @@ Le check Ambari est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez d
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
@@ -107,7 +111,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][6].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
 
 | Paramètre      | Valeur                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,11 +157,11 @@ Ambari n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://ambari.apache.org
-[2]: https://docs.datadoghq.com/fr/agent
+[2]: https://docs.datadoghq.com/fr/agent/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[6]: https://docs.datadoghq.com/fr/agent/docker/log/
+[5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/ambari/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/

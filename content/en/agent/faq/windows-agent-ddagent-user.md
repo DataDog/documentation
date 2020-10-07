@@ -11,6 +11,7 @@ The user `ddagentuser` is created at install time for the Datadog Windows Agent.
 * It becomes a member of the “Performance Monitor Users” group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
+* It becomes a member of the “Event Log Readers” group
 * It has local login disabled
 * It has remote login disabled
 * It has network login disabled
@@ -35,6 +36,11 @@ Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD
 
 For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied should **never** be an existing "real" (human) user. The installation process changes the rights of the user and they are denied login access.
 
+Additionally, the installer adds the user to the following groups:
+
+* Performance Monitoring
+* Event Log Viewer
+
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
@@ -42,7 +48,7 @@ For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied 
 **Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
 
 ```shell
-Msiexec /i ddagent.msi <DDAGENTUSER_NAME>=<DOMAIN>\<USERNAME>
+Msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME>
 ```
 
 ### Installation with Chef
@@ -79,10 +85,12 @@ If you’re using the Attach API, the change in user context means that the Agen
 
 ### Process check
 
-Now that the Agent runs under `ddagentuser`, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
 
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
+
+To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
 
 ### Cassandra Nodetool integration
 

@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: marathon
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -40,7 +44,7 @@ Le check Marathon de l'Agent vous permet de :
 - Suivre l'état et la santé de chaque application en visualisant la mémoire, l'espace disque, la charge processeur et le nombre d'instances configurés, ainsi que le nombre de tâches saines et non saines.
 - Surveiller le nombre d'applications en attente et le nombre de déploiements
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -48,7 +52,7 @@ Le check Marathon est inclus avec le paquet de l'[Agent Datadog][1] : vous n'av
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Agent conteneurisé](#agent-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 

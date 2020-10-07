@@ -269,7 +269,7 @@ The major changes for Agent v6 on Windows are:
 The major changes for Agent v6 on MacOS are:
 
 * The _lifecycle commands_ (formerly `datadog-agent start`/`stop`/`restart`/`status`) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent systray app.
-* All the other commands can still be run with the `datadog-agent` command located in the `PATH` (`/usr/local/bin/`) by default.
+* All the other commands can still be run with the `datadog-agent` binary located in the `PATH` (`/usr/local/bin/`) by default.
 * The `info` command has been renamed to `status`.
 * The configuration GUI is now a web-based application, which can be accessed by running the command `datadog-agent launch-gui` or using the systray app.
 
@@ -431,7 +431,7 @@ The [Autodiscovery][7] system was reworked for Agent v6. Also, container runtime
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-When using Kubernetes, Autodiscovery sources information from the kubelet, instead of Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener by the `kubelet` one if you need Autodiscovery on containers running out of pods.
+When using Kubernetes, Autodiscovery sources information from the kubelet instead of Docker daemon. This allows Autodiscovery to work without access to the Docker socket. Also, the default behavior is to source Autodiscovery templates from pod annotations. You can enable the `docker` config-provider to use container labels, and replace the `kubelet` listener with the Docker one if you need Autodiscovery on containers running out of pods.
 
 When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 

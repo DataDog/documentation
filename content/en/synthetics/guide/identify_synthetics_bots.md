@@ -1,13 +1,13 @@
 ---
-title: Identify Synthetics Bots
+title: Identify Synthetic Bots
 kind: documentation
-description: Identify incoming Synthetics requests
+description: Identify incoming Synthetic requests
 aliases:
 - /synthetics/identify_synthetics_bots
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
+  text: "Introducing Datadog Synthetic Monitoring"
 - link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
@@ -24,7 +24,7 @@ further_reading:
 Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. To detect Datadog robots, use:
 
 * The [headers](#headers) attached to all Datadog robot requests.
-* Datadog's [**Synthetics IP ranges**][1].
+* Datadog's [**Synthetic Monitoring IP ranges**][1].
 * The **Advanced options** configuration to set custom headers for your API and browser tests. You can also locally add **cookies, headers, or basic auth** to your API tests and **cookies and headers** to your browser tests.
 * The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#datadog-synthetics-browser-variable).
 
@@ -37,7 +37,7 @@ Use the header attached to Datadog robots to detect them for your API and browse
 
 The following header is attached to all Datadog API tests robots:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETIC_TEST_PUBLIC_ID>`
 
 The `x-datadog-origin: synthetics` header is also added to all the requests launched for a Datadog API test.
 
@@ -46,7 +46,7 @@ The `x-datadog-origin: synthetics` header is also added to all the requests laun
 
 The following header is attached to all Datadog browser tests robots:
 
-`Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETICS_TEST_PUBLIC_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETIC_TEST_PUBLIC_ID>`
 
 {{% /tab %}}
 {{< /tabs >}}

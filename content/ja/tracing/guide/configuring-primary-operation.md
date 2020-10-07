@@ -1,20 +1,22 @@
 ---
 title: サービスのプライマリオペレーション
 kind: ガイド
+aliases:
+  - /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: ドキュメント
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: ドキュメント
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: ドキュメント
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: ドキュメント
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: ドキュメント
     text: Datadog トレースの読み方を理解する
 ---
@@ -88,5 +90,5 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/getting_further/metrics_namespace
+[1]: /ja/tracing/guide/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/settings

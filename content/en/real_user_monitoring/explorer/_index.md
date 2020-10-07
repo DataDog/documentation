@@ -24,9 +24,9 @@ Build up a context to explore your views in your RUM Explorer page first by sele
 
 The time range appears directly under the search bar as a timeline. This feature allows you to display views in the view steam or analytics within a given time period.
 
-Quickly change the time range by selecting a preset range from the dropdown:
+Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][2]):
 
-{{< img src="real_user_monitoring/explorer/rum_time_selector.png" alt="Rum time selector"  style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/rum_time_selector.png" alt="Rum time selector"  style="width:50%;">}}
 
 All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
@@ -38,7 +38,7 @@ Click on any view to open the views panel and see more details (resources, trace
 
 ## Setup - Facets & Measures
 
-After [being collected][2], your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
+After being collected, your views attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [analytics][3].
 
 Note: to leverage the most out from your RUM Explorer page, make sure your views attributes follow [Datadog attribute naming convention][4].
 
@@ -88,6 +88,6 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/#search-syntax
-[2]: /real_user_monitoring/installation/
+[2]: /dashboards/guide/custom_time_frames
 [3]: /real_user_monitoring/explorer/analytics/
 [4]: /logs/processing/attributes_naming_convention/

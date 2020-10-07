@@ -1,14 +1,22 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: rabbitmq
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    pid_overview: assets/saved_views/status_overview.json
+    rabbitmq_pattern: assets/saved_views/rabbitmq_pattern.json
   service_checks: assets/service_checks.json
 categories:
   - processing
   - log collection
   - autodiscovery
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
 display_name: RabbitMQ
@@ -73,13 +81,16 @@ rabbitmqctl set_user_tags datadog monitoring
 
 ここで、`/` はデフォルトのホストを表します。これを、指定した仮想ホスト名に設定してください。詳細については、[RabbitMQ のドキュメント][5]を参照してください。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. RabbitMQ メトリクスの収集を開始するには、[Agent の構成ディレクトリ][6]のルートにある `conf.d/` フォルダーの `rabbitmq.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル rabbitmq.d/conf.yaml][7] を参照してください。
+1. RabbitMQ メトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `rabbitmq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル rabbitmq.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -92,9 +103,9 @@ rabbitmqctl set_user_tags datadog monitoring
      - rabbitmq_api_url: http://localhost:15672/api/
    ```
 
-   **注**: Agent は、デフォルトですべてのキュー、vhost、ノードをチェックしますが、リストまたは正規表現を指定してこれを制限できます。例については、[rabbitmq.d/conf.yaml][7] を参照してください。
+   **注**: Agent は、デフォルトですべてのキュー、vhost、ノードをチェックしますが、リストまたは正規表現を指定してこれを制限できます。例については、[rabbitmq.d/conf.yaml][2] を参照してください。
 
-2. [Agent を再起動します][8]。
+2. [Agent を再起動します][3]。
 
 ##### ログの収集
 
@@ -127,33 +138,44 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: "="
    ```
 
-4. [Agent を再起動します][8]。
+4. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][9]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
-| `<INTEGRATION_NAME>` | `rabbitmq`                                   |
-| `<INIT_CONFIG>`      | 空白または `{}`                                |
-| `<INSTANCE_CONFIG>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/"}` |
+| `<インテグレーション名>` | `rabbitmq`                                   |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                |
+| `<インスタンスコンフィギュレーション>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/","username": <ユーザー名>, "password": <パスワード>}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集のドキュメント][10]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": {"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][11]し、Checks セクションで `rabbitmq` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `rabbitmq` を探します。
 
 ## 収集データ
 
@@ -167,7 +189,7 @@ Agent は、キュー名に基づいて `rabbitmq.queue.*` メトリクスをタ
 
 パフォーマンス上の理由から、RabbitMQ チェックは、メトリクスの収集対象となるエクスチェンジ、キュー、ノードの数を制限します。この制限に近づくと、イベントストリームに警告レベルのイベントが送信されます。
 
-エクスチェンジ、キュー、またはノードの数を増やす必要がある場合は、[Datadog のサポートチーム][13]までお問合せください。
+エクスチェンジ、キュー、またはノードの数を増やす必要がある場合は、[Datadog のサポートチーム][7]までお問合せください。
 
 ### サービスのチェック
 
@@ -179,7 +201,7 @@ Agent が RabbitMQ に接続してメトリクスを収集できない場合は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
@@ -187,28 +209,23 @@ Agent が RabbitMQ に接続してメトリクスを収集できない場合は�
 
 ### Datadog ブログ
 
-- [RabbitMQ 監視のキーメトリクス][14]
-- [RabbitMQ 監視ツールでメトリクスを収集][15]
-- [Datadog を使用した RabbitMQ パフォーマンスの監視][16]
+- [RabbitMQ 監視のキーメトリクス][8]
+- [RabbitMQ 監視ツールでメトリクスを収集][9]
+- [Datadog を使用した RabbitMQ パフォーマンスの監視][10]
 
 ### よくあるご質問
 
-- [タグファミリーに基づいて RabbitMQ キューをタグ付け][17]
+- [タグファミリーに基づいて RabbitMQ キューをタグ付け][11]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/rabbitmq/images/rabbitmq_dashboard.png
 [2]: https://www.rabbitmq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://www.rabbitmq.com/management.html
 [5]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
-[10]: https://docs.datadoghq.com/ja/agent/docker/log/
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/metadata.csv
-[13]: https://docs.datadoghq.com/ja/help
-[14]: https://www.datadoghq.com/blog/rabbitmq-monitoring
-[15]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
-[16]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
-[17]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/rabbitmq-monitoring
+[9]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
+[10]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
+[11]: https://docs.datadoghq.com/ja/integrations/faq/tagging-rabbitmq-queues-by-tag-family/

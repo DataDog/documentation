@@ -6,19 +6,19 @@ aliases:
   - /ja/tracing/faq/how-long-is-tracing-data-stored/
   - /ja/tracing/getting_further/trace_sampling_and_storage
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -380,6 +380,6 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/visualization/#trace
-[2]: /ja/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[2]: /ja/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [3]: /ja/tracing/app_analytics/#span-filtering
 [4]: /ja/security/tracing/#resource-filtering

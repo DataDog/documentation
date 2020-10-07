@@ -25,9 +25,15 @@ further_reading:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1 and 3.1, as well as Microsoft-deprecated versions 2.0, 2.2 and 3.0.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
-## Getting Started
+## Getting started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app documentation (Recommended)
+
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable App Analytics and Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
@@ -35,7 +41,7 @@ Otherwise, to begin tracing applications written in any language, first [install
 
 ## Automatic Instrumentation
 
-Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries](#integrations) out of the box.
+Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][1] out of the box.
 
 Automatic instrumentation captures:
 
@@ -126,12 +132,33 @@ If your application runs in IIS, skip the rest of this section.
 
 For Windows applications **not** running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+
 Name                       | Value
 ---------------------------|------
 `CORECLR_ENABLE_PROFILING` | `1`
 `CORECLR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
-For example, to set the environment variables from a batch file before starting your application:
+#### Windows Services
+
+To automatically instrument a Windows Service, set the environment variables for that Service in the Windows Registry. Create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key. Then set the key's data to the values in the table:
+```text
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+```
+
+This can be done either through the Registry Editor as in the image below, or through a PowerShell snippet:
+
+{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Registry Editor"  >}}
+
+{{< code-block lang="powershell" filename="add-env-var.ps1" >}}
+[String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+{{< /code-block >}}
+
+#### Console Apps
+
+Set the environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
@@ -141,8 +168,6 @@ SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 rem Start application
 dotnet.exe example.dll
 ```
-
-To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
 
@@ -188,12 +213,52 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
+
+#### Systemctl (Per Service)
+
+When using `systemctl` to run .NET applications as a service, you can add the required environment variables to be loaded for a specific service.
+
+Create a file called `environment.env` containing:
+
+```bat
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
+# any other environment variable used by the application
+```
+
+In the service configuration file, reference this as an [`EnvironmentFile`][2] in the service block:
+
+```bat
+[Service]
+EnvironmentFile=/path/to/environment.env
+ExecStart=<command used to start the application>
+```
+After setting these variables, restart the .NET service for the environment variables to take effect.
+
+#### Systemctl (All Services)
+
+When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services ran via `systemctl`. To confirm these variables have been set, use [`systemctl show-environment`][2]. Before using this approach, see the note below about this instrumenting all .NET processes.
+
+```bat
+systemctl set-environment CORECLR_ENABLE_PROFILING=1
+systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
+systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+Once this is set, verify that the environment variables were set with `systemctl show-environment`.
+
 [1]: https://docs.docker.com/engine/reference/builder/#env
+[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
 {{% /tab %}}
 
 {{< /tabs >}}
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
 ## Manual Instrumentation
 
@@ -202,6 +267,8 @@ To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to 
 For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][5].
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
+
+**Note:** When using both manual and automatic instrumentation, it is important to keep the MSI installer and NuGet package versions in sync.
 
 ## Configuration
 
@@ -298,17 +365,17 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 The following tables list the supported configuration variables. Use the first name (e.g. `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name, if present (e.g. `AgentUri`), indicates the name the `TracerSettings` propery to use when changing settings in the code.
 
-#### Tagging
+#### Unified Service Tagging
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
-| `DD_SERVICE`<br/><br/>`ServiceName`            | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
-| `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service.
-| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`).                                                                                                                                              |
+| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.  Available for versions 1.17.0+.                                                            |
+| `DD_SERVICE`<br/><br/>`ServiceName`            | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). Available for versions 1.17.0+  |
+| `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service. Available for versions 1.17.0+
+| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Available for versions 1.17.0+                                                                                                                                              |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][6] documentation for recommendations on how to configure these environment variables.
 
 #### Instrumentation
 
@@ -319,11 +386,10 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][6] for more details about the `env` tag.                                                              |
-| `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
-| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
+| `DD_TRACE_HEADER_TAGS`                              | Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on root spans. (e.g. : `CASE-insensitive-Header:my-tag-name,User-ID:userId`). Available for version 1.18.3+  |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
@@ -331,25 +397,25 @@ The following table lists configuration variables that are available only when u
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_DEBUG`                                               | Enables or disables debug logs in the Tracer. Valid values are: `true` or `false` (default). Setting this as an environment variable also enabled debug logs in the CLR Profiler.                                                                                                        |
-| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                                     |
+| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above. **Note:** On Linux, the names of environment variables are case-sensitive.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations][1] section. **Note:** On Linux, the names of environment variables are case-sensitive.
 
-| Setting Name                                                            | Description                                                                                                           |
-|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | Enables or disable App Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
-| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | Sets the App Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
+| Setting Name                                                                  | Description                                                                                                           |
+|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `DD_TRACE_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | Enables or disable App Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
+| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | Sets the App Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
-[5]: /tracing/manual_instrumentation/dotnet/
-[6]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[5]: /tracing/custom_instrumentation/dotnet/
+[6]: /getting_started/tagging/unified_service_tagging/

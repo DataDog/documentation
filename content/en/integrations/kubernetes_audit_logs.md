@@ -142,12 +142,12 @@ In the last section, for everything that was not explicitly configured by the pr
         - hostPath:
             path: /var/log/kubernetes/apiserver
           name: auditdir
-         - name: dd-agent-config
+        - name: dd-agent-config
             configMap:
               name: dd-agent-config
               items:
-              - key: kubernetes-audit-log
-                path: conf.yaml
+                - key: kubernetes-audit-log
+                  path: conf.yaml
       # (...)
     ```
 

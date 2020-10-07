@@ -172,7 +172,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environement variable to true for the Agent container:
+1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
 
     ```yaml
     # (...)

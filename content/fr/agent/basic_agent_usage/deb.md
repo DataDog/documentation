@@ -7,13 +7,13 @@ aliases:
   - /fr/agent/basic_agent_usage/install_debian_5/
   - /fr/agent/basic_agent_usage/debian
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
 ---
@@ -62,7 +62,7 @@ Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 
 **Remarque** : si le wrapper de `service` n'est pas disponible sur votre système, utilisez :
 
-* Sur les systèmes basés sur `upstart` : `sudo initctl start/stop/restart/status datadog-agent`
+* Sur les systèmes basés sur `upstart` : `sudo start/stop/restart/status datadog-agent`
 * Sur les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart/status datadog-agent`
 
 [En savoir plus sur les commandes de cycle de vie du service][2]
@@ -79,7 +79,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -91,7 +91,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -111,5 +111,5 @@ Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets
 
 [1]: https://app.datadoghq.com/account/settings#agent/debian
 [2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /fr/agent/troubleshooting
-[4]: /fr/developers/guide/custom-python-package
+[3]: /fr/agent/troubleshooting/
+[4]: /fr/developers/guide/custom-python-package/

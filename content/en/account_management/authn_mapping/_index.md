@@ -14,6 +14,8 @@ If you are using Federated Authentication mechanisms, this API allows you to aut
 
 **Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
 
+You can also create and manage mappings in the Datadog app UI, on the **Mappings** tab in User Management. See [Mapping SAML attributes to Datadog roles][1] for more information.
+
 ## Requests
 
 {{< site-region region="us" >}}
@@ -43,7 +45,7 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 * **`role["data"]["id"]`** [*required*, no default]:
  The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][2].
 * **`attributes["attribute_key"]`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attributes["attribute_value"]`** [*required*, no default]:
@@ -420,7 +422,7 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
   Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to update. This is required in both the path of the request and the body of the request.
 * **`role["data"]["id"]`** [*optional*, *default*=none]:
  The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][2].
 * **`attributes["attribute_key"]`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attributes["attribute_value"]`** [*optional*, *default*=none]:
@@ -755,4 +757,5 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v2/roles/#list-roles
+[1]: /account_management/saml/#mapping-saml-attributes-to-datadog-roles
+[2]: /api/v2/roles/#list-roles

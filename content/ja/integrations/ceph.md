@@ -1,6 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: ceph
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -8,7 +13,7 @@ categories:
   - os & system
   - log collection
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ceph/README.md'
 display_name: Ceph
@@ -48,12 +53,12 @@ Datadog-Ceph インテグレーションを有効にすると、以下のこと�
 
 ### インストール
 
-Ceph チェックは [Datadog Agent][3] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
+Ceph チェックは [Datadog Agent][2] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
-[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
-使用可能なすべての構成オプションの詳細については、[サンプル ceph.d/conf.yaml][5] を参照してください。
+[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
+使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ceph.d/conf.yaml][4] を参照してください。
 
 ```yaml
 init_config:
@@ -89,7 +94,7 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<APPLICATION_NAME>"
    ```
 
-3. [Agent を再起動します][10]。
+3. [Agent を再起動します][5]。
 
 ### 検証
 
@@ -177,11 +182,11 @@ PG の数が最大しきい値を下回る場合は、`OK` を返します。そ
 - [Ceph の監視: ノードステータスからクラスター全体のパフォーマンスまで][9]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/ceph/datadog_checks/ceph/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/ceph/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/monitor-ceph-datadog
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

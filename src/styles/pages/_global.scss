@@ -326,6 +326,14 @@ h5{
     }
   }
 
+  ol {
+    li {
+      &:before {
+        content: "" !important;
+      }
+    }
+  }
+
   ul{
     list-style-type: none;
     -webkit-padding-start: 22px;
@@ -667,6 +675,15 @@ table, .table {
       width: 50%;
     }
   }
+}
+
+.break-word {
+  table {
+    td {
+      word-break: break-word;
+    }
+  }
+  
 }
 
 // external link logos

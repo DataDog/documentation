@@ -16,6 +16,8 @@ code_languages:
 
 branch: ""
 
+signupclass: sign-up-trigger
+
 header_scripts:
   - hotjar: false
   - google-tag-manager: false

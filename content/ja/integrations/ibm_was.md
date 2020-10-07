@@ -1,6 +1,10 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    IBM_WAS: assets/dashboards/overview.json
+  logs:
+    source: ibm_was
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -66,15 +70,18 @@ IBM WAS チェックは [Datadog Agent][4] パッケージに含まれていま�
 
 ### コンフィギュレーション
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### メトリクスの収集
 
-1. IBM WAS のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `ibm_was.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ibm_was.d/conf.yaml][3] を参照してください。
+1. IBM WAS のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_was.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ibm_was.d/conf.yaml][1] を参照してください。
 
-2. [Agent を再起動します][5]。
+2. [Agent を再起動します][2]。
 
 ##### ログの収集
 
@@ -96,33 +103,43 @@ _Agent バージョン 6.0 以降で利用可能_
        service: websphere
    ```
 
-3. [Agent を再起動します][5]。
+3. [Agent を再起動します][2]。
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
 | パラメーター            | 値                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `ibm_was`                                                                     |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                 |
-| `<INSTANCE_CONFIG>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
+| `<インテグレーション名>` | `ibm_was`                                                                     |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                 |
+| `<インスタンスコンフィギュレーション>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
 
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][6]を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集のドキュメント][2]を参照してください。
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ibm_was", "service": "<SERVICE_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションの `ibm_was` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションの `ibm_was` を探します。
 
 ## 収集データ
 
@@ -141,14 +158,12 @@ IBM WAS には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
 
 [1]: https://www.ibm.com/cloud/websphere-application-platform
-[2]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/docker/log/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

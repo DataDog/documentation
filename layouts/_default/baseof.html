@@ -39,7 +39,7 @@
   <div class="greyside">
     <div class="container h-100">
       <div class="row h-100">
-        <div class="d-none d-lg-flex col-12 col-sm-3 h-100 grey" style="background:#f8f8f8">
+        <div class="d-none d-lg-flex col-12 col-sm-3 h-100 grey" style="background:#f8f8f8; z-index: -1;">
         </div>
       </div>
     </div>
@@ -61,8 +61,8 @@
       </div>
 
       <div class="region-selector-container">
-        <select class="js-region-selector d-none" placeholder="Region">
-          <option value="" disabled>Region</option>
+        <select class="js-region-selector d-none" placeholder="Site">
+          <option value="" disabled>Site</option>
           {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
               <option value="{{ .value }}">{{ .name }}</option>
           {{ end }}

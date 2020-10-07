@@ -119,7 +119,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [1]: https://pypi.org/project/pynvml/
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[4]: https://github.com/DataDog/integrations-core/blob/master/nvml/datadog_checks/nvml/data/conf.yaml.example
+[4]: https://github.com/DataDog/integrations-extras/blob/master/nvml/datadog_checks/nvml/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/nvml/metadata.csv

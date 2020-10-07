@@ -33,7 +33,7 @@ Azure VM からメトリクスを取得すると、以下のことができま�
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-**ARM** でデプロイされた仮想マシンの場合は、診断をオンにし、収集する仮想マシンのメトリクスを選択する必要があります。手順については、[診断の有効化][7] を参照してください。
+**ARM** でデプロイされた仮想マシンの場合は、診断をオンにし、収集する仮想マシンのメトリクスを選択する必要があります。手順については、[診断の有効化][2] を参照してください。
 
 ## 収集データ
 
@@ -51,18 +51,18 @@ Azure Virtual Machine インテグレーションには、サービスのチェ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
-- [Microsoft Azure VM の監視方法][4]
-- [Azure メトリクスの収集方法][5]
-- [Datadog を使用した Azure VM の監視][6]
+- [Microsoft Azure VM の監視方法][5]
+- [Azure メトリクスの収集方法][6]
+- [Datadog を使用した Azure VM の監視][7]
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help
-[4]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
-[5]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
-[6]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
-[7]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[2]: https://docs.datadoghq.com/ja/integrations/faq/azure-troubleshooting/#enable-diagnostics
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
+[6]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
+[7]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog

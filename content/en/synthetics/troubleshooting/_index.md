@@ -1,11 +1,11 @@
 ---
-title: Synthetics Troubleshooting
+title: Synthetic Monitoring Troubleshooting
 kind: documentation
-description: Troubleshoot common Synthetics issues.
+description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: "/synthetics/"
   tag: "Documentation"
-  text: "Manage your Synthetics tests"
+  text: "Manage your Synthetic tests"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
@@ -14,7 +14,7 @@ further_reading:
   text: "Configure an API Test"
 ---
 
-If you experience issues setting up or configuring Datadog Synthetics, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
+If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
 
 ## Browser Tests
 
@@ -34,7 +34,7 @@ The freshly opened incognito pop up ignores all your previous browser history: c
 
 ### Unauthorized errors
 
-If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetics test.
+If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
 
 * Is your endpoint using **header-based authentication**?
   * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][2] or [Browser test][3].
@@ -43,13 +43,17 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
-* Is this endpoint using **IP-based authentication**? If so, you might need to whitelist part or all of the [IPs from which Synthetics tests originate][7].
+* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][7].
 
 ### Forbidden errors
 
-If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetics request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
+If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
-Additionally, you might also have to ensure [Datadog Synthetics' IP ranges][7] are allowed as traffic sources by your firewalls.
+Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][7] are allowed as traffic sources by your firewalls.
+
+### Missing notifications
+
+Synthetic tests by default do not [renotify][8]. This means that if you add your notification handle (email address, Slack handle, etc.) after a transition got generated (e.g., test going into alert or recovering from a previous alert), no notification is sent for that very transition. A notification will be sent for the next transition.
 
 ## Further Reading
 
@@ -62,3 +66,4 @@ Additionally, you might also have to ensure [Datadog Synthetics' IP ranges][7] a
 [5]: /synthetics/api_tests/?tab=httptest#use-global-variables
 [6]: /synthetics/browser_tests/#use-global-variables
 [7]: https://ip-ranges.datadoghq.com/synthetics.json
+[8]: /synthetics/api_tests/?tab=httptest#notify-your-team

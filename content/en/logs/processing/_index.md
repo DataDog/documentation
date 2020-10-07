@@ -2,6 +2,8 @@
 title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
+aliases:
+  - /logs/faq/integration-pipeline-reference
 further_reading:
 - link: "/logs/processing/pipelines/"
   tag: "Documentation"
@@ -26,7 +28,7 @@ To access the configuration panel use the left `Logs` menu then the configuratio
 Log configuration page allows full control over how your logs are processed with Datadog [Pipelines][1] and [Processors][2].
 
 * A [Pipeline][1] takes a filtered subset of incoming logs and applies a list of sequential processors.
-* A [Processor][2] executes within a [Pipeline][1] a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+* A [Processor][2] executes within a [Pipeline][1] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
 
 [Pipelines][1] and [Processors][2] can be applied to any type of logs:
 
@@ -67,9 +69,38 @@ To discover the full list of Processors available, refer to the dedicated [Proce
 
 If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][9]. There is also a [parsing best practice][10] and [parsing troubleshooting][11] guide.
 
-## Reserved attributes
+For optimal usage of the Log Management solution, Datadog recommends using at most 20 processors per pipeline and 10 parsing rules within a grok processor. 
+Datadog reserves the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog and are faceted by default:
+
+## JSON Logs Pre processing
+
+JSON Logs preprocessing applies on all logs before they actually enter [Log Pipelines][1] processing. Preprocessing runs a series of operations based on reserved attributes:
+
+* Trigger new [log integrations][12] based on the **source** of incoming logs.
+* Append incoming logs with all [**host** tags][13].
+* Apply reserved attribute remapper processors (namely [**date** remapper][14], [**status** remapper][15], [**service** remapper][16], [**message** remapper][17] and [**trace ID** remapper][18]) for the related JSON attributes of all incoming JSON logs.
+
+JSON Logs pre processing comes with a default configuration that works for standard log forwarders. Edit this configuration at any time to adapt to custom or specific log forwarding approaches. To change the default values, go to the [configuration page][5] and edit `Pre processing for JSON logs`:
+
+{{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON Logs Preprocessing Tile"  style="width:80%;">}}
+
+
+### *source* attribute
+
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][12].
+
+**Note**: Logs coming from a containerized environment require the use of an [environment variable][19] to override the default source and service values.
+
+
+### *host* attribute
+
+Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
+
+* `host`
+* `hostname`
+* `syslog.hostname`
+
 
 ### *date* attribute
 
@@ -84,9 +115,9 @@ By default Datadog generates a timestamp and appends it in a date attribute when
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][12].
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][14].
 
-**Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
+**Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
 <div class="alert alert-warning">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -94,7 +125,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][13], where it is indexed for [full text search][14].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [logstream][20], where it is indexed for [full text search][21].
 
 ### *status* attribute
 
@@ -107,20 +138,6 @@ Each log entry may specify a status level which is made available for faceted se
 
 If you would like to remap a status existing in the `status` attribute, you can do so with the [log status remapper][15].
 
-### *host* attribute
-
-Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's host:
-
-* `host`
-* `hostname`
-* `syslog.hostname`
-
-### *source* attribute
-
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
-
-**Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
-
 ### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
@@ -130,20 +147,11 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 ### *trace_id* attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs in the logs][18]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog tracers can automatically inject trace and span IDs in the logs][22]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
 
-### Edit reserved attributes
-
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing Pipelines. This is useful if logs are sent in JSON or from an external Agent.
-
-{{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute"  style="width:80%;">}}
-
-To change the default values for each of the reserved attributes, go to the [Configuration page][5] and edit the `Reserved Attribute mapping`:
-
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile"  style="width:80%;">}}
 
 ## Further Reading
 
@@ -160,10 +168,14 @@ To change the default values for each of the reserved attributes, go to the [Con
 [9]: /logs/processing/parsing/
 [10]: /logs/faq/log-parsing-best-practice/
 [11]: /logs/faq/how-to-investigate-a-log-parsing-issue/
-[12]: /logs/processing/processors/#log-date-remapper
-[13]: /logs/explorer/?tab=logstream#visualization
-[14]: /logs/explorer/search/
+[12]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[13]: /getting_started/tagging/#introduction
+[14]: /logs/processing/processors/#log-date-remapper
 [15]: /logs/processing/processors/#log-status-remapper
-[16]: /logs/faq/integration-pipeline-reference/
-[17]: /agent/docker/log/#examples
-[18]: /tracing/connect_logs_and_traces/
+[16]: /logs/processing/processors/?tab=ui#service-remapper
+[17]: /logs/processing/processors/?tab=ui#log-message-remapper
+[18]: /logs/processing/processors/?tab=ui#trace-remapper
+[19]: /agent/docker/log/#examples
+[20]: /logs/explorer/?tab=logstream#visualization
+[21]: /logs/explorer/search/
+[22]: /tracing/connect_logs_and_traces/

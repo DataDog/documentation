@@ -367,6 +367,73 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
+    ApmStatsQueryColumnType:
+      description: Column properties.
+      properties:
+        alias:
+          description: A user-assigned alias for the column.
+          example: Requests
+          type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        name:
+          description: Column name.
+          example: Reqs
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - name
+      type: object
+    ApmStatsQueryDefinition:
+      description: The APM stats query for table and distributions widgets.
+      properties:
+        columns:
+          description: Column properties used by the front end for display.
+          items:
+            $ref: '#/components/schemas/ApmStatsQueryColumnType'
+          type: array
+        env:
+          description: Environment name.
+          example: prod
+          type: string
+        name:
+          description: Operation name associated with service.
+          example: rack.request
+          type: string
+        primary_tag:
+          description: The organization's host group name and value.
+          example: datacenter:*
+          type: string
+        resource:
+          description: Resource name.
+          example: CartsController
+          type: string
+        row_type:
+          $ref: '#/components/schemas/ApmStatsQueryRowType'
+        service:
+          description: Service name.
+          example: web-store
+          type: string
+      required:
+      - service
+      - env
+      - name
+      - primary_tag
+      - row_type
+      type: object
+    ApmStatsQueryRowType:
+      description: The level of detail for the request.
+      enum:
+      - service
+      - resource
+      - span
+      example: service
+      type: string
+      x-enum-varnames:
+      - SERVICE
+      - RESOURCE
+      - SPAN
     ApplicationKey:
       description: An application key with its associated metadata.
       properties:
@@ -499,6 +566,11 @@ components:
       description: The Change graph shows you the change in a value over the time
         period chosen.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
@@ -563,6 +635,8 @@ components:
           description: Query definition.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         show_present:
           description: Whether to show the present value.
@@ -1001,6 +1075,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
@@ -1301,6 +1377,87 @@ components:
     Event:
       description: Object representing an event.
       properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
+
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
+    EventAlertType:
+      description: 'If an alert event is enabled, set its type.
+
+        For example, `error`, `warning`, `info`, and `success`.'
+      enum:
+      - error
+      - warning
+      - info
+      - success
+      example: info
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - INFO
+      - SUCCESS
+    EventCreateRequest:
+      description: Object representing an event.
+      properties:
         aggregation_key:
           description: 'An arbitrary string to use for aggregation. Limited to 100
             characters.
@@ -1315,15 +1472,12 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
             no quotes).
 
-            Limited to events no older than 1 year, 24 days (389 days).'
+            Limited to events no older than 7 days.'
           format: int64
           type: integer
         device_name:
-          description: A list of device names to post the event with.
-          items:
-            description: A device name.
-            type: string
-          type: array
+          description: A device name.
+          type: string
         host:
           description: 'Host name to associate with the event.
 
@@ -1382,22 +1536,79 @@ components:
       - title
       - text
       type: object
-    EventAlertType:
-      description: 'If an alert event is enabled, set its type.
+    EventCreateResponse:
+      description: Object containing an event response.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventAlertType'
+        date_happened:
+          description: 'POSIX timestamp of the event. Must be sent as an integer (i.e.
+            no quotes).
 
-        For example, `error`, `warning`, `info`, and `success`.'
-      enum:
-      - error
-      - warning
-      - info
-      - success
-      example: info
-      type: string
-      x-enum-varnames:
-      - ERROR
-      - WARNING
-      - INFO
-      - SUCCESS
+            Limited to events no older than 7 days.'
+          format: int64
+          type: integer
+        device_name:
+          description: A device name.
+          type: string
+        host:
+          description: 'Host name to associate with the event.
+
+            Any tags associated with the host are also applied to this event.'
+          type: string
+        id:
+          description: Integer ID of the event.
+          format: int64
+          readOnly: true
+          type: integer
+        payload:
+          description: Payload of the event.
+          example: '{}'
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/EventPriority'
+        related_event_id:
+          description: ID of the parent event. Must be sent as an integer (i.e. no
+            quotes).
+          format: int64
+          type: integer
+        source_type_name:
+          description: 'The type of event being posted. Option examples include nagios,
+            hudson, jenkins, my_apps, chef, puppet, git, bitbucket, etc.
+
+            A complete list of source attribute values [available here](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+          type: string
+        status:
+          description: A status.
+          type: string
+        tags:
+          description: A list of tags to apply to the event.
+          example:
+          - environment:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        text:
+          description: 'The body of the event. Limited to 4000 characters. The text
+            supports markdown.
+
+            Use `msg_text` with the Datadog Ruby library.'
+          example: Oh boy!
+          maxLength: 4000
+          type: string
+        title:
+          description: The event title. Limited to 100 characters. Use `msg_title`
+            with the Datadog Ruby library.
+          example: Did you hear the news today?
+          maxLength: 100
+          type: string
+        url:
+          description: URL of the event.
+          readOnly: true
+          type: string
+      type: object
     EventListResponse:
       description: An event list response.
       properties:
@@ -1421,7 +1632,7 @@ components:
       - NORMAL
       - LOW
     EventQueryDefinition:
-      description: List of events
+      description: The event query.
       properties:
         search:
           description: The query being made on the event.
@@ -1684,39 +1895,13 @@ components:
       x-enum-varnames:
       - GROUP
     HTTPLog:
-      description: Logs that are sent over HTTP.
-      properties:
-        ddsource:
-          description: 'The integration name associated with your log: the technology
-            from which the log originated.
-
-            When it matches an integration name, Datadog automatically installs the
-            corresponding parsers and facets.
-
-            See [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
-          example: nginx
-          type: string
-        ddtags:
-          description: Tags associated with your logs.
-          example: env:staging,service:payment
-          type: string
-        hostname:
-          description: The name of the originating host of the log.
-          example: i-012345678
-          type: string
-        message:
-          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
-
-            of your log. By default, Datadog ingests the value of the message attribute
-            as the body of the log entry.
-
-            That value is then highlighted and displayed in the Logstream, where it
-            is indexed for full text search.'
-          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
-          type: string
-      required:
-      - name
-      type: object
+      description: Structured log message.
+      oneOf:
+      - $ref: '#/components/schemas/HTTPLogItem'
+      - description: List of log items.
+        items:
+          $ref: '#/components/schemas/HTTPLogItem'
+        type: array
     HTTPLogError:
       description: Invalid query performed.
       properties:
@@ -1733,6 +1918,50 @@ components:
       required:
       - code
       - message
+      type: object
+    HTTPLogItem:
+      description: Logs that are sent over HTTP.
+      properties:
+        ddsource:
+          description: 'The integration name associated with your log: the technology
+            from which the log originated.
+
+            When it matches an integration name, Datadog automatically installs the
+            corresponding parsers and facets.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your logs.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: 'The name of the application or service generating the log
+            events.
+
+            It is used to switch from Logs to APM, so make sure you define the same
+            value when you use both products.
+
+            See [reserved attributes](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: payment
+          type: string
+      required:
+      - name
       type: object
     HTTPMethod:
       description: The HTTP method.
@@ -1758,6 +1987,11 @@ components:
         tags, such as hosts. The more hosts that have a particular value, the darker
         that square is.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         events:
           description: List of widget events.
           items:
@@ -1821,6 +2055,8 @@ components:
           description: Widget query.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
@@ -1963,11 +2199,18 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     HostMapWidgetDefinition:
       description: The host map widget graphs any metric across your hosts using the
         same visualization available from the main Host Map page.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         group:
           description: List of tag prefixes to group by.
           items:
@@ -2383,7 +2626,7 @@ components:
           type: string
       type: object
     LogQueryDefinition:
-      description: List of logs.
+      description: The log query.
       properties:
         compute:
           $ref: '#/components/schemas/LogsQueryCompute'
@@ -2626,9 +2869,12 @@ components:
           description: Final attribute or tag name to remap the sources to.
           example: operation_id
           type: string
+        target_format:
+          $ref: '#/components/schemas/TargetFormatType'
         target_type:
           default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
+          description: Defines if the final attribute or tag name is from log `attribute`
+            or `tag`.
           type: string
         type:
           $ref: '#/components/schemas/LogsAttributeRemapperType'
@@ -4505,6 +4751,7 @@ components:
       - service check
       - synthetics alert
       - trace-analytics alert
+      - slo alert
       type: string
       x-enum-varnames:
       - COMPOSITE
@@ -4517,6 +4764,7 @@ components:
       - SERVICE_CHECK
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
+      - SLO_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -4863,6 +5111,11 @@ components:
         autoscale:
           description: Whether to use auto-scaling or not.
           type: boolean
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         custom_unit:
           description: Display a unit of your choice on the widget.
           type: string
@@ -4931,6 +5184,8 @@ components:
           description: TODO.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     SLOBulkDelete:
@@ -5424,6 +5679,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     ScatterPlotWidgetDefinition:
       description: The scatter plot visualization allows you to graph a chosen scope
@@ -5434,6 +5691,11 @@ components:
           items:
             description: Group name.
             type: string
+          type: array
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         requests:
           description: Widget definition.
@@ -5503,7 +5765,8 @@ components:
           type: string
         points:
           description: Points relating to a metric. All points must be tuples with
-            timestamp and a scalar value (cannot be a string).
+            timestamp and a scalar value (cannot be a string). Timestamps cannot be
+            more than ten minutes in the future or more than one hour in the past.
           example:
           - - 1575317847
             - 0.5
@@ -5863,6 +6126,11 @@ components:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         filters:
           description: Your environment and primary tag (or * if enabled for your
             account).
@@ -6256,16 +6524,38 @@ components:
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
-        which property they apply , and upon which target.'
+        which property they apply, and upon which target.'
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      type: object
+    SyntheticsAssertionJSONPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_PATH
+    SyntheticsAssertionJSONPathTarget:
+      description: An assertion for the `validatesJSONPath` operator.
       properties:
         operator:
-          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+          $ref: '#/components/schemas/SyntheticsAssertionJSONPathOperator'
         property:
           description: The associated assertion property.
           type: string
         target:
-          description: Target to apply the assertion to. It can be a string, a number,
-            or a Date.
+          description: Composed target for `validatesJSONPath` operator.
+          properties:
+            jsonPath:
+              description: The JSON path to assert.
+              type: string
+            operator:
+              description: The specific operator to use on the path.
+              type: string
+            targetValue:
+              description: The path target value to compare to.
+              type: object
           type: object
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
@@ -6281,10 +6571,12 @@ components:
       - is
       - isNot
       - lessThan
+      - moreThan
       - matches
       - doesNotMatch
       - validates
       - isInMoreThan
+      - isInLessThan
       type: string
       x-enum-varnames:
       - CONTAINS
@@ -6292,10 +6584,29 @@ components:
       - IS
       - IS_NOT
       - LESS_THAN
+      - MORE_THAN
       - MATCHES
       - DOES_NOT_MATCH
       - VALIDATES
       - IS_IN_MORE_DAYS_THAN
+      - IS_IN_LESS_DAYS_THAN
+    SyntheticsAssertionTarget:
+      description: An assertion which uses a simple target.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          description: Value used by the operator.
+          type: object
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
@@ -6305,6 +6616,8 @@ components:
       - certificate
       - responseTime
       - property
+      - recordEvery
+      - recordSome
       type: string
       x-enum-varnames:
       - BODY
@@ -6313,6 +6626,23 @@ components:
       - CERTIFICATE
       - RESPONSE_TIME
       - PROPERTY
+      - RECORD_EVERY
+      - RECORD_SOME
+    SyntheticsBasicAuth:
+      description: Object to handle basic authentication when performing the test.
+      properties:
+        password:
+          description: Password to use for the basic authentication.
+          example: ''
+          type: string
+        username:
+          description: Username to use for the basic authentication.
+          example: ''
+          type: string
+      required:
+      - password
+      - username
+      type: object
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -6381,8 +6711,9 @@ components:
           description: Whether or not a thumbnail is associated with the browser test.
           type: boolean
         timeToInteractive:
-          description: Time in second to wait before the browser test starts after
-            reaching the start URL.
+          description: 'Time in second to wait before the browser test starts after
+
+            reaching the start URL.'
           format: double
           type: number
       type: object
@@ -6494,6 +6825,90 @@ components:
       - EMAIL
       - GLOBAL
       - TEXT
+    SyntheticsCITest:
+      description: Test configuration for Synthetics CI
+      properties:
+        allowInsecureCertificates:
+          description: Disable certificate checks in API tests.
+          type: boolean
+        basicAuth:
+          $ref: '#/components/schemas/SyntheticsBasicAuth'
+        body:
+          description: Body to include in the test.
+          type: string
+        bodyType:
+          description: Type of the data sent in a synthetics API test.
+          type: string
+        cookies:
+          description: Cookies for the request.
+          type: string
+        deviceIds:
+          description: For browser test, array with the different device IDs used
+            to run the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsDeviceID'
+          type: array
+        followRedirects:
+          description: For API HTTP test, whether or not the test should follow redirects.
+          type: boolean
+        headers:
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
+        locations:
+          description: Array of locations used to run the test.
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        metadata:
+          description: Metadata for the Synthetics tests run
+          properties:
+            ci:
+              description: Describe CI provider.
+              properties:
+                pipeline:
+                  description: Name of the pipeline.
+                  type: string
+                provider:
+                  description: Name of the CI provider.
+                  type: string
+              type: object
+            git:
+              description: Git information.
+              properties:
+                branch:
+                  description: Branch name.
+                  type: string
+                commit_sha:
+                  description: Commit SHA.
+                  type: string
+              type: object
+          type: object
+        public_id:
+          description: The public ID of the Synthetics test to trigger.
+          example: aaa-aaa-aaa
+          type: string
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        startUrl:
+          description: Starting URL for the browser test.
+          type: string
+        variables:
+          additionalProperties:
+            description: A single variable.
+            type: string
+          description: Variables to replace in the test.
+          type: object
+      required:
+      - public_id
+    SyntheticsCITestBody:
+      description: Object describing the synthetics tests to trigger.
+      properties:
+        tests:
+          description: Individual synthetics test.
+          items:
+            $ref: '#/components/schemas/SyntheticsCITest'
+          type: array
+      type: object
     SyntheticsCheckType:
       description: Type of assertion to apply in an API test.
       enum:
@@ -6522,13 +6937,16 @@ components:
       - LOWER_EQUALS
       - MATCH_REGEX
     SyntheticsDeleteTestsPayload:
-      description: A JSON list of the ID or IDs of the Synthetic tests that you want
-        to delete.
+      description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
+
+        to delete.'
       properties:
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
+          example: []
           items:
             description: A Synthetic test ID to delete.
+            example: abc-def-123
             type: string
           type: array
       type: object
@@ -6536,11 +6954,13 @@ components:
       description: Response object for deleting Synthetic tests.
       properties:
         deleted_tests:
-          description: Array of objects containing a deleted Synthetic test ID with
-            the associated deletion timestamp.
+          description: 'Array of objects containing a deleted Synthetic test ID with
+
+            the associated deletion timestamp.'
           items:
-            description: Object containing a deleted Synthetic test ID with the associated
-              deletion timestamp.
+            description: 'Object containing a deleted Synthetic test ID with the associated
+
+              deletion timestamp.'
             properties:
               deleted_at:
                 description: Deletion timestamp of the Synthetic test ID.
@@ -6648,6 +7068,55 @@ components:
             $ref: '#/components/schemas/SyntheticsBrowserTestResultShort'
           type: array
       type: object
+    SyntheticsGlobalVariable:
+      description: Synthetics global variable.
+      properties:
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        name:
+          description: Name of the global variable.
+          example: MY_VARIABLE
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      - value
+      type: object
+    SyntheticsGlobalVariableValue:
+      description: Value of the global variable.
+      example:
+        secure: true
+        value: value
+      properties:
+        secure:
+          description: Determines if the variable is secure.
+          type: boolean
+        value:
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is secure.'
+          example: example-value
+          type: string
+      required:
+      - value
     SyntheticsListTestsResponse:
       description: Object containing an array of Synthetic tests configuration.
       properties:
@@ -6658,8 +7127,9 @@ components:
           type: array
       type: object
     SyntheticsLocation:
-      description: Synthetics location that can be used when creating or editing a
-        test.
+      description: 'Synthetic location that can be used when creating or editing a
+
+        test.'
       properties:
         id:
           description: Unique identifier of the location.
@@ -7018,7 +7488,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: The steps of the test (only for browser tests).
+          description: For browser test, the steps of the test.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -7034,14 +7504,20 @@ components:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
     SyntheticsTestDetailsSubType:
-      description: The sub-type of the Synthetic API test, either `http` or `ssl`.
+      description: 'The sub-type of the Synthetic API test, `http`, `ssl`, `tcp` or
+
+        `dns`.'
       enum:
       - http
       - ssl
+      - tcp
+      - dns
       type: string
       x-enum-varnames:
       - HTTP
       - SSL
+      - TCP
+      - DNS
     SyntheticsTestDetailsType:
       description: Type of the Synthetic test, either `api` or `browser`.
       enum:
@@ -7051,6 +7527,12 @@ components:
       x-enum-varnames:
       - API
       - BROWSER
+    SyntheticsTestHeaders:
+      additionalProperties:
+        description: A single Header.
+        type: string
+      description: Headers to include when performing the test.
+      type: object
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
 
@@ -7073,52 +7555,75 @@ components:
       description: Object describing the extra options for a Synthetic test.
       properties:
         accept_self_signed:
-          description: For browser test, whether or not the test should allow self
-            signed certificate.
+          description: 'For SSL test, whether or not the test should allow self signed
+
+            certificates.'
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request.
           type: boolean
         device_ids:
-          description: Array with the different device IDs used to run the test.
+          description: For browser test, array with the different device IDs used
+            to run the test.
           items:
             $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         follow_redirects:
-          description: For API SSL test, whether or not the test should follow redirects.
+          description: For API HTTP test, whether or not the test should follow redirects.
           type: boolean
         min_failure_duration:
-          description: Minimum amount of time before declaring the test has failed.
+          description: Minimum amount of time in failure required to trigger an alert.
           format: int64
           type: integer
         min_location_failed:
-          description: Minimum amount of locations that are allowed to fail for the
-            test.
+          description: 'Minimum number of locations in failure required to trigger
+
+            an alert.'
           format: int64
           type: integer
-        retry:
-          description: 'Object describing the retry strategy to apply to a Synthetic
-            test.
+        monitor_options:
+          description: 'Object containing the options for a Synthetic test as a monitor
 
-            By default, there is a 300ms wait before retrying a test that has failed.'
+            (for example, renotification).'
           properties:
-            count:
-              description: The amount of location that needs to fail for the test
-                to be retried.
+            renotify_interval:
+              description: 'Time interval before renotifying if the test is still
+                failing
+
+                (in minutes).'
               format: int64
+              maximum: 1440
+              minimum: 0
               type: integer
-            interval:
-              description: The interval over which the amount of location needed to
-                fail for the test to be retried.
-              format: double
-              type: number
           type: object
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
         tick_every:
           $ref: '#/components/schemas/SyntheticsTickInterval'
       type: object
+    SyntheticsTestOptionsRetry:
+      description: Object describing the retry strategy to apply to a Synthetic test.
+      properties:
+        count:
+          description: 'Number of times a test needs to be retried before marking
+            a
+
+            location as failed. Defaults to 0.'
+          format: int64
+          type: integer
+        interval:
+          description: 'Time interval between retries (in milliseconds). Defaults
+            to
+
+            300ms.'
+          format: double
+          type: number
+      type: object
     SyntheticsTestPauseStatus:
-      description: Define whether you want to start (`live`) or pause (`paused`) a
-        Synthetic test.
+      description: 'Define whether you want to start (`live`) or pause (`paused`)
+        a
+
+        Synthetic test.'
       enum:
       - live
       - paused
@@ -7145,29 +7650,12 @@ components:
       description: Object describing the Synthetic test request.
       properties:
         basicAuth:
-          description: Object to handle basic authentication when performing the test.
-          properties:
-            password:
-              description: Password to use for the basic authentication.
-              example: ''
-              type: string
-            username:
-              description: Username to use for the basic authentication.
-              example: ''
-              type: string
-          required:
-          - password
-          - username
-          type: object
+          $ref: '#/components/schemas/SyntheticsBasicAuth'
         body:
           description: Body to include in the test.
           type: string
         headers:
-          additionalProperties:
-            description: A single Header.
-            type: string
-          description: Headers to include when performing the test.
-          type: object
+          $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
           description: Host name to perform the test with.
           type: string
@@ -7181,7 +7669,7 @@ components:
           description: Query to use for the test.
           type: object
         timeout:
-          description: Timeout in millisecond for the test.
+          description: Timeout in seconds for the test.
           format: double
           type: number
         url:
@@ -7189,7 +7677,7 @@ components:
           type: string
       type: object
     SyntheticsTickInterval:
-      description: The frequency at which to run the Synthetic test.
+      description: The frequency at which to run the Synthetic test (in seconds).
       enum:
       - 60
       - 300
@@ -7255,6 +7743,47 @@ components:
           format: double
           type: number
       type: object
+    SyntheticsTriggerCITestsResponse:
+      description: Object containing information about the tests triggered.
+      properties:
+        locations:
+          description: List of Synthetics locations.
+          items:
+            description: Synthetics location.
+            properties:
+              id:
+                description: Unique identifier of the location.
+                type: number
+              name:
+                description: Name of the location.
+                type: string
+            type: object
+          type: array
+        results:
+          description: Information about the tests runs.
+          items:
+            description: Information about a single test run.
+            properties:
+              device:
+                $ref: '#/components/schemas/SyntheticsDeviceID'
+              location:
+                description: The location ID of the test run.
+                type: number
+              public_id:
+                description: The public ID of the Synthetics test.
+                type: string
+              result_id:
+                description: ID of the result.
+                type: string
+            type: object
+          type: array
+        triggered_check_ids:
+          description: The public IDs of the Synthetics test triggered.
+          items:
+            description: The public ID of the Synthetics test.
+            type: string
+          type: array
+      type: object
     SyntheticsUpdateTestPauseStatusPayload:
       description: Object to start or pause an existing Synthetic test.
       properties:
@@ -7268,10 +7797,28 @@ components:
       type: string
       x-enum-varnames:
       - USER_LOCATOR
+    TableWidgetCellDisplayMode:
+      default: number
+      description: Define a display mode for the table cell.
+      enum:
+      - number
+      - bar
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
+      - BAR
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        has_search_bar:
+          $ref: '#/components/schemas/TableWidgetHasSearchBar'
         requests:
           description: Widget definition.
           example:
@@ -7304,6 +7851,19 @@ components:
       type: string
       x-enum-varnames:
       - QUERY_TABLE
+    TableWidgetHasSearchBar:
+      default: auto
+      description: Controls the display of the search bar.
+      enum:
+      - always
+      - never
+      - auto
+      example: auto
+      type: string
+      x-enum-varnames:
+      - ALWAYS
+      - NEVER
+      - AUTO
     TableWidgetRequest:
       description: Updated table widget.
       properties:
@@ -7314,6 +7874,13 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        apm_stats_query:
+          $ref: '#/components/schemas/ApmStatsQueryDefinition'
+        cell_display_mode:
+          description: A list of display modes for each table cell.
+          items:
+            $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+          type: array
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -7339,6 +7906,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -7355,10 +7924,32 @@ components:
           description: A list of tags to apply to the host.
           type: object
       type: object
+    TargetFormatType:
+      description: 'If the target of the remapper is an attribute, try to cast the
+        value to a new specific type.
+
+        If the cast is not possible, the original type is kept. `string`, `integer`,
+        or `double` are the possible types.'
+      enum:
+      - auto
+      - string
+      - integer
+      - double
+      type: string
+      x-enum-varnames:
+      - AUTO
+      - STRING
+      - INTEGER
+      - DOUBLE
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Analyzed Spans over time.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         events:
           description: List of widget events.
           items:
@@ -7379,6 +7970,8 @@ components:
             $ref: '#/components/schemas/TimeseriesWidgetRequest'
           minItems: 1
           type: array
+        right_yaxis:
+          $ref: '#/components/schemas/WidgetAxis'
         show_legend:
           description: (screenboard only) Show the legend for this widget.
           type: boolean
@@ -7438,12 +8031,17 @@ components:
           type: array
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        on_right_yaxis:
+          description: Whether or not to display a second y-axis on the right.
+          type: boolean
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
           description: Widget query.
           type: string
         rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
@@ -7453,6 +8051,11 @@ components:
         value like hostname or service with the most or least of any metric value,
         such as highest consumers of CPU, hosts with the least disk space, etc.
       properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         requests:
           description: List of top list widget requests.
           example:
@@ -7513,6 +8116,8 @@ components:
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
@@ -7537,6 +8142,177 @@ components:
           items:
             $ref: '#/components/schemas/UsageAnalyzedLogsHour'
           type: array
+      type: object
+    UsageBillableSummaryBody:
+      description: Response with properties for each aggregated usage type.
+      properties:
+        account_billable_usage:
+          description: The total account usage.
+          format: int64
+          type: integer
+        elapsed_usage_hours:
+          description: Elapsed usage hours for some billable product.
+          format: int64
+          type: integer
+        first_billable_usage_hour:
+          description: The first billable hour for the org.
+          format: date-time
+          type: string
+        last_billable_usage_hour:
+          description: The last billable hour for the org.
+          format: date-time
+          type: string
+        org_billable_usage:
+          description: The number of units used within the billable timeframe.
+          format: int64
+          type: integer
+        percentage_in_account:
+          description: The percentage of account usage the org represents.
+          format: double
+          type: number
+        usage_unit:
+          description: Units pertaining to the usage.
+          type: string
+      type: object
+    UsageBillableSummaryHour:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        billing_plan:
+          description: The billing plan.
+          type: string
+        end_date:
+          description: Shows the last date of usage.
+          format: date-time
+          type: string
+        num_orgs:
+          description: The number of organizations.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        ratio_in_month:
+          description: Shows usage aggregation for a billing period.
+          format: int64
+          type: integer
+        start_date:
+          description: Shows the first date of usage.
+          format: date-time
+          type: string
+        usage:
+          $ref: '#/components/schemas/UsageBillableSummaryKeys'
+      type: object
+    UsageBillableSummaryKeys:
+      description: Response with aggregated usage types.
+      properties:
+        apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_trace_search_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_ingested_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_flow_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+      type: object
+    UsageBillableSummaryResponse:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        usage:
+          description: An array of objects regarding usage of billable summary.
+          items:
+            $ref: '#/components/schemas/UsageBillableSummaryHour'
+          type: array
+      type: object
+    UsageCustomReportsAttributes:
+      description: The response containing attributes for custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of custom report.
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of custom report.
+          type: string
+        tags:
+          description: A list of tags to apply to custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageCustomReportsData:
+      description: The response containing the date and type for custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageCustomReportsMeta:
+      description: The object containing document metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageCustomReportsPage'
+      type: object
+    UsageCustomReportsPage:
+      description: The object containing page total count.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageCustomReportsResponse:
+      description: Response containing available custom reports.
+      properties:
+        data:
+          description: An array of available custom reports.
+          items:
+            $ref: '#/components/schemas/UsageCustomReportsData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/UsageCustomReportsMeta'
       type: object
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
@@ -7598,10 +8374,8 @@ components:
           format: int64
           type: integer
         container_count:
-          description: 'Contains the total number of billable infrastructure hosts
-            reporting during a given hour.
-
-            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
+          description: Shows the total number of containers reported by the Docker
+            integration during the hour.
           format: int64
           type: integer
         gcp_host_count:
@@ -7612,8 +8386,10 @@ components:
           format: int64
           type: integer
         host_count:
-          description: Shows the total number of containers reporting via the Docker
-            integration during the hour.
+          description: 'Contains the total number of billable infrastructure hosts
+            reporting during a given hour.
+
+            This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
           format: int64
           type: integer
         hour:
@@ -7777,6 +8553,42 @@ components:
             $ref: '#/components/schemas/UsageNetworkHostsHour'
           type: array
       type: object
+    UsageProfilingHour:
+      description: The number of profiled hosts for each hour for a given organization.
+      properties:
+        avg_container_agent_count:
+          description: Get average number of container agents for that hour.
+          format: int64
+          type: integer
+        host_count:
+          description: Contains the total number of profiled hosts reporting during
+            a given hour.
+          format: int64
+          type: integer
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+      type: object
+    UsageProfilingResponse:
+      description: Response containing the number of profiled hosts for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for profiled hosts.
+          items:
+            $ref: '#/components/schemas/UsageProfilingHour'
+          type: array
+      type: object
+    UsageReportsType:
+      default: reports
+      description: The type of reports.
+      enum:
+      - reports
+      example: reports
+      type: string
+      x-enum-varnames:
+      - REPORTS
     UsageRumSessionsHour:
       description: Number of RUM Sessions recorded for each hour for a given organization.
       properties:
@@ -7821,6 +8633,91 @@ components:
             $ref: '#/components/schemas/UsageSNMPHour'
           type: array
       type: object
+    UsageSort:
+      default: start_date
+      description: The field to sort by.
+      enum:
+      - computed_on
+      - size
+      - start_date
+      - end_date
+      type: string
+      x-enum-varnames:
+      - COMPUTED_ON
+      - SIZE
+      - START_DATE
+      - END_DATE
+    UsageSortDirection:
+      default: desc
+      description: The direction to sort by.
+      enum:
+      - desc
+      - asc
+      type: string
+      x-enum-varnames:
+      - DESC
+      - ASC
+    UsageSpecifiedCustomReportsAttributes:
+      description: The response containing attributes for specified custom reports.
+      properties:
+        computed_on:
+          description: The date the specified custom report was computed.
+          type: string
+        end_date:
+          description: The ending date of specified custom report.
+          type: string
+        location:
+          description: A downloadable file for the specified custom reporting file.
+          example: https://an-s3-or-gs-bucket.s3.amazonaws.com
+          type: string
+        size:
+          description: size
+          format: int64
+          type: integer
+        start_date:
+          description: The starting date of specified custom report.
+          type: string
+        tags:
+          description: A list of tags to apply to specified custom reports.
+          items:
+            description: A given tag in a list.
+            example: env
+            type: string
+          type: array
+      type: object
+    UsageSpecifiedCustomReportsData:
+      description: Response containing date and type for specified custom reports.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsAttributes'
+        id:
+          description: The date for specified custom reports.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageReportsType'
+      type: object
+    UsageSpecifiedCustomReportsMeta:
+      description: The object containing document metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsPage'
+      type: object
+    UsageSpecifiedCustomReportsPage:
+      description: The object containing page total count for specified ID.
+      properties:
+        total_count:
+          description: Total page count.
+          format: int64
+          type: integer
+      type: object
+    UsageSpecifiedCustomReportsResponse:
+      description: Returns available specified custom reports.
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsData'
+        meta:
+          $ref: '#/components/schemas/UsageSpecifiedCustomReportsMeta'
+      type: object
     UsageSummaryDate:
       description: Response with hourly report of all data billed by Datadog all organizations.
       properties:
@@ -7847,6 +8744,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_sum:
@@ -7903,6 +8805,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for all organizations
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -7918,9 +8825,14 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for all organizations
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for all organizations
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -7936,6 +8848,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -8020,6 +8937,11 @@ components:
             current date for the given org.
           format: int64
           type: integer
+        mobile_rum_session_count_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current date for the given org.
+          format: int64
+          type: integer
         name:
           description: The organization name.
           type: string
@@ -8033,12 +8955,17 @@ components:
             all hours in the current date for the given org.
           format: int64
           type: integer
+        profiling_host_top99p:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         public_id:
           description: The organization public id.
           type: string
         rum_session_count_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            date for the given org.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -8054,6 +8981,11 @@ components:
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -8083,6 +9015,11 @@ components:
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        azure_app_service_top99p_sum:
+          description: Shows the 99th percentile of all Azure app services over all
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
@@ -8150,6 +9087,11 @@ components:
             all organizations for which all usages were calculated.
           format: date-time
           type: string
+        mobile_rum_session_count_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions over all hours in
+            the current month(s) for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current month(s) for all organizations.
@@ -8160,9 +9102,19 @@ components:
             all hours in the current month(s) for all organizations.
           format: int64
           type: integer
+        profiling_container_agent_count_avg:
+          description: Shows the average number of profiled containers over all hours
+            in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        profiling_host_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month(s) for all organizations.
+          format: int64
+          type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all RUM Sessions over all hours in the current
-            month(s) for all organizations.
+          description: Shows the sum of all browser RUM Sessions over all hours in
+            the current month(s) for all organizations.
           format: int64
           type: integer
         start_date:
@@ -8183,6 +9135,11 @@ components:
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
             in the current month(s) for all organizations.
+          format: int64
+          type: integer
+        twol_ingested_events_bytes_agg_sum:
+          description: Shows the sum of all tracing without limits bytes ingested
+            over all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         usage:
@@ -8337,6 +9294,30 @@ components:
             organization.
           items:
             $ref: '#/components/schemas/UsageTraceHour'
+          type: array
+      type: object
+    UsageTracingWithoutLimitsHour:
+      description: Tracing without limits usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageTracingWithoutLimitsResponse:
+      description: Response containing the tracing without limits usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for tracing without limits.
+          items:
+            $ref: '#/components/schemas/UsageTracingWithoutLimitsHour'
           type: array
       type: object
     User:
@@ -8666,6 +9647,24 @@ components:
       - value
       - palette
       type: object
+    WidgetCustomLink:
+      description: Custom links help you connect a data value to a URL, like a Datadog
+        page or your AWS console.
+      properties:
+        label:
+          description: The label for the custom link URL. Keep the label short and
+            descriptive. Use metrics and tags as variables.
+          example: Search logs for {{host}}
+          type: string
+        link:
+          description: The URL of the custom link. URL must include `http` or `https`.
+            A relative URL must start with `/`.
+          example: https://app.datadoghq.com/logs?query={{host}}
+          type: string
+      required:
+      - label
+      - link
+      type: object
     WidgetDefinition:
       description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
       oneOf:
@@ -8808,22 +9807,9 @@ components:
       x-enum-varnames:
       - ORDERED
     WidgetLegendSize:
-      description: Available legend sizes for a widget.
-      enum:
-      - '0'
-      - '2'
-      - '4'
-      - '8'
-      - '16'
-      - auto
+      description: Available legend sizes for a widget. Should be one of "0", "2",
+        "4", "8", "16", or "auto".
       type: string
-      x-enum-varnames:
-      - ZERO
-      - TWO
-      - FOUR
-      - EIGHT
-      - SIXTEEN
-      - AUTO
     WidgetLineType:
       description: Type of lines displayed.
       enum:
@@ -9194,7 +10180,7 @@ info:
     name: Datadog Support
     url: https://www.datadoghq.com/support/
   description: Collection of all Datadog Public endpoints.
-  title: Datadog API Collection
+  title: Datadog API V1 Collection
   version: '1.0'
 openapi: 3.0.0
 paths:
@@ -9208,7 +10194,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IPRanges'
-          description: List of IP ranges.
+          description: OK
       security: []
       servers:
       - url: https://{subdomain}.{site}
@@ -9626,6 +10612,93 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+  /api/v1/daily_custom_reports:
+    get:
+      description: Get daily custom reports.
+      operationId: GetDailyCustomReports
+      parameters:
+      - description: The number of files to return in the response. `[default=60]`.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The identifier of the first page to return. This parameter is
+          used for the pagination feature `[default=0]`.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: 'The field to sort by: `[computed_on, size, start_date, end_date]`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get the list of available daily custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/daily_custom_reports/{report_id}:
+    get:
+      description: Get specified daily custom reports.
+      operationId: GetSpecifiedDailyCustomReports
+      parameters:
+      - description: The specified ID to search results for.
+        in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSpecifiedCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '404':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get specified daily custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/dashboard:
     get:
       description: 'Get all dashboards.
@@ -10262,7 +11335,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Event'
+              $ref: '#/components/schemas/EventCreateRequest'
         description: Event request object
         required: true
       responses:
@@ -10270,7 +11343,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventResponse'
+                $ref: '#/components/schemas/EventCreateResponse'
           description: OK
         '400':
           content:
@@ -10435,8 +11508,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully enabled.
+                    example: Embed 00000000000 successfully enabled.
                     type: string
                 type: object
           description: OK
@@ -10475,8 +11547,7 @@ paths:
                 properties:
                   success:
                     description: Message.
-                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
-                      successfully revoked.
+                    example: Embed 0000000000000 successfully revoked.
                     type: string
                 type: object
           description: OK
@@ -10692,6 +11763,20 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Include information on the muted status of hosts and when the
+          mute expires.
+        in: query
+        name: include_muted_hosts_data
+        required: false
+        schema:
+          type: boolean
+      - description: Include additional metadata about the hosts (agent_version, machine,
+          platform, processor, etc.).
+        in: query
+        name: include_hosts_metadata
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -10784,6 +11869,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Delete an AWS integration
       tags:
       - AWS Integration
@@ -10837,7 +11928,9 @@ paths:
 
         Using the `POST` method updates your integration configuration
 
-        by adding your new configuration to the existing one in your Datadog organization.'
+        by adding your new configuration to the existing one in your Datadog organization.
+
+        A unique AWS Account ID for role based authentication.'
       operationId: CreateAWSAccount
       requestBody:
         content:
@@ -10865,6 +11958,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Create an AWS integration
       tags:
       - AWS Integration
@@ -10921,6 +12020,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
       summary: Update an AWS integration
       tags:
       - AWS Integration
@@ -12823,7 +13928,7 @@ paths:
 
         - anomaly: `query alert`
 
-        - APM: `query alert`
+        - APM: `query alert` or `trace-analytics alert`
 
         - composite: `composite`
 
@@ -12839,7 +13944,7 @@ paths:
 
         - live process: `process alert`
 
-        - logs: `logs alert`
+        - logs: `log alert`
 
         - metric: `metric alert`
 
@@ -12847,9 +13952,9 @@ paths:
 
         - outlier: `query alert`
 
-        - process: `service query`
+        - process: `service check`
 
-        - rum: `alert`
+        - rum: `rum alert`
 
         - watchdog: `event alert`
 
@@ -13096,7 +14201,7 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
-  /api/v1/monitor/group/search:
+  /api/v1/monitor/groups/search:
     get:
       description: Search and filter your monitor groups details.
       operationId: SearchMonitorGroups
@@ -13550,6 +14655,99 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /api/v1/monthly_custom_reports:
+    get:
+      description: Get monthly custom reports.
+      operationId: GetMonthlyCustomReports
+      parameters:
+      - description: The number of files to return in the response `[default=60].`
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The identifier of the first page to return. This parameter is
+          used for the pagination feature `[default=0]`.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: 'The field to sort by: `[computed_on, size, start_date, end_date]`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageCustomReportsResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get the list of available monthly custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/monthly_custom_reports/{report_id}:
+    get:
+      description: Get specified monthly custom reports.
+      operationId: GetSpecifiedMonthlyCustomReports
+      parameters:
+      - description: The specified ID to search results for.
+        in: path
+        name: report_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageSpecifiedCustomReportsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '404':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get specified monthly custom reports
+      tags:
+      - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/org:
     get:
       description: List your managed organizations.
@@ -13831,17 +15029,30 @@ paths:
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that\
-        \ can be graphed on Datadog\u2019s dashboards.\nThe limit for compressed payloads\
-        \ is 3.2 megabytes (3200000), and 62 megabytes (62914560) for decompressed\
-        \ payloads.\n\nIf you\u2019re submitting metrics directly to the Datadog API\
-        \ without using DogStatsD, expect\n\n- 64 bits for the timestamp\n- 64 bits\
-        \ for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n\
-        - The full payload is approximately ~ 100 bytes. However, with the DogStatsD\
-        \ API,\ncompression is applied, which reduces the payload size."
+        \ can be graphed on Datadog\u2019s dashboards.\nThe maximum payload size is\
+        \ 3.2 megabytes (3200000). Compressed payloads must have a decompressed size\
+        \ of up to 62 megabytes (62914560).\n\nIf you\u2019re submitting metrics directly\
+        \ to the Datadog API without using DogStatsD, expect\n\n- 64 bits for the\
+        \ timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50\
+        \ bytes for the timeseries\n- The full payload is approximately ~ 100 bytes.\
+        \ However, with the DogStatsD API,\ncompression is applied, which reduces\
+        \ the payload size."
       operationId: SubmitMetrics
       requestBody:
         content:
           application/json:
+            examples:
+              dynamic-points:
+                description: TODO.
+                summary: Dynamic Points
+                value:
+                  series:
+                  - metric: system.load.1
+                    points:
+                    - - ${NOW}
+                      - '1234.5'
+                x-variables:
+                  NOW: $(date +%s)
             schema:
               $ref: '#/components/schemas/MetricsPayload'
         required: true
@@ -14371,8 +15582,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/locations:
     get:
-      description: Get the list of public and private locations available for Synthetics
-        tests. No arguments required.
+      description: 'Get the list of public and private locations available for Synthetic
+
+        tests. No arguments required.'
       operationId: ListLocations
       responses:
         '200':
@@ -14386,24 +15598,15 @@ paths:
       - Synthetics
   /api/v1/synthetics/tests:
     get:
-      description: Get the list of all Synthetic tests (can be filtered by type).
+      description: Get the list of all Synthetic tests.
       operationId: ListTests
-      parameters:
-      - description: API or browser to filter the list by test type, undefined to
-          get the unfiltered list.
-        in: query
-        name: check_type
-        required: false
-        schema:
-          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyntheticsListTestsResponse'
-          description: OK - Returns the list of all Synthetic tests (properly filtered
-            by type).
+          description: OK - Returns the list of all Synthetic tests.
         '403':
           content:
             application/json:
@@ -14416,7 +15619,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Synthetics is not activated for the user.
-      summary: Get a list of tests
+      summary: Get the list of all tests
       tags:
       - Synthetics
     post:
@@ -14462,8 +15665,9 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
-      description: Get the detailed configuration (including steps) associated with
-        a Synthetics browser test.
+      description: 'Get the detailed configuration (including steps) associated with
+
+        a Synthetic browser test.'
       operationId: GetBrowserTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -14502,8 +15706,9 @@ paths:
         test.
       operationId: GetBrowserTestLatestResults
       parameters:
-      - description: The public ID of the browser test for which to search results
-          for.
+      - description: 'The public ID of the browser test for which to search results
+
+          for.'
         in: path
         name: public_id
         required: true
@@ -14561,8 +15766,9 @@ paths:
       description: Get a specific full result from a given (browser) Synthetic test.
       operationId: GetBrowserTestResult
       parameters:
-      - description: The public ID of the browser test to which the target result
-          belongs.
+      - description: 'The public ID of the browser test to which the target result
+
+          belongs.'
         in: path
         name: public_id
         required: true
@@ -14642,6 +15848,34 @@ paths:
 
             - Synthetics is not activated for the user'
       summary: Delete tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/trigger/ci:
+    post:
+      description: Trigger a set of Synthetics tests for continuous integration
+      operationId: TriggerCITests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsCITestBody'
+        description: Details of the test to trigger.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTriggerCITestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong
+      summary: Trigger some Synthetics tests for CI
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -14878,6 +16112,147 @@ paths:
 
             - Test is not owned by the user'
       summary: Pause or start a test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/variables:
+    post:
+      description: Create a Synthetics global variable.
+      operationId: CreateGlobalVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        description: Details of the global variable to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/variables/{variable_id}:
+    delete:
+      description: Delete a Synthetics global variable.
+      operationId: DeleteGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: JSON format is wrong
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete a global variable
+      tags:
+      - Synthetics
+    get:
+      description: Get the detailed configuration of a global variable.
+      operationId: GetGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a global variable
+      tags:
+      - Synthetics
+    put:
+      description: Edit a Synthetics global variable.
+      operationId: EditGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        description: Details of the global variable to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsGlobalVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Edit a global variable
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -15138,7 +16513,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
@@ -15181,8 +16556,43 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Lambda
+      tags:
+      - Usage Metering
+  /api/v1/usage/billable-summary:
+    get:
+      description: Get billable usage across your multi-org account.
+      operationId: GetUsageBillableSummary
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage starting this month.'
+        in: query
+        name: month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageBillableSummaryResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get billable usage across your multi-org account
       tags:
       - Usage Metering
   /api/v1/usage/fargate:
@@ -15224,7 +16634,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
@@ -15267,7 +16677,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
@@ -15310,7 +16720,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Logs
       tags:
       - Usage Metering
@@ -15361,7 +16771,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
@@ -15406,7 +16816,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
@@ -15449,8 +16859,53 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Network Hosts
+      tags:
+      - Usage Metering
+  /api/v1/usage/profiling:
+    get:
+      description: Get hourly usage for profiled hosts.
+      operationId: GetUsageProfiling
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageProfilingResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
   /api/v1/usage/rum_sessions:
@@ -15475,6 +16930,12 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'RUM type: `[browser, mobile]`. Defaults to `browser`.'
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -15493,7 +16954,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
@@ -15538,7 +16999,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
@@ -15589,14 +17050,14 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
   /api/v1/usage/synthetics:
     get:
       deprecated: true
-      description: Get hourly usage for [Synthetics API checks](https://docs.datadoghq.com/synthetics/).
+      description: Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -15633,8 +17094,8 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-      summary: Get hourly usage for Synthetics API Checks
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
   /api/v1/usage/synthetics_api:
@@ -15676,7 +17137,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
@@ -15719,7 +17180,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
@@ -15762,7 +17223,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
@@ -15806,7 +17267,7 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get top 500 custom metrics by hourly average
       tags:
       - Usage Metering
@@ -15849,13 +17310,58 @@ paths:
             application/json;datetime-format=rfc3339:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
+          description: Forbidden - User is not authorized
       summary: Get hourly usage for Trace Search
+      tags:
+      - Usage Metering
+  /api/v1/usage/tracing-without-limits:
+    get:
+      description: Get hourly usage for tracing without limits.
+      operationId: GetTracingWithoutLimits
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageTracingWithoutLimitsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
   /api/v1/user:
     get:
-      description: Get all users for your organization.
+      description: List all users for your organization.
       operationId: ListUsers
       responses:
         '200':
@@ -15870,7 +17376,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Get all users
+      summary: List all users
       tags:
       - Users
     post:
@@ -15938,25 +17444,25 @@ paths:
       responses:
         '200':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/UserDisableResponse'
           description: User disabled
         '400':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
         '403':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
         '404':
           content:
-            applcation/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
@@ -16185,22 +17691,77 @@ paths:
 
         We encourage you to send your logs compressed.
 
-
-        **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`),
-
-        the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
+        Add the `Content-Encoding: gzip` header to the request when sending compressed
+        logs.'
       operationId: SubmitLog
       parameters:
-      - in: header
+      - description: HTTP header used to compress the media-type.
+        in: header
         name: Content-Encoding
         required: false
         schema:
           $ref: '#/components/schemas/ContentEncoding'
+      - description: Log tags can be passed as query parameters with `text/plain`
+          content type.
+        example: env:prod,user:my-user
+        in: query
+        name: ddtags
+        required: false
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
+            examples:
+              multi-json-messages:
+                description: Pass multiple log objects at once.
+                summary: Multi JSON Messages
+                value:
+                - message: hello
+                - message: world
+              simple-json-message:
+                description: Log attributes can be passed as `key:value` pairs in
+                  valid JSON messages.
+                summary: Simple JSON Message
+                value:
+                  ddsource: agent
+                  ddtags: env:prod,user:joe.doe
+                  hostname: fa1e1e739d95
+                  message: hello world
             schema:
               $ref: '#/components/schemas/HTTPLog'
+          application/logplex-1:
+            examples:
+              multi-raw-message:
+                description: Submit log messages.
+                summary: Multi Logplex Messages
+                value: 'hello
+
+                  world'
+              simple-logplex-message:
+                description: Submit log string.
+                summary: Simple Logplex Message
+                value: hello world
+            schema:
+              type: string
+          text/plain:
+            examples:
+              multi-raw-message:
+                description: Submit log string.
+                summary: Multi Raw Messages
+                value: 'hello
+
+                  world
+
+                  '
+              simple-raw-message:
+                description: 'Submit log string. Log attributes can be passed as query
+                  parameters in the URL. This enables the addition of tags or the
+                  source by using the `ddtags` and `ddsource` parameters: `?host=my-hostname&service=my-service&ddsource=my-source&ddtags=env:prod,user:my-user`.'
+                summary: Simple Raw Message
+                value: hello world
+            schema:
+              type: string
         description: Log to send (JSON format).
         required: true
       responses:
@@ -16419,9 +17980,8 @@ tags:
 
     We encourage you to send your logs compressed.
 
-
-    **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
-    endpoint is `http-intake.logs.datadoghq.eu`.'
+    Add the `Content-Encoding: gzip` header to the request when sending compressed
+    logs.'
   name: Logs
 - description: '[Check API version 2](/api/v2/logs-archives/).'
   name: Logs Archives
@@ -16549,13 +18109,15 @@ tags:
     \ can use Datadog\u2019s API to\nmanage both test types programmatically.\n\n\
     For more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: 'The tag endpoint allows you to tag hosts with keywords
+- description: 'The tag endpoint allows you to assign tags to hosts,
 
-    meaningful to you, like `role:database`. All metrics sent
+    for example: `role:database`. Those tags are applied to
 
-    from a host have its tags applied. When fetching and applying
+    all metrics sent by the host. Refer to hosts by name
 
-    tags to a particular host, refer to hosts by name (`yourhost.example.com`).
+    (`yourhost.example.com`) when fetching and applying
+
+    tags to a particular host.
 
 
     The component of your infrastructure responsible for a tag is identified

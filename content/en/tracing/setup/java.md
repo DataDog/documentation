@@ -13,31 +13,134 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibilty Requirements
+## Compatibility requirements
 
 The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
+### Follow the in-app Documentation (Recommended)
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
+Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
 
-Next, download `dd-java-agent.jar` that contains the Agent class files:
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env` and `version` tags.
+- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
 
-```shell
-wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
-```
+{{< partial name="apm/apm-inapp.html" >}}
 
-Finally, add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
+Otherwise, to begin tracing applications written in any language: 
+
+1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
+
+2. Download `dd-java-agent.jar` that contains the Agent class files:
+
+   ```shell
+wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   ```
+
+3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
+
+   ```text
+-javaagent:/path/to/the/dd-java-agent.jar
+   ```
+
+4. Add [Configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics---all the metrics you intend to use. See the examples below. Note that using the in-app Quickstart instructions generates these for you.
+
+**Notes**:
+
+- Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+
+    {{< tabs >}}
+    {{% tab "WebSphere" %}}
+
+In the administrative console:
+
+1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
+2. Select **Java and Process Management > Process Definition**.
+3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+4. In the **Generic JVM arguments** text field, enter:
 
 ```text
--javaagent:/path/to/the/dd-java-agent.jar
+-javaagent:/path/to/dd-java-agent.jar
 ```
 
-**Note**:
+For additional details and options, see the [WebSphere docs][1].
 
-- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][6].
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+    {{% /tab %}}
+    {{% tab "Spring Boot" %}}
+
+If your app is called `my_app.jar`, create a `my_app.conf`, containing:
+
+```text
+JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
+```
+
+For more information, see the [Spring Boot documentation][1].
+
+
+[1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+    {{% /tab %}}
+    {{% tab "Tomcat" %}}
+
+Open your Tomcat startup script file, for example `catalina.sh`, and add:
+
+```text
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+Or on Windows, `catalina.bat`:
+
+```text
+set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+```
+
+    {{% /tab %}}
+    {{% tab "JBoss" %}}
+
+Add the following line to the end of `standalone.sh`:
+
+```text
+JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+On Windows, add the following line to the end of `standalone.conf.bat`:
+
+```text
+set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
+```
+
+For more details, see the [JBoss documentation][1].
+
+
+[1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+    {{% /tab %}}
+    {{% tab "Jetty" %}}
+
+If you use `jetty.sh` to start Jetty as a service, edit it to add:
+
+```text
+JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
+```
+
+If you use `start.ini` to start Jetty, add the following line (under `--exec`, or add `--exec` line if it isn't there yet):
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+    {{% /tab %}}
+    {{< /tabs >}}
+
+
+- If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
+   
+   ```text
+   java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
+   ```
+   
+     For more information, see the [Oracle documentation][6].
 
 - `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].
 
@@ -59,16 +162,15 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
-### Tagging
 
 | System Property                        | Environment Variable                   | Default                           | Description                                                                                                                                                                                                                                                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                                                                    |
-| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. |
+| `dd.service`                      | `DD_SERVICE`                      | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application. Available for versions 0.50.1+.                                                                                                                                                                    |
+| `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. Available for versions 0.50.1+.  |
 |`dd.env`                              | `DD_ENV`                              | `none`                            | Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.                                                    |
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.             |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][10] for details                                   |
-| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service.name=<SERVICE_NAME>` |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][10] for details.   |
+| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>` |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                       |
 | `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][4] for more details.                                                                                                  |
@@ -77,7 +179,7 @@ System properties can be set as JVM flags.
 | `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Timeout in seconds for network interactions with the Datadog Agent.                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names. Automatically apply header values as tags on traces.                                                                                                               |
 | `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][11])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
-| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code.                                                                                       |
+| `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code.                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Example: `aws.service`) Used to rename spans to be identified with the corresponding service tag                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | When set to `true` db spans get assigned the instance name as the service name                                                                     |
@@ -96,6 +198,10 @@ System properties can be set as JVM flags.
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | How often to refresh list of avalable JMX beans (in seconds).                                                                             |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | same as `agent.host`              | Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an argument like 'unix://PATH_TO_UDS_SOCKET'. Example: `unix:///var/datadog-agent/dsd.socket`                                                                                                            |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.                                                                                                                                                                                                                              |
+| `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.                                                                                                                                                                                                                              |
+| `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | False | By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them. |
+| `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | True | By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests. |
+
 
 **Note**:
 
@@ -117,7 +223,7 @@ See how to disable integrations in the [integrations][16] compatability section.
 **Example with system property**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/service_mapping.png" alt="service mapping"  >}}
@@ -127,7 +233,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.servic
 **Setting a global env for spans and JMX metrics**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=env:dev -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags"  >}}
@@ -137,7 +243,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=e
 **Example with adding project:test to every span**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags"  >}}
@@ -147,7 +253,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 **Setting custom.type:2 on a JMX metric**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags"  >}}
@@ -157,7 +263,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 **Example with system property**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_methods.png" alt="trace methods"  >}}
@@ -167,7 +273,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.s
 Example with system property:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
 ```
 
 DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
@@ -185,7 +291,7 @@ Similarly on the service map, you would now see one web app making calls to two 
 Example with system property:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/query_string.png" alt="query string"  >}}
@@ -325,7 +431,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/send_traces/
 [4]: /tracing/setup/docker/
 [5]: /agent/kubernetes/apm/

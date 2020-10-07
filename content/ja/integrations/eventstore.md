@@ -3,7 +3,7 @@ aliases: []
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
@@ -18,7 +18,7 @@ integration_title: Eventstore
 is_public: true
 kind: インテグレーション
 maintainer: '@xorima'
-manifest_version: 1.0.0
+manifest_version: 1.1.0
 metric_prefix: eventstore.
 name: eventstore
 public_title: Datadog-Eventstore インテグレーション

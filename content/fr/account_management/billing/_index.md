@@ -43,7 +43,7 @@ Pour définir les adresses e-mails auxquelles vous souhaitez recevoir les factur
 ## Pour aller plus loin
 
 {{< whatsnext desc="Rubriques concernant la facturation :">}}
-    {{< nextlink href="account_management/billing/pricing/" >}}Tarification{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/pricing/" >}}Tarifs{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_details/" >}}Détails d'utilisation{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Métriques d'utilisation{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Carte bancaire{{< /nextlink >}}
@@ -58,16 +58,17 @@ Pour définir les adresses e-mails auxquelles vous souhaitez recevoir les factur
     {{< nextlink href="account_management/billing/alibaba/" >}}Intégration Alibaba{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Intégration Google Cloud{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}Intégration vSphere{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_attribution/" >}}Attribution de l'utilisation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
-[2]: /fr/infrastructure
-[3]: /fr/agent
+[2]: /fr/infrastructure/
+[3]: /fr/agent/
 [4]: https://docs.datadoghq.com/fr/account_management/billing/pricing/#apm
 [5]: https://docs.datadoghq.com/fr/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
-[7]: /fr/account_management/users/default_roles
+[7]: /fr/account_management/users/default_roles/
 [8]: https://app.datadoghq.com/account/billing_history
 [9]: mailto:billing@datadoghq.com
 [10]: https://app.datadoghq.com/account/billing

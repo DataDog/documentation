@@ -125,7 +125,7 @@ curl -X POST -H "Content-type: application/json" \
             }
         ]
 }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -248,7 +248,7 @@ curl -X PUT -H "Content-type: application/json" \
             }
         ]
 }' \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 
 ```
 
@@ -328,10 +328,10 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
             }
         ]
   }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}" | jq '.id')
 
 curl -X DELETE \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -408,10 +408,10 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
             }
         ]
   }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}" | jq '.id')
 
 curl -X GET \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -470,7 +470,7 @@ result = dog.get_all_screenboards()
 api_key=<DATADOG_API_KEY>
 app_key=<DATADOG_APPLICATION_KEY>
 
-curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}

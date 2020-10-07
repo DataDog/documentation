@@ -173,7 +173,7 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 [4]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=files#setting-up-check-templates
+[7]: https://docs.datadoghq.com/fr/agent/docker/integrations/?tab=file#configuration
 {{% /tab %}}
 {{< /tabs >}}
 

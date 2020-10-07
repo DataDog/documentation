@@ -36,10 +36,10 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
   ```shell
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
   ```
 
-  This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent.
+  This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent and updates the `ClusterRole` for the node Agent.
 
 If you are using Azure Kubernetes Service (AKS), you may require extra permissions. See the [RBAC for DCA on AKS][3] FAQ.
 
@@ -65,7 +65,7 @@ Setting the value without a secret results in the token being readable in the `P
 2. Run this one line command:
 
     ```shell
-    kubectl create secret generic datadog-agent-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
+    kubectl create secret generic datadog-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
     ```
 
     Alternatively, modify the value of the secret in the `agent-secret.yaml` file located in the [manifest/cluster-agent directory][1] or create it with:
@@ -115,19 +115,21 @@ Setting the value without a secret results in the token being readable in the `P
 
 1. Download the following manifests:
 
-  * [`agent-service.yaml`: The Cluster Agent Service manifest][4]
+  * [`agent-services.yaml`: The Cluster Agent Service manifest][4]
   * [`secrets.yaml`: The secret holding the Datadog API key][5]
   * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][6]
+  * [`install_info-configmap.yaml`: Install Info Configmap][7]
 
-2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][7] encoded in base64:
+2. In the `secrets.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][8] encoded in base64:
 
     ```shell
     echo -n '<Your API key>' | base64
     ```
 
 3. In the `cluster-agent-deployment.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
-4. Run: `kubectl apply -f agent-service.yaml`
+4. Run: `kubectl apply -f agent-services.yaml`
 5. Run: `kubectl apply -f secrets.yaml`
+6. Run: `kubectl apply -f install_info-configmap.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### Step 4 - Verification
@@ -155,7 +157,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Note**: If you already have the Datadog Agent running, you may need to apply the [rbac-agent.yaml manifest](#step-1-set-configure-rbac-permissions-for-node-based-agents) before the Cluster Agent can start running.
+**Note**: If you already have the Datadog Agent running, you may need to apply the [agent-rbac.yaml manifest](#step-1-set-configure-rbac-permissions-for-node-based-agents) before the Cluster Agent can start running.
 
 ## Configure the Datadog Agent
 
@@ -165,13 +167,13 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 #### Step 1 - Set Configure RBAC permissions for node-based Agents
 
-1. Download the the [rbac-agent.yaml manifest][8]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
+1. Download the the [agent-rbac.yaml manifest][9]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
 
-2. Run: `kubectl apply -f rbac-agent.yaml`
+2. Run: `kubectl apply -f agent-rbac.yaml`
 
 #### Step 2 - Enable the Datadog Agent
 
-1. Download the [daemonset.yaml manifest][9].
+1. Download the [daemonset.yaml manifest][10].
 
 3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with the Datadog site you are using, i.e. `datadoghq.com` or `datadoghq.eu`. This value defaults to `datadoghq.com`.
 
@@ -217,6 +219,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secrets.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml
-[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
+[7]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
+[8]: https://app.datadoghq.com/account/settings#api
+[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
+[10]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml

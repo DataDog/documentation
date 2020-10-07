@@ -2,8 +2,8 @@
 title: Fluent Bit
 name: fluentbit
 kind: integration
-description: 'Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring.'
-short_description: 'Collect, parse, and forward log data from several different sources to Datadog for monitoring.'
+description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
+short_description: 'Collect, parse, and forward log data from several sources.'
 categories:
     - log collection
 doc_link: /integrations/fluentbit/

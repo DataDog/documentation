@@ -1,5 +1,5 @@
 ---
-title: Collecte de métriques Prometheus et OpenMetrics Kubernetes
+title: Collecte de métriques Prometheus et OpenMetrics avec Kubernetes
 kind: documentation
 aliases:
   - /fr/getting_started/prometheus
@@ -24,7 +24,7 @@ further_reading:
     text: Attribuer des tags à toutes les données émises par un conteneur
   - link: /integrations/guide/prometheus-metrics/
     tag: Documentation
-    text: Mapping de métriques Prometheus avec des métriques Datadog
+    text: Mappage de métriques Prometheus avec des métriques Datadog
 ---
 Recueillez vos métriques Prometheus et OpenMetrics exposées à partir de votre application exécutée dans Kubernetes à l'aide de l'Agent Datadog et de l'intégration [Datadog/OpenMetrics][1] ou [Datadog/Prometheus][2].
 

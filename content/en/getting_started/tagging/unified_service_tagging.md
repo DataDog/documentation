@@ -7,6 +7,9 @@ further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
+- link: "/tracing/version_tracking"
+  tag: "Documentation"
+  text: "Use Version tags within Datadog APM to monitor deployments"
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
@@ -27,7 +30,9 @@ With these three tags you can:
 
 - Unified service tagging requires setup of the [Datadog Agent][2].
 
-- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] and [Assigning Tags][4] documentation before proceeding to configuration.
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
+
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][4] and [Assigning Tags][5] documentation before proceeding to configuration.
 
 ## Configuration
 
@@ -38,13 +43,13 @@ To begin configuration of unified service tagging, choose your environment:
 
 ### Containerized environment
 
-In containerized environments, `env`, `service`, and `versions` are set through environment variables or standard labels in your Datadog Agent configuration file. Since the agent associates data collected with a specific container, the configuration for these tags can reside within the container's metadata.
+In containerized environments, `env`, `service`, and `version` are set through environment variables or standard labels in your Datadog Agent configuration file. Since the agent associates data collected with a specific container, the configuration for these tags can reside within the container's metadata.
 
 To setup unified service tagging in a containerized environment:
 
-1. Enable [Autodiscovery][5]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
+1. Enable [Autodiscovery][6]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
-2. If you are using [Docker][6], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
+2. If you are using [Docker][7], make sure the Agent can access your container's [Docker socket][8]. This allows the Agent detect the environment variables and map them to the standard tags.
 
 4. Configure your environment based on either full configuration or partial configuration detailed below.
 
@@ -115,28 +120,32 @@ tags.datadoghq.com/<container-name>.version
 
 ###### State metrics
 
-To configure [Kubernetes State Metrics][2], add the same standard labels to the collection of labels for the parent resource (e.g., Deployment).
+To configure [Kubernetes State Metrics][2]:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-spec:
-  template:
-    metadata:
-      labels:
-        tags.datadoghq.com/env: "<ENV>"
-        tags.datadoghq.com/service: "<SERVICE>"
-        tags.datadoghq.com/version: "<VERSION>"
-```
+1. Set `join_standard_tags` to `true` in your [configuration file][3].
+
+2. Add the same standard labels to the collection of labels for the parent resource (e.g., Deployment).
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+  spec:
+    template:
+      metadata:
+        labels:
+          tags.datadoghq.com/env: "<ENV>"
+          tags.datadoghq.com/service: "<SERVICE>"
+          tags.datadoghq.com/version: "<VERSION>"
+  ```
 
 ###### APM Tracer / StatsD client
 
-To configure [APM Tracer][3] and [StatsD client][4] environment variables, use the [Kubernetes's downward API][1] in the format below:
+To configure [APM Tracer][4] and [StatsD client][5] environment variables, use the [Kubernetes's downward API][1] in the format below:
 
 ```yaml
 containers:
@@ -158,8 +167,9 @@ containers:
 
 [1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
 [2]: /agent/kubernetes/data_collected/#kube-state-metrics
-[3]: /tracing/send_traces/
-[4]: /integrations/statsd/
+[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: /tracing/send_traces/
+[5]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -173,7 +183,6 @@ The values for `service` and `version` can be provided in the Dockerfile:
 ENV DD_SERVICE <SERVICE>
 ENV DD_VERSION <VERSION>
 
-LABEL com.datadoghq.tags.env="<ENV>"
 LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
@@ -257,13 +266,13 @@ If your service has no need for the Datadog environment variables (for example, 
 
 Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
 
-To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
+To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][9], [logs][10], and [StatsD metrics][11], you can either:
 
 1. Export the environment variables in the command for your executable:
 
     `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-2. Or use [Chef][11], [Ansible][12], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
+2. Or use [Chef][12], [Ansible][13], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -286,7 +295,7 @@ When configuring your traces for unified service tagging:
 
 If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
 
-**Note**: The Java, PHP, and Go Tracer do not currently support configuration of unified service tagging for logs.
+**Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
 {{% /tab %}}
@@ -316,7 +325,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 
@@ -358,15 +367,17 @@ to configure the `service` tag only in the configuration of the process check.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /getting_started/tagging/#defining-tags
 [2]: /getting_started/agent
-[3]: /getting_started/tagging/
-[4]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[5]: /getting_started/agent/autodiscovery
-[6]: /agent/docker/integrations/?tab=docker
-[7]: /agent/docker/?tab=standard#optional-collection-agents
-[8]: /getting_started/tracing/
-[9]: /getting_started/logs/
-[10]: /integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
+[3]: /tracing/setup
+[4]: /getting_started/tagging/
+[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /getting_started/agent/autodiscovery
+[7]: /agent/docker/integrations/?tab=docker
+[8]: /agent/docker/?tab=standard#optional-collection-agents
+[9]: /getting_started/tracing/
+[10]: /getting_started/logs/
+[11]: /integrations/statsd/
+[12]: https://www.chef.io/
+[13]: https://www.ansible.com/

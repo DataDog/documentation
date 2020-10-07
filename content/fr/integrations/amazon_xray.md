@@ -48,16 +48,16 @@ Pour tirer le meilleur parti de l'intégration AWS X-Ray, vous devez l'activer 
 
 #### Utilisation du plug-in Serverless Framework (conseillé)
 
-Le plug-in [Serverless Framework de Datadog][16] active automatiquement X-Ray pour vos fonctions Lambda et vos instances d'API Gateway. Le plug-in se charge également d'ajouter la [couche Lambda Datadog][15] à toutes vos fonctions Node et Python.
+Le [plug-in Serverless Framework de Datadog][5] active automatiquement X-Ray pour vos fonctions Lambda et vos instances d'API Gateway. Le plug-in se charge également d'ajouter la [couche Lambda Datadog][6] à toutes vos fonctions Node et Python.
 
-Pour apprendre à utiliser le plug-in Serverless Framework, [lisez cet article de blog][7] et [consultez la documentation][16] (en anglais).
+Pour apprendre à utiliser le plug-in Serverless Framework, [lisez cet article de blog][7] et [consultez la documentation][5] (en anglais).
 
 Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction Lambda](#installer-les-bibliotheques-client-x-ray).
 
 #### Configuration manuelle
 
 1. Accédez à la fonction Lambda dans la console AWS que vous souhaitez instrumenter. Dans la section « Debugging and error handling », cochez la case **Enable active tracing** afin d'activer X-Ray pour cette fonction.
-2. Accédez à la [console API Gateway][6]. Sélectionnez votre API ainsi que l'étape. Ensuite, depuis l'onglet **Logs/Tracing** sélectionnez **Enable X-Ray Tracing**. Pour que ces changements prennent effet, accédez à **Resources** dans le volet de navigation sur la gauche et sélectionnez **Actions**. Ensuite, cliquez sur **Deploy API**.
+2. Accédez à la [console API Gateway][8]. Sélectionnez votre API ainsi que l'étape. Ensuite, depuis l'onglet **Logs/Tracing** sélectionnez **Enable X-Ray Tracing**. Pour que ces changements prennent effet, accédez à **Resources** dans le volet de navigation sur la gauche et sélectionnez **Actions**. Ensuite, cliquez sur **Deploy API**.
 
 **Remarque :** la couche Lambda Datadog et les bibliothèques client intègrent le X-Ray SDK en tant que dépendance. Vous n'avez donc pas besoin de l'installer dans vos projets.
 
@@ -116,8 +116,8 @@ var connection = mysql.createConnection(config);
 
 Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Node.js][1].
 
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
 
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -127,7 +127,7 @@ Installer la bibliothèque de tracing X-Ray :
 pip install aws-xray-sdk
 ```
 
-Pour patcher [toutes les bibliothèques][2] par défaut, ajoutez ce qui suit au fichier contenant vos gestionnaires de fonctions Lambda :
+Pour patcher [toutes les bibliothèques][1] par défaut, ajoutez ce qui suit au fichier contenant vos gestionnaires de fonctions Lambda :
 
 ```python
 from aws_xray_sdk.core import xray_recorder
@@ -135,14 +135,14 @@ from aws_xray_sdk.core import patch_all
 patch_all()
 ```
 
-Notez que le tracing de `aiohttp` nécessite une [instrumentation spécifique][3].
+Notez que le tracing de `aiohttp` nécessite une [instrumentation spécifique][2].
 
-Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Python][1].
+Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Python][3].
 
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-[2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
-[3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
 
+[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
+[2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
+[3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
 {{% /tab %}}
 {{% tab "Go, Ruby, Java, .NET" %}}
 
@@ -153,11 +153,11 @@ Pour tout autre runtime, consultez la documentation sur X-Ray SDK :
 - [X-Ray SDK pour Java][3]
 - [X-Ray SDK pour .NET et Core][4]
 
+
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
 [4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -169,9 +169,7 @@ L'intégration AWS X-Ray récupère les données de trace d'AWS et ne recueille
 [2]: https://docs.datadoghq.com/fr/infrastructure/serverless/
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
-[6]: https://console.aws.amazon.com/apigateway/
+[5]: https://github.com/DataDog/serverless-plugin-datadog
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [7]: https://www.datadoghq.com/blog/serverless-framework-plugin
-[8]: https://github.com/DataDog/serverless-plugin-datadog
-[15]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
-[16]: https://github.com/DataDog/serverless-plugin-datadog
+[8]: https://console.aws.amazon.com/apigateway/

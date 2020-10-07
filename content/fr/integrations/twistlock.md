@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: twistlock
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,7 +49,7 @@ Le check Twistlock est inclus avec le paquet de l'[Agent Datadog][2] : vous n'a
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
@@ -118,7 +122,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
      #(...)
    ```
 
-2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][7].
+2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog, comme dans [ce manifeste][7].
 
 3. Assurez-vous que la section de log est comprise dans l'annotation de pod relative au defender, où l'on peut trouver le nom du conteneur dans les spécifications de pod ci-dessous :
 
@@ -136,19 +140,19 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
    DD_LOGS_ENABLED=true
    ```
 
-2. Ajoutez une étiquette sur le conteneur defender :
+2. Ajoutez une étiquette sur le conteneur du defender :
 
    ```yaml
    ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
    ```
 
-3. Assurez-vous que le socket Docker est monté sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs via l'Agent Datadog dans la [documentation relative à Docker][5].
+3. Assurez-vous que le socket Docker est monté sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs à l'aide de l'Agent Datadog dans la [documentation relative à Docker][8].
 
 4. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `twistlock` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][9] et cherchez `twistlock` dans la section Checks.
 
 ## Données collectées
 
@@ -166,7 +170,7 @@ Twistlock envoie des checks de service en cas d'échec d'un scan.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 [1]: https://www.twistlock.com
 [2]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
@@ -175,6 +179,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
 [7]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/twistlock/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[8]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/integrations-core/blob/master/twistlock/metadata.csv
+[11]: https://docs.datadoghq.com/fr/help/

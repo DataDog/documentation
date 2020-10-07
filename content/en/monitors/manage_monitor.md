@@ -92,9 +92,11 @@ After searching, select one or more monitors to update using the checkboxes next
 
 To edit an individual monitor, hover over it and use the buttons to the far right: Edit, Clone, Mute, Delete. To see more details on a monitor, click its name to visit the status page.
 
+**Note**: With the [Datadog Mobile App][7], you can view, mute, and unmute monitors on your mobile device.
+
 ### Triggered monitors
 
-You can mute or [resolve][6] triggered monitors in bulk using the [Triggered Monitors][7] page. This page only shows monitors with a triggered status (Alert, Warn, or No Data).
+You can mute or [resolve][6] triggered monitors in bulk using the [Triggered Monitors][8] page. This page only shows monitors with a triggered status (Alert, Warn, or No Data).
 
 #### Grouped results
 
@@ -110,7 +112,7 @@ Attribute differences for the triggered monitors page:
 
 ### Monitor Tags
 
-Monitor tags are independent of tags sent by the Agent or integrations. Add tags directly to your monitors for filtering on the [manage monitors][1], [triggered monitors][7], or [manage downtime][8] pages. Learn more about monitor tags in the [tagging documentation][9].
+Monitor tags are independent of tags sent by the Agent or integrations. Add tags directly to your monitors for filtering on the [manage monitors][1], [triggered monitors][8], or [manage downtime][9] pages. Learn more about monitor tags in the [tagging documentation][10].
 
 ## Further Reading
 
@@ -122,6 +124,7 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add tags
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [5]: /monitors/monitor_types/
 [6]: /monitors/monitor_status/#resolve
-[7]: https://app.datadoghq.com/monitors/triggered
-[8]: https://app.datadoghq.com/monitors#downtime
-[9]: /getting_started/tagging/assigning_tags/?tab=monitors#ui
+[7]: /mobile/#monitors
+[8]: https://app.datadoghq.com/monitors/triggered
+[9]: https://app.datadoghq.com/monitors#downtime
+[10]: /getting_started/tagging/assigning_tags/?tab=monitors#ui

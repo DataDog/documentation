@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /ja/guides/forecasts/
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: モニター通知の設定
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: モニターをミュートするダウンタイムのスケジュール
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: モニターステータスの参照
 ---
@@ -99,7 +99,27 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 ## API
 
-プログラムで予測値モニターを作成するには、[Datadog API リファレンス][7]を参照してください。Datadog は、[モニターの JSON をエクスポート][8]して API のクエリを作成することを推奨しています。
+予測値モニターをプログラムで作成するには、[Datadog API リファレンス][7]を参照してください。Datadog では、[モニターの JSON をエクスポート][8]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
+
+予測値モニターは、他のモニターと[同じ API][9] を使用して管理されますが、`query` プロパティのコンテンツについては、さらに説明が必要です。
+
+リクエストの本文の `query` プロパティには、次の形式のクエリ文字列を含める必要があります。
+
+```text
+<aggregator>(<query_window>):forecast(<metric_query>, '<algorithm>', <deviations>, interval=<interval>[, history='<history>'][, model='<model>'][, seasonality='<seasonality>']) <comparator> <threshold>
+```
+
+* `aggregator`: 予測値が閾値を下回ったらアラートをトリガーするようにする場合は、`min` を使用します。予測値が閾値を上回ったらアラートをトリガーするようにするには、`max` を使用します。
+* `query_window`: `last_4h` や `last_7d` などのタイムフレーム。通知のグラフに表示される時間ウィンドウ。`alert_window` の約 5 倍にすることが推奨されますが、少なくとも `alert_window` と同じ大きさである必要があります。このパラメーターは、通知に含まれるグラフに表示される時間範囲を制御します。
+* `metric_query`: 標準の Datadog メトリクスクエリ (例: `min:system.disk.free{service:database,device:/data}by{host}`)
+* `algorithm`: `linear` または `seasonal`
+* `deviations`: 1 と等しい、または 1 より大きい数。このパラメーターは、信頼限界のサイズを制御し、モニターの秘密度を調整できます。
+* `interval`:ロールアップ間隔の秒数を表す正の整数。
+* `history`: 予測値の作成に使用されるべき過去データの量を表す文字列（例: `1w`、`3d`）。このパラメーターは、`linear` アルゴリズムでのみ使用されます。
+* `model`: 使用されるモデルタイプは `default`、`simple`、または `reactive`。このパラメーターは、`linear` アルゴリズムでのみ使用されます。
+* `seasonality`: 使用される季節性は `hourly`、`daily`、または `weekly`。このパラメーターは、`seasonal` アルゴリズムでのみ使用されます。
+* `comparator`: 予測値が閾値を下回ったらアラートを発生させるには、`<=` を使用します。予測値が閾値を上回ったらアラートする場合は、`>=` を使用します。
+* `threshold`: 予測値の信頼限界がこの閾値に達すると「クリティカル」のアラートをトリガーします。
 
 ## トラブルシューティング
 
@@ -108,14 +128,14 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html"  >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /ja/monitors/monitor_types/metric/#define-the-metric
-[3]: /ja/monitors/faq/what-are-recovery-thresholds
-[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /ja/dashboards/functions/rollup
-[6]: /ja/monitors/notifications
-[7]: /ja/api/#create-a-monitor
+[3]: /ja/monitors/faq/what-are-recovery-thresholds/
+[4]: /ja/monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /ja/dashboards/functions/rollup/
+[6]: /ja/monitors/notifications/
+[7]: /ja/api/v1/monitors/#create-a-monitor
 [8]: /ja/monitors/monitor_status/#settings
+[9]: /ja/api/v1/monitors/

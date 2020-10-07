@@ -2,14 +2,18 @@
 aliases:
   - /ja/integrations/ssh
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - network
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md'
 display_name: SSH
@@ -47,13 +51,16 @@ supported_os:
 
 SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれているため、SSH 接続をテストするサーバーに追加で何かをインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `ssh_check.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル ssh_check.d/conf.yaml][3] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `ssh_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ssh_check.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -69,21 +76,31 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれている
        # add_missing_keys: True    # default is False
    ```
 
-2. [Agent を再起動][4]すると、Datadog への SSH/SFTP メトリクスおよびサービスチェックの送信が開始されます。
+2. [Agent を再起動][3]すると、Datadog への SSH/SFTP メトリクスおよびサービスチェックの送信が開始されます。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                        |
 | -------------------- | ------------------------------------------------------------ |
-| `<INTEGRATION_NAME>` | `ssh`                                                        |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
+| `<インテグレーション名>` | `ssh_check`                                                  |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                |
+| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `ssh_check` を探します。
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `ssh_check` を探します。
 
 ## 収集データ
 
@@ -95,7 +112,7 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれている
 
 SSH チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 **ssh.can_connect**:
 
@@ -107,13 +124,9 @@ Agent が SFTP セッションを開始できない場合は、CRITICAL を返�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
-[8]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

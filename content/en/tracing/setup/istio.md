@@ -52,7 +52,15 @@ By default, Istio tries to automatically detect this. It can be manually configu
 application's deployment and service. More information can be found in Istio's documentation for [Protocol Selection][4]
 
 By default, the service name used when creating traces is generated from the deployment name and namespace. This can be
-set manually by adding an `app` label to the deployment's pod template.
+set manually by adding an `app` label to the deployment's pod template:
+
+```yaml
+template:
+  metadata:
+    labels:
+      app: <SERVICE_NAME>
+```
+
 For [CronJobs][5], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
@@ -69,6 +77,7 @@ The available [environment variables][6] depend on the version of the C++ tracer
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
+| v1.7.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
 | v1.5.x | v1.1.1 |
 | v1.4.x | v1.1.1 |

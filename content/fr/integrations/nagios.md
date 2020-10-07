@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +38,7 @@ Envoyez des événements depuis votre infrastructure surveillée par Nagios à D
 
 Ce check surveille les logs de votre serveur Nagios et envoie des événements à votre flux d'événements Datadog. Vous pouvez ainsi surveiller les bagottements de service, les changements d'état de host, les checks de service passif, les downtimes des services et de hosts, et plus encore. Ce check peut également envoyer des données de performance Nagios à Datadog sous forme de métriques.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -45,7 +46,7 @@ Le check Nagios est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 
@@ -85,10 +86,7 @@ Le check surveille le log d'événements Nagios en recherchant les lignes de log
 - ACKNOWLEDGE_SVC_PROBLEM
 - SERVICE ALERT
 - HOST ALERT
-- PASSIVE SERVICE CHECK
-- CURRENT SERVICE STATE
 - ACKNOWLEDGE_HOST_PROBLEM
-- CURRENT HOST STATE
 - SERVICE NOTIFICATION
 - HOST DOWNTIME ALERT
 - PROCESS_SERVICE_CHECK_RESULT

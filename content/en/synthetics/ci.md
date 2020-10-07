@@ -1,31 +1,26 @@
 ---
-title: Synthetics CI
+title: Synthetic CI/CD Testing
 kind: documentation
-description: Run Synthetics tests on-demand in your CI.
+description: Run Synthetic tests on-demand in your CI/CD pipelines.
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
-  text: "Introducing Datadog Synthetics"
-- link: "/synthetics/"
-  tag: "Documentation"
-  text: "Manage your checks"
+  text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
+  
 ---
 
-<div class="alert alert-warning">
-This feature is in private beta. To request access, contact <a href="/help/">Datadog Support</a>.
-</div>
-
-On top of executing your tests at predefined intervals, you can also execute Datadog Synthetics tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetics tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints.
+In addition to running tests at predefined intervals, you can also run Datadog Synthetic tests on-demand using API endpoints. You can run Datadog Synthetic tests in your continuous integration (CI) pipelines, letting you block the deployment of branches that would break your product. 
+Synthetic CI/CD testing can also be used to **run tests as part of your CD process**, evaluating the state of your production application immediately after a deployment finishes. This lets you detect potential regressions that could impact your users—and automatically trigger a rollback whenever a critical test fails.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
 
-On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetics with your CI tooling.
+On top of these API endpoints, Datadog provides and maintains a command line interface (CLI), allowing you to easily integrate Datadog Synthetic tests with your CI tooling. Synthetic CI/CD testing is open-source, and its source code is available on GitHub at [DataDog/datadog-ci][1].
 
 ## API usage
 
@@ -183,7 +178,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}
@@ -205,6 +200,10 @@ curl -G \
 {{< /site-region >}}
 
 #### Example response
+
+{{< tabs >}}
+
+{{% tab "API Test" %}}
 
 ```json
 {
@@ -237,25 +236,100 @@ curl -G \
 }
 ```
 
+{{% /tab %}}
+
+{{% tab "Browser Test" %}}
+
+```json
+{
+  "results": [
+    {
+      "check_id": "123456",
+      "timestamp": 1601639904704,
+      "orgID": 2,
+      "result": {
+        "runType": 2,
+        "artifactsBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/artifacts__1601639913277.json",
+        "browserType": "chrome",
+        "eventType": "finished",
+        "stepDetails": [
+          {
+            "browserErrors": [],
+            "skipped": false,
+            "description": "Navigate to start URL",
+            "warnings": [],
+            "url": "about:blank",
+            "value": "https://example.com",
+            "duration": 1002,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-0__1601639913294.jpeg",
+            "type": "goToUrlAndMeasureTti",
+            "stepId": -1
+          },
+          {
+            "browserErrors": [],
+            "stepElementUpdates": {
+              "version": 1,
+              "multiLocator": {
+                "ab": "/*[local-name()=\"html\"][1]/*[local-name()=\"body\"][1]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "co": "[{\"text\":\"example domain\",\"textType\":\"directText\"}]",
+                "cl": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "at": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "clt": "/descendant::*[text()[normalize-space(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ', 'abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ')) = \"example domain\"]]",
+                "ro": "//*[local-name()=\"h1\"]"
+              }
+            },
+            "skipped": false,
+            "description": "Test heading \"Example Domain\" content",
+            "url": "https://www.example.com/",
+            "checkType": "contains",
+            "value": "Example Domain",
+            "duration": 204,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-1__1601639913410.jpeg",
+            "type": "assertElementContent",
+            "stepId": 2275176
+          }
+        ],
+        "browserVersion": "84.0.4147.135",
+        "mainDC": "us1.prod",
+        "timeToInteractive": 269,
+        "device": {
+          "name": "Laptop Large",
+          "height": 1100,
+          "width": 1440,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
+          "id": "chrome.laptop_large",
+          "isMobile": false,
+          "browser": "chrome"
+        },
+        "passed": true,
+        "duration": 1206,
+        "startUrl": "https://www.example.com",
+        "metadata": {}
+      },
+      "dc_id": 30005,
+      "resultID": "17221670732431167",
+      "metadata": {}
+    }
+  ]
+}
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## CLI usage
 
 ### Package installation
 
-The package is published privately under [@datadog/datadog-ci][1] in the NPM registry.
-
-Until it is made public, an NPM token is needed to access it. If you do not have an NPM token to access the package, reach out to [Datadog support][2].
+The package is published under [@datadog/datadog-ci][2] in the NPM registry.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Set the below in your `~/.npmrc` file:
-
-```conf
-registry=https://registry.npmjs.org/
-//registry.npmjs.org/:_authToken=<TOKEN>
-```
-
-Then, install the package through NPM:
+Install the package through NPM:
 
 ```bash
 npm install --save-dev @datadog/datadog-ci
@@ -264,16 +338,7 @@ npm install --save-dev @datadog/datadog-ci
 {{% /tab %}}
 {{% tab "Yarn" %}}
 
-In Yarn v2, you can scope the token to the `@datadog` scope in the `.yarnrc` file:
-
-```yaml
-npmScopes:
-  datadog:
-    npmRegistryServer: "https://registry.npmjs.org"
-    npmAuthToken: "<TOKEN>"
-```
-
-Then, install the package through Yarn:
+Install the package through Yarn:
 
 ```bash
 yarn add --dev @datadog/datadog-ci
@@ -306,11 +371,10 @@ To setup your client, Datadog API and application keys need to be configured. Th
     * **apiKey**: The API key used to query the Datadog API.
     * **appKey**: The application key used to query the Datadog API.
     * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`). The default is `datadoghq.com`.
-    * **files**: Glob pattern to detect synthetics tests config files.
-    * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
+    * **files**: Glob pattern to detect synthetic tests config files.
+    * **global**: Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
     * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
     * **subdomain**: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
-    * **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
 
     **Example global configuration file**:
 
@@ -333,7 +397,8 @@ To setup your client, Datadog API and application keys need to be configured. Th
             "retry": { "count": 2, "interval": 300 },
             "executionRule": "skipped",
             "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new value" }
+            "variables": { "titleVariable": "new value" },
+            "pollingTimeout": 180000
         },
         "proxy": {
           "auth": {
@@ -344,8 +409,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
           "port": 3128,
           "protocol": "http"
         },
-        "subdomain": "subdomainname",
-        "timeout": 120000
+        "subdomain": "subdomainname"
     }
     ```
 
@@ -374,15 +438,15 @@ The default configurations used for the tests are the original tests' configurat
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
-* **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
+* **allowInsecureCertificates**: (_boolean_) Disable certificate checks in API tests.
 * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
      * **username**: (_string_) Username to use in basic authentication.
      * **password**: (_string_) Password to use in basic authentication.
-* **body**: (_string_) Data to send in a synthetics API test.
-* **bodyType**: (_string_) Type of the data sent in a synthetics API test.
+* **body**: (_string_) Data to send in a synthetic API test.
+* **bodyType**: (_string_) Type of the data sent in a synthetic API test.
 * **cookies**: (_string_) Use provided string as cookie header in API or browser test.
 * **deviceIds**: (_array_) List of devices on which to run the browser test.
-* **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
+* **followRedirects**: (_boolean_) Indicates whether to follow HTTP redirections in API tests.
 * **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
 * **locations**: (_array_) List of locations from which the test should be run.
 * **retry**: (_object_) Retry policy for the test:
@@ -394,6 +458,7 @@ However, in the context of your CI deployment, you can optionally decide to over
      * **skipped**: The test is not executed at all.
 * **startUrl**: (_string_) New start URL to provide to the test.
 * **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
+* **pollingTimeout**: (_integer_) Duration after which synthetic tests are considered failed (in milliseconds).
 
 **Note**: Tests' overrides take precedence over global overrides.
 
@@ -417,7 +482,8 @@ However, in the context of your CI deployment, you can optionally decide to over
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-                "variables": { "titleVariable": "new value" }
+                "variables": { "titleVariable": "new value" },
+                "pollingTimeout": 180000
             }
         }
     ]
@@ -457,7 +523,7 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 
 ### Running tests
 
-You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetic tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 
@@ -516,7 +582,7 @@ You can also see the results of your tests listed on your Datadog test details p
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /help/
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: https://github.com/TooTallNate/node-proxy-agent
 [4]: /api/v1/synthetics/#get-test

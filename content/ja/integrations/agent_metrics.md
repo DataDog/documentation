@@ -1,12 +1,14 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md'
 display_name: Agent メトリクス
@@ -14,7 +16,7 @@ git_integration_title: agent_metrics
 guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent
 integration_title: Agent メトリクス
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -46,19 +48,15 @@ Agent v6 以降で Agent メトリクスを収集するには、Agent にパッ�
 
 Agent Metrics チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `agent_metrics.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル agent_metrics.d/conf.yaml][5] を参照してください。
 
 2. [Agent を再起動します][6]。
 
-#### メトリクスの収集
-
-Agent Metrics インテグレーションでは[カスタムメトリクス][7]を送信することができますが、これはお客様の[課金][8]に影響します。
-
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `agent_metrics` を探します。
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `agent_metrics` を探します。
 
 ## 収集データ
 
@@ -78,16 +76,14 @@ Agent Metrics チェックには、サービスのチェック機能は含まれ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/go_expvar
+[1]: https://docs.datadoghq.com/ja/integrations/go_expvar/
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/agent-v5/agent_metrics/datadog_checks/agent_metrics/data/conf.yaml.default
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics
-[8]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv
-[11]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

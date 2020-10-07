@@ -73,13 +73,15 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 ### Checks configuration files for Agent 6
 
-An example for each Agent check configuration files can be found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` in order to enable the associated check. Note that the Agent loads any valid YAML file contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
+An example for each Agent check configuration file is found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` to enable the associated check. Note that the Agent loads valid YAML files contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This allows complex configurations to be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
 ```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
 ```
+
+A special case are YAML files with the suffix `.default`. These files are loaded by the Agent by default and help define the core set of checks that are always enabled (CPU, memory, uptime ...). They are ignored if any other configuration are found for that check, therefore you can safely ignore them. If you want to disable one of the default checks simply remove that file. To configure these checks, `conf.yaml.example` should be use as a base.
 
 Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 

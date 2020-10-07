@@ -61,6 +61,26 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ?>
 ```
 
+If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
+      
+      $record['dd'] = [
+          'trace_id' => $span->getTraceId(),
+          'span_id'  => $span->getSpanId(),
+      ];
+      
+      return $record;
+  });
+?>
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

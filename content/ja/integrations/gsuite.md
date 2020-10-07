@@ -1,23 +1,22 @@
 ---
-"categories":
-- ログの収集
-- security
-"ddtype": "crawler"
-"dependencies": []
-"description": "G Suite の監査およびセキュリティログを Datadog へインポートします。"
-"doc_link": "https://docs.datadoghq.com/integrations/gsuite/"
-"git_integration_title": "gsuite"
-"has_logo": !!bool "true"
-"integration_title": "G Suite"
-"is_public": !!bool "true"
-"kind": "インテグレーション"
-"manifest_version": "1.0"
-"name": "gsuite"
-"public_title": "Datadog-G Suite インテグレーション"
-"short_description": "G Suite の監査およびセキュリティログを Datadog へインポート"
-"version": "1.0"
+categories:
+  - ログの収集
+  - security
+ddtype: crawler
+dependencies: []
+description: G Suite の監査およびセキュリティログを Datadog へインポートします。
+doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
+git_integration_title: gsuite
+has_logo: true
+integration_title: G Suite
+is_public: true
+kind: インテグレーション
+manifest_version: '1.0'
+name: gsuite
+public_title: Datadog-G Suite インテグレーション
+short_description: G Suite の監査およびセキュリティログを Datadog へインポート
+version: '1.0'
 ---
-
 ## 概要
 
 G Suite のセキュリティログを Datadog へインポートします。このインテグレーションを有効にすると、以下の G Suite サービスに対しログが自動的に Datadog に取り込まれます。
@@ -40,12 +39,14 @@ G Suite のセキュリティログを Datadog へインポートします。こ
 ## セットアップ
 ### インストール
 
-Datadog G Suite インテグレーションを構成するには、 [Datadog G Suite インテグレーションタイル](https://app.datadoghq.com/account/settings#インテグレーション/gsuite)で *Connect a new G Suite domain* ボタンをクリックし、Datadog の G Suite 管理者 API へのアクセスを許可します。
+Datadog G Suite インテグレーションを構成するには、 [Datadog G Suite インテグレーションタイル][1] で *Connect a new G Suite domain* ボタンをクリックし、Datadog の G Suite 管理者 API へのアクセスを許可します。
 
 ## 収集データ
 ### ログ
 
-収集されたログとそのコンテンツの全リストは、[G Suite 管理者 SDK 文書](https://developers.google.com/admin-sdk/reports/v1/reference/activities/list) を参照して下さい。
+収集されたログとそのコンテンツの全リストは、[G Suite 管理者 SDK 文書][2] を参照してください。
+
+**注**: G Suite のセキュリティログは、Google のログポーリング頻度に制限があるため 90 分のクローリングとなっています。このインテグレーションのログは、1.5～2 時間おきに転送されます。
 
 ### メトリクス
 
@@ -55,11 +56,13 @@ G Suite インテグレーションにメトリクスは含まれません。
 
 G Suite インテグレーションにイベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 G Suite インテグレーションにサービスチェックは含まれません。
 
 ## トラブルシューティング
 
-お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。
-
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+[1]: https://app.datadoghq.com/account/settings#integrations/gsuite
+[2]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
+[3]: https://docs.datadoghq.com/ja/help/

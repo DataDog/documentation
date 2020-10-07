@@ -29,9 +29,9 @@ Pour générer une nouvelle métrique basée sur des logs, accédez à la [page 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics.png" alt="Créer une métrique basée sur des logs" style="width:80%;">}}
 
 1. **Saisissez une requête pour filtrer le flux de logs** : la syntaxe de la requête est la même que pour la [recherche du Log Explorer][5]. Seuls les logs ingérés avec un timestamp ne dépassant pas les 20 dernières minutes sont pris en compte lors de l'agrégation.
-2. **Sélectionnez le champ que vous souhaitez surveiller** : sélectionnez `*` pour obtenir le nombre total de logs qui correspondent à votre requête, ou saisissez un attribut de log (p. ex., `@network.bytes_written`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (`count`, `min`, `max`, `sum` et `avg`).
-3. **Ajoutez des dimensions en fonction desquelles effectuer le regroupement avec `group by`** : par défaut, les métriques générées à partir de logs ne sont associées à aucun tag, sauf si vous avez explicitement choisi d'en ajouter. Toute dimension d'attribut ou de tag présente dans vos logs peut être utilisée pour créer des [tags][6] de métriques. Les métriques basées sur des logs sont considérées comme des [métriques custom][7]. Évitez donc d'effectuer des regroupements à partir d'attributs sans restriction ou présentant une cardinalité extrêmement élevée, tels que des timestamps, des ID utilisateur, des ID de requête ou des ID de session, pour empêcher une hausse conséquente de vos coûts.
-4. **Donnez un nom à votre métrique** : les noms de métriques basées sur des logs doivent suivre la [convention de nommage des métriques][8].
+2. **Sélectionnez le champ que vous souhaitez surveiller** : sélectionnez `*` pour obtenir le nombre total de logs qui correspondent à votre requête, ou saisissez un attribut de log (p. ex., `@network.bytes_written`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (`count`, `min`, `max`, `sum` et `avg`). Si la facette d'attribut de log est une [mesure][6], la valeur de la métrique correspond à la valeur de l'attribut de log. 
+3. **Ajoutez des dimensions en fonction desquelles effectuer le regroupement avec `group by`** : par défaut, les métriques générées à partir de logs ne sont associées à aucun tag, sauf si vous avez explicitement choisi d'en ajouter. Toute dimension d'attribut ou de tag présente dans vos logs peut être utilisée pour créer des [tags][7] de métriques. Les métriques basées sur des logs sont considérées comme des [métriques custom][8]. Évitez donc d'effectuer des regroupements à partir d'attributs sans restriction ou présentant une cardinalité extrêmement élevée, tels que des timestamps, des ID utilisateur, des ID de requête ou des ID de session, pour empêcher une hausse conséquente de vos coûts.
+4. **Donnez un nom à votre métrique** : les noms de métriques basées sur des logs doivent suivre la [convention de nommage des métriques][9].
 
 **Remarque** : les points de données pour les métriques basées sur des logs sont générés à des intervalles de dix secondes.
 
@@ -63,17 +63,21 @@ Les métriques d'utilisation Log Management s'accompagnent de trois tags qui peu
 |  `datadog_is_excluded`  | Indique si un log correspond ou non à une requête d'exclusion.            |
 |  `service`              | L'attribut de service de l'événement de log.                               |
 
+Un tag `status` supplémentaire est disponible pour la métrique `datadog.estimated_usage.logs.ingested_events` afin d'indiquer le statut du log (`info`, `warning`, etc.).
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-<br>
+
+
 \*Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs
+[1]: /fr/logs/
 [2]: /fr/logs/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[5]: /fr/logs/search_syntax
-[6]: /fr/tagging
-[7]: /fr/developers/metrics/custom_metrics
-[8]: /fr/developers/metrics/#naming-metrics
+[5]: /fr/logs/search_syntax/
+[6]: /fr/logs/explorer/facets/#quantitative-facets-measures
+[7]: /fr/getting_started/tagging/
+[8]: /fr/developers/metrics/custom_metrics/
+[9]: /fr/developers/metrics/#naming-metrics

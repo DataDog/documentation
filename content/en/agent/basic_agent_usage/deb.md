@@ -63,7 +63,7 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 
 **Note**: If the `service` wrapper is not available on your system, use:
 
-* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `upstart`-based systems: `sudo start/stop/restart/status datadog-agent`
 * On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][2]

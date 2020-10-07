@@ -1,0 +1,86 @@
+{
+  "containerDefinitions": [
+    {
+      "cpu": 10,
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        {
+            "name": "DD_SITE",
+            "value": "datadoghq.com"
+        },
+        {
+          "name": "DD_SYSTEM_PROBE_ENABLED",
+          "value": "true"
+        }
+      ],
+      "essential": true,
+      "image": "datadog/agent:latest",
+      "linuxParameters": {
+        "capabilities": {
+          "add": [
+            "SYS_ADMIN",
+            "SYS_RESOURCE",
+            "SYS_PTRACE",
+            "NET_ADMIN"
+          ]
+        }
+      },
+      "memory": 256,
+      "mountPoints": [
+        {
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": true,
+          "sourceVolume": "docker_sock"
+        },
+        {
+          "containerPath": "/host/proc/",
+          "readOnly": true,
+          "sourceVolume": "proc"
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "readOnly": true,
+          "sourceVolume": "cgroup"
+        },
+        {
+          "containerPath": "/sys/kernel/debug",
+          "sourceVolume": "debug"
+        }
+      ],
+      "name": "datadog-agent"
+    }
+  ],
+  "family": "datadog-agent-task-lee",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "cgroup"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/kernel/debug"
+      },
+      "name": "debug"
+    }
+  ]
+}

@@ -11,15 +11,18 @@ aliases:
   - /ja/graphing/
 description: データを可視化して詳細な情報を把握
 further_reading:
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: ドキュメント
     text: テンプレート変数を使用してダッシュボードを強化
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: ドキュメント
     text: Datadogの外部でグラフを共有
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: ドキュメント
     text: ダッシュボードで利用可能なすべてのウィジェット
+  - link: '/mobile/#dashboards'
+    tag: Documentation
+    text: ダッシュボードをモバイルアプリで確認
 ---
 ## 概要
 
@@ -73,7 +76,7 @@ Preset lists (プリセットリスト) は、Datadog でデフォルトのダ�
 |------------|------------------------------------------------------------------------------------------|
 | スター       | 現在ログイン中のユーザーがスターを付けたすべてのダッシュボード。                                  |
 | アイコン       | ダッシュボードの種類 (タイムボードまたはスクリーンボード) を示すアイコン。                     |
-| Name       | カスタムダッシュボードまたはプリセットダッシュボードの名前。                                              |
+| 名前       | カスタムダッシュボードまたはプリセットダッシュボードの名前。                                              |
 | Modified   | カスタムダッシュボードの最終更新日。                                            |
 | 人気度 (Popularity) | 組織のダッシュボードの相対的な[人気度](#人気度)。           |
 | Creator    | ダッシュボードの作成者のプロファイルアイコンです。プリセットダッシュボードでは、インテグレーションロゴを使用します。 |
@@ -96,9 +99,9 @@ Datadog には、[スクリーンボード][4]と[タイムボード][3]の 2 �
 |----------------------------|---------------------------------------|-------------------------------------------|
 | 時間スコープ                 | すべてのグラフで同じ時間スコープが共有されます。 | グラフには、個別の時間スコープを設定できます。   |
 | レイアウト                     | グラフは固定グリッドに表示されます。 | グラフはキャンバス上のどこにでも配置できます。 |
-| グラフの個別共有  | はい                                   | いいえ                                        |
-| ダッシュボード全体の共有 | いいえ                                    | はい                                       |
-| 共有を読み取り専用に設定   | はい                                   | はい                                       |
+| グラフの個別共有  | 〇                                   | ✕                                        |
+| ダッシュボード全体の共有 | ✕                                    | はい                                       |
+| 共有を読み取り専用に設定   | 〇                                   | 〇                                       |
 
 ### コピー / インポート / エクスポート
 
@@ -123,6 +126,6 @@ Datadog には、[スクリーンボード][4]と[タイムボード][3]の 2 �
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /ja/help
-[3]: /ja/dashboards/timeboard
-[4]: /ja/dashboards/screenboard
+[2]: /ja/help/
+[3]: /ja/dashboards/timeboard/
+[4]: /ja/dashboards/screenboard/

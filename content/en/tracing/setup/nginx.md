@@ -106,6 +106,8 @@ Complete examples:
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
+#### NGINX and FastCGI
+
 When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
 
 ## NGINX Ingress Controller for Kubernetes
@@ -144,6 +146,14 @@ Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST
     fieldRef:
       fieldPath: status.hostIP
 ```
+
+To set a different service name per Ingress using annotations:
+
+```yaml
+  nginx.ingress.kubernetes.io/configuration-snippet: |
+      opentracing_tag "service.name" "custom-service-name";
+```
+The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
 ## Further Reading
 

@@ -2,87 +2,120 @@
 title: CERTIFICATE_VERIFY_FAILED エラー
 kind: faq
 ---
+### 事象
 
-CERTIFICATE_VERIFY_FAILED のエラーに関しまして
+2020 年 5 月 30 日土曜日の 10:48 UTC に、Datadog 証明書の一部に相互署名するために使用される SSL ルート証明書が期限切れになり、一部の Agent が Datadog エンドポイントとの接続を失いました。このルート証明書は特定の Agent バージョンに埋め込まれているため、接続を回復するには対応が必要です。
 
-### エラーの発生原因
+### 影響を受ける Agent のバージョン
 
-2020年5月30日 10時45分（UTC）に Datadog 証明書のクロス署名で使用されるルート証明書の有効期限が切れ、一部のお客様の Agent が Datadog へ接続できなくなりました。このルート証明書は、一部の Agent バージョンに直接インストールされているため、接続を修正するにはお客様に実施して頂く対応があります。
+3.6.x から 5.32.6 までの Agent バージョンには、期限切れの証明書が埋め込まれており、影響があります。
 
-### 影響を受けるバージョン
+Agent バージョン 6.x と 7.x は問題なく、更新する必要はありません。
 
-Agent 3.6.x から 5.32.6 までは有効期限切れのルート証明書を直接インストールしており、影響を受けています。
-Agent 6.x および 7.x は影響を受けず、アップデートの必要がありません。
+### 影響を受ける Agent バージョンを実行しているホストのリストを見つけるには？
 
-### 影響を受けるホストの検索方法
+Datadog UI の [Agent バージョンリスト][1]を使用して、ホスト名、そのホストが実行している Agent のバージョン、およびそのホストのステータスを確認してください。
 
-お客様の Datadog アカウントで影響を受けている Agent バージョンをインストールしているホストを検索するために、Webアプリで[Agent Versionsのページ][1]を用意しました。ホスト名やAgentバージョンやAgentの状態を表示されているページです。
+**注**: 影響を受ける Agent バージョンを実行しているホストについて Datadog アカウントにクエリを実行する以前推奨されていた Python スクリプトは、アプリケーションで使用できるようになったリストを優先して非推奨になりました。
 
-注意：以前、影響を受けるホストをクエリするPythonのスクリプトを用意しましたが、アプリ内のページの正確度の方が高いですので、[Agent Versionsのページ][1]を参考にしてください。
+### Agent 5.32.7 へのアップグレードによる修正
 
-### Agent 5.32.7 にアップグレードして対応する方法
-
-現状 Agent 5.x を使用している場合、Agent 5.32.7+ へのアップグレードを推奨します。新しいバージョンの Agent を使用することにより、様々な場面におけるより安定した稼働を期待できます。
+現在 64 ビットホストで Agent 5.x を実行している場合、Datadog は Agent 5.32.7 以降へのアップグレードを推奨しています。これにより、最小限の変更で、Agent がさまざまな異なるシナリオで機能し続けることが保証されます。
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (5.12.0より新しいバージョン): Datadog [Agent installer][7]をダウンロードする. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-その他のプラットフォームや構成については、[こちら][8]に詳細があります。
+Windows (バージョン > 5.12.0): Datadog [Agent インストーラー][2]をダウンロードします。`start /wait msiexec /qn /i ddagent-cli-latest.msi`
+他のプラットフォームやコンフィギュレーション管理オプションの詳細については、[Agent のインストールページ][3]をご覧ください。
 
-### Agent をアップグレードせずに対応する方法
+32 ビットシステム用にリリースされた最新の互換 Agent は 5.10.1 でした。32 ビットホストの場合は、`Agent をアップグレードせずに修正する` の手順に従ってください。
 
-*Linux*
+### Agent をアップグレードせずに修正する
+
+#### Linux
 
 ```shell
 sudo rm -f /opt/datadog-agent/agent/datadog-cert.pem && sudo /etc/init.d/datadog-agent restart
 ```
 
-*Windows CLI*
+#### Windows
 
-Agent `>= 5.12.0` の場合は、PowerShell で下記のコマンドを実行します。
+Agent がプロキシを使用するように構成されている場合は、代わりに[下記の専用セクション](#windows-agent-5-x-configured-to-use-a-proxy-or-the-curl-http-client)に従ってください。
+
+*CLI の使用*
+
+PowerShell を使用して、Agent `>= 5.12.0` に対して次のアクションを実行します。
 
 ```shell
-rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
-net stop /y datadogagent ; net start /y datadogagent
+rm "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
+restart-service -Force datadogagent
 ```
 
-Agent `<= 5.11` を使用している場合、場所が異なります。
-64-bit の Windows において、32-bit の Agent `<= 5.11` を使用している場合:
+Agent バージョン `<= 5.11` の場合は、場所が異なります。64 ビット Windows 上の 32 ビット Agent `<= 5.11` のユーザーの場合、手順は次のとおりです。
 
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Agent `<= 5.11` を使用している場合:
+Agent `<= 5.11` の他のすべてのユーザーの手順は次のとおりです。
 
 ```shell
 rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-*Windows GUI*
+*Windows GUI の使用*
 
-`C:\Program Files (x86)\Datadog\Datadog Agent\files\` にある `datadog-cert.pem` を削除します。
-（64-bit の Windows において、32-bit の Agent `<= 5.11` を使用している場合、場所は `C:\Program Files(x86)\Datadog\Datadog Agent\files\` です。Agent `<= 5.11` を使用している場合、場所は`C:\Program Files\Datadog\Datadog Agent\files\`です）。証明書を削除した後に、Windows Service Manager で Datadog Agent のサービスを再起動します。
+`datadog-cert.pem` を削除します。このファイルは次の場所にあります。
 
-### Agent 6 / Agent 7 にアップグレードして対応する方法
+* Agent `>=5.12.0`:
+  * 64 ビット Windows: `C:\Program Files\Datadog\Datadog Agent\agent\`
+  * 32 ビット Windows: Agent 5.12 以降の Datadog Agent は、32 ビットの Windows システムには対応していません。
+* Agent `<= 5.11.x`:
+  * 64 ビット Windows: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
+  * 32 ビット Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
-[Agent 6][3] もしくは[Agent 7][2] にアップグレードして本問題を回避します。Agent 6 / Agent 7 における下位互換性のない変更点については、Agent CHANGELOG をご確認ください。
+ファイルが削除されたら、Windows サービスマネージャーから Datadog サービスを再起動します。
 
-### 証明書を削除した後でも、Agentをアップグレードする必要はありますか。
+### Agent 6 または 7 へのアップグレードによる修正
 
-最新のAgentバージョンにアップグレードすることを推奨します。自動更新が設定されているデプロイメントについては、自動的に Agent 5.32.7 にアップグレードします。
+[Agent 7][4] または [Agent 6][5] にアップグレードすることでこの問題を解決できますが、*Agent 6 および 7 の下位互換性のない変更については、Agent CHANGELOG を参照してください。*
 
-### 証明書を削除し後でも、SSL通信は暗号化されますか。
+### 証明書を削除した場合でも、Agent をアップグレードする必要がありますか？
 
-証明書を削除した後でも、Agent からの通信が暗号化されます。この証明書は、クライアントのデフォルト証明書で、SSL 接続するには必須ではありません。Datadog Agent のエンドポイントは SSL での通信のみを受信しています。
+Datadog は、Agent を最新の状態に保ち、最新バージョンに更新することをお勧めします。自動更新に設定されているデプロイの場合、5.32.7 で更新されます。
+
+### 証明書を削除しても、トラフィックは SSL で暗号化されますか？
+
+はい。証明書は、クライアントが使用するためのプリセットであり、SSL 経由で接続する必要はありません。Datadog Agent エンドポイントは SSL トラフィックのみを受け入れます。
+
+### プロキシまたは curl http クライアントを使用するように構成された Windows Agent 5.x
+
+Agent が次のいずれかのように構成されている場合、このセクションは Windows Agent 5.x (`<= 5.32.6`) に適用されます。
+
+* `datadog.conf` の `proxy_host` コンフィギュレーションオプションまたは `HTTPS_PROXY` 環境変数でプロキシを使用する、または
+* `datadog.conf` の `use_curl_http_client: yes` コンフィギュレーションオプションで curl HTTP クライアントを使用する
+
+注: `datadog.conf` は `C:\ProgramData\Datadog\datadog.conf` にあります。
+
+この場合、`datadog-cert.pem` を削除しても、Agent は Datadog への接続を回復できません。代わりに、次のアクションを実行します。
+
+* Windows Agent v5, `>= 5.12.0`: `datadog-cert.pem` ファイルを 5.32.7 に付属しているバージョンに置き換えます。Powershell CLI の使用:
+
+```shell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/5.32.7/datadog-cert.pem" -OutFile "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
+restart-service -Force datadogagent
+```
+
+* Windows Agent v5, `<= 5.11.x`: Agent が提供する `Datadog Agent Manager` プログラムを使用するか、`datadog.conf` ファイルを直接編集して、`datadog.conf` に次のオプションを設定します。
+  * 64 ビット Windows: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
+  * 32 ビット Windows: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
+
+  `datadog.conf` が更新された後、Windows サービスマネージャーから Datadog サービスを再起動します。
+
 
 [1]: https://app.datadoghq.com/agent-versions
-[2]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[3]: /agent/versions/upgrade_to_agent_v6/?tab=linux
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: https://app.datadoghq.eu/account/settings#api
-[6]: https://github.com/DataDog/dd-agent/releases/tag/5.32.7
-[7]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[8]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[3]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[4]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[5]: /ja/agent/versions/upgrade_to_agent_v6/?tab=linux

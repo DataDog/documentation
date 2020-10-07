@@ -24,7 +24,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 ## Activate log collection
 
-Collecting logs is **disabled** by default in the Datadog Agent. To lean how to enable it with the host Agent, see the instructions below. If you are running the Agent in a Kuberentes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
+Collecting logs is **disabled** by default in the Datadog Agent. To learn how to enable it with the host Agent, see the instructions below. If you are running the Agent in a Kuberentes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
 
 To enable log collection with an Agent running on your host, update the Agent's [main configuration file][4] (`datadog.yaml`) with:
 
@@ -73,7 +73,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-**Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
+**Note**: When tailing files for logs, the Datadog Agent v6 and v7 for **Windows** requires the log files have UTF8 encoding.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
@@ -169,6 +169,7 @@ List of all available parameters for log collection:
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
 | `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_                                                                                                                                                  |
+| `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.  _Added in Agent v6.23/v7.23_                                                                                     |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][11]).                                                                                                                                                                                                                                                                             |
 
 ## Further Reading

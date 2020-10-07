@@ -2,14 +2,18 @@
 aliases:
   - /ja/integrations/dnscheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - network
   - web
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
 display_name: DNS
@@ -106,4 +110,4 @@ Agent がリクエストの解決に失敗した場合は、CRITICAL を返し�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/help/

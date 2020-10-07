@@ -71,7 +71,7 @@ To revoke a shared dashboard:
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][6] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][7].
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][6] to enable the IP address include listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][7].
 
 ### Dark mode
 

@@ -2,16 +2,16 @@
 title: Page Service
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
@@ -105,9 +105,9 @@ Choisissez ce que vous souhaitez afficher dans votre liste de ressources :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization
-[2]: /fr/tracing/visualization/resource
-[3]: /fr/monitors/monitor_types/apm
-[4]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[5]: /fr/dashboards/timeboard
+[1]: /fr/tracing/visualization/
+[2]: /fr/tracing/visualization/resource/
+[3]: /fr/monitors/monitor_types/apm/
+[4]: /fr/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[5]: /fr/dashboards/timeboard/
 [6]: /fr/tracing/visualization/#resources

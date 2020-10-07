@@ -1,6 +1,9 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -34,7 +37,7 @@ Recueillez des métriques de Cacti en temps réel pour :
 - Visualiser et surveiller les états de Cacti
 - Être informé des failovers et des événements de Cacti
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -175,4 +178,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [5]: https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv
 [6]: https://github.com/pbanaszkiewicz/python-rrdtool
 [7]: https://github.com/commx/python-rrdtool/issues/25
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

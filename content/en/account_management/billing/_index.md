@@ -7,7 +7,7 @@ kind: documentation
 
 The billing cycle begins the first of the month regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
 
-Datadog meters the count of hosts, containers, and custom metrics hourly. The billable count of hosts and containers is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. We exclude the top 1% to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog.
+Datadog meters the count of hosts, containers, and custom metrics hourly. The billable count of hosts and containers is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. We exclude the top 1% to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog. Billing pages are only accessible to users with the Datadog Admin Role.
 
 ### Hosts
 
@@ -21,9 +21,9 @@ It is recommended that containers are monitored with a single containerized Agen
 
 ### Serverless
 
-Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. 
+Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded.
 
-Pro and Enterprise plans include 150,000 analyzed spans and 5 custom metrics per billed function. Billing for serverless APM depends on the total number of [Analyzed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless. 
+Pro and Enterprise plans include 150,000 analyzed spans and 5 custom metrics per billed function. Billing for serverless APM depends on the total number of [Analyzed Spans][4] exceeding the bundled quantity submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 
@@ -54,6 +54,7 @@ You can set specific email addresses to receive invoices on the [Plan][10] page 
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM & Distributed Tracing{{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring FAQ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/profiler/" >}}Continuous Profiler FAQ{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}

@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: ibm_was
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -68,7 +70,7 @@ Une fois ce changement effectué, cliquez sur « Apply » pour enregistrer la 
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 

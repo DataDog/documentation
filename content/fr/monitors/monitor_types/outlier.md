@@ -5,13 +5,13 @@ aliases:
   - /fr/guides/outliers
 description: Recevoir des alertes lorsqu'un membre d'un groupe se comporte différemment des autres
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
@@ -112,6 +112,6 @@ Les algorithmes de détection des singularités sont conçus pour identifier les
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: /fr/monitors/monitor_types/metric/#define-the-metric
-[3]: /fr/monitors/notifications
-[4]: /fr/api/#create-a-monitor
+[3]: /fr/monitors/notifications/
+[4]: /fr/api/v1/monitors/#create-a-monitor
 [5]: /fr/monitors/monitor_status/#settings

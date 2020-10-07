@@ -1,12 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/disk/README.md'
 display_name: Disk
@@ -72,4 +76,4 @@ Disk チェックには、イベントは含まれません。
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/disk/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

@@ -2,16 +2,16 @@
 title: サービス一覧画面
 kind: documentation
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -70,13 +70,13 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/send_traces
+[1]: /ja/tracing/send_traces/
 [2]: /ja/tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
-[4]: /ja/tracing/visualization/service
+[4]: /ja/tracing/visualization/service/
 [5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-[6]: /ja/tracing/guide/setting_primary_tags_to_scope
+[6]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [7]: /ja/tracing/visualization/trace/#spans
-[8]: /ja/tracing/visualization/trace
-[9]: /ja/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[8]: /ja/tracing/visualization/trace/
+[9]: /ja/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [10]: /ja/tracing/visualization/service/#service-monitor

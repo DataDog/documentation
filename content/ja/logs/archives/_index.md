@@ -9,10 +9,10 @@ aliases:
   - /ja/logs/archives/gcs/
   - /ja/logs/archives/gcp/
 further_reading:
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: ドキュメント
     text: ログエクスプローラー
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: ドキュメント
     text: Logging without Limits*
 ---
@@ -31,13 +31,105 @@ Datadog アカウントを構成して、クラウドストレージシステム
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
+
+### S3 バケットを作成する
+
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。バケットを一般が閲覧できないように設定してください。
 
-次に、ロールの委任を持つ S3 バケットにログアーカイブを書き込む権限をDatadogに付与します。
+#### ストレージクラス
 
-1. S3 バケットを持つ AWS アカウントの [AWS インテグレーション][3]をセットアップします。これには、AWS Cloudwatch と統合するために Datadog が使用する[ロールの作成][4]も含まれます。
+[S3 バケットにライフサイクルコンフィギュレーションを設定][3]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
 
-2. 次の 2 つのアクセス許可ステートメントを [Datadog ロールの IAM ポリシー][4]に追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][5]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
+[リハイドレート][4]は、Glacier および Glacier Deep Archive を除くすべてのストレージクラスをサポートしています。Glacier または Glacier Deep Archive ストレージクラスのアーカイブからリハイドレートする場合は、まずそれらを別のストレージクラスに移動する必要があります。
+
+#### サーバー側の暗号化 (SSE)
+
+##### SSE-S3
+
+サーバー側の暗号化を S3 ログアーカイブに追加するもっとも簡単な方法は、S3 のネイティブサーバーサイド暗号化 [SSE-S3][5] を利用することです。有効化するには S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
+
+{{< img src="logs/archives/log_archives_s3_encryption.png" alt="AES-256 オプションを選択し、保存します。"  style="width:75%;">}}
+
+##### SSE-KMS
+
+また、Datadog は CMK を利用した [AWS KMS][6] からのサーバーサイド暗号化もサポートしています。有効化するには次の手順に従ってください。
+
+1. CMK の作成
+2. CMK に付随する CMK ポリシーに以下のコンテンツを添加して、AWS アカウント番号と Datadog IAM ロール名を適切なものに置き換えます。
+
+```
+{
+    "Id": "key-consolepolicy-3",
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Enable IAM User Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:root"
+            },
+            "Action": "kms:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow use of the key",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:ReEncrypt*",
+                "kms:GenerateDataKey*",
+                "kms:DescribeKey"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "Allow attachment of persistent resources",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<MY_AWS_ACCOUNT_NUMBER>:role/<MY_DATADOG_IAM_ROLE_NAME>"
+            },
+            "Action": [
+                "kms:CreateGrant",
+                "kms:ListGrants",
+                "kms:RevokeGrant"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Bool": {
+                    "kms:GrantIsForAWSResource": "true"
+                }
+            }
+        }
+    ]
+}
+```
+
+3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
+
+### ログアーカイブを構成する
+
+#### AWS インテグレーションを設定する
+
+まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][7]をセットアップします。
+
+* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
+* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+
+#### アーカイブを作成する
+
+Datadog の[アーカイブページ][8]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+
+S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
+
+ {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
+
+### アクセス許可を設定する
+
+次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][4]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
 
     ```json
     {
@@ -65,24 +157,15 @@ Datadog アカウントを構成して、クラウドストレージシステム
     }
     ```
 
-3. Datadog の[アーカイブページ][6]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
-
-4. S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
-
-    {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
-
-### サーバー側の暗号化 (SSE)
-
-サーバー側の暗号化を S3 ログアーカイブに追加するには、S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。`AES-256` オプションを選択して、**Save** を選択します。
-
-{{< img src="logs/archives/log_archives_s3_encryption.png" alt="AES-256 オプションを選択し、保存します。"  style="width:75%;">}}
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[4]: /ja/integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /ja/logs/archives/rehydrating
-[6]: https://app.datadoghq.com/logs/pipelines/archives
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[4]: /ja/logs/archives/rehydrating/
+[5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[7]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
+[8]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -126,6 +209,8 @@ Datadog アカウントを構成して、クラウドストレージシステム
 {{% /tab %}}
 {{< /tabs >}}
 
+## 検証
+
 Datadog アカウントでアーカイブ設定が正常に構成された時点から、処理パイプラインは Datadog が収集したすべてのログを加工し始めます。その後アーカイブに転送されます。
 
 ただし、アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。ログは15分ごとにアーカイブにアップロードされるので、**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。
@@ -134,7 +219,10 @@ Datadog アカウントでアーカイブ設定が正常に構成された時点
 
 Datadog がストレージバケットに転送するログアーカイブは、圧縮 JSON 形式（`.json.gz`）になっています。アーカイブは、次のように指定したプレフィックスの下の (指定しなかった場合は `/`)、アーカイブファイルが生成された日時を示すディレクトリ構造に保存されます。
 
-`/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz`
+```
+/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
+/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<DATADOG_ID>.json.gz
+```
 
 このディレクトリ構造により、過去のログアーカイブを日付に基づいてクエリする処理が簡略化されます。
 
@@ -176,4 +264,4 @@ Datadog がストレージバケットに転送するログアーカイブは、
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /ja/logs/archives/rehydrating
+[1]: /ja/logs/archives/rehydrating/

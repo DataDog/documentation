@@ -3,13 +3,15 @@ aliases:
   - /ja/integrations/goexpvar
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - languages
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
 display_name: Go-Expvar
@@ -52,33 +54,49 @@ Go Expvar チェックは Agent にパッケージ化されているため、メ
 
 Go サービスで [expvar パッケージ][4]をまだ使用していない場合は、これをインポートします (`import "expvar"`)。expvar を使用して独自のメトリクスを計測しない場合 (サービスのメモリメトリクスのみを収集する場合) は、空の識別子を使用してパッケージをインポートします (`import _ "expvar"`)。サービスがまだ (http パッケージを使用して) HTTP リクエストをリスニングしていない場合は、ローカルで Datadog Agent のみを[リスニングするように設定][5]します。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
 ##### Agent の接続
 
-1. [Agent の構成ディレクトリ][6]のルートにある `conf.d/` フォルダーの `go_expvar.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル go_expvar.d/conf.yaml][7] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `go_expvar.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル go_expvar.d/conf.yaml][2] を参照してください。
 
     **注**: `metrics` リストが構成されていない場合でも、Agent は memstat メトリクスを収集します。`metrics` を使用すると、収集する expvar 変数を Agent に指示できます。
 
-2. [Agent を再起動します][8]。
+2. [Agent を再起動します][3]。
 
- **注**: Go Expvar インテグレーションでは[カスタムメトリクス][9]を送信することができますが、これはお客様の[課金][10]に影響します。デフォルトでは、メトリクス数は 350 に制限されています。メトリクスの追加が必要な場合は、[Datadog のサポートチーム][11]にお問い合わせください。
+**注**: Go Expvar インテグレーションでは[カスタムメトリクス][4]を送信することができますが、これはお客様の[課金][5]に影響します。デフォルトでは、メトリクス数は 350 に制限されています。メトリクスの追加が必要な場合は、[Datadog のサポートチーム][6]にお問い合わせください。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[5]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[6]: https://docs.datadoghq.com/ja/help/
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][12]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
-| `<INTEGRATION_NAME>` | `go_expvar`                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                            |
-| `<INSTANCE_CONFIG>`  | `{"expvar_url": "http://%%host%%:8080"}` |
+| `<インテグレーション名>` | `go_expvar`                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                            |
+| `<インスタンスコンフィギュレーション>`  | `{"expvar_url": "http://%%host%%:8080"}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行][13]し、Checks セクションの `go_expvar` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションの `go_expvar` を探します。
 
 ## 収集データ
 
@@ -96,24 +114,18 @@ Go-Expvar チェックには、サービスのチェック機能は含まれま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
-- [Expvar と Datadog を使用した Go アプリの計測][15]
+- [Expvar と Datadog を使用した Go アプリの計測][8]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/go_expvar/images/go_graph.png
 [2]: https://github.com/DataDog/datadog-go
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://golang.org/pkg/expvar
 [5]: https://golang.org/pkg/net/http/#ListenAndServe
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
-[10]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[14]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/metadata.csv
-[15]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog

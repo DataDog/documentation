@@ -17,13 +17,9 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatically Inject Trace and Span IDs
-
-Coming Soon. Reach out to [the Datadog support team][1] to learn more.
-
 ## Manually Inject Trace and Span IDs
 
-The Go tracer exposes two API calls to allow printing [trace][2] and [span][3] identifiers along with log statements using exported methods from `SpanContext` type:
+The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
 
 ```go
 package main
@@ -39,25 +35,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
     span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
     defer span.Finish()
 
-    // Retrieve Trace ID and Span ID
-    traceID := span.Context().TraceID()
-    spanID := span.Context().SpanID()
-
-    // Append them to log messages as fields:
-    log.Printf("my log message dd.trace_id=%d dd.span_id=%d", traceID, spanID)
+    // Append span info to log messages:
+    log.Printf("my log message %v", span)
 }
 ```
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][5].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id`, `dd.span_id`, `dd.service`, `dd.env` and `dd.version` are being parsed as strings. More information can be found in the [FAQ on this topic][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
-[4]: /logs/log_collection/go/#configure-your-logger
-[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+
+[1]: /logs/log_collection/go/#configure-your-logger
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

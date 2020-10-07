@@ -5,13 +5,13 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: 3 分
     text: データベースサービスの異常な p99 レイテンシーに関するアラート
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: 2 分
     text: サービスのレイテンシーを前週と比較する
   - link: /tracing/guide/slowest_request_daily/
     tag: 3 分
     text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: すべてのガイド
 ---
@@ -88,7 +88,7 @@ public class BackupLedger {
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -134,7 +134,7 @@ class BackupLedger:
         # [...]
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab "Ruby" %}}
   Ruby の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -163,7 +163,7 @@ class BackupLedger
 end
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab "Go" %}}
   Go の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -208,7 +208,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab "Node.js" %}}
   Node.js の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -232,7 +232,7 @@ function write (transactions) {
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab ".NET" %}}
   .NET の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -262,7 +262,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -270,7 +270,7 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 **ラッパーを使用してメソッドをインスツルメントする**
 
-この例では、`BackupLedger.write` メソッドにスパンを追加し、トランザクション台帳に新しい行を追加します。`dd_trace()` 関数を使用して、投稿されたすべてのトランザクションを単一のユニットとして追跡するために、1 つのスパンが追加されます。
+この例では、`BackupLedger.write` メソッドにスパンを追加し、トランザクション台帳に新しい行を追加します。`DDTrace\trace_method()` 関数を使用して、投稿されたすべてのトランザクションを単一のユニットとして追跡するために、1 つのスパンが追加されます。
 
 ```php
 <?php
@@ -285,13 +285,13 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
     }
   }
 
-  // dd_trace() を使用してカスタムメソッドをトレースします
-  dd_trace('BackupLedger', 'write', function () {
-    $tracer = \DDTrace\GlobalTracer::get();
-    $scope = $tracer->startActiveSpan('BackupLedger.write');
-    dd_trace_forward_call();
-    $scope->close();
-    return $result;
+  // ddtrace v0.47.0 以前の場合、\dd_trace_method() を使用
+  \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
+    // SpanData::$name のデフォルトは、設定されていない場合 'ClassName.methodName' (v0.47.0 以降)
+    $span->name = 'BackupLedger.write';
+    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name if not set (v0.47.0 以降)
+    $span->resource = 'BackupLedger.write';
+    $span->service = 'php';
   });
 ?>
 ```
@@ -306,10 +306,10 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
     public function write(array $transactions) {
       foreach ($transactions as $transaction) {
-        // グローバルトレーサーを使用してインラインコードのブロックをトレースします
+        // グローバルトレーサーを使用してインラインコードのブロックをトレース
         $scope = \DDTrace\GlobalTracer::get()->startActiveSpan('BackupLedger.persist');
 
-        // スパンにカスタムメタデータを追加します
+        // スパンにカスタムメタデータを追加
         $scope->getSpan()->setTag('transaction.id', $transaction->getId());
         $this->transactions[$transaction->getId()] = $transaction;
 
@@ -321,18 +321,18 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
     }
   }
 
-  // dd_trace() を使用してカスタムメソッドをトレースします
-  dd_trace('BackupLedger', 'write', function () {
-    $tracer = \DDTrace\GlobalTracer::get();
-    $scope = $tracer->startActiveSpan('BackupLedger.write');
-    dd_trace_forward_call();
-    $scope->close();
-    return $result;
+  // ddtrace v0.47.0 以前の場合、\dd_trace_method() を使用
+  \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
+    // SpanData::$name のデフォルトは、設定されていない場合 'ClassName.methodName' (v0.47.0 以降)
+    $span->name = 'BackupLedger.write';
+    // SpanData::$resource のデフォルトは、設定されていない場合 SpanData::$name if not set (v0.47.0 以降)
+    $span->resource = 'BackupLedger.write';
+    $span->service = 'php';
   });
 ?>
 ```
 
-[1]: /ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -362,4 +362,4 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/search/analytics
-[4]: /ja/tracing/guide/add_span_md_and_graph_it
+[4]: /ja/tracing/guide/add_span_md_and_graph_it/

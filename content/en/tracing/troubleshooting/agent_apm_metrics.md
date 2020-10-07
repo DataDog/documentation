@@ -6,7 +6,7 @@ aliases:
     - /tracing/send_traces/agent-apm-metrics/
 ---
 
-Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent when [APM is enabled][1]:
+Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent when [APM is enabled][1]. Import the [APM monitoring dashboard][2] in your Datadog account in order to get an out of the box dashboard exploiting most of those metrics.
 
 | METRIC NAME                                         | TYPE      | DESCRIPTION                                                                                              |
 | --------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
@@ -69,3 +69,4 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 | datadog.trace_agent.trace_writer.traces             | Count     | Number of traces processed.                                                                              |
 
 [1]: /tracing/setup/
+[2]: /resources/json/APM_monitoring_dashboard.json

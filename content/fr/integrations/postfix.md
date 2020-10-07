@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs:
+    source: postfix
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -38,7 +40,7 @@ supported_os:
 
 Ce check surveille la taille de toutes les files d'attente Postfix.
 
-## Implémentation
+## Configuration
 
 ### Installation
 

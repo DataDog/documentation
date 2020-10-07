@@ -3,6 +3,7 @@ aliases:
   - /fr/integrations/goexpvar
 assets:
   dashboards: {}
+  logs: {}
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -40,7 +41,7 @@ Surveillez l'utilisation de la mémoire de vos services Go et recueillez des mé
 
 Si vous préférez instrumenter votre Go en utilisant seulement [dogstats-go][2], vous pouvez tout de même utiliser cette intégration pour recueillir des métriques relatives à la mémoire.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -54,7 +55,7 @@ Si votre service Go n'utilise pas déjà le [paquet Expvar][4], importez-le (`im
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Associer l'Agent
 

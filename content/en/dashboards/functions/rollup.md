@@ -29,6 +29,16 @@ The following bar graph displays the same metric, graphed using a day-long rollu
 
 {{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2"  style="width:60%;" >}}
 
+## Moving Rollup
+
+
+| Function        | Description                                    | Example |
+|------------------|------------------------------------------------|------------------|
+| `moving_rollup` | Rollup to combine the points in the last X seconds. | `moving_rollup(<METRIC_NAME>, <TIME> , <METHOD>)` |
+
+
+Applying the `moving_rollup()` function to a query allows you to combine points from the most recent specified time range—that is, the last X seconds. Like with `.rollup()`, `<METHOD>` can be `sum`/`min`/`max`/`count`/`avg` and defines how data points are aggregated within the given time interval.
+
 ## Rollup Interval: Enforced vs Custom
 
 When graphing, Datadog imposes a limit of 350 points per graph. In order to respect this limit, Datadog rolls up data points automatically with the `avg` method, effectively displaying the average of all data points within a time interval for a given metric.
@@ -51,6 +61,7 @@ Rollups should usually be avoided in [monitor][4] queries, because of the possib
     {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}

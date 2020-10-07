@@ -2,14 +2,18 @@
 aliases:
   - /ja/integrations/vmware/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md'
 display_name: vSphere
@@ -48,17 +52,7 @@ vSphere チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 vCenter の **管理** セクションで、`datadog-readonly` という読み取り専用ユーザーを追加します。
 
-次に、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `vsphere.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル vsphere.d/conf.yaml][4] を参照してください。
-
-```YAML
-init_config:
-
-instances:
-  - name: main-vcenter # メトリクスを 'vcenter_server:main-vcenter' のようにタグ付けします。
-    host: <VCENTER_HOSTNAME>          # 例：myvcenter.example.com
-    username: <USER_YOU_JUST_CREATED> # 例：datadog-readonly@vsphere.local
-    password: <PASSWORD>
-```
+次に、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `vsphere.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル vsphere.d/conf.yaml][4] を参照してください。
 
 [Agent を再起動][5]すると、vSphere メトリクスとイベントが Datadog に送信されます。
 
@@ -66,38 +60,17 @@ instances:
 
 ### 互換性
 
-Agent バージョン 6.5.0/5.27.0 に付属しているバージョン 3.3.0 以降のチェックでは、vCenter から収集するメトリクスを新しいオプションパラメーター `collection_level` で選択できるようになり、オプションパラメーター `all_metrics` は非推奨になりました。この変更に伴い、インテグレーションによって Datadog へ送信されるメトリクスの名前が変更され、vCenter が公開するメトリクスのロールアップタイプを指定するサフィックス (`.avg`、`.sum`など) が加えられました。
-
-バージョン 3.3.0 以降では、デフォルトで、`collection_level` は 1 に設定され、サフィックスが追加された新しいメトリクス名がインテグレーションによって送信されます。
-
-以下では、vSphere インテグレーションを使用する際に考えられるシナリオごとに説明します。
-
-1. これまでインテグレーションを使用したことがなく、バージョン 6.5.0+ / 5.27.0+ の Agent をインストールしたばかりの場合は、特別な作業は必要ありません。インテグレーションを使用し、`collection_level` を構成し、Datadog でメトリクスを表示します。
-
-2. 6.5.0/5.27.0 より古い Agent でインテグレーションを使用しており、新しいバージョンにアップグレードした場合。
-
-   - 構成で `all_metrics` パラメーターを `true` または `false` に明示的に設定していれば、これまでと何も変わりません (同じメトリクスが Datadog に送信されます)。ただし、`all_metrics` は非推奨になり、最終的には削除されるため、新しい `collection_level` パラメーターに切り替える前に、新しいメトリクス名を使用するようにダッシュボードとモニターを更新する必要があります。
-   - 構成で `all_metrics` パラメーターを指定していなければ、アップグレードされたインテグレーションは、デフォルトで `collection_level` パラメーターを 1 に設定し、メトリクスを新しい名前で Datadog に送信します。
-     **警告**: この場合、送信されなくなった非推奨のメトリクスを使用しているダッシュボードのグラフやモニターは機能しなくなります。これを防ぐには、構成で `all_metrics: false` を明示的に設定して、同じメトリクスが引き続き報告されるようにします。その後、新しいメトリクスを使用するようにダッシュボードとモニターを更新してから、`collection_level` の使用に切り替えます。
-
-#### 構成オプション
-
-| オプション                   | 必須 | 説明                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ssl_verify`              | いいえ       | vCenter に接続する際の SSL 検証を無効にするには、false に設定します。                                                                                                                                                                                                                                                                                            |
-| `ssl_capath`              | いいえ       | PEM 形式の CA 証明書を含むディレクトリの絶対ファイルパスを設定します。                                                                                                                                                                                                                                                                           |
-| `host_include_only_regex` | いいえ       | このチェックで、これらの ESXi ホストとそこで実行されている VM のメトリクスのみを取得する場合は、このような正規表現を使用します。                                                                                                                                                                                                                                                |
-| `vm_include_only_regex`   | いいえ       | パターンに一致する VM のみを含めるために正規表現を使用します。                                                                                                                                                                                                                                                                                              |
-| `include_only_marked`     | いいえ       | 値 'DatadogMonitored' を使用してカスタムフィールドとしてマークされた vSphere VM のメトリクスのみを収集する場合は、true に設定します。カスタムフィールドを設定するには、UI を使用してタグを適用するか、[PowerCLI][6] で CLI を使用します。VSphere 5.1 で動作する例: `Get-VM VM | Set-CustomField -Name "DatadogMonitored" -Value "DatadogMonitored"`. |
-| `collection_level`        | いいえ       | 送信するメトリクスの数を指定する 1 ～ 4 の数値。1 は重要な監視メトリクスのみを送信し、4 は取得可能なすべてのメトリクスを送信することを意味します。                                                                                                                                                                                                                 |
-| `all_metrics`             | いいえ       | (非推奨) true に設定すると、vCenter からすべてのメトリクスが収集されます。この場合、メトリクスは大量になります。false に設定すると、監視対象として選択した一部のメトリクスだけが収集されます。                                                                                                                                                           |
-| `event_config`            | いいえ       | イベント構成は辞書です。現在、オンにできるスイッチは `collect_vcenter_alarms` だけです。これは、vCenter でイベントとして設定されているアラームを送信します。                                                                                                                                                                                                                  |
+Agent バージョン 6.18.0/7.18.0 に付属のチェックバージョン 5.0.0 より、インテグレーションの新しい実装が導入されたことに伴い、コンフィギュレーションの変更が必要になりました。後方互換を維持するため、`use_legacy_implementation` というコンフィギュレーションパラメーターが一時的に利用可能になっています。
+インテグレーションの旧バージョンをアップグレードする際、このパラメーターはコンフィグで未設定となっており、これまでの実装が強制されます。
+初めてインテグレーションを構成する場合、または新機能 (タグ収集や高度なフィルターオプションなど) を利用したい場合は、[サンプル vsphere.d/conf.yaml][4] コンフィギュレーションファイルを参照してください。特に、`use_legacy_implementation: false` を必ず設定するようにしてください。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `vsphere` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `vsphere` を探します。
 
 ## 収集データ
+
+チェックコンフィギュレーションで設定した `collection_level` の値によっては、以下のすべてのメトリクスが収集されるわけではありません。特定の収集レベルでどのメトリクスが収集されるかを確認するには、[Vsphere データ収集レベルのドキュメント][7]を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "vsphere" >}}
@@ -105,11 +78,10 @@ Agent バージョン 6.5.0/5.27.0 に付属しているバージョン 3.3.0 �
 
 ### イベント
 
-このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のタイプのイベントは送信されません。
+このチェックは vCenter イベントマネージャーでイベントを監視し、それを Datadog に送信します。以下のイベントタイプを送信します。
 
 - AlarmStatusChangedEvent:Gray
 - VmBeingHotMigratedEvent
-- VmResumedEvent
 - VmReconfiguredEvent
 - VmPoweredOnEvent
 - VmMigratedEvent
@@ -142,8 +114,8 @@ Datadog を使用した vSphere 環境の監視については、Datadog の[ブ
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.powercli.cmdletref.doc%2FSet-CustomField.html
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.monitoring.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html
 [8]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
-[9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
+[9]: https://docs.datadoghq.com/ja/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
 [10]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

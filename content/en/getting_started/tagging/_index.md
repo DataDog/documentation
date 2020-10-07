@@ -1,22 +1,22 @@
 ---
 title: Getting started with tags
 kind: documentation
-description: "Learn how to assign and use Tags with Datadog."
+description: 'Learn how to assign and use Tags with Datadog.'
 aliases:
     - /getting_started/getting_started_with_tags
     - /guides/getting_started/tagging/
     - /developers/getting_started/tagging/
     - /tagging
 further_reading:
-- link: "/getting_started/tagging/assigning_tags/"
-  tag: "Documentation"
-  text: "Learn how to assign tags"
-- link: "/getting_started/tagging/unified_service_tagging/"
-  tag: "Documentation"
-  text: "Configure unified service tagging"
-- link: "/getting_started/tagging/using_tags/"
-  tag: "Documentation"
-  text: "Explore how to use tags in the Datadog app"
+    - link: '/getting_started/tagging/assigning_tags/'
+      tag: 'Documentation'
+      text: 'Learn how to assign tags'
+    - link: '/getting_started/tagging/unified_service_tagging/'
+      tag: 'Documentation'
+      text: 'Configure unified service tagging'
+    - link: '/getting_started/tagging/using_tags/'
+      tag: 'Documentation'
+      text: 'Explore how to use tags in the Datadog app'
 ---
 
 ## Introduction
@@ -26,7 +26,7 @@ Tags are a way of adding dimensions to Datadog telemetries so they can be filter
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
 | Tag Key   | Allows for                                                            |
-|-----------|-----------------------------------------------------------------------|
+| --------- | --------------------------------------------------------------------- |
 | `host`    | Correlation between metrics, traces, processes, and logs              |
 | `device`  | Segregation of metrics, traces, processes, and logs by device or disk |
 | `source`  | Span filtering and automated pipeline creation for log management     |
@@ -46,12 +46,12 @@ Below are Datadog's tagging requirements:
 
 1. Tags must **start with a letter** and after that may contain the characters listed below:
 
-    * Alphanumerics
-    * Underscores
-    * Minuses
-    * Colons
-    * Periods
-    * Slashes
+    - Alphanumerics
+    - Underscores
+    - Minuses
+    - Colons
+    - Periods
+    - Slashes
 
     Other special characters are converted to underscores.
 
@@ -62,7 +62,7 @@ Below are Datadog's tagging requirements:
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
     | Tag                | Key           | Value          |
-    |--------------------|---------------|----------------|
+    | ------------------ | ------------- | -------------- |
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
@@ -74,24 +74,23 @@ Below are Datadog's tagging requirements:
 
 Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
 
-| Method                       | Assign tags                                                                                  |
-|------------------------------|----------------------------------------------------------------------------------------------|
-| [Configuration Files][4]     | Manually in your main Agent or integration configuration files. |
-| [UI][5]                      | In the Datadog App                                                                     |
-| [API][6]                     | When using Datadog's API                                                                          |
-| [DogStatsD][7]               | When submitting metrics via DogStatsD                                                        |
+| Method                   | Assign tags                                                     |
+| ------------------------ | --------------------------------------------------------------- |
+| [Configuration Files][4] | Manually in your main Agent or integration configuration files. |
+| [UI][5]                  | In the Datadog App                                              |
+| [API][6]                 | When using Datadog's API                                        |
+| [DogStatsD][7]           | When submitting metrics via DogStatsD                           |
 
 #### Unified service tagging
 
 As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][8] documentation.
-
 
 ## Using Tags
 
 After you have [assigned tags][3] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
-|----------------------|--------------------------------------------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------------------------------------------ |
 | [Events][10]         | Filter the event stream                                                                          |
 | [Dashboards][11]     | Filter and group metrics on graphs                                                               |
 | [Infrastructure][12] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
@@ -101,7 +100,9 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 | [APM][16]            | Filter App Analytics or jump to other areas with the service map                                 |
 | [Notebooks][17]      | Filter and group metrics on graphs                                                               |
 | [Logs][18]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
-| [Developers][19]     | Pull information or setup different areas in the UI with the API                                 |
+| [SLOs][19]           | Search for SLOs, grouped metric-based SLOs, grouped monitor-based SLOs                           |
+| [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |
+| [Billing][21]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id` |
 
 ### Further Reading
 
@@ -125,4 +126,6 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 [16]: /getting_started/tagging/using_tags/#apm
 [17]: /getting_started/tagging/using_tags/#notebooks
 [18]: /getting_started/tagging/using_tags/#logs
-[19]: /getting_started/tagging/using_tags/#developers
+[19]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
+[20]: /getting_started/tagging/using_tags/#developers
+[21]: /account_management/billing/usage_attribution/

@@ -5,11 +5,11 @@ description: API テストのエラーの詳細な説明
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: ブログ
-  text: Datadog Synthetics の紹介
-- link: synthetics/
+  text: Datadog Synthetic モニタリングの紹介
+- link: /synthetics/
   tag: Documentation
   text: チェックを管理する
-- link: synthetics/browser_tests
+- link: /synthetics/browser_tests/
   tag: Documentation
   text: ブラウザーテストの設定
 ---

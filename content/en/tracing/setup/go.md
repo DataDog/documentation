@@ -34,31 +34,37 @@ Consult the [migration document][5] if you need to migrate from an older version
 
 ### Installation
 
-If you already have a Datadog account you can find [step-by-step instructions][6] in our in-app guides for either host-based or container-based set ups.
+#### Follow the in-app documentation (Recommended)
 
-First [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
+Follow the [Quickstart instructions][6] within the Datadog app for the best experience, including:
+
+- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
+- Dynamically set `service`, `env`, and `version` tags.
+- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+
+Otherwise, [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 
 Next, install the Go tracer from its canonical import path:
 
 ```go
-go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+go get gopkg.in/DataDog/dd-trace-go.v1/...
 ```
 
 You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section][10]. Note that packages must be imported.
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. A list of these packages can be found in the [Compatibility Requirements][1] page.  To trace these integrations, import these packages into your application and follow the configuration instructions listed alongside each [Integration][1].
 
 
 
 ## Configuration
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][72].
+See all available options in the [configuration documentation][10].
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][73] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][11] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -73,8 +79,11 @@ func main() {
     tracer.Start(
         tracer.WithEnv("prod"),
         tracer.WithService("test-go"),
-        tracer.WithVersion("abc123"),
+        tracer.WithServiceVersion("abc123"),
     )
+
+    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
+    // Make sure this line stays in your main function.
     defer tracer.Stop()
 }
 ```
@@ -106,7 +115,7 @@ func main() {
 
 ## Configure APM Environment Name
 
-The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][13] start option of the tracer.
+The [APM environment name][12] may be configured [in the agent][13] or using the [WithEnv][10] start option of the tracer.
 
 ### B3 Headers Extraction and Injection
 
@@ -139,11 +148,11 @@ extracted value is used.
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /tracing/send_traces/
-[7]: https://app.datadoghq.com/apm/install
+[6]: https://app.datadoghq.com/apm/docs
+[7]: /tracing/send_traces/
 [8]: /tracing/setup/docker/
 [9]: /agent/kubernetes/apm/
-[10]: https://docs.datadoghq.com/tracing/compatibility_requirements/go/
-[11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[12]: /getting_started/tracing/#environment-name
-[13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
+[10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
+[11]: /getting_started/tagging/unified_service_tagging
+[12]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[13]: /getting_started/tracing/#environment-name

@@ -3,6 +3,8 @@ aliases:
   - /ja/integrations/powerdns
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,7 +12,7 @@ categories:
   - network
   - autodiscovery
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
 display_name: PowerDNS Recursor
@@ -74,11 +76,14 @@ pdns_recursor 4.1 以上を実行している場合は、`api-key` のみを設�
 
 Recursor を再起動すると、統計 API が有効になります。
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### ホスト
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `powerdns_recursor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル powerdns_recursor.d/conf.yaml][3] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `powerdns_recursor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル powerdns_recursor.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -115,21 +120,31 @@ Recursor を再起動すると、統計 API が有効になります。
        version: 3
    ```
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][3]。
+
+[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Containerized" %}}
 
 #### コンテナ化
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][5]のガイドを参照して、次のパラメーターを適用してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 | パラメーター            | 値                                                                            |
 | -------------------- | -------------------------------------------------------------------------------- |
-| `<INTEGRATION_NAME>` | `powerdns_recursor`                                                              |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                    |
-| `<INSTANCE_CONFIG>`  | `{"host":"%%host%%", "port":8082, "api_key":"<POWERDNS_API_KEY>", "version": 3}` |
+| `<インテグレーション名>` | `powerdns_recursor`                                                              |
+| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                    |
+| `<インスタンスコンフィギュレーション>`  | `{"host":"%%host%%", "port":8082, "api_key":"<POWERDNS_API_KEY>", "version": 3}` |
+
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `powerdns_recursor` を探します。
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `powerdns_recursor` を探します。
 
 ## 収集データ
 
@@ -149,13 +164,9 @@ Agent が Recursor の統計 API に接続できない場合は、CRITICAL を�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/ja/help/

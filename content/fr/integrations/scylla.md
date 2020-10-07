@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Scylla Overview: assets/dashboards/overview.json
+  logs: {}
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

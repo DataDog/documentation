@@ -1,90 +1,82 @@
 ---
-title: Azure AD を SAML IdP として構成する方法
+title: Azure Active Directory SAML IdP
 kind: documentation
 aliases:
   - /ja/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントのための SAML の構成
-  - link: account_management/multi_organization
+  - link: /account_management/multi_organization/
     tag: Documentation
     text: 複数のアカウントを持つチームとオーガニゼーションの構成
 ---
-ここでは、Datadog で Azure AD を SAML IdP として構成する手順を説明します。
-**注**: この設定には、Azure AD の Premium サブスクリプションが必要です。
+次の手順に従って、Azure AD を Datadog 内の SAML ID プロバイダー (IdP) として構成します。**注**: Azure AD プレミアムサブスクリプションが必要です。
 
 ## コンフィグレーション
+### Azure
 
-1. `https://portal.azure.com/` に移動します。
+1. [Azure ポータル][1]を開き、グローバル管理者または共同管理者としてサインインします。
 
-2. Azure にログインしたら、左側のメニューで Azure Active Directory タブに移動します。
+2. _Azure Active Directory_ -> _Enterprise applications_ -> _New application_ に移動します。
 
-3. **エンタープライズアプリケーション**サービスを選択します。
+3. **Add from the gallery** セクションまでスクロールし、検索ボックスに **Datadog** と入力します。
 
-4. **新しいアプリケーション**ボタンをクリックします。
+4. 結果パネルから **Datadog** を選択します。
 
-5. **ギャラリー以外のアプリケーション**を選択します。
+5. **Name** テキストボックスにアプリケーションの名前を入力し、**Add** をクリックします。
 
-    {{< img src="account_management/saml/non_gallery_application.png" alt="ギャラリー以外のアプリケーション"  style="width:20%;">}}
+6. アプリケーションを追加したら、アプリケーションの左側のナビゲーションメニューから **Single sign-on** に移動します。
 
-6. アプリケーションに名前を付けます (例: **DatadogSSO_test**)。
+7. **Select a single sign-on method** ページで、**SAML** をクリックします。
 
-7. **追加**をクリックします。
+8. [Datadog SAML ページ][2]から `Service Provider Entity ID` と `Assertion Consumer Service URL` を取得します。デフォルト値は次のとおりです。
 
-8. アプリケーションが正しく追加されたら、**シングルサインオンを構成する (必須)**に移動します。
+    |                                |                                                                            |
+    |--------------------------------|----------------------------------------------------------------------------|
+    | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
 
-9. シングルサインオンのモードとして **SAML ベースのサインオン**を選択します。
+9.  Azure で、上記で取得した値を追加し、保存をクリックします。
 
-    {{< img src="account_management/saml/saml_based_sign_on.png" alt="SAML ベースのサインオン"  style="width:70%;">}}
+    `Service Provider Entity ID` を **Identifier** に<br>
+    `Assertion Consumer Service URL` を **Reply URL** に
 
-10. [Datadog の SAML ページ][1]に移動し、ページの右側で、**Service Provider Entity ID** と **Assertion Consumer Service** の URL を見つけます。これらの URL の値をコピーして、**識別子**と**応答 URL** のテキストフォームにそれぞれ貼り付けます。
-    Datadog で以下をコピーします。
+10. **User Identifier** を `user.mail` に設定し、保存をクリックします。
 
-    {{< img src="account_management/saml/Step10Redo.png" alt="Step10Redo"  style="width:70%;">}}
+11. **SAML Signing Certificate** セクションに移動し、**Notification Email** が正しいことを確認します。アクティブな署名証明書の有効期限が近づくと、証明書の更新手順が記載された通知が、この電子メールアドレスに送信されます。
 
-    Azure ポータルで貼り付けます。
+12. 同じ **SAML Signing Certificate** セクションで、**Federation Metadata XML** を見つけ、Download を選択して証明書をダウンロードし、保存します。
 
-    {{< img src="account_management/saml/set_values_azure.png" alt="Azure の値を設定"  style="width:70%;">}}
+### Datadog
 
-11. **ユーザー識別子**の値として、`user.mail` を設定します。
+1. [Datadog SAML ページ][2]に移動します。
 
-    {{< img src="account_management/saml/user_identifier.png" alt="ユーザーの識別子"  style="width:70%;">}}
+2. Azure からダウンロードした **SAML XML Metadata** ファイルを選択してアップロードします。
 
-12. ページ下部の**通知用電子メール**に入力します。アクティブな署名証明書の有効期限が近づくと、証明書の更新手順が記載された通知が、この電子メールアドレスに送信されます。
-
-    {{< img src="account_management/saml/notification_email.png" alt="通知メール"  style="width:70%;">}}
-
-13. 手順 5 のページの下部にある **DatadogSSO_test の構成**をクリックします。
-
-14. DatadogSSO_test の構成の手順 3 まで下へスクロールして、シングルサインオンセクションを見つけ、**SAML XML メタデータ**ファイルをダウンロードします。
-
-15. **SSO 構成セクション**のトップに移動し、**保存**をクリックします。
-
-16. [Datadog の SAML ページ][1]に戻り、手順 14 でダウンロードした **SAML XML メタデータ**ファイルをアップロードします。
-
-    {{< img src="account_management/saml/SAML_Configuration___Datadog10.png" alt="SAML_Configuration___Datadog10"  style="width:70%;">}}
-
-17. アップロードする XML ファイルを選択してから、必ず **Upload File** ボタンを押してください。
-
-18. これで完了です。SAML is ready と表示され、有効な IdP メタデータがインストールされていることが示されます。
+3. **SAML is ready** と **Valid IdP metadata installed** というメッセージが表示されます。
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11"  style="width:70%;">}}
 
-19. **Enable** を押すと、Azure AD から Datadog にログインできるようになります。
+4. **Enable** をクリックして、SAML での Azure AD シングルサインオンの使用を開始します。
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog12.png" alt="SAML_Configuration___Datadog12"  style="width:70%;">}}
 
-## オプション
+## 高度な URL
 
-Datadog のボタンやリンクから SSO を使用する場合は、サインオン URL を追加する必要があります。それには、Azure アプリケーションの SSO 構成セクション (手順 8) に戻り、**詳細な URL 設定の表示**をチェックします。
+Datadog ボタンまたはリンクで SSO を使用している場合は、サインオン URL が必要です。
 
-次に、[Datadog の SAML ページ][1]に表示されるシングルサインオン URL を貼り付けます。
+1. [Datadog SAML ページ][2]からシングルサインオン URL を取得します。
 
-{{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:60%;">}}
+    {{< img src="account_management/saml/SAML_Configuration___Datadog13.png" alt="SAML_Configuration___Datadog13"  style="width:70%;">}}
+
+2. Azure で、Azure Application の SSO Configuration セクションに移動し、**Show advanced URL settings** をオンにして、シングルサインオン URL を追加します。
+
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/saml/saml_setup
+
+[1]: https://portal.azure.com
+[2]: https://app.datadoghq.com/saml/saml_setup
