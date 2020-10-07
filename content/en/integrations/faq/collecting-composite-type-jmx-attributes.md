@@ -75,7 +75,7 @@ The best way to achieve this would be using JMXterm (see below).
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:<PORT> -u <USER> -p <PASSWORD>
 ```
 
-Note, for all versions of **Agent v6**, the `jmxterm` JAR is not shipped with the Agent. To download and use `jmxterm`, see the [upstream project][7].
+Note, for all versions of **Agent v5.32.8 or greater**, the `jmxterm` JAR is not shipped with the Agent. To download and use `jmxterm`, see the [upstream project][7].
 
 Then use the get command to pull up a specific metric.
 
