@@ -25,11 +25,11 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env` and `version` tags.
-- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+- Enable the Continuous Profiler, sending 100% of traces, and Trace ID injection into logs during setup.
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-Otherwise, to begin tracing applications written in any language: 
+Otherwise, to begin tracing applications written in any language:
 
 1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
@@ -58,7 +58,7 @@ In the administrative console:
 
 1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
 2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+3. In the **Additional Properties** section, click **Java Virtual Machine**.
 4. In the **Generic JVM arguments** text field, enter:
 
 ```text
@@ -135,11 +135,11 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 
 
 - If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
-   
+
    ```text
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
-   
+
      For more information, see the [Oracle documentation][6].
 
 - `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].

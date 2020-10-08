@@ -31,7 +31,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+- Enable the Continuous Profiler, sending 100% of traces, and Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in Python, first [install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
@@ -74,8 +74,6 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 | `DD_TRACE_AGENT_URL`               |             | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.  |
 | `DATADOG_PRIORITY_SAMPLING`        | `true`      | Enable [Priority Sampling][10].                                                                                                                                                                                                                                              |
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and trace injection][11].                                                                                                                                                                                                                           |
-| `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][12].                                                                                                                                                                                                                   |
-| `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
 
 ## Change Agent Hostname
 
@@ -108,4 +106,3 @@ tracer.configure(
 [9]: /tracing/guide/setting_primary_tags_to_scope/
 [10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [11]: /tracing/connect_logs_and_traces/python/
-[12]: /tracing/app_analytics/?tab=python#automatic-configuration
