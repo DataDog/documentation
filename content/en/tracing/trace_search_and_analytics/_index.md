@@ -24,7 +24,11 @@ Fine-grained ingestion controls can also be set per service instrumented with Da
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-In Live Search mode, Datadog displays spans as soon as they are sent by the Datadog Agent and before they are indexed by Datadog, and the spans are available for 15 minutes. All spans ingested by Datadog are displayed without any sampling (Tracing without Limits™). With the APM Live Search you can:
+In Live Search mode, Datadog displays spans as soon as they are sent by the Datadog Agent and before they are indexed by Datadog, and the spans are available for 15 minutes. All spans ingested by Datadog are displayed without any sampling (Tracing without Limits™).
+
+{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
+
+With the APM Live Search you can:
 
 - Write search queries to refine the stream of traces by any tag on any span. For example, monitor that a new deployment went smoothly by filtering on `version_id` of all tags
 - View 100% of trace spans as they are ingested. For example, view outage related information in real-time as it happens related to specific `org_id` or `customer_id` associated with a child span. Note that there is no sampling on ingested spans for 15 minutes.
@@ -32,8 +36,6 @@ In Live Search mode, Datadog displays spans as soon as they are sent by the Data
 - View Live timeseries visualization of key RED metrics: requests per second, errors, and latency. For example, monitor load test and performance impact on your endpoints by filtering on the duration of a child resource.
 - Run one-click search queries on any span or tag directly from the trace panel view.
 - Add, remove, and sort columns from span tags for a customized view.
-
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 The number of received spans per second is displayed at the top of the traces table, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity but are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
