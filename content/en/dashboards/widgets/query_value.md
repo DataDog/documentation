@@ -28,7 +28,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][1] to configure a metric query.
-    * indexed spans: See [the trace search documentation][2] to configure an indexed span query.
+    * Indexed spans: See [the trace search documentation][2] to configure an Indexed span query.
     * Log Events: See [the log search documentation][3] to configure a log event query.
 2. Choose the units and the formatting.
 3. Optional: configure a conditional format depending on the value displayed.

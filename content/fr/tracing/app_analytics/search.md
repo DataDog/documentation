@@ -132,7 +132,7 @@ Dans le flux de traces, sélectionnez **View in App Analytics** pour consulter l
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="Span analysée de trace"  >}}
 
-Si vous sélectionnez l'option **Traces**, les spans analysées affichées dans le flux de traces sont associées à un échantillon de trace. Si vous sélectionnez l'option **indexed spans**, le flux de traces affiche uniquement les spans analysées.
+Si vous sélectionnez l'option **Traces**, les spans analysées affichées dans le flux de traces sont associées à un échantillon de trace. Si vous sélectionnez l'option **Indexed spans**, le flux de traces affiche uniquement les spans analysées.
 
 Lorsqu'une requête parvient à un [service][4] (par exemple, un serveur Web ou une base de données), l'Agent Datadog crée une span analysée. Il s'agit d'un enregistrement de la requête qui inclut sa durée, le code de réponse et toutes les [métadonnées personnalisées][5]. Une span analysée correspond à une span unique accompagnée de métadonnées concernant la requête gérée. Pour chaque service qui reçoit une requête, l'Agent crée une span analysée. Si une requête transite par un service Web, un service de référencement et un service de base de données, cette requête génère 3 spans analysées. Pour réduire le nombre de spans analysées générées, [activez ou désactivez explicitement toute collecte de spans analysées pour un service spécifique][6]. Pour commencer à recueillir des spans analysées, [activez la fonction App Analytics pour vos services][6].
 

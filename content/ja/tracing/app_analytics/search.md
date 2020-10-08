@@ -127,15 +127,15 @@ further_reading:
 
 トレースストリームは、選択されたコンテキストに一致するトレースのリストです。コンテキストは、[検索バー](#search-bar)のフィルターと[タイムレンジ](#time-range)で定義されます。
 
-### トレースと indexed span
+### トレースと Indexed span
 
-トレースストリームで、**App Analytics で表示**を選択しトレースと indexed span を表示します。右上の **Traces** ボタンをクリックし、indexed span に関連付けられたサンプリングトレースを表示することを選択します。
+トレースストリームで、**App Analytics で表示**を選択しトレースと Indexed span を表示します。右上の **Traces** ボタンをクリックし、Indexed span に関連付けられたサンプリングトレースを表示することを選択します。
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
-**Traces** が選択された場合、トレースストリームにリストされている indexed span には、サンプリングトレースが関連付けられています。**indexed spans** が選択された場合、indexed span のみがトレースストリームにリストされます。
+**Traces** が選択された場合、トレースストリームにリストされている Indexed span には、サンプリングトレースが関連付けられています。**Indexed spans** が選択された場合、Indexed span のみがトレースストリームにリストされます。
 
-リクエストが[サービス][4]（ウェブサーバー、データベースなど）にヒットすると、Datadog Agent は indexed span を作成します。これは期間、応答コード、[カスタムメタデータ][5]を含むリクエストの記録です。indexed span は、処理されたリクエストのメタデータが添付された単一のスパンで表されます。リクエストを受け取った各サービスに対して、Agent は indexed span を作成します。リクエストがウェブサービス、リストサービス、データベースサービスを介して実行される場合、リクエストは 3 つの indexed span を生成します。生成される indexed span の量を減らすには、[特定のサービスの indexed span コレクションを明示的にオン/オフにします][6]。indexed span の収集を開始するには、[サービスの App Analytics を有効にします][6]。
+リクエストが[サービス][4]（ウェブサーバー、データベースなど）にヒットすると、Datadog Agent は Indexed span を作成します。これは期間、応答コード、[カスタムメタデータ][5]を含むリクエストの記録です。Indexed span は、処理されたリクエストのメタデータが添付された単一のスパンで表されます。リクエストを受け取った各サービスに対して、Agent は Indexed span を作成します。リクエストがウェブサービス、リストサービス、データベースサービスを介して実行される場合、リクエストは 3 つの Indexed span を生成します。生成される Indexed span の量を減らすには、[特定のサービスの Indexed span コレクションを明示的にオン/オフにします][6]。Indexed span の収集を開始するには、[サービスの App Analytics を有効にします][6]。
 
 ### 完全なトレースの表示
 

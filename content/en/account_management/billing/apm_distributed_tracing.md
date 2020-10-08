@@ -3,13 +3,13 @@ title: APM Billing
 kind: documentation
 ---
 
-[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [App Analytics][2] feature with APM allows you to slice and dice your application data with indexed spans using completely customizable tags.
+[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [App Analytics][2] feature with APM allows you to slice and dice your application data with Indexed spans using completely customizable tags.
 
 | Billing Parameter  | Price                                      | App Analytics                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [APM Host][3]      | $31 per underlying [APM host][3] per month | 1 million additional indexed spans included per month with every APM host.   | Datadog records the number of [APM hosts][4] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][4] |
-| [Fargate][3]       | $2 per concurrent task per month           | No indexed spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]              |
-| [indexed span][4] | $1.70 per million indexed spans per month | Billed when usage is in excess of indexed spans included with every APM host | An indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of indexed spans submitted to the Datadog APM service at the end of the month. [More information.][4]                                                                                          |
+| [APM Host][3]      | $31 per underlying [APM host][3] per month | 1 million additional Indexed spans included per month with every APM host.   | Datadog records the number of [APM hosts][4] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][4] |
+| [Fargate][3]       | $2 per concurrent task per month           | No Indexed spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][3]              |
+| [Indexed span][4] | $1.70 per million Indexed spans per month | Billed when usage is in excess of Indexed spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of Indexed spans submitted to the Datadog APM service at the end of the month. [More information.][4]                                                                                          |
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent.
 
@@ -17,40 +17,40 @@ For more information, see the [Pricing page][5].
 
 ## Sample Deployment Scenarios
 
-**Sample cases illustrate annual billing rates with default 15 days indexed span retention. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.**
+**Sample cases illustrate annual billing rates with default 15 days Indexed span retention. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.**
 
-### Case 1: Hosts and indexed spans
+### Case 1: Hosts and Indexed spans
 
-Using 5 hosts and sending 30 million indexed spans.
+Using 5 hosts and sending 30 million Indexed spans.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31       | $155                  |
-| indexed spans | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million indexed spans | 25 * $1.70    | $42.50                |
+| Indexed spans | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million Indexed spans | 25 * $1.70    | $42.50                |
 | Total          |            |                                                                                                 | $155 + $42.50 | **$197.50 per month** |
 
-### Case 2: Hosts, Fargate, and indexed spans
+### Case 2: Hosts, Fargate, and Indexed spans
 
-Using 5 hosts, sending 20 million indexed spans, and have deployed APM on average 20 Fargate Tasks over the month.
+Using 5 hosts, sending 20 million Indexed spans, and have deployed APM on average 20 Fargate Tasks over the month.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula             | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
 | APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31             | $155                  |
 | Fargate Tasks  | 20         | $2 per task                                                                                     | 20 * $2             | $40                   |
-| indexed spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million indexed spans | 15 * $1.70          | $25.50                |
+| Indexed spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Indexed spans | 15 * $1.70          | $25.50                |
 | Total          |            |                                                                                                 | $155 + $40 + $25.50 | **$220.50 per month** |
 
-### Case 3: Services, Containers and indexed spans
+### Case 3: Services, Containers and Indexed spans
 
-Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and are sending 20 million indexed spans on App Analytics.
+Service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and are sending 20 million Indexed spans on App Analytics.
 
 | Billable Unit  | Quantity   | Price                                                                                          | Formula      | Subtotal             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
 | APM Hosts      | 1          | $31 per host                                                                                   | 1 * $31      | $31                  |
-| indexed spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million indexed spans | 19 * $1.70   | $32.30               |
+| Indexed spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Indexed spans | 19 * $1.70   | $32.30               |
 | Total          |            |                                                                                                | $31 + $32.30 | **$63.30 per month** |
 
-### Case 4: Dynamic Scaling Hosts, Containers, Fargate and no indexed spans
+### Case 4: Dynamic Scaling Hosts, Containers, Fargate and no Indexed spans
 
 App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 2 running on 10-30 Fargate tasks and you're not using App Analytics. Assuming, the 99th percentile usage of EC2 instances is 7, and average of Fargate Tasks over the month is 28.
 
@@ -62,26 +62,26 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 Note that the container count will not matter if the deployed agent is on the EC2 instances.
 
-### Case 5: Kubernetes Nodes and indexed spans
+### Case 5: Kubernetes Nodes and Indexed spans
 
-Agent running on 20 worker nodes in Kubernetes sending 20 million indexed spans.
+Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed spans.
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
 | APM Hosts (Nodes) | 20         | $31 per host                                                                | 20 * $31  | $620               |
-| indexed spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional indexed spans | 0 * $1.70 | 0                  |
+| Indexed spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional Indexed spans | 0 * $1.70 | 0                  |
 | Total             |            |                                                                             | $620 + $0 | **$620 per month** |
 
 For Kubernetes, APM is priced by nodes not by pods.
 
-### Case 6: Lambda Functions and indexed spans
+### Case 6: Lambda Functions and Indexed spans
 
-Continuously invoking a Lambda function every hour for an entire month while sending 20 million indexed spans.
+Continuously invoking a Lambda function every hour for an entire month while sending 20 million Indexed spans.
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
 | Lambda Function   | 1          | [$5 per month][7]                                               | 1 * $5  | $5               |
-| indexed spans    | 20 million | $1.70 per million indexed spans | 20 * $1.70 | $34               |
+| Indexed spans    | 20 million | $1.70 per million Indexed spans | 20 * $1.70 | $34               |
 | Total             |            |                                                                             | $5 + $34 | **$39 per month** |
 
 
@@ -105,11 +105,11 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **5. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][3] deployed with agents sending traces and not services. App Analytics is billed on the basis of [indexed span][10] count. To estimate how many indexed spans each of your service can send, use the [Event Estimator][9].
+APM is billed on the basis of [hosts][3] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed span][10] count. To estimate how many Indexed spans each of your service can send, use the [Event Estimator][9].
 
 **6. Can I use App Analytics without APM?**
 
-No. App Analytics is an additional functionality available along with APM which billed on the basis indexed span volume.
+No. App Analytics is an additional functionality available along with APM which billed on the basis Indexed span volume.
 
 ## Further Reading
 

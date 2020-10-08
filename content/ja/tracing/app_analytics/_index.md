@@ -8,7 +8,7 @@ aliases:
 ---
 {{< wistia vrmqr812sz >}}
 </br>
-[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで indexed span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
+[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Indexed span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
 
 * サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムインスツルメンテーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
 
@@ -464,11 +464,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## スパンのフィルタリング
 
-[indexed span][2] は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで indexed span が送信されます。例えば、各 `servlet.request` スパンが indexed span を生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の indexed span を生成します。[indexed span のフィルタリング][5]は、請求可能な indexed span の数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは indexed span の生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
+[Indexed span][2] は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで Indexed span が送信されます。例えば、各 `servlet.request` スパンが Indexed span を生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の Indexed span を生成します。[Indexed span のフィルタリング][5]は、請求可能な Indexed span の数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは Indexed span の生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
 
 フィルターレートへの変更は、サービスおよび環境別にキューに配置されるため、全体的なスパンボリュームへの影響を予測できます。変更は、確認、編集、承認または拒否することが可能です。適用された変更は、直ちに有効となり[請求書にも反映されます][7]。
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="indexed span のフィルタリング" >}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Indexed span のフィルタリング" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /ja/tracing/visualization/#apm-event

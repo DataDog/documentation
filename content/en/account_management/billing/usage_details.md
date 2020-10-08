@@ -37,7 +37,7 @@ This section contains hourly, daily, monthly, and annual usage. In the "All" tab
 | Infra. Hosts             | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month.                         |
 | Containers               | Shows the high watermark of all distinct containers over all hours in the current month.                                    |
 | APM Hosts                | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.                                    |
-| indexed spans           | Shows the sum of all indexed spans indexed over all hours in the current month.                                            |
+| Indexed spans           | Shows the sum of all Indexed spans indexed over all hours in the current month.                                            |
 | Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                               |
 | Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                  |
 | Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                               |

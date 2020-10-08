@@ -21,7 +21,7 @@ further_reading:
 
 APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-App Analytics monitors allow you to visualize APM data over time and set up alerts based on indexed spans. For example, use a App Analytics monitor to receive alerts on a spike in slow requests.
+App Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed spans. For example, use a App Analytics monitor to receive alerts on a spike in slow requests.
 
 ## Monitor creation
 
