@@ -5,6 +5,7 @@ aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/
     - /tracing/getting_further/trace_sampling_and_storage
+    - /tracing/faq/trace_sampling_and_storage/
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
