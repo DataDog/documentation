@@ -1251,34 +1251,34 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Deployment Tracking
-    url: tracing/deployment_tracking/
-    parent: tracing
-    identifier: deployment_tracking
-    weight: 4
   - name: Trace Search and Analytics
     url: tracing/trace_search_and_analytics/
     parent: tracing
     identifier: trace_search_and_analytics
-    weight: 5
+    weight: 4
   - name: Query Syntax
     url: tracing/trace_search_and_analytics/query_syntax/
     parent: trace_search_and_analytics
-    weight: 503
+    weight: 403
   - name: Monitoring Analytics
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
-    weight: 504
+    weight: 404
   - name: Trace Ingestion and Indexing
     url: tracing/trace_ingestion_and_indexing/
     parent: tracing
     identifier: trace_ingestion_and_indexing
-    weight: 6
+    weight: 5
   - name:  Usage Metrics
     url: tracing/trace_ingestion_and_indexing/usage_metrics
     parent: trace_ingestion_and_indexing
     identifier: trace_ingestion_and_indexing_usage_metrics
-    weight: 601
+    weight: 501
+  - name: Deployment Tracking
+    url: tracing/deployment_tracking/
+    parent: tracing
+    identifier: deployment_tracking
+    weight: 6
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
     parent: tracing

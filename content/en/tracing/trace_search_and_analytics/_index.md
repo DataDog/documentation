@@ -1,5 +1,5 @@
 ---
-title: Tracing Without Limits
+title: Trace Search and Analytics
 kind: documentation
 description: "Beta Documentation for Live Analytics, ingestion rules and retention filters."
 ---
