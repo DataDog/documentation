@@ -32,7 +32,7 @@ Datadog Lambda Library for Python (2.7、3.6、3.7、3.8) は、拡張 Lambda �
 
 トレースとログの接続の詳細については、[ログとトレースの接続](https://docs.datadoghq.com/tracing/connect_logs_and_traces/python/)をご覧ください。
 
-トレーサーの詳細については、[Datadog トレースクライアントの公式ドキュメント](http://pypi.datadoghq.com/trace/docs/index.html)をご覧ください。
+トレーサーの詳細については、[Datadog トレースクライアントの公式ドキュメント](https://ddtrace.readthedocs.io/en/stable/index.html)をご覧ください。
 
 ## 拡張メトリクス
 

@@ -148,11 +148,12 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 
 {{% tab "SSL Test" %}}
 
-| Type          | Operator                                                                         | Value type                 |
-|---------------|----------------------------------------------------------------------------------|----------------------------|
-| certificate   | `expires in more than`, `expires in less than`                                   | _Integer (number of days)_ |
-| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
-| response time | `is less than`                                                                   | _Integer (ms)_             |
+| Type          | Operator                                                                               | Value type                 |
+|---------------|----------------------------------------------------------------------------------------|----------------------------|
+| certificate   | `expires in more than`, `expires in less than`                                         | _Integer (number of days)_ |
+| property      | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | _String_ <br> _[Regex][1]_ |
+| response time | `is less than`                                                                         | _Integer (ms)_             |
+| TLS version   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _Decimal_                  |
 
 If you click on **Test URL**, then the basic assertion is automatically filled:
 

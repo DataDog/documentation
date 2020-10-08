@@ -44,6 +44,30 @@ Cette URL est également fournie sur la [page Team][6]. Cliquez dessus pour init
 
 **Remarque** : si vous souhaitez configurer SAML pour un compte multi-org, consultez la [documentation dédiée][7].
 
+## Mappage d'attributs SAML avec des rôles Datadog
+
+Vous pouvez attribuer ou supprimer des rôles Datadog selon les attributs SAML d'un utilisateur :
+
+1. Accédez à la gestion de compte et cliquez sur l'onglet Mappings.
+
+2. Cliquez sur le bouton **New Mapping**. 
+
+3. Indiquez la paire clé-valeur du fournisseur d'identité SAML que vous souhaitez associer à un rôle Datadog existant (par défaut ou personnalisé). Par exemple, si vous souhaitez que tous les utilisateurs dont l'attribut `member_of` correspond à `Development` soient affectés à un rôle Datadog personnalisé appelé `Devs`: 
+
+    {{< img src="account_management/saml/create_mapping.png" alt="Créer un mappage SAML avec un rôle Datadog"  >}}
+
+4. Si vous ne l'avez pas déjà fait, activez les mappages en cliquant sur **Enable Mappings**.
+
+Lorsqu'un utilisateur disposant de l'attribut de fournisseur d'identité spécifié se connecte, il se voit automatiquement attribuer le rôle Datadog. De la même façon, si ce même attribut de fournisseur d'identité est supprimé d'un utilisateur, ce dernier perd également l'accès au rôle (sauf si un autre mappage l'ajoute). 
+
+<div class="alert alert-warning">
+  <strong>Important :</strong> si un utilisateur ne correspond à <i>aucun</i> mappage, il perd tous les rôles dont il disposait et ne peut plus se connecter à l'organisation avec SAML. Vérifiez bien les définitions de vos mappages. 
+</div>
+
+Vous pouvez modifier un mappage en cliquant sur l'icône en forme de crayon, ou le supprimer en cliquant sur l'icône en forme de corbeille. Ces actions affectent uniquement le mappage, et non les attributs du fournisseur d'identité ni les rôles Datadog.
+
+Vous pouvez également créer et modifier des mappages d'attributs SAML avec des rôles Datadog en utilisant l'endpoint `authn_mappings`. Consultez la page sur l'[API de mappage d'attributs d'authentification fédérée à un rôle][8] pour en savoir plus.
+
 ## Détails du prestataire de services de Datadog
 
 * Datadog prend en charge la liaison **HTTP-POST** pour **SAML2** :
@@ -83,13 +107,13 @@ Si **sn** et **givenName** sont fournis, ils servent à mettre à jour le nom de
 
 Pour en savoir plus sur la configuration d'un fournisseur d'identité spécifique, consultez la documentation suivante :
 
-* [Active Directory][8]
-* [Auth0][9]
-* [Azure][10]
-* [Google][11]
-* [NoPassword][12]
-* [Okta][13]
-* [SafeNet][14]
+* [Active Directory][9]
+* [Auth0][10]
+* [Azure][11]
+* [Google][12]
+* [NoPassword][13]
+* [Okta][14]
+* [SafeNet][15]
 
 ## Fonctionnalités supplémentaires
 
@@ -128,10 +152,11 @@ Lorsque le mode SAML Strict est activé, tous les utilisateurs doivent se connec
 [5]: https://app.datadoghq.com/account/saml/metadata.xml
 [6]: https://app.datadoghq.com/account/team
 [7]: /fr/account_management/multi_organization/#setting-up-saml
-[8]: /fr/account_management/saml/activedirectory/
-[9]: /fr/account_management/saml/auth0/
-[10]: /fr/account_management/saml/azure/
-[11]: /fr/account_management/saml/google/
-[12]: /fr/account_management/saml/nopassword/
-[13]: /fr/account_management/saml/okta/
-[14]: /fr/account_management/saml/safenet/
+[8]: /fr/account_management/authn_mapping/
+[9]: /fr/account_management/saml/activedirectory/
+[10]: /fr/account_management/saml/auth0/
+[11]: /fr/account_management/saml/azure/
+[12]: /fr/account_management/saml/google/
+[13]: /fr/account_management/saml/nopassword/
+[14]: /fr/account_management/saml/okta/
+[15]: /fr/account_management/saml/safenet/

@@ -367,15 +367,31 @@ components:
         api_key:
           $ref: '#/components/schemas/ApiKey'
       type: object
+    ApmStatsQueryColumnType:
+      description: Column properties.
+      properties:
+        alias:
+          description: A user-assigned alias for the column.
+          example: Requests
+          type: string
+        cell_display_mode:
+          $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        name:
+          description: Column name.
+          example: Reqs
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - name
+      type: object
     ApmStatsQueryDefinition:
       description: The APM stats query for table and distributions widgets.
       properties:
         columns:
-          description: Column names used by front end for display.
+          description: Column properties used by the front end for display.
           items:
-            description: Column header.
-            example: MeanLatency
-            type: string
+            $ref: '#/components/schemas/ApmStatsQueryColumnType'
           type: array
         env:
           description: Environment name.
@@ -7909,7 +7925,6 @@ components:
           type: object
       type: object
     TargetFormatType:
-      default: auto
       description: 'If the target of the remapper is an attribute, try to cast the
         value to a new specific type.
 

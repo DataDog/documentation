@@ -1,5 +1,5 @@
 ---
-title: Instrumentation des applications Go
+title: Instrumenter des applications Go
 kind: documentation
 further_reading:
   - link: serverless/serverless_tagging/

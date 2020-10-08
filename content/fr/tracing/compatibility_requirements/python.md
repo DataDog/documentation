@@ -32,6 +32,7 @@ La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris
 | [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Tornado][11]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
+
 ### Compatibilité des datastores
 
 La bibliothèque `ddtrace` prend en charge les datastores suivants :

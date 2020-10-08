@@ -23,6 +23,10 @@ Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/Data
 
 Si vous utilisez l'Agent v6, la plupart des options du [fichier de configuration principal de l'Agent][1] (`datadog.yaml`) peuvent être définies via des variables d'environnement.
 
+## Recommandations
+
+Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][2].
+
 ## Cas d'utilisation généraux
 
 Dans la plupart des cas, les règles suivantes doivent être respectées :
@@ -31,10 +35,10 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 
 * Les différentes valeurs doivent être séparées par des espaces :
    ```yaml
-      ac_include:
+      container_include:
         - "image:cp-kafka"
         - "image:k8szk"
-      # DD_AC_INCLUDE="image:cp-kafka image:k8szk"
+      # DD_CONTAINER_INCLUDE="image:cp-kafka image:k8szk"
    ```
 
 * Les options de configuration imbriquées dont les clés sont **prédéfinies** doivent être séparées par des tirets bas :
@@ -51,23 +55,49 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
       # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Remarque** : lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][2] pour en savoir plus.
+**Remarque** : lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][3] pour en savoir plus.
 
 ### Exceptions
 
-* Pour les Agents de collecte (APM, processus et logs), supprimez la partie `_config` du nom de l'option. Exemple :
-    ```yaml
-      apm_config:
-        enabled: true
-      # DD_APM_ENABLED=true
-    ```
+- Toutes les options du fichier `datadog.yaml` ne peuvent pas être définies via des variables d'environnement. Référez-vous au fichier [config.go][4] dans le référentiel GitHub de l'Agent Datadog. Les options disponibles via les variables d'environnement commencent par `config.BindEnv*`.
 
-* Toutes les options du fichier `datadog.yaml` ne peuvent pas être définies via des variables d'environnement. Référez-vous au fichier [config.go][3] dans le référentiel GitHub de l'Agent Datadog. Les options disponibles via les variables d'environnement commencent par `config.BindEnv*`.
+- Les variables d'environnement spécifiques à un composant qui ne sont pas répertoriées dans le fichier [config.go][4] peuvent également être prises en charge.
+
+  - **Agent de trace APM**
+
+      - [Variables d'environnement de l'Agent APM Docker][5]
+      - [trace-agent env.go][6]
+      - Exemple
+
+          ```yaml
+             apm_config:
+                 enabled: true
+                 env: dev
+             # DD_APM_ENABLED=true
+             # DD_APM_ENV=dev
+          ```
+
+  - **Agent Live Process**
+
+      - [process-agent config.go][7]
+      - Exemple
+
+          ```yaml
+             process_config:
+                 enabled: true
+                 process_dd_url: https://process.datadoghq.com
+             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+          ```
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /fr/agent/proxy/#environment-variables
-[3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[2]: /fr/getting_started/tagging/unified_service_tagging
+[3]: /fr/agent/proxy/#environment-variables
+[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[5]: https://docs.datadoghq.com/fr/agent/docker/apm/#docker-apm-agent-environment-variables
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env.go
+[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go

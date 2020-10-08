@@ -36,9 +36,9 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 
 {{< img src="serverless/integration/lambda_metrics.png" alt="Lambda Metrics Collection" >}}
 
-Follow the [installation instructions][3] to set up instrumentation of your serverless applications, and the enhanced Lambda metrics are enabled by default.
+Follow the [installation instructions][5] to set up instrumentation of your serverless applications, and the enhanced Lambda metrics are enabled by default.
 
-**Note**: To enable enhanced Lambda metrics without sending the logs for your functions to Datadog, set the `DdForwarderLog` environment variable to `false` on the [Datadog Forwarder][5].
+**Note**: To enable enhanced Lambda metrics without sending the logs for your functions to Datadog, set the `DdForwarderLog` environment variable to `false` on the [Datadog Forwarder][2].
 
 ## Viewing your dashboard
 
@@ -46,7 +46,7 @@ Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the
 
 [1]: /serverless/datadog_lambda_library
 [2]: /serverless/forwarder/
-[3]: /integrations/amazon_lambda/?tab=nodejs#metric-collection
-[4]: /serverless/installation/
-[5]: /integrations/amazon_web_services/#setup
-[6]: /serverless/forwarder
+[3]: /integrations/amazon_lambda/#metric-collection
+[4]: /metrics/distributions/
+[5]: /serverless/installation/
+[6]: https://app.datadoghq.com/screen/integration/30306

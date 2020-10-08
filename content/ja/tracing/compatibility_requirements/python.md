@@ -32,6 +32,7 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 | [Pyramid][10]             | 1.7 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Tornado][11]             | 4.0 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
+
 ### データストアの互換性
 
 `ddtrace` ライブラリには、次のデータストアのサポートが含まれています。
@@ -55,6 +56,7 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 | [SQLAlchemy][29]                   | 1.0 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][30]                      | 完全対応   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][31]                      | 0.6 以降            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+
 
 ### ライブラリの互換性
 

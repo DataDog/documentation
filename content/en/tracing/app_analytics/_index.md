@@ -158,7 +158,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 **Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [App Analytics][1] for details.
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 

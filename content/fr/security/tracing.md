@@ -64,5 +64,5 @@ Si vous avez besoin d'une instrumentation personnalisée pour une application sp
 [4]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L492-L496
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
 [6]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
-[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
+[7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [8]: /fr/api/v1/tracing/

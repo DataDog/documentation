@@ -257,7 +257,24 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][11].
 
-This permission is global, but only enables to trigger a rehydration for Archives users have [Logs Read Archive](#logs-read-archives) permission.
+This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](r#logs-read-archives) permission.
+
+{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
+
+In the example above:
+
+* `ADMIN` Role members **can** rehydrate from the `Audit Archive`, as they have the Write Historical View (Rehydrate) permission, as well as the Read Archive permission on that archive.
+* `AUDIT` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Write Historical View (Rehydrate) permission.
+* `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
+
+
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][10].  
+
+For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
+
+* If you **do not** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are accessible for `CI-CD` role members.
+* If you **do** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
+
 
 #### logs_public_config_api
 

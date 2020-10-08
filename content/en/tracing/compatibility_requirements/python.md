@@ -33,6 +33,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Tornado][11]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
+
 ### Datastore Compatibility
 
 The `ddtrace` library includes support for the following data stores:
@@ -56,6 +57,7 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLAlchemy][29]                   | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][30]                      | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][31]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+
 
 ### Library Compatibility
 

@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    IBM MQ: assets/dashboards/overview.json
   logs:
     source: ibm_mq
   metrics_metadata: metadata.csv

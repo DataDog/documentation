@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Active Directory: assets/dashboards/active_directory.json
   logs:
     source: ruby
   metrics_metadata: metadata.csv
