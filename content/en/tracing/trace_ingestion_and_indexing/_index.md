@@ -20,6 +20,8 @@ Ingestion Controls affect what is sent by your applications to Datadog.
 
 Many instrumented services will send 100% of their traffic to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
 
+For the best experience, we recommend you set services to send 100% of their traffic so all traces can be used for live search and analytics.
+
 **Note:** If you are seeing numbers below 100% for Ingestion Rate, ensure you are using Agent 6.19+ or 7.19+ as these versions increased the default rate.
 
 In the Datadog app, on the ['Data Ingestion' view][1], you can see the following information:
@@ -91,6 +93,8 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 ## Legacy App Analytics
 
-While this is no longer the recommended setup configuration, if needed there are instructions for configuring legacy [App Analytics][1] setups.
+While this is no longer the recommended setup configuration, if needed there are instructions for configuring legacy [App Analytics][3] setups.
 
-[1]: /tracing/app_analytics/
+[1]: https://app.datadoghq.com/apm/traces/data-ingestion
+[2]: /tracing/trace_search_and_analytics/#historical-search-mode
+[3]: /tracing/app_analytics/
