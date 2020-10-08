@@ -18,7 +18,7 @@ Ingestion Controls affect what is sent by your applications to Datadog.
 
 {{< img src="tracing/trace_indexing_and_ingestion/DataIngestion2.png" style="width:100%;" alt="Data Ingestion" >}}
 
-Many instrumented services will send 100% of their traffic to Datadog by default.  High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
+Many instrumented services will send 100% of their traffic to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
 
 **Note:** If you are seeing numbers below 100% for Ingestion Rate, ensure you are using Agent 6.19+ or 7.19+ as these versions increased the default rate.
 
