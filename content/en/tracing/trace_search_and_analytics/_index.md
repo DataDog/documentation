@@ -6,15 +6,13 @@ description: "Beta Documentation for Live Analytics, ingestion rules and retenti
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-## Tracing Without Limits Overview
-
 [Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed spans using any tag on any span.  Depending on whether you are using Live (the last 15 minutes, rolling) or Historical (all Indexed spans) mode, the data used to power your queries will change.
 
 Live data is all [Ingested spans](#ingestion-controls) and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  Historical data is all [Indexed spans](#indexing-controls).  You can customize settings for both [Ingestion and Indexing](#ingestion-and-indexing-overview).
 
 Send and retain exactly the spans you care about. Any Indexed span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
 
-### Live Search Mode
+## Live Search Mode
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -51,7 +49,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
-### Historical Search Mode
+## Historical Search Mode
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -67,11 +65,7 @@ For example, if you filter by a tag that only appears on un-Indexed spans, your 
 
 You can customize what spans are indexed and at what retention rates. By default, [Datadog Intelligent Sampling](#datadog-intelligent-sampling-filter) will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing](#indexing-controls) section of this page, or the [Span Indexing][2] page within Datadog.
 
-### Live Analytics Mode
-
-<div class="alert alert-warning">
-These features are currently in private beta. <a href="https://forms.gle/1FParyX49eNFPDsg9">Fill out the form</a> to request to be added to the beta.
-</div>
+## Live Analytics Mode
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -85,7 +79,7 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 **Note:** Exporting to dashboards and monitors is only possible in Historical mode.
 
-### Historical Analytics Mode
+## Historical Analytics Mode
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
