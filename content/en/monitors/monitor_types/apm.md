@@ -68,9 +68,11 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 ### Define the search query
 
 * Construct a search query using the same logic as a [trace search][1].
-* Choose to monitor over a trace count, [facet][2], or [measure][2]:
+* Choose to monitor over a trace count, [facet][2], or [measure][3]:
     * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
     * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+
+**Note:** Trace Analytics monitors can only be created based on [Indexed spans][4].
 
 ### Select alert conditions
 
@@ -79,9 +81,10 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
-[2]:/tracing/trace_search_and_analytics/query_syntax/#facet-search
 [1]: /tracing/trace_search_and_analytics/query_syntax/#search-bar
-[2]: /tracing/trace_search_and_analytics/query_syntax/#numerical-values
+[2]: /tracing/trace_search_and_analytics/query_syntax/#facet-search
+[3]: /tracing/trace_search_and_analytics/query_syntax/#numerical-values
+[4]: /tracing/visualization/#indexed-span
 {{% /tab %}}
 {{< /tabs >}}
 
