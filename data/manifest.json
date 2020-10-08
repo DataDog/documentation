@@ -1,9 +1,9 @@
 {
-  "@babel/polyfill.js": "static/@babel/polyfill.js",
-  "api-redirect.js": "static/api-redirect.js",
-  "dd-browser-logs-rum.js": "static/dd-browser-logs-rum.js",
-  "lang-redirects.js": "static/lang-redirects.js",
-  "main-dd-js.js": "static/main-dd-js.js",
-  "region-redirects.js": "static/region-redirects.js",
-  "vendor.js": "static/vendor.js"
+  "@babel/polyfill.js": "static/@babel/polyfill.a8b8e.js",
+  "api-redirect.js": "static/api-redirect.afa9e.js",
+  "dd-browser-logs-rum.js": "static/dd-browser-logs-rum.f2b2c.js",
+  "lang-redirects.js": "static/lang-redirects.88256.js",
+  "main-dd-js.js": "static/main-dd-js.675c4.js",
+  "region-redirects.js": "static/region-redirects.970a2.js",
+  "vendor.js": "static/vendor.0ae24.js"
 }
