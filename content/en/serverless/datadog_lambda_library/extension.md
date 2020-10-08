@@ -23,13 +23,17 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 
 2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:3`
+    ```
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:3
+    ```
 
     Replace the placeholder `AWS_REGION` in the Lambda Layer ARN with appropriate values.
 
 3. If you are using Node.js or Python, add the Lambda Layer for the [Datadog Library][7] to your AWS Lambda function:
 
-    `arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>`
+    ```
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
+    ```
 
     The available `RUNTIME` options are `Node8-10`, `Node10-x`, `Node12-x`, `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
 
