@@ -35,7 +35,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 
 [1]: /serverless/custom_metrics?tab=python#synchronous-vs-asynchronous-custom-metrics
 [2]: /serverless/forwarder
-[3]: https://docs.datadoghq.com/serverless/datadog_lambda_library
+[3]: /serverless/datadog_lambda_library
 [4]: /serverless/installation/python
 [5]: /serverless/installation/nodejs
 [6]: /serverless/installation/go
