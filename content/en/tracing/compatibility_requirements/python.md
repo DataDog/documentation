@@ -20,7 +20,7 @@ To request support for additional libraries, contact our awesome [support team][
 
 The `ddtrace` library includes support for a number of web frameworks, including:
 
-| Framework                 | Supported Version | PyPi Datadog Documentation                                         |
+| Framework                 | Supported Version | Library Documentation                                              |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
 | [aiohttp][3]             | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/web_integrations.html#aiohttp |
 | [Bottle][4]              | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/web_integrations.html#bottle  |
@@ -37,7 +37,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 
 The `ddtrace` library includes support for the following data stores:
 
-| Datastore                          | Supported Version | PyPi Datadog Documentation                                                                    |
+| Datastore                          | Supported Version | Library Documentation                                                                         |
 | ---------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
 | [Cassandra][12]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/db_integrations.html#cassandra                           |
 | [Elasticsearch][13]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/db_integrations.html#elasticsearch                       |
@@ -61,7 +61,7 @@ The `ddtrace` library includes support for the following data stores:
 
 The `ddtrace` library includes support for the following libraries:
 
-| Library           | Supported Version | PyPi Datadog Documentation                                               |
+| Library           | Supported Version | Library Documentation                                                    |
 | ----------------- | ----------------- | ------------------------------------------------------------------------ |
 | [asyncio][32]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/async_integrations.html#asyncio     |
 | [gevent][33]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/async_integrations.html#gevent      |
