@@ -21,13 +21,13 @@ further_reading:
 
 APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-App Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed spans. For example, use a App Analytics monitor to receive alerts on a spike in slow requests.
+Trace Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed spans. For example, use a Trace Analytics monitor to receive alerts on a spike in slow requests.
 
 ## Monitor creation
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-Choose between an **APM Metrics** or **App Analytics** monitor:
+Choose between an **APM Metrics** or **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -63,12 +63,12 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 [2]: /tracing/visualization/service/
 [3]: /tracing/visualization/resource/
 {{% /tab %}}
-{{% tab "App Analytics" %}}
+{{% tab "Trace Analytics" %}}
 
 ### Define the search query
 
 * Construct a search query using the same logic as a [trace search][1].
-* Choose to monitor over a trace count, [facet][2], or [measure][3]:
+* Choose to monitor over a trace count, [facet][2], or [measure][2]:
     * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
     * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
@@ -79,9 +79,9 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
-[1]: /tracing/app_analytics/search/#search-bar
-[2]: /tracing/app_analytics/search/#facet-search
-[3]: /tracing/app_analytics/search/#numerical-values
+[2]:/tracing/trace_search_and_analytics/query_syntax/#facet-search
+[1]: /tracing/trace_search_and_analytics/query_syntax/#search-bar
+[2]: /tracing/trace_search_and_analytics/query_syntax/#numerical-values
 {{% /tab %}}
 {{< /tabs >}}
 
