@@ -52,7 +52,7 @@ If you're [using APM][6], [DogStatsD][7], or [log management][8], set the approp
 
 **Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
-  - If you are using log management, refer to the dedicated [Log collection documentation][6].
+  - If you are using log management, refer to the dedicated [Log collection documentation][8].
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
