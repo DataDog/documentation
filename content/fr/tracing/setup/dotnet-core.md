@@ -150,10 +150,10 @@ Vous pouvez utiliser l'éditeur de registre comme dans l'image ci-dessous ou pas
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Éditeur de registre"  >}}
 
-{{< code-block lang="powershell" filename="add-env-var.ps1" >}}
+```powershell
 [String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NOM> -Name Environment -Value $v
-{{< /code-block >}}
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+```
 
 #### Consoles
 
