@@ -7852,7 +7852,6 @@ components:
       x-enum-varnames:
       - QUERY_TABLE
     TableWidgetHasSearchBar:
-      default: auto
       description: Controls the display of the search bar.
       enum:
       - always
