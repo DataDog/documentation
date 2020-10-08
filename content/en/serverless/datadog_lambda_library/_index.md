@@ -2,6 +2,9 @@
 title: Datadog Lambda Library
 kind: documentation
 further_reading:
+- link: "/serverless/datadog_lambda_library/extension"
+  tag: "Datadog Lambda Extension (Preview)"
+  text: "Datadog Lambda Extension (Preview)"
 - link: "/serverless/datadog_lambda_library/python"
   tag: "Datadog Lambda Library for Python"
   text: "Datadog Lambda Library for Python"
