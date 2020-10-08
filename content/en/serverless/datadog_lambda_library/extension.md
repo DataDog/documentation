@@ -28,6 +28,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
     Replace the placeholder `AWS_REGION` and `VERSION` in the Lambda Layer ARN with appropriate values.
 
 3. Reference the [sample code][7] to submit a custom metric.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
