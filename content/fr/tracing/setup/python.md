@@ -55,6 +55,7 @@ Pour découvrir des options d'utilisation, de configuration et de contrôle plus
 
 Lorsque vous utilisez **ddtrace-run**, les [variables d'environnement][7] suivantes sont disponibles :
 
+
 | Variable d'environnement               | Valeur par défaut     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DATADOG_TRACE_DEBUG`              | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                                                                                                         |
@@ -76,6 +77,7 @@ Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` pour dé
 | `DD_LOGS_INJECTION`                | `false`     | Active la [mise en relation des logs et des traces injectées][11].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Active App Analytics pour toutes les [intégrations Web][12].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Active App Analytics pour une intégration spécifique. Exemple : `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
+
 
 ## Modifier le hostname de l'Agent
 
