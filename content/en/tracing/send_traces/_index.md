@@ -25,7 +25,7 @@ further_reading:
 
 Configuring your application to send [traces][1] to Datadog involves two main steps: Configuring the Datadog Agent and [Instrumenting your application][14]. 
 
-Depending on your environment, there are different ways to configure the Datadog Agent. Instructions are provided here for [installing the Datadog Agent locally](#datadog-agent), [on containers](#containers), and [several other ways](#additional-environments).
+Depending on your environment, there are different ways to configure the Datadog Agent. See the instructions for installing the Datadog Agent [locally](#datadog-agent), [on containers](#containers), and [several other ways](#additional-environments).
 
 ## Datadog Agent
 
@@ -81,7 +81,7 @@ See our guide on setting the [`env` tag and an additional primary tag for scopin
 
 ## Next steps
 
-Next, [Instrument your application][14]. For the full overview of all of features and configurations of APM, see the [APM overview][2].
+Next, [instrument your application][14]. For the full overview of all of features and configurations of APM, see the [APM overview][2].
 
 ## Further Reading
 
