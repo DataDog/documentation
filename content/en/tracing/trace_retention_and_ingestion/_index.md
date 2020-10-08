@@ -1,6 +1,8 @@
 ---
 title: Ingestion and Indexing Controls
 kind: documentation
+aliases:
+    - /account_management/billing/usage_control_apm/
 description: "Learn how to control Ingestion and Indexing rates with Tracing without Limits."
 ---
 
@@ -13,10 +15,6 @@ With Tracing without Limits™, both the ingestion of traces to Datadog as well 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Ingestion Controls affect what is sent by your applications to Datadog.
-
-### Span Ingestion
-
-{{< img src="tracing/trace_indexing_and_ingestion/DataIngestion2.png" style="width:100%;" alt="Data Ingestion" >}}
 
 Many instrumented services will send 100% of their traffic to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
 
@@ -47,13 +45,11 @@ To specify that a specific percentage of a service's traffic should be sent, add
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy.
 5. Confirm on the Data Ingestion page that your new percentage has been applied.
 
-## Indexing Controls
+## Retention Filters
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Indexing Controls affect what is stored by Datadog for 15 days.
-
-### Retention Filters
 
 After spans have been ingested by Datadog, they will be retained for 15 days according to the indexing filters that have been set on your account.  By default, the only retention filter enabled per service will be the [Intelligent Sampling Filter](#datadog-intelligent-sampling-filter), which retains error traces and traces from different latency distributions.
 
@@ -69,11 +65,11 @@ You can also create any number of additional [tag-based retention filters](#crea
 | Spans Indexed             | The number of spans indexed by the filter over the selected time period.   |
 | Enabled toggle                 |  Allows filters to be turned on and off.  |
 
-### Datadog Intelligent Sampling Filter
+#+# Datadog Intelligent Retention Filter
 
-Intelligent Sampling is always active for your services, and it will keep an assortment of traces to help you monitor the health of your applications.
+Intelligent Retention is always active for your services, and it will keep an assortment of traces to help you monitor the health of your applications.
 
-Intelligent Sampling retains:
+Intelligent Retention retains:
 
  - Errors, including Error Diversity (response code 400s, 500s, etc).
  - High Latency in the different quartiles `p75`, `p90`, `p95`.
@@ -93,8 +89,9 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 ## Legacy App Analytics
 
-While this is no longer the recommended setup configuration, if needed there are instructions for configuring legacy [App Analytics][3] setups.
+While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][3], if needed there are instructions for configuring legacy [App Analytics][4] setups.
 
 [1]: https://app.datadoghq.com/apm/traces/data-ingestion
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode
-[3]: /tracing/app_analytics/
+[3]: /tracing/trace_search_and_analytics
+[4]: /tracing/app_analytics/

@@ -1264,15 +1264,15 @@ main:
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: trace_search_and_analytics
     weight: 404
-  - name: Trace Ingestion and Indexing
-    url: tracing/trace_ingestion_and_indexing/
+  - name: Trace Retention and Ingestion
+    url: tracing/trace_retention_and_ingestion/
     parent: tracing
-    identifier: trace_ingestion_and_indexing
+    identifier: trace_retention_and_ingestion
     weight: 5
   - name:  Usage Metrics
-    url: tracing/trace_ingestion_and_indexing/usage_metrics
-    parent: trace_ingestion_and_indexing
-    identifier: trace_ingestion_and_indexing_usage_metrics
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
     weight: 501
   - name: Deployment Tracking
     url: tracing/deployment_tracking/

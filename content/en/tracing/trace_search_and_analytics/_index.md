@@ -12,7 +12,7 @@ Live data is all [Ingested spans](#ingestion-controls) and is available in real-
 
 Send and retain exactly the spans you care about. Any Indexed span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
 
-## Live Search Mode
+## Live Search
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -29,7 +29,7 @@ In Live Search mode, Datadog displays spans as soon as they are sent by the Data
 
 The number of received spans per second is displayed at the top of the traces table, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity but are still searchable. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
-Live Search mode is the default view on the Traces page, and when you're in Historical mode, you can choose the **LIVE** option in the time range selector to switch to the Live Search mode for the past 15 minutes.
+Live Search mode is the default view on the Traces page, and when you're viewing retained traces, you can choose the **LIVE** option in the time range selector to switch to the Live Search mode for the past 15 minutes.
 
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
@@ -49,23 +49,23 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
-## Historical Search Mode
+## Retained Trace Search
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Historical Search Mode is accessed in the same way as Live Search mode.  To switch from Live to Historical mode, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched from live search mode to Indexed spans.
+Retained Search Mode is accessed in the same way as Live Search mode.  To switch from live to retained mode, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched from live search mode to Indexed spans.
 
-In Historical Search Mode, the data searched is Indexed spans, along with the root span of any trace with at least one Indexed span.  These spans are kept by Datadog for 15 days from being indexed.
+In Retained Search Mode, the data searched is Indexed spans, along with the root span of any trace with at least one Indexed span.  These spans are kept by Datadog for 15 days from being indexed.
 
 {{< img src="tracing/live_search/livesearch_mode.gif" alt="Live Search mode" >}}
 
-**Note:** The entire associated trace will appear whenever you are viewing the flame graph associated with any Indexed span, but only Indexed spans are searchable in historical search mode.
+**Note:** The entire associated trace will appear whenever you are viewing the flame graph associated with any Indexed span, but only Indexed spans are searchable in retained search mode.
 
 For example, if you filter by a tag that only appears on un-Indexed spans, your search will return no results.
 
-You can customize what spans are indexed and at what retention rates. By default, [Datadog Intelligent Sampling](#datadog-intelligent-sampling-filter) will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing](#indexing-controls) section of this page, or the [Span Indexing][2] page within Datadog.
+You can customize what spans are indexed and at what retention rates. By default, [Datadog Intelligent Retention](#datadog-intelligent-retention-filter) will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing](#indexing-controls) section of this page, or the [Span Indexing][2] page within Datadog.
 
-## Live Analytics Mode
+## Live Trace Analytics
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -79,11 +79,11 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 **Note:** Exporting to dashboards and monitors is only possible in Historical mode.
 
-## Historical Analytics Mode
+## Retained Trace Analytics
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Historical Analytics Mode is accessed in the same way as Live Analytics mode.  To switch from Live to Historical Analytics, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched to Indexed spans, and the data will no longer be a live feed.
+Retained Trace Analytics Mode is accessed in the same way as Live Analytics mode.  To switch from Live to Historical Analytics, change the time selector to any period of time greater than 15 minutes.  This will change the data being searched to Indexed spans, and the data will no longer be a live feed.
 
 The root span of any trace with at least one Indexed span is indexed. This means that you can search on tags on the root span or on the indexed child spans. These spans are kept by Datadog for 15 days after being indexed.
 
@@ -91,10 +91,10 @@ The root span of any trace with at least one Indexed span is indexed. This means
 
 {{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
 
-**Note:** Only Indexed spans can be searched in Historical Analytics Mode.
+**Note:** Only spans indexed by a retention filter can be searched using Retained Trace Analytics.
 
-You can customize what spans are indexed and at what retention rates. By default, Datadog Intelligent Sampling will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing][3] page.
+You can customize what spans are retained and at what retention rates. By default, Datadog Intelligent Retention will be applied to decide what spans to keep, and this is the data powering queries older than 15 minutes. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filter][3] page.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: https://app.datadoghq.com/apm/traces/retention-filters
-[3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[3]: /tracing/trace_retention_and_ingestion/#retention-filters
