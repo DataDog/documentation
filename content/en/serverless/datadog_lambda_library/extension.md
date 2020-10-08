@@ -23,7 +23,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 
 2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
 
-    `arn:aws:lambda:AWS_REGION:464622532012:layer:Datadog-Extension:1`
+    `arn:aws:lambda:AWS_REGION:464622532012:layer:Datadog-Extension:3`
 
     Replace the placeholder `AWS_REGION` and `VERSION` in the Lambda Layer ARN with appropriate values.
 
