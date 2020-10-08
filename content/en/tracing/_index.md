@@ -34,6 +34,8 @@ aliases:
 
 Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, synthetic checks, network, processes and infrastructure metrics across hosts, containers, proxies, and serverless functions. Search **100% of ingested traces live with no sampling** during an outage, while Datadog intelligently retains traces that represent an error, high latency, or unique code paths for analysis.
 
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+
 ## Getting Started
 
 As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
