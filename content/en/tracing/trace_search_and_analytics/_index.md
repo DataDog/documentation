@@ -8,9 +8,17 @@ description: "Beta Documentation for Live Analytics, ingestion rules and retenti
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed spans using any tag on any span.  Depending on whether you are using Live (the last 15 minutes, rolling) or Historical (all Indexed spans) mode, the data used to power your queries will change.
 
-Live data is all [Ingested spans](#ingestion-controls) and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  Historical data is all [Indexed spans](#indexing-controls).  You can customize settings for both [Ingestion and Indexing](#ingestion-and-indexing-overview).
+Live data is all [Ingested spans][2] and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  More than 15 minutes in the past data is all [retained spans][3].  You can customize settings for both [Retention and Ingestion][4] ingest and keep exactly what data is most relevant to you with tag-based retention filters and the ability to send 100% of your traces to Datadog.
 
-Send and retain exactly the spans you care about. Any Indexed span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
+Send and retain exactly the spans you care about. Any retained span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
+
+Retention filters can be configured within the app, and more information is available in the [Trace Retention][3] documentation.
+
+Fine-grained ingestion controls can also be set per service instrumented with Datadog APM, with more details available in the [Ingestion Controls][2] documentation.  All services can be also be configured to send all of their traffic with one environment variable configuration
+
+```
+`DD_TRACE_SAMPLE_RATE=1.0`
+```
 
 ## Live Search
 
@@ -63,7 +71,7 @@ In Retained Search Mode, the data searched is Indexed spans, along with the root
 
 For example, if you filter by a tag that only appears on un-Indexed spans, your search will return no results.
 
-You can customize what spans are indexed and at what retention rates. By default, [Datadog Intelligent Retention](#datadog-intelligent-retention-filter) will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing](#indexing-controls) section of this page, or the [Span Indexing][2] page within Datadog.
+You can customize what spans are indexed and at what retention rates. By default, [Datadog Intelligent Retention](#datadog-intelligent-retention-filter) will be applied to decide what spans to index, and this is the data powering Historical queries. To learn more about the default span retention filter and how to create your own additional filters, visit the [Indexing](#indexing-controls) section of this page, or the [Span Indexing][5] page within Datadog.
 
 ## Live Trace Analytics
 
@@ -96,5 +104,7 @@ The root span of any trace with at least one Indexed span is indexed. This means
 You can customize what spans are retained and at what retention rates. By default, Datadog Intelligent Retention will be applied to decide what spans to keep, and this is the data powering queries older than 15 minutes. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filter][3] page.
 
 [1]: https://app.datadoghq.com/apm/traces
-[2]: https://app.datadoghq.com/apm/traces/retention-filters
+[2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
+[4]: /tracing/trace_retention_and_ingestion/
+[5]: https://app.datadoghq.com/apm/traces/retention-filters
