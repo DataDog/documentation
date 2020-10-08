@@ -90,3 +90,9 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 2. Set the relevant tags you would like to index spans that match ALL of.
 3. Set a percentage of spans matching these tags to be indexed.
 4. Save your new filter.
+
+### Legacy App Analytics
+
+While this is no longer the recommended setup configuration, if needed there are instructions for configuring legacy [App Analytics][1] setups.
+
+[1]: /tracing/app_analytics/
