@@ -53,7 +53,7 @@ With the following definitions:
   - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-### Percentile aggregration
+### Percentile aggregation
 
 - `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
