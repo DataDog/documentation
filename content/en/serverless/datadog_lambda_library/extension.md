@@ -17,7 +17,7 @@ The Datadog Extension currently supports submitting custom metrics [synchronousl
 
 ## Setup
 
-The Datadog Extension is distributed as its own Lambda Layer (separate of the [Datadog Lambda Library][3]) and supports Node.js, Python, and Go runtimes.
+The Datadog Extension is distributed as its own Lambda Layer (separate from the [Datadog Lambda Library][3]) and supports Node.js, Python, and Go runtimes.
 
 1. Instrument your [Python][4], [Node.js][5], or [Go][6] application.
 
