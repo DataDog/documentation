@@ -27,6 +27,16 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "GetLogsArchiveOrder": {
+    "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
+    "summary": "Get archive order"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "Update the order of your archives. Since logs are processed sequentially, reordering an archive may change\nthe structure and content of the data processed by other archives.\n\n**Note**: Using the `PUT` method updates your archive's order by replacing the current order\nwith the new one.",
+    "summary": "Update archive order",
+    "request_description": "An object containing the new ordered list of archive IDs.",
+    "request_schema_description": "A ordered list of archive IDs."
+  },
   "ListLogsArchives": {
     "description": "Get the list of configured logs archives with their definitions.",
     "summary": "Get all archives"
