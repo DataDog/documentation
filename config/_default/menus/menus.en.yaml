@@ -640,6 +640,10 @@ main:
     parent: serverless_datadog_lambda_library
     identifier: serverless_datadog_lambda_library_java
     weight: 205
+  - name: Datadog Lambda Extension
+    url: serverless/datadog_lambda_library/extension
+    parent: serverless_datadog_lambda_library
+    weight: 206
   - name: Datadog Forwarder
     url: serverless/forwarder
     parent: serverless
