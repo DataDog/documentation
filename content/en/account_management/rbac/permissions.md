@@ -71,17 +71,17 @@ Find below the list of permissions for the log configuration assets and log data
 
 | Name                                                           | Description                                | Scopable |  Typical User |
 | -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
-| [`logs_read_data`](#logs-read-data)                            | Read access to log data                    | true     | Read-Only     |
-| [`logs_modify_indexes`](#logs-modify-indexes)                  | Update the definition of log indexes       | false    | Admin         |
+| [`logs_read_data`](#logs_read_data)                            | Read access to log data                    | true     | Read-Only     |
+| [`logs_modify_indexes`](#logs_modify_indexes)                  | Update the definition of log indexes       | false    | Admin         |
 | [`logs_write_facets`](#logs_write_facets)                      | Create, Update and Delete Log Facets       | false    | Standard      |
-| [`logs_write_exclusion_filters`](#logs_write-exclusion-filters)| Update indexes exclusion filters           | true     | Standard      |
-| [`logs_write_pipelines`](#logs-write-pipelines)                | Update log pipelines                       | false    | Admin         |
-| [`logs_write_processors`](#logs-write-processors)              | Update the log processors in a pipeline    | true     | Standard      |
-| [`logs_write_archives`](#logs-write-archives)                  | Update the external archives configuration | false    | Admin         |
-| [`logs_read_archives`](#logs-read-archives)                    | See archive configuration details, access content from the archive | true     | Standard |
-| [`logs_write_historical_views`](#logs-write-historical-views)  | Rehydrate data from Archives               | false    | Standard      |
-| [`logs_public_config_api`](#logs-public-config-api)            | Access the Logs Public Config API (r/w)    | false    | Admin         |
-| [`logs_generate_metrics`](#logs-generate-metrics)              | Access the Generate Metrics feature        | false    | Standard      |
+| [`logs_write_exclusion_filters`](#logs_write_exclusion_filters)| Update indexes exclusion filters           | true     | Standard      |
+| [`logs_write_pipelines`](#logs_write_pipelines)                | Update log pipelines                       | false    | Admin         |
+| [`logs_write_processors`](#logs_write_processors)              | Update the log processors in a pipeline    | true     | Standard      |
+| [`logs_write_archives`](#logs_write_archives)                  | Update the external archives configuration | false    | Admin         |
+| [`logs_read_archives`](#logs_read_archives)                    | See archive configuration details, access content from the archive | true     | Standard |
+| [`logs_write_historical_views`](#logs_write_historical_views)  | Rehydrate data from Archives               | false    | Standard      |
+| [`logs_public_config_api`](#logs_public_config_api)            | Access the Logs Public Config API (r/w)    | false    | Admin         |
+| [`logs_generate_metrics`](#logs_generate_metrics)              | Access the Generate Metrics feature        | false    | Standard      |
 
 
 Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive `logs_read_data` permission:
