@@ -80,7 +80,6 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
