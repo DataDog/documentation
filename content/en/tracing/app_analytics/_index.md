@@ -7,7 +7,13 @@ aliases:
   - /tracing/advanced_usage/
 ---
 
-[App Analytics][1], formerly known as Trace Search & Analytics, is used to filter Indexed spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+<div class="alert alert-danger">
+This is a deprecated page with configuration information relevant to Legacy App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
+<br>
+Read the <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion documentation</a> to learn how to use the new functionality.
+</div>
+
+[App Analytics][1] is used to filter Indexed spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
