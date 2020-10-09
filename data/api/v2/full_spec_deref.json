@@ -1889,6 +1889,18 @@
                     "example": "source:nginx",
                     "type": "string"
                   },
+                  "rehydration_tags": {
+                    "description": "An array of tags to add to rehydrated logs from an archive.",
+                    "example": [
+                      "team:intake",
+                      "team:app"
+                    ],
+                    "items": {
+                      "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
                   "state": {
                     "description": "The state of the archive.",
                     "enum": [
@@ -2126,6 +2138,18 @@
             "example": "source:nginx",
             "type": "string"
           },
+          "rehydration_tags": {
+            "description": "An array of tags to add to rehydrated logs from an archive.",
+            "example": [
+              "team:intake",
+              "team:app"
+            ],
+            "items": {
+              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+              "type": "string"
+            },
+            "type": "array"
+          },
           "state": {
             "description": "The state of the archive.",
             "enum": [
@@ -2345,6 +2369,18 @@
                     "description": "The archive query/filter. Logs matching this query are included in the archive.",
                     "example": "source:nginx",
                     "type": "string"
+                  },
+                  "rehydration_tags": {
+                    "description": "An array of tags to add to rehydrated logs from an archive.",
+                    "example": [
+                      "team:intake",
+                      "team:app"
+                    ],
+                    "items": {
+                      "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                      "type": "string"
+                    },
+                    "type": "array"
                   }
                 },
                 "required": [
@@ -2557,6 +2593,18 @@
             "description": "The archive query/filter. Logs matching this query are included in the archive.",
             "example": "source:nginx",
             "type": "string"
+          },
+          "rehydration_tags": {
+            "description": "An array of tags to add to rehydrated logs from an archive.",
+            "example": [
+              "team:intake",
+              "team:app"
+            ],
+            "items": {
+              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -2757,6 +2805,18 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_tags": {
+                "description": "An array of tags to add to rehydrated logs from an archive.",
+                "example": [
+                  "team:intake",
+                  "team:app"
+                ],
+                "items": {
+                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                  "type": "string"
+                },
+                "type": "array"
               }
             },
             "required": [
@@ -3146,6 +3206,18 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_tags": {
+                "description": "An array of tags to add to rehydrated logs from an archive.",
+                "example": [
+                  "team:intake",
+                  "team:app"
+                ],
+                "items": {
+                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                  "type": "string"
+                },
+                "type": "array"
               },
               "state": {
                 "description": "The state of the archive.",
@@ -3972,6 +4044,18 @@
                       "description": "The archive query/filter. Logs matching this query are included in the archive.",
                       "example": "source:nginx",
                       "type": "string"
+                    },
+                    "rehydration_tags": {
+                      "description": "An array of tags to add to rehydrated logs from an archive.",
+                      "example": [
+                        "team:intake",
+                        "team:app"
+                      ],
+                      "items": {
+                        "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                        "type": "string"
+                      },
+                      "type": "array"
                     },
                     "state": {
                       "description": "The state of the archive.",
@@ -16588,6 +16672,18 @@
                                 "example": "source:nginx",
                                 "type": "string"
                               },
+                              "rehydration_tags": {
+                                "description": "An array of tags to add to rehydrated logs from an archive.",
+                                "example": [
+                                  "team:intake",
+                                  "team:app"
+                                ],
+                                "items": {
+                                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                  "type": "string"
+                                },
+                                "type": "array"
+                              },
                               "state": {
                                 "description": "The state of the archive.",
                                 "enum": [
@@ -16872,6 +16968,18 @@
                             "description": "The archive query/filter. Logs matching this query are included in the archive.",
                             "example": "source:nginx",
                             "type": "string"
+                          },
+                          "rehydration_tags": {
+                            "description": "An array of tags to add to rehydrated logs from an archive.",
+                            "example": [
+                              "team:intake",
+                              "team:app"
+                            ],
+                            "items": {
+                              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -17100,6 +17208,18 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "state": {
                               "description": "The state of the archive.",
@@ -17524,6 +17644,18 @@
                               "example": "source:nginx",
                               "type": "string"
                             },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
                             "state": {
                               "description": "The state of the archive.",
                               "enum": [
@@ -17867,6 +17999,18 @@
                             "description": "The archive query/filter. Logs matching this query are included in the archive.",
                             "example": "source:nginx",
                             "type": "string"
+                          },
+                          "rehydration_tags": {
+                            "description": "An array of tags to add to rehydrated logs from an archive.",
+                            "example": [
+                              "team:intake",
+                              "team:app"
+                            ],
+                            "items": {
+                              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -18095,6 +18239,18 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "state": {
                               "description": "The state of the archive.",
