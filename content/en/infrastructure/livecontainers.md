@@ -36,7 +36,7 @@ Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Enabl
 **Kubernetes Resources for Live Containers requires installation of**:
 
 * [Datadog Agent][8] version 7.21.1 (or above)
-* [Datadog Cluster Agent][9] 1.8.0 (or above)
+* [Datadog Cluster Agent][9] 1.9.0 (or above)
 
 ### Kubernetes Resources
 
