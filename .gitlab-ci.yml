@@ -46,9 +46,9 @@ install_dependencies:
     <<: *cache
   script:
     - yarn install --frozen-lockfile
-  # only:
-  #   changes:
-  #     - yarn.lock
+  only:
+    changes:
+      - yarn.lock
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -73,8 +73,6 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
-    - node -v
-    - ./node_modules/.bin/hugo version
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
