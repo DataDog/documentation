@@ -32,7 +32,7 @@ aliases:
 
 </br>
 
-Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, synthetic checks, network, processes and infrastructure metrics across hosts, containers, proxies, and serverless functions. **Ingest 100% of your traces with no sampling** and use customizable, tag-based retention filters to keep traces that matter to you for analysis.
+Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, synthetic checks, network, processes and infrastructure metrics across hosts, containers, proxies, and serverless functions. **Ingest 100% of your traces with no sampling**, search and analyze them live for the last 15-minutes, and use tag-based retention filters to keep traces that matter for your business context for 15-days.
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -68,15 +68,15 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Live Search and Analytics
 
-[Search on any span][4] by any tag on 100% of your traces live with no sampling for 15 minutes.
+[Search and Analyze][4] 100% of your traces live with no sampling for 15 minutes.
 
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
+{{< img src="tracing/live_search/livesearchmain.gif" alt="Trace Search and Analytics" >}}
 
 ### Trace Retention and Ingestion
 
 [Retain the traces that matter most to you][5] with tag-based retention filters and control data ingestion with Tracing without Limits™.
 
-{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion"  style="width:100%;">}}
 
 ### Deployment Tracking
 
@@ -96,27 +96,21 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
 
-### App Analytics
-
-[Analyze performance][9] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
-
-{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
-
 ### Connect Synthetic Test Data and Traces
 
-[Link simulated API tests][10] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][9] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
 ### Continuous Profiler
 
-[Improve code efficiency][11] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][10] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
 ### Customize your Instrumentation or add OpenTracing
 
-[Seamlessly connect your instrumentation][12] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
+[Seamlessly connect your instrumentation][11] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
 
 ## Further Reading
 
@@ -130,7 +124,6 @@ Now that you've configured your application to send traces to Datadog, start get
 [6]: /tracing/deployment_tracking/
 [7]: /tracing/connect_logs_and_traces/
 [8]: /tracing/serverless_functions/
-[9]: /tracing/app_analytics/
-[10]: /synthetics/apm/
-[11]: /tracing/profiler/
-[12]: /tracing/custom_instrumentation/
+[9]: /synthetics/apm/
+[10]: /tracing/profiler/
+[11]: /tracing/custom_instrumentation/

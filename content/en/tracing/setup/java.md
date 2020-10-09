@@ -27,8 +27,6 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 - Dynamically set `service`, `env` and `version` tags.
 - Enable the Continuous Profiler, sending 100% of traces, and Trace ID injection into logs during setup.
 
-{{< partial name="apm/apm-inapp.html" >}}
-
 Otherwise, to begin tracing applications written in any language:
 
 1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
