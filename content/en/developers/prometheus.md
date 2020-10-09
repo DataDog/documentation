@@ -129,7 +129,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 #### Implementing the check method
 
-In some cases, you may want to override the `check()` function to implement additional features. 
+If you want to implement additional features, override the `check()` function. 
 
 From `instance`, use `endpoint`, which is the Prometheus or OpenMetrics metrics endpoint to poll metrics from:
 
