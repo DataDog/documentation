@@ -7,16 +7,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/php-logging-guide'
     tag: Blog
     text: 'Comment recueillir, personnaliser et analyser des logs PHP'
-  - link: /logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: /logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: /logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: Effectuer des analyses de logs
   - link: /logs/faq/log-collection-troubleshooting-guide
@@ -158,7 +158,7 @@ Utilisez la configuration ci-dessous pour activer le format JSON et enregistrer 
 
 [Transférez ensuite vos fichiers de log à Datadog][1].
 
-[1]: /fr/logs/log_collection
+[1]: /fr/logs/log_collection/
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -176,6 +176,10 @@ Configurez le formateur dans votre configuration Monolog en déclarant le champ 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Associer vos logs à vos traces**
+
+Si l'APM est activé pour cette application, vous pouvez améliorer la corrélation entre vos logs et vos traces d'application [en suivant les instructions de journalisation PHP pour l'APM][2] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
 
 ### Configuration de l'Agent
 
@@ -358,7 +362,7 @@ Ajoutez un processeur de session pour inclure des données de contexte variables
 
 3. [Transférez le fichier JSON généré à Datadog][1].
 
-[1]: /fr/logs/log_collection
+[1]: /fr/logs/log_collection/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -366,12 +370,12 @@ Ajoutez un processeur de session pour inclure des données de contexte variables
 
 Monolog est intégré aux frameworks suivants :
 
-* [Symfony2, Symfony3][2]
-* [PPI][3]
-* [Laravel 4 & 5][4]
-* [Silex][5]
-* [Lumen][6]
-* [CakePHP][7]
+* [Symfony2, Symfony3][3]
+* [PPI][4]
+* [Laravel 4 & 5][5]
+* [Silex][6]
+* [Lumen][7]
+* [CakePHP][8]
 
 Intégrez Monolog à votre framework, puis configurez votre logger :
 
@@ -534,10 +538,11 @@ CakeLog::config('debug', array(
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /fr/agent/logs
-[2]: /fr/logs/log_collection/php/#symfony-v2-v3
-[3]: /fr/logs/log_collection/php/#ppi
-[4]: /fr/logs/log_collection/php/#laravel
-[5]: /fr/logs/log_collection/php/#silex
-[6]: /fr/logs/log_collection/php/#lumen
-[7]: /fr/logs/log_collection/php/#cakephp
+[1]: /fr/agent/logs/
+[2]: /fr/tracing/connect_logs_and_traces/php/
+[3]: /fr/logs/log_collection/php/#symfony-v2-v3
+[4]: /fr/logs/log_collection/php/#ppi
+[5]: /fr/logs/log_collection/php/#laravel
+[6]: /fr/logs/log_collection/php/#silex
+[7]: /fr/logs/log_collection/php/#lumen
+[8]: /fr/logs/log_collection/php/#cakephp

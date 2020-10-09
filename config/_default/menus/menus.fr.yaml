@@ -3152,6 +3152,14 @@ api_v2:
     url: /api/v2/logs-archives/
     identifier: Archives de logs
     generated: true
+  - name: Récupérer l'ordre des archives
+    parent: Archives de logs
+    url: '#recuperer-l-ordre-des-archives'
+    generated: true
+  - name: Mettre à jour l'ordre des archives
+    parent: Archives de logs
+    url: '#mettre-a-jour-l-ordre-des-archives'
+    generated: true
   - name: Récupérer toutes les archives
     parent: Archives de logs
     url: '#recuperer-toutes-les-archives'
