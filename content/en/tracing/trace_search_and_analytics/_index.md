@@ -87,7 +87,7 @@ You can customize what spans are retained and at what retention rates. By defaul
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-With Live Analytics mode, you can perform analytics on 100% of your ingested traces for the last 15 minutes.
+With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes.
 
 {{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
 
