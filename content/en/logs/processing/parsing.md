@@ -93,7 +93,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `hostname`                                      | Matches a hostname.                                                                                                                |
 | `ipOrHost`                                      | Matches a hostname or IP.                                                                                                          |
 | `port`                                          | Matches a port number.                                                                                                             |
-| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`. Use when none of above matchers are appropriate.                                                              |
+| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.                                                              |
 
 {{% /tab %}}
 {{% tab "Filter" %}}
