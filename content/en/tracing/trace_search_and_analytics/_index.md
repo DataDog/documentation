@@ -6,9 +6,9 @@ aliases:
 description: "Beta Documentation for Live Analytics, ingestion rules and retention filters."
 ---
 
-## Search and Analytics Overview
-
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+
+## Search and Analytics Overview
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or retained spans using any tag on any span.  Depending on whether you are searching Live (the last 15 minutes, rolling) or all retained spans, the data used to power your queries will change.
 
