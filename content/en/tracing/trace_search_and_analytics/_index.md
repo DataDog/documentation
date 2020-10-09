@@ -3,7 +3,7 @@ title: Trace Search and Analytics
 kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
-description: "Beta Documentation for Live Analytics, ingestion rules and retention filters."
+description: "Trace Search and Analytics"
 ---
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
@@ -32,7 +32,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been processed by your retention filters. All ingested spans are available for 15 minutes. All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
+When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been processed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
