@@ -6,6 +6,7 @@ import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
+import {redirectCodeLang, addCodeTabEventListeners} from './code-languages';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -157,6 +158,9 @@ function loadPage(newUrl) {
             if (regionSelector) {
                 redirectToRegion(regionSelector.value);
             }
+
+            addCodeTabEventListeners();
+            redirectCodeLang();
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });

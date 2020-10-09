@@ -77,7 +77,16 @@ Get notified if the indexed log volumes in any scope (`service`, `availability-z
 
 {{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
 
+### Alert on indexes reaching their daily quota
+
 It is also possible to [set up a daily quota on indexes][9] to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the above monitor to alert when 80% of this quota is reached within the past 24 hours.
+An event is generated when the daily quota is reached. Set up a monitor to be notified when this happens:
+
+{{< img src="logs/guide/daily_quota_monitor.png" alt="Daily quota Monitor"  style="width:70%;">}}
+
+Here is an example of what the notification would look like in Slack:
+
+{{< img src="logs/guide/daily_quota_notification.png" alt="Notification on daily quota"  style="width:70%;">}}
 
 ## Further Reading
 

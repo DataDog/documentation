@@ -20,6 +20,6 @@ Détecter les cas où un même utilisateur se connecte depuis plusieurs pays dif
 Utiliser les données GeoIP pour détecter les cas où un utilisateur se connecte depuis deux adresses IP correspondant à deux pays différents dans un bref laps de temps.
 
 ## **Triage et réponse :**
-1. Vérifiez si la double authentification a été utilisée.
-2. Contactez l'utilisateur pour déterminer si ce comportement est normal.
-3. Si le compte de l'utilisateur a été compromis, réinitialisez ses identifiants.
+1. Vérifier si la double authentification a été utilisée.
+2. Contacter l'utilisateur pour déterminer si ce comportement est normal.
+3. Si le compte de l'utilisateur a été compromis, réinitialiser ses identifiants.

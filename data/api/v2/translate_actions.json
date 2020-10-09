@@ -1,0 +1,322 @@
+{
+  "DeleteDashboardListItems": {
+    "description": "Delete dashboards from an existing dashboard list.",
+    "summary": "Delete items from a dashboard list",
+    "request_description": "Dashboards to delete from the dashboard list.",
+    "request_schema_description": "Request containing a list of dashboards to delete."
+  },
+  "GetDashboardListItems": {
+    "description": "Fetch the dashboard list’s dashboard definitions.",
+    "summary": "Get a Dashboard List"
+  },
+  "CreateDashboardListItems": {
+    "description": "Add dashboards to an existing dashboard list.",
+    "summary": "Add Items to a Dashboard List",
+    "request_description": "Dashboards to add to the dashboard list.",
+    "request_schema_description": "Request containing a list of dashboards to add."
+  },
+  "UpdateDashboardListItems": {
+    "description": "Update dashboards of an existing dashboard list.",
+    "summary": "Update items of a dashboard list",
+    "request_description": "New dashboards of the dashboard list.",
+    "request_schema_description": "Request containing the list of dashboards to update to."
+  },
+  "AggregateLogs": {
+    "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
+    "summary": "Aggregate events",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
+  },
+  "GetLogsArchiveOrder": {
+    "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
+    "summary": "Get archive order"
+  },
+  "UpdateLogsArchiveOrder": {
+    "description": "Update the order of your archives. Since logs are processed sequentially, reordering an archive may change\nthe structure and content of the data processed by other archives.\n\n**Note**: Using the `PUT` method updates your archive's order by replacing the current order\nwith the new one.",
+    "summary": "Update archive order",
+    "request_description": "An object containing the new ordered list of archive IDs.",
+    "request_schema_description": "A ordered list of archive IDs."
+  },
+  "ListLogsArchives": {
+    "description": "Get the list of configured logs archives with their definitions.",
+    "summary": "Get all archives"
+  },
+  "CreateLogsArchive": {
+    "description": "Create an archive in your organization.",
+    "summary": "Create an archive",
+    "request_description": "The definition of the new archive.",
+    "request_schema_description": "The logs archive."
+  },
+  "DeleteLogsArchive": {
+    "description": "Delete a given archive from your organization.",
+    "summary": "Delete an archive"
+  },
+  "GetLogsArchive": {
+    "description": "Get a specific archive from your organization.",
+    "summary": "Get an archive"
+  },
+  "UpdateLogsArchive": {
+    "description": "Update a given archive configuration.\n\n**Note**: Using this method updates your archive configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.",
+    "summary": "Update an archive",
+    "request_description": "New definition of the archive.",
+    "request_schema_description": "The logs archive."
+  },
+  "RemoveRoleFromArchive": {
+    "description": "Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Revoke role from an archive",
+    "request_description": "",
+    "request_schema_description": "Relationship to role."
+  },
+  "ListArchiveReadRoles": {
+    "description": "Returns all read roles a given archive is restricted to.",
+    "summary": "List read roles for an archive"
+  },
+  "AddReadRoleToArchive": {
+    "description": "Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+    "summary": "Grant role to an archive",
+    "request_description": "",
+    "request_schema_description": "Relationship to role."
+  },
+  "ListRestrictionQueries": {
+    "description": "Returns all restriction queries, including their names and IDs.",
+    "summary": "List restriction queries"
+  },
+  "CreateRestrictionQuery": {
+    "description": "Create a new restriction query for your organization.",
+    "summary": "Create a restriction query",
+    "request_description": "",
+    "request_schema_description": "Create a restriction query."
+  },
+  "GetRoleRestrictionQuery": {
+    "description": "Get restriction query for a given role.",
+    "summary": "Get restriction query for a given role"
+  },
+  "ListUserRestrictionQueries": {
+    "description": "Get all restriction queries for a given user.",
+    "summary": "Get all restriction queries for a given user"
+  },
+  "DeleteRestrictionQuery": {
+    "description": "Deletes a restriction query.",
+    "summary": "Delete a restriction query"
+  },
+  "GetRestrictionQuery": {
+    "description": "Get a restriction query in the organization specified by the restriction query's `restriction_query_id`.",
+    "summary": "Get a restriction query"
+  },
+  "UpdateRestrictionQuery": {
+    "description": "Edit a restriction query.",
+    "summary": "Update a restriction query",
+    "request_description": "",
+    "request_schema_description": "Update a restriction query."
+  },
+  "RemoveRoleFromRestrictionQuery": {
+    "description": "Removes a role from a restriction query.",
+    "summary": "Revoke role from a restriction query",
+    "request_description": "",
+    "request_schema_description": "Relationship to role."
+  },
+  "ListRestrictionQueryRoles": {
+    "description": "Returns all roles that have a given restriction query.",
+    "summary": "List roles for a restriction query"
+  },
+  "AddRoleToRestrictionQuery": {
+    "description": "Adds a role to a restriction query.",
+    "summary": "Grant role to a restriction query",
+    "request_description": "",
+    "request_schema_description": "Relationship to role."
+  },
+  "ListLogsGet": {
+    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Get a quick list of logs"
+  },
+  "ListLogs": {
+    "description": "List endpoint returns logs that match a log search query.\n[Results are paginated][1].\n\nBoth this endpoint and the GET endpoint can be used interchangeably when listing\nlogs.\n\n**If you are considering archiving logs for your organization,\nconsider use of the Datadog archive capabilities instead of the log list API.\nSee [Datadog Logs Archive documentation][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "Get a list of logs",
+    "request_description": "",
+    "request_schema_description": "The request for a logs list."
+  },
+  "ListPermissions": {
+    "description": "Returns a list of all permissions, including name, description, and ID.",
+    "summary": "List permissions"
+  },
+  "ListRoles": {
+    "description": "Returns all roles, including their names and IDs.",
+    "summary": "List roles"
+  },
+  "CreateRole": {
+    "description": "Create a new role for your organization.",
+    "summary": "Create role",
+    "request_description": "",
+    "request_schema_description": "Create a role."
+  },
+  "DeleteRole": {
+    "description": "Disables a role.",
+    "summary": "Delete role"
+  },
+  "GetRole": {
+    "description": "Get a role in the organization specified by the role’s `role_id`.",
+    "summary": "Get a role"
+  },
+  "UpdateRole": {
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.",
+    "summary": "Update a role",
+    "request_description": "",
+    "request_schema_description": "Update a role."
+  },
+  "RemovePermissionFromRole": {
+    "description": "Removes a permission from a role.",
+    "summary": "Revoke permission",
+    "request_description": "",
+    "request_schema_description": "Relationship to a permissions object."
+  },
+  "ListRolePermissions": {
+    "description": "Returns a list of all permissions for a single role.",
+    "summary": "List permissions for a role"
+  },
+  "AddPermissionToRole": {
+    "description": "Adds a permission to a role.",
+    "summary": "Grant permission to a role",
+    "request_description": "",
+    "request_schema_description": "Relationship to a permissions object."
+  },
+  "RemoveUserFromRole": {
+    "description": "Removes a user from a role.",
+    "summary": "Remove a user from a role",
+    "request_description": "",
+    "request_schema_description": "Relationship to user."
+  },
+  "ListRoleUsers": {
+    "description": "Gets all users of a role.",
+    "summary": "Get all users of a role"
+  },
+  "AddUserToRole": {
+    "description": "Adds a user to a role.",
+    "summary": "Add a user to a role",
+    "request_description": "",
+    "request_schema_description": "Relationship to user."
+  },
+  "ListSecurityMonitoringRules": {
+    "description": "List rules.",
+    "summary": "List rules"
+  },
+  "CreateSecurityMonitoringRule": {
+    "description": "Create a detection rule.",
+    "summary": "Create a detection rule",
+    "request_description": "",
+    "request_schema_description": "Create a new rule."
+  },
+  "DeleteSecurityMonitoringRule": {
+    "description": "Delete an existing rule. Default rules cannot be deleted.",
+    "summary": "Delete an existing rule"
+  },
+  "GetSecurityMonitoringRule": {
+    "description": "Get a rule's details.",
+    "summary": "Get a rule's details"
+  },
+  "UpdateSecurityMonitoringRule": {
+    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled and to change notifications.",
+    "summary": "Update an existing rule",
+    "request_description": "",
+    "request_schema_description": "Update an existing rule."
+  },
+  "ListSecurityMonitoringSignals": {
+    "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
+    "summary": "Get a quick list of security signals"
+  },
+  "SearchSecurityMonitoringSignals": {
+    "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
+    "summary": "Get a list of security signals",
+    "request_description": "",
+    "request_schema_description": "The request for a security signal list."
+  },
+  "GetServices": {
+    "description": "Get all services for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services.",
+    "summary": "Get a list of all services"
+  },
+  "CreateService": {
+    "description": "Creates a new service.",
+    "summary": "Create a new service",
+    "request_description": "Service Payload.",
+    "request_schema_description": "Create request with a service payload."
+  },
+  "DeleteService": {
+    "description": "Deletes an existing service.",
+    "summary": "Delete an existing service"
+  },
+  "GetService": {
+    "description": "Get details of a service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services",
+    "summary": "Get details of a service"
+  },
+  "UpdateService": {
+    "description": "Updates an existing service. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing service",
+    "request_description": "Service Payload.",
+    "request_schema_description": "Update request with a service payload."
+  },
+  "GetTeams": {
+    "description": "Get all teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
+    "summary": "Get a list of all teams"
+  },
+  "CreateTeam": {
+    "description": "Creates a new team.",
+    "summary": "Create a new team",
+    "request_description": "Teams Payload.",
+    "request_schema_description": "Create request with a team payload."
+  },
+  "DeleteTeam": {
+    "description": "Deletes an existing team.",
+    "summary": "Delete an existing team"
+  },
+  "GetTeam": {
+    "description": "Get details of a team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
+    "summary": "Get details of a team"
+  },
+  "UpdateTeam": {
+    "description": "Updates an existing team. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing team",
+    "request_description": "Teams Payload.",
+    "request_schema_description": "Update request with a team payload."
+  },
+  "SendInvitations": {
+    "description": "Sends emails to one or more users inviting them to join the organization.",
+    "summary": "Send invitation emails",
+    "request_description": "",
+    "request_schema_description": "Object to invite users to join the organization."
+  },
+  "GetInvitation": {
+    "description": "Returns a single user invitation by its UUID.",
+    "summary": "Get a user invitation"
+  },
+  "ListUsers": {
+    "description": "Get the list of all users in the organization. This list includes\nall users even if they are deactivated or unverified.",
+    "summary": "List all users"
+  },
+  "CreateUser": {
+    "description": "Create a user for your organization.",
+    "summary": "Create a user",
+    "request_description": "",
+    "request_schema_description": "Create a user."
+  },
+  "DisableUser": {
+    "description": "Disable a user. Can only be used with an application key belonging\nto an administrator user.",
+    "summary": "Disable a user"
+  },
+  "GetUser": {
+    "description": "Get a user in the organization specified by the user’s `user_id`.",
+    "summary": "Get user details"
+  },
+  "UpdateUser": {
+    "description": "Edit a user. Can only be used with an application key belonging\nto an administrator user.",
+    "summary": "Update a user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
+  },
+  "ListUserOrganizations": {
+    "description": "Get a user organization. Returns the user information and all organizations\njoined by this user.",
+    "summary": "Get a user organization"
+  },
+  "ListUserPermissions": {
+    "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
+    "summary": "Get a user permissions"
+  }
+}

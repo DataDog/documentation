@@ -3630,6 +3630,134 @@
         ],
         "type": "object"
       },
+      "LogsArchiveOrder": {
+        "description": "A ordered list of archive IDs.",
+        "properties": {
+          "data": {
+            "description": "The definition of an archive order.",
+            "properties": {
+              "attributes": {
+                "description": "The attributes associated with the archive order.",
+                "properties": {
+                  "archive_ids": {
+                    "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                    "example": [
+                      "a2zcMylnM4OCHpYusxIi1g",
+                      "a2zcMylnM4OCHpYusxIi2g",
+                      "a2zcMylnM4OCHpYusxIi3g"
+                    ],
+                    "items": {
+                      "description": "A given archive ID.",
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "archive_ids"
+                ],
+                "type": "object"
+              },
+              "type": {
+                "default": "archive_order",
+                "description": "Type of the archive order definition.",
+                "enum": [
+                  "archive_order"
+                ],
+                "example": "archive_order",
+                "type": "string",
+                "x-enum-varnames": [
+                  "ARCHIVE_ORDER"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "attributes"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "LogsArchiveOrderAttributes": {
+        "description": "The attributes associated with the archive order.",
+        "properties": {
+          "archive_ids": {
+            "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+            "example": [
+              "a2zcMylnM4OCHpYusxIi1g",
+              "a2zcMylnM4OCHpYusxIi2g",
+              "a2zcMylnM4OCHpYusxIi3g"
+            ],
+            "items": {
+              "description": "A given archive ID.",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "archive_ids"
+        ],
+        "type": "object"
+      },
+      "LogsArchiveOrderDefinition": {
+        "description": "The definition of an archive order.",
+        "properties": {
+          "attributes": {
+            "description": "The attributes associated with the archive order.",
+            "properties": {
+              "archive_ids": {
+                "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                "example": [
+                  "a2zcMylnM4OCHpYusxIi1g",
+                  "a2zcMylnM4OCHpYusxIi2g",
+                  "a2zcMylnM4OCHpYusxIi3g"
+                ],
+                "items": {
+                  "description": "A given archive ID.",
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "archive_ids"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "default": "archive_order",
+            "description": "Type of the archive order definition.",
+            "enum": [
+              "archive_order"
+            ],
+            "example": "archive_order",
+            "type": "string",
+            "x-enum-varnames": [
+              "ARCHIVE_ORDER"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "attributes"
+        ],
+        "type": "object"
+      },
+      "LogsArchiveOrderDefinitionType": {
+        "default": "archive_order",
+        "description": "Type of the archive order definition.",
+        "enum": [
+          "archive_order"
+        ],
+        "example": "archive_order",
+        "type": "string",
+        "x-enum-varnames": [
+          "ARCHIVE_ORDER"
+        ]
+      },
       "LogsArchiveState": {
         "description": "The state of the archive.",
         "enum": [
@@ -15955,6 +16083,301 @@
         "summary": "Aggregate events",
         "tags": [
           "Logs"
+        ],
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/api/v2/logs/config/archive-order": {
+      "get": {
+        "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
+        "operationId": "GetLogsArchiveOrder",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "A ordered list of archive IDs.",
+                  "properties": {
+                    "data": {
+                      "description": "The definition of an archive order.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes associated with the archive order.",
+                          "properties": {
+                            "archive_ids": {
+                              "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                              "example": [
+                                "a2zcMylnM4OCHpYusxIi1g",
+                                "a2zcMylnM4OCHpYusxIi2g",
+                                "a2zcMylnM4OCHpYusxIi3g"
+                              ],
+                              "items": {
+                                "description": "A given archive ID.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "archive_ids"
+                          ],
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "archive_order",
+                          "description": "Type of the archive order definition.",
+                          "enum": [
+                            "archive_order"
+                          ],
+                          "example": "archive_order",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ARCHIVE_ORDER"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "summary": "Get archive order",
+        "tags": [
+          "Logs Archives"
+        ]
+      },
+      "put": {
+        "description": "Update the order of your archives. Since logs are processed sequentially, reordering an archive may change\nthe structure and content of the data processed by other archives.\n\n**Note**: Using the `PUT` method updates your archive's order by replacing the current order\nwith the new one.",
+        "operationId": "UpdateLogsArchiveOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "A ordered list of archive IDs.",
+                "properties": {
+                  "data": {
+                    "description": "The definition of an archive order.",
+                    "properties": {
+                      "attributes": {
+                        "description": "The attributes associated with the archive order.",
+                        "properties": {
+                          "archive_ids": {
+                            "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                            "example": [
+                              "a2zcMylnM4OCHpYusxIi1g",
+                              "a2zcMylnM4OCHpYusxIi2g",
+                              "a2zcMylnM4OCHpYusxIi3g"
+                            ],
+                            "items": {
+                              "description": "A given archive ID.",
+                              "type": "string"
+                            },
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "archive_ids"
+                        ],
+                        "type": "object"
+                      },
+                      "type": {
+                        "default": "archive_order",
+                        "description": "Type of the archive order definition.",
+                        "enum": [
+                          "archive_order"
+                        ],
+                        "example": "archive_order",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ARCHIVE_ORDER"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "attributes"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "description": "An object containing the new ordered list of archive IDs.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "A ordered list of archive IDs.",
+                  "properties": {
+                    "data": {
+                      "description": "The definition of an archive order.",
+                      "properties": {
+                        "attributes": {
+                          "description": "The attributes associated with the archive order.",
+                          "properties": {
+                            "archive_ids": {
+                              "description": "An ordered array of `<ARCHIVE_ID>` strings, the order of archive IDs in the array\ndefine the overall archives order for Datadog.",
+                              "example": [
+                                "a2zcMylnM4OCHpYusxIi1g",
+                                "a2zcMylnM4OCHpYusxIi2g",
+                                "a2zcMylnM4OCHpYusxIi3g"
+                              ],
+                              "items": {
+                                "description": "A given archive ID.",
+                                "type": "string"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "archive_ids"
+                          ],
+                          "type": "object"
+                        },
+                        "type": {
+                          "default": "archive_order",
+                          "description": "Type of the archive order definition.",
+                          "enum": [
+                            "archive_order"
+                          ],
+                          "example": "archive_order",
+                          "type": "string",
+                          "x-enum-varnames": [
+                            "ARCHIVE_ORDER"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "attributes"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Update archive order",
+        "tags": [
+          "Logs Archives"
         ],
         "x-codegen-request-body-name": "body"
       }

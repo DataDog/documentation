@@ -49,7 +49,7 @@ Définir sur `true` pour fusionner la trace X-Ray et la trace Datadog lorsque le
 
 Si vous rencontrez un bug avec ce package, faites-le nous savoir. Avant de créer un ticket, vérifiez que le problème n'a pas déjà été signalé dans les tickets existants pour éviter les doublons.
 
-Lorsque vous créez un ticket, indiquez la version de la couche Lambda Datadog, la version de Ruby et la trace de pile, si possible. Indiquez aussi les étapes à reproduire le cas échéant.
+Lorsque vous créez un ticket, indiquez la version de la couche Lambda Datadog, la version de Ruby et la stack trace, si possible. Indiquez aussi les étapes à reproduire le cas échéant.
 
 Vous pouvez également créer un ticket pour demander l'ajout d'une fonctionnalité.
 

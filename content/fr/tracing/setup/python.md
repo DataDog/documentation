@@ -9,7 +9,7 @@ further_reading:
   - link: 'https://github.com/DataDog/dd-trace-py'
     tag: GitHub
     text: Code source
-  - link: 'http://pypi.datadoghq.com/trace/docs/'
+  - link: 'https://ddtrace.readthedocs.io/en/stable/'
     tag: Pypi
     text: Documentation relative à l'API
   - link: tracing/visualization/
@@ -55,6 +55,7 @@ Pour découvrir des options d'utilisation, de configuration et de contrôle plus
 
 Lorsque vous utilisez **ddtrace-run**, les [variables d'environnement][7] suivantes sont disponibles :
 
+
 | Variable d'environnement               | Valeur par défaut     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DATADOG_TRACE_DEBUG`              | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                                                                                                         |
@@ -76,6 +77,7 @@ Nous vous conseillons d'utiliser `DD_ENV`, `DD_SERVICE` et `DD_VERSION` pour dé
 | `DD_LOGS_INJECTION`                | `false`     | Active la [mise en relation des logs et des traces injectées][11].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Active App Analytics pour toutes les [intégrations Web][12].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Active App Analytics pour une intégration spécifique. Exemple : `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
+
 
 ## Modifier le hostname de l'Agent
 
@@ -102,10 +104,10 @@ tracer.configure(
 [3]: /fr/tracing/send_traces/
 [4]: /fr/tracing/setup/docker/
 [5]: /fr/agent/kubernetes/apm/
-[6]: http://pypi.datadoghq.com/trace/docs
-[7]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
+[6]: https://ddtrace.readthedocs.io/en/stable/
+[7]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
 [8]: /fr/getting_started/tagging/unified_service_tagging
 [9]: /fr/tracing/guide/setting_primary_tags_to_scope/
-[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
+[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#priority-sampling
 [11]: /fr/tracing/connect_logs_and_traces/python/
 [12]: /fr/tracing/app_analytics/?tab=python#automatic-configuration
