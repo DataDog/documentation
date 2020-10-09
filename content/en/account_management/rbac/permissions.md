@@ -127,6 +127,8 @@ Grants a role the ability to use the [Create, Edit and Delete Facets][18].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
+This permission has no incidence on the management of [Standard Attributes][19] or [Aliasing Facets][20].
+
 #### logs_modify_indexes
 
 Grants a role the ability to create and modify [log indexes][4]. This includes:
@@ -163,17 +165,6 @@ This configuration is only supported through the UI.
 
 {{% /tab %}}
 {{< /tabs >}}
-
-#### logs_write_pipelines
-
-Grants a role the ability to create and modify [log processing pipelines][8]. This includes:
-
-- Setting the name of the pipeline
-- Setting [pipelines filters][9] for what logs should enter the processing pipeline
-- Reorder pipelines
-- Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
-
-**Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
 
 
 #### logs_write_pipelines
@@ -429,3 +420,5 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [16]: /logs/explorer/live_tail/
 [17]: /logs/guide/logs-rbac/?tab=ui#overview
 [18]: /logs/explorer/facets/#overview
+[19]: /logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
+[20]: /logs/explorer/facets/#alias-facets
