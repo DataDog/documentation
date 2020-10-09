@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/bin/env -S awk -f
 # SPDX-License-Identifier: Apache-2.0 OR MIT
 # Based on https://codereview.stackexchange.com/questions/194986/print-code-fenced-sections-of-a-markdown-document/195030#195030
 BEGIN {
