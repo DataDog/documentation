@@ -67,28 +67,29 @@ Find below the list of permissions for the Security Monitoring assets:
 
 ## Log Management
 
-Find below the list of permissions for the log configuration assets and log data:
+Find below the list of permissions for the log configuration assets and log data, along with the typical category of user to whom assign this permission (refer to our recommendations on how to assign permissions to team members in the [Logs RBAC][17] guide).
 
-| Name                           | Description                                | Scopable |
-| ------------------------------ | ------------------------------------------ | -------- |
-| `logs_read_data`               | Read access to log data                   | true     |
-| `logs_modify_indexes`          | Update the definition of log indexes       | false    |
-| `logs_write_exclusion_filters` | Update indexes exclusion filters           | true     |
-| `logs_write_pipelines`         | Update log pipelines                       | false    |
-| `logs_write_processors`        | Update the log processors in a pipeline    | true     |
-| `logs_write_archives`          | Update the external archives configuration | false    |
-| `logs_read_archives`           | See archive configuration details, access content from the archive | true     |
-| `logs_write_historical_views`  | Rehydrate data from Archives               | false    |
-| `logs_public_config_api`       | Access the Logs Public Config API (r/w)    | false    |
-| `logs_generate_metrics`        | Access the Generate Metrics feature        | false    |
+| Name                                                           | Description                                | Scopable |  Typical User |
+| -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
+| [`logs_read_data`](#logs-read-data)                            | Read access to log data                    | true     | Read-Only     |
+| [`logs_modify_indexes`](#logs-modify-indexes)                  | Update the definition of log indexes       | false    | Admin         |
+| [`logs_write_facets`](#logs-write-facets)                      | Create, Update and Delete Log Facets       | false    | Standard      |
+| [`logs_write_exclusion_filters`](#logs_write-exclusion-filters)| Update indexes exclusion filters           | true     | Standard      |
+| [`logs_write_pipelines`](#logs-write-pipelines)                | Update log pipelines                       | false    | Admin         |
+| [`logs_write_processors`](#logs-write-processors)              | Update the log processors in a pipeline    | true     | Standard      |
+| [`logs_write_archives`](#logs-write-archives)                  | Update the external archives configuration | false    | Admin         |
+| [`logs_read_archives`](#logs-read-archives)                    | See archive configuration details, access content from the archive | true     | Standard |
+| [`logs_write_historical_views`](#logs-write-historical-views)  | Rehydrate data from Archives               | false    | Standard      |
+| [`logs_public_config_api`](#logs-public-config-api)            | Access the Logs Public Config API (r/w)    | false    | Admin         |
+| [`logs_generate_metrics`](#logs-generate-metrics)              | Access the Generate Metrics feature        | false    | Standard      |
 
 
 Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive `logs_read_data` permission:
 
-| Name                           | Description                                | Scopable |
-| ------------------------------ | ------------------------------------------ | -------- |
-| `logs_live_tail`               | Access the live tail feature               | false    |
-| `logs_read_index_data`         | Read a subset log data (index based)       | true     |
+| Name                                              | Description                                | Scopable |  Typical User |
+| ------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
+| [`logs_live_tail`](#logs-live-tail)               | Access the live tail feature               | false    | Read-Only     |
+| [`logs_read_index_data`]](#logs-read-index-data)  | Read a subset log data (index based)       | true     | Read-Only     |
 
 
 {{< tabs >}}
@@ -119,6 +120,12 @@ More details about these permissions below.
 Grants a role the ability to use the [Generate Metrics][3] feature.
 
 This permission is global and enables both the creation of new metrics, and the edition or deletion of existing ones.
+
+#### logs_write_facet
+
+Grants a role the ability to use the [Create, Edit and Delete Facets][18].
+
+This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
 #### logs_modify_indexes
 
@@ -167,6 +174,19 @@ Grants a role the ability to create and modify [log processing pipelines][8]. Th
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
 
 **Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
+
+
+#### logs_write_pipelines
+
+Grants a role the ability to create and modify [log processing pipelines][8]. This includes:
+
+- Setting the name of the pipeline
+- Setting [pipelines filters][9] for what logs should enter the processing pipeline
+- Reorder pipelines
+- Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
+
+**Note**: This permission also grants [Logs Write Processors](#logs-write-processors) (for all processors on all pipelines) permissions behind the scenes.
+
 
 #### logs_write_processors
 
@@ -407,3 +427,5 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [14]: /api/v1/logs-pipelines/
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
+[17]: /logs/guide/logs-rbac/?tab=ui#overview
+[18]: /logs/explorer/facets/#overview
