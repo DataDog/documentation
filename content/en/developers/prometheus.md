@@ -221,22 +221,23 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 ## Going further
 
-To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][9]
-You can improve your OpenMetrics check with the following methods:
+To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][9].
 
-### `self.ignore_metrics`
+You can improve your OpenMetrics check by including default values for additional configuration options:
+
+### `ignore_metrics`
 
 Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
 
-### `self.labels_mapper`
+### `labels_mapper`
 
 If the `labels_mapper` dictionary is provided, the metrics labels in `labels_mapper` use the corresponding value as tag name when sending the gauges.
 
-### `self.exclude_labels`
+### `exclude_labels`
 
 `exclude_labels` is an array of labels to exclude. Those labels will not be added as tags when submitting the metric.
 
-### `self.type_overrides`
+### `type_overrides`
 
 `type_overrides` is a dictionary where the keys are Prometheus or OpenMetrics metric names, and the values are a metric type (name as string) to use instead of the one listed in the payload. This can be used to force a type on untyped metrics.
 Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
