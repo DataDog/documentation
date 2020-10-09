@@ -32,7 +32,7 @@ aliases:
 
 </br>
 
-Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, synthetic checks, network, processes and infrastructure metrics across hosts, containers, proxies, and serverless functions. **Ingest 100% of your traces with no sampling** and use customizable, tag-based retention filters to keep traces that matter to you, in addition to automatically keeping traces representing errors, high latency, or unique code paths for analysis.
+Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors, and latency. Distributed traces **seamlessly correlate** to browser sessions, logs, synthetic checks, network, processes and infrastructure metrics across hosts, containers, proxies, and serverless functions. **Ingest 100% of your traces with no sampling** and use customizable, tag-based retention filters to keep traces that matter to you for analysis.
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -66,23 +66,23 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
-### Deployment Tracking
-
-[Monitor service performance][4] and compare between versions for rolling, blue/green, shadow, or canary deployments.
-
-{{< img src="tracing/deployment_tracking/ErrorRateByVersion.png" alt="Versions on the Service Page"  style="width:100%;">}}
-
 ### Live Search and Analytics
 
-[Search on any span][5] by any tag on 100% of your traces live with no sampling for 15 minutes.
+[Search on any span][4] by any tag on 100% of your traces live with no sampling for 15 minutes.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
 ### Trace Retention and Ingestion
 
-[Retain the traces that matter most to you][6] with tag-based retention filters and control data ingestion with Tracing without Limits™.
+[Retain the traces that matter most to you][5] with tag-based retention filters and control data ingestion with Tracing without Limits™.
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-3.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
+
+### Deployment Tracking
+
+[Monitor service performance][6] and compare between versions for rolling, blue/green, shadow, or canary deployments.
+
+{{< img src="tracing/deployment_tracking/ErrorRateByVersion.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
 ### Connect Logs and Distributed Traces
 
@@ -125,9 +125,9 @@ Now that you've configured your application to send traces to Datadog, start get
 [1]: /tracing/send_traces/
 [2]: /tracing/visualization/services_map/
 [3]: /tracing/visualization/service/
-[4]: /tracing/deployment_tracking/
-[5]: /tracing/trace_search_and_analytics/
-[6]: /tracing/trace_retention_and_ingestion/
+[4]: /tracing/trace_search_and_analytics/
+[5]: /tracing/trace_retention_and_ingestion/
+[6]: /tracing/deployment_tracking/
 [7]: /tracing/connect_logs_and_traces/
 [8]: /tracing/serverless_functions/
 [9]: /tracing/app_analytics/
