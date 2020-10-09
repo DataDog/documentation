@@ -21,7 +21,7 @@ further_reading:
 
 APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-Trace Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed spans. For example, use a Trace Analytics monitor to receive alerts on a spike in slow requests.
+Trace Analytics monitors allow you to visualize APM data over time and set up alerts based on Retained Spans. For example, use a Trace Analytics monitor to receive alerts on a spike in slow requests.
 
 ## Monitor creation
 
@@ -72,7 +72,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
     * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
     * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 
-**Note:** Trace Analytics monitors can only be created based on [Indexed spans][4].
+**Note:** Trace Analytics monitors can only be created based on [Retained Spans][4].
 
 ### Select alert conditions
 

@@ -14,7 +14,7 @@ aliases:
 **Note**: To enable App Analytics with the Agent, [services][1] must be already flowing into Datadog.
 
 1. Once [your services are set up][4], navigate to the [App Analytics docs page][5] to find a list of [services][6] and [resource][7] names available for use in Trace Search.
-3. Select the `environment` and `services` from which to extract [Indexed spans][8].
+3. Select the `environment` and `services` from which to extract [Retained Spans][8].
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}

@@ -13,7 +13,7 @@ If you are an admin of your account, you can view your account usage using the [
 | Metric         | Description                                                                              |
 |----------------|------------------------------------------------------------------------------------------|
 | APM Hosts      | Shows the 99th percentile of all distinct APM hosts over all hours in the current month. |
-| Indexed spans | Shows the sum of all Indexed spans indexed over all hours in the current month.         |
+| Retained Spans | Shows the sum of all Retained Spans indexed over all hours in the current month.         |
 | Fargate Tasks  | Shows the average of all Fargate tasks over all hours in the current month.              |
 
 ## Set Alert on APM Hosts
@@ -27,16 +27,16 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 3. Define the rate you would like to set as a warning or error.
 4. Define an explicit notification: The volume of hosts on this env just got too high has exceeded the allocated threshold value. Scale down the number of APM enabled hosts.
 
-## Set Alert on Indexed spans
+## Set Alert on Retained Spans
 
-To get alerts in case a code deployment causes a spike in Indexed spans generated, set up [App Analytics monitors][5] on Indexed spans. Get notified at any moment if the Indexed span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in Retained Spans generated, set up [App Analytics monitors][5] on Retained Spans. Get notified at any moment if the Indexed span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 
 1. Go to [App Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
 5. Define the Indexed span volume rate you would like to set as a warning or error.
-6. Define an explicit notification: The volume of Indexed spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
+6. Define an explicit notification: The volume of Retained Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
 Learn more about Indexed span filtering and usage control [here][7].
 

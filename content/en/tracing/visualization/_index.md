@@ -31,8 +31,8 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                          |
 | [Trace metrics](#trace-metrics) | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][2]. They can be used to identify and alert on hits, errors, or latency.                       |
-| [App Analytics](#app-analytics) | App Analytics is used to filter Indexed spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                                                |
-| [Indexed span](#analyzed-span) | Indexed spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                                                |
+| [App Analytics](#app-analytics) | App Analytics is used to filter Retained Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                                                |
+| [Indexed span](#analyzed-span) | Retained Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*.                                                                                                    |
 
 ## Services
@@ -99,16 +99,16 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 ## App Analytics
 
-App Analytics is used to filter [Indexed spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][17].
+App Analytics is used to filter [Retained Spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][17].
 
 {{< wistia vrmqr812sz >}}
 
 ## Indexed span
 
-Indexed spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics by the [tags](#span-tags) included on the span. After enabling App Analytics, the tracing client analyzes an entry-point span for web services by default, with the ability to [configure additional services][18] in your application. For example, a Java service with 100 requests generates 100 Indexed spans from its `servlet.request` spans. If you set `DD_TRACE_ANALYTICS_ENABLED=true` the `web-store` service analyzes all `rack.request` spans and makes them available in App Analytics. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
+Retained Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics by the [tags](#span-tags) included on the span. After enabling App Analytics, the tracing client analyzes an entry-point span for web services by default, with the ability to [configure additional services][18] in your application. For example, a Java service with 100 requests generates 100 Retained Spans from its `servlet.request` spans. If you set `DD_TRACE_ANALYTICS_ENABLED=true` the `web-store` service analyzes all `rack.request` spans and makes them available in App Analytics. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
 
 <div class="alert alert-info">
-You can run an estimate on the number of Indexed spans that would be generated from your services with the <a href="https://app.datadoghq.com/apm/docs/trace-search">Indexed span Estimator</a>. After ingestion, you can filter Indexed spans from 100% to a lower percentage on a service-by-service level under <a href="https://app.datadoghq.com/apm/settings">APM settings</a>. This reduces billable Indexed spans.
+You can run an estimate on the number of Retained Spans that would be generated from your services with the <a href="https://app.datadoghq.com/apm/docs/trace-search">Indexed span Estimator</a>. After ingestion, you can filter Retained Spans from 100% to a lower percentage on a service-by-service level under <a href="https://app.datadoghq.com/apm/settings">APM settings</a>. This reduces billable Retained Spans.
 </div>
 
 ## Span tags

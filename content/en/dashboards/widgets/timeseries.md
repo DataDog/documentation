@@ -1,7 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
-description: "Display the evolution of one or more metrics, log events, Indexed spans, or process metrics over time."
+description: "Display the evolution of one or more metrics, log events, Retained Spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
   text: "Explore your data in full-screen graph mode"
 ---
 
-The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
+The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Retained Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
 {{< img src="dashboards/widgets/timeseries/timeseries.png" alt="Timeseries" >}}
 
@@ -31,7 +31,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][3] to configure a metric query.
-    * Indexed spans: See [the trace search documentation][4] to configure an Indexed span query.
+    * Retained Spans: See [the trace search documentation][4] to configure an Indexed span query.
     * Log Events: See [the log search documentation][5] to configure a log event query.
 
 2. Customize your graph with the available [options](#options).

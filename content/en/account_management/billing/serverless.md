@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 150,000 Indexed spans and 5 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 150,000 Retained Spans and 5 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
 ## Serverless Functions
 

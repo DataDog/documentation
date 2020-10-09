@@ -47,7 +47,7 @@ Notebooks support visualizations and text cells.
 
 #### Visualization
 
-Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
+Graphs in notebooks support all Datadog data sources: metrics, log events, Retained Spans, live processes, network traffic, RUM events, profiling metrics, and security signals.
 
 {{< img src="notebooks/data_sources.png" alt="live collaboration in notebooks"  style="width:50%;">}}
 

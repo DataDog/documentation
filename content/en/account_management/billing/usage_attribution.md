@@ -23,7 +23,7 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 
 - Indexed Log Events
 - Ingested Logs
-- Indexed spans
+- Retained Spans
 
 ### Getting started
 
