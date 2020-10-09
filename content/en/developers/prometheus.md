@@ -93,7 +93,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 A default instance is the basic configuration used for the check. The default instance should override `namespace`, `metrics`, and `prometheus_url`.
 
 
-Note that we also overrode some of the default values for certain config options in the `OpenMetricsBaseCheck`, we can expect to see better metric behavior correlation between [Prometheus and Datadog metric types][7]. 
+Note that we also override the default values for some config options in the `OpenMetricsBaseCheck`, so there is increased metric behavior correlation between [Prometheus and Datadog metric types][7]. 
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
