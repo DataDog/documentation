@@ -4,6 +4,8 @@ kind: documentation
 description: "Beta Documentation for Live Analytics, ingestion rules and retention filters."
 ---
 
+## Search and Analytics Overview
+
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or retained spans using any tag on any span.  Depending on whether you are searching Live (the last 15 minutes, rolling) or all retained spans, the data used to power your queries will change.
@@ -13,6 +15,8 @@ Live data is all [Ingested spans][2] and is available in real-time for the past 
 Send and retain exactly the spans you care about. Any retained span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
 
 Retention filters can be configured within the app, and more information is available in the [Trace Retention][3] documentation.
+
+### Enable Tracing Without Limits
 
 Fine-grained ingestion controls can also be set per service instrumented with Datadog APM, with more details available in the [Ingestion Controls][2] documentation.  All services can be also be configured to send all of their traffic with one environment variable configuration
 
