@@ -1,5 +1,5 @@
 ---
-title: Ingestion and Indexing Controls
+title: Trace Retention and Ingestion
 kind: documentation
 aliases:
     - /account_management/billing/usage_control_apm/
@@ -46,7 +46,7 @@ Intelligent Retention retains:
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
-To customize what spans are indexed and retained for 15 days, you can create, modify and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed the full trace context will be available.  In order to be searched by tag in [Historical Search and Analytics][2], however, the span containing the relevant tag must have been indexed.
+To customize what spans are indexed and retained for 15 days, you can create, modify and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed the complete trace will be available.  In order to be searched by tag in [Search and Analytics][2], however, the span containing the relevant tag must have been processed and retained by a [retention filter](#retention-filters).
 
 1. Name your filter.
 2. Set the relevant tags you would like to index spans that match ALL of.
