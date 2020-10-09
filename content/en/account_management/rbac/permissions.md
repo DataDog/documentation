@@ -73,7 +73,7 @@ Find below the list of permissions for the log configuration assets and log data
 | -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
 | [`logs_read_data`](#logs-read-data)                            | Read access to log data                    | true     | Read-Only     |
 | [`logs_modify_indexes`](#logs-modify-indexes)                  | Update the definition of log indexes       | false    | Admin         |
-| [`logs_write_facets`](#logs-write-facets)                      | Create, Update and Delete Log Facets       | false    | Standard      |
+| [`logs_write_facets`](#logs_write_facets)                      | Create, Update and Delete Log Facets       | false    | Standard      |
 | [`logs_write_exclusion_filters`](#logs_write-exclusion-filters)| Update indexes exclusion filters           | true     | Standard      |
 | [`logs_write_pipelines`](#logs-write-pipelines)                | Update log pipelines                       | false    | Admin         |
 | [`logs_write_processors`](#logs-write-processors)              | Update the log processors in a pipeline    | true     | Standard      |
@@ -121,7 +121,7 @@ Grants a role the ability to use the [Generate Metrics][3] feature.
 
 This permission is global and enables both the creation of new metrics, and the edition or deletion of existing ones.
 
-#### logs_write_facet
+#### logs_write_facets
 
 Grants a role the ability to use the [Create, Edit and Delete Facets][18].
 
