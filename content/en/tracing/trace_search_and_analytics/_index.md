@@ -20,11 +20,13 @@ Retention filters can be configured within the app, and more information is avai
 
 ### Enable Tracing Without Limits
 
-Fine-grained ingestion controls can also be set per service instrumented with Datadog APM, with more details available in the [Ingestion Controls][2] documentation.  All services can be also be configured to send all of their traffic with one environment variable configuration
+Fine-grained ingestion controls can be set per service instrumented with Datadog APM, with more details available in the [Ingestion Controls][2] documentation.  All services can be also be configured to send all of their traffic with one environment variable configuration below:
 
 ```
 DD_TRACE_SAMPLE_RATE=1.0
 ```
+
+[Retention filters][3] are set within the Datadog UI after services are instrumented, and are used to retain relevant spans based on tag-based filters.
 
 ## Live Search
 
