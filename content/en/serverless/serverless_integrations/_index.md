@@ -36,6 +36,7 @@ Enable the [AWS Step Functions integration][4] to automatically get additional t
     | ------------------ | -------------------------------------------- |
     | `states:ListStateMachines`     | List active Step Functions.   |
     | `states:DescribeStateMachine` | Get Step Function metadata, and tags.  |
+    | `cloudtrail:LookupEvents` | Get deployment events on lambda functions.  |
 3. Configure [distributed tracing and logging][4] for AWS Step Functions.
 4. Once done, go to the [Serverless Homepage][2] and filter your Lambda functions by `statemachinename`, `statemachinearn` or `stepname`.
 
