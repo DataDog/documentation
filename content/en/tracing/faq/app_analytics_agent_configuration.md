@@ -4,7 +4,14 @@ kind: Documentation
 aliases:
   - /tracing/trace_search_and_analytics/agent_trace_search/
   - /tracing/app_analytics/agent_trace_search/
+  - /tracing/guide/app_analytics_agent_configuration/
 ---
+
+<div class="alert alert-danger">
+This is a deprecated page with configuration information relevant to Legacy App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
+<br>
+Read the <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion documentation</a> to learn how to use the new functionality.
+</div>
 
 [App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 

@@ -36,7 +36,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.                                                                                              |
 
-**Note** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 ## Services
 
@@ -106,10 +106,12 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 ## Indexed span
 
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+
 Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 
 <div class="alert alert-info">
-You can run an estimate on the number of Indexed Spans that would be generated from your services with the <a href="https://app.datadoghq.com/apm/docs/trace-search">Indexed span Estimator</a>. After ingestion, you can filter Indexed Spans from 100% to a lower percentage on a service-by-service level under <a href="https://app.datadoghq.com/apm/settings">APM settings</a>. This reduces billable Indexed Spans.
+After ingestion, by creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> you can control and visualize exactly how many spans are being indexed per service.
 </div>
 
 ## Span tags
