@@ -3,6 +3,7 @@ title: Trace Search and Analytics
 kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
+    - /tracing/livesearch/
 description: "Trace Search and Analytics"
 ---
 

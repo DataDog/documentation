@@ -70,7 +70,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
-### Live Analytics
+### Live Search
 
 [Search 100% of your traces][6] by any tag live with no sampling for 15 minutes.
 

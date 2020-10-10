@@ -111,6 +111,8 @@ Note: the following usage types are not supported in this tool:
 * Ingested Logs
 * Indexed Spans
 
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
 ## Further Reading
