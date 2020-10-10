@@ -241,9 +241,7 @@ The bottom part of the view includes additional information about the trace or a
 
 <div class="alert alert-info">In order to enable Logs in this view you need to have Logs collection enabled and then to <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>connect Logs and Traces</a></div>
 
-## Leverage your custom span tags with App Analytics
-
-<div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>enabled App Analytics</a></div>
+## Leverage your custom span tags with Analytics
 
 4) **Navigate to the [Trace Search page][6]**.
 
@@ -261,9 +259,9 @@ You can now determine the displayed name of your facet and where to place it in 
 
 You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
 
-6) **Navigate to the [App Analytics][8] page**
+6) **Navigate to the [Analytics][8] page**
 
-The App Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [App Analytics overview][9].
+The Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Search and Analytics overview][9].
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
@@ -289,7 +287,7 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /tracing/app_analytics/search/
-[8]: https://app.datadoghq.com/apm/search/analytics
-[9]: /tracing/app_analytics/analytics/
+[7]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[8]: https://app.datadoghq.com/apm/analytics
+[9]: /tracing/trace_search_and_analytics/query_syntax/
 [10]: /tracing/guide/alert_anomalies_p99_database/

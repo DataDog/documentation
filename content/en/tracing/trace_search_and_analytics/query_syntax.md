@@ -134,7 +134,7 @@ The Trace Stream is the list of traces that match the selected context. A contex
 
 ### Traces vs Indexed Spans
 
-In the Trace Stream, select **View in App Analytics** to view Traces and Indexed Spans. Choose to display a sampled trace associated with your Indexed Spans by clicking the **Traces** button in the upper right corner:
+In the Trace Stream, select **View in Analytics** to view Traces and Indexed Spans. Choose to display a sampled trace associated with your Indexed Spans by clicking the **Traces** button in the upper right corner:
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
