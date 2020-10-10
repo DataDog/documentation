@@ -10,9 +10,9 @@ description: "Trace Search and Analytics"
 
 ## Search and Analytics Overview
 
-[Trace Search and Analytics][1] gives you the ability to search all ingested or retained spans using any tag on any span.  Depending on whether you are searching Live (the last 15 minutes, rolling) or all retained spans, the data used to power your queries will change.
+[Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed Spans using any tag on any span.  Depending on whether you are searching Live (the last 15 minutes, rolling) or all Indexed Spans, the data used to power your queries will change.
 
-Live data is all [Ingested spans][2] and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  More than 15 minutes in the past data is all [retained spans][3].  You can customize settings for both [Retention and Ingestion][4] to send and keep exactly what data is most relevant to you.
+Live data is all [Ingested spans][2] and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  More than 15 minutes in the past data is all [Indexed Spans][3].  You can customize settings for both [Retention and Ingestion][4] to send and keep exactly what data is most relevant to you.
 
 Send and retain exactly the spans you care about. Any retained span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
 
@@ -28,11 +28,11 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 [Retention filters][3] are set within the Datadog UI after services are instrumented, and are used to retain relevant spans based on tag-based filters.
 
-## Live Search
+## Live Search for 15 minutes
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been processed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
+When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
 
@@ -67,25 +67,23 @@ You can also filter on attributes that are not defined as facets. For example, t
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
 {{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
 
-## Retained Trace Search
+## Trace Search with 15 day retention
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
 Searching with retained traces is accessed in the same way as Live Search. To switch from searching live to retained data, change the time selector to any period of time greater than 15 minutes.
 
-All spans indexed by retention filters or legacy App Analytics filters are accessible.  These spans are kept by Datadog for 15 days from being processed by a retention filter.
+All spans indexed by retention filters or legacy App Analytics filters are accessible.  These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 {{< img src="tracing/live_search/livesearch_mode.gif" alt="Live Search mode" >}}
 
-**Note:** The complete trace will appear whenever a retained span is opened , but only retained spans are searchable by their tags.
+All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
-For example, if you filter by a tag that only appears on spans that are not part of any retention filter, your search will return no results unlike when using Live Search.
+For example, if you filter by a tag that only appears on spans that are not indexed by any retention filter, your search will return no results unlike when using Live Search.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][5] will be applied. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][6] page within the Datadog UI to create or modify your own filters.
 
-**Note:** Only spans processed by a retention filter can be searched by their tags.
-
-## Live Analytics
+## Live Analytics for 15 minutes
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -101,7 +99,7 @@ With Live Analytics, every tag on every span ingested over the rolling 15 minute
 
 **Note:** Exporting to dashboards and monitors is only possible using retained data.
 
-## Retained Analytics
+## Trace Analytics with 15 day retention
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-4.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
@@ -109,11 +107,7 @@ Retained Analytics is available from the same page as Live Analytics.  To switch
 
 {{< img src="tracing/live_search/HistoricalAnalytics2.gif" alt="Historical Analytics" >}}
 
-All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using retained analytics. These spans are kept by Datadog for 15 days after being processed by a retention filter.
-
-**Note:** The complete trace will appear whenever a retained span is opened, but only retained spans are searchable by their tags.
-
-**Note:** Only spans indexed by a retention filter can be searched by their tags.
+All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][5] will be applied. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][6] page within the Datadog UI to create or modify your own filters.
 

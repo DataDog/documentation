@@ -23,7 +23,9 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 
 - Indexed Log Events
 - Ingested Logs
-- Retained Spans
+- Indexed Spans
+
+**Note: Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.**
 
 ### Getting started
 

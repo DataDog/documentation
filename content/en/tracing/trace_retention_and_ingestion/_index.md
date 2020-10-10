@@ -46,7 +46,7 @@ Intelligent Retention retains:
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
-To customize what spans are indexed and retained for 15 days, you can create, modify and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed the complete trace will be available.  In order to be searched by tag in [Search and Analytics][2], however, the span containing the relevant tag must have been processed and retained by a [retention filter](#retention-filters).
+To customize what spans are indexed and retained for 15 days, you can create, modify and disable additional filters based on tags, and set a percentage of spans matching each filter to be retained. Any span that is retained will have its corresponding trace saved as well, and when it is viewed the complete trace will be available.  In order to be searched by tag in [Search and Analytics][2], however, the span containing the relevant tag must have been indexed by a [retention filter](#retention-filters).
 
 1. Name your filter.
 2. Set the relevant tags you would like to index spans that match ALL of.
@@ -72,8 +72,8 @@ In the Datadog app, on the ['Ingestion Controls' tab][3], you can see the follow
 | Root Service                 | The name of each service instrumented and sending traces to Datadog.   |
 | Data Ingested             | Amount of data ingested by Datadog over the selected time period.      |
 | Ingestion Rate                 | A percentage from 0 to 100% of how many of the spans that are produced by the service are being ingested by Datadog.  Any number lower than 100% means sampling is occurring in the Datadog Agent prior to Ingestion.      |
-| Tracers Configuration            | Will show `Default` unless changed by using the instructions in-app to configure the tracer. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) for more information. If configured to send 100% of traces, will show `Fully Configured`, and if configured to send less than 100% of traces, will show `Partially Configured`.   |
-| Dropped Spans                |       |
+| Tracers Configuration            | Will show `Default` unless changed by using the instructions in-app to configure the tracer. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) for more information. If all hosts with this service deployed are configured to send a specific volume of traces, this indicator will display as `Fully Configured`.  If only a portion of hosts with this service deployed are configured, the label will instead show `Partially Configured`.   |
+| Dropped Spans                |  The percentage of incoming spans dropped by the Datadog Agent.  If this percent is higher than 0%, the service can be configured by clicking anywhere on the service row.  See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) for more information.     |
 | Traces Ingested per Second                |   Average number of traces per second ingested into Datadog for the service over the selected time period.   |
 | Spans Ingested            | Number of spans ingested by Datadog over the selected time period.        |
 

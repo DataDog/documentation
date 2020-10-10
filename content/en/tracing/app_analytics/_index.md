@@ -13,7 +13,7 @@ This is a deprecated page with configuration information relevant to Legacy App 
 Read the <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion documentation</a> to learn how to use the new functionality.
 </div>
 
-[App Analytics][1] is used to filter Retained Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+[App Analytics][1] is used to filter Indexed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
@@ -474,7 +474,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## Span filtering
 
-An [Indexed span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Retained Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Retained Spans from its `servlet.request` spans, as each `servlet.request` span generates an Indexed span. [Filtering Retained Spans][5] has the benefit of reducing the number of billable Retained Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Indexed span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [Indexed span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Indexed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Indexed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Indexed span. [Filtering Indexed Spans][5] has the benefit of reducing the number of billable Indexed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Indexed span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
 Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
 

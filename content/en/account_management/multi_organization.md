@@ -109,7 +109,7 @@ Note: the following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
-* Retained Spans
+* Indexed Spans
 
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 

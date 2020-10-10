@@ -36,6 +36,9 @@ Datadog APM & Distributed Tracing gives deep visibility into your applications w
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
+#### Tracing Without Limits: Journey of a Trace
+
+
 ## Getting Started
 
 As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
@@ -66,51 +69,57 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
-### Live Search and Analytics
+### Live Analytics
 
-[Search and Analyze][4] 100% of your traces live with no sampling for 15 minutes.
+[Search 100% of your traces][4] by any tag live with no sampling for 15 minutes.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Trace Search and Analytics" >}}
 
+### Live Analytics
+
+[Analyze performance by any tag on any span][5] live for 15 minutes during an outage to identify impacted users or transactions.
+
+{{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
+
 ### Trace Retention and Ingestion
 
-[Retain the traces that matter most to you][5] with tag-based retention filters and control data ingestion with Tracing without Limits™.
+[Retain the traces that matter most to you][6] with tag-based retention filters and perform analytics on all indexed spans for 15 days.
 
 {{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion"  style="width:100%;">}}
 
 ### Deployment Tracking
 
-[Monitor service performance][6] and compare between versions for rolling, blue/green, shadow, or canary deployments.
+[Monitor service performance][7] and compare between versions for rolling, blue/green, shadow, or canary deployments.
 
-{{< img src="tracing/deployment_tracking/ErrorRateByVersion.png" alt="Versions on the Service Page"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page"  style="width:100%;">}}
 
 ### Connect Logs and Distributed Traces
 
-[View your application logs][7] side-by-side with the trace for a single distributed request with automatic trace-id injection.
+[View your application logs][8] side-by-side with the trace for a single distributed request with automatic trace-id injection.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
 ### Trace Serverless Functions
 
-[Trace across AWS Lambda and hosts][8] to view complete traces across your hybrid infrastructure.
+[Trace across AWS Lambda and hosts][9] to view complete traces across your hybrid infrastructure.
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
 
 ### Connect Synthetic Test Data and Traces
 
-[Link simulated API tests][9] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][10] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic tests"  style="width:100%;">}}
 
 ### Continuous Profiler
 
-[Improve code efficiency][10] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][11] with an always on production profiler to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
 ### Customize your Instrumentation or add OpenTracing
 
-[Seamlessly connect your instrumentation][11] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
+[Seamlessly connect your instrumentation][12] between automatic instrumentation, dd-trace-api, OpenTracing and OpenTelemetry exporters.
 
 ## Further Reading
 
@@ -119,11 +128,12 @@ Now that you've configured your application to send traces to Datadog, start get
 [1]: /tracing/send_traces/
 [2]: /tracing/visualization/services_map/
 [3]: /tracing/visualization/service/
-[4]: /tracing/trace_search_and_analytics/
-[5]: /tracing/trace_retention_and_ingestion/
-[6]: /tracing/deployment_tracking/
-[7]: /tracing/connect_logs_and_traces/
-[8]: /tracing/serverless_functions/
-[9]: /synthetics/apm/
-[10]: /tracing/profiler/
-[11]: /tracing/custom_instrumentation/
+[4]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[5]: /tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
+[6]: /tracing/trace_retention_and_ingestion/
+[7]: /tracing/deployment_tracking/
+[8]: /tracing/connect_logs_and_traces/
+[9]: /tracing/serverless_functions/
+[10]: /synthetics/apm/
+[11]: /tracing/profiler/
+[12]: /tracing/custom_instrumentation/

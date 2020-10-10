@@ -132,15 +132,15 @@ The time range allows you to display traces within a given time period. Quickly 
 
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
-### Traces vs Retained Spans
+### Traces vs Indexed Spans
 
-In the Trace Stream, select **View in App Analytics** to view Traces and Retained Spans. Choose to display a sampled trace associated with your Retained Spans by clicking the **Traces** button in the upper right corner:
+In the Trace Stream, select **View in App Analytics** to view Traces and Indexed Spans. Choose to display a sampled trace associated with your Indexed Spans by clicking the **Traces** button in the upper right corner:
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
-If **Traces** is selected, Retained Spans listed in the trace stream have a sampled trace associated with them. If **Retained Spans** is selected, only the Retained Spans are listed in the trace stream.
+If **Traces** is selected, Indexed Spans listed in the trace stream have a sampled trace associated with them. If **Indexed Spans** is selected, only the Indexed Spans are listed in the trace stream.
 
-When a request hits a [service][4] (e.g. webserver, database), the Datadog Agent creates an Indexed span. It's a record of the request including its duration, response code, and any [custom metadata][5]. An Indexed span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Indexed span. If a request runs through a web service, listing service, and database service, the request generates 3 Retained Spans. To reduce the amount of Retained Spans generated, [explicitly turn on/off any Indexed span collection for a specific service][6]. To start collecting Retained Spans, [enable App Analytics for your services][6].
+When a request hits a [service][4] (e.g. webserver, database), the Datadog Agent creates an Indexed span. It's a record of the request including its duration, response code, and any [custom metadata][5]. An Indexed span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Indexed span. If a request runs through a web service, listing service, and database service, the request generates 3 Indexed Spans. To reduce the amount of Indexed Spans generated, [explicitly turn on/off any Indexed span collection for a specific service][6]. To start collecting Indexed Spans, [enable App Analytics for your services][6].
 
 ### Displaying a full Trace
 
@@ -214,9 +214,9 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 ## Analytics Overview
 
-Use [App Analytics][7] to filter application performance metrics and [Retained Spans][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
+Use [App Analytics][7] to filter application performance metrics and [Indexed Spans][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
 
-App Analytics can be enabled per APM [service][4] and per host. A service on which it is enabled exposes all its Retained Spans to Datadog.
+App Analytics can be enabled per APM [service][4] and per host. A service on which it is enabled exposes all its Indexed Spans to Datadog.
 
 Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
