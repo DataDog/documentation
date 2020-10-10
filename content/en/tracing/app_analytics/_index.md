@@ -480,8 +480,8 @@ Changes to the filtering rates are queued, by service & environment, allowing to
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Indexed span Filtering" >}}
 
-[1]: https://app.datadoghq.com/apm/search/analytics
-[2]: /tracing/visualization/#apm-event
+[1]: https://app.datadoghq.com/apm/analytics
+[2]: /tracing/visualization/#analyzed-span
 [3]: /tracing/visualization/#spans
 [4]: /tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
