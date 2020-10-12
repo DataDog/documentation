@@ -67,7 +67,7 @@ Find below the list of permissions for the Security Monitoring assets:
 
 ## Log Management
 
-Find below the list of permissions for the log configuration assets and log data, along with the typical category of user to whom assign this permission (refer to our recommendations on how to assign permissions to team members in the [Logs RBAC][17] guide).
+Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you'd assign this permission to. See the recommendations on how to assign permissions to team members in the [Logs RBAC guide][17].
 
 | Name                                                           | Description                                | Scopable |  Typical User |
 | -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
@@ -88,8 +88,8 @@ Log Management RBAC also includes two legacy permissions, superseded by finer-gr
 
 | Name                                              | Description                                | Scopable |  Typical User |
 | ------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
-| [`logs_live_tail`](#logs-live-tail)               | Access the live tail feature               | false    | Read-Only     |
-| [`logs_read_index_data`]](#logs-read-index-data)  | Read a subset log data (index based)       | true     | Read-Only     |
+| [`logs_live_tail`](#logs_live_tail)               | Access the live tail feature               | false    | Read-Only     |
+| [`logs_read_index_data`](#logs_read_index_data)  | Read a subset log data (index based)       | true     | Read-Only     |
 
 
 {{< tabs >}}
@@ -123,11 +123,11 @@ This permission is global and enables both the creation of new metrics, and the 
 
 #### logs_write_facets
 
-Grants a role the ability to use the [Create, Edit and Delete Facets][18].
+Grants a role the ability to use the [Create, Edit, and Delete facets][18].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
-This permission has no incidence on the management of [Standard Attributes][19] or [Aliasing Facets][20].
+This permission has no effect on the management of [standard attributes][19] or [aliasing facets][20].
 
 #### logs_modify_indexes
 
