@@ -21,9 +21,9 @@ further_reading:
 ## Overview
 
 
-Logs might contain **sensitive information** that could either get [scrubbed][1] or be accessible only to authorized users of your organization. You may also wish to segment your users so that they **don't interfere one with another** as far as configuration and budget control is concerned. 
+Logs might contain **sensitive information** that you want to [scrub][1] or make viewable only by authorized users of your organization. You may also wish to segment your users so that they **don't interfere one with another** as far as configuration and budget control is concerned.  
 
-This guide provides a methodology in developing customized Datadog roles that allows users to access logs and log features in a compliant manner.
+This guide provides a methodology for developing customized Datadog roles that allow users to access logs and log features in a compliant manner.
 
 
 ### The "ACME" Team
@@ -35,11 +35,11 @@ This guide also assumes that you have two categories of users in the ACME Team:
 * **`ACME Admin`**: a role for users in charge of ACME log collection, pipelines, and exclusion filters.
 * **`ACME User`** : a role for users to access ACME logs, as well as to create monitors or dashboards out of these logs.
 
-*Note*: You can adapt this guide for one single ACME Role (concentrating permissions from both ACME Admins and ACME Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
+*Note*: You can adapt this guide for one single ACME Role (combining permissions from both ACME Admins and ACME Users) for the sake of simplicity, or more roles for the sake of more granular permissions.
 
-Although this guide focuses on the ACME Team, your setup is replicable to every other team in your organization. Members of the ACME team **can** also be members of other teams across your organization. Permissions are additive in Datadog, and multi-team users can benefit from the union of permissions inherited from every  team they belong to.
+Although this guide focuses on the ACME Team, your setup can be replicated by any/all other teams in your organization. Members of the ACME team **can** also be members of other teams across your organization. Permissions are additive in Datadog, and multi-team users can benefit from the union of permissions inherited from every team they belong to.
 
-### The role of Datadog admin
+### The Role of Datadog Admin
 
 This guide explains how you, as a Datadog admin, can set up a safe playground for ACME team members to interact with their logs (without interfering with other team logs) while also restricting access to these logs only to ACME users.
 
@@ -55,18 +55,18 @@ This guide explores the following:
 
 ## Prerequisites
 
-### Tag incoming logs
+### Tag Incoming Logs
 
-Tag ACME incoming logs with a `team:acme` tag. This is useful for triaging your logs as they flow through Datadog.
+Tag ACME incoming logs with a `team:acme` tag. This is useful for routing your logs as they flow through Datadog.
 
 {{< img src="logs/guide/rbac/team_tag.png" alt="Apply a team tag to your logs"  style="width:60%;">}}
 
 For example, in the context of Docker Log Collection, attach the `team:acme` tag to logs flowing from that container with [Docker labels as tags][85]. Refer to the [Tagging Section][84] for a more general overview.
 
 
-### Log in as a Datadog admin
+### Log in as a Datadog Admin
 
-The actions you have to perform in that guide require you belong to a Datadog admin role. More specifically, you need:
+The actions you have to perform in this guide require that you belong to a Datadog admin role. More specifically, you need:
 
 * Permissions to create roles and assign users to roles (actual privileged access).
 * Permissions to create [Log Pipelines][90], [Log Indexes][91], and [Log Archives][92].
@@ -76,9 +76,9 @@ Check in [Datadog][86] that you have all these permissions. If you are missing a
 
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="Check your permissions as an admin"  style="width:60%;">}}
 
-### Get an API key and an app key
+### Get an API Key and an App Key
 
-*Note*: This section is only required if you intend on using the Datadog API, for which you need an API key and an application key from an admin user.
+Note: This section is only required if you intend to use the Datadog API to set up RBAC.
 
 API keys and app keys are available in your [Datadog account API key page][94]. More details available in the [API and app keys][95] section of the documentation.
 
@@ -91,7 +91,7 @@ Throughout this guide, you will need to replace all occurrences of `<DATADOG_API
 
 ### Get Permission IDs
 
-*Note*: This section is only required if you intend on using the Datadog API to set up RBAC.
+*Note*: This section is only required if you intend to use the Datadog API to set up RBAC.
 
 Use the [Permissions API][96] to get the list of all existing permissions. The answer is an array of permissions such as the one below (the `logs_read_data` permission has the `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb`, which is all you need to know about that permission).
 
