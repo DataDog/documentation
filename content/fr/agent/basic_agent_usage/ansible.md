@@ -181,7 +181,7 @@ system_probe_config:
 Une fois la modification terminée, suivez les étapes ci-dessous :
 
 1. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`. **Remarque** : si le wrapper de service n'est pas disponible sur votre système, exécutez plutôt la commande suivante : `sudo initctl start datadog-agent-sysprobe`.
-2. [[Redémarrez l'Agent][8] : `sudo service datadog-agent restart`.]: `sudo service datadog-agent restart`.
+2. [Redémarrez l'Agent][8] : `sudo service datadog-agent restart`.
 3. Configurez le system-probe afin qu'il se lance au démarrage : `sudo service enable datadog-agent-sysprobe`.
 
 Pour la configuration manuelle, reportez-vous à la documentation relative à la [Surveillance des performances réseau][9].
@@ -289,6 +289,16 @@ Actions disponibles :
       version: <VERSION_À_INSTALLER>
 ```
 
+Pour installer des intégrations tierces, définissez le paramètre `third_party` sur `true` :
+
+```yml
+  datadog_integration:
+    <NOM_INTÉGRATION>:
+      action: <ACTION>
+      version: <VERSION_À_INSTALLER>
+      third_party: true
+```
+
 ##### Exemple
 
 Cet exemple installe la version `1.11.0` de l'intégration ElasticSearch et supprime l'intégration `postgres`.
@@ -313,7 +323,7 @@ Pour passer à une version antérieure de l'Agent :
 
 **Remarques :**
 
-- Les passages à une version antérieure ne sont pas pris en charge pour les plateformes Windows.
+- Les passages à une version antérieure ne sont pas pris en charge sur les plateformes Windows.
 
 ## Playbooks
 
@@ -406,9 +416,11 @@ Cet exemple installe la dernière version de l'Agent v6 :
     datadog_api_key: "<VOTRE_CLÉ_API_DD>"
 ```
 
-### Site européen
+### Configuration du site
 
-Cet exemple envoie des données au site européen :
+Si vous utilisez un site autre que le site par défaut `datadoghq.com`, définissez la variable `datadog_site` sur l'URL appropriée (par exemple : `datadoghq.eu`, `us3.datadoghq.com`).
+
+Cet exemple envoie les données au site européen :
 
 ```yml
 - hosts: servers
@@ -488,7 +500,7 @@ Sous Debian Stretch, le module `apt_key` utilisé par le rôle nécessite une d�
 
 ### Windows
 
-En raison d'un bug critique dans les versions `6.14.0` et `6.14.1` de l'Agent pour Windows, ces versions ont été bloquées (à partir de la version `3.3.0` de ce rôle).
+En raison d'un bug critique dans les versions `6.14.0` et `6.14.1` de l'Agent pour Windows, l'installation de ces versions est désormais bloquée (à partir de la version `3.3.0` de ce rôle).
 
 **REMARQUE :** Ansible ne fonctionnera pas sous Windows si `datadog_agent_version` est définie sur `6.14.0` ou `6.14.1`. Utilisez `6.14.2` ou une version ultérieure.
 

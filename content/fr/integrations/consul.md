@@ -68,7 +68,7 @@ Enfin, en plus des métriques, l'Agent Datadog envoie également un check de ser
 
 ### Installation
 
-Le check Consul de l'Agent Datadog est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Consul.
+Le check Consul de l'Agent Datadog est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Consul.
 
 ### Configuration
 

@@ -32,8 +32,9 @@ Watchdog est une fonction à base d'algorithmes qui analyse les métriques d'inf
   * [PostgreSQL][3]
   * [NGINX][4]
   * [Amazon Web Services][5], pour les services Amazon [S3][6], [ELB/ALB/NLB][7], [CloudFront][8] et [DynamoDB][9].
+  * [Alertes][10]
 
-Watchdog recherche des irrégularités dans les métriques, comme une élévation soudaine du taux de hits. Pour chaque irrégularité, une story est affichée sur la [page Watchdog][10]. Chaque story comprend un graphique illustrant l'irrégularité détectée et offre des informations supplémentaires sur l'intervalle et les endpoints pertinents. Pour éviter les fausses alertes, Watchdog signale les problèmes uniquement après avoir analysé vos données pendant une durée suffisante pour établir un degré de confiance élevé.
+Watchdog recherche des irrégularités dans les métriques, comme une élévation soudaine du taux de hits. Pour chaque irrégularité, une story est affichée sur la [page Watchdog][11]. Chaque story comprend un graphique illustrant l'irrégularité détectée et offre des informations supplémentaires sur l'intervalle et les endpoints pertinents. Pour éviter les fausses alertes, Watchdog signale les problèmes uniquement après avoir analysé vos données pendant une durée suffisante pour établir un degré de confiance élevé.
 
 ## Détails d'une story
 
@@ -55,13 +56,27 @@ Pour afficher les stories archivées, cochez la case « Show N archived stories
 
 **Remarque** : l'archivage d'une story n'empêche pas Watchdog de signaler d'autres éventuels problèmes affectant le service ou la ressource.
 
+##### Carte des dépendances
+
+Lorsqu'une anomalie apparaît dans un service, il y a souvent une anomalie correspondante dans un service connexe. Par exemple, si les requêtes de base de données d'un service sont ralenties, tout service en aval connaîtra une latence élevée. Lors du dépannage, vous devez considérer cette situation non pas comme deux problèmes distincts, mais plutôt comme un seul problème découlant d'une cause unique.
+
+Watchdog regroupe automatiquement les anomalies connexes dans une story unique chaque fois qu'il détecte un problème qui affecte plusieurs services. La story comprend alors une carte des dépendances qui montre le service à l'origine du problème et les dépendances en aval qui ont été affectées. Cela vous permet d'analyser rapidement l'impact d'un problème et de savoir où rechercher la cause d'origine.
+
+La capture d'écran ci-dessous illustre une story Watchdog, avec d'abord un résumé du problème et un graphique mettant en évidence l'anomalie. En dessous, une carte des dépendances illustre l'impact complet du problème : le problème provient du service `ad-server-http-client`, et il affecte également les services en aval `web-store` et `web-store-mongo`. Sous la carte des dépendances, un tableau énumère les services affectés et affiche les métriques de taux de hits, de latence et de taux d'erreur. Ici, les données du tableau indiquent que la latence des services en aval a également augmenté.
+
+{{< img src="watchdog/watchdog_dep_map.png" alt="Carte des dépendances Watchdog"  style="width:75%;">}}
+
+##### Dashboards connexes
+
+Pour accélérer l'analyse, Datadog peut vous suggérer des dashboards liés à la story. Dans ce cas, Datadog mettra en évidence les métriques du dashboard liées aux informations contenues dans la story.
+
 ##### Monitors
 
 Les monitors associés à vos stories sont affichés en bas. Pour chaque monitor affiché, la métrique de la story actuelle et ses tags associés sont appliqués en tant que contexte.
 
 {{< img src="watchdog/watchdog_monitors.png" alt="Monitors Watchdog"  style="width:75%;">}}
 
-En outre, Watchdog suggère un ou plusieurs monitors qui seront activés si la story se répète. Cliquez sur le bouton **Enable Monitor** pour activer le monitor pour votre organisation. Consultez la [documentation sur les monitors Watchdog][11] pour découvrir comment créer un monitor Watchdog.
+En outre, Watchdog suggère un ou plusieurs monitors qui seront activés si la story se répète. Cliquez sur le bouton **Enable Monitor** pour activer le monitor pour votre organisation. Consultez la [documentation sur les monitors Watchdog][12] pour découvrir comment créer un monitor Watchdog.
 
 ## Filtrer les stories
 
@@ -83,17 +98,17 @@ Les facettes sont associées à vos stories Watchdog. Elles vous permettent de l
 |-----------------|------------------------------------------------------------------------------------|
 | Catégorie de story  | Affiche toutes les stories `apm` ou `infrastructure`.                                 |
 | Type de story      | Définit les métriques des stories APM ou Infrastructure à afficher. |
-| Environnement APM | L'[environnement APM][12] dont les stories doivent être affichées.                                 |
-| Tag primaire APM | Le [tag primaire APM][13] dont les stories doivent être affichées.                         |
-| Service APM     | Le [service APM][14] dont les stories doivent être affichées.                                     |
+| Environnement APM | L'[environnement APM][13] dont les stories doivent être affichées.                                 |
+| Tag primaire APM | Le [tag primaire APM][14] dont les stories doivent être affichées.                         |
+| Service APM     | Le [service APM][15] dont les stories doivent être affichées.                                     |
 
 ## Watchdog dans la liste des services
 
-Lorsqu'une irrégularité est détectée dans une métrique, l'icône Watchdog jaune en forme de jumelles s'affiche à proximité du service affecté dans la [liste des services de l'APM][15]. Le nombre affiché à côté des jumelles indique le nombre de problèmes détectés par Watchdog dans ce service.
+Lorsqu'une irrégularité est détectée dans une métrique, l'icône Watchdog jaune en forme de jumelles s'affiche à proximité du service affecté dans la [liste des services de l'APM][16]. Le nombre affiché à côté des jumelles indique le nombre de problèmes détectés par Watchdog dans ce service.
 
 {{< img src="watchdog/service_list.png" alt="Liste des services Watchdog" style="width:75%;" >}}
 
-Si Watchdog a détecté une irrégularité dans un service spécifique, une section dédiée à Watchdog apparaît au milieu de la [page Service][15] correspondante, entre les graphiques de performances de l'application et la section de distribution de la latence. La section Watchdog affiche les stories Watchdog pertinentes.
+Si Watchdog a détecté une irrégularité dans un service spécifique, une section dédiée à Watchdog apparaît au milieu de la [page Service][16] correspondante, entre les graphiques de performances de l'application et la section de distribution de la latence. La section Watchdog affiche les stories Watchdog pertinentes.
 
 {{< img src="watchdog/watchdog_story_bis.png" alt="Story Watchdog bis" style="width:75%;">}}
 
@@ -110,9 +125,10 @@ Si Watchdog a détecté une irrégularité dans un service spécifique, une sect
 [7]: /fr/integrations/amazon_elb/
 [8]: /fr/integrations/amazon_cloudfront/
 [9]: /fr/integrations/amazon_dynamodb/
-[10]: https://app.datadoghq.com/apm/watchdog
-[11]: /fr/monitors/monitor_types/watchdog/
-[12]: /fr/tracing/send_traces/#configure-your-environment
-[13]: /fr/tracing/guide/setting_primary_tags_to_scope/
-[14]: /fr/tracing/visualization/#services
-[15]: /fr/tracing/visualization/services_list/
+[10]: /fr/monitors/
+[11]: https://app.datadoghq.com/apm/watchdog
+[12]: /fr/monitors/monitor_types/watchdog/
+[13]: /fr/tracing/send_traces/#configure-your-environment
+[14]: /fr/tracing/guide/setting_primary_tags_to_scope/
+[15]: /fr/tracing/visualization/#services
+[16]: /fr/tracing/visualization/services_list/

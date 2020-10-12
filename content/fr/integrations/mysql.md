@@ -61,7 +61,7 @@ Vous pouvez également créer vos propres métriques à l'aide de requêtes SQL 
 
 ### Installation
 
-Le check MySQL est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien d'autre à installer sur votre serveur MySQL.
+Le check MySQL est inclus avec le package de l'[Agent Datadog][4]. Vous n'avez donc rien d'autre à installer sur votre serveur MySQL.
 
 #### Préparer MySQL
 
