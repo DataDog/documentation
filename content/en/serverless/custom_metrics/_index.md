@@ -195,7 +195,7 @@ To add Lambda resource tags to your custom metrics, set the parameter `DdFetchLa
 
 With distribution metrics, you select the aggregation when graphing or querying it instead of specifying it at submission time.
 
-If you previously submitted custom metrics from Lambda without using one of the Datadog Lambda Librarys, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
+If you previously submitted custom metrics from Lambda without using one of the Datadog Lambda Libraries, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
 
 To enable percentile aggregations for your distribution metrics, consult the [Distribution Metrics][5] page.
 
