@@ -445,7 +445,7 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 ## Encode UTF-16 format logs
 
-If applications logs are written in UTF-16 format, from Datadog Agent **v6.23/v7.23** user can encode these logs so that they are parsed as expected in [Logs Explorer](https://docs.datadoghq.com/logs/explorer/#overview). Use the `encoding` parameter in logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer](https://docs.datadoghq.com/logs/explorer/#overview). Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
 
 Configuration example:
 
@@ -459,7 +459,7 @@ logs:
    encoding: utf-16-be
 ```
 
-**Note**: `encoding` parameter is only applicable when the `type` parameter is set to `file`.
+**Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
 
 ## Global processing rules
 
