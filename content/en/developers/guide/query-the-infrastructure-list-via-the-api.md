@@ -5,7 +5,7 @@ aliases:
   - /developers/faq/query-the-infrastructure-list-via-the-api
 ---
 
-More advanced Datadog users may sometimes want to use [the API][1] to query general data about their infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the [api/v1/hosts][4] endpoint.
+If you're a more advanced Datadog user, you may want to use [the API][1] to query general data about infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the [api/v1/hosts][4] endpoint.
 
 ## Examples
 
