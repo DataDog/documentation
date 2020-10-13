@@ -219,7 +219,7 @@ Input your bucket name. **Optional**: input a prefix directory for all the conte
 
 ### Advanced Settings
 
-#### Datadog Permissions on the Archive
+#### Datadog Permissions
 
 By default:
 
