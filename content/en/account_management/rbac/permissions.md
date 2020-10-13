@@ -67,7 +67,7 @@ Find below the list of permissions for the Security Monitoring assets:
 
 ## Log Management
 
-Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you'd assign this permission to. See the recommendations on how to assign permissions to team members in the [Logs RBAC guide][17].
+Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you'd assign this permission to. See the recommendations on how to assign permissions to team members in the [Logs RBAC guide][3].
 
 | Name                                                           | Description                                | Scopable |  Typical User |
 | -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
@@ -117,24 +117,24 @@ More details about these permissions below.
 
 #### logs_generate_metrics
 
-Grants a role the ability to use the [Generate Metrics][3] feature.
+Grants a role the ability to use the [Generate Metrics][4] feature.
 
 This permission is global and enables both the creation of new metrics, and the edition or deletion of existing ones.
 
 #### logs_write_facets
 
-Grants a role the ability to use the [Create, Edit, and Delete facets][18].
+Grants a role the ability to use the [Create, Edit, and Delete facets][5].
 
 This permission is global and enables both the creation of new facets, and the edition or deletion of existing ones.
 
-This permission has no effect on the management of [standard attributes][19] or [aliasing facets][20].
+This permission has no effect on the management of [standard attributes][6] or [aliasing facets][7].
 
 #### logs_modify_indexes
 
-Grants a role the ability to create and modify [log indexes][4]. This includes:
+Grants a role the ability to create and modify [log indexes][8]. This includes:
 
-- Setting [indexes filters][5] for which logs should be routed into an index.
-- Setting [log retention][6] for an index.
+- Setting [indexes filters][9] for which logs should be routed into an index.
+- Setting [log retention][10] for an index.
 - Granting another role the [Logs Read Index Data](#logs-read-index-data) and [Logs Write Exclsion Filters](#logs-write-exclusion-filters) permissions, scoped for a specific index.
 
 This permission is global and enables both the creation of new indexes, and the edition of existing ones.
@@ -144,7 +144,7 @@ This permission is global and enables both the creation of new indexes, and the 
 
 #### logs_write_exclusion_filters
 
-Grants a role the ability to create or modify [exclusion filters][7] within an index.
+Grants a role the ability to create or modify [exclusion filters][11] within an index.
 
 This permission can be assigned either globally or restricted to a subset of indexes.
 
@@ -169,10 +169,10 @@ This configuration is only supported through the UI.
 
 #### logs_write_pipelines
 
-Grants a role the ability to create and modify [log processing pipelines][8]. This includes:
+Grants a role the ability to create and modify [log processing pipelines][12]. This includes:
 
 - Setting the name of the pipeline
-- Setting [pipelines filters][9] for what logs should enter the processing pipeline
+- Setting [pipelines filters][13] for what logs should enter the processing pipeline
 - Reorder pipelines
 - Granting another role the [Logs Write Processors](#logs-write-processors) permission, scoped for that pipeline
 
@@ -223,9 +223,9 @@ curl -X POST \
 
 #### logs_write_archives
 
-Grants the ability to create, edit or delete [Log Archives][10]. This includes:
+Grants the ability to create, edit or delete [Log Archives][14]. This includes:
 
-- Setting [archives filters][9] for what logs should be routed to the archive
+- Setting [archives filters][13] for what logs should be routed to the archive
 - Setting the name of the archive
 - Reordering archives
 - Restricting the [Logs Read Archives](#logs-read-archives) permission to a subset of roles.
@@ -234,7 +234,7 @@ This permission is global and enables the creation of new archives, and the edit
 
 #### logs_read_archives
 
-Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][11] from Archives.
+Grants the ability to access the details of the archive configuration. In conjunction with [Logs Write Historical Views](#logs-write-historical-view), this permission also grants the ability to trigger a [Rehydration][15] from Archives.
 
 This permission can be scoped to a subset of archives. An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
 
@@ -264,11 +264,11 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_historical_view
+#### logs_write_historical_views
 
-Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][11].
+Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][15].
 
-This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive](r#logs-read-archives) permission.
+This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive][16] permission.
 
 {{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
 
@@ -279,7 +279,7 @@ In the example above:
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
 
 
-When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][10].  
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][14].  
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 
@@ -291,10 +291,10 @@ For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the f
 
 Grants the ability to create or modify log configuration through the Datadog API:
 
-* Configure [Archives][12] through the API
-* Configure [Indexes][13] through the API
-* Configure [Pipelines][14] through the API
-* Configure [Restriction Queries][15] through the API
+* Configure [Archives][17] through the API
+* Configure [Indexes][18] through the API
+* Configure [Pipelines][19] through the API
+* Configure [Restriction Queries][20] through the API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
@@ -307,7 +307,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][20].
 
 Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
@@ -391,7 +391,7 @@ curl -X POST \
 
 #### logs_live_tail
 
-Grants a role the ability to use the [Live Tail][16] feature.
+Grants a role the ability to use the [Live Tail][21] feature.
 
 This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
@@ -404,21 +404,22 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/v2/roles/#list-permissions
-[3]: /logs/logs_to_metrics/
-[4]: /logs/indexes
-[5]: /logs/indexes#indexes-filters
-[6]: /logs/indexes#update-log-retention
-[7]: /logs/indexes#exclusion-filters
-[8]: /logs/processing/pipelines/
-[9]: /logs/processing/pipelines/#pipeline-filters
-[10]: /logs/archives
-[11]: /logs/archives/rehydrating
-[12]: /api/v2/logs-archives/
-[13]: /api/v1/logs-indexes/
-[14]: /api/v1/logs-pipelines/
-[15]: /api/v2/logs-restriction-queries/
-[16]: /logs/explorer/live_tail/
-[17]: /logs/guide/logs-rbac/?tab=ui#overview
-[18]: /logs/explorer/facets/#overview
-[19]: /logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
-[20]: /logs/explorer/facets/#alias-facets
+[3]: /logs/guide/logs-rbac/?tab=ui#overview
+[4]: /logs/logs_to_metrics/
+[5]: /logs/explorer/facets/#overview
+[6]: /logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
+[7]: /logs/explorer/facets/#alias-facets
+[8]: /logs/indexes
+[9]: /logs/indexes#indexes-filters
+[10]: /logs/indexes#update-log-retention
+[11]: /logs/indexes#exclusion-filters
+[12]: /logs/processing/pipelines/
+[13]: /logs/processing/pipelines/#pipeline-filters
+[14]: /logs/archives
+[15]: /logs/archives/rehydrating
+[16]: r#logs-read-archives
+[17]: /api/v2/logs-archives/
+[18]: /api/v1/logs-indexes/
+[19]: /api/v1/logs-pipelines/
+[20]: /api/v2/logs-restriction-queries/
+[21]: /logs/explorer/live_tail/
