@@ -7,11 +7,11 @@ further_reading:
     text: Utiliser des profils avec le Network Device Monitoring
   - link: 'https://www.datadoghq.com/blog/monitor-snmp-with-datadog/'
     tag: Blog
-    text: Surveiller SNMP avec Datadog
+    text: Surveiller des périphériques SNMP avec Datadog
 ---
 ## Installation
 
-La fonction Network Device Monitoring utilise le protocole SNMP inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
+La fonction Network Device Monitoring utilise le protocole SNMP inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
 
 ## Configuration
 

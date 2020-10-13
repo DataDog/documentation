@@ -69,8 +69,10 @@ body > header {
         letter-spacing: 0.3px;
         border-radius: 5px;
         padding: 8.5px 8px 9.5px;
-        padding-right: 12px;
-
+        @include media-breakpoint-up(lg) {
+          padding: 8.5px 8px 9.5px 8px;
+        }
+        
         &:hover,
         &.active {
           color: #333;
@@ -152,6 +154,12 @@ body > header {
         border-top: 3px solid #632ca6;
         border-radius: 0;
 
+        li {
+      
+            white-space: nowrap;
+          
+        }
+
         &:lang(ja) {
           top: 43px;
         }
@@ -161,8 +169,9 @@ body > header {
           height: 330px;
           column-fill: auto;
 
-          .menu-icon {
+          img.menu-icon {
             width: 18px;
+            margin-right: 12px;
           }
         }
         // solutions menu
@@ -188,6 +197,7 @@ body > header {
           font-size: 18px;
           letter-spacing: 0.4px;
           border-radius: 4px;
+          padding: 7px 11px;
 
           &:lang(ja) {
             font-size: 16px;

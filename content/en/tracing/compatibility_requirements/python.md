@@ -8,7 +8,7 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-The Python Datadog Trace library is open source - view the [Github repository][1] for more information.
+The Python Datadog Trace library is open source. View the [Github repository][1] for more information.
 
 Python versions `2.7+` and `3.5+` are supported in the latest version of the tracer. Python `3.4` is supported in versions `0.35.x` and below of the Python tracer.
 
@@ -20,63 +20,64 @@ To request support for additional libraries, contact our awesome [support team][
 
 The `ddtrace` library includes support for a number of web frameworks, including:
 
-| Framework                 | Supported Version | PyPi Datadog Documentation                                         |
+| Framework                 | Supported Version | Library Documentation                                              |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
-| [asgi][3]               | >= 2.0         |  http://pypi.datadoghq.com/trace/docs/web_integrations.html#asgi |
-| [aiohttp][4]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
-| [Bottle][5]              | >= 0.11           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
-| [Django][6]              | >= 1.8            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
-| [djangorestframework][6] | >= 3.4            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
-| [Falcon][7]              | >= 1.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon  |
-| [Flask][8]               | >= 0.10           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask   |
-| [Molten][9]              | >= 0.7.0          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#molten  |
-| [Pylons][10]              | >= 0.9.6          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons  |
-| [Pyramid][11]             | >= 1.7            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid |
-| [Tornado][12]             | >= 4.0            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado |
+| [aiohttp][3]             | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [Bottle][4]              | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
+| [Django][5]              | >= 1.8            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [djangorestframework][5] | >= 3.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [Falcon][6]              | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
+| [Flask][7]               | >= 0.10           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
+| [Molten][8]              | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
+| [Pylons][9]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
+| [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [Tornado][11]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
+
 
 ### Datastore Compatibility
 
 The `ddtrace` library includes support for the following data stores:
 
-| Datastore                          | Supported Version | PyPi Datadog Documentation                                                                    |
+| Datastore                          | Supported Version | Library Documentation                                                                         |
 | ---------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
-| [Cassandra][13]                    | >= 3.5            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#cassandra                           |
-| [Elasticsearch][14]                | >= 1.6            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#elasticsearch                       |
-| [Flask Cache][15]                  | >= 0.12           | http://pypi.datadoghq.com/trace/docs/db_integrations.html#flask-cache                         |
-| [Memcached][16] [pylibmc][17]      | >= 1.4            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#pylibmc                             |
-| [Memcached][16] [pymemcache][18]   | >= 1.3            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#pymemcache                          |
-| [MongoDB][19] [Mongoengine][20]    | >= 0.11           | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mongoengine                         |
-| [MongoDB][19] [Pymongo][21]        | >= 3.0            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#pymongo                             |
-| [MySQL][22] [MySQL-python][23]     | >= 1.2.3          | http://pypi.datadoghq.com/trace/docs/db_integrations.html#module-ddtrace.contrib.mysqldb      |
-| [MySQL][22] [mysqlclient][24]      | >= 1.3            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#module-ddtrace.contrib.mysqldb      |
-| [MySQL][22] mysql-connector        | >= 2.1            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#mysql-connector                     |
-| [Postgres][25] [aiopg][26]         | >= 0.12.0         | http://pypi.datadoghq.com/trace/docs/db_integrations.html#aiopg                               |
-| [Postgres][25] [psycopg][27]       | >= 2.4            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#module-ddtrace.contrib.psycopg      |
-| [Redis][28]                        | >= 2.6            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#redis                               |
-| [Redis][28] [redis-py-cluster][29] | >= 1.3.5          | http://pypi.datadoghq.com/trace/docs/db_integrations.html#module-ddtrace.contrib.rediscluster |
-| [SQLAlchemy][30]                   | >= 1.0            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlalchemy                          |
-| [SQLite3][31]                      | Fully Supported   | http://pypi.datadoghq.com/trace/docs/db_integrations.html#sqlite                              |
-| [Vertica][32]                      | >= 0.6            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#vertica                             |
+| [Cassandra][12]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
+| [Elasticsearch][13]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Flask Cache][14]                  | >= 0.12           | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
+| [Memcached][15] [pylibmc][16]      | >= 1.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
+| [Memcached][15] [pymemcache][17]   | >= 1.3            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
+| [MongoDB][18] [Mongoengine][19]    | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
+| [MongoDB][18] [Pymongo][20]        | >= 3.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
+| [MySQL][21] [MySQL-python][22]     | >= 1.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][21] [mysqlclient][23]      | >= 1.3            | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][21] mysql-connector        | >= 2.1            | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Postgres][24] [aiopg][25]         | >= 0.12.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
+| [Postgres][24] [psycopg][26]       | >= 2.4            | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
+| [Redis][27]                        | >= 2.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
+| [Redis][27] [redis-py-cluster][28] | >= 1.3.5          | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [SQLAlchemy][29]                   | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
+| [SQLite3][30]                      | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
+| [Vertica][31]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+
 
 ### Library Compatibility
 
 The `ddtrace` library includes support for the following libraries:
 
-| Library           | Supported Version | PyPi Datadog Documentation                                               |
+| Library           | Supported Version | Library Documentation                                                    |
 | ----------------- | ----------------- | ------------------------------------------------------------------------ |
-| [asyncio][33]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/async_integrations.html#asyncio     |
-| [gevent][34]      | >= 1.0            | http://pypi.datadoghq.com/trace/docs/async_integrations.html#gevent      |
-| [aiobotocore][35] | >= 0.2.3          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#aiobotocore |
-| [Boto2][35]       | >= 2.29.0         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#boto2       |
-| [Botocore][35]    | >= 1.4.51         | http://pypi.datadoghq.com/trace/docs/other_integrations.html#botocore    |
-| [Celery][36]      | >= 4.0.2          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery      |
-| [Futures][37]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures     |
-| [Grpc][38]        | >= 1.8.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#grpc        |
-| [httplib][39]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib     |
-| [Jinja2][40]      | >= 2.7            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2      |
-| [Kombu][41]       | >= 4.0            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu       |
-| [Mako][42]        | >= 0.1.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#mako        |
-| [Requests][43]    | >= 2.08           | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests    |
+| [asyncio][32]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
+| [gevent][33]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [aiobotocore][34] | >= 0.2.3          | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [Boto2][34]       | >= 2.29.0         | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Botocore][34]    | >= 1.4.51         | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Celery][35]      | >= 4.0.2          | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Futures][36]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
+| [Grpc][37]        | >= 1.8.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [httplib][38]     | Fully Supported   | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Jinja2][39]      | >= 2.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Kombu][40]       | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Mako][41]        | >= 0.1.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Requests][42]    | >= 2.08           | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 
 
 ## Further Reading

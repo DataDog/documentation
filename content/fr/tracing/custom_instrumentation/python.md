@@ -58,7 +58,7 @@ def make_sandwich_request(request):
 Cliquez [ici][1] pour consulter les détails sur l'API concernant le décorateur pour `ddtrace.Tracer.wrap()`.
 
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Gestionnaire de contextes" %}}
 
@@ -85,8 +85,8 @@ def make_sandwich_request(request):
 
 Cliquez [ici][2] pour obtenir tous les détails sur l'API pour `ddtrace.Tracer()`.
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
+[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
 {{% /tab %}}
 {{% tab "Méthode manuelle" %}}
 
@@ -106,8 +106,8 @@ Pour obtenir plus de détails sur l'API pour le décorateur, consultez la docume
 
 
 [1]: /fr/tracing/visualization/#spans
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
-[3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
+[3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -190,7 +190,7 @@ with tracer.trace("throws.an.error") as span:
     raise Exception("Oups !")
 
 # `span` renvoie une erreur.
-# La trace de pile et le message d'exception sont alors ajoutés à la span en tant que tags.
+# La stack trace et le message de l'exception sont alors ajoutés à la span en tant que tags.
 ```
 
 Vous pouvez également signaler manuellement qu'une span est erronée :

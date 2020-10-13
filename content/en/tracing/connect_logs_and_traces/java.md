@@ -103,6 +103,6 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 [1]: /tracing/setup/java/#configuration
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
 [3]: /tracing/connect_logs_and_traces/
-[4]: /tracing/visualization/#trace
+[4]: /logs/log_collection/java/?tab=log4j 
 [5]: /logs/log_collection/java/#raw-format
 [6]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

@@ -53,7 +53,7 @@ With the following definitions:
   - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-### Percentile aggregration
+### Percentile aggregation
 
 - `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
@@ -164,19 +164,19 @@ With the following definitions:
 
 - `trace.<SPAN_NAME>.apdex.by.resource_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each combination of resources and web services.
+  - *Description:* Measure the [Apdex][9] score for each combination of resources and web services.
   - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, and `resource`
 
 - `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.
+  - *Description:* Measure the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.
   - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.apdex.by.service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each web services.
+  - *Description:* Measure the [Apdex][9] score for each web services.
   - *Metric type:* [GAUGE][6]
   - *Tags:* `env` and `service`.
 

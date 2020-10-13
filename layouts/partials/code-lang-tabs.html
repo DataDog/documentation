@@ -1,0 +1,13 @@
+{{ $dot := .}}
+
+<ul class="nav nav-tabs border-none code-lang-list-container">
+    {{ $count := 0}}
+
+    {{ range .codeLangs }}
+        <li class="nav-item">
+            <a class="nav-link mr-1 js-code-example-link text-capitalize" data-code-lang-trigger="{{ . }}" href="#">{{ . }}</a>
+        </li>
+        {{ $count = add $count 1 }}
+    {{ end}}
+
+</ul>  

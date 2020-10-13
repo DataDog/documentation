@@ -4,8 +4,6 @@ dependencies:
 kind: ドキュメント
 title: Ruby 向け Datadog Lambda ライブラリ
 ---
-
-
 [![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-rb)](https://circleci.com/gh/DataDog/workflows/datadog-lambda-rb)
 [![RubyGem](https://img.shields.io/gem/v/datadog-lambda)](https://rubygems.org/gems/datadog-lambda)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)

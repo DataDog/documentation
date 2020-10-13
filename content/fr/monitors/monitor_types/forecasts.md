@@ -99,7 +99,27 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 
 ## API
 
-Pour automatiser la création de monitors de prévisions, consultez la [documentation de référence sur l'API Datadog][7]. Datadog vous conseille d'[exporter le JSON d'un monitor][8] pour créer la requête pour l'API.
+Pour créer des monitors de prévisions automatiquement, consultez les [références sur les API Datadog][7]. Datadog vous **conseille fortement** d'[exporter le JSON d'un monitor][8] pour créer la requête d'API. Depuis la [page de création de monitors][1] de Datadog, les clients peuvent tirer parti du graphique d'aperçu et de l'ajustement automatique des paramètres pour éviter toute erreur de configuration.
+
+Les monitors de prévisions sont gérés via la [même API][9] que les autres monitors. Le contenu de la propriété `query` doit toutefois être décrit plus en détail.
+
+La propriété `query` dans le corps de la requête doit contenir une chaîne de requête au format suivant :
+
+```text
+<agrégateur>(<période_requête>):forecast(<requête_métrique>, '<algorithme>', <déviations>, interval=<intervalle>[, history='<historique>'][, model='<modèle>'][, seasonality='<saisonnalité>']) <comparateur> <seuil>
+```
+
+* `agrégateur` : utiliser `min` si l'alerte doit se déclencher lorsque la prévision passe en dessous du seuil. Utiliser `max` si l'alerte doit se déclencher lorsque la prévision passe au-dessus du seuil.
+* `période_requête` : intervalle, par exemple `last_4h` ou `last_7d`. Nous vous conseillons de choisir un intervalle environ cinq fois supérieur à la `période_alerte`, et il ne doit pas être inférieur à celle-ci. Ce paramètre détermine l'intervalle affiché dans les graphiques des notifications.
+* `requête_métrique` : requête de métrique Datadog standard. Exemple : `min:system.disk.free{service:database,device:/data}by{host}`.
+* `algorithme` : `linear` ou `seasonal`
+* `déviations` : un nombre supérieur ou égal à un. Ce paramètre détermine la taille des limites de confiance, ce qui permet de rendre un monitor plus ou moins sensible.
+* `intervalle` : un nombre entier positif représentant le nombre de secondes de l'intervalle de cumul.
+* `historique` : une chaîne représentant la quantité de données historiques à utiliser pour effectuer la prévision. Exemple : `1w`, `3d`. Ce paramètre s'utilise uniquement avec l'algorithme `linear`.
+* `modèle` : le type de modèle à utiliser parmi `default`, `simple` et `reactive`. Ce paramètre s'utilise uniquement avec l'algorithme `linear`.
+* `saisonnalité` : la saisonnalité à utiliser parmi `hourly`, `daily` et `weekly`. Ce paramètre s'utilise uniquement avec l'algorithme `seasonal`.
+* `comparateur` : utiliser `<=` si l'alerte doit se déclencher lorsque la prévision passe en dessous du seuil. Utiliser `>=` si l'alerte doit se déclencher lorsque la prévision passe au-dessus du seuil.
+* `seuil` : déclencher une alerte critique si les limites de confiance de la prévision atteignent ce seuil.
 
 ## Dépannage
 
@@ -118,3 +138,4 @@ Les fonctions suivantes ne peuvent pas être imbriquées dans des appels de la f
 [6]: /fr/monitors/notifications/
 [7]: /fr/api/v1/monitors/#create-a-monitor
 [8]: /fr/monitors/monitor_status/#settings
+[9]: /fr/api/v1/monitors/

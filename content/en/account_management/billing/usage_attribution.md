@@ -55,6 +55,8 @@ Once the reports start being generated, they are updated daily and aggregated mo
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
 - Reports are downloadable using the 'Export Current View' option. These `.tsv` reports include both usage numbers and percentages, allowing for easy allocations and chargebacks.
 
+Monthly data can also be pulled using the tool's public API. (See the [API endpoint documentation][1]).
+
 ### Daily Usage Attribution
 
 This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
@@ -64,7 +66,7 @@ This section provides daily reports at an hourly granularity to dig into timefra
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Download data" >}}
 
-Data can also be pulled using the tool's public API. (See the [API endpoint documentation][1]).
+Daily data can also be pulled using the tool's public API. (See the [API endpoint documentation][2]).
 
 ### Interpreting the data
 
@@ -79,11 +81,12 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 - An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
 - No value means the resource was not tagged with that particular tag.
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-- A valid tag value (see the [Defining Tags documentation][2]) refers to the actual value of the respective tag.
+- A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
 
 #### Further Data Analysis
 
 When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
-[1]: https://docs.datadoghq.com/api/#get-daily-usage-attribution-available-files
-[2]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-the-list-of-available-monthly-custom-reports
+[2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-the-list-of-available-daily-custom-reports
+[3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags

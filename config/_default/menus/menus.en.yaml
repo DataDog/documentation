@@ -1,3 +1,267 @@
+main_left:
+  - identifier: product
+    name: Product
+    url: 'https://www.datadoghq.com/product/'
+    weight: -500
+  - identifier: features
+    name: Features
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''features icon''>'
+    url: 'https://www.datadoghq.com/product/'
+    weight: 1
+    parent: product
+  - identifier: integrations
+    name: Integrations
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''integrations icon''>'
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
+    weight: 2
+    parent: product
+  - identifier: dashboarding
+    name: Dashboards
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''dashboard icon''>'
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
+    weight: 3
+    parent: product
+  - identifier: logs
+    name: Log Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''log icon''>'
+    url: 'https://www.datadoghq.com/product/log-management/'
+    weight: 4
+    parent: product
+  - identifier: apm
+    name: APM
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''apm icon''>'
+    url: 'https://www.datadoghq.com/product/apm/'
+    weight: 5
+    parent: product
+  - identifier: profiler
+    name: Continuous Profiler
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''profiler icon''>'
+    url: 'https://www.datadoghq.com/product/code-profiling/'
+    weight: 6
+    parent: product
+  - identifier: security
+    name: Security Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''security icon''>'
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
+    weight: 7
+    parent: product
+  - identifier: network
+    name: Network Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''network icon''>'
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
+    weight: 8
+    parent: product
+  - identifier: synthetics
+    name: Synthetic Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics icon''>'
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    weight: 9
+    parent: product
+  - identifier: rum
+    name: Real User Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''rum icon''>'
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 10
+    parent: product
+  - identifier: serverless
+    name: Serverless
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 11
+    parent: product
+  - identifier: alerts
+    name: Alerts
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 12
+    parent: product
+  - identifier: api
+    name: API
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
+    url: 'https://docs.datadoghq.com/api'
+    weight: 13
+    parent: product
+  - identifier: customers
+    name: Customers
+    url: 'https://www.datadoghq.com/customers/'
+    weight: -480
+  - identifier: pricing
+    name: Pricing
+    url: 'https://www.datadoghq.com/pricing/'
+    weight: -480
+  - identifier: solutions
+    name: Solutions
+    url: '#'
+    weight: -460
+  - name: Financial Services
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/financial-services/'
+    weight: -460
+  - name: Manufacturing & Logistics
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+    weight: -459
+  - name: Healthcare/Life Sciences
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/healthcare/'
+    weight: -458
+  - name: Retail/E-Commerce
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
+    weight: -457
+  - name: Public Sector
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/public-sector/'
+    weight: -456
+  - name: Media & Entertainment
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/media-entertainment/'
+    weight: -455
+  - name: Technology
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/technology/'
+    weight: -454
+  - name: Gaming
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/gaming/'
+    weight: -453
+  - name: Amazon Web Services
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/aws/'
+    weight: -452
+  - name: Azure
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/azure/'
+    weight: -451
+  - name: Google Cloud Platform
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/gcp/'
+    weight: -450
+  - name: Kubernetes
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/kubernetes/'
+    weight: -449
+  - name: Cloud Migration
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/cloud-migration/'
+    weight: -448
+  - name: Monitoring Consolidation
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
+    weight: -447
+  - name: DevOps
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/devops/'
+    weight: -446
+  - name: Security Analytics
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/security-analytics/'
+    weight: -445
+  - name: Hybrid Cloud Monitoring
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
+    weight: -444
+  - name: IoT Monitoring
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
+    weight: -443
+  - name: Machine Learning
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/machine-learning/'
+    weight: -442
+  - name: Real-Time BI
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/business-analytics/'
+    weight: -441
+main_right:
+  - identifier: about
+    name: About
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: -490
+  - name: Contact
+    parent: about
+    url: 'https://www.datadoghq.com/about/contact/'
+    weight: -490
+  - name: Partners
+    parent: about
+    url: 'https://www.datadoghq.com/partner'
+    weight: -480
+  - name: Latest News
+    parent: about
+    url: 'https://www.datadoghq.com/about/latest-news/'
+    weight: -460
+  - name: Leadership
+    parent: about
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: -440
+  - name: Careers
+    parent: about
+    url: 'https://www.datadoghq.com/careers/'
+    weight: -420
+  - name: Analyst Reports
+    parent: about
+    url: 'https://www.datadoghq.com/about/analyst/'
+    weight: -415
+  - name: Investor Relations
+    parent: about
+    url: 'https://investors.datadoghq.com/'
+    weight: -410
+  - name: Awards
+    parent: about
+    url: 'https://www.datadoghq.com/about/awards/'
+    weight: -405
+  - identifier: blog
+    name: Blog
+    url: 'https://www.datadoghq.com/blog/'
+    weight: -480
+  - name: The Monitor
+    url: 'https://www.datadoghq.com/blog/'
+    weight: 100
+    parent: blog
+  - name: Engineering
+    url: 'https://www.datadoghq.com/blog/engineering/'
+    parent: blog
+    weight: 200
+  - name: Pup Culture
+    url: 'https://www.datadoghq.com/blog/pup-culture/'
+    parent: blog
+    weight: 300
+  - name: Community
+    url: 'https://www.datadoghq.com/blog/community/'
+    parent: blog
+    weight: 400
+  - identifier: docs
+    name: Docs
+    url: 'https://docs.datadoghq.com/'
+    weight: -470
+  - identifier: login
+    name: Login
+    url: 'https://app.datadoghq.com/'
+    weight: -460
+  - identifier: get_started
+    name: Get Started Free
+    url: '#'
+    weight: -440
 main:
   - name: Getting Started
     identifier: getting_started
@@ -253,6 +517,11 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Operator configuration
+    url: agent/kubernetes/operator_configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_operator_configuration
+    weight: 307
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
@@ -640,6 +909,10 @@ main:
     parent: serverless_datadog_lambda_library
     identifier: serverless_datadog_lambda_library_java
     weight: 205
+  - name: Datadog Lambda Extension
+    url: serverless/datadog_lambda_library/extension
+    parent: serverless_datadog_lambda_library
+    weight: 206
   - name: Datadog Forwarder
     url: serverless/forwarder
     parent: serverless
@@ -2883,6 +3156,14 @@ api_v2:
     url: /api/v2/logs-archives/
     identifier: Logs Archives
     generated: true
+  - name: Get archive order
+    parent: Logs Archives
+    url: '#get-archive-order'
+    generated: true
+  - name: Update archive order
+    parent: Logs Archives
+    url: '#update-archive-order'
+    generated: true
   - name: Get all archives
     parent: Logs Archives
     url: '#get-all-archives'
@@ -3203,3 +3484,137 @@ api_v2:
     url: /api/v2/webhooks-integration/
     identifier: Webhooks Integration
     generated: true
+footer_product:
+  - name: Features
+    url: 'https://www.datadoghq.com/product/'
+    weight: 100
+  - name: Integrations
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
+    weight: 105
+  - name: Dashboards
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
+    weight: 110
+  - name: Log Management
+    url: 'https://www.datadoghq.com/product/log-management/'
+    weight: 115
+  - name: APM
+    url: 'https://www.datadoghq.com/product/apm/'
+    weight: 120
+  - name: Continuous Profiler
+    url: 'https://www.datadoghq.com/product/code-profiling/'
+    weight: 121
+  - name: Security Monitoring
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
+    weight: 123
+  - name: Network Monitoring
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
+    weight: 125
+  - name: Synthetic Monitoring
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    weight: 130
+  - name: Real User Monitoring
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 135
+  - name: Serverless
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 140
+  - name: Alerts
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 145
+  - name: API
+    url: 'https://docs.datadoghq.com/api/'
+    weight: 150
+footer_product_two:
+  - name: Real User Monitoring
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 135
+  - name: Serverless
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 140
+  - name: Alerts
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 145
+  - name: API
+    url: 'https://docs.datadoghq.com/api/'
+    weight: 150
+footer_product_three:
+  - name: Pricing
+    url: 'https://www.datadoghq.com/pricing/'
+    weight: 100
+  - name: Documentation
+    url: 'https://docs.datadoghq.com/'
+    weight: 105
+  - name: Support
+    url: 'https://www.datadoghq.com/support/'
+    weight: 110
+  - name: Resources
+    url: 'https://www.datadoghq.com/resources/'
+    weight: 150
+  - name: Security
+    url: 'https://www.datadoghq.com/security/'
+    weight: 180
+footer_about:
+  - name: COVID-19 Update
+    url: 'https://www.datadoghq.com/coronavirus/'
+    weight: 90
+  - name: Contact Us
+    url: 'https://www.datadoghq.com/about/contact/'
+    weight: 100
+  - name: Partners
+    url: 'https://www.datadoghq.com/partner-with-datadog/'
+    weight: 120
+  - name: Press
+    url: 'https://www.datadoghq.com/about/press/'
+    weight: 130
+  - name: Leadership
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: 140
+  - name: Careers
+    url: 'https://www.datadoghq.com/careers/'
+    weight: 160
+  - name: Legal
+    url: 'https://www.datadoghq.com/legal/'
+    weight: 170
+  - name: Investor Relations
+    url: 'https://investors.datadoghq.com/'
+    weight: 175
+  - name: Analyst Reports
+    url: 'https://www.datadoghq.com/about/analyst/'
+    weight: 180
+footer_blog:
+  - name: English
+    url: 'https://www.datadoghq.com/blog/'
+    weight: 100
+  - name: Español
+    url: 'https://www.datadoghq.com/es/blog/'
+    weight: 110
+  - name: 日本語
+    url: 'https://www.datadoghq.com/ja/blog/'
+    weight: 120
+footer_social:
+  - name: Twitter
+    url: 'https://twitter.com/datadoghq'
+    weight: 130
+    pre: twitter.svg
+  - name: Instagram
+    url: 'https://www.instagram.com/datadoghq/'
+    weight: 140
+    pre: instagram.svg
+  - name: LinkedIn
+    url: 'https://www.LinkedIn.com/company/datadog/'
+    weight: 160
+    pre: linkedin.svg
+  - name: Youtube
+    url: 'https://www.youtube.com/user/DatadogHQ'
+    weight: 150
+    pre: youtube.svg
+footer_sub:
+  - name: Terms
+    url: 'https://www.datadoghq.com/legal/terms/'
+    weight: 100
+  - name: Privacy
+    url: 'https://www.datadoghq.com/legal/privacy/'
+    weight: 120
+  - name: Cookies
+    url: 'https://www.datadoghq.com/legal/cookies/'
+    weight: 130

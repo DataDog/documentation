@@ -64,9 +64,9 @@ Configurez la tâche à l'aide des [outils AWS CLI][6] ou de la console Web d'A
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][4] de votre compte.
 3. Facultatif : ajoutez un [check de santé de l'Agent](#check-de-sante-de-l-agent).
 4. Facultatif : si vous êtes sur le site européen de Datadog, modifiez `datadog-agent-ecs.json` et définissez `DD_SITE` sur `DD_SITE:datadoghq.eu`.
-5. Facultatif : activez la collecte de logs en consultant la [rubrique dédiée][18].
+5. Facultatif : activez la collecte de logs en consultant la [rubrique dédiée][5].
 6. Facultatif : activez la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
-7. Facultatif : activez la collecte de traces (APM) en consultant la [rubrique dédiée][16].
+7. Facultatif : activez la collecte de traces (APM) en consultant la [rubrique dédiée][6].
 8. Facultatif : activez la collecte de données réseau (NPM) en consultant la [rubrique dédiée](#collecte-pour-la-surveillance-des-performances-reseau).
 9. Exécutez la commande suivante :
 
@@ -92,6 +92,8 @@ Ajoutez le bloc suivant à la définition de votre tâche ECS pour créer un che
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
+[5]: /fr/agent/amazon_ecs/logs/
+[6]: /fr/agent/amazon_ecs/apm/
 {{% /tab %}}
 {{% tab "Interface utilisateur Web" %}}
 
@@ -113,7 +115,7 @@ Ajoutez le bloc suivant à la définition de votre tâche ECS pour créer un che
 16. Faites défiler jusqu'à atteindre la section **Storage and Logging**.
 17. Dans **Mount points**, sélectionnez le volume source **docker_sock** et indiquez comme chemin du conteneur `/var/run/docker.sock` pour Linux ou `\\.\pipe\docker_engine` pour Windows. Cochez ensuite la case **Read only**.
 18. Pour Linux uniquement, ajoutez un point de montage supplémentaire pour **proc** et saisissez `/host/proc/` dans le chemin du conteneur. Cochez la case **Read only**.
-19. Pour Linux uniquement, ajoutez un troisième point de montage pour **cgroup** et saisissez `/host/sys/fs/cgroup` dans le chemin du conteneur. Cochez la case **Read only** (utilisez `/host/cgroup/` si vous utilisez une AMI Amazon Linux d'origine).
+19. Linux uniquement : ajoutez un troisième point de montage pour **cgroup** et indiquez `/host/sys/fs/cgroup` dans le chemin du conteneur. Cochez la case **Read only**.
 
 **Remarque** : si vous définissez la tâche Datadog de façon à utiliser 10 « CPU units », la métrique `aws.ecs.cpuutilization` pour `service:datadog-agent` peut afficher un pourcentage d'utilisation du processeur de 1000 %. Cela est dû à la façon dont AWS affiche la charge processeur. Vous pouvez ajouter davantage de « CPU units » pour corriger votre graphique.
 

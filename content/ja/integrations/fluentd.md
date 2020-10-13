@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -66,7 +67,7 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 </source>
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -186,7 +187,7 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/fluentd/datadog_checks/fluentd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: http://www.rubydoc.info/gems/fluent-plugin-datadog
+[4]: https://github.com/DataDog/fluent-plugin-datadog
 [5]: https://docs.datadoghq.com/ja/logs/processing/#edit-reserved-attributes
 [6]: https://docs.datadoghq.com/ja/integrations/#cat-log-collection
 [7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines

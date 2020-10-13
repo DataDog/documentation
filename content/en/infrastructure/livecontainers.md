@@ -31,12 +31,12 @@ If you're using Kubernetes, enable Kubernetes Resources for Live Containers to g
 
 ## Installation
 
-Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Container metrics are available without additional configuration after installation.
+Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Enable the Process Agent to populate your Live Containers view. Container metrics are available without additional configuration after installation.
 
 **Kubernetes Resources for Live Containers requires installation of**:
 
 * [Datadog Agent][8] version 7.21.1 (or above)
-* [Datadog Cluster Agent][9] 1.8.0 (or above)
+* [Datadog Cluster Agent][9] 1.9.0 (or above)
 
 ### Kubernetes Resources
 

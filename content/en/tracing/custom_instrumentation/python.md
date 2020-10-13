@@ -58,7 +58,7 @@ def make_sandwich_request(request):
 API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
 
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
@@ -85,8 +85,8 @@ def make_sandwich_request(request):
 
 Full API details for `ddtrace.Tracer()` can be found [here][2]
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
+[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
 {{% /tab %}}
 {{% tab "Manual" %}}
 
@@ -106,8 +106,8 @@ API details of the decorator can be found in the `ddtrace.Tracer.trace` [documen
 
 
 [1]: /tracing/visualization/#spans
-[2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
-[3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
+[3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -28,6 +28,16 @@ Le graphique à barres suivant affiche la même métrique, mais un cumul d'une j
 
 {{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2"  style="width:60%;" >}}
 
+## Rollup mobile
+
+
+| Fonction        | Description                                    | Exemple |
+|------------------|------------------------------------------------|------------------|
+| `moving_rollup` | Effectuer un rollup pour combiner les points recueillis sur les X dernières secondes. | `moving_rollup(<NOM_MÉTRIQUE>, <INTERVALLE> , <MÉTHODE>)` |
+
+
+Lorsque vous appliquez la fonction `moving_rollup()` à une requête, vous pouvez combiner plusieurs points provenant de l'intervalle spécifié le plus récent, c'est-à-dire les X dernières secondes. Comme avec `.rollup()`, la valeur de `<MÉTHODE>` peut être `sum`/`min`/`max`/`count`/`avg` et définit la façon dont les points de données sont agrégés dans un intervalle de temps donné.
+
 ## Intervalle de cumul : imposé ou personnalisé
 
 Datadog impose une limite de 350 points de données par graphique créé. Afin de respecter cette limite, Datadog effectue automatiquement un cumul des points de données via la méthode `avg` de façon à afficher la moyenne de l'ensemble des points de données dans un intervalle de temps pour une métrique donnée.
@@ -47,9 +57,10 @@ L'utilisation d'une fonction rollup dans une requête de [monitor][4] est géné
 ## Autres fonctions
 
 {{< whatsnext desc="Consultez les autres fonctions disponibles :" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités sur votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques sur votre métrique.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro ou différentes de null de votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Total : comptez les valeurs différentes de zéro  ou différentes de null de votre métrique. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut pour votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}

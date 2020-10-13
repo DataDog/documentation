@@ -31,14 +31,10 @@ further_reading:
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: >-
-              '["<INTEGRATION_NAME>"]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
-              '[{"is_jmx": true, "collect_default_metrics": true}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: >-
-              '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
-              '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '["<INTEGRATION_NAME>"]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
         # (...)
 
     spec:
@@ -89,14 +85,10 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check_names: >-
-          '["tomcat"]'
-        ad.datadoghq.com/tomcat.init_configs: >-
-          '[{"is_jmx": true, "collect_default_metrics": true}]'
-        ad.datadoghq.com/tomcat.instances: >-
-          '[{"host": "%%host%%","port":"9012"}]'
-        ad.datadoghq.com/tomcat.logs: >-
-          '[{"source":"Tomcat","service":"Tomcat"}]'
+        ad.datadoghq.com/tomcat.check_names: '["tomcat"]'
+        ad.datadoghq.com/tomcat.init_configs: '[{"is_jmx": true, "collect_default_metrics": true}]'
+        ad.datadoghq.com/tomcat.instances: '[{"host": "%%host%%","port":"9012"}]'
+        ad.datadoghq.com/tomcat.logs: '[{"source":"Tomcat","service":"Tomcat"}]'
 
 spec:
     containers:
@@ -294,53 +286,9 @@ Agent がホストで実行されており、JMX メトリクスを収集する�
 
 ### コンテナの準備
 
-Agent を構成して実行したら、アプリケーションコンテナの `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` ラベル/アノテーションを使用して、オートディスカバリーからチェックコンフィギュレーションを適用します。
+#### Docker
 
-{{< tabs >}}
-{{% tab "Kubernetes" %}}
-
-```yaml
-apiVersion: v1
-kind: Pod
-# (...)
-metadata:
-    name: '<POD_NAME>'
-    annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: '<CUSTOM_AD_IDENTIFIER>'
-        # (...)
-spec:
-    containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-          # (...)
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-
-            - name: JAVA_OPTS
-              value: >-
-                -Xms256m -Xmx6144m
-                -Dcom.sun.management.jmxremote
-                -Dcom.sun.management.jmxremote.authenticate=false
-                -Dcom.sun.management.jmxremote.ssl=false
-                -Dcom.sun.management.jmxremote.local.only=false
-                -Dcom.sun.management.jmxremote.port=<JMX_PORT>
-                -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
-                -Djava.rmi.server.hostname=$(POD_IP)
-# (...)
-```
-
-**注**:
-
-- 特定のコンフィギュレーションをコンテナに適用するには、オートディスカバリーはイメージではなく、**名前**でコンテナを認識します。`<CONTAINER_IDENTIFIER>` を `.spec.containers[0].image` ではなく `.spec.containers[0].name` にマッチさせるよう試みます。
-- `kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの真下に追加します。レプリケーションコントローラー、ReplicaSets、またはデプロイメントを使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
-- Agent が RMI レジストリに接続することを JMX サーバーが許可するように、`JAVA_OPTS` 環境変数を作成する必要があります。
-- `<JMX_PORT>` は、JMX メトリクスを公開するポートを参照します。
-- 上記の例で、RMI レジストリへの接続は SSL ではありません。SSL を使用したい場合は、`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` アノテーションで `"rmi_registry_ssl": true` を使用し、対応する `Dcom.sun.management.jmxremote` を `JAVA_OPTS` から削除します。
-
-{{% /tab %}}
-{{% tab "Docker" %}}
+Agent を構成して実行したら、アプリケーションコンテナの `com.datadoghq.ad.check.id:"<CUSTOM_AD_IDENTIFIER>"` ラベルを使用して、オートディスカバリーからチェックコンフィギュレーションを適用します。
 
 **Dockerfile**:
 
@@ -376,9 +324,6 @@ project:
 ```
 
 **注**: Agent と JMX コンテナが同じネットワークブリッジ上にある場合は、JMX サーバーを `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` でインスタンス化する必要があります。`<CONTAINER_NAME>` は JMX アプリケーションコンテナ名です。
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## その他の参考資料
 

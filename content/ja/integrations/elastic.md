@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: elasticsearch
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -53,7 +54,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -82,15 +83,16 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - クラスターの外で実行されている 1 つの Datadog Agent からのみ Elasticsearch メトリクスを収集する場合は (ホステッド Elasticsearch を使用する場合など)、`cluster_stats` を true に設定します。
       - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
       - Amazon ES コンフィギュレーション API へのリクエストは全て、署名されなければなりません。詳細は、[AWS ドキュメント][3]を参照してください。
+      - `aws` の認証タイプは、[boto3][4] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
 
-2. [Agent を再起動します][4]。
+2. [Agent を再起動します][5]。
 
 ##### トレースの収集
 
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][5]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][6]。
+1. [Datadog でトレースの収集を有効にします][6]。
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][7]。
 
 ##### ログの収集
 
@@ -102,7 +104,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][7]します。デフォルトでは、スローログは有効になっていません。
+2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][8]します。デフォルトでは、スローログは有効になっていません。
 
    - 特定のインデックス `<インデックス>` のインデックススローログを構成するには
 
@@ -160,15 +162,16 @@ _Agent バージョン 6.0 以降で利用可能_
 
      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-4. [Agent を再起動します][4]。
+4. [Agent を再起動します][5]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
 [3]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[6]: https://docs.datadoghq.com/ja/tracing/setup/
-[7]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[4]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[7]: https://docs.datadoghq.com/ja/tracing/setup/
+[8]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
