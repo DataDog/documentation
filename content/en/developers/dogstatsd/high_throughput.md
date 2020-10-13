@@ -298,6 +298,24 @@ This example decreases the max memory usage of DogStatsD to approximately 384MB:
 dogstatsd_queue_size: 512
 ```
 
+See next chapter on burst detection to help you detect bursts of metrics from your applications.
+
+### Enable metrics processing stats and burst detection
+
+DogStatsD has a stats mode in which you will be able to know which metrics are the most processed. Please note that enabling this mode could decrease the DogStatsD performances.
+
+To enable the stats mode, you can either:
+
+- set `dogstatsd_stats_enable` to `true` in your configuration file,
+- set the environment variable `DD_DOGSTATSD_STATS_ENABLE` to `true`,
+- use the `datadog-agent config set dogstatsd_stats true` command to enable it at runtime. You can disable it at runtime using the command  `datadog-agent config set dogstatsd_stats false`.
+
+When this mode is enabled, you can run the command `datadog-agent dogstatsd-stats`. A list of the processed metrics will be returned ordered by the ones received the most.
+
+While running in this mode, the DogStatsD server runs a burst detection mechanism. If a burst is detected, a warning log will be emitted. E.g.:
+
+    A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
+
 ## Client side telemetry
 
 DogStatsD clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottlenecks exist. Each metric is tagged with the client language and the client version. These metrics are not counted as custom metrics.
