@@ -23,8 +23,7 @@ This page dives into the `OpenMetricsBaseCheck` interface for more advanced usag
 
 If you have more advanced needs than the generic check (for example, metrics preprocessing), you can write a custom `OpenMetricsBaseCheck`. It's [the base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. The minimal configuration for checks based on this class include:
 
-- Overriding `self.NAMESPACE`
-- Overriding `self.metrics_mapper`
+- Creating a default instance with `namespace` and `metrics` mapping.
 - Implementing the `check()` method
 AND/OR
 - Create a method named after the OpenMetric metric they will handle (see `self.prometheus_metric_name`)
