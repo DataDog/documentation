@@ -28,6 +28,7 @@ further_reading:
   - [APM][1] data is `trace.agent.datadoghq.com`
   - [Live Containers][2] data is `process.datadoghq.com`
   - [Logs][3] data is `agent-intake.logs.datadoghq.com` for TCP traffic
+  - [Orchestrator Resources][4] data is `orchestrator.datadoghq.com`
   - All other Agent data:
       - **Agents < 5.2.0** `app.datadoghq.com`
       - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
@@ -41,12 +42,13 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
 
-- **[https://ip-ranges.datadoghq.com][4]** for Datadog US region.
+- **[https://ip-ranges.datadoghq.com][5]** for Datadog US region.
 
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
 [3]: /logs/
-[4]: https://ip-ranges.datadoghq.com
+[4]: /infrastructure/livecontainers/#kubernetes-resources-1
+[5]: https://ip-ranges.datadoghq.com
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
@@ -56,6 +58,7 @@ All of these domains are **CNAME** records pointing to a set of static IP addres
   - [APM][1] data is `trace.agent.datadoghq.eu`
   - [Live Containers][2] data is `process.datadoghq.eu`
   - [Logs][3] data is `agent-intake.logs.datadoghq.eu` for TCP traffic
+  - [Orchestrator Resources][4] data is `orchestrator.datadoghq.com`
   - All other Agent data:
       - **Agents < 5.2.0** `app.datadoghq.eu`
       - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.eu`
@@ -69,12 +72,13 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
 
-- **[https://ip-ranges.datadoghq.eu][4]** for Datadog EU region.
+- **[https://ip-ranges.datadoghq.eu][5]** for Datadog EU region.
 
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
 [3]: /logs/
-[4]: https://ip-ranges.datadoghq.eu
+[4]: /infrastructure/livecontainers/#kubernetes-resources-1
+[5]: https://ip-ranges.datadoghq.eu
 {{< /site-region >}}
 
 The information is structured as JSON following this schema:
@@ -96,6 +100,7 @@ The information is structured as JSON following this schema:
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
+    "orchestrator": {...},                   // <-- same for the process Agent data
     "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests) 
     "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
