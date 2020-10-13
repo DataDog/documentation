@@ -37,7 +37,7 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 - **Agent >= 7.18.0/6.18.0** `api.datadoghq`{{< region-param key="dd_site" code="true" >}}
 - **Agent < 7.18.0/6.18.0** `app.datadoghq.`{{< region-param key="dd_site" code="true" >}}
 
-All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.{{< region-param key="dd_site" code="true" >}}.
+All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.datadoghq.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
 
