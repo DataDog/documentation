@@ -380,7 +380,7 @@ Multiple archives can be useful if you have different lifecycle policies dependi
 
 Assign the [Write Historical View][73] permission to members of `ACME Admin`. This permission grants the ability to perform rehydrations. 
 
-**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. This option enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
+**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. [This option][76] enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
@@ -413,7 +413,7 @@ Assign the [Write Historical View][73] permission to members of `ACME Admin`. Th
 
 [74]: /account_management/rbac/permissions?tab=ui#logs-read-data
 [75]: /account_management/rbac/permissions?tab=ui#logs-read-index-data
-
+[76]: /logs/archives#datadog-permissions
 
 [84]: /getting_started/tagging/
 [85]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
