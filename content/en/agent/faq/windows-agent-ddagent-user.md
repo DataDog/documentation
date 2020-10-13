@@ -43,7 +43,7 @@ Additionally, the installer adds the user to the following groups:
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
-**Note**: The `<DDAGENTUSER_NAME>` must be 20 characters or less in order to comply with the [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+**Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
 
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
 
