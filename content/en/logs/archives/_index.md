@@ -250,16 +250,7 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 [1]: /logs/archives/rehydrating/
 
 {{% /tab %}}
-{{% tab "Azure Storage" %}}
 
-*** TODO ***
-
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-*** TODO ***
-
-{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -341,16 +332,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 
 {{% /tab %}}
-{{% tab "Azure Storage" %}}
 
-*** TODO ***
-
-{{% /tab %}}
-{{% tab "Google Cloud Storage" %}}
-
-*** TODO ***
-
-{{% /tab %}}
 {{< /tabs >}}
 
 
