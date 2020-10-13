@@ -17,20 +17,26 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-## Archives
+## Overview
 
-Configure your Datadog account to forward all the logs ingested to a cloud storage system. Keeping your logs in a storage-optimized archive for longer periods of time enables you to meet compliance requirements, and to keep auditability for ad hoc investigations within budget. Once your logs are archived for the long term, [you have access to them][1] should you ever need to investigate something unexpected—or that might have happened a long time ago.
+Configure your Datadog account to forward all the logs ingested - whether [indexed][3] or not - to a cloud storage system of yuor own. Keepi your logs in a storage-optimized archive for longer periods of time and **meet compliance** requirements whilst also **keeping auditability** for ad hoc investigations, with [Rehydration][1].
 
-This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
+This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
-**Note:** only Datadog users with admin status can create, modify, or delete log archive configurations.
+1. Set up Datadog [Integration](#set-integration) for your Cloud Provider,
+2. Create a [Storage Bucket](#create-a-storage-bucket),
+3. Set [permissions](#set-permissions) read and/or write on that Archive,
+4. [Route your logs](#route-your-logs-to-a-bucket) to and/or from that Archive,
+5. Configure [advanced settings](#advanced-settings) such as encryption and storage class.
+
+**Note:** only Datadog users with [Logs Write Archive permssion][2] can create, modify, or delete log archive configurations.
 
 {{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
 
+
 ## Create and configure a storage bucket
 
-
-#### Set Integration
+### Set Integration
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -96,7 +102,6 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{< /tabs >}}
 
 ### Set Permissions
-
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -207,7 +212,6 @@ Select the **GCS** archive type, and the GCS Service Account that has permission
 Input your bucket name. **Optional**: input a prefix directory for all the content of your log archives.
 
 {{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -369,3 +373,5 @@ Logs enter the first archive whose filter they match on.
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/archives/rehydrating/
+[2]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
+[3]: /logs/indexes/#exclusion-filters
