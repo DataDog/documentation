@@ -437,7 +437,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: http://bytebuddy.net
 [10]: /tracing/connect_logs_and_traces/java/
 [11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [12]: /developers/dogstatsd/#setup
