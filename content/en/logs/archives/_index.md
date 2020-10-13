@@ -25,19 +25,19 @@ Configure your Datadog account to forward all the logs ingested - whether [index
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
-1. Set up Datadog [Integration](#set-integration) for your Cloud Provider,
-2. Create a [Storage Bucket](#create-a-storage-bucket),
-3. Set [permissions](#set-permissions) read and/or write on that Archive,
-4. [Route your logs](#route-your-logs-to-a-bucket) to and/or from that Archive,
-5. Configure [advanced settings](#advanced-settings) such as encryption, storage class and tags,
-6. Eventually, [validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you.
+1. Set up Datadog [Integration](#set-integration) for your cloud provider
+2. Create a [storage bucket](#create-a-storage-bucket)
+3. Set [permissions](#set-permissions) read and/or write on that archive
+4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive
+5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags
+6. [Validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you
 
 **Note:** only Datadog users with [Logs Write Archive permssion][3] can create, modify, or delete log archive configurations.
 
 
-## Configure an Archive
+## Configure an archive
 
-### Set Integration
+### Set up an integration
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -45,14 +45,14 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
 
 * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
-* Specifically for AWS GovCloud or China accounts, use Access Keys as an alternative to Role Delegation.
+* Specifically for AWS GovCloud or China accounts, use access keys as an alternative to role delegation.
 
 
 [1]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an App Registration that Datadog can use][2] to integrate with.
+Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
@@ -61,7 +61,7 @@ Set up the [Azure integration][1] within the subscription that holds your new st
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCS Service Account that Datadog can use][2] to integrate with.
+Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven’t already. This involves [creating a GCS service account that Datadog can use][2] to integrate with.
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
@@ -70,7 +70,7 @@ Set up the [GCP integration][1] for the project that holds your GCS storage buck
 {{< /tabs >}}
 
 
-### Create a Storage Bucket
+### Create a storage bucket
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -157,7 +157,7 @@ Add the following two permission statements to the IAM policies. Edit the bucket
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Grant your Datadog GCP Service Account sufficient permissions to write your archives to your bucket.
+Grant your Datadog GCP service account sufficient permissions to write your archives to your bucket.
 
 * If you’re creating a new Service Account, this can be done from the [GCP Credentials page][1].
 * If you’re updating an existing Service Account, this can be done from the [GCP IAM Admin page][2]).
@@ -187,7 +187,7 @@ Only Datadog users with [Logs Write Archive permission][3] can complete this and
 
 Select the appropriate AWS account + role combination for your S3 bucket.
 
-Input your bucket name. **Optional**: input a prefix directory for all the content of your log archives.
+Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
 {{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
@@ -197,7 +197,7 @@ Input your bucket name. **Optional**: input a prefix directory for all the conte
 
 Select the **Azure Storage** archive type, and the Azure Tenant and Client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.
 
-Input your storage account name and a container name for your archive. **Optional**: input a prefix directory for all the content of your log archives.
+Input your storage account name and a container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
 
 {{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
 
@@ -208,7 +208,7 @@ Input your storage account name and a container name for your archive. **Optiona
 
 Select the **GCS** archive type, and the GCS Service Account that has permissions to write on your storage bucket.
 
-Input your bucket name. **Optional**: input a prefix directory for all the content of your log archives.
+Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
 {{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
 
