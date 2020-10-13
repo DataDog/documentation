@@ -25,14 +25,14 @@ Configure your Datadog account to forward all the logs ingested - whether [index
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
-1. Set up Datadog [Integration](#set-integration) for your cloud provider
+1. Set up a Datadog [integration](#set-up-an-integration) for your cloud provider
 2. Create a [storage bucket](#create-a-storage-bucket)
 3. Set [permissions](#set-permissions) read and/or write on that archive
 4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive
 5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags
 6. [Validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you
 
-**Note:** only Datadog users with [Logs Write Archive permssion][3] can create, modify, or delete log archive configurations.
+**Note:** only Datadog users with [Logs Write Archive permission][3] can create, modify, or delete log archive configurations.
 
 
 ## Configure an archive
