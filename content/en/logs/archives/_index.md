@@ -218,7 +218,6 @@ Input your bucket name. **Optional**: input a prefix directory for all the conte
 
 ### Advanced Settings
 
-
 #### Storage Class
 
 {{< tabs >}}
@@ -340,16 +339,18 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. 
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account.
+
+In case Datadog detects some broken configuration, the corresponding Archive is highlighted in the configuration page. Check on the error icon what actions to take in order to fix it.
+
+{{< img src="logs/archives/archive_validation.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
 
 
 ## Configure Multiple Archives
 
-Admins can route specific logs to an archive by adding a query in the archive’s filter field. Logs enter the first archive whose filter they match on, so it is important to order your archives carefully.
+In case mulitple archives are defined, logs enter the first archive whose filter they match on. So it is important to order your archives carefully.
 
 For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
-
-Logs enter the first archive whose filter they match on.
 
 {{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
 
