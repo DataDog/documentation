@@ -56,13 +56,13 @@ Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect Pyth
 ### Log into a file
 
 {{< tabs >}}
-{{% tab "JSON_log-formatter" %}}
+{{% tab "JSON-log-formatter" %}}
 
 Usage example with [JSON-log-formatter][1]:
 
 ```python
 import logging
-from pythonjsonlogger import jsonlogger
+from json_log_formatter import jsonlogger
 
 logger = logging.getLogger()
 
