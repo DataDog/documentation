@@ -137,6 +137,20 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 {{[dot.key.test].name}}
 ```
 
+#### Log facet variables
+
+Log monitors can use facets as variables if the monitor is grouped by the facets.
+For example, if your log monitor is grouped by the facet `@facet`, the variable is:
+
+```text
+{{@facet.name}}
+```
+
+If your facet has periods, use brackets around the facet, for example:
+```text
+{{[@facet.with.dot].name}}
+```
+
 ### Conditional variables
 
 Conditional variables use `if-else` logic to display a different message depending on the state of the monitor and the details of how it was triggered. These variables can be used within the subject or body of the notification message.
