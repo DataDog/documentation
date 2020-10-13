@@ -147,7 +147,6 @@ For additional details and options, see the [WebSphere docs][1].
 ## Automatic Instrumentation
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
