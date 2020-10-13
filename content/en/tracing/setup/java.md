@@ -47,28 +47,11 @@ Otherwise, to begin tracing applications written in any language:
 
 4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
 
-**Notes**:
+### JVM notes
 
 - Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
-{{< tabs >}}
-{{% tab "WebSphere" %}}
-
-In the administrative console:
-
-1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
-2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**.
-4. In the **Generic JVM arguments** text field, enter:
-
-```text
--javaagent:/path/to/dd-java-agent.jar
-```
-
-For additional details and options, see the [WebSphere docs][1].
-
-[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-    {{% /tab %}}
+    {{< tabs >}}
     {{% tab "Spring Boot" %}}
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
@@ -130,6 +113,23 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
+    {{% /tab %}}
+    {{% tab "WebSphere" %}}
+
+In the administrative console:
+
+1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
+2. Select **Java and Process Management > Process Definition**.
+3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+4. In the **Generic JVM arguments** text field, enter:
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+For additional details and options, see the [WebSphere docs][1].
+
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
     {{% /tab %}}
     {{< /tabs >}}
 

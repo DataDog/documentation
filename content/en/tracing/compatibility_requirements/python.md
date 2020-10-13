@@ -126,4 +126,3 @@ The `ddtrace` library includes support for the following libraries:
 [40]: http://jinja.pocoo.org
 [41]: https://kombu.readthedocs.io/en/latest
 [42]: https://www.makotemplates.org
-[43]: http://docs.python-requests.org/en/master
