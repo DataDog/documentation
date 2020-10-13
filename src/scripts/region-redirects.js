@@ -79,6 +79,12 @@ function showRegionSnippet(newSiteRegion) {
             );
         } else {
             param.innerHTML = config[regionParam][newSiteRegion];
+            // checks if there are two `<code>` elements next to each other, and allows them to 'blend' together(no padding or border radius in between the two)
+            if (param.previousElementSibling && param.previousElementSibling.tagName === 'CODE'){
+                param.previousElementSibling.style.paddingRight = '0';
+                param.previousElementSibling.style.borderTopRightRadius = '0';
+                param.previousElementSibling.style.borderBottomRightRadius = '0';
+            }
         }
     });
 
