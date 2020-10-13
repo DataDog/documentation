@@ -29,7 +29,8 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 2. Create a [Storage Bucket](#create-a-storage-bucket),
 3. Set [permissions](#set-permissions) read and/or write on that Archive,
 4. [Route your logs](#route-your-logs-to-a-bucket) to and/or from that Archive,
-5. Configure [advanced settings](#advanced-settings) such as encryption, storage class and tags.
+5. Configure [advanced settings](#advanced-settings) such as encryption, storage class and tags,
+6. Eventually, [validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you.
 
 **Note:** only Datadog users with [Logs Write Archive permssion][2] can create, modify, or delete log archive configurations.
 
@@ -218,6 +219,25 @@ Input your bucket name. **Optional**: input a prefix directory for all the conte
 
 ### Advanced Settings
 
+#### Datadog Permissions on the Archive
+
+By default:
+
+* all Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#configure-multiple-archives) Archives,
+* all Datadog Admin and Standard users can Rehydrate from Archives,
+* all users, including Datadog Read Only users, can access Rehydrated logs.
+
+Use optional step 5 to Assign Roles on that Archive and restrict who can: 
+
+* edit that Archive Configuration. See the [logs_write_archive][4] permission.
+* rehydrate from that Archive. See the [logs_read_archives][5] and [logs_write_historical_view][6].
+* access Rehydrated Logs in case you use the legacy [Read Index Data permission][7].
+
+Use optional step 6 to add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][8] permission.
+
+{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
+
+
 #### Storage Class
 
 {{< tabs >}}
@@ -241,7 +261,6 @@ You can [set a lifecycle configuration on your S3 bucket][1] to automatically tr
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 #### Server side encryption (SSE)
@@ -398,3 +417,8 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [1]: /logs/archives/rehydrating/
 [2]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [3]: /logs/indexes/#exclusion-filters
+[4]: /account_management/rbac/permissions#logs_write_archives
+[5]: /account_management/rbac/permissions#logs_read_archives
+[6]: /account_management/rbac/permissions#logs_write_historical_view
+[7]: /account_management/rbac/permissions#logs_read_index_data
+[8]: /account_management/rbac/permissions#logs_read_data
