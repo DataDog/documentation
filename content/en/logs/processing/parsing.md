@@ -71,7 +71,6 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | **Pattern**                                     | **Usage**                                                                                                                          |
 | `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates). |
 | `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
-| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
 | `notSpace`                                      | Matches any string until the next space.                                                                                           |
 | `boolean("truePattern", "falsePattern")`        | Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).     |
 | `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
@@ -94,6 +93,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `hostname`                                      | Matches a hostname.                                                                                                                |
 | `ipOrHost`                                      | Matches a hostname or IP.                                                                                                          |
 | `port`                                          | Matches a port number.                                                                                                             |
+| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.                                                              |
 
 {{% /tab %}}
 {{% tab "Filter" %}}

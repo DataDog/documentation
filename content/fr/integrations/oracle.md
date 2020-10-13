@@ -2,6 +2,8 @@
 assets:
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -37,7 +39,7 @@ supported_os:
 
 Recueillez des métriques de serveurs d'Oracle Database en temps réel pour visualiser et surveiller leurs performances et leur disponibilité.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -45,20 +47,19 @@ Recueillez des métriques de serveurs d'Oracle Database en temps réel pour vis
 
 Pour utiliser l'intégration Oracle, installez les bibliothèques Oracle Instant Client ou téléchargez le pilote JDBC d'Oracle. En raison des restrictions de licence, ces bibliothèques ne sont pas intégrées à l'Agent Datadog, mais peuvent être téléchargées directement sur le site d'Oracle.
 
-**Remarque** : JPype, l'une des bibliothèques utilisées par l'Agent, dépend spécifiquement de [Microsoft Visual C++ Runtime 2015][2]. Assurez-vous que ce runtime est installé sur votre système.
+**Remarque** : les runtimes suivants doivent être présents sur votre système pour JPype, l'une des bibliothèques utilisées par l'Agent lors de l'utilisation du pilote JDBC.
 
-##### Pilote JDBC
+- Java 8 ou version ultérieure 
+- [Microsoft Visual C++ Runtime 2015][2]
 
-- [Téléchargez le fichier jar du pilote JDBC][3].
-- Ajoutez le chemin vers le fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration du check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][4]).
 
 ##### Oracle Instant Client
 
 Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote JDBC d'Oracle :
 
-1. Accédez à la [page de téléchargement][5] et installez les paquets SDK et Basic d'Instant Client.
+1. Accédez à la [page de téléchargement][3] et installez les paquets SDK et Basic d'Instant Client.
 
-    Si vous utilisez Linux, une fois les bibliothèques Instant Client installées, vérifiez que l'éditeur de liens à l'exécution peut trouver les bibliothèques. Par exemple, avec `ldconfig` :
+    Si vous utilisez Linux, une fois les bibliothèques Instant Client installées, vérifiez que l'éditeur de liens du runtime parvient à trouver les bibliothèques. Par exemple, avec `ldconfig` :
 
    ```shell
    # Put the library location in an ld configuration file.
@@ -79,7 +80,15 @@ Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote J
    unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
    ```
 
+##### Pilote JDBC
+
+- [Téléchargez le fichier jar du pilote JDBC][4].
+- Ajoutez le chemin vers le fichier téléchargé dans votre `$CLASSPATH` ou le fichier de configuration du check sous `jdbc_driver_path` (consultez le [fichier d'exemple oracle.yaml][5]).
+
 #### Création d'un utilisateur Datadog
+
+{{< tabs >}}
+{{% tab "Standalone" %}}
 
 Créez un utilisateur `datadog` en lecture seule avec un accès approprié à votre serveur Oracle Database. Connectez-vous à votre base de données Oracle avec un utilisateur bénéficiant des droits administrateur (par ex., `SYSDBA` ou `SYSOPER`) et exécutez ce qui suit :
 
@@ -105,13 +114,35 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
+{{% /tab %}}
+{{% tab "Multitenant" %}}
+
+##### Oracle 12c ou 19c
+
+Connectez-vous à la base de données root en tant qu'administrateur pour créer un utilisateur `datadog` et accorder les autorisations nécessaires :
+
+```text
+alter session set container = cdb$root;
+CREATE USER c##datadog IDENTIFIED BY password CONTAINER=ALL;
+GRANT CREATE SESSION TO c##datadog CONTAINER=ALL;
+Grant select any dictionary to c##datadog container=all;
+GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
+GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Configuration
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `oracle.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6]. Mettez à jour les paramètres `server` et `port` pour définir les masters à surveiller. Consultez le [fichier d'exemple oracle.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `oracle.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Mettez à jour les paramètres `server` et `port` pour définir les masters à surveiller. Consultez le [fichier d'exemple oracle.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -140,7 +171,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
        password: "<PASSWORD>"
    ```
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][3].
 
 #### Requêtes personnalisées uniquement
 
@@ -179,9 +210,15 @@ instances:
     only_custom_queries: true
 ```
 
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -189,9 +226,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                             |
 | `<CONFIG_INSTANCE>`  | `{"server": "%%host%%:1521", "service_name":"<NOM_SERVICE>", "user":"datadog", "password":"<MOT_DE_PASSE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `oracle` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `oracle` dans la section Checks.
 
 ## Requête personnalisée
 
@@ -233,7 +274,71 @@ représentent ce que deviendrait l'exemple de configuration suivant :
     - tester:oracle
 ```
 
-Consultez le [fichier d'exemple oracle.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Consultez le [fichier d'exemple oracle.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+
+### Exemple
+
+Créez une configuration de requête pour faciliter l'identification des verrouillages de base de données :
+
+1. Pour inclure une requête personnalisée, modifiez `conf.d\oracle.d\conf.yaml`. Supprimez la mise en commentaire du bloc `custom_queries` ajoutez les requêtes et colonnes nécessaires, puis redémarrez l'Agent.
+
+```yaml
+  init_config:
+  instances:
+      - server: localhost:1521
+        service_name: orcl11g.us.oracle.com
+        user: datadog
+        password: xxxxxxx
+        jdbc_driver_path: /u01/app/oracle/product/11.2/dbhome_1/jdbc/lib/ojdbc6.jar
+        tags:
+          - db:oracle
+        custom_queries:
+          - metric_prefix: oracle.custom_query.locks
+            query: |
+              select blocking_session, username, osuser, sid, serial# as serial, wait_class, seconds_in_wait
+              from v_$session
+              where blocking_session is not NULL order by blocking_session
+            columns:
+              - name: blocking_session
+                type: gauge
+              - name: username
+                type: tag
+              - name: osuser
+                type: tag
+              - name: sid
+                type: tag
+              - name: serial
+                type: tag
+              - name: wait_class
+                type: tag
+              - name: seconds_in_wait
+                type: tag
+```
+
+2. Pour accéder à `v_$session`, accordez l'autorisation à `DATADOG` et testez les autorisations.
+
+```text
+SQL> grant select on sys.v_$session to datadog;
+
+## connexion avec l'utilisateur DD pour valider l'accès :
+
+
+SQL> show user
+USER is "DATADOG"
+
+
+## création d'un synonyme pour rendre la vue visible
+SQL> create synonym datadog.v_$session for sys.v_$session;
+
+
+Synonym created.
+
+
+SQL> select blocking_session,username,osuser, sid, serial#, wait_class, seconds_in_wait from v_$session
+where blocking_session is not NULL order by blocking_session;
+```
+
+3. Une fois la configuration terminée, vous pouvez créer un [monitor][7] basé sur les métriques `oracle.custom_query.locks`.
 
 ## Données collectées
 
@@ -252,16 +357,14 @@ Permet de vérifier que la base de données est disponible et accepte les connex
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
 [2]: https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
-[3]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
-[4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[5]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help/
+[3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
+[5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/monitors/monitor_types/metric/?tab=threshold
+[8]: https://docs.datadoghq.com/fr/help/

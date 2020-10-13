@@ -36,7 +36,7 @@ Otherwise, to begin tracing applications written in any language:
 2. Download `dd-java-agent.jar` that contains the Agent class files:
 
    ```shell
-wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
 3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
@@ -45,7 +45,7 @@ wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 -javaagent:/path/to/the/dd-java-agent.jar
    ```
 
-4. Add [Configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics---all the metrics you intend to use. See the examples below. Note that using the in-app Quickstart instructions generates these for you.
+4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
 
 **Notes**:
 

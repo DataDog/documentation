@@ -1,7 +1,7 @@
 ---
 beta: true
 dependencies:
-  - 'https://github.com/DataDog/dd-sdk-android/blob/dd-tracing/docs/trace_collection.md'
+  - 'https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md'
 description: Recueillez des traces à partir de vos applications Android.
 further_reading:
   - link: 'https://github.com/DataDog/dd-sdk-android'
@@ -13,19 +13,15 @@ further_reading:
 kind: documentation
 title: Collecte de traces Android
 ---
-<div class="alert alert-info">La collecte de traces Android est disponible en version bêta publique et n'est pas actuellement prise en charge par Datadog.</div>
-
 Envoyez des [traces][1] à Datadog à partir de vos applications Android avec la [bibliothèque de journalisation côté client `dd-sdk-android` de Datadog][2]. Vous pourrez notamment :
 
 * Créer des [spans][3] personnalisées pour les opérations dans votre application
 * Ajouter du contexte et des attributs personnalisés supplémentaires pour chaque span envoyée
-* Optimiser l'utilisation du réseau grâce aux envois automatiques en masse
-
-**Remarque** : les traces sur Android sont encore en phase expérimentale et seront disponibles dans la bibliothèque `dd-sdk-android` `1.4.0` et les versions ultérieures. La bibliothèque `dd-sdk-android` prend en charge toutes les versions d'Android à partir de l'API niveau 19 (KitKat).
+* Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
 
 ## Configuration
 
-1. Ajoutez la dépendance Gradle en définissant la bibliothèque comme une dépendance dans votre fichier `build.gradle` :
+1. Ajoutez la dépendance Gradle en définissant la bibliothèque en tant que dépendance dans votre fichier `build.gradle` :
 
     ```conf
     repositories {
@@ -99,7 +95,7 @@ class SampleApplication : Application() {
     span.finish()
 
     ```
-7. Utilisation de contextes :
+7. En faisant appel aux contextes :
    ```kotlin
    val span = tracer.buildSpan("<SPAN_NAME1>").start()
    try {
@@ -130,7 +126,7 @@ class SampleApplication : Application() {
    }
 
    ```
-8. Utilisation de contextes dans des appels asynchrones :
+8. Utiliser les contextes dans des appels asynchrones :
    ```kotlin
    val span = tracer.buildSpan("<SPAN_NAME1>").start()
    try{
@@ -192,7 +188,7 @@ class SampleApplication : Application() {
 
    ```
 
-**Remarque** : pour les bases de code utilisant le client OkHttp, Datadog fournit l'implémentation ci-dessous.
+**Remarque** : pour les codebases utilisant le client OkHttp, Datadog fournit l'implémentation ci-dessous.
 
 10. Fournissez des tags supplémentaires avec votre span (facultatif).
 
@@ -228,13 +224,27 @@ Si vous souhaitez effectuer le tracing de vos requêtes OkHttp, vous pouvez ajou
 
 ```kotlin
 val okHttpClient =  OkHttpClient.Builder()
-    .addInterceptor(DatadogInterceptor())
+    .addInterceptor(
+        DatadogInterceptor(
+            listOf("example.com", "example.eu")
+        )
+    )
     .build()
 ```
 
-Cette méthode crée une span autour de chaque requête traitée par OkHttpClient. Toutes les informations pertinentes sont automatiquement remplies (URL, méthode, code de statut, erreur). La span transmet les informations de tracing à votre backend afin de garantir la cohérence des traces dans Datadog
+Cette méthode crée une span autour de chaque requête traitée par OkHttpClient (correspondant aux hosts fournis). Toutes les informations pertinentes sont automatiquement renseignées (URL, méthode, code de statut, erreur). La span transmet les informations de tracing à votre backend afin de garantir la cohérence des traces dans Datadog.
 
-En raison de la méthode d'exécution de la requête OkHttp (utilisation d'un pool de threads), nous ne pouvons pas associer la span de la requête à la span qui a déclenché la requête. Vous pouvez tout de même fournir manuellement une span parent `OkHttp Request.Builder`, tel que suit :
+L'intercepteur surveille les requêtes au niveau de l'application. Vous pouvez également ajouter un `TracingInterceptor` au niveau du réseau pour obtenir plus de détails, par exemple lors du suivi de redirections.
+
+ ```kotlin
+val tracedHosts = listOf("example.com", "example.eu")
+val okHttpClient =  OkHttpClient.Builder()
+    .addInterceptor(DatadogInterceptor(tracedHosts))
+    .addNetworkInterceptor(TracingInterceptor(tracedHosts))
+    .build()
+ ```
+
+En raison de la méthode d'exécution de la requête OkHttp (utilisation d'un pool de threads), la span de la requête ne sera pas automatiquement associée à la span qui a déclenché la requête. Vous pouvez toutefois spécifier manuellement une span parent dans `OkHttp Request.Builder`, comme suit :
 
 ```kotlin
 val request = Request.Builder()

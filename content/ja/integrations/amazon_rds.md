@@ -97,9 +97,9 @@ RDS インスタンスの監視には 3 つのオプションがあります。�
 3. アプリケーションに一意の名前を付けます。
 4. 前のセクションで作成したキーの ID を `KMSKeyId` パラメーターに貼り付け、デプロイします。
 5. アプリケーションがデプロイされたら、新しく作成された Lambda 関数を開きます (「Resource」の下にある関数をクリック)。
-   {{< img src="integrations/awsrds/click-function.png" alt="Lambda 関数を開く" >}}
+  {{< img src="integrations/awsrds/click-function.png" alt="Lambda 関数を開く" >}}
 6. 下にスクロールして `Environment variables` セクションを見つけます。`<YOUR_API_KEY>` は、`{"api_key":"<YOUR_API_KEY>"}` の形式を使用して [Datadog API キー][1]に置き換えます。
-   {{< img src="integrations/awsrds/env-variables.png" alt="環境変数" >}}
+  {{< img src="integrations/awsrds/env-variables.png" alt="環境変数" >}}
 7. `Encryption configuration` セクションを開き、`Enable helpers for encryption in transit` を選択します。
 8. `KMS key to encrypt in transit` で、下の `KMS key to encrypt at rest` にあるキーと同じキーを選択します。
 9. 入力した JSON Blob の横にある Encrypt ボタンを押します。
@@ -131,7 +131,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 {{% tab "Native" %}}
 
 1. AWS コンソールに移動し、RDS セクションを開いて、監視するインスタンスを見つけます。
-   {{< img src="integrations/awsrds/rds-console.png" alt="RDS コンソール" >}}
+  {{< img src="integrations/awsrds/rds-console.png" alt="RDS コンソール" >}}
 2. エンドポイント URL をメモします (例: **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**)。これは Agent の構成に使用されます。`DB Instance identifier` もメモします (例 **mysqlrds**)。これはグラフやダッシュボードの作成に使用されます。
 
 {{% /tab %}}

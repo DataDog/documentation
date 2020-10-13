@@ -11,7 +11,7 @@ further_reading:
 ---
 ## Installation
 
-La fonction Network Device Monitoring utilise le protocole SNMP inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
+La fonction Network Device Monitoring utilise le protocole SNMP inclus avec le package de l'[Agent Datadog][1]. Vous n'avez donc rien d'autre à installer.
 
 ## Configuration
 

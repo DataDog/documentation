@@ -29,23 +29,118 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-または、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストールして構成し][3]、[Docker アプリケーションのトレース][4]または [Kubernetes アプリケーション][5]に関する追加ドキュメントを確認します。
+それ以外の場合、どの言語で作成されたアプリケーションをトレースする場合でも:
 
-次に、エージェントクラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+1. [Datadog Agent をインストール、構成][3]します。[Docker アプリケーションのトレース][4]または [Kubernetes アプリケーションのトレース][5]に関する追加ドキュメントを確認します。
 
-```shell
+2. Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+
+   ```shell
 wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
-```
+   ```
 
-最後に、アプリケーションの起動時に IDE、Maven または Gradle アプリケーションスクリプト、または `java -jar` コマンドに次の JVM 引数を追加します:
+3. アプリケーションの起動時に IDE、Maven または Gradle アプリケーションスクリプト、または `java -jar` コマンドに次の JVM 引数を追加します:
 
-```text
+   ```text
 -javaagent:/path/to/the/dd-java-agent.jar
-```
+   ```
+
+4. トレース用の[コンフィギュレーションオプション](#configuration)を追加し、特に、サービス、環境、ログインジェクション、プロファイリング、およびオプションでランタイムメトリクス (使用するつもりのすべてのメトリクス) に対して、環境変数を設定しているか、システムプロパティを JVM 引数として渡していることを確認します。以下の例を参照してください。なお、アプリ内クイックスタート手順を使用すると、これらが生成されます。
 
 **注**:
 
-- `-javaagent` は `-jar` ファイルより前に実行され、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][6]を参照してください。
+- IDE のドキュメントを使用して、`-javaagent` およびその他の JVM 引数を渡す正しい方法を確認してください。一般的に使用されるフレームワークの手順は次のとおりです。
+
+    {{< tabs >}}
+    {{% tab "WebSphere" %}}
+
+管理コンソールで:
+
+1. **Servers** を選択します。**Server Type** で、**WebSphere application servers** を選択し、サーバーを選択します。
+2. **Java and Process Management > Process Definition** を選択します。
+3. **Additional Properties** セクションで、**Java Virtual Machine** をクリックします。
+4. **Generic JVM arguments** テキストフィールドに次のように入力します。
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
+
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+    {{% /tab %}}
+    {{% tab "Spring Boot" %}}
+
+アプリの名前が `my_app.jar` の場合は、以下を含む `my_app.conf` を作成します。
+
+```text
+JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
+```
+
+詳細については、[Spring Boot のドキュメント][1]を参照してください。
+
+
+[1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+    {{% /tab %}}
+    {{% tab "Tomcat" %}}
+
+Tomcat 起動スクリプトファイル (たとえば、`catalina.sh`) を開き、次を追加します。
+
+```text
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+または Windows では、`catalina.bat`:
+
+```text
+set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+```
+
+    {{% /tab %}}
+    {{% tab "JBoss" %}}
+
+`standalone.sh` の末尾に次の行を追加します。
+
+```text
+JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+Windows では、`standalone.conf.bat` の末尾に次の行を追加します。
+
+```text
+set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
+```
+
+詳細については、[JBoss のドキュメント][1]を参照してください。
+
+
+[1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+    {{% /tab %}}
+    {{% tab "Jetty" %}}
+
+`jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
+
+```text
+JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
+```
+
+`start.ini` を使用して Jetty を起動する場合は、次の行を追加します(`--exec` の下に。まだ存在しない場合は `--exec` 行を追加します)。
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+    {{% /tab %}}
+    {{< /tabs >}}
+
+
+- `-javaagent` 引数を `java -jar` コマンドに追加する場合は、`-jar` 引数の_前_に追加する必要があります。つまり、アプリケーション引数としてではなく、JVM オプションとして追加する必要があります。例:
+
+   ```text
+   java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
+   ```
+
+  詳細については、[Oracle のドキュメント][6]を参照してください。
 
 - `dd-trace-java` の成果物 (`dd-java-agent.jar`、`dd-trace-api.jar`、`dd-trace-ot.jar`) は、すべての JVM ベース言語、つまり Scala、Groovy、Kotlin、Clojure などをサポートします。特定のフレームワークのサポートが必要な場合は、[オープンソースの貢献][7]を行うことを検討してください。
 
