@@ -19,10 +19,10 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 | Timestamp           | Value |
 |:--------------------|:------|
 | 2018-03-13 11:00:30 | 1     |
-| 2018-03-13 11:01:30 | 2     |
-| 2018-03-13 11:02:40 | 3     |
-| 2018-03-13 11:03:30 | 4     |
-| 2018-03-13 11:04:40 | 5     |
+| 2018-03-13 11:01:30 | 1     |
+| 2018-03-13 11:02:40 | 0     |
+| 2018-03-13 11:03:30 | 1     |
+| 2018-03-13 11:04:40 | 0     |
 ```
 
 **Denominator**: `sum:requests.total{*}`
@@ -30,10 +30,10 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 ```text
 | Timestamp           | Value |
 |:--------------------|:------|
-| 2018-03-13 11:00:30 | 5     |
-| 2018-03-13 11:01:30 | 5     |
-| 2018-03-13 11:02:40 | 5     |
-| 2018-03-13 11:03:30 | 5     |
+| 2018-03-13 11:00:30 | 1     |
+| 2018-03-13 11:01:30 | 2     |
+| 2018-03-13 11:02:40 | 3     |
+| 2018-03-13 11:03:30 | 4     |
 | 2018-03-13 11:04:40 | 5     |
 ```
 
@@ -42,7 +42,7 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 Refer to this query as **`classic_eval_path`**:
 
 ```text
-sum(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
+avg(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
 ```
 
 and this query as **`as_count_eval_path`**:
@@ -53,17 +53,17 @@ sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count(
 
 Compare the result of the evaluation depending on the path:
 
-| Path                     | Behavior                                       | Expanded expression         | Result  |
-|:-------------------------|:-----------------------------------------------|:----------------------------|:--------|
-| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/5 + 2/5 + ... + 5/5)** | **3**   |
-| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+...+5)/(5+5+...+5)** | **0.6** |
+| Path                     | Behavior                                       | Expanded expression                     | Result   |
+|:-------------------------|:-----------------------------------------------|:----------------------------------------|:---------|
+| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/1 + 1/2 + ... + 0/5)/5**           | **0.35** |
+| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1 + 1 + ... + 0)/(1 + 2 + ... + 5)** | **0.20** |
 
-_Note that both evaluations above are mathematically correct. Choose a method that suits your intentions._
+_Note that both evaluations above are mathematically correct. The former weights every timestamp equality whereas the later weights every timestamp proportional to the number of requests. Choose a method that suits your intentions._
 
 It may be helpful visualize the **`classic_eval_path`** as:
 
 ```text
-sum(last_5m):error/total
+avg(last_5m):error/total
 ```
 
 and the **`as_count_eval_path`** as:
