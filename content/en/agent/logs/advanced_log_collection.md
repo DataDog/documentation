@@ -26,6 +26,7 @@ Apply log processing rules to a specific log collection configurations to:
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Proceed to multi-line aggregation](#multi-line-aggregation)
 * [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
+* [Encode UTF-16 format logs](#encode-utf-16-format-logs)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -441,6 +442,24 @@ logs:
 The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+
+## Encode UTF-16 format logs
+
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer](https://docs.datadoghq.com/logs/explorer/#overview). Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+
+Configuration example:
+
+```yaml
+logs:
+ - type: file
+   path: /test/log/hello-world.log
+   tags: key:value
+   service: utf-16-logs
+   source: mysql
+   encoding: utf-16-be
+```
+
+**Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
 
 ## Global processing rules
 
