@@ -19,7 +19,9 @@ further_reading:
 
 ## Overview
 
-Configure your Datadog account to forward all the logs ingested - whether [indexed][3] or not - to a cloud storage system of yuor own. Keepi your logs in a storage-optimized archive for longer periods of time and **meet compliance** requirements whilst also **keeping auditability** for ad hoc investigations, with [Rehydration][1].
+Configure your Datadog account to forward all the logs ingested - whether [indexed][3] or not - to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements whilst also keeping auditability for ad hoc investigations, with [Rehydration][1].
+
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
@@ -27,14 +29,12 @@ This guide shows you how to set up an archive for forwarding ingested logs to yo
 2. Create a [Storage Bucket](#create-a-storage-bucket),
 3. Set [permissions](#set-permissions) read and/or write on that Archive,
 4. [Route your logs](#route-your-logs-to-a-bucket) to and/or from that Archive,
-5. Configure [advanced settings](#advanced-settings) such as encryption and storage class.
+5. Configure [advanced settings](#advanced-settings) such as encryption, storage class and tags.
 
 **Note:** only Datadog users with [Logs Write Archive permssion][2] can create, modify, or delete log archive configurations.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view"  style="width:75%;">}}
 
-
-## Create and configure a storage bucket
+## Configure an Archive
 
 ### Set Integration
 
@@ -218,27 +218,48 @@ Input your bucket name. **Optional**: input a prefix directory for all the conte
 
 ### Advanced Settings
 
-{{< tabs >}}
-{{% tab "AWS S3" %}}
 
 #### Storage Class
 
-You can [set a lifecycle configuration on your S3 bucket][3] to automatically transition your log archives to optimal storage classes. 
+{{< tabs >}}
+{{% tab "AWS S3" %}}
 
-[Rehydration][4] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes. 
+
+[Rehydration][1] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+
+[1]: /logs/archives/rehydrating/
+
+{{% /tab %}}
+{{% tab "Azure Storage" %}}
+
+*** TODO ***
+
+{{% /tab %}}
+{{% tab "Google Cloud Storage" %}}
+
+*** TODO ***
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 #### Server side encryption (SSE)
 
+{{< tabs >}}
+{{% tab "AWS S3" %}}
+
 ##### SSE-S3
 
-The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][5]. 
+The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][2]. 
 To enable it, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
 {{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
 
 ##### SSE-KMS
 
-Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][6]. To enable it, take the following steps:
+Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][3]. To enable it, take the following steps:
 
 1. Create your CMK
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name approproiately:
@@ -296,32 +317,42 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-
-[3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-
-[5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-[6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+[3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
 
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
--
+*** TODO ***
 
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
--
+*** TODO ***
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-## Validation
+### Validation
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
 However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. 
+
+
+## Configure Multiple Archives
+
+Admins can route specific logs to an archive by adding a query in the archive’s filter field. Logs enter the first archive whose filter they match on, so it is important to order your archives carefully.
+
+For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
+
+Logs enter the first archive whose filter they match on.
+
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
+
 
 ## Format of the Archives
 
@@ -351,21 +382,12 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 
 **Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. The log tags (metadata that connects your log data to related metrics and traces) are not included.
 
-## Multiple Archives
 
-Admins can route specific logs to an archive by adding a query in the archive’s filter field. Logs enter the first archive whose filter they match on, so it is important to order your archives carefully.
-
-For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
-
-Logs enter the first archive whose filter they match on.
-
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
+## Further Reading
 
 {{< whatsnext desc="Next, learn how to access your archived log content from Datadog:" >}}
     {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
