@@ -21,6 +21,7 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 
 | フレームワーク                 | サポート対象のバージョン | PyPi Datadog ドキュメント                                         |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
+| [asgi][43]               | >= 2.0         |  http://pypi.datadoghq.com/trace/docs/web_integrations.html#asgi |
 | [aiohttp][3]             | 1.2 以降            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][4]              | 0.11 以降           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][5]              | 1.8 以降            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
@@ -123,3 +124,4 @@ Python Datadog Trace ライブラリはオープンソースです。詳細に�
 [40]: https://kombu.readthedocs.io/en/latest
 [41]: https://www.makotemplates.org
 [42]: http://docs.python-requests.org/en/master
+[43]: http://asgi.readthedocs.io/

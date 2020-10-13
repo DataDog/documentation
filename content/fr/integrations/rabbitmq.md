@@ -57,7 +57,7 @@ Et plus encore.
 
 ### Installation
 
-Le check RabbitMQ est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check RabbitMQ est inclus avec le package de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 

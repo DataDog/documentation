@@ -29,20 +29,20 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-Otherwise, to begin tracing applications written in any language: 
+Otherwise, to begin tracing applications written in any language:
 
 1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
 2. Download `dd-java-agent.jar` that contains the Agent class files:
 
    ```shell
-wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
 3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
    ```text
--javaagent:/path/to/the/dd-java-agent.jar
+    -javaagent:/path/to/the/dd-java-agent.jar
    ```
 
 4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
@@ -135,11 +135,11 @@ For additional details and options, see the [WebSphere docs][1].
 
 
 - If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
-   
+
    ```text
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
-   
+
      For more information, see the [Oracle documentation][6].
 
 - `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].
