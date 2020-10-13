@@ -51,7 +51,7 @@ Recueillez des métriques de Cassandra en temps réel pour :
 
 ### Installation
 
-Le check Cassandra est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra. Nous vous conseillons d'utiliser le JDK d'Oracle pour cette intégration.
+Le check Cassandra est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra. Nous vous conseillons d'utiliser le JDK d'Oracle pour cette intégration.
 
 **Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][3] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][4].
 
@@ -177,7 +177,7 @@ Ce check permet de recueillir des métriques pour votre cluster Cassandra qui ne
 
 ### Installation
 
-Le check Cassandra Nodetool est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra.
+Le check Cassandra Nodetool est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra.
 
 ### Configuration
 

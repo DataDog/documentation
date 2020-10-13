@@ -36,7 +36,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
     }
     ```
 
-2. Initialisez la bibliothèque avec le contexte de votre application et votre [token client Datadog][2]. Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`, car elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
+2. Initialisez la bibliothèque avec le contexte de votre application ainsi que le [token client Datadog][2] et l'ID d'application générés lors de la création d'une application RUM depuis l'interface Datadog (consulter la section [Débuter avec la collecte de données RUM sur Android][6] pour en savoir plus). Pour des raisons de sécurité, vous devez utiliser un token client : vous ne pouvez pas utiliser les [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`, car elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
 
     {{< tabs >}}
     {{% tab "Site américain" %}}
@@ -140,7 +140,18 @@ class SampleApplication : Application() {
 
 ## Logging avancé
 
-### Initialisation
+### Initialisation de la bibliothèque
+
+Les méthodes suivantes dans `DatadogConfig.Builder` peuvent être utilisées lors de la création de la configuration Datadog pour initialiser la bibliothèque :
+
+| Méthode                           | Description                                                                                                                                                                                                                                                             |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setServiceName(<NOM_SERVICE>)` | Définir `<NOM_SERVICE>` en tant que valeur par défaut pour l'[attribut standard][4] `service` joint à tous les logs envoyés à Datadog (cette valeur peut être remplacée dans chaque logger).                                                                                                                                                           |
+| `setLogsEnabled(true)`     | Définir sur `true` pour activer l'envoi de logs à Datadog.                                                                                                                                                                                                                                  |
+| `addPlugin(DatadogPlugin, Feature)`   | Ajoute une implémentation de plugin pour une fonctionnalité spécifique (CRASH, LOG, TRACE, RUM). Le plugin sera enregistré une fois la fonctionnalité réinitialisée, puis désenregistré lorsque la fonctionnalité sera arrêtée. |
+
+
+### Initialisation du logger
 
 Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l'initialisation du logger afin d'envoyer des logs à Datadog :
 
@@ -150,7 +161,8 @@ Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l
 | `setServiceName(<NOM_SERVICE>)` | Définir `<NOM_SERVICE>` en tant que valeur pour l'[attribut standard][4] `service` joint à tous les logs envoyés à Datadog.                                                                                                                                                           |
 | `setLogcatLogsEnabled(true)`     | Définir ce paramètre sur `true` pour utiliser Logcat en tant que logger.                                                                                                                                                                                                                                  |
 | `setDatadogLogsEnabled(true)`    | Définir ce paramètre sur `true` pour envoyer les logs à Datadog.                                                                                                                                                                                                                                  |
-| `setBundleWithTraceEnabled(true)`| Définir sur `true` (valeur par défaut) pour associer les logs à la trace active dans votre application. Ce paramètre permet de visualiser tous les logs envoyés lors d'une trace spécifique depuis le dashboard Datadog.                                                        |
+| `setBundleWithTraceEnabled(true)`| Définir sur `true` (valeur par défaut) pour associer les logs à la trace active dans votre application. Ce paramètre vous permet de visualiser tous les logs envoyés lors d'une trace spécifique depuis le dashboard Datadog.                                                        |
+| `setBundleWithRumEnabled(true)`| Définir sur `true` (valeur par défaut) pour associer les logs au contexte RUM actuel dans votre application. Ce paramètre vous permet de visualiser tous les logs envoyés pendant qu'une vue spécifique est active depuis le RUM Explorer Datadog.                                                        |
 | `setLoggerName(<NOM_LOGGER>)`   | Définir `<NOM_LOGGER>` en tant que valeur pour l'attribut `logger.name` joint à tous les logs envoyés à Datadog.                                                                                                                                                                  |
 | `setVerbosity(Log.INFO)`         | Définir le niveau de détail du logger. Tous les messages internes dans la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont enregistrés dans le Logcat d'Android.                                                                                                       |
 | `setSampleRate(<TAUX_ÉCHANTILLONNAGE>)`   | Définir le taux d'échantillonnage de ce logger. Tous les logs générés par l'instance du logger sont échantillonnés de manière aléatoire selon le taux d'échantillonnage fourni (par défaut 1.0 = tous les logs). **Remarque** : les logs Logcat ne sont pas échantillonnés.            |
@@ -220,13 +232,19 @@ logger.removeAttribute("version_code")
 logger.removeAttribute("version_name")
 ```
 
-## Collecte groupée des logs
+## Collecte groupée de spans
 
 Tous les logs sont d'abord stockés sur l'appareil local sous forme groupée. Chaque groupe de logs respecte les spécifications d'admission. Ils sont envoyés dès que le réseau est disponible, et dès que la batterie est suffisamment élevée pour que le SDK Datadog n'affecte pas l'expérience de l'utilisateur final. Si le réseau n'est pas disponible alors que votre application s'exécute au premier plan, ou si l'envoi des données échoue, le groupe de logs est conservé jusqu'à ce qu'il puisse être envoyé.
 
 Cela signifie que même si les utilisateurs ouvrent votre application en étant hors ligne, aucune donnée ne sera perdue.
 
 Les données stockées sont automatiquement supprimées si elles sont trop anciennes pour limiter l'espace utilisé par le SDK.
+
+## Extensions
+
+### Timber 
+
+Si votre codebase existante utilise Timber, vous pouvez transmettre tous ces logs à Datadog automatiquement à l'aide de la [bibliothèque dédiée](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-timber).
 
 ## Pour aller plus loin
 
@@ -237,3 +255,4 @@ Les données stockées sont automatiquement supprimées si elles sont trop ancie
 [3]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/fr/logs/processing/attributes_naming_convention/
 [5]: https://docs.datadoghq.com/fr/tagging/
+[6]: https://docs.datadoghq.com/fr/real_user_monitoring/android/?tab=us

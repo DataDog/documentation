@@ -49,7 +49,7 @@ Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, 
 
 ### Installation
 
-Le check ActiveMQ de l'Agent est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
+Le check ActiveMQ de l'Agent est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
 
 Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][3]. Nous vous conseillons d'utiliser une JVM fournie par Oracle.
 
@@ -238,7 +238,7 @@ Recueillez des métriques d'ActiveMQ XML en temps réel pour :
 
 ### Installation
 
-Le check ActiveMQ XML est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check ActiveMQ XML est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
