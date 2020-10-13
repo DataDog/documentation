@@ -102,6 +102,6 @@ finally {
 [1]: /ja/tracing/setup/java/#configuration
 [2]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
 [3]: /ja/tracing/connect_logs_and_traces/
-[4]: /ja/tracing/visualization/#trace
+[4]: /ja/logs/log_collection/java/?tab=log4j 
 [5]: /ja/logs/log_collection/java/#raw-format
 [6]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

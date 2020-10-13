@@ -294,4 +294,4 @@ Bien que cette page décrive comment modifier les données une fois qu'elles ont
 [7]: /fr/api/v1/tracing/
 [8]: /fr/tracing/custom_instrumentation/java/#extending-tracers
 [9]: /fr/tracing/custom_instrumentation/ruby?tab=activespan#post-processing-traces
-[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
+[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

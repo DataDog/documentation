@@ -100,7 +100,7 @@ The information is structured as JSON following this schema:
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
-    "orchestrator": {...},                   // <-- same for the process Agent data
+    "orchestrator": {...},              // <-- same for the process Agent data
     "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests) 
     "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
