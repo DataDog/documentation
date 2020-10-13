@@ -35,12 +35,13 @@ Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir
 
 * Un **log analysé** est un enregistrement au format texte de l'activité générée par un système d'exploitation, une application ou d'autres sources qui a été analysé pour détecter les menaces de sécurité potentielles. Datadog facture les logs analysés en fonction du nombre total de gigaoctets ingérés et analysés par le service Security Monitoring de Datadog.
 
-## Synthetics
+## Surveillance Synthetic
 
-* Un **test API** est une requête HTTP ou HTTPS effectuée via une URL unique. Le prix facturé par Datadog est calculé par tranche de dix mille exécutions de tests API auprès du service Datadog Synthetics.
-* Un **test Browser** permet de simuler une séquence d'actions utilisateur scriptée sur une application Web à l'aide d'un navigateur Web virtualisé. Le prix facturé par Datadog est calculé par tranche de mille tests Browser exécutés auprès du service Datadog Synthetics.
+* Un **test API** est une requête HTTP ou HTTPS effectuée via une URL unique. Le prix facturé par Datadog est calculé par tranche de dix mille exécutions de tests API auprès du service de surveillance Datadog Synthetic.
+* Un **test Browser** permet de simuler une séquence d'actions utilisateur scriptée sur une application Web à l'aide d'un navigateur Web virtualisé. Le prix facturé par Datadog est calculé par tranche de mille tests Browser exécutés auprès du service de surveillance Datadog
+ Synthetic.
 
-## Surveillance des performances réseau
+## Network Performance Monitoring
 
 * Le nombre de hosts que vous surveillez en même temps via le service **surveillance des performances réseau** (NPM) de Datadog est mesuré toutes les heures.
   * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la huitième mesure la plus élevée.
@@ -48,9 +49,16 @@ Datadog propose différentes offres tarifaires selon vos besoins. Pour en savoir
 
 ## Real User Monitoring
 
-* Une **session** correspond à une visite de votre application Web par un utilisateur. Elle expire au bout de 15 minutes d'inactivité.
+* Une **session** correspond à une visite de votre application Web par un utilisateur. Elle expire au bout de 15 minutes d'inactivité ou de 4 heures d'activité continue.
 
 * Datadog collecte toutes les pages consultées par vos utilisateurs finaux avec les données de télémétrie pertinentes : chargement des ressources (XHR, images, fichiers CSS, scripts JS, etc.), erreurs frontend et tâches longues. Tous ces éléments sont inclus dans la session utilisateur. Le prix facturé par Datadog est calculé par tranche de dix mille (10 000) sessions ingérées dans le service Real User Monitoring (RUM) de Datadog.
+
+## Profiler en continu
+
+* Le nombre de hosts uniques que vous surveillez en même temps via le service Profiler en continu de Datadog est mesuré toutes les heures.
+  * Ces mesures horaires sont ordonnées de la plus élevée à la plus faible à la fin du mois, et le prix facturé par Datadog est calculé en fonction de la neuvième mesure la plus élevée (la huitième la plus élevée en février).
+  * Chaque host peut compter jusqu'à 4 conteneurs profilés gratuitement. Les conteneurs en surplus sont facturés 2 $ par conteneur. Remarque : ce quota est agrégé pour tous les hosts. Si vous avez une moyenne de 4 conteneurs sur l'ensemble de vos hosts, les conteneurs en surplus ne vous seront pas facturés pour chaque host séparément.
+* Datadog mesure le nombre total de conteneurs qui sont profilés. Un conteneur est un environnement d'exploitation autonome qui comprend une application ainsi que des paramètres et des bibliothèques de système d'exploitation limités. Le nombre de conteneurs uniques que vous surveillez avec le service Profiler en continu de Datadog est mesuré toutes les cinq minutes. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement. Pour le service Profiler en continu, Datadog comptabilise uniquement les conteneurs qui exécutent le service Profiler en continu dans le nombre total de conteneurs surveillés.
 
 ## Dépannage
 

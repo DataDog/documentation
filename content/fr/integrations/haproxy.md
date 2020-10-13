@@ -61,7 +61,7 @@ Enregistrez l'activité HAProxy dans Datadog pour :
 
 ### Installation
 
-Le check HAProxy est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur HAProxy.
+Le check HAProxy est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur HAProxy.
 
 #### Préparer HAProxy
 

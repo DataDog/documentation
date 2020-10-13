@@ -52,9 +52,18 @@ Attendez quelques minutes et vérifiez que l'Agent est connecté à votre compte
 
 ## APM Datadog
 
+### Suivre la documentation intégrée à l'application (conseillé)
+
+Pour les étapes restantes, suivez les [instructions de démarrage rapide][10] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
+
+- Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (dans cet exemple, un déploiement basé sur un host) ;
+- Définir les tags `service`, `env` et `version` de façon dynamique ;
+- Activer le profileur en continu, App Analytics et l'injection des ID de trace dans les logs durant la configuration.
+
+
 ### Activer l'APM
 
-Pour les dernières versions de l'Agent 6 et 7, l'APM est activée par défaut. Pour vérifier cela, consultez le [fichier de configuration `datadog.yaml`][10] de l'Agent :
+Avec les dernières versions de l'Agent 6 et 7, l'APM est activée par défaut. Pour vérifier cela, consultez le [fichier de configuration `datadog.yaml`][11] de l'Agent :
 
 ```yaml
 # apm_config:
@@ -72,13 +81,13 @@ Et `trace-agent.log` :
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
 ```
 
-### Nom d'environnement
+### Nom de l'environnement
 
-Pour obtenir la meilleure expérience possible, il est conseillé d'utiliser la variable d'environnement `DD_ENV` pour configurer `env` via le traceur de votre service.
+Pour une expérience optimale, nous vous conseillons d'utiliser la variable d'environnement `DD_ENV` pour configurer `env` via le traceur de votre service.
 
-En outre, si l'injection de logs est activée pour votre traceur, l'élément `env` sera cohérent dans les différents logs et traces. Pour en savoir plus, consultez la section [Tagging de service unifié][11].
+En outre, si l'injection de logs est activée pour votre traceur, le tag `env` sera cohérent dans les différents logs et traces. Pour en savoir plus, consultez la section [Tagging de service unifié][12].
 
-Sinon, nommez votre environnement en mettant à jour `datadog.yaml` de façon à définir `env` sous `apm_config`. Pour savoir comment définir `env` pour l'APM, consultez le [guide de configuration des tags primaires][12].
+Sinon, nommez votre environnement en mettant à jour `datadog.yaml` de façon à définir `env` sous `apm_config`. Pour savoir comment définir `env` pour l'APM, consultez le [guide de configuration des tags primaires][13].
 
 ## Application APM
 
@@ -127,20 +136,20 @@ La réponse devrait ressembler à ce qui suit :
 
 ### Test
 
-Testez votre application et envoyez vos traces à Datadog avec `curl`. Votre application devrait fonctionner (comme indiqué ci-dessus). Dans une invite de commande distincte, exécutez :
+Testez votre application et envoyez vos traces à Datadog avec `curl`. Votre application doit être en cours d'exécution (comme indiqué ci-dessus). Dans une invite de commande distincte, exécutez :
 
 ```text
 vagrant ssh
 curl http://0.0.0.0:5050/
 ```
 
-Cela donne :
+On obtient ce qui suit :
 
 ```text
 hello world
 ```
 
-Après quelques minutes, votre trace s'affiche dans Datadog sous le service `hello`. Consultez la [page de services][13] ou la [liste de traces][14] pour visualiser votre trace.
+Après quelques minutes, votre trace s'affiche dans Datadog sous le service `hello`. Consultez la [page de services][14] ou la [liste de traces][15] pour visualiser votre trace.
 
 {{< img src="getting_started/tracing-services-list.png" alt="Liste des services de tracing" >}}
 
@@ -157,8 +166,9 @@ Après quelques minutes, votre trace s'affiche dans Datadog sous le service `hel
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /fr/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /fr/getting_started/tagging/unified_service_tagging
-[12]: /fr/tracing/guide/setting_primary_tags_to_scope/
-[13]: https://app.datadoghq.com/apm/services
-[14]: https://app.datadoghq.com/apm/traces
+[10]: https://app.datadoghq.com/apm/docs
+[11]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[12]: /fr/getting_started/tagging/unified_service_tagging
+[13]: /fr/tracing/guide/setting_primary_tags_to_scope/
+[14]: https://app.datadoghq.com/apm/services
+[15]: https://app.datadoghq.com/apm/traces

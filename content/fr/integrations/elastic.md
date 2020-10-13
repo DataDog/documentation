@@ -52,7 +52,7 @@ Le check Elasticsearch de l'Agent Datadog recueille des métriques pour la reche
 
 ### Installation
 
-Le check Elasticsearch est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer.
+Le check Elasticsearch est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer.
 
 ### Configuration
 

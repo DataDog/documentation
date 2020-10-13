@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: apache
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -65,13 +66,16 @@ Le check Apache est fourni avec l'Agent. Pour commencer à recueillir vos logs e
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `apache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos métriques Apache. Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `apache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos métriques Apache. Consultez le [fichier d'exemple apache.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -83,7 +87,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
      - apache_status_url: http://localhost/server-status?auto
    ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
@@ -110,13 +114,19 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: apache
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple apache.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -130,15 +140,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                               |
 | -------------- | --------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "apache", "service": "<NOM_SERVICE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][8] et cherchez `apache` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `apache` dans la section Checks.
 
 ## Données collectées
 
@@ -161,28 +176,24 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'URL `apache_s
 
 Si vous rencontrez des difficultés avec votre intégration Apache, il est fort probable que l'Agent ne soit pas en mesure d'accéder à votre URL de statut Apache. Tentez de faire un curl sur l'URL `apache_status_url` spécifiée dans [votre fichier `apache.d/conf.yaml`][4] (indiquez vos identifiants de connexion le cas échéant).
 
-- [Problèmes liés au certificat SSL Apache][10]
+- [Problèmes liés au certificat SSL Apache][5]
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Déployer et configurer Datadog avec CloudFormation][11]
-- [Surveiller les performances du serveur Web Apache][12]
-- [Comment recueillir des métriques de performance Apache][13]
-- [Comment surveiller un serveur Web Apache avec Datadog][14]
+- [Déployer et configurer Datadog avec CloudFormation][6]
+- [Surveiller les performances du serveur Web Apache][7]
+- [Comment recueillir des métriques de performance Apache][8]
+- [Comment surveiller un serveur Web Apache avec Datadog][9]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/fr/agent/
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/apache/metadata.csv
-[10]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues/
-[11]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
-[12]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
-[13]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
-[14]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
+[5]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues/
+[6]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
+[7]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+[8]: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+[9]: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
