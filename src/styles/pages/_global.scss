@@ -159,17 +159,20 @@ tbody {
 
 code {
   color: #555555;
-  padding: 0;
+  padding: 0 5px;
   font-size: 14px;
   background-color: #F2F2F2;
-  border-left: 5px solid #f8f8f8;
-  border-right: 5px solid #f8f8f8;
-  border-bottom: 2px solid #f8f8f8;
   border-radius: 4px;
   display: inline;
   white-space: normal;
   /*font-family: 'Source Code Pro', monospace;*/
   font-family: $font-family-monospace;
+}
+
+code + code.region-param {
+  padding: 0 5px 0 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .programming-lang-wrapper {

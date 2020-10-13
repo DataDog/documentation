@@ -25,9 +25,9 @@ further_reading:
 - All traffic is sent over SSL
 - The destination for:
 
-  - [APM][1] data is `trace.agent.datadoghq.com`
-  - [Live Containers][2] data is `process.datadoghq.com`
-  - [Logs][3] data is `agent-intake.logs.datadoghq.com` for TCP traffic, `agent-http-intake.logs.datadoghq.com` in HTTP. Review the list of [logs endpoints][5] for more information.
+  - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+  - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
+  - [Logs][3] data is `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][5] for more information.
   - All other Agent data:
       - **Agents < 5.2.0** `app.datadoghq.com`
       - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
@@ -54,7 +54,7 @@ All of these domains are **CNAME** records pointing to a set of static IP addres
 - All traffic is sent over SSL
 - The destination for:
 
-  - [APM][1] data is `trace.agent.datadoghq.eu`
+  - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
   - [Live Containers][2] data is `process.datadoghq.eu`
   - [Logs][3] data is `agent-intake.logs.datadoghq.eu` for TCP traffic, `agent-http-intake.logs.datadoghq.eu` in HTTP. Review the list of [logs endpoints][5] for more information.
   - All other Agent data:
