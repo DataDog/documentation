@@ -74,7 +74,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Search 100% of your traces][6] by any tag live with no sampling for 15 minutes.
 
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Trace Search and Analytics" >}}
+{{< img src="tracing/live_search/livesearchmain2.gif" alt="Live Search" >}}
 
 ### Live Analytics
 
