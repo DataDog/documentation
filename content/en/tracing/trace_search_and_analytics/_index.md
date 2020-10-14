@@ -31,11 +31,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
-
 {{< img src="tracing/live_search/livesearchmain2.gif" alt="Live Search" >}}
-
-{{< img src="tracing/live_search/livesearchmain3.gif" alt="Live Search" >}}
 
 With the APM Live Search you can:
 
@@ -53,11 +49,11 @@ Live Search is the default view on the Traces page, and when you're viewing reta
 **Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
 
 ### Filtering the Trace Stream and Search Query
-{{< img src="tracing/live_search/toplevespan.gif" alt="Live Search query" >}}
+{{< img src="tracing/live_search/toplevelspan2.gif" alt="Live Search query" >}}
 
 A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across any span and any tag, and not just the indexed ones.
 
-**Note**: You can select only the `top-level spans of the service` by selecting the checkbox above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; they are all still present.
+**Note**: You can select only the `top-level spans of the service` by changing the selection to the box above the trace table. You can use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services. Selecting this box only _visually_ filters the spans shown; they are all still present.
 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `customer.id` attribute, there are two options:
 
@@ -76,7 +72,7 @@ Searching with retained traces is accessed in the same way as Live Search. To sw
 
 All spans indexed by retention filters or legacy App Analytics filters are accessible.  These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
-{{< img src="tracing/live_search/livesearch_mode.gif" alt="Live Search mode" >}}
+{{< img src="tracing/live_search/15daysearch.gif" alt="Live Search mode" >}}
 
 All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 

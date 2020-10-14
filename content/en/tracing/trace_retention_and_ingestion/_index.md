@@ -19,7 +19,7 @@ After spans have been ingested by Datadog, they will be kept for 15 days accordi
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing2.png" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Retention Filters" >}}
 
 In the Datadog app, on the ['Retention Filters' tab][1], you can see the following information:
 
@@ -64,6 +64,8 @@ Many instrumented services will send 100% of their traffic to Datadog by default
 
 For the best experience, we recommend you set services to send 100% of their traffic so all traces can be used for live search and analytics.
 
+{{< img src="tracing/trace_indexing_and_ingestion/IngestionControls.png" style="width:100%;" alt="Retention Filters" >}}
+
 **Note:** If you are seeing numbers below 100% for Ingestion Rate, ensure you are using Agent 6.19+ or 7.19+ as these versions increased the default rate.
 
 In the Datadog app, on the ['Ingestion Controls' tab][3], you can see the following information:
@@ -80,7 +82,7 @@ In the Datadog app, on the ['Ingestion Controls' tab][3], you can see the follow
 
 ### Change the Default Ingestion Rate
 
-{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate2.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ChangeIngestRate3.gif" style="width:100%;" alt="Change the Data Ingestion Rate" >}}
 
 To specify that a specific percentage of a service's traffic should be sent, add a generated code snippet to your tracer configuration for that service.
 
