@@ -79,7 +79,6 @@ Datadog は、Oracle JDK と OpenJDK の両方の Java JRE 1.7 以上を公式�
 | Jersey クライアント            | 1.9+        | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
 | JMS                      | 1 と 2     | 完全対応 | `jms`、`jms-1`、`jms-2`                        |
 | Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
-| Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
 | Ning HTTP クライアント         | 1.9.0+      | [ベータ][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | 完全対応 | `okhttp`、`okhttp-2`、`okhttp-3`                |
 | Play WSClient            | 1.0+        | 完全対応 | `play-ws`                                      |

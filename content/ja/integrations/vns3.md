@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - network
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
 display_name: VNS3
@@ -47,7 +48,7 @@ VNS3 トポロジーの IPSec エンドポイント/トンネル、VNS3 ピア�
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 メトリクスをキャプチャするには、Cohesive Networks の DataDog コンテナをデプロイし、VNS3 ファイアウォールをセットアップし、コンテナを構成する必要があります。
 

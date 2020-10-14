@@ -3,6 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -64,7 +65,7 @@ Pi-hole チェックをホストにインストールするには
 {{< get-metrics-from-git "pihole" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 **`pihole.running`**:
 

@@ -115,18 +115,20 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
     **注**: これにより、`default` ネームスペースでシークレットが作成されます。カスタムネームスペースを使用している場合、実行前にコマンドの `namespace` パラメーターを更新します。
 
-3. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
+3. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します
 
-    - [ログ、APM、プロセス、メトリクス収集を有効にしたマニフェスト][3]。
-    - [ログ、APM、メトリクス収集を有効にしたマニフェスト][4]。
-    - [ログとメトリクス収集を有効にしたマニフェスト][5]。
-    - [APMとメトリクス収集を有効にしたマニフェスト][6]。
-    - [ネットワークパフォーマンスモニタリングを有効にしたマニフェスト][7]
-    - [メトリクス収集だけを有効にした Vanilla マニフェスト][8]。
+    | メトリクス | ログ | APM | プロセス | NPM | Linux                  | Windows                 |
+    |---------|------|-----|---------|-----|------------------------|-------------------------|
+    | X       | X    | X   | X       |     | [マニフェストテンプレート][3] | [マニフェストテンプレート][4] |
+    | X       | X    | X   |         |     | [マニフェストテンプレート][5] | [マニフェストテンプレート][6] |
+    | X       | X    |     |         |     | [マニフェストテンプレート][7] | [マニフェストテンプレート][8] |
+    | X       |      | X   |         |     | [マニフェストテンプレート][9] | [マニフェストテンプレート][10] |
+    |         |      |     |         | X   | [マニフェストテンプレート][11] | テンプレートなし             |
+    | X       |      |     |         |     | [マニフェストテンプレート][12] | [マニフェストテンプレート][13] |
 
-     トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][9]。それぞれの機能を個別に有効にする方法については、[ログ][10]、[APM][11]、[プロセス][12]、[ネットワークパフォーマンスモニタリング][13]に関するドキュメントページを参照してください。
+   トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][14]。それぞれの機能を個別に有効にする方法については、[ログ][15]、[APM][16]、[プロセス][17]、[ネットワークパフォーマンスモニタリング][18]に関するドキュメントページを参照してください。
 
-      **注**: これらのマニフェストは、デフォルトで `default` ネームスペースに設定されています。カスタムネームスペースを使用している場合、適用する前に `metadata.namespace` パラメーターを更新します。
+    **注**: これらのマニフェストは、デフォルトで `default` ネームスペースに設定されています。カスタムネームスペースを使用している場合、適用する前に `metadata.namespace` パラメーターを更新します。
 
 4. 任意 - **Datadog サイトを設定**。Datadog EU サイトをご利用中の場合、`datadog-agent.yaml` マニフェストで `DD_SITE` 環境変数を `datadoghq.eu` に設定します。
 
@@ -149,7 +151,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. オプション - **Kubernetes State メトリクスを設定**: [Kube-State マニフェストフォルダー][14]をダウンロードし Kubernetes クラスターに適用すると、[kube-state metrics][15] を自動的に収集できます。
+7. オプション - **Kubernetes State メトリクスを設定**: [Kube-State マニフェストフォルダー][19]をダウンロードし Kubernetes クラスターに適用すると、[kube-state metrics][20] を自動的に収集できます。
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -158,26 +160,86 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
-[4]: /resources/yaml/datadog-agent-logs-apm.yaml
-[5]: /resources/yaml/datadog-agent-logs.yaml
-[6]: /resources/yaml/datadog-agent-apm.yaml
-[7]: /resources/yaml/datadog-agent-npm.yaml
-[8]: /resources/yaml/datadog-agent-vanilla.yaml
-[9]: /ja/agent/kubernetes/apm/#setup
-[10]: /ja/agent/kubernetes/log/
-[11]: /ja/agent/kubernetes/apm/
-[12]: /ja/infrastructure/process/?tab=kubernetes#installation
-[13]: /ja/network_performance_monitoring/installation/
-[14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[15]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
+[4]: /resources/yaml/datadog-agent-windows-all-features.yaml
+[5]: /resources/yaml/datadog-agent-logs-apm.yaml
+[6]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
+[7]: /resources/yaml/datadog-agent-logs.yaml
+[8]: /resources/yaml/datadog-agent-windows-logs.yaml
+[9]: /resources/yaml/datadog-agent-apm.yaml
+[10]: /resources/yaml/datadog-agent-windows-apm.yaml
+[11]: /resources/yaml/datadog-agent-npm.yaml
+[12]: /resources/yaml/datadog-agent-vanilla.yaml
+[13]: /resources/yaml/datadog-agent-windows-vanilla.yaml
+[14]: /ja/agent/kubernetes/apm/#setup
+[15]: /ja/agent/kubernetes/log/
+[16]: /ja/agent/kubernetes/apm/
+[17]: /ja/infrastructure/process/?tab=kubernetes#installation
+[18]: /ja/network_performance_monitoring/installation/
+[19]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[20]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[Datadog Operator][1] は公開ベータ版です。Datadog Operator は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。始めるには、[Datadog Operator リポジトリ][1]の[はじめにページ][2]を確認するか、[OperatorHub.io Datadog Operator ページ][3]からオペレーターをインストールします。
+<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
-[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
-[2]: https://github.com/DataDog/datadog-operator
-[3]: https://operatorhub.io/operator/datadog-operator
+[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
+
+## 前提条件
+
+Datadog Operator を使用するには、次の前提条件が必要です。
+
+- **Kubernetes Cluster バージョン >= v1.14.X**: テストはバージョン >= `1.14.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
+- `datadog-operator` をデプロイするための [`Helm`][2]。
+- `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
+
+
+## Operator を使用して Agent をデプロイする
+
+最小限のステップ数で Operator を使用して Datadog Agent をデプロイするには、[`datadog-agent-with-operator`][4] Helm チャートを使用します。
+手順は次のとおりです。
+
+1. [チャートをダウンロードします][5]。
+
+   ```shell
+   curl -Lo datadog-agent-with-operator.tar.gz https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+   ```
+
+2. Agent の仕様を使用してファイルを作成します。最も単純なコンフィギュレーションは次のとおりです。
+
+   ```yaml
+   credentials:
+     apiKey: <DATADOG_API_KEY>
+     appKey: <DATADOG_APP_KEY>
+   agent:
+     image:
+       name: "datadog/agent:latest"
+   ```
+
+   `<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を [Datadog API とアプリケーションキー][6]に置き換えます
+
+3. 上記のコンフィギュレーションファイルを使用して Datadog Agent をデプロイします。
+   ```shell
+   helm install --set-file agent_spec=/path/to/your/datadog-agent.yaml datadog datadog-agent-with-operator.tar.gz
+   ```
+
+## クリーンアップ
+
+次のコマンドは、上記の手順で作成されたすべての Kubernetes リソースを削除します。
+
+```shell
+kubectl delete datadogagent datadog
+helm delete datadog
+```
+
+許容範囲の使用に関する情報を含む、Operator の設定の詳細については、[Datadog Operator の高度な設定ガイド][7]を参照してください。
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/datadog-operator/tree/master/chart/datadog-agent-with-operator
+[5]: https://github.com/DataDog/datadog-operator/releases/latest/download/datadog-agent-with-operator.tar.gz
+[6]: https://app.datadoghq.com/account/settings#api
+[7]: /ja/agent/guide/operator-advanced
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -205,6 +267,19 @@ Kubernetes イベント収集を有効にするには、`value.yaml` ファイ�
 Kubernetes クラスターからイベントを収集する場合は、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定します。または、[Datadoc Cluster Agent イベント収集][1]を使用します
 
 [1]: /ja/agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+`datadog-agent.yaml` マニフェストで `agent.config.collectEvents` を `true` に設定します。
+
+例:
+
+```
+agent:
+  config:
+    collectEvents: true
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 

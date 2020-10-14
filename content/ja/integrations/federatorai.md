@@ -5,6 +5,7 @@ assets:
     ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
     ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors:
     Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
     Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json

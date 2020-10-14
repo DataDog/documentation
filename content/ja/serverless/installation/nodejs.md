@@ -2,16 +2,28 @@
 title: Node.js アプリケーションのインスツルメンテーション
 kind: ドキュメント
 further_reading:
-  - link: serverless/installation/node
+  - link: /serverless/serverless_integrations/plugin/
     tag: Documentation
-    text: Node.js サーバーレスモニタリングのインストール
-  - link: serverless/installation/ruby
+    text: Datadog サーバーレスプラグイン
+  - link: /serverless/serverless_integrations/macro/
     tag: Documentation
-    text: Ruby サーバーレスモニタリングのインストール
+    text: Datadog のサーバーレスマクロ
+  - link: /serverless/serverless_integrations/cli/
+    tag: Documentation
+    text: Datadog サーバーレス CLI
+  - link: serverless/serverless_tagging/
+    tag: Documentation
+    text: サーバーレスアプリケーションのタグ付け
+  - link: serverless/distributed_tracing/
+    tag: Documentation
+    text: サーバーレスアプリケーションのトレース
+  - link: serverless/custom_metrics/
+    tag: Documentation
+    text: サーバーレスアプリケーションからのカスタムメトリクスの送信
 ---
 [AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下のいずれかの方法を選択してアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
 
-## 構成
+## コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -33,12 +45,11 @@ Datadog サーバーレスプラグインをインストールして構成する
     ```
     custom:
       datadog:
-        flushMetricsToLogs: true
         forwarder: # The Datadog Forwarder ARN goes here.
     ```
    Datadog Forwarder ARN またはインストールの詳細については、[こちら][2]を参照してください。追加の設定については、[プラグインのドキュメント][1]を参照してください。
 
-[1]: https://github.com/DataDog/serverless-plugin-datadog
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -79,7 +90,7 @@ Transform:
 
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
-[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-js/releases
@@ -92,7 +103,7 @@ Transform:
 
 ### Datadog CloudFormation マクロのインストール
 
-[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定の地域に**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
+[AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
 ```sh
 aws cloudformation create-stack \
@@ -134,7 +145,7 @@ class CdkStack extends cdk.Stack {
 
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
-[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://github.com/DataDog/datadog-lambda-js/releases
 {{% /tab %}}
@@ -175,7 +186,7 @@ datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda
+[4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -232,44 +243,64 @@ yarn add datadog-lambda-js
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][4]。
-2. [DdFetchLambdaTags のオプションが有効であることを確認します][5]。
-3. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless Homepage][2] でメトリクス、ログ、トレースを確認できるようになります。
+以上の方法で関数を構成すると、[Serverless Homepage][3] でメトリクス、ログ、トレースを確認できるようになります。
 
-カスタムメトリクスの送信または関数の手動インスツルメントをご希望の場合は、以下のコード例をご参照ください。
+### カスタムビジネスロジックの監視
+
+カスタムメトリクスまたはスパンの送信をご希望の場合は、以下のコード例をご参照ください。
 
 ```javascript
-const { sendDistributionMetric } = require("datadog-lambda-js");
+const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// "sleep" という名前のカスタム APM スパンを送信します
+// "sleep" という名前のカスタムスパンを送信します
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  await sleep(1000);
+  // Lambda 関数スパンにカスタムタグを追加します
+  // X-Ray トレーシングが有効になっている場合は機能しません
+  const span = tracer.scope().active();
+  span.setTag('customer_id', '123456');
+
+  await sleep(100);
+
+  // カスタムスパンを送信します
+  const sandwich = tracer.trace('hello.world', () => {
+    console.log('Hello, World!');
+  });
 
   // カスタムメトリクスを送信します
   sendDistributionMetric(
     "coffee_house.order_value", // メトリクス名
-    12.45, // metric Value
+    12.45, // メトリクス値
     "product:latte", // タグ
-    "order:online", // 別のタグ
+    "order:online", // タグ
   );
+
+  // タイムスタンプ付きのカスタムメトリクスを送信します
+  sendDistributionMetricWithDate(
+    "coffee_house.order_value", // メトリクス名
+    12.45, // メトリクス値
+    new Date(Date.now()), // 日付、過去 20 分以内である必要があります
+    "product:latte", // タグ
+    "order:online", // タグ
+  );
+
   const response = {
     statusCode: 200,
     body: JSON.stringify("Hello from serverless!"),
@@ -278,5 +309,14 @@ exports.handler = async (event) => {
 };
 ```
 
+カスタムメトリクス送信の詳細については、[ここ][4]を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/functions
+[2]: /ja/serverless/forwarder
+[3]: https://app.datadoghq.com/functions
+[4]: /ja/serverless/custom_metrics?tab=nodejs
+[5]: tracing/custom_instrumentation/nodejs/

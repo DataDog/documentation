@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Contrast Security Integration Overview: assets/dashboards/contrast_security_protect.json
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -74,7 +75,7 @@ Contrast インテグレーションには、メトリクスは含まれませ�
 
 Contrast インテグレーションは、イベントを送信しません。
 
-### Service Checks
+### サービスのチェック
 
 Contrast インテグレーションには、サービス チェック機能は含まれません。
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6

@@ -2,6 +2,7 @@
 assets:
   dashboards:
     PerimeterX Overview: assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
