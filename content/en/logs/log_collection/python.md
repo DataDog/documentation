@@ -62,14 +62,16 @@ Usage example with [JSON-log-formatter][1]:
 
 ```python
 import logging
-from json_log_formatter import jsonlogger
 
-logger = logging.getLogger()
+import json_log_formatter
 
-logHandler = logging.FileHandler(filename='/var/log/my-log.json')
-formatter = jsonlogger.JsonFormatter()
-logHandler.setFormatter(formatter)
-logger.addHandler(logHandler)
+formatter = json_log_formatter.JSONFormatter()
+
+json_handler = logging.FileHandler(filename='/var/log/my-log.json')
+json_handler.setFormatter(formatter)
+
+logger = logging.getLogger('my_json')
+logger.addHandler(json_handler)
 logger.setLevel(logging.INFO)
 
 logger.info('Sign up', extra={'referral_code': '52d6ce'})
@@ -92,15 +94,18 @@ The log file contains the following log record (inline):
 Usage example with [Python-json-logger][1]:
 
 ```python
-    import logging
-    from pythonjsonlogger import jsonlogger
+import logging
+from pythonjsonlogger import jsonlogger
 
-    logger = logging.getLogger()
+logger = logging.getLogger()
 
-    logHandler = logging.StreamHandler()
-    formatter = jsonlogger.JsonFormatter()
-    logHandler.setFormatter(formatter)
-    logger.addHandler(logHandler)
+logHandler = logging.FileHandler(filename='/var/log/my-log.json')
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
+logger.setLevel(logging.INFO)
+
+logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
 Once the [handler is configured][2], the log file contains the following log record (inline):
