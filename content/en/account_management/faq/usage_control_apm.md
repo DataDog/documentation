@@ -3,6 +3,12 @@ title: Estimate and Control APM Usage
 kind: documentation
 ---
 
+<div class="alert alert-danger">
+This is a deprecated page with configuration information relevant to Legacy App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
+<br>
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion/a> to use the new functionality.
+</div>
+
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
