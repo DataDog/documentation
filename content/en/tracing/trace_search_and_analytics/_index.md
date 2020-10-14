@@ -62,7 +62,7 @@ You can also filter on attributes that are not defined as facets. For example, t
 
 
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
-{{< img src="tracing/live_search/LiveSearchQuery2.png" alt="Live Search filter" >}}
+{{< img src="tracing/live_search/LiveSearchQuery3.png" alt="Live Search filter" >}}
 
 ## Trace Search with 15 day retention
 
