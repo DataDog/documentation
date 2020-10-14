@@ -353,14 +353,14 @@ As a good practice for maximum granularity and easier maintainability, you shoul
 
 ### Log Pipelines
 
-Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][70] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
+Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][19] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
 
 
 ### Log Indexes
 
-Create one or multiple [indexes][14] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][71] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
+Create one or multiple [indexes][14] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][20] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes"  style="width:60%;">}}
 
@@ -369,7 +369,7 @@ Create one or multiple [indexes][14] for `team:acme` logs. Multiple indexes can 
 
 #### Read Log Archives
 
-Create one or multiple [archives][15] for `team:acme` logs. Assign the [Read Archives][72] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
+Create one or multiple [archives][15] for `team:acme` logs. Assign the [Read Archives][21] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Archives"  style="width:60%;">}}
 
@@ -392,28 +392,9 @@ Assign the [Write Historical View][16] permission to members of `ACME Admin`. Th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-
-
-
-
-
-<<<<<<< HEAD
-[70]: /account_management/rbac/permissions?tab=ui#logs-write-processors
-[71]: /account_management/rbac/permissions?tab=ui#logs-write-exclusion-filters
-[72]: /account_management/rbac/permissions?tab=ui#logs-read-archives
-
-=======
-[70]: /account_management/rbac/permissions?tab=ui#logs_write_processors
-[71]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
-[72]: /account_management/rbac/permissions?tab=ui#logs_read_archives
-
->>>>>>> master
-
-
-
-
-
+[19]: /account_management/rbac/permissions?tab=ui#logs_write_processors
+[20]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
+[21]: /account_management/rbac/permissions?tab=ui#logs_read_archives
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [2]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [3]: /getting_started/tagging/
