@@ -353,14 +353,14 @@ As a good practice for maximum granularity and easier maintainability, you shoul
 
 ### Log Pipelines
 
-Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][19] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
+Create one [pipeline][13] for `team:acme` logs. Assign the [Write Processor][14] permission to members of `ACME Admin`, but **scope** that permission to this ACME "root" pipeline.
 
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME Pipeline"  style="width:60%;">}}
 
 
 ### Log Indexes
 
-Create one or multiple [indexes][14] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][20] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
+Create one or multiple [indexes][15] for `team:acme` logs. Multiple indexes can be valuable if ACME team needs fine-grained budget control (for instance, indexes with different retentions, or indexes with different quotas). Assign the [Write Exclusion Filters][16] permission to members of `ACME Admin`, but **scope** that permission to these ACME Index(es).
 
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME Indexes"  style="width:60%;">}}
 
@@ -369,7 +369,7 @@ Create one or multiple [indexes][14] for `team:acme` logs. Multiple indexes can 
 
 #### Read Log Archives
 
-Create one or multiple [archives][15] for `team:acme` logs. Assign the [Read Archives][21] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
+Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Archives][18] permission to members of `ACME Admin`, but **scoped** to that ACME Archive(s).
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Archives"  style="width:60%;">}}
 
@@ -377,13 +377,13 @@ Multiple archives can be useful if you have different lifecycle policies dependi
 
 #### Write Historical Views
 
-Assign the [Write Historical View][16] permission to members of `ACME Admin`. This permission grants the ability to perform rehydrations.
+Assign the [Write Historical View][19] permission to members of `ACME Admin`. This permission grants the ability to perform rehydrations.
 
-**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. [This option][17] enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
+**Optionally**, set up your Log Archives so that all logs rehydrated from that archive will eventually have the `team:acme` tag, whether or not they had the tag in the archive. [This option][20] enables you to enforce consistency with your existing restriction policies, as well as to safely remove deprecated restrictions that correspond to no more logs flowing in Datadog or indexed in Datadog.
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
-*Note*: **If** you use the [Legacy Read Index Data Permission][18], add the `ACME User` role to ACME archive(s) alongside the `ACME User` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
+*Note*: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME User` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission"  style="width:60%;">}}
 
@@ -392,9 +392,6 @@ Assign the [Write Historical View][16] permission to members of `ACME Admin`. Th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[19]: /account_management/rbac/permissions?tab=ui#logs_write_processors
-[20]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
-[21]: /account_management/rbac/permissions?tab=ui#logs_read_archives
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [2]: /agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [3]: /getting_started/tagging/
@@ -408,8 +405,11 @@ Assign the [Write Historical View][16] permission to members of `ACME Admin`. Th
 [11]: /api/v2/roles/#list-permissions
 [12]: /account_management/rbac/permissions?tab=ui#logs_read_data
 [13]: /logs/processing/pipelines/
-[14]: /logs/indexes/
-[15]: /logs/archives/
-[16]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
-[17]: /logs/archives#datadog-permissions
-[18]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
+[14]: /account_management/rbac/permissions?tab=ui#logs_write_processors
+[15]: /logs/indexes/
+[16]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
+[17]: /logs/archives/
+[18]: /account_management/rbac/permissions?tab=ui#logs_read_archives
+[19]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
+[20]: /logs/archives#datadog-permissions
+[21]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
