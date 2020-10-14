@@ -96,7 +96,7 @@ To specify that a specific percentage of a service's traffic should be sent, add
 
 While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][4], if needed there are instructions for configuring legacy [App Analytics][5] setups.
 
-All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with *i* Legacy App Analytics Filters
+All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
 
 [1]: https://app.datadoghq.com/apm/traces/retention-filters

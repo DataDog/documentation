@@ -40,7 +40,7 @@ Follow the [Quickstart instructions][6] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, sending 100% of traces , and Trace ID injection into logs during setup.
+- Enable the Continuous Profiler, ingesting 100% of traces , and Trace ID injection into logs during setup.
 
 Otherwise, [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 

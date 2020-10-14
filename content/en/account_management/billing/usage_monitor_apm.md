@@ -31,21 +31,21 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 
 ## Set Alert on Indexed Spans
 
-To get alerts in case a code deployment causes a spike in Indexed Spans generated, set up [App Analytics monitors][5] on Indexed Spans. Get notified at any moment if the Indexed span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in Indexed Spans generated, set up [Analytics monitors][5] on Indexed Spans. Get notified at any moment if the Indexed span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 
-1. Go to [App Analytics view][6] in APM
+1. Go to [Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
 5. Define the Indexed span volume rate you would like to set as a warning or error.
 6. Define an explicit notification: The volume of Indexed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
-Learn more about Indexed span filtering and usage control [here][7].
+Learn more about rentention filters [here][7].
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
 [5]: /monitors/monitor_types/apm/?tab=traceanalytics#monitor-creation
-[6]: https://app.datadoghq.com/apm/search/analytics
-[7]: /account_management/billing/usage_control_apm/
+[6]: https://app.datadoghq.com/apm/analytics
+[7]: /tracing/trace_retention_and_ingestion/

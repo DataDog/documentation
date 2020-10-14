@@ -33,7 +33,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable sending 100% of traces and add Trace ID injection into logs during setup.
+- Enable ingesting 100% of traces and add Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 

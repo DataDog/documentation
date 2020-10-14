@@ -5,9 +5,9 @@ kind: documentation
 
 [APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by tagged based custom [retention filters][3].
 
-**Note** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
-| Billing Parameter  | Price                                      | App Analytics                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
+| Billing Parameter  | Price                                      | Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [APM Host][4]      | $31 per underlying [APM host][4] per month | 1 million additional Indexed Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][5] |
 | [Fargate][4]       | $2 per concurrent task per month           | No Indexed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][4]              |
@@ -108,6 +108,10 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 **5. How is the host billing related to my services?**
 
 APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed span][11] count. To estimate how many Indexed Spans each of your service can send, use the [Event Estimator][10].
+
+**6. What happens to my existing App Analytics filters?**
+
+All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
 
 ## Further Reading
 
