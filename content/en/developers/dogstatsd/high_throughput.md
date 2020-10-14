@@ -314,7 +314,9 @@ When this mode is enabled, you can run the command `datadog-agent dogstatsd-stat
 
 While running in this mode, the DogStatsD server runs a burst detection mechanism. If a burst is detected, a warning log will be emitted. E.g.:
 
-    A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
+```text
+A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
+```
 
 ## Client side telemetry
 
