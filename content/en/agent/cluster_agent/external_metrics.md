@@ -221,7 +221,7 @@ The Datadog Cluster Agent will take care of automatically creating `DatadogMetri
 
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource will be cleaned up by the Datadog Cluster Agent after few hours.
 
-### Troublehsooting DatadogMetric issues
+### Troubleshooting DatadogMetric issues
 
 The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing.
 
