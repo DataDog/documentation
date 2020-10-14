@@ -1135,61 +1135,21 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 140000
+  - name: Get started with tracing
+    url: tracing/get_started/
+    identifier: tracing_get_started
+    parent: tracing
+    weight: 1
   - name: Compatibility
     url: tracing/compatibility_requirements/
     identifier: tracing_compatibility_requirements
-    parent: tracing
-    weight: 1
-  - name: Java
-    url: tracing/compatibility_requirements/java
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_java
+    parent: tracing_get_started
     weight: 101
-  - name: Python
-    url: tracing/compatibility_requirements/python
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_python
-    weight: 102
-  - name: Ruby
-    url: tracing/compatibility_requirements/ruby
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_ruby
-    weight: 103
-  - name: Go
-    url: tracing/compatibility_requirements/go
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/compatibility_requirements/nodejs
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/compatibility_requirements/php
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_php
-    weight: 106
-  - name: C++
-    url: tracing/compatibility_requirements/cpp
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_cpp
-    weight: 107
-  - name: .NET Core
-    url: tracing/compatibility_requirements/dotnet-core
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_dotnet_core
-    weight: 108
-  - name: .NET Framework
-    url: tracing/compatibility_requirements/dotnet-framework
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_dotnet_framework
-    weight: 109
   - name: Agent Configuration
     url: tracing/send_traces/
     identifier: tracing_send_traces
-    parent: tracing
-    weight: 2
+    parent: tracing_get_started
+    weight: 102
   - name: Instrument Your Application
     url: tracing/setup/
     parent: tracing
