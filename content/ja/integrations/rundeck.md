@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -52,7 +53,7 @@ Rundeck のワークフロー自動化機能は Datadog の通知と併せて使
 ### インストール
 Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低 1 つ準備してください。
 
-### 構成
+### コンフィギュレーション
 
 #### Rundeck のセットアップ
 

@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -65,7 +66,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 {{< get-metrics-from-git "resin" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 **resin.can_connect**:
 

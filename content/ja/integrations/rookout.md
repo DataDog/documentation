@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -64,7 +65,7 @@ Rookout は、Datadog Agent の DogStatsD サービスから Datadog にデー�
 
 7. 通常のように、新しく作成したルールをアプリケーションに追加します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 特定のアクションを使用するようにルールを構成できますが、各ルールは、`processing.operations` オブジェクトに以下の属性を含んでいる必要があります。
 

@@ -73,7 +73,7 @@ ECS アプリケーションの変数が起動時に設定される場合は、`
 {{< tabs >}}
 {{% tab "Python" %}}
 
-{{< code-block lang="python" >}}
+```python
 import requests
 from ddtrace import tracer
 
@@ -83,7 +83,7 @@ def get_aws_ip():
   return r.text
 
 tracer.configure(hostname=get_aws_ip())
-{{< /code-block >}}
+```
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
@@ -93,7 +93,7 @@ tracer.configure(hostname=get_aws_ip())
 
 {{% tab "Node.js" %}}
 
-{{< code-block lang="javascript" >}}
+```javascript
 const tracer = require('dd-trace');
 const request = require('request');
 
@@ -104,7 +104,7 @@ request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
 ) {
     tracer.init({ hostname: body });
 });
-{{< /code-block >}}
+```
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
@@ -113,20 +113,20 @@ request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
 
 {{% tab "Ruby" %}}
 
-{{< code-block lang="ruby" >}}
+```ruby
 require 'ddtrace'
 require 'net/http'
 
 Datadog.configure do |c|
   c.tracer hostname: Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
 end
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
-{{< code-block lang="go" >}}
+```go
 package main
 
 import (
@@ -139,12 +139,12 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
         bodyBytes, err := ioutil.ReadAll(resp.Body)
         host := string(bodyBytes)
   if err == nil {
-        //curl コマンドの出力を DD_Agent_host 環境に設定します
+        //set the output of the curl command to the DD_Agent_host env
         os.Setenv("DD_AGENT_HOST", host)
-         // トレースエージェントにホスト設定を通知します
+        // tell the trace agent the host setting
         tracer.Start(tracer.WithAgentAddr(host))
         defer tracer.Stop()
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 
@@ -152,13 +152,13 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 
 このスクリプトを ECS タスク定義の `entryPoint` フィールドにコピーし、アプリケーション jar および引数フラグで値を更新します。
 
-{{< code-block lang="json" >}}
+```java
 "entryPoint": [
   "sh",
   "-c",
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); java -javaagent:/app/dd-java-agent.jar <APPLICATION_ARG_FLAGS> -jar <APPLICATION_JAR_FILE/WAR_FILE>"
 ]
-{{< /code-block >}}
+```
 
 他の言語で Agent ホスト名を設定するには、[Agent ホスト名の変更方法][1]を参照してください。
 
@@ -167,13 +167,13 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 
 {{% tab ".NET" %}}
 
-{{< code-block lang="json" >}}
+```json
 "entryPoint": [
   "sh",
   "-c",
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); dotnet ${APP_PATH}"
 ]
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
