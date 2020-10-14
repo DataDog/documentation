@@ -10,34 +10,36 @@ further_reading:
     text: Widget Disponibilité des monitors
   - link: /synthetics/
     tag: Documentation
-    text: Synthetics
+    text: Surveillance Synthetics
 ---
-Pour respecter les accords de service avec les clients externes ou internes, il est souvent nécessaire de mesurer le pourcentage de disponibilité. Ce guide vous explique comment y parvenir avec le service [Synthetics][1] de Datadog et le [widget SLO][2]. Le site `http://example.com/` sera utilisé comme exemple.
+## Présentation
 
-## Créer un test Synthetics
+Pour respecter les accords de service avec les clients externes ou internes, il est souvent nécessaire de mesurer le pourcentage de disponibilité. Ce guide vous explique comment y parvenir avec le service de [surveillance Synthetic][1] de Datadog et le [widget SLO][2]. Le site `http://example.com/` sera utilisé comme exemple.
 
-Créez un [test API Synthetics][3] pour `http://example.com/` :
+## Création d'un test Synthetic
 
-1. [Accédez à la page de création de test API Synthetics][4].
+Créez un [test API Synthetic][3] pour `http://example.com/` :
+
+1. [Accédez à la page de création de test API Synthetic][4].
 2. Saisissez `http://example.com/` dans le champ **URL**.
 3. Cliquez sur **Test URL** pour ajouter automatiquement les assertions concernant la santé de votre site Web :
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Configuration d'un test Synthetics" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Configuration d'un test Synthetic" >}}
 
 4. Ajustez ces assertions en fonction de votre SLI, puis définissez votre politique concernant les nouvelles tentatives de test. Dans cet exemple, lorsqu'au moins la moitié des emplacements renvoient une erreur même après une seconde tentative, le site est considéré comme indisponible :
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Assertions de test Synthetics" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Assertions de test Synthetic" >}}
 
-5. Facultatif – [Définissez un message de notification détaillé][5] :
+5. (Facultatif) [Définissez un message de notification détaillé][5] :
 
-    {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Message de test Synthetics" >}}
+    {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Message de test Synthetic" >}}
 
 ## Configuration du widget SLO
 
 ### Créer votre SLO
 
-1. [Créez un SLO][6] pour suivre la disponibilité de votre site Web en fonction des résultats de votre test Synthetics.
-2. Sélectionnez **Monitor based** et saisissez le nom de votre test Synthetics :
+1. [Créez un SLO][6] pour suivre la disponibilité de votre site Web en fonction des résultats de votre test Synthetic.
+2. Sélectionnez **Monitor based** et saisissez le nom de votre test Synthetic :
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="Configuration du SLO" >}}
 

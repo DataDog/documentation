@@ -573,9 +573,13 @@ class Integrations:
                     item[0]["ddtype"] = item[0].get("type")
                     del item[0]["type"]
                 item[0]["dependencies"] = dependencies
-                fm = yaml.dump(
-                    item[0], width=150, default_style='"', default_flow_style=False
+                item[0]["draft"] = not item[0].get("is_public", False)
+                fm = yaml.safe_dump(
+                    item[0], width=150, default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
+                # simple bool cleanups with replace
+                fm = fm.replace('!!bool "false"', 'false')
+                fm = fm.replace('!!bool "true"', 'true')
             else:
                 fm = {"kind": "integration"}
         return template.format(

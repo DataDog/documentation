@@ -63,7 +63,7 @@ Si vous utilisez une version antérieure, vous pouvez vous reporter aux fichiers
 
 ### Installation
 
-Le check Kafka de l'Agent est inclus avec le paquet de l'[Agent Datadog][4] : vous n'avez donc rien d'autre à installer sur vos nœuds Kafka.
+Le check Kafka de l'Agent est inclus avec le package de l'[Agent Datadog][4] : vous n'avez donc rien d'autre à installer sur vos nœuds Kafka.
 
 Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud Kafka pour que l'Agent puisse faire un fork de [jmxfetch][5]. Vous pouvez utiliser la même JVM que Kafka.
 
@@ -222,7 +222,7 @@ Ce check récupère les décalages records des agents Kafka, les décalages des 
 
 ### Installation
 
-Le check Kafka consumer de l'Agent est inclus avec le paquet de l'[Agent Datadog][4] : vous n'avez donc rien d'autre à installer sur vos nœuds Kafka.
+Le check Kafka consumer de l'Agent est inclus avec le package de l'[Agent Datadog][4] : vous n'avez donc rien d'autre à installer sur vos nœuds Kafka.
 
 ### Configuration
 
