@@ -85,7 +85,9 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
-See the [list of integrations][11] that can be used to notify your team. 
+See the [list of integrations][11] that can be used to notify your team.
+
+**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not be parsed and no alert is created.
 
 ### Modifications
 
