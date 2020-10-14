@@ -7,7 +7,7 @@ further_reading:
   text: "Agent Debug Mode"
 ---
 
-If you are running Agent 6.19+/7.19+, you can dynamically change some settings at runtime without having to restart the Agent to account for the configuration change. 
+If you are running Agent 6.19+/7.19+, you can dynamically change some settings at runtime without having to restart the Agent to account for the configuration change.
 
 **Note**: Changes made dynamically do not persist. They are lost as soon as the Agent is restarted.
 
@@ -44,4 +44,5 @@ The complete runtime configuration can also be show by using the `config` comman
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/basic_agent_usage/windows/#agent-v6

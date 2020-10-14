@@ -406,13 +406,13 @@ Assign the [Write Historical View][73] permission to members of `ACME Admin`. Th
 [61]: /logs/indexes/
 [62]: /logs/archives/
 
-[70]: /account_management/rbac/permissions?tab=ui#logs-write-processors
-[71]: /account_management/rbac/permissions?tab=ui#logs-write-exclusion-filters
-[72]: /account_management/rbac/permissions?tab=ui#logs-read-archives
-[73]: /account_management/rbac/permissions?tab=ui#logs-write-historical-view
+[70]: /account_management/rbac/permissions?tab=ui#logs_write_processors
+[71]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
+[72]: /account_management/rbac/permissions?tab=ui#logs_read_archives
+[73]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
 
-[74]: /account_management/rbac/permissions?tab=ui#logs-read-data
-[75]: /account_management/rbac/permissions?tab=ui#logs-read-index-data
+[74]: /account_management/rbac/permissions?tab=ui#logs_read_data
+[75]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
 
 
 [84]: /getting_started/tagging/
