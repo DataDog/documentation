@@ -13,15 +13,17 @@ The PHP Datadog Trace library is open source - view the [Github repository][1] f
 
 PHP APM supports the following PHP versions:
 
-| Version | Support type    |
-|:--------|:----------------|
-| 7.4.x   | Fully Supported |
-| 7.3.x   | Fully Supported |
-| 7.2.x   | Fully Supported |
-| 7.1.x   | Fully Supported |
-| 7.0.x   | Fully Supported |
-| 5.6.x   | Fully Supported |
-| 5.4.x   | Fully Supported |
+| Version    | Support type                          |
+|:-----------|:--------------------------------------|
+| 8.0.0 RC 1 | Experimental Support (as of `0.49.0`) |
+| 7.4.x      | Fully Supported                       |
+| 7.3.x      | Fully Supported                       |
+| 7.2.x      | Fully Supported                       |
+| 7.1.x      | Fully Supported                       |
+| 7.0.x      | Fully Supported                       |
+| 5.6.x      | Fully Supported                       |
+| 5.5.x      | Fully Supported (as of `0.49.0`)      |
+| 5.4.x      | Fully Supported                       |
 
 PHP APM supports the following SAPI's:
 
@@ -116,6 +118,10 @@ To request support for additional libraries, contact our awesome [support team][
 
 The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
 
+### Generators
+
+Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -125,3 +131,4 @@ The call stack is limited on PHP 5. See the [deep call stack troubleshooting pag
 [3]: https://pecl.php.net/package/mongo
 [4]: https://pecl.php.net/package/mongodb
 [5]: /tracing/troubleshooting/php_5_deep_call_stacks
+[6]: https://www.php.net/manual/en/language.generators.overview.php
