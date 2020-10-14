@@ -58,11 +58,11 @@ A valid query in the search bar displays traces that match your search criteria 
 You can also filter on attributes that are not defined as facets. For example, to filter on the `customer.id` attribute, there are two options:
 
 - Click on the attribute in the trace panel and add it to the search query `@customer.id:584959`.
-{{< img src="tracing/live_search/livesearch_query2.png" alt="Live Search filter" >}}
+{{< img src="tracing/live_search/LiveSearchQuery1.png" alt="Live Search filter" >}}
 
 
 - Filter on all spans with a `customer.id` attribute by typing "customer.id" in the search query bar: `@customer.id:584959`
-{{< img src="tracing/live_search/livesearch_query1.png" alt="Live Search filter" >}}
+{{< img src="tracing/live_search/LiveSearchQuery2.png" alt="Live Search filter" >}}
 
 ## Trace Search with 15 day retention
 
