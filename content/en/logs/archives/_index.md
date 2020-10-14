@@ -25,9 +25,9 @@ Configure your Datadog account to forward all the logs ingested - whether [index
 
 This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
 
-1. Set up a Datadog [integration](#set-up-an-integration) for your cloud provider
+1. Set up a Datadog [integration](#set-up-an-integration) for your cloud provider (if you haven't already)
 2. Create a [storage bucket](#create-a-storage-bucket)
-3. Set [permissions](#set-permissions) read and/or write on that archive
+3. Set [permissions](#set-permissions) to read and/or write on that archive
 4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive
 5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags
 6. [Validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you
@@ -46,7 +46,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 * In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
 * Specifically for AWS GovCloud or China accounts, use access keys as an alternative to role delegation.
 
-[1]: integrations/amazon_web_services/?tab=automaticcloudformation#setup
+[1]: /integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
@@ -226,9 +226,10 @@ Use optional step 6 to add tags on rehydrated logs according to your Restriction
 
 You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[Rehydration][1] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+[Rehydration][2] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
 
-[1]: /logs/archives/rehydrating/
+[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+[2]: /logs/archives/rehydrating/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -317,7 +318,7 @@ Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS]
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account.
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, you may want to check your inclusion filters to make sure the query is valid and matches log events in [live tail][10]. 
 
 In case Datadog detects some broken configuration, the corresponding archive is highlighted in the configuration page. Check on the error icon what actions to take in order to fix it.
 
@@ -357,7 +358,7 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 }
 ```
 
-**Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. The log tags (metadata that connects your log data to related metrics and traces) are not included.
+**Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. By default, the log tags (metadata that connects your log data to related metrics and traces) are not included.
 
 ## Further Reading
 
@@ -379,3 +380,4 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 [7]: /account_management/rbac/permissions#logs_write_historical_view
 [8]: /account_management/rbac/permissions#logs_read_index_data
 [9]: /account_management/rbac/permissions#logs_read_data
+[10]: /logs/explorer/live_tail/
