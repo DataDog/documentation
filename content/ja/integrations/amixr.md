@@ -1,6 +1,7 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "saved_views": {}
   "service_checks": assets/service_checks.json
@@ -53,7 +54,7 @@ Slack インテグレーションを活用して Amixr でアラートを管理�
 
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 Amixr で構成する場合:
 

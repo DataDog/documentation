@@ -591,6 +591,7 @@ CakeLog::config('debug', array(
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/logs/
 [2]: /tracing/connect_logs_and_traces/php/
 [3]: /logs/log_collection/php/#symfony-v2-v3

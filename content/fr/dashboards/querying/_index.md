@@ -46,7 +46,15 @@ Choisissez la métrique à représenter en la recherchant ou en la sélectionnan
 
 ### Filtre
 
-La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*. Pour en savoir plus sur les tags, consultez la documentation sur le [Tagging][6].
+La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*.
+
+{{< img src="dashboards/querying/filter.png" alt="Filtre sur un graphique"  style="width:75%;" >}}
+
+Vous pouvez également utiliser le filtrage avancé dans le menu déroulant `from` pour évaluer les requêtes filtrées avec un opérateur booléen, comme suit :
+
+{{< img src="dashboards/querying/booleanfilters.png" alt="Création d'un graphique avec filtres booléens"  style="width:75%;" >}}
+
+Pour en savoir plus sur les tags, consultez la documentation relative au [tagging][6].
 
 ### Agréger et cumuler des données
 
@@ -84,6 +92,8 @@ En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres f
 
 Datadog vous permet également de représenter graphiquement vos métriques avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/` et `*` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
 
+Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
+
 #### Opérations arithmétiques avec un entier
 
 Modifiez la valeur affichée pour une métrique sur un graphique en effectuant une opération arithmétique. Par exemple, vous pouvez visualiser le double d'une métrique spécifique en cliquant sur le lien **Advanced...** de l'éditeur de graphiques. Saisissez ensuite votre opération arithmétique dans la case `Formula`, à savoir ici : `a * 2`.
@@ -115,6 +125,23 @@ Si vous ne saisissez pas de titre, Datadog en génère un automatiquement en fon
 ### Enregistrer
 
 Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous pourrez toujours revenir à l'éditeur pour modifier le graphique. Si vous ne souhaitez pas enregistrer les modifications effectuées, cliquez sur **Cancel**.
+
+## Configuration d'un graphique de statistiques APM
+
+Pour configurer votre graphique à l'aide des données statistiques APM, suivez ces étapes :
+
+1. [Sélectionner votre visualisation](#select-your-visualization) (same as for Metrics)
+2. [Choisissez votre niveau de détail](#level-of-detail)
+3. [Choisissez vos paramètres](#apm-stats-parameters)
+4. [Donner un titre au graphique](#create-a-title) (same as for Metrics)
+
+### Niveau de détail
+Choisissez le niveau de détail pour lequel vous souhaitez visualiser des statistiques : services, ressources ou spans. Tous les niveaux de détail ne sont pas disponibles pour chaque type de widget.
+
+### Paramètres des statistiques APM
+Sélectionnez les paramètres suivants depuis l'éditeur de graphiques : Environnement (`env`), Tag primaire (`primary_tag`), Service (`service`) et Nom de l'opération (`name`).
+
+Si le niveau de détail choisi correspond à une ressource ou à une span, vous devrez également sélectionner un Nom de ressource (`resource`) pour certains types de widget afin d'affiner le contexte de votre requête.
 
 ## Options supplémentaires
 

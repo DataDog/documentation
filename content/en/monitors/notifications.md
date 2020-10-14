@@ -85,7 +85,9 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
-See the [list of integrations][11] that can be used to notify your team. 
+See the [list of integrations][11] that can be used to notify your team.
+
+**Note**: Handles that include parentheses (`(`, `)`) are not supported. When a handle with parentheses is used, the handle is not be parsed and no alert is created.
 
 ### Modifications
 
@@ -135,6 +137,20 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 
 ```text
 {{[dot.key.test].name}}
+```
+
+#### Log facet variables
+
+Log monitors can use facets as variables if the monitor is grouped by the facets.
+For example, if your log monitor is grouped by the facet `@facet`, the variable is:
+
+```text
+{{@facet.name}}
+```
+
+If your facet has periods, use brackets around the facet, for example:
+```text
+{{[@facet.with.dot].name}}
 ```
 
 ### Conditional variables

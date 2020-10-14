@@ -24,7 +24,7 @@ aws cloudformation create-stack \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
 
-新リリース後にマクロを更新する場合は、同じパラメーターではなく `update-stack` メソッドを使用します。
+新しいリリース後にマクロを更新する場合は、同じパラメータを使い `update-stack` メソッドを使用します。また、最新の [リリース](https://github.com/DataDog/datadog-cloudformation-macro/releases) からマクロのバージョンを指定することもできます。それには、`latest.yml` をリリースバージョンに置き換えます（例、`0.1.2.yaml`）。
 ```bash
 aws cloudformation update-stack \
   --stack-name datadog-serverless-macro \

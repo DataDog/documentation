@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -102,7 +103,7 @@ Squadcast インテグレーションには、メトリクスは含まれませ�
 
 トリガー/解決された Squadcast イベントが Squadcast プラットフォームダッシュボードに表示されます。
 
-### サービスチェック
+### サービスのチェック
 
 Squadcast インテグレーションには、サービスのチェック機能は含まれません。
 

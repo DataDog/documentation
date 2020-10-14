@@ -130,6 +130,7 @@ Access the startup logs as a JSON string at runtime with `\DDTrace\startup_logs(
 ```php
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
+
 [1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{% /tab %}}
 

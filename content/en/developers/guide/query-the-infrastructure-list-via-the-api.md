@@ -5,26 +5,7 @@ aliases:
   - /developers/faq/query-the-infrastructure-list-via-the-api
 ---
 
-More advanced Datadog users may sometimes want to use [the API][1] to query general data about their infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the `reports/v2/overview` endpoint.
-
-## Overview
-
-This endpoint takes the following required parameters:
-
-* **api_key**: string; your Datadog API key.
-* **application_key** strying; your Datadog application key.
-
-By default, this endpoint queries all the data in your infrastructure list, which can be a very large response indeed. You can use any of the following optional parameters to filter down the content that you receive:
-
-* **tags**: string; a comma-delimited list of what host tags you want to filter down by (uses AND logic; returns data only for those hosts that have _all_ of these tags associated with them).
-* **hostnames[]**: list of strings; a list of the specific hostnames you want to query data from.
-* **with_apps**: Boolean; if true, displays the applications (integrations) that are associated with a given host.
-* **with_mute_status**: Boolean; if true, displays whether the host is muted by a downtime or not.
-* **with_sources**: Boolean; if true, returns a list of sources from which metrics are reported for this host. For example, you might see 'aws', 'agent', or 'azure' in this list.
-* **with_aliases**: Boolean; if true, displays aliases for this host.
-* **with_meta**: Boolean; if true, includes metadata about the host with things like disk information, IP addresses, etc.
-
-The response to this API call is in JSON.
+If you're a more advanced Datadog user, you may want to use [the API][1] to query general data about infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this with an API GET request on the [api/v1/hosts][4] endpoint.
 
 ## Examples
 
@@ -34,9 +15,9 @@ If, for example, you want to query general data from all your hosts that include
 import requests
 s = requests.session()
 s.params = {
-  'api_key': 'DATADOG_API_KEY',
-  'application_key': 'YOUR_APPLICATION_KEY',
-  'tags': 'env:prod,role:elasticsearch'
+  'api_key': '<DATADOG_API_KEY>',
+  'application_key': '<YOUR_APPLICATION_KEY>',
+  'filter': 'env:prod,role:elasticsearch'
 }
 infra_link = 'https://app.datadoghq.com/api/v1/hosts'
 infra_content = s.request(
@@ -53,6 +34,8 @@ def iterate_all_hosts():
   s.params = {
     'api_key': '<DATADOG_API_KEY>',
     'application_key': '<YOUR_APPLICATION_KEY>',
+    'include_muted_hosts_data': False,
+    'include_hosts_metadata': False,
     'start': 0
   }
   infra_link = 'https://app.datadoghq.com/api/v1/hosts?count=1000'
@@ -71,3 +54,4 @@ for host in iterate_all_hosts():
 [1]: /api/
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://app.datadoghq.com/infrastructure/map
+[4]: https://docs.datadoghq.com/api/v1/hosts/
