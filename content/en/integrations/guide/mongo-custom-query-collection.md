@@ -21,6 +21,7 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
   * `type`: This is the submission method (`gauge`, `count`, `rate`, etc..). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
 * **`tags`**: A list of tags to apply to each metric (as specified above).
 * **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non-count queries.
+* **`run_on_secondary`**: [Optional] `true` or `false`, defaults to `false`. Since version 7.24/6.24 of the Agent, the mongo integration ignores custom queries by default on secondary nodes of replica sets to prevent duplicate custom metrics and unnecessary billing. If the query is specific to the 'local' database of the node for example, you may want to set this field to `true` to prevent the integration from ignoring it.
 
 ## Examples
 
