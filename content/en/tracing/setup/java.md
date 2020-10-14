@@ -29,7 +29,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-Otherwise, to begin tracing applications written in any language: 
+Otherwise, to begin tracing applications written in any language:
 
 1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
@@ -42,33 +42,16 @@ Otherwise, to begin tracing applications written in any language:
 3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
    ```text
--javaagent:/path/to/the/dd-java-agent.jar
+    -javaagent:/path/to/the/dd-java-agent.jar
    ```
 
 4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
 
-**Notes**:
+### JVM notes
 
 - Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
     {{< tabs >}}
-    {{% tab "WebSphere" %}}
-
-In the administrative console:
-
-1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
-2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**. 
-4. In the **Generic JVM arguments** text field, enter:
-
-```text
--javaagent:/path/to/dd-java-agent.jar
-```
-
-For additional details and options, see the [WebSphere docs][1].
-
-[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-    {{% /tab %}}
     {{% tab "Spring Boot" %}}
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
@@ -131,15 +114,32 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 ```
 
     {{% /tab %}}
+    {{% tab "WebSphere" %}}
+
+In the administrative console:
+
+1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
+2. Select **Java and Process Management > Process Definition**.
+3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+4. In the **Generic JVM arguments** text field, enter:
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+For additional details and options, see the [WebSphere docs][1].
+
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+    {{% /tab %}}
     {{< /tabs >}}
 
 
 - If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
-   
+
    ```text
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
-   
+
      For more information, see the [Oracle documentation][6].
 
 - `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].
@@ -147,7 +147,6 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 ## Automatic Instrumentation
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -438,7 +437,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: http://bytebuddy.net
 [10]: /tracing/connect_logs_and_traces/java/
 [11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [12]: /developers/dogstatsd/#setup

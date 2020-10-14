@@ -158,13 +158,13 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 {{% tab "AWS Console" %}}
 
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
-   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
+  {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
 1. Select the bucket and then follow the AWS instructions:
-   {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
+  {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
 1. Set the correct event type on S3 buckets:
-   {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
+  {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs!
 
