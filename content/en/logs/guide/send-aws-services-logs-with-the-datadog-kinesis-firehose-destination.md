@@ -46,6 +46,7 @@ If you only want to send logs to Datadog, or if you already have a Kinesis Datas
 ​
 To ensure that logs that fail through the Delivery Stream are still sent to Datadog, [configure the Datadog Lambda function to trigger on this S3 bucket][4].
 ​
+
 [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/account/settings#api
@@ -59,6 +60,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 [See the full Kinesis CloudFormation template here.][1]
 ​
 ​
+
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{% /tab %}}
 {{< /tabs >}}
@@ -91,6 +93,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 ​
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
 ​
+
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
