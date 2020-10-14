@@ -3,6 +3,7 @@ title: Trace Retention and Ingestion
 kind: documentation
 aliases:
     - /account_management/billing/usage_control_apm/
+    - /tracing/app_analytics/
 description: "Learn how to control Ingestion and Indexing rates with Tracing without Limits."
 ---
 
@@ -16,7 +17,7 @@ With Tracing without Limits™, both the ingestion of traces to Datadog as well 
 
 After spans have been ingested by Datadog, they will be kept for 15 days according to the retention filters that have been set on your account.  By default, the only retention filter enabled will be the [Intelligent Retention Filter](#datadog-intelligent-retention-filter), which retains error traces and traces from different latency distributions.
 
-You can also create any number of additional [tag-based retention filters](#create-your-own-filter) for your services.
+You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
 {{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing2.png" style="width:100%;" alt="Span Indexing" >}}
 
@@ -33,7 +34,7 @@ In the Datadog app, on the ['Retention Filters' tab][1], you can see the followi
 
 ### Datadog Intelligent Retention Filter
 
-Intelligent Retention is always active for your services, and it will keep an assortment of traces to help you monitor the health of your applications.
+Intelligent Retention is always active for your services, and it will keep a proportion of traces to help you monitor the health of your applications.
 
 Intelligent Retention retains:
 
@@ -42,7 +43,7 @@ Intelligent Retention retains:
  - All Resources with any traffic will have associated Traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
-### Create your own filter
+### Create your own Retention Filter
 
 {{< img src="tracing/trace_indexing_and_ingestion/IndexFilter2.gif" style="width:100%;" alt="Span Indexing" >}}
 
@@ -93,8 +94,11 @@ To specify that a specific percentage of a service's traffic should be sent, add
 
 While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][4], if needed there are instructions for configuring legacy [App Analytics][5] setups.
 
+All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with *i* Legacy App Analytics Filters
+
+
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode
 [3]: https://app.datadoghq.com/apm/traces/ingestion-controls
 [4]: /tracing/trace_search_and_analytics
-[5]: /tracing/app_analytics/
+[5]: /tracing/legacy_app_analytics/

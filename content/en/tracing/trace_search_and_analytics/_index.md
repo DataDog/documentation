@@ -15,10 +15,6 @@ description: "Trace Search and Analytics"
 
 Live data is all [Ingested spans][2] and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.  More than 15 minutes in the past data is all [Indexed Spans][3].  You can customize settings for both [Retention and Ingestion][4] to send and keep exactly what data is most relevant to you.
 
-Send and retain exactly the spans you care about. Any retained span will have its entire associated trace automatically retained for completeness of viewing within Datadog.
-
-Retention filters can be configured within the app, and more information is available in the [Trace Retention][3] documentation.
-
 ### Enable Tracing Without Limits
 
 Fine-grained ingestion controls can be set per service instrumented with Datadog APM, with more details available in the [Ingestion Controls][2] documentation.  All services can be also be configured to send all of their traffic with one environment variable configuration below:
@@ -36,6 +32,10 @@ DD_TRACE_SAMPLE_RATE=1.0
 When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
 {{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
+
+{{< img src="tracing/live_search/livesearchmain2.gif" alt="Live Search" >}}
+
+{{< img src="tracing/live_search/livesearchmain3.gif" alt="Live Search" >}}
 
 With the APM Live Search you can:
 
@@ -88,7 +88,7 @@ You can customize what spans are retained and at what retention rates. By defaul
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes.
+With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes. Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.\
 
 {{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
 

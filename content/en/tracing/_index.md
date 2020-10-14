@@ -38,7 +38,7 @@ Datadog APM & Distributed Tracing gives deep visibility into your applications w
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Traces start in your instrumented applications and flow in to Datadog.  Use [ingestion controls][1] to send 100% of your traces to Datadog where they are available for live search and analytics for 15 minutes and use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business context for 15 days search and analytics.
+Traces start in your instrumented applications and flow in to Datadog where we ingest 100% of traces up to 50 Traces per second (per APM Host). If needed for high-throughput services, you can view and control the experience using [Ingestion Controls][1].  All ingested traces are available for live search and analytics for 15 minutes and you can use custom tag-based [retention filters][2] to keep exactly the traces that matter for your business context for 15 days search and analytics.
 
 ## Getting Started
 
