@@ -20,7 +20,7 @@ To create a custom dashboard or monitor, the key metrics to use are:
 
 ### Indexed Spans
 
-{{< img src="tracing/trace_indexing_and_ingestion/SpanIndexing2.png" style="width:100%;" alt="Span Indexing" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
 
 Each retention filter set on your services, including the default [Datadog Intelligent Sampling Filter](#datadog-intelligent-sampling-filter), results in an _increase_ to the number of Indexed Spans for your Datadog account.
 
