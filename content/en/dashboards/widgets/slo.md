@@ -42,6 +42,8 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
   - `Status`: displays the overall SLO status percentages and targets
   - `Monitors`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
+  
+**Note:** When the `Global Time` time window option is selected you can only use the `Status` view mode.
 
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}
 
