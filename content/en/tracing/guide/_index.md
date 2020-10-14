@@ -24,6 +24,5 @@ aliases:
     {{< nextlink href="/api/v1/tracing/" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configuring App Analytics via the Agent{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
 {{< /whatsnext >}}

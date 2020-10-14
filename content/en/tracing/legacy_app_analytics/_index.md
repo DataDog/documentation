@@ -10,7 +10,7 @@ aliases:
 <div class="alert alert-danger">
 This is a deprecated page with configuration information relevant to Legacy App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
 <br>
-Read the <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion documentation</a> to learn how to use the new functionality.
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion/a> to use the new functionality.
 </div>
 
 [App Analytics][1] is used to filter Indexed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:

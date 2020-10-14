@@ -27,7 +27,7 @@ further_reading:
 <div class="alert alert-danger">
 This is a deprecated page with information relevant to App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
 <br>
-Read the <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion documentation</a> to learn how to use the new functionality.
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion/a> to use the new functionality.
 </div>
 
 ## Trace sampling
