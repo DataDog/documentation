@@ -3,6 +3,7 @@ assets:
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -110,7 +111,7 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

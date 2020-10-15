@@ -633,7 +633,16 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
-  let newRequiredFields = data.required || requiredFields;
+  let newRequiredFields;
+
+  // data.required must be an array of required fields e.g ['foo', 'bar']
+  // if its not then we possible have a field called required that is actually an object
+  // and we don't want this so pass in previous requirements
+  if(data.required && data.required instanceof Array) {
+    newRequiredFields = data.required;
+  } else {
+    newRequiredFields = requiredFields;
+  }
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -701,22 +710,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
 
 /**
- * Takes the schema table output string and checks if we had any expand collapse sections
- * if we had none then inject the class "has-no-expands" onto the output wrapper div
- * @param {string} schema table output string
- * returns html table string
- */
-const addHasExpandClass = (output) => {
-  if(!output.includes('js-collapse-trigger')) {
-    const regex = /(\s+schema-table\s+)/m;
-    const subst = ` schema-table has-no-expands `;
-    return output.replace(regex, subst);
-  }
-  return output;
-};
-
-
-/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
@@ -732,7 +725,7 @@ const schemaTable = (tableType, data) => {
       initialData = data.items.properties;
     } else {
       initialData = data.items;
-      extraClasses = 'd-none';
+      extraClasses = 'hide-table';
     }
   } else if(data.additionalProperties) {
     initialData = {"&lt;any-key&gt;": data.additionalProperties};
@@ -741,7 +734,7 @@ const schemaTable = (tableType, data) => {
   } else {
     initialData = data.properties;
   }
-  extraClasses = (initialData) ? extraClasses : 'd-none';
+  extraClasses = (initialData) ? extraClasses : 'hide-table';
   const emptyRow = `
     <div class="row">
       <div class="col-12 first-column">
@@ -750,25 +743,53 @@ const schemaTable = (tableType, data) => {
         </div>
       </div>
     </div>`.trim();
-  const output = `
-  <div class="table-${tableType} schema-table row ${extraClasses}">
-    <p class="expand-all js-expand-all text-primary">Expand All</p>
-    <div class="col-12">
-      <div class="row table-header">
-        <div class="col-4 column">
-          <p class="font-semibold">Field</p>
-        </div>
-        <div class="col-2 column">
-          <p class="font-semibold">Type</p>
-        </div>
-        <div class="col-6 column">
-          <p class="font-semibold">Description</p>
-        </div>
-      </div>
-      ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
-    </div>
-  </div>`.trim();
-  return addHasExpandClass(output);
+  return `<div class="${extraClasses}">${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}</div>`;
+};
+
+/**
+ * Create translation strings files
+ */
+const createTranslations = (apiYaml, deref, apiVersion) => {
+  const tags = apiYaml.tags.map((tag) => {
+    const name = getTagSlug(tag.name);
+    return {[name]: {"name": tag.name, "description": tag.description}};
+  }).reduce((obj, item) => ({...obj, ...item}) ,{});
+
+  const tagsFilePath = `./data/api/${apiVersion}/translate_tags.json`;
+  fs.writeFileSync(tagsFilePath, safeJsonStringify(tags, null, 2), 'utf8');
+
+  const actions = {};
+  Object.keys(deref.paths)
+    .forEach((path) => {
+      Object.entries(deref.paths[path]).forEach(([actionKey, action]) => {
+        const item = {
+          description: action.description,
+          summary: action.summary,
+          // responses: {}
+        }
+        if (action.requestBody) {
+          item['request_description'] = action.requestBody.description || '';
+          if (action.requestBody.content && action.requestBody.content["application/json"]) {
+            item['request_schema_description'] = action.requestBody.content["application/json"].schema.description || '';
+          }
+        }
+        /*
+        if (action.responses) {
+          Object.entries(action.responses).forEach(([responseKey, resp]) => {
+            const respObj = {
+              description: resp.description
+            }
+            if (resp.content && resp.content["application/json"] && resp.content["application/json"].schema && resp.content["application/json"].schema.description) {
+              respObj["schema_description"] = resp.content["application/json"].schema.description;
+            }
+            item['responses'][responseKey] = respObj;
+          });
+        } */
+        actions[action.operationId] = item;
+      });
+    });
+  const actionsFilePath = `./data/api/${apiVersion}/translate_actions.json`;
+  fs.writeFileSync(actionsFilePath, safeJsonStringify(actions, null, 2), 'utf8');
 };
 
 
@@ -786,6 +807,9 @@ const processSpecs = (specs) => {
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
+
+          // create translation ready datafiles
+          createTranslations(fileData, deref, version);
 
           // make a copy in static for postman
           // the postman copy needs to not include the empty "tags" that we
@@ -823,7 +847,6 @@ module.exports = {
   filterExampleJson,
   getSchema,
   getTagSlug,
-  addHasExpandClass,
   outputExample,
   getJsonWrapChars
 };

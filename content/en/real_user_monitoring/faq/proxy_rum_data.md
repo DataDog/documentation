@@ -1,17 +1,13 @@
 ---
 title: Proxy Real User Monitoring Data
 kind: faq
-further_reading:
-    - link: '/real_user_monitoring/installation/'
-      tag: 'Get Started'
-      text: 'Real User Monitoring'
 ---
 
 The Real User Monitoring (RUM) SDK can be configured to send requests through a proxy. Requests made still need to be forwarded to Datadog.
 
 ## SDK initialization
 
-When you set the `proxyHost` [initialization parameter][1], all RUM data is sent to the specified host URL.
+When you set the `proxyHost` [initialization parameter][1], all RUM data is sent to the specified host (ex: www.proxy.com).
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -23,7 +19,7 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     datacenter: Datacenter.US,
-    proxyHost: '<YOUR_PROXY_URL>',
+    proxyHost: '<YOUR_PROXY_HOST>',
 });
 ```
 
@@ -35,7 +31,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyHost: '<YOUR_PROXY_URL>',
+        proxyHost: '<YOUR_PROXY_HOST>',
     });
 ```
 
@@ -44,7 +40,7 @@ window.DD_RUM &&
 
 ## Proxy setup
 
-When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddhost` query parameter to all requests to your proxy. This query parameter contains the host URL all data must be forwarded to.
+When your proxy receives data from the RUM SDK, it must be forwarded to Datadog. The RUM SDK adds the `ddhost` query parameter to all requests to your proxy. This query parameter contains the host where all data must be forwarded to.
 
 To successfully proxy request to Datadog:
 
@@ -54,8 +50,4 @@ To successfully proxy request to Datadog:
 
 **Note:** The request body must remain unchanged.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/installation/?tab=us#initialization-parameters
+[1]: /real_user_monitoring/browser/#initialization-parameters

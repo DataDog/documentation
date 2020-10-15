@@ -183,7 +183,6 @@ The values for `service` and `version` can be provided in the Dockerfile:
 ENV DD_SERVICE <SERVICE>
 ENV DD_VERSION <VERSION>
 
-LABEL com.datadoghq.tags.env="<ENV>"
 LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```

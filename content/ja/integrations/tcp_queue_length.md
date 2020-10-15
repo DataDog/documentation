@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,7 +16,7 @@ git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length
 integration_title: TCP Queue Length
-is_public: true
+is_public: false
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

@@ -4,12 +4,6 @@ kind: documentation
 beta: true
 ---
 
-{{< site-region region="eu" >}}
-
-<div class="alert alert-warning"> The EU region is not yet available for Error Tracking. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
-
-{{< /site-region >}}
-
 {{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
 
 ## Explore your issues
@@ -18,12 +12,12 @@ The Error Tracking Explorer allows you to explore all your different issues. An 
 
 Each item listed in the Explorer is an issue and contains high-level information about the error:
 
-- The error type and the error message
-- The path to the file in which underlying errors are fired
-- Important information about the issue’s lifetime:
-  - When it was first and last seen
-  - Graph of occurrences over time
-  - Number of occurrences in the selected time period
+-   The error type and the error message
+-   The path to the file in which underlying errors are fired
+-   Important information about the issue’s lifetime:
+    -   When it was first and last seen
+    -   Graph of occurrences over time
+    -   Number of occurrences in the selected time period
 
 ### Time range
 
@@ -49,7 +43,17 @@ The high-level details you need when troubleshooting an issue can be found in th
 
 The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
 
-- The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
-- Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
-- Information about the user, such as their browser or their OS with the related versions that were used when the error occurred.
+-   The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
+-   Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
+-   Information about the user, such as their browser or their OS with the related versions that were used when the error occurred.
 
+## Get alerted on new errors
+
+Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking generates a [Datadog event][1] whenever an issue is first seen in a given service and environment and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors][2].
+
+Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
+
+{{< img src="real_user_monitoring/error_tracking/export_search_query_to_monitor.gif" alt="Export to monitor in Error Tracking"  >}}
+
+[1]: /events
+[2]: /monitors/monitor_types/event/

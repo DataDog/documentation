@@ -5,6 +5,13 @@ import yaml
 
 from os.path import basename
 
+TEMPLATE = """\
+---
+{front_matter}
+---
+{content}
+"""
+
 
 def pull_and_push_file(content, content_dir):
     """
@@ -19,11 +26,10 @@ def pull_and_push_file(content, content_dir):
         # If options include front params, then the H1 title of the source file is striped
         # and the options front params are inlined
         if "front_matters" in content["options"]:
-            front_matters = "---\n" + \
-                yaml.dump(content["options"]["front_matters"],
-                          default_flow_style=False) + "---\n"
-            file_content = re.sub(
-                r'^(#{1}).*', front_matters, file_content, count=1)
+            front_matter = yaml.dump(content["options"]["front_matters"], default_flow_style=False).strip()
+            # remove h1 if exists
+            file_content = re.sub(re.compile(r"^#{1}(?!#)(.*)", re.MULTILINE), "", file_content, count=1)
+            file_content = TEMPLATE.format(front_matter=front_matter, content=file_content.strip())
     with open(
         "{}{}{}".format(
             content_dir,

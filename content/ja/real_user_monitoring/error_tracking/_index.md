@@ -58,7 +58,7 @@ Datadog では、ソースマップを安全にアップロードして、スタ
 
 CLI パラメーターの詳細については、[公式 Github リポジトリ][5]を参照してください。
 
-<div class="alert alert-warning"><strong>関連ソースコードを直接含むソースマップ</strong>を作成するには、Javascript bundler を構成する必要があります。アップロードする前に、ソースマップ内の <code>sourceContent</code> 属性が空でないことを確認してください。</div>
+<div class="alert alert-warning"><strong>関連ソースコードを直接含むソースマップ</strong>を作成するには、Javascript bundler を構成する必要があります。アップロードする前に、ソースマップ内の <code>sourcesContent</code> 属性が空でないことを確認してください。</div>
 
 ## その他の参考資料
 

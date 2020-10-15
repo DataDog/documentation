@@ -43,6 +43,8 @@ Additionally, the installer adds the user to the following groups:
 
 **Note**: These options are honored even in a non-domain environment, if the user wishes to supply a username/password to use rather than have the installer generate one.
 
+**Note**: The `<USERNAME>` must be 20 characters or less in order to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
 
 **Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
@@ -70,18 +72,18 @@ For example, if the directory check is monitoring a directory that has specific 
 The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, i.e. if:
 
 1. You’re using a JMX-based integration, i.e. one of the following integrations:
-   * [ActiveMQ][1]
-   * [ActiveMQ_XML][2]
-   * [Cassandra][3]
-   * [JMX][4]
-   * [Presto][5]
-   * [Solr][6]
-   * [Tomcat][7]
-   * [Kafka][8]
+   * [ActiveMQ][2]
+   * [ActiveMQ_XML][3]
+   * [Cassandra][4]
+   * [JMX][5]
+   * [Presto][6]
+   * [Solr][7]
+   * [Tomcat][8]
+   * [Kafka][9]
 
 2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][4].
+If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, refer to the [JMX documentation][5].
 
 ### Process check
 
@@ -101,7 +103,7 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 
 ## Security Logs channel
 
-If you are using the [Datadog- Win 32 event log Integration][9], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
+If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
 
 1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
 2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
@@ -109,12 +111,13 @@ If you are using the [Datadog- Win 32 event log Integration][9], the Datadog use
 4. Click *Add* and enter `ddagentuser` -> *Check Names*.
 5. Click *OK* and *Apply*.
 
-[1]: /integrations/activemq/
-[2]: /integrations/activemq/#activemq-xml-integration
-[3]: /integrations/cassandra/
-[4]: /integrations/java/
-[5]: /integrations/presto/
-[6]: /integrations/solr/
-[7]: /integrations/tomcat/
-[8]: /integrations/kafka/
-[9]: /integrations/win32_event_log/
+[1]: https://docs.microsoft.com/en-us/windows/win32/adschema/a-samaccountname?redirectedfrom=MSDN
+[2]: /integrations/activemq/
+[3]: /integrations/activemq/#activemq-xml-integration
+[4]: /integrations/cassandra/
+[5]: /integrations/java/
+[6]: /integrations/presto/
+[7]: /integrations/solr/
+[8]: /integrations/tomcat/
+[9]: /integrations/kafka/
+[10]: /integrations/win32_event_log/

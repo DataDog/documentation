@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    aqua: assets/dashboards/overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -74,7 +75,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -137,7 +138,7 @@ Aqua 監査ログを収集するには、以下の手順に従います。
 {{< get-metrics-from-git "aqua" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 **aqua.can_connect**:
 

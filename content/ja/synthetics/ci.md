@@ -3,12 +3,9 @@ title: Synthetic CI/CD テスト
 kind: ドキュメント
 description: CI/CD パイプラインでオンデマンドの Synthetics テストを実行します。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
     tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: /synthetics/
-    tag: ドキュメント
-    text: チェックを管理する
+    text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
   - link: /synthetics/browser_tests/
     tag: ドキュメント
     text: ブラウザテストの設定
@@ -179,7 +176,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}

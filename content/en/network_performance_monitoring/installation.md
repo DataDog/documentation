@@ -105,7 +105,7 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     semodule -v -i system_probe_policy.pp
     ```
 
-4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `system_probe_policy.te`:
+4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `/opt/datadog-agent`:
 
     ```shell
     semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe

@@ -49,11 +49,15 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-App Analytics は、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。[`WithAnalytics`][1] のトレーサー開始オプションを使用することで、すべての **web** インテグレーションに対してグローバルに有効にすることができます。例:
+App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
 
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
+* [`WithAnalytics`][1] トレーサー開始オプション。例:
+
+  ```go
+  tracer.Start(tracer.WithAnalytics(true))
+  ```
+
+* バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{% /tab %}}
@@ -153,7 +157,7 @@ Nginx で App Analytics を有効にするには
 
 **注**: インテグレーションによっては、そのインテグレーション固有のトレーサーが実装されているため非標準の方法で設定する必要があります。詳細については、[App Analytics][1] のライブラリドキュメントを参照してください。
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -352,7 +356,7 @@ class MyClass {
     final Span span = GlobalTracer.get().activeSpan();
     // @Trace アノテーションにより送信されるスパン。
     if (span != null) {
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }

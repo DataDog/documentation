@@ -29,7 +29,8 @@ Les métriques envoyées peuvent être des types suivants :
 - [COUNT](?tab=count#metric-types)
 - [RATE](?tab=rate#metric-types)
 - [GAUGE](?tab=gauge#metric-types)
-- [HISTOGRAM](?tab=hisogram#metric-types)
+- [SET][4]
+- [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
 Ces différents types de métriques envoyés correspondent à quatre types de métriques stockés dans l'application Web Datadog :
@@ -39,17 +40,17 @@ Ces différents types de métriques envoyés correspondent à quatre types de m�
 - GAUGE
 - DISTRIBUTION
 
-**Remarque** : si vous envoyez une métrique sans aucun type à Datadog, celle-ci figurera sous le type `Other` dans Datadog. Pour remplacer ce type par une autre valeur, vous devez envoyer un type de métrique initial.
+**Remarque** : si vous envoyez une métrique sans aucun type à Datadog, celle-ci figurera sous le type `Not Assigned` dans Datadog. Pour remplacer ce type par une autre valeur, vous devez envoyer un type de métrique initial.
 
 ## Type envoyé et type stocké
 
 Les métriques sont envoyées à Datadog à l'aide des trois ressources suivantes :
 
-- [Check de l'Agent][4]
-- [DogStatsD][5]
-- [API HTTP de Datadog][6]
+- [Check de l'Agent][5]
+- [DogStatsD][6]
+- [API HTTP de Datadog][7]
 
-La plupart des données transmises à Datadog sont envoyées par l'Agent, que ce soit via un check d'Agent ou via DogStatsD. Pour ces méthodes d'envoi, le type d'une métrique détermine la méthode d'agrégation des différentes valeurs recueillies par l'Agent lors de [l'intervalle de transmission][7]. L'Agent combine ces valeurs au sein d'une unique valeur représentative de la métrique pour cet intervalle. Un timestamp est ajouté à la valeur combinée avant de la stocker dans Datadog.
+La plupart des données transmises à Datadog sont envoyées par l'Agent, que ce soit via un check d'Agent ou via DogStatsD. Pour ces méthodes d'envoi, le type d'une métrique détermine la méthode d'agrégation des différentes valeurs recueillies par l'Agent lors de [l'intervalle de transmission][8]. L'Agent combine ces valeurs au sein d'une unique valeur représentative de la métrique pour cet intervalle. Un timestamp est ajouté à la valeur combinée avant de la stocker dans Datadog.
 
 À l'exception des métriques de distribution, les données envoyées directement à l'API Datadog ne sont pas agrégées par Datadog. Les valeurs brutes transmises sont stockées telles quelles.
 
@@ -113,13 +114,13 @@ Contrairement aux métriques HISTOGRAM, qui effectuent l'agrégation au niveau d
 
 Si vous envoyez `X` valeurs pour la métrique DISTRIBUTION `<NOM_MÉTRIQUE>` durant un intervalle donné, par défaut, vos requêtes peuvent porter sur les agrégations suivantes :
 
-| Agrégation           | Description                                                                                                                                            | Type stocké dans Datadog |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| `avg:<NOM_MÉTRIQUE>`   | Représente la moyenne des `X` valeurs envoyées durant l'intervalle.                                                                                       | GAUGE               |
-| `count:<NOM_MÉTRIQUE>` | Représente le nombre de points envoyés durant l'intervalle. Ce nombre `X` est ensuite envoyé par l'Agent en tant que RATE, ce qui signifie que la valeur affichée dans Datadog est `X/intervalle`.  | RATE                |
-| `max:<NOM_MÉTRIQUE>`   | Représente la valeur maximale des `X` valeurs envoyées durant l'intervalle.                                                                            | GAUGE               |
-| `min:<NOM_MÉTRIQUE>`   | Représente la valeur minimale des `X` valeurs envoyées durant l'intervalle.                                                                                   | GAUGE               |
-| `sum:<NOM_MÉTRIQUE>`   | Représente la somme de l'ensemble des `X` valeurs envoyées durant l'intervalle.                                                                                         | GAUGE               |
+| Agrégation           | Description                                                                                              | Type stocké dans Datadog |
+| --------------------- | -------------------------------------------------------------------------------------------------------- | ------------------- |
+| `avg:<NOM_MÉTRIQUE>`   | Représente la moyenne des `X` valeurs envoyées durant l'intervalle.                                         | GAUGE               |
+| `count:<NOM_MÉTRIQUE>` | Représente le nombre de points envoyés durant l'intervalle. Ce nombre `X` est ensuite envoyé par l'Agent en tant que COUNT. | COUNT               |
+| `max:<NOM_MÉTRIQUE>`   | Représente la valeur maximale des `X` valeurs envoyées durant l'intervalle.                              | GAUGE               |
+| `min:<NOM_MÉTRIQUE>`   | Représente la valeur minimale des `X` valeurs envoyées durant l'intervalle.                                     | GAUGE               |
+| `sum:<NOM_MÉTRIQUE>`   | Représente la somme de l'ensemble des `X` valeurs envoyées durant l'intervalle.                                           | COUNT               |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -168,10 +169,10 @@ Imaginons que vous envoyiez la métrique DISTRIBUTION `request.response_time.dis
 | Nom de la métrique                                | Valeur  | Type stocké dans Datadog |
 | ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
-| `count:request.response_time.distribution` | `11`   | RATE                |
+| `count:request.response_time.distribution` | `11`   | COUNT               |
 | `max:request.response_time.distribution`   | `3`    | GAUGE               |
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
-| `sum:request.response_time.distribution`   | `19`   | GAUGE               |
+| `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
 #### Calcul des agrégations par centile
 
@@ -221,7 +222,7 @@ Envoyez vos métriques de type COUNT depuis l'une des sources suivantes :
 
 [1]: /fr/developers/metrics/agent_metrics_submission/?tab=count#count
 [2]: /fr/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[3]: /fr/api/?lang=python#post-timeseries-points
+[3]: /fr/api/v1/metrics/#submit-metrics
 [4]: /fr/developers/metrics/dogstatsd_metrics_submission/#count
 {{% /tab %}}
 {{% tab "RATE" %}}
@@ -237,7 +238,7 @@ Envoyez vos métriques de type RATE depuis l'une des sources suivantes :
 
 
 [1]: /fr/developers/metrics/agent_metrics_submission/?tab=rate
-[2]: /fr/api/?lang=python#post-timeseries-points
+[2]: /fr/api/v1/metrics/#submit-metrics
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -251,7 +252,7 @@ Envoyez vos métriques de type GAUGE depuis l'une des sources suivantes :
 
 
 [1]: /fr/developers/metrics/agent_metrics_submission/?tab=gauge
-[2]: /fr/api/?lang=python#post-timeseries-points
+[2]: /fr/api/v1/metrics/#submit-metrics
 [3]: /fr/developers/metrics/dogstatsd_metrics_submission/#gauge
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
@@ -275,7 +276,7 @@ Envoyez vos métriques de type DISTRIBUTION depuis la source suivante :
 
 | Source de l'envoi | Méthode d'envoi (python) | Type envoyé | Types stockés dans Datadog |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, RATE          |
+| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
 
 
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission/#distribution
@@ -288,23 +289,21 @@ Vous trouverez ci-dessous une synthèse de l'ensemble des sources et des méthod
 
 | Source de l'envoi | Méthode d'envoi (python)           | Type envoyé | Types stockés dans Datadog |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
-| [Check de l'Agent][8]  | `self.count(...)`                    | COUNT           | COUNT                |
-| [Check de l'Agent][9]  | `self.monotonic_count(...)`          | COUNT           | COUNT                |
-| [Check de l'Agent][10] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
-| [Check de l'Agent][11] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
-| [Check de l'Agent][12] | `self.rate(...)`                     | RATE            | GAUGE                |
-| [Check de l'Agent][13] | `self.set(...)`                      | SET             | GAUGE                |
-| [API][14]         | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
-| [API][14]         | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
-| [API][14]         | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
-| [DogStatsD][15]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
-| [DogStatsD][16]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, RATE          |
-| [DogStatsD][17]   | `dog.count(...)`                     | COUNT           | RATE                 |
-| [DogStatsD][17]   | `dog.increment(...)`                 | COUNT           | RATE                 |
-| [DogStatsD][17]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
-| [DogStatsD][18]   | `dog.set(...)`                       | SET             | GAUGE                |
-| [DogStatsD][19]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
-
+| [Check de l'Agent][9]  | `self.count(...)`                    | COUNT           | COUNT                |
+| [Check de l'Agent][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
+| [Check de l'Agent][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
+| [Check de l'Agent][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
+| [Check de l'Agent][13] | `self.rate(...)`                     | RATE            | GAUGE                |
+| [API][7]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
+| [API][7]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
+| [API][7]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
+| [DogStatsD][14]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
+| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT         |
+| [DogStatsD][16]   | `dog.count(...)`                     | COUNT           | RATE                 |
+| [DogStatsD][16]   | `dog.increment(...)`                 | COUNT           | RATE                 |
+| [DogStatsD][16]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
+| [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
+| [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -312,19 +311,18 @@ Vous trouverez ci-dessous une synthèse de l'ensemble des sources et des méthod
 [1]: /fr/developers/metrics/type_modifiers/
 [2]: /fr/dashboards/functions/
 [3]: /fr/metrics/summary/
-[4]: /fr/developers/metrics/agent_metrics_submission/
-[5]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[6]: /fr/api/#post-timeseries-points
-[7]: /fr/developers/dogstatsd/#how-it-works
-[8]: /fr/developers/metrics/agent_metrics_submission/?tab=count#count
-[9]: /fr/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[10]: /fr/developers/metrics/agent_metrics_submission/?tab=gauge
-[11]: /fr/developers/metrics/agent_metrics_submission/?tab=histogram
-[12]: /fr/developers/metrics/agent_metrics_submission/?tab=rate
-[13]: /fr/developers/integrations
-[14]: /fr/api/?lang=python#post-timeseries-points
-[15]: /fr/developers/metrics/dogstatsd_metrics_submission/#gauge
-[16]: /fr/developers/metrics/dogstatsd_metrics_submission/#distribution
-[17]: /fr/developers/metrics/dogstatsd_metrics_submission/#count
-[18]: /fr/developers/metrics/dogstatsd_metrics_submission/#set
-[19]: /fr/developers/metrics/dogstatsd_metrics_submission/#histogram
+[4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
+[5]: /fr/developers/metrics/agent_metrics_submission/
+[6]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[7]: /fr/api/v1/metrics/#submit-metrics
+[8]: /fr/developers/dogstatsd/#how-it-works
+[9]: /fr/developers/metrics/agent_metrics_submission/?tab=count#count
+[10]: /fr/developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[11]: /fr/developers/metrics/agent_metrics_submission/?tab=gauge
+[12]: /fr/developers/metrics/agent_metrics_submission/?tab=histogram
+[13]: /fr/developers/metrics/agent_metrics_submission/?tab=rate
+[14]: /fr/developers/metrics/dogstatsd_metrics_submission/#gauge
+[15]: /fr/developers/metrics/dogstatsd_metrics_submission/#distribution
+[16]: /fr/developers/metrics/dogstatsd_metrics_submission/#count
+[17]: /fr/developers/metrics/dogstatsd_metrics_submission/#set
+[18]: /fr/developers/metrics/dogstatsd_metrics_submission/#histogram

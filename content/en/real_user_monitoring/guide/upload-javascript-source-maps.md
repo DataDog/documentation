@@ -70,8 +70,11 @@ After building your application, bundlers generate a directory, most of the time
 
 The best way to upload source maps is to add an extra-step in your CI pipeline and to run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and its subdirectories to automatically upload the source maps with their related minified files. The flow is the following:
 
+{{< tabs >}}
+{{% tab "US" %}}
+
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
-2. [Create a new and dedicated Datadog API key][2] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
 ```bash
 datadog-ci sourcemaps upload /path/to/dist \
@@ -80,13 +83,34 @@ datadog-ci sourcemaps upload /path/to/dist \
 	--minified-path-prefix=https://hostname.com/static/js
 ```
 
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "EU" %}}
+
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+3. Configure the CLI to upload files to the EU region by exporting two additonal environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
+4. Run the following command:
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
+
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{< /tabs >}}
+
 **Note**: The CLI has been optimized to upload as many source maps as you need in a very short amount of time (typically a few seconds) to minimize the overhead on your CI's performance.
 
 By running this command against our example `dist` directory (see previous section), Datadog will expect your server or your CDN to deliver the javascript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min`.js.  When an error occurs in a session of one of your users, the RUM SDK instantaneously collects it. Whenever the given error originated in a file that were downloaded from one of those urls and is also tagged with `version:v35.2395005` and `service:my-service`, the related source map will be used to deobfuscate the stack trace (in this case, the `javascript.464388.js.map` file).
 
 ## Troubleshoot errors with ease
 
-A minified stack trace is not helpful as you don't have access to the file path and the line number. It's hard to know where something is happening in your code base. In addition, the code snippet is still minified (one long line of transformed code) which makes the troubleshooting process even harder. See below an example of an unminified stack trace:
+A minified stack trace is not helpful as you don't have access to the file path and the line number. It's hard to know where something is happening in your code base. In addition, the code snippet is still minified (one long line of transformed code) which makes the troubleshooting process even harder. See below an example of an minified stack trace:
 
 {{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace"  >}}
 
@@ -99,4 +123,3 @@ On the contrary, an unminified stack trace gives you all the context you need fo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://app.datadoghq.com/account/settings#api

@@ -34,7 +34,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 
 ## Monitors
 
-{{< img src="mobile/monitors_doc2.png" alt="monitor page">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
@@ -42,17 +42,52 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 ## Dashboards
 
-{{< img src="mobile/dashboards_doc.png" alt="dashboard page">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5]. 
 
-<!--- ## Quick Actions  --->
+## Quick Actions
 
-<!--- {{< img src="mobile/quick_actions.png" alt="dashboard page">}}  --->
+{{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-<!--- Long-press on your Datadog app icon to surface a quick-action sheet of your top dashboards. On iOS, it shows your top five “Frequently Viewed By Me” preset dashboards. On Android, it shows your top five viewed dashboards on mobile.  --->
+Long-press on the app icon to surface a quick-action sheet of your top five [Frequently Viewed By Me][10] dashboards for iOS (measured by view count and recency) and your five most opened dashboards on mobile for Android. Press on a result to open the dashboard in-app.
+
+## Search from Home Screen
+
+{{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
+
+**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the “Search in App” button to open the search query in the in-app Dashboard List page.
+
+## Shortcuts and Siri Suggestions
+
+**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
+
+**iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an “Open AWS Overview Dashboard” shortcut, open the AWS Overview Dashboard in your mobile app at least once.
+
+With the shortcut, you can access your dashboards and monitors through three key actions:
+
+- Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
+- Siri Voice: say your shortcut name, such as “Open AWS Overview”, and Siri opens your dashboard in-app.
+- Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
+
+{{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+
+For more information on Siri Shortcuts and Suggestions, refer to the [Apple Siri Documentation][11].
+
+## Handoff
+
+**iOS Only**: Use Apple Handoff to continue your task across Apple devices. While in use, the icon of the Datadog mobile app appears on your Mac at the left end of the Dock. Click on the icon to open your current dashboard or monitor on your Mac.
+
+For Handoff to work, each device must:
+
+- Be signed in to iCloud with the same Apple ID
+- Have Bluetooth enabled
+- Have Wi-Fi enabled
+- Have Handoff enabled
+
+For more information on Handoff, refer to the [Apple Handoff Documentation][12].
 
 ## Account
 
@@ -60,7 +95,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][10]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
+For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel. 
 
 ### Further Reading
 
@@ -75,6 +110,9 @@ For help with troubleshooting, [contact Datadog support][10]. You can also send 
 [7]: https://app.datadoghq.com/monitors
 [8]: /monitors/monitor_types/
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /help/
-[11]: https://chat.datadoghq.com/
-[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[10]: https://app.datadoghq.com/dashboard/lists/preset/5
+[11]: https://support.apple.com/en-us/HT209055
+[12]: https://support.apple.com/en-us/HT209455
+[13]: /help/
+[14]: https://chat.datadoghq.com/
+[15]: https://datadoghq.slack.com/archives/C0114D5EHNG

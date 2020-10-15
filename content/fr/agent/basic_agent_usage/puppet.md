@@ -4,11 +4,7 @@ dependencies:
 kind: documentation
 title: Puppet
 ---
-
-
 Ce module installe l'Agent Datadog et envoie les rapports Puppet à Datadog.
-
-## Configuration
 
 ### Prérequis
 
@@ -20,14 +16,6 @@ Installez le module Puppet [agent_datadog][1] dans le chemin du module de votre 
 
 ```shell
 puppet module install datadog-datadog_agent
-```
-
-**Remarque** : pour les versions de CentOS/RHEL antérieures à 7.0 et les versions d'Ubuntu antérieures à 15.04, indiquez le prestataire de services `upstart` :
-
-```conf
-class{ 'datadog_agent':
-    service_provider => 'upstart'
-  }
 ```
 
 #### Mise à niveau
@@ -45,68 +33,65 @@ class{ 'datadog_agent':
 Une fois le module `datadog_agent` installé sur votre `puppetserver` ou `puppetmaster` (ou sur un host sans master), suivez les étapes de configuration ci-dessous :
 
 1. Obtenez votre [clé d'API Datadog][2].
-2. Indiquez le module pour installer l'Agent Datadog sur vos nœuds.
+2. Ajoutez la classe Datadog à vos manifestes de nœud (ex. : `/etc/puppetlabs/code/environments/production/manifests/site.pp`).
 
-   ```conf
-   include datadog_agent
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+    }
+    ```
 
-    Vous pouvez également assigner ce module à l'aide de la classe paramétrable de style Puppet :
+    Si vous utilisez un site Datadog différent de celui par défaut (datadoghq.com), définissez-le ici également :
 
-   ```conf
-   class { 'datadog_agent':
-       api_key => "<YOUR_DD_API_KEY>",
-   }
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+        datadog_site => "datadoghq.eu",
+    }
+    ```
 
-3. Sur votre `puppetserver`, activez l'envoi de données :
+    Pour les versions de CentOS/RHEL antérieures à 7.0 et les versions d'Ubuntu antérieures à 15.04, définissez le prestataire de services sur `upstart` :
 
-   ```conf
-   class { 'datadog_agent':
-       api_key            => "<YOUR_DD_API_KEY>",
-       puppet_run_reports => true,
-   }
-   ```
+    ```conf
+    class { 'datadog_agent':
+        api_key => "<YOUR_DD_API_KEY>",
+        service_provider => 'upstart'
+    }
+    ```
 
-    - Pour envoyer des données, le gem [dogapi][3] doit être installé sur votre master Puppet. Pour ce faire, exécutez l'Agent Puppet sur votre master avec cette configuration. Vous pouvez également effectuer une installation manuelle avec `gem`. Vous devrez peut-être redémarrer votre service `puppetserver` après avoir installé le gem `dogapi`.
-    - Le paramètre `puppetserver_gem` est défini comme une dépendance de module. Il est installé automatiquement en même temps que le module.
+    Consultez la section [Variables de configuration](#variables-de-configuration) pour obtenir la liste des arguments utilisables ici.
 
-4. (Facultatif) Activer le tagging de rapports avec des faits
-    Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits. Par exemple, `["virtual","trusted.extensions.pp_role","operatingsystem"]` donne trois tags distincts par événement de rapport.
+4. (Facultatif) Ajoutez les intégrations à utiliser avec l'Agent. Dans l'exemple suivant, l'intégration Mongo est installée :
 
-    REMARQUE : la modification de ces paramètres nécessite un redémarrage de pe-puppetserver (ou de puppetserver) pour lancer une relecture du processeur de rapports. Assurez-vous que les changements sont déployés avant de redémarrer le(s) service(s).
+    ```conf
+    class { 'datadog_agent::integrations::mongo':
+        # integration arguments go here
+    }
+    ```
 
-    Conseils :
-    - Utilisez l'index des points pour spécifier un fait cible ; sinon, l'ensemble des données de fait devient la valeur sous forme de chaîne (pas très utile)
-    - Ne dupliquez pas les données de surveillance courantes comme le nom de l'host, l'uptime, la mémoire, etc.
-    - Coordonnez les faits essentiels comme le rôle, le propriétaire, le modèle, le centre de données, etc. pour établir des corrélations pertinentes avec les mêmes tags à partir de métriques
+    Référez-vous aux [commentaires dans le code][6] pour obtenir la liste de tous les arguments disponibles pour une intégration donnée.
 
+    Si une intégration ne dispose pas d'un [manifeste avec une classe dédiée][7], vous pouvez toujours ajouter une configuration pour celle-ci. Voici un exemple pour le check `ntp` :
 
-5. (Facultatif) Ajoutez les intégrations à utiliser avec l'Agent, par exemple :
+    ```conf
+    class { 'datadog_agent':
+        api_key      => "<YOUR_DD_API_KEY>",
+        integrations => {
+            "ntp" => {
+                init_config => {},
+                instances => [{
+                    offset_threshold => 30,
+                }],
+            },
+        },
+    }
+    ```
 
-   ```conf
-   include 'datadog_agent::integrations::mongo'
-   ```
+5. (Facultatif) Pour recueillir des métriques et des événements liés au service Puppet lui-même, consultez la section [Rapports](#rapports).
 
-    Si une intégration ne dispose pas d'un [manifeste avec une classe dédiée][6], vous pouvez toujours ajouter une configuration pour celle-ci. Voici un exemple pour le check `ntp` :
+### Mettre à jour une intégration
 
-   ```conf
-   class { 'datadog_agent':
-       api_key      => "<YOUR_DD_API_KEY>",
-       integrations => {
-           "ntp" => {
-               init_config => {},
-               instances => [{
-                   offset_threshold => 30,
-               }],
-           },
-       },
-   }
-   ```
-
-#### Versions d'intégration
-
-Pour installer et imposer des versions d'intégration spécifiques, indiquez une intégration et un numéro de version à l'aide de `datadog_agent::install_integration`. La commande `datadog-agent integration` est alors utilisée pour s'assurer qu'une intégration spécifique est installée ou désinstallée. Exemple :
+Pour installer et imposer une version spécifique d'une intégration, utilisez `datadog_agent::install_integration`. La commande `datadog-agent integration` est alors appelée pour s'assurer qu'une intégration spécifique est installée ou désinstallée. Exemple :
 
 ```conf
 datadog_agent::install_integration { "mongo-1.9":
@@ -117,114 +102,81 @@ datadog_agent::install_integration { "mongo-1.9":
 }
 ```
 
-`ensure` dispose de deux options :
+L'argument `ensure` accepte deux valeurs :
 
 - `present` (valeur par défaut)
 - `absent` (supprime une version préalablement imposée d'une intégration)
 
-Pour installer une intégration tierce, définissez le paramètre `third_party` sur `true`.
+Pour installer une intégration tierce (par exemple depuis le marketplace), définissez l'argument `third_party` sur `true`.
 
-### Envoi de données
+Notez qu'il est possible d'installer une version plus ancienne d'une intégration que cette intégrée à l'Agent.
 
-Assurez-vous que le gem [dogapi][3] est disponible sur votre système.
+### Rapports
 
-Pour activer l'envoi de données sur les modifications vers votre flux Datadog, activez le processeur de rapports sur votre master Puppet et l'envoi de données pour vos clients. Les clients renvoient au master un rapport d'exécution après chaque vérification.
+Pour activer l'envoi de rapports sur les exécutions Puppet vers votre flux Datadog, activez le processeur de rapports sur votre master Puppet et l'envoi de rapports pour vos clients. Les clients renvoient au master un rapport d'exécution après chaque vérification.
 
-Définissez l'option `puppet_run_reports` sur true dans le manifeste de configuration des nœuds pour votre master :
+1. Installez le gem [dogapi][3] sur votre système.
 
-```ruby
-class { "datadog-agent":
-    api_key => "<VOTRE_CLÉ_API_DD>",
-    puppet_run_reports => true
-    # ...
-}
-```
+2. Définissez l'option `puppet_run_reports` sur true dans le manifeste de configuration des nœuds pour votre master :
 
-Le fichier de configuration de Puppet se trouve dans `/etc/puppetlabs/puppet/puppet.conf`.
+    ```ruby
+    class { "datadog-agent":
+        api_key => "<YOUR_DD_API_KEY>",
+        puppet_run_reports => true
+        # ...
+    }
+    ```
 
-
-Ajoutez les options de configuration suivantes à l'emplacement approprié :
-
-```ini
-[main]
-# Aucune modification nécessaire pour cette section
-# ...
-
-[master]
-# Activer l'envoi de données à Datadog
-reports=datadog_reports
-# Si vous utilisez d'autres rapports, ajoutez datadog_reports à la fin,
-# par exemple : rapports=store,log,datadog_reports
-# ...
-
-[agent]
-# ...
-pluginsync=true
-report=true
-```
-
-Sur tous vos nœuds client Puppet, ajoutez ce qui suit au même emplacement :
-
-```ini
-[agent]
-# ...
-report=true
-```
-
-#### Dépannage
-
-Si vous constatez l'erreur suivante, assurez-vous que `reports=datadog_reports` est défini dans `[master]`, et non dans `[main]`.
-
-```text
-err: Could not send report:
-Error 400 on SERVER: Could not autoload datadog_reports:
-Class Datadog_reports is already defined in Puppet::Reports
-```
-
-### Étapes détaillées
-
-Les instructions suivantes décrivent les modifications minimums à apporter pour commencer à utiliser Puppet.
-
-1. Modifiez `/etc/puppetlabs/puppet/puppet.conf` de façon à ajouter l'Agent Puppet :
+3. Ajoutez ces options de configuration à la configuration du master Puppet (ex. : `/etc/puppetlabs/puppet/puppet.conf`) :
 
     ```ini
+    [main]
+    # No modification needed to this section
+    # ...
+
     [master]
-    report = true
-    reports = datadog_reports
-    pluginsync = true
+    # Enable reporting to Datadog
+    reports=datadog_reports
+    # If you use other reports, add datadog_reports to the end,
+    # for example: reports=store,log,datadog_reports
+    # ...
 
     [agent]
-    report = true
-    pluginsync = true
+    # ...
+    report=true
     ```
 
+4. Sur tous vos nœuds client Puppet, ajoutez ce qui suit au même emplacement :
 
-2. Modifiez `/etc/puppetlabs/code/environments/production/manifests/10_nodes.pp` de façon à configurer votre Agent :
-
-    ```conf
-    node "default" {
-        class { "datadog_agent":
-            api_key => "<YOUR_DD_API_KEY>",
-        }
-    }
-    node "puppetmaster" {
-        class { "datadog_agent":
-            api_key            => "<YOUR_DD_API_KEY>",
-            puppet_run_reports => true
-        }
-    }
+    ```ini
+    [agent]
+    # ...
+    report=true
     ```
 
-     **Remarque** : pour les anciennes versions de Puppet, modifiez `/etc/puppet/manifests/nodes.pp`.
+5. (Facultatif) Activez le tagging des rapports avec des faits :
 
-3. Exécutez l'Agent Puppet :
+    Vous pouvez ajouter des tags aux rapports qui sont envoyés à Datadog sous la forme d'événements. Ces tags peuvent provenir de faits Puppet propres au nœud sur lequel porte le rapport. Ils doivent être individuels et ne pas comprendre de faits structurés (hashs, tableaux, etc.) pour garantir la lisibilité. Pour activer le tagging, définissez le paramètre `datadog_agent::reports::report_fact_tags` sur la valeur de tableau des faits. Par exemple, `["virtual","trusted.extensions.pp_role","operatingsystem"]` donne trois tags distincts par événement de rapport.
+
+    Remarque : la modification de ces paramètres nécessite un redémarrage de pe-puppetserver (ou de puppetserver) pour lancer une relecture du processeur de rapports. Assurez-vous que les changements sont déployés avant de redémarrer le(s) service(s).
+
+    Conseils :
+    - Utilisez une notation par points pour spécifier un fait cible ; sinon, l'ensemble des données de fait devient la valeur sous forme de chaîne (peu utile)
+    - Ne dupliquez pas les données de surveillance courantes comme le nom de l'host, l'uptime, la mémoire, etc.
+    - Coordonnez les faits essentiels comme le rôle, le propriétaire, le modèle, le centre de données, etc. pour établir des corrélations pertinentes avec les mêmes tags à partir de métriques
+
+6. Vérifiez que vos données Puppet se trouvent dans Datadog en recherchant `sources:puppet` dans le [flux d'événements][5].
+
+### Dépannage
+
+Vous pouvez exécuter l'Agent Puppet manuellement pour vérifier la présence d'erreurs dans la sortie :
 
     ```shell
     sudo systemctl restart puppetserver
     sudo puppet agent --onetime --no-daemonize --no-splay --verbose
     ```
 
-     Exemple de réponse :
+     Example response:
 
     ```text
     info: Retrieving plugin
@@ -233,9 +185,15 @@ Les instructions suivantes décrivent les modifications minimums à apporter pou
     notice: Finished catalog run in 0.81 seconds
     ```
 
-4. Vérifiez que vos données Puppet se trouvent dans Datadog en recherchant `sources:puppet` dans le [flux d'événements][5].
+Si vous constatez l'erreur suivante, assurez-vous que `reports=datadog_reports` est défini dans `[master]`, et non dans `[main]`.
 
-## Puppet sans master
+    ```text
+    err: Could not send report:
+    Error 400 on SERVER: Could not autoload datadog_reports:
+    Class Datadog_reports is already defined in Puppet::Reports
+    ```
+
+### Puppet sans master
 
 1. Le module Datadog et ses dépendances doivent être installés sur tous les nœuds exécutés sans master.
 2. Ajoutez ce qui suit au fichier `site.pp` de chaque nœud :
@@ -246,17 +204,10 @@ Les instructions suivantes décrivent les modifications minimums à apporter pou
     }
    ```
 
-3. Configurez les rapports dans la section `[main]` de `puppet.conf` :
-    ```conf
-    [main]
-    reports=datadog_reports
-    ```
-4. Exécutez Puppet avec une configuration sans master :
+3. Exécutez Puppet avec une configuration sans master :
     ```shell
     puppet apply --modulepath <path_to_modules> <path_to_site.pp>
     ```
-
-## Paramètres client
 
 ### Tagging des nœuds client
 
@@ -281,7 +232,7 @@ Conseils :
 
 ### Variables de configuration
 
-Ces variables peuvent être définies dans la classe `datadog_agent` afin de contrôler les paramètres de l'Agent :
+Ces variables peuvent être définies dans la classe `datadog_agent` afin de contrôler les paramètres de l'Agent. Référez-vous aux [commentaires dans le code][8] pour obtenir la liste de tous les arguments disponibles pour une intégration donnée.
 
 | nom de la variable                           | description                                                                                                                                                                                      |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -289,7 +240,7 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 | `agent_version`                         | Cette variable vous permet d'imposer l'installation d'une version mineure spécifique de l'Agent, par exemple :`1:7.16.0-1`. Pour installer la dernière version, n'indiquez aucune valeur.                                                             |
 | `collect_ec2_tags`                      | Définissez cette variable sur `true` pour recueillir les tags EC2 personnalisés d'une instance en tant que tags de l'Agent.                                                                                                                             |
 | `collect_instance_metadata`             | Définissez cette variable sur `true` pour recueillir les métadonnées EC2 personnalisées d'une instance en tant que tags de l'Agent.                                                                                                                                |
-| `datadog_site`                          | Le site Datadog auquel vous envoyez les données. Par défaut, cette variable est définie sur `datadoghq.com`. Définissez-la sur `datadoghq.eu` pour transmettre les données au site européen (Agent v6 et v7 uniquement).                                                               |
+| `datadog_site`                          | Le site Datadog auquel envoyer les données (Agents v6 et v7 uniquement). Valeur par défaut : `datadoghq.com`, peut être définie sur `datadoghq.eu` ou `us3.datadoghq.com`.                                                         |
 | `dd_url`                                | L'URL du serveur entrant de Datadog. Il est peu probable que vous deviez la modifier. Cette variable remplace `datadog_site`.                                                                                                 |
 | `host`                                  | Remplace le hostname du nœud.                                                                                                                                                                  |
 | `local_tags`                            | Un tableau de chaînes `<KEY:VALUE>` définies en tant que tags pour le nœud.                                                                                                                             |
@@ -313,4 +264,6 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 [3]: https://github.com/DataDog/dogapi-rb
 [4]: https://app.datadoghq.com/account/settings#integrations
 [5]: https://app.datadoghq.com/event/stream
-[6]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
+[6]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/integrations/mongo.pp
+[7]: https://github.com/DataDog/puppet-datadog-agent/tree/master/manifests/integrations
+[8]: https://github.com/DataDog/puppet-datadog-agent/blob/master/manifests/init.pp

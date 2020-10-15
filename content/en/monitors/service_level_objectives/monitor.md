@@ -26,7 +26,7 @@ For example, if you have a Metric Monitor that is configured to alert when user 
 
 1. Select a single monitor or,
 2. Select multiple monitors (up to 20) or,
-3. Select a single [multi-alert monitor][6] and select specific monitor groups (up to 20) to be included in SLO calculation using the **Calculate on selected groups** toggle.
+3. Select a single [multi-alert monitor][5] and select specific monitor groups (up to 20) to be included in SLO calculation using the **Calculate on selected groups** toggle.
 
 **Supported Monitor Types:**
 
@@ -74,7 +74,7 @@ In certain cases, there is an exception to the status calculation for monitor-ba
 
 By changing any of these conditions to something other than their defaults, the overall status for a monitor-based SLO using just that one Synthetic test could appear to be better than the aggregated statuses of the Synthetic test's individual groups. 
 
-For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][7].
+For more information on Synthetic test alerting conditions, visit the Synthetic Monitoring [documentation][6].
 
 ## Underlying monitor and SLO histories
 
@@ -86,7 +86,7 @@ Datadog recommends against using monitors with `Alert Recovery Threshold` and `W
 
 SLO calculations do not take into account when a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO.
 
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][5].
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][7].
 
 ## Further Reading
 
@@ -96,6 +96,6 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
-[5]: /monitors/service_level_objectives/metric/
-[6]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
-[7]: /synthetics/api_tests/?tab=httptest#alert-conditions
+[5]: /monitors/monitor_types/metric/?tab=threshold#alert-grouping
+[6]: /synthetics/api_tests/?tab=httptest#alert-conditions
+[7]: /monitors/service_level_objectives/metric/

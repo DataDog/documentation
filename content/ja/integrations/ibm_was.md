@@ -1,8 +1,10 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    IBM_WAS: assets/dashboards/overview.json
   logs:
     source: ibm_was
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

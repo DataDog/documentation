@@ -17,11 +17,9 @@ further_reading:
 
 ### Metrics
 
-Metrics collected by the Agent when using Amazon ECS on EC2 instances:
+Amazon ECS metrics collected with the Datadog Agent:
 
-{{< get-metrics-from-git "amazon_ecs" >}}
-
-Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to hostname, security-groups, and more.
+{{< get-metrics-from-git "amazon_ecs" "ecs." >}}
 
 **Note**: Metrics prefixed with `ecs.containerinsights.*` come from the [AWS CloudWatch agent][1].
 
@@ -32,10 +30,6 @@ To reduce noise, the Amazon ECS integration is automatically set up to include o
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 
 To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
-
-### Service checks
-
-- **aws.ecs.agent_connected**: Returns `CRITICAL` if the Agent cannot connect, otherwise `OK`.
 
 ## Further reading
 

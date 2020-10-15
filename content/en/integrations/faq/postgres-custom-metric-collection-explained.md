@@ -17,8 +17,25 @@ To collect custom metrics with the Postgres integration, use the `custom_queries
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | metric_prefix | Yes      | Each metric starts with the chosen prefix.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | query         | Yes      | This is the SQL to execute. It can be a simple statement or a multi-line script. All of the rows of the results are evaluated. Use the pipe if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| columns       | Yes      | This is a list representing each column ordered sequentially from left to right. The number of columns must equal the number of columns returned in the query. There are 2 required pieces of data:<br>- `name`: This is the suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>- `type`: This is the submission method (gauge, count, rate, etc.). This can also be set to 'tag' to tag each metric in the row with the name and value of the item in this column. |
-| tags          | No       | A list of tags to apply to each metric (as specified above).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| columns       | Yes      | This is a list representing each column ordered sequentially from left to right.<br><br>There are 2 required pieces of data:<br>  - **`name`**: This is the suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: This is the submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
+| tags          | No       | A list of static tags to apply to each metric.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+### Notes
+
+- At least one of the items in defined `columns` should be a metric type (`gauge`, `count`, `rate`, etc.).
+- The number of items defined in `columns` must equal the number of columns returned in the query.
+- The order in which the items in `columns` are defined must be same order returned in the query.
+
+  ```yaml
+  custom_queries:
+    - query: Select F3, F2, F1 from Table;
+      columns:
+        - {name: f3_metric_alias, type: gauge}
+        - {name: f2_tagkey      , type: tag  }
+        - {name: f1_metric_alias, type: count}
+      [...]
+  ```
+
 
 ## Example
 

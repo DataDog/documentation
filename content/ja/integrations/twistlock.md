@@ -2,9 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Twistlock: assets/dashboards/overview.json
   logs:
     source: twistlock
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

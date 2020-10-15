@@ -2,9 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Active Directory: assets/dashboards/active_directory.json
   logs:
     source: ruby
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -45,7 +47,7 @@ Agent の Active Directory チェックは [Datadog Agent][1] パッケージに
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][2]を参照してください。
 
-### 構成
+### コンフィギュレーション
 
 #### メトリクスの収集
 

@@ -2,20 +2,23 @@
 title: Datadog Lambda Library
 kind: documentation
 further_reading:
+- link: "/serverless/datadog_lambda_library/extension"
+  tag: "Documentation"
+  text: "Datadog Lambda Extension (Preview)"
 - link: "/serverless/datadog_lambda_library/python"
-  tag: "Datadog Lambda Library for Python"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Python"
 - link: "/serverless/datadog_lambda_library/nodejs"
-  tag: "Datadog Lambda Library for Node.js"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Node.js"
 - link: "/serverless/datadog_lambda_library/ruby"
-  tag: "Datadog Lambda Library for Ruby"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Ruby"
 - link: "/serverless/datadog_lambda_library/go"
-  tag: "Datadog Lambda Library for Go"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Go"
 - link: "/serverless/datadog_lambda_library/java"
-  tag: "Datadog Lambda Library for Java"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Java"
 ---
 

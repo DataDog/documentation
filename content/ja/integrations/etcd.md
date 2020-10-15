@@ -2,8 +2,12 @@
 assets:
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
-  logs: {}
+  logs:
+    source: etcd
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    etcd_overview: assets/saved_views/etcd_overview.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
@@ -55,7 +59,7 @@ Etcd のメトリクスを収集して、以下のことができます。
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

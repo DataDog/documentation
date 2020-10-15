@@ -7,6 +7,7 @@ assets:
   dashboards: {}
   logs:
     source: postgresql
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     operations: assets/saved_views/operations.json
@@ -63,7 +64,7 @@ PostgreSQL からメトリクスをリアルタイムに取得して、以下の
 
 PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
 
-### 構成
+### コンフィギュレーション
 
 #### Postgres の準備
 

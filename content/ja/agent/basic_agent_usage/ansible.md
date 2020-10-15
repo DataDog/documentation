@@ -416,7 +416,9 @@ Agent を以前のバージョンにダウングレードするには、
     datadog_api_key: "<DD_API_キー>"
 ```
 
-### EU サイト
+### サイトの設定
+
+デフォルトの `datadoghq.com` 以外のサイトを利用している場合は、`datadog_site` var を適切な URL (例: `datadoghq.eu`, `us3.datadoghq.com`) に設定してください。
 
 以下の例は、データを EU サイトに送信します。
 

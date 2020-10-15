@@ -20,6 +20,15 @@ components:
         default: 0
         format: int64
         type: integer
+    PageOffset:
+      description: Specific offset to use as the beginning of the returned page.
+      in: query
+      name: page[offset]
+      required: false
+      schema:
+        default: 0
+        format: int64
+        type: integer
     PageSize:
       description: Size for a given page.
       in: query
@@ -64,6 +73,40 @@ components:
       required: true
       schema:
         type: string
+    ServiceIDPathParameter:
+      description: The ID of the service.
+      in: path
+      name: service_id
+      required: true
+      schema:
+        type: string
+    ServiceIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        enum:
+        - users
+        type: string
+    TeamIDPathParameter:
+      description: The ID of the team.
+      in: path
+      name: team_id
+      required: true
+      schema:
+        type: string
+    TeamIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        enum:
+        - users
+        type: string
     UserID:
       description: The ID of the user.
       in: path
@@ -85,6 +128,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Concurrent Modification
+    ForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Forbidden
     NotAuthorizedResponse:
       content:
         application/json:
@@ -97,6 +146,12 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    UnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Unauthorized
   schemas:
     APIErrorResponse:
       description: API error response.
@@ -544,6 +599,15 @@ components:
             in the archive.
           example: source:nginx
           type: string
+        rehydration_tags:
+          description: An array of tags to add to rehydrated logs from an archive.
+          example:
+          - team:intake
+          - team:app
+          items:
+            description: A given tag in the `<KEY>:<VALUE>` format.
+            type: string
+          type: array
         state:
           $ref: '#/components/schemas/LogsArchiveState'
       required:
@@ -571,6 +635,15 @@ components:
             in the archive.
           example: source:nginx
           type: string
+        rehydration_tags:
+          description: An array of tags to add to rehydrated logs from an archive.
+          example:
+          - team:intake
+          - team:app
+          items:
+            description: A given tag in the `<KEY>:<VALUE>` format.
+            type: string
+          type: array
       required:
       - name
       - query
@@ -766,6 +839,51 @@ components:
       - role_name
       - account_id
       type: object
+    LogsArchiveOrder:
+      description: A ordered list of archive IDs.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsArchiveOrderDefinition'
+      type: object
+    LogsArchiveOrderAttributes:
+      description: The attributes associated with the archive order.
+      properties:
+        archive_ids:
+          description: 'An ordered array of `<ARCHIVE_ID>` strings, the order of archive
+            IDs in the array
+
+            define the overall archives order for Datadog.'
+          example:
+          - a2zcMylnM4OCHpYusxIi1g
+          - a2zcMylnM4OCHpYusxIi2g
+          - a2zcMylnM4OCHpYusxIi3g
+          items:
+            description: A given archive ID.
+            type: string
+          type: array
+      required:
+      - archive_ids
+      type: object
+    LogsArchiveOrderDefinition:
+      description: The definition of an archive order.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsArchiveOrderAttributes'
+        type:
+          $ref: '#/components/schemas/LogsArchiveOrderDefinitionType'
+      required:
+      - type
+      - attributes
+      type: object
+    LogsArchiveOrderDefinitionType:
+      default: archive_order
+      description: Type of the archive order definition.
+      enum:
+      - archive_order
+      example: archive_order
+      type: string
+      x-enum-varnames:
+      - ARCHIVE_ORDER
     LogsArchiveState:
       description: The state of the archive.
       enum:
@@ -1214,24 +1332,33 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToOrganizationData'
+      required:
+      - data
       type: object
     RelationshipToOrganizationData:
       description: Relationship to organization object.
       properties:
         id:
           description: ID of the organization.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToOrganizations:
       description: Relationship to organizations.
       properties:
         data:
           description: Relationships to organization objects.
+          example: []
           items:
             $ref: '#/components/schemas/RelationshipToOrganizationData'
           type: array
+      required:
+      - data
       type: object
     RelationshipToPermission:
       description: Relationship to a permissions object.
@@ -1287,27 +1414,33 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToUserData'
+      required:
+      - data
       type: object
     RelationshipToUserData:
       description: Relationship to user object.
       properties:
         id:
-          description: ID of the user.
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
-          default: users
-          description: Users type.
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
       type: object
     RelationshipToUsers:
       description: Relationship to users.
       properties:
         data:
           description: Relationships to user objects.
+          example: []
           items:
             $ref: '#/components/schemas/RelationshipToUserData'
           type: array
+      required:
+      - data
       type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
@@ -1537,7 +1670,10 @@ components:
           type: string
         name:
           description: Name of the role.
+          example: developers
           type: string
+      required:
+      - name
       type: object
     RoleCreateData:
       description: Data related to the creation of a role.
@@ -1548,12 +1684,16 @@ components:
           $ref: '#/components/schemas/RoleRelationships'
         type:
           $ref: '#/components/schemas/RolesType'
+      required:
+      - attributes
       type: object
     RoleCreateRequest:
       description: Create a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleCreateData'
+      required:
+      - data
       type: object
     RoleCreateResponse:
       description: Response containing information about a created role.
@@ -1618,15 +1758,22 @@ components:
           $ref: '#/components/schemas/RoleUpdateAttributes'
         id:
           description: ID of the role.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/RolesType'
+      required:
+      - attributes
+      - type
+      - id
       type: object
     RoleUpdateRequest:
       description: Update a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleUpdateData'
+      required:
+      - data
       type: object
     RoleUpdateResponse:
       description: Response containing information about an updated role.
@@ -1898,8 +2045,9 @@ components:
             type: string
           type: array
         metric:
-          description: The target field to aggregate over when using the sum or max
-            aggregations.
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
           type: string
         name:
           description: Name of the query.
@@ -1939,14 +2087,16 @@ components:
             type: string
           type: array
         metric:
-          description: The target field to aggregate over when using the sum or max
-            aggregations.
+          description: 'The target field to aggregate over when using the sum or max
+
+            aggregations.'
           type: string
         name:
           description: Name of the query.
           type: string
         query:
           description: Query to run on logs.
+          example: a < 3
           type: string
       required:
       - query
@@ -2052,8 +2202,9 @@ components:
       description: Object description of a security signal.
       properties:
         attributes:
-          description: The JSON object containing all signal attributes and their
-            associated values.
+          description: 'The object containing all signal attributes and their
+
+            associated values.'
           properties:
             attributes:
               additionalProperties: {}
@@ -2188,6 +2339,370 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    ServiceCreateAttributes:
+      description: The service's attributes for a create request.
+      properties:
+        name:
+          description: Name of the service.
+          example: an example service name
+          type: string
+      required:
+      - name
+      type: object
+    ServiceCreateData:
+      description: Service payload for create requests.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/ServiceRelationships'
+        type:
+          $ref: '#/components/schemas/ServiceType'
+      required:
+      - type
+      type: object
+    ServiceCreateRequest:
+      description: Create request with a service payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceCreateData'
+      required:
+      - data
+      type: object
+    ServiceIncludedItems:
+      description: An object related to a service which is present in the included
+        payload.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    ServiceRelationships:
+      description: The service's relationships.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      readOnly: true
+      type: object
+    ServiceResponse:
+      description: Response with a service payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceResponseData'
+        included:
+          description: Included objects from relationships.
+          items:
+            $ref: '#/components/schemas/ServiceIncludedItems'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    ServiceResponseAttributes:
+      description: The service's attributes from a response.
+      properties:
+        created:
+          description: Timestamp of when the service was created.
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: Timestamp of when the service was modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Name of the service.
+          example: service name
+          type: string
+      type: object
+    ServiceResponseData:
+      description: Service data from responses.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceResponseAttributes'
+        id:
+          description: The service's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ServiceRelationships'
+        type:
+          $ref: '#/components/schemas/ServiceType'
+      required:
+      - id
+      - type
+      type: object
+    ServiceType:
+      default: services
+      description: Service resource type.
+      enum:
+      - services
+      example: services
+      type: string
+      x-enum-varnames:
+      - SERVICES
+    ServiceUpdateAttributes:
+      description: The service's attributes for an update request.
+      properties:
+        name:
+          description: Name of the service.
+          example: an example service name
+          type: string
+      required:
+      - name
+      type: object
+    ServiceUpdateData:
+      description: Service payload for update requests.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceUpdateAttributes'
+        id:
+          description: The service's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ServiceRelationships'
+        type:
+          $ref: '#/components/schemas/ServiceType'
+      required:
+      - id
+      - type
+      type: object
+    ServiceUpdateRequest:
+      description: Update request with a service payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceUpdateData'
+      required:
+      - data
+      type: object
+    ServicesResponse:
+      description: Response with a list of service payloads.
+      properties:
+        data:
+          description: An array of services.
+          example:
+          - id: 00000000-0000-0000-0000-000000000000
+            type: services
+          items:
+            $ref: '#/components/schemas/ServiceResponseData'
+          type: array
+        included:
+          description: Included related resources which the user requested.
+          items:
+            $ref: '#/components/schemas/ServiceIncludedItems'
+          readOnly: true
+          type: array
+        meta:
+          description: The metadata object containing pagination metadata.
+          properties:
+            pagination:
+              description: Pagination properties.
+              properties:
+                next_offset:
+                  description: The index of the first element in the next page of
+                    results. Equal to page size added to the current offset.
+                  example: 1000
+                  format: int64
+                  type: integer
+                offset:
+                  description: The index of the first element in the results.
+                  example: 10
+                  format: int64
+                  type: integer
+                size:
+                  description: Maximum size of pages to return.
+                  example: 1000
+                  format: int64
+                  type: integer
+              type: object
+          readOnly: true
+          type: object
+      required:
+      - data
+      type: object
+    TeamCreateAttributes:
+      description: The team's attributes for a create request.
+      properties:
+        name:
+          description: Name of the team.
+          example: team name
+          type: string
+      required:
+      - name
+      type: object
+    TeamCreateData:
+      description: Team data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/TeamRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - type
+      type: object
+    TeamCreateRequest:
+      description: Create request with a team payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamCreateData'
+      required:
+      - data
+      type: object
+    TeamIncludedItems:
+      description: An object related to a team which is present in the included payload.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    TeamRelationships:
+      description: The team's relationships.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by:
+          $ref: '#/components/schemas/RelationshipToUser'
+      readOnly: true
+      type: object
+    TeamResponse:
+      description: Response with a team payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamResponseData'
+        included:
+          description: Included objects from relationships.
+          items:
+            $ref: '#/components/schemas/TeamIncludedItems'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    TeamResponseAttributes:
+      description: The team's attributes from a response.
+      properties:
+        created:
+          description: Timestamp of when the team was created.
+          format: date-time
+          readOnly: true
+          type: string
+        modified:
+          description: Timestamp of when the team was modified.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Name of the team.
+          example: team name
+          type: string
+      type: object
+    TeamResponseData:
+      description: Team data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamResponseAttributes'
+        id:
+          description: The team's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
+    TeamType:
+      default: teams
+      description: Team resource type.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    TeamUpdateAttributes:
+      description: The team's attributes for an update request.
+      properties:
+        name:
+          description: Name of the team.
+          example: team name
+          type: string
+      required:
+      - name
+      type: object
+    TeamUpdateData:
+      description: Team data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamUpdateAttributes'
+        id:
+          description: The team's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - id
+      - type
+      type: object
+    TeamUpdateRequest:
+      description: Update request with a team payload.
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamUpdateData'
+      required:
+      - data
+      type: object
+    TeamsResponse:
+      description: Response with a list of team payloads.
+      properties:
+        data:
+          description: An array of teams.
+          example:
+          - attributes:
+              name: team name
+            id: 00000000-0000-0000-0000-000000000000
+            type: teams
+          items:
+            $ref: '#/components/schemas/TeamResponseData'
+          type: array
+        included:
+          description: Included related resources which the user requested.
+          items:
+            $ref: '#/components/schemas/TeamIncludedItems'
+          readOnly: true
+          type: array
+        meta:
+          description: The metadata object containing pagination metadata.
+          properties:
+            pagination:
+              description: Pagination properties.
+              properties:
+                next_offset:
+                  description: The index of the first element in the next page of
+                    results. Equal to page size added to the current offset.
+                  example: 1000
+                  format: int64
+                  type: integer
+                offset:
+                  description: The index of the first element in the results.
+                  example: 10
+                  format: int64
+                  type: integer
+                size:
+                  description: Maximum size of pages to return.
+                  example: 1000
+                  format: int64
+                  type: integer
+              type: object
+          readOnly: true
+          type: object
+      required:
+      - data
+      type: object
     User:
       description: User object returned by the API.
       properties:
@@ -2238,6 +2753,7 @@ components:
       properties:
         email:
           description: The email of the user.
+          example: joe.doe@example.com
           type: string
         name:
           description: The name of the user.
@@ -2245,6 +2761,8 @@ components:
         title:
           description: The title of the user.
           type: string
+      required:
+      - email
       type: object
     UserCreateData:
       description: Object to create a user.
@@ -2255,12 +2773,17 @@ components:
           $ref: '#/components/schemas/UserRelationships'
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - attributes
+      - type
       type: object
     UserCreateRequest:
       description: Create a user.
       properties:
         data:
           $ref: '#/components/schemas/UserCreateData'
+      required:
+      - data
       type: object
     UserInvitationData:
       description: Object to create a user invitation.
@@ -2269,6 +2792,9 @@ components:
           $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
+      required:
+      - type
+      - relationships
       type: object
     UserInvitationDataAttributes:
       description: Attributes of a user invitation.
@@ -2293,6 +2819,8 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/RelationshipToUser'
+      required:
+      - user
       type: object
     UserInvitationResponse:
       description: User invitation as returned by the API.
@@ -2316,9 +2844,12 @@ components:
       properties:
         data:
           description: List of user invitations.
+          example: []
           items:
             $ref: '#/components/schemas/UserInvitationData'
           type: array
+      required:
+      - data
       type: object
     UserInvitationsResponse:
       description: User invitations as returned by the API.
@@ -2334,6 +2865,7 @@ components:
       description: User invitations type.
       enum:
       - user_invitations
+      example: user_invitations
       type: string
       x-enum-varnames:
       - USER_INVITATIONS
@@ -2393,15 +2925,22 @@ components:
           $ref: '#/components/schemas/UserUpdateAttributes'
         id:
           description: ID of the user.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - attributes
+      - type
+      - id
       type: object
     UserUpdateRequest:
       description: Update a user.
       properties:
         data:
           $ref: '#/components/schemas/UserUpdateData'
+      required:
+      - data
       type: object
     UsersResponse:
       description: Response containing information about multiple users.
@@ -2418,12 +2957,14 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      readOnly: true
       type: object
     UsersType:
       default: users
       description: Users resource type.
       enum:
       - users
+      example: users
       type: string
       x-enum-varnames:
       - USERS
@@ -2627,8 +3168,8 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/logs/analytics/aggregate:
     post:
-      description: The public API endpoint to aggregate events into buckets and compute
-        metrics and timeseries.
+      description: The API endpoint to aggregate events into buckets and compute metrics
+        and timeseries.
       operationId: AggregateLogs
       requestBody:
         content:
@@ -2650,9 +3191,76 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
+  /api/v2/logs/config/archive-order:
+    get:
+      description: 'Get the current order of your archives.
 
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        This endpoint takes no JSON arguments.'
+      operationId: GetLogsArchiveOrder
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchiveOrder'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get archive order
+      tags:
+      - Logs Archives
+    put:
+      description: 'Update the order of your archives. Since logs are processed sequentially,
+        reordering an archive may change
+
+        the structure and content of the data processed by other archives.
+
+
+        **Note**: Using the `PUT` method updates your archive''s order by replacing
+        the current order
+
+        with the new one.'
+      operationId: UpdateLogsArchiveOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveOrder'
+        description: An object containing the new ordered list of archive IDs.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchiveOrder'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+      summary: Update archive order
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
   /api/v2/logs/config/archives:
     get:
       description: Get the list of configured logs archives with their definitions.
@@ -4071,6 +4679,306 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/services:
+    get:
+      description: Get all services for the requesting user's organization. If the
+        `include[users]` query parameter is provided, the included attribute will
+        contain the users related to these services.
+      operationId: GetServices
+      parameters:
+      - $ref: '#/components/parameters/ServiceIncludeQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get a list of all services
+      tags:
+      - Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new service.
+      operationId: CreateService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCreateRequest'
+        description: Service Payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Create a new service
+      tags:
+      - Services
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/services/{service_id}:
+    delete:
+      description: Deletes an existing service.
+      operationId: DeleteService
+      parameters:
+      - $ref: '#/components/parameters/ServiceIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Delete an existing service
+      tags:
+      - Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get details of a service. If the `include[users]` query parameter
+        is provided, the included attribute will contain the users related to these
+        services
+      operationId: GetService
+      parameters:
+      - $ref: '#/components/parameters/ServiceIDPathParameter'
+      - $ref: '#/components/parameters/ServiceIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get details of a service
+      tags:
+      - Services
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an existing service. Only provide the attributes which
+        should be updated as this request is a partial update.
+      operationId: UpdateService
+      parameters:
+      - $ref: '#/components/parameters/ServiceIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceUpdateRequest'
+        description: Service Payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Update an existing service
+      tags:
+      - Services
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/teams:
+    get:
+      description: Get all teams for the requesting user's organization. If the `include[users]`
+        query parameter is provided, the included attribute will contain the users
+        related to these teams.
+      operationId: GetTeams
+      parameters:
+      - $ref: '#/components/parameters/TeamIncludeQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get a list of all teams
+      tags:
+      - Teams
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new team.
+      operationId: CreateTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamCreateRequest'
+        description: Teams Payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Create a new team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/teams/{team_id}:
+    delete:
+      description: Deletes an existing team.
+      operationId: DeleteTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Delete an existing team
+      tags:
+      - Teams
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get details of a team. If the `include[users]` query parameter
+        is provided, the included attribute will contain the users related to these
+        teams.
+      operationId: GetTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamIDPathParameter'
+      - $ref: '#/components/parameters/TeamIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get details of a team
+      tags:
+      - Teams
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an existing team. Only provide the attributes which should
+        be updated as this request is a partial update.
+      operationId: UpdateTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamUpdateRequest'
+        description: Teams Payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Update an existing team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -4139,15 +5047,21 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users:
     get:
-      description: Get the list of all users in the organization. This list includes
-        all users even if they are disabled or unverified.
+      description: 'Get the list of all users in the organization. This list includes
+
+        all users even if they are deactivated or unverified.'
       operationId: ListUsers
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
       - description: 'User attribute to order results by. Sort order is ascending
-          by default. Sort order is descending if the field is prefixed by a negative
-          sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.'
+          by default.
+
+          Sort order is descending if the field
+
+          is prefixed by a negative sign, for example `sort=-name`. Options: `name`,
+
+          `modified_at`, `user_count`.'
         in: query
         name: sort
         required: false
@@ -4232,8 +5146,9 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}:
     delete:
-      description: Disable a user. Can only be used with an application key belonging
-        to an administrator user.
+      description: 'Disable a user. Can only be used with an application key belonging
+
+        to an administrator user.'
       operationId: DisableUser
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -4280,13 +5195,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
-      summary: Get a user
+      summary: Get user details
       tags:
       - Users
       x-codegen-request-body-name: body
     patch:
-      description: Edit a user. Can only be used with an application key belonging
-        to an administrator user.
+      description: 'Edit a user. Can only be used with an application key belonging
+
+        to an administrator user.'
       operationId: UpdateUser
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -4332,8 +5248,10 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}/orgs:
     get:
-      description: Get a user organization. Returns the user information and all organizations
-        joined by this user.
+      description: 'Get a user organization. Returns the user information and all
+        organizations
+
+        joined by this user.'
       operationId: ListUserOrganizations
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -4362,8 +5280,8 @@ paths:
       x-codegen-request-body-name: body
   /api/v2/users/{user_id}/permissions:
     get:
-      description: "Get a user permission set. Returns a list of the user\u2019s permissions\
-        \ granted by the associated user's roles."
+      description: "Get a user permission set. Returns a list of the user\u2019s permissions\n\
+        granted by the associated user's roles."
       operationId: ListUserPermissions
       parameters:
       - $ref: '#/components/parameters/UserID'
@@ -4435,7 +5353,9 @@ tags:
 
     organize, find, and share all of your dashboards with your team and
 
-    organization.'
+    organization. Note that you can add API v1 Dashboards to Dashboard Lists
+
+    that you create with API v2.'
   name: Dashboard Lists
 - description: '[See API version 1](/api/v1/dashboards/).'
   name: Dashboards
@@ -4518,7 +5438,9 @@ tags:
   name: Roles
 - description: '[See API version 1](/api/v1/screenboards/).'
   name: Screenboards
-- description: Detection rules for generating signals and listing of generated signals
+- description: 'Detection rules for generating signals and listing of generated
+
+    signals.'
   name: Security Monitoring
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
@@ -4526,6 +5448,8 @@ tags:
   name: Service Dependencies
 - description: '[See API version 1](/api/v1/service-level-objectives/).'
   name: Service Level Objectives
+- description: Create, update, delete and retrieve your organizations services.
+  name: Services
 - description: '[See API version 1](/api/v1/slack-integration/).'
   name: Slack Integration
 - description: '[See API version 1](/api/v1/snapshots/).'
@@ -4534,6 +5458,8 @@ tags:
   name: Synthetics
 - description: '[See API version 1](/api/v1/tags/).'
   name: Tags
+- description: Create, update, delete and retrieve your organizations Teams.
+  name: Teams
 - description: '[See API version 1](/api/v1/timeboards/).'
   name: Timeboards
 - description: '[See API version 1](/api/v1/tracing/).'

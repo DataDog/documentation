@@ -95,9 +95,9 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### DNS Resolution
 
-Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **Domain is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
+{{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Domain aggregation" >}}
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
@@ -108,6 +108,19 @@ The Network Address Translation (NAT) is a tool used by Kubernetes and other sys
 To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table settings. When this setting is toggled off, IPs shown in the Source IP and Dest IP columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs will be displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_page/prenat_ip.png" alt="pre-NAT IPs" >}}
+
+### Network ID
+
+NPM users may configure their networks to have overlapping IP spaces. For instance, you may want to deploy in multiple VPCs (virtual private clouds) which have overlapping address ranges and communicate only through load balancers or cloud gateways.
+
+To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from. 
+
+In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
+
+  ```shell 
+  network:
+     Id: <your-network-id>
+  ```
 
 ## Table
 

@@ -47,7 +47,15 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 ### Filter
 
-Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*. To learn more about tags, refer to the [Tagging][6] documentation.
+Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
+
+{{< img src="dashboards/querying/filter.png" alt="Graphing Filter"  style="width:75%;" >}}
+
+You can also use advanced filtering within the `from` dropdown to evaluate boolean filtered queries such as:
+
+{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters"  style="width:75%;" >}}
+
+To learn more about tags, refer to the [Tagging][6] documentation.
 
 ### Aggregate and rollup
 
@@ -118,6 +126,23 @@ If you do not enter a title, one is automatically generated based on your select
 ### Save
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
+
+## Configuring an APM Stats graph
+
+To configure your graph using APM Stats data, follow these steps:
+
+1. [Select your visualization](#select-your-visualization) (same as for Metrics)
+2. [Choose your level of detail](#level-of-detail)
+3. [Choose your parameters](#apm-stats-parameters)
+4. [Title the graph](#create-a-title) (same as for Metrics)
+
+### Level of detail
+Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
+
+### APM Stats parameters
+Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
+
+If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
 ## Additional options
 

@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: solr
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -51,7 +52,7 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 
 このチェックは JMX ベースなので、Solr サーバーで JMX リモートを有効にする必要があります。詳細については、[JMX チェックに関するドキュメント][3]を参照してください。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

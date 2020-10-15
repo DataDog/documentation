@@ -50,11 +50,15 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using the [`WithAnalytics`][1] tracer start option. For example:
+App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
+* the [`WithAnalytics`][1] tracer start option, for example:
+
+  ```go
+  tracer.Start(tracer.WithAnalytics(true))
+  ```
+
+* starting in version 1.26.0 using environment variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{% /tab %}}
@@ -154,7 +158,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 **Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [App Analytics][1] for details.
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -250,7 +254,7 @@ Use this in addition to the global configuration for any integrations that submi
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/php/#integrations
+[1]: /tracing/setup/php/#integration-names
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -360,7 +364,11 @@ class MyClass {
   }
 }
 ```
+**Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
+
+[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 {{% /tab %}}
 {{% tab "Python" %}}
 

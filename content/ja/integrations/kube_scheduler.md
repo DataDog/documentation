@@ -1,8 +1,12 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    kube_scheduler: assets/dashboards/overview.json
   logs:
     source: kube_scheduler
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

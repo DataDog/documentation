@@ -8,7 +8,6 @@ assets:
   monitors:
     Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
     Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
-    Recommended Replica Number Reaches Max Limit: assets/recommended_monitors/federatorai_recommended_replica_num.json
   saved_views: {}
   service_checks: assets/service_checks.json
 categories:

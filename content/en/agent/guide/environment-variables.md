@@ -34,7 +34,7 @@ In general, use the following rules:
 
 * Option names should be uppercase with the `DD_` prefix: `hostname` -> `DD_HOSTNAME`
 
-* List values should be separated by spaces:
+* List values should be separated by spaces (Include rules support regexes, and are defined as a list of comma-separated strings):
    ```yaml
       container_include:
         - "image:cp-kafka"
@@ -56,7 +56,7 @@ In general, use the following rules:
       # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
+**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details. 
 
 ### Exceptions
 

@@ -9,7 +9,7 @@ further_reading:
 ---
 Python Datadog Trace ライブラリはオープンソースです。詳細については、[Github リポジトリ][1]をご覧ください。
 
-Python `2.7` および `3.4` バージョン以降がサポートされます。
+トレーサーの最新バージョンでは、Python バージョン `2.7+` と `3.5+` がサポートされています。Python `3.4` は、Python トレーサーのバージョン `0.35.x` 以下でサポートされています。
 
 ## インテグレーション
 
@@ -21,6 +21,7 @@ Python `2.7` および `3.4` バージョン以降がサポートされます。
 
 | フレームワーク                 | サポート対象のバージョン | PyPi Datadog ドキュメント                                         |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
+| [asgi][43]               | >= 2.0         |  http://pypi.datadoghq.com/trace/docs/web_integrations.html#asgi |
 | [aiohttp][3]             | 1.2 以降            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][4]              | 0.11 以降           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][5]              | 1.8 以降            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
@@ -123,3 +124,4 @@ Python `2.7` および `3.4` バージョン以降がサポートされます。
 [40]: https://kombu.readthedocs.io/en/latest
 [41]: https://www.makotemplates.org
 [42]: http://docs.python-requests.org/en/master
+[43]: http://asgi.readthedocs.io/

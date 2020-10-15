@@ -158,13 +158,13 @@ If you are collecting logs from an S3 bucket, configure the trigger to the [Data
 {{% tab "AWS Console" %}}
 
 1. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your logs in the AWS console:
-   {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
+  {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" popup="true"style="width:80%;">}}
 
 1. Select the bucket and then follow the AWS instructions:
-   {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
+  {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
 1. Set the correct event type on S3 buckets:
-   {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
+  {{< img src="logs/aws/object_created.png" alt="Object Created" popup="true" style="width:80%;">}}
 
 Once done, go into your [Datadog Log section][1] to start exploring your logs!
 
@@ -232,8 +232,10 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [RedShift][36]                    | [Enable AWS Redshift logs][37]                                                                 | [Manual][38] and [automatic](#automatically-setup-triggers) log collection |
 | [VPC][39]                         | [Enable AWS VPC logs][40]                                                                      | [Manual][41] log collection                                                |
 
+## Scrubbing and filtering
 
-
+You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][42].
+You can also exclude or send only those logs that match a specific pattern by using the [filtering option][43].
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
@@ -276,3 +278,5 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 [39]: /integrations/amazon_vpc/
 [40]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [41]: /integrations/amazon_vpc/#log-collection
+[42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[43]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional

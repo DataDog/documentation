@@ -3,6 +3,7 @@ assets:
   dashboards: {}
   logs:
     source: azure.active_directory
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json

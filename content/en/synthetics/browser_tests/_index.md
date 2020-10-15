@@ -6,48 +6,46 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introducing Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with browser tests"
-- link: "/synthetics/"
+- link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
-  text: "Manage your checks"
-- link: "/synthetics/api_tests/"
+  text: "Getting started with browser tests"
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "/synthetics/guide/"
   tag: "Documentation"
-  text: "Configure an API Test"
-- link: "/synthetics/browser_tests/test_results/"
-  tag: "Documentation"
-  text: "Browser test results"
+  text: "Guides"
 ---
 
 ## Overview
 
-Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
+Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, from multiple browsers, and devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
-## Configuration
+<div class="alert alert-info">Are you interested in testing applications that sit behind MFA? Read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">our dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send us feedback</a> to help us work on the systems that matter the most to your teams.</div>
 
-### Test details
+## Test configuration
 
 Define the configuration of your browser test.
 
 1. **Starting URL**: The URL from which your browser test starts the scenario.
-    * Advanced Options (optional): Set custom request headers, cookies, or authenticate through Basic Auth.
-        * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
-        * Authentication: Authenticate through HTTP Basic Authentication with a username and a password.
-        * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+2. **Advanced Options** (optional): Set specific options to your browser test:
+    * Headers: Define headers to add to or override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
+    * Authentication: Authenticate through HTTP basic authentication or NTLM with a username and a password.
+    * Cookies: Define cookies to add to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+    * Proxy URL: URL of the proxy the requests should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
-2. **Name**: The name of your browser test.
-3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
-4. **Devices**: The devices to run your test on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up a [Private Location][2] to run a Synthetic Browser test on a private URL not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every 5 minutes to once per week.
+3. **Name**: The name of your browser test.
+4. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetic tests page.
+5. **Browsers & Devices**: The browsers (`Chrome`, `Firefox`) and devices (`Laptop Large`, `Tablet`, `Mobile Small`) to run your test on. 
+6. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up [private locations][2] to run your browser test from custom locations or from inside private networks.
+7. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week. The one minute frequency is available [upon request][3].
 
 ### Use global variables
 
-You can use the [global variables defined in the **settings**][3] in the URL as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the **Settings**][4] in the **Starting URL** as well as in the **Advanced Options** of your browser tests. To display your list of variables, type `{{` in the desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
@@ -55,8 +53,8 @@ You can use the [global variables defined in the **settings**][3] in the URL as 
 
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
-* An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification using.
-* Retry `<INSERT_NUMBER>` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][4].
+* An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification.
+* Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][5].
 
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
 
@@ -64,7 +62,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -75,32 +73,24 @@ A notification is sent according to the set of alerting conditions. To configure
 
     Notification messages include the **message** defined in this section and information about the failing locations.
 
-2. Choose your [services][7] and/or team members to notify.
+2. Choose your [services][8] and/or team members to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test**.
-5. Record your test.
 
-## Record test
+## Record your steps
 
-Tests can be only recorded from **[Google Chrome][8]**. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
+Tests can be only recorded from **[Google Chrome][9]**. To record your test, download the [Datadog Record Test extension for Google Chrome][10].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
-1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
-Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop in **Incognito mode** to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create [steps][10] within your browser test scenario.
-4. Use the [steps][10] available in the upper left corner to enrich your scenario:
-    {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
+3. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][11] within your browser test scenario on the left.
+4. In addition to the automatically recorded steps, you can also use the [steps][11] available in the upper left corner to enrich your scenario:
+    {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps"  style="width:80%;">}}
 
-    **Note**: **Your last browser test step must be an [assertion][11]** to confirm the journey executed by the browser test resulted in the expected state.
+    **Note**: You should always make to **end your browser test with an [assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
-
-## Steps
-
-After saving a browser test, you can record [steps][10] which you can then edit or build on.
-
-Steps are a series of actions that you can record for a browser test which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][12].
 
 ## Further Reading
 
@@ -108,13 +98,12 @@ Steps are a series of actions that you can record for a browser test which you c
 
 [1]: /synthetics/identify_synthetics_bots/
 [2]: /synthetics/private_locations/
-[3]: /synthetics/settings/#global-variables
-[4]: /api/v1/synthetics/#create-or-clone-a-test
-[5]: http://daringfireball.net/projects/markdown/syntax
-[6]: /monitors/notifications/?tab=is_alert#integrations
-[7]: /integrations/#cat-notification
-[8]: https://www.google.com/chrome
-[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /synthetics/browser_tests/actions/
-[11]: /synthetics/browser_tests/actions/#assertion
-[12]: /synthetics/browser_tests/advanced_options/
+[3]: /help/
+[4]: /synthetics/settings/#global-variables
+[5]: /api/v1/synthetics/#create-or-clone-a-test
+[6]: http://daringfireball.net/projects/markdown/syntax
+[7]: /monitors/notifications/?tab=is_alert#integrations
+[8]: /integrations/#cat-notification
+[9]: https://www.google.com/chrome
+[10]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[11]: /synthetics/browser_tests/actions/

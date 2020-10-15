@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -131,7 +132,7 @@ runAsUser:
 
 OpenShift チェックには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 OpenShift チェックには、サービスのチェック機能は含まれません。
 

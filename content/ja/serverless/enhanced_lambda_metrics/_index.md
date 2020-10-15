@@ -39,16 +39,28 @@ Datadog では、Datadog Lambda レイヤーと Datadog Forwarder を使用し�
 
 ## 拡張 Lambda メトリクスの有効化
 
-Datadog では、Node.js、Python、Ruby、Java、そして Go ランタイム用のリアルタイム Lambda ランタイムメトリクスを追加設定なしで生成できます。ご使用の関数で拡張 Lambda メトリクスを有効にするには、[インストール手順][4]に従ってください。
+{{< img src="serverless/integration/lambda_metrics.png" alt="Lambda メトリクスコレクション" >}}
 
-ご使用の関数のログを有効にせずに拡張 Lambda メトリクスを有効にするには、Datadog Forwarder で `DdForwarderLog` 環境変数が `false` に設定することをご確認ください。
+Datadog は、Node.js、Python、Ruby、Java、Go ランタイム用のリアルタイム拡張 Lambda メトリクスをすぐに生成します。 [インストール手順][4]では、関数で拡張 Lambda メトリクスを有効にするために必要な手順を確認できます。
+
+1. [AWS インテグレーション][5]をインストールします。
+2. [Datadog Forwarder][6] をインストールします。
+3. [Datadog Lambda ライブラリ][7]をインストールします。
+4. [Datadog Forwarder を関数ロググループ][8]にサブスクライブします。
+
+ご使用の関数のログを有効にせずに拡張 Lambda メトリクスを有効にするには、[Datadog Forwarder][6] で `DdForwarderLog` 環境変数が `false` に設定することをご確認ください。
 
 ## ダッシュボードの表示
 
-拡張 Lambda メトリクスが有効化されると、[Datadog アプリにデフォルトのダッシュボード][5]に表示されます。
+拡張 Lambda メトリクスが有効化されると、[Datadog アプリにデフォルトのダッシュボード][9]に表示されます。
 
-[1]: /ja/serverless/installation/installing_the_library
+[1]: /ja/serverless/datadog_lambda_library
 [2]: /ja/serverless/forwarder/
 [3]: /ja/integrations/amazon_lambda/?tab=nodejs#metric-collection
 [4]: /ja/serverless/installation/
-[5]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[5]: /ja/integrations/amazon_web_services/#setup
+[6]: /ja/serverless/forwarder
+[7]: /ja/serverless/datadog_lambda_library
+[8]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[9]: https://app.datadoghq.com/screen/integration/30306/aws-lambda-enhanced-metrics
+[10]: /ja/metrics/distributions/

@@ -44,12 +44,20 @@ Des [tags][1] peuvent être appliqués automatiquement par des [intégrations Da
 
 Par exemple, si certains de vos hosts utilisent AWS, vous pouvez dès à présent utiliser les tags suivants spécifiques à AWS :
 
-* availability-zone
-* region
-* image
-* instance-type
-* security-group
-* n'importe quel tag EC2 pertinent, comme 'name'
+* `availability-zone`
+* `region`
+* `image`
+* `instance-type`
+* `security-group`
+* n'importe quel tag EC2 pertinent, comme `name`
+
+L'Agent Datadog recueille également des métadonnées sur le host et des informations sur les applications, dont certaines peuvent être utilisées comme filtre ou pour regrouper des termes. Ces champs comprennent :
+
+- `field:metadata_agent_version`
+- `field:metadata_platform`
+- `field:metadata_processor`
+- `field:metadata_machine`
+- `field:apps`
 
 ### Zoom
 

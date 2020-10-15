@@ -6,16 +6,13 @@ further_reading:
 - link: "/real_user_monitoring/error_tracking/explorer"
   tag: "Documentation"
   text: "RUM Error Tracking Explorer"
+- link: "/real_user_monitoring/guide/upload-javascript-source-maps"
+  tag: "Guide"
+  text: "Upload javascript source maps"
 - link: "https://app.datadoghq.com/error-tracking"
   tag: "UI"
   text: "Error tracking"
 ---
-
-{{< site-region region="eu" >}}
-
-<div class="alert alert-warning"> The EU region is not yet available for Error Tracking. If you have any feedback or question, contact <a href="/help">Datadog support</a>.</div>
-
-{{< /site-region >}}
 
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Page"  >}}
 
@@ -49,13 +46,39 @@ Datadog allows you to securely upload your source maps to deobfuscate your stack
 
 Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][4] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
 
-1. Add `@datadog/datadog-ci` to your `package.json` file, you must use the `v0.5.2` version and onwards of the CLI.
-2. Export your Datadog API key as an environment variable named `DATADOG_API_KEY`.
+{{< tabs >}}
+{{% tab "US" %}}
+
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Run the following command:
-   {{< code-block lang="curl">}}datadog-ci sourcemaps upload /path/to/build/directory \
-  --service=my-service \
-  --release-version=v35.2395005 \
-  --minified-path-prefix=https://hostname.com/static/js{{< /code-block >}}
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
+
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "EU" %}}
+
+1. Add `@datadog/datadog-ci` to your `package.json` file (make sure to use the latest version).
+2. [Create a new and dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+3. Configure the CLI to upload files to the EU region by exporting two additonal environment variables: `export DATADOG_SITE="datadoghq.eu"` and `export DATADOG_API_HOST="api.datadoghq.eu"`.
+4. Run the following command:
+```bash
+datadog-ci sourcemaps upload /path/to/dist \
+	--service=my-service \
+	--release-version=v35.2395005 \
+	--minified-path-prefix=https://hostname.com/static/js
+```
+
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information about CLI parameters, see the [official Github repository][5].
 
@@ -65,9 +88,8 @@ For more information about CLI parameters, see the [official Github repository][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /real_user_monitoring/data_collected/error#error-origins
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
-[3]: /real_user_monitoring/installation/?tab=us#initialization-parameters
+[3]: /real_user_monitoring/browser/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps

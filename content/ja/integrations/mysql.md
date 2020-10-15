@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: mysql
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     operations: assets/saved_views/operations.json

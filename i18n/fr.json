@@ -108,11 +108,11 @@
   },
 
   "get_started_free": {
-    "other": "COMMENCER GRATUITEMENT"
+    "other": "COMMENCER"
   },
 
   "get_started_free_short": {
-    "other": "COMMENCER"
+    "other": "Essai gratuit"
   },
 
   "documentation_search": {
@@ -288,5 +288,14 @@
   },
   "description": {
     "other": "Description"
+  },
+  "field": {
+    "other": "Field"
+  },
+  "footer_blurb_heading": {
+    "other": "Besoin d'aide?"
+  },
+  "footer_blurb_desc": {
+    "other": "Nos ingénieurs sont là pour vous aider!"
   }
 }
