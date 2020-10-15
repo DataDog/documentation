@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_DMS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_dms/'
+draft: false
 git_integration_title: amazon_dms
 has_logo: true
 integration_title: "Amazon\_DMS"

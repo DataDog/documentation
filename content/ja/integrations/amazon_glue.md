@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Glue のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_glue/'
+draft: false
 git_integration_title: amazon_glue
 has_logo: true
 integration_title: Amazon Glue

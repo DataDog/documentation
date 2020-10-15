@@ -19,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md'
 display_name: Hazelcast
+draft: false
 git_integration_title: hazelcast
 guid: b2c63c99-f955-4494-a171-494f9dcf7d1f
 integration_id: hazelcast

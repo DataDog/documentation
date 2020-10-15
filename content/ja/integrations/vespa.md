@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md'
 display_name: Vespa
+draft: false
 git_integration_title: vespa
 guid: 810e2a6e-4aa4-4b03-b5a4-563f3752f0eb
 integration_id: vespa

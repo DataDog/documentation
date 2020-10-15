@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md'
 display_name: Snowflake
+draft: true
 git_integration_title: snowflake
 guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake

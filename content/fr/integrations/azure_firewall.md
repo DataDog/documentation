@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de vos pare-feux Azure.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_firewall/'
+draft: false
 git_integration_title: azure_firewall
 has_logo: true
 integration_title: Pare-feu Microsoft Azure

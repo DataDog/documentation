@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elastic\_Transcoder."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/'
+draft: false
 git_integration_title: amazon_elastic_transcoder
 has_logo: true
 integration_title: "Amazon\_Elastic\_Transcoder"

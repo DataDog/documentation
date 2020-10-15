@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md'
 display_name: SAP HANA
+draft: false
 git_integration_title: sap_hana
 guid: 85dace7c-baf5-4bcc-9fbb-4d3a6b841359
 integration_id: sap-hana

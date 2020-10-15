@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cri/README.md'
 display_name: CRI
+draft: false
 git_integration_title: cri
 guid: 6eb96c6a-3e2d-4236-9387-fa3b0c455336
 integration_id: cri

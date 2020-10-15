@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md'
 display_name: Kube_scheduler
+draft: false
 git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler

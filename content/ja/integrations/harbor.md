@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/harbor/README.md'
 display_name: Harbor
+draft: false
 git_integration_title: harbor
 guid: 8fcaa5d7-a121-45ea-bde2-f12d55bc6286
 integration_id: harbor

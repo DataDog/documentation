@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elemental\_MediaConvert."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediaconvert/'
+draft: false
 git_integration_title: amazon_mediaconvert
 has_logo: true
 integration_title: "Amazon\_Elemental\_MediaConvert"

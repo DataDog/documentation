@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md'
 display_name: Kubernetes API サーバーメトリクス
+draft: false
 git_integration_title: kube_apiserver_metrics
 guid: 406b274b-c44d-4499-a329-efd053b3f538
 integration_id: kube-apiserver-metrics

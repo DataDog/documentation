@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Translate."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_translate/'
+draft: false
 git_integration_title: amazon_translate
 has_logo: true
 integration_title: Amazon Translate

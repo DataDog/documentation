@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openldap/README.md'
 display_name: OpenLDAP
+draft: false
 git_integration_title: openldap
 guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap

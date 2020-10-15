@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_automation/'
+draft: false
 git_integration_title: azure_automation
 has_logo: true
 integration_title: Microsoft Azure Automation

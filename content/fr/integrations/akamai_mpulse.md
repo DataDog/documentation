@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: "Intégrez Akamai\_mPulse à Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/akamai_mpulse/'
+draft: false
 git_integration_title: akamai_mpulse
 has_logo: true
 integration_title: Akamai mPulse
