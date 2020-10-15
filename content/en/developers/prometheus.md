@@ -62,7 +62,7 @@ instances:
 
 ### Writing the check
 
-All OpenMetrics checks inherit from the [`OpenMetricsBaseCheck` class][5]:
+All OpenMetrics checks inherit from the [`OpenMetricsBaseCheck` class][8]:
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
@@ -92,7 +92,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 A default instance is the basic configuration used for the check. The default instance should override `namespace`, `metrics`, and `prometheus_url`.
 
 
-Note that we also override the default values for some config options in the `OpenMetricsBaseCheck`, so there is increased metric behavior correlation between [Prometheus and Datadog metric types][6]. 
+Note that we also override the default values for some config options in the `OpenMetricsBaseCheck`, so there is increased metric behavior correlation between [Prometheus and Datadog metric types][7]. 
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
@@ -139,7 +139,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][7] for easy debugging. For example:
+If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][6] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -220,7 +220,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 
 ## Going further
 
-To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][8].
+To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][9].
 
 You can improve your OpenMetrics check by including default values for additional configuration options:
 
@@ -251,7 +251,8 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 [2]: /agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /agent/agent_checks/#configuration
-[5]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
-[6]: https://docs.datadoghq.com/integrations/guide/prometheus-metrics/
-[7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: https://datadoghq.dev/integrations-core/base/prometheus/
+[5]: /developers/metrics/custom_metrics/
+[6]: /agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/integrations/guide/prometheus-metrics/
+[8]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
+[9]: https://datadoghq.dev/integrations-core/base/prometheus/
