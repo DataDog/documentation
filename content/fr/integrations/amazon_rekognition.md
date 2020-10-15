@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Rekognition."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rekognition/'
+draft: false
 git_integration_title: amazon_rekognition
 has_logo: true
 integration_title: "Amazon\_Rekognition"

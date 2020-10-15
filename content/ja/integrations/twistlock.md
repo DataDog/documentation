@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md'
 display_name: Twistlock
+draft: false
 git_integration_title: twistlock
 guid: 59082b73-62f4-48d4-83f8-af3d5576eae1
 integration_id: twistlock

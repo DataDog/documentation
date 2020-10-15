@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
 display_name: Squadcast
+draft: false
 git_integration_title: Squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: Squadcast

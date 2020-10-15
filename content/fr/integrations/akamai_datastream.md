@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Intégrez votre Akamai\_DataStream à Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
     tag: Blog

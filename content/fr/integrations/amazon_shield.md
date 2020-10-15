@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Shield."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_shield/'
+draft: false
 git_integration_title: amazon_shield
 has_logo: true
 integration_title: "Amazon\_Shield"

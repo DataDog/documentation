@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md'
 display_name: TCP Queue Length
+draft: true
 git_integration_title: tcp_queue_length
 guid: 0468b098-43bd-4157-8a01-14065cfdcb7b
 integration_id: tcp-queue-length

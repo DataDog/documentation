@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md'
 display_name: 外部 DNS
+draft: false
 git_integration_title: external_dns
 guid: 31eb63d5-15eb-42b3-912d-f8de47ea252a
 integration_id: external-dns

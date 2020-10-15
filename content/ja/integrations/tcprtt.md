@@ -99,4 +99,5 @@ TCP RTT チェックが開始している場合は、上のような go-metro �
 ### メトリクス
 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
+
 [1]: https://github.com/DataDog/go-metro#usage

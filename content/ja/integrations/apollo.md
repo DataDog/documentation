@@ -14,6 +14,7 @@ ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md'
 display_name: Apollo Engine
+draft: false
 git_integration_title: apollo
 guid: a0b142ff-0637-4c2f-814c-0f1a012bc65c
 integration_id: apollo

@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure API Management のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_api_management/'
+draft: false
 git_integration_title: azure_api_management
 has_logo: true
 integration_title: Microsoft Azure API Management

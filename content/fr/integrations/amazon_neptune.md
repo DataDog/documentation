@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Neptune."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_neptune/'
+draft: false
 git_integration_title: amazon_neptune
 has_logo: true
 integration_title: "Amazon\_Neptune"

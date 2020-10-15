@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md'
 display_name: Nextcloud
+draft: false
 git_integration_title: nextcloud
 guid: 852e64eb-93b9-4fb2-8cb2-10041b4045c3
 integration_id: nextcloud

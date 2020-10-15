@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Google Cloud Dataproc のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_dataproc/'
+draft: false
 git_integration_title: google_cloud_dataproc
 has_logo: true
 integration_title: Google Cloud Dataproc

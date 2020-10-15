@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Bigtable."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_bigtable/'
+draft: false
 git_integration_title: google_cloud_bigtable
 has_logo: true
 integration_title: "Google\_Bigtable"

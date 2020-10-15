@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md'
 display_name: Lighthouse
+draft: false
 git_integration_title: lighthouse
 guid: 4e66e6d6-bcb0-4250-b950-95ef11176494
 integration_id: lighthouse

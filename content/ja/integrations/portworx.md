@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md'
 display_name: Portworx
+draft: false
 git_integration_title: portworx
 guid: 858a4b03-3f75-4019-8ba8-46b00d5aeb46
 integration_id: portworx

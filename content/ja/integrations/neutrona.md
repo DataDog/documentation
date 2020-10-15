@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md'
 display_name: Neutrona
+draft: false
 git_integration_title: neutrona
 guid: ced5a4ae-6623-49f0-b45b-dbb678a5baa2
 integration_id: neutrona

@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tenable/README.md'
 display_name: Tenable
+draft: false
 git_integration_title: tenable
 guid: 303a1ba9-5136-4d23-9785-e36ea0d6caab
 integration_id: tenable
