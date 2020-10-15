@@ -401,10 +401,7 @@ Assign the [Write Historical View][16] permission to members of `ACME Admin`. Th
 [70]: /account_management/rbac/permissions?tab=ui#logs_write_processors
 [71]: /account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
 [72]: /account_management/rbac/permissions?tab=ui#logs_read_archives
-[73]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
 
-[74]: /account_management/rbac/permissions?tab=ui#logs_read_data
-[75]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
 
 
 
@@ -422,9 +419,9 @@ Assign the [Write Historical View][16] permission to members of `ACME Admin`. Th
 [9]: https://app.datadoghq.com/account/settings#api
 [10]: /account_management/api-app-keys/
 [11]: /api/v2/roles/#list-permissions
-[12]: /account_management/rbac/permissions?tab=ui#logs-read-data
+[12]: /account_management/rbac/permissions?tab=ui#logs_read_data
 [13]: /logs/processing/pipelines/
 [14]: /logs/indexes/
 [15]: /logs/archives/
-[16]: /account_management/rbac/permissions?tab=ui#logs-write-historical-view
-[17]: /account_management/rbac/permissions?tab=ui#logs-read-index-data
+[16]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
+[17]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
