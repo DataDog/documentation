@@ -23,7 +23,7 @@ further_reading:
   text: "ECS Fargate APM setup"
 ---
 
-Configuring your application to send [traces][1] to Datadog involves two main steps: Configuring the Datadog Agent and [Instrumenting your application][14]. 
+Configuring your application to send [traces][1] to Datadog involves two main steps: Configuring the Datadog Agent and [Instrumenting your application][2]. 
 
 Depending on your environment, there are different ways to configure the Datadog Agent. See the instructions for installing the Datadog Agent [locally](#datadog-agent), [on containers](#containers), and [several other ways](#additional-environments).
 
@@ -81,14 +81,14 @@ See our guide on setting the [`env` tag and an additional primary tag for scopin
 
 ## Next steps
 
-Next, [instrument your application][14]. For the full overview of all of features and configurations of APM, see the [APM overview][2].
+Next, [instrument your application][2]. For the full overview of all of features and configurations of APM, see the [APM overview][14].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /tracing/
+[2]: /tracing/setup/
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics/
@@ -100,4 +100,4 @@ Next, [instrument your application][14]. For the full overview of all of feature
 [11]: /integrations/cloud_foundry/#trace-collection
 [12]: /integrations/amazon_elasticbeanstalk/
 [13]: /tracing/guide/setting_primary_tags_to_scope/#definition
-[14]: /tracing/setup/
+[14]: /tracing/
