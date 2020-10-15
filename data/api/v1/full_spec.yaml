@@ -7798,7 +7798,6 @@ components:
       x-enum-varnames:
       - USER_LOCATOR
     TableWidgetCellDisplayMode:
-      default: number
       description: Define a display mode for the table cell.
       enum:
       - number
