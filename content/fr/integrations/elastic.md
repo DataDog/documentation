@@ -255,7 +255,7 @@ Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Elasticsearch p
 
 ## Dépannage
 
-- [Connexion impossible de l'Agent][5]
+- [Connexion de l'Agent impossible][5]
 - [Pourquoi Elasticsearch n'envoie-t-il pas toutes mes métriques ?][6]
 
 ## Pour aller plus loin

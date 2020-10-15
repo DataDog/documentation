@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -57,7 +58,7 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 
 Datadog の通知からトリガーするワークフローを作成します。
 
-### 構成
+### コンフィギュレーション
 
 #### Pliant の設定
 **Pliant API キーを作成します。**

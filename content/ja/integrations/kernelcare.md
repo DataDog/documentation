@@ -3,6 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -52,7 +53,7 @@ KernelCare チェックをホストにインストールするには
 3. [Datadog Agent をダウンロードします][4]。
 4. ビルドアーティファクトを Agent のあるホストにアップロードし、`datadog-agent integration install -w path/to/kernelcare/dist/<ARTIFACT_NAME>.whl` を実行します。
 
-### 構成
+### コンフィギュレーション
 
 1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
 

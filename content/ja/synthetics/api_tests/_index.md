@@ -22,35 +22,38 @@ API テストを行うと、API エンドポイントを監視して失敗や遅
 
 ## コンフィグレーション
 
-API テストのコンフィギュレーションは、作成する API テストのタイプにより異なります: [HTTP test](?tab=httptest), [SSL test](?tab=ssltest) または [TCP test](?tab=tcptest)。
+API テストのコンフィギュレーションは、作成する API テストのタイプにより異なります: [HTTP テスト](?tab=httptest)、[SSL テスト](?tab=ssltest)、[TCP テスト](?tab=tcptest)、または [DNS テスト](?tab=dnstest)
 
 ### リクエストを作成する
 
-Datadog によって実行される `HTTP`、`SSL` または `TCP` のリクエストを定義します。
+Datadog によって実行される `HTTP`、`SSL`、`TCP`、または `DNS` のリクエストを定義します。
 
 {{< tabs >}}
 
 {{% tab "HTTP Test" %}}
 
-{{< img src="synthetics/api_tests/make-http-request.png" alt="HTTP リクエストの作成"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-http-request.png" alt="HTTP リクエストの定義"  style="width:80%;" >}}
 
 Datadog によって実行されるリクエストを定義します。
 
-1. <mrk mid="29" mtype="seg"/><mrk mid="30" mtype="seg"/>
+1. **Choose a request type**: `HTTP`
 2. <mrk mid="31" mtype="seg"/><mrk mid="32" mtype="seg"/><mrk mid="33" mtype="seg"/>
-    * <mrk mid="34" mtype="seg"/><mrk mid="35" mtype="seg"/>
-        * Follow redirects: トグルボタンで、監視しているエンドポイントが最大 10 個のリダイレクトをフォローするよう設定します。
-        * Allow insecure certificates: トグルボタンで、証明書の検証中にエラーが発生しても、HTTP の接続テストを続行するよう設定できます。
-        * <mrk mid="38" mtype="seg"/><mrk mid="39" mtype="seg"/><mrk mid="40" mtype="seg"/>
-        * <mrk mid="41" mtype="seg"/><mrk mid="42" mtype="seg"/>
-        * Body: リクエストの本文と本文のタイプ（`text/plain`、`application/json`、`text/xml`、`text/html` または `None`）。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
-        * Cookies: 定義したクッキーをデフォルトのブラウザクッキーに追加します。複数のクッキーを設定するには、次の書式を使用します `<クッキー名1>=<クッキーの値1>; <クッキー名2>=<クッキーの値2>`。
+3. **Advanced Options** (オプション) をテストに追加します。
+  * Follow redirects: トグルボタンで、監視しているエンドポイントが最大 10 個のリダイレクトをフォローするよう設定します。
+  * Allow insecure server certificates: トグルボタンで、証明書の検証中にエラーが発生しても、HTTP の接続テストを続行するよう設定できます。
+  * Client certificate: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
+  * Request headers: 定義されたヘッダーは、デフォルトのブラウザヘッダーをオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]します。
+  * Cookies: 定義したクッキーをデフォルトのブラウザクッキーに追加します。複数のクッキーを設定するには、次の書式を使用します `<クッキー名1>=<クッキーの値1>; <クッキー名2>=<クッキーの値2>`。
+  * HTTP Basic Auth: ユーザー名とパスワードを使用した HTTP 基本認証。
+  * Request body: リクエストの本文と本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html` または `None`)。**注**: リクエスト本文の最大サイズは 50 キロバイトに制限されています。
+  * Proxy URL: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`)。
+  * Proxy Header: プロキシへの HTTP リクエストに含めるヘッダー。
 
-3. <mrk mid="68" mtype="seg"/><mrk mid="69" mtype="seg"/>
-4. **Select your tags**: タグはブラウザテストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][2]上の任意の `<KEY>` でフィルターを適用します。
-5. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][3] から入手できます。また、[プライベートロケーション][4]をセットアップして、公共インターネットからアクセスできない非公開のエンドポイントで Synthetic API テストを実行することもできます。
-6. <mrk mid="57" mtype="seg"/><mrk mid="58" mtype="seg"/>
-7. <mrk mid="59" mtype="seg"/><mrk mid="60" mtype="seg"/>
+4. <mrk mid="68" mtype="seg"/><mrk mid="69" mtype="seg"/>
+5. **Select your tags**: タグはブラウザテストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][2]上の任意の `<KEY>` でフィルターを適用します。
+6. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][3] から入手できます。また、[プライベートロケーション][4]をセットアップして、公共インターネットからアクセスできない非公開のエンドポイントで Synthetic API テストを実行することもできます。
+7. <mrk mid="57" mtype="seg"/><mrk mid="58" mtype="seg"/>
+8. <mrk mid="59" mtype="seg"/><mrk mid="60" mtype="seg"/>
 
 [1]: /ja/synthetics/identify_synthetics_bots/
 [2]: /ja/synthetics/
@@ -60,15 +63,19 @@ Datadog によって実行されるリクエストを定義します。
 
 {{% tab "SSL Test" %}}
 
-{{< img src="synthetics/api_tests/make-ssl-request.png" alt="SSL リクエストの作成"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/make-ssl-request.png" alt="SSL リクエストの定義"  style="width:80%;" >}}
 
-1. <mrk mid="64" mtype="seg"/><mrk mid="65" mtype="seg"/>
+1. **Choose a request type**: `SSL`
 2. <mrk mid="66" mtype="seg"/><mrk mid="67" mtype="seg"/>
-3. <mrk mid="68" mtype="seg"/><mrk mid="69" mtype="seg"/>
-4. **Select your tags**: タグは SSL テストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][1]上の任意の `<KEY>` でフィルターを適用します。
-5. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][2] から入手できます。また、[プライベートロケーション][3]をセットアップして、公共インターネットからアクセスできない非公開のエンドポイントで Synthetic API テストを実行することもできます。
-6. <mrk mid="77" mtype="seg"/><mrk mid="78" mtype="seg"/>
-7. <mrk mid="79" mtype="seg"/><mrk mid="80" mtype="seg"/>
+3. **Advanced Options** (オプション) をテストに追加します。
+  * Accept self-signed certificates: 自己署名証明書に関連するエラーをバイパスします。
+  * Client certificate: クライアント証明書と関連する秘密キーをアップロードして、mTLS を介して認証します。
+
+4. **Name**: SSL テストの名前。
+5. **Select your tags**: タグは SSL テストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][1]上の任意の `<KEY>` でフィルターを適用します。
+6. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][2] から入手できます。また、[プライベートロケーション][3]をセットアップして、公共インターネットからアクセスできない非公開のホストで Synthetic SSL テストを実行することもできます。
+7. <mrk mid="57" mtype="seg"/><mrk mid="58" mtype="seg"/>
+8. <mrk mid="79" mtype="seg"/><mrk mid="80" mtype="seg"/>
 
 [1]: /ja/synthetics/
 [2]: /ja/api/#get-available-locations
@@ -77,14 +84,31 @@ Datadog によって実行されるリクエストを定義します。
 
 {{% tab "TCP Test" %}}
 
-{{< img src="synthetics/api_tests/tcp_test.png" alt="TCP リクエストの作成"  style="width:80%;" >}}
+{{< img src="synthetics/api_tests/tcp_test.png" alt="TCP リクエストの定義"  style="width:80%;" >}}
 
-1. **Choose request type**: `TCP`
+1. **Choose a request type**: `TCP`
 2. `Host` および TCP `Port` を指定します。
-3. <mrk mid="68" mtype="seg"/><mrk mid="69" mtype="seg"/>
+3. **Name**: TCP テストの名前。
 4. **Select your tags**: タグは TCP テストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][1]上の任意の `<KEY>` でフィルターを適用します。
-5. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][2] から入手できます。また、[プライベートロケーション][3]をセットアップして、公共インターネットからアクセスできない非公開のエンドポイントで Synthetic API テストを実行することもできます。
-6. <mrk mid="77" mtype="seg"/><mrk mid="78" mtype="seg"/>
+5. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][2] から入手できます。また、[プライベートロケーション][3]をセットアップして、公共インターネットからアクセスできない非公開のホストまたはポートで Synthetic TCP テストを実行することもできます。
+6. <mrk mid="57" mtype="seg"/><mrk mid="58" mtype="seg"/>
+7. **Test URL** をクリックし、リクエストのコンフィギュレーションをテストします。応答データのプレビューが右側に表示されます。
+
+[1]: /ja/synthetics/
+[2]: /ja/api/#get-available-locations
+[3]: /ja/synthetics/private_locations/
+{{% /tab %}}
+
+{{% tab "DNS Test" %}}
+
+{{< img src="synthetics/api_tests/dns_test.png" alt="DNS リクエストの定義"  style="width:80%;" >}}
+
+1. **Choose a request type**: `DNS`
+2. 使用する `Domain` とオプションの `DNS Server` を指定します。
+3. **Name**: DNS テストの名前。
+4. **Select your tags**: タグは DNS テストに紐付いています。`<KEY>:<VALUE>` フォーマットを使用して `<VALUE>` に [Synthetic モニタリングページ][1]上の任意の `<KEY>` でフィルターを適用します。
+5. **Locations**: Datadog 管理下のロケーションからテストを実行します。世界中どこからでも使用できる AWS ロケーションが多数用意されています。完全なリストは  [Datadog API][2] から入手できます。また、[プライベートロケーション][3]をセットアップして、公共インターネットから解決できない非公開のドメインで Synthetic DNS テストを実行することもできます。
+6. <mrk mid="57" mtype="seg"/><mrk mid="58" mtype="seg"/>
 7. **Test URL** をクリックし、リクエストのコンフィギュレーションをテストします。応答データのプレビューが右側に表示されます。
 
 [1]: /ja/synthetics/
@@ -102,34 +126,38 @@ API テストの実行中は、少なくとも 1 つのアサーションを定�
 
 {{% tab "HTTP Test" %}}
 
-| 種類          | 演算子                                                                        | 値の型                 |
-|---------------|---------------------------------------------------------------------------------|----------------------------|
-| ステータスコード   | `is`、`is not`                                                                  | 整数                  |
-| 応答時間 | `lessThan`                                                                      | 整数 (ms)             |
-| ヘッダー       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | 文字列 <br> [Regex][1] |
-| 本文          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | 文字列 <br> [Regex][1] |
+| タイプ          | 演算子                                                                                               | 値の型                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][1] | _文字列_ <br> _[Regex][2]_ <br> _文字列_、_[Regex][2]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _文字列_ <br> _[Regex][2]_                                      |
+| response time | `is less than`                                                                                         | 整数 (ms)                                                  |
+| ステータスコード   | `is`、`is not`                                                                                         | 整数                                                      |
 
 **注**: HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文の圧縮を解除することが可能です。
 
 **注**: **Test URL** をクリックすると、基本のアサーションが自動的に入力されます。
 
-- `Response time` _lessThan_ 2000 ms
-- `Header content-type` _is_ "戻り値"
-- `Status code` _is_ "戻り値"
+- `response time` _is less than_ 1000 ms
+- `status code` _is_ "戻り値"
+- `header` `content-type` _is_ "戻り値"
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[1]: https://restfulapi.net/json-jsonpath/
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
 
-| タイプ        | 演算子                                                                        | 値の型                 |
-|-------------|---------------------------------------------------------------------------------|----------------------------|
-| 証明書 | `expires in more than`                                                          | _整数 (日数)_ |
-| プロパティ    | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | 文字列 <br> [Regex][1]  |
+| タイプ          | 演算子                                                                               | 値の型                 |
+|---------------|----------------------------------------------------------------------------------------|----------------------------|
+| 証明書   | `expires in more than`、`expires in less than`                                         | _整数 (日数)_ |
+| プロパティ      | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`       | 文字列 <br> [Regex][1] |
+| response time | `is less than`                                                                         | 整数 (ms)             |
+| TLS バージョン   | `is less than`、`is less than or equal`、`is`、`is more than`、`is more than or equal` | _Decimal_                  |
 
 **テスト URL** をクリックすると、基本アサーションが自動的に入力されます。
 
 - `certificate` _expires in more than_ 10 days
+- `response time` _is less than_ 1000 ms.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
@@ -142,8 +170,25 @@ API テストの実行中は、少なくとも 1 つのアサーションを定�
 
 **テスト URL** をクリックすると、基本アサーションが自動的に入力されます。
 
-- `response time` _is less than_ 2000 ms.
+- `response time` _is less than_ 1000 ms.
 
+{{% /tab %}}
+
+{{% tab "DNS Test" %}}
+
+| タイプ                | レコードタイプ             | 演算子                                           | 値の型                 |
+|---------------------|-------------------------|----------------------------------------------------|----------------------------|
+| response time       |                         | `is less than`                                     | 整数 (ms)             |
+| すべてのレコード        | of type A、of type AAAA | `is`、`contains`、<br> `matches`、`does not match` | 文字列 <br> [Regex][1] |
+| at least one record | of type A、of type AAAA | `is`、`contains`、<br> `matches`、`does not match` | 文字列 <br> [Regex][1] |
+
+**注**: **Test URL** をクリックすると、基本のアサーションが自動的に入力されます。
+
+- `response time` _is less than_ 1000 ms
+- `at least one record` `of type A` _is_ "戻り値" (戻ったとき)
+- `at least one record` `of type AAAA` _is_ "戻り値" (戻ったとき)
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
 
 {{< /tabs >}}

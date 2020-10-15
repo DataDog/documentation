@@ -1,6 +1,7 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "service_checks": assets/service_checks.json
 "categories":
@@ -152,7 +153,7 @@ Datadog イベントを介してアラートするようにチェックが構成
 
 ![events-example][10]
 
-### Service Checks
+### サービスのチェック
 
 このインテグレーションには、サービスのチェック機能は含まれません。
 

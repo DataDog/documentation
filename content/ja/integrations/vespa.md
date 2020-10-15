@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -73,7 +74,7 @@ Vespa チェックを構成するには
 {{< get-metrics-from-git "vespa" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 **vespa.metrics_health**:<br>
 Vespa [Node メトリクス API][10] からレスポンスがない場合、`CRITICAL`を返します。Vespa [Node メトリクス API][10] からレスポンスがあるものの処理中にエラーが発生した場合、`WARNING` を返します。それ以外の場合は `OK` を返します。

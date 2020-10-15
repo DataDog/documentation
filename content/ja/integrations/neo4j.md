@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md'
 display_name: Neo4j
@@ -62,7 +63,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
    ddev -e release build neo4j
    ```
 
-5. [Datadog Agent のダウンロードと起動][1]
+5. [Datadog Agent をダウンロードして起動][1]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
@@ -71,7 +72,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Neo4j の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `neo4j.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neo4j.d/conf.yaml][8] を参照してください。
 
@@ -91,7 +92,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 Neo4j チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 この Neo4j チェックは、収集するすべてのサービスチェックに次のタグを付けます。
 

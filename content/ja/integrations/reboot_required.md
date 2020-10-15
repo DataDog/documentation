@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md'
 display_name: Reboot required
@@ -63,7 +64,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. [Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `reboot_required.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル reboot_required.d/conf.yaml][8] を参照してください。
 
@@ -90,7 +91,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 reboot_required チェックには、イベントは含まれません。
 
-## Service Checks
+## サービスのチェック
 
 Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][10] ページで 'Integration' ではなく 'Custom Check' を選択します。
 
