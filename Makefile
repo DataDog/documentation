@@ -184,9 +184,13 @@ clean-java-examples:
 	@git clean -xdf content/en/api/**/*.java
 
 clean-python-examples:
-	@git clean -xdf content/en/api/**/*.py3
+	@git clean -xdf content/en/api/**/*.py*
 
-clean-examples: clean-go-examples clean-java-examples clean-python-examples
+clean-ruby-examples:
+	@git clean -xdf content/en/api/**/*.rb*
+
+
+clean-examples: clean-go-examples clean-java-examples clean-python-examples clean-ruby-examples
 	@rm -rf examples
 
 examples/datadog-api-client-go:
@@ -198,7 +202,10 @@ examples/datadog-api-client-java:
 examples/datadog-api-client-python:
 	@git clone https://github.com/DataDog/datadog-api-client-python.git examples/datadog-api-client-python
 
-.PHONY: examples/go examples/java examples/python examples
+examples/datadog-api-client-ruby:
+	@git clone https://github.com/DataDog/datadog-api-client-ruby.git examples/datadog-api-client-ruby
+
+.PHONY: examples/go examples/java examples/python examples/ruby examples
 
 examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extract-code-blocks-go.awk
 	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
@@ -222,4 +229,11 @@ examples/python: examples/datadog-api-client-python clean-python-examples local/
 
 	-cp -Rn examples/content ./
 
-examples: examples/go examples/java examples/python
+examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples local/bin/awk/extract-code-blocks-ruby.awk
+	@ls examples/datadog-api-client-ruby/docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-ruby.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-ruby/docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-ruby.awk -v output=examples/content/en/api/v2
+
+	-cp -Rn examples/content ./
+
+
+examples: examples/go examples/java examples/python examples/ruby

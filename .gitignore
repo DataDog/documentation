@@ -7,7 +7,8 @@ integrations_data
 /examples
 content/en/api/**/*.go
 content/en/api/**/*.java
-content/en/api/**/*.py3
+content/en/api/**/*.pybeta
+content/en/api/**/*.rbbeta
 
 # Ignoring all automated content
 # Developers/integrations

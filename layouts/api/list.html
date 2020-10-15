@@ -505,9 +505,8 @@
 
                                 {{ range . }}
                                 {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
-
-                                {{ $name := cond (eq $file_extension "py3") "python-beta" $lang.name }}
+                                {{ $lang := index $dot.Site.Params.code_languages (strings.TrimSuffix "beta" $file_extension) }}
+                                {{ $name := cond (strings.HasSuffix $file_extension "beta") (printf "%s-beta" $lang.name) $lang.name }}
 
                                 {{  $codeLangs = $codeLangs | append $name }}
                                 {{ end }}
@@ -564,8 +563,8 @@
                                     {{ $file_content := .Content }}
                                     {{ $file_extension := index (split (path.Ext .) ".") 1 }}
 
-                                    {{ $lang := index $dot.Site.Params.code_languages (cond (eq $file_extension "py3") "py" $file_extension) }}
-                                    {{ $name := cond (eq $file_extension "py3") "python-beta" $lang.name }}
+                                    {{ $lang := index $dot.Site.Params.code_languages (strings.TrimSuffix "beta" $file_extension) }}
+                                    {{ $name := cond (strings.HasSuffix $file_extension "beta") (printf "%s-beta" $lang.name) $lang.name }}
 
                                     {{ if ne $file_extension "sh"}}
                                     <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $name }}">

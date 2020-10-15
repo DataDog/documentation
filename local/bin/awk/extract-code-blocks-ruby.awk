@@ -35,20 +35,20 @@ function camel(value) {
     return head;
 }
 
-/^# datadog_api_client\.v[0-9]*\.(.+)Api/ {
+/^# DatadogAPIClient::V[0-9]*::(.+)Api/ {
     tag = slug(substr($2, 23, length($2)-25));
 }
-/^##? \*\*.+\*\*/ {
-    operation_id = camel(substr($2, 3, length($2)-4));
+/^## (.+)/ {
+    operation_id = camel($2);
 }
-/^```python/ {
+/^```ruby/ {
     if (in_code_block == 0) {
         in_code_block = 1;
         if (out_file) {
             close(out_file);
         }
         system("mkdir -p " output "/" tag);
-        out_file=output "/" tag "/" operation_id ".pybeta";
+        out_file=output "/" tag "/" operation_id ".rbbeta";
         print out_file;
     } else {
         print "Can't parse " FILENAME > "/dev/stderr"
