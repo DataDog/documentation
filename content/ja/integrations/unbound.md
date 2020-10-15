@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md'
 display_name: Unbound
+draft: false
 git_integration_title: unbound
 guid: 2b31e667-1fd9-440f-9e96-c72bea3cf3ca
 integration_id: unbound

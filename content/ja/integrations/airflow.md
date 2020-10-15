@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/airflow/README.md'
 display_name: Airflow
+draft: false
 git_integration_title: airflow
 guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow

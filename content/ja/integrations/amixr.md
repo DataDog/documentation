@@ -9,16 +9,17 @@
 - 監視
 - コラボレーション
 - notification
-"creates_events": !!bool "false"
+"creates_events": false
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
 "display_name": "Amixr"
+"draft": false
 "git_integration_title": "amixr"
 "guid": "56e3b585-27b4-4a04-b528-9c1adfecf387"
 "integration_id": "amixr"
 "integration_title": "Amixr"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "ildar@amixr.io"
 "manifest_version": "1.0.0"

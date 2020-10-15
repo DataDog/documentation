@@ -19,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md'
 display_name: IBM MQ
+draft: false
 git_integration_title: ibm_mq
 guid: 873153b6-5184-438a-8a32-1e2d2e490dde
 integration_id: ibm-mq

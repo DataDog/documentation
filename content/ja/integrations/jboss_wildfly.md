@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md'
 display_name: JBoss/WildFly
+draft: false
 git_integration_title: jboss_wildfly
 guid: ff99b3d2-9c14-4cdf-b869-7b8b1cbf0716
 integration_id: jboss-wildfly

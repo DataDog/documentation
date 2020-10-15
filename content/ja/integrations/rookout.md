@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rookout/README.md'
 display_name: Rookout
+draft: false
 git_integration_title: rookout
 guid: ad342dd9-4fe8-44e6-8bee-1e1cc64b1d28
 integration_id: rookout

@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Corrélez les alertes Datadog et créez des incidents actionnables avec BigPanda.
 doc_link: 'https://docs.datadoghq.com/integrations/bigpanda/'
+draft: false
 git_integration_title: bigpanda
 has_logo: true
 integration_title: BigPanda

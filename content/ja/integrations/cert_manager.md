@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/cert_manager/README.md'
 display_name: cert-manager
+draft: true
 git_integration_title: cert_manager
 guid: c9bdaf11-fe15-4892-ae30-47c5124144e5
 integration_id: cert-manager

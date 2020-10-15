@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
 display_name: Pliant
+draft: false
 git_integration_title: pliant
 guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant

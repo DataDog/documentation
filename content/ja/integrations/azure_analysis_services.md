@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Analysis Services のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_analysis_services/'
+draft: false
 git_integration_title: azure_analysis_services
 has_logo: true
 integration_title: Microsoft Azure Analysis Services

@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: ビルドの完了数、平均ビルド時間などを視覚化
 doc_link: 'https://docs.datadoghq.com/integrations/circleci/'
+draft: false
 git_integration_title: circleci
 has_logo: true
 integration_title: CircleCI

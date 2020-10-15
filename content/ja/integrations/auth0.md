@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md'
 display_name: Auth0
+draft: false
 git_integration_title: auth0
 guid: 9308a35c-219e-4d24-ac11-af2511e5041a
 integration_id: auth0

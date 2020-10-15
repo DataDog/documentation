@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md'
 display_name: CockroachDB
+draft: false
 git_integration_title: cockroachdb
 guid: d66151ed-2e98-4037-ad89-bf4400e45f34
 integration_id: cockroachdb

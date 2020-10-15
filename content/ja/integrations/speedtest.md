@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md'
 display_name: speedtest
+draft: true
 git_integration_title: speedtest
 guid: 4bf81e32-170a-44f3-868d-1683ef39464f
 integration_id: speedtest

@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md'
 display_name: HyperV
+draft: false
 git_integration_title: hyperv
 guid: 412a75c1-b752-4b20-b046-4195dfaaf6ec
 integration_id: hyper-v

@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md'
 display_name: KernelCare
+draft: true
 git_integration_title: kernelcare
 guid: 8b35942d-40cd-4c86-b584-af1837ea67ca
 integration_id: kernelcare

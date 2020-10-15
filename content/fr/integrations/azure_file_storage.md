@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Stockage Fichier Azure.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_file_storage/'
+draft: false
 git_integration_title: azure_file_storage
 has_logo: true
 integration_title: Stockage Fichier Microsoft Azure

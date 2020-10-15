@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md'
 display_name: BIND 9
+draft: false
 git_integration_title: bind9
 guid: bce6961c-4312-11e9-b210-d663bd873d93
 integration_id: bind9

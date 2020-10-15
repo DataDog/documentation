@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Connect."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_connect/'
+draft: false
 git_integration_title: amazon_connect
 has_logo: true
 integration_title: "Amazon\_Connect"

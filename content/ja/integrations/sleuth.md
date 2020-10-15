@@ -11,16 +11,17 @@
 - issue-tracking
 - コラボレーション
 - source-control
-"creates_events": !!bool "false"
+"creates_events": false
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
 "display_name": "Sleuth"
+"draft": false
 "git_integration_title": "sleuth"
 "guid": "294cd3d0-1412-475a-9c85-d8369719b805"
 "integration_id": "sleuth"
 "integration_title": "Sleuth"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@sleuth.io"
 "manifest_version": "1.0.0"

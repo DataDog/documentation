@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md'
 display_name: Eventstore
+draft: false
 git_integration_title: eventstore
 guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
