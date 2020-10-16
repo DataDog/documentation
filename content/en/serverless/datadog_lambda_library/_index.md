@@ -30,6 +30,8 @@ The Datadog Lambda Library is responsible for:
 - Submitting [custom metrics][2] (synchronously and asynchronously).
 - Enabling [Datadog APM and Distributed Tracing][3] for Node.js, Python, and Ruby.
 
+You **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
+
 The Datadog Lambda Library is **NOT** responsible for collecting:
 
 - Lambda metrics from CloudWatch (see [AWS Lambda Integration][4])
