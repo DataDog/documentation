@@ -66,7 +66,7 @@ After building your application, bundlers generate a directory, most of the time
         javascript.464388.js.map
 ```
 
-<div class="alert alert-info">If, for example, the sum of the file size of <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds __the 50mb limit__, reduce it by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][https://webpack.js.org/guides/code-splitting/]).</div>
+<div class="alert alert-info">If, for example, the sum of the file size of <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds <i>the 50mb limit</i>, reduce it by configuring your bundler to split the source code into multiple smaller chunks (<a href="https://webpack.js.org/guides/code-splitting/">See how to do this with WebpackJS</a>).</div>
 
 ## Upload your source maps
 
