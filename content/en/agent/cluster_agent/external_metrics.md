@@ -141,13 +141,13 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
 1. Install the `DatadogMetric` CRD in your cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-operator/master/deploy/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics_crd.yaml"
     ```
 
 2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent-datadogmetrics/cluster-agent-rbac.yaml"
     ```
 
 3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
