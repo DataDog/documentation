@@ -322,7 +322,7 @@ This view lists:
 
 * **`Restricted Access` section**: all the restriction queries, and what role(s) are attached to them,
 * **`Unrestricted Access` section**: all roles that have `log_read_data` permission with no further restrictions,
-* **`No Access` section**: all roles that does not `log_read_data`.
+* **`No Access` section**: all roles that does not have the `log_read_data` permission.
 
 
 ##### Create a Restriction Query
