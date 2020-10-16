@@ -112,7 +112,7 @@ While this is no longer the recommended setup configuration and is not needed to
 
 All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
-**Note:** Existing App Analytics filters can no longer be edited within Datadog.  The migrated retention filters *can* be edited to adjust the retention rate for spans that match the filter criteria.
+**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][1].  Legacy filters are now read only on the [settings][8] page in-app.
 
 
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
@@ -122,3 +122,4 @@ All existing App Analytics filters are automatically transitioned to Retention F
 [5]: /help/
 [6]: /tracing/trace_search_and_analytics
 [7]: /tracing/legacy_app_analytics/
+[8]: https://app.datadoghq.com/apm/settings
