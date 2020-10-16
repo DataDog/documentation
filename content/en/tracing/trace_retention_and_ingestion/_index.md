@@ -51,8 +51,11 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 1. Name your filter.
 2. Set the relevant tags you would like to index spans that match ALL of.
-3. Set a percentage of spans matching these tags to be indexed.
-4. Save your new filter.
+3. Select whether this filter will retain any span that matches the criteria, or only [top level spans][3].
+4. Set a percentage of spans matching these tags to be indexed.
+5. Save your new filter.
+
+**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][3] of service and index them. If "All Spans" is selected, the retention filter will retain the selected proportion of any spans of the distributed trace irrespective of their hierarchy and index them.  This may have an impact on your bill, and the visual indicator within the UI while setting a retention filter will inform you how many matching spans have been detected over the time period.
 
 ## Ingestion Controls
 
@@ -68,7 +71,7 @@ For the best experience, we recommend you set services to send 100% of their tra
 
 **Note:** If you are seeing numbers below 100% for Ingestion Rate, ensure you are using Agent 6.19+ or 7.19+ as these versions increased the default rate.
 
-In the Datadog app, on the ['Ingestion Controls' tab][3], you can see the following information:
+In the Datadog app, on the ['Ingestion Controls' tab][4], you can see the following information:
 
 | Column                | Data |
 | ----------------------- | ---------- |
@@ -92,15 +95,30 @@ To specify that a specific percentage of a service's traffic should be sent, add
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy.
 5. Confirm on the Data Ingestion page that your new percentage has been applied.
 
+### Traces dropped before ingestion
+
+If you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for Tracing without Limits and
+- your applications generate above 50 traces per second
+- your applications send intermittent traffic loads
+- your applications traces are large in size or otherwise have complicated trace payloads
+
+This may make them not always send 100% of your traces to Datadog.  In this case, some traces will be dropped en route to Datadog.  These traces will be dropped in the Datadog Agent, *after* stats are computed, so that metrics calculated will be based on 100% of your traces.
+
+In case you are seeing ingestion rates below 100% within Datadog and would like to send all your traces, our recommendation is to enable Tracing without Limits. If you have any questions, feel free to reach out to our [support team][5].
+
 ## Legacy App Analytics
 
-While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][4], if needed there are instructions for configuring legacy [App Analytics][5] setups.
+While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][6], if needed there are instructions for configuring legacy [App Analytics][7] setups.
 
 All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
+
+**Note:** Existing App Analytics filters can no longer be edited within Datadog.  The migrated retention filters *can* be edited to adjust the retention rate for spans that match the filter criteria.
 
 
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode
-[3]: https://app.datadoghq.com/apm/traces/ingestion-controls
-[4]: /tracing/trace_search_and_analytics
-[5]: /tracing/legacy_app_analytics/
+[3]: /tracing/visualization/#top-level-span
+[4]: https://app.datadoghq.com/apm/traces/ingestion-controls
+[5]: /help/
+[6]: /tracing/trace_search_and_analytics
+[7]: /tracing/legacy_app_analytics/

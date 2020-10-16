@@ -30,6 +30,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Monitors][1]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                          |
+| [Top Level Span](#top-level-span) | A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.                                                                                            |
 | [Trace metrics](#trace-metrics) | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][2]. They can be used to identify and alert on hits, errors, or latency.                       |
 | [Indexed span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
 | [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
@@ -81,6 +82,19 @@ A span represents a logical unit of work in the system for a given time period. 
 For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
+
+## Top Level Span
+
+A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.
+
+For the example below, the top level spans are:
+- rack.request
+- aspnet_coremvc.request
+- The topmost green span below aspnet_coremvc.request
+- Every orange mongodb span
+
+{{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
+
 
 ## Trace Metrics
 
