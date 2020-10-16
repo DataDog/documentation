@@ -12,6 +12,12 @@ html {
 $footer-font-color: rgba(255, 255, 255, 0.5);
 $footer-font-color-hover: rgba(255, 255, 255, 1);
 
+html[data-env="preview"] {
+  footer {
+    margin-bottom: 30px;
+  }
+}
+
 footer {
   display: block;
   width: 100%;
