@@ -533,7 +533,7 @@ components:
         aggregation:
           $ref: '#/components/schemas/LogsAggregationFunction'
         metric:
-          description: The metric to sort by (only used for type=metric)
+          description: The metric to sort by (only used for `type=measure`)
           example: '@duration'
           type: string
         order:
