@@ -74,7 +74,7 @@ Check in [Datadog][8] that you have all these permissions. If you are missing an
 
 ### Get an API key and an app key
 
-*Note*: This section is only required if you intend on using the Datadog API, for which you need an API key and an application key from an Admin user.
+**Note**: This section is only required if you intend on using the Datadog API, for which you need an API key and an application key from an Admin user.
 
 API keys and app keys are available in your [Datadog account API key page][9]. More details available in the [API and app keys][10] section of the documentation.
 
@@ -87,7 +87,7 @@ Throughout this guide, you will need to replace all occurrences of `<DATADOG_API
 
 ### Get permission IDs
 
-*Note*: This section is only required if you intend on using the Datadog API to set up RBAC.
+**Note**: This section is only required if you intend on using the Datadog API to set up RBAC.
 
 Use the [Permissions API][11] to get the list of all existing permissions. The answer is an array of permissions such as the one below (the `logs_read_data` permission has the `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb`, which is all you need to know about that permission).
 
@@ -270,14 +270,13 @@ This section details how to:
 1. Create a `team:acme` restriction query.
 2. Attach that restriction query to ACME roles.
 
-
-*Note*: Roles can have **no more than one** restriction query attached. If you attach a restriction query to a role, it removes any restriction queries already attached to this role.
+**Note**: Roles can have **no more than one** restriction query attached. If you attach a restriction query to a role, it removes any restriction queries already attached to this role.
 
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Use the [Data Access page][22] in the Datadog App to:
+Use the [Data Access page][1] in the Datadog App to:
 
 * Create a `team:acme` restriction query.
 * Assign `ACME Admin` and `ACME User` roles to that restriction query.
@@ -382,7 +381,7 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME Tags at Rehydration"  style="width:60%;">}}
 
-*Note*: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME User` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
+**Note**: **If** you use the [Legacy Read Index Data Permission][21], add the `ACME User` role to ACME archive(s) alongside the `ACME User` role. As `ACME User` role members don't have the permission to perform rehydration, this does not give them sensitive permissions. However, this automatically scopes the Read Index Data permission to the resulting historical view, so that they can access the content.
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="Rehydration Index Permission"  style="width:60%;">}}
 
