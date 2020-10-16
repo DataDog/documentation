@@ -312,7 +312,25 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 {{< tabs >}}
 {{% tab "UI" %}}
 
-This configuration is only supported through the API.
+
+##### Create a Restriction Query
+
+{{< img src="account_management/rbac/logs_rq-create.gif" alt="Create a Restriction Query"  style="width:70%;">}}
+
+
+##### Assign or Reassign a Role to a Restriction Query
+
+{{< img src="account_management/rbac/logs_rq-assign_roles.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+
+
+##### Check Restriction Queries
+
+{{< img src="account_management/rbac/logs_rq-filter.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+
+{{< img src="account_management/rbac/logs_rq-view_as_role.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+
+{{< img src="account_management/rbac/logs_rq-view_as_user.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+
 
 {{% /tab %}}
 {{% tab "API" %}}
