@@ -307,30 +307,56 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 
 {{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
 
-**Restrict read access to a subset of logs**
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
+To restrict users so that they see no more than logs matching a restriction query, use the [Data Access page][17] in the Datadog App to: 
+
+1. [Create](#create-a-restriction-query) a restriction query.
+2. [Assign](#assign-a-role-to-a-restriction-query) one or multiple roles to that restriction query.
+3. [Check](#check-restriction-queries) what roles and users are assigned to what restriction queries.
+
+
+This view lists:
+
+* **`Restricted Access` section**: all the restriction queries, and what role(s) are attached to them,
+* **`Unrestricted Access` section**: all roles that have `log_read_data` permission with no further restrictions,
+* **`No Access` section**: all roles that does not `log_read_data`.
+
 
 ##### Create a Restriction Query
+
+Create a new restriction query defining its query filter. The new query appears in the list of restrictions with no Role attached to it. 
 
 {{< img src="account_management/rbac/logs_rq-create.gif" alt="Create a Restriction Query"  style="width:70%;">}}
 
 
-##### Assign or Reassign a Role to a Restriction Query
+##### Assign a Role to a Restriction Query
+
+Pick the role wherever it stands, and assign it to the intended Restriction Query.
+
+*Note*: Keep in mind that a Role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
 
 {{< img src="account_management/rbac/logs_rq-assign_roles.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
 
+Likewise, use the same "Move" interaction to grant `Unrestricted Access` to a Role, or conversely to turn it into a `No Access` role.
 
 ##### Check Restriction Queries
 
-{{< img src="account_management/rbac/logs_rq-filter.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+This page won't display more than 50 Restriction Queries at once, and more than 50 Roles per section. In case you have hundreds if not thousands of roles and restriction queries, use the filters to scope this view down: 
 
-{{< img src="account_management/rbac/logs_rq-view_as_role.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+* with the restriction query filter,
 
-{{< img src="account_management/rbac/logs_rq-view_as_user.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-filter.png" alt="Filter Restriction Queries"  style="width:70%;">}}
 
+* with the role  filter,
+
+{{< img src="account_management/rbac/logs_rq-view_as_role.png" alt="View as Roles"  style="width:70%;">}}
+
+* with the user filter, which is a convenient way to see what a specific user belonging to multiple roles actually have access to.
+
+{{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles"  style="width:70%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -425,3 +451,4 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [14]: /api/v1/logs-pipelines/
 [15]: /api/v2/logs-restriction-queries/
 [16]: /logs/explorer/live_tail/
+[17]: https://app.datadoghq.com/logs/pipelines/data-access
