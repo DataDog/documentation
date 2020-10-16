@@ -130,6 +130,7 @@ DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
 ```php
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
+
 [1]: /ja/tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{% /tab %}}
 

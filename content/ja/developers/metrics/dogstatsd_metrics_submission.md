@@ -45,12 +45,12 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 `RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。 `COUNT` タイプについては、[メトリクスのタイプ][2] に関するドキュメントを参照してください。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+以下のコードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
 
-以下の Python コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
-{{< code-block lang="python" filename="count_metric.py" >}}
+{{< programming-lang lang="python" >}}
+```python
 from datadog import initialize, statsd
 import time
 
@@ -65,14 +65,11 @@ while(1):
   statsd.increment('example_metric.increment', tags=["environment:dev"])
   statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-以下の Ruby コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
-
-{{< code-block lang="ruby" filename="count_metric.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -83,14 +80,11 @@ while true do
     statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
-以下の Go コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
-
-{{< code-block lang="go" filename="count_metric.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -113,14 +107,11 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
-以下の Java コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
-
-{{< code-block lang="java" filename="count_metric.java" >}}
+{{< programming-lang lang="java" >}}
+```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -142,14 +133,11 @@ public class DogStatsdClient {
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-以下の .NET コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
-
-{{< code-block lang="csharp" filename="count_metric.cs" >}}
+{{< programming-lang lang=".NET" >}}
+```csharp
 using StatsdClient;
 using System;
 
@@ -178,14 +166,11 @@ public class DogStatsdClient
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-以下の PHP コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
-
-{{< code-block lang="php" filename="count_metric.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -203,10 +188,10 @@ while (TRUE) {
     $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
     sleep(10);
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
@@ -216,7 +201,7 @@ while (TRUE) {
 
 {{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
-### ゲージ (GAUGE)
+### GAUGE
 
 | メソッド                                                        | Datadog 保存タイプ                                                                                                                                      |
 |---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -226,12 +211,12 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+以下のコードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
 
-以下の Python コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
-{{< code-block lang="python" filename="gauge_metric.py" >}}
+{{< programming-lang lang="python" >}}
+```python
 from datadog import initialize, statsd
 import time
 
@@ -248,14 +233,11 @@ while(1):
   i += 1
   statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-以下の Ruby コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
-
-{{< code-block lang="ruby" filename="gauge_metric.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -267,14 +249,11 @@ while true do
     statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
-以下の Go コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
-
-{{< code-block lang="go" filename="gauge_metric.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -296,14 +275,11 @@ func main() {
         time.Sleep(10 * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
-以下の Java コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
-
-{{< code-block lang="java" filename="gauge_metric.java" >}}
+{{< programming-lang lang="java" >}}
+```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -323,14 +299,11 @@ public class DogStatsdClient {
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-以下の .NET コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
-
-{{< code-block lang="csharp" filename="gauge_metric.cs" >}}
+{{< programming-lang lang=".NET" >}}
+```csharp
 using StatsdClient;
 using System;
 
@@ -357,14 +330,11 @@ public class DogStatsdClient
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-以下の PHP コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
-
-{{< code-block lang="php" filename="gauge_metric.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -383,10 +353,9 @@ while (TRUE) {
     $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
@@ -402,12 +371,12 @@ while (TRUE) {
 
 `GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+以下のコードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
 
-以下の Python コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
 
-{{< code-block lang="python" filename="set_metric.py" >}}
+{{< programming-lang lang="python" >}}
+```python
 from datadog import initialize, statsd
 import time
 import random
@@ -423,14 +392,11 @@ while(1):
   i += 1
   statsd.set('example_metric.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-以下の Ruby コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
-
-{{< code-block lang="ruby" filename="set_metric.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -441,14 +407,11 @@ while true do
     statsd.set('example_metric.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
-以下の Go コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
-
-{{< code-block lang="go" filename="set_metric.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -472,14 +435,11 @@ func main() {
         time.Sleep(rand.Intn(10) * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-以下の .NET コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
-
-{{< code-block lang="csharp" filename="set_metric.cs" >}}
+{{< programming-lang lang=".NET" >}}
+```csharp
 using StatsdClient;
 using System;
 
@@ -506,14 +466,11 @@ public class DogStatsdClient
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-以下の PHP コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
-
-{{< code-block lang="php" filename="set_metric.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -533,22 +490,21 @@ while (TRUE) {
     $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
 {{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
-### ヒストグラム
+### HISTOGRAM
 
 | メソッド                                                            | Datadog 保存タイプ                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
-#### コンフィグレーション
+#### コンフィギュレーション
 
 * Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
 * Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
@@ -557,12 +513,13 @@ while (TRUE) {
 
 `HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
-{{< tabs >}}
-{{% tab "Python" %}}
 
-以下の Python コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+以下のコードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
 
-{{< code-block lang="python" filename="histogram_metric.py" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,.NET,PHP" >}}
+
+{{< programming-lang lang="python" >}}
+```python
 from datadog import initialize, statsd
 import time
 import random
@@ -577,14 +534,11 @@ initialize(**options)
 while(1):
   statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-以下の Ruby コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
-
-{{< code-block lang="ruby" filename="histogram_metric.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -593,14 +547,11 @@ while true do
     statsd.histogram('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
-以下の Go コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
-
-{{< code-block lang="go" filename="histogram_metric.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -618,18 +569,15 @@ func main() {
     }
 
     for {
-        statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
+        statsd.Histogram("example_metric.histogram", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
-以下の Java コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
-
-{{< code-block lang="java" filename="histogram_metric.java" >}}
+{{< programming-lang lang="java" >}}
+```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -649,14 +597,11 @@ public class DogStatsdClient {
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-以下の .NET コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
-
-{{< code-block lang="csharp" filename="histogram_metric.cs" >}}
+{{< programming-lang lang=".NET" >}}
+```csharp
 using StatsdClient;
 using System;
 
@@ -683,14 +628,11 @@ public class DogStatsdClient
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-以下の PHP コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
-
-{{< code-block lang="php" filename="histogram_metric.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -707,10 +649,10 @@ while (TRUE) {
     $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 上のインスツルメンテーションは、以下のメトリクスを生成します。
 
@@ -730,11 +672,11 @@ while (TRUE) {
 
 DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタイプとして実装されています（標準 StatsD に含まれるタイマーと混同しないでください）。また、コードセクションの実行にかかる時間など、タイミングデータのみを測定します。
 
-| メソッド                                                        | Datadog ストレージタイプ                                                                                                                                              |
+| メソッド                                                        | Datadog 保存タイプ                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
-##### コンフィグレーション
+##### コンフィギュレーション
 
 `TIMER` には、`HISTOGRAM` [コンフィギュレーション](#configuration)ルールが適用されます。
 
@@ -742,12 +684,13 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 `GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,PHP" >}}
+
+{{< programming-lang lang="python" >}}
 
 Python では、タイマーはデコレーターで作成されます。
 
-{{< code-block lang="python" filename="timers.py" >}}
+```python
 from datadog import initialize, statsd
 import time
 import random
@@ -765,33 +708,32 @@ def my_function():
 
 while(1):
   my_function()
-{{< /code-block >}}
+```
 
 または、コンテキストマネージャーを使用します。
 
-{{< code-block lang="python" filename="context_manager.py" >}}
+```python
 from datadog import statsd
 import time
 import random
 
 def my_function():
 
-  # 時間を測定しない部分を記述
+  # First some stuff you don't want to time
   sleep(1)
 
-  # ここでタイマーを開始
+  # Now start the timer
   with statsd.timed('example_metric.timer', tags=["environment:dev"]):
-    # 測定を実行
+    # do something to be measured
     sleep(random.randint(0, 10))
 
 while(1):
   my_function()
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-{{< code-block lang="php" filename="timer.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -813,10 +755,10 @@ while (TRUE) {
   runfunction();
   $statsd->microtiming('example_metric.timer', microtime(TRUE) - $start_time);
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 DogStatsD はタイマーメトリクスデータを受け取ると、レンダリング時間の統計的分布を計算し、次のメトリクスを Datadog に送信します。
 
@@ -832,7 +774,7 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 {{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
-### ディストリビューション
+### DISTRIBUTION
 
 | メソッド                                                | Datadog 保存タイプ                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
@@ -842,12 +784,12 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 `DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+以下のコードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
 
-以下の Python コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
-{{< code-block lang="python" filename="distribution_metric.py" >}}
+{{< programming-lang lang="python" >}}
+```python
 from datadog import initialize, statsd
 import time
 import random
@@ -862,14 +804,11 @@ initialize(**options)
 while(1):
   statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-以下の Ruby コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
-
-{{< code-block lang="ruby" filename="distribution_metric.rb" >}}
+{{< programming-lang lang="ruby" >}}
+```ruby
 require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
@@ -878,14 +817,11 @@ while true do
     statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
-以下の Go コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
-
-{{< code-block lang="go" filename="distribution_metric.go" >}}
+{{< programming-lang lang="go" >}}
+```go
 package main
 
 import (
@@ -907,14 +843,11 @@ func main() {
         time.Sleep(2 * time.Second)
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
-以下の Java コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
-
-{{< code-block lang="java" filename="distribution_metric.java" >}}
+{{< programming-lang lang="java" >}}
+```java
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
@@ -934,14 +867,11 @@ public class DogStatsdClient {
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-以下の .NET コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
-
-{{< code-block lang="csharp" filename="distribution_metric.cs" >}}
+{{< programming-lang lang=".NET" >}}
+```csharp
 using StatsdClient;
 using System;
 
@@ -968,14 +898,11 @@ public class DogStatsdClient
         }
     }
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-以下の PHP コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
-
-{{< code-block lang="php" filename="distribution_metric.php" >}}
+{{< programming-lang lang="PHP" >}}
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -992,10 +919,10 @@ while (TRUE) {
     $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
-{{< /code-block >}}
+```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 上のインスツルメンテーションは、`合計`、`カウント`、`平均`、`最小`、`最大`、`50 パーセンタイル` (中央値)、`75 パーセンタイル`、`90 パーセンタイル`、`95 パーセンタイル`、`99 パーセンタイル`の各データを計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、「あらゆる」種類の値の分布の測定に使用できます。
 
@@ -1020,51 +947,46 @@ DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` 
 
 以下のコードは、半分の時間だけポイントを送信します。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
+{{< programming-lang lang="python" >}}
 ```python
 statsd.increment('loop.count', sample_rate=0.5)
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
+{{< programming-lang lang="ruby" >}}
 ```ruby
 statsd.increment('loop.count', :sample_rate => 0.5)
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
+{{< programming-lang lang="go" >}}
 ```go
 statsd.Incr("example_metric.increment", []string{}, 0.5)
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
+{{< programming-lang lang="java" >}}
 ```java
 Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
+{{< programming-lang lang=".NET" >}}
 ```csharp
 dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
+{{< programming-lang lang="PHP" >}}
 ```php
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 ### メトリクスのタグ付け
 
@@ -1074,60 +996,53 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 以下のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
 
-{{< tabs >}}
-{{% tab "Python" %}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
+{{< programming-lang lang="python" >}}
 ```python
 statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
+{{< programming-lang lang="ruby" >}}
 ```ruby
 statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
-
+{{< programming-lang lang="go" >}}
 ```go
 statsd.Incr("example_metric.increment", []string{"environment:dev","account:local"}, 1)
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
-
+{{< programming-lang lang="java" >}}
 ```java
 Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
-
+{{< programming-lang lang=".NET" >}}
 ```csharp
 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
-
-`tags` 引数は文字列にすることができます。
+{{< programming-lang lang="PHP" >}}
+The `tags` argument can be a string:
 
 ```php
 $statsd->increment('example_metric.increment', "environment:dev,account:local");
 ```
 
 または配列にすることができます。
-
 ```php
 <?php
 $statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
-
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /programming-lang-wrapper >}}
 
 #### ホストタグ
 
