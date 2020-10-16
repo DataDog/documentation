@@ -81,6 +81,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 For more information about CLI parameters, see the [official Github repository][5].
 
 For Error Tracking to properly work, you must configure your Javascript bundler so that:
+
 -   Source maps directly include the related source code, you should make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
 -   The size of each source map augmented with the size of the related minified file do not exceed our limit of 50mb. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how yo do it with WebpackJS][6]).
 
