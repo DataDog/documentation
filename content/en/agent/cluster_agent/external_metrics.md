@@ -268,6 +268,6 @@ The `currentValue` is the value gathered from Datadog, and thus the one that wil
 [4]: /agent/cluster_agent/setup/
 [5]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
 [9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
