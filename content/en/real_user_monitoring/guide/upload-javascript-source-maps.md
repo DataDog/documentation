@@ -15,7 +15,7 @@ further_reading:
 If your front-end Javascript source code is minified, you will need to upload your source maps to Datadog so that we are able to deobfuscate your different stack traces. For a given error, you will then get access to the file path, the line number, as well as a code snippet for each frame of the related stack trace.
 
 ## Instrument your code
-You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. Check below some configurations for popular Javascript bundlers.
+You must configure your Javascript bundler so that, when minifying your source code, it generates source maps which directly include the related source code in the `sourcesContent` attribute. In addition, you should make sure that the size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. Check below some configurations for popular Javascript bundlers.
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
@@ -65,6 +65,8 @@ After building your application, bundlers generate a directory, most of the time
         javascript.464388.min.js
         javascript.464388.js.map
 ```
+
+<div class="alert alert-info">If the sum of the size of <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds our 50mb limit, a good way to reduce it is to configure the bundler to split the source code into multiple smaller chunks [see how yo do it with WebpackJS][https://webpack.js.org/guides/code-splitting/].</div>
 
 ## Upload your source maps
 

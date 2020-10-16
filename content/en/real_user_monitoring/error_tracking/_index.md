@@ -6,6 +6,9 @@ further_reading:
 - link: "/real_user_monitoring/error_tracking/explorer"
   tag: "Documentation"
   text: "RUM Error Tracking Explorer"
+- link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
+  tag: "Documentation"
+  text: "Official repository of the Datadog CLI"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Guide"
   text: "Upload javascript source maps"
@@ -78,12 +81,10 @@ datadog-ci sourcemaps upload /path/to/dist \
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information about CLI parameters, see the [official Github repository][5].
-
 For Error Tracking to properly work with your source maps, you must configure your Javascript bundler so that:
 
 -   Source maps directly include the related source code, you should make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
--   The size of each source map augmented with the size of the related minified file do not exceed our limit of 50mb. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how yo do it with WebpackJS][6]).
+-   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how yo do it with WebpackJS][5]).
 
 ## Further Reading
 
@@ -93,5 +94,4 @@ For Error Tracking to properly work with your source maps, you must configure yo
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: /real_user_monitoring/browser/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[6]: https://webpack.js.org/guides/code-splitting/
+[5]: https://webpack.js.org/guides/code-splitting/
