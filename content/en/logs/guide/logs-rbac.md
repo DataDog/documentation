@@ -285,13 +285,12 @@ This section details how to:
 
 Use the [Data Access page][22] in the Datadog App to:
 
-* Create a `team:acme` Restriction Query
-* Assign `ACME Admin` and `ACME User` roles to that restriction query. 
+* Create a `team:acme` restriction query.
+* Assign `ACME Admin` and `ACME User` roles to that restriction query.
 
 {{< img src="logs/guide/rbac/restriction_queries.png" alt="Restrict access to logs"  style="width:60%;">}}
 
-Find more details on how to use this page in the [`logs_read_data` permission section][12] our Account Management documentation.
-
+Refer to the [`logs_read_data` permission section][12] for more information.
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -421,4 +420,3 @@ Assign the [Write Historical View][19] permission to members of `ACME Admin`. Th
 [19]: /account_management/rbac/permissions?tab=ui#logs_write_historical_view
 [20]: /logs/archives#datadog-permissions
 [21]: /account_management/rbac/permissions?tab=ui#logs_read_index_data
-[22]: https://app.datadoghq.com/logs/pipelines/data-access
