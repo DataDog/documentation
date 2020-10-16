@@ -65,8 +65,8 @@ Once the Datadog Cluster Agent is up and running:
 
     Apply this change by running `kubectl apply -f custom-metric-server.yaml`
 
-3. Download the [`rbac-hpa.yaml` RBAC rules file][7].
-2. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
+2. Download the [`rbac-hpa.yaml` RBAC rules file][7].
+3. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
