@@ -32,15 +32,13 @@ Error Tracking processes errors collected from the browser by the RUM SDK (error
 
 To quickly get started with error tracking:
 
-1. Download the `v1.11.5+` version of the [RUM Browser SDK][2].
+1. Download the latest version of the [RUM Browser SDK][2].
 2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][3].
 
 ### Upload mapping files
 
 The source code of some applications is obfuscated or minified when deployed to production for performance optimization and security concerns.
-The consequence is that stack traces of errors fired from those applications are also obfuscated, making the troubleshooting process much more difficult because the stack traces cannot be used to understand which file and which line of code are responsible for a given error. 
-
-Datadog allows you to securely upload your source maps to deobfuscate your stack traces:
+The consequence is that stack traces of errors fired from those applications are also obfuscated, making the troubleshooting process much more difficult.
 
 #### Javascript source maps
 
@@ -82,7 +80,11 @@ datadog-ci sourcemaps upload /path/to/dist \
 
 For more information about CLI parameters, see the [official Github repository][5].
 
-<div class="alert alert-warning">You must configure your Javascript bundler to create <strong>source maps that directly include the related source code</strong>. You should make sure the <code>sourcesContent</code> attribute in your source maps is not empty before uploading them.</div>
+<div class="alert alert-warning">
+You must configure your Javascript bundler so that:
+-   Source maps directly include the related source code, you should make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
+-   The size of each source map combined with the size of the related minified file do not exceed our limit of 50mb. This sum can be reduced by configuring your bundler to split the source code into multiple chunks ([see how yo do it with WebpackJS][6]).
+</div>
 
 ## Further Reading
 
@@ -93,3 +95,4 @@ For more information about CLI parameters, see the [official Github repository][
 [3]: /real_user_monitoring/browser/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[6]: https://webpack.js.org/guides/code-splitting/
