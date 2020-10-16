@@ -67,5 +67,6 @@ You can now go ahead and create a final assertion to test the `div` content to m
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /synthetics/browser_tests
 [2]: 2

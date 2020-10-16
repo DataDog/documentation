@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure DB for PostgreSQL のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_db_for_postgresql/'
+draft: false
 git_integration_title: azure_db_for_postgresql
 has_logo: true
 integration_title: Microsoft Azure DB for PostgreSQL

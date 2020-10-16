@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md'
 display_name: UPSC
@@ -60,7 +61,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
    ddev -e release build upsc
    ```
 
-5. [Datadog Agent のダウンロードと起動][1]
+5. [Datadog Agent をダウンロードして起動][1]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
@@ -69,7 +70,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. UPSC の[メトリクス](#metric-collection)を収集するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `upsc.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル upsc.d/conf.yaml][8] を参照してください。
 
@@ -89,7 +90,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 UPSC チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 UPSC チェックには、サービスのチェック機能は含まれません。
 

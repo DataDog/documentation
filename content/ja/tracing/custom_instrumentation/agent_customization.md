@@ -72,6 +72,7 @@ apm_config:
 ```
 
 * `keep_values` - Agent トレースの難読化から除外するキーのセットを定義します。
+
 [1]: /ja/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}

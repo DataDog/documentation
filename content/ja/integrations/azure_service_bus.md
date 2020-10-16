@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Service Bus のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_service_bus/'
+draft: false
 git_integration_title: azure_service_bus
 has_logo: true
 integration_title: Microsoft Azure Service Bus

@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md'
 display_name: IBM WAS
+draft: false
 git_integration_title: ibm_was
 guid: ba177bb7-1bad-4ea8-ac59-1bc8a016f4f7
 integration_id: ibm-was

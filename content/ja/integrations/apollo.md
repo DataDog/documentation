@@ -3,6 +3,7 @@ aliases:
   - /ja/integrations/apollo_engine
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,7 +13,8 @@ creates_events: false
 ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md'
-display_name: Apollo
+display_name: Apollo Engine
+draft: false
 git_integration_title: apollo
 guid: a0b142ff-0637-4c2f-814c-0f1a012bc65c
 integration_id: apollo
@@ -20,9 +22,11 @@ integration_title: Apollo
 is_public: true
 kind: インテグレーション
 maintainer: sachin@apollographql.com
-manifest_version: 1.1.0
-metric_prefix: apollo.engine.
-metric_to_check: apollo.engine.operations.count
+manifest_version: 1.2.0
+metric_prefix: apollo.
+metric_to_check:
+  - apollo.operations.count
+  - apollo.engine.operations.count
 name: apollo
 public_title: Datadog-Apollo インテグレーション
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
@@ -40,21 +44,23 @@ Apollo と Datadog のインテグレーションにより、Studio のパフォ
 
 Studio は次のメトリクスを Datadog に送信します。
 
-- `apollo.engine.operations.count` - 実行された GraphQL 操作の数。これには、クエリ、ミューテーション、エラーになった操作が含まれます。
-- `apollo.engine.operations.error_count` - エラーになった GraphQL 操作の数。これには、GraphQL 実行エラーのほか、Studio がサーバーへの接続に失敗した場合の HTTP エラーが含まれます。
-- `apollo.engine.operations.cache_hit_count` - Apollo Server のクエリキャッシュ全体から結果が提供された GraphQL クエリの数。
+- `apollo.operations.count` - 実行された GraphQL 操作の数。これには、クエリ、ミューテーション、エラーになった操作が含まれます。
+- `apollo.operations.error_count` - エラーになった GraphQL 操作の数。これには、GraphQL 実行エラーのほか、Studio がサーバーへの接続に失敗した場合の HTTP エラーが含まれます。
+- `apollo.operations.cache_hit_count` - Apollo Server のクエリキャッシュ全体から結果が提供された GraphQL クエリの数。
 - GraphQL 操作の応答時間のヒストグラム (ミリ秒単位)。Studio の集計方法 (対数ビニング) のため、以下の値の精度は 5% 以内です。
 
-  - `apollo.engine.operations.latency.min`
-  - `apollo.engine.operations.latency.median`
-  - `apollo.engine.operations.latency.95percentile`
-  - `apollo.engine.operations.latency.99percentile`
-  - `apollo.engine.operations.latency.max`
-  - `apollo.engine.operations.latency.avg`
+  - `apollo.operations.latency.min`
+  - `apollo.operations.latency.median`
+  - `apollo.operations.latency.95percentile`
+  - `apollo.operations.latency.99percentile`
+  - `apollo.operations.latency.max`
+  - `apollo.operations.latency.avg`
 
 これらのメトリクスは 60 秒間隔で集計され、GraphQL 操作名に `operation:<query-name>` というタグが付けられます。同じ操作名を持つ一意のクエリシグネチャはマージされ、操作名のないクエリは無視されます。
 
-これらのメトリクスは関連する Studio のグラフ ID (`service:<graph-id>`) および関連するバリアント名 (`variant:<variant-name>`) の双方にタグ付けされるため、Studio の複数のグラフから同じ Datadog アカウントにデータを送信できます。バリアント名を設定していない場合、`current` が使用されます。
+これらのメトリクスは関連する Studio のグラフ ID (`graph:<graph-id>`) および関連するバリアント名 (`variant:<variant-name>`) の双方にタグ付けされるため、Studio の複数のグラフから同じ Datadog アカウントにデータを送信できます。バリアント名を設定していない場合、`current` が使用されます。
+
+(2020 年 10 月より前に設定されたインテグレーションでは、メトリクス名が `apollo.operations` ではなく `apollo.engine.operations` で始まり、`graph` ではなく `service` タグが使用されます。Apollo Studio のグラフのインテグレーションページで新しいメトリクス名に移行できます。)
 
 ## セットアップ
 
@@ -74,7 +80,7 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 
    ![IntegrationsPage][5]
 
-5. Datadog Forwarding セクションで **Configure** を開き、API キーとリージョンを入力して **Enable** をクリックします。転送されるすべてのメトリクスは対応するグラフ ID (`service:<graph-id>`) でタグ付けされるため、すべてのグラフに対して同じ API キーを使用できます。
+5. Datadog Forwarding セクションで **Configure** を開き、API キーとリージョンを入力して **Enable** をクリックします。転送されるすべてのメトリクスは対応するグラフ ID (`graph:<graph-id>`) でタグ付けされるため、すべてのグラフに対して同じ API キーを使用できます。
 
    ![IntegrationsToggle][6]
 
@@ -107,7 +113,7 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][10]を参照してください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
-[2]: https://app.datadoghq.com/account/settings
+[2]: https://app.datadoghq.com/account/settings#integrations
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png

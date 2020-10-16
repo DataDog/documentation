@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mapr/README.md'
 display_name: MapR
+draft: false
 git_integration_title: mapr
 guid: 7d1de422-85a6-47cc-9962-427a9499d109
 integration_id: mapr

@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/crio/README.md'
 display_name: CRI-O
+draft: false
 git_integration_title: crio
 guid: 40fd8230-d178-4e8e-9e6a-6ce4acc19a85
 integration_id: cri-o

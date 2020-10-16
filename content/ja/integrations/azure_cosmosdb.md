@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
+draft: false
 git_integration_title: azure_cosmosdb
 has_logo: true
 integration_title: Microsoft Azure Cosmos DB

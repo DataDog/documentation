@@ -122,5 +122,6 @@ The `source` attribute is used to identify the integration to use for each conta
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.datadoghq.com/logs/processing/#log-processing
 [2]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation#activate-log-integrations

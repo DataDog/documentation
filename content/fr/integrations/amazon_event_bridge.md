@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_EventBridge."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_event_bridge/'
+draft: false
 git_integration_title: amazon_event_bridge
 has_logo: true
 integration_title: Amazon EventBridge

@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md'
 display_name: Concourse CI
+draft: false
 git_integration_title: concourse_ci
 guid: 054cc9fb-01c4-4f05-98b5-fae828746787
 integration_id: concourse-ci
@@ -42,7 +44,7 @@ Concourse CI で Datadog メトリクスエミッターを構成すると、以�
 
 Concourse CI には Datadog メトリクスエミッターが付属しています。起動時にメトリクスを送信するように [ATC][1] を構成するには、[Datadog Agent][2] がインストールされていることが前提条件です。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
 

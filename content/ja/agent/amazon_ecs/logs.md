@@ -121,5 +121,6 @@ ECS コンテナ内で実行中のアプリケーションにより書き込ま�
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.datadoghq.com/ja/logs/processing/#log-processing
 [2]: https://docs.datadoghq.com/ja/logs/log_collection/docker/?tab=containerinstallation#activate-log-integrations

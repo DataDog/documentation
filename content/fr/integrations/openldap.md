@@ -4,6 +4,7 @@ assets:
   dashboards: {}
   logs:
     source: openldap
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openldap/README.md'
 display_name: OpenLDAP
+draft: false
 git_integration_title: openldap
 guid: ec61c06d-a870-4183-8a27-c66db1fc47cc
 integration_id: openldap
@@ -100,13 +102,18 @@ Si le backend `cn=Monitor` n'est pas configuré sur votre serveur, suivez ces é
 
 #### Configurer l'intégration OpenLDAP
 
-##### Host
+#{{< tabs >}}
+{{% tab "Host" %}}
+#{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+#### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ###### Collecte de métriques
 
-1. Modifiez le fichier `openldap.d/conf.yaml` dans le dossier `conf.d` à la racine du répertoire de configuration de votre Agent]. Consultez le [fichier d'exemple openldap.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `openldap.d/conf.yaml` dans le dossier `conf.d` à la racine du répertoire de configuration de votre Agent. Consultez le [fichier d'exemple openldap.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -129,7 +136,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
        password: "<PASSWORD>"
    ```
 
-2. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent][2].
 
 ###### Collecte de logs
 
@@ -151,35 +158,18 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: "<SERVICE_NAME>"
    ```
 
-   Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple openldap.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple openldap.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][3].
+3. [Redémarrez l'Agent][2].
 
-##### Environnement conteneurisé
-
-###### Collecte de métriques
-
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
-
-| Paramètre            | Valeur                                                                                           |
-| -------------------- | ----------------------------------------------------------------------------------------------- |
-| `<NOM_INTÉGRATION>` | `openldap`                                                                                      |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                                   |
-| `<CONFIG_INSTANCE>`  | `{"url":"ldaps://%%host%%:636","username":"<NOM_DISTINCT_UTILISATEUR>","password":"<MOTDEPASSE>"}` |
-
-###### Collecte de logs
-
-_Disponible à partir des versions > 6.0 de l'Agent_
-
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][5].
-
-| Paramètre      | Valeur                                                 |
-| -------------- | ----------------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "openldap", "service": "<NOM_SERVICE>"}` |
+[1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `openldap` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][2] et cherchez `openldap` dans la section Checks.
 
 ## Compatibilité
 
@@ -197,18 +187,14 @@ Le check OpenLDAP n'inclut aucun événement.
 
 ### Checks de service
 
-**openldap.can_connect**:<br>
+**openldap.can_connect** :<br>
 Renvoie `CRITICAL` si l'intégration ne parvient pas à se connecter au serveur OpenLDAP à surveiller. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/openldap/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help/
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

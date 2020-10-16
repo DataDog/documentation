@@ -7,6 +7,9 @@ further_reading:
   - link: /getting_started/tagging/using_tags
     tag: Documentation
     text: Apprendre à utiliser les tags dans l'application Datadog
+  - link: /tracing/version_tracking
+    tag: Documentation
+    text: Utiliser des tags version dans l'APM Datadog pour surveiller les déploiements
   - link: 'https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/'
     tag: Blog
     text: En savoir plus sur Autodiscovery
@@ -116,28 +119,32 @@ tags.datadoghq.com/<nom-conteneur>.version
 
 ###### Métriques State
 
-Pour configurer les [métriques Kubernetes State][2], ajoutez les mêmes étiquettes standard à la collection d'étiquettes pour la ressource parente (par exemple, Deployment).
+Pour configurer des [métriques Kubernetes State][2], procédez comme suit :
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-spec:
-  template:
-    metadata:
-      labels:
-        tags.datadoghq.com/env: "<ENV>"
-        tags.datadoghq.com/service: "<SERVICE>"
-        tags.datadoghq.com/version: "<VERSION>"
-```
+1. Définissez `join_standard_tags` sur `true` dans votre [fichier de configuration][3].
+
+2. Ajoutez les mêmes étiquettes standard à la collection d'étiquettes pour la ressource parente (par exemple, Deployment).
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+  spec:
+    template:
+      metadata:
+        labels:
+          tags.datadoghq.com/env: "<ENV>"
+          tags.datadoghq.com/service: "<SERVICE>"
+          tags.datadoghq.com/version: "<VERSION>"
+  ```
 
 ###### Traceur d'APM/Client StatsD
 
-Pour configurer les variables d'environnement du [Traceur de l'APM][3] et du [Client StatsD][4], utilisez l'[API Downward de Kubernetes][1] en suivant le format ci-dessous :
+Pour configurer les variables d'environnement du [Traceur de l'APM][4] et du [Client StatsD][5], utilisez l'[API Downward de Kubernetes][1] en suivant le format ci-dessous :
 
 ```yaml
 containers:
@@ -159,8 +166,9 @@ containers:
 
 [1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
 [2]: /fr/agent/kubernetes/data_collected/#kube-state-metrics
-[3]: /fr/tracing/send_traces/
-[4]: /fr/integrations/statsd/
+[3]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example#L70
+[4]: /fr/tracing/send_traces/
+[5]: /fr/integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -168,13 +176,12 @@ containers:
 
 Définissez les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION` ainsi que les étiquettes Docker correspondantes pour votre conteneur afin d'exploiter tout le potentiel du tagging de service unifié.
 
-Les valeurs pour `service` et `version` peuvent figurer dans le Dockerfile :
+Les valeurs pour `service` et `version` peuvent être spécifiées dans le Dockerfile :
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
 ENV DD_VERSION <VERSION>
 
-LABEL com.datadoghq.tags.env="<ENV>"
 LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
@@ -185,7 +192,7 @@ Comme `env` est probablement déterminé au moment du déploiement, vous pouvez 
 docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
 ```
 
-Vous pouvez également préférer définir tous les éléments au moment du déploiement :
+Si vous préférez, vous pouvez également définir tous les éléments au moment du déploiement :
 
 ```shell
 docker run -e DD_ENV="<ENV>" \
@@ -273,7 +280,7 @@ Lors de la configuration de vos traces pour le tagging de service unifié :
 
 1. Configurez le [Traceur de l'APM][1] avec `DD_ENV` pour que la définition de `env` soit plus proche de l'application qui génère les traces. Cette méthode permet au tag `env` de provenir automatiquement d'un tag dans les métadonnées de span.
 
-2. Configurez les spans avec `DD_VERSION` pour ajouter une version à toutes les spans relevant du service qui appartient au traceur (généralement `DD_SERVICE`). Ainsi, si votre service crée des spans avec le nom d'un service externe, ces spans ne recevront pas de tag `version`.
+2. Configurez des spans avec `DD_VERSION` pour ajouter un tag version à toutes les spans relevant du service qui appartient au traceur (généralement `DD_SERVICE`). Ainsi, si votre service crée des spans avec le nom d'un service externe, ces spans ne recevront pas de tag `version`.
 
     Tant que le tag version figure dans les spans, il sera ajouté aux métriques de trace générées à partir de ces spans. Le tag version peut être ajouté manuellement dans le code ou automatiquement par le traceur de l'APM. Une fois les spans configurées, elles seront au moins utilisées par l'APM et les [clients Dogstatsd][2] pour appliquer les tags `env`, `service` et `version` aux données de trace et aux métriques StatsD. S'il est activé, le traceur de l'APM injectera également les valeurs de ces variables dans vos logs.
 
@@ -316,7 +323,7 @@ Définissez la configuration suivante dans le [fichier de configuration principa
 
 ```yaml
 env: <ENV>
-  tags:
+tags:
     - service: <SERVICE>
 ```
 
@@ -355,6 +362,7 @@ instances:
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /fr/getting_started/tagging/#defining-tags
 [2]: /fr/getting_started/agent

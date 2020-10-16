@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: 'https://docs.datadoghq.com/integrations/microsoft_teams/'
+draft: false
 git_integration_title: microsoft_teams
 has_logo: true
 integration_title: Microsoft Teams

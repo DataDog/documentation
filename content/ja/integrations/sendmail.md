@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md'
 display_name: Sendmail
+draft: true
 git_integration_title: sendmail
 guid: 4d4f72c7-c8c5-4e7a-b281-32c2d462c7c8
 integration_id: sendmail
@@ -65,7 +67,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. sendmail のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `sendmail.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル sendmail.d/conf.yaml][8] を参照してください。
 

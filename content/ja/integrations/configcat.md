@@ -11,6 +11,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md'
 description: Datadog-ConfigCat インテグレーションにより、ConfigCat のすべての設定変更が確実にイベントとして Datadog に送信されます。この機能を使用すれば、設定を変更する際にシステムの挙動を確認することができます。製品の Datadog インテグレーションは ConfigCat で設定できます。
 display_name: ConfigCat
+draft: false
 git_integration_title: configcat
 guid: 5e98d95a-519d-460c-945a-5e3a4e1f8d72
 integration_id: configcat

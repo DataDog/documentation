@@ -66,5 +66,6 @@ Vous pouvez désormais créer une dernière assertion pour tester le contenu `di
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/synthetics/browser_tests
 [2]: 2

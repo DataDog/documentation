@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md'
 display_name: Gremlin
+draft: false
 git_integration_title: gremlin
 guid: 087cb38a-d119-4db6-8c54-30700fc1f355
 integration_id: gremlin
@@ -41,7 +43,7 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
 

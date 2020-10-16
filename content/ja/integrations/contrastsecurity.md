@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Contrast Security Integration Overview: assets/dashboards/contrast_security_protect.json
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md'
 display_name: contrastsecurity
+draft: false
 git_integration_title: contrastsecurity
 guid: 8483bcdc-3d45-48ee-8a73-75511a67ad5f
 integration_id: contrastsecurity
@@ -74,7 +76,7 @@ Contrast インテグレーションには、メトリクスは含まれませ�
 
 Contrast インテグレーションは、イベントを送信しません。
 
-### Service Checks
+### サービスのチェック
 
 Contrast インテグレーションには、サービス チェック機能は含まれません。
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6

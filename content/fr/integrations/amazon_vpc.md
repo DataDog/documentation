@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Rassemblez vos logs AWS VPC.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpc/'
+draft: false
 git_integration_title: amazon_vpc
 has_logo: false
 integration_title: "Amazon\_VPC"

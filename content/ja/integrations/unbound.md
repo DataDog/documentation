@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md'
 display_name: Unbound
+draft: false
 git_integration_title: unbound
 guid: 2b31e667-1fd9-440f-9e96-c72bea3cf3ca
 integration_id: unbound
@@ -50,7 +52,7 @@ Unbound チェックをホストにインストールするには
 3. [Datadog Agent をインストールします][4]。
 4. ビルドアーティファクトを Agent のあるホストにアップロードし、`datadog-agent integration install -w path/to/unbound/dist/<ARTIFACT_NAshellME>.whl` を実行します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `unbound.d/conf.yaml` ファイルを編集して、
    unbound メトリクスの収集を開始します。

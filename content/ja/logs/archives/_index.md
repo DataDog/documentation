@@ -36,6 +36,56 @@ Datadog アカウントを構成して、クラウドストレージシステム
 
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。バケットを一般が閲覧できないように設定してください。
 
+
+### ログアーカイブを構成する
+
+#### AWS インテグレーションを設定する
+
+まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][7]をセットアップします。
+
+* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
+* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+
+#### アーカイブを作成する
+
+Datadog の[アーカイブページ][8]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
+
+S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
+
+ {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
+
+### アクセス許可を設定する
+
+次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][4]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DatadogUploadAndRehydrateLogArchives",
+          "Effect": "Allow",
+          "Action": ["s3:PutObject", "s3:GetObject"],
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+          ]
+        },
+        {
+          "Sid": "DatadogRehydrateLogArchivesListBucket",
+          "Effect": "Allow",
+          "Action": "s3:ListBucket",
+          "Resource": [
+            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+          ]
+        }
+      ]
+    }
+    ```
+
+### 高度な設定
+
 #### ストレージクラス
 
 [S3 バケットにライフサイクルコンフィギュレーションを設定][3]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
@@ -110,52 +160,6 @@ Datadog アカウントを構成して、クラウドストレージシステム
 
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
-### ログアーカイブを構成する
-
-#### AWS インテグレーションを設定する
-
-まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][7]をセットアップします。
-
-* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
-* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
-
-#### アーカイブを作成する
-
-Datadog の[アーカイブページ][8]に移動し、下にある **Add a new archive** オプションを選択します。管理者ステータスの Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
-
-S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。バケット名を入力します。オプションでログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。アーカイブを保存したら完了です。
-
- {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Datadog で S3 バケット情報を設定する"  style="width:75%;">}}
-
-### アクセス許可を設定する
-
-次の 2 つのアクセス許可ステートメントを IAM ポリシーに追加します。バケット名を編集し、必要に応じてログアーカイブを含むパスを指定します。`GetObject` および `ListBucket` アクセス許可は、[アーカイブからリハイドレート][4]を可能にします。アーカイブのアップロードには、`PutObject` アクセス許可で十分です。
-
-    ```json
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Sid": "DatadogUploadAndRehydrateLogArchives",
-          "Effect": "Allow",
-          "Action": ["s3:PutObject", "s3:GetObject"],
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
-          ]
-        },
-        {
-          "Sid": "DatadogRehydrateLogArchivesListBucket",
-          "Effect": "Allow",
-          "Action": "s3:ListBucket",
-          "Resource": [
-            "arn:aws:s3:::<MY_BUCKET_NAME_1>",
-            "arn:aws:s3:::<MY_BUCKET_NAME_2>"
-          ]
-        }
-      ]
-    }
-    ```
 
 
 [1]: https://s3.console.aws.amazon.com/s3

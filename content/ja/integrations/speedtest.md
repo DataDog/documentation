@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Speedtest: assets/dashboards/speedtest.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md'
 display_name: speedtest
+draft: true
 git_integration_title: speedtest
 guid: 4bf81e32-170a-44f3-868d-1683ef39464f
 integration_id: speedtest

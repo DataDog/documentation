@@ -28,17 +28,17 @@ further_reading:
   - [Logs][3] data is `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][4] for more information.
   - [Orchestrator Resources][5] data is `orchestrator.datadoghq.com`
   - All other Agent data:
-      - **Agents < 5.2.0** `app.datadoghq.`{{< region-param key="dd_site" code="true" >}}
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
-        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq`{{< region-param key="dd_site" code="true" >}}. Therefore you must whitelist `*.agent.datadoghq.`{{< region-param key="dd_site" code="true" >}} in your firewall(s).
+        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must whitelist `*.agent.`{{< region-param key="dd_site" code="true" >}} in your firewall(s).
 
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):
 
-- **Agent >= 7.18.0/6.18.0** `api.datadoghq`{{< region-param key="dd_site" code="true" >}}
-- **Agent < 7.18.0/6.18.0** `app.datadoghq.`{{< region-param key="dd_site" code="true" >}}
+- **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
+- **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
 
-All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.datadoghq.`{{< region-param key="dd_site" code="true" >}}.
+All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
 

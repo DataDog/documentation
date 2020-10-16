@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Nomad Overview: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors:
     Nomad Excessive Leadership Losses: assets/monitors/nomad_excessive_leadership_losses.json
     Nomad Heartbeats Received: assets/monitors/nomad_heartbeats_received.json

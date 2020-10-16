@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_Cloud\_Tasks."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tasks/'
+draft: false
 git_integration_title: google_cloud_tasks
 has_logo: true
 integration_title: "Google\_Cloud\_Tasks"

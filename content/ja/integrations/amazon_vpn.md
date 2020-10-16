@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon VPN のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpn/'
+draft: false
 git_integration_title: amazon_vpn
 has_logo: true
 integration_title: Amazon VPN

@@ -119,7 +119,7 @@ The [APM environment name][12] may be configured [in the agent][13] or using the
 
 ### B3 Headers Extraction and Injection
 
-The Datadog APM tracer supports [B3 headers extraction][74] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][14] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -156,3 +156,4 @@ extracted value is used.
 [11]: /getting_started/tagging/unified_service_tagging
 [12]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [13]: /getting_started/tracing/#environment-name
+[14]: https://github.com/openzipkin/b3-propagation
