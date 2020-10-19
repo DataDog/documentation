@@ -4,9 +4,9 @@ kind: documentation
 ---
 
 <div class="alert alert-danger">
-This is a deprecated page with configuration information relevant to Legacy App Analytics. Tracing without Limits™ is now the recommended way to have full control over your data ingestion and trace retention with no sampling.
+This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
 <br>
-Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">Trace Retention and Ingestion</a> to use the new functionality.
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
 </div>
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
