@@ -3,7 +3,7 @@ title: APM Billing
 kind: documentation
 ---
 
-[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by tagged based custom [retention filters][3].
+[APM & Distributed Tracing][1] powers you to find service bottlenecks and analyze distributed traces for your microservices architecture. Additionally, using the [Tracing Without Limits][2] feature with APM allows you to slice and dice your application data with spans indexed by [tagged-based custom retention filters][3].
 
 **Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
@@ -19,7 +19,7 @@ For more information, see the [Pricing page][6].
 
 ## Sample Deployment Scenarios
 
-**Sample cases illustrate annual billing rates with default 15 days Indexed span retention. Contact [Sales][6] or your [Customer Success][7] Manager to discuss volume discounts for your account.**
+**Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][6] or your [Customer Success][7] Manager to discuss volume discounts for your account.**
 
 ### Case 1: Hosts and Indexed Spans
 
@@ -111,7 +111,7 @@ Kubernetes creates pause containers to acquire the respective pod’s IP address
 
 **6. How is the host billing related to my services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed span][11] count. To estimate how many Indexed Spans each of your service can send, use the [Event Estimator][10].
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed Span][11] count. To estimate how many Indexed Spans each of your service can send, use the [Event Estimator][10].
 
 **7. What happens to my existing App Analytics filters?**
 

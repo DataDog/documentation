@@ -204,7 +204,7 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 ## Analytics Overview
 
-Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
+Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
 
 Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
 
@@ -214,7 +214,7 @@ Downstream services like databases and cache layers aren't in the list of availa
 
 Use the query to control what's displayed in your Analytics:
 
-1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas [Facet][8] displays the unique count.
+1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
 
    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 
@@ -222,11 +222,11 @@ Use the query to control what's displayed in your Analytics:
 
    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
 
-3. Use [Tag][9] or [Facet][8] to split your Analytic.
+3. Use a tag or facet to split your Analytic.
 
    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [Facet][8] or `Duration`.
+4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
 
    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
 
@@ -237,9 +237,7 @@ Use the query to control what's displayed in your Analytics:
 
 ## Visualizations
 
-Select a Analytics visualization type using the Analytic selector.
-
-Available visualizations:
+Select an Analytics visualization type using the Analytic selector:
 
 * [Timeseries](#timeseries)
 * [Top List](#top-list)
@@ -247,25 +245,23 @@ Available visualizations:
 
 ### Timeseries
 
-Visualize the evolution of the `Duration` metric (or a [Facet][8] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][8].
+Visualize the evolution of the `Duration` metric (or a facet unique count of values) over a selected time frame, and (optionally) split by an available facet.
 
-The following timeseries Analytics shows:
-The evolution of the **pc99** **duration** by steps of **5min** for each **Service**
+The following timeseries Analytics shows the evolution of the **pc99** **duration** by steps of **5min** for each **Service**
 
 {{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
 ### Top List
 
-Visualize the top values from a [Facet][8] according to their `Duration` (or a [Facet][8] unique count of values):
+Visualize the top values from a facet according to their `Duration` (or a facet unique count of values).
 
-The following Top List Analytics shows:
-The top **pc99** **duration** of **Service**
+The following Top List Analytics shows the top **pc99** **duration** of **Service**:
 
 {{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
 ### Table
 
-Visualize the top values from a [facet][8] according to a chosen [measure][10] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a facet according to a chosen [measure][10] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or drill through logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -290,10 +286,9 @@ Select or click on a section of the graph to either zoom in the graph or see the
 Export your Analytics:
 
 * To a new [APM monitor][12]
-* To an existing [Timeboard][13]:
-   This functionality is in beta, [contact the Datadog support team][14] to activate it for your organization.
+* To an existing [Timeboard][13]. This feature is in beta. [Contact the Datadog support team][14] to activate it for your organization.
 
-**Note:** Analytics can only be exported when powered by [indexed spans][15].
+**Note:** Analytics can be exported only when powered by [indexed spans][15].
 
 ## Traces in Dashboard
 
