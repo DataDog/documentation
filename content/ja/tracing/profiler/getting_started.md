@@ -7,6 +7,9 @@ further_reading:
   - link: tracing/profiler/search_profiles
     tag: Documentation
     text: 使用可能なプロファイルタイプの詳細
+  - link: tracing/profiler/profiler_troubleshooting
+    tag: Documentation
+    text: プロファイラの使用中に発生する問題を修正
   - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
     tags: ブログ
     text: Datadog に常時接続型の本番環境プロファイリングが登場。
@@ -18,9 +21,9 @@ Profiler は、次のトレースライブラリに同梱されています。�
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiler ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
+Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiler ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、[ほとんどのベンダーの OpenJDK 8 (バージョン 8u262)][2]、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][2] 以降または [6.20.2][2] 以降にアップグレードしてください。まだ APM を有効にしていない場合で Datadog にデータを送信するようにアプリケーションを設定するには、ご利用中の Agent で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
+1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][3] 以降または [6.20.2][3] 以降にアップグレードしてください。まだ APM を有効にしていない場合で Datadog にデータを送信するようにアプリケーションを設定するには、ご利用中の Agent で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
 
 2. Java Agent クラスファイルを含む `dd-java-agent.jar` をダウンロードします。
 
@@ -36,12 +39,12 @@ Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profi
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. 1〜2 分後、[Datadog APM > Profiling ページ][3]でプロファイルを視覚化します。
+4. 1〜2 分後、[Datadog APM > Profiling ページ][4]でプロファイルを視覚化します。
 
 
 **注**:
 
-- `-javaagent` 引数は `-jar` ファイルより前にあり、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][4]を参照してください。
+- `-javaagent` 引数は `-jar` ファイルより前にあり、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][5]を参照してください。
 
     ```shell
     # Good:
@@ -55,17 +58,18 @@ Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profi
 | 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | `-Ddd.profiling.enabled` 引数の代替。`true` に設定してプロファイラを有効にします。               |
-| `DD_SERVICE`                                     | 文字列        | [サービス][2]名（例、`web-backend`）。     |
-| `DD_ENV`                                         | 文字列        | [環境][5]名（例、`production`）。|
+| `DD_SERVICE`                                     | 文字列        | [サービス][3]名（例、`web-backend`）。     |
+| `DD_ENV`                                         | 文字列        | [環境][6]名（例、`production`）。|
 | `DD_VERSION`                                     | 文字列        | サービスのバージョン                             |
 | `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/profiling
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
+[2]: /ja/tracing/profiler/profiler_troubleshooting/#java-8-support
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/profiling
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -194,7 +198,7 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithService     | 文字列        | Datadog [サービス][4] 名（例、`my-web-app`）。             |
 |  WithEnv         | 文字列        | Datadog [環境][5]名（例、`production`）。         |
-|  WithVersion     | 文字列        | アプリケーションのバージョン                                                                             |  
+|  WithVersion     | 文字列        | アプリケーションのバージョン                                                                             |
 |  WithTags        | 文字列        | アップロードされたプロファイルに適用するタグ。`<キー1>:<値1>,<キー2>:<値2>` 形式のリストである必要があります。 |
 
 - または、環境変数を使いプロファイラコンフィギュレーションを設定することもできます。
@@ -215,17 +219,9 @@ Datadog Profiler には Go 1.12 以降が必要です。アプリケーション
 
 {{< /tabs >}}
 
-## トラブルシューティング
-
-プロファイラを設定しても[プロファイル検索ページ](#search-profiles)にプロファイルが表示されない場合は、[デバッグモード][2]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][3]。
-
-- OS タイプとバージョン（例: Linux Ubuntu 14.04.3）
-- ランタイムのタイプ、バージョン、ベンダー（例: Java OpenJDK 11 AdoptOpenJDK）
-
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /ja/tracing/troubleshooting/#tracer-debug-mode
-[3]: /ja/help/
