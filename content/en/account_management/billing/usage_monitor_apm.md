@@ -31,13 +31,13 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 
 ## Set Alert on Indexed Spans
 
-To get alerts in case a code deployment causes a spike in Indexed Spans generated, set up [Analytics monitors][5] on Indexed Spans. Get notified at any moment if the Indexed span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
+To get alerts in case a code deployment causes a spike in Indexed Spans generated, set up [Analytics monitors][5] on Indexed Spans. Get notified at any moment if the Indexed Span volumes in any infrastructure scope (for example,`service`, `availability-zone`) is growing unexpectedly:
 
 1. Go to [Analytics view][6] in APM
 2. Select the `env` (you can select `*`)
 3. Select `count` (you can select `*`)
 4. Select Export -> Export to Monitor
-5. Define the Indexed span volume rate you would like to set as a warning or error.
+5. Define the Indexed Span volume rate you would like to set as a warning or error.
 6. Define an explicit notification: The volume of Indexed Spans on this service just got too high. Define an additional exclusion filter or increase the filtering rate to put it back under control.
 
 Learn more about rentention filters [here][7].
