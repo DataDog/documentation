@@ -5,12 +5,12 @@ description: "Learn how to monitor your Tracing without Limits usage."
 ---
 
 
-If, when you monitor your APM and Indexing usage, the numbers are not in line with your expectations, or you want to change your ingestion or indexing rates, see to the [Indexing](#indexing-controls) or [Ingestion](#ingestion-controls) documentation.
+If, when you monitor your APM and Indexing usage, the numbers are not in line with your expectations, or you want to change your ingestion or retention rates, see the [retention filters][1] or [ingestion control][2] documentation.
 
 ### Usage Dashboard
 {{< img src="tracing/trace_indexing_and_ingestion/AppAnalyticsDashboard.png" style="width:100%;" alt="Indexed span Dashboard" >}}
 
-Datadog provides an out-of-the-box [Usage Dashboard][1] for monitoring your APM usage, as well as your ingested and Indexed Spans.
+Datadog provides an out-of-the-box [Usage Dashboard][3] for monitoring your APM usage, as well as your ingested and Indexed Spans.
 
 To create a custom dashboard or monitor, the key metrics to use are:
 
@@ -30,4 +30,6 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 **Note:** Admin rights are required to create, modify or disable Span Indexing Filters.
 
 
-[1]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[1]: /tracing/trace_retention_and_ingestion/#retention-filters
+[2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
+[3]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage

@@ -216,24 +216,24 @@ Use the query to control what's displayed in your Analytics:
 
 1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
 
-   {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 
 2. Select the aggregation function for the `Duration` metric:
 
-   {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
 
 3. Use a tag or facet to split your Analytic.
 
-   {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
 
-   {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
 
 5. Choose the Analytic Timesteps.
  Changing the global timeframe changes the list of available Timesteps values.
 
-   {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
 
 ## Visualizations
 
@@ -261,7 +261,7 @@ The following Top List Analytics shows the top **pc99** **duration** of **Servic
 
 ### Table
 
-Visualize the top values from a facet according to a chosen [measure][10] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or drill through logs corresponding to either dimension.
+Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or drill through logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -275,7 +275,7 @@ The following Table Log Analytics shows the evolution of the **top Status Codes*
 
 ## Related Traces
 
-Select or click on a section of the graph to either zoom in the graph or see the list of [traces][11] corresponding to your selection:
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
 
 {{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces"  style="width:40%;">}}
 
@@ -285,16 +285,16 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Analytics:
 
-* To a new [APM monitor][12]
-* To an existing [Timeboard][13]. This feature is in beta. [Contact the Datadog support team][14] to activate it for your organization.
+* To a new [APM monitor][11]
+* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
 
-**Note:** Analytics can be exported only when powered by [indexed spans][15].
+**Note:** Analytics can be exported only when powered by [indexed spans][14].
 
 ## Traces in Dashboard
 
-Export [Analytics][4] from the Trace search or build them directly in your [Dashboard][16] alongside metrics and logs.
+Export [Analytics][4] from the Trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
 
-[Learn more about the timeseries widget][17].
+[Learn more about the timeseries widget][16].
 
 ## Further Reading
 
@@ -308,12 +308,11 @@ Export [Analytics][4] from the Trace search or build them directly in your [Dash
 [6]: /tracing/visualization/#services
 [7]: /tracing/trace_retention_and_ingestion/#retention-filters
 [8]: /tracing/trace_search_and_analytics/query_syntax/#facets
-[9]: /getting_started/tagging/
-[10]: /tracing/trace_search_and_analytics/query_syntax/#measures
-[11]: /tracing/visualization/#trace
-[12]: /monitors/monitor_types/apm/
-[13]: /dashboards/timeboard/
-[14]: /help/
-[15]: /tracing/visualization/#indexed-span
-[16]: /dashboards/
-[17]: /dashboards/widgets/timeseries/
+[9]: /tracing/trace_search_and_analytics/query_syntax/#measures
+[10]: /tracing/visualization/#trace
+[11]: /monitors/monitor_types/apm/
+[12]: /dashboards/timeboard/
+[13]: /help/
+[14]: /tracing/visualization/#indexed-span
+[15]: /dashboards/
+[16]: /dashboards/widgets/timeseries/
