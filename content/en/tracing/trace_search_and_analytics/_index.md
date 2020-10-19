@@ -45,7 +45,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 When using Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
-{{< img src="tracing/live_search/livesearchmain2.gif" alt="Live Search" >}}
+{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
 
 With the APM Live Search you can:
 
@@ -88,7 +88,7 @@ Searching with retained traces is accessed in the same way as Live Search. To sw
 
 All spans indexed by retention filters or legacy App Analytics filters are accessible.  These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
-{{< img src="tracing/live_search/15daysearch.gif" alt="Live Search mode" >}}
+{{< img src="tracing/live_search/HistoricalSearch2.gif" alt="Historical Search" >}}
 
 All spans indexed by retention filters or legacy App Analytics filters are available to be searched when using trace analytics. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
 
@@ -104,7 +104,7 @@ You can customize what spans are retained and at what retention rates. By defaul
 
 With Live Analytics, you can perform analytics on 100% of your ingested traces for the last 15 minutes, filtering and grouping by any tag on any span. Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window). All spans ingested by Datadog are displayed without any sampling, and this is Tracing without Limits™.
 
-{{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
+{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
 
 Analytics is used to graph requests or errors corresponding to specified criteria, such as:
 
