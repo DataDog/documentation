@@ -61,11 +61,11 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 {{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-1.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Journey" >}}
 
-Ingestion Controls affect what is sent by your applications to Datadog.
+Ingestion Controls affect what traces are sent by your applications to Datadog.  Stats and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
-Many instrumented services will send 100% of their traffic to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
+Many instrumented services will send 100% of their traces to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
 
-For the best experience, we recommend you set services to send 100% of their traffic so all traces can be used for live search and analytics.
+For the best experience, we recommend you set services to send 100% of their traces so all traces can be used for live search and analytics.
 
 {{< img src="tracing/trace_indexing_and_ingestion/IngestionControls.png" style="width:100%;" alt="Retention Filters" >}}
 
@@ -77,7 +77,7 @@ In the Datadog app, on the ['Ingestion Controls' tab][4], you can see the follow
 | ----------------------- | ---------- |
 | Root Service                 | The name of each service instrumented and sending traces to Datadog.   |
 | Data Ingested             | Amount of data ingested by Datadog over the selected time period.      |
-| Ingestion Rate                 | A percentage from 0 to 100% of how many of the spans that are produced by the service are being ingested by Datadog.  Any number lower than 100% means sampling is occurring in the Datadog Agent prior to Ingestion.      |
+| Ingestion Rate                 | A percentage from 0 to 100% of how many of the spans that are produced by the service are being ingested by Datadog.  Any number lower than 100% means some traces are not being ingested by Datadog from the Datadog Agent, and these traces will be dropped by the Datadog Agent after metrics and stats have been calculated.      |
 | Tracers Configuration            | Will show `Default` unless changed by using the instructions in-app to configure the tracer. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) for more information. If all hosts with this service deployed are configured to send a specific volume of traces, this indicator will display as `Fully Configured`.  If only a portion of hosts with this service deployed are configured, the label will instead show `Partially Configured`.   |
 | Dropped Spans                |  The percentage of incoming spans dropped by the Datadog Agent.  If this percent is higher than 0%, the service can be configured by clicking anywhere on the service row.  See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) for more information.     |
 | Traces Ingested per Second                |   Average number of traces per second ingested into Datadog for the service over the selected time period.   |
@@ -95,6 +95,16 @@ To specify that a specific percentage of a service's traffic should be sent, add
 4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy.
 5. Confirm on the Data Ingestion page that your new percentage has been applied.
 
+#### (Recommended) Setting the global ingestion rate to 100%
+
+In order to ingest 100% of your traces in Datadog for all services for live search and analytics as well as to have the most control with retention filters, Datadog recommends configuring all services to send 100% of traces by default.
+
+This can be done with one configuration on every service instrumented with a Datadog tracing library by setting the environment variable below in the tracer configuration:
+
+```
+DD_TRACE_SAMPLE_RATE=1.0
+```
+
 ### Traces dropped before ingestion
 
 If you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for Tracing without Limits and
@@ -106,14 +116,18 @@ This may make them not always send 100% of your traces to Datadog.  In this case
 
 In case you are seeing ingestion rates below 100% within Datadog and would like to send all your traces, our recommendation is to enable Tracing without Limits. If you have any questions, feel free to reach out to our [support team][5].
 
-## Legacy App Analytics
+{{< img src="tracing/trace_indexing_and_ingestion/VisualIndicator.png" style="width:100%;" alt="Root services not sending 100% of traces" >}}
 
-While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][6], if needed there are instructions for configuring legacy [App Analytics][7] setups.
 
-All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
+## App Analytics to Tracing Without Limits
+
+Prior to October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][6], the legacy instructions are available within the [App Analytics][7] setup page.
+
+All existing App Analytics filters have been automatically transitioned to Retention Filters. You can continue to use the unchanged filters or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
 **Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][1].  Legacy filters are now read only on the [settings][8] page in-app.
 
+{{< img src="tracing/trace_indexing_and_ingestion/MigratedRetentionFilter.png" style="width:100%;" alt="Visual indicator of App Analytics filter migrated to a retention filter" >}}
 
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode

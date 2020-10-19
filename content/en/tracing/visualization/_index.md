@@ -146,7 +146,7 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 ## Ingestion Controls
 
-[Send 100% of traces][19] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business context for 15 days.
+[Send 100% of traces][19] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
 ## Further Reading
 
