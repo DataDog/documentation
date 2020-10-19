@@ -88,7 +88,7 @@ Then click **Save Location and Generate Configuration File** to create your priv
 
 ### Configure your private location
 
-Configure your private location by customizing the generated configuration file. Initial configuration parameters like [proxy] (#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) are added in **Step 2** and are automatically reflected in the **Step 3** configuration file. Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
+Configure your private location by customizing the generated configuration file. Initial configuration parameters like [proxy](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) are added in **Step 2** and are automatically reflected in the **Step 3** configuration file. Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
 
 #### Proxy Configuration
 
