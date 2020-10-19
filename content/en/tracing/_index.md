@@ -74,13 +74,13 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [Search 100% of your traces][6] by any tag, live with no sampling, for 15 minutes.
 
-{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" >}}
+{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
 
 ### Live Analytics
 
 [Analyze performance by any tag on any span][7] live for 15 minutes during an outage to identify impacted users or transactions.
 
-{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" >}}
+{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
 
 ### Trace Retention and Ingestion
 
