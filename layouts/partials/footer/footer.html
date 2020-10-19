@@ -37,19 +37,19 @@
                 <p class="font-weight-semibold text-center text-lg-left mb-0">Download mobile app</p>
                 
                 <div class="d-flex d-lg-none justify-content-center ">
-                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "app-store-badge.svg" )}}
                     </a>             
-                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}  
                     </a>
                 </div>
 
                 <div class="d-none d-lg-flex justify-content-lg-start">
-                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "apple.svg" )}}
                     </a>             
-                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}  
                     </a>
                 </div>
@@ -220,7 +220,7 @@
                             <ul class="footer-menu d-flex  align-items-center">
                                 {{ range $index, $value := .Site.Menus.footer_social }}
                                 <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 {{end}}">
-                                    <a class="d-flex align-items-center" href="{{ .URL }}">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
+                                    <a class="d-flex align-items-center" href="{{ .URL }}" aria-label="{{ .Name }} link">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
                                 </li>
                                 {{end}}
                             </ul>
