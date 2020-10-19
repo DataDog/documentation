@@ -140,6 +140,12 @@ footer {
       }
     }
 
+    &:hover {
+      .selected-lang {
+        opacity: 0.5;
+      }
+    }
+
     .lang-popup {
       display: none;
       background-color: white;
