@@ -45,7 +45,7 @@ wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 
 4. Add [Configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics---all the metrics you intend to use. See the examples below. Note that using the in-app Quickstart instructions generates these for you.
 
-**Notes**:
+### JVM notes
 
 - Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
