@@ -12,6 +12,12 @@ html {
 $footer-font-color: rgba(255, 255, 255, 0.5);
 $footer-font-color-hover: rgba(255, 255, 255, 1);
 
+html[data-env="preview"] {
+  footer {
+    margin-bottom: 30px;
+  }
+}
+
 footer {
   display: block;
   width: 100%;
@@ -109,6 +115,66 @@ footer {
       }
     }
   }
+
+  .footer-lang-toggle {
+
+    span {
+      &:lang(ja), &:lang(ko) {
+      word-break: keep-all;
+      font-size: 14px;
+    }
+    }
+
+    .lang-toggle-arrow {
+      transform: translate(5px, -1px) rotate(180deg);
+    }
+
+    &.show {
+      .lang-popup {
+        display: block;
+
+        
+      }
+      .lang-toggle-arrow {
+        transform: translate(5px, 2px) rotate(0);
+      }
+    }
+
+    &:hover {
+      .selected-lang {
+        opacity: 0.5;
+      }
+    }
+
+    .lang-popup {
+      display: none;
+      background-color: white;
+      position: absolute;
+      transform: translateX(20%);
+      bottom: 25px;
+      border-radius: 6px;
+      a {
+        color: black;
+        padding: 4px 8px;
+        &:first-child {
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+        }
+        &:last-child {
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+        &.active, &:hover {
+          background-color: $gray-lighter;
+          color: $ddpurple;
+          opacity: 1;
+        }
+      }
+    }
+    
+  }
+
+  
 
   @include media-breakpoint-down(md) {
     height: 100%;
