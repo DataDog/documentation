@@ -6,6 +6,7 @@ private: true
 
 {{< whatsnext desc="" >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Correlate Your Logs and Metrics{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}Monitor your log usage{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Docker Log Collection Troubleshooting Guide{{< /nextlink >}}
