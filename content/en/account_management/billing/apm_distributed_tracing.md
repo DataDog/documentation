@@ -97,21 +97,25 @@ A [host][4] is a physical or virtual operating system instance. Datadog records 
 
 It is recommended to [setup running][10] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers)
 
-**3. What happens to my bill if I have to suddenly scale my environment?**
+**3. What is classified as an APM Fargate task for billing?**
+
+A Fargate task is a collection of containers that are scheduled to run on AWS Fargate as a serverless compute engine. Datadog records the number of tasks you are concurrently monitoring in Datadog at five-minute intervals. For billing APM, Datadog bills based on the average number of Fargate tasks that send traces to Datadog per hour across the month of your account.
+
+**4. What happens to my bill if I have to suddenly scale my environment?**
 
 Your APM bill is calculated using the top 99 percentile of active agents sending traces every hour of each month. At the end of the month, we disregard the top 1% value, giving a shield against being billed for unexpected spikes.
 
-**4. Do I get charged for pause containers in Kubernetes?**
+**5. Do I get charged for pause containers in Kubernetes?**
 
 Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by nodes not by pods.
 
-**5. How is the host billing related to my services?**
+**6. How is the host billing related to my services?**
 
 APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. App Analytics is billed on the basis of [Indexed span][11] count. To estimate how many Indexed Spans each of your service can send, use the [Event Estimator][10].
 
-**6. What happens to my existing App Analytics filters?**
+**7. What happens to my existing App Analytics filters?**
 
-All existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
+As of October 20, 2020, all existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
 
 ## Further Reading
 
