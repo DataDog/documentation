@@ -2,7 +2,6 @@
 
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
-import datadogLogs from './dd-browser-logs-rum';
 
 export function initializeIntegrations() {
     let finderState = 0; // closed
@@ -114,7 +113,7 @@ export function initializeIntegrations() {
                 e.target.value.length > 0 &&
                 window._DATADOG_SYNTHETICS_BROWSER === undefined
             ) {
-                datadogLogs.logger.log(
+                window.DD_LOGS.logger.log(
                     'Integrations Search',
                     {
                         browser: {
@@ -157,7 +156,7 @@ export function initializeIntegrations() {
         const filter = button.getAttribute('data-filter');
         if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
             // eslint-disable-line no-underscore-dangle
-            datadogLogs.logger.log(
+            window.DD_LOGS.logger.log(
                 'Integrations category selected',
                 { browser: { integrations: { category: button.innerText } } },
                 'info'

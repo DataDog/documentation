@@ -44,8 +44,8 @@
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
-        "@datadog/browser-logs": "^1.12.4",
-        "@datadog/browser-rum": "^1.12.6",
+        "@datadog/browser-logs": "^1.24.1",
+        "@datadog/browser-rum": "^1.24.1",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "^3.35.1",
         "bootstrap": "4.3.1",
@@ -88,6 +88,7 @@
         "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
         "@babel/preset-env": "^7.5.5",
         "@babel/register": "^7.5.5",
+        "@datadog/datadog-ci": "^0.7.1",
         "acorn": "^7.1.1",
         "babel-eslint": "^10.0.2",
         "babel-loader": "^8.0.6",

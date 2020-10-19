@@ -1,6 +1,5 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import codeTabs from './codetabs';
-import datadogLogs from './dd-browser-logs-rum';
 import { redirectToRegion } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
@@ -33,7 +32,7 @@ function loadPage(newUrl) {
             }
 
             const newDocument = httpRequest.responseXML;
-            
+
             if (newDocument === null) {
                 return;
             }
@@ -169,7 +168,7 @@ function loadPage(newUrl) {
             if (typeof window.Munchkin !== 'undefined') {
                 window.Munchkin.munchkinFunction('clickLink', { href: newUrl });
             } else {
-                datadogLogs.logger.info('Munchkin called before ready..');
+                window.DD_LOGS.logger.info('Munchkin called before ready..');
             }
         }; // end onreadystatechange
 

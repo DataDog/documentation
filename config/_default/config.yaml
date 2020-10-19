@@ -19,7 +19,7 @@ defaultContentLanguage: "en"
 defaultContentLanguageInSubdir: false
 
 # set this as a default otherwise we get "Error: found overlapping content dirs"
-contentDir: "content/en"
+# contentDir: "content/en"
 
 # gitinfo vars
 enableGitInfo: true
@@ -33,4 +33,34 @@ markup:
     guessSyntax: true
 
 # so we can access images as resources
-assetDir: "static"
+# assetDir: "static"
+
+module:
+  mounts:
+    # default mounts
+    - source: content/en
+      target: content
+      lang: en
+    - source: content/fr
+      target: content
+      lang: fr
+    - source: content/ja
+      target: content
+      lang: ja
+    - source: static
+      target: static
+    - source: layouts
+      target: layouts
+    - source: data
+      target: data
+    - source: static
+      target: assets
+    - source: i18n
+      target: i18n
+    - source: archetypes
+      target: archetypes
+    # custom mounts
+    - source: "./node_modules/@datadog/browser-rum/bundle/datadog-rum.js"
+      target: "assets/node_modules/datadog-rum.js"
+    - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
+      target: "assets/node_modules/datadog-logs.js"
