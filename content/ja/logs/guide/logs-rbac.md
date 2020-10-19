@@ -405,13 +405,13 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 [61]: /ja/logs/indexes/
 [62]: /ja/logs/archives/
 
-[70]: /ja/account_management/rbac/permissions?tab=ui#logs-write-processors
-[71]: /ja/account_management/rbac/permissions?tab=ui#logs-write-exclusion-filters
-[72]: /ja/account_management/rbac/permissions?tab=ui#logs-read-archives
-[73]: /ja/account_management/rbac/permissions?tab=ui#logs-write-historical-view
+[70]: /ja/account_management/rbac/permissions?tab=ui#logs_write_processors
+[71]: /ja/account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
+[72]: /ja/account_management/rbac/permissions?tab=ui#logs_read_archives
+[73]: /ja/account_management/rbac/permissions?tab=ui#logs_write_historical_view
 
-[74]: /ja/account_management/rbac/permissions?tab=ui#logs-read-data
-[75]: /ja/account_management/rbac/permissions?tab=ui#logs-read-index-data
+[74]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
+[75]: /ja/account_management/rbac/permissions?tab=ui#logs_read_index_data
 
 
 [84]: /ja/getting_started/tagging/

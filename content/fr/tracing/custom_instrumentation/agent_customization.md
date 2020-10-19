@@ -72,6 +72,7 @@ apm_config:
 ```
 
 * `keep_values` : définit un ensemble de clés à exclure de l'obfuscation des traces de l'Agent.
+
 [1]: /fr/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "Elasticsearch" %}}
