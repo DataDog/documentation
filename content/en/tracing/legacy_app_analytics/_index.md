@@ -8,7 +8,7 @@ aliases:
 ---
 
 <div class="alert alert-danger">
-This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
+On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
 <br>
 Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
 </div>
@@ -472,18 +472,4 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-## Span filtering
-
-An [Indexed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once tracing is enabled, 100% of Indexed Spans are sent by default. For example, a Java service with 100 requests will generate 100 Indexed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Indexed Span. You can reduce the number of billable indexed Spans by [Filtering Indexed Spans][5], without affecting [trace][6] sampling. If a service has been filtered lower than 100%, the Indexed Span-generated metrics Total Errors and Total Requests are adjusted to display an estimate by default, and you have the option to display the filtered value instead.
-
-Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
-
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Indexed Span Filtering" >}}
-
 [1]: https://app.datadoghq.com/apm/analytics
-[2]: /tracing/visualization/#analyzed-span
-[3]: /tracing/visualization/#spans
-[4]: /tracing/visualization/#services
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /tracing/visualization/#trace
-[7]: /account_management/billing/apm_distributed_tracing/

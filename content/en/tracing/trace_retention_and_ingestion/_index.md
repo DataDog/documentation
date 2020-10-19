@@ -55,7 +55,13 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 4. Set a percentage of spans matching these tags to be indexed.
 5. Save your new filter.
 
-**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][3] of service and index them. If "All Spans" is selected, the retention filter will retain the selected proportion of any spans of the distributed trace irrespective of their hierarchy and index them.  This may have an impact on your bill, and the visual indicator within the UI while setting a retention filter will inform you how many matching spans have been detected over the time period.
+**Note:** Selecting "Top-Level Spans for Services Only" means the retention filter will retain only the selected proportion of [top level spans][3] of service and index them. Use this if you only want to index top level spans with matching tags. If "All Spans" is selected, the retention filter will retain the selected proportion of any spans of the distributed trace irrespective of their hierarchy and index them.  This may have an impact on your bill, and the visual indicator within the UI while setting a retention filter will inform you how many matching spans have been detected over the time period.
+
+Use this to create filters to keep all traces for:
+
+- Credit card transactions over $100.
+- High-priority customers using a mission-critical feature of your SaaS solution
+- Specific versions of an online delivery service application
 
 ## Ingestion Controls
 
@@ -63,7 +69,7 @@ To customize what spans are indexed and retained for 15 days, you can create, mo
 
 Ingestion Controls affect what traces are sent by your applications to Datadog.  Stats and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
-Many instrumented services will send 100% of their traces to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default.
+Many instrumented services will send 100% of their traces to Datadog by default.  The Datadog Agent will not drop or sample any spans by default at volumes of up to 50 traces per second.   High-volume services or services that experience intermittent traffic are likelier to not send 100% of spans by default. This 50 traces per second default ingestion is based on our intelligent retention and will keep diverse traces by default.
 
 For the best experience, we recommend you set services to send 100% of their traces so all traces can be used for live search and analytics.
 

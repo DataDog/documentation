@@ -13,13 +13,21 @@ description: "Trace Search and Analytics"
 
 [Trace Search and Analytics][1] gives you the ability to search all ingested or Indexed Spans using any tag on any span.  Depending on whether you are searching Live (the last 15 minutes, rolling) or all Indexed Spans, the data used to power your queries will change.
 
-Live data is all [Ingested spans][2] and is available in real-time for the past 15 minutes.  The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode.
+- Instrumented applications send 100% of their traces to Datadog for [Ingestion][2] where they are available as Live data for the past 15 minutes (rolling window)
 
- {{< img src="tracing/live_search/LiveSearch.png" alt="Live Search Indicator" >}}
+The Datadog UI will also have a 'Live' indicator next to the time selector whenever you are in Live mode. as seen below:
 
-More than 15 minutes in the past data is all [Indexed Spans][3].  The Datadog UI will also have a 'Retained traces' indicator next to the time selector whenever you searching [indexed spans][4].  You can customize settings for both [Retention and Ingestion][5] to send and keep exactly what data is most relevant to you.
+{{< img src="tracing/live_search/LiveSearch.png" alt="Live Search Indicator" >}}
+
+- All ingested traces are processed by user-created [retention filters][3] to determine which spans to index, along with the default [intelligent retention filter][4] to retain a diverse set of traces.
+
+- Once indexed, traces are available for use in Search and Analytics with 15 day retention.
+
+The Datadog UI will also have a 'Retained traces' indicator next to the time selector whenever you searching [indexed spans][5].
 
 {{< img src="tracing/live_search/RetainedSearch.png" alt="Retained Search Indicator" >}}
+
+You can customize settings for both [Retention and Ingestion][6] to send and keep exactly what data is most relevant to you.
 
 ### (Recommended) Enable Tracing Without Limits
 
@@ -41,10 +49,10 @@ When using Live Search, Datadog displays spans as soon as they are sent by the D
 
 With the APM Live Search you can:
 
-- Write search queries to refine the stream of traces by any tag on any span. For example, monitor that a new deployment went smoothly by filtering on `version_id` of all tags
-- View 100% of trace spans as they are ingested. For example, view outage related information in real-time as it happens related to specific `org_id` or `customer_id` associated with a child span. Note that there is no sampling on ingested spans for 15 minutes.
-- Run search queries that autocomplete in real-time. For example, to check if a process has correctly started, type `process_id` of a child span tag and it autocompletes the ID.
-- View Live timeseries visualization of key RED metrics: requests per second, errors, and latency. For example, monitor load test and performance impact on your endpoints by filtering on the duration of a child resource.
+- Monitor that a new deployment went smoothly by filtering on `version_id` of all tags.
+- View outage related information in real-time as it happens related to specific `org_id` or `customer_id` associated with a child span over 100% of ingested traces.
+- Check if a process has correctly started by typing `process_id` of a child span tag and autocompleting the ID.
+- Monitor load test and performance impact on your endpoints by filtering on the duration of a child resource.
 - Run one-click search queries on any span or tag directly from the trace panel view.
 - Add, remove, and sort columns from span tags for a customized view.
 
@@ -88,7 +96,7 @@ All spans indexed by retention filters or legacy App Analytics filters are avail
 
 For example, if you filter by a tag that only appears on spans that are not indexed by any retention filter, your search will return no results unlike when using Live Search.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][6] will be applied. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][7] page within the Datadog UI to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][7] page within the Datadog UI to create or modify your own filters.
 
 ## Live Analytics for 15 minutes
 
@@ -98,13 +106,19 @@ With Live Analytics, you can perform analytics on 100% of your ingested traces f
 
 {{< img src="tracing/live_search/LiveAnalytics2.gif" alt="Live Analytics" >}}
 
-Analytics is used to graph requests or errors corresponding to specified criteria, such as errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to drill directly into traces matching these criteria.
+Analytics is used to graph requests or errors corresponding to specified criteria, such as:
+
+- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to drill directly into traces matching these criteria.
+
+- Monitor a canary deployment of a critical application update in real time.
+
+- Compare latency across geographic regions scoped to the latest version of your iOS application.
 
 In addition to viewing analytics for requests matching arbitrary queries, Live Analytics can also give a top list of the most impacted customers, availability-zones, or any other tag during an outage or investigation.
 
 With Live Analytics, every tag on every span ingested over the rolling 15 minute window is available for querying.
 
-**Note:** Exporting to dashboards and monitors is only possible using retained data.
+**Note:** Exporting to dashboards and monitors is only possible using retained spans.
 
 ## Trace Analytics with 15 day retention
 
@@ -118,12 +132,12 @@ All spans indexed by retention filters or legacy App Analytics filters are avail
 
 **Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
 
-You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][6] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][7] page within the Datadog UI to create or modify your own filters.
+You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default span retention filter and how to create your own additional filters, visit the [Retention Filters][3] section of this page, or the [Retention Filters][7] page within the Datadog UI to create or modify your own filters.
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
-[4]: /tracing/visualization/#indexed-span
-[5]: /tracing/trace_retention_and_ingestion/
-[6]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
+[4]: /tracing/trace_retention_and_ingestion/#datadog-intelligent-retention-filter
+[5]: /tracing/visualization/#indexed-span
+[6]: /tracing/trace_retention_and_ingestion/
 [7]: https://app.datadoghq.com/apm/traces/retention-filters
