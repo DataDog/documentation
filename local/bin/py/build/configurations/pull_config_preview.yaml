@@ -324,7 +324,7 @@
           title: RUM Browser Monitoring
           kind: documentation
     - action: pull-and-push-file
-      branch: master
+      branch: ruth/docs-1257
       globs:
       - 'packages/logs/README.md'
       options:
