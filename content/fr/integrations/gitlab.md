@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md'
 display_name: Gitlab
+draft: false
 git_integration_title: gitlab
 guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
@@ -47,7 +48,7 @@ Grâce à cette intégration, vous pouvez :
 
 - Visualiser et surveiller des métriques recueillies via Gitlab par l'intermédiaire de Prometheus
 
-Consultez la [documentation de Gitlab][1] pour en savoir plus sur Gitlab et sur son intégration à Prometheus.
+Consultez la [documentation de Gitlab][1] (en anglais) pour en savoir plus sur Gitlab et sur son intégration à Prometheus.
 
 ## Configuration
 

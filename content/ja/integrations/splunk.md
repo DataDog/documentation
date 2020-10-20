@@ -6,10 +6,11 @@
 "dependencies": []
 "description": "Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。"
 "doc_link": "https://docs.datadoghq.com/integrations/splunk/"
+"draft": false
 "git_integration_title": "splunk"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Splunk"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "splunk"

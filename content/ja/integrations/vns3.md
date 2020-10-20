@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md'
 display_name: VNS3
+draft: false
 git_integration_title: vns3
 guid: 1a7a2c46-37a8-4660-8d71-aaad733d987a
 integration_id: vns3

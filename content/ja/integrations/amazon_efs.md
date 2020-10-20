@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Elastic Filesystem のキーメトリクスを追跡します。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
+draft: false
 git_integration_title: amazon_efs
 has_logo: true
 integration_title: Amazon Elastic File System
@@ -53,7 +54,7 @@ Amazon EFS から S3 バケットまたは CloudWatch のいずれかにログ�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_efs` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon EFS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

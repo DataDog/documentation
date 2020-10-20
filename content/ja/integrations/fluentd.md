@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
 display_name: fluentd
+draft: false
 git_integration_title: fluentd
 guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd

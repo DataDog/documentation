@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md'
 display_name: RabbitMQ
+draft: false
 git_integration_title: rabbitmq
 guid: a790a556-fbaa-4208-9d39-c42c3d57084b
 integration_id: rabbitmq

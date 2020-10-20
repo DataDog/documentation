@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md'
 display_name: Linux proc extras
+draft: false
 git_integration_title: linux_proc_extras
 guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 integration_id: システム

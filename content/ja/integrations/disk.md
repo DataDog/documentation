@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/disk/README.md'
 display_name: Disk
+draft: false
 git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム

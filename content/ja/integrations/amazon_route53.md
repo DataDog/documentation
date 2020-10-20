@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: Route 53 メトリクスを追跡し、健全性チェックを監視。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_route53/'
+draft: false
 git_integration_title: amazon_route53
 has_logo: true
 integration_title: Amazon Route 53
@@ -67,11 +68,11 @@ Route 53 AWS コンソールに移動し、ログを構成するホストゾー�
 
 次に、Cloudwatch ロググループを選択するか、ログの送信先になる新しいロググループを作成します。ロググループ名には「route53」を入れてください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で Route53 ログを含む Cloudwatch ロググループにトリガーを追加します。
-   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Cloudwatch トリガー" popup="true" style="width:70%;">}}
 

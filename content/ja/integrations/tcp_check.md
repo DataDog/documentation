@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md'
 display_name: TCP
+draft: false
 git_integration_title: tcp_check
 guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: システム

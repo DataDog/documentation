@@ -24,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/postgres/README.md'
 display_name: Postgres
+draft: false
 git_integration_title: postgres
 guid: e9ca29d5-5b4f-4478-8989-20d89afda0c9
 integration_id: postgres

@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md'
 display_name: Gnatsd
+draft: false
 git_integration_title: gnatsd
 guid: 7edcf450-d9cf-44aa-9053-ece04ac7c21d
 integration_id: gnatsd

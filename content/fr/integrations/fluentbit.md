@@ -2,8 +2,8 @@
 title: "Fluent\_Bit"
 name: fluentbit
 kind: integration
-description: "Configurez Fluent\_Bit pour recueillir, analyser et transmettre des données de log provenant de plusieurs sources différentes à Datadog à des fins de surveillance."
-short_description: 'Recueillez, analysez et transmettez des données de log provenant de plusieurs sources différentes à Datadog à des fins de surveillance.'
+description: "Configurez Fluent\_Bit pour recueillir, analyser et transmettre des données de log provenant de plusieurs sources."
+short_description: 'Recueillez, analysez et transmettez des données de log provenant de plusieurs sources.'
 categories:
   - log collection
 doc_link: /integrations/fluentbit/
@@ -41,6 +41,7 @@ Avant de commencer, vous devez avoir un [compte Datadog][3] et une [clé d'API D
 | Host           | _Obligatoire_ - Le serveur Datadog vers lequel vous envoyez vos logs.                                                         | Site américain : `http-intake.logs.datadoghq.com` - Site européen : `http-intake.logs.datadoghq.eu` |
 | TLS            | _Obligatoire_ - Protocole de communication sécurisée de bout en bout. Datadog vous conseille de définir ce paramètre sur `on`.              | `off`                                                                       |
 | apikey         | _Obligatoire_ - Votre [clé d'API Datadog][4].                                                                                  |                                                                             |
+| compress       | _Conseillé_ - Compresse la charge utile au format GZIP. Datadog prend en charge et recommande le format `gzip`.           |                                                                             |
 | dd_service     | _Recommandé_ - Le nom lisible du service qui génère vos logs (nom de votre application ou base de données). |                                                                             |
 | dd_source      | _Recommandé_ - Le nom lisible de la technologie sous-jacente de votre service. Par exemple, `postgres` ou `nginx`. |                                                                             |
 | dd_message_key | _Recommandé_ - Définit l'attribut à utiliser pour stocker votre message de log.                                                      |                                                                             |
@@ -55,6 +56,7 @@ Avant de commencer, vous devez avoir un [compte Datadog][3] et une [clé d'API D
     Match             *
     Host              http-intake.logs.datadoghq.com
     TLS               on
+    compress          gzip
     apikey            <CLÉ_API_DATADOG>
     dd_service        <SERVICE_APPLICATION>
     dd_source         <SOURCE>
@@ -73,11 +75,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [1]: https://docs.fluentbit.io/manual/output/datadog
 [2]: /fr/integrations/ecs_fargate/#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
-[4]: /fr/account_management/api-app-keys
+[4]: /fr/account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
-[6]: https://docs.fluentbit.io/manual/installation
-[7]: https://docs.fluentbit.io/manual/configuration
-[8]: https://docs.fluentbit.io/manual/configuration/file
+[6]: https://docs.fluentbit.io/manual/installation/sources/build-and-install
+[7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
+[8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
 [9]: https://app.datadoghq.com/logs
-[10]: /fr/tagging
-[11]: /fr/help
+[10]: /fr/getting_started/tagging/
+[11]: /fr/help/

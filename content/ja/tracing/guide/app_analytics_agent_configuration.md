@@ -13,7 +13,7 @@ aliases:
 **注**: Agent で App Analytics を有効にするには、[サービス][1]が既に Datadog に流れている必要があります。
 
 1. [サービスのセットアップ][4]が完了したら、[App Analytics ドキュメントページ][5]に移動して、トレース検索で使用可能な[サービス][6]と[リソース][7]名のリストを見つけます。
-3. [Indexed span][8] を抽出する `environment` と `services` を選択します。
+3. [Analyzed Span][8] を抽出する `environment` と `services` を選択します。
 2. 以下の情報を使用して、Datadog Agent の構成を（Agent のバージョンに基づいて）更新します。
 
 {{< tabs >}}

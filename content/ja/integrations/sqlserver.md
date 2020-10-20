@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md'
 display_name: SQL Server
+draft: false
 git_integration_title: sqlserver
 guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server

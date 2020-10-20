@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md'
 display_name: .NET CLR
+draft: false
 git_integration_title: dotnetclr
 guid: 3d21557e-65bd-4b66-99b9-5521f32b5957
 integration_id: dotnetclr

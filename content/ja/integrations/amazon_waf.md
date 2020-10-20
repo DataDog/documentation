@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 許可およびブロックされたリクエストを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'
+draft: false
 git_integration_title: amazon_waf
 has_logo: true
 integration_title: Amazon Web Application Firewall

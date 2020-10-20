@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/directory/README.md'
 display_name: Directory
+draft: false
 git_integration_title: directory
 guid: 0c38c4ef-5266-4667-9fb1-de8f2b73708a
 integration_id: システム

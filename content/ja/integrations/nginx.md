@@ -25,6 +25,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nginx/README.md'
 display_name: Nginx
+draft: false
 git_integration_title: nginx
 guid: 88620208-3919-457c-ba51-d844d09ac97f
 integration_id: nginx

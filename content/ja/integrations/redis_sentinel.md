@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md'
 display_name: Redis Sentinel
+draft: false
 git_integration_title: redis_sentinel
 guid: 8efe0a8c-88c6-4a2f-aa04-60d92051c458
 integration_id: redis-sentinel

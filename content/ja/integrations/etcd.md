@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
 display_name: etcd
+draft: false
 git_integration_title: etcd
 guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd

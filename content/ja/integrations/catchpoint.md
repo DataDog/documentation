@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Catchpoint のアラートを Datadog イベントストリームへ送信。
 doc_link: 'https://docs.datadoghq.com/integrations/catchpoint/'
+draft: false
 git_integration_title: catchpoint
 has_logo: true
 integration_title: Catchpoint
@@ -34,7 +35,7 @@ Catchpoint を Datadog と接続すると、以下のことができます。
 
 インストールは必要ありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 ストリームに Catchpoint のアラートを取り込むには、Catchpoint ポータルにログインし、_Settings -> API_ に移動します。
 
@@ -79,7 +80,7 @@ Catchpoint インテグレーションには、メトリクスは含まれませ
 
 Catchpoint インテグレーションは、Catchpoint イベントを Datadog のイベントストリームにプッシュします。
 
-### Service Checks
+### サービスのチェック
 
 Catchpoint インテグレーションには、サービスのチェック機能は含まれません。
 

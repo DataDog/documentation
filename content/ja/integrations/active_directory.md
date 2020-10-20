@@ -18,6 +18,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md'
 description: Microsoft Active Directory のメトリクスを収集してグラフ化
 display_name: Active Directory
+draft: false
 git_integration_title: active_directory
 guid: ba667ff3-cf6a-458c-aa4b-1172f33de562
 integration_id: active-directory
