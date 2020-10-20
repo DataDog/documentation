@@ -27,6 +27,7 @@ image_map:
       - rds
       - redshift
       - s3
+      - route53
     image: amazon_
     append: true
   - source:
@@ -42,10 +43,6 @@ image_map:
   - source:
       - guardduty
     image: amazon_guardduty
-    append: false
-  - source:
-      - route53
-    image: amazon_route53
     append: false
   - source:
       - nginx-ingress-controller
