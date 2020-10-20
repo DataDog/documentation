@@ -223,7 +223,7 @@ docker-compose -f docker-compose.yml up
 
 {{% tab "ECS" %}}
 
-Create a new EC2 task definition matching the below. Make sure to replace each parameter by the corresponding value found in your previously generated pivate location configuration file:
+Create a new EC2 task definition matching the below. Make sure to replace each parameter by the corresponding value found in your previously generated private location configuration file:
 
 ```yaml
 {
