@@ -221,7 +221,7 @@ Use this optional configuration step to assign roles on that archive and restric
 
 Use this configuration optional step to:
 
-* Include all log tags in your archives (activated by default). Beware, this increases the size of resulting archives.  
+* Include all log tags in your archives (activated by default). **Note**: this increases the size of resulting archives.  
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
