@@ -3,8 +3,8 @@
 #
 # In the template logic, scope will fallback to the source image if specific mapping is not defined
 #
-# If `append: true`, the scope or source should be appended to the defined image 
-# ex: for source and scope `cloudtrail`, the resulting image should be `amazon_cloudtail.png` 
+# If `append: true`, the scope or source should be appended to the defined image
+# ex: for source and scope `cloudtrail`, the resulting image should be `amazon_cloudtail.png`
 base_integrations_url: https://docs.datadoghq.com/integrations/
 image_map:
   - source:
@@ -44,6 +44,10 @@ image_map:
     image: amazon_guardduty
     append: false
   - source:
+      - route53
+    image: amazon_route53
+    append: false
+  - source:
       - nginx-ingress-controller
       - nginx
     image: nginx
@@ -58,7 +62,7 @@ image_map:
     image: sigsci_sm
     link: sigsci
     append: false
-  - source: 
+  - source:
       - twistlock
     image: twistlock_sm
     link: twistlock
