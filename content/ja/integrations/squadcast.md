@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md'
 display_name: Squadcast
+draft: false
 git_integration_title: Squadcast
 guid: a2b0e9fe-f824-460b-864a-50c4bda759a0
 integration_id: Squadcast
@@ -102,7 +104,7 @@ Squadcast インテグレーションには、メトリクスは含まれませ�
 
 トリガー/解決された Squadcast イベントが Squadcast プラットフォームダッシュボードに表示されます。
 
-### サービスチェック
+### サービスのチェック
 
 Squadcast インテグレーションには、サービスのチェック機能は含まれません。
 

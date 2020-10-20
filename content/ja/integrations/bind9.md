@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md'
 display_name: BIND 9
+draft: false
 git_integration_title: bind9
 guid: bce6961c-4312-11e9-b210-d663bd873d93
 integration_id: bind9
@@ -72,7 +74,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Bind9 の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーの `bind9.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル bind9.d/conf.yaml][9] を参照してください。
 
@@ -103,7 +105,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 現時点で、bind9_check チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 `bind9_check.BIND_SERVICE_CHECK`: DNS の統計チャンネル URL がインスタンスに存在する場合は、`OK` を返します。
 `bind9_check.BIND_SERVICE_CHECK`: URL エラーが発生した場合は、`CRITICAL` を返します。

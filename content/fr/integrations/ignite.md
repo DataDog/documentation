@@ -2,7 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Ignite Overview: assets/dashboards/ignite_overview.json
+  logs:
+    source: ignite
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ignite/README.md'
 display_name: Ignite
+draft: false
 git_integration_title: ignite
 guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite
@@ -42,7 +47,7 @@ Ce check permet de surveiller [Ignite][1].
 
 ### Installation
 
-Le check Ignite est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Ignite est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -52,16 +57,21 @@ L'exportateur de métriques JMX est activé par défaut, mais vous devrez peut-�
 
 Pour le logging, nous vous conseillons fortement d'activer [log4j][3] afin que les logs affichent les dates complètes.
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-1. Modifiez le fichier `ignite.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ignite. Consultez le [fichier d'exemple ignite.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
+1. Modifiez le fichier `ignite.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ignite. Consultez le [fichier d'exemple ignite.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations.
-   Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous.
-   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées.
-   Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][6].
+   Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
+   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des instructions détaillées.
+   Si vous devez surveiller davantage de métriques, contactez [l'assistance Datadog][3].
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
@@ -87,32 +97,44 @@ _Disponible à partir des versions > 6.0 de l'Agent_
              pattern: \[\d{4}\-\d{2}\-\d{2}
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple ignite.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple ignite.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][7].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/integrations/java/
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
-Pour recueillir des métriques avec l'intégration Datadog/Ignite, consultez le guide [Autodiscovery avec JMX][9].
+Pour recueillir des métriques avec l'intégration Datadog/Ignite, consultez le guide [Autodiscovery avec JMX][2].
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][3].
 
 | Paramètre      | Valeur                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "ignite", "service": "<NOM_SERVICE>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
+| `<CONFIG_LOG>` | `{"source": "ignite", "service": "<NOM_SERVICE>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[3]: https://docs.datadoghq.com/fr/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][11] et cherchez `ignite` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][4] et cherchez `ignite` dans la section Checks.
 
 ## Données collectées
 
@@ -131,18 +153,12 @@ L'intégration Ignite n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 
 [1]: https://ignite.apache.org/
 [2]: https://docs.datadoghq.com/fr/agent/
 [3]: https://apacheignite.readme.io/docs/logging#section-log4j
-[4]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/integrations/java/
-[6]: https://docs.datadoghq.com/fr/help/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
-[9]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[10]: https://docs.datadoghq.com/fr/agent/docker/log/
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/ignite/metadata.csv
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example

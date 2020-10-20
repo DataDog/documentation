@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: consul
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -67,17 +68,20 @@ Enfin, en plus des métriques, l'Agent Datadog envoie également un check de ser
 
 ### Installation
 
-Le check Consul de l'Agent Datadog est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Consul.
+Le check Consul de l'Agent Datadog est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Consul.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `consul.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos métriques Consul. Consultez le [fichier d'exemple consul.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `consul.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos métriques de performance Consul. Consultez le [fichier d'exemple consul.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -91,7 +95,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
      - url: http://localhost:8500
    ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
 
 Rechargez l'Agent Consul pour commencer à envoyer davantage de métriques Consul à DogStatsD.
 
@@ -116,13 +120,19 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    ```
 
    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-   Consultez le [fichier d'exemple consul.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple consul.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -136,7 +146,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                               |
 | -------------- | --------------------------------------------------- |
@@ -144,7 +154,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 #### DogStatsD
 
-Si vous le souhaitez, vous pouvez configurer Consul de façon à ce qu'il envoie les données à l'Agent via [DogStatsD][8] au lieu de demander à l'Agent de récupérer les données auprès de Consul.
+Si vous le souhaitez, vous pouvez configurer Consul de façon à ce qu'il envoie les données à l'Agent via [DogStatsD][3] au lieu de demander à l'Agent de récupérer les données auprès de Consul. 
 
 1. Pour configurer Consul de façon à ce qu'il envoie des métriques DogStatsD, ajoutez votre `dogstatsd_addr` imbriqué sous la clé `telemetry` de premier niveau dans le fichier de configuration principal de Consul :
 
@@ -158,7 +168,7 @@ Si vous le souhaitez, vous pouvez configurer Consul de façon à ce qu'il envoie
     }
     ```
 
-1. Pour veiller à ce que les métriques soient correctement taguées, modifiez le [fichier de configuration principal de l'Agent Datadog][9] `datadog.yaml` en y ajoutant les paramètres suivants :
+2. Pour veiller à ce que les métriques soient correctement taguées, modifiez le [fichier de configuration principal de l'Agent Datadog][4] `datadog.yaml` en y ajoutant les paramètres suivants :
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -191,9 +201,47 @@ Si vous le souhaitez, vous pouvez configurer Consul de façon à ce qu'il envoie
 
 3. [Redémarrez l'Agent][5].
 
+#### OpenMetrics
+
+Au lieu d'utiliser DogStatsD, vous pouvez activer l'option de configuration `use_prometheus_endpoint` pour obtenir les mêmes métriques à partir de l'endpoint Prometheus.
+
+
+**Remarque** : utilisez soit la méthode DogStatsD, soit la méthode Prometheus. N'activez pas les deux pour la même instance.
+
+1. Configurez Consul de façon à ce qu'il expose des métriques à l'endpoint Prometheus. Définissez le paramètre [`prometheus_retention_time`][6] imbriqué sous la clé `telemetry` de premier niveau dans le fichier de configuration principal de Consul :
+
+    ```conf
+    {
+      ...
+      "telemetry": {
+        "prometheus_retention_time": "360h"
+      },
+      ...
+    }
+    ```
+
+2. Pour commencer à utiliser l'endpoint Prometheus, modifiez le fichier `consul.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7].
+    ```yaml
+    instances:
+        - url: <EXAMPLE>
+          use_prometheus_endpoint: true
+    ```
+
+3. [Redémarrez l'Agent][5].
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[3]: https://docs.datadoghq.com/fr/developers/dogstatsd/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://www.consul.io/docs/agent/options#telemetry-prometheus_retention_time
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `consul` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `consul` dans la section Checks.
 
 **Remarque** : si la journalisation de debugging est activée sur vos nœuds Consul, l'interrogation habituelle de l'Agent Datadog s'affichera dans le log Consul :
 
@@ -222,9 +270,9 @@ udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 
 {{< get-metrics-from-git "consul" >}}
 
 
-Consultez la [documentation relative à la télémétrie de Consul][12] pour obtenir la description des métriques envoyées par l'agent Consul à DogStatsD.
+Consultez la [documentation de Consul relative à la télémétrie][4] pour obtenir la description des métriques envoyées par l'agent Consul à DogStatsD.
 
-Consultez la [documentation relative aux coordonnées réseau de Consul][13] pour découvrir comment les métriques de latence réseau sont calculées.
+Consultez la [documentation de Consul relative aux coordonnées réseau][5] pour découvrir comment les métriques de latence réseau sont calculées.
 
 ### Événements
 
@@ -241,26 +289,19 @@ L'Agent Datadog envoie un check de service pour chaque check de santé de Consul
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-- [Surveiller la santé et les performances de Consul avec Datadog][15]
-- [Utilisation de Consul chez Datadog][16]
+- [Surveiller la santé et les performances de Consul avec Datadog][7]
+- [Utilisation de Consul chez Datadog][8]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/fr/developers/dogstatsd/
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/consul/metadata.csv
-[12]: https://www.consul.io/docs/agent/telemetry.html
-[13]: https://www.consul.io/docs/internals/coordinates.html
-[14]: https://docs.datadoghq.com/fr/help/
-[15]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
-[16]: https://engineering.datadoghq.com/consul-at-datadog
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://www.consul.io/docs/agent/telemetry.html
+[5]: https://www.consul.io/docs/internals/coordinates.html
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+[8]: https://engineering.datadoghq.com/consul-at-datadog

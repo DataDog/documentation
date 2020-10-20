@@ -4,6 +4,9 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Airflow Overview: assets/dashboards/overview.json
+  logs:
+    source: airflow
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/airflow/README.md'
 display_name: Airflow
+draft: false
 git_integration_title: airflow
 guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow
@@ -57,7 +61,9 @@ Les étapes décrites ci-dessous sont toutes les trois nécessaires pour faire f
 
 Configurez le check Airflow inclus avec le package de l'[Agent Datadog][4] pour recueillir ses métriques de santé et ses checks de service.
 
-Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos checks de service Airflow. Consultez le [fichier d'exemple airflow.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+(Facultatif) Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos checks de service Airflow. Consultez le [fichier d'exemple airflow.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+
+**Remarque** : si vous utilisez des conteneurs, consultez [Identificateurs de conteneur Autodiscovery][6] pour en savoir plus.
 
 #### Étape 2 : connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnalité `statsd` d'Airflow pour recueillir des métriques.
 
@@ -72,12 +78,12 @@ Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine
    ```conf
    [scheduler]
    statsd_on = True
-   statsd_host = localhost
-   statsd_port = 8125
+   statsd_host = localhost  # Hostname or IP of server running the Datadog Agent
+   statsd_port = 8125       # DogStatsD port configured in the Datadog Agent
    statsd_prefix = airflow
    ```
 
-3. Modifiez le [fichier de configuration principal de l'Agent Datadog][6] `datadog.yaml` pour y ajouter les paramètres suivants :
+3. Modifiez le [fichier de configuration principal de l'Agent Datadog][7] `datadog.yaml` pour y ajouter les paramètres suivants :
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -120,6 +126,14 @@ Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine
            name: "airflow.pool.open_slots"
            tags:
              pool_name: "$1"
+         - match: "pool.queued_slots.*"
+           name: "airflow.pool.queued_slots"
+           tags:
+             pool_name: "$1"
+         - match: "pool.running_slots.*"
+           name: "airflow.pool.running_slots"
+           tags:
+             pool_name: "$1"
          - match: "airflow.pool.used_slots.*"
            name: "airflow.pool.used_slots"
            tags:
@@ -159,6 +173,12 @@ Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine
            name: "airflow.dagrun.schedule_delay"
            tags:
              dag_id: "$1"
+         - match: 'scheduler.tasks.running'
+           name: "airflow.scheduler.tasks.running"
+         - match: 'scheduler.tasks.starving'
+           name: "airflow.scheduler.tasks.starving"
+         - match: sla_email_notification_failure
+           name: 'airflow.sla_email_notification_failure'
          - match: 'airflow\.task_removed_from_dag\.(.*)'
            match_type: "regex"
            name: "airflow.dag.task_removed"
@@ -173,11 +193,22 @@ Modifiez le fichier `airflow.d/conf.yaml` dans le dossier `conf.d/` à la racine
            name: "airflow.task.instance_created"
            tags:
              task_class: "$1"
+         - match: "ti.start.*.*"
+           name: "airflow.ti.start"
+           tags:
+             dagid: "$1"
+             taskid: "$2"
+         - match: "ti.finish.*.*.*"
+           name: "airflow.ti.finish"
+           tags:
+             dagid: "$1"
+             taskid: "$2"
+             state: "$3"
    ```
 
 #### Étape 3 : redémarrez l'Agent Datadog et Airflow.
 
-1. [Redémarrez l'Agent][7].
+1. [Redémarrez l'Agent][8].
 2. Redémarrez Airflow pour commencer à envoyer vos métriques Airflow à l'endpoint DogStatsD de l'Agent Datadog.
 
 #### Checks de service de l'intégration
@@ -251,11 +282,11 @@ _Disponible à partir des versions > 6.0 de l'Agent_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-3. [Redémarrez l'Agent][8].
+3. [Redémarrez l'Agent][9].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `airflow` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `airflow` dans la section Checks.
 
 ## Données collectées
 
@@ -265,12 +296,10 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 ### Checks de service
 
-**airflow.can_connect** :
-
+**airflow.can_connect** :<br>
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Airflow. Si ce n'est pas le cas, renvoie `OK`.
 
-**airflow.healthy** :
-
+**airflow.healthy** :<br>
 Renvoie `CRITICAL` si le processus Airflow n'est pas sain. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
@@ -281,7 +310,7 @@ Le check Airflow n'inclut aucun événement.
 
 ### Hook Datadog pour Airflow
 
-Un [hook Datadog pour Airflow][11] peut également être utilisé pour interagir avec Datadog :
+Un [hook Datadog pour Airflow][12] peut également être utilisé pour interagir avec Datadog :
 
 - Envoyer des métriques
 - Interroger des métriques
@@ -289,16 +318,17 @@ Un [hook Datadog pour Airflow][11] peut également être utilisé pour interagir
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://airflow.apache.org/docs/stable/metrics.html
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
 [3]: https://docs.datadoghq.com/fr/agent/
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/help/
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
-[11]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[6]: https://docs.datadoghq.com/fr/agent/guide/ad_identifiers/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/help/
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
+[12]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html

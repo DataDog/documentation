@@ -72,6 +72,7 @@ apm_config:
 ```
 
 * `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
+
 [1]: /tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
@@ -294,4 +295,4 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 [7]: /api/v1/tracing/
 [8]: /tracing/custom_instrumentation/java/#extending-tracers
 [9]: /tracing/custom_instrumentation/ruby?tab=activespan#post-processing-traces
-[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
+[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

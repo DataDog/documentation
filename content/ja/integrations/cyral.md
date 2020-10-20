@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Cyral Overview: assets/dashboards/cyral_overview.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md'
 display_name: Cyral
+draft: true
 git_integration_title: cyral
 guid: 2a854a73-b0da-4954-b34e-fc1cd05ba8e8
 integration_id: cyral

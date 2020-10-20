@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_SageMaker."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sagemaker/'
+draft: false
 git_integration_title: amazon_sagemaker
 has_logo: true
 integration_title: "Amazon\_SageMaker"

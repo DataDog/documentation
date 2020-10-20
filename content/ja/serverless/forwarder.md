@@ -8,7 +8,7 @@ title: Datadog Forwarder
 ---
 Datadog Forwarder は、ログ、カスタムメトリクス、トレースを環境から Datadog に送信する AWS Lambda 関数です。Forwarder は次のことができます。
 
-- CloudWatch、ELB、S3、CloudTrail、VPC、CloudFront ログを Datadog に転送する
+- CloudWatch、ELB、S3、CloudTrail、VPC、SNS、CloudFront ログを Datadog に転送する
 - S3 イベントを Datadog に転送する
 - Kinesis データストリームイベントを Datadog に転送する (CloudWatch ログのみがサポートされています)
 - CloudWatch ログを使用して AWS Lambda 関数からカスタムメトリクスを転送する
@@ -19,7 +19,9 @@ Datadog Forwarder で AWS サービスログを送信する方法について、
 
 ## インストール
 
-Datadog は、[CloudFormation](#cloudformation) を使用して Forwarder を自動的にインストールすることをお勧めします。[Terraform](#terraform) を使用するか、[手動](#manually)でセットアッププロセスを完了することもできます。
+Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を自動的にインストールすることをお勧めします。[Terraform](#terraform) を使用するか、[手動](#manual)でセットアッププロセスを完了することもできます。
+
+インストール後、次の[手順](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers)で S3 バケットまたは CloudWatch ロググループなどのログリソースに Forwarder をサブスクライブできます。
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Cloud Formation" xxx -->
@@ -44,7 +46,7 @@ Terraform リソース [aws_cloudformation_stack](https://www.terraform.io/docs/
 
 Datadog は、2 つの個別の Terraform コンフィギュレーションを作成することをお勧めします。
 
-- 最初のものを使用して Datasecret API キーを AWS Secrets Manager に保存し、出力から適用するシークレット ARN を書き留めます。
+- 最初のものを使用して Datadog API キーを AWS Secrets Manager に保存し、出力から適用するシークレット ARN を書き留めます。
 - 次に、Forwarder の別のコンフィギュレーションを作成し、`DdApiKeySecretArn` パラメーターを介してシークレット ARN を指定します。
 
 API キーと Forwarder のコンフィギュレーションを分離すると、Forwarder を更新するときに Datadog API キーを指定する必要がなくなります。
@@ -102,6 +104,7 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
 5. [トリガー](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#send-aws-service-logs-to-datadog)を構成します。
+6. S3 バケットを作成し、環境変数 `DD_S3_BUCKET_NAME` をバケット名に設定します。また、このバケットに `s3:GetObject`、`s3:PutObject`、`s3:DeleteObject` アクセス許可を Lambda 実行ロールに提供します。このバケットは、Lambda タグキャッシュの保存に使用されます。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -117,9 +120,23 @@ AWS PrivateLink 使用して、VPC で Forwarder を実行し Datadog に接続�
 1. [セットアップ手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)に従って、Datadog の **API** サービス用のエンドポイントを VPC に追加します。
 2. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **ログ** サービス用に 2 つ目のエンドポイントを VPC に追加します。
 3. [同様の手順](https://docs.datadoghq.com/agent/guide/private-link/?tab=logs#create-your-vpc-endpoint)で、Datadog の **トレース** サービス用に 3 つ目のエンドポイントを VPC に追加します。
-4. デフォルトで、Forwarder の API キーは Secrets Manager に保存されます。Secrets Manager のエンドポイントを VPC に追加する必要があります。AWS サービスを VPC に追加するには、[こちら](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint)の手順に従ってください。
-5. CloudFormation テンプレートで Forwarder をインストールする際は、'DdUsePrivateLink' を有効にして 1 つ以上の Subnet ID と Security Group を設定してください。
+4. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
+5. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUsePrivateLink`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
+6. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
 
+## AWS VPC およびプロキシのサポート
+
+パブリックインターネットの直接アクセスを使用せずに Forwarder を VPC にデプロイする必要がある場合で、Datadog EU サイトへの接続に AWS PrivateLink を使用できない場合（所属組織が Datadog EU サイトにホストされている (例: datadoghq.eu) 場合など）は、プロキシを使用してデータを送信できます。
+
+1. Forwarder がパブリックサブネットにデプロイされている場合以外は、こちらの[手順](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) に従い Secrets Manager および S3 のエンドポイントを VPC に追加し、Forwarder がこれらのサービスにアクセスできるようにします。
+2. 以下のコンフィギュレーション ([HAProxy](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/haproxy.txt) or [Nginx](https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/proxy_conf/nginx.txt)) でプロキシを更新します。
+3. CloudFormation テンプレートで Forwarder をインストールする際は、`DdUseVPC`、`VPCSecurityGroupIds`、`VPCSubnetIds` を設定します。
+4. AWS VPC はまだ Resource Group Tagging API にエンドポイントを提供しないため、`DdFetchLambdaTags` オプションが無効になっていることを確認してください。
+5. `DdApiUrl` を `http://<proxy_host>:3834` または `https://<proxy_host>:3834` に設定します。
+6. `DdTraceIntakeUrl` を `http://<proxy_host>:3835` または `https://<proxy_host>:3835` に設定します。
+7. `DdUrl` を `<proxy_host>` に、`DdPort` を `3837` に設定します。
+8. `http` を使用したプロキシに接続する場合は、`DdNoSsl` を `true` に設定します。
+9. 自己署名証明書のある `https` を使用したプロキシに接続する場合は `DdSkipSslValidation` を `true` に設定します。
 
 ## トラブルシューティング
 
@@ -210,57 +227,57 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 
 **IAM ステートメント**
 
-  ```json
-  [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Action": ["s3:GetObject"],
-      "Resource": "arn:aws:s3:::*",
-      "Effect": "Allow"
-    },
-    {
-      "Action": ["secretsmanager:GetSecretValue"],
-      "Resource": "<ARN of DdApiKeySecret>",
-      "Effect": "Allow"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::*",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["secretsmanager:GetSecretValue"],
+    "Resource": "<ARN of DdApiKeySecret>",
+    "Effect": "Allow"
+  }
+]
+```
 
 - `ForwarderZipCopierRole`: ForwarderZipCopier Lambda 関数が S3 バケットに Forwarder デプロイの zip ファイルをダウンロードするための実行ロール。
 
 **IAM ステートメント**:
 
-  ```json
-  [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Action": ["s3:PutObject", "s3:DeleteObject"],
-      "Resource": "<S3Bucket to Store the Forwarder Zip>",
-      "Effect": "Allow"
-    },
-    {
-      "Action": ["s3:ListBucket"],
-      "Resource": "<S3Bucket to Store the Forwarder Zip>",
-      "Effect": "Allow"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:PutObject", "s3:DeleteObject"],
+    "Resource": "<S3Bucket to Store the Forwarder Zip>",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["s3:ListBucket"],
+    "Resource": "<S3Bucket to Store the Forwarder Zip>",
+    "Effect": "Allow"
+  }
+]
+```
 
 ## CloudFormation パラメーター
 
@@ -279,14 +296,13 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 - `MemorySize` - Datadog Forwarder Lambda 関数のメモリサイズ
 - `Timeout` - Datadog Forwarder Lambda 関数のタイムアウト
 - `ReservedConcurrency` - Datadog Forwarder Lambda 関数用に予約されている同時実行数
-- `LogRetentionInDays` - Datadog Forwarder Lambda 関数によって生成されたログの CloudWatch ログの
-  保持
-
+- `LogRetentionInDays` - Datadog Forwarder Lambda 関数により生成されたログの CloudWatch ログ保存期間
+  関数
 
 ### ログ転送 (オプション)
 
 - `DdTags` - 転送されたログにカスタムタグを追加します。カンマ区切りの文字列で、末尾にカンマはありません。例:
-    `env:prod,stack:classic`
+  `env:prod,stack:classic`
 - `DdMultilineLogRegexPattern` - 指定された正規表現を使用して、S3 からの複数行ログの新しいログ行を検出します。
   たとえば、パターン "11/10/2014" で始まる複数行ログに対して表現 `\d{2}\/\d{2}\/\d{4}` を
   使用します。
@@ -305,6 +321,9 @@ CloudFormation Stack は、次の IAM ロールを作成します。
   あります。
 - `DdForwardLog` - ログ転送を無効にするには、false に設定しますが、
   Lambda 関数からのメトリクスやトレースなど、他の可観測性データの転送は続行します。
+- `DdFetchLambdaTags` - Forwarder が GetResources API 呼び出しを使用して Lambda タグをフェッチし、
+  それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `tag:GetResources` が
+  Lambda 実行 IAM ロールに自動的に追加されます。
 
 ### ログスクラビング (オプション)
 
@@ -315,23 +334,17 @@ CloudFormation Stack は、次の IAM ロールを作成します。
   ログスクラビングルールは、Lambda 関数によって自動的に追加されるメタデータを含む、完全な JSON 形式のログに適用されます。
   パターン一致の各インスタンスは、
   各ログで一致するものがなくなるまで置き換えられます。
-- `DdScrubbingRuleReplacement` - DdScrubbingRule に一致するテキストを、指定されたテキストで置き換えます
+  `.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながりますのでご注意ください。
+- `DdScrubbingRuleReplacement` - DdScrubbingRule に一致するテキストを、指定されたテキストで置き換えます。
 
 ### ログのフィルタリング (オプション)
 
 - `ExcludeAtMatch` - 指定された正規表現に一致するログを送信しません。
   ログが ExcludeAtMatch と IncludeAtMatch の両方に一致する場合、そのログは除外されます。
   フィルタリングルールは、関数によって自動的に追加されるメタデータを含む、完全な JSON 形式のログに適用されます。
-- `IncludeAtMatch` - 指定された正規表現に一致するログのみを送信し、ExcludeAtMatch によって
-  除外されません。
-
-### 試験運用 (オプション)
-
-- `DdFetchLambdaTags` - Forwarder が GetResources API 呼び出しを使用して Lambda タグをフェッチし、
-  それらをログ、メトリクス、トレースに適用できるようにします。true に設定すると、アクセス許可 `tag:GetResources` が
-  Lambda 実行 IAM ロールに自動的に追加されます。タグはメモリにキャッシュされるため、
-  関数がコールドスタートするか、TTL (1 時間) の期限が切れたときにのみフェッチされます。
-  Forwarder は、行われた各 API 呼び出しについて、`aws.lambda.enhanced.get_resources_api_calls` メトリクスを増分します。
+  `.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながりますのでご注意ください。
+- `IncludeAtMatch` - 指定された正規表現に一致し、ExcludeAtMatch により除外されていないログのみを送信します。
+  `.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながりますのでご注意ください。
 
 ### 高度 (オプション)
 

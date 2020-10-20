@@ -373,7 +373,7 @@ Monolog is a part of the following frameworks:
 
 * [Symfony2, Symfony3][3]
 * [PPI][4]
-* [Laravel 4 & 5][5]
+* [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
 * [CakePHP][8]
@@ -458,15 +458,67 @@ monolog:
 
 ```php
 <?php
-  //file: bootstrap/app.php
-  $app->configureMonologUsing(function($monolog) {
-      $monolog->pushHandler(...);
 
-    // configure your logger below
-  });
+namespace App\Providers;
 
-  return $app;
-?>
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // Get the Monolog instance
+        $monolog = logger()->getLogger();
+        if (!$monolog instanceof \Monolog\Logger) {
+            return;
+        }
+
+        // Optional: Use JSON formatting
+        $useJson = false;
+        foreach ($monolog->getHandlers() as $handler) {
+            if (method_exists($handler, 'setFormatter')) {
+                $handler->setFormatter(new \Monolog\Formatter\JsonFormatter());
+                $useJson = true;
+            }
+        }
+
+        // Inject the trace and span ID to connect the log entry with the APM trace
+        $monolog->pushProcessor(function ($record) use ($useJson) {
+            $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+            if (null === $span) {
+                return $record;
+            }
+            if ($useJson === true) {
+                $record['dd'] = [
+                    'trace_id' => $span->getTraceId(),
+                    'span_id'  => \dd_trace_peek_span_id(),
+                ];
+            } else {
+                $record['message'] .= sprintf(
+                    ' [dd.trace_id=%d dd.span_id=%d]',
+                    $span->getTraceId(),
+                    \dd_trace_peek_span_id()
+                );
+            }
+            return $record;
+        });
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+}
 ```
 
 ### Silex
@@ -539,6 +591,7 @@ CakeLog::config('debug', array(
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/logs/
 [2]: /tracing/connect_logs_and_traces/php/
 [3]: /logs/log_collection/php/#symfony-v2-v3

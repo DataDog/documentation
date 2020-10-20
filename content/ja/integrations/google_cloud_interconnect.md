@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Google Cloud Interconnect のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_interconnect/'
+draft: false
 git_integration_title: google_cloud_interconnect
 has_logo: true
 integration_title: Google Cloud Interconnect

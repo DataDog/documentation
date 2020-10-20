@@ -52,7 +52,7 @@ If you're [using APM][6], [DogStatsD][7], or [log management][8], set the approp
 
 **Note**: To enable DogStatsD metrics collection from other containers, ensure the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` environment variable is set to `true`.
 
-  - If you are using log management, refer to the dedicated [Log collection documentation][6].
+  - If you are using log management, refer to the dedicated [Log collection documentation][8].
 
 Double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog uses the private IP to route to the Agent from the containers.
 
@@ -71,15 +71,15 @@ Configure the task using either the [AWS CLI tools][10] or using the Amazon Web 
 8. Optionally - See [network performance monitoring (NPM)](#network-performance-monitoring-collection) to activate network collection
 9. Execute the following command:
 
-{{< code-block lang="bash" >}}
+```bash
 aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
-{{< /code-block >}}
+```
 
 ##### Agent health check
 
 Add the following to your ECS task definition to create an Agent health check:
 
-{{< code-block lang="json" >}}
+```json
 "healthCheck": {
   "retries": 3,
   "command": ["CMD-SHELL","agent health"],
@@ -87,7 +87,7 @@ Add the following to your ECS task definition to create an Agent health check:
   "interval": 30,
   "startPeriod": 15
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
@@ -173,7 +173,7 @@ To collect processes information for all your containers and send it to Datadog:
 1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs.json][1] file ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI) with the following configuration:
 
-{{< code-block lang="json" >}}
+```json
 {
   "containerDefinitions": [
     (...)
@@ -207,7 +207,7 @@ To collect processes information for all your containers and send it to Datadog:
   ],
   "family": "datadog-agent-task"
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
@@ -217,7 +217,7 @@ To collect processes information for all your containers and send it to Datadog:
 1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
 2. Update your [datadog-agent-ecs-win.json][1] file with the following configuration:
 
-{{< code-block lang="json" >}}
+```json
 {
   "containerDefinitions": [
     (...)
@@ -232,7 +232,7 @@ To collect processes information for all your containers and send it to Datadog:
   ],
   "family": "datadog-agent-task"
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 {{% /tab %}}
@@ -244,7 +244,7 @@ To collect processes information for all your containers and send it to Datadog:
   - If you are installing for the first time, there is a `datadog-agent-ecs.json` file available, [datadog-agent-sysprobe-ecs.json][15] ([datadog-agent-sysprobe-ecs1.json][16] if you are using an original Amazon Linux AMI), for use with the [above instructions](#aws-cli). Note that initial NPM setup requires the CLI, as you cannot add `linuxParameters` in the AWS UI.
  2. If you already have a task definition, update your [datadog-agent-ecs.json][17] file ([datadog-agent-ecs1.json][18] if you are using an original Amazon Linux AMI) with the following configuration:
 
- {{< code-block lang="json" >}}
+ ```json
  {
    "containerDefinitions": [
      (...)
@@ -289,7 +289,7 @@ To collect processes information for all your containers and send it to Datadog:
    ],
    "family": "datadog-agent-task"
  }
- {{< /code-block >}}
+ ```
 
 ## Troubleshooting
 

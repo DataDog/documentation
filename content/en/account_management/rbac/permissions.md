@@ -257,16 +257,33 @@ Use the Logs Archive API either to [assign][1] or [revoke][2] a role from a give
 
 Grants the ability to write historical views, meaning to trigger a [Log Rehydration*][11].
 
-This permission is global, but only enables to trigger a rehydration for Archives users have [Logs Read Archive](#logs-read-archives) permission.
+This permission is global. It enables users to trigger a rehydration for archives on which they have [Logs Read Archive][12] permission.
+
+{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="Write Historical View"  style="width:70%;">}}
+
+In the example above:
+
+* `ADMIN` Role members **can** rehydrate from the `Audit Archive`, as they have the Write Historical View (Rehydrate) permission, as well as the Read Archive permission on that archive.
+* `AUDIT` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Write Historical View (Rehydrate) permission.
+* `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
+
+
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][10].  
+
+For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
+
+* If you **do not** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are accessible for `CI-CD` role members.
+* If you **do** use the [Log Read Index Data](#logs-read-index-data) legacy permission, these logs are not accessible for `CI-CD` role members, as the resulting historical view is restricted to `PROD` and `ADMIN` role members.
+
 
 #### logs_public_config_api
 
 Grants the ability to create or modify log configuration through the Datadog API:
 
-* Configure [Archives][12] through the API
-* Configure [Indexes][13] through the API
-* Configure [Pipelines][14] through the API
-* Configure [Restriction Queries][15] through the API
+* Configure [Archives][13] through the API
+* Configure [Indexes][14] through the API
+* Configure [Pipelines][15] through the API
+* Configure [Restriction Queries][16] through the API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
@@ -279,7 +296,7 @@ Grant the following permissions to manage read access on subsets of log data:
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][15].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][16].
 
 Roles are additive: if a user belongs to multiple roles, the data they have access to is the union of all the permissions from each of the roles.
 
@@ -363,7 +380,7 @@ curl -X POST \
 
 #### logs_live_tail
 
-Grants a role the ability to use the [Live Tail][16] feature.
+Grants a role the ability to use the [Live Tail][17] feature.
 
 This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
@@ -385,8 +402,9 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [9]: /logs/processing/pipelines/#pipeline-filters
 [10]: /logs/archives
 [11]: /logs/archives/rehydrating
-[12]: /api/v2/logs-archives/
-[13]: /api/v1/logs-indexes/
-[14]: /api/v1/logs-pipelines/
-[15]: /api/v2/logs-restriction-queries/
-[16]: /logs/explorer/live_tail/
+[12]: r#logs-read-archives
+[13]: /api/v2/logs-archives/
+[14]: /api/v1/logs-indexes/
+[15]: /api/v1/logs-pipelines/
+[16]: /api/v2/logs-restriction-queries/
+[17]: /logs/explorer/live_tail/

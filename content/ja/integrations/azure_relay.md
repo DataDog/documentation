@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Relay のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_relay/'
+draft: false
 git_integration_title: azure_relay
 has_logo: true
 integration_title: Microsoft Azure Relay

@@ -99,4 +99,5 @@ Il s'agit d'un check passif. Ainsi, les métriques sont uniquement transmises si
 ### Métriques
 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
+
 [1]: https://github.com/DataDog/go-metro#usage

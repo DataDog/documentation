@@ -22,7 +22,14 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
+## Required Setup
+
+If not already configured:
+
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -46,12 +53,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     ```
     custom:
       datadog:
-        flushMetricsToLogs: true
         forwarder: # The Datadog Forwarder ARN goes here.
     ```
     More information on the Datadog Forwarder ARN or installation can be found [here][2]. For additional settings, see the [plugin documentation][1].
 
-[1]: https://github.com/DataDog/serverless-plugin-datadog
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -92,7 +98,7 @@ Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with 
 
 More information and additional parameters can be found in the [macro documentation][1].
 
-[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-js/releases
@@ -147,7 +153,7 @@ Replace `<SERVICE>` and `<ENV>` with appropriate values, `<LAYER_VERSION>` with 
 
 More information and additional parameters can be found in the [macro documentation][1].
 
-[1]: https://github.com/DataDog/datadog-cloudformation-macro
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://github.com/DataDog/datadog-lambda-js/releases
 {{% /tab %}}
@@ -188,7 +194,7 @@ More information and additional parameters can be found in the [CLI documentatio
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-js/releases
 [3]: https://docs.datadoghq.com/serverless/forwarder/
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda
+[4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -245,46 +251,64 @@ See the [latest release][3].
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][4].
-2. [Ensure the option DdFetchLambdaTags is enabled][5].
-3. [Subscribe the Datadog Forwarder to your function's log groups][6].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: https://docs.datadoghq.com/serverless/forwarder/
-[5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][2].
+After you have configured your function following the steps above, you can view metrics, logs and traces on the [Serverless Homepage][3].
 
-### Monitor Custom Business Metrics
+### Monitor Custom Business Logic
 
-If you would like to submit a custom metric or manually instrument a function, see the sample code below:
+If you would like to submit a custom metric or span, see the sample code below:
 
 ```javascript
-const { sendDistributionMetric } = require("datadog-lambda-js");
+const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// Submit a custom APM span named "sleep"
+// submit a custom span named "sleep"
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  await sleep(1000);
+  // add custom tags to the lambda function span,
+  // does NOT work when X-Ray tracing is enabled
+  const span = tracer.scope().active();
+  span.setTag('customer_id', '123456');
 
-  // Submit a custom metric
+  await sleep(100);
+
+  // submit a custom span
+  const sandwich = tracer.trace('hello.world', () => {
+    console.log('Hello, World!');
+  });
+
+  // submit a custom metric
   sendDistributionMetric(
     "coffee_house.order_value", // metric name
-    12.45, // metric Value
+    12.45, // metric value
     "product:latte", // tag
     "order:online", // another tag
   );
+
+  // submit a custom metric with timestamp
+  sendDistributionMetricWithDate(
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    new Date(Date.now()), // date, must be within last 20 mins
+    "product:latte", // tag
+    "order:online", // another tag
+  );
+
   const response = {
     statusCode: 200,
     body: JSON.stringify("Hello from serverless!"),
@@ -292,13 +316,8 @@ exports.handler = async (event) => {
   return response;
 };
 ```
-[Enable custom metric submission][3] to get started.
 
-### Enable the AWS X-Ray Integration
-
-Datadog’s integration with AWS X-Ray allows you to visualize end-to-end serverless transactions, so you can zero in on the source of any errors or slowdowns, and see how the performance of your functions impacts your users’ experience. Depending on your language and configuration, [choose between setting up Datadog APM or the AWS X-Ray integration][4] for your tracing needs.
-
-{{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
+For more information on custom metric submission, see [here][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
 ## Further Reading
 
@@ -306,5 +325,6 @@ Datadog’s integration with AWS X-Ray allows you to visualize end-to-end server
 
 [1]: /integrations/amazon_web_services/
 [2]: /serverless/forwarder
-[3]: /serverless/custom_metrics
-[4]: /serverless/distributed_tracing
+[3]: https://app.datadoghq.com/functions
+[4]: /serverless/custom_metrics?tab=nodejs
+[5]: tracing/custom_instrumentation/nodejs/

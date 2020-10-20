@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Elemental MediaConvert のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediaconvert/'
+draft: false
 git_integration_title: amazon_mediaconvert
 has_logo: true
 integration_title: Amazon Elemental MediaConvert

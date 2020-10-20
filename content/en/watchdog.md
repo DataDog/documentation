@@ -113,6 +113,10 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 
 {{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" style="width:75%;">}}
 
+## Toubleshooting
+
+Need help? Contact [Datadog support][17].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -133,3 +137,4 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 [14]: /tracing/guide/setting_primary_tags_to_scope/
 [15]: /tracing/visualization/#services
 [16]: /tracing/visualization/services_list/
+[17]: /help/

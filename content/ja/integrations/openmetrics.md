@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md'
 display_name: OpenMetrics
+draft: false
 git_integration_title: openmetrics
 guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics

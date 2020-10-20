@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Akamai DataStream を Datadog と統合
 doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
     tag: ブログ

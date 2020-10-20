@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hive/README.md'
 display_name: Hive
+draft: false
 git_integration_title: hive
 guid: 3faee302-f293-45de-9eb8-ba6b7fa052a3
 integration_id: hive

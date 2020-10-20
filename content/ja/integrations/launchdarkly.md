@@ -1,20 +1,22 @@
 ---
 "assets":
   "dashboards": {}
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "service_checks": assets/service_checks.json
 "categories":
 - notification
-"creates_events": !!bool "true"
+"creates_events": true
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md"
 "display_name": "LaunchDarkly"
+"draft": false
 "git_integration_title": "launchdarkly"
 "guid": "a1441ba8-be33-4123-8808-5a87cd696b64"
 "integration_id": "launchdarkly"
 "integration_title": "LaunchDarkly"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@launchdarkly"
 "manifest_version": "1.0.1"

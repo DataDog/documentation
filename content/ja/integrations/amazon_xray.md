@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_xray/'
+draft: false
 git_integration_title: amazon_xray
 has_logo: true
 integration_title: AWS X-Ray

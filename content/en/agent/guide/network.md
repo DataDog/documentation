@@ -20,62 +20,25 @@ further_reading:
 
 **Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
 
-{{< site-region region="us" >}}
-
 - All traffic is sent over SSL
 - The destination for:
 
-  - [APM][1] data is `trace.agent.datadoghq.com`
-  - [Live Containers][2] data is `process.datadoghq.com`
-  - [Logs][3] data is `agent-intake.logs.datadoghq.com` for TCP traffic
+  - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+  - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
+  - [Logs][3] data is `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][4] for more information.
+  - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - All other Agent data:
-      - **Agents < 5.2.0** `app.datadoghq.com`
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
+      - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
-        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
+        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Therefore you must whitelist `*.agent.`{{< region-param key="dd_site" code="true" >}} in your firewall(s).
 
-Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (ex.: display validity of configured API key):
+Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):
 
-- **Agent >= 7.18.0/6.18.0** `api.datadoghq.com`
-- **Agent < 7.18.0/6.18.0** `app.datadoghq.com`
+- **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
+- **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
 
-All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
-
-- **[https://ip-ranges.datadoghq.com][4]** for Datadog US region.
-
-[1]: /tracing/
-[2]: /infrastructure/livecontainers/
-[3]: /logs/
-[4]: https://ip-ranges.datadoghq.com
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-- All traffic is sent over SSL
-- The destination for:
-
-  - [APM][1] data is `trace.agent.datadoghq.eu`
-  - [Live Containers][2] data is `process.datadoghq.eu`
-  - [Logs][3] data is `agent-intake.logs.datadoghq.eu` for TCP traffic
-  - All other Agent data:
-      - **Agents < 5.2.0** `app.datadoghq.eu`
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.eu`
-
-        This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the _Forwarder_. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.eu` in your firewall(s).
-
-Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (ex.: display validity of configured API key):
-
-- **Agent >= 7.18.0/6.18.0** `api.datadoghq.eu`
-- **Agent < 7.18.0/6.18.0** `app.datadoghq.eu`
-
-All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
-
-- **[https://ip-ranges.datadoghq.eu][4]** for Datadog EU region.
-
-[1]: /tracing/
-[2]: /infrastructure/livecontainers/
-[3]: /logs/
-[4]: https://ip-ranges.datadoghq.eu
-{{< /site-region >}}
+All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
 
@@ -96,7 +59,8 @@ The information is structured as JSON following this schema:
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
-    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests) 
+    "orchestrator": {...},              // <-- same for the process Agent data
+    "synthetics": {...},                // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
     "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 ```
@@ -191,10 +155,15 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][1].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][6].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/proxy/
+[1]: /tracing/
+[2]: /infrastructure/livecontainers/
+[3]: /logs/
+[4]: /logs/log_collection/?tab=http#datadog-logs-endpoints
+[5]: /infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /agent/proxy/

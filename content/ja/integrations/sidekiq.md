@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md'
 display_name: Sidekiq
+draft: false
 git_integration_title: sidekiq
 guid: b4bc604c-73a5-4bd8-8dfe-3f80fc19976b
 integration_id: sidekiq

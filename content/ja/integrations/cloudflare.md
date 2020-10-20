@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/cloudflare/'
+draft: false
 git_integration_title: cloudflare
 has_logo: true
 integration_title: Cloudflare

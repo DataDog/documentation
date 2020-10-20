@@ -2,20 +2,23 @@
 title: Datadog Lambda Library
 kind: documentation
 further_reading:
+- link: "/serverless/datadog_lambda_library/extension"
+  tag: "Documentation"
+  text: "Datadog Lambda Extension (Preview)"
 - link: "/serverless/datadog_lambda_library/python"
-  tag: "Datadog Lambda Library for Python"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Python"
 - link: "/serverless/datadog_lambda_library/nodejs"
-  tag: "Datadog Lambda Library for Node.js"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Node.js"
 - link: "/serverless/datadog_lambda_library/ruby"
-  tag: "Datadog Lambda Library for Ruby"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Ruby"
 - link: "/serverless/datadog_lambda_library/go"
-  tag: "Datadog Lambda Library for Go"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Go"
 - link: "/serverless/datadog_lambda_library/java"
-  tag: "Datadog Lambda Library for Java"
+  tag: "Documentation"
   text: "Datadog Lambda Library for Java"
 ---
 
@@ -26,6 +29,8 @@ The Datadog Lambda Library is responsible for:
 - Generating real-time [enhanced Lambda metrics][1] for invocations, errors, cold starts, estimated costs, etc.
 - Submitting [custom metrics][2] (synchronously and asynchronously).
 - Enabling [Datadog APM and Distributed Tracing][3] for Node.js, Python, and Ruby.
+
+You **must** also install and configure the Datadog Forwarder to ingest traces, enhanced Lambda metrics, or custom metrics (asynchronously) from your Lambda functions.
 
 The Datadog Lambda Library is **NOT** responsible for collecting:
 

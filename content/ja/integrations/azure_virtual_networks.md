@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_virtual_networks/'
+draft: false
 git_integration_title: azure_virtual_networks
 has_logo: true
 integration_title: Microsoft Azure Virtual Network

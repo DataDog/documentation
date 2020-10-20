@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_network_interface/'
+draft: false
 git_integration_title: azure_network_interface
 has_logo: true
 integration_title: Microsoft Azure Network Interface

@@ -70,7 +70,7 @@ Passez le curseur sur un test du tableau pour afficher les options `Pause`, `Run
 
 ### Événements d'audit
 
-La création, l'ajout et la suppression de tests Synthetic et de variables globales entraînent la création d'événements dans le [flux d'événements][2]. Les événements générés décrivent la modification et affichent l'utilisateur à son origine.
+La création, l'ajout et la suppression de tests Synthetic, de variables globales et d'emplacements privés entraînent la création d'événements dans le [flux d'événements][2]. Les événements générés décrivent la modification et affichent l'utilisateur à son origine.
 
 Pour visualiser toutes les modifications associées à la surveillance Synthetic, recherchez `#audit synthetics` dans le flux d'événements. Pour visualiser les modifications associées à un test spécifique, recherchez l'ID de votre test. Exemple : `tags:public_id:4m7-bqy-mxq`.
 

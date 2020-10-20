@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Kubernetes Services のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_container_service/'
+draft: false
 git_integration_title: azure_container_service
 has_logo: true
 integration_title: Microsoft Azure Kubernetes Service

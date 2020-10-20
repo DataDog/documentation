@@ -74,7 +74,7 @@ In cases where variables on your ECS application are set at launch time, you **m
 {{< tabs >}}
 {{% tab "Python" %}}
 
-{{< code-block lang="python" >}}
+```python
 import requests
 from ddtrace import tracer
 
@@ -84,7 +84,7 @@ def get_aws_ip():
   return r.text
 
 tracer.configure(hostname=get_aws_ip())
-{{< /code-block >}}
+```
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
@@ -94,7 +94,7 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 {{% tab "Node.js" %}}
 
-{{< code-block lang="javascript" >}}
+```javascript
 const tracer = require('dd-trace');
 const request = require('request');
 
@@ -105,7 +105,7 @@ request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
 ) {
     tracer.init({ hostname: body });
 });
-{{< /code-block >}}
+```
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
@@ -114,20 +114,20 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 {{% tab "Ruby" %}}
 
-{{< code-block lang="ruby" >}}
+```ruby
 require 'ddtrace'
 require 'net/http'
 
 Datadog.configure do |c|
   c.tracer hostname: Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
 end
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
-{{< code-block lang="go" >}}
+```go
 package main
 
 import (
@@ -145,7 +145,7 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
         // tell the trace agent the host setting
         tracer.Start(tracer.WithAgentAddr(host))
         defer tracer.Stop()
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 
@@ -153,13 +153,13 @@ resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
 
 Copy this script into the `entryPoint` field of your ECS task definition, updating the values with your application jar and argument flags.
 
-{{< code-block lang="json" >}}
+```java
 "entryPoint": [
   "sh",
   "-c",
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); java -javaagent:/app/dd-java-agent.jar <APPLICATION_ARG_FLAGS> -jar <APPLICATION_JAR_FILE/WAR_FILE>"
 ]
-{{< /code-block >}}
+```
 
 For more examples of setting the Agent hostname in other languages, refer to the [change agent hostname documentation][1].
 
@@ -168,13 +168,13 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 {{% tab ".NET" %}}
 
-{{< code-block lang="json" >}}
+```json
 "entryPoint": [
   "sh",
   "-c",
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); dotnet ${APP_PATH}"
 ]
-{{< /code-block >}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}

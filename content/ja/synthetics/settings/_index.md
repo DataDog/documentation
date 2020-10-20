@@ -34,31 +34,35 @@ further_reading:
 {{% tab "Specify Value" %}}
 
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。
-2. **Value** を入力します。
-3. 変数を保護するかどうか決定します。保護すると、テスト結果の全ユーザーの変数の値が難読化されます。
-4. 任意: **Tags** を選択して変数と関連付けます。
-5. 任意: 変数の **Description** を入力します。
+2. 変数の **Description** を入力します（任意）。
+3. **Tags** を選択して変数と関連付けます（任意）。
+4. 変数に割り当てる **Value** を入力します。
+3. 変数を **Secure** にするか決定します。保護すると、全ユーザーに対してテスト結果の変数の値が難読化されます。
 
-{{< img src="synthetics/settings/variable_specifyvalue.png" alt="グローバル変数 : 値の指定"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_value.png" alt="グローバル変数 : 値の指定"  style="width:80%;">}}
 
 {{% /tab %}}
 
 {{% tab "Create From HTTP Test" %}}
 
-レスポンスヘッダーや本文をパースして、既存の HTTP テストから変数を作成できます。変数は、元のテストと同じ頻度で更新されます。
+関連するレスポンスヘッダーや本文をパースして、既存の [HTTP テスト][1] から変数を作成できます。
 
 1. **Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。
-2. 変数の抽出元となるテストを選びます。
-3. 変数を保護するかどうか決定します。保護すると、全ユーザーに対してテスト結果の変数の値が難読化されます。
-4. 任意: **Tags** を選択して変数と関連付けます。
-5. 任意: 変数の **Description** を入力します。
+2. 変数の **Description** を入力します（任意）。
+3. **Tags** を選択して変数と関連付けます（任意）。
+4. 変数の抽出元となる **[HTTP test][1]** を選びます。
+6. 変数を **Secure** にするか決定します。保護すると、全ユーザーに対してテスト結果の変数の値が難読化されます。
 6. 変数をレスポンスのヘッダーから抽出するか、本文から抽出するか決定します。
-    * **レスポンスのヘッダー**から値を抽出: レスポンスのヘッダー全体を変数に使用するか、レスポンスのヘッダーを[正規表現][1]によりパースします。
-    * **レスポンスの本文**から値を抽出: リクエストのレスポンス本文全体を使用するか、レスポンス本文を[正規表現][1]によりパースします。
+    * **Response Header** から値を抽出：レスポンスのヘッダー全体を変数に使用するか、レスポンスのヘッダーを[正規表現][2]によりパースします。
+    * **Response Body** から値を抽出：リクエストのレスポンス本文全体を使用するか、レスポンス本文を [JSON パス][3]または[正規表現][2]によりパースします。
 
-{{< img src="synthetics/settings/variable_from_http.png" alt="http の変数"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="http の変数"  style="width:80%;">}}
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+注：変数の値は抽出元のテストが実行される度に更新されます。
+
+[1]: /ja/synthetics/api_tests/?tab=httptest
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[3]: https://restfulapi.net/json-jsonpath/
 {{% /tab %}}
 
 {{< /tabs >}}

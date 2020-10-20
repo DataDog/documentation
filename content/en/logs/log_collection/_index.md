@@ -62,7 +62,7 @@ Choose your environment below to get dedicated log collection instructions:
 
 ## Serverless Log Collection
 
-Datadog collects logs from AWS Lambda. To enable this, refer to the [AWS Lambda integration documentation][17].
+Datadog collects logs from AWS Lambda. To enable this, refer to the [serverless monitoring documentation][17].
 
 ## Cloud Providers Log Collection
 
@@ -314,7 +314,7 @@ Log events that do not comply with these limits might be transformed or truncate
 [14]: /agent/guide/autodiscovery-management/
 [15]: /agent/kubernetes/integrations/
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
-[17]: /integrations/amazon_lambda/#log-collection
+[17]: /serverless/forwarder
 [18]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /security/logs/#information-security
 [20]: /logs/explorer/patterns/

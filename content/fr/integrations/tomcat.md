@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: tomcat
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -51,21 +52,24 @@ Ce check recueille des métriques Tomcat comme :
 
 ### Installation
 
-Le check Tomcat est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Tomcat.
+Le check Tomcat est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Tomcat.
 
 Ce check étant basé sur JMX, vous devez activer les connexions JMX à distance sur vos serveurs Tomcat. Suivez les instructions dans la [documentation Tomcat][3] pour effectuer cette opération.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `tomcat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour recueillir vos métriques et [logs](#collecte-de-logs) Tomcat. Consultez le [fichier d'exemple tomcat.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `tomcat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour recueillir vos métriques et [logs](#collecte-de-logs) Tomcat. Consultez le [fichier d'exemple tomcat.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][3].
 
-Consultez la [documentation relative au check JMX][7] pour découvrir la liste des options de configuration disponibles pour l'ensemble des checks basés sur JMX.
+Consultez la [documentation relative au check JMX][4] pour découvrir la liste des options de configuration disponibles pour l'ensemble des checks basés sur JMX.
 
 #### Liste des métriques
 
@@ -82,7 +86,7 @@ mydomain:attr0=val0,attr1=val1
 
 Dans cet exemple, votre métrique est `mondomaine` (ou un nom similaire, en fonction de l'attribut au sein du bean). Elle est associée aux tags `attr0:val0`, `attr1:val1` et `domain:mondomaine`.
 
-Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` s'affiche sous la forme `mon_nom_métrique` dans Datadog.
+Si vous spécifiez un alias dans une clé `include` au format _camel case_, il est converti au format _snake case_. Par exemple, `MonNomMétrique` devient `mon_nom_métrique` dans Datadog.
 
 ##### Le filtre attribute
 
@@ -200,7 +204,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      %d [%t] %-5p %c - %m%n
    ```
 
-    Dupliquez et modifiez le [pipeline d'intégration][8] si vous utilisez un autre format. Consultez la [documentation sur la journalisation][9] (en anglais) pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
+    Dupliquez et modifiez le [pipeline d'intégration][5] si vous utilisez un autre format. Consultez la [documentation sur la journalisation][6] (en anglais) Tomcat pour obtenir plus d'informations sur les fonctionnalités de journalisation de Tomcat.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -223,17 +227,30 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple tomcat.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple tomcat.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-5. [Redémarrez l'Agent][6].
+5. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/integrations/java/
+[5]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[6]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][10].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][1].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][11] et cherchez `tomcat` dans la section **Checks**.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `tomcat` dans la section **Checks**.
 
 ## Données collectées
 
@@ -273,20 +290,13 @@ La commande `datadog-agent jmx` a été ajoutée dans la version 4.1.0.
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller les métriques Tomcat avec Datadog][13]
-- [Métriques clés pour la surveillance Tomcat][14]
+- [Surveiller les métriques de Tomcat avec Datadog][5]
+- [Métriques clés pour la surveillance de Tomcat][6]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tomcat/images/tomcat_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://tomcat.apache.org/tomcat-6.0-doc/monitoring.html
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/integrations/java/
-[8]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-[9]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
-[10]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/tomcat/metadata.csv
-[13]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
-[14]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://www.datadoghq.com/blog/monitor-tomcat-metrics
+[6]: https://www.datadoghq.com/blog/tomcat-architecture-and-performance

@@ -78,7 +78,11 @@ class SampleApplication : Application() {
 3. RUM Monitor を構成して登録します。通常はアプリケーションの `onCreate()` メソッドで、一度だけ実行する必要があります。
 
     ```kotlin
-    val monitor = RumMonitor.Builder().build()
+    val monitor = RumMonitor.Builder()
+            // Optionally set a sampling between 0.0 and 100.0%
+            // Here 75% of the RUM Sessions will be sent to Datadog
+            .sampleRumSessions(75.0f)
+            .build()
     GlobalRum.registerIfAbsent(monitor)
     ```
 
@@ -94,7 +98,7 @@ class SampleApplication : Application() {
 
     **注**: また、複数のインターセプターを使用する場合、これを最初に呼び出す必要があります。
 
-5. (任意) リソースでタイミング情報 (最初の 1 バイトまで、DNS 解決など) を取得するには、以下の方法で提供されている[イベント][6]リスナーを追加します。
+5. (任意) リソースでタイミング情報 (最初の 1 バイトまで、DNS 解決など) を取得するには、以下の方法で[イベント][6]リスナーファクトリを追加します。
 
     ```kotlin
     val okHttpClient =  OkHttpClient.Builder()
@@ -139,7 +143,56 @@ class SampleApplication : Application() {
       }
    ```
 
-## ウィジェットの追跡
+7. (任意) すべての RUM イベントに属性としてカスタム情報を追加する場合は、`GlobalRum` クラスを使用します。
+
+   ```kotlin
+      // Adds an attribute to all future RUM events
+      GlobalRum.addAttribute(key, value)
+
+      // Removes an attribute to all future RUM events
+      GlobalRum.removeAttribute(key)
+   ```
+
+## 高度なロギング
+
+### ライブラリの初期化
+
+ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`DatadogConfig.Builder` の以下のメソッドを使用できます。
+
+| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setServiceName(<サービス名>)` | Datadog に送信されるすべてのログに添付される `service` [標準属性][4] のデフォルト値として `<SERVICE_NAME>` を設定します（各ロガーで上書きすることが可能です）。                                                                                                                                                           |
+| `setRumEnabled(true)`     | Datadog への RUM データ送信を有効にするには、`true` に設定します。                                                                                                                                                                                                                                  |
+| `trackInteractions(Array<ViewAttributesProvider>)` | ユーザーインタラクション (タップ、スクロール、スワイプなど) の追跡を有効にします。このパラメーターを使用すると、ユーザーが操作したウィジェットに基づいて、カスタム属性を RUM アクションイベントに追加できます。 |
+| `useViewTrackingStrategy(strategy)` | ビューの追跡に使用される戦略を定義します。ご使用のアプリケーションのアーキテクチャにより、`ViewTrackingStrategy` の実装から 1 つを選択するか (上記を参照)、独自のものを実装します。 |
+| `addPlugin(DatadogPlugin, Feature)`   | 特定の機能 (CRASH、LOG、TRACE、RUM) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。 |
+
+### RumMonitor の初期化
+
+RUM データを追跡するために RumMonitor を作成する場合、`RumMonitor.Builder` の次のメソッドを使用できます。
+
+| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sampleRumSessions(float)`   | RUM セッションのサンプリングレートを設定します。このメソッドは 0〜100 の値を想定しており、データが Datadog に送信されるセッションのパーセンテージとして使用されます。 |
+
+### 手動追跡
+
+イベントを手動で追跡する必要がある場合は、アクティブな `RumMonitor` インスタンスを取得し、次のいずれかのメソッドを呼び出すことで追跡できます。
+
+| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `startView(<key>, <name>, <attributes>)`   | 新しいビューが開始されたことを RumMonitor に通知します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` の `onResume()` メソッドで呼び出す必要があります。 |
+| `stopView(<key>, <attributes>)`   | 現在のビューが停止したことを RumMonitor に通知します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` の `onPause()` メソッドで呼び出す必要があります。 |
+| `addUserAction(<type>, <name>, <attributes>)`   | ユーザーアクションが発生したことを RumMonitor に通知します。 |
+| `startUserAction(<type>, <name>, <attributes>)`   | 継続的なユーザーアクションが開始されたことを RumMonitor に通知します (たとえば、ユーザーがリストをスクロールする)。 |
+| `stopUserAction(<type>, <name>, <attributes>)`   | 継続的なユーザーアクションが停止したことを RumMonitor に通知します。 |
+| `startResource(<key>, <method>, <url>, <attributes>)`   | アプリケーションが指定された URL で指定されたメソッド (例: `GET` または `POST`) を使用してリソースのロードを開始したことを RumMonitor に通知します。 |
+| `stopResource(<key>, <status>, <size>, <kind> <attributes>)`   | 特定のステータス (通常は HTTP ステータスコード)、サイズ (バイト単位)、および種類を使用して、リソースのロードが終了したことを RumMonitor に通知します。 |
+| `stopResourceWithError(<key>, <status>, <message>, <source>, <throwable>)` | 例外のため、リソースのロードを終了できなかったことを RumMonitor に通知します。 |
+| `addError(<message>, <source>, <throwable>, <attributes>)` | エラーが発生したことを RumMonitor に通知します。 |
+
+
+### ウィジェットの追跡
 
 通常の場合、ウィジェットは HomeScreen アプリケーションにより提供される `AppWidgetHostView` に表示されます。このコンポーネントに自動インスツルメンテーションは提供されません。ウィジェットから UI インタラクション情報を送信するには、Datadog の API を手動で呼び出します。サンプルアプリケーションで、例をご参照ください: 
 [ウィジェットの追跡](https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget)
@@ -154,13 +207,72 @@ class SampleApplication : Application() {
 
 ## 拡張
 
-### Glide
+### Coil
 
-既存のコードベースが Glide を使用している場合、[専用ライブラリ](glide_integration.md) を使用してさらにその他の情報 (RUM リソースやエラーなど) を自動的に Datadog へ転送できます。
+Coil を使用してアプリケーションに画像を読み込む場合は、Datadog の[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-coil)をご覧ください。
 
 ### Fresco
 
-既存のコードベースが Fresco を使用している場合、[専用ライブラリ](fresco_integration.md)を使用してさらにその他の情報 (RUM リソースやエラーなど) を自動的に Datadog へ転送できます。
+Fresco を使用してアプリケーションに画像を読み込む場合は、Datadog の[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-fresco)をご覧ください。
+
+### Glide
+
+Glide を使用してアプリケーションに画像を読み込む場合は、Datadog の[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-glide)をご覧ください。
+
+### Picasso
+
+Picasso を使用している場合は、`OkHttpClient` を使用するようにすると、Picasso によって行われたネットワークリクエストに関する RUM および APM 情報を取得できます。
+
+```kotlin
+        val picasso = Picasso.Builder(context)
+                .downloader(OkHttp3Downloader(okHttpClient))
+                // …
+                .build()
+        Picasso.setSingletonInstance(picasso)
+```
+
+### Retrofit
+
+Retrofit を使用している場合は、`OkHttpClient` を使用するようにすると、Retrofit によって行われたネットワークリクエストに関する RUM および APM 情報を取得できます。
+
+```kotlin
+        val retrofitClient = Retrofit.Builder()
+                .client(okHttpClient)
+                // …
+                .build()
+```
+
+### SQLDelight
+
+SQLDelight を使用している場合は、Datadog の[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-sqldelight)をご覧ください。
+
+### SQLite
+
+SQLiteOpenHelper の[生成された API ドキュメント][8]に従って、コンストラクターで DatabaseErrorHandler -> `DatadogDatabaseErrorHandler` の実装を指定するだけで済みます。
+
+これを行うと、データベースが破損している場合は常に検出され、関連する RUM エラーイベントが送信されます。
+
+```kotlint
+   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(<Context>, 
+                                                     <DATABASE_NAME>, 
+                                                     <CursorFactory>, 
+                                                     <DATABASE_VERSION>, 
+                                                     DatadogDatabaseErrorHandler()) {
+                                // …
+
+   }
+```
+
+### Apollo (GraphQL)
+
+Apollo を使用している場合は、`OkHttpClient` を使用するようにすると、Apollo クライアントを介して実行されたすべてのクエリに関する RUM および APM 情報を取得できます。
+
+```kotlin
+        val apolloClient =  ApolloClient.builder()
+                 .okHttpClient(okHttpClient)
+                 .serverUrl(<APOLLO_SERVER_URL>)
+                 .build()
+```
 
 ## その他の参考資料
 
@@ -173,3 +285,4 @@ class SampleApplication : Application() {
 [5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
 [7]: https://square.github.io/okhttp/events/
+[8]: https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper

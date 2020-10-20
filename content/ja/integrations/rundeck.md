@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md'
 display_name: Rundeck
+draft: false
 git_integration_title: rundeck
 guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck
@@ -52,7 +54,7 @@ Rundeck のワークフロー自動化機能は Datadog の通知と併せて使
 ### インストール
 Datadog アラートを使ってトリガーしたい Rundeck ジョブを最低 1 つ準備してください。
 
-### 構成
+### コンフィギュレーション
 
 #### Rundeck のセットアップ
 

@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure App Service Environment.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_app_service_environment/'
+draft: false
 git_integration_title: azure_app_service_environment
 has_logo: true
 integration_title: Microsoft Azure App Service Environment

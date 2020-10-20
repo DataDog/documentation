@@ -26,7 +26,13 @@ Le traceur .NET prend en charge l'instrumentation automatique sur .NET Core 2.1 
 
 ## Prise en main
 
-Si vous avez déjà un compte Datadog, vous trouverez des [instructions détaillées][2] dans nos guides intégrés à l'application pour les configurations basées sur un host et les configurations basées sur un conteneur.
+### Suivre la documentation dans l'application (conseillé)
+
+Suivez les [instructions de démarrage rapide][2] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
+
+- Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS) ;
+- Définir les tags `service`, `env` et `version` de façon dynamique ;
+- Activer App Analytics et l'injection des ID de trace dans les logs durant la configuration.
 
 Sinon, pour commencer le tracing d'applications écrites dans n'importe quel langage, [commencez par installer et configurer l'Agent Datadog][3]. Le traceur .NET instrumente vos applications et envoie leurs traces à l'Agent en s'exécutant au sein du processus.
 
@@ -40,7 +46,7 @@ L'instrumentation automatique capture :
 
 - Les temps d'exécution des appels instrumentés
 - Les données de trace pertinentes, telles que l'URL et les codes de réponse de statut pour les requêtes Web ou les requêtes SQL pour l'accès à la base de données
-- Les exceptions non traitées, y compris les traces de pile le cas échéant
+- Les exceptions non traitées, y compris les stack traces le cas échéant
 - Le nombre total de traces (p. ex. les requêtes Web) qui transitent par le système
 
 ### Installation
@@ -68,7 +74,7 @@ net start w3svc
 
 Pour utiliser l'instrumentation automatique sous Linux, suivez les trois étapes ci-dessous :
 
-1. Installez le traceur .NET dans l'environnement sur lequel votre application s'exécute à l'aide d'un des paquets disponibles sur la [page des versions][1] de `dd-trace-dotnet`.
+1. Installez le traceur .NET dans l'environnement sur lequel votre application s'exécute à l'aide d'un des packages disponibles sur la [page des versions][1] de `dd-trace-dotnet`.
 
 2. Créez les variables d'environnement requises. Consultez la section [Variables d'environnement requises](#variables-d-environnement-requises) ci-dessous pour en savoir plus.
 
@@ -78,7 +84,7 @@ Pour utiliser l'instrumentation automatique sous Linux, suivez les trois étapes
 
 **Mise à jour :** depuis la version `1.13.0` du traceur .NET, Alpine et d'autres [distributions basées sur Musl][2] sont désormais prises en charge.
 
-Pour Debian ou Ubuntu, téléchargez et installez le paquet Debian :
+Pour Debian ou Ubuntu, téléchargez et installez le package Debian :
 
 ```bash
 curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<VERSION_TRACEUR>/datadog-dotnet-apm_<VERSION_TRACEUR>_amd64.deb
@@ -144,10 +150,10 @@ Vous pouvez utiliser l'éditeur de registre comme dans l'image ci-dessous ou pas
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Éditeur de registre"  >}}
 
-{{< code-block lang="powershell" filename="add-env-var.ps1" >}}
+```powershell
 [String[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NOM> -Name Environment -Value $v
-{{< /code-block >}}
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+```
 
 #### Consoles
 
@@ -206,7 +212,47 @@ ENV DD_DOTNET_TRACER_HOME=/opt/datadog
 CMD ["dotnet", "example.dll"]
 ```
 
+
+#### Systemctl (service spécifique)
+
+Lorsque vous utilisez la commande `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez ajouter les variables d'environnement requises qui doivent être chargées pour un service spécifique.
+
+Créez un fichier nommé `environment.env` contenant :
+
+```bat
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+DD_DOTNET_TRACER_HOME=/opt/datadog
+# toute autre variable d'environnement utilisée par l'application
+```
+
+Dans le fichier de configuration de service, ajoutez une référence vers ce fichier comme [`EnvironmentFile`][2] dans le bloc Service :
+
+```bat
+[Service]
+EnvironmentFile=/chemin/vers/environment.env
+ExecStart=<commande utilisée pour lancer l'application>
+```
+Après avoir défini ces variables, relancez le service .NET pour que les variables d'environnement soient appliquées.
+
+#### Systemctl (tous les services)
+
+Lorsque vous utilisez la commande `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez également définir les variables d'environnement qui doivent être chargées pour tous les services exécutés via la commande `systemctl`. Pour confirmer la définition de ces variables, utilisez [`systemctl show-environment`][2]. Avant d'opter pour cette approche, consultez la remarque ci-dessous concernant l'instrumentation de tous les processus .NET.
+
+```bat
+systemctl set-environment CORECLR_ENABLE_PROFILING=1
+systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+systemctl set-environment DD_INTEGRATIONS=/opt/datadog/integrations.json
+systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+```
+
+Ensuite, vérifiez que les variables d'environnement ont été définies avec `systemctl show-environment`.
+
 [1]: https://docs.docker.com/engine/reference/builder/#env
+[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -339,7 +385,7 @@ Le tableau suivant énumère les variables de configuration disponibles aussi bi
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Définit l'URL d'endpoint où les traces sont envoyées. Utilisé à la place de `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. La valeur par défaut est `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Définit le host vers lequel les traces sont envoyées (le host qui exécute l'Agent). Il peut s'agir d'un hostname ou d'une adresse IP. Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. Valeur par défaut : `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Définit le port sur lequel les traces sont envoyées (le port où l'Agent écoute les connexions). Ce paramètre est ignoré si `DD_TRACE_AGENT_URL` est défini. Valeur par défaut : `8126`.                                                     |
-| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Active ou désactive l'injection automatique d'identificateurs de corrélation dans les logs de l'application.                                                                                                                         |
+| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Active ou désactive l'injection automatique des identifiants de corrélation dans les logs de l'application.                                                                                                                         |
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`        | Lorsqu'il est défini, ce paramètre ajoute tous les tags spécifiés à l'ensemble des spans générées.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Active ou désactive les logs de debugging. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                 |
 | `DD_TRACE_HEADER_TAGS`                              | Accepte une liste des correspondances entre les clés d'en-tête (insensibles à la casse) et les noms de tag et applique automatiquement les valeurs d'en-tête correspondantes en tant que tags sur les spans racine. (Ex. : `en-tête-insensible-CASSE:nom-du-tag,User-ID:userId`). Disponible pour les versions 1.18.3+  |
@@ -350,7 +396,7 @@ Le tableau suivant énumère les variables de configuration disponibles uniqueme
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | Active ou désactive toute instrumentation automatique. Lorsque la variable d'environnement est définie sur `false`, le profileur CLR est entièrement désactivé. Pour les autres méthodes de configuration, le profileur CLR est quand même chargé, mais aucune trace n'est générée. Valeurs acceptées : `true` (par défaut) ou `false`. |
 | `DD_TRACE_DEBUG`                                               | Active ou désactive les logs de debugging dans le traceur. Valeurs autorisées : `true` ou `false` (valeur par défaut). En définissant ce paramètre en tant que variable d'environnement, vous activez également les logs de debugging dans le profileur CLR.                                                                                                        |
-| `DD_TRACE_LOG_PATH`                                            | Définit le chemin du fichier de log du profileur CLR.<br/><br/>Valeur par défaut pour Windows : `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Valeur par défaut pour Linux : `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                              |
+| `DD_TRACE_LOG_PATH`                                            | Définit le chemin du fichier de log du profiler CLR.<br/><br/>Valeur par défaut pour Windows : `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Valeur par défaut pour Linux : `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Définit la liste des intégrations à désactiver. Toutes les autres intégrations restent activées. Si ce paramètre n'est pas défini, toutes les intégrations sont activées. Ce paramètre accepte plusieurs valeurs séparées par des points-virgules. Les valeurs valides correspondent aux noms d'intégration énumérés dans la section [Intégrations] (#integrations) ci-dessus.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Raccourci qui active les paramètres App Analytics par défaut pour les intégrations de framework Web. Valeurs acceptées : `true` ou `false` (par défaut).                                                                                                                                                     |
 
@@ -367,7 +413,7 @@ Le tableau suivant énumère les variables de configuration qui sont uniquement 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/install
+[2]: https://app.datadoghq.com/apm/docs
 [3]: /fr/tracing/send_traces/
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /fr/tracing/custom_instrumentation/dotnet/

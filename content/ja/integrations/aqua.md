@@ -2,6 +2,7 @@
 assets:
   dashboards:
     aqua: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md'
 display_name: Aqua
+draft: false
 git_integration_title: aqua
 guid: c269dad1-8db2-4e91-b25d-af646e80dbbf
 integration_id: aqua

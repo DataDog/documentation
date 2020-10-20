@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md'
 display_name: Vespa
+draft: false
 git_integration_title: vespa
 guid: 810e2a6e-4aa4-4b03-b5a4-563f3752f0eb
 integration_id: vespa
@@ -73,7 +75,7 @@ Vespa チェックを構成するには
 {{< get-metrics-from-git "vespa" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 **vespa.metrics_health**:<br>
 Vespa [Node メトリクス API][10] からレスポンスがない場合、`CRITICAL`を返します。Vespa [Node メトリクス API][10] からレスポンスがあるものの処理中にエラーが発生した場合、`WARNING` を返します。それ以外の場合は `OK` を返します。

@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_file_storage/'
+draft: false
 git_integration_title: azure_file_storage
 has_logo: true
 integration_title: Microsoft Azure File Storage
