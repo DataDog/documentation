@@ -1,5 +1,5 @@
 ---
-title: Datadog Role permissions
+title: Datadog Role Permissions
 kind: documentation
 aliases:
   - /account_management/faq/managing-global-role-permissions
@@ -16,7 +16,7 @@ Once your roles are created, assign or remove permission to this role directly b
 
 ## Overview
 
-### General Permissions
+### General permissions
 
 General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
 
@@ -27,7 +27,7 @@ General permissions provide the base level of access for your role. [Advanced Pe
 
 **Note**: There is no `read-only` permission as it is defined by the lack of both the `admin` and `standard` permissions for a role.
 
-### Advanced Permissions
+### Advanced permissions
 
 By default, existing users are already associated with one of the three out-of-the-box Datadog Admin, Standard, or Read-Only Roles, so all users already have permissions to read all data types, and Admin or Standard users already have write permissions on assets.
 
@@ -268,7 +268,7 @@ In the example above:
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
 
 
-When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][10].  
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][10].
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 
@@ -287,7 +287,7 @@ Grants the ability to create or modify log configuration through the Datadog API
 
 The Log Public Configuration API permission only grants the permission to operate actions through API. For instance, a user without [Log Write Exclusion Filter Permission](#logs-write-exclusion-filters) cannot update sampling rate through API, even if granted The Log Public Configuration API permission.
 
-### Log Data Access
+### Log data access
 
 Grant the following permissions to manage read access on subsets of log data:
 
@@ -307,12 +307,56 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 
 {{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="Read Data Access"  style="width:70%;">}}
 
-**Restrict read access to a subset of logs**
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-This configuration is only supported through the API.
+To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][17] in the Datadog App to:
+
+1. [Create](#create-a-restriction-query) a restriction query.
+2. [Assign](#assign-a-role-to-a-restriction-query) one or multiple roles to that restriction query.
+3. [Check](#check-restriction-queries) what roles and users are assigned to which restriction queries.
+
+
+This view lists:
+
+* **`Restricted Access` section**: all the restriction queries, and what role(s) are attached to them,
+* **`Unrestricted Access` section**: all roles that have `log_read_data` permission with no further restrictions,
+* **`No Access` section**: all roles that does not have the `log_read_data` permission.
+
+
+##### Create a restriction query
+
+Create a new restriction query defining its query filter. The new query appears in the list of restrictions with no role attached to it.
+
+{{< img src="account_management/rbac/logs_rq-create.gif" alt="Create a Restriction Query"  style="width:70%;">}}
+
+
+##### Assign a role to a restriction query
+
+Pick the role wherever it stands, and assign it to the intended restriction query.
+
+*Note*: Keep in mind that a role can be assigned no more than one restriction query. Meaning, when you assign a role to a restriction query, it loses connection to the restriction query it was already attached to.
+
+{{< img src="account_management/rbac/logs_rq-assign_roles.gif" alt="Assign a role to Restriction Query"  style="width:70%;">}}
+
+Likewise, use the same "Move" interaction to grant `Unrestricted Access` to a Role, or conversely to turn it into a `No Access` role.
+
+##### Check restriction queries
+
+This page won't display more than 50 restriction queries at once, and more than 50 roles per section. In case you have hundreds if not thousands of roles and restriction queries, use the filters to scope this view down:
+
+* with the restriction query filter:
+
+{{< img src="account_management/rbac/logs_rq-filter.png" alt="Filter Restriction Queries"  style="width:70%;">}}
+
+* with the role filter:
+
+{{< img src="account_management/rbac/logs_rq-view_as_role.png" alt="View as Roles"  style="width:70%;">}}
+
+* with the user filter, which is a convenient way to see what a specific user belonging to multiple roles actually has access to:
+
+{{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles"  style="width:70%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -325,7 +369,7 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Legacy Permissions
+### Legacy permissions
 
 These permissions are globally enabled by default for all users.
 
@@ -384,7 +428,7 @@ Grants a role the ability to use the [Live Tail][17] feature.
 
 This permission is global, and grants access to the livetail irregardless of [Log Read Index Data](#logs-read-index-data) permission.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
