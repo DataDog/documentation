@@ -120,19 +120,19 @@ The breakdown is composed of the following parts:
 
 **Complete traces ingested (Green)**:
 
-Shows you the percentage of the service traces that have been ingested by Datadog.
+Shows you the percentage of traces that have been ingested by Datadog.
 
-**Complete traces not retained by the default ingestion algorithm (Grey)**:
+**Complete traces not retained (Grey)**:
 
-By default, the agent and the tracers intelligently decide which traces should be retained and forwarded to Datadog's intake. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) if you wish to configure this behavior.
+Shows you the percentage of traces that have purposefully not been forwarded to Datadog by the agent or the tracer.
 
-**Complete traces not retained by the configured ingestion rate (Grey)**:
-
-If you decide to [configure the ingestion rate](#change-the-default-ingestion-rate) of a service to less than 100%, this part of the breakdown will show you the percentage of traces dropped by the tracer based on that configuration.
+This can happen for one of two reasons depending on your configuration:
+1. By default, the agent and the tracers intelligently sets the service ingestion rate. See [Change the Default Ingestion Rate](#change-the-default-ingestion-rate) if you wish to configure this behavior.
+2. When you change the default ingestion rate to less than 100%.
 
 **Complete traces dropped by the tracer rate limiter (Orange)**:
 
-By default, when the tracer has a [configured the ingestion rate](#change-the-default-ingestion-rate) for your service, the number of traces forwarded to Datadog is limited to 100 trace/second. Refer to your tracer configuration if you wish to configure this rate limiter.
+When you choose the [configure the ingestion rate of a service](#change-the-default-ingestion-rate), a rate limiter set to 100 traces/second is automatically enabled. Refer to your tracer configuration if you wish to configure this rate limiter.
 
 **Traces dropped due to the agent CPU limit (Red)**:
 
