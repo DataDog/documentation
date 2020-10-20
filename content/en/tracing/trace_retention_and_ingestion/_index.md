@@ -160,3 +160,4 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [6]: /tracing/trace_search_and_analytics
 [7]: /tracing/legacy_app_analytics/
 [8]: https://app.datadoghq.com/apm/settings
+[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
