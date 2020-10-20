@@ -141,7 +141,7 @@ The agent has a configuration option allowing users to limit the usage of the CP
 ### Traces dropped before ingestion
 
 You won't get 100% trace ingestion if you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for Tracing without Limits, and:
-- your applications generate above 50 traces per second;
+- your applications generate above 100 traces per second;
 - your applications send intermittent traffic loads; or
 - your applications traces are large in size or otherwise have complicated trace payloads.
 
