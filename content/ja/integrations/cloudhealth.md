@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: CloudHealth が Datadog からインスタンスごとのメトリクスを取得できるように支援。
 doc_link: 'https://docs.datadoghq.com/integrations/cloudhealth/'
+draft: false
 git_integration_title: cloudhealth
 has_logo: true
 integration_title: Cloudhealth
@@ -27,7 +28,7 @@ Cloudhealth と Datadog の両方を使用する場合は、Datadog からイン
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 CloudHealth を使用したクラウドの最適化をまだ開始していない場合は、まず [14 日間の無料トライアル][1]にサインアップしてください。既に CloudHealth を利用している場合は、以下の簡単な 4 つの手順に従うだけで、CloudHealth の Datadog インテグレーションがセットアップされ、クラウド環境のあらゆる側面の可視化が改善されます。
 

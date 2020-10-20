@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: イベントストリームで Honeybadger の例外を表示、検索、議論。
 doc_link: 'https://docs.datadoghq.com/integrations/honeybadger/'
+draft: false
 git_integration_title: honeybadger
 has_logo: true
 integration_title: Honeybadger

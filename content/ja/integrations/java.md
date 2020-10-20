@@ -7,6 +7,7 @@ ddtype: チェック
 dependencies: []
 description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集します。
 doc_link: 'https://docs.datadoghq.com/integrations/java/'
+draft: false
 further_reading:
   - link: 'https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect'
     tag: よくあるご質問

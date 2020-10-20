@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
 display_name: OpenStack
+draft: false
 git_integration_title: openstack
 guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack

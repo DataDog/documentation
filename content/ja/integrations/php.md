@@ -6,6 +6,7 @@ ddtype: ライブラリ
 dependencies: []
 description: PHP アプリケーションからメトリクス、トレース、ログを収集。
 doc_link: 'https://docs.datadoghq.com/integrations/php/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-php-performance/'
     tag: ブログ
@@ -17,7 +18,7 @@ git_integration_title: php
 has_logo: true
 integration_title: PHP
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: php
 public_title: Datadog-PHP インテグレーション

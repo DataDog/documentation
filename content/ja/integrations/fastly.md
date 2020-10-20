@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: キャッシュ関連メトリクス、オリジンリクエスト、応答コードなどを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/fastly/'
+draft: false
 git_integration_title: fastly
 has_logo: true
 integration_title: Fastly
@@ -29,7 +30,7 @@ Fastly に接続して、Fastly のキーメトリクス (キャッシュカバ�
 
 必要なインストール手順はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -41,10 +42,7 @@ Fastly のトークン管理ページで読み取り専用アクセス API ト�
 
 1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力してください。
 
-####         - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
+#### ログの収集
 
 Fastly ログを Datadog アプリケーションに転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
 

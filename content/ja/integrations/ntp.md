@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ntp/README.md'
 display_name: NTP
+draft: false
 git_integration_title: ntp
 guid: 9d105f8c-7fd3-48d7-a5d1-1cc386ec0367
 integration_id: ntp

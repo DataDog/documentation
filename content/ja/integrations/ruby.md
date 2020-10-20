@@ -6,6 +6,7 @@ ddtype: ライブラリ
 dependencies: []
 description: Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。
 doc_link: 'https://docs.datadoghq.com/integrations/ruby/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-rails-with-datadog/'
     tag: ブログ
@@ -20,7 +21,7 @@ git_integration_title: ruby
 has_logo: true
 integration_title: Ruby
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: ruby
 public_title: Datadog-Ruby インテグレーション

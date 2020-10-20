@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
 doc_link: 'https://docs.datadoghq.com/integrations/opsmatic/'
+draft: false
 git_integration_title: opsmatic
 has_logo: true
 integration_title: Opsmatic
@@ -35,7 +36,7 @@ Opsmatic のイベントを DataDog のストリームに表示するには、�
 
 詳細については、[Opsmatic の Web サイトでガイド][1]を参照してください。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Opsmatic インテグレーションタイルで **Install Integration** ボタンをクリックします。このインテグレーションの構成手順を行う必要があります。
 

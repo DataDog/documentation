@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez les erreurs d'AWS\_API\_Gateway, les hits et miss de cache et la latence des requêtes."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_api_gateway/'
+draft: false
 git_integration_title: amazon_api_gateway
 has_logo: true
 integration_title: Amazon API Gateway
@@ -26,7 +27,7 @@ Amazon API Gateway est un service entièrement géré qui permet aux développ
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'API Gateway.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -49,11 +50,10 @@ Pour activer la journalisation API Gateway :
 
 1. Accédez à API Gateway dans votre console AWS.
 2. Sélectionnez l'API souhaitée et accédez à la section Stages.
-3. Dans l'onglet Logs, activez la journalisation Cloudwatch ainsi que l'option *Access logging*.
-4. Sélectionnez le niveau INFO afin de vérifier que vous disposez de l'ensemble des requêtes.
-5. Assurez-vous d'inclure « apigateway » dans le nom de votre groupe de logs Cloudwatch.
-   {{< img src="integrations/amazon_api_gateway/aws_api_gateway_log_collection_1.png" alt="Collecte de log AWS API Gateway" popup="true" style="width:70%;">}}
-6. Sélectionnez le format JSON (les formats CLF et CSV sont également pris en charge). Nous vous recommandons d'ajouter ce qui suit dans le champ Format :
+3. Dans l'onglet **Logs**, activez **Enable CloudWatch Logs** et **Enable Access Logging**.
+4. Sélectionnez le niveau `INFO` afin de récupérer l'ensemble des requêtes.
+5. Assurez-vous d'inclure `apigateway` dans le nom de votre **groupe Cloudwatch**.
+6. Sélectionnez le format JSON (les formats CLF et CSV sont également pris en charge), et ajoutez ce qui suit dans le champ **Log format** :
 
     ```text
     {
@@ -72,7 +72,7 @@ Pour activer la journalisation API Gateway :
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][5].
+1. Si vous ne l'avez pas déjà fait, configurez la [fonction AWS Lambda de collecte de logs avec Datadog][5].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs Cloudwatch qui contient vos logs API Gateway :
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
@@ -100,11 +100,11 @@ L'intégration AWS API Gateway n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

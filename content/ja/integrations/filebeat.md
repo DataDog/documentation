@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md'
 display_name: Filebeat
+draft: false
 git_integration_title: filebeat
 guid: 3bb6a789-d1e3-465c-9bff-ea2a43ae2f59
 integration_id: filebeat

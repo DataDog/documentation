@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md'
 display_name: MapReduce
+draft: false
 git_integration_title: mapreduce
 guid: 1c143492-84ac-42d2-89d5-a45c718092b0
 integration_id: mapreduce

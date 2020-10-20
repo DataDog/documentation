@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Immunio からデータを収集して攻撃パターンを可視化および監視。
 doc_link: 'https://docs.datadoghq.com/integrations/immunio/'
+draft: false
 git_integration_title: immunio
 has_logo: true
 integration_title: Immunio
@@ -40,7 +41,7 @@ IMMUNIO はアプリケーションを監視して、次のすべての攻撃を
     {{< img src="integrations/immunio/immuniosetup2.png" alt="API キーを追加" popup="true">}}
 4. API キーを追加します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 このインテグレーションに構成手順は必要ありません。
 

@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md'
 display_name: Btrfs
+draft: false
 git_integration_title: btrfs
 guid: 54f9329a-8270-4f5a-bd4b-cd169abfc791
 integration_id: btrfs

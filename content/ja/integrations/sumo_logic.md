@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
 doc_link: 'https://docs.datadoghq.com/integrations/sumologic/'
+draft: false
 git_integration_title: sumo_logic
 has_logo: true
 integration_title: Sumo Logic

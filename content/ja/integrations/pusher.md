@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
 doc_link: 'https://docs.datadoghq.com/integrations/pusher/'
+draft: false
 git_integration_title: pusher
 has_logo: true
 integration_title: Pusher

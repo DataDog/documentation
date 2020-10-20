@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/solr/README.md'
 display_name: Solr
+draft: false
 git_integration_title: solr
 guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr

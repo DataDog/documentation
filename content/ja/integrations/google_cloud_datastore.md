@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_datastore/'
+draft: false
 git_integration_title: google_cloud_datastore
 has_logo: true
 integration_title: Google Datastore
@@ -16,7 +17,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_datastore
 public_title: Datadog-Google Datastore インテグレーション
-short_description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡します。
+short_description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。
 version: '1.0'
 ---
 ## 概要
