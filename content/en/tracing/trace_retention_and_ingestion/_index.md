@@ -132,7 +132,7 @@ This can happen for one of two reasons depending on your configuration:
 
 **Complete traces dropped by the tracer rate limiter (Orange)**:
 
-When you choose the [configure the ingestion rate of a service](#change-the-default-ingestion-rate), a rate limiter set to 100 traces/second is automatically enabled. Refer to your tracer configuration if you wish to configure this rate limiter.
+When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), a rate limiter set to 100 traces/second by default is automatically enabled. Refer to your tracer configuration if you wish to configure this rate limiter.
 
 **Traces dropped due to the agent CPU limit (Red)**:
 
