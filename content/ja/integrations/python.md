@@ -6,6 +6,7 @@ ddtype: ライブラリ
 dependencies: []
 description: Python アプリケーションからメトリクス、トレース、ログを収集。
 doc_link: 'https://docs.datadoghq.com/integrations/python/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/tracing-async-python-code/'
     tag: ブログ
@@ -17,7 +18,7 @@ git_integration_title: python
 has_logo: true
 integration_title: Python
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション

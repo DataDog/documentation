@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_dynamodb/'
+draft: false
 git_integration_title: amazon_dynamodb
 has_logo: true
 integration_title: Amazon DynamoDB

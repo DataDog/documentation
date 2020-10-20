@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡します。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_workspaces/'
+draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
 integration_title: AWS Workspaces
@@ -45,7 +46,7 @@ Amazon WorkSpaces から S3 バケットまたは CloudWatch のいずれかに�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_workspace` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon WorkSpaces ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

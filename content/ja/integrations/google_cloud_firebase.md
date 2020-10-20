@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Firebase サービスに関するネットワークとデータストアの使用状況を追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_firebase/'
+draft: false
 git_integration_title: google_cloud_firebase
 has_logo: true
 integration_title: Google Cloud Firebase

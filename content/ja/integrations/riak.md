@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riak/README.md'
 display_name: Riak
+draft: false
 git_integration_title: riak
 guid: e1ed642c-8a15-420c-954b-6fb894905956
 integration_id: riak

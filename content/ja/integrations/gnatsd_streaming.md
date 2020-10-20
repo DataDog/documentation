@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md'
 display_name: Gnatsd streaming
+draft: false
 git_integration_title: gnatsd_streaming
 guid: 0a849512-5823-4d9b-b378-aa9d8fb06231
 integration_id: gnatsd-streaming

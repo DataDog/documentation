@@ -7,15 +7,16 @@
 "dependencies": []
 "description": "Datadog イベントストリームで Sentry の例外を参照。"
 "doc_link": "https://docs.datadoghq.com/integrations/sentry/"
+"draft": false
 "git_integration_title": "sentry"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Sentry"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "sentry"
 "public_title": "Datadog-Sentry インテグレーション"
-"short_description": "Datadog イベントストリームで Sentry 例外を参照。"
+"short_description": "Datadog イベントストリームで Sentry の例外を参照。"
 "version": "1.0"
 ---
 

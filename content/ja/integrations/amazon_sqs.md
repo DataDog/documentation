@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sqs/'
+draft: false
 git_integration_title: amazon_sqs
 has_logo: true
 integration_title: Amazon SQS
@@ -55,7 +56,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 {{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="Cloudtrail ロギング" popup="true" style="width:70%;">}}
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから手動で、Amazon SQS ログを含む S3 バケットにトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。

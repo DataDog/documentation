@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
 doc_link: 'https://docs.datadoghq.com/integrations/servicenow/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/'
     tag: ブログ

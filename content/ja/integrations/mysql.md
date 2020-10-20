@@ -21,6 +21,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mysql/README.md'
 description: MySQL インテグレーションは、MySQL サーバーインスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
 display_name: MySQL
+draft: false
 git_integration_title: mysql
 guid: 056bfc7f-4775-4581-9442-502078593d10
 integration_id: mysql

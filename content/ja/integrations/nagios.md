@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
 display_name: Nagios
+draft: false
 git_integration_title: nagios
 guid: f7629918-751c-4a05-87e7-0e3de34e51e7
 integration_id: nagios

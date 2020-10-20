@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2/'
+draft: false
 git_integration_title: amazon_ec2
 has_logo: true
 integration_title: Amazon EC2
@@ -34,7 +35,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. [AWS インテグレーションタイル][2]のメトリクス収集で、`EC2` をオンにします。
 

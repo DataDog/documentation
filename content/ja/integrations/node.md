@@ -8,6 +8,7 @@ ddtype: ライブラリ
 dependencies: []
 description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
 doc_link: 'https://docs.datadoghq.com/integrations/nodejs/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/node-logging-best-practices/'
     tag: ブログ
@@ -19,7 +20,7 @@ git_integration_title: node
 has_logo: true
 integration_title: NodeJS
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: node
 public_title: Datadog-NodeJS インテグレーション

@@ -6,15 +6,16 @@
 "dependencies": []
 "description": "New Relic のメトリクスとイベントを Datadog で表示。"
 "doc_link": "https://docs.datadoghq.com/integrations/new_relic/"
+"draft": false
 "git_integration_title": "new_relic"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "New Relic"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "new_relic"
 "public_title": "Datadog-New Relic インテグレーション"
-"short_description": "New Relic のメトリクスとイベントを Datadog で表示します。"
+"short_description": "New Relic のメトリクスとイベントを Datadog で表示。"
 "version": "1.0"
 ---
 
@@ -63,7 +64,7 @@ New Relic のカスタムメトリクスが Datadog に表示されるまで 5�
 
 New Relic インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 New Relic インテグレーションには、サービスのチェック機能は含まれません。
 

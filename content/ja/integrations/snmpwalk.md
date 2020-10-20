@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md'
 display_name: Snmpwalk
+draft: false
 git_integration_title: snmpwalk
 guid: a2864821-994c-4ebb-8532-b6879ea9a9ab
 integration_id: snmpwalk

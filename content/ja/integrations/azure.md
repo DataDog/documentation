@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: インスタンスや多数の Azure サービスからメトリクスを収集
 doc_link: 'https://docs.datadoghq.com/integrations/azure/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/'
     tag: ブログ
@@ -43,7 +44,7 @@ Microsoft Azure に接続すると、以下のことができます。
 Datadog の Azure インテグレーションは、<a href="https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported">Azure Monitor からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。<br><code>azure.*.status</code> および <code>azure.*.count</code> メトリクスは、Datadog により Azure Resource Health から生成されています。<a href="https://docs.datadoghq.com/integrations/faq/azure-status-metric">このメトリクスに関する詳細は、こちらでご確認いただけます</a>。
 </div>
 
-| 統合                     | 説明                                                                                               |
+| インテグレーション                     | 説明                                                                                               |
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [Analysis Services][1]          | クラウドでデータモデルを提供するサービス                                                         |
 | [API Management][2]             | API を公開、セキュリティ保護、変換、管理、監視するサービス                                      |

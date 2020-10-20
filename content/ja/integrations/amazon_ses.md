@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: メールのバウンス、配信の試行、メッセージの拒否などを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ses/'
+draft: false
 git_integration_title: amazon_ses
 has_logo: true
 integration_title: Amazon SES
@@ -53,7 +54,7 @@ Amazon SES から S3 バケットまたは CloudWatch のいずれかにログ�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_ses` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon SES ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

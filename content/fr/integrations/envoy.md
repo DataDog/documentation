@@ -6,6 +6,7 @@ assets:
     Envoy - Overview: assets/dashboards/envoy_overview.json
   logs:
     source: envoy
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/envoy/README.md'
 display_name: Envoy
+draft: false
 git_integration_title: envoy
 guid: 007f4e6c-ac88-411e-ad81-f0272539b5ff
 integration_id: envoy
@@ -45,7 +47,7 @@ Ce check recueille les métriques d'observation système distribuées d'[Envoy][
 
 ### Installation
 
-Le check Envoy est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Envoy est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 #### Via Istio
 
@@ -122,13 +124,16 @@ static_resources:
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `envoy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos données de performance Envoy. Consultez le [fichier d'exemple envoy.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `envoy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos données de performance Envoy. Consultez le [fichier d'exemple envoy.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
     ```yaml
     init_config:
@@ -143,14 +148,14 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
       - stats_url: http://localhost:80/stats
     ```
 
-2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint admin][4] d'Envoy.
-3. [Redémarrez l'Agent][9].
+2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint admin][3] d'Envoy.
+3. [Redémarrez l'Agent][4].
 
 ###### Filtrer les métriques
 
 Les métriques peuvent être filtrées grâce à l'expression régulière `metric_whitelist` ou `metric_blacklist`. Si les deux paramètres sont utilisés, la liste d'inclusion (whitelist) est alors d'abord appliquée, puis la liste d'exclusion (blacklist) est appliquée sur les résultats.
 
-Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certains tags pour choisir de conserver ou d'ignorer certaines métriques. La liste exhaustive de toutes les métriques et de tous les tags est disponible sur [metrics.py][10]. Voici un exemple d'ajout de tags pour les métriques Envoy.
+Le filtrage a lieu avant l'extraction des tags. Vous pouvez donc utiliser certains tags pour choisir de conserver ou d'ignorer certaines métriques. La liste exhaustive de toutes les métriques et de tous les tags est disponible sur [metrics.py][5]. Voici un exemple d'ajout de tags pour les métriques Envoy.
 
 ```python
 ...
@@ -193,33 +198,46 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: envoy
    ```
 
-3. [Redémarrez l'Agent][9].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
+[3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                      |
-| -------------------- | ------------------------------------------ |
-| `<NOM_INTÉGRATION>` | `envoy`                                    |
-| `<CONFIG_INIT>`      | vide ou `{}`                              |
-| `<CONFIG_INSTANCE>`  | `{"stats_url": "http://%%host%%:80/stats}` |
+| Paramètre            | Valeur                                       |
+| -------------------- | ------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `envoy`                                     |
+| `<CONFIG_INIT>`      | vide ou `{}`                               |
+| `<CONFIG_INSTANCE>`  | `{"stats_url": "http://%%host%%:80/stats"}` |
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][12].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "envoy", "service": "<NOM_SERVICE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][13] et recherchez `envoy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][7] et recherchez `envoy` dans la section Checks.
 
 ## Données collectées
 
@@ -227,7 +245,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "envoy" >}}
 
 
-Consultez [metrics.py][10] pour y découvrir la liste des tags envoyés par chaque métrique.
+Consultez [metrics.py][8] pour y découvrir la liste des tags envoyés par chaque métrique.
 
 ### Événements
 
@@ -240,7 +258,8 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Envoy pour recu
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][15].
+Besoin d'aide ? Contactez [l'assistance Datadog][9].
+
 
 [1]: https://www.envoyproxy.io
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -248,12 +267,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://istio.io/docs/reference/config
 [6]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[11]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[12]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
-[15]: https://docs.datadoghq.com/fr/help/
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
+[9]: https://docs.datadoghq.com/fr/help/

@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ceph/README.md'
 display_name: Ceph
+draft: false
 git_integration_title: ceph
 guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph

@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/activemq/README.md'
 display_name: ActiveMQ
+draft: false
 git_integration_title: activemq
 guid: 496df16d-5ad0-438c-aa2a-b8ba8ee3ae05
 integration_id: activemq
