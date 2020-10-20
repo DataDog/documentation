@@ -7654,6 +7654,11 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        certificate:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
+        dnsServer:
+          description: DNS server to use for DNS tests.
+          type: string
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -7674,6 +7679,27 @@ components:
           type: number
         url:
           description: URL to perform the test with.
+          type: string
+      type: object
+    SyntheticsTestRequestCertificate:
+      description: Client certificate to use when performing the test request.
+      properties:
+        cert:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificateItem'
+        key:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificateItem'
+      type: object
+    SyntheticsTestRequestCertificateItem:
+      description: Define a request certificate.
+      properties:
+        content:
+          description: Content of the certificate or key.
+          type: string
+        filename:
+          description: File name for the certificate or key.
+          type: string
+        updatedAt:
+          description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
     SyntheticsTickInterval:
