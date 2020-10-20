@@ -50,23 +50,6 @@ Otherwise, to begin tracing applications written in any language:
 - Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
     {{< tabs >}}
-    {{% tab "WebSphere" %}}
-
-In the administrative console:
-
-1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
-2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**.
-4. In the **Generic JVM arguments** text field, enter:
-
-```text
--javaagent:/path/to/dd-java-agent.jar
-```
-
-For additional details and options, see the [WebSphere docs][1].
-
-[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-    {{% /tab %}}
     {{% tab "Spring Boot" %}}
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
@@ -135,7 +118,7 @@ In the administrative console:
 
 1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
 2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+3. In the **Additional Properties** section, click **Java Virtual Machine**.
 4. In the **Generic JVM arguments** text field, enter:
 
 ```text
