@@ -336,16 +336,6 @@
           kind: documentation
           aliases:
           - /logs/log_collection/web_browser
-          further_reading:
-          - link: "https://www.npmjs.com/package/@datadog/browser-logs"
-            tag: "NPM"
-            text: "@datadog/browser-logs NPM package"
-          - link: "/logs/processing/"
-            tag: "Documentation"
-            text: "Process your logs"
-          - link: "/logs/explorer/"
-            tag: "Documentation"
-            text: "Explore your logs"
 
   - repo_name: datadog-cloudformation-resources
     contents:
