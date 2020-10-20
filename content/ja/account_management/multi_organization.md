@@ -108,7 +108,7 @@ Individual Organization Usage セクションには、オーガニゼーショ�
 
 * インデックス化されたログイベント
 * 収集されたログ
-* Analyzed Span
+* Indexed span
 
 使用属性は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 

@@ -5,6 +5,7 @@ aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/
     - /tracing/getting_further/trace_sampling_and_storage
+    - /tracing/guide/trace_sampling_and_storage/
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
@@ -22,6 +23,12 @@ further_reading:
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
+
+<div class="alert alert-danger">
+On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
+<br>
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
+</div>
 
 ## Trace sampling
 

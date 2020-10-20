@@ -20,7 +20,7 @@ further_reading:
 
 APM メトリクスモニターは、通常の[メトリクスモニター][1]と同様に機能しますが、APM 専用に作られたコントロールを備えています。このモニターを使用して、サービスレベルのヒット数、エラー数、そしてさまざまなレイテンシー測定値についてアラートを受信します。
 
-App Analytics モニターを使用すると、APM データを経時的に視覚化し、Analyzed Span に基づきアラート設定を行えます。たとえば、App Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
+App Analytics モニターを使用すると、APM データを経時的に視覚化し、Indexed span に基づきアラート設定を行えます。たとえば、App Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
 
 ## モニターの作成
 
@@ -43,7 +43,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 
 メトリクスがしきい値を超えるとアラートがトリガーされます。
 
-* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`、`p50 latency`、`p75 latency`、`p90 latency`、または `p99 latency` 
+* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`、`p50 latency`、`p75 latency`、`p90 latency`、または `p99 latency`
 * が `above`、`above or equal to`、`below`、または `below or equal to` の時にアラートを作成
 * アラートのしきい値 `<数値>`
 * 警告のしきい値 `<数値>`

@@ -25,9 +25,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env` and `version` tags.
-- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
-
-{{< partial name="apm/apm-inapp.html" >}}
+- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
 
 Otherwise, to begin tracing applications written in any language:
 
@@ -120,7 +118,7 @@ In the administrative console:
 
 1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
 2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**. 
+3. In the **Additional Properties** section, click **Java Virtual Machine**.
 4. In the **Generic JVM arguments** text field, enter:
 
 ```text
