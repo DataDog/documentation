@@ -132,7 +132,7 @@ This can happen for one of two reasons depending on your configuration:
 
 **Complete traces dropped by the tracer rate limiter (Orange)**:
 
-When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), a rate limiter set to 100 traces/second by default is automatically enabled. Refer to your tracer configuration if you wish to configure this rate limiter.
+When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), you explicitly define the ingestion rate that your service should have. However, as a protection mechanism, a rate limiter set to 100 traces/second by default gets automatically enabled. If you wish to configure this rate limiter, refer to your tracer configuration documentation.
 
 **Traces dropped due to the agent CPU limit (Red)**:
 
@@ -141,7 +141,7 @@ The agent has a configuration option allowing users to limit the usage of the CP
 ### Traces dropped before ingestion
 
 You won't get 100% trace ingestion if you have not set the environment variable configuration `DD_TRACE_SAMPLE_RATE=1.0` for Tracing without Limits, and:
-- your applications generate above 100 traces per second;
+- your applications generate above 50 traces per second;
 - your applications send intermittent traffic loads; or
 - your applications traces are large in size or otherwise have complicated trace payloads.
 
