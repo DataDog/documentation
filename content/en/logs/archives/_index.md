@@ -209,15 +209,22 @@ By default:
 * All Datadog Admin and Standard users can rehydrate from archives
 * All users, including Datadog Read Only users, can access rehydrated logs
 
-Use optional step 5 to assign roles on that archive and restrict who can:
+Use this optional configuration step to assign roles on that archive and restrict who can:
 
 * Edit that archive configuration. See the [logs_write_archive][5] permission.
 * Rehydrate from that archive. See the [logs_read_archives][6] and [logs_write_historical_view][7].
 * Access rehydrated logs in case you use the legacy [Read Index Data permission][8].
 
-Use optional step 6 to add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
-
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
+
+#### Datadog Tags
+
+Use this configuration optional step to:
+
+* Include all log tags in your archives (activated by default). **Note**: this increases the size of resulting archives.  
+* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
+
+{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
 #### Storage Class
 
