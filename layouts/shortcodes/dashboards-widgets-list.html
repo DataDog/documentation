@@ -1,0 +1,15 @@
+{{ $dot := . }}
+<div class="whatsnext">
+    <ul class="list-group">
+        {{ range index $dot.Site.Data.api.v1.full_spec.components.schemas.WidgetDefinition.oneOf }}
+          {{ $s := (index . "$ref") }}
+          {{ $s = replace (replace $s "#/components/schemas/" "") "WidgetDefinition" "" }}
+          <a class="list-group-item list-group-item-white d-flex justify-content-between align-items-center" href="/dashboards/widgets/#{{ $s }}">
+            <span><span class="text">{{ $s }}</span></span>
+            {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow.png" "class" "img-fluid static" "alt" "more") }}
+            {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
+          </a>
+        {{ end }}
+    </ul>
+</div>
+<br>
