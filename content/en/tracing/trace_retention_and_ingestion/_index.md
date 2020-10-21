@@ -116,6 +116,8 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 The Ingestion Breakdown column breaks down the destination of all traces originating from the service. It can help you understand lower than expected ingestion rates and missing traces.
 
+{{< img src="tracing/trace_indexing_and_ingestion/IngestionBreakdown.png" style="width:100%;" alt="breakdown of traces ingested" >}}
+
 The breakdown is composed of the following parts:
 
 - **Complete traces ingested** (green): The percentage of traces that have been ingested by Datadog.
@@ -126,7 +128,7 @@ The breakdown is composed of the following parts:
 
 - **Complete traces dropped by the tracer rate limiter** (orange): When you choose to [configure the ingestion rate of a service](#change-the-default-ingestion-rate), you explicitly define the ingestion rate that your service should have. However, as a protection mechanism, a rate limiter set to 100 traces per second by default is automatically enabled. To configure this rate limiter, [open a support ticket][5] so we can guide you through the process.
 
-- **Traces dropped due to the agent CPU limit** (red): The agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the agent will stop accepting traces from the tracers. Change the [agent configuration][9] to configure how much CPU to allocate to the agent.
+- **Traces dropped due to the agent CPU limit** (red): The agent has a configuration option allowing users to limit the usage of the CPU. After this limit is reached the agent will stop accepting traces from the tracers. Change the [agent configuration][6] to configure how much CPU to allocate to the agent.
 
 ### Traces dropped before ingestion
 
@@ -144,11 +146,11 @@ If you are seeing ingestion rates below 100% within Datadog and would like to se
 
 ## App Analytics to Tracing Without Limits
 
-Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][6], the legacy instructions are available within the [App Analytics][7] setup page.
+Before October 20, 2020, Datadog offered App Analytics to index spans for performing analytics. While this is no longer the recommended setup configuration and is not needed to use [Trace Search and Analytics][7], the legacy instructions are available within the [App Analytics][8] setup page.
 
 All existing App Analytics filters have been automatically transitioned to Retention Filters. You can continue to use the unchanged filters or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters.
 
-**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][1].  Legacy filters are now read only on the [settings][8] page in-app.
+**Note:** Existing App Analytics filters can be edited within Datadog, but only by editing the transitioned [retention filters][1].  Legacy filters are now read only on the [settings][9] page in-app.
 
 {{< img src="tracing/trace_indexing_and_ingestion/MigratedRetentionFilter.png" style="width:100%;" alt="Visual indicator of App Analytics filter migrated to a retention filter" >}}
 
@@ -157,7 +159,7 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [3]: /tracing/visualization/#top-level-span
 [4]: https://app.datadoghq.com/apm/traces/ingestion-controls
 [5]: /help/
-[6]: /tracing/trace_search_and_analytics
-[7]: /tracing/legacy_app_analytics/
-[8]: https://app.datadoghq.com/apm/settings
-[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
+[7]: /tracing/trace_search_and_analytics
+[8]: /tracing/legacy_app_analytics/
+[9]: https://app.datadoghq.com/apm/settings
