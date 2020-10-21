@@ -311,7 +311,7 @@ Roles are additive: if a user belongs to multiple roles, the data they have acce
 {{< tabs >}}
 {{% tab "UI" %}}
 
-To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][17] in the Datadog App to:
+To restrict users so they see no more than logs matching a restriction query, use the [Data Access page][1] in the Datadog App to:
 
 1. [Create](#create-a-restriction-query) a restriction query.
 2. [Assign](#assign-a-role-to-a-restriction-query) one or multiple roles to that restriction query.
@@ -357,6 +357,7 @@ This page won't display more than 50 restriction queries at once, and more than 
 * with the user filter, which is a convenient way to see what a specific user belonging to multiple roles actually has access to:
 
 {{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="View as Roles"  style="width:70%;">}}
+[1]: https://app.datadoghq.com/logs/pipelines/data-access
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -446,7 +447,7 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [9]: /logs/processing/pipelines/#pipeline-filters
 [10]: /logs/archives
 [11]: /logs/archives/rehydrating
-[12]: r#logs-read-archives
+[12]: #logs-read-archives
 [13]: /api/v2/logs-archives/
 [14]: /api/v1/logs-indexes/
 [15]: /api/v1/logs-pipelines/
