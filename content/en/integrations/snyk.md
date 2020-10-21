@@ -17,7 +17,7 @@ version: '1.0'
 
 ## Overview
 
-The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your java libraries. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2]. 
+The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your Java libraries. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2]. 
 
 ## Setup
 
