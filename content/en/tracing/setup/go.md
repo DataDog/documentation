@@ -90,7 +90,7 @@ func main() {
 
 ### Change Agent Hostname
 
-The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_AGENT_APM_PORT`.
+The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
 But you can also set a custom hostname and port in code:
 
