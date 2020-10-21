@@ -17,7 +17,7 @@ version: '1.0'
 
 ## Overview
 
-The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your code. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2]. 
+The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulnerabilities in your java libraries. The CVE Analysis (Common Vulnerabilities and Exposures) is performed using [Snyk’s Intel Vulnerability DB][2]. 
 
 ## Setup
 
@@ -25,17 +25,19 @@ The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulner
 
 1. Sign up for a [Snyk account][3].
 
-2. Enable [Datadog Continuous Profiler][1] by following the [setup guide][4]. 
+2. Enable the [Datadog Continuous Profiler][1] by following the [setup guide][4]. The integration is only available for Datadog Continues Profiler customers.
 
 3. Install [`datadog-ci`][5] and [`snyk`][6]:
-	{{< code-block lang="bash" >}}
-	npm install --save-dev @datadog/datadog-ci snyk
-	{{< /code-block >}}
+	
+{{< code-block lang="bash" >}}
+npm install --save-dev @datadog/datadog-ci snyk
+{{< /code-block >}}
 
 4. In your build, [authenticate the Snyk CLI][7]:
-	{{< code-block lang="bash" >}}
-	snyk auth ”$YOUR_SNYK_TOKEN”
-	{{< /code-block >}}
+
+{{< code-block lang="bash" >}}
+snyk auth ”$YOUR_SNYK_TOKEN”
+{{< /code-block >}}
 
 ### Configuration
 
@@ -47,7 +49,7 @@ snyk test --print-deps --json > deps.json
 
 If you have a repo with multiple projects, add `--file=<package file>` to the Snyk command. For example, `--file=<pom.xml>`. See the [Snyk documentation][9] for more information.
 
-Add version and service tags on your deployment. See [Unified Service Tagging][10] for more information.
+For the most accurate analysis, add version and service tags on your deployment. See [Unified Service Tagging][10] for more information.
 
 Finally, upload the dependency graph to Datadog:
 
@@ -58,17 +60,6 @@ datadog-ci dependencies upload deps.json --source snyk --service <SERVICE> --rel
 By default, this command sends requests to Datadog US. To use Datadog EU, set the `DATADOG_SITE` environment variable to `datadoghq.eu`.
 
 A minute or two after you deploy your service, the “Vulnerability” column on the [Profiles][11] page is populated with the highest classification of vulnerability for that service. Details about the CVE vulnerabilities for the service can be found in the Analysis tab on the sidebar (detailed view of the service). 
-
-
-### Notes
-
-The Snyk integration only applies to Java libraries.
-
-The Snyk integration is only available for Datadog Continues Profiler customers.
-
-For the most accurate analysis, set the service name and version 
-
-
 
 ## Troubleshooting
 
