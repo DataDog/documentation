@@ -51,6 +51,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][4] for the query value widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 QUERY_VALUE_SCHEMA = {
     "type": "object",

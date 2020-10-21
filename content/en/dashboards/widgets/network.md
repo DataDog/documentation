@@ -48,6 +48,8 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 The dedicated [widget JSON schema definition][2] for the network widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 {
   "viz": "timeseries",

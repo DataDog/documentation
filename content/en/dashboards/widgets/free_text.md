@@ -32,6 +32,8 @@ This is commonly used to state the overall purpose of the dashboard.
 
 The dedicated [widget JSON schema definition][2] for the free text widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 FREE_TEXT_SCHEMA = {
     "type": "object",

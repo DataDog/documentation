@@ -39,6 +39,8 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 The dedicated [widget JSON schema definition][2] for the service summary widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 TRACE_SERVICE_SCHEMA = {
     "type": "object",

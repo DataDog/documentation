@@ -35,6 +35,8 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 The dedicated [widget JSON schema definition][4] for the service map widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 SERVICEMAP_SCHEMA = {
         "type": "object",

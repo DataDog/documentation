@@ -70,6 +70,8 @@ The following configuration options are available:
 
 The dedicated [widget JSON schema definition][3] for the heat map widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 HEATMAP_SCHEMA = {
     "type": "object",

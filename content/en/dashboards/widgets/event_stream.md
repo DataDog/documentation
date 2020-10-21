@@ -43,6 +43,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the event stream widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 EVENT_STREAM_SCHEMA = {
     "type": "object",

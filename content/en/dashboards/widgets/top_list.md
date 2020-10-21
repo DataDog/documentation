@@ -53,6 +53,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][3] for the top list widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 TOPLIST_SCHEMA = {
     "type": "object",

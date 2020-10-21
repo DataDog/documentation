@@ -6,9 +6,8 @@
 </style>
 <div class="whatsnext">
     <ul class="list-group">
-        {{ range index $dot.Site.Data.api.v1.full_spec.components.schemas.WidgetDefinition.oneOf }}
-          {{ $s := (index . "$ref") }}
-          {{ $s = replace (replace $s "#/components/schemas/" "") "WidgetDefinition" "" }}
+        {{ range $dot.Site.Data.api.v1.full_spec_deref.components.schemas.WidgetDefinition.oneOf }}
+          {{ $s := .properties.type.default }}
           {{ $pageExists := false }}
           {{ $filename := (lower (replace (humanize $s) " " "_" )) }}
           {{ if (fileExists (print "dashboards/widgets/" $filename ".md")) }}

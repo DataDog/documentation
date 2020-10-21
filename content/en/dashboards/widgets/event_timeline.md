@@ -40,6 +40,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][2] for the event timeline widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 EVENT_TIMELINE_SCHEMA = {
     "type": "object",

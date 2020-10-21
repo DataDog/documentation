@@ -25,6 +25,8 @@ Choose a name for your group by using the cog icon in the upper right corner of 
 
 The dedicated [widget JSON schema definition][2] for the change widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 GROUP_SCHEMA = {
     "type": "object",

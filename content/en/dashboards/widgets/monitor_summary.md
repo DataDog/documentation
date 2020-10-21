@@ -65,6 +65,8 @@ You can optionally define the title’s size and alignment.
 
 The dedicated [widget JSON schema definition][3] for the monitor summary widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 MANAGE_STATUS_SCHEMA = {
     "type": "object",

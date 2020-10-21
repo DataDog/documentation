@@ -46,6 +46,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the scatter plot widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 SCATTERPLOT_SCHEMA = {
     "type": "object",

@@ -30,6 +30,8 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 The dedicated [widget JSON schema definition][2] for the note widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 NOTE_SCHEMA = {
     "type": "object",

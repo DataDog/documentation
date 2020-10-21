@@ -25,6 +25,8 @@ Enter the URL of the page you want to display inside the iframe. If you do not u
 
 The dedicated [widget JSON schema definition][1] for the iframe widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 IFRAME_SCHEMA = {
     "type": "object",

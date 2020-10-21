@@ -55,6 +55,8 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the check status widget is:
 
+{{< dashboards-widgets-api >}}
+
 ```text
 CHECK_STATUS_SCHEMA = {
     "type": "object",
