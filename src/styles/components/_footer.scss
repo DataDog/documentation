@@ -108,13 +108,55 @@ footer {
       cursor: pointer;
       font-size: 18px;
       color: #fff;
-
       &:lang(ja),
       &:lang(ko) {
         font-size: 16px;
       }
     }
   }
+
+  .mobile-lang-select-container {
+
+    position: relative;
+    max-width: 100px;
+
+    .mobile-lang-select {
+      appearance: none;
+      color: white;
+      background-color: transparent;
+      transform: translateY(-1px);
+      border: none;
+      outline: none;
+      padding: 0 15px;
+      margin: 0 -15px;
+      max-width: fit-content;
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+      &:lang(ja),
+      &:lang(ko) {
+        font-size: 16px;
+      }
+
+      & + svg {
+        transform: translateY(6px) rotate(180deg);
+        &:lang(ja) {
+          margin-left: -7px;
+        }
+        &:lang(fr) {
+          margin-left: 5px;
+        }
+        margin-left: -1px;
+      }
+    }
+    
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  
 
   .footer-lang-toggle {
 

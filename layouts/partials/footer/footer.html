@@ -191,7 +191,18 @@
                 <div class="col-12">
                     <div class="row mb-1 align-items-center">
                         <div class="col-6 col-lg-1 offset-lg-3 mb-1 mb-lg-0">
-                            <div class="footer-menu d-flex align-items-center js-footer-lang-toggle footer-lang-toggle">
+                            <div class="d-flex d-lg-none mobile-lang-select-container">
+                                <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
+                                <label class="sr-only" for="mobile-lang-select">Language Selection</label>
+                                <select class="mobile-lang-select" id="mobile-lang-select" id="" onchange="javascript:location.href = this.value;">
+                                    <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+                                    {{ range .Translations }}
+                                        <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
+                                    {{ end }}
+                                </select>
+                                {{ partial "svg" (dict "context" $dot "src" "arrow.svg" "size" "15px" "color" "#ffffff"  )}}
+                            </div>
+                            <div class="footer-menu d-none d-lg-flex align-items-center js-footer-lang-toggle footer-lang-toggle">
                                 <div class="d-flex align-items-center text-white cursor-pointer selected-lang">
                                     <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
                                     <span class="d-flex align-items-center" style="transform: translateY(-1px);">{{ .Language.LanguageName }}</span>
