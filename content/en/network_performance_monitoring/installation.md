@@ -27,6 +27,10 @@ Supported platforms include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
+Network Performance Monitoring is compatible with Cilium installations, as long as the following requirements are met:
+1) Cilium version >= 1.6, and
+2) Kernel version >= 4.19.57, >= 5.1.16, or >= 5.2
+
 **Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
 The following provisioning systems are supported:
