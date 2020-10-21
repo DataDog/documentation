@@ -3230,8 +3230,9 @@ components:
         your Organization.
       properties:
         index:
-          description: For multi-index organizations, the log index in which the request
-            is performed. Default to '*' (all indexes).
+          description: The log index on which the request is performed. For multi-index
+            organizations, the default is all live indexes. Historical indexes of
+            rehydrated logs must be specified.
           example: retention-3,retention-15
           type: string
         limit:
