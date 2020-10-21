@@ -116,7 +116,7 @@ DD_TRACE_SAMPLE_RATE=1.0
 
 The Ingestion Breakdown column breaks down the destination of all traces originating from the service. It can help you understand lower than expected ingestion rates and missing traces.
 
-{{< img src="tracing/trace_indexing_and_ingestion/IngestionBreakdown.gif" style="width:100%;" alt="breakdown of traces ingested" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/IngestionBreakdown.png" style="width:100%;" alt="breakdown of traces ingested" >}}
 
 The breakdown is composed of the following parts:
 
