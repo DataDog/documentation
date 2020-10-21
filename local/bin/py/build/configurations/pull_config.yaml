@@ -323,6 +323,8 @@
           dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md"]
           title: RUM Browser Monitoring
           kind: documentation
+          aliases:
+            - /real_user_monitoring/setup
 
   - repo_name: datadog-cloudformation-resources
     contents:
