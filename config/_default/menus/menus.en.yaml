@@ -1273,7 +1273,7 @@ main:
     parent: tracing
     identifier: trace_retention_and_ingestion
     weight: 5
-  - name:  Usage Metrics
+  - name: Usage Metrics
     url: tracing/trace_retention_and_ingestion/usage_metrics
     parent: trace_retention_and_ingestion
     identifier: trace_retention_and_ingestion_usage_metrics

@@ -4363,9 +4363,8 @@ components:
         synthetics_check_id:
           deprecated: true
           description: ID of the corresponding Synthetic check.
-          format: int64
           nullable: true
-          type: integer
+          type: string
         threshold_windows:
           $ref: '#/components/schemas/MonitorThresholdWindowOptions'
         thresholds:
@@ -7969,7 +7968,7 @@ components:
       - DOUBLE
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
-        of one or more metrics, log events, or Indexed Spans over time.
+        of one or more metrics, log events, or Analyzed Spans over time.
       properties:
         custom_links:
           description: List of custom links.
@@ -8872,7 +8871,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all Indexed Spans indexed over all hours
+          description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for all organizations.
           format: int64
           type: integer
@@ -9005,7 +9004,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all Indexed Spans indexed over all hours
+          description: Shows the sum of all analyzed spans indexed over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -9159,7 +9158,7 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
-          description: Shows the sum of all Indexed Spans indexed over all hours
+          description: Shows the sum of all analyzed spans indexed over all hours
             in the current month(s) for all organizations.
           format: int64
           type: integer
@@ -9308,7 +9307,7 @@ components:
           format: date-time
           type: string
         indexed_events_count:
-          description: Contains the number of Indexed Spans indexed.
+          description: Contains the number of Analyzed Spans indexed.
           format: int64
           type: integer
       type: object
@@ -18025,8 +18024,13 @@ tags:
     \ API-related information about processors can be found in the\n  [processors\
     \ documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\
     \n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\
-    \n**Note:** These endpoints are only available for admin users.\nMake sure to\
-    \ use an application key created by an admin."
+    \n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure\
+    \ to use an application key created by an admin.\n\n**Grok parsing rules may effect\
+    \ JSON output and require\nreturned data to be configured before using in a request.**\n\
+    For example, if you are using the data returned from a\nrequest for another request\
+    \ body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,\
+    \ you will\nneed to configure all escaped spaces as `%{space}` to use\nin the\
+    \ body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/
