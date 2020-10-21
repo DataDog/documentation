@@ -28,22 +28,22 @@ The Snyk integration allows [Datadog Continuous Profiler][1] to report on vulner
 2. Enable [Datadog Continuous Profiler][1] by following the [setup guide][4]. 
 
 3. Install [`datadog-ci`][5] and [`snyk`][6]:
-	```bash
+	{{< code-block lang="bash" >}}
 	npm install --save-dev @datadog/datadog-ci snyk
-	```
+	{{< /code-block >}}
 
 4. In your build, [authenticate the Snyk CLI][7]:
-	```bash
+	{{< code-block lang="bash" >}}
 	snyk auth ”$YOUR_SNYK_TOKEN”
-	```
+	{{< /code-block >}}
 
 ### Configuration
 
 In your build, [generate a dependency graph file][8]:
 
-```bash
+{{< code-block lang="bash" >}}
 snyk test --print-deps --json > deps.json
-```
+{{< /code-block >}}
 
 If you have a repo with multiple projects, add `--file=<package file>` to the Snyk command. For example, `--file=<pom.xml>`. See the [Snyk documentation][9] for more information.
 
@@ -51,9 +51,9 @@ Add version and service tags on your deployment. See [Unified Service Tagging][1
 
 Finally, upload the dependency graph to Datadog:
 
-```bash
+{{< code-block lang="bash" >}}
 datadog-ci dependencies upload deps.json --source snyk --service <SERVICE> --release-version <VERSION>
-```
+{{< /code-block >}}
 
 By default, this command sends requests to Datadog US. To use Datadog EU, set the `DATADOG_SITE` environment variable to `datadoghq.eu`.
 
