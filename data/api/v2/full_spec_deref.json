@@ -1879,6 +1879,12 @@
                     ],
                     "type": "object"
                   },
+                  "include_tags": {
+                    "default": false,
+                    "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                    "example": false,
+                    "type": "boolean"
+                  },
                   "name": {
                     "description": "The archive name.",
                     "example": "Nginx Archive",
@@ -2128,6 +2134,12 @@
             ],
             "type": "object"
           },
+          "include_tags": {
+            "default": false,
+            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+            "example": false,
+            "type": "boolean"
+          },
           "name": {
             "description": "The archive name.",
             "example": "Nginx Archive",
@@ -2360,6 +2372,12 @@
                     ],
                     "type": "object"
                   },
+                  "include_tags": {
+                    "default": false,
+                    "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                    "example": false,
+                    "type": "boolean"
+                  },
                   "name": {
                     "description": "The archive name.",
                     "example": "Nginx Archive",
@@ -2584,6 +2602,12 @@
             ],
             "type": "object"
           },
+          "include_tags": {
+            "default": false,
+            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+            "example": false,
+            "type": "boolean"
+          },
           "name": {
             "description": "The archive name.",
             "example": "Nginx Archive",
@@ -2795,6 +2819,12 @@
                   "integration"
                 ],
                 "type": "object"
+              },
+              "include_tags": {
+                "default": false,
+                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                "example": false,
+                "type": "boolean"
               },
               "name": {
                 "description": "The archive name.",
@@ -3196,6 +3226,12 @@
                   "integration"
                 ],
                 "type": "object"
+              },
+              "include_tags": {
+                "default": false,
+                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                "example": false,
+                "type": "boolean"
               },
               "name": {
                 "description": "The archive name.",
@@ -4034,6 +4070,12 @@
                         "integration"
                       ],
                       "type": "object"
+                    },
+                    "include_tags": {
+                      "default": false,
+                      "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                      "example": false,
+                      "type": "boolean"
                     },
                     "name": {
                       "description": "The archive name.",
@@ -16662,6 +16704,12 @@
                                 ],
                                 "type": "object"
                               },
+                              "include_tags": {
+                                "default": false,
+                                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                                "example": false,
+                                "type": "boolean"
+                              },
                               "name": {
                                 "description": "The archive name.",
                                 "example": "Nginx Archive",
@@ -16959,6 +17007,12 @@
                             ],
                             "type": "object"
                           },
+                          "include_tags": {
+                            "default": false,
+                            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                            "example": false,
+                            "type": "boolean"
+                          },
                           "name": {
                             "description": "The archive name.",
                             "example": "Nginx Archive",
@@ -17198,6 +17252,12 @@
                                 "integration"
                               ],
                               "type": "object"
+                            },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
                             },
                             "name": {
                               "description": "The archive name.",
@@ -17634,6 +17694,12 @@
                               ],
                               "type": "object"
                             },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
+                            },
                             "name": {
                               "description": "The archive name.",
                               "example": "Nginx Archive",
@@ -17990,6 +18056,12 @@
                             ],
                             "type": "object"
                           },
+                          "include_tags": {
+                            "default": false,
+                            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                            "example": false,
+                            "type": "boolean"
+                          },
                           "name": {
                             "description": "The archive name.",
                             "example": "Nginx Archive",
@@ -18229,6 +18301,12 @@
                                 "integration"
                               ],
                               "type": "object"
+                            },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
                             },
                             "name": {
                               "description": "The archive name.",
