@@ -54,7 +54,6 @@ Alternatively, install it manually:
       use Monolog\Logger;
       use Monolog\Handler\StreamHandler;
       use Monolog\Formatter\JsonFormatter;
-    ?>
     ```
 
 {{% /tab %}}
@@ -78,7 +77,6 @@ Alternatively, install it manually:
   use Zend\Log\Logger;
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
-?>
 ```
 
 [1]: https://getcomposer.org
@@ -127,7 +125,6 @@ The following configuration enables the JSON formatting and writes the logs and 
 
   // an example
   $log->info('Adding a new user', array('username' => 'Seldaek'));
-?>
 ```
 
 {{% /tab %}}
@@ -154,7 +151,6 @@ The following configuration enables the JSON formatting and writes the logs and 
   // bind
   $logger->addWriter($writer);
   Zend\Log\Logger::registerErrorHandler($logger);
-?>
 ```
 
 Then [Stream your log files to Datadog][1]
@@ -211,7 +207,6 @@ It's useful to add additional context data to your logs and events. Monolog make
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
-?>
 ```
 
 Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (e.g., the session id, the request id, etc.):
@@ -236,7 +231,6 @@ Monolog comes with a pre-processor feature. It's a simple callback that enriches
 
       return $record;
   });
-?>
 ```
 
 {{% /tab %}}
@@ -247,7 +241,6 @@ Much of the useful information comes from additional context data that you can a
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
-?>
 ```
 
 But, most importantly, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
@@ -266,7 +259,6 @@ Take a peek to this code if you want to use it:
   $logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
   $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
   $logger->addProcessor(new Zend\Log\Processor\RequestId());
-?>
 ```
 
 If you want to develop yours, [refer the Zend documentation][1].
@@ -347,7 +339,6 @@ Add a session Processor to add variable context within your logs:
           return $toReturn;
         }
       }
-    ?>
     ```
 
 2. Wire the Processor with Symfony:
@@ -398,7 +389,6 @@ Integrate Monolog with your framework then configure your logger:
 
   $monolog->pushHandler($stream);
   return $r;
-?>
 ```
 
 ### Symfony (v2+, v3+)
@@ -531,7 +521,6 @@ class AppServiceProvider extends ServiceProvider
       // configure your logger below
       return $monolog;
   });
-?>
 ```
 
 ### Lumen
@@ -545,7 +534,6 @@ class AppServiceProvider extends ServiceProvider
   });
 
   return $app;
-?>
 ```
 
 ### CakePHP
@@ -562,7 +550,6 @@ Then, start by creating a logging configuration file (i.e., `app/Config/log.php`
 ```php
 <?php
   include 'log.php';
-?>
 ```
 
 A basic configuration, to replicate what Cake does but using Monolog would look something like this:
