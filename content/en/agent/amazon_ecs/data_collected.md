@@ -27,7 +27,7 @@ To reduce noise, the Amazon ECS integration is automatically set up to include o
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 
-To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
+To remove this include list and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
 
 ## Further reading
 
