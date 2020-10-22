@@ -1152,69 +1152,29 @@ main:
     weight: 102
   - name: Instrument Your Application
     url: tracing/setup/
-    parent: tracing
+    parent: tracing_get_started
     identifier: tracing_setup
+    weight: 103
+  - name: Set Up Tracing with a Proxy
+    url: tracing/setup/proxy_setup/
+    parent: tracing
+    identifier: tracing_proxy
     weight: 3
-  - name: Java
-    url: tracing/setup/java/
-    parent: tracing_setup
-    identifier: tracing_setup_java
-    weight: 301
-  - name: Python
-    url: tracing/setup/python/
-    parent: tracing_setup
-    identifier: tracing_setup_python
-    weight: 302
-  - name: Ruby
-    url: tracing/setup/ruby/
-    parent: tracing_setup
-    identifier: tracing_setup_ruby
-    weight: 303
-  - name: Go
-    url: tracing/setup/go/
-    parent: tracing_setup
-    identifier: tracing_setup_go
-    weight: 304
-  - name: Node.js
-    url: tracing/setup/nodejs/
-    parent: tracing_setup
-    identifier: tracing_setup_nodejs
-    weight: 305
-  - name: .NET Framework
-    url: tracing/setup/dotnet-framework/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_framework
-    weight: 306
-  - name: .NET Core
-    url: tracing/setup/dotnet-core/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_core
-    weight: 307
-  - name: PHP
-    url: tracing/setup/php/
-    parent: tracing_setup
-    identifier: tracing_setup_php
-    weight: 308
-  - name: C++
-    url: tracing/setup/cpp/
-    parent: tracing_setup
-    identifier: tracing_setup_cpp
-    weight: 309
   - name: Envoy
     url: tracing/setup/envoy/
-    parent: tracing_setup
+    parent: tracing_proxy
     identifier: tracing_setup_envoy
-    weight: 311
+    weight: 301
   - name: NGINX
     url: tracing/setup/nginx/
-    parent: tracing_setup
+    parent: tracing_proxy
     identifier: tracing_setup_nginx
-    weight: 312
+    weight: 302
   - name: Istio
     url: tracing/setup/istio/
     identifier: tracing_setup_istio
-    parent: tracing_setup
-    weight: 313
+    parent: tracing_proxy
+    weight: 303
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
