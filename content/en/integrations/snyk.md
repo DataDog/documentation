@@ -41,7 +41,7 @@ snyk auth ”$YOUR_SNYK_TOKEN”
 
 ### Configuration
 
-In your build, [generate a dependency graph file][8]:
+1. In your build, [generate a dependency graph file][8]:
 
 {{< code-block lang="bash" >}}
 snyk test --print-deps --json > deps.json
@@ -49,9 +49,9 @@ snyk test --print-deps --json > deps.json
 
 If you have a repo with multiple projects, add `--file=<package file>` to the Snyk command. For example, `--file=<pom.xml>`. See the [Snyk documentation][9] for more information.
 
-For the most accurate analysis, add version and service tags on your deployment. See [Unified Service Tagging][10] for more information.
+2. For the most accurate analysis, add version and service tags on your deployment. See [Unified Service Tagging][10] for more information.
 
-Finally, upload the dependency graph to Datadog:
+3. Finally, upload the dependency graph to Datadog:
 
 {{< code-block lang="bash" >}}
 datadog-ci dependencies upload deps.json --source snyk --service <SERVICE> --release-version <VERSION>
