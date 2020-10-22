@@ -95,102 +95,102 @@ main_left:
       weight: -460
     - name: 金融サービス
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/financial-services/'
       weight: -460
     - name: 製造 / 物流
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/manufacturing-logistics/'
       weight: -459
     - name: 医療 / ライフサイエンス
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/healthcare/'
       weight: -458
     - name: 小売業 / e コマース
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/retail-ecommerce/'
       weight: -457
     - name: 官業
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/solutions/public-sector/'
       weight: -456
     - name: メディア / エンターテインメント
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/media-entertainment/'
       weight: -455
     - name: テクノロジー
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/solutions/technology/'
       weight: -454
     - name: ゲーム業界
       parent: solutions
-      title: 業種
+      title: industry
       url: 'https://www.datadoghq.com/ja/solutions/gaming/'
       weight: -453
     - name: Amazon Web Services
       parent: solutions
-      title: テクノロジー
+      title: technology
       url: 'https://www.datadoghq.com/solutions/aws/'
       weight: -452
     - name: Azure
       parent: solutions
-      title: テクノロジー
+      title: technology
       url: 'https://www.datadoghq.com/solutions/azure/'
       weight: -451
     - name: Google Cloud Platform
       parent: solutions
-      title: テクノロジー
+      title: technology
       url: 'https://www.datadoghq.com/solutions/gcp/'
       weight: -450
     - name: Kubernetes
       parent: solutions
-      title: テクノロジー
+      title: technology
       url: 'https://www.datadoghq.com/solutions/kubernetes/'
       weight: -449
     - name: クラウド移行
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
       weight: -448
     - name: 統合監視
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
       weight: -447
     - name: DevOps
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/ja/solutions/devops/'
       weight: -446
     - name: セキュリティ分析
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/solutions/security-analytics/'
       weight: -445
     - name: ハイブリッドクラウドモニタリング
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
       weight: -444
     - name: IoT モニタリング
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
       weight: -443
     - name: 機械学習
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/solutions/machine-learning/'
       weight: -442
     - name: リアルタイム BI
       parent: solutions
-      title: ユースケース
+      title: usecase
       url: 'https://www.datadoghq.com/solutions/business-analytics/'
       weight: -441
 main_right:
