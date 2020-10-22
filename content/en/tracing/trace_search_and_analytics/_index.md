@@ -93,8 +93,6 @@ All spans that are indexed by retention filters or legacy App Analytics filters 
 {{< img src="tracing/live_search/HistoricalSearch2.gif" alt="Historical Search" >}}
 
 
-**Note:** As of October 20, 2020 Tracing without Limits replaced App Analytics as a more flexible way to ingest 100% of your traces and retain the ones important to your business.
-
 For example, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search will return no results, unlike when using Live Search.
 
 You can customize what spans are retained and at what retention rates. By default, [Datadog Intelligent Retention][4] will be applied. To learn more about the default span retention filter and how to create your own additional filters, see the [Retention Filters][3] documentation. Go to the [Retention Filters][7] page within the Datadog app to create or modify your own filters.
