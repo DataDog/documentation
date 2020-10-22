@@ -1037,7 +1037,7 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
-  xit('should show oneOf', () => {
+  it('should show oneOf', () => {
     const mockSchema = {
       "description": "Structured log message.",
       "oneOf": [
@@ -1122,6 +1122,90 @@ describe(`filterExampleJson`, () => {
       "hostname": "i-012345678",
       "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World",
       "service": "payment"
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show oneOf with definition', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "title": {
+          "description": "Title of the dashboard.",
+          "example": "",
+          "type": "string"
+        },
+        "widgets": {
+          "description": "List of widgets to display on the dashboard.",
+          "example": [
+            {
+              "definition": {
+                "requests": {
+                  "fill": {
+                    "q": "system.cpu.user"
+                  }
+                },
+                "type": "hostmap"
+              }
+            }
+          ],
+          "items": {
+            "description": "Information about widget.\n\nNote: The `layout` property is required for widgets in dashboards with `free` `layout_type` only.",
+            "properties": {
+              "definition": {
+                "description": "[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).",
+                "oneOf": [
+                  {
+                    "description": "Alert graphs are timeseries graphs showing the current status of any monitor defined on your system.",
+                    "properties": {
+                      "alert_id": {
+                        "description": "ID of the alert to use in the widget.",
+                        "example": "",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "alert_graph",
+                        "description": "Type of the alert graph widget.",
+                        "enum": [
+                          "alert_graph"
+                        ],
+                        "example": "alert_graph",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ALERT_GRAPH"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "alert_id"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the widget.",
+                "format": "int64",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {
+      "title": "",
+      "widgets": [
+        {
+          "definition": "",
+          "id": "integer"
+        }
+      ]
     };
     expect(actual).toEqual(expected);
   });
@@ -1326,92 +1410,6 @@ describe(`rowRecursive`, () => {
     };
     expect(t).not.toThrow(Error);
 
-  });
-
-});
-
-describe(`addHasExpandClass`, () => {
-
-  it('should do nothing when substring js-collapse-trigger found', () => {
-    const mockInput = `
-    <div class="table-response schema-table row">
-      <p class="expand-all js-expand-all text-primary">Expand All</p>
-      <div class="col-12">
-        <div class="row table-header">
-          <div class="col-4 column">
-            <p class="font-semibold">Field</p>
-          </div>
-          <div class="col-2 column">
-            <p class="font-semibold">Type</p>
-          </div>
-          <div class="col-6 column">
-            <p class="font-semibold">Description</p>
-          </div>
-        </div>
-        <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>
-    </div>`.trim();
-    const expected = `
-    <div class="table-response schema-table row">
-      <p class="expand-all js-expand-all text-primary">Expand All</p>
-      <div class="col-12">
-        <div class="row table-header">
-          <div class="col-4 column">
-            <p class="font-semibold">Field</p>
-          </div>
-          <div class="col-2 column">
-            <p class="font-semibold">Type</p>
-          </div>
-          <div class="col-6 column">
-            <p class="font-semibold">Description</p>
-          </div>
-        </div>
-        <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
-      </div>
-    </div>`.trim();
-    const actual = bp.addHasExpandClass(mockInput);
-    expect(actual).toEqual(expected);
-  });
-
-  it('should add has-no-expands class when substring js-collapse-trigger not found', () => {
-    const mockInput = `
-    <div class="table-response schema-table row">
-      <p class="expand-all js-expand-all text-primary">Expand All</p>
-      <div class="col-12">
-        <div class="row table-header">
-          <div class="col-4 column">
-            <p class="font-semibold">Field</p>
-          </div>
-          <div class="col-2 column">
-            <p class="font-semibold">Type</p>
-          </div>
-          <div class="col-6 column">
-            <p class="font-semibold">Description</p>
-          </div>
-        </div>
-        <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>
-    </div>`.trim();
-    const expected = `
-    <div class="table-response schema-table has-no-expands row">
-      <p class="expand-all js-expand-all text-primary">Expand All</p>
-      <div class="col-12">
-        <div class="row table-header">
-          <div class="col-4 column">
-            <p class="font-semibold">Field</p>
-          </div>
-          <div class="col-2 column">
-            <p class="font-semibold">Type</p>
-          </div>
-          <div class="col-6 column">
-            <p class="font-semibold">Description</p>
-          </div>
-        </div>
-        <div class="row first-row collapse-trigger">Testing Div</div>
-      </div>
-    </div>`.trim();
-    const actual = bp.addHasExpandClass(mockInput);
-    expect(actual).toEqual(expected);
   });
 
 });

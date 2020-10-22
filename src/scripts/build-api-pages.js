@@ -231,6 +231,16 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
               childRequiredKeys = (value.items.required) ? value.items.required : [];
               prefixType = '[{';
               suffixType = '}]';
+
+              // widgets
+              if("definition" in value.items.properties && "oneOf" in value.items.properties.definition) {
+                // childData = value.items.properties.definition.oneOf;
+                const names = value.items.properties.definition.oneOf.map((item) => item.properties.type.default);
+                childData = names
+                  .map((mapkey, indx) => { return {[mapkey]: value.items.properties.definition.oneOf[indx]} })
+                  .reduce((obj, item) => ({...obj, ...item}), {});
+                childRequiredKeys = [];
+              }
             }
           } else if (typeof value.items === 'string') {
             childRequiredKeys = (value.items.required) ? value.items.required : [];
@@ -251,8 +261,14 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
             suffixType = '}';
             newParentKey = "additionalProperties";
           }
+        /*
+        } else if(key === 'definition' && "oneOf" in value) {
+          // widgets
+          console.log(key, value, value.oneOf);
+          childData = value.oneOf;
+          prefixType = '{';
+          suffixType = '}';*/
         }
-
 
         // choose the example to use
         // parent -> current level -> one deep
@@ -675,6 +691,20 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             newParentKey = "additionalProperties";
           }
         }
+        // for widgets
+        /*
+        if(key === "definition" && value.discriminator) {
+          childData = Object.keys(value.discriminator.mapping)
+            .map((mapkey, indx) => { return {[mapkey]: value.oneOf[indx]} })
+            .reduce((obj, item) => ({...obj, ...item}), {});
+        }
+        */
+        // console.log(childData);
+        // if(childData && "definition" in childData) {
+        //   console.log("YES!!!!")
+        //   console.log(childData)
+        //   childData = value["oneOf"];
+        // }
 
         const isReadOnly = isReadOnlyRow(value);
 
