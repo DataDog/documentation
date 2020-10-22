@@ -366,7 +366,7 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 }
 ```
 
-**Note**: Adding tags in Archives is an opt-in feature - see in this [section](#datadog-tags) how to enable it for an archive.
+**Note**: Adding tags in archives is an opt-in feature - see in this [section](#datadog-tags) how to enable it for an archive.
 
 ## Further Reading
 
