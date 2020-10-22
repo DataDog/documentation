@@ -221,7 +221,7 @@ Use this optional configuration step to assign roles on that archive and restric
 
 Use this configuration optional step to:
 
-* Include all log tags in your archives (activated by default). **Note**: this increases the size of resulting archives.  
+* Include all log tags in your archives (activated by default on all new archives). **Note**: this increases the size of resulting archives.  
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
@@ -352,7 +352,7 @@ This directory structure simplifies the process of querying your historical log 
 
 Within the zipped JSON file, each event’s content is formatted as follows:
 
-```text
+```json
 {
     "_id": "123456789abcdefg",
     "date": "2018-05-15T14:31:16.003Z",
@@ -360,8 +360,9 @@ Within the zipped JSON file, each event’s content is formatted as follows:
     "source": "source_name",
     "service": "service_name",
     "status": "status_level",
-    "message": " ... log message content ... ",
-    "attributes": { ... log attributes content ... }
+    "message": "2018-05-15T14:31:16.003Z INFO rid="acb-123" status=403 method=PUT",
+    "attributes": { "rid": "abc-123", "http": { "status_code": 403, "method": "PUT" } }
+    "tags": [ "env:prod", "team:acme" ]
 }
 ```
 
