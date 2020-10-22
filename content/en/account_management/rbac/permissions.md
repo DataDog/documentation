@@ -35,110 +35,7 @@ By default, existing users are already associated with one of the three out-of-t
 
 In addition of the general permissions, it is possible to define more granular permissions for specific assets or data types. Permissions can be either global or scoped to a subset of elements. Find below the details of these options and the impact they have on each available permission.
 
-## Access management
-
-Find below the list of permissions for Access Management:
-
-| Name                    | Description                                                                               | Scopable |
-| ----------------------- | ----------------------------------------------------------------------------------------- | -------- |
-| `user_access_manage`         | Grants the permission to disable users, manage user roles and SAML-to-role mappings. | false    |
-| `user_access_invite`         | Allows users to invite other users to your organization.                             | false    |
-
-## API and application keys
-
-The following permissions are available for API and application keys:
-
-| Name                    | Description                                                                                     | Scopable |
-| ----------------------- | ----------------------------------------------------------------------------------------------- | -------- |
-| `user_app_keys`         | Grants the user the ability to create, view, and manage application keys they own.         | false    |
-| `org_app_keys_read`     | Grants the user the ability to list application keys owned by all users in the organization.       | false    |
-| `org_app_keys_write`    | Grants the user the ability to manage application keys owned by all users in the organization.     | false    |
-
-## Dashboards
-
-Find below the list of permissions for the dashboard assets:
-
-| Name                    | Description                             | Scopable |
-| ----------------------- | --------------------------------------- | -------- |
-| `dashboards_read`         | Ability to view dashboards              | false    |
-| `dashboards_write`        | Ability to create and change dashboards | false    |
-| `dashboards_public_share` | Ability to share dashboards externally  | false    |
-
-## Monitors
-
-Find below the list of permissions for the monitor assets:
-
-| Name              | Description                                  | Scopable |
-| ----------------- | -------------------------------------------- | -------- |
-| `monitors_read`     | Ability to view monitors                     | false    |
-| `monitors_write`    | Ability to change, mute, and delete monitors | false    |
-| `monitors_downtime` | Ability to set downtimes for your monitors   | false    |
-
-## Security Monitoring
-
-Find below the list of permissions for the Security Monitoring assets:
-
-| Name                             | Description                                         | Scopable |
-| -------------------------------- | --------------------------------------------------- | -------- |
-| `security_monitoring_rules_read`   | Ability to view detection rules                     | false    |
-| `security_monitoring_rules_write`  | Ability to create, edit, and delete detection rules | false    |
-| `security_monitoring_signals_read` | Ability to view security signals                    | false    |
-
-## APM
-
-Below is a list of the permissions currently available for APM:
-
-| Name                             | Description                                         | Scopable |
-| -------------------------------- | --------------------------------------------------- | -------- |
-| `apm_read` | The ability to read and query APM and Trace Analytics. | false |
-| `apm_service_ingest_read` | The ability to access Service Ingestion pages. A user with this permission can view the service ingestion page, list of root service, their statistics, and creation info. | false |
-| `apm_service_ingest_write` | The ability to edit Service Ingestion pages root services. A user with this permission can edit the root service ingestion and generate a code snippet to increase ingestion per service. | false |
-| `apm_retention_filter_read` | The ability to read trace retention filters. A user with this permission can view the retention filters page, list of filters, their statistics, and creation info. | false |
-| `apm_retention_filter_write` | The ability to create, edit and delete trace retention filters. A user with this permission can create new retention filters, and update or delete to existing retention filters. | false |
-
-## Real User Monitoring
-
-Below is a list of the permissions currently available for Real User Monitoring:
-
-| Name                             | Description                                         | Scopable |
-| -------------------------------- | --------------------------------------------------- | -------- |
-| `rum_apps_write` | The ability to create, edit and delete RUM Applications. | false |
-
-## Metrics
-
-Below is a list of the permissions currently available for the Metrics Management:
-
-| Name                             | Description                                         | Scopable |
-| -------------------------------- | --------------------------------------------------- | -------- |
-| `metric_tags_read` | The ability to view the tag configuration modal for any custom metric. A user with this permission will be able to view the relevant tag configuration applied to any custom metric. | false |
-| `metric_tags_write` | The ability to edit and save tag configurations for custom metrics. | false |
-
-## Log Management
-
-Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you'd assign this permission to. See the recommendations on how to assign permissions to team members in the [Logs RBAC guide][3].
-
-| Name                                                           | Description                                | Scopable |  Typical User |
-| -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
-| [`logs_read_data`](#logs_read_data)                            | Read access to log data                    | true     | Read-Only     |
-| [`logs_modify_indexes`](#logs_modify_indexes)                  | Update the definition of log indexes       | false    | Admin         |
-| [`logs_write_facets`](#logs_write_facets)                      | Create, Update and Delete Log Facets       | false    | Standard      |
-| [`logs_write_exclusion_filters`](#logs_write_exclusion_filters)| Update indexes exclusion filters           | true     | Standard      |
-| [`logs_write_pipelines`](#logs_write_pipelines)                | Update log pipelines                       | false    | Admin         |
-| [`logs_write_processors`](#logs_write_processors)              | Update the log processors in a pipeline    | true     | Standard      |
-| [`logs_write_archives`](#logs_write_archives)                  | Update the external archives configuration | false    | Admin         |
-| [`logs_read_archives`](#logs_read_archives)                    | See archive configuration details, access content from the archive | true     | Standard |
-| [`logs_write_historical_views`](#logs_write_historical_views)  | Rehydrate data from Archives               | false    | Standard      |
-| [`logs_public_config_api`](#logs_public_config_api)            | Access the Logs Public Config API (r/w)    | false    | Admin         |
-| [`logs_generate_metrics`](#logs_generate_metrics)              | Access the Generate Metrics feature        | false    | Standard      |
-
-
-Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive `logs_read_data` permission:
-
-| Name                                              | Description                                | Scopable |  Typical User |
-| ------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
-| [`logs_live_tail`](#logs_live_tail)               | Access the live tail feature               | false    | Read-Only     |
-| [`logs_read_index_data`](#logs_read_index_data)  | Read a subset log data (index based)       | true     | Read-Only     |
-
+{{% permissions %}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -327,7 +224,7 @@ In the example above:
 * `PROD` Role members **cannot** rehydrate from the `Audit Archive`, as they do not have the Read Archive permission.
 
 
-When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][14].  
+When assigning `team:audit` tags on all logs rehydrated from the `Audit Archive`, make sure that `Audit` role members who are restricted to read `team:audit`logs  can only access rehydrated content. For more details on how to add tags and rehydration, see the [Log Archive Setup section][14].
 
 For `service:ci-cd` logs that are rehydrated from the `Prod Archive`, note the following:
 

@@ -1,0 +1,24 @@
+{{ $permissions := $.Site.Data.permissions }}
+
+{{- range $group, $value := $permissions -}}
+  <h2>{{ $group }}</h2>
+  <p>Find below the list of permissions for the {{ lower $group }} assets:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Scopable</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $value -}}
+        <tr>
+          <td><code>{{- .attributes.name -}}</code></td>
+          <td>{{- .attributes.description -}}</td>
+          <td>tbd</td>
+        </tr>
+      {{- end -}}
+    </tbody>
+  </table>
+{{- end -}}

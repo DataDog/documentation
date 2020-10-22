@@ -17,7 +17,13 @@ if [ ${RUN_SERVER} = true ]; then
     args="${args} --token 'false'"
 	fi
 
-  update_pre_build.py "${args}"
+  # update_pre_build.py "${args}"
+
+	# rbac permissions 
+	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
+		echo "Pulling RBAC permissions."
+		pull_rbac.py ${DD_API_KEY} ${DD_APP_KEY}
+	fi
 
   # placeholders
 	if [ ${CREATE_I18N_PLACEHOLDERS} == true ]; then
