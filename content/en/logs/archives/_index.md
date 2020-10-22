@@ -366,7 +366,7 @@ Within the zipped JSON file, each event’s content is formatted as follows:
 }
 ```
 
-**Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. By default, the log tags (metadata that connects your log data to related metrics and traces) are not included.
+**Note**: Adding tags in Archives is an opt-in feature - see in this [section](#datadog-tags) how to enable it for an archive.
 
 ## Further Reading
 
