@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Kinesis のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_kinesis/'
+draft: false
 git_integration_title: amazon_kinesis
 has_logo: true
 integration_title: Amazon Kinesis

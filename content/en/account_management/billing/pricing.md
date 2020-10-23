@@ -25,7 +25,10 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 * Datadog records the number of unique **APM hosts** you are monitoring in the Datadog APM service each hour.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* An **Analyzed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of Analyzed Spans submitted to the Datadog APM service.
+* An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
+
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
+
 
 ## Log management
 
@@ -63,12 +66,13 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][3].
+For technical questions, contact [Datadog support][4].
 
-Contact [Sales][4] or your [Customer Success][5] Manager to discuss hourly pricing or billing for your account.
+Contact [Sales][5] or your [Customer Success][6] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /developers/metrics/custom_metrics/
-[3]: /help/
-[4]: mailto:sales@datadoghq.com
-[5]: mailto:success@datadoghq.com
+[3]: /tracing/trace_retention_and_ingestion/#retention-filters
+[4]: /help/
+[5]: mailto:sales@datadoghq.com
+[6]: mailto:success@datadoghq.com

@@ -30,10 +30,14 @@ The APM UI provides many tools to troubleshoot application performance and corre
 | [Monitors][1]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
 | [Span](#spans)                  | A span represents a logical unit of work in a distributed system for a given time period. Multiple spans construct a trace.                                                                                          |
+| [Top Level Span](#top-level-span) | A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.                                                                                            |
 | [Trace metrics](#trace-metrics) | Trace metrics are automatically collected and kept with a 15-month retention policy similar to other [Datadog metrics][2]. They can be used to identify and alert on hits, errors, or latency.                       |
-| [App Analytics](#app-analytics) | App Analytics is used to filter Analyzed Spans by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags.                                                                                |
-| [Analyzed Span](#analyzed-span) | Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics.                                                                                                |
-| [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*.                                                                                                    |
+| [Indexed Span](#indexed-span) | Indexed Spans represent all spans indexed by retention filters or legacy App Analytics analyzed spans and can be used to search, query, and monitor in *Analytics*.                                                                                                |
+| [Span tags](#span-tags)         | Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*.                                                                                                    |
+| [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
+| [Ingestion Controls](#ingestion-controls) | Ingestion Controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.                                                                                              |
+
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 ## Services
 
@@ -75,9 +79,22 @@ A trace is used to track the time spent by an application processing a request a
 
 A span represents a logical unit of work in the system for a given time period. Each span consists of a `span.name`, start time, duration, and [span tags](#span-tags). For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger request. Spans can be nested within each other, which creates a parent-child relationship between the spans.
 
-For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [App Analytics][14].
+For the example below, the span `rack.request` is the entry-point span of the trace. This means the web-store service page is displaying resources that consist of traces with an entry-point span named `rack.request.` The example also shows the tags added application side (`merchant.name`, `merchant.tier`, etc). These user-defined tags can be used to search and analyze APM data in [Analytics][14].
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="span" >}}
+
+## Top Level Span
+
+A span is a top level span when it is the entrypoint method for a request to a service.  You can visualize this within Datadog APM when the color of the immediate parent on a flamegraph is a different color.  Services are also listed on the right when viewing a flamegraph.
+
+For the example below, the top level spans are:
+- rack.request
+- aspnet_coremvc.request
+- The topmost green span below aspnet_coremvc.request
+- Every orange mongodb span
+
+{{< img src="tracing/visualization/toplevelspans.png" alt="span" >}}
+
 
 ## Trace Metrics
 
@@ -97,31 +114,39 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-## App Analytics
+## Trace Search and Analytics
 
-App Analytics is used to filter [Analyzed Spans](#analyzed-span) by user-defined tags (customer_id, error_type, app_name, etc.) or infrastructure tags. This allows deep exploration of the web requests flowing through your service along with being able to search, graph, and monitor on 100% throughput of hits, errors, and latency. This feature can be enabled with [automatic configuration][17].
+[Search and perform analytics][14] on 100% of ingested traces for 15 minutes and all [indexed spans](#indexed-span) for 15 days.
 
-{{< wistia vrmqr812sz >}}
+## Indexed span
 
-## Analyzed Span
+**Note:** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
-Analyzed Spans represent 100% throughput of a request and can be used to search, query, and monitor in App Analytics by the [tags](#span-tags) included on the span. After enabling App Analytics, the tracing client analyzes an entry-point span for web services by default, with the ability to [configure additional services][18] in your application. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans. If you set `DD_TRACE_ANALYTICS_ENABLED=true` the `web-store` service analyzes all `rack.request` spans and makes them available in App Analytics. For this example, you can graph the top 10 merchants highest latency in the 99th percentile. `merchant_name` is a user defined tag that was applied to the span in the application.
+Indexed Spans represent spans indexed by a [retention filter](#retention-filters) stored in Datadog for 15 days that can be used to search, query, and monitor in [Trace Search and Analytics][14] by the [tags](#span-tags) included on the span.
 
 <div class="alert alert-info">
-You can run an estimate on the number of Analyzed Spans that would be generated from your services with the <a href="https://app.datadoghq.com/apm/docs/trace-search">Analyzed Span Estimator</a>. After ingestion, you can filter Analyzed Spans from 100% to a lower percentage on a service-by-service level under <a href="https://app.datadoghq.com/apm/settings">APM settings</a>. This reduces billable Analyzed Spans.
+After ingestion, by creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag based retention filters</a> you can control and visualize exactly how many spans are being indexed per service.
 </div>
 
 ## Span tags
 
-Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *App Analytics*. Tags can be added to a single span or globally to all spans. For the example below, the requests (`merchant.store_name`, `merchant.tier`, etc.) have been added as tags to the span.
+Tag spans in the form of key-value pairs to correlate a request in the *Trace View* or filter in *Analytics*. Tags can be added to a single span or globally to all spans. For the example below, the requests (`merchant.store_name`, `merchant.tier`, etc.) have been added as tags to the span.
 
 {{< img src="tracing/visualization/span_tag.png" alt="span tag" >}}
 
 To get started tagging spans in your application, check out this [walkthrough][12].
 
-After a tag has been added to a span, search and query on the tag in App Analytics by clicking on the tag to add it as a [facet][19]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
+After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][17]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
+
+## Retention Filters
+
+[Set tag-based filters][18] in the Datadog UI to index spans for 15 days for use with [Trace Search and Analytics](#trace-search-and-analytics)
+
+## Ingestion Controls
+
+[Send 100% of traces][19] from your services to Datadog and combine with [tag-based retention filters](#retention-filters) to keep traces that matter for your business for 15 days.
 
 ## Further Reading
 
@@ -140,9 +165,9 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 [11]: /tracing/connect_logs_and_traces/
 [12]: /tracing/guide/adding_metadata_to_spans/
 [13]: /tracing/runtime_metrics/
-[14]: /tracing/app_analytics/
+[14]: /tracing/trace_search_and_analytics/
 [15]: https://app.datadoghq.com/metric/summary
 [16]: https://app.datadoghq.com/monitors#/create
-[17]: /tracing/app_analytics/#automatic-configuration
-[18]: /tracing/app_analytics/#configure-additional-services-optional
-[19]: /tracing/app_analytics/search/#facets
+[17]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[18]: /tracing/trace_retention_and_ingestion/#retention-filters
+[19]: /tracing/trace_retention_and_ingestion/#ingestion-controls

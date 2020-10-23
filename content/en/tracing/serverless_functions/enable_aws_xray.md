@@ -20,7 +20,7 @@ xray:GetTraceSummaries
 
 3. If you are using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
 
-**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Analyzed Spans which can increase your bill.
+**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Indexed Spans which can increase your bill.
 
 ### Enabling AWS X-Ray for your functions
 

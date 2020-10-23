@@ -34,6 +34,22 @@ further_reading:
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ"  style="width:80%;">}}
 
+高度なタグ値のフィルタリングはブールフィルターでも使用できます。次のブール構文がサポートされます。
+
+* `NOT`, `!`
+* `AND`, `,`
+* `OR`
+* `key IN (tag_value1, tag_value2,...)`
+* `key NOT IN (tag_value1, tag_value2,...)`
+
+`AND`、`OR` を使用して、特定のタグ全体のメトリクスを確認します。
+
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター"  style="width:80%;">}}
+
+`IN`、`NOT IN` を使用して、メトリクスを特定のタグにフィルタリングします。
+
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター"  style="width:80%;">}}
+
 タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:coffee-house` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ"  style="width:80%;">}}

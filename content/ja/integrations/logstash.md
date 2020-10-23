@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md'
 display_name: Logstash
+draft: false
 git_integration_title: logstash
 guid: 9d110885-cbdf-44e5-83b8-7a6514724e98
 integration_id: logstash

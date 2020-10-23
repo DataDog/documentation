@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md'
 display_name: Twemproxy
+draft: false
 git_integration_title: twemproxy
 guid: a5cca58a-9984-4226-ad1c-8dff73c9d6ac
 integration_id: twemproxy

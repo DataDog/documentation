@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/process/README.md'
 display_name: プロセス
+draft: false
 git_integration_title: プロセス
 guid: 1675eced-b435-464a-8f84-f65e438f838e
 integration_id: システム

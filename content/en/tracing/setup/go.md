@@ -40,7 +40,7 @@ Follow the [Quickstart instructions][6] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+- Enable the Continuous Profiler, ingesting 100% of traces , and Trace ID injection into logs during setup.
 
 Otherwise, [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 
@@ -90,7 +90,7 @@ func main() {
 
 ### Change Agent Hostname
 
-The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_AGENT_APM_PORT`.
+The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
 But you can also set a custom hostname and port in code:
 
@@ -119,7 +119,7 @@ The [APM environment name][12] may be configured [in the agent][13] or using the
 
 ### B3 Headers Extraction and Injection
 
-The Datadog APM tracer supports [B3 headers extraction][74] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][14] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -156,3 +156,4 @@ extracted value is used.
 [11]: /getting_started/tagging/unified_service_tagging
 [12]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [13]: /getting_started/tracing/#environment-name
+[14]: https://github.com/openzipkin/b3-propagation

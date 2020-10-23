@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Batch Service のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_batch/'
+draft: false
 git_integration_title: azure_batch
 has_logo: true
 integration_title: Microsoft Azure Batch
@@ -41,7 +42,7 @@ Azure Batch Service は、Azure アプリケーション用のマネージド型
 
 Azure Batch Service インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 Azure Batch Service インテグレーションには、サービスのチェック機能は含まれません。
 

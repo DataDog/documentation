@@ -22,6 +22,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kafka/README.md'
 display_name: Kafka
+draft: false
 git_integration_title: kafka
 guid: f201c0b7-4b31-4528-9955-ae756a4580b8
 integration_id: kafka

@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Azure SQL Elastic Pool の主要メトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_elastic_pool/'
+draft: false
 git_integration_title: azure_sql_elastic_pool
 has_logo: true
 integration_title: Microsoft Azure SQL Elastic Pool

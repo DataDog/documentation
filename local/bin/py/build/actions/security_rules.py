@@ -76,7 +76,7 @@ def security_rules(content, content_dir):
                     if 'configuration' in relative_path:
                         page_data['rule_category'].append('Cloud Configuration')
                     if 'security-monitoring' in relative_path:
-                        page_data['rule_category'].append('Logs Detection')
+                        page_data['rule_category'].append('Log Detection')
                     if 'runtime' in relative_path:
                         page_data['rule_category'].append('Runtime Agent')
 

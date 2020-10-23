@@ -12,6 +12,7 @@ ddtype: crawler
 dependencies: []
 description: 不審な AWS アカウントアクティビティを警告。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_cloudtrail/'
+draft: false
 git_integration_title: amazon_cloudtrail
 has_logo: true
 integration_title: AWS CloudTrail

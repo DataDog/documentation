@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: 'https://docs.datadoghq.com/integrations/opsgenie/'
+draft: false
 git_integration_title: opsgenie
 has_logo: true
 integration_title: OpsGenie
@@ -21,13 +22,13 @@ version: '1.0'
 
 `@opsgenie` を使用して、次の方法でアラートを作成できます。
 
-- イベントストリームから
-- スナップショットを取得して
-- メトリクスアラートがトリガーされたときに
+- イベントストリームから作成
+- スナップショットを取得して作成
+- メトリクスアラートがトリガーされたときに作成
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### OpsGenie で Datadog インテグレーションを作成する
 

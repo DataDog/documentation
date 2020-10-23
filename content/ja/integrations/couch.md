@@ -20,6 +20,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/couch/README.md'
 description: Apache CouchDB は、MapReduce 方式で JavaScript を使用してクエリおよびインデックスを作成できるドキュメント指向のデータベースです。
 display_name: CouchDB
+draft: false
 git_integration_title: couch
 guid: 9e7ed68c-669a-40f0-8564-548d49aa8098
 integration_id: couchdb

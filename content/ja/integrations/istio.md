@@ -19,6 +19,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/istio/README.md'
 description: istio インテグレーションで、istio サービスメッシュおよびミキサーからデータを収集。
 display_name: Istio
+draft: false
 git_integration_title: istio
 guid: d8bd53c0-0884-4357-9517-11858bf6aa9d
 integration_id: istio
@@ -71,7 +72,7 @@ Istio に接続するには、`istio.d/conf.yaml` ファイル ([Agent の構成
     init_config:
 
     instances:
-      - istiod_endpoint: http://istiod.istio-system:8080/metrics
+      - istiod_endpoint: http://istiod.istio-system:15014/metrics
     ```
 
    Istio メッシュメトリクスを監視するには、引き続き `istio_mesh_endpoint` を使用します。Istio メッシュメトリクスは、現在対応するオートディスカバリーを使用した `istio-proxy` コンテナからのみ利用可能です。[`istio.d/auto_conf.yaml`][5] を参照してください。

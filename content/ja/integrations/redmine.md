@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
 doc_link: 'https://docs.datadoghq.com/integrations/redmine/'
+draft: false
 git_integration_title: redmine
 has_logo: true
 integration_title: Redmine

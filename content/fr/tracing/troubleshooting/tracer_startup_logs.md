@@ -130,6 +130,7 @@ Accédez aux logs de lancement en tant que chaîne JSON lors de l'exécution ave
 ```php
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
+
 [1]: /fr/tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{% /tab %}}
 

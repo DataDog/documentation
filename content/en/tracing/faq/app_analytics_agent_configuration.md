@@ -4,7 +4,14 @@ kind: Documentation
 aliases:
   - /tracing/trace_search_and_analytics/agent_trace_search/
   - /tracing/app_analytics/agent_trace_search/
+  - /tracing/guide/app_analytics_agent_configuration/
 ---
+
+<div class="alert alert-danger">
+On October 20, 2020, App Analytics was replaced by Tracing without Limits. This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
+<br>
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
+</div>
 
 [App Analytics][1] is used to filter APM data by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
@@ -14,7 +21,7 @@ aliases:
 **Note**: To enable App Analytics with the Agent, [services][1] must be already flowing into Datadog.
 
 1. Once [your services are set up][4], navigate to the [App Analytics docs page][5] to find a list of [services][6] and [resource][7] names available for use in Trace Search.
-3. Select the `environment` and `services` from which to extract [Analyzed Spans][8].
+3. Select the `environment` and `services` from which to extract [Indexed Spans][8].
 2. Update your Datadog Agent configuration (based on Agent version) with the information below:
 
 {{< tabs >}}

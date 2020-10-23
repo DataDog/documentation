@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: 複数のアプリケーションのエラー率の変化を一元的に追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/bugsnag/'
+draft: false
 git_integration_title: bugsnag
 has_logo: true
 integration_title: Bugsnag
@@ -33,7 +34,7 @@ Bugsnag は、Web およびモバイルアプリケーション用の自動ク�
 
 インストールは必要ありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Bugsnag を Datadog と統合するには、以下の手順に従います。
 

@@ -7,9 +7,13 @@ aliases:
   - /tracing/advanced_usage/
 ---
 
-{{< wistia vrmqr812sz >}}
-</br>
-[App Analytics][1], formerly known as Trace Search & Analytics, is used to filter Analyzed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
+<div class="alert alert-danger">
+On October 20, 2020, App Analytics was replaced by Tracing without Limits.  This is a deprecated page with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. Now, instead, use Tracing without Limits™ to have full control over your <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion">data ingestion and trace retention</a> with no sampling.
+<br>
+Migrate to <a href="https://docs.datadoghq.com/tracing/trace_retention_and_ingestion"> Trace Retention and Ingestion </a> to use the new functionality.
+</div>
+
+[App Analytics][1] is used to filter Indexed Spans by user-defined tags such as `customer_id`, `error_type`, or `app_name` to help troubleshoot and filter your requests. To enable it, either:
 
 * Configure your APM tracer to emit the relevant analytics from your services—this can be done either [automatically](#automatic-configuration) or [manually](#custom-instrumentation). Next, [enable App Analytics inside Datadog][1] to begin forwarding these analytics.
 
@@ -364,11 +368,11 @@ class MyClass {
   }
 }
 ```
-**Note:** App analytics for [dd.trace.methods][8] or [trace annotations][9] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
+**Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
-[8]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
-[9]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 
+[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -468,18 +472,4 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 {{% /tab %}}
 {{< /tabs >}}
 
-## Span filtering
-
-An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Analyzed Span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
-
-Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
-
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" >}}
-
-[1]: https://app.datadoghq.com/apm/search/analytics
-[2]: /tracing/visualization/#apm-event
-[3]: /tracing/visualization/#spans
-[4]: /tracing/visualization/#services
-[5]: https://app.datadoghq.com/apm/settings
-[6]: /tracing/visualization/#trace
-[7]: /account_management/billing/apm_distributed_tracing/
+[1]: https://app.datadoghq.com/apm/analytics

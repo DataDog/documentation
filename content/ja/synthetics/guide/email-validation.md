@@ -66,5 +66,6 @@ UI の左上にある **Start Recording** ボタンを押して、今作成さ�
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/synthetics/browser_tests
 [2]: 2

@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: リクエストレイテンシー、種類別リクエスト数、バケットサイズなどを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_s3/'
+draft: false
 git_integration_title: amazon_s3
 has_logo: true
 integration_title: Amazon S3
@@ -63,7 +64,7 @@ S3 バケットを選択し、Properties タブをクリックします。
 
 ログの書き込み先になる S3 バケットを選択します。詳細については、[S3 AWS のドキュメント][7]を参照してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、S3 アクセスログを収集する方法を以下の 2 つから選択します。

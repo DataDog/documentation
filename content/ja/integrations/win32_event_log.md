@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md'
 display_name: Win32
+draft: false
 git_integration_title: win32_event_log
 guid: b04d6f04-947c-4068-b73d-f861adc39959
 integration_id: win32-event-log

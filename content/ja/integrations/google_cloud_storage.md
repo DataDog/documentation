@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Google Cloud Storage の主要メトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_storage/'
+draft: false
 git_integration_title: google_cloud_storage
 has_logo: true
 integration_title: Google Storage
@@ -16,7 +17,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_storage
 public_title: Datadog-Google Storage インテグレーション
-short_description: Google Cloud Storage の主要メトリクスを追跡します。
+short_description: Google Cloud Storage の主要メトリクスを追跡。
 version: '1.0'
 ---
 ## 概要
@@ -34,7 +35,7 @@ Google Storage からメトリクスを取得して、以下のことができ�
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### 構成
+#### コンフィギュレーション
 
 カスタム Cloud Storage ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 

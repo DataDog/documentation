@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog アラートとグラフを Moxtra に送信。
 doc_link: 'https://docs.datadoghq.com/integrations/moxtra/'
+draft: false
 git_integration_title: moxtra
 has_logo: true
 integration_title: Moxtra

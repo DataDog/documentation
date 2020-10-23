@@ -24,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md'
 display_name: Redis
+draft: false
 git_integration_title: redisdb
 guid: 0e2f3ed1-d36b-47a4-b69c-fedb50adf240
 integration_id: redis

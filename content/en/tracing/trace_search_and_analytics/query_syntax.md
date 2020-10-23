@@ -1,19 +1,29 @@
 ---
-title: Trace Search
+title: Query Syntax
 kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
-  - /tracing/trace_search_analytics/
-  - /tracing/trace_search/
-  - /tracing/search
-  - /tracing/getting_further/apm_events/
-  - /tracing/trace_search_and_analytics/search/
-  - /tracing/search/
-  - /tracing/advanced/search/
+ - /tracing/trace_search_analytics/
+ - /tracing/trace_search/
+ - /tracing/search
+ - /tracing/getting_further/apm_events/
+ - /tracing/trace_search_and_analytics/search/
+ - /tracing/search/
+ - /tracing/advanced/search/
+ - /tracing/app_analytics/search
+ - /tracing/live_search_and_analytics/search
+ - /tracing/trace_search_analytics/analytics
+ - /tracing/analytics
+ - /tracing/visualization/analytics
+ - /tracing/trace_search_and_analytics/analytics/
+ - /tracing/app_analytics/analytics
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
+- link: "/tracing/visualization/trace/"
+  tag: "Documentation"
+  text: "Understand how to read a Datadog Trace"
 - link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
@@ -23,12 +33,6 @@ further_reading:
 - link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "/tracing/visualization/trace/"
-  tag: "Documentation"
-  text: "Understand how to read a Datadog Trace"
-- link: "/tracing/app_analytics/analytics/"
-  tag: "Documentation"
-  text: "Analytics on your APM data at infinite cardinality"
 ---
 
 ## Search bar
@@ -122,21 +126,11 @@ To delete a saved search, click on the bin icon under the Trace search drop-down
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
 
-{{< img src="tracing/app_analytics/search/time_frame.png" style="width:50%;" alt="Select time frame" >}}
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
 ## Trace Stream
 
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
-
-### Traces vs Analyzed Spans
-
-In the Trace Stream, select **View in App Analytics** to view Traces and Analyzed Spans. Choose to display a sampled trace associated with your Analyzed Spans by clicking the **Traces** button in the upper right corner:
-
-{{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
-
-If **Traces** is selected, Analyzed Spans listed in the trace stream have a sampled trace associated with them. If **Analyzed Spans** is selected, only the Analyzed Spans are listed in the trace stream.
-
-When a request hits a [service][4] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][5]. An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request generates 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][6]. To start collecting Analyzed Spans, [enable App Analytics for your services][6].
 
 ### Displaying a full Trace
 
@@ -208,13 +202,117 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
 
+## Analytics Overview
+
+Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
+
+Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
+
+Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
+
+## Analytics query
+
+Use the query to control what's displayed in your Analytics:
+
+1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
+
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
+
+2. Select the aggregation function for the `Duration` metric:
+
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
+
+3. Use a tag or facet to split your Analytic.
+
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
+
+4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
+
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
+
+5. Choose the Analytic Timesteps.
+ Changing the global timeframe changes the list of available Timesteps values.
+
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
+
+## Visualizations
+
+Select an Analytics visualization type using the Analytic selector:
+
+* [Timeseries](#timeseries)
+* [Top List](#top-list)
+* [Table](#table)
+
+### Timeseries
+
+Visualize the evolution of the `Duration` metric (or a facet unique count of values) over a selected time frame, and (optionally) split by an available facet.
+
+The following timeseries Analytics shows the evolution of the **pc99** **duration** by steps of **5min** for each **Service**
+
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
+
+### Top List
+
+Visualize the top values from a facet according to their `Duration` (or a facet unique count of values).
+
+The following Top List Analytics shows the top **pc99** **duration** of **Service**:
+
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
+
+### Table
+
+Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or drill through logs corresponding to either dimension.
+
+* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+* When there are multiple measures, the top or bottom list is determined according to the first measure.
+* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+
+**Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+
+The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example"  style="width:90%;">}}
+
+## Related Traces
+
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
+
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces"  style="width:40%;">}}
+
+## Export
+
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button"  style="width:40%;">}}
+
+Export your Analytics:
+
+* To a new [APM monitor][11]
+* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
+
+**Note:** Analytics can be exported only when powered by [indexed spans][14].
+
+## Traces in Dashboard
+
+Export [Analytics][4] from the Trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
+
+[Learn more about the timeseries widget][16].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#integrations
 [2]: /getting_started/tagging/#tags-best-practices
-[3]: /dashboards/guide/custom_time_frames
-[4]: /tracing/visualization/#services
-[5]: /tracing/guide/adding_metadata_to_spans/
-[6]: /tracing/app_analytics/#configure-additional-services-optional
+[3]: /dashboards/guide/custom_time_frames/
+[4]: /tracing/trace_search_and_analytics/
+[5]: /tracing/visualization/#apm-event
+[6]: /tracing/visualization/#services
+[7]: /tracing/trace_retention_and_ingestion/#retention-filters
+[8]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[9]: /tracing/trace_search_and_analytics/query_syntax/#measures
+[10]: /tracing/visualization/#trace
+[11]: /monitors/monitor_types/apm/
+[12]: /dashboards/timeboard/
+[13]: /help/
+[14]: /tracing/visualization/#indexed-span
+[15]: /dashboards/
+[16]: /dashboards/widgets/timeseries/

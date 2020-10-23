@@ -9,7 +9,7 @@ further_reading:
 ---
 La bibliothèque de tracing Datadog Python est open source. Consultez le [référentiel GitHub][1] pour en savoir plus.
 
-Les versions `2.7` et `3.4` et les versions ultérieures de Python sont prises en charge.
+Les versions `2.7+` et `3.5+` de Python sont prises en charge dans la dernière version du traceur. Python `3.4` est pris en charge dans la version `0.35.x` et les versions antérieures du traceur Python.
 
 ## Intégrations
 
@@ -19,7 +19,7 @@ Pour demander la prise en charge d'une autre bibliothèque, contactez notre [for
 
 La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris :
 
-| Framework                 | Version prise en charge | Documentation PyPi de Datadog                                         |
+| Framework                 | Version prise en charge | Documentation de la bibliothèque                                              |
 | ------------------------- | ----------------- | ------------------------------------------------------------------ |
 | [aiohttp][3]             | >= 1.2            | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
 | [Bottle][4]              | >= 0.11           | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
@@ -37,7 +37,7 @@ La bibliothèque `ddtrace` prend en charge de nombreux frameworks Web, y compris
 
 La bibliothèque `ddtrace` prend en charge les datastores suivants :
 
-| Datastore                          | Version prise en charge | Documentation PyPi de Datadog                                                                    |
+| Datastore                          | Version prise en charge | Documentation de la bibliothèque                                                                         |
 | ---------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
 | [Cassandra][12]                    | >= 3.5            | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
 | [Elasticsearch][13]                | >= 1.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
@@ -57,11 +57,12 @@ La bibliothèque `ddtrace` prend en charge les datastores suivants :
 | [SQLite3][30]                      | Prise en charge complète   | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][31]                      | >= 0.6            | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
+
 ### Compatibilité des bibliothèques
 
 La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 
-| Bibliothèque           | Version prise en charge | Documentation PyPi de Datadog                                               |
+| Bibliothèque           | Version prise en charge | Documentation de la bibliothèque                                                    |
 | ----------------- | ----------------- | ------------------------------------------------------------------------ |
 | [asyncio][32]     | Prise en charge complète   | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
 | [gevent][33]      | >= 1.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
@@ -84,43 +85,43 @@ La bibliothèque `ddtrace` prend en charge les bibliothèques suivantes :
 
 [1]: https://github.com/DataDog/dd-trace-py
 [2]: /fr/help
-[3]: https://aiohttp.readthedocs.io
-[4]: https://bottlepy.org
-[5]: https://www.djangoproject.com
-[6]: https://falconframework.org
-[7]: http://flask.pocoo.org
-[8]: https://moltenframework.com
-[9]: http://pylonsproject.org
-[10]: https://trypyramid.com
-[11]: http://www.tornadoweb.org
-[12]: https://cassandra.apache.org
-[13]: https://www.elastic.co/products/elasticsearch
-[14]: https://pythonhosted.org/Flask-Cache
-[15]: https://memcached.org
-[16]: http://sendapatch.se/projects/pylibmc
-[17]: https://pymemcache.readthedocs.io
-[18]: https://www.mongodb.com/what-is-mongodb
-[19]: http://mongoengine.org
-[20]: https://api.mongodb.com/python/current
-[21]: https://www.mysql.com
-[22]: https://pypi.org/project/MySQL-python
-[23]: https://pypi.org/project/mysqlclient
-[24]: https://www.postgresql.org
-[25]: https://aiopg.readthedocs.io
-[26]: http://initd.org/psycopg
-[27]: https://redis.io
-[28]: https://redis-py-cluster.readthedocs.io
-[29]: https://www.sqlalchemy.org
-[30]: https://www.sqlite.org
-[31]: https://www.vertica.com
-[32]: https://docs.python.org/3/library/asyncio.html
-[33]: http://www.gevent.org
-[34]: http://docs.pythonboto.org/en/latest
-[35]: http://www.celeryproject.org
-[36]: https://docs.python.org/3/library/concurrent.futures.html
-[37]: https://grpc.io
-[38]: https://docs.python.org/2/library/httplib.html
-[39]: http://jinja.pocoo.org
-[40]: https://kombu.readthedocs.io/en/latest
-[41]: https://www.makotemplates.org
-[42]: http://docs.python-requests.org/en/master
+[3]: http://asgi.readthedocs.io/
+[4]: https://aiohttp.readthedocs.io
+[5]: https://bottlepy.org
+[6]: https://www.djangoproject.com
+[7]: https://falconframework.org
+[8]: http://flask.pocoo.org
+[9]: https://moltenframework.com
+[10]: http://pylonsproject.org
+[11]: https://trypyramid.com
+[12]: http://www.tornadoweb.org
+[13]: https://cassandra.apache.org
+[14]: https://www.elastic.co/products/elasticsearch
+[15]: https://pythonhosted.org/Flask-Cache
+[16]: https://memcached.org
+[17]: http://sendapatch.se/projects/pylibmc
+[18]: https://pymemcache.readthedocs.io
+[19]: https://www.mongodb.com/what-is-mongodb
+[20]: http://mongoengine.org
+[21]: https://api.mongodb.com/python/current
+[22]: https://www.mysql.com
+[23]: https://pypi.org/project/MySQL-python
+[24]: https://pypi.org/project/mysqlclient
+[25]: https://www.postgresql.org
+[26]: https://aiopg.readthedocs.io
+[27]: http://initd.org/psycopg
+[28]: https://redis.io
+[29]: https://redis-py-cluster.readthedocs.io
+[30]: https://www.sqlalchemy.org
+[31]: https://www.sqlite.org
+[32]: https://www.vertica.com
+[33]: https://docs.python.org/3/library/asyncio.html
+[34]: http://www.gevent.org
+[35]: http://docs.pythonboto.org/en/latest
+[36]: http://www.celeryproject.org
+[37]: https://docs.python.org/3/library/concurrent.futures.html
+[38]: https://grpc.io
+[39]: https://docs.python.org/2/library/httplib.html
+[40]: http://jinja.pocoo.org
+[41]: https://kombu.readthedocs.io/en/latest
+[42]: https://www.makotemplates.org

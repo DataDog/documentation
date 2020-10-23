@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
 doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
+draft: false
 git_integration_title: ansible
 has_logo: true
 integration_title: Ansible
@@ -59,7 +60,7 @@ Ansible を使用して、ログ収集を有効にして Datadog Agent をイン
 
 ## 収集データ
 
-### {{< img src="synthetics/create_a_check.png" alt="Create a check" responsive="true" style="width:80%;">}}
+### メトリクス
 {{< get-metrics-from-git "ansible" >}}
 
 

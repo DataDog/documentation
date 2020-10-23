@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
 doc_link: 'https://docs.datadoghq.com/integrations/papertrail/'
+draft: false
 git_integration_title: papertrail
 has_logo: true
 integration_title: PaperTrail
@@ -44,7 +45,7 @@ Papertrail からのメトリクスをキャプチャするには、以下のよ
 
 Papertrail が、選択された間隔で Datadog を更新します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 このインテグレーションに構成手順は必要ありません。
 

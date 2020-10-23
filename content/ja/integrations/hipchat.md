@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
 doc_link: 'https://docs.datadoghq.com/integrations/hipchat/'
+draft: false
 git_integration_title: hipchat
 has_logo: true
 integration_title: HipChat
@@ -27,7 +28,7 @@ Hipchat インテグレーションを使用して、Datadog は、HipChat ル�
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Datadog 用に[新しいアクセストークンを作成します][1]。通知レベルのアクセスだけが必要です。
 2. キーをコピーして、[HipChat インテグレーションタイル][2]に入力します。

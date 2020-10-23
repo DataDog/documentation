@@ -77,6 +77,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'rsyslog.md' \
 		-a -not -name 'sidekiq.md' \
 		-a -not -name 'sinatra.md' \
+		-a -not -name 'snyk.md' \
 		-a -not -name 'stunnel.md' \
 		-a -not -name 'syslog_ng.md' \
 		-a -not -name 'system.md' \

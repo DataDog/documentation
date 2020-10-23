@@ -209,15 +209,22 @@ By default:
 * All Datadog Admin and Standard users can rehydrate from archives
 * All users, including Datadog Read Only users, can access rehydrated logs
 
-Use optional step 5 to assign roles on that archive and restrict who can:
+Use this optional configuration step to assign roles on that archive and restrict who can:
 
 * Edit that archive configuration. See the [logs_write_archive][5] permission.
 * Rehydrate from that archive. See the [logs_read_archives][6] and [logs_write_historical_view][7].
 * Access rehydrated logs in case you use the legacy [Read Index Data permission][8].
 
-Use optional step 6 to add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
-
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
+
+#### Datadog Tags
+
+Use this configuration optional step to:
+
+* Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.  
+* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][9] permission.
+
+{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
 
 #### Storage Class
 
@@ -345,7 +352,7 @@ This directory structure simplifies the process of querying your historical log 
 
 Within the zipped JSON file, each event’s content is formatted as follows:
 
-```text
+```json
 {
     "_id": "123456789abcdefg",
     "date": "2018-05-15T14:31:16.003Z",
@@ -353,12 +360,13 @@ Within the zipped JSON file, each event’s content is formatted as follows:
     "source": "source_name",
     "service": "service_name",
     "status": "status_level",
-    "message": " ... log message content ... ",
-    "attributes": { ... log attributes content ... }
+    "message": "2018-05-15T14:31:16.003Z INFO rid='acb-123' status=403 method=PUT",
+    "attributes": { "rid": "abc-123", "http": { "status_code": 403, "method": "PUT" } },
+    "tags": [ "env:prod", "team:acme" ]
 }
 ```
 
-**Note**: Archives only include log content, which consists of the message, custom attributes, and reserved attributes of your log events. By default, the log tags (metadata that connects your log data to related metrics and traces) are not included.
+**Note**: Adding tags in archives is an opt-in feature - see in the [Datadog tags section](#datadog-tags) to enable it for an archive.
 
 ## Further Reading
 

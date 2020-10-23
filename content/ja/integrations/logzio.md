@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
 display_name: Logz.io
+draft: false
 git_integration_title: logzio
 guid: 0e44f9bd-8c7b-426a-a0ba-8f4302808191
 integration_id: logz-io

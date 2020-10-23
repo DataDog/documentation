@@ -323,6 +323,8 @@
           dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md"]
           title: RUM Browser Monitoring
           kind: documentation
+          aliases:
+            - /real_user_monitoring/setup
     - action: pull-and-push-file
       branch: master
       globs:

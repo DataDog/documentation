@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/network/README.md'
 display_name: Network
+draft: false
 git_integration_title: ネットワーク
 guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: システム

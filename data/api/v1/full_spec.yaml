@@ -1424,6 +1424,9 @@ components:
           description: 'The body of the event. Limited to 4000 characters. The text
             supports markdown.
 
+            To use markdown in the event text, start the text block with `%%% \n`
+            and end the text block with `\n %%%`.
+
             Use `msg_text` with the Datadog Ruby library.'
           example: Oh boy!
           maxLength: 4000
@@ -1517,6 +1520,9 @@ components:
         text:
           description: 'The body of the event. Limited to 4000 characters. The text
             supports markdown.
+
+            To use markdown in the event text, start the text block with `%%% \n`
+            and end the text block with `\n %%%`.
 
             Use `msg_text` with the Datadog Ruby library.'
           example: Oh boy!
@@ -3230,8 +3236,9 @@ components:
         your Organization.
       properties:
         index:
-          description: For multi-index organizations, the log index in which the request
-            is performed. Default to '*' (all indexes).
+          description: The log index on which the request is performed. For multi-index
+            organizations, the default is all live indexes. Historical indexes of
+            rehydrated logs must be specified.
           example: retention-3,retention-15
           type: string
         limit:
@@ -4363,9 +4370,8 @@ components:
         synthetics_check_id:
           deprecated: true
           description: ID of the corresponding Synthetic check.
-          format: int64
           nullable: true
-          type: integer
+          type: string
         threshold_windows:
           $ref: '#/components/schemas/MonitorThresholdWindowOptions'
         thresholds:
@@ -7399,12 +7405,16 @@ components:
       description: Step type used in your Synthetic test.
       enum:
       - assertCurrentUrl
+      - assertElementAttribute
       - assertElementContent
       - assertElementPresent
       - assertEmail
+      - assertFileDownload
+      - assertFromJavascript
       - assertPageContains
       - assertPageLacks
       - click
+      - extractFromJavascript
       - extractVariable
       - goToEmailLink
       - goToUrl
@@ -7413,6 +7423,8 @@ components:
       - playSubTest
       - pressKey
       - refresh
+      - runApiTest
+      - scroll
       - selectOption
       - typeText
       - uploadFiles
@@ -7420,12 +7432,16 @@ components:
       type: string
       x-enum-varnames:
       - ASSERT_CURRENT_URL
+      - ASSERT_ELEMENT_ATTRIBUTE
       - ASSERT_ELEMENT_CONTENT
       - ASSERT_ELEMENT_PRESENT
       - ASSERT_EMAIL
+      - ASSERT_FILE_DOWNLOAD
+      - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
       - CLICK
+      - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
       - GO_TO_EMAIL_LINK
       - GO_TO_URL
@@ -7434,6 +7450,8 @@ components:
       - PLAY_SUB_TEST
       - PRESS_KEY
       - REFRESH
+      - RUN_API_TEST
+      - SCROLL
       - SELECT_OPTION
       - TYPE_TEXT
       - UPLOAD_FILES
@@ -7654,6 +7672,11 @@ components:
         body:
           description: Body to include in the test.
           type: string
+        certificate:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificate'
+        dnsServer:
+          description: DNS server to use for DNS tests.
+          type: string
         headers:
           $ref: '#/components/schemas/SyntheticsTestHeaders'
         host:
@@ -7674,6 +7697,27 @@ components:
           type: number
         url:
           description: URL to perform the test with.
+          type: string
+      type: object
+    SyntheticsTestRequestCertificate:
+      description: Client certificate to use when performing the test request.
+      properties:
+        cert:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificateItem'
+        key:
+          $ref: '#/components/schemas/SyntheticsTestRequestCertificateItem'
+      type: object
+    SyntheticsTestRequestCertificateItem:
+      description: Define a request certificate.
+      properties:
+        content:
+          description: Content of the certificate or key.
+          type: string
+        filename:
+          description: File name for the certificate or key.
+          type: string
+        updatedAt:
+          description: Date of update of the certificate or key, ISO format.
           type: string
       type: object
     SyntheticsTickInterval:
@@ -7943,7 +7987,7 @@ components:
       - DOUBLE
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
-        of one or more metrics, log events, or Analyzed Spans over time.
+        of one or more metrics, log events, or Indexed Spans over time.
       properties:
         custom_links:
           description: List of custom links.
@@ -8846,8 +8890,8 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
-            in the current date for all organizations.
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current date for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
@@ -8979,8 +9023,8 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
-            in the current date for the given org.
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         twol_ingested_events_bytes_sum:
@@ -9133,8 +9177,8 @@ components:
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
-          description: Shows the sum of all analyzed spans indexed over all hours
-            in the current month(s) for all organizations.
+          description: Shows the sum of all Indexed Spans indexed over all hours in
+            the current month(s) for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
@@ -9282,7 +9326,7 @@ components:
           format: date-time
           type: string
         indexed_events_count:
-          description: Contains the number of Analyzed Spans indexed.
+          description: Contains the number of Indexed Spans indexed.
           format: int64
           type: integer
       type: object
@@ -17999,8 +18043,13 @@ tags:
     \ API-related information about processors can be found in the\n  [processors\
     \ documentation](https://docs.datadoghq.com/logs/processing/processors/?tab=api#lookup-processor).\n\
     \n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\
-    \n**Note:** These endpoints are only available for admin users.\nMake sure to\
-    \ use an application key created by an admin."
+    \n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure\
+    \ to use an application key created by an admin.\n\n**Grok parsing rules may effect\
+    \ JSON output and require\nreturned data to be configured before using in a request.**\n\
+    For example, if you are using the data returned from a\nrequest for another request\
+    \ body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces,\
+    \ you will\nneed to configure all escaped spaces as `%{space}` to use\nin the\
+    \ body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/

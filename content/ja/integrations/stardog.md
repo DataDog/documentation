@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md'
 display_name: Stardog
+draft: false
 git_integration_title: stardog
 guid: 1b32f0d4-49ef-40fb-aec3-365e4e7cd6ee
 integration_id: stardog
