@@ -3,6 +3,7 @@
 import sys
 import requests
 import json
+from os import getenv
 
 def pull_rbac():
   api_endpoint = 'https://app.datadoghq.com/api/v2/permissions'
@@ -28,8 +29,11 @@ def pull_rbac():
     with open('data/permissions.json', 'w') as outfile:
       outfile.write(formatted_permissions_json)
   else:
-    # API request failed
-    print('API request failed')
+    print('RBAC api request failed.')
+    
+    if getenv("LOCAL") != 'True':
+      sys.exit(1)
+
 
 pull_rbac()
 
