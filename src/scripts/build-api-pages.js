@@ -237,6 +237,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
               suffixType = '}]';
 
               // widgets
+              /*
               if("definition" in value.items.properties && "oneOf" in value.items.properties.definition) {
                 // childData = value.items.properties.definition.oneOf;
                 const names = value.items.properties.definition.oneOf.map((item) => item.properties.type.default);
@@ -244,7 +245,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
                   .map((mapkey, indx) => { return {[mapkey]: value.items.properties.definition.oneOf[indx]} })
                   .reduce((obj, item) => ({...obj, ...item}), {});
                 childRequiredKeys = [];
-              }
+              }*/
             }
           } else if (typeof value.items === 'string') {
             childRequiredKeys = (value.items.required) ? value.items.required : [];

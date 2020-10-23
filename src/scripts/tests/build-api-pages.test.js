@@ -1126,7 +1126,7 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should show oneOf with definition', () => {
+  xit('should show oneOf with definition', () => {
     const mockSchema = {
       "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
       "properties": {
