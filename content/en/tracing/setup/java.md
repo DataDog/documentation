@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The Java Tracer supports all JVMs on all platforms version 7 and higher. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and Getting Started
 
@@ -47,7 +47,7 @@ Otherwise, to begin tracing applications written in any language:
 
 ### JVM notes
 
-- Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
     {{< tabs >}}
     {{% tab "Spring Boot" %}}
@@ -139,8 +139,6 @@ For additional details and options, see the [WebSphere docs][1].
    ```
 
      For more information, see the [Oracle documentation][6].
-
-- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][7].
 
 ## Automatic Instrumentation
 
