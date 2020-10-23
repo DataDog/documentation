@@ -1160,21 +1160,26 @@ main:
     parent: tracing_setup_overview
     identifier: tracing_custom_instrumentation
     weight: 104
+  - name: Open Standards
+    url: tracing/open_standards/
+    parent: tracing_setup_overview
+    identifier: tracing_open_standards
+    weight: 105
   - name: Configure Data Security
     url: tracing/configure_data_security
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
-    weight: 105
+    weight: 106
   - name: Tracing a Proxy
     url: tracing/proxy_setup/
     parent: tracing_setup_overview
     identifier: tracing_proxy_setup
-    weight: 106
+    weight: 107
   - name: Trace Serverless Functions
     url: tracing/serverless_functions/
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
-    weight: 107
+    weight: 108
   - name: Trace Search and Analytics
     url: tracing/trace_search_and_analytics/
     parent: tracing
