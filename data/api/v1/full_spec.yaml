@@ -7405,12 +7405,16 @@ components:
       description: Step type used in your Synthetic test.
       enum:
       - assertCurrentUrl
+      - assertElementAttribute
       - assertElementContent
       - assertElementPresent
       - assertEmail
+      - assertFileDownload
+      - assertFromJavascript
       - assertPageContains
       - assertPageLacks
       - click
+      - extractFromJavascript
       - extractVariable
       - goToEmailLink
       - goToUrl
@@ -7419,6 +7423,8 @@ components:
       - playSubTest
       - pressKey
       - refresh
+      - runApiTest
+      - scroll
       - selectOption
       - typeText
       - uploadFiles
@@ -7426,12 +7432,16 @@ components:
       type: string
       x-enum-varnames:
       - ASSERT_CURRENT_URL
+      - ASSERT_ELEMENT_ATTRIBUTE
       - ASSERT_ELEMENT_CONTENT
       - ASSERT_ELEMENT_PRESENT
       - ASSERT_EMAIL
+      - ASSERT_FILE_DOWNLOAD
+      - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
       - CLICK
+      - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
       - GO_TO_EMAIL_LINK
       - GO_TO_URL
@@ -7440,6 +7450,8 @@ components:
       - PLAY_SUB_TEST
       - PRESS_KEY
       - REFRESH
+      - RUN_API_TEST
+      - SCROLL
       - SELECT_OPTION
       - TYPE_TEXT
       - UPLOAD_FILES
