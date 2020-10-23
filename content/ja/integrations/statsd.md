@@ -3,7 +3,8 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: statsd
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/statsd/README.md'
 display_name: StatsD
+draft: false
 git_integration_title: statsd
 guid: 4830acf3-626b-42ff-a1db-3f37babd0ae6
 integration_id: statsd
@@ -87,9 +89,31 @@ StatsD チェックは [Datadog Agent][1] パッケージに含まれていま�
 {{% /tab %}}
 {{< /tabs >}}
 
+#### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Supervisord ログの収集を開始するには、次のコンフィギュレーションブロックを `statsd.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: statsd
+   ```
+
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル statsd.d/conf.yaml][2] を参照してください。
+
+3. [Agent を再起動します][3]。
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `statsd` を探します。
+[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `statsd` を探します。
 
 ## 収集データ
 
@@ -113,17 +137,19 @@ Agent が StatsD に関するメトリクスを収集できない場合は、CRI
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 ## その他の参考資料
 
-StatsD およびその動作の詳細については、[StatsD に関するブログ記事][4]を参照してください。
+StatsD およびその動作の詳細については、[StatsD に関するブログ記事][6]を参照してください。
 
-Datadog を使用して StatsD メトリクスをカウントグラフで視覚化する方法 (またはその理由) について理解するには、Datadog の[一連のブログ記事][5]を参照してください。
+Datadog を使用して StatsD メトリクスをカウントグラフで視覚化する方法 (またはその理由) について理解するには、Datadog の[一連のブログ記事][7]を参照してください。
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/statsd
-[5]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
+[2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/help/
+[6]: https://www.datadoghq.com/blog/statsd
+[7]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
