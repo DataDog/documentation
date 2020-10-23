@@ -99,7 +99,19 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
     More information about the TLS parameters and possibilities for syslog-ng available in the [official documentation][1].
 
-5. Restart syslog-ng.
+5. (Optional) Set the source on your logs. To set the source, use the following format (if you have several sources, change the name of the format in each file):
+
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
+    ```
+    
+    You can also add custom tags with the `ddtags` attribute:
+    
+    ```conf
+    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
+    ```
+
+6. Restart syslog-ng.
 
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
