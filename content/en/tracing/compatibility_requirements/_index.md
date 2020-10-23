@@ -12,7 +12,66 @@ aliases:
 
 Choose your language to see the compatibility requirements and supported integrations for Datadog APM.
 
-{{< partial name="apm/apm-compatibility.html" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,c++,go,nodeJS,.NET,.NET Core,PHP" >}}
+
+{{< programming-lang lang="java" >}}
+
+JAVA
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+PYTHON
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+
+RUBY
+
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="c++" >}}
+
+C++
+
+{{< /programming-lang >}}
+
+
+{{< programming-lang lang="go" >}}
+
+GO
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
+
+NODEJS
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+.NET
+
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET Core" >}}
+
+.NETCORE
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
+
+PHP
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 <br>
 
