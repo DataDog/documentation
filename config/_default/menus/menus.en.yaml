@@ -1135,126 +1135,46 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 140000
+  - name: Set up tracing
+    url: tracing/setup_overview/
+    identifier: tracing_setup_overview
+    parent: tracing
+    weight: 1
   - name: Compatibility
     url: tracing/compatibility_requirements/
     identifier: tracing_compatibility_requirements
-    parent: tracing
-    weight: 1
-  - name: Java
-    url: tracing/compatibility_requirements/java
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_java
+    parent: tracing_setup_overview
     weight: 101
-  - name: Python
-    url: tracing/compatibility_requirements/python
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_python
+  - name: Datadog Agent Configuration
+    url: tracing/datadog_agent_configuration/
+    identifier: tracing_agent_config
+    parent: tracing_setup_overview
     weight: 102
-  - name: Ruby
-    url: tracing/compatibility_requirements/ruby
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_ruby
-    weight: 103
-  - name: Go
-    url: tracing/compatibility_requirements/go
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/compatibility_requirements/nodejs
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/compatibility_requirements/php
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_php
-    weight: 106
-  - name: C++
-    url: tracing/compatibility_requirements/cpp
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_cpp
-    weight: 107
-  - name: .NET Core
-    url: tracing/compatibility_requirements/dotnet-core
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_dotnet_core
-    weight: 108
-  - name: .NET Framework
-    url: tracing/compatibility_requirements/dotnet-framework
-    parent: tracing_compatibility_requirements
-    identifier: tracing_compatibility_requirements_dotnet_framework
-    weight: 109
-  - name: Agent Configuration
-    url: tracing/send_traces/
-    identifier: tracing_send_traces
-    parent: tracing
-    weight: 2
   - name: Instrument Your Application
     url: tracing/setup/
-    parent: tracing
+    parent: tracing_setup_overview
     identifier: tracing_setup
-    weight: 3
-  - name: Java
-    url: tracing/setup/java/
-    parent: tracing_setup
-    identifier: tracing_setup_java
-    weight: 301
-  - name: Python
-    url: tracing/setup/python/
-    parent: tracing_setup
-    identifier: tracing_setup_python
-    weight: 302
-  - name: Ruby
-    url: tracing/setup/ruby/
-    parent: tracing_setup
-    identifier: tracing_setup_ruby
-    weight: 303
-  - name: Go
-    url: tracing/setup/go/
-    parent: tracing_setup
-    identifier: tracing_setup_go
-    weight: 304
-  - name: Node.js
-    url: tracing/setup/nodejs/
-    parent: tracing_setup
-    identifier: tracing_setup_nodejs
-    weight: 305
-  - name: .NET Framework
-    url: tracing/setup/dotnet-framework/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_framework
-    weight: 306
-  - name: .NET Core
-    url: tracing/setup/dotnet-core/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_core
-    weight: 307
-  - name: PHP
-    url: tracing/setup/php/
-    parent: tracing_setup
-    identifier: tracing_setup_php
-    weight: 308
-  - name: C++
-    url: tracing/setup/cpp/
-    parent: tracing_setup
-    identifier: tracing_setup_cpp
-    weight: 309
-  - name: Envoy
-    url: tracing/setup/envoy/
-    parent: tracing_setup
-    identifier: tracing_setup_envoy
-    weight: 311
-  - name: NGINX
-    url: tracing/setup/nginx/
-    parent: tracing_setup
-    identifier: tracing_setup_nginx
-    weight: 312
-  - name: Istio
-    url: tracing/setup/istio/
-    identifier: tracing_setup_istio
-    parent: tracing_setup
-    weight: 313
+    weight: 103
+  - name: Custom Instrumentation
+    url: tracing/custom_instrumentation/
+    parent: tracing_setup_overview
+    identifier: tracing_custom_instrumentation
+    weight: 104
+  - name: Configure Data Security
+    url: tracing/configure_data_security
+    parent: tracing_setup_overview
+    identifier: tracing_configure_data_security
+    weight: 105
+  - name: Tracing a Proxy
+    url: tracing/proxy_setup/
+    parent: tracing_setup_overview
+    identifier: tracing_proxy_setup
+    weight: 106
+  - name: Trace Serverless Functions
+    url: tracing/serverless_functions/
+    parent: tracing_setup_overview
+    identifier: tracing_serverless_functions
+    weight: 107
   - name: Trace Search and Analytics
     url: tracing/trace_search_and_analytics/
     parent: tracing
@@ -1328,21 +1248,6 @@ main:
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
-  - name: Trace Serverless Functions
-    url: tracing/serverless_functions/
-    parent: tracing
-    identifier: tracing_serverless_functions
-    weight: 9
-  - name: Enable Datadog APM
-    url: serverless/
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_datadog_apm
-    weight: 901
-  - name: Enable AWS X-Ray
-    url: tracing/serverless_functions/enable_aws_xray
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_aws_xray
-    weight: 902
   - name: Runtime Metrics
     url: tracing/runtime_metrics/
     parent: tracing
@@ -1388,56 +1293,6 @@ main:
     parent: profiler
     identifier: profiler_profiler_troubleshooting
     weight: 1103
-  - name: Custom Instrumentation
-    url: tracing/custom_instrumentation/
-    parent: tracing
-    identifier: tracing_custom_instrumentation
-    weight: 12
-  - name: Agent Customization
-    url: tracing/custom_instrumentation/agent_customization
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_agent_customization
-    weight: 1201
-  - name: Java
-    url: tracing/custom_instrumentation/java
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_java
-    weight: 1202
-  - name: Python
-    url: tracing/custom_instrumentation/python
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_python
-    weight: 1203
-  - name: Ruby
-    url: tracing/custom_instrumentation/ruby
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_ruby
-    weight: 1204
-  - name: Go
-    url: tracing/custom_instrumentation/go
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_go
-    weight: 1205
-  - name: NodeJS
-    url: tracing/custom_instrumentation/nodejs
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_nodejs
-    weight: 1206
-  - name: PHP
-    url: tracing/custom_instrumentation/php
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_php
-    weight: 1207
-  - name: C++
-    url: tracing/custom_instrumentation/cpp
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_cpp
-    weight: 1208
-  - name: .NET
-    url: tracing/custom_instrumentation/dotnet
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_dotnet
-    weight: 1209
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
