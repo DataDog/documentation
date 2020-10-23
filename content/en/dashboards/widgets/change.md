@@ -76,7 +76,7 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][1] for the change widget is:
 
 {{< dashboards-widgets-api >}}
-                                                                                          |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -58,7 +58,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the alert graph widget is:
 
-{{< dashboards-widgets-api >}}                                                                                           |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
