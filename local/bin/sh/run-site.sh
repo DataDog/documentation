@@ -22,7 +22,12 @@ if [ ${RUN_SERVER} = true ]; then
 	# rbac permissions 
 	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then
 		echo "Pulling RBAC permissions."
-		pull_rbac.py ${DD_API_KEY} ${DD_APP_KEY}
+
+		if [ ${DD_API_KEY} != false ] && [ ${DD_APP_KEY} != false ]; then
+			pull_rbac.py ${DD_API_KEY} ${DD_APP_KEY}
+		else
+			echo "Api or application keys were not found. Skipping RBAC permissions."
+		fi
 	fi
 
   # placeholders
