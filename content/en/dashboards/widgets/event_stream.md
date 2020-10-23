@@ -45,37 +45,9 @@ The dedicated [widget JSON schema definition][2] for the event stream widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-EVENT_STREAM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["event_stream"]},
-        "query": {"type": "string"},
-        "event_size": {"enum": ["s", "l"]},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
-        "time": TIME_SCHEMA
-    },
-    "required": ["type", "query"],
-    "additionalProperties": false
-}
-```
-
-| Parameter     | Type   | Required | Description                                                                                                                |
-|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string | yes      | Type of the widget, for the event stream widget use `event_stream`                                                         |
-| `query`       | string | yes      | Query to filter the event stream with                                                                                      |
-| `event_size`  | string | no       | Size to use to display an event (small or large). Available values are: `s` or `l`                                         |
-| `title`       | string | no       | Title of the widget                                                                                                        |
-| `title_size`  | string | no       | Size of the title                                                                                                          |
-| `title_align` | string | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
-| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][3] to learn how to build the `TIME_SCHEMA` |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events/
 [2]: /dashboards/graphing_json/widget_json/
-[3]: /dashboards/graphing_json/widget_json/#time-schema

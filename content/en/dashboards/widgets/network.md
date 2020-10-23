@@ -50,43 +50,6 @@ The dedicated [widget JSON schema definition][2] for the network widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "network_query": {
-        "index": "netflow-search",
-        "search": {
-          "query": ""
-        },
-        "groupBy": [
-          {
-            "facet": {source_entity_type}
-          },
-          {
-            "facet": {destination_entity_type}
-          }
-        ],
-        "compute": {
-          "aggregation": "sum",
-          "facet": {type of data you’d like to display}
-        }
-      },
-      "style": {
-        "palette": {color},
-        "type": "solid",
-        "width": "normal"
-      },
-      "type": "area",
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "autoscale": true
-}
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -58,52 +58,9 @@ The dedicated [widget JSON schema definition][2] for the distribution widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-DISTIBUTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["distribution"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter     | Type             | Required | Description                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget, for the distribution widget use `distribution`.                                                                                              |
-| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`       | string           | no       | Title of your widget.                                                                                                                                        |
-| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                           |
-
-Additional properties allowed the `request` object:
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {"palette": {"type": "string"}},
-    "additionalProperties": false
-  }
-}
-```
-
-| Parameter       | Type   | Required | Description                           |
-|-----------------|--------|----------|---------------------------------------|
-| `style.palette` | string | no       | Color palette to apply to the widget. |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/heat_map/
 [2]: /dashboards/graphing_json/widget_json/
-[3]: /dashboards/graphing_json/request_json/

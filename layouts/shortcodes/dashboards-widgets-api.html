@@ -1,6 +1,34 @@
 {{ $dot := . }}
+{{ $widget_type := .Page.Params.widget_type | default .Page.File.TranslationBaseName }}
+{{ $dot.Scratch.Set "json" "" }}
+{{ $dot.Scratch.Set "html" "" }}
+{{ with .Site.GetPage "/api/v1/dashboards/_index.md" }}
+  {{ with .Resources.Match "widgets.json" }}
+    {{ range . }}
+        {{ $data := . | unmarshal }}
+        {{ $req := (index $data $widget_type) }}
+        {{ if $req }}
+            {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+            {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+
+            {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+            {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
+
+            {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+            {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+            {{ $dot.Scratch.Set "html" (index $req "html") }}
+        {{ else }}
+            {{ warnf "Could not load widget html/json for %q" $widget_type }}
+        {{ end }}
+      {{ end }}
+  {{ end }}
+{{ end }}
+{{ $json := ($dot.Scratch.Get "json") }}
+{{ $html := ($dot.Scratch.Get "html") }}
+
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="">
+
     <ul class="nav nav-tabs border-none response-toggle">
         <li class="nav-item">
             <a class="nav-link mr-1 js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
@@ -9,53 +37,41 @@
             <a class="nav-link mr-1 js-example-link" href="#" data-toggle="tab">{{ i18n "example" }}</a>
         </li>
     </ul>
+
     <div class="tab-content">
+
       <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
-
-              <div class="table-response schema-table row ">
-                <p class="expand-all js-expand-all text-primary">Expand All</p>
-                <div class="col-12">
-                  <div class="row table-header">
-                    <div class="col-4 column">
-                      <p class="font-semibold">{{ i18n "field" }}</p>
-                    </div>
-                    <div class="col-2 column">
-                      <p class="font-semibold">{{ i18n "type" }}</p>
-                    </div>
-                    <div class="col-6 column">
-                      <p class="font-semibold">{{ i18n "description" }}</p>
-                    </div>
-                  </div>
-
-                  <div class="">
-                    <div class="row">
-                      <div class="col-12 first-column">
-                        <div class="row first-row">
-                          <div class="col-4 column"><p class="key">errors&nbsp;[<em>required</em>]</p></div>
-                          <div class="col-2 column"><p>[string]</p></div>
-                          <div class="col-6 column"><p>Array of errors returned by the API.</p></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                </div>
+        <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
+          <p class="expand-all js-expand-all text-primary">Expand All</p>
+          <div class="col-12">
+            <div class="row table-header">
+              <div class="col-4 column">
+                <p class="font-semibold">{{ i18n "field" }}</p>
               </div>
-
-
-      </div>
-      <div role="tabpanel" class="tab-pane js-tab-example" id="example">
-          <div class="code-snippet-wrapper">
-              <div class="code-snippet">
-                  <div class="code-button-wrapper position-absolute">
-                      <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                  </div>
-                  {{ $jsonifiedData := "{\"errors\":[\"Bad Request\"]}" }}
-                  {{ (highlight ($jsonifiedData) "json" "") }}
+              <div class="col-2 column">
+                <p class="font-semibold">{{ i18n "type" }}</p>
               </div>
+              <div class="col-6 column">
+                <p class="font-semibold">{{ i18n "description" }}</p>
+              </div>
+            </div>
+            {{ $html | safeHTML }}
           </div>
+        </div>
       </div>
+
+      <div role="tabpanel" class="tab-pane js-tab-example" id="example">
+        <div class="code-snippet-wrapper">
+          <div class="code-snippet">
+            <div class="code-button-wrapper position-absolute">
+              <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+            </div>
+            {{ print $json | safeHTML }}
+          </div>
+        </div>
+      </div>
+
     </div>
+
   </div>
 </div>

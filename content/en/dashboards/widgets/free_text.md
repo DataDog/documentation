@@ -34,29 +34,6 @@ The dedicated [widget JSON schema definition][2] for the free text widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-FREE_TEXT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["free_text"]},
-        "text": {"type": "string"},
-        "color": {"type": "string"},
-        "font_size": {"type": "string"},
-        "text_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "text"],
-    "additionalProperties": false
-}
-```
-
-| Parameter    | Type   | Required | Description                                                                             |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------|
-| `type`       | string | yes      | Type of the widget, for the free text widget use `free_text`                            |
-| `text`       | string | yes      | Text to display                                                                         |
-| `color`      | string | no       | Color of the text                                                                       |
-| `font_size`  | string | no       | Size of the text                                                                        |
-| `text_align` | string | no       | How to align the text on the widget. Available values are: `center`, `left`, or `right` |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

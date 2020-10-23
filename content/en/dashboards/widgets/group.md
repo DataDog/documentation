@@ -27,40 +27,6 @@ The dedicated [widget JSON schema definition][2] for the change widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-GROUP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["group"]},
-        "layout_type": {"enum": ["ordered"]},
-        "widgets": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "definition": {
-                        "oneOf": [WIDGET_DEFINITION]
-                    },
-                    "id": {"type": "integer"}
-                },
-                "required": ["definition"],
-                "additionalProperties": false
-            }
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "layout_type", "widgets"],
-    "additionalProperties": false
-}
-```
-
-| Parameter     | Type             | Required | Description                                                                                                                                             |
-|---------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget, for the group widget use `group`.                                                                                                       |
-| `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][2] to learn how to build the `WIDGET_DEFINITION`. |
-| `layout_type` | string           | yes      | Layout type of the group, value available is `ordered`                                                                                                  |
-| `title`       | string           | no       | Title of your widget.                                                                                                                                   |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

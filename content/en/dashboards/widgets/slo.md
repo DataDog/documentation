@@ -21,18 +21,18 @@ Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on
 
 ### Configuration
 
-1. On the dashboard page, add an SLO Summary widget. 
+1. On the dashboard page, add an SLO Summary widget.
 2. Select an SLO from the dropdown menu.
 3. Select up to three different time windows.
 
-**Note:** The `Global Time` allows you to display your SLO’s status and error budget over arbitrary time periods within the past 90 days. Additionally, you will also be able to specify an optional unique SLO target for the arbitrary time period. Specifying an SLO target is required to display an error budget and for being able to color code the SLO status value as green or red. If no SLO target is specified only the SLO status will be shown and the font color will remain gray. 
+**Note:** The `Global Time` allows you to display your SLO’s status and error budget over arbitrary time periods within the past 90 days. Additionally, you will also be able to specify an optional unique SLO target for the arbitrary time period. Specifying an SLO target is required to display an error budget and for being able to color code the SLO status value as green or red. If no SLO target is specified only the SLO status will be shown and the font color will remain gray.
 
 ### Options
 
 #### Display preferences
 
 Select whether to show or hide remaining error budget by toggling the `Show error budget` option. If you are visualizing a monitor-based SLO with multiple groups or multiple monitors, select your `View mode`:
-  
+
 - For monitor-based SLOs configured with a single monitor broken into multiple groups, there are the following three view modes:
   - `Status`: displays the overall SLO status percentages and targets
   - `Groups`: displays a table of status percentages for each group
@@ -42,7 +42,7 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
   - `Status`: displays the overall SLO status percentages and targets
   - `Monitors`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
-  
+
 **Note:** When the `Global Time` time window option is selected you can only use the `Status` view mode.
 
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}
@@ -54,6 +54,10 @@ Display a custom title for your widget by checking the `Show a title` check box:
 {{< img src="dashboards/widgets/slo/slo_summary-show_title.png" alt="widget title"  >}}
 
 You can optionally define the title’s size and alignment.
+
+## API
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 

@@ -58,28 +58,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the alert graph widget is:
 
-{{< dashboards-widgets-api >}}
-
-```text
-ALERT_GRAPH_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["alert_graph"]},
-        "alert_id": {"type": "string"},
-        "viz_type": {"enum": ["timeseries", "toplist"]},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "alert_id", "viz_type"],
-    "additionalProperties": false
-}
-```
-
-| Parameter  | Type   | Required | Description                                                                                                       |
-|------------|--------|----------|-------------------------------------------------------------------------------------------------------------------|
-| `type`     | string | yes      | Type of the widget, for the alert graph widget use `alert_graph`                                                  |
-| `alert_id` | string | yes      | ID of the alert to use in the widget                                                                              |
-| `viz_type` | string | yes      | Whether to display the Alert Graph as a timeseries or a top list. Available values are: `timeseries` or `toplist` |
-| `title`    | string | no       | Title of the widget                                                                                               |
+{{< dashboards-widgets-api >}}                                                                                           |
 
 ## Further Reading
 

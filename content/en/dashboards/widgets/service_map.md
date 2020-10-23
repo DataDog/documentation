@@ -2,6 +2,7 @@
 title: Service Map Widget
 kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
+widget_type: "servicemap"
 aliases:
     - /graphing/widgets/service_map/
 further_reading:
@@ -36,27 +37,6 @@ Services connected to the mapped service are sorted outwards from the middle by 
 The dedicated [widget JSON schema definition][4] for the service map widget is:
 
 {{< dashboards-widgets-api >}}
-
-```text
-SERVICEMAP_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "type": {"enum": ["servicemap"]},
-            "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-            "service": {"type": "string"},
-            "title": WidgetSchema.TITLE
-        },
-        "required": ["type", "filters", "service"],
-        "additionalProperties": False,
-    }
-```
-
-| Parameter | Type   | Required | Description                                                       |
-|-----------|--------|----------|-------------------------------------------------------------------|
-| type      | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
-| service   | string | yes      | The ID of the service you want to map.                            |
-| filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).    |
-| title     | string | no       | The title of your widget.                                         |
 
 ## Further Reading
 

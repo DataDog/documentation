@@ -54,65 +54,9 @@ The dedicated [widget JSON schema definition][2] for the host map widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-HOSTMAP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["hostmap"]},
-        "requests":       {
-            "type": "object",
-            "properties": {
-                'fill': REQUEST_SCHEMA,
-                'size': REQUEST_SCHEMA
-            },
-            "anyOf": [
-                {"required": ["fill"]},
-                {"required": ["size"]}
-            ],
-            "additionalProperties": false
-        },
-        "node_type":       {"enum": ["host", "container"]},
-        "no_metric_hosts": {"type": "boolean"},
-        "no_group_hosts":  {"type": "boolean"},
-        "group":           {"type": "array", "items": {"type": "string"}},
-        "scope":           {"type": "array", "items": {"type": "string"}},
-        "style":           {
-            "type": "object",
-            "properties": {
-                "palette":      {"type": "string"},
-                "palette_flip": {"type": "boolean"},
-                "fill_min":     {"type": "string"},
-                "fill_max":     {"type": "string"}
-            },
-            "additionalProperties": false
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter            | Type             | Required | Description                                                                                                                      |
-|----------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | string           | yes      | Type of widget; for the host map widget use `hostmap`.                                                                           |
-| `requests.fill`      | string           | yes/no   | Query used to fill the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `requests.size`      | string           | yes/no   | Query used to size the map. See the dedicated [Request JSON schema documentation][3] to learn how to build the `REQUEST_SCHEMA`. |
-| `node_type`          | string           | no       | Which type of node to use in the map; available values are: `host` or `container`                                                |
-| `no_metric_hosts`    | Boolean          | no       | Whether to show the hosts with no metrics.                                                                                       |
-| `no_group_hosts`     | Boolean          | no       | Whether to show the hosts that don't fit in a group.                                                                             |
-| `group`              | array of strings | no       | List of tag prefixes to group by.                                                                                                |
-| `scope`              | array of strings | no       | List of tags used to filter the map.                                                                                             |
-| `style.palette`      | string           | no       | Color palette to apply to the widget.                                                                                            |
-| `style.palette_flip` | Boolean          | no       | Whether to flip the palette tones.                                                                                               |
-| `style.fill_min`     | string           | no       | Min value to use to color the map.                                                                                               |
-| `style.fill_max`     | string           | no       | Max value to use to color the map.                                                                                               |
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /infrastructure/hostmap/
 [2]: /dashboards/graphing_json/widget_json/
-[3]: /dashboards/graphing_json/request_json/

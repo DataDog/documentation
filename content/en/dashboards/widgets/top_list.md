@@ -1,6 +1,7 @@
 ---
 title: Top List Widget
 kind: documentation
+widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/
 further_reading:
@@ -54,42 +55,6 @@ Optionally define its size and alignment.
 The dedicated [widget JSON schema definition][3] for the top list widget is:
 
 {{< dashboards-widgets-api >}}
-
-```text
-TOPLIST_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["toplist"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter  | Type             | Required | Description                                                                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | string           | yes      | Type of widget, for the top list widget use `toplist`.                                                                                                       |
-| `requests` | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][4] to learn how to build the `REQUEST_SCHEMA`. |
-| `title`    | string           | no       | Title of your widget.                                                                                                                                        |
-
-Additional properties allowed in the `request` object:
-
-```text
-{
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| Parameter             | Type   | Required | Description                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][5] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
 
 ## Further Reading
 

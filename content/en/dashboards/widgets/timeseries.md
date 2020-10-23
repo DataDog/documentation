@@ -117,74 +117,6 @@ The dedicated [widget JSON schema definition][10] for the timeseries widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-TIMESERIES_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["timeseries"]},
-        "requests": {
-            "type":    "array",
-            "items":   REQUEST_SCHEMA,
-            "minItems": 1
-        },
-        "yaxis":   AXIS_SCHEMA,
-        "events":  EVENTS_SCHEMA,
-        "markers": MARKERS_SCHEMA,
-        "title":   {"type": "string"},
-        "show_legend": {"type": "boolean"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter     | Type             | Required | Description                                                                                                                                               |
-|---------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget, for the timeseries widget use `timeseries`.                                                                                               |
-| `requests`    | array of objects | yes      | Array of `request` object to display in the widget. See the dedicated [Request JSON schema documentation][11] to learn how to build the `REQUEST_SCHEMA`. |
-| `yaxis`       | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][12] to learn how to build the `AXIS_SCHEMA`.                                 |
-| `events`      | object           | no       | Event overlay control options. See the dedicated [Events JSON schema documentation][13] to learn how to build the `EVENTS_SCHEMA`                         |
-| `markers`     | object           | no       | Markers overlay control options. See the dedicated [Markers JSON schema documentation][14] to learn how to build the `MARKERS_SCHEMA`                     |
-| `title`       | string           | no       | Title of your widget.                                                                                                                                     |
-| `show_legend` | boolean          | no       | (screenboard only) Show the legend for this widget                                                                                                        |
-
-Additional properties allowed in each `request` object:
-
-```json
-{
-  "style": {
-    "type": "object",
-    "properties": {
-      "palette": {"type": "string"},
-      "line_type": {"enum": ["dashed", "dotted", "solid"]},
-      "line_width": {"enum": ["normal", "thick", "thin"]}
-    },
-    "additionalProperties": false
-  },
-  "metadata": {
-    "type": "array",
-    "items": {
-      "type": "object",
-      "properties": {
-        "expression": {"type": "string"},
-        "alias_name": {"type": "string"}
-      },
-      "required": ["expression"],
-      "additionalProperties": false
-    }
-  },
-  "display_type": {"enum": ["area", "bars", "line"]}
-}
-```
-
-| Parameter          | Type   | Required | Description                                                                              |
-|--------------------|--------|----------|------------------------------------------------------------------------------------------|
-| `style.palette`    | string | no       | Color palette to apply to the widget.                                                    |
-| `style.line_type`  | string | no       | Type of lines displayed. Available values are: `dashed`, `dotted`, or `solid`.           |
-| `style.line_width` | string | no       | Width of line displayed. Available values are: `normal`, `thick`, or `thin`.             |
-| `metadata`         | object | no       | Used to define expression aliases.                                                       |
-| `display_type`     | string | no       | Type of display to use for the request. Available values are: `area`, `bars`, or `line`. |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -199,7 +131,3 @@ Additional properties allowed in each `request` object:
 [8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
 [10]: /dashboards/graphing_json/widget_json/
-[11]: /dashboards/graphing_json/request_json/
-[12]: /dashboards/graphing_json/widget_json/#y-axis-schema
-[13]: /dashboards/graphing_json/widget_json/#events-schema
-[14]: /dashboards/graphing_json/widget_json/#markers-schema

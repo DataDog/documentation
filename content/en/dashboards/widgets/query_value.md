@@ -53,52 +53,6 @@ The dedicated [widget JSON schema definition][4] for the query value widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-QUERY_VALUE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["query_value"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "autoscale":   {"type": "boolean"},
-        "custom_unit": {"type": "string"},
-        "precision":   {"type": "integer"},
-        "text_align":  {"enum": ["center", "left", "right"]},
-        "title":       {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter     | Type             | Required | Description                                                                                                                                                  |
-|---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget. For the query value widget use `query_value`.                                                                                                |
-| `requests`    | array of objects | yes      | Array of one `request` object to display in the widget. See the dedicated [Request JSON schema documentation][5] to learn how to build the `REQUEST_SCHEMA`. |
-| `autoscale`   | Boolean          | no       | Whether to use autoscaling or not.                                                                                                                           |
-| `custom_unit` | string           | no       | Display a unit of your choice on the widget.                                                                                                                 |
-| `precision`   | integer          | no       | Number of decimals to show. If not defined, the widget uses the raw value.                                                                                   |
-| `text_align`  | string           | no       | How to align the value in the widget; values available are `center`, `left`, or `right`.                                                                     |
-| `title`       | string           | no       | Title of your widget.                                                                                                                                        |
-
-Additional properties allowed in the `request` object:
-
-```text
-{
-    "conditional_formats": CONDITIONAL_FORMATS_SCHEMA,
-    "aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}
-}
-```
-
-| Parameter             | Type   | Required | Description                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | object | no       | Conditional format control options. See the dedicated [Conditional format JSON schema documentation][6] to learn how to build the `CONDITIONAL_FORMATS_SCHEMA`. |
-| `aggregator`          | enum   | no       | Aggregator used for the request; available values are: `avg`, `last`, `max`, `min`, or `sum`.                                                                   |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -107,5 +61,3 @@ Additional properties allowed in the `request` object:
 [2]: /tracing/app_analytics/search/#search-bar
 [3]: /logs/search_syntax/
 [4]: /dashboards/graphing_json/widget_json/
-[5]: /dashboards/graphing_json/request_json/
-[6]: /dashboards/graphing_json/widget_json/#conditional-format-schema

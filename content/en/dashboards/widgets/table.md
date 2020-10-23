@@ -1,6 +1,7 @@
 ---
 title: Table Widget
 kind: documentation
+widge_type: "query_table"
 aliases:
     - /graphing/widgets/table/
 further_reading:
@@ -93,6 +94,10 @@ Additional properties allowed in a `request` object:
 To get multiple columns for metrics queries, you need multiple request objects, one object per column. For log queries, you only need one request object, which contains a `multi_compute` array of `compute` objects. Each `compute` object provides one column.
 
 APM Stats queries contain multiple columns in a single request object. When you choose this data source, the table will pre-populate with suggested columns. You can add, remove, and alias these columns.
+
+## API
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 

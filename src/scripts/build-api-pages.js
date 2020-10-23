@@ -186,12 +186,16 @@ const isTagMatch = (pathObj, tag) => {
  * @param {object} data - the schema object
  * @param {object} parentExample - the example object adjacent to data passed in
  * @param {object} requiredKeys - []
+ * @param {number} level - the depth of recursion
  * returns string
  */
-const filterJson = (actionType, data, parentExample = null, requiredKeys = []) => {
+const filterJson = (actionType, data, parentExample = null, requiredKeys = [], level = 0) => {
   let jsondata = '';
   let iterationHasRequiredKeyMatches = false;
   let childRequiredKeys = [];
+
+  // i've set a hard recurse limit of depth
+  if(level > 10) return [jsondata, iterationHasRequiredKeyMatches];
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
@@ -261,13 +265,6 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
             suffixType = '}';
             newParentKey = "additionalProperties";
           }
-        /*
-        } else if(key === 'definition' && "oneOf" in value) {
-          // widgets
-          console.log(key, value, value.oneOf);
-          childData = value.oneOf;
-          prefixType = '{';
-          suffixType = '}';*/
         }
 
         // choose the example to use
@@ -282,7 +279,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
         }
 
         if (childData) {
-          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys);
+          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys, (level + 1));
           iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
           if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
             // skip output
@@ -852,6 +849,20 @@ const processSpecs = (specs) => {
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
+
+          // for now lets just put the widgets in a file
+          if(deref.components.schemas && deref.components.schemas.WidgetDefinition && deref.components.schemas.WidgetDefinition.oneOf) {
+            const jsonData = {};
+            const pageDir = `./content/en/api/${version}/dashboards/`;
+            deref.components.schemas.WidgetDefinition.oneOf.forEach((widget) => {
+              const requestJson = filterExampleJson("request", widget);
+              const requestCurlJson = filterExampleJson("curl", widget);
+              const html = schemaTable("request", widget);
+              jsonData[widget.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
+            });
+            fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
+          }
+
         }).catch((e) => {
           console.log(e);
           process.exitCode = 1;

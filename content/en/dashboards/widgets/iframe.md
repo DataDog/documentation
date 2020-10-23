@@ -27,23 +27,6 @@ The dedicated [widget JSON schema definition][1] for the iframe widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-IFRAME_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["iframe"]},
-        "url": {"type": "string"},
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
-}
-```
-
-| Parameter | Type   | Required | Description                                            |
-|-----------|--------|----------|--------------------------------------------------------|
-| `type`    | string | yes      | Type of the widget, for the iframe widget use `iframe` |
-| `url`     | string | yes      | URL of the iframe                                      |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

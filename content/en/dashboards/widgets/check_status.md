@@ -55,34 +55,7 @@ Optionally define its size and alignment.
 
 The dedicated [widget JSON schema definition][1] for the check status widget is:
 
-{{< dashboards-widgets-api >}}
-
-```text
-CHECK_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["check_status"]},
-        "check": {"type": "string"},
-        "grouping": {"enum": ["check", "cluster"]},
-        "group": {"type": "string"},
-        "tags":  {"type": "array", "items": {"type": "string"}},
-        "group_by":  {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "check", "grouping"],
-    "additionalProperties": false
-}
-```
-
-| Parameter  | Type             | Required | Description                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------|
-| `type`     | string           | yes      | Type of the widget, for the check status widget use `check_status`                                           |
-| `check`    | string           | yes      | Name of the check to use in the widget                                                                       |
-| `grouping` | string           | yes      | The kind of grouping to use (single check vs. cluster of checks). Available values are: `check` or `cluster` |
-| `group`    | string           | no       | Group reporting a single check                                                                               |
-| `tags`     | Array of strings | no       | List of tags used to filter the groups reporting a cluster check                                             |
-| `group_by` | Array of strings | no       | List of tag prefixes to group by in the case of a cluster check                                              |
-| `title`    | string           | no       | Title of the widget                                                                                          |
+{{< dashboards-widgets-api >}}                                                                                    |
 
 ## Further Reading
 

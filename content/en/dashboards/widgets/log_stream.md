@@ -49,41 +49,6 @@ The dedicated [widget JSON schema definition][3] for the log stream widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-LOG_STREAM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["log_stream"]},
-        "logset": {"type": "string"},
-        "indexes": {"type": "array", "items": {"type": "string"}},
-        "query": {"type": "string"},
-        "columns": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]},
-        "time": TIME_SCHEMA
-    },
-    "required": ["type"],
-    "additionalProperties": false
-}
-```
-
-| Parameter             | Type    | Required | Description                                                                                |
-|-----------------------|---------|----------|--------------------------------------------------------------------------------------------|
-| `type`                | String  | Yes      | Type of the widget, for the log stream widget use `log_stream`.                            |
-| `logset`              | String  | No       | (Deprecated) Use 'indexes' instead. The ID of the index to query in the stream.            |
-| `indexes`             | Array   | No       | An array of index names to query in the stream. Use `[]` to query all indexes at once.       |
-| `query`               | String  | No       | The query to filter the log stream.                                                        |
-| `columns`             | Array   | No       | The columns to display on the widget.                                                      |
-| `show_date_column`    | Boolean | No       | Whether to show the date column or not.                                                    |
-| `show_message_column` | Boolean | No       | Whether to show the message column or not.                                                 |
-| `message_display`     | String  | No       | The amount of log lines to display.                                                        |
-| `sort`                | Object  | No       | The column and order to sort by.                                                           |
-| `title`               | String  | No       | The title of the widget.                                                                   |
-| `title_size`          | String  | No       | The size of the title.                                                                     |
-| `title_align`         | String  | No       | How to align the title. The available values are `center`, `left`, or `right`.             |
-| `time`                | Object  | No       | The time setting for the widget. For details, see the [Time JSON schema documentation][4]. |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -91,4 +56,3 @@ LOG_STREAM_SCHEMA = {
 [1]: /logs/explorer/search/
 [2]: /logs/explorer/facets/
 [3]: /dashboards/graphing_json/widget_json/
-[4]: /dashboards/graphing_json/widget_json/#time-schema

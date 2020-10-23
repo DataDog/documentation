@@ -2,6 +2,7 @@
 title: Scatter Plot Widget
 kind: documentation
 description: "Graph a chosen scope over two different metrics with their respective aggregation"
+widget_type: "scatterplot"
 aliases:
     - /graphing/widgets/scatter_plot/
 further_reading:
@@ -48,53 +49,8 @@ The dedicated [widget JSON schema definition][1] for the scatter plot widget is:
 
 {{< dashboards-widgets-api >}}
 
-```text
-SCATTERPLOT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["scatterplot"]},
-        "requests": {
-            "type": "object",
-            "properties": {
-                "x": REQUEST_SCHEMA,
-                "y": REQUEST_SCHEMA
-            },
-            "required": ["x", "y"],
-            "additionalProperties": false
-        },
-        "xaxis": AXIS_SCHEMA,
-        "yaxis": AXIS_SCHEMA,
-        "color_by_groups": {"type": "array", "items": {"type": "string"}},
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
-
-| Parameter         | Type             | Required | Description                                                                                                                                        |
-|-------------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`            | string           | yes      | Type of widget, for the scatter plot widget use `scatterplot`.                                                                                     |
-| `requests`        | object           | yes      | A `requests` object to display in the widget. See the dedicated [Request JSON schema documentation][2] to learn how to build the `REQUEST_SCHEMA`. |
-| `yaxis`           | object           | no       | Y-axis control options. See the dedicated [Y-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
-| `xaxis`           | object           | no       | Y-axis control options. See the dedicated [X-axis JSON schema documentation][3] to learn how to build the `AXIS_SCHEMA`.                           |
-| `color_by_groups` | array of strings | no       | List of groups used for colors.                                                                                                                    |
-| `title`           | string           | no       | Title of your widget.                                                                                                                              |
-
-Additional properties allowed in the `request` object:
-
-```json
-{"aggregator": {"enum": ["avg", "last", "max", "min", "sum"]}}
-```
-
-| Parameter    | Type   | Required | Description                                                                                   |
-|--------------|--------|----------|-----------------------------------------------------------------------------------------------|
-| `aggregator` | string | no       | Aggregator used for the request, available values are: `avg`, `last`, `max`, `min`, or `sum`. |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/graphing_json/widget_json/
-[2]: /dashboards/graphing_json/request_json/
-[3]: /dashboards/graphing_json/widget_json/#y-axis-schema
