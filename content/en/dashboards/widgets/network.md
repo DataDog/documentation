@@ -2,6 +2,7 @@
 title: Network Widget
 kind: documentation
 description: "Displays a timeseries of network data."
+widget_type: "timeseries"
 aliases:
     - /graphing/widgets/network/
 further_reading:
