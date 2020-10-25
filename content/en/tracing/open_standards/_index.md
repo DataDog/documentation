@@ -477,7 +477,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 
 
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="c++" >}}
