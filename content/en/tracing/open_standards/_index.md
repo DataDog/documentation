@@ -216,7 +216,7 @@ init_tracer("<SERVICE_NAME>")
 my_operation()
 ```
 
-The tracer can now be used like in any other OpenTracing application. See [opentracing.io][1] for OpenTracing Python usage.
+The tracer can now be used like in any other OpenTracing application. See [opentracing.io][3] for OpenTracing Python usage.
 
 ## OpenTelemetry
 
@@ -309,13 +309,13 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [github][2], [opentelemetry examples][3], or [readthedocs][4] for more OpenTelemetry Python Datadog Exporter usage.
+- See [github][4], [opentelemetry examples][5], or [readthedocs][6] for more OpenTelemetry Python Datadog Exporter usage.
 
 
-[1]: https://opentracing.io/guides/python/
-[2]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
-[3]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
-[4]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
+[3]: https://opentracing.io/guides/python/
+[4]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
+[5]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
+[6]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
 
 
 {{< /programming-lang >}}
