@@ -335,9 +335,9 @@ It can also be configured by using `Datadog.configure` as described in the [Ruby
 
 ### Activating and configuring integrations
 
-By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][2] and [traces][9] from OpenTracing instrumentation you have in your application.
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][9] and [traces][10] from OpenTracing instrumentation you have in your application.
 
-However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][10] for more details.
+However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][11] for more details.
 
 ### Supported serialization formats
 
@@ -357,7 +357,7 @@ This feature is currently in beta. <a href="https://docs.datadoghq.com/help/">Re
 
 ### Installation
 
-- If you use [bundler][11], include the following in your `Gemfile`:
+- If you use [bundler][12], include the following in your `Gemfile`:
 
 ```
 gem 'opentelemetry-exporters-datadog'
@@ -473,16 +473,8 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [rubygems][12] or [github][13] for more OpenTelemetry Ruby Datadog Exporter usage.
+- See [rubygems][13] or [github][14] for more OpenTelemetry Ruby Datadog Exporter usage.
 
-[2]: /tracing/visualization/#spans
-[7]: /tracing/setup/ruby/#quickstart-for-opentracing
-[8]: /tracing/setup/ruby/#tracer-settings
-[9]: /tracing/visualization/#trace
-[10]: /tracing/setup/ruby/#integration-instrumentation
-[11]: https://bundler.io
-[12]: https://rubygems.org/gems/opentelemetry-exporters-datadog
-[13]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
 
 {{< /programming-lang >}}
 
@@ -496,11 +488,11 @@ C++
 
 # OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][14], or see the setup information below.
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][15], or see the setup information below.
 
 ### Setup
 
-Import the [`opentracer` package][15] to expose the Datadog tracer as an [OpenTracing][16] compatible tracer.
+Import the [`opentracer` package][16] to expose the Datadog tracer as an [OpenTracing][17] compatible tracer.
 
 A basic usage example:
 
@@ -529,7 +521,7 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][14] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][15] for more examples and details.
+**Note**: Using the [OpenTracing API][15] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][16] for more examples and details.
 
 
 {{< /programming-lang >}}
@@ -555,7 +547,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io][17] for OpenTracing NodeJS usage.
+See [opentracing.io][18] for OpenTracing NodeJS usage.
 
 ## OpenTelemetry
 
@@ -679,7 +671,7 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [npm][18] or [github][19] for more OpenTelemetry NodeJS Datadog Exporter usage.
+- See [npm][19] or [github][20] for more OpenTelemetry NodeJS Datadog Exporter usage.
 
 
 
@@ -689,7 +681,7 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][20].
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][21].
 
 ### Setup
 For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][73 ] to your application. During application start-up, initialize the OpenTracing library:
@@ -746,13 +738,13 @@ To trace code running in an asynchronous task, create a new scope within the bac
 
 ## OpenTracing
 
-The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][21] which is installed with Composer:
+The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][22] which is installed with Composer:
 
 ```bash
 composer require opentracing/opentracing:1.0.0-beta5
 ```
 
-When [automatic instrumentation][22] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
+When [automatic instrumentation][23] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
 
 ```php
 <?php
@@ -787,17 +779,18 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 [6]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
 [7]: /tracing/setup/ruby/#quickstart-for-opentracing
 [8]: /tracing/setup/ruby/#tracer-settings
-[9]: /tracing/visualization/#trace
-[10]: /tracing/setup/ruby/#integration-instrumentation
-[11]: https://bundler.io
-[12]: https://rubygems.org/gems/opentelemetry-exporters-datadog
-[13]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
-[14]: https://github.com/opentracing/opentracing-go
-[15]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[16]: http://opentracing.io
-[17]: https://opentracing.io/guides/javascript/
-[18]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
-[19]: https://github.com/Datadog/dd-opentelemetry-exporter-js
-[20]: https://github.com/opentracing/opentracing-csharp
-[21]: https://github.com/opentracing/opentracing-php
-[22]: /tracing/setup/php/#automatic-instrumentation
+[9]: /tracing/visualization/#spans
+[10]: /tracing/visualization/#trace
+[11]: /tracing/setup/ruby/#integration-instrumentation
+[12]: https://bundler.io
+[13]: https://rubygems.org/gems/opentelemetry-exporters-datadog
+[14]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
+[15]: https://github.com/opentracing/opentracing-go
+[16]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[17]: http://opentracing.io
+[18]: https://opentracing.io/guides/javascript/
+[19]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
+[20]: https://github.com/Datadog/dd-opentelemetry-exporter-js
+[21]: https://github.com/opentracing/opentracing-csharp
+[22]: https://github.com/opentracing/opentracing-php
+[23]: /tracing/setup/php/#automatic-instrumentation
