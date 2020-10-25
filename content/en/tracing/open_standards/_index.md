@@ -4,6 +4,8 @@ kind: documentation
 description: "Get Started with Datadog APM using Open Tracing or Open Telemetry"
 ---
 
+Get started with Open Standards
+
 {{< programming-lang-wrapper langs="java,python,ruby,c++,go,nodeJS,.NET,PHP" >}}
 
 {{< programming-lang lang="java" >}}
