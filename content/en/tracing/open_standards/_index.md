@@ -475,7 +475,14 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 - See [rubygems][12] or [github][13] for more OpenTelemetry Ruby Datadog Exporter usage.
 
-
+[2]: /tracing/visualization/#spans
+[7]: /tracing/setup/ruby/#quickstart-for-opentracing
+[8]: /tracing/setup/ruby/#tracer-settings
+[9]: /tracing/visualization/#trace
+[10]: /tracing/setup/ruby/#integration-instrumentation
+[11]: https://bundler.io
+[12]: https://rubygems.org/gems/opentelemetry-exporters-datadog
+[13]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
 
 {{< /programming-lang >}}
 
