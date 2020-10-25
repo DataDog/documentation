@@ -1,5 +1,5 @@
 ---
-title: Security and Agent Customization
+title: Configure the Datadog Agent or Tracer for Data Security
 kind: documentation
 description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
 aliases:
