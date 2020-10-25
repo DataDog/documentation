@@ -175,8 +175,6 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
-[1]: https://github.com/opentracing/opentracing-java
-[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
 
 {{< /programming-lang >}}
 
@@ -312,10 +310,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 - See [github][4], [opentelemetry examples][5], or [readthedocs][6] for more OpenTelemetry Python Datadog Exporter usage.
 
 
-[3]: https://opentracing.io/guides/python/
-[4]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
-[5]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
-[6]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
 
 
 {{< /programming-lang >}}
@@ -479,13 +473,6 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 - See [rubygems][12] or [github][13] for more OpenTelemetry Ruby Datadog Exporter usage.
 
-[7]: /tracing/setup/ruby/#quickstart-for-opentracing
-[8]: /tracing/setup/ruby/#tracer-settings
-[9]: /tracing/visualization/#trace
-[10]: /tracing/setup/ruby/#integration-instrumentation
-[11]: https://bundler.io
-[12]: https://rubygems.org/gems/opentelemetry-exporters-datadog
-[13]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
 
 
 
@@ -501,11 +488,11 @@ C++
 
 # OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][100], or see the setup information below.
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][14], or see the setup information below.
 
 ### Setup
 
-Import the [`opentracer` package][110] to expose the Datadog tracer as an [OpenTracing][120] compatible tracer.
+Import the [`opentracer` package][15] to expose the Datadog tracer as an [OpenTracing][16] compatible tracer.
 
 A basic usage example:
 
@@ -534,11 +521,8 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][100] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][110] for more examples and details.
+**Note**: Using the [OpenTracing API][14] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][15] for more examples and details.
 
-[100]: https://github.com/opentracing/opentracing-go
-[110]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[120]: http://opentracing.io
 
 {{< /programming-lang >}}
 
@@ -563,7 +547,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io][5] for OpenTracing NodeJS usage.
+See [opentracing.io][17] for OpenTracing NodeJS usage.
 
 ## OpenTelemetry
 
@@ -687,11 +671,8 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ### OpenTelemetry Links
 
-- See [npm][6] or [github][7] for more OpenTelemetry NodeJS Datadog Exporter usage.
+- See [npm][18] or [github][19] for more OpenTelemetry NodeJS Datadog Exporter usage.
 
-[5]: https://opentracing.io/guides/javascript/
-[6]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
-[7]: https://github.com/Datadog/dd-opentelemetry-exporter-js
 
 
 {{< /programming-lang >}}
@@ -700,10 +681,10 @@ Tags that are set directly on individual spans supersede conflicting tags define
 
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][6].
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][20].
 
 ### Setup
-For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][7] to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][73 ] to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
 using Datadog.Trace.OpenTracing;
@@ -749,8 +730,6 @@ To trace code running in an asynchronous task, create a new scope within the bac
 
 ```
 
-[6]: https://github.com/opentracing/opentracing-csharp
-[7]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
 
 
 {{< /programming-lang >}}
@@ -759,13 +738,13 @@ To trace code running in an asynchronous task, create a new scope within the bac
 
 ## OpenTracing
 
-The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][6] which is installed with Composer:
+The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][21] which is installed with Composer:
 
 ```bash
 composer require opentracing/opentracing:1.0.0-beta5
 ```
 
-When [automatic instrumentation][1] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
+When [automatic instrumentation][22] is enabled, an OpenTracing-compatible tracer is made available as the global tracer:
 
 ```php
 <?php
@@ -780,8 +759,6 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 <div class="alert alert-info">Before ddtrace version 0.46.0, an OpenTracing compatible tracer was automatically returned from <code>OpenTracing\GlobalTracer::get()</code> without the need to set the global tracer manually.</div>
 
-[1]: /tracing/setup/php/#automatic-instrumentation
-[6]: https://github.com/opentracing/opentracing-php
 
 {{< /programming-lang >}}
 
@@ -794,3 +771,25 @@ $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
 
 
 
+[1]: https://github.com/opentracing/opentracing-java
+[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
+[3]: https://opentracing.io/guides/python/
+[4]: https://github.com/open-telemetry/opentelemetry-python/tree/master/ext/opentelemetry-ext-datadog
+[5]: https://github.com/open-telemetry/opentelemetry-python/tree/master/docs/examples/datadog_exporter
+[6]: https://opentelemetry-python.readthedocs.io/en/stable/ext/datadog/datadog.html
+[7]: /tracing/setup/ruby/#quickstart-for-opentracing
+[8]: /tracing/setup/ruby/#tracer-settings
+[9]: /tracing/visualization/#trace
+[10]: /tracing/setup/ruby/#integration-instrumentation
+[11]: https://bundler.io
+[12]: https://rubygems.org/gems/opentelemetry-exporters-datadog
+[13]: https://github.com/DataDog/dd-opentelemetry-exporter-ruby
+[14]: https://github.com/opentracing/opentracing-go
+[15]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[16]: http://opentracing.io
+[17]: https://opentracing.io/guides/javascript/
+[18]: https://www.npmjs.com/package/opentelemetry-exporter-datadog
+[19]: https://github.com/Datadog/dd-opentelemetry-exporter-js
+[20]: https://github.com/opentracing/opentracing-csharp
+[21]: https://github.com/opentracing/opentracing-php
+[22]: /tracing/setup/php/#automatic-instrumentation
