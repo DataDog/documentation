@@ -501,11 +501,11 @@ C++
 
 # OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][10], or see the setup information below.
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][100], or see the setup information below.
 
 ### Setup
 
-Import the [`opentracer` package][11] to expose the Datadog tracer as an [OpenTracing][12] compatible tracer.
+Import the [`opentracer` package][110] to expose the Datadog tracer as an [OpenTracing][120] compatible tracer.
 
 A basic usage example:
 
@@ -534,11 +534,11 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][10] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][11] for more examples and details.
+**Note**: Using the [OpenTracing API][100] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][110] for more examples and details.
 
-[10]: https://github.com/opentracing/opentracing-go
-[11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[12]: http://opentracing.io
+[100]: https://github.com/opentracing/opentracing-go
+[110]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[120]: http://opentracing.io
 
 {{< /programming-lang >}}
 
