@@ -175,7 +175,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][2] for more details and information.
 
 
 {{< /programming-lang >}}
