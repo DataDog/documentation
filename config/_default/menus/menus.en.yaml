@@ -1135,7 +1135,7 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 140000
-  - name: Set up tracing
+  - name: Send traces to Datadog
     url: tracing/setup_overview/
     identifier: tracing_setup_overview
     parent: tracing
