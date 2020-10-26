@@ -51,7 +51,7 @@ ECS コンテナおよびタスクを Datadog でモニタリングするには�
 
 **注**: 他のコンテナからの DogStatsD メトリクス収集を有効にするには、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` 環境変数を `true` に設定する必要があります。
 
-  - ログ管理を使用している場合は、このトピックの[ログの収集][6]セクションを参照してください。
+  - ログ管理を使用している場合は、このトピックの[ログの収集][8]セクションを参照してください。
 
 EC2 インスタンスでセキュリティグループ設定を再度チェックします。これらのポートが非公開であること確認してください。Datadog では、プライベート IP アドレスを使用してトレースをコンテナからエージェントへ渡します。
 
@@ -60,25 +60,25 @@ EC2 インスタンスでセキュリティグループ設定を再度チェッ�
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
 
-1. Linux コンテナで [datadog-agent-ecs.json][1] (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][2]) をダウンロードします。Windows の場合は [datadog-agent-ecs-win.json][3] をダウンロードします。
+1. Linux コンテナで [datadog-agent-ecs.json][1] (オリジナルの Amazon Linux 1 AMI を使用している場合は [datadog-agent-ecs1.json][2]) をダウンロードします。Windows の場合は [datadog-agent-ecs-win.json][3] をダウンロードします。
 2. `datadog-agent-ecs.json` を編集し、アカウントの [Datadog API キー][4]を使用して `<YOUR_DATADOG_API_KEY>` を設定します。
 3. オプション - [Agent 健全性チェック](#agent-health-check)を追加します。
 4. オプション - Datadog EU サイトをご利用の場合は、`datadog-agent-ecs.json` を編集して `DD_SITE` を `DD_SITE:datadoghq.eu` に設定します。
-5. オプション - ログの収集を有効にするには、[ログの収集][18]を参照してください。 
+5. オプション - ログの収集を有効にするには、[ログの収集][5]を参照してください。 
 6. オプション - プロセスの収集を有効にするには、[プロセスの収集](#プロセス-の-収集)を参照してください。
-7. オプション - トレースの収集を有効にするには、[トレースの収集 (APM)][16] を参照してください。
+7. オプション - トレースの収集を有効にするには、[トレースの収集 (APM)][6] を参照してください。
 8. オプション - ネットワークの収集を有効にするには、[ネットワークパフォーマンスモニタリング (NPM)](#network-performance-monitoring-collection) を参照してください
 9. 次のコマンドを実行します。
 
-{{< code-block lang="bash" >}}
+```bash
 aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
-{{< /code-block >}}
+```
 
 ##### Agent 健全性チェック
 
 ECS タスク定義に次を追加して、Agent 健全性チェックを作成します。
 
-{{< code-block lang="json" >}}
+```json
 "healthCheck": {
   "retries": 3,
   "command": ["CMD-SHELL","agent health"],
@@ -86,12 +86,14 @@ ECS タスク定義に次を追加して、Agent 健全性チェックを作成�
   "interval": 30,
   "startPeriod": 15
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [4]: https://app.datadoghq.com/account/settings#api
+[5]: /ja/agent/amazon_ecs/logs/
+[6]: /ja/agent/amazon_ecs/apm/
 {{% /tab %}}
 {{% tab "Web UI" %}}
 
@@ -102,7 +104,7 @@ ECS タスク定義に次を追加して、Agent 健全性チェックを作成�
 5. **Add volume** リンクをクリックします。
 6. **Name** に `docker_sock` と入力します。**Source Path** に、Linux の場合は `/var/run/docker.sock`、Windows の場合は `\\.\pipe\docker_engine` と入力し、**Add** をクリックします。
 7. Linux に限り、ボリュームをもう 1 つ追加して、名前を `proc`、ソースパスを `/proc/` に設定します。
-8. Linux に限り、ボリュームをもう 1 つ追加して、名前を `cgroup`、ソースパスを `/sys/fs/cgroup/` (オリジナルの Amazon Linux AMI を使用している場合は `/cgroup/`) に設定します。
+8. Linux の場合のみ、ボリュームをもう 1 つ追加して、名前を `cgroup`、ソースパスを `/sys/fs/cgroup/` (オリジナルの Amazon Linux 1 AMI を使用している場合は `/cgroup/`) に設定します。
 9. **Add container** ボタンをクリックします。
 10. **Container name** に `datadog-agent` と入力します。
 11. **Image** に `datadog/agent:latest` と入力します。
@@ -113,7 +115,7 @@ ECS タスク定義に次を追加して、Agent 健全性チェックを作成�
 16. **Storage and Logging** セクションまで下へスクロールします。
 17. **Mount points** で **docker_sock** ソースボリュームを選択し、コンテナのパスに Linux の場合は `/var/run/docker.sock`、Windows の場合は `\\.\pipe\docker_engine` と入力します。**Read only** のチェックボックスをオンにします。
 18. Linux に限り、**proc** 用に別のマウントポイントを追加し、コンテナのパスに `/host/proc/` と入力します。**Read only** チェックボックスをオンにします。
-19. Linux に限り、**cgroup** 用に 3 つ目のマウントポイントを追加して、コンテナのパスに `/host/sys/fs/cgroup` と入力します。**Read only** チェックボックスをオンにします (オリジナルの Amazon Linux AMI を使用している場合は `/host/cgroup/` を使用してください)。
+19. Linux の場合のみ、3 つ目のマウント ポイントを追加して **cgroup** を選択し、コンテナのパスに `/host/sys/fs/cgroup` と入力します。**Read only** チェックボックスをオンにします。
 
 **注**: Datadog タスク定義で CPU を 10 台使用するように設定すると、`service:datadog-agent` の `aws.ecs.cpuutilization` が 1000% と表示されることがあります。これは AWS が CPU 使用率を表示する際の独特な現象です。CPU の台数を増やすことで、グラフの歪曲を回避できます。
 
@@ -170,7 +172,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
 1. [前述の手順](#aws-cli)に従い Datadog Agent をインストールします。
 2. 次の構成で [datadog-agent-ecs.json][1] ファイル (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][2]) を更新します。
 
-{{< code-block lang="json" >}}
+```json
 {
   "containerDefinitions": [
     (...)
@@ -204,7 +206,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
   ],
   "family": "datadog-agent-task"
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
@@ -214,7 +216,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
 1. [前述の手順](#aws-cli)に従い Datadog Agent をインストールします。
 2. 次の構成を使用して [datadog-agent-ecs-win.json][1] ファイルを更新します。
 
-{{< code-block lang="json" >}}
+```json
 {
   "containerDefinitions": [
     (...)
@@ -229,7 +231,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
   ],
   "family": "datadog-agent-task"
 }
-{{< /code-block >}}
+```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 {{% /tab %}}
@@ -241,7 +243,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
   - 初めてインストールする場合は `datadog-agent-ecs.json` ファイル、[datadog-agent-sysprobe-ecs.json][15] (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-sysprobe-ecs1.json][16]) を使用できます。使用方法については、[上記の指示](#AWS-cli)に従ってください。AWS UI では `linuxParameters` を追加できないため、初回の NPM セットアップでは CLI が必要です。
  2. タスク定義がすでに存在する場合は、次のコンフィギュレーションで [datadog-agent-ecs.json][17] ファイル (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][18]) を更新します。
 
- {{< code-block lang="json" >}}
+ ```json
  {
    "containerDefinitions": [
      (...)
@@ -286,7 +288,7 @@ Agent v6.10 以上では、実際のコンテナと Agent コンテナの両方�
    ],
    "family": "datadog-agent-task"
  }
- {{< /code-block >}}
+ ```
 
 ## トラブルシューティング
 
