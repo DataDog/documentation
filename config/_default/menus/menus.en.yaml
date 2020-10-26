@@ -2720,13 +2720,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: Service Dependencies
     generated: true
-  - name: Get all service dependencies
+  - name: Get all APM service dependencies
     parent: Service Dependencies
-    url: '#get-all-service-dependencies'
+    url: '#get-all-apm-service-dependencies'
     generated: true
-  - name: Get one service's dependencies
+  - name: Get one APM service's dependencies
     parent: Service Dependencies
-    url: '#get-one-services-dependencies'
+    url: '#get-one-apm-services-dependencies'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
