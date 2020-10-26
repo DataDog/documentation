@@ -151,19 +151,19 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 * Examples:
   - PowerShell (`powershell.exe`)
 
-	```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
-	```
+    ```powershell
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
+    ```
 
   - Command Prompt (`cmd.exe`)
 
-	```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
-	```
+     ```cmd
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+    ```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
