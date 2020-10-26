@@ -52,7 +52,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
 | Lumen          | 5.2+          | All supported PHP versions |
 | Slim           | 3.x           | All supported PHP versions |
-| Symfony        | 3.3, 3.4, 4.x | All supported PHP versions |
+| Symfony        | 3.3+, 4, 5    | All supported PHP versions |
 | WordPress      | 4.x, 5.x      | PHP 7+                     |
 | Zend Framework | 1.12          | All supported PHP versions |
 | Yii            | 1.1, 2.0      | All supported PHP versions |
