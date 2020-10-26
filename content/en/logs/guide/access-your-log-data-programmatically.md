@@ -39,7 +39,7 @@ This guide also assumes that you have a terminal with `CURL`.
 
 ### Basic search
 
-In our sample data, we have some log events data which includes the number of `page views` for each `user`. 
+In our sample data, there are log events data which includes the number of `page views` for each `user`. 
 
 Retrieve all log events within a specific time period by using the following API call. `from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed. It follows the [Search Syntax][3].
 
