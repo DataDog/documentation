@@ -49,7 +49,7 @@ You can now confirm that an email was sent. Click the **Assertion** button and s
 
 If you want to make sure your email respects specific guidelines for its content, you can add more verifications against its subject and body.
 
-In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matches the `\d{1,6}` [regex pattern][2].
+In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matches the `\d{1,6}` regex pattern.
 
 ## Navigate links in email
 
@@ -69,4 +69,3 @@ You can now go ahead and create a final assertion to test the `div` content to m
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests
-[2]: 2
