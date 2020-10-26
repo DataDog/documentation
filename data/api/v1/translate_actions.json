@@ -577,12 +577,12 @@
     "request_schema_description": "The metrics' payload."
   },
   "ListServiceDependencies": {
-    "description": "Get a list of services and their dependencies. The services retrieved are filtered by environment and a\nprimary tag, if one is defined.",
-    "summary": "Get all service dependencies"
+    "description": "Get a list of services from APM and their dependencies. The services retrieved are filtered by environment and a\nprimary tag, if one is defined.",
+    "summary": "Get all APM service dependencies"
   },
   "ListSingleServiceDependencies": {
     "description": "Get a specific service's immediate upstream and downstream services.\nThe services retrieved are filtered by environment and a primary tag, if one is defined.",
-    "summary": "Get one service's dependencies"
+    "summary": "Get one APM service's dependencies"
   },
   "ListSLOs": {
     "description": "Get multiple service level objective objects by their IDs.",
