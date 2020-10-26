@@ -25,7 +25,7 @@ If you omit the database name, the Agent fails to run the query with the error: 
 
 ### Name your metric
 
-The names applied to your query metrics are taken as provided. It's recommended, but not required, to begin your custom query metrics with the `mysql.` namespace. Doing so includes the metrics in your MySQL summary dashboards on the infrastructure list and hostmap.
+The names applied to your query metrics are taken as provided (there are no prepends). For example, your metric name could be: `myapp.custom_query.test`.
 
 ### Collection frequency
 
@@ -47,21 +47,17 @@ col_1 | col_2 | col_3
 3     | c     | c
 ```
 
-Adding the following custom query to your MySQL `conf.yaml` collects the metric `mysql.custom_query.test.b` with a value of `2`.
+Adding the following custom query to your MySQL `conf.yaml` collects the metric `myapp.custom_query.test.b` with a value of `2`.
 
 ```yaml
     custom_queries:
       - query: SELECT col_1 FROM tester.test_table WHERE col_2 = 'b'
         columns:
-        - name: mysql.custom_query.test.b
+        - name: myapp.custom_query.test.b
           type: gauge
         tags:
         - tester:mysql
 ```
-
-Result in Datadog:
-
-{{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query"  >}}
 
 ## Further Reading
 

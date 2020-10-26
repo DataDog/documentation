@@ -67,7 +67,7 @@ LaunchDarkly インテグレーションには、サービスのチェック機�
 
 [LaunchDarkly][5] およびこのインテグレーションの詳細は[こちら][3]を参照してください。.
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/launchdarkly/assets/images/ld-datadog-hover.gif
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/launchdarkly/images/ld-datadog-hover.gif
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.launchdarkly.com/docs/datadog
 [4]: https://support.launchdarkly.com/hc/en-us/requests/new

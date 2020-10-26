@@ -70,9 +70,35 @@ Datadog アプリケーションのパース機能自体の詳細については
 
 ログ管理ソリューションを最適にご利用いただくため、Datadog では Grok プロセッサ内でパイプラインごとに最大 20 件のプロセッサーおよび 10 個のパース規則を使用することをおすすめします。Datadog はサービスのパフォーマンスに悪影響を与える可能性のあるパース規則、プロセッサー、パイプラインを無効化する権利を有しています。
 
-## 予約済み属性
 
-ログが JSON 形式の場合、Datadog によって以下の属性が予約されており、デフォルトでファセット化されているので注意してください。
+## JSON ログの前処理
+
+JSON ログの前処理は、実際の[ログパイプライン][1]プロセスに入る前にすべてのログに適用されます。前処理は、予約済みの属性に基づき一連のオペレーションを実行します。
+
+* 受信ログの**ソース**に基づき、新しい[ログインテグレーション][12]をトリガーします。
+* 受信ログにすべての [**host** タグ][13]を付加します。
+* 予約済みの属性リマッパープロセッサー ([**date** リマッパー][14]、[**status** リマッパー][15]、[**service** リマッパー][16]、[**message** リマッパー][17]、[**trace ID** リマッパー][18]) を、すべての JSON 受信ログの関連する JSON 属性に適用します。
+
+JSON ログ前処理は、デフォルトで標準ログフォワーダーに機能するよう構成されています。このコンフィギュレーションは、カスタムまたは特定のログ転送方法に合わせていつでも編集することが可能です。デフォルト値を変更するには、[コンフィギュレーションページ][5]で `Pre processing for JSON logs` を編集します。
+
+{{< img src="logs/processing/json_logs_preprocessing.gif" alt="JSON ログ前処理タイル"  style="width:80%;">}}
+
+
+### source 属性
+
+JSON 形式のログファイルに `ddsource` 属性が含まれる場合、Datadog はその値をログのソースと解釈します。Datadog が使用しているソース名を使用する場合は、[インテグレーションパイプラインライブラリ][12]を参照してください。
+
+**注**: コンテナ化環境から取得したログの場合、[環境変数][19]を使用してデフォルトのソース値とサービス値をオーバーライドする必要があります。
+
+
+### host 属性
+
+Datadog Agent または RFC5424 形式を使用すると、自動的にログにホスト値が設定されます。ただし、JSON 形式のログファイルに以下の属性が含まれる場合、Datadog はその値をログのホストと解釈します。
+
+* `host`
+* `hostname`
+* `syslog.hostname`
+
 
 ### date 属性
 
@@ -87,7 +113,7 @@ Datadog アプリケーションのパース機能自体の詳細については
 * `published_date`
 * `syslog.timestamp`
 
-[ログ日付リマッパープロセッサー][12]を設定することで、別の属性を指定してログの日付のソースとして使用することもできます。
+[ログ日付リマッパープロセッサー][14]を設定することで、別の属性を指定してログの日付のソースとして使用することもできます。
 
 **注**: ログエントリの正式な日付が 18 時間以上前だった場合、Datadog はそのエントリを拒否します。
 
@@ -97,7 +123,7 @@ Datadog アプリケーションのパース機能自体の詳細については
 
 ### message 属性
 
-デフォルトでは、メッセージの値はログエントリの本文として収集されます。[ログストリーム][13]では、この値がハイライトされ、[全文検索][14]用にインデックス化されます。
+デフォルトでは、メッセージの値はログエントリの本文として収集されます。[ログストリーム][20]では、この値がハイライトされ、[全文検索][21]用にインデックス化されます。
 
 ### status 属性
 
@@ -110,20 +136,6 @@ Datadog アプリケーションのパース機能自体の詳細については
 
 `status` 属性の既存のステータスを再マップする場合は、[ログステータスリマッパー][15]を使用します。
 
-### host 属性
-
-Datadog Agent または RFC5424 形式を使用すると、自動的にログにホスト値が設定されます。ただし、JSON 形式のログファイルに以下の属性が含まれる場合、Datadog はその値をログのホストと解釈します。
-
-* `host`
-* `hostname`
-* `syslog.hostname`
-
-### source 属性
-
-JSON 形式のログファイルに `ddsource` 属性が含まれる場合、Datadog はその値をログのソースと解釈します。Datadog が使用しているソース名を使用する場合は、[インテグレーションパイプラインライブラリ][16]を参照してください。
-
-**注**: コンテナ化環境から取得したログの場合、[環境変数][17]を使用してデフォルトのソース値とサービス値をオーバーライドする必要があります。
-
 ### service 属性
 
 Datadog Agent または RFC5424 形式を使用すると、自動的にログにサービス値が設定されます。ただし、JSON 形式のログファイルに以下の属性が含まれる場合、Datadog はその値をログのサービスと解釈します。
@@ -133,20 +145,11 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 
 ### trace_id 属性
 
-デフォルトでは、[Datadog トレーサーは、自動的にトレースとスパンの ID をログに挿入します][18]。ただし、JSON 形式のログに以下の属性が含まれる場合、Datadog はその値をログの `trace_id` と解釈します。
+デフォルトでは、[Datadog トレーサーは、自動的にトレースとスパンの ID をログに挿入します][22]。ただし、JSON 形式のログに以下の属性が含まれる場合、Datadog はその値をログの `trace_id` と解釈します。
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
 
-### 予約済み属性の編集
-
-パイプラインを処理する前に適用されるグローバルなホスト名、サービス、タイムスタンプ、およびステータスのメインマッピングを制御できるようになりました。この機能は、ログを JSON 形式で、または外部 Agent から送信する場合に便利です。
-
-{{< img src="logs/processing/reserved_attribute.png" alt="予約済み属性"  style="width:80%;">}}
-
-各予約済み属性のデフォルト値を変更するには、[Configuration ページ][5]に移動し、`予約済み属性のマッピング`を以下のように編集します。
-
-{{< img src="logs/processing/reserved_attribute_tile.png" alt="予約済み属性タイル"  style="width:80%;">}}
 
 ## その他の参考資料
 
@@ -163,10 +166,14 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [9]: /ja/logs/processing/parsing/
 [10]: /ja/logs/faq/log-parsing-best-practice/
 [11]: /ja/logs/faq/how-to-investigate-a-log-parsing-issue/
-[12]: /ja/logs/processing/processors/#log-date-remapper
-[13]: /ja/logs/explorer/?tab=logstream#visualization
-[14]: /ja/logs/explorer/search/
+[12]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[13]: /ja/getting_started/tagging/#introduction
+[14]: /ja/logs/processing/processors/#log-date-remapper
 [15]: /ja/logs/processing/processors/#log-status-remapper
-[16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[17]: /ja/agent/docker/log/#examples
-[18]: /ja/tracing/connect_logs_and_traces/
+[16]: /ja/logs/processing/processors/?tab=ui#service-remapper
+[17]: /ja/logs/processing/processors/?tab=ui#log-message-remapper
+[18]: /ja/logs/processing/processors/?tab=ui#trace-remapper
+[19]: /ja/agent/docker/log/#examples
+[20]: /ja/logs/explorer/?tab=logstream#visualization
+[21]: /ja/logs/explorer/search/
+[22]: /ja/tracing/connect_logs_and_traces/

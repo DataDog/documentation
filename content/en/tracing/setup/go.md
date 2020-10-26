@@ -44,12 +44,6 @@ Follow the [Quickstart instructions][6] within the Datadog app for the best expe
 
 Otherwise, [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 
-Next, install the Go tracer from its canonical import path:
-
-```go
-go get gopkg.in/DataDog/dd-trace-go.v1/...
-```
-
 You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation

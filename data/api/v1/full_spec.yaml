@@ -5853,7 +5853,7 @@ components:
     ServiceDependencies:
       additionalProperties:
         $ref: '#/components/schemas/ServiceDependency'
-      description: An object containing a list of services and their dependencies.
+      description: An object containing a list of APM services and their dependencies.
       example:
         servica_a:
           calls:
@@ -5869,13 +5869,13 @@ components:
           calls: []
       type: object
     ServiceDependency:
-      description: An object containing a service's dependencies.
+      description: An object containing an APM service's dependencies.
       properties:
         calls:
           description: A list of dependencies.
           example: []
           items:
-            description: Service names.
+            description: APM Service names.
             type: string
           type: array
       required:
@@ -6241,8 +6241,8 @@ components:
       x-enum-varnames:
       - TRACE_SERVICE
     SingleServiceDependencies:
-      description: An object with information on service that call, and are called
-        by a service.
+      description: An object with information on APM services that call, and are called
+        by a given service.
       properties:
         called_by:
           description: List of service names that call the given service.
@@ -6263,7 +6263,7 @@ components:
             type: string
           type: array
         name:
-          description: Name of the service being searched for.
+          description: Name of the APM service being searched for.
           example: service-c
           type: string
       type: object
@@ -15139,8 +15139,8 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/service_dependencies:
     get:
-      description: 'Get a list of services and their dependencies. The services retrieved
-        are filtered by environment and a
+      description: 'Get a list of services from APM and their dependencies. The services
+        retrieved are filtered by environment and a
 
         primary tag, if one is defined.'
       operationId: ListServiceDependencies
@@ -15196,7 +15196,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Get all service dependencies
+      summary: Get all APM service dependencies
       tags:
       - Service Dependencies
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
@@ -15268,7 +15268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Get one service's dependencies
+      summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,

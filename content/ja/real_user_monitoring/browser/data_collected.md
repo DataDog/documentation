@@ -25,10 +25,10 @@ further_reading:
 デフォルトでは、収集されたすべてのデータは詳細な粒度で 15 日間保持されます。Datadog リアルユーザーモニタリングのスクリプトが、Datadog に 5 種類の主なイベントタイプを送信します。
 
 - [View][1]: ユーザーがセットアップアプリケーションのページにアクセスするたびに、ビューイベントが作成されます。ユーザーがそのビューにとどまっている間、収集されたすべてのデータは、`view.id` 属性でそのビューにアタッチされます。
-- [Resource][6]: 画像、XHR/Fetch、CSS、または JS ライブラリのリソースイベントを生成できます。名前や関連付けられている読み込み時間など、リソースに関する情報が含まれています。
-- [Long task][7]: メインスレッドを 50 ミリ秒以上ブロックするブラウザのタスクはすべて、ロングタスクと見なされ、特定のイベントが生成されます。
-- [Error][8]: ブラウザによってフロントエンドエラーが発生するたびに、RUM はそれをキャッチし、Error Event として Datadog に送信します。
-- [User Action][9]: User Action イベントは、特定のユーザーアクションに対して生成できるカスタムイベントです。
+- [Resource][2]: 画像、XHR/Fetch、CSS、または JS ライブラリのリソースイベントを生成できます。名前や関連付けられている読み込み時間など、リソースに関する情報が含まれています。
+- [Long task][3]: メインスレッドを 50 ミリ秒以上ブロックするブラウザのタスクはすべて、ロングタスクと見なされ、特定のイベントが生成されます。
+- [Error][4]: ブラウザによってフロントエンドエラーが発生するたびに、RUM はそれをキャッチし、Error Event として Datadog に送信します。
+- [User Action][5]: User Action イベントは、特定のユーザーアクションに対して生成できるカスタムイベントです。
 
 {{< tabs >}}
 {{% tab "ビュー" %}}
@@ -186,23 +186,23 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 {{% tab "ユーザーアクション" %}}
 
 ## ユーザーアクションの自動収集
-Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行されるユーザーのインタラクションを検出します。この機能を有効にするには、`trackInteractions` [初期化パラメーター][5]を `true` に設定します。
+Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行されるユーザーのインタラクションを検出します。この機能を有効にするには、`trackInteractions` [初期化パラメーター][1]を `true` に設定します。
 
 **注**: 初期化パラメーター `trackInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
 
-インタラクションが検出されると、すべての新しい RUM イベントは、完了したと見なされるまで、進行中のユーザーアクションにアタッチされます。ユーザーアクションは、その親ビュー属性 (ブラウザ情報、ジオロケーションデータ、[グローバルコンテキスト][1]など) からも恩恵を受けます。
+インタラクションが検出されると、すべての新しい RUM イベントは、完了したと見なされるまで、進行中のユーザーアクションにアタッチされます。ユーザーアクションは、その親ビュー属性 (ブラウザ情報、ジオロケーションデータ、[グローバルコンテキスト][2]など) からも恩恵を受けます。
 
 ### ユーザーアクション期間はどのように計算されますか？
 インタラクションが検出されると、RUM SDK は DOM ミューテーションのネットワークリクエストを監視します。100 ミリ秒を超えてページにアクティビティがない場合、インタラクションは完了したと見なされます (アクティビティは、進行中のネットワークリクエストまたは DOM ミューテーションとして定義)。
 
 ## カスタムユーザーアクション
-カスタムユーザーアクションは、[`addUserAction` API][2] を介して手動で宣言および送信されるユーザーアクションです。カスタムタイミングや顧客のカート情報など、ユーザージャーニー中に発生するイベントに関連する情報を送信できます。
+カスタムユーザーアクションは、[`addUserAction` API][3] を介して手動で宣言および送信されるユーザーアクションです。カスタムタイミングや顧客のカート情報など、ユーザージャーニー中に発生するイベントに関連する情報を送信できます。
 
 ## 収集されるメジャー
 
 | 属性    | タイプ   | 説明              |
 |--------------|--------|--------------------------|
-| `duration` | 数値（ns） | ユーザーアクションの長さ。[ユーザーアクションのドキュメント][3]で計算方法を確認してください。 |
+| `duration` | 数値（ns） | ユーザーアクションの長さ。[ユーザーアクションのドキュメント][4]で計算方法を確認してください。 |
 | `user_action.measures.long_task_count`        | 数値      | このユーザーアクションについて収集されたすべてのロングタスクの数。 |
 | `user_action.measures.resource_count`         | 数値      | このユーザーアクションについて収集されたすべてのリソースの数。 |
 | `user_action.measures.user_action_count`      | 数値      | このユーザーアクションについて収集されたすべてのユーザーアクションの数。|
@@ -212,14 +212,15 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 | 属性    | タイプ   | 説明              |
 |--------------|--------|--------------------------|
 | `user_action.id` | 文字列 | ユーザーアクションの UUID。 |
-| `user_action.type` | 文字列 | ユーザーアクションのタイプ。[カスタムユーザーアクション][4]の場合、`custom` に設定されます。 |
+| `user_action.type` | 文字列 | ユーザーアクションのタイプ。[カスタムユーザーアクション][5]の場合、`custom` に設定されます。 |
 | `event.name` | 文字列 | ユーザーアクションの名前。自動的に収集されたユーザーアクションの場合、ユーザーが操作した要素。 |
 
-[1]: /ja/real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[2]: /ja/real_user_monitoring/installation/advanced_configuration/?tab=npm#custom-user-actions
-[3]: /ja/real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
-[4]: /ja/real_user_monitoring/data_collected/user_action#custom-user-actions
-[5]: /ja/real_user_monitoring/installation/?tab=us#initialization-parameters
+
+[1]: /ja/real_user_monitoring/browser/?tab=us#initialization-parameters
+[2]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[3]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#custom-user-actions
+[4]: /ja/real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
+[5]: /ja/real_user_monitoring/data_collected/user_action#custom-user-actions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -240,7 +241,7 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | 文字列 | ページビューごとにランダムに生成された ID。                                                                      |
 | `view.url`                     | 文字列 | ビューの URL。                                                                                                  |
-| `view.loading_type`                     | 文字列 | ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント][2]を参照してください。|
+| `view.loading_type`                     | 文字列 | ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント][6]を参照してください。|
 | `view.referrer`                | 文字列 | 現在リクエストされているページへのリンクがたどられた前のウェブページの URL。               |
 | `view.url_details.host`        | 文字列 | URL の HTTP ホスト部分。                                                                                 |
 | `view.url_details.path`        | 文字列 | URL の HTTP パス部分。                                                                                 |
@@ -249,7 +250,7 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 
 ### ユーザーエージェント
 
-[Datadog 標準属性][3]ロジックに続く次のコンテキストは、Datadog に送信されるすべてのイベントに自動的にアタッチされます。
+[Datadog 標準属性][7]ロジックに続く次のコンテキストは、Datadog に送信されるすべてのイベントに自動的にアタッチされます。
 
 | 属性名                           | タイプ   | 説明                                     |
 |------------------------------------------|--------|-------------------------------------------------|
@@ -265,11 +266,11 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 | 完全名                                    | タイプ   | 説明                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `network.client.geoip.country.name`         | 文字列 | 国の名前。                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | 文字列 | 国の [ISO コード][4] (米国は `US`、フランスは `FR` など)。                                                  |
+| `network.client.geoip.country.iso_code`     | 文字列 | 国の [ISO コード][8] (米国は `US`、フランスは `FR` など)。                                                  |
 | `network.client.geoip.continent.code`       | 文字列 | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)                                                                 |
 | `network.client.geoip.continent.name`       | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antartica`、`South America`、`Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | 文字列 | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など) |
-| `network.client.geoip.subdivision.iso_code` | 文字列 | その国で最大規模の地方区分の [ISO コード][4] (米国は `CA`、フランスは `SA` など)    |
+| `network.client.geoip.subdivision.iso_code` | 文字列 | その国で最大規模の地方区分の [ISO コード][8] (米国は `CA`、フランスは `SA` など)    |
 | `network.client.geoip.city.name`            | 文字列 | 都市名 (`Paris`、`New York` など)                                                                                   |
 
 ## 追加属性
@@ -281,12 +282,11 @@ Real User Monitoring (RUM) SDK は、ユーザージャーニー中に実行さ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/real_user_monitoring/installation/advanced_configuration/
-[2]: /ja/real_user_monitoring/data_collected/view#single-page-applications
-[3]: /ja/logs/processing/attributes_naming_convention/
-[4]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes
-[5]: /ja/real_user_monitoring/browser/data_collected/?tab=view
-[6]: /ja/real_user_monitoring/browser/data_collected/?tab=resource
-[7]: /ja/real_user_monitoring/browser/data_collected/?tab=longtask
-[8]: /ja/real_user_monitoring/browser/data_collected/?tab=error
-[9]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction
+[1]: /ja/real_user_monitoring/browser/advanced_configuration/
+[2]: /ja/real_user_monitoring/browser/data_collected/?tab=resource
+[3]: /ja/real_user_monitoring/browser/data_collected/?tab=longtask
+[4]: /ja/real_user_monitoring/browser/data_collected/?tab=error
+[5]: /ja/real_user_monitoring/browser/data_collected/?tab=useraction
+[6]: /ja/real_user_monitoring/data_collected/view#single-page-applications
+[7]: /ja/logs/processing/attributes_naming_convention/
+[8]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes

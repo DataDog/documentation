@@ -325,6 +325,19 @@
           kind: documentation
           aliases:
             - /real_user_monitoring/setup
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'packages/logs/README.md'
+      options:
+        dest_path: '/logs/log_collection/'
+        file_name: 'javascript.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md"]
+          title: Browser Log Collection
+          kind: documentation
+          aliases:
+          - /logs/log_collection/web_browser
 
   - repo_name: datadog-cloudformation-resources
     contents:
