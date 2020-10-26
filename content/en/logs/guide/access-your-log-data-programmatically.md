@@ -390,7 +390,6 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
                 "service": "pageViewService",
                 "tags": [
                     "source:postman",
-                    "source:postman"
                 ],
                 "timestamp": "2020-10-07T00:01:41.909Z",
                 "host": "my.sample.host",
