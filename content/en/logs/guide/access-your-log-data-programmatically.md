@@ -442,7 +442,7 @@ The `data` parameter is an array of Log objects and at maximum it contains as ma
 
 To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. 
 
-From the above JSON example, use the `after` value of `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` to get the next 2 results.
+From the above JSON example, use the `after` value `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` to get the next two results.
 
 ```bash
 
