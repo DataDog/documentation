@@ -45,9 +45,11 @@ Otherwise, to begin tracing applications written in any language:
 
 4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
 
-### JVM notes
+- The Java Tracer support all JVM-based languages, i.e. Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, Clojure, etc.
 
-- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
+### Add the Java Tracer to the JVM 
+
+Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
     {{< tabs >}}
     {{% tab "Spring Boot" %}}
