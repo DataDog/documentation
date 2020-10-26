@@ -73,10 +73,11 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
     sudo apt-get install apt-transport-https
     ```
 
-2. Set up the Datadog deb repo on your system and import Datadog's apt key:
+2. Set up the Datadog deb repo on your system and import Datadog's apt keys:
     ```bash
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
 3. Update `apt` and install the IoT Agent:
@@ -126,6 +127,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
     
     The `baseurl` is dependent on your host OS:
