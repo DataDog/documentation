@@ -464,7 +464,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 ```json
 
-In the response, the next two results i.e. `joe` with 500 `pageviews` and `chris` with 450 `pageviews` are retrieved. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
+In the response, the next two results, (for example, `joe` with 500 `pageviews` and `chris` with 450 `pageviews`) are retrieved. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
 {
     "meta": {
