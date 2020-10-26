@@ -16,13 +16,11 @@ further_reading:
 
 ### メトリクス
 
-EC2 インスタンスで Amazon ECS を使用するときに Agent によって収集されるメトリクス:
+Datadog Agent で収集された Amazon ECS メトリクス:
 
-{{< get-metrics-from-git "amazon_ecs" >}}
+{{< get-metrics-from-git "amazon_ecs" "ecs." >}}
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
-
-**注**: `ecs.containerinsights.*` をプレフィックスに持つメトリクスは、[AWS CloudWatch エージェント][1]に基づいています。
+**注**: `ecs.containerinsights.*` をプレフィックスに持つメトリクスは、[AWS CloudWatch エージェント][2]に基づいています。
 
 ### イベント
 
@@ -30,15 +28,12 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
 
-ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][2]までお問い合わせください。
-
-### サービスチェック
-
-- **aws.ecs.agent_connected**: Agent が接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
+ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][3]までお問い合わせください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
-[2]: https://docs.datadoghq.com/ja/help/
+[1]: /ja/integrations/amazon_web_services/
+[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
+[3]: https://docs.datadoghq.com/ja/help/
