@@ -80,6 +80,7 @@ The status graph shows your monitor's status over time, broken out by group. **N
 
 * The monitor is newly created and has not evaluated yet.
 * The monitor's query was recently changed.
+* The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 
 ### History
