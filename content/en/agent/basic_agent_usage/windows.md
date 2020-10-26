@@ -159,7 +159,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 
   - Command Prompt (`cmd.exe`)
 
-     ```cmd
+    ```cmd
     "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
     "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
     "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
