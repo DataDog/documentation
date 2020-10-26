@@ -12,6 +12,7 @@ content/en/api/**/*.java
 # Developers/integrations
 content/en/developers/integrations/*.md
 content/en/developers/amazon_cloudformation.md
+content/en/developers/marketplace.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md

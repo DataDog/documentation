@@ -463,3 +463,17 @@
         - "runtime/**/*.md"
       options:
         dest_path: '/security_monitoring/default_rules/'
+
+  - repo_name: marketplace
+    contents:
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'README.md'
+      options:
+        dest_path: '/developers/'
+        file_name: 'marketplace.md'
+        front_matters:
+          dependencies: ["https://github.com/DataDog/marketplace/blob/master/README.md"]
+          title: Marketplace
+          kind: documentation
