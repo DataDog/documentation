@@ -440,7 +440,7 @@ To retrieve a log list longer than the maximum 1000 logs limit, you must use the
 
 The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
 
-To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. 
+To see the next page of your logs, resend the query with the `cursor` parameter that takes the `after` value from the previous call. 
 
 From the above JSON example, use the `after` value `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` to get the next two results.
 
