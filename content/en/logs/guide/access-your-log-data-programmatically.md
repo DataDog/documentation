@@ -41,7 +41,7 @@ This guide also assumes that you have a terminal with `CURL`.
 
 In our sample data, we have some log events data which includes the number of `page views` for each `user`. 
 
-With the following API call, retrieve all log events within a specific time period. The `from` indicates the `start time` and the `to` indicates the `end time` for the log data. The `query` indicates the search query that must be executed. It follows the [Search Syntax][3].
+Retrieve all log events within a specific time period by using the following API call. `from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed. It follows the [Search Syntax][3].
 
 **API call:**
 
