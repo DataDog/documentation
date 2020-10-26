@@ -436,7 +436,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 ### Pagination
 
-To retrieve a log list longer than the maximum 1000 logs limit, you must use the Pagination feature.
+To retrieve a log list longer than the 1000 logs limit, you must use the Pagination feature.
 
 The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
 
