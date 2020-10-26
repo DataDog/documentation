@@ -355,7 +355,7 @@ The log events are retrieved in ascending order based on their `timestamp` value
 
 ### Limit the number of results retrieved
 
-With the following API call, limit the number of log events retrieved. The `limit` indicates the maximum number of log events returned in the response.
+With the following API call, limit the number of log events retrieved. The `limit` indicates the maximum number of log events returned in the response. The maximum limit is 1000.
 
 ```bash
 
