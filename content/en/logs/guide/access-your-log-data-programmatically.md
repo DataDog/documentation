@@ -59,7 +59,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 **Response:**
 
-The result dataset comprises the `data` object as shown in the following sample response.
+The result dataset is comprised of the `data` object, as shown in the following example response.
 
 ```json
 
