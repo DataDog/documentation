@@ -3,15 +3,20 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: hbase
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md'
 display_name: HBase master
+draft: false
 git_integration_title: hbase_master
 guid: b45e0f05-8ece-4d5c-946b-ce0ee8057e68
 integration_id: hbase-master
@@ -37,7 +42,7 @@ Hbase_master サービスからメトリクスをリアルタイムに取得し�
 - Hbase_master の状態を視覚化および監視できます。
 - Hbase_master のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ 
+## セットアップ
 
 ### インストール
 
@@ -76,6 +81,28 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. Hbase_master の[メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `hbase_master.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_master.d/conf.yaml][8] を参照してください。
 
 2. [Agent を再起動します][9]
+
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Hbase_master ログの収集を開始するには、次のコンフィギュレーションブロックを `hbase_master.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: hbase
+   ```
+
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル hbase_master.d/conf.yaml][8] を参照してください。
+
+3. [Agent を再起動します][9]。
 
 ### 検証
 
@@ -152,6 +179,28 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. Hbase RegionServer の[メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `hbase_regionserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_regionserver.d/conf.yaml][12] を参照してください。
 
 2. [Agent を再起動します][9]
+
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Hbase_regionserver ログの収集を開始するには、次のコンフィギュレーションブロックを `hbase_regionserver.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: hbase
+   ```
+
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hbase_regionserver.d/conf.yaml][12] を参照してください。
+
+3. [Agent を再起動します][9]。
 
 ## 検証
 
