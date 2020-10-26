@@ -67,6 +67,7 @@ npm-debug.log*
 # RUM
 content/en/real_user_monitoring/android.md
 content/en/real_user_monitoring/browser/_index.md
+content/en/logs/log_collection/javascript.md
 
 # serverless
 content/en/serverless/forwarder.md
