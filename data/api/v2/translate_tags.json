@@ -47,6 +47,14 @@
     "name": "IP Ranges",
     "description": "[See API version 1](/api/v1/ip-ranges/)."
   },
+  "incident-services": {
+    "name": "Incident Services",
+    "description": "Create, update, delete, and retrieve services which can be associated with incidents."
+  },
+  "incident-teams": {
+    "name": "Incident Teams",
+    "description": "Create, update, delete and retrieve teams which can be associated with incidents."
+  },
   "key-management": {
     "name": "Key Management",
     "description": "[See API version 1](/api/v1/key-management/)."
@@ -111,10 +119,6 @@
     "name": "Service Level Objectives",
     "description": "[See API version 1](/api/v1/service-level-objectives/)."
   },
-  "services": {
-    "name": "Services",
-    "description": "Create, update, delete and retrieve your organizations services."
-  },
   "slack-integration": {
     "name": "Slack Integration",
     "description": "[See API version 1](/api/v1/slack-integration/)."
@@ -130,10 +134,6 @@
   "tags": {
     "name": "Tags",
     "description": "[See API version 1](/api/v1/tags/)."
-  },
-  "teams": {
-    "name": "Teams",
-    "description": "Create, update, delete and retrieve your organizations Teams."
   },
   "timeboards": {
     "name": "Timeboards",

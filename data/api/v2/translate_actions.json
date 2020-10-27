@@ -229,53 +229,53 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
-  "GetServices": {
-    "description": "Get all services for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services.",
-    "summary": "Get a list of all services"
+  "GetIncidentServices": {
+    "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
+    "summary": "Get a list of all incident services"
   },
-  "CreateService": {
-    "description": "Creates a new service.",
-    "summary": "Create a new service",
-    "request_description": "Service Payload.",
-    "request_schema_description": "Create request with a service payload."
+  "CreateIncidentService": {
+    "description": "Creates a new incident service.",
+    "summary": "Create a new incident service",
+    "request_description": "Incident Service Payload.",
+    "request_schema_description": "Create request with an incident service payload."
   },
-  "DeleteService": {
-    "description": "Deletes an existing service.",
-    "summary": "Delete an existing service"
+  "DeleteIncidentService": {
+    "description": "Deletes an existing incident service.",
+    "summary": "Delete an existing incident service"
   },
-  "GetService": {
-    "description": "Get details of a service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these services",
-    "summary": "Get details of a service"
+  "GetIncidentService": {
+    "description": "Get details of an incident service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
+    "summary": "Get details of an incident service"
   },
-  "UpdateService": {
-    "description": "Updates an existing service. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing service",
-    "request_description": "Service Payload.",
-    "request_schema_description": "Update request with a service payload."
+  "UpdateIncidentService": {
+    "description": "Updates an existing incident service. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing incident service",
+    "request_description": "Incident Service Payload.",
+    "request_schema_description": "Update request with an incident service payload."
   },
-  "GetTeams": {
-    "description": "Get all teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
-    "summary": "Get a list of all teams"
+  "GetIncidentTeams": {
+    "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
+    "summary": "Get a list of all incident teams"
   },
-  "CreateTeam": {
-    "description": "Creates a new team.",
-    "summary": "Create a new team",
-    "request_description": "Teams Payload.",
-    "request_schema_description": "Create request with a team payload."
+  "CreateIncidentTeam": {
+    "description": "Creates a new incident team.",
+    "summary": "Create a new incident team",
+    "request_description": "Incident Team Payload.",
+    "request_schema_description": "Create request with an incident team payload."
   },
-  "DeleteTeam": {
-    "description": "Deletes an existing team.",
-    "summary": "Delete an existing team"
+  "DeleteIncidentTeam": {
+    "description": "Deletes an existing incident team.",
+    "summary": "Delete an existing incident team"
   },
-  "GetTeam": {
-    "description": "Get details of a team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these teams.",
-    "summary": "Get details of a team"
+  "GetIncidentTeam": {
+    "description": "Get details of an incident team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
+    "summary": "Get details of an incident team"
   },
-  "UpdateTeam": {
-    "description": "Updates an existing team. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing team",
-    "request_description": "Teams Payload.",
-    "request_schema_description": "Update request with a team payload."
+  "UpdateIncidentTeam": {
+    "description": "Updates an existing incident team. Only provide the attributes which should be updated as this request is a partial update.",
+    "summary": "Update an existing incident team",
+    "request_description": "Incident Team Payload.",
+    "request_schema_description": "Update request with an incident team payload."
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
