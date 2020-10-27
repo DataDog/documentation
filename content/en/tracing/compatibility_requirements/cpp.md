@@ -1,6 +1,8 @@
 ---
 title: C++ Compatibility Requirements
 kind: documentation
+code_lang: cpp
+type: multi-code-lang
 description: 'Compatibility Requirements for the C++ tracer'
 further_reading:
     - link: 'tracing/setup/cpp'

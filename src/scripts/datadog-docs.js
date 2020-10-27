@@ -688,6 +688,11 @@ function getPathElement() {
         maPath = document.querySelector('header [data-path*="graphing/guide"]');
     }
 
+    if (path.includes('tracing/compatibility_requirements')) {
+        aPath = document.querySelector('.side [data-path*="tracing/compatibility_requirements"]');
+        maPath = document.querySelector('header [data-path*="tracing/compatibility_requirements"]');
+    }
+
     if (path.includes('logs/guide')) {
         aPath = document.querySelector('.side [data-path*="logs/guide"]');
         maPath = document.querySelector('header [data-path*="logs/guide"]');

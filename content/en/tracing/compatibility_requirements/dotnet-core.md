@@ -2,6 +2,8 @@
 title: .NET Core Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
+code_lang: dotnet-core
+type: multi-code-lang
 further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'

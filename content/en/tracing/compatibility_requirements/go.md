@@ -1,6 +1,8 @@
 ---
 title: Go Compatibility Requirements
 kind: documentation
+code_lang: go
+type: multi-code-lang
 description: 'Compatibility Requirements for the Go tracer'
 further_reading:
     - link: 'tracing/setup/go'

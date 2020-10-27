@@ -1,6 +1,8 @@
 ---
 title: .NET Framework Compatibility Requirements
 kind: documentation
+code_lang: dotnet-framework
+type: multi-code-lang
 description: 'Compatibility Requirements for the .NET tracer'
 further_reading:
     - link: 'tracing/setup/dotnet-framework'

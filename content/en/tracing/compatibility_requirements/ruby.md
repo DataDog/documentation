@@ -3,6 +3,8 @@ title: Ruby Compatibility Requirements
 dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md
 kind: documentation
+code_lang: ruby
+type: multi-code-lang
 description: 'Compatibility Requirements for the Ruby tracer.'
 further_reading:
     - link: 'tracing/setup/ruby'

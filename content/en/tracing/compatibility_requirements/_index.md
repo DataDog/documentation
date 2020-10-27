@@ -6,6 +6,7 @@ further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
   text: "Add the tracing library to your application"
+type: multi-code-lang
 aliases:
   - /tracing/compatibility
 ---
