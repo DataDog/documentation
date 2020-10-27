@@ -467,7 +467,7 @@
   - repo_name: marketplace
     contents:
     - action: pull-and-push-file
-      branch: master
+      branch: ruth/docs-1275
       globs:
       - 'README.md'
       options:
