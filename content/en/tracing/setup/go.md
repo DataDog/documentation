@@ -1,4 +1,3 @@
-
 ---
 title: Tracing Go Applications
 kind: documentation
@@ -6,6 +5,8 @@ aliases:
 - /tracing/go/
 - /tracing/languages/go
 - /agent/apm/go/
+code_lang: go
+type: multi-code-lang
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
@@ -20,6 +21,7 @@ further_reading:
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
+
 ## Compatibilty Requirements
 
 The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
