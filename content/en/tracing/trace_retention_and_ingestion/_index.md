@@ -19,6 +19,8 @@ After spans have been ingested by Datadog, they will be kept for 15 days accordi
 
 You can also create any number of additional [tag-based retention filters](#create-your-own-retention-filter) for your services.
 
+**Note**: Admin rights are required to create, modify or disable Retention Filters.
+
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Retention Filters" >}}
 
 In the Datadog app, on the [Retention Filters tab][1], you can see the following information:
