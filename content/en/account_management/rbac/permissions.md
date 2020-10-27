@@ -462,7 +462,7 @@ This permission is global, and grants access to the livetail irregardless of [Lo
 [13]: /logs/processing/pipelines/#pipeline-filters
 [14]: /logs/archives
 [15]: /logs/archives/rehydrating
-[16]: #logs-read-archives
+[16]: #logs_read_archives
 [17]: /api/v2/logs-archives/
 [18]: /api/v1/logs-indexes/
 [19]: /api/v1/logs-pipelines/
