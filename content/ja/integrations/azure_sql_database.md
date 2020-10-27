@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Azure SQL Database の主要メトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_sql_database/'
+draft: false
 git_integration_title: azure_sql_database
 has_logo: true
 integration_title: Microsoft Azure SQL Database

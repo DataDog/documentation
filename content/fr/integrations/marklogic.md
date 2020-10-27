@@ -17,11 +17,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md'
 display_name: MarkLogic
+draft: false
 git_integration_title: marklogic
 guid: 0c200415-731f-4b67-9b2c-d6bd1225eee1
 integration_id: marklogic
 integration_title: MarkLogic
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

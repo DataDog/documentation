@@ -59,7 +59,7 @@ For the remaining steps, follow the [Quickstart instructions][10] within the Dat
 
 - Step-by-step instructions scoped to your deployment configuration (in this case, a host-based deployment).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, App Analytics, and Trace ID injection into logs during setup.
+- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
 
 
 ### Enable APM

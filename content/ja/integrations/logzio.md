@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md'
 display_name: Logz.io
+draft: false
 git_integration_title: logzio
 guid: 0e44f9bd-8c7b-426a-a0ba-8f4302808191
 integration_id: logz-io
@@ -37,7 +39,7 @@ Logz.io アラートと統合して、発生中のイベントをリアルタイ
 
 - イベントをダッシュボードに組み込んで、メトリクスとの相関関係を識別
 
-![ダッシュボード][2]
+![dashboard][2]
 
 ## セットアップ
 

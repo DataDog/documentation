@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez vos déploiements en temps réel et mesurez leur durée.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_codebuild/'
+draft: false
 git_integration_title: amazon_codebuild
 has_logo: true
 integration_title: "AWS\_CodeBuild"

@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md'
 display_name: Openstack_controller
+draft: false
 git_integration_title: openstack_controller
 guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller

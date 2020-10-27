@@ -19,62 +19,25 @@ further_reading:
 ---
 <mrk mid="16" mtype="seg">**トラフィックは、常に Agent から Datadog の方向に開始されます。</mrk><mrk mid="17" mtype="seg">Datadog から Agent の方向にセッションが開始されることはありません。**</mrk>
 
-{{< site-region region="us" >}}
-
 - すべてのトラフィックは SSL で送信されます。
 - 送信先は以下のとおりです。
 
-  - [APM][1] データ: `trace.agent.datadoghq.com`
-  - [ライブコンテナ][2]データ: `process.datadoghq.com`
-  - TCP のトラフィックの場合、[ログ][3] データは `agent-intake.logs.datadoghq.com` 
+  - [APM][1] データは `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+  - [ライブコンテナ][2]データは `process.`{{< region-param key="dd_site" code="true" >}}
+  - [ログ][3]データは、TCP トラフィックには `agent-intake.logs`{{< region-param key="dd_site" code="true" >}}、HTTP で `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} です。詳細は、[ログエンドポイント][4]のリストをご確認ください。
+  - [オーケストレーターリソース][5]データは `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - その他の Agent データ:
-      - **Agents < 5.2.0**: `app.datadoghq.com`
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
+      - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
-        これは、脆弱性 (POODLE) の問題に対応して決定されました。Agent v5.2.0 以降、エンドポイントの先頭にはバージョンが付き、Agent の各バージョンは、 _フォワーダー_ のバージョンに基づいて異なるエンドポイントを呼び出します。たとえば、Agent v5.2.0 は `5-2-0-app.agent.datadoghq.com` を呼び出します。したがって、ファイアウォールで `*.agent.datadoghq.com` をホワイトリストに登録する必要があります。
+        これは、脆弱性 (POODLE) の問題に対応して決定されました。Agent v5.2.0 以降、エンドポイントの先頭にはバージョンが付き、Agent の各バージョンは、 _フォワーダー_ のバージョンに基づいて異なるエンドポイントを呼び出します。たとえば、Agent v5.2.0 は `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}} を呼び出します。したがって、ファイアウォールで `*.agent.`{{< region-param key="dd_site" code="true" >}} をホワイトリストに登録する必要があります。
 
 v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要ではない機能（たとえば、構成された API キーの有効性の表示など）を提供します。
 
-- **Agent >= 7.18.0/6.18.0** `api.datadoghq.com`
-- **Agent < 7.18.0/6.18.0** `app.datadoghq.com`
+- **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
+- **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
 
-これらのドメインは、一連の静的 IP アドレスを指す **CNAME** レコードです。このアドレスは、次の場所から取得できます。
-
-- **[https://ip-ranges.datadoghq.com][4]** (Datadog US リージョンの場合)。
-
-[1]: /ja/tracing/
-[2]: /ja/infrastructure/livecontainers/
-[3]: /ja/logs/
-[4]: https://ip-ranges.datadoghq.com
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-- すべてのトラフィックは SSL で送信されます。
-- 送信先は以下のとおりです。
-
-  - [APM][1] データ: `trace.agent.datadoghq.eu`
-  - [ライブコンテナ][2]データ: `process.datadoghq.eu`
-  - TCP のトラフィックの場合、[ログ][3]データは `agent-intake.logs.datadoghq.eu`
-  - その他の Agent データ:
-      - **Agents < 5.2.0** `app.datadoghq.eu`
-      - **Agents >= 5.2.0** `<バージョン>-app.agent.datadoghq.eu`
-
-        これは、脆弱性 (POODLE) の問題に対応して決定されました。Agent v5.2.0 以降、エンドポイントの先頭にはバージョンが付き、Agent の各バージョンは、 _フォワーダー_ のバージョンに基づいて異なるエンドポイントを呼び出します。たとえば、Agent v5.2.0 は `5-2-0-app.agent.datadoghq.com` を呼び出します。したがって、ファイアウォールで `*.agent.datadoghq.eu` をホワイトリストに登録する必要があります。
-
-v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要ではない機能（たとえば、構成された API キーの有効性の表示など）を提供します。
-
-- **Agent >= 7.18.0/6.18.0** `api.datadoghq.eu`
-- **Agent < 7.18.0/6.18.0** `app.datadoghq.eu`
-
-これらのドメインは、一連の静的 IP アドレスを指す **CNAME** レコードです。このアドレスは、次の場所から取得できます。
-
-- **[https://ip-ranges.datadoghq.eu][4]** (Datadog EU リージョンの場合)。
-
-[1]: /ja/tracing/
-[2]: /ja/infrastructure/livecontainers/
-[3]: /ja/logs/
-[4]: https://ip-ranges.datadoghq.eu
-{{< /site-region >}}
+これらのドメインは、一連の静的 IP アドレスを指す **CNAME** レコードです。このアドレスは、`https://ip-ranges.`{{< region-param key="dd_site" code="true" >}} から取得できます。
 
 この情報は、次のスキーマに従って JSON として構造化されます。
 
@@ -95,6 +58,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
     "apm": {...},                       // <-- APM Agent データに使用される IP ("agents" と同構造)
     "logs": {...},                      // <-- Agent データのログと同様
     "process": {...},                   // <-- Agent データのプロセスと同様
+     "orchestrator": {...},             // <-- Agent データのプロセスと同様
     "synthetics": {...},                 // <-- Agent のトラフィックでは不使用 (Synthetic テストのためのボットの Datadog ソース IP)
     "webhooks": {...}                   // <-- Agent のトラフィックでは不使用 (webhook を送信する Datadog のソース IP)
 }
@@ -190,10 +154,15 @@ Agent のすべての機能を利用するには、以下のポートを開き�
 
 ## プロキシの使用
 
-プロキシの設定に関する詳細なコンフィギュレーションガイドについては、[Agent プロキシコンフィギュレーション][1]を参照してください。
+プロキシの設定に関する詳細なコンフィギュレーションガイドについては、[Agent プロキシコンフィギュレーション][6]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/proxy/
+[1]: /ja/tracing/
+[2]: /ja/infrastructure/livecontainers/
+[3]: /ja/logs/
+[4]: /ja/logs/log_collection/?tab=http#datadog-logs-endpoints
+[5]: /ja/infrastructure/livecontainers/#kubernetes-resources-1
+[6]: /ja/agent/proxy/

@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Gamelift."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_gamelift/'
+draft: false
 git_integration_title: amazon_gamelift
 has_logo: true
 integration_title: Amazon Gamelift

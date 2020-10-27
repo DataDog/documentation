@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md'
 display_name: Windows Service
+draft: false
 git_integration_title: windows_service
 guid: 2289acf0-e413-4384-83f7-88157b430805
 integration_id: windows-service

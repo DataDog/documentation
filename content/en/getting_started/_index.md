@@ -6,7 +6,7 @@ aliases:
     - /overview
     - /getting_started/faq/
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=2'
+    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
       tag: 'Learning Center'
       text: 'Introduction to Datadog'
 ---

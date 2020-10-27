@@ -38,7 +38,25 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-{{% tab "Bundle" %}}
+{{% tab "CDN async" %}}
+```html
+<script>
+ (function(h,o,u,n,d) {
+   h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+   d=o.createElement(u);d.async=1;d.src=n
+   n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+        clientToken: '<CLIENT_TOKEN>',
+        applicationId: '<APPLICATION_ID>',
+        sampleRate: 90,
+    })
+  })
+</script>
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -76,7 +94,22 @@ datadogRum.addRumGlobalContext('usr', {
 ```
 
 {{% /tab %}}
-{{% tab "Bundle" %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+})
+
+// Code example
+DD_RUM.onReady(function() {
+    DD_RUM.addRumGlobalContext('usr', {
+        id: 123,
+        plan: 'premium'
+    });
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
@@ -112,7 +145,21 @@ datadogRum.setRumGlobalContext({
 ```
 
 {{% /tab %}}
-{{% tab "Bundle" %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+})
+
+// Code example
+DD_RUM.onReady(function() {
+    DD_RUM.setRumGlobalContext({
+        codeVersion: 34,
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
@@ -154,7 +201,26 @@ datadogRum.addUserAction('checkout', {
 ```
 
 {{% /tab %}}
-{{% tab "Bundle" %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+})
+
+// Code example
+DD_RUM.onReady(function() {
+    DD_RUM.addUserAction('checkout', {
+        cart: {
+            amount: 42,
+            currency: '$',
+            nb_items: 2,
+            items: ['socks', 't-shirt'],
+        },
+    });
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');

@@ -5,6 +5,7 @@ categories:
 dependencies: []
 description: イベントストリームで Airbrake の例外を表示、検索、議論。
 doc_link: 'https://docs.datadoghq.com/integrations/airbrake/'
+draft: false
 git_integration_title: airbrake
 has_logo: true
 integration_title: Airbrake
@@ -28,7 +29,7 @@ Airbrake を Datadog に接続すると、以下のことができます。
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Airbrake インテグレーションのセットアップには、Webhook を使用します。
 

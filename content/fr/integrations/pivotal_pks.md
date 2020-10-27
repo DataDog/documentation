@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md'
 display_name: "Pivotal\_PKS"
+draft: false
 git_integration_title: pivotal_pks
 guid: b0090603-01c8-4ad9-8f9a-4f3700bf065b
 integration_id: pivotal-pks

@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Step\_Functions."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
+draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
 integration_title: "Amazon\_Step\_Functions"
@@ -60,6 +61,19 @@ Configurez Amazon Step Functions de façon à ce que ses logs soient envoyés ve
     - [Ajouter un déclencheur manuel sur le compartiment S3][7]
     - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
 
+### Collecte de traces
+
+#### Activer le tracing AWS X-Ray
+
+Pour activer le tracing distribué sur vos AWS Step Functions :
+
+1. Activez l'[intégration AWS X-Ray de Datadog][9).
+1. Connectez-vous à la console AWS.
+2. Accédez à **Step Functions**.
+3. Sélectionnez une de vos Step Functions et cliquez sur **Edit**.
+4. Faites défiler la page jusqu'à la section **Tracing** et cochez la case **Enable X-Ray tracing**.
+5. Conseil : [installez la bibliothèque de tracing AWS X-Ray][10] dans vos fonctions pour obtenir des traces plus détaillées.
+
 ## Données collectées
 
 ### Métriques
@@ -76,15 +90,17 @@ L'intégration Amazon Step Functions n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[1]: /fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-step-functions
 [4]: /fr/tagging/
 [5]: /fr/graphing/infrastructure/serverless/
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[6]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[7]: /fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[8]: /fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[9]: /fr/tracing/serverless_functions/enable_aws_xray
+[10]: /fr/integrations/amazon_xray/#installing-the-x-ray-client-libraries
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
+[12]: /fr/help/

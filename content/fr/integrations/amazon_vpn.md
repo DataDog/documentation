@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_VPN."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_vpn/'
+draft: false
 git_integration_title: amazon_vpn
 has_logo: true
 integration_title: "Amazon\_VPN"

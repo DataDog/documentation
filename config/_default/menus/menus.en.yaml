@@ -1255,32 +1255,33 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
+  - name: Trace Search and Analytics
+    url: tracing/trace_search_and_analytics/
+    parent: tracing
+    identifier: trace_search_and_analytics
+    weight: 4
+  - name: Query Syntax
+    url: tracing/trace_search_and_analytics/query_syntax/
+    parent: trace_search_and_analytics
+    weight: 403
+  - name: Monitoring Analytics
+    url: monitors/monitor_types/apm/?tab=appanalytics
+    parent: trace_search_and_analytics
+    weight: 404
+  - name: Trace Retention and Ingestion
+    url: tracing/trace_retention_and_ingestion/
+    parent: tracing
+    identifier: trace_retention_and_ingestion
+    weight: 5
+  - name: Usage Metrics
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
+    weight: 501
   - name: Deployment Tracking
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 4
-  - name: App Analytics
-    url: tracing/app_analytics/
-    parent: tracing
-    identifier: app_analytics
-    weight: 5
-  - name: Viewing Analytics
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 503
-  - name: Trace Search
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 504
-  - name: Monitoring App Analytics
-    url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 505
-  - name: Live Search
-    url: tracing/livesearch/
-    parent: tracing
-    identifier: Live Search
     weight: 6
   - name: Connect Logs and Traces
     url: tracing/connect_logs_and_traces/
@@ -1867,36 +1868,41 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: DNS Monitoring
+    url: network_performance_monitoring/dns_monitoring
+    parent: npm
+    identifier: dns_monitoring
+    weight: 4
   - name: Devices
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 400
+    weight: 500
   - name: Setup
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 401
+    weight: 501
   - name: Profiles
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 402
+    weight: 502
   - name: Data Collected
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 403
+    weight: 503
   - name: Troubleshooting
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 404
+    weight: 504
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 405
+    weight: 505
   - name: Developer Tools
     url: developers/
     pre: nav_developers
@@ -2714,13 +2720,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: Service Dependencies
     generated: true
-  - name: Get all service dependencies
+  - name: Get all APM service dependencies
     parent: Service Dependencies
-    url: '#get-all-service-dependencies'
+    url: '#get-all-apm-service-dependencies'
     generated: true
-  - name: Get one service's dependencies
+  - name: Get one APM service's dependencies
     parent: Service Dependencies
-    url: '#get-one-services-dependencies'
+    url: '#get-one-apm-services-dependencies'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/

@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md'
 display_name: fluentd
+draft: false
 git_integration_title: fluentd
 guid: 68100352-b993-43e6-9dc8-5ecd498e160b
 integration_id: fluentd
@@ -187,7 +188,7 @@ Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集�
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/fluentd/datadog_checks/fluentd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: http://www.rubydoc.info/gems/fluent-plugin-datadog
+[4]: https://github.com/DataDog/fluent-plugin-datadog
 [5]: https://docs.datadoghq.com/ja/logs/processing/#edit-reserved-attributes
 [6]: https://docs.datadoghq.com/ja/integrations/#cat-log-collection
 [7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines

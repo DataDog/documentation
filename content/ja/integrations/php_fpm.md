@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md'
 display_name: PHP-FPM
+draft: false
 git_integration_title: php_fpm
 guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm

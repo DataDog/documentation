@@ -6,6 +6,7 @@ assets:
     Hazelcast Overview: assets/dashboards/overview.json
   logs:
     source: hazelcast
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md'
 display_name: Hazelcast
+draft: false
 git_integration_title: hazelcast
 guid: b2c63c99-f955-4494-a171-494f9dcf7d1f
 integration_id: hazelcast
@@ -47,31 +49,34 @@ Ce check permet de surveiller [Hazelcast][1].
 
 ### Installation
 
-Le check Hazelcast est inclus avec le paquet de l'[Agent Datadog][2].
+Le check Hazelcast est inclus avec le package de l'[Agent Datadog][2].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
 1. Modifiez le fichier `hazelcast.d/conf.yaml` dans le dossier `conf.d/` à la racine du
    répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Hazelcast.
-   Consultez le [fichier d'exemple hazelcast.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple hazelcast.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué sur la page d'informations.
    Choisissez les métriques qui vous intéressent en modifiant la configuration ci-dessous.
-   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées.
-   Si vous souhaitez surveiller davantage de métriques, contactez [l'assistance Datadog][5].
+   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][2] afin d'obtenir des instructions détaillées.
+   Si vous devez surveiller davantage de métriques, contactez [l'assistance Datadog][3].
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
-1. Hazelcast prend en charge un vaste nombre d'[adaptateurs de logging][7] différents. Voici un exemple de fichier `log4j2.properties` :
+1. Hazelcast prend en charge un vaste nombre d'[adaptateurs de logging][5] différents. Voici un exemple de fichier `log4j2.properties` :
 
    ```text
    rootLogger=file
@@ -108,13 +113,13 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
    #log4j.logger.com.hazelcast.hibernate=debug
    ```
 
-2. Par défaut, le pipeline d'intégration de Datadog prend en charge l'[expression][8] de conversion suivante :
+2. Par défaut, le pipeline d'intégration de Datadog prend en charge l'[expression][6] de conversion suivante :
 
    ```text
    %d{yyyy-MM-dd HH:mm:ss} [%thread] %level{length=10} %c{1}:%L - %m%n
    ```
 
-    Dupliquez et modifiez le [pipeline d'intégration][9] si vous utilisez un autre format.
+    Dupliquez et modifiez le [pipeline d'intégration][7] si vous utilisez un autre format.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -122,7 +127,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
    logs_enabled: true
    ```
 
-4. Ajoutez le bloc de configuration suivant à votre fichier `hazelcast.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple hazelcast.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+4. Ajoutez le bloc de configuration suivant à votre fichier `hazelcast.d/conf.yaml`. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple hazelcast.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    logs:
@@ -136,25 +141,40 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-5. [Redémarrez l'Agent][6].
+5. [Redémarrez l'Agent][4].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/datadog_checks/hazelcast/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/integrations/java/
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#logging-configuration
+[6]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
+[7]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
 ##### Collecte de métriques
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][10].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][1].
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][11].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][2].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "hazelcast", "service": "<NOM_SERVICE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[2]: https://docs.datadoghq.com/fr/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][12] et cherchez `hazelcast` dans la section **JMXFetch** :
+[Lancez la sous-commande status de l'Agent][3] et cherchez `hazelcast` dans la section **JMXFetch** :
 
 ```text
 ========
@@ -190,18 +210,10 @@ Hazelcast n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
+
 
 [1]: https://hazelcast.org
 [2]: https://docs.datadoghq.com/fr/agent/
-[3]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/datadog_checks/hazelcast/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/integrations/java/
-[5]: https://docs.datadoghq.com/fr/help/
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#logging-configuration
-[8]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
-[9]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-[10]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[11]: https://docs.datadoghq.com/fr/agent/docker/log/
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/metadata.csv
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help/

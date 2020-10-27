@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés de Google\_TPU."
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_tpu/'
+draft: false
 git_integration_title: google_cloud_tpu
 has_logo: true
 integration_title: "Google\_Cloud\_TPU"

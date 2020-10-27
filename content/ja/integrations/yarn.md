@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/yarn/README.md'
 display_name: Yarn
+draft: false
 git_integration_title: yarn
 guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn

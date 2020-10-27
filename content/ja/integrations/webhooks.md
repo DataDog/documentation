@@ -5,10 +5,11 @@
 "dependencies": []
 "description": 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
 "doc_link": "https://docs.datadoghq.com/integrations/webhooks/"
+"draft": false
 "git_integration_title": "Webhooks"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Webhooks"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "Webhooks"

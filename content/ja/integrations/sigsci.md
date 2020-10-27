@@ -2,6 +2,7 @@
 assets:
   dashboards:
     sigsci: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/sigsci/README.md'
 display_name: Signal Sciences
+draft: false
 git_integration_title: sigsci
 guid: 0c92b7cd-0736-4f9d-82ed-16f1bba8c8d0
 integration_id: sigsci

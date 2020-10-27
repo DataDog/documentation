@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
 doc_link: 'https://docs.datadoghq.com/integrations/bitbucket/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/'
     tag: ブログ
@@ -50,7 +51,7 @@ Bitbucket Cloud または Bitbucket Server からコミットイベントとプ�
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>
 ```
 
-### コンフィグレーション
+### コンフィギュレーション
 
 インテグレーションタイルから [Bitbucket インテグレーション][2]を構成します。
 

@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md'
 display_name: Stardog
+draft: false
 git_integration_title: stardog
 guid: 1b32f0d4-49ef-40fb-aec3-365e4e7cd6ee
 integration_id: stardog
@@ -62,7 +64,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
    ddev -e release build stardog
    ```
 
-5. [Datadog Agent のダウンロードと起動][1]
+5. [Datadog Agent をダウンロードして起動][1]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
    ```shell
@@ -71,7 +73,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Stardog の[メトリクス](#メトリクス) を収集するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `stardog.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル stardog.d/conf.yaml][8] を参照してください。
 
@@ -91,7 +93,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 Stardog チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 Stardog チェックには、サービスのチェック機能は含まれません。
 

@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/convox/README.md'
 display_name: Convox
+draft: false
 git_integration_title: convox
 guid: e8b1f8a7-8859-4c85-81bd-044400854e59
 integration_id: convox

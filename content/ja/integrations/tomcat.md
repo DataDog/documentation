@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md'
 display_name: Tomcat
+draft: false
 git_integration_title: tomcat
 guid: 60f37d34-3bb7-43c9-9b52-2659b8898997
 integration_id: tomcat

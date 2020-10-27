@@ -77,6 +77,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'rsyslog.md' \
 		-a -not -name 'sidekiq.md' \
 		-a -not -name 'sinatra.md' \
+		-a -not -name 'snyk.md' \
 		-a -not -name 'stunnel.md' \
 		-a -not -name 'syslog_ng.md' \
 		-a -not -name 'system.md' \
@@ -130,6 +131,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/android.md ;fi
 	@if [ content/en/logs/log_collection/ios.md ]; then \
 	rm -f content/en/logs/log_collection/ios.md ;fi
+	@if [ content/en/logs/log_collection/javascript.md ]; then \
+	rm -f content/en/logs/log_collection/javascript.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 

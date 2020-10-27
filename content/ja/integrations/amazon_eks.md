@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/amazon_eks/README.md'
 display_name: Amazon EKS
+draft: false
 git_integration_title: amazon_eks
 guid: 9bc1f66e-de05-4460-b082-783c45a07355
 integration_id: amazon-eks

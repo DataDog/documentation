@@ -142,7 +142,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 3. `conf.d/` フォルダーの 1 つ上のレベルで、`checks.d/` フォルダーに移動します。次の内容でカスタムチェックファイルを作成し、`metrics_example.py` と名付けます。
 
-    {{< code-block lang="python" filename="metrics_example.py" >}}
+    ```python
     import random
 
     from datadog_checks.base import AgentCheck
@@ -194,7 +194,7 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
                 random.randint(0, 10),
                 tags=["env:dev","metric_submission_type:histogram"],
             )
-    {{< /code-block >}}
+    ```
 
 4. [Agent を再起動します][4]。
 5. [Agent の status サブコマンド][5]を使用して、カスタムチェックが正しく実行されていることを確認します。Checks セクションで `metrics_example` を探します。

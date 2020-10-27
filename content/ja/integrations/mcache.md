@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mcache/README.md'
 display_name: Memcached
+draft: false
 git_integration_title: mcache
 guid: b1c4033c-bf96-4456-be63-e74ff171f991
 integration_id: memcached

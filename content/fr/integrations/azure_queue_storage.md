@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés de Stockage File d'attente Azure.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_queue_storage/'
+draft: false
 git_integration_title: azure_queue_storage
 has_logo: true
 integration_title: Stockage File d'attente Microsoft Azure

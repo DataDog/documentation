@@ -65,8 +65,8 @@ Once the Datadog Cluster Agent is up and running:
 
     Apply this change by running `kubectl apply -f custom-metric-server.yaml`
 
-3. Download the [`rbac-hpa.yaml` RBAC rules file][7].
-2. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
+2. Download the [`rbac-hpa.yaml` RBAC rules file][7].
+3. Register the Cluster Agent as an External Metrics Provider via the service, exposing the port `443` by applying the RBAC rules from above:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -141,13 +141,13 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
 1. Install the `DatadogMetric` CRD in your cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-operator/master/deploy/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics_crd.yaml"
     ```
 
 2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent-datadogmetrics/cluster-agent-rbac.yaml"
     ```
 
 3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
@@ -221,7 +221,7 @@ The Datadog Cluster Agent will take care of automatically creating `DatadogMetri
 
 If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource will be cleaned up by the Datadog Cluster Agent after few hours.
 
-### Troublehsooting DatadogMetric issues
+### Troubleshooting DatadogMetric issues
 
 The Datadog Cluster Agent will take care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing.
 
@@ -268,6 +268,6 @@ The `currentValue` is the value gathered from Datadog, and thus the one that wil
 [4]: /agent/cluster_agent/setup/
 [5]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
 [9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics

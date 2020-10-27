@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md'
 display_name: WMI
+draft: false
 git_integration_title: wmi_check
 guid: d70f5c68-873d-436e-bddb-dbb3e107e3b5
 integration_id: wmi

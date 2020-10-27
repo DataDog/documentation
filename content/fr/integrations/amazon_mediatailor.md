@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elemental\_MediaTailor."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediatailor/'
+draft: false
 git_integration_title: amazon_mediatailor
 has_logo: true
 integration_title: "Amazon\_Elemental\_MediaTailor"

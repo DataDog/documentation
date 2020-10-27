@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cilium/README.md'
 display_name: Cilium
+draft: false
 git_integration_title: cilium
 guid: 1d9db288-4678-4ede-9ba0-8b04a8ae31c2
 integration_id: cilium

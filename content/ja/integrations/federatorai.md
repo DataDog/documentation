@@ -5,6 +5,7 @@ assets:
     ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
     ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors:
     Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
     Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md'
 display_name: Federator.ai
+draft: false
 git_integration_title: federatorai
 guid: ec0fd93a-ee4c-4652-9996-cc68cb5a4d45
 integration_id: federatorai

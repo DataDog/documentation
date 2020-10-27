@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームに、例外、エラー、コードデプロイを送信。
 doc_link: 'https://docs.datadoghq.com/integrations/rollbar/'
+draft: false
 git_integration_title: rollbar
 has_logo: true
 integration_title: Rollbar
@@ -38,7 +39,7 @@ Rollbar を Datadog に接続して、以下のことができます。
 
 インストールは必要ありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 構成は、Rollbar でプロジェクトごとに行います。
 
@@ -49,9 +50,9 @@ Rollbar を Datadog に接続して、以下のことができます。
 
 これで完了しました。例外が発生するたびに、イベントストリームに表示されます。
 
-## 収集されたデータ
+## 収集データ
 
-### メトリック
+### メトリクス
 
 Redmine インテグレーションには、メトリクスは含まれません。
 
@@ -59,7 +60,7 @@ Redmine インテグレーションには、メトリクスは含まれません
 
 Redmine インテグレーションは、例外、エラー、およびコードデプロイをイベントとして Datadog にプッシュします。
 
-### サービスチェック
+### サービスのチェック
 
 Redmine インテグレーションには、サービスのチェック機能は含まれません。
 

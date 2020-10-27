@@ -93,8 +93,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5s
-
+    timeout connect 5
 # This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
@@ -103,7 +102,6 @@ listen stats
     mode http
     stats enable
     stats uri /
-
 # This section is to reload DNS Records
 # Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
@@ -116,7 +114,6 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-    
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
@@ -124,7 +121,6 @@ frontend logs_frontend
     mode tcp
     option tcplog
     default_backend datadog-logs
-    
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -161,7 +157,6 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-
 # This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
@@ -170,7 +165,6 @@ listen stats
     mode http
     stats enable
     stats uri /
-
 # This section is to reload DNS Records
 # Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
@@ -183,14 +177,12 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-    
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
     default_backend datadog-logs
-    
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.

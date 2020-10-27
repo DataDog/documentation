@@ -1335,7 +1335,7 @@
                       ]
                     },
                     "metric": {
-                      "description": "The metric to sort by (only used for type=metric)",
+                      "description": "The metric to sort by (only used for `type=measure`)",
                       "example": "@duration",
                       "type": "string"
                     },
@@ -1616,7 +1616,7 @@
             ]
           },
           "metric": {
-            "description": "The metric to sort by (only used for type=metric)",
+            "description": "The metric to sort by (only used for `type=measure`)",
             "example": "@duration",
             "type": "string"
           },
@@ -1879,6 +1879,12 @@
                     ],
                     "type": "object"
                   },
+                  "include_tags": {
+                    "default": false,
+                    "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                    "example": false,
+                    "type": "boolean"
+                  },
                   "name": {
                     "description": "The archive name.",
                     "example": "Nginx Archive",
@@ -1888,6 +1894,18 @@
                     "description": "The archive query/filter. Logs matching this query are included in the archive.",
                     "example": "source:nginx",
                     "type": "string"
+                  },
+                  "rehydration_tags": {
+                    "description": "An array of tags to add to rehydrated logs from an archive.",
+                    "example": [
+                      "team:intake",
+                      "team:app"
+                    ],
+                    "items": {
+                      "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                      "type": "string"
+                    },
+                    "type": "array"
                   },
                   "state": {
                     "description": "The state of the archive.",
@@ -2116,6 +2134,12 @@
             ],
             "type": "object"
           },
+          "include_tags": {
+            "default": false,
+            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+            "example": false,
+            "type": "boolean"
+          },
           "name": {
             "description": "The archive name.",
             "example": "Nginx Archive",
@@ -2125,6 +2149,18 @@
             "description": "The archive query/filter. Logs matching this query are included in the archive.",
             "example": "source:nginx",
             "type": "string"
+          },
+          "rehydration_tags": {
+            "description": "An array of tags to add to rehydrated logs from an archive.",
+            "example": [
+              "team:intake",
+              "team:app"
+            ],
+            "items": {
+              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+              "type": "string"
+            },
+            "type": "array"
           },
           "state": {
             "description": "The state of the archive.",
@@ -2336,6 +2372,12 @@
                     ],
                     "type": "object"
                   },
+                  "include_tags": {
+                    "default": false,
+                    "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                    "example": false,
+                    "type": "boolean"
+                  },
                   "name": {
                     "description": "The archive name.",
                     "example": "Nginx Archive",
@@ -2345,6 +2387,18 @@
                     "description": "The archive query/filter. Logs matching this query are included in the archive.",
                     "example": "source:nginx",
                     "type": "string"
+                  },
+                  "rehydration_tags": {
+                    "description": "An array of tags to add to rehydrated logs from an archive.",
+                    "example": [
+                      "team:intake",
+                      "team:app"
+                    ],
+                    "items": {
+                      "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                      "type": "string"
+                    },
+                    "type": "array"
                   }
                 },
                 "required": [
@@ -2548,6 +2602,12 @@
             ],
             "type": "object"
           },
+          "include_tags": {
+            "default": false,
+            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+            "example": false,
+            "type": "boolean"
+          },
           "name": {
             "description": "The archive name.",
             "example": "Nginx Archive",
@@ -2557,6 +2617,18 @@
             "description": "The archive query/filter. Logs matching this query are included in the archive.",
             "example": "source:nginx",
             "type": "string"
+          },
+          "rehydration_tags": {
+            "description": "An array of tags to add to rehydrated logs from an archive.",
+            "example": [
+              "team:intake",
+              "team:app"
+            ],
+            "items": {
+              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -2748,6 +2820,12 @@
                 ],
                 "type": "object"
               },
+              "include_tags": {
+                "default": false,
+                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                "example": false,
+                "type": "boolean"
+              },
               "name": {
                 "description": "The archive name.",
                 "example": "Nginx Archive",
@@ -2757,6 +2835,18 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_tags": {
+                "description": "An array of tags to add to rehydrated logs from an archive.",
+                "example": [
+                  "team:intake",
+                  "team:app"
+                ],
+                "items": {
+                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                  "type": "string"
+                },
+                "type": "array"
               }
             },
             "required": [
@@ -3137,6 +3227,12 @@
                 ],
                 "type": "object"
               },
+              "include_tags": {
+                "default": false,
+                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                "example": false,
+                "type": "boolean"
+              },
               "name": {
                 "description": "The archive name.",
                 "example": "Nginx Archive",
@@ -3146,6 +3242,18 @@
                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                 "example": "source:nginx",
                 "type": "string"
+              },
+              "rehydration_tags": {
+                "description": "An array of tags to add to rehydrated logs from an archive.",
+                "example": [
+                  "team:intake",
+                  "team:app"
+                ],
+                "items": {
+                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                  "type": "string"
+                },
+                "type": "array"
               },
               "state": {
                 "description": "The state of the archive.",
@@ -3963,6 +4071,12 @@
                       ],
                       "type": "object"
                     },
+                    "include_tags": {
+                      "default": false,
+                      "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                      "example": false,
+                      "type": "boolean"
+                    },
                     "name": {
                       "description": "The archive name.",
                       "example": "Nginx Archive",
@@ -3972,6 +4086,18 @@
                       "description": "The archive query/filter. Logs matching this query are included in the archive.",
                       "example": "source:nginx",
                       "type": "string"
+                    },
+                    "rehydration_tags": {
+                      "description": "An array of tags to add to rehydrated logs from an archive.",
+                      "example": [
+                        "team:intake",
+                        "team:app"
+                      ],
+                      "items": {
+                        "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                        "type": "string"
+                      },
+                      "type": "array"
                     },
                     "state": {
                       "description": "The state of the archive.",
@@ -4193,7 +4319,7 @@
                 ]
               },
               "metric": {
-                "description": "The metric to sort by (only used for type=metric)",
+                "description": "The metric to sort by (only used for `type=measure`)",
                 "example": "@duration",
                 "type": "string"
               },
@@ -15789,7 +15915,7 @@
                               ]
                             },
                             "metric": {
-                              "description": "The metric to sort by (only used for type=metric)",
+                              "description": "The metric to sort by (only used for `type=measure`)",
                               "example": "@duration",
                               "type": "string"
                             },
@@ -16578,6 +16704,12 @@
                                 ],
                                 "type": "object"
                               },
+                              "include_tags": {
+                                "default": false,
+                                "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                                "example": false,
+                                "type": "boolean"
+                              },
                               "name": {
                                 "description": "The archive name.",
                                 "example": "Nginx Archive",
@@ -16587,6 +16719,18 @@
                                 "description": "The archive query/filter. Logs matching this query are included in the archive.",
                                 "example": "source:nginx",
                                 "type": "string"
+                              },
+                              "rehydration_tags": {
+                                "description": "An array of tags to add to rehydrated logs from an archive.",
+                                "example": [
+                                  "team:intake",
+                                  "team:app"
+                                ],
+                                "items": {
+                                  "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                  "type": "string"
+                                },
+                                "type": "array"
                               },
                               "state": {
                                 "description": "The state of the archive.",
@@ -16863,6 +17007,12 @@
                             ],
                             "type": "object"
                           },
+                          "include_tags": {
+                            "default": false,
+                            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                            "example": false,
+                            "type": "boolean"
+                          },
                           "name": {
                             "description": "The archive name.",
                             "example": "Nginx Archive",
@@ -16872,6 +17022,18 @@
                             "description": "The archive query/filter. Logs matching this query are included in the archive.",
                             "example": "source:nginx",
                             "type": "string"
+                          },
+                          "rehydration_tags": {
+                            "description": "An array of tags to add to rehydrated logs from an archive.",
+                            "example": [
+                              "team:intake",
+                              "team:app"
+                            ],
+                            "items": {
+                              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -17091,6 +17253,12 @@
                               ],
                               "type": "object"
                             },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
+                            },
                             "name": {
                               "description": "The archive name.",
                               "example": "Nginx Archive",
@@ -17100,6 +17268,18 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "state": {
                               "description": "The state of the archive.",
@@ -17514,6 +17694,12 @@
                               ],
                               "type": "object"
                             },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
+                            },
                             "name": {
                               "description": "The archive name.",
                               "example": "Nginx Archive",
@@ -17523,6 +17709,18 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "state": {
                               "description": "The state of the archive.",
@@ -17858,6 +18056,12 @@
                             ],
                             "type": "object"
                           },
+                          "include_tags": {
+                            "default": false,
+                            "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                            "example": false,
+                            "type": "boolean"
+                          },
                           "name": {
                             "description": "The archive name.",
                             "example": "Nginx Archive",
@@ -17867,6 +18071,18 @@
                             "description": "The archive query/filter. Logs matching this query are included in the archive.",
                             "example": "source:nginx",
                             "type": "string"
+                          },
+                          "rehydration_tags": {
+                            "description": "An array of tags to add to rehydrated logs from an archive.",
+                            "example": [
+                              "team:intake",
+                              "team:app"
+                            ],
+                            "items": {
+                              "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                              "type": "string"
+                            },
+                            "type": "array"
                           }
                         },
                         "required": [
@@ -18086,6 +18302,12 @@
                               ],
                               "type": "object"
                             },
+                            "include_tags": {
+                              "default": false,
+                              "description": "To store the tags in the archive, set the value \"true\".\nIf it is set to \"false\", the tags will be deleted when the logs are sent to the archive.",
+                              "example": false,
+                              "type": "boolean"
+                            },
                             "name": {
                               "description": "The archive name.",
                               "example": "Nginx Archive",
@@ -18095,6 +18317,18 @@
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
                               "example": "source:nginx",
                               "type": "string"
+                            },
+                            "rehydration_tags": {
+                              "description": "An array of tags to add to rehydrated logs from an archive.",
+                              "example": [
+                                "team:intake",
+                                "team:app"
+                              ],
+                              "items": {
+                                "description": "A given tag in the `<KEY>:<VALUE>` format.",
+                                "type": "string"
+                              },
+                              "type": "array"
                             },
                             "state": {
                               "description": "The state of the archive.",

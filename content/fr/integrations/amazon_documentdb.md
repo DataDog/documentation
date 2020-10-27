@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez vos métriques et vos logs AWS\_DocumentDB."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_documentdb/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-documentdb-with-datadog/'
     tag: Blog

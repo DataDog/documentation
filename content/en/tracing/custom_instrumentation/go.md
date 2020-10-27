@@ -114,9 +114,6 @@ To make use of manual instrumentation, use the `tracer` package which is documen
 There are two functions available to create spans. API details are available for `StartSpan` [here][5] and for `StartSpanFromContext` [here][6].
 
 ```go
-//Create a span
-span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
-
 //Create a span with a resource name, which is the child of parentSpan.
 span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 

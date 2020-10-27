@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
 display_name: Go-Metro
+draft: false
 git_integration_title: go-metro
 guid: 6d00688b-32b1-4755-98cd-44bd1bd40428
 integration_id: go-metro

@@ -6,6 +6,7 @@ categories:
 dependencies: []
 description: サービスのパフォーマンスに影響するコミットとプルリクエストを特定。
 doc_link: 'https://docs.datadoghq.com/integrations/github/'
+draft: false
 git_integration_title: github
 has_logo: true
 integration_title: GitHub

@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md'
 display_name: Buddy
+draft: false
 git_integration_title: buddy
 guid: 7b131269-e2ba-4279-b9dd-82e85764d389
 integration_id: buddy

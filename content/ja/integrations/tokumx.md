@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md'
 display_name: TokuMX
+draft: false
 git_integration_title: tokumx
 guid: 7785939b-bfb6-4d3e-acc2-94c1f5fb33e7
 integration_id: tokumx

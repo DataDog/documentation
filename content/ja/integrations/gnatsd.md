@@ -1,16 +1,18 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - messaging
   - notification
 creates_events: false
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md'
 display_name: Gnatsd
+draft: false
 git_integration_title: gnatsd
 guid: 7edcf450-d9cf-44aa-9053-ece04ac7c21d
 integration_id: gnatsd
@@ -70,7 +72,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Gnatsd [メトリクス](#メトリクス)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーで `gnatsd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gnatsd.d/conf.yaml][8] を参照してください。
 
@@ -97,7 +99,7 @@ gnatsd チェックは、すべての主要プラットフォームと互換性�
 
 gnatsd チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 この gnatsd チェックは、収集するすべてのサービスチェックに次のタグを付けます。
 

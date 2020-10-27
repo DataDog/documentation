@@ -9,6 +9,7 @@ ddtype: check
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
 display_name: AWS App Mesh
+draft: false
 further_reading:
   - link: 'https://docs.datadoghq.com/integrations/envoy/'
     tag: ドキュメント

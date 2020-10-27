@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
 display_name: DNS
+draft: false
 git_integration_title: dns_check
 guid: 31e4c84c-fc4b-4cd4-97ed-0331bf4e2023
 integration_id: dns

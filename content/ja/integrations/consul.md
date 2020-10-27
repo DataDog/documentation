@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/consul/README.md'
 display_name: Consul
+draft: false
 git_integration_title: consul
 guid: ec1e9fac-a339-49a3-b501-60656d2a5671
 integration_id: consul

@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md'
 display_name: Riak MDC Replication
+draft: false
 git_integration_title: riak_repl
 guid: 8a6c8c1e-8c41-4037-9a7b-1eb45f327e3d
 integration_id: riak-repl
@@ -67,7 +69,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. riak_repl のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `riak_repl.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル riak_repl.d/conf.yaml][8] を参照してください。
 

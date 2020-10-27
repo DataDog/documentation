@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md'
 display_name: Confluent Platform
+draft: false
 git_integration_title: confluent_platform
 guid: 8e4a6d7e-44bc-440c-aafa-a0f98df87cc0
 integration_id: confluent-platform

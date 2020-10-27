@@ -64,6 +64,10 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
+- By default, The Datadog Profiler keeps the bottom 256 frames in a Java profile. If your application creates stacks deeper than 256 frames, you can increase the threshold by passing a `-XX:FlightRecorderOptions=stackdepth=` option to your JVM.  For example:
+    ```shell
+    java -javaagent:dd-java-agent.jar -XX:FlightRecorderOptions=stackdepth=512 ...
+    ```
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /tracing/profiler/profiler_troubleshooting/#java-8-support
@@ -199,7 +203,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`.             |
 |  WithEnv         | String        | The Datadog [environment][5] name, for example, `production`.         |
-|  WithVersion     | String        | The version of your application.                                                                             |  
+|  WithVersion     | String        | The version of your application.                                                                             |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 - Alternatively you can also set the profiler configuration using environment variables:
@@ -224,4 +228,5 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform

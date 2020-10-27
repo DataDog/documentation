@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: "Intégrez vos services Alibaba\_Cloud à Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/alibaba_cloud/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/'
     tag: Blog

@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - notification
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/split/README.md'
 display_name: Split
+draft: false
 git_integration_title: split
 guid: 2c48dd0b-418f-4ca7-9b8d-54c857587db4
 integration_id: split
@@ -61,7 +63,7 @@ Split チェックには、メトリクスは含まれません。
 
 Split リスト/リスト除外イベントを [Datadog のイベントストリーム][5]にプッシュします。
 
-### Service Checks
+### サービスのチェック
 
 Split チェックには、サービスのチェック機能は含まれません。
 

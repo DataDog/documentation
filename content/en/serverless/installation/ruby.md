@@ -13,7 +13,14 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
+## Required Setup
+
+If not already configured:
+
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 

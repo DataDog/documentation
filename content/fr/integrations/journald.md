@@ -14,6 +14,10 @@ name: journald
 ddtype: check
 supported_os:
   - linux
+further_reading:
+  - link: logs/guide/docker-logs-collection-troubleshooting-guide
+    tag: Documentation
+    text: Collecte de logs avec Docker
 ---
 ## Présentation
 
@@ -23,7 +27,7 @@ Systemd-journald est un service système qui recueille et stocke des données de
 
 ### Installation
 
-Par défaut, les fichiers journaux appartiennent au groupe système `systemd-journal`, qui peut également les lire. Pour commencer à recueillir les logs de vos journaux, vous devez :
+Par défaut, les fichiers journal appartiennent au groupe système `systemd-journal`, qui peut également les lire. Pour commencer à recueillir vos logs journal, vous devez :
 
 1. [Installer l'Agent][1] sur l'instance qui exécute le journal
 2. Ajouter l'utilisateur `dd-agent` au groupe `systemd-journal` en exécutant la commande :
@@ -34,7 +38,12 @@ usermod -a -G systemd-journal dd-agent
 
 ### Configuration
 
-Créez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` de l'Agent à la racine du répertoire de votre Agent.
+{{< tabs >}}
+{{% tab "Host" %}}
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
+Modifiez le fichier `journald.d/conf.yaml` dans le dossier `conf.d/` de l'Agent à la racine du répertoire de votre Agent.
 
 #### Collecte de logs
 
@@ -54,9 +63,34 @@ logs:
       container_mode: true
 ```
 
-**Remarque** : pour l'Agent 7.17 ou les versions ultérieures, si `container_mode` est défini sur `true`, l'attribut `source` de vos logs est automatiquement défini sur le nom  raccourci de l'image correspondante du conteneur, au lieu de simplement prendre pour valeur `docker`.
+Pour renseigner les attributs `source` et `service`, l'Agent recueille `SYSLOG_IDENTIFIER` , `_SYSTEMD_UNIT` et `_COMM` puis les définit sur la première valeur non vide. Pour tirer parti des pipelines d'intégration, Datadog recommande de définir le paramètre `SyslogIdentifier` directement dans le fichier du service `systemd` ou dans un fichier de remplacement du service `systemd`. Le fichier du service `systemd` dépend de votre distribution, mais vous pouvez le localiser avec la commande `systemctl show -p FragmentPath <nom_unité>`.
 
-Pour terminer, [redémarrez l'Agent][2].
+**Remarque** : pour l'Agent 7.17+, si `container_mode` est défini sur `true`, le comportement par défaut change pour les logs provenant de conteneurs Docker. L'attribut `source` de vos logs est automatiquement défini sur le nom raccourci de l'image correspondante du conteneur au lieu de simplement prendre pour valeur `docker`.
+
+Pour terminer, [redémarrez l'Agent][1].
+
+[1]: /fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+#### Collecte de logs
+
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+
+| Paramètre      | Valeur                                                  |
+| -------------- | ------------------------------------------------------ |
+| `<CONFIG_LOG>` | `{"source": "journald", "service": "<NOM_VOTRE_APPLICATION>"}` |
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 #### Fonctions avancées
 
@@ -71,10 +105,10 @@ Si votre journal est situé ailleurs, ajoutez un paramètre `path` en indiquant 
 
 ##### Filtrer les unités de journal
 
-Il est possible de filtrer des unités précises par inclusion ou exclusion grâce aux paramètres suivants :
+Il est possible d'inclure ou d'exclure des unités spécifiques à l'aide des paramètres suivants :
 
 - `include_units` : inclut toutes les unités précisées.
-- `exclude_units`: exclut toutes les unités précisées.
+- `exclude_units` : exclut toutes les unités précisées.
 
 Exemple :
 
@@ -97,13 +131,12 @@ Cette collecte est automatique lorsque l'Agent est exécuté à partir du host. 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 ## Pour aller plus loin
 
-Consultez [notre blog][4] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations Datadog.
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[3]: /fr/help/
-[4]: https://www.datadoghq.com/blog
+[2]: /fr/help/

@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon ElasicCache のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticache/'
+draft: false
 git_integration_title: amazon_elasticache
 has_logo: true
 integration_title: Amazon ElastiCache
@@ -113,7 +114,7 @@ AWS ElastiCache インテグレーションには、クラスター、キャッ�
 
 {{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="AWS Elasticache イベント" >}}
 
-### Service Checks
+### サービスのチェック
 
 AWS ElastiCache インテグレーションには、サービスのチェック機能は含まれません。
 

@@ -34,6 +34,22 @@ further_reading:
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ"  style="width:80%;">}}
 
+高度なタグ値のフィルタリングはブールフィルターでも使用できます。次のブール構文がサポートされます。
+
+* `NOT`, `!`
+* `AND`, `,`
+* `OR`
+* `key IN (tag_value1, tag_value2,...)`
+* `key NOT IN (tag_value1, tag_value2,...)`
+
+`AND`、`OR` を使用して、特定のタグ全体のメトリクスを確認します。
+
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター"  style="width:80%;">}}
+
+`IN`、`NOT IN` を使用して、メトリクスを特定のタグにフィルタリングします。
+
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター"  style="width:80%;">}}
+
 タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:coffee-house` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ"  style="width:80%;">}}
@@ -215,7 +231,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 ## APM
 
 {{< tabs >}}
-{{% tab "App Analytics" %}}
+{{% tab "Analytics" %}}
 
 [トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
 
@@ -226,7 +242,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-[タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域にジャンプできます。以下の例では、タグ `service:coffee-house` で絞り込んで、[App Analytics][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
+[タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域にジャンプできます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ"  style="width:80%;">}}
 
