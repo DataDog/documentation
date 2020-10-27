@@ -1,5 +1,5 @@
 ---
-title: Agent Configuration
+title: Datadog Agent Configuration
 kind: Documentation
 aliases:
   - /tracing/setup/
@@ -23,7 +23,7 @@ further_reading:
   text: "ECS Fargate APM setup"
 ---
 
-Configuring your application to send [traces][1] to Datadog involves two main steps: Configuring the Datadog Agent and [Instrumenting your application][2]. 
+Configuring your application to send [traces][1] to Datadog involves two main steps: Configuring the Datadog Agent and [Instrumenting your application][2].
 
 Depending on your environment, there are different ways to configure the Datadog Agent. See the instructions for installing the Datadog Agent [locally](#datadog-agent), [on containers](#containers), and [several other ways](#additional-environments).
 
