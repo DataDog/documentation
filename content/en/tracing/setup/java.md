@@ -53,8 +53,8 @@ Otherwise, to begin tracing applications written in any language:
 
 Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
-    {{< tabs >}}
-    {{% tab "Spring Boot" %}}
+{{< tabs >}}
+{{% tab "Spring Boot" %}}
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 
@@ -66,8 +66,8 @@ For more information, see the [Spring Boot documentation][1].
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-    {{% /tab %}}
-    {{% tab "Tomcat" %}}
+{{% /tab %}}
+{{% tab "Tomcat" %}}
 
 Open your Tomcat startup script file, for example `catalina.sh`, and add:
 
@@ -81,8 +81,8 @@ Or on Windows, `catalina.bat`:
 set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 
-    {{% /tab %}}
-    {{% tab "JBoss" %}}
+{{% /tab %}}
+{{% tab "JBoss" %}}
 
 Add the following line to the end of `standalone.sh`:
 
@@ -100,8 +100,8 @@ For more details, see the [JBoss documentation][1].
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-    {{% /tab %}}
-    {{% tab "Jetty" %}}
+{{% /tab %}}
+{{% tab "Jetty" %}}
 
 If you use `jetty.sh` to start Jetty as a service, edit it to add:
 
@@ -115,8 +115,8 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-    {{% /tab %}}
-    {{% tab "WebSphere" %}}
+{{% /tab %}}
+{{% tab "WebSphere" %}}
 
 In the administrative console:
 
@@ -132,8 +132,8 @@ In the administrative console:
 For additional details and options, see the [WebSphere docs][1].
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
-    {{% /tab %}}
-    {{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 
 - If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
