@@ -13,6 +13,7 @@ aliases:
 
 Choose your language to see the compatibility requirements and supported integrations for Datadog APM.
 
+{{< partial name="apm/apm-compatibility.html" >}}
 
 <br>
 
