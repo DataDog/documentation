@@ -153,13 +153,14 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 ## Sublayer Metric
 
-Some [Tracing Application Metrics][20] are tagged with sublayer_service and sublayer_type so that you can see the execution duration for individual services within a trace.
+Some [Tracing Application Metrics][20] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution duration for individual services within a trace.
 
 ## Execution Duration
 
 The active spans for a given time, for a given trace, are all of the leaf spans (spans without children).
 
-{{< img src="/execution_duration.png" style="width:50%;" alt="Execution Duration"  style="width:50%;">}}
+{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="Execution Duration"  style="width:50%;">}}
+
 
 ## Further Reading
 
