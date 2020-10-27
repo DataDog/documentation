@@ -27,7 +27,7 @@ Because Indexed Spans can impact your bill, the 'Spans Indexed' column appears a
 
 **Note:** The Datadog Intelligent Retention Filter on its own will not cause any bill outside of the included Indexed Spans with your APM Host pricing.
 
-**Note**: Admin rights are required to create, modify or disable Retention Filters.
+**Note**: Admin rights are required to create, modify, or disable retention filters.
 
 
 [1]: /tracing/trace_retention_and_ingestion/#retention-filters
