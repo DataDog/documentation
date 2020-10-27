@@ -1,5 +1,5 @@
 ---
-title: Access your log data programmatically using Logs Search API.
+title: Programmatically access log data using the Logs Search API
 kind: guide
 further_reading:
 - link: "/logs/explorer/"
@@ -27,27 +27,23 @@ The following examples are covered in this guide:
 
 ## Prerequisites
 
-Since this guide describes usage of the API, you will need an API key and an application key from an admin user. These are available in your [Datadog account API key page][2].
+- An API key and an application key from an admin user is required to use the API. These are available in your [Datadog account API key page][2]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
 
-Throughout this article, you will need to replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
-
-This guide also assumes that you have a terminal with `CURL`. 
-
-**Note:** If you are in the Datadog EU site, use https://api.datadoghq.eu/api/ as the endpoint.
+- This guide features `curl` examples. Install [curl][3] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][1].
 
 ## Examples
 
 ### Basic search
 
-In our sample data, there are log events data which includes the number of `page views` for each `user`. 
+To retrieve all log events within a specific time period, use the following [Search Syntax][4] to complete the API call.
 
-Retrieve all log events within a specific time period by using the following API call. `from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed. It follows the [Search Syntax][3].
+`from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed.
 
 **API call:**
 
 ```bash
 
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -59,7 +55,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 **Response:**
 
-The result dataset is comprised of the `data` object, as shown in the following example response.
+The result dataset is comprised of the `data` object, as depicted in the following example response.
 
 ```json
 
@@ -143,16 +139,15 @@ The result dataset is comprised of the `data` object, as shown in the following 
 
 ### Sort by facet or timestamp
 
-{{< tabs >}}
-{{% tab "Facet" %}}
+#### Facet
 
-With the following API call, sort your retrieved log events by some facet such as `pageViews` in ascending order. Make sure to include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.
+With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order.
 
 **API call:**
 
 ```bash
 
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -165,7 +160,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 **Response:**
 
-The log events are retrieved in ascending order of the `pageViews` facet values as showing in the following response. User `chris` has 450, `bob` has 500, and `steve` has 700 page views.
+Log events are retrieved in ascending order of the `pageViews` facet values as depicted in the following response. User `chris` has 450, `bob` has 500, and `steve` has 700 page views.
 
 ```json
 
@@ -247,8 +242,7 @@ The log events are retrieved in ascending order of the `pageViews` facet values 
 
 ```
 
-{{% /tab %}}
-{{% tab "Timestamp" %}}
+#### Timestamp
 
 With the following API call, sort your retrieved log events by `timestamp` in ascending order. Use a `-` hyphen such as `-timestamp` to sort in descending order.
 
@@ -256,7 +250,7 @@ With the following API call, sort your retrieved log events by `timestamp` in as
 
 ```bash
 
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -269,7 +263,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 **Response:**
 
-The log events are retrieved in ascending order based on their `timestamp` values as showing in the following response.
+Log events are retrieved in ascending order based on their `timestamp` values as depicted in the following response.
 
 ```json
 
@@ -350,16 +344,14 @@ The log events are retrieved in ascending order based on their `timestamp` value
 }
 
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Limit the number of results retrieved
 
-With the following API call, limit the number of log events retrieved. The `limit` indicates the maximum number of log events returned in the response. The maximum limit is 1000.
+With the following API call, limit the number of log events retrieved. The `limit` indicates the maximum number of log events returned in the response. The maximum limit is `1000`.
 
 ```bash
 
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -436,17 +428,17 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 
 ### Pagination
 
-To retrieve a log list longer than the 1000 logs limit, you must use the Pagination feature.
+To retrieve a log list longer than the `1000` logs limit, use the Pagination feature.
 
-The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter is `50` by default, but can be set up to `1000`.
 
-To see the next page of your logs, resend the query with the `cursor` parameter that takes the `after` value from the previous call. 
+To see the next page of your logs, resend the query with the `cursor` parameter that takes the `after` value from the previous call.
 
 From the above JSON example, use the `after` value `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` to get the next two results.
 
 ```bash
 
-curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
+curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/logs/events/search" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" --data-raw '{
   "filter": {
     "from": "2020-10-07T00:00:00+00:00",
     "to": "2020-10-07T00:15:00+00:00",
@@ -462,10 +454,9 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/events/search" -H "Conten
 ```
 **Response:**
 
+In the response, the next two results, `joe` with 500 `pageviews` and `chris` with 450 `pageviews`, are retrieved. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
+
 ```json
-
-In the response, the next two results, (for example, `joe` with 500 `pageviews` and `chris` with 450 `pageviews`) are retrieved. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
-
 {
     "meta": {
         "page": {
@@ -527,6 +518,7 @@ In the response, the next two results, (for example, `joe` with 500 `pageviews` 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/api/v2/logs/
-[2]: https://docs.datadoghq.com/api/v1/authentication/
-[3]: https://docs.datadoghq.com/logs/search_syntax/
+[1]: /api/v2/logs/
+[2]: /api/v1/authentication/
+[3]: https://curl.haxx.se/download.html
+[4]: /logs/search_syntax/
