@@ -2,13 +2,15 @@
 title: .NET Core Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
-code_lang: dotnet
+code_lang: dotnet-core
 type: multi-code-lang
 further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
+
+## Compatibility
 
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 

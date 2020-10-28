@@ -2,7 +2,7 @@
 title: PHP Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
-code_lang: PHP
+code_lang: php
 type: multi-code-lang
 further_reading:
     - link: 'tracing/setup/php'

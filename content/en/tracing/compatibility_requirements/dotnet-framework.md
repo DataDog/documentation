@@ -10,6 +10,8 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
+## Compatiblity
+
 The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][2].

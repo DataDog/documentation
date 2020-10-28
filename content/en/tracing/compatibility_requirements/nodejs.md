@@ -2,13 +2,14 @@
 title: NodeJS Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the NodeJS tracer'
-code_lang: nodeJS
+code_lang: nodejs
 type: multi-code-lang
 further_reading:
     - link: 'tracing/setup/nodejs'
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
+## Compatibility
 
 The NodeJS Datadog Trace library is open source - view the [Github repository][1] for more information.
 
