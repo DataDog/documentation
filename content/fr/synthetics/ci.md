@@ -1,14 +1,11 @@
 ---
-title: Tests CI/CD Synthetics
+title: Tests CI/CD Synthetic
 kind: documentation
-description: Exécutez des tests Synthetics à la demande dans vos pipelines de CI/CD.
+description: Exécutez des tests Synthetic à la demande dans vos pipelines de CI/CD.
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
     tag: Blog
-    text: Présentation de la surveillance Datadog Synthetics
-  - link: /synthetics/
-    tag: Documentation
-    text: Gérer vos checks
+    text: Intégrer des tests Datadog Synthetic dans votre pipeline de CI/CD.
   - link: /synthetics/browser_tests/
     tag: Documentation
     text: Configurer un test Browser
@@ -179,7 +176,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}
@@ -201,6 +198,10 @@ curl -G \
 {{< /site-region >}}
 
 #### Exemple de réponse
+
+{{< tabs >}}
+
+{{% tab "Test API" %}}
 
 ```json
 {
@@ -233,6 +234,90 @@ curl -G \
 }
 ```
 
+{{% /tab %}}
+
+{{% tab "Test Browser" %}}
+
+```json
+{
+  "results": [
+    {
+      "check_id": "123456",
+      "timestamp": 1601639904704,
+      "orgID": 2,
+      "result": {
+        "runType": 2,
+        "artifactsBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/artifacts__1601639913277.json",
+        "browserType": "chrome",
+        "eventType": "finished",
+        "stepDetails": [
+          {
+            "browserErrors": [],
+            "skipped": false,
+            "description": "Navigate to start URL",
+            "warnings": [],
+            "url": "about:blank",
+            "value": "https://example.com",
+            "duration": 1002,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-0__1601639913294.jpeg",
+            "type": "goToUrlAndMeasureTti",
+            "stepId": -1
+          },
+          {
+            "browserErrors": [],
+            "stepElementUpdates": {
+              "version": 1,
+              "multiLocator": {
+                "ab": "/*[local-name()=\"html\"][1]/*[local-name()=\"body\"][1]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "co": "[{\"text\":\"example domain\",\"textType\":\"directText\"}]",
+                "cl": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "at": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "clt": "/descendant::*[text()[normalize-space(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ', 'abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ')) = \"example domain\"]]",
+                "ro": "//*[local-name()=\"h1\"]"
+              }
+            },
+            "skipped": false,
+            "description": "Test heading \"Example Domain\" content",
+            "url": "https://www.example.com/",
+            "checkType": "contains",
+            "value": "Example Domain",
+            "duration": 204,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-1__1601639913410.jpeg",
+            "type": "assertElementContent",
+            "stepId": 2275176
+          }
+        ],
+        "browserVersion": "84.0.4147.135",
+        "mainDC": "us1.prod",
+        "timeToInteractive": 269,
+        "device": {
+          "name": "Laptop Large",
+          "height": 1100,
+          "width": 1440,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
+          "id": "chrome.laptop_large",
+          "isMobile": false,
+          "browser": "chrome"
+        },
+        "passed": true,
+        "duration": 1206,
+        "startUrl": "https://www.example.com",
+        "metadata": {}
+      },
+      "dc_id": 30005,
+      "resultID": "17221670732431167",
+      "metadata": {}
+    }
+  ]
+}
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Utilisation de l'interface de ligne de commande
 
 ### Installation du package
@@ -242,14 +327,7 @@ Le package est publié sous [@datadog/datadog-ci][2] dans le registre NPM.
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Ajoutez les lignes suivantes dans votre fichier `~/.npmrc` :
-
-```conf
-registry=https://registry.npmjs.org/
-//registry.npmjs.org/:_authToken=<TOKEN>
-```
-
-Installez ensuite le package via NPM :
+Installez le package via NPM :
 
 ```bash
 npm install --save-dev @datadog/datadog-ci
@@ -258,16 +336,7 @@ npm install --save-dev @datadog/datadog-ci
 {{% /tab %}}
 {{% tab "Yarn" %}}
 
-Avec la version 2 de Yarn, vous pouvez définir le contexte `@datadog` pour le token dans le fichier `.yarnrc` :
-
-```yaml
-npmScopes:
-  datadog:
-    npmRegistryServer: "https://registry.npmjs.org"
-    npmAuthToken: "<TOKEN>"
-```
-
-Installez ensuite le package via Yarn :
+Installez le package via Yarn :
 
 ```bash
 yarn add --dev @datadog/datadog-ci
@@ -300,8 +369,8 @@ Pour configurer votre client, les clés d'API et d'application Datadog doivent �
     * **apiKey** : la clé d'API utilisée pour interroger l'API Datadog.
     * **appKey** : la clé d'application utilisée pour interroger l'API Datadog.
     * **datadogSite** : l'instance Datadog vers laquelle la requête est envoyée (valeurs autorisées : `datadoghq.com` ou `datadoghq.eu`). Valeur par défaut : `datadoghq.com`.
-    * **files** : l'expression globale utilisée pour les fichiers de configuration des tests Synthetics.
-    * **global** : les configurations à appliquer à tous les tests Synthetics ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
+    * **files** : l'expression globale utilisée pour les fichiers de configuration des tests Synthetic.
+    * **global** : les configurations à appliquer à tous les tests Synthetic ([consultez ci-dessous la description de chaque champ](#configurer-des-tests)).
     * **proxy** : le proxy à utiliser pour les connexions sortantes vers Datadog. Les clés `host` et `port` sont des arguments obligatoires. Par défaut, la clé `protocol` a pour valeur `http`. Elle peut prendre pour valeur `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http` ou `pac+https`. La bibliothèque [proxy-agent][3] est utilisée pour configurer le proxy.
     * **subdomain** : le nom du sous-domaine personnalisé permettant d'accéder à votre application Datadog. Si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, la valeur de `subdomain` doit alors être définie sur `myorg`.
 
@@ -367,12 +436,12 @@ Par défaut, les tests utilisent leur configuration d'origine. Vous pouvez la co
 
 Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de remplacer certains (ou l'ensemble) des paramètres de vos tests en utilisant les paramètres ci-dessous. Si vous souhaitez modifier la configuration de tous vos tests, ces mêmes paramètres peuvent être définis au niveau du [fichier de configuration globale](#configurer-le-client).
 
-* **allowInsecureCertificates** (_booléen_) : désactive les checks de certificat dans les tests API.
+* **allowInsecureCertificates** (_booléen_) : désactive les vérifications de certificat dans les tests API.
 * **basicAuth** (_objet_) : identifiants à utiliser pour une authentification basique.
      * **username** (_chaîne_) : nom d'utilisateur à utiliser pour l'authentification basique.
      * **password** (_chaîne_) : mot de passe à utiliser lors de l'authentification basique.
-* **body** (_chaîne_) : données à envoyer avec le test API Synthetics.
-* **bodyType** (_chaîne_) : type de données envoyées avec le test API Synthetics.
+* **body** (_chaîne_) : données à envoyer avec le test API Synthetic.
+* **bodyType** (_chaîne_) : type de données envoyées avec le test API Synthetic.
 * **cookies** (_chaîne_) : chaîne utilisée en tant qu'en-tête de cookie dans un test Browser ou API.
 * **deviceIds** (_tableau_) : liste des appareils sur lesquels le test Browser s'exécute.
 * **followRedirects** (_booléen_) : indique s'il faut suivre ou non les redirections HTTP dans les tests API.
@@ -387,7 +456,7 @@ Cependant, dans le cadre de votre déploiement CI, vous pouvez choisir de rempla
      * **skipped** : le test n'est pas du tout exécuté.
 * **startUrl** (_chaîne_) : nouvelle URL de départ à fournir au test.
 * **variables** (_objet_) : variables à remplacer dans le test. La clé de cet objet est définie sur le nom de la variable à remplacer, et sa valeur sur la nouvelle valeur de la variable.
-* **pollingTimeout** (_entier_) : la durée après laquelle un test Synthetics est considéré comme un échec (en millisecondes).
+* **pollingTimeout** (_entier_) : la durée après laquelle un test Synthetic est considéré comme un échec (en millisecondes).
 
 **Remarque** : les nouvelles configurations de test sont prioritaires sur les configurations globales.
 
@@ -452,7 +521,7 @@ Par exemple, si l'URL de départ de votre test est `https://www.example.org:81/c
 
 ### Exécution des tests
 
-Vous pouvez faire en sorte que votre interface de ligne de commande découvre automatiquement tous vos tests Synthetics `**/*.synthetics.json` (ou tous les tests associés au chemin spécifié dans votre [fichier de configuration globale](#configurer-le-client)) ou spécifier les tests que vous souhaitez exécuter à l'aide du flag `-p,--public-id`.
+Vous pouvez faire en sorte que votre interface de ligne de commande découvre automatiquement tous vos tests Synthetic `**/*.synthetics.json` (ou tous les tests associés au chemin spécifié dans votre [fichier de configuration globale](#configurer-le-client)) ou spécifier les tests que vous souhaitez exécuter à l'aide du flag `-p,--public-id`.
 
 Exécutez des tests via l'interface de ligne de commande :
 

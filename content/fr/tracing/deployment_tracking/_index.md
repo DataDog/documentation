@@ -168,7 +168,7 @@ Les analyses peuvent être exportées vers des dashboards et des monitors, même
 
 ### Profils par version
 
-Vous avez la possibilité de rechercher les profils correspondant à une version spécifique. Vous pouvez également cliquer sur **View Profiles** en haut à droite de la page de [comparaison de déploiements](#comparaison-de-deploiements) pour ouvrir le profiler en continu dans le contexte de l'une des versions comparées.
+Vous avez la possibilité de rechercher les profils correspondant à une version spécifique. Vous pouvez également cliquer sur **View Profiles** en haut à droite de la page de [comparaison de déploiements](#comparaison-de-deploiements) pour ouvrir le profileur en continu dans le contexte de l'une des versions comparées.
 
 {{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filtrer les profils par version"  style="width:100%;">}}
 

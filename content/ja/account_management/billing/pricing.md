@@ -24,7 +24,10 @@ Datadog では、ニーズに合わせてさまざまな料金プランをご用
 * Datadog は、お客様が Datadog APM サービスで監視している **APM ホスト**のユニーク数を 1 時間ごとに記録します。
   * Datadog の最高水準プラン (HWMP) では、月末にこの 1 時間ごとの測定結果が最高から最低まで順序付けられ、そのうち 8 番目に高い測定値に基づいて課金されます。
   * 月単位/時間単位混合プラン (MHP) では、月単位の最低契約量に対して課金され、ホスト数がその契約量を超えた時間については、時間単位の料金が課金されます。
-* **Analyzed Span **は、スタック内の個々のサービスに対する個別のリクエストです。Datadog APM サービスに送信された Analyzed Span の合計数に基づき課金されます。
+* **Indexed Span** は、スタック内の個々のサービスに対する個別のリクエストです。Datadog APM 内の[保持フィルター][3]によりインデックス化されたスパンの合計数に基づき課金されます。
+
+**注:** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
+
 
 ## ログ管理
 
@@ -53,7 +56,7 @@ Datadog では、ニーズに合わせてさまざまな料金プランをご用
 
 * Datadog は、エンドユーザーが訪問したすべてのページを、読み込みリソース (XHR、イメージ、CSS ファイル、JS スクリプト等)、フロントエンドエラー、長時間のタスクなど、重要なテレメトリーと一緒に収集します。これらはすべてユーザーセッションに含まれるデータです。Datadog リアルユーザーモニタリング (RUM) サービスで収集されたセッション 1 万件ごとに課金されます。
 
-## 継続的なプロファイラー
+## Continuous Profiler
 
 * Datadog は、お客様が Datadog Continuous Profiler サービスで同時に監視している一意の Continuous Profiler ホストの数を 1 時間に一度記録します。
   * この毎時の測定値は月末に最高から最低の順に並べられ、Datadog は 9 番目に高い測定値 (2 月のみ 8 番目に高い値) に基づいて課金します。
@@ -62,12 +65,13 @@ Datadog では、ニーズに合わせてさまざまな料金プランをご用
 
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][3]にお問い合わせください。
+技術的な質問については、[Datadog のサポートチーム][4]にお問い合わせください。
 
-お客様のアカウントの時間ごとの料金または課金額については、[営業担当者][4]または[カスタマーサクセス][5]マネージャーまでお問い合わせください。
+お客様のアカウントの時間ごとの料金または課金額については、[営業担当者][5]または[カスタマーサクセス][6]マネージャーまでお問い合わせください。
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /ja/developers/metrics/custom_metrics/
-[3]: /ja/help/
-[4]: mailto:sales@datadoghq.com
-[5]: mailto:success@datadoghq.com
+[3]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
+[4]: /ja/help/
+[5]: mailto:sales@datadoghq.com
+[6]: mailto:success@datadoghq.com

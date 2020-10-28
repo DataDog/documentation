@@ -51,7 +51,7 @@ DaemonSet によるログの収集を有効にするには
      # (...)
     ```
 
-    **注**: `DD_CONTAINER_EXCLUDE` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナのディスカバリー管理][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE` にコンテナの `name` を設定してログを収集します。
+    **注**: `DD_CONTAINER_EXCLUDE` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナのディスカバリー管理][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
 
 2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
 
@@ -115,6 +115,28 @@ datadog:
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+`datadog-agent.yaml` マニフェストを次のように更新します。
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  log:
+    enabled: true
+```
+
+完全な例については、[ログ とメトリクス収集が有効になっているマニフェスト][1]の例を参照してください。
+
+次に、新しいコンフィギュレーションを適用します。
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 **注**: Docker ソケットがマウントされていても、`/var/log/pods` からログを収集したい場合は、Agent にファイル収集モードを強制するために環境変数 `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (または `datadog.yaml` 内の `logs_config.k8s_container_use_file`) を `true` に設定します。
@@ -137,7 +159,7 @@ datadog:
 * [ConfigMap](?tab=configmap#configuration)
 * [key-value ストア](?tab=keyvaluestore#configuration)
 
-### 構成
+### コンフィギュレーション
 
 **注**: Datadog では、ポッドアノテーションを使い `service` 値を設定する際のベストプラクティスとして、統合サービスタグ付けの使用をお勧めしています。統合サービスタグ付けは `env`、`service`、`version` の 3 つの標準タグを使用して、ログを含むすべての Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][4]ドキュメントをご参照ください。
 

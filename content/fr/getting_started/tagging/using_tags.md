@@ -34,6 +34,22 @@ Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de 
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from"  style="width:80%;">}}
 
+Le filtrage avancé des valeurs de tag peut également inclure des filtres booléens. La syntaxe booléenne suivante est prise en charge :
+
+* `NOT`, `!`
+* `AND`, `,`
+* `OR`
+* `key IN (valeur_tag1, valeur_tag2, etc.)`
+* `key NOT IN (valeur_tag1, valeur_tag2, etc.)`
+
+Utilisez `AND` ou `OR` pour examiner une métrique en fonction de tags spécifiques :
+
+{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Filtre booléen avec AND/OR"  style="width:80%;">}}
+
+Utilisez `IN` ou `NOT IN` pour filtrer rapidement une métrique en fonction de tags spécifiques :
+
+{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtre booléen avec IN/NOT IN"  style="width:80%;">}}
+
 Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags dans des dashboards avec la zone de texte avg by" style="width:80%;">}}
@@ -88,21 +104,21 @@ Ou des conteneurs :
 
 {{% tab "Liste d'infrastructures" %}}
 
-Voici les zones de texte de filtrage et de regroupement de la page de la liste d'infrastructures :
+La liste d'infrastructures propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags de la liste d'infrastructures" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Conteneurs" %}}
 
-Voici les zones de texte de filtrage et de regroupement de la page des live containers :
+La page des live containers propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="Tags live containers" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processus" %}}
 
-Voici les zones de texte de filtrage et de regroupement de la page des live processes :
+La page des live processes propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="Tags live processes" style="width:80%;">}}
 {{% /tab %}}
@@ -215,7 +231,7 @@ Pour en savoir plus sur les libellés GCP, consultez la [documentation sur GCP][
 ## APM
 
 {{< tabs >}}
-{{% tab "App Analytics" %}}
+{{% tab "Analytics" %}}
 
 Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de traces][2].
 
@@ -226,7 +242,7 @@ Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide d
 {{% /tab %}}
 {{% tab "Service map" %}}
 
-Après avoir [assigné des tags][1], utilisez la Service Map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données [App Analytics][2], les [monitors][3], les [logs][4] et la [hostmap][5] correspondant au tag `service:coffee-house`.
+Après avoir [assigné des tags][1], utilisez la Service Map pour accéder facilement à différentes sections de l'application en cliquant sur un service spécifique. L'exemple ci-dessous affiche les données [Analytics][2], les [monitors][3], les [logs][4] et la [hostmap][5] correspondant au tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Tags service map" style="width:80%;">}}
 

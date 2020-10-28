@@ -1,5 +1,5 @@
 ---
-title: Surveillance Synthetics
+title: Surveillance Synthetic
 kind: documentation
 description: Utilisez des tests automatisés pour vous assurer que les aspects les plus importants de vos systèmes et applications fonctionnent correctement à différents endroits du monde.
 disable_toc: true
@@ -8,7 +8,7 @@ aliases:
 further_reading:
   - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
     tag: Blog
-    text: Présentation de la surveillance Datadog Synthetics
+    text: Présentation de la surveillance Datadog Synthetic
   - link: 'https://www.datadoghq.com/blog/browser-tests/'
     tag: Blog
     text: Surveillance de l'expérience utilisateur avec les tests Browser de Datadog
@@ -17,17 +17,17 @@ further_reading:
     text: Pratiques recommandées pour la création de tests de bout en bout
   - link: /synthetics/guide/
     tag: Documentation
-    text: Guides d'utilisation de la surveillance Synthetics
+    text: Guides d'utilisation de la surveillance Synthetic
   - link: /synthetics/troubleshooting/
     tag: Documentation
     text: Dépannage de la surveillance Synthetics
 ---
-{{< img src="synthetics/synthetics_home.png" alt="Page d'accueil Surveillance Synthetics" >}}
+{{< img src="synthetics/synthetics_home.png" alt="Page d'accueil Surveillance Synthetic" >}}
 
 Les tests Synthetic vous permettent d'observer le fonctionnement de vos systèmes et applications à l'aide de **requêtes et actions simulées dans le monde entier**. Datadog **surveille le fonctionnement de vos pages Web et de vos API** du backend au frontend, et à différents niveaux du réseau (HTTP, TCP, SSL et DNS) de manière contrôlée et stable, en vous envoyant des alertes en cas de comportement anormal (régression, fonctionnalité défaillante, temps de réponse élevé, code de statut inattendu, etc.). **Les tests de bout en bout dans les environnements de production et d'intégration continue** améliorent la rapidité des équipes de développement, car ils éliminent tout risque que le code défectueux soit mis en production. **La configuration de SLO** sur les principaux endpoints et parcours utilisateurs permet de mieux répondre aux objectifs de performance de l'application et, à terme, de proposer une expérience client robuste.
 
 ## Prise en main
-Créez votre premier test Synthetics et commencez à surveiller des applications Web pour améliorer leurs performances en quelques minutes seulement.
+Créez votre premier test Synthetic et commencez à surveiller des applications Web pour améliorer leurs performances en quelques minutes seulement.
 
 ### Configurer des tests API
 
@@ -53,11 +53,11 @@ Utilisez vos tests Synthetic comme [tests Canary][7] ou exécutez-les directemen
 
  {{< img src="synthetics/ci.png" alt="Tests d'intégration continue"  style="width:100%;">}}
 
-### Associer vos données de surveillance Synthetics à vos traces
+### Associer vos données de surveillance Synthetic à vos traces
 
 Datadog vous permet d'[intégrer vos tests Synthetic à vos traces d'APM][8] pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
-{{< img src="synthetics/synthetics_traces.gif" alt="Surveillance Synthetics" style="width:100%;">}}
+{{< img src="synthetics/synthetics_traces.gif" alt="Surveillance Synthetic" style="width:100%;">}}
 
 ## Pour aller plus loin
 
