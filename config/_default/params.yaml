@@ -29,6 +29,19 @@ code_languages:
     extension: php
     name: php
 
+code_language_ids:
+    java: Java
+    cpp: 'C++'
+    php: PHP
+    nodejs: NodeJS
+    python: Python
+    ruby: Ruby
+    go: Go
+    ".NET": ".NET"
+    dotnet-core: ".NET Core"
+    dotnet-framework: ".NET Framework"
+    curl: Curl
+
 branch: ""
 
 signupclass: sign-up-trigger

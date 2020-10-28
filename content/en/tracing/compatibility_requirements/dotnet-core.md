@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
 code_lang: dotnet-core
 type: multi-code-lang
+code_lang_weight: 70
 further_reading:
     - link: 'tracing/setup/dotnet-core'
       tag: 'Documentation'

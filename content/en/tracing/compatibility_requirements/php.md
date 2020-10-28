@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
 code_lang: php
 type: multi-code-lang
+code_lang_weight: 50
 further_reading:
     - link: 'tracing/setup/php'
       tag: 'Documentation'

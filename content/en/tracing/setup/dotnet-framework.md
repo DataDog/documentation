@@ -12,6 +12,7 @@ aliases:
     - /agent/apm/dotnet-framework/
 code_lang: dotnet-framework
 type: multi-code-lang
+code_lang_weight: 70
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
       tag: 'GitHub'

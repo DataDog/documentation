@@ -9,6 +9,7 @@ aliases:
     - /agent/apm/nodejs/
 code_lang: nodejs
 type: multi-code-lang
+code_lang_weight: 30
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: 'GitHub'

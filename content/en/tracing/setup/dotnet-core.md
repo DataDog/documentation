@@ -8,6 +8,7 @@ aliases:
   - /agent/apm/dotnet-core/
 code_lang: dotnet-core
 type: multi-code-lang
+code_lang_weight: 60
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "GitHub"

@@ -7,6 +7,7 @@ aliases:
 - /tracing/php/
 code_lang: php
 type: multi-code-lang
+code_lang_weight: 40
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"

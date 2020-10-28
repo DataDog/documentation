@@ -7,6 +7,7 @@ aliases:
 - /agent/apm/cpp/
 code_lang: cpp
 type: multi-code-lang
+code_lang_weight: 50
 further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Github"

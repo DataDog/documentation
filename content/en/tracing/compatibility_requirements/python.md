@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the Python tracer'
 code_lang: python
 type: multi-code-lang
+code_lang_weight: 10
 further_reading:
     - link: 'tracing/setup/python'
       tag: 'Documentation'

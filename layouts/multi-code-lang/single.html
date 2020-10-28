@@ -1,7 +1,7 @@
 {{ define "main" }}
 
     {{ $codeLangs := slice }}
-    {{ range .CurrentSection.Pages }} 
+    {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }} 
         {{ with .Params.code_lang }}  
         {{ $codeLangs = $codeLangs | append .  }}
         {{ end }}

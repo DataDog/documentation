@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the Go tracer'
 code_lang: go
 type: multi-code-lang
+code_lang_weight: 30
 further_reading:
     - link: 'tracing/setup/go'
       tag: 'Documentation'

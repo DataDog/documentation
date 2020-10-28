@@ -7,6 +7,7 @@ aliases:
     - /agent/apm/java/
 code_lang: java
 type: multi-code-lang
+code_lang_weight: 0
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
       tag: 'GitHub'

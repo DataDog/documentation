@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the NodeJS tracer'
 code_lang: nodejs
 type: multi-code-lang
+code_lang_weight: 40
 further_reading:
     - link: 'tracing/setup/nodejs'
       tag: 'Documentation'

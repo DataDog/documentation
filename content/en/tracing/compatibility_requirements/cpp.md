@@ -4,6 +4,7 @@ kind: documentation
 description: 'Compatibility Requirements for the C++ tracer'
 code_lang: cpp
 type: multi-code-lang
+code_lang_weight: 60
 further_reading:
     - link: 'tracing/setup/cpp'
       tag: 'Documentation'

@@ -1,6 +1,7 @@
 ---
 title: Instrument Your Application
 kind: documentation
+type: multi-code-lang
 aliases:
     - /tracing/languages
     - /tracing/proxies

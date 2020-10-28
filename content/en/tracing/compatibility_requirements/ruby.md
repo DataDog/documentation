@@ -6,6 +6,7 @@ kind: documentation
 description: 'Compatibility Requirements for the Ruby tracer.'
 code_lang: ruby
 type: multi-code-lang
+code_lang_weight: 20
 further_reading:
     - link: 'tracing/setup/ruby'
       tag: 'Documentation'
