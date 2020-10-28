@@ -89,5 +89,5 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/
-[2]: /tracing/serverless_functions/enable_aws_xray/
+[2]: /tracing/guide/serverless_enable_aws_xray/
 [3]: /tracing/send_traces/
