@@ -1141,7 +1141,7 @@ main:
     parent: tracing
     weight: 1
   - name: Compatibility
-    url: tracing/compatibility_requirements/
+    url: tracing/compatibility_requirements/java
     identifier: tracing_compatibility_requirements
     parent: tracing_setup_overview
     weight: 101
