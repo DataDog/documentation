@@ -1,15 +1,15 @@
 ---
-title: Facturation du service Profiler en continu
+title: Facturation du service Profileur en continu
 kind: documentation
 ---
-Le service [Profiler en continu de Datadog][1] vous permet d'analyser les performances du code en production, sur l'ensemble de votre stack et avec une charge système minimale. Vous pouvez tirer parti du profiling de code pour identifier et optimiser rapidement les méthodes ou les classes qui consomment le plus de ressources dans votre application, et ainsi améliorer l'efficacité du code et réduire les coûts facturés par votre fournisseur de cloud.
+Le service [Profileur en continu de Datadog][1] vous permet d'analyser les performances du code en production, sur l'ensemble de votre stack et avec une charge système minimale. Vous pouvez tirer parti du profiling de code pour identifier et optimiser rapidement les méthodes ou les classes qui consomment le plus de ressources dans votre application, et ainsi améliorer l'efficacité du code et réduire les coûts facturés par votre fournisseur de cloud.
 
 | Paramètre de facturation  | Prix                                      | Conteneurs                                                                 | Facturation                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Host avec profiler][2]      | 12 $ par [host profilé][2] par mois | Quatre conteneurs profilés* par host profilé inclus dans le prix. Tout conteneur profilé supplémentaire est facturé 2 $ par conteneur et par mois.    | Le nombre de hosts Profiler en continu que vous surveillez en même temps via le service Profiler en continu de Datadog est mesuré toutes les heures. À la fin du mois, ces mesures horaires sont classées de la plus élevée à la moins élevée, et Datadog envoie une facture basée sur la neuvième mesure la plus élevée (la huitième la plus élevée uniquement pour le mois de février). <br> En outre, Datadog mesure le nombre total de conteneurs qui sont profilés. Toutes les cinq minutes, Datadog enregistre le nombre de conteneurs uniques que vous surveillez via le service Profiler en continu. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement. Pour le service Profiler en continu, Datadog comptabilise uniquement les conteneurs qui exécutent le service Profiler en continu dans le nombre total de conteneurs surveillés. |
+| [Host avec profileur][2]      | 12 $ par [host profilé][2] par mois | Quatre conteneurs profilés* par host profilé inclus dans le prix. Tout conteneur profilé supplémentaire est facturé 2 $ par conteneur et par mois.    | Le nombre de hosts que vous surveillez en même temps via le service Profileur en continu de Datadog est mesuré toutes les heures. À la fin du mois, ces mesures horaires sont classées de la plus élevée à la moins élevée, et Datadog envoie une facture basée sur la neuvième mesure la plus élevée (la huitième la plus élevée uniquement pour le mois de février). <br> En outre, Datadog mesure le nombre total de conteneurs qui sont profilés. Toutes les cinq minutes, Datadog enregistre le nombre de conteneurs uniques que vous surveillez via le service Profileur en continu. Chaque mois, Datadog facture le nombre d'heures de surveillance de vos conteneurs, calculé proportionnellement. Pour le service Profileur en continu, Datadog comptabilise uniquement les conteneurs qui exécutent le service Profileur en continu dans le nombre total de conteneurs surveillés. |
 
 
-**Remarque :** un conteneur profilé est un conteneur qui exécute le service Profiler en continu. Les conteneurs non profilés ne sont pas inclus. Par exemple, si un conteneur de service DNS qui n'est pas profilé s'exécute en même temps qu'un conteneur d'application profilé, le premier conteneur sera pas comptabilisé dans le quota de quatre conteneurs profilés.
+**Remarque :** un conteneur profilé est un conteneur qui exécute le service Profileur en continu. Les conteneurs non profilés ne sont pas inclus. Par exemple, si un conteneur de service DNS qui n'est pas profilé s'exécute en même temps qu'un conteneur d'application profilé, le premier conteneur sera pas comptabilisé dans le quota de quatre conteneurs profilés.
 
 ## Exemples de scénarios de déploiement
 
@@ -28,7 +28,7 @@ Utilisation de 5 hosts exécutant une application profilée dans chaque host. A
 
 ### Cas nº 2 : hosts avec 4 conteneurs profilés
 
-Utilisation de 5 hosts exécutant chacun 4 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profiler en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
+Utilisation de 5 hosts exécutant chacun 4 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
@@ -39,7 +39,7 @@ Utilisation de 5 hosts exécutant chacun 4 conteneurs profilés. Un conteneur 
 
 ### Cas nº 3 : hosts avec 6 conteneurs profilés
 
-Utilisation de 5 hosts exécutant chacun 6 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profiler en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
+Utilisation de 5 hosts exécutant chacun 6 conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
@@ -50,7 +50,7 @@ Utilisation de 5 hosts exécutant chacun 6 conteneurs profilés. Un conteneur 
 
 ### Cas nº 4 : hosts avec 5 conteneurs, dont 2 seulement sont profilés
 
-Utilisation de 4 hosts exécutant chacun 5 conteneurs, mais seulement deux d'entre eux sont des conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profiler en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
+Utilisation de 4 hosts exécutant chacun 5 conteneurs, mais seulement deux d'entre eux sont des conteneurs profilés. Un conteneur profilé est un conteneur qui exécute le service Profileur en continu et envoie des données de profiling à l'Agent Datadog. Les conteneurs non profilés ne sont pas pris en compte.
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule       | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
@@ -79,9 +79,9 @@ Dans ce scénario, tous les conteneurs de tous les hosts (soit 2 hosts et 10 c
 
 
 ## FAQ
-**1. Comment un « host Profiler en continu » est-il défini pour la facturation ?**
+**1. Comment un « host Profileur en continu » est-il défini pour la facturation ?**
 
-Un host est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les heures. Pour la facturation d'un profiler en continu, le nombre de hosts sur lesquels la bibliothèque du profiler est installée et qui envoient des profils est calculé toutes les heures. Ces mesures horaires sont triées par ordre décroissant à la fin du mois, et Datadog facture selon la neuvième mesure la plus élevée (huitième mesure la plus élevée uniquement en février).
+Un host est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les heures. Pour la facturation d'un profileur en continu, le nombre de hosts sur lesquels la bibliothèque du profileur est installée et qui envoient des profils est calculé toutes les heures. Ces mesures horaires sont triées par ordre décroissant à la fin du mois, et Datadog facture selon la neuvième mesure la plus élevée (huitième mesure la plus élevée uniquement en février).
 
 **2. Comment le tarif facturé est-il calculé en cas de déploiement d'un Agent par conteneur ?**
 
@@ -97,7 +97,7 @@ Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif
 
 **5. Le nombre de hosts facturés tient-il compte de mes services ?**
 
-La facturation du service Profiler en continu est calculée en fonction du nombre de hosts déployés avec des Agents qui envoient des profils, et non en fonction du nombre de services.
+La facturation du service Profileur en continu est calculée en fonction du nombre de hosts déployés avec des Agents qui envoient des profils, et non en fonction du nombre de services.
 
 **6. Est-il possible d'utiliser le profiling en continu sans l'APM ?**
 

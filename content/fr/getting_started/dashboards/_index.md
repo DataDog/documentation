@@ -54,7 +54,7 @@ Pour créer un dashboard, il est notamment possible de trouver un dashboard simi
 2. Modifiez le clone en l'ouvrant et en cliquant sur **Edit widgets**. 
 3. Supprimez les widgets dont vous n'avez pas besoin en sélectionnant **Delete** à partir du menu des paramètres du widget.
 4. Réorganisez les widgets selon vos besoins. Chaque widget ou groupe de widgets peut être déplacé vers un autre endroit du dashboard à l'aide d'un glisser-déposer.
-5. Copiez les widgets qui vous intéressent à partir d'autres dashboards en survolant le widget et en saisissant `Command + C` (`Ctrl + C` sur Windows). Collez-les dans votre dashboard en ouvrant le dashboard et en saisissant `Command + V` (`Ctrl + V` sur Windows).
+5. Copiez les widgets qui vous intéressent à partir d'autres dashboards en survolant le widget et en appuyant sur `Command + C` (`Ctrl + C` sur Windows). Collez-les dans votre dashboard en ouvrant le dashboard et en appuyant sur `Command + V` (`Ctrl + V` sur Windows).
 5. Utilisez l'option **Export to Dashboard** disponible dans plusieurs vues Datadog pour exporter les données affichées dans un dashboard. Par exemple, les vues Log Explorer et Log Analytics vous permettent d'exporter des métriques et des listes de logs vers des dashboards.
 
 ## En savoir plus sur les métriques

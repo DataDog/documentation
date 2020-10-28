@@ -7,20 +7,23 @@ further_reading:
   - link: tracing/profiler/search_profiles
     tag: Documentation
     text: En savoir plus sur les types de profils disponibles
+  - link: tracing/profiler/profiler_troubleshooting
+    tag: Documentation
+    text: Résoudre les problèmes rencontrés en utilisant le profileur
   - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
     tags: Blog
     text: Présentation du profiling continu en production dans Datadog
 ---
 Le profileur est fourni au sein des bibliothèques de tracing suivantes. Sélectionnez votre langage ci-dessous afin d'activer le profileur pour votre application :
 
-Pour accéder au profiler **Node**, **Ruby**, **PHP** ou **.NET**, [inscrivez-vous][1] à la bêta privée. Nous vous préviendrons lorsque la bêta sera prête.
+Pour accéder au profileur **Node**, **Ruby**, **PHP** ou **.NET**, [inscrivez-vous][1] à la bêta privée. Nous vous préviendrons lorsque la bêta sera prête.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Le profileur Datadog nécessite [Java Flight Recorder][1]. La bibliothèque du profileur Datadog est prise en charge par OpenJDK 11+, Oracle Java 11+ et Zulu Java 8+ (version mineure 1.8.0_212+). Tous les langages basés sur JVM, tels que Scala, Groovy, Kotlin, ou encore Clojure sont pris en charge. Pour commencer le profiling d'applications :
+Le profileur Datadog nécessite [Java Flight Recorder][1]. La bibliothèque du profileur Datadog est prise en charge par OpenJDK 11+, Oracle Java 11+,  [OpenJDK 8 pour la plupart des fournisseurs (version 8u262)][2] et Zulu Java 8+ (version mineure 1.8.0_212+). Tous les langages basés sur JVM, tels que Scala, Groovy, Kotlin, ou encore Clojure sont pris en charge. Pour commencer le profiling d'applications :
 
-1. Si vous utilisez déjà Datadog, mettez votre Agent à jour vers la version [7.20.2][2] ou [6.20.2][2]. Si l'APM n'est pas activé et que votre application n'est pas configurée pour envoyer des données à Datadog, dans votre Agent, définissez la variable d'environnement `DD_APM_ENABLED` sur `true` et le port d'écoute sur `8126/TCP`.
+1. Si vous utilisez déjà Datadog, mettez votre Agent à jour vers la version [7.20.2][3]+ ou [6.20.2][3]+. Si l'APM n'est pas activé et que votre application n'est pas configurée pour envoyer des données à Datadog, dans votre Agent, définissez la variable d'environnement `DD_APM_ENABLED` sur `true` et le port d'écoute sur `8126/TCP`.
 
 2. Téléchargez `dd-java-agent.jar`, qui contient les fichiers de classe de l'Agent Java :
 
@@ -36,12 +39,12 @@ Le profileur Datadog nécessite [Java Flight Recorder][1]. La bibliothèque du p
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. Au bout d'une ou de deux minutes, visualisez vos profils en accédant à [l'APM Datadog puis à la page Profiling][3].
+4. Au bout d'une ou de deux minutes, visualisez vos profils en accédant à [l'APM Datadog puis à la page Profiling][4].
 
 
 **Remarques** :
 
-- L'argument `-javaagent` doit être exécuté avant le fichier `-jar`, en l'ajoutant en tant qu'option JVM et non en tant qu'argument d'application. Pour en savoir plus, consultez la [documentation Oracle][4] (en anglais) :
+- L'argument `-javaagent` doit figurer avant `-jar` et être ajouté en tant qu'option JVM et non en tant qu'argument d'application. Pour en savoir plus, consultez la [documentation Oracle][5] (en anglais) :
 
     ```shell
     # Good:
@@ -55,22 +58,23 @@ Le profileur Datadog nécessite [Java Flight Recorder][1]. La bibliothèque du p
 | Variable d'environnement                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Booléen       | Alternative à l'argument `-Ddd.profiling.enabled`. Définissez cette variable d'environnement sur `true` pour activer le profileur.               |
-| `DD_SERVICE`                                     | Chaîne        | Le nom de votre [service][2], par exemple, `web-backend`.     |
-| `DD_ENV`                                         | Chaîne        | Le nom de votre [environnement][5], par exemple `production`.|
+| `DD_SERVICE`                                     | Chaîne        | Le nom de votre [service][3], par exemple, `web-backend`.     |
+| `DD_ENV`                                         | Chaîne        | Le nom de votre [environnement][6], par exemple `production`.|
 | `DD_VERSION`                                     | Chaîne        | La version de votre service.                             |
-| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de valeurs `<key>:<value>` séparées par des virgules, par exemple : `layer:api, team:intake`.  |
+| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de paires `<key>:<value>` séparées par des virgules, par exemple : `layer:api, team:intake`.  |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/profiling
-[4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[5]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
+[2]: /fr/tracing/profiler/profiler_troubleshooting/#java-8-support
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/profiling
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
-Le profileur Datadog nécessite Python 2.7 ou une version ultérieure. Le profiling de mémoire est disponible sur Python 3.5 ou une version ultérieure. Pour commencer le profiling d'applications :
+Le profileur Datadog nécessite Python 2.7 ou une version ultérieure. Le profiling de mémoire est disponible sur Python 3.5 ou les versions ultérieures. Pour commencer le profiling d'applications :
 
 1. Si vous utilisez déjà Datadog, mettez votre Agent à niveau vers la version [7.20.2][1] ou [6.20.2][1]+.
 
@@ -115,7 +119,7 @@ Le profileur Datadog nécessite Python 2.7 ou une version ultérieure. Le profi
 | `DD_SERVICE`                                     | Chaîne        | Le nom du [service][3] Datadog.     |
 | `DD_ENV`                                         | Chaîne        | Le nom de l'[environnement][4] Datadog, par exemple `production`. |
 | `DD_VERSION`                                     | Chaîne        | La version de votre application.                             |
-| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de valeurs `<key>:<value>` séparées par des virgules, par exemple : `layer:api,team:intake`.   |
+| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de paires `<key>:<value>` séparées par des virgules, par exemple : `layer:api,team:intake`.   |
 
 <div class="alert alert-info">
 Conseillé pour une utilisation avancée uniquement.
@@ -194,7 +198,7 @@ Le profileur Datadog nécessite Go 1.12 ou une version ultérieure. Pour commen
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithService     | Chaîne        | Le nom du [service][4] Datadog, par exemple `my-web-app`.             |
 |  WithEnv         | Chaîne        | Le nom de l'[environnement][5] Datadog, par exemple `production`.         |
-|  WithVersion     | Chaîne        | La version de votre application.                                                                             |  
+|  WithVersion     | Chaîne        | La version de votre application.                                                                             |
 |  WithTags        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspond à une liste au format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 - Vous pouvez également définir la configuration du profileur à l'aide de variables d'environnement :
@@ -204,7 +208,7 @@ Le profileur Datadog nécessite Go 1.12 ou une version ultérieure. Pour commen
 | `DD_SERVICE`                                     | Chaîne        | Le nom du [service][4] Datadog.     |
 | `DD_ENV`                                         | Chaîne        | Le nom de l'[environnement][5] Datadog, par exemple `production`. |
 | `DD_VERSION`                                     | Chaîne        | La version de votre application.                             |
-| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de valeurs `<key>:<value>` séparées par des virgules, par exemple : `layer:api,team:intake`.   |
+| `DD_TAGS`                                        | Chaîne        | Les tags à appliquer à un profil importé. Doit correspondre à une liste de paires `<key>:<value>` séparées par des virgules, par exemple : `layer:api,team:intake`.   |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
@@ -215,17 +219,9 @@ Le profileur Datadog nécessite Go 1.12 ou une version ultérieure. Pour commen
 
 {{< /tabs >}}
 
-## Dépannage
-
-Si vous avez configuré le profileur et que vous ne voyez pas les profils dans la [page de recherche de profils](#rechercher-des-profils), veuillez activer le [mode debugging][2] et [ouvrez un ticket d'assistance][3] en fournissant les fichiers de débogage et les informations suivantes :
-
-- Type et version du système d'exploitation (par exemple, Linux Ubuntu 14.04.3)
-- Type, version et fournisseur du runtime (par exemple, Java OpenJDK 11 AdoptOpenJDK)
-
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[2]: /fr/tracing/troubleshooting/#tracer-debug-mode
-[3]: /fr/help/

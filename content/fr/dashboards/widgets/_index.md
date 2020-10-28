@@ -51,6 +51,23 @@ En mode plein écran, vous pouvez :
 
 Des options supplémentaires sont disponibles pour [les widgets Série temporelle][1].
 
+## Liens personnalisés
+La plupart des widgets proposent l'option de lien personnalisé dans le menu contextuel cliquable. Pour ajouter cette fonctionnalité, modifiez votre widget et sélectionnez l'onglet **Custom Links** ou choisissez **New custom link** à partir du menu contextuel cliquable.
+
+Les liens personnalisés vous permettent d'associer une valeur à une URL, comme une page Datadog ou votre console AWS. Elles prennent en charge les template variables et les tags ou les attributs utilisés dans le champ `group by`.
+
+### Exemples
+
+Afficher les logs associés à un graphique regroupé par `region` :
+```text
+http://app.datadoghq.com/logs?query={{region}}
+```
+
+Afficher les logs associés à un graphique sur un dashboard avec la template variable  `region` :
+```text
+http://app.datadoghq.com/logs?query={{$region.value}}
+```
+
 ## Copier/coller des widgets
 
 Les widgets peuvent être copiés sur les pages des [dashboards][2], [notebooks][3], [services APM][4] et [ressources APM][5] en utilisant les touches `Ctrl + C` (`Cmd + C` pour Mac) ou en sélectionnant l'icône de partage et en choisissant l'option Copy.

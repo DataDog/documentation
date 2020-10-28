@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
   logs: {}

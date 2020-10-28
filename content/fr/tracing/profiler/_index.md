@@ -1,12 +1,12 @@
 ---
-title: Profiler en continu
+title: Profileur en continu
 kind: Documentation
 aliases:
   - /fr/tracing/profiling
 further_reading:
   - link: tracing/profiler/getting_started
     tag: Documentation
-    text: Activez le profiler en continu pour votre application.
+    text: Activez le profileur en continu pour votre application.
   - link: tracing/profiler/search_profiles
     tag: Documentation
     text: En savoir plus sur les types de profils disponibles
@@ -20,7 +20,7 @@ Identifiez les goulots d'étranglement au niveau du processeur, de la mémoire e
 
 ### Faible impact en production
 
-Le profiler en continu est conçu pour être exécuté en production dans tous les services en exploitant des technologies telles que [JDK Flight Recorder][1] afin de minimiser l'impact sur la charge processeur et la charge mémoire de votre host.
+Le profileur en continu est conçu pour être exécuté en production dans tous les services en exploitant des technologies telles que [JDK Flight Recorder][1] afin de minimiser l'impact sur la charge processeur et la charge mémoire de votre host.
 
 ## Débuter
 
@@ -28,13 +28,13 @@ Le profiling de votre service vous permet de visualiser toutes vos stack traces 
 
 ### 1. Instrumentez votre application
 
-Ajoutez une bibliothèque de profiler à votre application pour commencer à envoyer des profils à l'Agent Datadog.
+Ajoutez une bibliothèque de profileur à votre application pour commencer à envoyer des profils à l'Agent Datadog.
 
-Pour accéder au profiler **Node**, **Ruby**, **PHP** ou **.NET**, [inscrivez-vous][2] à la bêta privée. Nous vous préviendrons lorsque la bêta sera prête.
+Pour accéder au profileur **Node**, **Ruby**, **PHP** ou **.NET**, [inscrivez-vous][2] à la bêta privée. Nous vous préviendrons lorsque la bêta sera prête.
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-## Explorer le profiler Datadog
+## Explorer le profileur Datadog
 
 Maintenant que vous avez configuré votre application pour qu'elle envoie des profils à Datadog, vous pouvez commencer à analyser les performances de votre code :
 

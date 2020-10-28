@@ -35,7 +35,7 @@ PHP ログとトレースを手動で接続する方法については、以下�
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
       $span->getTraceId(),
-      $span->getSpanId()
+      \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
 ?>
@@ -53,7 +53,7 @@ PHP ログとトレースを手動で接続する方法については、以下�
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
           $span->getTraceId(),
-          $span->getSpanId()
+          \dd_trace_peek_span_id()
       );
       return $record;
   });
@@ -72,7 +72,7 @@ PHP ログとトレースを手動で接続する方法については、以下�
 
       $record['dd'] = [
           'trace_id' => $span->getTraceId(),
-          'span_id'  => $span->getSpanId(),
+          'span_id'  => \dd_trace_peek_span_id(),
       ];
 
       return $record;
