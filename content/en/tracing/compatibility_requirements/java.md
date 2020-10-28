@@ -4,6 +4,8 @@ kind: documentation
 description: 'Compatibility Requirements for the Java tracer'
 code_lang: java
 type: multi-code-lang
+aliases:
+    - /tracing/setup/
 further_reading:
     - link: 'tracing/setup/java'
       tag: 'Documentation'
