@@ -15,28 +15,52 @@ further_reading:
 
 ## Overview
 
+Within the Datadog app there are several ways to correlate logs with metrics. Views like [Log Explorer][1], [Dashboards][2], and [Metrics Explorer][3] offer detailed panels and instant view switching to help you quickly gain context of an issue and map it throughout your service.
+
+This guide shows you how to correlate logs and metrics throughout these views.
+
 ## Log Explorer
 
-Scenario 1:
+To correlate logs and metrics in [Log Explorer][4]:
 
-- Click on log content
-- Select metrics tab
+1. Click on any log under **Content**. This populates a panel with detailed information about the log.
+2. Click on the **Metrics** tab within the panel.
 
-Scenario 2:
-
-- Custom query for log content
-- Click on log content
-- Select metrics tab
-
-## Metrics Explorer
-
-Scenario 1:
-
-- Graph metric
-- Click on graph, view related logs
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="Setting file permission"  >}}
 
 ## Dashboards
 
-Scenario 1:
+To correlate logs and metrics in a [Dashboard][5]:
 
-- Click on graph, view related logs
+1. Navigate to your dashboard.
+2. Click on any data point within any widget to populate the [graph menu][6].
+3. If your widget contains **logs events that you wish to correlate with metrics**:
+    1. Select **View related logs** to populate a panel with detailed information about related logs.
+    2. Select a specific log event.
+    3. Click on the **Metrics** tab.
+4. If your widget contains **metrics that you wish to correlate with logs**:
+    1. Select **View related logs**.
+
+{{< img src="logs/guide/correlate-logs-with-metrics/dashboards.gif" alt="Setting file permission"  >}}
+
+## Metrics Explorer
+
+To correlate logs and metrics on the [Metrics Explorer][7] page:
+
+1. Select a metric to graph.
+2. Click on any point within the graph to populate the graph menu.
+3. Select **View related logs**.
+
+{{< img src="logs/guide/correlate-logs-with-metrics/metrics-explorer.png" alt="Setting file permission"  >}}
+
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/
+[2]: /dashboards/
+[3]: /metrics/explorer/
+[4]: https://app.datadoghq.com/logs
+[5]: https://app.datadoghq.com/dashboard/lists
+[6]: /dashboards/timeboards/#graph-menu
+[7]: https://app.datadoghq.com/metric/explorer
