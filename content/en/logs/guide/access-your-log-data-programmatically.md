@@ -1,5 +1,5 @@
 ---
-title: Programmatically access log data using the Logs Search API
+title: Programmatically Access Log Data Using the Logs Search API
 kind: guide
 further_reading:
 - link: "/logs/explorer/"

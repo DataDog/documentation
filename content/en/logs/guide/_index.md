@@ -5,6 +5,7 @@ private: true
 ---
 
 {{< whatsnext desc="" >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Programmatically access log data using the Logs Search API{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}Monitor your log usage{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}
