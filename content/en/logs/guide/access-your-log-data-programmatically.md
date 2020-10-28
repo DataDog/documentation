@@ -428,7 +428,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ### Pagination
 
-To retrieve a log list longer than the `1000` logs limit, use the Pagination feature.
+To retrieve a log list longer than the `1000` logs limit, use the pagination feature.
 
 The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter is `50` by default, but can be set up to `1000`.
 
