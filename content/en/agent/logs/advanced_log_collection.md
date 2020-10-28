@@ -516,6 +516,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
+
 [1]: /agent/faq/commonly-used-log-processing-rules
 [2]: https://docs.datadoghq.com/logs/explorer/#overview
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
