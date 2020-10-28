@@ -15,7 +15,9 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The Java Tracer supports all JVMs on all platforms version 7 and higher. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utililze tracing with the [Continous Profiler][17], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, all vendors will be supported for the Profiler. 
+
+All JVM-based languages, such as Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure are supported. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation and Getting Started
 
@@ -44,8 +46,6 @@ Otherwise, to begin tracing applications written in any language:
    ```
 
 4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
-
-- The Java Tracer support all JVM-based languages, i.e. Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure.
 
 ### Add the Java Tracer to the JVM 
 
@@ -445,3 +445,4 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [14]: /tracing/compatibility_requirements/java#disabling-integrations
 [15]: /integrations/java/?tab=host#metric-collection
 [16]: https://github.com/openzipkin/b3-propagation
+[17]: /tracing/profiler/getting_started/?tab=java
