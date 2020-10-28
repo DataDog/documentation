@@ -73,6 +73,19 @@ Refer to the [main dashboard documentation][5] for details on copying, importing
 
 Use this option to permanently delete your screenboard. You are prompted to confirm deletion.
 
+## Graph menu
+
+Click on any screenboard graph to open an options menu:
+
+| Option                 | Description                                                   |
+|------------------------|---------------------------------------------------------------|
+| View in full screen    | View the graph in [full screen mode][6].                     |
+| View related processes | Jump to the [Live Processes][7] page scoped to your graph.   |
+| View related hosts     | Jump to the [Host Map][8] page scoped to your graph.         |
+| View related logs      | Populate a [Logs][9] panel scoped to your graph.             |
+| View related traces    | Populate a [Traces][10] panel scoped to your graph.          |
+| View related profiles  | Jump to the [Profiling][11] page scoped to your graph.       |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -82,3 +95,9 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 [3]: /events/
 [4]: /account_management/users/default_roles/
 [5]: /dashboards/#copy-import-export
+[6]: /dashboards/widgets/#full-screen
+[7]: https://app.datadoghq.com/process
+[8]: https://app.datadoghq.com/infrastructure/map
+[9]: /logs/
+[10]: /tracing/
+[11]: /tracing/profiler/
