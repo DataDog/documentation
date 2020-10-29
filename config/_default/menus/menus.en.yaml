@@ -1145,16 +1145,136 @@ main:
     identifier: tracing_compatibility_requirements
     parent: tracing_setup_overview
     weight: 101
+  - name: Java
+    url: tracing/setup_overview/compatibility_requirements/java
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/compatibility_requirements/python
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/compatibility_requirements/ruby
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_ruby
+    weight: 103
+  - name: Go
+    url: tracing/setup_overview/compatibility_requirements/go
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/compatibility_requirements/nodejs
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/compatibility_requirements/php
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/compatibility_requirements/cpp
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/setup_overview/compatibility_requirements/dotnet-core
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/setup_overview/compatibility_requirements/dotnet-framework
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_framework
+    weight: 109
   - name: Add the Datadog Tracing Library
     url: tracing/setup_overview/setup/
     parent: tracing_setup_overview
-    identifier: tracing_setup
+    identifier: tracing_setup_overview_setup
     weight: 102
+  - name: Java
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/setup/python
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_python
+    weight: 102
+  - name: Go
+    url: tracing/setup_overview/setup/go
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/setup/nodejs
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/setup/php
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/setup/cpp
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/setup_overview/setup/dotnet-core
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/setup_overview/setup/dotnet-framework
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_framework
+    weight: 109
   - name: Open Standards
     url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
-    identifier: tracing_open_standards
+    identifier: tracing_open_standards_open_standards
     weight: 103
+  - name: Java
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/open_standards/python
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/open_standards/ruby
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/open_standards/go
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/open_standards/nodejs
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/open_standards/php
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_php
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/open_standards/dotnet
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_dotnet
+    weight: 108
   - name: Trace Serverless Functions
     url: tracing/setup_overview/serverless_functions/
     parent: tracing_setup_overview
@@ -1168,8 +1288,48 @@ main:
   - name: Custom Instrumentation
     url: tracing/setup_overview/custom_instrumentation/
     parent: tracing_setup_overview
-    identifier: tracing_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation
     weight: 106
+  - name: Java
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/custom_instrumentation/python
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/custom_instrumentation/ruby
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/custom_instrumentation/go
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/custom_instrumentation/nodejs
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/custom_instrumentation/php
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/custom_instrumentation/cpp
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_cpp
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/custom_instrumentation/dotnet
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_dotnet
+    weight: 108
   - name: Configure Data Security
     url: tracing/setup_overview/configure_data_security
     parent: tracing_setup_overview

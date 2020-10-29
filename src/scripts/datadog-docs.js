@@ -650,8 +650,8 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let aPath = document.querySelector(`.side [data-path="${path}"]`);
-    let maPath = document.querySelector(`header [data-path="${path}"]`);
+    let aPath = document.querySelector(`.side [data-path*="${path}"]`);
+    let maPath = document.querySelector(`header [data-path*="${path}"]`);
 
     // TODO: fix exceptions for specific nav links that have the same url but both open the same place
     if (path.includes('agent/guide/upgrade-to-agent-v6')) {
@@ -686,13 +686,6 @@ function getPathElement() {
     if (path.includes('graphing/guide')) {
         aPath = document.querySelector('.side [data-path*="graphing/guide"]');
         maPath = document.querySelector('header [data-path*="graphing/guide"]');
-    }
-
-    
-
-    if (path.includes('tracing/setup')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup"]');
     }
 
     if (path.includes('logs/guide')) {
@@ -746,41 +739,6 @@ function getPathElement() {
         );
     }
 
-    if (path.includes('tracing/setup_overview/compatibility_requirements')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/compatibility_requirements"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/compatibility_requirements"]');
-    }
-
-    if (path.includes('tracing/setup_overview/setup')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/setup"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/setup"]');
-    }
-
-    if (path.includes('tracing/setup_overview/open_standards')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/open_standards"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/open_standards"]');
-    }
-
-    if (path.includes('tracing/setup_overview/serverless_functions')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/serverless_functions"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/serverless_functions"]');
-    }
-
-    if (path.includes('tracing/setup_overview/proxy_setup')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/proxy_setup"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/proxy_setup"]');
-    }
-
-    if (path.includes('tracing/setup_overview/custom_instrumentation')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/custom_instrumentation"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/custom_instrumentation"]');
-    }
-
-    if (path.includes('tracing/setup_overview/configure_data_security')) {
-        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/configure_data_security"]');
-        maPath = document.querySelector('header [data-path*="tracing/setup_overview/configure_data_security"]');
-    }
-
     // if url is domain + /integrations/**
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
@@ -795,11 +753,6 @@ function getPathElement() {
         );
     }
     
-    if (path.includes('tracing/serverless_functions')) {
-        aPath = document.querySelectorAll('.side [data-path*="tracing/serverless_functions"]')[1];
-        maPath = document.querySelectorAll('header [data-path*="tracing/serverless_functions"]')[1];
-    }
-
     if (aPath) {
         aPath.classList.add('active');
         hasParentLi(aPath);
