@@ -1205,6 +1205,11 @@ main:
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_python
     weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/setup/ruby
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_ruby
+    weight: 103
   - name: Go
     url: tracing/setup_overview/setup/go
     parent: tracing_setup_overview_setup
