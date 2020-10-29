@@ -18,7 +18,7 @@ To access deployment tracking for your serverless applications, select a functio
 
 For visibility into historical code and configuration changes, adjust the global time selector at the top right of the view.
 
-## Enabling Deployment Tracking
+## Setup
 
 Datadog collects code and configuration change events for your AWS Lambda functions from AWS CloudTrail.
 
