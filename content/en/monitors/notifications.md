@@ -145,7 +145,7 @@ Log monitors can use facets as variables if the monitor is grouped by the facets
 For example, if your log monitor is grouped by the `facet`, the variable is:
 
 ```text
-{{ facet }}
+{{ facet.name }}
 ```
 
 If your facet has periods, use brackets around the facet, for example:
