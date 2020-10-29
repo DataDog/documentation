@@ -10,6 +10,7 @@ aliases:
     - /tracing/languages/dotnet-framework
     - /tracing/setup/dotnet-framework
     - /agent/apm/dotnet-framework/
+    - /tracing/setup_overview/dotnet-framework
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70

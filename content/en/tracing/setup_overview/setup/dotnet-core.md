@@ -7,6 +7,7 @@ aliases:
   - /tracing/setup/dotnet-core
   - /agent/apm/dotnet-core/
   - /tracing/setup/dotnet-core
+  - /tracing/setup_overview/dotnet-core
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60

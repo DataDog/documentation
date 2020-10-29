@@ -6,6 +6,7 @@ aliases:
     - /tracing/languages/java
     - /agent/apm/java/
     - /tracing/setup/java
+    - /tracing/setup_overview/java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0

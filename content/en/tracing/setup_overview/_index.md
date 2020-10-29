@@ -17,6 +17,8 @@ Configuring your application to send [traces][1] to Datadog involves two main st
 
 Depending on your environment, there are different ways to configure the Datadog Agent.
 
+{{< partial name="apm/apm-compatibility.html" >}}
+
 ### Follow the in-app documentation (Recommended)
 
 For step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS), follow the [Quickstart instructions][3] within the Datadog app.

@@ -9,6 +9,7 @@ aliases:
     - /tracing/languages/python/
     - /agent/apm/python/
     - /tracing/setup/python
+    - /tracing/setup_overview/python
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'
