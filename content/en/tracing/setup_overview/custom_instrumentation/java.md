@@ -8,6 +8,7 @@ aliases:
 description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
 code_lang: java
 type: multi-code-lang
+code_lang_weight: 0
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

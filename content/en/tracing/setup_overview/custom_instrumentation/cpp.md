@@ -7,6 +7,7 @@ aliases:
 description: 'Manually instrument your C++ application to send custom traces to Datadog.'
 code_lang: cpp
 type: multi-code-lang
+code_lang_weight: 50
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

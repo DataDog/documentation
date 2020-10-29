@@ -8,6 +8,7 @@ aliases:
 description: 'Implement the OpenTracing standard with the Datadog Go APM tracer.'
 code_lang: go
 type: multi-code-lang
+code_lang_weight: 30
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

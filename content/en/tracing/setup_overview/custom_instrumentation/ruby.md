@@ -8,6 +8,7 @@ aliases:
 description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
 code_lang: ruby
 type: multi-code-lang
+code_lang_weight: 20
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

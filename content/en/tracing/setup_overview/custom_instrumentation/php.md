@@ -7,6 +7,7 @@ aliases:
     - /tracing/custom_instrumentation/php
 description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 code_lang: php
+code_lang_weight: 50
 type: multi-code-lang
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

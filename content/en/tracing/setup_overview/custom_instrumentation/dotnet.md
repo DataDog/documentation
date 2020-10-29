@@ -3,6 +3,7 @@ title: .NET Custom Instrumentation
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
+code_lang_weight: 80
 aliases:
     - /tracing/opentracing/dotnet
     - /tracing/manual_instrumentation/dotnet

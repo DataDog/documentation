@@ -7,6 +7,7 @@ aliases:
     - /tracing/custom_instrumentation/nodejs
 description: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
 code_lang: nodejs
+code_lang_weight: 40
 type: multi-code-lang
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
