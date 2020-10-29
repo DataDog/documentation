@@ -54,7 +54,7 @@ Setting an HTTPS proxy for both `https` and `http` requests:
 ```yaml
 proxy:
     https: "https://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>"
-    http: "https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>"
+    http: "http://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>"
 ```
 
 Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` requests:
