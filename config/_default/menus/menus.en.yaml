@@ -1141,37 +1141,37 @@ main:
     parent: tracing
     weight: 1
   - name: Compatibility
-    url: tracing/compatibility_requirements/
+    url: tracing/setup_overview/compatibility_requirements/
     identifier: tracing_compatibility_requirements
     parent: tracing_setup_overview
     weight: 101
   - name: Add the Datadog Tracing Library
-    url: tracing/setup/
+    url: tracing/setup_overview/setup/
     parent: tracing_setup_overview
     identifier: tracing_setup
     weight: 102
   - name: Open Standards
-    url: tracing/open_standards/
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards
     weight: 103
   - name: Trace Serverless Functions
-    url: tracing/serverless_functions/
+    url: tracing/setup_overview/serverless_functions/
     parent: tracing_setup_overview
     identifier: tracing_serverless_functions
     weight: 104
   - name: Trace Proxies
-    url: tracing/proxy_setup/
+    url: tracing/setup_overview/proxy_setup/
     parent: tracing_setup_overview
     identifier: tracing_proxy_setup
     weight: 105
   - name: Custom Instrumentation
-    url: tracing/custom_instrumentation/
+    url: tracing/setup_overview/custom_instrumentation/
     parent: tracing_setup_overview
     identifier: tracing_custom_instrumentation
     weight: 106
   - name: Configure Data Security
-    url: tracing/configure_data_security
+    url: tracing/setup_overview/configure_data_security
     parent: tracing_setup_overview
     identifier: tracing_configure_data_security
     weight: 107

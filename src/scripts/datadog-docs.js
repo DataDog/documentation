@@ -688,10 +688,7 @@ function getPathElement() {
         maPath = document.querySelector('header [data-path*="graphing/guide"]');
     }
 
-    if (path.includes('tracing/compatibility_requirements')) {
-        aPath = document.querySelector('.side [data-path*="tracing/compatibility_requirements"]');
-        maPath = document.querySelector('header [data-path*="tracing/compatibility_requirements"]');
-    }
+    
 
     if (path.includes('tracing/setup')) {
         aPath = document.querySelector('.side [data-path*="tracing/setup"]');
@@ -747,6 +744,41 @@ function getPathElement() {
         maPath = document.querySelector(
             'header [data-path*="synthetics/guide"]'
         );
+    }
+
+    if (path.includes('tracing/setup_overview/compatibility_requirements')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/compatibility_requirements"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/compatibility_requirements"]');
+    }
+
+    if (path.includes('tracing/setup_overview/setup')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/setup"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/setup"]');
+    }
+
+    if (path.includes('tracing/setup_overview/open_standards')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/open_standards"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/open_standards"]');
+    }
+
+    if (path.includes('tracing/setup_overview/serverless_functions')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/serverless_functions"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/serverless_functions"]');
+    }
+
+    if (path.includes('tracing/setup_overview/proxy_setup')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/proxy_setup"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/proxy_setup"]');
+    }
+
+    if (path.includes('tracing/setup_overview/custom_instrumentation')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/custom_instrumentation"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/custom_instrumentation"]');
+    }
+
+    if (path.includes('tracing/setup_overview/configure_data_security')) {
+        aPath = document.querySelector('.side [data-path*="tracing/setup_overview/configure_data_security"]');
+        maPath = document.querySelector('header [data-path*="tracing/setup_overview/configure_data_security"]');
     }
 
     // if url is domain + /integrations/**

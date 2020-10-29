@@ -38,6 +38,7 @@ code_language_ids:
     ruby: Ruby
     go: Go
     ".NET": ".NET"
+    dotnet: ".NET"
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
