@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: mitheysh.asokam/log-forwarder-automation
+      branch: mitheysh.asokan/log-forwarder-automation
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
