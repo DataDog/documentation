@@ -1,7 +1,5 @@
 datadog:
   kubeStateMetricsEnabled: false
-  processAgent:
-    enabled: false
 agents:
   rbac:
     create: false

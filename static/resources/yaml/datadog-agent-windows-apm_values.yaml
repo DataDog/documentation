@@ -1,7 +1,10 @@
+targetSystem: windows
 datadog:
   kubeStateMetricsEnabled: false
   apm:
     enabled: true
+  processAgent:
+    enabled: false
 agents:
   rbac:
     create: false
