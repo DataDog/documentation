@@ -110,6 +110,17 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 {{% /tab %}}
 {{< /tabs >}}
 
+## Manually submitting a Flare 
+
+The agent flare protocol collects configurations and log into an archive file first put into the local `/tmp` directory.
+Manually obtain this file and provide to support if there are any issues with agent connectivity.
+
+### Grabbing the file in Kubernetes
+Use this kubectl command:
+```
+kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
