@@ -116,7 +116,7 @@ The agent flare protocol collects configurations and log into an archive file fi
 Manually obtain this file and provide it to support if there are any issues with Agent connectivity.
 
 ### Grabbing the file in Kubernetes
-Use this kubectl command:
+To obtain the archive file in Kubernetes, use the kubectl command:
 ```
 kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
 ```
