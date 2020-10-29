@@ -1,10 +1,9 @@
 ---
-title: Instrument Your Application
+title: Add the Datadog Tracing Library
 kind: documentation
 type: multi-code-lang
 aliases:
     - /tracing/languages
-    - /tracing/proxies
 disable_toc: true
 ---
 
