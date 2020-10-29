@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md'
 display_name: Amazon Fargate
+draft: false
 git_integration_title: ecs_fargate
 guid: 7484e55c-99ec-45ad-92f8-28e798796411
 integration_id: aws-fargate
@@ -101,7 +102,7 @@ aws ecs register-task-definition --cli-input-json file://<CHEMIN_VERS_FICHIER>/d
 
 ##### AWS CloudFormation
 
-Vous pouvez utiliser les modèles [AWS CloudFormation][9] pour configurer vos conteneurs Fargate. Utilisez la ressource `AWS::ECS::TaskDefinition` dans votre modèle CloudFormation pour définir la tâche Amazon ECS et spécifier `FARGATE` comme type de lancement requis pour cette tâche. Vous pouvez ensuite définir l'option `Datadog` pour configurer la gestion des logs, comme dans l'exemple ci-dessous :
+Vous pouvez tirer profit des modèles [AWS CloudFormation][9] pour configurer vos conteneurs Fargate. Utilisez la ressource `AWS::ECS::TaskDefinition` dans votre modèle CloudFormation pour définir la tâche Amazon ECS et spécifier `FARGATE` comme type de lancement requis pour cette tâche. Vous pouvez ensuite définir l'option `Datadog` de façon à configurer la gestion des logs, comme dans l'exemple ci-dessous :
 
 ```yaml
 Resources:
@@ -137,11 +138,11 @@ Resources:
           MemoryReservation: 50
 ```
 
-Pour en savoir plus sur les modèles et la syntaxe CloudFormation, consultez [la documentation relative à AWS CloudFormation][10].
+Pour en savoir plus sur les modèles et la syntaxe CloudFormation, consultez [la documentation relative à AWS CloudFormation][10].
 
 #### Créer ou modifier votre stratégie IAM
 
-Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][11] afin de recueillir des métriques ECS Fargate. Pour en savoir plus sur les stratégies ECS, [consultez la documentation du site Web d'AWS][12].
+Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][11] afin de recueillir des métriques ECS Fargate. Pour en savoir plus sur les stratégies ECS, [consultez la documentation sur le site Web d'AWS][12].
 
 | Autorisation AWS                   | Description                                                       |
 | -------------------------------- | ----------------------------------------------------------------- |
@@ -169,7 +170,7 @@ Exécutez la tâche en tant que service pour votre cluster :
 
 ```bash
 aws ecs run-task --cluster <NOM_CLUSTER> \
---network-configuration "awsvpcConfiguration={subnets=["<SOUSRÉSEAU_PRIVÉ>"],securityGroups=["<GROUPE_SÉCURITÉ>"]}" \
+--network-configuration "awsvpcConfiguration={subnets=["<SOUS-RÉSEAU_PRIVÉ>"],securityGroups=["<GROUPE_SÉCURITÉ>"]}" \
 --task-definition arn:aws:ecs:us-east-1:<NUMÉRO_COMPTE_AWS>:task-definition/<NOM_TÂCHE>:1 \
 --region <RÉGION_AWS> --launch-type FARGATE --platform-version 1.1.0
 ```
@@ -191,7 +192,7 @@ aws ecs run-task --cluster <NOM_CLUSTER> \
 
 ### Collecte de métriques
 
-Une fois l'Agent Datadog configuré conformément aux instructions ci-dessus, le [check ecs_fargate][14] recueille des métriques lorsque Autodiscovery est activé. Ajoutez des étiquettes Docker à vos autres conteneurs dans la même tâche pour recueillir des métriques supplémentaires.
+Une fois l'Agent Datadog configuré conformément aux instructions ci-dessus, le [check ecs_fargate][14] recueille des métriques lorsqu'Autodiscovery est activé. Ajoutez des étiquettes Docker à vos autres conteneurs dans la même tâche pour recueillir des métriques supplémentaires.
 
 Pour en savoir plus sur la collecte de métriques d'intégration, consultez la section [Configuration d'intégration pour ECS Fargate][7].
 
@@ -207,7 +208,7 @@ Pour consulter les variables d'environnement disponibles avec le conteneur de l'
 
 Pour le tagging global, il est conseillé d'utiliser `DD_DOCKER_LABELS_AS_TAGS`. Avec cette méthode, l'Agent récupère les tags depuis les étiquettes de vos conteneurs Docker. Cela vous oblige à ajouter les étiquettes appropriées à vos autres conteneurs Docker. Il est possible d'ajouter des étiquettes directement dans la [définition de tâche][17].
 
-Format pour le conteneur de l'Agent :
+Format du conteneur de l'Agent :
 
 ```json
 {
@@ -245,11 +246,13 @@ Le crawler CloudWatch par défaut de Datadog récupère les métriques toutes le
 
 Vous avez la possibilité de surveiller les logs Fargate de deux façons différentes. Vous pouvez tout d'abord utiliser l'intégration AWS FireLens basée sur le plug-in de sortie Fluent Bit de Datadog afin d'envoyer les logs à Datadog, Il est également possible d'utiliser le pilote de logs `awslogs` et une fonction Lambda afin d'acheminer les logs vers Datadog. Étant donné que Fluent Bit peut être directement configuré dans vos tâches Fargate, nous vous conseillons d'utiliser AWS FireLens.
 
+{{< tabs >}}
+{{% tab "Fluent Bit et Firelens" %}}
 #### Fluent Bit et FireLens
 
 Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent Bit de Datadog de façon à connecter vos données de logs FireLens aux logs Datadog.
 
-1. Activez Fluent Bit dans le conteneur de routage de vos logs FireLens au sein de votre tâche Fargate. Pour en savoir plus sur l'activation de FireLens, consultez la [documentation AWS FireLens dédiée][21]. Pour en savoir plus sur les définitions de conteneur Fargate, consultez la [documentation AWS à ce sujet][22]. AWS conseille d'utiliser l'[image Docker correspondant à votre région][23]. Voici un exemple de définition de tâche où l'image Fluent Bit est configurée :
+1. Activez Fluent Bit dans le conteneur de routage de vos logs FireLens au sein de votre tâche Fargate. Pour en savoir plus sur l'activation de FireLens, consultez la [documentation AWS FireLens dédiée][1]. Pour en savoir plus sur les définitions de conteneur Fargate, consultez la [documentation AWS à ce sujet][2]. AWS conseille d'utiliser l'[image Docker correspondant à votre région][3]. Voici un exemple de définition de tâche où l'image Fluent Bit est configurée :
 
    ```json
    {
@@ -263,7 +266,7 @@ Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent 
    }
    ```
 
-    Si vos conteneurs publient des logs JSON sérialisés via stdout, vous devez utiliser cette [configuration FireLens supplémentaire][24] pour que leur parsing s'effectue correctement dans Datadog :
+    Si vos conteneurs publient des logs JSON sérialisés via stdout, vous devez utiliser cette [configuration FireLens supplémentaire][4] pour que leur parsing s'effectue correctement dans Datadog :
 
    ```json
    {
@@ -281,7 +284,7 @@ Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent 
    }
    ```
 
-    Cet argument convertit le JSON sérialisé du champ `log:` en champs de premier niveau. Consultez un exemple pour AWS dans la section [Parser des logs sous forme de JSON sérialisé à partir du stdout d'un conteneur][25] pour en savoir plus.
+    Cet argument convertit le JSON sérialisé du champ `log:` en champs de premier niveau. Consultez un exemple pour AWS dans la section [Parser des logs sous forme de JSON sérialisé à partir du stdout d'un conteneur][5] pour en savoir plus.
 
 2. Ensuite, toujours dans la même tâche Fargate, définissez une configuration de log en spécifiant AWS FireLens comme pilote de logs et en configurant l'envoi des logs à Fluent Bit. Voici un exemple de définition de tâche permettant d'envoyer les données de logs à Fluent Bit avec FireLens comme pilote de logs :
 
@@ -304,15 +307,28 @@ Configurez l'intégration AWS FireLens basée sur le plug-in de sortie Flutent 
    }
    ```
 
-    **Remarque** : si votre organisation utilise le site européen de Datadog, utilisez plutôt `http-intake.logs.datadoghq.eu` pour l'option `Host`. La liste complète des paramètres acceptés est disponible dans la [documentation Datadog sur Fluentbit][26].
+    **Remarque** : si votre organisation utilise le site européen de Datadog, utilisez plutôt `http-intake.logs.datadoghq.eu` pour l'option `Host`. La liste complète des paramètres acceptés est disponible dans la [documentation Datadog sur Fluentbit][6].
 
-3. À chaque exécution d'une tâche Fargate, Fluent Bit envoie désormais les logs de conteneur à Datadog, accompagnés d'informations sur l'ensemble des conteneurs gérés par vos tâches Fargate. Vous avez la possibilité de visualiser les logs bruts sur la [page Log Explorer][27], de [créer des monitors][28] pour des logs et d'utiliser la [vue Live Container][29].
+3. À chaque exécution d'une tâche Fargate, Fluent Bit envoie désormais les logs de conteneur à Datadog, accompagnés d'informations sur l'ensemble des conteneurs gérés par vos tâches Fargate. Vous avez la possibilité de visualiser les logs bruts sur la [page Log Explorer][7], de [créer des monitors][8] pour des logs et d'utiliser la [vue Live Container][9].
+
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
+[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
+[4]: https://github.com/aws-samples/amazon-ecs-firelens-examples/tree/master/examples/fluent-bit/parse-json
+[5]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[6]: https://docs.datadoghq.com/fr/integrations/fluentbit/#configuration-parameters
+[7]: https://app.datadoghq.com/logs
+[8]: https://docs.datadoghq.com/fr/monitors/monitor_types/
+[9]: https://docs.datadoghq.com/fr/infrastructure/livecontainers/?tab=linuxwindows
+{{% /tab %}}
+{{% tab "Pilote de logs" %}}
 
 #### Pilote de logs AWS
 
 Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lambda pour acheminer les logs vers Datadog.
 
-1. Définissez le pilote AwsLog Fargate dans votre tâche. [Consultez le guide de développement d'AWS Fargate][30] pour obtenir des instructions à ce sujet.
+1. Définissez le pilote AwsLog Fargate dans votre tâche. [Consultez le guide de développement d'AWS Fargate][1] pour obtenir des instructions à ce sujet.
 
 2. Les définitions de tâche Fargate prennent uniquement en charge le pilote de log awslogs pour la configuration des logs. Vous pouvez ainsi configurer vos tâches Fargate de façon à envoyer des informations de journalisation à Amazon CloudWatch Logs. Voici un extrait de définition de tâche pour laquelle le pilote de log awslogs est configuré :
 
@@ -329,15 +345,22 @@ Surveillez les logs Fargate avec le pilote de logs `awslogs` et une fonction Lam
    }
    ```
 
-    Pour en savoir plus sur l'utilisation du pilote de log awslogs dans vos définitions de tâches afin d'envoyer des logs de conteneur à CloudWatch Logs, reportez-vous à la section [Using the awslogs Log Driver][31]. Ce pilote recueille les logs générés par le conteneur et les envoie directement à CloudWatch.
+    Pour en savoir plus sur l'utilisation du pilote de log awslogs dans vos définitions de tâches afin d'envoyer des logs de conteneur à CloudWatch Logs, référez-vous à la section [Utilisation du pilote de journal awslogs][2]. Ce pilote recueille les logs générés par le conteneur et les envoie directement à CloudWatch.
 
-3. Enfin, utilisez une [fonction Lambda][32] pour recueillir les logs à partir de CloudWatch et les envoyer à Datadog.
+3. Enfin, utilisez une [fonction Lambda][3] pour recueillir les logs à partir de CloudWatch et les envoyer à Datadog.
+
+
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
+[3]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Collecte de traces
 
 1. Suivez les [instructions ci-dessus](#installation) pour ajouter le conteneur de l'Agent Datadog à la définition de votre tâche en définissant la variable d'environnement supplémentaire `DD_APM_ENABLED` sur `true`, et configurez un port de host qui utilise **8126** avec le protocole **tcp** pour le mappage de port.
 
-2. [Instrumentez votre application][33] en fonction de votre configuration.
+2. [Instrumentez votre application][21] en fonction de votre configuration.
 
 3. Assurez-vous que votre application s'exécute dans la même définition de tâche que le conteneur de l'Agent Datadog.
 
@@ -362,9 +385,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 
 ## Pour aller plus loin
 
-- Article de blog : [Surveiller des applications AWS Fargate avec Datadog][35]
+- Article de blog : [Surveiller des applications AWS Fargate avec Datadog][22]
 - FAQ : [Configuration d'intégration pour ECS Fargate][7]
-- Article de blog : [Surveiller vos logs de conteneur Fargate avec FireLens et Datadog][25]
+- Article de blog : [Surveiller vos logs de conteneur Fargate avec FireLens et Datadog][23]
+
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
 [2]: https://docs.docker.com/engine/api/v1.30/#operation/ContainerStats
@@ -386,18 +410,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [18]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html
 [19]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#data-collected
 [20]: https://docs.datadoghq.com/fr/help/
-[21]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
-[22]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
-[23]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
-[24]: https://github.com/aws-samples/amazon-ecs-firelens-examples/tree/master/examples/fluent-bit/parse-json
-[25]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[26]: https://docs.datadoghq.com/fr/integrations/fluentbit/#configuration-parameters
-[27]: https://app.datadoghq.com/logs
-[28]: https://docs.datadoghq.com/fr/monitors/monitor_types/
-[29]: https://docs.datadoghq.com/fr/infrastructure/livecontainers/?tab=linuxwindows
-[30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
-[31]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-[32]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#log-collection
-[33]: https://docs.datadoghq.com/fr/tracing/setup/
-[34]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/metadata.csv
-[35]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[21]: https://docs.datadoghq.com/fr/tracing/setup/
+[22]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[23]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/

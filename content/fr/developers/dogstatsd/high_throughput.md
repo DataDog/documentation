@@ -296,6 +296,28 @@ Cet exemple réduit l'utilisation maximale de la mémoire de DogStatsD à enviro
 dogstatsd_queue_size: 512
 ```
 
+Consultez la section suivante dédiée à la détection des salves pour découvrir comment détecter les salves de métriques de vos applications.
+
+### Activer les statistiques de traitement des métriques et la détection des salves
+
+DogStatsD possède un mode statistique qui permet de savoir quelles métriques sont les plus traitées.
+
+**Remarque** : l'activation de ce mode peut nuire aux performances de DogStatsD.
+
+Pour activer le mode statistique, vous pouvez :
+
+- Définir `dogstatsd_stats_enable` sur `true` dans votre fichier de configuration
+- Définir la variable d'environnement `DD_DOGSTATSD_STATS_ENABLE` sur `true`
+- Utilisez la commande `datadog-agent config set dogstatsd_stats true` pour activer le mode lors de l'exécution. Vous pouvez le désactiver lors de l'exécution avec la commande `datadog-agent config set dogstatsd_stats false`.
+
+Lorsque ce mode est activé, exécutez la commande `datadog-agent dogstatsd-stats`. Cela envoie la liste des métriques traitées. Les métriques les plus reçues apparaissent en premier.
+
+Lors de l'exécution de ce mode, le serveur DogStatsD utilise un mécanisme de détection de salves. Si une salve est détectée, un log d'avertissement est généré. Par exemple :
+
+```text
+A burst of metrics has been detected by DogStatSd: here is the last 5 seconds count of metrics: [250 230 93899 233 218]
+```
+
 ## Télémétrie côté client
 
 Par défaut, les clients DogStatsD envoient des métriques de télémétrie à l'Agent. Cela vous permet d'identifier plus facilement les goulots d'étranglement. Chaque métrique comporte un tag avec le langage du client ainsi que la version du client. Ces métriques ne sont pas considérées comme des métriques custom.
@@ -321,7 +343,7 @@ La télémétrie a été ajoutée avec la version `0.34.0` du client Python.
 | `datadog.dogstatsd.client.events`          | count       | Le nombre d'`events` envoyés au client DogStatsD par votre application.                    |
 | `datadog.dogstatsd.client.service_checks`  | count       | Le nombre de `service_checks` envoyés au client DogStatsD par votre application.            |
 | `datadog.dogstatsd.client.bytes_sent`      | count       | Le nombre d'octets envoyés à l'Agent.                                         |
-| `datadog.dogstatsd.client.bytes_dropped`   | count       | Le nombre d'octets non perdus par le client DogStatsD.                                        |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | Le nombre d'octets perdus par le client DogStatsD.                                        |
 | `datadog.dogstatsd.client.packets_sent`    | count       | Le nombre de datagrammes envoyés à l'Agent.                                     |
 | `datadog.dogstatsd.client.packets_dropped` | count       | Le nombre de datagrammes perdus par le client DogStatsD.                                    |
 
@@ -406,7 +428,7 @@ La télémétrie a été ajoutée avec la version `2.10.0` du client Java.
 | `datadog.dogstatsd.client.packets_dropped`       | count       | Le nombre de datagrammes perdus par le client DogStatsD.                                    |
 | `datadog.dogstatsd.client.packets_dropped_queue` | count       | Le nombre de datagrammes perdus, car la liste d'attente du client DogStatsD était pleine.                |
 
-Pour désactiver la télémétrie, utilisez l'option de builder `enableTelemetry(false)` :
+Pour désactiver la télémétrie, utilisez l'option builder `enableTelemetry(false)` :
 
 ```java
 StatsDClient client = new NonBlockingStatsDClientBuilder()

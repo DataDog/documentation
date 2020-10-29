@@ -3,17 +3,20 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: cacti
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cacti/README.md'
 display_name: Cacti
+draft: false
 git_integration_title: cacti
 guid: 566466b0-1422-44ef-b14f-493a64e7b58a
 integration_id: cacti
@@ -153,6 +156,27 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ### メトリクス
 {{< get-metrics-from-git "cacti" >}}
 
+
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Cacti ログの収集を開始するには、次のコンフィギュレーションブロックを `cacti.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /opt/cacti/log/cacti.log
+        source: cacti
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[cacti.d/conf.yaml のサンプル][2]を参照してください。
+
+3. [Agent を再起動します][3]。
 
 ### イベント
 
