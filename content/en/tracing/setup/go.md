@@ -5,6 +5,7 @@ aliases:
 - /tracing/go/
 - /tracing/languages/go
 - /agent/apm/go/
+- /tracing/setup/go
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20

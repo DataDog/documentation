@@ -2,6 +2,8 @@
 title: Trace Serverless Functions
 kind: documentation
 description: 'Send traces from your serverless functions to Datadog'
+aliases:
+  - /tracing/serverless_functions
 further_reading:
     - link: 'serverless'
       text: 'Serverless Monitoring with Datadog'

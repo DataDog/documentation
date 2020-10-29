@@ -7,6 +7,7 @@ aliases:
     - /tracing/languages/javascript/
     - /tracing/setup/javascript/
     - /agent/apm/nodejs/
+    - /tracing/setup/nodejs
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30

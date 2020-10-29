@@ -1,7 +1,7 @@
 ---
 title: Go Custom Instrumentation
 kind: documentation
-description: 'Implement the OpenTracing standard with the Datadog Go APM tracer.'
+description: 'Open Standards for Go'
 code_lang: go
 type: multi-code-lang
 ---

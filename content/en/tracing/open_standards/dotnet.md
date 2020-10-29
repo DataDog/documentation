@@ -3,7 +3,7 @@ title: .NET Open Standards
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
-description: 'Manually instrument your .NET application to send custom traces to Datadog.'
+description: 'Open Standards for .NET'
 further_reading:
 ---
 

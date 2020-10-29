@@ -1,7 +1,7 @@
 ---
 title: Python Open Standards
 kind: documentation
-description: 'Manually instrument your Python application to send custom traces to Datadog.'
+description: 'Open Standards for Python'
 code_lang: python
 type: multi-code-lang
 further_reading:

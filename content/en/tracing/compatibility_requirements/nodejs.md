@@ -2,6 +2,8 @@
 title: NodeJS Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the NodeJS tracer'
+aliases:
+  - /tracing/compatibility_requirements/nodejs
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40

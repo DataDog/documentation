@@ -1,7 +1,7 @@
 ---
 title: NodeJS Open Standards
 kind: documentation
-description: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
+description: 'Open Standards for NodeJS'
 code_lang: nodejs
 type: multi-code-lang
 further_reading:

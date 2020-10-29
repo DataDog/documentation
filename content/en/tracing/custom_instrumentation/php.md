@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /tracing/manual_instrumentation/php
     - /tracing/opentracing/php
+    - /tracing/custom_instrumentation/php
 description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 code_lang: php
 type: multi-code-lang

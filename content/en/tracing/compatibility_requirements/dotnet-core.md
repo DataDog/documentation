@@ -2,6 +2,8 @@
 title: .NET Core Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
+aliases:
+  - /tracing/compatibility_requirements/dotnet-core
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 70

@@ -2,6 +2,8 @@
 title: PHP Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
+aliases:
+  - /tracing/compatibility_requirements/php
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 50

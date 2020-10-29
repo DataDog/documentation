@@ -1,7 +1,7 @@
 ---
 title: Java Open Standards
 kind: documentation
-description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
+description: 'Open Standards for Java'
 code_lang: java
 type: multi-code-lang
 further_reading:

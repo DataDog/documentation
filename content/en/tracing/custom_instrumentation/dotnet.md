@@ -6,6 +6,7 @@ type: multi-code-lang
 aliases:
     - /tracing/opentracing/dotnet
     - /tracing/manual_instrumentation/dotnet
+    - /tracing/custom_instrumentation/dotnet
 description: 'Manually instrument your .NET application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

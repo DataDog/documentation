@@ -2,6 +2,8 @@
 title: Go Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the Go tracer'
+aliases:
+  - /tracing/compatibility_requirements/go
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30

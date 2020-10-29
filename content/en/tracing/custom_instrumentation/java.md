@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java
+    - /tracing/custom_instrumentation/java
 description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
 code_lang: java
 type: multi-code-lang

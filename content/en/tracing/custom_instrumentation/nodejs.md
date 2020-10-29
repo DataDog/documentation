@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /tracing/opentracing/nodejs
     - /tracing/manual_instrumentation/nodejs
+    - /tracing/custom_instrumentation/nodejs
 description: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
 code_lang: nodejs
 type: multi-code-lang

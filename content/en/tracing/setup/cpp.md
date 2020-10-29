@@ -5,6 +5,7 @@ aliases:
 - /tracing/cpp/
 - /tracing/languages/cpp/
 - /agent/apm/cpp/
+- /tracing/setup/cpp
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50

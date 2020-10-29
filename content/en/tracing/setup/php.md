@@ -5,6 +5,7 @@ aliases:
 - /tracing/languages/php
 - /agent/apm/php/
 - /tracing/php/
+- /tracing/setup/php
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40

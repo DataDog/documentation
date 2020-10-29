@@ -1,7 +1,7 @@
 ---
 title: PHP Open Standards
 kind: documentation
-description: 'Manually instrument your PHP application to send custom traces to Datadog.'
+description: 'Open Standards for PHP'
 code_lang: php
 type: multi-code-lang
 further_reading:

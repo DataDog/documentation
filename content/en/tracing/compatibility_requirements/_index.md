@@ -8,6 +8,7 @@ further_reading:
   text: "Add the tracing library to your application"
 aliases:
   - /tracing/compatibility
+  - /tracing/compatibility_requirements
 ---
 
 Choose your language to see the compatibility requirements and supported integrations for Datadog APM.

@@ -1,7 +1,7 @@
 ---
 title: Ruby Open Standards
 kind: documentation
-description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
+description: 'Open Standards for Ruby'
 code_lang: ruby
 type: multi-code-lang
 further_reading:

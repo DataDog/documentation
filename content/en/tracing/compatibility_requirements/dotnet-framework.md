@@ -2,6 +2,8 @@
 title: .NET Framework Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the .NET tracer'
+aliases:
+  - /tracing/compatibility_requirements/dotnet-framework
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 80

@@ -5,6 +5,7 @@ aliases:
     - /tracing/java
     - /tracing/languages/java
     - /agent/apm/java/
+    - /tracing/setup/java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -50,7 +51,7 @@ Otherwise, to begin tracing applications written in any language:
 
 - The Java Tracer support all JVM-based languages, i.e. Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure.
 
-### Add the Java Tracer to the JVM 
+### Add the Java Tracer to the JVM
 
 Use the documentation for your IDE to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 

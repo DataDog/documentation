@@ -2,6 +2,8 @@
 title: Python Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the Python tracer'
+aliases:
+  - /tracing/compatibility_requirements/python
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

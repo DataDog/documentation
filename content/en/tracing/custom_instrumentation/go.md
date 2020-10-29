@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
+    - /tracing/custom_instrumentation/go
 description: 'Implement the OpenTracing standard with the Datadog Go APM tracer.'
 code_lang: go
 type: multi-code-lang
