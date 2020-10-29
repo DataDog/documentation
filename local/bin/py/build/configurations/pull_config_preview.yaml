@@ -385,7 +385,7 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup/'
+        dest_path: '/tracing/setup_overview/setup/'
         file_name: 'android.md'
         front_matters:
           title: Android Trace Collection
@@ -429,7 +429,7 @@
       globs:
       - 'docs/trace_collection.md'
       options:
-        dest_path: '/tracing/setup/'
+        dest_path: '/tracing/setup_overview/setup/'
         file_name: 'ios.md'
         front_matters:
           title: iOS Trace Collection
