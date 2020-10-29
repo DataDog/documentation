@@ -112,7 +112,7 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 
 ## Manual submission
 
-The agent flare protocol collects configurations and log into an archive file first put into the local `/tmp` directory.
+The Agent flare protocol collects configurations and logs into an archive file first located in the local `/tmp` directory.
 Manually obtain this file and provide it to support if there are any issues with Agent connectivity.
 
 ### Kubernetes
