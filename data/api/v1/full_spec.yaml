@@ -11308,9 +11308,12 @@ paths:
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,\
-        \ sources and tags.\n\n**Note**: If the event you\u2019re querying contains\
-        \ markdown formatting of any kind, you may see characters such as %,\\,n in\
-        \ your output."
+        \ sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains\
+        \ markdown formatting of any kind,\nyou may see characters such as `%`,`\\\
+        `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
+        \ recent results. To return additional results,\nidentify the last timestamp\
+        \ of the last result and set that as the `end` query time to\npaginate the\
+        \ results."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
