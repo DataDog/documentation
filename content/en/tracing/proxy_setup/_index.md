@@ -35,6 +35,9 @@ aliases:
 - /tracing/proxies/nginx
 - /tracing/nginx/
 - /tracing/istio/
+- /tracing/setup/envoy/
+- /tracing/setup/nginx/
+- /tracing/setup/istio/
 ---
 
 You can set up tracing to include collecting trace information about proxies.
