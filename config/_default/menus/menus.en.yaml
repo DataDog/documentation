@@ -1141,7 +1141,7 @@ main:
     parent: tracing
     weight: 1
   - name: Compatibility
-    url: tracing/setup_overview/compatibility_requirements/
+    url: tracing/setup_overview/compatibility_requirements/java
     identifier: tracing_compatibility_requirements
     parent: tracing_setup_overview
     weight: 101
@@ -1191,7 +1191,7 @@ main:
     identifier: tracing_compatibility_requirements_dotnet_framework
     weight: 109
   - name: Add the Datadog Tracing Library
-    url: tracing/setup_overview/setup/
+    url: tracing/setup_overview/setup/java
     parent: tracing_setup_overview
     identifier: tracing_setup_overview_setup
     weight: 102
@@ -1241,7 +1241,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: Open Standards
-    url: tracing/setup_overview/open_standards/
+    url: tracing/setup_overview/open_standards/java
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1291,7 +1291,7 @@ main:
     identifier: tracing_proxy_setup
     weight: 105
   - name: Custom Instrumentation
-    url: tracing/setup_overview/custom_instrumentation/
+    url: tracing/setup_overview/custom_instrumentation/java
     parent: tracing_setup_overview
     identifier: tracing_setup_overview_custom_instrumentation
     weight: 106
