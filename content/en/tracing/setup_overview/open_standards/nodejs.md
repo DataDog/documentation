@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for NodeJS'
 code_lang: nodejs
 type: multi-code-lang
+code_lang_weight: 40
 further_reading:
 ---
 

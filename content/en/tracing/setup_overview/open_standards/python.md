@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for Python'
 code_lang: python
 type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 ---
 

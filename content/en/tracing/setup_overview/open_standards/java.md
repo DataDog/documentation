@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for Java'
 code_lang: java
 type: multi-code-lang
+code_lang_weight: 0
 further_reading:
 
 ---

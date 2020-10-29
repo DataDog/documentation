@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for PHP'
 code_lang: php
 type: multi-code-lang
+code_lang_weight: 50
 further_reading:
 ---
 

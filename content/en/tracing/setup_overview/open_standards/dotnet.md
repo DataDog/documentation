@@ -3,6 +3,7 @@ title: .NET Open Standards
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
+code_lang_weight: 70
 description: 'Open Standards for .NET'
 further_reading:
 ---

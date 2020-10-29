@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for Ruby'
 code_lang: ruby
 type: multi-code-lang
+code_lang_weight: 20
 further_reading:
 ---
 

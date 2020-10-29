@@ -4,6 +4,7 @@ kind: documentation
 description: 'Open Standards for Go'
 code_lang: go
 type: multi-code-lang
+code_lang_weight: 30
 ---
 
 ## OpenTracing
