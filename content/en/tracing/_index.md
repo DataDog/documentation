@@ -44,7 +44,7 @@ Traces start in your instrumented applications and flow into Datadog where we in
 
 As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
 
-[Visit the Setup Overview][3] to find instructions for your environment and language, whether you are tracing a proxy or tracing across AWS Lambda functions and hosts, using automatic instrumentation, dd-trace-api, OpenTracing, or OpenTelemetry.
+[Add the Datadog Tracing Library][3] to find instructions for your environment and language, whether you are tracing a proxy or tracing across AWS Lambda functions and hosts, using automatic instrumentation, dd-trace-api, OpenTracing, or OpenTelemetry.
 
 {{< partial name="apm/apm-compatibility.html" >}}
 

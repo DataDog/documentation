@@ -25,7 +25,7 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-## Compatibilty Requirements
+## Compatibility Requirements
 
 The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
