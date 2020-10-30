@@ -17,7 +17,7 @@ further_reading:
 
 Profiler is shipped within the following tracing libraries. Select your language below to learn how to enable profiler for your application:
 
-For **Node**, **Ruby**, **PHP**, or **.NET** Profilers, [sign up][1] to be on the private beta access list. We will notify you when the beta is ready.
+**Node**, **Ruby**, **PHP**, or **.NET** Profilers are coming soon. To get notified when a private beta is available, [sign up here][1].
 
 {{< tabs >}}
 {{% tab "Java" %}}
