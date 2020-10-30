@@ -114,7 +114,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 [1]: /tracing/trace_retention_and_ingestion/#ingestion-controls
 [2]: /tracing/trace_retention_and_ingestion/#retention-filters
-[3]: /tracing/setup_overview/
+[3]: /tracing/setup_overview/setup/java
 [4]: /tracing/visualization/services_map/
 [5]: /tracing/visualization/service/
 [6]: /tracing/trace_search_and_analytics/#live-search-for-15-minutes
