@@ -145,11 +145,12 @@ Detailed network timing data for the loading of an application’s resources are
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 ## Error Origins
-Front-end errors are split in 3 different categories depending on their `error.origin`:
+Front-end errors are split in 4 different categories depending on their `error.origin`:
 
 - **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1].
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
+- **custom**: Errors sent with the [RUM `addError` API][2] default to `custom`.
 
 ## Facet Collected
 
@@ -175,14 +176,16 @@ Network errors include information about failing HTTP requests. The following fa
 
 ### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.kind`    | string | The error type or kind (or code in some cases).                   |
 
+
 [1]: /real_user_monitoring/data_collected/error/#network-errors
-[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 {{% /tab %}}
 {{% tab "User Action" %}}
 
