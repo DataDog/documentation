@@ -105,8 +105,8 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
-| Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
-| Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
+| Elasticsearch Transport | 2.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
+| Elasticsearch Rest      | 5.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
