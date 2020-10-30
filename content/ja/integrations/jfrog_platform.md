@@ -2,29 +2,31 @@
 "assets":
   "dashboards":
     "Jfrog Artifactory Dashboard": assets/dashboards/jfrog_artifactory_dashboard.json
+  "metrics_metadata": metadata.csv
   "monitors": {}
   "saved_views": {}
   "service_checks": assets/service_checks.json
 "categories":
 - ログの収集
 - セキュリティ
-"creates_events": !!bool "false"
+"creates_events": false
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/jfrog_platform/README.md"
 "display_name": "JFrog Platform"
+"draft": false
 "git_integration_title": "jfrog_platform"
 "guid": "2c70552e-b77a-4349-9955-8799b9b57d56"
 "integration_id": "jfrog-platform"
-"integration_title": "JFrog Artifactory および Xray と Datadog のインテグレーション"
-"is_public": !!bool "true"
+"integration_title": "JFrog Artifactory および Xray"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "integrations@jfrog.com"
 "manifest_version": "1.0.0"
 "metric_prefix": "jfrog."
 "metric_to_check": ""
 "name": "jfrog_platform"
-"public_title": "JFrog Artifactory および Xray と Datadog のインテグレーション"
+"public_title": "JFrog Artifactory および Xray"
 "short_description": "Artifactory および Xray イベントを表示、分析します。"
 "support": "contrib"
 "supported_os":
@@ -108,13 +110,9 @@ API キーは `td-agent` で構成され、これにより Datadog へのログ�
 
 既存の視覚化とフィルターにアクセスするには、ダッシュボードをクリックして新しいスクリーンボードを追加し、[export.json][4] をインポートして既存のダッシュボードを上書きします。
 
-## テスト用データの生成
-[Partner Integration Test Framework][5] を使用して、メトリクスのデータを生成できます。
-
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/jfrog_platform/images/dashboard.png
 [2]: https://github.com/jfrog/charts
 [3]: https://helm.sh/
 [4]: https://github.com/jfrog/log-analytics/blob/master/datadog/export.json
-[5]: https://github.com/jfrog/partner-integration-tests
 

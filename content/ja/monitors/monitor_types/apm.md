@@ -20,13 +20,13 @@ further_reading:
 
 APM メトリクスモニターは、通常の[メトリクスモニター][1]と同様に機能しますが、APM 専用に作られたコントロールを備えています。このモニターを使用して、サービスレベルのヒット数、エラー数、そしてさまざまなレイテンシー測定値についてアラートを受信します。
 
-App Analytics モニターを使用すると、APM データを経時的に視覚化し、Analyzed Span に基づきアラート設定を行えます。たとえば、App Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
+Analytics モニターを使用すると、APM データを経時的に視覚化し、Indexed Span に基づきアラート設定を行えます。たとえば、Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
 
 ## モニターの作成
 
 Datadog で [APM モニター][2]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> APM* の順に進みます。
 
-**APM Metrics** または **App Analytics** モニターのいずれかを選択します。
+**APM Metrics** または **Analytics** モニターのいずれかを選択します。
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
@@ -62,7 +62,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 [2]: /ja/tracing/visualization/service/
 [3]: /ja/tracing/visualization/resource/
 {{% /tab %}}
-{{% tab "App Analytics" %}}
+{{% tab "Analytics" %}}
 
 ### 検索クエリを定義する
 
@@ -71,6 +71,8 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
     * **Monitor over a trace count**: 検索バーを使用し（任意）、ファセットまたはメジャーを選択**しません**。選択されたタイムフレームで Datadog がログ数を評価し、それをしきい値の条件と比較します。
     * **Monitor over a facet or measure**: ファセットが選択されている場合、モニターはファセットの `Unique value count` でアラートを作成します。計測が選択されている場合は、メトリクスモニターと同様、集計を選択する必要があります（`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、 `pc95`、`pc98`、`pc99`、または `max`）。
 
+**注:** Analytics モニターは [Indexed Span][4] ベースでのみ作成できます。
+
 ### アラート条件を選択
 
 * メトリクスが `above` または `above or equal to` の場合にトリガー
@@ -78,9 +80,10 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 * アラートのしきい値: `<数値>`
 * 警告のしきい値: `<数値>`
 
-[1]: /ja/tracing/app_analytics/search/#search-bar
-[2]: /ja/tracing/app_analytics/search/#facet-search
-[3]: /ja/tracing/app_analytics/search/#numerical-values
+[1]: /ja/tracing/trace_search_and_analytics/query_syntax/#search-bar
+[2]: /ja/tracing/trace_search_and_analytics/query_syntax/#facet-search
+[3]: /ja/tracing/trace_search_and_analytics/query_syntax/#numerical-values
+[4]: /ja/tracing/visualization/#indexed-span
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -91,7 +94,6 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 **注**: サービスレベルモニターについては[サービスページ][4]および[サービスマップ][5]で、リソースレベルモニターについては個々のリソースページで確認できます（[サービスページ][4]に記載されているリソースをクリックすると、特定のアクセスできます）。
 
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 

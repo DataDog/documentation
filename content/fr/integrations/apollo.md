@@ -3,6 +3,7 @@ aliases:
   - /fr/integrations/apollo_engine
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,7 +13,8 @@ creates_events: false
 ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md'
-display_name: Apollo
+display_name: "Apollo\_Engine"
+draft: false
 git_integration_title: apollo
 guid: a0b142ff-0637-4c2f-814c-0f1a012bc65c
 integration_id: apollo
@@ -20,9 +22,11 @@ integration_title: Apollo
 is_public: true
 kind: integration
 maintainer: sachin@apollographql.com
-manifest_version: 1.1.0
-metric_prefix: apollo.engine.
-metric_to_check: apollo.engine.operations.count
+manifest_version: 1.2.0
+metric_prefix: apollo.
+metric_to_check:
+  - apollo.operations.count
+  - apollo.engine.operations.count
 name: apollo
 public_title: Intégration Datadog/Apollo
 short_description: Surveillez les performances de votre infrastructure GraphQL
@@ -40,21 +44,23 @@ L'intégration Apollo/Datadog vous permet de transmettre les métriques de perfo
 
 Studio transfère les métriques suivantes à Datadog :
 
-- `apollo.engine.operations.count` : le nombre d'opérations GraphQL exécutées. Ce nombre comprend les requêtes, les mutations et les opérations ayant généré une erreur.
-- `apollo.engine.operations.error_count` : le nombre d'opérations GraphQL ayant généré une erreur. Ce nombre comprend les erreurs d'exécution GraphQL et les erreurs HTTP survenues lorsque Studio ne parvient pas à se connecter à votre serveur.
-- `apollo.engine.operations.cache_hit_count` : le nombre de requêtes GraphQL dont le résultat a été traité depuis le cache de requêtes complètes d'Apollo Server.
+- `apollo.operations.count` : le nombre d'opérations GraphQL exécutées. Ce nombre comprend les requêtes, les mutations et les opérations ayant généré une erreur.
+- `apollo.operations.error_count` : le nombre d'opérations GraphQL ayant généré une erreur. Ce nombre comprend les erreurs d'exécution GraphQL et les erreurs HTTP survenues lorsque Studio ne parvient pas à se connecter à votre serveur.
+- `apollo.operations.cache_hit_count` : le nombre de requêtes GraphQL dont le résultat a été traité depuis le cache de requêtes complètes d'Apollo Server.
 - Un histogramme des temps de réponse des opérations GraphQL, mesurés en millisecondes. En raison de la méthode d'agrégation utilisée par Studio (compartimentage logarithmique), la précision de ces valeurs est de l'ordre de +/- 5 % :
 
-  - `apollo.engine.operations.latency.min`
-  - `apollo.engine.operations.latency.median`
-  - `apollo.engine.operations.latency.95percentile`
-  - `apollo.engine.operations.latency.99percentile`
-  - `apollo.engine.operations.latency.max`
-  - `apollo.engine.operations.latency.avg`
+  - `apollo.operations.latency.min`
+  - `apollo.operations.latency.median`
+  - `apollo.operations.latency.95percentile`
+  - `apollo.operations.latency.99percentile`
+  - `apollo.operations.latency.max`
+  - `apollo.operations.latency.avg`
 
 Ces métriques sont agrégées selon des intervalles de 60 secondes et taguées avec le nom de l'opération GraphQL, au format `operation:<nom-requête>`. Les signatures de requêtes uniques avec le même nom d'opération sont fusionnées, et les requêtes sans nom d'opération sont ignorées. 
 
-Ces métriques sont également taguées avec l'ID de graphique Studio, `service:<id-graphique>`, et le nom de la variante associée, `variant:<nom-variante>`. Ainsi, plusieurs graphiques Studio peuvent envoyer des données au même compte Datadog. Si vous n'avez pas défini de nom de variante, la valeur `current` est utilisée.
+Ces métriques sont également taguées avec l'ID de graphique Studio, `graph:<id-graphique>`, et le nom de la variante associée, `variant:<nom-variante>`. Ainsi, plusieurs graphiques Studio peuvent envoyer des données au même compte Datadog. Si vous n'avez pas défini de nom de variante, la valeur `current` est utilisée.
+
+(Si l'intégration a été configurée avant octobre 2020, les noms des métriques commencent par `apollo.engine.operations` au lieu de `apollo.operations` et utilisent un tag `service` au lieu de `graph`. Vous pouvez migrer vers les nouveaux noms de métriques en accédant à la page Integrations de votre graphique dans Apollo Studio.)
 
 ## Configuration
 
@@ -74,7 +80,7 @@ Il vous suffit de fournir la clé et la région d'API Datadog à Studio pour con
 
    ![Page des intégrations][5]
 
-5. Dans la section Datadog Forwarding, cliquez sur **Configure**. Renseignez votre clé d'API et votre région, puis cliquez sur **Enable**. Étant donné que toutes les métriques transférées reçoivent l'ID de graphique en tant que tag (`service:<id-graphique>`), vous pouvez utiliser la même clé d'API pour tous vos graphiques.
+5. Dans la section Datadog Forwarding, cliquez sur **Configure**. Renseignez votre clé d'API et votre région, puis cliquez sur **Enable**. Étant donné que toutes les métriques transférées reçoivent l'ID de graphique en tant que tag (`graph:<id-graphique>`), vous pouvez utiliser la même clé d'API pour tous vos graphiques.
 
    ![Activation des intégrations][6]
 
@@ -107,7 +113,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 Pour en savoir plus sur la surveillance d'infrastructure et pour découvrir toutes nos intégrations, rendez-vous sur [notre blog][10].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
-[2]: https://app.datadoghq.com/account/settings
+[2]: https://app.datadoghq.com/account/settings#integrations
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png

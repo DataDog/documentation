@@ -32,7 +32,7 @@ Définissez la configuration de votre test Browser.
 1. **Starting URL** : l'URL depuis laquelle le test Browser démarre le scénario.
 2. **Advanced Options** (facultatif) : définissez des options spécifiques pour votre test Browser.
     * Headers : définissez les en-têtes à ajouter ou à utiliser pour remplacer les en-têtes par défaut du navigateur. Par exemple, vous pouvez modifier le user-agent dans l'en-tête de façon à [identifier les scripts Datadog][1].
-    * Authentication : s'authentifier via l'authentification HTTP basique ou NTLM avec un nom d'utilisateur et un mot de passe.
+    * Authentication : s'authentifier via l'authentification HTTP basique, Digest ou NTLM avec un nom d'utilisateur et un mot de passe.
     * Cookies : définissez les cookies à ajouter aux cookies de navigateur par défaut. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
     * Proxy URL : URL du proxy à utiliser par les requêtes (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
 
