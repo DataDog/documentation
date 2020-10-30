@@ -24,7 +24,7 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
-## Compatibility
+## Compatibility Requirements
 
 The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 

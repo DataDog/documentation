@@ -13,7 +13,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibility requirements
+## Compatibility Requirements
 
 The Java Tracing Library supports all JVMs on all platforms version 7 and higher. To utililze tracing with the [Continous Profiler][17], OpenJDK 11+, Oracle Java 11+, OpenJDK 8 for most vendors (version 8u262+) and Zulu Java 8+ (minor version 1.8.0_212+) are supported. Starting in version 8u272+, all vendors will be supported for the Profiler. 
 
