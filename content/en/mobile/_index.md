@@ -24,9 +24,10 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the note at the end of this section. To authenticate SAML:
 
-1. Press on the “Using Single Sign-On (SAML)?” button.
-2. Enter your company email, send the email, and while on your mobile device, open the email and click on the indicated link.
-3. Enter your org’s SAML credentials, which upon success, will reroute to an authenticated session of the Datadog mobile app.
+1. Press the “Using Single Sign-On (SAML)?” button.
+2. Enter your company email and send the email.
+3. While on your mobile device, open the email and click on the indicated link.
+4. Enter your org’s SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
 
@@ -38,9 +39,10 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### Manual Entry
 
-1. You can manually enter the SAML ID by opening the Datadog Mobile app, clicking “Using Single Sign-On (SAML)?” button followed by clicking the “Use another method to login” button, and entering the SAML ID manually.
+1. To manually enter the SAML ID, open the Datadog Mobile app and press the “Using Single Sign-On (SAML)?” button.
+2. Click the “Use another method to login” button, and entering the SAML ID manually.
 
-By clicking Authorize when logging in, you link this mobile device to your account. For security purposes, you will have to go through this flow once per month.
+By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
 **Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
@@ -58,7 +60,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Click on an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5]. 
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][9]. For more information, see [Dashboards][5].
 
 ## Quick Actions
 
@@ -107,7 +109,7 @@ Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel. 
+For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel.
 
 ### Further Reading
 
