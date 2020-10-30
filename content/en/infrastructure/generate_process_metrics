@@ -23,6 +23,8 @@ While Live Processes data is stored for 36 hours, you can generate global and pe
 
 {{< img src="infrastructure/process/process2metrics_overview.png" alt="Generate process-based metrics"  style="width:80%;">}}
 
+Generating process-based metrics is currently in [private beta][5]. 
+
 ## Generate a process-based metric
 
 You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Distribution Metrics][1]_ tab, by selecting the **Create Metric** button. 
@@ -73,3 +75,4 @@ Once created, you can use process distribution aggregate and percentile metrics 
 [2]: https://app.datadoghq.com/process 
 [3]: /developers/metrics/custom_metrics/ 
 [4]: /dashboards/correlations/
+[5]: https://forms.gle/Bo664kv8Y1Avmzmg6
