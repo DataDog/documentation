@@ -3,7 +3,7 @@ title: Generate Metrics from Processes
 kind: documentation
 aliases:
     - /processes/processing/process_to_metrics/
-description: 'Generate Metrics from Processes.'
+description: Generate metrics from processes.
 further_reading:
     - link: 'metrics/distributions/'
       tag: 'Documentation'
