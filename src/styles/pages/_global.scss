@@ -532,6 +532,9 @@ h5{
     .text-center img {
       border: 1px solid $ddgray;
     }
+    .card-body img {
+      border: 0px solid $ddgray;
+    }
   }
 }
 
