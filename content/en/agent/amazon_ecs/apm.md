@@ -96,14 +96,14 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 ```javascript
 const tracer = require('dd-trace');
+tracer.init();
 const request = require('request');
-
 request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
     error,
     resp,
     body
 ) {
-    tracer.init({ hostname: body });
+    tracer.setUrl(`http://${hostname}:8126`)
 });
 ```
 
