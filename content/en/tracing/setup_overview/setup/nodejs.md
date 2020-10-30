@@ -52,15 +52,13 @@ For details about contributing, check out the [development guide][5].
 This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
 </div>
 
-To begin tracing Node.js applications, first [install and configure the Datadog Agent][6], see the additional documentation for [tracing Docker applications][7] or [Kubernetes applications][8].
-
-Next, install the Datadog Tracing library using npm:
+To begin tracing Node.js applications, install the Datadog Tracing library using npm:
 
 ```sh
 npm install --save dd-trace
 ```
 
-Finally, import and initialize the tracer:
+Next, import and initialize the tracer:
 
 ##### JavaScript
 
@@ -81,7 +79,61 @@ tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
 
-See the [tracer settings][9] for the list of initialization options.
+Finally, install and configure the Datadog Agent to receive traces from your now instrumented application:
+
+{{< tabs >}}
+{{% tab "Containers" %}}
+
+1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+
+`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+```sh
+DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+```
+
+To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
+
+```sh
+DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+```
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+### AWS Lambda
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+{{% tab "Other Environments" %}}
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+
+For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/
+[6]: /help/
+{{% /tab %}}
+{{< /tabs >}}
+
+
+See the [tracer settings][6] for the list of initialization options.
 
 ## Configuration
 
@@ -96,7 +148,7 @@ Tracer settings can be configured as a parameter to the `init()` method or as en
 | version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json. Available for versions 0.20+
 | tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically: `tracer.init({ tags: { foo: 'bar' } })` Available for versions 0.20+                                                                                                                            |
 
-It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][10] documentation for recommendations on how to configure these environment variables.
+It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][7] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
@@ -112,27 +164,11 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 | sampleRate     | -                            | `1`         | Percentage of spans to sample as a float between `0` and `1`.                                                                                                                                                                                                              |
 | flushInterval  | -                            | `2000`      | Interval (in milliseconds) at which the tracer submits traces to the Agent.                                                                                                                                                                                                |
 | runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.                                                                                                                                        |
-| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][11] to learn more about the available experimental features.                                                                                   |
+| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][8] to learn more about the available experimental features.                                                                                   |
 | plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                                                                                                       |
 | - | `DD_TRACE_DISABLED_PLUGINS` | - | A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`. |
 | clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                                                                                                             |
 | logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                                                                                                             |
-
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname:
-
-The NodeJS Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
-
-```sh
-DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
-```
-
-To use a different protocol such as UDS, specify the entire URL as a single ENV variable `DD_TRACE_AGENT_URL`.
-
-```sh
-DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-```
 
 ## Further Reading
 
@@ -143,9 +179,6 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 [3]: /tracing/visualization/
 [4]: https://datadog.github.io/dd-trace-js
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[6]: /tracing/send_traces/
-[7]: /tracing/setup/docker/
-[8]: /agent/kubernetes/apm/
-[9]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[10]: /getting_started/tagging/unified_service_tagging/
-[11]: /help/
+[6]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[7]: /getting_started/tagging/unified_service_tagging/
+[8]: /help/

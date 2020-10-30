@@ -171,6 +171,53 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 **Note**: OpenTracing requires C++ 11 or higher.
 
+## Setup the Datadog Agent
+
+Install and configure the Datadog Agent to receive traces from your instrumented application:
+
+{{< tabs >}}
+{{% tab "Containers" %}}
+
+1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+
+`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+To connect to the agent using Unix Domain Sockets, `DD_TRACE_AGENT_URL` can be used instead. The value should match the Agent's value for `DD_APM_RECEIVER_SOCKET`.
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+### AWS Lambda
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+{{% tab "Other Environments" %}}
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+
+For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/
+[6]: /help/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Environment Variables
 
 | Variable | Version | Default | Note |
@@ -187,12 +234,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 | `DD_TAGS` | v1.1.4 | | If specified, will add tags to all generated spans. A comma-separated list of `key:value` pairs. |
 | `DD_PROPAGATION_STYLE_INJECT` | v0.4.1 | `Datadog` | Propagation style(s) to use when injecting tracing headers. `Datadog`, `B3`, or `Datadog B3`. |
 | `DD_PROPAGATION_STYLE_EXTRACT` | v0.4.1 | `Datadog` | Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or `Datadog B3`. |
-
-### Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname. The C++ Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-To connect to the agent using Unix Domain Sockets, `DD_TRACE_AGENT_URL` can be used instead. The value should match the Agent's value for `DD_APM_RECEIVER_SOCKET`.
 
 ## Further Reading
 

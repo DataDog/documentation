@@ -44,16 +44,55 @@ For details about open-source contributions to the PHP tracer, refer to the [con
 
 ### Setup the Datadog Agent
 
-The PHP APM tracer sends trace data through the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application:
 
-[Install and configure the Datadog Agent][5]. See the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
+{{< tabs >}}
+{{% tab "Containers" %}}
 
-For Agent version [7.18.0][8] and above, APM is enabled by default for all environments without further action.
-If you are running an older version of the agent, make sure the Agent has **[APM enabled][5]**.
+1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+
+`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+See [tracer configuration][2] for more information on how to set these variables.
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /tracing/setup/php/#environment-variable-configuration
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+### AWS Lambda
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+{{% tab "Other Environments" %}}
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+
+For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/
+[6]: /help/
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][9].
+Install the PHP extension using one of the [precompiled packages for supported distributions][5].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -74,11 +113,11 @@ The extension will be installed for the default PHP version. To install the exte
 export DD_TRACE_PHP_BIN=$(which php-fpm7)
 ```
 
-Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][10] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][6] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [create a `phpinfo()` page][11] from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [create a `phpinfo()` page][7] from the host machine and scroll down to the "ddtrace" section. Failed diagnostic checks will appear here to help identify any issues.
 
-If you can't find your distribution, you can [manually install][12] the PHP extension.
+If you can't find your distribution, you can [manually install][8] the PHP extension.
 
 ## Automatic Instrumentation
 
@@ -94,14 +133,6 @@ Automatic instrumentation captures:
 * A total count of traces (e.g., web requests) flowing through the system
 
 **Note**: If your application does not use Composer nor an autoloader registered with `spl_autoload_register()`, set the environment variable, `DD_TRACE_NO_AUTOLOADER=true`, to enable automatic instrumentation.
-
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname:
-
-The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-See [tracer configuration][13] for more information on how to set these variables.
 
 ## Configuration
 
@@ -122,7 +153,7 @@ env[DD_AGENT_HOST] = $SOME_ENV
 env[DD_SERVICE] = my-app
 ```
 
-Alternatively, you can use [`SetEnv`][14] from the server config, virtual host, directory, or `.htaccess` file.
+Alternatively, you can use [`SetEnv`][9] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
 SetEnv DD_TRACE_DEBUG true
@@ -141,7 +172,7 @@ env[DD_AGENT_HOST] = $SOME_ENV
 env[DD_SERVICE] = my-app
 ```
 
-**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][15] for more details.
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][10] for more details.
 
 ### PHP CLI server
 
@@ -273,7 +304,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ## Upgrading
 
-To upgrade the PHP tracer, [download the latest release][9] and follow the same steps as [installing the extension](#install-the-extension).
+To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
@@ -295,14 +326,9 @@ To remove the PHP tracer:
 [2]: https://app.datadoghq.com/apm/docs
 [3]: /tracing/visualization/
 [4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[5]: /tracing/send_traces/
-[6]: /tracing/setup/docker/
-[7]: /agent/kubernetes/apm/
-[8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
-[9]: https://github.com/DataDog/dd-trace-php/releases/latest
-[10]: https://app.datadoghq.com/apm/services
-[11]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
-[12]: /tracing/faq/php-tracer-manual-installation
-[13]: /tracing/setup/php/#environment-variable-configuration
-[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[15]: /tracing/setup/nginx/#nginx-and-fastcgi
+[5]: https://github.com/DataDog/dd-trace-php/releases/latest
+[6]: https://app.datadoghq.com/apm/services
+[7]: /tracing/troubleshooting/tracer_startup_logs?tab=php#php-info
+[8]: /tracing/faq/php-tracer-manual-installation
+[9]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[10]: /tracing/setup/nginx/#nginx-and-fastcgi
