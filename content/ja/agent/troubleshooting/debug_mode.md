@@ -52,25 +52,13 @@ Agent のフルデバッグモードを有効にするには
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-**Agent が起動したら `DD_LOG_LEVEL=debug` 環境変数を設定します。**
+コンテナ Agent でデバッグモードを有効にする場合は、Agent の起動時に `DD_LOG_LEVEL=debug` を使用してください。
 
-コンテナが既に実行されている場合
+Agent v6.19 / v7.19 以降の場合は、以下を使用してランタイム時の Agent のログレベルを設定します。
 
-1. プロセスが S6 によって再起動しないように、次を実行します。
-
-    <mrk mid="64" mtype="seg">`rm /var/run/s6/services/agent/finish`</mrk>
-
-2. Agent を停止します。
-
-    ```shell
-    s6-svc -d /var/run/s6/services/agent/
-    ```
-
-3. 次を実行して、Agent をデバッグログレベルで再起動します。
-
-    ```text
-    DD_LOG_LEVEL=debug agent start
-    ```
+```
+agent config set log_level debug
+```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

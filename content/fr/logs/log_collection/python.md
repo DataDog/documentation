@@ -7,16 +7,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/python-logging-best-practices/'
     tag: Blog
     text: 'Comment recueillir, personnaliser et centraliser des logs Python'
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
@@ -36,10 +36,13 @@ Vous trouverez ci-dessous des exemples de configuration pour les bibliothèques 
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][3]
 
-**Associer vos logs à vos traces**
+## Associer votre service à l'ensemble des logs et traces
 
-Si l'APM est activé pour cette application, vous pouvez améliorer la corrélation entre vos logs et vos traces d'application [en suivant les instructions de journalisation Python pour l'APM][3] afin d'ajouter des identifiants de trace et de span à vos logs.
+Si l'APM est activé pour cette application, associez vos logs et vos traces en ajoutant automatiquement l'ID des traces, l'ID des spans et les paramètres `env`, `service` et `version` à vos logs. Pour ce faire, [suivez les instructions relatives à l'utilisation de Python pour l'APM][4] (en anglais).
+
+**Remarque** : si le traceur de l'APM injecte `service` dans vos logs, cela remplace la valeur définie dans la configuration de l'Agent.
 
 Une fois cette opération terminée, le log doit avoir le format suivant :
 
@@ -52,7 +55,7 @@ Une fois cette opération terminée, le log doit avoir le format suivant :
 ### Écrire les logs dans un fichier
 
 {{< tabs >}}
-{{% tab "JSON_log-formatter" %}}
+{{% tab "JSON-log-formatter" %}}
 
 Exemple d'utilisation avec [JSON-log-formatter][1] :
 
@@ -90,15 +93,18 @@ Le fichier de log comprend l'entrée de log suivante (sur une ligne) :
 Exemple d'utilisation avec [Python-json-logger][1] :
 
 ```python
-    import logging
-    from pythonjsonlogger import jsonlogger
+import logging
+from pythonjsonlogger import jsonlogger
 
-    logger = logging.getLogger()
+logger = logging.getLogger()
 
-    logHandler = logging.StreamHandler()
-    formatter = jsonlogger.JsonFormatter()
-    logHandler.setFormatter(formatter)
-    logger.addHandler(logHandler)
+logHandler = logging.FileHandler(filename='/var/log/my-log.json')
+formatter = jsonlogger.JsonFormatter()
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
+logger.setLevel(logging.INFO)
+
+logger.info('Sign up', extra={'referral_code': '52d6ce'})
 ```
 
 Une fois le [gestionnaire configuré][2], le fichier de log comprend l'entrée de log suivante (sur une ligne) :
@@ -156,7 +162,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Redémarrez l'Agent][4] pour prendre en compte les changements de configuration.
+[Redémarrez l'Agent][5] pour prendre en compte les changements de configuration.
 
 ## Pour aller plus loin
 
@@ -164,5 +170,6 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /fr/tracing/connect_logs_and_traces/python
-[4]: /fr/agent/guide/agent-commands
+[3]: https://pypi.org/project/django-datadog-logger/
+[4]: /fr/tracing/connect_logs_and_traces/python
+[5]: /fr/agent/guide/agent-commands/

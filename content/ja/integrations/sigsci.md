@@ -121,24 +121,12 @@ Signal Sciences-Datadog インテグレーションを使用するには、Signa
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "sigsci" >}}
 
-```text
-sigsci.agent.waf.total
-sigsci.agent.waf.error
-sigsci.agent.waf.allow
-sigsci.agent.waf.block
-sigsci.agent.waf.perf.decision_time
-sigsci.agent.waf.perf.queue_time
-sigsci.agent.rpc.connections.open
-sigsci.agent.runtime.cpu_pct
-sigsci.agent.runtime.mem.sys_bytes
-sigsci.agent.runtime.uptime
-sigsci.agent.signal
-```
 
 ### イベント
 
-すべての Signal Sciences イベントが [Datadog のイベントストリーム][9]に送信されます
+すべての Signal Sciences イベントが [Datadog のイベントストリーム][10]に送信されます。
 
 ### サービスのチェック
 
@@ -146,13 +134,13 @@ Signal Sciences インテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
-アプリケーションセキュリティ、DevOps、SecOps、およびすべての操作については、[Signal Sciences ブログ][11]を参照してください。
+アプリケーションセキュリティ、DevOps、SecOps、およびすべての操作については、[Signal Sciences ブログ][12]を参照してください。
 
-Signal Sciences のサブスクリプションなしで、アプリケーション、API、マイクロサービスなどに対する攻撃をリアルタイムに表示できる無料サービス Signal Sciences-Datadog Monitoring に登録できます。[登録ページ][12]にアクセスしてください。
+Signal Sciences のサブスクリプションなしで、アプリケーション、API、マイクロサービスなどに対する攻撃をリアルタイムに表示できる無料サービス Signal Sciences-Datadog Monitoring に登録できます。[登録ページ][13]にアクセスしてください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
@@ -162,7 +150,8 @@ Signal Sciences のサブスクリプションなしで、アプリケーショ�
 [6]: https://dashboard.signalsciences.net
 [7]: https://player.vimeo.com/video/347360711
 [8]: https://docs.signalsciences.net/integrations/datadog/
-[9]: https://docs.datadoghq.com/ja/events/
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://labs.signalsciences.com
-[12]: https://info.signalsciences.com/datadog-security
+[9]: https://github.com/DataDog/integrations-extras/blob/master/sigsci/metadata.csv
+[10]: https://docs.datadoghq.com/ja/events/
+[11]: https://docs.datadoghq.com/ja/help/
+[12]: https://labs.signalsciences.com
+[13]: https://info.signalsciences.com/datadog-security

@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/spark/README.md'
 display_name: Spark
+draft: false
 git_integration_title: spark
 guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
@@ -103,8 +104,11 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                                     |
 | `<インスタンスコンフィギュレーション>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<CLUSTER_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
 
-#### ログの収集
+### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -112,7 +116,7 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
        logs_enabled: true
      ```
 
-2. `spark.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][2] を参照してください。
+2. `spark.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][4] を参照してください。
 
       ```yaml
        logs:
@@ -127,20 +131,13 @@ Spark チェックは [Datadog Agent][3] パッケージに含まれています
            #     name: new_log_start_with_date
      ```
 
-3. [Agent を再起動します][3]。
+3. [Agent を再起動します][5]。
 
-Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][4]を参照してください。
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: 
-{{% /tab %}}
-{{< /tabs >}}
+Docker 環境でログを収集する Agent を構成する追加の情報に関しては、[Datadog ドキュメント][6]を参照してください。
 
 ### 検証
 
-Agent の [status サブコマンド][4]を実行し、Checks セクションで `spark` を探します。
+Agent の [status サブコマンド][7]を実行し、Checks セクションで `spark` を探します。
 
 ## 収集データ
 
@@ -175,20 +172,23 @@ Agent が Spark インスタンスの ResourceManager に接続できない場�
 
 ### AWS EMR 上の Spark
 
-AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][5]して [Datadog Agent][6] をインストールし、[各 EMR ノードに正しい値が指定][7]された `/etc/dd-agent/conf.d/spark.yaml` コンフィギュレーションファイルを作成します。
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールし、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した Hadoop と Spark の監視][8]
+- [Datadog を使用した Hadoop と Spark の監視][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/spark/images/sparkgraph.png
 [2]: https://spark.apache.org/
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
-[6]: https://docs.datadoghq.com/ja/agent/
-[7]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
-[8]: https://www.datadoghq.com/blog/monitoring-spark
+[4]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: 
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-bootstrap.html
+[9]: https://docs.datadoghq.com/ja/agent/
+[10]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html
+[11]: https://www.datadoghq.com/blog/monitoring-spark
