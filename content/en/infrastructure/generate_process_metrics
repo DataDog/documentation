@@ -43,7 +43,7 @@ You can generate a new process-based metric directly from queries in the Live Pr
 
 You can create multiple metrics using the same query by selecting the **Create Another** checkbox at the bottom of the metric creation modal. When selected, the modal will remain open after your metric has been created, with the filters and aggregation groups already filled in.
 
-**Note**: Data points for process-based metrics are generated as soon as the metric has been created, and at one second intervals.    
+**Note**: Data points for process-based metrics are generated at ten second intervals. There may be up to a 3-minute delay from the moment the metric is created or updated, to the moment the first data point is reported.    
 
 ### Update a process-based metric
 
