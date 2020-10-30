@@ -32,25 +32,87 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 - Dynamically set `service`, `env` and `version` tags.
 - Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
 
+### Java Installation Steps
+
 Otherwise, to begin tracing applications written in any language:
 
-1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
+1. [Install and configure the Datadog Agent][3], see the additional documentation for [tracing Docker applications][3] or [Kubernetes applications][4].
 
-2. Download `dd-java-agent.jar` that contains the Agent class files:
+1. Download `dd-java-agent.jar` that contains the Agent class files:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-3. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
+2. Add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
 
    ```text
     -javaagent:/path/to/the/dd-java-agent.jar
    ```
 
-4. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
+3. Add [configuration options](#configuration) for tracing and ensure you are setting environment variables or passing system properties as JVM arguments, particularly for service, environment, logs injection, profiling, and optionally runtime metrics-all the metrics you intend to use. See the examples below. Note that using the in-app quickstart instructions generates these for you.
 
 - The Java Tracer support all JVM-based languages, i.e. Scala (versions 2.10.x - 2.13.x), Groovy, Kotlin, and Clojure.
+
+4. Install and configure the Datadog Agent to receive traces from your now instrumented application:
+
+{{< tabs >}}
+{{% tab "Containers" %}}
+
+Make sure to set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+**Note:** After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the host and port your Datadog Agent can be reached at, you must change it by setting the below variables:
+
+The Java Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+You can also use system properties:
+
+```bash
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+     -Ddd.agent.host=$DD_AGENT_HOST \
+     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
+     -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "AWS Lambda" %}}
+
+### AWS Lambda
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
+
+
+[1]: /tracing/serverless_functions/
+{{% /tab %}}
+{{% tab "Other Environments" %}}
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Services Extension][4].
+
+For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[4]: /infrastructure/serverless/azure_app_services/#overview
+[5]: /integrations/
+[6]: /help/
+{{% /tab %}}
+{{< /tabs >}}
+
+To get an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml` configuration file][5].
+
+
 
 ### Add the Java Tracer to the JVM
 
@@ -175,7 +237,7 @@ System properties can be set as JVM flags.
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>` |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                       |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][4] for more details.                                                                                                  |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][3] for more details.                                                                                                  |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Port number the Agent is listening on for configured host.                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | This can be used to direct trace traffic to a proxy, to later be sent to a remote Datadog Agent.                                                            |
 | `dd.trace.agent.url`                   | `DD_TRACE_AGENT_URL`                   | `null`                            | The URL to send traces to. This can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+. |
@@ -411,24 +473,6 @@ Java APM has minimal impact on the overhead of an application:
 - Java APM typically adds no more than a 3% increase in CPU usage
 - Java APM typically adds no more than a 3% increase in JVM heap usage
 
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname:
-
-The Java Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
-
-```bash
-java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
-```
-
-You can also use system properties:
-
-```bash
-java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -Ddd.agent.host=$DD_AGENT_HOST \
-     -Ddd.agent.port=$DD_TRACE_AGENT_PORT \
-     -jar <YOUR_APPLICATION_PATH>.jar
-```
 
 ## Further Reading
 
@@ -436,9 +480,9 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 [1]: /tracing/compatibility_requirements/java
 [2]: https://app.datadoghq.com/apm/docs
-[3]: /tracing/send_traces/
-[4]: /tracing/setup/docker/
-[5]: /agent/kubernetes/apm/
+[3]: /tracing/setup/docker/
+[4]: /agent/kubernetes/apm/
+[5]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [8]: /tracing/connect_logs_and_traces/java/
