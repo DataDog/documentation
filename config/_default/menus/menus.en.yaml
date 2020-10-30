@@ -835,10 +835,14 @@ main:
     url: infrastructure/process/
     parent: infrastructure
     weight: 5
+  - name: Generate Process Metrics
+    url: infrastructure/generate_process_metrics/
+    parent: infrastructure
+    weight: 6
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
-    weight: 6
+    weight: 7
   - name: Serverless
     url: serverless
     pre: nav_serverless
