@@ -40,8 +40,6 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 - Dynamically set `service`, `env`, and `version` tags.
 - Enable ingesting 100% of traces and add Trace ID injection into logs during setup.
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][3]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
-
 **Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
 
 ## Automatic Instrumentation
@@ -61,7 +59,9 @@ Automatic instrumentation captures:
 
 {{% tab "Windows" %}}
 
-To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
+
+To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][2]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -73,7 +73,8 @@ net start w3svc
 **Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core. Remove it from your application when you update the .NET Tracer.
 
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[1]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
+[2]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
 {{% tab "Linux" %}}
@@ -178,7 +179,18 @@ dotnet.exe example.dll
 
 {{% tab "Linux" %}}
 
-On Linux, the following environment variables are required to enable automatic instrumentation:
+1. Set `apm_non_local_traffic: true` in your main [`datadog.yaml` configuration file][1]
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After having instrumented your application, the tracing client sends traces to `localhost:8126` by default.  If this is not the correct host and port change it by setting the below env variables:
+
+`DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+4. On Linux, the following environment variables are required to enable automatic instrumentation:
 
 Name                       | Value
 ---------------------------|------
@@ -204,7 +216,7 @@ export DD_DOTNET_TRACER_HOME=/opt/datadog
 dotnet example.dll
 ```
 
-To set the environment variables on a Linux Docker container, use [`ENV`][1]:
+To set the environment variables on a Linux Docker container, use [`ENV`][2]:
 
 ```docker
 # Set environment variables
@@ -234,7 +246,7 @@ DD_DOTNET_TRACER_HOME=/opt/datadog
 # any other environment variable used by the application
 ```
 
-In the service configuration file, reference this as an [`EnvironmentFile`][2] in the service block:
+In the service configuration file, reference this as an [`EnvironmentFile`][3] in the service block:
 
 ```bat
 [Service]
@@ -245,7 +257,7 @@ After setting these variables, restart the .NET service for the environment vari
 
 #### Systemctl (All Services)
 
-When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services ran via `systemctl`. To confirm these variables have been set, use [`systemctl show-environment`][2]. Before using this approach, see the note below about this instrumenting all .NET processes.
+When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services ran via `systemctl`. To confirm these variables have been set, use [`systemctl show-environment`][3]. Before using this approach, see the note below about this instrumenting all .NET processes.
 
 ```bat
 systemctl set-environment CORECLR_ENABLE_PROFILING=1
@@ -257,8 +269,9 @@ systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
 
 Once this is set, verify that the environment variables were set with `systemctl show-environment`.
 
-[1]: https://docs.docker.com/engine/reference/builder/#env
-[2]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: https://docs.docker.com/engine/reference/builder/#env
+[3]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -267,9 +280,9 @@ Once this is set, verify that the environment variables were set with `systemctl
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][3] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][5].
+For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][4].
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
 
@@ -380,7 +393,7 @@ The following tables list the supported configuration variables. Use the first n
 | `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`). Available for versions 1.17.0+                                                                                                                                              |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][6] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][5] documentation for recommendations on how to configure these environment variables.
 
 #### Instrumentation
 
@@ -417,7 +430,6 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/compatibility_requirements/dotnet-core
 [2]: https://app.datadoghq.com/apm/docs
-[3]: /tracing/send_traces/
-[4]: https://www.nuget.org/packages/Datadog.Trace
-[5]: /tracing/custom_instrumentation/dotnet/
-[6]: /getting_started/tagging/unified_service_tagging/
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: /tracing/custom_instrumentation/dotnet/
+[5]: /getting_started/tagging/unified_service_tagging/

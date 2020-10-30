@@ -18,7 +18,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibility requirements
+## Compatibility Requirements
 
 The Java Tracer supports all JVMs on all platforms version 7 and higher. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 

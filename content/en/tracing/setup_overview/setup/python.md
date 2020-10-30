@@ -24,7 +24,7 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
-## Compatibility requirements
+## Compatibility Requirements
 
 Python versions `2.7+` and `3.5+` are supported.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 

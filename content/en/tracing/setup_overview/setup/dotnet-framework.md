@@ -261,7 +261,7 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/compatibility_requirements/dotnet-framework
 [2]: https://app.datadoghq.com/apm/docs
-[3]: /tracing/send_traces/
+[3]: https://docs.datadoghq.com/agent/basic_agent_usage/windows/?tab=gui
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
 [5]: https://www.nuget.org/packages/Datadog.Trace
 [6]: /tracing/custom_instrumentation/dotnet/
