@@ -17,6 +17,8 @@ Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count
 
 ### Containers
 
+Depending on your plan, you can monitor 10 or 20 containers free for each host license. Additional containers will be billed per hour. In addition, you can purchase prepaid containers at $1 per container per month.
+
 It is recommended that containers are monitored with a single containerized Agent per host. This Agent collects both container and host metrics. If you choose to install the Agent directly in each container, each container is counted as a host from a billing perspective.  More details can be found in the [Agent installation][3] documentation.
 
 ### Serverless
@@ -28,6 +30,11 @@ Pro and Enterprise plans include 150,000 Indexed Spans and 5 custom metrics per 
 **Note** Indexed Spans were formerly known as Analyzed Spans and renamed with the launch of Tracing Without Limits on October 20th, 2020.
 
 For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
+
+### Fargate
+Fargate includes any ECS tasks and EKS pods that run on AWS Fargate.
+
+Datadog records the number of tasks and pods you are monitoring in Datadog at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your Fargate applications were run and monitored.
 
 ## Invoicing
 
