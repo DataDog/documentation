@@ -31,7 +31,7 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 Add a profiler library to your application to start sending profiles to the Datadog Agent.
 
-**Node**, **Ruby**, **PHP**, or **.NET** Profilers are coming soon. To get notified when a private beta is available [sign up here][2].
+To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][2].
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
