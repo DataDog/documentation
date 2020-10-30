@@ -40,7 +40,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 ##### Manual Entry
 
 1. To manually enter the SAML ID, open the Datadog Mobile app and press the “Using Single Sign-On (SAML)?” button.
-2. Click the “Use another method to login” button, and entering the SAML ID manually.
+2. Press the “Use another method to login” button, and enter the SAML ID manually.
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
