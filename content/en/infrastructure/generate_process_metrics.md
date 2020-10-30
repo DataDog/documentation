@@ -15,7 +15,8 @@ further_reading:
 
 ## Overview
 
-While Live Processes data is stored for 36 hours, you can generate global and percentile distribution metrics from your processes to monitor your resource consumption long-term. Process-based metrics are stored for 15 months like any other Datadog metric, making it easy to
+While Live Processes data is stored for 36 hours, you can generate global and percentile distribution metrics from your processes to monitor your resource consumption long-term. Process-based metrics are stored for 15 months like any other Datadog metric, making it easy to:
+
 - Debug past and ongoing infrastructure issues
 - Identify trends in the resource consumption of your critical workloads
 - Assess the health of your system before and after load or stress tests
@@ -51,9 +52,9 @@ You can create multiple metrics using the same query by selecting the **Create A
 
 After a metric is created, the following fields can be updated:
 
-- Filter query: add or remove tags from the ‘Filter by’ field to change the set of matching processes for which metrics are generated.
-- Aggregation groups: add or remove tags from the ‘Group by’ field to break down your metrics in different ways, or manage their cardinality.
-- Percentile selection: check or uncheck the ‘Include percentile aggregations’ box to remove or generate percentile metrics.
+- Filter query: Add or remove tags from the ‘Filter by’ field to change the set of matching processes for which metrics are generated.
+- Aggregation groups: Add or remove tags from the ‘Group by’ field to break down your metrics in different ways, or manage their cardinality.
+- Percentile selection: Check or uncheck the ‘Include percentile aggregations’ box to remove or generate percentile metrics.
 
 To change the metric type or name, a new metric must be created.
 
@@ -61,13 +62,13 @@ To change the metric type or name, a new metric must be created.
 
 {{< img src="infrastructure/process/process2metrics_dashboard_widget.png" alt="Graphing process distribution metrics in dashboards" style="width:80%;">}}
 
-Once created, you can use process distribution aggregate and percentile metrics like any other in Datadog. For instance,
+Once created, you can use process distribution aggregate and percentile metrics like any other in Datadog. For instance:
 
 - Graph process-based metrics in dashboards and notebooks to track the historical resource consumption of important workloads
 - Create threshold or anomaly-based monitors on top of process-based metrics to detect when CPU or RSS memory dips or spikes unexpectedly
 - Use [Metric Correlations][5] to contextualize changes in resource consumption against internal and third-party software performance
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
