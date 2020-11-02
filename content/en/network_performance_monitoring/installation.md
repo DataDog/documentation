@@ -29,7 +29,7 @@ Supported **platforms** include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
-**For Windows OS:** Data collection is done using a Windows driver, which is now available in private beta for version 2016 or later. To request access, please fill out [this form][8]. 
+**For Windows OS:** Data collection is done using a Windows driver, which is now available in private beta for version 2016 or later. To request access, please fill out [this form][8]. Note that the driver currently monitors Windows hosts only, and not Windows containers.  
 
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
