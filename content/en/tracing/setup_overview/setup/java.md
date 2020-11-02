@@ -274,7 +274,7 @@ System properties can be set as JVM flags.
 
 ### Integrations
 
-See how to disable integrations in the [integrations][13] compatability section.
+See how to disable integrations in the [integrations][13] compatibility section.
 
 ### Examples
 
