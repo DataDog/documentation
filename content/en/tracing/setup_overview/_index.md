@@ -2,6 +2,7 @@
 title: Set up Datadog APM
 kind: documentation
 description: "Get Started with Datadog APM"
+disable_toc: true
 aliases:
     - /tracing/setup
     - /tracing/send_traces/
