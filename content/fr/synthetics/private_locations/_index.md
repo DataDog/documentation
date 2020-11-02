@@ -45,10 +45,8 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com` pour les versions 0.1.6+, `api.datadoghq.com/api/` pour les versions <0.1.5   | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
+| 443  | `intake.synthetics.datadoghq.com` pour les versions 0.1.6+, `api.datadoghq.com` pour les versions <0.1.5   | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
 | 443  | `intake-v2.synthetics.datadoghq.com` pour les versions >0.2.0                                             | Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources)                                                                         |
-
-**Remarque** : vérifiez si l'endpoint correspondant à votre `site` Datadog est disponible à partir du host exécutant le worker en utilisant `curl intake.synthetics.datadoghq.com` pour les versions 0.1.6+ (`curl https://api.datadoghq.com` pour les versions <0.1.5).
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -58,10 +56,10 @@ Pour extraire les configurations de test et renvoyer les résultats de test, le 
 
 | Port | Endpoint                                               | Description                                                                                   |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `api.datadoghq.eu/api/`                                | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
+| 443  | `api.datadoghq.eu`                                | Utilisé par l'emplacement privé pour extraire les configurations de test et renvoyer les résultats de test à Datadog à l'aide d'un protocole interne basé sur le [protocole Signature Version 4 d'AWS][1]. |
 | 443  | `intake-v2.synthetics.datadoghq.eu` pour les versions >0.2.0| Utilisé par l'emplacement privé pour renvoyer les artefacts de test Browser (captures d'écran, erreurs, ressources)                                                                            |
 
-*Remarque** : vérifiez si l'endpoint correspondant à votre `site` Datadog est disponible à partir du host exécutant le worker en utilisant `curl https://api.datadoghq.eu`.
+**Remarque** : ces domaines pointent vers un ensemble d'adresses IP statiques. Ces adresses sont disponibles sur https://ip-ranges.datadoghq.eu, plus spécifiquement sur https://ip-ranges.datadoghq.eu/api.json pour `api.datadoghq.eu` et sur https://ip-ranges.datadoghq.eu/synthetics-private-locations.json pour `intake-v2.synthetics.datadoghq.eu`.
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -87,7 +85,7 @@ Cliquez ensuite sur **Save Location and Generate Configuration File** pour crée
 
 ### Configurer votre emplacement privé
 
-Selon la configuration de votre réseau interne, vous pouvez ajouter des paramètres de configuration initiaux (configuration du proxy et des IP réservées) au fichier de configuration de votre emplacement privé. Les paramètres ajoutés à la **2e étape** s'appliquent automatiquement au fichier de configuration généré à la **3e étape**.
+Configurez votre emplacement privé en personnalisant le fichier de configuration généré. Les paramètres de configuration initiaux comme le [proxy](#configuration-du-proxy) et les [IP réservées bloquées](#bloquer-des-ip-reservees) sont ajoutés à l'**Étape 2** et sont automatiquement reportés dans le fichier de configuration de l'**Étape 3**. Selon la configuration de votre réseau interne, vous pouvez configurer votre emplacement privé avec des [options avancées](#configuration-avancee).
 
 #### Configuration du proxy
 
@@ -105,11 +103,11 @@ Si certains des endpoints que vous voulez tester se trouvent dans une ou plusieu
 
 {{< img src="synthetics/private_locations/pl_reserved_ips.png" alt="Configurer les IP réservées"  style="width:90%;">}}
 
-[Des options avancées de configuration d'IP réservées][8] sont disponibles.
+[Des options avancées pour la configuration d'IP réservées][8] sont disponibles.
 
 #### Configuration avancée
 
-[Des options de configuration avancées][9] sont disponibles. Pour les afficher, exécutez la commande `help` ci-dessous : 
+[Des options de configuration avancées][9] sont disponibles. Pour les afficher, exécutez la commande `help` ci-dessous :
 
 ```shell
 docker run --rm datadog/synthetics-private-location-worker --help
@@ -222,7 +220,7 @@ docker-compose -f docker-compose.yml up
 
 {{% tab "ECS" %}}
 
-Créez une nouvelle définition de tâche EC2 correspondant à celle indiquée ci-dessous. Pensez à remplacer chaque paramètre par la valeur correspondante figurant dans le fichier de configuration de l'emplacement privé que vous avez généré précédemment :
+Créez une définition de tâche EC2 correspondant à celle indiquée ci-dessous. Pensez à remplacer chaque paramètre par la valeur correspondante figurant dans le fichier de configuration de l'emplacement privé que vous avez généré précédemment :
 
 ```yaml
 {
@@ -305,32 +303,32 @@ Créez une nouvelle définition de tâche Fargate correspondant à celle indiqu�
     kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. Profitez des déploiements pour décrire le statut souhaité associé à vos emplacements privés. Créez le fichier private-location-worker-deployment.yaml suivant :
+2. Tirez parti des déploiements pour décrire le statut souhaité associé à vos emplacements privés. Créez le fichier `private-location-worker-deployment.yaml` suivant :
 
     ```yaml
-    private-location-worker-deployment.yaml file:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: datadog-private-location-worker
-    namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-    selector:
-      matchLabels:
-        app: private-location
-    template:
-      metadata:
-        name: datadog-private-location-worker
-        labels:
+      selector:
+        matchLabels:
           app: private-location
-      spec:
-        containers:
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
+        spec:
+          containers:
           - name: datadog-private-location-worker
             image: datadog/synthetics-private-location-worker
             volumeMounts:
-              - mountPath: /etc/datadog/
-                name: worker-config
-        volumes:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
           - name: worker-config
             configMap:
               name: private-location-worker-config
@@ -445,7 +443,7 @@ livenessProbe:
 
 ### Tester votre endpoint interne
 
-Une fois qu'au moins un conteneur d'emplacement privé commence à envoyer des données à Datadog, le statut de l'emplacement privé devient vert :
+Lorsqu'au moins un conteneur d'emplacement privé a commencé à envoyer des données à Datadog, le statut de l'emplacement privé devient vert :
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Envoi de données par l'emplacement privé"  style="width:90%;">}}
 

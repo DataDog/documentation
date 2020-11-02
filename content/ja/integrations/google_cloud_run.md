@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_run/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/'
     tag: ブログ
@@ -52,7 +53,7 @@ Google Cloud Run のログは、Stackdriver を使用して収集され、HTTP �
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

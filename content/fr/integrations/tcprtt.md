@@ -1,23 +1,22 @@
 ---
-integration_title: Check TCP RTT
+integration_title: TCP RTT
 name: tcp_rtt
 kind: integration
 newhlevel: true
 is_public: true
 public_title: Intégration Datadog/TCP RTT
-short_description: 'Surveillez la connectivité TCP vers les hosts à distance.'
+short_description: Surveillez la connectivité TCP vers les hosts à distance.
 categories:
-    - network
+  - network
 ddtype: check
 dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md'
 ---
-
 ## Présentation
 
-Le check TCP RTT transmet les durées d'aller-retour entre le host sur lequel l'Agent s'exécute et tout host avec lequel il communique. Ce check est passif et ne transmet que les durées RTT pour les paquets envoyés et reçus à l'extérieur du check. Le check n'envoie aucun paquet.
+Le check TCP RTT transmet les délais d'aller-retour entre le host de l'Agent et tout host avec lequel il communique. Ce check est passif et ne transmet que les durées RTT pour les paquets envoyés et reçus à l'extérieur du check. Le check n'envoie aucun paquet.
 
-Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent v5 de Datadog. Pour découvrir comment créer le binaire go-metro pour d'autres versions de l'Agent, consultez [la section relative à l'utilisation de Datadog avec go-metro][1] (en anglais).
+Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent v5 de Datadog. Pour d'autres versions de l'Agent, consultez [la section relative à l'utilisation de Datadog avec go-metro][1] (en anglais) afin de découvrir comment créer le binaire go-metro.
 
 ## Configuration
 
@@ -47,7 +46,9 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### Configuration
 
-Modifiez le fichier `go-metro.yaml` dans le dossier `conf.d` de votre Agent. Voici un fichier d'exemple qui affichera les durées TCP RTT pour app.datadoghq.com et 192.168.0.22 :
+Modifiez le fichier `go-metro.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple go-metro.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+
+L'exemple suivant récupère les durées TCP RTT pour `app.datadoghq.com` et `192.168.0.22` :
 
 ```yaml
 init_config:
@@ -68,8 +69,6 @@ instances:
       hosts:
           - app.datadoghq.com
 ```
-
-{{< insert-example-links conf="go-metro" check="none" >}}
 
 ### Validation
 
@@ -101,3 +100,5 @@ Il s'agit d'un check passif. Ainsi, les métriques sont uniquement transmises si
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
 
 [1]: https://github.com/DataDog/go-metro#usage
+[2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/datadog_checks/go-metro/data/conf.yaml.example

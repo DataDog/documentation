@@ -34,8 +34,8 @@ main_left:
     weight: 5
     parent: product
   - identifier: profiler
-    name: Profiler en continu
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profiler''>'
+    name: Profileur en continu
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profileur''>'
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 6
     parent: product
@@ -333,7 +333,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 8
-  - name: Surveillance Synthetics
+  - name: Surveillance Synthetic
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
@@ -909,6 +909,10 @@ main:
     parent: serverless_datadog_lambda_library
     identifier: serverless_datadog_lambda_library_java
     weight: 205
+  - name: Extension Lambda Datadog
+    url: serverless/datadog_lambda_library/extension
+    parent: serverless_datadog_lambda_library
+    weight: 206
   - name: Forwarder Datadog
     url: serverless/forwarder
     parent: serverless
@@ -922,44 +926,48 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
-  - name: Métriques custom
+  - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
+  - name: Suivi des déploiements
+    url: serverless/deployment_tracking
+    parent: serverless
+    weight: 7
   - name: Intégrations sans serveur
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Plug-in Serverless Datadog
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 701
+    weight: 801
   - name: Macro Serverless Datadog
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 702
+    weight: 802
   - name: CLI Serverless Datadog
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 703
+    weight: 803
   - name: Tagging de fonctions sans serveur
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Dépannage
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 9
+    weight: 10
   - name: Extension Azure App Services
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 10
+    weight: 11
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
@@ -1251,32 +1259,33 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Suivi de déploiement
+  - name: Analyse et recherche de traces
+    url: tracing/trace_search_and_analytics/
+    parent: tracing
+    identifier: trace_search_and_analytics
+    weight: 4
+  - name: Syntaxe de requête
+    url: tracing/trace_search_and_analytics/query_syntax/
+    parent: trace_search_and_analytics
+    weight: 403
+  - name: Surveillance d'analyses
+    url: monitors/monitor_types/apm/?tab=appanalytics
+    parent: trace_search_and_analytics
+    weight: 404
+  - name: Rétention et ingestion des traces
+    url: tracing/trace_retention_and_ingestion/
+    parent: tracing
+    identifier: trace_retention_and_ingestion
+    weight: 5
+  - name: Métriques d'utilisation
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
+    weight: 501
+  - name: Suivi des déploiements
     url: tracing/deployment_tracking/
     parent: tracing
     identifier: deployment_tracking
-    weight: 4
-  - name: App Analytics
-    url: tracing/app_analytics/
-    parent: tracing
-    identifier: app_analytics
-    weight: 5
-  - name: Visualiser les analyses
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 503
-  - name: Recherche de traces
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 504
-  - name: Monitors App Analytics
-    url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 505
-  - name: Live Search
-    url: tracing/livesearch/
-    parent: tracing
-    identifier: Live Search
     weight: 6
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
@@ -1368,7 +1377,7 @@ main:
     parent: tracing
     identifier: profiler
     weight: 11
-  - name: Débuter
+  - name: Prise en main
     url: tracing/profiler/getting_started
     parent: profiler
     identifier: profiler_getting_started
@@ -1378,7 +1387,7 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
-  - name: Dépannage du profiler
+  - name: Dépannage du profileur
     url: tracing/profiler/profiler_troubleshooting
     parent: profiler
     identifier: profiler_profiler_troubleshooting
@@ -1669,7 +1678,7 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
-  - name: Débuter
+  - name: Prise en main
     url: security_monitoring/getting_started
     parent: security_monitoring
     identifier: security_monitoring_getting_started
@@ -1684,7 +1693,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Surveillance Synthetics
+  - name: Surveillance Synthetic
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1863,36 +1872,41 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: Surveillance DNS
+    url: network_performance_monitoring/dns_monitoring
+    parent: npm
+    identifier: dns_monitoring
+    weight: 4
   - name: Appareils
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 400
+    weight: 500
   - name: Configuration
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 401
+    weight: 501
   - name: Profiles
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 402
+    weight: 502
   - name: Données collectées
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 403
+    weight: 503
   - name: Dépannage
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 404
+    weight: 504
   - name: Guides
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 405
+    weight: 505
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -1928,7 +1942,7 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 2
-  - name: Métriques custom
+  - name: Custom Metrics
     url: developers/metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
@@ -2226,9 +2240,9 @@ api_v1:
     parent: Intégration de logs AWS
     url: '#verifier-qu-une-fonction-lambda-aws-existe'
     generated: true
-  - name: Obtenir la liste des services AWS compatibles avec la collecte de logs
+  - name: Récupérer la liste des services AWS compatibles avec la collecte de logs
     parent: Intégration de logs AWS
-    url: '#obtenir-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
+    url: '#recuperer-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
     generated: true
   - name: Activer une intégration de logs AWS
     parent: Intégration de logs AWS
@@ -2438,9 +2452,9 @@ api_v1:
     url: /api/v1/key-management/
     identifier: Gestion des clés
     generated: true
-  - name: Obtenir toutes les clés d'API
+  - name: Récupérer toutes les clés d'API
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-api'
+    url: '#recuperer-toutes-les-cles-d-api'
     generated: true
   - name: Créer une clé d'API
     parent: Gestion des clés
@@ -2450,17 +2464,17 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-api'
     generated: true
-  - name: Obtenir la clé d'API
+  - name: Récupérer une clé d'API
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-api'
+    url: '#recuperer-une-cle-d-api'
     generated: true
   - name: Modifier une clé d'API
     parent: Gestion des clés
     url: '#modifier-une-cle-d-api'
     generated: true
-  - name: Obtenir toutes les clés d'application
+  - name: Récupérer toutes les clés d'application
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-application'
+    url: '#recuperer-toutes-les-cles-d-application'
     generated: true
   - name: Créer une clé d'application
     parent: Gestion des clés
@@ -2470,9 +2484,9 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-application'
     generated: true
-  - name: Obtenir une clé d'application
+  - name: Récupérer une clé d'application
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-application'
+    url: '#recuperer-une-cle-d-application'
     generated: true
   - name: Modifier une clé d'application
     parent: Gestion des clés
@@ -2500,7 +2514,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des index
     parent: Index de logs
-    url: '#obtenir-la-sequence-des-index'
+    url: '#recuperer-la-sequence-des-index'
     generated: true
   - name: Mettre à jour la séquence des index
     parent: Index de logs
@@ -2508,11 +2522,11 @@ api_v1:
     generated: true
   - name: Récupérer tous les index
     parent: Index de logs
-    url: '#obtenir-tous-les-index'
+    url: '#recuperer-tous-les-index'
     generated: true
-  - name: Obtenir un index
+  - name: Récupérer un index
     parent: Index de logs
-    url: '#obtenir-un-index'
+    url: '#recuperer-un-index'
     generated: true
   - name: Mettre à jour un index
     parent: Index de logs
@@ -2524,7 +2538,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des pipelines
     parent: Pipelines de logs
-    url: '#obtenir-la-sequence-des-pipelines'
+    url: '#recuperer-la-sequence-des-pipelines'
     generated: true
   - name: Mettre à jour la séquence des pipelines
     parent: Pipelines de logs
@@ -2532,7 +2546,7 @@ api_v1:
     generated: true
   - name: Récupérer tous les pipelines
     parent: Pipelines de logs
-    url: '#obtenir-tous-les-pipelines'
+    url: '#recuperer-tous-les-pipelines'
     generated: true
   - name: Créer un pipeline
     parent: Pipelines de logs
@@ -2544,7 +2558,7 @@ api_v1:
     generated: true
   - name: Récupérer un pipeline
     parent: Pipelines de logs
-    url: '#obtenir-un-pipeline'
+    url: '#recuperer-un-pipeline'
     generated: true
   - name: Mettre à jour un pipeline
     parent: Pipelines de logs
@@ -2558,13 +2572,13 @@ api_v1:
     url: /api/v1/metrics/
     identifier: Métriques
     generated: true
-  - name: Obtenir la liste des métriques actives
+  - name: Récupérer la liste des métriques actives
     parent: Métriques
     url: '#recuperer-la-liste-des-metriques-actives'
     generated: true
-  - name: Obtenir les métadonnées d'une métrique
+  - name: Récupérer les métadonnées d'une métrique
     parent: Métriques
-    url: '#obtenir-les-metadonnees-d-une-metrique'
+    url: '#recuperer-les-metadonnees-d-une-metrique'
     generated: true
   - name: Modifier les métadonnées d'une métrique
     parent: Métriques
@@ -2710,13 +2724,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: Dépendances de service
     generated: true
-  - name: Récupérer toutes les dépendances de service
+  - name: Récupérer toutes les dépendances de services APM
     parent: Dépendances de service
-    url: '#recuperer-toutes-les-dependances-de-service'
+    url: '#recuperer-toutes-les-dependances-de-services-apm'
     generated: true
-  - name: Récupérer les dépendances d'un service
+  - name: Récupérer les dépendances d'un service APM
     parent: Dépendances de service
-    url: '#recuperer-les-dependances-d-un-service'
+    url: '#recuperer-les-dependances-d-un-service-apm'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
@@ -2894,101 +2908,101 @@ api_v1:
     url: /api/v1/usage-metering/
     identifier: Mesure de l'utilisation
     generated: true
-  - name: Obtenir la liste des rapports personnalisés journaliers disponibles
+  - name: Récupérer la liste des rapports personnalisés journaliers disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-journaliers-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-journaliers-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés journaliers spécifiés
+  - name: Récupérer les rapports personnalisés journaliers spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-journaliers-specifies'
+    url: '#recuperer-les-rapports-personnalises-journaliers-specifies'
     generated: true
-  - name: Obtenir la liste des rapports personnalisés mensuels disponibles
+  - name: Récupérer la liste des rapports personnalisés mensuels disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-mensuels-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-mensuels-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés mensuels spécifiés
+  - name: Récupérer les rapports personnalisés mensuels spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-mensuels-specifies'
+    url: '#recuperer-les-rapports-personnalises-mensuels-specifies'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs analysés
+  - name: Récupérer l'utilisation horaire pour les logs analysés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-logs-analyses'
+    url: '#recuperer-l-utilisation-horaire-pour-les-logs-analyses'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Lambda
+  - name: Récupérer l'utilisation horaire pour Lambda
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-lambda'
+    url: '#recuperer-l-utilisation-horaire-pour-lambda'
     generated: true
-  - name: Obtenir l'utilisation facturable de votre compte multi-org
+  - name: Récupérer l'utilisation facturable de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-facturable-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-facturable-de-votre-compte-multi-org'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Fargate
+  - name: Récupérer l'utilisation horaire pour Fargate
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-fargate'
+    url: '#recuperer-l-utilisation-horaire-pour-fargate'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts et conteneurs
+  - name: Récupérer l'utilisation horaire pour les hosts et conteneurs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs
+  - name: Récupérer l'utilisation horaire pour les logs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs par index
+  - name: Récupérer l'utilisation horaire pour les logs par index
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs-par-index'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs-par-index'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les flux réseau
+  - name: Récupérer l'utilisation horaire pour les flux réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-flux-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts réseau
+  - name: Récupérer l'utilisation horaire pour les hosts réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-reseau'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts profilés
+  - name: Récupérer l'utilisation horaire pour les hosts profilés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-profiles'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-profiles'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les sessions RUM
+  - name: Récupérer l'utilisation horaire pour les sessions RUM
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-sessions-rum'
+    url: '#recuperer-l-utilisation-horaire-pour-les-sessions-rum'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les appareils SNMP
+  - name: Récupérer l'utilisation horaire pour les appareils SNMP
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-appareils-snmp'
+    url: '#recuperer-l-utilisation-horaire-pour-les-appareils-snmp'
     generated: true
-  - name: Obtenir l'utilisation de votre compte multi-org
+  - name: Récupérer l'utilisation de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-de-votre-compte-multi-org'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les API checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les API checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-api-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-api-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les browser checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les browser checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-browser-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-browser-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les métriques custom
+  - name: Récupérer l'utilisation horaire pour les métriques custom
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-metriques-custom'
+    url: '#recuperer-l-utilisation-horaire-pour-des-metriques-custom'
     generated: true
-  - name: "Obtenir les 500\_principales métriques custom selon la moyenne horaire"
+  - name: "Récupérer les 500\_principales métriques custom selon la moyenne horaire"
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
+    url: '#recuperer-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
     generated: true
-  - name: Obtenir l'utilisation horaire pour la recherche de traces
+  - name: Récupérer l'utilisation horaire pour la recherche de traces
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces'
+    url: '#recuperer-l-utilisation-horaire-pour-la-recherche-de-traces'
     generated: true
-  - name: Obtenir l'utilisation horaire pour le Tracing without Limits
+  - name: Récupérer l'utilisation horaire pour le Tracing without Limits
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-le-tracing-without-limits'
+    url: '#recuperer-l-utilisation-horaire-pour-le-tracing-without-limits'
     generated: true
   - name: Utilisateurs
     url: /api/v1/users/
@@ -3042,9 +3056,9 @@ api_v1:
     parent: Intégration Webhooks
     url: '#supprimer-un-webhook'
     generated: true
-  - name: Obtenir une intégration Webhook
+  - name: Récupérer une intégration Webhook
     parent: Intégration Webhooks
-    url: '#obtenir-une-integration-webhook'
+    url: '#recuperer-une-integration-webhook'
     generated: true
   - name: Mettre à jour un webhook
     parent: Intégration Webhooks
@@ -3127,6 +3141,54 @@ api_v2:
   - name: Plages d'IP
     url: /api/v2/ip-ranges/
     identifier: Plages d'IP
+    generated: true
+  - name: Services liés à un incident
+    url: /api/v2/incident-services/
+    identifier: Services liés à un incident
+    generated: true
+  - name: Récupérer la liste de tous les services liés à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-une-liste-de-tous-les-services-lies-a-un-incident'
+    generated: true
+  - name: Créer un service lié à un incident
+    parent: Services liés à un incident
+    url: '#creer-un-service-lie-a-un-incident'
+    generated: true
+  - name: Supprimer un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#supprimer-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Récupérer les détails d'un service lié à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-les-details-d-un-service-lie-a-un-incident'
+    generated: true
+  - name: Mettre à jour un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#mettre-a-jour-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Équipes liées à un incident
+    url: /api/v2/incident-teams/
+    identifier: Équipes liées à un incident
+    generated: true
+  - name: Récupérer la liste de toutes les équipes liées à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-la-liste-de-toutes-les-equipes-lies-a-un-incident'
+    generated: true
+  - name: Créer une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#creer-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Supprimer une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#supprimer-une-equipe-liee-a-un-incident-existante'
+    generated: true
+  - name: Récupérer les détails d'une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-les-details-d-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Mettre à jour une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
     generated: true
   - name: Gestion des clés
     url: /api/v2/key-management/
@@ -3340,13 +3402,13 @@ api_v2:
     parent: Security Monitoring
     url: '#mettre-a-jour-une-regle-existante'
     generated: true
-  - name: Obtenir une liste rapide de signaux de sécurité
+  - name: Récupérer une liste rapide de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-rapide-de-signaux-de-securite'
+    url: '#recuperer-une-liste-rapide-de-signaux-de-securite'
     generated: true
-  - name: Obtenir une liste de signaux de sécurité
+  - name: Récupérer une liste de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-de-signaux-de-securite'
+    url: '#recuperer-une-liste-de-signaux-de-securite'
     generated: true
   - name: Checks de service
     url: /api/v2/service-checks/
@@ -3360,30 +3422,6 @@ api_v2:
     url: /api/v2/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
-  - name: Services
-    url: /api/v2/services/
-    identifier: Services
-    generated: true
-  - name: Récupérer une liste de tous les services
-    parent: Services
-    url: '#recuperer-une-liste-de-tous-les-services'
-    generated: true
-  - name: Créer un service
-    parent: Services
-    url: '#creer-un-service'
-    generated: true
-  - name: Supprimer un service existant
-    parent: Services
-    url: '#supprimer-un-service-existant'
-    generated: true
-  - name: Récupérer les détails d'un service
-    parent: Services
-    url: '#recuperer-les-details-d-un-service'
-    generated: true
-  - name: Mettre à jour un service existant
-    parent: Services
-    url: '#mettre-a-jour-un-service-existant'
-    generated: true
   - name: Intégration Slack
     url: /api/v2/slack-integration/
     identifier: Intégration Slack
@@ -3392,37 +3430,13 @@ api_v2:
     url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic
     url: /api/v2/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic
     generated: true
   - name: Tags
     url: /api/v2/tags/
     identifier: Tags
-    generated: true
-  - name: Équipes
-    url: /api/v2/teams/
-    identifier: Équipes
-    generated: true
-  - name: Récupérer une liste de toutes les équipes
-    parent: Équipes
-    url: '#recuperer-une-liste-de-toutes-les-equipes'
-    generated: true
-  - name: Créer une équipe
-    parent: Équipes
-    url: '#creer-une-equipe'
-    generated: true
-  - name: Supprimer une équipe existante
-    parent: Équipes
-    url: '#supprimer-une-equipe-existante'
-    generated: true
-  - name: Récupérer les détails d'une équipe
-    parent: Équipes
-    url: '#recuperer-les-details-d-une-equipe'
-    generated: true
-  - name: Mettre à jour une équipe existante
-    parent: Équipes
-    url: '#mettre-a-jour-une-equipe-existante'
     generated: true
   - name: Timeboards
     url: /api/v2/timeboards/
@@ -3496,7 +3510,7 @@ footer_product:
   - name: APM
     url: 'https://www.datadoghq.com/product/apm/'
     weight: 120
-  - name: Profiler en continu
+  - name: Profileur en continu
     url: 'https://www.datadoghq.com/product/code-profiling/'
     weight: 121
   - name: Security Monitoring

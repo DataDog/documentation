@@ -76,7 +76,16 @@ Recevez une notification si les volumes de logs indexés de votre infrastructure
 
 {{< img src="logs/guide/example_notification.png" alt=" exemple de notification" style="width:70%;">}}
 
+### Recevoir une alerte lorsqu'un index atteint son quota journalier
+
 Il est également possible d'[appliquer un quota journalier aux index][9] pour empêcher que le nombre de logs indexés par jour dépasse une valeur donnée. Si vous appliquez une telle limite, nous vous conseillons de configurer le monitor ci-dessus de façon à recevoir une alerte lorsque 80 % de ce quota est atteint au cours des 24 dernières heures.
+Un événement est généré lorsque le quota journalier est atteint. Configurez un monitor pour être notifié de cet événement :
+
+{{< img src="logs/guide/daily_quota_monitor.png" alt="Monitor de quota journalier"  style="width:70%;">}}
+
+Voici un exemple de notification sur Slack :
+
+{{< img src="logs/guide/daily_quota_notification.png" alt="Notification de quota journalier"  style="width:70%;">}}
 
 ## Pour aller plus loin
 

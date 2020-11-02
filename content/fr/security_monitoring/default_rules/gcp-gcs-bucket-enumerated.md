@@ -4,7 +4,7 @@ aliases:
 disable_edit: true
 kind: documentation
 rule_category:
-  - Détection de logs
+  - Log Detection
 scope: gcp.gcs.bucket
 security: attack
 source: gcp

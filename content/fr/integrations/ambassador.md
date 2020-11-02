@@ -1,8 +1,9 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - Cloud
   - orchestration
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md'
 display_name: Ambassador
+draft: false
 git_integration_title: ambassador
 guid: 71936a65-1a8c-4f6e-a18e-f71d4236182b
 integration_id: ambassador
@@ -21,7 +23,7 @@ kind: integration
 maintainer: hello@datawire.io
 manifest_version: 1.0.0
 metric_prefix: envoy.
-metric_to_check: envoy.server.live
+metric_to_check: envoy.listener.downstream_cx_total
 name: ambassador
 public_title: "Intégration Datadog/Ambassador\_API\_Gateway"
 short_description: Ambassador est une solution open source de passerelle API intégrée nativement à Kubernetes et conçue sur le proxy Envoy.
@@ -37,71 +39,24 @@ Recueillez des métriques d'[Ambassador][1] en temps réel pour :
 
 - Visualiser les performances de vos microservices
 
-- Comprendre l'incidence des nouvelles versions de vos services lorsque vous utilisez Ambassador pour réaliser un déploiement canari
+- Comprendre l'impact des nouvelles versions de vos services lorsque vous utilisez Ambassador pour réaliser un déploiement Canary
 
 ![snapshot][2]
 
-## Implémentation
+## Configuration
 
-Par défaut, Ambassador installe un sidecar `statsd` sur son pod. Ce sidecar transmet la métrique `statsd` à n'importe quel service Kubernetes du nom de `statsd-sink`.
+Activez DogStatsD via le DaemonSet de votre Agent et définissez la variable d'environnement suivante sur votre pod Ambassador :
 
-1. Créez un fichier `datadog-statsd-sink.yaml` avec la configuration suivante, en remplaçant la clé d'API ci-dessous par votre propre clé API :
+```
+name: STATSD_HOST
+valueFrom:
+  fieldRef:    
+    fieldPath: status.hostIP
+```
 
-   ```yaml
-   ---
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-    name: statsd-sink
-   spec:
-     selector:
-       matchLabels:
-         service: statsd-sink
-    replicas: 1
-    template:
-      metadata:
-        labels:
-          service: statsd-sink
-      spec:
-        containers:
-        - name: statsd-sink
-          image: datadog/docker-dd-agent:latest
-          ports:
-            - containerPort: 8125
-              name: dogstatsdport
-              protocol: UDP
-          env:
-            - name: API_KEY
-              value: "<YOUR_DATADOG_API_KEY>"
-            - name: KUBERNETES
-              value: "yes"
-            - name: SD_BACKEND
-              value: docker
-        restartPolicy: Always
-   status: {}
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-    labels:
-      service: statsd-sink
-    name: statsd-sink
-   spec:
-    ports:
-       - protocol: UDP
-         port: 8125
-         name: dogstatsdport
-    selector:
-      service: statsd-sink
-   ```
+Avec cette configuration, les métriques StatsD sont envoyées à l'IP du host, qui redirige le trafic vers le port 8125 de l'Agent.
 
-2. Déployez l'Agent sur Kubernetes :
-
-   ```shell
-   kubectl apply -f datadog-statsd-sink.yaml
-   ```
-
-3. Vos métriques apparaîtront dès que du trafic sera transmis via Ambassador.
+Consultez la [documentation dédiée à Ambassador][3] pour en savoir plus.
 
 ## Données collectées
 
@@ -119,9 +74,10 @@ Le check Ambassador n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://www.getambassador.io
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ambassador/images/upstream-req-time.png
-[3]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
-[4]: https://docs.datadoghq.com/fr/help
+[3]: https://www.getambassador.io/docs/latest/topics/running/statistics/#exposing-statistics-via-statsd
+[4]: https://github.com/DataDog/integrations-extras/blob/master/ambassador/metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/
