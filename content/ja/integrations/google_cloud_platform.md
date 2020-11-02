@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/'
+draft: false
 git_integration_title: google_cloud_platform
 has_logo: true
 integration_title: Google Cloud Platform
@@ -93,7 +94,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
     - 複数のサービスアカウントを使用する場合は、上のプロセスを繰り返します。
     - 同じサービスアカウントを使用する場合は、手順 6 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 7 ～ 10 の説明に従って、このファイルを Datadog にアップロードします。
 
-#### コンフィグレーション
+#### コンフィギュレーション
 
 オプションで、**Limit Metric Collection** テキストボックスにタグを入力することで、Datadog にプルされる GCE インスタンスを制限できます。定義されたタグのいずれかに一致するホストだけが Datadog にインポートされます。複数のホストに一致するワイルドカード (1 文字の場合は `?`、複数文字の場合は `*`)、または特定のホストを除外する `!` を使用できます。次の例では、`c1*` サイズのインスタンスは含まれますが、ステージングホストは除外されます。
 
@@ -129,7 +130,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 2. サブスクリプション ID を作成し、先に作成したトピックを選択します。
 3. 配信タイプとして `Push` を選択し、`https://gcp-intake.logs.datadoghq.com/v1/input/<DATADOG_API_KEY>/` と入力します。
 
-    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Push メソッド" style="width:80%;">}}
+  {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Push メソッド" style="width:80%;">}}
 
 4. **サブスクリプションの有効期限**、**承認期限**、**メッセージの保存期間**、**デッドレター** など、他のオプションを設定します。
 5. 最下部にある `作成` を押します。
@@ -143,7 +144,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 2. サブスクリプション ID を作成し、先に作成したトピックを選択します。
 3. 配信タイプとして `Push` を選択し、`https://gcp-intake.logs.datadoghq.eu/v1/input/<DATADOG_API_KEY>/` と入力します。
 
-    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Push メソッド" style="width:80%;">}}
+  {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Push メソッド" style="width:80%;">}}
 
 4. **サブスクリプションの有効期限**、**承認期限**、**メッセージの保存期間**、**デッドレター** など、他のオプションを設定します。
 5. 最下部にある `作成` を押します。
@@ -157,7 +158,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

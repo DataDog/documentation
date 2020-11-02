@@ -22,7 +22,9 @@ further_reading:
     tag: Documentation
     text: Configuration de l'APM ECS Fargate
 ---
-Pour utiliser l'APM, commencez par envoyer vos [traces][1] à Datadog, puis [configurez votre environnement](#configurer-votre-environnement). Vous pouvez envoyer des traces à Datadog de plusieurs manières en fonction de la configuration de votre système : en exécutant l'[Agent Datadog localement](#agent-datadog), [sur des conteneurs](#conteneurs) ou [via un autre type d'environnement](#environnements-supplementaires). Pour consulter l'ensemble des étapes de configuration de l'APM, accédez à la section [Présentation de l'APM][2].
+La configuration de votre application pour envoyer des [traces][1] à Datadog repose sur deux étapes essentielles, à savoir la configuration de l'Agent Datadog et l'[instrumentation de votre application][2].
+
+Selon votre environnement, la configuration de l'Agent Datadog peut se faire de différentes façons. Consultez les instructions d'installation de l'Agent Datadog [en local] (#agent-datadog), [sur des conteneurs](#conteneurs) ou selon [d'autres méthodes](#environnements-supplementaires).
 
 ## Agent Datadog
 
@@ -34,15 +36,19 @@ Pour découvrir l'ensemble des paramètres disponibles pour l'APM, consultez le 
 
 Consultez les instructions de configuration spécifiques pour vous assurer que l'Agent est configuré de manière à recevoir des traces dans un environnement conteneurisé :
 
+### Suivre la documentation intégrée à l'application (conseillé)
+
+Pour obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS), suivez les [instructions de prise en main rapide][7] fournies dans l'application Datadog.
+
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 Remarque : après avoir instrumenté votre application, par défaut, le client de tracing envoie les traces à `localhost:8126`.
 
-## Environnement sans serveur
+## Sans serveur
 
 ### AWS Lambda
 
-Pour configurer l'APM Datadog dans AWS Lambda, consultez la [documentation sur l'intégration Lambda][7]. Vous pouvez également utiliser [AWS X-Ray][8] pour tracer vos fonctions Lambda.
+Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédiée au [tracing de fonctions sans serveur][8].
 
 ### Azure App Service
 
@@ -64,28 +70,33 @@ Le tracing est activé par défaut lors de la surveillance avec Heroku. Pour en 
 
 Le tracing est activé par défaut lors de la surveillance avec Cloud Foundry. Pour en savoir plus sur la configuration du tracing pour Cloud Foundry, consultez la [documentation Cloud Foundry][11].
 
+### AWS Elastic Beanstalk
+
+Le tracing est activé par défaut lors de la surveillance avec AWS Elastic Beanstalk. Pour en savoir plus sur la configuration du tracing pour AWS Elastic Beanstalk, consultez la [documentation dédiée][12].
+
 ## Configurer votre environnement
 
-Pour découvrir comment définir le tag `env` ainsi qu'un tag primaire supplémentaire et filtrer vos données APM, consultez [notre guide dédié][12].
+Pour découvrir comment définir le tag `env` ainsi qu'un tag primaire supplémentaire et filtrer vos données APM, consultez [notre guide dédié][13].
 
 ## Étapes suivantes
 
-Ensuite, [instrumentez votre application][13]. Pour consulter l'ensemble des étapes de configuration de l'APM, accédez à la section [Présentation de l'APM][2].
+Ensuite, [instrumentez votre application][2]. Pour consulter toutes les fonctionnalités et méthodes de configuration de l'APM, accédez à la section [Présentation de l'APM][14].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing/
+[2]: /fr/tracing/setup/
 [3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /fr/tracing/send_traces/agent-apm-metrics/
 [6]: /fr/agent/
-[7]: /fr/integrations/amazon_lambda/#trace-collection
-[8]: /fr/integrations/amazon_xray/#overview
+[7]: https://app.datadoghq.com/apm/docs
+[8]: /fr/tracing/serverless_functions/
 [9]: /fr/infrastructure/serverless/azure_app_services/#overview
 [10]: /fr/agent/basic_agent_usage/heroku/#installation
 [11]: /fr/integrations/cloud_foundry/#trace-collection
-[12]: /fr/tracing/guide/setting_primary_tags_to_scope/#definition
-[13]: /fr/tracing/setup/
+[12]: /fr/integrations/amazon_elasticbeanstalk/
+[13]: /fr/tracing/guide/setting_primary_tags_to_scope/#definition
+[14]: /fr/tracing/

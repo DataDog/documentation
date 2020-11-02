@@ -61,9 +61,13 @@ Keep in mind that `ddtrace` uses native extensions, which must be compiled for A
 
 ### Configure the Function
 
-1. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+1. Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
     ```ruby
     require 'datadog/lambda'
+    
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
 
     def handler(event:, context:)
         Datadog::Lambda.wrap(event, context) do

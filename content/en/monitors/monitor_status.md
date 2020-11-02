@@ -28,7 +28,7 @@ The header contains the monitor's status, time of status, and monitor title. On 
 
 ### Mute
 
-Mute a monitor directly on its status page. Use the **Scope** field to narrow your downtime. See [Downtimes][2] for details on muting multiple scopes or monitors at the same time.
+Use the mute button to mute the entire monitor or partially mute it by setting a **Scope**. The available scopes are based on the monitor's group tags. See [Downtimes][2] for details on muting multiple scopes or monitors at the same time.
 
 **Note**: Muting or unmuting a monitor with the UI deletes all scheduled downtimes associated with that monitor.
 

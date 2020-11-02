@@ -19,21 +19,27 @@ Les filtres d'exclusion d'index ne s'appliquent pas aux vues historiques. Vous n
 
 ### Ajouter des vues historiques
 
-1. **Sélectionnez l'archive** depuis laquelle vous souhaitez réintégrer les événements de log. Seules les archives [configurées pour utiliser la délégation de rôles](#autorisations) peuvent être réintégrées.
+1. **Choisissez la période** pour laquelle vous souhaitez réintégrer des événements de log.
 
-2. **Choisissez la période** pour laquelle vous souhaitez réintégrer des événements de log.
+2. **Saisissez la requête**. La syntaxe de la requête est identique à la syntaxe des [recherches avec le Log Explorer][4]. Elle se limite cependant aux attributs du log, aux [attributs réservés][5] et à la recherche de texte libre dans le message.
 
-3. **Saisissez la requête**. La syntaxe de la requête est identique à la syntaxe des [recherches avec le Log Explorer][4]. Elle se limite cependant aux attributs du log, aux [attributs réservés][5] et à la recherche de texte libre dans le message.
+3. **Sélectionnez l'archive** depuis laquelle vous souhaitez réintégrer les événements de log. Seules les archives [configurées pour utiliser la délégation de rôles](#autorisations) peuvent être réintégrées.
 
-4. **Nommez votre vue historique**. Les noms doivent commencer par une lettre minuscule et ne peuvent contenir que des lettres minuscules, des nombres et le caractère `-` (tiret).
+4. (Facultatif) **Estimez la taille des scans** pour obtenir le volume total de données compressées contenues dans votre archive pour la période sélectionnée.
 
-5. (Facultatif) **Ajoutez une description** pour informer votre équipe de l'objectif de la vue historique.
+5. **Nommez votre vue historique**. Les noms doivent commencer par une lettre minuscule et ne peuvent contenir que des lettres minuscules, des nombres et le caractère `-` (tiret).
 
-{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Réintégration depuis une archive"  style="width:75%;">}}
+6. Définissez le nombre maximal de logs devant être réintégrés dans cette vue historique, **de 1  million à 1 milliard**.
+
+7. Définissez la période de rétention des logs réintégrés (les rétentions disponibles dépendent de votre contrat ; elle est de 15 jours par défaut).
+
+8. (Facultatif) **Recevez une notification** à la fin du processus de réintégration grâce aux [intégrations][6] en utilisant la syntaxe @nom.
+
+{{< img src="logs/archives/log_rehydration_setup.png" alt="Réintégration depuis une archive"  style="width:75%;">}}
 
 #### Réintégration à l'aide d'une requête
 
-Créez des vues historiques avec des requêtes spécifiques (par exemple, sur un ou plusieurs services, endpoints d'URL ou ID clients) pour réduire la durée et les coûts de réintégration de vos logs. Cette méthode est particulièrement utile lorsque vous cherchez à réintégrer des logs sur un large intervalle. Vous pouvez réintégrer jusqu'à 300 millions d'événements de logs par vue historique créée.
+Créez des vues historiques avec des requêtes spécifiques (par exemple, sur un ou plusieurs services, endpoints d'URL ou ID clients) pour réduire la durée et les coûts de réintégration de vos logs. Cette méthode est particulièrement utile lorsque vous cherchez à réintégrer des logs sur un large intervalle. Vous pouvez réintégrer jusqu'à 1 milliard d'événements de logs par vue historique créée.
 
 ### Afficher le contenu d'une vue historique
 
@@ -45,15 +51,15 @@ Une fois le contenu réintégré, la vue historique est considérée comme activ
 
 #### Depuis le Log Explorer
 
-Les équipes peuvent aussi accéder à la vue historique directement dans le Log Explorer, à partir du sélecteur d'index. {{ if .Inner }}Lorsque vous sélectionnez une vue historique, une fenêtre contextuelle s'ouvre pour définir l'intervalle pertinent.{{ end }}
+Les équipes peuvent aussi accéder à la vue historique directement dans le Log Explorer, à partir du sélecteur d'index. Lorsque vous sélectionnez une vue historique, une fenêtre contextuelle s'ouvre pour définir l'intervalle pertinent pour la vue historique sélectionnée.
 
 {{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
 ### Supprimer des vues historiques
 
-Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que vous choisissiez de les supprimer. Vous pouvez indiquer qu'une vue historique doit être supprimée en sélectionnant l'icône de suppression à droite de la vue, puis en confirmant votre choix.
+Les vues historiques continuent à être stockées dans Datadog jusqu'à ce que la période de rétention sélectionnée expire, mais vous pouvez aussi choisir de les supprimer plus tôt si vous n'avez plus besoin de la vue. Vous pouvez indiquer qu'une vue historique doit être supprimée en sélectionnant l'icône de suppression à droite de la vue, puis en confirmant votre choix.
 
-Après 24 heures, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 24 heures pour annuler la suppression.
+Après 1 heure, la vue historique est définitivement supprimée. L'équipe dispose donc d'un délai de 1 heure pour annuler la suppression.
 
 {{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Suppression de vues historiques" video="true"  width="75%" >}}
 
@@ -61,9 +67,9 @@ Après 24 heures, la vue historique est définitivement supprimée. L'équipe d
 
 ### Définir une archive Datadog
 
-Une archive externe doit être configurée afin de pouvoir réintégrer ses données. [Suivez ce guide][6] pour archiver vos logs dans les emplacements disponibles.
+Une archive externe doit être configurée afin de pouvoir réintégrer ses données. [Suivez ce guide][7] pour archiver vos logs dans les emplacements disponibles.
 
-### Permissions
+### Autorisations
 
 Datadog doit avoir un accès en lecture à vos archives afin de réintégrer leur contenu. Cette autorisation peut être modifiée à tout moment.
 
@@ -131,9 +137,10 @@ Afin de réintégrer des événements de log depuis vos archives, Datadog utilis
 
 *Log Rehydration est une marque déposée de Datadog, Inc.
 
-[1]: /fr/logs/explorer
+[1]: /fr/logs/explorer/
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
-[4]: /fr/logs/explorer/search
-[5]: /fr/logs/?tab=ussite#reserved-attributes
-[6]: /fr/logs/archives/
+[4]: /fr/logs/explorer/search/
+[5]: /fr/logs/processing/#reserved-attributes
+[6]: /fr/integrations/#cat-notification
+[7]: /fr/logs/archives/

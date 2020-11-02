@@ -131,6 +131,12 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 
 **注**: インデックスの 1 日の割り当ては、UTC 時間の 2:00pm (CET 4:00pm、EDT 10:00am、PDT 7:00am) に自動的にリセットされます。
 
+日別の割り当てに達したらイベントが生成されます。
+
+{{< img src="logs/indexes/index_quota_event.png" alt="インデックスの割り当て数通知"  style="width:70%;">}}
+
+ [ログ使用ガイド][19]に従って、現在の使用量を監視し、アラートを発動させる方法をご確認ください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -155,3 +161,4 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7]をサ�
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
 [17]: /ja/help/
 [18]: /ja/logs/live_tail/#overview
+[19]: /ja/logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

@@ -4097,6 +4097,12 @@ components:
           $ref: '#/components/schemas/MonitorOptions'
         overall_state:
           $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         query:
           description: The monitor query.
           type: string
@@ -4351,12 +4357,10 @@ components:
           nullable: true
           type: integer
         require_full_window:
-          default: true
           description: "A Boolean indicating whether this monitor needs a full window\
             \ of data before it\u2019s evaluated.\nWe highly recommend you set this\
             \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
-            \ For \u201Con average\u201D\n\u201Cat all times\u201D and \u201Cin total\u201D\
-            \ aggregation, default is true. `False` otherwise."
+            \ Default is false."
           type: boolean
         silenced:
           additionalProperties:
@@ -4811,6 +4815,12 @@ components:
           $ref: '#/components/schemas/MonitorOptions'
         overall_state:
           $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         query:
           description: The monitor query.
           type: string
@@ -11298,9 +11308,12 @@ paths:
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,\
-        \ sources and tags.\n\n**Note**: If the event you\u2019re querying contains\
-        \ markdown formatting of any kind, you may see characters such as %,\\,n in\
-        \ your output."
+        \ sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains\
+        \ markdown formatting of any kind,\nyou may see characters such as `%`,`\\\
+        `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
+        \ recent results. To return additional results,\nidentify the last timestamp\
+        \ of the last result and set that as the `end` query time to\npaginate the\
+        \ results."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.

@@ -16,7 +16,7 @@ further_reading:
 
 Network performance monitoring requires [Datadog Agent v6.14+][1]. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
 
-Supported platforms include:
+Supported **platforms** include:
 
 - Ubuntu 16.04+
 - Debian 9+
@@ -27,9 +27,13 @@ Supported platforms include:
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
 
+Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
+1) Cilium version 1.6 and above, and
+2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
+
 **Note**: Datadog does not currently support Windows and macOS platforms for Network Performance Monitoring.
 
-The following provisioning systems are supported:
+The following **provisioning systems** are supported:
 
 - Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][4]
 - Chef 12.7+: See the [Datadog Chef recipe][5]

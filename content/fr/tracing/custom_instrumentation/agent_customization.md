@@ -11,7 +11,7 @@ aliases:
 ---
 ## Présentation
 
-Les données de performance et les traces que vous collectez avec Datadog peuvent contenir des informations sensibles que vous souhaitez filtrer, nettoyer, masquer ou modifier, ou que vous ne souhaitez pas collecter du tout. De plus, elles peuvent contenir du trafic Synthetics susceptible de fausser les erreurs détectées ou d'empêcher Datadog d'indiquer correctement la santé de vos services.
+Les données de performance et les traces que vous collectez avec Datadog peuvent contenir des informations sensibles que vous souhaitez filtrer, nettoyer, masquer ou modifier, ou que vous ne souhaitez pas collecter du tout. De plus, elles peuvent contenir du trafic Synthetic susceptible de fausser les erreurs détectées ou d'empêcher Datadog d'indiquer correctement la santé de vos services.
 
 L'Agent Datadog et certaines bibliothèques de tracing proposent des options pour remédier à ces problèmes en modifiant ou en supprimant des spans, et plusieurs d'entre elles sont décrites ci-dessous. Cette page couvre plusieurs méthodes courantes pour configurer le traceur et l'Agent et ainsi atteindre ces exigences de sécurité.
 

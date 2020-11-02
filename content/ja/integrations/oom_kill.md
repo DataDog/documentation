@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md'
 display_name: OOM Killer
+draft: false
 git_integration_title: oom_kill
 guid: 4b8e9c18-1a13-43b0-a03c-186eb3221147
 integration_id: oom-kill
@@ -62,17 +63,17 @@ yum install -y kernel-headers-$(uname -r)
         enable_oom_kill: true
     ```
 
-2. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーに `oom_kill.d/conf.yaml` ファイルが存在することを確認し、OOM Killer メトリクスの収集を開始します。
+2. OOM Kill メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `oom_kill.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[oom_kill.d/conf.yaml の例][2]を参照してください。
 
-3. [Agent を再起動します][2]。
+3. [Agent を再起動します][3]。
 
 ### Helm のインテグレーション
 
-[Datadog Helm チャート][3]を使用し、`values.yaml` ファイルで `datadog.systemProbe` と `datadog.systemProbe.enableOOMKill` のパラメータが有効であることを確認します。
+[Datadog Helm チャート][4]を使用し、`values.yaml` ファイルで `datadog.systemProbe` と `datadog.systemProbe.enableOOMKill` のパラメータが有効であることを確認します。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `oom_kill` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `oom_kill` を探します。
 
 ## 収集データ
 
@@ -90,11 +91,12 @@ OOM Killer チェックでは、強制終了されたプロセス ID とプロ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/helm/charts/tree/master/stable/datadog
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/oom_kill.d/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/oom_kill/metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/
