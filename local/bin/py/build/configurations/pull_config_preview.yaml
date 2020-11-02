@@ -170,6 +170,7 @@
           - /tracing/ruby/
           - /tracing/languages/ruby/
           - /tracing/setup/ruby/
+          - /tracing/setup_overview/ruby/
           - /agent/apm/ruby/
 
   - repo_name: datadog-serverless-functions
