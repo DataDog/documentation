@@ -12,7 +12,7 @@ private: true
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda Log Collection Troubleshooting Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-multiple-logs-with-pagination" >}}Collect multiple logs with the Log List API and pagination{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac" >}}How to set up Logs RBAC{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-restrict-sensitive" >}}How to mitigate sensitive data leaking with Query-Based Access Control{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-parsing-best-practice" >}}Log Parsing Best Practices{{< /nextlink >}}
     {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Setting File Permissions for Rotating Logs (Linux){{< /nextlink >}}
