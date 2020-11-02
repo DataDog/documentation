@@ -2,13 +2,12 @@
 title: Java Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the Java tracer'
-aliases:
-  - /tracing/compatibility_requirements/java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 aliases:
     - /tracing/compatibility_requirements/
+    - /tracing/compatibility_requirements/java
 further_reading:
     - link: 'tracing/setup/java'
       tag: 'Documentation'
