@@ -20,5 +20,4 @@ private: true
     {{< nextlink href="/logs/guide/build-custom-reports-using-log-analytics-api/?tab=table" >}}Build custom reports using Log Analytics API{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Send AWS services logs with the Datadog Lambda function{{< /nextlink >}}
     {{< nextlink href="/logs/guide/enrichment-tables/" >}}Add Custom Metadata to Logs with Enrichment Tables{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}Restrict Access to Sensitive Data with Query Based Access Controls{{< /nextlink >}}
 {{< /whatsnext >}}
