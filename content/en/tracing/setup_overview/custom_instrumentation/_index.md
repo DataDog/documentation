@@ -19,7 +19,7 @@ further_reading:
     - link: 'tracing/connect_logs_and_traces'
       text: 'Connect your Logs and Traces together'
     - link: 'tracing/opentracing'
-      text: 'Implement Opentracing across your applications'
+      text: 'Implement OpenTracing across your applications'
     - link: 'tracing/visualization/'
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
@@ -30,7 +30,7 @@ Custom instrumentation allows programmatic creation, modification, or deletion o
 
 Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
-If you’re already using OpenTracing, choose your language below and proceed to the OpenTracing section.
+If you’re already using OpenTracing or OpenTelemetry, see [OpenTracing and OpenTelemetry][3].
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
@@ -44,3 +44,4 @@ If you’re already using OpenTracing, choose your language below and proceed to
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
 [2]: /tracing/visualization
+[3]: /tracing/setup_overview/open_standards/

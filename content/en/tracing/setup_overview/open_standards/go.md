@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation
+title: Go Open Standards
 kind: documentation
 description: 'Open Standards for Go'
 code_lang: go

@@ -1,10 +1,10 @@
 ---
-title: Open Standards
+title: OpenTracing and OpenTelemetry
 kind: documentation
-description: 'Use Open standards to generate your application traces'
+description: 'Use open standards to generate your application traces'
 aliases:
 ---
-Datadog supports a variety of Open Standards, including OpenTracing and OpenTelemetry. For language specific instructions, please select your language below:
+Datadog supports a variety of open standards, including OpenTracing and OpenTelemetry. For language-specific instructions, select your language:
 
 {{< partial name="apm/apm-opentracing.html" >}}
 
