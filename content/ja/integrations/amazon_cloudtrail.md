@@ -49,7 +49,6 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
     | `s3:ListBucket`             | CloudTrail バケット内のオブジェクトをリストして、有効な証跡を取得します。|
     | `s3:GetBucketLocation`      | 証跡をダウンロードするバケットのリージョンを取得します。               |
     | `s3:GetObject`              | 有効な証跡を取得します。                                     |
-    | `s3:ListObjects`            | バケット内のオブジェクトの一部またはすべて（最大 1,000）を返します。   |
 
     このポリシーを Datadog IAM の既存のメインポリシーに追加します。
 
@@ -60,7 +59,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
         "Principal": {
             "AWS": "<ARN_FROM_MAIN_AWS_INTEGRATION_SETUP>"
         },
-        "Action": ["s3:ListBucket", "s3:GetBucketLocation", "s3:GetObject", "s3:ListObjects"],
+        "Action": ["s3:ListBucket", "s3:GetBucketLocation", "s3:GetObject"],
         "Resource": [
             "arn:aws:s3:::<YOUR_S3_CLOUDTRAIL_BUCKET_NAME>",
             "arn:aws:s3:::<YOUR_S3_CLOUDTRAIL_BUCKET_NAME>/*"
