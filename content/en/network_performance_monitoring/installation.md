@@ -14,7 +14,9 @@ further_reading:
       text: 'Network Widget'
 ---
 
-Network performance monitoring requires [Datadog Agent v6.14+][1]. Since this product is built on eBPF, Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
+Network performance monitoring requires [Datadog Agent v6.14+][1]. 
+
+**For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
 
 Supported **platforms** include:
 
@@ -26,6 +28,8 @@ Supported **platforms** include:
 - Amazon Linux 2
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6.
+
+**For Windows OS:** Data collection is done using a Windows driver, which is now available in private beta for version 2016 or later. To request access, please fill out [this form][8]. 
 
 Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
 1) Cilium version 1.6 and above, and
@@ -331,3 +335,4 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [5]: https://github.com/DataDog/chef-datadog
 [6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: https://forms.gle/ijBfL8Zu34BgQw8KA
