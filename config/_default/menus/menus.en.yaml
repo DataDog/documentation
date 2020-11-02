@@ -1248,7 +1248,7 @@ main:
     parent: tracing_setup_overview_setup
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
-  - name: Open Standards
+  - name: OpenTracing and OpenTelemetry
     url: tracing/setup_overview/open_standards/java
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
