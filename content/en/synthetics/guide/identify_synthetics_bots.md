@@ -35,7 +35,7 @@ You can use the [**Synthetic Monitoring IP ranges**][1] corresponding to each Da
 
 {{< site-region region="eu" >}}
 
-You can use the [IP addresses][1] corresponding to each Datadog managed location.
+You can use the [**Synthetic Monitoring IP ranges**][1] corresponding to each Datadog managed location.
 
 [1]: https://ip-ranges.datadoghq.eu/synthetics.json
 
