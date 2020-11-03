@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloudsql/'
+draft: false
 git_integration_title: google_cloudsql
 has_logo: true
 integration_title: Google CloudSQL
@@ -16,7 +17,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloudsql
 public_title: Datadog-Google CloudSQL インテグレーション
-short_description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡する。
+short_description: パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。
 version: '1.0'
 ---
 ## 概要
@@ -34,9 +35,9 @@ Google CloudSQL からメトリクスを取得して、以下のことができ�
 
 #### メトリクスの収集
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### 構成
+#### コンフィギュレーション
 
 カスタム CloudSQL ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
@@ -50,7 +51,7 @@ Google Cloud SQL のログは Stackdriver 経由で収集され、HTTP プッシ
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

@@ -86,6 +86,8 @@ Informez votre équipe par l'intermédiaire des intégrations connectées en uti
 
 Consultez la [liste des intégrations][11] pouvant envoyer des notifications à votre équipe.
 
+**Remarque** : les handles comprenant des parenthèses (`(`, `)`) ne sont pas pris en charge. Lorsqu'un handle comprenant des parenthèses est utilisé, il n'est pas analysé et aucune alerte n'est créée.
+
 ### Via des modifications
 
 Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][12] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes ainsi qu'aux services de discussion à propos de ces événements.
@@ -134,6 +136,20 @@ Par exemple, pour un tag `dot.key.test:five` et un monitor regroupé selon `dot.
 
 ```text
 {{[dot.key.test].name}}
+```
+
+#### Variables des facettes de log
+
+Les log monitors peuvent utiliser des facettes en tant que variables si le monitor est regroupé selon les facettes.
+Par exemple, si votre log monitor est regroupé en fonction de la facette `@facet`, la variable est :
+
+```text
+{{@nom.facette}}
+```
+
+Si votre facette comporte des points, placez-la entre crochets. Par exemple :
+```text
+{{[@facette.avec.point].nom}}
 ```
 
 ### Variables conditionnelles

@@ -399,12 +399,13 @@ spec:
 
 Exemples supplémentaires :
 
-| **Chaîne brute**           | **Pattern**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
+| **Chaîne brute**           | **Pattern**                                   |
+|--------------------------|-----------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
+| 20180228                 | `\d{8}`                                       |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 
 **Remarque** : les expressions régulières pour les logs multiligne doivent commencer au **début** d'un log. Les expressions ne peuvent pas être recherchées en milieu de ligne.
 
@@ -513,6 +514,7 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
+
 
 [1]: /fr/agent/faq/commonly-used-log-processing-rules
 [2]: https://docs.datadoghq.com/fr/logs/explorer/#overview

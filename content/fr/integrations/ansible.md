@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez les tâches ayant échoué et consultez les exécutions de playbook dans votre flux d'événements.
 doc_link: 'https://docs.datadoghq.com/integrations/ansible/'
+draft: false
 git_integration_title: ansible
 has_logo: true
 integration_title: Ansible
@@ -31,31 +32,31 @@ Installez l'intégration de rappel Datadog/Ansible pour :
 
 Pour obtenir davantage d'informations sur l'utilisation des intégrations Datadog avec Ansible, lisez l'article de blog [Ansible et Datadog : surveillez votre automatisation et automatisez votre surveillance][1] (en anglais).
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-1. Assurez-vous que les bibliothèques python pré-requises sont installées sur le serveur :
+1. Assurez-vous que les bibliothèques Python pré-requises sont installées sur le serveur :
 
     - datadogpy
     - pyyaml (installer avec `pip install pyyaml`)
-    - Pour les utilisateurs Mac OS X : si vous exécutez la version 2.7.10 ou une version antérieure de Python installée sur l'OS, effectuez une mise à niveau vers une nouvelle version d'OpenSSL - `pip install pyopenssl idna`.
+    - Pour les utilisateurs Mac OS X : si vous utilisez la version 2.7.10 ou une version antérieure de Python installée sur l'OS, installez une version plus récente d'OpenSSL avec `pip install pyopenssl idna`.
 
 2. Dupliquez le [référentiel GitHub ansible-datadog-callback][2].
 3. Copiez `datadog_callback.py` dans votre répertoire de rappel de playbook (par défaut, callback_plugins/ dans le répertoire racine de votre playbook). Créez ce répertoire s'il n'existe pas.
 4. Créez un fichier `datadog_callback.yml` dans le même répertoire que `datadog_callback.py` et définissez son contenu avec votre clé d'API tel que suit :
 
-        ```yaml
-        api_key: <VOTRE_CLÉ_API_DATADOG>
-        ```
 
-5. Vous devriez commencer à voir les événements et les métriques Ansible apparaître dans Datadog durant l'exécution de votre playbook.
+        api_key: <VOTRE_CLÉ_API_DATADOG>
+
+
+5. Les événements et les métriques Ansible apparaissent dans Datadog après l'exécution de votre playbook.
 
 Pour installer l'Agent Datadog en utilisant Ansible, consultez la [documentation d'installation][3].
 
 ### Collecte de logs
 
-[Consultez l'exemple de playbook][4] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs à l'aide d'Ansible.
+[Consultez l'exemple de playbook][4] pour découvrir comment installer l'Agent Datadog en activant la collecte de logs via Ansible.
 
 ## Données collectées
 
@@ -65,7 +66,7 @@ Pour installer l'Agent Datadog en utilisant Ansible, consultez la [documentation
 
 ### Événements
 
-L'intégration Ansible n'inclut aucun événement.
+L'intégration [ansible-datadog-callback][2] capture les événements Ansible issus des exécutions de votre playbook.
 
 ### Checks de service
 

@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
   logs:
