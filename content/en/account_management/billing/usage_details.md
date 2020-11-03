@@ -28,6 +28,17 @@ In product specific tabs, you will see your month-to-date usage of the products 
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
+When possible, the default data shown in this section is "Billable" usage, which is estimated usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage, which is usage above your prepaid commitments and allocations.
+
+{{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
+
+Switching to the "All" view will show all usage, including non-billable usage such as product trials.
+
+{{< img src="account_management/billing/usage-details-v2-08.png" alt="Usage Summary - All" >}}
+
+If "Billable" usage is not available, the data shown reflects "All" usage and the toggle to switch views will not be available.
+
+
 ## Overall Usage
 
 This section contains hourly, daily, monthly, and annual usage. In the "All" tab, you will see hourly, daily, monthly, and annual usage for:
@@ -64,6 +75,7 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 * Azure Hosts
 * GCP Hosts
 * vSphere Hosts
+* Azure App Services
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 
