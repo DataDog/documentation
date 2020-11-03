@@ -28,11 +28,7 @@ If you haven’t already, set up the [Amazon Web Services][2] integration first.
 cloudtrail:LookupEvents
 ```
 
-## Troubleshooting 
-
-If you see the error `assumed-role/DatadogIntegrationRole/DatadogAWSIntegration is not authorized to perform: cloudtrail:LookupEvents`, you can disregard it.
-
-Need help? Contact our awesome [support team][3], or check out discussions going on in the [#serverless][4] channel in the [Datadog Slack community][5].
+If you have already added the permission, but you still don't see any event populated for any of your Lambda functions, please contact our awesome [support team][3] to double check the feature enablement.
 
 ## Further Reading
 
@@ -42,5 +38,3 @@ Need help? Contact our awesome [support team][3], or check out discussions going
 [1]: https://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/#setup
 [3]: /help/
-[4]: https://datadoghq.slack.com/archives/CFDPB83M4
-[5]: https://chat.datadoghq.com/
