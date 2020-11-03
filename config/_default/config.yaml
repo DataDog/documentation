@@ -10,8 +10,8 @@ publishDir: "./public"
 
 # taxonomies
 taxonomies:
-  tag: "tags"
-  category: "categories"
+  #tag: "tags"
+  #category: "categories"
   "video-category": "video-categories"
 
 # language
