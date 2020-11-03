@@ -43,7 +43,7 @@ If "Billable" usage is not available, the data shown reflects "All" usage and th
 
 This section contains hourly, daily, monthly, and annual usage. In the "All" tab, you will see hourly, daily, monthly, and annual usage for:
 
-| Column                   | Description                                                                                                                    |
+| Graph                    | Description                                                                                                                    |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | Infra. Hosts             | Each bar shows the 99th percentile of all distinct infrastructure hosts for that hour/day/week.                                  |
 | Containers               | Each bar shows the high watermark of all distinct containers for that hour/day/week.                                             |
@@ -64,11 +64,11 @@ This section contains hourly, daily, monthly, and annual usage. In the "All" tab
 | Synthetic API Tests      | Each bar shows the sum of all Synthetic API tests over that hour/day/week. The line shows the running total of Synthetic API tests|
 | Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over that hour/day/week. The line shows the running total of Synthetic Browser Tests |  | RUM Sessions             | Shows the sum of all distinct RUM sessions over that hour/day/week. The line shows the running total of RUM Sessions |
 
-{{< img src="account_management/billing/usage-details-v2-09.png" alt="Hourly Usage - Dual Axis Graph" >}}
-
-Some graphs will contain both bars for the sum of usage in an hour/day/week and a line that shows the running or cummulative total. The units for the bars are on the left-hand y-axis of the graph while the units for the line are on the right-hand y-axis of the graph.
-
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
+
+Some graphs contain both bars for sums of hourly/daily/weekly usage and a line for the running or cummulative total. The units for the bars are on the left-hand side of the graph while the units for the line is on the right-hand side. 
+
+{{< img src="account_management/billing/usage-details-v2-09.png" alt="Hourly Usage - Dual Axis Graph" >}}
 
 In product specific tabs, you will see your hourly, daily, monthly, and annual usage of the products in that product category. In the Infrastructure tab, you will also see a breakdown of the **Infra Hosts** graph by host type:
 
