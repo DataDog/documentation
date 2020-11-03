@@ -1,0 +1,43 @@
+{{ $scopable_permissions := slice "logs_read_data" "logs_write_exclusion_filters" "logs_write_processors" "logs_read_archives" "logs_read_index_data" }}
+{{ $is_scopable := false }}
+{{ $hide_scopable_column := false }}
+{{ $permission_group := .group }}
+{{ $permissions_data := .data }}
+
+{{ if eq $permission_group "General" }}
+  {{ $hide_scopable_column = true }}
+{{ else }}
+  {{ $hide_scopable_column = false }}
+{{ end }}
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th {{ if $hide_scopable_column }}class="d-none"{{ end }}>Scopable</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $permissions_data -}}
+    {{- if in $scopable_permissions .attributes.name -}}
+        {{- $is_scopable = true -}}
+      {{- else -}}
+        {{- $is_scopable = false -}}
+      {{- end -}}
+    <tr>
+      <td>
+        {{- if eq $permission_group "Logs" -}}
+          <a href="#{{ .attributes.name }}">
+            <code>{{- .attributes.name -}}</code>
+          </a>
+        {{- else -}}
+          <code>{{- .attributes.name -}}</code>
+        {{- end -}}
+      </td>
+      <td>{{- .attributes.description -}}</td>
+      <td {{ if $hide_scopable_column }}class="d-none"{{ end }}>{{- $is_scopable -}}</td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>

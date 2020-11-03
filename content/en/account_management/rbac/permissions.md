@@ -20,10 +20,7 @@ Once your roles are created, assign or remove permission to this role directly b
 
 General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
 
-| Permission Name | Description                                                                                                                                                                                                                                                                                           |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| admin           | This permission gives to the role the ability to view and edit everything in your Datadog organization that does not have an explicitly defined permission. This includes billing and usage, API keys, and organization management. This permission is inclusive of all Standard Access permissions. |
-| standard        | This permission gives to the role the ability to view and edit components in your Datadog organization that do not have explicitly defined permissions. This includes APM, Events, and other non-Account Management functionality.                                                                    |
+{{< permissions group="General" >}}
 
 **Note**: There is no `read-only` permission as it is defined by the lack of both the `admin` and `standard` permissions for a role.
 

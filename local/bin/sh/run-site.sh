@@ -17,7 +17,7 @@ if [ ${RUN_SERVER} = true ]; then
     args="${args} --token 'false'"
 	fi
 
-  # update_pre_build.py "${args}"
+  update_pre_build.py "${args}"
 
 	# rbac permissions 
 	if [ ${PULL_RBAC_PERMISSIONS} == true ]; then

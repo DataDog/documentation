@@ -1,24 +1,24 @@
-{{ $permissions := $.Site.Data.permissions }}
+{{ $permissions_data := $.Site.Data.permissions }}
+{{ $single_permission_group := .Get "group" }}
 
-{{- range $group, $value := $permissions -}}
-  <h2>{{ $group }}</h2>
-  <p>Find below the list of permissions for the {{ lower $group }} assets:</p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Scopable</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{- range $value -}}
-        <tr>
-          <td><code>{{- .attributes.name -}}</code></td>
-          <td>{{- .attributes.description -}}</td>
-          <td>tbd</td>
-        </tr>
+{{ if ne $single_permission_group nil }}
+  {{ $permissions_data := index $permissions_data $single_permission_group }}
+  {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
+{{ else }}
+  {{- range $group_name, $group_permissions_data := $permissions_data -}}
+    {{- if ne $group_name "General" -}}
+      {{- $group_id := $group_name -}}
+
+      {{- if in $group_name " " -}}
+        {{- $group_id = split $group_name " " -}}
+        {{- $group_id = delimit $group_id "-" -}}
       {{- end -}}
-    </tbody>
-  </table>
+      <h2 id="{{ lower $group_id }}">
+        {{- $group_name -}}
+      </h2>
+      <p>Find below the list of permissions for the {{ lower $group_name }} assets:</p>
+      {{ partial "rbac-permissions-table.html" (dict "data" $group_permissions_data "group" $group_name) }}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
+
