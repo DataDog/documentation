@@ -28,7 +28,7 @@ further_reading:
 
 ## Compatibility Requirements
 
-The .NET Tracer supports automatic instrumentation on .NET 5 (starting with .NET Tracer `1.20.0`), LTS .NET Core versions 2.1 and 3.1, and Microsoft-deprecated .NET Core versions 2.0, 2.2 and 3.0.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][2]. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Getting started
 
