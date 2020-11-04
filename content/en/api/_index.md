@@ -14,7 +14,9 @@ further_reading:
 
 The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call the API, uses status codes to indicate the success or failure of requests, returns JSON from all requests, and uses standard HTTP response codes. Use the Datadog API to access the Datadog platform programmatically.
 
-Authenticate to the API with an [API key][1], and depending on the endpoint, and [Application key][2].
+### Getting Started
+
+Authenticate to the API with an [API key][1], and depending on the endpoint, an [Application key][2].
 
 By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][3] languages in each endpoint to see code examples from that library:
 
@@ -22,7 +24,7 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 </br>
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][4]: `brew install coreutils`
 
-To quickly get started with the Datadog API, see [Using the API][5], or [![Run in Postman][6]](https://app.getpostman.com/run-collection/39109d43cad6e7fb423b)
+To quickly get started with the Datadog API, see [Using the API][5], or [![Run in Postman][6]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
 
 Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 
