@@ -4,7 +4,7 @@ aliases:
 disable_edit: true
 kind: documentation
 rule_category:
-  - Détection de logs
+  - Log Detection
 scope: gcp.service.account
 security: compliance
 source: gcp

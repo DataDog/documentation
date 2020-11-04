@@ -13,12 +13,14 @@ further_reading:
 kind: documentation
 title: Collecte de traces iOS
 ---
+<div class="alert alert-info">La collecte de traces iOS est en bêta publique. Si vous avez des questions, contactez notre <a href="https://docs.datadoghq.com/help/" target="_blank">équipe d'assistance</a>.</div>
+
 Envoyez des [traces][1] à Datadog à partir de vos applications iOS avec la [bibliothèque de tracing côté client `dd-sdk-ios` de Datadog][2]. Vous pourrez notamment :
 
-* créer des [spans][3] personnalisées pour diverses opérations dans votre application ;
-* envoyer des logs pour chaque span individuellement ;
-* utiliser des attributs par défaut et ajouter des attributs personnalisés à chaque span ;
-* optimiser l'utilisation du réseau grâce aux envois groupés automatiques.
+* Créer des [spans][3] personnalisées pour diverses opérations dans votre application
+* Envoyer des logs pour chaque span individuellement
+* Utiliser des attributs par défaut et ajouter des attributs personnalisés à chaque span
+* Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
 
 ## Configuration
 
@@ -144,7 +146,9 @@ Datadog.initialize(
     )
     ```
 
-8. (Facultatif) Pour distribuer des traces entre vos environnements, par exemple frontend/backend, injectez le contexte du traceur dans la requête client :
+8. (Facultatif) Distribuez vos traces entre vos environnements (par exemple frontend/backend). Vous pouvez le faire manuellement ou en tirant parti de notre instrumentation automatique.
+
+    * Pour propager manuellement la trace, injectez le contexte de span dans les en-têtes `URLRequest` :
 
     ```swift
     import Datadog
@@ -160,7 +164,22 @@ Datadog.initialize(
         request.addValue(value, forHTTPHeaderField: headerField)
     }
     ```
-    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Si votre backend est également instrumenté avec [l'APM et le tracing distribué de Datadog][10], vous verrez la trace frontend/backend entière sur le dashboard Datadog. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire de complétion.
+    Des en-têtes de tracing supplémentaires seront alors définis sur votre requête, afin que votre backend puisse procéder à l'extraction et poursuivre le tracing distribué. Une fois la requête terminée, appelez `span.finish()` dans un gestionnaire de complétion. Si votre backend est également instrumenté avec [l'APM et le tracing distribué de Datadog][10], vous verrez la trace frontend/backend complète sur le dashboard Datadog.
+
+    * Pour que le SDK trace automatiquement toutes les requêtes réseau vers des hosts donnés, spécifiez le tableau `tracedHosts` lors de l'initialisation de Datadog :
+
+    ```swift
+    Datadog.initialize(
+        appContext: .init(),
+        configuration: Datadog.Configuration
+            .builderUsing(clientToken: "<client_token>", environment: "<environment_name>")
+            .set(tracedHosts: ["example.com", "api.yourdomain.com"])
+            .build()
+    )
+    ```
+    Vous pourrez ainsi tracer toutes les requêtes acheminées vers `example.com` et `api.yourdomain.com` (par exemple, `https://api.yourdomain.com/v2/users` ou `https://subdomain.example.com/image.png`).
+
+    **Remarque** : l'instrumentation automatique prend uniquement en charge les requêtes effectuées avec `URLSession.dataTask(request:completionHandler:)` et `URLSession.dataTask(url:completionHandler:)`. Elle utilise le swizzling `URLSession`. Ce swizzling est entièrement facultatif : si vous spécifiez pas `tracedHosts`, aucun swizzling n'est appliqué.
 
 
 ## Collecte groupée de spans

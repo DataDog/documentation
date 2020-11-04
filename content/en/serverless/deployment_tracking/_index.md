@@ -28,6 +28,8 @@ If you haven’t already, set up the [Amazon Web Services][2] integration first.
 cloudtrail:LookupEvents
 ```
 
+If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, please reach out to our [support team][3].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -35,3 +37,4 @@ cloudtrail:LookupEvents
 
 [1]: https://app.datadoghq.com/functions
 [2]: /integrations/amazon_web_services/#setup
+[3]: /help/

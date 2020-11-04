@@ -13,7 +13,7 @@ further_reading:
 ---
 ## Présentation
 
-L'Agent est un logiciel léger installé sur vos hosts. Il transmet les métriques et les événements à partir de votre host à Datadog via les [intégrations][1], [DogStatsD][2] ou l'[API][3]. Avec une configuration supplémentaire, l'Agent peut transmettre des [live processes][4], [logs][5] et [traces][6].
+L'Agent est un logiciel léger installé sur vos hosts. Il transmet les métriques et les événements issus de votre host à Datadog via les [intégrations][1], [DogStatsD][2] ou l'[API][3]. L'Agent peut également être configuré pour transmettre des [live processes][4], des [logs][5] et des [traces][6].
 
 ## Implémentation
 
@@ -29,9 +29,9 @@ L'Agent peut être installé sur de nombreuses plateformes différentes, directe
 
 {{< site-region region="us" >}}
 
-Le [fichier de configuration principal][1] de l'Agent est `datadog.yaml`. L'unique paramètre requis est votre [clé d'API Datadog][2] qui est utilisé pour associer les données de votre Agent à votre organisation. Consultez le [fichier d'exemple config_template.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Le [fichier de configuration principal][1] de l'Agent est `datadog.yaml`. L'unique paramètre requis est votre [clé d'API Datadog][2], qui est utilisée pour associer les données de votre Agent à votre organisation. Consultez le [fichier d'exemple config_template.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
-Pour l'[Agent conteneur][4], les options de configuration de `datadog.yaml` sont transmises avec les [variables d'environnement][5]. Par exemple, la variable d'environnement de la clé d'API Datadog est `DD_API_KEY`.
+Pour l'[Agent de conteneur][4], les options de configuration de `datadog.yaml` sont transmises via des [variables d'environnement][5]. Par exemple, la variable d'environnement de la clé d'API Datadog est `DD_API_KEY`.
 
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file

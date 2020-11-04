@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Recueillez une multitude de métriques GCP et visualisez vos instances sur une host map.
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/'
+draft: false
 git_integration_title: google_cloud_platform
 has_logo: true
 integration_title: Google Cloud Platform
@@ -47,11 +48,11 @@ L'intégration GCP de Datadog est conçue pour recueillir <a href="https://cloud
 | [Cloud Run][15]                   | Plateforme de calcul gérée qui exécute des conteneurs sans état via HTTP    |
 | [Cloud Tasks][16]                 | Files d'attente de tâches distribuées                                                 |
 | [Cloud TPU][17]                   | Entraînement et exécution de modèles d'apprentissage automatique                                   |
-| [Compute Engine][18]              | Machines virtuelles puissantes                                       |
+| [Compute Engine][18]              | Machines virtuelles hautes performances                                       |
 | [Container Engine][19]            | Kubernetes, géré par Google                                           |
 | [Datastore][20]                   | Base de données NoSQL                                                          |
 | [Firebase][21]                    | Plateforme mobile pour le développement d'applications                             |
-| [Functions][22]                   | Plateforme d'informatique sans serveur pour la création de microservices basés sur des événements              |
+| [Functions][22]                   | Plateforme sans serveur pour la création de microservices basés sur des événements              |
 | [Machine Learning][23]            | Services d'apprentissage automatique                                               |
 | [Pub/Sub][24]                     | Service de messagerie en temps réel                                             |
 | [Spanner][25]                     | Service de base de données relationnelle à évolutivité horizontale et à cohérence forte |
@@ -59,7 +60,7 @@ L'intégration GCP de Datadog est conçue pour recueillir <a href="https://cloud
 | [Storage][27]                     | Stockage d'objets unifié                                                  |
 | [VPN][28]                         | Fonctionnalité de réseau géré                                           |
 
-## Implémentation
+## Configuration
 
 ### Collecte de métriques
 
@@ -67,7 +68,9 @@ L'intégration GCP de Datadog est conçue pour recueillir <a href="https://cloud
 
 L'intégration Google Cloud <> Datadog utilise des comptes de service pour créer une connexion API entre Google Cloud et Datadog. Vous trouverez ci-dessous les instructions à suivre pour créer un compte de service et fournir à Datadog les identifiants du compte de service afin de commencer à effectuer des appels d'API en votre nom.
 
-1. Consultez la [page des identifiants Google Cloud][29] pour le projet Google Cloud que vous souhaitez configurer dans le cadre de l'intégration Datadog.
+**Remarque** : vous devez avoir activé [Google Cloud Billing][29], l'[API Stackdriver Monitoring][30], l'[API Compute Engine][31] et l'[API Cloud Asset][32] pour le ou les projets que vous souhaitez surveiller.
+
+1. Consultez la [page des identifiants Google Cloud][33] pour le projet Google Cloud que vous souhaitez configurer dans le cadre de l'intégration Datadog.
 2. Cliquez sur _Create credentials_ et sélectionnez _Service account key_.
 
     {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="paramètres" popup="true" style="width:80%;">}}
@@ -79,7 +82,7 @@ L'intégration Google Cloud <> Datadog utilise des comptes de service pour crée
    **Remarque** : vous devez être un administrateur clé de compte de service pour sélectionner les rôles Compute Engin et Cloud Asset. Tous les rôles sélectionnés permettent à Datadog de recueillir des métriques, des tags, des événements et des étiquettes utilisateur à votre place.
 
 6. Appuyez sur **CREATE KEY**, sélectionnez _JSON_ comme type de clé, puis appuyez sur _create_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin pour la suite.
-7. Accédez au [carré d'intégration Datadog/Google Cloud][30].
+7. Accédez au [carré d'intégration Datadog/Google Cloud][34].
 8. Dans l'onglet **Configuration**, sélectionnez _Upload Key File_ pour intégrer ce projet à Datadog.
 9. Si vous le souhaitez, vous pouvez utiliser des tags pour exclure des hosts de cette intégration. Vous trouverez des instructions détaillées à ce sujet [ci-dessous](#configuration).
 
@@ -91,8 +94,6 @@ L'intégration Google Cloud <> Datadog utilise des comptes de service pour crée
     - Répétez les étapes ci-dessus pour utiliser plusieurs comptes de service.
     - Utilisez le même compte de service en modifiant la valeur de `project_id` dans le fichier JSON téléchargé à l'étape 6. Importez ensuite le fichier dans Datadog, tel que décrit aux étapes 7 à 10.
 
-Vous devez avoir activé [Google Cloud Billing][31], l'[API Stackdriver Monitoring][32], l'[API Compute Engine][33] et l'[API Cloud Asset][34] pour le ou les projets que vous souhaitez surveiller.
-
 #### Configuration
 
 Si vous le souhaitez, vous pouvez limiter les instances GCE récupérées par Datadog en saisissant des tags dans la zone de texte **Limiter la collecte de métriques**. Seuls les hosts qui correspondent à l'un des tags définis sont alors importés dans Datadog. Vous pouvez utiliser des wildcards (`?` pour un caractère unique, `*` pour plusieurs caractères) pour inclure un grand nombre de hosts, ou encore `!` pour exclure certains hosts. L'exemple ci-dessous englobe toutes les instances de taille `c1*`, mais exclut les hosts de type staging :
@@ -103,9 +104,9 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ### Collecte de logs
 
-Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être utilisé pour la collecte locale de logs. Les logs de service GCP sont recueillis via Stackdriver avant d'être envoyés à un Cloud Pub/Sub grâce à un redirecteur Push HTTP. La collecte de logs repose sur cinq étapes :
+Pour les applications exécutées sous GCE ou GKE, l'Agent Datadog peut être utilisé pour la collecte de logs en local. Les logs de service GCP sont recueillis via Stackdriver avant d'être envoyés à un Cloud Pub/Sub grâce à un redirecteur Push HTTP. La collecte de logs repose sur cinq étapes :
 
-1. Si vous ne l'avez pas déjà fait, configurez [d'abord l'intégration Google Cloud Platform](#installation).
+1. Si vous ne l'avez pas déjà fait, configurez d'abord l'[intégration Google Cloud Platform](#installation).
 2. [Créer un Cloud Pub/Sub](#creer-un-cloud-pub-sub)
 3. [Configurer le Pub/Sub pour transmettre les logs à Datadog](#configurer-le-pub-sub-pour-transmettre-les-logs-a-datadog)
 4. [Configurer les exportations depuis les logs Stackdriver vers le Pub/Sub](#exporter-les-logs-de-stackdriver-vers-le-pub-sub).
@@ -129,9 +130,9 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
 2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
 3. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>/`.
 
-    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
+  {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
 
-4. Configurez n'importe quelle option supplémentaire, telle que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
+4. Configurez des options supplémentaires si vous le souhaitez, telles que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
 5. Cliquez sur `Create` en bas.
 
 Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
@@ -143,9 +144,9 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
 3. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DATADOG>/`.
 
-    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
+  {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
 
-4. Configurez n'importe quelle option supplémentaire, telle que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
+4. Configurez des options supplémentaires si vous le souhaitez, telles que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
 5. Cliquez sur `Create` en bas.
 
 {{% /tab %}}
@@ -157,7 +158,7 @@ Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre �
 2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
@@ -244,12 +245,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][41].
 [26]: https://docs.datadoghq.com/fr/integrations/google_stackdriver_logging/
 [27]: https://docs.datadoghq.com/fr/integrations/google_cloud_storage/
 [28]: https://docs.datadoghq.com/fr/integrations/google_cloud_vpn/
-[29]: https://console.cloud.google.com/apis/credentials
-[30]: http://app.datadoghq.com/account/settings#integrations/google_cloud_platform
-[31]: https://support.google.com/cloud/answer/6293499?hl=en
-[32]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
-[33]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[34]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[29]: https://support.google.com/cloud/answer/6293499?hl=en
+[30]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
+[31]: https://console.cloud.google.com/apis/library/compute.googleapis.com
+[32]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[33]: https://console.cloud.google.com/apis/credentials
+[34]: http://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [35]: https://cloud.google.com/pubsub/quotas#quotas
 [36]: https://console.cloud.google.com/cloudpubsub/topicList
 [37]: https://console.cloud.google.com/logs/viewer

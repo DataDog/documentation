@@ -353,7 +353,7 @@ var log = new LoggerConfiguration()
 For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
 
 ```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
