@@ -2,7 +2,7 @@
 title: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
 kind: guide
 further_reading:
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
     text: Comparer la latence d'un service avec celle de la semaine précédente
   - link: /tracing/guide/slowest_request_daily/
@@ -11,10 +11,10 @@ further_reading:
   - link: /tracing/guide/apm_dashboard/
     tag: "4\_minutes"
     text: Créer un dashboard pour suivre et corréler les métriques APM
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
     text: Ajouter des tags de span et filtrer les données de performance de votre application
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: Tous les guides
 ---

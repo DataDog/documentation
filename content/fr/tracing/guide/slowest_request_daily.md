@@ -5,16 +5,16 @@ further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
     text: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
     text: Comparer la latence d'un service avec celle de la semaine précédente
   - link: /tracing/guide/apm_dashboard/
     tag: "4\_minutes"
     text: Créer un dashboard pour suivre et corréler les métriques APM
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
     text: Ajouter des tags de span et filtrer les données de performance de votre application
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: Tous les guides
 ---
@@ -68,5 +68,5 @@ L'APM Datadog prend automatiquement en compte les autres informations et métriq
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#spans
 [6]: /fr/tracing/visualization/trace/?tab=spanmetadata
-[7]: /fr/tracing/guide/adding_metadata_to_spans
-[8]: /fr/tracing/connect_logs_and_traces
+[7]: /fr/tracing/guide/adding_metadata_to_spans/
+[8]: /fr/tracing/connect_logs_and_traces/

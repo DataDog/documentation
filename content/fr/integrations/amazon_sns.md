@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: "Envoyez des messages Amazon\_SNS à Datadog ou des alertes Datadog à SNS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
+draft: false
 git_integration_title: amazon_sns
 has_logo: true
 integration_title: Amazon SNS
@@ -30,7 +31,7 @@ Associez SNS à Datadog pour :
 - Voir les messages SNS sous forme d'événements dans votre flux
 - Envoyer des alertes et notifications d'événement à SNS
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -74,11 +75,13 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Collecte de logs
 
-Il n'y a pas de logs SNS. Traitez les logs et les événements transmis via le service SNS.
+SNS ne fournit pas de logs. Traitez les logs et les événements transmis via le service SNS.
 
 #### Envoyer des logs à Datadog
 
-Configurez un nouvel abonnement SNS. Sélectionnez la rubrique d'où proviennent les messages, puis choisissez « Lambda » comme protocole et l'ARN d'une fonction Lambda à utiliser :
+1. Configurez un nouvel abonnement SNS
+2. Sélectionnez la rubrique d'où proviennent les messages
+3. Choisissez « Lambda » comme protocole et l'ARN de la fonction Lambda du Forwarder Datadog
 
 {{< img src="integrations/amazon_sns/aws_sns_log_collection_1.png" alt="Collecte de logs AWS sns" popup="true" style="width:70%;">}}
 
