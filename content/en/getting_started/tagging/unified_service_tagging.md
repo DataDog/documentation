@@ -183,7 +183,6 @@ The values for `service` and `version` can be provided in the Dockerfile:
 ENV DD_SERVICE <SERVICE>
 ENV DD_VERSION <VERSION>
 
-LABEL com.datadoghq.tags.env="<ENV>"
 LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
@@ -327,7 +326,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 ```yaml
 env: <ENV>
 tags:
-    - service: <SERVICE>
+    - service:<SERVICE>
 ```
 
 This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.

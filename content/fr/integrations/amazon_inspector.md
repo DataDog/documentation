@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez les métriques clés d'Amazon\_Inspector."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_inspector/'
+draft: false
 git_integration_title: amazon_inspector
 has_logo: true
 integration_title: "Amazon\_Inspector"

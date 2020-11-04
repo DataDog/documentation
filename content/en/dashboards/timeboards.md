@@ -53,19 +53,19 @@ Set up an overlay of logs by clicking the **Search...** link in the upper left, 
 
 ## Graph menu
 
-Left click on any dashboard timeseries graph to open an options menu:
-
-{{< img src="dashboards/timeboard/metric_to_logs.png" alt="Related logs"  style="width:80%;">}}
+Click on any dashboard timeseries graph to open an options menu:
 
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|
-| Annotate this graph    | Write a comment that enters the event feed or notify members of your team about a graph. |
+| Send snapshot          | Create and send a snapshot of your graph.                     |
+| Find correlated metrics| Find correlations from APM services, integrations, and dashboards. |
 | View in full screen    | View the graph in [full screen mode][12].                     |
-| Copy tags to clipboard | Copy the tags to your clipboard that display on hover.        |
+| Lock cursor            | Lock the cursor in place on the page.                         |
 | View related processes | Jump to the [Live Processes][13] page scoped to your graph.   |
 | View related hosts     | Jump to the [Host Map][14] page scoped to your graph.         |
 | View related logs      | Jump to the [Log Explorer][15] page scoped to your graph.     |
-
+| View related traces    | Populate a [Traces][16] panel scoped to your graph.           |
+| View related profiles  | Jump to the [Profiling][17] page scoped to your graph.        |
 ### Logs search query
 
 The search query for **View related logs** is defined using the following parameters:
@@ -93,3 +93,5 @@ The search query for **View related logs** is defined using the following parame
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map
 [15]: https://app.datadoghq.com/logs
+[16]: /tracing/
+[17]: /tracing/profiler/

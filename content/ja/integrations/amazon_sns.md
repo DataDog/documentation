@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sns/'
+draft: false
 git_integration_title: amazon_sns
 has_logo: true
 integration_title: Amazon SNS
@@ -18,7 +19,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon SNS インテグレーション
-short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信します。
+short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
 version: '1.0'
 ---
 {{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS ダッシュボード" popup="true">}}
@@ -76,7 +77,7 @@ SNS を Datadog に接続すると、以下のことができます。
 
 SNS はログを提供しません。SNS に送信されるログとイベントが処理されます。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. 新しい SNS サブスクリプションを構成します
 2. メッセージの送信元のトピックを選択します

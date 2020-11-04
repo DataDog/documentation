@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md'
 display_name: Linux proc extras
+draft: false
 git_integration_title: linux_proc_extras
 guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 integration_id: システム
@@ -41,7 +43,7 @@ linux_proc_extras サービスからメトリクスをリアルタイムに取�
 
 Linux_proc_extras チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. [Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `linux_proc_extras.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル linux_proc_extras.d/conf.yaml][3] を参照してください。
 

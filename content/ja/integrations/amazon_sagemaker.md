@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_sagemaker/'
+draft: false
 git_integration_title: amazon_sagemaker
 has_logo: true
 integration_title: Amazon SageMaker
@@ -72,7 +73,7 @@ Amazon SageMaker インテグレーションには、サービスのチェック
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-sagemaker
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#log-collection
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sagemaker/amazon_sagemaker_metadata.csv

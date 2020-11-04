@@ -1,93 +1,362 @@
+main_left:
+  - identifier: product
+    name: Produit
+    url: 'https://www.datadoghq.com/product/'
+    weight: -500
+  - identifier: features
+    name: Fonctionnalités
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''icône fonctionnalités''>'
+    url: 'https://www.datadoghq.com/product/'
+    weight: 1
+    parent: product
+  - identifier: integrations
+    name: Intégrations
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''icône intégrations''>'
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
+    weight: 2
+    parent: product
+  - identifier: dashboarding
+    name: Dashboards
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''icône dashboard''>'
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
+    weight: 3
+    parent: product
+  - identifier: logs
+    name: Log Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''icône log''>'
+    url: 'https://www.datadoghq.com/product/log-management/'
+    weight: 4
+    parent: product
+  - identifier: apm
+    name: APM
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
+    url: 'https://www.datadoghq.com/product/apm/'
+    weight: 5
+    parent: product
+  - identifier: profiler
+    name: Profileur en continu
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''icône profileur''>'
+    url: 'https://www.datadoghq.com/product/code-profiling/'
+    weight: 6
+    parent: product
+  - identifier: security
+    name: Security Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''icône sécurité''>'
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
+    weight: 7
+    parent: product
+  - identifier: network
+    name: Surveillance réseau
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
+    weight: 8
+    parent: product
+  - identifier: synthetics
+    name: Surveillance Synthetic
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    weight: 9
+    parent: product
+  - identifier: rum
+    name: Real User Monitoring
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 10
+    parent: product
+  - identifier: serverless
+    name: Sans serveur
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône sans serveur''>'
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 11
+    parent: product
+  - identifier: alerts
+    name: Alertes
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 12
+    parent: product
+  - identifier: api
+    name: API
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
+    url: 'https://docs.datadoghq.com/api'
+    weight: 13
+    parent: product
+  - identifier: customers
+    name: Clients
+    url: 'https://www.datadoghq.com/customers/'
+    weight: -480
+  - identifier: pricing
+    name: Tarifs
+    url: 'https://www.datadoghq.com/pricing/'
+    weight: -480
+  - identifier: solutions
+    name: Solutions
+    url: Version
+    weight: -460
+  - name: Services financiers
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/financial-services/'
+    weight: -460
+  - name: Production et logistique
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
+    weight: -459
+  - name: Santé et sciences de la vie
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/healthcare/'
+    weight: -458
+  - name: Commerce de détail et électronique
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
+    weight: -457
+  - name: Secteur public
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/public-sector/'
+    weight: -456
+  - name: Médias et divertissement
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/media-entertainment/'
+    weight: -455
+  - name: Technologies
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/technology/'
+    weight: -454
+  - name: Jeux vidéo
+    parent: solutions
+    title: industry
+    url: 'https://www.datadoghq.com/solutions/gaming/'
+    weight: -453
+  - name: "Amazon\_Web\_Services"
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/aws/'
+    weight: -452
+  - name: Azure
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/azure/'
+    weight: -451
+  - name: "Google\_Cloud\_Platform"
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/gcp/'
+    weight: -450
+  - name: Kubernetes
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/kubernetes/'
+    weight: -449
+  - name: Migration vers le cloud
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/cloud-migration/'
+    weight: -448
+  - name: Unification de la surveillance
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
+    weight: -447
+  - name: DevOps
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/devops/'
+    weight: -446
+  - name: Analyse de la sécurité
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/security-analytics/'
+    weight: -445
+  - name: Surveillance Cloud hybride
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
+    weight: -444
+  - name: Surveillance IoT
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
+    weight: -443
+  - name: Apprentissage automatique
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/machine-learning/'
+    weight: -442
+  - name: BI en temps réel
+    parent: solutions
+    title: usecase
+    url: 'https://www.datadoghq.com/solutions/business-analytics/'
+    weight: -441
+main_right:
+  - identifier: about
+    name: Notre entreprise
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: -490
+  - name: Contact
+    parent: about
+    url: 'https://www.datadoghq.com/about/contact/'
+    weight: -490
+  - name: Partenaires
+    parent: about
+    url: 'https://www.datadoghq.com/partner'
+    weight: -480
+  - name: Actualité
+    parent: about
+    url: 'https://www.datadoghq.com/about/latest-news/'
+    weight: -460
+  - name: Direction
+    parent: about
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: -440
+  - name: Offres d'emploi
+    parent: about
+    url: 'https://www.datadoghq.com/careers/'
+    weight: -420
+  - name: Rapports d'analystes
+    parent: about
+    url: 'https://www.datadoghq.com/about/analyst/'
+    weight: -415
+  - name: Relations avec les investisseurs
+    parent: about
+    url: 'https://investors.datadoghq.com/'
+    weight: -410
+  - name: Récompenses
+    parent: about
+    url: 'https://www.datadoghq.com/about/awards/'
+    weight: -405
+  - identifier: blog
+    name: Blog
+    url: 'https://www.datadoghq.com/blog/'
+    weight: -480
+  - name: Le monitor
+    url: 'https://www.datadoghq.com/blog/'
+    weight: 100
+    parent: blog
+  - name: Ingénierie
+    url: 'https://www.datadoghq.com/blog/engineering/'
+    parent: blog
+    weight: 200
+  - name: Actualité
+    url: 'https://www.datadoghq.com/blog/pup-culture/'
+    parent: blog
+    weight: 300
+  - name: Communauté
+    url: 'https://www.datadoghq.com/blog/community/'
+    parent: blog
+    weight: 400
+  - identifier: docs
+    name: Docs
+    url: 'https://docs.datadoghq.com/'
+    weight: -470
+  - identifier: login
+    name: Login
+    url: 'https://app.datadoghq.com/'
+    weight: -460
+  - identifier: get_started
+    name: Essayer gratuitement
+    url: '#'
+    weight: -440
 main:
   - name: Débuter
     identifier: getting_started
     url: getting_started/
     pre: nav_start
     weight: 10000
-  - name: Agent
-    identifier: getting_started_agent
-    url: getting_started/agent/
-    parent: getting_started
-    weight: 1
-  - name: Autodiscovery
-    identifier: getting_started_agent_autodiscovery
-    url: getting_started/agent/autodiscovery
-    parent: getting_started_agent
-    weight: 101
-  - name: Intégrations
-    identifier: getting_started_integrations
-    url: getting_started/integrations/
-    parent: getting_started
-    weight: 2
   - name: Datadog
     identifier: getting_started_datadog
     url: getting_started/application/
     parent: getting_started
-    weight: 3
+    weight: 1
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/application/monitors
     parent: getting_started_datadog
-    weight: 301
+    weight: 101
+  - name: Agent
+    identifier: getting_started_agent
+    url: getting_started/agent/
+    parent: getting_started
+    weight: 2
+  - name: Autodiscovery
+    identifier: getting_started_agent_autodiscovery
+    url: getting_started/agent/autodiscovery
+    parent: getting_started_agent
+    weight: 201
+  - name: Intégrations
+    identifier: getting_started_integrations
+    url: getting_started/integrations/
+    parent: getting_started
+    weight: 3
+  - name: Dashboards
+    identifier: getting_started_dashboards
+    url: getting_started/dashboards/
+    parent: getting_started
+    weight: 4
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 4
+    weight: 5
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 5
+    weight: 6
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Assigner des tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
     parent: tagging_
-    weight: 601
+    weight: 701
   - name: Tagging de service unifié
     identifier: unified_service_tagging
     url: getting_started/tagging/unified_service_tagging
     parent: tagging_
-    weight: 602
+    weight: 702
   - name: Utiliser les tags
     identifier: using_tags
     url: getting_started/tagging/using_tags
     parent: tagging_
-    weight: 603
+    weight: 703
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 7
-  - name: Surveillance Synthetics
+    weight: 8
+  - name: Surveillance Synthetic
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Emplacements privés
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 801
-  - name: Test Browser
+    weight: 901
+  - name: Tests Browser
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 802
-  - name: Test API
+    weight: 902
+  - name: Tests API
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 803
+    weight: 903
   - name: Centre d'apprentissage
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -248,6 +517,11 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
     weight: 306
+  - name: Configuration de l'Operator
+    url: agent/kubernetes/operator_configuration
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_operator_configuration
+    weight: 307
   - name: Amazon ECS
     url: agent/amazon_ecs/
     parent: agent
@@ -635,6 +909,10 @@ main:
     parent: serverless_datadog_lambda_library
     identifier: serverless_datadog_lambda_library_java
     weight: 205
+  - name: Extension Lambda Datadog
+    url: serverless/datadog_lambda_library/extension
+    parent: serverless_datadog_lambda_library
+    weight: 206
   - name: Forwarder Datadog
     url: serverless/forwarder
     parent: serverless
@@ -648,28 +926,48 @@ main:
     identifier: serverless_distributed_tracing
     parent: serverless
     weight: 5
-  - name: Métriques custom
+  - name: Custom Metrics
     url: serverless/custom_metrics
     parent: serverless
     weight: 6
-  - name: Intégrations sans serveur
-    url: serverless/serverless_integrations
+  - name: Suivi des déploiements
+    url: serverless/deployment_tracking
     parent: serverless
     weight: 7
+  - name: Intégrations sans serveur
+    url: serverless/serverless_integrations
+    identifier: serverless_integrations
+    parent: serverless
+    weight: 8
+  - name: Plug-in Serverless Datadog
+    url: serverless/serverless_integrations/plugin
+    parent: serverless_integrations
+    identifier: serverless_integrations_plugin
+    weight: 801
+  - name: Macro Serverless Datadog
+    url: serverless/serverless_integrations/macro
+    parent: serverless_integrations
+    identifier: serverless_integrations_macro
+    weight: 802
+  - name: CLI Serverless Datadog
+    url: serverless/serverless_integrations/cli
+    parent: serverless_integrations
+    identifier: serverless_integrations_cli
+    weight: 803
   - name: Tagging de fonctions sans serveur
     url: serverless/serverless_tagging
     parent: serverless
-    weight: 8
+    weight: 9
   - name: Dépannage
     url: serverless/troubleshooting
     parent: serverless
     identifier: serverless_troubleshooting
-    weight: 9
+    weight: 10
   - name: Extension Azure App Services
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 10
+    weight: 11
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
@@ -961,32 +1259,33 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 313
-  - name: Suivi des versions
-    url: tracing/version_tracking/
+  - name: Analyse et recherche de traces
+    url: tracing/trace_search_and_analytics/
     parent: tracing
-    identifier: version_tracking
+    identifier: trace_search_and_analytics
     weight: 4
-  - name: App Analytics
-    url: tracing/app_analytics/
-    parent: tracing
-    identifier: app_analytics
-    weight: 5
-  - name: Visualiser les analyses
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 503
-  - name: Recherche de traces
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 504
-  - name: Monitors App Analytics
+  - name: Syntaxe de requête
+    url: tracing/trace_search_and_analytics/query_syntax/
+    parent: trace_search_and_analytics
+    weight: 403
+  - name: Surveillance d'analyses
     url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 505
-  - name: Live Search
-    url: tracing/livesearch/
+    parent: trace_search_and_analytics
+    weight: 404
+  - name: Rétention et ingestion des traces
+    url: tracing/trace_retention_and_ingestion/
     parent: tracing
-    identifier: Live Search
+    identifier: trace_retention_and_ingestion
+    weight: 5
+  - name: Métriques d'utilisation
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
+    weight: 501
+  - name: Suivi des déploiements
+    url: tracing/deployment_tracking/
+    parent: tracing
+    identifier: deployment_tracking
     weight: 6
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
@@ -1028,7 +1327,7 @@ main:
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
     weight: 707
-  - name: Associer Synthetics à vos traces
+  - name: Associer les tests Synthetic à vos traces
     url: synthetics/apm
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
@@ -1078,7 +1377,7 @@ main:
     parent: tracing
     identifier: profiler
     weight: 11
-  - name: Débuter
+  - name: Prise en main
     url: tracing/profiler/getting_started
     parent: profiler
     identifier: profiler_getting_started
@@ -1088,6 +1387,11 @@ main:
     parent: profiler
     identifier: profiler_search_profiles
     weight: 1102
+  - name: Dépannage du profileur
+    url: tracing/profiler/profiler_troubleshooting
+    parent: profiler
+    identifier: profiler_profiler_troubleshooting
+    weight: 1103
   - name: Instrumentation personnalisée
     url: tracing/custom_instrumentation/
     parent: tracing
@@ -1193,7 +1497,7 @@ main:
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
     weight: 1504
-  - name: "Piles d'exécution profondes PHP\_5"
+  - name: "Call stacks profondes PHP\_5"
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
@@ -1374,7 +1678,7 @@ main:
     parent: security_compliance_monitoring
     identifier: security_monitoring_default_detection_rules
     weight: 3
-  - name: Débuter
+  - name: Prise en main
     url: security_monitoring/getting_started
     parent: security_monitoring
     identifier: security_monitoring_getting_started
@@ -1389,7 +1693,7 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
-  - name: Surveillance Synthetics
+  - name: Surveillance Synthetic
     url: synthetics/
     pre: nav_synthetics
     identifier: synthetics
@@ -1408,14 +1712,14 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
+  - name: Options avancées pour les étapes
+    url: synthetics/browser_tests/advanced_options
+    parent: synthetics_browser_tests
+    weight: 203
   - name: Résultats de test
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
-  - name: Options avancées
-    url: synthetics/browser_tests/advanced_options
-    parent: synthetics_browser_tests
-    weight: 203
   - name: Emplacements privés
     url: synthetics/private_locations
     parent: synthetics
@@ -1436,7 +1740,7 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 5
-  - name: Recherche
+  - name: Rechercher et gérer
     url: synthetics/search/
     parent: synthetics
     weight: 6
@@ -1568,26 +1872,41 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: Surveillance DNS
+    url: network_performance_monitoring/dns_monitoring
+    parent: npm
+    identifier: dns_monitoring
+    weight: 4
   - name: Appareils
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 400
+    weight: 500
   - name: Configuration
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 401
+    weight: 501
   - name: Profiles
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 402
+    weight: 502
   - name: Données collectées
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 403
+    weight: 503
+  - name: Dépannage
+    url: network_performance_monitoring/devices/troubleshooting
+    parent: ndm
+    identifier: ndm_trouble
+    weight: 504
+  - name: Guides
+    url: network_performance_monitoring/devices/guide/
+    parent: ndm
+    identifier: ndm_guide
+    weight: 505
   - name: Outils de développement
     url: developers/
     pre: nav_developers
@@ -1623,7 +1942,7 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 2
-  - name: Métriques custom
+  - name: Custom Metrics
     url: developers/metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
@@ -1921,9 +2240,9 @@ api_v1:
     parent: Intégration de logs AWS
     url: '#verifier-qu-une-fonction-lambda-aws-existe'
     generated: true
-  - name: Obtenir la liste des services AWS compatibles avec la collecte de logs
+  - name: Récupérer la liste des services AWS compatibles avec la collecte de logs
     parent: Intégration de logs AWS
-    url: '#obtenir-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
+    url: '#recuperer-la-liste-des-services-aws-compatibles-avec-la-collecte-de-logs'
     generated: true
   - name: Activer une intégration de logs AWS
     parent: Intégration de logs AWS
@@ -2133,9 +2452,9 @@ api_v1:
     url: /api/v1/key-management/
     identifier: Gestion des clés
     generated: true
-  - name: Obtenir toutes les clés d'API
+  - name: Récupérer toutes les clés d'API
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-api'
+    url: '#recuperer-toutes-les-cles-d-api'
     generated: true
   - name: Créer une clé d'API
     parent: Gestion des clés
@@ -2145,17 +2464,17 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-api'
     generated: true
-  - name: Obtenir la clé d'API
+  - name: Récupérer une clé d'API
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-api'
+    url: '#recuperer-une-cle-d-api'
     generated: true
   - name: Modifier une clé d'API
     parent: Gestion des clés
     url: '#modifier-une-cle-d-api'
     generated: true
-  - name: Obtenir toutes les clés d'application
+  - name: Récupérer toutes les clés d'application
     parent: Gestion des clés
-    url: '#obtenir-toutes-les-cles-d-application'
+    url: '#recuperer-toutes-les-cles-d-application'
     generated: true
   - name: Créer une clé d'application
     parent: Gestion des clés
@@ -2165,9 +2484,9 @@ api_v1:
     parent: Gestion des clés
     url: '#supprimer-une-cle-d-application'
     generated: true
-  - name: Obtenir une clé d'application
+  - name: Récupérer une clé d'application
     parent: Gestion des clés
-    url: '#obtenir-une-cle-d-application'
+    url: '#recuperer-une-cle-d-application'
     generated: true
   - name: Modifier une clé d'application
     parent: Gestion des clés
@@ -2195,7 +2514,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des index
     parent: Index de logs
-    url: '#obtenir-la-sequence-des-index'
+    url: '#recuperer-la-sequence-des-index'
     generated: true
   - name: Mettre à jour la séquence des index
     parent: Index de logs
@@ -2203,11 +2522,11 @@ api_v1:
     generated: true
   - name: Récupérer tous les index
     parent: Index de logs
-    url: '#obtenir-tous-les-index'
+    url: '#recuperer-tous-les-index'
     generated: true
-  - name: Obtenir un index
+  - name: Récupérer un index
     parent: Index de logs
-    url: '#obtenir-un-index'
+    url: '#recuperer-un-index'
     generated: true
   - name: Mettre à jour un index
     parent: Index de logs
@@ -2219,7 +2538,7 @@ api_v1:
     generated: true
   - name: Récupérer la séquence des pipelines
     parent: Pipelines de logs
-    url: '#obtenir-la-sequence-des-pipelines'
+    url: '#recuperer-la-sequence-des-pipelines'
     generated: true
   - name: Mettre à jour la séquence des pipelines
     parent: Pipelines de logs
@@ -2227,7 +2546,7 @@ api_v1:
     generated: true
   - name: Récupérer tous les pipelines
     parent: Pipelines de logs
-    url: '#obtenir-tous-les-pipelines'
+    url: '#recuperer-tous-les-pipelines'
     generated: true
   - name: Créer un pipeline
     parent: Pipelines de logs
@@ -2239,7 +2558,7 @@ api_v1:
     generated: true
   - name: Récupérer un pipeline
     parent: Pipelines de logs
-    url: '#obtenir-un-pipeline'
+    url: '#recuperer-un-pipeline'
     generated: true
   - name: Mettre à jour un pipeline
     parent: Pipelines de logs
@@ -2253,13 +2572,13 @@ api_v1:
     url: /api/v1/metrics/
     identifier: Métriques
     generated: true
-  - name: Obtenir la liste des métriques actives
+  - name: Récupérer la liste des métriques actives
     parent: Métriques
     url: '#recuperer-la-liste-des-metriques-actives'
     generated: true
-  - name: Obtenir les métadonnées d'une métrique
+  - name: Récupérer les métadonnées d'une métrique
     parent: Métriques
-    url: '#obtenir-les-metadonnees-d-une-metrique'
+    url: '#recuperer-les-metadonnees-d-une-metrique'
     generated: true
   - name: Modifier les métadonnées d'une métrique
     parent: Métriques
@@ -2405,13 +2724,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: Dépendances de service
     generated: true
-  - name: Récupérer toutes les dépendances de service
+  - name: Récupérer toutes les dépendances de services APM
     parent: Dépendances de service
-    url: '#recuperer-toutes-les-dependances-de-service'
+    url: '#recuperer-toutes-les-dependances-de-services-apm'
     generated: true
-  - name: Récupérer les dépendances d'un service
+  - name: Récupérer les dépendances d'un service APM
     parent: Dépendances de service
-    url: '#recuperer-les-dependances-d-un-service'
+    url: '#recuperer-les-dependances-d-un-service-apm'
     generated: true
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
@@ -2485,9 +2804,9 @@ api_v1:
     parent: Synthetics
     url: '#recuperer-tous-les-emplacements-publics-et-prives'
     generated: true
-  - name: Récupérer la liste des tests
+  - name: Récupérer la liste de tous les tests
     parent: Synthetics
-    url: '#recuperer-la-liste-des-tests'
+    url: '#recuperer-la-liste-de-tous-les-tests'
     generated: true
   - name: Créer un test
     parent: Synthetics
@@ -2541,6 +2860,10 @@ api_v1:
     parent: Synthetics
     url: '#supprimer-une-variable-globale'
     generated: true
+  - name: Récupérer une variable globale
+    parent: Synthetics
+    url: '#recuperer-une-variable-globale'
+    generated: true
   - name: Modifier une variable globale
     parent: Synthetics
     url: '#modifier-une-variable-globale'
@@ -2585,109 +2908,109 @@ api_v1:
     url: /api/v1/usage-metering/
     identifier: Mesure de l'utilisation
     generated: true
-  - name: Obtenir la liste des rapports personnalisés journaliers disponibles
+  - name: Récupérer la liste des rapports personnalisés journaliers disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-journaliers-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-journaliers-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés journaliers spécifiés
+  - name: Récupérer les rapports personnalisés journaliers spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-journaliers-specifies'
+    url: '#recuperer-les-rapports-personnalises-journaliers-specifies'
     generated: true
-  - name: Obtenir la liste des rapports personnalisés mensuels disponibles
+  - name: Récupérer la liste des rapports personnalisés mensuels disponibles
     parent: Mesure de l'utilisation
-    url: '#obtenir-la liste-des-rapports-personnalises-mensuels-disponibles'
+    url: '#recuperer-la liste-des-rapports-personnalises-mensuels-disponibles'
     generated: true
-  - name: Obtenir les rapports personnalisés mensuels spécifiés
+  - name: Récupérer les rapports personnalisés mensuels spécifiés
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-rapports-personnalises-mensuels-specifies'
+    url: '#recuperer-les-rapports-personnalises-mensuels-specifies'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs analysés
+  - name: Récupérer l'utilisation horaire pour les logs analysés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-logs-analyses'
+    url: '#recuperer-l-utilisation-horaire-pour-les-logs-analyses'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Lambda
+  - name: Récupérer l'utilisation horaire pour Lambda
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-lambda'
+    url: '#recuperer-l-utilisation-horaire-pour-lambda'
     generated: true
-  - name: Obtenir l'utilisation facturable de votre compte multi-org
+  - name: Récupérer l'utilisation facturable de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-facturable-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-facturable-de-votre-compte-multi-org'
     generated: true
-  - name: Obtenir l'utilisation horaire pour Fargate
+  - name: Récupérer l'utilisation horaire pour Fargate
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-fargate'
+    url: '#recuperer-l-utilisation-horaire-pour-fargate'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts et conteneurs
+  - name: Récupérer l'utilisation horaire pour les hosts et conteneurs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs
+  - name: Récupérer l'utilisation horaire pour les logs
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les logs par index
+  - name: Récupérer l'utilisation horaire pour les logs par index
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-logs-par-index'
+    url: '#recuperer-l-utilisation-horaire-pour-des-logs-par-index'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les flux réseau
+  - name: Récupérer l'utilisation horaire pour les flux réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-flux-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts réseau
+  - name: Récupérer l'utilisation horaire pour les hosts réseau
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-reseau'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-reseau'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les hosts profilés
+  - name: Récupérer l'utilisation horaire pour les hosts profilés
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-hosts-profiles'
+    url: '#recuperer-l-utilisation-horaire-pour-les-hosts-profiles'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les sessions RUM
+  - name: Récupérer l'utilisation horaire pour les sessions RUM
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-sessions-rum'
+    url: '#recuperer-l-utilisation-horaire-pour-les-sessions-rum'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les appareils SNMP
+  - name: Récupérer l'utilisation horaire pour les appareils SNMP
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-appareils-snmp'
+    url: '#recuperer-l-utilisation-horaire-pour-les-appareils-snmp'
     generated: true
-  - name: Obtenir l'utilisation de votre compte multi-org
+  - name: Récupérer l'utilisation de votre compte multi-org
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-de-votre-compte-multi-org'
+    url: '#recuperer-l-utilisation-de-votre-compte-multi-org'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les API checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les API checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-api-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-api-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les browser checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les browser checks Synthetics
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-les-browser-checks-synthetics'
+    url: '#recuperer-l-utilisation-horaire-pour-les-browser-checks-synthetics'
     generated: true
-  - name: Obtenir l'utilisation horaire pour les métriques custom
+  - name: Récupérer l'utilisation horaire pour les métriques custom
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-des-metriques-custom'
+    url: '#recuperer-l-utilisation-horaire-pour-des-metriques-custom'
     generated: true
-  - name: "Obtenir les 500\_principales métriques custom selon la moyenne horaire"
+  - name: "Récupérer les 500\_principales métriques custom selon la moyenne horaire"
     parent: Mesure de l'utilisation
-    url: '#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
+    url: '#recuperer-les-500-principales-metriques-custom-selon-la-moyenne-horaire'
     generated: true
-  - name: Obtenir l'utilisation horaire pour la recherche de traces
+  - name: Récupérer l'utilisation horaire pour la recherche de traces
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-la-recherche-de-traces'
+    url: '#recuperer-l-utilisation-horaire-pour-la-recherche-de-traces'
     generated: true
-  - name: Obtenir l'utilisation horaire pour le Tracing without Limits
+  - name: Récupérer l'utilisation horaire pour le Tracing without Limits
     parent: Mesure de l'utilisation
-    url: '#obtenir-l-utilisation-horaire-pour-le-tracing-without-limits'
+    url: '#recuperer-l-utilisation-horaire-pour-le-tracing-without-limits'
     generated: true
   - name: Utilisateurs
     url: /api/v1/users/
     identifier: Utilisateurs
     generated: true
-  - name: Récupérer tous les utilisateurs
+  - name: Énumérer tous les utilisateurs
     parent: Utilisateurs
-    url: '#recuperer-tous-les-utilisateurs'
+    url: '#enumerer-tous-les-utilisateurs'
     generated: true
   - name: Créer un utilisateur
     parent: Utilisateurs
@@ -2733,9 +3056,9 @@ api_v1:
     parent: Intégration Webhooks
     url: '#supprimer-un-webhook'
     generated: true
-  - name: Obtenir une intégration Webhook
+  - name: Récupérer une intégration Webhook
     parent: Intégration Webhooks
-    url: '#obtenir-une-integration-webhook'
+    url: '#recuperer-une-integration-webhook'
     generated: true
   - name: Mettre à jour un webhook
     parent: Intégration Webhooks
@@ -2819,6 +3142,54 @@ api_v2:
     url: /api/v2/ip-ranges/
     identifier: Plages d'IP
     generated: true
+  - name: Services liés à un incident
+    url: /api/v2/incident-services/
+    identifier: Services liés à un incident
+    generated: true
+  - name: Récupérer la liste de tous les services liés à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-une-liste-de-tous-les-services-lies-a-un-incident'
+    generated: true
+  - name: Créer un service lié à un incident
+    parent: Services liés à un incident
+    url: '#creer-un-service-lie-a-un-incident'
+    generated: true
+  - name: Supprimer un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#supprimer-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Récupérer les détails d'un service lié à un incident
+    parent: Services liés à un incident
+    url: '#recuperer-les-details-d-un-service-lie-a-un-incident'
+    generated: true
+  - name: Mettre à jour un service lié à un incident existant
+    parent: Services liés à un incident
+    url: '#mettre-a-jour-un-service-lie-a-un-incident-existant'
+    generated: true
+  - name: Équipes liées à un incident
+    url: /api/v2/incident-teams/
+    identifier: Équipes liées à un incident
+    generated: true
+  - name: Récupérer la liste de toutes les équipes liées à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-la-liste-de-toutes-les-equipes-lies-a-un-incident'
+    generated: true
+  - name: Créer une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#creer-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Supprimer une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#supprimer-une-equipe-liee-a-un-incident-existante'
+    generated: true
+  - name: Récupérer les détails d'une équipe liée à un incident
+    parent: Équipes liées à un incident
+    url: '#recuperer-les-details-d-une-equipe-liee-a-un-incident'
+    generated: true
+  - name: Mettre à jour une équipe liée à un incident existante
+    parent: Équipes liées à un incident
+    url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
+    generated: true
   - name: Gestion des clés
     url: /api/v2/key-management/
     identifier: Gestion des clés
@@ -2842,6 +3213,14 @@ api_v2:
   - name: Archives de logs
     url: /api/v2/logs-archives/
     identifier: Archives de logs
+    generated: true
+  - name: Récupérer l'ordre des archives
+    parent: Archives de logs
+    url: '#recuperer-l-ordre-des-archives'
+    generated: true
+  - name: Mettre à jour l'ordre des archives
+    parent: Archives de logs
+    url: '#mettre-a-jour-l-ordre-des-archives'
     generated: true
   - name: Récupérer toutes les archives
     parent: Archives de logs
@@ -3023,13 +3402,13 @@ api_v2:
     parent: Security Monitoring
     url: '#mettre-a-jour-une-regle-existante'
     generated: true
-  - name: Obtenir une liste rapide de signaux de sécurité
+  - name: Récupérer une liste rapide de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-rapide-de-signaux-de-securite'
+    url: '#recuperer-une-liste-rapide-de-signaux-de-securite'
     generated: true
-  - name: Obtenir une liste de signaux de sécurité
+  - name: Récupérer une liste de signaux de sécurité
     parent: Security Monitoring
-    url: '#obtenir-une-liste-de-signaux-de-securite'
+    url: '#recuperer-une-liste-de-signaux-de-securite'
     generated: true
   - name: Checks de service
     url: /api/v2/service-checks/
@@ -3051,9 +3430,9 @@ api_v2:
     url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Synthetics
+  - name: Synthetic
     url: /api/v2/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic
     generated: true
   - name: Tags
     url: /api/v2/tags/
@@ -3095,9 +3474,9 @@ api_v2:
     parent: Utilisateurs
     url: '#desactiver-un-utilisateur'
     generated: true
-  - name: Récupérer un utilisateur
+  - name: Récupérer les détails d'un utilisateur
     parent: Utilisateurs
-    url: '#recuperer-un-utilisateur'
+    url: '#recuperer-les-details-d-un-utilisateur'
     generated: true
   - name: Mettre à jour un utilisateur
     parent: Utilisateurs
@@ -3115,3 +3494,137 @@ api_v2:
     url: /api/v2/webhooks-integration/
     identifier: Intégration Webhooks
     generated: true
+footer_product:
+  - name: Fonctionnalités
+    url: 'https://www.datadoghq.com/product/'
+    weight: 100
+  - name: Intégrations
+    url: 'https://www.datadoghq.com/product/platform/integrations/'
+    weight: 105
+  - name: Dashboards
+    url: 'https://www.datadoghq.com/product/platform/dashboards/'
+    weight: 110
+  - name: Log Management
+    url: 'https://www.datadoghq.com/product/log-management/'
+    weight: 115
+  - name: APM
+    url: 'https://www.datadoghq.com/product/apm/'
+    weight: 120
+  - name: Profileur en continu
+    url: 'https://www.datadoghq.com/product/code-profiling/'
+    weight: 121
+  - name: Security Monitoring
+    url: 'https://www.datadoghq.com/product/security-monitoring/'
+    weight: 123
+  - name: Surveillance réseau
+    url: 'https://www.datadoghq.com/product/network-monitoring/'
+    weight: 125
+  - name: Surveillance Synthetics
+    url: 'https://www.datadoghq.com/product/synthetic-monitoring/'
+    weight: 130
+  - name: Real User Monitoring
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 135
+  - name: Informatique sans serveur
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 140
+  - name: Alertes
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 145
+  - name: API
+    url: api
+    weight: 150
+footer_product_two:
+  - name: Real User Monitoring
+    url: 'https://www.datadoghq.com/product/real-user-monitoring/'
+    weight: 135
+  - name: Sans serveur
+    url: 'https://www.datadoghq.com/product/serverless-monitoring/'
+    weight: 140
+  - name: Alertes
+    url: 'https://www.datadoghq.com/product/platform/alerts/'
+    weight: 145
+  - name: API
+    url: api
+    weight: 150
+footer_product_three:
+  - name: Tarifs
+    url: 'https://www.datadoghq.com/pricing/'
+    weight: 100
+  - name: Documentation
+    url: 'https://docs.datadoghq.com/'
+    weight: 105
+  - name: Assistance
+    url: 'https://www.datadoghq.com/support/'
+    weight: 110
+  - name: Ressources
+    url: 'https://www.datadoghq.com/resources/'
+    weight: 150
+  - name: Sécurité
+    url: 'https://www.datadoghq.com/security/'
+    weight: 180
+footer_about:
+  - name: Mise à jour COVID-19
+    url: 'https://www.datadoghq.com/coronavirus/'
+    weight: 90
+  - name: Nous contacter
+    url: 'https://www.datadoghq.com/about/contact/'
+    weight: 100
+  - name: Partenaires
+    url: 'https://www.datadoghq.com/partner-with-datadog/'
+    weight: 120
+  - name: Presse
+    url: 'https://www.datadoghq.com/about/press/'
+    weight: 130
+  - name: Direction
+    url: 'https://www.datadoghq.com/about/leadership/'
+    weight: 140
+  - name: Offres d'emploi
+    url: 'https://www.datadoghq.com/careers/'
+    weight: 160
+  - name: Mentions légales
+    url: 'https://www.datadoghq.com/legal/'
+    weight: 170
+  - name: Relations avec les investisseurs
+    url: 'https://investors.datadoghq.com/'
+    weight: 175
+  - name: Rapports d'analystes
+    url: 'https://www.datadoghq.com/about/analyst/'
+    weight: 180
+footer_blog:
+  - name: Anglais
+    url: 'https://www.datadoghq.com/blog/'
+    weight: 100
+  - name: Español
+    url: 'https://www.datadoghq.com/es/blog/'
+    weight: 110
+  - name: 日本語
+    url: 'https://www.datadoghq.com/ja/blog/'
+    weight: 120
+footer_social:
+  - name: Twitter
+    url: 'https://twitter.com/datadoghq'
+    weight: 130
+    pre: twitter.svg
+  - name: Instagram
+    url: 'https://www.instagram.com/datadoghq/'
+    weight: 140
+    pre: instagram.svg
+  - name: LinkedIn
+    url: 'https://www.LinkedIn.com/company/datadog/'
+    weight: 160
+    pre: linkedin.svg
+  - name: Youtube
+    url: 'https://www.youtube.com/user/DatadogHQ'
+    weight: 150
+    pre: youtube.svg
+footer_sub:
+  - name: Conditions
+    url: 'https://www.datadoghq.com/legal/terms/'
+    weight: 100
+  - name: Confidentialité
+    url: 'https://www.datadoghq.com/legal/privacy/'
+    weight: 120
+  - name: Cookies
+    url: 'https://www.datadoghq.com/legal/cookies/'
+    weight: 130

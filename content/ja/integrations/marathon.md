@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: marathon
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/marathon/README.md'
 display_name: Marathon
+draft: false
 git_integration_title: marathon
 guid: 6af353ff-ecca-420a-82c0-a0e84cf0a35e
 integration_id: marathon

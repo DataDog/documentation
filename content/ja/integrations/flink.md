@@ -6,6 +6,7 @@ assets:
     Flink Overview: assets/dashboards/overview.json
   logs:
     source: flink
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/flink/README.md'
 display_name: flink
+draft: false
 git_integration_title: flink
 guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink

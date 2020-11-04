@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: haproxy
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -21,6 +24,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md'
 description: HAProxy インテグレーションは、HAProxy インスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
 display_name: HAProxy
+draft: false
 git_integration_title: haproxy
 guid: cd935030-131f-4545-8b6a-a4ca21b8565b
 integration_id: haproxy
@@ -62,6 +66,8 @@ Haproxy チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 #### HAProxy の準備
 
+##### バージョン < 2
+
 Agent は、メトリクスを統計エンドポイント経由で収集します。
 
 1. `haproxy.conf` で統計エンドポイントを構成します。
@@ -79,7 +85,17 @@ Agent は、メトリクスを統計エンドポイント経由で収集しま�
 
 2. [HAProxy を再起動して、統計エンドポイントを有効にします][3]。
 
-### 構成
+##### バージョン >= 2
+
+このチェックは、Prometheus エンドポイントに基づく HAProxy バージョン 2 以降の新しい実装をサポートします。
+
+1. [公式ガイド][4]を使用して `haproxy.conf` を構成します。
+
+2. `haproxy.d/conf.yaml` で設定 `use_prometheus` を[有効](#configuration)にします。
+
+3. [HAProxy を再起動して、統計エンドポイントを有効にします][3]。
+
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -188,7 +204,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `haproxy` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `haproxy` を探します。
 
 ## 収集データ
 
@@ -209,23 +225,24 @@ HAProxy のステータスページをサービスチェックに変換します
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
-- [HAProxy パフォーマンスメトリクスの監視][6]
-- [HAProxy メトリクスの収集方法][7]
-- [Datadog を使用した HAProxy の監視][8]
-- [HAProxy のマルチプロセス構成][9]
-- [HAProxy メトリクスの収集方法][7]
+- [HAProxy パフォーマンスメトリクスの監視][7]
+- [HAProxy メトリクスの収集方法][8]
+- [Datadog を使用した HAProxy の監視][9]
+- [HAProxy のマルチプロセスコンフィギュレーション][10]
+- [HAProxy メトリクスの収集方法][8]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://www.haproxy.org/download/1.7/doc/management.txt
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
-[7]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[8]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[9]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/
+[4]: https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+[8]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+[9]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+[10]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/

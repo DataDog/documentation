@@ -72,6 +72,7 @@ apm_config:
 ```
 
 * `keep_values` - Agent トレースの難読化から除外するキーのセットを定義します。
+
 [1]: /ja/tracing/visualization/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
@@ -294,4 +295,4 @@ DD_APM_REPLACE_TAGS=[
 [7]: /ja/api/v1/tracing/
 [8]: /ja/tracing/custom_instrumentation/java/#extending-tracers
 [9]: /ja/tracing/custom_instrumentation/ruby?tab=activespan#post-processing-traces
-[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
+[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

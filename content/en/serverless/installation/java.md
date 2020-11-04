@@ -2,30 +2,31 @@
 title: Instrumenting Java Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
-    - link: 'serverless/installation/python'
-      tag: 'Documentation'
-      text: 'Installing Python Serverless Monitoring'
-    - link: 'serverless/installation/dotnet'
-      tag: 'Documentation'
-      text: 'Installing .NET Serverless Monitoring'
-    - link: 'serverless/installation/go'
-      tag: 'Documentation'
-      text: 'Installing Go Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: "Documentation"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Documentation"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Documentation"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
+## Required Setup
+
+If not already configured:
+
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
 ### Install the Datadog Lambda Library
 
-You can install the Datadog Lambda Library locally by running one of the following commands based on your project’s configuration. For latest version, see the [latest release][3].
+You can install the Datadog Lambda Library locally by adding one of the following blocks into your `pom.xml` or `build.gradle` as appropriate based on your project’s configuration. Replace `n.n.n` below with the latest release (omitting the preceeding `v`): ![Bintray][3]
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -42,7 +43,7 @@ Include the following dependency in your `pom.xml`:
 <dependency>
   <groupId>com.datadoghq</groupId>
   <artifactId>datadog-lambda-java</artifactId>
-  <version>0.0.5</version>
+  <version>n.n.n</version>
   <type>pom</type>
 </dependency>
 ```
@@ -57,7 +58,7 @@ repositories {
   maven { url "https://dl.bintray.com/datadog/datadog-maven" }
 }
 dependencies {
-  implementation 'com.datadoghq:datadog-lambda-java:0.0.5'
+  implementation 'com.datadoghq:datadog-lambda-java:n.n.n'
 }
 ```
 {{% /tab %}}
@@ -66,18 +67,27 @@ dependencies {
 ### Configure the Function
 
 1. Enable [AWS X-Ray active tracing][4] for your Lambda function.
+2. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+    ```java
+    public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
+        public Integer handleRequest(APIGatewayV2ProxyRequestEvent request, Context context){
+            DDLambda dd = new DDLambda(request, lambda);
+        }
+    }
+    ```
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, in order to send metrics, traces and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
-2. [Ensure the option DdFetchLambdaTags is enabled][5].
-3. [Subscribe the Datadog Forwarder to your function's log groups][6].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][7].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless Homepage][6].
+
+### Monitor Custom Business Logic
 
 If you would like to submit a custom metric, see the sample code below:
 
@@ -108,10 +118,16 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-[1]: /serverless/#1-install-the-cloud-integration
-[2]: https://docs.datadoghq.com/serverless/forwarder/
-[3]: https://github.com/DataDog/datadog-lambda-java/releases
+For more information on custom metric submission, see [here][7].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/amazon_web_services/
+[2]: /serverless/forwarder/
+[3]: https://img.shields.io/bintray/v/datadog/datadog-maven/datadog-lambda-java
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
-[5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://app.datadoghq.com/functions
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: https://app.datadoghq.com/functions
+[7]: /serverless/custom_metrics?tab=java

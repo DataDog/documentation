@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md'
 display_name: Prometheus
+draft: false
 git_integration_title: prometheus
 guid: 58e75868-0933-407b-aaa5-469c252bdb2b
 integration_id: prometheus
@@ -46,7 +48,7 @@ supported_os:
 
 Prometheus チェックは、Agent のバージョン 6.1.0 以降にパッケージ化されています。
 
-### 構成
+### コンフィギュレーション
 
 `prometheus.d/conf.yaml` ファイルを編集して、OpenMetrics/Prometheus エンドポイントを公開するアプリケーションからメトリクスを取得します。
 

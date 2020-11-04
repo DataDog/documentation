@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Intégrez votre Akamai\_DataStream à Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
     tag: Blog
@@ -34,6 +35,8 @@ Installez l'intégration avec le [carré d'intégration Akamai][1] de Datadog.
 
 ### Configuration
 
+#### Collecte de métriques
+
 Commencez par ajouter un compte Akamai :
 
 1. Dans le Luna Control Center, accédez à Configure > Organization > Manage APIs et créez un client avec au moins un accès en lecture seule « READ-ONLY » à l'API « DataStream ».
@@ -48,6 +51,26 @@ Vous pouvez configurer plusieurs comptes (ou hosts), mais chaque flux doit être
 <div class="alert alert-warning">
 Seuls les flux présentant le type « Aggregated metrics » sont pris en charge.
 </div>
+
+#### Collecte de logs
+
+Akamai DataStream 1.0 et 2.0 prennent en charge l'envoi de logs à Datadog via les endpoints HTTP(s) dans un fichier compressé gzip. Pour envoyer les logs à Datadog, remplissez ces champs dans Akamai :
+
+1. **Name** : saisissez une description lisible de l'endpoint.
+
+2. **Endpoint** : saisissez l'endpoint Datadog pour l'envoi et le stockage des logs : `https://http-intake.logs.datadoghq.com/v1/input`.
+
+3. **Tags** (facultatif) : saisissez une liste de tags séparés par des virgules, par exemple `env:staging,team:web`, pour filtrer et regrouper vos logs dans Datadog.
+
+4. **Source** : saisissez le nom de la source `akamai`.
+
+5. **Service** (facultatif) : saisissez le nom de l'application ou du service qui génère les événements de log associés à votre compte Datadog.
+
+6. **API key** : saisissez votre [clé d'API Datadog][2].
+
+7. **Send compressed data** (facultatif) : cochez cette case pour compresser au format gzip les logs envoyés à la destination.
+
+8. **Validate & Save** : cliquez sur ce champ pour valider la connexion avec la destination et enregistrer les informations que vous avez fournies.
 
 ## Données collectées
 
@@ -65,8 +88,9 @@ L'intégration Akamai n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
+[4]: https://docs.datadoghq.com/fr/help/

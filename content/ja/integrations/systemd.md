@@ -3,6 +3,7 @@ assets:
   dashboards:
     Systemd Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/systemd/README.md'
 display_name: Systemd
+draft: false
 git_integration_title: systemd
 guid: acd470e7-5413-4deb-95fc-4b034d904691
 integration_id: systemd

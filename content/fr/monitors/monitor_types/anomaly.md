@@ -127,7 +127,7 @@ avg(<période_requête>):anomalies(<requête_métrique>, '<algorithme>', <dévia
 ```
 
 * `période_requête` : intervalle, par exemple `last_4h` ou `last_7d`. Correspond à l'intervalle affiché dans les graphiques des notifications. Cette valeur ne doit pas être inférieure à `période_alerte`. Valeur recommandée : environ 5 fois la valeur de `période_alerte`.
-* `requête_métrique` : requête de métrique standard de Datadog. Exemple : `sum:trace.flask.request.hits{service:web-app}.as_count()`.
+* `requête_métrique` : requête de métrique Datadog standard. Exemple : `sum:trace.flask.request.hits{service:web-app}.as_count()`.
 * `algorithme` : `basic`, `agile` ou `robust`.
 * `déviations` : nombre positif permettant de régler la réactivité de la détection des anomalies.
 * `direction` : indique si l'alerte doit être déclenchée lorsque les points se trouvent au-dessus de la bande de valeurs autorisées (`above`), en dessous (`below`) ou au-dessus et en dessous (`both`).

@@ -3,6 +3,7 @@ assets:
   dashboards:
     OpenStack Controller Overview: assets/dashboards/openstack-controller.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
 display_name: OpenStack
+draft: false
 git_integration_title: openstack
 guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack
@@ -52,7 +54,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][2]します。
 
-### 構成
+### コンフィギュレーション
 
 #### OpenStack の準備
 

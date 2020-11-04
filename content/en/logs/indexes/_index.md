@@ -132,6 +132,12 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
+An event is generated when the daily quota is reached:
+
+{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification"  style="width:70%;">}}
+
+Follow our [Log Usage guide][19] to see how to monitor and alert on your usage.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -156,3 +162,4 @@ Update or remove this quota at any time when editing the Index:
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
 [17]: /help/
 [18]: /logs/live_tail/#overview
+[19]: /logs/guide/logs-monitors-on-volumes/#monitor-indexed-logs-with-fixed-threshold

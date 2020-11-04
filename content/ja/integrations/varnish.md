@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: varnish
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -21,6 +22,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/varnish/README.md'
 display_name: Varnish
+draft: false
 git_integration_title: varnish
 guid: d2052eae-89b8-4cb1-b631-f373010da4b8
 integration_id: varnish

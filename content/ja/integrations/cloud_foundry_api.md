@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cloud_foundry_api/README.md'
 display_name: Cloud Foundry API
+draft: true
 git_integration_title: cloud_foundry_api
 guid: 82e5b924-c8c3-4467-bfde-5838857b6447
 integration_id: cloud-foundry-api
@@ -47,7 +49,7 @@ supported_os:
 Cloud Foundry API チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. Cloud Foundry API のデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloud_foundry_api.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cloud_foundry_api.d/conf.yaml][3] を参照してください。
 

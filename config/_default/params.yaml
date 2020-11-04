@@ -7,14 +7,31 @@ imgix:
   png: "?fm=png&auto=format&lossless=1"
   gif: ""
 code_languages:
-  - display_name: Curl
-    key: bash
-  - display_name: Python
-    key: python
-  - display_name: Ruby
-    key: ruby
+  'py':
+    extension: py
+    name: python
+  'rb':
+    extension: rb
+    name: ruby
+  'sh':
+    extension: sh
+    name: curl
+  'go':
+    extension: go
+    name: go
+  'java':
+    extension: java
+    name: java
+  'cs':
+    extension: cs
+    name: csharp
+  'php':
+    extension: php
+    name: php
 
 branch: ""
+
+signupclass: sign-up-trigger
 
 header_scripts:
   - hotjar: false

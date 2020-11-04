@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md'
 display_name: Cisco ACI
+draft: false
 git_integration_title: cisco_aci
 guid: 8a20f56b-2e25-4a0b-a252-f5187dddeeef
 integration_id: cisco-aci
@@ -47,7 +49,7 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 
 Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

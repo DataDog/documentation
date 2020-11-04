@@ -70,6 +70,8 @@ sudo touch /etc/logrotate.d/dd-agent_ACLs
 getfacl /var/log/apache/access.log
 ```
 
+**注**: **PostgreSQL v10** 以前の場合、アクセス許可を **0700** に設定します。**PostgreSQL v11** の場合は、**0700** または **0750** を設定します。0700 または 0750 とは異なるアクセス許可を持つ基本データフォルダーでサーバーを起動しようとすると、postmater プロセスが失敗します。
+
 ## ACL がない場合のアクセス許可の設定
 
 システムに ACL がない場合は、グループアクセスに基づいてアクセス許可を設定します。

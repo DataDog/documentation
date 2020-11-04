@@ -5,6 +5,7 @@ assets:
   dashboards:
     TLS Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tls/README.md'
 display_name: TLS
+draft: false
 git_integration_title: tls
 guid: 4e27a211-a034-42dd-9939-9ef967b1da50
 integration_id: tls

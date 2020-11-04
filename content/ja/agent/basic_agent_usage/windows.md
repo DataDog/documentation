@@ -151,17 +151,17 @@ Agent の実行は、Windows サービスコントロールマネージャーに
   - PowerShell (`powershell.exe`)
 
     ```powershell
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
   - コマンドプロンプト (`cmd.exe`)
 
     ```cmd
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
-"%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" status
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" launch-gui
+    "%PROGRAMFILES%\Datadog\Datadog Agent\bin\agent.exe" flare
     ```
 
 {{% /tab %}}

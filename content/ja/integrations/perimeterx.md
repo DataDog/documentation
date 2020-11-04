@@ -2,6 +2,7 @@
 assets:
   dashboards:
     PerimeterX Overview: assets/dashboards/PerimeterX_Bot_Defender_Dashboard.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md'
 display_name: PerimeterX
+draft: true
 git_integration_title: perimeterx
 guid: 6e3a9bc2-6766-4b24-9edf-12811d821d41
 integration_id: perimeterx

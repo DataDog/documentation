@@ -33,7 +33,7 @@ La connexion via le protocole SAML nécessite la configuration et l'authentifica
 
 ## Monitors
 
-{{< img src="mobile/monitors_doc2.png" alt="page monitors">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="page monitors">}}
 
 Sur la page Monitors, vous pouvez consulter et rechercher tous les monitors auxquels vous avez accès dans votre organisation Datadog. Vos requêtes de recherche peuvent reposer sur un nom de champ ou un build, selon votre stratégie de tagging. Pour en savoir plus sur les recherches, consultez la [section Gérer les monitors][6]. Par exemple, pour filtrer les monitors de métrique associés à l'équipe SRE qui reçoit les alertes, utilisez la requête `"status:Alert type:Metric team:sre"`. Cliquez sur une alerte pour voir ses détails. Vous pouvez filtrer les alertes par type et par heure. Il est également possible de désactiver une alerte. Vos dix recherches les plus récentes sont enregistrées, afin que vous puissiez accéder rapidement à vos dernières requêtes.
 
@@ -41,11 +41,52 @@ Sur la page Monitors, vous pouvez consulter et rechercher tous les monitors auxq
 
 ## Dashboards
 
-{{< img src="mobile/dashboards_doc.png" alt="page dashboards">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="page dashboards">}}
 
 Sur la page Dashboards, vous pouvez consulter et rechercher tous les dashboards accessibles de votre organisation Datadog, et les filtrer à l'aide des template variables définies dans l'application Web Datadog. Cliquez sur un dashboard pour l'afficher.
 
 **Remarque :** pour configurer ou modifier un dashboard, vous devez [passer par un navigateur][9]. Pour en savoir plus, consultez la section [Dashboards][5].
+
+## Actions rapides
+
+{{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Actions rapides">}}
+
+Appuyez longuement sur l'icône de l'application pour faire apparaître un menu d'actions rapides permettant d'accéder aux cinq dashboards [consultés le plus fréquemment][10] pour iOS (d'après le nombre de vues récentes) et les cinq dashboards les plus ouverts sur mobile pour Android. Appuyez sur un résultat pour ouvrir le dashboard dans l'application.
+
+## Recherche depuis l'écran d'accueil
+
+{{< img src="mobile/iphone_search_doc.png" alt="Recherche depuis l'écran d'accueil" style="width:40%;">}}
+
+**iOS uniquement** : dans la recherche iPhone, filtrez et recherchez le nom de n'importe quel dashboard souhaité. Appuyez sur un résultat pour ouvrir la vue du dashboard directement dans l'application mobile ou appuyez sur l'option « Rechercher dans l'app » pour accéder aux résultats de la recherche sur la page de la liste des dashboards dans l'application.
+
+## Raccourcis et suggestions Siri
+
+**Android** : créez des icônes de raccourci vers vos dashboards en appuyant longuement sur l'icône de l'application Datadog. Si l'application propose des raccourcis, une liste s'affiche. Appuyez longuement sur le raccourci souhaité et faites-le glisser à un autre endroit sur votre écran pour créer une icône de raccourci unique.
+
+**iOS** : créez des raccourcis Siri vers des dashboards et des monitors Datadog grâce à l'application Raccourcis. Pour créer un raccourci, vous devez avoir exécuté l'action souhaitée au moins une fois dans l'application. Par exemple, pour créer un raccourci « Ouvrir le dashboard d'aperçu AWS », ouvrez le dashboard d'aperçu AWS dans votre application mobile au moins une fois.
+
+Avec le raccourci, vous pouvez accéder à vos dashboards et à vos monitors grâce à trois actions clés :
+
+- Épinglez le raccourci à votre écran d'accueil en tant qu'icône. Pour ce faire, accédez à l'application Raccourcis et ouvrez le menu de modification du raccourci vers votre dashboard.
+- Commande vocale Siri : dites le nom de votre raccourci, comme « Ouvrir l'aperçu AWS », pour que Siri ouvre votre dashboard dans l'application.
+- Suggestions Siri : Siri enregistre vos habitudes et vous suggère des raccourcis vers les dashboards dont vous avez le plus besoin. Ces suggestions s'affichent dans un bandeau sur l'écran d'accueil ou l'écran de verrouillage, sur l'écran de recherche iPhone ou dans les widgets de suggestions Siri sur iOS 14.
+
+{{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Raccourcis">}}
+
+Pour en savoir plus sur les raccourcis et les suggestions Siri, consultez la [documentation d'Apple dédiée à Siri][11].
+
+## Handoff
+
+**iOS uniquement** : utilisez la fonctionnalité Handoff d'Apple pour continuer une tâche sur vos différents appareils Apple. Lorsque l'application mobile Datadog est en cours d'utilisation, son icône apparaît sur votre Mac à l'extrémité gauche du Dock. Cliquez sur l'icône pour ouvrir votre dashboard ou votre monitor actuel sur votre Mac.
+
+Pour que la fonctionnalité Handoff fonctionne, chaque appareil doit :
+
+- être connecté à iCloud avec le même identifiant Apple
+- avoir le Bluetooth activé
+- avoir le Wi-Fi activé
+- avoir Handoff activé
+
+Pour en savoir plus sur Handoff, consultez la [documentation d'Apple dédiée à Handoff][12].
 
 ## Compte
 
@@ -53,7 +94,7 @@ Changez d'organisation ou déconnectez-vous sur la page Account.
 
 ## Dépannage
 
-Si vous avez besoin d'aide pour le dépannage, [contactez l'assistance Datadog][10]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][11] [#application-mobile][12]. 
+Si vous avez besoin d'aide pour le dépannage, [contactez l'assistance Datadog][13]. Vous pouvez aussi envoyer un message sur le canal [Slack public de Datadog][14] [#application-mobile][15].
 
 ### Pour aller plus loin
 
@@ -68,6 +109,9 @@ Si vous avez besoin d'aide pour le dépannage, [contactez l'assistance Datadog][
 [7]: https://app.datadoghq.com/monitors
 [8]: /fr/monitors/monitor_types/
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /fr/help/
-[11]: https://chat.datadoghq.com/
-[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[10]: https://app.datadoghq.com/dashboard/lists/preset/5
+[11]: https://support.apple.com/en-us/HT209055
+[12]: https://support.apple.com/en-us/HT209455
+[13]: /fr/help/
+[14]: https://chat.datadoghq.com/
+[15]: https://datadoghq.slack.com/archives/C0114D5EHNG

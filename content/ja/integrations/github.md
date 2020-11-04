@@ -6,6 +6,7 @@ categories:
 dependencies: []
 description: サービスのパフォーマンスに影響するコミットとプルリクエストを特定。
 doc_link: 'https://docs.datadoghq.com/integrations/github/'
+draft: false
 git_integration_title: github
 has_logo: true
 integration_title: GitHub
@@ -75,6 +76,8 @@ Datadog で GitHub コミットをキャプチャして、以下のことがで�
     DataDog オーガニゼーションの**すべての** `master` ブランチに関連するすべてのイベントを収集する場合は、次のように設定します。
 
     {{< img src="integrations/github/get_all_branches.png" alt="github すべてのブランチ" popup="true" style="width:50%;">}}
+
+    ブランチにワイルドカードを使用することも可能です（例: `dev-*` には `dev-` で開始するすべてのブランチが含まれます）。
 
 ## 収集データ
 

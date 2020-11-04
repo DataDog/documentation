@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nagios/README.md'
 display_name: Nagios
+draft: false
 git_integration_title: nagios
 guid: f7629918-751c-4a05-87e7-0e3de34e51e7
 integration_id: nagios
@@ -44,7 +46,7 @@ Nagios が監視するインフラストラクチャーから Datadog にイベ�
 
 Nagios チェックは [Datadog Agent][1] パッケージに含まれています。Nagios サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 

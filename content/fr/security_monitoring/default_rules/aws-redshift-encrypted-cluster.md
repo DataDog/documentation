@@ -5,7 +5,7 @@ cloud: aws
 disable_edit: true
 kind: documentation
 rule_category:
-  - Configuration de cloud
+  - Configuration du cloud
 scope: redshift
 security: compliance
 source: redshift
@@ -28,14 +28,14 @@ Le chiffrement de vos clusters Redshift protège vos données sensibles contre t
 
     {{< code-block lang="bash" filename="describe-cluster.sh" >}}
     aws redshift describe-clusters
-        --cluster-identifier cluster-name
+        --cluster-identifier nom-cluster
     {{< /code-block >}}
 
 2. Exécutez `create-cluster` à l'aide des détails de configuration renvoyés lors de la première étape, avec le [flag `encrypted`][2].
 
     {{< code-block lang="bash" filename="create-cluster.sh" >}}
     aws redshift create-cluster
-        --cluster-identifier cluster-name
+        --cluster-identifier nom-cluster
         ...
         --encrypted
     {{< /code-block >}}

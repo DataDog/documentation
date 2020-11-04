@@ -1,12 +1,13 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md'
 display_name: Uptime
@@ -40,7 +41,7 @@ supported_os:
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Uptime アカウント内で Datadog のインテグレーションを有効にするには、[Alerting > Push Notifications][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
 

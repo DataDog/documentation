@@ -45,7 +45,7 @@ further_reading:
 
 | ポート | エンドポイント                                                                                             | 説明                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | バージョン 0.1.6 以降の場合は `intake.synthetics.datadoghq.com`、バージョン 0.1.5 以前の場合は `api.datadoghq.com/api/`   | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
+| 443  | バージョン 0.1.6 以降の場合は `intake.synthetics.datadoghq.com`、バージョン 0.1.5 以前の場合は `api.datadoghq.com`   | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 | 443  | `intake-v2.synthetics.datadoghq.com` for versions >0.2.0                                             | ブラウザのテストアーティファクト ()スクリーンショット、エラー、リソース をプッシュするためにプライベートロケーションで使用されます                                                                         |
 
 **注**: バージョン 0.1.6 以降の場合は `curl intake.synthetics.datadoghq.com` (バージョン 0.1.5 以前の場合は `curl https://api.datadoghq.com`) を使用して、Datadog `site` に対応するエンドポイントが、ワーカーを実行しているホストで利用可能かどうかを確認します。
@@ -58,7 +58,7 @@ further_reading:
 
 | ポート | エンドポイント                                               | 説明                                                                                   |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `api.datadoghq.eu/api/`                                | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
+| 443  | `api.datadoghq.eu`                                | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 | 443  | `intake-v2.synthetics.datadoghq.eu` for versions >0.2.0| ブラウザのテストアーティファクト ()スクリーンショット、エラー、リソース をプッシュするためにプライベートロケーションで使用されます                                                                            |
 
 **注**: `curl https://api.datadoghq.eu` を使用して、ご利用の Datadog `site` に対応するエンドポイントが、ワーカーを実行するホストで利用可能かどうか確認します。
@@ -87,7 +87,7 @@ _Synthetic Monitoring_ -> _Settings_ -> _Private Locations_ に移動し、**Add
 
 ### プライベートロケーションを構成する
 
-内部ネットワークの設定に応じて、プライベートロケーションコンフィギュレーションファイルに初期コンフィギュレーションパラメーター (プロキシおよび予約済み IP コンフィギュレーション) を追加できます。**ステップ 2** で追加されたパラメーターは、自動的に**ステップ 3** のコンフィギュレーションファイルに反映されます。
+生成されたコンフィギュレーションファイルをカスタマイズして、プライベートロケーションを構成します。[プロキシ](#proxy-configuration)および[ブロックされている予約済み IP](#blocking-reserved-ips)のような初期コンフィギュレーションパラメーターは、**ステップ 2** で追加され、**ステップ 3** で自動的にコンフィギュレーションファイルに反映されます。最初のネットワーク設定に応じて、プライベートロケーションを[高度なオプション](#advanced-configuration)で構成することも可能です。
 
 #### プロキシコンフィギュレーション
 
@@ -222,7 +222,7 @@ docker-compose -f docker-compose.yml up
 
 {{% tab "ECS" %}}
 
-以下に一致する新しい EC2 タスク定義を作成します。各パラメーターは、以前に生成したプライベートロケーションコンフィギュレーションファイルにある対応する値に置き換えてください。
+以下に一致する新しい EC2 タスク定義を作成します。各パラメーターは、以前に生成したプライベートロケーションのコンフィギュレーションファイルにある対応する値に置き換えてください。
 
 ```yaml
 {
@@ -305,32 +305,32 @@ Datadog は既に Kubernetes および AWS と統合されているため、す�
     kubectl create configmap private-location-worker-config --from-file=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-2. デプロイを利用して、プライベートロケーションに関連付けられている望ましい状態を記述します。次を作成します。
+2. デプロイを利用して、プライベートロケーションに関連付けられている望ましい状態を記述します。次の `private-location-worker-deployment.yaml `ファイルを作成します。
 
     ```yaml
-    private-location-worker-deployment.yaml file:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: datadog-private-location-worker
-    namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-    selector:
-      matchLabels:
-        app: private-location
-    template:
-      metadata:
-        name: datadog-private-location-worker
-        labels:
+      selector:
+        matchLabels:
           app: private-location
-      spec:
-        containers:
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
+        spec:
+          containers:
           - name: datadog-private-location-worker
             image: datadog/synthetics-private-location-worker
             volumeMounts:
-              - mountPath: /etc/datadog/
-                name: worker-config
-        volumes:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
           - name: worker-config
             configMap:
               name: private-location-worker-config

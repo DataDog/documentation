@@ -1,15 +1,17 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: true
-ddtype: チェック
+ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md'
 display_name: RBLTracker
+draft: false
 git_integration_title: rbltracker
 guid: 94218bd0-8cc3-4686-8b67-ea9110b77092
 integration_id: rbltracker

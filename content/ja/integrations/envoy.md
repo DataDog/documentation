@@ -6,6 +6,7 @@ assets:
     Envoy - Overview: assets/dashboards/envoy_overview.json
   logs:
     source: envoy
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/envoy/README.md'
 display_name: Envoy
+draft: false
 git_integration_title: envoy
 guid: 007f4e6c-ac88-411e-ad81-f0272539b5ff
 integration_id: envoy
@@ -120,7 +122,7 @@ static_resources:
             port_value: 8001
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

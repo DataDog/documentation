@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_AppStream."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_appstream/'
+draft: false
 git_integration_title: amazon_appstream
 has_logo: true
 integration_title: "Amazon\_AppStream"

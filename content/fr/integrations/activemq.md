@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: activemq
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -48,18 +49,21 @@ Le check ActiveMQ recueille des métriques sur les agents, les files d'attente, 
 
 ### Installation
 
-Le check ActiveMQ de l'Agent est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
+Le check ActiveMQ de l'Agent est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds ActiveMQ.
 
 Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud pour que l'Agent puisse faire un fork de [jmxfetch][3]. Nous vous conseillons d'utiliser une JVM fournie par Oracle.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. **Vérifiez que l'[accès distant à JMX est activé][4] sur votre serveur ActiveMQ.**
-2. Configurez l'Agent pour le connecter à ActiveMQ. Modifiez `activemq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5]. Consultez le [fichier d'exemple activemq.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. **Vérifiez que l'[accès distant à JMX est activé][1] sur votre serveur ActiveMQ.**
+2. Configurez l'Agent pour le connecter à ActiveMQ. Modifiez `activemq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple activemq.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    instances:
@@ -126,7 +130,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
              metric_type: gauge
    ```
 
-3. [Redémarrez l'Agent][7].
+3. [Redémarrez l'Agent][4].
 
 ##### Collecte de logs
 
@@ -138,7 +142,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    logs_enabled: true
    ```
 
-2. Ajoutez ce bloc de configuration à votre fichier `activemq.d/conf.yaml` pour commencer à recueillir vos logs Riak :
+2. Ajoutez ce bloc de configuration à votre fichier `activemq.d/conf.yaml` pour commencer à recueillir vos logs ActiveMQ :
 
    ```yaml
    logs:
@@ -152,11 +156,18 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: "<SERVICE_NAME>"
    ```
 
-3. [Redémarrez l'Agent][7].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://activemq.apache.org/jmx.html
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -170,15 +181,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][9].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "activemq", "service": "<VOTRE_NOM_APPLICATION>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `activemq` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `activemq` dans la section Checks.
 
 ## Données collectées
 
@@ -197,14 +213,14 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Acti
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Architecture et métriques clés d'ActiveMQ][12]
-- [Surveiller les métriques et performances d'ActiveMQ][13]
+- [Architecture et métriques clés d'ActiveMQ][6]
+- [Surveiller les métriques et performances d'ActiveMQ][7]
 
 
 
@@ -222,27 +238,38 @@ Recueillez des métriques d'ActiveMQ XML en temps réel pour :
 
 ### Installation
 
-Le check ActiveMQ XML est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check ActiveMQ XML est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
 Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
+<!-- xxx tabs xxx -->
+<!-- xxx tab "Host" xxx -->
+
 #### Host
 
-1. Modifiez le fichier `activemq_xml.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] avec votre `url` stats. Consultez le [fichier d'exemple activemq_xml.d/conf.yaml][14] pour découvrir toutes les options de configuration disponibles.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-   **Remarque** : l'intégration ActiveMQ XML peut potentiellement générer des [métriques custom][15], ce qui peut avoir une incidence sur votre [facture][16]. Par défaut, une limite de 350 métriques est appliquée. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][11].
+1. Modifiez le fichier `activemq_xml.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] avec votre `url` stats. Consultez le [fichier d'exemple activemq_xml.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][7].
+   **Remarque** : l'intégration ActiveMQ XML peut potentiellement générer des [métriques custom][10], ce qui peut avoir une incidence sur votre [facture][11]. Par défaut, une limite de 350 métriques est appliquée. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][5].
+
+2. [Redémarrez l'Agent][12].
+
+<!-- xxz tab xxx -->
+<!-- xxx tab "Environnement conteneurisé" xxx -->
 
 #### Environnement conteneurisé
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][17].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][13].
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `activemq_xml` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `activemq_xml` dans la section Checks.
 
 ## Données collectées
 
@@ -260,27 +287,23 @@ Le check ActiveMQ XML n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin
 
-- [Surveiller les métriques et performances d'ActiveMQ][13]
+- [Surveiller les métriques et performances d'ActiveMQ][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/jmxfetch
-[4]: https://activemq.apache.org/jmx.html
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/fr/agent/kubernetes/log/?tab=containerinstallation#setup
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://docs.datadoghq.com/fr/help/
-[12]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
-[13]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
-[14]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
-[15]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
-[16]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
-[17]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+[7]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[13]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

@@ -2,8 +2,11 @@
 aliases:
   - /ja/integrations/powerdns
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
 display_name: PowerDNS Recursor
+draft: false
 git_integration_title: powerdns_recursor
 guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns
@@ -55,7 +59,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### PowerDNS の準備
 

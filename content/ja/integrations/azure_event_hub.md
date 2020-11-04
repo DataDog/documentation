@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Event Hub のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_event_hub/'
+draft: false
 git_integration_title: azure_event_hub
 has_logo: true
 integration_title: Microsoft Azure Event Hub
@@ -39,7 +40,7 @@ Azure Event Hub からメトリクスを取得すると、以下のことがで�
 
 [Azure インテグレーションタイル][1]のメトリクス収集で、`Event Hub` をオンにします。
 
-### Log Collection
+### ログの収集
 
 イベントハブからログを収集するには、以下の手順に従ってください。
 

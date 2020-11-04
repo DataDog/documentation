@@ -6,6 +6,7 @@ assets:
     ProxySQL Overview: assets/dashboards/overview.json
   logs:
     source: proxysql
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md'
 display_name: ProxySQL
+draft: false
 git_integration_title: proxysql
 guid: 8d759c9d-eb9e-4c78-9f26-1c2c844233a5
 integration_id: proxysql

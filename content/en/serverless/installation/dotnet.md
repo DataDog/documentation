@@ -2,24 +2,25 @@
 title: Instrumenting .NET Applications
 kind: documentation
 further_reading:
-    - link: 'serverless/installation/node'
-      tag: 'Documentation'
-      text: 'Installing Node.js Serverless Monitoring'
-    - link: 'serverless/installation/ruby'
-      tag: 'Documentation'
-      text: 'Installing Ruby Serverless Monitoring'
-    - link: 'serverless/installation/python'
-      tag: 'Documentation'
-      text: 'Installing Python Serverless Monitoring'
-    - link: 'serverless/installation/go'
-      tag: 'Documentation'
-      text: 'Installing Go Serverless Monitoring'
-    - link: 'serverless/installation/java'
-      tag: 'Documentation'
-      text: 'Installing Java Serverless Monitoring'
+- link: 'serverless/serverless_tagging/'
+  tag: "Serverless"
+  text: 'Tagging Serverless Applications'
+- link: 'serverless/distributed_tracing/'
+  tag: "Serverless"
+  text: 'Tracing Serverless Applications'
+- link: 'serverless/custom_metrics/'
+  tag: "Serverless"
+  text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow the steps below to instrument your application to send metrics, logs, and traces to Datadog.
+## Required Setup
+
+If not already configured:
+
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -33,12 +34,13 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 You need to subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder if you haven't][2].
-2. [Ensure the option DdFetchLambdaTags is enabled][5].
-3. [Subscribe the Datadog Forwarder to your function's log groups][6].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
 ## Explore Datadog Serverless Monitoring
 
-After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][7].
+After you have configured your function following the steps above, you should be able to view metrics, logs and traces on the [Serverless homepage][6].
+
+### Monitor Custom Business Logic
 
 If you would like to submit a custom metric, see the sample code below:
 
@@ -51,10 +53,16 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-[1]: /serverless/#1-install-the-cloud-integration
-[2]: https://docs.datadoghq.com/serverless/forwarder/
+For more information on custom metric submission, see [here][7].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/amazon_web_services/
+[2]: /serverless/forwarder/
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[5]: https://docs.datadoghq.com/serverless/forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://app.datadoghq.com/functions
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: https://app.datadoghq.com/functions
+[7]: /serverless/custom_metrics?tab=otherruntimes

@@ -3,6 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md'
 display_name: pihole
+draft: true
 git_integration_title: pihole
 guid: f0a69a1e-3961-43e2-9848-469342734e34
 integration_id: pihole
@@ -64,7 +66,7 @@ Pi-hole チェックをホストにインストールするには
 {{< get-metrics-from-git "pihole" >}}
 
 
-### サービスチェック
+### サービスのチェック
 
 **`pihole.running`**:
 

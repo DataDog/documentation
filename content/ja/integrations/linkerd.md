@@ -3,6 +3,7 @@ assets:
   dashboards:
     Linkerd - Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md'
 display_name: Linkerd
+draft: false
 git_integration_title: linkerd
 guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd
@@ -43,7 +45,7 @@ supported_os:
 
 Linkerd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

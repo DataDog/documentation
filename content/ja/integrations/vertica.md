@@ -6,6 +6,7 @@ assets:
     Vertica Overview: assets/dashboards/overview.json
   logs:
     source: vertica
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vertica/README.md'
 display_name: Vertica
+draft: false
 git_integration_title: vertica
 guid: 884d1895-6791-487c-ac8e-7ccaad45db0b
 integration_id: vertica

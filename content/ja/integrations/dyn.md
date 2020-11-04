@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/dyn/'
+draft: false
 git_integration_title: dyn
 has_logo: true
 integration_title: Dyn

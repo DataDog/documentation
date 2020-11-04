@@ -20,47 +20,20 @@ Depending on your language and configuration, choose between setting up Datadog 
 | Set up using your developer tools without making any changes to your code with Serverless Framework and AWS SAM Integrations. | Install the AWS X-Ray client library for your Lambda runtime. |
 | Support for Python, Node.js, Ruby. |  Support for all Lambda runtimes. |
 
-
-## Organizing your Serverless infrastructure with tags
-
-Any [tag][3] applied to your AWS Lambda function automatically becomes a new dimension on which you can slice and dice your traces.
-
-Tags are especially powerful for consistency across the Datadog platform, which has [first-class support][4] for the `env` and `service` tags.
-
-**Note**: If you are tracing with Datadog APM, set the parameter `DdFetchLambdaTags` to `true` on the forwarder CloudFormation stack to ensure your traces are tagged with the resource tags on the originating Lambda function. Lambda function resource tags are automatically surfaced to X-Ray traces in Datadog without any additional configuration.
-
-### The env tag
-
-Use `env` to separate out your staging, development, and production environments. This works for any kind of infrastructure, not just for your serverless functions. As an example, you could tag your production EU Lambda functions with `env:prod-eu`.
-
-By default, AWS Lambda functions are tagged with `env:none` in Datadog. Add your own tag to override this.
-
-### The service tag
-
-Add the `service` [tag][5] in order to group related Lambda functions into a [service][6]. The [Service Map][5] and [Services List][7] use this tag to show relationships between services and the health of their monitors. Services are represented as individual nodes on the Service Map.
-
-By default, each Lambda function is treated as its own `service`. Add your own tag to override this.
-
-**Note**: The default behavior for new Datadog customers is for all Lambda functions to be grouped under the `aws.lambda` service, and represented as a single node on the Service map. Tag your functions by `service` to override this.
-
-{{< img src="integrations/amazon_lambda/animated_service_map.gif" alt="animated service map of Lambda functions" >}}
-
 ## Augment AWS X-Ray Tracing with Datadog APM
 
 {{< img src="integrations/amazon_lambda/lambda_tracing.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-You might also configure _both_ AWS X-Ray Tracing and Datadog APM, which can be useful, but will result in higher usage bills. If you are unsure whether to use Datadog APM or AWS X-Ray, contact [our support team][8] to discuss.
-
-You can find setup instructions for this case when you want to do both below:
+You might also configure _both_ AWS X-Ray Tracing and Datadog APM. Note that this may result in higher usage bills. You can find setup instructions for this case when you want to do both below:
 
 - [Tracing in a serverless-first environment](#tracing-in-a-serverless-first-environment)
 - [Tracing across AWS Lambda and hosts](#tracing-across-aws-lambda-and-hosts)
 
 #### Tracing in a serverless-first environment
 
-AWS X-Ray is both a backend AWS service and a set of client libraries. The service gives you an Invocation span for your AWS Lambda functions and traces across Amazon API Gateways and message queues.
+AWS X-Ray provides both a backend AWS service and a set of client libraries. Enabling the backend AWS service alone gives you an Invocation span for your AWS Lambda functions as well as traces across Amazon API Gateways and message queues.
 
-The client libraries trace the integrations in your code. If you are using the Datadog APM client library instead of the AWS X-Ray client library to trace and visualize traces, follow the below two steps:
+Both the AWS X-Ray and Datadog APM client libraries trace the integrations in your code. If you are using the Datadog APM client library instead of the AWS X-Ray client library to trace and visualize traces, follow the below two steps:
 
 1. Enable the [AWS X-Ray integration][2] for tracing your Lambda functions.
 2. [Set up Datadog APM][1] on your Lambda functions.
@@ -103,7 +76,7 @@ Set the `DD_MERGE_DATADOG_XRAY_TRACES` environment variable to `True` on your La
 When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces. This means that your traces will show the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 1. Enable the [AWS X-Ray integration][2] for tracing your Lambda functions.
-2. [Set up Datadog APM][9] on your hosts and container-based infrastructure.
+2. [Set up Datadog APM][3] on your hosts and container-based infrastructure.
 
 **Note**: Distributed Tracing is supported for any runtime for your host or container-based applications.
 
@@ -117,10 +90,4 @@ When applicable, Datadog merges AWS X-Ray traces with native Datadog APM traces.
 
 [1]: /serverless/
 [2]: /tracing/serverless_functions/enable_aws_xray/
-[3]: /getting_stared/tagging/
-[4]: /getting_started/tagging/unified_service_tagging
-[5]: /tracing/visualization/services_map/#the-service-tag
-[6]: /tracing/visualization/#services
-[7]: /tracing/visualization/services_list/
-[8]: /help
-[9]: /tracing/send_traces/
+[3]: /tracing/send_traces/

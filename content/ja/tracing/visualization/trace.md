@@ -84,6 +84,18 @@ further_reading:
 [1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
+
+{{% tab "ネットワーク" %}}
+
+サービスのスパンをクリックして、リクエストを行っているサービスネットワークの依存関係を確認します。特に、コードエラーが生成されない場合には、ボリューム、エラー (TCP 再送)、ネットワークレイテンシー (TCP ラウンドトリップ時間) などの主要なネットワークパフォーマンスのメトリクスを使用して、アプリケーション固有の問題とネットワーク広域の問題の切り分けを行います。たとえば、ネットワークのテレメトリーを使用して、リクエストのレイテンシーが高い理由 (関連するアプリケーションのトラフィックがオーバーロードした、下流のポッドやセキュリティグループ、その他のタグ付けされたエンドポイントの依存関係に問題があったなど）を特定することができます。プロセスをクリックすると[ネットワークの概要][1]が開きます。スパン固有のプロセスを閲覧するには、[ネットワークパフォーマンスモニタリング][2]を有効にしてください。
+
+**注**: 関連するネットワークのテレメトリーは、現在サーバーレスのトレースではサポートされていません。
+
+{{< img src="tracing/visualization/trace/trace_networks.png" alt="トレースネットワークの依存関係" style="width:90%;">}}
+
+[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/network_page
+[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/installation?tab=agent
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

@@ -3,6 +3,7 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md'
 display_name: Filebeat
+draft: false
 git_integration_title: filebeat
 guid: 3bb6a789-d1e3-465c-9bff-ea2a43ae2f59
 integration_id: filebeat
@@ -73,7 +75,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従ってホ
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### 構成
+### コンフィギュレーション
 
 1. Filebeat の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][7]のルートにある `conf.d/` フォルダーの `filebeat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル filebeat.d/conf.yaml][8] を参照してください。
 
@@ -95,9 +97,12 @@ Filebeat チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-Filebeat チェックには、サービスのチェック機能は含まれません。
+`filebeat.can_connect`:
+
+Agent が Filebeat に接続してメトリクスを収集できない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
+
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

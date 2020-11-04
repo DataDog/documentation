@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: ceph
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ceph/README.md'
 display_name: Ceph
+draft: false
 git_integration_title: ceph
 guid: 8a60c34f-ecde-4269-bcae-636e6cbce98f
 integration_id: ceph
@@ -54,7 +56,7 @@ Datadog-Ceph インテグレーションを有効にすると、以下のこと�
 
 Ceph チェックは [Datadog Agent][2] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ceph.d/conf.yaml][4] を参照してください。

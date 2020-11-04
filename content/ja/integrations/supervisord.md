@@ -2,18 +2,24 @@
 aliases:
   - /integrations/supervisor
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: supervisord
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - os & system
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md'
 display_name: Supervisord
+draft: false
 git_integration_title: supervisord
 guid: 2b81259b-723e-47be-8612-87e1f64152e9
 integration_id: supervisord
@@ -48,7 +54,7 @@ supported_os:
 
 Supervisor チェックは [Datadog Agent][2] パッケージに含まれています。Supervisor が実行されているサーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 #### supervisord の準備
 
@@ -135,9 +141,31 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Supervisord ログの収集を開始するには、次のコンフィギュレーションブロックを `supervisord.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: supervisord
+   ```
+
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル supervisord.d/conf.yaml][3] を参照してください。
+
+3. [Agent を再起動します][4]。
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `supervisord` を探します。
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `supervisord` を探します。
 
 ## 収集データ
 
@@ -174,15 +202,17 @@ Agent は、supervisord のすべての子プロセス (`proc_names` と `proc_r
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
-- [ Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][5]
+- [Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
-[5]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor
+[3]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor

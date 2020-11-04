@@ -20,7 +20,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Le check HDFS DataNode est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos DataNodes.
+Le check HDFS DataNode est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos DataNodes.
 
 ### Configuration
 
@@ -39,9 +39,12 @@ Le check HDFS DataNode est inclus avec le paquet de l'[Agent Datadog][3] : vous
 
 #### Associer l'Agent
 
-##### Host
+##<!-- xxx tabs xxx -->
+<!-- xxx tab "Host" xxx -->
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+#### Host
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 1. Modifiez le fichier `hdfs_datanode.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple hdfs_datanode.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles :
 
@@ -62,6 +65,9 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
    ```
 
 2. [Redémarrez l'Agent][6].
+
+<!-- xxz tab xxx -->
+<!-- xxx tab "Environnement conteneurisé" xxx -->
 
 #### Environnement conteneurisé
 
@@ -96,6 +102,9 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
 3. [Redémarrez l'Agent][6].
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### Validation
 
@@ -132,7 +141,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 ## Intégration NameNode HDFS
 
-![Dashboard HDFS][1]
+![Dashboard HDFS][13]
 
 ## Présentation
 
@@ -146,7 +155,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Le check HDFS NameNode est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos NameNodes.
+Le check HDFS NameNode est inclus avec le package de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos NameNodes.
 
 ### Configuration
 
@@ -165,11 +174,14 @@ Le check HDFS NameNode est inclus avec le paquet de l'[Agent Datadog][3] : vous
 
 #### Associer l'Agent
 
-##### Host
+##<!-- xxx tabs xxx -->
+<!-- xxx tab "Host" xxx -->
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+#### Host
 
-1. Modifiez le fichier `hdfs_namenode.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple hdfs_namenode.d/conf.yaml][13] pour découvrir toutes les options de configuration disponibles :
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+
+1. Modifiez le fichier `hdfs_namenode.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4]. Consultez le [fichier d'exemple hdfs_namenode.d/conf.yaml][14] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -189,6 +201,9 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
 
 2. [Redémarrez l'Agent][6].
 
+<!-- xxz tab xxx -->
+<!-- xxx tab "Environnement conteneurisé" xxx -->
+
 #### Environnement conteneurisé
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
@@ -203,7 +218,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` avec :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` :
 
     ```yaml
       logs_enabled: true
@@ -222,6 +237,9 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
 3. [Redémarrez l'Agent][6].
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
 
 ### Validation
 
@@ -266,4 +284,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [11]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
 [12]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
-[13]: https://github.com/DataDog/integrations-core/blob/master/hdfs_namenode/datadog_checks/hdfs_namenode/data/conf.yaml.example
+[13]: https://raw.githubusercontent.com/DataDog/integrations-core/master/hdfs_namenode/images/hadoop_dashboard.png
+[14]: https://github.com/DataDog/integrations-core/blob/master/hdfs_namenode/datadog_checks/hdfs_namenode/data/conf.yaml.example

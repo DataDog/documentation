@@ -33,7 +33,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable App Analytics and Trace ID injection into logs during setup.
+- Enable ingesting 100% of traces and Trace ID injection into logs during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
 

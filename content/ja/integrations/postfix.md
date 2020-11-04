@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: postfix
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
 display_name: Postfix
+draft: false
 git_integration_title: postfix
 guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix
@@ -46,7 +50,7 @@ supported_os:
 
 Postfix チェックは [Datadog Agent][2] パッケージに含まれています。Postfix サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 このチェックは、`find` コマンドを使用するように構成できます。このコマンドを使用するには、`incoming`、`active`、および `deferred` メールキュー内のメッセージカウントを取得するために、`dd-agent` への `sudo` アクセスを許可する必要があります。
 

@@ -1,8 +1,12 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    kube_scheduler: assets/dashboards/overview.json
   logs:
     source: kube_scheduler
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md'
 display_name: Kube_scheduler
+draft: false
 git_integration_title: kube_scheduler
 guid: ec7c029f-86c2-4202-9368-1904998a646c
 integration_id: kube-scheduler

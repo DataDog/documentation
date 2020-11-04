@@ -6,6 +6,7 @@ assets:
     Airflow Overview: assets/dashboards/overview.json
   logs:
     source: airflow
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/airflow/README.md'
 display_name: Airflow
+draft: false
 git_integration_title: airflow
 guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow
@@ -65,6 +67,8 @@ Airflow インテグレーションを適切に動作させるには、以下の
 
 #### ステップ 2: Airflow の `statsd` 機能を使用して Airflow を（Datadog Agent に含まれる） DogStatsD に接続し、メトリクスを収集する
 
+**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes、airflow.operator_failures/successes、airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][7]。
+
 1. [Airflow StatsD プラグイン][1]をインストールします。
 
    ```shell
@@ -81,7 +85,7 @@ Airflow インテグレーションを適切に動作させるには、以下の
    statsd_prefix = airflow
    ```
 
-3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][7]である `datadog.yaml` を更新します。
+3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][8]である `datadog.yaml` を更新します。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -206,7 +210,7 @@ Airflow インテグレーションを適切に動作させるには、以下の
 
 #### ステップ 3: Datadog Agent と Airflow を再起動する
 
-1. [Agent を再起動します][8]。
+1. [Agent を再起動します][9]。
 2. Airflow を再起動し、Agent の DogStatsD エンドポイントへの Airflow メトリクスの送信を開始します。
 
 #### インテグレーションサービスチェック
@@ -280,11 +284,11 @@ _Agent バージョン 6.0 以降で利用可能_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-3. [Agent を再起動します][9]。
+3. [Agent を再起動します][10]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `airflow` を探します。
+[Agent の status サブコマンドを実行][11]し、Checks セクションで `airflow` を探します。
 
 ## 収集データ
 
@@ -308,7 +312,7 @@ Airflow チェックには、イベントは含まれません。
 
 ### Airflow DatadogHook
 
-さらに、Datadog とのインタラクションに [Airflow DatadogHook][12] を使用することも可能です。
+さらに、Datadog とのインタラクションに [Airflow DatadogHook][13] を使用することも可能です。
 
 - メトリクスの送信
 - メトリクスのクエリ
@@ -316,7 +320,7 @@ Airflow チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://airflow.apache.org/docs/stable/metrics.html
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
@@ -324,9 +328,10 @@ Airflow チェックには、イベントは含まれません。
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/ad_identifiers/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
-[12]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[7]: https://github.com/apache/airflow/issues/11514
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
+[13]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html

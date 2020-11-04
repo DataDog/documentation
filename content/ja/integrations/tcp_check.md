@@ -7,6 +7,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md'
 display_name: TCP
+draft: false
 git_integration_title: tcp_check
 guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: システム

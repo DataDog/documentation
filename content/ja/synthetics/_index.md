@@ -24,37 +24,38 @@ further_reading:
 ---
 {{< img src="synthetics/synthetics_home.png" alt="Synthetic モニタリングのホームページ" >}}
 
-Synthetics テストでは、**世界中のシミュレートされたリクエストとアクション**を使用して、システムとアプリケーションのパフォーマンスを観察できます。Datadog は、バックエンドからフロントエンドまで、およびさまざまなネットワークレベル (HTTP、TCP、SSL) で、制御された安定した方法を使って **Web ページと API のパフォーマンスを追跡**し、異常な動作 (回帰、機能障害、応答時間が長い、予期しないステータスコードなど) がある場合に警告します。**本番環境と CI 環境をエンドツーエンドでテストする**ことにより、欠陥のあるコードが本番環境に移行する恐れをなくすことができるため、開発チームのスピードが向上します。主要なエンドポイントとユーザージャーニーで **SLO を計算する**ことにより、アプリケーションのパフォーマンス目標に専念し、最終的に一貫した顧客体験を提供することが容易になります。
+Synthetics テストでは、**世界中のシミュレートされたリクエストとアクション**を使用して、システムとアプリケーションのパフォーマンスを観察できます。Datadog は、バックエンドからフロントエンドまで、およびさまざまなネットワークレベル (HTTP、TCP、SSL、DNS) で、制御された安定した方法を使って **Web ページと API のパフォーマンスを追跡**し、異常な動作 (回帰、機能障害、応答時間が長い、予期しないステータスコードなど) がある場合に警告します。**本番環境と CI 環境をエンドツーエンドでテストする**ことにより、欠陥のあるコードが本番環境に移行する恐れをなくすことができるため、開発チームのスピードが向上します。主要なエンドポイントとユーザージャーニーで **SLO を計算する**ことにより、アプリケーションのパフォーマンス目標に専念し、最終的に一貫した顧客体験を提供することが容易になります。
 
 ## はじめに
 たった数分で最初の Synthetics テストを作成し、Web アプリケーションの監視を開始して、パフォーマンスを向上させることができます。
+
 ### API テストを設定する
 
-API テストを使用すると、HTTP、TCP、SSL などのさまざまなネットワークレベルでリクエストを起動し、Web アプリケーションで検証を実行できます。最初の [HTTP テスト][1]、TCP テスト、[SSL テスト][2]を作成して、API とネットワークの監視を開始しましょう。
+API テストを使用すると、HTTP、TCP、SSL、DNS などのさまざまなネットワークレベルでリクエストを起動し、Web アプリケーションで検証を実行できます。最初の [HTTP テスト][1]、[TCP テスト][2]、[SSL テスト][3]、[DNS テスト][4]を作成して、API とネットワークの監視を開始しましょう。
 
 {{< img src="synthetics/api_test.png" alt="API テスト"  style="width:100%;">}}
 
 ### ブラウザテストを記録する
 
-[Synthetic ブラウザテスト][3]を使用すれば、エンドツーエンドのテストを記録して、顧客が世界中の Web ページをどのように体験しているかを監視できます。
+[Synthetic ブラウザテスト][5]を使用すれば、エンドツーエンドのテストを記録して、顧客が世界中の Web ページをどのように体験しているかを監視できます。
 
 {{< img src="synthetics/browser_test.gif" alt="ブラウザテスト"  style="width:100%;">}}
 
 ### プライベートロケーションを起動する
 
-[Synthetic プライベートロケーション][4]を使用すれば、内部 API と Web サイトを監視したり、ビジネスにミッションクリティカルな領域にカスタムロケーションを作成したりすることができます。
+[Synthetic プライベートロケーション][6]を使用すれば、内部 API と Web サイトを監視したり、ビジネスにミッションクリティカルな領域にカスタムロケーションを作成したりすることができます。
 
 {{< img src="synthetics/private_locations.png" alt="プライベートロケーション"  style="width:100%;">}}
 
 ### インテグレーションとデプロイプロセスでテストを実行する
 
-Synthetics テストを[カナリア][5]として活用するか、[CI パイプライン][5]内で直接実行すれば、欠陥のあるコードが顧客の体験に影響を与えることを恐れずに出荷を開始できます。
+Synthetics テストを[カナリア][7]として活用するか、[CI パイプライン][7]内で直接実行すれば、欠陥のあるコードが顧客の体験に影響を与えることを恐れずに出荷を開始できます。
 
  {{< img src="synthetics/ci.png" alt="CI テスト"  style="width:100%;">}}
 
 ### Synthetic モニタリングデータとトレースを接続する
 
-[Synthetics テストと APM トレース間のすぐに使えるインテグレーション][6]を利用すれば、フロントエンド、ネットワーク、バックエンドリクエスト全体の障害の根本的な原因を見つけることができます。
+[Synthetics テストと APM トレース間のすぐに使えるインテグレーション][8]を利用すれば、フロントエンド、ネットワーク、バックエンドリクエスト全体の障害の根本的な原因を見つけることができます。
 
 {{< img src="synthetics/synthetics_traces.gif" alt="Synthetic モニタリング" style="width:100%;">}}
 
@@ -63,8 +64,10 @@ Synthetics テストを[カナリア][5]として活用するか、[CI パイプ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/synthetics/api_test
-[2]: /ja/synthetics/api_tests/?tab=ssltest
-[3]: /ja/getting_started/synthetics/browser_test
-[4]: /ja/getting_started/synthetics/private_location
-[5]: /ja/synthetics/ci/
-[6]: /ja/synthetics/apm/
+[2]: /ja/synthetics/api_tests/?tab=tcptest
+[3]: /ja/synthetics/api_tests/?tab=ssltest
+[4]: /ja/synthetics/api_tests/?tab=dnstest
+[5]: /ja/getting_started/synthetics/browser_test
+[6]: /ja/getting_started/synthetics/private_location
+[7]: /ja/synthetics/ci/
+[8]: /ja/synthetics/apm/

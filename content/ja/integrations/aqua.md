@@ -1,6 +1,8 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    aqua: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md'
 display_name: Aqua
+draft: false
 git_integration_title: aqua
 guid: c269dad1-8db2-4e91-b25d-af646e80dbbf
 integration_id: aqua
@@ -74,7 +77,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -137,7 +140,7 @@ Aqua 監査ログを収集するには、以下の手順に従います。
 {{< get-metrics-from-git "aqua" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 **aqua.can_connect**:
 

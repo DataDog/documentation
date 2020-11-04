@@ -8,11 +8,11 @@ aliases:
 ---
 ## Clés d'API
 
-Les clés d'API sont uniques à votre organisation. Une clé d'API est requise par l'Agent Datadog pour envoyer des métriques et des événements à Datadog.
+Les clés d'API sont uniques à votre organisation. Une [clé d'API][1] est requise par l'Agent Datadog pour envoyer des métriques et des événements à Datadog.
 
 ## Clés d'application
 
-Les clés d'application sont utilisées conjointement avec la clé d'API de votre organisation afin de vous donner un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et doivent être nommées. La clé d'application est utilisée pour loguer toutes les requêtes effectuées via l'API.
+Les [clés d'application][1] sont utilisées conjointement avec la clé d'API de votre organisation afin de vous donner un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et doivent être nommées. La clé d'application est utilisée pour loguer toutes les requêtes effectuées via l'API.
 
 ## Tokens client
 
@@ -39,6 +39,14 @@ Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, 
 Pour supprimer une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][1] et cliquez sur le bouton **Revoke** correspondant à la clé ou au token que vous souhaitez supprimer :
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Clés d'application"  >}}
+
+## Utilisation de plusieurs clés d'API
+
+Pensez à configurer plusieurs clés d'API pour votre organisation. Par exemple, utilisez des clés d'API différentes pour chacune de vos méthodes de déploiement : une pour le déploiement d'un Agent sur Kubernetes dans AWS, une pour le déploiement sur site avec Chef, une pour les scripts Terraform qui automatisent vos dashboards ou monitors, et une pour les développeurs qui réalisent des déploiements localement.
+
+L'utilisation de plusieurs clés d'API vous permet d'effectuer une rotation des clés dans le cadre de vos mesures de sécurité ou de révoquer une clé spécifique si elle est exposée par inadvertance ou si vous cessez d'utiliser le service auquel elle est associée.
+
+Si la limite de 5 clés d'API est insuffisante pour votre organisation, contactez l'[assistance][4] pour demander d'augmenter ce nombre.
 
 ## Désactiver un compte utilisateur
 

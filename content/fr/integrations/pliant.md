@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md'
 display_name: Pliant
+draft: false
 git_integration_title: pliant
 guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant
@@ -75,10 +77,11 @@ Créez un ou plusieurs workflows à déclencher à partir d'une notification Dat
 
 ![Étape 1a Créer une étape de flow][4]
 
-2. Configurez le flow en ajoutant des actions à effectuer au déclenchement de la notification Datadog.
+2. Configurez le workflow en ajoutant des actions à effectuer au déclenchement de la notification Datadog.
 
+Dans cet exemple, le workflow s'intitule « RestartHost ». Il redémarre un host à partir des informations avec lesquelles Datadog le déclenche.
 
-Dans cet exemple, le workflow s'intitule « RestartHost ». Il se déclenche lorsqu'un host redémarre à partir des informations transmises par Datadog.
+Ce workflow s'exécute avec ses variables d'entrée qui sont initialement attribuées en fonction du corps de requête utilisé pour le déclencher. Le workflow peut déclencher/exécuter n'importe quelle action d'automatisation d'infrastructure de votre choix à l'aide des informations fournies par son entrée. Dans cet exemple, un host est redémarré via SSH dans certaines conditions lorsque Datadog déclenche notre workflow d'automatisation avec certains paramètres.
 
   - Pour ajouter des variables d'entrée ayant pour valeur les données envoyées par Datadog, cliquez sur l'icône « Expand » au démarrage du workflow pour ouvrir le volet Variable. Pour créer des variables d'**entrée** correspondantes, définissez la valeur de toutes ces variables d'entrée sur des guillemets vides : `""`. Par défaut, Datadog transmet des données pour les champs suivants :
 `body`
@@ -89,6 +92,7 @@ Dans cet exemple, le workflow s'intitule « RestartHost ». Il se déclenche l
 `org`
 `id`
 
+Certaines variables de sortie (`host`, `meta` et `ip`) sont également initialisées. Le workflow attribue ces variables de sortie et renvoie les valeurs résultantes à la fin de l'action. Il est également possible de spécifier des variables qui ne sont ni d'entrée ni de sortie de façon à les utiliser en interne dans la logique du workflow.
 
 ![Expand][5]
 
@@ -100,11 +104,11 @@ Cliquez sur cURL > Temporary Bearer Token et sélectionnez la clé d'API que vo
 
 ![Sélection d'une clé][7]
 
-Voici le format de votre endpoint : ***https://<VOTRE_INSTANCE_PLIANT>/api/v1/trigger/<VOTRE_NOM_UTILISATEUR_PLIANT>/User/<CHEMIN_DU_WORKFLOW>/<WORKFLOW_ACTUEL>?sync=true&api_key=<VOTRE_CLÉ_API>***
+Votre endpoint est mis entre des guillemets et se présente sous le format suivant : ***https://<VOTRE_INSTANCE_PLIANT>/api/v1/trigger/<VOTRE_NOM_UTILISATEUR_PLIANT>/User/<CHEMIN_DU_WORKFLOW>/<WORKFLOW_ACTUEL>?sync=true&api_key=<VOTRE_CLÉ_API>***
 
 ![endpoint][8]
 
-Copiez cet endpoint, qui commence par ***https*** et finit par la clé d'API complète. Ne copiez aucun guillemet.
+Copiez l'URL complète qui est mise entre guillemets (comprenant éventuellement des paramètres de requête supplémentaires) et qui commence par ***https***. N'incluez pas les guillemets.
 
 #### Configuration de Datadog
 1. Ouvrez Datadog. Depuis la barre latérale de gauche, cliquez sur **Integrations** > **integrations**.

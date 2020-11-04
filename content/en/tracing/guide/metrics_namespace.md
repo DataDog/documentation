@@ -44,42 +44,42 @@ With the following definitions:
 - `trace.<SPAN_NAME>.hits`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of hits for a given span.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.hits.by_http_status`
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
   - *Description:* Represent the count of hits for a given span break down by HTTP status code.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-### Percentile aggregration
+### Percentile aggregation
 
 - `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent processing by resource, service, and [2nd primary tag][4].
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service`, `resource`, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by.resource_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent processing for each resource and service combination.
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service`, and `resource`.
 
 - `trace.<SPAN_NAME>.duration.by.<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent processing for each [2nd primary tag][4] and service combination.
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service`, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by.service.<PERCENTILE_AGGREGATION>`
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represents the duration for an individual span. It's used to track latency and answer questions like, "what's the median wait time a user experienced?" or "how long do the slowest 1% of users have to wait?".
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env` and `service`.
 
@@ -88,13 +88,13 @@ With the following definitions:
 - `trace.<SPAN_NAME>.errors`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of errors for a given span.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.errors.by_http_status`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of errors for a given span.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 
@@ -105,13 +105,13 @@ With the following definitions:
 - `trace.<SPAN_NAME>.span_count`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the amount of spans collected on a given interval.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `resource`, all host tags on from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.span_count.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
   - *Description:* Represent the amount of spans collected on a given interval break down by HTTP status.
-  - *Metric type:* [COUNT][8]
+  - *Metric type:* [COUNT][5]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 
@@ -120,38 +120,38 @@ With the following definitions:
 - `trace.<SPAN_NAME>.duration`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time for a collection of spans. Specifically, it is the total time spent by all spans over an interval - including time spent waiting on child processes.
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Duration by
 - `trace.<SPAN_NAME>.duration.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
   - *Description:* Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_service`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent actually processing for each service (i.e. it excludes time spent waiting on child processes).
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_type`:
   - *Prerequisite:* This metric exists for any APM service.
-  - *Description:* Measure the total time spent actually processing for each [Service type][6].
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the total time spent actually processing for each [Service type][7].
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_type.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measure the total time spent actually processing for each [Service type][6] and HTTP status.
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the total time spent actually processing for each [Service type][7] and HTTP status.
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_service.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measure the total time spent actually processing for each [Service][7] and HTTP status.
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the total time spent actually processing for each [Service][8] and HTTP status.
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Apdex
@@ -159,25 +159,25 @@ With the following definitions:
 - `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
   - *Description:* Represent the [Apdex][9] score for all combination of resources, [2nd primary tag][4]s and services.
-  - *Metric type:* [GAUGE][5]
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, `resource`, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.apdex.by.resource_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each combination of resources and web services.
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the [Apdex][9] score for each combination of resources and web services.
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, and `resource`
 
 - `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the [Apdex][9] score for each combination of [2nd primary tag][4] and web services.
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env`, `service`, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.apdex.by.service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
-  - *Description:* Mesure the [Apdex][9] score for each web services.
-  - *Metric type:* [GAUGE][5]
+  - *Description:* Measure the [Apdex][9] score for each web services.
+  - *Metric type:* [GAUGE][6]
   - *Tags:* `env` and `service`.
 
 ## Further Reading
@@ -188,8 +188,8 @@ With the following definitions:
 [2]: /tracing/setup/
 [3]: /tracing/visualization/#trace-metrics
 [4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /developers/metrics/types/?tab=gauge#metric-types
-[6]: /tracing/visualization/services_list/#services-types
-[7]: /tracing/visualization/#services
-[8]: /developers/metrics/types/?tab=count#metric-types
+[5]: /developers/metrics/types/?tab=count#metric-types
+[6]: /developers/metrics/types/?tab=gauge#metric-types
+[7]: /tracing/visualization/services_list/#services-types
+[8]: /tracing/visualization/#services
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

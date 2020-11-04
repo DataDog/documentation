@@ -4,6 +4,7 @@ aliases:
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md'
 display_name: PHP-FPM
+draft: false
 git_integration_title: php_fpm
 guid: 47f2c337-83ac-4767-b460-1927d8343764
 integration_id: php-fpm
@@ -54,7 +56,7 @@ PHP-FPM チェックは、FPM プールの状態を監視し、リクエスト�
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。PHP-FPM を使用するサーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 

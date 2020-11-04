@@ -33,7 +33,7 @@ SAML ログインでは、Datadog を使用して SAML プロバイダーをセ�
 
 ## モニター
 
-{{< img src="mobile/monitors_doc2.png" alt="モニターページ">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モニターページ">}}
 
 モニターページでは、Datadog 組織でアクセスできるすべてのモニターを表示、検索できます。タグ付け戦略に基づいて、フィールド名とビルド固有の検索クエリで指定できます。検索の詳細については、[モニター検索の管理セクション][6]を参照してください。たとえば、アラートが発生している SRE チームに関連するメトリクスモニターでフィルタリングするには、クエリ `"status:Alert type:Metric team:sre"` を使用します。個々のアラートをクリックして詳細を表示します。これは、タイプとアラート時間でフィルタリングできます。また、アラートをミュートにすることもできます。最新の 10 件の検索が保存されるため、以前のクエリにすばやくアクセスできます。
 
@@ -41,11 +41,53 @@ SAML ログインでは、Datadog を使用して SAML プロバイダーをセ�
 
 ## ダッシュボード
 
-{{< img src="mobile/dashboards_doc.png" alt="ダッシュボードページ">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
 
 ダッシュボードページでは、Datadog 組織でアクセスできるすべてのダッシュボードを表示、検索し、Datadog Web アプリで設定したものと同じテンプレート変数を使用してそれらをフィルタリングできます。個々のダッシュボードをクリックして表示します。
 
 **注:** ダッシュボードを設定または編集するには、[Datadog ブラウザアプリにログイン][9]する必要があります。詳細については、[ダッシュボード][5]を参照してください。
+
+## クイックアクション
+
+{{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
+
+
+アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][10] ダッシュボード (表示数と最新性で測定) と Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果を押して、アプリ内ダッシュボードを開きます。
+
+## ホーム画面から検索
+
+{{< img src="mobile/iphone_search_doc.png" alt="ホーム画面の検索" style="width:40%;">}}
+
+**iOS のみ**: iPhone Search 内で、必要なダッシュボードの名前をフィルタリングして検索します。結果を押してモバイルアプリで直接ダッシュボードビューを開くか、“Search in App” ボタンを押してアプリ内ダッシュボードリストページで検索クエリを開きます。
+
+## ショートカットと Siri の提案
+
+**Android**: Datadog アプリアイコンを長押ししてダッシュボードのショートカットアイコンを作成し、指を離します。アプリにショートカットがある場合は、リストが表示されます。目的のショートカットを長押ししてから、画面上の別の場所にドラッグアンドドロップして、一意のショートカットアイコンを作成します。
+
+**iOS**: ショートカットアプリを使用して、Datadog ダッシュボードとモニターの Siri ショートカットを作成します。ショートカットを作成できるようにするには、アプリで目的のアクションを少なくとも 1 回実行する必要があります。たとえば、「AWS 概要ダッシュボードを開く」ショートカットを作成するには、モバイルアプリで AWS 概要ダッシュボードを少なくとも 1 回開きます。
+
+ショートカットを使用すると、次の 3 つの主要なアクションを通じてダッシュボードとモニターにアクセスできます。
+
+- ショートカットをホーム画面のアイコンとして固定します。これを行うには、ショートカットアプリにアクセスし、ダッシュボードショートカットの編集メニューを開きます。
+- Siri 音声: 「AWS の概要を開く」などのショートカット名を言うと、Siri はアプリ内でダッシュボードを開きます。
+- Siri の提案: Siri はあなたのルーチンを学習し、ホームまたはロック画面のバナー、iPhone 検索、または iOS 14 の Siri の提案ウィジェットを介して、最も必要なときにダッシュボードのショートカットを提案します。
+
+{{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
+
+Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][11]を参照してください。
+
+## Handoff
+
+**iOS のみ**: Apple Handoff を使用して、Apple デバイス間でタスクを継続します。使用中、Datadog モバイルアプリのアイコンが Mac の Dock の左端に表示されます。アイコンをクリックして、Mac で現在のダッシュボードまたはモニターを開きます。
+
+Handoff が機能するには、各デバイスが次の条件を満たしている必要があります。
+
+- 同じ Apple ID で iCloud にサインインしている
+- Bluetooth が有効になっている
+- Wi-Fi が有効になっている
+- Handoff が有効になっている
+
+Handoff の詳細については、[Apple Handoff のドキュメント][12]を参照してください。
 
 ## アカウント
 
@@ -53,7 +95,7 @@ SAML ログインでは、Datadog を使用して SAML プロバイダーをセ�
 
 ## トラブルシューティング
 
-トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][10]。また、[Datadog 公開 Slack][11] [#mobile-app][12] チャンネルでメッセージをお送りいただくことも可能です。
+トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][13]。また、[Datadog 公開 Slack][14] [#mobile-app][15] チャンネルでメッセージをお送りいただくことも可能です。
 
 ### その他の参考資料
 
@@ -68,6 +110,9 @@ SAML ログインでは、Datadog を使用して SAML プロバイダーをセ�
 [7]: https://app.datadoghq.com/monitors
 [8]: /ja/monitors/monitor_types/
 [9]: https://app.datadoghq.com/dashboard/lists
-[10]: /ja/help/
-[11]: https://chat.datadoghq.com/
-[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[10]: https://app.datadoghq.com/dashboard/lists/preset/5
+[11]: https://support.apple.com/en-us/HT209055
+[12]: https://support.apple.com/en-us/HT209455
+[13]: /ja/help/
+[14]: https://chat.datadoghq.com/
+[15]: https://datadoghq.slack.com/archives/C0114D5EHNG

@@ -27,7 +27,6 @@ Datadog recommends using a Kinesis stream as input when using the Datadog Kinesi
 ​
 If you only want to send logs to Datadog, or if you already have a Kinesis Datastream with your logs, ignore step 1.
 ​
-
 1. (Optional) Create a new Kinesis stream (see the [Kinesis documentation][1]). Name the stream something descriptive, like `DatadogLogStream`, and give it a shard count of 1 (increase the shard count for each MB/s throughput that you need).
 2. Create a [new delivery stream][2] and name it `DatadogLogsforwarder`.
 3. Set the source as "Kinesis stream" (or leave the source as `Direct PUT or other sources` if you don’t want to use a Kinesis stream) and select `DatadogLogStream` (or the existing Kinesis stream that already contains your logs).
@@ -39,18 +38,19 @@ If you only want to send logs to Datadog, or if you already have a Kinesis Datas
 {{< img src="logs/guide/kinesis_logs_datadog_destination.png" alt="Datadog destination configuration" style="width:100%;">}}
 8. Choose to backup failed events to an S3 bucket.
 9. Configure the delivery stream parameters. The two important parameters are:
-  * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
-  * Batch size: Datadog recommends a value between 1MB and 4MB. The logs are sent by the delivery stream if the batch size or the linger time (minimum 60 seconds)
-  is reached. Datadog recommends reducing the batch size to be as close to real-time as possible.
-    {{< img src="logs/guide/kinesis_logs_datadog_batch.png" alt="Batch configuration" style="width:100%;">}}
-​
+    * Retry time: How long the delivery stream should retry before sending an event to the backup S3 bucket.
+    * Batch size: Datadog recommends a value between 1MB and 4MB. The logs are sent by the delivery stream if the batch size or the linger time (minimum 60 seconds) is reached. Datadog recommends reducing the batch size to be as close to real-time as possible.
+    {{< img src="logs/guide/kinesis_logs_datadog_batch.png" alt="Batch configuration" style="width:100%;" >}}
+
 To ensure that logs that fail through the Delivery Stream are still sent to Datadog, [configure the Datadog Lambda function to trigger on this S3 bucket][4].
-​
+
+
 [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/app-hotspots-prepare.html#app-hotspots-create-two-streams
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
 {{% /tab %}}
+
 {{% tab "CloudFormation template" %}}
 ## Upload with a CloudFormation Template
 ​
@@ -59,12 +59,12 @@ Alternatively, customize this CloudFormation template and install it from the AW
 [See the full Kinesis CloudFormation template here.][1]
 ​
 ​
+
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{% /tab %}}
 {{< /tabs >}}
-​
+
 ## Send AWS logs to your Kinesis stream
-​
 
 1. Check the `Subscriptions` column on the [log groups index page][1] to see current subscriptions to your relevant log groups. Because CloudWatch Log groups can only have one subscription, delete any existing subscriptions to the log groups before adding the new Kinesis stream as a subscriber.
   * **Note**: If you have something else you want to subscribe to, you can subscribe to the new Kinesis stream after completing this setup.
@@ -91,6 +91,7 @@ Alternatively, customize this CloudFormation template and install it from the AW
 ​
 If you want to push logs directly to the delivery stream without going through a Kinesis data stream, you can subscribe the CloudWatch log groups directly to the Kinesis Firehose Destination by adding the Kinesis Firehose ARN in the `destination-arn` parameter of the subscription filter, as shown in [the AWS Subscription Filters documentation][4] (step 12).
 ​
+
 [1]: https://console.aws.amazon.com/cloudwatch/home
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html

@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: /tracing/setup/
     tag: Documentation
-    text: Découvrir comment configurer le tracing d'APM avec votre application
+    text: Configurer le tracing d'APM avec votre application
   - link: /tracing/visualization/service/
     tag: Documentation
     text: En savoir plus sur les services dans Datadog

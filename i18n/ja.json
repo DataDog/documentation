@@ -292,5 +292,17 @@
   },
   "description": {
     "other": "説明"
+  },
+  "field": {
+    "other": "フィールド"
+  },
+  "product": {
+    "other": "製品"
+  },
+  "about": {
+    "other": "会社情報"
+  },
+  "blog": {
+    "other": "ブログ"
   }
 }

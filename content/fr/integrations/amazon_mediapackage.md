@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Elemental\_MediaPackage."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_mediapackage/'
+draft: false
 git_integration_title: amazon_mediapackage
 has_logo: true
 integration_title: "Amazon\_Elemental\_MediaPackage"

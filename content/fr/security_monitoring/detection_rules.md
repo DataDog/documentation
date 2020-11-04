@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: /security_monitoring/explorer/
     tag: Documentation
-    text: Faire des recherches sur l'ensemble de vos signaux de sécurité et effectuer une analyse de la sécurité
+    text: Security Signals Explorer
 ---
 ## Présentation
 

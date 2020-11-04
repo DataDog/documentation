@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
 display_name: Couchbase
+draft: false
 git_integration_title: couchbase
 guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase

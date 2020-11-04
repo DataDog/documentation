@@ -4,8 +4,6 @@ dependencies:
 kind: documentation
 title: Chef
 ---
-
-
 Les recettes Chef pour Datadog servent à déployer automatiquement les composants et la configuration de Datadog. Le cookbook prend en charge les versions suivantes de l'Agent :
 
 * Agent Datadog v7.x (par défaut)
@@ -99,6 +97,23 @@ depends 'yum', '< 5.0'
 
 5. Patientez jusqu'à la prochaine exécution programmée de `chef-client` ou déclenchez-le manuellement.
 
+### Environnement Dockerisé
+
+Pour créer un environnement Docker, utilisez les fichiers sous `docker_test_env` :
+
+```
+cd docker_test_env
+docker build -t chef-datadog-container .
+```
+
+Pour exécuter le conteneur, utilisez :
+
+```
+docker run -d -v /dev/vboxdrv:/dev/vboxdrv --privileged=true chef-datadog-container
+```
+
+Ensuite, associez une console au conteneur ou utilisez la fonctionnalité de conteneur distant de VS Code pour développer au sein du conteneur.
+
 #### Attributs Datadog
 
 Vous pouvez utiliser les méthodes suivantes pour ajouter vos [clés d'API et d'application Datadog][4] :
@@ -111,7 +126,7 @@ Vous pouvez utiliser les méthodes suivantes pour ajouter vos [clés d'API et d'
 
 #### Configuration supplémentaire
 
-Pour ajouter des éléments supplémentaires au fichier de configuration de l'Agent (généralement `datadog.yaml`) qui ne sont pas directement disponibles en tant qu'attributs du cookbook, utilisez l'attribut `node['datadog']['extra_config']`. Il s'agit d'un attribut de hachage, qui est marshalé dans le fichier de configuration en conséquence.
+Pour ajouter des éléments supplémentaires qui ne sont pas directement disponibles en tant qu'attributs du cookbook au fichier de configuration de l'Agent (généralement `datadog.yaml`), utilisez l'attribut `node['datadog']['extra_config']`. Il s'agit d'un attribut de hachage, qui est marshalé dans le fichier de configuration en conséquence.
 
 ##### Exemples
 
@@ -139,11 +154,11 @@ Pour les attributs imbriqués, utilisez une syntaxe d'objet. Le code suivant dé
 default['datadog']['extra_config']['logs_config'] = { 'use_port_443' => true }
 ```
 
-#### Déploiement de Chef pour AWS OpsWorks
+#### Déploiement Chef sur AWS OpsWorks
 
 Suivez les étapes ci-dessous pour déployer l'Agent Datadog avec Chef sur AWS OpsWorks :
 
-1. Ajoutez un fichier JSON personnalisé pour Chef :
+1. Ajoutez le JSON personnalisé suivant pour Chef :
   ```json
   {"datadog":{"agent_major_version": 7, "api_key": "<API_KEY>", "application_key": "<APP_KEY>"}}
   ```
@@ -199,7 +214,7 @@ Par défaut, la version majeure actuelle de ce cookbook installe l'Agent v7. Le
 
 Consultez le fichier d'exemple [attributes/default.rb][1] correspondant à la version de votre cookbook pour découvrir tous les attributs disponibles.
 
-### Effectuer une mise à niveau
+### Passer à une version supérieure
 
 Certains noms d'attributs ont changé entre les versions 3.x et 4.x du cookbook. Référez-vous à ce tableau de référence pour mettre à jour votre configuration :
 
@@ -318,9 +333,9 @@ end
 | Propriété                   | Description                                                                                                                                                                                                                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `'name'`                   | Le nom de l'intégration de l'Agent à configurer et à activer.                                                                                                                                                                                                                                     |
-| `instances`                | Les champs utilisés pour remplir les valeurs sous la section `instances` dans le fichier de configuration de l'intégration.                                                                                                                                                                                            |
-| `init_config`              | Les champs utilisés pour remplir les valeurs sous la section `init_config` dans le fichier de configuration de l'intégration.                                                                                                                                                                                      |
-| `logs`                     | Les champs utilisés pour remplir les valeurs sous la section `logs` dans le fichier de configuration de l'intégration.                                                                                                                                                                                             |
+| `instances`                | Les champs utilisés pour renseigners les valeurs sous la section `instances` dans le fichier de configuration de l'intégration.                                                                                                                                                                                            |
+| `init_config`              | Les champs utilisés pour renseigner les valeurs sous la section `init_config` dans le fichier de configuration de l'intégration.                                                                                                                                                                                      |
+| `logs`                     | Les champs utilisés pour renseigner les valeurs sous la section `logs` dans le fichier de configuration de l'intégration.                                                                                                                                                                                             |
 | `use_integration_template` | Définissez cette propriété sur `true` (conseillé) pour utiliser le modèle par défaut, qui inscrit les valeurs des propriétés `instances`, `init_config` et `logs` dans le fichier YAML sous leurs clés respectives. Cette propriété est par défaut définie sur `false` afin de rendre possible une rétrocompatibilité. La valeur `true` sera prochainement utilisée par défaut dans une prochaine version majeure du cookbook |
 
 #### Exemple
@@ -332,7 +347,7 @@ Cet exemple permet d'activer l'intégration ElasticSearch en utilisant la ressou
 ```ruby
 include_recipe 'datadog::dd-agent'
 
-datadog_monitor 'elastic'
+datadog_monitor 'elastic' do
   instances  [{'url' => 'http://localhost:9200'}]
   use_integration_template true
   notifies :restart, 'service[datadog-agent]' if node['datadog']['agent_start']
@@ -354,8 +369,9 @@ Pour installer une version spécifique d'une intégration Datadog, utilisez la r
 
 ```ruby
 datadog_integration 'name' do
-  version                      String # version à installer pour l'action :install 
-  action                       Symbol # valeur par défaut : :install
+  version                      String         # version à installer pour l'action :install
+  action                       Symbol         # valeur par défaut : :install
+  third_party                  [true, false]  # valeur par défaut : false
 end
 ```
 
@@ -363,6 +379,7 @@ end
 
 - `'name'` : le nom de l'intégration de l'Agent à installer, par exemple : `datadog-apache`.
 - `version` : la version de l'intégration à installer (obligatoire uniquement pour l'action `:install`).
+- `third_party` : définissez ce paramètre sur false si vous installez une intégration Datadog. Si ce n'est pas le cas, définissez-le sur true. Disponible à partir des versions 6.21/7.21 de l'Agent Datadog uniquement.
 
 #### Exemple
 
@@ -373,14 +390,14 @@ Cet exemple permet d'installer la version `1.11.0` de l'intégration ElasticSear
 ```ruby
 include_recipe 'datadog::dd-agent'
 
-datadog_integration 'datadog-elastic'
+datadog_integration 'datadog-elastic' do
   version '1.11.0'
 end
 ```
 
 Pour obtenir la liste des versions disponibles d'une intégration, consultez son `CHANGELOG.md` dans le [référentiel integrations-core][16].
 
-**Remarque** : pour les utilisateurs Windows de Chef, le `chef-client` doit avoir un accès en lecture au fichier `datadog.yaml` lorsque le binaire `datadog-agent` disponible sur le nœud est utilisé par cette ressource.
+**Remarque** : pour les utilisateurs de Chef sous Windows, le `chef-client` doit avoir un accès en lecture au fichier `datadog.yaml` lorsque le binaire `datadog-agent` disponible sur le nœud est utilisé par cette ressource.
 
 
 [1]: https://github.com/DataDog/chef-datadog/blob/master/attributes/default.rb

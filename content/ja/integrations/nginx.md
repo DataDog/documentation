@@ -6,7 +6,11 @@ assets:
     NGINX Plus base overview: assets/dashboards/plus_overview.json
   logs:
     source: nginx
-  monitors: {}
+  metrics_metadata: metadata.csv
+  monitors:
+    '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
+    '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
+    '[NGINX] Upstream peers fails': assets/monitors/upstream_peer_fails.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -21,6 +25,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nginx/README.md'
 display_name: Nginx
+draft: false
 git_integration_title: nginx
 guid: 88620208-3919-457c-ba51-d844d09ac97f
 integration_id: nginx
@@ -30,7 +35,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: nginx.
-metric_to_check: nginx.net.connections
+metric_to_check:
+  - nginx.net.connections
+  - nginx.connections.active
 name: nginx
 process_signatures:
   - 'nginx: マスタープロセス'
@@ -144,7 +151,7 @@ NGINX をリロードして、status または API エンドポイントを有�
 sudo nginx -t && sudo nginx -s reload
 ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

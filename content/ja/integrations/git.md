@@ -5,10 +5,11 @@
 "dependencies": []
 "description": "自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/git/"
+"draft": false
 "git_integration_title": "git"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Git"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "git"

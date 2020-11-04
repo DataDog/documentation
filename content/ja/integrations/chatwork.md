@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
 doc_link: 'https://docs.datadoghq.com/integrations/chatwork/'
+draft: false
 git_integration_title: chatwork
 has_logo: true
 integration_title: Chatwork

@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md'
 display_name: Teamcity
+draft: false
 git_integration_title: teamcity
 guid: b390dd3f-47d5-4555-976a-36722833f000
 integration_id: teamcity

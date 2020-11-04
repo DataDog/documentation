@@ -4,9 +4,11 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    redis: assets/dashboards/overview.json
   logs:
     source: redis
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
@@ -22,6 +24,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md'
 display_name: Redis
+draft: false
 git_integration_title: redisdb
 guid: 0e2f3ed1-d36b-47a4-b69c-fedb50adf240
 integration_id: redis
@@ -53,7 +56,7 @@ Redis をデータベース、キャッシュ、メッセージキューのど�
 
 Redis チェックは [Datadog Agent][1] パッケージに含まれています。Redis サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

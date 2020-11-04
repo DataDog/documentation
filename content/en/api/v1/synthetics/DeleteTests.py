@@ -9,4 +9,4 @@ test_ids = ['<SYNTHETICS_TEST_PUBLIC_ID_1>','<SYNTHETICS_TEST_PUBLIC_ID_2>']
 
 initialize(**options)
 
-api.Synthetics.delete_test(id=test_ids)
+api.Synthetics.delete_test(public_ids=test_ids)

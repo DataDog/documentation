@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md'
 display_name: Openstack_controller
+draft: false
 git_integration_title: openstack_controller
 guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
@@ -44,7 +46,7 @@ supported_os:
 
 OpenStack Controller チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 OpenStack Controller インテグレーションは、すべてのコンピュートノードおよびそれを実行しているサーバーから情報を収集するように設計されています。また、単一の Agent から実行して OpenStack 環境を監視します。このインテグレーションは、コントローラーノード、または Keystone および Nova エンドポイントにアクセスできる隣接サーバーでデプロイできます。
 

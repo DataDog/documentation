@@ -1,9 +1,12 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Scylla Overview: assets/dashboards/overview.json
   logs:
     source: Scylla
+  metrics_metadata: metadata.csv
   monitors:
     '[Scylla] Server is shutting down': assets/monitors/instance_down.json
   saved_views: {}
@@ -16,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/scylla/README.md'
 display_name: Scylla
+draft: false
 git_integration_title: Scylla
 guid: 875e4d62-831b-4929-bea1-57e5c7016d65
 integration_id: Scylla

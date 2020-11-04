@@ -68,6 +68,14 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 {{% /tab %}}
 {{< /tabs >}}
 
+## Fichiers de log d'installation de l'Agent
+
+| Plate-forme                             | Nom du fichier et emplacement        |
+|--------------------------------------|-------------------------------|
+| Linux                                | `/tmp/dd_agent.log`           |
+| macOS                                | `/tmp/dd_agent.log`           |
+| Windows                              | `%TEMP%\MSI*.LOG`             |
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

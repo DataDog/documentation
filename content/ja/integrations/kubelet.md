@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md'
 display_name: Kubelet
+draft: false
 git_integration_title: kubelet
 guid: 55039e21-7e89-41fb-968c-ab8bf8f25da0
 integration_id: kubelet
@@ -43,7 +45,7 @@ supported_os:
 
 Kubelet チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 サーバーとポートを指定し、メトリクスと共に送信するタグを設定するには、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `kubelet.d/conf.yaml` ファイルを編集します。
 

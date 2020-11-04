@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md'
 display_name: DNS
+draft: false
 git_integration_title: dns_check
 guid: 31e4c84c-fc4b-4cd4-97ed-0331bf4e2023
 integration_id: dns
@@ -47,7 +49,7 @@ DNS チェックは [Datadog Agent][1] パッケージに含まれているた�
 
 メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適ですが、このステータス指向チェックは、監視対象の DNS サービスを実行していないホストから実行することが望ましい場合があります。
 
-### 構成
+### コンフィギュレーション
 
 1. DNS データの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `dns_check.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル dns_check.d/conf.yaml][3] を参照してください。

@@ -19,7 +19,7 @@ Utilisez le tableau suivant pour dépanner les éventuels problèmes que vous po
 | Fonctionnalité                       | Description |
 | ----------------------------- |--------------------------------------------------|
 | [Métriques Lambda][4]           | Métriques Lambda AWS extraites d'Amazon CloudWatch|
-| [Métriques améliorées][5]         | Métriques Lambda améliorées en temps réel générées par Datadog|
+| [Métriques optimisées][5]         | Métriques Lambda améliorées en temps réel générées par Datadog|
 | [Logs Lambda][6]              | Gestion et ingestion de logs à partir de vos fonctions Lambda|
 | [Métriques custom Lambda][7]    | Ingestion de métriques custom à partir de vos fonctions Lambda|
 | [APM Datadog][8]              | Tracing distribué via le traceur Datadog ou AWS X-Ray|
@@ -33,5 +33,5 @@ Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[é
 [5]: /fr/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /fr/integrations/amazon_lambda/#log-collection
 [7]: /fr/integrations/amazon_lambda/#custom-metrics
-[8]: /fr/integrations/amazon_lambda/#trace-collection
+[8]: /fr/tracing/serverless_functions/
 [9]: /fr/help/

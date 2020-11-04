@@ -31,7 +31,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
-- Enable App Analytics during setup.
+- Enable ingesting 100% of traces during setup.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
@@ -164,7 +164,6 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | The Agent port number                                                                                                                          |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | The Agent request transfer timeout (in milliseconds)                                                                                           |
 | `DD_TRACE_AGENT_URL`                      | `null`      | The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. Added in version `0.47.1`. |
-| `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag to enable app analytics for relevant spans in web integrations                                                                            |
 | `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace long-running processes |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | Enable tracing of PHP scripts from the CLI                                                                                                     |
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
@@ -172,8 +171,6 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
 | `DD_TAGS`                                 | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`                                                 |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
-| `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED` | `false`    | A flag to enable app analytics for relevant spans in a specific integration (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_<INTEGRATION>_ANALYTICS_ENABLED`. |
-| `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` | `1.0`  | Set the app analytics sample rate for relevant spans in a specific integration (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`. |
 | `DD_TRACE_<INTEGRATION>_ENABLED`          | `true`      | Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |

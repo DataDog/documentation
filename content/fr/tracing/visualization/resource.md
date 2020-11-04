@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: /tracing/setup/
     tag: Documentation
-    text: Découvrir comment configurer le tracing d'APM avec votre application
+    text: Configurer le tracing d'APM avec votre application
   - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
@@ -75,7 +75,7 @@ Voici la signification des métriques affichées pour chaque span :
 | `Avg duration`    | La durée moyenne de la span pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois.                                  |
 | `Avg % Exec Time` | Le pourcentage de temps d'exécution moyen pendant lequel la span est active pour les traces qui incluent la ressource actuelle, où la span est présente au moins une fois. |
 
-**Remarque** : un span est considéré comme actif lorsqu'il n'attend pas la fin d'un span enfant. Les spans actifs à un moment donné et pour une trace donnée regroupent tous les spans terminaux (c'est-à-dire les spans sans enfants).
+**Remarque** : une span est considérée comme active lorsqu'elle n'attend pas la fin d'une span enfant. Les spans actives à un moment donné et pour une trace donnée regroupent toutes les spans terminales (c'est-à-dire les spans sans enfants).
 
 ## Traces
 

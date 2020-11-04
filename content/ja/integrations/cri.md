@@ -1,7 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    cri: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cri/README.md'
 display_name: CRI
+draft: false
 git_integration_title: cri
 guid: 6eb96c6a-3e2d-4236-9387-fa3b0c455336
 integration_id: cri
@@ -95,7 +98,7 @@ spec:
 {{< get-metrics-from-git "cri" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 CRI には、サービスのチェック機能は含まれません。
 

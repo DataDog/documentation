@@ -22,7 +22,7 @@ version: '1.0'
 Enregistrez votre activité Redmine dans Datadog pour :
 
 - Suivrez vote cycle de développement.
-- Consulter les problèmes en suspens du flux d'événements Datadog.
+- Visualiser les tickets ouverts dans le flux d'événements Datadog.
 - Discuter des projets avec votre équipe.
 
 La configuration Redmine nécessite seulement une URL complète vers le flux d'activités souhaité. Vous pouvez ajouter plusieurs URL.

@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: tomcat
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md'
 display_name: Tomcat
+draft: false
 git_integration_title: tomcat
 guid: 60f37d34-3bb7-43c9-9b52-2659b8898997
 integration_id: tomcat
@@ -55,7 +57,7 @@ Tomcat チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 このチェックは JMX ベースなので、Tomcat サーバーで JMX リモートを有効にする必要があります。この方法については、[Tomcat のドキュメント][3]の手順に従ってください。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

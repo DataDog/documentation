@@ -132,7 +132,7 @@ Kubernetes ではデフォルトでオートディスカバリーが有効にな
 これを確認するには、次の環境変数が設定されていることを確認します。
 
 ```shell
-KUBERNETES=true
+KUBERNETES=yes
 ```
 
 {{% /tab %}}

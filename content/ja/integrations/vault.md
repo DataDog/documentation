@@ -6,6 +6,7 @@ assets:
     Vault - Overview: assets/dashboards/vault_overview.json
   logs:
     source: vault
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
@@ -22,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vault/README.md'
 display_name: Vault
+draft: false
 git_integration_title: vault
 guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault

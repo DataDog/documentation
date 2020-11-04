@@ -13,11 +13,12 @@ ddtype: crawler
 dependencies: []
 description: AWS サービスを Datadog と統合。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_web_services/'
+draft: false
 git_integration_title: amazon_web_services
 has_logo: true
 integration_title: AWS
 is_public: true
-kind: integration
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_web_services
 public_title: Datadog-AWS インテグレーション
@@ -157,7 +158,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 4. 作成されたロールの名前を入力します。**注:** インテグレーションタイルに入力する名前は大文字と小文字が区別され、AWS 側で作成されるロール名と完全に一致する必要があります。
 5. ダイアログの左側で、メトリクスを収集するサービスを選択します。
 6. オプションで、すべてのホストやメトリクスにタグを追加します。
-7. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。
+7. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
 8. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
 9. **Install Integration** をクリックします。
 
@@ -212,10 +213,13 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
                 "lambda:GetPolicy",
                 "lambda:List*",
                 "lambda:RemovePermission",
-                "logs:TestMetricFilter",
-                "logs:PutSubscriptionFilter",
                 "logs:DeleteSubscriptionFilter",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
                 "logs:DescribeSubscriptionFilters",
+                "logs:FilterLogEvents",
+                "logs:PutSubscriptionFilter",
+                "logs:TestMetricFilter",
                 "rds:Describe*",
                 "rds:List*",
                 "redshift:DescribeClusters",
@@ -299,7 +303,7 @@ Resource Group Tagging API の主な用途は、カスタム タグの収集に�
 3. AWS アクセス キーと AWS 秘密キーを入力します。**GovCloud と中国では、アクセス キーと秘密キーのみが許可されます。**
 4. ダイアログの左側で、メトリクスを収集するサービスを選択します。
 5. オプションで、すべてのホストやメトリクスにタグを追加します。
-6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。
+6. オプションで、`to hosts with tag` テキストボックスに AWS タグを入力して、EC2 インスタンスのサブセットを監視します。**注:** インスタンスに接続された EBS ボリュームにも適用されます。
 7. オプションで、`to Lambdas with tag` テキストボックスに AWS タグを入力して、Lambdas のサブセットを監視します。
 8. **Install Integration** をクリックします。
 

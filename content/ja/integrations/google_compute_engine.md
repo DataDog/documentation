@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
 doc_link: 'https://docs.datadoghq.com/integrations/google_compute_engine/'
+draft: false
 git_integration_title: google_compute_engine
 has_logo: true
 integration_title: Google Compute Engine
@@ -34,9 +35,9 @@ Google Compute Engine からメトリクスを取得して、以下のことが�
 
 #### インストール
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### 構成
+#### コンフィギュレーション
 
 カスタム Compute Engine ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
@@ -50,11 +51,11 @@ Google Compute Engine のログは Stackdriver により収集され、HTTP プ�
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-### 構成
+### コンフィギュレーション
 
 #### ホスト収集の制限
 

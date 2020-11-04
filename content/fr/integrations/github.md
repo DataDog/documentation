@@ -3,7 +3,6 @@ categories:
   - Source Control
   - Collaboration
   - issue tracking
-ddtype: crawler
 dependencies: []
 description: Identifiez les commits et pull requests qui affectent les performances de vos services.
 doc_link: 'https://docs.datadoghq.com/integrations/github/'
@@ -28,7 +27,7 @@ Enregistrez vos commits GitHub dans Datadog pour :
 - Identifier les nouveaux changements de code entraînant des alertes système ou des échecs de build
 - Discuter des changements de code avec votre équipe dans le flux d'événements Datadog
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -50,13 +49,20 @@ Enregistrez vos commits GitHub dans Datadog pour :
 
     {{< img src="integrations/github/webhook_configuration_2.png" alt="Configuration webhook" popup="true" style="width:80%;">}}
 
-6. Dans la section _Which events would you like to trigger this webhook?_, utilisez l'option _Let me select individual events._ pour choisir ce que vous souhaitez envoyer à Datadog. L'intégration Datadog/GitHub prend en charge :
+6. Dans la section _Which events would you like to trigger this webhook?_, utilisez l'option _Let me select individual events._ pour choisir ce que vous souhaitez envoyer à Datadog. L'intégration Datadog/GitHub prend en charge les événements suivants :
 
-    - Les push (nouveaux commits)
-    - Les créations et suppressions (pour les tags)
-    - Les pull requests
-    - Les issues
-    - Tous les commentaires
+    - Push (nouveaux commits)
+    - Créations et suppressions (pour les tags)
+    - Pull requests
+    - Issues
+    - Commentaire sur une issue
+    - Commentaire sur un commit
+    - Commentaire sur un examen de pull request
+    - Installation
+    - Appartenance
+    - Un dépôt devient public
+    - Avis de sécurité
+    - Ajout à l'équipe
 
 #### Datadog
 
@@ -70,6 +76,8 @@ Enregistrez vos commits GitHub dans Datadog pour :
 
     {{< img src="integrations/github/get_all_branches.png" alt="toutes les branches github" popup="true" style="width:50%;">}}
 
+    Vous pouvez également utiliser des wildcards sur les branches. Par exemple, `dev-*` englobe toutes les branches commençant par `dev-`.
+
 ## Données collectées
 
 Une fois l'intégration terminée, les événements sélectionnés seront ajoutés à votre flux d'événements Datadog. Saisissez `sources:github` dans la barre de recherche en haut à gauche d'un dashboard pour superposer des événements GitHub sur les graphiques.
@@ -80,4 +88,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/account/settings#integrations/github
-[3]: https://docs.datadoghq.com/fr/help
+[3]: https://docs.datadoghq.com/fr/help/

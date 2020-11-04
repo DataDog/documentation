@@ -6,6 +6,7 @@ assets:
     RethinkDB Overview: assets/dashboards/overview.json
   logs:
     source: rethinkdb
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md'
 display_name: RethinkDB
+draft: false
 git_integration_title: rethinkdb
 guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb

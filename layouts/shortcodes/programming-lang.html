@@ -1,0 +1,5 @@
+{{ $lang := (.Get ("lang")) }}
+
+<div class="js-code-block code-snippet-wrapper" data-code-lang-block="{{ $lang }}">
+    {{- .Inner | markdownify -}}
+</div>

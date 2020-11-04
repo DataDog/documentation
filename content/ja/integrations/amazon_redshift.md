@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Redshift のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'
+draft: false
 git_integration_title: amazon_redshift
 has_logo: true
 integration_title: Amazon Redshift
@@ -51,7 +52,7 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
 ログを収集するには、まず Redshift Cluster でログを有効にします。Redshift ログを AWS S3 バケットに書き込み、[Lambda 関数で使用][6]します。[詳細については、AWS のドキュメントを参照してください][7]。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][8]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、Redshift ログを収集する方法を以下の 2 つから選択します。

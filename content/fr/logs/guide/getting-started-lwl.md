@@ -2,22 +2,22 @@
 title: Guide de la fonctionnalité Logging without Limits™
 kind: guide
 further_reading:
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: "En savoir plus sur la vue Log\_Explorer"
-  - link: logs/explorer/patterns/
+  - link: /logs/explorer/patterns/
     tag: Documentation
     text: Se familiariser avec la vue Log Pattern
-  - link: logs/live_tail
+  - link: /logs/live_tail/
     tag: Documentation
     text: Explorer la fonctionnalité Live Tail
-  - link: logs/logs_to_metrics
+  - link: /logs/logs_to_metrics/
     tag: Documentation
     text: Découvrir comment générer des métriques à partir de logs ingérés
 ---
 ## Présentation
 
-Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, vos logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits][1]™ vous offre une flexibilité accrue en séparant [le processus d'ingestion des logs du processus indexation][2]. 
+Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, vos logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits™][1] de Datadog vous offre une flexibilité accrue en séparant [le processus d'ingestion des logs du processus d'indexation][2].
 
 Ce guide identifie les principaux composants de la fonctionnalité Logging without Limits™ tels que les [patterns](#2-identifier-les-patterns-de-journalisation-volumineuse), les [filtres d'exclusion](#3-creer-un-filtre-d-exclusion-de-pattern-de-log), les [métriques custom basées sur des logs](#4-generer-des-metriques-pour-effectuer-un-suivi-des-logs-exclus) et les [monitors](#creer-un-monitor-de-detection-d-anomalies), qui peuvent améliorer l'organisation de votre vue Log Explorer et optimiser la surveillance de vos KPI au fil du temps.
 
@@ -70,7 +70,7 @@ Le volet Pattern context répertorie toutes les instances (tous les événements
 
 **Remarque** : si un log correspond à plusieurs filtres d'exclusion, seule la règle du premier filtre d'exclusion est appliquée. Un log ne peut pas être échantillonné ou exclu plusieurs fois par différents filtres d'exclusion. 
 
-Dans cet exemple, le pattern `Updating recommendations with customer_id=* & url=shops/*/*` du statut de service `INFO` est exclus à l'aide d'un filtre d'exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pouvez parcourir vos données et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de la vue Log Explorer. Ils sont toujours ingérés, indexés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
+Dans cet exemple, le pattern `Updating recommendations with customer_id=* & url=shops/*/*` du statut de service `INFO` est exclus à l'aide d'un filtre d'exclusion. En supprimant les patterns de journalisation volumineuse comme celui-ci de votre vue Log Explorer, vous pouvez parcourir vos données et identifier vos problèmes plus facilement. Sachez cependant que ces logs sont **uniquement** retirés de la vue Log Explorer. Ils sont toujours ingérés et consultables dans la vue [Live Tail][5]. Ils peuvent également être envoyés vers les [archives de logs][6] ou utilisés pour [générer des métriques][7].
 
 {{< img src="logs/guide/getting-started-lwl/live_tail.gif" alt="Live Tail" style="width:100%;">}}
 
@@ -110,10 +110,11 @@ Lorsqu'une anomalie est détectée, toutes les personnes concernées reçoivent 
 ## Résumé
 
 Vous savez désormais comment utiliser la fonctionnalité Logging without Limits™ pour :
-* [1. Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
-* [2. Identifier les patterns de journalisation volumineuse](#2-identify-high-volume-logging-patterns)
-* [3. Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)
-* [4. Générer des métriques pour effectuer un suivi des logs exclus](#4-generate-metrics-to-track-excluded-logs)
+
+1. [Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
+2. [Identifier les patterns de logs les plus volumineux](#2-identify-high-volume-logging-patterns)
+3. [Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)
+4. [Générer des métriques pour effectuer un suivi des logs exclus](#4-generate-metrics-to-track-excluded-logs)
   * [Ajouter une nouvelle métrique basée sur des logs](#add-a-new-log-based-metric)
   * [Créer un monitor de détection d'anomalies](#create-an-anomaly-detection-monitor)
 
@@ -130,6 +131,6 @@ Pour en savoir plus sur la fonctionnalité Logging without Limits™ et exploite
 [5]: /fr/logs/live_tail/
 [6]: /fr/logs/archives/
 [7]: /fr/developers/metrics/
-[8]: /fr/logs/logs_to_metrics
+[8]: /fr/logs/logs_to_metrics/
 [9]: /fr/monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

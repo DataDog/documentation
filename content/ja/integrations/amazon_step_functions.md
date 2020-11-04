@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Step Functions のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
+draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
 integration_title: Amazon Step Functions
@@ -60,6 +61,19 @@ Step Functions ステートが Lambda 関数である場合、このインテグ
     - [S3 バケットに手動トリガーを追加][7]
     - [Cloudwatch ロググループに手動トリガーを追加][8]
 
+### トレースの収集
+
+#### AWS X-Ray トレーシングを有効にする
+
+AWS Step Functions の分散型トレーシングを有効にするには
+
+1. [Datadog AWS X-Ray インテグレーション][9]を有効にします。
+1. AWS コンソールにログインします。
+2. **Step Functions** にアクセスします。
+3. Step Functions の 1 つを選択して、**Edit** をクリックします。
+4. ページの下部にある **Tracing** セクションまでスクロールし、**Enable X-Ray tracing** チェックボックスをオンにします。
+5. 推奨: より詳細なトレースを行うには、関数に [AWS X-Ray トレーシングライブラリをインストール][10]してください。
+
 ## 収集データ
 
 ### メトリクス
@@ -70,21 +84,23 @@ Step Functions ステートが Lambda 関数である場合、このインテグ
 
 Amazon Step Functions インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 Amazon Step Functions インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: /ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-step-functions
 [4]: /ja/tagging/
 [5]: /ja/graphing/infrastructure/serverless/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[6]: /ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[7]: /ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[8]: /ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[9]: /ja/tracing/serverless_functions/enable_aws_xray
+[10]: /ja/integrations/amazon_xray/#installing-the-x-ray-client-libraries
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_step_functions/amazon_step_functions_metadata.csv
+[12]: /ja/help/

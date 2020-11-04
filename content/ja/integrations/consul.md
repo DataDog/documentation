@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: consul
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -19,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/consul/README.md'
 display_name: Consul
+draft: false
 git_integration_title: consul
 guid: ec1e9fac-a339-49a3-b501-60656d2a5671
 integration_id: consul
@@ -69,7 +71,7 @@ _Consul_ Agent は DogStatsD 経由でさらに多くのメトリクスを提供
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

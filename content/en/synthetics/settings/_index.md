@@ -35,31 +35,35 @@ Choose the type of variable you want to create:
 {{% tab "Specify Value" %}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-2. Enter the given **Value**.
-3. Decide whether to make your variable secure. Securing your variable obfuscates its value for all users on your test results.
-4. Optional: select **Tags** to associate to your variable.
-5. Optional: enter a **Description** for your variable.
+2. Enter a **Description** for your variable (optional).
+3. Select **Tags** to associate with your variable (optional).
+4. Enter the **Value** you want to assign to your variable.
+3. Decide whether to make your variable **Secure**. Securing your variable obfuscates its value for all users on your test results.
 
-{{< img src="synthetics/settings/variable_specifyvalue.png" alt="Global Variable Specify Value"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_value.png" alt="Global Variable Specify Value"  style="width:80%;">}}
 
 {{% /tab %}}
 
 {{% tab "Create From HTTP Test" %}}
 
-You can create variables from your existing HTTP tests by parsing its response headers or body. Variables are updated with the same frequency as the test it's coming from:
+You can create variables from your existing [HTTP tests][1] by parsing their associated response headers and body:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-2. Pick the test you want to extract your variable from.
-3. Decide whether to make your variable secure. Securing your variable obfuscates its value for all users on your test results.
-4. Optional: select **Tags** to associate to your variable.
-5. Optional: enter a **Description** for your variable.
+2. Enter a **Description** for your variable (optional).
+3. Select **Tags** to associate with your variable (optional).
+4. Pick the **[HTTP test][1]** you want to extract your variable from.
+6. Decide whether to make your variable **Secure**. Securing your variable obfuscates its value for all users on your test results.
 6. Decide whether to extract your variable from the response headers, or from the response body.
-    * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
-    * Extract the value from **response body**: parse the response body of the request with a [regex][1], or use the full response body.
+    * Extract the value from **Response Header**: use the full response header for your variable, or parse it with a [regex][2].
+    * Extract the value from **Response Body**: parse the response body of the request with a [jsonpath][3], a [regex][2], or use the full response body.
 
-{{< img src="synthetics/settings/variable_from_http.png" alt="Variable from http"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_fromhttp.png" alt="Variable from http"  style="width:80%;">}}
 
-[1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+Note: Variable values are updated whenever the test they are extracted from runs.
+
+[1]: /synthetics/api_tests/?tab=httptest
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[3]: https://restfulapi.net/json-jsonpath/
 {{% /tab %}}
 
 {{< /tabs >}}

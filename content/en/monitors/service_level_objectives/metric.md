@@ -41,6 +41,8 @@ By grouping these SLIs you can visualize each individual group’s status, good 
 
 {{< img src="monitors/service_level_objectives/metric_results.png" alt="metric-based SLO group results"  >}}
 
+By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
+
 **Note**: If you are using monitor-based SLIs, you can also [view monitor groups][3].
 
 ### Set your SLO targets

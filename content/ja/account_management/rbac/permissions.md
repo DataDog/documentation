@@ -40,9 +40,9 @@ further_reading:
 
 | 名前                    | 説明                             | Scopable |
 | ----------------------- | --------------------------------------- | -------- |
-| dashboards_read         | ダッシュボードを表示する機能              | false    |
-| dashboards_write        | ダッシュボードを作成および変更する機能 | false    |
-| dashboards_public_share | ダッシュボードを外部と共有する機能  | false    |
+| `dashboards_read`         | ダッシュボードを表示する機能              | false    |
+| `dashboards_write`        | ダッシュボードを作成および変更する機能 | false    |
+| `dashboards_public_share` | ダッシュボードを外部と共有する機能  | false    |
 
 ## モニター
 
@@ -50,9 +50,9 @@ further_reading:
 
 | 名前              | 説明                                  | Scopable |
 | ----------------- | -------------------------------------------- | -------- |
-| monitors_read     | モニターを表示する機能                     | false    |
-| monitors_write    | モニターを変更、ミュート、削除する機能 | false    |
-| monitors_downtime | モニターのダウンタイムを設定する機能   | false    |
+| `monitors_read`     | モニターを表示する機能                     | false    |
+| `monitors_write`    | モニターを変更、ミュート、削除する機能 | false    |
+| `monitors_downtime` | モニターのダウンタイムを設定する機能   | false    |
 
 ## セキュリティモニタリング
 
@@ -60,27 +60,54 @@ further_reading:
 
 | 名前                             | 説明                                         | Scopable |
 | -------------------------------- | --------------------------------------------------- | -------- |
-| security_monitoring_rules_read   | 検出ルールを閲覧可能                     | false    |
-| security_monitoring_rules_write  | 検出ルールを作成、編集、削除可能 | false    |
-| security_monitoring_signals_read | セキュリティシグナルを閲覧可能                    | false    |
+| `security_monitoring_rules_read`   | 検出ルールを閲覧可能                     | false    |
+| `security_monitoring_rules_write`  | 検出ルールを作成、編集、削除可能 | false    |
+| `security_monitoring_signals_read` | セキュリティシグナルを閲覧可能                    | false    |
 
 ## ログ管理
 
 ログコンフィギュレーションアセットおよびログデータのアクセス許可一覧は、以下をご覧ください。
 
-| 名前                         | 説明                                | Scopable |
-| ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_data               | ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または制限クエリなど)。       | true     |
-| logs_read_index_data         | サブセットログデータの読み取り (インデックスベース)       | true     |
-| logs_modify_indexes          | ログインデックスの定義を更新可能       | false    |
-| logs_live_tail               | Live Tail 機能にアクセス可能               | false    |
-| logs_write_exclusion_filters | 除外フィルターのサブセットを更新可能   | true     |
-| logs_write_pipelines         | ログパイプラインのサブセットを更新可能       | true     |
-| logs_write_processors        | インデックス内のログプロセッサーを更新可能      | true     |
-| logs_write_archives          | 外部アーカイブのコンフィギュレーションを更新可能 | false    |
-| logs_read_archives          | アーカイブからログをリハイドレートします。アーカイブのコンフィギュレーション詳細を参照してください。 | true    |
-| logs_public_config_api       | ログパブリック構成 API にアクセス可能（読み取り/書き込み）    | false    |
-| logs_generate_metrics        | メトリクス生成機能にアクセス可能        | false    |
+| 名前                           | 説明                                | Scopable |
+| ------------------------------ | ------------------------------------------ | -------- |
+| `logs_read_data`               | ログデータへの読み取りアクセス                   | true     |
+| `logs_modify_indexes`          | ログインデックスの定義を更新可能       | false    |
+| `logs_write_exclusion_filters` | インデックス除外フィルターを更新する           | true     |
+| `logs_write_pipelines`         | ログパイプラインを更新する                       | false    |
+| `logs_write_processors`        | パイプラインのログプロセッサを更新する    | true     |
+| `logs_write_archives`          | 外部アーカイブのコンフィギュレーションを更新可能 | false    |
+| `logs_read_archives`           | アーカイブコンフィギュレーションの詳細を確認し、アーカイブからコンテンツにアクセスする | true     |
+| `logs_write_historical_views`  | アーカイブからデータをリハイドレートする               | false    |
+| `logs_public_config_api`       | ログパブリック構成 API にアクセス可能（読み取り/書き込み）    | false    |
+| `logs_generate_metrics`        | メトリクス生成機能にアクセス可能        | false    |
+
+
+ログ管理 RBAC には、2 つのレガシーアクセス許可も含まれています。これは、よりきめ細かく、より広範な `logs_read_data` アクセス許可に置き換えられました。
+
+| 名前                           | 説明                                | Scopable |
+| ------------------------------ | ------------------------------------------ | -------- |
+| `logs_live_tail`               | Live Tail 機能にアクセス可能               | false    |
+| `logs_read_index_data`         | サブセットログデータの読み取り (インデックスベース)       | true     |
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+ロールを作成すると、[Datadog アプリケーションでロールを更新][1]して、このロールへアクセス許可を直接割り当てたり削除したりできます。
+
+{{< img src="account_management/rbac/logs_permissions.png" alt="ログアクセス許可"  style="width:75%;" >}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+ロールを作成すると、[Datadog Permission API][1] を使用して、このロールへアクセス許可を直接割り当てたり削除したりできます。
+
+
+[1]: /ja/api/v2/roles/
+{{% /tab %}}
+{{< /tabs >}}
 
 アクセス許可に関する詳細は、以下をご覧ください。
 
@@ -88,111 +115,80 @@ further_reading:
 
 #### logs_generate_metrics
 
-メトリクスの生成機能を使用する能力をロールに付与します。このアクセス許可はグルーバルで、ログから生成されるすべてのメトリクスのコンフィギュレーションに適用されます。
+[Generate Metrics][3] 機能を使用する能力をロールに付与します。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `other` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_generate_metrics_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
+このアクセス許可はグローバルで、これにより新しいメトリクスの作成と、既存のメトリクスの編集または削除の両方が可能になります。
 
 #### logs_modify_indexes
 
-ログインデックスを作成および変更する能力をロールに付与します。それには以下が含まれます。
+[ログインデックス][4]を作成および変更する能力をロールに付与します。それには以下が含まれます。
 
-- インデックスにルーティングするログを指定するための包含クエリを設定します。
-- インデックスに対するログの保存期間を設定します。
-- インデックスの読み取りアクセス権を持つロールを制限します (`logs_read_index_data`) 。
-- インデックスの除外フィルターを変更できるロールを指定します (`logs_write_exclusion_filters`) 。
+- インデックスにルーティングするログを指定するための[インデックスフィルター][5]を設定します。
+- インデックスに対する[ログの保存期間][6]を設定します。
+- 別のロールに、特定のインデックスを範囲とする[ログ読み取りインデックスデータ](#logs-read-index-data)および[ログ書き込み除外フィルター](#logs-write-exclusion-filters)アクセス許可を付与します。
 
-**注**: このアクセス許可は、すべてのログインデックスの読み取りアクセスとすべてのインデックス除外フィルターの書き込みアクセス許可も付与します。
+このアクセス許可はグローバルで、これにより新しいインデックスの作成と、既存のインデックスの編集の両方が可能になります。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+**注**: このアクセス許可は、バックグラウンドで[ログ読み取りインデックスデータ](#logs-read-index-data)および[ログ書き込み除外フィルター](#logs-write-exclusion-filters)アクセス許可も付与します。
 
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `other` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_modify_indexes_access.png" alt="カスタムロールを作成" style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
 
 #### logs_write_exclusion_filters
 
-インデックス内で除外フィルターを作成または変更する能力をロールに付与します。これは、グローバルに割り当てることも、インデックスのサブセットに制限することもできます。
+インデックス内で[除外フィルター][7]を作成または変更する能力をロールに付与します。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**Global access**:
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `write` のチェックボックスを選択します（以下参照）。
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
+このアクセス許可は、グローバルに割り当てることも、インデックスのサブセットに制限することもできます。
 
 **インデックスのサブセット**:
 
+{{< tabs >}}
+{{% tab "UI" %}}
+
 1. ロールのグローバルなアクセス許可を削除。
-2. インデックスを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog アプリの処理パイプラインページ][2]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
+2. インデックスを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog アプリのインデックスページ][2]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
 
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="特定のロールにインデックス除外フィルターの書き込みアクセス権を付与する"  style="width:75%;" >}}
+{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="ログ書き込み除外フィルター"  style="width:75%;" >}}
 
-
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
+このコンフィギュレーションは、UI を通じてのみサポートされます。
 
-
-[1]: /ja/api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
 #### logs_write_pipelines
 
-ロールにログ処理パイプラインを作成および変更する能力を付与します。これには、処理パイプラインに入るログの一致フィルターの設定、パイプラインの名前の設定、そのパイプライン内のプロセッサーへの書き込みアクセス権を持つロールの制限（`logs_write_processors`）が含まれます。
+[ログ処理パイプライン][8]を作成および変更する能力をロールに付与します。それには以下が含まれます。
+
+- パイプラインの名前を設定する
+- 処理パイプラインに入る必要があるログに[パイプラインフィルター][9]を設定する
+- パイプラインを並べ替える
+- 別のロールに、そのパイプラインを対象とした[ログ書き込みプロセッサ](#logs-write-processors)アクセス許可を付与します
+
+**注**: このアクセス許可は、バックグラウンドで[ログ書き込みプロセッサ](#logs-write-processors) (すべてのパイプライン上のすべてのプロセッサに対して) アクセス許可も付与します。
+
+#### logs_write_processors
+
+プロセッサとネストされたパイプラインを作成、編集、または削除する能力をロールに付与します[12]。
+
+このアクセス許可は、グローバルに割り当てることも、パイプラインのサブセットに制限することもできます。
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "UI" %}}
 
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `other` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_write_pipeline_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
+特定のパイプラインのモーダルでロールを割り当てます。
 
+{{< img src="account_management/rbac/logs_write_processors.png" alt="ログ書き込みプロセッサ"  style="width:75%;" >}}
 
-[1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
+予備、
 
-ID がそれぞれ `abcd-1234` および `bcde-2345` の 2 つの処理パイプラインにのみ書き込みアクセスを付与する場合、
-
-1. ロールのグローバルなアクセス許可 `logs_write_pipelines` が割り当てられている場合、削除します。
-2. 変更するロールの UUID を取得します。
-3. [アクセス許可を取得][2] API を使用し、リージョンの `logs_write_pipelines` アクセス許可 UUID を見つけます。
-4. 以下の呼び出しで、そのロールにアクセス許可を付与します。
+* 特定のパイプラインに割り当てるロールの[ロール ID を取得][1]します。
+* 地域の `logs_write_processors` アクセス許可 API の[アクセス許可 ID を取得][2]します。
+* このロールを割り当てるパイプラインの[パイプライン ID を取得][3]します。
+* 以下の呼び出しで、そのロールにアクセス許可を付与します。
 
 ```sh
 curl -X POST \
@@ -202,90 +198,33 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "pipelines": [
-                        "abcd-1234",
-                        "bcde-2345"
-                    ]
+                    "pipelines": [ "<PIPELINE-X_ID>", "<PIPELINE-Y_ID>"]
                 }
             }'
 ```
 
-
-[1]: /ja/api/v2/roles/
+[1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
-{{% /tab %}}
-{{< /tabs >}}
-
-#### logs_write_processors
-
-処理パイプライン内でプロセッサーを作成または変更する能力をロールに付与します。
-
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**Global access**:
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `write` のチェックボックスを選択します（以下参照）。
-
-{{< img src="account_management/rbac/logs_write_processors_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
-
-**パイプラインのサブセット**:
-
-1. ロールの `logs_write_processors` および `logs_write_pipelines` アクセス許可を削除します。
-2. 処理パイプラインを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog アプリの処理パイプラインページ][2]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="特定のロールにプロセッサーの書き込みアクセス権を付与する"  style="width:75%;" >}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/v2/roles/
+[3]: /ja/api/v1/logs-pipelines/#get-all-pipelines
 {{% /tab %}}
 {{< /tabs >}}
 
 #### logs_write_archives
 
-ログアーカイブを作成または変更する能力を付与します。
+[ログアーカイブ][10]を作成、編集、または削除する能力を付与します。それには以下が含まれます。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+- アーカイブにルーティングするログの[アーカイブフィルター][9]を設定する
+- アーカイブの名前を設定する
+- アーカイブを並べ替える
+- [ログ読み取りアーカイブ](#logs-read-archives)アクセス許可をロールのサブセットに制限します。
 
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `other` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_write_archives_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
-
+このアクセス許可はグローバルで、これにより新しいアーカイブの作成と、既存のアーカイブの編集と削除が可能になります。
 
 #### logs_read_archives
 
-アーカイブからのリハイドレートを行う許可を取得し、アーカイブコンフィギュレーションの詳細にアクセスします。このアクセス許可の対象はアーカイブのサブセットとなります。
+アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][11]をトリガーする能力も付与します。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `read` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_read_archive_access.png" alt="カスタムロールを作成" style="width:90%;">}}
-
-次に、アーカイブにロールを割り当てます。アーカイブを作成して割り当てるか、アーカイブの編集時にいつでも更新することができます。
-{{< img src="account_management/rbac/logs_archive_restriction.png" alt="カスタムロールを作成" style="width:90%;">}}
-
-アクセス制限のないアーカイブは、`logs_read_archives` アクセス許可をもつロールに属するユーザー全員が閲覧できます。アクセスが制限されているアーカイブは、`logs_read_archives` が許可されているロールを除き、登録済みのロールのいずれかに属するユーザーのみしかアクセスできません。
+このアクセス許可の対象はアーカイブのサブセットとなります。アクセス制限のないアーカイブは、`logs_read_archives` アクセス許可をもつロールに属するユーザー全員が閲覧できます。アクセスが制限されているアーカイブは、`logs_read_archives` が許可されているロールを除き、登録済みのロールのいずれかに属するユーザーのみしかアクセスできません。
 
 以下の例では、`Guest` 以外のすべてのロールに `logs_read_archive` 許可が付与されていることを前提としています。
 
@@ -295,62 +234,70 @@ curl -X POST \
 
 {{< img src="account_management/rbac/logs_archives_list.png" alt="カスタムロールを作成"  style="width:90%;">}}
 
+{{< tabs >}}
+{{% tab "UI" %}}
 
-[1]: https://app.datadoghq.com/access/roles
+アーカイブの作成に進むことも、アーカイブの編集中にいつでも更新することもできます。
+
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="カスタムロールを作成"  style="width:90%;">}}
+
 {{% /tab %}}
 {{% tab "API" %}}
 
-[Roles API][1] から、`logs_read_archive` アクセス許可をロールに付与したり取り消すことができます。
-
-[Archive API][2] を使用して、アーカイブ対象をロールのサブセットに設定することができます。
+ログアーカイブ API を使用して、特定のアーカイブからロールを[割り当て][1]または[取り消し][2]します。
 
 
-[1]: /ja/api/v2/roles/
-[2]: /ja/api/v2/logs-archives/
+[1]: /ja/api/v2/logs-archives/#grant-role-to-an-archive
+[2]: /ja/api/v2/logs-archives/#revoke-role-from-an-archive
 {{% /tab %}}
 {{< /tabs >}}
+
+#### logs_write_historical_view
+
+[Log Rehydration*][11] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
+
+このアクセス許可はグローバルです。 これにより、ユーザーは、[ログ読み取りアーカイブ](r#logs-read-archives)アクセス許可を持つアーカイブのリハイドレートをトリガーできます。
+
+{{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="履歴ビューを書き込む"  style="width:70%;">}}
+
+上記の例では
+
+* `ADMIN` ロールメンバーは、そのアーカイブに対する履歴ビューの書き込み (リハイドレート) アクセス許可と、アーカイブの読み取りアクセス許可を持っているため、`Audit Archive` からリハイドレート**できます**。
+* `AUDIT` ロールメンバーは、履歴ビューの書き込み (リハイドレート) アクセス許可を持っていないため、`Audit Archive` からリハイドレートすることは**できません**。
+* `PROD` ロールメンバーは、アーカイブの読み取りアクセス許可を持っていないため、`Audit Archive` からリハイドレートすることは**できません**。
+
+
+`Audit Archive` からリハイドレートされたすべてのログに `team:audit` タグを割り当てるときは、`team:audit` ログの読み取りに制限されている `Audit` ロールメンバーがリハイドレートされたコンテンツにのみアクセスできることを確認してください。タグの追加とリハイドレートの方法の詳細については、[ログアーカイブ設定セクション][10]を参照してください。
+
+`Prod Archive` からリハイドレートされた `service:ci-cd` ログの場合、次の点に注意してください。
+
+* [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**しない**場合、これらのログには `CI-CD` ロールメンバーがアクセスできます。
+* [インデックスデータのログ読み取り](#logs-read-index-data)レガシーアクセス許可を使用**する**場合、結果の履歴ビューは `PROD` および `ADMIN` ロールメンバーに制限されるため、これらのログには `CI-CD` ロールメンバーはアクセスできません。 
+
 
 #### logs_public_config_api
 
 Datadog API でログコンフィギュレーションを作成または変更する能力を付与します。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
+* API を介して[アーカイブ][12]を構成する
+* API を介して[インデックス][13]を構成する
+* API を介して[パイプライン][14]を構成する
+* API を介して[制限クエリ][15]を構成する
 
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `other` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_public_config_api_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/v2/roles/
-{{% /tab %}}
-{{< /tabs >}}
+ログパブリックコンフィギュレーション API アクセス許可は、API を介してアクションを操作するアクセス許可のみを付与します。たとえば、[ログ書き込み除外フィルターアクセス許可](#logs-write-exclusion-filters)を持たないユーザーは、ログパブリックコンフィギュレーション API アクセス許可が付与されていても、API を介してサンプリングレートを更新できません。
 
 ### ログデータアクセス
 
 次のアクセス許可を付与してログデータのサブセットの読み取りアクセス権を管理します。
 
-* `logs_read_data`(推奨) は、ログ制限クエリに一致するログへのロールのアクセスを制限することにより、よりきめ細かなアクセス制御を提供します。
-* `logs_read_index_data` は、インデックスごとにインデックス付きログデータへのデータアクセスを制限する代替アプローチです。(インデックスされたデータにアクセスする際にもこのアクセス許可が求められます)
-
-これらのアクセス許可は一緒に使用することもできます。ロールは、ユーザーをインデックスのサブセットに制限し、さらに制限クエリを適用して、これらのインデックス内のアクセスを制限できます。
-
-**例**: ユーザー A はインデックス `audit` とインデックス `errors` にアクセスでき、クエリ `service:api` に制限されています。
-ログエクスプローラーを見ると、このユーザーには `service:api` から `audit` と `errors` インデックスへのログのみが表示されます。
-
-さらに、Live Tail へのアクセスは、ユーザーのデータアクセス制限に関係なく、`logs_live_tail` アクセス許可で制限できます。
+* [ログ読み取りデータ](#logs-read-data) (推奨) は、ログ制限クエリに一致するログへのロールのアクセスを制限することにより、よりきめ細かなアクセス制御を提供します。
+* [ログ読み取りインデックスデータ](#logs-read-index-data)は、インデックスごとにインデックス付きログデータへのデータアクセスを制限するレガシーアプローチです。(インデックスされたデータにアクセスする際にもこのアクセス許可を有効にすることが求められます)
 
 #### logs_read_data
 
-ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][3]など)。
+ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][15]など)。
 
-"ロールの組み合わせは許容されます。ユーザーが複数の役割に属している場合、最も制限の少ないロールが適用されます。"
+ロールは付加的です。ユーザーが複数のロールに属している場合、ユーザーがアクセスできるデータは、各ロールからのすべてのアクセス許可の結合になります。
 
 **例**:
 
@@ -359,66 +306,56 @@ Datadog API でログコンフィギュレーションを作成または変更�
 
 {{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="データ読み取りアクセス権"  style="width:70%;">}}
 
+**ログのサブセットへの読み取りアクセスを制限する**
+
 {{< tabs >}}
-{{% tab "Datadog application" %}}
-
-**ログデータへのグローバルな読み取りアクセス権を付与する**:
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `read` のチェックボックスを選択します（以下参照）。
-
-{{< img src="account_management/rbac/logs_read_data_access.png" alt="データ読み取りアクセス権"  style="width:70%;">}}
-
-**ログのサブセットへの読み取りアクセスを制限する**:
+{{% tab "UI" %}}
 
 このコンフィギュレーションは、API を通じてのみサポートされます。
-[1]: https://app.datadoghq.com/access/roles
+
 {{% /tab %}}
 {{% tab "API" %}}
 
 [Roles API][1] を使用して、ロールからこのアクセス許可を取り消すか付与します。
 [制限クエリ][2]を使用して、ログデータのサブセットにアクセス許可をスコープします。
 
-
-
 [1]: /ja/api/#roles
 [2]: /ja/api/?lang=bash#roles-restriction-queries-for-logs
 {{% /tab %}}
 {{< /tabs >}}
 
+### レガシーアクセス許可
+
+これらのアクセス許可は、デフォルトですべてのユーザーに対してグローバルに有効になっています。
+
+[ログ読み取りデータ](#logs-read-data)アクセス許可は、これらのレガシーアクセス許可の上にあります。たとえば、ユーザーがクエリ `service:api` に制限されているとします。
+
+* このユーザーが `audit` および `errors` インデックスのスコープ[読み取りインデックスデータ](#logs-read-index-data)アクセス許可を持っている場合、このユーザーにはこれらのインデックス内の `service:api` ログのみが表示されます。
+* このユーザーが [livetail](#logs-livetail) アクセス許可を持っている場合、このユーザーには livetail の `service:api` ログのみが表示されます。
+
 
 #### logs_read_index_data
 
 いくつかのログインデックスでロールに読み取りアクセス権を付与します。これは、グローバルに割り当てることも、ログインデックスのサブセットに制限することもできます。
-`logs_read_data` と制限クエリを使用する場合は、インデックスされたログにアクセスできるよう `logs_read_index_data` アクセス許可を**必ず**グローバルに設定する必要があります。
+
+このアクセス許可の範囲をインデックスのサブセットに設定するには、まずロールの `logs_read_index_data` および `logs_modify_indexes` アクセス許可を削除します。その後、
 
 {{< tabs >}}
-{{% tab "Datadog application" %}}
+{{% tab "UI" %}}
 
-**Global access**:
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `read` のチェックボックスを選択します（以下参照）。
-
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="インデックスデータ読み取りアクセス権"  style="width:90%;">}}
-
-**インデックスのサブセット**:
-
-1. ロールの `logs_read_index_data` および `logs_modify_indexes` アクセス許可を削除します。
-2. インデックスを編集し、"Grant access of this index's content to" フィールドにロールを追加することで、[Datadog アプリのインデックスコンフィギュレーションページ][2]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
+このロールに[コンフィギュレーションページ][1]のインデックスへのアクセスを許可します。
 
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="特定のロールにインデックスの読み取りアクセス権を付与する"  style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/access/roles
-[2]: https://app.datadoghq.com/logs/pipelines/indexes
+[1]: https://app.datadoghq.com/logs/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
-このアクセス許可は、[Roles API][3] を介してロールから付与または取り消すことができます。たとえば、`main` および `support` の名前のついた 2 つのインデックスのみの読み取りアクセスをロールに付与する場合、API 呼び出しは以下のようになります。
-
-1. ロールのグローバルなアクセス許可 `logs_read_index_data` が割り当てられている場合、削除します。
-2. 変更するロールの UUID を取得します。
-3. [アクセス許可を取得][2] API を使用し、リージョンの `logs_read_index_data` アクセス許可 UUID を見つけます。
-4. 以下の呼び出しで、そのロールにアクセス許可を付与します。
+* 特定のパイプラインに割り当てるロールの[ロール ID を取得][1]します。
+* 地域の `logs_write_processors` アクセス許可 API の[アクセス許可 ID を取得][2]します。
+* このロールを割り当てるパイプラインの[インデックス ID を取得][3]します。
+* 以下の呼び出しで、そのロールにアクセス許可を付与します。
 
 ```bash
 curl -X POST \
@@ -428,47 +365,44 @@ curl -X POST \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
         -d '{
                 "scope": {
-                    "indexes": [
-                        "main",
-                        "support"
-                    ]
+                    "indexes": ["<INDEX-1_ID>",["<INDEX-2_ID>"]
                 }
             }'
 ```
 
 
-[1]: /ja/api/v2/roles/
+[1]: /ja/api/v2/roles/#list-roles
 [2]: /ja/api/v2/roles/#list-permissions
+[3]: /ja/api/v1/logs-indexes/#get-all-indexes
 {{% /tab %}}
 {{< /tabs >}}
-
 
 #### logs_live_tail
 
-ロールに Live Tail 機能を使用する能力を付与します。
+ロールに [Live Tail][16] 機能を使用する能力を付与します。
 
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-[Datadog ロールのページ][1]にアクセスし、指定するロールの `read` のチェックボックスを選択します（以下参照）。
-{{< img src="account_management/rbac/logs_livetail_access.png" alt="カスタムロールを作成"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[Roles API][1] から、このアクセス許可をロールに付与したり取り消すことができます。
-
-
-[1]: /ja/api/#roles
-{{% /tab %}}
-{{< /tabs >}}
+このアクセス許可はグローバルで、[ログ読み取りインデックスデータ](#logs-read-index-data)アクセス許可に関係なく、livetail へのアクセスを許可します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>
+\*Log Rehydration は Datadog, Inc. の商標です
+
 [1]: /ja/account_management/users/#edit-a-user-s-roles
 [2]: /ja/api/v2/roles/#list-permissions
-[3]: /ja/api/v2/logs-restriction-queries/
+[3]: /ja/logs/logs_to_metrics/
+[4]: /ja/logs/indexes
+[5]: /ja/logs/indexes#indexes-filters
+[6]: /ja/logs/indexes#update-log-retention
+[7]: /ja/logs/indexes#exclusion-filters
+[8]: /ja/logs/processing/pipelines/
+[9]: /ja/logs/processing/pipelines/#pipeline-filters
+[10]: /ja/logs/archives
+[11]: /ja/logs/archives/rehydrating
+[12]: /ja/api/v2/logs-archives/
+[13]: /ja/api/v1/logs-indexes/
+[14]: /ja/api/v1/logs-pipelines/
+[15]: /ja/api/v2/logs-restriction-queries/
+[16]: /ja/logs/explorer/live_tail/

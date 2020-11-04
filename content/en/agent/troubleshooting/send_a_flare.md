@@ -53,27 +53,27 @@ To get a flare from each container, run the following commands:
 
 ### Agent
 
-{{< code-block lang="bash" filename="agent.sh" >}}
+```bash
 kubectl exec -it <agent-pod-name> -c agent -- agent flare <case-id>
-{{< /code-block >}}
+```
 
 ### process-agent
 
-{{< code-block lang="bash" filename="process-agent.sh" >}}
+```bash
 kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
-{{< /code-block >}}
+```
 
 ### trace-agent
 
-{{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
-{{< /code-block >}}
+```
   
 ### system-probe
 
-{{< code-block lang="bash" filename="trace-agent.sh" >}}
+```bash
 kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --local
-{{< /code-block >}}
+```
 
 [1]: /agent/basic_agent_usage/#gui
 [2]: /agent/basic_agent_usage/windows/#agent-v6
@@ -109,6 +109,17 @@ kubectl exec -it <AGENT_POD_NAME> -c system-probe -- agent flare <CASE_ID> --loc
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Manual submission
+
+The Agent flare protocol collects configurations and logs into an archive file first located in the local `/tmp` directory.
+Manually obtain this file and provide it to support if there are any issues with Agent connectivity.
+
+### Kubernetes
+To obtain the archive file in Kubernetes, use the kubectl command:
+```
+kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+```
 
 ## Further Reading
 

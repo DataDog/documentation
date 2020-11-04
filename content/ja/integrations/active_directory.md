@@ -2,9 +2,11 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Active Directory: assets/dashboards/active_directory.json
   logs:
     source: ruby
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +18,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md'
 description: Microsoft Active Directory のメトリクスを収集してグラフ化
 display_name: Active Directory
+draft: false
 git_integration_title: active_directory
 guid: ba667ff3-cf6a-458c-aa4b-1172f33de562
 integration_id: active-directory
@@ -45,7 +48,7 @@ Agent の Active Directory チェックは [Datadog Agent][1] パッケージに
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][2]を参照してください。
 
-### 構成
+### コンフィギュレーション
 
 #### メトリクスの収集
 

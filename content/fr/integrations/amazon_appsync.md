@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'AWS\_AppSync."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_appsync/'
+draft: false
 git_integration_title: amazon_appsync
 has_logo: true
 integration_title: "AWS\_AppSync"

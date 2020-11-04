@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、アラートパフォーマンスを視覚化できます
 doc_link: 'https://docs.datadoghq.com/integrations/mongodb_atlas/'
+draft: false
 git_integration_title: mongodb_atlas
 has_logo: true
 integration_title: MongoDB Atlas

@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog-StatusPage.io インテグレーション。
 doc_link: 'https://docs.datadoghq.com/integrations/statuspage/'
+draft: false
 git_integration_title: statuspage
 has_logo: true
 integration_title: StatusPage.io
@@ -28,9 +29,9 @@ version: '1.0'
 
 インテグレーションタイルを有効にしたら、監視するサービスの StatusPage.io ページを入力します。たとえば、PagerDuty のステータスページは `https://status.pagerduty.com` にあります。ページに関連付けるカスタムタグを入力し、**Update Configuration** をクリックします。
 
-## 収集されたデータ
+## 収集データ
 
-### メトリック
+### メトリクス
 
 StatusPage インテグレーションには、メトリクスは含まれません。
 
@@ -38,7 +39,7 @@ StatusPage インテグレーションには、メトリクスは含まれませ
 
 StatusPage インテグレーションは、構成された StatusPage ([PagerDuty など][1]) から Datadog イベントを取得します。これらのイベントをメトリクスに関連付けたり、[イベントに基づいてアラートを送信][2]することができます。
 
-### サービスチェック
+### サービスのチェック
 
 StatusPage インテグレーションには、サービスのチェック機能は含まれません。
 

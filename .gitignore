@@ -49,6 +49,7 @@ data/integrations/
 !content/en/integrations/iam_access_analyzer.md
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
+!content/en/integrations/snyk.md
 
 # security rules
 content/en/security_monitoring/default_rules/*.md
@@ -65,6 +66,8 @@ npm-debug.log*
 
 # RUM
 content/en/real_user_monitoring/android.md
+content/en/real_user_monitoring/browser/_index.md
+content/en/logs/log_collection/javascript.md
 
 # serverless
 content/en/serverless/forwarder.md
@@ -73,6 +76,9 @@ content/en/serverless/datadog_lambda_library/nodejs.md
 content/en/serverless/datadog_lambda_library/ruby.md
 content/en/serverless/datadog_lambda_library/go.md
 content/en/serverless/datadog_lambda_library/java.md
+content/en/serverless/serverless_integrations/plugin.md
+content/en/serverless/serverless_integrations/macro.md
+content/en/serverless/serverless_integrations/cli.md
 
 # Runtime data
 pids

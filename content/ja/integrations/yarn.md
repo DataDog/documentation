@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: yarn
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/yarn/README.md'
 display_name: Yarn
+draft: false
 git_integration_title: yarn
 guid: 3223c2e3-29dd-4cfb-82a2-51b951c648eb
 integration_id: yarn
@@ -55,7 +57,7 @@ supported_os:
 
 YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

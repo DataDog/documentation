@@ -6,6 +6,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md'
 display_name: SSH
+draft: false
 git_integration_title: ssh_check
 guid: 4eb195ef-554f-4cc2-80af-8f286c631fa8
 integration_id: ssh
@@ -50,7 +52,7 @@ supported_os:
 
 SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれているため、SSH 接続をテストするサーバーに追加で何かをインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

@@ -49,8 +49,16 @@ kubectl label namespace example-ns istio-injection=enabled
 Les traces sont générées lorsque Istio est en mesure de déterminer si le trafic utilise un protocole basé sur HTTP.
 Par défaut, Istio effectue automatiquement cette vérification. Vous pouvez configurer manuellement cette vérification en nommant les ports dans le service et le déploiement de votre application. Reportez-vous à la section relative à la [sélection de protocole][4] de la documentation Istio (en anglais) pour en savoir plus.
 
-Par défaut, le nom du service utilisé lors de la création des traces est généré à partir de l'espace de nommage et du nom du déploiement. Vous pouvez le définir manuellement en ajoutant une étiquette `app` au modèle de pod du déploiement.
-Pour les [cronJobs][5], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
+Par défaut, le nom de service utilisé lors de la création des traces est généré à partir de l'espace de nommage et du nom du déploiement. Vous pouvez le définir manuellement en ajoutant une étiquette `app` au modèle de pod du déploiement :
+
+```yaml
+template:
+  metadata:
+    labels:
+      app: <NOM_SERVICE>
+```
+
+Pour les [CronJobs][5], l'étiquette `app` doit être ajoutée au modèle du job, car le nom généré provient du `Job`, et non du `CronJob` de niveau supérieur.
 
 ### Variables d'environnement
 
@@ -65,6 +73,7 @@ Les [variables d'environnement][6] dépendent de la version du traceur C++ inté
 
 | Version d'Istio | Version du traceur C++ |
 |---------------|--------------------|
+| v1.7.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
 | v1.5.x | v1.1.1 |
 | v1.4.x | v1.1.1 |

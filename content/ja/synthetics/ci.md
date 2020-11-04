@@ -3,12 +3,9 @@ title: Synthetic CI/CD テスト
 kind: ドキュメント
 description: CI/CD パイプラインでオンデマンドの Synthetics テストを実行します。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+  - link: 'https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/'
     tag: ブログ
-    text: Datadog Synthetic モニタリングの紹介
-  - link: /synthetics/
-    tag: ドキュメント
-    text: チェックを管理する
+    text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
   - link: /synthetics/browser_tests/
     tag: ドキュメント
     text: ブラウザテストの設定
@@ -179,7 +176,7 @@ curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
+    -d "result_ids=[220123456789012345678]"
 ```
 
 {{< /site-region >}}
@@ -201,6 +198,10 @@ curl -G \
 {{< /site-region >}}
 
 #### 応答例
+
+{{< tabs >}}
+
+{{% tab "API Test" %}}
 
 ```json
 {
@@ -233,6 +234,90 @@ curl -G \
 }
 ```
 
+{{% /tab %}}
+
+{{% tab "Browser Test" %}}
+
+```json
+{
+  "results": [
+    {
+      "check_id": "123456",
+      "timestamp": 1601639904704,
+      "orgID": 2,
+      "result": {
+        "runType": 2,
+        "artifactsBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/artifacts__1601639913277.json",
+        "browserType": "chrome",
+        "eventType": "finished",
+        "stepDetails": [
+          {
+            "browserErrors": [],
+            "skipped": false,
+            "description": "Navigate to start URL",
+            "warnings": [],
+            "url": "about:blank",
+            "value": "https://example.com",
+            "duration": 1002,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-0__1601639913294.jpeg",
+            "type": "goToUrlAndMeasureTti",
+            "stepId": -1
+          },
+          {
+            "browserErrors": [],
+            "stepElementUpdates": {
+              "version": 1,
+              "multiLocator": {
+                "ab": "/*[local-name()=\"html\"][1]/*[local-name()=\"body\"][1]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "co": "[{\"text\":\"example domain\",\"textType\":\"directText\"}]",
+                "cl": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "at": "/*[local-name()=\"html\"]/*[local-name()=\"body\"]/*[local-name()=\"div\"][1]/*[local-name()=\"h1\"][1]",
+                "clt": "/descendant::*[text()[normalize-space(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ', 'abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ')) = \"example domain\"]]",
+                "ro": "//*[local-name()=\"h1\"]"
+              }
+            },
+            "skipped": false,
+            "description": "Test heading \"Example Domain\" content",
+            "url": "https://www.example.com/",
+            "checkType": "contains",
+            "value": "Example Domain",
+            "duration": 204,
+            "allowFailure": false,
+            "screenshotBucketKey": "2/e2e-tests/abc-def-ghi/results/17221670732431167/chrome.laptop_large/step-1__1601639913410.jpeg",
+            "type": "assertElementContent",
+            "stepId": 2275176
+          }
+        ],
+        "browserVersion": "84.0.4147.135",
+        "mainDC": "us1.prod",
+        "timeToInteractive": 269,
+        "device": {
+          "name": "Laptop Large",
+          "height": 1100,
+          "width": 1440,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36",
+          "id": "chrome.laptop_large",
+          "isMobile": false,
+          "browser": "chrome"
+        },
+        "passed": true,
+        "duration": 1206,
+        "startUrl": "https://www.example.com",
+        "metadata": {}
+      },
+      "dc_id": 30005,
+      "resultID": "17221670732431167",
+      "metadata": {}
+    }
+  ]
+}
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## CLI の使用
 
 ### パッケージのインストール
@@ -242,14 +327,7 @@ curl -G \
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-`~/.npmrc` ファイルで下記のように設定します。
-
-```conf
-registry=https://registry.npmjs.org/
-//registry.npmjs.org/:_authToken=<TOKEN>
-```
-
-次に、NPM からパッケージをインストールします。
+NPM からパッケージをインストールします。
 
 ```bash
 npm install --save-dev @datadog/datadog-ci
@@ -258,16 +336,7 @@ npm install --save-dev @datadog/datadog-ci
 {{% /tab %}}
 {{% tab "Yarn" %}}
 
-Yarn v2 では、`.yarnrc` ファイルの `@datadog` スコープにトークンを含めることができます。
-
-```yaml
-npmScopes:
-  datadog:
-    npmRegistryServer: "https://registry.npmjs.org"
-    npmAuthToken: "<TOKEN>"
-```
-
-次に、Yarn からパッケージをインストールします。
+Yarn からパッケージをインストールします。
 
 ```bash
 yarn add --dev @datadog/datadog-ci

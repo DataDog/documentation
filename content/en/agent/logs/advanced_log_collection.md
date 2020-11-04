@@ -26,6 +26,7 @@ Apply log processing rules to a specific log collection configurations to:
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Proceed to multi-line aggregation](#multi-line-aggregation)
 * [Tail directories by using wildcards](#tail-directories-by-using-wildcards)
+* [Encode UTF-16 format logs](#encode-utf-16-format-logs)
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
@@ -399,12 +400,13 @@ spec:
 
 More examples:
 
-| **Raw string**           | **Pattern**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
+| **Raw string**           | **Pattern**                                   |
+|--------------------------|-----------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
+| 20180228                 | `\d{8}`                                       |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
@@ -442,9 +444,27 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
+## Encode UTF-16 format logs
+
+If applications logs are written in UTF-16 format, starting with Datadog Agent **v6.23/v7.23**, users can encode these logs so that they are parsed as expected in the [Logs Explorer][2]. Use the `encoding` parameter in the logs configuration section. Set it to `utf-16-le` for UTF16 little-endian and `utf-16-be` for UTF16 big-endian. Any other value will be ignored and the Agent will read the file as UTF8.
+
+Configuration example:
+
+```yaml
+logs:
+ - type: file
+   path: /test/log/hello-world.log
+   tags: key:value
+   service: utf-16-logs
+   source: mysql
+   encoding: utf-16-be
+```
+
+**Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
+
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][2] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][3] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -487,7 +507,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][3] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][4] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -496,6 +516,8 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
+
 [1]: /agent/faq/commonly-used-log-processing-rules
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/guide/agent-commands/#agent-information
+[2]: https://docs.datadoghq.com/logs/explorer/#overview
+[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /agent/guide/agent-commands/#agent-information

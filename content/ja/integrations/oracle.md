@@ -3,6 +3,7 @@ assets:
   dashboards:
     oracle: assets/dashboards/oracle_overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/oracle/README.md'
 display_name: Oracle Database
+draft: false
 git_integration_title: oracle
 guid: 6c4ddc46-2763-4c56-8b71-c838b7f82d7b
 integration_id: oracle
@@ -86,6 +88,9 @@ Oracle チェックは、`cx_Oracle` Python モジュールまたは Oracle JDBC
 
 #### Datadog ユーザーの作成
 
+{{< tabs >}}
+{{% tab "スタンドアロン" %}}
+
 Oracle Database サーバーへの適切なアクセス権を持つ、読み取り専用の `datadog` ユーザーを作成します。管理者ユーザー (SYSDBA` または `SYSOPER`) で Oracle Database に接続し、以下を実行します。
 
 ```text
@@ -110,7 +115,26 @@ GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
-### 構成
+{{% /tab %}}
+{{% tab "マルチテナント" %}}
+
+##### Oracle 12c または 19c
+
+管理者としてルートデータベースにログインして、`datadog` ユーザーを作成し、アクセス許可を付与します。
+
+```text
+alter session set container = cdb$root;
+CREATE USER c##datadog IDENTIFIED BY password CONTAINER=ALL;
+GRANT CREATE SESSION TO c##datadog CONTAINER=ALL;
+Grant select any dictionary to c##datadog container=all;
+GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
+GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -253,6 +277,70 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
 
 使用可能なすべての構成オプションの詳細については、[サンプル oracle.d/conf.yaml][5] を参照してください。
 
+### 例
+
+データベースロックの識別に役立つクエリコンフィギュレーションを作成します。
+
+1. カスタムクエリを含めるには、`conf.d\oracle.d\conf.yaml` を変更します。`custom_queries` ブロックのコメントを解除し、必要なクエリと列を追加して、Agent を再起動します。
+
+```yaml
+  init_config:
+  instances:
+      - server: localhost:1521
+        service_name: orcl11g.us.oracle.com
+        user: datadog
+        password: xxxxxxx
+        jdbc_driver_path: /u01/app/oracle/product/11.2/dbhome_1/jdbc/lib/ojdbc6.jar
+        tags:
+          - db:oracle
+        custom_queries:
+          - metric_prefix: oracle.custom_query.locks
+            query: |
+              select blocking_session, username, osuser, sid, serial# as serial, wait_class, seconds_in_wait
+              from v_$session
+              where blocking_session is not NULL order by blocking_session
+            columns:
+              - name: blocking_session
+                type: gauge
+              - name: username
+                type: tag
+              - name: osuser
+                type: tag
+              - name: sid
+                type: tag
+              - name: serial
+                type: tag
+              - name: wait_class
+                type: tag
+              - name: seconds_in_wait
+                type: tag
+```
+
+2. `v_$session` にアクセスするには、`DATADOG` にアクセス許可を付与し、アクセス許可をテストします。
+
+```text
+SQL> grant select on sys.v_$session to datadog;
+
+##アクセスを検証するために DD ユーザーと接続します。
+
+
+SQL> show user
+USER is "DATADOG"
+
+
+##ビューを表示するための同義語の作成
+SQL> create synonym datadog.v_$session for sys.v_$session;
+
+
+Synonym created.
+
+
+SQL> select blocking_session,username,osuser, sid, serial#, wait_class, seconds_in_wait from v_$session
+where blocking_session is not NULL order by blocking_session;
+```
+
+3. 構成が完了すると、`oracle.custom_query.locks` メトリクスに基づいて[モニター][7]を作成できます。
+
 ## 収集データ
 
 ### メトリクス
@@ -270,7 +358,7 @@ Oracle Database チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
@@ -279,4 +367,5 @@ Oracle Database チェックには、イベントは含まれません。
 [4]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/monitors/monitor_types/metric/?tab=threshold
+[8]: https://docs.datadoghq.com/ja/help/

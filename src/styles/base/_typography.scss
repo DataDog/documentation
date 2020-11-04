@@ -80,3 +80,7 @@ small,
 .font-semibold, .font-bold {
   font-weight: 600!important;
 }
+
+p + blockquote {
+  margin-top: 1rem;
+}

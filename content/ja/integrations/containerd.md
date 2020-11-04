@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/containerd/README.md'
 display_name: Containerd
+draft: false
 git_integration_title: containerd
 guid: 5cdc0363-a0df-469b-8346-2da4ab84128c
 integration_id: containerd
@@ -97,7 +99,7 @@ CPU、メモリ、ブロック I/O、ヒュージページテーブルのメト�
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][4] を参照してください。
 
-### Service Checks
+### サービスのチェック
 
 Containerd には、Containerd Socket への接続の健全性を通知する `containerd.health` サービスチェックが含まれています。
 

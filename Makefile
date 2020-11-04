@@ -14,7 +14,7 @@ IMAGE_VERSION="latest"
 # config
 CONFIG_FILE := Makefile.config
 ifeq ($(wildcard $(CONFIG_FILE)),)
-	$(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
+	_ := $(error $(CONFIG_FILE) not found. See $(CONFIG_FILE).example.)
 endif
 include $(CONFIG_FILE)
 
@@ -77,6 +77,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'rsyslog.md' \
 		-a -not -name 'sidekiq.md' \
 		-a -not -name 'sinatra.md' \
+		-a -not -name 'snyk.md' \
 		-a -not -name 'stunnel.md' \
 		-a -not -name 'syslog_ng.md' \
 		-a -not -name 'system.md' \
@@ -112,8 +113,16 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/serverless/datadog_lambda_library/go.md ;fi
 	@if [ content/en/serverless/datadog_lambda_library/java.md ]; then \
 	rm -f content/en/serverless/datadog_lambda_library/java.md ;fi
+	@if [ content/en/serverless/serverless_integrations/plugin.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/plugin.md ;fi
+	@if [ content/en/serverless/serverless_integrations/macro.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/macro.md ;fi
+	@if [ content/en/serverless/serverless_integrations/cli.md ]; then \
+	rm -f content/en/serverless/serverless_integrations/cli.md ;fi
 	@if [ content/en/real_user_monitoring/android.md ]; then \
 	rm -f content/en/real_user_monitoring/android.md ;fi
+	@if [ content/en/real_user_monitoring/browser/_index.md ]; then \
+	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
@@ -122,6 +131,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/android.md ;fi
 	@if [ content/en/logs/log_collection/ios.md ]; then \
 	rm -f content/en/logs/log_collection/ios.md ;fi
+	@if [ content/en/logs/log_collection/javascript.md ]; then \
+	rm -f content/en/logs/log_collection/javascript.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 

@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards:
     Speedtest: assets/dashboards/speedtest.json
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md'
 display_name: speedtest
+draft: true
 git_integration_title: speedtest
 guid: 4bf81e32-170a-44f3-868d-1683ef39464f
 integration_id: speedtest
@@ -24,7 +26,7 @@ kind: インテグレーション
 maintainer: cody.lee@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: speedtest.
-metric_to_check: ''
+metric_to_check: speedtest.download.bandwidth
 name: speedtest
 public_title: Datadog-speedtest インテグレーション
 short_description: speedtest-cli を使用して Speedtest の結果を実行します

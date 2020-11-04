@@ -29,30 +29,124 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 {{< partial name="apm/apm-inapp.html" >}}
 
-または、何らかの言語で記述されたアプリケーションのトレースを始めるには、まず [Datadog Agent をインストールして構成し][3]、[Docker アプリケーションのトレース][4]または [Kubernetes アプリケーション][5]に関する追加ドキュメントを確認します。
+もしくは、各言語で作成されたアプリケーションをトレースする場合は以下の操作を行ってください。
 
-次に、エージェントクラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+1. [Datadog Agent をインストール、構成][3]します。[Docker アプリケーションのトレース][4]または [Kubernetes アプリケーションのトレース][5]に関する追加ドキュメントを確認します。
 
-```shell
-wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
-```
+2. Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
 
-最後に、アプリケーションの起動時に IDE、Maven または Gradle アプリケーションスクリプト、または `java -jar` コマンドに次の JVM 引数を追加します:
+   ```shell
+   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   ```
+
+3. アプリケーションの起動時に IDE、Maven または Gradle アプリケーションスクリプト、または `java -jar` コマンドに次の JVM 引数を追加します:
+
+   ```text
+    -javaagent:/path/to/the/dd-java-agent.jar
+   ```
+
+4. トレース用の[コンフィギュレーションオプション](#コンフィギュレーション)を追加し、特に、サービス、環境、ログインジェクション、プロファイリング、およびオプションでランタイムメトリクス (使用予定のすべてのメトリクス) に対して、環境変数を設定しているか、システムプロパティを JVM 引数として渡していることを確認します。以下の例を参照してください。なお、アプリ内クイックスタート手順を使用すると、これらが生成されます。
+
+### JVM について
+
+- IDE のドキュメントを使用して、`-javaagent` およびその他の JVM 引数を渡す正しい方法を確認してください。一般的に使用されるフレームワークの手順は次のとおりです。
+
+    {{< tabs >}}
+    {{% tab "Spring Boot" %}}
+
+アプリの名前が `my_app.jar` の場合は、以下を含む `my_app.conf` を作成します。
 
 ```text
--javaagent:/path/to/the/dd-java-agent.jar
+JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 ```
 
-**注**:
+詳細については、[Spring Boot のドキュメント][1]を参照してください。
 
-- `-javaagent` は `-jar` ファイルより前に実行され、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][6]を参照してください。
+
+[1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+    {{% /tab %}}
+    {{% tab "Tomcat" %}}
+
+Tomcat 起動スクリプトファイル (たとえば、`catalina.sh`) を開き、次を追加します。
+
+```text
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+または Windows では、`catalina.bat`:
+
+```text
+set CATALINA_OPTS_OPTS=%CATALINA_OPTS_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+```
+
+    {{% /tab %}}
+    {{% tab "JBoss" %}}
+
+`standalone.sh` の末尾に次の行を追加します。
+
+```text
+JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+```
+
+Windows では、`standalone.conf.bat` の末尾に次の行を追加します。
+
+```text
+set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
+```
+
+詳細については、[JBoss のドキュメント][1]を参照してください。
+
+
+[1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+    {{% /tab %}}
+    {{% tab "Jetty" %}}
+
+`jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
+
+```text
+JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
+```
+
+`start.ini` を使用して Jetty を起動する場合は、次の行を追加します(`--exec` の下に。まだ存在しない場合は `--exec` 行を追加します)。
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+    {{% /tab %}}
+    {{% tab "WebSphere" %}}
+
+管理コンソールで:
+
+1. **Servers** を選択します。**Server Type** で、**WebSphere application servers** を選択し、サーバーを選択します。
+2. **Java and Process Management > Process Definition** を選択します。
+3. **Additional Properties** セクションで、**Java Virtual Machine** をクリックします。
+4. **Generic JVM arguments** テキストフィールドに次のように入力します。
+
+```text
+-javaagent:/path/to/dd-java-agent.jar
+```
+
+詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
+
+[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+    {{% /tab %}}
+    {{< /tabs >}}
+
+
+- `-javaagent` 引数を `java -jar` コマンドに追加する場合は、`-jar` 引数の_前_に追加する必要があります。つまり、アプリケーション引数としてではなく、JVM オプションとして追加する必要があります。例:
+
+   ```text
+   java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
+   ```
+
+  詳細については、[Oracle のドキュメント][6]を参照してください。
 
 - `dd-trace-java` の成果物 (`dd-java-agent.jar`、`dd-trace-api.jar`、`dd-trace-ot.jar`) は、すべての JVM ベース言語、つまり Scala、Groovy、Kotlin、Clojure などをサポートします。特定のフレームワークのサポートが必要な場合は、[オープンソースの貢献][7]を行うことを検討してください。
 
 ## 自動でデータと収集
 
-Java の自動インスツルメンテーションは、[JVM によって提供される][8] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合、これにはロード時間にクラスファイルを変更する能力があります。
-`java-agent` は [Byte Buddy フレームワーク][9]を使ってインスツルメンテーションに対して定義されたクラスを見つけ、必要に応じてこのクラスバイトを変更します。
+Java の自動インスツルメンテーションは、[JVM によって提供される][8] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合は、ロード時にクラスファイルを変更することができます。
 
 インスツルメンテーションの由来は自動インスツルメンテーション、OpenTracing api、または両者の混合になる場合があります。一般的に、インスツルメンテーションは次の情報を取得します:
 
@@ -74,16 +168,17 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 | `dd.tags`                              | `DD_TAGS`                              | `null`                            | (例: `layer:api,team:intake`) すべてのスパン、プロファイル、JMX メトリクスに追加されるデフォルトタグのリスト。DD_ENV または DD_VERSION が使用される場合、DD_TAGS で定義される env または version タグをオーバーライドします。バージョン 0.50.1 以降で利用可能。  |
 |`dd.env`                              | `DD_ENV`                              | `none`                            | アプリケーション環境（例、production、staging など）。0.48+ 以降のバージョンで利用可能。                                                    |
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | アプリケーションバージョン（例、2.5、202003181415、1.3-alpha など）。0.48+ 以降のバージョンで利用可能。             |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][10]を参照してください。   |
-| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | 構成プロパティが行ごとに 1 つ提供されている、ファイルへのオプションパス。たとえば、ファイルパスは `-Ddd.trace.config=<ファイルパス>.properties` 経由として、ファイルのサービス名に `dd.service.name=<サービス名>` を設定して提供することができます。 |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][9]を参照してください。   |
+| `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | 構成プロパティが行ごとに 1 つ提供されている、ファイルへのオプションパス。たとえば、ファイルパスは `-Ddd.trace.config=<ファイルパス>.properties` 経由として、ファイルのサービス名に `dd.service=<SERVICE_NAME>` を設定して提供することができます。 |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (例: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) コンフィギュレーション経由でサービス名を動的に変更します。サービス間でデータベースの名前を区別する場合に便利です。                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | デフォルト値はトレースを Agent に送信します。代わりに `LoggingWriter` で構成すると、トレースがコンソールに書き出されます。                       |
 | `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | トレースの送信先のホスト名。コンテナ化された環境を使う場合は、これを構成してホスト IP にします。詳しくは、[Docker アプリケーションのトレース][4]を参照してください。                                                                                                  |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | 構成されたホストに対して Agent がリッスンしているポート番号。                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | これは、トレーストラフィックをプロキシに送り、その後リモート Datadog Agent に送信するために使うことができます。                                                            |
+| `dd.trace.agent.url`                   | `DD_TRACE_AGENT_URL`                   | `null`                            | トレースを送信する URL。`http://` (HTTP を使用) もしくは `unix://` ( Unix ドメインソケットを使用）のいずれかで始まります。この設定は `DD_AGENT_HOST` および `DD_TRACE_AGENT_PORT` よりも優先されます。バージョン 0.65 以上で使用可能です。 |
 | `dd.trace.agent.timeout`               | `DD_TRACE_AGENT_TIMEOUT`               | `10`                              | Datadog Agent とのネットワークインタラクションのタイムアウト (秒)。                                                                                                                                                                                                   |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (例: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) 名前をタグ付けするヘッダーキーのマップ。ヘッダー値がトレースのタグとして自動的に提供されます。                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([こちらを参照][11])               | (例: `com.some.Trace;io.other.Trace`) `@Trace` として処理するメソッドアノテーションのリスト。                                            |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([こちらを参照][10])               | (例: `com.some.Trace;io.other.Trace`) `@Trace` として処理するメソッドアノテーションのリスト。                                            |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (例: `"package.ClassName[method1,method2,...];AnonymousClass$1[call]"`) トレースするクラス/インターフェイスとメソッドのリスト。`@Trace` の追加と似ていますが、コードの変更はありません。                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | フラッシュする部分スパンの数を設定します。大量のトラフィック処理や長時間のトレース実行時にメモリのオーバーヘッドを軽減する際に役立ちます。     |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (例: `aws.service`) 対応するサービスタグで特定されるよう、スパンの名前を変えるために使われます                                       |
@@ -105,19 +200,22 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使用している場合、0 を入力します。                                                                                                                                                                                                                              |
 | `dd.integration.opentracing.enabled`              | `DD_INTEGRATION_OPENTRACING_ENABLED`              | true                              | デフォルトで、トレーシングクライアントは GlobalTracer がロードされており、トレーサーを動的に登録しているかどうかを検知します。これを false に設定すると、OpenTracing 上のトレーサーの依存関係がすべて消去されます。                                                                                                                                                                                                                              |
 | `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | 偽 | デフォルトでは、Hystrix のグループ、コマンド、サーキット状態のタグは有効になっていません。このプロパティにより有効になります。 |
+| `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | 真 | デフォルトでは、長時間実行されている非同期リクエストはエラーとしてマークされます。この値を false に設定すると、すべてのタイムアウトを成功したリクエストとしてマークできます。 |
+| `dd.trace.startup.logs`                | `DD_TRACE_STARTUP_LOGS`                | 真 | `false` の場合は起動ログの収集が無効化されます。バージョン 0.64 以上で使用可能です。 |
+
 
 **注**:
 
 - 両方に同じキータイプが設定された場合、システムプロパティコンフィギュレーションが優先されます。
 - システムプロパティは JVM パラメーターとして使用できます。
-- デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][12]ことを確認してください。
+- デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][11]ことを確認してください。
 
-  - Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [`true` に設定されている][13]ことと、Agent コンテナでポート `8125` が開いていることを確認してください。
-  - Kubernetes の場合は、[DogStatsD ポートをホストポートにバインドします][14]。ECS の場合は、[タスク定義で適当なフラグを設定します][15]。
+  - Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [`true` に設定されている][12]ことと、Agent コンテナでポート `8125` が開いていることを確認してください。
+  - Kubernetes の場合は、[DogStatsD ポートをホストポートにバインドします][13]。ECS の場合は、[タスク定義で適当なフラグを設定します][14]。
 
 ### インテグレーション
 
-インテグレーションを無効にする方法に関しては、[インテグレーション][16] の互換性セクションを参照してください。
+インテグレーションを無効にする方法に関しては、[インテグレーション][15] の互換性セクションを参照してください。
 
 ### 例
 
@@ -126,7 +224,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 **システムプロパティの例**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング"  >}}
@@ -136,7 +234,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.servic
 **スパンと JMX メトリクスにグローバルな env を設定**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=env:dev -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース"  >}}
@@ -146,7 +244,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.tags=e
 **すべてのスパンに project:test を追加する例**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース"  >}}
@@ -156,7 +254,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 **JMX メトリクスに custom.type:2 を設定**:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース"  >}}
@@ -176,7 +274,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 システムプロパティの例:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
 ```
 
 これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
@@ -194,7 +292,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.s
 システムプロパティの例:
 
 ```shell
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
 {{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列"  >}}
@@ -237,11 +335,11 @@ instances:
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例"  >}}
 
-JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][17]を参照してください。
+JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][16]を参照してください。
 
 ### B3 ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][18]と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][17]と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。現在、次の 2 つのスタイルがサポートされています:
 
@@ -341,13 +439,12 @@ java -javaagent:<DD-JAVA-エージェントパス>.jar \
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: http://bytebuddy.net
-[10]: /ja/tracing/connect_logs_and_traces/java/
-[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[12]: /ja/developers/dogstatsd/#setup
-[13]: /ja/agent/docker/#dogstatsd-custom-metrics
-[14]: /ja/developers/dogstatsd/
-[15]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[16]: /ja/tracing/compatibility_requirements/java#disabling-integrations
-[17]: /ja/integrations/java/?tab=host#metric-collection
-[18]: https://github.com/openzipkin/b3-propagation
+[9]: /ja/tracing/connect_logs_and_traces/java/
+[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[11]: /ja/developers/dogstatsd/#setup
+[12]: /ja/agent/docker/#dogstatsd-custom-metrics
+[13]: /ja/developers/dogstatsd/
+[14]: /ja/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[15]: /ja/tracing/compatibility_requirements/java#disabling-integrations
+[16]: /ja/integrations/java/?tab=host#metric-collection
+[17]: https://github.com/openzipkin/b3-propagation

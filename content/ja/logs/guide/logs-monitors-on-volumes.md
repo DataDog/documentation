@@ -76,7 +76,16 @@ further_reading:
 
 {{< img src="logs/guide/example_notification.png" alt=" 通知例"  style="width:70%;">}}
 
+### 1 日の割り当て数に達したインデックスへのアラート
+
 また、[インデックスに 1 日の割り当てを設定][9]して、ログが 1 日の規定数よりも多くインデックス化されることを防ぐことも可能です。この場合、Datadog では上記のモニターを過去 24 時間以内にこの割り当ての 80% に達したらアラートが発信されるようセットアップすることを推奨しています。
+1 日の割り当て数に達すると、イベントが生成されます。この際に通知を受信するよう、モニターをセットアップします。
+
+{{< img src="logs/guide/daily_quota_monitor.png" alt="1 日の割り当て数をモニター"  style="width:70%;">}}
+
+Slack で受信する通知の例:
+
+{{< img src="logs/guide/daily_quota_notification.png" alt="1 日の割り当て数に関する通知"  style="width:70%;">}}
 
 ## その他の参考資料
 

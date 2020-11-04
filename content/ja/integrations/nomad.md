@@ -2,6 +2,7 @@
 assets:
   dashboards:
     Nomad Overview: assets/dashboards/overview.json
+  metrics_metadata: metadata.csv
   monitors:
     Nomad Excessive Leadership Losses: assets/monitors/nomad_excessive_leadership_losses.json
     Nomad Heartbeats Received: assets/monitors/nomad_heartbeats_received.json
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md'
 display_name: Nomad
+draft: false
 git_integration_title: nomad
 guid: 09fec09d-69ef-435f-bb0d-f586652b9bc7
 integration_id: nomad

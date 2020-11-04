@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Google Cloud Machine Learning の主要メトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_ml/'
+draft: false
 git_integration_title: google_cloud_ml
 has_logo: true
 integration_title: Google Machine Learning
@@ -15,7 +16,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_ml
 public_title: Datadog-Google Machine Learning インテグレーション
-short_description: Google Cloud Machine Learning の主要メトリクスを追跡します。
+short_description: Google Cloud Machine Learning の主要メトリクスを追跡。
 version: '1.0'
 ---
 ## 概要

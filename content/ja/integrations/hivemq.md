@@ -6,6 +6,7 @@ assets:
     HiveMQ: assets/dashboards/hivemq.json
   logs:
     source: hivemq
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md'
 display_name: HiveMQ
+draft: false
 git_integration_title: hivemq
 guid: 905e4d87-2777-4253-ad44-f91ee66ad888
 integration_id: hivemq

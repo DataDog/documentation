@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Azure\_Cosmos\_DB."
 doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
+draft: false
 git_integration_title: azure_cosmosdb
 has_logo: true
 integration_title: "Microsoft\_Azure\_Cosmos\_DB"

@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: "Envoyez des alertes et des graphiques Datadog au salon Google\_Hangouts de votre équipe."
 doc_link: 'https://docs.datadoghq.com/integrations/google_hangouts_chat/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/google-hangouts-chat-integration/'
     tag: Blog

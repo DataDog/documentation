@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: "MongoDB\_Atlas peut transmettre des métriques calculées à Datadog pour vous permettre de visualiser ses performances."
 doc_link: 'https://docs.datadoghq.com/integrations/mongodb_atlas/'
+draft: false
 git_integration_title: mongodb_atlas
 has_logo: true
 integration_title: "MongoDB\_Atlas"

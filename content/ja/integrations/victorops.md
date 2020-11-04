@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: 'https://docs.datadoghq.com/integrations/victorops/'
+draft: false
 git_integration_title: victorops
 has_logo: true
 integration_title: VictorOps
@@ -34,9 +35,9 @@ Datadog-VictorOps インテグレーションを使用して、Datadog のアラ
 3. キーをコピーします。
 4. Datadog に戻り、API キーを次のセクションに貼り付けます。
 
-## 収集されたデータ
+## 収集データ
 
-### メトリック
+### メトリクス
 
 VictorOps インテグレーションには、メトリクスは含まれません。
 
@@ -44,7 +45,7 @@ VictorOps インテグレーションには、メトリクスは含まれませ�
 
 VictorOps インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 VictorOps インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -52,7 +53,7 @@ VictorOps インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-## その他の参照先
+## その他の参考資料
 
 ### ナレッジベース
 

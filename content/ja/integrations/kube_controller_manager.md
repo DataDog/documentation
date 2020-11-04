@@ -1,7 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    kube_controller_manager: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md'
 display_name: Kubernetes Controller Manager
+draft: false
 git_integration_title: kube_controller_manager
 guid: 34156dda-9288-4968-962b-6b29e1753d33
 integration_id: kube-controller-manager
@@ -42,7 +45,7 @@ supported_os:
 Kube_controller_manager チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。通常、これは 
 Container-as-a-Service クラスターでは公開されません。
@@ -61,7 +64,7 @@ Container-as-a-Service クラスターでは公開されません。
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 `kube_controller_manager.prometheus.health`:
 

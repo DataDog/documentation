@@ -1,7 +1,11 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    crio: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/crio/README.md'
 display_name: CRI-O
+draft: false
 git_integration_title: crio
 guid: 40fd8230-d178-4e8e-9e6a-6ce4acc19a85
 integration_id: cri-o
@@ -59,7 +64,7 @@ CRI-O は、ランタイムによって実行される操作のカウントと�
 {{< get-metrics-from-git "crio" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 CRI-O には、メトリクスエンドポイントの到達可能性に関するサービスのチェック機能が含まれています。
 

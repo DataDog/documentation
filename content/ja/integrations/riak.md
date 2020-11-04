@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: riak
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/riak/README.md'
 display_name: Riak
+draft: false
 git_integration_title: riak
 guid: e1ed642c-8a15-420c-954b-6fb894905956
 integration_id: riak
@@ -47,7 +49,7 @@ supported_os:
 
 Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

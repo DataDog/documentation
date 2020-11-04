@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md'
 display_name: ASP.NET
+draft: false
 git_integration_title: aspdotnet
 guid: 475b0c6c-02e5-49ef-806b-9fab377f0839
 integration_id: aspdotnet

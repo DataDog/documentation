@@ -33,8 +33,9 @@ Watchdog is an algorithmic feature for APM performances and infrastructure metri
   * [PostgreSQL][3]
   * [NGINX][4]
   * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
+  * [Alerting][10]
 
-Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][10] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
+Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. To avoid false alarms, Watchdog only reports issues after observing your data for a sufficient amount of time to establish a high degree of confidence.
 
 ## Story details
 
@@ -60,7 +61,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 When an anomaly appears in one service, there's often a corresponding anomaly in a related service. For example, if one service's database queries get throttled, any downstream service will experience elevated latency. You need to troubleshoot this not as two separate issues, but rather as one issue stemming from a single root cause. 
 
-Watchdog helps you do that by automatically grouping related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story then includes a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This allows you to quickly understand the impact of the issue and provides insight on where to look for the root cause. 
+Watchdog automatically groups related APM anomalies into a single story whenever it detects an issue that affects multiple services. The story then includes a dependency map that shows the service where the issue originated and the downstream dependencies that were affected. This allows you to quickly understand the impact of the issue and provides insight on where to look for the root cause. 
 
 The screenshot below shows a Watchdog story, starting with a summary of the issue and a graph highlighting the anomaly. Below that, a dependency map illustrates the full scope of the problem: the issue is rooted in the  `ad-server-http-client` service, and it also affects the downstream services  `web-store` and `web-store-mongo`. Below the dependency map, a table lists the affected services and displays hit rate, latency, and error rate metrics. In this case, the data in the table indicates that latency in the downstream services also increased.
 
@@ -76,7 +77,7 @@ Monitors associated with your stories are displayed at the bottom. Each monitor 
 
 {{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors"  style="width:75%;">}}
 
-Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
+Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][12] to learn how to create a Watchdog monitor.
 
 ## Filter Stories
 
@@ -98,19 +99,23 @@ Facets are associated with your Watchdog stories, allowing you to filter them by
 |-----------------|------------------------------------------------------------------------------------|
 | Story Category  | Display all `apm` or all `infrastructure` stories.                                 |
 | Story Type      | Which metrics from APM or infrastructure integrations stories should be displayed. |
-| APM Environment | The [APM Environment][12] to display stories from.                                 |
-| APM Primary Tag | The [defined APM primary tag][13] to display stories from.                         |
-| APM Service     | The [APM Service][14] to display stories from.                                     |
+| APM Environment | The [APM Environment][13] to display stories from.                                 |
+| APM Primary Tag | The [defined APM primary tag][14] to display stories from.                         |
+| APM Service     | The [APM Service][15] to display stories from.                                     |
 
 ## Watchdog in the Services List
 
-When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][15]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
+When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][16]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
 {{< img src="watchdog/service_list.png" alt="Watchdog service list" style="width:75%;" >}}
 
-If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][15] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
+If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][16] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
 
 {{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" style="width:75%;">}}
+
+## Toubleshooting
+
+Need help? Contact [Datadog support][17].
 
 ## Further Reading
 
@@ -125,9 +130,11 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 [7]: /integrations/amazon_elb/
 [8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
-[10]: https://app.datadoghq.com/apm/watchdog
-[11]: /monitors/monitor_types/watchdog/
-[12]: /tracing/send_traces/#configure-your-environment
-[13]: /tracing/guide/setting_primary_tags_to_scope/
-[14]: /tracing/visualization/#services
-[15]: /tracing/visualization/services_list/
+[10]: /monitors/
+[11]: https://app.datadoghq.com/apm/watchdog
+[12]: /monitors/monitor_types/watchdog/
+[13]: /tracing/send_traces/#configure-your-environment
+[14]: /tracing/guide/setting_primary_tags_to_scope/
+[15]: /tracing/visualization/#services
+[16]: /tracing/visualization/services_list/
+[17]: /help/

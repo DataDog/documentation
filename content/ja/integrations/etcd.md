@@ -1,9 +1,15 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
-  logs: {}
+  logs:
+    source: etcd
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    etcd_overview: assets/saved_views/etcd_overview.json
   service_checks: assets/service_checks.json
 categories:
   - orchestration
@@ -16,6 +22,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
 display_name: etcd
+draft: false
 git_integration_title: etcd
 guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
@@ -55,7 +62,7 @@ Etcd のメトリクスを収集して、以下のことができます。
 
 Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

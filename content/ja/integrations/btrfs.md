@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md'
 display_name: Btrfs
+draft: false
 git_integration_title: btrfs
 guid: 54f9329a-8270-4f5a-bd4b-cd169abfc791
 integration_id: btrfs
@@ -46,7 +48,7 @@ Btrfs からメトリクスをリアルタイムに取得すると、以下の�
 
 Btrfs チェックは [Datadog Agent][2] パッケージに含まれています。少なくとも 1 つの Btrfs ファイルシステムを使用しているサーバーでは、追加のインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 1. 必要に応じて Agent を構成し、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `btrfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル btrfs.d/conf.yaml][4] を参照してください。
 

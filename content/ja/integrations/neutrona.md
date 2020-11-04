@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md'
 display_name: Neutrona
+draft: false
 git_integration_title: neutrona
 guid: ced5a4ae-6623-49f0-b45b-dbb678a5baa2
 integration_id: neutrona
@@ -71,12 +73,12 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Neutrona の[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
    使用可能なすべての構成オプションの詳細については、[サンプル neutrona.d/conf.yaml][9] を参照してください。
 
-2. [Agent を再起動します][10]。
+2. [Agent を再起動します][10]
 
 ### 検証
 

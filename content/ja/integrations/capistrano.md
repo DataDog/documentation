@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
 doc_link: 'https://docs.datadoghq.com/integrations/capistrano/'
+draft: false
 git_integration_title: capistrano
 has_logo: true
 integration_title: Capistrano
@@ -37,7 +38,7 @@ Capistrano Datadog インテグレーションをインストールすると、�
 sudo gem install dogapi --version ">=1.10.0"
 ```
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Datadog に送信したいタスクを持つ `Capfile` の先頭に以下を追加します。
 

@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
 display_name: Go-Metro
+draft: false
 git_integration_title: go-metro
 guid: 6d00688b-32b1-4755-98cd-44bd1bd40428
 integration_id: go-metro
@@ -62,7 +64,7 @@ sudo yum install compat-libcap1
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### 構成
+### コンフィギュレーション
 
 Agent の `conf.d` ディレクトリにある `go-metro.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル go-metro.yaml][3] を参照してください。以下のサンプルファイルは、app.datadoghq.com と 192.168.0.22 の TCP RTT 回数を表示します。
 

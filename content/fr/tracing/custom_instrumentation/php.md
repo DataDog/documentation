@@ -223,7 +223,7 @@ function doRiskyThing() {
     'doRiskyThing',
     function() {
         // La span est signalée comme étant erronée et comporte
-        // la trace de pile et les message de l'exception sous forme de tags
+        // la stack trace et le message de l'exception sous forme de tags
     }
 );
 ```
@@ -257,7 +257,7 @@ function doRiskyThing() {
 
 ## Filtrage de ressources
 
-Il est possible d'exclure des traces en fonction de leur nom de ressource afin d'empêcher le trafic Synthetics (tel que les checks de santé) d'envoyer des traces à Datadog. Pour filtrer des ressources et configurer d'autres paramètres de sécurité et de personnalisation, accédez à la page [Securité][5].
+Il est possible d'exclure des traces en fonction de leur nom de ressource afin d'empêcher le trafic Synthetic (tel que les checks de santé) d'envoyer des traces à Datadog. Pour filtrer des ressources et configurer d'autres paramètres de sécurité et de personnalisation, accédez à la page [Securité][5].
 
 ## OpenTracing
 

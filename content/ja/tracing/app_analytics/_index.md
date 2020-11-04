@@ -8,7 +8,7 @@ aliases:
 ---
 {{< wistia vrmqr812sz >}}
 </br>
-[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Analyzed Span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
+[App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで Indexed span を絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
 
 * サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムインスツルメンテーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
 
@@ -49,11 +49,15 @@ Datadog.configure { |c| c.analytics_enabled = true }
 {{% /tab %}}
 {{% tab "Go" %}}
 
-App Analytics は、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。[`WithAnalytics`][1] のトレーサー開始オプションを使用することで、すべての **web** インテグレーションに対してグローバルに有効にすることができます。例:
+App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
 
-```go
-tracer.Start(tracer.WithAnalytics(true))
-```
+* [`WithAnalytics`][1] トレーサー開始オプション。例:
+
+  ```go
+  tracer.Start(tracer.WithAnalytics(true))
+  ```
+
+* バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{% /tab %}}
@@ -153,7 +157,7 @@ Nginx で App Analytics を有効にするには
 
 **注**: インテグレーションによっては、そのインテグレーション固有のトレーサーが実装されているため非標準の方法で設定する必要があります。詳細については、[App Analytics][1] のライブラリドキュメントを参照してください。
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace_search_analytics
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -352,7 +356,7 @@ class MyClass {
     final Span span = GlobalTracer.get().activeSpan();
     // @Trace アノテーションにより送信されるスパン。
     if (span != null) {
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
     }
   }
@@ -460,11 +464,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## スパンのフィルタリング
 
-[Analyzed Span][2] は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで Analyzed Span が送信されます。例えば、各 `servlet.request` スパンが Analyzed Span を生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の Analyzed Span を生成します。[Analyzed Span のフィルタリング][5]は、請求可能な Analyzed Span の数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは Analyzed Span の生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
+[Indexed span][2] は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで Indexed span が送信されます。例えば、各 `servlet.request` スパンが Indexed span を生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の Indexed span を生成します。[Indexed span のフィルタリング][5]は、請求可能な Indexed span の数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは Indexed span の生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
 
 フィルターレートへの変更は、サービスおよび環境別にキューに配置されるため、全体的なスパンボリュームへの影響を予測できます。変更は、確認、編集、承認または拒否することが可能です。適用された変更は、直ちに有効となり[請求書にも反映されます][7]。
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span のフィルタリング" >}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Indexed span のフィルタリング" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /ja/tracing/visualization/#apm-event

@@ -1,6 +1,7 @@
 ---
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md'
 display_name: Nextcloud
+draft: false
 git_integration_title: nextcloud
 guid: 852e64eb-93b9-4fb2-8cb2-10041b4045c3
 integration_id: nextcloud
@@ -67,7 +69,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. Nextcloud の[メトリクス](#メトリクス) を収集するには、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `nextcloud.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル nextcloud.d/conf.yaml][9] を参照してください。
 
@@ -83,7 +85,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 {{< get-metrics-from-git "nextcloud" >}}
 
 
-### Service Checks
+### サービスのチェック
 
 **`nextcloud.can_connect`**
 

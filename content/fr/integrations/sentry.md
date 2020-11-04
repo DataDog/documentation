@@ -7,10 +7,11 @@
 "dependencies": []
 "description": "Visualisez des exceptions Sentry dans votre flux d'événements Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/sentry/"
+"draft": false
 "git_integration_title": "sentry"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Sentry"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "integration"
 "manifest_version": "1.0"
 "name": "sentry"
@@ -29,19 +30,18 @@ Associez Sentry à Datadog pour :
 - Rechercher des exceptions sur vos graphiques
 - Discuter des exceptions avec votre équipe
 
-## Implémentation
+## Configuration
 
 ### Installation
 
 Implémentation de l'intégration Sentry :
 
-1. Connectez vous à Sentry.
-2. Accédez à un projet.
-3. Accédez à la page des paramètres du projet.
-4. À gauche de la page, cliquez sur _Integrations_.
-5. Faites défiler l'écran vers le bas jusqu'à l'intégration _Webhooks_, cliquez sur le bouton coulissant pour l'activer, puis cliquez sur Configure Plugin.
-6. Sous **Callback URLs'**, saisissez `https://app.datadoghq.com/intake/webhook/sentry?api_key=<VOTRE_CLÉ_API_DATADOG>`
-7. Cliquez sur **Save changes**
+1. Connectez-vous à Sentry.
+2. Accédez à **Settings > Integrations**.
+3. Trouvez l'intégration Webhooks, cliquez sur **Add to Project**, et sélectionnez le projet dans lequel vous souhaitez configurer l'intégration.
+4. Sous **Callback URLs'**, saisissez `https://app.datadoghq.com/intake/webhook/sentry?api_key=<VOTRE_CLÉ_API_DATADOG>`.
+5. Cliquez sur **Save changes**.
+6. Activez l'intégration si nécessaire en cliquant sur **Enable Plugin**.
 
 Par défaut, Sentry ping le Webhook avec les données d'événement chaque fois qu'une nouvelle exception se produit (contrairement à une nouvelle instance d'une exception déjà loguée). Si vous souhaitez utiliser des déclencheurs différents (ou supplémentaires), vous pouvez les configurer dans la section Alerts des paramètres de votre projet.
 
@@ -49,7 +49,7 @@ Par défaut, Sentry ping le Webhook avec les données d'événement chaque fois 
 
 Il arrive parfois que le nom de serveur envoyé par Sentry ne corresponde pas au hostname reconnu par Datadog. Pour résoudre ce problème, définissez une valeur personnalisée pour le tag `nom_serveur` associé à chaque événement.
 
-Pour utiliser un hostname différent tout en conservant la valeur `nom_nom` par défaut de Sentry, vous pouvez également définir un tag `hostname` sur vos événements. Consultez la [documentation relative aux événements de tagging Sentry][1] pour découvrir comment le faire dans votre langue.
+Pour utiliser un hostname différent tout en conservant la valeur `nom_nom` par défaut de Sentry, vous pouvez également définir un tag `hostname` sur vos événements. Consultez la [documentation relative aux événements de tagging Sentry][1] pour découvrir comment le faire dans votre langage.
 
 ## Dépannage
 

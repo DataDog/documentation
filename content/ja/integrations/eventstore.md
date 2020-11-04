@@ -2,6 +2,7 @@
 aliases: []
 assets:
   dashboards: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md'
 display_name: Eventstore
+draft: false
 git_integration_title: eventstore
 guid: 4BEB8E51-E7DA-4145-B780-E3B3A6A8CD60
 integration_id: eventstore
@@ -18,7 +20,7 @@ integration_title: Eventstore
 is_public: true
 kind: インテグレーション
 maintainer: '@xorima'
-manifest_version: 1.0.0
+manifest_version: 1.1.0
 metric_prefix: eventstore.
 name: eventstore
 public_title: Datadog-Eventstore インテグレーション
@@ -70,7 +72,7 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
    使用可能なすべての構成オプションの詳細については、[サンプル eventstore.d/conf.yaml][8] を参照してください。

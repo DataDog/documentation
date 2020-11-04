@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: solr
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/solr/README.md'
 display_name: Solr
+draft: false
 git_integration_title: solr
 guid: 0235124a-0207-44dd-aede-f578a6d46b26
 integration_id: solr
@@ -51,7 +53,7 @@ Solr チェックは [Datadog Agent][2] パッケージに含まれています�
 
 このチェックは JMX ベースなので、Solr サーバーで JMX リモートを有効にする必要があります。詳細については、[JMX チェックに関するドキュメント][3]を参照してください。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

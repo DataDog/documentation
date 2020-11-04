@@ -1,8 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: pgbouncer
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
@@ -18,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md'
 display_name: PGBouncer
+draft: false
 git_integration_title: pgbouncer
 guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
@@ -62,7 +66,7 @@ PgBouncer チェックは [Datadog Agent][1] パッケージに含まれてい�
    "datadog" "<PASSWORD>"
    ```
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

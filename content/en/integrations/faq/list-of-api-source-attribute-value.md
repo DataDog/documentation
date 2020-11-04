@@ -1,24 +1,25 @@
 ---
-title: List of API source attribute values
+title: API Source Attributes
 kind: faq
 private: true
 ---
 
-| API Source Attribute          | Internal Source Name       |
+| Integration name              | API source attribute       |
 |-------------------------------|----------------------------|
 | Activemq                      | ACTIVEMQ                   |
 | Airbrake                      | AIRBRAKE                   |
 | Akamai Datastream             | AKAMAIDATASTREAM           |
 | Akamai Mpulse                 | AKAMAIMPULSE               |
 | Alibaba Cloud                 | ALIBABACLOUD               |
-| Amazon Api Gateway            | APIGATEWAY                 |
-| Amazon App Mesh               | AMAZONAPPMESH              |
 | Amazon Appstream              | APPSTREAM                  |
 | Amazon Appsync                | APPSYNC                    |
+| Amazon Api Gateway            | APIGATEWAY                 |
 | Amazon Athena                 | ATHENA                     |
 | Amazon Auto Scaling           | AUTOSCALING                |
+| Bigpanda                      | BIGPANDA                   |
 | Amazon Billing                | BILLING                    |
 | Amazon Cloudfront             | CLOUDFRONT                 |
+| Amazon Cloudhsm               | CLOUDHSM                   |
 | Amazon Cloudsearch            | CLOUDSEARCH                |
 | Amazon Cloudtrail             | CLOUDTRAIL                 |
 | Amazon Codebuild              | CODEBUILD                  |
@@ -34,9 +35,13 @@ private: true
 | Amazon Ec2 Spot               | EC2SPOT                    |
 | Amazon Ecs                    | ECS                        |
 | Amazon Efs                    | EFS                        |
-| Amazon Elastic Transcoder     | ELASTICTRANSCODER          |
 | Amazon Elasticache            | ELASTICACHE                |
 | Amazon Elasticbeanstalk       | ELASTICBEANSTALK           |
+| Amazon Elastic Transcoder     | ELASTICTRANSCODER          |
+| Amazon Mediaconnect           | MEDIACONNECT               |
+| Amazon Mediaconvert           | MEDIACONVERT               |
+| Amazon Mediapackage           | MEDIAPACKAGE               |
+| Amazon Mediatailor            | MEDIATAILOR                |
 | Amazon Elb                    | ELB                        |
 | Amazon Emr                    | EMR                        |
 | Amazon Es                     | ES                         |
@@ -51,11 +56,8 @@ private: true
 | Amazon Kms                    | KMS                        |
 | Amazon Lambda                 | LAMBDA                     |
 | Amazon Lex                    | AWSLEX                     |
+| Amazon App Mesh               | AMAZONAPPMESH              |
 | Amazon Machine Learning       | MACHINELEARNING            |
-| Amazon Mediaconnect           | MEDIACONNECT               |
-| Amazon Mediaconvert           | MEDIACONVERT               |
-| Amazon Mediapackage           | MEDIAPACKAGE               |
-| Amazon Mediatailor            | MEDIATAILOR                |
 | Amazon Mq                     | MQ                         |
 | Amazon Msk                    | MSK                        |
 | Amazon Nat Gateway            | NATGATEWAY                 |
@@ -77,15 +79,13 @@ private: true
 | Amazon Swf                    | SWF                        |
 | Amazon Translate              | TRANSLATE                  |
 | Amazon Trusted Advisor        | TRUSTEDADVISOR             |
-| Amazon Vpn                    | AWSVPN                     |
 | Amazon Waf                    | WAF                        |
+| Amazon Vpn                    | AWSVPN                     |
 | Amazon Web Services           | CLOUDWATCH                 |
 | Amazon Workspaces             | WORKSPACES                 |
 | Amazon Xray                   | AWSXRAY                    |
 | Ansible                       | ANSIBLE                    |
 | Apache                        | APACHE                     |
-| Api                           | API                        |
-| Azure                         | AZURE                      |
 | Azure Analysis Services       | AZUREANALYSISSERVICES      |
 | Azure Api Management          | AZUREAPIMANAGEMENT         |
 | Azure App Service Environment | AZUREAPPSERVICEENVIRONMENT |
@@ -106,6 +106,7 @@ private: true
 | Azure Db For Mariadb          | AZUREDBFORMARIADB          |
 | Azure Db For Mysql            | AZUREDBFORMYSQL            |
 | Azure Db For Postgresql       | AZUREDBFORPOSTGRESQL       |
+| Azure Devops                  | AZUREDEVOPS                |
 | Azure Event Grid              | AZUREEVENTGRID             |
 | Azure Event Hub               | AZUREEVENTHUB              |
 | Azure Express Route           | AZUREEXPRESSROUTE          |
@@ -125,11 +126,13 @@ private: true
 | Azure Service Bus             | AZURESERVICEBUS            |
 | Azure Sql Database            | AZURESQLDATABASE           |
 | Azure Sql Elastic Pool        | AZURESQLELASTICPOOL        |
-| Azure Storage                 | AZURESTORAGE               |
 | Azure Stream Analytics        | AZURESTREAMANALYTICS       |
 | Azure Table Storage           | AZURETABLESTORAGE          |
-| Azure Vm                      | AZUREVM                    |
+| Azure Usage And Quotas        | AZUREUSAGEANDQUOTAS        |
+| Azure Virtual Network         | AZUREVIRTUALNETWORK        |
 | Azure Vm Scale Set            | AZUREVMSCALESET            |
+| Azure Vm                      | AZUREVM                    |
+| Azure                         | AZURE                      |
 | Bitbucket                     | BITBUCKET                  |
 | Btrfs                         | BTRFS                      |
 | Bugsnag                       | BUGSNAG                    |
@@ -143,14 +146,11 @@ private: true
 | Chef                          | CHEF                       |
 | Circleci                      | CIRCLECI                   |
 | Cisco Aci                     | CISCOACI                   |
-| Cloud Foundry                 | CLOUDFOUNDRY               |
 | Cloudflare                    | CLOUDFLARE                 |
 | Cloudhealth                   | CLOUDHEALTH                |
-| Cloudnetworkhealth            | CLOUDNETWORKHEALTH         |
 | Consul                        | CONSUL                     |
 | Couchbase                     | COUCHBASE                  |
 | Couchdb                       | COUCHDB                    |
-| Datadog                       | SYSTEM                     |
 | Desk                          | DESK                       |
 | Dingtalk                      | DINGTALK                   |
 | Docker                        | DOCKER                     |
@@ -158,16 +158,11 @@ private: true
 | Elasticsearch                 | ELASTICSEARCH              |
 | Etcd                          | ETCD                       |
 | Event Viewer                  | EVENTVIEWER                |
-| Exceptional                   | EXCEPTIONAL                |
-| Exceptional                   | EXCEPTIONAL                |
 | Express                       | EXPRESS                    |
 | Fabric                        | FABRIC                     |
 | Fastly                        | FASTLY                     |
-| Feed                          | FEED                       |
 | Flowdock                      | FLOWDOCK                   |
 | Fluentd                       | FLUENTD                    |
-| Ganglia                       | GANGLIA                    |
-| Gearman                       | GEARMAN                    |
 | Git                           | GIT                        |
 | Github                        | GITHUB                     |
 | Go Expvar                     | GOEXPVAR                   |
@@ -186,6 +181,7 @@ private: true
 | Google Cloud Interconnect     | GCPINTERCONNECT            |
 | Google Cloud Iot              | GCPIOT                     |
 | Google Cloud Loadbalancing    | GCPLOADBALANCING           |
+| Google Stackdriver Logging    | GCPLOGGING                 |
 | Google Cloud Ml               | GCPML                      |
 | Google Cloud Platform         | GCP                        |
 | Google Cloud Pubsub           | GCPPUBSUB                  |
@@ -201,14 +197,12 @@ private: true
 | Google Compute Engine         | GCPCOMPUTE                 |
 | Google Container Engine       | GCPCONTAINER               |
 | Google Hangouts Chat          | HANGOUTS                   |
-| Google Stackdriver Logging    | GCPLOGGING                 |
+| G Suite                       | GSUITE                     |
 | Gunicorn                      | GUNICORN                   |
 | Haproxy                       | HAPROXY                    |
 | Hdfs                          | HDFS                       |
 | Hipchat                       | HIPCHAT                    |
 | Honeybadger                   | HONEYBADGER                |
-| Hp Cloud                      | HPCLOUD                    |
-| Hudson                        | JENKINS                    |
 | Iis                           | IIS                        |
 | Immunio                       | IMMUNIO                    |
 | Java                          | JAVA                       |
@@ -222,17 +216,14 @@ private: true
 | Lighttpd                      | LIGHTTPD                   |
 | Mapreduce                     | MAPREDUCE                  |
 | Marathon                      | MARATHON                   |
-| Marlo                         | MARLO                      |
 | Memcached                     | MEMCACHED                  |
+| Meraki                        | MERAKI                     |
 | Mesos                         | MESOS                      |
-| Metric Alert                  | ALERT                      |
 | Microsoft Teams               | MICROSOFTTEAMS             |
 | Mongodb                       | MONGODB                    |
 | Mongodb Atlas                 | MONGODBATLAS               |
-| Monitor Alert                 | ALERT                      |
 | Moxtra                        | MOXTRA                     |
 | Mparticle                     | MPARTICLE                  |
-| My Apps                       | API                        |
 | Mysql                         | MYSQL                      |
 | Nagios                        | NAGIOS                     |
 | New Relic                     | NEWRELIC                   |
@@ -243,6 +234,7 @@ private: true
 | Openstack                     | OPENSTACK                  |
 | Opsgenie                      | OPSGENIE                   |
 | Opsmatic                      | OPSMATIC                   |
+| Oracle Cloud                  | ORACLECLOUD                |
 | Pagerduty                     | PAGERDUTY                  |
 | Papertrail                    | PAPERTRAIL                 |
 | Pgbouncer                     | PGBOUNCER                  |
@@ -266,17 +258,14 @@ private: true
 | Segment                       | SEGMENT                    |
 | Sentry                        | SENTRY                     |
 | Servicenow                    | SERVICENOW                 |
-| Sketch                        | SKETCH                     |
 | Slack                         | SLACK                      |
 | Snmp                          | SNMP                       |
-| Solidfire                     | SOLIDFIRE                  |
 | Solr                          | SOLR                       |
 | Spark                         | SPARK                      |
 | Splunk                        | SPLUNK                     |
 | Sql Server                    | SQLSERVER                  |
 | Ssh                           | SSH                        |
 | Statuspage                    | STATUSPAGE                 |
-| Stride                        | STRIDE                     |
 | Sumo Logic                    | SUMOLOGIC                  |
 | Supervisord                   | SUPERVISORD                |
 | System                        | SYSTEM                     |
@@ -284,15 +273,10 @@ private: true
 | Tokumx                        | TOKUMX                     |
 | Tomcat                        | TOMCAT                     |
 | Travis Ci                     | TRAVISCI                   |
-| Upstart                       | UPSTART                    |
 | Varnish                       | VARNISH                    |
-| Verisign                      | VERISIGN                   |
-| Verisign Openhybrid           | VERISIGNOPENHYBRID         |
 | Victorops                     | VICTOROPS                  |
 | Vsphere                       | VSPHERE                    |
-| Watchdog                      | WATCHDOG                   |
 | Webhooks                      | WEBHOOKS                   |
-| Webmetrics                    | WEBMETRICS                 |
 | Windows Service               | WINDOWSSERVICE             |
 | Wmi                           | WMI                        |
 | Xmatters                      | XMATTERS                   |

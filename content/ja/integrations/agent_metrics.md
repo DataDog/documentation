@@ -2,6 +2,7 @@
 assets:
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md'
 display_name: Agent メトリクス
+draft: false
 git_integration_title: agent_metrics
 guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent
@@ -47,7 +49,7 @@ Agent v6 以降で Agent メトリクスを収集するには、Agent にパッ�
 
 Agent Metrics チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 1. サーバーとポートを指定し、監視するマスターを設定するには、[Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `agent_metrics.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル agent_metrics.d/conf.yaml][5] を参照してください。
 

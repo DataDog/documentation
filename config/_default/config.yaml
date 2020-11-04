@@ -10,8 +10,8 @@ publishDir: "./public"
 
 # taxonomies
 taxonomies:
-  tag: "tags"
-  category: "categories"
+  #tag: "tags"
+  #category: "categories"
   "video-category": "video-categories"
 
 # language
@@ -26,7 +26,9 @@ enableGitInfo: true
 
 # Allow to render HTML in markdown files
 markup:
-  defaultMarkdownHandler: blackfriday
+  goldmark:
+    renderer:
+      unsafe: true
   highlight:
     guessSyntax: true
 

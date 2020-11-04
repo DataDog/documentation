@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: squid
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/squid/README.md'
 display_name: Squid
+draft: false
 git_integration_title: squid
 guid: e7d4b233-b32a-46f9-8cb2-c582ee8fd251
 integration_id: squid

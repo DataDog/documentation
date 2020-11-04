@@ -79,6 +79,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo rm /etc/apt/sources.list.d/datadog-beta.list
     [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
 3. Update apt and downgrade the Agent:
@@ -124,7 +125,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
-    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/  DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=0\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
 2. Update your local yum cache and downgrade the Agent

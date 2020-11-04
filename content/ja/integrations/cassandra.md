@@ -5,6 +5,7 @@ assets:
   dashboards: {}
   logs:
     source: cassandra
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -16,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md'
 display_name: Cassandra
+draft: false
 git_integration_title: cassandra
 guid: 03ba454d-425c-4f61-9e9c-54682c3ebce5
 integration_id: cassandra

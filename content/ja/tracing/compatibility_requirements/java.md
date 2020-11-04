@@ -79,12 +79,14 @@ Datadog は、Oracle JDK と OpenJDK の両方の Java JRE 1.7 以上を公式�
 | Jersey クライアント            | 1.9+        | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
 | JMS                      | 1 と 2     | 完全対応 | `jms`、`jms-1`、`jms-2`                        |
 | Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
-| Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
 | Ning HTTP クライアント         | 1.9.0+      | [ベータ][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | 完全対応 | `okhttp`、`okhttp-2`、`okhttp-3`                |
 | Play WSClient            | 1.0+        | 完全対応 | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | 完全対応 | `amqp`、`rabbitmq`                             |
+| Spring SessionAwareMessageListener              | 3.1+        | 完全対応 | `spring-jms-3.1`                             |
 | Spring WebClient         | 5.0+        | 完全対応 | `spring-webflux`、`spring-webflux-client`      |
+
+**注**: Datadog's Kafka インテグレーションは、ヘッダー API をサポートする Kafka のバージョン `0.11+` で機能します。この API はトレースコンテキストの挿入と抽出に使用されます。バージョンが混在する環境でシステムを稼働させている場合は、Kafka ブローカーが Kafka のより新しいバージョンを間違って報告する場合があります。この場合、トレーサーがローカルのプロデューサーでサポートされていないヘッダーを挿入しようとしたときに問題が発生することがあります。また、古いバージョンのコンシューマーはヘッダーが存在するためにメッセージを収集することができません。これらの問題を回避するために、0.11 より前の Kafka のバージョンが混在している環境では、環境変数: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false` を伴うコンテキストの伝搬を無効化するようにしてください。
 
 希望するネットワーキングフレームワークが見つかりませんか？Datadog では継続的にサポートを追加しています。サポートが必要な場合は、[Datadog サポート][2]にお問い合わせください。
 
@@ -123,6 +125,7 @@ Datadog は、Oracle JDK と OpenJDK の両方の Java JRE 1.7 以上を公式�
 - MySQL
 - Oracle
 - Postgres SQL
+- ScalikeJDBC
 
 希望するデータストアが見つかりませんか？Datadog では継続的にサポートを追加しています。サポートが必要な場合は、[Datadog サポート][2]にお問い合わせください。
 

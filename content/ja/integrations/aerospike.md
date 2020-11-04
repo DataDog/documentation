@@ -5,6 +5,7 @@ assets:
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md'
 display_name: Aerospike
+draft: false
 git_integration_title: aerospike
 guid: 582de9e7-0c99-4037-9cc5-bc34612ce039
 integration_id: aerospike
@@ -47,7 +49,7 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 Aerospike チェックは Datadog Agent パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Host" %}}

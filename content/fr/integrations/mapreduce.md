@@ -1,12 +1,17 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: mapreduce
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - processing
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -44,21 +49,30 @@ Recueillez des métriques du service MapReduce en temps réel pour :
 
 ### Installation
 
-Le check MapReduce est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check MapReduce est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `mapreduce.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `mapreduce.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                         |
 | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -66,9 +80,43 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                 |
 | `<CONFIG_INSTANCE>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<NOM_CLUSTER_MAPREDUCE>"}` |
 
+##### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Supprimez la mise en commentaire du bloc de configuration des logs du fichier `mapreduce.d/conf.yaml` et modifiez les paramètres. Modifiez les valeurs des paramètres `type`, `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple mapreduce.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+    ```yaml
+    logs:
+      - type: file
+        path: <LOG_FILE_PATH>
+        source: mapreduce
+        service: <SERVICE_NAME>
+        # To handle multi line that starts with yyyy-mm-dd use the following pattern
+        # log_processing_rules:
+        #   - type: multi_line
+        #     pattern: \d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2},\d{3}
+        #     name: new_log_start_with_date
+    ```
+
+3. [Redémarrez l'Agent][3].
+
+Consultez la [documentation de Datadog][4] pour découvrir comment configurer l'Agent afin de recueillir les logs dans un environnement Docker.
+
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/docker/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `mapreduce` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][3] et cherchez `mapreduce` dans la section Checks.
 
 ## Données collectées
 
@@ -94,25 +142,21 @@ Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-- [Vue d'ensemble de l'architecture Hadoop][10]
-- [Comment surveiller des métriques Hadoop][11]
-- [Comment recueillir des métriques Hadoop][12]
-- [Comment surveiller Hadoop avec Datadog][13]
+- [Vue d'ensemble de l'architecture Hadoop][5]
+- [Comment surveiller des métriques Hadoop][6]
+- [Comment recueillir des métriques Hadoop][7]
+- [Comment surveiller Hadoop avec Datadog][8]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog/hadoop-architecture-overview
-[11]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
-[12]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
-[13]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help/
+[5]: https://www.datadoghq.com/blog/hadoop-architecture-overview
+[6]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
+[7]: https://www.datadoghq.com/blog/collecting-hadoop-metrics
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog

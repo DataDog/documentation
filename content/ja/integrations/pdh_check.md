@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md'
 display_name: PDH
+draft: false
 git_integration_title: pdh_check
 guid: D09B3410-00A0-4789-ABD7-7740C3FE211F
 integration_id: pdh
@@ -41,7 +43,7 @@ Windows のパフォーマンスカウンターからメトリクスをリアル
 
 PDH チェックは [Datadog Agent][1] パッケージに含まれています。追加のインストールは必要ありません。
 
-### 構成
+### コンフィギュレーション
 
 1. Windows のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `pdh_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル pdh_check.d/conf.yaml][3] を参照してください。
 

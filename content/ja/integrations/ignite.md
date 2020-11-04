@@ -6,6 +6,7 @@ assets:
     Ignite Overview: assets/dashboards/ignite_overview.json
   logs:
     source: ignite
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -18,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ignite/README.md'
 display_name: Ignite
+draft: false
 git_integration_title: ignite
 guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite

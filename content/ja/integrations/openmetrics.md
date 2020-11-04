@@ -4,6 +4,7 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -14,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md'
 display_name: OpenMetrics
+draft: false
 git_integration_title: openmetrics
 guid: 3f67af75-6987-468c-99b3-5001ba5ab414
 integration_id: openmetrics
@@ -45,7 +47,7 @@ supported_os:
 
 OpenMetrics チェックは、[Datadog Agent のバージョン 6.6.0 以降][2]にパッケージ化されています。
 
-### 構成
+### コンフィギュレーション
 
 [Agent の構成ディレクトリ][3]のルートにある `openmetrics.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openmetrics.d/conf.yaml][4] を参照してください。
 

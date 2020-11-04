@@ -4,8 +4,6 @@ dependencies:
 kind: ドキュメント
 title: Chef
 ---
-
-
 Datadog Chef レシピは Datadog のコンポーネントとコンフィギュレーションを自動的にデプロイするために使用します。クックブックは次のバージョンに対応しています。
 
 * Datadog Agent v7.x (デフォルト)
@@ -348,7 +346,7 @@ end
 ```ruby
 include_recipe 'datadog::dd-agent'
 
-datadog_monitor 'elastic'
+datadog_monitor 'elastic' do
   instances  [{'url' => 'http://localhost:9200'}]
   use_integration_template true
   notifies :restart, 'service[datadog-agent]' if node['datadog']['agent_start']
@@ -391,7 +389,7 @@ end
 ```ruby
 include_recipe 'datadog::dd-agent'
 
-datadog_integration 'datadog-elastic'
+datadog_integration 'datadog-elastic' do
   version '1.11.0'
 end
 ```

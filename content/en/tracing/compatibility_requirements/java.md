@@ -80,7 +80,6 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
@@ -106,8 +105,8 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
-| Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
-| Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
+| Elasticsearch Transport | 2.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
+| Elasticsearch Rest      | 5.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |

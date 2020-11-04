@@ -1,9 +1,12 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Presto Overview: assets/dashboards/overview.json
   logs:
     source: presto
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -20,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/presto/README.md'
 display_name: Presto
+draft: false
 git_integration_title: presto
 guid: a05766fc-8760-464b-9e5d-a784500b7b90
 integration_id: presto

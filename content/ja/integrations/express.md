@@ -7,6 +7,7 @@ ddtype: ライブラリ
 dependencies: []
 description: 全体的な応答時間と応答コード別のリクエスト率を監視。
 doc_link: 'https://docs.datadoghq.com/integrations/express/'
+draft: false
 git_integration_title: express
 has_logo: true
 integration_title: ExpressJS
@@ -33,7 +34,7 @@ Express インテグレーションは、収集したメトリクス Datadog に
 
 [ホストに Agent をインストールしたら][2]、[DogStatsD セットアップドキュメント][3]を参照して有効にしてください。
 
-### 構成
+### コンフィギュレーション
 
 1. ミドルウェアをインストールします。
 

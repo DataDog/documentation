@@ -97,6 +97,10 @@ left:
         category: テクノロジー
         link: 'https://www.datadoghq.com/solutions/aws/'
         title: Amazon Web Services
+      - name: Azure
+        category: テクノロジー
+        link: 'https://www.datadoghq.com/solutions/azure/'
+        title: Azure
       - name: Google Cloud Platform
         category: テクノロジー
         link: 'https://www.datadoghq.com/solutions/gcp/'
