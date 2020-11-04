@@ -3,6 +3,8 @@ aliases:
   - /integrations/amazon_eks_fargate/
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,6 +17,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md'
 description: "Recueillez vos métriques, traces et logs Amazon\_EKS."
 display_name: "EKS\_Fargate"
+draft: false
 git_integration_title: eks_fargate
 guid: e9e58fb9-696b-4e3c-9058-c144a1d9a737
 integration_id: eks-fargate
@@ -46,7 +49,7 @@ Les pods AWS Fargate ne sont pas des pods physiques. Ils excluent donc les [che
 
 - Collecte de métriques Kubernetes à partir du pod exécutant les conteneurs de votre application et l'Agent
 - [Autodiscovery][3]
-- Configuration de checks custom d'Agent pour cibler les conteneurs dans le même pod
+- Configuration de checks d'Agent personnalisés pour cibler les conteneurs dans un même pod
 - APM et DogStatsD pour les conteneurs dans un même pod
 
 ### Nœud EC2
@@ -62,7 +65,7 @@ Pour accroître votre visibilité lors de la surveillance de charges de travail 
 - [EKS][10]
 - [EC2][11] (si vous exécutez un nœud de type EC2)
 
-Configurez également des intégrations pour tout autre service AWS que vous exécutez avec EKS (par exemple, [ELB][12]).
+Configurez également les intégrations des autres services AWS que vous exécutez avec EKS (par exemple, [ELB][12]).
 
 #### Installation manuelle
 
@@ -76,7 +79,9 @@ Pour recueillir des données à partir de vos applications qui s'exécutent dans
 
 - [Configurez des règles RBAC AWS EKS Fargate](#rbac-aws-eks-fargate).
 - [Déployez l'Agent en tant que sidecar](#execution-de-l-agent-en-tant-que-side-car).
-- Configurez la collecte de [métriques](#collecte-de-metriques), d'[événements](#collecte-d-evenements) et de [traces](#collecte-de-traces).
+- Configurez la collecte de [métriques](#collecte-de-metriques), d'[événements](#collecte-d-evenements) et de [traces](#collecte-de-traces) Datadog.
+
+Pour que vos conteneurs EKS Fargate s'affichent dans la vue Live Container de Datadog, activez `shareProcessNamespace` dans les spécifications de votre pod. Consultez la section [Collecte de processus](#collecte-de-processus).
 
 #### RBAC AWS EKS Fargate
 
@@ -224,7 +229,7 @@ spec:
             cpu: "200m"
 ```
 
-**Remarques :**
+**Remarques** :
 
 - N'oubliez pas de remplacer `<VOTRE_CLÉ_API_DATADOG>` par la [clé d'API Datadog de votre organisation][13].
 - Les métriques de conteneur ne sont pas disponibles dans Fargate. En effet, il est impossible de monter le volume `cgroups` du host sur l'Agent.
@@ -352,6 +357,22 @@ Outre la configuration de l'Agent de cluster Datadog, vous pouvez également cho
 
 **Remarque** : vous pouvez également recueillir des événements si vous exécutez l'Agent de cluster Datadog dans un pod dans Fargate.
 
+## Collecte de processus
+
+Les Agents 6.19+/7.19+ prennent en charge la [Collecte de processus][20]. Activez `shareProcessNamespace` dans les spécifications de pod pour recueillir tous les processus exécutés sur votre pod Fargate. Exemple :
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <NOM>
+spec:
+  shareProcessNamespace: true
+...
+```
+
+**Remarque** : les métriques de CPU et de mémoire ne sont pas disponibles.
+
 ## Données collectées
 
 ### Métriques
@@ -368,7 +389,7 @@ eks_fargate n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][20].
+Besoin d'aide ? Contactez [l'assistance Datadog][21].
 
 [1]: http://docs.datadoghq.com/integrations/amazon_eks/
 [2]: http://docs.datadoghq.com/integrations/system
@@ -389,4 +410,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [17]: http://docs.datadoghq.com/tracing/setup
 [18]: http://docs.datadoghq.com/agent/cluster_agent/setup
 [19]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
-[20]: https://docs.datadoghq.com/fr/help/
+[20]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#process-collection
+[21]: https://docs.datadoghq.com/fr/help/

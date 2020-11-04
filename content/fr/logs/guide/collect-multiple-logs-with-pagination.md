@@ -29,16 +29,17 @@ Pour récupérer une liste de logs contenant plus de 1 000 logs (soit la limit
 Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
+-H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
         "limit": 50,
         "query": "*",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -61,17 +62,18 @@ Le paramètre `logs` est un tableau d'objets Log qui peut contenir autant de log
 Pour récupérer la page de logs suivante, renvoyez votre requête, mais cette fois avec le paramètre `startAt`. Celui-ci prend la valeur `nextLogId` de l'appel précédent :
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
--H 'Content-Type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
+-H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
         "limit": 1000,
         "query": "*",
         "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
         "sort": "desc",
         "time": {
-            "from": "2019-08-07T00:00:00Z",
-            "to": "2019-08-06T00:00:00Z"
+            "from": "2019-08-06T00:00:00Z",
+            "to": "2019-08-07T00:00:00Z"
         }
     }'
 ```
@@ -97,14 +99,15 @@ Pour voir toutes vos pages de logs, continuez à renvoyer votre requête avec le
 Commencez par créer une requête afin de récupérer les logs correspondant à un contexte donné, tel qu'une requête donnée dans un intervalle défini :
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
+-H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  
@@ -139,14 +142,15 @@ Le paramètre `data` est un tableau d'objets Log qui peut contenir autant de log
 Pour voir la page suivante de vos logs, continuez à renvoyer votre requête avec le paramètre `cursor` défini sur la valeur `after` de l'appel précédent. Lorsque `data` renvoie `null`, cela signifie que vous avez renvoyé toutes les pages de logs associées à votre requête.
 
 ```bash
-curl -X POST \
-'https://api.datadoghq.com/api/v2/logs/events/search?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
--H 'content-type: application/json' \
+curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${CLÉ_API_CLIENT_DD}" \
+-H "DD-APPLICATION-KEY: ${CLÉ_APP_CLIENT_DD}" \
 -d '{
       "filter": 
               {
-                "from": "2019-08-07T00:00:00Z",
-                "to": "2019-08-06T00:00:00Z",
+                "from": "2019-08-06T00:00:00Z",
+                "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
       "page":  
