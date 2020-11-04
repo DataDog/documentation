@@ -30,7 +30,7 @@ This page details common use cases for adding and customizing observability with
 
 Add the `Datadog.Trace` [NuGet package][1] to your application. To create new spans, access the global tracer through the `Datadog.Trace.Tracer.Instance` property.
 
-Custom instrumentation is supported on **.NET Framework 4.5+** for Windows and on **.NET Core 2.1, 3.0, and 3.1** for Windows and Linux.
+Custom instrumentation is supported on **.NET Framework 4.5+** for Windows, on **.NET Core 2.0+** for Windows and Linux, and on **.NET 5** for Windows and Linux.
 
 
 ## Add tags and spans
