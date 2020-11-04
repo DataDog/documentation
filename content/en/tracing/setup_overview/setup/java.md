@@ -204,7 +204,7 @@ For additional details and options, see the [WebSphere docs][1].
 
      For more information, see the [Oracle documentation][4].
      
-- The `dd-java-agent` should never be added to your classpath. 
+- The `dd-java-agent` should never be added to your classpath and can cause unexpected behavoir. 
 
 ## Automatic Instrumentation
 
