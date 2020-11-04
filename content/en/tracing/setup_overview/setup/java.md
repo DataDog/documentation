@@ -194,6 +194,7 @@ For additional details and options, see the [WebSphere docs][1].
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**
 
 - If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, that is as a JVM option, not as an application argument. For example:
 
@@ -202,6 +203,8 @@ For additional details and options, see the [WebSphere docs][1].
    ```
 
      For more information, see the [Oracle documentation][4].
+     
+- The `dd-java-agent` should never be added to your classpath. 
 
 ## Automatic Instrumentation
 
