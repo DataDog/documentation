@@ -1,5 +1,5 @@
 ---
-title: Keep control on sensitive data flowing in logs 
+title: Control sensitive logs data 
 kind: guide
 alias:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
@@ -16,12 +16,12 @@ further_reading:
 
 ---
 
-Your logs can hold sensitive customer data, so they need specific care from a compliance standpoint. Once you realize that you are ingesting sensitive customer data, consider these two things:
+Your logs may hold sensitive customer data, so they may need specific care from a compliance standpoint. Once you realize that you are ingesting sensitive customer data into Datadog, consider these two things:
 
-If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use Roles Based Action Control to ensure that you have set up appropriate restrictions to ensure that only entitled users can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] and learn how to configure it for your organization.
-If the sensitive data flowing out of your platform and into Datadog is unintentional, you have a compliance concern. Continue with this guide to learn about addressing that concern.
+- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use Roles Based Action Control to ensure that you have set up appropriate restrictions to ensure that only entitled users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] and learn how to configure it for your organization.
+- If the sensitive data being sent from your platform into Datadog is unintentional, you have a compliance concern. Continue with this guide to learn about addressing that concern.
 
-Controlling all of the data flow at any time can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should undergo when you detect compliance-sensitive data leaking out of your platform:
+Controlling all of the data flow at any time can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should take when you detect compliance-sensitive data from your platform:
 
 1. [Identify](#determine-the-scope-of-the-leak) the nature and the scope of sensitive data leaking.
 2. [Fix](#fix-the-leak-upstream) the leak upstream.
@@ -34,7 +34,7 @@ Controlling all of the data flow at any time can be challenging, especially on a
 
 First, define a query that outlines the sensitive data. That query would return all logs with sensitive data and, ideally, only such logs. 
 
-Chances are that queries such as `version:x.y.z source:python status:debug` will match that expectation. Refer to the [Log Search Syntax][2] documentation if you need more advanced operators (wildcards, boolean operators, etc.) to get there.
+Chances are that queries such as `version:x.y.z source:python status:debug` match that expectation. Refer to the [Log Search Syntax][2] documentation if you need more advanced operators (wildcards, boolean operators, etc.) to get there.
 
 This guide refers to that query as the **sensitive outline query**. Keep track of this query for the next steps.
 
