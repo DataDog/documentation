@@ -23,12 +23,12 @@ Your logs may hold sensitive customer data, so they may need specific care from 
 
 Controlling all of the data flow at any time can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should take when you detect compliance-sensitive data from your platform:
 
-1. [Identify](#determine-the-scope-of-the-leak) the nature and the scope of sensitive data leaking.
-2. [Fix](#fix-the-leak-upstream) the leak upstream.
-3. [Handle](#handle-leaked-data) sensitive data that has already leaked into Datadog.
+1. [Identify](#determine-the-scope-of-the-data-being-sent) the nature and the scope of sensitive data being sent.
+2. [Fix](#fix-the-source-of-the-data-upstream) the source of data upstream.
+3. [Handle](#handle-data-already-sent-to-datadog) sensitive data that has already been sent into Datadog.
 
 
-## Determine the scope of the leak
+## Determine the scope of the data being sent
 
 ### What log query defines sensitive data?
 
@@ -40,7 +40,7 @@ This guide refers to that query as the **sensitive outline query**. Keep track o
 
 {{< img src="logs/guide/sensitive/sensitive_outline_query.png" alt="Sensitive Outline Query" style="width:80%;" >}}
 
-### Where did sensitive data leak so far?
+### Where is the senitive data inside Datadog?
 
 Although there could be sensitive data coming in at multiple places in Datadog, focus on Datadog Indexes because other locations are likely a lesser compliance concern. 
 
@@ -50,17 +50,17 @@ Although there could be sensitive data coming in at multiple places in Datadog, 
 
 * Datadog [Metrics generated from Logs][7] storing aggregated metrics, meaning sensitive data likely have been discarded or crushed. Check custom metrics filters to see if logs with sensitive data are processed.
 
-* Datadog [Log Monitors][8] notifications when they include [Log Samples][9]. Check specifically for monitors triggered during the period when sensitive data leaked. 
+* Datadog [Log Monitors][8] notifications when they include [Log Samples][9]. Check specifically for monitors triggered during the period when sensitive data was being sent. 
 
 * Datadog [Livetail][10], where logs are streamed in web browsers from your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be highly sampled.
 
 
-## Fix the leak upstream
+## Fix the source of the data upstream
 
 
 ### Stop indexing sensitive logs
 
-This step is optional. It won't fix the compliance issue, but you can take immediate action before you commit to stopping the leak on your end.
+This step is optional. It won't fix the compliance issue, but you can take immediate action before you commit to stopping the data from being sent to Datadog
 
 * Find which index(es) logs holding sensitive data are susceptible to be routed.
 * For each index, add an exclusion filter based on the sensitive outline query. It has to be **in the first place**. 
@@ -78,13 +78,13 @@ In case you have no straightforward way to change the loggers themselves, Datado
 Similar scrubbing capabilities exist for the [Serverless Forwarder][14].
 
 
-## Handle leaked data
+## Handle data already sent to Datadog
 
 Take the following steps according to your compliance requirements. You might not need to run through all of them.
 
 ### Make sensitive logs un-queryable in Datadog (until they age-out)
 
-This step is a handy way to mitigate compliance issues. It aims at making the logs with sensitive data - both logs that already leaked and logs that might keep flowing in - not queryable in Datadog (Explorer, Dashboards, and Livetail). 
+This step is a handy way to mitigate compliance issues. It aims at making the logs with sensitive data - both logs that already sent and logs that might keep flowing in - not queryable in Datadog (Explorer, Dashboards, and Livetail). 
 
 Use the [Data Access configuration page][15] and use the sensitive outline query to define a [restiction][16] that applies to everyone in your organization. 
 
@@ -103,7 +103,7 @@ If you have to patch your archives to remove sensitive data, refer to the docume
 In case you have specific compliance questions or need a helping hand in fixing this, feel free to reach out to our [awesome support team][18]. When you contact our support team, it is helpful for you to have this information available to them:
 
 * The sensitive outline query. Or anything that could define sensitive data such as a timerange, a service or an environment,
-* Whether the sensitive data still leaking into Datadog,
+* Whether the sensitive data is still being sent into Datadog,
 * Whether sensitive data has been indexed (in which index(es)) or turned into metrics,
 * Whether you have already made sensitive data unqueryable.
 
