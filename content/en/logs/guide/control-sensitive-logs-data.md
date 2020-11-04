@@ -16,7 +16,7 @@ further_reading:
 
 ---
 
-Your logs may hold sensitive customer data, so they may need specific care from a compliance standpoint. Once you realize that you are ingesting sensitive customer data into Datadog, consider these two things:
+Your logs may hold sensitive data, so they may need specific care from a compliance standpoint. Once you realize that you are ingesting sensitive data into Datadog, consider these two things:
 
 - If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use Roles Based Action Control to ensure that you have set up appropriate restrictions to ensure that only entitled users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] and learn how to configure it for your organization.
 - If the sensitive data being sent from your platform into Datadog is unintentional, you have a compliance concern. Continue with this guide to learn about addressing that concern.
