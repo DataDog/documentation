@@ -59,7 +59,7 @@ Pour configurer SAML pour plusieurs organisations, suivez la procédure suivante
 
 ## Utilisation pour plusieurs organisations
 
-L'organisation parent peut consulter l'utilisation totale et l'utilisation facturée de toutes ses organisations (parent et enfant) en survolant leur nom d'utilisateur en bas à gauche, puis en accédant à : `Plan & Usage`--> `Multi-Org Usage`.
+L'organisation parent peut consulter l'utilisation totale et l'utilisation facturée de toutes ses organisations (parent et enfant) en survolant son nom d'utilisateur en bas à gauche, puis en accédant à : `Plan & Usage`--> `Multi-Org Usage`.
 
 L'onglet Multi-Org Usage indique l'utilisation globale de l'organisation parent et de toutes ses organisations enfant. L'onglet Multi-Org Usage comprend deux sous-onglets :
 
@@ -68,9 +68,9 @@ L'onglet Multi-Org Usage indique l'utilisation globale de l'organisation parent 
 
 ### Month-to-Date Usage
 
-Cette vue comprend une section Overall Usage et une section Individual Organization Usage. 
+Cette vue comprend une section Overall Usage et une section Individual Organization Usage.
 
-La section Overall Usage résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom et de toute autre partie de la plateforme que vous avez utilisée au cours du mois, dans votre organisation parent et toutes ses organisations enfant. 
+La section Overall Usage résume votre utilisation mensuelle des hosts, des conteneurs, des métriques custom et de toute autre partie de la plateforme que vous avez utilisée au cours du mois. Ces données englobent votre organisation parent et toutes ses organisations enfant.
 
 {{< img src="account_management/managing-multiorgs-01.png" alt="Month-to-Date Usage" >}}
 
@@ -108,7 +108,9 @@ Remarque : les types d'utilisations suivants ne sont pas pris en charge par cet
 
 * Événements de log indexés
 * Logs ingérés
-* Spans analysées
+* Spans indexées
+
+**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
 
 L'attribution de l'utilisation est une fonction avancée incluse dans la formule Enterprise. Pour toutes les autres formules, contactez votre chargé de compte ou envoyez un e-mail à <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 

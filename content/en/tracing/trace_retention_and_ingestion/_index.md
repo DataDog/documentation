@@ -159,7 +159,7 @@ All existing App Analytics filters have been automatically transitioned to Reten
 [1]: https://app.datadoghq.com/apm/traces/retention-filters
 [2]: /tracing/trace_search_and_analytics/#historical-search-mode
 [3]: /tracing/visualization/#top-level-span
-[4]: https://app.datadoghq.com/apm/traces/ingestion-controls
+[4]: https://app.datadoghq.com/apm/traces/ingestion-control
 [5]: /help/
 [6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml#L736-L741
 [7]: /tracing/trace_search_and_analytics

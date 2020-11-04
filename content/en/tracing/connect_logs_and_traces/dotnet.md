@@ -105,16 +105,23 @@ leverage the Datadog API to retrieve correlation identifiers:
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
+**Note**: The Serilog library requires message property names to be valid C# identifiers, so the property names must be:
+- `dd_env`
+- `dd_service`
+- `dd_version`
+- `dd_trace_id`
+- `dd_span_id`
+
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
 // there must be spans started and active before this block.
-using (LogContext.PushProperty("dd.env", CorrelationIdentifier.Env))
-using (LogContext.PushProperty("dd.service", CorrelationIdentifier.Service))
-using (LogContext.PushProperty("dd.version", CorrelationIdentifier.Version))
-using (LogContext.PushProperty("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
-using (LogContext.PushProperty("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
+using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
+using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
+using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
+using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
+using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
     // Log something
 }

@@ -3,17 +3,21 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: lighttpd
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - web
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md'
 display_name: Lighttpd
+draft: false
 git_integration_title: lighttpd
 guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
 integration_id: lighttpd
@@ -45,17 +49,20 @@ Le check lighttpd de l'Agent surveille la disponibilité, les octets traités, l
 
 ### Installation
 
-Le check lighttpd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs lighttpd.
+Le check lighttpd est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs lighttpd.
 
 En outre, vous pouvez installer `mod_status` sur vos serveurs lighttpd.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `lighttpd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple lighttpd.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `lighttpd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple lighttpd.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -67,11 +74,17 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
      - lighttpd_status_url: http://localhost/server-status?auto
    ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                           |
 | -------------------- | --------------------------------------------------------------- |
@@ -79,9 +92,37 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                   |
 | `<CONFIG_INSTANCE>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `lighttpd.d/conf.yaml` pour commencer à recueillir vos logs lighttpd :
+
+   ```yaml
+   logs:
+     - type: file
+       encoding: utf-16-le
+       path: /path/to/my/directory/file.log
+       source: lighttpd
+   ```
+
+   Modifiez la valeur du paramètre `path` et configurez-la pour votre environnement.
+   Consultez le [fichier d'exemple lighttpd.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][4].
+
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `lighttpd` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `lighttpd` dans la section Checks.
 
 ## Données collectées
 
@@ -101,19 +142,17 @@ Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à lighttpd pour rec
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-Pour mieux comprendre comment (ou pourquoi) surveiller les métriques de serveur web lighttpd avec Datadog, lisez nos [articles de blog][10] à ce sujet.
+Pour mieux comprendre comment (ou pourquoi) surveiller les métriques de serveur web lighttpd avec Datadog, lisez nos [articles de blog][7] à ce sujet.
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/lighttpd/images/lighttpddashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics
+[3]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics

@@ -26,7 +26,7 @@ Les intégrations bêta sont désactivées par défaut. Vous pouvez cependant le
 
 - Calcul de la durée entre les requêtes HTTP et leur réponse
 - Ajout de tags pour les requêtes HTTP (code de statut, méthode, etc.)
-- Capture des erreurs et des traces de pile
+- Capture des erreurs et des stack traces
 - Mise en corrélation des tâches créées au sein d'une requête Web et du tracing distribué
 
 | Serveur                  | Versions   | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration) |
@@ -58,7 +58,7 @@ Vos frameworks Web préférés ne sont pas disponibles ? Datadog élargit conti
 
 - Calcul de la durée entre les requêtes HTTP et leur réponse
 - Ajout de tags pour les requêtes (p. ex., code de réponse)
-- Capture des erreurs et des traces de pile
+- Capture des erreurs et des stack traces
 - Tracing distribué
 
 
@@ -79,12 +79,14 @@ Vos frameworks Web préférés ne sont pas disponibles ? Datadog élargit conti
 | Jersey Client            | 1.9+        | Prise en charge complète | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 et 2     | Prise en charge complète | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Prise en charge complète | `netty`, `netty-4.0`, `netty-4.1`              |
-| Netty HTTP Client        | 4.0+        | Prise en charge complète | `netty`, `netty-4.0`, `netty-4.1`              |
 | Ning HTTP Client         | 1.9.0+      | [Bêta][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Prise en charge complète | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Prise en charge complète | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Prise en charge complète | `amqp`, `rabbitmq`                             |
+| Spring SessionAwareMessageListener              | 3.1+        | Prise en charge complète | `spring-jms-3.1`                             |
 | Spring WebClient         | 5.0+        | Prise en charge complète | `spring-webflux`, `spring-webflux-client`      |
+
+**Remarque** : l'intégration Kafka/Datadog fonctionne avec Kafka version `0.11+`, qui prend en charge l'API Header. Cette API est utilisée pour injecter et extraire le contexte de tracing. Si vous utilisez un environnement à versions mixtes, le broker Kafka peut transmettre la version la plus récente de Kafka par erreur, et le traceur tente alors d'injecter des en-têtes qui ne sont pas pris en charge par le producer local. En outre, les consommateurs plus anciens ne sont pas en mesure de consommer le message à cause de la présence des en-têtes. Pour éviter ces problèmes, si vous utilisez un environnement Kafka à versions mixtes avec des versions antérieures à 0.11, désactivez la propagation du contexte avec la variable d'environnement suivante : `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
 Vos frameworks réseau préférés ne sont pas disponibles ? Datadog élargit continuellement la liste des frameworks pris en charge. Contactez [l'assistance Datadog][2] si vous avez besoin d'aide.
 
@@ -94,9 +96,9 @@ Vos frameworks réseau préférés ne sont pas disponibles ? Datadog élargit c
 
 **Le tracing Datadog offre les fonctionnalités suivantes :**
 
-- Mesure de la durée entre les requêtes HTTP et leur réponse
+- Calcul de la durée entre les requêtes HTTP et leur réponse
 - Récupération d'informations sur les requêtes (p. ex., la chaîne de requête expurgée)
-- Capture des erreurs et des traces de pile
+- Capture des erreurs et des stack traces
 
 | Base de données                | Versions | Type de prise en charge    | Noms des instrumentations (utilisés pour la configuration)                                           |
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
@@ -123,6 +125,7 @@ Vos frameworks réseau préférés ne sont pas disponibles ? Datadog élargit c
 - MySQL
 - Oracle
 - Postgres SQL
+- ScalikeJDBC
 
 Vos datastores préférés ne sont pas disponibles ? Datadog élargit continuellement la liste des datastores pris en charge. Contactez [l'assistance Datadog][2] si vous avez besoin d'aide.
 
@@ -162,7 +165,7 @@ Les intégrations peuvent être activées ou désactivées individuellement (ce 
 - System Property: `-Ddd.integration.<NOM_INTÉGRATION>.enabled=true`
 - Variable d'environnement : `DD_INTEGRATION_<NOM_INTÉGRATION>_ENABLED=true`
 
-(Le nom de chaque intégration est affiché ci-dessous.)
+(Le nom de chaque intégration est affiché ci-dessus.)
 
 
 ## Pour aller plus loin

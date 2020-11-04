@@ -4,7 +4,7 @@ aliases:
 disable_edit: true
 kind: documentation
 rule_category:
-  - Détection de logs
+  - Log Detection
 security: compliance
 source: gcp
 title: Activité de compte de service GCP non autorisée

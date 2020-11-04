@@ -2,8 +2,12 @@
 aliases:
   - /fr/integrations/vmware/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     vsphere-overview: assets/dashboards/vsphere_overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md'
 display_name: vSphere
+draft: false
 git_integration_title: vsphere
 guid: 930b1839-cc1f-4e7a-b706-0e8cf3218464
 integration_id: vsphere
@@ -38,66 +43,35 @@ supported_os:
 
 Ce check recueille des métriques d'utilisation des ressources depuis votre cluster vSphere : charge processeur, disque, mémoire et réseau. Il surveille également votre serveur vCenter à la recherche d'événements et les envoie à Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check vSphere est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur vCenter.
+Le check vSphere est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur vCenter.
 
 ### Configuration
 
 Dans la section **Administration** de vCenter, ajoutez un utilisateur en lecture seule du nom de `datadog-readonly`.
 
-Modifiez ensuite le fichier `vsphere.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple vsphere.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
-
-```YAML
-init_config:
-
-instances:
-  - name: main-vcenter # le tag appliqué aux métriques, p. ex. 'vcenter_server:main-vcenter'
-    host: <HOSTNAME_VCENTER>          # p. ex. myvcenter.example.com
-    username: <UTILISATEUR_CRÉÉ_PLUS_TÔT> # p. ex. datadog-readonly@vsphere.local
-    password: <MOTDEPASSE>
-```
+Modifiez ensuite le fichier `vsphere.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple vsphere.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 [Redémarrez l'Agent][5] pour commencer à envoyer des métriques et des événements vSphere à Datadog.
 
-**Remarque** : l'Agent Datadog ne doit pas nécessairement être sur le même serveur que le logiciel vSphere. Lorsque le check vSphere est activé, l'Agent peut être configuré de façon à pointer vers le serveur vSphere (et ce, quel que soit le système d'exploitation sur lequel il s'exécute). Mettez à jour votre `<HOSTNAME_VCENTER>` en fonction.
+**Remarque** : l'Agent Datadog ne doit pas nécessairement être sur le même serveur que le logiciel vSphere. Lorsque le check vSphere est activé, l'Agent peut être configuré de façon à pointer vers le serveur vSphere (et ce, quel que soit le système d'exploitation sur lequel il s'exécute). Mettez à jour votre `<HOSTNAME>` en fonction.
 
 ### Compatibilité
 
-À partir de la version 3.3.0 du check (incluse avec l'Agent version 6.5.0/5.27.0), un nouveau paramètre facultatif `collection_level` est disponible pour sélectionner les métriques à recueillir à partir du vCenter, le paramètre facultatif `all_metrics` étant désormais obsolète. Les noms des métriques envoyées à Datadog par l'intégration ont également changé, avec l'ajout d'un suffixe spécifiant le type de cumul de la métrique exposée par vCenter (`.avg`, `.sum`, etc.).
-
-Par défaut, depuis la version 3.3.0, le paramètre `collection_level` est défini sur 1 et l'intégration envoie les nouveaux noms de métrique avec le suffixe supplémentaire.
-
-Vous pouvez faire face à deux types de situations :
-
-1. Vous n'avez jamais utilisé l'intégration auparavant et vous venez d'installer un Agent version 6.5.0+/5.27.0+. Vous n'avez rien de particulier à faire dans ce cas. Utilisez l'intégration, configurez le paramètre `collection_level` et visualisez vos métriques dans Datadog.
-
-2. Vous avez utilisé l'intégration avec un Agent antérieur à 6.5.0/5.27.0, et vous êtes depuis passé à une version plus récente.
-
-   - Si le paramètre `all_metrics` est spécifiquement défini sur `true` ou `false` dans votre configuration, rien ne change (les mêmes métriques sont envoyées à Datadog). Vous devez alors mettre à jour vos dashboards et monitors pour utiliser les nouveaux noms de métrique avant de passer au nouveau paramètre `collection_level`, car le paramètre `all_metrics` est obsolète et sera prochainement supprimé.
-   - Si le paramètre `all_metrics` n'est pas spécifié dans votre configuration, une fois la nouvelle version installée, l'intégration définit le paramètre `collection_level` sur 1 par défaut et envoie les métriques à Datadog avec le nouveau nom.
-     **Avertissement** : étant donné que les métriques obsolètes ne seront plus envoyées, vos graphiques de dashboard et vos monitors basés sur ces dernières cesseront de fonctionner. Pour empêcher cela, définissez `all_metrics: false` dans votre configuration afin de continuer à transmettre les mêmes métriques ; ensuite, mettez à jour vos dashboards et monitors afin de les faire utiliser les nouvelles métriques avant de recommencer à utiliser `collection_level`.
-
-#### Options de configuration
-
-| Options                   | Obligatoire | Description                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ssl_verify`              | Non       | Définir sur false pour désactiver la vérification SSL lors de la connexion à vCenter.                                                                                                                                                                                                                                                                                            |
-| `ssl_capath`              | Non       | Définir sur le chemin absolu d'un répertoire contenant les certificats d'autorité de certification au format PEM.                                                                                                                                                                                                                                                                           |
-| `host_include_only_regex` | Non       | Utiliser une expression régulière comme celle-ci pour que le check ne récupère que les métriques de ces hosts ESXi, ainsi que celles des machines virtuelles fonctionnant sur ces hosts.                                                                                                                                                                                                                                                |
-| `vm_include_only_regex`   | Non       | Utiliser une expression régulière pour inclure uniquement les machines virtuelles correspondant à cette expression.                                                                                                                                                                                                                                                                                              |
-| `include_only_marked`     | Non       | Définir sur true pour recueillir uniquement les métriques des machines virtuelles vSphere marquées par un champ personnalisé avec la valeur « DatadogMonitored ». Ce champ personnalisé peut être défini depuis l'interface en appliquant un tag ou via l'interface de ligne de commande avec [PowerCLI][6] Exemple fonctionnant avec vSphere 5.1 : `Get-VM VM | Set-CustomField -Name "DatadogMonitored" -Value "DatadogMonitored"`. |
-| `collection_level`        | Non       | Un nombre entre 1 et 4 indiquant le nombre de métriques à envoyer. Lorsque cette option est définie sur 1, seules les métriques de surveillance importantes sont envoyées. À l'inverse, lorsqu'elle est définie sur 4, toutes les métriques disponibles sont envoyées.                                                                                                                                                                                                                 |
-| `all_metrics`             | Non       | (Obsolète) Lorsque défini sur true, TOUTES les métriques de vCenter (soit un TRÈS grand nombre) sont recueillies. Lorsque défini sur false, un sous-ensemble de métriques intéressantes à surveiller est recueilli.                                                                                                                                                           |
-| `event_config`            | Non       | La configuration d'événements est un dictionnaire. Pour le moment, le seul paramètre activable est `collect_vcenter_alarms`, qui envoie les alarmes définies dans vCenter en tant qu'événements.                                                                                                                                                                                                                  |
+À partir de la version 5.0.0 du check (incluse avec l'Agent version 6.18.0/7.18.0), une nouvelle implémentation de l'intégration a été mise en place, ce qui signifie que le fichier de configuration a été modifié. Pour assurer la compatibilité avec les versions précédentes, un paramètre de configuration intitulé `use_legacy_implementation` est temporairement disponible.
+Si vous mettez à jour l'intégration depuis une version plus ancienne, ce paramètre n'est pas défini dans la configuration et oblige l'Agent à utiliser l'ancienne implémentation.
+Si vous configurez l'intégration pour la première fois ou si vous souhaitez bénéficier des nouvelles fonctionnalités (comme la collecte de tags et les options de filtrage avancées), reportez-vous à l'exemple de fichier de configuration [vsphere.d/conf.yaml][4]. En particulier, assurez-vous de définir `use_legacy_implementation: false`.
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `vsphere` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `vsphere` dans la section Checks.
 
 ## Données collectées
+
+En fonction de la valeur `collection_level` configurée dans votre configuration du check, les métriques ci-dessous ne seront pas toutes recueillies. Consultez la [documentation relative aux niveaux de collecte des données Vsphere][7] pour découvrir les métriques collectées en fonction du niveau de collecte choisi.
 
 ### Métriques
 {{< get-metrics-from-git "vsphere" >}}
@@ -105,11 +79,10 @@ Vous pouvez faire face à deux types de situations :
 
 ### Événements
 
-Ce check surveille le gestionnaire d'événements de vCenter à la recherche d'événements et les envoie à Datadog. Il n'envoie PAS les types d'événements suivants :
+Ce check surveille le gestionnaire d'événements de vCenter à la recherche d'événements et les envoie à Datadog. Il envoie les types d'événements suivants :
 
 - AlarmStatusChangedEvent:Gray
 - VmBeingHotMigratedEvent
-- VmResumedEvent
 - VmReconfiguredEvent
 - VmPoweredOnEvent
 - VmMigratedEvent
@@ -127,7 +100,7 @@ Ce check surveille le gestionnaire d'événements de vCenter à la recherche d'�
 ### Checks de service
 
 **vcenter.can_connect**:<br>
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à vCenter pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à vCenter pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
 
@@ -142,8 +115,8 @@ Lisez notre [article de blog][10] (en anglais) à propos de la surveillance des 
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/vsphere/datadog_checks/vsphere/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://pubs.vmware.com/vsphere-51/index.jsp?topic=%2Fcom.vmware.powercli.cmdletref.doc%2FSet-CustomField.html
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.monitoring.doc/GUID-25800DE4-68E5-41CC-82D9-8811E27924BC.html
 [8]: https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv
-[9]: https://docs.datadoghq.com/fr/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
+[9]: https://docs.datadoghq.com/fr/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration/
 [10]: https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers

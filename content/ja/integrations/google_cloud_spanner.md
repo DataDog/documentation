@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Spanner インスタンスのリソースの使用状況を追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_spanner/'
+draft: false
 git_integration_title: google_cloud_spanner
 has_logo: true
 integration_title: Google Spanner
@@ -16,7 +17,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_spanner
 public_title: Datadog-Google Spanner インテグレーション
-short_description: Spanner インスタンスのリソースの使用状況を追跡します。
+short_description: Spanner インスタンスのリソースの使用状況を追跡。
 version: '1.0'
 ---
 ## 概要
@@ -34,7 +35,7 @@ Google Spanner からメトリクスを取得して、以下のことができ�
 
 #### インストール
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ### ログの収集
 
@@ -46,7 +47,7 @@ Google Cloud Spanner のログは Stackdriver により収集され、HTTP プ�
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
