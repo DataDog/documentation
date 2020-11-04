@@ -125,6 +125,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/real_user_monitoring/browser/_index.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
+	@if [ content/en/tracing/setup_overview/setup/ruby.md ]; then \
+	rm -f content/en/tracing/setup_overview/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
@@ -133,8 +135,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/logs/log_collection/javascript.md ]; then \
 	rm -f content/en/logs/log_collection/javascript.md ;fi
-	@if [ content/en/tracing/setup/android.md ]; then \
-	rm -f content/en/tracing/setup/android.md ;fi
+	@if [ content/en/tracing/setup_overview/setup/android.md ]; then \
+	rm -f content/en/tracing/setup_overview/setup/android.md ;fi
 
 clean-node:  ## Remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

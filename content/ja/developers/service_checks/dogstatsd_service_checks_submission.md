@@ -37,7 +37,7 @@ service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 
 サービスチェックコードの例を表示するには言語を選んでください。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -143,7 +143,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 

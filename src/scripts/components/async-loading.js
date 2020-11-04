@@ -6,7 +6,7 @@ import { initializeIntegrations } from './integrations';
 import { initializeSecurityRules } from './security-rules';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
-import {redirectCodeLang, addCodeTabEventListeners} from './code-languages';
+import {redirectCodeLang, addCodeTabEventListeners, activateCodeLangNav} from './code-languages'; // eslint-disable-line import/no-cycle
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -104,6 +104,18 @@ function loadPage(newUrl) {
             // update data-relPermalink
             document.documentElement.dataset.relpermalink =
                 newDocument.documentElement.dataset.relpermalink;
+            
+            // update data-type
+            document.documentElement.dataset.type =
+                newDocument.documentElement.dataset.type;
+
+            // update data-code-lang
+            document.documentElement.dataset.pageCodeLang =
+            newDocument.documentElement.dataset.pageCodeLang;
+
+            // update data-current-section
+            document.documentElement.dataset.currentSection =
+            newDocument.documentElement.dataset.currentSection;
 
             // check if loaded page has inline JS. if so, we want to return as script will not execute
             const hasScript = newContent.getElementsByTagName('script').length;
@@ -159,7 +171,10 @@ function loadPage(newUrl) {
                 redirectToRegion(regionSelector.value);
             }
 
+            const {pageCodeLang} = document.documentElement.dataset;
+
             addCodeTabEventListeners();
+            activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
 
             // Gtag virtual pageview
