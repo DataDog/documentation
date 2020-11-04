@@ -1,7 +1,7 @@
 ---
 title: Control sensitive logs data 
 kind: guide
-alias:
+aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
 further_reading:
   - link: /logs/guide/logs-rbac/
