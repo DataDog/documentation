@@ -79,7 +79,9 @@ tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
 
-Finally, install and configure the Datadog Agent to receive traces from your now instrumented application:
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -109,8 +111,6 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
-
-### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 

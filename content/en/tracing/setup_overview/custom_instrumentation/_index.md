@@ -24,7 +24,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
-disable_toc: true
 ---
 
 Custom instrumentation allows programmatic creation, modification, or deletion of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, as well as for providing deeper visibility and context into spans, including adding any desired [span tags][1].

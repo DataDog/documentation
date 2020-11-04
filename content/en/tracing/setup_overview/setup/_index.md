@@ -4,7 +4,6 @@ kind: documentation
 type: multi-code-lang
 aliases:
     - /tracing/languages
-disable_toc: true
 ---
 
 Set up your application to send [traces][1] using one of the following official Datadog tracing libraries:

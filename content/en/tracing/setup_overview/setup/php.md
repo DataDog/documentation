@@ -42,9 +42,9 @@ For descriptions of terminology used in APM, take a look at the [official docume
 
 For details about open-source contributions to the PHP tracer, refer to the [contributing guide][4].
 
-### Setup the Datadog Agent
+### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application:
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -66,8 +66,6 @@ See [tracer configuration][2] for more information on how to set these variables
 [2]: /tracing/setup/php/#environment-variable-configuration
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
-
-### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 

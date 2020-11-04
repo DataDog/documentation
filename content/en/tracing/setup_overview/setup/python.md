@@ -52,7 +52,9 @@ For example, if your application is started with `python app.py` then:
 ddtrace-run python app.py
 ```
 
-Finally, install and configure the Datadog Agent to receive traces from your now instrumented application:
+### Configure the Datadog Agent for APM
+
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -84,8 +86,6 @@ tracer.configure(
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
-
-### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 

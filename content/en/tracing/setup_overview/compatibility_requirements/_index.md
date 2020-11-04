@@ -9,7 +9,6 @@ further_reading:
 aliases:
   - /tracing/compatibility
   - /tracing/compatibility_requirements
-disable_toc: true
 ---
 
 Choose your language to see the compatibility requirements and supported integrations for Datadog APM.

@@ -171,9 +171,9 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 **Note**: OpenTracing requires C++ 11 or higher.
 
-## Setup the Datadog Agent
+## Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application:
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -195,8 +195,6 @@ To connect to the agent using Unix Domain Sockets, `DD_TRACE_AGENT_URL` can be u
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
-
-### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
