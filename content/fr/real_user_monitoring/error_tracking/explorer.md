@@ -38,7 +38,7 @@ Cliquez sur un problème pour l'examiner plus en détail dans un volet dédié.
 
 Les principales informations dont vous avez besoin pour dépanner un problème se trouvent dans la partie supérieure du volet. Elles vous permettent de comprendre son cycle de vie : première et dernière occurrence, nombre total d'occurrences et évolution du nombre d'occurrences au fil du temps.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt=""Partie inférieure du volet des détails d'un problème"  >}}
+{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Partie inférieure du volet des détails d'un problème"  >}}
 
 La partie inférieure du volet vous permet de parcourir des exemples d'erreur pour le problème concerné. Chaque exemple d'erreur vous donne des informations utiles au dépannage du problème, par exemple :
 
