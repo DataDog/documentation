@@ -74,8 +74,7 @@ public class Application {
 }
 ```
 
-Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][2] for a full listing.
-
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][2] for a full listing. Note the `dd-java-agent` should never be added to your classpath and can cause unexpected behavoir. 
 
 ### Asynchronous traces
 
