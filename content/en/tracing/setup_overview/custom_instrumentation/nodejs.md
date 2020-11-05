@@ -275,7 +275,7 @@ tracer.use('http', {
 })
 ```
 
-Additionally, traces can also be discarded at the Datadog Agent hecks from reporting traces to Datadog.  This and other security and fine-tuning Agent configurations can be found on the [Security][4] page.
+Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][4] page.
 
 ## Further Reading
 
