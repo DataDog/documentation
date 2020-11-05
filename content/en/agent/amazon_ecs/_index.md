@@ -157,7 +157,7 @@ Datadog's [Autodiscovery][14] can be used in conjunction with ECS and Docker to 
 For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instances security group to reach the applicative containers on relevant ports.
 
 While it's possible to run the Agent in `awsvpc` mode, it's not the recommended setup, because it may be difficult to retrieve the ENI IP to reach the Agent for Dogstatsd metrics and APM traces.
-It's best to run the agent in bridge mode with port mapping to allow easy retrieval of [host IP through metadata server][6]
+Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6]
 
 ### Process collection
 
