@@ -35,7 +35,7 @@ DogStatsD is available on Docker Hub and GCR:
 
 | Docker Hub                                       | GCR                                                       |
 |--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                          |
+| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
 ## How it works
 

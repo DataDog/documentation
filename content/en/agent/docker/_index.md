@@ -37,8 +37,8 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 
 | Docker Hub      | GCR             |
 |-----------------|-----------------|
-| [Agent v6+][2] | [Agent v6+][3] |
-| [Agent v5][4]  | [Agent v5][5]  |
+| [Agent v6+][2]  | [Agent v6+][3]  |
+| [Agent v5][4]   | [Agent v5][5]   |
 
 
 ## Setup
