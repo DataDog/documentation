@@ -664,7 +664,16 @@ function getPathElement() {
     } else if (path.includes('agent/guide')) {
         aPath = document.querySelector('.side [data-path*="agent/guide"]');
         maPath = document.querySelector('header [data-path*="agent/guide"]');
+    } 
+    else if (path === 'agent') {
+        aPath = document.querySelectorAll(
+            '.side [data-path*="agent"]'
+        )[2];
+        maPath = document.querySelectorAll(
+            'header [data-path*="agent"]'
+        )[2];
     }
+
 
     if (path.includes('tracing/guide')) {
         aPath = document.querySelector('.side [data-path*="tracing/guide"]');
