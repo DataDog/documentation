@@ -10053,6 +10053,9 @@ components:
       - white_on_red
       - white_on_yellow
       - yellow_on_white
+      - black_on_light_yellow
+      - black_on_light_green
+      - black_on_light_red
       type: string
       x-enum-varnames:
       - BLUE
