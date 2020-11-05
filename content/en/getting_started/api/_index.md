@@ -19,26 +19,15 @@ You have:
 
 - An active Datadog implementation.
 - Access to your Datadog [API and application keys][2].
-- The [Postman API client installed][1].
 - Basic knowledge of API structure and JSON formatting.
 
 ## Setup
 
-### Import the Datadog collection
+### Import the Datadog collection into Postman
 
-After the prerequisites are met:
+[![Run in Postman][3]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
 
-1. Download the [Datadog Postman collection][3] (pre-configured API call templates).
-   In Postman, a collection is a folder of organized API calls for easy editing, saving, and re-use.
-
-2. Import the Datadog Postman Collection:
-    - Open Postman
-    - Click on **Import**
-    - Select the [datadog_collection.json][3] file downloaded in step 1.
-
-You now have a Datadog collection with many different API examples.
-
-**Note**: The API calls do not work at this point. See below to set your Datadog-Postman Environment.
+This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
 
 ### Postman environment setup
 
@@ -85,7 +74,7 @@ When you click on the Endpoint name a description of the endpoint and all requir
 
 ### Params
 
-The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][6].
+The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][3].
 
 {{< img src="getting_started/postman/parameters.png" alt="postman_param"  style="width:70%;">}}
 
@@ -98,7 +87,6 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /resources/json/datadog_collection.json
+[3]: /api/
 [4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
 [5]: /api/v1/organizations/
-[6]: /api/

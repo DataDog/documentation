@@ -26,6 +26,8 @@ By default, the Datadog API Docs show examples in cURL. Select one of our offici
 
 To quickly get started with the Datadog API, see [Using the API][5], or [![Run in Postman][6]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
 
+**Note**: The Postman spec is large and takes a few seconds to load in Postman.
+
 Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 
 ## Further Reading
