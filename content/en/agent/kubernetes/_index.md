@@ -49,7 +49,7 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 3. If this is a fresh install, add the Helm Datadog repo and the Helm stable repo (for Kube State Metrics chart):
     ```bash
     helm repo add datadog https://helm.datadoghq.com
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo add stable https://charts.helm.sh/stable
     helm repo update
     ```
 4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
