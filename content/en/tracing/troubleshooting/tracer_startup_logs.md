@@ -32,7 +32,7 @@ The Java tracer does not output Diagnostics logs.  For this check, run the trace
 
 Log files are located in `%PROGRAMDATA%\Datadog .NET Tracer\logs`.
 
-- `dotnet-tracer-{processName}-{timestamp}.log` contains the Configuration log.
+- `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the Configuration log.
 
 - `dotnet-profiler.log` contains the Diagnostics logs, if any are generated.
 
