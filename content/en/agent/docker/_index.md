@@ -37,8 +37,8 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 
 | Docker Hub      | GCR             |
 |-----------------|-----------------|
-| [Agent v6+][2]  | [Agent v6+][3]  |
-| [Agent v5][4]   | [Agent v5][5]   |
+| [Agent v6+][2]<br>`docker pull datadog/agent`             | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`           |
+| [Agent v5][4]i<br>`docker pull datadog/docker-dd-agent`   | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent`  |
 
 ## Setup
 
