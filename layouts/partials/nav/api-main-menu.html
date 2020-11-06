@@ -36,7 +36,7 @@
             <ul class="nav">
                 {{ range .Children }}
                     <li class="nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        <a class="nav-link" href="{{ if hasPrefix .ConfiguredURL "#" }}#{{ .Name | urlize }}{{ else }}{{ .URL }}{{ end }}" data-target="#{{.Identifier}}">
+                        <a class="nav-link" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ .URL | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                             <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
