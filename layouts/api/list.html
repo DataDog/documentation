@@ -511,7 +511,7 @@
                                 {{ end }}
                             {{ end }}
 
-                            {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
+                            {{ partial "code-lang-tabs" (dict "context" $dot "codeLangs" $codeLangs ) }}
 
                             {{ $count := 0 }}
                             {{ $file_extension := "sh" }}

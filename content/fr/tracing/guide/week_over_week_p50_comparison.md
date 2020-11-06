@@ -11,10 +11,10 @@ further_reading:
   - link: /tracing/guide/slowest_request_daily/
     tag: "3\_minutes"
     text: Débuguer la trace la plus lente sur l'endpoint le plus lent d'un service web
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: "7\_minutes"
     text: Ajouter des tags de span et filtrer les données de performance de votre application
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: Tous les guides
 ---

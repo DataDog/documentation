@@ -38,7 +38,7 @@ Service check function parameters:
 
 Choose your language for a service check code example:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -144,7 +144,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 

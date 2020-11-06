@@ -9,6 +9,7 @@ ddtype: check
 dependencies: []
 description: "AWS\_App\_Mesh est un proxy de périmètre et de service open source."
 display_name: "AWS\_App\_Mesh"
+draft: false
 further_reading:
   - link: 'https://docs.datadoghq.com/integrations/envoy/'
     tag: Documentation
@@ -151,13 +152,16 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 
 #### Collecte de traces
 
-Les traces APM ne sont pas disponibles pour App Mesh. Contactez l'[assistance Datadog][4] pour en savoir plus.
+1. Activez la collecte de traces en suivant les instructions détaillées dans la documentation relative à [l'intégration ECS Fargate][4].
+
+Définissez les paramètres AWS App Mesh `ENABLE_ENVOY_DATADOG_TRACING` et `DATADOG_TRACER_PORT` en tant que variables d'environnement dans la définition de la tâche ECS Fargate. Pour en savoir plus, consultez la documentation [AWS App Mesh][5].
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/
 [2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#log-collection
-[4]: /fr/help
+[4]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#trace-collection
+[5]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{% tab "ECS EC2" %}}
 
@@ -202,13 +206,16 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 
 #### Collecte de traces
 
-Les traces APM ne sont pas disponibles pour App Mesh. Contactez l'[assistance Datadog][4] pour en savoir plus.
+1. Activez la collecte de traces en suivant les instructions détaillées dans la documentation relative à [l'intégration ECS][4].
+
+2. Définissez les paramètres AWS App Mesh `ENABLE_ENVOY_DATADOG_TRACING` et `DATADOG_TRACER_PORT` en tant que variables d'environnement dans la définition de la tâche ECS. Pour en savoir plus, consultez la documentation [AWS App Mesh][5].
 
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/
 [2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#log-collection
-[4]: /fr/help
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#trace-collection
+[5]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{< /tabs >}}
 

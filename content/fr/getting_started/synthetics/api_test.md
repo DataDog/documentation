@@ -7,10 +7,10 @@ further_reading:
     text: En savoir plus sur les tests API
   - link: /synthetics/identify_synthetics_bots
     tag: Documentation
-    text: Apprendre à identifier les bots Synthetics pour les tests API
+    text: Apprendre à identifier les bots Synthetic pour les tests API
   - link: /synthetics/settings/
     tag: Documentation
-    text: Configurer les paramètres Synthetics avancés
+    text: Configurer les paramètres de surveillance Synthetic avancés
 ---
 ## Créer un test API
 
@@ -20,7 +20,7 @@ Dans cet exemple, un test API est créé pour vérifier que votre site reste tou
 
 ### Configurer la requête
 
-1. Dans l'application Datadog, passez votre curseur sur l'option **[UX Monitoring][3]** du menu de gauche et sélectionnez **Synthetics Test**.
+1. Dans l'application Datadog, passez votre curseur sur l'option **[UX Monitoring][3]** du menu de gauche et sélectionnez **Synthetic Test**.
 2. Cliquez sur le bouton **New Test** en haut à droite.
 3. Sélectionnez **API test**.
 4. Définissez la configuration de votre test API :
@@ -69,12 +69,12 @@ Pour dépanner un test qui n'a pas réussi, faites défiler la page jusqu'à la 
 
 {{< img src="getting_started/synthetics/api-test-failure.png" alt="Échec du test API" style="width:90%;">}}
 
-Datadog offre également la possibilité d'[intégrer l'APM avec Synthetics][7] pour vous permettre d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution.
+Datadog offre également la possibilité d'[intégrer l'APM à la surveillance Synthetic][7] pour vous permettre d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution.
 
-{{< whatsnext desc="After you set up your first API test:">}}
+{{< whatsnext desc="Après avoir configuré votre premier test API :">}}
 {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}En savoir plus sur les tests API{{< /nextlink >}}
-{{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}Apprendre à identifier les bots Synthetics pour les tests API{{< /nextlink >}}
-{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres Synthetics avancés{{< /nextlink >}}
+{{< nextlink href="/synthetics/identify_synthetics_bots" tag="Documentation" >}}Apprendre à identifier les bots Synthetic pour les tests API{{< /nextlink >}}
+{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres de surveillance Synthetic avancés{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/synthetics/api_tests/

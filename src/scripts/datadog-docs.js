@@ -650,8 +650,8 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let aPath = document.querySelector(`.side [data-path="${path}"]`);
-    let maPath = document.querySelector(`header [data-path="${path}"]`);
+    let aPath = document.querySelector(`.side [data-path*="${path}"]`);
+    let maPath = document.querySelector(`header [data-path*="${path}"]`);
 
     // TODO: fix exceptions for specific nav links that have the same url but both open the same place
     if (path.includes('agent/guide/upgrade-to-agent-v6')) {
@@ -664,7 +664,16 @@ function getPathElement() {
     } else if (path.includes('agent/guide')) {
         aPath = document.querySelector('.side [data-path*="agent/guide"]');
         maPath = document.querySelector('header [data-path*="agent/guide"]');
+    } 
+    else if (path === 'agent') {
+        aPath = document.querySelectorAll(
+            '.side [data-path*="agent"]'
+        )[2];
+        maPath = document.querySelectorAll(
+            'header [data-path*="agent"]'
+        )[2];
     }
+
 
     if (path.includes('tracing/guide')) {
         aPath = document.querySelector('.side [data-path*="tracing/guide"]');
@@ -753,11 +762,6 @@ function getPathElement() {
         );
     }
     
-    if (path.includes('tracing/serverless_functions')) {
-        aPath = document.querySelectorAll('.side [data-path*="tracing/serverless_functions"]')[1];
-        maPath = document.querySelectorAll('header [data-path*="tracing/serverless_functions"]')[1];
-    }
-
     if (aPath) {
         aPath.classList.add('active');
         hasParentLi(aPath);

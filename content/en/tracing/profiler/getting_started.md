@@ -229,4 +229,3 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
