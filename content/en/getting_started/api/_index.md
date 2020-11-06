@@ -66,7 +66,7 @@ If you are accessing the Datadog app that is in the EU region, instead of the de
 
 Follow these steps to update to the EU instance:
 
-1. In the Datadog API Collection folder on the left pane, click the horizontal hamburger, and then select **Edit**.
+1. In the Datadog API Collection folder on the left pane, click the three dot menu, and then select **Edit**.
 
 {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
