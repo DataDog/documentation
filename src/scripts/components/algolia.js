@@ -1,5 +1,4 @@
 import docsearch from 'docsearch.js';
-import datadogLogs from './dd-browser-logs-rum';
 import configDocs from '../config/config-docs';
 
 const { env } = document.documentElement.dataset;
@@ -49,7 +48,7 @@ const searchDesktop = docsearch({
             clearTimeout(algoliaTimer);
             algoliaTimer = setTimeout(function() {
                 if (query.length > 0) {
-                    datadogLogs.logger.log(
+                    window.DD_LOGS.logger.log(
                         'Algolia Search',
                         {
                             browser: {
