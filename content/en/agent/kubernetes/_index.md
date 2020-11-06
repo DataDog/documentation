@@ -256,7 +256,7 @@ For further details on setting up Operator, including information about using to
 
 ## Kubernetes resources for Live Containers
 
-The Agent and [Cluster Agent][3] can be configured to retrieve Kubernetes resources for Live Containers. This feature allows you to monitor the state of pods or deployments in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+The Agent and [Cluster Agent][3] can be configured to retrieve Kubernetes resources for [Live Containers][4]. This feature allows you to monitor the state of pods or deployments in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
 Kubernetes resources for Live Containers requires the following set up prior to configuration:
 
@@ -273,7 +273,7 @@ Kubernetes resources for Live Containers requires the following set up prior to 
       key: id
   {{< /code-block >}}
 
-  It must also be configured to communicate with the Cluster Agent, see the [Cluster Agent Setup documentation][4] for more information about this.
+  It must also be configured to communicate with the Cluster Agent, see the [Cluster Agent Setup documentation][5] for more information about this.
 
 - Cluster Agent version >= 1.9.0
 - Cluster Agent is running, and the Agent must be able to communicate with it
@@ -380,11 +380,11 @@ agent:
 
 ## Integrations
 
-Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][5] to collect metrics and logs automatically from your pods.
+Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][6] to collect metrics and logs automatically from your pods.
 
 ## Environment variables
 
-Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][6].
+Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][7].
 
 ### Global options
 
@@ -410,7 +410,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 | `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][7].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][8].
 
 ### Optional collection Agents
 
@@ -418,9 +418,9 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_APM_ENABLED`           | Enable [trace collection][8] with the Trace Agent.                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`          | Enable [log collection][9] with the Logs Agent.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][10] with the Process Agent. The [live container view][11] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][10] and the [live container view][11] are disabled. |
+| `DD_APM_ENABLED`           | Enable [trace collection][9] with the Trace Agent.                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`          | Enable [log collection][10] with the Logs Agent.                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][11] with the Process Agent. The [live container view][4] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][11] and the [live container view][4] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well. |
 
 To enable the Live Container view, make sure you are running the process agent in addition to setting DD_PROCESS_AGENT_ENABLED to `true`.
@@ -495,14 +495,14 @@ See the [Agent Commands guides][17] to discover all the Docker Agent commands.
 [1]: /agent/faq/kubernetes-legacy/
 [2]: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
 [3]: /agent/cluster_agent/
-[4]: /agent/cluster_agent/setup/?tab=secret
-[5]: /agent/kubernetes/integrations/
-[6]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
-[7]: /agent/proxy/#agent-v6
-[8]: /agent/kubernetes/apm/
-[9]: /agent/kubernetes/log/
-[10]: /infrastructure/process/
-[11]: /infrastructure/livecontainers/
+[4]: /infrastructure/livecontainers/
+[5]: /agent/cluster_agent/setup/?tab=secret
+[6]: /agent/kubernetes/integrations/
+[7]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
+[8]: /agent/proxy/#agent-v6
+[9]: /agent/kubernetes/apm/
+[10]: /agent/kubernetes/log/
+[11]: /infrastructure/process/
 [12]: /developers/dogstatsd/
 [13]: /developers/dogstatsd/unix_socket/
 [14]: /agent/kubernetes/tag/
