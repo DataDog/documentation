@@ -24,41 +24,63 @@ You have:
 ## Setup
 
 ### Import the Datadog collection into Postman
+</br>
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="add08e16382f7e11a59a"></div>
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
 
-[![Run in Postman][3]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
-
-This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
+</br>This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
 
 ### Postman environment setup
 
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
-In the folders, the API calls have variables entered for `datadog_site`, `datadog_api_key`, and `datadog_application_key`:
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="postman_api_template_variables"  style="width:70%;">}}
+#### Authentication
 
-This allows you to set up [Postman environments][4] and save your Datadog site, API, and application keys for authentication. If you have multiple Datadog organizations, set up multiple [Postman environments][4] to make API calls to different organizations without modifying the API calls in the Datadog Postman collection.
+The collection includes a [Postman environment][3] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication. 
 
 Follow these steps to set up your environment:
 
 1. Click the **Manage Environments** gear icon in the upper right corner of Postman.
 
-2. Click **Add** and enter an **Environment Name**.
+2. Select **Datadog Authentication**
 
-3. In the table, add the variables `datadog_api_key` and `datadog_application_key`. In the **Current Value** column, enter your actual [Datadog API and application keys][2].
+3. Click **Edit**.
 
-4. Add the variable `datadog_site`. In the **Current Value** column enter `com` if you are on Datadog US site or `eu` if you are on Datadog EU site.
+4. Add in your Datadog [API key][2] as the value for the `api_key` variable, and add your Datadog [Application key][2] as the value for the `application_key` variable.
 
-5. Optional: If you have multiple Datadog organizations, repeat steps 1-4 for each organization.
+{{< site-region region="eu" >}}
 
-{{< img src="getting_started/postman/setAPIKeys2.png" alt="postman_api_template_variables"  style="width:70%;">}}
+#### Switch to the EU API endpoint
+ 
+If you are accessing the Datadog app that is in the EU region, instead of the default endpoint URL, you need to switch the Postman collection to access from the EU endpoint URL `https://api.datadoghq.eu`.
+
+Follow these steps to update to the EU instance:
+
+1. In the Datadog API Collection folder on the left pane, click the horizontal hamburger, and then select **Edit**.
+
+{{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
+
+2. On the **Variables** tab, deselct the `site` variable with the value `datadoghq.com` and select the `site` with the variable `datadoghq.eu`.
+
+{{< img src="getting_started/postman/variables.png" alt="Update the site variable">}}
+
+3. Click **Update**.
+
+{{< /site-region >}}
 
 ## Working with the Collection
 
-After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][5]. Expand the subfolders to see the HTTP methods and API call names.
-
-**Note**: Don't forget to set your defined Environment in the upper right corner of Postman interface:
-
-{{< img src="getting_started/postman/env_setup.png" alt="Environment Setup"  style="width:40%;">}}
+After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][4]. Expand the subfolders to see the HTTP methods and API call names.
 
 ### Builder
 
@@ -74,7 +96,7 @@ When you click on the Endpoint name a description of the endpoint and all requir
 
 ### Params
 
-The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][3].
+The **Params** tab shows all parameters and values that are currently on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][5].
 
 {{< img src="getting_started/postman/parameters.png" alt="postman_param"  style="width:70%;">}}
 
@@ -87,6 +109,6 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /api/
-[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[5]: /api/v1/organizations/
+[3]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[4]: /api/v1/organizations/
+[5]: /api/
