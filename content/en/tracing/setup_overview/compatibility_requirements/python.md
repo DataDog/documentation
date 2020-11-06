@@ -36,7 +36,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Molten][8]              | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][9]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
-| [Starlette][11]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
+| [Starlette][11]             | >= 0.13            | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][12]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
 
