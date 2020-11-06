@@ -21,7 +21,7 @@ further_reading:
 
 Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs. If you haven't done so already, it is recommended to configure the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience when adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
+The .NET Tracer can automatically inject trace IDs, span IDs, `env`, `service`, and `version`. If you haven't done so already, it is recommended to configure the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience when adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
 
 We support [Serilog][4], [NLog][5] (version 2.0.0.2000+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
 
