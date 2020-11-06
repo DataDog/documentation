@@ -108,7 +108,6 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
