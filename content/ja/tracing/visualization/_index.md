@@ -30,10 +30,17 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 | [モニター][1]                   | APM メトリクスモニターは、通常のメトリクスモニターと同様に機能しますが、APM 専用に調整されたコントロールを備えています。このモニターを使用して、ヒット、エラー、さまざまなレイテンシー測定に関するサービスレベルでアラートを受信します。 |
 | [トレース](#trace)                 | トレースは、アプリケーションがリクエストを処理するのにかかった時間とこのリクエストのステータスを追跡するために使用されます。各トレースは、1 つ以上のスパンで構成されます。                                                             |
 | [スパン](#spans)                  | スパンは、特定の期間における分散システムの論理的な作業単位を表します。複数のスパンでトレースが構成されます。                                                                                          |
+| [トップレベルスパン](#top-level-span) | スパンとは、サービスへのリクエストに対するエントリーポイントメソッドとなるトップレベルのスパンを指します。フレームグラフ上の直属の親のカラーが異なる場合、この値を Datadog APM 内で可視化することができます。                                                                                            |
 | [トレースメトリクス](#trace-metrics) | トレースメトリクスは自動的に収集され、他の [Datadog メトリクス][2]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。                       |
-| [App Analytics](#app-analytics) | App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで Analyzed Span をフィルターするために使用されます。                                                                                |
-| [Analyzed Span](#analyzed-span) | Analyzed Span は、リクエストの 100% のスループットを表し、App Analytics での検索、クエリ、監視に使用できます。                                                                                                |
-| [スパンタグ](#span-tags)         | *Trace View* でリクエストを関連付けたり、*App Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。                                                                                                    |
+| [Indexed Span](#indexed-span) | Indexed Span は、Retention Filter またはレガシー版の App Analytics で分析されたスパンによりインデックスされたすべてのスパンを表し、*Analytics* での検索、クエリ、監視に使用することができます。                                                                                                |
+| [スパンタグ](#span-tags)         | *Trace View* でリクエストを関連付けたり、*Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。                                                                                                    |
+| [Retention Filters](#retention-filters) | Retention Filter は Datadog UI 内に設定されたタグベースのコントロールで、15 日間にわたって Datadog でインデックスするスパンの種類を決定します。                                                                                              |
+| [Ingestion Controls](#ingestion-controls) | Ingestion Controls は Datadog に最大 100% のトレースを送信し、 15 分間の Live Search および分析を行う際に使用されます。
+| [サブレイヤーメトリクス](#sublayer-metric) | サブレイヤーメトリクスはトレース内における任意のタイプ / サービスの実行時間を指します。
+| [実行時間](#execution-duration) | スパンが 'active' と判断される合計時間 (子スパンの完了まで待機しません) 。
+
+
+**注:** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
 
 ## サービス
 
@@ -75,9 +82,22 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 スパンは、特定の期間におけるシステム内の論理的な作業単位を表します。各スパンは、`span.name`、開始時間、期間、および[スパンタグ](#span-tags)で構成されます。たとえば、スパンは、別のマシンでの分散呼び出しに費やされた時間、または大きなリクエスト内の小さなコンポーネントに費やされた時間を表すことができます。スパンは相互にネストでき、これによりスパン間に親子関係が作られます。
 
-以下の例では、スパン `rack.request` はトレースのエントリポイントスパンです。これは、ウェブストアサービス詳細画面が、`rack.request` という名前のエントリポイントスパンを持つトレースで構成されるリソースを表示していることを意味します。この例では、アプリケーション側に追加されたタグ（`merchant.name` や `merchant.tier` など）も示されています。これらのユーザー定義のタグは、[App Analytics][14] で APM データを検索、分析するために使用できます。
+以下の例では、スパン `rack.request` はトレースのエントリーポイントスパンです。これは、ウェブストアのサービス詳細画面が、`rack.request` という名前のエントリーポイントスパンを持つトレースで構成されるリソースを表示していることを意味します。この例では、アプリケーション側に追加されたタグ（`merchant.name` や `merchant.tier` など）も示されています。これらのユーザー定義のタグは、[Analytics][14] で APM データを検索、分析するために使用できます。
 
 {{< img src="tracing/visualization/span_with_metadata.png" alt="スパン" >}}
+
+## トップレベルスパン
+
+スパンとは、サービスへのリクエストに対するエントリーポイントメソッドとなるトップレベルのスパンを指します。フレームグラフ上の直属の親のカラーが異なる場合、この値を Datadog APM 内で可視化することができます。フレームグラフ画面の右側にはサービスの一覧も表示されます。
+
+以下の例におけるトップレベルスパンは次の通りです。
+- rack.request
+- aspnet_coremvc.request
+- 以下で最上位にある緑色のスパン aspnet_coremvc.request
+- オレンジ色の各 mongodb スパン
+
+{{< img src="tracing/visualization/toplevelspans.png" alt="スパン" >}}
+
 
 ## トレースメトリクス
 
@@ -97,31 +117,50 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="トレースメトリクスモニター" >}}
 
-## App Analytics
+## トレース検索と分析
 
-App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで [Analyzed Span](#analyzed-span) をフィルターするために使用されます。これにより、ヒット、エラー、レイテンシーの 100% スループットで検索、グラフ化、監視できるとともに、サービスを流れるウェブリクエストを詳細に調べることができます。この機能は、[自動構成][17]で有効にできます。
+15 分間で収集されたトレースの 100% および 15 日間におけるすべての [Indexed Span](#indexed-span) の[検索および分析を実行][14]します。
 
-{{< wistia vrmqr812sz >}}
+## Indexed Span
 
-## Analyzed Span
+**注:** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
 
-Analyzed Span は、リクエストの 100% のスループットを表し、スパンに含まれる[タグ](#span-tags)による App Analytics の検索、クエリ、監視に使用できます。App Analytics を有効にすると、トレースクライアントは、デフォルトでウェブサービスのエントリポイントスパンを分析し、アプリケーションで[追加のサービスを構成][18]できるようになります。たとえば、100 個のリクエストを持つ Java サービスは、`servlet.request` スパンから 100 個の Analyzed Span を生成します。`DD_TRACE_ANALYTICS_ENABLED=true` を設定すると、`web-store` サービスはすべての `rack.request` スパンを分析し、App Analytics で利用できるようにします。この例では、99 パーセンタイルでレイテンシーが最も高い上位 10 マーチャントをグラフ化できます。`merchant_name` は、アプリケーションのスパンに適用されたユーザー定義のタグです。
+Indexed Span は、Datadog に 15 日間保管された [Retention Filter](#Retention Filters) でインデックスされたスパンを表し、スパンに含まれる[タグ](#スパンタグ)による[トレース検索および Analytics][14] での検索、クエリ、監視に使用することができます。
 
 <div class="alert alert-info">
-<a href="https://app.datadoghq.com/apm/docs/trace-search">Analyzed Span Estimator</a> を使用して、サービスから生成される Analyzed Span の数を見積もることができます。取り込み後、<a href="https://app.datadoghq.com/apm/settings">APM 設定</a>のサービス別レベルで、Analyzed Span を 100% からそれより低いパーセンテージまでフィルターできます。これにより、課金対象の Analyzed Span が減少します。
+取り込み後に<a href="https://app.datadoghq.com/apm/traces/retention-filters">タグベースの Retention Filter</a> を作成して、サービスごとにインデックス化されたスパンの正確な数を制御および可視化することができます。
 </div>
 
 ## スパンタグ
 
-*Trace View* でリクエストを関連付けたり、*App Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。タグは、単一のスパンに追加することも、すべてのスパンにグローバルに追加することもできます。以下の例では、リクエスト（`merchant.store_name` や `merchant.tier` など）がタグとしてスパンに追加されています。
+*Trace View* でリクエストを関連付けたり、*Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。タグは、単一のスパンに追加することも、すべてのスパンにグローバルに追加することもできます。以下の例では、リクエスト（`merchant.store_name` や `merchant.tier` など）がタグとしてスパンに追加されています。
 
 {{< img src="tracing/visualization/span_tag.png" alt="スパンタグ" >}}
 
 アプリケーションのスパンをタグ付けするには、この[チュートリアル][12]をご覧ください。
 
-タグがスパンに追加されたら、タグをクリックして[ファセット][19]として追加し、App Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
+タグがスパンに追加されたら、タグをクリックして[ファセット][17]として追加し、Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
 
 {{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成"  style="width:50%;">}}
+
+## Retention Filters
+
+[Datadog UI で[タグベースのフィルター][18]を設定して 15 日間のスパンをインデックスし、トレース検索と Analytics で使用できるようにします。](#trace-search-and-analytics)
+
+## Ingestion Controls
+
+サービスから Datadog に[トレースの 100% を送信][19]し、[タグベースの Retention Filter](#Retention Filters) と結合させて 15 日間で最もビジネス的に重要なトレースを維持します。
+
+## サブレイヤーメトリクス
+
+[トレーシングアプリケーションメトリクス][20]を `sublayer_service` と `sublayer_type` でタグ付けし、トレース内のサービスの実行時間を個別に確認することもできます。
+
+## 実行時間
+
+特定のトレースにおける特定の時間にアクティブなスパンは、すべてリーフスパン (子のないスパン) となります。
+
+{{< img src="tracing/visualization/execution_duration.png" style="width:50%;" alt="実行時間"  style="width:50%;">}}
+
 
 ## その他の参考資料
 
@@ -140,9 +179,10 @@ Analyzed Span は、リクエストの 100% のスループットを表し、ス
 [11]: /ja/tracing/connect_logs_and_traces/
 [12]: /ja/tracing/guide/adding_metadata_to_spans/
 [13]: /ja/tracing/runtime_metrics/
-[14]: /ja/tracing/app_analytics/
+[14]: /ja/tracing/trace_search_and_analytics/
 [15]: https://app.datadoghq.com/metric/summary
 [16]: https://app.datadoghq.com/monitors#/create
-[17]: /ja/tracing/app_analytics/#automatic-configuration
-[18]: /ja/tracing/app_analytics/#configure-additional-services-optional
-[19]: /ja/tracing/app_analytics/search/#facets
+[17]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
+[18]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
+[19]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
+[20]: /ja/tracing/guide/metrics_namespace/

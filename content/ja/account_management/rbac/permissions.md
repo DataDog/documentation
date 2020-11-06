@@ -66,28 +66,29 @@ further_reading:
 
 ## ログ管理
 
-ログコンフィギュレーションアセットおよびログデータのアクセス許可一覧は、以下をご覧ください。
+以下のリストは、ログコンフィギュレーションアセットおよびログデータのアクセス許可と、この許可を与えるユーザーの一般的なカテゴリーです。チームメンバーへ許可を割り当てる方法（推奨）については、[ログ RBAC ガイド][3]をご参照ください。
 
-| 名前                           | 説明                                | Scopable |
-| ------------------------------ | ------------------------------------------ | -------- |
-| `logs_read_data`               | ログデータへの読み取りアクセス                   | true     |
-| `logs_modify_indexes`          | ログインデックスの定義を更新可能       | false    |
-| `logs_write_exclusion_filters` | インデックス除外フィルターを更新する           | true     |
-| `logs_write_pipelines`         | ログパイプラインを更新する                       | false    |
-| `logs_write_processors`        | パイプラインのログプロセッサを更新する    | true     |
-| `logs_write_archives`          | 外部アーカイブのコンフィギュレーションを更新可能 | false    |
-| `logs_read_archives`           | アーカイブコンフィギュレーションの詳細を確認し、アーカイブからコンテンツにアクセスする | true     |
-| `logs_write_historical_views`  | アーカイブからデータをリハイドレートする               | false    |
-| `logs_public_config_api`       | ログパブリック構成 API にアクセス可能（読み取り/書き込み）    | false    |
-| `logs_generate_metrics`        | メトリクス生成機能にアクセス可能        | false    |
+| 名前                                                           | 説明                                | Scopable |  通常のユーザー |
+| -------------------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
+| [`logs_read_data`](#logs_read_data)                            | ログデータへの読み取りアクセス                    | true     | 読み取り専用     |
+| [`logs_modify_indexes`](#logs_modify_indexes)                  | ログインデックスの定義を更新可能       | false    | 管理者         |
+| [`logs_write_facets`](#logs_write_facets)                      | ログファセットの作成、更新および削除       | false    | 標準的な方法      |
+| [`logs_write_exclusion_filters`](#logs_write_exclusion_filters)| インデックス除外フィルターを更新する           | true     | 標準的な方法      |
+| [`logs_write_pipelines`](#logs_write_pipelines)                | ログパイプラインを更新する                       | false    | 管理者         |
+| [`logs_write_processors`](#logs_write_processors)              | パイプラインのログプロセッサを更新する    | true     | 標準的な方法      |
+| [`logs_write_archives`](#logs_write_archives)                  | 外部アーカイブのコンフィギュレーションを更新可能 | false    | 管理者         |
+| [`logs_read_archives`](#logs_read_archives)                    | アーカイブコンフィギュレーションの詳細を確認し、アーカイブからコンテンツにアクセスする | true     | 標準的な方法 |
+| [`logs_write_historical_views`](#logs_write_historical_views)  | アーカイブからデータをリハイドレートする               | false    | 標準的な方法      |
+| [`logs_public_config_api`](#logs_public_config_api)            | ログパブリック構成 API にアクセス可能（読み取り/書き込み）    | false    | 管理者         |
+| [`logs_generate_metrics`](#logs_generate_metrics)              | メトリクス生成機能にアクセス可能        | false    | 標準的な方法      |
 
 
 ログ管理 RBAC には、2 つのレガシーアクセス許可も含まれています。これは、よりきめ細かく、より広範な `logs_read_data` アクセス許可に置き換えられました。
 
-| 名前                           | 説明                                | Scopable |
-| ------------------------------ | ------------------------------------------ | -------- |
-| `logs_live_tail`               | Live Tail 機能にアクセス可能               | false    |
-| `logs_read_index_data`         | サブセットログデータの読み取り (インデックスベース)       | true     |
+| 名前                                              | 説明                                | Scopable |  通常のユーザー |
+| ------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
+| [`logs_live_tail`](#logs_live_tail)               | Live Tail 機能にアクセス可能               | false    | 読み取り専用     |
+| [`logs_read_index_data`](#logs_read_index_data)  | サブセットログデータの読み取り (インデックスベース)       | true     | 読み取り専用     |
 
 
 {{< tabs >}}
@@ -115,16 +116,24 @@ further_reading:
 
 #### logs_generate_metrics
 
-[Generate Metrics][3] 機能を使用する能力をロールに付与します。
+[Generate Metrics][4] 機能を使用する能力をロールに付与します。
 
 このアクセス許可はグローバルで、これにより新しいメトリクスの作成と、既存のメトリクスの編集または削除の両方が可能になります。
 
+#### logs_write_facets
+
+ロールに [Create, Edit, and Delete facets][5] を使用する能力を付与します。
+
+このアクセス許可はグローバルで、これにより新しいファセットの作成と、既存のメトリクスの編集または削除の両方が可能になります。
+
+この許可は、[標準属性][6]の管理または[ファセットのエイリアス設定][7]に影響しません。
+
 #### logs_modify_indexes
 
-[ログインデックス][4]を作成および変更する能力をロールに付与します。それには以下が含まれます。
+[ログインデックス][8]を作成および変更する能力をロールに付与します。これには以下が含まれます。
 
-- インデックスにルーティングするログを指定するための[インデックスフィルター][5]を設定します。
-- インデックスに対する[ログの保存期間][6]を設定します。
+- インデックスにルーティングするログを指定するための[インデックスフィルター][9]を設定します。
+- インデックスに対する[ログの保存期間][10]を設定します。
 - 別のロールに、特定のインデックスを範囲とする[ログ読み取りインデックスデータ](#logs-read-index-data)および[ログ書き込み除外フィルター](#logs-write-exclusion-filters)アクセス許可を付与します。
 
 このアクセス許可はグローバルで、これにより新しいインデックスの作成と、既存のインデックスの編集の両方が可能になります。
@@ -134,7 +143,7 @@ further_reading:
 
 #### logs_write_exclusion_filters
 
-インデックス内で[除外フィルター][7]を作成または変更する能力をロールに付与します。
+インデックス内で[除外フィルター][11]を作成または変更する能力をロールに付与します。
 
 このアクセス許可は、グローバルに割り当てることも、インデックスのサブセットに制限することもできます。
 
@@ -156,16 +165,18 @@ further_reading:
 {{% /tab %}}
 {{< /tabs >}}
 
+
 #### logs_write_pipelines
 
-[ログ処理パイプライン][8]を作成および変更する能力をロールに付与します。それには以下が含まれます。
+[ログ処理パイプライン][12]を作成および変更する能力をロールに付与します。これには以下が含まれます。
 
 - パイプラインの名前を設定する
-- 処理パイプラインに入る必要があるログに[パイプラインフィルター][9]を設定する
+- 処理パイプラインに入る必要があるログに[パイプラインフィルター][13]を設定する
 - パイプラインを並べ替える
 - 別のロールに、そのパイプラインを対象とした[ログ書き込みプロセッサ](#logs-write-processors)アクセス許可を付与します
 
 **注**: このアクセス許可は、バックグラウンドで[ログ書き込みプロセッサ](#logs-write-processors) (すべてのパイプライン上のすべてのプロセッサに対して) アクセス許可も付与します。
+
 
 #### logs_write_processors
 
@@ -211,9 +222,9 @@ curl -X POST \
 
 #### logs_write_archives
 
-[ログアーカイブ][10]を作成、編集、または削除する能力を付与します。それには以下が含まれます。
+[ログアーカイブ][14]を作成、編集、または削除する能力を付与します。これには以下が含まれます。
 
-- アーカイブにルーティングするログの[アーカイブフィルター][9]を設定する
+- アーカイブにルーティングするログの[アーカイブフィルター][13]を設定する
 - アーカイブの名前を設定する
 - アーカイブを並べ替える
 - [ログ読み取りアーカイブ](#logs-read-archives)アクセス許可をロールのサブセットに制限します。
@@ -222,7 +233,7 @@ curl -X POST \
 
 #### logs_read_archives
 
-アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][11]をトリガーする能力も付与します。
+アーカイブコンフィギュレーションの詳細にアクセスする能力を付与します。 [ログ書き込み履歴ビュー](#logs-write-historical-view)と組み合わせて、このアクセス許可はアーカイブから[リハイドレート][15]をトリガーする能力も付与します。
 
 このアクセス許可の対象はアーカイブのサブセットとなります。アクセス制限のないアーカイブは、`logs_read_archives` アクセス許可をもつロールに属するユーザー全員が閲覧できます。アクセスが制限されているアーカイブは、`logs_read_archives` が許可されているロールを除き、登録済みのロールのいずれかに属するユーザーのみしかアクセスできません。
 
@@ -252,11 +263,11 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-#### logs_write_historical_view
+#### logs_write_historical_views
 
-[Log Rehydration*][11] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
+[Log Rehydration*][15] をトリガーすることを意味する、履歴ビューを書き込む能力を付与します。
 
-このアクセス許可はグローバルです。 これにより、ユーザーは、[ログ読み取りアーカイブ](r#logs-read-archives)アクセス許可を持つアーカイブのリハイドレートをトリガーできます。
+このアクセス許可はグローバルです。 これにより、ユーザーは、[ログ読み取りアーカイブ][16]のアクセス許可を持つアーカイブのリハイドレートをトリガーできます。
 
 {{< img src="account_management/rbac/logs_hv_roles_combination.png" alt="履歴ビューを書き込む"  style="width:70%;">}}
 
@@ -267,7 +278,7 @@ curl -X POST \
 * `PROD` ロールメンバーは、アーカイブの読み取りアクセス許可を持っていないため、`Audit Archive` からリハイドレートすることは**できません**。
 
 
-`Audit Archive` からリハイドレートされたすべてのログに `team:audit` タグを割り当てるときは、`team:audit` ログの読み取りに制限されている `Audit` ロールメンバーがリハイドレートされたコンテンツにのみアクセスできることを確認してください。タグの追加とリハイドレートの方法の詳細については、[ログアーカイブ設定セクション][10]を参照してください。
+`Audit Archive` からリハイドレートされたすべてのログに `team:audit` タグを割り当てるときは、`team:audit` ログの読み取りに制限されている `Audit` ロールメンバーがリハイドレートされたコンテンツにのみアクセスできることを確認してください。タグの追加とリハイドレートの方法の詳細については、[ログアーカイブ設定セクション][14]を参照してください。
 
 `Prod Archive` からリハイドレートされた `service:ci-cd` ログの場合、次の点に注意してください。
 
@@ -279,10 +290,10 @@ curl -X POST \
 
 Datadog API でログコンフィギュレーションを作成または変更する能力を付与します。
 
-* API を介して[アーカイブ][12]を構成する
-* API を介して[インデックス][13]を構成する
-* API を介して[パイプライン][14]を構成する
-* API を介して[制限クエリ][15]を構成する
+* API を介して[アーカイブ][17]を構成する
+* API を介して[インデックス][18]を構成する
+* API を介して[パイプライン][19]を構成する
+* API を介して[制限クエリ][20]を構成する
 
 ログパブリックコンフィギュレーション API アクセス許可は、API を介してアクションを操作するアクセス許可のみを付与します。たとえば、[ログ書き込み除外フィルターアクセス許可](#logs-write-exclusion-filters)を持たないユーザーは、ログパブリックコンフィギュレーション API アクセス許可が付与されていても、API を介してサンプリングレートを更新できません。
 
@@ -295,7 +306,7 @@ Datadog API でログコンフィギュレーションを作成または変更�
 
 #### logs_read_data
 
-ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][15]など)。
+ログデータへの読み取りアクセス権。付与された場合、他の制限が適用されます (`logs_read_index_data` または[制限クエリ][20]など)。
 
 ロールは付加的です。ユーザーが複数のロールに属している場合、ユーザーがアクセスできるデータは、各ロールからのすべてのアクセス許可の結合になります。
 
@@ -306,12 +317,57 @@ Datadog API でログコンフィギュレーションを作成または変更�
 
 {{< img src="account_management/rbac/logs_rq_roles_combination.png" alt="データ読み取りアクセス権"  style="width:70%;">}}
 
-**ログのサブセットへの読み取りアクセスを制限する**
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-このコンフィギュレーションは、API を通じてのみサポートされます。
+制限クエリに一致するログ以外は見られないようユーザーを制限するには、Datadog アプリの [Data Access ページ][1]を使用して以下を実行します。
+
+1. 制限クエリを[作成](#create-a-restriction-query)。
+2. その制限クエリにロール（複数可）を[割り当て](#assign-a-role-to-a-restriction-query)。
+3. それぞれの制限クエリに割り当てられたロールおよびユーザーを[確認](#check-restriction-queries)。
+
+
+このビューには以下が表示されます。
+
+* **`Restricted Access` セクション**: すべての制限クエリと、それらにアタッチされているロール
+* **`Unrestricted Access` セクション**: `log_read_data` 許可が付与されているすべてのロール（それ以上の制限はなし）
+* **`No Access` セクション**: `log_read_data` 許可が付与されていないすべてのロール
+
+
+##### 制限クエリを作成する
+
+クエリフィルターを定義する新しい制限クエリを作成します。新しいクエリは、ロールなしで制限リストに表示されます。
+
+{{< img src="account_management/rbac/logs_rq-create.gif" alt="制限クエリを作成"  style="width:70%;">}}
+
+
+##### 制限クエリにロールを割り当てる
+
+任意のロールを選択し、目的の制限クエリに割り当てます。
+
+*注*: ロールを割り当てられるのは、1 つの制限クエリのみです。つまり、ロールを制限クエリに割り当てると、このロールにすでにアタッチされていた制限クエリとの関係性を失います。
+
+{{< img src="account_management/rbac/logs_rq-assign_roles.gif" alt="制限クエリにロールを割り当て"  style="width:70%;">}}
+
+同様に、同じ "Move" インタラクションを使用してロールに `Unrestricted Access` を付与するか、反対に `No Access` ロールに変更します。
+
+##### 制限クエリの確認
+
+このページには、一度に 50 以上の制限クエリ、およびセクションにつき 50 ロール以上は表示されません。多数のロールおよび制限クエリがある場合は、フィルターを使用してこのビューのスコープを限定します。
+
+* 制限クエリフィルターを使用:
+
+{{< img src="account_management/rbac/logs_rq-filter.png" alt="制限クエリフィルター"  style="width:70%;">}}
+
+* ロールフィルターを使用:
+
+{{< img src="account_management/rbac/logs_rq-view_as_role.png" alt="ロールビュー"  style="width:70%;">}}
+
+* ユーザーフィルターを使用（複数ロールに属する特定のユーザーが実際に持つアクセス許可を確認するのに便利）:
+
+{{< img src="account_management/rbac/logs_rq-view_as_user.png" alt="ロールビュー"  style="width:70%;">}}
+[1]: https://app.datadoghq.com/logs/pipelines/data-access
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -379,7 +435,7 @@ curl -X POST \
 
 #### logs_live_tail
 
-ロールに [Live Tail][16] 機能を使用する能力を付与します。
+ロールに [Live Tail][21] 機能を使用する能力を付与します。
 
 このアクセス許可はグローバルで、[ログ読み取りインデックスデータ](#logs-read-index-data)アクセス許可に関係なく、livetail へのアクセスを許可します。
 
@@ -392,17 +448,22 @@ curl -X POST \
 
 [1]: /ja/account_management/users/#edit-a-user-s-roles
 [2]: /ja/api/v2/roles/#list-permissions
-[3]: /ja/logs/logs_to_metrics/
-[4]: /ja/logs/indexes
-[5]: /ja/logs/indexes#indexes-filters
-[6]: /ja/logs/indexes#update-log-retention
-[7]: /ja/logs/indexes#exclusion-filters
-[8]: /ja/logs/processing/pipelines/
-[9]: /ja/logs/processing/pipelines/#pipeline-filters
-[10]: /ja/logs/archives
-[11]: /ja/logs/archives/rehydrating
-[12]: /ja/api/v2/logs-archives/
-[13]: /ja/api/v1/logs-indexes/
-[14]: /ja/api/v1/logs-pipelines/
-[15]: /ja/api/v2/logs-restriction-queries/
-[16]: /ja/logs/explorer/live_tail/
+[3]: /ja/logs/guide/logs-rbac/?tab=ui#overview
+[4]: /ja/logs/logs_to_metrics/
+[5]: /ja/logs/explorer/facets/#overview
+[6]: /ja/logs/processing/attributes_naming_convention/#standard-attributes-in-log-configuration
+[7]: /ja/logs/explorer/facets/#alias-facets
+[8]: /ja/logs/indexes
+[9]: /ja/logs/indexes#indexes-filters
+[10]: /ja/logs/indexes#update-log-retention
+[11]: /ja/logs/indexes#exclusion-filters
+[12]: /ja/logs/processing/pipelines/
+[13]: /ja/logs/processing/pipelines/#pipeline-filters
+[14]: /ja/logs/archives
+[15]: /ja/logs/archives/rehydrating
+[16]: #logs_read_archives
+[17]: /ja/api/v2/logs-archives/
+[18]: /ja/api/v1/logs-indexes/
+[19]: /ja/api/v1/logs-pipelines/
+[20]: /ja/api/v2/logs-restriction-queries/
+[21]: /ja/logs/explorer/live_tail/
