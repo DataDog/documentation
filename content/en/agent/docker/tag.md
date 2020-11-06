@@ -61,7 +61,6 @@ docker_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
