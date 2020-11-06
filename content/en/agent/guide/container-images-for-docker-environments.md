@@ -17,7 +17,7 @@ If you are currently using Docker, there are several container images available 
 {{< tabs >}}
 {{% tab "Docker Hub" %}}
 
-| Datadog Product                         | Docker Hub Image                         | Docker Pull Command                              |
+| Datadog Product                         | Docker Hub                               | Docker Pull Command                              |
 |-----------------------------------------|------------------------------------------|--------------------------------------------------|
 | [Docker Agent][1]                       | [Docker Agent (v6+)][2]                  | `docker pull datadog/agent`                      |
 | Docker Agent (v 5)                      | [Docker Agent (v5)][3]                   | `docker pull datadog/docker-dd-agent`            |
@@ -38,7 +38,7 @@ If you are currently using Docker, there are several container images available 
 {{% /tab %}}
 {{% tab "GCR" %}}
 
-| Datadog Product                          | GCR Image                                | GCR Pull Command                                                  |
+| Datadog Product                          | GCR                                      | GCR Pull Command                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
 | [Docker Agent][1]                        | [Docker Agent (v6+)][2]                  | `docker pull gcr.io/datadoghq/agent`                              |
 | Docker Agent (v 5)                       | [Docker Agent (v5)][2]                   | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
