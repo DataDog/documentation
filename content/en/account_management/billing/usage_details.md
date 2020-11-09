@@ -28,13 +28,9 @@ In product specific tabs, you will see your month-to-date usage of the products 
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-Most accounts will have the option to switch between two views of this section: "Billable" and "All". The "Billable" view shows estimated usage that contributes to your final bill and breaks out the portion which is on-demand usage above your commitments and allocations.
+The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts will also be able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage above your commitments and allocations.
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
-
-Switching to the "All" view will show all usage, including non-billable usage such as product trials. This is the default view if the "Billable" view is not available. 
-
-{{< img src="account_management/billing/usage-details-v2-08.png" alt="Usage Summary - All" >}}
 
 Month-to-date usage of each product is calculated as follows:
 
