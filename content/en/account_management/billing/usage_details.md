@@ -20,55 +20,51 @@ Certain product tabs also contain additional tools:
 
 ## Month-to-Date Summary
 
-This section summarizes your month-to-date or MTD usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month.
+This section summarizes your month-to-date usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month. 
 
-{{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All" >}}
+{{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All tab" >}}
 
 In product specific tabs, you will see your month-to-date usage of the products in that product category.
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-When possible, the default data shown in this section is "Billable" usage, which is estimated usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage, which is usage above your prepaid commitments and allocations.
+Most accounts will have the option to switch between two views of this section: "Billable" and "All". The "Billable" view shows estimated usage that contributes to your final bill and breaks out the portion which is on-demand usage above your commitments and allocations.
 
 {{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
 
-Switching to the "All" view will show all usage, including non-billable usage such as product trials.
+Switching to the "All" view will show all usage, including non-billable usage such as product trials. This is the default view if the "Billable" view is not available. 
 
 {{< img src="account_management/billing/usage-details-v2-08.png" alt="Usage Summary - All" >}}
 
-If "Billable" usage is not available, the data shown reflects "All" usage and the toggle to switch views will not be available.
+Month-to-date usage of each product is calculated as follows:
 
+| Product                   | Description                                                                                                                |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Infra. Hosts             | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month.                         |
+| Containers               | Shows the high watermark of all distinct containers over all hours in the current month.                                    |
+| APM Hosts                | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.                                    |
+| Indexed Spans           | Shows the sum of all Indexed Spans indexed over all hours in the current month.                                            |
+| Profiled Hosts           | Shows the 99th percentile of all distinct profiled hosts over all hours in the current month.                               |
+| Profiled Containers      | Shows the average of all distinct profiled containers over all hours in the current month.                                  |
+| Custom Metrics           | Shows the average number of distinct [custom metrics][2] over all hours in the current month.                               |
+| Ingested Custom Metrics  | Shows the average number of distinct INGESTED custom metrics over all hours in the current month.                           |
+| Ingested Logs            | Shows the sum of all log bytes ingested over all hours in the current month.                                                |
+| Indexed Logs             | Shows the sum of all log events indexed over all hours in the current month.                                                |
+| Analyzed Logs (Security) | Shows the sum of all analyzed log bytes ingested over all hours in the current month.                                       |
+| Serverless Functions     | Shows the average of the number of functions that are executed 1 or more times each hour in the current month.              |
+| Fargate Tasks            | Shows the sum of all Fargate tasks over all hours in the current month.                                                     |
+| Network Hosts            | Shows the 99th percentile of all distinct Network hosts over all hours in the current month.                                |
+| Network Flows            | Shows the sum of all Network flows indexed over all hours in the current month.                                             |
+| Network Devices          | Shows the 99th percentile of all distinct Network devices over all hours in the current month.                              |
+| Synthetic API Tests      | Shows the sum of all Synthetic API tests over all hours in the current month.                                               |
+| Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                           |
+| RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                             |
 
 ## Overall Usage
 
-This section contains hourly, daily, monthly, and annual usage. In the "All" tab, you will see hourly, daily, monthly, and annual usage for:
-
-| Graph                    | Description                                                                                                                    |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Infra. Hosts             | Each bar shows the 99th percentile of all distinct infrastructure hosts for that hour/day/week.                                  |
-| Containers               | Each bar shows the high watermark of all distinct containers for that hour/day/week.                                             |
-| APM Hosts                | Each bar shows the 99th percentile of all distinct APM hosts for that hour/day/week.                                             |
-| Indexed Spans            | Each bar shows the sum of all spans indexed during that hour/day/week. The line shows the running total of spans indexed.        |
-| Profiled Hosts           | Each bar shows the 99th percentile of all distinct profiled hosts for that hour/day/week.                                        |
-| Profiled Containers      | Each point shows the average of all distinct profiled containers for that hour/day/week.                                         |
-| Custom Metrics           | Each point shows the average number of distinct [custom metrics][2] for that hour/day/week.                                      |
-| Ingested Custom Metrics  | Each point shows the average number of distinct INGESTED custom metrics for that hour/day/week.                                  |
-| Ingested Logs            | Each bar shows the sum of all log bytes ingested for that hour/day/week. The line shows the running total of logs bytes ingested.|
-| Indexed Logs             | Each bar shows the sum of all log events indexed for that hour/day/week. The line shows the running total of logs bytes indexed. |
-| Analyzed Logs (Security) | Each bar shows the sum of all analyzed log bytes ingested for that hour/day/week. The line shows the running total of analyzed logs bytes ingested. |
-| Serverless Functions     | Each point shows the average number of functions that are executed 1 or more times in that hour/day/week.                        |
-| Fargate Tasks            | Each point shows the average number of Fargate tasks in that hour/day/week.                                                      |
-| Network Hosts            | Each bar shows the 99th percentile of all distinct Network hosts for that hour/day/week.                                         |
-| Network Flows            | Each bar shows the sum of all Network flows indexed for that hour/day/week. The line shows the running total of Network flows indexed    |
-| Network Devices          | Each bar shows the 99th percentile of all distinct Network devices over that hour/day/week.                                       |
-| Synthetic API Tests      | Each bar shows the sum of all Synthetic API tests over that hour/day/week. The line shows the running total of Synthetic API tests|
-| Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over that hour/day/week. The line shows the running total of Synthetic Browser Tests |  | RUM Sessions             | Shows the sum of all distinct RUM sessions over that hour/day/week. The line shows the running total of RUM Sessions |
+This section contains hourly, daily, monthly, and annual usage:
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
-
-Some graphs contain both bars for sums of hourly/daily/weekly usage and a line for the running or cummulative total. The units for the bars are on the left-hand side of the graph while the units for the line is on the right-hand side. 
-
-{{< img src="account_management/billing/usage-details-v2-09.png" alt="Hourly Usage - Dual Axis Graph" >}}
 
 In product specific tabs, you will see your hourly, daily, monthly, and annual usage of the products in that product category. In the Infrastructure tab, you will also see a breakdown of the **Infra Hosts** graph by host type:
 
