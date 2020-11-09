@@ -35,8 +35,8 @@ Error Tracking processes errors collected from the browser by the RUM SDK: whene
 
 To quickly get started with error tracking:
 
-1. Download the latest version of the [RUM Browser SDK][2].
-2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][3].
+1. Download the latest version of the [RUM Browser SDK][3].
+2. Configure the __version__, the __env__ and the __service__ when [initializing your SDK][4].
 
 ### Upload mapping files
 
@@ -45,7 +45,7 @@ The consequence is that stack traces of errors fired from those applications are
 
 #### Javascript source maps
 
-Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][4] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
+Source maps are mapping files generated when minifying Javascript source code. The [Datadog CLI][5] can be used to upload those mapping files from your build directory: it scans the build directory and its subdirectories to automatically upload the source maps with their related minified files. Upload your source maps directly from your CI pipeline:
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -84,7 +84,7 @@ datadog-ci sourcemaps upload /path/to/dist \
 For Error Tracking to properly work with your source maps, you must configure your Javascript bundler so that:
 
 -   Source maps directly include the related source code. Make sure the <code>sourcesContent</code> attribute is not empty before uploading them.
--   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][5]).
+-   The size of each source map augmented with the size of the related minified file does not exceed __our limit of 50mb__. This sum can be reduced by configuring your bundler to split the source code into multiple smaller chunks ([see how to do this with WebpackJS][6]).
 
 ## Further Reading
 
