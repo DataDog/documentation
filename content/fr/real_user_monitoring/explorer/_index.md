@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /fr/real_user_monitoring/rum_explorer
 further_reading:
-  - link: /real_user_monitoring/explorer/search
+  - link: /real_user_monitoring/explorer/search/
     tag: Documentation
     text: Explorez vos vues dans Datadog
-  - link: /real_user_monitoring/rum_explorer
+  - link: /real_user_monitoring/rum_explorer/
     tag: Documentation
     text: Explorez vos vues dans Datadog
 ---
@@ -23,9 +23,9 @@ Créez un contexte pour explorer vos vues sur votre page RUM Explorer. Commencez
 
 L'intervalle est visible juste en dessous de la barre de recherche. Cette fonctionnalité vous permet de limiter votre vue ou votre analyse à une période donnée.
 
-Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante :
+Changez rapidement l'intervalle en sélectionnant une durée prédéfinie dans la liste déroulante. Vous pouvez également [saisir un intervalle personnalisé][2] :
 
-{{< img src="real_user_monitoring/explorer/rum_time_selector.png" alt="Sélecteur d'intervalle RUM"  style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/rum_time_selector.png" alt="Sélecteur d'intervalle RUM"  style="width:50%;">}}
 
 Tous les paramètres de recherche sont contenus dans l'URL. Vous pouvez partager votre vue en partageant l'URL.
 
@@ -37,7 +37,7 @@ Cliquez sur une vue pour ouvrir le volet des vues et l'examiner plus en détail 
 
 ## Configuration - Facettes et mesures
 
-Une fois [recueillis][2], vos attributs de vues peuvent être indexés en tant que facettes ou mesures afin d'être accessibles pour votre création de [contexte](#contexte) et vos [analyses][3].
+Une fois recueillis, vos attributs de vues peuvent être indexés en tant que facettes ou mesures puis être utilisés pour créer un [contexte](#contexte) ou réaliser des [analyses][3].
 
 Remarque : pour tirer le meilleur parti de votre page RUM Explorer, assurez-vous que les attributs de vos vues suivent la [convention de nommage d'attributs Datadog][4].
 
@@ -57,7 +57,7 @@ Pour commencer à utiliser un attribut en tant que facette ou dans une recherche
 Lorsque vous avez terminé, la valeur de cet attribut est stockée **pour toutes les nouvelles vues** et peut être utilisée dans [la barre de recherche][1], le volet Facettes et dans la [requête RUM Analytics][2].
 
 [1]: /fr/real_user_monitoring/explorer/search/#search
-[2]: /fr/real_user_monitoring/rum_analytics
+[2]: /fr/real_user_monitoring/rum_analytics/
 {{% /tab %}}
 {{% tab "Mesures" %}}
 
@@ -78,7 +78,7 @@ Chaque mesure dispose de sa propre unité. Celle-ci est affichée dans les colon
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Modifier une mesure"  style="width:50%;">}}
 
 [1]: /fr/real_user_monitoring/explorer/search/#search
-[2]: /fr/real_user_monitoring/rum_analytics
+[2]: /fr/real_user_monitoring/rum_analytics/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,6 +87,6 @@ Chaque mesure dispose de sa propre unité. Celle-ci est affichée dans les colon
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/real_user_monitoring/explorer/search/#search-syntax
-[2]: /fr/real_user_monitoring/installation
-[3]: /fr/real_user_monitoring/explorer/analytics
+[2]: /fr/dashboards/guide/custom_time_frames
+[3]: /fr/real_user_monitoring/explorer/analytics/
 [4]: /fr/logs/processing/attributes_naming_convention/

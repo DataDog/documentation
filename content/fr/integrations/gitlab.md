@@ -163,10 +163,17 @@ Le check Gitlab n'inclut aucun événement.
 
 Le check Gitlab inclut des checks de service de santé, de readiness et de liveness.
 
-`gitlab.prometheus_endpoint_up` : renvoie `CRITICAL` si le check ne peut pas accéder à l'endpoint des métriques Prometheus de l'instance Gitlab.
-`gitlab.health` : renvoie `CRITICAL` si le check ne peut pas accéder à l'instance Gitlab.
-`gitlab.liveness` : renvoie `CRITICAL` si le check ne peut pas accéder à l'instance Gitlab en raison d'un blocage de Rails Controllers.
-`gitlab.readiness` : renvoie `CRITICAL` si l'instance Gitlab parvient à accepter le trafic via Rails Controllers.
+**gitlab.prometheus_endpoint_up** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'endpoint de métriques Prometheus de l'instance Gitlab.
+
+**gitlab.health** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'instance Gitlab.
+
+**gitlab.liveness** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'instance Gitlab en raison d'un blocage de contrôleurs Rails.
+
+**gitlab.readiness** :<br>
+Renvoie `CRITICAL` si l'instance Gitlab parvient à accepter le trafic via des contrôleurs Rails.
 
 ## Dépannage
 
