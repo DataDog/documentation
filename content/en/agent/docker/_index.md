@@ -51,6 +51,7 @@ If you haven’t installed the Docker Agent, follow the [in-app installation ins
 DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7
 ```
 
+**Note**: If you're using a different registry besides Docker Hub, make sure to update the image.
 
 {{% /tab %}}
 {{% tab "Amazon Linux < v2" %}}
