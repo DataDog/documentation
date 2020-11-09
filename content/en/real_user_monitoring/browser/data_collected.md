@@ -98,7 +98,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
-## Measure Collected
+## Resource timings
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -111,7 +111,7 @@ Detailed network timing data for the loading of an application’s resources are
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-## Facet Collected
+## Resource attributes
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -123,6 +123,9 @@ Detailed network timing data for the loading of an application’s resources are
 | `resource.url_path`        | string | The path part of the URL.                                                          |
 | `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
 | `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `resource.provider.name`      | string | The resource provider name. Default to `unknown`.                                            |
+| `resource.provider.domain`      | string | The resource provider domain.                                            |
+| `resource.provider.type`      | string | The resource provider type (Example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
@@ -175,6 +178,9 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.url_path`        | string | The path part of the URL.                                                          |
 | `error.resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
 | `error.resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `error.resource.provider.name`      | string | The resource provider name. Default to `unknown`.                                            |
+| `error.resource.provider.domain`      | string | The resource provider domain.                                            |
+| `error.resource.provider.type`      | string | The resource provider type (Example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 ### Source errors
 
