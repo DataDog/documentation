@@ -58,7 +58,7 @@ To account for modern web applications, loading time watches for network request
 
 Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Metrics collected
+## View Timings and Metrics
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
@@ -98,7 +98,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
-## Resource timings
+## Resource Timings
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -111,7 +111,7 @@ Detailed network timing data for the loading of an application’s resources are
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
 | `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-## Resource attributes
+## Resource Attributes
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
@@ -135,7 +135,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 [Long tasks][1] are tasks that block the main thread for 50 milliseconds or more. They may cause high input latency, delayed time to interaction, etc. Understand what causes these long tasks in your browser performance profiler.
 
-## Measure Collected
+## Long Task Timings
 
 | Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
@@ -156,7 +156,7 @@ Front-end errors are split in 4 different categories depending on their `error.o
 - **console**: `console.error()` API calls.
 - **custom**: Errors sent with the [RUM `addError` API][2] default to `custom`.
 
-## Facet Collected
+## Error Attributes
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -210,7 +210,7 @@ Once an interaction is detected, the RUM SDK watches for network requests an DOM
 ## Custom User Actions
 Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
-## Measures Collected
+## Action Timings and Metrics
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -219,7 +219,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
 
-## Facet Collected
+## Action Attributes
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
@@ -247,7 +247,7 @@ These five event types have attributes attached by default:
 | `type`     | string | The type of the event (e.g. `view` or `resource`)             |
 | `application.id` | string | The Datadog application ID. |
 
-### View Attribute
+### View Attributes
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
