@@ -156,8 +156,8 @@ Front-end errors are split in 4 different categories depending on their `error.o
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.origin`  | string | Where the error originates from (for example, the console or network).     |
-| `error.kind`    | string | The error type or kind (or code in some cases).                   |
+| `error.source`  | string | Where the error originates from (Example `console`, `network`)     |
+| `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 
@@ -167,12 +167,12 @@ Network errors include information about failing HTTP requests. The following fa
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `http.status_code`             | number | The response status code.                                                               |
-| `http.url`                     | string | The resource URL.                                                                       |
-| `http.url_details.host`        | string | The HTTP host part of the URL.                                                          |
-| `http.url_details.path`        | string | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `error.resource.status_code`             | number | The response status code.                                                               |
+| `error.resource.url`                     | string | The resource URL.                                                                       |
+| `error.resource.url_host`        | string | The host part of the URL.                                                          |
+| `error.resource.url_path`        | string | The path part of the URL.                                                          |
+| `error.resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `error.resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
 
 ### Source errors
 
@@ -180,7 +180,7 @@ Source errors include code-level information about the error. More information a
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.kind`    | string | The error type or kind (or code in some cases).                   |
+| `error.type`    | string | The error type (or error code in some cases).                   |
 
 
 [1]: /real_user_monitoring/data_collected/error/#network-errors
