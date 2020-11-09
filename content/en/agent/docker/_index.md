@@ -174,7 +174,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 Additional examples are available on the [Container Discover Management][25] page.
 
-**Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
+**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
 ### Misc
 
