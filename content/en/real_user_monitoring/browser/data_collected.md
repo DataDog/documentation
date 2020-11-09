@@ -71,7 +71,7 @@ Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK autom
 | `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
 | `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
 | `view.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
-| `view.error.count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
+| `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
 | `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
@@ -139,7 +139,7 @@ Detailed network timing data for the loading of an application’s resources are
 
 | Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
-| `duration` | number | Duration of the long task. |
+| `long_task.duration` | number | Duration of the long task. |
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
