@@ -230,52 +230,64 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 ## Default attributes
 
-These five event categories have attributes attached by default:
+These five event types have attributes attached by default:
 
 ### Core
 
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
-| `application_id` | string | The Datadog application ID. |
-| `session_id`     | string | The session ID.             |
+| `type`     | string | The type of the event (e.g. `view` or `resource`)             |
+| `application.id` | string | The Datadog application ID. |
 
 ### View Attribute
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.url`                     | string | The view URL.                                                                                                  |
 | `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][6].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
-| `view.url_details.host`        | string | The HTTP host part of the URL.                                                                                 |
-| `view.url_details.path`        | string | The HTTP path part of the URL.                                                                                 |
-| `view.url_details.path_group`  | string | Automatic URL group generated for similar URLs. (ex: `/dashboard/?` For `/dashboard/123` and `/dashboard/456`) |
-| `view.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes.                        |
+| `view.url`                     | string | The view URL.                                                                                                  |
+| `view.url_hash`                     | string | The hash part of the URL.|
+| `view.url_host`        | string | The host part of the URL.                                                                                |
+| `view.url_path`        | string | The path part of the URL.                                                                                 |
+| `view.url_path_group`  | string | The automatic URL group generated for similar URLs. (ex: `/dashboard/?` For `/dashboard/123` and `/dashboard/456`) |
+| `view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes.                        |
+| `view.url_scheme` | object | The scheme part of the URL.                        |
 
-### User Agent
+### Device
 
-The following contexts—following the [Datadog Standard Attributes][7] logic—are attached automatically to all events sent to Datadog:
+The following device-related attributes are attached automatically to all events collected by Datadog:
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `http.useragent_details.os.family`       | string | The OS family reported by the User-Agent.       |
-| `http.useragent_details.browser.family`  | string | The browser Family reported by the User-Agent.  |
-| `http.useragent_details.device.family`   | string | The device family reported by the User-Agent.   |
-| `http.useragent_details.device.category` | string | The device category reported by the User-Agent. |
+| `device.type`       | string | The device type as reported by the User-Agent       |
+| `device.brand`  | string | The device brand as reported by the User-Agent.  |
+| `device.model`   | string | The device model as reported by the User-Agent.   |
+| `device.name` | string | The device name as reported by the User-Agent. |
+
+### OS
+
+The following OS-related attributes are attached automatically to all events collected by Datadog:
+
+| Attribute name                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
+| `os.name`       | string | The OS name as reported by the User-Agent.       |
+| `os.version`  | string | The OS version as reported by the User-Agent.  |
+| `os.version_major`   | string | The OS version major as reported by the User-Agent.   |
 
 ### Geolocation
 
-The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
+The following attributes are related to the geolocation of IP addresses:
 
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| `network.client.geoip.country.name`         | string | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | string | [ISO Code][8] of the country (example: `US` for the United States, `FR` for France)                                                  |
-| `network.client.geoip.continent.code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
-| `network.client.geoip.continent.name`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
-| `network.client.geoip.subdivision.name`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][8] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
-| `network.client.geoip.city.name`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
+| `geo.country`         | string | Name of the country                                                                                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][7] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `geo.country_subdivision`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
+| `geo.country_subdivision_iso_code` | string | [ISO Code][7] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
+| `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
+| `geo.city`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ## Extra Attribute
 
@@ -292,5 +304,4 @@ In addition to default attributes, add [specific global context][1] to all event
 [4]: /real_user_monitoring/browser/data_collected/?tab=error
 [5]: /real_user_monitoring/browser/data_collected/?tab=useraction
 [6]: /real_user_monitoring/data_collected/view#single-page-applications
-[7]: /logs/processing/attributes_naming_convention/
-[8]: /logs/processing/attributes_naming_convention/#user-agent-attributes
+[7]: /logs/processing/attributes_naming_convention/#user-agent-attributes
