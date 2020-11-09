@@ -191,14 +191,14 @@ Source errors include code-level information about the error. More information a
 {{% /tab %}}
 {{% tab "User Action" %}}
 
-## Automatic Collection of User Actions
+## Automatic Collection of Actions
 Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
 **Note**:  The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
-Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered finished. The user action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
+Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
 
-### How is the User Action duration calculated?
+### How is the Action loading time calculated?
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Custom User Actions
@@ -208,19 +208,19 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `duration` | number (ns) | The length of the user action. See how it is calculated in the [User Action documentation][4]. |
-| `user_action.measures.long_task_count`        | number      | Count of all long tasks collected for this user action. |
-| `user_action.measures.resource_count`         | number      | Count of all resources collected for this user action. |
-| `user_action.measures.user_action_count`      | number      | Count of all user actions collected for this user action.|
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][4]. |
+| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
+| `action.resource.count`         | number      | Count of all resources collected for this action. |
+| `action.error.count`      | number      | Count of all errors collected for this action.|
 
 ## Facet Collected
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `user_action.id` | string | UUID of the user action. |
-| `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
-| `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
-
+| `action.id` | string | UUID of the user action. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
+| `action.target.name` | string | Element which the user interacted with. Only for automatically collected actions |
+| `action.name` | string | User-friendly name created (Example `Click on #checkout`). For [Custom User Actions][5], the action name given in the API call. |
 
 [1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
