@@ -90,7 +90,7 @@ For Error Tracking to properly work with your source maps, you must configure yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/data_collected/error#error-origins
+[1]: /real_user_monitoring/browser/data_collected/?tab=error#error-origins
 [2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
 [3]: https://www.npmjs.com/package/@datadog/browser-rum
 [4]: /real_user_monitoring/browser/#initialization-parameters
