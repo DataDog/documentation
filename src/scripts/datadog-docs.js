@@ -748,6 +748,15 @@ function getPathElement() {
         );
     }
 
+    if (path === 'tracing') {
+        aPath = document.querySelector(
+            '.side [data-path="tracing"]'
+        );
+        maPath = document.querySelector(
+            'header [data-path="tracing"]'
+        );
+    }
+
     // if url is domain + /integrations/**
     if (
         `${replaceURL(domain)}/${replacePath(path)}`.includes(
