@@ -103,25 +103,25 @@ Detailed network timing data for the loading of an application’s resources are
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
-| `network.bytes_written`                | number (bytes) | Resource size.                                                                                                                            |
-| `http.performance.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart)                                                            |
-| `http.performance.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart) |
-| `http.performance.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart)                                               |
-| `http.performance.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
-| `http.performance.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
-| `http.performance.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
+| `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart)                                                            |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart) |
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart)                                               |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
 ## Facet Collected
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `resource.kind`                | string | The kind or type of resource being collected (ex: CSS, JS, media, XHR, image)           |
-| `http.status_code`             | number | The response status code.                                                               |
-| `http.url`                     | string | The resource URL.                                                                       |
-| `http.url_details.host`        | string | The HTTP host part of the URL.                                                          |
-| `http.url_details.path`        | string | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `resource.type`                | string | The type of resource being collected (Example `css`, `javascript`, `media`, `XHR`, `image`)           |
+| `resource.status_code`             | number | The response status code.                                                               |
+| `resource.url`                     | string | The resource URL.                                                                       |
+| `resource.url_host`        | string | The host part of the URL.                                                          |
+| `resource.url_path`        | string | The path part of the URL.                                                          |
+| `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
