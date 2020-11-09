@@ -40,6 +40,7 @@ The APM Service and Resource pages now use this new metric for customers in the 
 - New Distribution Metrics now power APM Service and Resource pages as we roll this out for more and more customers
 - We will migrate all manual queries from dashboards and monitors to the new metrics automatically on your behalf while retaining the existing metrics to support historic views
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/distributions/
 [2]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
