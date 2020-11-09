@@ -31,7 +31,7 @@ Error Tracking makes it easier to monitor these errors by:
 
 ## Getting started
 
-Error Tracking processes errors collected from the browser by the RUM SDK (errors with [source origin][1]).
+Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source][1] or [custom][2] error containing a stack trace is collected, Error Tracking will process it and group it under an issue (group of similar errors).
 
 To quickly get started with error tracking:
 
@@ -91,7 +91,8 @@ For Error Tracking to properly work with your source maps, you must configure yo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/data_collected/error#error-origins
-[2]: https://www.npmjs.com/package/@datadog/browser-rum
-[3]: /real_user_monitoring/browser/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/
-[5]: https://webpack.js.org/guides/code-splitting/
+[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
+[3]: https://www.npmjs.com/package/@datadog/browser-rum
+[4]: /real_user_monitoring/browser/#initialization-parameters
+[5]: https://github.com/DataDog/datadog-ci/
+[6]: https://webpack.js.org/guides/code-splitting/
