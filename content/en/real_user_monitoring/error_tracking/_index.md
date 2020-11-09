@@ -31,7 +31,7 @@ Error Tracking makes it easier to monitor these errors by:
 
 ## Getting started
 
-Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source][1] or [custom][2] error containing a stack trace is collected, Error Tracking will process it and group it under an issue (group of similar errors).
+Error Tracking processes errors collected from the browser by the RUM SDK: whenever a [source][1] or [custom][2] error containing a stack trace is collected, Error Tracking processes and groups it under an issue (group of similar errors).
 
 To quickly get started with error tracking:
 
