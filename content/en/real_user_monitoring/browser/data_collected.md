@@ -116,6 +116,7 @@ Detailed network timing data for the loading of an application’s resources are
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
 | `resource.type`                | string | The type of resource being collected (Example `css`, `javascript`, `media`, `XHR`, `image`)           |
+| `resource.method`                | string | The HTTP method (Example `POST`, `GET`)           |
 | `resource.status_code`             | number | The response status code.                                                               |
 | `resource.url`                     | string | The resource URL.                                                                       |
 | `resource.url_host`        | string | The host part of the URL.                                                          |
@@ -168,6 +169,7 @@ Network errors include information about failing HTTP requests. The following fa
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
 | `error.resource.status_code`             | number | The response status code.                                                               |
+| `error.resource.method`                | string | The HTTP method (Example `POST`, `GET`)           |
 | `error.resource.url`                     | string | The resource URL.                                                                       |
 | `error.resource.url_host`        | string | The host part of the URL.                                                          |
 | `error.resource.url_path`        | string | The path part of the URL.                                                          |
