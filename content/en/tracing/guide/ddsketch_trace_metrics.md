@@ -15,7 +15,7 @@ further_reading:
   text: "Learn more about Trace Metrics"
 ---
 
-Trace metrics are collected automatically for your services and resources and retained for 15 months. The latency percentiles exist as individual time series and in beta as a DD Distribution Metric. This means that we now offer more data in easier formats. Instead of having a different metric for each percentile, separately for services, resources and second primary tags, we now offer a simple metric:
+Trace metrics are collected automatically for your services and resources and are retained for 15 months. The latency percentiles exist as individual time series and in beta as a DD Distribution Metric. This means that we now offer more data in easier formats. Instead of having a different metric for each percentile, separately for services, resources and second primary tags, we now offer a simple metric:
 
 - `trace.<SPAN_NAME>`:
   - *Prerequisite:* This metric exists for any APM service in beta.
@@ -26,7 +26,7 @@ Trace metrics are collected automatically for your services and resources and re
 The APM Service and Resource pages now use this new metric for customers in the Beta automatically. This means you can use these metrics to power your dashboards and monitors.
 
 **What does this metric mean for me?**
-- Distribution metrics offer new capabilities compared with the existing gauge metric like precise aggregation in time (instead of a rollup) and open the door for better visualizations and functionality in the future.
+- Distribution metrics offer new capabilities compared with the existing gauge metric like precise percentile calculation over time periods (instead of a rollup function) and open the door for better visualizations and functionality in the future.
 
 **How am I seeing a full history of this new metric?**
 - We stitch any existing query on the new metric to an equivalent query based on the long-existing latency metrics, so you never have to create multiple queries
