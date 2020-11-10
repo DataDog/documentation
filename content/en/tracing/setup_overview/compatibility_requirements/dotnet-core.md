@@ -45,10 +45,10 @@ Don’t see your desired frameworks? Datadog is continually adding additional su
 
 The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][6] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| Issue                                         | Affected .NET Core Versions       | Workaround                                                                                              | More information                        |
-|-----------------------------------------------|-----------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x, 2.1.0-2.1.11, 2.2.0-2.2.5  | Upgrade .NET Core installation to latest patch, or follow steps in the linked issue if unable to update | [DataDog/dd-trace-dotnet/issues/302][4] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                             | Upgrade .NET Core installation to 2.0.3+                                                                | [dotnet/runtime/issues/23938][5]        |
+| Issue                                         | Affected .NET Core Versions               | Workaround                                                             | More information                        |
+|-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
+| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to latest patch, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][4] |
+| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3+                                            | [dotnet/runtime/issues/23938][5]        |
 
 ## Further Reading
 
