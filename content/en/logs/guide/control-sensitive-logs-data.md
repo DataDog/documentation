@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: /logs/guide/logs-rbac/
     tag: Documentation
-    text: "Setup Role Based Access Controls (RBAC) for Log Management"
+    text: "Set up Roles Based Access Controls (RBAC) for Log Management"
   - link: /agent/logs/advanced_log_collection
     tag: Documentation
     text: "Filter and Redact logs with Advanced Log Collection"
@@ -16,16 +16,16 @@ further_reading:
 
 ---
 
-Your logs may hold sensitive data, so they may need specific care from a compliance standpoint. Once you realize that you are ingesting sensitive data into Datadog, consider these two things:
+Because your logs may contain sensitive data, you should be extra careful in how you handle them. Once you realize that you are ingesting sensitive data into Datadog, consider these two things:
 
-- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use Roles Based Action Control to ensure that you have set up appropriate restrictions to ensure that only entitled users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] and learn how to configure it for your organization.
-- If the sensitive data being sent from your platform into Datadog is unintentional, you have a compliance concern. Continue with this guide to learn about addressing that concern.
+- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use Roles Based Access Control to ensure that you have set up appropriate restrictions to ensure that only entitled users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] and learn how to configure it for your organization.
+- Address any unintentional logging of sensitive data to preemptively address any concerns down the road. Continue with this guide to learn about addressing that concern.
 
 Controlling all of the data flow at any time can be challenging, especially on a large and highly collaborative platform. This guide walks you through the three steps you should take when you detect compliance-sensitive data from your platform:
 
-1. [Identify](#determine-the-scope-of-the-data-being-sent) the nature and the scope of sensitive data being sent.
-2. [Fix](#fix-the-source-of-the-data-upstream) the source of data upstream.
-3. [Handle](#handle-data-already-sent-to-datadog) sensitive data that has already been sent into Datadog.
+1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent) the nature and the scope of sensitive data being sent.
+2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream) the source of data upstream.
+3. [Handle data already sent to Datadog](#handle-data-already-sent-to-datadog) sensitive data that has already been sent into Datadog.
 
 
 ## Determine the scope of the data being sent
@@ -40,13 +40,13 @@ This guide refers to that query as the **sensitive outline query**. Keep track o
 
 {{< img src="logs/guide/sensitive/sensitive_outline_query.png" alt="Sensitive Outline Query" style="width:80%;" >}}
 
-### Where is the senitive data inside Datadog?
+### Where is the sensitive data inside Datadog?
 
-Although there could be sensitive data coming in at multiple places in Datadog, focus on Datadog Indexes because other locations are likely a lesser compliance concern. 
+Once sensitive data is sent to your Datadog platform, it may exist in a number of places. As a result, be sure to check each of the following (ordered from most likely to have sensitive data to least likely):
 
-* Datadog [Indexes][3] are where logs are stored with Datadog until they age out according to index retention. Check [indexes filters][4] and [exclusion filters][5] to see if logs with sensitive data are indexed.
+* Datadog [Indexes][3] are where logs are stored with Datadog until they age out according to index retention. Although there could be sensitive data coming in at multiple places in Datadog, focus on Datadog Indexes because other locations are likely a lesser compliance concern. Check [indexes filters][4] and [exclusion filters][5] to see if logs with sensitive data are indexed.
 
-* Check your Log [Archives][6], where Datadog sends logs to be stored on your end. Set up Archive Filters to see if your archive contains sensitive logs.
+* Check your Log [Archives][6], which is where Datadog sends logs to be stored on your end. Set up Archive Filters to see if your archive contains sensitive logs.
 
 * Datadog [Metrics generated from Logs][7] storing aggregated metrics, meaning sensitive data likely have been discarded or crushed. Check custom metrics filters to see if logs with sensitive data are processed.
 
@@ -57,10 +57,9 @@ Although there could be sensitive data coming in at multiple places in Datadog, 
 
 ## Fix the source of the data upstream
 
-
 ### Stop indexing sensitive logs
 
-This step is optional. It won't fix the compliance issue, but you can take immediate action before you commit to stopping the data from being sent to Datadog
+This is an optional step to prevent additional sensitive data from being sent to Datadog. However keep in mind that you’ll still need to address the sensitive data already sent to Datadog.
 
 * Find which index(es) logs holding sensitive data are susceptible to be routed.
 * For each index, add an exclusion filter based on the sensitive outline query. It has to be **in the first place**. 
