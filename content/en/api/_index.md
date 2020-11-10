@@ -18,14 +18,62 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 Authenticate to the API with an [API key][1], and depending on the endpoint, an [Application key][2].
 
-By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][3] languages in each endpoint to see code examples from that library:
+To try out the API [![Run in Postman][3]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
 
-{{< partial name="api/sdk-languages.html" >}}
+[Using the API][4] is a guide to the endpoints.
+
+**Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][5]: `brew install coreutils`
+
+### Client Libraries
+
+By default, the Datadog API Docs show examples in cURL. Select one of our official [client libraries][6] languages in each endpoint to see code examples from that library. To install each library:
+
+{{< programming-lang-wrapper langs="java,python,ruby,go" >}}
+
+{{< programming-lang lang="java" >}}
+Maven - Add this dependency to your project's POM:
+ ```java
+<dependency>
+  <groupId>com.datadoghq</groupId>
+  <artifactId>datadog-api-client</artifactId>
+  <version>1.0.0</version>
+  <scope>compile</scope>
+</dependency>
+ ```
+
+ Gradle - Add this dependency to your project's build file:
+ ```java
+compile "com.datadoghq:datadog-api-client:1.0.0"
+ ```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+ ```python
+pip install datadog
+ ```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+ ```ruby
+gem install dogapi
+ ```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+ ```go
+import "github.com/DataDog/datadog-api-client-go/api/<VERSION>/datadog"
+ ```
+ **Note**: Replace `<VERSION>` with v1 or v2, depending on which endpoints you want to use.
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+Or check out the libraries directly:
+
+{{< partial name="api/sdk-languages.html" >}} 
 </br>
-**Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][4]: `brew install coreutils`
-
-To quickly get started with the Datadog API, see [Using the API][5], or [![Run in Postman][6]](https://app.getpostman.com/run-collection/add08e16382f7e11a59a)
-
 Trying to get started with the application instead? Check out our general [Getting Started docs][7].
 
 ## Further Reading
@@ -34,8 +82,8 @@ Trying to get started with the application instead? Check out our general [Getti
 
 [1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [2]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
-[3]: https://docs.datadoghq.com/developers/libraries/
-[4]: https://brew.sh
-[5]: /api/v1/using-the-api/
-[6]: https://run.pstmn.io/button.svg
+[3]: https://run.pstmn.io/button.svg
+[4]: /api/v1/using-the-api/
+[5]: https://brew.sh
+[6]: https://docs.datadoghq.com/developers/libraries/
 [7]: /getting_started/application/
