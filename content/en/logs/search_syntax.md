@@ -103,7 +103,7 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Search wildcard
 
-When searching for a facet value that contains special characters requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
+When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
 
 ## Numerical values
 
