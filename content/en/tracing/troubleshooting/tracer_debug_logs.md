@@ -133,7 +133,7 @@ GlobalSettings.SetDebugEnabled(true);
 
 ```
 
-Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_PATH` setting to change these paths.
+Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
 | Platform | Path                                      |
 |----------|-------------------------------------------|
