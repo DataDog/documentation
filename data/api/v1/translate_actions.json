@@ -361,6 +361,30 @@
     "request_description": "Update an existing Datadog-Slack integration request body.",
     "request_schema_description": "Configuration of your Slack channels."
   },
+  "GetSlackIntegrationChannels": {
+    "description": "Get a list of all channels configured for your Datadog-Slack integration.",
+    "summary": "Get all channels in a Slack integration"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Add a channel to your Datadog-Slack integration.",
+    "summary": "Create a Slack integration channel",
+    "request_description": "Payload describing Slack channel to be created",
+    "request_schema_description": "The Slack channel configuration."
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Remove a channel from your Datadog-Slack integration.",
+    "summary": "Remove a Slack integration channel"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Get a channel configured for your Datadog-Slack integration.",
+    "summary": "Get a Slack integration channel"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Update a channel used in your Datadog-Slack integration.",
+    "summary": "Update a Slack integration channel",
+    "request_description": "Payload describing fields and values to be updated.",
+    "request_schema_description": "The Slack channel configuration."
+  },
   "CreateWebhooksIntegrationCustomVariable": {
     "description": "Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.",
     "summary": "Create a custom variable",

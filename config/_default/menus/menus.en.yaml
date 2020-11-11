@@ -2813,6 +2813,26 @@ api_v1:
     parent: Slack Integration
     url: '#add-channels-to-slack-integration'
     generated: true
+  - name: Get all channels in a Slack integration
+    parent: Slack Integration
+    url: '#get-all-channels-in-a-slack-integration'
+    generated: true
+  - name: Create a Slack integration channel
+    parent: Slack Integration
+    url: '#create-a-slack-integration-channel'
+    generated: true
+  - name: Remove a Slack integration channel
+    parent: Slack Integration
+    url: '#remove-a-slack-integration-channel'
+    generated: true
+  - name: Get a Slack integration channel
+    parent: Slack Integration
+    url: '#get-a-slack-integration-channel'
+    generated: true
+  - name: Update a Slack integration channel
+    parent: Slack Integration
+    url: '#update-a-slack-integration-channel'
+    generated: true
   - name: Snapshots
     url: /api/v1/snapshots/
     identifier: Snapshots
