@@ -108,7 +108,9 @@ Individual Organization Usage セクションには、オーガニゼーショ�
 
 * インデックス化されたログイベント
 * 収集されたログ
-* Analyzed Span
+* インデックス化されたスパン
+
+**注:** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
 
 使用属性は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 

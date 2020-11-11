@@ -30,9 +30,15 @@ DogStatsD は、Datadog Agent に付属するメトリクス集計サービス�
 
 **注**: DogStatsD は、StatsD のタイマーをネイティブメトリクスタイプとして実装しません（ただし、[ヒストグラム経由でサポートします][2]）。
 
+DogStatsD は、Docker Hub と GCR で利用できます。
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+
 ## UDS の仕組み
 
-DogStatsD は、UDP 経由で[カスタムメトリクス][3]、[イベント][4]、および[サービスチェック][5]を受け入れ、それらを定期的に集計して Datadog に転送します。
+DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6]、および[サービスチェック][7]を受け入れ、それらを定期的に集計して Datadog に転送します。
 
 UDP を使用するため、アプリケーションはメトリクスを DogStatsD に送信した後、応答を待たずに自身の作業を再開できます。DogStatsD を利用できなくなった場合でも、アプリケーションは中断しません。
 
@@ -44,7 +50,7 @@ DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と�
 
 DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有効になっています。このポートを変更する必要がない場合は、[コードで DogStatsD をセットアップする](#code)方法を直接参照してください。
 
-### Agent
+### エージェント
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -216,7 +222,7 @@ env:
 
 #### DogStatsD クライアントをインストールする
 
-公式の Datadog-DogStatsD クライアントライブラリは、次の言語で使用できます。[汎用 StatsD クライアント][6]を使用してメトリクスを DogStatsD に送信_できます_が、上記の Datadog 固有の機能を使用することはできません。
+公式の Datadog-DogStatsD クライアントライブラリは、次の言語で使用できます。[汎用 StatsD クライアント][8]を使用してメトリクスを DogStatsD に送信_できます_が、上記の Datadog 固有の機能を使用することはできません。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -393,7 +399,7 @@ using (var dogStatsdService = new DogStatsdService())
 
 ### クライアントのインスタンス化パラメーター
 
-**注**: Datadog では、タグを付ける際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。環境を統合する方法については、[統合サービスタグ付け][7]ドキュメントをご参照ください。
+**注**: Datadog では、タグを付ける際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。環境を統合する方法については、[統合サービスタグ付け][9]ドキュメントをご参照ください。
 
 必須の DogStatsD 構成（`url` と `port`）に加えて、DogStatsD クライアントでは次のオプションのパラメーターを使用できます。
 
@@ -486,13 +492,15 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][8]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
+DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][10]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
 
 [1]: https://github.com/etsy/statsd
 [2]: /ja/developers/metrics/dogstatsd_metrics_submission/
-[3]: /ja/developers/metrics/custom_metrics/
-[4]: /ja/developers/events/dogstatsd/
-[5]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
-[6]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /ja/getting_started/tagging/unified_service_tagging
-[8]: /ja/developers/metrics/
+[3]: https://hub.docker.com/r/datadog/dogstatsd
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[5]: /ja/developers/metrics/custom_metrics/
+[6]: /ja/developers/events/dogstatsd/
+[7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
+[8]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
+[9]: /ja/getting_started/tagging/unified_service_tagging
+[10]: /ja/developers/metrics/
