@@ -20,27 +20,29 @@ Trace metrics are collected automatically for your services and resources and ar
 - `trace.<SPAN_NAME>`:
   - *Prerequisite:* This metric exists for any APM service in beta.
   - *Description:* Represents latency distributions for all services, resources and versions across different environments and second primary tags.
-  - *Metric type:* [DISTRIBUTION][1]
+  - *Metric type:* [DISTRIBUTION][3]
   - *Tags:* `env`, `service`, `version`, `resource`, and [the second primary tag][2].
 
-The APM Service and Resource pages now use this new metric for customers in the Beta automatically. This means you can use these metrics to power your dashboards and monitors.
+The APM Service and Resource pages now use this metric type for customers in the Beta automatically. This means you can use these metrics to power your dashboards and monitors.
 
 **What does this metric mean for me?**
-- [Distribution metrics][1] offer new capabilities compared with the existing gauge metric like precise percentile calculation over time periods (instead of a rollup function) and open the door for better visualizations and functionality in the future.
+- [Distribution metrics][1] offer new capabilities like precise percentile calculation over time periods (instead of a rollup function) and open the door for better visualizations and functionality in the future.
 
 **How am I seeing a full history of this new metric?**
 - We stitch any existing query on the new metric to an equivalent query based on the long-existing latency metrics, so you never have to create multiple queries
 
 **I’m seeing a change in the values of my latency, what is happening?**
-- Datadog Distribution Metrics are powered by DDSketch. This includes a change from rank-error guarantees to relative error guarantees. As a result, all percentile estimate values are now guaranteed to be closer to the true percentile value.
+- Datadog Distribution Metrics are powered by [DDSketch][4]. This includes a change from rank-error guarantees to relative error guarantees. As a result, all percentile estimate values are now guaranteed to be closer to the true percentile value.
 - Specifically you might expect to see a reduction in p99 values where this difference is most noticeable. The new values are centered more closely on the precise p99 value.
 - One thing to note is that the APM metric calculations are not exactly akin to a DD Distribution Custom Metric that would be calculated in-code. The calculation happens on the backend so some differences may occur
 
 **What does this beta program entail?**
-- New Distribution Metrics now power APM Service and Resource pages as we roll this out for more and more customers
+- Distribution Metrics now power APM Service and Resource pages as we roll this out for more and more customers
 - We will migrate all manual queries from dashboards and monitors to the new metrics automatically on your behalf while retaining the existing metrics to support historic views
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/distributions/
 [2]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[3]: /developers/metrics/types/?tab=distribution#metric-types
+[4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
