@@ -26,6 +26,11 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | カスタムメトリクス       | `datadog.estimated_usage.metrics.custom` |
 | ログ取り込みバイト  | `datadog.estimated_usage.logs.ingested_bytes`          |
 | ログ取り込みイベント | `datadog.estimated_usage.logs.ingested_events`   |
+| APM ホスト            | `datadog.estimated_usage.apm_hosts`      |
+| APM インデックス化スパン   | `datadog.estimated_usage.logs.apm.indexed_spans` |
+| APM 取り込みバイト   | `datadog.estimated_usage.logs.apm.ingested_bytes` |
+| APM 取り込みスパン   | `datadog.estimated_usage.logs.apm.ingested_spans` |
+| サーバーレス Lambda 関数 | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 
 ログベースの使用量メトリクスは、[メトリクスの生成][1]ページから手動で有効にする必要があります。
 
