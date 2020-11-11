@@ -59,8 +59,10 @@ footer_scripts:
   - adroll: false
 
 # Docs allowed regions for redirecting
-allowedRegions: 
+allowedRegions:
   - name: US
     value: us
   - name: EU
-    value: eu 
+    value: eu
+  - name: US3
+    value: us3

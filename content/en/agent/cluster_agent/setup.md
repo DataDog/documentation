@@ -175,7 +175,7 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 1. Download the [daemonset.yaml manifest][10].
 
-3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with the Datadog site you are using, i.e. `datadoghq.com` or `datadoghq.eu`. This value defaults to `datadoghq.com`.
+3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with your Datadog site: `{{< region-param key="dd_site">}}`. Defaults to `datadoghq.com`.
 
 4. In the `daemonset.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 

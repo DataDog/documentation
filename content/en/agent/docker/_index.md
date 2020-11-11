@@ -35,10 +35,10 @@ The Datadog Docker Agent is the containerized version of the host [Agent][1]. Th
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 
-| Docker Hub      | GCR             |
-|-----------------|-----------------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`             | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`           |
-| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent`   | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent`  |
+| Docker Hub                                             | GCR                                                             |
+|--------------------------------------------------------|-----------------------------------------------------------------|
+| [Agent v6+][2]<br>`docker pull datadog/agent`          | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+| [Agent v5][4]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][5]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 ## Setup
 
@@ -96,10 +96,10 @@ The Agent's [main configuration file][11] is `datadog.yaml`. For the Docker Agen
 | Env Variable       | Description                                                                                                                                                                                                                                                                                                                                      |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`       | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
-| `DD_ENV`          | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                 |
+| `DD_ENV`           | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`      | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
 | `DD_TAGS`          | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
-| `DD_SITE`          | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site.                                                                                                                                                                                      |
+| `DD_SITE`          | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                                                                                                                                                |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
 
@@ -121,7 +121,7 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                      |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_ENABLED`           | Enable [trace collection][13] with the Trace Agent.                                                                                                                                                                                                               |
+| `DD_APM_ENABLED`           | Enable [trace collection][13] with the Trace Agent.                                                                                                                                                                                                              |
 | `DD_LOGS_ENABLED`          | Enable [log collection][14] with the Logs Agent.                                                                                                                                                                                                                 |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][15] with the Process Agent. The [live container view][16] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][15] and the [live container view][16] are disabled. |
 
@@ -146,11 +146,11 @@ As a best practice, Datadog recommends using [unified service tagging][19] when 
 
 Datadog automatically collects common tags from [Docker][20], [Kubernetes][21], [ECS][22], [Swarm, Mesos, Nomad, and Rancher][20]. To extract even more tags, use the following options:
 
-| Env Variable                            | Description                                               |
-|-----------------------------------------|-----------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`              | Extract Docker container labels                           |
-| `DD_DOCKER_ENV_AS_TAGS`                 | Extract Docker container environment variables            |
-| `DD_COLLECT_EC2_TAGS`                   | Extract custom EC2 tags without using the AWS integration |
+| Env Variable               | Description                                               |
+|----------------------------|-----------------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS` | Extract Docker container labels                           |
+| `DD_DOCKER_ENV_AS_TAGS`    | Extract Docker container environment variables            |
+| `DD_COLLECT_EC2_TAGS`      | Extract custom EC2 tags without using the AWS integration |
 
 See the [Docker Tag Extraction][23] documentation to learn more.
 
@@ -162,16 +162,16 @@ Integration credentials can be stored in Docker or Kubernetes secrets and used i
 
 Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. The value for these environment variables support regular expressions.
 
-| Env Variable    | Description                                                                                                                                                                                                        |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example:"name:container_name_1 name:container_name_2", name:.*|
-| `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
-| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.  |
-| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude. |
-| `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs you wish to include.  |
-| `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs you wish to exclude. |
-| `DD_AC_INCLUDE` | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
-| `DD_AC_EXCLUDE` | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| Env Variable                   | Description                                                                                                                                                                                                                                                                                                               |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_INCLUDE`         | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example:"name:container_name_1 name:container_name_2", name:.* |
+| `DD_CONTAINER_EXCLUDE`         | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                                        |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude.                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_INCLUDE_LOGS`    | Allowlist of containers whose logs you wish to include.                                                                                                                                                                                                                                                                   |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | Blocklist of containers whose logs you wish to exclude.                                                                                                                                                                                                                                                                   |
+| `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                                                                                                     |
+| `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                        |
 
 Additional examples are available on the [Container Discover Management][25] page.
 
