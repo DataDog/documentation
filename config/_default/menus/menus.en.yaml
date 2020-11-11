@@ -2969,6 +2969,14 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-hosts-and-containers'
     generated: true
+  - name: Get hourly usage for indexed spans
+    parent: Usage Metering
+    url: '#get-hourly-usage-for-indexed-spans'
+    generated: true
+  - name: Get hourly usage for ingested spans
+    parent: Usage Metering
+    url: '#get-hourly-usage-for-ingested-spans'
+    generated: true
   - name: Get hourly usage for Logs
     parent: Usage Metering
     url: '#get-hourly-usage-for-logs'

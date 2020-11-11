@@ -748,6 +748,14 @@
     "description": "Get hourly usage for hosts and containers.",
     "summary": "Get hourly usage for hosts and containers"
   },
+  "GetUsageIndexedSpans": {
+    "description": "Get hourly usage for indexed spans.",
+    "summary": "Get hourly usage for indexed spans"
+  },
+  "GetIngestedSpans": {
+    "description": "Get hourly usage for ingested spans.",
+    "summary": "Get hourly usage for ingested spans"
+  },
   "GetUsageLogs": {
     "description": "Get hourly usage for logs.",
     "summary": "Get hourly usage for Logs"
@@ -801,11 +809,11 @@
     "summary": "Get top 500 custom metrics by hourly average"
   },
   "GetUsageTrace": {
-    "description": "Get hourly usage for trace search.",
+    "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",
     "summary": "Get hourly usage for Trace Search"
   },
   "GetTracingWithoutLimits": {
-    "description": "Get hourly usage for tracing without limits.",
+    "description": "Get hourly usage for tracing without limits.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.",
     "summary": "Get hourly usage for tracing without limits"
   },
   "ListUsers": {
