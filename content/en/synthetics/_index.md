@@ -30,7 +30,7 @@ Synthetic tests allow you to observe how your systems and applications are perfo
 ## Getting Started
 Create your first Synthetic test and start monitoring web applications to improve their performance in just a few minutes.
 
-### Set up API tests
+### Set up API tests and Multistep API tests
 
 API tests allow you to launch [single][1] or [chained][2] requests to perform verifications on your key systems at various network levels: `HTTP`, `TCP`, `SSL`, and `DNS`. Create your first [HTTP test][3], [TCP test][4], [SSL test][5], or [DNS test][6] to get started with API and network monitoring.
 
