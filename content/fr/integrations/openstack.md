@@ -1,6 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    OpenStack Controller Overview: assets/dashboards/openstack-controller.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
 display_name: OpenStack
+draft: false
 git_integration_title: openstack
 guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack
@@ -31,6 +35,10 @@ supported_os:
   - mac_os
   - windows
 ---
+<div class="alert alert-warning">
+<b>Remarque importante</b> : cette intégration s'applique uniquement à OpenStack version 12 et versions antérieures (OpenStack non conteneurisé). Si vous souhaitez recueillir des métriques depuis OpenStack v13 ou une version ultérieure (OpenStack conteneurisé), utilisez l'<a href="https://docs.datadoghq.com/integrations/openstack_controller/">intégration OpenStack Controller.</a>
+</div>
+
 ![Dashboard par défaut OpenStack][1]
 
 ## Présentation
@@ -40,7 +48,7 @@ Recueillez des métriques du service OpenStack en temps réel pour :
 - Visualiser et surveiller les états OpenStack
 - Être informé des failovers et des événements OpenStack
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -158,25 +166,20 @@ Le check OpenStack n'inclut aucun événement.
 
 ### Checks de service
 
-**openstack.neutron.api.up** :
+**openstack.neutron.api.up** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à interroger l'API Neutron, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Neutron, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
+**openstack.nova.api.up** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à interroger l'API Nova, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
 
-**openstack.nova.api.up** :
+**openstack.keystone.api.up** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à interroger l'API Keystone. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Nova, renvoie `UNKNOWN` en cas de problème avec l'API Keystone ou renvoie `OK` pour les autres cas.
+**openstack.nova.hypervisor.up** :<br>
+Renvoie `UNKNOWN` si l'Agent ne parvient pas à obtenir l'état de l'hyperviseur, renvoie `CRITICAL` si l'hyperviseur est indisponible ou renvoie `OK` pour les autres cas.
 
-**openstack.keystone.api.up** :
-
-Renvoie `CRITICAL` si l'Agent n'est pas capable d'interroger l'API Keystone. Si ce n'est pas le cas, renvoie `OK`.
-
-**openstack.nova.hypervisor.up** :
-
-Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état de l'hyperviseur, renvoie `CRITICAL` si l'hyperviseur est indisponible ou renvoie `OK` pour les autres cas.
-
-**openstack.neutron.network.up** :
-
-Renvoie `UNKNOWN` si l'Agent n'est pas capable d'obtenir l'état du réseau, renvoie `CRITICAL` si le réseau est indisponible ou renvoie `OK` pour les autres cas.
+**openstack.neutron.network.up** :<br>
+Renvoie `UNKNOWN` si l'Agent ne parvient pas à obtenir l'état du réseau, renvoie `CRITICAL` si le réseau est indisponible ou renvoie `OK` pour les autres cas.
 
 ## Dépannage
 
@@ -198,7 +201,7 @@ Consultez également ces autres articles du blog de Datadog :
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/openstack/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/
 [9]: https://www.datadoghq.com/blog/openstack-monitoring-nova
 [10]: https://www.datadoghq.com/blog/install-openstack-in-two-commands
 [11]: https://www.datadoghq.com/blog/openstack-host-aggregates-flavors-availability-zones

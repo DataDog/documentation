@@ -30,12 +30,12 @@ Error Tracking を使用すると、以下の機能により簡単にエラー�
 
 ## はじめに
 
-Error Tracking では、RUM SDK によりブラウザから収集されたエラー ([ソース元][1]のあるエラー) を処理します。
+エラートラッキングは、RUM SDK によってブラウザから収集されたエラーを処理します。スタックトレースを含む[ソース][1]または[カスタム][2]エラーが収集されるたびに、エラートラッキングはそれを処理し、問題 (同様のエラーのグループ) にグループ化します。
 
 エラー追跡を素早く開始するには:
 
-1. [RUM Browser SDK][2] の最新バージョンをダウンロードします。
-2. [SDK の初期化時][3]に、__version__、__env__、__service__ を構成します。
+1. [RUM Browser SDK][3] の最新バージョンをダウンロードします。
+2. [SDK の初期化時][4]に、__version__、__env__、__service__ を構成します。
 
 ### マッピングファイルのアップロード
 
@@ -44,7 +44,7 @@ Error Tracking では、RUM SDK によりブラウザから収集されたエラ
 
 #### Javascript ソースマップ
 
-ソースマップは、Javascript のソースコードを縮小する際に生成されるマッピングファイルです。このマッピングファイルをビルドディレクトリからアップロードするために、[Datadog CLI][4] を使用できます（ビルドディレクトリとそのサブディレクトリをスキャンして、関連する縮小化ファイルとともにソースマップを自動的にアップロード）。CI パイプラインから、ソースマップを直接アップロードします。
+ソースマップは、Javascript のソースコードを縮小する際に生成されるマッピングファイルです。このマッピングファイルをビルドディレクトリからアップロードするために、[Datadog CLI][5] を使用できます（ビルドディレクトリとそのサブディレクトリをスキャンして、関連する縮小化ファイルとともにソースマップを自動的にアップロード）。CI パイプラインから、ソースマップを直接アップロードします。
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -83,14 +83,15 @@ datadog-ci sourcemaps upload /path/to/dist \
 ソースマップでエラー追跡が正常に動作するには、以下を満たすように Javascript バンドルを構成する必要があります。
 
 -   ソースマップが直接関連ソースコードを直接含むこと。アップロードする前に、ソースマップ内の <code>sourcesContent</code> 属性が空でないことを確認してください。
--   関連する縮小ファイルのサイズで拡張された各ソースマップのサイズが、__上限の 50mb__を越えないこと。この合計は、ソースコードを複数の小さい部分に分けるようバンドルを構成することで抑制することができます ([WebpackJS でこれを実行する方法はこちら][5])。
+-   関連する縮小ファイルのサイズで拡張された各ソースマップのサイズが、__上限の 50mb__を越えないこと。この合計は、ソースコードを複数の小さい部分に分けるようバンドルを構成することで抑制することができます ([WebpackJS でこれを実行する方法はこちら][6])。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/data_collected/error#error-origins
-[2]: https://www.npmjs.com/package/@datadog/browser-rum
-[3]: /ja/real_user_monitoring/browser/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/
-[5]: https://webpack.js.org/guides/code-splitting/
+[1]: /ja/real_user_monitoring/browser/data_collected/?tab=error#error-origins
+[2]: /ja/real_user_monitoring/browser/advanced_configuration#custom-errors
+[3]: https://www.npmjs.com/package/@datadog/browser-rum
+[4]: /ja/real_user_monitoring/browser/#initialization-parameters
+[5]: https://github.com/DataDog/datadog-ci/
+[6]: https://webpack.js.org/guides/code-splitting/
