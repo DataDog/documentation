@@ -13,7 +13,7 @@ further_reading:
 
 AWS Lambda Extensions are companion processes that augment your Lambda functions. They run within the Lambda execution environment, alongside your Lambda function code. The Datadog Extension is a lightweight version of the Datadog agent built to run alongside your code with minimal performance overhead.
 
-The Datadog Extension currently supports submitting custom metrics and logs [synchronously][1] while your AWS Lambda function executes. This means that you can submit some of your telemetry data without the [Datadog Forwarder][2]. Note that the Datadog Forwarder is still required to submit traces to Datadog.
+The Datadog Extension supports submitting custom metrics and logs [synchronously][1] while your AWS Lambda function executes. This means that you can submit some of your telemetry data without the [Datadog Forwarder][2]. **Note**: The Datadog Forwarder is still required to submit traces to Datadog.
 
 ## Setup
 
