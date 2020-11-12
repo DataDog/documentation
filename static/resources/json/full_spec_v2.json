@@ -35,6 +35,16 @@
           "type": "string"
         }
       },
+      "IncidentServiceSearchQueryParameter": {
+        "description": "A search query that filters services by name.",
+        "in": "query",
+        "name": "filter",
+        "required": false,
+        "schema": {
+          "example": "ExampleServiceName",
+          "type": "string"
+        }
+      },
       "IncidentTeamIDPathParameter": {
         "description": "The ID of the incident team.",
         "in": "path",
@@ -53,6 +63,16 @@
           "enum": [
             "users"
           ],
+          "type": "string"
+        }
+      },
+      "IncidentTeamSearchQueryParameter": {
+        "description": "A search query that filters teams by name.",
+        "in": "query",
+        "name": "filter",
+        "required": false,
+        "schema": {
+          "example": "ExampleTeamName",
           "type": "string"
         }
       },
@@ -27138,7 +27158,7 @@
     "/api/v2/services": {
       "get": {
         "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
-        "operationId": "GetIncidentServices",
+        "operationId": "ListIncidentServices",
         "parameters": [
           {
             "description": "Specifies which types of related objects should be included in the response.",
@@ -27172,6 +27192,16 @@
               "default": 0,
               "format": "int64",
               "type": "integer"
+            }
+          },
+          {
+            "description": "A search query that filters services by name.",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "example": "ExampleServiceName",
+              "type": "string"
             }
           }
         ],
@@ -29604,7 +29634,7 @@
     "/api/v2/teams": {
       "get": {
         "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
-        "operationId": "GetIncidentTeams",
+        "operationId": "ListIncidentTeams",
         "parameters": [
           {
             "description": "Specifies which types of related objects should be included in the response.",
@@ -29638,6 +29668,16 @@
               "default": 0,
               "format": "int64",
               "type": "integer"
+            }
+          },
+          {
+            "description": "A search query that filters teams by name.",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "schema": {
+              "example": "ExampleTeamName",
+              "type": "string"
             }
           }
         ],
