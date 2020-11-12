@@ -81,13 +81,13 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
         - `ExperimentalFeatures__Enabled`: `true`
         - `ExperimentalFeatures__EnableMetrics`: `true`
 
-1. **Edge Hub** ランタイムモジュールを以下のように構成します。
+2. **Edge Hub** ランタイムモジュールを以下のように構成します。
     - イメージバージョンは `1.0.10` 以上である必要があります。
     - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
         - `ExperimentalFeatures__Enabled`: `true`
         - `ExperimentalFeatures__EnableMetrics`: `true`
 
-1. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
+3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)
     - Agent のイメージ URI を設定します。(例: `datadog/agent:7`)
     - "Environment Variables" で `DD_API_KEY` を構成します。ここで、追加の Agent コンフィギュレーションを設定することも可能です ([Agent の環境変数][6]参照)。
@@ -116,18 +116,18 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
 
     - Datadog Agent カスタムモジュールを保存します。
 
-1. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
+4. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
 
 #### ログの収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。Datadog Agent カスタムモジュールを構成することで、これを有効にします。
-  - "Environment Variables" で、`DD_LOGS_ENABLED` 環境変数を設定します。
+    - "Environment Variables" で、`DD_LOGS_ENABLED` 環境変数を設定します。
 
-    ```yaml
-    DD_LOGS_ENABLED: true
-    ```
+        ```yaml
+        DD_LOGS_ENABLED: true
+        ```
 
-1. "Create Options" で **Edge Agent** および **Edge Hub** モジュールを構成し、以下のラベルを追加します。
+2. "Create Options" で **Edge Agent** および **Edge Hub** モジュールを構成し、以下のラベルを追加します。
 
     ```json
     "Labels": {
@@ -140,7 +140,7 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
 
     ログを収集するカスタムモジュールに、この操作を繰り返します。
 
-1. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
+3. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
 
 ### 検証
 

@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md'
 display_name: Gitlab
+draft: false
 git_integration_title: gitlab
 guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
@@ -162,10 +163,17 @@ Gitlab チェックには、イベントは含まれません。
 
 Gitlab チェックには、サービスのチェック機能として Health、Readiness、Liveness が含まれます。 
 
-`gitlab.prometheus_endpoint_up`: チェックが Gitlab インスタンスの Prometheus メトリクスのエンドポイントにアクセスできない場合は `CRITICAL` を返します。
-`gitlab.health`: チェックが Gitlab インスタンスにアクセスできない場合は、`CRITICAL` を返します。
-`gitlab.liveness`: Rails コントローラーのデッドロックが原因で Gitlab インスタンスにアクセスできない場合は、`CRITICAL` を返します。
-`gitlab.readiness`: Gitlab インスタンスが Rails コントローラー経由でトラフィックを受け入れられる場合は、`CRITICAL` を返します。
+**gitlab.prometheus_endpoint_up**:<br>
+チェックが Gitlab インスタンスの Prometheus メトリクスエンドポイントにアクセスできない場合は `CRITICAL` を返します。
+
+**gitlab.health**:<br>
+チェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
+
+**gitlab.liveness**:<br>
+Rails Controllers とのデッドロックのためにチェックが Gitlab インスタンスにアクセスできない場合は `CRITICAL` を返します。
+
+**gitlab.readiness**:<br>
+Gitlab インスタンスが Rails Controllers を介してトラフィックを受け入れることができる場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 
@@ -231,11 +239,11 @@ Runner の Prometheus メトリクスエンドポイントおよびサービス�
    usermod -a -G systemd-journal dd-agent
    ```
 
-4. CouchDB のログの収集を開始するには、次の構成ブロックを `gitlab_runner.d/conf.yaml` ファイルに追加します。
+4. Gitlab Runner のログの収集を開始するには、次の構成ブロックを `gitlab_runner.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
-     - type: jounrald
+     - type: journald
        source: gitlab-runner
    ```
 

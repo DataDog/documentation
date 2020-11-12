@@ -140,7 +140,7 @@ Pour tirer parti du CRD `DatadogMetric`, suivez les étapes ci-dessous :
 1. Installez le CRD `DatadogMetric` dans votre cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics_crd.yaml"
     ```
 
 2. Mettez à jour le manifeste RBAC de l'Agent de cluster Datadog. La mise à jour permet d'utiliser le CRD `DatadogMetric`.
