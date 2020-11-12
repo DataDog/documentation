@@ -41,7 +41,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 
 ### Log Collection
 
-To submit your AWS Lambda logs to Datadog using the Extension, set the env variable `DD_LOGS_ENABLED` to `true` on your function. This additionally generates Datadog's [enhanced metrics][11] automatically.
+To submit your AWS Lambda logs to Datadog using the Extension, set the env variable `DD_LOGS_ENABLED` to `true` in your function. Additionally, this generates Datadog's [enhanced metrics][11].
 
 ## Further Reading
 
