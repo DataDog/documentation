@@ -202,12 +202,13 @@ To create a variable, first give it a name then define its value from:
 
 Create a variable by defining its value from one of the below available builtins: 
 
-| Pattern                 | Description                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------|
-| `{{ numeric(n) }}`      | Generates a numeric string with `n` digits.                                                               |
-| `{{ alphabetic(n) }}`   | Generates an alphabetic string with `n` letters.                                                           |
-| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with `n` characters.                                                     |
-| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days. |
+| Pattern                    | Description                                                                                                 |
+|----------------------------|-------------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`         | Generates a numeric string with `n` digits.                                                                 |
+| `{{ alphabetic(n) }}`      | Generates an alphabetic string with `n` letters.                                                            |
+| `{{ alphanumeric(n) }}`    | Generates an alphanumeric string with `n` characters.                                                       |
+| `{{ date(n, format) }}`    | Generates a date in one of our accepted formats with a value of the date the test is initiated + `n` days.        |
+| `{{ timestamp(n, unit) }}` | Generates a timestamp in one of our accepted units with a value of the timestamp the test is initiated at +/- `n` chosen unit. |
 
 #### An Element
 
@@ -311,12 +312,12 @@ To define your HTTP request:
 
 Optionally, you can base your step success on assertions about the defined HTTP request:
 
-| Type          | Value type                 | Operator                                                                      |
-|---------------|----------------------------|-------------------------------------------------------------------------------|
-| Status Code   | _Integer_                  | `is`, `is not`                                                                 |
-| Response time | _Integer (ms)_             | `lessThan`                                                                     |
-| Headers       | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
-| Body          | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Type          | Operator                                                                                               | Value type                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10_                                      |
+| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
