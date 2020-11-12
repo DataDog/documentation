@@ -2481,12 +2481,30 @@ components:
             description: IPv4 prefix
             type: string
           type: array
+        prefixes_ipv4_by_location:
+          additionalProperties:
+            description: List of IPv4 prefixes.
+            items:
+              description: IPv4 prefix.
+              type: string
+            type: array
+          description: List of IPv4 prefixes by location.
+          type: object
         prefixes_ipv6:
           description: List of IPv6 prefixes.
           items:
             description: IPv6 prefix
             type: string
           type: array
+        prefixes_ipv6_by_location:
+          additionalProperties:
+            description: List of IPv6 prefixes.
+            items:
+              description: IPv6 prefix.
+              type: string
+            type: array
+          description: List of IPv6 prefixes by location.
+          type: object
       type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
