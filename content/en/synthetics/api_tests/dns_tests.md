@@ -34,7 +34,7 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 {{< img src="synthetics/api_tests/dns_test_config.png" alt="Define DNS query"  style="width:90%;" >}}
 
 1. Specify the **Domain** you want your test to query, e.g., `www.example.com`.
-2. Specify the `DNS Server` to use (optional). If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
+2. Specify the `DNS Server` to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. **Name** your DNS test.
 4. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
 5. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
