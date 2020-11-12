@@ -702,6 +702,11 @@ function getPathElement() {
         maPath = document.querySelector('header [data-path*="logs/guide"]');
     }
 
+    if (path === 'real_user_monitoring') {
+        aPath = document.querySelector('.side [data-path="real_user_monitoring"]');
+        maPath = document.querySelector('header [data-path="real_user_monitoring"]');
+    }
+
     if (path.includes('security/logs')) {
         aPath = document.querySelectorAll(
             '.side [data-path*="security/logs"]'
