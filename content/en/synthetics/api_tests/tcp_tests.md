@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-TCP tests allow you to easily **monitor that low-level TCP connections can be established on the ports of given hosts**, ensuring availability of a variety of key services: e.g., `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. Thanks to built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.  
+TCP tests allow you to easily **monitor that low-level TCP connections can be established on the ports of given hosts**, ensuring availability of a variety of key services: e.g., `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. Thanks to built-in response time data, you can keep track of the performance of your network applications and be alerted in case of unexpected slowness.
 TCP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to launch your TCP connections from **outside or inside your network**.
 
 ## Configuration
@@ -43,14 +43,14 @@ TCP tests can run:
 
 * **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency you want Datadog to run your TCP test.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
 * [**Within your CI/CD pipelines**][8].
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time` is added. You must define at least one assertion for your test to monitor. 
+Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time` is added. You must define at least one assertion for your test to monitor.
 
 | Type          | Operator                                                                | Value type     |
 |---------------|-------------------------------------------------------------------------|----------------|
@@ -58,7 +58,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your TCP test" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your TCP test" style="width:90%;" >}}
 
 ### Define alert conditions
 
@@ -76,13 +76,13 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][9].
 
 
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime. 
+Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
 ### Notify your team
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams. 
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box. 
+1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
 
@@ -106,7 +106,7 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by defining their values from one of the below available builtins: 
+You can create local variables by defining their values from one of the below available builtins:
 
 | Pattern                    | Description                                                                                                 |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|
@@ -118,7 +118,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.   
+You can use the [global variables defined in the `Settings`][13] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}

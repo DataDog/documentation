@@ -12,17 +12,17 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run Multistep API tests on internal endpoints"
-
 ---
 
 ## Overview
 
-Multistep API tests allow you to **chain [HTTP tests][1]** to proactively monitor that sophisticated journeys on your key services are available at anytime and from anywhere: 
+Multistep API tests allow you to **chain [HTTP tests][1]** to proactively monitor that sophisticated journeys on your key services are available at anytime and from anywhere:
+
 * Execute HTTP requests on API endpoints requiring authentication (e.g., through a token);
 * Monitor key business transactions at the API level;
 * Simulate end-to-end mobile applications journeys, etc.
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/ms_overview.png" alt="Multistep API test overview" style="width:90%;" >}}
 
 If one of your services starts answering more slowly, or in an unexpected way (e.g., unexpected response body, status code, etc.), your test [**alerts your team**][2], [**blocks your CI pipeline**][3], or even [**rolls back the faulty deployment**][3].
 
@@ -45,15 +45,15 @@ Select the **Locations** to run your Multistep API test from: Multistep API test
 
 Hit **Create Your First Request** to start designing your test's requests.
 
-{{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/create_request.png" alt="Create your Multistep API test requests"  style="width:90%;" >}}
 
 #### Define the request
 
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
 
 1. **Name** your step.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-3. Enrich your HTTP request with **Advanced Options** (optional): 
+3. Enrich your HTTP request with **Advanced Options** (optional):
 
   {{< tabs >}}
 
@@ -77,7 +77,7 @@ Hit **Create Your First Request** to start designing your test's requests.
 
   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-    
+
   {{% /tab %}}
 
   {{% tab "Proxy" %}}
@@ -97,7 +97,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
 | header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10_                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
@@ -106,7 +106,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 You can create up to 10 assertions per step by clicking on **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your Multistep API test" style="width:90%;" >}}
 
 #### Extract variables from the response
 
@@ -117,10 +117,10 @@ To parse your variable:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers, or from the response body:
 
-    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][8].
-    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][8] or a [JSONPath][9].
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][10].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][10] or a [JSONPath][8].
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
 
 Once created this variable can be used in the following steps of your Multistep API test.
 
@@ -130,7 +130,7 @@ Multistep API tests can run:
 
 * **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Multistep API test.
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule"  style="width:90%;" >}}
 
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
@@ -148,16 +148,16 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 #### Fast retry
 
-Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][10].
+Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][9].
 
 
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime. 
+Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
 ### Notify your team
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams. 
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box. 
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
@@ -187,7 +187,7 @@ You can [extract variables from any step of your Multistep API test](#extract-va
 
 #### Variables from pattern
 
-You can create local variables by defining their values from one of the below available builtins: 
+You can create local variables by defining their values from one of the below available builtins:
 
 | Pattern                    | Description                                                                                                 |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|
@@ -199,7 +199,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.   
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in Multistep API tests" video="true" width="90%" >}}
@@ -227,9 +227,9 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 [5]: /synthetics/private_locations
 [6]: /synthetics/api_tests/
 [7]: /synthetics/search/#search
-[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[9]: https://restfulapi.net/json-jsonpath/
-[10]: /api/v1/synthetics/#create-a-test
+[8]: https://restfulapi.net/json-jsonpath/
+[9]: /api/v1/synthetics/#create-a-test
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /monitors/notifications/?tab=is_alert#notification
 [12]: http://daringfireball.net/projects/markdown/syntax
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

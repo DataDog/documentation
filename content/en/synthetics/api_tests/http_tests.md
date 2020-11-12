@@ -15,11 +15,11 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run HTTP tests on internal endpoints"
-
 ---
 ## Overview
 
-HTTP tests allow you to **send HTTP requests to your applications' API endpoints** in order to verify that they are responding to requests, as well as that they meet any conditions you define-such as overall response time, status code, and header or body content.    
+HTTP tests allow you to **send HTTP requests to your applications' API endpoints** in order to verify that they are responding to requests, as well as that they meet any conditions you define-such as overall response time, status code, and header or body content.
+
 HTTP tests can be run from [**managed**][1] and [**private locations**][2] depending on whether you are willing to monitor your endpoints from outside or inside your network. HTTP tests can run **on a schedule**, **on-demand**, or directly **within your [CI/CD pipelines][3]**.
 
 ## Configuration
@@ -31,7 +31,7 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 
 1. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-2. Enrich your HTTP request with **Advanced Options** (optional): 
+2. Enrich your HTTP request with **Advanced Options** (optional):
 
   {{< tabs >}}
 
@@ -55,7 +55,7 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-    
+
   {{% /tab %}}
 
   {{% tab "Proxy" %}}
@@ -86,7 +86,7 @@ HTTP tests can run:
 
 ### Define assertions
 
-Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor. 
+Assertions define what an expected test result is. When hitting `Test URL` basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -99,7 +99,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 
 You can create up to 10 assertions per API test by clicking on **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}} 
+{{< img src="synthetics/api_tests/assertions.png" alt="Define assertions for your HTTP test" style="width:90%;" >}}
 
 ### Define alert conditions
 
@@ -117,13 +117,13 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
 
 
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime. 
+Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
 ### Notify your team
 
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams. 
+A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box. 
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
@@ -147,7 +147,7 @@ Click on **Save** to save your test and have Datadog start executing it.
 
 ### Create local variables
 
-You can create local variables by defining their values from one of the below available builtins: 
+You can create local variables by defining their values from one of the below available builtins:
 
 | Pattern                    | Description                                                                                                 |
 |----------------------------|-------------------------------------------------------------------------------------------------------------|
@@ -159,7 +159,7 @@ You can create local variables by defining their values from one of the below av
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.   
+You can use the [global variables defined in the `Settings`][15] and the [locally defined variables](#create-local-variables) in the URL, Advanced Options, and assertions of your HTTP tests.
 To display your list of variables, type `{{` in your desired field:
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}

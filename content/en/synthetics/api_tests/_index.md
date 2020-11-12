@@ -27,12 +27,12 @@ further_reading:
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run API tests on internal endpoints"
-
 ---
 
 ## Overview
 
-API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in four different flavors that allow you to launch requests on the **different network layers** of your systems: 
+API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in four different flavors that allow you to launch requests on the **different network layers** of your systems:
+
 - [`HTTP` test][1],
 - [`SSL` test][2],
 - [`TCP` test][3],
@@ -40,11 +40,11 @@ API tests are useful to help you **proactively monitor that your most important 
 
 {{< img src="synthetics/api_tests/api_tests.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
 
-If your service starts answering more slowly, or in an unexpected way (e.g., unexpected response body, wrong A record, etc.), your test [**alerts your team**][6], [**blocks your CI pipeline**][7], or even [**rolls back the faulty deployment**][7].
+If your service starts answering more slowly, or in an unexpected way (e.g., unexpected response body, wrong A record, etc.), your test [**alerts your team**][5], [**blocks your CI pipeline**][6], or even [**rolls back the faulty deployment**][6].
 
-API tests can run from Datadog [managed locations][8] and [private locations][9], allowing **full coverage of your systems**, both external and internal.
+API tests can run from Datadog [managed locations][7] and [private locations][8], allowing **full coverage of your systems**, both external and internal.
 
-**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, you can also chain your requests using [Multistep API tests][5].
+**Note**: API tests are single requests executed against your services. If you want to monitor sophisticated business transactions at the API level or endpoints that require authentication, you can also chain your requests using [Multistep API tests][9].
 
 ## Further Reading
 
@@ -54,8 +54,8 @@ API tests can run from Datadog [managed locations][8] and [private locations][9]
 [2]: /synthetics/api_tests/ssl_tests
 [3]: /synthetics/api_tests/tcp_tests
 [4]: /synthetics/api_tests/dns_tests
-[5]: /synthetics/multistep/
-[6]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[7]: /synthetics/ci
-[8]: /api/v1/synthetics/#get-all-locations-public-and-private
-[9]: /synthetics/private_locations
+[5]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[6]: /synthetics/ci
+[7]: /api/v1/synthetics/#get-all-locations-public-and-private
+[8]: /synthetics/private_locations
+[9]: /synthetics/multistep/
