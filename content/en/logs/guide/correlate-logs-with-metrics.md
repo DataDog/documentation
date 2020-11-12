@@ -21,9 +21,9 @@ This guide shows you how to correlate logs and metrics throughout these views.
 
 ## Log Explorer
 
-To correlate logs and metrics in [Log Explorer][4]:
+To correlate logs and metrics in the [Log Explorer][4]:
 
-1. Click on any log under **Content**. This populates a panel with detailed information about the log.
+1. Click on any log under the **Content** column. This expands a panel with detailed information about the log.
 2. Click on the **Metrics** tab within the panel.
 
 {{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.png" alt="Setting file permission"  >}}
