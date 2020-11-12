@@ -27,9 +27,9 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 ### Kubernetes Resources
 
-The Agent and [Cluster Agent][5] can be configured to retrieve Kubernetes resources for [Live Containers][6]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][5]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
-Kubernetes resources for Live Containers requires [Agent version >= 7.21.1][7] prior to the configurations below.
+Kubernetes resources for Live Containers requires [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] prior to the configurations below.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -37,6 +37,7 @@ Kubernetes resources for Live Containers requires [Agent version >= 7.21.1][7] p
 If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version 2.4.5 or above
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above.
 - Set `datadog.orchestratorExplorer.enabled` to true in [values.yaml][2]
 - Deploy a new release
 
@@ -46,16 +47,16 @@ If you are using the official [Datadog Helm Chart][1]:
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-To configure a DaemonSet, [Cluster Agent][1] version >= 1.9.0 is required. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
+1. [Cluster Agent][1] version >= 1.9.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
 
-1. Set the Cluster Agent container with the following environment variable:
+- Set the Cluster Agent container with the following environment variable:
 
       ```
       - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
         value: "true"
       ```
 
-2. Set the Cluster Agent ClusterRole with the following RBAC permissions:
+- Set the Cluster Agent ClusterRole with the following RBAC permissions:
 
     ```
       ClusterRole:
@@ -86,11 +87,11 @@ To configure a DaemonSet, [Cluster Agent][1] version >= 1.9.0 is required. The C
         - watch
       ```
 
-    These permissions are needed in order to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
+    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
 
-3. The Process-agent must be running (it doesn't need to run the process collection), and configured with the following options:
+2. The Process Agent, which runs in the Agent DaemonSet, must be running (it doesn't need to run the process collection), and configured with the following options:
 
     ```
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
@@ -101,7 +102,6 @@ To configure a DaemonSet, [Cluster Agent][1] version >= 1.9.0 is required. The C
         name: datadog-cluster-id
         key: id
     ```
-
 
 [1]: /agent/cluster_agent/
 [2]: /agent/cluster_agent/setup/
@@ -302,9 +302,9 @@ You can see logs that you have chosen to index and persist by selecting a corres
 [2]: /integrations/docker_daemon/
 [3]: /agent/kubernetes/
 [4]: /agent/amazon_ecs/
-[5]: /agent/cluster_agent/setup/
-[6]: https://app.datadoghq.com/orchestration/overview
-[7]: /agent/
+[5]: https://app.datadoghq.com/orchestration/overview
+[6]: /agent/
+[7]: /agent/cluster_agent/setup/
 [8]: /tagging/assigning_tags?tab=agentv6v7#host-tags
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /dashboards/widgets/timeseries/
