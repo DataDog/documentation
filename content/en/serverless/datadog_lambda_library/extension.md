@@ -13,7 +13,7 @@ further_reading:
 
 AWS Lambda Extensions are companion processes that augment your Lambda functions. They run within the Lambda execution environment, alongside your Lambda function code. The Datadog Extension is a lightweight version of the Datadog agent built to run alongside your code with minimal performance overhead.
 
-The Datadog Extension currently supports submitting custom metrics [synchronously][1] while your AWS Lambda function executes. This means that you can submit your custom metrics without the [Datadog Forwarder][2]. Note that the Datadog Forwarder is still required to submit logs and traces to Datadog.
+The Datadog Extension currently supports submitting custom metrics and logs [synchronously][1] while your AWS Lambda function executes. This means that you can submit some of your telemetry data without the [Datadog Forwarder][2]. Note that the Datadog Forwarder is still required to submit traces to Datadog.
 
 ## Setup
 
@@ -24,7 +24,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 2. Add the Lambda Layer for the Datadog Extension to your AWS Lambda function:
 
     ```
-    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:3
+    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:4
     ```
 
     Replace the placeholder `AWS_REGION` in the Lambda Layer ARN with appropriate values.
@@ -38,6 +38,12 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
     The available `RUNTIME` options are `Node8-10`, `Node10-x`, `Node12-x`, `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
 
 4. Reference the [sample code][10] to submit a custom metric.
+
+### Log Collection
+
+To submit your AWS Lambda logs to Datadog using the Extension, set the env variable `DD_LOGS_ENABLED` to `true` on your function. This additionally generates Datadog's [enhanced metrics][11] automatically.
+
+Note that this sends your logs directly to Datadog, and not first to Amazon CloudWatch.
 
 ## Further Reading
 
@@ -54,3 +60,4 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
 [8]: https://github.com/DataDog/datadog-lambda-js/releases
 [9]: https://github.com/DataDog/datadog-lambda-python/releases
 [10]: /serverless/custom_metrics#custom-metrics-sample-code
+[11]: /serverless/enhanced_lambda_metrics
