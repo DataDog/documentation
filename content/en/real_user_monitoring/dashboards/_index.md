@@ -31,11 +31,11 @@ RUM dashboards are generated for all your applications with a set of default tem
 
 {{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" style="width:50%;" >}}
 
-### View related views
+### View RUM events
 
-To explore all the individual events, click on any graph and select _View related views_ to be redirected to the RUM Explorer with the currently selected filters.
+To explore all the individual events, click on any graph and select _View RUM events_ to be redirected to the RUM Explorer with the currently selected filters.
 
-{{< img src="real_user_monitoring/dashboards/view_related_views.gif" alt="View related views" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="View RUM events" style="width:80%;" >}}
 
 ### Customize dashboards
 
