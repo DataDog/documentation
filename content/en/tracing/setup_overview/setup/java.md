@@ -264,6 +264,7 @@ System properties can be set as JVM flags.
 | `dd.hystrix.tags.enabled` | `DD_HYSTRIX_TAGS_ENABLED` | False | By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them. |
 | `dd.trace.servlet.async-timeout.error` | `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` | True | By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests. |
 | `dd.trace.startup.logs`                | `DD_TRACE_STARTUP_LOGS`                | True | When `false`, informational startup logging is disabled. Available for versions 0.64+. |
+| `dd.trace.servlet.principal.enabled`                | `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`                | False | When `true`, user principal is collected. Available for versions 0.61+. |
 
 
 **Note**:
