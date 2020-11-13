@@ -39,7 +39,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
     ```diff
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
 4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][4].
@@ -66,7 +66,7 @@ The Datadog Profiler requires [JDK Flight Recorder][1]. The Datadog Profiler lib
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
-- By default, The Datadog Profiler keeps the bottom 256 frames in a Java profile. If your application creates stacks deeper than 256 frames, you can increase the threshold by passing a `-XX:FlightRecorderOptions=stackdepth=` option to your JVM.  For example:
+- If your application creates stacks deeper than 256 frames, you can increase the threshold by customizing the `-XX:FlightRecorderOptions=stackdepth=` option. If you do not specify a `stackdepth` the JVM default is 64.
     ```shell
     java -javaagent:dd-java-agent.jar -XX:FlightRecorderOptions=stackdepth=512 ...
     ```
