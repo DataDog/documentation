@@ -66,7 +66,7 @@ Override templates let you specify profiling properties to override. However, th
     touch dd-profiler-overrides.jfp
     ```
 
-2. Add your desired overrides to the jfp file. For example, if you wanted to disable allocation profiling and JVM system properties, your `dd-profiler-overrides.jfp` file would look as following:
+2. Add your desired overrides to the jfp file. For example, to disable allocation profiling and JVM system properties, your `dd-profiler-overrides.jfp` file would look like the following:
 
     {{< code-block lang="text" filename="example-template.jfp" >}}
     jdk.ObjectAllocationInNewTLAB#enabled=false
