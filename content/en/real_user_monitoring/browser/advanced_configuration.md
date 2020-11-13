@@ -177,6 +177,36 @@ window.DD_RUM &&
 
 **Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
+### Read global context
+
+Once Real User Monitoring (RUM) is initialized, read the global context with the `getRumGlobalContext()` API:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const context = datadogRum.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+  var context = DD_RUM.getRumGlobalContext();
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Custom user actions
 
 Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API:
