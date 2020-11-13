@@ -19,56 +19,30 @@ Datadog Agent のコミュニティ開発のインテグレーションは、[In
 
 `<インテグレーション名>` チェックをホストにインストールするには
 
-1. [開発ツールキット][1]をインストールします。
-2. integrations-extras リポジトリを複製します。
+1. [Datadog Agent をダウンロードして起動][1]します。
+2. 次のコマンドを実行して、Agent でインテグレーションをインストールします。
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    datadog-agent integration install -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
 
-3. `ddev` 構成を `integrations-extras/` パスで更新します。
+3. [他のパッケージ化されたインテグレーション][2]と同様にインテグレーションを構成します。
+4. [Agent を再起動します][3]。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
-
-4. `<インテグレーション名>` パッケージをビルドします。
-
-    ```
-    ddev -e release build <INTEGRATION_NAME>
-    ```
-
-5. [Datadog Agent をダウンロードして起動][2]します。
-6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
-
-    ```
-    datadog-agent integration install -w <PATH_OF_INTEGRATION_NAME_PACKAGE>/<ARTIFACT_NAME>.whl
-    ```
-
-7. [他のパッケージ化されたインテグレーション][3]と同様にインテグレーションを構成します。
-8. [Agent を再起動します][4]。
-
-[1]: /ja/developers/integrations/new_check_howto/#developer-toolkit
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: /ja/getting_started/integrations/
-[4]: /ja/agent/guide/agent-commands/#restart-the-agent
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: /ja/getting_started/integrations/
+[3]: /ja/agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 integrations-extra からの Docker Agent とのインテグレーションを使用する最良の方法は、このインテグレーションがインストールされた Agent をビルドすることです。次の Dockerfile を使用して、integrations-extra からの `<インテグレーション名>` インテグレーションを含む Agent の更新バージョンをビルドします。
 
-```text
-FROM python:3.8 AS wheel_builder
-WORKDIR /wheels
-RUN pip install "datadog-checks-dev[cli]"
-RUN git clone https://github.com/DataDog/integrations-extras.git
-RUN ddev config set extras ./integrations-extras
-RUN ddev -e release build  <インテグレーション名>
-
+```dockerfile
 FROM datadog/agent:latest
-COPY --from=wheel_builder /wheels/integrations-extras/<インテグレーション名>/dist/ /dist
-RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
+RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
+
+Docker 内で実行された `agent Integration install` コマンドは、無害な警告 `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn` を発行します。この警告は無視してかまいません。
 
 次に、この新しい Agent イメージを[オートディスカバリー][1]と組み合わせて使用して、`<インテグレーション名>` チェックを有効にします。
 

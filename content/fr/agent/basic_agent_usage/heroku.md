@@ -25,19 +25,11 @@ heroku buildpacks:add heroku/ruby
 heroku labs:enable runtime-dyno-metadata -a $(heroku apps:info|grep ===|cut -d' ' -f2)
 
 # Ajouter ce buildpack et définir votre clé d'API Datadog
-heroku buildpacks:add https://github.com/DataDog/heroku-buildpack-datadog.git#<VERSION_BUILDPACK_DATADOG>
+heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git#<VERSION_BUILDPACK_DATADOG>
 heroku config:add DD_API_KEY=<CLÉ_API_DATADOG>
 
 # Déployer vers Heroku
 git push heroku master
-```
-
-**Avertissement** : les buildpacks qui installent des paquets apt (p. ex. [apt][3], [les dépendances de puppeteer][4]) et les buildpacks qui modifient le dossier `/app` (p. ex. [monorepo][5]) doivent être ajoutés *avant* le buildpack Datadog. Par exemple, si votre application utilise les buildpacks `ruby`, `datadog` et `apt`, une sortie valide pour `heroku buildpacks` serait :
-
-```text
-1. heroku/ruby
-2. https://github.com/heroku/heroku-buildpack-apt.git
-3. https://github.com/DataDog/heroku-buildpack-datadog.git
 ```
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][6].
@@ -46,6 +38,16 @@ Remplacez `<VERSION_BUILDPACK_DATADOG>` par la [version du buildpack][7] que vou
 Une fois terminé, l'Agent Datadog se lance automatiquement à chaque démarrage de dyno.
 
 L'Agent Datadog fournit un port d'écoute sur le port `8125` pour les métriques et événements StatsD/DogStatsD. Les traces sont recueillies sur le port `8126`.
+
+<div class="alert alert-warning">
+Avertissement : le dernier buildpack dans la liste sera utilisé pour déterminer le type de processus pour l'application. En outre, les buildpacks qui installent des paquets apt (p. ex. [apt][3] ou [les dépendances puppeteer][4]) et les buildpacks qui modifient le dossier `/app` (p. ex. [monorepo][5]) doivent être ajoutés *avant* le buildpack Datadog. Par exemple, si votre application utilise les buildpacks `ruby`, `datadog` et `apt`, une sortie valide pour `heroku buildpacks` serait :
+
+```text
+1. https://github.com/heroku/heroku-buildpack-apt.git
+2. https://github.com/DataDog/heroku-buildpack-datadog.git
+3. heroku/ruby
+```
+</div>
 
 ## Mises à jour et recompilation du slug
 
@@ -86,6 +88,7 @@ Outre l'exemple ci-dessus, vous pouvez définir un certain nombre de variables d
 | `DD_HOSTNAME`              | *Facultatif*. **ATTENTION** : la définition manuelle du hostname peut entraîner des erreurs de continuité des métriques. Nous vous conseillons de ne *pas* définir cette variable. Étant donné que les hosts dyno sont éphémères, il est recommandé d'effectuer votre suivi en fonction des tags `dynoname` ou `appname`.                                                                                                                                                                                                                                                       |
 | `DD_DYNO_HOST`             | *Facultatif*. Définissez cette variable sur `true` pour utiliser le nom du dyno (p. ex., `web.1` ou `run.1234`) comme hostname. Consultez la [section Hostname](#hostname) ci-dessous pour en savoir plus. Valeur par défaut : `false`.                                                                                                                                                                                                                                                                                                                                          |
 | `DD_TAGS`                  | *Facultatif*. Définit des tags supplémentaires fournis en tant que chaînes séparées par des espaces. (**Remarque** : jusqu'à la version `1.16` du buildpack, les chaînes doivent être séparées par des virgules ; cette délimitation reste prise en charge à des fins de rétrocompatibilité). Exemple : `heroku config:set DD_TAGS="simple-tag-0 tag-key-1:tag-value-1"`. Le buildpack ajoute automatiquement les tags `dyno` qui représentent le nom du dyno (p. ex., web.1) et `dynotype` (le type de dyno, p. ex., `run` ou `web`). Consultez le [Guide d'utilisation des tags][8] pour en savoir plus.                                                                                                                                                             |
+| `DD_VERSION`                  | *Facultatif*. Définit la version de votre application. Permet d'organiser les traces en fonction de la version.                                                                                                                                          |
 | `DD_HISTOGRAM_PERCENTILES` | *Facultatif*. Permet de définir des centiles supplémentaires pour vos métriques histogram. Voir la section [Représentation des centiles dans Datadog][9].                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `DISABLE_DATADOG_AGENT`    | *Facultatif*. Définissez cette variable pour empêcher l'exécution de l'Agent Datadog.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `DD_APM_ENABLED`           | *Facultatif*. La collecte de traces est activée par défaut. Définissez cette variable sur `false` pour la désactiver. Si vous modifiez cette option, vous devrez recompiler le slug. Consultez la section [Mises à jour et recompilation du slug](#mises-a-jour-et-recompilation-du-slug) pour en savoir plus.                                                                                                                                                                                                                                                          |
@@ -148,19 +151,24 @@ instances:
 
 ## Script de pré-exécution
 
-Outre les étapes de configuration ci-dessus, vous pouvez ajouter un script de pré-exécution, `/datadog/prerun.sh`, à votre application. Le script de pré-exécution s'exécute après toutes les actions de configuration standard et juste avant le lancement de l'Agent Datadog. Il vous permet de modifier les variables d'environnement, d'effectuer des configurations supplémentaires ou même de désactiver l'Agent Datadog automatiquement.
+Outre les étapes de configuration ci-dessus, vous pouvez ajouter un script de pré-exécution, `/datadog/prerun.sh`, à votre application. Le script de pré-exécution s'exécute après toutes les actions de configuration standard et juste avant le lancement de l'Agent Datadog. Il vous permet de modifier les variables d'environnement (par exemple, DD_TAGS ou DD_VERSION), d'effectuer des configurations supplémentaires ou même de désactiver l'Agent Datadog automatiquement.
 
 L'exemple ci-dessous illustre quelques actions que vous pouvez accomplir à l'aide du script `prerun.sh` :
 
 ```shell
 #!/usr/bin/env bash
 
-# Désactiver l'Agent Datadog en fonction du type de dyno.
+# Désactiver l'Agent Datadog en fonction du type de dyno
 if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku.
+# Définir la version de l'application en fonction de HEROKU_SLUG_COMMIT
+if [ -n "$HEROKU_SLUG_COMMIT" ]; then
+  DD_VERSION=$HEROKU_SLUG_COMMIT
+fi
+
+# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku
 if [ -n "$DATABASE_URL" ]; then
   POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
   if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
@@ -168,7 +176,7 @@ if [ -n "$DATABASE_URL" ]; then
     sed -i "s/<VOTRE NOM D'UTILISATEUR>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
     sed -i "s/<VOTRE MOT DE PASSE>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
     sed -i "s/<VOTRE PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<LE NOM DE VOTRE BDD>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<NOM DE VOTRE BDD>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
   fi
 fi
 ```
@@ -220,9 +228,10 @@ Par exemple, si vous créez votre image Docker depuis un système d'exploitation
 RUN apt-get update \
  && apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
 
-# Ajout du dépôt Datadog et de la clé de signature
+# Ajout du référentiel Datadog et des clés de signature
 RUN sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
 
 # Installation de l'Agent Datadog
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
@@ -255,7 +264,7 @@ Pour utiliser des options plus avancées dans l'image Docker, consultez les [fic
 
 Consultez la [documentation relative aux contributions][21] (en anglais) pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][22].
 
-## History
+## Historique
 
 Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog par miketheman][23]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][24].
 

@@ -1,7 +1,11 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Cilium Overview: assets/dashboards/overview.json
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cilium/README.md'
 display_name: Cilium
+draft: false
 git_integration_title: cilium
 guid: 1d9db288-4678-4ede-9ba0-8b04a8ae31c2
 integration_id: cilium
@@ -36,13 +41,13 @@ supported_os:
 
 Ce check permet de surveiller [Cilium][1] avec l'Agent Datadog. L'intégration peut recueillir des métriques à partir de `cilium-agent` ou de `cilium-operator`.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
 
 ### Installation
 
-Le check Cilium est inclus avec le paquet de l'[Agent Datadog][3], mais des opérations d'installation supplémentaires sont nécessaires pour l'exposition des métriques Prometheus.
+Le check Cilium est inclus avec le package de l'[Agent Datadog][3], mais des opérations d'installation supplémentaires sont nécessaires pour l'exposition des métriques Prometheus.
 
 1. Pour activer les métriques Prometheus dans `cilium-agent` et `cilium-operator`, déployez Cilium en définissant la valeur Helm `global.prometheus.enabled=true`.
 
@@ -72,19 +77,24 @@ Le check Cilium est inclus avec le paquet de l'[Agent Datadog][3], mais des opé
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
-1. Modifiez le fichier `cilium.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Cilium. Consultez le [fichier d'exemple cilium.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
+1. Modifiez le fichier `cilium.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Cilium. Consultez le [fichier d'exemple cilium.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
    - Pour recueillir les métriques `cilium-agent` activez l'option `agent_endpoint`.
    - Pour recueillir les métriques `cilium-operator`, activez l'option `operator_endpoint`.
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][2].
 
 ##### Collecte de logs
 
 Cilium génère deux types de logs : `cilium-agent` et `cilium-operator`.
 
-1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet][4] :
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet][1] :
 
    ```yaml
      # (...)
@@ -97,13 +107,19 @@ Cilium génère deux types de logs : `cilium-agent` et `cilium-operator`.
      # (...)
    ```
 
-2. Montez le socket Docker sur l'Agent Datadog comme dans [ce manifeste][9]. Si vous n'utilisez pas Docker, montez le répertoire `/var/log/pods`.
+2. Montez le socket Docker sur l'Agent Datadog comme dans [ce manifeste][3]. Si vous n'utilisez pas Docker, montez le répertoire `/var/log/pods`.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#create-manifest
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -115,16 +131,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de logs
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                     |
 |----------------|-------------------------------------------|
 | `<CONFIG_LOG>` | `{"source": "cilium-agent", "service": "cilium-agent"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez `cilium` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][4] et cherchez `cilium` dans la section Checks.
 
 ## Données collectées
 
@@ -134,8 +154,8 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Checks de service
 
-`cilium.prometheus.health` :
-Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
+**cilium.prometheus.health** :<br>
+ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter aux endpoints de métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
@@ -143,16 +163,11 @@ Cilium n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 [1]: https://cilium.io
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://docs.datadoghq.com/fr/agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/cilium/datadog_checks/cilium/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/cilium/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#create-manifest
-[10]: https://docs.datadoghq.com/fr/agent/docker/log
-[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/fr/agent/
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/help/

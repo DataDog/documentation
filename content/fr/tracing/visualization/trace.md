@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: /tracing/setup/
     tag: Documentation
-    text: Découvrir comment configurer le tracing d'APM avec votre application
+    text: Configurer le tracing d'APM avec votre application
   - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
@@ -82,6 +82,18 @@ Cliquez sur la span d'un service pour voir les processus qui s'exécutent sur so
 
 [1]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/fr/infrastructure/process/?tab=linuxwindows#installation
+{{% /tab %}}
+
+{{% tab "Réseau" %}}
+
+Cliquez sur la span d'un service pour voir les dépendances réseau du service à l'origine de la requête. Utilisez des métriques de performances réseau clés comme le volume, les erreurs (retransmissions TCP) et la latence réseau (temps d'aller-retour TCP) pour différencier les problèmes spécifiques à une application et les problèmes qui touchent l'ensemble du réseau, en particulier lorsqu'aucune erreur de code n'a été générée. Par exemple, vous pouvez utiliser la télémétrie réseau pour déterminer si une latence de requête élevée est due à une élévation soudaine du trafic de l'application concernée ou à des dépendances défectueuses avec un pod en aval, un groupe de sécurité ou tout autre endpoint tagué. Cliquez sur un processus pour accéder à la [vue d'ensemble du réseau][1]. Pour voir les processus spécifiques à une span, activez la [surveillance des performances réseau][2].
+
+**Remarque** : les données de télémétrie associées ne sont pas actuellement prises en charge pour les traces sans serveur.
+
+{{< img src="tracing/visualization/trace/trace_networks.png" alt="Tracer les dépendances réseau" style="width:90%;">}}
+
+[1]: https://docs.datadoghq.com/fr/network_performance_monitoring/network_page
+[2]: https://docs.datadoghq.com/fr/network_performance_monitoring/installation?tab=agent
 {{% /tab %}}
 {{< /tabs >}}
 

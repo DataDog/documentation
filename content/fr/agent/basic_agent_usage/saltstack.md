@@ -132,6 +132,7 @@ Pour ajouter une intégration de l'Agent à votre host, utilisez la variable `ch
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config`  | Ajoutez les options de configuration à écrire dans le fichier de configuration du check :<br>Agents v6 et v7 : `<chemin_confd>/<check>.d/conf.yaml`<br>Agent v5 : `<chemin_confd>/<check>.yaml` |
 | `version` | Pour les Agents v6 et v7, la version du check à installer (par défaut, la version fournie avec l'Agent).                                                                |
+| `third_party` | Pour les Agents v6 et v7 (v6.21.0/v7.21.0 et versions ultérieures uniquement), valeur booléenne pour indiquer que l'intégration à installer est une intégration tierce. Doit être associée à l'option `version`.                                                                |
 
 L'exemple ci-dessous permet d'utiliser la v1.4.0 de l'intégration [Directory][3] pour surveiller le répertoire `/srv/pillar` :
 
@@ -148,6 +149,23 @@ datadog:
           - directory: "/srv/pillar"
             name: "pillars"
       version: 1.4.0
+```
+
+L'exemple ci-dessous permet d'utiliser la v1.0.0 d'un exemple d'intégration tierce appelée « third-party-integration » :
+
+```
+datadog:
+  config:
+    api_key: <VOTRE_CLÉ_API_DD>
+  install_settings:
+    agent_version: <VERSION_AGENT7>
+  checks:
+    third-party-integration:
+      config:
+        instances:
+          - some_config: "some value"
+      version: 1.0.0
+      third_party: true
 ```
 
 ##### Logs
@@ -189,7 +207,7 @@ Les formules Salt sont des states Salt pré-écrits. Les states suivants sont di
 
 | State               | Description                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
-| `datadog`           | Installe, configure et lance l'Agent Datadog.                                             |
+| `datadog`           | Installe, configure et lance le service de l'Agent Datadog.                                             |
 | `datadog.install`   | Configure le référentiel adéquat et installe l'Agent Datadog.                                             |
 | `datadog.config`    | Configure l'Agent Datadog et les intégrations à l'aide des données pillar (voir [pillar.example][4]).              |
 | `datadog.service`   | Exécute le service de l'Agent Datadog, qui surveille les changements apportés aux fichiers de configuration de l'Agent et des checks. |

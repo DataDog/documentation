@@ -174,9 +174,11 @@ Les notifications d'absence de données sont particulièrement utiles si une mé
 
 **Remarque** : l'intervalle d'absence de données doit être au moins deux fois supérieur à l'intervalle d'évaluation.
 
-En revanche, si vous surveillez une métrique pour un groupe de hosts avec mise à l'échelle automatique où les hosts s'arrêtent et démarrent automatiquement, vous risqueriez de recevoir un trop grand nombre de notifications. Dans ce cas, nous vous conseillons de ne pas les activer.
+En revanche, si vous surveillez une métrique pour un groupe de hosts avec mise à l'échelle automatique où les hosts s'arrêtent et démarrent automatiquement, vous risqueriez de recevoir un trop grand nombre de notifications. Dans ce cas, nous vous conseillons de ne pas les activer. Cette option ne fonctionne pas si vous l'activez alors qu'aucune donnée n'a été transmise pendant une longue période.
 
-Cette option ne fonctionne pas si vous l'activez alors qu'aucune donnée n'a été transmise pendant une longue période.
+##### Groupes
+
+Lorsqu'un monitor n'envoie pas de notifications d'absence de données et qu'un groupe n'envoie pas de données, le monitor n'effectue aucune évaluation et finit par mettre de côté le groupe. Pendant cette période, la barre sur la page des résultats reste verte. Lorsque les groupes recommencent à envoyer des données, la barre verte affiche un statut OK et se remplit comme si aucune interruption n'avait eu lieu.
 
 #### Auto Resolve
 
@@ -205,5 +207,5 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /fr/getting_started/tagging/using_tags/?tab=assignment
 [3]: /fr/dashboards/querying/#advanced-graphing
-[4]: /fr/monitors/faq/what-are-recovery-thresholds
-[5]: /fr/monitors/notifications
+[4]: /fr/monitors/faq/what-are-recovery-thresholds/
+[5]: /fr/monitors/notifications/
