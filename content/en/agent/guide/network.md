@@ -25,7 +25,7 @@ further_reading:
 
   - [APM][1] data is `trace.agent.`{{< region-param key="dd_site" code="true" >}}
   - [Live Containers][2] data is `process.`{{< region-param key="dd_site" code="true" >}}
-  - [Logs][3] data is `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][4] for more information.
+  - [Logs][3] data is `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} for TCP traffic, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} in HTTP. Review the list of [logs endpoints][4] for more information.
   - [Orchestrator Resources][5] data is `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
   - All other Agent data:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}

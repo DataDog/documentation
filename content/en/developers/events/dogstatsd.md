@@ -40,7 +40,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 
 View errors and exceptions in Datadog with a DogStatsD event:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 
@@ -147,7 +147,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 
 ```php
 <?php

@@ -229,7 +229,7 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
-  "GetIncidentServices": {
+  "ListIncidentServices": {
     "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
     "summary": "Get a list of all incident services"
   },
@@ -253,7 +253,7 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
     "summary": "Get a list of all incident teams"
   },

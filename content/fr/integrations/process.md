@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -10,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/process/README.md'
 display_name: Process
+draft: false
 git_integration_title: process
 guid: 1675eced-b435-464a-8f84-f65e438f838e
 integration_id: system
@@ -36,17 +41,17 @@ Le check Process possède plusieurs applications.
 - Il vous permet de recueillir des métriques d'utilisation des ressources pour des processus en cours d'exécution spécifiques sur n'importe quel host (processeur, mémoire, E/S, nombre de threads, etc.).
 - Il vous aide à tirer parti des [monitors de processus][1] : vous pouvez configurer des seuils pour le nombre d'instances d'un processus spécifique à exécuter et recevoir des alertes lorsque les seuils ne sont pas atteints (voir la section **Checks de service** ci-dessous).
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Process est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Process est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
 Contrairement à de nombreux checks, le check Process ne surveille aucun processus utile par défaut. Vous devez configurer les processus que vous souhaitez surveiller et la méthode à employer.
 
-1. Bien qu'il n'y ait pas de configuration standard par défaut, voici un exemple de configuration `process.d/conf.yaml` qui permet de surveiller les processus SSH/SSHD. Consultez le [fichier d'exemple process.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Bien qu'il n'y ait pas de configuration standard par défaut, voici un exemple de configuration `process.d/conf.yaml` qui permet de surveiller les processus SSH/SSHD. Consultez le [fichier d'exemple process.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -72,19 +77,17 @@ Contrairement à de nombreux checks, le check Process ne surveille aucun process
    dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
    ```
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][3].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][8] et cherchez `process` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][4] et cherchez `process` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
 {{< get-metrics-from-git "process" >}}
-
-
-Toutes les métriques sont envoyées pour chaque `instance` configurée dans process.yaml et reçoivent le tag `nom_processus:<nom_instance>`.
+Fiable uniquement pour les processus actifs pendant plus de 30 secondes. Sa valeur ne doit pas être considérée comme exacte pour les processus actifs sur de plus courtes périodes.
 
 ### Événements
 
@@ -92,9 +95,8 @@ Le check Process n'inclut aucun événement.
 
 ### Checks de service
 
-**process.up** :
-
-L'Agent envoie un check de service pour chaque instance dans `process.yaml`, et leur attribue le tag : `process:<nom>`.
+**process.up** :<br>
+L'Agent envoie ce check de service pour chaque instance dans `process.yaml`, en attribuant le tag `process:<nom>`.
 
 Lorsqu'aucune valeur `thresholds` n'est spécifiée pour une instance, le check de service renvoie le statut CRITICAL (aucun processus n'est en cours d'exécution) ou OK (au moins un processus est en cours d'exécution).
 
@@ -111,26 +113,23 @@ instances:
 
 L'Agent envoie un `process.up` avec le tag `process:my_worker_process` dont le statut est :
 
-- CRITICAL lorsqu'il y a moins de 1 ou plus de 7 processus worker
-- WARNING lorsqu'il y a 1, 2, 6 ou 7 processus worker
-- OK lorsqu'il y a 3, 4 ou 5 processus worker
+- `CRITICAL` lorsqu'il y a moins de 1 ou plus de 7 processus worker
+- `WARNING` lorsqu'il y a 1, 2, 6 ou 7 processus worker
+- `OK` lorsqu'il y a 3, 4 ou 5 processus worker
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
 
-Pour mieux comprendre comment (ou pourquoi) surveiller l'utilisation des ressources de processus avec Datadog, lisez la [série d'articles de blog][12] de Datadog à ce sujet.
+Pour mieux comprendre comment (ou pourquoi) surveiller l'utilisation des ressources de processus avec Datadog, lisez la [série d'articles de blog][8] de Datadog à ce sujet.
 
 [1]: https://docs.datadoghq.com/fr/monitoring/#process
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
-[4]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/process.py#L117
-[5]: https://github.com/DataDog/docker-dd-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://docs.datadoghq.com/fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-[10]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://www.datadoghq.com/blog/process-check-monitoring
+[2]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
+[6]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help/
+[8]: https://www.datadoghq.com/blog/process-check-monitoring

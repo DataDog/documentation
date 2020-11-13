@@ -4,9 +4,7 @@ dependencies:
 kind: ドキュメント
 title: Go 向け Datadog Lambda ライブラリ
 ---
-
-
-[![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-go)](https://circleci.com/gh/DataDog/datadog-lambda-go)
+![build](https://github.com/DataDog/datadog-lambda-go/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-go)](https://codecov.io/gh/DataDog/datadog-lambda-go)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
 [![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/DataDog/datadog-lambda-go)
@@ -16,7 +14,7 @@ Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型ト
 
 ## インストール
 
-[インストール手順](https://docs.datadoghq.com/serverless/installation/go/)に従って、Datadog で関数の拡張メトリクス、トレース、ログを表示します。
+[こちら](https://docs.datadoghq.com/serverless/installation/go/)のインストール手順に従ってください。
 
 ## 拡張メトリクス
 
@@ -32,18 +30,38 @@ Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型ト
 
 ## トレーシング
 
-`ddlambda.AddTraceHeaders(ctx, req)` を使用して、Datadog トレースヘッダーをアウトバウンドリクエストに挿入します。
+`DD_TRACE_ENABLED` 環境変数を `true` に設定して、Datadog トレースを有効にします。Datadog トレースが有効になっている場合、ライブラリは Lambda の実行を表すスパンをコンテキストオブジェクトに挿入します。次に、付属の `dd-trace-go` パッケージを使用して、コンテキストから追加のスパンを作成したり、コンテキストを他のサービスに渡したりできます。詳細については、[dd-trace-go ドキュメント](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace)を参照してください。
 
-```go
-  req, err := http.NewRequest("GET", "http://example.com/status")
-  // Lambda ハンドラーに指定したものと同じ Context オブジェクトを使用します。
-  // コンテキストを呼び出し階層に渡したくない場合は、ddlambda.GetContext() を使用できます
-  ddlambda.AddTraceHeaders(ctx, req)
+```
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+)
 
+func handleRequest(ctx context.Context, ev events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+  // HTTP リクエストをトレースします
+  req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
   client := http.Client{}
+  client = *httptrace.WrapClient(&client)
   client.Do(req)
+
+  // カスタムスパンを作成します
+  s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+  time.Sleep(100 * time.Millisecond)
+  s.Finish()
 }
 ```
+
+挿入されたスパンを使用して[ログとトレースを接続](https://docs.datadoghq.com/tracing/connect_logs_and_traces/go/)することもできます。
+
+```
+func handleRequest(ctx context.Context, ev events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+  currentSpan, _ := tracer.SpanFromContext(ctx)
+  log.Printf("my log message %v", currentSpan)
+}
+```
+
+AWS X-Ray を使用して Lambda 関数をトレースしている場合は、`DD_MERGE_XRAY_TRACES` 環境変数を `true` に設定すると、Datadog は Datadog トレースと X-Ray トレースを単一の統合トレースにマージします。
 
 
 ## 環境変数
@@ -68,7 +86,15 @@ Datadog Lambda Library for Go は、拡張 Lambda メトリクス、分散型ト
 
 `aws.lambda.enhanced.invocations` や `aws.lambda.enhanced.errors` などの拡張 Datadog Lambda インテグレーションメトリクスを生成します。デフォルトは `true` です。
 
-## 未解決の問題
+### DD_TRACE_ENABLED
+
+`true` に設定されている場合は、Datadog トレーサーを初期化します。デフォルトは `false` です。
+
+### DD_MERGE_XRAY_TRACES
+
+X-Ray トレースと Datadog トレースの両方を使用している場合は、これを `true` に設定して、X-Ray トレースと Datadog トレースをマージします。デフォルトは `false` です。
+
+## 問題を開く
 
 このパッケージでバグが発生した場合は、お知らせください。新しい問題を開く前に、重複を避けるために既存の問題を検索してください。
 

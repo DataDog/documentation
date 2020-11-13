@@ -20,19 +20,21 @@ Certain product tabs also contain additional tools:
 
 ## Month-to-Date Summary
 
-This section summarizes your month-to-date or MTD usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month.
+This section summarizes your month-to-date usage. In the "All" tab, you will see your month-to-date usage of infrastructure hosts, containers, custom metrics, APM hosts, logs and any other part of the platform you've used during the month. 
 
-{{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All" >}}
+{{< img src="account_management/billing/usage-details-v2-01.png" alt="Usage Summary - All tab" >}}
 
 In product specific tabs, you will see your month-to-date usage of the products in that product category.
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="Usage Summary - Network" >}}
 
-## Overall Usage
+The month-to-date usage shown above is "All" usage, which includes non-billable usage such as product trials. Most accounts will also be able to view "Billable" usage, which only shows usage that contributes to your final bill. The "Billable" view also breaks out on-demand usage above your commitments and allocations.
 
-This section contains hourly, daily, monthly, and annual usage. In the "All" tab, you will see hourly, daily, monthly, and annual usage for:
+{{< img src="account_management/billing/usage-details-v2-07.png" alt="Usage Summary - Billable" >}}
 
-| Column                   | Description                                                                                                                 |
+Month-to-date usage of each product is calculated as follows:
+
+| Product                   | Description                                                                                                                |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Infra. Hosts             | Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month.                         |
 | Containers               | Shows the high watermark of all distinct containers over all hours in the current month.                                    |
@@ -54,6 +56,9 @@ This section contains hourly, daily, monthly, and annual usage. In the "All" tab
 | Synthetic Browser Tests  | Shows the sum of all Synthetic browser tests over all hours in the current month.                                           |
 | RUM Sessions             | Shows the sum of all distinct RUM sessions over all hours in the current month.                                             |
 
+## Overall Usage
+
+This section contains hourly, daily, monthly, and annual usage:
 
 {{< img src="account_management/billing/usage-details-v2-03.png" alt="Hourly Usage - All" >}}
 
@@ -64,6 +69,7 @@ In product specific tabs, you will see your hourly, daily, monthly, and annual u
 * Azure Hosts
 * GCP Hosts
 * vSphere Hosts
+* Azure App Services
 
 {{< img src="account_management/billing/usage-details-v2-04.png" alt="Hourly Usage - Infra Hosts" >}}
 

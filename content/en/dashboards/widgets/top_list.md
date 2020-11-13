@@ -29,7 +29,7 @@ The top list visualization enables you to display a list of Tag values like `hos
 ### Configuration
 
 1. Choose the data to graph:
-    * Metric: See the documentation [querying][1] to configure a metric query.
+    * Metric: See the [querying][6] documentation to configure a metric query.
     * Indexed Spans: See [the trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See [the log search documentation][1] to configure a log event query.
 
@@ -98,3 +98,4 @@ Additional properties allowed in the `request` object:
 [3]: /dashboards/graphing_json/widget_json/
 [4]: /dashboards/graphing_json/request_json/
 [5]: /dashboards/graphing_json/widget_json/#conditional-format-schema
+[6]: /dashboards/querying/
