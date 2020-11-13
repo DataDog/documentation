@@ -25,7 +25,7 @@ jdk.InitialSystemProperty#enabled=false
 
 ## Large allocation events overwhelming the profiler
 
-If allocation profiling is deemed too costly, you can turn off allocation profiling by disabling the following two events in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+To turn off allocation profiling, disable the following events in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
 
 {{< code-block lang="text" filename="example-template.jfp" >}}
 jdk.ObjectAllocationInNewTLAB#enabled=false
