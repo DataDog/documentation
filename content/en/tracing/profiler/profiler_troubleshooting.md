@@ -59,7 +59,7 @@ If your vendor is not on the list, [open a support ticket][2], we can let you kn
 
 ## Creating and using a JFR template override file
 
-Override templates help you override specific profiling properties. Care should be taken as the default settings are balanced for a good tradeoff between overhead and data density that should work well in most cases. In order to use an override file, perform the following steps:
+Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
 1. Create an override file in a directory accessible by dd-java-agent at service invocation:
     ```
