@@ -56,7 +56,7 @@ If you are using the official [Datadog Helm Chart][1]:
         value: "true"
       ```
 
-- Set the Cluster Agent ClusterRole with the following RBAC permissions:
+- Set the Cluster Agent ClusterRole with the following [RBAC permissions][18]:
 
     ```
       ClusterRole:
@@ -313,5 +313,5 @@ You can see logs that you have chosen to index and persist by selecting a corres
 [13]: /tracing
 [14]: /events
 [15]: /logs/live_tail/
-[16]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[16]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
 [17]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
