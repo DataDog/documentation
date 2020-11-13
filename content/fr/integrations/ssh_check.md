@@ -2,7 +2,11 @@
 aliases:
   - /fr/integrations/ssh
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md'
 display_name: SSH
+draft: false
 git_integration_title: ssh_check
 guid: 4eb195ef-554f-4cc2-80af-8f286c631fa8
 integration_id: ssh
@@ -41,19 +46,22 @@ supported_os:
 
 Ce check vous permet de surveiller la connectivité SSH vers les hosts à distance et les temps de réponse SFTP.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check SSH/SFTP est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur à partir duquel vous souhaitez tester la connectivité SSH.
+Le check SSH/SFTP est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur votre serveur à partir duquel vous souhaitez tester la connectivité SSH.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Agent conteneurisé](#agent-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `ssh_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple ssh_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `ssh_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple ssh_check.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -69,21 +77,31 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
        # add_missing_keys: True    # default is False
    ```
 
-2. [Redémarrez l'Agent][4] pour commencer à envoyer vos métriques, événements et checks de service SSH/SFTP à Datadog.
+2. [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques, événements et checks de service SSH/SFTP à Datadog.
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                        |
 | -------------------- | ------------------------------------------------------------ |
-| `<NOM_INTÉGRATION>` | `ssh`                                                        |
+| `<NOM_INTÉGRATION>` | `ssh_check`                                                  |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                |
 | `<CONFIG_INSTANCE>`  | `{"host": "%%host%%", "port":"22", "username":"<NOMUTILISATEUR>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][5] et cherchez `ssh_check` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][2] et cherchez `ssh_check` dans la section Checks.
 
 ## Données collectées
 
@@ -97,23 +115,17 @@ Le check SSH ne comprend aucun événement.
 
 ### Checks de service
 
-**ssh.can_connect** :
+**ssh.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à ouvrir de session SSH. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie CRITICAL si l'Agent n'est pas capable d'ouvrir de session SSH. Si ce n'est pas le cas, renvoie OK.
-
-**sftp.can_connect** :
-
-Renvoie CRITICAL si l'Agent n'est pas capable d'ouvrir de session SFTP. Si ce n'est pas le cas, renvoie OK.
+**sftp.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à ouvrir de session SFTP. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/
