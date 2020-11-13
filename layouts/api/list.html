@@ -1,7 +1,9 @@
 {{ define "api-main" }}
 
     {{ with .Content}}
-        {{ . }}
+        <div class="col-12 col-lg-9">
+            {{ . }}
+        </div>
     {{ end }}
 
     {{ $dot := . }}
