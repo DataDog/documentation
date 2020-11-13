@@ -36,7 +36,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=false
 
 ## Exceptions overwhelming the profiler
 
-The Datadog exception profiler will normally have a very small footprint and overhead. But if a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen, for example, when you use exceptions for control flow.  If you have an unusually high exception rate, temporarily turn off exception profiling until you’ve had a chance to fix what's causing them.
+The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
 
 To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
 
