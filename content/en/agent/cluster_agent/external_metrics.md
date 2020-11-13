@@ -187,7 +187,7 @@ spec:
   metrics:
     - type: External
       external:
-      metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
+        metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
 ```
 
 **Example**: An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`:
