@@ -61,7 +61,7 @@ If your vendor is not on the list, [open a support ticket][2], we can let you kn
 
 Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
-1. Create an override file in a directory accessible by dd-java-agent at service invocation:
+1. Create an override file in a directory accessible by `dd-java-agent` at service invocation:
     ```
     touch dd-profiler-overrides.jfp
     ```
