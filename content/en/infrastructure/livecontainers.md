@@ -51,14 +51,14 @@ If you are using the official [Datadog Helm Chart][1]:
 
 - Set the Cluster Agent container with the following environment variable:
 
-      ```
+    ```yaml
       - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
         value: "true"
-      ```
-
-- Set the Cluster Agent ClusterRole with the following [RBAC permissions][18]:
-
     ```
+
+- Set the Cluster Agent ClusterRole with the following RBAC permissions:
+
+    ```yaml
       ClusterRole:
       - apiGroups:  # To create the datadog-cluster-id CM
         - ""
@@ -85,15 +85,15 @@ If you are using the official [Datadog Helm Chart][1]:
         - list
         - get
         - watch
-      ```
+    ```
 
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
 
-2. [The Process Agent][18], which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+2. The Process Agent which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
 
-    ```
+    ```yaml
     - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
       value: "true"
     - name: DD_ORCHESTRATOR_CLUSTER_ID
