@@ -14,7 +14,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/explorer/rum_explorer.png" alt="RUM explorer"  >}}
 
-The Real User Monitoring (RUM) Explorer allows you to explore all data collected from your different applications. It gives your access to granular information about your RUM events, allowing you to:
+The Real User Monitoring (RUM) Explorer allows you to explore all data collected from your different applications. It gives you access to granular information about your RUM events, allowing you to:
 - Navigate user sessions
 - Investigate performance issues affecting views, resources or actions
 - Troubleshoot application errors
