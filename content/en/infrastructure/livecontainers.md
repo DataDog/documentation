@@ -38,7 +38,7 @@ If you are using the official [Datadog Helm Chart][1]:
 
 - Use chart version 2.4.5 or above
   **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
-- Set `datadog.orchestratorExplorer.enabled` to true in [values.yaml][2]
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
 - Deploy a new release
 
 
