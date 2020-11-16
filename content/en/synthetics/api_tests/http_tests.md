@@ -37,8 +37,8 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
   {{% tab "Request Options" %}}
 
-  * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
-  * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (e.g., the `user-agent` header).
+  * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
+  * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
 
@@ -53,7 +53,7 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 
   {{% tab "Certificate" %}}
 
-  * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+  * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
 
   {{% /tab %}}
@@ -71,7 +71,7 @@ After choosing the type of test you are willing to create ([`HTTP`][4], [`SSL`][
 4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][8].
 6. Select the **Locations** to run your HTTP test from: HTTP tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor your endpoints from outside or inside your network.
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
 ### Specify test frequency
 
@@ -91,7 +91,7 @@ Assertions define what an expected test result is. When hitting `Test URL` basic
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][9] | _String_ <br> _[Regex][10]_ <br> _String_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10_                                      |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][10]                                      |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
@@ -116,14 +116,13 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 
 Your test can trigger retries in case of failed test result. By default, the retries are performed 300 ms after the first failed test result-this interval can be configured via the [API][11].
 
-
 Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
 
 ### Notify your team
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][12], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][13] and supports the following [conditional variables][14]:
 
@@ -192,7 +191,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [11]: /api/v1/synthetics/#create-a-test
 [12]: /monitors/notifications/?tab=is_alert#notification
-[13]: http://daringfireball.net/projects/markdown/syntax
+[13]: https://www.markdownguide.org/basic-syntax/
 [14]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [15]: /synthetics/settings/#global-variables
 [16]: /synthetics/api_tests/errors/#ssl-errors

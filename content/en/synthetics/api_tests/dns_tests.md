@@ -17,7 +17,7 @@ further_reading:
   text: "Test DNS resolution of your internal endpoints"
 - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
   tag: "Blog"
-  tewt: "DNS monitoring with Datadog"
+  text: "DNS monitoring with Datadog"
 ---
 
 ## Overview
@@ -33,13 +33,13 @@ After choosing the type of test you are willing to create ([`HTTP`][3], [`SSL`][
 
 {{< img src="synthetics/api_tests/dns_test_config.png" alt="Define DNS query"  style="width:90%;" >}}
 
-1. Specify the **Domain** you want your test to query, e.g., `www.example.com`.
+1. Specify the **Domain** you want your test to query. For example, `www.example.com`.
 2. Specify the `DNS Server` to use (optional), it can be a domain name or an IP address. If not specified, your DNS test performs resolution using `8.8.8.8`, with a fallback on `1.1.1.1` and an internal AWS DNS server.
 3. **Name** your DNS test.
 4. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][7].
 5. Select the **Locations** to run your DNS test from: DNS tests can run from [managed][1] and [private locations][2] depending on whether you are willing to monitor a public or a private domain.
 
-Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
+Click on **Test URL** to try out the request configuration. You will see a response preview show up on the right side of your screen.
 
 ### Specify test frequency
 
@@ -101,8 +101,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
-Email notifications include the message defined in this section as well as a summary of failed assertions.
-Notifications example:
+Email notifications include the message defined in this section as well as a summary of failed assertions. Notifications example:
 
 {{< img src="synthetics/api_tests/notifications-example.png" alt="API Test Notifications"  style="width:90%;" >}}
 
@@ -156,7 +155,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [10]: /api/v1/synthetics/#create-a-test
 [11]: /monitors/notifications/?tab=is_alert#notification
-[12]: http://daringfireball.net/projects/markdown/syntax
+[12]: https://www.markdownguide.org/basic-syntax/
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [14]: /synthetics/settings/#global-variables
 [15]: /synthetics/api_tests/errors/#ssl-errors

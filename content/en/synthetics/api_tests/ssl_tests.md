@@ -88,7 +88,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what message to send to your teams.
 
-1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification `to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to monitors][11], select **users and/or services** that should receive notifications either by adding an `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][12] and supports the following [conditional variables][13]:
 
@@ -156,7 +156,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [10]: /api/v1/synthetics/#create-a-test
 [11]: /monitors/notifications/?tab=is_alert#notification
-[12]: http://daringfireball.net/projects/markdown/syntax
+[12]: https://www.markdownguide.org/basic-syntax/
 [13]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [14]: /synthetics/settings/#global-variables
 [15]: /synthetics/api_tests/errors/#ssl-errors

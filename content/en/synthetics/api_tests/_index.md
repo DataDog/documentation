@@ -33,14 +33,14 @@ further_reading:
 
 API tests are useful to help you **proactively monitor that your most important services are available** at anytime and from anywhere. API tests come in four different flavors that allow you to launch requests on the **different network layers** of your systems:
 
-- [`HTTP` test][1],
-- [`SSL` test][2],
-- [`TCP` test][3],
-- [`DNS` test][4].
+- [`HTTP` test][1]
+- [`SSL` test][2]
+- [`TCP` test][3]
+- [`DNS` test][4]
 
 {{< img src="synthetics/api_tests/api_tests.mp4" alt="API Test subtypes" video="true"  width="100%" >}}
 
-If your service starts answering more slowly, or in an unexpected way (e.g., unexpected response body, wrong A record, etc.), your test [**alerts your team**][5], [**blocks your CI pipeline**][6], or even [**rolls back the faulty deployment**][6].
+If your service starts answering more slowly, or in an unexpected way (for example, unexpected response body, wrong A record, etc.), your test can [**alert your team**][5], [**block your CI pipeline**][6], or even [**roll back the faulty deployment**][6].
 
 API tests can run from Datadog [managed locations][7] and [private locations][8], allowing **full coverage of your systems**, both external and internal.
 

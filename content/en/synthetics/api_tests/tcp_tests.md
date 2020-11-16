@@ -149,7 +149,7 @@ A test is considered `FAILED` if it does not satisfy one or several assertions o
 [8]: /synthetics/ci
 [9]: /api/v1/synthetics/#create-a-test
 [10]: /monitors/notifications/?tab=is_alert#notification
-[11]: http://daringfireball.net/projects/markdown/syntax
+[11]: https://www.markdownguide.org/basic-syntax/
 [12]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables
 [13]: /synthetics/settings/#global-variables
 [14]: /synthetics/api_tests/errors/#ssl-errors
