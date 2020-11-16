@@ -13,6 +13,7 @@ further_reading:
 ---
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="network_performance_monitoring/devices/guide/cluster-agent" >}}NDM with the Cluster Agent{{< /nextlink >}}
     {{< nextlink href="network_performance_monitoring/devices/guide/build-ndm-profile" >}}Build a NDM Profile{{< /nextlink >}}
 {{< /whatsnext >}}
 
