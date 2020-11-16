@@ -8,8 +8,6 @@ datadog:
   acExclude: "name:datadog-agent"
   apm:
     enabled: true
-  processAgent:
-    enabled: false
 agents:
   rbac:
     create: false

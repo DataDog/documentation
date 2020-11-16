@@ -2,7 +2,11 @@
 aliases:
   - /fr/integrations/httpcheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/http_check/README.md'
 display_name: HTTP
+draft: false
 git_integration_title: http_check
 guid: eb133a1f-697c-4143-bad3-10e72541fa9c
 integration_id: network
@@ -36,11 +41,11 @@ supported_os:
 
 Surveillez le statut de disponibilité d'endpoints HTTP locaux ou à distance. Le check HTTP peut détecter des codes d'erreur (p. ex., 404), identifier les certificats SSL sur le point d'expirer, rechercher des réponses pour un texte spécifique, et plus encore. Le check peut également transmettre des délais de réponse HTTP sous la forme d'une métrique.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check HTTP est inclus avec le paquet de [l'Agent Datadog][1] : vous n'avez donc rien à installer sur les serveurs à partir desquels vous souhaitez sonder vos sites HTTP. Bien qu'il soit généralement préférable d'exécuter les checks axés sur des métriques sur le même host que celui du service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
+Le check HTTP est inclus avec le package de [l'Agent Datadog][1] : vous n'avez donc rien à installer sur les serveurs à partir desquels vous souhaitez sonder vos sites HTTP. Bien qu'il soit généralement préférable d'exécuter les checks axés sur des métriques sur le même host que celui du service surveillé, ce check axé sur des statuts peut être lancé sur des hosts qui n'exécutent pas les sites surveillés.
 
 ### Configuration
 
@@ -75,7 +80,7 @@ Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste
 | `reverse_content_match`          | Si ce paramètre a pour valeur `true`, inverse le comportement de l'option `content_match`. Ainsi, le check HTTP renverra DOWN si la chaîne ou l'expression dans `content_match` a été trouvée. Valeur par défaut : `false`.                                                              |
 | `username` et `password`          | Si votre service demande une authentification basique, vous pouvez fournir avec ces paramètres le nom d'utilisateur et le mot de passe.                                                                                                                                                       |
 | `http_response_status_code`      | Une chaîne de caractères ou une expression régulière Python d'un code de statut HTTP. Ce check renvoie DOWN pour tout code de statut ne correspondant pas. Par défaut, ce check couvre les codes de statut HTTP 1xx, 2xx et 3xx. Par exemple, `401` ou `4\d\d`.                              |
-| `include_content`                | Lorsque ce paramètre est défini sur `true`, le check inclut les 200 premiers caractères du corps de la réponse HTTP dans les notifications. Valeur par défaut : `false`.                                                                                                        |
+| `include_content`                | Lorsque ce paramètre est défini sur `true`, le check inclut les 500 premiers caractères du corps de la réponse HTTP dans les notifications. Valeur par défaut : `false`.                                                                                                        |
 | `collect_response_time`          | Par défaut, le check recueille le délai de réponse (en secondes) par l'intermédiaire de la métrique `network.http.response_time`. Pour désactiver cette option, définissez cette valeur sur `false`.                                                                                                 |
 | `tls_verify`                     | Oblige le check à valider le certificat TLS des services lors de la connexion à `url`.                                                                                                                                                          |
 | `tls_ignore_warning`             | Lorsque `tls_verify` est défini sur `true`, les avertissements de sécurité issus de la connexion SSL sont désactivés.                                                                                                                                                     |
@@ -84,7 +89,7 @@ Consultez le [fichier d'exemple http_check.d/conf.yaml][3] pour obtenir la liste
 | `days_warning` et `days_critical` | Lorsque `check_certificate_expiration` est activé, ces paramètres génèrent une alerte « warning » ou « critical » quand la durée avant l'expiration du certificat SSL correspond à la plage spécifiée.                                                                |
 | `ssl_server_name`                | Lorsque `check_certificate_expiration` est activé, ce paramètre spécifie le hostname du service auquel se connecter. Si check_hostname est activé, il remplace également le host à faire correspondre.                                                      |
 | `check_hostname`                 | Lorsque ce paramètre est défini sur `true`, le check envoie un avertissement si le hostname de l'`url` vérifiée est différent du hostname du certificat SSL.                                                                                                                           |
-| `skip_proxy`                     | Si ce paramètre est défini, le check ignore les paramètres de proxy et tente d'accéder directement à l'URL de check. Valeur par défaut : `false`.                                                                                                                              |
+| `skip_proxy`                     | Si ce paramètre est défini, le check ignore les paramètres de proxy et tente d'accéder directement à l'URL de check. Valeur par défaut : `false`. Si ce paramètre n'est pas défini, les paramètres de proxy de cette intégration correspondront, par défaut, aux paramètres de proxy définis dans le fichier de configuration `datadog.yaml`. |
 | `allow_redirects`                | Ce paramètre permet au check de service de suivre les redirections HTTP. Valeur par défaut : `true`.                                                                                                                                                           |
 | `tags`                           | La liste des tags arbitraires qui seront associés au check. Pour en savoir plus sur les tags, consultez notre [Guide d'utilisation des tags][5] et notre article de blog, [La puissance des métriques taguées][6] (en anglais).                                                                  |
 
@@ -108,8 +113,7 @@ Le check HTTP n'inclut aucun événement.
 
 Pour créer des conditions d'alerte sur ces checks de service dans Datadog, sélectionnez « Network » sur la page [Create Monitor][10], et non « Integration ».
 
-**`http.can_connect`** :
-
+**http.can_connect** :<br>
 Renvoie `DOWN` lorsqu'une des affirmations suivantes se vérifie :
 
 - La requête vers `uri` expire.
@@ -120,8 +124,7 @@ Renvoie `DOWN` lorsqu'une des affirmations suivantes se vérifie :
 
 Si ce n'est pas le cas, renvoie `UP`.
 
-**`http.ssl_cert`** :
-
+**http.ssl_cert** :<br>
 Le check renvoie :
 
 - `DOWN` si le certificat de `uri` a déjà expiré ;

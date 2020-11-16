@@ -400,12 +400,13 @@ spec:
 
 More examples:
 
-| **Raw string**           | **Pattern**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
+| **Raw string**           | **Pattern**                                   |
+|--------------------------|-----------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
+| 20180228                 | `\d{8}`                                       |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
@@ -514,6 +515,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
+
 
 [1]: /agent/faq/commonly-used-log-processing-rules
 [2]: https://docs.datadoghq.com/logs/explorer/#overview

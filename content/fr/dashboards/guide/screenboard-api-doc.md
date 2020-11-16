@@ -6,7 +6,7 @@ aliases:
   - /fr/graphing/guide/screenboard-api-doc
 ---
 <div class="alert alert-danger">
-Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/?lang=python#dashboards">nouvel endpoint Dashboard</a>.
+Cet endpoint est obsolète. Utilisez plutôt le <a href="https://docs.datadoghq.com/api/v1/dashboards/">nouvel endpoint Dashboards</a>.
 </div>
 
 L'endpoint Screenboard vous permet de programmer la création, la mise à jour, la suppression et la récupération de screenboards. [En savoir plus sur les screenboards][1].
@@ -124,7 +124,7 @@ curl -X POST -H "Content-type: application/json" \
             }
         ]
 }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -247,7 +247,7 @@ curl -X PUT -H "Content-type: application/json" \
             }
         ]
 }' \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 
 ```
 
@@ -327,10 +327,10 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
             }
         ]
   }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}" | jq '.id')
 
 curl -X DELETE \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -407,10 +407,10 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
             }
         ]
   }' \
-"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+"https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}" | jq '.id')
 
 curl -X GET \
-"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
@@ -469,10 +469,10 @@ result = dog.get_all_screenboards()
 api_key=<CLÉ_API_DATADOG>
 app_key=<CLÉ_APPLICATION_DATADOG>
 
-curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${DD_CLIENT_API_KEY}&application_key=${DD_CLIENT_APP_KEY}"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /fr/dashboards/screenboard
+[1]: /fr/dashboards/screenboard/

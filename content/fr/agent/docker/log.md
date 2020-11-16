@@ -48,7 +48,7 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY="<CLÉ_API_DATADOG>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -63,7 +63,7 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY="<CLÉ_API_DATADOG>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            datadog/agent:latest
 ```
@@ -77,7 +77,7 @@ Voici les commandes associées à la collecte de logs :
 | `-e DD_LOGS_ENABLED=true`                             | L'envoi de cette commande avec la valeur `true` active la collecte de logs. L'Agent recherche les instructions relatives aux logs dans les fichiers de configuration.                                                          |
 | `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | Ajoute une configuration de log qui active la collecte de logs pour tous les conteneurs.                                                                                         |
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host.     |
-| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Empêche l'Agent Datadog de recueillir et d'envoyer ses propres logs et métriques. Supprimez ce paramètre si vous souhaitez recueillir les logs et les métriques de l'Agent Datadog. |
+| `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Empêche l'Agent Datadog de recueillir et d'envoyer ses propres logs et métriques. Supprimez ce paramètre si vous souhaitez recueillir les logs et les métriques de l'Agent Datadog. La valeur de ce paramètre prend en charge les expressions régulières. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Les logs sont recueillis à partir du `stdout/stderr` du conteneur via le socket Docker.                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
@@ -115,7 +115,7 @@ logs_config:
 
 - Les logs qui proviennent du `Stderr` du conteneur possèdent par défaut le statut `Error`.
 
-- Si vous utilisez le pilote de journalisation _journald_ à la place du pilote json-file par défaut de Docker, consultez la documentation relative à l'[intégration de journald][1] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés.
+- Si vous utilisez le pilote de journalisation _journald_ à la place du pilote json-file par défaut de Docker, consultez la documentation relative à l'[intégration de journald][1] pour obtenir des instructions de configuration spécifiques aux environnements conteneurisés. Consultez la documentation sur les [unités de filtrage journald][1] pour en savoir plus sur les paramètres de filtrage.
 
 ## Collecte de logs pour des intégrations
 
@@ -183,9 +183,9 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 {{% /tab %}}
 {{% tab "Logs multiligne Java" %}}
 
-Pour les logs multiligne tels que les traces de pile, l'Agent dispose de [règles de traitement multiligne][1] pour agréger les lignes dans un seul log.
+Pour les logs multiligne tels que les stack traces, l'Agent dispose de [règles de traitement multiligne][1] pour agréger les lignes dans un seul log.
 
-Exemple de log (traces de pile Java) :
+Exemple de log (stack traces Java) :
 
 ```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException

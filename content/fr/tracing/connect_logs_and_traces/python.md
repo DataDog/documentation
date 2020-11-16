@@ -16,7 +16,7 @@ further_reading:
     tag: Blog
     text: Corréler automatiquement des logs de requête avec des traces
 ---
-## Injecter automatiquement des ID de trace et de span
+## Injecter automatiquement les ID de trace et de span
 
 Activez l'injection avec la variable d'environnement `DD_LOGS_INJECTION=true` lorsque vous utilisez `ddtrace-run`.
 Si vous avez configuré votre traceur avec les variables d'environnement `DD_ENV`, `DD_SERVICE` et `DD_VERSION`, alors `env`, `service` et `version` seront également ajoutés automatiquement. Pour en savoir plus, consultez la [section relative au tagging de service unifié][1].

@@ -78,7 +78,8 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Azure Storage" %}}
 
-Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+* Create a **container** service into that storage account. Please take a note of the container name as you will need to add this in Datadog Archive Page. 
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
@@ -182,7 +183,7 @@ Input your bucket name. **Optional**: Input a prefix directory for all the conte
 
 Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.
 
-Input your storage account name and a container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
+Input your storage account name and the container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
 
 {{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
 

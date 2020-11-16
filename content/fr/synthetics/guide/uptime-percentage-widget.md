@@ -10,7 +10,7 @@ further_reading:
     text: Widget Disponibilité des monitors
   - link: /synthetics/
     tag: Documentation
-    text: Surveillance Synthetics
+    text: Surveillance Synthetic
 ---
 ## Présentation
 

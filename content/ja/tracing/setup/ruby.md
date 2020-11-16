@@ -41,6 +41,7 @@ title: Ruby アプリケーションのトレース
      - [Active Support](#active-support)
      - [AWS](#aws)
      - [Concurrent Ruby](#concurrent-ruby)
+     - [Cucumber](#cucumber)
      - [Dalli](#dalli)
      - [DelayedJob](#delayedjob)
      - [Elasticsearch](#elasticsearch)
@@ -345,6 +346,7 @@ end
 | Active Support           | `active_support`           | `>= 3.0`                 | `>= 3.0`                  | *[リンク](#active-support)*           | *[リンク](https://github.com/rails/rails/tree/master/activesupport)*             |
 | AWS                      | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | *[リンク](#aws)*                      | *[リンク](https://github.com/aws/aws-sdk-ruby)*                                  |
 | Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | *[リンク](#concurrent-ruby)*          | *[リンク](https://github.com/ruby-concurrency/concurrent-ruby)*                  |
+| Cucumber                 | `cucumber`                 | `>= 3.0`                 | `>= 1.7.16`               | *[Link](#cucumber)*                | *[Link](https://github.com/cucumber/cucumber-ruby)*                            |
 | Dalli                    | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | *[リンク](#dalli)*                    | *[リンク](https://github.com/petergoldstein/dalli)*                              |
 | DelayedJob               | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | *[リンク](#delayedjob)*               | *[リンク](https://github.com/collectiveidea/delayed_job)*                        |
 | Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#elasticsearch)*            | *[リンク](https://github.com/elastic/elasticsearch-ruby)*                        |
@@ -366,7 +368,7 @@ end
 | Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[リンク](#rails)*                    | *[リンク](https://github.com/rails/rails)*                                       |
 | Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[リンク](#rake)*                     | *[リンク](https://github.com/ruby/rake)*                                         |
 | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#redis)*                    | *[リンク](https://github.com/redis/redis-rb)*                                    |
-| Resque                   | `resque`                   | `>= 1.0, < 2.0`          | `>= 1.0, < 2.0`           | *[リンク](#resque)*                   | *[リンク](https://github.com/resque/resque)*                                     |
+| Resque                   | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#resque)*                   | *[リンク](https://github.com/resque/resque)*                                     |
 | Rest Client              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[リンク](#rest-client)*              | *[リンク](https://github.com/rest-client/rest-client)*                           |
 | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[リンク](#sequel)*                   | *[リンク](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#shoryuken)*                | *[リンク](https://github.com/phstc/shoryuken)*                                   |
@@ -597,6 +599,42 @@ end
 | --- | ----------- | ------- |
 | `service_name` | `concurrent-ruby` インスツルメンテーションに使用されるサービス名 | `'concurrent-ruby'` |
 
+### Cucumber
+
+Cucumber インテグレーションでは、`cucumber` フレームワークを使用している場合のすべてのシナリオとステップの実行をトレースすることができます。
+
+インテグレーションをアクティブ化するには、`Datadog.configure` メソッドを使用します。
+
+```ruby
+require 'cucumber'
+require 'ddtrace'
+
+# デフォルトの Cucumber インテグレーションを構成
+Datadog.configure do |c|
+  c.use :cucumber, options
+end
+
+# シナリオからアクティブなスパンにタグ付けする方法の例
+Around do |scenario, block|
+  active_span = Datadog.configuration[:cucumber][:tracer].active_span
+  unless active_span.nil?
+    scenario.tags.filter { |tag| tag.include? ':' }.each do |tag|
+      active_span.set_tag(*tag.name.split(':', 2))
+    end
+  end
+  block.call
+end
+```
+
+ここで、`options` はオプションの `Hash` であり、次のパラメーターを受け入れます。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `true` |
+| `enabled` | Cucumber テストをトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
+| `service_name` | `cucumber` インスツルメンテーションに使用されるサービス名 | `'cucumber'` |
+| `operation_name` | `cucumber` インスツルメンテーションに使用するオペレーション名。`trace.#{operation_name}.errors` など、自動のトレースメトリクスの名前を変更したい場合に役立ちます。 | `'cucumber.test'` |
+
 ### Dalli
 
 Dalli インテグレーションは、`memcached` サーバーへのすべての呼び出しを追跡します。
@@ -624,7 +662,7 @@ client.set('abc', 123)
 
 ### DelayedJob
 
-DelayedJob インテグレーションは、ライフサイクルフックを使用してジョブの実行を追跡します。
+DelayedJob インテグレーションは、ライフサイクルフックを使用してジョブの実行とエンキューを追跡します。
 
 `Datadog.configure` で有効にできます。
 
@@ -642,6 +680,8 @@ end
 | --- | ----------- | ------- |
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `DelayedJob` インスツルメンテーションに使用されるサービス名 | `'delayed_job'` |
+| `client_service_name` | クライアントサイドの `DelayedJob` インスツルメンテーションに使用されるサービス名 | `'delayed_job-client'` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Elasticsearch
 
@@ -1142,6 +1182,7 @@ end
 | `service_name` | `que` インスツルメンテーションに使用されるサービス名 | `'que'` |
 | `tag_args` | ジョブの引数フィールドのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
 | `tag_data` | ジョブのデータフィールドのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Racecar
 
@@ -1442,6 +1483,7 @@ end
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `resque` インスツルメンテーションに使用されるサービス名 | `'resque'` |
 | `workers` | トレースするすべてのワーカークラスを含む配列（例: `[MyJob]`） | `[]` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Rest Client
 
@@ -1532,6 +1574,7 @@ end
 | --- | ----------- | ------- |
 | `analytics_enabled` | このインテグレーションによって生成されたスパンの分析を有効にします。オンの場合は `true`、グローバル設定に従う場合は `nil`、オフの場合は `false` です。 | `false` |
 | `service_name` | `shoryuken` インスツルメンテーションに使用されるサービス名 | `'shoryuken'` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Sidekiq
 
@@ -1555,6 +1598,7 @@ end
 | `client_service_name` | クライアント側の `sidekiq` インスツルメンテーションに使用されるサービス名 | `'sidekiq-client'` |
 | `service_name` | サーバー側の `sidekiq` インスツルメンテーションに使用されるサービス名 | `'sidekiq'` |
 | `tag_args` | ジョブ引数のタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Sinatra
 
@@ -1642,6 +1686,7 @@ end
 | `enabled` | Sneakers をトレースするかどうかを定義します。トレースを一時的に無効にしたい場合に役立ちます。`true` または `false` | `true` |
 | `service_name` | `sneakers` インスツルメンテーションに使用されるサービス名 | `'sneakers'` |
 | `tag_body` | ジョブメッセージのタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
+| `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { |スパン、エラー| span.set_error(error) unless span.nil? }` |
 
 ### Sucker Punch
 
@@ -2051,6 +2096,8 @@ Datadog.configure do |c|
   c.use :rails, log_injection: true
 end
 ```
+
+_注:_ `lograge` ユーザーで `initializers/lograge.rb` コンフィギュレーションファイルに `lograge.custom_options` を定義している場合は、Rails がイニシャライザーを読み込む順番 (アルファベット順) の関係で自動のトレース相関付けがうまく機能しない場合があります。これは、`initializers/datadog.rb` が `initializers/lograge.rb` イニシャライザーで上書きされてしまうためです。_既存の_ `lograge.custom_options` で自動のトレース相関付けを行う場合は、以下の[マニュアル (Lograge)](#manual-lograge) をご利用ください。
 
 ##### 手動 (Lograge)
 

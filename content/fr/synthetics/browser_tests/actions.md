@@ -1,7 +1,7 @@
 ---
 title: Étapes des tests Browser
 kind: documentation
-description: Enregistrer les étapes d'un test Browser Synthetics
+description: Enregistrer les étapes d'un test Browser Synthetic
 further_reading:
   - link: /synthetics/browser_tests/advanced_options/
     tag: Documentation

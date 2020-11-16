@@ -41,6 +41,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [Active Support](#active-support)
      - [AWS](#aws)
      - [Concurrent Ruby](#concurrent-ruby)
+     - [Cucumber](#cucumber)
      - [Dalli](#dalli)
      - [DelayedJob](#delayedjob)
      - [Elasticsearch](#elasticsearch)
@@ -145,7 +146,7 @@ Avant de configurer le tracing de votre application, installez l'Agent Datadog. 
     gem 'ddtrace'
     ```
 
-2. Installez le gem avec `bundle install`
+2. Installez le gem avec `bundle install`.
 3. Créez un fichier `config/initializers/datadog.rb` contenant :
 
     ```ruby
@@ -155,11 +156,11 @@ Avant de configurer le tracing de votre application, installez l'Agent Datadog. 
     end
     ```
 
-   Vous pouvez également activer d'autres intégrations ici (consultez [Instrumenter des intégrations](#instrumenter-des-integrations))
+    Vous pouvez également activer d'autres intégrations ici (consultez [Instrumenter des intégrations](#instrumenter-des-integrations)).
 
 ### Démarrage rapide pour les applications Ruby
 
-1. Installez le gem avec `gem install ddtrace`
+1. Installez la gemme avec `gem install ddtrace`.
 2. Ajoutez un bloc de configuration à votre application Ruby :
 
     ```ruby
@@ -177,7 +178,7 @@ Avant de configurer le tracing de votre application, installez l'Agent Datadog. 
 
 ### Démarrage rapide pour OpenTracing
 
-1. Installez le gem avec `gem install ddtrace`
+1. Installez le gem avec `gem install ddtrace`.
 2. Ajoutez ce qui suit à votre fichier de configuration OpenTracing :
 
     ```ruby
@@ -345,6 +346,7 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | Active Support           | `active_support`           | `>= 3.0`                 | `>= 3.0`                  | *[Lien](#active-support)*           | *[Lien](https://github.com/rails/rails/tree/master/activesupport)*             |
 | AWS                      | `aws`                      | `>= 2.0`                 | `>= 2.0`                  | *[Lien](#aws)*                      | *[Lien](https://github.com/aws/aws-sdk-ruby)*                                  |
 | Concurrent Ruby          | `concurrent_ruby`          | `>= 0.9`                 | `>= 0.9`                  | *[Lien](#concurrent-ruby)*          | *[Link](https://github.com/ruby-concurrency/concurrent-ruby)*                  |
+| Cucumber                 | `cucumber`                 | `>= 3.0`                 | `>= 1.7.16`               | *[Lien](#cucumber)*                | *[Lien](https://github.com/cucumber/cucumber-ruby)*                            |
 | Dalli                    | `dalli`                    | `>= 2.0`                 | `>= 2.0`                  | *[Lien](#dalli)*                    | *[Lien](https://github.com/petergoldstein/dalli)*                              |
 | DelayedJob               | `delayed_job`              | `>= 4.1`                 | `>= 4.1`                  | *[Lien](#delayedjob)*               | *[Lien](https://github.com/collectiveidea/delayed_job)*                        |
 | Elasticsearch            | `elasticsearch`            | `>= 1.0`                 | `>= 1.0`                  | *[Lien](#elasticsearch)*            | *[Lien](https://github.com/elastic/elasticsearch-ruby)*                        |
@@ -366,7 +368,7 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | Rails                    | `rails`                    | `>= 3.0`                 | `>= 3.0`                  | *[Lien](#rails)*                    | *[Lien](https://github.com/rails/rails)*                                       |
 | Rake                     | `rake`                     | `>= 12.0`                | `>= 12.0`                 | *[Lien](#rake)*                     | *[Lien](https://github.com/ruby/rake)*                                         |
 | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#redis)*                    | *[Lien](https://github.com/redis/redis-rb)*                                    |
-| Resque                   | `resque`                   | `>= 1.0, < 2.0`          | `>= 1.0, < 2.0`           | *[Lien](#resque)*                   | *[Lien](https://github.com/resque/resque)*                                     |
+| Resque                   | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[Lien](#resque)*                   | *[Lien](https://github.com/resque/resque)*                                     |
 | Client Rest              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Lien](#rest-client)*              | *[Lien](https://github.com/rest-client/rest-client)*                           |
 | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[Lien](#sequel)*                   | *[Lien](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#shoryuken)*                | *[Lien](https://github.com/phstc/shoryuken)*                                   |
@@ -597,6 +599,42 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | --- | ----------- | ------- |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `concurrent-ruby` | `'concurrent-ruby'` |
 
+### Cucumber
+
+Lorsque vous utilisez le framework `cucumber`, l'intégration Cucumber trace toutes les exécutions de scénarios et d'étapes.
+
+Pour activer votre intégration, utilisez la méthode `Datadog.configure` :
+
+```ruby
+require 'cucumber'
+require 'ddtrace'
+
+# Configurer l'intégration Cucumber par défaut
+Datadog.configure do |c|
+  c.use :cucumber, options
+end
+
+# L'exemple suivant décrit comment appliquer des tags provenant d'un scénario à la span active
+Around do |scenario, block|
+  active_span = Datadog.configuration[:cucumber][:tracer].active_span
+  unless active_span.nil?
+    scenario.tags.filter { |tag| tag.include? ':' }.each do |tag|
+      active_span.set_tag(*tag.name.split(':', 2))
+    end
+  end
+  block.call
+end
+```
+
+Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
+
+| Clé | Description | Valeur par défaut |
+| --- | ----------- | ------- |
+| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `true` |
+| `enabled` | Définit si Cucumber doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
+| `service_name` | Nom de service utilisé pour l'instrumentation de `cucumber`. | `'cucumber'` |
+| `operation_name` | Nom de l'opération utilisée pour l'instrumentation de `cucumber`. Utile si vous souhaitez renommer les métriques de traces automatiques, par exemple `trace.#{nom_opération}.errors`. | `'cucumber.test'` |
+
 ### Dalli
 
 L'intégration Dalli permet de tracer l'ensemble des appels à votre serveur `memcached` :
@@ -643,6 +681,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `DelayedJob` | `'delayed_job'` |
 | `client_service_name` | Nom de service utilisé pour l'instrumentation de `DelayedJob` côté client | `'delayed_job-client'` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Elasticsearch
 
@@ -821,7 +860,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `nil` |
-| `enabled` | Définit si Grape doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false` | `true` |
+| `enabled` | Définit si Grape doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `grape` | `'grape'` |
 
 ### GraphQL
@@ -1139,10 +1178,11 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
-| `enabled` | Définit si Que doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false` | `true` |
+| `enabled` | Définit si Que doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `que` | `'que'` |
 | `tag_args` | Activer le tagging du champ d'arguments d'une tâche. `true` pour l'activer, `false` pour le désactiver. | `false` |
 | `tag_data` | Activer le tagging du champ de données d'une tâche. `true` pour l'activer, `false` pour le désactiver. | `false` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Racecar
 
@@ -1305,7 +1345,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
-| `enabled` | Définit si les tâches Rake doivent être tracées ou non. Utile pour désactiver le tracing temporairement. `true` ou `false` | `true` |
+| `enabled` | Définit si les tâches Rake doivent être tracées ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `quantize` | Hash contenant les options de quantification des arguments de tâche. Des détails supplémentaires et des exemples sont disponibles plus bas. | `{}` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `rake` | `'rake'` |
 
@@ -1443,6 +1483,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `resque` | `'resque'` |
 | `workers` | Un tableau comprenant toutes les classes worker que vous souhaitez tracer (ex. : `[MyJob]`) | `[]` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Client Rest
 
@@ -1533,6 +1574,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | --- | ----------- | ------- |
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `shoryuken` | `'shoryuken'` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Sidekiq
 
@@ -1556,6 +1598,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `client_service_name` | Nom de service utilisé pour l'instrumentation de `sidekiq` côté client | `'sidekiq-client'` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sidekiq` côté serveur | `'sidekiq'` |
 | `tag_args` | Activer le tagging des arguments des tâches. `true` pour l'activer, `false` pour le désactiver. | `false` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Sinatra
 
@@ -1640,9 +1683,10 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | Clé | Description | Valeur par défaut |
 | --- | ----------- | ------- |
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
-| `enabled` | Définit si Sneakers doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false` | `true` |
+| `enabled` | Définit si Sneakers doit être tracé ou non. Utile pour désactiver le tracing temporairement. `true` ou `false`. | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `sneakers` | `'sneakers'` |
 | `tag_body` | Activer le tagging des messages des tâches. `true` pour l'activer, `false` pour le désactiver. | `false` |
+| `error_handler` | Gestionnaire d'erreurs personnalisé appelé lorsqu'une tâche renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit une erreur sur la span par défaut. Utile pour ignorer les erreurs temporaires. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
 ### Sucker Punch
 
@@ -1692,7 +1736,7 @@ end
 
 Les options disponibles sont :
 
- - `enabled` : définir si le `tracer` est activé ou non. Si cette option est définie sur `false`, l'instrumentation sera exécutée, mais aucune span ne sera envoyée à l'Agent de trace. Cette option peut être configurée via la variable d'environnement `DD_TRACE_ENABLED`. Valeur par défaut : `true`.
+ - `enabled` : définit si le `tracer` est activé ou non. Si cette option est définie sur `false`, l'instrumentation sera exécutée, mais aucune span ne sera envoyée à l'Agent de trace. Cette option peut être configurée via la variable d'environnement `DD_TRACE_ENABLED`. Valeur par défaut : `true`.
  - `hostname` : définir le hostname de l'Agent de trace.
  - `instance` : définir une instance de `Datadog::Tracer` personnalisée. Si cette option est définie, les autres paramètres de tracing sont ignorés (le traceur doit être configuré manuellement).
  - `partial_flush.enabled` : définir sur `true` pour vider les traces partielles (lorsque leur temps d'exécution est trop long). Désactivé par défaut. *Option expérimentale*.
@@ -1753,8 +1797,8 @@ Autres variables d'environnement :
 
 - `DD_TRACE_AGENT_URL` : définit l'URL d'endpoint où les traces sont envoyées. Prioritaire par rapport à `DD_AGENT_HOST` et `DD_TRACE_AGENT_PORT` si défini. Ex : `DD_TRACE_AGENT_URL=http://localhost:8126`.
 - `DD_TRACE_<INTÉGRATION>_ENABLED` : permet d'activer ou de désactiver une intégration **activée**. Valeur par défaut : `true`. Ex : `DD_TRACE_RAILS_ENABLED=false`. Cette option n'a aucun effet sur les intégrations qui n'ont pas été explicitement activées dans le code (p. ex. `Datadog.configure{ |c| c.use :integration }`). Cette variable d'environnement peut uniquement être utilisée pour désactiver une intégration.
-- `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED` : active ou désactive App Analytics pour une intégration spécifique. Valeurs acceptées : true ou false (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_ENABLED=true`.
-- `DD_TRACE_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` : définit le taux d'échantillonnage App Analytics pour une intégration spécifique. Doit être un nombre flottant entre 0.0 et 1.0 (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_SAMPLE_RATE=0.5`.
+- `DD_TRACE_<INTÉGRATION>_ANALYTICS_ENABLED` : active ou désactive App Analytics pour une intégration spécifique. Valeurs acceptées : true ou false (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_ENABLED=true`.
+- `DD_TRACE_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE` : définit le taux d'échantillonnage App Analytics pour une intégration spécifique. Doit être un nombre flottant entre 0.0 et 1.0 (par défaut). Ex : `DD_TRACE_ACTION_CABLE_ANALYTICS_SAMPLE_RATE=0.5`.
 - `DD_LOGS_INJECTION` : activer automatiquement l'injection des informations de [mise en corrélation des traces](#mise-en-correlation-des-traces), telles que `dd.trace_id`, dans les logs Rails. Prend en charge le logger par défaut (`ActiveSupport::TaggedLogging`) et `Lograge`. Pour en savoir plus sur le format des informations de mise en corrélation des traces, consultez la [section dédiée](#mise-en-correlation-des-traces). Valeurs acceptées : `true` ou `false` (par défaut). Ex. : `DD_LOGS_INJECTION=true`.
 
 ### Échantillonnage
@@ -2040,7 +2084,7 @@ Dans de nombreux cas, par exemple pour le logging, il peut s'avérer utile de me
 
 #### Logging dans les applications Rails
 
-##### Méthode automatique
+##### Configuration automatique
 
 Pour les applications Rails qui utilisent le logger par défaut (`ActiveSupport::TaggedLogging`) ou `lograge`, vous pouvez activer automatiquement l'injection des informations de mise en corrélation des traces en définissant l'option de configuration de l'instrumentation `rails` intitulée `log_injection` sur `true` ou en définissant la variable d'environnement `DD_LOGS_INJECTION=true`:
 
@@ -2053,7 +2097,9 @@ Datadog.configure do |c|
 end
 ```
 
-##### Méthode manuelle (Lograge)
+_Remarque :_  Rails charge les initialiseurs dans l'ordre alphabétique. Ainsi, pour les utilisateurs `lograge` qui ont également défini `lograge.custom_options` dans un fichier de configuration `initializers/lograge.rb`, il est possible que la corrélation automatique des traces ne soit pas appliquée. En effet, `initializers/datadog.rb` serait écrasé par l'initialiseur `initializers/lograge.rb`. Pour activer la corrélation automatique des traces avec un paramètre `lograge.custom_options` _existant_, utilisez la configuration [manuelle de Lograge](#configuration-manuelle-de-lograge) ci-dessous.
+
+##### Configuration manuelle de Lograge
 
 Après avoir [configuré Lograge dans une application Rails](https://docs.datadoghq.com/logs/log_collection/ruby/), modifiez manuellement le bloc `custom_options` dans le fichier de configuration de votre environnement (p. ex., `config/environments/production.rb`) pour ajouter les ID de trace.
 
@@ -2239,7 +2285,7 @@ end
 
 Consultez la [documentation sur Dogstatsd](https://www.rubydoc.info/github/DataDog/dogstatsd-ruby/master/frames) pour en savoir plus sur la configuration de `Datadog::Statsd`.
 
-Les statistiques sont spécifiques à la VM et comprennent :
+Les statistiques sont spécifiques à la VM et comprennent ce qui suit :
 
 | Nom                        | Type    | Description                                              |
 | --------------------------  | ------- | -------------------------------------------------------- |

@@ -37,9 +37,9 @@ Agent v5 の次の機能は、Agent v6 では**使用できません**。
 Agent v5 `datadog.conf` --> Agent v6 `datadog.yaml`
 
 Agent コンフィギュレーションのパスと形式を切り替えるには、以下の Agent コマンドを使用します。
-{{< code-block lang="bash" >}}
+```bash
 sudo -u dd-agent -- datadog-agent import
-{{< /code-block >}}
+```
 
 このコマンドは、既存の `datadog.conf` を解析し、サポートされているパラメーターを `datadog.yaml` の新しい形式に変換します。このコマンドは、現在有効になっているチェックのコンフィギュレーションファイルもコピーします。詳細については、[Datadog Agent v6 へのアップグレード][2]を参照してください。
 
@@ -100,12 +100,12 @@ sudo -u dd-agent -- datadog-agent import
 
 Agent v6 は、有効な YAML ファイルを `<AGENT_DIRECTORY>/conf.d/<CHECK_NAME>.d/` にロードします。これにより、複雑なコンフィギュレーションを複数のファイルに分割できます。
 
-たとえば、`http_check` のコンフィギュレーションファイルは次のようになります。
-{{< code-block lang="text" >}}
+たとえば、`http_check` のコンフィギュレーションファイルは以下のようになります。
+```text
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
 └── frontend.yaml
-{{< /code-block >}}
+```
 
 Agent は、`<CHECK_NAME>.d` フォルダー内のサブディレクトリからコンフィギュレーションファイルをロードしません。たとえば、次のコンフィギュレーションはロード**されません**。
 ```text

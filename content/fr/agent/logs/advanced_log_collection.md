@@ -25,6 +25,7 @@ Appliquez des règles de traitement de logs aux configurations de collecte de lo
 * [Nettoyer les données sensibles de vos logs](#scrub-sensitive-data-from-your-logs)
 * [Effectuer l'agrégation multiligne](#multi-line-aggregation)
 * [Suivre des répertoires à l'aide de wildcards](#tail-directories-by-using-wildcards)
+* [Encoder des logs au format UTF-16](#encode-utf-16-format-logs)
 
 **Remarque** : si vous configurez plusieurs règles de traitement, celles-ci sont appliquées de façon séquentielle et chaque règle est appliquée au résultat de la précédente.
 
@@ -246,6 +247,7 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
         "log_processing_rules": [{
           "type": "mask_sequences",
           "name": "mask_credit_cards",
+          "replace_placeholder": "[masked_credit_card]",
           "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
         }]
       }]
@@ -277,6 +279,7 @@ spec:
             "log_processing_rules": [{
               "type": "mask_sequences",
               "name": "mask_credit_cards",
+              "replace_placeholder": "[masked_credit_card]",
               "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
             }]
           }]
@@ -307,7 +310,7 @@ Le log suivant est alors envoyé à Datadog : `User email: masked_user@example.
 
 Si vos logs ne sont pas envoyés au format JSON et que vous souhaitez agréger plusieurs lignes en une seule entrée, configurez l'Agent Datadog de façon à détecter un nouveau log avec une expression régulière spécifique, au lieu de compter un seul log par ligne. Pour ce faire, utilisez le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **multi_line** qui agrège toutes les lignes en une seule entrée jusqu'à ce que l'expression indiquée soit à nouveau détectée.
 
-Par exemple, chaque ligne de log Java commence avec un timestamp au format `aaaa-jj-mm`. Ces lignes comprennent une trace de pile qui peut être envoyée sous forme de deux logs :
+Par exemple, chaque ligne de log Java commence avec un timestamp au format `aaaa-jj-mm`. Ces lignes comprennent une stack trace qui peut être envoyée sous forme de deux logs :
 
 ```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -320,7 +323,7 @@ Par exemple, chaque ligne de log Java commence avec un timestamp au format `aaaa
 {{< tabs >}}
 {{% tab "Fichier de configuration" %}}
 
-Pour envoyer les exemples de log mentionnés ci-dessus à l'aide d'un fichier de configuration, utilisez les `log_processing_rules` suivants :
+Pour envoyer les logs d'exemple mentionnés ci-dessus avec un fichier de configuration, utilisez les paramètres `log_processing_rules` suivants :
 
 ```yaml
 logs:
@@ -396,12 +399,13 @@ spec:
 
 Exemples supplémentaires :
 
-| **Chaîne brute**           | **Pattern**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
+| **Chaîne brute**           | **Pattern**                                   |
+|--------------------------|-----------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
+| 20180228                 | `\d{8}`                                       |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 
 **Remarque** : les expressions régulières pour les logs multiligne doivent commencer au **début** d'un log. Les expressions ne peuvent pas être recherchées en milieu de ligne.
 
@@ -439,9 +443,27 @@ L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log`, mais `
 
 **Remarque** : l'Agent nécessite les autorisations de lecture et d'exécution pour un répertoire afin d'énumérer tous les fichiers qui y figurent.
 
+## Encoder des logs au format UTF-16
+
+Si des logs d'applications sont rédigés au format UTF-16, depuis l'Agent Datadog **v6.23/v7.23**, les utilisateurs peuvent les encoder afin qu'ils soient parsés comme prévu dans le [Log Explorer][2]. Utilisez le paramètre `encoding` dans la section de configuration des logs. Définissez-le sur `utf-16-le` pour le format little-endian UTF16 et sur `utf-16-be` pour le format big-endian UTF16. Toutes les autres valeurs seront ignorées et l'Agent lira le fichier en assumant un format UTF8.
+
+Exemple de configuration :
+
+```yaml
+logs:
+ - type: file
+   path: /test/log/hello-world.log
+   tags: key:value
+   service: utf-16-logs
+   source: mysql
+   encoding: utf-16-be
+```
+
+**Remarque** : le paramètre `encoding` est uniquement applicable lorsque le paramètre `type` est défini sur `file`.
+
 ## Règles globales de traitement
 
-Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][2] de l'Agent, ou à l'aide d'une variable d'environnement :
+Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][3] de l'Agent, ou à l'aide d'une variable d'environnement :
 
 {{< tabs >}}
 {{% tab "Fichiers de configuration" %}}
@@ -463,7 +485,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Variable d'environnement" %}}
 
-Utilisez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` pour configurer les règles globales de traitement, par exemple :
+Utilisez la variable d'environnement `DD_LOGS_CONFIG_PROCESSING_RULES` pour configurer les règles globales de traitement. Exemple :
 
 ```shell
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
@@ -484,7 +506,7 @@ env:
 {{< /tabs >}}
 Ces règles globales de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
 
-**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [sous-commande status][3] pour diagnostiquer les éventuels problèmes.
+**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [sous-commande status][4] pour diagnostiquer les éventuels problèmes.
 
 ## Pour aller plus loin
 
@@ -493,6 +515,8 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
+
 [1]: /fr/agent/faq/commonly-used-log-processing-rules
-[2]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /fr/agent/guide/agent-commands/#agent-information
+[2]: https://docs.datadoghq.com/fr/logs/explorer/#overview
+[3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /fr/agent/guide/agent-commands/#agent-information

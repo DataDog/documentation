@@ -1,7 +1,16 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: pgbouncer
+  metrics_metadata: metadata.csv
   monitors: {}
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    instance_overview: assets/saved_views/instance_overview.json
+    user_overview: assets/saved_views/user_overview.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -12,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md'
 display_name: PGBouncer
+draft: false
 git_integration_title: pgbouncer
 guid: 51386802-4502-4991-b592-27eff1ca111c
 integration_id: pgbouncer
@@ -36,7 +46,7 @@ supported_os:
 
 Le check PgBouncer surveille les métriques du pool de connexions et vous permet de mesurer le trafic entrant et sortant de votre application.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -58,13 +68,16 @@ Ce check nécessite un utilisateur associé afin d'interroger votre instance PgB
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `pgbouncer.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple pgbouncer.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `pgbouncer.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple pgbouncer.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -76,7 +89,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
@@ -98,19 +111,26 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: "<SERVICE_NAME>"
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple pgbouncer.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple pgbouncer.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][5].
+3. [Redémarrez l'Agent][4].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
-| `<NOM_INTÉGRATION>` | `oracle`                                                                                               |
+| `<NOM_INTÉGRATION>` | `pgbouncer`                                                                                               |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                          |
 | `<CONFIG_INSTANCE>`  | `{"database_url": "postgresql://datadog:<MOTDEPASSE>@%%host%%:%%port%%/<URL_BASEDEDONNÉES>?sslmode=require"}` |
 
@@ -118,15 +138,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                           |
 | -------------- | ----------------------------------------------- |
 | `<CONFIG_LOG>` | {"source": "pgbouncer", "service": "pgbouncer"} |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `pgbouncer` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][2] et cherchez `pgbouncer` dans la section Checks.
 
 ## Données collectées
 
@@ -143,18 +168,13 @@ Le check PgBouncer n'inclut aucun événement.
 ### Checks de service
 
 **pgbouncer.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à PgBouncer pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à PgBouncer pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/docker/log/
-[8]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

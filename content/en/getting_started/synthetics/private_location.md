@@ -28,13 +28,19 @@ Your private location worker pulls your test configurations from Datadog’s ser
 
 {{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign Synthetic test to private location"  style="width:100%;">}}
 
+The private location worker is available on Docker Hub:
+
+| Docker Hub                                                                |
+|---------------------------------------------------------------------------|
+| [hub.docker.com/r/datadog/synthetics-private-location-worker][3]          |
+
 ## Create your Private Location
 
 1. Set up a [Vagrant Ubuntu 16.04 virtual machine][2].
-2. Install [Docker][3] on that machine.
-3. In the Datadog app, hover over **[UX Monitoring][4]** and select *Settings* -> *Private Locations*. Click **Add Private Location**.
+2. Install [Docker][4] on that machine.
+3. In the Datadog app, hover over **[UX Monitoring][5]** and select *Settings* -> *Private Locations*. Click **Add Private Location**.
 4. Fill out your private location details (only `Name` and `API key` fields are mandatory). Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
-5. Specify the proxy URL if the traffic between your private location and Datadog needs to go through a proxy. You can also optionally toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][5] and [IPv6 address registry][6]).
+5. Specify the proxy URL if the traffic between your private location and Datadog needs to go through a proxy. You can also optionally toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]).
 6. Copy and paste your private location configuration file to your working directory.
 
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
@@ -76,7 +82,8 @@ You are now able to use your new private location as any other Datadog managed l
 
 [1]: /getting_started/synthetics/api_test/
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[3]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
-[4]: https://app.datadoghq.com/synthetics/list
-[5]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[6]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[3]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
+[4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
+[5]: https://app.datadoghq.com/synthetics/list
+[6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml

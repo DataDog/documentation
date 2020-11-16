@@ -25,10 +25,10 @@ further_reading:
 Par défaut, toutes les données recueillies sont conservées avec une granularité complète pendant 15 jours. Le script Real User Monitoring de Datadog envoie 5 grands types d'événements à Datadog :
 
 - [Vue][1] : À chaque fois qu'un utilisateur accède à une page de l'application configurée, un événement de type Vue est créé. Tant que l'utilisateur reste sur la page, toutes les données recueillies sont associées à cette vue via l'attribut `view.id`.
-- [Ressource][6] : Un événement de type Ressource peut être généré pour les images, les XHR/Fetch, le CSS ou les bibliothèques JS. Celui-ci contient des informations sur la ressource, telles que son nom et le temps de chargement associé.
-- [Tâche longue][7] : Lorsqu'une tâche dans un navigateur bloque le thread principal pendant plus de 50 ms, celle-ci est considérée comme une tâche longue et génère un événement spécifique.
-- [Erreur][8] : À chaque fois qu'une erreur frontend est générée par le navigateur, celle-ci est enregistrée et transmise à Datadog en tant qu'événement de type Erreur.
-- [Action utilisateur][9] : Un événement de type Action utilisateur correspond à un événement personnalisé qui peut être généré pour une action utilisateur donnée.
+- [Ressource][2] : Un événement de type Ressource peut être généré pour les images, les XHR/Fetch, le CSS ou les bibliothèques JS. Celui-ci contient des informations sur la ressource, telles que son nom et le temps de chargement associé.
+- [Tâche longue][3] : Lorsqu'une tâche dans un navigateur bloque le thread principal pendant plus de 50 ms, celle-ci est considérée comme une tâche longue et génère un événement spécifique.
+- [Erreur][4] : À chaque fois qu'une erreur frontend est générée par le navigateur, celle-ci est enregistrée et transmise à Datadog en tant qu'événement de type Erreur.
+- [Action utilisateur][5] : Un événement de type Action utilisateur correspond à un événement personnalisé qui peut être généré pour une action utilisateur donnée.
 
 {{< tabs >}}
 {{% tab "Vue" %}}
@@ -141,7 +141,7 @@ Une tâche est dite [longue][1] lorsqu'elle bloque le thread principal pendant 5
 {{% /tab %}}
 {{% tab "Erreur" %}}
 
-Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM). Le message d'erreur et la trace de pile sont inclus lorsque cela est possible.
+Les erreurs frontend sont recueillies par le service Real User Monitoring (RUM). Le message d'erreur et la stack trace sont inclus lorsque cela est possible.
 
 ## Origines des erreurs
 Les erreurs frontend sont réparties en 3 catégories différentes en fonction de leur `error.origin` :
@@ -157,7 +157,7 @@ Les erreurs frontend sont réparties en 3 catégories différentes en fonction 
 | `error.origin`  | chaîne | L'origine de l'erreur (par exemple, la console ou le réseau).     |
 | `error.kind`    | chaîne | Le type ou la catégorie d'erreur (ou le code dans certains cas).                   |
 | `error.message` | chaîne | Un message d'une ligne lisible et concis décrivant l'événement. |
-| `error.stack`   | chaîne | La trace de pile ou toutes informations complémentaires relatives à l'erreur.     |
+| `error.stack`   | chaîne | La stack trace ou toutes informations complémentaires relatives à l'erreur.     |
 
 ### Erreurs réseau
 
@@ -186,23 +186,23 @@ Les erreurs de type source comprennent des informations au niveau du code concer
 {{% tab "Action utilisateur" %}}
 
 ## Collecte automatique des actions utilisateur
-Le SDK Real User Monitoring (RUM) détecte les interactions effectuées par un utilisateur durant son parcours. Pour activer cette fonctionnalité, définissez le [paramètre de lancement][5] `trackInteractions` sur `true`.
+Le SDK Real User Monitoring (RUM) détecte les interactions effectuées par un utilisateur durant son parcours. Pour activer cette fonctionnalité, définissez le [paramètre de lancement][1] `trackInteractions` sur `true`.
 
 **Remarque** : le paramètre de lancement `trackInteractions` permet la collecte des clics utilisateur dans votre application. **Des données sensibles et privées** contenues dans vos pages sont susceptibles d'être recueillies pour identifier les éléments qui ont fait l'objet d'une interaction.
 
-Une fois qu'une interaction est détectée, tous les nouveaux événements RUM sont associés à l'action utilisateur en cours jusqu'à ce qu'elle soit considérée comme terminée. L'action utilisateur est également associée à ses attributs d'affichage parents : informations sur le navigateur, données de géolocalisation et [contexte global][1].
+Une fois qu'une interaction est détectée, tous les nouveaux événements RUM sont associés à l'action utilisateur en cours jusqu'à ce qu'elle soit considérée comme terminée. L'action utilisateur est également associée à ses attributs d'affichage parents : informations sur le navigateur, données de géolocalisation et [contexte global][2].
 
 ### Comment la durée de l'action utilisateur est-elle calculée ?
 Une fois qu'une interaction est détectée, le SDK RUM surveille les requêtes réseau et les mutations DOM. L'action utilisateur est considérée comme terminée lorsqu'aucune activité n'est effectuée sur la page pendant plus de 100 ms (une activité étant définie comme des requêtes réseau en cours ou une mutation DOM).
 
 ## Actions utilisateur personnalisées
-Les actions utilisateur personnalisées sont des actions utilisateur déclarées et envoyées manuellement via l'[API `addUserAction`][2]. Elles permettent d'envoyer des informations relatives à un événement qui a lieu au cours d'un parcours utilisateur, telles qu'un délai personnalisé ou des informations sur le panier client.
+Les actions utilisateur personnalisées sont des actions utilisateur déclarées et envoyées manuellement via l'[API `addUserAction`][3]. Elles permettent d'envoyer des informations relatives à un événement qui a lieu au cours d'un parcours utilisateur, telles qu'un délai personnalisé ou des informations sur le panier client.
 
 ## Mesures collectées
 
 | Attribut    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `duration` | nombre (ns) | La durée de l'action utilisateur. Consultez la [documentation relative aux actions utilisateur][3] pour découvrir comment elle est calculée. |
+| `duration` | nombre (ns) | La durée de l'action utilisateur. Consultez la [documentation relative aux actions utilisateur][4] pour découvrir comment elle est calculée. |
 | `user_action.measures.long_task_count`        | nombre      | Nombre total de tâches longues recueillies pour cette action utilisateur. |
 | `user_action.measures.resource_count`         | nombre      | Nombre total de ressources recueillies pour cette action utilisateur. |
 | `user_action.measures.user_action_count`      | nombre      | Nombre total d'actions utilisateur recueillies pour cette action utilisateur.|
@@ -212,14 +212,15 @@ Les actions utilisateur personnalisées sont des actions utilisateur déclarées
 | Attribut    | Type   | Description              |
 |--------------|--------|--------------------------|
 | `user_action.id` | chaîne | UUID de l'action utilisateur. |
-| `user_action.type` | chaîne | Type d'action utilisateur. Pour les [actions utilisateur personnalisées][4], ce paramètre est défini sur `custom`. |
+| `user_action.type` | chaîne | Type d'action utilisateur. Pour les [actions utilisateur personnalisées][5], ce paramètre est défini sur `custom`. |
 | `event.name` | chaîne | Nom de l'action utilisateur. Pour les actions utilisateur collectées automatiquement, il s'agit de l'élément avec lequel l'utilisateur a interagi. |
 
-[1]: /fr/real_user_monitoring/installation/advanced_configuration/?tab=npm#add-global-context
-[2]: /fr/real_user_monitoring/installation/advanced_configuration/?tab=npm#custom-user-actions
-[3]: /fr/real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
-[4]: /fr/real_user_monitoring/data_collected/user_action#custom-user-actions
-[5]: /fr/real_user_monitoring/installation/?tab=us#initialization-parameters
+
+[1]: /fr/real_user_monitoring/browser/?tab=us#initialization-parameters
+[2]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
+[3]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#custom-user-actions
+[4]: /fr/real_user_monitoring/data_collected/user_action#how-is-the-user-action-duration-calculated
+[5]: /fr/real_user_monitoring/data_collected/user_action#custom-user-actions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -240,7 +241,7 @@ Ces cinq types d'événements sont associés à des attributs par défaut :
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | chaîne | ID généré aléatoirement pour chaque vue de page.                                                                      |
 | `view.url`                     | chaîne | L'URL de la vue.                                                                                                  |
-| `view.loading_type`                     | chaîne | Le type de chargement de page : `initial_load` ou `route_change`. Pour en savoir plus, consultez la [documentation sur la prise en charge des applications monopage][2].|
+| `view.loading_type`                     | chaîne | Le type de chargement de page : `initial_load` ou `route_change`. Pour en savoir plus, consultez la [documentation sur la prise en charge des applications monopage][6].|
 | `view.referrer`                | chaîne | L'URL de la page web précédente, à partir de laquelle un lien vers la page demandée à été sélectionné.               |
 | `view.url_details.host`        | chaîne | La partie de l'URL correspondant au host HTTP.                                                                                 |
 | `view.url_details.path`        | chaîne | La partie de l'URL correspondant au chemin HTTP.                                                                                 |
@@ -249,7 +250,7 @@ Ces cinq types d'événements sont associés à des attributs par défaut :
 
 ### User agent
 
-Les contextes suivants, qui suivent la logique des [attributs standard Datadog][3], sont joints automatiquement à tous les événements envoyés à Datadog :
+Les contextes suivants, qui suivent la logique des [attributs standard Datadog][7], sont joints automatiquement à tous les événements envoyés à Datadog :
 
 | Nom de l'attribut                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
@@ -265,11 +266,11 @@ Les attributs suivants sont liés à la géolocalisation des adresses IP utilis�
 | Nom complet                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `network.client.geoip.country.name`         | chaîne | Nom du pays                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | chaîne | [Code ISO][4] du pays (par exemple : `US` pour les États-Unis, `FR` pour la France)                                                  |
+| `network.client.geoip.country.iso_code`     | chaîne | [Code ISO][8] du pays (par exemple : `US` pour les États-Unis, `FR` pour la France)                                                  |
 | `network.client.geoip.continent.code`       | chaîne | Code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | chaîne | Nom du continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | chaîne | Nom du premier niveau de division du pays (par exemple : `California` aux États-Unis ou le département de la `Sarthe` en France) |
-| `network.client.geoip.subdivision.iso_code` | chaîne | [Code ISO][4] du premier niveau de division du pays (par exemple : `CA` aux États-Unis ou le département `SA` en France)    |
+| `network.client.geoip.subdivision.iso_code` | chaîne | [Code ISO][8] du premier niveau de division du pays (par exemple : `CA` aux États-Unis ou le département `SA` en France)    |
 | `network.client.geoip.city.name`            | chaîne | Le nom de la ville (par exemple : `Paris`, `New York`)                                                                                   |
 
 ## Attributs supplémentaires
@@ -281,12 +282,11 @@ En plus des attributs par défaut, vous pouvez ajouter un [contexte global spéc
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/real_user_monitoring/installation/advanced_configuration/
-[2]: /fr/real_user_monitoring/data_collected/view#single-page-applications
-[3]: /fr/logs/processing/attributes_naming_convention/
-[4]: /fr/logs/processing/attributes_naming_convention/#user-agent-attributes
-[5]: /fr/real_user_monitoring/browser/data_collected/?tab=view
-[6]: /fr/real_user_monitoring/browser/data_collected/?tab=resource
-[7]: /fr/real_user_monitoring/browser/data_collected/?tab=longtask
-[8]: /fr/real_user_monitoring/browser/data_collected/?tab=error
-[9]: /fr/real_user_monitoring/browser/data_collected/?tab=useraction
+[1]: /fr/real_user_monitoring/browser/advanced_configuration/
+[2]: /fr/real_user_monitoring/browser/data_collected/?tab=resource
+[3]: /fr/real_user_monitoring/browser/data_collected/?tab=longtask
+[4]: /fr/real_user_monitoring/browser/data_collected/?tab=error
+[5]: /fr/real_user_monitoring/browser/data_collected/?tab=useraction
+[6]: /fr/real_user_monitoring/data_collected/view#single-page-applications
+[7]: /fr/logs/processing/attributes_naming_convention/
+[8]: /fr/logs/processing/attributes_naming_convention/#user-agent-attributes

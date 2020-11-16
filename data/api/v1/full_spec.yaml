@@ -3,7 +3,21 @@ components:
   examples: {}
   headers: {}
   links: {}
-  parameters: {}
+  parameters:
+    SlackChannelNamePathParameter:
+      description: The name of the Slack channel being operated on.
+      in: path
+      name: channel_name
+      required: true
+      schema:
+        type: string
+    SlackTeamNamePathParameter:
+      description: Your Slack team name.
+      in: path
+      name: team_name
+      required: true
+      schema:
+        type: string
   requestBodies: {}
   responses: {}
   schemas:
@@ -2467,12 +2481,30 @@ components:
             description: IPv4 prefix
             type: string
           type: array
+        prefixes_ipv4_by_location:
+          additionalProperties:
+            description: List of IPv4 prefixes.
+            items:
+              description: IPv4 prefix.
+              type: string
+            type: array
+          description: List of IPv4 prefixes by location.
+          type: object
         prefixes_ipv6:
           description: List of IPv6 prefixes.
           items:
             description: IPv6 prefix
             type: string
           type: array
+        prefixes_ipv6_by_location:
+          additionalProperties:
+            description: List of IPv6 prefixes.
+            items:
+              description: IPv6 prefix.
+              type: string
+            type: array
+          description: List of IPv6 prefixes by location.
+          type: object
       type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
@@ -3166,7 +3198,6 @@ components:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
           format: int64
-          readOnly: true
           type: integer
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -3193,9 +3224,11 @@ components:
           readOnly: true
           type: string
         num_retention_days:
-          description: The number of days before logs are deleted from this index.
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.'
           format: int64
-          readOnly: true
           type: integer
       required:
       - filter
@@ -3208,6 +3241,52 @@ components:
           items:
             $ref: '#/components/schemas/LogsIndex'
           type: array
+      type: object
+    LogsIndexUpdateRequest:
+      description: Object for updating a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          format: int64
+          type: integer
+        disable_daily_limit:
+          description: 'If true, sets the `daily_limit` value to null and the index
+            is not limited on a daily basis (any
+
+            specified `daily_limit` value in the request is ignored). If false or
+            omitted, the index''s current
+
+            `daily_limit` is maintained.'
+          type: boolean
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all logs
+
+            already in this index. It may also affect billing.'
+          format: int64
+          type: integer
+      required:
+      - filter
       type: object
     LogsIndexesOrder:
       description: Object containing the ordered list of log index names.
@@ -4097,6 +4176,12 @@ components:
           $ref: '#/components/schemas/MonitorOptions'
         overall_state:
           $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         query:
           description: The monitor query.
           type: string
@@ -4351,13 +4436,18 @@ components:
           nullable: true
           type: integer
         require_full_window:
-          default: true
           description: "A Boolean indicating whether this monitor needs a full window\
             \ of data before it\u2019s evaluated.\nWe highly recommend you set this\
             \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
-            \ For \u201Con average\u201D\n\u201Cat all times\u201D and \u201Cin total\u201D\
-            \ aggregation, default is true. `False` otherwise."
+            \ Default is false."
           type: boolean
+        restricted_roles:
+          description: A list of role identifiers that can be pulled from the Roles
+            API. Cannot be used with `locked`.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         silenced:
           additionalProperties:
             description: ID of the downtime applied to the monitor.
@@ -4811,6 +4901,12 @@ components:
           $ref: '#/components/schemas/MonitorOptions'
         overall_state:
           $ref: '#/components/schemas/MonitorOverallStates'
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         query:
           description: The monitor query.
           type: string
@@ -6272,7 +6368,7 @@ components:
       properties:
         account:
           description: Account to which the channel belongs to.
-          example: ''
+          example: jane.doe
           type: string
         channel_name:
           description: Your channel name.
@@ -6321,6 +6417,52 @@ components:
             $ref: '#/components/schemas/SlackServiceHook'
           type: array
       type: object
+    SlackIntegrationChannel:
+      description: The Slack channel configuration.
+      properties:
+        display:
+          description: Configuration options for what is shown in an alert event message.
+          properties:
+            message:
+              default: true
+              description: Show the main body of the alert event.
+              type: boolean
+            notified:
+              default: true
+              description: Show the list of @-handles in the alert event.
+              type: boolean
+            snapshot:
+              default: true
+              description: Show the alert event's snapshot image.
+              type: boolean
+            tags:
+              default: true
+              description: Show the scopes on which the monitor alerted.
+              type: boolean
+          type: object
+        name:
+          description: Your channel name.
+          example: '#general'
+          type: string
+      type: object
+    SlackIntegrationChannels:
+      description: A list of configured Slack channels.
+      example:
+      - display:
+          message: true
+          notified: true
+          snapshot: true
+          tags: true
+        name: '#channel_name_main_account'
+      - display:
+          message: true
+          notified: true
+          snapshot: false
+          tags: true
+        name: '#channel_name_doghouse'
+      items:
+        $ref: '#/components/schemas/SlackIntegrationChannel'
+      type: array
     SlackServiceHook:
       description: 'The service hook is generated for your Slack account in
 
@@ -6328,11 +6470,11 @@ components:
       properties:
         account:
           description: Your Slack account name.
-          example: ''
+          example: joe.doe
           type: string
         url:
           description: Your Slack service hook URL.
-          example: ''
+          example: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
           type: string
       required:
       - account
@@ -8450,6 +8592,51 @@ components:
             $ref: '#/components/schemas/UsageHostHour'
           type: array
       type: object
+    UsageIndexedSpansHour:
+      description: The hours of indexed spans usage.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        indexed_events_count:
+          description: Contains the number of spans indexed.
+          format: int64
+          type: integer
+      type: object
+    UsageIndexedSpansResponse:
+      description: A response containing indexed spans usage.
+      properties:
+        usage:
+          description: Array with the number of hourly traces indexed for a given
+            organization.
+          items:
+            $ref: '#/components/schemas/UsageIndexedSpansHour'
+          type: array
+      type: object
+    UsageIngestedSpansHour:
+      description: Ingested spans usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIngestedSpansResponse:
+      description: Response containing the ingested spans usage for each hour for
+        a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for ingested spans.
+          items:
+            $ref: '#/components/schemas/UsageIngestedSpansHour'
+          type: array
+      type: object
     UsageLambdaHour:
       description: 'Number of lambda functions and sum of the invocations of all lambda
         functions
@@ -10043,6 +10230,9 @@ components:
       - white_on_red
       - white_on_yellow
       - yellow_on_white
+      - black_on_light_yellow
+      - black_on_light_green
+      - black_on_light_red
       type: string
       x-enum-varnames:
       - BLUE
@@ -11298,9 +11488,12 @@ paths:
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,\
-        \ sources and tags.\n\n**Note**: If the event you\u2019re querying contains\
-        \ markdown formatting of any kind, you may see characters such as %,\\,n in\
-        \ your output."
+        \ sources and tags.\n\n**Notes**:\n- If the event you\u2019re querying contains\
+        \ markdown formatting of any kind,\nyou may see characters such as `%`,`\\\
+        `,`n` in your output.\n\n- This endpoint returns a maximum of `1000` most\
+        \ recent results. To return additional results,\nidentify the last timestamp\
+        \ of the last result and set that as the `end` query time to\npaginate the\
+        \ results."
       operationId: ListEvents
       parameters:
       - description: POSIX timestamp.
@@ -12869,6 +13062,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/integration/slack:
     delete:
+      deprecated: true
       description: Delete a Datadog-Slack integration.
       operationId: DeleteSlackIntegration
       responses:
@@ -12884,6 +13078,7 @@ paths:
       tags:
       - Slack Integration
     get:
+      deprecated: true
       description: Get all information about your Datadog-Slack integration.
       operationId: GetSlackIntegration
       responses:
@@ -12915,6 +13110,7 @@ paths:
       tags:
       - Slack Integration
     post:
+      deprecated: true
       description: 'Create a Datadog-Slack integration. Once created, add a channel
         to it with the
 
@@ -12952,6 +13148,7 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
     put:
+      deprecated: true
       description: 'Add channels to your existing Datadog-Slack integration.
 
 
@@ -12982,6 +13179,188 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
       summary: Add channels to Slack integration
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
+    get:
+      description: Get a list of all channels configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannels
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannels'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get all channels in a Slack integration
+      tags:
+      - Slack Integration
+    post:
+      description: Add a channel to your Datadog-Slack integration.
+      operationId: CreateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing Slack channel to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Create a Slack integration channel
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
+    delete:
+      description: Remove a channel from your Datadog-Slack integration.
+      operationId: RemoveSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '204':
+          description: The channel was removed successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Remove a Slack integration channel
+      tags:
+      - Slack Integration
+    get:
+      description: Get a channel configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a Slack integration channel
+      tags:
+      - Slack Integration
+    patch:
+      description: Update a channel used in your Datadog-Slack integration.
+      operationId: UpdateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing fields and values to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a Slack integration channel
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
@@ -13473,8 +13852,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LogsIndex'
-        description: Object containing the new `LogsIndex`.
+              $ref: '#/components/schemas/LogsIndexUpdateRequest'
+        description: Object containing the new `LogsIndexUpdateRequest`.
       responses:
         '200':
           content:
@@ -16725,6 +17104,94 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+  /api/v1/usage/indexed-spans:
+    get:
+      description: Get hourly usage for indexed spans.
+      operationId: GetUsageIndexedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIndexedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for indexed spans
+      tags:
+      - Usage Metering
+  /api/v1/usage/ingested-spans:
+    get:
+      description: Get hourly usage for ingested spans.
+      operationId: GetIngestedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIngestedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for ingested spans
+      tags:
+      - Usage Metering
   /api/v1/usage/logs:
     get:
       description: Get hourly usage for logs.
@@ -17317,7 +17784,11 @@ paths:
       - Usage Metering
   /api/v1/usage/traces:
     get:
-      description: Get hourly usage for trace search.
+      deprecated: true
+      description: 'Get hourly usage for trace search.
+
+
+        **Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.'
       operationId: GetUsageTrace
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -17360,7 +17831,11 @@ paths:
       - Usage Metering
   /api/v1/usage/tracing-without-limits:
     get:
-      description: Get hourly usage for tracing without limits.
+      deprecated: true
+      description: 'Get hourly usage for tracing without limits.
+
+
+        **Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.'
       operationId: GetTracingWithoutLimits
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -18143,7 +18618,7 @@ tags:
   name: Service Level Objectives
 - description: 'Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)
 
-    directly through Datadog API.'
+    directly through the Datadog API.'
   externalDocs:
     description: For more information about the Datadog-Slack integration, see the
       integration page.

@@ -131,7 +131,7 @@ As of October 20, 2020, all existing App Analytics filters are automatically tra
 [3]: /tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /account_management/billing/pricing/#infrastructure-monitoring
 [5]: /account_management/billing/pricing/#apm
-[6]: mailto:sales@datadoghq.com
+[6]: https://www.datadoghq.com/pricing/
 [7]: mailto:success@datadoghq.com
 [8]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [9]: /tracing/send_traces/#datadog-agent

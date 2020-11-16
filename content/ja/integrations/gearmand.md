@@ -5,18 +5,21 @@ assets:
   configuration:
     spec: assets/configuration/spec.yaml
   dashboards: {}
-  logs: {}
+  logs:
+    source: gearman
   metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - processing
   - autodiscovery
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md'
 display_name: Gearman
+draft: false
 git_integration_title: gearmand
 guid: bdd65394-92ff-4d51-bbe3-ba732663fdb2
 integration_id: gearman
@@ -93,9 +96,32 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
 {{% /tab %}}
 {{< /tabs >}}
 
+#### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Gearman ログの収集を開始するには、次のコンフィギュレーションブロックを `gearmand.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/gearmand.log
+        source: gearman
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[gearmand.d/conf.yaml のサンプル][2]を参照してください。
+
+3. [Agent を再起動します][3]。
+
+Kubernetes 環境でログを収集する Agent を構成するためのその他の情報については、[Datadog ドキュメント][4]を参照してください。
+
 ### 検証
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `gearmand` を探します。
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `gearmand` を探します。
 
 ## 収集データ
 
@@ -115,9 +141,12 @@ Agent が Gearman に接続してメトリクスを収集できない場合は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

@@ -83,6 +83,8 @@ Examples:
 
 ## Wildcards
 
+### Multi-character wildcard
+
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
 * `service:web*` matches every log message that has a service starting with `web`.
@@ -98,6 +100,10 @@ Wildcard searches can also be used to search in the plain text of a log that is 
 `*NETWORK*`
 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
+
+### Search wildcard
+
+When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
 
 ## Numerical values
 

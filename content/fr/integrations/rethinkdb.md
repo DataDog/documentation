@@ -6,6 +6,7 @@ assets:
     RethinkDB Overview: assets/dashboards/overview.json
   logs:
     source: rethinkdb
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -17,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md'
 display_name: RethinkDB
+draft: false
 git_integration_title: rethinkdb
 guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb
@@ -52,7 +54,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ### Installation
 
-Le check RethinkDB est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check RethinkDB est inclus avec le package de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
@@ -79,7 +81,7 @@ Le check RethinkDB est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'ave
 
 3. [Redémarrez l'Agent][8].
 
-**Remarque** : cette intégration recueille des métriques de tous les serveurs dans le cluster ; vous n'avez donc besoin que d'un seul Agent.
+**Remarque** : cette intégration recueille des métriques de tous les serveurs au sein du cluster ; vous n'avez donc besoin que d'un seul Agent.
 
 ##### Collecte de logs
 
@@ -119,11 +121,20 @@ Consultez la [documentation de Datadog][9] pour découvrir comment configurer l'
 
 ### Checks de service
 
-- `rethinkdb.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur RethinkDB configuré. Si ce n'est pas le cas, renvoie `OK`.
-- `rethinkdb.table_status.status.ready_for_outdated_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture obsolètes. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.ready_for_reads` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.ready_for_writes` : renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes d'écriture. Si ce n'est pas le cas, renvoie `WARNING`.
-- `rethinkdb.table_status.status.all_replicas_ready` : renvoie `OK` si tous les réplicas sont prêts pour des opérations de lecture et d'écriture. Si ce n'est pas le cas, renvoie `WARNING` (par exemple, si des backfills sont en cours).
+**rethinkdb.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au serveur RethinkDB configuré. Si ce n'est pas le cas, renvoie `OK`.
+
+**rethinkdb.table_status.status.ready_for_outdated_reads** :<br>
+Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture obsolètes. Si ce n'est pas le cas, renvoie `WARNING`.
+
+**rethinkdb.table_status.status.ready_for_reads** :<br>
+Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes de lecture. Si ce n'est pas le cas, renvoie `WARNING`.
+
+**rethinkdb.table_status.status.ready_for_writes** :<br>
+Renvoie `OK` si toutes les partitions d'une table sont prêtes à accepter des requêtes d'écriture. Si ce n'est pas le cas, renvoie `WARNING`.
+
+**rethinkdb.table_status.status.all_replicas_ready** :<br>
+Renvoie `OK` si tous les réplicas sont prêts pour des opérations de lecture et d'écriture. Si ce n'est pas le cas, renvoie `WARNING` (par exemple, si des backfills sont en cours).
 
 ### Événements
 

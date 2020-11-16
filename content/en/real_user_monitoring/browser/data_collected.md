@@ -58,23 +58,23 @@ To account for modern web applications, loading time watches for network request
 
 Frameworks relying on hash (`#`) navigation are monitored with the RUM SDK automatically. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Metrics collected
+## View timing and metrics
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation][8]|
-| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
-| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
-| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
-| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
-| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
-| `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
-| `view.measures.long_task_count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
-| `view.measures.resource_count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.measures.user_action_count`      | number      | Count of all user actions collected for this view.                                                                                     
+| `view.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
+| `view.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
+| `view.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
+| `view.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
+| `view.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
+| `view.error.count`            | number      | Count of all errors collected for this view.                                                                                                                                                                        |
+| `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
+| `view.resource.count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
+| `view.action.count`      | number      | Count of all actions collected for this view.                                                                                     
 
 [1]: /real_user_monitoring/data_collected/error/
 [2]: /real_user_monitoring/data_collected/resource/
@@ -98,30 +98,34 @@ Detailed network timing data for the loading of an application’s resources are
 
 {{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
-## Measure Collected
+## Resource timing
 
 | Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
-| `network.bytes_written`                | number (bytes) | Resource size.                                                                                                                            |
-| `http.performance.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart)                                                            |
-| `http.performance.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart) |
-| `http.performance.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart)                                               |
-| `http.performance.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
-| `http.performance.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
-| `http.performance.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
+| `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart)                                                            |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart) |
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart)                                               |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart)                                                                      |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart)                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart)                                                                         |
 
-## Facet Collected
+## Resource attributes
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `resource.kind`                | string | The kind or type of resource being collected (ex: CSS, JS, media, XHR, image)           |
-| `http.status_code`             | number | The response status code.                                                               |
-| `http.url`                     | string | The resource URL.                                                                       |
-| `http.url_details.host`        | string | The HTTP host part of the URL.                                                          |
-| `http.url_details.path`        | string | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `resource.type`                | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`).           |
+| `resource.method`                | string | The HTTP method (for example `POST`, `GET`).           |
+| `resource.status_code`             | number | The response status code.                                                               |
+| `resource.url`                     | string | The resource URL.                                                                       |
+| `resource.url_host`        | string | The host part of the URL.                                                          |
+| `resource.url_path`        | string | The path part of the URL.                                                          |
+| `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
+| `resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
+| `resource.provider.domain`      | string | The resource provider domain.                                            |
+| `resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
@@ -131,11 +135,11 @@ Detailed network timing data for the loading of an application’s resources are
 
 [Long tasks][1] are tasks that block the main thread for 50 milliseconds or more. They may cause high input latency, delayed time to interaction, etc. Understand what causes these long tasks in your browser performance profiler.
 
-## Measure Collected
+## Long task timing
 
 | Attribute  | Type   | Description                |
 |------------|--------|----------------------------|
-| `duration` | number | Duration of the long task. |
+| `long_task.duration` | number | Duration of the long task. |
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
@@ -145,18 +149,19 @@ Detailed network timing data for the loading of an application’s resources are
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 ## Error Origins
-Front-end errors are split in 3 different categories depending on their `error.origin`:
+Front-end errors are split in 4 different categories depending on their `error.origin`:
 
 - **network**: XHR or Fetch errors resulting from AJAX requests. Specific attributes to network errors can be found [in the documentation][1].
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
+- **custom**: Errors sent with the [RUM `addError` API][2] default to `custom`.
 
-## Facet Collected
+## Error attributes
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.origin`  | string | Where the error originates from (for example, the console or network).     |
-| `error.kind`    | string | The error type or kind (or code in some cases).                   |
+| `error.source`  | string | Where the error originates from (for example, `console` or `network`).     |
+| `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 
@@ -166,56 +171,62 @@ Network errors include information about failing HTTP requests. The following fa
 
 | Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `http.status_code`             | number | The response status code.                                                               |
-| `http.url`                     | string | The resource URL.                                                                       |
-| `http.url_details.host`        | string | The HTTP host part of the URL.                                                          |
-| `http.url_details.path`        | string | The HTTP path part of the URL.                                                          |
-| `http.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | string | The protocol name of the URL (HTTP or HTTPS)                                            |
+| `error.resource.status_code`             | number | The response status code.                                                               |
+| `error.resource.method`                | string | The HTTP method (for example `POST`, `GET`).           |
+| `error.resource.url`                     | string | The resource URL.                                                                       |
+| `error.resource.url_host`        | string | The host part of the URL.                                                          |
+| `error.resource.url_path`        | string | The path part of the URL.                                                          |
+| `error.resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `error.resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
+| `error.resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
+| `error.resource.provider.domain`      | string | The resource provider domain.                                            |
+| `error.resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
 ### Source errors
 
-Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][2].
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][3].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.kind`    | string | The error type or kind (or code in some cases).                   |
+| `error.type`    | string | The error type (or error code in some cases).                   |
+
 
 [1]: /real_user_monitoring/data_collected/error/#network-errors
-[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[2]: /real_user_monitoring/browser/advanced_configuration#custom-errors
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 {{% /tab %}}
 {{% tab "User Action" %}}
 
-## Automatic Collection of User Actions
+## Automatic collection of actions
 Real User Monitoring (RUM) SDKs detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
 **Note**:  The `trackInteractions` initialization parameter enables the collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
-Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered finished. The user action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
+Once an interaction is detected, all new RUM events are attached to the ongoing action until it is considered finished. The action also benefits from its parent view attributes such as browser information, geolocation data, [global context][2].
 
-### How is the User Action duration calculated?
+### How is the action loading time calculated?
 Once an interaction is detected, the RUM SDK watches for network requests an DOM mutations. It is considered finished once the page has no activity for more than 100ms (activity being defined as ongoing network requests or DOM mutations).
 
 ## Custom User Actions
 Custom User Actions are User Actions declared and sent manually via the [`addUserAction` API][3]. They can send information relative to an event occurring during a user journey, for example, a custom timing or customer cart information.
 
-## Measures Collected
+## Action timing and metrics
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `duration` | number (ns) | The length of the user action. See how it is calculated in the [User Action documentation][4]. |
-| `user_action.measures.long_task_count`        | number      | Count of all long tasks collected for this user action. |
-| `user_action.measures.resource_count`         | number      | Count of all resources collected for this user action. |
-| `user_action.measures.user_action_count`      | number      | Count of all user actions collected for this user action.|
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][4]. |
+| `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
+| `action.resource.count`         | number      | Count of all resources collected for this action. |
+| `action.error.count`      | number      | Count of all errors collected for this action.|
 
-## Facet Collected
+## Action Attributes
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `user_action.id` | string | UUID of the user action. |
-| `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
-| `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
-
+| `action.id` | string | UUID of the user action. |
+| `action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
+| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions |
+| `action.name` | string | User-friendly name created (for example `Click on #checkout`). For [Custom User Actions][5], the action name given in the API call. |
 
 [1]: /real_user_monitoring/browser/?tab=us#initialization-parameters
 [2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
@@ -227,52 +238,64 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 ## Default attributes
 
-These five event categories have attributes attached by default:
+These five event types have attributes attached by default:
 
 ### Core
 
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
-| `application_id` | string | The Datadog application ID. |
-| `session_id`     | string | The session ID.             |
+| `type`     | string | The type of the event (for example, `view` or `resource`).             |
+| `application.id` | string | The Datadog application ID. |
 
-### View Attribute
+### View attributes
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
-| `view.url`                     | string | The view URL.                                                                                                  |
 | `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][6].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
-| `view.url_details.host`        | string | The HTTP host part of the URL.                                                                                 |
-| `view.url_details.path`        | string | The HTTP path part of the URL.                                                                                 |
-| `view.url_details.path_group`  | string | Automatic URL group generated for similar URLs. (ex: `/dashboard/?` For `/dashboard/123` and `/dashboard/456`) |
-| `view.url_details.queryString` | object | The HTTP query string parts of the URL decomposed as query params key/value attributes.                        |
+| `view.url`                     | string | The view URL.                                                                                                  |
+| `view.url_hash`                     | string | The hash part of the URL.|
+| `view.url_host`        | string | The host part of the URL.                                                                                |
+| `view.url_path`        | string | The path part of the URL.                                                                                 |
+| `view.url_path_group`  | string | The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`). |
+| `view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes.                        |
+| `view.url_scheme` | object | The scheme part of the URL.                        |
 
-### User Agent
+### Device
 
-The following contexts—following the [Datadog Standard Attributes][7] logic—are attached automatically to all events sent to Datadog:
+The following device-related attributes are attached automatically to all events collected by Datadog:
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `http.useragent_details.os.family`       | string | The OS family reported by the User-Agent.       |
-| `http.useragent_details.browser.family`  | string | The browser Family reported by the User-Agent.  |
-| `http.useragent_details.device.family`   | string | The device family reported by the User-Agent.   |
-| `http.useragent_details.device.category` | string | The device category reported by the User-Agent. |
+| `device.type`       | string | The device type as reported by the User-Agent       |
+| `device.brand`  | string | The device brand as reported by the User-Agent.  |
+| `device.model`   | string | The device model as reported by the User-Agent.   |
+| `device.name` | string | The device name as reported by the User-Agent. |
+
+### Operating system
+
+The following OS-related attributes are attached automatically to all events collected by Datadog:
+
+| Attribute name                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
+| `os.name`       | string | The OS name as reported by the User-Agent.       |
+| `os.version`  | string | The OS version as reported by the User-Agent.  |
+| `os.version_major`   | string | The OS version major as reported by the User-Agent.   |
 
 ### Geolocation
 
-The following attributes are related to the geolocation of IP addresses used in network communication. All fields are prefixed by `network.client.geoip` or `network.destination.geoip`.
+The following attributes are related to the geolocation of IP addresses:
 
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
-| `network.client.geoip.country.name`         | string | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | string | [ISO Code][8] of the country (example: `US` for the United States, `FR` for France)                                                  |
-| `network.client.geoip.continent.code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
-| `network.client.geoip.continent.name`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
-| `network.client.geoip.subdivision.name`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][8] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
-| `network.client.geoip.city.name`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
+| `geo.country`         | string | Name of the country                                                                                                                  |
+| `geo.country_iso_code`     | string | [ISO Code][7] of the country (for example, `US` for the United States, `FR` for France).                                                  |
+| `geo.country_subdivision`     | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
+| `geo.country_subdivision_iso_code` | string | [ISO Code][7] of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France).    |
+| `geo.continent_code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).                                                                 |
+| `geo.continent`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`).                    |
+| `geo.city`            | string | The name of the city (example `Paris`, `New York`).                                                                                   |
 
 ## Extra Attribute
 
@@ -289,5 +312,4 @@ In addition to default attributes, add [specific global context][1] to all event
 [4]: /real_user_monitoring/browser/data_collected/?tab=error
 [5]: /real_user_monitoring/browser/data_collected/?tab=useraction
 [6]: /real_user_monitoring/data_collected/view#single-page-applications
-[7]: /logs/processing/attributes_naming_convention/
-[8]: /logs/processing/attributes_naming_convention/#user-agent-attributes
+[7]: /logs/processing/attributes_naming_convention/#user-agent-attributes

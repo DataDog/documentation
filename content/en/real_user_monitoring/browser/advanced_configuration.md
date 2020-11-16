@@ -177,6 +177,36 @@ window.DD_RUM &&
 
 **Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
+### Read global context
+
+Once Real User Monitoring (RUM) is initialized, read the global context with the `getRumGlobalContext()` API:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const context = datadogRum.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+  var context = DD_RUM.getRumGlobalContext();
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Custom user actions
 
 Once Real User Monitoring (RUM) is initialized, generate user actions when you want to monitor specific interactions on your application pages or measure custom timings with the `addUserAction(name: string, context: Context)` API:
@@ -242,9 +272,105 @@ window.DD_RUM &&
 
 With the above example, the RUM SDK would collect the amount of items within a cart, what they are, and how much the cart is worth overall.
 
+
+### Custom errors
+Monitor handled exceptions, handled promise rejections and other errors not tracked automatically by the RUM SDK with the `addError()` API:
+
+```javascript
+addError(
+    error: unknown,
+    context?: Context,
+    source: ErrorSource.CUSTOM | ErrorSource.NETWORK | ErrorSource.SOURCE = ErrorSource.CUSTOM
+);
+```
+
+**Note**: The [Error Tracking][3] feature processes errors sent with source set to `custom` or `source` and that contain a stacktrace.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+// Send a custom error with context
+const error = new Error('Something wrong occured.');
+
+datadogRum.addError(error, {
+    pageStatus: 'beta',
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    datadogRum.addError(error, undefined, 'network');
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    datadogRum.addError(error, undefined, 'source');
+}
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+// Send a custom error with context
+const error = new Error('Something wrong occured.');
+
+DD_RUM.onReady(function() {
+    DD_RUM.addError(error, {
+        pageStatus: 'beta',
+    });
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    DD_RUM.onReady(function() {
+        DD_RUM.addError(error, undefined, 'network');
+    });
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    DD_RUM.onReady(function() {
+        DD_RUM.addError(error, undefined, 'source');
+    })
+}
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+// Send a custom error with context
+const error = new Error('Something wrong occured.');
+
+window.DD_RUM && DD_RUM.addError(error, {
+    pageStatus: 'beta',
+});
+
+// Send a network error
+fetch('<SOME_URL>').catch(function(error) {
+    window.DD_RUM && DD_RUM.addError(error, undefined, 'network');
+})
+
+// Send a handled exception error
+try {
+    //Some code logic
+} catch (error) {
+    window.DD_RUM && DD_RUM.addError(error, undefined, 'source');
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: /logs/processing/attributes_naming_convention/#user-related-attributes
+[3]: /real_user_monitoring/error_tracking

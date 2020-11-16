@@ -13,15 +13,17 @@ La bibliothèque de tracing Datadog PHP est open source. Consultez le [référen
 
 L'APM PHP prend en charge les versions suivantes de PHP :
 
-| Version | Type de prise en charge    |
-|:--------|:----------------|
-| 7.4.x   | Prise en charge complète |
-| 7.3.x   | Prise en charge complète |
-| 7.2.x   | Prise en charge complète |
-| 7.1.x   | Prise en charge complète |
-| 7.0.x   | Prise en charge complète |
-| 5.6.x   | Prise en charge complète |
-| 5.4.x   | Prise en charge complète |
+| Version    | Type de prise en charge                          |
+|:-----------|:--------------------------------------|
+| 8.0.0 RC 1 | Prise en charge expérimentale (à partir de `0.49.0`) |
+| 7.4.x      | Prise en charge complète                       |
+| 7.3.x      | Prise en charge complète                       |
+| 7.2.x      | Prise en charge complète                       |
+| 7.1.x      | Prise en charge complète                       |
+| 7.0.x      | Prise en charge complète                       |
+| 5.6.x      | Prise en charge complète                       |
+| 5.5.x      | Entièrement prise en charge (à partir de `0.49.0`)      |
+| 5.4.x      | Prise en charge complète                       |
 
 L'APM PHP prend en charge les SAPI suivants :
 
@@ -116,6 +118,10 @@ Pour demander la prise en charge d'une autre bibliothèque, contactez notre [for
 
 Les call stacks sont limitées sur PHP 5. Pour en savoir plus, consultez la [page de dépannage des call stacks profondes][5].
 
+### Générateurs
+
+L'instrumentation des [générateurs][6] n'est pas prise en charge sur PHP 5 et PHP 7.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -125,3 +131,4 @@ Les call stacks sont limitées sur PHP 5. Pour en savoir plus, consultez la [pa
 [3]: https://pecl.php.net/package/mongo
 [4]: https://pecl.php.net/package/mongodb
 [5]: /fr/tracing/troubleshooting/php_5_deep_call_stacks
+[6]: https://www.php.net/manual/en/language.generators.overview.php

@@ -25,7 +25,7 @@ Les tags sont conçus pour ajouter des caractéristiques aux données de télém
 Les tags relient différents types de données dans Datadog. Grâce à certaines clés de tag **réservées**, vous pouvez corréler différent(e)s métriques, traces et logs et déclencher des actions. Voici quelques exemples :
 
 | Clé de tag   | Fonctionnalité                                                            |
-|-----------|-----------------------------------------------------------------------|
+| --------- | --------------------------------------------------------------------- |
 | `host`    | Corrélation entre des métriques, des traces, des processus et des logs              |
 | `device`  | Séparation de métriques, traces, processus et logs selon un appareil ou un disque |
 | `source`  | Filtrage de spans et création automatisée de pipelines pour la gestion des logs     |
@@ -45,12 +45,12 @@ Voici quelques exigences en ce qui concerne l'utilisation de tags dans Datadog 
 
 1. Les noms des tags doivent **commencer par une lettre**. Ils peuvent ensuite contenir les caractères suivants :
 
-    * Des caractères alphanumériques
-    * Des underscores
-    * Des moins
-    * Des virgules
-    * Des points
-    * Des barres obliques
+    - Des caractères alphanumériques
+    - Des underscores
+    - Des moins
+    - Des virgules
+    - Des points
+    - Des barres obliques
 
     Les autres caractères spéciaux sont remplacés par des underscores.
 
@@ -61,11 +61,11 @@ Voici quelques exigences en ce qui concerne l'utilisation de tags dans Datadog 
 4. Un tag peut être au format `valeur` ou `<KEY>:<VALUE>`. Pour un fonctionnement optimal, **nous recommandons de créer des tags au format `<KEY>:<VALUE>`.** `env`, `instance`, et `name` sont des clés de tag couramment utilisées. La clé précède toujours le caractère « : » de la définition globale du tag. Par exemple :
 
     | Tag                | Clé           | Valeur          |
-    |--------------------|---------------|----------------|
+    | ------------------ | ------------- | -------------- |
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
-5. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages epoch, des ID d'utilisateur ou des ID de demande. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
+5. Les tags ne doivent pas provenir de sources illimitées, telles que des horodatages epoch, des ID d'utilisateur ou des ID de requête. Cela pourrait [accroître de façon significative le nombre de métriques][2] de votre organisation et augmenter vos frais.
 
 ## Assigner des tags
 
@@ -73,35 +73,35 @@ Voici quelques exigences en ce qui concerne l'utilisation de tags dans Datadog 
 
 Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner des tags. Consultez la [documentation relative à l'assignation des tags][3] pour en savoir plus :
 
-| Méthode                       | Assignation de tags                                                                                  |
-|------------------------------|----------------------------------------------------------------------------------------------|
-| [Fichiers de configuration][4]     | Assignation manuelle dans les principaux fichiers de configuration de votre Agent ou des intégrations |
-| [IU][5]                      | Dans l'app Datadog                                                                     |
-| [API][6]                     | Lors de l'utilisation de l'API Datadog                                                                          |
-| [DogStatsD][7]               | Lors de l'envoi de métriques via DogStatsD                                                        |
+| Méthode                   | Assignation de tags                                                     |
+| ------------------------ | --------------------------------------------------------------- |
+| [Fichiers de configuration][4] | Assignation manuelle dans les principaux fichiers de configuration de votre Agent ou des intégrations |
+| [IU][5]                  | Dans l'app Datadog                                              |
+| [API][6]                 | Lors de l'utilisation de l'API Datadog                                        |
+| [DogStatsD][7]           | Lors de l'envoi de métriques via DogStatsD                           |
 
 #### Tagging de service unifié
 
 Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][8].
-
 
 ## Utiliser les tags
 
 [Assignez des tags][3] au niveau des hosts et des [intégrations][9] pour pouvoir filtrer et regrouper vos métriques, traces et logs. Les tags peuvent être utilisés dans les sections suivantes de votre plateforme Datadog. Consultez la [documentation relative à l'utilisation des tags][1] pour en savoir plus :
 
 | Section                 | Utilisation des tags                                                                                      |
-|----------------------|--------------------------------------------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------------------------------------------ |
 | [Événements][10]         | Filtrer le flux d'événements                                                                          |
 | [Dashboards][11]     | Filtrer et regrouper des métriques sur des graphiques                                                               |
 | [Infrastructure][12] | Filtrer et regrouper des données sur les vues de la hostmap, de la liste d'infrastructures, des live containers et des live processes |
 | [Monitors][13]       | Créer et gérer des monitors ou gérer des downtimes                                             |
 | [Métriques][14]        | Filtrer et regrouper des données avec le Metrics Explorer                                                        |
 | [Intégrations][15]   | Définir des limites facultatives pour AWS, Google Cloud et Azure                                        |
-| [APM][16]            | Filtrer les données App Analytics ou accéder facilement à d'autres sections avec la Service map                                 |
+| [APM][16]            | Filtrer les données Analytics ou accéder facilement à d'autres sections avec la Service map                                 |
 | [Notebooks][17]      | Filtrer et regrouper des métriques sur des graphiques                                                               |
 | [Logs][18]           | Filtrer la recherche de logs, les analyses, les patterns, le live tailing et les pipelines                                |
-| [SLO][19]           | Recherchez des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors.                           |
+| [SLO][19]           | Rechercher des SLO ainsi que des SLO groupés basés sur des métriques ou sur des monitors.                           |
 | [Outils de développement][20]     | Récupérer des informations ou configurer différentes sections dans l'IU avec l'API                                 |
+| [Facturation][21]        | Obtenir des informations sur votre utilisation de Datadog en choisissant jusqu'à trois tags, tels que `env`, `team`, et `account_id` |
 
 ### Pour aller plus loin
 
@@ -127,3 +127,4 @@ Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous ass
 [18]: /fr/getting_started/tagging/using_tags/#logs
 [19]: /fr/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [20]: /fr/getting_started/tagging/using_tags/#developers
+[21]: /fr/account_management/billing/usage_attribution/

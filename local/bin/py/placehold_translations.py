@@ -153,7 +153,7 @@ def main():
         if options["files_location"]:
             files_location = options["files_location"]
         else:
-            files_location = info.get('contentDir', 'content/')
+            files_location = info.get('contentDir', 'content/{lang_code}/'.format(lang_code=l))
             files_location = files_location if files_location.endswith('/') else files_location + '/'
         lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"])
         diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])

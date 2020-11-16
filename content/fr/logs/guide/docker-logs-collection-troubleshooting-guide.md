@@ -163,6 +163,19 @@ Si vous ne pouvez pas ouvrir le port 10514 ou 10516, vous pouvez configurer l'Ag
 
 4. Montez le fichier YAML sur votre conteneur en suivant les instructions disponibles dans la [documentation sur l'Agent Docker][3]. Pour découvrir comment définir le pilote de logging utilisé par un conteneur Docker, [consultez cette documentation][4].
 
+## L'Agent n'envoie pas les logs issus de conteneurs pour lesquels une grande quantité de logs persistants est conservée (> 1 Go)
+
+Le daemon Docker peut rencontrer des problèmes de performances lorsqu'il essaie de récupérer les logs de conteneurs pour lesquels des fichiers de logs volumineux sont déjà stockés sur le disque. Cela peut engendrer des timeouts de lecture lorsque l'Agent Datadog récupère les logs des conteneurs à partir du daemon Docker. 
+
+Dans ce cas, l'Agent Datadog envoie un log contenant le message `Restarting reader after a read timeout` pour un conteneur donné toutes les 30 secondes, et il arrête d'envoyer les logs issus de ce conteneur.
+
+Le timeout de lecture par défaut est défini sur 30 secondes. Si vous augmentez cette valeur, cela laisse plus de temps au daemon Docker pour répondre à l'Agent Datadog. Elle peut être configurée dans `datadog.yaml` à l'aide du paramètre `logs_config.docker_client_read_timeout` ou via la variable d'environnement `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT`. Cette valeur est une durée en secondes. Voici un exemple où le délai d'expiration est défini sur 60 secondes :
+
+```yaml
+logs_config:
+  docker_client_read_timeout: 60
+```
+
 [1]: /fr/help/
 [2]: /fr/integrations/journald/#setup
 [3]: /fr/agent/docker/?tab=standard#mounting-conf-d

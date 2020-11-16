@@ -29,14 +29,14 @@ Chaque onglet spécifique à un produit affiche votre utilisation mensuelle des 
 
 ## Overall Usage
 
-Cette section affiche l'utilisation horaire, quotidienne, mensuelle et annuelle. Dans l'onglet « All », vous verrez votre utilisation horaire, quotidienne, mensuelle et annuelle pour les éléments suivants : 
+Cette section affiche l'utilisation horaire, quotidienne, mensuelle et annuelle. Dans l'onglet « All », vous verrez votre utilisation horaire, quotidienne, mensuelle et annuelle pour les éléments suivants :
 
 | Colonne                   | Description                                                                                                                 |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Infra. Hosts             | Affiche le 99e centile de tous les hosts d'infrastructure distincts pour toutes les heures du mois actuel.                         |
 | Containers               | Affiche la limite supérieure de tous les conteneurs distincts pour toutes les heures du mois actuel.                                    |
 | APM Hosts                | Affiche le nombre total de hosts d'APM distincts au 99e centile pour toutes les heures du mois actuel.                                    |
-| Analyzed Spans           | Affiche la somme de toutes les spans analysées indexées pour toutes les heures du mois actuel.                                            |
+| Spans indexées           | Affiche la somme de toutes les spans indexées pour toutes les heures du mois actuel.                                            |
 | Profiled Hosts           | Affiche le 99e centile de tous les hosts profilés distincts pour toutes les heures du mois actuel.                               |
 | Profiled Containers      | Affiche le nombre total moyen de conteneurs profilés distincts pour toutes les heures du mois actuel.                                  |
 | Custom Metrics           | Affiche le nombre moyen de [métriques custom][2] distinctes pour toutes les heures du mois actuel.                               |
@@ -49,8 +49,8 @@ Cette section affiche l'utilisation horaire, quotidienne, mensuelle et annuelle.
 | Network Hosts            | Affiche le 99e centile de tous les hosts réseau distincts pour toutes les heures du mois actuel.                                |
 | Network Flows            | Affiche la somme de tous les flux réseau indexés pour toutes les heures du mois actuel.                                             |
 | Network Devices          | Affiche le 99e centile de tous les périphériques réseau distincts pour toutes les heures du mois actuel.                              |
-| Synthetics API Test Runs      | Affiche la somme de tous les tests API Synthetic pour toutes les heures du mois actuel.                                               |
-| Synthetics Browser Test Runs  | Affiche la somme de tous les tests Browser Synthetic pour toutes les heures du mois actuel.                                           |
+| Synthetic API Tests      | Affiche la somme de tous les tests API Synthetic pour toutes les heures du mois actuel.                                               |
+| Synthetic Browser Tests  | Affiche la somme de tous les tests Browser Synthetic pour toutes les heures du mois actuel.                                           |
 | RUM Sessions             | Affiche la somme de toutes les sessions RUM distinctes pour toutes les heures du mois actuel.                                             |
 
 

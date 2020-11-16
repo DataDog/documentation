@@ -28,6 +28,14 @@ components:
         enum:
         - users
         type: string
+    IncidentServiceSearchQueryParameter:
+      description: A search query that filters services by name.
+      in: query
+      name: filter
+      required: false
+      schema:
+        example: ExampleServiceName
+        type: string
     IncidentTeamIDPathParameter:
       description: The ID of the incident team.
       in: path
@@ -44,6 +52,14 @@ components:
       schema:
         enum:
         - users
+        type: string
+    IncidentTeamSearchQueryParameter:
+      description: A search query that filters teams by name.
+      in: query
+      name: filter
+      required: false
+      schema:
+        example: ExampleTeamName
         type: string
     PageNumber:
       description: Specific page number to return.
@@ -4701,11 +4717,12 @@ paths:
       description: Get all incident services uploaded for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident services.
-      operationId: GetIncidentServices
+      operationId: ListIncidentServices
       parameters:
       - $ref: '#/components/parameters/IncidentServiceIncludeQueryParameter'
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/IncidentServiceSearchQueryParameter'
       responses:
         '200':
           content:
@@ -4851,11 +4868,12 @@ paths:
       description: Get all incident teams for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident teams.
-      operationId: GetIncidentTeams
+      operationId: ListIncidentTeams
       parameters:
       - $ref: '#/components/parameters/IncidentTeamIncludeQueryParameter'
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/IncidentTeamSearchQueryParameter'
       responses:
         '200':
           content:

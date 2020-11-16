@@ -33,13 +33,48 @@ This means that your `Hadoop:service=HBase,name=Master,sub=Server - tag.isActive
 
 Check your `jmx.yaml` file, the following excerpt should show something similar:
 
-{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf"  >}}
+```yaml
+init_config:
+instances:
+  - name: hbase_master
+    host: localhost
+    port: xxx
+    tags:
+      application: hbase
+      service: master
+    conf:
+      - include:
+          bean: "Hadoop:service=HBase,name=Master,sub=Server"
+          [...]
+            tag.isActiveMaster:
+              alias: jmx.hadoop.hbase.master.server.tag.isActiveMaster
+              metric_type: java.lang.String
+```
 
 The `java.lang.String` metric_type confirms the issue you were seeing in the logs.
 
-To resolve this issue, change the associated metric_type, and ensure that your `jmx.yaml` file has the following configuration:
+To resolve this issue, change the associated metric_type, and ensure that your `jmx.yaml` file has the following configuration (note the changes in the last four lines):
 
-{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type"  >}}
+```yaml
+init_config:
+instances:
+  - name: hbase_master
+    host: localhost
+    port: xxx
+    tags:
+      application: hbase
+      service: master
+    conf:
+      - include:
+          bean: "Hadoop:service=HBase,name=Master,sub=Server"
+          [...]
+            tag.isActiveMaster:
+              alias: jmx.hadoop.hbase.master.server.tag.isActiveMaster
+              metric_type: gauge
+              values:
+                "true": 1
+                "false": 0
+```
 
 Jmxfetch then knows it's a string and uses this rule to transform that into a numeric metric.
 

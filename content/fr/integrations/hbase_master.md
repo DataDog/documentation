@@ -1,15 +1,22 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs:
+    source: hbase
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/hbase_master/README.md'
 display_name: HBase master
+draft: false
 git_integration_title: hbase_master
 guid: b45e0f05-8ece-4d5c-946b-ce0ee8057e68
 integration_id: hbase-master
@@ -35,7 +42,7 @@ Recueillez des métriques du service Hbase_master en temps réel pour :
 - Visualiser et surveiller les états de Hbase_master
 - Être informé des failovers et des événements de Hbase_master
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -75,13 +82,35 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 2. [Redémarrez l'Agent][9].
 
+### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `hbase_master.d/conf.yaml` pour commencer à recueillir vos logs Hbase_master :
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: hbase
+   ```
+
+   Modifiez la valeur du paramètre `path` et configurez-la pour votre environnement.
+   Consultez le [fichier d'exemple hbase_master.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][9].
+
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][10] et cherchez `hbase_master` dans la section Checks.
 
 ## Données collectées
 
-### Metrics
+### Métriques
 {{< get-metrics-from-git "hbase_master" >}}
 
 
@@ -151,13 +180,35 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 2. [Redémarrez l'Agent][9].
 
+### Collecte de logs
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Ajoutez ce bloc de configuration à votre fichier `hbase_regionserver.d/conf.yaml` pour commencer à recueillir vos logs Hbase_regionserver :
+
+   ```yaml
+   logs:
+     - type: file
+       path: /path/to/my/directory/file.log
+       source: hbase
+   ```
+
+   Modifiez la valeur du paramètre `path` et configurez-la pour votre environnement.
+   Consultez le [fichier d'exemple hbase_regionserver.d/conf.yaml[12] pour découvrir toutes les options de configuration disponibles.
+
+3. [Redémarrez l'Agent][9].
+
 ## Validation
 
 [Lancez la sous-commande `status` de l'Agent][10] et cherchez `hbase_regionserver` dans la section Checks.
 
 ## Données collectées
 
-### Metrics
+### Métriques
 {{< get-metrics-from-git "hbase_regionserver" >}}
 
 

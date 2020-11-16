@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Intégrez vos logs d'événements de sécurité Okta à Datadog.
 doc_link: 'https://docs.datadoghq.com/integrations/okta/'
+draft: false
 git_integration_title: okta
 has_logo: true
 integration_title: Okta
@@ -19,11 +20,15 @@ version: '1.0'
 ---
 ## Présentation
 
-Connectez Okta pour intégrer vos logs d'événements de sécurité Okta au système Log Management de Datadog.
+Connectez Okta pour intégrer vos logs d'événements système Okta à la fonctionnalité Log Management de Datadog.
+
+Ces logs vous offrent une meilleure visibilité sur les événements d'accès et de cycle de vie associés à l'ensemble de vos applications, utilisateurs, etc. L'intégration Datadog/Okta vous permet de détecter les menaces pour vos applications, de suivre l'activité des utilisateurs, de débuguer les problèmes d'authentification et d'autorisation, et de créer une piste d'audit pour assurer votre conformité à la réglementation.
+
+[Consultez la documentation d'Okta][1] pour obtenir la liste complète des événements Okta que Datadog peut surveiller.
 
 ## SSO avec SAML
 
-Pour l'authentification unique, consultez la section [Configurer Okta en tant que fournisseur d'identité SAML][4].
+Pour l'authentification unique, consultez la section [Configurer Okta en tant que fournisseur d'identité SAML][2].
 
 ## Configuration
 
@@ -32,7 +37,7 @@ Pour l'authentification unique, consultez la section [Configurer Okta en tant qu
 Pour activer l'intégration Datadog/Okta :
 
 1. Dans Okta, accédez à _Security_ -> _API_ -> _Tokens_ et ajoutez un nouveau token d'API pour Datadog.
-2. Dans Datadog, ouvrez le [carré d'intégration Okta][2].
+2. Dans Datadog, ouvrez le [carré d'intégration Okta][3].
 3. Depuis l'onglet **Configuration**, cliquez sur _Add Account_ et indiquez les informations suivantes :
 
     | Paramètre    | Description                                                                                                     |
@@ -59,8 +64,9 @@ L'intégration Okta n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[2]: https://app.datadoghq.com/account/settings#integrations/okta
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://docs.datadoghq.com/fr/account_management/saml/okta
+[1]: https://developer.okta.com/docs/reference/api/event-types/
+[2]: https://docs.datadoghq.com/fr/account_management/saml/okta/
+[3]: https://app.datadoghq.com/account/settings#integrations/okta
+[4]: https://docs.datadoghq.com/fr/help/
