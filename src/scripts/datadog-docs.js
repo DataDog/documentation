@@ -650,29 +650,14 @@ function getPathElement() {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let aPath = document.querySelector(`.side [data-path*="${path}"]`);
-    let maPath = document.querySelector(`header [data-path*="${path}"]`);
+    let aPath = document.querySelector(`.side [data-path="${path}"]`);
+    let maPath = document.querySelector(`header [data-path="${path}"]`);
 
     // TODO: fix exceptions for specific nav links that have the same url but both open the same place
-    if (path.includes('agent/guide/upgrade-to-agent-v6')) {
-        aPath = document.querySelectorAll(
-            '.side [data-path*="agent/guide"]'
-        )[0];
-        maPath = document.querySelectorAll(
-            'header [data-path*="agent/guide"]'
-        )[0];
-    } else if (path.includes('agent/guide')) {
+     if (path.includes('agent/guide')) {
         aPath = document.querySelector('.side [data-path*="agent/guide"]');
         maPath = document.querySelector('header [data-path*="agent/guide"]');
     } 
-    else if (path === 'agent') {
-        aPath = document.querySelectorAll(
-            '.side [data-path*="agent"]'
-        )[2];
-        maPath = document.querySelectorAll(
-            'header [data-path*="agent"]'
-        )[2];
-    }
 
 
     if (path.includes('tracing/guide')) {
@@ -685,36 +670,13 @@ function getPathElement() {
         maPath = document.querySelector('header [data-path*="monitors/guide"]');
     }
 
-    if (path.includes('graphing/widgets')) {
-        aPath = document.querySelector('.side [data-path*="graphing/widgets"]');
-        maPath = document.querySelector(
-            'header [data-path*="graphing/widgets"]'
-        );
-    }
-
-    if (path.includes('graphing/guide')) {
-        aPath = document.querySelector('.side [data-path*="graphing/guide"]');
-        maPath = document.querySelector('header [data-path*="graphing/guide"]');
-    }
 
     if (path.includes('logs/guide')) {
         aPath = document.querySelector('.side [data-path*="logs/guide"]');
         maPath = document.querySelector('header [data-path*="logs/guide"]');
     }
 
-    if (path.includes('security/logs')) {
-        aPath = document.querySelectorAll(
-            '.side [data-path*="security/logs"]'
-        )[1];
-        maPath = document.querySelectorAll(
-            'header [data-path*="security/logs"]'
-        )[1];
-    }
 
-    if (path.includes('videos')) {
-        aPath = document.querySelector('.side [data-path*="videos"]');
-        maPath = document.querySelector('header [data-path*="videos"]');
-    }
 
     if (path.includes('account_management/billing')) {
         aPath = document.querySelector(
@@ -725,14 +687,6 @@ function getPathElement() {
         );
     }
 
-    if (path.includes('monitors/monitor_types/app_analytics')) {
-        aPath = document.querySelector(
-            '.side [data-path*="monitors/monitor_types/app_analytics"]'
-        );
-        maPath = document.querySelector(
-            'header [data-path*="monitors/monitor_types/app_analytics"]'
-        );
-    }
 
     if (path.includes('developers/guide')) {
         aPath = document.querySelector('.side [data-path*="developers/guide"]');
@@ -748,14 +702,6 @@ function getPathElement() {
         );
     }
 
-    if (path === 'tracing') {
-        aPath = document.querySelector(
-            '.side [data-path="tracing"]'
-        );
-        maPath = document.querySelector(
-            'header [data-path="tracing"]'
-        );
-    }
 
     // if url is domain + /integrations/**
     if (
