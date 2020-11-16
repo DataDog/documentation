@@ -3198,7 +3198,6 @@ components:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
           format: int64
-          readOnly: true
           type: integer
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -3225,9 +3224,11 @@ components:
           readOnly: true
           type: string
         num_retention_days:
-          description: The number of days before logs are deleted from this index.
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.'
           format: int64
-          readOnly: true
           type: integer
       required:
       - filter
@@ -3240,6 +3241,52 @@ components:
           items:
             $ref: '#/components/schemas/LogsIndex'
           type: array
+      type: object
+    LogsIndexUpdateRequest:
+      description: Object for updating a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          format: int64
+          type: integer
+        disable_daily_limit:
+          description: 'If true, sets the `daily_limit` value to null and the index
+            is not limited on a daily basis (any
+
+            specified `daily_limit` value in the request is ignored). If false or
+            omitted, the index''s current
+
+            `daily_limit` is maintained.'
+          type: boolean
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all logs
+
+            already in this index. It may also affect billing.'
+          format: int64
+          type: integer
+      required:
+      - filter
       type: object
     LogsIndexesOrder:
       description: Object containing the ordered list of log index names.
@@ -13805,8 +13852,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LogsIndex'
-        description: Object containing the new `LogsIndex`.
+              $ref: '#/components/schemas/LogsIndexUpdateRequest'
+        description: Object containing the new `LogsIndexUpdateRequest`.
       responses:
         '200':
           content:
