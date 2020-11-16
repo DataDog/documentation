@@ -452,8 +452,8 @@
   "UpdateLogsIndex": {
     "description": "Update an index as identified by its name.\nReturns the Index object passed in the request body when the request is successful.\n\nUsing the `PUT` method updates your index’s configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.",
     "summary": "Update an index",
-    "request_description": "Object containing the new `LogsIndex`.",
-    "request_schema_description": "Object describing a Datadog Log index."
+    "request_description": "Object containing the new `LogsIndexUpdateRequest`.",
+    "request_schema_description": "Object for updating a Datadog Log index."
   },
   "GetLogsPipelineOrder": {
     "description": "Get the current order of your pipelines.\nThis endpoint takes no JSON arguments.",
