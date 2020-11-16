@@ -68,6 +68,7 @@ npm-debug.log*
 content/en/real_user_monitoring/android.md
 content/en/real_user_monitoring/browser/_index.md
 content/en/logs/log_collection/javascript.md
+content/en/real_user_monitoring/ios.md
 
 # serverless
 content/en/serverless/forwarder.md

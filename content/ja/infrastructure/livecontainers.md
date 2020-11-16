@@ -30,12 +30,12 @@ Kubernetes を使用している場合は、ライブコンテナ向け Kubernet
 
 ## インストール
 
-[Docker][6] または [Kubernetes][7] Agent のインストール手順に従います。コンテナメトリクスは、インストール後に追加のコンフィギュレーションなしで使用できます。
+[Docker][6] または [Kubernetes][7] Agent のインストール手順に従います。プロセス Agent を有効にして、ライブコンテナビューにデータを入力します。コンテナメトリクスは、インストール後に追加のコンフィギュレーションなしで使用できます。
 
 **ライブコンテナ向け Kubernetes Resources には、次のインストールが必要です**:
 
 * [Datadog Agent][8] バージョン 7.21.1 (以上)
-* [Datadog Cluster Agent][9] 1.8.0 (以上)
+* [Datadog Cluster Agent][9] 1.9.0 (以上)
 
 ### Kubernetes Resources
 
@@ -74,9 +74,9 @@ datadog:
    ...
 {{< /code-block >}}
 
-**注**: クラスター名は 40 文字以下である必要があります。
+**注**: クラスター名は 80 文字以下である必要があります。
 
-Google GKE、AWS EKS、Azure AKS では、Agent およびクラスター Agent がクラウドメタデータ API にアクセスがない場合、またはクラスター名が 40 文字以上である場合以外は必要ありません。
+Google GKE、AWS EKS、Azure AKS では、Agent およびクラスター Agent がクラウドメタデータ API にアクセスがない場合、またはクラスター名が 80 文字以上である場合以外は必要ありません。
 
 ## コンフィギュレーション
 
