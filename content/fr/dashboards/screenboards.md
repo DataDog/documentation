@@ -72,6 +72,19 @@ Consultez la [documentation principale sur les dashboards][5] pour découvrir co
 
 Utilisez cette option pour supprimer définitivement votre screenboard. Vous serez invité à confirmer votre choix.
 
+## Menu des graphiques
+
+Cliquez sur un graphique de screenboard pour ouvrir le menu des options :
+
+| Option                 | Description                                                   |
+|------------------------|---------------------------------------------------------------|
+| View in full screen    | Affichez le graphique [en plein écran][6].                     |
+| View related processes | Accédez à la page [Live Processes][7] en appliquant un filtre basé sur votre graphique.   |
+| View related hosts     | Accédez à la page [Host Map][8] en appliquant un filtre basé sur votre graphique.         |
+| View related logs      | Remplissez automatiquement un volet de [logs][9] à partir des données de votre graphique.             |
+| View related traces    | Remplissez automatiquement un volet de [traces][10] à partir des données de votre graphique.          |
+| View related profiles  | Accédez à la page [Profiling][11] en appliquant un filtre basé sur votre graphique.       |
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -81,3 +94,9 @@ Utilisez cette option pour supprimer définitivement votre screenboard. Vous ser
 [3]: /fr/events/
 [4]: /fr/account_management/users/default_roles/
 [5]: /fr/dashboards/#copy-import-export
+[6]: /fr/dashboards/widgets/#full-screen
+[7]: https://app.datadoghq.com/process
+[8]: https://app.datadoghq.com/infrastructure/map
+[9]: /fr/logs/
+[10]: /fr/tracing/
+[11]: /fr/tracing/profiler/

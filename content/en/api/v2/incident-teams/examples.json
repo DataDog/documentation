@@ -1,5 +1,5 @@
 {
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "responses": {
       "200": {
         "json": {

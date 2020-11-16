@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    Snowflake: assets/dashboards/snowflake.json
   metrics_metadata: metadata.csv
   monitors:
     Snowflake failed logins: assets/recommended_monitors/snowflake_failed_logins.json
@@ -17,12 +18,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md'
 display_name: Snowflake
-draft: true
+draft: false
 git_integration_title: snowflake
 guid: 4813a514-e9a4-4f28-9b83-b4221b51b18b
 integration_id: snowflake
 integration_title: Snowflake
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -40,7 +41,7 @@ supported_os:
 ## Présentation
 
 Ce check permet de surveiller [Snowflake][1] via l'Agent Datadog. Snowflake est un entrepôt de données analytique fourni en tant que SaaS et s'exécute entièrement sur une infrastructure cloud. 
-Cette intégration permet de surveiller les crédits, la facturation, l'utilisation du stockage, l'historique des requêtes et bien plus encore.
+Cette intégration permet de surveiller l'utilisation des crédits, la facturation, le stockage, l'historique des requêtes et bien plus encore.
 
 <div class="alert alert-info"><bold>REMARQUE : les métriques sont collectées par le biais de requêtes envoyées à Snowflake. Les requêtes transmises par l'intégration Datadog sont facturables par Snowflake.</bold></div>
 
@@ -55,11 +56,11 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 **Remarque** : actuellement, le check Snowflake n'est pas disponible pour macOS dans l'Agent Datadog 6 avec Python 2.
 
-<div class="alert alert-warning">Pour les utilisateurs qui configurent l'intégration avec l'Agent <code>v7.23.0</code>, passez à la version <code>2.1.0</code> de l'intégration pour tirer profit des dernières nouveautés.
+<div class="alert alert-warning">Pour les utilisateurs qui configurent l'intégration avec l'Agent <code>v7.23.0</code>, passez à la version <code>2.0.1</code> de l'intégration pour tirer profit des dernières nouveautés.
 Pour mettre à niveau l'intégration, utilisez <a href=https://docs.datadoghq.com/agent/guide/integration-management/#install>cette commande</a> :<br>
 
 ```text
-datadog-agent integration install datadog-snowflake==2.1.0
+datadog-agent integration install datadog-snowflake==2.0.1
 ```
 </div>
 
@@ -68,7 +69,7 @@ datadog-agent integration install datadog-snowflake==2.1.0
 1. Modifiez le fichier `snowflake.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Snowflake. Consultez le [fichier d'exemple snowflake.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
     **Remarque** : par défaut, cette intégration surveille la base de données `SNOWFLAKE` et le schéma `ACCOUNT_USAGE`.
-    Cette base de données est disponible par défaut et ne peut être consultée que par les utilisateurs disposant du rôle `ACCOUNTADMIN` ou [tout rôle accordé par le rôle ACCOUNTADMIN][4].
+    Cette base de données est disponible par défaut et ne peut être consultée que par les utilisateurs disposant du rôle `ACCOUNTADMIN` ou de [tout rôle accordé par ACCOUNTADMIN][4].
 
     ```yaml
         ## @param account - string - required

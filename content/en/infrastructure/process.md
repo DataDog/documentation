@@ -5,9 +5,12 @@ aliases:
     - /guides/process
     - /graphing/infrastructure/process/
 further_reading:
-    - link: '/infrastructure/hostmap'
-      tag: 'Graphing'
-      text: 'See all of your hosts together on one screen with the hostmap'
+    - link: 'https://www.datadoghq.com/blog/live-process-monitoring/'
+      tag: 'Blog'
+      text: 'Monitor your processes with Datadog'
+    - link: '/infrastructure/process/generate_process_metrics/'
+      tag: 'Documentation'
+      text: 'Increase the retention of process data with metrics'
     - link: '/infrastructure/livecontainers'
       tag: 'Graphing'
       text: 'Get real-time visibility of all of the containers across your environment'
@@ -15,13 +18,19 @@ further_reading:
 
 ## Introduction
 
-Datadog's Process Monitoring allows for real-time visibility of the most granular elements in a deployment.
+Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
 
-{{< img src="infrastructure/process/live_process_preview.png" alt="live process preview"  >}}
+* View all of your running processes in one place
+* Break down the resource consumption on your hosts and containers at the process level
+* Query for processes running on a specific host, in a specific zone, or running a specific workload
+* Monitor the performance of the internal and third-party software you run using system metrics at two-second granularity
+* Add context to your dashboards and notebooks 
+
+{{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview"  >}}
 
 ## Installation
 
-The following installation processes are for [Agent 6 and 7][1]. If you are using Agent 5, [follow this specific installation process][2].
+If you are using Agent 5, [follow this specific installation process][2]. If you are using Agent 6 or 7, [see the intructions below][1]. 
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -144,11 +153,15 @@ process_config:
     strip_proc_arguments: true
 ```
 
-## Searching, Filtering, and Pivoting
+## Queries
 
-### Search Syntax
+### Scoping Processes
 
-Processes and containers are, by their nature, extremely high cardinality objects. Fuzzy string search helps you view relevant information. Enter a string of two or more characters to see results. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
+Processes are, by nature, extremely high cardinality objects. To refine your scope to view relevant processes, you can use text and tag filters. 
+
+#### Text Filters
+
+When you input a text string into the search bar, fuzzy string search is used to query processes containing that text string in their command lines or paths. Enter a string of two or more characters to see results. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
 
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
@@ -165,7 +178,16 @@ To combine multiple string searches into a complex query, use any of the followi
 
 Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
 
-### Tagging
+#### Tag Filters
+
+You can also filter your processes using Datadog [tags][3], such as `host`, `pod`, `user`, and `service`. Input tag filters directly into the search bar, or select them in the facet panel on the left of the page.
+
+Datadog automatically generates a `command` tag, so that you can filter for
+* third-party software (e.g. `command:mongod`, `command:nginx`)
+* container management software (e.g. `command:docker`, `command:kubelet`)
+* common workloads (e.g. `command:ssh`, `command:CRON`)
+
+### Aggregating Processes
 
 [Tagging][3] enhances navigation. In addition to all existing host-level tags, processes are tagged by `user`.
 
@@ -191,22 +213,6 @@ If you have configuration for [Unified Service Tagging][4] in place, `env`, `ser
 Having these tags available will let you tie together APM, logs, metrics, and process data.
 Note that this setup applies to containerized environments only.
 
-### Filtering and Pivoting
-
-First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes and pivot the table by availability zone to be confident about that service staying highly available.
-
-{{< img src="infrastructure/process/mcnultynginx.png" alt="mcnulty nginx"  style="width:80%;">}}
-
-Here, you are checking the Elasticsearch processes for an individual feature team. You have also added metrics for voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
-
-{{< img src="infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch"  style="width:80%;">}}
-
-Below, you have searched for SSH processes and pivoted by `user` to understand who is logged into which hosts.
-
-{{< img src="infrastructure/process/sshusers.png" alt="ssh users"  style="width:80%;">}}
-
-Perhaps this one is less exciting after redaction.
-
 ## Scatter Plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
@@ -225,17 +231,56 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 {{< img src="infrastructure/process/scatterplot.png" alt="container inspect"  style="width:80%;">}}
 
-## Enriched Live Containers view
+## Process Monitors
 
-Live Processes adds extra visibility to your container deployments. The [Live Containers][6] feature gives you a similarly comprehensive view of your container and orchestrator environment. When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
+Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see our [Live Process Monitor documentation][6]. 
 
-{{< img src="infrastructure/process/containerinspect.png" alt="container inspect"  style="width:80%;">}}
+{{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor"  style="width:80%;">}}
+
+## Processes in Dashboards and Notebooks
+
+You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure: 
+1. Select Live Processes as a data source 
+2. Filter using text strings in the search bar 
+3. Select a process metric to graph
+4. Filter using tags in the `From` field
+
+{{< img src="infrastructure/process/process_widget.png" alt="Processes widget"  style="width:80%;">}}
+
+## Autodetected Integrations
+
+Datadog uses process collection to autodetect the technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
+
+{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
+
+Each integration has one of two status types:
+
+- **+ Detected**: This integration is not enabled on any host(s) running it.
+- **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
+
+Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
+
+## Processes across the Platform 
+
+{{< img src="getting_started/integrations/process_platform.gif" alt="Processes across the Platform" >}}
+
+### In Live Containers
+
+Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
+
+### In APM
+
+In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the Live Processes page. Related processes are not currently supported for serverless and browser traces.
+
+### In Network Performance Monitoring 
+
+When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints (e.g. services) communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication. 
 
 ## Real-time monitoring
 
 While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for highly volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
-## Notes and frequently asked questions
+## Additional Information
 
 - Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
@@ -250,4 +295,9 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [3]: /getting_started/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /infrastructure/livecontainers/
+[6]: /monitors/monitor_types/process/
+[7]: https://app.datadoghq.com/monitors#create/live_process
+[8]: /dashboards/widgets/timeseries/#pagetitle
+[9]: /infrastructure/livecontainers/
+[10]: /tracing/
+[11]: /network_performance_monitoring/network_page

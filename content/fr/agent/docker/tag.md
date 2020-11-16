@@ -60,6 +60,7 @@ docker_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
+
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
@@ -107,11 +108,11 @@ docker_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/getting_started/tagging/unified_service_tagging

@@ -5,9 +5,9 @@ description: Diagnose and debug DNS server issues
 aliases:
     - /network_performance_monitoring/network_table
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
+    - link: 'https://www.datadoghq.com/blog/monitor-dns-with-datadog/'
       tag: 'Blog'
-      text: 'Network Performance Monitoring'
+      text: 'Monitor DNS with Datadog'
     - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
       tag: 'Blog'
       text: 'Monitor CoreDNS with Datadog'

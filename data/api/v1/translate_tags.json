@@ -113,7 +113,7 @@
   },
   "slack-integration": {
     "name": "Slack Integration",
-    "description": "Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)\ndirectly through Datadog API."
+    "description": "Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)\ndirectly through the Datadog API."
   },
   "snapshots": {
     "name": "Snapshots",

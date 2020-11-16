@@ -91,9 +91,11 @@ Une fois votre recherche terminée, sélectionnez le ou les monitors à modifier
 
 Pour modifier un monitor, passez le curseur dessus et utilisez les boutons tout à droite : Edit, Clone, Mute et Delete. Pour afficher plus de détails sur un monitor, cliquez sur son nom pour accéder à sa page de statut.
 
+**Remarque** : l'[application mobile Datadog][7] vous permet d'afficher, de désactiver et de réactiver des monitors depuis votre appareil mobile.
+
 ### Monitors déclenchés
 
-Vous pouvez désactiver ou [résoudre][6] plusieurs monitors à la fois depuis la page [Triggered Monitors][7]. Cette page affiche uniquement les monitors actuellement déclenchés (statut Alert, Warn ou No Data).
+Vous pouvez désactiver ou [résoudre][6] plusieurs monitors à la fois depuis la page [Triggered Monitors][8]. Cette page affiche uniquement les monitors actuellement déclenchés (statut Alert, Warn ou No Data).
 
 #### Résultats groupés
 
@@ -109,7 +111,9 @@ Les attributs sur la page Triggered Monitors présentent les différences suivan
 
 ### Surveiller des tags
 
-Les tags de monitor sont séparés des tags envoyés par l'Agent ou les intégrations. Ajoutez des tags directement à vos monitors depuis les pages [Manage Monitors][1], [Triggered Monitors][7] et [Manage Downtime][8] afin de les filtrer ultérieurement. Pour en savoir plus sur les tags de monitor, consultez la [documentation relative aux tags][9].
+Les tags de monitor sont séparés des tags envoyés par l'Agent ou les intégrations. Ajoutez jusqu'à 32 tags directement à vos monitors depuis les pages [Manage Monitors][1], [Triggered Monitors][8] et [Manage Downtime][9] afin de les filtrer ultérieurement. Pour en savoir plus sur les tags de monitor, consultez la [documentation relative aux tags][10].
+
+**Remarque** : ces tags sont ajoutés à l'événement d'alerte généré par le monitor, avec une limite de 25 tags par événement d'alerte.
 
 ## Pour aller plus loin
 
@@ -121,6 +125,7 @@ Les tags de monitor sont séparés des tags envoyés par l'Agent ou les intégra
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [5]: /fr/monitors/monitor_types/
 [6]: /fr/monitors/monitor_status/#resolve
-[7]: https://app.datadoghq.com/monitors/triggered
-[8]: https://app.datadoghq.com/monitors#downtime
-[9]: /fr/getting_started/tagging/assigning_tags/?tab=monitors#ui
+[7]: /fr/mobile/#monitors
+[8]: https://app.datadoghq.com/monitors/triggered
+[9]: https://app.datadoghq.com/monitors#downtime
+[10]: /fr/getting_started/tagging/assigning_tags/?tab=monitors#ui

@@ -25,6 +25,7 @@ further_reading:
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行の集約の実行](#multi-line-aggregation)
 * [ワイルドカードを使用したディレクトリの追跡](#tail-directories-by-using-wildcards)
+* [UTF-16 形式のログをエンコード](#encode-utf-16-format-logs)
 
 **注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
 
@@ -398,12 +399,13 @@ spec:
 
 その他の例:
 
-| **文字列の例**           | **パターン**                                |
-|--------------------------|--------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-| 20180228                 | `\d{8}`                                    |
+| **文字列の例**           | **パターン**                                   |
+|--------------------------|-----------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
+| 20180228                 | `\d{8}`                                       |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
 
 **注**: 複数行のログのための正規表現パターンは、常にログの**先頭**に一致します。行の途中でパターンを一致させることはできません。
 
@@ -441,9 +443,27 @@ logs:
 
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
 
+## UTF-16 形式のログをエンコード
+
+Datadog Agent **v6.23/v7.23** 以降でアプリケーションログが UTF-16 形式で記述されている場合は、これらのログをエンコードして[ログエクスプローラー][2]で望ましい形にパースすることができます。ログコンフィギュレーションのセクションで `encoding` パラメーターを使用して、UTF16 リトルエンディアン の場合は `utf-16-le` に、UTF16 ビッグエンディアンの場合は `utf-16-be` に設定します。その他の値は無視され、Agent はファイルを UTF-8 形式で読み込みます。
+
+構成例:
+
+```yaml
+logs:
+ - type: file
+   path: /test/log/hello-world.log
+   tags: key:value
+   service: utf-16-logs
+   source: mysql
+   encoding: utf-16-be
+```
+
+**注**: `encoding` パラメーターは `type` パラメーターが `file` に設定されている場合のみ適用可能です。
+
 ## グローバルな処理ルール
 
-Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][2]で、または環境変数を使用してグローバルに定義できます。
+Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メイン構成ファイル][3]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -486,7 +506,7 @@ env:
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
-**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][3]を実行します。
+**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][4]を実行します。
 
 ## その他の参考資料
 
@@ -495,6 +515,8 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
+
 [1]: /ja/agent/faq/commonly-used-log-processing-rules
-[2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /ja/agent/guide/agent-commands/#agent-information
+[2]: https://docs.datadoghq.com/ja/logs/explorer/#overview
+[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /ja/agent/guide/agent-commands/#agent-information
