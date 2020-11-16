@@ -153,46 +153,51 @@ main_left:
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
+  - name: 'Red Hat OpenShift'
+    parent: 'solutions'
+    title: テクノロジー
+    url: 'https://www.datadoghq.com/ja/solutions/openshift/'
+    weight: -448
   - name: クラウド移行
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
-    weight: -448
+    weight: -447
   - name: 統合監視
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
-    weight: -447
+    weight: -446
   - name: DevOps
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/devops/'
-    weight: -446
+    weight: -445
   - name: セキュリティ分析
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
+    weight: -444
   - name: ハイブリッドクラウドモニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
+    weight: -443
   - name: IoT モニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
+    weight: -442
   - name: 機械学習
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
+    weight: -441
   - name: リアルタイム BI
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    weight: -440
 main_right:
   - identifier: about
     name: 会社情報
