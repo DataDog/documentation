@@ -153,46 +153,51 @@ main_left:
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
+  - name: 'Red Hat OpenShift'
+    parent: 'solutions'
+    title: 'technology'
+    url: 'https://www.datadoghq.com/solutions/openshift/'
+    weight: -448
   - name: Cloud Migration
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -448
+    weight: -447
   - name: Monitoring Consolidation
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -447
+    weight: -446
   - name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -446
+    weight: -445
   - name: Security Analytics
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
+    weight: -444
   - name: Hybrid Cloud Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
+    weight: -443
   - name: IoT Monitoring
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
+    weight: -442
   - name: Machine Learning
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
+    weight: -441
   - name: Real-Time BI
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    weight: -440
 main_right:
   - identifier: about
     name: About
