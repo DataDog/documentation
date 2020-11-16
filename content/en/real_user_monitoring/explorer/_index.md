@@ -23,7 +23,7 @@ The Real User Monitoring (RUM) Explorer allows you to explore all data collected
 
 {{< img src="real_user_monitoring/explorer/explorer_tabs.png" alt="RUM explorer tabs"  >}}
 
-The RUM explorer displays all event types by default. Each tab will give you access to a customized list with relevant columns for the selected RUM event type. 
+The RUM explorer displays all event types by default. Each tab gives you access to a customized list with relevant columns for the selected RUM event type. 
 
 ### Event side panel
 
