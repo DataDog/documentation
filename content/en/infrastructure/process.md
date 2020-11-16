@@ -18,7 +18,8 @@ further_reading:
 
 ## Introduction
 
-Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure.. Use Live Processes to
+Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
 * Query for processes running on a specific host, in a specific zone, or running a specific workload
