@@ -239,7 +239,7 @@ Use the [Live Process Monitor][6] to generate alerts based on the count of any g
 
 ## Processes in Dashboards and Notebooks
 
-You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure, 
+You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure: 
 1. Select Live Processes as a data source 
 2. Filter using text strings in the search bar 
 3. Select a process metric to graph
