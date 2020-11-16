@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/http_check/README.md'
 display_name: HTTP
+draft: false
 git_integration_title: http_check
 guid: eb133a1f-697c-4143-bad3-10e72541fa9c
 integration_id: ネットワーク
@@ -79,7 +80,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | `reverse_content_match`          | `true` の場合は、`content_match` オプションの動作を反転させます。つまり、`content_match` に文字列または式が検出された場合に HTTP チェックは DOWN として報告します。(デフォルトは false)                                                              |
 | `username` と `password`          | サービスが基本的な認証を使用している場合は、ここでユーザー名とパスワードを指定できます。                                                                                                                                                       |
 | `http_response_status_code`      | HTTP ステータスコードの文字列または Python 正規表現。このチェックは、一致しないステータスコードに対して DOWN を報告します。デフォルトで 1xx、2xx、3xx の HTTP ステータスコードになります。例: `401` または `4\d\d`。                              |
-| `include_content`                | `true` に設定されている場合、チェックは HTTP 応答本文の最初の 200 文字を通知に含めます。デフォルト値は `false` です。                                                                                                        |
+| `include_content`                | `true` に設定されている場合、チェックは HTTP 応答本文の最初の 500 文字を通知に含めます。デフォルト値は `false` です。                                                                                                        |
 | `collect_response_time`          | デフォルトでは、チェックは応答時間 (秒単位) をメトリクス `network.http.response_time` として収集します。無効にするには、この値を `false` に設定します。                                                                                                 |
 | `tls_verify`                     | `url` に到達した時に、サービスの TLS 証明書を検証するように指示します。                                                                                                                                                          |
 | `tls_ignore_warning`             | `tls_verify` を `true` に設定すると、SSL 接続からのすべてのセキュリティ警告が無効になります。                                                                                                                                                     |
@@ -112,8 +113,7 @@ HTTP チェックにはイベントは含まれません。
 
 Datadog でこれらのサービスチェックのアラート条件を作成するには、[Create Monitor][10] ページで 'Integration' ではなく 'Network' を選択します。
 
-**`http.can_connect`**:
-
+**http.can_connect**:<br>
 次のいずれかが発生したら `DOWN` を返します。
 
 - `uri` へのリクエストがタイムアウトした
@@ -124,8 +124,7 @@ Datadog でこれらのサービスチェックのアラート条件を作成す
 
 これら以外の場合は `UP` を返します。
 
-**`http.ssl_cert`**:
-
+**http.ssl_cert**:<br>
 チェックは次の内容を返します。
 
 - `uri` の証明書が既に期限切れの場合は `DOWN`

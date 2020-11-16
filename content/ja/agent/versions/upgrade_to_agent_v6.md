@@ -77,6 +77,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -118,6 +119,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -161,6 +163,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
     注: Datadog の APT キーをインポートするために、`dirmngr` をインストールしなければならない場合があります。
@@ -197,6 +200,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -232,6 +236,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
@@ -275,6 +280,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
     注: Datadog の APT キーをインポートするために、`dirmngr` をインストールしなければならない場合があります。
@@ -320,6 +326,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
   repo_gpgcheck=0
   gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
          https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+         https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
   ```
 
 2. ローカルの Zypper リポジトリを更新し、Agent をインストールします。
@@ -327,6 +334,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
   sudo zypper refresh
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
   sudo zypper install datadog-agent
   ```
 
