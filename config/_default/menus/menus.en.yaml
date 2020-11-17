@@ -153,9 +153,9 @@ main_left:
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: 'Red Hat OpenShift'
-    parent: 'solutions'
-    title: 'technology'
+  - name: Red Hat OpenShift
+    parent: solutions
+    title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
   - name: Cloud Migration
