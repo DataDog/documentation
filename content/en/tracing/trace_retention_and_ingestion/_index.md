@@ -45,7 +45,7 @@ Intelligent Retention retains:
  - All Resources with any traffic will have associated Traces in the past for any time window selection.
  - True maximum duration trace for each time window.
 
-If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter][#create-your-own-retention-filter]. For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. This may have an impact on your bill.
+If there are specific tags, facets, or groups of traces that you want to investigate _in detail_, meaning you want to retain more than what Intelligent Retention retains, then [create your own retention filter](#create-your-own-retention-filter). For example, you might want to keep more than a representative selection of errors from your production environment. To ensure _all_ production errors are retained and available for search and analytics for 15 days, create a 100 percent retention filter scoped to `env:prod` and `status:error`. As discussed below, this may have an impact on your bill.
 
 ### Create your own Retention Filter
 
