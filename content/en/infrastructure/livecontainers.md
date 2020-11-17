@@ -41,6 +41,7 @@ If you are using the official [Datadog Helm Chart][1]:
 - Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
 - Deploy a new release
 
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -102,6 +103,13 @@ If you are using the official [Datadog Helm Chart][1]:
         name: datadog-cluster-id
         key: id
     ```
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must add the following options in the `env` section of both the Cluster Agent and the Process Agent:
+
+  ```yaml
+  - name: DD_CLUSTER_NAME
+    value: "<YOUR_CLUSTER_NAME>"
+  ```
 
 [1]: /agent/cluster_agent/
 [2]: /agent/cluster_agent/setup/
