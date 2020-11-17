@@ -464,6 +464,8 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
 
+ **Note:** The "Go to email and click link" feature is not currently supported for browser tests running on private locations.
+
 ## Scale your private locations
 
 You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
