@@ -24,7 +24,6 @@ You have:
 ## Setup
 
 ### Import the Datadog collection into Postman
-</br>
 <div class="postman-run-button"
 data-postman-action="collection/import"
 data-postman-var-1="bf4ac0b68b8ff47419c1"
@@ -47,7 +46,7 @@ After the Postman collection is imported, a full list of available Datadog API c
 
 #### Authentication
 
-The collection includes a [Postman environment][3] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication. 
+The collection includes a [Postman environment][3] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
 
 Follow these steps to set up your environment:
 
@@ -57,7 +56,7 @@ Follow these steps to set up your environment:
 
 3. Click **Edit**.
 
-4. Add in your Datadog [API key][2] as the value for the `api_key` variable, and add your Datadog [Application key][2] as the value for the `application_key` variable.
+4. Add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [Application key][2] as the initial value and current value for the `application_key` variable.
 
 {{< site-region region="eu" >}}
 
