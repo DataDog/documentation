@@ -11,13 +11,13 @@ export default {
         eu: 'app'
     },
     tcp_endpoint: {
-        us: 'intake.logs.datadoghq.com',
-        us3: 'intake.logs.datadoghq.com',
-        eu: 'tcp-intake.logs.datadoghq.eu'
+        us: 'agent-intake.logs.datadoghq.com',
+        us3: 'agent-intake.logs.datadoghq.com',
+        eu: 'agent-intake.logs.datadoghq.eu'
     },
     tcp_endpoint_port: {
-        us: '10514',
-        us3: '10514',
-        eu: '1883'
+        us: '10516',
+        us3: '10516',
+        eu: '443'
     }
 };

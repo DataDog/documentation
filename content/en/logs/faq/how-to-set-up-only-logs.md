@@ -55,7 +55,9 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration:
+If you are deploying the Agent in Kubernetes, set the environment variable `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` to `false` in addition to your Agent configuration.
+
+Set `DD_SITE` to your Datadog site: {{< region-param key="dd_site" code="true">}}
 
 ```yaml
 # datadog-agent.yaml
@@ -113,8 +115,8 @@ spec:
           ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
           - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
 
-          ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
-          - {name: DD_SITE, value: "datadoghq.com"}
+          ## Set DD_SITE to your Datadog site
+          - {name: DD_SITE, value: "<YOUR_DD_SITE>"}
 
           ## Path to docker socket
           - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}

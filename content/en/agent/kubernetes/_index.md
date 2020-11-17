@@ -133,7 +133,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
-4. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
+4. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -342,7 +342,7 @@ To enable the Live Container view, make sure you are running the process agent i
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][13]:
+Send custom metrics with [the StatsD protocol][10]:
 
 | Env Variable                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -353,7 +353,7 @@ Send custom metrics with [the StatsD protocol][13]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][14].
+Learn more about [DogStatsD over Unix Domain Sockets][11].
 
 ### Tagging
 
@@ -364,11 +364,11 @@ Datadog automatically collects common tags from Kubernetes. To extract even more
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][15] documentation to learn more.
+See the [Kubernetes Tag Extraction][12] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][16].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][13].
 
 ### Ignore containers
 
@@ -385,7 +385,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][17] page.
+Additional examples are available on the [Container Discover Management][14] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -401,7 +401,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][18] to discover all the Docker Agent commands.
+See the [Agent Commands guides][15] to discover all the Docker Agent commands.
 
 ## Further Reading
 
@@ -416,12 +416,9 @@ See the [Agent Commands guides][18] to discover all the Docker Agent commands.
 [7]: /agent/kubernetes/integrations/
 [8]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#all-configuration-options
 [9]: /agent/proxy/#agent-v6
-[10]: /agent/kubernetes/apm/
-[11]: /agent/kubernetes/log/
-[12]: /infrastructure/process/
-[13]: /developers/dogstatsd/
-[14]: /developers/dogstatsd/unix_socket/
-[15]: /agent/kubernetes/tag/
-[16]: /security/agent/#secrets-management
-[17]: /agent/guide/autodiscovery-management/
-[18]: /agent/guide/agent-commands/
+[10]: /developers/dogstatsd/
+[11]: /developers/dogstatsd/unix_socket/
+[12]: /agent/kubernetes/tag/
+[13]: /security/agent/#secrets-management
+[14]: /agent/guide/autodiscovery-management/
+[15]: /agent/guide/agent-commands/

@@ -327,13 +327,15 @@ Note: If you want to manually update one specific Agent integration refer to the
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][10], edit your [Agent main configuration file][11] `datadog.yaml` and set the `site` parameter to:
+Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).
 
-`site: datadoghq.eu`
+```yaml
+site: {{< region-param key="dd_site" >}}
+```
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][12]
+[See the dedicated documentation for Agent log files][11]
 
 ## Further Reading
 
@@ -348,6 +350,5 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
-[10]: https://app.datadoghq.eu
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-log-files/
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-log-files/

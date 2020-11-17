@@ -33,7 +33,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
-| `site` | String | `datadoghq.com` | Datadog site from which the private location pulls the test configuration and pushes the test results. Needs to be set to `datadoghq.eu` for Datadog EU users. |
+| `site` | String | `datadoghq.com` | Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}. |
 
 ### DNS Configuration 
 

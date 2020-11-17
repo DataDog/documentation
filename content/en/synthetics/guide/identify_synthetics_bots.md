@@ -25,21 +25,11 @@ Some parts of your systems might not be available to robots without the right id
 
 ## IP addresses
 
-{{< site-region region="us" >}}
+You can use the **Synthetic Monitoring IP ranges** corresponding to each Datadog managed location:
 
-You can use the [**Synthetic Monitoring IP ranges**][1] corresponding to each Datadog managed location.
-
-[1]: https://ip-ranges.datadoghq.com/synthetics.json
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-You can use the [**Synthetic Monitoring IP ranges**][1] corresponding to each Datadog managed location.
-
-[1]: https://ip-ranges.datadoghq.eu/synthetics.json
-
-{{< /site-region >}}
+```
+https://ip-ranges.{{< region-param key="dd_site" >}}/synthetics.json
+```
 
 ## Default headers
 

@@ -30,20 +30,9 @@ The trigger endpoint provides the list of triggered checks alongside their resul
 
 The test triggering endpoint supports starting up to 50 tests in one request.
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
-* **Method**: `POST`
-* **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
-
-{{< /site-region >}}
 
 #### Request data structure
 
@@ -59,8 +48,6 @@ The public identifier of a test can be either the identifier of the test found i
 
 #### Example request
 
-{{< site-region region="us" >}}
-
 ```bash
 #!/bin/sh
 
@@ -89,46 +76,8 @@ curl -X POST \
             "variables": { "titleVariable": "new value" }
         }
     ]
-}' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
+}' "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -X POST \
--H 'Content-Type: application/json' \
--H "DD-API-KEY: ${api_key}" \
--H "DD-APPLICATION-KEY: ${app_key}" \
--d '{
-    "tests": [
-        {
-            "public_id": "abc-def-ghi",
-            "allowInsecureCertificates": true,
-            "basicAuth": { "username": "test", "password": "test" },
-            "body": "{\"fakeContent\":true}",
-            "bodyType": "application/json",
-            "cookies": "name1=value1;name2=value2;",
-            "deviceIds": ["laptop_large"],
-            "followRedirects": true,
-            "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-west-1"],
-            "retry": { "count": 2, "interval": 300 },
-            "startUrl": "http://new.url/",
-            "variables": { "titleVariable": "new value" }
-        }
-    ]
-}' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
-```
-
-{{< /site-region >}}
-
 
 #### Example response
 
@@ -149,24 +98,11 @@ curl -X POST \
 
 ### Poll results endpoint
 
-{{< site-region region="us" >}}
-
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
+* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
-* **Method**: `GET`
-* **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
-
-{{< /site-region >}}
 
 #### Example request
-
-{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -175,29 +111,11 @@ api_key="<DATADOG_API_KEY>"
 app_key="<DATADOG_APPLICATION_KEY>"
 
 curl -G \
-    "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
+    "https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
     -H "DD-APPLICATION-KEY: ${app_key}" \
     -d "result_ids=[220123456789012345678]"
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```bash
-#!/bin/sh
-
-api_key="<DATADOG_API_KEY>"
-app_key="<DATADOG_APPLICATION_KEY>"
-
-curl -G \
-    "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
-    -H "DD-API-KEY: ${api_key}" \
-    -H "DD-APPLICATION-KEY: ${app_key}" \
-    -d "result_ids=[%220123456789012345678%22]"
-```
-
-{{< /site-region >}}
 
 #### Example response
 
@@ -370,7 +288,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
     * **apiKey**: The API key used to query the Datadog API.
     * **appKey**: The application key used to query the Datadog API.
-    * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`). The default is `datadoghq.com`.
+    * **datadogSite**: The Datadog instance to which request is sent. The default is `datadoghq.com`. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
     * **files**: Glob pattern to detect synthetic tests config files.
     * **global**: Overrides of synthetic tests applied to all tests ([see below for description of each field](#configure-tests)).
     * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
