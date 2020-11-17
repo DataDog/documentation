@@ -27,7 +27,8 @@ You have:
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/import"
-data-postman-var-1="add08e16382f7e11a59a"></div>
+data-postman-var-1="bf4ac0b68b8ff47419c1"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
