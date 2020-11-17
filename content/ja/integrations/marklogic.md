@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    MarkLogic - Overview: assets/dashboards/overview.json
   logs:
     source: marklogic
   metrics_metadata: metadata.csv

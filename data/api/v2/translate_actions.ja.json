@@ -212,7 +212,7 @@
     "summary": "セキュリティシグナルのリストの取得",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
-  "GetIncidentServices": {
+  "ListIncidentServices": {
     "description": "要求するユーザーのオーガニゼーションにアップロードされたすべてのインシデントサービスを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
     "summary": "すべてのインシデントサービスのリストを取得する"
   },
@@ -236,7 +236,7 @@
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
   },
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "description": "要求するユーザーのオーガニゼーションのすべてのインシデントチームを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
     "summary": "すべてのインシデントチームのリストを取得する"
   },

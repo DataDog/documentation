@@ -149,12 +149,10 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-**druid.process.can_connect**:
-
+**druid.process.can_connect**:<br>
 チェックが Druid プロセスに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-**druid.process.health**:
-
+**druid.process.health**:<br>
 Druid プロセスが不健全な場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ### イベント

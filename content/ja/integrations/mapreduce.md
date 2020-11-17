@@ -131,14 +131,12 @@ Mapreduce チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**mapreduce.resource_manager.can_connect**
-
-Agent が Resource Manager に接続できない場合は、`CRITICAL` を返します。
+**mapreduce.resource_manager.can_connect**:<br>
+Agent が ResourceManager に接続できない場合は `CRITICAL` を返します。
 それ以外の場合は、`OK` を返します。
 
-**mapreduce.application_master.can_connect**
-
-Agent が Application Master に接続できない場合は、`CRITICAL` を返します。
+**mapreduce.application_master.can_connect**:<br>
+Agent が ApplicationMaster に接続できない場合は `CRITICAL` を返します。
 それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング

@@ -3,7 +3,8 @@ aliases: []
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    CoreDNS: assets/dashboards/coredns.json
   logs:
     source: coredns
   metrics_metadata: metadata.csv
@@ -19,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/coredns/README.md'
 display_name: CoreDNS
+draft: false
 git_integration_title: coredns
 guid: 9b316155-fc8e-4cb0-8bd5-8af270759cfb
 integration_id: coredns
@@ -91,9 +93,8 @@ CoreDNS チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`coredns.prometheus.health`:
-
-Agent がメトリクスのエンドポイントに到達できない場合は、`CRITICAL` を返します。
+**coredns.prometheus.health**:<br>
+Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 
