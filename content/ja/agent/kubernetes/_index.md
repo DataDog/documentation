@@ -48,7 +48,7 @@ further_reading:
 3. これが新規インストールの場合は、Helm Datadog リポジトリおよび Helm 安定版リポジトリ (Kube State Metrics チャート用) を追加します。
     ```bash
     helm repo add datadog https://helm.datadoghq.com
-    helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+    helm repo add stable https://charts.helm.sh/stable
     helm repo update
     ```
 4. [Agent のインストール手順][3]から Datadog API キーを取得し、次を実行します:
@@ -264,7 +264,7 @@ Kubernetes イベント収集を有効にするには、`value.yaml` ファイ�
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Kubernetes クラスターからイベントを収集する場合は、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定します。または、[Datadoc Cluster Agent イベント収集][1]を使用します
+Kubernetes クラスターからイベントを収集する場合は、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定します。または、[Datadog Cluster Agent イベント収集][1]を使用します
 
 [1]: /ja/agent/cluster_agent/event_collection/
 {{% /tab %}}
@@ -363,7 +363,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 
 ### コンテナの無視
 
-ログの収集、メトリクスの収集、オートディスカバリーからコンテナを除外します。Datadog はデフォルトで Kubernetes と OpenShift の `pause` コンテナを除外します。これらの許可リストとブロックリストはオートディスカバリーにのみ適用されます。トレースと DogStatsD は影響を受けません。
+ログの収集、メトリクスの収集、オートディスカバリーからコンテナを除外します。Datadog はデフォルトで Kubernetes と OpenShift の `pause` コンテナを除外します。これらの許可リストとブロックリストはオートディスカバリーにのみ適用されます。トレースと DogStatsD は影響を受けません。これらの環境変数の値は、正規表現をサポートしています。
 
 | 環境変数    | 説明                                                                                                                                                                                                        |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -378,7 +378,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 
 その他の例は[コンテナのディスカバリー管理][14] ページでご確認いただけます。
 
-**注**: `docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
+**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。コンテナごとの課金にも影響しません。
 
 ### その他
 
@@ -386,6 +386,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します (`"docker"`、`"ecs_fargate"`、`"kubelet"` など)。 |
 | `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                              |
+| `DD_CLUSTER_NAME`                   | カスタム Kubernetes クラスター識別子を設定して、ホストエイリアスの衝突を回避します。クラスター名は最大 40 文字で、小文字、数字、およびハイフンのみという制限があります。また、文字で始める必要があり、 数字または文字で終わる必要があります。                                                             |
 
 リスナーおよび構成プロバイダーを追加するには、`DD_EXTRA_LISTENERS` と `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を使用します。これらは `datadog.yaml` 構成ファイルの `listeners` セクションと `config_providers` セクションに定義する変数に追加されます。
 

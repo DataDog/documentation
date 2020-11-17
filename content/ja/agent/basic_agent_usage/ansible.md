@@ -37,6 +37,7 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
 |--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `datadog_api_key`                          | Datadog API キー。                                                                                                                                                                                                                                                                                     |
 | `datadog_site`                             | Agent データの送信先である Datadog インテークのサイト。デフォルトでは `datadoghq.com` ですが、`datadoghq.eu` に設定すると、EU サイトにデータが送信されます。このオプションは、バージョン 6.6.0 以上の Agent でのみ使用可能です。                                                                                                          |
+| `datadog_agent_flavor`                     | RPI 上の IOT インストールに対するデフォルトの Debian / Redhat パッケージをオーバーライドします。デフォルトが "datadog-agent" の場合、RPI には "datadog-iot-agent" を使用します。                                                                                                                                                                 |  
 | `datadog_agent_version`                    | インストールする Agent のバージョンを固定します（例: `7.16.0`）。設定は任意ですが、推奨されています。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。**注**: ダウングレードは、Windows プラットフォームではサポートされていません。                                                       |
 | `datadog_agent_major_version`              | インストールする Agent のメジャーバージョン。5、6、または 7（デフォルト）を設定できます。`datadog_agent_version` を設定している場合はそれが優先されますが、そうでなければ、指定されたメジャーバージョンの中で最新のバージョンがインストールされます。`datadog_agent_version` を使用する場合、`datadog_agent_major_version` の設定は不要です。 |
 | `datadog_checks`                           | Agent チェックのために追加する YAML コンフィギュレーション。<br> - Agent v6 および v7 では `/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` <br> - Agent v5 では `/etc/dd-agent/conf.d`                                                                                                                            |
@@ -220,7 +221,7 @@ datadog_config_ex:
 | 指定された内容                            | インストール     | システム                |
 |-------------------------------------|--------------|-----------------------|
 | `datadog_agent_version: 7.16.0`     | `1:7.16.0-1` | Debian および SUSE ベース |
-| `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | Redhat ベース          |
+| `datadog_agent_version: 7.16.0`     | `7.16.0-1`   | Redhat-based          |
 | `datadog_agent_version: 7.16.0`     | `7.16.0`     | Windows               |
 | `datadog_agent_version: 1:7.16.0-1` | `1:7.16.0-1` | Debian および SUSE ベース |
 | `datadog_agent_version: 1:7.16.0-1` | `7.16.0-1`   | Redhat-based          |

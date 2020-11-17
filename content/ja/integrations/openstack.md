@@ -166,24 +166,19 @@ OpenStack チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**openstack.neutron.api.up**:
-
+**openstack.neutron.api.up**:<br>
 Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.api.up**:
-
+**openstack.nova.api.up**:<br>
 Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.keystone.api.up**:
-
+**openstack.keystone.api.up**:<br>
 Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.hypervisor.up**:
-
+**openstack.nova.hypervisor.up**:<br>
 Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.neutron.network.up**:
-
+**openstack.neutron.network.up**:<br>
 Agent がネットワークの状態を取得できない場合は `UNKNOWN`、ネットワークがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
