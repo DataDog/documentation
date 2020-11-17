@@ -239,7 +239,7 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 {{/is_match}}
 ```
 
-It also supports multiple strings match:
+The `is_match` condition also supports matching multiple strings:
 
 ```text
 {{#is_match "role.name" "db" "database"}}
@@ -248,7 +248,7 @@ It also supports multiple strings match:
 {{/is_match}}
 ```
 
-To send a different notification if the tag doesn't contain `db` use the negation of the condition as follows:
+To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
 {{^#is_match "role.name" "db"}}
