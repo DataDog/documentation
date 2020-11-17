@@ -262,7 +262,7 @@ Hosts that are running the integration, but where the integration is not enabled
 
 ## Processes across the Platform 
 
-{{< img src="getting_started/integrations/process_platform.gif" alt="Processes across the Platform" >}}
+{{< img src="infrastructure/process/process_platform.gif" alt="Processes across the Platform" >}}
 
 ### In Live Containers
 
