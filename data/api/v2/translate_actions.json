@@ -21,6 +21,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListIncidents": {
+    "description": "Get all incidents for the user's organization.",
+    "summary": "Get a list of incidents"
+  },
+  "CreateIncident": {
+    "description": "Create an incident.",
+    "summary": "Create an incident",
+    "request_description": "Incident payload.",
+    "request_schema_description": "Create request for an incident."
+  },
+  "DeleteIncident": {
+    "description": "Deletes an existing incident from the users organization.",
+    "summary": "Delete an existing incident"
+  },
+  "GetIncident": {
+    "description": "Get the details of an incident by `incident_id`.",
+    "summary": "Get the details of an incident"
+  },
+  "UpdateIncident": {
+    "description": "Updates an incident. Provide only the attributes that should be updated as this request is a partial update.",
+    "summary": "Update an existing incident",
+    "request_description": "Incident Payload.",
+    "request_schema_description": "Update request for an incident."
+  },
   "AggregateLogs": {
     "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
     "summary": "Aggregate events",

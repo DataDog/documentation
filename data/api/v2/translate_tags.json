@@ -55,6 +55,10 @@
     "name": "Incident Teams",
     "description": "Create, update, delete and retrieve teams which can be associated with incidents."
   },
+  "incidents": {
+    "name": "Incidents",
+    "description": "Manage incident response."
+  },
   "key-management": {
     "name": "Key Management",
     "description": "[See API version 1](/api/v1/key-management/)."

@@ -5885,7 +5885,7 @@ components:
           type: array
         type:
           default: gauge
-          description: The type of the metric.
+          description: The type of the metric either `count`, `gauge`, or `rate`.
           example: rate
           type: string
       required:

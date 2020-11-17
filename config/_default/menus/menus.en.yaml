@@ -153,9 +153,9 @@ main_left:
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: 'Red Hat OpenShift'
-    parent: 'solutions'
-    title: 'technology'
+  - name: Red Hat OpenShift
+    parent: solutions
+    title: technology
     url: 'https://www.datadoghq.com/solutions/openshift/'
     weight: -448
   - name: Cloud Migration
@@ -3252,6 +3252,30 @@ api_v2:
   - name: Update an existing incident team
     parent: Incident Teams
     url: '#update-an-existing-incident-team'
+    generated: true
+  - name: Incidents
+    url: /api/v2/incidents/
+    identifier: Incidents
+    generated: true
+  - name: Get a list of incidents
+    parent: Incidents
+    url: '#get-a-list-of-incidents'
+    generated: true
+  - name: Create an incident
+    parent: Incidents
+    url: '#create-an-incident'
+    generated: true
+  - name: Delete an existing incident
+    parent: Incidents
+    url: '#delete-an-existing-incident'
+    generated: true
+  - name: Get the details of an incident
+    parent: Incidents
+    url: '#get-the-details-of-an-incident'
+    generated: true
+  - name: Update an existing incident
+    parent: Incidents
+    url: '#update-an-existing-incident'
     generated: true
   - name: Key Management
     url: /api/v2/key-management/
