@@ -239,6 +239,15 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 {{/is_match}}
 ```
 
+To send a different notification if the tag doesn't contain `db` use the negation of the condition as follows:
+
+```text
+{{^#is_match "role.name" "db"}}
+  This displays if the role tag doesn't contain `db`.
+  @slack-example
+{{/is_match}}
+```
+
 **Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
 
 {{% /tab %}}
