@@ -772,6 +772,10 @@
     "description": "Get hourly usage for hosts and containers.",
     "summary": "Get hourly usage for hosts and containers"
   },
+  "GetIncidentManagement": {
+    "description": "Get hourly usage for incident management.",
+    "summary": "Get hourly usage for incident management"
+  },
   "GetUsageIndexedSpans": {
     "description": "Get hourly usage for indexed spans.",
     "summary": "Get hourly usage for indexed spans"
