@@ -464,7 +464,6 @@ You can then go to any of your API or Browser test creation form, and tick your 
 
 Your private locations can be used just like any other Datadog managed locations: assign [Synthetic tests][2] to private locations, visualize test results, get [Synthetic metrics][10], etc.
 
- **Note:** The "Go to email and click link" feature is not supported for browser tests running on private locations.
 
 ## Scale your private locations
 
