@@ -2483,6 +2483,18 @@ api_v1:
     parent: IP Ranges
     url: '#list-ip-ranges'
     generated: true
+  - name: Incident Services
+    url: /api/v1/incident-services/
+    identifier: Incident Services
+    generated: true
+  - name: Incident Teams
+    url: /api/v1/incident-teams/
+    identifier: Incident Teams
+    generated: true
+  - name: Incidents
+    url: /api/v1/incidents/
+    identifier: Incidents
+    generated: true
   - name: Key Management
     url: /api/v1/key-management/
     identifier: Key Management
