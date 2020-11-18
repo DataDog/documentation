@@ -112,17 +112,19 @@ logs_config:
 
 **Important notes**:
 
+- **If you cannot forward logs to `stdout` & `stderr`**, you can [tail logs from your host using a container agent][1].
+
 - `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+. The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name results in the installation of integration Pipelines that parse your logs and extract relevant information from them.
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][1] documentation for more information on parameters for filtering.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][2] documentation for more information on parameters for filtering.
 
 ## Log Integrations
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][2] and [pod annotations in Kubernetes][3] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][3] and [pod annotations in Kubernetes][4] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -157,9 +159,9 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4].
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
 
-**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][5] documentation.
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][6] documentation.
 
 ### Examples
 
@@ -219,13 +221,13 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
 
-- [Filter logs before sending them to Datadog][6].
-- [Scrub sensitive data from your logs][7].
-- [Proceed to multi-line aggregation][8].
+- [Filter logs before sending them to Datadog][7].
+- [Scrub sensitive data from your logs][8].
+- [Proceed to multi-line aggregation][9].
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][9] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][10] to learn more.
 
 ## Short Lived containers
 
@@ -233,19 +235,20 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environements, refer to the [Kubernetes short lived container documentation][10]
+For Kubernetes environments, refer to the [Kubernetes short lived container documentation][11].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/journald/
-[2]: /agent/docker/integrations/
-[3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[4]: /agent/logs/#custom-log-collection
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[7]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[9]: /agent/guide/autodiscovery-management/
-[10]: /agent/kubernetes/log/#short-lived-containers
+[1]: /logs/faq/how-to-tail-logs-from-host-using-a-container-agent/
+[2]: /integrations/journald/
+[3]: /agent/docker/integrations/
+[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /agent/logs/#custom-log-collection
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[8]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[9]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[10]: /agent/guide/autodiscovery-management/
+[11]: /agent/kubernetes/log/#short-lived-containers
