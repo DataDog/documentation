@@ -99,9 +99,9 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
       value: "true"
     - name: DD_ORCHESTRATOR_CLUSTER_ID
       valueFrom:
-      configMapKeyRef:
-        name: datadog-cluster-id
-        key: id
+        configMapKeyRef:
+          name: datadog-cluster-id
+          key: id
     ```
 
 In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must add the following options in the `env` section of both the Cluster Agent and the Process Agent:
