@@ -3365,7 +3365,6 @@ components:
           - to
           type: object
       required:
-      - query
       - time
       type: object
     LogsListResponse:
@@ -8592,6 +8591,30 @@ components:
             $ref: '#/components/schemas/UsageHostHour'
           type: array
       type: object
+    UsageIncidentManagementHour:
+      description: Incident management usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        monthly_active_users:
+          description: Contains the total number monthly active users from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIncidentManagementResponse:
+      description: Response containing the incident management usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for incident management.
+          items:
+            $ref: '#/components/schemas/UsageIncidentManagementHour'
+          type: array
+      type: object
     UsageIndexedSpansHour:
       description: The hours of indexed spans usage.
       properties:
@@ -8993,7 +9016,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
           format: int64
           type: integer
@@ -9007,7 +9030,7 @@ components:
           format: date-time
           type: string
         fargate_tasks_count_avg:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
           format: int64
           type: integer
@@ -9019,6 +9042,11 @@ components:
         gcp_host_top99p:
           description: Shows the 99th percentile of all GCP hosts over all hours in
             the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -9127,7 +9155,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
           format: int64
           type: integer
@@ -9141,7 +9169,7 @@ components:
           format: int64
           type: integer
         fargate_tasks_count_hwm:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -9153,6 +9181,11 @@ components:
         id:
           description: The organization id.
           type: string
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for the given org.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for the given org.
@@ -9225,152 +9258,157 @@ components:
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current month(s) for all organizations.
+            1 or more times each hour in the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         azure_app_service_top99p_sum:
           description: Shows the 99th percentile of all Azure app services over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
           description: Shows the 99th percentile of all Azure hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         container_hwm_sum:
-          description: Shows the high watermark of all distinct containers over all
-            hours in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all distinct containers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         end_date:
-          description: Shows the last date of usage in the current month(s) for all
+          description: Shows the last date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         fargate_tasks_count_avg_sum:
           description: Shows the average of all Fargate tasks over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm_sum:
-          description: Shows the high watermark of all Fargate tasks over all hours
-            in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all Fargate tasks
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         gcp_host_top99p_sum:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm_sum:
+          description: Shows sum of the the high-water marks of incident management
+            monthly active users in the current months for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month(s) for
-            all organizations for which all usages were calculated.
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
           format: date-time
           type: string
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month(s) for all organizations.
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
           description: Shows the average number of profiled containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         start_date:
-          description: Shows the first date of usage in the current month(s) for all
+          description: Shows the first date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -17104,6 +17142,51 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+  /api/v1/usage/incident-management:
+    get:
+      description: Get hourly usage for incident management.
+      operationId: GetIncidentManagement
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIncidentManagementResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for incident management
+      tags:
+      - Usage Metering
   /api/v1/usage/indexed-spans:
     get:
       description: Get hourly usage for indexed spans.
@@ -18466,6 +18549,12 @@ tags:
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
+- description: '[Check API version 2](/api/v2/incident-services/).'
+  name: Incident Services
+- description: '[Check API version 2](/api/v2/incident-teams/).'
+  name: Incident Teams
+- description: '[Check API version 2](/api/v2/incidents/).'
+  name: Incidents
 - description: 'Manage your Datadog API and application keys.
 
 
