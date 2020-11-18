@@ -11,7 +11,7 @@ description: Create and manage incidents
 
 The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a Dashboard, Notebook, or Incident.
 
-https://a.cl.ly/OAuJkv6y
+{{< img src="monitors/incidents/clipboard-main.png" alt="The main clipboard">}}
 
 ## Cross-Page Exploration
 
@@ -21,7 +21,7 @@ The Clipboard works on all pages in Datadog and keeps a record of all graphs cop
 
 To open the Clipboard, copy any graph and click “Open Clipboard” in the toast.
 
-https://a.cl.ly/2NujGo6W
+{{< img src="monitors/incidents/open-clipboard.png" alt="Open a graph in the Clipboard"  style="width:80%;">}}
 
 Or, click “`Cmd + Shift + X` to open” on the minimized Clipboard. 
 
@@ -33,13 +33,13 @@ To add a graph, copy it with `Cmd+C` or click “Copy” in the export menu. Onc
 
 To add a URL, open the Clipboard and click “Add Current URL.”
 
-https://a.cl.ly/X6udZjXn 
+{{< img src="monitors/incidents/add-dashboard.png" alt="Add a dashboard to the Clipboard"  style="width:80%;">}}
 
 ## Managing Clips
 
 Each item in the Clipboard can be opened, cloned, or deleted; these options are available when you hover over any signal. Opening an item navigates to the link of the original signal. Open the source of any graph (like the dashboard it was clipped from) by clicking the title at the bottom of the item.
 
-
+{{< img src="monitors/incidents/managing-clips.png" alt="Manage your clips"  style="width:80%;">}}
 
 The Clipboard holds a maximum of 20 graphs. Remove graphs by deleting them individually, or by clicking “Clear Clipboard” on the bottom left. If more than 20 graphs are added, the oldest graphs, stored furthest to the left, are removed automatically.
 
@@ -47,7 +47,7 @@ The Clipboard holds a maximum of 20 graphs. Remove graphs by deleting them indiv
 
 Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents. `Shift + Click` to select multiple items. In the export menu, choose a new export destination, or search through existing Dashboards, Notebooks, and Incidents. 
 
-https://a.cl.ly/12urXj8v 
+{{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard"  style="width:80%;">}}
 
 URLs cannot be exported to Dashboards. Only [supported graphs][1] can be exported to Notebooks. 
 

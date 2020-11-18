@@ -1120,6 +1120,11 @@ main:
     parent: alerting
     identifier: incidents
     weight: 8
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 801
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
