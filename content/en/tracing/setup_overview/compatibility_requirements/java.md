@@ -137,7 +137,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Additional Framework Compatibility
+### Additional framework compatibility
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
