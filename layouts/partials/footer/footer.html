@@ -37,25 +37,25 @@
                 <p class="font-weight-semibold text-center text-lg-left mb-0">Download mobile app</p>
                 
                 <div class="d-flex d-lg-none justify-content-center ">
-                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-1" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "app-store-badge.svg" )}}
                     </a>             
-                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "google-play-badge.svg" )}}  
                     </a>
                 </div>
 
                 <div class="d-none d-lg-flex justify-content-lg-start">
-                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2">
+                    <a href="https://apps.apple.com/app/datadog/id1391380318" class="mr-2" aria-label="Apple Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "apple.svg" )}}
                     </a>             
-                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app">
+                    <a href="https://play.google.com/store/apps/details?id=com.datadog.app" aria-label="Google Play Store Link">
                         {{ partial "svg" (dict "context" $dot "src" "google-play.svg" )}}  
                     </a>
                 </div>
             </div>
             <div class="col-12 col-lg-6  mt-3 mt-lg-0">
-                <p class="border-bottom border-gray mb-0">{{ i18n "product" $ }}</p>
+                <p class="border-bottom border-gray mb-0">{{ i18n "product" }}</p>
 
                 {{ $lenFooterProduct := len .Site.Menus.footer_product }}
                 {{ $secondHalfFooterProduct := div $lenFooterProduct 2 }}
@@ -191,36 +191,36 @@
                 <div class="col-12">
                     <div class="row mb-1 align-items-center">
                         <div class="col-6 col-lg-1 offset-lg-3 mb-1 mb-lg-0">
-                            <div class="footer-menu d-flex align-items-center">
-                                <!-- languages to be displayed -->
-                                {{ $dot.Scratch.Add "translated_lang" (slice "en" "ja" ) }}
-                                <!--/ languages to be displayed -->
-        
-                                <!-- As we disable ja and build seperately in pipeline this causes issues like empty nav, so bit more manual for now.. -->
-                                {{ if or (eq $dot.Page.Lang "en") (eq $dot.Page.Lang "es") }}
-                                    {{ $baseLink := strings.TrimPrefix "/" (replace $dot.RelPermalink (print "/" $.Site.Language.Lang "/") "") }}
-                                    <a style="font-size: 15px;" class="d-flex align-items-center button is-small is-danger is-rounded text-white" href="{{ (print "/ja/" $baseLink) }}?lang_pref=ja">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span>日本語</span></a>
-        
-                                    
-                                {{ else }}
+                            <div class="d-flex d-lg-none mobile-lang-select-container">
+                                <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
+                                <label class="sr-only" for="mobile-lang-select">Language Selection</label>
+                                <select class="mobile-lang-select" id="mobile-lang-select" id="" onchange="javascript:location.href = this.value;">
+                                    <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ range .Translations }}
-                                        {{ if in ($dot.Scratch.Get "translated_lang") .Language.Lang }}
-                                            <a class="button is-small is-danger is-rounded d-flex align-items-center text-white" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span style="transform: translateY(-1px);">{{ .Language.LanguageName }}</span></a>
-                                        {{ end }}
+                                        <option value="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
-        
-                                    <!-- we have some ja blog posts without english equivalents, to avoid empty language navigator or linking to 404's this links directly to the blog in english -->
-                                    {{ if eq (len .Translations) 0 }}
-                                        <a class="button is-small is-danger is-rounded text-white" href="{{ "blog/" | absURL }}?lang_pref=en">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;<span style="transform: translateY(-1px);">English</span></a>
+                                </select>
+                                {{ partial "svg" (dict "context" $dot "src" "arrow.svg" "size" "15px" "color" "#ffffff"  )}}
+                            </div>
+                            <div class="footer-menu d-none d-lg-flex align-items-center js-footer-lang-toggle footer-lang-toggle">
+                                <div class="d-flex align-items-center text-white cursor-pointer selected-lang">
+                                    <span class="d-flex align-items-center">{{ partial "svg" (dict "context" $dot "src" "world.svg" "size" "15px" "color" "#ffffff"  )}}&nbsp;</span>
+                                    <span class="d-flex align-items-center" style="transform: translateY(-1px);">{{ .Language.LanguageName }}</span>
+                                    <span class="d-flex align-items-center lang-toggle-arrow">{{ partial "svg" (dict "context" $dot "src" "arrow.svg" "size" "15px" "color" "#ffffff"  )}}</span>
+                                </div>
+                                <div class="js-lang-popup lang-popup">
+                                    <a class="active" href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</span></a>
+                                    {{ range .Translations }}
+                                        <a href="{{ .Permalink }}?lang_pref={{ .Language.Lang }}">{{ .Language.LanguageName }}</a>
                                     {{ end }}
-                                {{ end }}
+                               </div>
                             </div>
                         </div>
                         <div class="col-6 col-lg-2 mb-1 mb-lg-0 d-flex justify-content-lg-end">
                             <ul class="footer-menu d-flex  align-items-center">
                                 {{ range $index, $value := .Site.Menus.footer_social }}
-                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 {{end}}">
-                                    <a class="d-flex align-items-center" href="{{ .URL }}">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
+                                <li class="d-flex align-items-center {{ if ne $index ( sub (len $.Site.Menus.footer_social) 1 ) }} mr-2 mr-lg-1 mr-xl-2 {{end}}">
+                                    <a class="d-flex align-items-center" href="{{ .URL }}" aria-label="{{ .Name }} link">{{ partial "svg" (dict "context" $dot "src" .Pre  )}}  </a>
                                 </li>
                                 {{end}}
                             </ul>

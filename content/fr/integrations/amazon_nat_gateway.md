@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_NAT\_Gateway."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_nat_gateway/'
+draft: false
 git_integration_title: amazon_nat_gateway
 has_logo: true
 integration_title: "Amazon\_NAT\_Gateway"

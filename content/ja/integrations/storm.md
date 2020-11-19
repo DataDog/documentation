@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/storm/README.md'
 display_name: storm
+draft: false
 git_integration_title: storm
 guid: 5a9ec2c3-8ea0-4337-8c45-a6b8a36b8721
 integration_id: storm

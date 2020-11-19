@@ -14,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/process/README.md'
 display_name: プロセス
+draft: false
 git_integration_title: プロセス
 guid: 1675eced-b435-464a-8f84-f65e438f838e
 integration_id: システム
@@ -95,8 +96,7 @@ supported_os:
 
 ### サービスのチェック
 
-**process.up**:
-
+**process.up**:<br>
 Agent は、`process.yaml` 内の各インスタンスに対してこのサービスチェックを送信し、それぞれに `process:<name>` のタグを付けます。
 
 `thresholds` が指定されていないインスタンスの場合、サービスチェックは、CRITICAL (実行中のプロセスがない) または OK (少なくとも 1 つのプロセスが実行中) のいずれかのステータスを持ちます。
@@ -114,9 +114,9 @@ instances:
 
 Agent は、`process.up` のタグを付けた `process:my_worker_process` を以下のステータスで送信します。
 
-- ワーカープロセスの数が 1 個未満または 7 個より多い場合は CRITICAL
-- ワーカープロセスの数が 1、2、6、または 7 個の場合は WARNING
-- ワーカープロセスの数が 3、4、または 5 個の場合は OK
+- ワーカープロセスの数が 1 個未満または 7 個より多い場合は `CRITICAL`
+- ワーカープロセスの数が 1、2、6、または 7 個の場合は `WARNING`
+- ワーカープロセスの数が 3、4、または 5 個の場合は `OK`
 
 ## トラブルシューティング
 

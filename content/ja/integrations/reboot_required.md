@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md'
 display_name: Reboot required
+draft: false
 git_integration_title: reboot_required
 guid: e7eed0e7-0acd-47c9-b684-3190828517ce
 integration_id: reboot-required

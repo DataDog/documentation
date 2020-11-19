@@ -165,7 +165,7 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 
 DogStatsD がコンテナ内で実行されている場合、発信点検出を高い信頼性で行うには、DogStatsD をホストの PID ネームスペースで実行する必要があります。そのため、`--pid=host` フラグを用いて Docker で有効にします。**注**: これは、コンテナのタスク定義内の `"pidMode": "host"` パラメーターを使用して、ECS によってサポートされます。このオプションは、Fargate ではサポートされません。詳細については、[AWS のドキュメント][2]を参照してください。
 
-[2]:
+
 [1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}

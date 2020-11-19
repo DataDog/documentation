@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/flink/README.md'
 display_name: flink
+draft: false
 git_integration_title: flink
 guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink

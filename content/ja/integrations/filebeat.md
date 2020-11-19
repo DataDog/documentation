@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/filebeat/README.md'
 display_name: Filebeat
+draft: false
 git_integration_title: filebeat
 guid: 3bb6a789-d1e3-465c-9bff-ea2a43ae2f59
 integration_id: filebeat
@@ -96,9 +97,12 @@ Filebeat チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-Filebeat チェックには、サービスのチェック機能は含まれません。
+`filebeat.can_connect`:
+
+Agent が Filebeat に接続してメトリクスを収集できない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
+
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

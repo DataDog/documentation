@@ -23,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vault/README.md'
 display_name: Vault
+draft: false
 git_integration_title: vault
 guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
@@ -59,6 +60,8 @@ Vault チェックが正しく機能するには、a) Vault メトリクスへ�
 a) Vault [`unauthenticated_metrics_access`][3] コンフィギュレーションを `true` に設定します。
 
 これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
+
+**注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
 
 b) Vault クライアントトークンを使用します。
 
@@ -246,17 +249,17 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-`vault.can_connect`:
-Agent が Vault に接続できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.can_connect**:<br>
+Agent が Vault に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.unsealed`:
-Vault がシールされている場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.unsealed**:<br>
+Vault がシールされている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.initialized`:
-Vault がまだ初期化されていない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.initialized**:<br>
+Vault がまだ初期化されていない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.prometheus.health`:
-チェックがメトリクスのエンドポイントにアクセスできない場合 CRITICAL を返します。それ以外の場合 OK を返します。
+**vault.prometheus.health**:<br>
+チェックがメトリクスのエンドポイントにアクセスできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

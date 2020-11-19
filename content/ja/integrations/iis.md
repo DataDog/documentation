@@ -21,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/iis/README.md'
 display_name: IIS
+draft: false
 git_integration_title: iis
 guid: 6ad932f0-8816-467a-8860-72af44d4f3ba
 integration_id: iis

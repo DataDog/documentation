@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md'
 display_name: Gitlab
+draft: false
 git_integration_title: gitlab
 guid: 1cab328c-5560-4737-ad06-92ebc54af901
 integration_id: gitlab
@@ -47,7 +48,7 @@ Grâce à cette intégration, vous pouvez :
 
 - Visualiser et surveiller des métriques recueillies via Gitlab par l'intermédiaire de Prometheus
 
-Consultez la [documentation de Gitlab][1] pour en savoir plus sur Gitlab et sur son intégration à Prometheus.
+Consultez la [documentation de Gitlab][1] (en anglais) pour en savoir plus sur Gitlab et sur son intégration à Prometheus.
 
 ## Configuration
 
@@ -162,10 +163,17 @@ Le check Gitlab n'inclut aucun événement.
 
 Le check Gitlab inclut des checks de service de santé, de readiness et de liveness.
 
-`gitlab.prometheus_endpoint_up` : renvoie `CRITICAL` si le check ne peut pas accéder à l'endpoint des métriques Prometheus de l'instance Gitlab.
-`gitlab.health` : renvoie `CRITICAL` si le check ne peut pas accéder à l'instance Gitlab.
-`gitlab.liveness` : renvoie `CRITICAL` si le check ne peut pas accéder à l'instance Gitlab en raison d'un blocage de Rails Controllers.
-`gitlab.readiness` : renvoie `CRITICAL` si l'instance Gitlab parvient à accepter le trafic via Rails Controllers.
+**gitlab.prometheus_endpoint_up** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'endpoint de métriques Prometheus de l'instance Gitlab.
+
+**gitlab.health** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'instance Gitlab.
+
+**gitlab.liveness** :<br>
+Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'instance Gitlab en raison d'un blocage de contrôleurs Rails.
+
+**gitlab.readiness** :<br>
+Renvoie `CRITICAL` si l'instance Gitlab parvient à accepter le trafic via des contrôleurs Rails.
 
 ## Dépannage
 

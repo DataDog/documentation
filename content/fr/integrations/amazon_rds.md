@@ -12,6 +12,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveiller un ensemble de métriques relatives à Amazon\_RDS."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rds/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/'
     tag: Blog
@@ -97,9 +98,9 @@ Activez la surveillance améliorée de votre instance RDS. Vous pouvez activer c
 3. Saisissez un nom unique pour l'application.
 4. Collez l'identifiant de la clé créée dans le paramètre `KMSKeyId` de la section précédente et effectuez le déploiement.
 5. Une fois l'application déployée, ouvrez la fonction Lambda créée (cliquez sur la fonction dans « Resource »).
-   {{< img src="integrations/awsrds/click-function.png" alt="Fonction Lambda ouverte" >}}
+  {{< img src="integrations/awsrds/click-function.png" alt="Fonction Lambda ouverte" >}}
 6. Faites défiler la page jusqu'à la section `Environment variables`. Remplacez `<YOUR_API_KEY>` par votre [clé d'API Datadog][1] au format `{"api_key":"<VOTRE_CLÉ_API>"}` :
-   {{< img src="integrations/awsrds/env-variables.png" alt="Variables d'environnement" >}}
+  {{< img src="integrations/awsrds/env-variables.png" alt="Variables d'environnement" >}}
 7. Ouvrez la section `Encryption configuration` et sélectionnez `Enable helpers for encryption in transit`.
 8. Dans `KMS key to encrypt in transit`, sélectionnez la même clé que celle qui figure sous `KMS key to encrypt at rest`.
 9. Appuyez sur le bouton Encrypt en regard de l'objet blob JSON que vous venez de saisir.
@@ -131,7 +132,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 {{% tab "Intégration native" %}}
 
 1. Accédez à la console AWS et ouvrez la section RDS pour trouver l'instance que vous souhaitez surveiller.
-   {{< img src="integrations/awsrds/rds-console.png" alt="Console RDS" >}}
+  {{< img src="integrations/awsrds/rds-console.png" alt="Console RDS" >}}
 2. Relevez l'URL de l'endpoint (par ex., **mysqlrds.blah.us-east1.rds.amazonaws.com:3306**) qui est utilisée pour configurer l'Agent. Notez également le paramètre `DB Instance identifier` (p. ex., **mysqlrds**) qui est utilisé pour créer des graphiques et des dashboards.
 
 {{% /tab %}}
@@ -179,7 +180,7 @@ Vous pouvez l'ignorer. Le bouton de test ne fonctionne pas avec cette configurat
 {{% /tab %}}
 {{% tab "Intégration native" %}}
 
-Configurez un Agent et connectez-vous à votre instance RDS en modifiant le fichier YAML approprié dans votre répertoire conf.d, puis redémarrez votre Agent : 
+Configurez un Agent et connectez-vous à votre instance RDS en modifiant le fichier YAML approprié dans votre répertoire conf.d, puis redémarrez votre Agent :
 
 Pour RDS Aurora, modifiez le fichier YAML de la base de données que vous utilisez.
 
@@ -231,7 +232,7 @@ instances:
 
 ### Validation
 
-Pour confirmer le bon fonctionnement de l'intégration de base de données native, exécutez `sudo /etc/init.d/datadog-agent info`. Vous devriez voir un message similaire à ce qui suit :
+[Lancez la sous-commande status de l'Agent][1] et cherchez quelque chose qui ressemble à ceci dans la section Checks :
 
 ```shell
 Checks
@@ -247,36 +248,36 @@ Checks
 
 ### Utilisation
 
-Après quelques minutes, les métriques RDS et les [métriques de MySQL, Aurora, MariaDB, SQL Server ou PostgreSQL][1] peuvent être consultées dans Datadog depuis le Metrics Explorer, les [dashboards][2] et les [alertes][3].
+Après quelques minutes, les métriques RDS et les [métriques de MySQL, Aurora, MariaDB, SQL Server ou PostgreSQL][2] peuvent être consultées dans Datadog depuis le Metrics Explorer, les [dashboards][3] et les [alertes][4].
 Voici un exemple de dashboard Aurora affichant un certain nombre de métriques issues des intégrations MySQL et RDS. Les métriques des deux intégrations sur l'instance `quicktestrds` sont unifiées à l'aide du tag `dbinstanceidentifier`.
 {{< img src="integrations/awsrds/aurora-rds-dash.png" alt="dashboard rds aurora" popup="true">}}
 
 Voici le dashboard par défaut pour MySQL sur Amazon RDS :
 {{< img src="integrations/awsrds/rds-mysql.png" alt="Dashboard par défaut RDS MySQL" popup="true">}}
 
-Pour savoir comment surveiller les métriques de performance MySQL d'Amazon RDS, consultez [notre série d'articles à ce sujet][4]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance ainsi que des conseils pour les recueillir et pour utiliser Datadog afin de surveiller MySQL sur Amazon RDS.
+Pour savoir comment surveiller les métriques de performance MySQL d'Amazon RDS, consultez [notre série d'articles à ce sujet][5]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance ainsi que des conseils pour les recueillir et pour utiliser Datadog afin de surveiller MySQL sur Amazon RDS.
 
 ### Collecte de logs
 
 #### Activer la journalisation RDS
 
-Vous pouvez transmettre des logs MySQL, MariaDB et Postgres à Amazon CloudWatch. Suivez les instructions figurant [ici][5] pour commencer à envoyer vos logs RDS à CloudWatch. 
+Vous pouvez transmettre des logs MySQL, MariaDB et Postgres à Amazon CloudWatch. Suivez les instructions figurant [ici][6] pour commencer à envoyer vos logs RDS à CloudWatch. 
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][6].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda de collecte de logs AWS avec Datadog][7].
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de logs CloudWatch qui contient vos logs RDS :
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="groupes de logs cloudwatch" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de logs CloudWatch correspondant, ajoutez un nom de filtre (vous pouvez toutefois laisser le filtre vide) et ajoutez le déclencheur :
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="Déclencheur cloudwatch" popup="true" style="width:70%;">}}
 
-Accédez ensuite à la [section Logs de Datadog][7] pour commencer à explorer vos logs !
+Accédez ensuite à la [section Log de Datadog][8] pour commencer à explorer vos logs !
 
 ## Données collectées
 
-Outre les [métriques recueillies depuis les moteurs de base de données][1], vous recevez également les métriques RDS suivantes :
+Outre les [métriques recueillies depuis les moteurs de base de données][2], vous recevez également les métriques RDS suivantes :
 
-### Metrics
+### Métriques
 {{< get-metrics-from-git "amazon_rds" >}}
 
 
@@ -291,7 +292,7 @@ L'intégration AWS RDS comprend des événements liés aux instances de base de
 ### Checks de service
 
 **aws.rds.read_replica_status**
-Surveille le statut du [réplica en lecture][9]. Ce check renvoie l'un des statuts suivants :
+Surveille le statut du [réplica en lecture][10]. Ce check renvoie l'un des statuts suivants :
 
 - OK - En cours de réplication ou de connexion
 - CRITICAL - Erreur ou terminé
@@ -300,19 +301,20 @@ Surveille le statut du [réplica en lecture][9]. Ce check renvoie l'un des statu
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
-[2]: https://docs.datadoghq.com/fr/dashboards/
-[3]: https://docs.datadoghq.com/fr/monitors/
-[4]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics
-[5]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
-[7]: https://app.datadoghq.com/logs
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
-[9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[10]: https://docs.datadoghq.com/fr/help/
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-information
+[2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html
+[3]: https://docs.datadoghq.com/fr/dashboards/
+[4]: https://docs.datadoghq.com/fr/monitors/
+[5]: https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics
+[6]: https://aws.amazon.com/blogs/database/monitor-amazon-rds-for-mysql-and-mariadb-logs-with-amazon-cloudwatch
+[7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
+[8]: https://app.datadoghq.com/logs
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
+[10]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
+[11]: https://docs.datadoghq.com/fr/help/

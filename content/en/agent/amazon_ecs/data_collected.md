@@ -8,7 +8,7 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/amazon_ecs/metrics/"
+- link: "/agent/amazon_ecs/data_collected/#metrics"
   tag: "Documentation"
   text: "Collect ECS metrics"
 ---
@@ -17,11 +17,9 @@ further_reading:
 
 ### Metrics
 
-Amazon ECS metrics collected with the Datadog Agent:
+Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent when deployed in a Docker container are the same metrics collected by the Docker integration. Refer to the [Docker integration metrics][1] for a complete list of metrics.
 
-{{< get-metrics-from-git "amazon_ecs" "ecs." >}}
-
-**Note**: Metrics prefixed with `ecs.containerinsights.*` come from the [AWS CloudWatch agent][2].
+**Note**: Docker metrics are tagged accordingly with the following tags: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`. No further configuration is required.
 
 ### Events
 
@@ -29,12 +27,11 @@ To reduce noise, the Amazon ECS integration is automatically set up to include o
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS Events" >}}
 
-To remove the whitelist and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][3].
+To remove this include list and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/amazon_web_services/
-[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
-[3]: https://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/agent/docker/data_collected/#metrics
+[2]: https://docs.datadoghq.com/help/

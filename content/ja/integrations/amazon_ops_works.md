@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: AWS OpsWorks のリソース使用状況を追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ops_works/'
+draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
 integration_title: Amazon OpsWorks
@@ -46,7 +47,7 @@ Amazon OpsWorks から S3 バケットまたは CloudWatch のいずれかにロ
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_ops_work` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon OpsWorks ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

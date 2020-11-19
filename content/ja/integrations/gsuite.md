@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: G Suite の監査およびセキュリティログを Datadog へインポートします。
 doc_link: 'https://docs.datadoghq.com/integrations/gsuite/'
+draft: false
 git_integration_title: gsuite
 has_logo: true
 integration_title: G Suite

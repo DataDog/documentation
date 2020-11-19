@@ -1,5 +1,5 @@
 ---
-integration_title: TCP RTT Check
+integration_title: TCP RTT
 name: tcp_rtt
 kind: integration
 newhlevel: true
@@ -15,9 +15,9 @@ dependencies:
 
 ## Overview
 
-The TCP RTT check reports on roundtrip times between the host the Agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
+The TCP RTT check reports on roundtrip times between the Agent's host and any host it is communicating with. This check is passive and only reports RTT times for packets being sent and received from outside the check. The check itself does not send any packets.
 
-This check is only shipped in the 64-bit DEB and RPM Datadog Agent v5 packages.  For instructions on how to build the go-metro binary for other versions of the Agent, see the [Datadog/go-metro usage][1]
+This check is only shipped with the 64-bit DEB and RPM Datadog Agent v5 packages. For other versions of the Agent, see the [Datadog/go-metro usage][1] for instructions on how to build the go-metro binary.
 
 ## Setup
 
@@ -47,7 +47,9 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### Configuration
 
-Edit the `go-metro.yaml` file in your Agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
+Edit `go-metro.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample go-metro.d/conf.yaml][3] for all available configuration options.
+
+The following example retrieves the TCP RTT times for `app.datadoghq.com` and `192.168.0.22`:
 
 ```yaml
 init_config:
@@ -68,8 +70,6 @@ instances:
       hosts:
           - app.datadoghq.com
 ```
-
-{{< insert-example-links conf="go-metro" check="none" >}}
 
 ### Validation
 
@@ -101,3 +101,5 @@ This is a passive check, so unless there are packets actively being sent to the 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
 
 [1]: https://github.com/DataDog/go-metro#usage
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/datadog_checks/go-metro/data/conf.yaml.example

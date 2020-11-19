@@ -8,6 +8,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Azure Network Interface.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_network_interface/'
+draft: false
 git_integration_title: azure_network_interface
 has_logo: true
 integration_title: Microsoft Azure Network Interface

@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/ping/README.md'
 display_name: Ping
+draft: false
 git_integration_title: ping
 guid: c3be63cb-678e-4421-b470-79c03b3fe3f1
 integration_id: ping

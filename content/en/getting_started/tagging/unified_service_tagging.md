@@ -326,7 +326,7 @@ Set the following configuration in the Agent's [main configuration file][1]:
 ```yaml
 env: <ENV>
 tags:
-    - service: <SERVICE>
+    - service:<SERVICE>
 ```
 
 This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.

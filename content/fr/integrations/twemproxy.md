@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md'
 display_name: Twemproxy
+draft: false
 git_integration_title: twemproxy
 guid: a5cca58a-9984-4226-ad1c-8dff73c9d6ac
 integration_id: twemproxy
@@ -34,19 +39,22 @@ supported_os:
 
 Suivez les statistiques globales et les statistiques de chaque pool pour chacun de vos serveurs Twemproxy. Ce check de l'Agent recueille les métriques pour les connexions et les erreurs client/serveur, les taux de requêtes et de réponses, les octets entrants/sortants du proxy, et plus encore.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Twemproxy de l'Agent est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Twemproxy .
+Le check Twemproxy de l'Agent est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Twemproxy.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `twemproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple twemproxy.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `twemproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple twemproxy.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -56,7 +64,13 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
        port: 22222
    ```
 
-2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques Twemproxy à Datadog.
+2. [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques Twemproxy à Datadog.
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -68,9 +82,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                          |
 | `<CONFIG_INSTANCE>`  | `{"host": "%%host%%", "port":"22222"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `twemproxy` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][2] et cherchez `twemproxy` dans la section Checks.
 
 ## Données collectées
 
@@ -84,19 +102,14 @@ Le check Twemproxy n'inclut aucun événement.
 
 ### Checks de service
 
-`twemproxy.can_connect` :
-
-Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Twemproxy pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**twemproxy.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Twemproxy pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/datadog_checks/twemproxy/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/twemproxy/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md'
 display_name: Rundeck
+draft: false
 git_integration_title: rundeck
 guid: 2e3492d3-14fd-409d-b339-fb1bc14d7db9
 integration_id: rundeck

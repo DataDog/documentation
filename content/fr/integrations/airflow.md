@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/airflow/README.md'
 display_name: Airflow
+draft: false
 git_integration_title: airflow
 guid: f55d88b1-1c0a-4a23-a2df-9516b50050dd
 integration_id: airflow
@@ -66,6 +67,8 @@ Configurez le check Airflow inclus avec le package de l'[Agent Datadog][4] pour 
 
 #### Étape 2 : connectez Airflow à DogStatsD (inclus avec l'Agent Datadog) via la fonctionnalité `statsd` d'Airflow pour recueillir des métriques.
 
+**Remarque** : la présence ou l'absence des métriques StatsD transmises par Airflow peut varier en fonction de l'exécuteur Airflow utilisé. Par exemple, les métriques `airflow.ti_failures/successes, airflow.operator_failures/successes, airflow.dag.task.duration` ne sont [pas transmises pour `KubernetesExecutor`][7].
+
 1. Installez le [plugin StatsD pour Airflow][1].
 
    ```shell
@@ -82,7 +85,7 @@ Configurez le check Airflow inclus avec le package de l'[Agent Datadog][4] pour 
    statsd_prefix = airflow
    ```
 
-3. Modifiez le [fichier de configuration principal de l'Agent Datadog][7] `datadog.yaml` pour y ajouter les paramètres suivants :
+3. Modifiez le [fichier de configuration principal de l'Agent Datadog][8] `datadog.yaml` pour y ajouter les paramètres suivants :
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -207,7 +210,7 @@ Configurez le check Airflow inclus avec le package de l'[Agent Datadog][4] pour 
 
 #### Étape 3 : redémarrez l'Agent Datadog et Airflow.
 
-1. [Redémarrez l'Agent][8].
+1. [Redémarrez l'Agent][9].
 2. Redémarrez Airflow pour commencer à envoyer vos métriques Airflow à l'endpoint DogStatsD de l'Agent Datadog.
 
 #### Checks de service de l'intégration
@@ -267,7 +270,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
       Attention : par défaut, Airflow utilise le modèle de fichier de log suivant pour les tâches : `log_filename_template = {{ ti.dag_id }}/{{ ti.task_id }}/{{ ts }}/{{ try_number }}.log`. Le nombre de logs augmentera considérablement si vous n'effectuez pas un nettoyage régulier. Ce modèle est utilisé par l'interface d'Airflow pour afficher tous les logs de chaque tâche exécutée.
 
-      Si vous ne consultez pas de logs dans l'interface Airflow, nous conseillons plutôt d'utiliser la configuration suivante dans `airflow.cfg` : `log_filename_template = dag_tasks.log`. Effectuez ensuite une rotation de ce fichier et utilisez cette configuration :
+      Si vous ne consultez pas vos logs depuis l'interface Airflow, nous vous conseillons plutôt d'utiliser la configuration suivante dans `airflow.cfg` : `log_filename_template = dag_tasks.log`. Effectuez ensuite une rotation des logs de ce fichier et utilisez cette configuration :
 
       ```yaml
       logs:
@@ -281,11 +284,11 @@ _Disponible à partir des versions > 6.0 de l'Agent_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-3. [Redémarrez l'Agent][9].
+3. [Redémarrez l'Agent][10].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `airflow` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][11] et cherchez `airflow` dans la section Checks.
 
 ## Données collectées
 
@@ -309,7 +312,7 @@ Le check Airflow n'inclut aucun événement.
 
 ### Hook Datadog pour Airflow
 
-Un [hook Datadog pour Airflow][12] peut également être utilisé pour interagir avec Datadog :
+Un [hook Datadog pour Airflow][13] peut également être utilisé pour interagir avec Datadog :
 
 - Envoyer des métriques
 - Interroger des métriques
@@ -317,7 +320,7 @@ Un [hook Datadog pour Airflow][12] peut également être utilisé pour interagir
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://airflow.apache.org/docs/stable/metrics.html
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
@@ -325,9 +328,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/ad_identifiers/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
-[12]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html
+[7]: https://github.com/apache/airflow/issues/11514
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/help/
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/airflow/metadata.csv
+[13]: https://airflow.apache.org/docs/stable/_modules/airflow/contrib/hooks/datadog_hook.html

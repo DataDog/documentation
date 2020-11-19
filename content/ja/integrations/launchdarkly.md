@@ -6,16 +6,17 @@
   "service_checks": assets/service_checks.json
 "categories":
 - notification
-"creates_events": !!bool "true"
+"creates_events": true
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md"
 "display_name": "LaunchDarkly"
+"draft": false
 "git_integration_title": "launchdarkly"
 "guid": "a1441ba8-be33-4123-8808-5a87cd696b64"
 "integration_id": "launchdarkly"
 "integration_title": "LaunchDarkly"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@launchdarkly"
 "manifest_version": "1.0.1"
@@ -66,7 +67,7 @@ LaunchDarkly インテグレーションには、サービスのチェック機�
 
 [LaunchDarkly][5] およびこのインテグレーションの詳細は[こちら][3]を参照してください。.
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/launchdarkly/assets/images/ld-datadog-hover.gif
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/launchdarkly/images/ld-datadog-hover.gif
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://docs.launchdarkly.com/docs/datadog
 [4]: https://support.launchdarkly.com/hc/en-us/requests/new

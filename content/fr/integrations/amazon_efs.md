@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Elastic File System.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_efs/'
+draft: false
 git_integration_title: amazon_efs
 has_logo: true
 integration_title: Amazon Elastic File System
@@ -23,11 +24,11 @@ version: '1.0'
 ---
 ## Présentation
 
-Amazon EFS est un système de stockage de fichiers simple et évolutif à utiliser avec les instances Amazon EC2 dans le cloud AWS.
+Amazon EFS est un système de stockage de fichiers simple et évolutif à utiliser avec les fonctions AWS Lambda ou les instances Amazon EC2.
 
-Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'EFS.
+Activez cette intégration pour recueillir toutes vos métriques EFS dans l'application Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -61,6 +62,15 @@ Configurez Amazon EFS de façon à ce que ses logs soient envoyés vers un comp
     - [Ajouter un déclencheur manuel sur le compartiment S3][7]
     - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][8]
 
+### Amazon EFS pour Lambda
+
+[Amazon EFS pour Lambda][9] vous permet d'associer un EFS à vos fonctions Lambda. Avec EFS pour Lambda, les organisations ont la possibilité de simplifier leurs charges de travail d'apprentissage automatique et de traitement de données en faisant appel au sans serveur. Pour diviser les métriques Lambda et les logs par EFS :
+
+1. Installez l'[intégration AWS Lambda][10] et activez la collecte des métriques.
+2. Ajoutez cette autorisation à votre [stratégie IAM Datadog][3] :
+
+    - `elasticfilesystem:DescribeAccessPoints` : Énumère les instances EFS actives connectées aux fonctions Lambda
+
 ## Données collectées
 
 ### Métriques
@@ -79,7 +89,7 @@ L'intégration AWS Elastic File System n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -89,5 +99,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_efs/amazon_efs_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help/
+[9]: /fr/integrations/amazon_lambda/#amazon-efs-for-lambda
+[10]: https://docs.datadoghq.com/fr/integrations/amazon_lambda/#aws-lambda-metrics
+[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_efs/amazon_efs_metadata.csv
+[12]: https://docs.datadoghq.com/fr/help/

@@ -58,7 +58,7 @@ Pour les étapes restantes, suivez les [instructions de démarrage rapide][10] f
 
 - Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (dans cet exemple, un déploiement basé sur un host) ;
 - Définir les tags `service`, `env` et `version` de façon dynamique ;
-- Activer le profileur en continu, App Analytics et l'injection des ID de trace dans les logs durant la configuration.
+- Activer le profileur en continu, l'ingestion de 100 % des traces et l'injection des ID de trace dans les logs durant la configuration.
 
 
 ### Activer l'APM

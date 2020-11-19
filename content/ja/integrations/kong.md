@@ -23,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kong/README.md'
 display_name: Kong
+draft: false
 git_integration_title: kong
 guid: f1098d6f-b393-4374-81c0-47c0a142aeef
 integration_id: kong

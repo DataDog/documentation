@@ -16,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md'
 display_name: Aerospike
+draft: false
 git_integration_title: aerospike
 guid: 582de9e7-0c99-4037-9cc5-bc34612ce039
 integration_id: aerospike

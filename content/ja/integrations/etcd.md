@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Etcd Overview: assets/dashboards/etcd_overview.json
   logs:
@@ -20,6 +22,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/etcd/README.md'
 display_name: etcd
+draft: false
 git_integration_title: etcd
 guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
@@ -144,13 +147,11 @@ Etcd チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`etcd.can_connect`:
+**etcd.can_connect**:<br>
+Agent が Etcd API エンドポイントからメトリクスを収集できない場合は、'CRITICAL' を返します。
 
-Agent が Etcd API エンドポイントからメトリクスを収集できない場合は、'Critical' を返します。
-
-`etcd.healthy`:
-
-メンバーノードが異常である場合は、'Critical' を返します。Agent が `/health` エンドポイントに到達できない場合、あるいは健全性ステータスが見つからない場合は、'Unknown' を返します。
+**etcd.healthy**:<br>
+メンバーノードが異常である場合は、'CRITICAL' を返します。Agent が `/health` エンドポイントに到達できない場合、あるいは健全性ステータスが見つからない場合は、'Unknown' を返します。
 
 ## トラブルシューティング
 

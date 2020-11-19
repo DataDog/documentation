@@ -1,6 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md'
 display_name: Cisco ACI
+draft: false
 git_integration_title: cisco_aci
 guid: 8a20f56b-2e25-4a0b-a252-f5187dddeeef
 integration_id: cisco-aci
@@ -38,19 +43,22 @@ Grâce à l'intégration Cisco ACI, vous pouvez :
 - Faire un suivi de la capacité de votre ACI
 - Surveiller les commutateurs et les contrôleurs
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check Cisco ACI est fourni avec l'Agent : il vous suffit donc d'[installer l'Agent][2] sur un serveur au sein de votre réseau.
+Le check Cisco ACI est fourni avec l'Agent : il vous suffit donc d'[installer l'Agent][1] sur un serveur au sein de votre réseau.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `cisco_aci.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple cisco_aci.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `cisco_aci.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple cisco_aci.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
    ```yaml
    init_config:
@@ -74,7 +82,13 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
        pwd: datadog
    ```
 
-2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques Cisco ACI à Datadog.
+2. [Redémarrez l'Agent][3] pour commencer à envoyer vos métriques Cisco ACI à Datadog.
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
@@ -86,9 +100,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                          |
 | `<CONFIG_INSTANCE>`  | `{"aci_url":"%%host%%", "username":"<NOMUTILISATEUR>", "pwd": "<MOTDEPASSE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `cisco_aci` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][2] et cherchez `cisco_aci` dans la section Checks.
 
 ## Données collectées
 
@@ -102,19 +120,14 @@ Le check Cisco ACI envoie les défaillances de locataire sous la forme d'évén
 
 ### Checks de service
 
-`cisco_aci.can_connect` :
-
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'API Cisco ACI pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
+**cisco_aci.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Cisco ACI pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/

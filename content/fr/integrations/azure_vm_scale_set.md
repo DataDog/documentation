@@ -7,29 +7,30 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques sur vos groupes de machines virtuelles\_: octets entrants/sortants, opérations de disque, charge CPU, et plus encore."
 doc_link: 'https://docs.datadoghq.com/integrations/azure_vm_scale_set/'
+draft: false
 git_integration_title: azure_vm_scale_set
 has_logo: true
-integration_title: Microsoft Azure Virtual Machine Scale Set
+integration_title: Azure Virtual Machine Scale Set
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_vm_scale_set
-public_title: Intégration Datadog/Microsoft Azure Virtual Machine Scale Set
+public_title: Intégration Datadog/Azure Virtual Machine Scale Set
 short_description: "Surveillez des métriques sur vos groupes de machines virtuelles\_: octets entrants/sortants, opérations de disque, charge CPU, et plus encore."
 version: '1.0'
 ---
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="dashboard azure vm scale sets" popup="true">}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="dashboard groupes de machines virtuelles identiques azure" popup="true">}}
 
 ## Présentation
 
 Les groupes de machines virtuelles identiques sont des ressources de calcul Azure utilisées pour déployer, gérer et mettre automatiquement à l'échelle un ensemble de machines virtuelles identiques.
 
-Recueillez des métriques d'Azure Virtual Machine Scale Sets pour :
+Recueillez des métriques des groupes de machines virtuelles identiques Azure pour :
 
 - Visualiser les performances de vos groupes de machines virtuelles identiques
 - Corréler les performances de vos groupes de machines virtuelles identiques avec vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -63,11 +64,11 @@ Pour en savoir plus, consultez les informations relatives à l'intégration des 
 
 ### Événements
 
-L'intégration Azure Virtual Machine Scale Sets n'inclut aucun événement.
+L'intégration Azure Virtual Machine Scale Set n'inclut aucun événement.
 
 ### Checks de service
 
-L'intégration Azure Virtual Machine Scale Sets n'inclut aucun check de service.
+L'intégration Azure Virtual Machine Scale Set n'inclut aucun check de service.
 
 ## Dépannage
 

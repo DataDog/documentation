@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Google Cloud Filestore のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_filestore/'
+draft: false
 git_integration_title: google_cloud_filestore
 has_logo: true
 integration_title: Google Cloud Filestore

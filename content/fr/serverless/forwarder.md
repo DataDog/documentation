@@ -8,7 +8,7 @@ title: Forwarder Datadog
 ---
 Le Forwarder Datadog est une fonction AWS Lambda qui envoie des logs, des métriques custom et des traces depuis votre environnement à Datadog. Le Forwarder peut :
 
-- Transmettre les logs CloudWatch, ELB, S3, CloudTrail, VPC et CloudFront à Datadog
+- Transmettre les logs CloudWatch, ELB, S3, CloudTrail, VPC, SNS et CloudFront à Datadog
 - Transmettre les événements S3 à Datadog
 - Transmettre les événements des flux de données Kinesis à Datadog (seuls les logs CloudWatch sont pris en charge)
 - Transmettre les métriques custom de fonctions AWS Lambda à l'aide des logs CloudWatch
@@ -20,6 +20,8 @@ Pour en savoir plus sur l'envoi de logs de services AWS avec le Forwarder Datado
 ## Installation
 
 Datadog vous conseille d'utiliser [CloudFormation](#cloudformation) pour installer automatiquement le Forwarder. Vous pouvez également effectuer l'installation avec [Terraform](#terraform) ou [manuellement](#installation-manuelle).
+
+Une fois installé, vous pouvez abonner le Forwarder à des sources de logs, tels que des compartiments S3 ou des groupes de logs CloudWatch, en suivant ces [instructions](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#configurer-des-declencheurs).
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Cloud Formation" xxx -->
@@ -45,7 +47,7 @@ Installez le Forwarder en utilisant la ressource Terraform [aws_cloudformation_s
 Datadog vous conseille de créer deux configurations Terraform distinctes :
 
 - Utilisez la première pour stocker la clé d'API Datadog dans AWS Secrets Manager, et récupérez l'ARN du secret depuis la sortie générée.
-- Ensuite, créez une autre configuration pour le Forwarder et spécifiez l'ARN du secret via le paramètre `DdApiKeySecretArn`.
+- Ensuite, créez une autre configuration pour le Forwarder et spécifiez l'ARN des secrets via le paramètre `DdApiKeySecretArn`.
 
 En séparant les configurations de la clé d'API et du Forwarder, vous n'aurez pas à spécifier la clé d'API Datadog lorsque vous mettez à jour le Forwarder.
 
@@ -91,7 +93,7 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 ```
 
 <!-- xxz tab xxx -->
-<!-- xxx tab "Manual" xxx -->
+<!-- xxx tab "Méthode manuelle" xxx -->
 
 ### Méthode manuelle
 
@@ -102,6 +104,7 @@ Si vous ne parvenez pas à installer le Forwarder à l'aide du modèle CloudForm
 3. Si vous souhaitez transmettre des logs depuis des compartiments S3, ajoutez l'autorisation `s3:GetObject` au rôle d'exécution de la fonction Lambda.
 4. Définissez la variable d'environnement `DD_ENHANCED_METRICS` sur `false` pour le Forwarder. De cette façon, le Forwarder ne génèrera pas de métriques optimisées mais transmettra quand même les métriques custom des autres fonctions Lambda.
 5. Configurez des [déclencheurs](https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#envoyer-des-logs-de-service-aws-a-datadog).
+6. Créez un compartiment S3 et définissez la variable d'environnement `DD_S3_BUCKET_NAME` sur le nom du compartiment. Accordez également les autorisations `s3:GetObject`, `s3:PutObject` et `s3:DeleteObject` au rôle d'exécution de la fonction Lambda pour ce compartiment. Ce compartiment est utilisé pour stocker le cache des tags Lambda.
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -224,140 +227,136 @@ La pile CloudFormation crée les rôles IAM suivants :
 
 **Déclarations IAM**
 
-  ```json
-  [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Action": ["s3:GetObject"],
-      "Resource": "arn:aws:s3:::*",
-      "Effect": "Allow"
-    },
-    {
-      "Action": ["secretsmanager:GetSecretValue"],
-      "Resource": "<ARN de DdApiKeySecret>",
-      "Effect": "Allow"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::*",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["secretsmanager:GetSecretValue"],
+    "Resource": "<ARN de DdApiKeySecret>",
+    "Effect": "Allow"
+  }
+]
+```
 
 - `ForwarderZipCopierRole` : le rôle d'exécution utilisé par la fonction Lambda ForwarderZipCopier pour télécharger le fichier zip de déploiement du Forwarder dans un compartiment S3.
 
 **Déclarations IAM** :
 
-  ```json
-  [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Action": ["s3:PutObject", "s3:DeleteObject"],
-      "Resource": "<Compartiment S3 dans lequel stocker le zip du Forwarder>",
-      "Effect": "Allow"
-    },
-    {
-      "Action": ["s3:ListBucket"],
-      "Resource": "<Compartiment S3 dans lequel stocker le zip du Forwarder>",
-      "Effect": "Allow"
-    }
-  ]
-  ```
+```json
+[
+  {
+    "Effect": "Allow",
+    "Action": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Action": ["s3:PutObject", "s3:DeleteObject"],
+    "Resource": "<Compartiment S3 dans lequel stocker le zip du Forwarder>",
+    "Effect": "Allow"
+  },
+  {
+    "Action": ["s3:ListBucket"],
+    "Resource": "<Compartiment S3 dans lequel stocker le zip du Forwarder>",
+    "Effect": "Allow"
+  }
+]
+```
 
 ## Paramètres CloudFormation
 
 ### Obligatoire
 
 - `DdApiKey` : votre clé d'API Datadog. Pour l'obtenir, accédez à Integrations > APIs > API Keys.
-    La clé d'API sera stockée dans AWS Secrets Manager.
-- `DdSite` : le site Datadog vers lequel envoyer vos métriques et logs. Doit être défini sur `datadoghq.com` 
-    ou `datadoghq.eu`.
+  La clé d'API sera stockée dans AWS Secrets Manager.
+- `DdSite` : le site Datadog vers lequel envoyer vos métriques et logs. Doit être défini sur `datadoghq.com`
+  ou `datadoghq.eu`
 
 ### Fonction Lambda (facultatif)
 
-- `FunctionName` : le nom de la fonction Lambda du Forwarder Datadog. Veillez à ne pas le modifier lorsque vous mettez à jour une 
-    pile CloudFormation existante, sous peine de remplacer la fonction du Forwarder existante et de 
-    perdre tous vos déclencheurs.
+- `FunctionName` : le nom de la fonction Lambda du Forwarder Datadog. Veillez à ne pas le modifier lorsque vous mettez à jour une
+  pile CloudFormation existante, sous peine de remplacer la fonction du Forwarder existante et de
+  perdre tous vos déclencheurs.
 - `MemorySize` : la quantité de mémoire allouée à la fonction Lambda du Forwarder Datadog.
 - `Timeout` : le délai d'expiration de la fonction Lambda du Forwarder Datadog.
 - `ReservedConcurrency` : la simultanéité réservée pour la fonction Lambda du Forwarder Datadog.
-- `LogRetentionInDays` : la durée de rétention des logs CloudWatch générés par la fonction Lambda du Forwarder 
-    Datadog.
-
+- `LogRetentionInDays` : la durée de rétention des logs CloudWatch générés par la fonction Lambda
+  du Forwarder
 
 ### Transfert des logs (facultatif)
 
-- `DdTags` : ajouter des tags personnalisés aux logs transférés. Ces tags doivent être séparés par des virgules dans une chaîne, sans virgule finale. Ex. : 
-    `env:prod,stack:classic`
-- `DdMultilineLogRegexPattern` : utiliser l'expression régulière spécifiée pour détecter une nouvelle ligne de log 
-    dans les logs multiligne provenant de S3. Ex. : utiliser l'expression `\d{2}\/\d{2}\/\d{4}` pour les logs multiligne qui commencent par 
-    l'expression "11/10/2014".
-- `DdUseTcp` : par défaut, le Forwarder envoie les logs via HTTPS sur le port 443. Pour envoyer les logs via une 
-    connexion TCP avec chiffrement SSL, définir ce paramètre sur true.
+- `DdTags` : ajouter des tags personnalisés aux logs transférés. Ces tags doivent être séparés par des virgules dans une chaîne, sans virgule finale. Ex. :
+  `env:prod,stack:classic`
+- `DdMultilineLogRegexPattern` : utiliser l'expression régulière spécifiée pour détecter une nouvelle ligne de log
+  dans les logs multiligne provenant de S3. Ex. : utiliser l'expression `\d{2}\/\d{2}\/\d{4}` pour les logs multiligne qui commencent par
+  l'expression "11/10/2014".
+- `DdUseTcp` : par défaut, le Forwarder envoie les logs via HTTPS sur le port 443. Pour envoyer les logs via une
+  connexion TCP avec chiffrement SSL, définir ce paramètre sur true.
 - `DdNoSsl` : désactiver le SSL lors du transfert des logs. Définir sur true lorsque les logs doivent passer par un proxy.
 - `DdUrl` : l'URL de l'endpoint vers lequel transmettre les logs. Utile lorsque les logs doivent passer par un proxy.
 - `DdPort` : le port de l'endpoint vers lequel transmettre les logs. Utile lorsque les logs doivent passer par un proxy.
-- `DdSkipSslValidation` : envoyer les logs via HTTPS, mais SANS valider le certificat fourni par 
-    l'endpoint. Le trafic entre le Forwarder et l'endpoint d'admission des logs sera toujours chiffré, 
-    mais la validité du certificat SSL de destination ne sera pas vérifiée.
+- `DdSkipSslValidation` : envoyer les logs via HTTPS, mais SANS valider le certificat fourni par
+  l'endpoint. Le trafic entre le Forwarder et l'endpoint d'admission des logs sera toujours chiffré,
+  mais la validité du certificat SSL de destination ne sera pas vérifiée.
 - `DdUseCompression` : définir sur false pour désactiver la compression des logs. Valide uniquement en cas d'envoi des logs via HTTP.
-- `DdCompressionLevel` : définir le niveau de compression entre 0 (aucune compression) et 9 (compression la plus élevée). 
-    Le niveau de compression par défaut est de 6. Un niveau de compression plus élevé peut permettre de 
-    réduire la quantité de trafic sortant, mais le temps d'exécution du Forwarder sera plus 
-    élevé.
-- `DdForwardLog` : définir sur false pour désactiver le transfert des logs mais continuer à transférer les autres 
-    données d'observabilité, telles que les métriques et les traces des fonctions Lambda.
+- `DdCompressionLevel` : définir le niveau de compression entre 0 (aucune compression) et 9 (compression la plus élevée).
+  Le niveau de compression par défaut est de 6. Un niveau de compression plus élevé peut permettre de
+  réduire la quantité de trafic sortant, mais le temps d'exécution du Forwarder sera plus
+  long.
+- `DdForwardLog` : définir sur false pour désactiver le transfert des logs mais continuer à transférer les autres
+  données d'observabilité, telles que les métriques et les traces des fonctions Lambda.
+- `DdFetchLambdaTags` : laisser le Forwarder récupérer les tags de Lambda à l'aide d'appels d'API GetResources et les appliquer
+  aux logs, aux métriques et aux traces. Si défini sur true, l'autorisation `tag:GetResources` sera
+  automatiquement ajoutée au rôle IAM d'exécution de la fonction Lambda.
 
 ### Nettoyage des logs (facultatif)
 
 - `RedactIp` : remplacer le texte correspondant à `\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}` par `xxx.xxx.xxx.xxx`.
-- `RedactEmail` : remplacer le texte correspondant à `[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+` par 
-    `xxxxx@xxxxx.com`.
-- `DdScrubbingRule` : remplacer le texte correspondant à l'expression régulière spécifiée par `xxxxx` (par défaut) ou par 
-    `DdScrubbingRuleReplacement` (lorsque spécifié). La règle de nettoyage des logs est appliquée à l'intégralité du log au format 
-    JSON, y compris aux métadonnées ajoutées automatiquement par la fonction Lambda. Chaque expression 
-    correspondante est remplacée jusqu'à ce qu'aucune correspondance ne soit trouvée dans chaque log.
+- `RedactEmail` : remplacer le texte correspondant à `[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+` par
+  `xxxxx@xxxxx.com`
+- `DdScrubbingRule` : remplacer le texte correspondant à l'expression régulière spécifiée par `xxxxx` (par défaut) ou par
+  `DdScrubbingRuleReplacement` (lorsque spécifié). La règle de nettoyage des logs est appliquée à l'intégralité du log au format
+  JSON, y compris aux métadonnées ajoutées automatiquement par la fonction Lambda. Chaque expression
+  correspondante est remplacée jusqu'à ce qu'aucune correspondance ne soit trouvée dans chaque log. Remarque : l'utilisation d'une expression régulière inefficace,
+  comme  `.*`, peut ralentir la fonction Lambda.
 - `DdScrubbingRuleReplacement` : remplacer le texte correspondant au paramètre DdScrubbingRule par le texte spécifié.
 
 ### Filtrage des logs (facultatif)
 
-- `ExcludeAtMatch` : ne PAS envoyer les logs correspondant à l'expression régulière spécifiée. Si un log correspond à la fois 
-    à ExcludeAtMatch et à IncludeAtMatch, celui-ci est exclu. Les règles de filtrage sont appliquées à l'intégralité 
-    du log au format JSON, y compris aux métadonnées automatiquement ajoutées par la fonction.
-- `IncludeAtMatch` : envoyer uniquement les logs correspondant à l'expression régulière spécifiée et qui ne sont pas exclus par 
-    ExcludeAtMatch.
-
-### Paramètres expérimentaux (facultatif)
-
-- `DdFetchLambdaTags` : laisser le Forwarder récupérer les tags de Lambda à l'aide d'appels d'API GetResources et les appliquer 
-    aux logs, aux métriques et aux traces. Si défini sur true, l'autorisation `tag:GetResources` sera 
-    automatiquement ajoutée au rôle IAM d'exécution de la fonction Lambda. Les tags sont mis en cache dans la mémoire afin 
-    qu'ils soient uniquement récupérés en cas de démarrage à froid de la fonction ou en cas d'expiration du TTL (1 heure). Le 
-    Forwarder incrémente la métrique `aws.lambda.enhanced.get_resources_api_calls` à chaque fois qu'un appel d'API est effectué.
+- `ExcludeAtMatch` : ne PAS envoyer les logs correspondant à l'expression régulière spécifiée. Si un log correspond à la fois
+  à ExcludeAtMatch et à IncludeAtMatch, celui-ci est exclu. Les règles de filtrage sont appliquées à l'intégralité
+  du log au format JSON, y compris aux métadonnées automatiquement ajoutées par la fonction. Remarque : l'utilisation
+  d'une expression régulière inefficace, comme  `.*`, peut ralentir la fonction Lambda.
+- `IncludeAtMatch` : envoyer uniquement les logs correspondant à l'expression régulière spécifiée et qui ne sont pas exclus par
+  ExcludeAtMatch. Remarque : l'utilisation d'une expression régulière inefficace, comme `.*`, peut ralentir la fonction Lambda.
 
 ### Paramètres avancés (facultatif)
 
-- `SourceZipUrl` : modifier UNIQUEMENT si vous savez ce que vous faites. Permet de remplacer l'emplacement par défaut du 
-    code source de la fonction.
+- `SourceZipUrl` : modifier UNIQUEMENT si vous savez ce que vous faites. Permet de remplacer l'emplacement par défaut du
+  code source de la fonction.
 - `PermissionBoundaryArn` : ARN de la stratégie utilisée pour définir les limites d'autorisations.
-- `DdApiKeySecretArn` : ARN du secret dans lequel est stocké la clé d'API Datadog, si elle est déjà 
-    stockée dans Secrets Manager. Vous devez quand même spécifier une valeur fictive pour DdApiKey afin de satisfaire 
-    l'exigence, même si cette valeur ne sera pas utilisée.
-- `DdUsePrivateLink` : définir sur true pour activer l'envoi des logs et des métriques via AWS PrivateLink. Voir 
-    https://dtdg.co/private-link.
-- `VPCSecurityGroupIds` : liste des identifiants des groupes de sécurité du VPC, séparés par des virgules. À utiliser lorsque AWS PrivateLink est 
-    activé.
+- `DdApiKeySecretArn` : ARN du secret dans lequel est stocké la clé d'API Datadog, si elle est déjà
+  stockée dans Secrets Manager. Vous devez quand même spécifier une valeur fictive pour DdApiKey afin de satisfaire
+  l'exigence, même si cette valeur ne sera pas utilisée.
+- `DdUsePrivateLink` : définir sur true pour activer l'envoi des logs et des métriques via AWS PrivateLink. Voir
+  https://dtdg.co/private-link.
+- `VPCSecurityGroupIds` : liste des identifiants des groupes de sécurité du VPC, séparés par des virgules. À utiliser lorsque AWS PrivateLink est
+  activé.
 - `VPCSubnetIds` : liste des identifiants des sous-réseaux du VPC, séparés par des virgules. À utiliser lorsque AWS PrivateLink est activé.
 - `AdditionalTargetLambdaARNs` : liste des ARN de Lambda qui seront appelés de façon asynchrone avec le même `event` que celui reçu par le Forwarder Datadog. Les ARN doivent être séparés par des virgules.

@@ -24,6 +24,7 @@ private: true
     {{< nextlink href="agent/guide/autodiscovery-management" >}}Manage container discovery with the Agent.{{< /nextlink >}}
     {{< nextlink href="agent/guide/ad_identifiers" >}}Apply an Autodiscovery configuration file template to a given container with the ad_identifers parameter.{{< /nextlink >}}
     {{< nextlink href="agent/guide/operator-advanced" >}}Advanced setup for Datadog Operator.{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Container Images for Docker Environments{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}

@@ -18,7 +18,7 @@ metadata:
   name: datadog-agent-installinfo
   labels: {}
   annotations:
-    checksum/install_info: ee293ccedf116ce1ed6e0d9c7f7f9adabd0c230618089bb173c7acffa487e020
+    checksum/install_info: 0b4b93ab3a64d6b6dd8f6b9954ef7628e2faf03f1c6b5a0145077b1f281d21bc
 data:
   install_info: |
     ---
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "datadog/agent:7.21.1"
+          image: "datadog/agent:7.23.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -106,6 +106,7 @@ spec:
             httpGet:
               path: /live
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
@@ -115,13 +116,54 @@ spec:
             httpGet:
               path: /ready
               port: 5555
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 5
+        - name: process-agent
+          image: "datadog/agent:7.23.0"
+          imagePullPolicy: IfNotPresent
+          command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
+          resources: {}
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog-agent"
+                  key: api-key
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KUBERNETES
+              value: "yes"
+            - name: DOCKER_HOST
+              value: unix:///host/var/run/docker.sock
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+              value: "false"
+          volumeMounts:
+            - name: config
+              mountPath: /etc/datadog-agent
+            - name: runtimesocketdir
+              mountPath: /host/var/run
+              mountPropagation: None
+              readOnly: true
+            - name: cgroups
+              mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
+              readOnly: true
+            - name: passwd
+              mountPath: /etc/passwd
+            - name: procdir
+              mountPath: /host/proc
+              mountPropagation: None
+              readOnly: true
       initContainers:
         - name: init-volume
-          image: "datadog/agent:7.21.1"
+          image: "datadog/agent:7.23.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -131,7 +173,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "datadog/agent:7.21.1"
+          image: "datadog/agent:7.23.0"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -179,6 +221,9 @@ spec:
           name: cgroups
         - name: s6-run
           emptyDir: {}
+        - hostPath:
+            path: /etc/passwd
+          name: passwd
       tolerations:
       affinity: {}
       serviceAccountName: "datadog-agent"

@@ -1,0 +1,9 @@
+targetSystem: windows
+datadog:
+  kubeStateMetricsEnabled: false
+  processAgent:
+    enabled: false
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent

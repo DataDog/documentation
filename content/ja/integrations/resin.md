@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   metrics_metadata: metadata.csv
   monitors: {}
@@ -11,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/resin/README.md'
 display_name: Resin
+draft: true
 git_integration_title: resin
 guid: f7b4c3db-5e56-4ab7-bef7-9d4a347daaee
 integration_id: resin

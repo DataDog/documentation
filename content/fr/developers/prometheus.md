@@ -22,8 +22,7 @@ Cette page présente l'interface `OpenMetricsBaseCheck` en détail pour une util
 
 Si vous avez besoin de fonctionnalités plus avancées que celles offertes par le check générique (telles que le prétraitement de métriques), vous pouvez écrire un `OpenMetricsBaseCheck` personnalisé. Il s'agit de [la classe de base][3] du check générique, qui fournit une structure et certains auxiliaires permettant de recueillir des métriques, des événements et des checks de service exposés via Prometheus. Les checks basés sur cette classe nécessitent d'effectuer les opérations de configuration suivantes :
 
-- Remplacement de `self.NAMESPACE`
-- Remplacement de `self.metrics_mapper`
+- Création d'une instance par défaut avec le mapping `namespace` et `metrics`.
 - Implémentation de la méthode `check()`
 ET/OU
 - Création d'une méthode portant le nom de la métrique OpenMetric gérée par les checks (voir `self.prometheus_metric_name`)
@@ -50,52 +49,34 @@ instances:
 Vos fichiers de configuration et de check doivent porter le même nom. Si votre check s'appelle <code>moncheck.py</code>, votre fichier de configuration <em>doit</em> s'appeler <code>moncheck.yaml</code>.
 </div>
 
-La configuration d'un check Prometheus est pratiquement la même que celle d'un [check de l'Agent][4] classique. La principale différence est l'inclusion de la variable `prometheus_endpoint` dans votre fichier `check.yaml`. Le code suivant doit être ajouté dans `conf.d/kube_dns.yaml` :
+La configuration d'un check Prometheus est pratiquement la même que celle d'un [check de l'Agent][4] classique. La principale différence est l'inclusion de la variable `prometheus_url` dans votre fichier `check.yaml`. Le code suivant doit être ajouté dans `conf.d/kube_dns.yaml` :
 
 ```yaml
 init_config:
 
 instances:
     # URL de l'endpoint des métriques de Prometheus
-  - prometheus_endpoint: http://localhost:10055/metrics
+  - prometheus_url: http://localhost:10055/metrics
 ```
 
 ### Écrire le check
 
-Tous les checks OpenMetrics héritent de la classe `OpenMetricsBaseCheck` qui se trouve dans `checks/openmetrics_check.py` :
-
-```python
-from datadog_checks.base import OpenMetricsBasicCheck
-
-class KubeDNSCheck(OpenMetricsBasicCheck):
-```
-
-#### Remplacement de `self.NAMESPACE`
-
-`NAMESPACE` correspond au préfixe des métriques. Il doit être codé en dur dans la classe de votre check :
+Tous les checks OpenMetrics héritent de la [classe `OpenMetricsBaseCheck`][5] :
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
-    def __init__(self, name, init_config, agentConfig, instances=None):
-        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
-        self.NAMESPACE = 'kubedns'
 ```
 
-#### Remplacement de `self.metrics_mapper`
-
-`metrics_mapper` est un dictionnaire où la clé est la métrique à recueillir et la valeur est le nom de métrique correspondant dans Datadog.
-L'objectif du remplacement est de faire en sorte que les métriques envoyées par les checks OpenMetrics ne soient pas considérées comme des [métriques custom][5] :
+#### Définir un mapping de métriques
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
-    def __init__(self, name, init_config, agentConfig, instances=None):
-        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
-        self.NAMESPACE = 'kubedns'
-        self.metrics_mapper = {
+    def __init__(self, name, init_config, instances=None):
+        METRICS_MAP = {
             # Les métriques s'intitulent kubedns à partir de kubernetes 1.6.0
             'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
             'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
@@ -105,18 +86,59 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
         }
 ```
 
+#### Définir une instance par défaut
+
+Une instance par défaut correspond à la configuration de base utilisée pour le check. L'instance par défaut doit remplacer `namespace`, `metrics` et `prometheus_url`.
+
+
+Notez que les valeurs par défaut de certaines options de configuration dans `OpenMetricsBaseCheck` sont également remplacées ; la cohérence du comportement des [types de métriques Prometheus et Datadog][6] est donc renforcée.
+
+```python
+from datadog_checks.base import OpenMetricsBaseCheck
+
+class KubeDNSCheck(OpenMetricsBaseCheck):
+    def __init__(self, name, init_config, instances=None):
+        METRICS_MAP = {
+            # Les métriques s'intitulent kubedns à partir de kubernetes 1.6.0
+            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
+            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
+            'kubedns_kubedns_dns_request_count_total': 'request_count',
+            'kubedns_kubedns_dns_error_count_total': 'error_count',
+            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
+        }
+        super(KubeDNSCheck, self).__init__(
+            name,
+            init_config,
+            instances,
+            default_instances={
+                'kubedns': {
+                    'prometheus_url': 'http://localhost:8404/metrics',
+                    'namespace': 'kubedns',
+                    'metrics': [METRIC_MAP],
+                    'send_histograms_buckets': True,
+                    'send_distribution_counts_as_monotonic': True,
+                    'send_distribution_sums_as_monotonic': True,
+                }
+            },
+            default_namespace='kubedns',
+        )
+```
+
+
 #### Implémenter la méthode de check
+
+Si vous souhaitez implémenter d'autres fonctionnalités, remplacez la fonction `check()`. 
 
 Depuis `instance`, utilisez `endpoint`, qui correspond à l'endpoint de métriques Prometheus ou OpenMetrics à partir duquel les métriques sont récupérées :
 
 ```python
 def check(self, instance):
-    endpoint = instance.get('prometheus_endpoint')
+    endpoint = instance.get('prometheus_url')
 ```
 
 ##### Exceptions
 
-Si un check ne parvient pas à se lancer en raison d'une mauvaise configuration ou d'une erreur de programmation, ou s'il n'est pas en mesure de recueillir de métrique, il doit générer une exception explicative. Cette exception est loguée et affichée dans la [commande status][6] de l'Agent pour faciliter le debugging. Par exemple :
+Si un check ne parvient pas à se lancer en raison d'une mauvaise configuration ou d'une erreur de programmation, ou s'il n'est pas en mesure de recueillir de métrique, il doit générer une exception explicative. Cette exception est loguée et affichée dans la [commande status][7] de l'Agent pour faciliter le debugging. Par exemple :
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -125,93 +147,95 @@ Si un check ne parvient pas à se lancer en raison d'une mauvaise configuration 
 
         my_custom_check
         ---------------
-          - instance #0 [ERROR]: Unable to find prometheus_endpoint in config file.
+          - instance #0 [ERROR]: Unable to find prometheus_url in config file.
           - Collected 0 metrics & 0 events
 
-Améliorez votre méthode `check ()` avec `CheckException` :
+Améliorez votre méthode `check ()` avec `ConfigurationError` :
 
 ```python
-from datadog_checks.base.errors import CheckException
+from datadog_checks.base import ConfigurationError
 
 def check(self, instance):
-    endpoint = instance.get('prometheus_endpoint')
+    endpoint = instance.get('prometheus_url')
     if endpoint is None:
-        raise CheckException("Unable to find prometheus_endpoint in config file.")
+        raise ConfigurationError("Unable to find prometheus_url in config file.")
 ```
 
 Ensuite, les données sont transmises dès qu'elles sont disponibles :
 
 ```python
-from datadog_checks.base.errors import CheckException
+from datadog_checks.base import ConfigurationError
 
 def check(self, instance):
-    endpoint = instance.get('prometheus_endpoint')
+    endpoint = instance.get('prometheus_url')
     if endpoint is None:
-        raise CheckException("Unable to find prometheus_endpoint in config file.")
-    # Par défaut, les compartiments sont envoyés.
-    if send_buckets is not None and str(send_buckets).lower() == 'false':
-        send_buckets = False
-    else:
-        send_buckets = True
+        raise ConfigurationError("Unable to find prometheus_url in config file.")
 
-    self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
+    self.process(instance)
 ```
 
 ### Synthèse
 
 ```python
-from datadog_checks.base import OpenMetricsBaseCheck
-from datadog_checks.base.errors import CheckException
+from datadog_checks.base import ConfigurationError, OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     """
     Collect kube-dns metrics from Prometheus endpoint
     """
-    def __init__(self, name, init_config, agentConfig, instances=None):
-        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
-        self.NAMESPACE = 'kubedns'
-
-        self.metrics_mapper = {
+    def __init__(self, name, init_config, instances=None):
+        METRICS_MAP = {
             # Les métriques s'intitulent kubedns à partir de kubernetes 1.6.0
             'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
             'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
             'kubedns_kubedns_dns_request_count_total': 'request_count',
             'kubedns_kubedns_dns_error_count_total': 'error_count',
-            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count',
+            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
         }
+        super(KubeDNSCheck, self).__init__(
+            name,
+            init_config,
+            instances,
+            default_instances={
+                'kubedns': {
+                    'prometheus_url': 'http://localhost:8404/metrics',
+                    'namespace': 'kubedns',
+                    'metrics': [METRIC_MAP],
+                    'send_histograms_buckets': True,
+                    'send_distribution_counts_as_monotonic': True,
+                    'send_distribution_sums_as_monotonic': True,
+                }
+            },
+            default_namespace='kubedns',
+        )
 
     def check(self, instance):
-        endpoint = instance.get('prometheus_endpoint')
+        endpoint = instance.get('prometheus_url')
         if endpoint is None:
-            raise CheckException("Unable to find prometheus_endpoint in config file.")
+            raise ConfigurationError("Unable to find prometheus_url in config file.")
 
-        send_buckets = instance.get('send_histograms_buckets', True)
-        # Par défaut, les compartiments sont envoyés.
-        if send_buckets is not None and str(send_buckets).lower() == 'false':
-            send_buckets = False
-        else:
-            send_buckets = True
-
-        self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
+        self.process(instance)
 ```
 
 ## Concepts avancés
 
-Vous pouvez améliorer votre check OpenMetrics à l'aide des méthodes suivantes :
+Pour en savoir plus sur les intégrations Prometheus et OpenMetrics de base, consultez la [documentation pour développeurs][8].
 
-### `self.ignore_metrics`
+Vous pouvez améliorer votre check OpenMetrics en incluant des valeurs par défaut pour d'autres options de configuration :
+
+### `ignore_metrics`
 
 Certaines métriques sont ignorées car elles sont en double ou introduisent une très forte cardinalité. Les métriques incluses dans cette liste seront ignorées en silence, sans que la ligne de debugging `Unable to handle metric` ne soit ajoutée dans les logs.
 
-### `self.labels_mapper`
+### `labels_mapper`
 
 Si le dictionnaire `labels_mapper` est fourni, les étiquettes de métriques dans `labels_mapper` utilisent la valeur correspondante comme nom de tag lors de l'envoi des gauges.
 
-### `self.exclude_labels`
+### `exclude_labels`
 
 `exclude_labels` est un tableau d'étiquettes à exclure. Ces étiquettes ne seront pas ajoutées en tant que tags lors de l'envoi de la métrique.
 
-### `self.type_overrides`
+### `type_overrides`
 
 `type_overrides` est un dictionnaire où les clés correspondent aux noms des métriques Prometheus ou OpenMetrics et où les valeurs correspondent au type de métrique (nom sous forme de chaîne) à utiliser au lieu de celui indiqué dans la charge utile. Il peut être utilisé pour forcer l'application d'un type sur des métriques non associées à un type. 
 Voici les types disponibles : `counter`, `gauge`, `summary`, `untyped` et `histogram`.
@@ -226,5 +250,7 @@ Voici les types disponibles : `counter`, `gauge`, `summary`, `untyped` et `hist
 [2]: /fr/agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /fr/agent/agent_checks/#configuration
-[5]: /fr/developers/metrics/custom_metrics/
-[6]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
+[6]: https://docs.datadoghq.com/fr/integrations/guide/prometheus-metrics/
+[7]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://datadoghq.dev/integrations-core/base/prometheus/

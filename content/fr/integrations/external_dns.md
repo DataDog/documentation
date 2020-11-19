@@ -1,6 +1,8 @@
 ---
 assets:
   dashboards: {}
+  logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md'
 display_name: ExternalDNS
+draft: false
 git_integration_title: external_dns
 guid: 31eb63d5-15eb-42b3-912d-f8de47ea252a
 integration_id: external-dns
@@ -34,17 +37,17 @@ supported_os:
 
 Recueillez des métriques sur le service ExternalDNS en temps réel pour visualiser et surveiller les métriques recueillies avec le plug-in Prometheus ExternalDNS pour Kubernetes.
 
-Pour en savoir plus sur le service ExternalDNS, consultez le [référentiel Github][7].
+Pour en savoir plus sur le service ExternalDNS, consultez le [référentiel Github][1].
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check ExternalDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check ExternalDNS est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `external_dns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple external_dns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `external_dns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple external_dns.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 #### Utilisation de la découverte de services
 
@@ -65,7 +68,7 @@ metadata:
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][4] et cherchez `external_dns` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `external_dns` dans la section Checks.
 
 ## Données collectées
 
@@ -84,12 +87,12 @@ Renvoie `CRITICAL` si le check ne parvient pas à se connecter à l'endpoint de 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/external_dns/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://github.com/kubernetes-incubator/external-dns
+[1]: https://github.com/kubernetes-incubator/external-dns
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/external_dns/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help/

@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_vm/'
+draft: false
 git_integration_title: azure_vm
 has_logo: true
 integration_title: Microsoft Azure VM

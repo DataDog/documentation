@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Step Functions のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
+draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
 integration_title: Amazon Step Functions

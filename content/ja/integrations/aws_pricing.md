@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md'
 display_name: AWS Pricing
+draft: false
 git_integration_title: aws_pricing
 guid: fce760ae-979a-4c35-aa4e-5a05c24e2ce3
 integration_id: aws-pricing

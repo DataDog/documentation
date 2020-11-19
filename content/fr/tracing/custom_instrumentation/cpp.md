@@ -145,7 +145,7 @@ Si plusieurs styles d'extraction sont activés, une tentative d'extraction est e
 
 ### Filtrage de ressources
 
-Il est possible d'exclure des traces en fonction de leur nom de ressource afin d'empêcher le trafic Synthetics (tel que les checks de santé) d'envoyer des traces à Datadog. Pour filtrer des ressources et configurer d'autres paramètres de sécurité et de personnalisation, accédez à la page [Securité][11].
+Il est possible d'exclure des traces en fonction de leur nom de ressource afin d'empêcher le trafic Synthetic (tel que les checks de santé) d'envoyer des traces à Datadog. Pour filtrer des ressources et configurer d'autres paramètres de sécurité et de personnalisation, accédez à la page [Securité][11].
 
 ## Pour aller plus loin
 

@@ -13,73 +13,108 @@ further_reading:
   text: "Understand what is going on at any level of your system"
 ---
 
-## Introduction
+## Overview
 
 [Datadog Live Containers][1] enables real-time visibility into all containers across your environment.
 
 Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
-Coupled with integrations for [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
+Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
 {{< img src="infrastructure/livecontainers/livecontainersoverview.png" alt="Live containers with summaries"  >}}
 
-### Kubernetes Resources
-
-[Kubernetes Resources for Live Containers][1] is currently in private beta. Fill out [this form][5] to request access.
-
-If you're using Kubernetes, enable Kubernetes Resources for Live Containers to gain multi-dimensional visibility into all Kubernetes workloads across your clusters. Inspired by the `kubectl` tool, this feature gives you complete coverage of your Kubernetes infrastructure in a continuously updated table with curated resource metrics, faceted search, per-workload detailed view, and visualized maps.
-
-## Installation
-
-Follow the [Docker][6] or [Kubernetes][7] Agent installation instructions. Enable the Process Agent to populate your Live Containers view. Container metrics are available without additional configuration after installation.
-
-**Kubernetes Resources for Live Containers requires installation of**:
-
-* [Datadog Agent][8] version 7.21.1 (or above)
-* [Datadog Cluster Agent][9] 1.9.0 (or above)
-
-### Kubernetes Resources
-
-To enable Kubernetes Resources for Live Containers, follow the [Helm instructions][10] and add the following changes to your `values.yaml` file:
-
-{{< code-block lang="yaml" filename="values.yaml" >}}
-datadog:
-  ...
-  processAgent:
-    enabled: true
-  ...
-  orchestratorExplorer:
-    enabled: true
-...
-clusterAgent:
-  enabled: true
-  image:
-    repository: datadog/cluster-agent
-    tag: latest
-    pullPolicy: Always
-...
-agents:
-  image:
-    repository: datadog/agent
-    tag: latest
-    pullPolicy: Always
-...
-{{< /code-block >}}
-
-In cases where the Agent is not able to automatically detect the Kubernetes cluster name, you must set it in `values.yaml`:
-
-{{< code-block lang="yaml" filename="values.yaml" >}}
-datadog:
-   ...
-   clusterName: <PLACEHOLDER>
-   ...
-{{< /code-block >}}
-
-**Note**: The cluster name must be 40-characters or less.
-
-On Google's GKE, AWS EKS, and Azure AKS, this is unnecessary, unless the Agent and the cluster Agent don't have access to the cloud metadata APIs, or the cluster name is longer than 40 characters.
-
 ## Configuration
+
+### Kubernetes Resources
+
+The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][5]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+
+Kubernetes resources for Live Containers requires [Agent version >= 7.21.1][6] and [Cluster Agent version >= 1.9.0][7] prior to the configurations below.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+If you are using the official [Datadog Helm Chart][1]:
+
+- Use chart version 2.4.5 or above
+  **Note**: Ensure the Agent and Cluster Agent versions are hardcoded with the minimum versions required or above in your helm chart [values.yaml][2] file.
+- Set `datadog.orchestratorExplorer.enabled` to `true` in [values.yaml][2]
+- Deploy a new release
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+1. [Cluster Agent][1] version >= 1.9.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup documentation][2] for configuration.
+
+    - Set the Cluster Agent container with the following environment variable:
+
+        ```yaml
+          - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+            value: "true"
+        ```
+
+    - Set the Cluster Agent ClusterRole with the following RBAC permissions:
+
+        ```yaml
+          ClusterRole:
+          - apiGroups:  # To create the datadog-cluster-id CM
+            - ""
+            resources:
+            - configmaps
+            verbs:
+            - create
+            - get
+            - update
+          ...
+          - apiGroups:  # Required to get the kube-system namespace UID and generate a cluster ID
+            - ""
+            resources:
+            - namespaces
+            verbs:
+            - get
+          ...
+          - apiGroups:  # to collect new resource types
+            - "apps"
+            resources:
+            - deployments
+            - replicasets
+            verbs:
+            - list
+            - get
+            - watch
+        ```
+
+    These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
+
+    If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
+
+2. The Process Agent, which runs in the Agent DaemonSet, must be enabled and running (it doesn't need to run the process collection), and configured with the following options:
+
+    ```yaml
+    - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+      value: "true"
+    - name: DD_ORCHESTRATOR_CLUSTER_ID
+      valueFrom:
+        configMapKeyRef:
+          name: datadog-cluster-id
+          key: id
+    ```
+
+In some setups, the Process Agent and Cluster Agent are unable to automatically detect a Kubernetes cluster name. If this happens the feature will not start, and you will see a WARN log in the Cluster Agent logs saying `Orchestrator explorer enabled but no cluster name set: disabling`. In this case you must add the following options in the `env` section of both the Cluster Agent and the Process Agent:
+
+  ```yaml
+  - name: DD_CLUSTER_NAME
+    value: "<YOUR_CLUSTER_NAME>"
+  ```
+
+[1]: /agent/cluster_agent/
+[2]: /agent/cluster_agent/setup/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Include or exclude containers
 
@@ -125,7 +160,7 @@ Navigate to the [Containers page][1]. This will automatically bring you to the *
 
 Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
-If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `ReplicaSet`, and `service name`, as well as Kubernetes labels are searchable in a [Kubernetes Resources view](#kubernetes-resources-views).
+If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `ReplicaSet`, and `service name`, as well as Kubernetes labels are searchable in a [Kubernetes Resources view](#kubernetes-resources-view).
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
@@ -156,7 +191,7 @@ For Kubernetes resources, select Datadog tags such as `environment`, `service`, 
 
 ## Tagging
 
-Containers are [tagged][11] with all existing host-level tags, as well as with metadata associated with individual containers.
+Containers are [tagged][8] with all existing host-level tags, as well as with metadata associated with individual containers.
 
 All containers are tagged by `image_name`, including integrations with popular orchestrators, such as [ECS][4] and [Kubernetes][3], which provide further container-level tags. Additionally, each container is decorated with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
@@ -178,14 +213,14 @@ Kubernetes containers are tagged by:
 * `kube_deployment`
 * `kube_cluster`
 
-If you have configuration for [Unified Service Tagging][12] in place, `env`, `service`, and `version` will also be picked up automatically.
+If you have configuration for [Unified Service Tagging][9] in place, `env`, `service`, and `version` will also be picked up automatically.
 Having these tags available will let you tie together APM, logs, metrics, and live container data.
 
 ## Views
 
 ### Containers View
 
-The **Containers** view includes [Scatter Plot](#scatter-plots) and [Timeseries][13] views, and a table to better organize your container data by fields such as container name, status, and start time.
+The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][10] views, and a table to better organize your container data by fields such as container name, status, and start time.
 
 #### Scatter plot
 
@@ -223,28 +258,28 @@ Drill down into resources from Cluster Maps by click on any circle or group to p
 
 Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel. This panel is useful for troubleshooting and finding information about a selected container or resource, such as:
 
-* [**Logs**][14]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
-* [**Metrics**][15]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
+* [**Logs**][11]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
+* [**Metrics**][12]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
 * **Network**: View a container or resource’s network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
-* [**Traces**][16]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
+* [**Traces**][13]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 
 Kubernetes Resources views have a few additional tabs:
 
 * **Processes**: View all processes running in the container of this resource.
 * **YAML**: A detailed YAML overview for the resource.
-* [**Events**][17]: View all Kubernetes events for your resource.
+* [**Events**][14]: View all Kubernetes events for your resource.
 
 For a detailed dashboard of this resource, click the **View Dashboard** in the top right corner of this panel.
 
 ### Container logs
 
-View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][18] or indexed logs for any time in the past.
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [Live Tail][15] or indexed logs for any time in the past.
 
 #### Live Tail
 
 With Live Tail, all container logs are streamed. Pausing the stream allows you to easily read logs that are quickly being written; unpause to continue streaming.
 
-Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][18].
+Streaming logs can be searched with simple string matching. For more details about Live Tail, see the [Live Tail documentation][15].
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
@@ -259,13 +294,13 @@ You can see logs that you have chosen to index and persist by selecting a corres
 ## Notes and known issues
 
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][19].
+* RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][16].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
 ### Kubernetes Resources
 
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
-* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [add link][20] for more details.
+* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [the Helm Chart repo][17] for more details.
 
 ## Further reading
 
@@ -274,20 +309,17 @@ You can see logs that you have chosen to index and persist by selecting a corres
 [1]: https://app.datadoghq.com/containers
 [2]: /integrations/docker_daemon/
 [3]: /agent/kubernetes/
-[4]: /integrations/amazon_ecs/
-[5]: https://app.datadoghq.com/containers/kubernetes-beta
-[6]: /agent/docker/#run-the-docker-agent
-[7]: /agent/kubernetes/?tab=helm
-[8]: /agent/
-[9]: /agent/cluster_agent/setup/?tab=secret
-[10]: /agent/kubernetes/?tab=helm#installation
-[11]: /getting_started/tagging/
-[12]: /getting_started/tagging/unified_service_tagging
-[13]: /dashboards/widgets/timeseries/
-[14]: /logs
-[15]: /metrics
-[16]: /tracing
-[17]: /events
-[18]: /logs/live_tail/
-[19]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
-[20]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[4]: /agent/amazon_ecs/
+[5]: https://app.datadoghq.com/orchestration/overview
+[6]: /agent/
+[7]: /agent/cluster_agent/setup/
+[8]: /tagging/assigning_tags?tab=agentv6v7#host-tags
+[9]: /getting_started/tagging/unified_service_tagging
+[10]: /dashboards/widgets/timeseries/
+[11]: /logs
+[12]: /metrics
+[13]: /tracing
+[14]: /events
+[15]: /logs/live_tail/
+[16]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
+[17]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog

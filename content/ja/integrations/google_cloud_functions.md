@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: 関数実行時間の最小、最大、平均を追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_functions/'
+draft: false
 git_integration_title: google_cloud_functions
 has_logo: true
 integration_title: Google Cloud Functions
@@ -33,7 +34,7 @@ Google Functions からメトリクスを取得して、以下のことができ
 
 #### インストール
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ### ログの収集
 
@@ -45,7 +46,7 @@ Google Cloud Function のログは Stackdriver により収集され、HTTP プ�
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
-    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 

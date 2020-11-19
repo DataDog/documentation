@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
 doc_link: 'https://docs.datadoghq.com/integrations/pagerduty/'
+draft: false
 git_integration_title: pagerduty
 has_logo: true
 integration_title: PagerDuty

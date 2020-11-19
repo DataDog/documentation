@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="logs/processing/processors/processors_overview.png" alt="original log" >}}
 
-A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][4], etc.) on a log.
+A [Processor][1] executes within a [Pipeline][2] to complete a data-structuring action ([Remapping an attribute][3], [Grok parsing][12], etc.) on a log.
 
 **Note**: Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][5] feature.
 
@@ -764,3 +764,4 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [9]: /logs/processing/parsing/?tab=filter#matcher-and-filter
 [10]: /logs/guide/enrichment-tables/
 [11]: /tracing/connect_logs_and_traces/
+[12]: /logs/processing/processors/?tab=ui#grok-parser

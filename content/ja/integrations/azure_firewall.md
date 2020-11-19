@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Azure Firewall のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_firewall/'
+draft: false
 git_integration_title: azure_firewall
 has_logo: true
 integration_title: Microsoft Azure Firewall

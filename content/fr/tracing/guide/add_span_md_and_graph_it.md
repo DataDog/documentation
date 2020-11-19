@@ -240,13 +240,11 @@ La partie inférieure de cette vue comprend des informations supplémentaires su
 
 <div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>associer vos logs à vos traces</a>.</div>
 
-## Exploiter vos tags de span personnalisés avec App Analytics
-
-<div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>activé la fonctionnalité App Analytics.</a></div>
+## Exploiter vos tags de span personnalisés avec Analytics
 
 4) **Accédez à la [page Trace Search][6]**.
 
-La page Trace Search vous permet d'identifier les [traces][1] et les spans analysées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
+La page Trace Search vous permet d'identifier les [traces][1] et les spans indexées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
 
 5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez l'explorateur de facettes sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
 
@@ -260,9 +258,9 @@ Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que 
 
 La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
 
-6) **Accédez à la page [App Analytics][8].**
+6) **Accédez à la page [Analytics][8].**
 
-La page App Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [App Analytics][9].
+La page Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [Recherche et analyse de traces][9].
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
@@ -288,7 +286,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#services
 [6]: https://app.datadoghq.com/apm/search
-[7]: /fr/tracing/app_analytics/search/
-[8]: https://app.datadoghq.com/apm/search/analytics
-[9]: /fr/tracing/app_analytics/analytics/
+[7]: /fr/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[8]: https://app.datadoghq.com/apm/analytics
+[9]: /fr/tracing/trace_search_and_analytics/query_syntax/
 [10]: /fr/tracing/guide/alert_anomalies_p99_database/

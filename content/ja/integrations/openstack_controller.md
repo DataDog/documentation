@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md'
 display_name: Openstack_controller
+draft: false
 git_integration_title: openstack_controller
 guid: 49979592-9096-460a-b086-f173f26c6626
 integration_id: openstack-controller
@@ -95,24 +96,19 @@ OpenStack Controller インテグレーションは、すべてのコンピュ�
 
 ### サービスのチェック
 
-**openstack.neutron.api.up**
-
+**openstack.neutron.api.up**:<br>
 Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.api.up**
-
+**openstack.nova.api.up**:<br>
 Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.keystone.api.up**
-
+**openstack.keystone.api.up**:<br>
 Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.hypervisor.up**
-
+**openstack.nova.hypervisor.up**:<br>
 Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.neutron.network.up**
-
+**openstack.neutron.network.up**:<br>
 ネットワークがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ### イベント

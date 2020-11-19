@@ -6,16 +6,17 @@
   "service_checks": assets/service_checks.json
 "categories":
 - モニター
-"creates_events": !!bool "true"
+"creates_events": true
 "ddtype": "check"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
 "display_name": "Rigor"
+"draft": false
 "git_integration_title": "rigor"
 "guid": "f51704ed-a327-4132-9f04-a25a47791693"
 "integration_id": "rigor"
 "integration_title": "Rigor"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "maintainer": "support@rigor.com"
 "manifest_version": "1.0.0"

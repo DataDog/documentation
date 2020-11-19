@@ -2,6 +2,8 @@
 aliases:
   - /ja/integrations/goexpvar
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv
@@ -15,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md'
 display_name: Go-Expvar
+draft: false
 git_integration_title: go_expvar
 guid: 33557f7a-5f24-43f3-9551-78432894e539
 integration_id: go-expvar

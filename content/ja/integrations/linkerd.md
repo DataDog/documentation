@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md'
 display_name: Linkerd
+draft: false
 git_integration_title: linkerd
 guid: 9aa60dff-4baf-4112-9177-f9c3814dd513
 integration_id: linkerd

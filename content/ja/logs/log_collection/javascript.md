@@ -1,73 +1,86 @@
 ---
-title: ブラウザログ収集
-kind: documentation
 aliases:
   - /ja/logs/log_collection/web_browser
-further_reading:
-  - link: 'https://www.npmjs.com/package/@datadog/browser-logs'
-    tag: NPM
-    text: '@datadog/browser-logs NPM パッケージ'
-  - link: /logs/processing/
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/explorer/
-    tag: Documentation
-    text: ログの調査方法
+dependencies:
+  - 'https://github.com/DataDog/browser-sdk/blob/master/packages/logs/README.md'
+kind: documentation
+title: ブラウザログ収集
 ---
-Datadog のクライアント側 JavaScript ロギングライブラリ `datadog-logs` を利用して、Web ブラウザなどの JavaScript クライアントから Datadog にログを送信できます。
+クライアント側 JavaScript ロギングライブラリ `datadog-logs` で、Web ブラウザなどの JavaScript クライアントから Datadog にログを送信できます。
 
 `datadog-logs` ライブラリを使用すると、JS クライアントから Datadog にログを直接送信すると共に、次の機能を利用できます。
 
-* ライブラリをロガーとして使用する。すべてが JSON ドキュメントとして Datadog に転送されます。
-* 送信される各ログに `context` およびカスタム属性を追加する。
-* すべてのフロントエンドエラーを自動的にラップして転送する。
-* フロントエンドエラーの送信
-* 実際のクライアント IP アドレスとユーザーエージェントを記録する。
-* 自動一括ポストによってネットワークの利用を最適化する。
+- ライブラリをロガーとして使用する。すべてが JSON ドキュメントとして Datadog に転送されます。
+- 送信される各ログに `context` およびカスタム属性を追加する。
+- すべてのフロントエンドエラーを自動的にラップして転送する。
+- フロントエンドエラーの送信
+- 実際のクライアント IP アドレスとユーザーエージェントを記録する。
+- 自動一括ポストによってネットワークの利用を最適化する。
 
 ## セットアップ
 
-1. **Datadog クライアントトークンを取得**: セキュリティ上の理由から、[API キー][1] を使用して `datadog-logs` ライブラリを構成することはできません。JavaScript キーでクライアント側に公開されるためです。ウェブブラウザーからログを収集するには、[クライアントトークン][2]を使用する必要があります。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
-2. [NPM を使い](#npm-setup)**Datadog ブラウザのログライブラリを構成する**か、[バンドル](#bundle-setup)をヘッドタグに直接貼り付けます。
+**Datadog クライアントトークン**: セキュリティ上の理由から、[API キー][1] を使用して `datadog-logs` ライブラリを構成することはできません。JavaScript コードでクライアント側に公開されるためです。ウェブブラウザーからログを収集するには、[クライアントトークン][2]を使用する必要があります。詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
-### NPM の設定
+**Datadog ブラウザログライブラリ**: [NPM](#npm) を使用してライブラリを構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
+
+**対応ブラウザ**: `datadog-logs` ライブラリは、IE10 および IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
+
+### 適切なインストール方法の選択
+
+| インストール方法        | 使用例                                                                                                                                                                                                                                                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm (node package manager) | 最新の Web アプリケーションには、この方法が推奨されます。RUM SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。                            |
+| CDN 非同期                  | この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。 |
+| CDN 同期                   | この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。                                                     |
+
+### NPM
 
 `package.json` ファイルに [`@datadog/browser-logs`][3] を追加したら、以下を使い初期化します。
 
-{{< site-region region="us" >}}
-
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: 'datadoghq.com',
+  site: '<DATADOG_SITE>',
   forwardErrorsToLogs: true,
-  sampleRate: 100
-});
+  sampleRate: 100,
+})
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+### CDN 非同期
 
-```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+ページの head セクションでライブラリの読み込みと構成を行います。
 
-datadogLogs.init({
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: 'datadoghq.eu',
-  forwardErrorsToLogs: true,
-  sampleRate: 100
-});
+<!-- prettier-ignore -->
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: 'XXX',
+            site: 'datadoghq.com',
+            forwardErrorsToLogs: true,
+            sampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
 ```
 
-{{< /site-region >}}
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
-### バンドルの設定
+### CDN 同期
 
-ログやエラーを取りこぼさないよう、ライブラリのロードと構成をページのヘッドセクションの先頭で行います。
-
-{{< site-region region="us" >}}
+すべてのログとエラーを受信するには、ページの head セクションの先頭でライブラリを読み込み構成します。
 
 ```html
 <html>
@@ -75,86 +88,99 @@ datadogLogs.init({
     <title>Example to send logs to Datadog</title>
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
     <script>
-      window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<CLIENT_TOKEN>',
-        site: 'datadoghq.com',
-        forwardErrorsToLogs: true,
-        sampleRate: 100
-      });
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<CLIENT_TOKEN>',
+          site: '<DATADOG_SITE>',
+          forwardErrorsToLogs: true,
+          sampleRate: 100,
+        })
     </script>
   </head>
 </html>
 ```
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```html
-<html>
-  <head>
-    <title>Example to send logs to Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS && DD_LOGS.init({
-        clientToken: '<CLIENT_TOKEN>',
-        site: 'datadoghq.eu',
-        forwardErrorsToLogs: true,
-        sampleRate: 100
-      });
-    </script>
-  </head>
-</html>
-```
-
-{{< /site-region >}}
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+
+### TypeScript
+
+タイプは TypeScript >= 3.0 と互換性があります。以前のバージョンの場合は、JS ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
+
+```typescript
+import '@datadog/browser-logs/bundle/datadog-logs'
+
+window.DD_LOGS.init({
+  clientToken: '<CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  forwardErrorsToLogs: true,
+  sampleRate: 100,
+})
+```
+
+## コンフィギュレーション
 
 ### 初期化パラメーター
 
 以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザのログライブラリを構成できます。
 
-| パラメーター                      | 種類    | 必須 | デフォルト         | 説明                                                                                              |
-|--------------------------------|---------|----------|-----------------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`                  | 文字列  | はい      | `-`             | [Datadog クライアントトークン][2]。                                                                             |
-| `site`                         | 文字列  | はい      | `datadoghq.com` | 所属する組織の Datadog サイト。`datadoghq.com` はアメリカの Datadog のサイト、 `datadoghq.eu` は EU の Datadog サイト。 |
-| `service`                      | 文字列  | ✕       | ``              | このアプリケーションのサービス名。                                                                    |
-| `env`                          | 文字列  | ✕       | ``              | アプリケーションの環境 (例: prod、pre-prod、staging)                   |
-| `version`                      | 文字列  | ✕       | ``              | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                   |
-| `forwardErrorsToLogs`          | Boolean | ✕       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。 |
-| `sampleRate`                   | 数値  | ✕       | `100`           | 追跡するセッションの割合。追跡されたセッションのみログを送信します。`100` は全てを、`0` は皆無を意味します。   |
-| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false`         | 同じサイトのサブドメインのセッションを保持するには、`true` に設定します。**ログと RUM SDK の双方を使用している場合は、この設定を一致させる必要があります。**  |
-| `useSecureSessionCookie`       | Boolean | ✕       | `false`         | 安全なセッションの Cookie を使用するには、`true` に設定します。これで、安全でない (非 HTTPS) 接続のセッション追跡を阻止できます。**ログと RUM SDK の双方を使用している場合は、この設定を一致させる必要があります。** |
-| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false`         | サイト間で安全なセッションの Cookie を使用するには、`true` に設定します。これで、別の対象 (`iframe` など) からサイトが読み込まれた場合に ログ SDK を実行できます。useSecureSessionCookie と併せて使用されます。 **ログと RUM SDK の双方を使用している場合は、この設定を一致させる必要があります。** |
+| パラメーター             | タイプ    | 必須 | デフォルト         | 説明                                                                                              |
+| --------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
+| `clientToken`         | 文字列  | 〇      |                 | [Datadog クライアントトークン][2]。                                                                             |
+| `site`                | 文字列  | 〇      | `datadoghq.com` | 組織の Datadog サイト。US: `datadoghq.com`、EU: `datadoghq.eu`                           |
+| `service`             | 文字列  | ✕       |                 | アプリケーションのサービス名。                                                                   |
+| `env`                 | 文字列  | ✕       |                 | アプリケーションの環境 (例: prod、pre-prod、staging)                                |
+| `version`             | 文字列  | ✕       |                 | アプリケーションのバージョン (例: 1.2.3、6c44da20、2020.02.13)                                |
+| `forwardErrorsToLogs` | Boolean | ✕       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。 |
+| `sampleRate`          | 数値  | ✕       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。       |
+| `silentMultipleInit`  | Boolean | ✕       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                       |
 
-## カスタムログエントリの送信
+`RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
+
+| パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                  |
+| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                    |
+| `useSecureSessionCookie`       | Boolean | ✕       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                    |
+| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+
+## 使用方法
+
+### カスタムログ
 
 Datadog ブラウザのログライブラリが初期化されると、API を使用してカスタムログエントリを Datadog へ直接送信します。
 
-`logger.debug | info | warn | error (message: string, messageContext = Context)`
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogLogs } from '@datadog/browser-logs';
-
-datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 });
+```
+logger.debug | info | warn | error (message: string, messageContext = Context)
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### NPM
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 });
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+```
+
+#### CDN 非同期
+
+```javascript
+DD_LOGS.onReady(function() {
+  DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+#### CDN 同期
+
+```javascript
+window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
 
-{{% /tab %}}
-{{< /tabs >}}
+#### 結果
 
-上の結果は次のようになります。
+結果は、NPM、CDN 非同期、CDN 同期を使用した時と同じです。
 
 ```json
 {
@@ -167,25 +193,28 @@ window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id
     "url": "...",
     "useragent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.130 Safari/537.36"
   },
-  "network": {"client": {"ip": "109.30.xx.xxx"}}
+  "network": { "client": { "ip": "109.30.xx.xxx" } }
 }
 ```
 
 ロガーは、デフォルトで次の情報を追加します。
 
-* `view.url`
-* `session_id`
-* `http.useragent`
-* `network.client.ip`
+- `view.url`
+- `session_id`
+- `http.useragent`
+- `network.client.ip`
 
-### パラメーターとしてのステータスの使用
+### ステータスのパラメーター
 
-Datadog ブラウザのログライブラリが初期化されると、API を使用してカスタムログエントリをそのステータスをパラメーターとして Datadog へ直接送信します。
+Datadog ブラウザのログライブラリが初期化されると、ステータスをパラメーターとして使用して、API でカスタムログエントリを Datadog へ送信します。
 
-`log (message: string, messageContext: Context, status? = 'debug' | 'info' | 'warn' | 'error')`
+```
+log (message: string, messageContext: Context, status? = 'debug' | 'info' | 'warn' | 'error')
+```
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+#### NPM
+
+NPM の場合は以下を使用します。
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -193,31 +222,45 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### CDN 非同期
+
+CDN 非同期の場合は以下を使用します。
+
+```javascript
+DD_LOGS.onReady(function() {
+  DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+#### CDN 同期
+
+CDN 同期の場合は以下を使用します。
 
 ```javascript
 window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+#### プレースホルダー
+
+上記例のプレースホルダーは、以下に説明されています。
 
 | プレースホルダー         | 説明                                                                             |
-|---------------------|-----------------------------------------------------------------------------------------|
-| `<MESSAGE>`         | Datadog によって完全にインデックス化されたログメッセージ                                |
-| `<JSON_ATTRIBUTES>` | `<MESSAGE>` にアタッチされているすべての属性を含む有効な JSON オブジェクト            |
-| `<STATUS>`          | ログのステータス。使用できるステータス値は、`debug`、`info`、`warn`、`error` です。 |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `<MESSAGE>`         | Datadog によって完全にインデックス化されたログメッセージ。                               |
+| `<JSON_ATTRIBUTES>` | `<MESSAGE>` にアタッチされているすべての属性を含む有効な JSON オブジェクト。         |
+| `<STATUS>`          | ログのステータス。使用できるステータス値は、`debug`、`info`、`warn`、`error`。 |
 
 ## 高度な使用方法
 
 ### 複数のロガーの定義
 
-Datadog ブラウザのログライブラリにはデフォルトのロガーが含まれていますが、さまざまなロガーを定義することもできます。これは、同じプロジェクトで複数のチームが作業している場合に便利です。
+Datadog ブラウザのログライブラリにはデフォルトのロガーが含まれていますが、さまざまなロガーを定義することもできます。
 
 #### 新しいロガーの作成
 
-Datadog ブラウザのログライブラリが初期化されると、API `createLogger` を使用して新しいロガーを定義します。
+Datadog ブラウザのログライブラリを初期化したら、API `createLogger` を使用して新しいロガーを定義します。
 
 ```text
 createLogger (name: string, conf?: {
@@ -227,42 +270,63 @@ createLogger (name: string, conf?: {
 })
 ```
 
-**注**: パラメーターは、[setLevel](#ステータスに-基づく-フィルタリング)、[setHandler](#送信先-の-変更)、[setContext](#コンテキストの-上書き) API と共に設定することができます。
+**注**: パラメーターは、[setLevel](#filter-by-status)、[setHandler](#change-the-destination)、[setContext](#overwrite-context) API と共に設定することができます。
 
 #### カスタムロガーを取得
 
 ロガーを作成すると、API を使い JavaScript コードのどこからでもロガーにアクセスすることができます。
 
-`getLogger (name: string)`
+```javascript
+getLogger (name: string)
+```
 
-#### 例
+##### NPM
 
-他のロガーと共に、`signupLogger` のロガーを次のように定義したとします。
-
-{{< tabs >}}
-{{% tab "NPM" %}}
+たとえば、他のロガーと共に定義された `signupLogger` があります。
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
+datadogLogs.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 ```
 
 これで、次のように、このロガーをコードの別の場所で使用できます。
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
 const signupLogger = datadogLogs.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### CDN 非同期
+
+たとえば、他のロガーと共に定義された `signupLogger` があります。
+
+```javascript
+DD_LOGS.onReady(function() {
+  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+})
+```
+
+これで、次のように、このロガーをコードの別の場所で使用できます。
+
+```javascript
+DD_LOGS.onReady(function() {
+  const signupLogger = DD_LOGS.getLogger('signupLogger')
+  signupLogger.info('Test sign up completed')
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+##### CDN 同期
+
+たとえば、他のロガーと共に定義された `signupLogger` があります。
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
+  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 }
 ```
 
@@ -270,15 +334,12 @@ if (window.DD_LOGS) {
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.getLogger('signupLogger')
-    signupLogger.info('Test sign up completed')
+  const signupLogger = DD_LOGS.getLogger('signupLogger')
+  signupLogger.info('Test sign up completed')
 }
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### コンテキストの上書き
 
@@ -286,131 +347,180 @@ if (window.DD_LOGS) {
 
 Datadog ブラウザのログライブラリを初期化すると、以下のことが可能になります。
 
-* `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
-* `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
+- `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+##### NPM
+
+NPM の場合は以下を使用します。
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setLoggerGlobalContext("{'env': 'staging'}");
+datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
 
-datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
+datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### CDN 非同期
+
+CDN 非同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
+DD_LOGS.onReady(function() {
+  DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+})
 
-window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
+DD_LOGS.onReady(function() {
+  window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+##### CDN 同期
+
+CDN 同期の場合は以下を使用します。
+
+```javascript
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
+
+window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### ロガーのコンテキスト
 
 ロガーを作成すると、以下のことができます。
 
-* `setContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
-* `addContext (key: string, value: any)` API を使用して、あなたのロガーにコンテキストを追加。
+- `setContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
+- `addContext (key: string, value: any)` API を使用して、あなたのロガーにコンテキストを追加。
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+##### NPM
+
+NPM の場合は以下を使用します。
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.setContext("{'env': 'staging'}");
+datadogLogs.setContext("{'env': 'staging'}")
 
-datadogLogs.addContext('referrer', document.referrer);
+datadogLogs.addContext('referrer', document.referrer)
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### CDN 非同期
+
+CDN 非同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}");
+DD_LOGS.onReady(function() {
+  DD_LOGS.setContext("{'env': 'staging'}")
+})
 
-window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
+DD_LOGS.onReady(function() {
+  DD_LOGS.addContext('referrer', document.referrer)
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+##### CDN 同期
+
+CDN 同期の場合は以下を使用します。
+
+```javascript
+window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}")
+
+window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### ステータスに基づくフィルタリング
 
-Datadog ブラウザのログライブラリが初期化されると、API を使用してロガーにの最小ログレベルを設定できます。
+Datadog ブラウザのログライブラリが初期化されると、API を使用してロガーの最小ログレベルが設定されます。
 
-`setLevel (level?: 'debug' | 'info' | 'warn' | 'error')`
+```
+setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
+```
 
 指定したレベル以上のステータスのログだけが送信されます。
 
-{{< tabs >}}
-{{% tab "NPM" %}}
+##### NPM
+
+NPM の場合は以下を使用します。
 
 ```javascript
-import { datadogLogs } from '@datadog/browser-logs';
+import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.logger.setLevel('<レベル>');
+datadogLogs.logger.setLevel('<LEVEL>')
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+#### CDN 非同期
+
+CDN 非同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>');
+DD_LOGS.onReady(function() {
+  DD_LOGS.logger.setLevel('<LEVEL>')
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+##### CDN 同期
+
+CDN 同期の場合は以下を使用します。
+
+```javascript
+window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### 送信先の変更
 
 デフォルトでは、Datadog ブラウザのログライブラリが作成したロガーは、ログを Datadog に送信します。
 Datadog ブラウザのログライブラリが初期化されると、ログを `console` に送信したり、ログをまったく送信しない (`silent`) よう、API を使用してロガーを構成することもできます。
 
-`setHandler (handler?: 'http' | 'console' | 'silent')`
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogLogs } from '@datadog/browser-logs';
-
-datadogLogs.logger.setHandler('<ハンドラー>');
+```
+setHandler (handler?: 'http' | 'console' | 'silent')
 ```
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
+##### NPM
+
+NPM の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setHandler('<ハンドラー>');
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.logger.setHandler('<HANDLER>')
+```
+
+#### CDN 非同期
+
+CDN 非同期の場合は以下を使用します。
+
+```javascript
+DD_LOGS.onReady(function() {
+  DD_LOGS.logger.setHandler('<HANDLER>')
+})
+```
+
+**注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+##### CDN 同期
+
+CDN 同期の場合は以下を使用します。
+
+```javascript
+window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
 
-{{% /tab %}}
-{{< /tabs >}}
-
-## サポートされるブラウザ
-
-`datadog-logs` ライブラリは、最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。IE10 および IE11 もサポートしています。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /ja/account_management/api-app-keys/#api-keys
 [2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
+[4]: https://github.com/DataDog/browser-sdk/blob/master/packages/logs/BROWSER_SUPPORT.md

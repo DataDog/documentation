@@ -1,10 +1,7 @@
-import { datadogLogs } from '@datadog/browser-logs';
-import { datadogRum } from '@datadog/browser-rum';
-
+/* eslint import/no-unresolved: 0 */
 import configDocs from '../config/config-docs';
-
-const { env } = document.documentElement.dataset;
-
+const { env, branch } = document.documentElement.dataset;
+const lang = document.documentElement.lang || 'en';
 function getConfig() {
     if (env === 'live') {
         return configDocs['live'];
@@ -14,44 +11,39 @@ function getConfig() {
         return configDocs['development'];
     }
 }
-
-const { ddClientToken, ddApplicationId, loggingHandler } = getConfig();
-const lang = document.documentElement.lang || 'en';
-
-// init browser logs
-datadogLogs.init({
-    clientToken: ddClientToken,
-    forwardErrorsToLogs: true
-});
-
-// init RUM
-if (env === 'preview' || env === 'live') {
-    datadogRum.init({
-        applicationId: ddApplicationId,
-        clientToken: ddClientToken,
-        env,
-        service: 'docs',
-        version: ''
-    });
-}
-
-// global context
-datadogLogs.addLoggerGlobalContext('env', env);
-datadogLogs.addLoggerGlobalContext('service', 'docs');
-datadogLogs.addLoggerGlobalContext('host', window.location.host);
-datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
-datadogLogs.addLoggerGlobalContext('lang', lang);
-
-// create custom loggers
-// Creation of a custom global logger to be used in all part of the site.
-datadogLogs.createLogger('datadog_logger', {
-    context: {
-        env,
-        service: 'docs',
-        host: window.location.host
+const Config = getConfig();
+if (window.DD_RUM) {
+    if (env === 'preview' || env === 'live') {
+        window.DD_RUM.init({
+            applicationId: Config.ddApplicationId,
+            clientToken: Config.ddClientToken,
+            env,
+            service: 'docs',
+            version: CI_COMMIT_SHORT_SHA,
+            trackInteractions: true,
+            allowedTracingOrigins: [window.location.origin]
+        });
+        if (branch) {
+            window.DD_RUM.addRumGlobalContext('branch', branch);
+        }
     }
-});
-
-datadogLogs.logger.setHandler(loggingHandler);
-
-export default datadogLogs;
+}
+if (window.DD_LOGS) {
+    // init browser logs
+    window.DD_LOGS.init({
+        clientToken: Config.ddClientToken,
+        forwardErrorsToLogs: true,
+        env,
+        service: 'docs',
+        version: CI_COMMIT_SHORT_SHA
+    });
+    // global context
+    window.DD_LOGS.addLoggerGlobalContext('host', window.location.host);
+    window.DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
+    window.DD_LOGS.addLoggerGlobalContext('lang', lang);
+    if (branch) {
+        window.DD_LOGS.addLoggerGlobalContext('branch', branch);
+    }
+    // Locally log to console
+    window.DD_LOGS.logger.setHandler(Config.loggingHandler);
+}

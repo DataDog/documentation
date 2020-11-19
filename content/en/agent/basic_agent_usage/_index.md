@@ -148,6 +148,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                                      | macOS 10.12+                                      |
 | [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
+| [Windows Azure Stack HCI OS][10]                | All Versions                                      |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 

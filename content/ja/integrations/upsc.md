@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md'
 display_name: UPSC
+draft: false
 git_integration_title: upsc
 guid: f14607ca-0e30-4c7f-9564-fbdb46ca3030
 integration_id: upsc

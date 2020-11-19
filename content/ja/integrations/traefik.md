@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md'
 display_name: Traefik
+draft: false
 git_integration_title: traefik
 guid: 322c0b9d-3ec6-434e-918c-5740f2a114bf
 integration_id: traefik

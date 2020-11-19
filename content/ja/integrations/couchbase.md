@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
 display_name: Couchbase
+draft: false
 git_integration_title: couchbase
 guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase
@@ -119,18 +120,15 @@ Couchbase チェックは、クラスターのバランスが再調整される�
 
 ### サービスのチェック
 
-- `couchbase.can_connect`:
-
+**couchbase.can_connect**:<br>
 Agent が Couchbase に接続してメトリクスを収集できない場合は、`Critical` を返します。
 
-- `couchbase.by_node.cluster_membership`:
-
+**couchbase.by_node.cluster_membership**:<br>
 ノードがフェイルオーバーした場合は、`Critical` を返します。
 ノードがクラスターに追加され、バランスの再調整を待っている場合は、`Warning` を返します。
 それ以外の場合は、`OK` を返します。
 
-- `couchbase.by_node.health`:
-
+**couchbase.by_node.health**:<br>
 ノードが正常でない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング

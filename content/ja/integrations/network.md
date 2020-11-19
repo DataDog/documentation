@@ -15,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/network/README.md'
 display_name: Network
+draft: false
 git_integration_title: ネットワーク
 guid: 43631795-8a1f-404d-83ae-397639a84050
 integration_id: システム
@@ -72,6 +73,15 @@ sudo modprobe nf_conntrack_ipv6
      ## the command `netstat` from the system package `net-tools` to be installed
      #
      - collect_connection_state: false
+
+     ## @param collect_connection_queues - boolean - optional
+     ## Set to false to disable connection queues collection
+     ## Note: connection queues collections require both
+     ## `collect_connection_state` and `collect_connection_queues` to be true
+     ## because it also requires the command `ss` from system package `iproute2` or
+     ## the command `netstat` from the system package `net-tools` to be installed
+     #
+     - collect_connection_queues: true
    ```
 
 2. [Agent を再起動][5]すると、構成の変更が有効になります。

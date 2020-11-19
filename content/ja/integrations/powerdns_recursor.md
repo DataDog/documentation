@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md'
 display_name: PowerDNS Recursor
+draft: false
 git_integration_title: powerdns_recursor
 guid: ae533b67-a2af-45ce-8e23-235acb3a3893
 integration_id: powerdns

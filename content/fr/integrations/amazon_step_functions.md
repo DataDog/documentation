@@ -7,6 +7,7 @@ ddtype: crawler
 dependencies: []
 description: "Surveillez des métriques clés d'Amazon\_Step\_Functions."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_step_functions/'
+draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
 integration_title: "Amazon\_Step\_Functions"

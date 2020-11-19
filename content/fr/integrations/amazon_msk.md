@@ -7,6 +7,7 @@ ddtype: check
 dependencies: []
 description: Surveillez des métriques clés d'Amazon Managed Streaming for Apache Kafka (MSK).
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_msk/'
+draft: false
 git_integration_title: amazon_msk
 has_logo: true
 integration_title: Amazon Managed Streaming for Apache Kafka

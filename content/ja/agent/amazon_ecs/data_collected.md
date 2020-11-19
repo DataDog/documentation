@@ -8,7 +8,7 @@ further_reading:
   - link: /agent/amazon_ecs/apm/
     tag: Documentation
     text: アプリケーショントレースの収集
-  - link: /agent/amazon_ecs/metrics/
+  - link: '/agent/amazon_ecs/data_collected/#metrics'
     tag: Documentation
     text: ECS リソースの収集
 ---
@@ -16,13 +16,9 @@ further_reading:
 
 ### メトリクス
 
-EC2 インスタンスで Amazon ECS を使用するときに Agent によって収集されるメトリクス:
+EC2 の Amazon ECS は、EC2 インスタンス上で動作する Docker コンテナ向けのコンテナ管理サービスです。Docker コンテナでのデプロイ時に Agent により収集されたメトリクスは Docker インテグレーションにより収集されたメトリクスと同じです。すべてのメトリクスのリストは、[Docker のインテグレーションメトリクス][1]を参照してください。
 
-{{< get-metrics-from-git "amazon_ecs" >}}
-
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
-
-**注**: `ecs.containerinsights.*` をプレフィックスに持つメトリクスは、[AWS CloudWatch エージェント][1]に基づいています。
+**注**: Docker メトリクスは以下のタグに基づいてタグ付けされます: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`。追加のコンフィギュレーションは不要です。
 
 ### イベント
 
@@ -30,15 +26,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
 
-ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][2]までお問い合わせください。
-
-### サービスチェック
-
-- **aws.ecs.agent_connected**: Agent が接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
+このリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][2]までお問い合わせください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
+[1]: https://docs.datadoghq.com/ja/agent/docker/data_collected/#metrics
 [2]: https://docs.datadoghq.com/ja/help/

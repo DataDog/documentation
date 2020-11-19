@@ -12,6 +12,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon RDS 関連の大量のメトリクスを追跡する。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rds/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-rds-mysql-performance-metrics/'
     tag: ブログ
@@ -137,7 +138,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 {{% /tab %}}
 {{< /tabs >}}
 
-### 構成
+### コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "標準" %}}

@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md'
 display_name: Neo4j
+draft: false
 git_integration_title: neo4j
 guid: a85ec8bb-e677-4089-ae8f-d1705c340131
 integration_id: neo4j

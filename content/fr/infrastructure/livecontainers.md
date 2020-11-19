@@ -30,12 +30,12 @@ Si vous utilisez Kubernetes, activez la fonctionnalité Ressources Kubernetes po
 
 ## Installation
 
-Suivez les instructions d'installation de l'Agent [Docker][6] ou [Kubernetes][7]. Une fois l'Agent installé, aucune autre configuration n'est nécessaire pour accéder aux métriques de conteneur.
+Suivez les instructions d'installation de l'Agent [Docker][6] ou [Kubernetes][7]. Activez l'Agent de processus pour bénéficier de la vue Live Containers. Une fois l'Agent installé, aucune autre configuration n'est nécessaire pour accéder aux métriques de conteneur.
 
 **La fonctionnalité Ressources Kubernetes pour Live Containers nécessite l'installation des Agents suivants** :
 
 * [Agent Datadog][8] version 7.21.1 (ou supérieure)
-* [Agent de cluster Datadog][9] version 1.8.0 (ou supérieure)
+* [Agent de cluster Datadog][9] version 1.9.0 (ou supérieure)
 
 ### Ressources Kubernetes
 
@@ -74,9 +74,9 @@ datadog:
    ...
 {{< /code-block >}}
 
-**Remarque** : le nom du cluster ne doit pas comporter plus de 40 caractères.
+**Remarque** : le nom du cluster ne doit pas comporter plus de 80 caractères.
 
-Cette étape n'est pas nécessaire sur Google GKE, AWS EKS et Azure AKS, sauf si l'Agent et l'Agent de cluster n'ont pas accès aux API des métadonnées cloud, ou que le nom du cluster comporte plus de 40 caractères.
+Cette étape n'est pas nécessaire sur Google GKE, AWS EKS et Azure AKS, sauf si l'Agent et l'Agent de cluster n'ont pas accès aux API des métadonnées cloud, ou que le nom du cluster comporte plus de 80 caractères.
 
 ## Configuration
 

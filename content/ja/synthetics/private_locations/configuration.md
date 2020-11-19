@@ -37,16 +37,20 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 ### DNS コンフィギュレーション
 
+* 以下 2 つのパラメーターは **API テスト**で DNS 解決をカスタマイズするために使用されます。
+
 | オプション | タイプ | デフォルト | 説明 |
 | ------ | ---- | ------- | ----------- |
 | `dnsUseHost` | Boolean | `true` | 最初にホストのローカル DNS コンフィギュレーション (たとえば、`etc/resolv.conf` ファイルのコンフィギュレーション) を使用し、次に DNS サーバーがある場合は、`dnsServer` パラメーターで指定します。 |
 | `dnsServer` | 文字列の配列 | `["8.8.8.8","1.1.1.1"]` | 指定した順序で使用する DNS サーバーの IP (例: `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`)。 |
 
+* **ブラウザテスト**の場合、DNS 解決はブラウザにより直接行われ、ホストから DNS サーバーが読み込まれます。また、コンテナレベルでこの構成を行うこともできます (例: [Docker][1] の `--dns` フラグ、または [Kubernetes][2] の `dnsConfig.nameservers` を使用する) 。
+
 ### 予約済み IP コンフィギュレーション
 
 | オプション | タイプ | デフォルト | 説明 |
 | -------| ---- | ------- | ----------- |
-| `enableDefaultBlockedIpRanges`| Boolean | `false` | `allowedIPRanges` パラメーターで明示的に設定されていない限り、ユーザーが予約済み IP 範囲 (IANA [IPv4][1] および [IPv6][2] 専用アドレスレジストリ) を使用しているエンドポイントで Synthetic テストを作成できないようにします。 |
+| `enableDefaultBlockedIpRanges`| Boolean | `false` | `allowedIPRanges` パラメーターで明示的に設定されていない限り、ユーザーが予約済み IP 範囲 (IANA [IPv4][3] および [IPv6][4] 専用アドレスレジストリ) を使用しているエンドポイントで Synthetic テストを作成できないようにします。 |
 | `allowedIPRanges` | 文字列の配列 | `none` | `enableDefaultBlockedIpRanges` または `blockedIPRanges` によってブロックされた IP 範囲のうち、特定の IP または CIDR あるいはその両方へのアクセスを許可します (例: `"allowedIPRanges.4": "10.0.0.0/8"`)。**注:** `allowedIPRanges` は `blockedIPRanges` よりも優先されます。
 | `blockedIPRanges` | 文字列の配列 | `none` | `enableDefaultBlockedIpRanges` パラメーターを `true` に設定すると、ブロックされた IP 範囲に加えて、特定の IP または CIDR あるいはその両方へのアクセスをブロックします (例: `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
@@ -83,5 +87,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[2]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[1]: https://docs.docker.com/config/containers/container-networking/#dns-services
+[2]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
+[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[4]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml

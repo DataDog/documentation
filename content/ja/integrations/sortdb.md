@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md'
 display_name: Sortdb
+draft: false
 git_integration_title: sortdb
 guid: 806dcbd7-3686-4472-9435-2049729847c1
 integration_id: sortdb

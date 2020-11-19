@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Datadog イベントストリームでストーリーを参照してコメントを入力。
 doc_link: 'https://docs.datadoghq.com/integrations/pivotal/'
+draft: false
 git_integration_title: pivotal
 has_logo: true
 integration_title: Pivotal Tracker
@@ -14,7 +15,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: pivotal
 public_title: Datadog-Pivotal Tracker インテグレーション
-short_description: Datadog イベントストリームでストーリーを参照してコメントを入力できます。
+short_description: Datadog イベントストリームでストーリーを参照してコメントを入力。
 version: '1.0'
 ---
 {{< img src="integrations/pivotal/pivotal_event.png" alt="Pivotal のイベント" popup="true">}}

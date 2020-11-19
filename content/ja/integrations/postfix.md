@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs:
     source: postfix
@@ -14,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/postfix/README.md'
 display_name: Postfix
+draft: false
 git_integration_title: postfix
 guid: 7f03c5b7-ee54-466e-8854-5896d62c82b4
 integration_id: postfix

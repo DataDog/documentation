@@ -12,6 +12,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md'
 display_name: Agent メトリクス
+draft: false
 git_integration_title: agent_metrics
 guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent

@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+    {{ $codeLangs := slice }}
+    {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }} 
+        {{ with .Params.code_lang }}  
+        {{ $codeLangs = $codeLangs | append .  }}
+        {{ end }}
+    {{ end }}
+
+    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs ) }}
+
+    <h1 id="pagetitle">{{ .Title }}</h1>
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+
+    <div>
+        {{ .Content }}
+    </div>
+
+{{ end }}

@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡します。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_codedeploy/'
+draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true
 integration_title: Amazon CodeDeploy
@@ -57,7 +58,7 @@ Amazon CodeDeploy から S3 バケットまたは CloudWatch のいずれかに�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_codedeploy` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログコレクション AWS Lambda 関数][5] をまだ設定していない場合は、設定を行ってください。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
@@ -85,7 +86,7 @@ AWS Codedeploy インテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation

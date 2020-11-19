@@ -2,6 +2,8 @@
 aliases:
   - /ja/integrations/amazon_eks_fargate/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv
@@ -17,6 +19,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md'
 description: Amazon EKS のメトリクス、トレース、およびログを収集します。
 display_name: EKS Fargate
+draft: false
 git_integration_title: eks_fargate
 guid: e9e58fb9-696b-4e3c-9058-c144a1d9a737
 integration_id: eks-fargate

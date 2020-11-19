@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md'
 display_name: Riak MDC Replication
+draft: false
 git_integration_title: riak_repl
 guid: 8a6c8c1e-8c41-4037-9a7b-1eb45f327e3d
 integration_id: riak-repl

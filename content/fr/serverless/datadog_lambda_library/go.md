@@ -4,7 +4,7 @@ dependencies:
 kind: documentation
 title: Bibliothèque Lambda Datadog pour Go
 ---
-[![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-go)](https://circleci.com/gh/DataDog/datadog-lambda-go)
+![build](https://github.com/DataDog/datadog-lambda-go/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-go)](https://codecov.io/gh/DataDog/datadog-lambda-go)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
 [![Godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/DataDog/datadog-lambda-go)
@@ -14,7 +14,7 @@ La bibliothèque Lambda Datadog pour Go permet de recueillir des métriques Lamb
 
 ## Installation
 
-Suivez les [instructions d'installation](https://docs.datadoghq.com/serverless/installation/go/), et consultez les métriques optimisées, les traces et les logs de votre fonction dans Datadog.
+Suivez les instructions d'installation [sur cette page](https://docs.datadoghq.com/serverless/installation/go/).
 
 ## Métriques optimisées
 
@@ -30,18 +30,38 @@ Consultez les instructions relatives à l'[envoi de métriques custom à partir 
 
 ## Tracing
 
-Utilisez `ddlambda.AddTraceHeaders(ctx, req)` afin d'injecter les en-têtes de tracing Datadog dans les requêtes sortantes.
+Définissez la variable d'environnement `DD_TRACE_ENABLED` sur `true` pour activer le tracing Datadog. Une fois le tracing Datadog activé, la bibliothèque injecte une span représentant l'exécution de Lambda dans l'objet de contexte. Vous pouvez ensuite utiliser le package `dd-trace-go` inclus pour créer des spans supplémentaires à partir du contexte ou transmettre ce dernier à d'autres services. Pour en savoir plus, consultez la [documentation dédiée à dd-trace-go](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace) (en anglais).
 
-```go
-  req, err := http.NewRequest("GET", "http://example.com/status", nil)
-  // Utilisez le même objet Context que celui attribué à votre gestionnaire Lambda.
-  // Si vous ne souhaitez pas passer le contexte dans votre hiérarchie d'appels, vous pouvez utiliser ddlambda.GetContext()
-  ddlambda.AddTraceHeaders(ctx, req)
+```
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+)
 
+func handleRequest(ctx context.Context, ev events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+  // Tracer une requête HTTP
+  req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
   client := http.Client{}
+  client = *httptrace.WrapClient(&client)
   client.Do(req)
+
+  // Créer une span personnalisée
+  s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+  time.Sleep(100 * time.Millisecond)
+  s.Finish()
 }
 ```
+
+Vous pouvez également utiliser la span injectée pour [associer vos logs à vos traces](https://docs.datadoghq.com/tracing/connect_logs_and_traces/go/).
+
+```
+func handleRequest(ctx context.Context, ev events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+  currentSpan, _ := tracer.SpanFromContext(ctx)
+  log.Printf("mon message de log %v", currentSpan)
+}
+```
+
+Si vous utilisez également AWS X-Ray pour tracer vos fonctions Lambda, vous pouvez définir la variable d'environnement `DD_MERGE_XRAY_TRACES` sur `true`. Datadog se charge alors de fusionner vos traces Datadog et X-Ray afin d'obtenir une seule version unifiée.
 
 
 ## Variables d'environnement
@@ -66,6 +86,14 @@ Définir sur `debug` pour activer les logs de debugging à partir de la biblioth
 
 Générer des métriques d'intégration Lambda Datadog optimisées, telles que `aws.lambda.enhanced.invocations` et `aws.lambda.enhanced.errors`. Valeur par défaut : `true`.
 
+### DD_TRACE_ENABLED
+
+Définir sur `true` pour lancer le traceur Datadog. Valeur par défaut : `false`.
+
+### DD_MERGE_XRAY_TRACES
+
+Si vous utilisez le tracing X-Ray et Datadog, définissez cette valeur sur `true` pour fusionner les traces X-Ray et Datadog. Valeur par défaut : `false`.
+
 ## Ouvrir un ticket
 
 Si vous rencontrez un bug avec ce package, faites-le nous savoir. Avant de créer un ticket, vérifiez que le problème n'a pas déjà été signalé dans les tickets existants pour éviter les doublons.
@@ -82,4 +110,4 @@ Si vous rencontrez un problème avec ce package et que vous avez un correctif, n
 
 Sauf indication contraire, tous les fichiers de ce référentiel sont distribués sous licence Apache version 2.0.
 
-Ce produit inclut un logiciel développé chez Datadog (https://www.datadoghq.com/). Copyright 2020 Datadog, Inc.
+Ce produit inclut un logiciel développé par Datadog (https://www.datadoghq.com/). Copyright 2020 Datadog, Inc.

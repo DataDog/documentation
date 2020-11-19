@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
 doc_link: 'https://docs.datadoghq.com/integrations/desk/'
+draft: false
 git_integration_title: desk
 has_logo: true
 integration_title: Desk
@@ -27,7 +28,7 @@ Desk を Datadog に接続すると、以下のことが可能です。
 
 ## セットアップ
 
-### コンフィグレーション
+### コンフィギュレーション
 
 Desk アカウントから、Settings -> API -> My Applications ページで、API アプリケーションを追加します (管理者権限が必要な場合があります)。
 以下のようにフォームに入力します。最後の 2 つの URL フィールドは空白にしておきます。Desk がアプリケーションキー、アプリケーションシークレット、API アクセストークン、API アクセストークンシークレットを生成します。

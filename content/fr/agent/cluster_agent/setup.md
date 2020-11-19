@@ -64,7 +64,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 2. Exécutez cette commande d'une ligne :
 
     ```shell
-    kubectl create secret generic datadog-agent-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
+    kubectl create secret generic datadog-cluster-agent --from-literal=token='<ThirtyX2XcharactersXlongXtoken>'
     ```
 
    Vous pouvez également modifier la valeur du secret dans le fichier `agent-secret.yaml` qui se trouve dans le [répertoire manifest/cluster-agent][1] ou le créer avec :
@@ -117,8 +117,9 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
   * [`agent-services.yaml` : le manifeste du service de l'Agent de cluster][4]
   * [`secrets.yaml` : le secret contenant la clé d'API Datadog][5]
   * [`cluster-agent-deployment.yaml` : le manifeste de l'Agent de cluster][6]
+  * [`install_info-configmap.yaml` : installer la Configmap Info][7]
 
-2. Dans le manifeste `secrets.yaml`, remplacez `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` par [votre clé d'API Datadog][7] codée en base64 :
+2. Dans le manifeste `secrets.yaml`, remplacez `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` par [votre clé d'API Datadog][8] encodée en base64 :
 
     ```shell
     echo -n '<Your API key>' | base64
@@ -127,6 +128,7 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
 3. Dans le manifeste `cluster-agent-deployment.yaml`, définissez le token conformément à la section [Étape 2 : Sécuriser les communications entre l'Agent de cluster et l'Agent](#etape-2-securiser-les-communications-entre-l-agent-de-cluster-et-l-agent). Le format dépend de la façon dont vous configurez votre secret ; les instructions se trouvent directement dans le manifeste.
 4. Exécutez : `kubectl apply -f agent-services.yaml`
 5. Exécutez : `kubectl apply -f secrets.yaml`
+6. Exécutez : `kubectl apply -f install_info-configmap.yaml`
 6. Enfin, déployez l'Agent de cluster Datadog : `kubectl apply -f cluster-agent-deployment.yaml`
 
 ### Étape 4 : Vérification
@@ -154,7 +156,7 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Remarque** : si l'Agent Datadog s'exécute déjà, vous devrez peut-être appliquer le [manifeste agent-rbac.yaml](#etape-1-configurer-les-autorisations-rbac-des-agents-de-nœud) avant que l'Agent de cluster ne puisse s'exécuter.
+**Remarque** : si l'Agent Datadog s'exécute déjà, vous devrez peut-être appliquer le [manifeste agent-rbac.yaml](#etape-1-configurer-les-autorisations-rbac-des-agents-de-nœud) pour que l'Agent de cluster puisse s'exécuter.
 
 ## Configurer l'Agent Datadog
 
@@ -164,13 +166,13 @@ Une fois l'Agent de cluster Datadog configuré, configurez votre Agent Datadog d
 
 #### Étape 1 : Configurer les autorisations RBAC des Agents de nœud
 
-1. Téléchargez le [manifeste agent-rbac.yaml][8]. **Remarque** : lorsque vous utilisez l'Agent de cluster, vos Agents de nœud ne peuvent pas interagir avec le serveur d'API Kubernetes ; seul l'Agent de cluster peut le faire.
+1. Téléchargez le [manifeste agent-rbac.yaml][9]. **Remarque** : lorsque vous utilisez l'Agent de cluster, vos Agents de nœud ne peuvent pas interagir avec le serveur d'API Kubernetes ; seul l'Agent de cluster peut le faire.
 
 2. Exécutez : `kubectl apply -f agent-rbac.yaml`
 
 #### Étape 2 : Activer l'Agent Datadog
 
-1. Téléchargez le [manifeste daemonset.yaml][9].
+1. Téléchargez le [manifeste daemonset.yaml][10].
 
 3. Dans le manifeste `daemonset.yaml`, remplacez `<DD_SITE>` par le site Datadog que vous utilisez, p. ex. `datadoghq.com` ou `datadoghq.eu`. Cette valeur correspond par défaut à `datadoghq.com`.
 
@@ -178,7 +180,7 @@ Une fois l'Agent de cluster Datadog configuré, configurez votre Agent Datadog d
 
 5. Dans le manifeste `daemonset.yaml`, vérifiez que la variable d'environnement `DD_CLUSTER_AGENT_ENABLED` est bien définie sur `true`.
 
-6. (Facultatif) Si votre cluster concerne un seul environnement, vous pouvez également définir la variable `<DD_ENV>` dans `agent.yaml`.
+6. (Facultatif) Si votre cluster comprend un seul environnement, vous pouvez également définir la variable `<DD_ENV>` dans `agent.yaml`.
 
 7. Créez le DaemonSet avec cette commande : `kubectl apply -f daemonset.yaml`
 
@@ -216,6 +218,7 @@ La transmission des événements Kubernetes à votre compte Datadog commence alo
 [4]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml
 [5]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/secrets.yaml
 [6]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
-[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
+[7]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/install_info-configmap.yaml
+[8]: https://app.datadoghq.com/account/settings#api
+[9]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml
+[10]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml

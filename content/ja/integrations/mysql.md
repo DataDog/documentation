@@ -21,6 +21,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/mysql/README.md'
 description: MySQL インテグレーションは、MySQL サーバーインスタンスからパフォーマンスメトリクスと可用性メトリクスを収集するのに役立ちます。
 display_name: MySQL
+draft: false
 git_integration_title: mysql
 guid: 056bfc7f-4775-4581-9442-502078593d10
 integration_id: mysql
@@ -244,6 +245,11 @@ _Agent バージョン 6.0 以降で利用可能_
        #   - type: multi_line
        #     name: new_log_start_with_date
        #     pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+       # If the logs start with a date with the format yymmdd but include a timestamp with each new second, rather than with each log, uncomment the following processing rule
+       # log_processing_rules:
+       #   - type: multi_line
+       #     name: new_logs_do_not_always_start_with_timestamp
+       #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
     カスタムメトリクスのオプションなど、使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.yaml][2] を参照してください。

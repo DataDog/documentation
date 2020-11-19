@@ -11,6 +11,7 @@ ddtype: crawler
 dependencies: []
 description: AWS アカウントの支払実績と支払予測を監視
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'
+draft: false
 git_integration_title: amazon_billing
 has_logo: true
 integration_title: AWS Billing
@@ -57,7 +58,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_billing` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][8]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールで、AWS Billing ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。

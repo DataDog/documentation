@@ -13,7 +13,14 @@ further_reading:
   text: 'Submitting Custom Metrics from Serverless Applications'
 ---
 
-After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], choose one of the following methods to instrument your application to send metrics, logs, and traces to Datadog.
+## Required Setup
+
+If not already configured:
+
+- Install the [AWS integration][1]. This allows Datadog to ingest Lambda metrics from AWS. 
+- Install the [Datadog Forwarder Lambda function][2], which is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs. 
+
+After you have installed the [AWS integration][1] and the [Datadog Forwarder][2], follow these steps to instrument your application to send metrics, logs, and traces to Datadog.
 
 ## Configuration
 
@@ -54,9 +61,13 @@ Keep in mind that `ddtrace` uses native extensions, which must be compiled for A
 
 ### Configure the Function
 
-1. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+1. Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
     ```ruby
     require 'datadog/lambda'
+    
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
 
     def handler(event:, context:)
         Datadog::Lambda.wrap(event, context) do

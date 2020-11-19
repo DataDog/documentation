@@ -834,7 +834,12 @@ main:
   - name: ライブプロセス
     url: infrastructure/process/
     parent: インフラストラクチャー
+    identifier: infrastructure_process
     weight: 5
+  - name: プロセスメトリクスの生成
+    url: infrastructure/process/generate_process_metrics/
+    parent: infrastructure_process
+    weight: 101
   - name: ライブコンテナ
     url: infrastructure/livecontainers/
     parent: インフラストラクチャー
@@ -930,40 +935,44 @@ main:
     url: serverless/custom_metrics
     parent: サーバーレス
     weight: 6
+  - name: デプロイ追跡
+    url: serverless/deployment_tracking
+    parent: サーバーレス
+    weight: 7
   - name: サーバーレスインテグレーション
     url: serverless/serverless_integrations
     identifier: serverless_integrations
     parent: サーバーレス
-    weight: 7
+    weight: 8
   - name: Datadog サーバーレスプラグイン
     url: serverless/serverless_integrations/plugin
     parent: serverless_integrations
     identifier: serverless_integrations_plugin
-    weight: 701
+    weight: 801
   - name: Datadog のサーバーレスマクロ
     url: serverless/serverless_integrations/macro
     parent: serverless_integrations
     identifier: serverless_integrations_macro
-    weight: 702
+    weight: 802
   - name: Datadog サーバーレス CLI
     url: serverless/serverless_integrations/cli
     parent: serverless_integrations
     identifier: serverless_integrations_cli
-    weight: 703
+    weight: 803
   - name: サーバーレスタグ付け
     url: serverless/serverless_tagging
     parent: サーバーレス
-    weight: 8
+    weight: 9
   - name: トラブルシューティング
     url: serverless/troubleshooting
     parent: サーバーレス
     identifier: serverless_troubleshooting
-    weight: 9
+    weight: 10
   - name: Azure App Service 拡張機能
     url: serverless/azure_app_services
     parent: サーバーレス
     identifier: serverless_app_services
-    weight: 10
+    weight: 11
   - name: メトリクス
     url: metrics/
     identifier: metrics_top_level
@@ -1135,152 +1144,238 @@ main:
     pre: nav_tracing
     identifier: トレーシング
     weight: 140000
-  - name: 互換性
-    url: tracing/compatibility_requirements/
-    identifier: tracing_compatibility_requirements
+  - name: Datadog へトレースを送信
+    url: tracing/setup_overview/
+    identifier: tracing_setup_overview
     parent: トレーシング
     weight: 1
+  - name: 互換性
+    url: tracing/setup_overview/compatibility_requirements/java
+    identifier: tracing_compatibility_requirements
+    parent: tracing_setup_overview
+    weight: 101
   - name: Java
-    url: tracing/compatibility_requirements/java
+    url: tracing/setup_overview/compatibility_requirements/java
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_java
     weight: 101
   - name: Python
-    url: tracing/compatibility_requirements/python
+    url: tracing/setup_overview/compatibility_requirements/python
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_python
     weight: 102
   - name: Ruby
-    url: tracing/compatibility_requirements/ruby
+    url: tracing/setup_overview/compatibility_requirements/ruby
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_ruby
     weight: 103
   - name: Go
-    url: tracing/compatibility_requirements/go
+    url: tracing/setup_overview/compatibility_requirements/go
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_go
     weight: 104
   - name: NodeJS
-    url: tracing/compatibility_requirements/nodejs
+    url: tracing/setup_overview/compatibility_requirements/nodejs
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_nodejs
     weight: 105
   - name: PHP
-    url: tracing/compatibility_requirements/php
+    url: tracing/setup_overview/compatibility_requirements/php
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_php
     weight: 106
   - name: C++
-    url: tracing/compatibility_requirements/cpp
+    url: tracing/setup_overview/compatibility_requirements/cpp
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_cpp
     weight: 107
   - name: .NET コア
-    url: tracing/compatibility_requirements/dotnet-core
+    url: tracing/setup_overview/compatibility_requirements/dotnet-core
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_core
     weight: 108
   - name: .NET フレームワーク
-    url: tracing/compatibility_requirements/dotnet-framework
+    url: tracing/setup_overview/compatibility_requirements/dotnet-framework
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_framework
     weight: 109
-  - name: Agent 構成
-    url: tracing/send_traces/
-    identifier: tracing_send_traces
-    parent: トレーシング
-    weight: 2
-  - name: アプリケーションのインスツルメンテーション
-    url: tracing/setup/
-    parent: トレーシング
-    identifier: tracing_setup
-    weight: 3
+  - name: Datadog トレーシングライブラリの追加
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_setup
+    weight: 102
   - name: Java
-    url: tracing/setup/java/
-    parent: tracing_setup
-    identifier: tracing_setup_java
-    weight: 301
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_java
+    weight: 101
   - name: Python
-    url: tracing/setup/python/
-    parent: tracing_setup
-    identifier: tracing_setup_python
-    weight: 302
+    url: tracing/setup_overview/setup/python
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_python
+    weight: 102
   - name: Ruby
-    url: tracing/setup/ruby/
-    parent: tracing_setup
-    identifier: tracing_setup_ruby
-    weight: 303
+    url: tracing/setup_overview/setup/ruby
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_ruby
+    weight: 103
   - name: Go
-    url: tracing/setup/go/
-    parent: tracing_setup
-    identifier: tracing_setup_go
-    weight: 304
-  - name: Node.js
-    url: tracing/setup/nodejs/
-    parent: tracing_setup
-    identifier: tracing_setup_nodejs
-    weight: 305
-  - name: .NET フレームワーク
-    url: tracing/setup/dotnet-framework/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_framework
-    weight: 306
-  - name: .NET コア
-    url: tracing/setup/dotnet-core/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_core
-    weight: 307
+    url: tracing/setup_overview/setup/go
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/setup/nodejs
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_nodejs
+    weight: 105
   - name: PHP
-    url: tracing/setup/php/
-    parent: tracing_setup
-    identifier: tracing_setup_php
-    weight: 308
+    url: tracing/setup_overview/setup/php
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_php
+    weight: 106
   - name: C++
-    url: tracing/setup/cpp/
-    parent: tracing_setup
-    identifier: tracing_setup_cpp
-    weight: 309
-  - name: Envoy
-    url: tracing/setup/envoy/
-    parent: tracing_setup
-    identifier: tracing_setup_envoy
-    weight: 311
-  - name: NGINX
-    url: tracing/setup/nginx/
-    parent: tracing_setup
-    identifier: tracing_setup_nginx
-    weight: 312
-  - name: Istio
-    url: tracing/setup/istio/
-    identifier: tracing_setup_istio
-    parent: tracing_setup
-    weight: 313
+    url: tracing/setup_overview/setup/cpp
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_cpp
+    weight: 107
+  - name: .NET コア
+    url: tracing/setup_overview/setup/dotnet-core
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_core
+    weight: 108
+  - name: .NET フレームワーク
+    url: tracing/setup_overview/setup/dotnet-framework
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_framework
+    weight: 109
+  - name: OpenTracing と OpenTelemetry
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_setup_overview
+    identifier: tracing_open_standards_open_standards
+    weight: 103
+  - name: Java
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/open_standards/python
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/open_standards/ruby
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/open_standards/go
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/open_standards/nodejs
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/open_standards/php
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_php
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/open_standards/dotnet
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_dotnet
+    weight: 108
+  - name: サーバーレス関数のトレース
+    url: tracing/setup_overview/serverless_functions/
+    parent: tracing_setup_overview
+    identifier: tracing_serverless_functions
+    weight: 104
+  - name: トレースプロキシ
+    url: tracing/setup_overview/proxy_setup/
+    parent: tracing_setup_overview
+    identifier: tracing_proxy_setup
+    weight: 105
+  - name: カスタムインスツルメンテーション
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_custom_instrumentation
+    weight: 106
+  - name: Java
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/custom_instrumentation/python
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/custom_instrumentation/ruby
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/custom_instrumentation/go
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/custom_instrumentation/nodejs
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/custom_instrumentation/php
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/custom_instrumentation/cpp
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_cpp
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/custom_instrumentation/dotnet
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_dotnet
+    weight: 108
+  - name: データセキュリティの構成
+    url: tracing/setup_overview/configure_data_security
+    parent: tracing_setup_overview
+    identifier: tracing_configure_data_security
+    weight: 107
+  - name: トレース検索と分析
+    url: tracing/trace_search_and_analytics/
+    parent: トレーシング
+    identifier: trace_search_and_analytics
+    weight: 4
+  - name: 検索構文
+    url: tracing/trace_search_and_analytics/query_syntax/
+    parent: trace_search_and_analytics
+    weight: 403
+  - name: Analytics のモニタリング
+    url: monitors/monitor_types/apm/?tab=appanalytics
+    parent: trace_search_and_analytics
+    weight: 404
+  - name: トレースの取り込みと保存
+    url: tracing/trace_retention_and_ingestion/
+    parent: トレーシング
+    identifier: trace_retention_and_ingestion
+    weight: 5
+  - name: 使用量メトリクス
+    url: tracing/trace_retention_and_ingestion/usage_metrics
+    parent: trace_retention_and_ingestion
+    identifier: trace_retention_and_ingestion_usage_metrics
+    weight: 501
   - name: デプロイ追跡
     url: tracing/deployment_tracking/
     parent: トレーシング
     identifier: deployment_tracking
-    weight: 4
-  - name: App Analytics
-    url: tracing/app_analytics/
-    parent: トレーシング
-    identifier: app_analytics
-    weight: 5
-  - name: ビュー分析
-    url: tracing/app_analytics/analytics/
-    parent: app_analytics
-    weight: 503
-  - name: トレース検索
-    url: tracing/app_analytics/search/
-    parent: app_analytics
-    weight: 504
-  - name: App Analytics のモニタリング
-    url: monitors/monitor_types/apm/?tab=appanalytics
-    parent: app_analytics
-    weight: 505
-  - name: Live Search
-    url: tracing/livesearch/
-    parent: トレーシング
-    identifier: Live Search
     weight: 6
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/
@@ -1327,21 +1422,6 @@ main:
     parent: トレーシング
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
-  - name: サーバーレス関数のトレース
-    url: tracing/serverless_functions/
-    parent: トレーシング
-    identifier: tracing_serverless_functions
-    weight: 9
-  - name: Datadog APM を有効にする
-    url: serverless/
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_datadog_apm
-    weight: 901
-  - name: AWS X-Ray を有効にする
-    url: tracing/serverless_functions/enable_aws_xray
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_aws_xray
-    weight: 902
   - name: ランタイムメトリクス
     url: tracing/runtime_metrics/
     parent: トレーシング
@@ -1382,61 +1462,11 @@ main:
     parent: プロファイラー
     identifier: profiler_search_profiles
     weight: 1102
-  - name: プロファイラーのトラブルシューティング
+  - name: プロファイラのトラブルシューティング
     url: tracing/profiler/profiler_troubleshooting
     parent: プロファイラー
     identifier: profiler_profiler_troubleshooting
     weight: 1103
-  - name: カスタムインスツルメンテーション
-    url: tracing/custom_instrumentation/
-    parent: トレーシング
-    identifier: tracing_custom_instrumentation
-    weight: 12
-  - name: Agent のカスタマイズ
-    url: tracing/custom_instrumentation/agent_customization
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_agent_customization
-    weight: 1201
-  - name: Java
-    url: tracing/custom_instrumentation/java
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_java
-    weight: 1202
-  - name: Python
-    url: tracing/custom_instrumentation/python
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_python
-    weight: 1203
-  - name: Ruby
-    url: tracing/custom_instrumentation/ruby
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_ruby
-    weight: 1204
-  - name: Go
-    url: tracing/custom_instrumentation/go
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_go
-    weight: 1205
-  - name: NodeJS
-    url: tracing/custom_instrumentation/nodejs
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_nodejs
-    weight: 1206
-  - name: PHP
-    url: tracing/custom_instrumentation/php
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_php
-    weight: 1207
-  - name: C++
-    url: tracing/custom_instrumentation/cpp
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_cpp
-    weight: 1208
-  - name: .NET
-    url: tracing/custom_instrumentation/dotnet
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_dotnet
-    weight: 1209
   - name: APM 用語集
     url: tracing/visualization/
     parent: トレーシング
@@ -1867,36 +1897,41 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: DNS モニタリング
+    url: network_performance_monitoring/dns_monitoring
+    parent: npm
+    identifier: dns_monitoring
+    weight: 4
   - name: デバイス
     url: network_performance_monitoring/devices
     parent: npm
     identifier: ndm
-    weight: 400
+    weight: 500
   - name: セットアップ
     url: network_performance_monitoring/devices/setup
     parent: ndm
     identifier: ndm_setup
-    weight: 401
+    weight: 501
   - name: プロファイル
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
-    weight: 402
+    weight: 502
   - name: 収集データ
     url: network_performance_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 403
+    weight: 503
   - name: トラブルシューティング
     url: network_performance_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 404
+    weight: 504
   - name: ガイド
     url: network_performance_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 405
+    weight: 505
   - name: 開発ツール
     url: developers/
     pre: nav_developers
@@ -2714,13 +2749,13 @@ api_v1:
     url: /api/v1/service-dependencies/
     identifier: サービスの依存関係
     generated: true
-  - name: すべてのサービスの依存関係を取得する
+  - name: すべての APM サービスの依存関係を取得
     parent: サービスの依存関係
-    url: '#get-all-service-dependencies'
+    url: '#get-all-apm-service-dependencies'
     generated: true
-  - name: 1 つのサービスの依存関係を取得する
+  - name: 1 つの APM サービスの依存関係を取得
     parent: サービスの依存関係
-    url: '#get-one-services-dependencies'
+    url: '#get-one-apm-services-dependencies'
     generated: true
   - name: サービスレベル目標
     url: /api/v1/service-level-objectives/
@@ -2777,6 +2812,26 @@ api_v1:
   - name: Slack インテグレーションにチャネルを追加
     parent: Slack インテグレーション
     url: '#add-channels-to-slack-integration'
+    generated: true
+  - name: Slack インテグレーションのすべてのチャンネルを取得
+    parent: Slack インテグレーション
+    url: '#get-all-channels-in-a-slack-integration'
+    generated: true
+  - name: Slack インテグレーションチャンネルの作成
+    parent: Slack インテグレーション
+    url: '#create-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの削除
+    parent: Slack インテグレーション
+    url: '#remove-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの取得
+    parent: Slack インテグレーション
+    url: '#get-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの更新
+    parent: Slack インテグレーション
+    url: '#update-a-slack-integration-channel'
     generated: true
   - name: スナップショット
     url: /api/v1/snapshots/
@@ -2898,11 +2953,11 @@ api_v1:
     url: /api/v1/usage-metering/
     identifier: 使用料のメータリング
     generated: true
-  - name: 利用可能な日刊カスタムレポートのリストを取得します
+  - name: 利用可能な日刊カスタムレポートのリストを取得
     parent: 使用料のメータリング
     url: '#get-the-list-of-available-daily-custom-reports'
     generated: true
-  - name: 特定の日刊カスタムレポートを取得します
+  - name: 指定された日刊カスタムレポートを取得
     parent: 使用料のメータリング
     url: '#get-specified-daily-custom-reports'
     generated: true
@@ -2933,6 +2988,14 @@ api_v1:
   - name: ホストとコンテナの 1 時間あたり使用量の取得
     parent: 使用料のメータリング
     url: '#get-hourly-usage-for-hosts-and-containers'
+    generated: true
+  - name: インデックス化されたスパンの 1 時間あたり使用量を取得
+    parent: 使用料のメータリング
+    url: '#get-hourly-usage-for-indexed-spans'
+    generated: true
+  - name: 取り込まれたスパンの 1 時間あたり使用量を取得
+    parent: 使用料のメータリング
+    url: '#get-hourly-usage-for-ingested-spans'
     generated: true
   - name: ログの 1 時間あたり使用量の取得
     parent: 使用料のメータリング
@@ -3131,6 +3194,54 @@ api_v2:
   - name: IP 範囲
     url: /api/v2/ip-ranges/
     identifier: IP 範囲
+    generated: true
+  - name: インシデントサービス
+    url: /api/v2/incident-services/
+    identifier: インシデントサービス
+    generated: true
+  - name: すべてのインシデントサービスのリストを取得する
+    parent: インシデントサービス
+    url: '#get-a-list-of-all-incident-services'
+    generated: true
+  - name: 新しいインシデントサービスを作成する
+    parent: インシデントサービス
+    url: '#create-a-new-incident-service'
+    generated: true
+  - name: 既存のインシデントサービスを削除する
+    parent: インシデントサービス
+    url: '#delete-an-existing-incident-service'
+    generated: true
+  - name: インシデントサービスの詳細を取得する
+    parent: インシデントサービス
+    url: '#get-details-of-an-incident-service'
+    generated: true
+  - name: 既存のインシデントサービスを更新する
+    parent: インシデントサービス
+    url: '#update-an-existing-incident-service'
+    generated: true
+  - name: インシデントチーム
+    url: /api/v2/incident-teams/
+    identifier: インシデントチーム
+    generated: true
+  - name: すべてのインシデントチームのリストを取得する
+    parent: インシデントチーム
+    url: '#get-a-list-of-all-incident-teams'
+    generated: true
+  - name: 新しいインシデントチームを作成する
+    parent: インシデントチーム
+    url: '#create-a-new-incident-team'
+    generated: true
+  - name: 既存のインシデントチームを削除する
+    parent: インシデントチーム
+    url: '#delete-an-existing-incident-team'
+    generated: true
+  - name: インシデントチームの詳細を取得する
+    parent: インシデントチーム
+    url: '#get-details-of-an-incident-team'
+    generated: true
+  - name: 既存のインシデントチームを更新する
+    parent: インシデントチーム
+    url: '#update-an-existing-incident-team'
     generated: true
   - name: Key Management
     url: /api/v2/key-management/
@@ -3364,30 +3475,6 @@ api_v2:
     url: /api/v2/service-level-objectives/
     identifier: サービスレベル目標
     generated: true
-  - name: サービス
-    url: /api/v2/services/
-    identifier: サービス
-    generated: true
-  - name: すべてのサービスのリストを取得する
-    parent: サービス
-    url: '#get-a-list-of-all-services'
-    generated: true
-  - name: 新しいサービスを作成する
-    parent: サービス
-    url: '#create-a-new-service'
-    generated: true
-  - name: 既存のサービスを削除する
-    parent: サービス
-    url: '#delete-an-existing-service'
-    generated: true
-  - name: サービスの詳細を取得する
-    parent: サービス
-    url: '#get-details-of-a-service'
-    generated: true
-  - name: 既存のサービスを更新する
-    parent: サービス
-    url: '#update-an-existing-service'
-    generated: true
   - name: Slack インテグレーション
     url: /api/v2/slack-integration/
     identifier: Slack インテグレーション
@@ -3403,30 +3490,6 @@ api_v2:
   - name: タグ
     url: /api/v2/tags/
     identifier: タグ
-    generated: true
-  - name: チーム
-    url: /api/v2/teams/
-    identifier: チーム
-    generated: true
-  - name: すべてのチームのリストを取得する
-    parent: チーム
-    url: '#get-a-list-of-all-teams'
-    generated: true
-  - name: 新しいチームの作成
-    parent: チーム
-    url: '#create-a-new-team'
-    generated: true
-  - name: 既存のチームを削除する
-    parent: チーム
-    url: '#delete-an-existing-team'
-    generated: true
-  - name: チームの詳細を取得する
-    parent: チーム
-    url: '#get-details-of-a-team'
-    generated: true
-  - name: 既存のチームを更新する
-    parent: チーム
-    url: '#update-an-existing-team'
     generated: true
   - name: タイムボード
     url: /api/v2/timeboards/

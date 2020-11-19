@@ -4,7 +4,9 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    elasticsearch: assets/dashboards/overview.json
+    elasticsearch_timeboard: assets/dashboards/metrics.json
   logs:
     source: elasticsearch
   metrics_metadata: metadata.csv
@@ -19,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/elastic/README.md'
 display_name: Elasticsearch
+draft: false
 git_integration_title: elastic
 guid: d91d91bd-4a8e-4489-bfb1-b119d4cc388a
 integration_id: elasticsearch
@@ -80,19 +83,34 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
    **注**:
 
-      - クラスターの外で実行されている 1 つの Datadog Agent からのみ Elasticsearch メトリクスを収集する場合は (ホステッド Elasticsearch を使用する場合など)、`cluster_stats` を true に設定します。
-      - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
-      - Amazon ES コンフィギュレーション API へのリクエストは全て、署名されなければなりません。詳細は、[AWS ドキュメント][3]を参照してください。
-      - `aws` の認証タイプは、[boto3][4] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
+      - クラスターの外で実行されている 1 つの Datadog Agent からのみ Elasticsearch メトリクスを収集する場合は (ホステッド Elasticsearch を使用する場合など)、`cluster_stats` を `true` に設定します。
+      - [Agent レベルのタグ][3]は、Agent を実行していないクラスターのホストには適用されません。**すべての** メトリクスが一定のタグを持つようにするには、`<integration>.d/conf.yaml` でインテグレーションレベルのタグを使用します。
 
-2. [Agent を再起動します][5]。
+        ```yaml
+        init_config:
+        instances:
+          - url: "%%env_MONITOR_ES_HOST%%"
+            username: "%%env_MONITOR_ES_USER%%"
+            password: *********
+            auth_type: basic
+            cluster_stats: true
+            tags:
+            - service.name:elasticsearch
+            - env:%%env_DD_ENV%%
+        ```
+
+      - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
+      - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[AWS ドキュメント][4]を参照してください。
+      - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
+
+2. [Agent を再起動します][6]。
 
 ##### トレースの収集
 
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Datadog でトレースの収集を有効にします][6]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][7]。
+1. [Datadog でトレースの収集を有効にします][7]。
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][8]。
 
 ##### ログの収集
 
@@ -104,7 +122,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][8]します。デフォルトでは、スローログは有効になっていません。
+2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][9]します。デフォルトでは、スローログは有効になっていません。
 
    - 特定のインデックス `<インデックス>` のインデックススローログを構成するには
 
@@ -162,16 +180,17 @@ _Agent バージョン 6.0 以降で利用可能_
 
      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-4. [Agent を再起動します][5]。
+4. [Agent を再起動します][6]。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
-[3]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
-[4]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[7]: https://docs.datadoghq.com/ja/tracing/setup/
-[8]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[3]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#file-location
+[4]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
+[5]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/ja/tracing/send_traces/
+[8]: https://docs.datadoghq.com/ja/tracing/setup/
+[9]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -245,13 +264,11 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 ### サービスチェック
 
-`elasticsearch.cluster_health`:
+**elasticsearch.cluster_health**:<br>
+クラスターステータスが緑色の場合は `OK`、黄色の場合は `WARNING`、その他の場合は `CRITICAL` を返します。
 
-クラスターステータスが緑色の場合は `OK`、黄色の場合は `Warn`、その他の場合は `Critical` を返します。
-
-`elasticsearch.can_connect`:
-
-Agent が Elasticsearch に接続してメトリクスを収集できない場合は、`Critical` を返します。
+**elasticsearch.can_connect**:<br>
+Agent が Elasticsearch に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

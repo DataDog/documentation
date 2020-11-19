@@ -5,6 +5,7 @@ ddtype: crawler
 dependencies: []
 description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
 doc_link: 'https://docs.datadoghq.com/integrations/mparticle/'
+draft: false
 git_integration_title: mparticle
 has_logo: true
 integration_title: mParticle

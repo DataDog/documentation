@@ -13,6 +13,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/openstack/README.md'
 display_name: OpenStack
+draft: false
 git_integration_title: openstack
 guid: 944452d0-208e-4d1c-8adb-495f517ce2c2
 integration_id: openstack
@@ -165,24 +166,19 @@ OpenStack チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**openstack.neutron.api.up**:
-
+**openstack.neutron.api.up**:<br>
 Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.api.up**:
-
+**openstack.nova.api.up**:<br>
 Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.keystone.api.up**:
-
+**openstack.keystone.api.up**:<br>
 Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.nova.hypervisor.up**:
-
+**openstack.nova.hypervisor.up**:<br>
 Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**openstack.neutron.network.up**:
-
+**openstack.neutron.network.up**:<br>
 Agent がネットワークの状態を取得できない場合は `UNKNOWN`、ネットワークがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング

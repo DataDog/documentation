@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ambari/README.md'
 display_name: Ambari
+draft: false
 git_integration_title: ambari
 guid: 4f518f2c-cfa7-4763-ac33-b1c8846eb738
 integration_id: ambari

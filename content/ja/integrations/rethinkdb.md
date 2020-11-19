@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md'
 display_name: RethinkDB
+draft: false
 git_integration_title: rethinkdb
 guid: a09f3ed3-c947-413c-a9c6-0dcb641ea890
 integration_id: rethinkdb
@@ -120,11 +121,20 @@ Kubernetes 環境でログを収集する Agent を構成する追加の情報�
 
 ### サービスのチェック
 
-- `rethinkdb.can_connect`: 構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_outdated_reads`: テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.ready_for_writes`: テーブルのすべてのシャードで書き込みクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
-- `rethinkdb.table_status.status.all_replicas_ready`: すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
+**rethinkdb.can_connect**:<br>
+構成された RethinkDB サーバーに Agent が到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+
+**rethinkdb.table_status.status.ready_for_outdated_reads**:<br>
+テーブルのすべてのシャードで旧バージョンの読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+
+**rethinkdb.table_status.status.ready_for_reads**:<br>
+テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+
+**rethinkdb.table_status.status.ready_for_writes**:<br>
+テーブルのすべてのシャードで読み取りクエリの処理が可能であれば `OK` を、それ以外の場合は `WARNING` を返します。
+
+**rethinkdb.table_status.status.all_replicas_ready**:<br>
+すべてのレプリカで読み取りと書き込みの処理が可能であれば `OK` を、それ以外の場合（バックフィルが進行中であるなど）は `WARNING` を返します。
 
 ### イベント
 

@@ -21,7 +21,7 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-Continuous profiler is designed to run in production across all services by leveraging technologies such as [JDK Flight Recorder][1] to have minimal impact on your host's CPU and memory usage.
+Continuous profiler is designed to run in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 Add a profiler library to your application to start sending profiles to the Datadog Agent.
 
-For **Node**, **Ruby**, **PHP**, or **.NET** Profilers, [sign up][2] to be on the private beta access list. We will notify you when the beta is ready.
+To get notified when a private beta is available for the **Node**, **Ruby**, **PHP**, or **.NET** Profiler, [sign up here][1].
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
@@ -41,7 +41,7 @@ Now that you've configured your application to send profiles to Datadog, start g
 
 ### Search profiles by tags
 
-[Use tags to search profiles][3] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
@@ -55,6 +55,5 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170
-[2]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[3]: /tracing/profiling/search_profiles
+[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[2]: /tracing/profiling/search_profiles

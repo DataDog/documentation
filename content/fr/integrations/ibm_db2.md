@@ -2,6 +2,9 @@
 assets:
   dashboards:
     IBM Db2 Overview: assets/dashboards/overview.json
+  logs:
+    source: ibm_db2
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -13,6 +16,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md'
 display_name: IBM Db2
+draft: false
 git_integration_title: ibm_db2
 guid: 67378f79-e72b-4f49-8ec2-57053706523d
 integration_id: ibm-db2
@@ -42,11 +46,11 @@ Ce check surveille [IBM Db2][2] avec l'Agent Datadog.
 
 ### Installation
 
-Le check IBM Db2 est inclus avec le paquet de l'[Agent Datadog][3].
+Le check IBM Db2 est inclus avec le package de l'[Agent Datadog][3].
 
 #### Dépendances
 
-La bibliothèque client [ibm_db][4] est requise. Pour l'installer, veillez à avoir un compilateur en fonctionnement et exécutez :
+La bibliothèque client [ibm_db][4] est requise. Pour l'installer, veillez à avoir un compilateur opérationnel et exécutez :
 
 ##### Unix
 
@@ -59,13 +63,13 @@ La bibliothèque client [ibm_db][4] est requise. Pour l'installer, veillez à av
 Pour les versions <= 6.11 de l'Agent :
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded\Scripts\python.exe" -m pip install ibm_db==3.0.1
+"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" -m pip install ibm_db==3.0.1
 ```
 
 Pour les versions >= 6.12 de l'Agent :
 
 ```text
-"C:\Program Files\Datadog\Datadog Agent\embedded<VERSION_MAJEURE_PYTHON>\Scripts\python.exe" -m pip install ibm_db==3.0.1
+"C:\Program Files\Datadog\Datadog Agent\embedded<VERSION_MAJEURE_PYTHON>\python.exe" -m pip install ibm_db==3.0.1
 ```
 
 Des fonctionnalités XML peuvent être requises sur Linux. Si vous rencontrez des erreurs durant
@@ -100,15 +104,18 @@ Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `ibm_db2.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance `ibm_db2`. Consultez le [fichier d'exemple ibm_db2.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `ibm_db2.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance `ibm_db2`. Consultez le [fichier d'exemple ibm_db2.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+2. [Redémarrez l'Agent][2].
 
 ##### Collecte de logs
 
@@ -134,11 +141,16 @@ _Disponible à partir des versions > 6.0 de l'Agent_
            pattern: \d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])
    ```
 
-3. [Redémarrez l'Agent][6].
+3. [Redémarrez l'Agent][2].
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -152,15 +164,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                                                                                                                                                                                |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "ibm_db2", "service": "<NOM_SERVICE>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])"}}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `ibm_db2` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][5] et cherchez `ibm_db2` dans la section Checks.
 
 ## Données collectées
 
@@ -171,7 +188,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ### Checks de service
 
 **ibm_db2.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à la base de données IBM Db2 qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à la base de données IBM Db2 qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
 
 **ibm_db2.status** :<br>
 Renvoie `CRITICAL` si la base de données IBM Db2 surveillée est en veille, `WARNING` pour l'attente de mise en veille ou les restaurations ou renvoie `OK` pour les autres cas.
@@ -182,23 +199,19 @@ Renvoie `CRITICAL` si la base de données IBM Db2 surveillée est en veille, `WA
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][11].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller IBM DB2 avec Datadog][12]
+- [Surveiller IBM DB2 avec Datadog][7]
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/assets/images/dashboard_overview.png
+
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
-[3]: https://docs.datadoghq.com/fr/agent
+[3]: https://docs.datadoghq.com/fr/agent/
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
-[5]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[8]: https://docs.datadoghq.com/fr/agent/docker/log/
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
-[12]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/monitor-db2-with-datadog

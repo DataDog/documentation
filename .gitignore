@@ -23,9 +23,9 @@ content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
-content/en/tracing/setup/ruby.md
-content/en/tracing/setup/android.md
-content/en/tracing/setup/ios.md
+content/en/tracing/setup_overview/setup/ruby.md
+content/en/tracing/setup_overview/setup/android.md
+content/en/tracing/setup_overview/setup/ios.md
 
 # Log collection
 content/en/logs/log_collection/android.md
@@ -51,6 +51,7 @@ data/integrations/
 !content/en/integrations/iam_access_analyzer.md
 !content/en/integrations/kubernetes_audit_logs.md
 !content/en/integrations/apigee.md
+!content/en/integrations/snyk.md
 
 # security rules
 content/en/security_monitoring/default_rules/*.md
@@ -68,6 +69,8 @@ npm-debug.log*
 # RUM
 content/en/real_user_monitoring/android.md
 content/en/real_user_monitoring/browser/_index.md
+content/en/logs/log_collection/javascript.md
+content/en/real_user_monitoring/ios.md
 
 # serverless
 content/en/serverless/forwarder.md

@@ -18,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/druid/README.md'
 display_name: Druid
+draft: false
 git_integration_title: druid
 guid: 8abd92f8-7383-45f2-a412-d6ee960baa15
 integration_id: druid
@@ -148,12 +149,10 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-**druid.process.can_connect**:
-
+**druid.process.can_connect**:<br>
 チェックが Druid プロセスに接続できない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
-**druid.process.health**:
-
+**druid.process.health**:<br>
 Druid プロセスが不健全な場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ### イベント

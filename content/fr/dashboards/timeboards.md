@@ -54,17 +54,17 @@ Pour configurer une superposition de logs, cliquez sur le lien **Search...** dan
 
 Cliquez sur un graphique de série temporelle d'un dashboard pour ouvrir le menu des options :
 
-{{< img src="dashboards/timeboard/metric_to_logs.png" alt="Logs associés" style="width:80%;">}}
-
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|
-| Annotate this graph    | Rédigez un commentaire à ajouter au flux d'événements ou envoyez une alerte à des membres d'équipe à propos de ce graphique. |
+| Send snapshot          | Créez et envoyez un snapshot de votre graphique.                     |
+| Find correlated metrics| Trouvez des corrélations entre des services APM, des intégrations et des dashboards. |
 | View in full screen    | Affichez le graphique [en plein écran][12].                     |
-| Copy tags to clipboard | Copiez dans votre presse-papiers les tags qui s'affichent lorsque vous passez votre curseur.        |
+| Lock cursor            | Verrouillez l'emplacement du curseur sur la page.                         |
 | View related processes | Accédez à la page [Live Processes][13] en appliquant un filtre basé sur votre graphique.   |
 | View related hosts     | Accédez à la page [Host Map][14] en appliquant un filtre basé sur votre graphique.         |
 | View related logs      | Accédez à la page [Log Explorer][15] en appliquant un filtre basé sur votre graphique.     |
-
+| View related traces    | Remplissez automatiquement un volet de [traces][16] à partir des données de votre graphique.           |
+| View related profiles  | Accédez à la page [Profiling][17] en appliquant un filtre basé sur votre graphique.        |
 ### Requête de recherche de logs
 
 La requête de recherche pour **View related logs** est définie à l'aide des paramètres suivants :;
@@ -92,3 +92,5 @@ La requête de recherche pour **View related logs** est définie à l'aide des p
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map
 [15]: https://app.datadoghq.com/logs
+[16]: /fr/tracing/
+[17]: /fr/tracing/profiler/

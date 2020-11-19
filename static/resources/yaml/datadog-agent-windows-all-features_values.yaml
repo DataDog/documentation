@@ -1,0 +1,18 @@
+targetSystem: windows
+datadog:
+  kubeStateMetricsEnabled: false
+  leaderElection: true
+  collectEvents: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  acExclude: "name:datadog-agent"
+  apm:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent

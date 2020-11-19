@@ -6,6 +6,7 @@ assets:
     Vault - Overview: assets/dashboards/vault_overview.json
   logs:
     source: vault
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     error_warning_status: assets/saved_views/error_warning_status.json
@@ -22,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vault/README.md'
 display_name: Vault
+draft: false
 git_integration_title: vault
 guid: d65af827-c818-44ce-9ec3-cd7ead3ac4ce
 integration_id: vault
@@ -49,7 +51,7 @@ Ce check surveille la santé du cluster [Vault][1] et les changements de leader.
 
 ### Installation
 
-Le check Vault est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Vault est inclus avec le package de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 #### Prérequis
 
@@ -109,11 +111,14 @@ vault {
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-1. Modifiez le fichier `vault.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos données de performance Vault. Consultez le [fichier d'exemple vault.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `vault.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos données de performance vault. Consultez le [fichier d'exemple vault.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
     Configuration pour faire fonctionner l'intégration sans token (avec le paramètre de configuration Vault `unauthenticated_metrics_access` défini sur true) :
 
@@ -155,11 +160,17 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
         # client_token_path: <CLIENT_TOKEN_PATH>
     ```
 
-2. [Redémarrez l'Agent][7].
+2. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                    |
 | -------------------- | ---------------------------------------- |
@@ -181,13 +192,13 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
 2. Configurez Vault de façon à activer les logs d'audit et serveur.
 
-   - Les logs d'audit doivent être activés par un utilisateur disposant des privilèges et des stratégies nécessaires. Consultez la section [Enabling audit devices][9] (en anglais) de la documentation Vault pour en savoir plus.
+   - Les logs d'audit doivent être activés par un utilisateur disposant des privilèges et des stratégies nécessaires. Consultez la section [Enabling audit devices][2] (en anglais) pour en savoir plus.
 
      ```shell
      vault audit enable file file_path=/vault/vault-audit.log
      ```
 
-   - Assurez-vous que les [logs serveur][10] sont écrits dans un fichier. Vous pouvez configurer les logs serveur statiques dans le [script de lancement systemd de Vault][11].
+   - Assurez-vous que les [logs serveur][3] sont écrits dans un fichier. Vous pouvez configurer les logs serveur statiques dans le [script de lancement systemd de Vault][4].
      Le script suivant permet d'écrire les logs dans `/var/log/vault.log`.
 
      ```text
@@ -212,9 +223,16 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: "<SERVICE_NAME>"
    ```
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
+[3]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
+[4]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][12] et cherchez `vault` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][5] et cherchez `vault` dans la section Checks.
 
 ## Données collectées
 
@@ -243,26 +261,19 @@ Renvoie CRITICAL si le check ne parvient pas à se connecter à l'endpoint de m�
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Surveiller HashiCorp Vault avec Datadog][15]
+- [Surveiller HashiCorp Vault avec Datadog][7]
+
 
 [1]: https://www.vaultproject.io
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
 [4]: https://www.vaultproject.io/docs/auth
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[9]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
-[10]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
-[11]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://github.com/DataDog/integrations-core/blob/master/vault/metadata.csv
-[14]: https://docs.datadoghq.com/fr/help/
-[15]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/help/
+[7]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog

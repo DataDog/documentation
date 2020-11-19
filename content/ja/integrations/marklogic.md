@@ -2,7 +2,8 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    MarkLogic - Overview: assets/dashboards/overview.json
   logs:
     source: marklogic
   metrics_metadata: metadata.csv
@@ -17,17 +18,20 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md'
 display_name: MarkLogic
+draft: false
 git_integration_title: marklogic
 guid: 0c200415-731f-4b67-9b2c-d6bd1225eee1
 integration_id: marklogic
 integration_title: MarkLogic
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: marklogic.
 metric_to_check: marklogic.hosts.total_hosts
 name: marklogic
+process_signatures:
+  - MarkLogic
 public_title: Datadog-MarkLogic インテグレーション
 short_description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
 support: コア
@@ -111,7 +115,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-2. Hive のログの収集を開始するには、次の構成ブロックを `hive.d/conf.yaml` ファイルに追加します。
+2. MarkLogic のログの収集を開始するには、次の構成ブロックを `marklogic.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -139,13 +143,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-**marklogic.can_connect**: 
+**marklogic.can_connect**:<br>
 Agent がクエリのエンドポイントに到達できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**marklogic.database.health**:
+**marklogic.database.health**:<br>
 データベースのステータスが `critical` の場合は `CRITICAL`、`maintenance`、`offline` または `at-risk` の場合は `WARNING`、それ以外の場合は `OK` を返します。
 
-**marklogic.forest.health**:
+**marklogic.forest.health**:<br>
 フォレストのステータスが `critical` の場合は `CRITICAL`、`maintenance`、`offline` または `at-risk` の場合は `WARNING`、それ以外の場合は `OK` を返します。
 
 ### イベント

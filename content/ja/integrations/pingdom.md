@@ -6,10 +6,11 @@
 "dependencies": []
 "description": "Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照。"
 "doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
+"draft": false
 "git_integration_title": "pingdom"
-"has_logo": !!bool "true"
+"has_logo": true
 "integration_title": "Pingdom"
-"is_public": !!bool "true"
+"is_public": true
 "kind": "インテグレーション"
 "manifest_version": "1.0"
 "name": "pingdom"
@@ -48,7 +49,7 @@ Datadog は、Pingdom Web サイトで構成されているすべてのサイト
 
 Pingdom インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスのチェック
 
 Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
 

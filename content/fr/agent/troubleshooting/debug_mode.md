@@ -5,10 +5,10 @@ aliases:
   - /fr/agent/faq/how-to-get-more-logging-from-the-agent
   - /fr/agent/faq/agent-5-container-more-log
 further_reading:
-  - link: /agent/troubleshooting/send_a_flare
+  - link: /agent/troubleshooting/send_a_flare/
     tag: Dépannage de l'Agent
     text: Envoyer un flare de l'Agent
-  - link: /agent/troubleshooting/agent_check_status
+  - link: /agent/troubleshooting/agent_check_status/
     tag: Dépannage de l'Agent
     text: Obtenir le statut d'un check de l'Agent
 ---
@@ -52,25 +52,13 @@ Pour activer le mode debugging complet de l'Agent :
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-**Définissez la variable d'environnement `DD_LOG_LEVEL=debug` lors du démarrage de votre Agent.**
+Pour activer le mode debugging pour l'Agent de conteneur, utilisez `DD_LOG_LEVEL=debug` lors du démarrage de l'Agent.
 
-Si votre conteneur s'exécute déjà :
+À partir des versions 6.19/7.19 de l'Agent, définissez le niveau de journalisation de l'Agent pendant son exécution, à l'aide de la commande suivante :
 
-1. Pour empêcher le redémarrage de votre processus par S6, exécutez :
-
-    `rm /var/run/s6/services/agent/finish`
-
-2. Puis arrêtez l'Agent :
-
-    ```shell
-    s6-svc -d /var/run/s6/services/agent/
-    ```
-
-3. Redémarrez alors l'Agent en mode debugging en exécutant :
-
-    ```text
-    DD_LOG_LEVEL=debug agent start
-    ```
+```
+agent config set log_level debug
+```
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -102,9 +90,9 @@ Le conteneur peut également être redémarré.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Niveau de log de l'Agent
+## Niveau de journalisation de l'Agent
 
-Les niveaux de log de l'Agent suivants sont disponibles pour `log_level` ou `DD_LOG_LEVEL` :
+Les niveaux de journalisation de l'Agent suivants sont disponibles pour `log_level` ou `DD_LOG_LEVEL` :
 
 | Option     | Logs critiques | Logs d'erreur | Logs d'avertissement | Logs d'information | Logs de debugging | Logs de trace |
 |------------|---------------|------------|-----------|-----------|------------|------------|

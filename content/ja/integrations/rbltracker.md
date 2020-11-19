@@ -11,6 +11,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md'
 display_name: RBLTracker
+draft: false
 git_integration_title: rbltracker
 guid: 94218bd0-8cc3-4686-8b67-ea9110b77092
 integration_id: rbltracker

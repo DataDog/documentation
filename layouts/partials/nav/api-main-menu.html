@@ -24,18 +24,19 @@
 {{ if ne $currentPage.Lang "en" }}
     {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $currentPage.RelPermalink)) }}
 {{ end }}
-                
+
 <ul class="list-unstyled">
 {{ range $menu }}
-    {{ if .HasChildren }}
+    <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/" ) }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
-            <ul class="nav"> 
+            <ul class="nav">
                 {{ range .Children }}
                     <li class="nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        <a class="nav-link" href="{{ .URL }}" data-target="#{{.Identifier}}">
+                        <a class="nav-link" href="{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}" data-target="#{{.Identifier}}">
                             <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>

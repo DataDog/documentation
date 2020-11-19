@@ -31,6 +31,10 @@ You can monitor your CloudWatch API usage using the [AWS Billing integration][2]
 
 By default, Datadog collects AWS metrics every 10 minutes. See [Cloud Metric Delay][3] for more information. If you need to reduce the latency, contact [Datadog support][4] for assistance.
 
+### Why am I only seeing the average values of my custom AWS/Cloudwatch metrics?
+
+By default, Datadog only collects the average values of your custom AWS/Cloudwatch metrics. However, additional values are available by contacting [Datadog support][4]. These include (where available) the min, max, sum, and sample count.
+
 ### Is there a discrepancy between my data in CloudWatch and Datadog?
 
 Some important distinctions to be aware of:

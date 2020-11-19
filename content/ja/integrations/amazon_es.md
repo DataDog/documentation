@@ -9,6 +9,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Elasticsearch のキーメトリクスを追跡。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_es/'
+draft: false
 git_integration_title: amazon_es
 has_logo: true
 integration_title: Amazon Elasticsearch
@@ -53,13 +54,13 @@ Amazon Elasticsearch から S3 バケットまたは CloudWatch のいずれか�
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_elasticsearch` に設定されているかを確認してください。
 
-#### Datadog へのログの送信
+#### ログを Datadog に送信する方法
 
 1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
 2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Elasticsearch ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
-    - [Cloudwatch ロググループに手動トリガーを追加][8]
+    - [Cloudwatch ロググループに手動トリガーを追加][7]
 
 ## 収集データ
 
@@ -79,7 +80,7 @@ AWS ES インテグレーションには、サービスのチェック機能は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -87,7 +88,6 @@ AWS ES インテグレーションには、サービスのチェック機能は�
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_es.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

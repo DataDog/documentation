@@ -4,7 +4,7 @@ kind: ドキュメント
 further_reading:
   - link: /security_monitoring/explorer/
     tag: ドキュメント
-    text: すべてのセキュリティシグナルを検索し、セキュリティ分析を実施
+    text: セキュリティシグナルエクスプローラー
 ---
 ## 概要
 

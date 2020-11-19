@@ -2,25 +2,26 @@
 title: .NET アプリケーションのインスツルメンテーション
 kind: ドキュメント
 further_reading:
-  - link: serverless/installation/node
-    tag: Documentation
-    text: Node.js サーバーレスモニタリングのインストール
-  - link: serverless/installation/ruby
-    tag: Documentation
-    text: Ruby サーバーレスモニタリングのインストール
-  - link: serverless/installation/python
-    tag: Documentation
-    text: Python サーバーレスモニタリングのインストール
-  - link: serverless/installation/go
-    tag: Documentation
-    text: Go サーバーレスモニタリングのインストール
-  - link: serverless/installation/java
-    tag: Documentation
-    text: Java サーバーレスモニタリングのインストール
+  - link: serverless/serverless_tagging/
+    tag: サーバーレス
+    text: サーバーレスアプリケーションのタグ付け
+  - link: serverless/distributed_tracing/
+    tag: サーバーレス
+    text: サーバーレスアプリケーションのトレース
+  - link: serverless/custom_metrics/
+    tag: サーバーレス
+    text: サーバーレスアプリケーションからのカスタムメトリクスの送信
 ---
-[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、以下の手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+## 必須セットアップ
 
-## 構成
+未構成の場合:
+
+- [AWS インテグレーション][1]をインストールします。これにより、Datadog は AWS から Lambda メトリクスを取り込むことができます。
+- AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
+
+[AWS インテグレーション][1]と [Datadog Forwarder][2] をインストールしたら、手順に従ってアプリケーションをインスツルメントし、Datadog にメトリクス、ログ、トレースを送信します。
+
+## コンフィギュレーション
 
 ### 関数の構成
 
@@ -32,12 +33,13 @@ further_reading:
 メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
 
 1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [DdFetchLambdaTags のオプションが有効であることを確認します][5]。
-3. [Datadog Forwarder を関数のロググループにサブスクライブします][6]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
 
 ## Datadog サーバーレスモニタリングの利用
 
-以上の方法で関数を構成すると、[Serverless Homepage][7] でメトリクス、ログ、トレースを確認できるようになるはずです。
+以上の方法で関数を構成すると、[Serverless ホームページ][6] でメトリクス、ログ、トレースを確認できるようになるはずです。
+
+### カスタムビジネスロジックの監視
 
 カスタムメトリクスの送信をご希望の場合は、以下のコード例をご参照ください。
 
@@ -50,10 +52,16 @@ myMetric.Add("t", new string[] {"product:latte", "order:online"});
 LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
-[1]: /ja/serverless/#1-install-the-cloud-integration
-[2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+カスタムメトリクスの送信について、詳しくは[こちら][7]を参照してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/integrations/amazon_web_services/
+[2]: /ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [4]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[5]: https://docs.datadoghq.com/ja/serverless/forwarder/#experimental-optional
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://app.datadoghq.com/functions
+[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: https://app.datadoghq.com/functions
+[7]: /ja/serverless/custom_metrics?tab=otherruntimes
