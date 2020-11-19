@@ -50,7 +50,13 @@ In the [incidents UI][1], click the **New Incident** button to create an inciden
 
 #### From Slack
 
-Once you have the [Datadog integration enabled on Slack][3], you can use `/datadog` to declare a new incident from any channel.
+Once you have the [Datadog integration enabled on Slack][3], from any Slack channel you can use the slash command `/datadog incident` to declare a new incident. 
+
+In the creation modal, you add a descriptive title, select whether customers were impacted (yes, no, or unknown) and select a severity level (1-5, unknown). 
+
+If the user declaring the incident has connected their Slack to their Datadog account, then, by default, that user will become the Incident Commander. The Incident Commander (IC) can be changed later in-app if necessary. If the person declaring an incident is not a member of a Datadog account, then the IC is assigned to a generic `Slack app user` and can be assigned to another IC in-app.
+
+Read more about using the Datadog Slack App [here][8]. 
 
 {{< img src="monitors/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
 
