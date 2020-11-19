@@ -44,6 +44,10 @@ You can declare an incident directly from a monitor by clicking the export butto
 
 {{< img src="monitors/incidents/from-a-graph.png" alt="Create in incident from a monitor" style="width:80%;">}}
 
+You can also add a monitor to an existing incident.
+
+{{< img src="monitors/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
+
 #### From the incidents page
 
 In the [incidents UI][1], click the **New Incident** button to create an incident.
@@ -99,7 +103,7 @@ An incident’s status can be updated directly in the [overview page][1] of the 
 
 You can also update the impact section to specify if there was customer impact, the incident timeline, and whether or not it’s still active. This section also requires a description of the scope of impact to be completed.
 
-In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
+In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
 
 Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. You can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
@@ -146,7 +150,7 @@ If you have the [Datadog Slack app][3] installed, the Slack integration can auto
 
 For non-EU customers who use Slack, [sign up for beta access][6] to the Datadog Slack app. For EU customers who use Slack, stay informed about the Slack app by emailing support@datadoghq.com.
 
-{{< img src="monitors/incidents/workflow-3-slack-1.png" alt="Communicate"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-3-slack-1-1.png" alt="Communicate"  style="width:80%;">}}
 
 ### 4. Update the incident and generate a postmortum
 
@@ -165,6 +169,8 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 | `Active` to `Completed` to `Active` to `Resolved` | Overridden on last transition |
 
 Once an incident is moved to resolved, you will be able to generate a postmortem automatically.
+
+{{< img src="monitors/incidents/postmortem.png" alt="Automatically generate a postmortem" style="width:80%;">}}
 
 ### 5. Follow up and learn from the incident
 
