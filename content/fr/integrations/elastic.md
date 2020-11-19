@@ -19,6 +19,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/elastic/README.md'
 display_name: Elasticsearch
+draft: false
 git_integration_title: elastic
 guid: d91d91bd-4a8e-4489-bfb1-b119d4cc388a
 integration_id: elasticsearch
@@ -80,19 +81,34 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
     **Remarques** :
 
-      - Si vous recueillez des métriques Elasticsearch à partir d'un seul Agent Datadog s'exécutant en dehors du cluster, par exemple si vous utilisez une instance Elasticsearch hébergée, définissez `cluster_stats` sur true.
-      - Pour utiliser l'intégration Elasticsearch de l'Agent pour les services AWS Elasticsearch AWS, définissez le paramètre `url` afin de rediriger vers votre URL stats AWS Elasticsearch.
-      - Toutes les requêtes envoyées à l'API de configuration Amazon ES doivent être signées. Consultez la [documentation AWS][3] pour en savoir plus.
-      - Le type d'authentification `aws` fait appel à [boto3][4] pour récupérer automatiquement les identifiants AWS depuis `.aws/credentials`. Utilisez `auth_type: basic` dans le fichier `conf.yaml` et définissez les identifiants avec `username: <NOMUTILISATEUR>` et `password: <MOTDEPASSE>`.
+      - Si vous recueillez des métriques Elasticsearch à partir d'un seul Agent Datadog s'exécutant en dehors du cluster, par exemple si vous utilisez une instance Elasticsearch hébergée, définissez `cluster_stats` sur `true`.
+      - Les [tags au niveau de l'Agent][3] ne sont pas appliqués aux hosts associés à un cluster qui n'exécute pas l'Agent. Utilisez les tags au niveau de l'intégration dans `<integration>.d/conf.yaml` pour vous assurer que **TOUTES** les métriques présentent des tags cohérents. Par exemple :
 
-2. [Redémarrez l'Agent][5].
+        ```yaml
+        init_config:
+        instances:
+          - url: "%%env_MONITOR_ES_HOST%%"
+            username: "%%env_MONITOR_ES_USER%%"
+            password: *********
+            auth_type: basic
+            cluster_stats: true
+            tags:
+            - service.name:elasticsearch
+            - env:%%env_DD_ENV%%
+        ```
+
+      - Pour utiliser l'intégration Elasticsearch de l'Agent pour les services AWS Elasticsearch AWS, définissez le paramètre `url` afin de rediriger vers votre URL stats AWS Elasticsearch.
+      - Toutes les requêtes envoyées à l'API de configuration Amazon ES doivent être signées. Consultez la [documentation AWS][4] pour en savoir plus.
+      - Le type d'authentification `aws` fait appel à [boto3][5] pour récupérer automatiquement les identifiants AWS depuis `.aws/credentials`. Utilisez `auth_type: basic` dans le fichier `conf.yaml` et définissez les identifiants avec `username: <NOMUTILISATEUR>` et `password: <MOTDEPASSE>`.
+
+2. [Redémarrez l'Agent][6].
 
 ##### Collecte de traces
 
 L'APM Datadog s'intègre à Elastisearch pour vous permettre de visualiser les traces sur l'ensemble de votre système distribué. La collecte de traces est activée par défaut dans les versions 6 et ultérieures de l'Agent Datadog. Pour commencer à recueillir des traces :
 
-1. [Activez la collecte de traces dans Datadog][6].
-2. [Instrumentez l'application qui envoie des requêtes à ElasticSearch][7].
+1. [Activez la collecte de traces dans Datadog][7].
+2. [Instrumentez l'application qui envoie des requêtes à ElasticSearch][8].
 
 ##### Collecte de logs
 
@@ -104,7 +120,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
    logs_enabled: true
    ```
 
-2. Pour recueillir les logs lents de recherche et d'index, [configurez vos paramètres Elasticsearch][8]. Par défaut, les logs lents ne sont pas activés.
+2. Pour recueillir les logs lents de recherche et d'index, [configurez vos paramètres Elasticsearch][9]. Par défaut, les logs lents ne sont pas activés.
 
    - Pour configurer des logs lents d'index pour un index `<INDEX>` donné :
 
@@ -162,16 +178,17 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 
      Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
-4. [Redémarrez l'Agent][5].
+4. [Redémarrez l'Agent][6].
 
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
-[3]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
-[4]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/tracing/send_traces/
-[7]: https://docs.datadoghq.com/fr/tracing/setup/
-[8]: https://docs.datadoghq.com/fr/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
+[3]: https://docs.datadoghq.com/fr/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#file-location
+[4]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-ac.html#es-managedomains-signing-service-requests
+[5]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#configuring-credentials
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/tracing/send_traces/
+[8]: https://docs.datadoghq.com/fr/tracing/setup/
+[9]: https://docs.datadoghq.com/fr/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -245,13 +262,11 @@ Le check Elasticsearch envoie un événement à Datadog à chaque changement de 
 
 ### Checks de service
 
-`elasticsearch.cluster_health` :
+**elasticsearch.cluster_health** :<br>
+Renvoie `OK` si le statut du cluster est vert, renvoie `WARNING` si le statut est jaune ou `CRITICAL` pour les autres cas.
 
-Renvoie `OK` si le statut du cluster est vert, renvoie `Warn` si le statut est jaune ou renvoie `Critical` pour les autres cas.
-
-`elasticsearch.can_connect` :
-
-Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Elasticsearch pour recueillir des métriques.
+**elasticsearch.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Elasticsearch pour recueillir des métriques.
 
 ## Dépannage
 

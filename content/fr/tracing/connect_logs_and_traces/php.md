@@ -16,12 +16,12 @@ further_reading:
     tag: Blog
     text: Corréler automatiquement des logs de requête avec des traces
 ---
-## Injection automatique d'ID de trace
+## Injecter automatiquement les ID de trace et de span
 
 Compte tenu des nombreuses méthodes de logging pouvant être utilisées dans PHP<span class="x x-first x-last">,</span> dont certaines contournent complètement l'API de logging d'erreurs intégrée de PHP, la bibliothèque de tracing PHP de Datadog ne peut pas injecter d'<span class="x x-first x-last">ID</span> de trace et de span de manière fiable et automatique dans les logs.
 Consultez la section ci-dessous pour savoir comment associer vos logs PHP et vos traces manuellement.
 
-## Injection manuelle d'ID de trace
+## Injecter manuellement des ID de trace et de span
 
 Pour associer vos logs et vos traces, vos logs doivent contenir les attributs `dd.trace_id` et `dd.span_id`, qui contiennent respectivement votre ID de trace et votre ID de span.
 
@@ -35,7 +35,7 @@ Par exemple, ces deux attributs seront ajoutés à vos logs de la manière suiva
   $append = sprintf(
       ' [dd.trace_id=%d dd.span_id=%d]',
       $span->getTraceId(),
-      $span->getSpanId()
+      \dd_trace_peek_span_id()
   );
   my_error_logger('Error message.' . $append);
 ?>
@@ -53,8 +53,28 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
       $record['message'] .= sprintf(
           ' [dd.trace_id=%d dd.span_id=%d]',
           $span->getTraceId(),
-          $span->getSpanId()
+          \dd_trace_peek_span_id()
       );
+      return $record;
+  });
+?>
+```
+
+Si votre application utilise des logs au format json, au lieu d'ajouter les ID trace_id et span_id au message de log, vous pouvez ajouter une clé « dd » de premier niveau qui contient ces ID :
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+      $span = \DDTrace\GlobalTracer::get()->getActiveSpan();
+      if (null === $span) {
+          return $record;
+      }
+
+      $record['dd'] = [
+          'trace_id' => $span->getTraceId(),
+          'span_id'  => \dd_trace_peek_span_id(),
+      ];
+
       return $record;
   });
 ?>

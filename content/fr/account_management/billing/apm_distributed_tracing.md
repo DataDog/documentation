@@ -130,7 +130,7 @@ L'APM est facturé en fonction du nombre de [hosts][4] déployés avec des Agent
 [3]: /fr/tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /fr/account_management/billing/pricing/#apm
-[6]: mailto:sales@datadoghq.com
+[6]: https://www.datadoghq.com/pricing/
 [7]: mailto:success@datadoghq.com
 [8]: https://docs.datadoghq.com/fr/account_management/billing/serverless/#serverless-functions
 [9]: /fr/tracing/send_traces/#datadog-agent

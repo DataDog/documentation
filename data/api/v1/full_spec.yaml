@@ -3,7 +3,21 @@ components:
   examples: {}
   headers: {}
   links: {}
-  parameters: {}
+  parameters:
+    SlackChannelNamePathParameter:
+      description: The name of the Slack channel being operated on.
+      in: path
+      name: channel_name
+      required: true
+      schema:
+        type: string
+    SlackTeamNamePathParameter:
+      description: Your Slack team name.
+      in: path
+      name: team_name
+      required: true
+      schema:
+        type: string
   requestBodies: {}
   responses: {}
   schemas:
@@ -617,7 +631,7 @@ components:
         compare_to:
           $ref: '#/components/schemas/WidgetCompareTo'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         increase_good:
           description: Whether to show increase as good.
           type: boolean
@@ -1063,7 +1077,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -2193,7 +2207,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -2467,12 +2481,30 @@ components:
             description: IPv4 prefix
             type: string
           type: array
+        prefixes_ipv4_by_location:
+          additionalProperties:
+            description: List of IPv4 prefixes.
+            items:
+              description: IPv4 prefix.
+              type: string
+            type: array
+          description: List of IPv4 prefixes by location.
+          type: object
         prefixes_ipv6:
           description: List of IPv6 prefixes.
           items:
             description: IPv6 prefix
             type: string
           type: array
+        prefixes_ipv6_by_location:
+          additionalProperties:
+            description: List of IPv6 prefixes.
+            items:
+              description: IPv6 prefix.
+              type: string
+            type: array
+          description: List of IPv6 prefixes by location.
+          type: object
       type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
@@ -3166,7 +3198,6 @@ components:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
           format: int64
-          readOnly: true
           type: integer
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -3193,9 +3224,11 @@ components:
           readOnly: true
           type: string
         num_retention_days:
-          description: The number of days before logs are deleted from this index.
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.'
           format: int64
-          readOnly: true
           type: integer
       required:
       - filter
@@ -3208,6 +3241,52 @@ components:
           items:
             $ref: '#/components/schemas/LogsIndex'
           type: array
+      type: object
+    LogsIndexUpdateRequest:
+      description: Object for updating a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          format: int64
+          type: integer
+        disable_daily_limit:
+          description: 'If true, sets the `daily_limit` value to null and the index
+            is not limited on a daily basis (any
+
+            specified `daily_limit` value in the request is ignored). If false or
+            omitted, the index''s current
+
+            `daily_limit` is maintained.'
+          type: boolean
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all logs
+
+            already in this index. It may also affect billing.'
+          format: int64
+          type: integer
+      required:
+      - filter
       type: object
     LogsIndexesOrder:
       description: Object containing the ordered list of log index names.
@@ -3286,7 +3365,6 @@ components:
           - to
           type: object
       required:
-      - query
       - time
       type: object
     LogsListResponse:
@@ -5196,7 +5274,7 @@ components:
             $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -5690,7 +5768,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -5806,7 +5884,7 @@ components:
           type: array
         type:
           default: gauge
-          description: The type of the metric.
+          description: The type of the metric either `count`, `gauge`, or `rate`.
           example: rate
           type: string
       required:
@@ -6289,7 +6367,7 @@ components:
       properties:
         account:
           description: Account to which the channel belongs to.
-          example: ''
+          example: jane.doe
           type: string
         channel_name:
           description: Your channel name.
@@ -6338,6 +6416,52 @@ components:
             $ref: '#/components/schemas/SlackServiceHook'
           type: array
       type: object
+    SlackIntegrationChannel:
+      description: The Slack channel configuration.
+      properties:
+        display:
+          description: Configuration options for what is shown in an alert event message.
+          properties:
+            message:
+              default: true
+              description: Show the main body of the alert event.
+              type: boolean
+            notified:
+              default: true
+              description: Show the list of @-handles in the alert event.
+              type: boolean
+            snapshot:
+              default: true
+              description: Show the alert event's snapshot image.
+              type: boolean
+            tags:
+              default: true
+              description: Show the scopes on which the monitor alerted.
+              type: boolean
+          type: object
+        name:
+          description: Your channel name.
+          example: '#general'
+          type: string
+      type: object
+    SlackIntegrationChannels:
+      description: A list of configured Slack channels.
+      example:
+      - display:
+          message: true
+          notified: true
+          snapshot: true
+          tags: true
+        name: '#channel_name_main_account'
+      - display:
+          message: true
+          notified: true
+          snapshot: false
+          tags: true
+        name: '#channel_name_doghouse'
+      items:
+        $ref: '#/components/schemas/SlackIntegrationChannel'
+      type: array
     SlackServiceHook:
       description: 'The service hook is generated for your Slack account in
 
@@ -6345,11 +6469,11 @@ components:
       properties:
         account:
           description: Your Slack account name.
-          example: ''
+          example: joe.doe
           type: string
         url:
           description: Your Slack service hook URL.
-          example: ''
+          example: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
           type: string
       required:
       - account
@@ -7946,7 +8070,7 @@ components:
             $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         limit:
           description: For metric queries, the number of lines to show in the table.
             Only one request should have this property.
@@ -8071,7 +8195,7 @@ components:
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         metadata:
@@ -8165,7 +8289,7 @@ components:
           minItems: 1
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -8465,6 +8589,30 @@ components:
           description: An array of objects related to host usage.
           items:
             $ref: '#/components/schemas/UsageHostHour'
+          type: array
+      type: object
+    UsageIncidentManagementHour:
+      description: Incident management usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        monthly_active_users:
+          description: Contains the total number monthly active users from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIncidentManagementResponse:
+      description: Response containing the incident management usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for incident management.
+          items:
+            $ref: '#/components/schemas/UsageIncidentManagementHour'
           type: array
       type: object
     UsageIndexedSpansHour:
@@ -8868,7 +9016,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
           format: int64
           type: integer
@@ -8882,7 +9030,7 @@ components:
           format: date-time
           type: string
         fargate_tasks_count_avg:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
           format: int64
           type: integer
@@ -8894,6 +9042,11 @@ components:
         gcp_host_top99p:
           description: Shows the 99th percentile of all GCP hosts over all hours in
             the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -9002,7 +9155,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
           format: int64
           type: integer
@@ -9016,7 +9169,7 @@ components:
           format: int64
           type: integer
         fargate_tasks_count_hwm:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -9028,6 +9181,11 @@ components:
         id:
           description: The organization id.
           type: string
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for the given org.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for the given org.
@@ -9100,152 +9258,157 @@ components:
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current month(s) for all organizations.
+            1 or more times each hour in the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         azure_app_service_top99p_sum:
           description: Shows the 99th percentile of all Azure app services over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
           description: Shows the 99th percentile of all Azure hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         container_hwm_sum:
-          description: Shows the high watermark of all distinct containers over all
-            hours in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all distinct containers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         end_date:
-          description: Shows the last date of usage in the current month(s) for all
+          description: Shows the last date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         fargate_tasks_count_avg_sum:
           description: Shows the average of all Fargate tasks over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm_sum:
-          description: Shows the high watermark of all Fargate tasks over all hours
-            in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all Fargate tasks
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         gcp_host_top99p_sum:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm_sum:
+          description: Shows sum of the the high-water marks of incident management
+            monthly active users in the current months for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month(s) for
-            all organizations for which all usages were calculated.
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
           format: date-time
           type: string
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month(s) for all organizations.
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
           description: Shows the average number of profiled containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         start_date:
-          description: Shows the first date of usage in the current month(s) for all
+          description: Shows the first date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -12937,6 +13100,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/integration/slack:
     delete:
+      deprecated: true
       description: Delete a Datadog-Slack integration.
       operationId: DeleteSlackIntegration
       responses:
@@ -12952,6 +13116,7 @@ paths:
       tags:
       - Slack Integration
     get:
+      deprecated: true
       description: Get all information about your Datadog-Slack integration.
       operationId: GetSlackIntegration
       responses:
@@ -12983,6 +13148,7 @@ paths:
       tags:
       - Slack Integration
     post:
+      deprecated: true
       description: 'Create a Datadog-Slack integration. Once created, add a channel
         to it with the
 
@@ -13020,6 +13186,7 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
     put:
+      deprecated: true
       description: 'Add channels to your existing Datadog-Slack integration.
 
 
@@ -13050,6 +13217,188 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
       summary: Add channels to Slack integration
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
+    get:
+      description: Get a list of all channels configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannels
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannels'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get all channels in a Slack integration
+      tags:
+      - Slack Integration
+    post:
+      description: Add a channel to your Datadog-Slack integration.
+      operationId: CreateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing Slack channel to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Create a Slack integration channel
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
+    delete:
+      description: Remove a channel from your Datadog-Slack integration.
+      operationId: RemoveSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '204':
+          description: The channel was removed successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Remove a Slack integration channel
+      tags:
+      - Slack Integration
+    get:
+      description: Get a channel configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a Slack integration channel
+      tags:
+      - Slack Integration
+    patch:
+      description: Update a channel used in your Datadog-Slack integration.
+      operationId: UpdateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing fields and values to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a Slack integration channel
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
@@ -13541,8 +13890,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LogsIndex'
-        description: Object containing the new `LogsIndex`.
+              $ref: '#/components/schemas/LogsIndexUpdateRequest'
+        description: Object containing the new `LogsIndexUpdateRequest`.
       responses:
         '200':
           content:
@@ -16793,6 +17142,51 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+  /api/v1/usage/incident-management:
+    get:
+      description: Get hourly usage for incident management.
+      operationId: GetIncidentManagement
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIncidentManagementResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for incident management
+      tags:
+      - Usage Metering
   /api/v1/usage/indexed-spans:
     get:
       description: Get hourly usage for indexed spans.
@@ -18155,6 +18549,12 @@ tags:
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
+- description: '[Check API version 2](/api/v2/incident-services/).'
+  name: Incident Services
+- description: '[Check API version 2](/api/v2/incident-teams/).'
+  name: Incident Teams
+- description: '[Check API version 2](/api/v2/incidents/).'
+  name: Incidents
 - description: 'Manage your Datadog API and application keys.
 
 
@@ -18307,7 +18707,7 @@ tags:
   name: Service Level Objectives
 - description: 'Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)
 
-    directly through Datadog API.'
+    directly through the Datadog API.'
   externalDocs:
     description: For more information about the Datadog-Slack integration, see the
       integration page.

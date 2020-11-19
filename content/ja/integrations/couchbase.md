@@ -120,18 +120,15 @@ Couchbase チェックは、クラスターのバランスが再調整される�
 
 ### サービスのチェック
 
-- `couchbase.can_connect`:
-
+**couchbase.can_connect**:<br>
 Agent が Couchbase に接続してメトリクスを収集できない場合は、`Critical` を返します。
 
-- `couchbase.by_node.cluster_membership`:
-
+**couchbase.by_node.cluster_membership**:<br>
 ノードがフェイルオーバーした場合は、`Critical` を返します。
 ノードがクラスターに追加され、バランスの再調整を待っている場合は、`Warning` を返します。
 それ以外の場合は、`OK` を返します。
 
-- `couchbase.by_node.health`:
-
+**couchbase.by_node.health**:<br>
 ノードが正常でない場合は、`Critical` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング

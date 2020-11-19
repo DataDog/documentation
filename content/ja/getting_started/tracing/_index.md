@@ -58,7 +58,7 @@ sudo datadog-agent status
 
 - デプロイコンフィギュレーション (この場合はホストベースのデプロイメント) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
-- セットアップ中に Continuous Profiler、App Analytics、およびトレース ID 挿入を有効にします。
+- セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
 
 
 ### APM を有効にする

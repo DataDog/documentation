@@ -22,7 +22,7 @@ Datadog APM は Datadog にトレースデータをリアルタイムで送信�
 
 Datadog Python、Node.js、Ruby トレースライブラリは、AWS Lambda の分散トレースをサポートし、より多くのランタイムが間もなく登場します。アプリケーションにトレースを追加する最も簡単な方法は、依存関係として Datadog トレースライブラリを含む [Datadog Lambda ライブラリ][2] を使用することです。
 
-[サーバーレスホームページ][3]、[App Analytics][4]、[サービスマップ][5]でトレースを視覚化します。
+[サーバーレスホームページ][3]、[トレース検索および App Analytics][4]、[サービスマップ][5]でトレースを視覚化します。
 
 ### ログとトレースの相関
 
@@ -39,9 +39,10 @@ APM Live Search を使用すると、過去 15 分間に収集されたスパン
 Datadog Python、Node.js、Ruby トレースライブラリは、AWS Lambda の分散トレースをサポートし、より多くのランタイムが間もなく登場します。ご使用の関数にトレースを有効にするには、[インストール手順][6] に従ってください。
 
 ご使用の関数のログを有効にせずに Datadog APM を有効にするには、Datadog Forwarder で `DdForwarderLog` 環境変数が `false` に設定することをご確認ください。
+
 [1]: /ja/tracing/serverless_functions/
 [2]: /ja/serverless/datadog_lambda_library/
 [3]: https://app.datadoghq.com/functions
-[4]: https://app.datadoghq.com/apm/analytics
+[4]: https://app.datadoghq.com/apm/traces
 [5]: https://app.datadoghq.com/apm/map
 [6]: https://docs.datadoghq.com/ja/serverless/installation

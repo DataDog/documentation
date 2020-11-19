@@ -317,7 +317,7 @@ services:
 To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 
 
-[1]: /integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 
