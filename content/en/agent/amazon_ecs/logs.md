@@ -17,8 +17,8 @@ To collect all logs written by running applications in your ECS containers and s
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
-2. Update your [datadog-agent-ecs.json][1] file [datadog-agent-ecs1.json][2] if you are using an original Amazon Linux AMI) with the following configuration:
+1. Follow the [above instructions][1]] to install the Datadog Agent.
+2. Update your [datadog-agent-ecs.json][2] file ([datadog-agent-ecs1.json][3] if you are using an original Amazon Linux AMI) with the following configuration:
 
     ```text
     {
@@ -61,16 +61,17 @@ To collect all logs written by running applications in your ECS containers and s
     }
     ```
 
-3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][3].
+3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][4].
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
-[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-[3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
+[1]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli#setup
+[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
+[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
+[4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. Follow the [above instructions](#aws-cli) to install the Datadog Agent.
-2. Update your [datadog-agent-ecs-win.json][1] file with the following configuration:
+1. Follow the [ECS setup instructions][1] to install the Datadog Agent.
+2. Update your [datadog-agent-ecs-win.json][2] file with the following configuration:
 
     ```text
     {
@@ -108,10 +109,11 @@ To collect all logs written by running applications in your ECS containers and s
     }
     ```
 
-3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][2].
+3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][3].
 
-[1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
-[2]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
+[1]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli#setup
+[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
+[3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 {{% /tab %}}
 {{< /tabs >}}
 
