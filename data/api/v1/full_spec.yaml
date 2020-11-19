@@ -8328,6 +8328,215 @@ components:
             $ref: '#/components/schemas/UsageAnalyzedLogsHour'
           type: array
       type: object
+    UsageAttributionAggregates:
+      description: An array of available aggregates.
+      items:
+        $ref: '#/components/schemas/UsageAttributionAggregatesBody'
+      type: array
+    UsageAttributionAggregatesBody:
+      description: The object containing the aggregates.
+      properties:
+        agg_type:
+          description: The aggregate type.
+          example: sum
+          type: string
+        field:
+          description: The field.
+          example: custom_timeseries_usage
+          type: string
+        value:
+          description: The value for a given field.
+          format: double
+          type: number
+      type: object
+    UsageAttributionBody:
+      description: Usage Summary by tag usage for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
+          format: date-time
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        updated_at:
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
+          type: string
+        values:
+          $ref: '#/components/schemas/UsageAttributionValues'
+      type: object
+    UsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/UsageAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/UsageAttributionPagination'
+      type: object
+    UsageAttributionPagination:
+      description: The page count for the current pagination.
+      properties:
+        limit:
+          description: Maximum amount of records to be returned.
+          format: int64
+          type: integer
+        offset:
+          description: Records to be skipped before beginning to return.
+          format: int64
+          type: integer
+        sort_direction:
+          description: Direction to sort by.
+          type: string
+        sort_name:
+          description: Field to sort by.
+          type: string
+        total_number_of_records:
+          description: Total number of records.
+          format: int64
+          type: integer
+      type: object
+    UsageAttributionResponse:
+      description: Response containing the Usage Summary by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/UsageAttributionMetadata'
+        usage:
+          description: Get Usage Summary by tag(s).
+          items:
+            $ref: '#/components/schemas/UsageAttributionBody'
+          type: array
+      type: object
+    UsageAttributionSort:
+      default: custom_timeseries_usage
+      description: The field to sort by.
+      enum:
+      - api_percentage
+      - snmp_usage
+      - lambda_percentage
+      - apm_host_usage
+      - api_usage
+      - container_usage
+      - custom_timeseries_percentage
+      - container_percentage
+      - lambda_usage
+      - apm_host_percentage
+      - npm_host_percentage
+      - browser_percentage
+      - browser_usage
+      - infra_host_percentage
+      - snmp_percentage
+      - npm_host_usage
+      - infra_host_usage
+      - custom_timeseries_usage
+      type: string
+      x-enum-varnames:
+      - API_PERCENTAGE
+      - SNMP_USAGE
+      - LAMBDA_PERCENTAGE
+      - APM_HOST_USAGE
+      - API_USAGE
+      - CONTAINER_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CONTAINER_PERCENTAGE
+      - LAMBDA_USAGE
+      - APM_HOST_PERCENTAGE
+      - NPM_HOST_PERCENTAGE
+      - BROWSER_PERCENTAGE
+      - BROWSER_USAGE
+      - INFRA_HOST_PERCENTAGE
+      - SNMP_PERCENTAGE
+      - NPM_HOST_USAGE
+      - INFRA_HOST_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+    UsageAttributionTagNames:
+      additionalProperties:
+        description: A list of tag values.
+        items:
+          description: A given tag in a list.
+          example: datadog-integrations-lab
+          type: string
+        type: array
+      description: Usage Summary by tag names.
+      type: object
+    UsageAttributionValues:
+      description: Fields in Usage Summary by tag(s).
+      properties:
+        api_percentage:
+          description: The percentage of synthetic API test usage by tag(s).
+          format: double
+          type: number
+        api_usage:
+          description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_host_percentage:
+          description: The percentage of APM host usage by tag(s).
+          format: double
+          type: number
+        apm_host_usage:
+          description: The APM host usage by tag(s).
+          format: double
+          type: number
+        browser_percentage:
+          description: The percentage of synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        browser_usage:
+          description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        container_percentage:
+          description: The percentage of container usage by tag(s).
+          format: double
+          type: number
+        container_usage:
+          description: The container usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_percentage:
+          description: The percentage of custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_usage:
+          description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        infra_host_percentage:
+          description: The percentage of infrastructure host usage by tag(s).
+          format: double
+          type: number
+        infra_host_usage:
+          description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        lambda_percentage:
+          description: The percentage of lambda function usage by tag(s).
+          format: double
+          type: number
+        lambda_usage:
+          description: The lambda function usage by tag(s).
+          format: double
+          type: number
+        npm_host_percentage:
+          description: The percentage of network host usage by tag(s).
+          format: double
+          type: number
+        npm_host_usage:
+          description: The network host usage by tag(s).
+          format: double
+          type: number
+        snmp_percentage:
+          description: The percentage of network device usage by tag(s).
+          format: double
+          type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
+      type: object
     UsageBillableSummaryBody:
       description: Response with properties for each aggregated usage type.
       properties:
@@ -16976,6 +17185,70 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
       summary: Get hourly usage for analyzed logs
+      tags:
+      - Usage Metering
+  /api/v1/usage/attribution:
+    get:
+      description: Get Usage Attribution.
+      operationId: GetUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: The specified field to search results for.
+        in: query
+        name: fields
+        required: true
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: Include usage summaries for each sub-org.
+        in: query
+        name: org_id
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get Usage Attribution
       tags:
       - Usage Metering
   /api/v1/usage/aws_lambda:
