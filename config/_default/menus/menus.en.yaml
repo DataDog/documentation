@@ -2995,6 +2995,10 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-analyzed-logs'
     generated: true
+  - name: Get Usage Attribution
+    parent: Usage Metering
+    url: '#get-usage-attribution'
+    generated: true
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: '#get-hourly-usage-for-lambda'
