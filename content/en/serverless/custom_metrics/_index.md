@@ -243,7 +243,7 @@ Where:
 [1]: https://docs.datadoghq.com/metrics/distributions/
 [2]: /serverless/forwarder/
 [3]: /developers/metrics/
-[4]: /serverless/installation/installing_the_library/
+[4]: /serverless/installation/
 [5]: /metrics/distributions/#customize-tagging
 [6]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
 [7]: /agent/
