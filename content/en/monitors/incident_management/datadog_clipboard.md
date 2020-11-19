@@ -9,7 +9,7 @@ description: Create and manage incidents
 
 # Overview
 
-The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a Dashboard, Notebook, or Incident.
+The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a dashboard, notebook, or incident.
 
 {{< img src="monitors/incidents/clipboard-full.png" alt="The main clipboard">}}
 
@@ -23,13 +23,13 @@ To open the Clipboard, copy any graph and click “Open Clipboard” in the toas
 
 {{< img src="monitors/incidents/open-clipboard.png" alt="Open a graph in the Clipboard"  style="width:80%;">}}
 
-Or, click “`Cmd + Shift + X` to open” on the minimized Clipboard. 
+Or, click “`Cmd/Ctrl + Shift + X` to open” on the minimized Clipboard. 
 
-The Clipboard can also be opened and closed using `Cmd + Shift + X`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
+The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + X`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
 
 ## Adding Clips
 
-To add a graph, copy it with `Cmd+C` or click “Copy” in the export menu. Once the Clipboard is open, copied graphs get added automatically. 
+To add a graph, copy it with `Cmd/Ctrl + C` or click “Copy” in the export menu. Once the Clipboard is open, copied graphs get added automatically. 
 
 To add a URL, open the Clipboard and click “Add Current URL.”
 
@@ -45,7 +45,7 @@ The Clipboard holds a maximum of 20 graphs. Remove graphs by deleting them indiv
 
 ## Exporting
 
-Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents. `Shift + Click` to select multiple items. In the export menu, choose a new export destination, or search through existing Dashboards, Notebooks, and Incidents. 
+Items on the Clipboard can be exported to dashboards, notebooks, or incidents. `Shift + Click` to select multiple items. In the export menu, choose a new export destination, or search through existing dashboards, notebooks, and incidents. 
 
 {{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard"  style="width:80%;">}}
 

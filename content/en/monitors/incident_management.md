@@ -7,18 +7,18 @@ description: Create and manage incidents
 
 {{< img src="monitors/incidents/incidents-top-1.png" alt="Incident Management"  style="width:80%;">}}
 
-Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents. 
+Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management product provides a system through which your organization can effectively identify and mitigate incidents. 
 
-Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
+Incidents and outages can be managed in Datadog alongside the metrics, traces, logs, and other data you are collecting. You can view and filter incidents that are relevant to you and your team. 
 
 In the Datadog paradigm, any of the following are appropriate situations for declaring an incident:
 
-* An issue is or may be impacting customers or services.
-* You do not know whether you should call an incident. Notify other people and increase severity appropriately.
+* An issue is or may be impacting customers or internal services.
+* You do not know whether you should call an incident.
 
 ## Usage
 
-Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents.  You can configure additional fields that appear for all incidents in [Incident Settings][2].
+Incident Management requires no installation. To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing and resolved incidents. You can configure additional fields that appear for all incidents in [Incident Settings][2].
 
 ### Creating an incident
 
@@ -28,15 +28,17 @@ You can declare an incident directly from a graph by clicking the export button 
 
 {{< img src="monitors/incidents/from-a-graph.png" alt="Create in incident from a graph">}}
 
-#### From the clipboard
+#### From the Clipboard
 
-Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the clipboard and then click **Add to New Incident**. Everything on the clipboard is added to the incident as a signal.
+Use the beta [Datadog Clipboard][6] to gather multiple signals like monitors, graphs, security signals, logs, or any data in Datadog and to generate an incident. To add a graph to the clipboard, copy any graph, and then select Open Clipboard. Continuing adding all of the relevant graphs and monitors to the clipboard, select them, and then click Add to New Incident. Everything on the clipboard is added to the incident as a signal.
+
+You can also add these signals to active incidents by scrolling down and selecting the incident ID.
 
 {{< img src="monitors/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard">}}
 
 {{< img src="monitors/incidents/clipboard.png" alt="Create in incident from the clipboard">}}
 
-**Note**: Data on the clipboard can also be exported to a new dashboard or a notebook in addition to an incident.
+**Note**: Data on the Clipboard can also be exported to a new or existing dashboard or a notebook in addition to an incident.
 
 #### From a monitor
 
@@ -58,7 +60,7 @@ If the user declaring the incident is a part of your Datadog account, then that 
 
 Once you declare an incident from Slack, it generates an incident channel.
 
-For more information about the Datadog Slack integration, check out [the docs][3].
+For more information about the Datadog Slack integration, see [the documentation][3].
 
 ### Describing the incident
 
@@ -142,3 +144,4 @@ Link to a postmortem document, look back on exactly what went wrong, and add fol
 [3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [4]: https://app.datadoghq.com/incidents/ddslackapp
 [5]: https://app.datadoghq.com/notebook/list
+[6]: /monitors/incident_management/datadog_clipboard/
