@@ -1,6 +1,8 @@
 ---
 title: Installing Serverless Monitoring
 kind: documentation
+aliases:
+    - /serverless/installation/installing_the_library/
 further_reading:
     - link: 'serverless/installation/node'
       tag: 'Documentation'
