@@ -507,10 +507,9 @@
 
                                 {{ range . }}
                                 {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Params.code_languages (strings.TrimSuffix "beta" $file_extension) }}
-                                {{ $name := cond (strings.HasSuffix $file_extension "beta") (printf "%s-beta" $lang.name) $lang.name }}
+                                {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
 
-                                {{  $codeLangs = $codeLangs | append $name }}
+                                {{  $codeLangs = $codeLangs | append $lang.name }}
                                 {{ end }}
                             {{ end }}
 
@@ -564,18 +563,16 @@
 
                                     {{ $file_content := .Content }}
                                     {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-
-                                    {{ $lang := index $dot.Site.Params.code_languages (strings.TrimSuffix "beta" $file_extension) }}
-                                    {{ $name := cond (strings.HasSuffix $file_extension "beta") (printf "%s-beta" $lang.name) $lang.name }}
+                                    {{ $lang := index $dot.Site.Params.code_languages $file_extension }}
 
                                     {{ if ne $file_extension "sh"}}
-                                    <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $name }}">
+                                    <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
                                         <div class="code-snippet">
                                         <div class="code-button-wrapper position-absolute">
                                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                         </div>
 
-                                        {{ highlight $file_content $lang.name "" }}
+                                        {{ highlight $file_content $lang.syntax "" }}
                                     </div>
                                     </div>
                                     {{ $count = add $count 1 }}

@@ -214,31 +214,26 @@ examples/datadog-api-client-ruby:
 
 .PHONY: examples/go examples/java examples/python examples/ruby examples
 
-examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extract-code-blocks-go.awk
-	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
-	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
+EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 
-	#for f in examples/content/en/api/v*/*/*.go ; do \
-	#	gofmt -w $$f || rm $f; \
-	#done;
+examples/go: examples/datadog-api-client-go clean-go-examples
+	echo $(EXAMPLES_DIR)
+	@cd examples/datadog-api-client-go; ./extract-code-blocks.sh $(EXAMPLES_DIR)
 
 	-cp -Rn examples/content ./
 
-examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
-	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
-	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
+examples/java: examples/datadog-api-client-java clean-java-examples
+	@cd examples/datadog-api-client-java; ./extract-code-blocks.sh $(EXAMPLES_DIR)
 
 	-cp -Rn examples/content ./
 
-examples/python: examples/datadog-api-client-python clean-python-examples local/bin/awk/extract-code-blocks-python.awk
-	@ls examples/datadog-api-client-python/docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-python.awk -v output=examples/content/en/api/v1
-	@ls examples/datadog-api-client-python/docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-python.awk -v output=examples/content/en/api/v2
+examples/python: examples/datadog-api-client-python clean-python-examples
+	@cd examples/datadog-api-client-python; ./extract-code-blocks.sh $(EXAMPLES_DIR)
 
 	-cp -Rn examples/content ./
 
-examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples local/bin/awk/extract-code-blocks-ruby.awk
-	@ls examples/datadog-api-client-ruby/docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-ruby.awk -v output=examples/content/en/api/v1
-	@ls examples/datadog-api-client-ruby/docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-ruby.awk -v output=examples/content/en/api/v2
+examples/ruby: examples/datadog-api-client-ruby clean-ruby-examples
+	@cd examples/datadog-api-client-ruby; ./extract-code-blocks.sh $(EXAMPLES_DIR)
 
 	-cp -Rn examples/content ./
 
