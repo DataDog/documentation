@@ -63,23 +63,29 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: incident
+    name: Incident Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 11
+    parent: product
   - identifier: serverless
     name: Serverless
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: alerts
     name: Alerts
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
     url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 13
+    weight: 14
     parent: product
   - identifier: customers
     name: Customers
@@ -3637,6 +3643,9 @@ footer_product:
   - name: Real User Monitoring
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
+  - name: Incident Management
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
   - name: Serverless
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140
