@@ -65,7 +65,7 @@ main_left:
     parent: product
   - identifier: incident
     name: Incident Management
-    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents-1.svg'' alt=''incident icon''>'
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
     url: 'https://www.datadoghq.com/product/incident-management/'
     weight: 6
     parent: product
