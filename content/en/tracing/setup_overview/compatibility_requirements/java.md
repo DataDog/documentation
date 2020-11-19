@@ -109,14 +109,15 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
+| Aerospike               | 4.0+     | Fully Supported | `aerospike`                                                                              |
 | Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
-| Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
+| Cassandra               | 3.x      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
 | Elasticsearch Rest      | 5.0-7.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
-| MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                  |
+| MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                  |
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 
@@ -136,9 +137,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
-### Other Framework Compatibility
+### Additional Framework Compatibility
 
-`dd-java-agent` includes support for automatically tracing the following other frameworks.
+`dd-java-agent` includes support for automatically tracing the following frameworks.
 
 | Framework         | Versions | Support Type    | Instrumentation Names (used for configuration) |
 | ----------------- | -------- | --------------- | ---------------------------------------------- |
@@ -146,8 +147,8 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
 | Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
-| Slf4J MDC         | 1+       | Fully Supported | `mdc` (see also configuration for `dd.logs.injection`) |
 | Project Reactor   | 3.1+     | Fully Supported | `reactor-core`                                 |
+| RxJava            | 2.x      | Fully Supported | `rxjava`                                       |
 | Spring Data       | 1.8+     | Fully Supported | `spring-data`                                  |
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
