@@ -104,19 +104,11 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 
 4. After a minute or two, visualize your profiles on the [Datadog APM > Profiler page][2].
 
-**Note**:
-
-- Alternatively, profile your service by running it with the wrapper `pyddprofile`:
-
-    ```shell
-    $ pyddprofile server.py
-    ```
-
 - It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracker version 0.40+.              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Set to `true` to enable profiler. Supported from tracer version 0.40+.              |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -128,7 +120,7 @@ Recommended for advanced usage only.
 
 - When your process forks using `os.fork`, the profiler is stopped in the child process.
 
-  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `ddtrace-run` or `ddtrace.profiling.auto`.
 
   If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
 

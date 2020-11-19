@@ -116,7 +116,7 @@
   },
 
   "get_started_free_short": {
-    "other": "開始"
+    "other": "無料トライアル"
   },
 
   "documentation_search": {
@@ -299,10 +299,17 @@
   "product": {
     "other": "製品"
   },
+  "blog": {
+    "other": "ブログ"
+  },
   "about": {
     "other": "会社情報"
   },
-  "blog": {
-    "other": "ブログ"
+  "footer_blurb_heading": {
+    "other": "お困りですか？"
+  },
+  "footer_blurb_desc": {
+    "other": "知識豊富なエンジニアがサポートします。"
   }
+  
 }

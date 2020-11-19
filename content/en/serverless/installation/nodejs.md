@@ -327,4 +327,4 @@ For more information on custom metric submission, see [here][4]. For additional 
 [2]: /serverless/forwarder
 [3]: https://app.datadoghq.com/functions
 [4]: /serverless/custom_metrics?tab=nodejs
-[5]: tracing/custom_instrumentation/nodejs/
+[5]: /tracing/custom_instrumentation/nodejs/
