@@ -77,6 +77,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
@@ -118,6 +119,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
@@ -157,13 +159,14 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     sudo apt-get install apt-transport-https
     ```
 
-2. Configurez le référentiel de l'API Datadog sur votre système et importez la clé APT de Datadog :
+2. Configurez le référentiel de l'API Datadog sur votre système et importez les clés APT de Datadog :
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
-    Remarque : vous devrez peut-être installer `dirmngr` pour importer la clé APT de Datadog.
+    Remarque : vous devrez peut-être installer `dirmngr` pour importer les clés APT de Datadog.
 
 3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
@@ -197,6 +200,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
@@ -232,6 +236,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
            https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
     ```
 
 2. Mettez à jour votre référentiel Yum local et installez l'Agent :
@@ -271,13 +276,14 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
     sudo apt-get install apt-transport-https
     ```
 
-2. Configurez le référentiel de l'API Datadog sur votre système et importez la clé APT de Datadog :
+2. Configurez le référentiel de l'API Datadog sur votre système et importez les clés APT de Datadog :
     ```shell
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
     ```
 
-    Remarque : vous devrez peut-être installer `dirmngr` pour importer la clé APT de Datadog.
+    Remarque : vous devrez peut-être installer `dirmngr` pour importer les clés APT de Datadog.
 
 3. Mettez à jour votre cache APT local et installez l'Agent :
     ```
@@ -320,6 +326,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
   repo_gpgcheck=0
   gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
          https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+         https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
   ```
 
 2. Mettez à jour votre référentiel Zypper local et installez l'Agent :
@@ -327,6 +334,7 @@ Vous trouverez ci-dessous les instructions d'installation manuelle pour :
   sudo zypper refresh
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
   sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
   sudo zypper install datadog-agent
   ```
 
