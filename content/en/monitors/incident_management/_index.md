@@ -28,15 +28,15 @@ You can declare an incident directly from a graph by clicking the export button 
 
 {{< img src="monitors/incidents/from-a-graph.png" alt="Create in incident from a graph" style="width:80%;">}}
 
-#### From the clipboard
+#### From the Clipboard
 
-Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the clipboard and then click **Add to New Incident**. Everything on the clipboard is added to the incident as a signal.
+Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the Clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the Clipboard and then click **Add to New Incident**. Everything on the Clipboard is added to the incident as a signal.
 
 {{< img src="monitors/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard" style="width:80%;">}}
 
 {{< img src="monitors/incidents/clipboard.png" alt="Create in incident from the clipboard" style="width:80%;">}}
 
-**Note**: In addition to exporting from an incident, data on the clipboard can be exported to a new dashboard or a notebook.
+**Note**: In addition to exporting from an incident, data on the Clipboard can be exported to a new dashboard or a notebook.
 
 #### From a monitor
 
@@ -93,7 +93,7 @@ An incident’s status can be updated directly in the [overview page][1] of the 
 
 You can also update the impact section to specify if there was customer impact, the incident timeline, and whether or not it’s still active. This section also requires a description of the scope of impact to be completed.
 
-In the incident header, you can see the state, severity, timestamp, and impact duration of the incident, and who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
+In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
 
 #### Status levels
 
@@ -104,19 +104,19 @@ The default includes the statuses **Active**, **Stable**, and **Resolved**. **Co
 * Resolved: Incident no longer affecting others and investigations complete.
 * Completed: All remediation complete.
 
-#### Assessment Fields
+#### Assessment fields
 
 Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][4]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
 
 * **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident. 
-* **Detection Method**: Specify how the incident was detected via these default options: customer, employee, monitor, other or unknown. 
-* **Services**: If you have APM configured, your APM services will be available for incident assessment. To learn more about configuring your services in APM, see [the docs][5]. 
-    * If you are not using Datadog APM, you can upload service names via CSV. Any values uploaded via CSV will only be available within Incident Management for incident assessment purposes.
-    * Datadog deduplicates service names case-insensitively,, so if you use "My Service" or "my service", only the manually added one is shown.
+* **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown. 
+* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][5]. 
+    * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
+    * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
     * Datadog overrides APM service names in favor of the manually uploaded list. 
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM 
-* **Teams**: Populated from a CSV upload. Any values uploaded via CSV will only be available within Incident Management for incident assessment purposes.
+* **Teams**: Populated from a CSV upload. Any values uploaded via CSV are only available within Incident Management for incident assessment purposes.
 
 ## Example workflow
 
