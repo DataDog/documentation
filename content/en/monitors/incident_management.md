@@ -30,7 +30,7 @@ You can declare an incident directly from a graph by clicking the export button 
 
 #### From the Clipboard
 
-Use the beta [Datadog Clipboard][9] to gather multiple signals like monitors, graphs, security signals, logs, or any data in Datadog and to generate an incident. To add a graph to the clipboard, copy any graph, and then select Open Clipboard. Continuing adding all of the relevant graphs and monitors to the clipboard, select them, and then click Add to New Incident. Everything on the clipboard is added to the incident as a signal.
+Use the beta [Datadog Clipboard][6] to gather multiple signals like monitors, graphs, security signals, logs, or any data in Datadog and to generate an incident. To add a graph to the clipboard, copy any graph, and then select Open Clipboard. Continuing adding all of the relevant graphs and monitors to the clipboard, select them, and then click Add to New Incident. Everything on the clipboard is added to the incident as a signal.
 
 You can also add these signals to active incidents by scrolling down and selecting the incident ID.
 
@@ -144,3 +144,4 @@ Link to a postmortem document, look back on exactly what went wrong, and add fol
 [3]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [4]: https://app.datadoghq.com/incidents/ddslackapp
 [5]: https://app.datadoghq.com/notebook/list
+[6]: /monitors/incident_management/datadog_clipboard/
