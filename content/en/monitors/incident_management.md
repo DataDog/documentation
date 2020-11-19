@@ -30,7 +30,9 @@ You can declare an incident directly from a graph by clicking the export button 
 
 #### From the Clipboard
 
-Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the Clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the Clipboard and then click **Add to New Incident**. Everything on the Clipboard is added to the incident as a signal.
+Use the beta [Datadog Clipboard][9] to gather multiple signals like monitors, graphs, security signals, logs, or any data in Datadog and to generate an incident. To add a graph to the clipboard, copy any graph, and then select Open Clipboard. Continuing adding all of the relevant graphs and monitors to the clipboard, select them, and then click Add to New Incident. Everything on the clipboard is added to the incident as a signal.
+
+You can also add these signals to active incidents by scrolling down and selecting the incident ID.
 
 {{< img src="monitors/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard">}}
 
