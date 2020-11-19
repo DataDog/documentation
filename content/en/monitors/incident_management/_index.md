@@ -72,7 +72,7 @@ No matter where you create an incident, it's important to describe it as thoroug
 
 When you create an incident, an incident modal comes up. This modal has several core elements:
 
-**Severity**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN.
+**Severity Level**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN.
 
 * SEV-1: Critical impact
 * SEV-2: High impact
@@ -93,13 +93,15 @@ When you create an incident, an incident modal comes up. This modal has several 
 
 Click on “Declare Incident” to finish creating your incident.
 
-### Updating the incident
+### Updating the incident and the incident timeline
 
 An incident’s status can be updated directly in the [overview page][1] of the incident or from Slack within the dedicated incident channel. To update an incident from Slack, use this slash command to pull up the update modal: `/datadog incident update`
 
 You can also update the impact section to specify if there was customer impact, the incident timeline, and whether or not it’s still active. This section also requires a description of the scope of impact to be completed.
 
 In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels, video conferencing, and attached postmortem (if one has been added).
+
+Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. You can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
 #### Status levels
 
@@ -146,9 +148,7 @@ For non-EU customers who use Slack, [sign up for beta access][6] to the Datadog 
 
 {{< img src="monitors/incidents/workflow-3-slack-1.png" alt="Communicate"  style="width:80%;">}}
 
-Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. You can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
-
-### 4. Update the incident
+### 4. Update the incident and generate a postmortum
 
 Update the incident as the situation evolves. Set the status to `Stable` to indicate the problem has been mitigated and set the customer impact field so that your organization knows how this issue has affected customers. Then, set the status to `Resolved` once the incident is completely fixed. There is an optional fourth status, `Completed`, that can be used to track if all remediation steps are complete. This status can be enabled in [Incident Settings][2]. 
 
