@@ -164,7 +164,7 @@
                             {{- end -}}
                             {{- range $region, $url := $.Scratch.Get "globalRegions" -}}
                                 {{- if not (index ($.Scratch.Get "regions") $region) -}}
-                                    <span class="d-none" data-region="{{ $region }}">not supported in {{ $region }} region</span>
+                                    <span class="d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
                                 {{- end -}}
                             {{- end -}}
                         </p>
