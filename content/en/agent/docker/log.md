@@ -39,18 +39,12 @@ Then, collect all the logs from your environment's containers, or filter by cont
 
 The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all containers.
 
-**Notes:**
-
-- The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. The containerized Agent requires no additional configuration as Docker socket is a part of the container installation below.
-
-- The Agent host installation permits [log collection from files on the host][2] or from container `stdout/stderr`. This installation method requires **additional configuration**, as detailed below.
-
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. This requires no additional configuration as Docker socket is a part of the installation below.
+The containerized Agent installation below uses Docker socket to retrieve logs from container `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1].
 
-To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
+Run a [Docker container][2] that embeds the Datadog Agent to monitor your host by using the following command:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -65,7 +59,7 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
-**Note**: On Windows systems, run this command without volume mounts. That is:
+**Note**: On Windows systems, run this command without volume mounts:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -77,7 +71,7 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
-It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
+It is recommended that you use the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][3] on Docker Hub.
 
 The commands related to log collection are:
 
@@ -89,30 +83,34 @@ The commands related to log collection are:
 | `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. This parameter value supports regular expressions. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://hub.docker.com/r/datadog/agent/tags
+[1]: /getting_started/agent/autodiscovery?tab=docker
+[2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[3]: https://hub.docker.com/r/datadog/agent/tags
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 
-Install the [latest version of Agent 6][1] on your host. The Agent can collect logs from [files on the host][2] or from container `stdout`/`stderr`.
+1. Install the [latest version of Agent 6][1] on your host.
 
-Collecting logs is _disabled_ by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
+  Collecting logs is _disabled_ by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
 
-```yaml
-logs_enabled: true
-listeners:
-    - name: docker
-config_providers:
-    - name: docker
-      polling: true
-logs_config:
-    container_collect_all: true
-```
+  ```yaml
+  logs_enabled: true
+  listeners:
+      - name: docker
+  config_providers:
+      - name: docker
+        polling: true
+  logs_config:
+      container_collect_all: true
+  ```
 
-[Restart the Agent][3] to see all your container logs in Datadog.
+2. **Optional** If your environment requires log collection and forwarding to Datadog from files, refer to the [Custom Log Collection documentation][2] for additional configuration.
+
+3. [Restart the Agent][3] to see all of your container logs in Datadog.
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
+[3]: /agent/faq/log-collection-with-docker-socket/
 [3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
