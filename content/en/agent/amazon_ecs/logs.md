@@ -17,8 +17,9 @@ To collect all logs written by running applications in your ECS containers and s
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-1. Follow the [above instructions][1]] to install the Datadog Agent.
-2. Update your [datadog-agent-ecs.json][2] file ([datadog-agent-ecs1.json][3] if you are using an original Amazon Linux AMI) with the following configuration:
+1. Follow the [Agent installation instructions][1] to install the Datadog Agent.
+2. Follow the [Amazon ECS setup instructions][2].
+2. Update your [datadog-agent-ecs.json][3] file ([datadog-agent-ecs1.json][4] if you are using an original Amazon Linux AMI) with the following configuration:
 
     ```text
     {
@@ -61,12 +62,13 @@ To collect all logs written by running applications in your ECS containers and s
     }
     ```
 
-3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][4].
+3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][5].
 
-[1]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli#setup
-[2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
-[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
-[4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
+[1]: https://docs.datadoghq.com/getting_started/agent/#installation
+[2]: https://docs.datadoghq.com/agent/amazon_ecs/?tab=awscli#setup
+[3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
+[4]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
+[5]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -125,5 +127,6 @@ The `source` attribute is used to identify the integration to use for each conta
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/processing/#log-processing
+[1]: /getting_started/agent/#installation
+[2]: https://docs.datadoghq.com/logs/processing/#log-processing
 [2]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation#activate-log-integrations
