@@ -34,6 +34,8 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][4] for the service map widget is:
 
 {{< dashboards-widgets-api >}}

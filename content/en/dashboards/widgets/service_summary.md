@@ -38,6 +38,8 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][2] for the service summary widget is:
 
 {{< dashboards-widgets-api >}}

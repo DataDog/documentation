@@ -16,7 +16,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The notes and links widget is similar to [free text widget][1], but allows for more formatting options:
+The notes and links widget is similar to [free text widget][1], but allows for more formatting options.
 
 ## Setup
 
@@ -27,6 +27,8 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 3. Select the pointer position.
 
 ## API
+
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][2] for the note widget is:
 

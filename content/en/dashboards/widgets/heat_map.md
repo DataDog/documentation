@@ -69,6 +69,8 @@ The following configuration options are available:
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][3] for the heat map widget is:
 
 {{< dashboards-widgets-api >}}
@@ -80,6 +82,3 @@ The dedicated [widget JSON schema definition][3] for the heat map widget is:
 [1]: /events/
 [2]: /dashboards/template_variables/
 [3]: /dashboards/graphing_json/widget_json/
-[4]: /dashboards/graphing_json/request_json/
-[5]: /dashboards/graphing_json/widget_json/#y-axis-schema
-[6]: /dashboards/graphing_json/widget_json/#events-schema

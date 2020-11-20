@@ -47,6 +47,8 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][2] for the network widget is:
 
 {{< dashboards-widgets-api >}}

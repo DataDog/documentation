@@ -30,6 +30,8 @@ This is commonly used to state the overall purpose of the dashboard.
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][2] for the free text widget is:
 
 {{< dashboards-widgets-api >}}

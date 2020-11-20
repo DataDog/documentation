@@ -13,8 +13,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range.
-The values displayed by a query value need not represent an instantaneous measurement.
+Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. The values displayed by a query value need not represent an instantaneous measurement.
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
@@ -48,6 +47,8 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 Optionally define its size and alignment.
 
 ## API
+
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
 The dedicated [widget JSON schema definition][4] for the query value widget is:
 

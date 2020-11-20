@@ -23,6 +23,8 @@ Enter the URL of the page you want to display inside the iframe. If you do not u
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][1] for the iframe widget is:
 
 {{< dashboards-widgets-api >}}

@@ -56,7 +56,9 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the alert graph widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
+
+The dedicated [widget JSON schema definition][2] for the alert graph widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -64,4 +66,5 @@ The dedicated [widget JSON schema definition][1] for the alert graph widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/#get-all-dashboards
+[2]: /dashboards/graphing_json/widget_json/

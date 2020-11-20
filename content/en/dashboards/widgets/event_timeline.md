@@ -38,6 +38,8 @@ Optionally define its size and alignment.
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][2] for the event timeline widget is:
 
 {{< dashboards-widgets-api >}}

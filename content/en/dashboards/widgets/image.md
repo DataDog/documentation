@@ -29,6 +29,8 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+
 The dedicated [widget JSON schema definition][1] for the image widget is:
 
 {{< dashboards-widgets-api >}}
