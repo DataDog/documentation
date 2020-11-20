@@ -114,6 +114,7 @@ To collect all logs written by running applications in your ECS containers and s
 [1]: https://docs.datadoghq.com/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
+[4]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 

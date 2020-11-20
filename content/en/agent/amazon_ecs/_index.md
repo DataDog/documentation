@@ -28,7 +28,7 @@ This page covers Amazon ECS setup with [Datadog Container Agent v6][1]. For othe
 
 ## Setup
 
-To monitor your ECS containers and tasks with Datadog, run the Agent as a container on every EC2 instance in your ECS cluster. As detailed below, there are a few setup steps:
+To monitor your ECS containers and tasks with Datadog, [run the Agent as a container][] on every EC2 instance in your ECS cluster. As detailed below, there are a few setup steps:
 
 1. Add an ECS Task
 2. Create or modify your IAM Policy
