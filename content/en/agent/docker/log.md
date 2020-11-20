@@ -42,7 +42,7 @@ The first step is to install the Agent (whether the containerized version or dir
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-Run a [Docker container][1] that embeds the Datadog Agent to monitor your host by using the following command:
+1. Run a [Docker container][1] that embeds the Datadog Agent to monitor your host by using the following command:
 
 ```shell
 docker run -d --name datadog-agent \
