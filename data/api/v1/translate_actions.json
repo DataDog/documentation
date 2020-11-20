@@ -756,6 +756,10 @@
     "description": "Get hourly usage for analyzed logs (Security Monitoring).",
     "summary": "Get hourly usage for analyzed logs"
   },
+  "GetUsageAttribution": {
+    "description": "Get Usage Attribution.",
+    "summary": "Get Usage Attribution"
+  },
   "GetUsageLambda": {
     "description": "Get hourly usage for lambda.",
     "summary": "Get hourly usage for Lambda"

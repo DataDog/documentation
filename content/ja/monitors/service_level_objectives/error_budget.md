@@ -38,7 +38,7 @@ error_budget("slo_id").over("time_window") > 75
 
 さらに、SLO エラーバジェットモニターは [Terraform の datadog_monitor リソース][5]を使用して作成することも可能です。以下は、上記の例と同じクエリを用いてメトリクスベースの SLO 向けにエラーバジェットモニターを構成する `.tf` の例です。
 
-**注:** SLO エラーバジェットモニターは Terraform プロバイダーの v2.7.0 以前でのみサポートされています。
+**注:** SLO エラーバジェットモニターは Terraform プロバイダーの v2.7.0 以前およびプロバイダーの v2.13.0 以降でのみサポートされています。v2.7.0 と v2.13.0 の間のバージョンはサポートされていません。
 
 ```
 resource "datadog_monitor" "metric-based-slo" {

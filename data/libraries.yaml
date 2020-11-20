@@ -306,6 +306,11 @@ Tracing:
       link: https://github.com/Colisweb/scala-opentracing
       authors: Colisweb
 Log:
+  - Flutter:
+    - name: Datadog Flutter
+      link: https://github.com/greenbits/datadog_flutter
+      authors: tshedor
+      notes: Log-only SDK for Flutter
   - Laravel:
     - name: laravel-datadog-logger
       link: https://github.com/myLocalInfluence/laravel-datadog-logger

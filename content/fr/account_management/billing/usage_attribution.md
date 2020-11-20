@@ -22,7 +22,9 @@ Les administrateurs peuvent accéder à l'onglet Usage Attribution à partir de 
 
 - Événements de log indexés
 - Logs ingérés
-- Spans analysées
+- Spans indexées
+
+**Remarque : les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.**
 
 ### Prise en main
 
@@ -51,8 +53,10 @@ Dès que la création de rapports est lancée, ces derniers sont mis à jour quo
 - Cliquez sur une clé de tag pour afficher ses données dans le tableau.
 - Si vous avez activé les comptes multi-org, l'utilisation est résumée pour toutes les organisations Datadog du compte parent.
 - Utilisez le sélecteur d'intervalle pour accéder aux rapports des mois précédents.
-- Les rapports ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant. 
+- Les rapports mensuels ne sont générés qu'à la fin du mois. Chaque rapport mensuel est disponible le deuxième jour du mois suivant. 
 - Utilisez l'option « Export Current View » pour télécharger des rapports. Les rapports `.tsv` incluent les valeurs et pourcentages d'utilisation, afin de simplifier l'attribution des ressources et la rétrofacturation.
+
+Les données mensuelles peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.
 
 ### Section Daily Usage Attribution
 
@@ -63,7 +67,7 @@ Cette section fournit des rapports quotidiens avec une granularité horaire pour
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Télécharger les données" >}}
 
-Les données peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][1] pour en savoir plus.
+Les données quotidiennes peuvent également être récupérées à l'aide de l'API publique de l'outil. Consultez la [documentation sur l'endpoint d'API][2] pour en savoir plus.
 
 ### Interprétation des données
 
@@ -78,11 +82,12 @@ Le tableau ci-dessous présente un exemple de rapport quotidien pour deux tags d
 - Une valeur `<empty>` indique que la ressource a été taguée avec le tag concerné, mais qu'elle ne présente aucune valeur.
 - Si aucune valeur n'est indiquée, cela indique que la ressource ne comporte pas le tag concerné.
 - Des valeurs séparées par le symbole `|` (barre verticale) (par exemple, `service1 | service2`) indiquent qu'un tag spécifique a été appliqué plusieurs fois à la ressource.
-- Une valeur de tag valide (voir la [documentation sur la définition de tags][2]) indique la valeur réelle du tag concerné.
+- Une valeur de tag valide (voir la [documentation sur la définition de tags][3]) indique la valeur réelle du tag concerné.
 
 #### Analyse plus approfondie des données
 
 Lorsque vous utilisez plusieurs tags, les rapports Daily Usage Attribution et Monthly Usage Attribution contiennent des données pour toutes les combinaisons possibles de ces tags. Ils constituent ainsi d'excellents ensembles de données de base pour vos tâches d'analyse plus approfondie. Par exemple, vous pouvez utiliser des opérations de regroupement ou de pivotement pour générer des vues afin d'étudier plus précisément un certain sous-ensemble de tags, ou encore d'effectuer des agrégations temporelles personnalisées.
 
-[1]: https://docs.datadoghq.com/fr/api/#get-daily-usage-attribution-available-files
-[2]: https://docs.datadoghq.com/fr/getting_started/tagging/#defining-tags
+[1]: https://docs.datadoghq.com/fr/api/v1/usage-metering/#get-the-list-of-available-monthly-custom-reports
+[2]: https://docs.datadoghq.com/fr/api/v1/usage-metering/#get-the-list-of-available-daily-custom-reports
+[3]: https://docs.datadoghq.com/fr/getting_started/tagging/#defining-tags
