@@ -37,7 +37,13 @@ Then, collect all the logs from your environment's containers, or filter by cont
 
 ## One-step install
 
-The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all the containers.
+The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all containers.
+
+**A few things to note prior to choosing an installation type**:
+
+- The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. This requires no additional configuration as Docker socket is a part of the installation below.
+
+- The Datadog Agent can also [collect logs and forward them to Datadog from files][2] with volume mounts if you are required to use the Agent on your host.
 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
@@ -103,7 +109,6 @@ logs_config:
 
 [Restart the Agent][3] to see all your container logs in Datadog.
 
-
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
@@ -112,19 +117,17 @@ logs_config:
 
 **Important notes**:
 
-- **If you cannot forward logs to `stdout` & `stderr`**, you can [tail logs from your host using a container agent][1].
-
 - `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+. The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name results in the installation of integration Pipelines that parse your logs and extract relevant information from them.
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][2] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][2] documentation for more information on parameters for filtering.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][3] documentation for details regarding the setup for containerized environments. Refer to the [journald filter units][3] documentation for more information on parameters for filtering.
 
 ## Log Integrations
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][3] and [pod annotations in Kubernetes][4] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][4] and [pod annotations in Kubernetes][5] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -159,7 +162,7 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][2].
 
 **Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][6] documentation.
 
@@ -241,11 +244,11 @@ For Kubernetes environments, refer to the [Kubernetes short lived container docu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/faq/how-to-tail-logs-from-host-using-a-container-agent/
-[2]: /integrations/journald/
-[3]: /agent/docker/integrations/
-[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[5]: /agent/logs/#custom-log-collection
+[1]: /getting_started/agent/autodiscovery?tab=docker
+[2]: /agent/logs/#custom-log-collection
+[3]: /integrations/journald/
+[4]: /agent/docker/integrations/
+[5]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [6]: /getting_started/tagging/unified_service_tagging
 [7]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [8]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
