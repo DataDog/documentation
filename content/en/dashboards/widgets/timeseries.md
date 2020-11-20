@@ -113,7 +113,9 @@ See [Explore your data in full-screen graph mode][9], to learn more.
 
 ## API
 
-The dedicated [widget JSON schema definition][10] for the timeseries widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][10] documentation for additional reference.
+
+The dedicated [widget JSON schema definition][11] for the timeseries widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -130,4 +132,5 @@ The dedicated [widget JSON schema definition][10] for the timeseries widget is:
 [7]: /dashboards/template_variables/
 [8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /dashboards/graphing_json/widget_json/
+[10]: /api/v1/dashboards/
+[11]: /dashboards/graphing_json/widget_json/

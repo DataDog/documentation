@@ -48,9 +48,9 @@ Optionally define its size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][4] for the query value widget is:
+The dedicated [widget JSON schema definition][5] for the query value widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -61,4 +61,5 @@ The dedicated [widget JSON schema definition][4] for the query value widget is:
 [1]: /dashboards/querying/#overview
 [2]: /tracing/app_analytics/search/#search-bar
 [3]: /logs/search_syntax/
-[4]: /dashboards/graphing_json/widget_json/
+[4]: /api/v1/dashboards/
+[5]: /dashboards/graphing_json/widget_json/

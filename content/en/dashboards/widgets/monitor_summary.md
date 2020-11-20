@@ -64,9 +64,9 @@ You can optionally define the title’s size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][3] for the monitor summary widget is:
+The dedicated [widget JSON schema definition][4] for the monitor summary widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -76,4 +76,5 @@ The dedicated [widget JSON schema definition][3] for the monitor summary widget 
 
 [1]: /monitors/manage_monitor/
 [2]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /dashboards/graphing_json/widget_json/
+[3]: /api/v1/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

@@ -57,6 +57,10 @@ You can optionally define the title’s size and alignment.
 
 ## API
 
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
+
+The dedicated [widget JSON schema definition][4] for the service map widget is:
+
 {{< dashboards-widgets-api >}}
 
 ## Further Reading
@@ -65,3 +69,5 @@ You can optionally define the title’s size and alignment.
 
 [1]: /monitors/service_level_objectives/
 [2]: https://app.datadoghq.com/slo
+[3]: /api/v1/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

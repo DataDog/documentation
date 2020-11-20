@@ -56,7 +56,7 @@ Optionally define its size and alignment.
 
 This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the distribution widget is:
+The dedicated [widget JSON schema definition][3] for the distribution widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -65,4 +65,5 @@ The dedicated [widget JSON schema definition][2] for the distribution widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/heat_map/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

@@ -40,7 +40,7 @@ Optionally define its size and alignment.
 
 This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the event timeline widget is:
+The dedicated [widget JSON schema definition][3] for the event timeline widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -49,4 +49,5 @@ The dedicated [widget JSON schema definition][2] for the event timeline widget i
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

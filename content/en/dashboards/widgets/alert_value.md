@@ -58,5 +58,5 @@ The dedicated [widget JSON schema definition][2] for the alert value widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/#get-all-dashboards
+[1]: /api/v1/dashboards/
 [2]: /dashboards/graphing_json/widget_json/

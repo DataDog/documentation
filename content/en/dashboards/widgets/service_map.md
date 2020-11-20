@@ -34,9 +34,9 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][4] for the service map widget is:
+The dedicated [widget JSON schema definition][5] for the service map widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -47,4 +47,5 @@ The dedicated [widget JSON schema definition][4] for the service map widget is:
 [1]: /tracing/send_traces/
 [2]: /tracing/guide/setting_primary_tags_to_scope/
 [3]: /tracing/visualization/service/
-[4]: /dashboards/graphing_json/widget_json/
+[4]: /api/v1/dashboards/
+[5]: /dashboards/graphing_json/widget_json/

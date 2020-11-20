@@ -38,9 +38,9 @@ The service summary displays the graphs of a chosen [service][1] in your screenb
 
 ## API
 
-This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the service summary widget is:
+The dedicated [widget JSON schema definition][4] for the service summary widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -50,3 +50,5 @@ The dedicated [widget JSON schema definition][2] for the service summary widget 
 
 [1]: /tracing/visualization/service/
 [2]: /tracing/send_traces/
+[3]: /api/v1/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

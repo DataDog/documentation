@@ -25,7 +25,7 @@ Choose a name for your group by using the cog icon in the upper right corner of 
 
 This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the change widget is:
+The dedicated [widget JSON schema definition][3] for the change widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -34,4 +34,5 @@ The dedicated [widget JSON schema definition][2] for the change widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/timeboard/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

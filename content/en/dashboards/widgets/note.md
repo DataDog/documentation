@@ -30,7 +30,7 @@ The notes and links widget is similar to [free text widget][1], but allows for m
 
 This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-The dedicated [widget JSON schema definition][2] for the note widget is:
+The dedicated [widget JSON schema definition][3] for the note widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -39,4 +39,5 @@ The dedicated [widget JSON schema definition][2] for the note widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/free_text/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
