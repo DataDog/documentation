@@ -1459,12 +1459,17 @@ components:
     EventAlertType:
       description: 'If an alert event is enabled, set its type.
 
-        For example, `error`, `warning`, `info`, and `success`.'
+        For example, `error`, `warning`, `info`, `success`, `user_update`,
+
+        `recommendation`, and `snapshot`.'
       enum:
       - error
       - warning
       - info
       - success
+      - user_update
+      - recommendation
+      - snapshot
       example: info
       type: string
       x-enum-varnames:
@@ -1472,6 +1477,9 @@ components:
       - WARNING
       - INFO
       - SUCCESS
+      - USER_UPDATE
+      - RECOMMENDATION
+      - SNAPSHOT
     EventCreateRequest:
       description: Object representing an event.
       properties:
