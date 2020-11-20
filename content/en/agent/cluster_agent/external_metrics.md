@@ -41,7 +41,7 @@ To enable the Custom Metrics Server, follow the instructions to [set up the Data
 
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
-3. Set `DATADOG_HOST` to `https://{{< region-param key="dd_subdomain" >}}.{{< region-param key="dd_site" >}}` (defaults to `https://app.datadoghq.com`).
+3. Set `DATADOG_HOST` to `https://{{< region-param key="dd_full_site" >}}` (defaults to `https://app.datadoghq.com`).
 
 ### Register the External Metrics Provider
 

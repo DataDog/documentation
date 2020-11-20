@@ -35,8 +35,8 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
     |                                |                                                                                                                |
     |--------------------------------|----------------------------------------------------------------------------------------------------------------|
-    | Service Provider Entity ID     | `https://{{< region-param key="dd_subdomain" >}}.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
-    | Assertion Consumer Service URL | `https://{{< region-param key="dd_subdomain" >}}.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
+    | Service Provider Entity ID     | `https://{{< region-param key="dd_full_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://{{< region-param key="dd_full_site" >}}/account/saml/assertion`    |
 
 9.  In Azure, add the values retrieved above and click save:
 
