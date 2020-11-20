@@ -39,14 +39,16 @@ Then, collect all the logs from your environment's containers, or filter by cont
 
 The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all containers.
 
-**A few things to note prior to choosing an installation type**:
+**Notes:**
 
-- The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. This requires no additional configuration as Docker socket is a part of the installation below.
+- The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. The containerized Agent requires no additional configuration as Docker socket is a part of the container installation below.
 
-- The Datadog Agent can also [collect logs and forward them to Datadog from files][2] with volume mounts if you are required to use the Agent on your host.
+- The Agent host installation permits [log collection from files on the host][2] or from container `stdout/stderr`. This installation method requires **additional configuration**, as detailed below.
 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
+
+The containerized Agent uses Docker socket to retrieve logs from the container's `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. This requires no additional configuration as Docker socket is a part of the installation below.
 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
 
