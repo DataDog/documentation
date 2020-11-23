@@ -70,7 +70,6 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
  * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens/closes an incident or simply views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
 
 
-
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][4].
