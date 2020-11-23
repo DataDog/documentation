@@ -4,7 +4,7 @@ kind: documentation
 description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
-  tag: "Documentation"
+  tag: "Blog"
   text: "Secure your infrastructure with Datadog Runtime Security"
 ---
 
