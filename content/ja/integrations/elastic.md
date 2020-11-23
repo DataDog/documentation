@@ -4,7 +4,9 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    elasticsearch: assets/dashboards/overview.json
+    elasticsearch_timeboard: assets/dashboards/metrics.json
   logs:
     source: elasticsearch
   metrics_metadata: metadata.csv
@@ -262,13 +264,11 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 ### サービスチェック
 
-`elasticsearch.cluster_health`:
+**elasticsearch.cluster_health**:<br>
+クラスターステータスが緑色の場合は `OK`、黄色の場合は `WARNING`、その他の場合は `CRITICAL` を返します。
 
-クラスターステータスが緑色の場合は `OK`、黄色の場合は `Warn`、その他の場合は `Critical` を返します。
-
-`elasticsearch.can_connect`:
-
-Agent が Elasticsearch に接続してメトリクスを収集できない場合は、`Critical` を返します。
+**elasticsearch.can_connect**:<br>
+Agent が Elasticsearch に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

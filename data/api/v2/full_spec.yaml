@@ -11,6 +11,26 @@ components:
       required: true
       schema:
         type: string
+    IncidentIDPathParameter:
+      description: The UUID the incident.
+      in: path
+      name: incident_id
+      required: true
+      schema:
+        type: string
+    IncidentIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          enum:
+          - users
+          type: string
+        type: array
     IncidentServiceIDPathParameter:
       description: The ID of the incident service.
       in: path
@@ -363,6 +383,311 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    IncidentCreateAttributes:
+      description: The incident's attributes for a create request.
+      properties:
+        customer_impacted:
+          description: A flag indicating whether the incident caused customer impact.
+          example: false
+          type: boolean
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields for which to create
+            initial selections.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        initial_timeline_cells:
+          description: An array of initial timeline cells to be placed at the beginning
+            of the incident timeline.
+          items:
+            $ref: '#/components/schemas/IncidentTimelineCellCreateAttributes'
+          type: array
+        notification_handles:
+          description: Notification handles that will be notified of the incident
+            at creation.
+          items:
+            description: A notification handle that will be notified at incident creation.
+            example: '@test.user@test.com'
+            type: string
+          type: array
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: A test incident title
+          type: string
+      required:
+      - title
+      - customer_impacted
+      type: object
+    IncidentCreateData:
+      description: Incident data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentCreateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentCreateRelationships:
+      description: The relationships the incident will have with other resources once
+        created.
+      properties:
+        commander:
+          $ref: '#/components/schemas/RelationshipToUser'
+      required:
+      - commander
+      type: object
+    IncidentCreateRequest:
+      description: Create request for an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentCreateData'
+      required:
+      - data
+      type: object
+    IncidentFieldAttributes:
+      description: Dynamic fields for which selections can be made, with field names
+        as keys.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentFieldAttributesSingleValue'
+      - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
+      required:
+      - type
+      type: object
+    IncidentFieldAttributesMultipleValue:
+      description: A field with potentially multiple values selected.
+      properties:
+        type:
+          $ref: '#/components/schemas/IncidentFieldAttributesValueType'
+        value:
+          description: The multiple values selected for this field.
+          example:
+          - '1.0'
+          - '1.1'
+          items:
+            description: A value which has been selected for the parent field.
+            example: '1.1'
+            type: string
+          type: array
+      type: object
+    IncidentFieldAttributesSingleValue:
+      description: A field with a single value selected.
+      properties:
+        type:
+          $ref: '#/components/schemas/IncidentFieldAttributesSingleValueType'
+        value:
+          description: The single value selected for this field.
+          example: SEV-1
+          type: string
+      type: object
+    IncidentFieldAttributesSingleValueType:
+      default: dropdown
+      description: Type of the single value field definitions.
+      enum:
+      - dropdown
+      - textbox
+      example: dropdown
+      type: string
+      x-enum-varnames:
+      - DROPDOWN
+      - TEXTBOX
+    IncidentFieldAttributesValueType:
+      default: multiselect
+      description: Type of the single value field definitions.
+      enum:
+      - multiselect
+      - textarray
+      - metrictag
+      - autocomplete
+      example: multiselect
+      type: string
+      x-enum-varnames:
+      - MULTISELECT
+      - TEXTARRAY
+      - METRICTAG
+      - AUTOCOMPLETE
+    IncidentIntegrationMetadataType:
+      default: incident_integration_metadata
+      description: Integration metadata resource type.
+      enum:
+      - incident_integration_metadata
+      example: incident_integration_metadata
+      type: string
+      x-enum-varnames:
+      - INCIDENT_INTEGRATION_METADATA
+    IncidentPostmortemType:
+      default: incident_postmortems
+      description: Incident postmortem resource type.
+      enum:
+      - incident_postmortems
+      example: incident_postmortems
+      type: string
+      x-enum-varnames:
+      - INCIDENT_POSTMORTEMS
+    IncidentResponse:
+      description: Response with an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentResponseAttributes:
+      description: The incident's attributes from a response.
+      properties:
+        created:
+          description: Timestamp when the incident was created.
+          format: date-time
+          readOnly: true
+          type: string
+        customer_impact_duration:
+          description: Length of the incident's customer impact in seconds. Equals
+            the difference between `customer_impact_start` and `customer_impact_end`.
+          format: int64
+          readOnly: true
+          type: integer
+        customer_impact_end:
+          description: Timestamp when customers were no longer impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impact_scope:
+          description: A summary of the impact customers experienced during the incident.
+          example: An example customer impact scope
+          nullable: true
+          type: string
+        customer_impact_start:
+          description: Timestamp when customers began being impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impacted:
+          description: A flag indicating whether the incident caused customer impact.
+          example: false
+          type: boolean
+        detected:
+          description: Timestamp when the incident was detected.
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields attached to incidents.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        modified:
+          description: Timestamp when the incident was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        notification_handles:
+          description: Notification handles that will be notified of the incident
+            during update.
+          items:
+            description: A notification handle that will be notified during incident
+              update.
+            example: '@test.user@test.com'
+            type: string
+          type: array
+        postmortem_id:
+          description: The UUID of the postmortem object attached to the incident.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        public_id:
+          description: The monotonically increasing integer ID for the incident.
+          example: 1
+          format: int64
+          type: integer
+        resolved:
+          description: Timestamp when the incident's state was set to resolved.
+          format: date-time
+          nullable: true
+          type: string
+        time_to_detect:
+          description: The amount of time in seconds to detect the incident. Equals
+            the difference between `customer_impact_start` and `detected`.
+          format: int64
+          readOnly: true
+          type: integer
+        time_to_internal_response:
+          description: The amount of time in seconds to call incident after detection.
+            Equals the difference of `detected` and `created`.
+          format: int64
+          readOnly: true
+          type: integer
+        time_to_repair:
+          description: The amount of time in seconds to resolve customer impact after
+            detecting the issue. Equals the difference between `customer_impact_end`
+            and `detected`.
+          format: int64
+          readOnly: true
+          type: integer
+        time_to_resolve:
+          description: The amount of time in seconds to resolve the incident after
+            it was created. Equals the difference between `created` and `resolved`.
+          format: int64
+          readOnly: true
+          type: integer
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: A test incident title
+          type: string
+      required:
+      - title
+      type: object
+    IncidentResponseData:
+      description: Incident data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentResponseAttributes'
+        id:
+          description: The incident's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentResponseRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentResponseIncludedItem:
+      description: An object related to an incident that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      type: object
+    IncidentResponseRelationships:
+      description: The incident's relationships from a response.
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        integrations:
+          $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        postmortem:
+          $ref: '#/components/schemas/RelationshipToIncidentPostmortem'
+      type: object
     IncidentServiceCreateAttributes:
       description: The incident service's attributes for a create request.
       properties:
@@ -698,6 +1023,278 @@ components:
           description: Included related resources which the user requested.
           items:
             $ref: '#/components/schemas/IncidentTeamIncludedItems'
+          readOnly: true
+          type: array
+        meta:
+          description: The metadata object containing pagination metadata.
+          properties:
+            pagination:
+              description: Pagination properties.
+              properties:
+                next_offset:
+                  description: The index of the first element in the next page of
+                    results. Equal to page size added to the current offset.
+                  example: 1000
+                  format: int64
+                  type: integer
+                offset:
+                  description: The index of the first element in the results.
+                  example: 10
+                  format: int64
+                  type: integer
+                size:
+                  description: Maximum size of pages to return.
+                  example: 1000
+                  format: int64
+                  type: integer
+              type: object
+          readOnly: true
+          type: object
+      required:
+      - data
+      type: object
+    IncidentTimelineCellCreateAttributes:
+      description: The timeline cell's attributes for a create request.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentTimelineCellMarkdownCreateAttributes'
+      type: object
+    IncidentTimelineCellMarkdownContentType:
+      default: markdown
+      description: Type of the Markdown timeline cell.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
+    IncidentTimelineCellMarkdownCreateAttributes:
+      description: Timeline cell data for Markdown timeline cells for a create request.
+      properties:
+        cell_type:
+          $ref: '#/components/schemas/IncidentTimelineCellMarkdownContentType'
+        content:
+          description: The Markdown timeline cell contents.
+          properties:
+            content:
+              description: The Markdown content of the cell.
+              example: An example timeline cell message.
+              nullable: false
+              type: string
+          type: object
+        important:
+          default: false
+          description: A flag indicating whether the timeline cell is important and
+            should be highlighted.
+          example: false
+          type: boolean
+      required:
+      - content
+      - cell_type
+      type: object
+    IncidentType:
+      default: incidents
+      description: Incident resource type.
+      enum:
+      - incidents
+      example: incidents
+      type: string
+      x-enum-varnames:
+      - INCIDENTS
+    IncidentUpdateAttributes:
+      description: The incident's attributes for an update request.
+      properties:
+        customer_impact_end:
+          description: Timestamp when customers were no longer impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impact_scope:
+          description: A summary of the impact customers experienced during the incident.
+          example: Example customer impact scope
+          type: string
+        customer_impact_start:
+          description: Timestamp when customers began being impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impacted:
+          description: A flag indicating whether the incident caused customer impact.
+          example: false
+          type: boolean
+        detected:
+          description: Timestamp when the incident was detected.
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields for which to update
+            selections.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        notification_handles:
+          description: Notification handles that will be notified of the incident
+            during update.
+          items:
+            description: A notification handle that will be notified during incident
+              update.
+            example: '@test.user@test.com'
+            type: string
+          type: array
+        resolved:
+          description: Timestamp when the incident's state was set to resolved.
+          format: date-time
+          nullable: true
+          type: string
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: A test incident title
+          type: string
+      type: object
+    IncidentUpdateData:
+      description: Incident data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentUpdateAttributes'
+        id:
+          description: The team's ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentUpdateRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentUpdateRelationships:
+      description: The incident's relationships for an update request.
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        integrations:
+          $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        postmortem:
+          $ref: '#/components/schemas/RelationshipToIncidentPostmortem'
+      type: object
+    IncidentUpdateRequest:
+      description: Update request for an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentUpdateData'
+      required:
+      - data
+      type: object
+    IncidentsResponse:
+      description: Response with a list of incidents.
+      properties:
+        data:
+          description: An array of incidents.
+          example:
+          - attributes:
+              created: '2020-04-21T15:34:08.627205+00:00'
+              creation_idempotency_key: null
+              customer_impact_duration: 0
+              customer_impact_end: null
+              customer_impact_scope: null
+              customer_impact_start: null
+              customer_impacted: false
+              detected: '2020-04-14T00:00:00+00:00'
+              modified: '2020-09-17T14:16:58.696424+00:00'
+              postmortem_id: 00000000-0000-0000-0000-000000000000
+              public_id: 1
+              resolved: null
+              severity: SEV-1
+              time_to_detect: 0
+              time_to_internal_response: 0
+              time_to_repair: 0
+              time_to_resolve: 0
+              title: Example Incident
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              commander_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              created_by_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              integrations:
+                data:
+                - id: 00000000-0000-0000-0000-000000000000
+                  type: incident_integration_metadata
+                - id: 00000000-0000-0000-0000-000000000000
+                  type: incident_integration_metadata
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              postmortem:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: incident_postmortems
+            type: incidents
+          - attributes:
+              created: '2020-04-21T15:34:08.627205+00:00'
+              creation_idempotency_key: null
+              customer_impact_duration: 0
+              customer_impact_end: null
+              customer_impact_scope: null
+              customer_impact_start: null
+              customer_impacted: false
+              detected: '2020-04-14T00:00:00+00:00'
+              modified: '2020-09-17T14:16:58.696424+00:00'
+              postmortem_id: 00000000-0000-0000-0000-000000000000
+              public_id: 2
+              resolved: null
+              severity: SEV-5
+              time_to_detect: 0
+              time_to_internal_response: 0
+              time_to_repair: 0
+              time_to_resolve: 0
+              title: Example Incident 2
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              commander_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              created_by_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              integrations:
+                data:
+                - id: 00000000-0000-0000-0000-000000000000
+                  type: incident_integration_metadata
+                - id: 00000000-0000-0000-0000-000000000000
+                  type: incident_integration_metadata
+              last_modified_by_user:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: users
+              postmortem:
+                data:
+                  id: 00000000-0000-0000-0000-000000000000
+                  type: incident_postmortems
+            type: incidents
+          items:
+            $ref: '#/components/schemas/IncidentResponseData'
+          type: array
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentResponseIncludedItem'
           readOnly: true
           type: array
         meta:
@@ -1724,6 +2321,72 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    RelationshipToIncidentIntegrationMetadataData:
+      description: A relationship reference for an integration metadata object.
+      example:
+        id: 00000000-0000-0000-0000-000000000000
+        type: incident_integration_metadata
+      properties:
+        id:
+          description: A unique identifier that represents the integration metadata.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentIntegrationMetadataType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentIntegrationMetadatas:
+      description: A relationship reference for multiple integration metadata objects.
+      example:
+        data:
+        - id: 00000000-0000-0000-0000-000000000000
+          type: incident_integration_metadata
+        - id: 00000000-0000-0000-0000-000000000000
+          type: incident_integration_metadata
+      properties:
+        data:
+          description: The integration metadata relationship array
+          example:
+          - id: 00000000-0000-0000-0000-000000000000
+            type: incident_integration_metadata
+          - id: 00000000-0000-0000-0000-000000000000
+            type: incident_integration_metadata
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadataData'
+          type: array
+      required:
+      - data
+      type: object
+    RelationshipToIncidentPostmortem:
+      description: A relationship reference for postmortems.
+      example:
+        data:
+          id: 00000000-0000-0000-0000-000000000000
+          type: incident_postmortems
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToIncidentPostmortemData'
+      required:
+      - data
+      type: object
+    RelationshipToIncidentPostmortemData:
+      description: The postmortem relationship data.
+      example:
+        id: 00000000-0000-0000-0000-000000000000
+        type: incident_postmortems
+      properties:
+        id:
+          description: A unique identifier that represents the postmortem.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentPostmortemType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
       properties:
@@ -3199,6 +3862,152 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+  /api/v2/incidents:
+    get:
+      description: Get all incidents for the user's organization.
+      operationId: ListIncidents
+      parameters:
+      - $ref: '#/components/parameters/IncidentIncludeQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get a list of incidents
+      tags:
+      - Incidents
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an incident.
+      operationId: CreateIncident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentCreateRequest'
+        description: Incident payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Create an incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}:
+    delete:
+      description: Deletes an existing incident from the users organization.
+      operationId: DeleteIncident
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Delete an existing incident
+      tags:
+      - Incidents
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get the details of an incident by `incident_id`.
+      operationId: GetIncident
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      - $ref: '#/components/parameters/IncidentIncludeQueryParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get the details of an incident
+      tags:
+      - Incidents
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Updates an incident. Provide only the attributes that should be
+        updated as this request is a partial update.
+      operationId: UpdateIncident
+      parameters:
+      - $ref: '#/components/parameters/IncidentIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentUpdateRequest'
+        description: Incident Payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Update an existing incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/analytics/aggregate:
     post:
       description: The API endpoint to aggregate events into buckets and compute metrics
@@ -5412,6 +6221,8 @@ tags:
 - description: Create, update, delete and retrieve teams which can be associated with
     incidents.
   name: Incident Teams
+- description: Manage incident response.
+  name: Incidents
 - description: '[See API version 1](/api/v1/key-management/).'
   name: Key Management
 - description: 'Search your logs in the Datadog platform over HTTP.

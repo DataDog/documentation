@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Amazon Fargate: assets/dashboards/amazon_fargate_overview.json
   logs: {}

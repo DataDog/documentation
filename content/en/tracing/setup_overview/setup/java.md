@@ -454,7 +454,7 @@ Add the `dd-trace-api` dependency to your project. For Maven, add this to `pom.x
 For Gradle, add:
 
 ```gradle
-compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
+implementation group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 ```
 
 Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.

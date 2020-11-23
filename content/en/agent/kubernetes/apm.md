@@ -92,6 +92,7 @@ agent:
     name: "datadog/agent:latest"
   apm:
     enabled: true
+    hostPort: 8126
 ```
 
 See the sample [manifest with APM and metrics collection enabled][1] for a complete example.

@@ -63,6 +63,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: incident
+    name: Incident Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 6
+    parent: product
   - identifier: サーバーレス
     name: サーバーレス
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
@@ -153,51 +159,46 @@ main_left:
     title: テクノロジー
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
-  - name: 'Red Hat OpenShift'
-    parent: 'solutions'
-    title: テクノロジー
-    url: 'https://www.datadoghq.com/ja/solutions/openshift/'
-    weight: -448
   - name: クラウド移行
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/cloud-migration/'
-    weight: -447
+    weight: -448
   - name: 統合監視
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/monitoring-consolidation/'
-    weight: -446
+    weight: -447
   - name: DevOps
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/ja/solutions/devops/'
-    weight: -445
+    weight: -446
   - name: セキュリティ分析
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -444
+    weight: -445
   - name: ハイブリッドクラウドモニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -443
+    weight: -444
   - name: IoT モニタリング
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -442
+    weight: -443
   - name: 機械学習
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -441
+    weight: -442
   - name: リアルタイム BI
     parent: solutions
     title: ユースケース
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -440
+    weight: -441
 main_right:
   - identifier: about
     name: 会社情報
@@ -839,15 +840,16 @@ main:
   - name: ライブプロセス
     url: infrastructure/process/
     parent: インフラストラクチャー
+    identifier: infrastructure_process
     weight: 5
   - name: プロセスメトリクスの生成
-    url: infrastructure/generate_process_metrics/
-    parent: インフラストラクチャー
-    weight: 6
+    url: infrastructure/process/generate_process_metrics/
+    parent: infrastructure_process
+    weight: 101
   - name: ライブコンテナ
     url: infrastructure/livecontainers/
     parent: インフラストラクチャー
-    weight: 7
+    weight: 6
   - name: サーバーレス
     url: サーバーレス
     pre: nav_serverless
@@ -2817,6 +2819,26 @@ api_v1:
     parent: Slack インテグレーション
     url: '#add-channels-to-slack-integration'
     generated: true
+  - name: Slack インテグレーションのすべてのチャンネルを取得
+    parent: Slack インテグレーション
+    url: '#get-all-channels-in-a-slack-integration'
+    generated: true
+  - name: Slack インテグレーションチャンネルの作成
+    parent: Slack インテグレーション
+    url: '#create-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの削除
+    parent: Slack インテグレーション
+    url: '#remove-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの取得
+    parent: Slack インテグレーション
+    url: '#get-a-slack-integration-channel'
+    generated: true
+  - name: Slack インテグレーションチャンネルの更新
+    parent: Slack インテグレーション
+    url: '#update-a-slack-integration-channel'
+    generated: true
   - name: スナップショット
     url: /api/v1/snapshots/
     identifier: スナップショット
@@ -2937,11 +2959,11 @@ api_v1:
     url: /api/v1/usage-metering/
     identifier: 使用料のメータリング
     generated: true
-  - name: 利用可能な日刊カスタムレポートのリストを取得します
+  - name: 利用可能な日刊カスタムレポートのリストを取得
     parent: 使用料のメータリング
     url: '#get-the-list-of-available-daily-custom-reports'
     generated: true
-  - name: 特定の日刊カスタムレポートを取得します
+  - name: 指定された日刊カスタムレポートを取得
     parent: 使用料のメータリング
     url: '#get-specified-daily-custom-reports'
     generated: true
@@ -2972,6 +2994,14 @@ api_v1:
   - name: ホストとコンテナの 1 時間あたり使用量の取得
     parent: 使用料のメータリング
     url: '#get-hourly-usage-for-hosts-and-containers'
+    generated: true
+  - name: インデックス化されたスパンの 1 時間あたり使用量を取得
+    parent: 使用料のメータリング
+    url: '#get-hourly-usage-for-indexed-spans'
+    generated: true
+  - name: 取り込まれたスパンの 1 時間あたり使用量を取得
+    parent: 使用料のメータリング
+    url: '#get-hourly-usage-for-ingested-spans'
     generated: true
   - name: ログの 1 時間あたり使用量の取得
     parent: 使用料のメータリング
@@ -3554,6 +3584,9 @@ footer_product:
   - name: リアルユーザーモニタリング
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
+  - name: Incident Management
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
   - name: サーバーレス
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140

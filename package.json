@@ -64,7 +64,7 @@
         "lazysizes": "4.0.1",
         "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.73.tgz",
         "lodash": "^4.17.20",
-        "marked": "^1.2.4",
+        "marked": "^1.2.5",
         "merge-stream": "2.0.0",
         "minimist": "^1.2.5",
         "mixitup": "^3.3.1",

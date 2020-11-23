@@ -148,6 +148,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [macOS][9]                                      | macOS 10.12 以上                                      |
 | [Windows Server 64 ビット][10]                     | Windows Server 2008r2 以上と Server Core (Nano 以外) |
 | [Windows 64 ビット][10]                            | Windows 7 以上                                        |
+| [Windows Azure Stack HCI OS][10]                | すべてのバージョン                                      |
 
 **注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
 

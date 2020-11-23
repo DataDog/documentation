@@ -20,39 +20,58 @@ further_reading:
 ---
 ## 概要
 
-一部のシステムでは、正しく識別を行わないとロボットが利用できない場合があります。Datadog ロボットから分析結果を収集する際に悪影響が及ぶため、以下を利用して Datadog ロボットの検出を行ってください。
+一部のシステムでは、正しく識別を行わないとロボットが利用できない場合があるため、Datadog ロボットから分析結果を収集するには十分な注意が必要です。Datadog Synthetics モニタリングロボットを検出するには、以下の方法を使用します。
 
-* リクエストに含まれる[ヘッダー](#ヘッダー)。Datadog ロボットの全リクエストにはヘッダーが付加されます。
-* Datadog の [**Synthetic モニタリング IP 範囲**][1]。
-* API とブラウザテストのカスタムヘッダー設定に用いる**高度なオプション**コンフィギュレーション。ローカルで API テストに**クッキー、ヘッダー、または Basic 認証**を、ブラウザテストに**クッキーとヘッダー**を追加することも可能です。
-* `window._DATADOG_SYNTHETICS_BROWSER`: [アプリケーションコードの JavaScript 変数](#_DATADOG_SYNTHETICS_BROWSER 変数)。
+## IP アドレス
 
-## ヘッダー
+{{< site-region region="us" >}}
 
-Datadog ロボットのヘッダーから、API およびブラウザテストに紐付くロボットを検出します。
+Datadog で管理されている各場所に対応する [**Synthetic モニタリング IP 範囲**][1]を使用できます。
+
+[1]: https://ip-ranges.datadoghq.com/synthetics.json
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+Datadog で管理されている各場所に対応する [**Synthetic モニタリング IP 範囲**][1]を使用できます。
+
+[1]: https://ip-ranges.datadoghq.eu/synthetics.json
+
+{{< /site-region >}}
+
+## デフォルトのヘッダー
+
+API およびブラウザテストで生成されたリクエストにアタッチされている **デフォルトのヘッダー** を使用して、Datadog ロボットを特定することもできます。
 
 {{< tabs >}}
 {{% tab "API Tests" %}}
 
 Datadog API テストロボットには以下のヘッダーが付加されています。
 
-`Sec-Datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+`sec-datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
 
-Datadog API テスト向けに発動されたすべてのリクエストには、`x-datadog-origin: synthetics` ヘッダーが付加されます。
+`user-agent: Datadog/Synthetics` も不可されます。
 
 {{% /tab %}}
 {{% tab "Browser tests" %}}
 
 Datadog ブラウザテストロボットには以下のヘッダーが付加されています。
 
-`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>`
+
+ブラウザのテストラン（ブラウザ、デバイス）のタイプにより異なる値を持つ `user-agent` ヘッダーも不可されます。
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### APM ヘッダー
 
-APM が有効になっている場合、`x-datadog-trace-id` など、[**その他の APM に特有のヘッダー**][2]が API テスト向けに発動されたすべてのリクエストに付加されます。
+`x-datadog-origin: synthetics` など、[**その他の APM に特有のヘッダー**][1]も、Synthetic API およびブラウザにより生成されたリクエストに付加されます。
+
+## リクエストのカスタマイズ
+
+API およびブラウザテストのコンフィギュレーションの **高度なオプション** を利用して、特定の識別子をテストリクエストに追加することも可能です。たとえば、**custom headers**、**cookies**、**request bodies** を追加できます。
 
 ## ブラウザ変数
 
@@ -68,5 +87,4 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://ip-ranges.datadoghq.com/synthetics.json
-[2]: /ja/synthetics/apm/#how-are-traces-linked-to-tests
+[1]: /ja/synthetics/apm/#how-are-traces-linked-to-tests

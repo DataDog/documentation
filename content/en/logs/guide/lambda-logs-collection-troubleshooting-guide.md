@@ -94,5 +94,5 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 [4]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
 [5]: https://console.aws.amazon.com/lambda/home
 [6]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
-[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
-[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers

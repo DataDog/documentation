@@ -131,7 +131,7 @@ APM では、サービスではなく、Agent をデプロイしてトレース�
 [3]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
 [4]: /ja/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /ja/account_management/billing/pricing/#apm
-[6]: mailto:sales@datadoghq.com
+[6]: https://www.datadoghq.com/pricing/
 [7]: mailto:success@datadoghq.com
 [8]: https://docs.datadoghq.com/ja/account_management/billing/serverless/#serverless-functions
 [9]: /ja/tracing/send_traces/#datadog-agent

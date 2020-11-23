@@ -160,7 +160,7 @@ A Winston Datadog [transport][60].
 
 [dd-agent nixpkg][62]
 
-If you've written a Datadog library and would like to add it to this page, send an email to [code@datadoghq.com][63].
+If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][63].
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/
 [2]: /tracing/
@@ -224,4 +224,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [60]: https://github.com/sparkida/winston-datadog
 [61]: https://github.com/urosgruber/dd-agent-FreeBSD
 [62]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
-[63]: mailto:code@datadoghq.com
+[63]: mailto:opensource@datadoghq.com

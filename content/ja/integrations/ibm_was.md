@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     IBM_WAS: assets/dashboards/overview.json
   logs:
