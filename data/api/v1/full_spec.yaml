@@ -7318,6 +7318,82 @@ components:
       - TAB_1
       - TAB_2
       - TAB_3
+    SyntheticsPrivateLocation:
+      description: Object containing information about the private location to create.
+      properties:
+        description:
+          description: Description of the private location.
+          example: Description of private location
+          type: string
+        id:
+          description: Unique identifier of the private location.
+          readOnly: true
+          type: string
+        name:
+          description: Name of the private location.
+          example: New private location
+          type: string
+        secrets:
+          description: Secrets for the private location. Only present in the response
+            when creating the private location.
+          properties:
+            authentication:
+              description: Authentication part of the secrets.
+              properties:
+                id:
+                  description: Access key for the private location.
+                  readOnly: true
+                  type: string
+                key:
+                  description: Secret access key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+            config_decryption:
+              description: Private key for the private location.
+              properties:
+                key:
+                  description: Private key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+          readOnly: true
+          type: object
+        tags:
+          description: Array of tags attached to the private location.
+          example:
+          - team:front
+          items:
+            description: A tag attached to the private location.
+            example: team:front
+            type: string
+          type: array
+      required:
+      - name
+      - description
+      - tags
+      type: object
+    SyntheticsPrivateLocationCreationResponse:
+      description: Object that contains the new private location, the public key for
+        result encryption, and the configuration skeleton.
+      properties:
+        config:
+          description: Configuration skeleton for the private location. See installation
+            instructions of the private location on how to use this configuration.
+          type: object
+        private_location:
+          $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        result_encryption:
+          description: Public key for the result encryption.
+          properties:
+            id:
+              description: Fingerprint for the encryption key.
+              type: string
+            key:
+              description: Public key for result encryption.
+              type: string
+          type: object
+      type: object
     SyntheticsResource:
       description: Object describing a resource which is the combination of requests
         (fetch, XHR) and Assets (HTML, CSS, JS, images).
@@ -16274,6 +16350,129 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+  /api/v1/synthetics/private-locations:
+    post:
+      description: Create a new Synthetics private location.
+      operationId: CreatePrivateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocationCreationResponse'
+          description: OK
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Quota reached for private locations
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Private locations are not activated for the user
+      summary: Create a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/private-locations/{location_id}:
+    delete:
+      description: Delete a Synthetics private location.
+      operationId: DeletePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Delete a private location
+      tags:
+      - Synthetics
+    get:
+      description: Get a Synthetics private location.
+      operationId: GetPrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Get a private location
+      tags:
+      - Synthetics
+    put:
+      description: Edit a Synthetics private location.
+      operationId: UpdatePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Edit a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.
@@ -16531,7 +16730,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/trigger/ci:
     post:
-      description: Trigger a set of Synthetics tests for continuous integration
+      description: Trigger a set of Synthetics tests for continuous integration.
       operationId: TriggerCITests
       requestBody:
         content:

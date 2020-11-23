@@ -2882,6 +2882,22 @@ api_v1:
     parent: Synthetics
     url: '#get-all-locations-public-and-private'
     generated: true
+  - name: Create a private location
+    parent: Synthetics
+    url: '#create-a-private-location'
+    generated: true
+  - name: Delete a private location
+    parent: Synthetics
+    url: '#delete-a-private-location'
+    generated: true
+  - name: Get a private location
+    parent: Synthetics
+    url: '#get-a-private-location'
+    generated: true
+  - name: Edit a private location
+    parent: Synthetics
+    url: '#edit-a-private-location'
+    generated: true
   - name: Get the list of all tests
     parent: Synthetics
     url: '#get-the-list-of-all-tests'
