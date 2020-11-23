@@ -115,13 +115,11 @@ SSH チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**ssh.can_connect**:
+**ssh.can_connect**:<br>
+Agent が SSH セッションを開始できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-Agent が SSH セッションを開始できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
-
-**sftp.can_connect**:
-
-Agent が SFTP セッションを開始できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**sftp.can_connect**:<br>
+Agent が SFTP セッションを開始できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

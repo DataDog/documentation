@@ -103,8 +103,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-- Agent が監視対象の Vertica データベースに接続できる場合、`vertica.can_connect` は `OK` を返します。それ以外の場合は、`CRITICAL` を返します。
-- `vertica.node_state` は、UP 状態の各ノードに対して `OK` を、UP への可能なパス上にあるノードに対して `WARNING` を、それ以外の場合は `CRITICAL` を返します。
+**vertica.can_connect**:<br> 
+Agent が監視対象の Vertica データベースに接続できる場合、`OK` を返します。それ以外の場合は、`CRITICAL` を返します。
+
+**vertica.node_state**:<br>
+UP 状態の各ノードに対して `OK` を、UP への可能なパス上にあるノードに対して `WARNING` を、それ以外の場合は `CRITICAL` を返します。
 
 ### イベント
 

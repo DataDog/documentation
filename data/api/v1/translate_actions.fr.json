@@ -140,7 +140,7 @@
     "request_schema_description": "Les downtimes vous permettent de mieux contrôler les notifications d'un monitor en empêchant certains contextes de déclencher des alertes. Les paramètres de downtime, qui peuvent être planifiés avec une heure de début et de fin, désactivent toutes les alertes liées à des tags Datadog spécifiques."
   },
   "ListEvents": {
-    "description": "Le flux d'événements peut être interrogé et filtré par période, priorité, sources et tags.\n\n**Remarque** : si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères « % », « \\ » ou encore « n » peuvent s'afficher dans votre sortie.",
+    "description": "Le flux d'événements peut être interrogé et filtré par période, priorité, sources et tags.\n\n**Remarques** :\n- Si l'événement que vous interrogez comprend de la mise en forme Markdown, les caractères `%`,`\\`,`n` peuvent s'afficher dans votre sortie.\n\n- Cet endpoint renvoie jusqu'à `1000` résultats parmi les plus récents. Pour renvoyer davantage de résultats, identifiez le dernier timestamp du dernier résultat et définissez-le en tant que `end` de l'intervalle de requête pour paginer les résultats.",
     "summary": "Interroger le flux d'événements"
   },
   "CreateEvent": {
@@ -357,6 +357,30 @@
     "request_description": "Corps de requête pour la mise à jour d'une intégration Datadog/Slack existante.",
     "request_schema_description": "Configuration de vos canaux Slack."
   },
+  "GetSlackIntegrationChannels": {
+    "description": "Récupérez la liste de tous les canaux configurés pour votre intégration Datadog/Slack.",
+    "summary": "Récupérer tous les canaux dans une intégration Slack"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Ajoutez un canal à votre intégration Datadog/Slack.",
+    "summary": "Créer un canal dans une intégration Slack",
+    "request_description": "Charge utile décrivant le canal Slack à créer",
+    "request_schema_description": "La configuration du canal Slack."
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Supprimez un canal de votre intégration Datadog/Slack.",
+    "summary": "Supprimer un canal dans une intégration Slack"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Récupérez un canal configuré pour votre intégration Datadog/Slack.",
+    "summary": "Récupérer un canal dans une intégration Slack"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Mettez à jour un canal utilisé dans votre intégration Datadog/Slack.",
+    "summary": "Mettre à jour un canal dans une intégration Slack",
+    "request_description": "Charge utile décrivant les champs et valeurs à mettre à jour.",
+    "request_schema_description": "La configuration du canal Slack."
+  },
   "CreateWebhooksIntegrationCustomVariable": {
     "description": "Crée un endpoint avec le nom `<NOM_VARIABLE_PERSONNALISÉE>`.",
     "summary": "Créer une variable personnalisée",
@@ -424,8 +448,8 @@
   "UpdateLogsIndex": {
     "description": "Mettez à jour un index identifié par son nom. Renvoie l'objet Index passé dans le corps de la requête lorsque celle-ci est réussie. La méthode `PUT` permet de mettre à jour la configuration de votre index en **remplaçant** votre configuration actuelle par la nouvelle, envoyée à votre organisation Datadog.",
     "summary": "Mettre à jour un index",
-    "request_description": "Objet contenant le nouveau `LogsIndex`.",
-    "request_schema_description": "Objet décrivant un index de log Datadog."
+    "request_description": "Objet contenant le nouveau `LogsIndexUpdateRequest`.",
+    "request_schema_description": "Objet permettant de mettre à jour un index de log Datadog."
   },
   "GetLogsPipelineOrder": {
     "description": "Récupérez la séquence actuelle de vos pipelines. Cet endpoint ne prend aucun argument JSON.",
@@ -740,6 +764,18 @@
     "description": "Récupérez l'utilisation horaire pour les hosts et les conteneurs.",
     "summary": "Récupérer l'utilisation horaire pour les hosts et conteneurs"
   },
+  "GetIncidentManagement": {
+    "description": "Récupérez l'utilisation horaire pour la gestion des incidents.",
+    "summary": "Récupérer l'utilisation horaire pour la gestion des incidents"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "Récupérez l'utilisation horaire pour les spans indexées.",
+    "summary": "Récupérer l'utilisation horaire pour les spans indexées"
+  },
+  "GetIngestedSpans": {
+    "description": "Récupérez l'utilisation horaire pour les spans ingérées.",
+    "summary": "Récupérer l'utilisation horaire pour les spans ingérées"
+  },
   "GetUsageLogs": {
     "description": "Récupérez l'utilisation horaire pour les logs.",
     "summary": "Récupérer l'utilisation horaire pour les logs"
@@ -793,11 +829,11 @@
     "summary": "Récupérer les 500 principales métriques custom selon la moyenne horaire"
   },
   "GetUsageTrace": {
-    "description": "Récupérez l'utilisation horaire pour la recherche de traces.",
+    "description": "Récupérez l'utilisation horaire pour la recherche de traces.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/indexed-spans`.",
     "summary": "Récupérer l'utilisation horaire pour la recherche de traces"
   },
   "GetTracingWithoutLimits": {
-    "description": "Récupérez l'utilisation horaire pour le Tracing without Limits.",
+    "description": "Récupérez l'utilisation horaire pour le Tracing without Limits.\n\n**Remarque** : cet endpoint a été renommé `/api/v1/usage/ingested-spans`.",
     "summary": "Récupérer l'utilisation horaire pour le Tracing without Limits"
   },
   "ListUsers": {
