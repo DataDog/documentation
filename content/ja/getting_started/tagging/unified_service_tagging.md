@@ -182,7 +182,6 @@ containers:
 ENV DD_SERVICE <SERVICE>
 ENV DD_VERSION <VERSION>
 
-LABEL com.datadoghq.tags.env="<ENV>"
 LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
@@ -325,7 +324,7 @@ Agent の[メインコンフィギュレーションファイル][1]に、以下
 ```yaml
 env: <ENV>
 tags:
-    - service: <SERVICE>
+    - service:<SERVICE>
 ```
 
 この設定により、Agent が送信するすべてのデータに対する `env` と `service` のタグ付けの一貫性が保証されます。

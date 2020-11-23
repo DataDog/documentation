@@ -161,12 +161,10 @@ Yarn チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**yarn.can_connect**:
-
+**yarn.can_connect**:<br>
 Agent が ResourceManager URI に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-**yarn.application.status**:
-
+**yarn.application.status**:<br>
 [`conf.yaml`][4] ファイルで指定されたマッピングに応じて、アプリケーションのステータスごとに返します。
 
 ## トラブルシューティング

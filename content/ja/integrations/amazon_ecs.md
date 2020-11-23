@@ -57,10 +57,12 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "amazon_ecs" >}}
 
-{{< get-metrics-from-git "amazon_ecs" "aws." >}}
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+
+**注**: `ecs.containerinsights.*` をプレフィックスに持つメトリクスは、[AWS CloudWatch エージェント][2]に基づいています。
 
 ### イベント
 
@@ -68,7 +70,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
 
-ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][5]までお問い合わせください。
+ホワイトリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][6]までお問い合わせください。
 
 ### サービスチェック
 
@@ -76,10 +78,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 Agent が接続できない場合は `CRITICAL`、それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [3]: https://app.datadoghq.com/screen/integration/82/aws-ecs
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
+[6]: https://docs.datadoghq.com/ja/help/
