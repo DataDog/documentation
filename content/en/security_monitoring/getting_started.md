@@ -28,6 +28,10 @@ Datadog provides out of the box [Detection Rules][3], which begin detecting thre
 
 When a threat is detected with a Detection Rule, a Security Signal is generated. The Security Signals can be correlated and triaged in the [Security Signals Explorer][5]. Refer to the [Security Signals Explorer][6] documentation for further details.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/
 [3]: /security_monitoring/default_rules/
