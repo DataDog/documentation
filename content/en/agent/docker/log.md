@@ -54,7 +54,7 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 **Note**: On Windows systems, run this command without volume mounts. That is:
@@ -66,7 +66,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
@@ -82,7 +82,7 @@ The commands related to log collection are:
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://hub.docker.com/r/datadog/agent/tags
+[2]: https://gcr.io/datadoghq/agent
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 

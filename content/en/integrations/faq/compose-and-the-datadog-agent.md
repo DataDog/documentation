@@ -38,7 +38,7 @@ services:
   datadog:
     links:
      - redis # Connect the Datadog Agent container to the Redis container
-    image: datadog/agent:latest
+    image: gcr.io/datadoghq/agent:latest
     environment:
      - DD_API_KEY=${DD_API_KEY}
    volumes:
@@ -58,7 +58,7 @@ services:
   datadog:
     links:
      - redis # Connect the Datadog Agent container to the Redis container
-    image: datadog/agent:latest
+    image: gcr.io/datadoghq/agent:latest
     environment:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE=datadoghq.eu
