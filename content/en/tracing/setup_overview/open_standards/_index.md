@@ -41,11 +41,11 @@ datadog:
 On each OpenTelemetry-instrumented application, set the resource attributes `development.environment`, `service.name`, and `service.version` using the language's SDK. As a fall-back, you can also configure hostname (optionally), environment, service name, and service version at the collector level for unified service tagging by following the [example configuration file][5]. If you don't specify the hostname explicitly, the exporter attempts to get an automatic default by checking the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
 <!--- 1. Hostname set by another OpenTelemetry component -->
-2. Manually set hostname in configuration
-3. EC2 non-default hostname (if in EC2 instance)
-4. EC2 instance id (if in EC2 instance)
-5. Fully qualified domain name
-6. Operating system host name
+1. Manually set hostname in configuration
+1. EC2 non-default hostname (if in EC2 instance)
+1. EC2 instance id (if in EC2 instance)
+1. Fully qualified domain name
+1. Operating system host name
 
 ### Ingesting OpenTelemetry Traces with the Collector
 
