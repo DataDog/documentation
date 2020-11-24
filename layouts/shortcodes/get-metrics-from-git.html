@@ -48,12 +48,14 @@
 
         {{ if (hasPrefix $v.metric_name $m) }}
 
+          {{ if not (hasPrefix $v.metric_name "aws.stream") }}
           <tr>
             <td>
             <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
             <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
             </td>
           </tr>
+          {{ end }}
 
         {{ end }}
 
