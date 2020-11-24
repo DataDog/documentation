@@ -20,7 +20,7 @@ further_reading:
 
 ### 実環境での影響を最小限に
 
-Continuous Profiler は、[JDK Flight Recorder][1] などの技術を活用し、すべてのサービスをまたいで実環境で実行されるよう設計されています。こうすることでホストの CPU とメモリ使用量への影響を最小限に抑えることができます。
+Continuous Profiler は、JDK Flight Recorder などの技術を活用し、すべてのサービスをまたいで実環境で実行されるよう設計されています。こうすることでホストの CPU とメモリ使用量への影響を最小限に抑えることができます。
 
 ## はじめに
 
@@ -30,7 +30,7 @@ Continuous Profiler は、[JDK Flight Recorder][1] などの技術を活用し�
 
 アプリケーションにプロファイラーライブラリを追加して、Datadog Agent へのプロファイル送信を開始します。
 
-**Node**、**Ruby**、**PHP**、**.NET** プロファイラでは、プライベートベータアクセスリストに掲載するために[新規登録][2]が必要です。 ベータ版の準備が完了次第、ご連絡いたします。
+**Node**、**Ruby**、**PHP**、**.NET** プロファイラーの非公開ベータ版が利用可能になった場合に通知するには、[こちらから新規登録][1]してください。
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
@@ -40,7 +40,7 @@ Continuous Profiler は、[JDK Flight Recorder][1] などの技術を活用し�
 
 ### タグを使用してプロファイルを検索
 
-[タグを使用してプロファイルを検索][3]します。特定のホスト、サービス、バージョン、あるいはいずれかの組み合わせなど、すべてのディメンションのデータを表示させることができます。
+[タグを使用してプロファイルを検索][2]します。特定のホスト、サービス、バージョン、あるいはいずれかの組み合わせなど、すべてのディメンションのデータを表示させることができます。
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="タグによるプロファイルの検索">}}
 
@@ -54,6 +54,5 @@ Continuous Profiler は、[JDK Flight Recorder][1] などの技術を活用し�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170
-[2]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
-[3]: /ja/tracing/profiling/search_profiles
+[1]: https://docs.google.com/forms/d/e/1FAIpQLScb9GKmKfSoY6YNV2Wa5P8IzUn02tA7afCahk7S0XHfakjYQw/viewform
+[2]: /ja/tracing/profiling/search_profiles

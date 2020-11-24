@@ -47,7 +47,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 以下のコードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -169,7 +169,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -213,7 +213,7 @@ while (TRUE) {
 
 以下のコードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -333,7 +333,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -469,7 +469,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -631,7 +631,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -732,7 +732,7 @@ while(1):
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -786,7 +786,7 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 以下のコードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -901,7 +901,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -947,7 +947,7 @@ DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` 
 
 以下のコードは、半分の時間だけポイントを送信します。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -979,7 +979,7 @@ dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
@@ -996,7 +996,7 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 以下のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1028,8 +1028,8 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
-The `tags` argument can be a string:
+{{< programming-lang lang="php" >}}
+`tags` 引数は文字列にすることができます。
 
 ```php
 $statsd->increment('example_metric.increment', "environment:dev,account:local");

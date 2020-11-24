@@ -48,8 +48,6 @@ further_reading:
 | 443  | バージョン 0.1.6 以降の場合は `intake.synthetics.datadoghq.com`、バージョン 0.1.5 以前の場合は `api.datadoghq.com`   | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 | 443  | `intake-v2.synthetics.datadoghq.com` for versions >0.2.0                                             | ブラウザのテストアーティファクト ()スクリーンショット、エラー、リソース をプッシュするためにプライベートロケーションで使用されます                                                                         |
 
-**注**: バージョン 0.1.6 以降の場合は `curl intake.synthetics.datadoghq.com` (バージョン 0.1.5 以前の場合は `curl https://api.datadoghq.com`) を使用して、Datadog `site` に対応するエンドポイントが、ワーカーを実行しているホストで利用可能かどうかを確認します。
-
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{< /site-region >}}
@@ -61,7 +59,7 @@ further_reading:
 | 443  | `api.datadoghq.eu`                                | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
 | 443  | `intake-v2.synthetics.datadoghq.eu` for versions >0.2.0| ブラウザのテストアーティファクト ()スクリーンショット、エラー、リソース をプッシュするためにプライベートロケーションで使用されます                                                                            |
 
-**注**: `curl https://api.datadoghq.eu` を使用して、ご利用の Datadog `site` に対応するエンドポイントが、ワーカーを実行するホストで利用可能かどうか確認します。
+**注**: これらのドメインは、静的 IP アドレスのセットを指しています。これらのアドレスは、https://ip-ranges.datadoghq.eu、具体的には https://ip-ranges.datadoghq.eu/api.json (`api.datadoghq.eu` の場合) および https://ip-ranges.datadoghq.eu/synthetics-private-locations.json (`intake-v2.synthetics.datadoghq.eu` の場合) にあります。
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -464,6 +462,7 @@ livenessProbe:
 {{< img src="synthetics/private_locations/assign_test_pl.png" alt="Synthetics テストをプライベートロケーションに割り当てる"  style="width:80%;">}}
 
 プライベートロケーションは、他の Datadog 管理ロケーションと同じように使用できます。具体的には、プライベートロケーションに [Synthetic テスト][2]を割り当て、テスト結果を視覚化し、[Synthetic メトリクス][10]を取得するなどが可能です。
+
 
 ## プライベートロケーションのサイズ変更
 
