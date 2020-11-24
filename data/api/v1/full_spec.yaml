@@ -18323,6 +18323,16 @@ paths:
           items:
             type: string
           type: array
+      - description: Maximum number of results to return.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -19130,6 +19140,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
+- description: '[Check API version 2](/api/v2/processes/).'
+  name: Processes
 - description: '[Check API version 2](/api/v2/roles/).'
   name: Roles
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)

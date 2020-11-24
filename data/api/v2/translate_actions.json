@@ -163,6 +163,10 @@
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
+  "ListProcesses": {
+    "description": "Get all processes for your organization.",
+    "summary": "Get all processes"
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and IDs.",
     "summary": "List roles"
