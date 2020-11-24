@@ -6,13 +6,13 @@ aliases:
   - /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
   - /fr/agent/faq/log-location
 further_reading:
-  - link: agent/faq/how-datadog-agent-determines-the-hostname
+  - link: /agent/faq/how-datadog-agent-determines-the-hostname/
     tag: FAQ
     text: "Comment Datadog détermine-t-il le hostname de l'Agent\_?"
-  - link: agent/guide/agent-commands
+  - link: /agent/guide/agent-commands/
     tag: FAQ
     text: Liste de toutes les commandes de l'Agent
-  - link: agent/guide/agent-configuration-files
+  - link: /agent/guide/agent-configuration-files/
     tag: FAQ
     text: Emplacement de l'ensemble des fichiers de configuration de l'Agent
 ---
@@ -63,11 +63,11 @@ Le Forwarder de l'Agent envoie les métriques à Datadog via HTTPS. Une mise en 
 Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agrégation des métriques [StatsD d'Etsy][5]. Il est utilisé pour recueillir et rassembler des métriques arbitraires via le protocole UDP ou un socket Unix, ce qui permet d'instrumenter du code personnalisé sans augmenter la latence de votre application. En savoir plus sur [DogStatsD][6].
 
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission/#metrics
-[2]: /fr/tracing/guide/terminology
+[2]: /fr/tracing/guide/terminology/
 [3]: /fr/agent/guide/network/#open-ports
 [4]: /fr/developers/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /fr/developers/metrics/dogstatsd_metrics_submission
+[6]: /fr/developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -103,11 +103,11 @@ Nous vous conseillons de prévoir 1024 descripteurs de fichiers ouverts. Vous po
 minfds = 100  # Votre limite stricte
 ```
 
-[1]: /fr/integrations
-[2]: /fr/developers/metrics/custom_metrics
+[1]: /fr/integrations/
+[2]: /fr/developers/metrics/custom_metrics/
 [3]: /fr/agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /fr/agent/proxy/?tab=agentv5
-[5]: /fr/agent/faq/network
+[5]: /fr/agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -147,20 +147,21 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | [macOS][9]                                      | macOS 10.12 et versions ultérieures                                      |
 | [Windows Server 64 bits][10]                     | Windows Server 2008r2 et versions ultérieures, et Server Core (Nano non pris en charge) |
 | [Windows 64 bits][10]                            | Windows 7 et versions ultérieures                                        |
+| [Système d'exploitation Windows Azure Stack HCI][10]                | Toutes les versions                                      |
 
 **Remarque** : l'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
 
 [1]: /fr/agent/basic_agent_usage/amazonlinux/
-[2]: /fr/agent/basic_agent_usage/deb
-[3]: /fr/agent/basic_agent_usage/ubuntu
-[4]: /fr/agent/basic_agent_usage/redhat
-[5]: /fr/agent/docker
-[6]: /fr/agent/basic_agent_usage/kubernetes
-[7]: /fr/agent/basic_agent_usage/suse
-[8]: /fr/agent/basic_agent_usage/fedora
-[9]: /fr/agent/basic_agent_usage/osx
-[10]: /fr/agent/basic_agent_usage/windows
-[11]: /fr/agent/basic_agent_usage/source
+[2]: /fr/agent/basic_agent_usage/deb/
+[3]: /fr/agent/basic_agent_usage/ubuntu/
+[4]: /fr/agent/basic_agent_usage/redhat/
+[5]: /fr/agent/docker/
+[6]: /fr/agent/basic_agent_usage/kubernetes/
+[7]: /fr/agent/basic_agent_usage/suse/
+[8]: /fr/agent/basic_agent_usage/fedora/
+[9]: /fr/agent/basic_agent_usage/osx/
+[10]: /fr/agent/basic_agent_usage/windows/
+[11]: /fr/agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -174,23 +175,28 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | [Kubernetes][6]                   | Version 1.3 à 1.8     |
 | [SUSE Enterprise Linux x86_64][7] | SUSE 11 SP4 et versions ultérieures           |
 | [Fedora x86_64][8]                | Fedora 26 et versions ultérieures             |
-| [MacOS][9]                        | macOS 10.10 et versions ultérieures           |
+| [macOS][9]                        | macOS 10.10 et versions ultérieures           |
 | [Windows Server 64 bits][10]       | Windows Server 2008r2 et versions ultérieures |
 | [Windows 64 bits][10]              | Windows 7 et versions ultérieures             |
 
-**Remarque** : l'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
+**Remarques** :
+
+- L'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
+
+- Le système d'exploitation Windows Server 2008 R2 et ultérieur est pris en charge, mais il doit disposer des dernières mises à jour afin d'exécuter les versions 7 et ultérieures de l'Agent Datadog. Il présente également [un problème connu relatif au décalage de l'horloge et à Go][12].
 
 [1]: /fr/agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /fr/agent/basic_agent_usage/deb
-[3]: /fr/agent/basic_agent_usage/ubuntu
-[4]: /fr/agent/basic_agent_usage/redhat
-[5]: /fr/agent/docker
-[6]: /fr/agent/basic_agent_usage/kubernetes
-[7]: /fr/agent/basic_agent_usage/suse
-[8]: /fr/agent/basic_agent_usage/fedora
-[9]: /fr/agent/basic_agent_usage/osx
-[10]: /fr/agent/basic_agent_usage/windows
-[11]: /fr/agent/basic_agent_usage/source
+[2]: /fr/agent/basic_agent_usage/deb/
+[3]: /fr/agent/basic_agent_usage/ubuntu/
+[4]: /fr/agent/basic_agent_usage/redhat/
+[5]: /fr/agent/docker/
+[6]: /fr/agent/basic_agent_usage/kubernetes/
+[7]: /fr/agent/basic_agent_usage/suse/
+[8]: /fr/agent/basic_agent_usage/fedora/
+[9]: /fr/agent/basic_agent_usage/osx/
+[10]: /fr/agent/basic_agent_usage/windows/
+[11]: /fr/agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Agent Unix" %}}
 
@@ -198,7 +204,7 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
-[1]: /fr/agent/basic_agent_usage/aix
+[1]: /fr/agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -217,14 +223,14 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 | `diagnose`        | Exécute un diagnostic de connectivité sur votre système.                              |
 | `flare`           | [Recueille et envoie un flare à Datadog][1].                                |
 | `health`          | Affiche la santé actuelle de l'Agent.                                             |
-| `help`            | Aide pour n'importe quelle commande.                                                     |
+| `help`            | Affiche des informations d'aide pour n'importe quelle commande.                                                     |
 | `hostname`        | Affiche le hostname utilisé par l'Agent.                                       |
 | `import`          | Importe et convertit les fichiers de configuration d'une version précédente de l'Agent. |
 | `installservice`  | Installe l'Agent dans le gestionnaire de contrôle des services.                       |
 | `launch-gui`      | Démarre l'interface graphique de l'Agent Datadog.                                                |
 | `regimport`       | Importe les paramètres de registre dans `datadog.yaml`.                           |
 | `remove-service`  | Supprime l'Agent du gestionnaire de contrôle des services.                          |
-| `restart`         | [Redémarre l'Agent][2].                                                     |
+| `restart`         | [Redémarrez l'Agent][2].                                                     |
 | `restart-service` | Redémarre l'Agent dans le gestionnaire de contrôle des services.                       |
 | `start`           | [Démarre l'Agent][3].                                                       |
 | `start-service`   | Démarre l'Agent dans le gestionnaire de contrôle des services.                         |
@@ -242,7 +248,7 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 ## Charge système de l'Agent
 
 Vous trouverez ci-dessous un exemple de la consommation en ressources de l'Agent Datadog. Les tests ont été effectués sur une instance `c5.xlarge` de machine EC2 AWS (4 VCPU/8 Go de RAM), où le `datadog-agent` de base était exécuté avec un check de processus pour surveiller l'Agent. La consommation en ressources de l'Agent peut augmenter avec davantage d'intégrations.
-L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le nombre de beans exposés par les JVM surveillés. L'activation des Agents de traces et de processus augmente également la consommation en ressources.
+L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le nombre de beans exposés par les JVM surveillées. L'activation des Agents de traces et de processus augmente également la consommation en ressources.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
@@ -273,7 +279,7 @@ L'activation des checks JMX force l'Agent à utiliser plus de mémoire selon le 
 
 **Collecte de logs** :
 
-Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* à partir d'un fichier, avec le [redirecteur HTTP][1] activé. Ils montrent l'évolution de l'utilisation des ressources pour les différents niveaux de compression disponibles.
+Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* à partir d'un fichier, avec le [redirecteur HTTP][6] activé. Elles montrent l'évolution de l'utilisation des ressources pour les différents niveaux de compression disponibles.
 
 {{< tabs >}}
 {{% tab "Compression HTTP niveau 6" %}}
@@ -311,48 +317,11 @@ Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* �
 {{% /tab %}}
 {{< /tabs >}}
 
-## Outils de gestion des configurations
-
-Gérez l'Agent Datadog et les [intégrations][6] grâce aux outils de gestion des configurations :
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Projet GitHub Chef][1]
-* [Installation de l'Agent Datadog avec Chef][2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Projet GitHub Puppet][1]
-* [Installation de l'Agent Datadog avec Puppet][2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Projet GitHub Ansible][1]
-* [Installation de l'Agent Datadog avec Ansible][2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Installation de l'Agent Datadog avec Saltstack][1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Concepts avancés de l'Agent Datadog
 
 ### Mise à jour de l'Agent
 
-Pour mettre à jour manuellement les composants principaux de l'Agent Datadog vers une version mineure sur un host donné, exécutez la [commande d'installation correspondant à votre plateforme][7].
+Pour mettre à jour manuellement les composants principaux de l'Agent Datadog depuis et vers une version mineure sur un host donné, exécutez la [commande d'installation correspondant à votre plateforme][7].
 
 Remarque : si vous souhaitez mettre à jour manuellement une intégration spécifique, consultez le [guide de gestion des intégrations][8].
 
@@ -379,10 +348,10 @@ Pour envoyer les données de votre Agent vers le [site européen de Datadog][10]
 [3]: /fr/agent/guide/agent-commands/#start-the-agent
 [4]: /fr/agent/guide/agent-commands/#service-status
 [5]: /fr/agent/guide/agent-commands/#stop-the-agent
-[6]: /fr/integrations
+[6]: /fr/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings#agent
-[8]: /fr/agent/guide/integration-management
-[9]: /fr/agent/guide/agent-configuration-files
+[8]: /fr/agent/guide/integration-management/
+[9]: /fr/agent/guide/agent-configuration-files/
 [10]: https://app.datadoghq.eu
 [11]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /fr/agent/guide/agent-log-files
+[12]: /fr/agent/guide/agent-log-files/

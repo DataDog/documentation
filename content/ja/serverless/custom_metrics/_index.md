@@ -242,7 +242,7 @@ MONITORING|<UNIX_EPOCH_タイムスタンプ>|<メトリクス値>|<メトリク
 [1]: https://docs.datadoghq.com/ja/metrics/distributions/
 [2]: /ja/serverless/forwarder/
 [3]: /ja/developers/metrics/
-[4]: /ja/serverless/installation/installing_the_library/
+[4]: /ja/serverless/installation/
 [5]: /ja/metrics/distributions/#customize-tagging
 [6]: https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function
 [7]: /ja/agent/

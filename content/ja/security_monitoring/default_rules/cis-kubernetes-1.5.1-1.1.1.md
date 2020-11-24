@@ -10,7 +10,7 @@ rule_category:
 scope: Kubernetes
 security: コンプライアンス
 source: Kubernetes
-title: API サーバーのポッド仕様ファイルパーミッションが 644 またはこれより厳しい制限付きであることを確認
+title: API サーバーのポッド仕様ファイルパーミッションが 644 またはこれより厳しい制限付きである
 type: security_rules
 ---
 ## 概要

@@ -94,15 +94,14 @@ tracer.configure(hostname=get_aws_ip())
 {{% tab "Node.js" %}}
 
 ```javascript
-const tracer = require('dd-trace');
+const tracer = require('dd-trace').init();
 const request = require('request');
-
 request('http://169.254.169.254/latest/meta-data/local-ipv4', function(
     error,
     resp,
     body
 ) {
-    tracer.init({ hostname: body });
+    tracer.setUrl(`http://${hostname}:8126`)
 });
 ```
 

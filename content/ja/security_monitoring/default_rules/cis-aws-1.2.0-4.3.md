@@ -9,7 +9,7 @@ rule_category:
 scope: ec2
 security: コンプライアンス
 source: ec2
-title: 各 VPC のデフォルトのセキュリティグループがすべてのトラフィックを制限
+title: すべてのトラフィックを制限していない、デフォルトの VPC セキュリティグループ
 type: security_rules
 ---
 ## 概要
