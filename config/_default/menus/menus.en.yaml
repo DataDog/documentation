@@ -1686,7 +1686,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: dashboards/timeboards/#graph-menu
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
