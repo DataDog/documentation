@@ -17,6 +17,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md'
 display_name: vSphere
+draft: false
 git_integration_title: vsphere
 guid: 930b1839-cc1f-4e7a-b706-0e8cf3218464
 integration_id: vsphere
@@ -56,7 +57,7 @@ vCenter の **管理** セクションで、`datadog-readonly` という読み�
 
 [Agent を再起動][5]すると、vSphere メトリクスとイベントが Datadog に送信されます。
 
-**注**: Datadog Agent が vSphere アプライアンスソフトウェアと同じサーバー上にある必要はありません。vSphere チェックが有効になっている Agent は、OS がどこで実行されているかにかかわらず vSphere アプライアンスサーバーをポイントするようにセットアップできます。それに応じて `<VCENTER_HOSTNAME>` を更新してください。
+**注**: Datadog Agent が vSphere アプライアンスソフトウェアと同じサーバー上にある必要はありません。vSphere チェックが有効になっている Agent は、OS がどこで実行されているかにかかわらず vSphere アプライアンスサーバーをポイントするようにセットアップできます。各インスタンスに応じて `<HOSTNAME>` を更新してください。
 
 ### 互換性
 
@@ -99,7 +100,7 @@ Agent バージョン 6.18.0/7.18.0 に付属のチェックバージョン 5.0.
 ### サービスのチェック
 
 **vcenter.can_connect**:<br>
-Agent が vCenter に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+Agent が vCenter に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

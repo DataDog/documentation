@@ -650,6 +650,26 @@
     "description": "Get the list of public and private locations available for Synthetic\ntests. No arguments required.",
     "summary": "Get all locations (public and private)"
   },
+  "CreatePrivateLocation": {
+    "description": "Create a new Synthetics private location.",
+    "summary": "Create a private location",
+    "request_description": "Details of the private location to create.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
+  "DeletePrivateLocation": {
+    "description": "Delete a Synthetics private location.",
+    "summary": "Delete a private location"
+  },
+  "GetPrivateLocation": {
+    "description": "Get a Synthetics private location.",
+    "summary": "Get a private location"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Edit a Synthetics private location.",
+    "summary": "Edit a private location",
+    "request_description": "Details of the private location to be updated.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
     "summary": "Get the list of all tests"
@@ -679,7 +699,7 @@
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
   },
   "TriggerCITests": {
-    "description": "Trigger a set of Synthetics tests for continuous integration",
+    "description": "Trigger a set of Synthetics tests for continuous integration.",
     "summary": "Trigger some Synthetics tests for CI",
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."

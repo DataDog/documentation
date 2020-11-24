@@ -27,6 +27,7 @@ further_reading:
 | ログ     | entry                                                                                                                                                                                                                                                                                                                      |
 | 温度 | degree celsius / degree fahrenheit                                                                                                                                                                                                                                                                                         |
 | CPU         | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                                                                                                   |
+| 電力         | ナノワット / マイクロワット / ミリワット / ワット / キロワット / メガワット / ギガワット / テラワット                                                                                                                                                                                                                   |
 
 下記の Redis ダッシュボードの画面例のように、時系列グラフ、クエリ値ウィジェット、トップリストでは単位が自動的に表示されます。
 

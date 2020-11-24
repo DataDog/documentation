@@ -6,11 +6,11 @@ dependencies:
 kind: documentation
 title: ブラウザログ収集
 ---
-クライアント側 JavaScript ロギングライブラリ `datadog-logs` で、Web ブラウザなどの JavaScript クライアントから Datadog にログを送信できます。
+ブラウザログ SDK で、Web ブラウザや JavaScript クライアントから Datadog にログを送信できます。
 
-`datadog-logs` ライブラリを使用すると、JS クライアントから Datadog にログを直接送信すると共に、次の機能を利用できます。
+ブラウザログ SDK を使用すると、JS クライアントから Datadog にログを直接送信すると共に、次の機能を利用できます。
 
-- ライブラリをロガーとして使用する。すべてが JSON ドキュメントとして Datadog に転送されます。
+- SDK をロガーとして使用する。すべてが JSON ドキュメントとして Datadog に転送されます。
 - 送信される各ログに `context` およびカスタム属性を追加する。
 - すべてのフロントエンドエラーを自動的にラップして転送する。
 - フロントエンドエラーの送信
@@ -19,19 +19,19 @@ title: ブラウザログ収集
 
 ## セットアップ
 
-**Datadog クライアントトークン**: セキュリティ上の理由から、[API キー][1] を使用して `datadog-logs` ライブラリを構成することはできません。JavaScript コードでクライアント側に公開されるためです。ウェブブラウザーからログを収集するには、[クライアントトークン][2]を使用する必要があります。詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
+**Datadog クライアントトークン**: セキュリティ上の理由から、[API キー][1] を使用してブラウザログ SDK を構成することはできません。JavaScript コードでクライアント側に公開されるためです。ウェブブラウザーからログを収集するには、[クライアントトークン][2]を使用する必要があります。詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
-**Datadog ブラウザログライブラリ**: [NPM](#npm) を使用してライブラリを構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
+**Datadog ブラウザログ SDK**: [NPM](#npm) を使用して SDK を構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
 
-**対応ブラウザ**: `datadog-logs` ライブラリは、IE10 および IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
+**対応ブラウザ**: ブラウザログ SDK は、IE10 および IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
 
 ### 適切なインストール方法の選択
 
-| インストール方法        | 使用例                                                                                                                                                                                                                                                                                                         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npm (node package manager) | 最新の Web アプリケーションには、この方法が推奨されます。RUM SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。                            |
-| CDN 非同期                  | この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。 |
-| CDN 同期                   | この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。                                                     |
+| インストール方法        | 使用例                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm (node package manager) | 最新の Web アプリケーションには、この方法が推奨されます。ブラウザログ SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。**注:** 使用する場合、RUM SDK と一致するバージョンの使用が推奨されます。 |
+| CDN 非同期                  | この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。ブラウザログ SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。                                                  |
+| CDN 同期                   | この方法は、すべての RUM イベントを収集する場合に推奨されます。ブラウザログ SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。                                                                                                      |
 
 ### NPM
 
@@ -50,7 +50,7 @@ datadogLogs.init({
 
 ### CDN 非同期
 
-ページの head セクションでライブラリの読み込みと構成を行います。
+ページの head セクションで SDK の読み込みと構成を行います。
 
 <!-- prettier-ignore -->
 ```html
@@ -80,7 +80,7 @@ datadogLogs.init({
 
 ### CDN 同期
 
-すべてのログとエラーを受信するには、ページの head セクションの先頭でライブラリを読み込み構成します。
+すべてのログとエラーを受信するには、ページの head セクションの先頭で SDK を読み込み構成します。
 
 ```html
 <html>
@@ -100,7 +100,7 @@ datadogLogs.init({
 </html>
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 ### TypeScript
 
@@ -121,7 +121,7 @@ window.DD_LOGS.init({
 
 ### 初期化パラメーター
 
-以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザのログライブラリを構成できます。
+以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザログ SDK を構成できます。
 
 | パラメーター             | タイプ    | 必須 | デフォルト         | 説明                                                                                              |
 | --------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
@@ -146,7 +146,7 @@ window.DD_LOGS.init({
 
 ### カスタムログ
 
-Datadog ブラウザのログライブラリが初期化されると、API を使用してカスタムログエントリを Datadog へ直接送信します。
+Datadog ブラウザログ SDK が初期化されると、API を使用してカスタムログエントリを Datadog へ直接送信します。
 
 ```
 logger.debug | info | warn | error (message: string, messageContext = Context)
@@ -176,7 +176,7 @@ DD_LOGS.onReady(function() {
 window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 #### 結果
 
@@ -206,7 +206,7 @@ window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id
 
 ### ステータスのパラメーター
 
-Datadog ブラウザのログライブラリが初期化されると、ステータスをパラメーターとして使用して、API でカスタムログエントリを Datadog へ送信します。
+Datadog ブラウザログ SDK が初期化されると、ステータスをパラメーターとして使用して、API でカスタムログエントリを Datadog へ送信します。
 
 ```
 log (message: string, messageContext: Context, status? = 'debug' | 'info' | 'warn' | 'error')
@@ -256,11 +256,11 @@ window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
 
 ### 複数のロガーの定義
 
-Datadog ブラウザのログライブラリにはデフォルトのロガーが含まれていますが、さまざまなロガーを定義することもできます。
+Datadog ブラウザログ SDK にはデフォルトのロガーが含まれていますが、さまざまなロガーを定義することもできます。
 
 #### 新しいロガーの作成
 
-Datadog ブラウザのログライブラリを初期化したら、API `createLogger` を使用して新しいロガーを定義します。
+Datadog ブラウザログ SDK を初期化したら、API `createLogger` を使用して新しいロガーを定義します。
 
 ```text
 createLogger (name: string, conf?: {
@@ -339,16 +339,17 @@ if (window.DD_LOGS) {
 }
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 ### コンテキストの上書き
 
 #### グローバルコンテキスト
 
-Datadog ブラウザのログライブラリを初期化すると、以下のことが可能になります。
+Datadog ブラウザログ SDK を初期化すると、以下のことが可能になります。
 
 - `setLoggerGlobalContext (context: Context)` API を使用して、すべてのロガーのコンテキスト全てを設定。
 - `addLoggerGlobalContext (key: string, value: any)` API を使用して、あなたのすべてのロガーにコンテキストを追加。
+- Get the entire global context with `getLoggerGlobalContext ()` API を使用して、グローバルコンテキスト全体を取得。
 
 ##### NPM
 
@@ -360,6 +361,8 @@ import { datadogLogs } from '@datadog/browser-logs'
 datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
+
+const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 ```
 
 #### CDN 非同期
@@ -374,6 +377,10 @@ DD_LOGS.onReady(function() {
 DD_LOGS.onReady(function() {
   window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 })
+
+DD_LOGS.onReady(function() {
+  var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+})
 ```
 
 **注:** 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
@@ -386,9 +393,11 @@ CDN 同期の場合は以下を使用します。
 window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+
+var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 #### ロガーのコンテキスト
 
@@ -435,11 +444,11 @@ window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}")
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 ### ステータスに基づくフィルタリング
 
-Datadog ブラウザのログライブラリが初期化されると、API を使用してロガーの最小ログレベルが設定されます。
+Datadog ブラウザログ SDK が初期化されると、API を使用してロガーの最小ログレベルが設定されます。
 
 ```
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
@@ -477,12 +486,12 @@ CDN 同期の場合は以下を使用します。
 window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 ### 送信先の変更
 
-デフォルトでは、Datadog ブラウザのログライブラリが作成したロガーは、ログを Datadog に送信します。
-Datadog ブラウザのログライブラリが初期化されると、ログを `console` に送信したり、ログをまったく送信しない (`silent`) よう、API を使用してロガーを構成することもできます。
+デフォルトでは、Datadog ブラウザログ SDK が作成したロガーは、ログを Datadog に送信します。
+Datadog ブラウザログ SDK が初期化されると、ログを `console` に送信したり、ログをまったく送信しない (`silent`) よう、API を使用してロガーを構成することもできます。
 
 ```
 setHandler (handler?: 'http' | 'console' | 'silent')
@@ -518,7 +527,7 @@ CDN 同期の場合は以下を使用します。
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
-**注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
+**注**: `window.DD_LOGS` チェックは、SDK で読み込みエラーが起きた際に問題を防ぐために使用されます。
 
 [1]: /ja/account_management/api-app-keys/#api-keys
 [2]: /ja/account_management/api-app-keys/#client-tokens
