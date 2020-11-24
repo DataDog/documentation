@@ -7,7 +7,7 @@ further_reading:
   text: "See how to explore your logs"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without limits*"
+  text: "Logging without Limits*"
 - link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
