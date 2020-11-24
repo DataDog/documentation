@@ -238,6 +238,66 @@ components:
       - account_id
       - services
       type: object
+    AWSNamespace:
+      description: The namespace associated with the tag filter entry.
+      enum:
+      - elb
+      - application_elb
+      - sqs
+      - rds
+      - custom
+      - network_elb
+      - lambda
+      type: string
+      x-enum-varnames:
+      - ELB
+      - APPLICATION_ELB
+      - SQS
+      - RDS
+      - CUSTOM
+      - NETWORK_ELB
+      - LAMBDA
+    AWSTagFilterCreateRequest:
+      description: The objects used to set an AWS tag filter.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+        tag_filter_str:
+          description: The tag filter string.
+          example: prod*
+          type: string
+      type: object
+    AWSTagFilterDeleteRequest:
+      description: The objects used to delete an AWS tag filter entry.
+      properties:
+        aws_account_identifier:
+          description: The unique identifier of your AWS account.
+          example: FAKEAC0FAKEAC2FAKEAC
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+      type: object
+    AWSTagFilterListResponse:
+      description: An array of tag filter rules by `namespace` and tag filter string.
+      properties:
+        filters:
+          description: An array of tag filters.
+          items:
+            description: A list of tag filters.
+            properties:
+              namespace:
+                $ref: '#/components/schemas/AWSNamespace'
+              tag_filter_str:
+                description: The tag filter string.
+                example: prod*
+                type: string
+            type: object
+          type: array
+      type: object
     AccessRole:
       default: st
       description: The access role of the user. Options are **st** (standard user),
@@ -5073,6 +5133,7 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       type: object
     OrganizationBilling:
+      deprecated: true
       description: A JSON array of billing type.
       example:
         type: parent_billing
@@ -5095,8 +5156,6 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       required:
       - name
-      - subscription
-      - billing
       type: object
     OrganizationCreateResponse:
       description: Response object for an organization creation.
@@ -5126,6 +5185,7 @@ components:
           $ref: '#/components/schemas/Organization'
       type: object
     OrganizationSubscription:
+      deprecated: true
       description: Subscription definition.
       example:
         type: pro
@@ -12626,6 +12686,169 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+  /api/v1/integration/aws/filtering:
+    delete:
+      description: Delete a tag filtering entry.
+      operationId: DeleteAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterDeleteRequest'
+        description: Delete a tag filtering entry for a given AWS account and `dd-aws`
+          namespace.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Delete a tag filtering entry
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+    get:
+      description: Get all AWS tag filters.
+      operationId: ListAWSTagFilters
+      parameters:
+      - description: Only return AWS filters that matches this `account_id`.
+        in: query
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSTagFilterListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Get all AWS tag filters
+      tags:
+      - AWS Integration
+    post:
+      description: Set an AWS tag filter.
+      operationId: CreateAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterCreateRequest'
+        description: 'Set an AWS tag filter using an `aws_account_identifier`, `namespace`,
+          and filtering string.
+
+          Namespace options are `application_elb`, `elb`, `lambda`, `network_elb`,
+          `rds`, `sqs`, and `custom`.'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Set an AWS tag filter
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
   /api/v1/integration/aws/generate_new_external_id:
     put:
       description: Generate a new AWS external ID for a given AWS account ID and role
@@ -18323,6 +18546,16 @@ paths:
           items:
             type: string
           type: array
+      - description: Maximum number of results to return.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -19130,6 +19363,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
+- description: '[Check API version 2](/api/v2/processes/).'
+  name: Processes
 - description: '[Check API version 2](/api/v2/roles/).'
   name: Roles
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
