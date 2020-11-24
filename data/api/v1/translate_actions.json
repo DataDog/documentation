@@ -227,6 +227,22 @@
     "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
   },
+  "DeleteAWSTagFilter": {
+    "description": "Delete a tag filtering entry.",
+    "summary": "Delete a tag filtering entry",
+    "request_description": "Delete a tag filtering entry for a given AWS account and `dd-aws` namespace.",
+    "request_schema_description": "The objects used to delete an AWS tag filter entry."
+  },
+  "ListAWSTagFilters": {
+    "description": "Get all AWS tag filters.",
+    "summary": "Get all AWS tag filters"
+  },
+  "CreateAWSTagFilter": {
+    "description": "Set an AWS tag filter.",
+    "summary": "Set an AWS tag filter",
+    "request_description": "Set an AWS tag filter using an `aws_account_identifier`, `namespace`, and filtering string.\nNamespace options are `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs`, and `custom`.",
+    "request_schema_description": "The objects used to set an AWS tag filter."
+  },
   "CreateNewAWSExternalID": {
     "description": "Generate a new AWS external ID for a given AWS account ID and role name pair.",
     "summary": "Generate a new external ID",
