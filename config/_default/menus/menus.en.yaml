@@ -2758,6 +2758,10 @@ api_v1:
     parent: PagerDuty Integration
     url: '#update-a-single-service-object'
     generated: true
+  - name: Processes
+    url: /api/v1/processes/
+    identifier: Processes
+    generated: true
   - name: Roles
     url: /api/v1/roles/
     identifier: Roles
@@ -3455,6 +3459,14 @@ api_v2:
   - name: PagerDuty Integration
     url: /api/v2/pagerduty-integration/
     identifier: PagerDuty Integration
+    generated: true
+  - name: Processes
+    url: /api/v2/processes/
+    identifier: Processes
+    generated: true
+  - name: Get all processes
+    parent: Processes
+    url: '#get-all-processes'
     generated: true
   - name: Roles
     url: /api/v2/roles/
