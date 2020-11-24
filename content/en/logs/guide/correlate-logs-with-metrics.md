@@ -7,7 +7,7 @@ further_reading:
   text: "See how to explore your logs"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without limits*"
+  text: "Logging without Limits*"
 - link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
@@ -56,6 +56,8 @@ To correlate logs and metrics on the [Metrics Explorer][7] page:
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+\*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
 [2]: /dashboards/
