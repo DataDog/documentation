@@ -56,14 +56,14 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
       --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
       -e API_KEY=<YOUR_DATADOG_API_KEY> \
       -e SD_BACKEND=docker \
-      datadog/docker-dd-agent:latest
+      gcr.io/datadoghq/docker-dd-agent:latest
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][6].
 
 **If you want the Agent to auto-discover JMX-based checks**:
 
-1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][7].
-2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
+1. Use the `gcr.io/datadoghq/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][7].
+2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `gcr.io/datadoghq/docker-dd-agent:latest-jmx`.
 
 ## Setting up Check Templates
 
@@ -163,7 +163,7 @@ docker service create \
   -e SD_CONFIG_BACKEND=etcd \
   -e SD_BACKEND_HOST=127.0.0.1 \
   -e SD_BACKEND_PORT=4001 \
-  datadog/docker-dd-agent:latest
+  gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
 Note that the option to enable Autodiscovery is called `service_discovery_backend` in `datadog.conf`, but it's called just `SD_BACKEND` as an environment variable.
@@ -389,7 +389,7 @@ checks:
 
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: https://hub.docker.com/r/datadog/docker-dd-agent
+[3]: https://gcr.io/datadoghq/docker-dd-agent
 [4]: /agent/kubernetes/
 [5]: /integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables

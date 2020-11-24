@@ -26,7 +26,7 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
-Enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Enable the Trace Agent in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
@@ -46,7 +46,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -56,7 +56,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -113,7 +113,7 @@ docker run -d --name datadog-agent \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # Application
 docker run -d --name app \
@@ -131,7 +131,7 @@ docker run -d --name datadog-agent \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # Application
 docker run -d --name app \
