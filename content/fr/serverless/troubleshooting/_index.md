@@ -28,7 +28,7 @@ Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[é
 
 [1]: /fr/serverless/#getting-started
 [2]: /fr/serverless/forwarder
-[3]: /fr/serverless/installation/installing_the_library
+[3]: /fr/serverless/installation/
 [4]: /fr/integrations/amazon_lambda/#metric-collection
 [5]: /fr/integrations/amazon_lambda/#real-time-enhanced-lambda-metrics
 [6]: /fr/integrations/amazon_lambda/#log-collection

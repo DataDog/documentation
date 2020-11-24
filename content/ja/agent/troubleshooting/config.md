@@ -43,4 +43,5 @@ sudo datadog-agent config get log_level
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/agent/basic_agent_usage/windows/#agent-v6

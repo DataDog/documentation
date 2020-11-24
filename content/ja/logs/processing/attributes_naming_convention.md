@@ -241,11 +241,11 @@ Datadog ではこの属性を[トレース検索][18]のデフォルトの[メ�
 | **完全名**         | **型** | **説明**                                                           |
 | :------------------- | :------- | :------------------------------------------------------------------------ |
 | `dns.id`             | `string` | DNS のクエリ識別子。                                                 |
-| `dns.question.name`  | `string` | DNS の質問で解決したい IP アドレスの URL。                  |
+| `dns.question.name`  | `string` | クエリ対象のドメイン名。                                                  |
 | `dns.question.type`  | `string` | DNS の質問の種類を指定する [2 オクテットのコード][24]。             |
 | `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IN など) 。 |
 | `dns.question.size`  | `number` | DNS 質問のバイトサイズ。                                           |
-| `dns.answer.name`    | `string` | クエリ対象のドメイン名。                                                  |
+| `dns.answer.name`    | `string` | DNS で回答する際の IP アドレス。                                 |                                                  
 | `dns.answer.type`    | `string` | DNS の回答の種類を指定する [2 オクテットのコード][24]。               |
 | `dns.answer.class`   | `string` | DNS によって回答されるクラス。                                            |
 | `dns.answer.size`    | `number` | DNS 回答のバイトサイズ。                                             |
@@ -258,7 +258,7 @@ Datadog ではこの属性を[トレース検索][18]のデフォルトの[メ�
 | **完全名** | **型** | **説明**                                                                       |
 |:--------------|:---------|:-------------------------------------------------------------------------------------|
 | `evt.name`    | `string` | 同じアクティビティ (例: 認証) によって生成されたイベント間での共有名。 |
-| `evt.outcome` | `string` | イベントの結果 (例: `success`、`failure`)。                                     |
+| `evt.outcome` | `string` | イベントの結果 (例: `success`、`failure`)。                                 |
 
 ## その他の参考資料
 

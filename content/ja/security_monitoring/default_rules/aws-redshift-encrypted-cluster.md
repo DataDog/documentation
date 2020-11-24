@@ -9,7 +9,7 @@ rule_category:
 scope: redshift
 security: コンプライアンス
 source: redshift
-title: 暗号化されていない Redshift クラスター
+title: Redshift クラスターが暗号化されていません
 type: security_rules
 ---
 ## 概要
