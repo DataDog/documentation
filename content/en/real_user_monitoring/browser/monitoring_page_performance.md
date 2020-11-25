@@ -16,20 +16,50 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-When a user visits a page on your website, a new RUM **view event** is created. While the user remains on that view, all collected data (errors, resources performance, long tasks, user actions) is attached to that view with the `view.id` attribute. Performance metrics are collected from both the [Paint Timing API][1] and the [Navigation Timing API][2]. View events are updated with new metrics and metadata as they become available in the end user’s browser.
+When a user visits a page on your website, a new **RUM view event** is created. The view contains live page load and performance metrics. Performance metrics are sent to Datadog as the page finishes loading, but might be empty for a few seconds before they appear in the Datadog UI.
 
-By default, all data collected is kept at full granularity for 15 days.
+## Identifying performance bottlenecks
 
-To monitor a page's performance:
+To find what's causing a page to under-perform:
 
-1. Ensure you've set up and configured [RUM Browser monitoring][3] for your application.
-2. Optionally, add [custom user actions monitoring][4], [custom errors][5], or [global context][6] to the RUM data collected.
-3. Watch for incoming data in [Dashboards][7] and the [RUM Explorer][8]. 
-4. Filter by xxx and yyy to drill down into the specific information you want to investigate.
+1. Set up and configure [RUM Browser monitoring][1] for your application.
+2. Open the [Performance Overview dashboard][2]. It provides you with a high level view of your monitored pages, and you can apply filters to find pages with performance problems.
+3. When you find a page with problem, click the event to open it in the [RUM Explorer][3].
+4. Open the event side panel to see what is causing the performance issue with the help of the waterfall.
+
+## Performance metrics for views
+
+Performance metrics are collected for each individual view. These metrics can pinpoint exactly where the problem is occurring when used with the RUM context collected by default (current page view information, geoIP data, browser information, etc.) and extended with [Global Context][4].
+
+These performance metrics are key for helping you start your investigations:
+
+- **Time To First Byte:** How long it takes the server to process the request. If the server is slow, try using APM to understand what's causing the slowness on the server side.
+- **First Contentful Paint:** How long until something is displayed. Check the RUM waterfall for blocking resources and long tasks preventing the browser from rendering content.
+- **Loading Time:** How long until the page is interactive. Check the RUM waterfall to see if you're loading too many assets, or if some resources are blocking the rendering.
+
+{{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
+
+## All performance metrics
+
+For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists the performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
+
+| Attribute                              | Type        | Description                                                                                                                                                                                                                 |
+|----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info](#how-is-loading-time-calculated).|
+| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9]..                                                                                            |
+| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][10].                                                                                                               |
+| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
+| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
+| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
+| `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
+| `view.measures.long_task_count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
+| `view.measures.resource_count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
+| `view.measures.user_action_count`      | number      | Count of all user actions collected for this view.                                                         
 
 ## Monitoring Single Page Applications
 
-For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][9].
+For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][14].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -48,43 +78,21 @@ To account for modern web applications, loading time watches for network request
 
 The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## Performance metrics for views
-
-{{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
-
-For information about the default attributes for all RUM event types, see [Data Collected][10]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][11]. The following table lists the performance metrics available for page view events.
-
-| Attribute                              | Type        | Description                                                                                                                                                                                                                 |
-|----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation](#how-is-loading-time-calculated)|
-| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][12].                                                                                            |
-| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finishes its work on the main document. [More info from the MDN documentation][13]                                                                                                               |
-| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][14]. |
-| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][15]                                                                             |
-| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][16]                                                                                   |
-| `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
-| `view.measures.long_task_count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
-| `view.measures.resource_count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
-| `view.measures.user_action_count`      | number      | Count of all user actions collected for this view.                                                         
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.w3.org/TR/paint-timing/
-[2]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
-[3]: /real_user_monitoring/browser/
-[4]: /real_user_monitoring/guide/send-custom-user-actions/
-[5]: /real_user_monitoring/browser/advanced_configuration/#custom-errors
-[6]: /real_user_monitoring/browser/advanced_configuration/#add-global-context
-[7]: /real_user_monitoring/dashboards
-[8]: /real_user_monitoring/explorer
-[9]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[10]: /real_user_monitoring/browser/data_collected/
-[11]: /real_user_monitoring/browser/advanced_configuration/
-[12]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[14]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[16]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[1]: /real_user_monitoring/browser/
+[2]: /real_user_monitoring/dashboards/performance_overview_dashboard
+[3]: /real_user_monitoring/explorer/
+[4]: /real_user_monitoring/browser/advanced_configuration/#add-global-context
+[5]: /real_user_monitoring/browser/data_collected/
+[6]: /real_user_monitoring/browser/advanced_configuration/
+[7]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
+[8]: https://www.w3.org/TR/paint-timing/
+[9]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[14]: https://developer.mozilla.org/en-US/docs/Web/API/History
