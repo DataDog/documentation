@@ -112,6 +112,12 @@ $('.hasChildData .js-collapse-trigger').click(function () {
     $(this).find('.toggle-arrow').toggleClass('expanded');
 });
 
+$('.endpoint h2 .js-collapse-trigger').click(function() {
+    const parent = $(this).closest('.isCollapsed');
+    parent.find('.endpoint-content').toggleClass('d-none');
+    parent.find('h2 .toggle-arrow').toggleClass('expanded');
+});
+
 // Scroll the active top level nav item into view below Docs search input
 if (document.body.classList.contains('api')) {
     const headerHeight = $('body > header').height();
