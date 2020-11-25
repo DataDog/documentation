@@ -3118,9 +3118,9 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-custom-metrics'
     generated: true
-  - name: Get top 500 custom metrics by hourly average
+  - name: Get top custom metrics by hourly average
     parent: Usage Metering
-    url: '#get-top-500-custom-metrics-by-hourly-average'
+    url: '#get-top-custom-metrics-by-hourly-average'
     generated: true
   - name: Get hourly usage for Trace Search
     parent: Usage Metering
