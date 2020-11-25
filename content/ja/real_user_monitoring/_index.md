@@ -1,17 +1,18 @@
 ---
 title: リアルユーザーモニタリング
 kind: documentation
-description: "ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化して分析します。"
+description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化して分析します。
 disable_toc: true
+aliases:
+  - /ja/real_user_monitoring/installation
 further_reading:
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-  tag: ブログ
-  text: リアルユーザーモニタリング
-- link: /logs/processing/attributes_naming_convention/
-  tag: ドキュメント
-  text: Datadog標準属性
+  - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
+    tag: ブログ
+    text: リアルユーザーモニタリング
+  - link: /logs/processing/attributes_naming_convention/
+    tag: ドキュメント
+    text: Datadog標準属性
 ---
-
 {{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM ダッシュボード"  >}}
 
 ## リアルユーザーモニタリングとは？
@@ -25,7 +26,8 @@ Datadog のリアルユーザーモニタリング (RUM) は、個々のユー�
 * **Support**: 1 つのユーザーセッションに関連するすべての情報を取得して、問題をトラブルシューティングします (セッションの継続時間、アクセスしたページ、インタラクション、読み込まれたリソース、エラー…)
 
 {{< whatsnext desc="RUM の概要:">}}
-  {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u>: 最初のアプリケーションを作成し、ブラウザ SDK を構成します。{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/browser">}}<u>ブラウザの監視</u>: ブラウザ SDK を構成してアプリケーションを作成します。{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/android">}}<u>Android の監視</u>: Android SDK を構成してアプリケーションを作成します。{{< /nextlink >}} 
   {{< nextlink href="/real_user_monitoring/dashboards">}}<u>ダッシュボード</u>: すぐに使用できるダッシュボード内で収集されたすべてのデータを利用開始後すぐに発見します。{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="RUM イベントを探索する:">}}
