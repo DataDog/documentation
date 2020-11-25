@@ -29,6 +29,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
+    - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
+      tag: "GitHub"
+      text: "Examples of Custom Instrumentation"
 ---
 ## Compatibility Requirements
 

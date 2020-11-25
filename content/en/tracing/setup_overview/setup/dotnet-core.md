@@ -24,17 +24,20 @@ further_reading:
   - link: "/tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
+  - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/samples"
+    tag: "GitHub"
+    text: "Examples of Custom Instrumentation"
 ---
 
 ## Compatibility Requirements
 
-The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][2]. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+The .NET Tracer supports automatic instrumentation on .NET 5, .NET Core 3.1, and .NET Core 2.1. It also supports [.NET Framework][1]. For a full list of supported libraries, visit the [Compatibility Requirements][2] page.
 
 ## Getting started
 
 ### Follow the in-app documentation (Recommended)
 
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+Follow the [Quickstart instructions][1] within the Datadog app for the best experience, including:
 
 - Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
 - Dynamically set `service`, `env`, and `version` tags.
@@ -44,7 +47,7 @@ Follow the [Quickstart instructions][2] within the Datadog app for the best expe
 
 ## Automatic Instrumentation
 
-Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][1] out of the box.
+Automatic instrumentation can collect performance data about your application with zero code changes and minimal configuration. The .NET Tracer automatically instruments all [supported libraries][2] out of the box.
 
 Automatic instrumentation captures:
 
@@ -419,7 +422,7 @@ The following table lists configuration variables that are available only when u
 | `DD_TRACE_LOG_PATH`                                            | Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.                                                                              |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations][1] section. **Note:** On Linux, the names of environment variables are case-sensitive.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations][2] section. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 | Setting Name                                                                  | Description                                                                                                           |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -429,8 +432,8 @@ The following table lists configuration variables that are available only when u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/dotnet-core
-[2]: https://app.datadoghq.com/apm/docs
+[1]: https://app.datadoghq.com/apm/docs
+[2]: /tracing/compatibility_requirements/dotnet-core
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: /tracing/custom_instrumentation/dotnet/
 [5]: /getting_started/tagging/unified_service_tagging/
