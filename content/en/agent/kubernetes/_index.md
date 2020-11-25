@@ -77,7 +77,7 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 **Notes**:
 
 - For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
-- If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, the Docker Hub registry can be used with the images [datadog/agent][9] and [datadog/cluster-agent][10] by using the following configuration in the `values.yaml` file:
+- If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use the Docker Hub registry with the images [datadog/agent][9] and [datadog/cluster-agent][10] with the following configuration in the `values.yaml` file:
 
     ```yaml
     agents:
