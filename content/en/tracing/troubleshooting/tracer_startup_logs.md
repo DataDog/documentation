@@ -30,18 +30,18 @@ The Java tracer does not output Diagnostics logs.  For this check, run the trace
 
 #### File Location
 
-Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
+Log files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
 | Platform | Path                                      |
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
 | Linux    | `/var/log/datadog/dotnet/`                |
 
-**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
+**Note:**: On Linux, you must create the logs directory before you enable debug mode.
 
-- `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the Configuration logs.
+- `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
-- `dotnet-tracer-native.log` contains the Diagnostics logs, if any are generated.
+- `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
 
 #### Configuration
 
