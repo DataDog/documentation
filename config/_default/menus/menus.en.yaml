@@ -1825,7 +1825,7 @@ main:
     weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/
-    parent: browser
+    parent: rum_browser
     identifier: page_performance
     weight: 103
   - name: Android Monitoring
