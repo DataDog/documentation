@@ -23,6 +23,8 @@ private: true
     {{< nextlink href="agent/guide/build-container-agent" >}}Datadog Agent イメージの構築{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-management" >}}Agent を使用して、コンテナディスカバリーを管理{{< /nextlink >}}
     {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifers パラメーターを使用して、オートディスカバリーコンフィギュレーションファイルテンプレートを特定のコンテナに適用します。{{< /nextlink >}}
+   {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ。{{< /nextlink >}} 
+   {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
