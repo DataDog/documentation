@@ -41,7 +41,7 @@ These performance metrics are key for helping you start your investigations:
 
 For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists the performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
 
-| Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
+| Attribute                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info](#how-is-loading-time-calculated).|
