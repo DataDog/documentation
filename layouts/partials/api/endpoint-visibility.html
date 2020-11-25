@@ -1,0 +1,30 @@
+{{ $dot := . }}
+{{ $s := newScratch }}
+{{ $versionCount := .versionCount }}
+{{ $versionNum := .versionNum }}
+{{ $menuChild := .menuChild }}
+
+{{ if gt $versionCount 1 }}
+    <!-- we have multiple versions for this endpoint -->
+    {{ if eq $versionNum "v1" }}
+        {{ if in $menuChild.Params.unstable "v2" }}
+          <!-- if we are outputting v1 and we know v2 is unstable we are ok to make v1 visible -->
+          {{ $s.Set "isVisibleVersion" true }}
+        {{ else }}
+          <!-- if we are outputting v1 and we know v2 is stable we should collapse v1 -->
+          {{ $s.Set "isVisibleVersion" false }}
+        {{ end }}
+    {{ else if eq $versionNum "v2" }}
+        {{ if in $menuChild.Params.unstable "v2" }}
+            <!-- if we are outputting v2 and its unstable we should collapse/hide  -->
+            {{ $s.Set "isVisibleVersion" false }}
+        {{ else }}
+            <!-- if we are outputting v2 and its stable we should show  -->
+            {{ $s.Set "isVisibleVersion" true }}
+        {{ end }}
+    {{ end }}
+{{ else }}
+    <!-- we only have one version for this endpoint, so just show it -->
+    {{ $s.Set "isVisibleVersion" true }}
+{{ end }}
+{{ return ($s.Get "isVisibleVersion") }}
