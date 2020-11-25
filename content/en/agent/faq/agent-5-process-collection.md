@@ -28,7 +28,7 @@ After configuration is complete, [restart the Agent][3].
 
 Update to Datadog Agent image version 5.16.0 or above:
 
-    $ docker pull datadog/docker-dd-agent
+    $ docker pull gcr.io/datadoghq/docker-dd-agent
 
 Follow the instructions for [docker-dd-agent][4], passing in the following attributes, in addition to any other custom settings as appropriate:
 

@@ -47,7 +47,7 @@ Dans cet exemple, une métrique `COUNT` stockée en tant que métrique `RATE` es
 
 Exécutez le code suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -169,7 +169,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -213,7 +213,7 @@ Dans cet exemple, une métrique `GAUGE` stockée en tant que métrique `GAUGE` e
 
 Exécutez le code suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -333,7 +333,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -469,7 +469,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -631,7 +631,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -732,7 +732,7 @@ while(1):
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -786,7 +786,7 @@ Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemp
 
 Exécutez le code suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -901,7 +901,7 @@ public class DogStatsdClient
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <?php
 
@@ -947,7 +947,7 @@ Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<TAUX_ÉCHANTILL
 
 Le code suivant envoie des points de données 50 % du temps :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -979,7 +979,7 @@ dogStatsdService.Increment("exemple_métrique.increment", sampleRate: 0.5);
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 ```php
 <? php
 $statsd->increment('exemple_métrique.increment', $sampleRate->0.5);
@@ -996,7 +996,7 @@ Ajoutez des tags à n'importe quelle métrique envoyée à DogStatsD avec le par
 
 Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `exemple_métrique.increment` :
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1028,7 +1028,7 @@ dogStatsdService.Increment("exemple_métrique.increment", tags: new[] {"environm
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="PHP" >}}
+{{< programming-lang lang="php" >}}
 L'argument `tags` peut être une chaîne :
 
 ```php

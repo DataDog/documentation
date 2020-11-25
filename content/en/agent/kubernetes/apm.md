@@ -89,9 +89,10 @@ Update your `datadog-agent.yaml` manifest with:
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   apm:
     enabled: true
+    hostPort: 8126
 ```
 
 See the sample [manifest with APM and metrics collection enabled][1] for a complete example.

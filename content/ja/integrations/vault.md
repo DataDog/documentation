@@ -61,6 +61,8 @@ a) Vault [`unauthenticated_metrics_access`][3] コンフィギュレーション
 
 これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
 
+**注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
+
 b) Vault クライアントトークンを使用します。
 
 以下は JWT 認証方法を使用した例ですが、他の[認証方法][4]を使用することもできます。
@@ -247,17 +249,17 @@ _Agent バージョン 6.0 以降で利用可能_
 
 ### サービスのチェック
 
-`vault.can_connect`:
-Agent が Vault に接続できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.can_connect**:<br>
+Agent が Vault に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.unsealed`:
-Vault がシールされている場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.unsealed**:<br>
+Vault がシールされている場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.initialized`:
-Vault がまだ初期化されていない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**vault.initialized**:<br>
+Vault がまだ初期化されていない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-`vault.prometheus.health`:
-チェックがメトリクスのエンドポイントにアクセスできない場合 CRITICAL を返します。それ以外の場合 OK を返します。
+**vault.prometheus.health**:<br>
+チェックがメトリクスのエンドポイントにアクセスできない場合は `CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 ## トラブルシューティング
 

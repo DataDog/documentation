@@ -141,7 +141,7 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
 1. Install the `DatadogMetric` CRD in your cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
     ```
 
 2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
@@ -187,7 +187,7 @@ spec:
   metrics:
     - type: External
       external:
-      metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
+        metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
 ```
 
 **Example**: An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`:

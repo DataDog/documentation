@@ -9,7 +9,7 @@ rule_category:
 scope: rds
 security: コンプライアンス
 source: rds
-title: RDS 暗号化の無効
+title: RDS データベースインスタンスが暗号化されていないことを確認します
 type: security_rules
 ---
 ## 概要

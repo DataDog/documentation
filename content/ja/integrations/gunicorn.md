@@ -21,6 +21,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md'
 display_name: Gunicorn
+draft: false
 git_integration_title: gunicorn
 guid: 5347bfe1-2e9b-4c92-9410-48b8659ce10f
 integration_id: gunicorn
@@ -79,10 +80,13 @@ Gunicorn の[メトリクス](#metric-collection)と[ログ](#log-collection)の
 init_config:
 
 instances:
-  # セットとして
-  # 1) アプリの config.py (proc_name = <アプリ名)、または
-  # 2) CLI (gunicorn --name <アプリ名> your:app) 経由
-  - proc_name: <アプリ名>
+    ## @param proc_name - 文字列 - 必須
+    ## gunicorn プロセスの名前。次の gunicorn サーバーの場合:
+    ##
+    ## gunicorn --name <WEB_APP_NAME> <WEB_APP_CONFIG>.ini
+    ##
+    ## 名前は `<WEB_APP_NAME>` です
+  - proc_name: <YOUR_APP_NAME>
 ```
 
 2. [Agent を再起動][2]すると、Datadog への Gunicorn メトリクスの送信が開始されます。

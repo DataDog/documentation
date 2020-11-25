@@ -20,7 +20,7 @@ further_reading:
 
 環境変数またはコンフィギュレーションファイルを通じて `DD_LOGS_INJECTION=true` を設定することで、.NET トレーサーの[コンフィギュレーション][1]の挿入を有効にします。
 
-.NET トレーサーは [LibLog][2] ライブラリを使用して、トレース ID、スパン ID、`env`、`service`、`version` をアプリケーションログに自動的に挿入します。.NET トレーサーを `DD_ENV`, `DD_SERVICE`、および `DD_VERSION` で構成することが推奨されます。`env`、`service`、`version` を追加する際に違いを感じられるはずです（詳細は、[統合サービスタグ付け][3]を参照してください）。
+.NET トレーサーはトレース ID、スパン ID、`env`、`service`、`version` をアプリケーションログに自動的に挿入できます。まだこれを行っていない場合は、.NET トレーサーを `DD_ENV`, `DD_SERVICE`、および `DD_VERSION` で構成することが推奨されます。`env`、`service`、`version` を追加する際に違いを感じられるはずです（詳細は、[統合サービスタグ付け][3]を参照してください）。
 
 [Serilog][4]、[NLog][5] (バージョン 2.0.0.2000+)、[log4net][6] に対応しています。.NET トレーサーは [LibLog][2] ライブラリを使用してトレース ID をアプリケーションログに自動的に挿入します。自動挿入は、`Serilog` ロガーで `LogContext` 強化を有効化した後、あるいは、`NLog` ロガーまたは `log4net` ロガーで `Mapped Diagnostics Context` を有効化した後でのみ、アプリケーションログに表示されます (下記の例を参照してください)。
 
@@ -103,16 +103,23 @@ NLog バージョン 4.5 の場合
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
+**注**: Serilog ライブラリでは、メッセージプロパティ名が有効な C# 識別子である必要があるため、プロパティ名は次のようにする必要があります。
+- `dd_env`
+- `dd_service`
+- `dd_version`
+- `dd_trace_id`
+- `dd_span_id`
+
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
 // スパンはこのブロック以前に開始され、アクティブになっている必要があります。
-using (LogContext.PushProperty("dd.env", CorrelationIdentifier.Env))
-using (LogContext.PushProperty("dd.service", CorrelationIdentifier.Service))
-using (LogContext.PushProperty("dd.version", CorrelationIdentifier.Version))
-using (LogContext.PushProperty("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
-using (LogContext.PushProperty("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
+using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
+using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
+using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
+using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
+using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
     // 任意のログを記録
 }

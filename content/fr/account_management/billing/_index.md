@@ -6,7 +6,7 @@ kind: documentation
 
 Le cycle de facturation commence le premier jour du mois, quelle que soit votre date d'inscription. Votre premier mois est calculé au prorata en fonction de votre date d'inscription.
 
-Datadog mesure le nombre total de hosts, de conteneurs et de métriques custom toutes les heures. La quantité de hosts et de conteneurs facturable est calculée à la fin du mois en prenant la limite inférieure du 99e centile d'utilisation durant ces heures. Le dernier centile est exclu afin de réduire l'impact des pics d'utilisation sur votre facture. La quantité de métriques custom facturable est basée sur le nombre moyen de métriques custom par heure pour le mois. Consultez votre page [Usage][1] dans Datadog.
+Datadog mesure le nombre de total de hosts, de conteneurs et de métriques custom toutes les heures. La quantité de hosts et de conteneurs facturable est calculée à la fin du mois en prenant la limite inférieure du 99e centile d'utilisation durant ces heures. Le dernier centile est exclu afin de réduire l'impact des pics d'utilisation sur votre facture. La quantité de métriques custom facturable est basée sur le nombre moyen de métriques custom par heure pour le mois. Consultez votre page [Usage][1] dans Datadog. Les pages de facturation sont uniquement accessibles aux utilisateurs avec le rôle Admin Datadog.
 
 ### Hosts
 
@@ -22,7 +22,9 @@ Il est conseillé de surveiller les conteneurs avec un seul Agent conteneurisé 
 
 La facturation de Datadog repose sur le nombre moyen de fonctions par heure sur un mois pour l'ensemble de vos comptes. Chaque heure, Datadog enregistre le nombre de fonctions exécutées une ou plusieurs fois et surveillées par votre compte Datadog. À la fin du mois, Datadog détermine le montant à facturer en calculant la moyenne horaire du nombre de fonctions enregistrées.
 
-Les offres Pro et Enterprise prévoient 40 métriques custom par fonction facturée. La facturation pour l'APM sans serveur dépend du nombre total de [spans analysées][4] envoyées au service APM de Datadog à la fin du mois. Aucun [host APM][4] n'est facturable pour un déploiement sans serveur.
+Les offres Pro et Enterprise prévoient un quota de 150 000 spans indexées et 5 métriques custom par fonction facturée. La facturation pour l'APM sans serveur dépend du nombre total de [spans indexées][4] qui dépassent ce quota envoyées au service APM de Datadog à la fin du mois. Aucun [host APM][4] n'est facturable pour un déploiement sans serveur.
+
+**Remarque :** les spans indexées étaient auparavant désignées par le terme de « spans analysées ». Le changement de dénomination a eu lieu à l'occasion du lancement de Tracing Without Limits le 20 octobre 2020.
 
 Pour en savoir plus, consultez la [page Facturation des fonctions sans serveur][5] et la page [Tarification Datadog][6].
 
@@ -53,6 +55,7 @@ Pour définir les adresses e-mails auxquelles vous souhaitez recevoir les factur
     {{< nextlink href="account_management/billing/apm_distributed_tracing/" >}}APM et tracing distribué{{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Informatique sans serveur{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}FAQ Real User Monitoring{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/profiler/" >}}FAQ Profileur en continu{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}Intégration AWS{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Intégration Azure{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Intégration Alibaba{{< /nextlink >}}

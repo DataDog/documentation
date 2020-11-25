@@ -153,46 +153,51 @@ main_left:
     title: technology
     url: 'https://www.datadoghq.com/solutions/kubernetes/'
     weight: -449
+  - name: Red Hat OpenShift
+    parent: solutions
+    title: technology
+    url: 'https://www.datadoghq.com/solutions/openshift/'
+    weight: -448
   - name: Migration vers le cloud
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/cloud-migration/'
-    weight: -448
+    weight: -447
   - name: Unification de la surveillance
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
-    weight: -447
+    weight: -446
   - name: DevOps
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/devops/'
-    weight: -446
+    weight: -445
   - name: Analyse de la sécurité
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/security-analytics/'
-    weight: -445
+    weight: -444
   - name: Surveillance Cloud hybride
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
-    weight: -444
+    weight: -443
   - name: Surveillance IoT
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/iot-monitoring/'
-    weight: -443
+    weight: -442
   - name: Apprentissage automatique
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/machine-learning/'
-    weight: -442
+    weight: -441
   - name: BI en temps réel
     parent: solutions
     title: usecase
     url: 'https://www.datadoghq.com/solutions/business-analytics/'
-    weight: -441
+    weight: -440
 main_right:
   - identifier: about
     name: Notre entreprise
@@ -834,12 +839,17 @@ main:
   - name: Live Processes
     url: infrastructure/process/
     parent: infrastructure
+    identifier: infrastructure_process
     weight: 5
+  - name: Générer des métriques de processus
+    url: infrastructure/process/generate_process_metrics/
+    parent: infrastructure_process
+    weight: 101
   - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 6
-  - name: Informatique sans serveur
+  - name: Sans serveur
     url: serverless
     pre: nav_serverless
     identifier: serverless
@@ -1020,12 +1030,12 @@ main:
     parent: monitor_types
     identifier: monitor_types_anomaly
     weight: 103
-  - name: Singularité
+  - name: Outlier
     url: monitors/monitor_types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
     weight: 104
-  - name: Prévision
+  - name: Forecast
     url: monitors/monitor_types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
@@ -1139,126 +1149,211 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 140000
-  - name: Compatibilité
-    url: tracing/compatibility_requirements/
-    identifier: tracing_compatibility_requirements
+  - name: Envoyer des traces à Datadog
+    url: tracing/setup_overview/
+    identifier: tracing_setup_overview
     parent: tracing
     weight: 1
+  - name: Compatibilité
+    url: tracing/setup_overview/compatibility_requirements/java
+    identifier: tracing_compatibility_requirements
+    parent: tracing_setup_overview
+    weight: 101
   - name: Java
-    url: tracing/compatibility_requirements/java
+    url: tracing/setup_overview/compatibility_requirements/java
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_java
     weight: 101
   - name: Python
-    url: tracing/compatibility_requirements/python
+    url: tracing/setup_overview/compatibility_requirements/python
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_python
     weight: 102
   - name: Ruby
-    url: tracing/compatibility_requirements/ruby
+    url: tracing/setup_overview/compatibility_requirements/ruby
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_ruby
     weight: 103
   - name: Go
-    url: tracing/compatibility_requirements/go
+    url: tracing/setup_overview/compatibility_requirements/go
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_go
     weight: 104
   - name: NodeJS
-    url: tracing/compatibility_requirements/nodejs
+    url: tracing/setup_overview/compatibility_requirements/nodejs
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_nodejs
     weight: 105
   - name: PHP
-    url: tracing/compatibility_requirements/php
+    url: tracing/setup_overview/compatibility_requirements/php
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_php
     weight: 106
   - name: C++
-    url: tracing/compatibility_requirements/cpp
+    url: tracing/setup_overview/compatibility_requirements/cpp
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_cpp
     weight: 107
   - name: .NET Core
-    url: tracing/compatibility_requirements/dotnet-core
+    url: tracing/setup_overview/compatibility_requirements/dotnet-core
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_core
     weight: 108
   - name: .NET Framework
-    url: tracing/compatibility_requirements/dotnet-framework
+    url: tracing/setup_overview/compatibility_requirements/dotnet-framework
     parent: tracing_compatibility_requirements
     identifier: tracing_compatibility_requirements_dotnet_framework
     weight: 109
-  - name: Configuration de l'Agent
-    url: tracing/send_traces/
-    identifier: tracing_send_traces
-    parent: tracing
-    weight: 2
-  - name: Instrumenter votre application
-    url: tracing/setup/
-    parent: tracing
-    identifier: tracing_setup
-    weight: 3
+  - name: Ajouter la bibliothèque de tracing Datadog
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_setup
+    weight: 102
   - name: Java
-    url: tracing/setup/java/
-    parent: tracing_setup
-    identifier: tracing_setup_java
-    weight: 301
+    url: tracing/setup_overview/setup/java
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_java
+    weight: 101
   - name: Python
-    url: tracing/setup/python/
-    parent: tracing_setup
-    identifier: tracing_setup_python
-    weight: 302
+    url: tracing/setup_overview/setup/python
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_python
+    weight: 102
   - name: Ruby
-    url: tracing/setup/ruby/
-    parent: tracing_setup
-    identifier: tracing_setup_ruby
-    weight: 303
+    url: tracing/setup_overview/setup/ruby
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_ruby
+    weight: 103
   - name: Go
-    url: tracing/setup/go/
-    parent: tracing_setup
-    identifier: tracing_setup_go
-    weight: 304
-  - name: Node.js
-    url: tracing/setup/nodejs/
-    parent: tracing_setup
-    identifier: tracing_setup_nodejs
-    weight: 305
-  - name: .NET Framework
-    url: tracing/setup/dotnet-framework/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_framework
-    weight: 306
-  - name: .NET Core
-    url: tracing/setup/dotnet-core/
-    parent: tracing_setup
-    identifier: tracing_setup_dotnet_core
-    weight: 307
+    url: tracing/setup_overview/setup/go
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/setup/nodejs
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_nodejs
+    weight: 105
   - name: PHP
-    url: tracing/setup/php/
-    parent: tracing_setup
-    identifier: tracing_setup_php
-    weight: 308
+    url: tracing/setup_overview/setup/php
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_php
+    weight: 106
   - name: C++
-    url: tracing/setup/cpp/
-    parent: tracing_setup
-    identifier: tracing_setup_cpp
-    weight: 309
-  - name: Envoy
-    url: tracing/setup/envoy/
-    parent: tracing_setup
-    identifier: tracing_setup_envoy
-    weight: 311
-  - name: NGINX
-    url: tracing/setup/nginx/
-    parent: tracing_setup
-    identifier: tracing_setup_nginx
-    weight: 312
-  - name: Istio
-    url: tracing/setup/istio/
-    identifier: tracing_setup_istio
-    parent: tracing_setup
-    weight: 313
+    url: tracing/setup_overview/setup/cpp
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/setup_overview/setup/dotnet-core
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/setup_overview/setup/dotnet-framework
+    parent: tracing_setup_overview_setup
+    identifier: tracing_setup_overview_setup_dotnet_framework
+    weight: 109
+  - name: OpenTracing et OpenTelemetry
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_setup_overview
+    identifier: tracing_open_standards_open_standards
+    weight: 103
+  - name: Java
+    url: tracing/setup_overview/open_standards/java
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/open_standards/python
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/open_standards/ruby
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/open_standards/go
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/open_standards/nodejs
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/open_standards/php
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_php
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/open_standards/dotnet
+    parent: tracing_open_standards_open_standards
+    identifier: tracing_open_standards_open_standards_dotnet
+    weight: 108
+  - name: Tracer des fonctions sans serveur
+    url: tracing/setup_overview/serverless_functions/
+    parent: tracing_setup_overview
+    identifier: tracing_serverless_functions
+    weight: 104
+  - name: Proxies de traces
+    url: tracing/setup_overview/proxy_setup/
+    parent: tracing_setup_overview
+    identifier: tracing_proxy_setup
+    weight: 105
+  - name: Instrumentation personnalisée
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview
+    identifier: tracing_setup_overview_custom_instrumentation
+    weight: 106
+  - name: Java
+    url: tracing/setup_overview/custom_instrumentation/java
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_java
+    weight: 101
+  - name: Python
+    url: tracing/setup_overview/custom_instrumentation/python
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_python
+    weight: 102
+  - name: Ruby
+    url: tracing/setup_overview/custom_instrumentation/ruby
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_ruby
+    weight: 108
+  - name: Go
+    url: tracing/setup_overview/custom_instrumentation/go
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/setup_overview/custom_instrumentation/nodejs
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/setup_overview/custom_instrumentation/php
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_php
+    weight: 106
+  - name: C++
+    url: tracing/setup_overview/custom_instrumentation/cpp
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_cpp
+    weight: 106
+  - name: .NET
+    url: tracing/setup_overview/custom_instrumentation/dotnet
+    parent: tracing_setup_overview_custom_instrumentation
+    identifier: tracing_setup_overview_custom_instrumentation_dotnet
+    weight: 108
+  - name: Configurer la sécurité des données
+    url: tracing/setup_overview/configure_data_security
+    parent: tracing_setup_overview
+    identifier: tracing_configure_data_security
+    weight: 107
   - name: Analyse et recherche de traces
     url: tracing/trace_search_and_analytics/
     parent: tracing
@@ -1332,21 +1427,6 @@ main:
     parent: tracing
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
-  - name: Tracer des fonctions sans serveur
-    url: tracing/serverless_functions/
-    parent: tracing
-    identifier: tracing_serverless_functions
-    weight: 9
-  - name: Activer l'APM Datadog
-    url: serverless/
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_datadog_apm
-    weight: 901
-  - name: Activer AWS X-Ray
-    url: tracing/serverless_functions/enable_aws_xray
-    parent: tracing_serverless_functions
-    identifier: tracing_serverless_functions_enable_aws_xray
-    weight: 902
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
@@ -1392,56 +1472,6 @@ main:
     parent: profiler
     identifier: profiler_profiler_troubleshooting
     weight: 1103
-  - name: Instrumentation personnalisée
-    url: tracing/custom_instrumentation/
-    parent: tracing
-    identifier: tracing_custom_instrumentation
-    weight: 12
-  - name: Personnalisation de l'Agent
-    url: tracing/custom_instrumentation/agent_customization
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_agent_customization
-    weight: 1201
-  - name: Java
-    url: tracing/custom_instrumentation/java
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_java
-    weight: 1202
-  - name: Python
-    url: tracing/custom_instrumentation/python
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_python
-    weight: 1203
-  - name: Ruby
-    url: tracing/custom_instrumentation/ruby
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_ruby
-    weight: 1204
-  - name: Go
-    url: tracing/custom_instrumentation/go
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_go
-    weight: 1205
-  - name: NodeJS
-    url: tracing/custom_instrumentation/nodejs
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_nodejs
-    weight: 1206
-  - name: PHP
-    url: tracing/custom_instrumentation/php
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_php
-    weight: 1207
-  - name: C++
-    url: tracing/custom_instrumentation/cpp
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_cpp
-    weight: 1208
-  - name: .NET
-    url: tracing/custom_instrumentation/dotnet
-    parent: tracing_custom_instrumentation
-    identifier: tracing_custom_instrumentation_dotnet
-    weight: 1209
   - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
@@ -1770,88 +1800,93 @@ main:
   - name: Surveillance Browser
     url: real_user_monitoring/browser/
     parent: rum
-    identifier: browser
+    identifier: rum_browser
     weight: 1
   - name: Données collectées
     url: real_user_monitoring/browser/data_collected/
-    parent: browser
+    parent: rum_browser
     identifier: rum_data_collected
     weight: 101
   - name: Configuration avancée
     url: real_user_monitoring/browser/advanced_configuration/
-    parent: browser
+    parent: rum_browser
     identifier: rum_advanced
     weight: 102
   - name: Surveillance Android
     url: real_user_monitoring/android/
     parent: rum
-    identifier: android
+    identifier: rum_android
     weight: 2
+  - name: Surveillance iOS
+    url: real_user_monitoring/ios/
+    parent: rum
+    identifier: rum_ios
+    weight: 3
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 3
+    weight: 4
   - name: Vue d'ensemble des performances
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 301
+    weight: 401
   - name: Ressources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 302
+    weight: 402
   - name: Erreurs
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 303
+    weight: 403
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 4
+    weight: 5
   - name: Recherche
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 401
+    weight: 501
   - name: Analyses
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 402
+    weight: 502
   - name: Tâche longue
     url: real_user_monitoring/data_collected/long_task
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
-    weight: 403
+    weight: 503
   - name: Erreur
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
-    weight: 404
+    weight: 504
   - name: Action utilisateur
     url: real_user_monitoring/data_collected/user_action
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
-    weight: 405
+    weight: 505
   - name: Suivi des erreurs
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 5
+    weight: 6
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 501
+    weight: 601
   - name: Guides
     url: real_user_monitoring/guide
     parent: rum
     identifier: rum_guides
-    weight: 6
+    weight: 7
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -1887,7 +1922,7 @@ main:
     parent: ndm
     identifier: ndm_setup
     weight: 501
-  - name: Profiles
+  - name: Profils
     url: network_performance_monitoring/devices/profiles
     parent: ndm
     identifier: ndm_profiles
@@ -1942,7 +1977,7 @@ main:
     parent: dev_tools
     identifier: marketplace
     weight: 2
-  - name: Custom Metrics
+  - name: Métriques custom
     url: developers/metrics/
     parent: dev_tools
     identifier: dev_tools_metrics
@@ -2788,6 +2823,26 @@ api_v1:
     parent: Intégration Slack
     url: '#ajouter-des-canaux-a-l-integration-slack'
     generated: true
+  - name: Récupérer tous les canaux dans une intégration Slack
+    parent: Intégration Slack
+    url: '#recuperer-tous-les-canaux-dans-une-integration-slack'
+    generated: true
+  - name: Créer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#creer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Supprimer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#supprimer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Récupérer un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#recuperer-un-canal-dans-une-integration-slack'
+    generated: true
+  - name: Mettre à jour un canal dans une intégration Slack
+    parent: Intégration Slack
+    url: '#mettre-a-jour-un-canal-dans-une-integration-slack'
+    generated: true
   - name: Snapshots
     url: /api/v1/snapshots/
     identifier: Snapshots
@@ -2796,9 +2851,9 @@ api_v1:
     parent: Snapshots
     url: '#prendre-des-snapshots-de-graphiques'
     generated: true
-  - name: Synthetics
+  - name: Synthetic
     url: /api/v1/synthetics/
-    identifier: Synthetics
+    identifier: Synthetic
     generated: true
   - name: Récupérer tous les emplacements (publics et privés)
     parent: Synthetics
@@ -2828,7 +2883,7 @@ api_v1:
     parent: Synthetics
     url: '#supprimer-des-tests'
     generated: true
-  - name: Déclencher des tests Synthetics pour CI
+  - name: Déclencher des tests Synthetic spécifiques pour l'intégration continue
     parent: Synthetics
     url: '#declencher-des-tests-synthetics-pour-ci'
     generated: true
@@ -2849,23 +2904,23 @@ api_v1:
     url: '#recuperer-un-resultat-de-test-api'
     generated: true
   - name: Interrompre ou démarrer un test
-    parent: Synthetics
+    parent: Synthetic
     url: '#interrompre-ou-demarrer-un-test'
     generated: true
   - name: Créer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#creer-une-variable-globale'
     generated: true
   - name: Supprimer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#supprimer-une-variable-globale'
     generated: true
   - name: Récupérer une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#recuperer-une-variable-globale'
     generated: true
   - name: Modifier une variable globale
-    parent: Synthetics
+    parent: Synthetic
     url: '#modifier-une-variable-globale'
     generated: true
   - name: Tags
@@ -2944,6 +2999,14 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-hosts-et-conteneurs'
     generated: true
+  - name: Récupérer l'utilisation horaire pour les spans indexées
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-les-spans-indexees'
+    generated: true
+  - name: Récupérer l'utilisation horaire pour les spans ingérées
+    parent: Mesure de l'utilisation
+    url: '#recuperer-l-utilisation-horaire-pour-les-spans-ingerees'
+    generated: true
   - name: Récupérer l'utilisation horaire pour les logs
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-des-logs'
@@ -2968,7 +3031,7 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-sessions-rum'
     generated: true
-  - name: Récupérer l'utilisation horaire pour les appareils SNMP
+  - name: Récupérer l'utilisation horaire pour les périphériques SNMP
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-appareils-snmp'
     generated: true
@@ -2976,15 +3039,15 @@ api_v1:
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-de-votre-compte-multi-org'
     generated: true
-  - name: Récupérer l'utilisation horaire pour les checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les checks Synthetic
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-checks-synthetics'
     generated: true
-  - name: Récupérer l'utilisation horaire pour les API checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les checks API Synthetic
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-api-checks-synthetics'
     generated: true
-  - name: Récupérer l'utilisation horaire pour les browser checks Synthetics
+  - name: Récupérer l'utilisation horaire pour les checks Browser Synthetic
     parent: Mesure de l'utilisation
     url: '#recuperer-l-utilisation-horaire-pour-les-browser-checks-synthetics'
     generated: true
@@ -3190,6 +3253,30 @@ api_v2:
     parent: Équipes liées à un incident
     url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
     generated: true
+  - name: Incidents
+    url: /api/v2/incidents/
+    identifier: Incidents
+    generated: true
+  - name: Récupérer la liste des incidents
+    parent: Incidents
+    url: '#recuperer-la-liste-des-incidents'
+    generated: true
+  - name: Créer un incident
+    parent: Incidents
+    url: '#creer-un-incident'
+    generated: true
+  - name: Supprimer un incident existant
+    parent: Incidents
+    url: '#supprimer-un-incident-existant'
+    generated: true
+  - name: Récupérer les détails d'un incident
+    parent: Incidents
+    url: '#recuperer-les-details-d-un-incident'
+    generated: true
+  - name: Mettre à jour un incident existant
+    parent: Incidents
+    url: '#mettre-a-jour-un-incident-existant'
+    generated: true
   - name: Gestion des clés
     url: /api/v2/key-management/
     identifier: Gestion des clés
@@ -3214,11 +3301,11 @@ api_v2:
     url: /api/v2/logs-archives/
     identifier: Archives de logs
     generated: true
-  - name: Récupérer l'ordre des archives
+  - name: Récupérer la séquence des archives
     parent: Archives de logs
     url: '#recuperer-l-ordre-des-archives'
     generated: true
-  - name: Mettre à jour l'ordre des archives
+  - name: Mettre à jour la séquence des archives
     parent: Archives de logs
     url: '#mettre-a-jour-l-ordre-des-archives'
     generated: true

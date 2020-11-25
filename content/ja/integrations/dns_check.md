@@ -95,9 +95,8 @@ DNS チェックには、イベントは含まれません。
 - `nameserver:<nameserver_in_yaml>`
 - `resolved_hostname:<hostname_in_yaml>`
 
-`dns.can_resolve`:
-
-Agent がリクエストの解決に失敗した場合は、CRITICAL を返します。それ以外の場合は UP を返します。
+**dns.can_resolve**:<br>
+Agent がリクエストの解決に失敗した場合は、`CRITICAL` を返します。それ以外の場合は `OK` を返します。
 
 `hostname` および `record_type` でタグ付けされます。
 

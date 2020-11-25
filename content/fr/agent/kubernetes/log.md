@@ -51,7 +51,7 @@ Pour activer la collecte de logs avec votre DaemonSet :
      # (...)
     ```
 
-   **Remarque** : définissez `DD_CONTAINER_EXCLUDE` pour empêcher l'Agent Datadog de recueillir et d'envoyer ses propres logs. Supprimez ce paramètre si vous souhaitez recueillir les logs de l'Agent Datadog. Pour en savoir plus, consultez [Gestion de la découverte de conteneurs][1].
+    **Remarque** : définissez `DD_CONTAINER_EXCLUDE` pour empêcher l'Agent Datadog de recueillir et d'envoyer ses propres logs. Supprimez ce paramètre si vous souhaitez recueillir les logs de l'Agent Datadog. Pour en savoir plus, consultez [Gestion de la découverte de conteneurs][1]. Lorsque vous utilisez ImageStreams au sein d'environnements OpenShift, définissez `DD_CONTAINER_INCLUDE` avec le `name` du conteneur pour recueillir des logs. Ces deux paramètres Exclude/Include prennent en charge les expressions régulières.
 
 2. Montez le volume `pointdir` pour empêcher la perte de logs de conteneurs lors des redémarrages ou en en cas de problèmes réseau. Montez également `/var/lib/docker/containers` pour recueillir des logs via le fichier de logs Kubernetes, car `/var/log/pods` est un lien symbolique vers ce répertoire :
 
@@ -115,6 +115,28 @@ datadog:
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+Mettez à jour votre manifeste `datadog-agent.yaml` comme suit :
+
+```
+agent:
+  image:
+    name: "datadog/agent:latest"
+  log:
+    enabled: true
+```
+
+Consultez l'[exemple de manifeste avec activation de la collecte des métriques et des logs][1] pour un exemple complet.
+
+Ensuite, appliquez la nouvelle configuration :
+
+```shell
+$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-logs.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 Remarque : si vous souhaitez recueillir les logs à partir de `/var/log/pods` même lorsque le socket Docker est monté, vous pouvez définir la variable d'environnement `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (ou `logs_config.k8s_container_use_file` dans `datadog.yaml`) sur `true` pour forcer l'Agent à passer par les fichiers.
@@ -135,7 +157,7 @@ Chaque onglet des sections ci-dessous présente une façon différente d'appliqu
 
 * [Annotations de pod Kubernetes](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
-* [Stockages clé-valeur](?tab=keyvaluestore#configuration)
+* [Des stockages key/value](?tab=keyvaluestore#configuration)
 
 ### Configuration
 
@@ -190,7 +212,7 @@ Remarque : si vous définissez directement vos pods Kubernetes (avec `kind: Pod
 
 Vous pouvez stocker des modèles en tant que fichiers locaux et les monter dans l'Agent conteneurisé. Cela ne nécessite aucun service externe ni aucune plateforme d'orchestration spécifique. Vous devrez cependant redémarrer les conteneurs de votre Agent à chaque fois qu'un modèle est modifié, ajouté ou supprimé. L'Agent recherche les modèles Autodiscovery dans le répertoire `/conf.d` monté.
 
-À partir de la version 6.2.0 (et 5.24.0) de l'Agent, les modèles par défaut utilisent le port par défaut pour le logiciel surveillé au lieu de le détecter automatiquement. Si vous devez utiliser un port différent, spécifiez un modèle Autodiscovery personnalisé dans les [étiquettes de conteneur Docker](?tab=etiquette-docker) ou dans les [annotations de pod Kubernetes](?tab=annotations-kubernetes).
+À partir de la version 6.2.0 (et 5.24.0) de l'Agent, les modèles par défaut utilisent le port par défaut pour le logiciel surveillé au lieu de le détecter automatiquement. Si vous devez utiliser un port différent, spécifiez un modèle Autodiscovery personnalisé dans les [étiquettes de conteneur Docker](?tab=etiquettes-docker) ou dans les [annotations de pod Kubernetes](?tab=annotations-kubernetes).
 
 Ces modèles d'intégration peuvent convenir dans les cas simples. Toutefois, si vous avez besoin de personnaliser les configurations de votre intégration Datadog (par exemple pour activer des options supplémentaires, pour faire appel à des identificateurs de conteneur différents ou pour utiliser les index de template variables), vous devez écrire vos propres fichiers de configuration automatique :
 
@@ -243,7 +265,7 @@ Autodiscovery peut utiliser [Consul][1], Etcd et Zookeeper comme sources de mod�
 
 **Configuration dans datadog.yaml** :
 
-Dans le fichier `datadog.yaml`, définissez l'adresse `<IP_STOCKAGE_CLÉ_VALEUR>` et le port `<PORT_STOCKAGE_CLÉ_VALEUR>` de votre stockage clé-valeur :
+Dans le fichier `datadog.yaml`, définissez l'adresse `<IP_STOCKAGE_CLÉ_VALEUR>` et le `<PORT_STOCKAGE_CLÉ_VALEUR>` de votre stockage clé-valeur :
 
   ```yaml
   config_providers:
@@ -392,7 +414,7 @@ Il est possible de spécifier les conteneurs à partir desquels vous souhaitez r
 
 ## Conteneurs de courte durée
 
-Par défaut, l'Agent recherche de nouveaux conteneurs toutes les cinq secondes.
+Par défaut, l'Agent recherche de nouveaux conteneurs toutes les 5 secondes.
 
 Si vous utilisez l'Agent v6.12+, les logs de conteneurs de courte durée (en raison d'une interruption ou d'un crash) sont automatiquement recueillis à partir des fichiers Kubernetes (via `/var/log/pods`). Les logs des conteneurs d'initialisation sont eux aussi recueillis.
 

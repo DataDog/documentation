@@ -123,7 +123,7 @@ HDFS-datanode チェックには、イベントは含まれません。
 ### サービスのチェック
 
 **hdfs.datanode.jmx.can_connect**:<br>
-何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が DataNode の JMX インターフェイスに接続できない場合は、`Critical` を返します。
+何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が DataNode の JMX インターフェイスに接続できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 
@@ -258,7 +258,7 @@ HDFS-namenode チェックには、イベントは含まれません。
 ### サービスのチェック
 
 **hdfs.namenode.jmx.can_connect**:<br>
-何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が NameNode の JMX インターフェイスに接続できない場合は、`Critical` を返します。
+何らかの理由 (誤ったポートの指定、タイムアウト、パースできない JSON 応答など) で Agent が NameNode の JMX インターフェイスに接続できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

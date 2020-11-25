@@ -3,8 +3,11 @@ aliases:
   - /fr/guides/network_checks
   - /fr/integrations/tcpcheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -15,6 +18,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md'
 display_name: TCP
+draft: false
 git_integration_title: tcp_check
 guid: c514029e-0ed8-4c9f-abe5-2fd4096726ba
 integration_id: system
@@ -48,11 +52,14 @@ Le check TCP est inclus avec le package de [l'Agent Datadog][2] : vous n'avez d
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
-Modifiez le fichier `tcp_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple tcp_check.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+Modifiez le fichier `tcp_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1]. Consultez le [fichier d'exemple tcp_check.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
 ```yaml
 init_config:
@@ -73,11 +80,17 @@ Options de configuration :
 - `collect_response_time` (facultatif) : valeur par défaut : false. Si cette option n'est pas définie sur true, aucune métrique de délai de réponse ne sera recueillie. Si elle est définie sur true, la métrique renvoyée sera `network.tcp.response_time`.
 - `tags` (facultatif) : les tags à attribuer à la métrique.
 
-[Redémarrez l'Agent][5] pour commencer à envoyer vos checks de service et délais de réponse TCP à Datadog.
+[Redémarrez l'Agent][3] pour commencer à envoyer vos métriques et checks de service TCP à Datadog.
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                         |
 | -------------------- | ----------------------------------------------------------------------------- |
@@ -85,9 +98,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                 |
 | `<CONFIG_INSTANCE>`  | `{"name": "<NOM_INSTANCE_CHECK_TCP>", "host":"%%host%%", "port":"%%port%%"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `tcp_check` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][3] et cherchez `tcp_check` dans la section Checks.
 
 ## Données collectées
 
@@ -101,23 +118,18 @@ Le check TCP n'inclut aucun événement.
 
 ### Checks de service
 
-**`tcp.can_connect`** :
+**tcp.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au `host` et au `port` configurés. Si ce n'est pas le cas, renvoie `OK`.
 
-Renvoie DOWN si l'Agent ne parvient pas à se connecter au `host` et au `port` configurés. Si ce n'est pas le cas, renvoie UP.
-
-Pour créer des conditions d'alerte sur ce check de service dans Datadog, sélectionnez **Network** sur la page [Create Monitor][9], et non **Integration**.
+Pour créer des conditions d'alerte sur ce check de service dans Datadog, sélectionnez **Network** sur la page [Create Monitor][4], et non **Integration**.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/datadog_checks/tcp_check/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/tcp_check/metadata.csv
-[9]: https://app.datadoghq.com/monitors#/create
-[10]: https://docs.datadoghq.com/fr/help/
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://app.datadoghq.com/monitors#/create
+[5]: https://docs.datadoghq.com/fr/help/

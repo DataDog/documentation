@@ -9,7 +9,7 @@ rule_category:
 scope: cloudfront
 security: コンプライアンス
 source: cloudfront
-title: CloudFront Insecure Viewer Protocol ポリシー
+title: Cloudfront のビューワーが暗号化されていません
 type: security_rules
 ---
 ## 概要

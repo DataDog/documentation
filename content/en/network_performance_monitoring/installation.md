@@ -184,7 +184,7 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -317,7 +317,7 @@ services:
 To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 
 
-[1]: /integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 

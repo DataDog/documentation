@@ -1,23 +1,22 @@
 ---
-integration_title: TCP RTT チェック
+integration_title: TCP RTT
 name: tcp_rtt
 kind: インテグレーション
 newhlevel: true
 is_public: true
 public_title: Datadog-TCP RTT インテグレーション
-short_description: 'リモートホストへの TCP 接続を監視。'
+short_description: リモートホストへの TCP 接続を監視。
 categories:
-    - network
+  - network
 ddtype: check
 dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md'
 ---
-
 ## 概要
 
-TCP RTT チェックは、Agent が実行されているホストと Agent の通信相手のホストの間のラウンドトリップ回数を報告します。このチェックは受動的で、チェックの外部から送信されて受信したパケットの RTT 回数のみを報告します。チェック自身はパケットを送信しません。
+TCP RTT チェックは、Agent のホストと Agent の通信相手のホストの間のラウンドトリップ回数を報告します。このチェックは受動的で、チェックの外部から送信されて受信したパケットの RTT 回数のみを報告します。チェック自身はパケットを送信しません。
 
-このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。Agent の他のバージョン用の go-metro バイナリをビルドする方法については、[Datadog/go-metro の使用法][1]を参照してください。
+このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。Agent の他のバージョンで go-metro バイナリをビルドする方法については、[Datadog/go-metro の使用法][1]を参照してください。
 
 ## セットアップ
 
@@ -47,7 +46,9 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### コンフィギュレーション
 
-Agent の `conf.d` ディレクトリにある `go-metro.yaml` ファイルを編集します。以下のサンプルファイルは、app.datadoghq.com と 192.168.0.22 の TCP RTT 回数を表示します。
+[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `go-metro.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル go-metro.d/conf.yaml][3] を参照してください。
+
+次の例では、`app.datadoghq.com` と `192.168.0.22` の TCP RTT 回数を取得します。
 
 ```yaml
 init_config:
@@ -68,8 +69,6 @@ instances:
       hosts:
           - app.datadoghq.com
 ```
-
-{{< insert-example-links conf="go-metro" check="none" >}}
 
 ### 検証
 
@@ -101,3 +100,5 @@ TCP RTT チェックが開始している場合は、上のような go-metro �
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
 
 [1]: https://github.com/DataDog/go-metro#usage
+[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/datadog_checks/go-metro/data/conf.yaml.example

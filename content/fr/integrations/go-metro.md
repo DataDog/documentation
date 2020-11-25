@@ -1,7 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -11,6 +14,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md'
 display_name: Go-Metro
+draft: false
 git_integration_title: go-metro
 guid: 6d00688b-32b1-4755-98cd-44bd1bd40428
 integration_id: go-metro
@@ -64,7 +68,8 @@ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ### Configuration
 
-Modifiez le fichier `go-metro.yaml` dans le répertoire `conf.d` de votre Agent. Consultez [l'exemple de fichier go-metro.yaml][3] pour découvrir toutes les options de configuration disponibles. Voici un exemple de fichier qui affichera les durées TCP RTT pour app.datadoghq.com et 192.168.0.22 :
+Modifiez le fichier `go-metro.yaml` dans le répertoire `conf.d` de votre Agent. Consultez [le fichier d'exemple go-metro.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Voici un exemple de fichier qui affichera les durées TCP RTT pour app.datadoghq.com et 192.168.0.22 :
 
 ```yaml
 init_config:
@@ -84,6 +89,25 @@ instances:
     hosts:
       - app.datadoghq.com
 ```
+
+*REMARQUE* : pour que go metro s'exécute sans privilèges, vous devez définir les capacités CAP_NET_RAW  sur le binaire :
+```
+# Installer les bibliothèques requises
+$ sudo apt-get install libcap  # debian
+$ sudo apt-get install libcap2-bin  # autre bibliothèque debian
+$ sudo yum install libcap  # redhat
+$ sudo yum install compat-libcap1  # autre bibliothèque redhat
+
+# Définir les capacités
+$ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro`
+```
+
+Étant donné que les noms des packages varient selon les distributions, si les instructions ci-dessus ne fonctionnent pas dans votre environnement, exécutez `apt-cache search libcap` ou `yum search libcap` pour afficher une sélection des packages qui peuvent fournir le binaire. N'hésitez pas à nous contacter si vous avez besoin d'aide.
+
+Veuillez également noter que go-metro enregistre ses entrées dans son propre fichier de log, qui se trouve à l'emplacement /var/log/datadog/go-metro.log.
+De plus, go-metro s'exécute indépendamment. Il ne s'affiche donc *PAS* dans la page d'informations de l'Agent.
+
+Enfin, puisque le binaire go-metro est inclus avec les distributions RPM et DEB 64 bits de datadog-agent, il est uniquement disponible dans ces versions. Ainsi, il n'est actuellement pas disponible avec l'installation depuis les sources ou les packages 32 bits.
 
 ### Validation
 

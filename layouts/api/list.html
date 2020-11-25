@@ -1,7 +1,9 @@
 {{ define "api-main" }}
 
     {{ with .Content}}
-        {{ . }}
+        <div class="col-12 col-lg-9">
+            {{ . }}
+        </div>
     {{ end }}
 
     {{ $dot := . }}
@@ -43,7 +45,7 @@
 
     <!-- Get the general API server url -->
     {{ $servers := index (index $d "servers") 0 }}
-    {{ $.Scratch.Set "serverURLS" slice }}
+    {{ $.Scratch.Set "regions" dict }}
     {{ $serverURL := ""}}
 
     {{ range $servers.variables.site.enum }}
@@ -55,9 +57,11 @@
             {{ $region = "us"}}
         {{ end }}
 
-        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region) }}
+        {{ $.Scratch.SetInMap "regions" $region $serverURL }}
 
     {{ end }}
+
+    {{ $.Scratch.Set "globalRegions" ($.Scratch.Get "regions") }}
 
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $ParamTitleEn $v.name }}
@@ -118,7 +122,7 @@
 
                     {{ $servers := index . 0 }}
 
-                    {{ $.Scratch.Set "serverURLS" slice }}
+                    {{ $.Scratch.Set "regions" dict }}
 
                     {{ $serverURL := ""}}
 
@@ -133,13 +137,13 @@
                                 {{ $region = "us"}}
                             {{ end }}
 
-                            {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
+                            {{ $.Scratch.SetInMap "regions" $region $serverURL }}
 
                         {{ end }}
                     {{ else }}
                         <!-- If not, we're in a case where we talk to the local agent endpoint, like for tracing -->
                         {{ $serverURL = replace $servers.url "{site}" $servers.variables.site.default }}
-                        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" "local" ) }}
+                        {{ $.Scratch.SetInMap "regions" "local" $serverURL }}
                     {{ end }}
                 {{ end }}
 
@@ -154,7 +158,15 @@
                             <p class="alert-warning">{{ . | markdownify }}</p>
                         </div>
                         {{ end }}
-                        <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType | upper }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
+                        <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType | upper }}</span>&nbsp;
+                            {{- range $region, $url := $.Scratch.Get "regions" -}}
+                                <span class="d-none" data-region="{{ $region }}">{{ $url }}{{$context.pathKey}}</span>
+                            {{- end -}}
+                            {{- range $region, $url := $.Scratch.Get "globalRegions" -}}
+                                {{- if not (index ($.Scratch.Get "regions") $region) -}}
+                                    <span class="d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
+                                {{- end -}}
+                            {{- end -}}
                         </p>
                         <h3 class="mt-2">{{ i18n "overview" }}</h3>
                         <p>{{ $translate_action.description | default .action.description | markdownify }}</p>
@@ -570,7 +582,7 @@
                                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                                         </div>
 
-                                        {{ highlight $file_content $lang.name "" }}
+                                        {{ highlight $file_content $lang.syntax "" }}
                                     </div>
                                     </div>
                                     {{ $count = add $count 1 }}

@@ -81,13 +81,13 @@ Suivez les étapes ci-dessous pour configurer l'appareil IoT Edge, les modules d
         - `ExperimentalFeatures__Enabled`: `true`
         - `ExperimentalFeatures__EnableMetrics`: `true`
 
-1. Configurez le module de runtime **Edge Hub** comme suit :
+2. Configurez le module de runtime **Edge Hub** comme suit :
     - La version de l'image doit être `1.0.10` ou une version ultérieure.
     - Sous « Environment Variables », activez les métriques expérimentales en ajoutant ces variables d'environnement (notez les doubles underscores) :
         - `ExperimentalFeatures__Enabled`: `true`
         - `ExperimentalFeatures__EnableMetrics`: `true`
 
-1. Installez et configurez l'Agent Datadog en tant que **module personnalisé** :
+3. Installez et configurez l'Agent Datadog en tant que **module personnalisé** :
     - Définissez le nom du module. Par exemple : `datadog-agent`.
     - Définissez l'URI de l'image de l'Agent. Par exemple : `datadog/agent:7`.
     - Sous « Environment Variables », configurez votre `DD_API_KEY`. Vous pouvez également définir d'autres paramètres de configuration ici (voir [Variables d'environnement de l'Agent][6]).
@@ -116,18 +116,18 @@ Suivez les étapes ci-dessous pour configurer l'appareil IoT Edge, les modules d
 
     - Enregistrez le module personnalisé de l'Agent Datadog.
 
-1. Enregistrez et déployez les modifications apportées à la configuration de votre appareil.
+4. Enregistrez et déployez les modifications apportées à la configuration de votre appareil.
 
 #### Collecte de logs
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer en configurant le module personnalisé de l'Agent Datadog :
-  - Sous « Environment Variables », définissez la variable d'environnement `DD_LOGS_ENABLED` :
+    - Sous « Environment Variables », définissez la variable d'environnement `DD_LOGS_ENABLED` :
 
-    ```yaml
-    DD_LOGS_ENABLED: true
-    ```
+        ```yaml
+        DD_LOGS_ENABLED: true
+        ```
 
-1. Configurez les modules **Edge Agent** et **Edge Hub**. Sous « Create Options », ajoutez l'étiquette suivante :
+2. Configurez les modules **Edge Agent** et **Edge Hub**. Sous « Create Options », ajoutez l'étiquette suivante :
 
     ```json
     "Labels": {
@@ -140,7 +140,7 @@ Suivez les étapes ci-dessous pour configurer l'appareil IoT Edge, les modules d
 
     Répétez cette opération pour tous les autres modules personnalisés dont vous souhaitez recueillir les logs.
 
-1. Enregistrez et déployez les modifications apportées à la configuration de votre appareil.
+3. Enregistrez et déployez les modifications apportées à la configuration de votre appareil.
 
 ### Validation
 

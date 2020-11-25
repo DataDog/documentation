@@ -21,6 +21,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "ListIncidents": {
+    "description": "Get all incidents for the user's organization.",
+    "summary": "Get a list of incidents"
+  },
+  "CreateIncident": {
+    "description": "Create an incident.",
+    "summary": "Create an incident",
+    "request_description": "Incident payload.",
+    "request_schema_description": "Create request for an incident."
+  },
+  "DeleteIncident": {
+    "description": "Deletes an existing incident from the users organization.",
+    "summary": "Delete an existing incident"
+  },
+  "GetIncident": {
+    "description": "Get the details of an incident by `incident_id`.",
+    "summary": "Get the details of an incident"
+  },
+  "UpdateIncident": {
+    "description": "Updates an incident. Provide only the attributes that should be updated as this request is a partial update.",
+    "summary": "Update an existing incident",
+    "request_description": "Incident Payload.",
+    "request_schema_description": "Update request for an incident."
+  },
   "AggregateLogs": {
     "description": "The API endpoint to aggregate events into buckets and compute metrics and timeseries.",
     "summary": "Aggregate events",
@@ -139,6 +163,10 @@
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
+  "ListProcesses": {
+    "description": "Get all processes for your organization.",
+    "summary": "Get all processes"
+  },
   "ListRoles": {
     "description": "Returns all roles, including their names and IDs.",
     "summary": "List roles"
@@ -229,7 +257,7 @@
     "request_description": "",
     "request_schema_description": "The request for a security signal list."
   },
-  "GetIncidentServices": {
+  "ListIncidentServices": {
     "description": "Get all incident services uploaded for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
     "summary": "Get a list of all incident services"
   },
@@ -253,7 +281,7 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
     "summary": "Get a list of all incident teams"
   },

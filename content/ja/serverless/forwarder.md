@@ -351,9 +351,7 @@ CloudFormation Stack は、次の IAM ロールを作成します。
 - `SourceZipUrl` - 実行内容を理解できない場合は、変更しないでください。
   関数のソースコードのデフォルトの場所を上書きします。
 - `PermissionBoundaryArn` - Permissions Boundary Policy の ARN
-- `DdApiKeySecretArn` - Secrets Manager にすでに格納されている場合は、Datadog API キーを格納するシークレットの ARN。
-  "DdApiKey" のダミー値を設定して要件を満たす必要がありますが、
-  その値は使用されません。
+- `DdApiKeySecretArn` - Datadog API キーを格納しているシークレットの ARN (すでに Secrets Manager に格納されている場合)。シークレットは、キーと値のペアではなく、プレーンテキストとして保存する必要があります。要件を満たすには、"DdApiKey" にダミー値を設定する必要がありますが、その値は使用されません。
 - `DdUsePrivateLink` - AWS PrivateLink を介したログとメトリクスの送信を有効にするには、true に設定します。
   https://dtdg.co/private-link を参照してください。
 - `VPCSecurityGroupIds` - VPC セキュリティグループ ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に

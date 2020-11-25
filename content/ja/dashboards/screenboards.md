@@ -72,6 +72,19 @@ tags:audit,dash
 
 このオプションを使うと、スクリーンボードを完全に削除できます。このとき、削除の確認を求められます。
 
+## グラフメニュー
+
+スクリーンボードグラフをクリックするとオプションメニューが開きます。
+
+| オプション                 | 説明                                                   |
+|------------------------|---------------------------------------------------------------|
+| View in full screen    | グラフを[全画面モード][6]で表示します。                     |
+| View related processes | グラフ参照範囲の[ライブプロセス][7]ページへジャンプします。   |
+| View related hosts     | グラフ参照範囲の[ホストマップ][8]ページへジャンプします。         |
+| View related logs      | グラフ参照範囲の[ログ][9]パネルに入力します。             |
+| 関連トレースを表示    | グラフ参照範囲の[トレース][10]パネルに入力します。          |
+| 関連プロファイルを表示  | グラフ参照範囲の[プロファイリング][11]ページへジャンプします。       |
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -81,3 +94,9 @@ tags:audit,dash
 [3]: /ja/events/
 [4]: /ja/account_management/users/default_roles/
 [5]: /ja/dashboards/#copy-import-export
+[6]: /ja/dashboards/widgets/#full-screen
+[7]: https://app.datadoghq.com/process
+[8]: https://app.datadoghq.com/infrastructure/map
+[9]: /ja/logs/
+[10]: /ja/tracing/
+[11]: /ja/tracing/profiler/

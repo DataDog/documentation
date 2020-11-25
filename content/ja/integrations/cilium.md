@@ -154,7 +154,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### サービスのチェック
 
-`cilium.prometheus.health`: Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+**cilium.prometheus.health**: <br>
+ Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ### イベント
 

@@ -308,7 +308,98 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 Azure から Datadog へログを送信する最適な方法は、Agent または DaemonSet を使うことです。一部のリソースではできない場合があります。その場合、Azure Event Hub を使いログ転送パイプラインを作成し、[Azure プラットフォームログ][54]を収集することをお勧めします。Azure プラットフォームログを Event Hub にストリーミングできないリソースには、Blob Storage 転送オプションを使用できます。
 
 {{< tabs >}}
-{{% tab "Event Hub" %}}
+
+{{% tab "自動インストール" %}}
+
+Datadog が提供する、使用できる自動スクリプトは 2 つあります。
+
+最初のスクリプトは、アクティビティログを Datadog アカウントにストリーミングするために必要な Azure リソースを作成、構成します。これらのリソースには、アクティビティログの診断設定、Azure Functions、Event Hub ネームスペース、Event Hub が含まれます。
+
+2 番目のスクリプトは、診断設定なしで、Event Hub と Azure Function の部分のみをデプロイするより一般的なオプションです。これは、ストリーミングソースを構成するために使用できます。いずれの場合も、Event Hub は他のストリーミングソースで使用できます。
+
+**例:**
+
+'westus' からアクティビティログとリソースログの両方をストリーミングする場合は、オプションのパラメーター '-ResourceGroupLocation westus' を含む最初のスクリプトを実行します (アクティビティログはサブスクリプションレベルのソースであるため、任意のリージョンでパイプラインを作成できます)。これがデプロイされると、'westus' のリソースに診断設定を追加することで、同じ Event Hub を介してリソースログを送信できます。
+
+
+#### Azure から Datadog へのアクティビティログの送信:
+
+**ステップ 1:** Azure ポータルで、**Cloud Shell** に移動します。
+
+{{< img src="integrations/azure/azure_cloud_shell.png" alt="azure cloud shell" popup="true" style="width:100%">}}
+
+**ステップ 2:** 以下のコマンドを実行して、自動化スクリプトを Cloud Shell 環境にダウンロードします。
+
+{{< code-block lang="powershell" filename="アクティビティログステップ 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1", "activity_logs_deploy.ps1")
+
+{{< /code-block >}}
+
+[スクリプトの内容を表示][1]することもできます。
+
+**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][2]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
+
+{{< code-block lang="powershell" filename="アクティビティログステップ 2" >}}
+
+./activity_logs_deploy.ps1 -ApiKey <api_key> -SubscriptionId <subscription_id> 
+
+{{< /code-block >}}
+
+#### Azure から Datadog へのプラットフォームログの送信:
+
+Azure プラットフォームログ (リソースログを含む) を送信するための一般的なソリューションの場合、Event Hub とログフォワーダーのみをデプロイすることもできます。
+このパイプラインをデプロイした後、各ログソースの診断設定を作成し、Datadog にストリーミングするように構成できます。
+
+**ステップ 1:** Azure ポータルで、**Cloud Shell** に移動します。
+
+**ステップ 2:** 以下のコマンドを実行して、自動化スクリプトを Cloud Shell 環境にダウンロードします。
+
+{{< code-block lang="powershell" filename="プラットフォームログステップ 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+
+{{< /code-block >}}
+
+[スクリプトの内容を表示する](https://github.
+com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1)こともできます。
+
+**ステップ 3:** 以下のコマンドを実行してスクリプトを呼び出します。**`<api_key>`** を [Datadog API トークン][2]に置き換え、**`<subscription_id>`** を Azure サブスクリプション ID に置き換えます。他のオプションのパラメーターを追加して、デプロイを構成することもできます。[オプションのパラメーター](#optional-parameters)を参照してください。
+
+{{< code-block lang="powershell" filename="プラットフォームログステップ 2" >}}
+
+./resource_deploy.ps1 -ApiKey <api_key> -SubscriptionId <subscription_id> 
+
+{{< /code-block >}}
+
+**ステップ 4:** Datadog にログを送信するすべての Azure リソースの診断設定を作成します。これらの診断設定を構成して、作成したばかりの Event Hub へのストリーミングを開始します。
+
+**注:** リソースは同じ Azure リージョン内の Event Hub にのみストリーミングできるため、リソースログをストリーミングするリージョンごとにステップ 2 を繰り返す必要があります。
+
+**注:** プラットフォームログパイプライン用にデプロイされたすべての Azure リソースには、デフォルト名に追加された Resource-Group-Location が含まれています。例: 'datadog-eventhub-westus'。ただし、パラメーターをオーバーライドすれば、この規則を変更できます。
+
+#### オプションパラメーター
+
+**注:** パラメーターをカスタマイズするときは、カスタムリソース名が一意であることを確認してください。リソース名が他の Azure リソースのリスト内にまだ存在していないことを確認します。
+
+| -Flag `<Default Parameter>`                                           | 説明                                                                                                                                                      |
+|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -DatadogSite `<datadoghq.com>`                                        | このフラグを別の datadog-url を使用してパラメーターとして追加して、Datadog インスタンスをカスタマイズします。(datadoghq.eu、ddog-gov.com、または us3.datadoghq.com を使用できます)      |
+| -ResourceGroupLocation `<westus2>`                                    | 更新された Azure-region を使用してこのフラグを追加することにより、Azure Resource-Group と Resources がデプロイされるリージョンを選択できます。              |
+| -ResourceGroupName `<datadog-log-forwarder-rg>`                       | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure リソースグループ名をカスタマイズします。                                                                          |
+| -EventhubNamespace `<datadog-eventhub-namespace>`                     | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub ネームスペースをカスタマイズします。                                                                          |
+| -EventhubName `<datadog-eventhub>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Event-Hub 名をカスタマイズします。                                                                               |
+| -FunctionAppName `<datadog-functionapp>`                              | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function-App 名をカスタマイズします。                                                                            |
+| -FunctionName `<datadog-function>`                                    | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Function 名をカスタマイズします。                                                                                |
+| -DiagnosticSettingName `<datadog-activity-logs-diagnostic-setting>`   | 更新されたパラメーターを使用してこのフラグを追加することにより、Azure Diagnostic-Setting 名をカスタマイズします。**(アクティビティログの送信にのみ関連)**                        |
+
+
+
+[1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[2]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+
+{{% tab "手動インストール" %}}
 
 Azure から Datadog にログを送信するには、以下の手順に従ってください。
 

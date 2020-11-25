@@ -51,7 +51,7 @@ spec:
       name: dd-agent
     spec:
       containers:
-      - image: datadog/docker-dd-agent:latest
+      - image: gcr.io/datadoghq/docker-dd-agent:latest
         imagePullPolicy: Always
         name: dd-agent
         ports:
@@ -285,7 +285,7 @@ Checks
 ```
 
 [1]: https://github.com/DataDog/docker-dd-agent
-[2]: https://hub.docker.com/r/datadog/docker-dd-agent
+[2]: https://gcr.io/datadoghq/docker-dd-agent
 [3]: /#host-setup
 [4]: /integrations/docker_daemon/
 [5]: /agent/kubernetes/
