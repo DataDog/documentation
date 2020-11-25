@@ -1,3 +1,4 @@
 ---
 title: Monitors
+draft: true
 ---

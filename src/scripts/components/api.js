@@ -112,6 +112,15 @@ $('.hasChildData .js-collapse-trigger').click(function () {
     $(this).find('.toggle-arrow').toggleClass('expanded');
 });
 
+$('.toggle-version-tab').click(function() {
+    const url = $(this).attr('href');
+    const el = $(`a[href="${url}"]`);
+    if(el) {
+      el.tab('show');
+    }
+    return false;
+});
+
 // Scroll the active top level nav item into view below Docs search input
 if (document.body.classList.contains('api')) {
     const headerHeight = $('body > header').height();
