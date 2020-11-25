@@ -37,8 +37,6 @@ These performance metrics are key for helping you start your investigations:
 - **First Contentful Paint:** How long until something is displayed. Check the RUM waterfall for blocking resources and long tasks preventing the browser from rendering content.
 - **Loading Time:** How long until the page is interactive. Check the RUM waterfall to see if you're loading too many assets, or if some resources are blocking the rendering.
 
-{{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
-
 ## All performance metrics
 
 For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists the performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
