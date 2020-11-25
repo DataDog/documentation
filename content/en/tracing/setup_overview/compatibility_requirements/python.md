@@ -36,6 +36,8 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Molten][8]              | >= 0.7.0          | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][9]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [Sanic][43]             | >= 19.6.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic |
+| [Starlette][44]             | >= 0.13.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][11]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
 
@@ -131,3 +133,5 @@ The `ddtrace` library includes support for the following libraries:
 [40]: http://jinja.pocoo.org
 [41]: https://kombu.readthedocs.io/en/latest
 [42]: https://www.makotemplates.org
+[43]: https://sanic.readthedocs.io/en/latest/
+[44]: https://www.starlette.io/
