@@ -18549,7 +18549,8 @@ paths:
           items:
             type: string
           type: array
-      - description: Maximum number of results to return.
+      - description: Maximum number of results to return (between 1 and 5000) - defaults
+          to 500 results if limit not specified.
         in: query
         name: limit
         required: false
@@ -18578,7 +18579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top 500 custom metrics by hourly average
+      summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
   /api/v1/usage/traces:

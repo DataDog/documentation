@@ -874,7 +874,7 @@
   },
   "GetUsageTopAvgMetrics": {
     "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average.",
-    "summary": "Get top 500 custom metrics by hourly average"
+    "summary": "Get top custom metrics by hourly average"
   },
   "GetUsageTrace": {
     "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",
