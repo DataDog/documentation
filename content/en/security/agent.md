@@ -16,6 +16,22 @@ This article is part of a [series on data security][1].
 
 Customers can send data to the Datadog service by using a locally installed [Agent][2] or through our [HTTP API][3]. While use of Datadog does not strictly require use of the Datadog Agent, the vast majority of customers leverage the Agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.
 
+## Agent distribution
+
+The official repositories and/or binary packages of the Agent are signed. You can verify the distribution channel you are using by checking the signature against one of the following public keys:
+
+- APT repo metadata:
+  - https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
+  - https://keyserver.ubuntu.com/pks/lookup?op=hget&search=3e8510ce571008616b42bd67916e83f8
+- RPM packages and repo metadata:
+  - https://yum.datadoghq.com/DATADOG_RPM_KEY_20200908.public
+  - https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+  - https://yum.datadoghq.com/DATADOG_RPM_KEY.public (Agent 6 and older only)
+- Windows MSI:
+  - DigiCert certificate fingerprint 21fe8679bdfb16b879a87df228003758b62abf5e
+- MacOS PKG:
+  - Apple certificate fingerprint FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA
+
 ## Information Security
 
 The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce TLS 1.2 when connecting to Datadog. Customers who require the use of "strong cryptography," for example, to meet PCI requirements, should use Agent v6 and set the `force_tls_12: true` setting in the Agent's configuration file.
