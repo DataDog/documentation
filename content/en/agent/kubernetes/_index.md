@@ -74,13 +74,30 @@ This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. 
 
 Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 
-**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
+**Notes**:
+
+- For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
+- If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, the Docker Hub registry can be used with the images [datadog/agent][9] and [datadog/cluster-agent][10] by using the following configuration in the `values.yaml` file:
+
+    ```yaml
+    agents:
+      image:
+        repository: datadog/agent
+
+    clusterAgent:
+      image:
+        repository: datadog/cluster-agent
+
+    clusterChecksRunner:
+      image:
+        repository: datadog/agent
+    ```
 
 ### Upgrading from chart v1.x
 
 The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way.
 
-If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][8] to map your previous settings with the new fields.
+If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
 
 
 [1]: https://v3.helm.sh/docs/intro/install/
@@ -90,7 +107,10 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 [5]: /agent/kubernetes/apm?tab=helm
 [6]: /agent/kubernetes/log?tab=helm
 [7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
-[8]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[8]: https://gcr.io/datadoghq
+[9]: https://hub.docker.com/r/datadog/agent
+[10]: https://hub.docker.com/r/datadog/cluster-agent
+[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
