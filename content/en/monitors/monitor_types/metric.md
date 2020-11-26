@@ -126,7 +126,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 * The `average`, `maximum`, `minimum`, or `in total`
 * of the `change` or `% change`
-* over `5 minutes`, `15 minutes`, `1 hour`, ... or `custom` to set a value between 1 minute and 48 hours.
+* over `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 * compared to `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours before.
 * is `above`, `above or equal to`, `below`, or `below or equal to` the threshold.
 
