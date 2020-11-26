@@ -18,7 +18,7 @@ Customers can send data to the Datadog service by using a locally installed [Age
 
 ## Agent distribution
 
-The official repositories and/or binary packages of the Agent are signed. You can verify the distribution channel you are using by checking the signature against one of the following public keys:
+The official repositories and/or binary packages of the Agent are signed. Verify the distribution channel by checking the signature against one of the following public keys:
 
 - APT repo metadata:
   - https://keyserver.ubuntu.com/pks/lookup?op=hget&search=d1402d39517b9f8888abfc98d6936dab
