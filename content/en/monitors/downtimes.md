@@ -38,7 +38,7 @@ Schedule a downtime based on one or more [monitor tags][1]. You must select at l
 
 If you choose to silence monitors constrained by scope, click **Preview affected monitors** to see the monitors included. Any monitors created or edited after the downtime is scheduled are automatically included in the downtime if they match the scope.
 
-**Note**: If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`. 
+**Note**: If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
 ### Schedule
 
