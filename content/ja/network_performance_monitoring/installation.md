@@ -24,7 +24,7 @@ further_reading:
 - Amazon AMI 2016.03 以降
 - Amazon Linux 2
 
-[CentOS/RHEL 7.6 以降][2]の要件は、kernel 4.4.0 以降では適用外です。[DNS 解決][3]機能は CentOS/RHEL 7.6 ではサポートされていません。
+[CentOS/RHEL 7.6 以降][2]の要件は、kernel 4.4.0 以降では適用外のものがあります。[DNS 解決][3]機能は CentOS/RHEL 7.6 ではサポートされていません。
 
 ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
 1) Cilium バージョン 1.6 以降、および
