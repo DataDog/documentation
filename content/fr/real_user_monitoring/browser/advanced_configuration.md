@@ -177,6 +177,36 @@ window.DD_RUM &&
 
 **Remarque** : respectez la [convention de nommage Datadog][2] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
 
+### Lire le contexte global
+
+Une fois le Real User Monitoring (RUM) lancé, lisez le contexte global avec l'API `getRumGlobalContext()` :
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+const context = datadogRum.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
+```javascript
+DD_RUM.onReady(function() {
+  var context = DD_RUM.getRumGlobalContext();
+});
+```
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
+
+```javascript
+var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Actions utilisateur personnalisées
 
 Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur lorsque vous souhaitez surveiller des interactions spécifiques sur les pages de votre application ou mesurer des délais personnalisés avec l'API `addUserAction(name: string, context: Context)` :
@@ -207,7 +237,7 @@ DD_RUM.onReady(function() {
     DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
 })
 
-// Exemple de code
+// Code example
 DD_RUM.onReady(function() {
     DD_RUM.addUserAction('checkout', {
         cart: {
@@ -220,7 +250,7 @@ DD_RUM.onReady(function() {
 })
 ```
 {{% /tab %}}
-{{% tab "CDN asynchrone" %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_RUM && DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
@@ -311,7 +341,7 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN asynchrone" %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 // Envoyer une erreur personnalisée avec contexte
