@@ -183,7 +183,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][3] :
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir

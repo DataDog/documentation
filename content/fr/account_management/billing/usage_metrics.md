@@ -26,6 +26,11 @@ Les métriques d'estimation de l'utilisation sont généralement disponibles pou
 | Métriques custom       | `datadog.estimated_usage.metrics.custom` |
 | Octets de log ingérés  | `datadog.estimated_usage.logs.ingested_bytes`          |
 | Événements de log ingérés | `datadog.estimated_usage.logs.ingested_events`   |
+| Hosts d'APM            | `datadog.estimated_usage.apm_hosts`      |
+| Spans indexées de l'APM   | `datadog.estimated_usage.logs.apm.indexed_spans` |
+| Octets ingérés de l'APM   | `datadog.estimated_usage.logs.apm.ingested_bytes` |
+| Spans ingérées de l'APM   | `datadog.estimated_usage.logs.apm.ingested_spans` |
+| Fonctions Lambda sans serveur | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 
 Les métriques d'utilisation reposant sur des logs doivent être activées manuellement depuis la page [Generate Metrics][1].
 
