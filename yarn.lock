@@ -5931,10 +5931,10 @@ https@^1.0.0:
   resolved "https://registry.yarnpkg.com/https/-/https-1.0.0.tgz#3c37c7ae1a8eeb966904a2ad1e975a194b7ed3a4"
   integrity sha1-PDfHrhqO65ZpBKKtHpdaGUt+06Q=
 
-hugo-bin@0.59.1:
-  version "0.59.1"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.59.1.tgz#96683a522563ead42a3dd44f93dc18aa6091ce34"
-  integrity sha512-mPKgNTuvqIo98xoRYKbKxdhv+yANSDziB+6PHvPG1BHJ6pAuhi/73r21ywbAmEnAsir4gQTtkge9kXse3FvTeA==
+hugo-bin@^0.67.0:
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.67.0.tgz#4a9a81271b64c2c04fc16ebe5760bc94595da60f"
+  integrity sha512-EvNzhWGqE2Pb1idPPLlyIIK2VC3so3sdYShC2ohxsHCGNVWoe/D25KPJ5oIVpakxTu4SSH7Kr37RUMsa0yGQ+g==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
