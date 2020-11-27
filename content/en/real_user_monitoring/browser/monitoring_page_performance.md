@@ -16,16 +16,16 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-When a user visits a page on your website, a new **RUM view event** is created. The view contains live page load and performance metrics. Performance metrics are sent to Datadog as the page finishes loading, but might be empty for a few seconds before they appear in the Datadog UI.
+When a user visits a page on your website, a new **RUM view event** is created. The view contains live page load and performance metrics. Performance metrics are sent to Datadog periodically as the page finishes loading, and might be empty for a few seconds before they appear in the Datadog UI.
 
 ## Identifying performance bottlenecks
 
 To find what's causing a page to under-perform:
 
 1. Set up and configure [RUM Browser monitoring][1] for your application.
-2. Open the [Performance Overview dashboard][2]. It provides you with a high level view of your monitored pages, and you can apply filters to find pages with performance problems.
+2. From the RUM Applications page, open the [Performance Overview dashboard][2]. It provides you with a high level view of your monitored pages. Apply filters to narrow your search and uncover performance problems.
 3. When you find a page with problem, click the event to open it in the [RUM Explorer][3].
-4. Open the event side panel to see what is causing the performance issue with the help of the waterfall.
+4. Click on one particular view in the RUM Explorer to access performance information and a lot of details about that specific page view, in the side panel. Troubleshoot the performance bottleneck or other issue with the the waterfall.
 
 ## Performance metrics for views
 
@@ -39,7 +39,7 @@ These performance metrics are key for helping you start your investigations:
 
 ## All performance metrics
 
-For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists the performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
+For information about the default attributes for all RUM event types, see [Data Collected][5]. For information about configuring for sampling, global context, or custom user actions and custom errors, see [Advanced Configuration][6]. The following table lists Datadog-specific metrics along with performance metrics collected from [Navigation Timing API][7] and [Paint Timing API][8]:
 
 | Attribute                              | Type        | Description                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
