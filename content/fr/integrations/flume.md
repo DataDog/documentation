@@ -90,7 +90,7 @@ Pour obtenir la liste complète des métriques exposées par chaque composant, v
 
 **flume.can_connect** :
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Flume qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Flume qu'il surveille et à y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 
