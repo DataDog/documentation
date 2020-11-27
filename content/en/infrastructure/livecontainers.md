@@ -87,7 +87,22 @@ In some setups, the Process Agent and Cluster Agent are unable to automatically 
             - get
             - watch
         ```
-
+Live Containers need permissions to collect common kubernetes resources (pods, services, nodes ..), which should be already in the RBAC if following [Cluster Agent Setup documentation][2].
+If not, the missing resources should be added:
+```
+          - apiGroups:  # to collect new resource types
+            - "apps"
+            resources:
+            - deployments
+            - replicasets
+            - pods
+            - nodes
+            - services
+            verbs:
+            - list
+            - get
+            - watch
+```
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect Deployments and ReplicaSets.
 
     If the `cluster-id` ConfigMap doesn't get created by the Cluster Agent, the Agent pod will not start, and fall in `CreateContainerConfigError` status. If the Agent pod is stuck because this ConfigMap doesn't exist, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap and the Agent pod will recover automatically.
