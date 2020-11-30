@@ -77,7 +77,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 You can upload custom certificates to your private locations to have your API and Browser tests perform SSL handshake using your own `.pem` files. When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs`, the same way your private location configuration file is mounted. These certificates are then considered trusted CA and used as such at test runtime.
 
-**Note**: This feature is supported for versions >1.5.3 of the image.
+**Note**: This feature is supported for versions >1.5.3 of the private location Docker image.
 
 ## Private Locations Admin
 
