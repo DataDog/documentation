@@ -20,9 +20,7 @@ PHP APM supports the following PHP versions:
 
 | Version    | Support type                          |
 |:-----------|:--------------------------------------|
-| 8.0.0 RC 3 | Experimental Support (as of `0.50.0`) |
-| 8.0.0 RC 2 | Experimental Support (as of `0.50.0`) |
-| 8.0.0 RC 1 | Experimental Support (as of `0.49.0`) |
+| 8.0.x      | Fully Supported (as of `0.52.0`)      |
 | 7.4.x      | Fully Supported                       |
 | 7.3.x      | Fully Supported                       |
 | 7.2.x      | Fully Supported                       |
@@ -57,6 +55,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CakePHP        | 2.x           | All supported PHP versions |
 | CodeIgniter    | 2.x, 3.x      | PHP 7+                     |
 | Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
+| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions |
 | Lumen          | 5.2+          | All supported PHP versions |
 | Slim           | 3.x           | All supported PHP versions |
 | Symfony 3      | 3.3, 3.4      | All supported PHP versions |
