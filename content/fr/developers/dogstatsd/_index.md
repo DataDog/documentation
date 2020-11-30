@@ -30,9 +30,15 @@ Vous pouvez utiliser n'importe quel client StatsD conforme avec DogStatsD et l'A
 
 **Remarque** : DogStatsD n'implémente PAS les minuteurs de StatsD en tant que type de métrique native (bien qu'il [les prend en charge par l'intermédiaire des histogrammes][2]).
 
+DogStatsD est disponible sur Docker Hub et GCR :
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+
 ## Fonctionnement
 
-DogStatsD accepte les [métriques custom][3], les [événements][4] et les [checks de service][5] par le biais du protocole UDP. Il les agrège et les transmet régulièrement à Datadog.
+DogStatsD accepte les [métriques custom][5], les [événements][6] et les [checks de service][7] par le biais du protocole UDP. Il les agrège et les transmet régulièrement à Datadog.
 
 Grâce au protocole UDP, votre application peut envoyer des métriques à DogStatsD et reprendre sa tâche sans attendre de réponse. Si jamais DogStatsD devient indisponible, votre application continue à fonctionner sans interruption.
 
@@ -40,7 +46,7 @@ Grâce au protocole UDP, votre application peut envoyer des métriques à DogSta
 
 Lorsque DogStatsD reçoit des données, il agrège de nombreux points de données pour chaque métrique en un point de données unique sur une période désignée par le terme _intervalle de transmission_ (par défaut, dix secondes).
 
-## Implémentation
+## Configuration
 
 DogStatsD est activé par défaut sur le port UDP `8125` à partir de la version 6 de l'Agent. Si vous ne devez pas changer ce port, passez directement à la [configuration de DogStatsD dans votre code](#code).
 
@@ -85,7 +91,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_API_KEY="<CLÉ_API_DATADOG>" \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 Si vous devez modifier le port utilisé pour recueillir des métriques StatsD, utilisez la variable d'environnement `DD_DOGSTATSD_PORT="<NOUVEAU_PORT_DOGSTATSD>`. Vous pouvez également configurer DogStatsD de façon à utiliser un [socket de domaine Unix][1] :
@@ -108,7 +114,7 @@ Pour commencer à recueillir vos métriques StatsD, vous devez associer le port 
 
      Vos applications peuvent ainsi envoyer des métriques via DogStatsD sur le port `8125` sur les nœuds sur lesquels elles s'exécutent.
 
-     **Remarque** : la fonction `hostPort` requiert un fournisseur de solution réseau qui respecte la [spécification CNI][2], tel que Calico, Canal ou Flannel. Pour obtenir davantage d'informations, et notamment pour trouver une solution pour les fournisseurs de solution réseau ne respectant pas la spécification CNI, consultez la [documentation Kubernetes][3].
+     **Remarque** : la fonction `hostPort` requiert un fournisseur de solution réseau qui respecte la [spécification CNI][2], tel que Calico, Canal ou Flannel. Pour obtenir davantage d'informations, et notamment pour trouver une solution pour les fournisseurs de solution réseau ne respectant pas la spécification CNI, consultez la [documentation Kubernetes][3].
 
 2. Activez le trafic DogStatsD non local pour permettre la collecte de données StatsD en définissant `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` sur `true` dans votre manifeste `datadog-agent.yaml` :
 
@@ -117,7 +123,7 @@ Pour commencer à recueillir vos métriques StatsD, vous devez associer le port 
       value: 'true'
     ```
 
-     Cela permet la collecte de données StatsD depuis des conteneurs autres que celui qui exécute l'Agent.
+     Cela permet de recueillir les données StatsD depuis des conteneurs autres que celui qui exécute l'Agent.
 
 3. Appliquez la modification :
 
@@ -130,7 +136,7 @@ Pour y remédier, ajoutez `hostNetwork: true` aux spécifications de pod de votr
 
 ### Envoyer des métriques StatsD à l'Agent
 
-Votre application doit maintenant pouvoir déterminer de façon fiable l'adresse IP de son host. La version 1.7 de Kubernetes vous permet d'y parvenir facilement, en élargissant l'ensemble d'attributs que vous pouvez transmettre à vos pods sous la forme de variables d'environnement. Dans cette version, et les versions supérieures, vous pouvez transmettre l'IP du host à n'importe quel pod en ajoutant une variable d'environnement au PodSpec. Voici un exemple de manifeste d'application :
+Votre application doit désormais pouvoir déterminer de façon fiable l'adresse IP de son host. La version 1.7 de Kubernetes vous permet d'y parvenir facilement, en élargissant l'ensemble d'attributs que vous pouvez transmettre à vos pods sous la forme de variables d'environnement. Dans cette version, et les versions ultérieures, vous pouvez transmettre l'IP du host à n'importe quel pod en ajoutant une variable d'environnement au PodSpec. Voici un exemple de manifeste d'application :
 
 ```yaml
 env:
@@ -146,7 +152,7 @@ Grâce à ce manifeste, un pod exécutant votre application peut transmettre des
 
 #### Détection de l'origine via UDP
 
-La détection de l'origine est prise en charge dans l'Agent 6.10.0+ et permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDP reçoivent les mêmes tags de conteneur que les métriques Autodiscovery.
+La détection de l'origine est prise en charge par l'Agent 6.10.0 et les versions ultérieures. Elle permet à DogStatsD de détecter la provenance des métriques de conteneur et de taguer automatiquement les métriques. Lorsque ce mode est activé, toutes les métriques transmises via UDP reçoivent les mêmes tags de conteneur que les métriques Autodiscovery.
 
 **Remarque** : comme alternative à UDP, vous pouvez utiliser des [sockets de domaine Unix][4].
 
@@ -175,7 +181,7 @@ Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec
 
 Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 
-1. Mettez à jour votre fichier [datadog-values.yaml][2] pour activer DogStatsD :
+1. Modifiez votre fichier [datadog-values.yaml][2] pour activer DogStatsD :
 
     ```yaml
       dogstatsd:
@@ -193,7 +199,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
     helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
-3. Mettez à jour les pods de votre application : votre application doit maintenant pouvoir déterminer de façon fiable l'adresse IP de son host. La version 1.7 de Kubernetes vous permet d'y parvenir facilement, en élargissant l'ensemble d'attributs que vous pouvez transmettre à vos pods sous la forme de variables d'environnement. Dans cette version, et les versions supérieures, vous pouvez transmettre l'IP du host à n'importe quel pod en ajoutant une variable d'environnement au PodSpec. Voici un exemple de manifeste d'application :
+3. Modifiez les pods de votre application : votre application doit désormais pouvoir déterminer de façon fiable l'adresse IP de son host. La version 1.7 de Kubernetes vous permet d'y parvenir facilement, en élargissant l'ensemble d'attributs que vous pouvez transmettre à vos pods sous la forme de variables d'environnement. Dans cette version, et les versions ultérieures, vous pouvez transmettre l'IP du host à n'importe quel pod en ajoutant une variable d'environnement au PodSpec. Voici un exemple de manifeste d'application :
 
     ```yaml
     env:
@@ -216,7 +222,7 @@ Pour recueillir des métriques custom via [DogStatsD][1] avec Helm :
 
 #### Installer le client DogStatsD
 
-Il existe des bibliothèques client DogStatsD officielles pour les langages suivants. Vous _pouvez_ utiliser n'importe quel [client StatsD générique][6] pour envoyer des métriques à DogStatsD, mais vous ne pourrez pas utiliser toutes les fonctionnalités de Datadog mentionnées ci-dessus :
+Il existe des bibliothèques client DogStatsD officielles pour les langages suivants. Vous _pouvez_ utiliser n'importe quel [client StatsD générique][8] pour envoyer des métriques à DogStatsD, mais vous ne pourrez pas utiliser toutes les fonctionnalités de Datadog mentionnées ci-dessus :
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -263,7 +269,7 @@ Ajoutez ce qui suit à votre fichier `composer.json` :
 "datadog/php-datadogstatsd": "1.4.*"
 ```
 
-**Remarque** : la première version distribuée dans Composer est la version _0.0.3_
+**Remarque** : la première version distribuée dans Composer est la version _0.0.3_.
 
 Vous pouvez également dupliquer manuellement le référentiel disponible sur [github.com/DataDog/php-datadogstatsd][1] et le configurer avec `require './src/DogStatsd.php'`.
 
@@ -346,7 +352,7 @@ public class DogStatsdClient {
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Instanciez un nouvel objet DogStatsD avec composer :
+Instanciez un nouvel objet DogStatsD avec Composer :
 
 ```php
 <?php
@@ -393,7 +399,7 @@ using (var dogStatsdService = new DogStatsdService())
 
 ### Paramètres d'instanciation du client
 
-**Remarque **: Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la documentation dédiée au [tagging de service unifié][7].
+**Remarque **: Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la documentation dédiée au [tagging de service unifié][9].
 
 En plus de la configuration DogStatsD obligatoire (`url` et `port`), vous pouvez configurer les paramètres facultatifs suivants pour votre client DogStatsD :
 
@@ -481,18 +487,20 @@ Pour en savoir plus, consultez la documentation relative à la [classe NonBlocki
 DogStatsD et StatsD sont assez semblables. Toutefois, DogStatsD comprend des fonctionnalités avancées propres à Datadog, notamment en ce qui concerne les types de données, les événements, les checks de service et les tags disponibles :
 
 {{< whatsnext desc="">}}
-{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Envoyer des métriques à Datadog avec DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/developers/events/dogstatsd/" >}}Envoyer des événements à Datadog avec DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Envoyer des checks de service à Datadog avec DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/developers/metrics/dogstatsd_metrics_submission/" >}}Envoyer des métriques à Datadog avec DogStatsD{{< /nextlink >}}
+{{< nextlink href="/developers/events/dogstatsd/" >}}Envoyer des événements à Datadog avec DogStatsD{{< /nextlink >}}
+{{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Envoyer des checks de service à Datadog avec DogStatsD{{< /nextlink >}}
 {{< /whatsnext >}}
 
-Si vous souhaitez approfondir vos connaissances sur le format des datagrammes utilisé par DogStatsD, ou concevoir votre propre bibliothèque Datadog, consultez la section [Datagramme et interface système][8], qui décrit également comment envoyer des métriques et des événements directement depuis la ligne de commande.
+Si vous souhaitez approfondir vos connaissances sur le format des datagrammes utilisé par DogStatsD, ou concevoir votre propre bibliothèque Datadog, consultez la section [Datagramme et interface système][10], qui décrit également comment envoyer des métriques et des événements directement depuis la ligne de commande.
 
 [1]: https://github.com/etsy/statsd
 [2]: /fr/developers/metrics/dogstatsd_metrics_submission/
-[3]: /fr/developers/metrics/custom_metrics/
-[4]: /fr/developers/events/dogstatsd/
-[5]: /fr/developers/service_checks/dogstatsd_service_checks_submission/
-[6]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /fr/getting_started/tagging/unified_service_tagging
-[8]: /fr/developers/metrics/
+[3]: https://hub.docker.com/r/datadog/dogstatsd
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[5]: /fr/developers/metrics/custom_metrics/
+[6]: /fr/developers/events/dogstatsd/
+[7]: /fr/developers/service_checks/dogstatsd_service_checks_submission/
+[8]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
+[9]: /fr/getting_started/tagging/unified_service_tagging
+[10]: /fr/developers/metrics/

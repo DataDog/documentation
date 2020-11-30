@@ -43,7 +43,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_SITE="<YOUR_DATADOG_SITE>" \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -56,7 +56,8 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
                               -e DD_API_KEY="<DATADOG_API_KEY>" \
                               -e DD_SITE="<YOUR_DATADOG_SITE>" \
-                              datadog/agent:latest
+                              gcr.io/datadoghq/agent:latest
+
 ```
 
 {{% /tab %}}
@@ -66,7 +67,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_SITE="<YOUR_DATADOG_SITE>" \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -141,7 +142,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
@@ -149,7 +150,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-              datadog/agent:latest \
+              gcr.io/datadoghq/agent:latest \
               -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}

@@ -48,12 +48,14 @@
 
         {{ if (hasPrefix $v.metric_name $m) }}
 
+          {{ if not (hasPrefix $v.metric_name "aws.stream") }}
           <tr>
             <td>
             <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
             <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
             </td>
           </tr>
+          {{ end }}
 
         {{ end }}
 
@@ -70,12 +72,14 @@
 <table class="table table-vertical-mobile table-metrics">
   <tbody>
   {{ range $k, $v := (index $data $integration) }}
-    <tr>
-      <td>
-      <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-      <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
-      </td>
-    </tr>
+    {{ if not (hasPrefix $v.metric_name "aws.stream") }}
+      <tr>
+        <td>
+        <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
+        <td>{{$v.description | safeHTML }}{{if $v.unit_name}}<br><em>Shown as {{$v.unit_name}}</em>{{end}}
+        </td>
+      </tr>
+    {{ end }}
   {{ end }}
   </tbody>
 </table>

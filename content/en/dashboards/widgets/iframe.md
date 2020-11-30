@@ -23,27 +23,15 @@ Enter the URL of the page you want to display inside the iframe. If you do not u
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the iframe widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
 
-```text
-IFRAME_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["iframe"]},
-        "url": {"type": "string"},
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][2] for the iframe widget is:
 
-| Parameter | Type   | Required | Description                                            |
-|-----------|--------|----------|--------------------------------------------------------|
-| `type`    | string | yes      | Type of the widget, for the iframe widget use `iframe` |
-| `url`     | string | yes      | URL of the iframe                                      |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

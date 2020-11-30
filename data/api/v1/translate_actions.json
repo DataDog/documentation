@@ -227,6 +227,22 @@
     "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
   },
+  "DeleteAWSTagFilter": {
+    "description": "Delete a tag filtering entry.",
+    "summary": "Delete a tag filtering entry",
+    "request_description": "Delete a tag filtering entry for a given AWS account and `dd-aws` namespace.",
+    "request_schema_description": "The objects used to delete an AWS tag filter entry."
+  },
+  "ListAWSTagFilters": {
+    "description": "Get all AWS tag filters.",
+    "summary": "Get all AWS tag filters"
+  },
+  "CreateAWSTagFilter": {
+    "description": "Set an AWS tag filter.",
+    "summary": "Set an AWS tag filter",
+    "request_description": "Set an AWS tag filter using an `aws_account_identifier`, `namespace`, and filtering string.\nNamespace options are `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs`, and `custom`.",
+    "request_schema_description": "The objects used to set an AWS tag filter."
+  },
   "CreateNewAWSExternalID": {
     "description": "Generate a new AWS external ID for a given AWS account ID and role name pair.",
     "summary": "Generate a new external ID",
@@ -650,6 +666,26 @@
     "description": "Get the list of public and private locations available for Synthetic\ntests. No arguments required.",
     "summary": "Get all locations (public and private)"
   },
+  "CreatePrivateLocation": {
+    "description": "Create a new Synthetics private location.",
+    "summary": "Create a private location",
+    "request_description": "Details of the private location to create.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
+  "DeletePrivateLocation": {
+    "description": "Delete a Synthetics private location.",
+    "summary": "Delete a private location"
+  },
+  "GetPrivateLocation": {
+    "description": "Get a Synthetics private location.",
+    "summary": "Get a private location"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Edit a Synthetics private location.",
+    "summary": "Edit a private location",
+    "request_description": "Details of the private location to be updated.",
+    "request_schema_description": "Object containing information about the private location to create."
+  },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
     "summary": "Get the list of all tests"
@@ -679,7 +715,7 @@
     "request_schema_description": "A JSON list of the ID or IDs of the Synthetic tests that you want\nto delete."
   },
   "TriggerCITests": {
-    "description": "Trigger a set of Synthetics tests for continuous integration",
+    "description": "Trigger a set of Synthetics tests for continuous integration.",
     "summary": "Trigger some Synthetics tests for CI",
     "request_description": "Details of the test to trigger.",
     "request_schema_description": "Object describing the synthetics tests to trigger."
@@ -838,7 +874,7 @@
   },
   "GetUsageTopAvgMetrics": {
     "description": "Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/) by hourly average.",
-    "summary": "Get top 500 custom metrics by hourly average"
+    "summary": "Get top custom metrics by hourly average"
   },
   "GetUsageTrace": {
     "description": "Get hourly usage for trace search.\n\n**Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.",

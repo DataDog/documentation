@@ -99,6 +99,10 @@
     "name": "PagerDuty Integration",
     "description": "Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)\ndirectly through the Datadog API."
   },
+  "processes": {
+    "name": "Processes",
+    "description": "[Check API version 2](/api/v2/processes/)."
+  },
   "roles": {
     "name": "Roles",
     "description": "[Check API version 2](/api/v2/roles/)."

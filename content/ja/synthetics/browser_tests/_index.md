@@ -32,7 +32,7 @@ further_reading:
 1. <mrk mid="23" mtype="seg"/><mrk mid="24" mtype="seg"/>
 2. **Advanced Options** (オプション): ブラウザテストに特定のオプションを設定します。
     * Headers: ヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]します。
-    * Authentication: HTTP 基本認証または NTLM を使用し、ユーザー名とパスワードで認証を行います。
+    * Authentication: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。
     * Cookies: クッキーを定義してデフォルトのブラウザクッキーに追加します。複数のクッキーを設定するには、次の書式を使用します `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`。
     * Proxy URL: リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`)。
 

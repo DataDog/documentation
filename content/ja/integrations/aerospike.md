@@ -33,7 +33,6 @@ short_description: Aerospike データベースからクラスターやネーム
 support: コア
 supported_os:
   - linux
-  - mac_os
 ---
 ## 概要
 
@@ -93,8 +92,8 @@ Aerospike チェックは Datadog Agent パッケージに含まれています�
 
 ### サービスのチェック
 
-- `aerospike.can_connect`
-- `aerospike.cluster_up`
+**aerospike.can_connect**
+**aerospike.cluster_up**
 
 ### イベント
 

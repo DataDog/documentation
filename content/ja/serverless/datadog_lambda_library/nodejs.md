@@ -4,7 +4,7 @@ dependencies:
 kind: ドキュメント
 title: Datadog Lambda Library for Node.js
 ---
-![CircleCI](https://img.shields.io/circleci/build/github/DataDog/datadog-lambda-js)
+![build](https://github.com/DataDog/datadog-lambda-js/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/datadog-lambda-js)](https://codecov.io/gh/DataDog/datadog-lambda-js)
 [![NPM](https://img.shields.io/npm/v/datadog-lambda-js)](https://www.npmjs.com/package/datadog-lambda-js)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
@@ -29,6 +29,8 @@ Datadog Lambda Library for Node.js は、拡張 Lambda メトリクス、分散�
 トレース収集の詳細については、[AWS Lambda 関数からのトレースの収集](https://docs.datadoghq.com/integrations/amazon_lambda/?tab=nodejs#trace-collection)をご覧ください。
 
 トレースとログの接続の詳細については、[Datadog トレースクライアントの公式ドキュメント](https://datadoghq.dev/dd-trace-js/)をご覧ください。
+
+`fs` モジュールは、デフォルトで無効になっています。有効にするには、環境変数 `DD_TRACE_DISABLED_PLUGINS` を `''` または無効にするプラグインのコンマ区切りリストに設定する必要がありまし。対応プラグインの一覧は、[こちら](https://docs.datadoghq.com/tracing/compatibility_requirements/nodejs/) をご覧ください。
 
 ### トレースおよびログ相関
 
@@ -107,7 +109,7 @@ module.exports.myHandler = datadog(myHandler, {
 
 X-Ray トレースと Datadog トレースの両方を使用するときに、X-Ray トレースと Datadog トレースをマージするには、`true` に設定します。デフォルトは `false` です。
 
-## 未解決の問題
+## 問題を開く
 
 このパッケージでバグが発生した場合は、お知らせください。新しい問題を開く前に、重複を避けるために既存の問題を検索してください。
 

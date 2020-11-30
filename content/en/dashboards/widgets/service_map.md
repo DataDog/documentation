@@ -2,6 +2,7 @@
 title: Service Map Widget
 kind: documentation
 description: "Displays a map of a service to all of the services that call it, and all of the services that it calls."
+widget_type: "servicemap"
 aliases:
     - /graphing/widgets/service_map/
 further_reading:
@@ -33,28 +34,11 @@ Services connected to the mapped service are sorted outwards from the middle by 
 
 ## API
 
-The dedicated [widget JSON schema definition][4] for the service map widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][4] documentation for additional reference.
 
-```text
-SERVICEMAP_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "type": {"enum": ["servicemap"]},
-            "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
-            "service": {"type": "string"},
-            "title": WidgetSchema.TITLE
-        },
-        "required": ["type", "filters", "service"],
-        "additionalProperties": False,
-    }
-```
+The dedicated [widget JSON schema definition][5] for the service map widget is:
 
-| Parameter | Type   | Required | Description                                                       |
-|-----------|--------|----------|-------------------------------------------------------------------|
-| type      | string | yes      | The type of widget, for the service map widget, use `servicemap`. |
-| service   | string | yes      | The ID of the service you want to map.                            |
-| filters   | object | yes      | Your env and primary tag (or `*` if enabled for your account).    |
-| title     | string | no       | The title of your widget.                                         |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
@@ -63,4 +47,5 @@ SERVICEMAP_SCHEMA = {
 [1]: /tracing/send_traces/
 [2]: /tracing/guide/setting_primary_tags_to_scope/
 [3]: /tracing/visualization/service/
-[4]: /dashboards/graphing_json/widget_json/
+[4]: /api/v1/dashboards/
+[5]: /dashboards/graphing_json/widget_json/

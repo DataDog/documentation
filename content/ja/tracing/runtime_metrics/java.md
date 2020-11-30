@@ -18,7 +18,7 @@ further_reading:
 ---
 ## 自動コンフィギュレーション
 
-JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に有効になっています。トレースクライアントの設定パラメーターで、システムプロパティ `-Ddd.jmxfetch.enabled=false` または環境変数 `DD_JMXFETCH_ENABLED=false` を使用して無効にすることも可能です。
+JVM メトリクス収集は、初期設定で Java トレーサー v0.29.0+ に有効になっています。トレースクライアントの設定パラメーターで、システムプロパティ `-Ddd.jmxfetch.enabled=false` または環境変数 `DD_JMXFETCH_ENABLED=false` を使用して無効にすることも可能です。v0.64.0+ では、`DD_RUNTIME_METRICS_ENABLED=false` 環境変数を使用して無効にすることもできます。
 
 JVM メトリクスは、Java サービスと相関して表示できます。Datadog の[サービス詳細画面][1]を参照してください。
 

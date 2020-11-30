@@ -39,7 +39,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
 The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
 
 ```dockerfile
-FROM datadog/agent:latest
+FROM gcr.io/datadoghq/agent:latest
 RUN agent integration install -r -t <INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 

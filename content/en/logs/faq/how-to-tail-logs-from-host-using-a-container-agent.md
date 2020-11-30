@@ -124,7 +124,7 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            -v /<host log directory>/:<container log directory>/ \
            -v /<config location>/logs.yaml:/conf.d/logs.yaml \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 {{% /tab %}}
 {{< /tabs >}}

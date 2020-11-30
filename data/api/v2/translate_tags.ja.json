@@ -47,6 +47,18 @@
     "name": "IP 範囲",
     "description": "[API バージョン 1 を参照](/api/v1/ip-ranges/)してください。"
   },
+  "incident-services": {
+    "name": "インシデントサービス",
+    "description": "インシデントに関連付けられるサービスを作成、更新、削除、取得します。"
+  },
+  "incident-teams": {
+    "name": "インシデントサービス",
+    "description": "インシデントに関連付けられるチームを作成、更新、削除、取得します。"
+  },
+  "incidents": {
+    "name": "インシデント",
+    "description": "インシデント対応を管理します。"
+  },
   "key-management": {
     "name": "Key Management",
     "description": "[API バージョン 1 を参照](/api/v1/key-management/)してください。"
@@ -111,10 +123,6 @@
     "name": "サービスレベル目標",
     "description": "[API バージョン 1 を参照](/api/v1/service-level-objectives/)してください。"
   },
-  "services": {
-    "name": "サービス",
-    "description": "組織のサービスを作成、更新、削除、取得します。"
-  },
   "slack-integration": {
     "name": "Slack インテグレーション",
     "description": "[API バージョン 1 を参照](/api/v1/slack-integration/)してください。"
@@ -130,10 +138,6 @@
   "tags": {
     "name": "タグ",
     "description": "[API バージョン 1 を参照](/api/v1/tags/)してください。"
-  },
-  "teams": {
-    "name": "チーム",
-    "description": "組織のチームを作成、更新、削除、取得します。"
   },
   "timeboards": {
     "name": "タイムボード",

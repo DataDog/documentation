@@ -30,12 +30,12 @@ Le suivi des erreurs permet de simplifier la surveillance grâce aux techniques 
 
 ## Prise en main
 
-Le suivi des erreurs traite les erreurs recueillies à partir du navigateur par le SDK RUM (erreurs avec [origine dans la source][1]).
+Le suivi des erreurs traite les erreurs recueillies à partir du navigateur par le SDK RUM. Dès lors qu'une erreur [source][1] ou [personnalisée][2] contenant une stack trace est recueillie, le suivi des erreurs assure son traitement et lui attribue une catégorie de problème afin de la rassembler avec des erreurs similaires.
 
 Pour démarrer rapidement le suivi des erreurs, procédez comme suit :
 
-1. Téléchargez la dernière version du [SDK RUM Browser][2].
-2. Configurez les paramètres __version__, __env__ et __service__ lors de l'[initialisation de votre SDK][3].
+1. Téléchargez la dernière version du [SDK RUM Browser][3].
+2. Configurez les paramètres __version__, __env__ et __service__ lors de l'[initialisation de votre SDK][4].
 
 ### Importer des fichiers de mappage
 
@@ -44,7 +44,7 @@ Par conséquent, les stack traces d'erreurs générées par ces applications son
 
 #### Source maps JavaScript
 
-Les source maps sont des fichiers de mappage générés lors de la minification de code source Javascript. L'[interface de ligne de commande Datadog][4] peut être utilisée pour importer ces fichiers de mappage à partir du répertoire de votre build : elle analyse le répertoire du build et ses sous-répertoires pour importer automatiquement les source maps avec leurs fichiers minifiés associés. Importez vos source maps directement à partir de votre pipeline d'intégration continue :
+Les source maps sont des fichiers de mappage générés lors de la minification de code source Javascript. L'[interface de ligne de commande Datadog][5] peut être utilisée pour importer ces fichiers de mappage à partir du répertoire de votre build : elle analyse le répertoire du build et ses sous-répertoires pour importer automatiquement les source maps avec leurs fichiers minifiés associés. Importez vos source maps directement à partir de votre pipeline d'intégration continue :
 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
@@ -83,14 +83,15 @@ datadog-ci sourcemaps upload /path/to/dist \
 Pour que le suivi des erreurs fonctionne correctement avec vos source maps, vous devez configurer votre bundler Javascript en respectant les consignes suivantes :
 
 -   Les source maps doivent inclure directement le code source associé. Assurez-vous que l'attribut <code>sourceContent</code> n'est pas vide avant de les importer.
--   La taille de chaque source map combinée à la taille du fichier minifié associé ne doit pas dépasser __la limite de 50 Mo__. La taille totale peut être réduite en configurant votre bundler de manière à diviser votre code source en plusieurs blocs de plus petite taille ([découvrez comment y parvenir avec WebpackJS][5]).
+-   La taille de chaque source map combinée à la taille du fichier minifié associé ne doit pas dépasser __la limite de 50 Mo__. La taille totale peut être réduite en configurant votre bundler de manière à diviser votre code source en plusieurs blocs de plus petite taille ([découvrez comment y parvenir avec WebpackJS][6]).
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/data_collected/error#error-origins
-[2]: https://www.npmjs.com/package/@datadog/browser-rum
-[3]: /fr/real_user_monitoring/browser/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/
-[5]: https://webpack.js.org/guides/code-splitting/
+[1]: /fr/real_user_monitoring/browser/data_collected/?tab=error#error-origins
+[2]: /fr/real_user_monitoring/browser/advanced_configuration#custom-errors
+[3]: https://www.npmjs.com/package/@datadog/browser-rum
+[4]: /fr/real_user_monitoring/browser/#initialization-parameters
+[5]: https://github.com/DataDog/datadog-ci/
+[6]: https://webpack.js.org/guides/code-splitting/

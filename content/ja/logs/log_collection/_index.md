@@ -61,7 +61,7 @@ Datadog Agent では、ログドライバーを使用せずに[コンテナ stdo
 
 ## サーバーレスログの収集
 
-Datadog で、AWS Lambda からログを収集できます。これを有効にするには、[AWS Lambda インテグレーションドキュメント][17]を参照してください。
+Datadog で、AWS Lambda からログを収集できます。これを有効にするには、[サーバーレスモニタリングのドキュメント][17]を参照してください。
 
 ## クラウドプロバイダーログの収集
 
@@ -313,7 +313,7 @@ Datadog は、JSON 形式のログを自動的にパースします。このた�
 [14]: /ja/agent/guide/autodiscovery-management/
 [15]: /ja/agent/kubernetes/integrations/
 [16]: /ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
-[17]: /ja/integrations/amazon_lambda/#log-collection
+[17]: /ja/serverless/forwarder
 [18]: /ja/logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /ja/security/logs/#information-security
 [20]: /ja/logs/explorer/patterns/

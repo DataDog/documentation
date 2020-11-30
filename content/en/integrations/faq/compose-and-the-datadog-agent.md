@@ -36,11 +36,11 @@ services:
   datadog:
     links:
      - redis # Connect the Datadog Agent container to the Redis container
-    image: datadog/agent:latest
+    image: gcr.io/datadoghq/agent:latest
     environment:
      - DD_API_KEY=${DD_API_KEY}
      - DD_SITE={{< region-param key="dd_site" >}}
-   volumes:
+    volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro

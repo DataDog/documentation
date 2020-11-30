@@ -10,6 +10,7 @@ ddtype: crawler
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_lambda/'
+draft: false
 further_reading:
   - link: 'https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/'
     tag: ブログ
@@ -55,6 +56,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
     | ------------------ | -------------------------------------------- |
     | `lambda:List*`     | Lambda 関数、メタデータ、およびタグを一覧表示します。   |
     | `tag:GetResources` | Lambda 関数に適用されたカスタムタグを取得します。 |
+    | `cloudtrail:LookupEvents` | Cloudtrail History を使用して Lambda 関数への変更を検出 |
 
 3. [Datadog - AWS Lambda インテグレーション][5]をインストールします。
 

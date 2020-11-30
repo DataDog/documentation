@@ -36,7 +36,7 @@ title: Android ログの収集
     }
     ```
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][2]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
+2. アプリケーションコンテキストと [Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][6]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
 
     {{< tabs >}}
     {{% tab "US" %}}
@@ -259,3 +259,4 @@ logger.removeAttribute("version_name")
 [3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [4]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/
 [5]: https://docs.datadoghq.com/ja/tagging/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=us

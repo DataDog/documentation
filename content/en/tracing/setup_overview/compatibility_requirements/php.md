@@ -66,7 +66,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12          | All supported PHP versions |
 | Yii            | 1.1, 2.0      | All supported PHP versions |
 | Drupal         |               | All supported PHP versions |
-| Magento        | 2             | All supported PHP versions |
+| Magento        | 1, 2          | All supported PHP versions |
 | Phalcon        | 1.3, 3.4      | All supported PHP versions |
 | Slim           | 2.x           | All supported PHP versions |
 | Neos Flow      | 1.1           | All supported PHP versions |
