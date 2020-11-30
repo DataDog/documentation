@@ -24,8 +24,8 @@ To find what's causing a page to under-perform:
 
 1. Set up and configure [RUM Browser monitoring][1] for your application.
 2. From the RUM Applications page, open the [Performance Overview dashboard][2]. It provides you with a high level view of your monitored pages. Apply filters to narrow your search and uncover performance problems.
-3. When you find a page with problem, click the event to open it in the [RUM Explorer][3].
-4. Click on one particular view in the RUM Explorer to access performance information and a lot of details about that specific page view, in the side panel. Troubleshoot the performance bottleneck or other issue with the the waterfall.
+3. When you find a page with problem, dive from the overview dashboard quickly into a RUM view that exemplifies the problem by clicking **View RUM events** to open it in the [RUM Explorer][3], and then clicking a specific user view. The waterfall in the side panel shows performance details, such as load times for resources, that will help you troubleshoot the bottleneck or other issue.
+    {{< img src="real_user_monitoring/browser/rum-page-performance-dive.gif" alt="Diving from Performance Overview dashboard to performance details for a particular view with an issue"  >}}
 
 ## Performance metrics for views
 
