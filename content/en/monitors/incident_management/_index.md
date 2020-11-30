@@ -1,7 +1,6 @@
 ---
 title: Incident Management
 kind: documentation
-disable_toc: true
 description: Create and manage incidents
 ---
 
