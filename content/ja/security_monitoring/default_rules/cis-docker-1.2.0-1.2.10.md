@@ -10,7 +10,7 @@ rule_category:
 scope: docker
 security: コンプライアンス
 source: docker
-title: 監査が Docker ファイルおよびディレクトリ用に構成されていることを確認 - /etc/docker/daemon.json
+title: /etc/docker/daemon.json 監査が構成されている
 type: security_rules
 ---
 ## 概要

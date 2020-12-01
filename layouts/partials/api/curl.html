@@ -33,7 +33,7 @@
 {{- end -}}
 
 <span class="c1"># Curl command</span>
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ .context.actionType | upper }}</span> {{ range .dollarScratch.Get "serverURLS" }}{{ if ne .region "local" }}<span class="kn d-none" data-region="{{ .region }}">"{{ .url }}</span>{{ else }}<span class="kn">"{{ .url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace .context.pathKey "{" "${" }}</span>
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1">{{ .context.actionType | upper }}</span> {{ range $region, $url := .dollarScratch.Get "regions" }}{{ if ne $region "local" }}<span class="kn d-none" data-region="{{ $region }}">"{{ $url }}</span>{{ else }}<span class="kn">"{{ $url }}</span>{{ end }}{{ end }}<span class="kn">{{ replace .context.pathKey "{" "${" }}</span>
 {{- range $qi, $q := $queryStrings -}}
     {{- if eq .required true -}}
         <span class="kn">{{ cond (gt $qi 0) "&" "?" }}</span><span class="kn">{{ $q.name }}</span><span class="kn">=</span><span class="kn">${ {{- $q.name -}} }</span>

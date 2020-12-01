@@ -20,7 +20,7 @@ further_reading:
 
 Activez l'injection dans la [configuration][1] du traceur .NET en définissant `DD_LOGS_INJECTION=true` via les variables d'environnement ou dans les fichiers de configuration.
 
-Le traceur .NET utilise la bibliothèque [LibLog][2] pour injecter automatiquement les ID des traces, les ID des spans, `env`, `service` et `version` dans les logs de votre application. Si vous ne l'avez pas encore fait, il est conseillé de configurer le traceur .NET avec `DD_ENV`, `DD_SERVICE` et `DD_VERSION`. Vous profiterez ainsi d'une expérience optimale lors de l'ajout des tags `env`, `service` et `version` (consultez la section [Tagging de service unifié][3] pour en savoir plus).
+Le traceur .NET peut injecter automatiquement les ID de traces, les ID de spans, `env`, `service` et `version` dans les logs de votre application. Si vous ne l'avez pas encore fait, Datadog conseille de configurer le traceur .NET avec `DD_ENV`, `DD_SERVICE` et `DD_VERSION`. Vous profiterez ainsi d'une expérience optimale lors de l'ajout des tags `env`, `service` et `version` (consultez la section [Tagging de service unifié][3] pour en savoir plus).
 
 Nous prenons en charge [Serilog][4], [NLog][5] (version 2.0.0.2000+) ou [log4net][6]. Pour que les ID injectés automatiquement s'affichent dans les logs d'application, vous devez avoir activé l'enrichissement `LogContext` dans votre logger `Serilog`, ou `Mapped Diagnostics Context` dans votre logger `NLog` ou `log4net` (voir les exemples ci-dessous).
 
@@ -103,16 +103,23 @@ Si vous préférez corréler manuellement vos [traces][7] avec vos logs et lier 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
+**Remarque** : la bibliothèque Serilog exige que les noms de propriété de message soient des identificateurs C# valides. Les noms doivent donc correspondre à ce qui suit :
+- `dd_env`
+- `dd_service`
+- `dd_version`
+- `dd_trace_id`
+- `dd_span_id`
+
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
 // Des spans doivent avoir été initialisées et être actives avant ce bloc.
-using (LogContext.PushProperty("dd.env", CorrelationIdentifier.Env))
-using (LogContext.PushProperty("dd.service", CorrelationIdentifier.Service))
-using (LogContext.PushProperty("dd.version", CorrelationIdentifier.Version))
-using (LogContext.PushProperty("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
-using (LogContext.PushProperty("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
+using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
+using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
+using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
+using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
+using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
     // Loguer quelque chose
 }

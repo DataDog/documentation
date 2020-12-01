@@ -72,6 +72,38 @@ Configuring log collection depends on your current environment. Choose one of th
 
 **Note**: It is recommended that you use the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
 
+{{< tabs >}}
+{{% tab "Container Installation" %}}
+
+To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
+
+```shell
+docker run -d --name datadog-agent \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /proc/:/host/proc/:ro \
+           -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+           -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+           gcr.io/datadoghq/agent:latest
+```
+
+**Note**: On Windows systems, run this command without volume mounts. That is:
+
+```shell
+docker run -d --name datadog-agent \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
+           -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
+           gcr.io/datadoghq/agent:latest
+```
+
+It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
+
 The commands related to log collection are:
 
 | Command                                               | Description                                                                                                                                                      |
@@ -83,7 +115,7 @@ The commands related to log collection are:
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://hub.docker.com/r/datadog/agent/tags
+[2]: https://gcr.io/datadoghq/agent
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 

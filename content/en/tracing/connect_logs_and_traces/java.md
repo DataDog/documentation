@@ -25,9 +25,22 @@ If your logs are JSON formated and you are using Logback there is nothing left t
 
 If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
+{{< tabs >}}
+{{% tab "Log4j2" %}}
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+```
+
+{{% /tab %}}
+{{% tab "slf4j/logback" %}}
+
 ```xml
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: If the `attribute.path` for your trace ID is **not** `dd.trace_id`, ensure your trace ID reserved attribute settings account for the `attribute.path`. More information can be found in the [FAQ on this topic][2].
 
@@ -60,6 +73,12 @@ finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
+```
+
+Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
 {{% /tab %}}

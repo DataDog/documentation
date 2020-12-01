@@ -2,6 +2,7 @@
 title: Network Widget
 kind: documentation
 description: "Displays a timeseries of network data."
+widget_type: "timeseries"
 aliases:
     - /graphing/widgets/network/
 further_reading:
@@ -46,48 +47,16 @@ The network widget supplements the [Network Performance Monitoring][1] feature b
 
 ## API
 
-The dedicated [widget JSON schema definition][2] for the network widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-```text
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "network_query": {
-        "index": "netflow-search",
-        "search": {
-          "query": ""
-        },
-        "groupBy": [
-          {
-            "facet": {source_entity_type}
-          },
-          {
-            "facet": {destination_entity_type}
-          }
-        ],
-        "compute": {
-          "aggregation": "sum",
-          "facet": {type of data you’d like to display}
-        }
-      },
-      "style": {
-        "palette": {color},
-        "type": "solid",
-        "width": "normal"
-      },
-      "type": "area",
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "autoscale": true
-}
-```
+The dedicated [widget JSON schema definition][3] for the network widget is:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_performance_monitoring/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

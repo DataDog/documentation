@@ -23,45 +23,16 @@ Choose a name for your group by using the cog icon in the upper right corner of 
 
 ## API
 
-The dedicated [widget JSON schema definition][2] for the change widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][2] documentation for additional reference.
 
-```text
-GROUP_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["group"]},
-        "layout_type": {"enum": ["ordered"]},
-        "widgets": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "definition": {
-                        "oneOf": [WIDGET_DEFINITION]
-                    },
-                    "id": {"type": "integer"}
-                },
-                "required": ["definition"],
-                "additionalProperties": false
-            }
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "layout_type", "widgets"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][3] for the change widget is:
 
-| Parameter     | Type             | Required | Description                                                                                                                                             |
-|---------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string           | yes      | Type of widget, for the group widget use `group`.                                                                                                       |
-| `widgets`     | array of objects | yes      | List of widgets that belong to the group widget. See the dedicated [Widget JSON schema documentation][2] to learn how to build the `WIDGET_DEFINITION`. |
-| `layout_type` | string           | yes      | Layout type of the group, value available is `ordered`                                                                                                  |
-| `title`       | string           | no       | Title of your widget.                                                                                                                                   |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/timeboard/
-[2]: /dashboards/graphing_json/widget_json/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

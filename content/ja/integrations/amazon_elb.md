@@ -13,6 +13,7 @@ ddtype: crawler
 dependencies: []
 description: Amazon Load Balancer のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_elb/'
+draft: false
 git_integration_title: amazon_elb
 has_logo: true
 integration_title: Amazon Load Balancer
@@ -82,7 +83,7 @@ Datadog は、AWS が提供する 3 つのバリエーションの Elastic Load 
 | -------------------- | ------------------------------ |
 | `aws.applicationelb` | Application Load Balancer     |
 | `aws.elb`            | Classic Elastic Load Balancing |
-| `aws.network.elb`    | Network Load Balancer         |
+| `aws.networkelb`     | Network Load Balancer         |
 
 ### メトリクス
 
