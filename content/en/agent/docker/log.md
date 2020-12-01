@@ -118,15 +118,12 @@ The commands related to log collection are:
 | `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. This parameter value supports regular expressions. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
-<<<<<<< HEAD
 [1]: /getting_started/agent/autodiscovery?tab=docker
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [3]: /logs/faq/how-to-tail-logs-from-host-using-a-container-agent/
 [4]: https://hub.docker.com/r/datadog/agent/tags
-=======
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://gcr.io/datadoghq/agent
->>>>>>> 3670948778edd73c07715993fdee1f425c4c2852
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 
