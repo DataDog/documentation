@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-Datadog Agent 6+ collects logs from containers. The recommended setup to collect logs from ECS containers is [deploying the Datadog Agent on your host](#setup) and enabling containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. This configuration allows the Datadog Agent to collect logs written to `stdout`/`stderr` with Docker socket.
+Datadog Agent 6+ collects logs from containers. The recommended way to collect logs from ECS containers is to enable containerized logging within your `datadog-agent-ecs.json` or `datadog-agent-ecs1.json` file. However, if your application emits logs to files in any capacity (logs that are not written to `stdout`/`stderr`), you will need to [deploy the Datadog Agent on your host](#custom-log-collection) and use custom log collection to tail files.
 
-If your application writes all or some logs to files (logs that are not written to `stdout`/`stderr`), you will need to [deploy the Datadog Agent on your host and use a third-party integration](#logs-written-to-files) to tail logs to the Datadog Agent.
+## Installation
 
-## Setup
+### ECS file
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -127,12 +127,21 @@ If your application writes all or some logs to files (logs that are not written 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Logs written to files
+### Custom log collection
 
-If your application writes all or some of its logs to files, you will need to use a [third-party integration][1], such as [Fluent Bit][2], to collect logs from files and tail them to the Agent using a custom logs configuration.
+If your container writes any logs to files, follow the [Custom Log Collection documentation][1] to tail files for logs.
 
-1. Complete the setup of a third-party service or integration to forward logs to the Agent.
-2. Refer to the [Custom Log Collection documentation][3] to tail logs to the Agent.
+To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][2] with the following content:
+
+```yaml
+logs:
+  - type: file
+    path: "<PATH_LOG_FILE>/<LOG_FILE_NAME>.log"
+    service: "<APP_NAME>"
+    source: "<SOURCE>"
+```
+
+**Note**: Container metadata is not retrieved with custom log collection, therefore the Agent does not automatically assign container tags to logs. Use [custom tags][3] to create container tags.
 
 ## Activate log integrations
 
@@ -142,8 +151,9 @@ The `source` attribute is used to identify the integration to use for each conta
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/#cat-log-collection
-[2]: /integrations/fluentbit/
-[3]: /agent/logs/?tab=tailfiles#custom-log-collection
+
+[1]: /agent/logs/?tab=tailfiles#custom-log-collection
+[2]: /agent/logs/#custom-log-collection
+[3]: getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
 [4]: /getting_started/agent/#installation
 [5]: /logs/processing/#log-processing

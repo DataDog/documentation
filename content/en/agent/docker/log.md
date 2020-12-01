@@ -30,13 +30,13 @@ further_reading:
 
 Datadog Agent 6+ collects logs from containers. You can either deploy the containerized Agent within your Docker environment (**recommended**) or configure the Agent on your host, external to your Docker environment, to collect logs from your containers.
 
-Choosing where to deploy the Agent to collect logs depends on your current environment and where your application logs are stored:
+Configuring log collection depends on your current environment. Choose one of the following installations to get started:
 
-- Deploying the Agent within your Docker container, as detailed in the [Containerized Agent installation](?tab=containerized-agent#installation) below, allows the Agent to use Docker socket to collect logs written to `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1], which is automatically configured during the installation.
+- If your environment writes **all** logs to `stdout`/`stderr`, follow the [containerized Agent](?tab=containerized-agent#installation) installation.
 
-- [Deploying the Agent on your host](?tab=agent-on-your-host#installation) requires enabling containerized logging within your Agent configuration file. This allows the Agent to collect logs from Docker socket that are written to `stdout`/`stderr`.
+- If you cannot deploy the containerized Agent and your container writes **all** logs to `stdout`/`stderr`, follow the [host Agent](?tab=host-agent#installation) installation to enable containerized logging within your Agent configuration file.
 
-- If your application writes some or all logs to files (logs that are not written to `stdout`/`stderr`), you will need to [deploy the Datadog Agent on your host](?tab=agent-on-your-host#installation) use a [third-party integration][2] or service to tail logs to the Datadog Agent.
+- If your container writes logs to files (only partially writes logs to `stdout`/`stderr` and writes logs to files OR fully writes logs to files), follow the [host Agent](?tab=host-agent-with-custom-logging#installation) with [custom log collection][1] installation.
 
 ## Installation
 
@@ -85,37 +85,54 @@ The commands related to log collection are:
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
 {{% /tab %}}
-{{% tab "Agent on your host" %}}
+{{% tab "Host Agent" %}}
 
-There are two ways to collect logs from containers on a host:
+1. Install the [latest version of the Agent][1] on your host.
+2. Collecting logs is _disabled_ by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
 
-1. Configure your `datadog.yaml` file to retrieve logs from your Docker container.
+    ```yaml
+    logs_enabled: true
+    listeners:
+        - name: docker
+    config_providers:
+        - name: docker
+          polling: true
+    logs_config:
+        container_collect_all: true
+    ```
 
-  Install the [latest version of the Agent][1] on your host. Collecting logs is _disabled_ by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file:
-
-      ```yaml
-      logs_enabled: true
-      listeners:
-          - name: docker
-      config_providers:
-          - name: docker
-            polling: true
-      logs_config:
-          container_collect_all: true
-      ```
-
-  [Restart the Agent][2] to see all of your container logs in Datadog.
-
-2. If your application or service does not write logs to `stdout`/`stderr`, you can use the Datadog Agent to collect logs and forward them to Datadog from files. This setup requires a third party integration, such as [Fluent Bit][3], to collect logs from files. Refer to the [Custom Log Collection documentation][4] for complete installation.
+3. [Restart the Agent][2] to see all of your container logs in Datadog.
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: /integrations/fluentbit/#overview
-[4]: /agent/logs/#custom-log-collection
+{{% /tab %}}
+{{% tab "Host Agent with Custom Logging" %}}
+
+1. Install the [latest version of the Agent][1] on your host.
+2. Follow the [Custom Log Collection documentation][2] to tail files for logs.
+
+    To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][3] with the following content:
+
+    ```yaml
+    logs:
+      - type: file
+        path: "<PATH_LOG_FILE>/<LOG_FILE_NAME>.log"
+        service: "<APP_NAME>"
+        source: "<SOURCE>"
+    ```
+
+3. [Restart the Agent][4] to see all of your container logs in Datadog.
+
+[1]: /agent/basic_agent_usage/
+[2]: /agent/logs/#custom-log-collection
+[3]: /agent/guide/agent-configuration-files/
+[4]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
 **Important notes**:
+
+- Container metadata is not retrieved with custom log collection, therefore the Agent does not automatically assign container tags to logs. Use [custom tags][2] to create container tags.
 
 - `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+. The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name results in the installation of integration Pipelines that parse your logs and extract relevant information from them.
 
@@ -244,8 +261,8 @@ For Kubernetes environments, refer to the [Kubernetes short lived container docu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/agent/autodiscovery?tab=docker
-[2]: /integrations/#cat-log-collection
+[1]: /agent/logs/?tab=tailfiles
+[2]: getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
 [3]: /integrations/journald/
 [4]: /agent/docker/integrations/
 [5]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
