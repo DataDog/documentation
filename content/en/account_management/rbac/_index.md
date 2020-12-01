@@ -42,7 +42,7 @@ By granting permissions to roles, any user who is associated with that role rece
 Creating and modifying custom roles is an opt-in Enterprise feature. <a href="/help">Contact Datadog support</a> to get it enabled for your account.
 </div>
 
-Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role permissions][7] documentation for more information about available permissions.
+Manage your custom roles through the Datadog application, the [Datadog Role API][6], or SAML directly. Find below how to create, update, delete a role. See the [Datadog Role permissions][7] documentation for more information about available permissions. Only users with the Access Management permission can create or edit roles in Datadog.
 
 ### Create a custom role
 
