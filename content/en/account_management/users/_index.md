@@ -63,7 +63,7 @@ See the [Role Based Access Control][2] documentation to discover all roles avail
 
 ## Disable existing members
 
-Only user with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any Application Keys they had generated are automatically revoked.
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys they had generated are automatically revoked.
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line.
