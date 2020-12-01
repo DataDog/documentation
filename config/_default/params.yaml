@@ -81,5 +81,3 @@ allowedRegions:
     value: us
   - name: EU
     value: eu
-  - name: US3
-    value: us3
