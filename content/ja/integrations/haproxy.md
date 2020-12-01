@@ -34,7 +34,9 @@ kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: haproxy.
-metric_to_check: haproxy.frontend.bytes.in_rate
+metric_to_check:
+  - haproxy.frontend.bytes.in_rate
+  - haproxy.frontend.bytes.in.total
 name: haproxy
 process_signatures:
   - haproxy

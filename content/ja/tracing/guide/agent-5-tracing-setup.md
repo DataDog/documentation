@@ -76,7 +76,7 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 [3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /ja/tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://hub.docker.com/r/datadog/docker-dd-agent
+[6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /ja/tracing/docker/
 [8]: /ja/api/v1/tracing/
 [9]: /ja/agent/

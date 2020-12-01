@@ -91,6 +91,7 @@ agent:
     name: "datadog/agent:latest"
   apm:
     enabled: true
+    hostPort: 8126
 ```
 
 完全な例については、[APM とメトリクス収集が有効になっているマニフェスト][1]の例を参照してください。
@@ -152,7 +153,7 @@ Kubernetes で稼働する Agent 内のトレースに利用可能なすべて�
 | `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。たとえば、<code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                          |
 | `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りのインスタンス <code>\<サービス名>\|;\<オペレーション名>=1</code>、たとえば、<code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code> となります。トレーシングクライアントでコンフィギュレーションパラメーターを使用して[自動的に有効化][6]することもできます。 |
 | `DD_ENV`               | Agent によって発行されたすべてのデータにグローバル `env` を設定します。トレースデータに `env` が存在しない場合、この変数が使用されます。詳細については、[APM 環境設定][7]を参照してください。                                                                                                                                                                                                                                                                         |
-| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Analyzed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                               |
+| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Indexed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                               |
 | `DD_APM_MAX_TPS`           | 1 秒あたりの最大トレース数を設定します。デフォルトは 1 秒あたり 10 トレースです。                                                                                                                                                                                                                                                        |
 
 ### オペレーター環境変数

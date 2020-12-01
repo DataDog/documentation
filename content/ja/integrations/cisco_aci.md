@@ -120,9 +120,8 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 
 ### サービスのチェック
 
-`cisco_aci.can_connect`:
-
-Agent が Cisco ACI API に接続してメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**cisco_aci.can_connect**:<br>
+Agent が Cisco ACI API に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

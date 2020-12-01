@@ -20,39 +20,58 @@ further_reading:
 ---
 ## Présentation
 
-Certaines parties de votre système peuvent ne pas être accessibles aux robots sans identification appropriée. Il est parfois également préférable de ne pas recueillir de données d'analyse provenant des robots Datadog. Pour détecter les robots Datadog, utilisez :
+Certaines parties de vos systèmes peuvent ne pas être accessibles aux robots sans identification appropriée. De plus, il est parfois préférable de ne pas recueillir les données d'analyse associées aux robots Datadog. Utilisez les méthodes ci-dessous pour détecter les robots de surveillance Datadog Synthetic :
 
-* Les [en-têtes](#en-tetes) joints à toutes les requêtes des robots de Datadog.
-* Les [**plages d'IP de surveillance Synthetic**][1] de Datadog.
-* Les **Advanced options** afin de définir des en-têtes personnalisés pour vos tests Browser et tests API. Vous pouvez également ajouter localement des **cookies, des en-têtes ou une authentification basique** à vos tests API et des **cookies et en-têtes** à vos tests Browser.
-* La variable `window._DATADOG_SYNTHETICS_BROWSER` [variable JavaScript dans le code de votre application](#variable_datadog_synthetics_browser).
+## Adresses IP
 
-## En-têtes
+{{< site-region region="us" >}}
 
-Utilisez l'en-tête joint aux robots Datadog afin de les détecter pour vos tests Browser et tests API.
+Vous pouvez utiliser les [**plages d'IP de la fonction surveillance Synthetic**][1] de Datadog correspondant à chaque emplacement géré par Datadog.
+
+[1]: https://ip-ranges.datadoghq.com/synthetics.json
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+Vous pouvez utiliser les [**plages d'IP de la fonction surveillance Synthetic**][1] de Datadog correspondant à chaque emplacement géré par Datadog.
+
+[1]: https://ip-ranges.datadoghq.eu/synthetics.json
+
+{{< /site-region >}}
+
+## En-têtes par défaut
+
+Vous pouvez également identifier les robots Datadog en utilisant certains **en-têtes par défaut** joints aux requêtes générées par les tests API et Browser :
 
 {{< tabs >}}
 {{% tab "Tests API" %}}
 
 L'en-tête suivant est joint à tous les robots de test API de Datadog :
 
-`Sec-Datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - public_id: <ID_PUBLIC_TEST_SYNTHETIC>`
+`sec-datadog: Request sent by a Datadog Synthetic API Test (https://docs.datadoghq.com/synthetics/) - test_id: <ID_PUBLIC_TEST_SYNTHETIC>`
 
-L'en-tête `x-datadog-origin: synthetics` est également ajouté à toutes les requêtes lancées pour un test API Datadog.
+Un `user-agent: Datadog/Synthetics` est également ajouté.
 
 {{% /tab %}}
 {{% tab "Tests Browser" %}}
 
 L'en-tête suivant est joint à tous les robots de test Browser de Datadog :
 
-`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - public_id: <ID_PUBLIC_TEST_SYNTHETIC>`
+`Sec-Datadog: Request sent by a Datadog Synthetic Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <ID_PUBLIC_TEST_SYNTHETIC>`
+
+Un en-tête `user-agent` avec une valeur reflétant le type d'exécution de test Browser (navigateur, appareil) est également ajouté.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### En-têtes d'APM
 
-Si l'APM est activé, [**d'autres en-têtes spécifiques de l'APM**][2] comme `x-datadog-trace-id` sont ajoutés à toutes les requêtes lancées par les tests API.
+Plusieurs [**autres en-têtes spécifiques à l'APM**][1] tels que `x-datadog-origin: synthetics` sont également ajoutés aux requêtes générées par les tests Synthetic API et Browser.
+
+## Personnaliser les requêtes
+
+Vous pouvez également tirer parti des **options avancées** lors de la configuration des tests Browser et d'API pour ajouter des identifiants spécifiques à vos requêtes de test. Par exemple, vous pouvez ajouter des **en-têtes**, des **cookies** ou des **corps de requête** personnalisés.
 
 ## Variable Browser
 
@@ -68,5 +87,4 @@ if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://ip-ranges.datadoghq.com/synthetics.json
-[2]: /fr/synthetics/apm/#how-are-traces-linked-to-tests
+[1]: /fr/synthetics/apm/#how-are-traces-linked-to-tests

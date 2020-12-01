@@ -305,6 +305,7 @@ After you have configured your function following the steps above, you can view 
 If you would like to submit a custom metric or span, see the sample code below:
 
 ```python
+import time
 from ddtrace import tracer
 from datadog_lambda.metric import lambda_metric
 
@@ -323,7 +324,7 @@ def lambda_handler(event, context):
     lambda_metric(
         metric_name='coffee_house.order_value',
         value=12.45,
-        timestamp=1602008721, # optional, must be within last 20 mins
+        timestamp=int(time.time()), # optional, must be within last 20 mins
         tags=['product:latte', 'order:online']
     )
 

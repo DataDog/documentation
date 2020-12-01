@@ -326,4 +326,4 @@ Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][4].
 [2]: /fr/serverless/forwarder
 [3]: https://app.datadoghq.com/functions
 [4]: /fr/serverless/custom_metrics?tab=nodejs
-[5]: tracing/custom_instrumentation/nodejs/
+[5]: /fr/tracing/custom_instrumentation/nodejs/

@@ -326,4 +326,4 @@ exports.handler = async (event) => {
 [2]: /ja/serverless/forwarder
 [3]: https://app.datadoghq.com/functions
 [4]: /ja/serverless/custom_metrics?tab=nodejs
-[5]: tracing/custom_instrumentation/nodejs/
+[5]: /ja/tracing/custom_instrumentation/nodejs/

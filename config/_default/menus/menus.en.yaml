@@ -1266,7 +1266,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: OpenTracing and OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1686,7 +1686,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: dashboards/timeboards/#graph-menu
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -2262,6 +2262,18 @@ api_v1:
     parent: AWS Integration
     url: '#list-namespace-rules'
     generated: true
+  - name: Delete a tag filtering entry
+    parent: AWS Integration
+    url: '#delete-a-tag-filtering-entry'
+    generated: true
+  - name: Get all AWS tag filters
+    parent: AWS Integration
+    url: '#get-all-aws-tag-filters'
+    generated: true
+  - name: Set an AWS tag filter
+    parent: AWS Integration
+    url: '#set-an-aws-tag-filter'
+    generated: true
   - name: Generate a new external ID
     parent: AWS Integration
     url: '#generate-a-new-external-id'
@@ -2758,6 +2770,10 @@ api_v1:
     parent: PagerDuty Integration
     url: '#update-a-single-service-object'
     generated: true
+  - name: Processes
+    url: /api/v1/processes/
+    identifier: Processes
+    generated: true
   - name: Roles
     url: /api/v1/roles/
     identifier: Roles
@@ -2881,6 +2897,22 @@ api_v1:
   - name: Get all locations (public and private)
     parent: Synthetics
     url: '#get-all-locations-public-and-private'
+    generated: true
+  - name: Create a private location
+    parent: Synthetics
+    url: '#create-a-private-location'
+    generated: true
+  - name: Delete a private location
+    parent: Synthetics
+    url: '#delete-a-private-location'
+    generated: true
+  - name: Get a private location
+    parent: Synthetics
+    url: '#get-a-private-location'
+    generated: true
+  - name: Edit a private location
+    parent: Synthetics
+    url: '#edit-a-private-location'
     generated: true
   - name: Get the list of all tests
     parent: Synthetics
@@ -3086,9 +3118,9 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-custom-metrics'
     generated: true
-  - name: Get top 500 custom metrics by hourly average
+  - name: Get top custom metrics by hourly average
     parent: Usage Metering
-    url: '#get-top-500-custom-metrics-by-hourly-average'
+    url: '#get-top-custom-metrics-by-hourly-average'
     generated: true
   - name: Get hourly usage for Trace Search
     parent: Usage Metering
@@ -3439,6 +3471,14 @@ api_v2:
   - name: PagerDuty Integration
     url: /api/v2/pagerduty-integration/
     identifier: PagerDuty Integration
+    generated: true
+  - name: Processes
+    url: /api/v2/processes/
+    identifier: Processes
+    generated: true
+  - name: Get all processes
+    parent: Processes
+    url: '#get-all-processes'
     generated: true
   - name: Roles
     url: /api/v2/roles/

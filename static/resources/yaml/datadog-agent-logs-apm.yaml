@@ -18,7 +18,7 @@ metadata:
   name: datadog-agent-installinfo
   labels: {}
   annotations:
-    checksum/install_info: 0b4b93ab3a64d6b6dd8f6b9954ef7628e2faf03f1c6b5a0145077b1f281d21bc
+    checksum/install_info: 9f58f4fe71f1b79dfabae5311eb8f5373bd03072d4636e248cd3f581f8752627
 data:
   install_info: |
     ---
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "datadog/agent:7.23.0"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -139,7 +139,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "datadog/agent:7.23.0"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -186,7 +186,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "datadog/agent:7.23.0"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -229,7 +229,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-volume
-          image: "datadog/agent:7.23.0"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -239,7 +239,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "datadog/agent:7.23.0"
+          image: "gcr.io/datadoghq/agent:7.23.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:

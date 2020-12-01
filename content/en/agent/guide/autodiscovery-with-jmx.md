@@ -22,7 +22,7 @@ Leverage integrations autodiscovery annotations or use Autodiscovery Container I
 
 The autodiscovery annotations logic consists in applying the JMX check configuration elements, through annotations, to your pod in order to allow the Agent to "automatically discover" them and configure its JMX check accordingly:
 
-1. [Launch the Agent in your Kubernetes cluster][1] **with the `datadog/agent:latest-jmx` image name** instead of the regular `datadog/agent:latest`.
+1. [Launch the Agent in your Kubernetes cluster][1] **with the `gcr.io/datadoghq/agent:latest-jmx` image name** instead of the regular `gcr.io/datadoghq/agent:latest`.
 
 2. Apply the Autodiscovery annotations to the containers containing your JMX-application:
 
@@ -129,7 +129,7 @@ Choose wether your Agent is running as a container in your cluster, or on your h
 
 If your Agent is running in your cluster and you want to autodiscover your container to collect JMX metrics:
 
-1. Make sure to run the Agent image **the `datadog/agent:latest-jmx`** instead of the regular `datadog/agent:latest` image.
+1. Make sure to run the Agent image **the `gcr.io/datadoghq/agent:latest-jmx`** instead of the regular `gcr.io/datadoghq/agent:latest` image.
 
 2. Get the configuration files `conf.yaml` and `metrics.yaml` associated to your integration. Find below the list of Datadog-JMX based integration with their associated files:
 
@@ -192,7 +192,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 7. (Optional) - If you can't mount those files in the Agent container (like on AWS ECS), you should re-build the Agent docker image with those two configuration files in it:
 
     ```conf
-    FROM datadog/agent:latest-jmx
+    FROM gcr.io/datadoghq/agent:latest-jmx
     COPY <PATH_JMX_CONF_FILE> conf.d/tomcat.d/
     COPY <PATH_JMX_METRICS_FILE> conf.d/tomcat.d/
     ```

@@ -123,7 +123,7 @@ Update your `datadog-agent.yaml` manifest with:
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   log:
     enabled: true
 ```

@@ -180,7 +180,11 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Windows server 64-bit][10]       | Windows Server 2008r2+ |
 | [Windows 64-bit][10]              | Windows 7+             |
 
-**Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+**Notes**:
+
+- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
+
+- Windows Server 2008 R2+ is supported, but must have the most recent updates installed in order to run versions 7+ of the Datadog Agent. There is also [a known issued with clock drift and Go][12] that affects Windows Server 2008 R2+.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /agent/basic_agent_usage/deb/
@@ -193,6 +197,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 [9]: /agent/basic_agent_usage/osx/
 [10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 

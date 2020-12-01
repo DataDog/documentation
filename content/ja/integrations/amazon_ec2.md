@@ -37,7 +37,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 ### コンフィギュレーション
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`EC2` をオンにします。
+1. [AWS インテグレーションタイル][2]で **Configuration** タブを開き、**Limit metric collection by AWS Service** で `EC2` をオンにします。
 
 2. Amazon EC2 のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。EC2 ポリシーの詳細については、[AWS Web サイトのガイド][4]を参照してください。
 

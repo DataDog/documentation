@@ -107,7 +107,7 @@ aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.jso
 8. For Linux only, add another volume with the name `cgroup` and source path of `/sys/fs/cgroup/` (or `/cgroup/` if you are using an original Amazon Linux 1 AMI).
 9. Click the large **Add container** button.
 10. For **Container name** enter `datadog-agent`.
-11. For **Image** enter `datadog/agent:latest`.
+11. For **Image** enter `gcr.io/datadoghq/agent:latest`.
 12. For **Maximum memory** enter `256`. **Note**: For high resource usage, you may need a higher memory limit.
 13. Scroll down to the **Advanced container configuration** section and enter `10` in **CPU units**.
 14. For **Env Variables**, add a **Key** of `DD_API_KEY` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a look at the [ECS Configuration guide][1].*

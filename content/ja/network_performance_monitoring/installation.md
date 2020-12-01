@@ -183,7 +183,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir

@@ -238,6 +238,66 @@ components:
       - account_id
       - services
       type: object
+    AWSNamespace:
+      description: The namespace associated with the tag filter entry.
+      enum:
+      - elb
+      - application_elb
+      - sqs
+      - rds
+      - custom
+      - network_elb
+      - lambda
+      type: string
+      x-enum-varnames:
+      - ELB
+      - APPLICATION_ELB
+      - SQS
+      - RDS
+      - CUSTOM
+      - NETWORK_ELB
+      - LAMBDA
+    AWSTagFilterCreateRequest:
+      description: The objects used to set an AWS tag filter.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+        tag_filter_str:
+          description: The tag filter string.
+          example: prod*
+          type: string
+      type: object
+    AWSTagFilterDeleteRequest:
+      description: The objects used to delete an AWS tag filter entry.
+      properties:
+        aws_account_identifier:
+          description: The unique identifier of your AWS account.
+          example: FAKEAC0FAKEAC2FAKEAC
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+      type: object
+    AWSTagFilterListResponse:
+      description: An array of tag filter rules by `namespace` and tag filter string.
+      properties:
+        filters:
+          description: An array of tag filters.
+          items:
+            description: A list of tag filters.
+            properties:
+              namespace:
+                $ref: '#/components/schemas/AWSNamespace'
+              tag_filter_str:
+                description: The tag filter string.
+                example: prod*
+                type: string
+            type: object
+          type: array
+      type: object
     AccessRole:
       default: st
       description: The access role of the user. Options are **st** (standard user),
@@ -5073,6 +5133,7 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       type: object
     OrganizationBilling:
+      deprecated: true
       description: A JSON array of billing type.
       example:
         type: parent_billing
@@ -5095,8 +5156,6 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       required:
       - name
-      - subscription
-      - billing
       type: object
     OrganizationCreateResponse:
       description: Response object for an organization creation.
@@ -5126,6 +5185,7 @@ components:
           $ref: '#/components/schemas/Organization'
       type: object
     OrganizationSubscription:
+      deprecated: true
       description: Subscription definition.
       example:
         type: pro
@@ -7318,6 +7378,82 @@ components:
       - TAB_1
       - TAB_2
       - TAB_3
+    SyntheticsPrivateLocation:
+      description: Object containing information about the private location to create.
+      properties:
+        description:
+          description: Description of the private location.
+          example: Description of private location
+          type: string
+        id:
+          description: Unique identifier of the private location.
+          readOnly: true
+          type: string
+        name:
+          description: Name of the private location.
+          example: New private location
+          type: string
+        secrets:
+          description: Secrets for the private location. Only present in the response
+            when creating the private location.
+          properties:
+            authentication:
+              description: Authentication part of the secrets.
+              properties:
+                id:
+                  description: Access key for the private location.
+                  readOnly: true
+                  type: string
+                key:
+                  description: Secret access key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+            config_decryption:
+              description: Private key for the private location.
+              properties:
+                key:
+                  description: Private key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+          readOnly: true
+          type: object
+        tags:
+          description: Array of tags attached to the private location.
+          example:
+          - team:front
+          items:
+            description: A tag attached to the private location.
+            example: team:front
+            type: string
+          type: array
+      required:
+      - name
+      - description
+      - tags
+      type: object
+    SyntheticsPrivateLocationCreationResponse:
+      description: Object that contains the new private location, the public key for
+        result encryption, and the configuration skeleton.
+      properties:
+        config:
+          description: Configuration skeleton for the private location. See installation
+            instructions of the private location on how to use this configuration.
+          type: object
+        private_location:
+          $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        result_encryption:
+          description: Public key for the result encryption.
+          properties:
+            id:
+              description: Fingerprint for the encryption key.
+              type: string
+            key:
+              description: Public key for result encryption.
+              type: string
+          type: object
+      type: object
     SyntheticsResource:
       description: Object describing a resource which is the combination of requests
         (fetch, XHR) and Assets (HTML, CSS, JS, images).
@@ -12550,6 +12686,169 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+  /api/v1/integration/aws/filtering:
+    delete:
+      description: Delete a tag filtering entry.
+      operationId: DeleteAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterDeleteRequest'
+        description: Delete a tag filtering entry for a given AWS account and `dd-aws`
+          namespace.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Delete a tag filtering entry
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+    get:
+      description: Get all AWS tag filters.
+      operationId: ListAWSTagFilters
+      parameters:
+      - description: Only return AWS filters that matches this `account_id`.
+        in: query
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSTagFilterListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Get all AWS tag filters
+      tags:
+      - AWS Integration
+    post:
+      description: Set an AWS tag filter.
+      operationId: CreateAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterCreateRequest'
+        description: 'Set an AWS tag filter using an `aws_account_identifier`, `namespace`,
+          and filtering string.
+
+          Namespace options are `application_elb`, `elb`, `lambda`, `network_elb`,
+          `rds`, `sqs`, and `custom`.'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Set an AWS tag filter
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
   /api/v1/integration/aws/generate_new_external_id:
     put:
       description: Generate a new AWS external ID for a given AWS account ID and role
@@ -16274,6 +16573,129 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+  /api/v1/synthetics/private-locations:
+    post:
+      description: Create a new Synthetics private location.
+      operationId: CreatePrivateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocationCreationResponse'
+          description: OK
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Quota reached for private locations
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Private locations are not activated for the user
+      summary: Create a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+  /api/v1/synthetics/private-locations/{location_id}:
+    delete:
+      description: Delete a Synthetics private location.
+      operationId: DeletePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Delete a private location
+      tags:
+      - Synthetics
+    get:
+      description: Get a Synthetics private location.
+      operationId: GetPrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Get a private location
+      tags:
+      - Synthetics
+    put:
+      description: Edit a Synthetics private location.
+      operationId: UpdatePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Edit a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.
@@ -16531,7 +16953,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/trigger/ci:
     post:
-      description: Trigger a set of Synthetics tests for continuous integration
+      description: Trigger a set of Synthetics tests for continuous integration.
       operationId: TriggerCITests
       requestBody:
         content:
@@ -17224,13 +17646,6 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: Include usage summaries for each sub-org.
-        in: query
-        name: org_id
-        required: false
-        schema:
-          format: int64
-          type: integer
       - description: 'The direction to sort by: `[desc, asc]`.'
         in: query
         name: sort_direction
@@ -17259,6 +17674,9 @@ paths:
       summary: Get Usage Attribution
       tags:
       - Usage Metering
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/aws_lambda:
     get:
       description: Get hourly usage for lambda.
@@ -18124,6 +18542,17 @@ paths:
           items:
             type: string
           type: array
+      - description: Maximum number of results to return (between 1 and 5000) - defaults
+          to 500 results if limit not specified.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -18143,7 +18572,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top 500 custom metrics by hourly average
+      summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
   /api/v1/usage/traces:
@@ -18931,6 +19360,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
+- description: '[Check API version 2](/api/v2/processes/).'
+  name: Processes
 - description: '[Check API version 2](/api/v2/roles/).'
   name: Roles
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
