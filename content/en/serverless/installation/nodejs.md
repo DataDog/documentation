@@ -215,9 +215,9 @@ npm install --save datadog-lambda-js dd-trace
 yarn add datadog-lambda-js dd-trace
 ```
 
-Note that the minor version of the `datadog-lambda-js` package always matches the layer version. E.g., datadog-lambda-js v0.5.0 matches the content of layer version 5.
+Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
 
-### Configure the Function
+### Configure the function
 
 1. Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can either set this directly in your Dockerfile or override the value using AWS.
 2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -225,7 +225,7 @@ Note that the minor version of the `datadog-lambda-js` package always matches th
 4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
 5. Optionally add a `service` and `env` tag with appropriate values to your function.
 
-### Subscribe the Datadog Forwarder to the Log Groups
+### Subscribe the Datadog Forwarder to the log groups
 
 You need to subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
 

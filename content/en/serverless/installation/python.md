@@ -244,7 +244,7 @@ If you are deploying your Lambda function as a container image, you cannot use t
 pip install datadog-lambda
 ```
 
-Note that the minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
+Note that the minor version of the `datadog-lambda` package always matches the layer version. For example, `datadog-lambda v0.5.0` matches the content of layer version 5.
 
 ### Configure the Function
 
