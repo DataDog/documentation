@@ -233,6 +233,38 @@ More information and additional parameters can be found in the [CLI documentatio
 [3]: https://docs.datadoghq.com/serverless/forwarder/
 [4]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
 {{% /tab %}}
+{{% tab "Container Image" %}}
+
+### Install the Datadog Lambda Library
+
+If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda Library as a layer. Instead, you must install the Datadog Lambda Library directly within the image.
+
+
+```sh
+pip install datadog-lambda
+```
+
+Note that the minor version of the `datadog-lambda` package always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
+
+### Configure the Function
+
+1. Set your image's `CMD` value to `datadog_lambda.handler.handler`. You can either set this directly in your Dockerfile or override the value using AWS.
+2. Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+3. Set the environment variable `DD_TRACE_ENABLED` to `true`.
+4. Set the environment variable `DD_FLUSH_TO_LOG` to `true`.
+5. Optionally add a `service` and `env` tag with appropriate values to your function.
+
+### Subscribe the Datadog Forwarder to the Log Groups
+
+You need to subscribe the Datadog Forwarder Lambda function to each of your functions' log groups in order to send metrics, traces, and logs to Datadog.
+
+1. [Install the Datadog Forwarder if you haven't][1].
+2. [Subscribe the Datadog Forwarder to your function's log groups][2].
+
+[1]: https://docs.datadoghq.com/serverless/forwarder/
+[2]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 ### Install the Datadog Lambda Library
