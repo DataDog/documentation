@@ -31,7 +31,7 @@ To add members to your organization:
 2. Click **Invite Users** in the upper right corner of the page.
 3. Enter the email address of the user you wish to invite to your Datadog account.
 4. Assign one or more [user roles][1] to the users.
-**Note**: Users with Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
+**Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
 5. Click **Send Invites**
 
 {{< img src="account_management/users/invite_user.png" alt="Add a user to your organization"  style="width:80%;">}}
