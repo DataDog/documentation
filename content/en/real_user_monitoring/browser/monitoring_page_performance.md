@@ -16,26 +16,26 @@ further_reading:
     text: "RUM Dashboards"
 ---
 
-When a user visits a page on your website, a new **RUM view event** is created. The view contains live page load and performance metrics. Performance metrics are sent to Datadog periodically as the page finishes loading, and might be empty for a few seconds before they appear in the Datadog UI.
+When a user visits a page on your website, a new **RUM view event** is created. The view contains live page load and performance metrics. Performance metrics are sent to Datadog periodically as the page finishes loading and might be empty for a few seconds before they appear in the Datadog UI.
 
 ## Identifying performance bottlenecks
 
 To find what's causing a page to under-perform:
 
 1. Set up and configure [RUM Browser monitoring][1] for your application.
-2. From the RUM Applications page, open the [Performance Overview dashboard][2]. It provides you with a high level view of your monitored pages. Apply filters to narrow your search and uncover performance problems.
+2. From the RUM Applications page, open the [Performance Overview dashboard][2]. It provides you with a high-level view of your monitored pages. Apply filters to narrow your search and uncover performance problems.
 3. When you find a page with problem, dive from the overview dashboard quickly into a RUM view that exemplifies the problem by clicking **View RUM events** to open it in the [RUM Explorer][3], and then clicking a specific user view. The waterfall in the side panel shows performance details, such as load times for resources, that will help you troubleshoot the bottleneck or other issue.
     {{< img src="real_user_monitoring/browser/rum-page-performance-dive.gif" alt="Diving from Performance Overview dashboard to performance details for a particular view with an issue"  >}}
 
 ## Performance metrics for views
 
-Performance metrics are collected for each individual view. These metrics can pinpoint exactly where the problem is occurring when used with the RUM context collected by default (current page view information, geoIP data, browser information, etc.) and extended with [Global Context][4].
+Performance metrics are collected for each individual view. These metrics can pinpoint exactly where the problem is occurring when used with the RUM context collected by default (current page view information, GeoIP data, browser information, etc.) and extended with [Global Context][4].
 
 These performance metrics are key for helping you start your investigations:
 
-- **Time To First Byte:** How long it takes the server to process the request. If the server is slow, try using APM to understand what's causing the slowness on the server side.
+- **Time To First Byte:** How long it takes the server to process the request. If the server is slow, try using APM to understand what's causing the slowness on the server-side.
 - **First Contentful Paint:** How long until something is displayed. Check the RUM waterfall for blocking resources and long tasks preventing the browser from rendering content.
-- **Loading Time:** How long until the page is interactive. Check the RUM waterfall to see if you're loading too many assets, or if some resources are blocking the rendering.
+- **Loading Time:** How long until the page is interactive. Check the RUM waterfall to see if you're loading too many assets or if some resources are blocking the rendering.
 
 ## All performance metrics
 
@@ -68,9 +68,9 @@ To account for modern web applications, loading time watches for network request
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
   - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests or a DOM mutation).
+  - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity defined as ongoing network requests or a DOM mutation).
 
-- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or a DOM mutation).
+- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity defined as ongoing network requests or a DOM mutation).
 
 ### Hash SPA navigation
 
