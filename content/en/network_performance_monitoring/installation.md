@@ -158,7 +158,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe with the following environment variables in the Agent daemonset. Add the following environment variables to the process-agent container if running a container per agent-process, or to the agent container otherwise. 
+2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
 
     ```yaml
       # (...)
