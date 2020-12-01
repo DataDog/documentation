@@ -26,7 +26,7 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 
 ### Install the Datadog Lambda Library
 
-The Datadog Lambda Library can be imported as a layer or a gem.
+The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
 
 The minor version of the `datadog-lambda` gem always matches the layer version. E.g., datadog-lambda v0.5.0 matches the content of layer version 5.
 
@@ -50,31 +50,50 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 
 #### Using the Gem
 
-Add the following line to your Gemfile. See the [latest release][5].
+Add the following to your Gemfile.
 
+```Gemfile
+gem 'datadog-lambda'
 ```
+
+To use Datadog APM, you must also add `ddtrace` as a second dependency in your Gemfile.
+
+```Gemfile
 gem 'datadog-lambda'
 gem 'ddtrace'
 ```
 
-Keep in mind that `ddtrace` uses native extensions, which must be compiled for Amazon Linux before being packaged and uploaded to Lambda. For this reason, Datadog recommends using the layer.
+`ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
+
+Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function’s Dockerfile to ensure that the native extensions can be successfully compiled.
+
+```dockerfile
+FROM <base image>
+
+# assemble your container image
+
+RUN yum -y install gcc gmp-devel make
+RUN bundle config set path 'vendor/bundle'
+RUN bundle install
+```
 
 ### Configure the Function
 
-1. Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
-    ```ruby
-    require 'datadog/lambda'
-    
-    Datadog::Lambda.configure_apm do |c|
-    # Enable the instrumentation
-    end
+Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
 
-    def handler(event:, context:)
-        Datadog::Lambda.wrap(event, context) do
-            return { statusCode: 200, body: 'Hello World' }
-        end
+```ruby
+require 'datadog/lambda'
+
+Datadog::Lambda.configure_apm do |c|
+# Enable the instrumentation
+end
+
+def handler(event:, context:)
+    Datadog::Lambda.wrap(event, context) do
+        return { statusCode: 200, body: 'Hello World' }
     end
-    ```
+end
+```
 
 ### Subscribe the Datadog Forwarder to the Log Groups
 
