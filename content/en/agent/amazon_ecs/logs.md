@@ -149,4 +149,4 @@ The `source` attribute is used to identify the integration to use for each conta
 
 [1]: /agent/logs/?tab=tailfiles#custom-log-collection
 [2]: /agent/logs/#custom-log-collection
-[3]: getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
+[3]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
