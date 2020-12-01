@@ -2,7 +2,6 @@ export default {
     allowedRegions: ['us', 'eu'],
     dd_site: {
         us: 'datadoghq.com',
-        us3: 'us3.datadoghq.com',
         eu: 'datadoghq.eu'
     },
     dd_full_site: {
