@@ -43,42 +43,6 @@ Configuring log collection depends on your current environment. Choose one of th
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-The containerized Agent uses Docker socket to retrieve logs from container `stdout`/`stderr`. Container and orchestrator metadata are automatically added as tags to your logs thanks to [Autodiscovery][1]. Follow the instructions below to install the containerized Agent:
-
-1. Run a [Docker container][2] that embeds the Datadog Agent to monitor your host by using the following command:
-
-    ```shell
-    docker run -d --name datadog-agent \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              -e DD_LOGS_ENABLED=true \
-              -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-              -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-              -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              datadog/agent:latest
-    ```
-
-    **Note**: On Windows systems, run this command without volume mounts:
-
-    ```shell
-    docker run -d --name datadog-agent \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              -e DD_LOGS_ENABLED=true \
-              -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-              -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-              -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
-              datadog/agent:latest
-    ```
-
-2. **Optional**: If your environment requires the **collection of logs from host files**, refer to the [How to tail logs from host using the Container Agent documentation][3] to complete installation.
-
-**Note**: It is recommended that you use the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][4] on Docker Hub.
-
-{{< tabs >}}
-{{% tab "Container Installation" %}}
-
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command:
 
 ```shell
@@ -120,10 +84,6 @@ The commands related to log collection are:
 
 [1]: /getting_started/agent/autodiscovery?tab=docker
 [2]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[3]: /logs/faq/how-to-tail-logs-from-host-using-a-container-agent/
-[4]: https://hub.docker.com/r/datadog/agent/tags
-[1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://gcr.io/datadoghq/agent
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 
