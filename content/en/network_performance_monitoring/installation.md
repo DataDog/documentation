@@ -158,7 +158,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe with the following environment variables in the Agent container. If all Agents are running in a single container, use:
+2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
 
     ```yaml
       # (...)
@@ -173,8 +173,6 @@ If you already have the [Agent running with a manifest][3]:
                           - name: DD_SYSPROBE_SOCKET
                             value: /var/run/s6/sysprobe.sock
     ```
-
-    If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
 
 3. Mount the following extra volumes into the `datadog-agent` container:
 
