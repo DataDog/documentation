@@ -317,6 +317,32 @@ To remove the PHP tracer:
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
+## Troubleshooting an application crash
+
+While very rare, it can happen that the PHP tracer causes an application to crash. Typically this happens because of a segmentation fault.
+When this happens, the best path ahead is to reach out to support providing a description of the problem and a core dump. Unless the procedure to recreate the application crash is trivial, without a core dump there is very little we can do to help.
+
+### Obtaining a core dump
+
+Obtaining a core dump for php applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump.
+
+First things first: did the php-fpm generate any core dump at all? The answer to that question is in the application error log.
+
+An occurrence of `(SIGSEGV)` signals that the core was not dumped. For example: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+
+On the other hand, an occurence of `(SIGSEGV - core dumped)` means it has been dumped. For example: `WARNING: [pool www] child N exited on signal 11 (SIGSEGV - core dumped) after X.Y seconds from start`.
+
+In order to know where the core dump is generated run `cat /proc/sys/kernel/core_pattern`. The default value is typically `core`, meaning that a file named `core` will be generated in the web root folder.
+
+Possible reasons causing a core dump not to be generated:
+
+1. if `/proc/sys/kernel/core_pattern` contains a path including nested directories, then the full directory path has to exist;
+2. if the user running the php-fpm user is different from `root` (a common user name is `www-data`) then such user is required to have writing permissions to the core dumps directory;
+3. the value of `/proc/sys/fs/suid_dumpable` cannot be `0`. That value has to be either `1` or `2` unless you run php-fpm workers pool as `root` - check your options with your system administrator;
+4. you should have a proper `rlimit_core` in the pool configuration (for example `[www]`) section of your php-fpm server. You can even set it to unlimited: `rlimit_core = 99999999999`;
+5. you should have a proper `ulimit` set in your system. You can even set it to unlimited: `ulimit -c unlimited`;
+6. if your application runs in a docker container, changes to `/proc/sys/*` have to be done to the host machine - contact your system administrator to know the options available to you. If you are able to, we suggest to try recreating the issue in your testing/staging environments.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
