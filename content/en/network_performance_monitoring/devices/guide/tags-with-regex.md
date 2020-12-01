@@ -20,11 +20,11 @@ Follow the [setup instructions][1] to install Datadog NDM.
 
 ### Configuration
 
-In the [SNMP conf.yaml][2], you can specify `metric_tags` from a symbol or an OID. To create multiple tags for devices, use regular expressions to separate the resulting value into several tags, or get a substring using the regular [Python engine][3].
+In the [SNMP conf.yaml][2], you can specify `metric_tags` from a symbol or an OID. To create multiple tags for devices, use regular expressions to separate the resulting value into multiple tags, or get a substring using the regular [Python engine][3].
 
 #### Symbol
 
-The example below creates two tags using Regex matching on the symbol's value. If the symbol's value is `router-webserver`, the tags `device_type:router` and `host:webserver` are added to the corresponding metrics.
+The example below creates two tags using Regex matching on the symbol's value. So, if the symbol's value is `router-webserver`, the tags `device_type:router` and `host:webserver` are added to the corresponding metrics.
 
 ```yaml
     metric_tags:
@@ -39,7 +39,7 @@ The example below creates two tags using Regex matching on the symbol's value. I
 
 #### OID
 
-The example below creates two tags using Regex matching on the OID's value. If the OID's value is `41ba948911b9`, the tags `host_prefix:41` and `host:ba948911b9` are added to the corresponding metrics.
+The example below creates two tags using Regex matching on the OID's value. So, if the OID's value is `41ba948911b9`, the tags `host_prefix:41` and `host:ba948911b9` are added to the corresponding metrics.
 
 ```yaml
     metric_tags:
