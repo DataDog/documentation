@@ -108,7 +108,7 @@ Add the following to your ECS task definition to create an Agent health check:
 8. For Linux only, add another volume with the name `cgroup` and source path of `/sys/fs/cgroup/` (or `/cgroup/` if you are using an original Amazon Linux 1 AMI).
 9. Click the large **Add container** button.
 10. For **Container name** enter `datadog-agent`.
-11. For **Image** enter `datadog/agent:latest`.
+11. For **Image** enter `gcr.io/datadoghq/agent:latest`.
 12. For **Maximum memory** enter `256`. **Note**: For high resource usage, you may need a higher memory limit.
 13. Scroll down to the **Advanced container configuration** section and enter `10` in **CPU units**.
 14. For **Env Variables**, add a **Key** of `DD_API_KEY` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a look at the [ECS Configuration guide][1].*
@@ -154,14 +154,10 @@ Datadog's [Autodiscovery][14] can be used in conjunction with ECS and Docker to 
 
 #### AWSVPC Mode
 
-For Agent v6.10+, `awsvpc` mode is supported for both applicative containers and the Agent container, provided:
+For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instances security group to reach the applicative containers on relevant ports.
 
-1. For the apps and the Agent in `awsvpc` mode, security groups must be set to allow:
-
-    - The Agent's security group to reach the applicative containers on relevant ports.
-    - The Agent's security group to reach the host instances on TCP port 51678. The ECS Agent container must either run in host network mode (default) or have a port binding on the host.
-
-2. For apps in `awsvpc` mode and the Agent in bridge mode, security groups must be set to allow the host instances security group to reach the applicative containers on relevant ports.
+While it's possible to run the Agent in `awsvpc` mode, it's not the recommended setup, because it may be difficult to retrieve the ENI IP to reach the Agent for Dogstatsd metrics and APM traces.
+Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6]
 
 ### Process collection
 

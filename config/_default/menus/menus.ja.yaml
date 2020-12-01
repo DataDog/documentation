@@ -63,6 +63,12 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: incident
+    name: Incident Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 6
+    parent: product
   - identifier: サーバーレス
     name: サーバーレス
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
@@ -3578,6 +3584,9 @@ footer_product:
   - name: リアルユーザーモニタリング
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
+  - name: Incident Management
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
   - name: サーバーレス
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140

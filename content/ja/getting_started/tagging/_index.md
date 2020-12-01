@@ -7,6 +7,7 @@ aliases:
   - /ja/guides/getting_started/tagging/
   - /ja/developers/getting_started/tagging/
   - /ja/tagging
+  - /ja/guides/tagging/
 further_reading:
   - link: /getting_started/tagging/assigning_tags/
     tag: Documentation
@@ -97,7 +98,7 @@ Datadog では、タグを付ける際のベストプラクティスとして、
 | [モニター][13]       | モニターの管理、モニターの作成、ダウンタイムの管理                                             |
 | [メトリクス][14]        | Metric Explorer での絞り込みとグループ化                                                        |
 | [インテグレーション][15]   | AWS、Google Cloud、Azure のメトリクスをオプションで制限                                        |
-| [APM][16]            | App Analytics の絞り込み、サービス マップでの他の領域へのジャンプ                                 |
+| [APM][16]            | Analytics の絞り込み、サービス マップでの他の領域へのジャンプ                                 |
 | [ノートブック][17]      | グラフでのメトリクスの絞り込みおよびグループ化                                                               |
 | [ログ][18]           | ログ検索、分析、パターン、Live Tail、パイプラインの絞り込み                                |
 | [SLO][19]           | SLO、グループ化されたメトリクスベース SLO、グループ化されたモニターベース SLO の検索                           |

@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv
@@ -84,7 +86,9 @@ Directory チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-Directory チェックには、サービスのチェック機能は含まれません。
+**system.disk.directory.exists**:<br>
+Agent が監視するディレクトリを見つけられない、またはアクセスできない場合は、`WARNING` を返します。それ以外の場合は、`OK` を返します。
+
 
 ## トラブルシューティング
 

@@ -15,7 +15,7 @@ further_reading:
     tag: ドキュメント
     text: JSON を使用したダッシュボードの構築
 ---
-アラートグラフは、システムで定義されているモニターの現在のステータスを表示する時系列グラフです。
+アラートグラフは、システムで定義されているほとんどのモニターの現在のステータスを表示する時系列グラフです。
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="アラートグラフ" >}}
 

@@ -100,7 +100,7 @@ spec:
     appKey: "<DATADOG_APP_KEY>"
   agent:
     image:
-      name: "datadog/agent:latest"
+      name: "gcr.io/datadoghq/agent:latest"
     config:
       tolerations:
        - operator: Exists

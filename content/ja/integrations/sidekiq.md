@@ -109,17 +109,13 @@ Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化�
 
 4. [Agent を再起動します][4]。
 
-### 検証
-
-[Agent の `status` サブコマンドを実行][8]し、Checks セクションで `sidekiq` を探します。
-
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "sidekiq" >}}
 
 
-Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq のドキュメント][10]を参照してください。
+Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq のドキュメント][9]を参照してください。
 
 ### ログの収集
 
@@ -140,7 +136,7 @@ Sidekiq インテグレーションでは、カスタムメトリクスも使用
           service: <SERVICE>
     ```
 
-     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。ログが見つからない場合は、[Sidekiq のドキュメントでログの詳細を確認][2]してください。
+     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。ログが見つからない場合は、[Sidekiq のドキュメントでログの詳細を確認][10]してください。
 
 3. [Agent を再起動します][4]。
 
@@ -154,7 +150,7 @@ Sidekiq には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
@@ -163,8 +159,7 @@ Sidekiq には、イベントは含まれません。
 [5]: https://github.com/mperham/sidekiq/wiki/Pro-Metrics
 [6]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
-[10]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
-[11]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
-[12]: https://docs.datadoghq.com/ja/help/
+[8]: https://github.com/DataDog/integrations-core/blob/master/sidekiq/metadata.csv
+[9]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics#custom
+[10]: https://github.com/mperham/sidekiq/wiki/Logging#log-file
+[11]: https://docs.datadoghq.com/ja/help/

@@ -13,7 +13,8 @@ further_reading:
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}
-    {{< nextlink href="network_performance_monitoring/devices/guide/build-ndm-profile" >}}NDM プロファイルを構築{{< /nextlink >}}
+    {{< nextlink href="network_performance_monitoring/devices/guide/cluster-agent" >}}Cluster Agent を使用した NDM{{< /nextlink >}} 
+   {{< nextlink href="network_performance_monitoring/devices/guide/build-ndm-profile" >}}NDM プロファイルを構築{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

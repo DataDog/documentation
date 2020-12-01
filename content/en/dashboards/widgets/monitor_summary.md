@@ -2,6 +2,7 @@
 title: Monitor Summary Widget
 kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
+widget_type: "manage_status"
 aliases:
     - /graphing/widgets/monitor_summary/
 further_reading:
@@ -63,42 +64,11 @@ You can optionally define the title’s size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][3] for the monitor summary widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][3] documentation for additional reference.
 
-```text
-MANAGE_STATUS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["manage_status"]},
-        "query": {"type": "string"},
-        "summary_type": {"enum": ["monitors", "groups", "combined"]},
-        "sort": {"type": "string"},
-        "display_format": {"enum": ["counts", "countsAndList", "list"]},
-        "color_preference": {"enum": ["background", "text"]},
-        "hide_zero_counts": {"type": "boolean"},
-        "show_last_triggered": {"type": "boolean"},
-        "title": {"type": "string"},
-        "title_size": {"type": "string"},
-        "title_align": {"enum": ["center", "left", "right"]}
-    },
-    "required": ["type", "query"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][4] for the monitor summary widget is:
 
-| Parameter             | Type    | Required | Description                                                                              |
-|-----------------------|---------|----------|------------------------------------------------------------------------------------------|
-| `type`                | string  | yes      | Type of the widget, for the monitor summary widget use `manage_status`                   |
-| `query`               | string  | yes      | Query to filter the monitors with                                                        |
-| `summary_type`        | string  | no       | Which summary type should be used                                                        |
-| `sort`                | string  | no       | How to sort results, e.g. `status,asc`. Available sort field values are: `group`, `name`, `status` or `triggered`, and available order values are `asc` or `desc`. Defaults to `status,asc`.|
-| `display_format`      | string  | no       | What to display on the widget. Available values are: `counts`, `countsAndList` or `list` |
-| `color_preference`    | string  | no       | Which color to use on the widget. Available values are: `background` or `text`           |
-| `hide_zero_counts`    | Boolean | no       | Whether to show counts of 0 or not                                                       |
-| `show_last_triggered` | Boolean | no       | Whether to show the time that has elapsed since the monitor/group triggered              |
-| `title`               | string  | no       | Title of the widget                                                                      |
-| `title_size`          | string  | no       | Size of the title                                                                        |
-| `title_align`         | string  | no       | How to align the title. Available values are: `center`, `left`, or `right`               |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
@@ -106,4 +76,5 @@ MANAGE_STATUS_SCHEMA = {
 
 [1]: /monitors/manage_monitor/
 [2]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /dashboards/graphing_json/widget_json/
+[3]: /api/v1/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

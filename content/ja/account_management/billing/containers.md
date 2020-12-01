@@ -14,7 +14,7 @@ Kubernetes は、ポッドの IP アドレスを取得し、そのポッドに�
 
 ### Fargate
 
-Fargate は同時に発生するタスクの数に基づいて課金されます。料金の詳細は、料金ページの[サーバーレス][4]セクションを参照してください。
+Fargate は同時に発生するタスクの数に基づいて課金されます。料金の詳細は、料金ページの[インフラストラクチャー][4]セクションを参照してください。
 
 ## トラブルシューティング
 
@@ -25,5 +25,5 @@ Fargate は同時に発生するタスクの数に基づいて課金されます
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: https://www.datadoghq.com/pricing/#section-infrastructure
+[4]: https://www.datadoghq.com/pricing/#section-infra
 [5]: /ja/help/

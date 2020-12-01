@@ -212,7 +212,7 @@
     "summary": "Récupérer une liste de signaux de sécurité",
     "request_schema_description": "La requête de récupération d'une liste de signaux de sécurité."
   },
-  "GetIncidentServices": {
+  "ListIncidentServices": {
     "description": "Récupérez tous les services liés à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
     "summary": "Récupérer la liste de tous les services liés à un incident"
   },
@@ -236,7 +236,7 @@
     "request_description": "Charge utile du service lié à un incident.",
     "request_schema_description": "Requête de mise à jour avec une charge utile de service lié à un incident."
   },
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "description": "Récupérez toutes les équipes liées à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
     "summary": "Récupérer la liste de toutes les équipes liées à un incident"
   },

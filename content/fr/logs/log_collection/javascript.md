@@ -6,11 +6,11 @@ dependencies:
 kind: documentation
 title: Collecte de logs à partir des navigateurs
 ---
-Envoyez des logs à Datadog à partir de navigateurs Web ou d'autres clients Javascript avec la bibliothèque de journalisation JavaScript côté client `datadog-logs`.
+Envoyez des logs à Datadog à partir de navigateurs Web ou d'autres clients Javascript avec le SDK de collecte de logs à partir des navigateurs.
 
-Utilisez la bibliothèque `datadog-logs` pour envoyer des logs directement à Datadog depuis les clients JS. Vous pourrez notamment :
+Utilisez le SDK de collecte de logs à partir des navigateurs afin d'envoyer des logs directement à Datadog depuis les clients JS. Vous pourrez notamment :
 
-- Utiliser la bibliothèque en tant que logger et transmettre tous les logs à Datadog sous forme de documents JSON
+- Utiliser le SDK en tant que logger ; tous les logs sont transmis à Datadog sous forme de documents JSON
 - Ajouter du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé
 - Incorporer et transmettre automatiquement chaque erreur frontend
 - Transmettre les erreurs frontend
@@ -19,19 +19,19 @@ Utilisez la bibliothèque `datadog-logs` pour envoyer des logs directement à Da
 
 ## Configuration
 
-**Token client Datadog** : pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la bibliothèque `datadog-logs`, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][2]. Consultez la [documentation relative aux tokens client][2] pour en savoir plus.
+**Token client Datadog** : pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la le SDK de collecte de logs à partir des navigateurs, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][2]. Consultez la [documentation relative aux tokens client][2] pour en savoir plus.
 
-**Bibliothèque Datadog de collecte de logs à partir des navigateurs** : configurez la bibliothèque via [NPM](#npm) ou utilisez les extraits de code [CDN asynchrone](#cdn-asynchrone) ou [CDN synchrone](#cdn-synchrone) dans le tag head.
+**SDK Datadog de collecte de logs à partir des navigateurs** : configurez le SDK via [NPM](#npm) ou utilisez les extraits de code [CDN asynchrone](#cdn-asynchrone) ou [CDN synchrone](#cdn-synchrone) dans le tag head.
 
-**Navigateurs pris en charge** : la bibliothèque `datadog-logs` prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE10 et IE11. Consultez le tableau des [navigateurs pris en charge][4].
+**Navigateurs pris en charge** : le SDK de collecte de logs à partir des navigateurs prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE10 et IE11. Consultez le tableau des [navigateurs pris en charge][4].
 
 ### Choisir la bonne méthode d'installation
 
-| Méthode d'installation        | Cas d'utilisation                                                                                                                                                                                                                                                                                                         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npm (node package manager) | Cette méthode est recommandée pour les applications Web modernes. Le SDK RUM est inclus dans le package avec le reste de votre code JavaScript frontend. Les performances de chargement des pages ne sont pas affectées. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK.                            |
-| CDN asynchrone                  | Cette méthode est recommandée pour les applications Web devant satisfaire des objectifs de performance. Le SDK RUM est chargé à partir de notre CDN de façon asynchrone : ainsi, le téléchargement du SDK n'affecte pas les performances de chargement des pages. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK. |
-| CDN synchrone                   | Cette méthode est recommandée pour recueillir tous les événements RUM. Le SDK RUM est chargé à partir de notre CDN de façon synchrone : ainsi, le SDK est chargé en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement des pages.                                                     |
+| Méthode d'installation        | Cas d'utilisation                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm (node package manager) | Cette méthode est recommandée pour les applications Web modernes. Le SDK de collecte de logs à partir des navigateurs est inclus dans le package avec le reste de votre code JavaScript frontend. Les performances de chargement des pages ne sont pas affectées. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK. **Remarque :** si vous avez recours au SDK RUM, il est recommandé d'utiliser une version correspondante. |
+| CDN asynchrone                  | Cette méthode est recommandée pour les applications Web devant satisfaire des objectifs de performance. Le SDK de collecte de logs à partir des navigateurs est chargé à partir de notre CDN de façon asynchrone : ainsi, le téléchargement du SDK n'affecte pas les performances de chargement des pages. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK.                                                  |
+| CDN synchrone                   | Cette méthode est recommandée pour recueillir tous les événements RUM. Le SDK de collecte de logs à partir des navigateurs est chargé à partir de notre CDN de façon synchrone : ainsi, le SDK est chargé en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement des pages.                                                                                                      |
 
 ### NPM
 
@@ -50,7 +50,7 @@ datadogLogs.init({
 
 ### CDN asynchrone
 
-Chargez et configurez la bibliothèque dans la section head de vos pages.
+Chargez et configurez le SDK dans la section head de vos pages.
 
 <!-- prettier-ignore -->
 ```html
@@ -80,7 +80,7 @@ Chargez et configurez la bibliothèque dans la section head de vos pages.
 
 ### CDN synchrone
 
-Pour recevoir tous les logs et toutes les erreurs, chargez et configurez la bibliothèque au début de la section head de vos pages.
+Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK au début de la section head de vos pages.
 
 ```html
 <html>
@@ -100,7 +100,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez la bibl
 </html>
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 ### TypeScript
 
@@ -121,7 +121,7 @@ window.DD_LOGS.init({
 
 ### Paramètres de lancement
 
-Les paramètres suivants peuvent être utilisés pour configurer l'envoi des logs à Datadog avec la bibliothèque :
+Les paramètres suivants peuvent être utilisés pour configurer l'envoi des logs à Datadog avec le SDK Datadog de collecte de logs à partir des navigateurs :
 
 | Paramètre             | Type    | Obligatoire | Valeur par défaut         | Description                                                                                              |
 | --------------------- | ------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
@@ -146,7 +146,7 @@ Options qui doivent avoir une configuration correspondante lors de l'utilisation
 
 ### Logs personnalisés
 
-Une fois la bibliothèque de collecte de logs à partir des navigateurs lancée, envoyez une entrée de log personnalisée directement à Datadog avec l'API :
+Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, envoyez une entrée de log personnalisée directement à Datadog avec l'API :
 
 ```
 logger.debug | info | warn | error (message: string, messageContext = Context)
@@ -176,7 +176,7 @@ DD_LOGS.onReady(function() {
 window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 #### Résultats
 
@@ -206,7 +206,7 @@ Le logger ajoute les informations suivantes par défaut :
 
 ### Paramètre status
 
-Une fois la bibliothèque de collecte à partir des navigateurs lancée, envoyez une entrée de log personnalisée directement à Datadog avec l'API en utilisant le statut comme paramètre :
+Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, envoyez une entrée de log personnalisée directement à Datadog avec l'API en utilisant le statut comme paramètre :
 
 ```
 log (message: string, messageContext: Context, status? = 'debug' | 'info' | 'warn' | 'error')
@@ -256,11 +256,11 @@ Les placeholders dans les exemples ci-dessus sont décrits plus bas :
 
 ### Définir plusieurs loggers
 
-La bibliothèque Datadog de collecte de logs à partir des navigateurs contient un logger par défaut, mais vous pouvez également définir d'autres loggers.
+Le SDK Datadog de collecte de logs à partir des navigateurs contient un logger par défaut, mais vous pouvez également définir d'autres loggers.
 
 #### Créer un logger
 
-Une fois la bibliothèque de collecte de logs à partir des navigateurs lancée, utilisez l'API `createLogger` pour définir un nouveau logger :
+Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, utilisez l'API `createLogger` pour définir un nouveau logger :
 
 ```text
 createLogger (name: string, conf?: {
@@ -339,16 +339,17 @@ if (window.DD_LOGS) {
 }
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 ### Remplacer le contexte
 
 #### Contexte global
 
-Une fois la bibliothèque Datadog de collecte de logs à partir des navigateurs lancée, vous pouvez :
+Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, vous pouvez :
 
-- Définir l'intégralité du contexte pour tous vos loggers avec l'API `setLoggerGlobalContext (context: Context)`.
-- Ajouter un contexte à l'ensemble de vos loggers avec l'API `addLoggerGlobalContext (key: string, value: any)`.
+- Définir l'intégralité du contexte pour tous vos loggers avec l'API `setLoggerGlobalContext (context: Context)`
+- Ajouter un contexte à l'ensemble de vos loggers avec l'API `addLoggerGlobalContext (key: string, value: any)`
+- Récupérer tout le contexte global, avec l'API `getLoggerGlobalContext ()`
 
 ##### NPM
 
@@ -360,6 +361,8 @@ import { datadogLogs } from '@datadog/browser-logs'
 datadogLogs.setLoggerGlobalContext("{'env': 'staging'}")
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer)
+
+const context = datadogLogs.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 ```
 
 #### CDN asynchrone
@@ -374,6 +377,10 @@ DD_LOGS.onReady(function() {
 DD_LOGS.onReady(function() {
   window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
 })
+
+DD_LOGS.onReady(function() {
+  var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
+})
 ```
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
@@ -386,9 +393,11 @@ Pour CDN synchrone, utilisez :
 window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({ env: 'staging' })
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer)
+
+var context = window.DD_LOGS && DD_LOGS.getLoggerGlobalContext() // => {env: 'staging', referrer: ...}
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 #### Contexte du logger
 
@@ -435,11 +444,11 @@ window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}")
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 ### Filtrer par statut
 
-Une fois la bibliothèque Datadog de collecte de logs à partir des navigateurs lancée, définissez le niveau de log minimum pour votre logger avec l'API :
+Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, définissez le niveau de log minimum pour votre logger avec l'API :
 
 ```
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
@@ -477,11 +486,11 @@ Pour CDN synchrone, utilisez :
 window.DD_LOGS && DD_LOGS.logger.setLevel('<NIVEAU>')
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 ### Modifier la destination
 
-Par défaut, les loggers créés par la bibliothèque de collecte de logs à partir des navigateurs envoient les logs à Datadog. Une fois la bibliothèque lancée, il est possible de configurer le logger de façon à ce que les logs soient envoyés à la `console` ou qu'ils ne soient pas envoyés du tout (`silent`) à l'aide de l'API :
+Par défaut, les loggers créés par le SDK Datadog de collecte de logs à partir des navigateurs envoient les logs à Datadog. Une fois le SDK lancé, il est possible de configurer le logger de façon à ce que les logs soient envoyés à la `console` ou qu'ils ne soient pas envoyés du tout (`silent`) avec l'API :
 
 ```
 setHandler (handler?: 'http' | 'console' | 'silent')
@@ -517,7 +526,7 @@ Pour CDN synchrone, utilisez :
 window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
 ```
 
-**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement du SDK échoue.
 
 [1]: /fr/account_management/api-app-keys/#api-keys
 [2]: /fr/account_management/api-app-keys/#client-tokens

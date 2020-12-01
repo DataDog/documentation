@@ -63,23 +63,29 @@ main_left:
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 10
     parent: product
+  - identifier: incident
+    name: Incident Management
+    pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/incidents.svg'' alt=''incident icon''>'
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 11
+    parent: product
   - identifier: serverless
     name: Serverless
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''serverless icon''>'
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
-    weight: 11
+    weight: 12
     parent: product
   - identifier: alerts
     name: Alerts
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''alert icon''>'
     url: 'https://www.datadoghq.com/product/platform/alerts/'
-    weight: 12
+    weight: 13
     parent: product
   - identifier: api
     name: API
     pre: '<img class=''menu-icon'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''api icon''>'
     url: 'https://docs.datadoghq.com/api'
-    weight: 13
+    weight: 14
     parent: product
   - identifier: customers
     name: Customers
@@ -1125,6 +1131,11 @@ main:
     parent: alerting
     identifier: incidents
     weight: 8
+  - name: Datadog Clipboard
+    url: monitors/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 801
   - name: Monitor-based SLOs
     url: monitors/service_level_objectives/monitor/
     parent: slos
@@ -1255,7 +1266,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: OpenTracing and OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1675,7 +1686,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: dashboards/timeboards/#graph-menu
+    url: logs/guide/correlate-logs-with-metrics
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -2251,6 +2262,18 @@ api_v1:
     parent: AWS Integration
     url: '#list-namespace-rules'
     generated: true
+  - name: Delete a tag filtering entry
+    parent: AWS Integration
+    url: '#delete-a-tag-filtering-entry'
+    generated: true
+  - name: Get all AWS tag filters
+    parent: AWS Integration
+    url: '#get-all-aws-tag-filters'
+    generated: true
+  - name: Set an AWS tag filter
+    parent: AWS Integration
+    url: '#set-an-aws-tag-filter'
+    generated: true
   - name: Generate a new external ID
     parent: AWS Integration
     url: '#generate-a-new-external-id'
@@ -2482,6 +2505,18 @@ api_v1:
   - name: List IP Ranges
     parent: IP Ranges
     url: '#list-ip-ranges'
+    generated: true
+  - name: Incident Services
+    url: /api/v1/incident-services/
+    identifier: Incident Services
+    generated: true
+  - name: Incident Teams
+    url: /api/v1/incident-teams/
+    identifier: Incident Teams
+    generated: true
+  - name: Incidents
+    url: /api/v1/incidents/
+    identifier: Incidents
     generated: true
   - name: Key Management
     url: /api/v1/key-management/
@@ -2735,6 +2770,10 @@ api_v1:
     parent: PagerDuty Integration
     url: '#update-a-single-service-object'
     generated: true
+  - name: Processes
+    url: /api/v1/processes/
+    identifier: Processes
+    generated: true
   - name: Roles
     url: /api/v1/roles/
     identifier: Roles
@@ -2858,6 +2897,22 @@ api_v1:
   - name: Get all locations (public and private)
     parent: Synthetics
     url: '#get-all-locations-public-and-private'
+    generated: true
+  - name: Create a private location
+    parent: Synthetics
+    url: '#create-a-private-location'
+    generated: true
+  - name: Delete a private location
+    parent: Synthetics
+    url: '#delete-a-private-location'
+    generated: true
+  - name: Get a private location
+    parent: Synthetics
+    url: '#get-a-private-location'
+    generated: true
+  - name: Edit a private location
+    parent: Synthetics
+    url: '#edit-a-private-location'
     generated: true
   - name: Get the list of all tests
     parent: Synthetics
@@ -2983,6 +3038,10 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-analyzed-logs'
     generated: true
+  - name: Get Usage Attribution
+    parent: Usage Metering
+    url: '#get-usage-attribution'
+    generated: true
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: '#get-hourly-usage-for-lambda'
@@ -2998,6 +3057,10 @@ api_v1:
   - name: Get hourly usage for hosts and containers
     parent: Usage Metering
     url: '#get-hourly-usage-for-hosts-and-containers'
+    generated: true
+  - name: Get hourly usage for incident management
+    parent: Usage Metering
+    url: '#get-hourly-usage-for-incident-management'
     generated: true
   - name: Get hourly usage for indexed spans
     parent: Usage Metering
@@ -3055,9 +3118,9 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-custom-metrics'
     generated: true
-  - name: Get top 500 custom metrics by hourly average
+  - name: Get top custom metrics by hourly average
     parent: Usage Metering
-    url: '#get-top-500-custom-metrics-by-hourly-average'
+    url: '#get-top-custom-metrics-by-hourly-average'
     generated: true
   - name: Get hourly usage for Trace Search
     parent: Usage Metering
@@ -3409,6 +3472,14 @@ api_v2:
     url: /api/v2/pagerduty-integration/
     identifier: PagerDuty Integration
     generated: true
+  - name: Processes
+    url: /api/v2/processes/
+    identifier: Processes
+    generated: true
+  - name: Get all processes
+    parent: Processes
+    url: '#get-all-processes'
+    generated: true
   - name: Roles
     url: /api/v2/roles/
     identifier: Roles
@@ -3612,6 +3683,9 @@ footer_product:
   - name: Real User Monitoring
     url: 'https://www.datadoghq.com/product/real-user-monitoring/'
     weight: 135
+  - name: Incident Management
+    url: 'https://www.datadoghq.com/product/incident-management/'
+    weight: 136
   - name: Serverless
     url: 'https://www.datadoghq.com/product/serverless-monitoring/'
     weight: 140

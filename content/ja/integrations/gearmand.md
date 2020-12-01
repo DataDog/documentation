@@ -135,9 +135,8 @@ Gearmand チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-`gearman.can_connect`:
-
-Agent が Gearman に接続してメトリクスを収集できない場合は、`Critical` を返します。
+**gearman.can_connect**:<br>
+Agent が Gearman に接続してメトリクスを収集できない場合は、`CRITICAL` を返します。
 
 ## トラブルシューティング
 

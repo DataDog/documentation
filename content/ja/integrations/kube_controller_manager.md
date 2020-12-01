@@ -66,9 +66,8 @@ Container-as-a-Service クラスターでは公開されません。
 
 ### サービスのチェック
 
-`kube_controller_manager.prometheus.health`:
-
-Agent がメトリクスのエンドポイントに到達できない場合は、CRITICAL を返します。
+**kube_controller_manager.prometheus.health**:<br>
+Agent がメトリクスのエンドポイントに到達できない場合は `CRITICAL` を返します。
 
 ### イベント
 

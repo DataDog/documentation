@@ -92,8 +92,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5s
-
+    timeout connect 5
 # ポート 3833 で HAProxy 統計情報の表示を宣言します
 # このページを表示するための資格情報は不要です
 # 一度セットアップを行うとオフにできます。
@@ -102,20 +101,18 @@ listen stats
     mode http
     stats enable
     stats uri /
-
 # このセクションは、DNS レコードをリロードするためのものです
-# <DNS_サーバー_IP> と <DNS_セカンダリサーバー_IP> を DNS サーバーの IP アドレスに置き換えます。
+# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
 # HAProxy 1.8 以降の場合
 resolvers my-dns
-    nameserver dns1 <DNS_サーバー_IP>:53
-    nameserver dns2 <DNS_セカンダリサーバー_IP>:53
+    nameserver dns1 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-
 # これは、ログを送信するために Agent が接続するエンドポイントを
 # 宣言します (例: "logs.config.logs_dd_url" の値)
 frontend logs_frontend
@@ -123,7 +120,6 @@ frontend logs_frontend
     mode tcp
     option tcplog
     default_backend datadog-logs
-
 # これは Datadog サーバーです。実際、上記で定義された
 # Forwarderのフロントエンドに着信する TCP リクエストは、
 # Datadog のパブリックエンドポイントにプロキシされます。
@@ -160,7 +156,6 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-
 # これは、ポート 3833 で HAProxy 統計の表示を宣言します
 # このページを表示するために資格情報は必要ありません。
 # セットアップが完了したら、このページをオフにすることができます。
@@ -169,27 +164,24 @@ listen stats
     mode http
     stats enable
     stats uri /
-
 # このセクションは、DNS レコードをリロードするためのものです
-# <DNS_サーバー_IP> と <DNS_セカンダリサーバー_IP> を DNS サーバーの IP アドレスに置き換えます。
+# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
 # HAProxy 1.8 以降の場合
 resolvers my-dns
-    nameserver dns1 <DNS_サーバー_IP>:53
-    nameserver dns2 <DNS_セカンダリサーバー_IP>:53
+    nameserver dns1 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-
 # これは、ログを送信するために Agent が接続するエンドポイントを
 # 宣言します (例: "logs.config.logs_dd_url" の値)
 frontend logs_frontend
     bind *:10514
     mode tcp
     default_backend datadog-logs
-
 # これは Datadog サーバーです。実際、上記で定義された
 # フォワーダーのフロントエンドに着信する TCP リクエストは、
 # Datadog のパブリックエンドポイントにプロキシされます。
