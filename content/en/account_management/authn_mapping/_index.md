@@ -10,7 +10,7 @@ further_reading:
   text: "RBAC for Log Management"
 ---
 
-If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog using attributes sent from your Identity Provider.
+If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog using attributes sent from your Identity Provider. To create and manage Authentication Mappings through the API, users need to use an application key owned by someone with the Access Management permission.
 
 **Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
 

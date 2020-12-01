@@ -56,7 +56,7 @@ Setting the value without a secret results in the token being readable in the `P
 {{< tabs >}}
 {{% tab "Secret" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -78,7 +78,7 @@ Setting the value without a secret results in the token being readable in the `P
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64
@@ -94,7 +94,7 @@ Setting the value without a secret results in the token being readable in the `P
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-1. Run the following command to create a secret token:
+1. Run the following command to create a secret token. Your token must be at least 32 characters long.
 
     ```shell
     echo -n '<ThirtyX2XcharactersXlongXtoken>' | base64

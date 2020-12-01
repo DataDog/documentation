@@ -31,7 +31,7 @@ To add members to your organization:
 2. Click **Invite Users** in the upper right corner of the page.
 3. Enter the email address of the user you wish to invite to your Datadog account.
 4. Assign one or more [user roles][1] to the users.
-**Note**: Users with Standard Access can invite a user to any role they have themselves. Users with Privileged Access can invite a user to any role.
+**Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
 5. Click **Send Invites**
 
 {{< img src="account_management/users/invite_user.png" alt="Add a user to your organization"  style="width:80%;">}}
@@ -50,7 +50,7 @@ In grid view, hover over the user box and click **Resend Invite**:
 
 ## Edit a user's roles
 
-Only users with Privileged Access, such as users with the Datadog Admin Role, can change another user's role:
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can change another user's role:
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line.
@@ -63,7 +63,7 @@ See the [Role Based Access Control][2] documentation to discover all roles avail
 
 ## Disable existing members
 
-Only user with Privileged Access, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might own events, dashboards, etc. that are not supposed to be removed. When a user is disabled, any Application Keys they had generated are automatically revoked.
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys they had generated are automatically revoked.
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line.
