@@ -52,13 +52,13 @@ Le check ZooKeeper vérifie les connexions client et les latences, surveille le 
 
 ### Installation
 
-Le check ZooKeeper est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs ZooKeeper.
+Le check ZooKeeper est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs ZooKeeper.
 
 ### Configuration
 
-#### Liste blanche Zookeeper
+#### Liste blanche ZooKeeper
 
-Depuis la version 3.5 de Zookeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation Zookeeper][3]) permet d'ajouter des [commandes à 4 lettres][4] à la liste blanche. Par défaut, seule la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
+Depuis la version 3.5 de ZooKeeper, le paramètre `4lw.commands.whitelist` (voir la [documentation ZooKeeper][3]) permet d'ajouter des [commandes à 4 lettres][4] à la liste blanche. Par défaut, seule la commande `srvr` est autorisée. Ajoutez `stat` et `mntr` à la liste blanche, car le processus d'intégration repose sur ces commandes.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -71,6 +71,39 @@ Pour configurer ce check lorsque l'Agent est exécuté sur un host :
    Consultez le [fichier d'exemple zk.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][3].
+
+#### Activation de l'authentification SSL
+
+La version 3.5 de ZooKeeper prend en charge l'authentification SSL. Pour découvrir comment configurer l'authentification SSL avec ZooKeeper, consultez le [guide ZooKeeper à ce sujet][4] (en anglais).
+
+Après avoir configuré l'authentification SSL pour ZooKeeper, vous pouvez égalemet configuré l'Agent Datadog afin de le connecter à ZooKeeper via SSL. Si vous avez déjà configuré l'authentification à l'aide de fichiers JKS, suivez les étapes ci-dessous pour les convertir en fichiers PEM afin de procéder à la configuration TLS/SSL.
+
+Les exemples de commandes suivants supposent que vos fichiers `truststore` et `keystore` JKS portent les noms suivants :
+
+- `server_truststore.jks`
+- `server_keystore.jks` 
+- `client_truststore.jks`
+- `client_keystore.jks`
+
+Nous partons également du principe que les fichiers `keystore` et `truststore` côté client et serveur disposent chacun des certificats réciproques, avec les alias `server_cert` et `client_cert`. Ainsi, le client ZooKeeper Java peut d'ores et déjà se connecter à un serveur ZooKeeper.
+Si votre clé privée est protégée par un mot de passe, assurez-vous d'indiquer le mot de passe pour l'option `tls_private_key_password` du fichier `config.yaml`.
+
+Pour convertir des fichiers JKS en fichiers PEM :
+
+1. Récupérez le fichier `ca_cert.pem` à partir du fichier `client_truststore.jks`, puisque le `truststore` du client contient le certificat du serveur fiable :
+    ```
+    keytool -exportcert -file ca_cert.pem -keystore client_truststore.jks -alias server_cert -rfc
+    ```
+
+2. Récupérez le fichier `cert.pem` à partir du fichier `client_keystore.jks`, puisque le `keystore` du client contient le certificat du client pour l'alias `client_cert` :
+    ```
+    keytool -importkeystore -srckeystore client_keystore.jks -destkeystore cert.p12 -srcstoretype jks -deststoretype pkcs12 -srcalias client_cert
+    ```   
+
+3. Exécutez la commande `openssl pkcs12`, afin d'exporter le certificat client et la clé privée du certificat. L'option `tls_cert` peut lire et parser le fichier PEM, qui contient à la fois le certificat et la clé privée. Si vous souhaitez obtenir un fichier qui n'est pas protégé par un mot de passe, ajoutez `-nodes` à la commande :
+   ```
+   openssl pkcs12 -in cert.p12 -out cert.pem
+   ``` 
 
 #### Collecte de logs
 
@@ -124,6 +157,7 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 [1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide
 {{% /tab %}}
 {{% tab "Environnement conteneurisé" %}}
 
@@ -173,7 +207,7 @@ Bien qu'elles soient toujours envoyées, les métriques suivantes seront prochai
 
 ### Événements
 
-Le check Zookeeper n'inclut aucun événement.
+Le check ZooKeeper n'inclut aucun événement.
 
 ### Checks de service
 
