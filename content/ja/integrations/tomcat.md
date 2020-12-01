@@ -152,9 +152,8 @@ mydomain:attr0=val0,attr1=val1
 
 #### ログの収集
 
-_Agent バージョン 6.0 以降で利用可能_
 
-1. Tomcat は、デフォルトで `log4j` ロガーを使用します。ファイルへのログ記録を有効にし、ログ形式をカスタマイズするには、`$CATALINA_BASE/lib` ディレクトリにある `log4j.properties` ファイルを以下のように編集します。
+1. ログを Datadog に送信する際、Tomcat は `log4j` ロガーを使用します。バージョン 8.0 より前の Tomcat では、`log4j` がデフォルトで構成されています。バージョン 8.0 以降の Tomcat では、[Apache Tomcat ドキュメント][5] に沿って Tomcat を構成し `log4j` を使用する必要があります。この手順の初めに、以下の要領で  `$CATALINA_BASE/lib` ディレクトリにある `log4j.properties` ファイルを編集します。
 
    ```conf
      log4j.rootLogger = INFO, CATALINA
@@ -197,6 +196,7 @@ _Agent バージョン 6.0 以降で利用可能_
      log4j.logger.org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager] =\
        INFO, HOST-MANAGER
    ```
+   そして、[Tomcat ドキュメント][5] の残りの手順に従い `log4j` を構成します。
 
 2. Datadog のインテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
 
@@ -205,7 +205,7 @@ _Agent バージョン 6.0 以降で利用可能_
      %d [%t] %-5p %c - %m%n
    ```
 
-    フォーマットが異なる場合は、[インテグレーションパイプライン][5]を複製して編集します。Tomcat のログ機能の詳細については、Tomcat の[ログに関するドキュメント][6]を確認してください。
+    フォーマットが異なる場合は、[インテグレーションパイプライン][6]を複製して編集します。Tomcat のログ機能の詳細は、Tomcat の[ログに関するドキュメント][7]を確認してください。
 
 3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -236,8 +236,9 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/integrations/java/
-[5]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-[6]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
+[5]: https://tomcat.apache.org/tomcat-8.0-doc/logging.html#Using_Log4j
+[6]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
+[7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 {{% /tab %}}
 {{% tab "Containerized" %}}
 

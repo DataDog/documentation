@@ -24,9 +24,22 @@ further_reading:
 
 ログが Raw 形式の場合、フォーマッタを更新してロガーコンフィギュレーションに `dd.trace_id` and `dd.span_id` を含めます:
 
+{{< tabs >}}
+{{% tab "Log4j2" %}}
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+```
+
+{{% /tab %}}
+{{% tab "slf4j/logback" %}}
+
 ```xml
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **注**: トレース ID の `attribute.path` が `dd.trace_id` **でない**場合は、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは[このトピックについてのよくあるご質問][2]を参照してください。
 
@@ -59,6 +72,12 @@ finally {
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
+```
+
+次にロガーコンフィギュレーションを更新して `dd.trace_id` と `dd.span_id` をログパターンに含めます:
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
 {{% /tab %}}

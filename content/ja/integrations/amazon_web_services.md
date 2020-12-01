@@ -120,7 +120,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
 {{< tabs >}}
 {{% tab "自動 - CloudFormation" %}}
 
-1. [Datadog AWS インテグレーション タイル][1]を開きます。
+1. [Datadog AWS インテグレーションタイル][1] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. _Configuration_ タブで **Automatically Using CloudFormation** を選択します。既に AWS アカウントがアタッチされている場合は、まず **Add another account** をクリックしてください。
 4. AWS コンソールにログインします。
 5. CloudFormation ページでスタックを新規作成し、[Datadog API キー][2]を入力します。
@@ -182,6 +182,7 @@ Amazon Web Services との Datadog インテグレーションをセットアッ
                 "cloudfront:ListDistributions",
                 "cloudtrail:DescribeTrails",
                 "cloudtrail:GetTrailStatus",
+                "cloudtrail:LookupEvents",
                 "cloudwatch:Describe*",
                 "cloudwatch:Get*",
                 "cloudwatch:List*",
@@ -298,7 +299,7 @@ Resource Group Tagging API の主な用途は、カスタム タグの収集に�
 
 ### GovCloud と China
 
-1. [AWS インテグレーション タイル][69]を開きます。
+1. [AWS インテグレーションタイル][69] を開きます。**Install** ボタンをクリックし、このインテグレーションをインストールします。
 2. **Access Keys (GovCloud or China Only)** タブを選択します。
 3. AWS アクセス キーと AWS 秘密キーを入力します。**GovCloud と中国では、アクセス キーと秘密キーのみが許可されます。**
 4. ダイアログの左側で、メトリクスを収集するサービスを選択します。

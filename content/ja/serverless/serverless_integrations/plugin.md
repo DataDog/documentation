@@ -5,7 +5,7 @@ kind: ドキュメント
 title: Datadog サーバーレスプラグイン
 ---
 [![serverless](http://public.serverless.com/badges/v1.svg)](https://www.serverless.com)
-[![CircleCI](https://img.shields.io/circleci/build/github/DataDog/serverless-plugin-datadog)](https://circleci.com/gh/DataDog/serverless-plugin-datadog)
+![build](https://github.com/DataDog/serverless-plugin-datadog/workflows/build/badge.svg)
 [![Code Coverage](https://img.shields.io/codecov/c/github/DataDog/serverless-plugin-datadog)](https://codecov.io/gh/DataDog/serverless-plugin-datadog)
 [![NPM](https://img.shields.io/npm/v/serverless-plugin-datadog)](https://www.npmjs.com/package/serverless-plugin-datadog)
 [![Slack](https://img.shields.io/badge/slack-%23serverless-blueviolet?logo=slack)](https://datadoghq.slack.com/channels/serverless/)
@@ -71,6 +71,45 @@ plugins:
 
 TypeScript を使用する場合、タイプ定義が欠落しているというエラーが発生する可能性があります。事前に構築されたレイヤーを使用し (たとえば、`addLayers` をデフォルトの `true` に設定)、`datadog-lambda-js` と `dd-trace` パッケージからヘルパー関数をインポートしてカスタムメトリクスを送信したり、特定の関数をインスツルメントしたりする必要がある場合、タイプ定義が欠落します。エラーを解決するには、プロジェクトの package.json の `devDependencies` リストに `datadog-lambda-js` と `dd-trace` を追加します。
 
+### Webpack
+
+`dd-trace` は条件付きインポートの使用やその他の問題などで、Webpack との互換性がないことが知られています。Webpack を使用する場合は、`datadog-lambda-js` と `dd-trace` を Webpack の[外部](https://webpack.js.org/configuration/externals/)に設定してください。これで、ランタイム時にこれらの依存関係を利用できることが Webpack で認識されます。また、`datadog-lambda-js` と `dd-trace` を `package.json` およびビルドプロセスから削除し、Datadog Lambda レイヤーから提供されたバージョンを必ず使用するようにしてください。
+
+#### serverless-webpack
+
+`serverless-webpack` を使用する場合は、`serverless.yml` 内の `datadog-lambda-js` と `dd-trace` を Webpack の config ファイルで外部宣言した上でそれらを除外します。
+
+**webpack.config.js**
+```
+var nodeExternals = require('webpack-node-externals')
+
+module.exports = {
+  // webpack-node-externals を使用してすべてのノードの依存関係を除外します。
+  // 手動で外部設定にすることも可能です。
+  externals: [nodeExternals(), 'dd-trace', 'datadog-lambda-js'],
+}
+```
+
+**serverless.yml**
+```
+custom:
+  webpack:
+    includeModules:
+      forceExclude:
+        - dd-trace
+        - datadog-lambda-js
+```
+
+### Forwarder
+
+[Datadog Forwarder Lambda 関数][7] は、インストールして Lambda 関数ロググループにサブスクライブさせる必要があります。Forwarder の ARN が `forwarder` オプションを介して提供された際に、プラグインが自動的にログサブスクリプションを生成します。
+
+以下のエラーが発生した場合は、提供されている Forwarder ARN が正しいかどうかを再チェックし、サーバーレスアプリケーションが配置されている地域とアカウントから提供されていることを確認してください。
+
+```
+エラーが発生しました。GetaccountapiLogGroupSubscription -  Lambda 関数を実行できませんでした。関数を実行するための許可がCloudWatch Logs に付与されていることを確認してください。(Service: AWSLogs; Status Code: 400; Error Code: InvalidParameterException)。
+
+
 ## 問題を開く
 
 このパッケージでバグが発生した場合は、問題を登録してお知らせください。新しい問題を開く前に、重複を避けるために既存の問題を検索してください。
@@ -95,3 +134,4 @@ TypeScript を使用する場合、タイプ定義が欠落しているという
 [4]: https://pypi.org/project/datadog-lambda/
 [5]: https://www.npmjs.com/package/datadog-lambda-js
 [6]: https://webpack.js.org/configuration/externals/
+[7]: https://docs.datadoghq.com/ja/serverless/forwarder/

@@ -4,8 +4,8 @@ meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: Dash が新機能を発表！インシデントマネジメント、Continuous Profiler など多数の機能が追加されました！
-  mobile_message: Dash イベントで発表された新機能！
-  link: 'https://www.datadoghq.com/blog/dash-2020-new-feature-roundup/'
+  desktop_message: Incident Management が一般に使用できるようになりました。
+  mobile_message: Incident Management が広範に使用できるようになりました。
+  link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
 exclude: []
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
