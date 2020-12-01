@@ -18,6 +18,8 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 
 ### ECS file
 
+To collect all logs written by running applications in your ECS containers and send it to your Datadog application:
+
 {{< tabs >}}
 {{% tab "Linux" %}}
 
@@ -67,13 +69,10 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 
 3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][4].
 
-4. Additional environment variables for Amazon ECS containers are available for configuration. See the [Docker environment variables documentation][5] for more information.
-
 [1]: https://docs.datadoghq.com/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [3]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
 [4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-[5]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -118,12 +117,9 @@ Datadog Agent 6+ collects logs from containers. The recommended way to collect l
 
 3. Make sure your container definition doesn't contain a `logConfiguration.logDriver` parameter, so that the logs are written to `stdout/stderr` and collected by the Agent. If this parameter is set to `awslogs`, collect your Amazon ECS logs without the Agent by using [AWS Lambda to collect ECS logs from CloudWatch][3].
 
-4. Additional environment variables for Amazon ECS containers are available for configuration. See the [Docker environment variables documentation][4] for more information.
-
 [1]: https://docs.datadoghq.com/agent/amazon_ecs/
 [2]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-win.json
 [3]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/
-[4]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -145,15 +141,12 @@ logs:
 
 ## Activate log integrations
 
-The `source` attribute is used to identify the integration to use for each container. Override it directly in your containers labels to start using [log integrations][4]. Read Datadog's [Autodiscovery guide for logs][5] to learn more about this process.
+The `source` attribute is used to identify the integration to use for each container. Override it directly in your containers labels to start using [log integrations][1]. Read Datadog's [Autodiscovery guide for logs][2] to learn more about this process.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/logs/?tab=tailfiles#custom-log-collection
 [2]: /agent/logs/#custom-log-collection
 [3]: getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
-[4]: /getting_started/agent/#installation
-[5]: /logs/processing/#log-processing
