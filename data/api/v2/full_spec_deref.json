@@ -1818,7 +1818,7 @@
                     "type": "string"
                   },
                   "customer_impact_duration": {
-                    "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                    "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                     "format": "int64",
                     "readOnly": true,
                     "type": "integer"
@@ -1966,7 +1966,7 @@
                     "type": "string"
                   },
                   "time_to_detect": {
-                    "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                    "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                     "format": "int64",
                     "readOnly": true,
                     "type": "integer"
@@ -2499,7 +2499,7 @@
             "type": "string"
           },
           "customer_impact_duration": {
-            "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+            "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
             "format": "int64",
             "readOnly": true,
             "type": "integer"
@@ -2647,7 +2647,7 @@
             "type": "string"
           },
           "time_to_detect": {
-            "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+            "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
             "format": "int64",
             "readOnly": true,
             "type": "integer"
@@ -2694,7 +2694,7 @@
                 "type": "string"
               },
               "customer_impact_duration": {
-                "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                 "format": "int64",
                 "readOnly": true,
                 "type": "integer"
@@ -2842,7 +2842,7 @@
                 "type": "string"
               },
               "time_to_detect": {
-                "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                 "format": "int64",
                 "readOnly": true,
                 "type": "integer"
@@ -8507,7 +8507,7 @@
                       "type": "string"
                     },
                     "customer_impact_duration": {
-                      "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                      "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                       "format": "int64",
                       "readOnly": true,
                       "type": "integer"
@@ -8655,7 +8655,7 @@
                       "type": "string"
                     },
                     "time_to_detect": {
-                      "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                      "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                       "format": "int64",
                       "readOnly": true,
                       "type": "integer"
@@ -17629,7 +17629,7 @@
         ]
       },
       "SecurityMonitoringSignalsListResponse": {
-        "description": "The response object with all security signals matching the request and pagination information.",
+        "description": "The response object with all security signals matching the request\nand pagination information.",
         "properties": {
           "data": {
             "description": "An array of security signals matching the request.",
@@ -20304,7 +20304,10 @@
         "tags": [
           "Dashboard Lists"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Fetch the dashboard list’s dashboard definitions.",
@@ -20503,7 +20506,10 @@
         "summary": "Get a Dashboard List",
         "tags": [
           "Dashboard Lists"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Add dashboards to an existing dashboard list.",
@@ -20703,7 +20709,10 @@
         "tags": [
           "Dashboard Lists"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "put": {
         "description": "Update dashboards of an existing dashboard list.",
@@ -20903,7 +20912,10 @@
         "tags": [
           "Dashboard Lists"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/incidents": {
@@ -21098,7 +21110,7 @@
                                 "type": "string"
                               },
                               "customer_impact_duration": {
-                                "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                                "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                                 "format": "int64",
                                 "readOnly": true,
                                 "type": "integer"
@@ -21246,7 +21258,7 @@
                                 "type": "string"
                               },
                               "time_to_detect": {
-                                "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                                "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                                 "format": "int64",
                                 "readOnly": true,
                                 "type": "integer"
@@ -21911,6 +21923,9 @@
         "tags": [
           "Incidents"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -22180,7 +22195,7 @@
                               "type": "string"
                             },
                             "customer_impact_duration": {
-                              "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                              "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -22328,7 +22343,7 @@
                               "type": "string"
                             },
                             "time_to_detect": {
-                              "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                              "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -22961,6 +22976,16 @@
           "Incidents"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteIncident",
+          "parameters": [
+            {
+              "name": "incident_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -23088,6 +23113,9 @@
         "tags": [
           "Incidents"
         ],
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
@@ -23140,7 +23168,7 @@
                               "type": "string"
                             },
                             "customer_impact_duration": {
-                              "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                              "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -23288,7 +23316,7 @@
                               "type": "string"
                             },
                             "time_to_detect": {
-                              "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                              "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -23920,6 +23948,9 @@
         "tags": [
           "Incidents"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "patch": {
@@ -24361,7 +24392,7 @@
                               "type": "string"
                             },
                             "customer_impact_duration": {
-                              "description": "Length of the incident's customer impact in seconds. Equals the difference between `customer_impact_start` and `customer_impact_end`.",
+                              "description": "Length of the incident's customer impact in seconds.\nEquals the difference between `customer_impact_start` and `customer_impact_end`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -24509,7 +24540,7 @@
                               "type": "string"
                             },
                             "time_to_detect": {
-                              "description": "The amount of time in seconds to detect the incident. Equals the difference between `customer_impact_start` and `detected`.",
+                              "description": "The amount of time in seconds to detect the incident.\nEquals the difference between `customer_impact_start` and `detected`.",
                               "format": "int64",
                               "readOnly": true,
                               "type": "integer"
@@ -25142,6 +25173,9 @@
           "Incidents"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -25654,7 +25688,10 @@
         "tags": [
           "Logs"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/logs/config/archive-order": {
@@ -25748,7 +25785,10 @@
         "summary": "Get archive order",
         "tags": [
           "Logs Archives"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "put": {
         "description": "Update the order of your archives. Since logs are processed sequentially, reordering an archive may change\nthe structure and content of the data processed by other archives.\n\n**Note**: Using the `PUT` method updates your archive's order by replacing the current order\nwith the new one.",
@@ -25949,7 +25989,10 @@
         "tags": [
           "Logs Archives"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/logs/config/archives": {
@@ -26258,7 +26301,10 @@
         "summary": "Get all archives",
         "tags": [
           "Logs Archives"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Create an archive in your organization.",
@@ -26831,7 +26877,17 @@
         "tags": [
           "Logs Archives"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteLogsArchive",
+          "parameters": [
+            {
+              "name": "archive_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
       }
     },
     "/api/v2/logs/config/archives/{archive_id}": {
@@ -26932,7 +26988,10 @@
         "summary": "Delete an archive",
         "tags": [
           "Logs Archives"
-        ]
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Get a specific archive from your organization.",
@@ -27296,7 +27355,10 @@
         "summary": "Get an archive",
         "tags": [
           "Logs Archives"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "put": {
         "description": "Update a given archive configuration.\n\n**Note**: Using this method updates your archive configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.",
@@ -27905,7 +27967,10 @@
         "tags": [
           "Logs Archives"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/logs/config/archives/{archive_id}/readers": {
@@ -28044,6 +28109,9 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
@@ -28272,6 +28340,9 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -28409,6 +28480,9 @@
           "Logs Archives"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "unsafe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -28531,6 +28605,9 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -28691,6 +28768,16 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteRestrictionQuery",
+          "parameters": [
+            {
+              "name": "restriction_query_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -28825,6 +28912,9 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -28959,6 +29049,9 @@
         "tags": [
           "Logs Restriction Queries"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -29062,6 +29155,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
@@ -29305,6 +29401,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "patch": {
@@ -29501,6 +29600,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -29640,6 +29742,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
@@ -29806,6 +29911,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -29943,6 +30051,9 @@
           "Logs Restriction Queries"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -30259,6 +30370,9 @@
         "tags": [
           "Logs"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -30590,6 +30704,9 @@
           "Logs"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -30729,7 +30846,10 @@
         "summary": "List permissions",
         "tags": [
           "Roles"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/processes": {
@@ -30961,7 +31081,10 @@
         "summary": "Get all processes",
         "tags": [
           "Processes"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/roles": {
@@ -31188,7 +31311,10 @@
         "summary": "List roles",
         "tags": [
           "Roles"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Create a new role for your organization.",
@@ -31493,7 +31619,17 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteRole",
+          "parameters": [
+            {
+              "name": "role_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
       }
     },
     "/api/v2/roles/{role_id}": {
@@ -31570,7 +31706,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Get a role in the organization specified by the role’s `role_id`.",
@@ -31746,7 +31885,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "patch": {
         "description": "Edit a role. Can only be used with application keys belonging to administrators.",
@@ -32032,7 +32174,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/roles/{role_id}/permissions": {
@@ -32243,7 +32388,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Returns a list of all permissions for a single role.",
@@ -32392,7 +32540,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Adds a permission to a role.",
@@ -32601,7 +32752,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/roles/{role_id}/users": {
@@ -33231,7 +33385,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Gets all users of a role.",
@@ -33831,7 +33988,10 @@
         "summary": "Get all users of a role",
         "tags": [
           "Roles"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Adds a user to a role.",
@@ -34459,7 +34619,10 @@
         "tags": [
           "Roles"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/security_monitoring/rules": {
@@ -34802,7 +34965,10 @@
         "summary": "List rules",
         "tags": [
           "Security Monitoring"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Create a detection rule.",
@@ -35361,7 +35527,17 @@
         "tags": [
           "Security Monitoring"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteSecurityMonitoringRule",
+          "parameters": [
+            {
+              "name": "rule_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
       }
     },
     "/api/v2/security_monitoring/rules/{rule_id}": {
@@ -35437,7 +35613,10 @@
         "summary": "Delete an existing rule",
         "tags": [
           "Security Monitoring"
-        ]
+        ],
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Get a rule's details.",
@@ -35733,7 +35912,10 @@
         "summary": "Get a rule's details",
         "tags": [
           "Security Monitoring"
-        ]
+        ],
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "put": {
         "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled and to change notifications.",
@@ -36329,7 +36511,10 @@
         "tags": [
           "Security Monitoring"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/security_monitoring/signals": {
@@ -36416,7 +36601,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "The response object with all security signals matching the request and pagination information.",
+                  "description": "The response object with all security signals matching the request\nand pagination information.",
                   "properties": {
                     "data": {
                       "description": "An array of security signals matching the request.",
@@ -36580,6 +36765,9 @@
         "tags": [
           "Security Monitoring"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -36659,7 +36847,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "The response object with all security signals matching the request and pagination information.",
+                  "description": "The response object with all security signals matching the request\nand pagination information.",
                   "properties": {
                     "data": {
                       "description": "An array of security signals matching the request.",
@@ -36824,6 +37012,9 @@
           "Security Monitoring"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -37402,6 +37593,9 @@
         "tags": [
           "Incident Services"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -38023,6 +38217,16 @@
           "Incident Services"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteIncidentService",
+          "parameters": [
+            {
+              "name": "service_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -38150,10 +38354,13 @@
         "tags": [
           "Incident Services"
         ],
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
-        "description": "Get details of an incident service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
+        "description": "Get details of an incident service. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident services.",
         "operationId": "GetIncidentService",
         "parameters": [
           {
@@ -38662,6 +38869,9 @@
         "tags": [
           "Incident Services"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "patch": {
@@ -39300,6 +39510,9 @@
           "Incident Services"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -39877,6 +40090,9 @@
         "tags": [
           "Incident Teams"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "post": {
@@ -40494,6 +40710,16 @@
           "Incident Teams"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DeleteIncidentTeam",
+          "parameters": [
+            {
+              "name": "team_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -40621,10 +40847,13 @@
         "tags": [
           "Incident Teams"
         ],
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "get": {
-        "description": "Get details of an incident team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
+        "description": "Get details of an incident team. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident teams.",
         "operationId": "GetIncidentTeam",
         "parameters": [
           {
@@ -41129,6 +41358,9 @@
         "tags": [
           "Incident Teams"
         ],
+        "x-undo": {
+          "type": "safe"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       },
       "patch": {
@@ -41763,6 +41995,9 @@
           "Incident Teams"
         ],
         "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        },
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
@@ -41977,7 +42212,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/user_invitations/{user_invitation_uuid}": {
@@ -42110,7 +42348,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/users": {
@@ -42732,7 +42973,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "post": {
         "description": "Create a user for your organization.",
@@ -43353,7 +43597,17 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "operationId": "DisableUser",
+          "parameters": [
+            {
+              "name": "user_id",
+              "source": "data.id"
+            }
+          ],
+          "type": "unsafe"
+        }
       }
     },
     "/api/v2/users/{user_id}": {
@@ -43430,7 +43684,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       },
       "get": {
         "description": "Get a user in the organization specified by the user’s `user_id`.",
@@ -43963,7 +44220,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       },
       "patch": {
         "description": "Edit a user. Can only be used with an application key belonging\nto an administrator user.",
@@ -44608,7 +44868,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "idempotent"
+        }
       }
     },
     "/api/v2/users/{user_id}/orgs": {
@@ -45143,7 +45406,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     },
     "/api/v2/users/{user_id}/permissions": {
@@ -45294,7 +45560,10 @@
         "tags": [
           "Users"
         ],
-        "x-codegen-request-body-name": "body"
+        "x-codegen-request-body-name": "body",
+        "x-undo": {
+          "type": "safe"
+        }
       }
     }
   },
