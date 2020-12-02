@@ -59,7 +59,14 @@ Measures come with either a (long) integer or double value, for equivalent capab
 
 #### Units
 
-Measures support units (time in `seconds` or size in `bytes`) for easier handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
+Measures support units in **time** or **size** for easier handling of orders of magnitude at query time and display time.
+
+| type        | unit(s)                                                                                                                                                                                                                                                                                                                    |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BYTES       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
+| TIME        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
+
+Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
 1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][21]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
 2. Use `duration:>20ms` (see [search syntax][1] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
