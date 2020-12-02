@@ -3383,9 +3383,11 @@ components:
         your Organization.
       properties:
         index:
-          description: The log index on which the request is performed. For multi-index
-            organizations, the default is all live indexes. Historical indexes of
-            rehydrated logs must be specified.
+          description: 'The log index on which the request is performed. For multi-index
+            organizations,
+
+            the default is all live indexes. Historical indexes of rehydrated logs
+            must be specified.'
           example: retention-3,retention-15
           type: string
         limit:
@@ -10844,6 +10846,8 @@ paths:
       summary: List IP Ranges
       tags:
       - IP Ranges
+      x-undo:
+        type: safe
   /api/v1/api_key:
     get:
       description: Get all API keys available for your account.
@@ -10864,6 +10868,8 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-undo:
+        type: safe
     post:
       description: Creates an API key with a given name.
       operationId: CreateAPIKey
@@ -10896,6 +10902,12 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAPIKey
+        parameters:
+        - name: key
+          source: <RESPONSE_PATH>
+        type: unsafe
   /api/v1/api_key/{key}:
     delete:
       description: Delete a given API key.
@@ -10935,6 +10947,8 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-undo:
+        type: idempotent
     get:
       description: Get a given API key.
       operationId: GetAPIKey
@@ -10967,6 +10981,8 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-undo:
+        type: safe
     put:
       description: Edit an API key name.
       operationId: UpdateAPIKey
@@ -11012,6 +11028,8 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/application_key:
     get:
       description: Get all application keys available for your Datadog account.
@@ -11032,6 +11050,8 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-undo:
+        type: safe
     post:
       description: Create an application key with a given name.
       operationId: CreateApplicationKey
@@ -11070,6 +11090,12 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteApplicationKey
+        parameters:
+        - name: key
+          source: <RESPONSE_PATH>
+        type: unsafe
   /api/v1/application_key/{key}:
     delete:
       description: Delete a given application key.
@@ -11103,6 +11129,8 @@ paths:
       summary: Delete an application key
       tags:
       - Key Management
+      x-undo:
+        type: idempotent
     get:
       description: Get a given application key.
       operationId: GetApplicationKey
@@ -11135,6 +11163,8 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-undo:
+        type: safe
     put:
       description: Edit an application key name.
       operationId: UpdateApplicationKey
@@ -11186,6 +11216,8 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/check_run:
     post:
       description: 'Submit a list of Service Checks.
@@ -11237,6 +11269,8 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/daily_custom_reports:
     get:
       description: Get daily custom reports.
@@ -11285,6 +11319,8 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -11321,6 +11357,8 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -11349,6 +11387,8 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
+      x-undo:
+        type: safe
     post:
       description: Create a dashboard using the specified options.
       operationId: CreateDashboard
@@ -11382,6 +11422,12 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteDashboard
+        parameters:
+        - name: dashboard_id
+          source: id
+        type: unsafe
   /api/v1/dashboard/lists/manual:
     get:
       description: Fetch all of your existing dashboard list definitions.
@@ -11402,6 +11448,8 @@ paths:
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     post:
       description: Create an empty dashboard list.
       operationId: CreateDashboardList
@@ -11435,6 +11483,12 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteDashboardList
+        parameters:
+        - name: list_id
+          source: id
+        type: unsafe
   /api/v1/dashboard/lists/manual/{list_id}:
     delete:
       description: Delete a dashboard list.
@@ -11469,6 +11523,8 @@ paths:
       summary: Delete a dashboard list
       tags:
       - Dashboard Lists
+      x-undo:
+        type: idempotent
     get:
       description: Fetch an existing dashboard list's definition.
       operationId: GetDashboardList
@@ -11502,6 +11558,8 @@ paths:
       summary: Get a dashboard list
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     put:
       description: Update the name of a dashboard list.
       operationId: UpdateDashboardList
@@ -11549,6 +11607,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/dashboard/{dashboard_id}:
     delete:
       description: Delete a dashboard using the specified ID.
@@ -11582,6 +11642,8 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-undo:
+        type: idempotent
     get:
       description: Get a dashboard using the specified ID.
       operationId: GetDashboard
@@ -11614,6 +11676,8 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
+      x-undo:
+        type: safe
     put:
       description: Update a dashboard using the specified ID.
       operationId: UpdateDashboard
@@ -11660,6 +11724,8 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -11689,6 +11755,8 @@ paths:
       summary: Get all downtimes
       tags:
       - Downtimes
+      x-undo:
+        type: safe
     post:
       description: Schedule a downtime.
       operationId: CreateDowntime
@@ -11722,6 +11790,10 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
       description: Delete all downtimes that match the scope of `X`.
@@ -11762,6 +11834,8 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
       description: Cancel a downtime.
@@ -11793,6 +11867,8 @@ paths:
       summary: Cancel a downtime
       tags:
       - Downtimes
+      x-undo:
+        type: idempotent
     get:
       description: Get downtime detail by `downtime_id`.
       operationId: GetDowntime
@@ -11827,6 +11903,8 @@ paths:
       summary: Get a downtime
       tags:
       - Downtimes
+      x-undo:
+        type: safe
     put:
       description: Update a single downtime by `downtime_id`.
       operationId: UpdateDowntime
@@ -11876,6 +11954,8 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,\
@@ -11954,6 +12034,8 @@ paths:
       summary: Query the event stream
       tags:
       - Events
+      x-undo:
+        type: safe
     post:
       description: 'This endpoint allows you to post events to the stream.
 
@@ -11985,6 +12067,8 @@ paths:
       tags:
       - Events
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/events/{event_id}:
     get:
       description: "This endpoint allows you to query for event details.\n\n**Note**:\
@@ -12021,6 +12105,8 @@ paths:
       summary: Get an event
       tags:
       - Events
+      x-undo:
+        type: safe
   /api/v1/graph/embed:
     get:
       description: Gets a list of previously created embeddable graphs.
@@ -12041,6 +12127,8 @@ paths:
       summary: Get all embeds
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
     post:
       description: 'Creates a new embeddable graph.
 
@@ -12084,6 +12172,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/graph/embed/{embed_id}:
     get:
       description: Get the HTML fragment for a previously generated embed with `embed_id`.
@@ -12117,6 +12209,8 @@ paths:
       summary: Get specific embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/embed/{embed_id}/enable:
     get:
       description: Enable a specified embed.
@@ -12156,6 +12250,8 @@ paths:
       summary: Enable embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
     get:
       description: Revoke a specified embed.
@@ -12195,6 +12291,8 @@ paths:
       summary: Revoke embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/snapshot:
     get:
       description: 'Take graph snapshots.
@@ -12267,6 +12365,8 @@ paths:
       summary: Take graph snapshots
       tags:
       - Snapshots
+      x-undo:
+        type: safe
   /api/v1/host/{host_name}/mute:
     post:
       description: Mute a host.
@@ -12308,6 +12408,8 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/host/{host_name}/unmute:
     post:
       description: Unmutes a host. This endpoint takes no JSON arguments.
@@ -12342,6 +12444,8 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/hosts:
     get:
       description: 'This endpoint allows searching for hosts by name, alias, or tag.
@@ -12429,6 +12533,8 @@ paths:
       summary: Get all hosts for your organization
       tags:
       - Hosts
+      x-undo:
+        type: safe
   /api/v1/hosts/totals:
     get:
       description: 'This endpoint returns the total number of active and up hosts
@@ -12468,6 +12574,8 @@ paths:
       summary: Get the total number of active hosts
       tags:
       - Hosts
+      x-undo:
+        type: safe
   /api/v1/integration/aws:
     delete:
       description: Delete a Datadog-AWS integration matching the specified `account_id`
@@ -12509,6 +12617,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
@@ -12553,6 +12663,8 @@ paths:
       summary: List all AWS integrations
       tags:
       - AWS Integration
+      x-undo:
+        type: safe
     post:
       description: 'Create a Datadog-Amazon Web Services integration.
 
@@ -12598,6 +12710,10 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSAccount
+        parameters: []
+        type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
@@ -12660,6 +12776,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
       description: List all namespace rules for a given Datadog-AWS integration. This
@@ -12688,6 +12806,8 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+      x-undo:
+        type: safe
   /api/v1/integration/aws/filtering:
     delete:
       description: Delete a tag filtering entry.
@@ -12743,6 +12863,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: Get all AWS tag filters.
       operationId: ListAWSTagFilters
@@ -12794,6 +12916,8 @@ paths:
       summary: Get all AWS tag filters
       tags:
       - AWS Integration
+      x-undo:
+        type: safe
     post:
       description: Set an AWS tag filter.
       operationId: CreateAWSTagFilter
@@ -12851,6 +12975,10 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSTagFilter
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
       description: Generate a new AWS external ID for a given AWS account ID and role
@@ -12890,6 +13018,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/aws/logs:
     delete:
       description: Delete a Datadog-AWS logs configuration by removing the specific
@@ -12925,6 +13055,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
@@ -12963,6 +13095,8 @@ paths:
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
+      x-undo:
+        type: safe
     post:
       description: Attach the Lambda ARN of the Lambda created for the Datadog-AWS
         log collection to your AWS account ID to enable log collection.
@@ -12997,6 +13131,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSLambdaARN
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/logs/check_async:
     post:
       description: 'Test if permissions are present to add a log-forwarding triggers
@@ -13047,6 +13185,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/aws/logs/services:
     get:
       description: Get the list of current AWS services that Datadog offers automatic
@@ -13084,6 +13224,8 @@ paths:
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
+      x-undo:
+        type: safe
     post:
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
@@ -13118,6 +13260,9 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        type: unsafe
   /api/v1/integration/aws/logs/services_async:
     post:
       description: "Test if permissions are present to add log-forwarding triggers\
@@ -13159,6 +13304,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/azure:
     delete:
       description: Delete a given Datadog-Azure integration from your Datadog account.
@@ -13194,6 +13341,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-Azure integrations configured in your Datadog
         account.
@@ -13220,6 +13369,8 @@ paths:
       summary: List all Azure integrations
       tags:
       - Azure Integration
+      x-undo:
+        type: safe
     post:
       description: 'Create a Datadog-Azure integration.
 
@@ -13267,6 +13418,10 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAzureIntegration
+        parameters: []
+        type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
         and `client_id`.
@@ -13308,6 +13463,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/azure/host_filters:
     post:
       description: Update the defined list of host filters for a given Datadog-Azure
@@ -13344,6 +13501,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/gcp:
     delete:
       description: Delete a given Datadog-GCP integration.
@@ -13379,6 +13538,8 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-GCP integrations configured in your Datadog account.
       operationId: ListGCPIntegration
@@ -13404,6 +13565,8 @@ paths:
       summary: List all GCP integrations
       tags:
       - GCP Integration
+      x-undo:
+        type: safe
     post:
       description: Create a Datadog-GCP integration.
       operationId: CreateGCPIntegration
@@ -13438,6 +13601,10 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteGCPIntegration
+        parameters: []
+        type: unsafe
     put:
       description: 'Update a Datadog-GCP integrations host_filters and/or auto-mute.
 
@@ -13479,6 +13646,8 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
     post:
       description: Create a new service object in the PagerDuty integration.
@@ -13513,6 +13682,12 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePagerDutyIntegrationService
+        parameters:
+        - name: service_name
+          source: service_name
+        type: unsafe
   /api/v1/integration/pagerduty/configuration/services/{service_name}:
     delete:
       description: Delete a single service object in the Datadog-PagerDuty integration.
@@ -13542,6 +13717,8 @@ paths:
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
+      x-undo:
+        type: idempotent
     get:
       description: Get service name in the Datadog-PagerDuty integration.
       operationId: GetPagerDutyIntegrationService
@@ -13574,6 +13751,8 @@ paths:
       summary: Get a single service object
       tags:
       - PagerDuty Integration
+      x-undo:
+        type: safe
     put:
       description: Update a single service object in the Datadog-PagerDuty integration.
       operationId: UpdatePagerDutyIntegrationService
@@ -13616,6 +13795,8 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/slack:
     delete:
       deprecated: true
@@ -13633,6 +13814,8 @@ paths:
       summary: Delete a Slack integration
       tags:
       - Slack Integration
+      x-undo:
+        type: idempotent
     get:
       deprecated: true
       description: Get all information about your Datadog-Slack integration.
@@ -13665,6 +13848,8 @@ paths:
       summary: Get info about a Slack integration
       tags:
       - Slack Integration
+      x-undo:
+        type: safe
     post:
       deprecated: true
       description: 'Create a Datadog-Slack integration. Once created, add a channel
@@ -13703,6 +13888,10 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSlackIntegration
+        parameters: []
+        type: unsafe
     put:
       deprecated: true
       description: 'Add channels to your existing Datadog-Slack integration.
@@ -13738,6 +13927,8 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
@@ -13772,6 +13963,8 @@ paths:
       summary: Get all channels in a Slack integration
       tags:
       - Slack Integration
+      x-undo:
+        type: safe
     post:
       description: Add a channel to your Datadog-Slack integration.
       operationId: CreateSlackIntegrationChannel
@@ -13813,6 +14006,14 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: RemoveSlackIntegrationChannel
+        parameters:
+        - name: team_name
+          source: TODO
+        - name: channel_name
+          source: name
+        type: unsafe
   /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
     delete:
       description: Remove a channel from your Datadog-Slack integration.
@@ -13844,6 +14045,8 @@ paths:
       summary: Remove a Slack integration channel
       tags:
       - Slack Integration
+      x-undo:
+        type: idempotent
     get:
       description: Get a channel configured for your Datadog-Slack integration.
       operationId: GetSlackIntegrationChannel
@@ -13878,6 +14081,8 @@ paths:
       summary: Get a Slack integration channel
       tags:
       - Slack Integration
+      x-undo:
+        type: safe
     patch:
       description: Update a channel used in your Datadog-Slack integration.
       operationId: UpdateSlackIntegrationChannel
@@ -13920,6 +14125,8 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
     post:
       description: Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -13954,6 +14161,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteWebhooksIntegrationCustomVariable
+        parameters:
+        - name: custom_variable_name
+          source: name
+        type: unsafe
   /api/v1/integration/webhooks/configuration/custom-variables/{custom_variable_name}:
     delete:
       description: Deletes the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -13983,6 +14196,8 @@ paths:
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
+      x-undo:
+        type: idempotent
     get:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
@@ -14026,6 +14241,8 @@ paths:
       summary: Get a custom variable
       tags:
       - Webhooks Integration
+      x-undo:
+        type: safe
     put:
       description: Updates the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
       operationId: UpdateWebhooksIntegrationCustomVariable
@@ -14072,6 +14289,8 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
     post:
       description: Creates an endpoint with the name `<WEBHOOK_NAME>`.
@@ -14106,6 +14325,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteWebhooksIntegration
+        parameters:
+        - name: webhook_name
+          source: name
+        type: unsafe
   /api/v1/integration/webhooks/configuration/webhooks/{webhook_name}:
     delete:
       description: Deletes the endpoint with the name `<WEBHOOK NAME>`.
@@ -14135,6 +14360,8 @@ paths:
       summary: Delete a webhook
       tags:
       - Webhooks Integration
+      x-undo:
+        type: idempotent
     get:
       description: Gets the content of the webhook with the name `<WEBHOOK_NAME>`.
       operationId: GetWebhooksIntegration
@@ -14173,6 +14400,8 @@ paths:
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
+      x-undo:
+        type: safe
     put:
       description: Updates the endpoint with the name `<WEBHOOK_NAME>`.
       operationId: UpdateWebhooksIntegration
@@ -14219,6 +14448,8 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/logs-queries/list:
     post:
       description: 'List endpoint returns logs that match a log search query.
@@ -14267,6 +14498,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/logs/config/index-order:
     get:
       description: Get the current order of your log indexes. This endpoint takes
@@ -14288,6 +14521,8 @@ paths:
       summary: Get indexes order
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14327,6 +14562,8 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14352,6 +14589,8 @@ paths:
       summary: Get all indexes
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14389,6 +14628,8 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14441,6 +14682,8 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14466,6 +14709,8 @@ paths:
       summary: Get pipeline order
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     put:
       description: 'Update the order of your pipelines. Since logs are processed sequentially,
         reordering a pipeline may change
@@ -14515,6 +14760,8 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/logs/config/pipelines:
     get:
       description: 'Get all pipelines from your organization.
@@ -14537,6 +14784,8 @@ paths:
       summary: Get all pipelines
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     post:
       description: Create a pipeline in your organization.
       operationId: CreateLogsPipeline
@@ -14570,6 +14819,12 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteLogsPipeline
+        parameters:
+        - name: pipeline_id
+          source: id
+        type: unsafe
   /api/v1/logs/config/pipelines/{pipeline_id}:
     delete:
       description: 'Delete a given pipeline from your organization.
@@ -14601,6 +14856,8 @@ paths:
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
+      x-undo:
+        type: idempotent
     get:
       description: 'Get a specific pipeline from your organization.
 
@@ -14635,6 +14892,8 @@ paths:
       summary: Get a pipeline
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     put:
       description: "Update a given pipeline configuration to change it\u2019s processors\
         \ or their order.\n\n**Note**: Using this method updates your pipeline configuration\
@@ -14678,6 +14937,8 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/metrics:
     get:
       description: Get the list of actively reporting metrics from a given time until
@@ -14721,6 +14982,8 @@ paths:
       summary: Get active metrics list
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/metrics/{metric_name}:
     get:
       description: Get metadata about a specific metric.
@@ -14754,6 +15017,8 @@ paths:
       summary: Get metric metadata
       tags:
       - Metrics
+      x-undo:
+        type: safe
     put:
       description: Edit metadata of a specific metric. Find out more about [supported
         types](https://docs.datadoghq.com/developers/metrics).
@@ -14801,6 +15066,8 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor:
     get:
       description: Get details about the specified monitor from your organization.
@@ -14897,6 +15164,8 @@ paths:
       summary: Get all monitor details
       tags:
       - Monitors
+      x-undo:
+        type: safe
     post:
       description: 'Create a monitor using the specified options.
 
@@ -15142,6 +15411,12 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteMonitor
+        parameters:
+        - name: monitor_id
+          source: id
+        type: unsafe
   /api/v1/monitor/can_delete:
     get:
       description: Check if the given monitors can be deleted.
@@ -15184,6 +15459,8 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/groups/search:
     get:
       description: Search and filter your monitor groups details.
@@ -15263,6 +15540,8 @@ paths:
       summary: Monitors group search
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/search:
     get:
       description: Search and filter your monitors details.
@@ -15342,6 +15621,8 @@ paths:
       summary: Monitors search
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/validate:
     post:
       description: Validate the monitor provided in the request.
@@ -15376,6 +15657,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor/{monitor_id}:
     delete:
       description: Delete the specified monitor
@@ -15429,6 +15712,8 @@ paths:
       summary: Delete a monitor
       tags:
       - Monitors
+      x-undo:
+        type: idempotent
     get:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
@@ -15475,6 +15760,8 @@ paths:
       summary: Get a monitor's details
       tags:
       - Monitors
+      x-undo:
+        type: safe
     put:
       description: Edit the specified monitor.
       operationId: UpdateMonitor
@@ -15528,6 +15815,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor/{monitor_id}/mute:
     post:
       description: Mute the specified monitor.
@@ -15583,6 +15872,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/monitor/{monitor_id}/unmute:
     post:
       description: Mute the specified monitor.
@@ -15638,6 +15929,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/monthly_custom_reports:
     get:
       description: Get monthly custom reports.
@@ -15686,6 +15979,8 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -15728,6 +16023,8 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -15751,6 +16048,8 @@ paths:
       summary: List your managed organizations
       tags:
       - Organizations
+      x-undo:
+        type: safe
     post:
       description: 'Create a child organization.
 
@@ -15800,6 +16099,10 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/org/{public_id}:
     get:
       description: Get organization information.
@@ -15834,6 +16137,8 @@ paths:
       summary: Get organization information
       tags:
       - Organizations
+      x-undo:
+        type: safe
     put:
       description: Update your organization.
       operationId: UpdateOrg
@@ -15874,6 +16179,8 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/org/{public_id}/idp_metadata:
     post:
       description: 'There are a couple of options for updating the Identity Provider
@@ -15930,6 +16237,8 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/query:
     get:
       description: Query timeseries points.
@@ -15977,6 +16286,8 @@ paths:
       summary: Query timeseries points
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/search:
     get:
       description: Search for metrics from the last 24 hours in Datadog.
@@ -16010,6 +16321,8 @@ paths:
       summary: Search metrics
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that\
@@ -16077,6 +16390,8 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/service_dependencies:
     get:
       description: 'Get a list of services from APM and their dependencies. The services
@@ -16139,6 +16454,8 @@ paths:
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -16211,6 +16528,8 @@ paths:
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -16255,6 +16574,8 @@ paths:
       summary: Search SLOs
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
     post:
       description: Create a service level objective object.
       operationId: CreateSLO
@@ -16288,6 +16609,12 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSLO
+        parameters:
+        - name: slo_id
+          source: data.id
+        type: unsafe
   /api/v1/slo/bulk_delete:
     post:
       description: 'Delete (or partially delete) multiple service level objective
@@ -16331,6 +16658,8 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/slo/can_delete:
     get:
       description: 'Check if a SLO can be safely deleted. For example,
@@ -16374,6 +16703,8 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -16425,6 +16756,8 @@ paths:
       summary: Delete a SLO
       tags:
       - Service Level Objectives
+      x-undo:
+        type: idempotent
     get:
       description: Get a service level objective object.
       operationId: GetSLO
@@ -16457,6 +16790,8 @@ paths:
       summary: Get a SLO's details
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
     put:
       description: Update the specified service level objective object.
       operationId: UpdateSLO
@@ -16503,6 +16838,8 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\
@@ -16561,6 +16898,8 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -16580,6 +16919,8 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/private-locations:
     post:
       description: Create a new Synthetics private location.
@@ -16614,6 +16955,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePrivateLocation
+        parameters:
+        - name: location_id
+          source: private_location
+        type: unsafe
   /api/v1/synthetics/private-locations/{location_id}:
     delete:
       description: Delete a Synthetics private location.
@@ -16639,6 +16986,8 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
+      x-undo:
+        type: idempotent
     get:
       description: Get a Synthetics private location.
       operationId: GetPrivateLocation
@@ -16667,6 +17016,8 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit a Synthetics private location.
       operationId: UpdatePrivateLocation
@@ -16703,6 +17054,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.
@@ -16729,6 +17082,8 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     post:
       description: Create a Synthetic test.
       operationId: CreateTest
@@ -16770,6 +17125,10 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
       description: 'Get the detailed configuration (including steps) associated with
@@ -16807,6 +17166,8 @@ paths:
       summary: Get a test configuration (browser)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics Browser
@@ -16868,6 +17229,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given (browser) Synthetic test.
@@ -16911,6 +17274,8 @@ paths:
       summary: Get a test result (browser)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/delete:
     post:
       description: Delete multiple Synthetic tests by ID.
@@ -16958,6 +17323,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/trigger/ci:
     post:
       description: Trigger a set of Synthetics tests for continuous integration.
@@ -16986,6 +17353,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/{public_id}:
     get:
       description: Get the detailed configuration associated with a Synthetics test.
@@ -17021,6 +17390,8 @@ paths:
       summary: Get a test configuration (API)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit the configuration of a Synthetic test.
       operationId: UpdateTest
@@ -17073,6 +17444,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics API
@@ -17132,6 +17505,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given (API) Synthetic test.
@@ -17173,6 +17548,8 @@ paths:
       summary: Get a test result (API)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/{public_id}/status:
     put:
       description: Pause or start a Synthetics test by changing the status.
@@ -17222,6 +17599,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/variables:
     post:
       description: Create a Synthetics global variable.
@@ -17256,6 +17635,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteGlobalVariable
+        parameters:
+        - name: variable_id
+          source: id
+        type: unsafe
   /api/v1/synthetics/variables/{variable_id}:
     delete:
       description: Delete a Synthetics global variable.
@@ -17291,6 +17676,8 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+      x-undo:
+        type: idempotent
     get:
       description: Get the detailed configuration of a global variable.
       operationId: GetGlobalVariable
@@ -17323,6 +17710,8 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit a Synthetics global variable.
       operationId: EditGlobalVariable
@@ -17363,6 +17752,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/tags/hosts:
     get:
       description: Return a mapping of tags to hosts for your whole infrastructure.
@@ -17397,6 +17788,8 @@ paths:
       summary: Get Tags
       tags:
       - Tags
+      x-undo:
+        type: safe
   /api/v1/tags/hosts/{host_name}:
     delete:
       description: 'This endpoint allows you to remove all user-assigned tags
@@ -17437,6 +17830,8 @@ paths:
       summary: Remove host tags
       tags:
       - Tags
+      x-undo:
+        type: idempotent
     get:
       description: Return the list of tags that apply to a given host.
       operationId: GetHostTags
@@ -17476,6 +17871,8 @@ paths:
       summary: Get host tags
       tags:
       - Tags
+      x-undo:
+        type: safe
     post:
       description: 'This endpoint allows you to add new tags to a host,
 
@@ -17528,6 +17925,14 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteHostTags
+        parameters:
+        - name: host_name
+          source: <RESPONSE_PATH>
+        - name: source
+          source: <RESPONSE_PATH>
+        type: unsafe
     put:
       description: 'This endpoint allows you to update/replace all tags in
 
@@ -17579,6 +17984,8 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
       description: Get hourly usage for analyzed logs (Security Monitoring).
@@ -17624,6 +18031,8 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/attribution:
     get:
       description: Get Usage Attribution.
@@ -17681,6 +18090,8 @@ paths:
       summary: Get Usage Attribution
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -17727,6 +18138,8 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/billable-summary:
     get:
       description: Get billable usage across your multi-org account.
@@ -17762,6 +18175,8 @@ paths:
       summary: Get billable usage across your multi-org account
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/fargate:
     get:
       description: Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
@@ -17805,6 +18220,8 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/hosts:
     get:
       description: Get hourly usage for hosts and containers.
@@ -17848,6 +18265,8 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/incident-management:
     get:
       description: Get hourly usage for incident management.
@@ -17893,6 +18312,8 @@ paths:
       summary: Get hourly usage for incident management
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/indexed-spans:
     get:
       description: Get hourly usage for indexed spans.
@@ -17936,6 +18357,8 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/ingested-spans:
     get:
       description: Get hourly usage for ingested spans.
@@ -17981,6 +18404,8 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/logs:
     get:
       description: Get hourly usage for logs.
@@ -18024,6 +18449,8 @@ paths:
       summary: Get hourly usage for Logs
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/logs_by_index:
     get:
       description: Get hourly usage for logs by index.
@@ -18075,6 +18502,8 @@ paths:
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/network_flows:
     get:
       description: Get hourly usage for network flows.
@@ -18120,6 +18549,8 @@ paths:
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/network_hosts:
     get:
       description: Get hourly usage for network hosts.
@@ -18163,6 +18594,8 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/profiling:
     get:
       description: Get hourly usage for profiled hosts.
@@ -18208,6 +18641,8 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/rum_sessions:
     get:
       description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
@@ -18258,6 +18693,8 @@ paths:
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/snmp:
     get:
       description: Get hourly usage for SNMP devices.
@@ -18303,6 +18740,8 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/summary:
     get:
       description: Get usage across your multi-org account.
@@ -18354,6 +18793,8 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics:
     get:
       deprecated: true
@@ -18398,6 +18839,8 @@ paths:
       summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics_api:
     get:
       description: Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
@@ -18441,6 +18884,8 @@ paths:
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics_browser:
     get:
       description: Get hourly usage for synthetics browser checks.
@@ -18484,6 +18929,8 @@ paths:
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/timeseries:
     get:
       description: Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
@@ -18527,6 +18974,8 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/top_avg_metrics:
     get:
       description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
@@ -18582,6 +19031,8 @@ paths:
       summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/traces:
     get:
       deprecated: true
@@ -18629,6 +19080,8 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/tracing-without-limits:
     get:
       deprecated: true
@@ -18678,6 +19131,8 @@ paths:
       summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/user:
     get:
       description: List all users for your organization.
@@ -18698,6 +19153,8 @@ paths:
       summary: List all users
       tags:
       - Users
+      x-undo:
+        type: safe
     post:
       description: 'Create a user for your organization.
 
@@ -18742,6 +19199,12 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DisableUser
+        parameters:
+        - name: user_handle
+          source: user.handle
+        type: unsafe
   /api/v1/user/{user_handle}:
     delete:
       description: 'Delete a user from an organization.
@@ -18788,6 +19251,8 @@ paths:
       summary: Disable a user
       tags:
       - Users
+      x-undo:
+        type: idempotent
     get:
       description: Get a user's details.
       operationId: GetUser
@@ -18822,6 +19287,8 @@ paths:
       summary: Get user details
       tags:
       - Users
+      x-undo:
+        type: safe
     put:
       description: 'Update a user information.
 
@@ -18873,6 +19340,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/validate:
     get:
       description: Check if the API key (not the APP key) is valid. If invalid, a
@@ -18896,6 +19365,8 @@ paths:
       summary: Validate API key
       tags:
       - Authentication
+      x-undo:
+        type: safe
   /monitor/bulk_resolve:
     post:
       deprecated: true
@@ -18935,6 +19406,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v0.3/traces:
     put:
       description: "Datadog\u2019s APM allows you to collect performance metrics by\
@@ -18986,6 +19459,8 @@ paths:
       tags:
       - Tracing
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -19122,6 +19597,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v1/monitor/mute_all:
     post:
       deprecated: true
@@ -19155,6 +19632,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -19177,6 +19656,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []

@@ -554,8 +554,9 @@ components:
           readOnly: true
           type: string
         customer_impact_duration:
-          description: Length of the incident's customer impact in seconds. Equals
-            the difference between `customer_impact_start` and `customer_impact_end`.
+          description: 'Length of the incident''s customer impact in seconds.
+
+            Equals the difference between `customer_impact_start` and `customer_impact_end`.'
           format: int64
           readOnly: true
           type: integer
@@ -621,8 +622,9 @@ components:
           nullable: true
           type: string
         time_to_detect:
-          description: The amount of time in seconds to detect the incident. Equals
-            the difference between `customer_impact_start` and `detected`.
+          description: 'The amount of time in seconds to detect the incident.
+
+            Equals the difference between `customer_impact_start` and `detected`.'
           format: int64
           readOnly: true
           type: integer
@@ -3440,8 +3442,9 @@ components:
       x-enum-varnames:
       - SIGNAL
     SecurityMonitoringSignalsListResponse:
-      description: The response object with all security signals matching the request
-        and pagination information.
+      description: 'The response object with all security signals matching the request
+
+        and pagination information.'
       properties:
         data:
           description: An array of security signals matching the request.
@@ -3820,6 +3823,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Fetch the dashboard list\u2019s dashboard definitions."
       operationId: GetDashboardListItems
@@ -3853,6 +3858,8 @@ paths:
       summary: Get a Dashboard List
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     post:
       description: Add dashboards to an existing dashboard list.
       operationId: CreateDashboardListItems
@@ -3900,6 +3907,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     put:
       description: Update dashboards of an existing dashboard list.
       operationId: UpdateDashboardListItems
@@ -3947,6 +3956,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -3973,6 +3984,8 @@ paths:
       summary: Get a list of incidents
       tags:
       - Incidents
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4005,6 +4018,12 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncident
+        parameters:
+        - name: incident_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4028,6 +4047,8 @@ paths:
       summary: Delete an existing incident
       tags:
       - Incidents
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4055,6 +4076,8 @@ paths:
       summary: Get the details of an incident
       tags:
       - Incidents
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4090,6 +4113,8 @@ paths:
       tags:
       - Incidents
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4119,6 +4144,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archive-order:
     get:
       description: 'Get the current order of your archives.
@@ -4141,6 +4168,8 @@ paths:
       summary: Get archive order
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     put:
       description: 'Update the order of your archives. Since logs are processed sequentially,
         reordering an archive may change
@@ -4189,6 +4218,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archives:
     get:
       description: Get the list of configured logs archives with their definitions.
@@ -4209,6 +4240,8 @@ paths:
       summary: Get all archives
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     post:
       description: Create an archive in your organization.
       operationId: CreateLogsArchive
@@ -4242,6 +4275,12 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteLogsArchive
+        parameters:
+        - name: archive_id
+          source: data.id
+        type: unsafe
   /api/v2/logs/config/archives/{archive_id}:
     delete:
       description: Delete a given archive from your organization.
@@ -4272,6 +4311,8 @@ paths:
       summary: Delete an archive
       tags:
       - Logs Archives
+      x-undo:
+        type: idempotent
     get:
       description: Get a specific archive from your organization.
       operationId: GetLogsArchive
@@ -4305,6 +4346,8 @@ paths:
       summary: Get an archive
       tags:
       - Logs Archives
+      x-undo:
+        type: safe
     put:
       description: 'Update a given archive configuration.
 
@@ -4351,6 +4394,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/logs/config/archives/{archive_id}/readers:
     delete:
       description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
@@ -4388,6 +4433,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4425,6 +4472,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4464,6 +4513,8 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
+      x-undo:
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4490,6 +4541,8 @@ paths:
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4525,6 +4578,12 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteRestrictionQuery
+        parameters:
+        - name: restriction_query_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4556,6 +4615,8 @@ paths:
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4587,6 +4648,8 @@ paths:
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4621,6 +4684,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4659,6 +4724,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4702,6 +4769,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4742,6 +4811,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4781,6 +4852,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4820,6 +4893,8 @@ paths:
       tags:
       - Logs Restriction Queries
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4918,6 +4993,8 @@ paths:
       summary: Get a quick list of logs
       tags:
       - Logs
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4965,6 +5042,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -4995,6 +5074,8 @@ paths:
       summary: List permissions
       tags:
       - Roles
+      x-undo:
+        type: safe
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -5079,6 +5160,8 @@ paths:
       summary: Get all processes
       tags:
       - Processes
+      x-undo:
+        type: safe
   /api/v2/roles:
     get:
       description: Returns all roles, including their names and IDs.
@@ -5120,6 +5203,8 @@ paths:
       summary: List roles
       tags:
       - Roles
+      x-undo:
+        type: safe
     post:
       description: Create a new role for your organization.
       operationId: CreateRole
@@ -5152,6 +5237,12 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteRole
+        parameters:
+        - name: role_id
+          source: data.id
+        type: unsafe
   /api/v2/roles/{role_id}:
     delete:
       description: Disables a role.
@@ -5177,6 +5268,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Get a role in the organization specified by the role\u2019s `role_id`."
       operationId: GetRole
@@ -5205,6 +5298,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     patch:
       description: Edit a role. Can only be used with application keys belonging to
         administrators.
@@ -5252,6 +5347,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/roles/{role_id}/permissions:
     delete:
       description: Removes a permission from a role.
@@ -5293,6 +5390,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: Returns a list of all permissions for a single role.
       operationId: ListRolePermissions
@@ -5321,6 +5420,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     post:
       description: Adds a permission to a role.
       operationId: AddPermissionToRole
@@ -5361,6 +5462,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/roles/{role_id}/users:
     delete:
       description: Removes a user from a role.
@@ -5402,6 +5505,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: Gets all users of a role.
       operationId: ListRoleUsers
@@ -5449,6 +5554,8 @@ paths:
       summary: Get all users of a role
       tags:
       - Roles
+      x-undo:
+        type: safe
     post:
       description: Adds a user to a role.
       operationId: AddUserToRole
@@ -5489,6 +5596,8 @@ paths:
       tags:
       - Roles
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/security_monitoring/rules:
     get:
       description: List rules.
@@ -5508,6 +5617,8 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
     post:
       description: Create a detection rule.
       operationId: CreateSecurityMonitoringRule
@@ -5532,6 +5643,12 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSecurityMonitoringRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        type: unsafe
   /api/v2/security_monitoring/rules/{rule_id}:
     delete:
       description: Delete an existing rule. Default rules cannot be deleted.
@@ -5548,6 +5665,8 @@ paths:
       summary: Delete an existing rule
       tags:
       - Security Monitoring
+      x-undo:
+        type: idempotent
     get:
       description: Get a rule's details.
       operationId: GetSecurityMonitoringRule
@@ -5565,6 +5684,8 @@ paths:
       summary: Get a rule's details
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
     put:
       description: 'Update an existing rule. When updating `cases`, `queries` or `options`,
         the whole field
@@ -5601,6 +5722,8 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
@@ -5672,6 +5795,8 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5704,6 +5829,8 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5736,6 +5863,8 @@ paths:
       summary: Get a list of all incident services
       tags:
       - Incident Services
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5768,6 +5897,12 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncidentService
+        parameters:
+        - name: service_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5791,13 +5926,16 @@ paths:
       summary: Delete an existing incident service
       tags:
       - Incident Services
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get details of an incident service. If the `include[users]` query
-        parameter is provided, the included attribute will contain the users related
-        to these incident services.
+      description: 'Get details of an incident service. If the `include[users]` query
+        parameter is provided,
+
+        the included attribute will contain the users related to these incident services.'
       operationId: GetIncidentService
       parameters:
       - $ref: '#/components/parameters/IncidentServiceIDPathParameter'
@@ -5820,6 +5958,8 @@ paths:
       summary: Get details of an incident service
       tags:
       - Incident Services
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5855,6 +5995,8 @@ paths:
       tags:
       - Incident Services
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5887,6 +6029,8 @@ paths:
       summary: Get a list of all incident teams
       tags:
       - Incident Teams
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5919,6 +6063,12 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteIncidentTeam
+        parameters:
+        - name: team_id
+          source: data.id
+        type: unsafe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -5942,13 +6092,16 @@ paths:
       summary: Delete an existing incident team
       tags:
       - Incident Teams
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
-      description: Get details of an incident team. If the `include[users]` query
-        parameter is provided, the included attribute will contain the users related
-        to these incident teams.
+      description: 'Get details of an incident team. If the `include[users]` query
+        parameter is provided,
+
+        the included attribute will contain the users related to these incident teams.'
       operationId: GetIncidentTeam
       parameters:
       - $ref: '#/components/parameters/IncidentTeamIDPathParameter'
@@ -5971,6 +6124,8 @@ paths:
       summary: Get details of an incident team
       tags:
       - Incident Teams
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -6006,6 +6161,8 @@ paths:
       tags:
       - Incident Teams
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -6042,6 +6199,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/user_invitations/{user_invitation_uuid}:
     get:
       description: Returns a single user invitation by its UUID.
@@ -6076,6 +6235,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/users:
     get:
       description: 'Get the list of all users in the organization. This list includes
@@ -6144,6 +6305,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     post:
       description: Create a user for your organization.
       operationId: CreateUser
@@ -6176,6 +6339,12 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DisableUser
+        parameters:
+        - name: user_id
+          source: data.id
+        type: unsafe
   /api/v2/users/{user_id}:
     delete:
       description: 'Disable a user. Can only be used with an application key belonging
@@ -6203,6 +6372,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: "Get a user in the organization specified by the user\u2019s `user_id`."
       operationId: GetUser
@@ -6231,6 +6402,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
     patch:
       description: 'Edit a user. Can only be used with an application key belonging
 
@@ -6279,6 +6452,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v2/users/{user_id}/orgs:
     get:
       description: 'Get a user organization. Returns the user information and all
@@ -6311,6 +6486,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v2/users/{user_id}/permissions:
     get:
       description: "Get a user permission set. Returns a list of the user\u2019s permissions\n\
@@ -6341,6 +6518,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []

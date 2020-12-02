@@ -272,7 +272,7 @@
     "summary": "Delete an existing incident service"
   },
   "GetIncidentService": {
-    "description": "Get details of an incident service. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident services.",
+    "description": "Get details of an incident service. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident services.",
     "summary": "Get details of an incident service"
   },
   "UpdateIncidentService": {
@@ -296,7 +296,7 @@
     "summary": "Delete an existing incident team"
   },
   "GetIncidentTeam": {
-    "description": "Get details of an incident team. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
+    "description": "Get details of an incident team. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident teams.",
     "summary": "Get details of an incident team"
   },
   "UpdateIncidentTeam": {
