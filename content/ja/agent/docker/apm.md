@@ -25,7 +25,7 @@ further_reading:
     tag: ドキュメント
     text: コンテナから送信された全データにタグを割り当て
 ---
-環境変数として `DD_APM_ENABLED=true` を渡すことで、`datadog/agent` コンテナで Trace Agent を有効にします。
+環境変数として `DD_APM_ENABLED=true` を渡すことで、`gcr.io/datadoghq/agent` コンテナで Trace Agent を有効にします。
 
 ## ホストからのトレース
 
@@ -43,9 +43,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<DATADOG_API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -53,9 +53,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -105,18 +105,18 @@ docker network create <NETWORK_NAME>
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
-              --network <ネットワーク名> \
+              --network <NETWORK_NAME> \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # アプリケーション
 docker run -d --name app \
-              --network <ネットワーク名> \
+              --network <NETWORK_NAME> \
               company/app:latest
 ```
 
@@ -126,15 +126,15 @@ docker run -d --name app \
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
-              --network "<ネットワーク名>" \
-              -e DD_API_KEY="<API_キー>" \
+              --network "<NETWORK_NAME>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
-# Application
+# アプリケーション
 docker run -d --name app \
-              --network "<ネットワーク名>" \
+              --network "<NETWORK_NAME>" \
               company/app:latest
 ```
 
