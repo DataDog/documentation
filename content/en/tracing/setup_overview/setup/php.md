@@ -339,7 +339,7 @@ Possible reasons causing a core dump not to be generated:
 1. if `/proc/sys/kernel/core_pattern` contains a path including nested directories, then the full directory path has to exist;
 1. if the user running the PHP-FPM pool workers is different from `root` (a common user name is `www-data`) then such user is required to have writing permissions to the core dumps directory;
 1. the value of `/proc/sys/fs/suid_dumpable` cannot be `0`. That value has to be either `1` or `2` unless you run PHP-FPM workers pool as `root` - check your options with your system administrator;
-1. you should have a proper `rlimit_core` in the pool configuration (for example `[www]`) section of your PHP-FPM server. You can even set it to unlimited: `rlimit_core = 99999999999`;
+1. you should have a proper `rlimit_core` in the pool configuration (for example `[www]`) section of your PHP-FPM server. You can even set it to unlimited: `rlimit_core = unlimited`;
 1. you should have a proper `ulimit` set in your system. You can even set it to unlimited: `ulimit -c unlimited`;
 1. if your application runs in a docker container, changes to `/proc/sys/*` have to be done to the host machine - contact your system administrator to know the options available to you. If you are able to, we suggest to try recreating the issue in your testing/staging environments.
 
