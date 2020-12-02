@@ -37,29 +37,13 @@ To send logs manually, use the `telnet` command with your [Datadog API key][5] w
 
 Logs can be a full-text message:
 
-{{< site-region region="us" >}}
-
 The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
-{{< code-block lang="text" >}}
-telnet intake.logs.datadoghq.com 10514
+```
+telnet {{< region-param key="tcp_endpoint" >}} {{< region-param key="tcp_endpoint_port_ssl" >}}
 
 <DATADOG_API_KEY> Plain text log sent through TCP
-{{< /code-block >}}
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
-
-{{< code-block lang="text" >}}
-telnet tcp-intake.logs.datadoghq.eu 1883
-
-<DATADOG_API_KEY> Plain text log sent through TCP
-{{< /code-block >}}
-
-{{< /site-region >}}
+```
 
 This produces the following result in the [Log Explorer Page][2]:
 

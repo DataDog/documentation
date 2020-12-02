@@ -63,8 +63,8 @@ Configure the task using either the [AWS CLI tools][10] or using the Amazon Web 
 
 1. For Linux containers, download [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] if you are using an original Amazon Linux 1 AMI). For Windows, download [datadog-agent-ecs-win.json][3].
 2. Edit `datadog-agent-ecs.json` and set `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][4] for your account.
-3. Optionally - Add an [Agent health check](#agent-health-check).
-4. Optionally - If you are in Datadog EU site, edit `datadog-agent-ecs.json` and set `DD_SITE` to `DD_SITE:datadoghq.eu`.
+3. Edit the `datadog-agent-ecs.json` and set `DD_SITE` to {{< region-param key="dd_site" code="true">}}. Defaults to `datadoghq.com`.
+4. Optionally - Add an [Agent health check](#agent-health-check).
 5. Optionally - See [log collection][5] to activate log collection.
 6. Optionally - See [process collection](#process-collection) to activate process collection.
 7. Optionally - See [trace collection (APM)][6] to activate trace collection.

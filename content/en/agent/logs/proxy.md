@@ -37,11 +37,9 @@ The parameters above can also be set with the following environment variables:
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com` or `agent-intake.logs.datadoghq.eu`) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
+**Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="tcp_endpoint" code="true" >}}) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
 
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to:
-    * For `app.datadoghq.com`: `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
-    * For `app.datadoghq.eu`: `agent-intake.logs.datadoghq.eu` on port `443` and activate SSL encryption.
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs. For {{< region-param key="dd_subdomain" code="true" >}}.{{< region-param key="dd_site" code="true" >}}, use {{< region-param key="tcp_endpoint" code="true" >}} on port {{< region-param key="tcp_endpoint_port" code="true" >}} and activate SSL encryption.
 
 * Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
     * `sudo apt-get install ca-certificates` (Debian, Ubuntu)

@@ -33,10 +33,10 @@ Follow these steps to configure Azure AD as a SAML identity provider (IdP) withi
 
 8. Retrieve your `Service Provider Entity ID` and `Assertion Consumer Service URL` from the [Datadog SAML page][2]. The default values are:
 
-    |                                |                                                                            |
-    |--------------------------------|----------------------------------------------------------------------------|
-    | Service Provider Entity ID     | `https://app.{{< region-param key="dd_site" >}}/account/saml/metadata.xml` |
-    | Assertion Consumer Service URL | `https://app.{{< region-param key="dd_site" >}}/account/saml/assertion`    |
+    |                                |                                                                                                                |
+    |--------------------------------|----------------------------------------------------------------------------------------------------------------|
+    | Service Provider Entity ID     | `https://{{< region-param key="dd_full_site" >}}/account/saml/metadata.xml` |
+    | Assertion Consumer Service URL | `https://{{< region-param key="dd_full_site" >}}/account/saml/assertion`    |
 
 9.  In Azure, add the values retrieved above and click save:
 

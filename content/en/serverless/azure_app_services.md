@@ -51,8 +51,7 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
 3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][10].
     {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
-4. If you use the EU Datadog site (datadoghq.eu domain), add an application setting `DD_SITE` with datadoghq.eu as the value.
-    By default, the extension submits data to the US Datadog site (the datadoghq.com domain). So if you use the US Datadog site, there is no additional application setting required.
+4. Set the `DD_SITE` to `{{< region-param key="dd_site" code="true" >}}`. Defaults to `datadoghq.com`.
 5. Go to the extensions page and click **Add**.
 6. Select the Datadog APM extension.
     {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Datadog extension" >}}
