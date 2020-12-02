@@ -13,13 +13,13 @@ further_reading:
 
 [Amazon ECS エージェントのインストール手順][1]でインストールした後、以下の手順に従いトレースの収集を有効にします。
 
-1. `datadog/agent` コンテナのタスク定義で次のパラメーターを設定します。`portMappings` ホスト / コンテナポートを `8126`（プロトコルは `tcp`）に設定します。
+1. `gcr.io/datadoghq/agent` コンテナのタスク定義で次のパラメーターを設定します。`portMappings` ホスト / コンテナポートを `8126`（プロトコルは `tcp`）に設定します。
 
     {{< code-block lang="json" >}}
     containerDefinitions": [
     {
       "name": "datadog-agent",
-      "image": "datadog/agent:latest",
+      "image": "gcr.io/datadoghq/agent:latest",
       "cpu": 10,
       "memory": 256,
       "essential": true,

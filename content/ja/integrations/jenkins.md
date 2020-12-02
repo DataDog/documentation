@@ -283,6 +283,10 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
 | `jenkins.node_status.count`            | このノードが存在する場合。                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
 | `jenkins.plugin.count`                 | プラグイン総数                                                 | `jenkins_url`                                                              |
+| `jenkins.plugin.active`                | プラグインは有効です。                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.failed`                | プラグインに失敗しました。                                                | `jenkins_url`                                                              |
+| `jenkins.plugin.inactivate`            | プラグインは無効です。                                              | `jenkins_url`                                                              |
+| `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                           | `jenkins_url`                                                              |
 | `jenkins.project.count`                | プロジェクト総数                                                 | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | キューサイズ                                                    | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                             | `jenkins_url`                                                              |

@@ -140,7 +140,7 @@
     "request_schema_description": "ダウンタイム設定を使用すると、アラートからいくつかのスコープをグローバルに除外することで、\nモニター通知をより詳細に制御できます。\nダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、\n指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
   },
   "ListEvents": {
-    "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**: クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に %、\\、n などの文字が表示される場合があります。",
+    "description": "イベントストリームにクエリを発行して、時間、優先度、ソース、タグなどで絞り込むことができます。\n\n**注**:\n- クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に `%`、`\\`、`n` などの文字が表示される場合があります。\n\n- このエンドポイントは最新の結果を最大 `1000` 件返します。さらに多くの結果を返すには、最新の結果の最新のタイムスタンプを特定し、それを `end` クエリに設定して結果をページ区切りします。",
     "summary": "イベントストリームのクエリ"
   },
   "CreateEvent": {
@@ -222,6 +222,22 @@
   "ListAvailableAWSNamespaces": {
     "description": "特定の Datadog-AWS インテグレーションのすべてのネームスペース規則をリストします。このエンドポイントは引数を受け取りません。",
     "summary": "ネームスペース規則のリスト"
+  },
+  "DeleteAWSTagFilter": {
+    "description": "タグのフィルタリングエントリを削除します。",
+    "summary": "タグのフィルタリング入力を削除する",
+    "request_description": "特定の AWS アカウントと `dd-aws` ネームスペースのタグフィルタリングエントリを削除します。",
+    "request_schema_description": "AWS タグフィルターエントリの削除に使用されるオブジェクト。"
+  },
+  "ListAWSTagFilters": {
+    "description": "すべての AWS タグフィルターを取得します。",
+    "summary": "すべての AWS タグのフィルターを取得する"
+  },
+  "CreateAWSTagFilter": {
+    "description": "AWS タグフィルターを設定します。",
+    "summary": "AWS タグのフィルターを設定する",
+    "request_description": "`aws_account_identifier`、`namespace`、フィルタリング文字列を使用して、AWS タブフィルターを設定します。\nネームスペースには、`application_elb`、`elb`、`lambda`、`network_elb`、`rds`、`sqs`、`custom` を使用できます。",
+    "request_schema_description": "AWS タグフィルターの設定に使用されるオブジェクト。"
   },
   "CreateNewAWSExternalID": {
     "description": "特定の AWS アカウント ID/ロール名ペアに対して新しい AWS 外部 ID を作成します。",
@@ -357,6 +373,30 @@
     "request_description": "既存の Datadog-Slack インテグレーションのリクエスト本文を更新します。",
     "request_schema_description": "Slack チャンネルのコンフィギュレーションです。"
   },
+  "GetSlackIntegrationChannels": {
+    "description": "Datadog-Slack インテグレーションに構成されたすべてのチャンネルのリストを取得します。",
+    "summary": "Slack インテグレーションのすべてのチャンネルを取得"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションにチャンネルを追加します。",
+    "summary": "Slack インテグレーションチャンネルの作成",
+    "request_description": "作成される Slack チャンネルを説明するペイロード",
+    "request_schema_description": "Slack チャンネルのコンフィギュレーション。"
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションからチャンネルを削除します。",
+    "summary": "Slack インテグレーションチャンネルの削除"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションに構成されたチャンネルを取得します。",
+    "summary": "Slack インテグレーションチャンネルの取得"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Datadog-Slack インテグレーションに使用されるチャンネルを更新します。",
+    "summary": "Slack インテグレーションチャンネルの更新",
+    "request_description": "更新されるフィールドと値を説明するペイロード。",
+    "request_schema_description": "Slack チャネルのコンフィギュレーション。"
+  },
   "CreateWebhooksIntegrationCustomVariable": {
     "description": "`<CUSTOM_VARIABLE_NAME>` という名のエンドポイントを作成します。",
     "summary": "カスタム変数を作成する",
@@ -424,8 +464,8 @@
   "UpdateLogsIndex": {
     "description": "名前による識別に従ってインデックスを更新します。\nリクエストが正常に完了したときに、リクエスト本文で渡されるインデックスオブジェクトを返します。\n\nPUT` メソッドを使用すると、現在の構成を Datadog Organization に送信された\n新しい構成に**置き換えて**、インデックス構成が更新されます。",
     "summary": "インデックスを更新する",
-    "request_description": "新しい `LogsIndex` を含むオブジェクト。",
-    "request_schema_description": "Datadog のログインデックスを記述するオブジェクト。"
+    "request_description": "新しい `LogsIndexUpdateRequest` を含むオブジェクト。",
+    "request_schema_description": "Datadog ログのインデックスを更新するオブジェクト。"
   },
   "GetLogsPipelineOrder": {
     "description": "パイプラインの現在の順序を取得します。\nこのエンドポイントは、JSON 引数を受け取りません。",
@@ -569,12 +609,12 @@
     "request_schema_description": "メトリクスのペイロード。"
   },
   "ListServiceDependencies": {
-    "description": "サービスのリストと依存関係を取得します。取得されたサービスは環境およびプライマリタグ \n(定義されている場合) でフィルタリングされます。",
-    "summary": "すべてのサービスの依存関係を取得する"
+    "description": "APM サービスのリストと依存関係を取得します。取得されたサービスは環境およびプライマリタグ (定義されている場合) でフィルタリングされます。",
+    "summary": "すべての APM サービスの依存関係を取得"
   },
   "ListSingleServiceDependencies": {
     "description": "指定のサービスのすぐ上流および下流のサービスを取得します。\n取得されたサービスは環境およびプライマリタグ (定義されている場合) でフィルタリングされます。",
-    "summary": "1 つのサービスの依存関係を取得する"
+    "summary": "1 つの APM サービスの依存関係を取得"
   },
   "ListSLOs": {
     "description": "複数のサービスレベル目標オブジェクトを ID で取得します。",
@@ -618,6 +658,26 @@
     "description": "Synthetic テストで利用可能なパブリックおよびプライベートのロケーションリストを取得します。引数は不要です。",
     "summary": "ロケーションをすべて取得する（パブリックおよびプライベート）"
   },
+  "CreatePrivateLocation": {
+    "description": "新しい Synthetics プライベートロケーションを作成します。",
+    "summary": "プライベートロケーションを作成する",
+    "request_description": "作成するプライベートロケーションの詳細。",
+    "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
+  },
+  "DeletePrivateLocation": {
+    "description": "Synthetics プライベートロケーションを削除します。",
+    "summary": "プライベートロケーションを削除する"
+  },
+  "GetPrivateLocation": {
+    "description": "Synthetics プライベートロケーションを取得します。",
+    "summary": "プライベートロケーションを取得する"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Synthetics プライベートロケーションを編集します。",
+    "summary": "プライベートロケーションを編集する",
+    "request_description": "更新するプライベートロケーションの詳細。",
+    "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
+  },
   "ListTests": {
     "description": "すべての Synthetic テストのリストを取得します。",
     "summary": "すべてのテストのリストを取得する"
@@ -647,7 +707,7 @@
     "request_schema_description": "削除したい Synthetic テスト ID の \nJSON リスト。"
   },
   "TriggerCITests": {
-    "description": "継続的なインテグレーションに向けた一連の Synthetics テストのトリガー",
+    "description": "継続的なインテグレーションに向けた一連の Synthetics テストをトリガーします。",
     "summary": "CI の Synthetic テストのトリガー",
     "request_description": "トリガーするテストの詳細。",
     "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
@@ -724,6 +784,10 @@
     "description": "分析されたログの 1 時間あたり使用量を取得します (セキュリティモニタリング) 。",
     "summary": "分析されたログの 1 時間あたり使用量の取得"
   },
+  "GetUsageAttribution": {
+    "description": "使用属性を取得します。",
+    "summary": "使用属性を取得する"
+  },
   "GetUsageLambda": {
     "description": "Lambda の 1 時間あたり使用量を取得します。",
     "summary": "Lambda の 1 時間あたり使用量の取得"
@@ -739,6 +803,18 @@
   "GetUsageHosts": {
     "description": "ホストとコンテナの 1 時間あたり使用量を取得します。",
     "summary": "ホストとコンテナの 1 時間あたり使用量の取得"
+  },
+  "GetIncidentManagement": {
+    "description": "インシデント管理の 1 時間あたり使用量を取得します。",
+    "summary": "インシデント管理の 1 時間あたり使用量を取得する"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "Indexed span の 1 時間あたり使用量を取得します。",
+    "summary": "インデックス化されたスパンの 1 時間あたり使用量を取得"
+  },
+  "GetIngestedSpans": {
+    "description": "取り込まれたスパンの 1 時間あたり使用量を取得します。",
+    "summary": "取り込まれたスパンの 1 時間あたり使用量を取得"
   },
   "GetUsageLogs": {
     "description": "ログの 1 時間あたり使用量を取得します。",
@@ -790,14 +866,14 @@
   },
   "GetUsageTopAvgMetrics": {
     "description": "時間平均に基づく上位[カスタムメトリクス](https://docs.datadoghq.com/developers/metrics/custom_metrics/)を取得します。",
-    "summary": "時間平均に基づくカスタムメトリクス上位 500 の取得"
+    "summary": "時間平均に基づく上位カスタムメトリクスを取得する"
   },
   "GetUsageTrace": {
-    "description": "トレース検索の 1 時間あたり使用量を取得します。",
+    "description": "トレース検索の 1 時間あたりの使用量を取得します。\n\n**注** このエンドポイントの名前は `/api/v1/usage/indexed-spans` に変更されました。",
     "summary": "トレース検索の 1 時間あたり使用量の取得"
   },
   "GetTracingWithoutLimits": {
-    "description": "Tracing without Limits の 1 時間あたり使用量を取得します。",
+    "description": "Tracing without Limits の 1 時間あたりの使用量を取得します。\n\n**注** このエンドポイントの名前は `/api/v1/usage/ingested-spans` に変更されました。",
     "summary": "Tracing without Limits の 1 時間あたり使用量の取得"
   },
   "ListUsers": {
