@@ -50,7 +50,9 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 {{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. Lastly, view and run synthetic tests when viewing your synthetic monitors.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
+
+For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. Lastly, view and run synthetic tests when viewing your synthetic monitors.
 
 **Note:** To set up or edit monitors, notifications, or saved views, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
 
