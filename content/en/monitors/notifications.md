@@ -147,10 +147,15 @@ For example, if your log monitor is grouped by the `facet`, the variable is:
 ```text
 {{ facet.name }}
 ```
+**Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
 
-If your facet has periods, use brackets around the facet, for example:
 ```text
-{{ [facet.with.dot].name }}
+This alert was triggered on {{ @machine_id.name }}
+```
+If your facet has periods, use brackets around the facet, for example:
+
+```text
+{{ [@network.client.ip].name }}
 ```
 
 ### Conditional variables
