@@ -28,9 +28,9 @@ Estimated usage metrics are generally available for the following usage types:
 | Logs Ingested Bytes  | `datadog.estimated_usage.logs.ingested_bytes`          |
 | Logs Ingested Events | `datadog.estimated_usage.logs.ingested_events`   |
 | APM Hosts            | `datadog.estimated_usage.apm_hosts`      |
-| APM Indexed Spans   | `datadog.estimated_usage.logs.apm.indexed_spans` |
-| APM Ingested Bytes   | `datadog.estimated_usage.logs.apm.ingested_bytes` |
-| APM Ingested Spans   | `datadog.estimated_usage.logs.apm.ingested_spans` |
+| APM Indexed Spans   | `datadog.estimated_usage.apm.indexed_spans` |
+| APM Ingested Bytes   | `datadog.estimated_usage.apm.ingested_bytes` |
+| APM Ingested Spans   | `datadog.estimated_usage.apm.ingested_spans` |
 | Serverless Lambda Functions | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 
 Log-based usage metrics must be manually enabled from the [Generate Metrics][1] page.

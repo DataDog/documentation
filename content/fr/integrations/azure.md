@@ -308,7 +308,98 @@ Accédez au [dashboard par défaut des machines virtuelles Azure][53] pour visua
 Le meilleur moyen d'envoyer les logs d'Azure à Datadog est d'utiliser l'Agent ou un DaemonSet. Si cela n'est pas possible pour une certaine ressource, Datadog vous conseille de créer un pipeline de transfert de logs en utilisant un Event Hub Azure pour recueillir [les logs de la plateforme Azure][54]. Si une ressource ne prend pas en charge la diffusion des logs de la plateforme Azure à un Event Hub, vous pouvez les transférer via le service Stockage Blob Azure.
 
 {{< tabs >}}
-{{% tab "Event Hub" %}}
+
+{{% tab "Installation automatisée" %}}
+
+Datadog met à votre disposition deux scripts automatisés.
+
+Le premier script crée et configure les ressources Azure requises pour que les logs d'activité soient diffusés vers votre compte Datadog. Ces ressources incluent les paramètres de diagnostic des logs d'activité, les fonctions Azure, les espaces de nommage d'Event Hub et l'Event Hub.
+
+Le second script est une option plus générique qui déploie uniquement l'Event Hub et les fonctions Azure, sans aucun paramètre de diagnostic. Il peut être utilisé pour configurer les sources de diffusion. Dans les deux cas, les Event Hubs peuvent être utilisés par d'autres sources de diffusion.
+
+**Exemple :**
+
+Si vous souhaitez diffuser à la fois les logs d'activité et les logs de ressources provenant de `westus`, exécutez le premier script en spécifiant le paramètre facultatif `-ResourceGroupLocation westus` (les logs d'activité sont une source au niveau de l'abonnement, vous pouvez donc leur créer un pipeline dans n'importe quelle région). Une fois le script déployé, vous pouvez envoyer les logs de ressource via le même Event Hub en ajoutant les paramètres de diagnostic à vos ressources dans `westus`.
+
+
+#### Envoyer vos logs d'activité à Datadog depuis Azure :
+
+*Étape 1 :** dans le portail Azure, accédez à votre **Cloud Shell**.
+
+{{< img src="integrations/azure/azure_cloud_shell.png" alt="cloud shell azure" popup="true" style="width:100%">}}
+
+**Étape 2 :** exécutez la commande ci-dessous pour télécharger le script d'automatisation dans votre environnement Cloud Shell.
+
+{{< code-block lang="powershell" filename="Logs d'activité Étape 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1", "activity_logs_deploy.ps1")
+
+{{< /code-block >}}
+
+Vous pouvez également [afficher le contenu du script][1].
+
+**Étape 3 :** invoquez le script en exécutant la commande ci-dessous, en ayant remplacé **`<clé_api>`**, par votre [token d'API Datadog][2], et **`<id_abonnement>`**, par votre ID d'abonnement Azure. Vous pouvez également ajouter des paramètres facultatifs supplémentaires pour configurer votre déploiement. Consultez [Paramètres facultatifs](#parametres-facultatifs).
+
+{{< code-block lang="powershell" filename="Logs d'activité Étape 2" >}}
+
+./activity_logs_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+
+{{< /code-block >}}
+
+#### Envoyer vos logs de plateforme à Datadog depuis Azure :
+
+Une solution générique pour envoyer des logs de plateforme Azure, y compris les logs de ressource, consiste à déployer uniquement l'Event Hub et le forwarder de logs.
+Une fois ce pipeline déployé, vous pouvez créer des paramètres de diagnostic pour chaque source de log et les configurer pour qu'elles diffusent leur contenu vers Datadog.
+
+*Étape 1 :** dans le portail Azure, accédez à votre **Cloud Shell**.
+
+**Étape 2 :** exécutez la commande ci-dessous pour télécharger le script d'automatisation dans votre environnement Cloud Shell.
+
+{{< code-block lang="powershell" filename="Logs de plateforme Étape 1" >}}
+
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+
+{{< /code-block >}}
+
+Vous pouvez également [afficher le contenu du script](https://github.
+com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
+
+**Étape 3 :** invoquez le script en exécutant la commande ci-dessous, en ayant remplacé **`<clé_api>`**, par votre [token d'API Datadog][2], et **`<id_abonnement>`**, par votre ID d'abonnement Azure. Vous pouvez également ajouter des paramètres facultatifs supplémentaires pour configurer votre déploiement. Consultez [Paramètres facultatifs](#parametres-facultatifs).
+
+{{< code-block lang="powershell" filename="Logs de plateforme Étape 2" >}}
+
+./resource_deploy.ps1 -ApiKey <clé_api> -SubscriptionId <id_abonnement> 
+
+{{< /code-block >}}
+
+**Étape 4 :** créez des paramètres de diagnostic pour toutes les ressources Azure qui enverront des logs à Datadog. Configurez ces paramètres de diagnostic pour démarrer la diffusion des logs vers l'Event Hub que vous venez de créer.
+
+**Remarque :** les ressources peuvent diffuser des logs uniquement aux Event Hubs qui se trouvent dans la même région Azure. Vous devrez donc répéter l'étape 2 pour chaque région à partir de laquelle vous souhaitez diffuser des logs de ressource.
+
+**Remarque :** les valeurs Ressource-Groupe-Emplacement sont ajoutées au nom par défaut de chaque ressource Azure déployée pour le pipeline de logs de plateforme. Exemple : `datadog-eventhub-westus`. Toutefois, vous pouvez modifier cette convention en remplaçant ce paramètre.
+
+#### Paramètres facultatifs
+
+**Remarque :** lorsque vous personnalisez les paramètres, assurez-vous que le nom de chacune de vos ressources personnalisées est unique. Vérifiez que le nom de la ressource ne figure pas déjà dans votre liste de ressources Azure.
+
+| -Flag `<paramètre par défaut>`                                           | Description                                                                                                                                                      |
+|-----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -DatadogSite `<datadoghq.com>`                                        | Personnalisez votre instance Datadog en ajoutant ce flag avec une autre URL datadog comme paramètre. (Vous pouvez utiliser datadoghq.eu, ddog-gov.com, ou us3.datadoghq.com)      |
+| -ResourceGroupLocation `<westus2>`                                    | Vous pouvez sélectionner la région dans laquelle votre groupe de ressources et vos ressources Azure sont déployés en ajoutant ce flag avec la nouvelle région Azure.              |
+| -ResourceGroupName `<gr-forwarder-logs-datadog>`                       | Personnalisez le nom de votre groupe de ressources Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                          |
+| -EventhubNamespace `<espacedenommage-eventhub-datadog>`                     | Personnalisez l'espace de nommage de votre Event-Hub Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                          |
+| -EventhubName `<eventhub-datadog>`                                    | Personnalisez le nom de votre Event-Hub Azure en utilisant ce flag avec un paramètre mis à jour.                                                                               |
+| -FunctionAppName `<application-de-fonction-datadog>`                              | Personnalisez le nom de votre application de fonction Azure en ajoutant ce flag avec un paramètre mis à jour.                                                                            |
+| -FunctionName `<fonction-datadog>`                                    | Personnalisez le nom de votre fonction Azure en utilisant ce flag avec un paramètre mis à jour.                                                                                |
+| -DiagnosticSettingName `<paramètre-diagnostic-logs-activité-datadog>`   | Personnalisez le nom de votre paramètre de diagnostic Azure en utilisant ce flag avec un paramètre mis à jour. **(Est pertinent uniquement pour l'envoi de logs d'activité)**                        |
+
+
+
+[1]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/activity_logs_deploy.ps1
+[2]: https://app.datadoghq.com/account/settings#api
+{{% /tab %}}
+
+{{% tab "Installation manuelle" %}}
 
 Pour envoyer des logs d'Azure à Datadog, suivez cette méthode globale :
 
@@ -371,7 +462,7 @@ Pointez votre déclencheur Event Hub vers Datadog.
     a. Event Parameter Name doit être défini sur `eventHubMessages`.
     b. Event Hub Cardinality doit être défini sur `Many`.
     c. Event Hub Data Type doit être vide.
-7. Cliquez sur **Save**.
+7. Cliquez sur **Enregistrer**.
 8. Vérifiez que votre configuration est valide en exécutant la fonction et en recherchant le message de test dans le [Log Explorer de Datadog][5].
 
 #### Logs d'activité

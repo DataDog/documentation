@@ -47,7 +47,7 @@ Agent は、Docker のイベント (コンテナの作成、廃棄、起動、�
 
 Docker Swarm を使用する場合は、マネージャーノードのいずれかで以下のコマンドを実行します。
 
-   docker service create \
+    docker service create \
       --name dd-agent \
       --mode global \
       --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
@@ -55,14 +55,14 @@ Docker Swarm を使用する場合は、マネージャーノードのいずれ�
       --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
       -e API_KEY=<YOUR_DATADOG_API_KEY> \
       -e SD_BACKEND=docker \
-      datadog/docker-dd-agent:latest
+      gcr.io/datadoghq/docker-dd-agent:latest
 
 その他の場合は、docker-dd-agent ドキュメントで詳細な手順およびサポートされている[環境変数][6]の一覧を参照してください。
 
 **Agent で JMX ベースのチェックを自動検出するには**
 
-1. `datadog/docker-dd-agent:latest-jmx` イメージを使用します。このイメージは `latest` に基づいていますが、Agent が [jmxfetch][7] を実行するために必要な JVM が含まれます。
-2. `datadog/docker-dd-agent:latest-jmx` の起動時に、環境変数 `SD_JMX_ENABLE=yes` を渡します。
+1. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` イメージを使用します。このイメージは `latest` に基づいていますが、Agent が [jmxfetch][7] を実行するために必要な JVM を含んでいます。
+2. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` の起動時に、環境変数 `SD_JMX_ENABLE=yes` を渡します。
 
 ## チェックテンプレートの設定
 
@@ -162,7 +162,7 @@ docker service create \
   -e SD_CONFIG_BACKEND=etcd \
   -e SD_BACKEND_HOST=127.0.0.1 \
   -e SD_BACKEND_PORT=4001 \
-  datadog/docker-dd-agent:latest
+  gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
 オートディスカバリーを有効にするためのオプションの名前は、`datadog.conf` では `service_discovery_backend` ですが、環境変数では `SD_BACKEND` です。
@@ -388,7 +388,7 @@ checks:
 
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
-[3]: https://hub.docker.com/r/datadog/docker-dd-agent
+[3]: https://gcr.io/datadoghq/docker-dd-agent
 [4]: /ja/agent/kubernetes/
 [5]: /ja/integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables

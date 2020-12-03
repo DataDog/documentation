@@ -132,6 +132,8 @@ Setting the value without a secret results in the token being readable in the `P
 6. Run: `kubectl apply -f install_info-configmap.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
 
+**Note**: In your Datadog Cluster Agent, set `<DD_SITE>` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. The default value is `datadoghq.com`
+
 ### Step 4 - Verification
 
 At this point, you should see:
@@ -175,7 +177,7 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 1. Download the [daemonset.yaml manifest][10].
 
-3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with the Datadog site you are using, i.e. `datadoghq.com` or `datadoghq.eu`. This value defaults to `datadoghq.com`.
+3. In the `daemonset.yaml` manifest, replace `<DD_SITE>` with your Datadog site: `{{< region-param key="dd_site">}}`. Defaults to `datadoghq.com`.
 
 4. In the `daemonset.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 

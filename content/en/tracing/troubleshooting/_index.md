@@ -13,7 +13,7 @@ further_reading:
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance.  We also recommend regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
 
 ## Confirm APM setup and Agent status
 

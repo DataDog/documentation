@@ -13,7 +13,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF:
+The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL:
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
 
@@ -21,7 +21,7 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 {{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup"  style="width:80%;">}}
 
-1. Enter your image URL
+1. Enter your image URL.
 2. Choose an appearance:
     * Zoom image to cover whole title
     * Fit image on tile

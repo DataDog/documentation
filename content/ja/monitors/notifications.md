@@ -237,6 +237,36 @@ Disk space is low @ops-team@company.com
 {{/is_match}}
 ```
 
+`is_match` 条件は、複数の文字列の一致にも対応しています。
+
+```text
+{{#is_match "role.name" "db" "database"}}
+  アラートをトリガーしているホストのロール名に `db` または `database` が
+  含まれている場合に表示されます。@db-team@company.com
+{{/is_match}}
+```
+
+タグに `db` が含まれない場合に異なる通知を送信するには、以下のように条件の否認を使用します。
+
+```text
+{{^#is_match "role.name" "db"}}
+  ロールタグに `db` が含まれない場合に表示されます。
+  @slack-example
+{{/is_match}}
+```
+
+または、最初の例にある `{{else}}` パラメータを使用します。
+
+```text
+{{#is_match "role.name" "db"}}
+  アラートをトリガーしているホストのロール名に `db` が
+  含まれている場合に表示されます。@db-team@company.com
+{{else}}
+  ロールタグに `db` が含まれない場合に表示されます。
+  @slack-example
+{{/is_match}}
+```
+
 **注**: `<タグ変数>` が空では**ない**かどうかを確認するには、`<比較文字列>` に空の文字列を使用します。
 
 {{% /tab %}}

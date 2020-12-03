@@ -42,6 +42,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_SITE="<YOUR_DATADOG_SITE>" \
               gcr.io/datadoghq/agent:latest
 ```
 
@@ -54,7 +55,9 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
                               -e DD_API_KEY="<DATADOG_API_KEY>" \
+                              -e DD_SITE="<YOUR_DATADOG_SITE>" \
                               gcr.io/datadoghq/agent:latest
+
 ```
 
 {{% /tab %}}
@@ -63,13 +66,14 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 DOCKER_CONTENT_TRUST=1 \
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_SITE="<YOUR_DATADOG_SITE>" \
               gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: add `DD_SITE=datadoghq.eu` if you are using Datadog EU site.
+**Note**: Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
 
 ### Configuration
 

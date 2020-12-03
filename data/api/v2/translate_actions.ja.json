@@ -21,6 +21,30 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "ListIncidents": {
+    "description": "ユーザーの組織のすべてのインシデントを取得します。",
+    "summary": "インシデントリストを取得"
+  },
+  "CreateIncident": {
+    "description": "インシデントを作成します。",
+    "summary": "インシデントを作成",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを作成します。"
+  },
+  "DeleteIncident": {
+    "description": "ユーザーの組織から既存のインシデントを削除します。",
+    "summary": "既存のインシデントを削除"
+  },
+  "GetIncident": {
+    "description": "`incident_id` でインシデントの詳細を取得します。",
+    "summary": "インシデントの詳細を取得"
+  },
+  "UpdateIncident": {
+    "description": "インシデントを更新します。このリクエストは部分的な更新なので、更新が必要な属性のみを指定してください。",
+    "summary": "既存のインシデントを更新",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを更新します。"
+  },
   "AggregateLogs": {
     "description": "イベントをバケットに集約しメトリクスと時系列を計算する API エンドポイント。",
     "summary": "イベントを集計する",
@@ -130,6 +154,10 @@
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
     "summary": "アクセス許可を一覧表示する"
+  },
+  "ListProcesses": {
+    "description": "組織のすべてのプロセスを取得します。",
+    "summary": "すべてのプロセスを取得"
   },
   "ListRoles": {
     "description": "名前と ID を含むすべてのロールを返します。",

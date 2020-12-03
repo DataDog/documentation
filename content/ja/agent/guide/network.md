@@ -24,8 +24,14 @@ further_reading:
 
   - [APM][1] データは `trace.agent.`{{< region-param key="dd_site" code="true" >}}
   - [ライブコンテナ][2]データは `process.`{{< region-param key="dd_site" code="true" >}}
-  - [ログ][3]データは、TCP トラフィックには `agent-intake.logs`{{< region-param key="dd_site" code="true" >}}、HTTP で `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} です。詳細は、[ログエンドポイント][4]のリストをご確認ください。
+  - [ログ][3] データには、TCP トラフィックの `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} 、HTTP の `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} などが含まれます。詳細は、[ログエンドポイント][4]の全リストを参照してください。
   - [オーケストレーターリソース][5]データは `orchestrator.`{{< region-param key="dd_site" code="true" >}}.
+  - [HIPPA ログ][6]データはすべての[ログ][3]と同じですが、以下に挙げるレガシーエンドポイントにも対応しています。
+    - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Synthetic プライベートロケーション][7] は、バージョン 0.1.6 以降では `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}、バージョン 0.2.0 以降は `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} となります。
   - その他の Agent データ:
       - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
       - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
@@ -154,7 +160,7 @@ Agent のすべての機能を利用するには、以下のポートを開き�
 
 ## プロキシの使用
 
-プロキシの設定に関する詳細なコンフィギュレーションガイドについては、[Agent プロキシコンフィギュレーション][6]を参照してください。
+プロキシの設定に関する詳細なコンフィギュレーションガイドについては、[Agent プロキシコンフィギュレーション][8]を参照してください。
 
 ## その他の参考資料
 
@@ -165,4 +171,6 @@ Agent のすべての機能を利用するには、以下のポートを開き�
 [3]: /ja/logs/
 [4]: /ja/logs/log_collection/?tab=http#datadog-logs-endpoints
 [5]: /ja/infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /ja/agent/proxy/
+[6]: /ja/security/logs/#hipaa-enabled-customers
+[7]: /ja/synthetics/private_locations/#datadog-private-locations-endpoints
+[8]: /ja/agent/proxy/
