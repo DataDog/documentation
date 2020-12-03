@@ -53,7 +53,7 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 **注**: Windows システムでは、このコマンドをボリュームマウントなしで実行します。つまり以下のようになります。
@@ -65,7 +65,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 最新版の Datadog Agent の使用が推奨されます。Docker Hub で利用できる [Agent v6 のイメージ][2]リストを参照してください。
@@ -81,7 +81,7 @@ docker run -d --name datadog-agent \
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | ログは Docker ソケットの `stdout/stderr` コンテナから収集されます。                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://hub.docker.com/r/datadog/agent/tags
+[2]: https://gcr.io/datadoghq/agent
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 

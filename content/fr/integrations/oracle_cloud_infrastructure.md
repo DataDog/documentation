@@ -23,7 +23,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Oracle Cloud Infrastructure (OCI) est une infrastructure en tant que service (IaaS) et une plateforme en tant que service (PaaS) utilisée par les entreprises les plus importantes. Celle-ci inclut un ensemble complet de services gérés pour l'hébergement, le stockage, la mise en réseau, les bases de données, et bien plus encore.
+Oracle Cloud Infrastructure (OCI) est une infrastructure en tant que service (IaaS) et une plateforme en tant que service (PaaS) utilisée par les plus grandes entreprises. Celle-ci inclut un ensemble complet de services gérés pour l'hébergement, le stockage, la mise en réseau, les bases de données, et bien plus encore.
 
 Grâce à notre nouvelle intégration, les utilisateurs d'OCI peuvent transmettre directement l'ensemble de leurs logs vers Datadog, où ils peuvent alors être stockés indéfiniment, analysés à des fins de dépannage, et surveillés à des fins de sécurité et de conformité.
 

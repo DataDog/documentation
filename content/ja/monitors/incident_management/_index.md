@@ -51,7 +51,7 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 #### Slack から作成
 
-[Datadog インテグレーションを Slack で有効化][3]すると、どの Slack チャネルからでもスラッシュコマンド `/datadog incident` を使用して新しいインシデントを宣言できます。
+[Datadog インテグレーションを Slack で有効化][3]すると、どの Slack チャンネルからでもスラッシュコマンド `/datadog incident` を使用して新しいインシデントを宣言できます。
 
 作成モーダルで、説明タイトル (Title) に入力し、カスタマーへの影響 (Yes、No、Unknown) を選択して、重大度 (Severity) を (Unknown または 1～5) から選択します。
 

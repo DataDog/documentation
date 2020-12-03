@@ -76,7 +76,7 @@ ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][4]を参照してください。 
 
-ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agent を構成し、ZooKeeper に接続できるようになります。JKS フィルによってすでに認証設定が済んでいる場合は、次のステップに従って JKS ファイルを TLS/SSL コンフィギュレーション用の PEM ファイルに変換します。
+ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agent を構成し、ZooKeeper に接続できるようになります。JKS ファイルによってすでに認証設定が済んでいる場合は、次のステップに従って JKS ファイルを TLS/SSL コンフィギュレーション用の PEM ファイルに変換します。
 
 次のコマンドの例は、JKS `truststore` ファイルと `keystore` ファイルが呼び出された場合を仮定しています。
 
