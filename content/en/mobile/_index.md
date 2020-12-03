@@ -44,7 +44,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
 
-**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][5] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
+**Note**: Mobile App SAML IdP-initiated login is currently available in beta. Contact [Datadog Support][14] to request SAML IdP-initiated beta access or if you have any issues with SAML authentication.
 
 ## Monitors
 
