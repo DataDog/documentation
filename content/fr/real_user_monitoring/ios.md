@@ -165,7 +165,7 @@ Datadog.Configuration
 Global.rum = RUMMonitor.initialize()
 ```
 
-De cette façon, le SDK surveillera toutes les pressions de l'écran importantes effectuées dans l'application. Pour des raisons de confidentialité, les interactions avec le clavier ne sont jamais enregistrées.
+De cette façon, le SDK surveillera toutes les pressions significatives effectuées sur l'écran depuis l'application. Pour des raisons de confidentialité, les interactions avec le clavier ne sont jamais enregistrées.
 
 ### Erreurs liées au RUM
 

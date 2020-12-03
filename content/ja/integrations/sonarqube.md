@@ -61,7 +61,7 @@ SonarQube チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 ##### メトリクスの収集
 
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `sonarqube.d/conf.yaml` ファイルを編集して、
+1. 次のルートにある `conf.d/` フォルダーの `sonarqube.d/conf.yaml` ファイルを編集します:
    SonarQube データの収集を開始します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル  sonarqube.d/conf.yaml][1] を参照してください。
 
