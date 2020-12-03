@@ -319,17 +319,15 @@ To remove the PHP tracer:
 
 ## Troubleshooting an application crash
 
-While very rare, it can happen that the PHP tracer causes an application to crash. Typically this happens because of a segmentation fault.
-When this happens, the best path ahead is to reach out to support providing a description of the problem and a core dump. Unless the procedure to recreate the application crash is trivial, without a core dump there is very little we can do to help.
+In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump and contact Datadog support.
 
 ### Obtaining a core dump
 
 Obtaining a core dump for PHP applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump:
 
 1. Determine whether the PHP-FPM generated a core dump by looking in the application error log:
+   - Search for `(SIGSEGV - core dumped)` because a message like this means it has been dumped: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
    - Search for `(SIGSEGV)` because a message like this indicates that the core was not dumped: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
-   - Search for `(SIGSEGV - core dumped)` because a message like this means it has been dumped: `WARNING: [pool www] child N exited on signal 11 (SIGSEGV - core dumped) after X.Y seconds from start`.
-
 1. Locate the core dump by running `cat /proc/sys/kernel/core_pattern`. The default value is typically `core`, meaning that a file named `core` will be generated in the web root folder.
 
 If no core dump was generated, check the following configurations and change them as needed:
@@ -337,8 +335,8 @@ If no core dump was generated, check the following configurations and change the
 1. If `/proc/sys/kernel/core_pattern` contains a path including nested directories, ensure the full directory path exists.
 1. If the user running the PHP-FPM pool workers is something other than `root` (a common user name is `www-data`) give that user write permissions to the core dumps directory.
 1. Ensure that the value of `/proc/sys/fs/suid_dumpable` is not `0`. Set it to `1` or `2` unless you run PHP-FPM workers pool as `root`. Check your options with your system administrator.
-1. Ensure you have a suitable `rlimit_core` in the pool configuration (for example `[www]`) section of your PHP-FPM server. You can set it to unlimited: `rlimit_core = unlimited`
-1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`
+1. Ensure you have a suitable `rlimit_core` in the PHP-FPM pool configuration section. You can set it to unlimited: `rlimit_core = unlimited`.
+1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
 ## Further Reading
