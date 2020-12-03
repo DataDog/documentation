@@ -324,24 +324,22 @@ When this happens, the best path ahead is to reach out to support providing a de
 
 ### Obtaining a core dump
 
-Obtaining a core dump for php applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump.
+Obtaining a core dump for PHP applications can be tricky, especially on PHP-FPM. Here are a few tips to help you obtain a core dump:
 
-First things first: did the php-fpm generate any core dump at all? The answer to that question is in the application error log.
+1. Determine whether the PHP-FPM generated a core dump by looking in the application error log:
+   - Search for `(SIGSEGV)` because a message like this indicates that the core was not dumped: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+   - Search for `(SIGSEGV - core dumped)` because a message like this means it has been dumped: `WARNING: [pool www] child N exited on signal 11 (SIGSEGV - core dumped) after X.Y seconds from start`.
 
-An occurrence of `(SIGSEGV)` signals that the core was not dumped. For example: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+1. Locate the core dump by running `cat /proc/sys/kernel/core_pattern`. The default value is typically `core`, meaning that a file named `core` will be generated in the web root folder.
 
-On the other hand, an occurence of `(SIGSEGV - core dumped)` means it has been dumped. For example: `WARNING: [pool www] child N exited on signal 11 (SIGSEGV - core dumped) after X.Y seconds from start`.
+If no core dump was generated, check the following configurations and change them as needed:
 
-In order to know where the core dump is generated run `cat /proc/sys/kernel/core_pattern`. The default value is typically `core`, meaning that a file named `core` will be generated in the web root folder.
-
-Possible reasons causing a core dump not to be generated:
-
-1. if `/proc/sys/kernel/core_pattern` contains a path including nested directories, then the full directory path has to exist;
-1. if the user running the PHP-FPM pool workers is different from `root` (a common user name is `www-data`) then such user is required to have writing permissions to the core dumps directory;
-1. the value of `/proc/sys/fs/suid_dumpable` cannot be `0`. That value has to be either `1` or `2` unless you run PHP-FPM workers pool as `root` - check your options with your system administrator;
-1. you should have a proper `rlimit_core` in the pool configuration (for example `[www]`) section of your PHP-FPM server. You can even set it to unlimited: `rlimit_core = unlimited`;
-1. you should have a proper `ulimit` set in your system. You can even set it to unlimited: `ulimit -c unlimited`;
-1. if your application runs in a docker container, changes to `/proc/sys/*` have to be done to the host machine - contact your system administrator to know the options available to you. If you are able to, we suggest to try recreating the issue in your testing/staging environments.
+1. If `/proc/sys/kernel/core_pattern` contains a path including nested directories, ensure the full directory path exists.
+1. If the user running the PHP-FPM pool workers is something other than `root` (a common user name is `www-data`) give that user write permissions to the core dumps directory.
+1. Ensure that the value of `/proc/sys/fs/suid_dumpable` is not `0`. Set it to `1` or `2` unless you run PHP-FPM workers pool as `root`. Check your options with your system administrator.
+1. Ensure you have a suitable `rlimit_core` in the pool configuration (for example `[www]`) section of your PHP-FPM server. You can set it to unlimited: `rlimit_core = unlimited`
+1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`
+1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
 ## Further Reading
 
