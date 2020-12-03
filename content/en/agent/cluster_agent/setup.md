@@ -132,7 +132,7 @@ Setting the value without a secret results in the token being readable in the `P
 6. Run: `kubectl apply -f install_info-configmap.yaml`
 6. Finally, deploy the Datadog Cluster Agent: `kubectl apply -f cluster-agent-deployment.yaml`
 
-**Note**: In your Datadog Cluster Agent, set `<DD_SITE>` to your Datadog site: `datadoghq.`{{< region-param key="dd_site" code="true" >}}. The default value is `datadoghq.com`
+**Note**: In your Datadog Cluster Agent, set `<DD_SITE>` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. The default value is `datadoghq.com`
 
 ### Step 4 - Verification
 
