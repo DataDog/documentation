@@ -11,60 +11,51 @@ further_reading:
       text: 'Learn how to process your logs'
 ---
 
-## Log Explorer Default View 
+## Overview
 
-The default log explorer view is loaded where you land on the Logs Search, Analytics, or Patterns pages from the main navigation menu, or enter the corresponding URLs into your browser.
+Efficient troubleshooting requires that your data is put into the right perspective: the proper **scope** to delimitate your exploration, the proper **visualisation options** to surface meaningful information, and the relevant **[facets][2]** to explore.
 
-The default view includes:
+But that perspective is highly contextual and depends on what you're looking at and seeking for. Saved Views are meant to easily switch between different troubleshooting contexts, for yourself and for your teammates.
 
-- an empty query
-- a list of visible facets in the facet list
-- a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
+Saved Views are accessible from the upper right corner of the [Log Explorer][6].
 
-All edits on the facet list (see below) or in the page layout are automatically saved in this default view.
+{{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
-{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection"  style="width:90%;" >}}
+Technically, Saved Views keep track of: 
+- A [search query][1],
+- A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties),
+- A [selected subset of facets][2] to be displayed in the facet list.
 
-## Saved Views
+
+## User's Default Saved View 
+
+The Default View is the default configuration for your Log Explorer. 
+
+This default configuration can be **temporarily** overriden by either by configuration updates done in the flow of exploration, or that happens when opening links to the log explorer that embed a different configuraiton.
+
+{{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:90%;" >}}
+
+At any moment, from the Default View section in the Saved View Panel:
+
+* **reload** your default configuration in the current view by clicking on the default view. 
+* **update** your default configuration with current parameters, by clicking on the "Update" button.
+* **reset** your default configuration at any moment, by clicking on the default view.
+
+
+
+## Custom Saved Views 
 
 Saved Views allow you to save search customizations in the Log Explorer, including:
 
-- A [search query][1]
-- A [selected subset of facets][2]
-- A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
-
-### Load a Saved View
-
-Select Saved Views directly in the left panel or in the search bar with autocompletion, which matches on either search name or query.
-
-{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Saved Views selection"  style="width:90%;" >}}
-
-Star Saved Views to marked them as favorites. Starred Saved Views are available directly from the main navigation menu.
-
-{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Saved Views load" video="true"  >}}
-
-### Share a Saved View
-
-Copy-paste a Saved View short-link to share it with your teammates.
-
-{{< img src="logs/explorer/saved_views/saved_view_share.png" alt="Saved Views selection"  style="width:30%;" >}}
-
-### Manage Saved Views
-
-To create a new Saved View, click the _Save as_ button at the top of the screen. Give it a name, and click on _Save_.
-
-Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button.
-
-{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Saved views creation"  style="width:90%;" >}}
-
-Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
 [2]: /logs/explorer/facets/
+[6]: /logs/explorer
+
+[1]: /logs/explorer/search/
 [3]: /logs/explorer/?tab=logstream#visualization
 [4]: /logs/explorer/patterns/
 [5]: /logs/explorer/analytics/
