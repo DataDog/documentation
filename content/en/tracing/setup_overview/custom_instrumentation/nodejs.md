@@ -266,7 +266,7 @@ When using `tracer.trace()` or `tracer.wrap()` this is done automatically when a
 
 ## Request filtering
 
-In most applications, some of the requests should not be instrumented. A common case would be health checks. These can be ignored by using the `blacklist` or `whitelist` option on the `http` plugin.
+You may not want some requests of an application to be instrumented. A common case would be health checks or other synthetic traffic. These can be ignored by using the `blacklist` or `whitelist` option on the `http` plugin.
 
 ```javascript
 // at the top of the entry point right after tracer.init()
