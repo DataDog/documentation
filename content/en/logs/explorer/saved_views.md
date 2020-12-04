@@ -29,7 +29,7 @@ Technically, a Saved View keeps track of:
 
 ## User's Default Saved View 
 
-{{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:90%;" >}}
+{{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:50%;" >}}
 
 The default view is the default configuration for your Log Explorer. This configuraiton only applies to yourself, and updating this won't impact any of your teammates.
 
@@ -44,7 +44,7 @@ At any moment, from the default view entry in the saved views panel:
 
 ## Organization's Saved Views 
 
-{{< img src="logs/explorer/saved_views/custom.png" alt="Saved Views selection"  style="width:90%;" >}}
+{{< img src="logs/explorer/saved_views/custom.png" alt="Saved Views selection"  style="width:50%;" >}}
 
 All other saved views are shared across your organisation:
 
@@ -52,7 +52,7 @@ All other saved views are shared across your organisation:
 * **Custom saved views** are created by users. They are editable by any user in your organisation (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Hit the **save** button to create a new custom saved view from the current content of your explorer.
 
 
-{{< img src="logs/explorer/saved_views/save.png" alt="Saved Views selection"  style="width:90%;" >}}
+{{< img src="logs/explorer/saved_views/save.png" alt="Saved Views selection"  style="width:30%;" >}}
 
 
 At any moment, from the saved view entry in the saved views panel:
@@ -63,7 +63,7 @@ At any moment, from the saved view entry in the saved views panel:
 * **Share** a saved view through a short-link.
 * **Star** (turn into a favourite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-{{< img src="logs/explorer/saved_views/save.png" alt="Saved Views selection"  style="width:90%;" >}}
+{{< img src="logs/explorer/saved_views/star.png" alt="Saved Views selection"  style="width:30%;" >}}
 
 *Note*: Update, rename and delete actions are disabled for integration saved views and [Read Only users][8].
 
