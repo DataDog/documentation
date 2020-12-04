@@ -17,11 +17,11 @@ Efficient troubleshooting requires that your data is put into the right perspect
 
 But that perspective is highly contextual and depends on what you're looking at and seeking for. Saved Views are meant to easily switch between different troubleshooting contexts, for yourself and for your teammates.
 
-Saved Views are accessible from the upper right corner of the [Log Explorer][6].
+Saved Views are accessible from the upper right corner of the [Log Explorer][6]. 
 
 {{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
-Technically, Saved Views keep track of: 
+Technically, a Saved View keeps track of: 
 - A [search query][1],
 - A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties),
 - A [selected subset of facets][2] to be displayed in the facet list.
@@ -29,23 +29,39 @@ Technically, Saved Views keep track of:
 
 ## User's Default Saved View 
 
-The Default View is the default configuration for your Log Explorer. 
+The default view is the default configuration for your Log Explorer. This configuraiton only applies to yourself, and updating this won't impact any of your teammates.
 
 This default configuration can be **temporarily** overriden by either by configuration updates done in the flow of exploration, or that happens when opening links to the log explorer that embed a different configuraiton.
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:90%;" >}}
 
-At any moment, from the Default View section in the Saved View Panel:
+At any moment, from the default view entry in the saved views panel:
 
-* **reload** your default configuration in the current view by clicking on the default view. 
-* **update** your default configuration with current parameters, by clicking on the "Update" button.
-* **reset** your default configuration at any moment, by clicking on the default view.
+* **Reload** your default view, by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
 
 
+## Organization's Saved Views 
 
-## Custom Saved Views 
+All other saved views are shared across your organisation:
 
-Saved Views allow you to save search customizations in the Log Explorer, including:
+* **Integration saved views** come out-of-the-box with most of Datadog [Log Management Integrations][7]. These are read-only, and identified with the logo of the integration.
+* **Custom saved views** are created by users. They are editable by any user in your organisation (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Hit the **save** button to create a new custom saved view from the current content of your explorer.
+
+{{< img src="logs/explorer/saved_views/save.png" alt="Saved Views selection"  style="width:90%;" >}}
+
+
+At any moment, from the saved view entry in the saved views panel:
+
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view. 
+* **Rename** or **delete** a saved view. This option is disabled for integration saved views and Read Only users.
+* **Share** your default configuration at any moment, by clicking on the "Reset to Datadog Default“ button.
+
+{{< img src="logs/explorer/saved_views/custom.png" alt="Saved Views selection"  style="width:90%;" >}}
+
+*Note*: Update, rename and delete actions are disabled for integration saved views and [Read Only users][8].
 
 
 ## Further Reading
@@ -54,6 +70,8 @@ Saved Views allow you to save search customizations in the Log Explorer, includi
 
 [2]: /logs/explorer/facets/
 [6]: /logs/explorer
+[7]: /integrations/#cat-log-collection
+[8]: /account_management/rbac/permissions?tab=ui#general-permissions
 
 [1]: /logs/explorer/search/
 [3]: /logs/explorer/?tab=logstream#visualization
