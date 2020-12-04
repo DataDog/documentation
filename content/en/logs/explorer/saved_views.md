@@ -64,6 +64,7 @@ At any moment, from the saved view entry in the Views panel:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/explorer/facets/
 [2]: /logs/explorer
 [3]: /logs/explorer/search/
