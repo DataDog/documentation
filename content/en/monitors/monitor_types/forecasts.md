@@ -36,7 +36,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 ### Set alert conditions
 
 * Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`.
-* the threshold within the next `24 hours`, `1 week`, `1 month`, etc.
+* the threshold within the next `24 hours`, `1 week`, `1 month`, etc. or `custom` to set a value between 12 hours and 3 months.
 * Alert threshold: >= `<NUMBER>`
 * Alert [recovery threshold][3]: < `<NUMBER>`
 

@@ -48,7 +48,7 @@ An alert is triggered whenever a metric crosses a threshold.
 * is `above`, `above or equal to`, `below`, or `below or equal to`
 * Alert threshold `<NUMBER>`
 * Warning threshold `<NUMBER>`
-* over the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* over the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
 #### Anomaly Alert
 
@@ -57,7 +57,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * For `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
 * Alert when `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`%
 * of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
-* the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc.
+* the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/visualization/service/
@@ -77,7 +77,7 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 ### Select alert conditions
 
 * Trigger when the metric is `above` or `above or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 24 hours.
 * Alert threshold: `<NUMBER>`
 * Warning threshold: `<NUMBER>`
 
