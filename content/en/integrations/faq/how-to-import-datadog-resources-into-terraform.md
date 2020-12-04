@@ -6,9 +6,9 @@ kind: faq
 ## Overview
 
 Terraform supports an out-of-the-box way to import existing resources into your terraform state via the [`terraform import`][1] command.
-This can be done via the `terraform import <resource_type>.<resource_name> <existing_id>`
+This can be done via the `terraform import <resource_type>.<resource_name> <existing_id>`.
 
-This approach is `state only` and requires already having the HCL resource fully defined in your terraform configuration files. To import the configuration fully, you can use a tool like Terraformer
+This approach is `state only` and requires already having the HCL resource fully defined in your terraform configuration files. To import the configuration fully, you can use a tool like Terraformer.
 
 ## Terraformer
 
@@ -50,7 +50,7 @@ Now you can use `terraformer` to start importing resources. For example, to impo
 
 `terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY>`
 
-This generates a folder `genrated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
+This generates a folder `generated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
 
 ## Other examples of running terraformer
 
