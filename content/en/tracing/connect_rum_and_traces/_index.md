@@ -121,13 +121,13 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | x-datadog-trace-id             | Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.   |
 | x-datadog-parent-id            | Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace. |
-| x-datadog-origin: rum          | rum header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact Indexed Span counts.              |
+| x-datadog-origin: rum          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.              |
 | x-datadog-sampling-priority: 1 | To make sure that the Agent keeps the trace.                                                           |
 | x-datadog-sampled: 1           | To make sure that the Agent keeps the trace.     
 
 ## How are APM quotas affected?
 
-The `x-datadog-origin:` rum header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact your classical APM quotas.
+The `x-datadog-origin: rum` header specifies to the APM backend that the traces are generated from Real User Monitoring. The generated traces consequently do not impact Indexed Span counts.
 
 ## How long are traces retained?
 
