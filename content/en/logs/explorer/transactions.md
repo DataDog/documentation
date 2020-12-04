@@ -36,10 +36,11 @@ Click on a transaction to see the underlying logs and eventually drill-down to e
 - **Cardinality:** When selecting a `facet` with string values, the operations available are `count unique`, `latest`, `earliest` and `most frequent`.
 - **Statistics:** When selecting a `measure`, the operations available are `min`, 'max', `avg`, `sum`, `median', `pc75`, `pc90`,`pc95`, and `pc99`.
 
-You can sort the results based on the facet used to group. The default sort order is ascending order. 
+You can sort the results based on the facet used to group. Click on the column header to change the sort order. The default sort order is ascending order. 
 
 ## Saved View & Export options
 
-You can save the transaction query as a Saved View for future use. You also have the option to export the results of the Transaction table to a CSV for sharing it with others in your team. 
+You can save the transaction query as a Saved View[2] for future use. You also have the option to export the results of the Transaction table to a CSV for sharing it with others in your team. Export your current transaction view with its selected columns to a CSV file. You can export up to 5,000 logs at once.
 
 [1]: /logs/explorer/#context
+[2]: /logs/explorer/saved_views
