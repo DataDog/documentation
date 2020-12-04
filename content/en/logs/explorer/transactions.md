@@ -30,7 +30,7 @@ Select any facet from your log data. But facets commonly used for transactions a
 
 Click on a transaction row in the table to see the underlying logs and eventually drill-down to each individual log event.
 
-## Transaction Operations
+## Transactions Operations
 
 - **Adding aggregations:** Click the `+` icon to add more aggregations as columns to the Transaction Table. You can add upto 5 aggregations.
 - **Finding key items:** For any `facet` with string values, easily calculate specific log event information using the the operations `count unique`, `latest`, `earliest` and `most frequent`.
