@@ -17,7 +17,7 @@ Transactions are an efficient way to track and analyze multiple related log even
 
 In the Log Explorer, build transactions from your log data easily without doing any pre-processing or setup.
 
-## Transactions Table
+## Transactions Table View
 
 Switch to the Transactions view to start building and viewing your log data as transactions in the selected context. A [context][1] is composed of a time range and a search query.
 
