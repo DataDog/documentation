@@ -35,7 +35,7 @@ The Datadog Extension is distributed as its own Lambda Layer (separate from the 
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
     ```
 
-    The available `RUNTIME` options are `Node8-10`, `Node10-x`, `Node12-x`, `Python27`, `Python36`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
+    The available `RUNTIME` options are `Node10-x`, `Node12-x`, `Python37`, and `Python38`. For `VERSION`, see the latest release for [Node.js][8] or [Python][9].
 
 4. Reference the [sample code][10] to submit a custom metric.
 
