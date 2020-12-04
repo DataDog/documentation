@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Transactions are an efficient way to track and analyze multiple related log events based on some unique identifier. Logs coming from e-commerce applications, user activity on websites, payment integrations, financial transactions, or stock trades can all be grouped together to get a better sense of the actual underlying business activity.
+Transactions are an efficient way to track and analyze multiple related log events based on some unique identifier. Logs coming from e-commerce applications, user activity on websites, payment integrations, financial transactions, or stock trades can all be grouped together to get a better sense of the actual underlying business activity. For example, an ecommerce website would group log events across various actions such as catalog search, add to cart, and checkout to build a transaction view of the various actions using a common attribute such as requestId or orderId.
 
 In the Log Explorer, build transactions from your log data easily without doing any pre-processing or setup.
 
