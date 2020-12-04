@@ -18,6 +18,10 @@ The APM integration with Real User Monitoring allows you to link requests from y
 
 Having frontend-related specifics (thanks to your RUM session) as well as backend, infrastructure, and log information (thanks to your trace id injection) allows you to pinpoint issues anywhere in your stack in unprecedented speed with a full understanding of what your users are experiencing.
 
+<div class="alert alert-warning">
+This feature is currently available for private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+</div>
+
 # Usage
 ## Prerequisites
 
