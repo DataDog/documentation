@@ -11,7 +11,7 @@ further_reading:
       text: 'Learn how to process your logs'
 ---
 
-## Log Explorer Default View
+## Log Explorer Default View 
 
 The default log explorer view is loaded where you land on the Logs Search, Analytics, or Patterns pages from the main navigation menu, or enter the corresponding URLs into your browser.
 
