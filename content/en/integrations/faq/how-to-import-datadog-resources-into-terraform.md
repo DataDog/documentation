@@ -52,6 +52,21 @@ Now you can use `terraformer` to start importing resources. For example, to impo
 
 This generates a folder `genrated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
 
+```
+generated
+└── datadog
+    └── dashboard
+        ├── dashboard.tf
+        ├── outputs.tf
+        ├── provider.tf
+        └── terraform.tfstate
+```
+
+* `dashboard.tf`: The HCL configuration file for the newly imported dashboard
+* `outputs.tf`: An HCL containing outputs to use potentially in other configurations
+* `provider.tf`: An HCL initialization of the provider, similar to whats in our `main.tf` file
+* `terraform.tfstate`: The terraform state representing the imported dashboard
+
 ## Other examples of running terraformer
 
 All example commands require the `--api-key` and `--app-key` flags.
@@ -61,6 +76,7 @@ All example commands require the `--api-key` and `--app-key` flags.
 * Import monitors with id 1234 and 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
 * Import all monitors and dashboards: `terraformer import datadog --resources=monitor,dashboard`
 * Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
+
 [1]: https://www.terraform.io/docs/import/index.html
 [2]: https://github.com/GoogleCloudPlatform/terraformer
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
