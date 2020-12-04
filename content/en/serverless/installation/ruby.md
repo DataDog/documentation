@@ -48,8 +48,6 @@ The available `RUNTIME` options are `Ruby2-5` and `Ruby2-7`. For `VERSION`, see 
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Ruby2-7:5
 ```
 
-If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][10] before you can add the Datadog Lambda library as a layer.
-
 #### Using the Gem
 
 Add the following to your Gemfile.
@@ -168,4 +166,3 @@ For more information on custom metric submission, see [here][8]. For additional 
 [7]: https://app.datadoghq.com/functions
 [8]: /serverless/custom_metrics?tab=ruby
 [9]: /tracing/custom_instrumentation/ruby/
-[10]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
