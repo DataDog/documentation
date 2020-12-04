@@ -101,8 +101,8 @@ get_latest_release() {
     sed -E 's/.*"([^"]+)".*/\1/';
 }
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-OPENTRACING_VERSION="$(get_latest_release opentracing/opentracing-cpp)"
-# Download and install OpenTracing-cpp
+OPENTRACING_VERSION="v1.5.1"
+# OpenTracing-cpp をダウンロードしてインストール 
 wget https://github.com/opentracing/opentracing-cpp/archive/${OPENTRACING_VERSION}.tar.gz -O opentracing-cpp.tar.gz
 mkdir -p opentracing-cpp/.build
 tar zxvf opentracing-cpp.tar.gz -C ./opentracing-cpp/ --strip-components=1
@@ -110,7 +110,7 @@ cd opentracing-cpp/.build
 cmake ..
 make
 make install
-# Install dd-opentracing-cpp shared plugin.
+# dd-opentracing-cpp 共有プラグインをインストール。
 wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
