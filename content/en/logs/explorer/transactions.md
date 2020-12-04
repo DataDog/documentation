@@ -23,10 +23,10 @@ Switch to the Transactions view to start building and viewing your log data as t
 
 Select any facet from your log data. But facets commonly used for transactions are a unique identifier available across your data sources such as requestId, sessionId, transactionId, clientIP, and userId. Each transaction comes with highlights to get you straight to its characteristic features:
 
-- A mini graph displays a rough timeline for the volume of its logs to help you identify how that transaction differs from other transactions.
-- The duration of the transaction calculated by the difference in the timestamps of the earliest event and most recent event in the transaction.
-- The max severity of the transaction based on the max severity of log events within the transaction.
-- The total count of log events within the transaction.
+- A **mini graph** displays a rough timeline for the volume of its logs to help you identify how that transaction differs from other transactions.
+- The **duration** of the transaction calculated by the difference in the timestamps of the earliest event and most recent event in the transaction.
+- The **max severity** of the transaction based on the max severity of log events within the transaction.
+- The **total count** of log events within the transaction.
 
 Click on a transaction row in the table to see the underlying logs and eventually drill-down to each individual log event.
 
