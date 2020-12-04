@@ -1,7 +1,7 @@
 ---
 title: Transactions
 kind: documentation
-description: 'Group related log events into a single higher level called transaction.'
+description: 'Group multiple related log events into a single higher level event called transaction.'
 further_reading:
     - link: 'logs/explorer/analytics'
       tag: 'Documentation'
@@ -21,26 +21,30 @@ In the Log Explorer, build transactions from your log data easily without doing 
 
 Switch to the Transactions view to start building and viewing your log data as transactions in the selected context. A [context][1] is composed of a time range and a search query.
 
-You can select any facet from your log data. But facets commonly used for transactions are a unique identifier available across your data sources such as requestId, sessionId, transactionId, clientIP, and userId. Each transaction comes with highlights to get you straight to its characteristic features:
+Select any facet from your log data. But facets commonly used for transactions are a unique identifier available across your data sources such as requestId, sessionId, transactionId, clientIP, and userId. Each transaction comes with highlights to get you straight to its characteristic features:
 
 - A mini graph displays a rough timeline for the volume of its logs to help you identify how that transaction differs from other transactions.
 - The duration of the transaction calculated by the difference in the timestamps of the earliest event and most recent event in the transaction.
 - The max severity of the transaction based on the max severity of log events within the transaction.
 - The total count of log events within the transaction.
 
-Click on a transaction to see the underlying logs and eventually drill-down to each individual log event.
+Click on a transaction row in the table to see the underlying logs and eventually drill-down to each individual log event.
 
 ## Transaction Operations
 
 - **Adding aggregations:** Click the `+` icon to add more aggregations as columns to the Transaction Table. You can add upto 5 aggregations.
-- **Cardinality:** When selecting a `facet` with string values, the operations available are `count unique`, `latest`, `earliest` and `most frequent`.
-- **Statistics:** When selecting a `measure`, the operations available are `min`, 'max', `avg`, `sum`, `median', `pc75`, `pc90`,`pc95`, and `pc99`.
+- **Finding key items:** For any `facet` with string values, easily calculate specific log event information using the the operations `count unique`, `latest`, `earliest` and `most frequent`.
+- **Getting Statistics:** For any `measure`, easily calculate statistical information using the operations `min`, 'max', `avg`, `sum`, `median', `pc75`, `pc90`,`pc95`, and `pc99`.
 
-You can sort the results based on the facet used to group. Click on the column header to change the sort order. The default sort order is ascending order. 
+Sort the results based on the facet used to group. Click on the column header to change the sort order. The default sort order is ascending order. 
 
 ## Saved View & Export options
 
-You can save the transaction query as a Saved View[2] for future use. You also have the option to export the results of the Transaction table to a CSV for sharing it with others in your team. Export your current transaction view with its selected columns to a CSV file. You can export up to 5,000 logs at once.
+Save the transaction query as a Saved View[2] for future use. You also have the option to export the transaction view including its columns to a CSV for sharing it with others in your team. Export up to 5,000 logs at once.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/#context
 [2]: /logs/explorer/saved_views
