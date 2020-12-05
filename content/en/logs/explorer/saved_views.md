@@ -11,60 +11,65 @@ further_reading:
       text: 'Learn how to process your logs'
 ---
 
-## Log Explorer Default View
+## Overview
 
-The default log explorer view is loaded where you land on the Logs Search, Analytics, or Patterns pages from the main navigation menu, or enter the corresponding URLs into your browser.
+Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** to enable analysis.
 
-The default view includes:
+Troubleshooting is highly contextual, and Saved Views enable you and your teammates to easily switch between different troubleshooting contexts. You can access Saved Views in the upper right corner of the [Log Explorer][2].
 
-- an empty query
-- a list of visible facets in the facet list
-- a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
+{{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
-All edits on the facet list (see below) or in the page layout are automatically saved in this default view.
+Technically, a Saved View keeps track of:
+- A [search query][3]
+- A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
+- A [selected subset of facets][1] to be displayed in the facet list
 
-{{< img src="logs/explorer/saved_views/edit_facet_list.png" alt="Saved Views selection"  style="width:90%;" >}}
+## Your Default Saved Views
 
-## Saved Views
+{{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:50%;" >}}
 
-Saved Views allow you to save search customizations in the Log Explorer, including:
+Your existing Log Explorer view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization.
 
-- A [search query][1]
-- A [selected subset of facets][2]
-- A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
+You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Log Explorer that embed a different configuration.
 
-### Load a Saved View
+At any moment, from the default view entry in the Views panel:
 
-Select Saved Views directly in the left panel or in the search bar with autocompletion, which matches on either search name or query.
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
 
-{{< img src="logs/explorer/saved_views/saved_view_load-from-bar.png" alt="Saved Views selection"  style="width:90%;" >}}
+## Your Organization's Saved Views
 
-Star Saved Views to marked them as favorites. Starred Saved Views are available directly from the main navigation menu.
+{{< img src="logs/explorer/saved_views/custom.png" alt="Saved Views selection"  style="width:50%;" >}}
 
-{{< img src="logs/explorer/saved_views/saved_view_load.mp4" alt="Saved Views load" video="true"  >}}
+All saved views, that are not your default saved view, are shared across your organization:
 
-### Share a Saved View
+* **Integration saved views** come out-of-the-box with most Datadog [Log Management Integrations][7]. These are read-only, and identified by the logo of the integration.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Hit the **save** button to create a new custom saved view from the current content of your explorer.
 
-Copy-paste a Saved View short-link to share it with your teammates.
+{{< img src="logs/explorer/saved_views/save.png" alt="Saved Views selection"  style="width:30%;" >}}
 
-{{< img src="logs/explorer/saved_views/saved_view_share.png" alt="Saved Views selection"  style="width:30%;" >}}
+At any moment, from the saved view entry in the Views panel:
 
-### Manage Saved Views
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-To create a new Saved View, click the _Save as_ button at the top of the screen. Give it a name, and click on _Save_.
+{{< img src="logs/explorer/saved_views/star.png" alt="Saved Views selection"  style="width:30%;" >}}
 
-Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button.
-
-{{< img src="logs/explorer/saved_views/saved_view_create-delete.mp4" video="true" alt="Saved views creation"  style="width:90%;" >}}
-
-Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
+*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][8].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
-[2]: /logs/explorer/facets/
-[3]: /logs/explorer/?tab=logstream#visualization
-[4]: /logs/explorer/patterns/
-[5]: /logs/explorer/analytics/
+[1]: /logs/explorer/facets/
+[2]: /logs/explorer
+[3]: /logs/explorer/search/
+[4]: /logs/explorer/?tab=logstream#visualization
+[5]: /logs/explorer/patterns/
+[6]: /logs/explorer/analytics/
+[7]: /integrations/#cat-log-collection
+[8]: /account_management/rbac/permissions?tab=ui#general-permissions
