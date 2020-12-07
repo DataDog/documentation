@@ -127,13 +127,11 @@ StatsD チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
-**statsd.is_up**:
+**statsd.is_up**:<br>
+StatsD サーバーが Agent の健全性ステータスリクエストに応答しない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-StatsD サーバーが Agent の健全性ステータスリクエストに応答しない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
-
-**statsd.can_connect**:
-
-Agent が StatsD に関するメトリクスを収集できない場合は、CRITICAL を返します。それ以外の場合は、OK を返します。
+**statsd.can_connect**:<br>
+Agent が StatsD に関するメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

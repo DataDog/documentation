@@ -6,6 +6,7 @@ assets:
     Kong Overview: assets/dashboards/kong_overview.json
   logs:
     source: kong
+  metrics_metadata: metadata.csv
   monitors: {}
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
@@ -22,6 +23,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kong/README.md'
 display_name: Kong
+draft: false
 git_integration_title: kong
 guid: f1098d6f-b393-4374-81c0-47c0a142aeef
 integration_id: kong
@@ -51,17 +53,20 @@ Le check Kong de l'Agent surveille le nombre total de requêtes, les codes de r�
 
 ### Installation
 
-Le check Kong est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kong.
+Le check Kong est inclus avec le package de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kong.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Ajoutez le bloc de configuration suivant à votre fichier `kong.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos [métriques Kong](#metriques). Consultez le [fichier d'exemple kong.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+1. Ajoutez le bloc de configuration suivant à votre fichier `kong.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos [métriques Kong](#metriques). Consultez le [fichier d'exemple kong.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -73,7 +78,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
      - kong_status_url: http://localhost:8001/status/
    ```
 
-2. [Redémarrez l'Agent][4].
+2. [Redémarrez l'Agent][3].
 
 ##### Collecte de logs
 
@@ -102,13 +107,19 @@ Les logs d'accès Kong sont générés par NGINX. L'emplacement par défaut est 
        source: kong
    ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple kong.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple kong.d/conf.yaml][1] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][4].
+3. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][5] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -122,15 +133,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][6].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
 
 | Paramètre      | Valeur                                             |
 | -------------- | ------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "kong", "service": "<NOM_SERVICE>"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `kong` dans la section Checks.
+[Lancez la sous-commande de statut de l'Agent][2] et cherchez `kong` dans la section Checks.
 
 ## Données collectées
 
@@ -149,19 +165,14 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Kong pour recue
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 ## Pour aller plus loin
 
-- [Surveiller Kong avec notre nouvelle intégration Datadog][10]
+- [Surveiller Kong avec notre nouvelle intégration Datadog][4]
+
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: https://github.com/DataDog/integrations-core/blob/master/kong/datadog_checks/kong/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog/monitor-kong-datadog
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://www.datadoghq.com/blog/monitor-kong-datadog

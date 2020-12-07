@@ -1,7 +1,10 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
+  metrics_metadata: metadata.csv
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
@@ -12,6 +15,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md'
 display_name: Couchbase
+draft: false
 git_integration_title: couchbase
 guid: ba7ce7de-4fcb-4418-8c90-329baa6a5d59
 integration_id: couchbase
@@ -51,17 +55,20 @@ Et bien plus encore.
 
 ### Installation
 
-Le check Couchbase est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Couchbase.
+Le check Couchbase est inclus avec le package de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Couchbase.
 
 ### Configuration
 
+{{< tabs >}}
+{{% tab "Host" %}}
+
 #### Host
 
-Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Pour configurer ce check lorsque l'Agent est exécuté sur un host :
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `couchbase.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données Couchbase. Consultez le [fichier d'exemple couchbase.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `couchbase.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][1] pour commencer à recueillir vos données Couchbase. Consultez le [fichier d'exemple couchbase.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    init_config:
@@ -73,11 +80,17 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
      - server: http://localhost:8091
    ```
 
-2. [Redémarrez l'Agent][5].
+2. [Redémarrez l'Agent][3].
+
+[1]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+{{% /tab %}}
+{{% tab "Environnement conteneurisé" %}}
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -87,9 +100,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                        |
 | `<CONFIG_INSTANCE>`  | `{"server": "http://%%host%%:8091"}` |
 
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][7] et cherchez `couchbase` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][3] et cherchez `couchbase` dans la section Checks.
 
 ## Données collectées
 
@@ -103,35 +120,28 @@ Le check Couchbase envoie un événement à Datadog à chaque rééquilibrage de
 
 ### Checks de service
 
-- `couchbase.can_connect` :
-
+**couchbase.can_connect** :<br>
 Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Couchbase pour recueillir des métriques.
 
-- `couchbase.by_node.cluster_membership` :
-
+**couchbase.by_node.cluster_membership** :<br>
 Renvoie `Critical` si le nœud est basculé.
-Renvoie `Warning` si le nœud est ajouté au cluster mais attend un rééquilibrage pour s'activer.
-Renvoie `Ok` pour les autres bas.
+Renvoie `Warning` si le nœud est ajouté au cluster mais attend un rééquilibrage.
+Renvoie `Ok` pour les autres cas.
 
-- `couchbase.by_node.health` :
-
+**couchbase.by_node.health** :<br>
 Renvoie `Critical` si le nœud n'est pas sain. Si ce n'est pas le cas, renvoie `Ok`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-- [Surveiller des métriques clés de Couchbase][10].
+- [Surveiller des métriques clés de Couchbase][5]
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couchbase/images/couchbase_graph.png
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/couchbase/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help/
-[10]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/fr/help/
+[5]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog

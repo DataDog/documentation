@@ -6,6 +6,7 @@ ddtype: crawler
 dependencies: []
 description: Recueillez des métriques pour votre projet et comparez-les entre ses différentes versions.
 doc_link: 'https://docs.datadoghq.com/integrations/google_app_engine/'
+draft: false
 git_integration_title: google_app_engine
 has_logo: true
 integration_title: Google App Engine
@@ -19,7 +20,7 @@ version: '1.0'
 ---
 ## Présentation
 
-Installez l'intégration Google App Engine dans votre projet Python pour :
+Installez l'intégration Google App Engine dans votre projet pour :
 
 - Consulter les métriques de vos services Google App Engine (memcache, files d'attente de tâches, banques de données, etc.)
 - Consulter des métriques sur les requêtes (pourcentages, latence, coût, etc.)
@@ -27,69 +28,22 @@ Installez l'intégration Google App Engine dans votre projet Python pour :
 
 Vous pouvez également envoyer des métriques custom à Datadog.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Assurez-vous d'avoir activé Billing pour votre projet Google App Engine afin de recueillir toutes les métriques.
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
 
-1. Remplacez le répertoire par celui de l'application de votre projet.
-2. Dupliquez le module Google App Engine de Datadog.
+### Collecte de logs
 
-    ```shell
-    git clone https://github.com/DataDog/gae_datadog
-    ```
+Les logs Google App Engine sont recueillis avec Stackdriver et envoyés à un Cloud Pub/Sub via un redirecteur Push HTTP. Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub à l'aide d'un redirecteur Push HTTP][2].
 
-3. Modifiez le fichier `app.yaml` de votre projet.
+Une fois cette opération effectuée, exportez vos logs Google App Engine depuis Stackdriver vers le Pub/Sub :
 
-    a. Ajoutez le gestionnaire Datadog à votre fichier app.yaml :
-
-      ```yaml
-      handlers:
-        # Should probably be at the beginning of the list
-        # so it's not clobbered by a catchall route
-        - url: /datadog
-          script: gae_datadog.datadog.app
-      ```
-
-   b. Configurez votre clé d'API. Cette partie doit se trouver au niveau supérieur du fichier, et non dans la section du gestionnaire.
-
-      ```yaml
-      env_variables:
-        DATADOG_API_KEY: '<YOUR_DATADOG_API_KEY>'
-      ```
-
-   c. Puisque le module dogapi envoie des métriques et des événements par le biais d'une connexion TLS sécurisée, ajoutez le module ssl dans le fichier app.yaml :
-
-      ```yaml
-      libraries:
-        - name: ssl
-          version: "latest"
-      ```
-
-4. Ajoutez `dogapi` dans le fichier requirements.txt.
-
-    ```shell
-    echo dogapi >> requirements.txt
-    ```
-
-5. Assurez-vous que les éléments exigés sont installés.
-
-    ```shell
-    pip install -r requirements.txt -t lib/
-    ```
-
-6. Déployez votre application. Consultez la [documentation de Google App Engine][1] pour découvrir les commandes de déploiement de chaque langage. Pour les apps Python, il s'agit de la commande suivante :
-
-    ```shell
-    appcfg.py -A <project id> update app.yaml
-    ```
-
-7. Saisissez l'URL de votre application dans la première zone de texte de l'écran de configuration de l'intégration. Si vous utilisez des files d'attente de tâches dans la console de développement Google, vous pouvez également les ajouter ici.
-
-À ce stade, vous devriez recevoir un certain nombre de métriques pour votre environnement. Vous pouvez également choisir d'instrumenter davantage votre application à l'aide de la bibliothèque du langage de votre application.
-
-Consultez la [page Bibliothèques][2] pour découvrir la liste de l'ensemble des bibliothèques client de Datadog et sa communauté pour DogStatsD et les API.
+1. Accédez à la [page Stackdriver][3] et filtrez les logs de Google App Engine.
+2. Cliquez sur **Create Export** et nommez le récepteur.
+3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
 
@@ -107,9 +61,10 @@ L'intégration Google App Engine n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://cloud.google.com/appengine/kb
-[2]: https://docs.datadoghq.com/fr/libraries/
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/google_app_engine/google_app_engine_metadata.csv
-[4]: https://docs.datadoghq.com/fr/help/
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
+[3]: https://console.cloud.google.com/logs/viewer
+[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_app_engine/google_app_engine_metadata.csv
+[5]: https://docs.datadoghq.com/fr/help/

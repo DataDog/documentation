@@ -10,6 +10,9 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  # datadog-ci
+  DATADOG_SITE: 'datadoghq.com'
+  DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
 
@@ -183,7 +186,8 @@ sourcemaps_preview:
     policy: pull
   environment: "preview"
   script:
-    - upload_sourcemaps
+    - yarn run build:webpack:preview -- --devtool source-map
+    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs-staging.datadoghq.com/${CI_COMMIT_REF_NAME}/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_preview
   allow_failure: true
@@ -201,7 +205,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup_overview/setup/android.md,content/en/tracing/setup_overview/setup/ruby.md,content/en/security_monitoring/default_rules,content/en/serverless/forwarder.md,content/en/serverless/datadog_lambda_library/python.md,content/en/serverless/datadog_lambda_library/nodejs.md,content/en/serverless/datadog_lambda_library/ruby.md,content/en/serverless/datadog_lambda_library/go.md,content/en/serverless/datadog_lambda_library/java.md,content/en/real_user_monitoring/android.md,content/en/real_user_monitoring/browser/_index.md,content/en/real_user_monitoring/ios.md,content/en/serverless/serverless_integrations/plugin.md,content/en/serverless/serverless_integrations/macro.md,content/en/serverless/serverless_integrations/cli.md,content/en/logs/log_collection/javascript.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -323,7 +327,8 @@ sourcemaps_live:
     policy: pull
   environment: "live"
   script:
-    - upload_sourcemaps
+    - yarn run build:webpack -- --devtool source-map
+    - DATADOG_API_KEY="$(get_secret 'dd_synthetic_api_key_prod')" ./node_modules/.bin/datadog-ci sourcemaps upload ./public/static --service docs --minified-path-prefix "https://docs.datadoghq.com/static/" --release-version "${CI_COMMIT_SHORT_SHA}"
   dependencies:
     - build_live
   allow_failure: true

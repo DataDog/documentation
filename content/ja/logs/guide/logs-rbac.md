@@ -19,11 +19,13 @@ further_reading:
 ---
 ## 概要
 
-
 ログには、[スクラブ][1]されるか組織内の権限のあるユーザーのみがアクセスできる**機密データ**が含まれている場合があります。また、コンフィギュレーションと予算管理に関する限り、ユーザーが**互いに干渉しない**ようにユーザーをセグメント化することもできます。
 
 このガイドでは、ユーザーが準拠した方法でログとログ機能にアクセスするための、カスタマイズされた Datadog ロールを開発する方法を紹介します。
 
+<div class="alert alert-warning">
+カスタムロールの作成と変更は、オプトイン機能です。ご使用のアカウントでこの機能を有効にしたい場合は、<a href="/help">Datadog のサポートチームにお問い合わせください</a>。
+</div>
 
 ### "ACME" チーム
 
@@ -34,7 +36,7 @@ further_reading:
 * **`ACME Admin`**: ACME ログ収集、パイプライン、除外フィルターを担当するユーザーのロール。
 * **`ACME User`** : ユーザーが ACME ログにアクセスし、このログからモニターまたはダッシュボードを作成するためのロール。
 
-*注*: このガイドは、シンプル化のために 1 つの ACME ロール (ACME 管理者と ACME ユーザーの両方からのアクセス許可を集中させる) に適合させることも、より詳細なアクセス許可のためにより多くのロールに適合させることもできます。
+**注**: このガイドは、シンプル化のために 1 つの ACME ロール (ACME 管理者と ACME ユーザーの両方からのアクセス許可を集中させる) に適合させることも、より詳細なアクセス許可のためにより多くのロールに適合させることもできます。
 
 このガイドは ACME チームに焦点を当てていますが、セットアップは組織内の他のすべてのチームに複製できます。ACME チームのメンバーは、組織全体の他のチームのメンバーになることも**可能**です。Datadog ではアクセス許可は付加的であり、マルチチームユーザーは、所属先のすべてのチームから継承されたアクセス許可の結合から利益を得ることができます。
 
@@ -42,7 +44,7 @@ further_reading:
 
 このガイドでは、Datadog 管理者が ACME チームメンバーが (他のチームログに干渉することなく) ログを操作するための安全なプレイグラウンドをセットアップし、これらのログへのアクセスを ACME ユーザーのみに制限する方法について説明します。
 
-*注*: このガイドを適応させて、ACME 管理者が Datadog 管理者でもあると見なすことができます。
+**注**: このガイドを適応させて、ACME 管理者が Datadog 管理者でもあると見なすことができます。
 
 このガイドでは、以下について説明します。
 
@@ -50,7 +52,6 @@ further_reading:
 2. ACME チームの**ロールの設定**と**メンバーの割り当て**: [ロールを設定する](#set-up-roles)。
 3. 制限クエリを使用した、Datadog アプリケーション全体の**ログへのアクセスの制限**: [ログへのアクセスを制限する](#restrict-access-to-logs)。
 4. **ログアセット** (つまり、パイプライン、インデックス、アーカイブ) のアクセス許可の構成: [ログアセットへのアクセスを制限する](#restrict-access-to-log-assets)。
-
 
 ## 前提条件
 
@@ -60,26 +61,25 @@ ACME の受信ログに `team:acme` タグを付けます。これは、ログ�
 
 {{< img src="logs/guide/rbac/team_tag.png" alt="ログにチームタグを適用する"  style="width:60%;">}}
 
-たとえば、Docker ログコレクションのコンテキストでは、[タグとしての Docker ラベル][85]を持つそのコンテナから流れるログに `team:acme` タグをアタッチします。より一般的な概要については、[タグ付けセクション][84]を参照してください。
-
+たとえば、Docker ログコレクションのコンテキストでは、[タグとしての Docker ラベル][2]を持つそのコンテナから流れるログに `team:acme` タグをアタッチします。より一般的な概要については、[タグ付けセクション][3]を参照してください。
 
 ### Datadog 管理者としてログインする
 
 そのガイドで実行する必要のあるアクションでは、Datadog 管理者ロールに属している必要があります。具体的には、次のものが必要です。
 
 * ロールを作成し、ユーザーをロールに割り当てるためのアクセス許可 (実際の特権アクセス)。
-* [ログパイプライン][90]、[ログインデックス][91]、[ログアーカイブ][92]を作成するためのアクセス許可。
-* API を介してこれらのオペレーションを実行する場合は、[ログコンフィギュレーション API][93] を介して操作するためのアクセス許可。
+* [ログパイプライン][4]、[ログインデックス][5]、[ログアーカイブ][6]を作成するためのアクセス許可。
+* API を介してこれらのオペレーションを実行する場合は、[ログコンフィギュレーション API][7] を介して操作するためのアクセス許可。
 
-[Datadog][86] にこれらすべてのアクセス許可があることを確認してください。不足しているものがある場合は、Datadog 管理者ユーザーに設定を依頼してください。
+[Datadog][8] にこれらすべてのアクセス許可があることを確認してください。不足しているものがある場合は、Datadog 管理者ユーザーに設定を依頼してください。
 
 {{< img src="logs/guide/rbac/admin_permissions.png" alt="管理者としてのアクセス許可を確認"  style="width:60%;">}}
 
 ### API キーとアプリキーを取得する
 
-*注*: このセクションは、管理者ユーザーからの API キーとアプリケーションキーが必要な Datadog API を使用する場合にのみ必要です。
+**注**: このセクションは、管理者ユーザーからの API キーとアプリケーションキーが必要な Datadog API を使用する場合にのみ必要です。
 
-API キーとアプリキーは、[Datadog アカウント API キーページ][94]で入手できます。詳細については、ドキュメントの [API キーとアプリキー][95]セクションをご覧ください。
+API キーとアプリキーは、[Datadog アカウント API キーページ][9]で入手できます。詳細については、ドキュメントの [API キーとアプリキー][10]セクションをご覧ください。
 
 使用するアプリキーが、自分のユーザーまたは同様のアクセス許可を持つユーザーにアタッチされていることを確認してください。
 
@@ -90,11 +90,11 @@ API キーとアプリキーは、[Datadog アカウント API キーページ][
 
 ### アクセス許可 ID を取得する
 
-*注*: このセクションは、Datadog API を使用して RBAC をセットアップする場合にのみ必要です。
+**注**: このセクションは、Datadog API を使用して RBAC をセットアップする場合にのみ必要です。
 
-[Permissions API][96] を使用して、既存のすべてのアクセス許可のリストを取得します。答えは、次のような一連のアクセス許可です (`logs_read_data` アクセス許可には `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` があり、そのアクセス許可について知っておく必要があるのはこれだけです)。
+[Permissions API][11] を使用して、既存のすべてのアクセス許可のリストを取得します。答えは、次のような一連のアクセス許可です (`logs_read_data` アクセス許可には `<PERMISSION_ID>` `1af86ce4-7823-11ea-93dc-d7cad1b1c6cb` があり、そのアクセス許可について知っておく必要があるのはこれだけです)。
 
-```bash 
+```bash
 curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
@@ -113,7 +113,6 @@ curl -X GET "https://app.datadoghq.com/api/v2/permissions" -H "Content-Type: app
 ```
 
 **注**: アクセス許可 ID は、使用している Datadog サイト (Datadog US、Datadog EU など) によって異なります。
-
 
 ## ロールを設定する
 このセクションでは、`ACME Admin` と `ACME User` の 2 つのロールを作成する方法、両方のロールに最小限のログアクセス許可を付与する方法 (このガイドの後半で拡張)、ユーザーにどちらかのロールを割り当てる方法について説明します。
@@ -136,10 +135,10 @@ Datadog の [Team Section][1] で、Role タブの Add Role ボタンを使用�
 
 ロールの作成の詳細については、[アカウントの管理][3]セクションを参照してください。
 
+
 [1]: https://app.datadoghq.com/access/roles
 [2]: /ja/account_management/rbac/permissions?tab=ui#legacy-permissions
 [3]: /ja/account_management/rbac/?tab=datadogapplication#create-a-custom-role
-
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -194,11 +193,11 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 
 ```
 
+
 [1]: /ja/api/v2/roles/#create-role
 [2]: /ja/api/v2/roles/#list-roles
 [3]: /ja/api/v2/roles/#grant-permission-to-a-role
 [4]: /ja/api/v2/roles/#revoke-permission
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -215,12 +214,11 @@ Datadog の [Team Section][1] で、User タブに移動します。ユーザー
 {{< img src="logs/guide/rbac/assign_user.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
 {{< img src="logs/guide/rbac/assign_user2.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
 
+
 [1]: https://app.datadoghq.com/access/users
 [2]: /ja/account_management/users/
-
 {{% /tab %}}
 {{% tab "API" %}}
-
 
 [List Users API][1] を使用して、`ACME Admin` または `ACME User` ロールのいずれかに割り当てるユーザーのユーザー ID を取得します。この API はページ区切りされているため、たとえば、ユーザーの姓をクエリパラメーターとして使用して、結果をフィルタリングする必要がある場合があります。次の例では、ユーザー ID は `1581e993-eba0-11e9-a77a-7b9b056a262c` です。
 
@@ -256,18 +254,17 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Conten
 curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
 ```
 
+
+
 [1]: /ja/api/v2/users/#list-all-users
 [2]: /ja/api/v2/roles/#add-a-user-to-a-role
-[3]: /ja/api/v2/roles/#remove-a-user-from-a-role
-
-
 {{% /tab %}}
 {{< /tabs >}}
 
 
 ## ログへのアクセスを制限する
 
-このセクションでは、ACME チームメンバー (`ACME Admin` と `ACME User` の両方のメンバー) に `team:acme` ログへのアクセスを付与する (`team:acme` ログのみ) 方法について説明します。制限クエリでスコープされた [Log Read Data][74] アクセス許可を使用します。
+このセクションでは、ACME チームメンバー (`ACME Admin` と `ACME User` の両方のメンバー) に `team:acme` ログへのアクセスを付与する (`team:acme` ログのみ) 方法について説明します。制限クエリでスコープされた [Log Read Data][12] アクセス許可を使用します。
 
 粒度を最大限に高め、メンテナンスを容易にするために推奨されるのは、アクセスできるログを増やすために ACME ユーザーのアクセスを拡張**しない**ことです。他のロールを同じ `team:acme` 制限クエリに制限するよりも、各ユーザーが個別にアクセスする必要があるものに基づいて、ユーザーを複数のロールに割り当てることを検討してください。
 
@@ -276,15 +273,22 @@ curl -X DELETE "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Cont
 1. `team:acme` 制限クエリを作成する。
 2. その制限クエリを ACME ロールにアタッチする。
 
-
-*注*: ロールには、制限クエリを **1 つだけ**アタッチできます。制限クエリをロールにアタッチすると、このロールにすでにアタッチされている制限クエリがすべて削除されます。
+**注**: ロールには、制限クエリを **1 つだけ**アタッチできます。制限クエリをロールにアタッチすると、このロールにすでにアタッチされている制限クエリがすべて削除されます。
 
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-このコンフィギュレーションは、UI からは利用できません。
+Datadog アプリで [Data Access ページ][1]を使用して、以下を実行します。
 
+* `team:acme` 制限クエリを作成する。
+* `ACME Admin` および `ACME User` ロールを制限クエリに割り当てます。
+
+{{< img src="logs/guide/rbac/restriction_queries.png" alt="ログへのアクセスを制限"  style="width:60%;">}}
+
+詳細については、[`logs_read_data` アクセス許可セクション][1]を参照してください。
+
+[1]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -327,12 +331,12 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 * [Get Roles API][4] を使用して、クエリにアタッチされているロールのリストを取得します。結果には `ACME Admin` と `ACME User` のみが表示されます。
 * 逆に、[Get Limitation Query API][5] を使用して、いずれかのロールに制限クエリをアタッチします。`team:acme` 制限クエリが表示されます。
 
+
 [1]: /ja/api/v2/logs-restriction-queries/#create-a-restriction-query
 [2]: /ja/api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
 [3]: /ja/api/v2/roles/#grant-permission-to-a-role
 [4]: /ja/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 [5]: /ja/api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -350,26 +354,23 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 粒度を最大限に高め、メンテナンスを容易にするために推奨されるのは、ACME ログアセットを編集するアクセス許可を他のロールに付与**しない**ことです。代わりに、(一部の) ユーザーを対象の他のロールから `ACME Admin` ロールにも追加することを検討してください。
 
-
 ### ログパイプライン
 
-`team:acme` ログ用に 1 つの[パイプライン][60]を作成します。[Write Processor][70] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこの ACME「ルート」パイプラインに**スコープ**します。
+`team:acme` ログ用に 1 つの[パイプライン][13]を作成します。[Write Processor][14] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこの ACME「ルート」パイプラインに**スコープ**します。
 
 {{< img src="logs/guide/rbac/pipelines.png" alt="ACME パイプライン"  style="width:60%;">}}
 
-
 ### ログインデックス
 
-`team:acme` ログ用に 1 つまたは複数の[インデックス][61]を作成します。ACME チームがきめ細かい予算管理を必要とする場合、複数のインデックスが役立つ場合があります (たとえば、保持が異なるインデックス、またはクオータが異なるインデックス)。[Write Exclusion Filters][71] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこれらの ACME インデックスに**スコープ**します。
+`team:acme` ログ用に 1 つまたは複数の[インデックス][15]を作成します。ACME チームがきめ細かい予算管理を必要とする場合、複数のインデックスが役立つ場合があります (たとえば、保持が異なるインデックス、またはクオータが異なるインデックス)。[Write Exclusion Filters][16] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこれらの ACME インデックスに**スコープ**します。
 
 {{< img src="logs/guide/rbac/indexes.png" alt="ACME インデックス"  style="width:60%;">}}
 
-
 ### ログアーカイブ
 
-#### ログアーカイブを読み取る
+#### アーカイブを読み取る
 
-`team:acme` ログ用に 1 つまたは複数の[アーカイブ][62]を作成します。[Read Archives][72] アクセス許可を `ACME Admin` のメンバーに割り当てますが、その ACME アーカイブに**スコープ**します。
+`team:acme` ログ用に 1 つまたは複数の[アーカイブ][17]を作成します。[Read Archives][18] アクセス許可を `ACME Admin` のメンバーに割り当てますが、その ACME アーカイブに**スコープ**します。
 
 {{< img src="logs/guide/rbac/archives.png" alt="ACME アーカイブ"  style="width:60%;">}}
 
@@ -377,54 +378,38 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 #### 履歴ビューを書き込む
 
-`ACME Admin` のメンバーに [Write Historical View][73] アクセス許可を割り当てます。このアクセス許可は、リハイドレートを実行する能力を付与します。
+`ACME Admin` のメンバーに [Write Historical View][19] アクセス許可を割り当てます。このアクセス許可は、リハイドレートを実行する能力を付与します。
 
-**オプションで**、ログアーカイブを設定して、そのアーカイブからリハイドレートされたすべてのログに、アーカイブにタグがあるかどうかに関係なく、最終的に `team:acme` タグが付けられるようにします。このオプションを使用すると、既存の制限ポリシーとの整合性を確保できるだけでなく、Datadog に流れないログや Datadog でインデックス付けされていないログに対応する非推奨の制限を安全に削除できます。
+**オプションで**、ログアーカイブを設定して、そのアーカイブからリハイドレートされたすべてのログに、アーカイブにタグがあるかどうかに関係なく、最終的に `team:acme` タグが付けられるようにします。[このオプション][20]を使用すると、既存の制限ポリシーとの整合性を確保できるだけでなく、Datadog に流れないログや Datadog でインデックス付けされていないログに対応する非推奨の制限を安全に削除できます。
 
 {{< img src="logs/guide/rbac/archives.png" alt="リハイドレートの ACME タグ"  style="width:60%;">}}
 
-*注*: [Legacy Read Index Data Permission][75] を使用する**場合**、`ACME User` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
+**注**: [Legacy Read Index Data Permission][21] を使用する**場合**、`ACME User` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
 
 {{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可"  style="width:60%;">}}
-
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-
-
-[6]: /ja/account_management/rbac/permissions?tab=datadogapplication#general-permissions
-[7]: /ja/account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
-
-
-[10]: /ja/account_management/rbac/permissions?tab=datadogapplication#log-data-access
-
-[60]: /ja/logs/processing/pipelines/
-[61]: /ja/logs/indexes/
-[62]: /ja/logs/archives/
-
-[70]: /ja/account_management/rbac/permissions?tab=ui#logs_write_processors
-[71]: /ja/account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
-[72]: /ja/account_management/rbac/permissions?tab=ui#logs_read_archives
-[73]: /ja/account_management/rbac/permissions?tab=ui#logs_write_historical_view
-
-[74]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
-[75]: /ja/account_management/rbac/permissions?tab=ui#logs_read_index_data
-
-
-[84]: /ja/getting_started/tagging/
-[85]: /ja/agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
-[86]: https://app.datadoghq.com/access/users
-
-
-[90]: /ja/account_management/rbac/permissions?tab=ui#logs-write-pipelines
-[91]: /ja/account_management/rbac/permissions?tab=ui#logs-modify-indexes
-[92]: /ja/account_management/rbac/permissions?tab=ui#logs-write-archives
-[93]: /ja/account_management/rbac/permissions?tab=ui#logs-public-config-api
-
-[94]: https://app.datadoghq.com/account/settings#api
-[95]: /ja/account_management/api-app-keys/
-
-[96]: /ja/api/v2/roles/#list-permissions
+[2]: /ja/agent/docker/tag/?tab=containerizedagent#extract-labels-as-tags
+[3]: /ja/getting_started/tagging/
+[4]: /ja/account_management/rbac/permissions?tab=ui#logs_write_pipelines
+[5]: /ja/account_management/rbac/permissions?tab=ui#logs_modify_indexes
+[6]: /ja/account_management/rbac/permissions?tab=ui#logs_write_archives
+[7]: /ja/account_management/rbac/permissions?tab=ui#logs_public_config_api
+[8]: https://app.datadoghq.com/access/users
+[9]: https://app.datadoghq.com/account/settings#api
+[10]: /ja/account_management/api-app-keys/
+[11]: /ja/api/v2/roles/#list-permissions
+[12]: /ja/account_management/rbac/permissions?tab=ui#logs_read_data
+[13]: /ja/logs/processing/pipelines/
+[14]: /ja/account_management/rbac/permissions?tab=ui#logs_write_processors
+[15]: /ja/logs/indexes/
+[16]: /ja/account_management/rbac/permissions?tab=ui#logs_write_exclusion_filters
+[17]: /ja/logs/archives/
+[18]: /ja/account_management/rbac/permissions?tab=ui#logs_read_archives
+[19]: /ja/account_management/rbac/permissions?tab=ui#logs_write_historical_view
+[20]: /ja/logs/archives#datadog-permissions
+[21]: /ja/account_management/rbac/permissions?tab=ui#logs_read_index_data

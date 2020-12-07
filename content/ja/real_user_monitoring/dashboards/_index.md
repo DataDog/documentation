@@ -30,11 +30,11 @@ RUM アプリケーションを作成すると、すべての[収集データ][1
 
 {{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="テンプレート変数" style="width:50%;" >}}
 
-### 関連ビューの表示
+### RUM イベントの表示
 
-すべての個別イベントを調査するには、グラフをクリックして _View related views_ を選択すれば、現在選択中のフィルターがかかった状態で RUM Explore にリダイレクトされます。
+すべての個別イベントを調査するには、グラフをクリックして _View RUM views_ を選択すると、現在選択中のフィルターで RUM Explore にリダイレクトされます。
 
-{{< img src="real_user_monitoring/dashboards/view_related_views.gif" alt="関連ビューの表示" style="width:50%;" >}}
+{{< img src="real_user_monitoring/dashboards/view_rum_events.gif" alt="RUM イベントの表示" style="width:80%;" >}}
 
 ### ダッシュボードのカスタマイズ
 

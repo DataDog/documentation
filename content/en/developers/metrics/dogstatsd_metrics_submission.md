@@ -671,7 +671,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 #### TIMER
 
-`TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measure timing data only: for example, the amount of time a section of code takes to execute.
+`TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute.
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|

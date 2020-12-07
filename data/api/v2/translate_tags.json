@@ -55,6 +55,10 @@
     "name": "Incident Teams",
     "description": "Create, update, delete and retrieve teams which can be associated with incidents."
   },
+  "incidents": {
+    "name": "Incidents",
+    "description": "Manage incident response."
+  },
   "key-management": {
     "name": "Key Management",
     "description": "[See API version 1](/api/v1/key-management/)."
@@ -94,6 +98,10 @@
   "pagerduty-integration": {
     "name": "PagerDuty Integration",
     "description": "[See API version 1](/api/v1/pagerduty-integration/)."
+  },
+  "processes": {
+    "name": "Processes",
+    "description": "The processes API allows you to query processes data for your organization."
   },
   "roles": {
     "name": "Roles",

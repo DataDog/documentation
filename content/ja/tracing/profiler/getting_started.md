@@ -16,12 +16,13 @@ further_reading:
 ---
 Profiler は、次のトレースライブラリに同梱されています。アプリケーションのプロファイラを有効にする方法を確認するには、以下で言語を選択してください。
 
-**Node**、**Ruby**、**PHP**、**.NET** プロファイラでは、プライベートベータアクセスリストに掲載するために[新規登録][1]が必要です。 ベータ版の準備が完了次第、ご連絡いたします。
+**Node**、**Ruby**、**PHP**、**.NET** プロファイラーの非公開ベータ版が利用可能になった場合に通知するには、[こちらから新規登録][1]してください。
+
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiler ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、[ほとんどのベンダーの OpenJDK 8 (バージョン 8u262)][2]、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
+Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profiler ライブラリは、OpenJDK 11 以降、Oracle Java 11以降、[OpenJDK 8 (バージョン 8u262以降)][2]、Zulu Java 8 以降 (マイナーバージョン 1.8.0_212 以降)でサポートされています。Scala、Groovy、Kotlin、Clojure など、JVM ベースのすべての言語がサポートされています。アプリケーションのプロファイリングを開始するには、
 
 1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][3] 以降または [6.20.2][3] 以降にアップグレードしてください。まだ APM を有効にしていない場合で Datadog にデータを送信するようにアプリケーションを設定するには、ご利用中の Agent で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
 
@@ -36,7 +37,7 @@ Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profi
 3. `-Ddd.profiling.enabled` フラグまたは `DD_PROFILING_ENABLED` 環境変数を `true` に設定します。次のようにサービス呼び出しを更新します。
 
     ```diff
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
 4. 1〜2 分後、[Datadog APM > Profiling ページ][4]でプロファイルを視覚化します。
@@ -62,7 +63,6 @@ Datadog Profiler には [JDK Flight Recorder][1] が必要です。Datadog Profi
 | `DD_ENV`                                         | 文字列        | [環境][6]名（例、`production`）。|
 | `DD_VERSION`                                     | 文字列        | サービスのバージョン                             |
 | `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
-
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: /ja/tracing/profiler/profiler_troubleshooting/#java-8-support
@@ -103,19 +103,11 @@ Datadog Profiler には Python 2.7 以降が必要です。メモリプロファ
 
 4. 1〜2 分後、[Datadog APM > Profiler ページ][2]でプロファイルを視覚化します。
 
-**注**:
-
-- または、ラッパー `pyddprofile` で実行してサービスをプロファイルします。
-
-    ```shell
-    $ pyddprofile server.py
-    ```
-
 - `service` や `version` のようなタグ追加すると、プロファイルのさまざまな側面をすばやく詳細に解明でき操作性の向上につながるため、強くお勧めします。環境変数を使用してパラメータを設定します。
 
 | 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | プロファイラを有効にするには、`true` に設定します。トラッカーのバージョン 0.40 以降からサポートされます。              |
+| `DD_PROFILING_ENABLED`                           | Boolean       | プロファイラを有効にするには、`true` に設定します。トレーサーのバージョン 0.40 以降からサポートされます。              |
 | `DD_SERVICE`                                     | 文字列        | Datadog [サービス][3]名。     |
 | `DD_ENV`                                         | 文字列        | Datadog [環境][4]名前（例、`production`）。 |
 | `DD_VERSION`                                     | 文字列        | アプリケーションのバージョン                             |
@@ -127,7 +119,7 @@ Datadog Profiler には Python 2.7 以降が必要です。メモリプロファ
 
 - プロセスが `os.fork` を使用してフォークすると、プロファイラは子プロセスで停止します。
 
-  POSIX プラットフォームの Python 3.7 以降では、`pyddprofile` または `ddtrace.profiling.auto` を介してプロファイラを有効にすると、新しいプロファイラが起動します。
+  POSIX プラットフォームの Python 3.7 以降では、`ddtrace-run` または `ddtrace.profiling.auto` を介してプロファイラを有効にすると、新しいプロファイラが起動します。
 
   `Profiler()` を手動で作成する場合、Python 3.6 未満を使用する場合、または非 POSIX プラットフォームで実行する場合、以下を使用し子のプロファイラーを手動で再起動します。
 

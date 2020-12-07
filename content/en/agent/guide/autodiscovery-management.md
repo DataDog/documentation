@@ -12,7 +12,7 @@ further_reading:
 
 Datadog Agent auto-discovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
-**Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
+**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
 If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Agent](?tab=agent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 

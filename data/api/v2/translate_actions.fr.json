@@ -21,6 +21,30 @@
     "request_description": "Nouveaux dashboards de la liste de dashboards.",
     "request_schema_description": "Requête contenant la liste des dashboards à mettre à jour."
   },
+  "ListIncidents": {
+    "description": "Récupérez tous les incidents de l'organisation de l'utilisateur.",
+    "summary": "Récupérer la liste des incidents"
+  },
+  "CreateIncident": {
+    "description": "Créez un incident.",
+    "summary": "Créer un incident",
+    "request_description": "Charge utile de l'incident.",
+    "request_schema_description": "Requête de création d'un incident."
+  },
+  "DeleteIncident": {
+    "description": "Supprimez un incident existant de l'organisation de l'utilisateur.",
+    "summary": "Supprimer un incident existant"
+  },
+  "GetIncident": {
+    "description": "Récupérez les détails d'un incident en fonction de son `incident_id`.",
+    "summary": "Récupérer les détails d'un incident"
+  },
+  "UpdateIncident": {
+    "description": "Mettez à jour un incident. Cette requête étant une mise à jour partielle, spécifiez uniquement les attributs devant être mis à jour.",
+    "summary": "Mettre à jour un incident existant",
+    "request_description": "Charge utile de l'incident.",
+    "request_schema_description": "Requête de mise à jour d'un incident."
+  },
   "AggregateLogs": {
     "description": "Endpoint d'API pour agréger les événements sous la forme de compartiments et calculer les métriques ainsi que les séries temporelles.",
     "summary": "Événements agrégés",
@@ -131,6 +155,10 @@
     "description": "Renvoie la liste de toutes les autorisations, y compris le nom, la description et l'ID.",
     "summary": "Énumérer les autorisations"
   },
+  "ListProcesses": {
+    "description": "Récupérez tous les processus de votre organisation.",
+    "summary": "Récupérer tous les processus"
+  },
   "ListRoles": {
     "description": "Renvoie tous les rôles, y compris leurs noms et leurs ID.",
     "summary": "Énumérer les rôles"
@@ -212,7 +240,7 @@
     "summary": "Récupérer une liste de signaux de sécurité",
     "request_schema_description": "La requête de récupération d'une liste de signaux de sécurité."
   },
-  "GetIncidentServices": {
+  "ListIncidentServices": {
     "description": "Récupérez tous les services liés à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces services.",
     "summary": "Récupérer la liste de tous les services liés à un incident"
   },
@@ -236,7 +264,7 @@
     "request_description": "Charge utile du service lié à un incident.",
     "request_schema_description": "Requête de mise à jour avec une charge utile de service lié à un incident."
   },
-  "GetIncidentTeams": {
+  "ListIncidentTeams": {
     "description": "Récupérez toutes les équipes liées à un incident pour l'organisation de l'utilisateur effectuant la requête. Si le paramètre de requête `include[users]` est spécifié, l'attribut inclus contiendra les utilisateurs associés à ces équipes.",
     "summary": "Récupérer la liste de toutes les équipes liées à un incident"
   },

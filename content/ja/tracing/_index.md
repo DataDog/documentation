@@ -30,96 +30,98 @@ aliases:
 
 </br>
 
-Datadog APM と分散型トレーシングは、Web サービス、キュー、データベースがリクエスト、エラー、レイテンシーを監視するための**標準のパフォーマンスダッシュボード**を使用して、アプリケーションを詳細に可視化します。分散型トレースは、ホスト、コンテナ、プロキシ、サーバーレス機能全体で、ブラウザセッション、ログ、synthetic チェック、ネットワーク、プロセス、インフラストラクチャーのメトリクスに**シームレスに関連付けられます**。システム停止中、**収集されたトレースの 100% がサンプリングなしで生存**を検索しますが、Datadog は、エラー、高レイテンシー、または一意のコードパスを表すトレースを分析のためにインテリジェントに保持します。
+Datadog APM と分散型トレーシングは、Web サービス、キュー、データベースがリクエスト、エラー、レイテンシーを監視するための**標準のパフォーマンスダッシュボード**を使用して、アプリケーションを詳細に可視化します。分散型トレースは、ホスト、コンテナ、プロキシ、サーバーレス機能全体で、ブラウザセッション、ログ、synthetic チェック、ネットワーク、プロセス、インフラストラクチャーのメトリクスに**シームレスに関連付けられます**。システム停止中、**サンプリングなしで、トレースの 100% を収集**して、最近 15 分間について検索、分析し、タグベースの保持フィルターを使用してビジネスに必要なトレースを 15 日間保持します。
 
-## はじめに
+#### Tracing Without Limits: トレースジャーニー
+
+{{< img src="tracing/live_search_and_analytics/tracing_without_limits_lifecycle-0.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースジャーニー" >}}
+
+トレースは、インスツルメントされたアプリケーションで開始し Datadog へ流れ、トレースの 100%、1 秒につき最大 50 トレース（APM ホストあたり）まで収集します。高スループットのサービスに必要な場合は、[Ingestion Controls][1] を使用してこれを表示、制御できます。収集されたすべてのトレースは、15 分間ライブ検索および分析が可能です。また、タグベースのカスタム[保持フィルター][2]を使用して、ビジネスに有用なトレースを 15 日間保持し、検索、分析できます。
+
+## Datadog へトレースを送信
 
 モノリスからマイクロサービスに移行すると、ホスト、コンテナ、またはサーバーレス機能全体の Datadog APM の設定に数分しかかかりません。
 
-### 1. Datadog Agent の構成
+[Datadog Tracing Library を追加し][3]、ご使用の環境および言語、トレースの対象が[プロキシ][4]または [AWS Lambda 関数][5]全体なのか、また自動インスツルメンテーション、dd-trace-api、[OpenTracing、または OpenTelemetry][6] のいずれを使用するのかに応じて、手順を見つけます。
 
-AWS、GCP、Azure、Kubernetes、ECS、Fargate、PCF、Heroku、オンプレミスなどに [Datadog Agent をインストールして構成します][1]。
+{{< partial name="apm/apm-compatibility.html" >}}
 
-### 2. アプリケーションのインスツルメンテーション
-
-アプリケーションまたはプロキシサービスにトレースライブラリを追加して、Datadog Agent へのトレースの送信を開始します。
-
-{{< partial name="apm/apm-languages.html" >}}
 <br>
+
 ## Datadog APM の確認
 
 これで、トレースを Datadog に送信するようにアプリケーションを構成したので、アプリケーションのパフォーマンスに関する情報を入手できます。
 
 ### サービスマップ
 
-トレースから自動生成されたサービスマップとサービスパフォーマンスメトリクスおよびモニターアラート状態のモニタリングにより[サービスの依存関係を理解します][2]。
+トレースから自動生成されたサービスマップとサービスパフォーマンスメトリクスおよびモニターアラート状態のモニタリングにより[サービスの依存関係を理解します][7]。
 
 {{< img src="tracing/index/ServiceMapInspect.gif" alt="サービスマップ"  style="width:100%;">}}
 
 ### サービスパフォーマンスダッシュボード
 
-リクエスト、エラー、レイテンシーパーセンタイルに関する[サービスメトリクスを監視][3]します。インフラストラクチャーに関連づけられたデータベースクエリまたはエンドポイントにドリルダウンします。
+リクエスト、エラー、レイテンシーパーセンタイルに関する[サービスメトリクスを監視][8]します。インフラストラクチャーに関連づけられたデータベースクエリまたはエンドポイントにドリルダウンします。
 
 {{< img src="tracing/index/ServicePage.gif" alt="サービスページ"  style="width:100%;">}}
 
-### バージョン追跡
-
-ローリング、ブルー/グリーン、シャドウ、またはカナリアデプロイに対し、バージョンタグで[サービスパフォーマンスを監視][4]します。
-
-{{< img src="tracing/version_tracking/rolling.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
-
 ### Live Search
 
-取り込まれたトレースの 100% がサンプリングなしで 15 分間生存している任意のタグで[スパンを検索][5]します。
+タグを使用して、サンプリングなしのライブで 15 分間、[トレースの 100% を検索][9]します。
 
-{{< img src="tracing/live_search/livesearchmain.gif" alt="Live Search" >}}
+{{< img src="tracing/live_search/LiveSearch.mp4" alt="Live Search" video="true" >}}
+
+### Live Analytics
+
+停止中に、15 分間ライブで[任意のタグにより任意のスパンのパフォーマンスを分析][10]し、影響を受けたユーザーまたはトランザクションを特定します。
+
+{{< img src="tracing/live_search/LiveAnalytics.mp4" alt="Live Analytics" video="true" >}}
+
+### トレースの取り込みと保存
+
+タグベースの保持フィルターで、[最も重要なトレースを保持][11]し、インデックス化されたすべてのスパンで 15 日間分析を実行します。
+
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="トレースの保持と収集"  style="width:100%;">}}
+
+### デプロイ追跡
+
+[サービスパフォーマンスを監視][12]して、ローリング、ブルー/グリーン、シャドウ、またはカナリアデプロイに対しバージョン間で比較します。
+
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
 
 ### ログと分散型トレースの接続
 
-自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][6]します。
+自動トレース ID インジェクションを使用した単一の分散リクエストのトレースと[アプリケーションログを並べて表示][13]します。
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースをつなげる"  style="width:100%;">}}
 
-### サーバーレス関数のトレース
-
-[AWS Lambda およびホストをトレース][7]し、ハイブリッドインフラストラクチャーのすべてにおける完全トレースを確認します。
-
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数"  style="width:100%;">}}
-
-### App Analytics
-
-アプリケーション、インフラストラクチャー、またはデータセンター、アベイラビリティーゾーン、デプロイバージョン、ドメイン、ユーザー、チェックアウト金額、顧客などのカスタムタグごとに[パフォーマンスを分析][8]します。
-
-{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
-
 ### Synthetic テストデータとトレースの接続
 
-トレースに[シュミレーションされた API テストをリンクして][9]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
+トレースに[シュミレーションされた API テストをリンクして][14]、フロントエンド、ネットワーク、バックエンドリクエスト全体における障害の根本原因を突き止めます。
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetic テスト"  style="width:100%;">}}
 
-### 継続的なプロファイラー
+### Continuous Profiler
 
-CPU、メモリ、または I/O を最も多く消費するコード行を特定するため、常時稼働の本番環境プロファイラーにより[コードの効率を向上][10]します。
+CPU、メモリ、または I/O を最も多く消費するコード行を特定するため、常時稼働の本番環境プロファイラーにより[コードの効率を向上][15]します。
 
 {{< img src="tracing/index/Profiling.png" alt="プロファイリング"  style="width:100%;">}}
-
-### インスツルメンテーションをカスタマイズまたは OpenTracing を追加
-
-自動インスツルメンテーション、dd-trace-api、OpenTracing および OpenTelemetry エクスポーター間で[インスツルメンテーションとシームレスに接続][11]します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/send_traces/
-[2]: /ja/tracing/visualization/services_map/
-[3]: /ja/tracing/visualization/service/
-[4]: /ja/tracing/version_tracking/
-[5]: /ja/tracing/livesearch/
-[6]: /ja/tracing/connect_logs_and_traces/
-[7]: /ja/tracing/serverless_functions/
-[8]: /ja/tracing/app_analytics/
-[9]: /ja/synthetics/apm/
-[10]: /ja/tracing/profiler/
-[11]: /ja/tracing/manual_instrumentation/
+[1]: /ja/tracing/trace_retention_and_ingestion/#ingestion-controls
+[2]: /ja/tracing/trace_retention_and_ingestion/#retention-filters
+[3]: /ja/tracing/setup_overview/setup/java
+[4]: /ja/tracing/setup_overview/proxy_setup/
+[5]: /ja/tracing/setup_overview/serverless_functions/
+[6]: /ja/tracing/setup_overview/open_standards/
+[7]: /ja/tracing/visualization/services_map/
+[8]: /ja/tracing/visualization/service/
+[9]: /ja/tracing/trace_search_and_analytics/#live-search-for-15-minutes
+[10]: /ja/tracing/trace_search_and_analytics/#live-analytics-for-15-minutes
+[11]: /ja/tracing/trace_retention_and_ingestion/
+[12]: /ja/tracing/deployment_tracking/
+[13]: /ja/tracing/connect_logs_and_traces/
+[14]: /ja/synthetics/apm/
+[15]: /ja/tracing/profiler/

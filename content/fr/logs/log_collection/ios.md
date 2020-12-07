@@ -15,9 +15,9 @@ title: Collecte de logs iOS
 Envoyez des logs à Datadog à partir de vos applications iOS avec la [bibliothèque de logging côté client `dd-sdk-ios` de Datadog][1]. Vous pourrez notamment :
 
 * Envoyer des logs vers Datadog au format JSON en natif
-* Ajouter du contexte et des attributs personnalisés supplémentaires pour chaque log envoyé
+* Utiliser des attributs par défaut et ajouter des attributs personnalisés à chaque log envoyé
 * Enregistrer les adresses IP et user agents réels du client
-* Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
+* tirer parti de l'utilisation du réseau optimisée grâce aux envois groupés automatiques.
 
 **Remarque** : la bibliothèque `dd-sdk-androidios` prend en charge toutes les versions d'iOS à partir de la version 11.
 
@@ -66,6 +66,7 @@ Datadog.initialize(
     appContext: .init(),
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<token_client>", environment: "<nom_environnement>")
+        .set(serviceName: "app-name")
         .build()
 )
 ```
@@ -78,6 +79,7 @@ Datadog.initialize(
     appContext: .init(),
     configuration: Datadog.Configuration
         .builderUsing(clientToken: "<token_client>", environment: "<nom_environnement>")
+        .set(serviceName: "app-name")
         .set(logsEndpoint: .eu)
         .build()
 )
@@ -86,17 +88,17 @@ Datadog.initialize(
     {{% /tab %}}
     {{< /tabs >}}
 
-     Lors de la création de votre application, vous pouvez activer les logs de développement. Tous les messages internes dans la bibliothèque dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans les logs de la console.
+     Lors de la création de votre application, vous pouvez activer les logs de développement. Tous les messages internes dans le SDK dont la priorité est égale ou supérieure au niveau spécifié sont alors enregistrés dans les logs de la console.
 
     ```swift
     Datadog.verbosityLevel = .debug
     ```
 
-3. Configurez le logger iOS :
+3. Configurez le `Logger` :
 
     ```swift
     logger = Logger.builder
-        .set(serviceName: "app-name")
+        .sendNetworkInfo(true)
         .printLogsToConsole(true, usingFormat: .shortWith(prefix: "[iOS App] "))
         .build()
     ```
@@ -126,7 +128,7 @@ Les méthodes suivantes dans `Logger.Builder` peuvent être utilisées lors de l
 
 | Méthode                           | Description                                                                                                                                                                                                                         |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sendNetworkInfo(true)`    | Ajouter des attributs `network.client.*` à tous les logs. Les données loguées par défaut sont les suivantes : `reachability` (`yes` | `no` | `maybe`), `available_interfaces` (`wifi`, `cellular`, etc.), `sim_carrier.name` (p. ex. `AT&T - US`), `sim_carrier.technology` (`3G`, `LTE`, etc.) et `sim_carrier.iso_country` (p. ex. `US`). |
+| `sendNetworkInfo(true)`    | Ajouter des attributs `network.client.*` à tous les logs. Les données loguées par défaut sont les suivantes : `reachability` (`yes`, `no`, `maybe`), `available_interfaces` (`wifi`, `cellular`, etc.), `sim_carrier.name` (p. ex. `AT&T - US`), `sim_carrier.technology` (`3G`, `LTE`, etc.) et `sim_carrier.iso_country` (p. ex. `US`). |
 | `set(serviceName: "<NOM_SERVICE>")` | Définir `<NOM_SERVICE>` en tant que valeur pour l'[attribut standard][4] `service` joint à tous les logs envoyés à Datadog.                                                                                                                        |
 | `printLogsToConsole(true)`     | Définir ce paramètre sur `true` pour envoyer les logs à la console de debugging.                                                                                                                                                                                         |
 | `sendLogsToDatadog(true)`    | Définir ce paramètre sur `true` pour envoyer les logs à Datadog.                                                                                                                                                                                              |
@@ -189,7 +191,7 @@ Utilisez la méthode `removeAttribute(forKey:)` pour supprimer un attribut perso
 
 ```swift
 // Supprimer l'attribut device-model de tous les prochains logs envoyés.
-logger.removeAttribute("device-model")
+logger.removeAttribute(forKey: "device-model")
 
 ```
 

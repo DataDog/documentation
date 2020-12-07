@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /ja/real_user_monitoring/setup
 dependencies:
   - 'https://github.com/DataDog/browser-sdk/blob/master/packages/rum/README.md'
 kind: ドキュメント
@@ -10,19 +12,25 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 
 ## セットアップ
 
-### Datadog
-
 Datadog RUM ブラウザモニタリングを設定するには
 
 1. Datadog で、[リアルユーザーモニタリングのページ][1]に移動し、**New Application** ボタンをクリックします。
 2. アプリケーションの名前を入力し、**Generate Client Token** をクリックします。これにより、アプリケーションの `clientToken` と `applicationId` が生成されます。
-3. Datadog RUM SDK [NPM](#npm-setup) または[生成されたコードスニペット](#bundle-setup)をセットアップします。
+3. [npm](#npm) またはホストされているバージョンの 1 つ ([CDN async](#cdn-async) または [CDN sync](#cdn-sync)) を介して Datadog RUM SDK をセットアップします。
 4. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーブラウザから Datadog によってイベントが収集されます。
 5. [収集されたデータ][2]は、Datadog の[ダッシュボード][3]で視覚的に確認できます。
 
 **注**: Datadog がデータの受信を開始するまで、アプリケーションはアプリケーションリストページに「保留中」として表示されます。
 
-### NPM
+### 適切なインストール方法の選択
+
+| インストール方法        | 使用例                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| npm (node package manager) | 最新の Web アプリケーションには、この方法が推奨されます。RUM SDK は、残りのフロントエンド JavaScript コードとともにパッケージ化されます。ページの読み込みパフォーマンスに影響は出ませんが、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。**注:** 使用する場合、ログ SDK と一致するバージョンの使用が推奨されます。 |
+| CDN 非同期                  | この方法は、パフォーマンス目標のある Web アプリケーションに推奨されます。RUM SDK は、CDN から非同期的に読み込まれます。この方法を使用すると、SDK のダウンロードによるページの読み込みパフォーマンスへの影響を回避できます。ただし、SDK が初期化される前にトリガーされたエラー、リソース、ユーザーアクションは取りこぼされる場合があります。                                                   |
+| CDN 同期                   | この方法は、すべての RUM イベントを収集する場合に推奨されます。RUM SDK は、CDN から同期的に読み込まれます。この方法を使用すると、最初に SDK を読み込み、すべてのエラー、リソース、ユーザーアクションを収集することができます。この方法は、ページの読み込みパフォーマンスに影響を与える可能性があります。                                                                                                       |
+
+### npm
 
 [`@datadog/browser-rum`][4]を `package.json` ファイルに追加したら、次のコマンドを実行して初期化します。
 
@@ -43,7 +51,39 @@ datadogRum.init({
 
 **注**: `trackInteractions` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
 
-### バンドル
+### CDN 非同期
+
+生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグに追加します。
+
+<!-- prettier-ignore -->
+```html
+<script>
+ (function(h,o,u,n,d) {
+   h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+   d=o.createElement(u);d.async=1;d.src=n
+   n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<DATADOG_SITE>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sampleRate: 100,
+      trackInteractions: true,
+    })
+  })
+</script>
+```
+
+**注**:
+
+- `trackInteractions` パラメーターは、アプリケーション内のユーザークリックの自動収集を有効にします。ページに含まれている**機密データと非公開データ**は、やり取りされた要素を特定するために含まれる場合があります。
+- 始めの RUM API 呼び出しは `DD_RUM.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+
+### CDN 同期
 
 生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグ（他のスクリプトタグの前にあるタグ）に追加します。同期型のスクリプトタグをより高い位置に含めると、Datadog RUM ですべてのパフォーマンスデータとエラーを収集できます。
 
@@ -108,11 +148,11 @@ window.DD_RUM.init({
 
 `logs` SDK も使用する場合、一致するコンフィギュレーションが必要なオプション:
 
-| パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                  |
-| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                    |
-| `useSecureSessionCookie`       | Boolean | ✕       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。                                                              |
-| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+| パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                 |
+| ------------------------------ | ------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `trackSessionAcrossSubdomains` | Boolean | ✕       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                   |
+| `useSecureSessionCookie`       | Boolean | ✕       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信される RUM イベントが無効になります。                                                             |
+| `useCrossSiteSessionCookie`    | Boolean | ✕       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、RUM SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
 
 #### 例
 
@@ -135,22 +175,6 @@ init(configuration: {
     useSecureSessionCookie?: boolean,
     useCrossSiteSessionCookie?: boolean,
 })
-```
-
-### クリックアクションに名前を付ける
-
-RUM ライブラリは、さまざまな戦略を使用して、クリックアクションに自動的に名前を付けます。さらにコントロールする必要がある場合は、クリック可能な要素 (またはその親のいずれか) に `data-dd-action-name` 属性を定義して、アクションに名前を付けます。次に例を示します。
-
-```html
-<a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Login</a>
-```
-
-```html
-<div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  Enter a valid email address
-</div>
 ```
 
 [1]: https://app.datadoghq.com/rum/list

@@ -13,31 +13,23 @@ title: Datadog Heroku ビルドパック
 このビルドパックをプロジェクトに追加し、かつ必要な環境変数を設定するには、以下を参照してください。
 
 ```shell
-cd <HEROKU_プロジェクトルートフォルダー>
+cd <HEROKU_PROJECT_ROOT_FOLDER>
 
-# これが新しい Heroku プロジェクトの場合
+# If this is a new Heroku project
 heroku create
 
-# 適切な言語固有のビルドパックを追加します。例:
+# Add the appropriate language-specific buildpack. For example:
 heroku buildpacks:add heroku/ruby
 
-# Heroku Labs Dyno メタデータを有効にします
+# Enable Heroku Labs Dyno Metadata
 heroku labs:enable runtime-dyno-metadata -a $(heroku apps:info|grep ===|cut -d' ' -f2)
 
-# このビルドパックを追加して、Datadog API キーを設定します
-heroku buildpacks:add https://github.com/DataDog/heroku-buildpack-datadog.git#<DATADOG_ビルドパックリリース>
-heroku config:add DD_API_KEY=<DATADOG_API_キー>
+# Add this buildpack and set your Datadog API key
+heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git#<DATADOG_BUILDPACK_RELEASE>
+heroku config:add DD_API_KEY=<DATADOG_API_KEY>
 
-# Heroku にデプロイします
+# Deploy to Heroku
 git push heroku master
-```
-
-**警告**: apt パッケージをインストールするビルドパック（[apt][3]、[puppeteer 依存関係][4]など）または `/app` フォルダーを変更するビルドパック（[monorepo][5] など）は Datadog ビルドパックの*前*に追加される必要があります。たとえば、アプリケーションが `ruby`、`datadog`、`apt` ビルドパックを使用している場合、これは正しい `heroku buildpacks` 出力になります。
-
-```text
-1. heroku/ruby
-2. https://github.com/heroku/heroku-buildpack-apt.git
-3. https://github.com/DataDog/heroku-buildpack-datadog.git
 ```
 
 `<DATADOG_API_キー>` は、現在の [Datadog API キー][6]に置き換えてください。
@@ -46,6 +38,16 @@ git push heroku master
 完了すると、各 dyno の起動時に Datadog Agent が自動的に起動します。
 
 Datadog Agent は、statsd/dogstatsd のメトリクスおよびイベント用に `8125` でリスニングポートを提供します。トレースは、ポート `8126` で収集されます。
+
+<div class="alert alert-warning">
+警告: リスト内の最後のビルドパックは、アプリケーションに対するプロセスのタイプを決定するために使用されます。また、apt パッケージをインストールするビルドパック ([apt][3]、[puppeteer 依存関係][4]など) または `/app` フォルダーを変更するビルドパック ([monorepo][5] など) は Datadog ビルドパックの*前*に追加される必要があります。たとえば、アプリケーションが `ruby`、`datadog`、`apt` ビルドパックを使用している場合、これは正しい `heroku buildpacks` 出力になります。
+
+```text
+1. https://github.com/heroku/heroku-buildpack-apt.git
+2. https://github.com/DataDog/heroku-buildpack-datadog.git
+3. heroku/ruby
+```
+</div>
 
 ## アップグレードとスラグの再コンパイル
 
@@ -229,6 +231,7 @@ RUN apt-get update \
 # Datadog レポジトリと署名キーを追加
 RUN sh -c "echo 'deb https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 D75CEA17048B9ACBF186794B32637D44F14F620E
 
 # Datadog Agent をインストール
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent

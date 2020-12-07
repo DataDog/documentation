@@ -147,10 +147,15 @@ For example, if your log monitor is grouped by the `facet`, the variable is:
 ```text
 {{ facet.name }}
 ```
+**Example**: To include the information in a multi alert log monitor group by `@machine_id`: 
 
-If your facet has periods, use brackets around the facet, for example:
 ```text
-{{ [facet.with.dot].name }}
+This alert was triggered on {{ @machine_id.name }}
+```
+If your facet has periods, use brackets around the facet, for example:
+
+```text
+{{ [@network.client.ip].name }}
 ```
 
 ### Conditional variables
@@ -236,6 +241,36 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 {{#is_match "role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
+{{/is_match}}
+```
+
+The `is_match` condition also supports matching multiple strings:
+
+```text
+{{#is_match "role.name" "db" "database"}}
+  This displays if the host triggering the alert contains `db` or `database`
+  in the role name. @db-team@company.com
+{{/is_match}}
+```
+
+To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
+
+```text
+{{^#is_match "role.name" "db"}}
+  This displays if the role tag doesn't contain `db`.
+  @slack-example
+{{/is_match}}
+```
+
+Or use the `{{else}}` parameter in the first example:
+
+```text
+{{#is_match "role.name" "db"}}
+  This displays if the host triggering the alert contains `db`
+  in the role name. @db-team@company.com
+{{else}}
+  This displays if the role tag doesn't contain `db`.
+  @slack-example
 {{/is_match}}
 ```
 

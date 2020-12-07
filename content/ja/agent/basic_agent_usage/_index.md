@@ -148,6 +148,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [macOS][9]                                      | macOS 10.12 以上                                      |
 | [Windows Server 64 ビット][10]                     | Windows Server 2008r2 以上と Server Core (Nano 以外) |
 | [Windows 64 ビット][10]                            | Windows 7 以上                                        |
+| [Windows Azure Stack HCI OS][10]                | すべてのバージョン                                      |
 
 **注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
 
@@ -179,7 +180,11 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 | [Windows Server 64 ビット][10]       | Windows Server 2008r2 以上 |
 | [Windows 64 ビット][10]              | Windows 7 以上             |
 
-**注**: [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
+**注**:
+
+- [ソース][11]インストールは、このリストにないオペレーティングシステムでも実行でき、ベストエフォートベースでサポートされている可能性があります。
+
+- Windows Server 2008 R2+ はサポートされていますが、Datadog Agent のバージョン 7 以降を実行するには、最新の更新プログラムがインストールされている必要があります。Windows Server 2008 R2+ に影響を与える[クロックドリフトと Go の既知の問題][12]もあります。
 
 [1]: /ja/agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /ja/agent/basic_agent_usage/deb/
@@ -192,6 +197,7 @@ Agent の実行中は、`datadog-agent launch-gui` コマンドを使用して�
 [9]: /ja/agent/basic_agent_usage/osx/
 [10]: /ja/agent/basic_agent_usage/windows/
 [11]: /ja/agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 

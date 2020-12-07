@@ -81,11 +81,11 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
     "containerDefinitions": [
         {
             "name": "dd-agent",
-            "image": "datadog/agent:7",
+            "image": "gcr.io/datadoghq/agent:7",
             "environment": [
                 {
                     "name": "DD_API_KEY",
-                    "value": "<DD_API_キー>"
+                    "value": "<YOUR_DD_API_KEY>"
                 },
                 {
                     "name": "DD_SITE",
@@ -93,7 +93,7 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
                 },
                 {
                     "name": "DD_TAGS",
-                    "value": "<シンプルタグ>, <キー:値タグ>"
+                    "value": "<SIMPLE_TAG>, <KEY:VALUE_TAG>"
                 }
             ],
             "memory": 256,
@@ -190,6 +190,139 @@ Elastic Beanstalk 環境で Docker コンテナを使用する場合は、コン
 echo -e "process_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
 ```
 
+### トレースの収集
+
+#### ホストベース
+
+アプリケーションがコンテナ化されておらず、Datadog Agent が `99datadog.config` で構成されているとき、アプリケーションが[トレーシングライブラリセットアップ][11]でインスツルメントされている場合は、追加のコンフィギュレーションなしでトレーシングが有効になります。
+
+#### 単一 Docker コンテナ
+
+アプリケーションがコンテナ化されていて、Datadog Agent が `99datadog.config` で構成されている場合は、この追加コンフィギュレーションでトレーシングを有効にします。
+
+1. `99datadog.config` ファイルの `"/configure_datadog_yaml.sh"` セクションを `apm_non_local_traffic` で更新し、次のようなフォーマットにします。
+
+```text
+
+echo -e "apm_config:\n  enabled: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
+
+echo -e "  apm_non_local_traffic: \"true\"\n" >> /etc/datadog-agent/datadog.yaml
+```
+2. トレーシングライブラリをセットアップして、トレースが [ブリッジネットワークの Gateway IP][12] に送られるようにします。アプリケーションコンテナ内からのデフォルトが `172.17.0.1` になります（これが Gateway IP かどうかわからない場合は、`docker inspect <container id>` を実行して確認します）。
+
+すべての言語で、`DD_AGENT_HOST` と呼ばれる環境変数を Gateway IP へ設定します。
+
+または、以下の言語の場合はホスト名をプログラムで設定することができます。
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+
+tracer.configure(hostname="172.17.0.1")
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+const tracer = require('dd-trace');
+
+tracer.init({ hostname: "172.17.0.1" });
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.tracer hostname: "172.17.0.1")
+end
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+package main
+
+import (
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+  tracer.Start(tracer.WithAgentAddr("172.17.0.1"))
+  defer tracer.Stop()
+
+  // ...
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### 複数 Docker コンテナ
+
+1. アプリケーションと同じ `Dockerrun.aws.json` 内で `gcr.io/datadoghq/agent` イメージを使用して Datadog Agent コンテナを追加します。以下を追加します。
+    - `portMappings` セクションで、`containerPort` 8126 と `hostPort` 8126 を追加します。
+    - `environment` セクションで、`DD_APM_ENABLED` と `DD_APM_NON_LOCAL_TRAFFIC` を `true` に設定します。
+2. [トレーシングライブラリのセットアップ][17]でインスツルメントされたアプリケーションコンテナで、以下を追加します。
+    - `environment` セクションで、`DD_AGENT_HOST` と呼ばれる環境変数を Datadog Agent コンテナの名前に追加します。
+    - `links` セクションで、Agent コンテナを環境変数として使用されるように設定します。
+
+以下の例を参照してください。
+
+```text
+ "containerDefinitions": [    {
+      "name": "dd-agent",
+      "image": "gcr.io/datadoghq/agent:latest",
+      "environment": [
+          {
+              "name": "DD_API_KEY",
+              "value": "<api key>"
+          },
+          {
+              "name": "DD_APM_ENABLED",
+              "value": "true"
+          },
+          {
+             "name": "DD_APM_NON_LOCAL_TRAFFIC",
+             "value": "true"
+          },
+         # 他の環境変数が必要 
+      ],
+      "portMappings": [
+        {
+          "hostPort": 8126,
+          "containerPort": 8126
+        }
+      ],
+      "memory": 256,
+      "mountPoints": [
+          # マウントポイントが必要
+         }
+      ]
+    },
+    {
+      "name": "application-container",
+      "image": "<application image name>",
+      "environment": [
+        {
+          "name": "DD_AGENT_HOST",
+          "value": "dd-agent",
+          # 他の環境変数が必要
+        }
+      ],
+      "links": [
+        "dd-agent:dd-agent"
+      ],
+
+```
+
 ## 収集データ
 
 ### メトリクス
@@ -208,22 +341,24 @@ AWS Elastic Beanstalk インテグレーションには、サービスのチェ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 
 ## その他の参考資料
 
-- ブログ記事: [AWS Elastic Beanstalk への Datadog のデプロイ][13]
+- ブログ記事: [AWS Elastic Beanstalk への Datadog のデプロイ][15]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
-[6]: https://hub.docker.com/r/datadog/agent/tags
+[6]: https://gcr.io/datadoghq/agent
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
 [8]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
 [9]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [10]: https://docs.datadoghq.com/ja/config/99datadog.config
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
-[13]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk
+[11]: https://docs.datadoghq.com/ja/tracing/setup/
+[12]: https://docs.docker.com/network/network-tutorial-standalone/
+[13]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
+[14]: https://docs.datadoghq.com/ja/help/
+[15]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk

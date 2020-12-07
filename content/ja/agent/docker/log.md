@@ -53,7 +53,7 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 **注**: Windows システムでは、このコマンドをボリュームマウントなしで実行します。つまり以下のようになります。
@@ -65,7 +65,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
-           datadog/agent:latest
+           gcr.io/datadoghq/agent:latest
 ```
 
 最新版の Datadog Agent の使用が推奨されます。Docker Hub で利用できる [Agent v6 のイメージ][2]リストを参照してください。
@@ -77,11 +77,11 @@ docker run -d --name datadog-agent \
 | `-e DD_LOGS_ENABLED=true`                             | `true` に設定すると、ログ収集が有効になります。Agent は構成ファイルのログ命令を探します。                                                          |
 | `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | すべてのコンテナのログ収集を有効にするログコンフィギュレーションを追加します。                                                                                         |
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | 再起動の際やネットワークで問題が生じた際でもコンテナログを紛失しないよう、このディレクトリ内の各コンテナのために収集された最後のログ行は、ホストに保存されます。     |
-| `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Datadog Agent が自身のログやメトリクスを収集したり送信するのを防ぎます。Datadog Agent ログやメトリクスを収集したい場合は、このパラメータを削除します。 |
+| `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Datadog Agent が自身のログやメトリクスを収集したり送信するのを防ぎます。Datadog Agent ログやメトリクスを収集したい場合は、このパラメータを削除します。このパラメーター値は正規表現をサポートしています。 |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | ログは Docker ソケットの `stdout/stderr` コンテナから収集されます。                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://hub.docker.com/r/datadog/agent/tags
+[2]: https://gcr.io/datadoghq/agent
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 
@@ -115,7 +115,7 @@ logs_config:
 
 - コンテナ `Stderr` からのログは `Error` の状態がデフォルトとなります。
 
-- Docker のデフォルトである json-file ログドライバーではなく _journald_ ログドライバーを使用する場合は、コンテナ環境の設定に関するドキュメント [journald インテグレーション][1] をご覧ください。
+- Docker のデフォルトである json-file ログドライバーではなく _journald_ ログドライバーを使用する場合は、コンテナ環境の設定に関するドキュメント [journald インテグレーション][1] をご覧ください。フィルタリング対象のパラメーターについての詳細は、[journald フィルターユニット][1]のドキュメントを参照してください。
 
 ## ログインテグレーション
 

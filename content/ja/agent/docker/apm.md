@@ -25,7 +25,7 @@ further_reading:
     tag: ドキュメント
     text: コンテナから送信された全データにタグを割り当て
 ---
-環境変数として `DD_APM_ENABLED=true` を渡すことで、`datadog/agent` コンテナで Trace Agent を有効にします。
+環境変数として `DD_APM_ENABLED=true` を渡すことで、`gcr.io/datadoghq/agent` コンテナで Trace Agent を有効にします。
 
 ## ホストからのトレース
 
@@ -43,9 +43,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<DATADOG_API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -53,9 +53,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ```shell
 docker run -d -p 127.0.0.1:8126:8126/tcp \
-              -e DD_API_KEY="<API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -82,7 +82,7 @@ Docker Agent 内のトレースに利用可能なすべての環境変数をリ�
 | `DD_APM_NON_LOCAL_TRAFFIC` | [他のコンテナからのトレース](#tracing-from-other-containers)時に、非ローカルトラフィックを許可します。                                                                                                                                                                                                                                                        |
 | `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。例: <code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                                       |
 | `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りのインスタンス <code>\<サービス名>\|;\<オペレーション名>=1</code>、たとえば、<code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code> となります。トレーシングクライアントでコンフィギュレーションパラメーターを使用して[自動的に有効化][3]することもできます。 |
-| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Analyzed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                                                        |
+| `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Indexed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                                                        |
 | `DD_APM_MAX_TPS`           | 1 秒あたりの最大トレース数を設定します。デフォルトは 1 秒あたり 10 トレースです。                                                                                                                                                                                                                                                                                 |
 
 ## 他のコンテナからのトレース
@@ -105,18 +105,18 @@ docker network create <NETWORK_NAME>
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
-              --network <ネットワーク名> \
+              --network <NETWORK_NAME> \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_キー>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
 # アプリケーション
 docker run -d --name app \
-              --network <ネットワーク名> \
+              --network <NETWORK_NAME> \
               company/app:latest
 ```
 
@@ -126,15 +126,15 @@ docker run -d --name app \
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
-              --network "<ネットワーク名>" \
-              -e DD_API_KEY="<API_キー>" \
+              --network "<NETWORK_NAME>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              datadog/agent:latest
+              gcr.io/datadoghq/agent:latest
 
-# Application
+# アプリケーション
 docker run -d --name app \
-              --network "<ネットワーク名>" \
+              --network "<NETWORK_NAME>" \
               company/app:latest
 ```
 

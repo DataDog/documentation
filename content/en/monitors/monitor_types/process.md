@@ -41,7 +41,7 @@ After defining your search, a graph is displayed above the search inputs with an
 ### Set alert conditions
 
 * The count was `above`, `above or equal to`, `below`, or `below or equal to`
-* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
 Use thresholds to set a numeric value for triggering an alert. Datadog has two types of notifications (alert and warning). Live process monitors recover automatically based on the alert or warning threshold.
 

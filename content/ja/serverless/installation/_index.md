@@ -1,6 +1,8 @@
 ---
 title: サーバーレスモニタリングのインストール
 kind: ドキュメント
+aliases:
+  - /ja/serverless/installation/installing_the_library/
 further_reading:
   - link: serverless/installation/node
     tag: Documentation
@@ -15,7 +17,9 @@ further_reading:
 
 ### 2. Datadog Forwarder のインストール
 
-AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。**注**: [AWS インテグレーション][1] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
+AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要な [Datadog Forwarder Lambda 関数][2]をインストールします。
+
+**注**: [AWS インテグレーション][1] CloudFormation スタックの一部として Forwarder 関数がすでにインストールされている場合は、この手順をスキップしてください。
 
 ### 3. アプリケーションのインスツルメンテーション
 

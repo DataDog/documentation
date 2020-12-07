@@ -3,7 +3,21 @@ components:
   examples: {}
   headers: {}
   links: {}
-  parameters: {}
+  parameters:
+    SlackChannelNamePathParameter:
+      description: The name of the Slack channel being operated on.
+      in: path
+      name: channel_name
+      required: true
+      schema:
+        type: string
+    SlackTeamNamePathParameter:
+      description: Your Slack team name.
+      in: path
+      name: team_name
+      required: true
+      schema:
+        type: string
   requestBodies: {}
   responses: {}
   schemas:
@@ -223,6 +237,66 @@ components:
       required:
       - account_id
       - services
+      type: object
+    AWSNamespace:
+      description: The namespace associated with the tag filter entry.
+      enum:
+      - elb
+      - application_elb
+      - sqs
+      - rds
+      - custom
+      - network_elb
+      - lambda
+      type: string
+      x-enum-varnames:
+      - ELB
+      - APPLICATION_ELB
+      - SQS
+      - RDS
+      - CUSTOM
+      - NETWORK_ELB
+      - LAMBDA
+    AWSTagFilterCreateRequest:
+      description: The objects used to set an AWS tag filter.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '1234567'
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+        tag_filter_str:
+          description: The tag filter string.
+          example: prod*
+          type: string
+      type: object
+    AWSTagFilterDeleteRequest:
+      description: The objects used to delete an AWS tag filter entry.
+      properties:
+        aws_account_identifier:
+          description: The unique identifier of your AWS account.
+          example: FAKEAC0FAKEAC2FAKEAC
+          type: string
+        namespace:
+          $ref: '#/components/schemas/AWSNamespace'
+      type: object
+    AWSTagFilterListResponse:
+      description: An array of tag filter rules by `namespace` and tag filter string.
+      properties:
+        filters:
+          description: An array of tag filters.
+          items:
+            description: A list of tag filters.
+            properties:
+              namespace:
+                $ref: '#/components/schemas/AWSNamespace'
+              tag_filter_str:
+                description: The tag filter string.
+                example: prod*
+                type: string
+            type: object
+          type: array
       type: object
     AccessRole:
       default: st
@@ -617,7 +691,7 @@ components:
         compare_to:
           $ref: '#/components/schemas/WidgetCompareTo'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         increase_good:
           description: Whether to show increase as good.
           type: boolean
@@ -1063,7 +1137,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -1445,12 +1519,17 @@ components:
     EventAlertType:
       description: 'If an alert event is enabled, set its type.
 
-        For example, `error`, `warning`, `info`, and `success`.'
+        For example, `error`, `warning`, `info`, `success`, `user_update`,
+
+        `recommendation`, and `snapshot`.'
       enum:
       - error
       - warning
       - info
       - success
+      - user_update
+      - recommendation
+      - snapshot
       example: info
       type: string
       x-enum-varnames:
@@ -1458,6 +1537,9 @@ components:
       - WARNING
       - INFO
       - SUCCESS
+      - USER_UPDATE
+      - RECOMMENDATION
+      - SNAPSHOT
     EventCreateRequest:
       description: Object representing an event.
       properties:
@@ -2193,7 +2275,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -2467,12 +2549,30 @@ components:
             description: IPv4 prefix
             type: string
           type: array
+        prefixes_ipv4_by_location:
+          additionalProperties:
+            description: List of IPv4 prefixes.
+            items:
+              description: IPv4 prefix.
+              type: string
+            type: array
+          description: List of IPv4 prefixes by location.
+          type: object
         prefixes_ipv6:
           description: List of IPv6 prefixes.
           items:
             description: IPv6 prefix
             type: string
           type: array
+        prefixes_ipv6_by_location:
+          additionalProperties:
+            description: List of IPv6 prefixes.
+            items:
+              description: IPv6 prefix.
+              type: string
+            type: array
+          description: List of IPv6 prefixes by location.
+          type: object
       type: object
     IPPrefixesWebhooks:
       description: Available prefix information for the Webhook endpoints.
@@ -3166,7 +3266,6 @@ components:
           description: The number of log events you can send in this index per day
             before you are rate-limited.
           format: int64
-          readOnly: true
           type: integer
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
@@ -3193,9 +3292,11 @@ components:
           readOnly: true
           type: string
         num_retention_days:
-          description: The number of days before logs are deleted from this index.
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.'
           format: int64
-          readOnly: true
           type: integer
       required:
       - filter
@@ -3208,6 +3309,52 @@ components:
           items:
             $ref: '#/components/schemas/LogsIndex'
           type: array
+      type: object
+    LogsIndexUpdateRequest:
+      description: Object for updating a Datadog Log index.
+      properties:
+        daily_limit:
+          description: The number of log events you can send in this index per day
+            before you are rate-limited.
+          format: int64
+          type: integer
+        disable_daily_limit:
+          description: 'If true, sets the `daily_limit` value to null and the index
+            is not limited on a daily basis (any
+
+            specified `daily_limit` value in the request is ignored). If false or
+            omitted, the index''s current
+
+            `daily_limit` is maintained.'
+          type: boolean
+        exclusion_filters:
+          description: 'An array of exclusion objects. The logs are tested against
+            the query of each filter,
+
+            following the order of the array. Only the first matching active exclusion
+            matters,
+
+            others (if any) are ignored.'
+          items:
+            $ref: '#/components/schemas/LogsExclusion'
+          type: array
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        num_retention_days:
+          description: 'The number of days before logs are deleted from this index.
+            Available values depend on
+
+            retention plans specified in your organization''s contract/subscriptions.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all logs
+
+            already in this index. It may also affect billing.'
+          format: int64
+          type: integer
+      required:
+      - filter
       type: object
     LogsIndexesOrder:
       description: Object containing the ordered list of log index names.
@@ -3236,9 +3383,11 @@ components:
         your Organization.
       properties:
         index:
-          description: The log index on which the request is performed. For multi-index
-            organizations, the default is all live indexes. Historical indexes of
-            rehydrated logs must be specified.
+          description: 'The log index on which the request is performed. For multi-index
+            organizations,
+
+            the default is all live indexes. Historical indexes of rehydrated logs
+            must be specified.'
           example: retention-3,retention-15
           type: string
         limit:
@@ -3286,7 +3435,6 @@ components:
           - to
           type: object
       required:
-      - query
       - time
       type: object
     LogsListResponse:
@@ -4362,6 +4510,13 @@ components:
             \ to `false` for sparse metrics,\notherwise some evaluations are skipped.\
             \ Default is false."
           type: boolean
+        restricted_roles:
+          description: A list of role identifiers that can be pulled from the Roles
+            API. Cannot be used with `locked`.
+          items:
+            description: A role UUID.
+            type: string
+          type: array
         silenced:
           additionalProperties:
             description: ID of the downtime applied to the monitor.
@@ -4980,6 +5135,7 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       type: object
     OrganizationBilling:
+      deprecated: true
       description: A JSON array of billing type.
       example:
         type: parent_billing
@@ -5002,8 +5158,6 @@ components:
           $ref: '#/components/schemas/OrganizationSubscription'
       required:
       - name
-      - subscription
-      - billing
       type: object
     OrganizationCreateResponse:
       description: Response object for an organization creation.
@@ -5033,6 +5187,7 @@ components:
           $ref: '#/components/schemas/Organization'
       type: object
     OrganizationSubscription:
+      deprecated: true
       description: Subscription definition.
       example:
         type: pro
@@ -5189,7 +5344,7 @@ components:
             $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -5683,7 +5838,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -5799,7 +5954,7 @@ components:
           type: array
         type:
           default: gauge
-          description: The type of the metric.
+          description: The type of the metric either `count`, `gauge`, or `rate`.
           example: rate
           type: string
       required:
@@ -6282,7 +6437,7 @@ components:
       properties:
         account:
           description: Account to which the channel belongs to.
-          example: ''
+          example: jane.doe
           type: string
         channel_name:
           description: Your channel name.
@@ -6331,6 +6486,52 @@ components:
             $ref: '#/components/schemas/SlackServiceHook'
           type: array
       type: object
+    SlackIntegrationChannel:
+      description: The Slack channel configuration.
+      properties:
+        display:
+          description: Configuration options for what is shown in an alert event message.
+          properties:
+            message:
+              default: true
+              description: Show the main body of the alert event.
+              type: boolean
+            notified:
+              default: true
+              description: Show the list of @-handles in the alert event.
+              type: boolean
+            snapshot:
+              default: true
+              description: Show the alert event's snapshot image.
+              type: boolean
+            tags:
+              default: true
+              description: Show the scopes on which the monitor alerted.
+              type: boolean
+          type: object
+        name:
+          description: Your channel name.
+          example: '#general'
+          type: string
+      type: object
+    SlackIntegrationChannels:
+      description: A list of configured Slack channels.
+      example:
+      - display:
+          message: true
+          notified: true
+          snapshot: true
+          tags: true
+        name: '#channel_name_main_account'
+      - display:
+          message: true
+          notified: true
+          snapshot: false
+          tags: true
+        name: '#channel_name_doghouse'
+      items:
+        $ref: '#/components/schemas/SlackIntegrationChannel'
+      type: array
     SlackServiceHook:
       description: 'The service hook is generated for your Slack account in
 
@@ -6338,11 +6539,11 @@ components:
       properties:
         account:
           description: Your Slack account name.
-          example: ''
+          example: joe.doe
           type: string
         url:
           description: Your Slack service hook URL.
-          example: ''
+          example: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
           type: string
       required:
       - account
@@ -7179,6 +7380,82 @@ components:
       - TAB_1
       - TAB_2
       - TAB_3
+    SyntheticsPrivateLocation:
+      description: Object containing information about the private location to create.
+      properties:
+        description:
+          description: Description of the private location.
+          example: Description of private location
+          type: string
+        id:
+          description: Unique identifier of the private location.
+          readOnly: true
+          type: string
+        name:
+          description: Name of the private location.
+          example: New private location
+          type: string
+        secrets:
+          description: Secrets for the private location. Only present in the response
+            when creating the private location.
+          properties:
+            authentication:
+              description: Authentication part of the secrets.
+              properties:
+                id:
+                  description: Access key for the private location.
+                  readOnly: true
+                  type: string
+                key:
+                  description: Secret access key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+            config_decryption:
+              description: Private key for the private location.
+              properties:
+                key:
+                  description: Private key for the private location.
+                  readOnly: true
+                  type: string
+              type: object
+          readOnly: true
+          type: object
+        tags:
+          description: Array of tags attached to the private location.
+          example:
+          - team:front
+          items:
+            description: A tag attached to the private location.
+            example: team:front
+            type: string
+          type: array
+      required:
+      - name
+      - description
+      - tags
+      type: object
+    SyntheticsPrivateLocationCreationResponse:
+      description: Object that contains the new private location, the public key for
+        result encryption, and the configuration skeleton.
+      properties:
+        config:
+          description: Configuration skeleton for the private location. See installation
+            instructions of the private location on how to use this configuration.
+          type: object
+        private_location:
+          $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        result_encryption:
+          description: Public key for the result encryption.
+          properties:
+            id:
+              description: Fingerprint for the encryption key.
+              type: string
+            key:
+              description: Public key for result encryption.
+              type: string
+          type: object
+      type: object
     SyntheticsResource:
       description: Object describing a resource which is the combination of requests
         (fetch, XHR) and Assets (HTML, CSS, JS, images).
@@ -7939,7 +8216,7 @@ components:
             $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         limit:
           description: For metric queries, the number of lines to show in the table.
             Only one request should have this property.
@@ -8064,7 +8341,7 @@ components:
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         metadata:
@@ -8158,7 +8435,7 @@ components:
           minItems: 1
           type: array
         event_query:
-          $ref: '#/components/schemas/EventQueryDefinition'
+          $ref: '#/components/schemas/LogQueryDefinition'
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -8196,6 +8473,215 @@ components:
           items:
             $ref: '#/components/schemas/UsageAnalyzedLogsHour'
           type: array
+      type: object
+    UsageAttributionAggregates:
+      description: An array of available aggregates.
+      items:
+        $ref: '#/components/schemas/UsageAttributionAggregatesBody'
+      type: array
+    UsageAttributionAggregatesBody:
+      description: The object containing the aggregates.
+      properties:
+        agg_type:
+          description: The aggregate type.
+          example: sum
+          type: string
+        field:
+          description: The field.
+          example: custom_timeseries_usage
+          type: string
+        value:
+          description: The value for a given field.
+          format: double
+          type: number
+      type: object
+    UsageAttributionBody:
+      description: Usage Summary by tag for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
+          format: date-time
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tags:
+          $ref: '#/components/schemas/UsageAttributionTagNames'
+        updated_at:
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
+          type: string
+        values:
+          $ref: '#/components/schemas/UsageAttributionValues'
+      type: object
+    UsageAttributionMetadata:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/UsageAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/UsageAttributionPagination'
+      type: object
+    UsageAttributionPagination:
+      description: The page count for the current pagination.
+      properties:
+        limit:
+          description: Maximum amount of records to be returned.
+          format: int64
+          type: integer
+        offset:
+          description: Records to be skipped before beginning to return.
+          format: int64
+          type: integer
+        sort_direction:
+          description: Direction to sort by.
+          type: string
+        sort_name:
+          description: Field to sort by.
+          type: string
+        total_number_of_records:
+          description: Total number of records.
+          format: int64
+          type: integer
+      type: object
+    UsageAttributionResponse:
+      description: Response containing the Usage Summary by tag(s).
+      properties:
+        metadata:
+          $ref: '#/components/schemas/UsageAttributionMetadata'
+        usage:
+          description: Get Usage Summary by tag(s).
+          items:
+            $ref: '#/components/schemas/UsageAttributionBody'
+          type: array
+      type: object
+    UsageAttributionSort:
+      default: custom_timeseries_usage
+      description: The field to sort by.
+      enum:
+      - api_percentage
+      - snmp_usage
+      - lambda_percentage
+      - apm_host_usage
+      - api_usage
+      - container_usage
+      - custom_timeseries_percentage
+      - container_percentage
+      - lambda_usage
+      - apm_host_percentage
+      - npm_host_percentage
+      - browser_percentage
+      - browser_usage
+      - infra_host_percentage
+      - snmp_percentage
+      - npm_host_usage
+      - infra_host_usage
+      - custom_timeseries_usage
+      type: string
+      x-enum-varnames:
+      - API_PERCENTAGE
+      - SNMP_USAGE
+      - LAMBDA_PERCENTAGE
+      - APM_HOST_USAGE
+      - API_USAGE
+      - CONTAINER_USAGE
+      - CUSTOM_TIMESERIES_PERCENTAGE
+      - CONTAINER_PERCENTAGE
+      - LAMBDA_USAGE
+      - APM_HOST_PERCENTAGE
+      - NPM_HOST_PERCENTAGE
+      - BROWSER_PERCENTAGE
+      - BROWSER_USAGE
+      - INFRA_HOST_PERCENTAGE
+      - SNMP_PERCENTAGE
+      - NPM_HOST_USAGE
+      - INFRA_HOST_USAGE
+      - CUSTOM_TIMESERIES_USAGE
+    UsageAttributionTagNames:
+      additionalProperties:
+        description: A list of tag values.
+        items:
+          description: A given tag in a list.
+          example: datadog-integrations-lab
+          type: string
+        type: array
+      description: Usage Summary by tag name.
+      type: object
+    UsageAttributionValues:
+      description: Fields in Usage Summary by tag(s).
+      properties:
+        api_percentage:
+          description: The percentage of synthetic API test usage by tag(s).
+          format: double
+          type: number
+        api_usage:
+          description: The synthetic API test usage by tag(s).
+          format: double
+          type: number
+        apm_host_percentage:
+          description: The percentage of APM host usage by tag(s).
+          format: double
+          type: number
+        apm_host_usage:
+          description: The APM host usage by tag(s).
+          format: double
+          type: number
+        browser_percentage:
+          description: The percentage of synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        browser_usage:
+          description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        container_percentage:
+          description: The percentage of container usage by tag(s).
+          format: double
+          type: number
+        container_usage:
+          description: The container usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_percentage:
+          description: The percentage of custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_timeseries_usage:
+          description: The custom metrics usage by tag(s).
+          format: double
+          type: number
+        infra_host_percentage:
+          description: The percentage of infrastructure host usage by tag(s).
+          format: double
+          type: number
+        infra_host_usage:
+          description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        lambda_percentage:
+          description: The percentage of lambda function usage by tag(s).
+          format: double
+          type: number
+        lambda_usage:
+          description: The lambda function usage by tag(s).
+          format: double
+          type: number
+        npm_host_percentage:
+          description: The percentage of network host usage by tag(s).
+          format: double
+          type: number
+        npm_host_usage:
+          description: The network host usage by tag(s).
+          format: double
+          type: number
+        snmp_percentage:
+          description: The percentage of network device usage by tag(s).
+          format: double
+          type: number
+        snmp_usage:
+          description: The network device usage by tag(s).
+          format: double
+          type: number
       type: object
     UsageBillableSummaryBody:
       description: Response with properties for each aggregated usage type.
@@ -8458,6 +8944,75 @@ components:
           description: An array of objects related to host usage.
           items:
             $ref: '#/components/schemas/UsageHostHour'
+          type: array
+      type: object
+    UsageIncidentManagementHour:
+      description: Incident management usage for a given organization for a given
+        hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        monthly_active_users:
+          description: Contains the total number monthly active users from the start
+            of the given hour's month until the given hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIncidentManagementResponse:
+      description: Response containing the incident management usage for each hour
+        for a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for incident management.
+          items:
+            $ref: '#/components/schemas/UsageIncidentManagementHour'
+          type: array
+      type: object
+    UsageIndexedSpansHour:
+      description: The hours of indexed spans usage.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        indexed_events_count:
+          description: Contains the number of spans indexed.
+          format: int64
+          type: integer
+      type: object
+    UsageIndexedSpansResponse:
+      description: A response containing indexed spans usage.
+      properties:
+        usage:
+          description: Array with the number of hourly traces indexed for a given
+            organization.
+          items:
+            $ref: '#/components/schemas/UsageIndexedSpansHour'
+          type: array
+      type: object
+    UsageIngestedSpansHour:
+      description: Ingested spans usage for a given organization for a given hour.
+      properties:
+        hour:
+          description: The hour for the usage.
+          format: date-time
+          type: string
+        ingested_events_bytes:
+          description: Contains the total number of bytes ingested during a given
+            hour.
+          format: int64
+          type: integer
+      type: object
+    UsageIngestedSpansResponse:
+      description: Response containing the ingested spans usage for each hour for
+        a given organization.
+      properties:
+        usage:
+          description: Get hourly usage for ingested spans.
+          items:
+            $ref: '#/components/schemas/UsageIngestedSpansHour'
           type: array
       type: object
     UsageLambdaHour:
@@ -8816,7 +9371,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for all organizations.
           format: int64
           type: integer
@@ -8830,7 +9385,7 @@ components:
           format: date-time
           type: string
         fargate_tasks_count_avg:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-watermark of all Fargate tasks over all hours
             in the current date for all organizations.
           format: int64
           type: integer
@@ -8842,6 +9397,11 @@ components:
         gcp_host_top99p:
           description: Shows the 99th percentile of all GCP hosts over all hours in
             the current date for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
@@ -8950,7 +9510,7 @@ components:
           format: int64
           type: integer
         container_hwm:
-          description: Shows the high watermark of all distinct containers over all
+          description: Shows the high-water mark of all distinct containers over all
             hours in the current date for the given org.
           format: int64
           type: integer
@@ -8964,7 +9524,7 @@ components:
           format: int64
           type: integer
         fargate_tasks_count_hwm:
-          description: Shows the high watermark of all Fargate tasks over all hours
+          description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -8976,6 +9536,11 @@ components:
         id:
           description: The organization id.
           type: string
+        incident_management_monthly_active_users_hwm:
+          description: Shows the high-water mark of incident management monthly active
+            users over all hours in the current date for the given org.
+          format: int64
+          type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
             current date for the given org.
@@ -9048,152 +9613,157 @@ components:
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current month(s) for all organizations.
+            1 or more times each hour in the current months for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
           description: Shows the sum of all AWS Lambda invocations over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         azure_app_service_top99p_sum:
           description: Shows the 99th percentile of all Azure app services over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
           description: Shows the 99th percentile of all Azure hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         container_hwm_sum:
-          description: Shows the high watermark of all distinct containers over all
-            hours in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all distinct containers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current month(s) for all organizations.
+            hours in the current months for all organizations.
           format: int64
           type: integer
         end_date:
-          description: Shows the last date of usage in the current month(s) for all
+          description: Shows the last date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         fargate_tasks_count_avg_sum:
           description: Shows the average of all Fargate tasks over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm_sum:
-          description: Shows the high watermark of all Fargate tasks over all hours
-            in the current month(s) for all organizations.
+          description: Shows the sum of the high-water marks of all Fargate tasks
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         gcp_host_top99p_sum:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
+          format: int64
+          type: integer
+        incident_management_monthly_active_users_hwm_sum:
+          description: Shows sum of the the high-water marks of incident management
+            monthly active users in the current months for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all organizations.
+            current months for all organizations.
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month(s) for
-            all organizations for which all usages were calculated.
+          description: Shows the the most recent hour in the current months for all
+            organizations for which all usages were calculated.
           format: date-time
           type: string
         mobile_rum_session_count_agg_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month(s) for all organizations.
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
           description: Shows the average number of profiled containers over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all browser RUM Sessions over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         start_date:
-          description: Shows the first date of usage in the current month(s) for all
+          description: Shows the first date of usage in the current months for all
             organizations.
           format: date-time
           type: string
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current month(s) for all organizations.
+            in the current months for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all Indexed Spans indexed over all hours in
-            the current month(s) for all organizations.
+            the current months for all organizations.
           format: int64
           type: integer
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all tracing without limits bytes ingested
-            over all hours in the current month(s) for all organizations.
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -10276,6 +10846,8 @@ paths:
       summary: List IP Ranges
       tags:
       - IP Ranges
+      x-undo:
+        type: safe
   /api/v1/api_key:
     get:
       description: Get all API keys available for your account.
@@ -10296,6 +10868,8 @@ paths:
       summary: Get all API keys
       tags:
       - Key Management
+      x-undo:
+        type: safe
     post:
       description: Creates an API key with a given name.
       operationId: CreateAPIKey
@@ -10328,6 +10902,12 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAPIKey
+        parameters:
+        - name: key
+          source: <RESPONSE_PATH>
+        type: unsafe
   /api/v1/api_key/{key}:
     delete:
       description: Delete a given API key.
@@ -10367,6 +10947,8 @@ paths:
       summary: Delete an API key
       tags:
       - Key Management
+      x-undo:
+        type: idempotent
     get:
       description: Get a given API key.
       operationId: GetAPIKey
@@ -10399,6 +10981,8 @@ paths:
       summary: Get API key
       tags:
       - Key Management
+      x-undo:
+        type: safe
     put:
       description: Edit an API key name.
       operationId: UpdateAPIKey
@@ -10444,6 +11028,8 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/application_key:
     get:
       description: Get all application keys available for your Datadog account.
@@ -10464,6 +11050,8 @@ paths:
       summary: Get all application keys
       tags:
       - Key Management
+      x-undo:
+        type: safe
     post:
       description: Create an application key with a given name.
       operationId: CreateApplicationKey
@@ -10502,6 +11090,12 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteApplicationKey
+        parameters:
+        - name: key
+          source: <RESPONSE_PATH>
+        type: unsafe
   /api/v1/application_key/{key}:
     delete:
       description: Delete a given application key.
@@ -10535,6 +11129,8 @@ paths:
       summary: Delete an application key
       tags:
       - Key Management
+      x-undo:
+        type: idempotent
     get:
       description: Get a given application key.
       operationId: GetApplicationKey
@@ -10567,6 +11163,8 @@ paths:
       summary: Get an application key
       tags:
       - Key Management
+      x-undo:
+        type: safe
     put:
       description: Edit an application key name.
       operationId: UpdateApplicationKey
@@ -10618,6 +11216,8 @@ paths:
       tags:
       - Key Management
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/check_run:
     post:
       description: 'Submit a list of Service Checks.
@@ -10669,6 +11269,8 @@ paths:
       tags:
       - Service Checks
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/daily_custom_reports:
     get:
       description: Get daily custom reports.
@@ -10717,6 +11319,8 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -10753,6 +11357,8 @@ paths:
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -10781,6 +11387,8 @@ paths:
       summary: Get all dashboards
       tags:
       - Dashboards
+      x-undo:
+        type: safe
     post:
       description: Create a dashboard using the specified options.
       operationId: CreateDashboard
@@ -10814,6 +11422,12 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteDashboard
+        parameters:
+        - name: dashboard_id
+          source: id
+        type: unsafe
   /api/v1/dashboard/lists/manual:
     get:
       description: Fetch all of your existing dashboard list definitions.
@@ -10834,6 +11448,8 @@ paths:
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     post:
       description: Create an empty dashboard list.
       operationId: CreateDashboardList
@@ -10867,6 +11483,12 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteDashboardList
+        parameters:
+        - name: list_id
+          source: id
+        type: unsafe
   /api/v1/dashboard/lists/manual/{list_id}:
     delete:
       description: Delete a dashboard list.
@@ -10901,6 +11523,8 @@ paths:
       summary: Delete a dashboard list
       tags:
       - Dashboard Lists
+      x-undo:
+        type: idempotent
     get:
       description: Fetch an existing dashboard list's definition.
       operationId: GetDashboardList
@@ -10934,6 +11558,8 @@ paths:
       summary: Get a dashboard list
       tags:
       - Dashboard Lists
+      x-undo:
+        type: safe
     put:
       description: Update the name of a dashboard list.
       operationId: UpdateDashboardList
@@ -10981,6 +11607,8 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/dashboard/{dashboard_id}:
     delete:
       description: Delete a dashboard using the specified ID.
@@ -11014,6 +11642,8 @@ paths:
       summary: Delete a dashboard
       tags:
       - Dashboards
+      x-undo:
+        type: idempotent
     get:
       description: Get a dashboard using the specified ID.
       operationId: GetDashboard
@@ -11046,6 +11676,8 @@ paths:
       summary: Get a dashboard
       tags:
       - Dashboards
+      x-undo:
+        type: safe
     put:
       description: Update a dashboard using the specified ID.
       operationId: UpdateDashboard
@@ -11092,6 +11724,8 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -11121,6 +11755,8 @@ paths:
       summary: Get all downtimes
       tags:
       - Downtimes
+      x-undo:
+        type: safe
     post:
       description: Schedule a downtime.
       operationId: CreateDowntime
@@ -11154,6 +11790,10 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
       description: Delete all downtimes that match the scope of `X`.
@@ -11194,6 +11834,8 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
       description: Cancel a downtime.
@@ -11225,6 +11867,8 @@ paths:
       summary: Cancel a downtime
       tags:
       - Downtimes
+      x-undo:
+        type: idempotent
     get:
       description: Get downtime detail by `downtime_id`.
       operationId: GetDowntime
@@ -11259,6 +11903,8 @@ paths:
       summary: Get a downtime
       tags:
       - Downtimes
+      x-undo:
+        type: safe
     put:
       description: Update a single downtime by `downtime_id`.
       operationId: UpdateDowntime
@@ -11308,6 +11954,8 @@ paths:
       tags:
       - Downtimes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/events:
     get:
       description: "The event stream can be queried and filtered by time, priority,\
@@ -11386,6 +12034,8 @@ paths:
       summary: Query the event stream
       tags:
       - Events
+      x-undo:
+        type: safe
     post:
       description: 'This endpoint allows you to post events to the stream.
 
@@ -11417,6 +12067,8 @@ paths:
       tags:
       - Events
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/events/{event_id}:
     get:
       description: "This endpoint allows you to query for event details.\n\n**Note**:\
@@ -11453,6 +12105,8 @@ paths:
       summary: Get an event
       tags:
       - Events
+      x-undo:
+        type: safe
   /api/v1/graph/embed:
     get:
       description: Gets a list of previously created embeddable graphs.
@@ -11473,6 +12127,8 @@ paths:
       summary: Get all embeds
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
     post:
       description: 'Creates a new embeddable graph.
 
@@ -11492,6 +12148,7 @@ paths:
             schema:
               $ref: '#/components/schemas/EmbeddableGraphPayload'
         description: Embeddable Graph body
+        required: true
       responses:
         '200':
           content:
@@ -11515,6 +12172,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/graph/embed/{embed_id}:
     get:
       description: Get the HTML fragment for a previously generated embed with `embed_id`.
@@ -11548,6 +12209,8 @@ paths:
       summary: Get specific embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/embed/{embed_id}/enable:
     get:
       description: Enable a specified embed.
@@ -11587,6 +12250,8 @@ paths:
       summary: Enable embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
     get:
       description: Revoke a specified embed.
@@ -11626,6 +12291,8 @@ paths:
       summary: Revoke embed
       tags:
       - Embeddable Graphs
+      x-undo:
+        type: safe
   /api/v1/graph/snapshot:
     get:
       description: 'Take graph snapshots.
@@ -11698,6 +12365,8 @@ paths:
       summary: Take graph snapshots
       tags:
       - Snapshots
+      x-undo:
+        type: safe
   /api/v1/host/{host_name}/mute:
     post:
       description: Mute a host.
@@ -11715,6 +12384,7 @@ paths:
             schema:
               $ref: '#/components/schemas/HostMuteSettings'
         description: Mute a host request body.
+        required: true
       responses:
         '200':
           content:
@@ -11738,6 +12408,8 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/host/{host_name}/unmute:
     post:
       description: Unmutes a host. This endpoint takes no JSON arguments.
@@ -11772,6 +12444,8 @@ paths:
       tags:
       - Hosts
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/hosts:
     get:
       description: 'This endpoint allows searching for hosts by name, alias, or tag.
@@ -11859,6 +12533,8 @@ paths:
       summary: Get all hosts for your organization
       tags:
       - Hosts
+      x-undo:
+        type: safe
   /api/v1/hosts/totals:
     get:
       description: 'This endpoint returns the total number of active and up hosts
@@ -11898,6 +12574,8 @@ paths:
       summary: Get the total number of active hosts
       tags:
       - Hosts
+      x-undo:
+        type: safe
   /api/v1/integration/aws:
     delete:
       description: Delete a Datadog-AWS integration matching the specified `account_id`
@@ -11939,6 +12617,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
@@ -11983,6 +12663,8 @@ paths:
       summary: List all AWS integrations
       tags:
       - AWS Integration
+      x-undo:
+        type: safe
     post:
       description: 'Create a Datadog-Amazon Web Services integration.
 
@@ -12028,6 +12710,10 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSAccount
+        parameters: []
+        type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
@@ -12090,6 +12776,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/aws/available_namespace_rules:
     get:
       description: List all namespace rules for a given Datadog-AWS integration. This
@@ -12118,6 +12806,179 @@ paths:
       summary: List namespace rules
       tags:
       - AWS Integration
+      x-undo:
+        type: safe
+  /api/v1/integration/aws/filtering:
+    delete:
+      description: Delete a tag filtering entry.
+      operationId: DeleteAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterDeleteRequest'
+        description: Delete a tag filtering entry for a given AWS account and `dd-aws`
+          namespace.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Delete a tag filtering entry
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+    get:
+      description: Get all AWS tag filters.
+      operationId: ListAWSTagFilters
+      parameters:
+      - description: Only return AWS filters that matches this `account_id`.
+        in: query
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSTagFilterListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Get all AWS tag filters
+      tags:
+      - AWS Integration
+      x-undo:
+        type: safe
+    post:
+      description: Set an AWS tag filter.
+      operationId: CreateAWSTagFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSTagFilterCreateRequest'
+        description: 'Set an AWS tag filter using an `aws_account_identifier`, `namespace`,
+          and filtering string.
+
+          Namespace options are `application_elb`, `elb`, `lambda`, `network_elb`,
+          `rds`, `sqs`, and `custom`.'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for our customers.
+            enum:
+            - datadoghq.com
+          subdomain:
+            default: api
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: api.datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      summary: Set an AWS tag filter
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSTagFilter
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/generate_new_external_id:
     put:
       description: Generate a new AWS external ID for a given AWS account ID and role
@@ -12157,6 +13018,8 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/aws/logs:
     delete:
       description: Delete a Datadog-AWS logs configuration by removing the specific
@@ -12192,6 +13055,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
@@ -12230,6 +13095,8 @@ paths:
       summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
+      x-undo:
+        type: safe
     post:
       description: Attach the Lambda ARN of the Lambda created for the Datadog-AWS
         log collection to your AWS account ID to enable log collection.
@@ -12264,6 +13131,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAWSLambdaARN
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/logs/check_async:
     post:
       description: 'Test if permissions are present to add a log-forwarding triggers
@@ -12314,6 +13185,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/aws/logs/services:
     get:
       description: Get the list of current AWS services that Datadog offers automatic
@@ -12351,6 +13224,8 @@ paths:
       summary: Get list of AWS log ready services
       tags:
       - AWS Logs Integration
+      x-undo:
+        type: safe
     post:
       description: Enable automatic log collection for a list of services. This should
         be run after running `CreateAWSLambdaARN` to save the configuration.
@@ -12385,6 +13260,9 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        type: unsafe
   /api/v1/integration/aws/logs/services_async:
     post:
       description: "Test if permissions are present to add log-forwarding triggers\
@@ -12426,6 +13304,8 @@ paths:
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/azure:
     delete:
       description: Delete a given Datadog-Azure integration from your Datadog account.
@@ -12461,6 +13341,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-Azure integrations configured in your Datadog
         account.
@@ -12487,6 +13369,8 @@ paths:
       summary: List all Azure integrations
       tags:
       - Azure Integration
+      x-undo:
+        type: safe
     post:
       description: 'Create a Datadog-Azure integration.
 
@@ -12534,6 +13418,10 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteAzureIntegration
+        parameters: []
+        type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
         and `client_id`.
@@ -12575,6 +13463,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/azure/host_filters:
     post:
       description: Update the defined list of host filters for a given Datadog-Azure
@@ -12611,6 +13501,8 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/gcp:
     delete:
       description: Delete a given Datadog-GCP integration.
@@ -12646,6 +13538,8 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
     get:
       description: List all Datadog-GCP integrations configured in your Datadog account.
       operationId: ListGCPIntegration
@@ -12671,6 +13565,8 @@ paths:
       summary: List all GCP integrations
       tags:
       - GCP Integration
+      x-undo:
+        type: safe
     post:
       description: Create a Datadog-GCP integration.
       operationId: CreateGCPIntegration
@@ -12705,6 +13601,10 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteGCPIntegration
+        parameters: []
+        type: unsafe
     put:
       description: 'Update a Datadog-GCP integrations host_filters and/or auto-mute.
 
@@ -12746,6 +13646,8 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
     post:
       description: Create a new service object in the PagerDuty integration.
@@ -12780,6 +13682,12 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePagerDutyIntegrationService
+        parameters:
+        - name: service_name
+          source: service_name
+        type: unsafe
   /api/v1/integration/pagerduty/configuration/services/{service_name}:
     delete:
       description: Delete a single service object in the Datadog-PagerDuty integration.
@@ -12809,6 +13717,8 @@ paths:
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
+      x-undo:
+        type: idempotent
     get:
       description: Get service name in the Datadog-PagerDuty integration.
       operationId: GetPagerDutyIntegrationService
@@ -12841,6 +13751,8 @@ paths:
       summary: Get a single service object
       tags:
       - PagerDuty Integration
+      x-undo:
+        type: safe
     put:
       description: Update a single service object in the Datadog-PagerDuty integration.
       operationId: UpdatePagerDutyIntegrationService
@@ -12883,8 +13795,11 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/slack:
     delete:
+      deprecated: true
       description: Delete a Datadog-Slack integration.
       operationId: DeleteSlackIntegration
       responses:
@@ -12899,7 +13814,10 @@ paths:
       summary: Delete a Slack integration
       tags:
       - Slack Integration
+      x-undo:
+        type: idempotent
     get:
+      deprecated: true
       description: Get all information about your Datadog-Slack integration.
       operationId: GetSlackIntegration
       responses:
@@ -12930,7 +13848,10 @@ paths:
       summary: Get info about a Slack integration
       tags:
       - Slack Integration
+      x-undo:
+        type: safe
     post:
+      deprecated: true
       description: 'Create a Datadog-Slack integration. Once created, add a channel
         to it with the
 
@@ -12967,7 +13888,12 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSlackIntegration
+        parameters: []
+        type: unsafe
     put:
+      deprecated: true
       description: 'Add channels to your existing Datadog-Slack integration.
 
 
@@ -13001,6 +13927,206 @@ paths:
       tags:
       - Slack Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels:
+    get:
+      description: Get a list of all channels configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannels
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannels'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get all channels in a Slack integration
+      tags:
+      - Slack Integration
+      x-undo:
+        type: safe
+    post:
+      description: Add a channel to your Datadog-Slack integration.
+      operationId: CreateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing Slack channel to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Create a Slack integration channel
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: RemoveSlackIntegrationChannel
+        parameters:
+        - name: team_name
+          source: TODO
+        - name: channel_name
+          source: name
+        type: unsafe
+  /api/v1/integration/slack/configuration/accounts/{team_name}/channels/{channel_name}:
+    delete:
+      description: Remove a channel from your Datadog-Slack integration.
+      operationId: RemoveSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '204':
+          description: The channel was removed successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Remove a Slack integration channel
+      tags:
+      - Slack Integration
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a channel configured for your Datadog-Slack integration.
+      operationId: GetSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a Slack integration channel
+      tags:
+      - Slack Integration
+      x-undo:
+        type: safe
+    patch:
+      description: Update a channel used in your Datadog-Slack integration.
+      operationId: UpdateSlackIntegrationChannel
+      parameters:
+      - $ref: '#/components/parameters/SlackTeamNamePathParameter'
+      - $ref: '#/components/parameters/SlackChannelNamePathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackIntegrationChannel'
+        description: Payload describing fields and values to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackIntegrationChannel'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a Slack integration channel
+      tags:
+      - Slack Integration
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
     post:
       description: Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -13035,6 +14161,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteWebhooksIntegrationCustomVariable
+        parameters:
+        - name: custom_variable_name
+          source: name
+        type: unsafe
   /api/v1/integration/webhooks/configuration/custom-variables/{custom_variable_name}:
     delete:
       description: Deletes the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
@@ -13064,6 +14196,8 @@ paths:
       summary: Delete a custom variable
       tags:
       - Webhooks Integration
+      x-undo:
+        type: idempotent
     get:
       description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
@@ -13107,6 +14241,8 @@ paths:
       summary: Get a custom variable
       tags:
       - Webhooks Integration
+      x-undo:
+        type: safe
     put:
       description: Updates the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
       operationId: UpdateWebhooksIntegrationCustomVariable
@@ -13153,6 +14289,8 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
     post:
       description: Creates an endpoint with the name `<WEBHOOK_NAME>`.
@@ -13187,6 +14325,12 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteWebhooksIntegration
+        parameters:
+        - name: webhook_name
+          source: name
+        type: unsafe
   /api/v1/integration/webhooks/configuration/webhooks/{webhook_name}:
     delete:
       description: Deletes the endpoint with the name `<WEBHOOK NAME>`.
@@ -13216,6 +14360,8 @@ paths:
       summary: Delete a webhook
       tags:
       - Webhooks Integration
+      x-undo:
+        type: idempotent
     get:
       description: Gets the content of the webhook with the name `<WEBHOOK_NAME>`.
       operationId: GetWebhooksIntegration
@@ -13254,6 +14400,8 @@ paths:
       summary: Get a webhook integration
       tags:
       - Webhooks Integration
+      x-undo:
+        type: safe
     put:
       description: Updates the endpoint with the name `<WEBHOOK_NAME>`.
       operationId: UpdateWebhooksIntegration
@@ -13300,6 +14448,8 @@ paths:
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/logs-queries/list:
     post:
       description: 'List endpoint returns logs that match a log search query.
@@ -13348,6 +14498,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/logs/config/index-order:
     get:
       description: Get the current order of your log indexes. This endpoint takes
@@ -13369,6 +14521,8 @@ paths:
       summary: Get indexes order
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -13384,6 +14538,7 @@ paths:
             schema:
               $ref: '#/components/schemas/LogsIndexesOrder'
         description: Object containing the new ordered list of index names
+        required: true
       responses:
         '200':
           content:
@@ -13407,6 +14562,8 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -13432,6 +14589,8 @@ paths:
       summary: Get all indexes
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -13469,6 +14628,8 @@ paths:
       summary: Get an index
       tags:
       - Logs Indexes
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -13489,8 +14650,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LogsIndex'
-        description: Object containing the new `LogsIndex`.
+              $ref: '#/components/schemas/LogsIndexUpdateRequest'
+        description: Object containing the new `LogsIndexUpdateRequest`.
+        required: true
       responses:
         '200':
           content:
@@ -13520,6 +14682,8 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
       x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -13545,6 +14709,8 @@ paths:
       summary: Get pipeline order
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     put:
       description: 'Update the order of your pipelines. Since logs are processed sequentially,
         reordering a pipeline may change
@@ -13594,6 +14760,8 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/logs/config/pipelines:
     get:
       description: 'Get all pipelines from your organization.
@@ -13616,6 +14784,8 @@ paths:
       summary: Get all pipelines
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     post:
       description: Create a pipeline in your organization.
       operationId: CreateLogsPipeline
@@ -13649,6 +14819,12 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteLogsPipeline
+        parameters:
+        - name: pipeline_id
+          source: id
+        type: unsafe
   /api/v1/logs/config/pipelines/{pipeline_id}:
     delete:
       description: 'Delete a given pipeline from your organization.
@@ -13680,6 +14856,8 @@ paths:
       summary: Delete a pipeline
       tags:
       - Logs Pipelines
+      x-undo:
+        type: idempotent
     get:
       description: 'Get a specific pipeline from your organization.
 
@@ -13714,6 +14892,8 @@ paths:
       summary: Get a pipeline
       tags:
       - Logs Pipelines
+      x-undo:
+        type: safe
     put:
       description: "Update a given pipeline configuration to change it\u2019s processors\
         \ or their order.\n\n**Note**: Using this method updates your pipeline configuration\
@@ -13757,6 +14937,8 @@ paths:
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/metrics:
     get:
       description: Get the list of actively reporting metrics from a given time until
@@ -13800,6 +14982,8 @@ paths:
       summary: Get active metrics list
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/metrics/{metric_name}:
     get:
       description: Get metadata about a specific metric.
@@ -13833,6 +15017,8 @@ paths:
       summary: Get metric metadata
       tags:
       - Metrics
+      x-undo:
+        type: safe
     put:
       description: Edit metadata of a specific metric. Find out more about [supported
         types](https://docs.datadoghq.com/developers/metrics).
@@ -13880,6 +15066,8 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor:
     get:
       description: Get details about the specified monitor from your organization.
@@ -13976,6 +15164,8 @@ paths:
       summary: Get all monitor details
       tags:
       - Monitors
+      x-undo:
+        type: safe
     post:
       description: 'Create a monitor using the specified options.
 
@@ -14031,8 +15221,9 @@ paths:
 
         - `time_aggr`: avg, sum, max, min, change, or pct_change
 
-        - `time_window`: `last_#m` (with `#` being 5, 10, 15, or 30) or `last_#h`(with
-        `#` being 1, 2, or 4), or `last_1d`
+        - `time_window`: `last_#m` (with `#` between 1 and 2880 depending on the monitor
+        type) or `last_#h`(with `#` between 1 and 48 depending on the monitor type),
+        or `last_1d`
 
         - `space_aggr`: avg, sum, min, or max
 
@@ -14056,8 +15247,9 @@ paths:
 
         - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/monitor_types/#define-the-conditions)
 
-        - `time_window` last\_#m (1, 5, 10, 15, or 30), last\_#h (1, 2, or 4), or
-        last_#d (1 or 2)
+        - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
+        last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
+        2)
 
         - `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
@@ -14113,8 +15305,8 @@ paths:
         - **`rollup`** the stats roll-up method. `count` is the only supported method
         now.
 
-        - **`last`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported
-        timeframes: s, m, h and d. This value should not exceed 48 hours.
+        - **`last`** the timeframe to roll up the counts. Examples: 45m, 4h. Supported
+        timeframes: m, h and d. This value should not exceed 48 hours.
 
 
         **Process Alert Query**
@@ -14131,7 +15323,7 @@ paths:
 
         - **`tags`** one or more tags (comma-separated)
 
-        - **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h.
+        - **`timeframe`** the timeframe to roll up the counts. Examples: 10m, 4h.
         Supported timeframes: s, m, h and d
 
         - **`operator`** <, <=, >, >=, ==, or !=
@@ -14157,7 +15349,7 @@ paths:
         - **`measure`** For `avg` and cardinality `rollup_method` - specify the measure
         or the facet name you want to use.
 
-        - **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)
+        - **`time_window`** #m (between 1 and 1440), #h (between 1 and 24)
 
         - **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
@@ -14219,6 +15411,12 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteMonitor
+        parameters:
+        - name: monitor_id
+          source: id
+        type: unsafe
   /api/v1/monitor/can_delete:
     get:
       description: Check if the given monitors can be deleted.
@@ -14261,6 +15459,8 @@ paths:
       summary: Check if a monitor can be deleted
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/groups/search:
     get:
       description: Search and filter your monitor groups details.
@@ -14340,6 +15540,8 @@ paths:
       summary: Monitors group search
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/search:
     get:
       description: Search and filter your monitors details.
@@ -14419,6 +15621,8 @@ paths:
       summary: Monitors search
       tags:
       - Monitors
+      x-undo:
+        type: safe
   /api/v1/monitor/validate:
     post:
       description: Validate the monitor provided in the request.
@@ -14453,6 +15657,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor/{monitor_id}:
     delete:
       description: Delete the specified monitor
@@ -14506,6 +15712,8 @@ paths:
       summary: Delete a monitor
       tags:
       - Monitors
+      x-undo:
+        type: idempotent
     get:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
@@ -14552,6 +15760,8 @@ paths:
       summary: Get a monitor's details
       tags:
       - Monitors
+      x-undo:
+        type: safe
     put:
       description: Edit the specified monitor.
       operationId: UpdateMonitor
@@ -14605,6 +15815,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/monitor/{monitor_id}/mute:
     post:
       description: Mute the specified monitor.
@@ -14660,6 +15872,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/monitor/{monitor_id}/unmute:
     post:
       description: Mute the specified monitor.
@@ -14715,6 +15929,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/monthly_custom_reports:
     get:
       description: Get monthly custom reports.
@@ -14763,6 +15979,8 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14805,6 +16023,8 @@ paths:
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -14828,6 +16048,8 @@ paths:
       summary: List your managed organizations
       tags:
       - Organizations
+      x-undo:
+        type: safe
     post:
       description: 'Create a child organization.
 
@@ -14877,6 +16099,10 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/org/{public_id}:
     get:
       description: Get organization information.
@@ -14911,6 +16137,8 @@ paths:
       summary: Get organization information
       tags:
       - Organizations
+      x-undo:
+        type: safe
     put:
       description: Update your organization.
       operationId: UpdateOrg
@@ -14951,6 +16179,8 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/org/{public_id}/idp_metadata:
     post:
       description: 'There are a couple of options for updating the Identity Provider
@@ -14977,6 +16207,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/IdpFormData'
+        required: true
       responses:
         '200':
           content:
@@ -15006,6 +16237,8 @@ paths:
       tags:
       - Organizations
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/query:
     get:
       description: Query timeseries points.
@@ -15053,6 +16286,8 @@ paths:
       summary: Query timeseries points
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/search:
     get:
       description: Search for metrics from the last 24 hours in Datadog.
@@ -15086,6 +16321,8 @@ paths:
       summary: Search metrics
       tags:
       - Metrics
+      x-undo:
+        type: safe
   /api/v1/series:
     post:
       description: "The metrics end-point allows you to post time-series data that\
@@ -15153,6 +16390,8 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/service_dependencies:
     get:
       description: 'Get a list of services from APM and their dependencies. The services
@@ -15215,6 +16454,8 @@ paths:
       summary: Get all APM service dependencies
       tags:
       - Service Dependencies
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -15287,6 +16528,8 @@ paths:
       summary: Get one APM service's dependencies
       tags:
       - Service Dependencies
+      x-undo:
+        type: safe
       x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).**'
@@ -15331,6 +16574,8 @@ paths:
       summary: Search SLOs
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
     post:
       description: Create a service level objective object.
       operationId: CreateSLO
@@ -15364,6 +16609,12 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteSLO
+        parameters:
+        - name: slo_id
+          source: data.id
+        type: unsafe
   /api/v1/slo/bulk_delete:
     post:
       description: 'Delete (or partially delete) multiple service level objective
@@ -15407,6 +16658,8 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/slo/can_delete:
     get:
       description: 'Check if a SLO can be safely deleted. For example,
@@ -15450,6 +16703,8 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -15501,6 +16756,8 @@ paths:
       summary: Delete a SLO
       tags:
       - Service Level Objectives
+      x-undo:
+        type: idempotent
     get:
       description: Get a service level objective object.
       operationId: GetSLO
@@ -15533,6 +16790,8 @@ paths:
       summary: Get a SLO's details
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
     put:
       description: Update the specified service level objective object.
       operationId: UpdateSLO
@@ -15579,6 +16838,8 @@ paths:
       tags:
       - Service Level Objectives
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/slo/{slo_id}/history:
     get:
       description: "Get a specific SLO\u2019s history, regardless of its SLO type.\n\
@@ -15637,6 +16898,8 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -15656,6 +16919,143 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
+  /api/v1/synthetics/private-locations:
+    post:
+      description: Create a new Synthetics private location.
+      operationId: CreatePrivateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocationCreationResponse'
+          description: OK
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Quota reached for private locations
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Private locations are not activated for the user
+      summary: Create a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeletePrivateLocation
+        parameters:
+        - name: location_id
+          source: private_location
+        type: unsafe
+  /api/v1/synthetics/private-locations/{location_id}:
+    delete:
+      description: Delete a Synthetics private location.
+      operationId: DeletePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Delete a private location
+      tags:
+      - Synthetics
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a Synthetics private location.
+      operationId: GetPrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Get a private location
+      tags:
+      - Synthetics
+      x-undo:
+        type: safe
+    put:
+      description: Edit a Synthetics private location.
+      operationId: UpdatePrivateLocation
+      parameters:
+      - description: The ID of the private location.
+        in: path
+        name: location_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPrivateLocation'
+        description: Details of the private location to be updated.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsPrivateLocation'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Private locations are not activated for the user
+
+            - Private location does not exist'
+      summary: Edit a private location
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.
@@ -15682,6 +17082,8 @@ paths:
       summary: Get the list of all tests
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     post:
       description: Create a Synthetic test.
       operationId: CreateTest
@@ -15723,6 +17125,10 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v1/synthetics/tests/browser/{public_id}:
     get:
       description: 'Get the detailed configuration (including steps) associated with
@@ -15760,6 +17166,8 @@ paths:
       summary: Get a test configuration (browser)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics Browser
@@ -15821,6 +17229,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given (browser) Synthetic test.
@@ -15864,6 +17274,8 @@ paths:
       summary: Get a test result (browser)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/delete:
     post:
       description: Delete multiple Synthetic tests by ID.
@@ -15911,9 +17323,11 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/trigger/ci:
     post:
-      description: Trigger a set of Synthetics tests for continuous integration
+      description: Trigger a set of Synthetics tests for continuous integration.
       operationId: TriggerCITests
       requestBody:
         content:
@@ -15939,6 +17353,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/{public_id}:
     get:
       description: Get the detailed configuration associated with a Synthetics test.
@@ -15974,6 +17390,8 @@ paths:
       summary: Get a test configuration (API)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit the configuration of a Synthetic test.
       operationId: UpdateTest
@@ -16026,6 +17444,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics API
@@ -16085,6 +17505,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
     get:
       description: Get a specific full result from a given (API) Synthetic test.
@@ -16126,6 +17548,8 @@ paths:
       summary: Get a test result (API)
       tags:
       - Synthetics
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests/{public_id}/status:
     put:
       description: Pause or start a Synthetics test by changing the status.
@@ -16175,6 +17599,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/synthetics/variables:
     post:
       description: Create a Synthetics global variable.
@@ -16209,6 +17635,12 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteGlobalVariable
+        parameters:
+        - name: variable_id
+          source: id
+        type: unsafe
   /api/v1/synthetics/variables/{variable_id}:
     delete:
       description: Delete a Synthetics global variable.
@@ -16244,6 +17676,8 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
+      x-undo:
+        type: idempotent
     get:
       description: Get the detailed configuration of a global variable.
       operationId: GetGlobalVariable
@@ -16276,6 +17710,8 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
+      x-undo:
+        type: safe
     put:
       description: Edit a Synthetics global variable.
       operationId: EditGlobalVariable
@@ -16316,6 +17752,8 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/tags/hosts:
     get:
       description: Return a mapping of tags to hosts for your whole infrastructure.
@@ -16350,6 +17788,8 @@ paths:
       summary: Get Tags
       tags:
       - Tags
+      x-undo:
+        type: safe
   /api/v1/tags/hosts/{host_name}:
     delete:
       description: 'This endpoint allows you to remove all user-assigned tags
@@ -16390,6 +17830,8 @@ paths:
       summary: Remove host tags
       tags:
       - Tags
+      x-undo:
+        type: idempotent
     get:
       description: Return the list of tags that apply to a given host.
       operationId: GetHostTags
@@ -16429,6 +17871,8 @@ paths:
       summary: Get host tags
       tags:
       - Tags
+      x-undo:
+        type: safe
     post:
       description: 'This endpoint allows you to add new tags to a host,
 
@@ -16481,6 +17925,14 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DeleteHostTags
+        parameters:
+        - name: host_name
+          source: <RESPONSE_PATH>
+        - name: source
+          source: <RESPONSE_PATH>
+        type: unsafe
     put:
       description: 'This endpoint allows you to update/replace all tags in
 
@@ -16532,6 +17984,8 @@ paths:
       tags:
       - Tags
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
       description: Get hourly usage for analyzed logs (Security Monitoring).
@@ -16577,6 +18031,70 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/attribution:
+    get:
+      description: Get Usage Attribution.
+      operationId: GetUsageAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: The specified field to search results for.
+        in: query
+        name: fields
+        required: true
+        schema:
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage ending this month.'
+        in: query
+        name: end_month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageSortDirection'
+      - description: The field to sort by.
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          $ref: '#/components/schemas/UsageAttributionSort'
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAttributionResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get Usage Attribution
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/usage/aws_lambda:
     get:
       description: Get hourly usage for lambda.
@@ -16620,6 +18138,8 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/billable-summary:
     get:
       description: Get billable usage across your multi-org account.
@@ -16655,6 +18175,8 @@ paths:
       summary: Get billable usage across your multi-org account
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/fargate:
     get:
       description: Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
@@ -16698,6 +18220,8 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/hosts:
     get:
       description: Get hourly usage for hosts and containers.
@@ -16741,6 +18265,147 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/incident-management:
+    get:
+      description: Get hourly usage for incident management.
+      operationId: GetIncidentManagement
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIncidentManagementResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for incident management
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/indexed-spans:
+    get:
+      description: Get hourly usage for indexed spans.
+      operationId: GetUsageIndexedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIndexedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for indexed spans
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
+  /api/v1/usage/ingested-spans:
+    get:
+      description: Get hourly usage for ingested spans.
+      operationId: GetIngestedSpans
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
+        in: query
+        name: start_hr
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          **before** this hour.'
+        in: query
+        name: end_hr
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageIngestedSpansResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+      summary: Get hourly usage for ingested spans
+      tags:
+      - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/logs:
     get:
       description: Get hourly usage for logs.
@@ -16784,6 +18449,8 @@ paths:
       summary: Get hourly usage for Logs
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/logs_by_index:
     get:
       description: Get hourly usage for logs by index.
@@ -16835,6 +18502,8 @@ paths:
       summary: Get hourly usage for Logs by Index
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/network_flows:
     get:
       description: Get hourly usage for network flows.
@@ -16880,6 +18549,8 @@ paths:
       summary: Get hourly usage for Network Flows
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/network_hosts:
     get:
       description: Get hourly usage for network hosts.
@@ -16923,6 +18594,8 @@ paths:
       summary: Get hourly usage for Network Hosts
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/profiling:
     get:
       description: Get hourly usage for profiled hosts.
@@ -16968,6 +18641,8 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/rum_sessions:
     get:
       description: Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
@@ -17018,6 +18693,8 @@ paths:
       summary: Get hourly usage for RUM Sessions
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/snmp:
     get:
       description: Get hourly usage for SNMP devices.
@@ -17063,6 +18740,8 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/summary:
     get:
       description: Get usage across your multi-org account.
@@ -17114,6 +18793,8 @@ paths:
       summary: Get usage across your multi-org account
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics:
     get:
       deprecated: true
@@ -17158,6 +18839,8 @@ paths:
       summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics_api:
     get:
       description: Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
@@ -17201,6 +18884,8 @@ paths:
       summary: Get hourly usage for Synthetics API Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/synthetics_browser:
     get:
       description: Get hourly usage for synthetics browser checks.
@@ -17244,6 +18929,8 @@ paths:
       summary: Get hourly usage for Synthetics Browser Checks
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/timeseries:
     get:
       description: Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
@@ -17287,6 +18974,8 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/top_avg_metrics:
     get:
       description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
@@ -17309,6 +18998,17 @@ paths:
           items:
             type: string
           type: array
+      - description: Maximum number of results to return (between 1 and 5000) - defaults
+          to 500 results if limit not specified.
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 500
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -17328,12 +19028,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get top 500 custom metrics by hourly average
+      summary: Get top custom metrics by hourly average
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/traces:
     get:
-      description: Get hourly usage for trace search.
+      deprecated: true
+      description: 'Get hourly usage for trace search.
+
+
+        **Note** This endpoint has been renamed to `/api/v1/usage/indexed-spans`.'
       operationId: GetUsageTrace
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -17374,9 +19080,15 @@ paths:
       summary: Get hourly usage for Trace Search
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/usage/tracing-without-limits:
     get:
-      description: Get hourly usage for tracing without limits.
+      deprecated: true
+      description: 'Get hourly usage for tracing without limits.
+
+
+        **Note** This endpoint has been renamed to `/api/v1/usage/ingested-spans`.'
       operationId: GetTracingWithoutLimits
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -17419,6 +19131,8 @@ paths:
       summary: Get hourly usage for tracing without limits
       tags:
       - Usage Metering
+      x-undo:
+        type: safe
   /api/v1/user:
     get:
       description: List all users for your organization.
@@ -17439,6 +19153,8 @@ paths:
       summary: List all users
       tags:
       - Users
+      x-undo:
+        type: safe
     post:
       description: 'Create a user for your organization.
 
@@ -17483,6 +19199,12 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        operationId: DisableUser
+        parameters:
+        - name: user_handle
+          source: user.handle
+        type: unsafe
   /api/v1/user/{user_handle}:
     delete:
       description: 'Delete a user from an organization.
@@ -17529,6 +19251,8 @@ paths:
       summary: Disable a user
       tags:
       - Users
+      x-undo:
+        type: idempotent
     get:
       description: Get a user's details.
       operationId: GetUser
@@ -17563,6 +19287,8 @@ paths:
       summary: Get user details
       tags:
       - Users
+      x-undo:
+        type: safe
     put:
       description: 'Update a user information.
 
@@ -17614,6 +19340,8 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /api/v1/validate:
     get:
       description: Check if the API key (not the APP key) is valid. If invalid, a
@@ -17637,6 +19365,8 @@ paths:
       summary: Validate API key
       tags:
       - Authentication
+      x-undo:
+        type: safe
   /monitor/bulk_resolve:
     post:
       deprecated: true
@@ -17676,6 +19406,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v0.3/traces:
     put:
       description: "Datadog\u2019s APM allows you to collect performance metrics by\
@@ -17727,6 +19459,8 @@ paths:
       tags:
       - Tracing
       x-codegen-request-body-name: body
+      x-undo:
+        type: idempotent
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -17863,6 +19597,8 @@ paths:
       tags:
       - Logs
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v1/monitor/mute_all:
     post:
       deprecated: true
@@ -17896,6 +19632,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -17918,6 +19656,8 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+      x-undo:
+        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []
@@ -18007,6 +19747,12 @@ tags:
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
+- description: '[Check API version 2](/api/v2/incident-services/).'
+  name: Incident Services
+- description: '[Check API version 2](/api/v2/incident-teams/).'
+  name: Incident Teams
+- description: '[Check API version 2](/api/v2/incidents/).'
+  name: Incidents
 - description: 'Manage your Datadog API and application keys.
 
 
@@ -18102,6 +19848,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
+- description: '[Check API version 2](/api/v2/processes/).'
+  name: Processes
 - description: '[Check API version 2](/api/v2/roles/).'
   name: Roles
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
@@ -18159,7 +19907,7 @@ tags:
   name: Service Level Objectives
 - description: 'Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)
 
-    directly through Datadog API.'
+    directly through the Datadog API.'
   externalDocs:
     description: For more information about the Datadog-Slack integration, see the
       integration page.

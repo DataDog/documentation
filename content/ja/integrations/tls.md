@@ -103,10 +103,17 @@ TLS には、イベントは含まれません。
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][4] を参照してください。
 
-- `tls.can_connect` - 監視対象のエンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `tls.version` - 許可されていないプロトコルバージョンで接続が行われた場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `tls.cert_validation` - 証明書の形式が正しくない場合、またはサーバーのホスト名と一致しない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
-- `tls.cert_expiration` - 証明書の有効期限が切れているか、有効期限が `days_critical`/`seconds_critical` 未満の場合は `CRITICAL` を返し、有効期限が `days_warning`/`seconds_warning` 未満の場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。
+**tls.can_connect**:<br>
+監視対象のエンドポイントに Agent が接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+
+**tls.version**:<br>
+許可されていないプロトコルバージョンで接続が行われた場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+
+**tls.cert_validation**:<br>
+証明書の形式が正しくない場合、またはサーバーのホスト名と一致しない場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+
+**tls.cert_expiration**:<br>
+証明書の有効期限が切れているか、有効期限が `days_critical`/`seconds_critical` 未満の場合は `CRITICAL` を返し、有効期限が `days_warning`/`seconds_warning` 未満の場合は `WARNING` を返します。それ以外の場合は、`OK` を返します。
 
 ## トラブルシューティング
 

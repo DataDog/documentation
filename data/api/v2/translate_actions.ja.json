@@ -21,6 +21,30 @@
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
   },
+  "ListIncidents": {
+    "description": "ユーザーの組織のすべてのインシデントを取得します。",
+    "summary": "インシデントリストを取得"
+  },
+  "CreateIncident": {
+    "description": "インシデントを作成します。",
+    "summary": "インシデントを作成",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを作成します。"
+  },
+  "DeleteIncident": {
+    "description": "ユーザーの組織から既存のインシデントを削除します。",
+    "summary": "既存のインシデントを削除"
+  },
+  "GetIncident": {
+    "description": "`incident_id` でインシデントの詳細を取得します。",
+    "summary": "インシデントの詳細を取得"
+  },
+  "UpdateIncident": {
+    "description": "インシデントを更新します。このリクエストは部分的な更新なので、更新が必要な属性のみを指定してください。",
+    "summary": "既存のインシデントを更新",
+    "request_description": "インシデントのペイロード。",
+    "request_schema_description": "インシデントのリクエストを更新します。"
+  },
   "AggregateLogs": {
     "description": "イベントをバケットに集約しメトリクスと時系列を計算する API エンドポイント。",
     "summary": "イベントを集計する",
@@ -131,6 +155,10 @@
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
     "summary": "アクセス許可を一覧表示する"
   },
+  "ListProcesses": {
+    "description": "組織のすべてのプロセスを取得します。",
+    "summary": "すべてのプロセスを取得"
+  },
   "ListRoles": {
     "description": "名前と ID を含むすべてのロールを返します。",
     "summary": "ロールを一覧表示する"
@@ -212,53 +240,53 @@
     "summary": "セキュリティシグナルのリストの取得",
     "request_schema_description": "セキュリティシグナルのリストをリクエスト"
   },
-  "GetServices": {
-    "description": "要求するユーザーのオーガニゼーションのすべてのサービスを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのサービスに関連するユーザーが含まれます。",
-    "summary": "すべてのサービスのリストを取得する"
+  "ListIncidentServices": {
+    "description": "要求するユーザーのオーガニゼーションにアップロードされたすべてのインシデントサービスを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "summary": "すべてのインシデントサービスのリストを取得する"
   },
-  "CreateService": {
-    "description": "新しいサービスを作成します。",
-    "summary": "新しいサービスを作成する",
-    "request_description": "サービスペイロード。",
-    "request_schema_description": "サービスペイロードを使用してリクエストを作成します。"
+  "CreateIncidentService": {
+    "description": "新しいインシデントサービスを作成します。",
+    "summary": "新しいインシデントサービスを作成する",
+    "request_description": "インシデントサービスのペイロード。",
+    "request_schema_description": "インシデントサービスペイロードを使用してリクエストを作成します。"
   },
-  "DeleteService": {
-    "description": "既存のサービスを削除します。",
-    "summary": "既存のサービスを削除します"
+  "DeleteIncidentService": {
+    "description": "既存のインシデントサービスを削除します。",
+    "summary": "既存のインシデントサービスを削除する"
   },
-  "GetService": {
-    "description": "サービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのサービスに関連するユーザーが含まれます。",
-    "summary": "サービスの詳細を取得する"
+  "GetIncidentService": {
+    "description": "インシデントサービスの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントサービスに関連するユーザーが含まれます。",
+    "summary": "インシデントサービスの詳細を取得する"
   },
-  "UpdateService": {
-    "description": "既存のサービスを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
-    "summary": "既存のサービスを更新する",
-    "request_description": "サービスペイロード。",
-    "request_schema_description": "サービスペイロードを使用してリクエストを更新します。"
+  "UpdateIncidentService": {
+    "description": "既存のインシデントサービスを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
+    "summary": "既存のインシデントサービスを更新する",
+    "request_description": "インシデントサービスのペイロード。",
+    "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
   },
-  "GetTeams": {
-    "description": "要求するユーザーのオーガニゼーションのすべてのチームを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのチームに関連するユーザーが含まれます。",
-    "summary": "すべてのチームのリストを取得する"
+  "ListIncidentTeams": {
+    "description": "要求するユーザーのオーガニゼーションのすべてのインシデントチームを取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "summary": "すべてのインシデントチームのリストを取得する"
   },
-  "CreateTeam": {
-    "description": "新しいチームを作成します。",
-    "summary": "新しいチームの作成",
-    "request_description": "チームペイロード。",
-    "request_schema_description": "チームペイロードを使用してリクエストを作成します。"
+  "CreateIncidentTeam": {
+    "description": "新しいインシデントチームを作成します。",
+    "summary": "新しいインシデントチームを作成する",
+    "request_description": "インシデントチームのペイロード。",
+    "request_schema_description": "インシデントチームペイロードを使用してリクエストを作成します。"
   },
-  "DeleteTeam": {
-    "description": "既存のチームを削除します。",
-    "summary": "既存のチームを削除する"
+  "DeleteIncidentTeam": {
+    "description": "既存のインシデントチームを削除します。",
+    "summary": "既存のインシデントチームを削除する"
   },
-  "GetTeam": {
-    "description": "チームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのチームに関連するユーザーが含まれます。",
-    "summary": "チームの詳細を取得する"
+  "GetIncidentTeam": {
+    "description": "インシデントチームの詳細を取得します。 `include[users]` クエリパラメータが指定される場合、included 属性にはこれらのインシデントチームに関連するユーザーが含まれます。",
+    "summary": "インシデントチームの詳細を取得する"
   },
-  "UpdateTeam": {
-    "description": "既存のチームを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
-    "summary": "既存のチームを更新する",
-    "request_description": "チームペイロード。",
-    "request_schema_description": "チームペイロードを使用してリクエストを更新します。"
+  "UpdateIncidentTeam": {
+    "description": "既存のインシデントチームを更新します。このリクエストは部分的な更新なので、更新すべき属性のみを指定してください。",
+    "summary": "既存のインシデントチームを更新する",
+    "request_description": "インシデントチームのペイロード。",
+    "request_schema_description": "インシデントチームペイロードを使用してリクエストを更新します。"
   },
   "SendInvitations": {
     "description": "組織への参加を招待するメールを 1 人以上のユーザーに送信します。",

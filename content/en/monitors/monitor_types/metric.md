@@ -107,7 +107,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 * Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
 * the threshold `on average`, `at least once`, `at all times`, or `in total`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc.
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
 **Definitions**:
 
@@ -126,8 +126,8 @@ The alert conditions vary slightly based on the chosen detection method.
 
 * The `average`, `maximum`, `minimum`, or `in total`
 * of the `change` or `% change`
-* over `5 minutes`, `15 minutes`, `1 hour`, etc.
-* compared to `5 minutes`, `15 minutes`, `1 hour`, etc. before
+* over `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
+* compared to `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours before.
 * is `above`, `above or equal to`, `below`, or `below or equal to` the threshold.
 
 **Definitions**:

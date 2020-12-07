@@ -37,7 +37,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Pylons][9]              | >= 0.9.6          | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][10]             | >= 1.7            | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Sanic][11]             | >= 19.6.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic |
-| [Starlette][12]             | >= 0.13            | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
+| [Starlette][12]             | >= 0.13.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][13]             | >= 4.0            | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 
 

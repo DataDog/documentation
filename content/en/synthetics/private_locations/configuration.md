@@ -33,7 +33,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
-| `site` | String | `datadoghq.com` | Datadog site from which the private location pulls the test configuration and pushes the test results. Needs to be set to `datadoghq.eu` for Datadog EU users. |
+| `site` | String | `datadoghq.com` | Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}. |
 
 ### DNS Configuration 
 
@@ -72,6 +72,12 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 | -------| ---- | ------- | ----------- |
 | `concurrency` | Number | `10` | Maximum number of tests executed in parallel. |
 | `maxTimeout` | Number | `60000` | Maximum test execution duration for API tests (in milliseconds). |
+
+## Private Root Certificates
+
+You can upload custom root certificates to your private locations to have your API and Browser tests perform SSL handshake using your own `.pem` files. When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs`, the same way your private location configuration file is mounted. These certificates are then considered trusted CA and used as such at test runtime.
+
+**Note**: This feature is supported for versions 1.5.3+ of the private location Docker image.
 
 ## Private Locations Admin
 

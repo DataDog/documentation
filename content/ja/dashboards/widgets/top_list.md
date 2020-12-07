@@ -28,8 +28,8 @@ further_reading:
 ### コンフィギュレーション
 
 1. グラフ化するデータを選択します。
-    * メトリクス:  メトリクスクエリの構成については、[クエリ][1]に関するドキュメントを参照してください。
-    * Analyzed Span: Analyzed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
+    * Metric: メトリクスのクエリを構成するには、[クエリ作成][6]のドキュメントを参照してください。
+    * Indexed Span : Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
     * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][1]を参照してください。
 
 2. オプション: エントリの値に応じて、条件付き書式を構成します。
@@ -97,3 +97,4 @@ TOPLIST_SCHEMA = {
 [3]: /ja/dashboards/graphing_json/widget_json/
 [4]: /ja/dashboards/graphing_json/request_json/
 [5]: /ja/dashboards/graphing_json/widget_json/#conditional-format-schema
+[6]: /ja/dashboards/querying/

@@ -48,7 +48,7 @@ UI の左上にある **Start Recording** ボタンを押して、今作成さ�
 
 メールが、その内容に基づき特別なガイドラインを遵守するよう設定するには、題名と本文に対する確認を追加することが可能です。
 
-上記の例では、メールの題名が `Welcome to Shopist!` で本文に `Your verification code is` という文が含まれ、認証コードが `\d{1,6}` の[正規表現パターン][2]に一致する場合に成功とするアサーションが設定されています。
+上記の例では、メールの題名が `Welcome to Shopist!` で本文に `Your verification code is` という文が含まれ、認証コードが `\d{1,6}` の正規表現パターンに一致する場合に成功とするアサーションが設定されています。
 
 ## メール内のリンクをナビゲート
 
@@ -68,4 +68,3 @@ UI の左上にある **Start Recording** ボタンを押して、今作成さ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/browser_tests
-[2]: 2

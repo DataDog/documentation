@@ -20,6 +20,7 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/zk/README.md'
 display_name: ZooKeeper
+draft: false
 git_integration_title: zk
 guid: 5519c110-5183-438e-85ad-63678c072ac7
 integration_id: zookeeper
@@ -41,23 +42,23 @@ supported_os:
   - linux
   - mac_os
 ---
-![Zookeeper ダッシュボード][1]
+![ZooKeeper ダッシュボード][1]
 
 ## 概要
 
-Zookeeper チェックは、クライアント接続とレイテンシーの追跡、未処理リクエスト数の監視などを行います。
+ZooKeeper チェックは、クライアント接続とレイテンシーの追跡、未処理リクエスト数の監視などを行います。
 
 ## セットアップ
 
 ### インストール
 
-Zookeeper チェックは [Datadog Agent][2] パッケージに含まれています。Zookeeper サーバーに追加でインストールする必要はありません。
+ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
-#### Zookeepr のホワイトリスト
+#### ZooKeeper のホワイトリスト
 
-バージョン 3.5 以降、Zookeeper で [4 文字コマンド][4]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([Zookeeper のドキュメント][3]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストされています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
+バージョン 3.5 以降、ZooKeeper で [4 文字コマンド][4]をホワイトリストに登録する `4lw.commands.whitelist` パラメーターを利用できるようになりました ([ZooKeeper のドキュメント][3]を参照してください)。デフォルトでは、`srvr` だけがホワイトリストに登録されています。このインテグレーションは `stat` および `mntr` コマンドに基づいているため、これらのコマンドを ホワイトリストに登録してください。
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -66,16 +67,49 @@ Zookeeper チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 ホストで実行中の Agent に対してこのチェックを構成するには:
 
-1. Zookeeper の[メトリクス](#メトリクスの収集)と[ログ](#ログ収集)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `zk.d/conf.yaml` ファイルを編集します。
+1. ZooKeeper の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `zk.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zk.d/conf.yaml][2] を参照してください。
 
 2. [Agent を再起動します][3]。
+
+#### SSL の有効化
+
+ZooKeeper 3.5 で SSL 認証を使用できるようになりました。ZooKeeper での SSL 設定については、[ZooKeeper SSL ユーザーガイド][4]を参照してください。 
+
+ZooKeeper で SSL の設定が完了すると、SSL を使用して Datadog Agent を構成し、ZooKeeper に接続できるようになります。JKS ファイルによってすでに認証設定が済んでいる場合は、次のステップに従って JKS ファイルを TLS/SSL コンフィギュレーション用の PEM ファイルに変換します。
+
+次のコマンドの例は、JKS `truststore` ファイルと `keystore` ファイルが呼び出された場合を仮定しています。
+
+- `server_truststore.jks`
+- `server_keystore.jks` 
+- `client_truststore.jks`
+- `client_keystore.jks`
+
+次の手順もまた、両サイドの `keystore` ファイルと `truststore` ファイルが、互いの証明書およびエイリアスの `server_cert` と `client_cert` を持っていると仮定しています。つまり、Java ZooKeeper クライアントがすでに ZooKeeper サーバーに接続できる状態です。
+秘密キーにパスワードが設定されている場合は、コンフィグオプション `tls_private_key_password` の `config.yaml` ファイルにこのパスワードが含まれていることを確認してください。
+
+JKS ファイルを PEM ファイルに変換するには
+
+1. クライアントの truststore には信頼できるサーバーの証明書が含まれているため、`ca_cert.pem` ファイルを `client_truststore.jks` から取得します。
+    ```
+    keytool -exportcert -file ca_cert.pem -keystore client_truststore.jks -alias server_cert -rfc
+    ```
+
+2. クライアントの `keystore` にはエイリアス `client_cert` のクライアントの証明書が含まれているため、`cert.pem` ファイルを `client_keystore.jks` から取得します。
+    ```
+    keytool -importkeystore -srckeystore client_keystore.jks -destkeystore cert.p12 -srcstoretype jks -deststoretype pkcs12 -srcalias client_cert
+    ```   
+
+3. `openssl pkcs12` コマンドを実行します。これにより、クライアント証明書と証明書の秘密キーをエクスポートします。`tls_cert` コンフィグオプションにより、証明書と秘密キーを含む PEM ファイルを読み取って、パースできます。パスワード保護されていないファイルを取得するには、このコマンドに `-nodes` を追加します。
+   ```
+   openssl pkcs12 -in cert.p12 -out cert.pem
+   ``` 
 
 #### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-1. Zookeeper はデフォルトで `log4j` ロガーを使用します。ファイルへのログ記録をアクティブにし、フォーマットをカスタマイズするには、`log4j.properties` ファイルを編集します。
+1. ZooKeeper はデフォルトで `log4j` ロガーを使用します。ファイルへのログ記録をアクティブにし、フォーマットをカスタマイズするには、`log4j.properties` ファイルを編集します。
 
    ```text
      # Set root logger level to INFO and its only appender to R
@@ -123,6 +157,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://cwiki.apache.org/confluence/display/ZOOKEEPER/ZooKeeper+SSL+User+Guide
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
@@ -172,7 +207,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### イベント
 
-Zookeeper チェックには、イベントは含まれません。
+ZooKeeper チェックには、イベントは含まれません。
 
 ### サービスのチェック
 
@@ -180,7 +215,7 @@ Zookeeper チェックには、イベントは含まれません。
 監視対象ノードに `ruok` を送信します。`imok` 応答には `OK`、別の応答には `WARN`、応答がない場合は `CRITICAL` を返します。
 
 **zookeeper.mode**:<br>
-`zk.yaml` で `expected_mode` が構成されている場合、Agent はこのサービスチェックを送信します。Zookeeper の実際のモードが `expected_mode` と一致する場合は `OK` を返し、それ以外の場合は `CRITICAL` を返します。
+`zk.yaml` で `expected_mode` が構成されている場合、Agent はこのサービスチェックを送信します。ZooKeeper の実際のモードが `expected_mode` と一致する場合は `OK` を返し、それ以外の場合は `CRITICAL` を返します。
 
 ## トラブルシューティング
 

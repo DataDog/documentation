@@ -8,7 +8,7 @@ rule_category:
 scope: gcp.project
 security: コンプライアンス
 source: gcp
-title: GCP Logging シンクの変更
+title: GCP ロギングシンクの変更
 type: security_rules
 ---
 ## 概要

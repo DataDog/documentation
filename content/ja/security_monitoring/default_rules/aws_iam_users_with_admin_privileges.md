@@ -9,7 +9,7 @@ rule_category:
 scope: iam
 security: コンプライアンス
 source: iam
-title: 管理者特権をもつ AWS IAM ユーザー
+title: IAM 特権ユーザーには、AWS アカウントに対する管理者権限があります
 type: security_rules
 ---
 ## 概要

@@ -47,6 +47,18 @@
     "name": "IP Ranges",
     "description": "Get a list of IP prefixes belonging to Datadog."
   },
+  "incident-services": {
+    "name": "Incident Services",
+    "description": "[Check API version 2](/api/v2/incident-services/)."
+  },
+  "incident-teams": {
+    "name": "Incident Teams",
+    "description": "[Check API version 2](/api/v2/incident-teams/)."
+  },
+  "incidents": {
+    "name": "Incidents",
+    "description": "[Check API version 2](/api/v2/incidents/)."
+  },
   "key-management": {
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys.\n\nYou need an API and applications key with Admin rights\nto interact with this endpoint. The full list of keys can be seen on your\n[Datadog API page](https://app.datadoghq.com/account/settings#api)."
@@ -87,6 +99,10 @@
     "name": "PagerDuty Integration",
     "description": "Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)\ndirectly through the Datadog API."
   },
+  "processes": {
+    "name": "Processes",
+    "description": "[Check API version 2](/api/v2/processes/)."
+  },
   "roles": {
     "name": "Roles",
     "description": "[Check API version 2](/api/v2/roles/)."
@@ -113,7 +129,7 @@
   },
   "slack-integration": {
     "name": "Slack Integration",
-    "description": "Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)\ndirectly through Datadog API."
+    "description": "Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)\ndirectly through the Datadog API."
   },
   "snapshots": {
     "name": "Snapshots",

@@ -15,7 +15,7 @@ further_reading:
 ---
 ネットワークパフォーマンスのモニタリングには [Datadog Agent v6.14 以降][1]が必要です。この製品は eBPF に構築されているため、Datadog では最小要件として基盤プラットフォームに Linux kernel バージョン4.4.0 以降が必要です。
 
-サポート対象のプラットフォーム
+サポート対象の**プラットフォーム**
 
 - Ubuntu 16.04 以降
 - Debian 9 以降
@@ -26,9 +26,13 @@ further_reading:
 
 [CentOS/RHEL 7.6 以降][2]の要件は、kernel 4.4.0 以降では適用外です。[DNS 解決][3]機能は CentOS/RHEL 7.6 ではサポートされていません。
 
+ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
+1) Cilium バージョン 1.6 以降、および
+2) カーネルバージョン 5.1.16 以降、または 4.19.x カーネルの場合は 4.19.57 以降
+
 **注**: 現在 Datadog では、Windows プラットフォームおよび macOS プラットフォームのネットワークパフォーマンスのモニタリングをサポートしていません。
 
-次のプロビジョニングシステムはサポート対象です。
+次の**プロビジョニングシステム**はサポート対象です。
 
 - Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][4] を参照してください
 - Chef 12.7 以降: [Datadog Chef レシピ][5] を参照してください
@@ -104,7 +108,7 @@ SELinux を有効にしたその他のシステムでネットワークパフォ
     semodule -v -i system_probe_policy.pp
     ```
 
-4. システムプローブバイナリのタイプを、ポリシーで定義されたもののいずれかに変更します。Agent のインストールディレクトリ名が `system_probe_policy.te` の場合は以下のようになります。
+4. システムプローブバイナリのタイプを、ポリシーで定義されたもののいずれかに変更します。Agent のインストールディレクトリ名が `/opt/datadog-agent` の場合は以下のようになります。
 
     ```shell
     semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
@@ -179,7 +183,7 @@ Kubernetes を使用してネットワークパフォーマンスのモニタリ
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -312,7 +316,7 @@ services:
 AWS ECS での設定については、[AWS ECS][1] ドキュメントページを参照してください。
 
 
-[1]: /ja/integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 

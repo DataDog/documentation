@@ -35,6 +35,12 @@ Datadog Cluster Agent を使用すると、次のことができます。
 * サービス、SPOF、イベントの監視など、クラスターレベルのデータの収集を有効化します。
 * カスタム Kubernetes メトリクスによる Horizontal Pod Autoscaling を利用できます。この機能の詳細については、[ガイド][1]を参照してください。
 
+Docker をお使いの場合、Datadog Cluster Agent は Docker Hub と GCR で利用できます。
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
+
 **注**: Datadog Cluster Agent のすべての機能を利用するには、Kubernetes v1.10+ を使用してください。
 
 {{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
@@ -50,7 +56,8 @@ Datadog Cluster Agent を使用すると、次のことができます。
 
 ## その他の参考資料
 
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/CUSTOM_METRICS_SERVER.md
+[2]: https://hub.docker.com/r/datadog/cluster-agent
+[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent

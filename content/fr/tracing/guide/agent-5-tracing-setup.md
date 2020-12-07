@@ -76,7 +76,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [3]: /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /fr/tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://hub.docker.com/r/datadog/docker-dd-agent
+[6]: https://gcr.io/datadoghq/docker-dd-agent
 [7]: /fr/tracing/docker/
 [8]: /fr/api/v1/tracing/
 [9]: /fr/agent/

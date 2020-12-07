@@ -2,6 +2,8 @@
 aliases:
   - /ja/integrations/amazon_eks_fargate/
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   logs: {}
   metrics_metadata: metadata.csv

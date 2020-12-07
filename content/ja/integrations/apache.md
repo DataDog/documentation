@@ -4,7 +4,8 @@ aliases:
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    apache: assets/dashboards/apache_dashboard.json
   logs:
     source: apache
   metrics_metadata: metadata.csv
@@ -25,6 +26,7 @@ dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/apache/README.md'
 description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 display_name: Apache
+draft: false
 git_integration_title: apache
 guid: cb2b4a06-4ede-465e-9478-a45f8b32058a
 integration_id: apache

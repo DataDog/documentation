@@ -20,7 +20,7 @@ PHP APM supports the following PHP versions:
 
 | Version    | Support type                          |
 |:-----------|:--------------------------------------|
-| 8.0.0 RC 1 | Experimental Support (as of `0.49.0`) |
+| 8.0.x      | Fully Supported (as of `0.52.0`)      |
 | 7.4.x      | Fully Supported                       |
 | 7.3.x      | Fully Supported                       |
 | 7.2.x      | Fully Supported                       |
@@ -55,14 +55,17 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CakePHP        | 2.x           | All supported PHP versions |
 | CodeIgniter    | 2.x, 3.x      | PHP 7+                     |
 | Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
+| Laravel 8      | 8.x (as of `0.52.0`) | All supported PHP versions |
 | Lumen          | 5.2+          | All supported PHP versions |
 | Slim           | 3.x           | All supported PHP versions |
-| Symfony        | 3.3, 3.4, 4.x | All supported PHP versions |
+| Symfony 3      | 3.3, 3.4      | All supported PHP versions |
+| Symfony 4      | 4.x           | All supported PHP versions |
+| Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions |
 | WordPress      | 4.x, 5.x      | PHP 7+                     |
 | Zend Framework | 1.12          | All supported PHP versions |
 | Yii            | 1.1, 2.0      | All supported PHP versions |
 | Drupal         |               | All supported PHP versions |
-| Magento        | 2             | All supported PHP versions |
+| Magento        | 1, 2          | All supported PHP versions |
 | Phalcon        | 1.3, 3.4      | All supported PHP versions |
 | Slim           | 2.x           | All supported PHP versions |
 | Neos Flow      | 1.1           | All supported PHP versions |

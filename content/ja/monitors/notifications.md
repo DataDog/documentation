@@ -141,15 +141,15 @@ Disk space is low @ops-team@company.com
 #### ログファセット変数
 
 モニターがファセットによりグループ化されている場合、ログモニターはファセットを変数として使用できます。
-たとえば、ログモニターがファセット `@facet` でグループ化されている場合、変数は次のようになります。
+たとえば、ログモニターが `facet` でグループ化されている場合、変数は次のようになります。
 
 ```text
-{{@facet.name}}
+{{ facet.name }}
 ```
 
 ファセットにピリオドが含まれている場合、ファセットを角括弧で囲みます。例、
 ```text
-{{[@facet.with.dot].name}}
+{{ [facet.with.dot].name }}
 ```
 
 ### 条件付き変数
@@ -234,6 +234,36 @@ Disk space is low @ops-team@company.com
 ```text
 {{#is_match "role.name" "db"}}
   これは、アラートをトリガーするホストのロール名に `db` が含まれている場合に表示されます。@db-team@company.com
+{{/is_match}}
+```
+
+`is_match` 条件は、複数の文字列の一致にも対応しています。
+
+```text
+{{#is_match "role.name" "db" "database"}}
+  アラートをトリガーしているホストのロール名に `db` または `database` が
+  含まれている場合に表示されます。@db-team@company.com
+{{/is_match}}
+```
+
+タグに `db` が含まれない場合に異なる通知を送信するには、以下のように条件の否認を使用します。
+
+```text
+{{^#is_match "role.name" "db"}}
+  ロールタグに `db` が含まれない場合に表示されます。
+  @slack-example
+{{/is_match}}
+```
+
+または、最初の例にある `{{else}}` パラメータを使用します。
+
+```text
+{{#is_match "role.name" "db"}}
+  アラートをトリガーしているホストのロール名に `db` が
+  含まれている場合に表示されます。@db-team@company.com
+{{else}}
+  ロールタグに `db` が含まれない場合に表示されます。
+  @slack-example
 {{/is_match}}
 ```
 

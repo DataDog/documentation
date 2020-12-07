@@ -36,6 +36,12 @@ Using the Datadog Cluster Agent allows you to:
 * Enable the collection of cluster level data, such as the monitoring of services or SPOF and events.
 * Leverage horizontal pod autoscaling with custom Kubernetes metrics. Refer to [the dedicated guide][1] for more details about this feature.
 
+If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and GCR:
+
+| Docker Hub                                       | GCR                                                       |
+|--------------------------------------------------|-----------------------------------------------------------|
+| [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
+
 **Note**: To leverage all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
 
 {{< whatsnext desc="This section includes the following topics:">}}
@@ -54,3 +60,5 @@ Using the Datadog Cluster Agent allows you to:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/CUSTOM_METRICS_SERVER.md
+[2]: https://hub.docker.com/r/datadog/cluster-agent
+[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent

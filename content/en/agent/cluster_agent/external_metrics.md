@@ -41,7 +41,7 @@ To enable the Custom Metrics Server, follow the instructions to [set up the Data
 
 1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` to `true` in the deployment of the Datadog Cluster Agent.
 2. Configure the `<DD_APP_KEY>` as well as the `<DD_API_KEY>` in the deployment of the Datadog Cluster Agent with the Datadog [API and application keys for your account][6].
-3. Optional: set `DATADOG_HOST` to `https://app.datadoghq.eu` if you are using an EU account.
+3. Set `DATADOG_HOST` to `https://{{< region-param key="dd_full_site" >}}` (defaults to `https://app.datadoghq.com`).
 
 ### Register the External Metrics Provider
 
@@ -141,7 +141,7 @@ To activate usage of `DatadogMetric` CRD, follow these extra steps:
 1. Install the `DatadogMetric` CRD in your cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
     ```
 
 2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
@@ -187,7 +187,7 @@ spec:
   metrics:
     - type: External
       external:
-      metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
+        metricName: "datadogmetric@<namespace>:<datadogmetric_name>"
 ```
 
 **Example**: An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`:

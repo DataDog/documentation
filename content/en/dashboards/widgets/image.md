@@ -13,7 +13,7 @@ further_reading:
   text: "Building Dashboard using JSON"
 ---
 
-The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF:
+The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF, hosted where it can be accessed by URL:
 
 {{< img src="dashboards/widgets/image/image.mp4" alt="Image" video="true"  width="80%" >}}
 
@@ -21,7 +21,7 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 {{< img src="dashboards/widgets/image/image_setup.png" alt="Image setup"  style="width:80%;">}}
 
-1. Enter your image URL
+1. Enter your image URL.
 2. Choose an appearance:
     * Zoom image to cover whole title
     * Fit image on tile
@@ -29,31 +29,15 @@ The image widget allows you to embed an image on your dashboard. An image can be
 
 ## API
 
-The dedicated [widget JSON schema definition][1] for the image widget is:
+This widget can be used with the **Dashboards API**. Refer to the [Dashboards API][1] documentation for additional reference.
 
-```text
-IMAGE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["image"]},
-        "url": {"type": "string"},
-        "sizing": {"enum": ["zoom", "fit", "center"]},
-        "margin": {"enum": ["small", "large"]}
-    },
-    "required": ["type", "url"],
-    "additionalProperties": false
-}
-```
+The dedicated [widget JSON schema definition][2] for the image widget is:
 
-| Parameter | Type   | Required | Description                                                                          |
-|-----------|--------|----------|--------------------------------------------------------------------------------------|
-| `type`    | string | yes      | Type of the widget, for the image widget use `image`                                 |
-| `url`     | string | yes      | URL of the image                                                                     |
-| `sizing`  | string | no       | How to size the image on the widget. Available values are: `zoom`, `fit` or `center` |
-| `margin`  | string | no       | Size of the margins around the image. Available values are: `small` or `large`       |
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

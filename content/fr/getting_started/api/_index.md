@@ -16,88 +16,98 @@ Cet article explique comment utiliser [Postman][1] pour effectuer des appels d'A
 
 Vous avez :
 
-- Une implémentation Datadog active.
-- Accès à vos [clés d'API et d'application][2] Datadog.
-- Le [client API Postman installé][1].
-- Une connaissance de base de la structure d'API et du formatage JSON.
+- une implémentation Datadog active ;
+- accès à vos [clés d'API et d'application][2] Datadog ;
+- une connaissance de base de la structure d'API et du format JSON ;
 
-## Implémentation
+## Configuration
 
-### Importer la collection Datadog
+### Importer la collection Datadog dans Postman
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="bf4ac0b68b8ff47419c1"
+data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBwbGljYXRpb25fa2V5IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
 
-Une fois les prérequis établis :
-
-1. Téléchargez la [collection Postman Datadog][3] (modèles d'appel d'API préconfigurés).
-   Dans Postman, une collection est un répertoire d'appels d'API organisés pour faciliter leur modification, leur enregistrement et leur réutilisation.
-
-2. Importez la collection Postman Datadog :
-    - Ouvrez Postman
-    - Cliquez sur **Import**
-    - Sélectionnez le fichier [datadog_collection.json][3] téléchargé à l'étape 1.
-
-Vous disposez maintenant d'une collection Datadog contenant de nombreux exemples différents d'API.
-
-**Remarque** : les appels d'API ne fonctionnent pas encore à cette étape. Continuez à lire pour configurer votre environnement Datadog-Postman.
+</br>Cette collection fonctionne dans l'interface Web ou l'application de Postman. Son chargement peut prendre quelques secondes.
 
 ### Configuration de l'environnement Postman
 
-Après l'importation de la collection Postman, une liste complète des appels d'API Datadog disponibles est arrangée par répertoire dans le volet de gauche de Postman.
-Dans les répertoires, les appels d'API ont des variables entrées pour `datadog_site`, `datadog_api_key`, et `datadog_application_key` :
+Après avoir importé la collection Postman, la liste complète des appels d'API Datadog disponibles s'affiche. Elle est arrangée par dossier dans le volet de gauche de Postman.
 
-{{< img src="getting_started/postman/SetAPIKeys.png" alt="template variables de l'API Postman"  style="width:70%;">}}
+#### Authentification
 
-Cela vous permet de configurer les [environnements Postman][4] et d'enregistrer votre site Datadog, ainsi que les clés d'application pour l'authentification. Si vous avez plusieurs organisations Datadog, définissez plusieurs [environnements Postman][4] pour effectuer des appels d'API vers différentes organisations sans modifier les appels d'API dans la collection Postman Datadog.
+La collection comprend un [environnement Postman][3] du nom de `Datadog Authentication`, au sein duquel vous pouvez ajouter votre API Datadog et des clés d'application pour l'authentification.
 
 Suivez ces étapes pour configurer votre environnement :
 
-1. Cliquez sur l'icône de **gestion des environnements** en forme d'engrenage dans le coin supérieur droit de Postman.
+1. Cliquez sur l'icône d'engrenage **Manage Environments** dans le coin supérieur droit de Postman.
 
-2. Cliquez sur **Add** pour entrer un **nom d'environnement**.
+2. Sélectionnez **Datadog Authentication**.
 
-3. Dans le tableau, ajoutez les variables `datadog_api_key` et `datadog_application_key`. Dans la colonne **Current Value**, entrez vos [clés d'API et d'application Datadog][2] réelles.
+3. Cliquez sur **Edit**.
 
-4. Ajoutez la variable `datadog_site`. Dans la colonne **Current Value**, entrez `com` si vous êtes sur le site américain Datadog ou `eu` si vous êtes sur le site européen Datadog.
+4. Ajoutez votre [clé d'API][2] Datadog en tant que valeur initiale et valeur actuelle de la variable `api_key`. Ajoutez ensuite votre [clé d'application][2] Datadog en tant que valeur initiale et valeur actuelle de la variable `application_key`.
 
-5. Facultatif : si vous avez plusieurs organisations Datadog, répétez les étapes 1 à 4 pour chaque organisation.
+{{< site-region region="eu" >}}
 
-{{< img src="getting_started/postman/setAPIKeys2.png" alt="template variables de l'API Postman 2"  style="width:70%;">}}
+#### Basculer vers l'endpoint de l'API européenne
+
+Si vous accédez à l'application Datadog européenne, vous devez modifier la configuration de la collection Postman afin d'accéder à l'URL de l'endpoint européen `https://api.datadoghq.eu`, à la place de l'URL de l'endpoint par défaut.
+
+Procédez comme suit pour apporter cette modification :
+
+1. Dans le volet gauche du répertoire de collection d'API Datadog, cliquez sur le menu représentant trois points, puis sélectionnez **Edit**.
+
+{{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
+
+2. Dans l'onglet **Variables**, décochez la variable `site` avec la valeur `datadoghq.com` et cochez la variable `site` avec la valeur `datadoghq.eu`.
+
+{{< img src="getting_started/postman/variables.png" alt="Mettre à jour la variable site">}}
+
+3. Cliquez sur **Update**.
+
+{{< /site-region >}}
 
 ## Utilisation de la collection
 
-Une fois la configuration terminée, vous êtes prêt(e) à effectuer des appels d'API. Dans le répertoire Postman -> Datadog, vous trouverez des sous-répertoires pour chaque type de catégorie d'API énuméré dans la [référence de l'API Datadog][5]. Développez les sous-répertoires pour afficher les méthodes HTTP et les noms des appels d'API.
-
-**Remarque** : n'oubliez pas de définir votre environnement défini dans le coin supérieur droit de l'interface Postman :
-
-{{< img src="getting_started/postman/env_setup.png" alt="Configuration de l'environnement" style="width:40%;">}}
+Une fois la configuration terminée, vous pouvez à présent effectuer des appels d'API. Dans le répertoire Postman -> Datadog, vous trouverez des sous-répertoires pour chaque type de catégorie d'API énumérée dans la [section relative aux API de Datadog][4]. Développez les sous-répertoires pour afficher les méthodes HTTP et les noms des appels d'API.
 
 ### Builder
 
-Lorsque vous cliquez sur un appel d'API dans la collection, il s'affiche dans le volet `Builder`, à droite. Depuis ce volet, vous pouvez envoyer l'appel d'API et voir le statut retourné, le temps de réponse et le code de réponse d'API.
+Lorsque vous cliquez sur un appel d'API dans la collection, il s'affiche dans le volet `Builder`, à droite. Depuis ce volet, vous pouvez envoyer l'appel d'API et consulter le statut renvoyé, le délai de réponse et le code de la réponse d'API.
 
 {{< img src="getting_started/postman/apiGetCalls.png" alt="Réponse API Postman" style="width:70%;">}}
 
 ### Description
 
-Lorsque vous cliquez sur le nom d'un endpoint, une description du endpoint et de tous les paramètres obligatoires/facultatifs s'affiche pour vous aider à créer vos requêtes :
+Lorsque vous cliquez sur le nom d'un endpoint, une description de l'endpoint et de tous les paramètres obligatoires/facultatifs s'affiche pour vous aider à créer vos requêtes :
 
 {{< img src="getting_started/postman/description.mp4" alt="Description Postman" video="true" >}}
 
 ### Params
 
-L'onglet **Params** affiche tous les paramètres et toutes les valeurs actuellement sur l'appel d'API. Depuis cet onglet, vous pouvez ajouter des paramètres et des valeurs. Consultez les arguments disponibles dans la section correspondante de la [documentation de l'API Datadog][6].
+L'onglet **Params** affiche tous les paramètres et toutes les valeurs actuellement inclus dans l'appel d'API. Depuis cet onglet, vous pouvez ajouter des paramètres et des valeurs. Consultez les arguments disponibles dans la section correspondante de la [documentation sur l'API Datadog][5].
 
 {{< img src="getting_started/postman/parameters.png" alt="Paramètres Postman" style="width:70%;">}}
 
 Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de l'appel d'API.
 
-**Remarques :**
+**Remarques** :
 
-- L'esperluette (&) et les deux-points (:) ne sont pas nécessaires dans le tableau de paramètres. Postman les ajoute pour vous.
-- Tous les placeholders respectent le format : `<PLACEHOLDER>` . Ils doivent être remplacés avant de lancer une requête.
+- Il n'est pas nécessaire d'ajouter les esperluettes (&) et les deux-points (:) dans le tableau des paramètres. Postman les insère automatiquement.
+- Tous les placeholders respectent le format `<PLACEHOLDER>`. Vous devez les remplacer avant de pouvoir lancer une requête.
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /resources/json/datadog_collection.json
-[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[5]: /fr/api/v1/organizations/
-[6]: /fr/api/
+[3]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[4]: /fr/api/v1/organizations/
+[5]: /fr/api/

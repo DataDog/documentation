@@ -103,10 +103,17 @@ TLS n'inclut aucun événement.
 
 Consultez le fichier [service_checks.json][4] pour afficher la liste des checks de service fournis par cette intégration :
 
-- `tls.can_connect` : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
-- `tls.version` : renvoie `CRITICAL` si une connexion à une version non autorisée du protocole est établie. Si ce n'est pas le cas, renvoie `OK`.
-- `tls.cert_validation` : renvoie `CRITICAL` si le certificat est incorrect ou ne correspond pas au hostname du serveur. Si ce n'est pas le cas, renvoie `OK`.
-- `tls.cert_expiration` : renvoie `CRITICAL` si le certificat a expiré ou expire dans moins de `days_critical`/`seconds_critical`, renvoie `WARNING` s'il expire dans moins de `days_warning`/`seconds_warning`, ou renvoie `OK` pour les autres cas.
+**tls.can_connect** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint qu'il surveille. Si ce n'est pas le cas, renvoie `OK`.
+
+**tls.version** :<br>
+Renvoie `CRITICAL` si une connexion à une version non autorisée du protocole est établie. Si ce n'est pas le cas, renvoie `OK`.
+
+**tls.cert_validation** :<br>
+Renvoie `CRITICAL` si le certificat est incorrect ou ne correspond pas au hostname du serveur. Si ce n'est pas le cas, renvoie `OK`.
+
+**tls.cert_expiration** :<br>
+Renvoie `CRITICAL` si le certificat a expiré ou expire dans moins de `days_critical`/`seconds_critical`, renvoie `WARNING` s'il expire dans moins de `days_warning`/`seconds_warning`, ou renvoie `OK` pour les autres cas.
 
 ## Dépannage
 

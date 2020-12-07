@@ -24,18 +24,24 @@ further_reading:
 
   - Données de l'[APM][1] : `trace.agent.`{{< region-param key="dd_site" code="true" >}}
   - Données des [live containers][2] : `process.`{{< region-param key="dd_site" code="true" >}}
-  - Données des [logs][3] : `agent-intake.logs`{{< region-param key="dd_site" code="true" >}} pour le trafic TCP, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} en HTTP. Consultez la liste d'[endpoints de logs][4] pour en savoir plus.
+  - Données des [Logs][3] : `agent-intake.logs.`{{< region-param key="dd_site" code="true" >}} pour le trafic TCP, `agent-http-intake.logs.`{{< region-param key="dd_site" code="true" >}} en HTTP, et plus encore. Consultez la liste d'[endpoints de logs][4] pour en savoir plus.
   - Données des [ressources de l'orchestrateur][5] : `orchestrator.`{{< region-param key="dd_site" code="true" >}}
+  - La destination des données des [logs HIPPA][6] est identique à celles de l'ensemble des [logs][3]. Toutefois, les endpoints hérités suivants sont également pris en charge :
+    - `tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `lambda-tcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `gcp-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+    - `http-encrypted-intake.logs.`{{< region-param key="dd_site" code="true" >}}
+  - [Emplacements privés Synthetic][7] : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.1.6+ et `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}} pour les versions 0.2.0+.
   - Toutes les autres données de l'Agent :
-      - **Agents < 5.2.0** `app.`{{< region-param key="dd_site" code="true" >}}
-      - **Agents >= 5.2.0** `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents < 5.2.0** : `app.`{{< region-param key="dd_site" code="true" >}}
+      - **Agents >= 5.2.0** : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}
 
         Cette modification a été apportée après la découverte de la vulnérabilité POODLE. Les endpoints avec contrôle des versions sont disponibles à partir de l'Agent v5.2.0. Chaque version de l'Agent appelle un endpoint différent en fonction de la version du _Forwarder_. Par exemple, l'Agent v5.2.0 appelle `5-2-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. Par conséquent, vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à la liste blanche de vos pare-feux.
 
 À partir de la version 6.1.0, l'Agent interroge également l'API de Datadog afin de fournir une fonctionnalité non essentielle, par exemple pour afficher la validité de la clé d'API configurée :
 
-- **Agent >= 7.18.0/6.18.0** `api.`{{< region-param key="dd_site" code="true" >}}
-- **Agent < 7.18.0/6.18.0** `app.`{{< region-param key="dd_site" code="true" >}}
+- **Agent >= 7.18.0/6.18.0** : `api.`{{< region-param key="dd_site" code="true" >}}
+- **Agent < 7.18.0/6.18.0** : `app.`{{< region-param key="dd_site" code="true" >}}
 
 Tous ces domaines sont des entrées **CNAME** qui pointent vers un ensemble d'adresses IP statiques. Vous pouvez trouver ces adresses sur la page `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
@@ -154,7 +160,7 @@ Ouvrez les ports suivants pour profiter de toutes les fonctionnalités de l'Agen
 
 ## Utilisation d'un proxy
 
-Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la section [Configuration de l'Agent pour un proxy][6].
+Pour obtenir des instructions détaillées sur la configuration d'un proxy, consultez la section [Configuration de l'Agent pour un proxy][8].
 
 ## Pour aller plus loin
 
@@ -165,4 +171,6 @@ Pour obtenir des instructions détaillées sur la configuration d'un proxy, cons
 [3]: /fr/logs/
 [4]: /fr/logs/log_collection/?tab=http#datadog-logs-endpoints
 [5]: /fr/infrastructure/livecontainers/#kubernetes-resources-1
-[6]: /fr/agent/proxy/
+[6]: /fr/security/logs/#hipaa-enabled-customers
+[7]: /fr/synthetics/private_locations/#datadog-private-locations-endpoints
+[8]: /fr/agent/proxy/

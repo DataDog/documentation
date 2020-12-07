@@ -64,8 +64,8 @@ Une fois l'Agent de cluster Datadog opérationnel :
 
     Appliquez cette modification en exécutant `kubectl apply -f custom-metric-server.yaml`
 
-3. Téléchargez le [fichier des règles RBAC `rbac-hpa.yaml`][7].
-2. Enregistrez l'Agent de cluster Datadog en tant que fournisseur de métriques externes via le service, en exposant le port `443`. Pour ce faire, appliquez les règles RBAC mentionnées ci-dessus :
+2. Téléchargez le [fichier des règles RBAC `rbac-hpa.yaml`][7].
+3. Enregistrez l'Agent de cluster Datadog en tant que fournisseur de métriques externes via le service, en exposant le port `443`. Pour ce faire, appliquez les règles RBAC mentionnées ci-dessus :
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -76,13 +76,13 @@ Une fois l'Agent de cluster Datadog lancé et le service enregistré, créez un 
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
       metricName: "<NOM_MÉTRIQUE>"
       metricSelector:
         matchLabels:
-          "<CLÉ_TAG>:<VALEUR_TAG>"
+          <CLÉ_TAG>: <VALEUR_TAG>
 ```
 
 **Exemple **: le manifeste d'Autoscaler de pods horizontaux ci-dessous permet de procéder à l'autoscaling d'un déploiement NGINX en fonction de la métrique `nginx.net.request_per_s` de Datadog.
@@ -112,7 +112,7 @@ spec:
 Notez que dans ce manifeste :
 
 - L'Autoscaler de pods horizontaux est configuré de façon à effectuer l'autoscaling du déploiement `nginx`.
-- Le nombre maximum de réplicas créés est de `5`, et le minimum est de `1`.
+- Le nombre maximum de réplicas créés est de `3`, et le minimum est de `1`.
 - La métrique utilisée est `nginx.net.request_per_s` et le contexte est `kube_container_name: nginx`. Ce format de métrique correspond à celui de Datadog.
 
 Toutes les 30 secondes, Kubernetes interroge l'Agent de cluster Datadog pour obtenir la valeur de cette métrique et effectue l'autoscaling en fonction, si cela est nécessaire. Pour les cas d'utilisation avancés, il est possible de configurer plusieurs métriques dans le même Autoscaler de pods horizontaux, comme le décrit [la documentation sur l'autoscaling de pods horizontaux Kubernetes][9]. La plus grande des valeurs proposées est celle choisie.
@@ -140,13 +140,13 @@ Pour tirer parti du CRD `DatadogMetric`, suivez les étapes ci-dessous :
 1. Installez le CRD `DatadogMetric` dans votre cluster.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-operator/master/deploy/crds/datadoghq.com_datadogmetrics_crd.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
     ```
 
 2. Mettez à jour le manifeste RBAC de l'Agent de cluster Datadog. La mise à jour permet d'utiliser le CRD `DatadogMetric`.
 
     ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent-datadogmetrics/cluster-agent-rbac.yaml"
     ```
 
 3. Définissez la variable `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` sur `true` dans le déploiement de l'Agent de cluster Datadog.
@@ -183,7 +183,7 @@ Une fois votre objet `DatadogMetric` créé, vous devez configurer votre Autosca
 
 ```yaml
 spec:
-  metric:
+  metrics:
     - type: External
       external:
       metricName: "datadogmetric@<espacedenommage>:<nom_métriquedatadog>"
@@ -220,7 +220,7 @@ L'Agent de cluster Datadog s'adapte en créant automatiquement des ressources `D
 
 Si vous choisissez de migrer un Autoscaler de pods horizontaux ultérieurement pour appeler un objet `DatadogMetric`, la ressource créée automatiquement sera nettoyée par l'Agent de cluster Datadog quelques heures plus tard.
 
-### Résolution des problèmes liés aux ressources DatadogMetric
+### Résolution des problèmes liés à DatadogMetric
 
 L'Agent de cluster Datadog se charge de mettre à jour la sous-ressource `status` de toutes les ressources `DatadogMetric` afin de refléter les résultats des requêtes envoyées à Datadog. Ces informations sont à examiner en priorité afin de comprendre ce qui se passe en cas de dysfonctionnement.
 
@@ -267,6 +267,6 @@ Les quatre conditions vous permettent d'en savoir plus sur l'état actuel de vot
 [4]: /fr/agent/cluster_agent/setup/
 [5]: /fr/agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
 [6]: https://app.datadoghq.com/account/settings#api
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
 [9]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics

@@ -158,7 +158,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe with the following environment variables in the Agent container. If all Agents are running in a single container, use:
+2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
 
     ```yaml
       # (...)
@@ -174,8 +174,6 @@ If you already have the [Agent running with a manifest][3]:
                             value: /var/run/s6/sysprobe.sock
     ```
 
-    If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
-
 3. Mount the following extra volumes into the `datadog-agent` container:
 
     ```yaml
@@ -184,7 +182,7 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'datadog/agent:latest'
+                      image: 'gcr.io/datadoghq/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -317,7 +315,7 @@ services:
 To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 
 
-[1]: /integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 

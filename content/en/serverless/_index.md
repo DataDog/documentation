@@ -15,6 +15,9 @@ further_reading:
 - link: "/integrations/amazon_lambda/"
   tag: "AWS Lambda Integration"
   text: "AWS Lambda Integration"
+- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+  tag: "Blog"
+  text: "Monitor AWS Lambda functions deployed using container images"
 ---
 
 {{< img src="serverless/datadog_serverless_overview.png" alt="Datadog Serverless Overview"  style="width:100%;">}}

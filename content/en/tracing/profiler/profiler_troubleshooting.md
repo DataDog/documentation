@@ -13,9 +13,38 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 14.04.3)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
 
+## Removing sensitive information from profiles
+
+If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.InitialSystemProperty#enabled=false
+{{< /code-block >}}
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+## Large allocation events overwhelming the profiler
+
+To turn off allocation profiling, disable the following events in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.ObjectAllocationInNewTLAB#enabled=false
+jdk.ObjectAllocationOutsideTLAB#enabled=false
+{{< /code-block >}}
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+## Exceptions overwhelming the profiler
+
+The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
+
+To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
+
+Remember to turn this setting back on after you've returned to a more typical rate of exceptions.
+
 ## Java 8 support
 
-The following OpenJDK 8 vendors are supported for Continuous Profiling because they include JDK Flight Recorder in their latest versions: 
+The following OpenJDK 8 vendors are supported for Continuous Profiling because they include JDK Flight Recorder in their latest versions:
 
 | Vendor                      | JDK version that includes Flight Recorder                      |
 | --------------------------- | -------------------------------------------------------------- |
@@ -24,25 +53,32 @@ The following OpenJDK 8 vendors are supported for Continuous Profiling because t
 | RedHat                      | u262                                                           |
 | Amazon (Corretto)           | u262                                                           |
 | Bell-Soft (Liberica)        | u262                                                           |
-| Upstream builds             | u272                                                           |
+| All vendors upstream builds             | u272                                                           |
 
 If your vendor is not on the list, [open a support ticket][2], we can let you know if we're planning to support it or if we already offer beta support.
 
-## Removing sensitive information from profiles
+## Creating and using a JFR template override file
 
-If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` override template file with `jdk.InitialSystemProperty` disabled:
+Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
-{{< code-block lang="text" filename="example-template.jfp" >}}
-jdk.InitialSystemProperty#enabled=false
-{{< /code-block >}}
+1. Create an override file in a directory accessible by `dd-java-agent` at service invocation:
+    ```
+    touch dd-profiler-overrides.jfp
+    ```
 
-## Exceptions overwhelming the profiler
+2. Add your desired overrides to the jfp file. For example, to disable allocation profiling and JVM system properties, your `dd-profiler-overrides.jfp` file would look like the following:
 
-The Datadog exception profiler will normally have a very small footprint and overhead. But if a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen, for example, when you use exceptions for control flow.  If you have an unusually high exception rate, temporarily turn off exception profiling until you’ve had a chance to fix what's causing them. 
+    {{< code-block lang="text" filename="example-template.jfp" >}}
+    jdk.ObjectAllocationInNewTLAB#enabled=false
+    jdk.ObjectAllocationOutsideTLAB#enabled=false
+    jdk.InitialSystemProperty#enabled=false
+    {{< /code-block >}}
 
-To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
+3. When running your application with `dd-java-agent`, your service invocation must point to the override file with `-Ddd.profiling.jfr-template-override-file=</path/to/override.jfp>`, for example:
 
-Remember to turn this setting back on after you've returned to a more typical rate of exceptions.
+    {{< code-block lang="text" filename="example-template.jfp" >}}
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.trace.sample.rate=1 -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
+    {{< /code-block >}}
 
 ## Further Reading
 

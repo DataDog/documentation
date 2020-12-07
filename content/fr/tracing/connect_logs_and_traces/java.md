@@ -16,9 +16,11 @@ further_reading:
     tag: Blog
     text: Corréler automatiquement des logs de requête avec des traces
 ---
-## Injection automatique d'ID de trace
+## Injecter automatiquement les ID de trace et de span
 
 Activez l'injection dans la [configuration][1] du traceur Java en ajoutant `-Ddd.logs.injection=true` comme argument de démarrage jvm ou via la variable d'environnement `DD_LOGS_INJECTION=true`.
+
+Si vos logs sont au format JSON et que vous utilisez Logback, vous n'avez plus rien à faire. Si vous utilisez une autre bibliothèque de logging, vous devez activer l'auto-injection des attributs MDC dans vos logs.
 
 Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_id` et `dd.span_id` à la configuration de votre logger :
 
@@ -26,13 +28,13 @@ Si vos logs sont au format brut, modifiez votre formateur en ajoutant `dd.trace_
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
-Si vos logs sont au format JSON et que vous utilisez Logback, vous n'avez plus rien à faire. Si vous utilisez une autre bibliothèque de logging, vous devez activer l'auto-injection des attributs MDC dans vos logs.
+**Remarque** : si le `attribute.path` de votre ID de trace ne correspond **pas** à `dd.trace_id`, assurez-vous que les paramètres des attributs réservés de votre ID de trace prennent en compte le `attribute.path`. Pour en savoir plus, consultez la [FAQ à ce sujet][2].
 
-## Injection manuelle d'ID de trace
+## Injecter manuellement des ID de trace et de span
 
-Si vous préférez corréler manuellement vos [traces][2] avec vos logs, utilisez l'API Datadog pour récupérer les identificateurs de corrélation :
+Si vous préférez corréler manuellement vos [traces][3] avec vos logs, utilisez l'API Datadog pour récupérer les identificateurs de corrélation :
 
-- Utilisez les méthodes d'API `CorrelationIdentifier#getTraceId()` et `CorrelationIdentifier#getSpanId()` pour injecter les identificateurs au début et à la fin de chaque [span][3] dans vos logs (voir les exemples ci-dessous).
+- Utilisez les méthodes d'API `CorrelationIdentifier#getTraceId()` et `CorrelationIdentifier#getSpanId()` pour injecter les identificateurs au début et à la fin de chaque [span][4] dans vos logs (voir les exemples ci-dessous).
 - Configurez MDC pour utiliser les clés injectées :
 
     - `dd.trace_id` : l'ID de la trace active lors de l'écriture du message de log (ou `0` en l'absence de trace).
@@ -89,7 +91,7 @@ Modifiez ensuite la configuration de votre logger en ajoutant `dd.trace_id` et `
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][4] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et  `dd.span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][5].
+**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][5] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et `dd.span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][6].
 
 [Consultez la documentation relative à la journalisation Java][4] pour en savoir plus sur l'implémentation d'un logger spécifique ou découvrir comment créer des logs au format JSON.
 
@@ -98,7 +100,8 @@ Modifiez ensuite la configuration de votre logger en ajoutant `dd.trace_id` et `
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/setup/java/#configuration
-[2]: /fr/tracing/visualization/#trace
-[3]: /fr/tracing/visualization/#spans
-[4]: /fr/logs/log_collection/java/#raw-format
-[5]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[2]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
+[3]: /fr/tracing/connect_logs_and_traces/
+[4]: /fr/logs/log_collection/java/?tab=log4j
+[5]: /fr/logs/log_collection/java/#raw-format
+[6]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
