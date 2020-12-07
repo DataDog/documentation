@@ -34,13 +34,22 @@ Par défaut, les utilisateurs existants sont déjà associés à l'un des trois 
 
 En plus des autorisations générales, il est possible de définir des autorisations plus granulaires pour des ressources ou des types de données spécifiques. Les autorisations peuvent être globales ou limitées à un sous-ensemble d'éléments. Vous trouverez ci-dessous les détails de ces options et leur impact sur chacune des autorisations disponibles.
 
+## Gestion de l'accès
+
+La liste ci-dessous répertorie les autorisations disponibles pour la gestion de l'accès :
+
+| Nom                    | Description                                                                               | Limitation possible |
+| ----------------------- | ----------------------------------------------------------------------------------------- | -------- |
+| `user_access_manage`         | Autorise la désactivation d'utilisateurs, la gestion des rôles d'utilisateur et les mappings SAML/rôle. | non    |
+| `user_access_invite`         | Permet aux utilisateurs d'inviter d'autres utilisateurs à rejoindre l'organisation.                             | non    |
+
 ## Dashboards
 
 La liste ci-dessous répertorie les autorisations disponibles pour les dashboards :
 
 | Nom                    | Description                             | Limitation possible |
 | ----------------------- | --------------------------------------- | -------- |
-| `dashboards_read`         | Possibilité de consulter les dashboards              | non    |
+| `dashboards_read`         | Possibilité de consulter les dashboards              | false    |
 | `dashboards_write`        | Possibilité de créer et de modifier des dashboards | non    |
 | `dashboards_public_share` | Possibilité de partager des dashboards en externe  | non    |
 
@@ -50,9 +59,9 @@ La liste ci-dessous répertorie les autorisations disponibles pour les monitors�
 
 | Nom              | Description                                  | Limitation possible |
 | ----------------- | -------------------------------------------- | -------- |
-| `monitors_read`     | Possibilité de consulter les monitors                     | non    |
-| `monitors_write`    | Possibilité de modifier, désactiver et supprimer des monitors | non    |
-| `monitors_downtime` | Possibilité de définir des downtimes pour vos monitors   | non    |
+| `monitors_read`     | Possibilité de consulter les monitors                     | false    |
+| `monitors_write`    | Possibilité de modifier, désactiver et supprimer des monitors | false    |
+| `monitors_downtime` | Possibilité de définir des downtimes pour vos monitors   | false    |
 
 ## Security Monitoring
 
@@ -62,7 +71,7 @@ La liste ci-dessous répertorie les autorisations disponibles pour les ressource
 | -------------------------------- | --------------------------------------------------- | -------- |
 | `security_monitoring_rules_read`   | Possibilité de consulter les règles de détection                     | false    |
 | `security_monitoring_rules_write`  | Possibilité de créer, modifier et supprimer des règles de détection | false    |
-| `security_monitoring_signals_read` | Possibilité de consulter les signaux de sécurité                    | non    |
+| `security_monitoring_signals_read` | Possibilité de consulter les signaux de sécurité                    | false    |
 
 ## Log Management
 
@@ -85,7 +94,7 @@ Vous trouverez ci-dessous la liste des autorisations pour les ressources de conf
 
 Le contrôle RBAC pour Log Management comprend également deux autorisations obsolètes, remplacées par une autorisation `logs_read_data` plus spécifique et plus étendue :
 
-| Nom                                              | Description                                | Limitation possible |  Profil type |
+| Nom                                              | Description                                | Limitation possible |  Utilisateur type |
 | ------------------------------------------------- | ------------------------------------------ | -------- | ------------- |
 | [`logs_live_tail`](#logs_live_tail)               | Accès à la fonctionnalité Live Tail               | false    | Lecture seule     |
 | [`logs_read_index_data`](#logs_read_index_data)  | Lecture d'un sous-ensemble de données de log (par index)       | true     | Lecture seule     |
@@ -94,7 +103,7 @@ Le contrôle RBAC pour Log Management comprend également deux autorisations obs
 {{< tabs >}}
 {{% tab "Interface utilisateur" %}}
 
-Une fois votre rôle créé, vous pouvez attribuer ou supprimer des autorisations pour ce rôle directement en [le mettant à jour depuis l'application Datadog][1].
+Une fois votre rôle créé, vous pouvez attribuer ou supprimer directement des autorisations pour ce rôle en le [modifiant depuis l'application Datadog][1].
 
 {{< img src="account_management/rbac/logs_permissions.png" alt="Autorisations de logs"  style="width:75%;" >}}
 
@@ -112,7 +121,7 @@ Une fois votre rôle créé, vous pouvez attribuer ou supprimer des autorisation
 
 Vous trouverez plus de détails sur ces autorisations ci-dessous.
 
-### Accès aux paramètres de configuration des logs
+### Accès à la configuration des logs
 
 #### logs_generate_metrics
 
@@ -308,7 +317,7 @@ Accordez les autorisations suivantes pour gérer l'accès en lecture à des sous
 
 Accès en lecture aux données de log. Si cette autorisation est accordée, d'autres restrictions peuvent être appliquées telles que `logs_read_index_data` ou via une [requête de restriction][20].
 
-Les rôles sont cumulatifs : si un utilisateur dispose de plusieurs rôles, l'ensemble de toutes les autorisations de chacun des rôles détermine les données auxquelles il a accès.
+Les rôles sont cumulatifs : si un utilisateur dispose de plusieurs rôles, toutes les autorisations de chacun des rôles déterminent les données auxquelles il a accès.
 
 **Exemple** :
 
@@ -325,7 +334,7 @@ Pour limiter les utilisateurs de manière à ce qu'ils puissent voir uniquement 
 
 1. [Créer](#creer-une-requete-de-restriction) une requête de restriction.
 2. [Assigner](#assigner-un-role-a-une-requete-de-restriction) un ou plusieurs rôles à cette requête de restriction.
-3. [Vérifier](#verifier-les-requetes-de-restriction) quels rôles et utilisateurs sont assignés à quelles requêtes de restriction.
+3. [Vérifier](#verifier-les-requetes-de-restriction) quels rôles et utilisateurs sont assignés aux requêtes de restriction.
 
 
 Cette vue répertorie les éléments suivants :
@@ -337,14 +346,14 @@ Cette vue répertorie les éléments suivants :
 
 ##### Créer une requête de restriction
 
-Créez une requête de restriction en définissant le filtre de la requête. La nouvelle requête apparaît dans la liste des restrictions sans aucun rôle associé.
+Créez une requête de restriction en définissant son filtre de requête. La nouvelle requête apparaît dans la liste des restrictions sans aucun rôle associé.
 
 {{< img src="account_management/rbac/logs_rq-create.gif" alt="Créer une requête de restriction"  style="width:70%;">}}
 
 
 ##### Assigner un rôle à une requête de restriction
 
-Choisissez un rôle et assignez-le à la requête de restriction prévue.
+Choisissez un rôle et assignez-le à la requête de restriction de votre choix.
 
 *Remarque* : n'oubliez pas qu'un rôle peut être associé à une seule requête de restriction. Par conséquent, si vous assignez un rôle à une requête de restriction, il perd tout lien avec la requête de restriction à laquelle il était déjà associé.
 
@@ -354,7 +363,7 @@ De la même manière, utilisez cette action de déplacement pour accorder un `Un
 
 ##### Vérifier les requêtes de restriction
 
-Cette page affiche un maximum de 50 requêtes de restriction à la fois, et de 50 rôles par section. Si vous avez des centaines ou des milliers de rôles et de requêtes de restriction, utilisez les filtres pour affiner la vue :
+Cette page affiche un maximum de 50 requêtes de restriction à la fois et de 50 rôles par section. Si vous avez des centaines ou des milliers de rôles et de requêtes de restriction, utilisez les filtres pour affiner la vue :
 
 * À l'aide du filtre de requête de restriction :
 
@@ -380,7 +389,7 @@ Utilisez des [requêtes de restriction][2] pour restreindre l'autorisation à un
 {{% /tab %}}
 {{< /tabs >}}
 
-### Autorisations obsolètes
+### Autorisations héritées
 
 Ces autorisations sont activées globalement par défaut pour tous les utilisateurs.
 

@@ -2,7 +2,9 @@
 assets:
   configuration:
     spec: assets/configuration/spec.yaml
-  dashboards: {}
+  dashboards:
+    tomcat: assets/dashboards/metrics.json
+    tomcat--overview: assets/dashboards/overview.json
   logs:
     source: tomcat
   metrics_metadata: metadata.csv
