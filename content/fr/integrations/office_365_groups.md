@@ -5,11 +5,11 @@ ddtype: crawler
 dependencies: []
 description: "Collaborez, partagez et suivez les performances de votre environnement avec des groupes Office\_365 et Datadog."
 doc_link: 'https://docs.datadoghq.com/integrations/office_365_groups/'
-draft: false
+draft: true
 git_integration_title: office_365_groups
 has_logo: true
 integration_title: "Groupes Office\_365"
-is_public: true
+is_public: false
 kind: integration
 manifest_version: '1.0'
 name: office_365_groups

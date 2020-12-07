@@ -50,7 +50,7 @@ spec:
       name: dd-agent
     spec:
       containers:
-      - image: datadog/docker-dd-agent:latest
+      - image: gcr.io/datadoghq/docker-dd-agent:latest
         imagePullPolicy: Always
         name: dd-agent
         ports:
@@ -58,8 +58,8 @@ spec:
             name: dogstatsdport
             protocol: UDP
         env:
-          - name: API_キー
-            value: "DATADOG_API_キー"
+          - name: API_KEY
+            value: "DATADOG_API_KEY"
           - name: KUBERNETES
             value: "yes"
         volumeMounts:
@@ -284,7 +284,7 @@ Checks
 ```
 
 [1]: https://github.com/DataDog/docker-dd-agent
-[2]: https://hub.docker.com/r/datadog/docker-dd-agent
+[2]: https://gcr.io/datadoghq/docker-dd-agent
 [3]: /ja/#host-setup
 [4]: /ja/integrations/docker_daemon/
 [5]: /ja/agent/kubernetes/

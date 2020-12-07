@@ -37,7 +37,7 @@ kind: ドキュメント
 
 [インストール手順][5]に従ってサーバーレスアプリケーションのインスツルメンテーションをセットアップすると、拡張 Lambda メトリクスがデフォルトで有効になります。
 
-**注**: ご使用の関数のログを Datadog に送信せずに拡張 Lambda メトリクスを有効にするには、[Datadog Forwarder][2] で `DdForwarderLog` 環境変数を `false` に設定します。
+**注**: ご使用の関数のログを Datadog に送信せずに拡張 Lambda メトリクスを有効にするには、[Datadog Forwarder][2] で `DdForwardLog` 環境変数を `false` に設定します。
 
 ## ダッシュボードの表示
 

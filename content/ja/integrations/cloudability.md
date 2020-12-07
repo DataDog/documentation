@@ -12,10 +12,7 @@ categories:
     - cloud
     - コスト管理
 ddtype: crawler
-further_reading:
-    - link: "https://support.cloudability.com/hc/en-us/articles/360011041074-Integration-with-Datadog-how-to-add-your-Datadog-Credentials-to-Cloudability"
-      tag: 外部ドキュメント
-      text: Datadog 資格情報を Cloudability に追加する方法
+
 ---
 
 ## 概要
@@ -28,9 +25,5 @@ Datadog アプリケーションを Cloudability アカウントにバインド�
 
 - Cloudability >> Settings >> Vendor Credentials にログインします。
 - [Datadog API キーとアプリケーションキー][1]を追加します。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api

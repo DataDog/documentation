@@ -75,7 +75,7 @@ logs:
 init_config:
 
 instances:
-    - apache_stats_url: "http://localhost/server-status?auto"
+    - apache_status_url: "http://localhost/server-status?auto"
       service: local-apache
 
     - apache_status_url: "http://<REMOTE_APACHE_ENDPOINT>/server-status?auto"
