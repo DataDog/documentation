@@ -1,4 +1,42 @@
 {
+  "ListApplicationKeys": {
+    "description": "List all application keys available for your org",
+    "summary": "Get all application keys"
+  },
+  "DeleteApplicationKey": {
+    "description": "Delete an application key",
+    "summary": "Delete an application key"
+  },
+  "UpdateApplicationKey": {
+    "description": "Edit an application key",
+    "summary": "Edit an application key",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
+  "ListCurrentUserApplicationKeys": {
+    "description": "List all application keys available for current user",
+    "summary": "Get all application keys owned by current user"
+  },
+  "CreateCurrentUserApplicationKey": {
+    "description": "Create an application key for current user",
+    "summary": "Create an application key for current user",
+    "request_description": "",
+    "request_schema_description": "Request used to create an application key."
+  },
+  "DeleteCurrentUserApplicationKey": {
+    "description": "Delete an application key owned by current user",
+    "summary": "Delete an application key owned by current user"
+  },
+  "GetCurrentUserApplicationKey": {
+    "description": "Get an application key owned by current user",
+    "summary": "Get one application key owned by current user"
+  },
+  "UpdateCurrentUserApplicationKey": {
+    "description": "Edit an application key owned by current user",
+    "summary": "Edit an application key owned by current user",
+    "request_description": "",
+    "request_schema_description": "Request used to update an application key."
+  },
   "DeleteDashboardListItems": {
     "description": "Delete dashboards from an existing dashboard list.",
     "summary": "Delete items from a dashboard list",
