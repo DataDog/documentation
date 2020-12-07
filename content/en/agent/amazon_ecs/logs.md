@@ -83,33 +83,19 @@ To collect all logs written by running applications in your ECS containers and s
     {
       "containerDefinitions": [
         (...)
-          "mountPoints": [
-            (...)
-            {
-              "containerPath": "/etc/passwd",
-              "sourceVolume": "passwd",
-              "readOnly": true
-            },
-            (...)
-          ],
           "environment": [
             (...)
             {
-              "name": "DD_PROCESS_AGENT_ENABLED",
+              "name": "DD_LOGS_ENABLED",
               "value": "true"
-            }
+            },
+            {
+              "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+              "value": "true"
+            },
+            (...)
           ]
         }
-      ],
-      "volumes": [
-        (...)
-        {
-          "host": {
-            "sourcePath": "/etc/passwd"
-          },
-          "name": "passwd"
-        },
-        (...)
       ],
       "family": "datadog-agent-task"
     }
