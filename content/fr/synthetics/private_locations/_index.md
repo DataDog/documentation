@@ -396,7 +396,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,
@@ -412,7 +412,7 @@ livenessProbe:
 "healthCheck": {
   "retries": 3,
   "command": [
-    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+    "CMD-SHELL", "/bin/sh -c '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
   ],
   "timeout": 2,
   "interval": 10,

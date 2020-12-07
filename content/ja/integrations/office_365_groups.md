@@ -5,11 +5,11 @@ ddtype: crawler
 dependencies: []
 description: Office 365 グループと Datadog を使用して、コラボレーション、共有、パフォーマンスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/office_365_groups/'
-draft: false
+draft: true
 git_integration_title: office_365_groups
 has_logo: true
 integration_title: Office 365 グループ
-is_public: true
+is_public: false
 kind: インテグレーション
 manifest_version: '1.0'
 name: office_365_groups

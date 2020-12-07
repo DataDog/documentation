@@ -1,6 +1,7 @@
 ---
 title: Widget Top List
 kind: documentation
+widget_type: toplist
 aliases:
   - /fr/graphing/widgets/top_list/
 further_reading:
@@ -9,10 +10,13 @@ further_reading:
     text: Timeboards
   - link: /dashboards/screenboards/
     tag: Documentation
-    text: Screenboard
+    text: Screenboards
   - link: /dashboards/graphing_json/
     tag: Documentation
     text: Créer des dashboards avec JSON
+  - link: /notebooks/
+    tag: Documentation
+    text: Notebooks
 ---
 La visualisation Top List vous permet d'afficher une liste de valeurs de tags comme `hostname` ou `service` avec la valeur maximale ou minimale d'une métrique quelconque (par exemple, les processus qui sollicitent le plus le processeur, les hosts disposant du moins d'espace disque, etc.) :
 
@@ -25,9 +29,9 @@ La visualisation Top List vous permet d'afficher une liste de valeurs de tags co
 ### Configuration
 
 1. Choisissez les données à représenter :
-    * Métrique : consultez la documentation sur les [requêtes][1] pour configurer une requête de métrique.
-    * Spans analysées : consultez la [documentation sur la recherche de traces][2] pour configurer une requête de span analysée.
-    * Événements de log : consultez la [documentation sur la recherche de logs][1] pour configurer une requête d'événement de log.
+    * Métrique : consultez la [documentation sur les requêtes][1] pour configurer une requête de métrique.
+    * Spans indexées : consultez la [documentation sur la recherche de traces][2] pour configurer une requête de span indexée.
+    * Événements de log : consultez la [documentation sur la recherche de logs][3] pour configurer une requête d'événement de log.
 
 2. Facultatif : configurez une mise en forme conditionnelle en fonction des valeurs de vos entrées.
 
@@ -35,7 +39,7 @@ La visualisation Top List vous permet d'afficher une liste de valeurs de tags co
 
 #### Intervalle global
 
-Choisissez si votre widget doit afficher un intervalle personnalisé ou l'intervalle global du screenboard (disponible sur les screenboards uniquement).
+Sur les screenboards et les notebooks, choisissez si votre widget doit utiliser un intervalle personnalisé ou l'intervalle global.
 
 #### Titre
 
@@ -47,50 +51,18 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][3] utilisé pour le widget Top List est le suivant :
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la documentation relative à l'[API Dashboards][4] pour en savoir plus.
 
-```text
-TOPLIST_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "type": {"enum": ["toplist"]},
-        "requests": {
-            "type":     "array",
-            "items":    REQUEST_SCHEMA,
-            "minItems": 1,
-            "maxItems": 1
-        },
-        "title": {"type": "string"}
-    },
-    "required": ["type", "requests"],
-    "additionalProperties": false
-}
-```
+Le [schéma JSON][5] utilisé pour le widget Top List est le suivant :
 
-| Paramètre  | Type             | Obligatoire | Description                                                                                                                                                  |
-|------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`     | chaîne           | oui      | Type du widget (utilisez `toplist` pour le widget Top List).                                                                                                       |
-| `requests` | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][4] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
-| `title`    | chaîne           | non       | Titre de votre widget.                                                                                                                                        |
-
-Propriétés supplémentaires autorisées dans l'objet `request` :
-
-```text
-{
-   "conditional_formats": CONDITIONAL_FORMATS_SCHEMA
-}
-```
-
-| Paramètre             | Type   | Obligatoire | Description                                                                                                                                                     |
-|-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | objet | non       | Options de commande de mise en forme conditionnelle. Consultez la [documentation relative au schéma JSON de format conditionnel][5] pour apprendre à élaborer le `CONDITIONAL_FORMATS_SCHEMA`. |
+{{< dashboards-widgets-api >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/search_syntax
+[1]: /fr/dashboards/querying/
 [2]: /fr/tracing/app_analytics/search/#search-bar
-[3]: /fr/dashboards/graphing_json/widget_json
-[4]: /fr/dashboards/graphing_json/request_json
-[5]: /fr/dashboards/graphing_json/widget_json/#conditional-format-schema
+[3]: /fr/logs/search_syntax/
+[4]: /fr/api/v1/dashboards/
+[5]: /fr/dashboards/graphing_json/widget_json/
