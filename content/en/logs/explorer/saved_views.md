@@ -15,7 +15,7 @@ further_reading:
 
 Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** to enable analysis.
 
-Troubleshooting is highly contextual, and Saved Views enable you and your teammates to easily switch between different troubleshooting contexts. You can access Saved Views in the upper right corner of the [Log Explorer][2].
+Troubleshooting is highly contextual, and Saved Views enable you and your teammates to easily switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
 
 {{< img src="logs/explorer/saved_views/overview.png" alt="Saved Views selection"  style="width:90%;" >}}
 
@@ -24,7 +24,7 @@ Technically, a Saved View keeps track of:
 - A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties)
 - A [selected subset of facets][1] to be displayed in the facet list
 
-## Your Default Saved Views
+## Your Default Saved View
 
 {{< img src="logs/explorer/saved_views/default.png" alt="Saved Views selection"  style="width:50%;" >}}
 
