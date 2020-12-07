@@ -3349,6 +3349,74 @@ api_v2:
     url: /api/v2/key-management/
     identifier: Key Management
     generated: true
+  - name: Get all application keys
+    parent: Key Management
+    url: '#get-all-application-keys'
+    generated: true
+  - name: Delete an application key
+    parent: Key Management
+    url: '#delete-an-application-key'
+    generated: true
+  - name: Edit an application key
+    parent: Key Management
+    url: '#edit-an-application-key'
+    generated: true
+  - name: Get all application keys owned by current user
+    parent: Key Management
+    url: '#get-all-application-keys-owned-by-current-user'
+    generated: true
+  - name: Create an application key for current user
+    parent: Key Management
+    url: '#create-an-application-key-for-current-user'
+    generated: true
+  - name: Delete an application key owned by current user
+    parent: Key Management
+    url: '#delete-an-application-key-owned-by-current-user'
+    generated: true
+  - name: Get one application key owned by current user
+    parent: Key Management
+    url: '#get-one-application-key-owned-by-current-user'
+    generated: true
+  - name: Edit an application key owned by current user
+    parent: Key Management
+    url: '#edit-an-application-key-owned-by-current-user'
+    generated: true
+  - name: Key Management
+    url: /api/v2/key-management/
+    identifier: Key Management
+    generated: true
+  - name: Get all application keys
+    parent: Key Management
+    url: '#get-all-application-keys'
+    generated: true
+  - name: Delete an application key
+    parent: Key Management
+    url: '#delete-an-application-key'
+    generated: true
+  - name: Edit an application key
+    parent: Key Management
+    url: '#edit-an-application-key'
+    generated: true
+  - name: Get all application keys owned by current user
+    parent: Key Management
+    url: '#get-all-application-keys-owned-by-current-user'
+    generated: true
+  - name: Create an application key for current user
+    parent: Key Management
+    url: '#create-an-application-key-for-current-user'
+    generated: true
+  - name: Delete an application key owned by current user
+    parent: Key Management
+    url: '#delete-an-application-key-owned-by-current-user'
+    generated: true
+  - name: Get one application key owned by current user
+    parent: Key Management
+    url: '#get-one-application-key-owned-by-current-user'
+    generated: true
+  - name: Edit an application key owned by current user
+    parent: Key Management
+    url: '#edit-an-application-key-owned-by-current-user'
+    generated: true
   - name: Logs
     url: /api/v2/logs/
     identifier: Logs
