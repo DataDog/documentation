@@ -36,9 +36,9 @@ To add a comment, select some text or hover over a graph. The **Add comment** bu
 
 To edit or delete a comment you wrote, click the menu on the top-right of your comment.
 
-{{< img src="notebooks/edit_comment.png" alt="live collaboration in notebooks"  style="width:100%;">}}
+{{< img src="notebooks/edit_comment.png" alt="edit comment in notebook"  style="width:100%;">}}
 
-Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu. 
+Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
 
 ## Notebook List
