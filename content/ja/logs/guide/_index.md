@@ -6,7 +6,8 @@ private: true
 
 {{< whatsnext desc="Logging Without Limits™" >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
-    {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}ログの使用状況を監視する{{< /nextlink >}}
+    {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
+    {{< nextlink href="logs/guide/logs-monitors-on-volumes" >}}ログの使用状況の監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

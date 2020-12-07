@@ -1,7 +1,6 @@
 ---
 title: Gestion des incidents
 kind: documentation
-disable_toc: true
 description: Créer et gérer des incidents
 ---
 Tout événement susceptible d'entraîner une interruption des services de votre organisation peut être considéré comme un incident, et il est souvent nécessaire d'avoir un système bien défini pour traiter ce genre d'événements. La fonctionnalité de gestion des incidents de Datadog fournit un système grâce auquel votre organisation peut identifier et réduire les incidents de manière efficace.

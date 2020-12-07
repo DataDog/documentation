@@ -88,7 +88,7 @@ APM トレースの収集を有効にするには、DaemonSet コンフィギュ
 ```
 agent:
   image:
-    name: "datadog/agent:latest"
+    name: "gcr.io/datadoghq/agent:latest"
   apm:
     enabled: true
     hostPort: 8126
@@ -147,12 +147,12 @@ Kubernetes で稼働する Agent 内のトレースに利用可能なすべて�
 | `DD_LOG_LEVEL`             | ログレベルを設定します。(`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                             |
 | `DD_APM_ENABLED`           | `true` に設定すると、Datadog Agent はトレースメトリクスを受け取ります。デフォルト値は `true` です（Agent 7.18 以上）。                                                                                                                                                                                                                                                                |
 | `DD_APM_CONNECTION_LIMIT`  | 30 秒のタイムウィンドウに対する最大接続制限を設定します。                                                                                                                                                                                                                                                              |
-| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイント。Datadog EU サイトの場合は、`DD_APM_DD_URL` を `https://trace.agent.datadoghq.eu` に設定します                                                                                                                                                                                                   |
+| `DD_APM_DD_URL`            | トレースが送信される Datadog API エンドポイントを設定します: `https://trace.agent.{{< region-param key="dd_site" >}}`。デフォルトは `https://trace.agent.datadoghq.com` 。                                                                                                                                                                                                   |
 | `DD_APM_RECEIVER_PORT`     | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                                                                                                                                                                                           |
 | `DD_APM_NON_LOCAL_TRAFFIC` | 他のコンテナからのトレース時に、非ローカルトラフィックを許可します。デフォルト値は `true` です（Agent 7.18 以上）。                                                                                                                                                                                                                               |
 | `DD_APM_IGNORE_RESOURCES`  | Agent が無視するリソースを構成します。書式はカンマ区切りの正規表現です。たとえば、<code>GET /ignore-me,(GET\|POST) /and-also-me</code> となります。                                                                                                                                                                          |
 | `DD_APM_ANALYZED_SPANS`    | トランザクションを分析するスパンを構成します。書式はカンマ区切りのインスタンス <code>\<サービス名>\|;\<オペレーション名>=1</code>、たとえば、<code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code> となります。トレーシングクライアントでコンフィギュレーションパラメーターを使用して[自動的に有効化][6]することもできます。 |
-| `DD_ENV`               | Agent によって発行されたすべてのデータにグローバル `env` を設定します。トレースデータに `env` が存在しない場合、この変数が使用されます。詳細については、[APM 環境設定][7]を参照してください。                                                                                                                                                                                                                                                                         |
+| `DD_ENV`                   | Agent によって発行されたすべてのデータにグローバル `env` を設定します。トレースデータに `env` が存在しない場合、この変数が使用されます。詳細については、[APM 環境設定][7]を参照してください。                                                                                                                                                                                                                                                                         |
 | `DD_APM_MAX_EPS`           | 1 秒あたりの最大 Indexed Span 数を設定します。デフォルトは 1 秒あたり 200 イベントです。                                                                                                                                                                                                                                               |
 | `DD_APM_MAX_TPS`           | 1 秒あたりの最大トレース数を設定します。デフォルトは 1 秒あたり 10 トレースです。                                                                                                                                                                                                                                                        |
 

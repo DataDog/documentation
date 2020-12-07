@@ -6,7 +6,7 @@ aliases:
   - /ja/overview
   - /ja/getting_started/faq/
 further_reading:
-  - link: 'https://learn.datadoghq.com/course/view.php?id=2'
+  - link: 'https://learn.datadoghq.com/course/view.php?id=18'
     tag: ラーニングセンター
     text: Datadog 入門
 ---
