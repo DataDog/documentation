@@ -125,7 +125,7 @@
                     </p>
 
                     <h3 class="mt-2">{{ i18n "overview" }}</h3>
-                    <p>{{ $endpoint.action.description | markdownify }}</p>
+                    <p>{{ $translate_action.description | default $endpoint.action.description | markdownify }}</p>
 
                     <!-- querystring, path params, header params -->
                     {{ partial "api/arguments.html" (dict "parameters" $endpoint.action.parameters) }}
