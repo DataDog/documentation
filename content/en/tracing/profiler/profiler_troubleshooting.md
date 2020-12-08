@@ -34,6 +34,16 @@ jdk.ObjectAllocationOutsideTLAB#enabled=false
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
+## Memory leak detection slowing down garbage collector
+
+To turn off memory leak detection, disable the following event in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.OldObjectSample#enabled=false
+{{< /code-block >}}
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
 ## Exceptions overwhelming the profiler
 
 The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
