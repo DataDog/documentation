@@ -44,13 +44,15 @@ https://*.datadoghq.com/*
 
 The following Datadog tracing libraries are supported:
 
-* [Python][4]
-* [Go][5]
-* [Java][6]
-* [Ruby][7]
-* [JavaScript][8]
-* [PHP][9]
-* [.NET][10]
+| Library                             | Minimum Version                                                                                                             |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [Python][4]                  | [0.22.0][4]                |
+| [Go][5]                  | [1.10.0][5]                |
+| [Java][6]                  | [0.24.1][6]                |
+| [Ruby][7]                  | [0.20.0][7]                |
+| [JavaScript][8]                  | [0.10.0][8]                |
+| [PHP][9]                  | [0.33.0][9]                |
+| [.NET][10]                  | [1.18.2][10]                |
 
 ### How are traces linked to tests?
 
@@ -62,7 +64,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 | `x-datadog-parent-id: 0`               | To have Synthetic tests be the root span of the generated trace.                                                        |
 | `x-datadog-origin: synthetics`         | To make sure the generated traces from your API tests [don't affect your APM quotas](#how-are-apm-quotas-affected).     |
 | `x-datadog-origin: synthetics-browser` | To make sure the generated traces from your Browser tests [don't affect your APM quotas](#how-are-apm-quotas-affected). |
-| `x-datadog-sampling-priority: 1`       | [To make sure that the Agent keeps the trace][11].                                                                      |
+| `x-datadog-sampling-priority: 1`       | To make sure that the Agent keeps the trace.                                                                      |
 
 ### How are APM quotas affected?
 
@@ -70,7 +72,7 @@ The `x-datadog-origin: synthetics` header specifies to the APM backend that the 
 
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][12].
+These traces are retained [just like your classical APM traces][11].
 
 ## Further Reading
 
@@ -86,5 +88,4 @@ These traces are retained [just like your classical APM traces][12].
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[11]: /tracing/guide/trace_sampling_and_storage/#how-it-works
-[12]: /tracing/guide/trace_sampling_and_storage/#trace-storage
+[11]: /tracing/trace_retention_and_ingestion/
