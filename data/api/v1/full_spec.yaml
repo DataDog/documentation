@@ -1273,7 +1273,8 @@ components:
           format: int64
           type: integer
         timezone:
-          description: The timezone for the downtime.
+          description: The timezone in which to display the downtime's start and end
+            times in Datadog applications.
           example: America/New_York
           type: string
         updater_id:
