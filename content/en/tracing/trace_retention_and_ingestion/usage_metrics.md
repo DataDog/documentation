@@ -18,7 +18,6 @@ To create a custom dashboard or monitor, the key metrics to use are:
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.indexed_spans`
 
-
 ### Indexed Spans
 
 {{< img src="tracing/trace_indexing_and_ingestion/RetentionFilters.png" style="width:100%;" alt="Span Indexing" >}}
