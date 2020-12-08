@@ -14,12 +14,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md'
 display_name: Nvidia Jetson
-draft: true
+draft: false
 git_integration_title: nvidia_jetson
 guid: 72845bb7-c3a6-4017-96f6-c232171102f8
 integration_id: nvidia-jetson
 integration_title: Nvidia Jetson
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
