@@ -46,13 +46,13 @@ The following Datadog tracing libraries are supported:
 
 | Library                             | Minimum Version                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][4]                  | [0.22.0][4]                |
-| [Go][5]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][6]                |
-| [Ruby][7]                  | [0.20.0][7]                |
-| [JavaScript][8]                  | [0.10.0][8]                |
-| [PHP][9]                  | [0.33.0][9]                |
-| [.NET][10]                  | [1.18.2][10]                |
+| [Python][4]                  | [0.22.0][5]                |
+| [Go][6]                  | [1.10.0][7]                |
+| [Java][8]                  | [0.24.1][9]                |
+| [Ruby][10]                  | [0.20.0][11]                |
+| [JavaScript][12]                  | [0.10.0][13]                |
+| [PHP][14]                  | [0.33.0][15]                |
+| [.NET][16]                  | [1.18.2][17]                |
 
 ### How are traces linked to tests?
 
@@ -72,7 +72,7 @@ The `x-datadog-origin: synthetics` header specifies to the APM backend that the 
 
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][11].
+These traces are retained [just like your classical APM traces][18].
 
 ## Further Reading
 
@@ -81,11 +81,18 @@ These traces are retained [just like your classical APM traces][11].
 [1]: /synthetics/api_tests/
 [2]: /synthetics/browser_tests/
 [3]: /tracing/
-[4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[11]: /tracing/trace_retention_and_ingestion/
+[4]: /tracing/setup_overview/setup/python/
+[5]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[6]: /tracing/setup_overview/setup/go/
+[7]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[8]: /tracing/setup_overview/setup/java/
+[9]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[10]: /tracing/setup_overview/setup/ruby/
+[11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[12]: /tracing/setup_overview/setup/nodejs/
+[13]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[14]: /tracing/setup_overview/setup/php/
+[15]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[16]: /tracing/setup_overview/setup/dotnet-core/
+[17]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[18]: /tracing/trace_retention_and_ingestion/
