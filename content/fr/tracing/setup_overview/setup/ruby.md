@@ -61,6 +61,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [MySQL2](#mysql2)
      - [Net/HTTP](#net-http)
      - [Presto](#presto)
+     - [Qless](#qless)
      - [Que](#que)
      - [Racecar](#racecar)
      - [Rack](#rack)
@@ -69,6 +70,7 @@ Pour contribuer au code, consultez les [règles de contribution][contribution do
      - [Redis](#redis)
      - [Client Rest](#rest-client)
      - [Resque](#resque)
+     - [RSpec](#rspec)
      - [Shoryuken](#shoryuken)
      - [Sequel](#sequel)
      - [Sidekiq](#sidekiq)
@@ -239,7 +241,7 @@ Assurez-vous de remplacer `name` par une `string` décrivant le type d'opératio
 | `resource`    | `String` | Nom de la ressource ou de l'action tracée. Les traces associées à un même nom de ressource seront regroupées pour la collecte de métriques (elles resteront toutefois consultables séparément). Généralement spécifique à un domaine, tel qu'une URL, une requête, etc. (p. ex. `'Article#submit'`, `http://exemple.com/articles/list`.) | `name` de la span. |
 | `span_type`   | `String` | Type de span (`'http'`, `'db'`, etc.) | `nil` |
 | `child_of`    | `Datadog::Span` / `Datadog::Context` | Parent de cette span. Si aucun parent n'est spécifié, devient automatiquement la span active. | `nil` |
-| `start_time`  | `Integer` | Heure d'initialisation réelle de la span. Utile dans les cas où les événements tracés se sont déjà produits. | `Time.now.utc` |
+| `start_time`  | `Time` | Heure d'initialisation réelle de la span. Utile dans les cas où les événements tracés se sont déjà produits. | `Time.now` |
 | `tags`        | `Hash` | Tags supplémentaires à ajouter à la span. | `{}` |
 | `on_error`    | `Proc` | Gestionnaire invoqué lorsqu'un bloc devant être tracé renvoie une erreur. Arguments : `span` spécifiée et `error`. Définit l'erreur sur la span par défaut. | `proc { |span, error| span.set_error(error) unless span.nil? }` |
 
@@ -367,6 +369,7 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | MySQL2                   | `mysql2`                   | `>= 0.3.21`              | *Gem non disponible*       | *[Lien](#mysql2)*                   | *[Lien](https://github.com/brianmario/mysql2)*                                 |
 | Net/HTTP                 | `http`                     | *(Toute version de Ruby prise en charge)*   | *(Toute version de Ruby prise en charge)*    | *[Lien](#nethttp)*                  | *[Lien](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html)* |
 | Presto                   | `presto`                   | `>= 0.5.14`              | `>= 0.5.14`               | *[Lien](#presto)*                   | *[Lien](https://github.com/treasure-data/presto-client-ruby)*                  |
+| Qless                    | `qless`                    | `>= 0.10.0`              | `>= 0.10.0`               | *[Lien](#qless)*                    | *[Lien](https://github.com/seomoz/qless)*                                      |
 | Que                      | `que`                      | `>= 1.0.0.beta2`         | `>= 1.0.0.beta2`          | *[Lien](#que)*                      | *[Lien](https://github.com/que-rb/que)*                                        |
 | Racecar                  | `racecar`                  | `>= 0.3.5`               | `>= 0.3.5`                | *[Lien](#racecar)*                  | *[Lien](https://github.com/zendesk/racecar)*                                   |
 | Rack                     | `rack`                     | `>= 1.1`                 | `>= 1.1`                  | *[Lien](#rack)*                     | *[Lien](https://github.com/rack/rack)*                                         |
@@ -375,6 +378,7 @@ Vous trouverez ci-dessous la liste des intégrations disponibles ainsi que leurs
 | Redis                    | `redis`                    | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#redis)*                    | *[Lien](https://github.com/redis/redis-rb)*                                    |
 | Resque                   | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[Lien](#resque)*                   | *[Lien](https://github.com/resque/resque)*                                     |
 | Client Rest              | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[Lien](#rest-client)*              | *[Lien](https://github.com/rest-client/rest-client)*                           |
+| RSpec                    | `rspec`.                   | `>= 3.0.0`               | `>= 3.0.0`                | *[Lien](#rspec)*.                   | *[Lien](https://github.com/rspec/rspec)*                                       |
 | Sequel                   | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[Lien](#sequel)*                   | *[Lien](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[Lien](#shoryuken)*                | *[Lien](https://github.com/phstc/shoryuken)*                                   |
 | Sidekiq                  | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[Lien](#sidekiq)*                  | *[Lien](https://github.com/mperham/sidekiq)*                                   |
@@ -1165,6 +1169,29 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `presto` | `'presto'` |
 
+### Qless
+
+L'intégration Qless utilise des hooks de cycle de vie pour tracer les exécutions de tâches.
+
+Pour tracer une tâche Qless :
+
+```ruby
+require 'ddtrace'
+
+Datadog.configure do |c|
+  c.use :qless, options
+end
+```
+
+Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
+
+| Clé | Description | Valeur par défaut |
+| --- | ----------- | ------- |
+| `analytics_enabled` | Activer l'analyse des spans générées par cette intégration. Définir sur `true` pour l'activer, sur `nil` pour utiliser le paramètre global, ou sur `false` pour la désactiver. | `false` |
+| `service_name` | Nom de service utilisé pour l'instrumentation de `qless` | `'qless'` |
+| `tag_job_data` | Activer le tagging avec des arguments de tâches. true pour l'activer, false pour le désactiver. | `false` |
+| `tag_job_tags` | Activer le tagging avec des tags de tâches. true pour l'activer, false pour le désactiver. | `false` |
+
 ### Que
 
 L'intégration Que est un middleware qui permet de tracer les exécutions de tâches.
@@ -1242,7 +1269,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `application` | Votre application Rack. Obligatoire pour `middleware_names`. | `nil` |
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) de façon à associer les traces de ce service aux traces d'autres services si des en-têtes de tracing sont reçus. | `true` |
 | `headers` | Hash d'en-têtes de requête ou de réponse HTTP à ajouter en tant que tags à `rack.request`. Accepte les clés `request` et `response` des valeurs sous forme de tableau, par exemple `['Last-Modified']`. Ajoute les tags `http.request.headers.*` et `http.response.headers.*` respectivement. | `{ response: ['Content-Type', 'X-Request-ID'] }` |
-| `middleware_names` | Activez ce paramètre pour utiliser les classes de middleware en tant que noms de ressource pour les spans `rack`. Nécessite d'utiliser l'option `application`. | `false` |
+| `middleware_names` | Activez cette option pour utiliser la dernière classe middleware exécutée comme nom de ressource pour la span `rack`. Si cette option et l'instrumentation `rails` sont toutes les deux activées, `rails` a la priorité et définit le nom de ressource `rack` sur le contrôleur `rails` actif, le cas échéant. Nécessite l'option `application`. | `false` |
 | `quantize` | Hash contenant les options de quantification. Possibilité d'utiliser `:query` ou `:fragment`. | `{}` |
 | `quantize.query` | Hash contenant les options propres à la requête lors de la quantification des URL. Possibilité d'utiliser `:show` ou `:exclude`. Voir les options ci-dessous. Cette option doit être imbriquée dans l'option `quantize`. | `{}` |
 | `quantize.query.show` | Définit les valeurs à toujours afficher. Par défaut, aucune valeur n'est affichée. Spécifier un tableau de chaînes ou `:all` pour afficher toutes les valeurs. Cette option doit être imbriquée dans l'option `query`. | `nil` |
@@ -1512,7 +1539,7 @@ Où `options` est un `hash` facultatif qui accepte les paramètres suivants :
 | `distributed_tracing` | Active le [tracing distribué](#tracing-distribue) | `true` |
 | `service_name` | Nom de service utilisé pour l'instrumentation de `rest_client`. | `'rest_client'` |
 
-## RSpec
+### RSpec
 
 Lorsque vous utilisez le framework de test `rspec`, l'intégration RSpec trace toutes les exécutions d'exemples et de groupes d'exemples 
 
