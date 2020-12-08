@@ -17,8 +17,9 @@
                   "<any-key>": {}
                 },
                 "modified": "2019-09-19T10:00:00.000Z",
-                "notification_handles": [
-                  "@test.user@test.com"
+                "notification_handles": [{
+                    "handle":"@test.user@example.com"
+                  }
                 ],
                 "postmortem_id": "00000000-0000-0000-0000-000000000000",
                 "public_id": 1,
@@ -134,8 +135,9 @@
                 "<any-key>": {}
               },
               "modified": "2019-09-19T10:00:00.000Z",
-              "notification_handles": [
-                "@test.user@test.com"
+              "notification_handles": [{
+                  "handle":"@test.user@example.com"
+                }
               ],
               "postmortem_id": "00000000-0000-0000-0000-000000000000",
               "public_id": 1,
@@ -246,8 +248,9 @@
               "<any-key>": {}
             },
             "initial_timeline_cells": [],
-            "notification_handles": [
-              "@test.user@test.com"
+            "notification_handles": [{
+                "handle":"@test.user@example.com"
+              }
             ],
             "title": "A test incident title"
           },
@@ -323,8 +326,9 @@
                 "<any-key>": {}
               },
               "modified": "2019-09-19T10:00:00.000Z",
-              "notification_handles": [
-                "@test.user@test.com"
+              "notification_handles": [{
+                  "handle":"@test.user@example.com"
+                }
               ],
               "postmortem_id": "00000000-0000-0000-0000-000000000000",
               "public_id": 1,
@@ -432,8 +436,9 @@
                 "<any-key>": {}
               },
               "modified": "2019-09-19T10:00:00.000Z",
-              "notification_handles": [
-                "@test.user@test.com"
+              "notification_handles": [{
+                  "handle":"@test.user@example.com"
+                }
               ],
               "postmortem_id": "00000000-0000-0000-0000-000000000000",
               "public_id": 1,
@@ -570,8 +575,9 @@
             "fields": {
               "<any-key>": {}
             },
-            "notification_handles": [
-              "@test.user@test.com"
+            "notification_handles": [{
+                "handle":"@test.user@example.com"
+              }
             ],
             "resolved": "2019-09-19T10:00:00.000Z",
             "title": "A test incident title"
