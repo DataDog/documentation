@@ -14,6 +14,7 @@ Datadog provides an out-of-the-box [Usage Dashboard][3] for monitoring your APM 
 
 To create a custom dashboard or monitor, the key metrics to use are:
 
+ - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.indexed_spans`
 
