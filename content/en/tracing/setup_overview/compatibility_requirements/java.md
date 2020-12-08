@@ -84,7 +84,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
 | Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
+| Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
