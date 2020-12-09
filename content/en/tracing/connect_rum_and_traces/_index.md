@@ -105,13 +105,15 @@ let session =  URLSession(
 
 The following Datadog tracing libraries are supported:
 
-* [Python][2]
-* [Go][3]
-* [Java][4]
-* [Ruby][5]
-* [JavaScript][6]
-* [PHP][7]
-* [.NET][8]
+| Library                             | Minimum Version                                                                                                             |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| [Python][2]                  | [0.22.0][3]                |
+| [Go][4]                  | [1.10.0][5]                |
+| [Java][6]                  | [0.24.1][7]                |
+| [Ruby][8]                  | [0.20.0][9]                |
+| [JavaScript][10]                  | [0.10.0][11]                |
+| [PHP][12]                  | [0.33.0][13]                |
+| [.NET][14]                  | [1.18.2][15]                |
     
 
 ## How are RUM resources linked to traces?
@@ -119,11 +121,11 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 | HEADER                         | DESCRIPTION                                                                                            |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| x-datadog-trace-id             | Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.   |
-| x-datadog-parent-id            | Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace. |
-| x-datadog-origin: rum          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.              |
-| x-datadog-sampling-priority: 1 | To make sure that the Agent keeps the trace.                                                           |
-| x-datadog-sampled: 1           | To make sure that the Agent keeps the trace.     
+| `x-datadog-trace-id `            | Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.   |
+| `x-datadog-parent-id`            | Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace. |
+| `x-datadog-origin: rum`          | To make sure the generated traces from Real User Monitoring don’t affect your APM Index Spans counts.              |
+| `x-datadog-sampling-priority: 1` | To make sure that the Agent keeps the trace.                                                           |
+| `x-datadog-sampling-priority: 1`       | To make sure that the Agent keeps the trace.                                                                      |  
 
 ## How are APM quotas affected?
 
@@ -131,16 +133,23 @@ The `x-datadog-origin: rum` header specifies to the APM backend that the traces 
 
 ## How long are traces retained?
 
-These traces are retained [just like your classical APM traces][9].
+These traces are retained [just like your classical APM traces][16].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
-[2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[4]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[5]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[6]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[7]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[8]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[9]: /tracing/guide/trace_sampling_and_storage/#trace-storage
+[2]: /tracing/setup_overview/setup/python/
+[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[4]: /tracing/setup_overview/setup/go/
+[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[6]: /tracing/setup_overview/setup/java/
+[7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[8]: /tracing/setup_overview/setup/ruby/
+[9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[10]: /tracing/setup_overview/setup/nodejs/
+[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[12]: /tracing/setup_overview/setup/php/
+[13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[14]: /tracing/setup_overview/setup/dotnet-core/
+[15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[16]: /tracing/trace_retention_and_ingestion/
