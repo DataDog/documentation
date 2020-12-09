@@ -23,9 +23,45 @@ Define new entities in Datadog like customer details, service names and informat
 
 ## Create an Enrichment Table
 
+{{< tabs >}}
+{{% tab "Manual Upload" %}}
+
 Create an Enrichment Table by uploading a CSV file, naming all the appropriate columns, and defining the primary key, on which all lookups will happen.
 
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
+{{% /tab %}}
+
+{{% tab "AWS S3 Upload" %}}
+
+Enrichment tables can automatically pull a csv file from an AWS S3 bucket to keep your data up to date. The integration will look for changes to the csv file in S3 and when a new version is found it will replace the enrichment table with the new data. This also enables API updating via the S3 API once you’ve set up the initial table.
+
+In order to update enrichment tables from S3, Datadog uses the IAM Role in your AWS account that you configured for your [AWS integration][2]. If you have not yet created that Role, [follow these steps][3] to do so. To allow that Role to update your enrichment tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your csv files.
+
+
+```json
+ {
+      "Sid": "EnrichmentTablesS3",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": [
+        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
+      ]
+    },
+    {
+      "Sid": "EnrichmentTablesS3",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": [
+        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
+      ]
+    }
+  ]
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 This Enrichment Table can now be used to add additional attributes to logs with the [Lookup Processor][1].
 
