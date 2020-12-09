@@ -1,4 +1,4 @@
 ---
 title: Logs Archives
-headless: true
+draft: true
 ---

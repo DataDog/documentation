@@ -1,4 +1,4 @@
 ---
 title: Logs
-headless: true
+draft: true
 ---

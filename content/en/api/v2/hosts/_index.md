@@ -1,4 +1,4 @@
 ---
 title: Hosts
-headless: true
+draft: true
 ---

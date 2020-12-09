@@ -1,4 +1,4 @@
 ---
 title: Dashboards
-headless: true
+draft: true
 ---

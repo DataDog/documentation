@@ -1,4 +1,4 @@
 ---
 title: Monitors
-headless: true
+draft: true
 ---

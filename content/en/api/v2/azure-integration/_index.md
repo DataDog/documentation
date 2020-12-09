@@ -1,4 +1,4 @@
 ---
 title: Azure Integration
-headless: true
+draft: true
 ---

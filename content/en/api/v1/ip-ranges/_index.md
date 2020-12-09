@@ -1,4 +1,4 @@
 ---
 title: IP Ranges
-headless: true
+draft: true
 ---

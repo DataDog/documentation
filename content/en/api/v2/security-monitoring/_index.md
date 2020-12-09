@@ -1,4 +1,4 @@
 ---
 title: Security Monitoring
-headless: true
+draft: true
 ---

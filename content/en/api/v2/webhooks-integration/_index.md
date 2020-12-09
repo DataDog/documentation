@@ -1,4 +1,4 @@
 ---
 title: Webhooks Integration
-headless: true
+draft: true
 ---

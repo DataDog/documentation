@@ -1,4 +1,4 @@
 ---
 title: Screenboards
-headless: true
+draft: true
 ---

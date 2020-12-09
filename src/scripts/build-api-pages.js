@@ -109,7 +109,7 @@ const createPages = (apiYaml, deref, apiVersion) => {
 
     // make version frontmatter
     const baseFrontMatter = {title: tag.name};
-    const indexFrontMatter = {...baseFrontMatter, headless: true};
+    const indexFrontMatter = {...baseFrontMatter, draft: true};
     let indexYamlStr = yaml.safeDump(indexFrontMatter);
     indexYamlStr = `---\n${indexYamlStr}---\n`;
 

@@ -1,4 +1,4 @@
 ---
 title: Organizations
-headless: true
+draft: true
 ---

@@ -1,4 +1,4 @@
 ---
 title: AWS Logs Integration
-headless: true
+draft: true
 ---
