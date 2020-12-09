@@ -107,8 +107,9 @@ const createPages = (apiYaml, deref, apiVersion) => {
     const newDirName = getTagSlug(tag.name);
     fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {recursive: true});
 
-    // make frontmatter
-    const indexFrontMatter = {title: tag.name};
+    // make version frontmatter
+    const baseFrontMatter = {title: tag.name};
+    const indexFrontMatter = {...baseFrontMatter, headless: true};
     let indexYamlStr = yaml.safeDump(indexFrontMatter);
     indexYamlStr = `---\n${indexYamlStr}---\n`;
 
@@ -116,6 +117,8 @@ const createPages = (apiYaml, deref, apiVersion) => {
     fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/_index.md`, indexYamlStr, 'utf8');
 
     // create a copy in /latest/
+    indexYamlStr = yaml.safeDump(baseFrontMatter);
+    indexYamlStr = `---\n${indexYamlStr}---\n`;
     fs.mkdirSync(`./content/en/api/latest/${newDirName}`, {recursive: true});
     fs.writeFileSync(`./content/en/api/latest/${newDirName}/_index.md`, indexYamlStr, 'utf8');
 

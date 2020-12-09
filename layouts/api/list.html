@@ -106,7 +106,7 @@
                     {{ end }}
 
                     <!-- Multiple versions notification -->
-                    {{ if $isVisibleVersion }}
+                    {{ if (and $isVisibleVersion (gt $versionCount 1)) }}
                       {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
                       <div class="alert alert-warning mb-2">
                         <p class="alert-warning">Note: For the v2 version of this endpoint, which is in public beta, see <a href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>

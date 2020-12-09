@@ -3898,6 +3898,19 @@ footer_sub:
     url: 'https://www.datadoghq.com/legal/cookies/'
     weight: 130
 api:
+  - name: Overview
+    url: /api/latest/
+    identifier: API overview
+    weight: -10
+  - name: Using the API
+    url: /api/latest/using-the-api/
+    parent: API overview
+    weight: 5
+  - name: Rate Limits
+    url: /api/latest/rate-limits/
+    parent: API overview
+    weight: 6
+    identifier: rate-limits
   - name: AWS Integration
     url: /api/latest/aws-integration/
     identifier: aws-integration
