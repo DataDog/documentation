@@ -73,11 +73,11 @@
       <!-- for accessing v1/v2 resources from latest -->
       {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "/_index.md") }}
 
-      {{ range $tag := (where $adat.tags ".name" "==" $dot.Params.title) }}
+      {{ range $tag := (first 1 (where $adat.tags ".name" "==" $dot.Params.title)) }}
 
         {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
-        {{ $isVisibleVersion := (and (gt $versionCount 1) (eq $versionIndex 0)) }}
-        {{ $isCollapsedVersion := (and (gt $versionCount 1) (eq $versionIndex 1)) }}
+        {{ $isVisibleVersion := (or (eq $versionCount 1) (and (gt $versionCount 1) (eq $versionNum "v1")) ) }}
+        {{ $isCollapsedVersion := not $isVisibleVersion }}
 
         <!-- get action strings from params, why? because they are translated here -->
         {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
