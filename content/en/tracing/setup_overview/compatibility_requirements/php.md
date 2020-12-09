@@ -44,11 +44,11 @@ PHP APM supports the following SAPI's:
 
 #### Web Framework Compatibility
 
-By default, Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries—for example: database and HTTP clients.
-
-The following table enumerates some of the frameworks and versions Datadog successfully traces.
-
 **Web frameworks**:
+
+By default, Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces containing extensive request data and all spans of supported libraries—for example: database and HTTP clients.
+
+For a number of popular web frameworks, we offer a more in-depth instrumentation that provides details about the framework internals.
 
 | Module         | Versions      | Support Type               |
 |:---------------|:--------------|:---------------------------|
@@ -63,13 +63,8 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Symfony 5      | 5.x (as of `0.50.0`) | All supported PHP versions |
 | WordPress      | 4.x, 5.x      | PHP 7+                     |
 | Zend Framework | 1.12          | All supported PHP versions |
-| Yii            | 1.1, 2.0      | All supported PHP versions |
-| Drupal         |               | All supported PHP versions |
-| Magento        | 1, 2          | All supported PHP versions |
-| Phalcon        | 1.3, 3.4      | All supported PHP versions |
+| Yii            | 2.0           | All supported PHP versions |
 | Slim           | 2.x           | All supported PHP versions |
-| Neos Flow      | 1.1           | All supported PHP versions |
-| FuelPHP        | 1.1           | PHP 7+                     |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
