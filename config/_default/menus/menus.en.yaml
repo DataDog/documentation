@@ -1439,7 +1439,7 @@ main:
     identifier: tracing_connect_synthetics_and_traces
     weight: 8
   - name: Connect RUM and Traces
-    url: rum/connect_rum_and_traces
+    url: real_user_monitoring/connect_rum_and_traces
     parent: tracing
     identifier: tracing_connect_rum_and_traces
     weight: 9
@@ -1894,7 +1894,7 @@ main:
     identifier: rum_data_collected_user_action
     weight: 505
   - name: Connect RUM and Traces
-    url: rum/connect_rum_and_traces
+    url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
     weight: 6

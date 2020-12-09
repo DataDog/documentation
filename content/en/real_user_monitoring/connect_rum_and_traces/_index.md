@@ -10,7 +10,7 @@ further_reading:
     text: "APM and Distributed Tracing"
 ---
 
-{{< img src="tracing/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
 # Overview
 
