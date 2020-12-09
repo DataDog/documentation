@@ -14,9 +14,9 @@ further_reading:
 
 # Overview
 
-The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces, while providing the RUM session context.
+The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full front end and backend data through one lens.
 
-Having frontend-related specifics (thanks to your RUM session) as well as backend, infrastructure, and log information (thanks to your trace id injection) allows you to pinpoint issues anywhere in your stack in unprecedented speed with a full understanding of what your users are experiencing.
+Use frontend data from RUM, and backend, infrastructure, and log information from trace ID injection to quickly pinpoint issues anywhere in your stack and fully understand what your users are experiencing.
 
 <div class="alert alert-warning">
 This feature is currently available for private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
@@ -25,7 +25,7 @@ This feature is currently available for private beta. <a href="https://docs.data
 # Usage
 ## Prerequisites
 
--   Your services targeted by your RUM applications are [traced on the APM side][1].
+-   Set up [APM tracing][1] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
 -   Your HTTP servers are using a library that supports distributed tracing.
 
@@ -33,7 +33,7 @@ This feature is currently available for private beta. <a href="https://docs.data
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
-1.  Set up [Browser Real User Monitoring][1]
+1.  Set up [Browser Real User Monitoring][1].
 
 2. Initialize the RUM SDK. Configure the `allowedTracingOrigins` initialization parameter with the list of internal (first party) origins called by your browser application.
 
@@ -54,9 +54,9 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  Set up [Android Real User Monitoring][1]
+1.  Set up [Android Real User Monitoring][1].
     
-2.  Configure the OkHttpClient interceptor with the list of internal (first party) origins called by your Android application.
+2.  Configure the `OkHttpClient` interceptor with the list of internal (first party) origins called by your Android application.
 ```java
 val tracedHosts =  listOf("example.com", "example.eu")
 
@@ -67,13 +67,13 @@ val okHttpClient = OkHttpClient.Builder()
     .build()
 ```
 
-**Note**: By default, all subdomains of listed hosts will be traced. For instance, adding example.com will also enable the tracing for api.example.com and foo.example.com
+**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
 [1]: /real_user_monitoring/android/
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  Set up [iOS Real User Monitoring][1]
+1.  Set up [iOS Real User Monitoring][1].
     
 2.  Set the `firstPartyHosts` initialization parameter with the list of internal (first party) origins called by your iOS application.
 ```swift
@@ -95,7 +95,7 @@ let session =  URLSession(
 )
 ```
 
-**Note**: By default, all subdomains of listed hosts will be traced. For instance, adding example.com will also enable the tracing for api.example.com and foo.example.com
+**Note**: By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
