@@ -27,6 +27,7 @@ Supported **platforms** include:
 - [Windows 2016+][8] (in public beta)
 
 **For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
+
 **For Windows OS:** Data collection is available in public beta for Windows versions 2016 or later.
 
 There is an exemption to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][2]. The [DNS Resolution][3] feature is not supported on CentOS/RHEL 7.6. 
@@ -136,8 +137,7 @@ To enable network performance monitoring with the Windows driver:
 2. Edit `c:\ProgramData\Datadog\system-proe.yaml` to set the enable flag to `true`:
 
     ```yaml
-    system_probe_config
-    :
+    system_probe_config:
         ## @param enabled - boolean - optional - default: false
         ## Set to true to enable the System Probe.
         #
@@ -147,8 +147,7 @@ To enable network performance monitoring with the Windows driver:
 3. Edit `C:\ProgramData\Datadog\datadog.yaml` to set the enable flag to `true`:
 
     ```yaml
-    process_config
-    :
+    process_config:
         ## @param enabled - boolean - optional - default: false
         ## Set to true to enable the System Probe.
         #
