@@ -129,10 +129,9 @@ logs:
 
 #### Using container label
 
-It is possible to enable file tailing by using container label so the logs collected will get the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
+With Agent version >= 7.25.0/6.25.0 it is possible to enable file tailing by using container label so the logs collected will get the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
 
 **Note**: The file path are always relative to the Agent. So this require extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. Please refere to the [AWS documentation][5] for additional details on volume management with ECS.
-
 
 ## Activate log integrations
 
