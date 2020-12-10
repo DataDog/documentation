@@ -31,7 +31,7 @@ Click **New Enrichment Table +**, then upload a CSV file, name the appropriate c
 {{< img src="logs/guide/enrichment-tables/configure-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
 {{% /tab %}}
 
-{{% tab "AWS S3 Upload" %}}
+{{% tab "AWS S3 upload" %}}
 
 Enrichment tables can automatically pull a csv file from an AWS S3 bucket to keep your data up to date. The integration will look for changes to the csv file in S3, and when the file is updated it will replace the Enrichment Table with the new data. This also enables API updating via the S3 API once you’ve configured the initial Enrichment Table.
 
