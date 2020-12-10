@@ -133,7 +133,7 @@ Data collection for Windows systems is now available in public beta for versions
 
 To enable network performance monitoring for Windows hosts:
 
-1. Install [this custom build][9] of the Datadog Agent 
+1. Install [this custom build][4] of the Datadog Agent.
 2. Edit `c:\ProgramData\Datadog\system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
