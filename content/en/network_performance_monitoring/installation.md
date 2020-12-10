@@ -168,6 +168,7 @@ To enable network performance monitoring for Windows hosts:
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+[4]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
