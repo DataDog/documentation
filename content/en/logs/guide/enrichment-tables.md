@@ -59,7 +59,7 @@ To update enrichment tables from S3, Datadog uses the IAM role in your AWS accou
 ```
 ### Define the table
 
-Create an Enrichment Table by clicking **New Enrichment Table +**, adding a name, selecting AWS S3, filling out all the fields, clicking import, and finally defining the primary key on which all lookups will happen. It may take a few seconds between clicking import and having the preview available for setting up your primary key in the schema.
+Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
 
 {{< img src="logs/guide/enrichment-tables/configure-s3-enrichment-table.png" alt="Create an Enrichment Table" style="width:100%;">}}
 
