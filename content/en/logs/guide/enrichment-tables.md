@@ -33,7 +33,7 @@ Click **New Enrichment Table +**, then upload a CSV file, name the appropriate c
 
 {{% tab "AWS S3 upload" %}}
 
-Enrichment tables can automatically pull a csv file from an AWS S3 bucket to keep your data up to date. The integration will look for changes to the csv file in S3, and when the file is updated it will replace the Enrichment Table with the new data. This also enables API updating via the S3 API once you’ve configured the initial Enrichment Table.
+Enrichment tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the enrichment table with the new data. This also enables API updating with the S3 API once the initial enrichment table is configured.
 
 To update enrichment tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your enrichment tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
