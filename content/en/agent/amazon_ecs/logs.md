@@ -111,6 +111,8 @@ To collect all logs written by running applications in your ECS containers and s
 
 ### Custom log collection
 
+#### Using configuration file
+
 If your container writes any logs to files, follow the [Custom Log Collection documentation][1] to tail files for logs.
 
 To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][2] with the following content:
@@ -125,6 +127,13 @@ logs:
 
 **Note**: Container metadata is not retrieved with custom log collection, therefore the Agent does not automatically assign container tags to logs. Use [custom tags][3] to create container tags.
 
+#### Using container label
+
+It is possible to enable file tailing by using container label so the logs collected will get the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
+
+**Note**: The file path are always relative to the Agent. So this require extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. Please refere to the [AWS documentation][5] for additional details on volume management with ECS.
+
+
 ## Activate log integrations
 
 The `source` attribute is used to identify the integration to use for each container. Override it directly in your containers labels to start using [log integrations][1]. Read Datadog's [Autodiscovery guide for logs][2] to learn more about this process.
@@ -136,3 +145,5 @@ The `source` attribute is used to identify the integration to use for each conta
 [1]: /agent/logs/?tab=tailfiles#custom-log-collection
 [2]: /agent/logs/#custom-log-collection
 [3]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#methods-for-assigning-tags
+[4]: /agent/docker/log/?tab=logcollectionfromfile#examples
+[5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html
