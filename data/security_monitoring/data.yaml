@@ -13,7 +13,7 @@ image_map:
     append: false
   - source:
       - azure
-    image: azure.active_directory
+    image: azure
     append: false
   - source:
       - cloudtrail
