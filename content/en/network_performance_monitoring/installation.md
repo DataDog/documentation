@@ -373,6 +373,5 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 [5]: https://github.com/DataDog/chef-datadog
 [6]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /network_performance_monitoring/installation/?tab=agent#windows
+[8]: /network_performance_monitoring/installation/?tab=agent#windows-systems
 [9]: https://s3.amazonaws.com/ddagent-windows-unstable/datadog-agent-7.23.2-beta1-1-x86_64.msi
-
