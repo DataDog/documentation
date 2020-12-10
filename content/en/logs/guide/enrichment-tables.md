@@ -21,7 +21,7 @@ Define new entities in Datadog like customer details, service names and informat
 
 {{< img src="logs/guide/enrichment-tables/overview.png" alt="Enrichment Tables" style="width:100%;">}}
 
-## Create an Enrichment Table
+## Create an enrichment table
 
 {{< tabs >}}
 {{% tab "Manual upload" %}}
