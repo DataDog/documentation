@@ -58,6 +58,9 @@ const updateMenu = (specData, specs, languages) => {
             if(!existingParams["operationids"].includes(action.operationId)) {
               newMenuArray[existingSubMenuItemIndex].params["operationids"].push(action.operationId);
             }
+            if(!existingParams["unstable"].includes(apiVersion) && action.hasOwnProperty("x-unstable")) {
+              newMenuArray[existingSubMenuItemIndex].params["unstable"].push(apiVersion);
+            }
           } else {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === getTagSlug(tag.name));
@@ -69,7 +72,8 @@ const updateMenu = (specData, specs, languages) => {
               generated: true,
               params: {
                 "versions": [apiVersion],
-                "operationids": [`${action.operationId}`]
+                "operationids": [`${action.operationId}`],
+                "unstable": action.hasOwnProperty("x-unstable") ? [apiVersion] : []
               }
             };
             newMenuArray.splice(indx + 1, 0, item);

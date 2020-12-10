@@ -3925,6 +3925,7 @@ api:
         - v1
       operationids:
         - CreateNewAWSExternalID
+      unstable: []
   - name: Set an AWS tag filter
     url: '#set-an-aws-tag-filter'
     identifier: set-an-aws-tag-filter
@@ -3935,6 +3936,7 @@ api:
         - v1
       operationids:
         - CreateAWSTagFilter
+      unstable: []
   - name: Get all AWS tag filters
     url: '#get-all-aws-tag-filters'
     identifier: get-all-aws-tag-filters
@@ -3945,6 +3947,7 @@ api:
         - v1
       operationids:
         - ListAWSTagFilters
+      unstable: []
   - name: Delete a tag filtering entry
     url: '#delete-a-tag-filtering-entry'
     identifier: delete-a-tag-filtering-entry
@@ -3955,6 +3958,7 @@ api:
         - v1
       operationids:
         - DeleteAWSTagFilter
+      unstable: []
   - name: List namespace rules
     url: '#list-namespace-rules'
     identifier: list-namespace-rules
@@ -3965,6 +3969,7 @@ api:
         - v1
       operationids:
         - ListAvailableAWSNamespaces
+      unstable: []
   - name: Update an AWS integration
     url: '#update-an-aws-integration'
     identifier: update-an-aws-integration
@@ -3975,6 +3980,7 @@ api:
         - v1
       operationids:
         - UpdateAWSAccount
+      unstable: []
   - name: Create an AWS integration
     url: '#create-an-aws-integration'
     identifier: create-an-aws-integration
@@ -3985,6 +3991,7 @@ api:
         - v1
       operationids:
         - CreateAWSAccount
+      unstable: []
   - name: List all AWS integrations
     url: '#list-all-aws-integrations'
     identifier: list-all-aws-integrations
@@ -3995,6 +4002,7 @@ api:
         - v1
       operationids:
         - ListAWSAccounts
+      unstable: []
   - name: Delete an AWS integration
     url: '#delete-an-aws-integration'
     identifier: delete-an-aws-integration
@@ -4005,6 +4013,7 @@ api:
         - v1
       operationids:
         - DeleteAWSAccount
+      unstable: []
   - name: AWS Logs Integration
     url: /api/latest/aws-logs-integration/
     identifier: aws-logs-integration
@@ -4019,6 +4028,7 @@ api:
         - v1
       operationids:
         - CheckAWSLogsServicesAsync
+      unstable: []
   - name: Enable an AWS Logs integration
     url: '#enable-an-aws-logs-integration'
     identifier: enable-an-aws-logs-integration
@@ -4029,6 +4039,7 @@ api:
         - v1
       operationids:
         - EnableAWSLogServices
+      unstable: []
   - name: Get list of AWS log ready services
     url: '#get-list-of-aws-log-ready-services'
     identifier: get-list-of-aws-log-ready-services
@@ -4039,6 +4050,7 @@ api:
         - v1
       operationids:
         - ListAWSLogsServices
+      unstable: []
   - name: Check that an AWS Lambda Function exists
     url: '#check-that-an-aws-lambda-function-exists'
     identifier: check-that-an-aws-lambda-function-exists
@@ -4049,6 +4061,7 @@ api:
         - v1
       operationids:
         - CheckAWSLogsLambdaAsync
+      unstable: []
   - name: Add AWS Log Lambda ARN
     url: '#add-aws-log-lambda-arn'
     identifier: add-aws-log-lambda-arn
@@ -4059,6 +4072,7 @@ api:
         - v1
       operationids:
         - CreateAWSLambdaARN
+      unstable: []
   - name: List all AWS Logs integrations
     url: '#list-all-aws-logs-integrations'
     identifier: list-all-aws-logs-integrations
@@ -4069,6 +4083,7 @@ api:
         - v1
       operationids:
         - ListAWSLogsIntegrations
+      unstable: []
   - name: Delete an AWS Logs integration
     url: '#delete-an-aws-logs-integration'
     identifier: delete-an-aws-logs-integration
@@ -4079,6 +4094,7 @@ api:
         - v1
       operationids:
         - DeleteAWSLambdaARN
+      unstable: []
   - name: Authentication
     url: /api/latest/authentication/
     identifier: authentication
@@ -4093,6 +4109,7 @@ api:
         - v1
       operationids:
         - Validate
+      unstable: []
   - name: Azure Integration
     url: /api/latest/azure-integration/
     identifier: azure-integration
@@ -4107,6 +4124,7 @@ api:
         - v1
       operationids:
         - UpdateAzureHostFilters
+      unstable: []
   - name: Update an Azure integration
     url: '#update-an-azure-integration'
     identifier: update-an-azure-integration
@@ -4117,6 +4135,7 @@ api:
         - v1
       operationids:
         - UpdateAzureIntegration
+      unstable: []
   - name: Create an Azure integration
     url: '#create-an-azure-integration'
     identifier: create-an-azure-integration
@@ -4127,6 +4146,7 @@ api:
         - v1
       operationids:
         - CreateAzureIntegration
+      unstable: []
   - name: List all Azure integrations
     url: '#list-all-azure-integrations'
     identifier: list-all-azure-integrations
@@ -4137,6 +4157,7 @@ api:
         - v1
       operationids:
         - ListAzureIntegration
+      unstable: []
   - name: Delete an Azure integration
     url: '#delete-an-azure-integration'
     identifier: delete-an-azure-integration
@@ -4147,6 +4168,7 @@ api:
         - v1
       operationids:
         - DeleteAzureIntegration
+      unstable: []
   - name: Dashboard Lists
     url: /api/latest/dashboard-lists/
     identifier: dashboard-lists
@@ -4161,6 +4183,7 @@ api:
         - v2
       operationids:
         - UpdateDashboardListItems
+      unstable: []
   - name: Add Items to a Dashboard List
     url: '#add-items-to-a-dashboard-list'
     identifier: add-items-to-a-dashboard-list
@@ -4171,6 +4194,7 @@ api:
         - v2
       operationids:
         - CreateDashboardListItems
+      unstable: []
   - name: Delete items from a dashboard list
     url: '#delete-items-from-a-dashboard-list'
     identifier: delete-items-from-a-dashboard-list
@@ -4181,6 +4205,7 @@ api:
         - v2
       operationids:
         - DeleteDashboardListItems
+      unstable: []
   - name: Update a dashboard list
     url: '#update-a-dashboard-list'
     identifier: update-a-dashboard-list
@@ -4191,6 +4216,7 @@ api:
         - v1
       operationids:
         - UpdateDashboardList
+      unstable: []
   - name: Get a dashboard list
     url: '#get-a-dashboard-list'
     identifier: get-a-dashboard-list
@@ -4203,6 +4229,7 @@ api:
       operationids:
         - GetDashboardList
         - GetDashboardListItems
+      unstable: []
   - name: Delete a dashboard list
     url: '#delete-a-dashboard-list'
     identifier: delete-a-dashboard-list
@@ -4213,6 +4240,7 @@ api:
         - v1
       operationids:
         - DeleteDashboardList
+      unstable: []
   - name: Create a dashboard list
     url: '#create-a-dashboard-list'
     identifier: create-a-dashboard-list
@@ -4223,6 +4251,7 @@ api:
         - v1
       operationids:
         - CreateDashboardList
+      unstable: []
   - name: Get all dashboard lists
     url: '#get-all-dashboard-lists'
     identifier: get-all-dashboard-lists
@@ -4233,6 +4262,7 @@ api:
         - v1
       operationids:
         - ListDashboardLists
+      unstable: []
   - name: Dashboards
     url: /api/latest/dashboards/
     identifier: dashboards
@@ -4247,6 +4277,7 @@ api:
         - v1
       operationids:
         - UpdateDashboard
+      unstable: []
   - name: Get a dashboard
     url: '#get-a-dashboard'
     identifier: get-a-dashboard
@@ -4257,6 +4288,7 @@ api:
         - v1
       operationids:
         - GetDashboard
+      unstable: []
   - name: Delete a dashboard
     url: '#delete-a-dashboard'
     identifier: delete-a-dashboard
@@ -4267,6 +4299,7 @@ api:
         - v1
       operationids:
         - DeleteDashboard
+      unstable: []
   - name: Create a new dashboard
     url: '#create-a-new-dashboard'
     identifier: create-a-new-dashboard
@@ -4277,6 +4310,7 @@ api:
         - v1
       operationids:
         - CreateDashboard
+      unstable: []
   - name: Get all dashboards
     url: '#get-all-dashboards'
     identifier: get-all-dashboards
@@ -4287,6 +4321,7 @@ api:
         - v1
       operationids:
         - ListDashboards
+      unstable: []
   - name: Downtimes
     url: /api/latest/downtimes/
     identifier: downtimes
@@ -4301,6 +4336,7 @@ api:
         - v1
       operationids:
         - UpdateDowntime
+      unstable: []
   - name: Get a downtime
     url: '#get-a-downtime'
     identifier: get-a-downtime
@@ -4311,6 +4347,7 @@ api:
         - v1
       operationids:
         - GetDowntime
+      unstable: []
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
     identifier: cancel-a-downtime
@@ -4321,6 +4358,7 @@ api:
         - v1
       operationids:
         - CancelDowntime
+      unstable: []
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
     identifier: cancel-downtimes-by-scope
@@ -4331,6 +4369,7 @@ api:
         - v1
       operationids:
         - CancelDowntimesByScope
+      unstable: []
   - name: Schedule a downtime
     url: '#schedule-a-downtime'
     identifier: schedule-a-downtime
@@ -4341,6 +4380,7 @@ api:
         - v1
       operationids:
         - CreateDowntime
+      unstable: []
   - name: Get all downtimes
     url: '#get-all-downtimes'
     identifier: get-all-downtimes
@@ -4351,6 +4391,7 @@ api:
         - v1
       operationids:
         - ListDowntimes
+      unstable: []
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
     identifier: embeddable-graphs
@@ -4365,6 +4406,7 @@ api:
         - v1
       operationids:
         - RevokeEmbeddableGraph
+      unstable: []
   - name: Enable embed
     url: '#enable-embed'
     identifier: enable-embed
@@ -4375,6 +4417,7 @@ api:
         - v1
       operationids:
         - EnableEmbeddableGraph
+      unstable: []
   - name: Get specific embed
     url: '#get-specific-embed'
     identifier: get-specific-embed
@@ -4385,6 +4428,7 @@ api:
         - v1
       operationids:
         - GetEmbeddableGraph
+      unstable: []
   - name: Create embed
     url: '#create-embed'
     identifier: create-embed
@@ -4395,6 +4439,7 @@ api:
         - v1
       operationids:
         - CreateEmbeddableGraph
+      unstable: []
   - name: Get all embeds
     url: '#get-all-embeds'
     identifier: get-all-embeds
@@ -4405,6 +4450,7 @@ api:
         - v1
       operationids:
         - ListEmbeddableGraphs
+      unstable: []
   - name: Events
     url: /api/latest/events/
     identifier: events
@@ -4419,6 +4465,7 @@ api:
         - v1
       operationids:
         - GetEvent
+      unstable: []
   - name: Post an event
     url: '#post-an-event'
     identifier: post-an-event
@@ -4429,6 +4476,7 @@ api:
         - v1
       operationids:
         - CreateEvent
+      unstable: []
   - name: Query the event stream
     url: '#query-the-event-stream'
     identifier: query-the-event-stream
@@ -4439,6 +4487,7 @@ api:
         - v1
       operationids:
         - ListEvents
+      unstable: []
   - name: GCP Integration
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
@@ -4453,6 +4502,7 @@ api:
         - v1
       operationids:
         - UpdateGCPIntegration
+      unstable: []
   - name: Create a GCP integration
     url: '#create-a-gcp-integration'
     identifier: create-a-gcp-integration
@@ -4463,6 +4513,7 @@ api:
         - v1
       operationids:
         - CreateGCPIntegration
+      unstable: []
   - name: List all GCP integrations
     url: '#list-all-gcp-integrations'
     identifier: list-all-gcp-integrations
@@ -4473,6 +4524,7 @@ api:
         - v1
       operationids:
         - ListGCPIntegration
+      unstable: []
   - name: Delete a GCP integration
     url: '#delete-a-gcp-integration'
     identifier: delete-a-gcp-integration
@@ -4483,6 +4535,7 @@ api:
         - v1
       operationids:
         - DeleteGCPIntegration
+      unstable: []
   - name: Hosts
     url: /api/latest/hosts/
     identifier: hosts
@@ -4497,6 +4550,7 @@ api:
         - v1
       operationids:
         - GetHostTotals
+      unstable: []
   - name: Get all hosts for your organization
     url: '#get-all-hosts-for-your-organization'
     identifier: get-all-hosts-for-your-organization
@@ -4507,6 +4561,7 @@ api:
         - v1
       operationids:
         - ListHosts
+      unstable: []
   - name: Unmute a host
     url: '#unmute-a-host'
     identifier: unmute-a-host
@@ -4517,6 +4572,7 @@ api:
         - v1
       operationids:
         - UnmuteHost
+      unstable: []
   - name: Mute a host
     url: '#mute-a-host'
     identifier: mute-a-host
@@ -4527,6 +4583,7 @@ api:
         - v1
       operationids:
         - MuteHost
+      unstable: []
   - name: IP Ranges
     url: /api/latest/ip-ranges/
     identifier: ip-ranges
@@ -4541,6 +4598,7 @@ api:
         - v1
       operationids:
         - GetIPRanges
+      unstable: []
   - name: Incident Services
     url: /api/latest/incident-services/
     identifier: incident-services
@@ -4555,6 +4613,8 @@ api:
         - v2
       operationids:
         - UpdateIncidentService
+      unstable:
+        - v2
   - name: Get details of an incident service
     url: '#get-details-of-an-incident-service'
     identifier: get-details-of-an-incident-service
@@ -4565,6 +4625,8 @@ api:
         - v2
       operationids:
         - GetIncidentService
+      unstable:
+        - v2
   - name: Delete an existing incident service
     url: '#delete-an-existing-incident-service'
     identifier: delete-an-existing-incident-service
@@ -4575,6 +4637,8 @@ api:
         - v2
       operationids:
         - DeleteIncidentService
+      unstable:
+        - v2
   - name: Create a new incident service
     url: '#create-a-new-incident-service'
     identifier: create-a-new-incident-service
@@ -4585,6 +4649,8 @@ api:
         - v2
       operationids:
         - CreateIncidentService
+      unstable:
+        - v2
   - name: Get a list of all incident services
     url: '#get-a-list-of-all-incident-services'
     identifier: get-a-list-of-all-incident-services
@@ -4595,6 +4661,8 @@ api:
         - v2
       operationids:
         - ListIncidentServices
+      unstable:
+        - v2
   - name: Incident Teams
     url: /api/latest/incident-teams/
     identifier: incident-teams
@@ -4609,6 +4677,8 @@ api:
         - v2
       operationids:
         - UpdateIncidentTeam
+      unstable:
+        - v2
   - name: Get details of an incident team
     url: '#get-details-of-an-incident-team'
     identifier: get-details-of-an-incident-team
@@ -4619,6 +4689,8 @@ api:
         - v2
       operationids:
         - GetIncidentTeam
+      unstable:
+        - v2
   - name: Delete an existing incident team
     url: '#delete-an-existing-incident-team'
     identifier: delete-an-existing-incident-team
@@ -4629,6 +4701,8 @@ api:
         - v2
       operationids:
         - DeleteIncidentTeam
+      unstable:
+        - v2
   - name: Create a new incident team
     url: '#create-a-new-incident-team'
     identifier: create-a-new-incident-team
@@ -4639,6 +4713,8 @@ api:
         - v2
       operationids:
         - CreateIncidentTeam
+      unstable:
+        - v2
   - name: Get a list of all incident teams
     url: '#get-a-list-of-all-incident-teams'
     identifier: get-a-list-of-all-incident-teams
@@ -4649,6 +4725,8 @@ api:
         - v2
       operationids:
         - ListIncidentTeams
+      unstable:
+        - v2
   - name: Incidents
     url: /api/latest/incidents/
     identifier: incidents
@@ -4663,6 +4741,8 @@ api:
         - v2
       operationids:
         - UpdateIncident
+      unstable:
+        - v2
   - name: Get the details of an incident
     url: '#get-the-details-of-an-incident'
     identifier: get-the-details-of-an-incident
@@ -4673,6 +4753,8 @@ api:
         - v2
       operationids:
         - GetIncident
+      unstable:
+        - v2
   - name: Delete an existing incident
     url: '#delete-an-existing-incident'
     identifier: delete-an-existing-incident
@@ -4683,6 +4765,8 @@ api:
         - v2
       operationids:
         - DeleteIncident
+      unstable:
+        - v2
   - name: Create an incident
     url: '#create-an-incident'
     identifier: create-an-incident
@@ -4693,6 +4777,8 @@ api:
         - v2
       operationids:
         - CreateIncident
+      unstable:
+        - v2
   - name: Get a list of incidents
     url: '#get-a-list-of-incidents'
     identifier: get-a-list-of-incidents
@@ -4703,6 +4789,8 @@ api:
         - v2
       operationids:
         - ListIncidents
+      unstable:
+        - v2
   - name: Key Management
     url: /api/latest/key-management/
     identifier: key-management
@@ -4717,6 +4805,7 @@ api:
         - v2
       operationids:
         - UpdateCurrentUserApplicationKey
+      unstable: []
   - name: Get one application key owned by current user
     url: '#get-one-application-key-owned-by-current-user'
     identifier: get-one-application-key-owned-by-current-user
@@ -4727,6 +4816,7 @@ api:
         - v2
       operationids:
         - GetCurrentUserApplicationKey
+      unstable: []
   - name: Delete an application key owned by current user
     url: '#delete-an-application-key-owned-by-current-user'
     identifier: delete-an-application-key-owned-by-current-user
@@ -4737,6 +4827,7 @@ api:
         - v2
       operationids:
         - DeleteCurrentUserApplicationKey
+      unstable: []
   - name: Create an application key for current user
     url: '#create-an-application-key-for-current-user'
     identifier: create-an-application-key-for-current-user
@@ -4747,6 +4838,7 @@ api:
         - v2
       operationids:
         - CreateCurrentUserApplicationKey
+      unstable: []
   - name: Get all application keys owned by current user
     url: '#get-all-application-keys-owned-by-current-user'
     identifier: get-all-application-keys-owned-by-current-user
@@ -4757,6 +4849,7 @@ api:
         - v2
       operationids:
         - ListCurrentUserApplicationKeys
+      unstable: []
   - name: Edit an application key
     url: '#edit-an-application-key'
     identifier: edit-an-application-key
@@ -4768,6 +4861,7 @@ api:
         - v2
       operationids:
         - UpdateApplicationKey
+      unstable: []
   - name: Get an application key
     url: '#get-an-application-key'
     identifier: get-an-application-key
@@ -4778,6 +4872,7 @@ api:
         - v1
       operationids:
         - GetApplicationKey
+      unstable: []
   - name: Delete an application key
     url: '#delete-an-application-key'
     identifier: delete-an-application-key
@@ -4789,6 +4884,7 @@ api:
         - v2
       operationids:
         - DeleteApplicationKey
+      unstable: []
   - name: Create an application key
     url: '#create-an-application-key'
     identifier: create-an-application-key
@@ -4799,6 +4895,7 @@ api:
         - v1
       operationids:
         - CreateApplicationKey
+      unstable: []
   - name: Get all application keys
     url: '#get-all-application-keys'
     identifier: get-all-application-keys
@@ -4810,6 +4907,7 @@ api:
         - v2
       operationids:
         - ListApplicationKeys
+      unstable: []
   - name: Edit an API key
     url: '#edit-an-api-key'
     identifier: edit-an-api-key
@@ -4820,6 +4918,7 @@ api:
         - v1
       operationids:
         - UpdateAPIKey
+      unstable: []
   - name: Get API key
     url: '#get-api-key'
     identifier: get-api-key
@@ -4830,6 +4929,7 @@ api:
         - v1
       operationids:
         - GetAPIKey
+      unstable: []
   - name: Delete an API key
     url: '#delete-an-api-key'
     identifier: delete-an-api-key
@@ -4840,6 +4940,7 @@ api:
         - v1
       operationids:
         - DeleteAPIKey
+      unstable: []
   - name: Create an API key
     url: '#create-an-api-key'
     identifier: create-an-api-key
@@ -4850,6 +4951,7 @@ api:
         - v1
       operationids:
         - CreateAPIKey
+      unstable: []
   - name: Get all API keys
     url: '#get-all-api-keys'
     identifier: get-all-api-keys
@@ -4860,6 +4962,7 @@ api:
         - v1
       operationids:
         - ListAPIKeys
+      unstable: []
   - name: Logs
     url: /api/latest/logs/
     identifier: logs
@@ -4874,6 +4977,8 @@ api:
         - v2
       operationids:
         - ListLogsGet
+      unstable:
+        - v2
   - name: Aggregate events
     url: '#aggregate-events'
     identifier: aggregate-events
@@ -4884,6 +4989,7 @@ api:
         - v2
       operationids:
         - AggregateLogs
+      unstable: []
   - name: Send logs
     url: '#send-logs'
     identifier: send-logs
@@ -4894,6 +5000,7 @@ api:
         - v1
       operationids:
         - SubmitLog
+      unstable: []
   - name: Get a list of logs
     url: '#get-a-list-of-logs'
     identifier: get-a-list-of-logs
@@ -4905,6 +5012,8 @@ api:
         - v2
       operationids:
         - ListLogs
+      unstable:
+        - v2
   - name: Logs Archives
     url: /api/latest/logs-archives/
     identifier: logs-archives
@@ -4919,6 +5028,8 @@ api:
         - v2
       operationids:
         - AddReadRoleToArchive
+      unstable:
+        - v2
   - name: List read roles for an archive
     url: '#list-read-roles-for-an-archive'
     identifier: list-read-roles-for-an-archive
@@ -4929,6 +5040,8 @@ api:
         - v2
       operationids:
         - ListArchiveReadRoles
+      unstable:
+        - v2
   - name: Revoke role from an archive
     url: '#revoke-role-from-an-archive'
     identifier: revoke-role-from-an-archive
@@ -4939,6 +5052,8 @@ api:
         - v2
       operationids:
         - RemoveRoleFromArchive
+      unstable:
+        - v2
   - name: Update an archive
     url: '#update-an-archive'
     identifier: update-an-archive
@@ -4949,6 +5064,7 @@ api:
         - v2
       operationids:
         - UpdateLogsArchive
+      unstable: []
   - name: Get an archive
     url: '#get-an-archive'
     identifier: get-an-archive
@@ -4959,6 +5075,7 @@ api:
         - v2
       operationids:
         - GetLogsArchive
+      unstable: []
   - name: Delete an archive
     url: '#delete-an-archive'
     identifier: delete-an-archive
@@ -4969,6 +5086,7 @@ api:
         - v2
       operationids:
         - DeleteLogsArchive
+      unstable: []
   - name: Create an archive
     url: '#create-an-archive'
     identifier: create-an-archive
@@ -4979,6 +5097,7 @@ api:
         - v2
       operationids:
         - CreateLogsArchive
+      unstable: []
   - name: Get all archives
     url: '#get-all-archives'
     identifier: get-all-archives
@@ -4989,6 +5108,7 @@ api:
         - v2
       operationids:
         - ListLogsArchives
+      unstable: []
   - name: Update archive order
     url: '#update-archive-order'
     identifier: update-archive-order
@@ -4999,6 +5119,7 @@ api:
         - v2
       operationids:
         - UpdateLogsArchiveOrder
+      unstable: []
   - name: Get archive order
     url: '#get-archive-order'
     identifier: get-archive-order
@@ -5009,6 +5130,7 @@ api:
         - v2
       operationids:
         - GetLogsArchiveOrder
+      unstable: []
   - name: Logs Indexes
     url: /api/latest/logs-indexes/
     identifier: logs-indexes
@@ -5023,6 +5145,8 @@ api:
         - v1
       operationids:
         - UpdateLogsIndex
+      unstable:
+        - v1
   - name: Get an index
     url: '#get-an-index'
     identifier: get-an-index
@@ -5033,6 +5157,8 @@ api:
         - v1
       operationids:
         - GetLogsIndex
+      unstable:
+        - v1
   - name: Get all indexes
     url: '#get-all-indexes'
     identifier: get-all-indexes
@@ -5043,6 +5169,8 @@ api:
         - v1
       operationids:
         - ListLogIndexes
+      unstable:
+        - v1
   - name: Update indexes order
     url: '#update-indexes-order'
     identifier: update-indexes-order
@@ -5053,6 +5181,8 @@ api:
         - v1
       operationids:
         - UpdateLogsIndexOrder
+      unstable:
+        - v1
   - name: Get indexes order
     url: '#get-indexes-order'
     identifier: get-indexes-order
@@ -5063,6 +5193,8 @@ api:
         - v1
       operationids:
         - GetLogsIndexOrder
+      unstable:
+        - v1
   - name: Logs Pipelines
     url: /api/latest/logs-pipelines/
     identifier: logs-pipelines
@@ -5077,6 +5209,7 @@ api:
         - v1
       operationids:
         - UpdateLogsPipeline
+      unstable: []
   - name: Get a pipeline
     url: '#get-a-pipeline'
     identifier: get-a-pipeline
@@ -5087,6 +5220,7 @@ api:
         - v1
       operationids:
         - GetLogsPipeline
+      unstable: []
   - name: Delete a pipeline
     url: '#delete-a-pipeline'
     identifier: delete-a-pipeline
@@ -5097,6 +5231,7 @@ api:
         - v1
       operationids:
         - DeleteLogsPipeline
+      unstable: []
   - name: Create a pipeline
     url: '#create-a-pipeline'
     identifier: create-a-pipeline
@@ -5107,6 +5242,7 @@ api:
         - v1
       operationids:
         - CreateLogsPipeline
+      unstable: []
   - name: Get all pipelines
     url: '#get-all-pipelines'
     identifier: get-all-pipelines
@@ -5117,6 +5253,7 @@ api:
         - v1
       operationids:
         - ListLogsPipelines
+      unstable: []
   - name: Update pipeline order
     url: '#update-pipeline-order'
     identifier: update-pipeline-order
@@ -5127,6 +5264,7 @@ api:
         - v1
       operationids:
         - UpdateLogsPipelineOrder
+      unstable: []
   - name: Get pipeline order
     url: '#get-pipeline-order'
     identifier: get-pipeline-order
@@ -5137,6 +5275,7 @@ api:
         - v1
       operationids:
         - GetLogsPipelineOrder
+      unstable: []
   - name: Logs Restriction Queries
     url: /api/latest/logs-restriction-queries/
     identifier: logs-restriction-queries
@@ -5151,6 +5290,8 @@ api:
         - v2
       operationids:
         - AddRoleToRestrictionQuery
+      unstable:
+        - v2
   - name: List roles for a restriction query
     url: '#list-roles-for-a-restriction-query'
     identifier: list-roles-for-a-restriction-query
@@ -5161,6 +5302,8 @@ api:
         - v2
       operationids:
         - ListRestrictionQueryRoles
+      unstable:
+        - v2
   - name: Revoke role from a restriction query
     url: '#revoke-role-from-a-restriction-query'
     identifier: revoke-role-from-a-restriction-query
@@ -5171,6 +5314,8 @@ api:
         - v2
       operationids:
         - RemoveRoleFromRestrictionQuery
+      unstable:
+        - v2
   - name: Update a restriction query
     url: '#update-a-restriction-query'
     identifier: update-a-restriction-query
@@ -5181,6 +5326,8 @@ api:
         - v2
       operationids:
         - UpdateRestrictionQuery
+      unstable:
+        - v2
   - name: Get a restriction query
     url: '#get-a-restriction-query'
     identifier: get-a-restriction-query
@@ -5191,6 +5338,8 @@ api:
         - v2
       operationids:
         - GetRestrictionQuery
+      unstable:
+        - v2
   - name: Delete a restriction query
     url: '#delete-a-restriction-query'
     identifier: delete-a-restriction-query
@@ -5201,6 +5350,8 @@ api:
         - v2
       operationids:
         - DeleteRestrictionQuery
+      unstable:
+        - v2
   - name: Get all restriction queries for a given user
     url: '#get-all-restriction-queries-for-a-given-user'
     identifier: get-all-restriction-queries-for-a-given-user
@@ -5211,6 +5362,8 @@ api:
         - v2
       operationids:
         - ListUserRestrictionQueries
+      unstable:
+        - v2
   - name: Get restriction query for a given role
     url: '#get-restriction-query-for-a-given-role'
     identifier: get-restriction-query-for-a-given-role
@@ -5221,6 +5374,8 @@ api:
         - v2
       operationids:
         - GetRoleRestrictionQuery
+      unstable:
+        - v2
   - name: Create a restriction query
     url: '#create-a-restriction-query'
     identifier: create-a-restriction-query
@@ -5231,6 +5386,8 @@ api:
         - v2
       operationids:
         - CreateRestrictionQuery
+      unstable:
+        - v2
   - name: List restriction queries
     url: '#list-restriction-queries'
     identifier: list-restriction-queries
@@ -5241,6 +5398,8 @@ api:
         - v2
       operationids:
         - ListRestrictionQueries
+      unstable:
+        - v2
   - name: Metrics
     url: /api/latest/metrics/
     identifier: metrics
@@ -5255,6 +5414,7 @@ api:
         - v1
       operationids:
         - SubmitMetrics
+      unstable: []
   - name: Search metrics
     url: '#search-metrics'
     identifier: search-metrics
@@ -5265,6 +5425,7 @@ api:
         - v1
       operationids:
         - ListMetrics
+      unstable: []
   - name: Query timeseries points
     url: '#query-timeseries-points'
     identifier: query-timeseries-points
@@ -5275,6 +5436,7 @@ api:
         - v1
       operationids:
         - QueryMetrics
+      unstable: []
   - name: Edit metric metadata
     url: '#edit-metric-metadata'
     identifier: edit-metric-metadata
@@ -5285,6 +5447,7 @@ api:
         - v1
       operationids:
         - UpdateMetricMetadata
+      unstable: []
   - name: Get metric metadata
     url: '#get-metric-metadata'
     identifier: get-metric-metadata
@@ -5295,6 +5458,7 @@ api:
         - v1
       operationids:
         - GetMetricMetadata
+      unstable: []
   - name: Get active metrics list
     url: '#get-active-metrics-list'
     identifier: get-active-metrics-list
@@ -5305,6 +5469,7 @@ api:
         - v1
       operationids:
         - ListActiveMetrics
+      unstable: []
   - name: Monitors
     url: /api/latest/monitors/
     identifier: monitors
@@ -5319,6 +5484,7 @@ api:
         - v1
       operationids:
         - UnmuteAllMonitors
+      unstable: []
   - name: Mute all monitors
     url: '#mute-all-monitors'
     identifier: mute-all-monitors
@@ -5329,6 +5495,7 @@ api:
         - v1
       operationids:
         - MuteAllMonitors
+      unstable: []
   - name: Resolve Monitor
     url: '#resolve-monitor'
     identifier: resolve-monitor
@@ -5339,6 +5506,7 @@ api:
         - v1
       operationids:
         - ResolveMonitor
+      unstable: []
   - name: Unmute a monitor
     url: '#unmute-a-monitor'
     identifier: unmute-a-monitor
@@ -5349,6 +5517,7 @@ api:
         - v1
       operationids:
         - UnmuteMonitor
+      unstable: []
   - name: Mute a monitor
     url: '#mute-a-monitor'
     identifier: mute-a-monitor
@@ -5359,6 +5528,7 @@ api:
         - v1
       operationids:
         - MuteMonitor
+      unstable: []
   - name: Edit a monitor
     url: '#edit-a-monitor'
     identifier: edit-a-monitor
@@ -5369,6 +5539,7 @@ api:
         - v1
       operationids:
         - UpdateMonitor
+      unstable: []
   - name: Get a monitor's details
     url: '#get-a-monitors-details'
     identifier: get-a-monitors-details
@@ -5379,6 +5550,7 @@ api:
         - v1
       operationids:
         - GetMonitor
+      unstable: []
   - name: Delete a monitor
     url: '#delete-a-monitor'
     identifier: delete-a-monitor
@@ -5389,6 +5561,7 @@ api:
         - v1
       operationids:
         - DeleteMonitor
+      unstable: []
   - name: Validate a monitor
     url: '#validate-a-monitor'
     identifier: validate-a-monitor
@@ -5399,6 +5572,7 @@ api:
         - v1
       operationids:
         - ValidateMonitor
+      unstable: []
   - name: Monitors search
     url: '#monitors-search'
     identifier: monitors-search
@@ -5409,6 +5583,7 @@ api:
         - v1
       operationids:
         - SearchMonitors
+      unstable: []
   - name: Monitors group search
     url: '#monitors-group-search'
     identifier: monitors-group-search
@@ -5419,6 +5594,7 @@ api:
         - v1
       operationids:
         - SearchMonitorGroups
+      unstable: []
   - name: Check if a monitor can be deleted
     url: '#check-if-a-monitor-can-be-deleted'
     identifier: check-if-a-monitor-can-be-deleted
@@ -5429,6 +5605,7 @@ api:
         - v1
       operationids:
         - CheckCanDeleteMonitor
+      unstable: []
   - name: Create a monitor
     url: '#create-a-monitor'
     identifier: create-a-monitor
@@ -5439,6 +5616,7 @@ api:
         - v1
       operationids:
         - CreateMonitor
+      unstable: []
   - name: Get all monitor details
     url: '#get-all-monitor-details'
     identifier: get-all-monitor-details
@@ -5449,6 +5627,7 @@ api:
         - v1
       operationids:
         - ListMonitors
+      unstable: []
   - name: Organizations
     url: /api/latest/organizations/
     identifier: organizations
@@ -5463,6 +5642,7 @@ api:
         - v1
       operationids:
         - UploadIdPForOrg
+      unstable: []
   - name: Update your organization
     url: '#update-your-organization'
     identifier: update-your-organization
@@ -5473,6 +5653,7 @@ api:
         - v1
       operationids:
         - UpdateOrg
+      unstable: []
   - name: Get organization information
     url: '#get-organization-information'
     identifier: get-organization-information
@@ -5483,6 +5664,7 @@ api:
         - v1
       operationids:
         - GetOrg
+      unstable: []
   - name: Create a child organization
     url: '#create-a-child-organization'
     identifier: create-a-child-organization
@@ -5493,6 +5675,7 @@ api:
         - v1
       operationids:
         - CreateChildOrg
+      unstable: []
   - name: List your managed organizations
     url: '#list-your-managed-organizations'
     identifier: list-your-managed-organizations
@@ -5503,6 +5686,7 @@ api:
         - v1
       operationids:
         - ListOrgs
+      unstable: []
   - name: PagerDuty Integration
     url: /api/latest/pagerduty-integration/
     identifier: pagerduty-integration
@@ -5517,6 +5701,7 @@ api:
         - v1
       operationids:
         - UpdatePagerDutyIntegrationService
+      unstable: []
   - name: Get a single service object
     url: '#get-a-single-service-object'
     identifier: get-a-single-service-object
@@ -5527,6 +5712,7 @@ api:
         - v1
       operationids:
         - GetPagerDutyIntegrationService
+      unstable: []
   - name: Delete a single service object
     url: '#delete-a-single-service-object'
     identifier: delete-a-single-service-object
@@ -5537,6 +5723,7 @@ api:
         - v1
       operationids:
         - DeletePagerDutyIntegrationService
+      unstable: []
   - name: Create a new service object
     url: '#create-a-new-service-object'
     identifier: create-a-new-service-object
@@ -5547,6 +5734,7 @@ api:
         - v1
       operationids:
         - CreatePagerDutyIntegrationService
+      unstable: []
   - name: Processes
     url: /api/latest/processes/
     identifier: processes
@@ -5561,6 +5749,7 @@ api:
         - v2
       operationids:
         - ListProcesses
+      unstable: []
   - name: Roles
     url: /api/latest/roles/
     identifier: roles
@@ -5575,6 +5764,7 @@ api:
         - v2
       operationids:
         - AddUserToRole
+      unstable: []
   - name: Get all users of a role
     url: '#get-all-users-of-a-role'
     identifier: get-all-users-of-a-role
@@ -5585,6 +5775,7 @@ api:
         - v2
       operationids:
         - ListRoleUsers
+      unstable: []
   - name: Remove a user from a role
     url: '#remove-a-user-from-a-role'
     identifier: remove-a-user-from-a-role
@@ -5595,6 +5786,7 @@ api:
         - v2
       operationids:
         - RemoveUserFromRole
+      unstable: []
   - name: Grant permission to a role
     url: '#grant-permission-to-a-role'
     identifier: grant-permission-to-a-role
@@ -5605,6 +5797,7 @@ api:
         - v2
       operationids:
         - AddPermissionToRole
+      unstable: []
   - name: List permissions for a role
     url: '#list-permissions-for-a-role'
     identifier: list-permissions-for-a-role
@@ -5615,6 +5808,7 @@ api:
         - v2
       operationids:
         - ListRolePermissions
+      unstable: []
   - name: Revoke permission
     url: '#revoke-permission'
     identifier: revoke-permission
@@ -5625,6 +5819,7 @@ api:
         - v2
       operationids:
         - RemovePermissionFromRole
+      unstable: []
   - name: Update a role
     url: '#update-a-role'
     identifier: update-a-role
@@ -5635,6 +5830,7 @@ api:
         - v2
       operationids:
         - UpdateRole
+      unstable: []
   - name: Get a role
     url: '#get-a-role'
     identifier: get-a-role
@@ -5645,6 +5841,7 @@ api:
         - v2
       operationids:
         - GetRole
+      unstable: []
   - name: Delete role
     url: '#delete-role'
     identifier: delete-role
@@ -5655,6 +5852,7 @@ api:
         - v2
       operationids:
         - DeleteRole
+      unstable: []
   - name: Create role
     url: '#create-role'
     identifier: create-role
@@ -5665,6 +5863,7 @@ api:
         - v2
       operationids:
         - CreateRole
+      unstable: []
   - name: List roles
     url: '#list-roles'
     identifier: list-roles
@@ -5675,6 +5874,7 @@ api:
         - v2
       operationids:
         - ListRoles
+      unstable: []
   - name: List permissions
     url: '#list-permissions'
     identifier: list-permissions
@@ -5685,6 +5885,7 @@ api:
         - v2
       operationids:
         - ListPermissions
+      unstable: []
   - name: Screenboards
     url: /api/latest/screenboards/
     identifier: screenboards
@@ -5703,6 +5904,8 @@ api:
         - v2
       operationids:
         - SearchSecurityMonitoringSignals
+      unstable:
+        - v2
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: get-a-quick-list-of-security-signals
@@ -5713,6 +5916,8 @@ api:
         - v2
       operationids:
         - ListSecurityMonitoringSignals
+      unstable:
+        - v2
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: update-an-existing-rule
@@ -5723,6 +5928,7 @@ api:
         - v2
       operationids:
         - UpdateSecurityMonitoringRule
+      unstable: []
   - name: Get a rule's details
     url: '#get-a-rules-details'
     identifier: get-a-rules-details
@@ -5733,6 +5939,7 @@ api:
         - v2
       operationids:
         - GetSecurityMonitoringRule
+      unstable: []
   - name: Delete an existing rule
     url: '#delete-an-existing-rule'
     identifier: delete-an-existing-rule
@@ -5743,6 +5950,7 @@ api:
         - v2
       operationids:
         - DeleteSecurityMonitoringRule
+      unstable: []
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: create-a-detection-rule
@@ -5753,6 +5961,7 @@ api:
         - v2
       operationids:
         - CreateSecurityMonitoringRule
+      unstable: []
   - name: List rules
     url: '#list-rules'
     identifier: list-rules
@@ -5763,6 +5972,7 @@ api:
         - v2
       operationids:
         - ListSecurityMonitoringRules
+      unstable: []
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -5777,6 +5987,7 @@ api:
         - v1
       operationids:
         - SubmitServiceCheck
+      unstable: []
   - name: Service Dependencies
     url: /api/latest/service-dependencies/
     identifier: service-dependencies
@@ -5791,6 +6002,8 @@ api:
         - v1
       operationids:
         - ListSingleServiceDependencies
+      unstable:
+        - v1
   - name: Get all APM service dependencies
     url: '#get-all-apm-service-dependencies'
     identifier: get-all-apm-service-dependencies
@@ -5801,6 +6014,8 @@ api:
         - v1
       operationids:
         - ListServiceDependencies
+      unstable:
+        - v1
   - name: Service Level Objectives
     url: /api/latest/service-level-objectives/
     identifier: service-level-objectives
@@ -5815,6 +6030,8 @@ api:
         - v1
       operationids:
         - GetSLOHistory
+      unstable:
+        - v1
   - name: Update a SLO
     url: '#update-a-slo'
     identifier: update-a-slo
@@ -5825,6 +6042,7 @@ api:
         - v1
       operationids:
         - UpdateSLO
+      unstable: []
   - name: Get a SLO's details
     url: '#get-a-slos-details'
     identifier: get-a-slos-details
@@ -5835,6 +6053,7 @@ api:
         - v1
       operationids:
         - GetSLO
+      unstable: []
   - name: Delete a SLO
     url: '#delete-a-slo'
     identifier: delete-a-slo
@@ -5845,6 +6064,7 @@ api:
         - v1
       operationids:
         - DeleteSLO
+      unstable: []
   - name: Check if SLOs can be safely deleted
     url: '#check-if-slos-can-be-safely-deleted'
     identifier: check-if-slos-can-be-safely-deleted
@@ -5855,6 +6075,7 @@ api:
         - v1
       operationids:
         - CheckCanDeleteSLO
+      unstable: []
   - name: Bulk Delete SLO Timeframes
     url: '#bulk-delete-slo-timeframes'
     identifier: bulk-delete-slo-timeframes
@@ -5865,6 +6086,7 @@ api:
         - v1
       operationids:
         - DeleteSLOTimeframeInBulk
+      unstable: []
   - name: Create a SLO object
     url: '#create-a-slo-object'
     identifier: create-a-slo-object
@@ -5875,6 +6097,7 @@ api:
         - v1
       operationids:
         - CreateSLO
+      unstable: []
   - name: Search SLOs
     url: '#search-slos'
     identifier: search-slos
@@ -5885,6 +6108,7 @@ api:
         - v1
       operationids:
         - ListSLOs
+      unstable: []
   - name: Slack Integration
     url: /api/latest/slack-integration/
     identifier: slack-integration
@@ -5899,6 +6123,7 @@ api:
         - v1
       operationids:
         - UpdateSlackIntegrationChannel
+      unstable: []
   - name: Get a Slack integration channel
     url: '#get-a-slack-integration-channel'
     identifier: get-a-slack-integration-channel
@@ -5909,6 +6134,7 @@ api:
         - v1
       operationids:
         - GetSlackIntegrationChannel
+      unstable: []
   - name: Remove a Slack integration channel
     url: '#remove-a-slack-integration-channel'
     identifier: remove-a-slack-integration-channel
@@ -5919,6 +6145,7 @@ api:
         - v1
       operationids:
         - RemoveSlackIntegrationChannel
+      unstable: []
   - name: Create a Slack integration channel
     url: '#create-a-slack-integration-channel'
     identifier: create-a-slack-integration-channel
@@ -5929,6 +6156,7 @@ api:
         - v1
       operationids:
         - CreateSlackIntegrationChannel
+      unstable: []
   - name: Get all channels in a Slack integration
     url: '#get-all-channels-in-a-slack-integration'
     identifier: get-all-channels-in-a-slack-integration
@@ -5939,6 +6167,7 @@ api:
         - v1
       operationids:
         - GetSlackIntegrationChannels
+      unstable: []
   - name: Add channels to Slack integration
     url: '#add-channels-to-slack-integration'
     identifier: add-channels-to-slack-integration
@@ -5949,6 +6178,7 @@ api:
         - v1
       operationids:
         - UpdateSlackIntegration
+      unstable: []
   - name: Create a Slack integration
     url: '#create-a-slack-integration'
     identifier: create-a-slack-integration
@@ -5959,6 +6189,7 @@ api:
         - v1
       operationids:
         - CreateSlackIntegration
+      unstable: []
   - name: Get info about a Slack integration
     url: '#get-info-about-a-slack-integration'
     identifier: get-info-about-a-slack-integration
@@ -5969,6 +6200,7 @@ api:
         - v1
       operationids:
         - GetSlackIntegration
+      unstable: []
   - name: Delete a Slack integration
     url: '#delete-a-slack-integration'
     identifier: delete-a-slack-integration
@@ -5979,6 +6211,7 @@ api:
         - v1
       operationids:
         - DeleteSlackIntegration
+      unstable: []
   - name: Snapshots
     url: /api/latest/snapshots/
     identifier: snapshots
@@ -5993,6 +6226,7 @@ api:
         - v1
       operationids:
         - GetGraphSnapshot
+      unstable: []
   - name: Synthetics
     url: /api/latest/synthetics/
     identifier: synthetics
@@ -6007,6 +6241,7 @@ api:
         - v1
       operationids:
         - EditGlobalVariable
+      unstable: []
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: get-a-global-variable
@@ -6017,6 +6252,7 @@ api:
         - v1
       operationids:
         - GetGlobalVariable
+      unstable: []
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: delete-a-global-variable
@@ -6027,6 +6263,7 @@ api:
         - v1
       operationids:
         - DeleteGlobalVariable
+      unstable: []
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: create-a-global-variable
@@ -6037,6 +6274,7 @@ api:
         - v1
       operationids:
         - CreateGlobalVariable
+      unstable: []
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: pause-or-start-a-test
@@ -6047,6 +6285,7 @@ api:
         - v1
       operationids:
         - UpdateTestPauseStatus
+      unstable: []
   - name: Get a test result (API)
     url: '#get-a-test-result-api'
     identifier: get-a-test-result-api
@@ -6057,6 +6296,7 @@ api:
         - v1
       operationids:
         - GetAPITestResult
+      unstable: []
   - name: Get the test's latest results summaries (API)
     url: '#get-the-tests-latest-results-summaries-api'
     identifier: get-the-tests-latest-results-summaries-api
@@ -6067,6 +6307,7 @@ api:
         - v1
       operationids:
         - GetAPITestLatestResults
+      unstable: []
   - name: Edit a test
     url: '#edit-a-test'
     identifier: edit-a-test
@@ -6077,6 +6318,7 @@ api:
         - v1
       operationids:
         - UpdateTest
+      unstable: []
   - name: Get a test configuration (API)
     url: '#get-a-test-configuration-api'
     identifier: get-a-test-configuration-api
@@ -6087,6 +6329,7 @@ api:
         - v1
       operationids:
         - GetTest
+      unstable: []
   - name: Trigger some Synthetics tests for CI
     url: '#trigger-some-synthetics-tests-for-ci'
     identifier: trigger-some-synthetics-tests-for-ci
@@ -6097,6 +6340,7 @@ api:
         - v1
       operationids:
         - TriggerCITests
+      unstable: []
   - name: Delete tests
     url: '#delete-tests'
     identifier: delete-tests
@@ -6107,6 +6351,7 @@ api:
         - v1
       operationids:
         - DeleteTests
+      unstable: []
   - name: Get a test result (browser)
     url: '#get-a-test-result-browser'
     identifier: get-a-test-result-browser
@@ -6117,6 +6362,7 @@ api:
         - v1
       operationids:
         - GetBrowserTestResult
+      unstable: []
   - name: Get the test's latest results summaries (browser)
     url: '#get-the-tests-latest-results-summaries-browser'
     identifier: get-the-tests-latest-results-summaries-browser
@@ -6127,6 +6373,7 @@ api:
         - v1
       operationids:
         - GetBrowserTestLatestResults
+      unstable: []
   - name: Get a test configuration (browser)
     url: '#get-a-test-configuration-browser'
     identifier: get-a-test-configuration-browser
@@ -6137,6 +6384,7 @@ api:
         - v1
       operationids:
         - GetBrowserTest
+      unstable: []
   - name: Create a test
     url: '#create-a-test'
     identifier: create-a-test
@@ -6147,6 +6395,7 @@ api:
         - v1
       operationids:
         - CreateTest
+      unstable: []
   - name: Get the list of all tests
     url: '#get-the-list-of-all-tests'
     identifier: get-the-list-of-all-tests
@@ -6157,6 +6406,7 @@ api:
         - v1
       operationids:
         - ListTests
+      unstable: []
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: edit-a-private-location
@@ -6167,6 +6417,7 @@ api:
         - v1
       operationids:
         - UpdatePrivateLocation
+      unstable: []
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: get-a-private-location
@@ -6177,6 +6428,7 @@ api:
         - v1
       operationids:
         - GetPrivateLocation
+      unstable: []
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: delete-a-private-location
@@ -6187,6 +6439,7 @@ api:
         - v1
       operationids:
         - DeletePrivateLocation
+      unstable: []
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: create-a-private-location
@@ -6197,6 +6450,7 @@ api:
         - v1
       operationids:
         - CreatePrivateLocation
+      unstable: []
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: get-all-locations-public-and-private
@@ -6207,6 +6461,7 @@ api:
         - v1
       operationids:
         - ListLocations
+      unstable: []
   - name: Tags
     url: /api/latest/tags/
     identifier: tags
@@ -6221,6 +6476,7 @@ api:
         - v1
       operationids:
         - UpdateHostTags
+      unstable: []
   - name: Add tags to a host
     url: '#add-tags-to-a-host'
     identifier: add-tags-to-a-host
@@ -6231,6 +6487,7 @@ api:
         - v1
       operationids:
         - CreateHostTags
+      unstable: []
   - name: Get host tags
     url: '#get-host-tags'
     identifier: get-host-tags
@@ -6241,6 +6498,7 @@ api:
         - v1
       operationids:
         - GetHostTags
+      unstable: []
   - name: Remove host tags
     url: '#remove-host-tags'
     identifier: remove-host-tags
@@ -6251,6 +6509,7 @@ api:
         - v1
       operationids:
         - DeleteHostTags
+      unstable: []
   - name: Get Tags
     url: '#get-tags'
     identifier: get-tags
@@ -6261,6 +6520,7 @@ api:
         - v1
       operationids:
         - ListHostTags
+      unstable: []
   - name: Timeboards
     url: /api/latest/timeboards/
     identifier: timeboards
@@ -6279,6 +6539,7 @@ api:
         - v1
       operationids:
         - SubmitTraces
+      unstable: []
   - name: Usage Metering
     url: /api/latest/usage-metering/
     identifier: usage-metering
@@ -6293,6 +6554,7 @@ api:
         - v1
       operationids:
         - GetTracingWithoutLimits
+      unstable: []
   - name: Get hourly usage for Trace Search
     url: '#get-hourly-usage-for-trace-search'
     identifier: get-hourly-usage-for-trace-search
@@ -6303,6 +6565,7 @@ api:
         - v1
       operationids:
         - GetUsageTrace
+      unstable: []
   - name: Get top custom metrics by hourly average
     url: '#get-top-custom-metrics-by-hourly-average'
     identifier: get-top-custom-metrics-by-hourly-average
@@ -6313,6 +6576,7 @@ api:
         - v1
       operationids:
         - GetUsageTopAvgMetrics
+      unstable: []
   - name: Get hourly usage for custom metrics
     url: '#get-hourly-usage-for-custom-metrics'
     identifier: get-hourly-usage-for-custom-metrics
@@ -6323,6 +6587,7 @@ api:
         - v1
       operationids:
         - GetUsageTimeseries
+      unstable: []
   - name: Get hourly usage for Synthetics Browser Checks
     url: '#get-hourly-usage-for-synthetics-browser-checks'
     identifier: get-hourly-usage-for-synthetics-browser-checks
@@ -6333,6 +6598,7 @@ api:
         - v1
       operationids:
         - GetUsageSyntheticsBrowser
+      unstable: []
   - name: Get hourly usage for Synthetics API Checks
     url: '#get-hourly-usage-for-synthetics-api-checks'
     identifier: get-hourly-usage-for-synthetics-api-checks
@@ -6343,6 +6609,7 @@ api:
         - v1
       operationids:
         - GetUsageSyntheticsAPI
+      unstable: []
   - name: Get hourly usage for Synthetics Checks
     url: '#get-hourly-usage-for-synthetics-checks'
     identifier: get-hourly-usage-for-synthetics-checks
@@ -6353,6 +6620,7 @@ api:
         - v1
       operationids:
         - GetUsageSynthetics
+      unstable: []
   - name: Get usage across your multi-org account
     url: '#get-usage-across-your-multi-org-account'
     identifier: get-usage-across-your-multi-org-account
@@ -6363,6 +6631,7 @@ api:
         - v1
       operationids:
         - GetUsageSummary
+      unstable: []
   - name: Get hourly usage for SNMP devices
     url: '#get-hourly-usage-for-snmp-devices'
     identifier: get-hourly-usage-for-snmp-devices
@@ -6373,6 +6642,7 @@ api:
         - v1
       operationids:
         - GetUsageSNMP
+      unstable: []
   - name: Get hourly usage for RUM Sessions
     url: '#get-hourly-usage-for-rum-sessions'
     identifier: get-hourly-usage-for-rum-sessions
@@ -6383,6 +6653,7 @@ api:
         - v1
       operationids:
         - GetUsageRumSessions
+      unstable: []
   - name: Get hourly usage for profiled hosts
     url: '#get-hourly-usage-for-profiled-hosts'
     identifier: get-hourly-usage-for-profiled-hosts
@@ -6393,6 +6664,7 @@ api:
         - v1
       operationids:
         - GetUsageProfiling
+      unstable: []
   - name: Get hourly usage for Network Hosts
     url: '#get-hourly-usage-for-network-hosts'
     identifier: get-hourly-usage-for-network-hosts
@@ -6403,6 +6675,7 @@ api:
         - v1
       operationids:
         - GetUsageNetworkHosts
+      unstable: []
   - name: Get hourly usage for Network Flows
     url: '#get-hourly-usage-for-network-flows'
     identifier: get-hourly-usage-for-network-flows
@@ -6413,6 +6686,7 @@ api:
         - v1
       operationids:
         - GetUsageNetworkFlows
+      unstable: []
   - name: Get hourly usage for Logs by Index
     url: '#get-hourly-usage-for-logs-by-index'
     identifier: get-hourly-usage-for-logs-by-index
@@ -6423,6 +6697,7 @@ api:
         - v1
       operationids:
         - GetUsageLogsByIndex
+      unstable: []
   - name: Get hourly usage for Logs
     url: '#get-hourly-usage-for-logs'
     identifier: get-hourly-usage-for-logs
@@ -6433,6 +6708,7 @@ api:
         - v1
       operationids:
         - GetUsageLogs
+      unstable: []
   - name: Get hourly usage for ingested spans
     url: '#get-hourly-usage-for-ingested-spans'
     identifier: get-hourly-usage-for-ingested-spans
@@ -6443,6 +6719,7 @@ api:
         - v1
       operationids:
         - GetIngestedSpans
+      unstable: []
   - name: Get hourly usage for indexed spans
     url: '#get-hourly-usage-for-indexed-spans'
     identifier: get-hourly-usage-for-indexed-spans
@@ -6453,6 +6730,7 @@ api:
         - v1
       operationids:
         - GetUsageIndexedSpans
+      unstable: []
   - name: Get hourly usage for incident management
     url: '#get-hourly-usage-for-incident-management'
     identifier: get-hourly-usage-for-incident-management
@@ -6463,6 +6741,7 @@ api:
         - v1
       operationids:
         - GetIncidentManagement
+      unstable: []
   - name: Get hourly usage for hosts and containers
     url: '#get-hourly-usage-for-hosts-and-containers'
     identifier: get-hourly-usage-for-hosts-and-containers
@@ -6473,6 +6752,7 @@ api:
         - v1
       operationids:
         - GetUsageHosts
+      unstable: []
   - name: Get hourly usage for Fargate
     url: '#get-hourly-usage-for-fargate'
     identifier: get-hourly-usage-for-fargate
@@ -6483,6 +6763,7 @@ api:
         - v1
       operationids:
         - GetUsageFargate
+      unstable: []
   - name: Get billable usage across your multi-org account
     url: '#get-billable-usage-across-your-multi-org-account'
     identifier: get-billable-usage-across-your-multi-org-account
@@ -6493,6 +6774,7 @@ api:
         - v1
       operationids:
         - GetUsageBillableSummary
+      unstable: []
   - name: Get hourly usage for Lambda
     url: '#get-hourly-usage-for-lambda'
     identifier: get-hourly-usage-for-lambda
@@ -6503,6 +6785,7 @@ api:
         - v1
       operationids:
         - GetUsageLambda
+      unstable: []
   - name: Get Usage Attribution
     url: '#get-usage-attribution'
     identifier: get-usage-attribution
@@ -6513,6 +6796,8 @@ api:
         - v1
       operationids:
         - GetUsageAttribution
+      unstable:
+        - v1
   - name: Get hourly usage for analyzed logs
     url: '#get-hourly-usage-for-analyzed-logs'
     identifier: get-hourly-usage-for-analyzed-logs
@@ -6523,6 +6808,7 @@ api:
         - v1
       operationids:
         - GetUsageAnalyzedLogs
+      unstable: []
   - name: Get specified monthly custom reports
     url: '#get-specified-monthly-custom-reports'
     identifier: get-specified-monthly-custom-reports
@@ -6533,6 +6819,8 @@ api:
         - v1
       operationids:
         - GetSpecifiedMonthlyCustomReports
+      unstable:
+        - v1
   - name: Get the list of available monthly custom reports
     url: '#get-the-list-of-available-monthly-custom-reports'
     identifier: get-the-list-of-available-monthly-custom-reports
@@ -6543,6 +6831,8 @@ api:
         - v1
       operationids:
         - GetMonthlyCustomReports
+      unstable:
+        - v1
   - name: Get specified daily custom reports
     url: '#get-specified-daily-custom-reports'
     identifier: get-specified-daily-custom-reports
@@ -6553,6 +6843,8 @@ api:
         - v1
       operationids:
         - GetSpecifiedDailyCustomReports
+      unstable:
+        - v1
   - name: Get the list of available daily custom reports
     url: '#get-the-list-of-available-daily-custom-reports'
     identifier: get-the-list-of-available-daily-custom-reports
@@ -6563,6 +6855,8 @@ api:
         - v1
       operationids:
         - GetDailyCustomReports
+      unstable:
+        - v1
   - name: Users
     url: /api/latest/users/
     identifier: users
@@ -6577,6 +6871,7 @@ api:
         - v2
       operationids:
         - ListUserPermissions
+      unstable: []
   - name: Get a user organization
     url: '#get-a-user-organization'
     identifier: get-a-user-organization
@@ -6587,6 +6882,7 @@ api:
         - v2
       operationids:
         - ListUserOrganizations
+      unstable: []
   - name: Get a user invitation
     url: '#get-a-user-invitation'
     identifier: get-a-user-invitation
@@ -6597,6 +6893,7 @@ api:
         - v2
       operationids:
         - GetInvitation
+      unstable: []
   - name: Send invitation emails
     url: '#send-invitation-emails'
     identifier: send-invitation-emails
@@ -6607,6 +6904,7 @@ api:
         - v2
       operationids:
         - SendInvitations
+      unstable: []
   - name: Update a user
     url: '#update-a-user'
     identifier: update-a-user
@@ -6618,6 +6916,7 @@ api:
         - v2
       operationids:
         - UpdateUser
+      unstable: []
   - name: Get user details
     url: '#get-user-details'
     identifier: get-user-details
@@ -6629,6 +6928,7 @@ api:
         - v2
       operationids:
         - GetUser
+      unstable: []
   - name: Disable a user
     url: '#disable-a-user'
     identifier: disable-a-user
@@ -6640,6 +6940,7 @@ api:
         - v2
       operationids:
         - DisableUser
+      unstable: []
   - name: Create a user
     url: '#create-a-user'
     identifier: create-a-user
@@ -6651,6 +6952,7 @@ api:
         - v2
       operationids:
         - CreateUser
+      unstable: []
   - name: List all users
     url: '#list-all-users'
     identifier: list-all-users
@@ -6662,6 +6964,7 @@ api:
         - v2
       operationids:
         - ListUsers
+      unstable: []
   - name: Webhooks Integration
     url: /api/latest/webhooks-integration/
     identifier: webhooks-integration
@@ -6676,6 +6979,7 @@ api:
         - v1
       operationids:
         - UpdateWebhooksIntegration
+      unstable: []
   - name: Get a webhook integration
     url: '#get-a-webhook-integration'
     identifier: get-a-webhook-integration
@@ -6686,6 +6990,7 @@ api:
         - v1
       operationids:
         - GetWebhooksIntegration
+      unstable: []
   - name: Delete a webhook
     url: '#delete-a-webhook'
     identifier: delete-a-webhook
@@ -6696,6 +7001,7 @@ api:
         - v1
       operationids:
         - DeleteWebhooksIntegration
+      unstable: []
   - name: Create a webhooks integration
     url: '#create-a-webhooks-integration'
     identifier: create-a-webhooks-integration
@@ -6706,6 +7012,7 @@ api:
         - v1
       operationids:
         - CreateWebhooksIntegration
+      unstable: []
   - name: Update a custom variable
     url: '#update-a-custom-variable'
     identifier: update-a-custom-variable
@@ -6716,6 +7023,7 @@ api:
         - v1
       operationids:
         - UpdateWebhooksIntegrationCustomVariable
+      unstable: []
   - name: Get a custom variable
     url: '#get-a-custom-variable'
     identifier: get-a-custom-variable
@@ -6726,6 +7034,7 @@ api:
         - v1
       operationids:
         - GetWebhooksIntegrationCustomVariable
+      unstable: []
   - name: Delete a custom variable
     url: '#delete-a-custom-variable'
     identifier: delete-a-custom-variable
@@ -6736,6 +7045,7 @@ api:
         - v1
       operationids:
         - DeleteWebhooksIntegrationCustomVariable
+      unstable: []
   - name: Create a custom variable
     url: '#create-a-custom-variable'
     identifier: create-a-custom-variable
@@ -6746,3 +7056,4 @@ api:
         - v1
       operationids:
         - CreateWebhooksIntegrationCustomVariable
+      unstable: []
