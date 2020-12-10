@@ -36,7 +36,7 @@ Network Performance Monitoring is compatible with **Cilium** installations, prov
 1) Cilium version 1.6 and above, and
 2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
 
-**Note**: Datadog does not currently support macOS platforms for Network Performance Monitoring.
+**Note**: Datadog does not support macOS platforms for Network Performance Monitoring.
 
 The following **provisioning systems** are supported:
 
