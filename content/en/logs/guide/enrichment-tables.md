@@ -24,7 +24,7 @@ Define new entities in Datadog like customer details, service names and informat
 ## Create an Enrichment Table
 
 {{< tabs >}}
-{{% tab "Manual Upload" %}}
+{{% tab "Manual upload" %}}
 
 Click **New Enrichment Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
