@@ -20,9 +20,9 @@ def pull_rbac():
       group_name = permission['attributes']['group_name']
       permission_name = permission['attributes']['name']
 
-      # Remove legacy logs permissions from dictionary before converting to JSON.  These legacy permissions are hard-coded until deprecation.
+      # Remove legacy logs permissions from dictionary before converting to JSON.  These legacy permissions are hard-coded in rbac-permissions-table partial until they can be deprecated.
       if permission_name == 'logs_live_tail' or permission_name == 'logs_read_index_data':
-        del permission['attributes']
+        del permission
 
       if group_name not in formatted_permissions_dict.keys():
         formatted_permissions_dict[group_name] = [permission]

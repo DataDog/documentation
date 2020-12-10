@@ -20,24 +20,58 @@
   </thead>
   <tbody>
     {{- range $permissions_data -}}
-    {{- if in $scopable_permissions .attributes.name -}}
-        {{- $is_scopable = true -}}
-      {{- else -}}
-        {{- $is_scopable = false -}}
-      {{- end -}}
-    <tr>
-      <td>
-        {{- if eq $permission_group "Logs" -}}
-          <a href="#{{ .attributes.name }}">
-            <code>{{- .attributes.name -}}</code>
-          </a>
+      {{- if in $scopable_permissions .attributes.name -}}
+          {{- $is_scopable = true -}}
         {{- else -}}
-          <code>{{- .attributes.name -}}</code>
+          {{- $is_scopable = false -}}
         {{- end -}}
-      </td>
-      <td>{{- .attributes.description -}}</td>
-      <td {{ if $hide_scopable_column }}class="d-none"{{ end }}>{{- $is_scopable -}}</td>
-    </tr>
+
+      {{- if ne .attributes.name nil -}}
+      <tr>
+        <td>      
+            {{- if eq $permission_group "Logs" -}}
+              <a href="#{{ .attributes.name }}">
+                <code>{{- .attributes.name -}}</code>
+              </a>
+            {{- else -}}
+              <code>{{- .attributes.name -}}</code>
+            {{- end -}}
+        </td>
+        <td>{{- .attributes.description -}}</td>
+        <td {{ if $hide_scopable_column }}class="d-none"{{ end }}>{{- $is_scopable -}}</td>
+      </tr>
+      {{- end -}}
     {{ end }}
   </tbody>
 </table>
+
+{{/* Harcoding the legacy logs section until deprecation */}}
+{{ if eq $permission_group "Logs" }}
+  Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive <code>logs_read_data</code> permission:
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Scopable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href="#logs_live_tail"><code>logs_live_tail</code></a>
+        </td>
+        <td>Access the live tail feature</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#logs_live_tail"><code>logs_read_index_data</code></a>
+        </td>
+        <td>Read a subset log data (index based)</td>
+        <td>true</td>
+      </tr>
+    </tbody>
+  </table>
+{{ end }}
