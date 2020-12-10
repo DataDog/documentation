@@ -144,7 +144,6 @@ To enable network performance monitoring for Windows hosts:
         #
         enabled: true
     ```
-    ```
 3. Edit `C:\ProgramData\Datadog\datadog.yaml` to set the enable flag to `true`:
 
     ```yaml
