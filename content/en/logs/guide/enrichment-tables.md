@@ -70,7 +70,7 @@ Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all f
 
 This enrichment table can now be used to add additional attributes to logs with the [Lookup Processor][1].
 
-## Modify an Enrichment Table
+## Modify an enrichment table
 
 To modify an existing enrichment table with new data, select a table then click **Update Data +** in the top right corner. The selected CSV is upserted into the table, meaning that all existing rows with the same primary key are updated, and all new rows are added. Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the updated rows to appear in affected logs.
 
