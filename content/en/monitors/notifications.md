@@ -55,6 +55,10 @@ Add tags to your monitor (optional). Monitor tags are different than metric tags
 
 Enable monitor renotification (optional), which is useful to remind your team a problem is not solved. If enabled, you are given the option to include an escalation message sent any time the monitor renotifies. The original notification message is also included.
 
+### Priority
+
+Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+
 ## Notify your team
 
 Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
@@ -186,6 +190,7 @@ The following conditional variables are available:
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
 | `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
+| `{{is_priority 'value'}}`  | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
 
 #### Examples
 
