@@ -131,7 +131,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 Data collection for Windows systems is now available in public beta for versions 2016 or later. Note that NPM currently monitors Windows hosts only, and not Windows containers. DNS metric collection is not currently supported for Windows systems.
 
-To enable network performance monitoring with the Windows systems:
+To enable network performance monitoring for Windows hosts:
 
 1. Install [this custom build][9] of the Datadog Agent 
 2. Edit `c:\ProgramData\Datadog\system-probe.yaml` to set the enable flag to `true`:
