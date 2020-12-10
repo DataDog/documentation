@@ -68,7 +68,7 @@ Click **New Enrichment Table +**, then add a name, select AWS S3, fill out all f
 {{% /tab %}}
 {{< /tabs >}}
 
-This Enrichment Table can now be used to add additional attributes to logs with the [Lookup Processor][1].
+This enrichment table can now be used to add additional attributes to logs with the [Lookup Processor][1].
 
 ## Modify an Enrichment Table
 
