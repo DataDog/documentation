@@ -153,7 +153,6 @@ To enable network performance monitoring for Windows hosts:
         #
         enabled: true
     ```
-    ```
 4. [Restart the Agent][2].
 
     For PowerShell (`powershell.exe`): 
