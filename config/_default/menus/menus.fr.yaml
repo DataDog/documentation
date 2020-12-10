@@ -1266,7 +1266,7 @@ main:
     identifier: tracing_setup_overview_setup_dotnet_framework
     weight: 109
   - name: OpenTracing et OpenTelemetry
-    url: tracing/setup_overview/open_standards/java
+    url: tracing/setup_overview/open_standards/
     parent: tracing_setup_overview
     identifier: tracing_open_standards_open_standards
     weight: 103
@@ -1823,6 +1823,11 @@ main:
     parent: rum_browser
     identifier: rum_advanced
     weight: 102
+  - name: Surveillance des performances de pages
+    url: real_user_monitoring/browser/monitoring_page_performance/
+    parent: rum_browser
+    identifier: page_performance
+    weight: 103
   - name: Surveillance Android
     url: real_user_monitoring/android/
     parent: rum
@@ -1863,7 +1868,7 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 501
-  - name: Analyses
+  - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
@@ -3343,6 +3348,74 @@ api_v2:
   - name: Gestion des clés
     url: /api/v2/key-management/
     identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Gestion des clés
+    url: /api/v2/key-management/
+    identifier: Gestion des clés
+    generated: true
+  - name: Récupérer toutes les clés d'application
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application'
+    generated: true
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
+    url: '#supprimer-une-cle-d-application'
+    generated: true
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
+    url: '#modifier-une-cle-d-application'
+    generated: true
+  - name: Récupérer toutes les clés d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-toutes-les-cles-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Créer une clé d'application pour l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#creer-une-cle-d-application-pour-l-utilisateur-actuel'
+    generated: true
+  - name: Supprimer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#supprimer-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Récupérer une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#recuperer-une-cle-d-application-appartenant-a-l-utilisateur-actuel'
+    generated: true
+  - name: Modifier une clé d'application appartenant à l'utilisateur actuel
+    parent: Gestion des clés
+    url: '#modifier-une-clé-d-application-appartenant-a-l-utilisateur-actuel'
     generated: true
   - name: Logs
     url: /api/v2/logs/
