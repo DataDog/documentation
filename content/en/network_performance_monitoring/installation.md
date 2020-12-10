@@ -26,7 +26,7 @@ Supported **platforms** include:
 - Amazon Linux 2
 - [Windows 2016+][8] (in public beta)
 
-**For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have an underlying Linux kernel versions of 4.4.0+.
+**For Linux OS:** Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+.
 
 **For Windows OS:** Data collection is available in public beta for Windows versions 2016 or later.
 
