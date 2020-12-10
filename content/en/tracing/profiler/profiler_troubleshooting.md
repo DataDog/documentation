@@ -30,6 +30,7 @@ To turn off allocation profiling, disable the following events in your `jfp` [ov
 {{< code-block lang="text" filename="example-template.jfp" >}}
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
+jdk.OldObjectSample#enabled=false
 {{< /code-block >}}
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
