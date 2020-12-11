@@ -25,7 +25,7 @@ The *account settings* page also lists all of the organizations you are associat
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. Once invited, you'll receive an email about being invited to the org. Click the **join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. Once invited, you'll receive an email with the subject `You've been invited to join <Organization Name>`. Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
