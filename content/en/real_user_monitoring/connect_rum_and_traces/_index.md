@@ -12,7 +12,6 @@ further_reading:
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces"  style="width:100%;">}}
 
-# Overview
 
 The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination lets you see your full front end and backend data through one lens.
 
@@ -22,14 +21,14 @@ Use frontend data from RUM, and backend, infrastructure, and log information fro
 This feature is currently available for private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
 </div>
 
-# Usage
+## Usage
 ## Prerequisites
 
 -   Set up [APM tracing][1] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
--   Your HTTP servers are using a library that supports distributed tracing.
+-   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
 
-## RUM set up
+### RUM set up
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
@@ -101,7 +100,7 @@ let session =  URLSession(
 {{% /tab %}}
 {{< /tabs >}}
 
-# Supported Libraries
+## Supported Libraries
 
 The following Datadog tracing libraries are supported:
 
