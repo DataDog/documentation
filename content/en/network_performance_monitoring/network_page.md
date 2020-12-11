@@ -8,9 +8,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
-    - link: "/network_performance_monitoring/devices"
-      tag: "Documentation"
-      text: "Network Device Monitoring"
+    - link: '/network_performance_monitoring/devices'
+      tag: 'Documentation'
+      text: 'Network Device Monitoring'
     - link: '/network_performance_monitoring/installation'
       tag: 'Documentation'
       text: 'Collect your Network Data with the Datadog Agent.'
