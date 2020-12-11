@@ -111,7 +111,7 @@ To collect all logs written by running applications in your ECS containers and s
 
 ### Custom log collection
 
-#### Using configuration file
+#### Configuration file
 
 If your container writes any logs to files, follow the [Custom Log Collection documentation][1] to tail files for logs.
 
@@ -127,11 +127,11 @@ logs:
 
 **Note**: Container metadata is not retrieved with custom log collection, therefore the Agent does not automatically assign container tags to logs. Use [custom tags][3] to create container tags.
 
-#### Using container label
+#### Container label
 
-With Agent version >= 7.25.0/6.25.0 it is possible to enable file tailing by using container label so the logs collected will get the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
+With Agent v7.25.0+/6.25.0+, it is possible to enable file tailing by using a container label so the logs collected receive the tags of the container on which the label was set. See this [example][4] that details the exact label to use.
 
-**Note**: The file path are always relative to the Agent. So this require extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. Please refere to the [AWS documentation][5] for additional details on volume management with ECS.
+**Note**: The file paths are always relative to the Agent. So, this requires extra configuration for involved ECS tasks to share a directory between the container writing to the file and the Agent container. Refer to the [AWS documentation][5] for additional details on volume management with ECS.
 
 ## Activate log integrations
 

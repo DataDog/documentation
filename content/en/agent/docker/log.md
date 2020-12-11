@@ -229,7 +229,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 [1]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 {{% /tab %}}
-{{% tab "Log collection from file" %}}
+{{% tab "From file" %}}
 
 The Agent (version >= 7.25) can also directly collect logs from file based on a container Autodiscovery label. To collect logs from a file associated to a container use the `com.datadoghq.ad.logs` label as shown below on your containers to get `/logs/app.log` to be collected:
 
@@ -238,20 +238,20 @@ labels:
     com.datadoghq.ad.logs: '[{"type":"file", "source": "sample_app", "service": "sample_service", "path": "/logs/app/prod.log"}]'
 ```
 
-Log collected from that file will be tagged with the container metadata. Log collection is linked to the container life cycle, as soon as the container stops, log collection from that file also stops.
+Logs collected from a file are tagged with the container metadata. Log collection is linked to the container life cycle, as soon as the container stops, log collection from that file stops.
 
 
-**Important notes**:
+**Notes**:
 
-- The path is **relative** to the Agent, thus the directory containing the file should be shared between the container running the application logging to the file and the Agent container. For example the container may mount `/logs` and each container logging to file may mount a volume like `/logs/app` where the log file will be written.
+- The file path is **relative** to the Agent, so the directory containing the file should be shared between the container running the application and the Agent container. For example, if the container mounts `/logs` each container logging to file may mount a volume such as `/logs/app` where the log file is written.
 
-- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label like:
+- When using this kind of label on a container, its `stderr`/`stdout` logs are not collected automatically. If collection from both `stderr`/`stdout` and a file are needed it should be explicity enabled by using a label, for example:
 ```yaml
 labels:
     com.datadoghq.ad.logs: '[{"type":"file", "source": "java", "service": "app", "path": "/logs/app/prod.log"}, {"type": "docker", "source": "app_container", "service": "app"}]'
 ```
 
-- When using this kind of combination, `source` and `service` have no default value, and therefore they should be explicitely set in the Autodiscovery label.   
+- When using this kind of combination, `source` and `service` have no default value and should be explicitly set in the Autodiscovery label.   
 
 {{% /tab %}}
 {{< /tabs >}}
