@@ -22,7 +22,7 @@ This feature is currently available for private beta. <a href="https://docs.data
 </div>
 
 ## Usage
-## Prerequisites
+### Prerequisites
 
 -   Set up [APM tracing][1] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
