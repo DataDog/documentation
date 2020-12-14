@@ -10,7 +10,7 @@ kind: documentation
 | Billing Parameter  | Price                                      | Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [APM Host][4]      | $31 per underlying [APM host][4] per month | 1 million additional Indexed Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][5] |
-| [Fargate][4]       | $2 per concurrent task per month           | No Indexed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][4]              |
+| [Fargate][4]       | $2 per concurrent task per month           | 65,000 Indexed Spans included in pricing.                                        | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored. [More information.][4]              |
 | [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed via retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More information.][5]                                                                                          |
 
 Note: If you're using a container based environment, you get billed for underlying host deploying APM agent.
@@ -39,8 +39,8 @@ Using 5 hosts, sending 20 million Indexed Spans, and have deployed APM on averag
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
 | APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31             | $155                  |
 | Fargate Tasks  | 20         | $2 per task                                                                                     | 20 * $2             | $40                   |
-| Indexed Spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Indexed Spans | 15 * $1.70          | $25.50                |
-| Total          |            |                                                                                                 | $155 + $40 + $25.50 | **$220.50 per month** |
+| Indexed Spans | 20 million | 5 million included with 5 APM hosts. 1.3 million included with 20 Fargate tasks. $1.70 per million for additional 13.7 million Indexed Spans | 13.7 * $1.70          | $23.29                |
+| Total          |            |                                                                                                 | $155 + $40 + $23.29 | **$218.29 per month** |
 
 ### Case 3: Services, Containers and Indexed Spans
 
@@ -78,13 +78,13 @@ For Kubernetes, APM is priced by nodes not by pods.
 
 ### Case 6: Lambda Functions and Indexed Spans
 
-Continuously invoking a Lambda function every hour for an entire month while sending 20 million Indexed Spans.
+Continuously invoking 20 Lambda functions every hour for an entire month while sending 10 million Indexed Spans.
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Lambda Function   | 1          | [$5 per month][8]                                               | 1 * $5  | $5               |
-| Indexed Spans    | 20 million | $1.70 per million Indexed Spans | 20 * $1.70 | $34               |
-| Total             |            |                                                                             | $5 + $34 | **$39 per month** |
+| Lambda Function   | 20          | [$5 per month][8]                                               | 20 * $5  | $100               |
+| Indexed Spans    | 10 million | 150,000 Indexed Spans included with each Lambda Function. $1.70 per million additional Indexed Spans | 7 * $1.70 | $11.90               |
+| Total             |            |                                                                             | $100 + $11.90 | **$119.90 per month** |
 
 
 ## FAQs
