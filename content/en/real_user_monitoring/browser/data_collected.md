@@ -299,17 +299,18 @@ The following attributes are related to the geolocation of IP addresses:
 
 ## Extra Attribute
 
-In addition to default attributes, add [specific global context][1] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
+In addition to default attributes, add [specific global context][8] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/data_collected/?tab=view
 [2]: /real_user_monitoring/browser/data_collected/?tab=resource
 [3]: /real_user_monitoring/browser/data_collected/?tab=longtask
 [4]: /real_user_monitoring/browser/data_collected/?tab=error
 [5]: /real_user_monitoring/browser/data_collected/?tab=useraction
 [6]: /real_user_monitoring/data_collected/view#single-page-applications
-[7]: /logs/processing/attributes_naming_convention/#user-agent-attributes
+[7]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context
