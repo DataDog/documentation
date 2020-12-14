@@ -17,6 +17,8 @@ If you are experiencing issues with a given Agent Check, use these commands for 
 - [Systemd](#systemd)
 - [Further Reading](#further-reading)
 
+**Note**: Replace `<CHECK_NAME>` in the examples below with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
+
 ## Linux
 
 To test an Agent check, run:
@@ -40,6 +42,8 @@ sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 ```shell
 sudo -u dd-agent dd-agent check <CHECK_NAME>
 ```
+
+Replace `<CHECK_NAME>` with any Agent check. For example: `activemq`, `ceph`, or `elastic`. Review an [integration's documentation][1] to confirm the Agent check name.
 
 If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
 
