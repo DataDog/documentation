@@ -73,7 +73,7 @@ dogstatsd($metric)
 
 ## Examples
 
-Here are two examples translated in PowerShell, using `Msxml2.XMLHTTP`, fully documented [on Mozilla's documentation page][2]:
+Here are two examples translated in PowerShell, using `Msxml2.XMLHTTP`, fully documented [on Mozilla's documentation page][6]:
 
 ### The code that makes the API call
 
@@ -153,3 +153,4 @@ $http_request.responseText
 [3]: /api/v1/hosts/
 [4]: /api/v1/metrics/
 [5]: https://github.com/ncracker/dd_metric
+[6]: https://developer.mozilla.org/en-US/docs/Glossary/XHR_(XMLHttpRequest)
