@@ -18147,7 +18147,7 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your multi-org account.
+      description: Get billable usage across your account.
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -18177,7 +18177,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden - User is not authorized
-      summary: Get billable usage across your multi-org account
+      summary: Get billable usage across your account
       tags:
       - Usage Metering
       x-undo:
@@ -18749,7 +18749,8 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get usage across your multi-org account.
+      description: Get usage across your multi-org account. You must have the multi-org
+        feature enabled.
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`

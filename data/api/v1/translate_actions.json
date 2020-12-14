@@ -801,8 +801,8 @@
     "summary": "Get hourly usage for Lambda"
   },
   "GetUsageBillableSummary": {
-    "description": "Get billable usage across your multi-org account.",
-    "summary": "Get billable usage across your multi-org account"
+    "description": "Get billable usage across your account.",
+    "summary": "Get billable usage across your account"
   },
   "GetUsageFargate": {
     "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).",
@@ -853,7 +853,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get usage across your multi-org account.",
+    "description": "Get usage across your multi-org account. You must have the multi-org feature enabled.",
     "summary": "Get usage across your multi-org account"
   },
   "GetUsageSynthetics": {

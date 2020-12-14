@@ -3082,9 +3082,9 @@ api_v1:
     parent: Usage Metering
     url: '#get-hourly-usage-for-lambda'
     generated: true
-  - name: Get billable usage across your multi-org account
+  - name: Get billable usage across your account
     parent: Usage Metering
-    url: '#get-billable-usage-across-your-multi-org-account'
+    url: '#get-billable-usage-across-your-account'
     generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering
