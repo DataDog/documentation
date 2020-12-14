@@ -55,7 +55,7 @@ En plus des métriques, l'Agent Datadog envoie également des checks de service 
 
 ### Installation
 
-Les étapes ci-dessous sont toutes nécessaires pour faire fonctionner l'intégration Airflow. Avant de commencer, [installez l'Agent Datadog][3] version `>=6.17` ou `>=7.17` pour bénéficier de la fonctionnalité de mapping StatsD/DogStatsD.
+Les étapes ci-dessous sont toutes nécessaires pour faire fonctionner l'intégration Airflow. Avant de commencer, [installez l'Agent Datadog][3] version `>=6.17` ou `>=7.17` pour bénéficier de la fonctionnalité de mappage StatsD/DogStatsD.
 
 ### Configuration
 
