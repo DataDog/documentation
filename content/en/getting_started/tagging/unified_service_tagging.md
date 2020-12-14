@@ -43,7 +43,7 @@ To begin configuration of unified service tagging, choose your environment:
 
 ### Containerized environment
 
-In containerized environments, `env`, `service`, and `version` are set through the service's environment variables or labels (e.g., Kubernetes deployment and pod labels, Docker container labels). The Datadog Agent can detect this tagging configuration and apply it on the data that it collects from containers.
+In containerized environments, `env`, `service`, and `version` are set through the service's environment variables or labels (for example, Kubernetes deployment and pod labels, Docker container labels). The Datadog Agent detects this tagging configuration and applies it to the data it collects from containers.
 
 To setup unified service tagging in a containerized environment:
 
