@@ -15,10 +15,63 @@ From the location you downloaded the package:
 
 ```bash
 $ tar -xf datadog-php-tracer.tar.gz -C /
-  /opt/datadog-php/bin/post-install.sh
 ```
 
-Next, [modify the `php.ini` file](#modify-the-ini-file) to add the extension to the PHP runtime.
+#### Automatic INI file setup
+
+In case of a standard PHP installation, the command below will automatically install and configure the extension.
+
+```
+$ /opt/datadog-php/bin/post-install.sh
+```
+
+Verify that the extension has been correctly installed
+
+```bash
+$ php --ri=ddtrace
+
+ddtrace
+
+Datadog PHP tracer extension
+...
+```
+
+If the PHP installation is not standard the above steps might fail. In this case proceed with the [manual steps below](#manual-ini-file-setup).
+
+#### Manual INI file setup
+
+Steps in this paragraph are only required if the [Automatic INI file setup](#automatic-ini-file-setup) did not work.
+
+Modify the `php.ini` configuration file to make the **ddtrace** extension available in the PHP runtime. To find out where the INI file is, run the following command:
+
+```bash
+$ php --ini
+
+Configuration File (php.ini) Path: /usr/local/etc/php/7.2
+Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
+...
+```
+
+Add the following lines to the `php.ini` file.
+
+```ini
+extension=/opt/datadog-php/extensions/ddtrace-<PHP_EXTENSION_VERSION>.so
+ddtrace.request_init_hook=/opt/datadog-php/dd-trace-sources/bridge/dd_wrap_autoloader.php
+```
+
+The correct value for `PHP_EXTENSION_VERSION` depends on the PHP version.
+
+| PHP Version | PHP_EXTENSION_VERSION |
+|-------------|-----------------------|
+| `5.4`       | `20100412`            |
+| `5.5`       | `20121113`            |
+| `5.6`       | `20131106`            |
+| `7.0`       | `20151012`            |
+| `7.1`       | `20160303`            |
+| `7.2`       | `20170718`            |
+| `7.3`       | `20180731`            |
+| `7.4`       | `20190902`            |
+| `8.0`       | `20200930`            |
 
 ### Install from source
 
