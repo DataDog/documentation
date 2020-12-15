@@ -61,7 +61,7 @@ Automatic instrumentation captures:
 
 Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
-To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][2]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation on Windows, install the .NET Tracer on the host by running the [MSI installer for Windows][2] as administrator. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
