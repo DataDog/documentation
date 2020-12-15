@@ -30,6 +30,8 @@ Switch to the Transactions view, and select a facet to build a transaction on. F
 
 Click on a transaction row to drill down into its underlying log events.
 
+{{< img src="logs/explorer/transactions_details.png" alt="Drill down to see transaction log events" style="width:80%;" >}}
+
 ## Transactions Operations
 
 - **Adding aggregations:** Click the `+` icon to add aggregations as columns to the Transaction Table. You can add up to five aggregations.
