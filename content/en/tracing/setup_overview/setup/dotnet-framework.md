@@ -61,7 +61,7 @@ Automatic instrumentation captures:
 
 ### Installation
 
-To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation on Windows, install the .NET Tracer on the host by running the [MSI installer for Windows][4] as administrator. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
