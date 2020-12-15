@@ -30,6 +30,17 @@ To turn off allocation profiling, disable the following events in your `jfp` [ov
 {{< code-block lang="text" filename="example-template.jfp" >}}
 jdk.ObjectAllocationInNewTLAB#enabled=false
 jdk.ObjectAllocationOutsideTLAB#enabled=false
+jdk.OldObjectSample#enabled=false
+{{< /code-block >}}
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+## Memory leak detection slowing down garbage collector
+
+To turn off memory leak detection, disable the following event in your `jfp` [override template file](#large-allocation-events-overwhelming-the-profiler):
+
+{{< code-block lang="text" filename="example-template.jfp" >}}
+jdk.OldObjectSample#enabled=false
 {{< /code-block >}}
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)

@@ -12,7 +12,7 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 * Get instant alerts of spikes or drops in your usage
 * Assess the potential impact of code changes on your usage in near real-time
 
-**Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average.
+**Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average. Due to the nature of the estimations, the margin of error is larger for small usage.
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 

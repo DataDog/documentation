@@ -122,7 +122,7 @@ If you need to pass a more complex configuration for your Datadog-JMX integratio
 
 ### Agent preparation
 
-Choose wether your Agent is running as a container in your cluster, or on your host directly:
+Choose whether your Agent is running as a container in your cluster, or on your host directly:
 
 {{< tabs >}}
 {{% tab "Container Agent" %}}

@@ -2,6 +2,7 @@
 title: ネットワークウィジェット
 kind: documentation
 description: ネットワークデータの時系列を表示します。
+widget_type: Timeseries
 aliases:
   - /ja/graphing/widgets/network/
 further_reading:
@@ -45,48 +46,16 @@ further_reading:
 
 ## API
 
-ネットワークウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
 
-```text
-{
-  "viz": "timeseries",
-  "requests": [
-    {
-      "network_query": {
-        "index": "netflow-search",
-        "search": {
-          "query": ""
-        },
-        "groupBy": [
-          {
-            "facet": {source_entity_type}
-          },
-          {
-            "facet": {destination_entity_type}
-          }
-        ],
-        "compute": {
-          "aggregation": "sum",
-          "facet": {type of data you’d like to display}
-        }
-      },
-      "style": {
-        "palette": {color},
-        "type": "solid",
-        "width": "normal"
-      },
-      "type": "area",
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "autoscale": true
-}
-```
+ネットワークウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/network_performance_monitoring/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[2]: /ja/api/v1/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

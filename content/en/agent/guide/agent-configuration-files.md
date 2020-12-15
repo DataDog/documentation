@@ -24,7 +24,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Source                               | `/etc/datadog-agent/datadog.yaml`    |
 | Suse                                 | `/etc/datadog-agent/datadog.yaml`    |
 | Ubuntu                               | `/etc/datadog-agent/datadog.yaml`    |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.yaml` |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
 | Windows Server 2003, XP or older     | *unsupported platform*               |
 
 {{% /tab %}}
@@ -41,7 +41,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | Source                               | `/etc/dd-agent/datadog.conf`                                               |
 | Suse                                 | `/etc/dd-agent/datadog.conf`                                               |
 | Ubuntu                               | `/etc/dd-agent/datadog.conf`                                               |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\datadog.conf`                                       |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
 {{% /tab %}}
@@ -68,7 +68,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d` |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d` |
 | Windows Server 2003, XP or older     | *unsupported platform*         |
 
 ### Checks configuration files for Agent 6
@@ -109,7 +109,7 @@ To preserve backwards compatibility, the Agent still picks up configuration file
 | Source                               | `/etc/dd-agent/conf.d/`                                              |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              |
 | Ubuntu                               | `/etc/dd-agent/conf.d/`                                              |
-| Windows Server 2008, Vista and newer | `\\ProgramData\Datadog\conf.d`                                       |
+| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\conf.d` |
 
 {{% /tab %}}

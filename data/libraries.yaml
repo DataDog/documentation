@@ -184,6 +184,11 @@ Classic:
       dogstatsd: true
       authors: Datadog
       notes: Also includes an API client CLI tool, 'dog'.
+    - name: datadog-api-client-python
+      link: https://github.com/DataDog/datadog-api-client-python
+      official: true
+      api: true
+      authors: Datadog
   - R:
     - name: datadogr
       link: https://cran.r-project.org/package=datadogr

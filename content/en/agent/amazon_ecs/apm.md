@@ -182,5 +182,5 @@ For more examples of setting the Agent hostname in other languages, refer to the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/apm/#docker-apm-agent-environment-variables
+[1]: /agent/amazon_ecs/
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html

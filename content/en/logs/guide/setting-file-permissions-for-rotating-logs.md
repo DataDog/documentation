@@ -73,6 +73,8 @@ getfacl /var/log/apache/access.log
 
 **Note**: For **PostgreSQL v10** and older, set the permission to **0700**. For **PostgreSQL v11**, set either **0700** or **0750**. Trying to start a server with a base data folder that has permissions different from 0700 or 0750 will result in a failure of the postmater process.
 
+**Note**: The PostgreSQL logging directory cannot be located in the same directory as the base PostgreSQL installation.
+
 ## Setting permissions when ACLs are not present
 
 When ACLs are not present in a system, set your permissions based on group access.

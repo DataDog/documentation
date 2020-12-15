@@ -37,6 +37,8 @@ further_reading:
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+
 Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
 
 1. Datadog サーバーレスプラグインをインストールします。
@@ -58,6 +60,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 <div class="alert alert-warning"> このサービスは公開ベータ版です。フィードバックがございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
@@ -95,12 +98,15 @@ Transform:
 
 `<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 
+Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
+
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
@@ -147,12 +153,15 @@ class CdkStack(core.Stack):
 
 `<SERVICE>` と `<ENV>` を適切な値に置き換え、`<LAYER_VERSION>` を目的のバージョンの Datadog Lambda レイヤーに置き換え ([最新リリース][4]を参照)、`<FORWARDER_ARN>` を Forwarder ARN に置き換えます ([Forwarder のドキュメント][2]を参照)。
 
+Lambda 関数が、コード署名を使用するよう構成してある場合、マクロを使用するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
+
 [マクロのドキュメント][1]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/macro
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://github.com/DataDog/datadog-lambda-python/releases
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Zappa" %}}
 
@@ -180,6 +189,7 @@ class CdkStack(core.Stack):
     # For us-gov regions
     arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:19
     ```
+1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][4]に追加します。
 
 ### Datadog Forwarder をロググループにサブスクライブ
 
@@ -192,6 +202,7 @@ class CdkStack(core.Stack):
 [1]: https://github.com/DataDog/datadog-lambda-python/releases
 [2]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [3]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -225,12 +236,47 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v 19 --forwarder arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
 ```
 
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog CLI でインスツルメントするには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][5]に追加する必要があります。
+
 [CLI のドキュメント][4]に詳細と追加のパラメーターがあります。
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-python/releases
 [3]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [4]: https://docs.datadoghq.com/ja/serverless/serverless_integrations/cli
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
+{{% /tab %}}
+{{% tab "Container Image" %}}
+
+### Datadog Lambda ライブラリのインストール
+
+Lambda 関数をコンテナイメージとしてデプロイする場合は、Datadog Lambda ライブラリをレイヤーとして使用できません。代わりに、Datadog Lambda ライブラリを直接イメージ内にインストールする必要があります。
+
+
+```sh
+pip install datadog-lambda
+```
+
+`datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、`datadog-lambda v0.5.0` は、レイヤーバージョン 5 のコンテンツに一致します。
+
+### 関数の構成
+
+1. イメージの `CMD` 値を `datadog_lambda.handler.handler` に設定します。Dockerfile で直接設定するか、AWS を使用して値を上書きします。
+2. 元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+3. 環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
+4. 環境変数 `DD_FLUSH_TO_LOG` を `true` に設定します。
+5. オプションで、関数に `service` および `env` タグを適切な値とともに追加します。
+
+### Datadog Forwarder をロググループにサブスクライブ
+
+メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブする必要があります。
+
+1. [まだの場合は、Datadog Forwarder をインストールします][1]。
+2. [Datadog Forwarder を関数のロググループにサブスクライブします][2]。
+
+[1]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[2]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -257,6 +303,8 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:19
 ```
+
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][9]に追加する必要があります。
 
 #### パッケージの使用
 
@@ -292,6 +340,7 @@ pip install datadog-lambda -t ./
 [6]: https://pypi.org/project/datadog-lambda/
 [7]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -304,6 +353,7 @@ pip install datadog-lambda -t ./
 カスタムメトリクスまたはスパンの送信をご希望の場合は、以下のコード例をご参照ください。
 
 ```python
+import time
 from ddtrace import tracer
 from datadog_lambda.metric import lambda_metric
 
@@ -322,7 +372,7 @@ def lambda_handler(event, context):
     lambda_metric(
         metric_name='coffee_house.order_value',
         value=12.45,
-        timestamp=1602008721, # オプション、過去 20 分以内である必要があります
+        timestamp=int(time.time()), # オプション、過去 20 分以内である必要があります
         tags=['product:latte', 'order:online']
     )
 

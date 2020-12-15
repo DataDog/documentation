@@ -21,12 +21,12 @@ ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md'
 display_name: Azure IoT Edge
-draft: true
+draft: false
 git_integration_title: azure_iot_edge
 guid: 9eafeab9-daf4-4f54-befc-fcc623ec9c1b
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-is_public: false
+is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0

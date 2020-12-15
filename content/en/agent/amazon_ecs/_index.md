@@ -160,32 +160,36 @@ To collect processes information for all your containers and send it to Datadog:
 ```json
 {
   "containerDefinitions": [
-    (...)
+   {
+      (...)
       "mountPoints": [
-        (...)
         {
-          "containerPath": "/etc/passwd",
-          "sourceVolume": "passwd",
+          (...)
+        },
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "docker_sock",
           "readOnly": true
         },
+        {
         (...)
+        }
       ],
       "environment": [
         (...)
         {
-          "name": "DD_PROCESS_AGENT_ENABLED",
-          "value": "true"
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
         }
       ]
     }
   ],
   "volumes": [
-    (...)
     {
       "host": {
-        "sourcePath": "/etc/passwd"
+        "sourcePath": "/var/run/docker.sock"
       },
-      "name": "passwd"
+      "name": "docker_sock"
     },
     (...)
   ],

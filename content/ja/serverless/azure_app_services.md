@@ -21,19 +21,22 @@ Datadog では Azure App Service に属するすべてのリソースタイプ�
 
 - [Azure インテグレーション][1]を使用した[アプリ][1]および[関数][2]向けの Azure Monitor メトリクス。
 - カスタムメトリクスは API 経由で送信可能です。
-- ログは [Eventhub または Blob ストレージ][3]経由で送信可能です。
+- [リソースログ][3]は [Event Hub][4] 経由で送信可能です。
 
-Datadog の Azure App Service 向け拡張機能は、[Azure Web Apps][4] の追加モニタリングもサポートしています。これには以下の機能が含まれます。
+Datadog の Azure App Service 向け拡張機能は、[Azure Web Apps][5] の追加モニタリングもサポートしています。これには以下の機能が含まれます。
 
 - 自動インスツルメンテーションを用いた、完全分散型の APM トレーシング。
 - スパンのカスタマイズが可能な、手動 APM インスツルメンテーション機能。
 - アプリケーションログへの `Trace_ID` 挿入。
+- [DogStatsD][6] を使用したカスタムメトリクス送信のサポート。
 
 ## セットアップ
 
 ### 要件
 
-Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートしています (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][5]を参照してください。
+[Microsoft Azure インテグレーション][7]をまだセットアップしていない場合は、最初にセットアップします。
+
+Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートします (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][8]を参照してください。
 
 - .NET フレームワーク 4.7 以降
 - .NET Core 2.1
@@ -43,13 +46,12 @@ Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する 
 
 ### インストール
 
-1. [Azure ポータル][6]を開き、ダッシュボードで Datadog にインスツルメントしたい Azure App Service インスタンスを選択します。
+1. [Azure Portal][9] を開き、ダッシュボードで Datadog にインスツルメントしたい Azure App Service インスタンスを選択します。
 2. 'Configuration' ページで 'Application settings' タブを開きます。
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="Configuration ページ" >}}
-3. Datadog API キーに対応するアプリケーション設定 `DD_API_KEY` を追加し、[Datadog API キー][7]の値を設定します。
+3. Datadog API キーに対応するアプリケーション設定 `DD_API_KEY` を追加し、[Datadog API キー][10]の値を設定します。
     {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="API キーページ" >}}
-4. EU 版の Datadog サイト (datadoghq.eu ドメイン) をお使いの場合は、アプリケーション設定 `DD_SITE` を追加し、値に datadoghq.eu を設定してください。
-    デフォルトでは、この拡張機能は US 版の Datadog サイト (datadoghq.com ドメイン) にデータを送信します。US 版の Datadog サイトをお使いの場合は、追加のアプリケーション設定は不要です。
+4. `DD_SITE` を `{{< region-param key="dd_site" code="true" >}}` に設定します。デフォルトは `datadoghq.com`。
 5. 拡張機能ページで **Add** をクリックします。
 6. Datadog APM 拡張機能を選択します。
     {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Datadog 拡張機能" >}}
@@ -57,17 +59,97 @@ Datadog .NET APM 拡張機能は、Windows インスタンス上で稼働する 
 8. メインのアプリケーションを再起動して **Stop** をクリックします。その後、完全にアプリケーションが停止してから **Start** をクリックします。
     {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="このページで停止および再起動を実行" >}}
 
-### Azure Web Apps からのロギング
+### Azure Web Apps からのアプリケーションロギング
 
-Azure Web Apps のログは、[Azure インテグレーションドキュメント][8] に記載するプロセスを使用して、Eventhub 経由で Datadog に送信できます。**注**: Eventhub はお使いの Web アプリケーションと同じリージョンに所在している必要があります。
+Azure App Services のアプリケーションから Datadog へログを送信するには、Serilog を使用する必要があります。このメソッドでログを送信すると、トレース ID の挿入が可能になり、Datadog でログとトレースを関連付けられるようになります。拡張機能によるトレース ID の挿入を有効にするには、アプリケーション設定 `DD_LOGS_INJECTION:true` を追加します。
 
-Eventhub と Forwarder の機能設定が完了したら、Web アプリケーション向けの診断設定を作成します。以下のように、Datadog に送信したいログを選択します。
+**注**: これはお使いのアプリケーション内で行われるため、診断設定によって送信される Azure プラットフォームのログにトレース ID は含まれません。
 
-{{< img src="serverless/azure_diagnostics.png" alt="診断設定" >}}
+[Datadog Serilog シンク][11] NuGet パッケージをインストールします。これにより、イベントとログが Datadog に送信されます。デフォルトでは、ポート 443 の HTTPS 経由でシンクがログを転送します。アプリケーションのパッケージマネージャーコンソールで、次のコマンドを実行します。
 
-アプリケーションに対するロギングパイプラインを構築したら、トレース ID を挿入して Datadog で[ログとトレースを接続][9]します。拡張機能でこれを有効にするには、アプリケーション設定 `DD_LOGS_INJECTION:true` を追加します。
+```
+PM> Install-Package Serilog.Sinks.Datadog.Logs
+```
 
-**注**: トレース ID 挿入はアプリケーションの内部で実行されるため、トレース ID はアプリケーションログに含まれます。HTTP ログや監査ログなど、[Azure で利用可能な診断ログ][10]のその他のカテゴリにトレース ID が含まれることはありません。
+次に、アプリケーションでロガーを直接初期化します。 `<DD_API_KEY>` は、お使いの [Datadog API キー][10]に置き換えます。
+
+```
+using Serilog;
+using Serilog.Sinks.Datadog.Logs;
+
+          Serilog.Log.Logger = new LoggerConfiguration()
+              .WriteTo.DatadogLogs("<DD_API_KEY>")
+              .Enrich.FromLogContext()
+              .CreateLogger();
+```
+
+デフォルトの動作を上書きして、必須プロパティ url、port、useSSL、useTCP を手動で指定することで、TCP でログを転送することもできます。また、オプションで、[source、service、カスタムタグ][12]を指定できます。
+
+たとえば、TCP で Datadog US リージョンにログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
+
+{{< code-block lang="text" wrap="false" disable_copy="true" >}}
+using Serilog; 
+using Serilog.Sinks.Datadog.Logs;
+
+          var config = new DatadogConfiguration(
+              url:"https://http-intake.logs.datadoghq.com", 
+              port:10516, 
+              useSSL:true, 
+              useTCP:false);
+
+          Serilog.Log.Logger = new LoggerConfiguration()
+              .WriteTo.DatadogLogs(
+                  "eb7c615e5fca779871203b7de9209b6c",
+                  source: "<SOURCE_NAME>",
+                  service: "<SERVICE_NAME>",
+                  tags: new string[] { "<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>" },
+                  configuration: config
+              )
+              .Enrich.FromLogContext()
+              .CreateLogger();
+{{< /code-block >}}
+
+これで、新しいログが Datadog に直接送信されるようになります。
+
+または、0.2.0 以降、Serilog.Setting.Configuration NuGet パッケージで `appsettings.json` ファイルを使用して Datadog シンクを構成できます。
+
+`Serilog.WriteTo()` 配列で、DatadogLogs のエントリを追加します。以下に例を示します。
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<API_キー>",
+        "source": "<ソース名>",
+        "host": "<ホスト名>",
+        "tags": ["<タグ_1>:<値_1>", "<タグ_2>:<値_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
+
+## DogStatsD とカスタムメトリクス
+
+バージョン `0.3.14-prerelease` 以降、App Services 拡張には [DogStatsD][6] (Datadog のメトリクス集計サービス) のインスタンスが含まれます。これにより、拡張機能でカスタムメトリクス、サービスチェック、イベントを Azure Web Apps から直接 Datadog へ送信できます。
+
+ウェブアプリにカスタムメトリクスやチェックを作成することは、Datadog Agent を実行しているホスト上のアプリケーションで書き込むプロセスと同様です。ただし、拡張機能により自動的に実行されるため、ポートを構成する必要がないという違いがあります。拡張機能を使用してカスタムメトリクスを Azure App Services から Datadog へ送信するには、以下を実行します。
+
+1. [DogStatsD Nuget パッケージ][13]を Visual Studio プロジェクトに追加します。
+2. アプリケーション内で [DogStatdD を初期化し、カスタムメトリクスを作成][14]します。
+3. サポートされている Azure .NET ウェブアプリにコードをデプロイします。
+4. Datadog App Service 拡張機能をインストールします。
+
+[カスタムメトリクス][15]の詳細。
 
 ## トラブルシューティング
 
@@ -89,7 +171,7 @@ Eventhub と Forwarder の機能設定が完了したら、Web アプリケー�
 
 トレースが消失している、またはトレースが全く受信できない場合は、ポート設定が手動で変更されていないかをご確認ください。拡張機能においては、Tracer Agent がアプリケーションと通信し、外部トラフィック向けに使用可能な正しいポートを特定します。手動でポートを設定すると、このプロセスが阻害されてトレースの消失につながる可能性があります。
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 ### その他の参考資料
 
@@ -98,12 +180,17 @@ Eventhub と Forwarder の機能設定が完了したら、Web アプリケー�
 
 [1]: /ja/integrations/azure_app_services/
 [2]: /ja/integrations/azure_functions/
-[3]: /ja/integrations/azure/?tab=azurecliv20#log-collection
-[4]: https://azure.microsoft.com/en-us/services/app-service/web/
-[5]: /ja/tracing/setup/dotnet/
-[6]: https://portal.azure.com
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: /ja/integrations/azure/?tab=eventhub#log-collection
-[9]: /ja/tracing/connect_logs_and_traces/
-[10]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
-[11]: /ja/help/
+[3]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
+[4]: /ja/integrations/azure/?tab=eventhub#log-collection
+[5]: https://azure.microsoft.com/en-us/services/app-service/web/
+[6]: /ja/developers/dogstatsd
+[7]: /ja/integrations/azure
+[8]: /ja/tracing/setup/dotnet/
+[9]: https://portal.azure.com
+[10]: https://app.datadoghq.com/account/settings#api
+[11]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[12]: /ja/logs/log_collection/#reserved-attributes
+[13]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
+[14]: /ja/developers/dogstatsd/?tab=net#code
+[15]: developers/metrics/
+[16]: /ja/help

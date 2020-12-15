@@ -32,7 +32,6 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 * [Host maps](?wtime=504)
 * [Query values](?wtime=510)
 * [Overlaying events at analysis time](?wtime=536)
-* [Graph annotations](?wtime=577)
 * [Screenboards](?wtime=593)
 * [Event stream & timeline widgets](?wtime=622)
 * [Other widgets](?wtime=641)
