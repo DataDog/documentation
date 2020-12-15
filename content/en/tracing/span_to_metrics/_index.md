@@ -14,11 +14,13 @@ further_reading:
 This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Fill out this form</a> to request this feature for your account or be notified when it becomes Generally Available.
 </div>
 
+## Generate Span-based Metrics
+
 Tracing without Limits™ now allows you to generate metrics from all ingested spans, regardless of if they are indexed by a [retention filter][1].
 
-Generate metrics from all of your ingested traces whether you choose to keep them for longer term using [Retention Filters][1]. These metrics can be used in conjunction with retention filters and Analytics monitors. Use custom metrics for specific fixed queries, while creating retention filters to allow arbitrary querying and investigation.  With custom metrics generated from your incoming span stream, you can visualize anomalies, create dashboards and monitors, and see trends across any parameters that are important to your business context. All generated metrics are available for 15 months as Datadog [custom metrics][2].
+These metrics pair with retention filters and Analytics monitors - use custom metrics for specific fixed queries, while creating retention filters to allow arbitrary querying and investigation.
 
-## Generate Span-based Metrics
+For example, you may want to use custom metrics to visualize anomalies, create dashboards and monitors, and see trends across any parameters that are important to your business context. All generated metrics are available for 15 months as Datadog [custom metrics][2].
 
 {{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
 
