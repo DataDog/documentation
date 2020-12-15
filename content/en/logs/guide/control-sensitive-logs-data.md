@@ -76,16 +76,16 @@ In case you have no straightforward way to change the loggers themselves, Datado
 
 Similar scrubbing capabilities exist for the [Serverless Forwarder][14].
 
-### Anonymizing Browser and Mobile Logs IPs
+### Anonymizing IPs in browser and mobile logs
 
-In order to be compliant with privacy regulations, you might want to remove IP information collected from your application users. For [Browser][15], [Android][16] and [iOS][17] SDKs, anonymize user IPs with the following steps :
+For compliance with privacy regulations, you might want to remove IP information collected from your application users. For [browser][15], [Android][16], and [iOS][17] SDKs, anonymize user IPs with the following steps:
 
-1. Clone the “Web Browser logs”, “Android Logs” or “iOS Logs” [pipeline][18] in your logs configuration page.
-2. Disable the GeoIP Parser :
+1. Clone the “Web Browser logs”, “Android Logs”, or “iOS Logs” [pipeline][18] in your logs configuration page.
+2. Disable the GeoIP Parser:
 
 {{< img src="logs/guide/sensitive/disable_geoip_parser.png" alt="Disable GeoIP Parser" style="width:80%;" >}}
 
-3. Add a new [String Builder][19] processor on the network.client.ip attribute path and replace it with [REMOVED] :
+3. Add a new [String Builder][19] processor on the `network.client.ip` attribute path and replace it with `[REMOVED]`:
 
 {{< img src="logs/guide/sensitive/remove_network_client_ip.png" alt="Remove network.client.ip" style="width:80%;" >}}
 
