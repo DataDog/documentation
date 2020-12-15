@@ -13,13 +13,12 @@ further_reading:
   text: "Collect your traces"
 ---
 
+## Overview
+
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]). 
+As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]).
 If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][2] and use the same set of proxy settings as other data types.
-
-
-## TCP log forwarding
 
 {{< tabs >}}
 {{% tab "TCP" %}}
@@ -42,12 +41,32 @@ The parameters above can also be set with the following environment variables:
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs. For {{< region-param key="dd_subdomain" code="true" >}}.{{< region-param key="dd_site" code="true" >}}, use {{< region-param key="tcp_endpoint" code="true" >}} on port {{< region-param key="tcp_endpoint_port" code="true" >}} and activate SSL encryption.
 
 * Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
-    * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-    * `yum install ca-certificates` (CentOS, Redhat)
+  - `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+  - `yum install ca-certificates` (CentOS, Redhat)
+
   And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
-  
+
+{{% /tab %}}
+{{% tab "SOCKS5" %}}
+
+To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
+
+```yaml
+logs_config:
+  socks5_proxy_address: "<MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>"
+```
+
+The parameter above can also be set with the following environment variable:
+
+* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Examples of TCP proxy
 
+{{< tabs >}}
+{{% tab "HAProxy" %}}
 ### Using HAProxy as a TCP Proxy for Logs
 
 This example explains how to configure the Datadog Agent to send logs in TCP to a server with HAProxy installed and listening on port `10514` to then forward the logs to Datadog.
@@ -69,13 +88,11 @@ logs_config:
   logs_no_ssl: true
 ```
 
-
 #### HAProxy configuration
 
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
 {{< site-region region="us" >}}
-
 
 ```conf
 # Basic configuration
@@ -135,7 +152,6 @@ backend datadog-logs
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
-
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
@@ -202,6 +218,9 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 {{< /site-region >}}
 
+{{% /tab %}}
+
+{{% tab "NGINX" %}}
 ### Using NGINX as a TCP Proxy for logs
 
 #### Agent configuration
@@ -262,24 +281,8 @@ stream {
 ```
 
 {{< /site-region >}}
-
-{{% /tab %}}
-{{% tab "SOCKS5" %}}
-
-To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
-
-```yaml
-logs_config:
-  socks5_proxy_address: "<MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>"
-```
-
-The parameter above can also be set with the following environment variable:
-
-* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
-
 {{% /tab %}}
 {{< /tabs >}}
-
 
 
 ## Further Reading
