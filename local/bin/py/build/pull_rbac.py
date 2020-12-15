@@ -9,6 +9,7 @@ def pull_rbac():
   api_endpoint = 'https://app.datadoghq.com/api/v2/permissions'
   headers = {'DD-API-KEY': sys.argv[1], 'DD-APPLICATION-KEY': sys.argv[2]}
   formatted_permissions_dict = {}
+  permission = []
 
   r = requests.get(api_endpoint, headers=headers)
 

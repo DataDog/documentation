@@ -7,13 +7,7 @@
 {{ else }}
   {{- range $group_name, $group_permissions_data := $permissions_data -}}
     {{- if ne $group_name "General" -}}
-      {{- $group_id := $group_name -}}
-
-      {{- if in $group_name " " -}}
-        {{- $group_id = split $group_name " " -}}
-        {{- $group_id = delimit $group_id "-" -}}
-      {{- end -}}
-      <h2 id="{{ lower $group_id }}">
+      <h2 id="{{ anchorize $group_name }}">
         {{- $group_name -}}
       </h2>
       <p>
