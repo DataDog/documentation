@@ -9,7 +9,7 @@ further_reading:
     tag: ドキュメント
     text: ログ管理のための RBAC
 ---
-フェデレーション認証メカニズムを使用する場合、この API を利用することにより、Datadog 内で ID プロバイダーから送信される属性を使用してユーザーグループをロールに自動的にマッピングできます。
+フェデレーション認証メカニズムを使用する場合、この API を利用することにより、Datadog 内で ID プロバイダーから送信される属性を使用してユーザーグループをロールに自動的にマッピングできます。API を使用して認証マッピングを作成および管理するには、ユーザーはアクセス管理許可を持つ所有者のいるアプリケーションキーを使用する必要があります。
 
 **注**: SAML ユーザーであり、既存のベータ版フェデレーションマッピングメカニズム (`roles_v2_saml`) を使用している方には、この API に移行することを強くお勧めします。
 
@@ -17,20 +17,9 @@ Datadog アプリの UI（User Management の **Mappings** タブ）からも、
 
 ## リクエスト
 
-{{< site-region region="us" >}}
-
 下記のすべての API エンドポイントで、次のホストエンドポイントを使用できます。
 
-* Datadog US リージョンの場合、`https://api.datadoghq.com/api/` 。
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-下記のすべての API エンドポイントで、次のホストエンドポイントを使用できます。
-
-* Datadog EU リージョンの場合、`https://api.datadoghq.eu/api/` 。
-
-{{< /site-region >}}
+* Datadog リージョンには `https://api.{{< region-param key="dd_site" >}}/api/` 。
 
 ### 新しい認証マッピングを作成する
 
@@ -53,14 +42,12 @@ AuthN Mapping を JSON の本文から新しく作成します。新規作成さ
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
 curl -X POST \
-    "https://api.datadoghq.com/api/v2/authn_mappings" \
+    "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
     -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_API_キー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
     -d '{
             "data": {
                 "type": "authn_mappings",
@@ -80,37 +67,8 @@ curl -X POST \
         }'
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X POST \
-    "https://api.datadoghq.eu/api/v2/authn_mappings" \
-    -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_API_キー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-    -d '{
-            "data": {
-                "type": "authn_mappings",
-                "attributes": {
-                    "attribute_key": "member-of",
-                    "attribute_value": "Development"
-                },
-                "relationships": {
-                    "role": {
-                        "data": {
-                            "id": "123e4567-e89b-12d3-a456-426655445555",
-                            "type": "roles"
-                        }
-                    }
-                }
-            }
-        }'
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -204,26 +162,14 @@ AuthN Mapping のリストを返します
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
-curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
-     -H "DD-API-KEY: <DATADOG_APIキー>" \
-     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
+     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings" \
-     -H "DD-API-KEY: <DATADOG_API_キー>" \
-     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -315,26 +261,14 @@ UUID で指定した AuthN Mapping を返します。
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
-curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{authn_mapping_id}" \
-     -H "DD-API-KEY: <DATADOG_APIキー>" \
-     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}" \
+     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings/{authn_mapping_id}" \
-     -H "DD-API-KEY: <DATADOG_API_キー>" \
-     -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -430,14 +364,12 @@ AuthN Mapping の `role`、`saml_assertion_attribute_id`、あるいはその両
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
 curl -X PATCH \
-    "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+    "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
     -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_API_キー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
     -d '{
             "data": {
                 "type": "authn_mappings",
@@ -458,38 +390,8 @@ curl -X PATCH \
         }'
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X PATCH \
-    "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
-    -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_API_キー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-    -d '{
-            "data": {
-                "type": "authn_mappings",
-                "id": "{authn_mapping_id}",
-                "attributes": {
-                    "attribute_key": "member-of",
-                    "attribute_value": "Developer"
-                }
-                "relationships": {
-                "role": {
-                    "data": {
-                            "id": "123e4567-e89b-12d3-a456-426655440000",
-                            "type": "roles"
-                        }
-                    }
-                }
-            }
-        }'
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -575,28 +477,15 @@ curl -X PATCH \
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
-curl -X DELETE "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_APIキー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X DELETE "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_API_キー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>"
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -620,30 +509,16 @@ Authn Mapping 機能が有効または無効のどちらに設定されている
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
 curl -X GET \
-         "https://api.datadoghq.com/api/v1/org_preferences" \
+         "https://api.<YOUR_DD_SITE>/api/v1/org_preferences" \
          -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_APIキー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X GET \
-         "https://api.datadoghq.eu/api/v1/org_preferences" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <DATADOG_API_キー>" \
-         -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -687,14 +562,12 @@ curl -X GET \
 {{< tabs >}}
 {{% tab "Example" %}}
 
-{{< site-region region="us" >}}
-
 ```sh
 curl -X POST \
-    "https://api.datadoghq.com/api/v1/org_preferences" \
+    "https://api.<YOUR_DD_SITE>/api/v1/org_preferences" \
     -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_APIキー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
     -d '{
         "data": {
             "type": "org_preferences",
@@ -707,30 +580,8 @@ curl -X POST \
 `
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```sh
-curl -X POST \
-    "https://api.datadoghq.eu/api/v1/org_preferences" \
-    -H "Content-Type: application/json" \
-    -H "DD-API-KEY: <DATADOG_API_キー>" \
-    -H "DD-APPLICATION-KEY: <DATADOG_アプリケーションキー>" \
-    -d '{
-        "data": {
-            "type": "org_preferences",
-            "attributes": {
-                "preference_type": "saml_authn_mapping_roles",
-                "preference_data": true
-            }
-        }
-    }'
-`
-```
-
-{{< /site-region >}}
-
-`<DATADOG_API_キー>` と `<DATADOG_アプリケーションキー>` のプレースホルダ―を、ご自身の[組織の API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
