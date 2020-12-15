@@ -30,15 +30,15 @@ Primary tags must follow a different set of rules from those of conventional [Da
 
 The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`.
 
-#### Setting the environment in the tracer
+#### Tracer environment
 
-We recommend having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
+Datadog recommends having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
 
 If `DD_ENV` is exposed to your service's process, the tracer will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
 
 You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
 
-#### Setting the environment in the Agent
+#### Agent environment
 
 The `env` tag can be set in your Agent configuration.
 **However, if `env` is already present in trace data then it will override any `env` set in the Agent.**
@@ -64,11 +64,9 @@ Options:
 
     **Containerized environments**: The Agent also supports configuration of top-level `tags` through the environment variable `DD_TAGS`.
 
-#### Viewing Data by Environment
+#### Data by environment
 
-Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
-
-{{< img src="tracing/guide/setting_primary_tags/envs_tracing_screen.png" alt="Envs tracing"  style="width:80%;">}}
+Environments appear at the top of APM pages. Use the `env` dropdown to scope the data displayed on the current page.
 
 ## Add a second primary tag in Datadog
 
@@ -84,11 +82,9 @@ If you change a previously set primary tag, be aware of the following:
 * Historical APM data aggregated by the previously set tag is no longer accessible.
 * Any APM monitors scoped to the previous tag display a status of _No Data_.
 
-### Viewing Data by Primary Tag
+### Data by primary tag
 
-Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown (as in the image below).
-
-{{< img src="tracing/guide/setting_primary_tags/primary_tags_ui.png" alt="Primary tags UI"  style="width:80%;">}}
+Primary tags appear at the top of APM pages. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown.
 
 ## Further Reading
 
