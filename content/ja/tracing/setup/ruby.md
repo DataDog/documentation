@@ -54,7 +54,7 @@ title: Ruby アプリケーションのトレース
      - [http.rb](#http-rb)
      - [MongoDB](#mongodb)
      - [MySQL2](#mysql2)
-     - [Net/HTTP](#net-http)
+     - [Net/HTTP](#nethttp)
      - [Presto](#presto)
      - [Que](#que)
      - [Racecar](#racecar)
