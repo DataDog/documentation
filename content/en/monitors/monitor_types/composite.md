@@ -24,7 +24,10 @@ Choose existing monitors to create a composite monitor, for example: monitor `A`
 
 For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors—it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
-**Note**: The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
+**Notes**
+
+- The terms `individual monitors`, `constituent monitors`, and `non-composite monitors` all refer to monitors used by a composite monitor to calculate its status.
+- **Synthetics monitors cannot be used with other monitors within a composite monitor.**
 
 ## Monitor creation
 
