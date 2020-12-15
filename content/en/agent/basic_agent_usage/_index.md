@@ -186,7 +186,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
-- Windows Server 2008 R2+ is supported, but there is [a known issue with clock drift and Go][12] that affects Windows Server 2008 R2+.
+- Windows Server 2008 R2+ is supported, but there is a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2+.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
 [2]: /agent/basic_agent_usage/deb/
