@@ -138,10 +138,10 @@ In case you have specific compliance questions or need a helping hand in fixing 
 [12]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [13]: /agent/guide/autodiscovery-management/?tab=containerizedagent
 [14]: /serverless/forwarder#log-forwarding-optional
-[15]: /logs/log_collection/javascript/#pagetitle
-[16]: /logs/log_collection/android/?tab=us#pagetitle
-[17]: /logs/log_collection/ios/?tab=cocoapods#pagetitle
-[18]: /logs/processing/pipelines/#pipelines-goal
+[15]: /logs/log_collection/javascript/
+[16]: /logs/log_collection/android/
+[17]: /logs/log_collection/ios/
+[18]: /logs/processing/pipelines/
 [19]: /logs/processing/processors/?tab=ui#string-builder-processor
 [20]: https://app.datadoghq.com/logs/pipelines/data-access
 [21]: /account_management/rbac/permissions/?tab=ui#logs_read_data
