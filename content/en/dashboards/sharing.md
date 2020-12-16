@@ -38,7 +38,7 @@ To share an entire dashboard publicly, generate a URL:
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
 5. Choose configuration options under "Time & Variable Setings" for "Allow changing timeframe" and/or template variables visible tags.
-6. (Optional) You can copy the URL to share, but they will also receive an email with a link.
+6. (Optional) You can copy the URL to share; the specified email addresses will also receive an email with a link.
 7. Click **Done**.
 
 **Note**: 
