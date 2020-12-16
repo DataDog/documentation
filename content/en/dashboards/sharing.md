@@ -19,7 +19,39 @@ further_reading:
 
 ## Overview
 
-Shared graphs and screenboards allow you to display metric, trace, and log visualizations outside of Datadog.
+Shared dashboards and graphs allow you to display metric, trace, and log visualizations outside of Datadog.
+
+## Dashboards
+
+**Share an entire dashboard publicly by generating a URL**:
+1. On the dashboard's page, click the settings cog in the upper right.
+2. Choose the **Generate public URL** option.
+3. Choose configuration options under "Time & Variable Setings" for "Allow changing timeframe" and/or template variables visible tags.
+4. Copy the URL and click **Done**.
+
+**Share with individual emails**: 
+1. On the dashboard's page, click the settings cog in the upper right.
+2. Choose the **Generate public URL** option.
+3. Select "Only specified people" can access this dashboard.
+4. Input the emails you would like to share your dashboard with.
+5. Choose configuration options under "Time & Variable Setings" for "Allow changing timeframe" and/or template variables visible tags.
+6. (Optional) You can copy the URL to share, but they will also receive an email with a link.
+7. Click **Done**.
+
+**Note**: 
+- The created URL has live, read-only access to the contents of that specific dashboard.
+- Dashboard [template variable][4] selectors are only present on dashboards when you configure visible tags. The template variables' default values are the default values set in Datadog. 
+- Additionally, widgets based on APM traces queries do not display data on public dashboards. All log based queries will show data, except the Log Stream widget.
+
+### Revoke
+
+To revoke a shared dashboard:
+
+1. Navigate to the [Dashboard List][5].
+2. Select the dashboard you want to revoke access to.
+3. Click on the settings cog in the upper right.
+4. Click **Configure sharing**.
+5. Click **Revoke public URL**.
 
 ## Graphs
 
@@ -43,31 +75,6 @@ To revoke the keys used to share individual (embedded) graphs:
 1. Navigate to [**Integrations -> Embeds**][3] to see a list of all shared graphs.
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
-
-## Dashboards
-
-### Share
-
-Share an entire dashboard by generating a public URL:
-
-1. On the dashboard's page, click the settings cog in the upper right.
-2. Choose the **Generate public URL** option.
-3. Choose configuration options for "Allow changing timeframe" and/or template variables visible tags.
-4. Copy the URL and click **Done**.
-
-The created URL has live, read-only access to the contents of that specific dashboard.
-
-**Note**: Dashboard [template variable][4] selectors are only present on dashboards when you configure visible tags. The template variables' default values are the default values set in Datadog. Additionally, widgets based on APM traces queries do not display data on public dashboards. All log based queries will show data, except the Log Stream widget.
-
-### Revoke
-
-To revoke a shared dashboard:
-
-1. Navigate to the [Dashboard List][5].
-2. Select the dashboard you want to revoke access to.
-3. Click on the settings cog in the upper right.
-4. Click **Configure sharing**.
-5. Click **Revoke public URL**.
 
 ### Applying restrictions
 
