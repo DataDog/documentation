@@ -34,10 +34,12 @@ For example, you may want to use custom metrics to visualize anomalies, create d
 | Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Search and Analytics][4] for specific endpoints, or use the 'Group By' option in [Analytics][5].                    |
 | Forecasting or complex mathematics                          | Create a [Forecast monitor][6] based on generated metrics.                          |   N/A                            |
 
+To generate metrics from span, navigate from the [APM Setup and Configuration][7] page to [Generate Metrics][8] on the top of the page, and click the “+ New Metric” button.
+
+<br>
 
 {{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
 
-To generate metrics from span, navigate from the [APM Setup and Configuration][7] page to [Generate Metrics][8] on the top of the page, and click the “+ New Metric” button.
 
 ### Creating a New Span-based Metric
 
