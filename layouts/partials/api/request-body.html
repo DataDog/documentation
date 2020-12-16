@@ -26,7 +26,7 @@
                         {{ with $resourcePage.Resources.Match "examples.json" }}
                               {{ range . }}
                                   {{ $data := . | unmarshal}}
-                                  {{ with (index $data $context.action.operationId) }}
+                                  {{ with (index $data $operationid) }}
                                       {{ with (index . "request") }}
                                           {{ $req := . }}
                                           {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
@@ -42,7 +42,7 @@
                                           {{ warnf "Could not load html/json request for %q" $operationid }}
                                       {{ end }}
                                   {{ else }}
-                                        {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                        {{ warnf "Could not load html/json request for %q" $operationid }}
                                   {{ end }}
                               {{ end }}
                         {{ end }}

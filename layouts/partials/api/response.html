@@ -39,7 +39,7 @@
                         {{ with $resourcePage.Resources.Match "examples.json" }}
                             {{ range . }}
                                 {{ $data := . | unmarshal}}
-                                {{ with (index $data $context.action.operationId) }}
+                                {{ with (index $data $operationid) }}
                                     {{ with (index . "responses") }}
                                         {{ $res := (index . $response_code) }}
                                         {{ if $res }}
@@ -51,10 +51,10 @@
                                             {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
                                         {{ end }}
                                     {{ else }}
-                                        {{ warnf "Could not load html/json responses in data for operation %q" $context.action.operationId }}
+                                        {{ warnf "Could not load html/json responses in data for operation %q" $operationid }}
                                     {{ end }}
                                 {{ else }}
-                                    {{ warnf "Could not load html/json response for %q" $context.action.operationId }}
+                                    {{ warnf "Could not load html/json response for %q" $operationid }}
                                 {{ end }}
                             {{ end }}
                         {{ end }}
