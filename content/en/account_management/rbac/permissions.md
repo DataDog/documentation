@@ -44,15 +44,15 @@ Find below the list of permissions for Access Management:
 | `user_access_manage`         | Grants the permission to disable users, manage user roles and SAML-to-role mappings. | false    |
 | `user_access_invite`         | Allows users to invite other users to your organization.                             | false    |
 
-## API and Application Keys
+## API and application keys
 
-Find below the list of permissions for API and Application Keys:
+The following permissions are available for API and application keys:
 
 | Name                    | Description                                                                                     | Scopable |
 | ----------------------- | ----------------------------------------------------------------------------------------------- | -------- |
-| `user_app_keys`         | Grants users the ability to create, view and manage Application Keys owned by the user.         | false    |
-| `org_app_keys_read`     | Grants users the ability to list Application Keys owned by all users in the organization.       | false    |
-| `org_app_keys_write`    | Grants users the ability to manage Application Keys owned by all users in the organization.     | false    |
+| `user_app_keys`         | Grants the user the ability to create, view, and manage application keys they own.         | false    |
+| `org_app_keys_read`     | Grants the user the ability to list application keys owned by all users in the organization.       | false    |
+| `org_app_keys_write`    | Grants the user the ability to manage application keys owned by all users in the organization.     | false    |
 
 ## Dashboards
 

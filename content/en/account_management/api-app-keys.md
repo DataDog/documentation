@@ -25,7 +25,7 @@ Client tokens are unique to your organization. A client token is required by the
 
 For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a client token must be used.
 
-## Add an API Key or Client Token
+## Add an API key or client token
 
 To add a Datadog API key or client token, navigate to [Integration -> APIs][1], enter a name for your key or token, and click **Create API key** or **Create Client Token**.
 
@@ -33,17 +33,17 @@ To add a Datadog API key or client token, navigate to [Integration -> APIs][1], 
 
 * Your org must have at least one API key and at most five API keys.
 * Key names must be unique across your org.
-* Application Key names cannot be blank.
+* Application key names cannot be blank.
 
-## Remove API Keys or Client Tokens
+## Remove API keys or client tokens
 
-To remove a Datadog API key or client token, navigate to [Integration -> APIs][1] and select the **Revoke** button next to the key or token you want to remove:
+To remove a Datadog API key or client token, navigate to [Integration -> APIs][1] and click **Revoke** next to the key or token you want to remove:
 
 {{< img src="account_management/api_app_keys/api_keys_revoke.png" alt="Revoke API Keys"  >}}
 
-## Add Application Keys
+## Add application keys
 
-To add a Datadog Application Key, navigate to [Teams -> Application Keys][2]. If you have the [permission][5] to create Application Keys you will be able to click **New Key**:
+To add a Datadog application key, navigate to [Teams -> Application Keys][2]. If you have the [permission][5] to create application keys you can click **New Key**:
 
 {{< img src="account_management/api_app_keys/application_keys_new_key.png" alt="Create new Application Keys"  >}}
 
@@ -51,11 +51,11 @@ To add a Datadog Application Key, navigate to [Teams -> Application Keys][2]. If
 
 * Your org must have at least one API key and at most five API keys.
 * Key names must be unique across your org.
-* Application Key names cannot be blank.
+* Application key names cannot be blank.
 
-## Remove Application Keys
+## Remove application keys
 
-To remove a Datadog Application Key, navigate to [Teams -> Application Keys][2]. If you have the [permissions][5] to create and use Application Keys you'll be able to see your own keys and click **Revoke** on the Action Bar next to the Key you'd like to revoke. If you have the permissions to list and manage all Org Application Keys you'll be able to search for and then tap **Revoke** on the key you'd like to revoke:
+To remove a Datadog application key, navigate to [Teams -> Application Keys][2]. If you have the [permission][5] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and then click **Revoke** next to it:
 
 {{< img src="account_management/api_app_keys/application_keys_revoke.png" alt="Revoke Application Keys"  >}}
 
