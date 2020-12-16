@@ -70,7 +70,7 @@
     "summary": "Get all dashboards"
   },
   "CreateDashboard": {
-    "description": "Create a dashboard using the specified options.",
+    "description": "Create a dashboard using the specified options. When defining queries in your widgets, take note of which queries should have the `as_count()` or `as_rate()` modifiers appended.\nRefer to the following [documentation](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers) for more information on these modifiers.",
     "summary": "Create a new dashboard",
     "request_description": "Create a dashboard request body.",
     "request_schema_description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure."
