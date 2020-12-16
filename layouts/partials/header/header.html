@@ -9,7 +9,7 @@
 
 <header>
     <div class="container">
-        <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
+        <div class="mainnav d-none d-xl-flex row align-items-center no-gutters">
             <div class="col">
                 <ul class="nav navbar-left">
                     {{ range .Site.Menus.main_left   }}
@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
+    <nav class="navbar d-xl-none navbar-light bg-white rounded">
         <div class="container">
             <a class="navbar-brand text-primary" href="{{ "" | absLangURL }}" title="DataDog">
                 {{ partial "img.html" (dict "root" . "src" "dd_logo_n_70x75.png" "alt" "DataDog" "disable_lazy" "true") }}
