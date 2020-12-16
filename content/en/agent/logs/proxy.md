@@ -38,7 +38,7 @@ The parameters above can also be set with the following environment variables:
 
 **Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="tcp_endpoint" code="true" >}}) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
 
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs. For {{< region-param key="dd_subdomain" code="true" >}}.{{< region-param key="dd_site" code="true" >}}, use {{< region-param key="tcp_endpoint" code="true" >}} on port {{< region-param key="tcp_endpoint_port" code="true" >}} and activate SSL encryption.
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs. For {{< region-param key="dd_site" code="true" >}}, use {{< region-param key="tcp_endpoint" code="true" >}} on port {{< region-param key="tcp_endpoint_port" code="true" >}} and activate SSL encryption.
 
 * Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
   - `sudo apt-get install ca-certificates` (Debian, Ubuntu)
