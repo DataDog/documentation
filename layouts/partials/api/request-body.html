@@ -24,24 +24,27 @@
 
                       {{ if $resourcePage }}
                         {{ with $resourcePage.Resources.Match "examples.json" }}
-                            {{ range . }}
-                              {{ $data := . | unmarshal}}
-                              {{ $req := (index (index $data $operationid) "request") }}
-                              {{ if $req }}
+                              {{ range . }}
+                                  {{ $data := . | unmarshal}}
+                                  {{ with (index $data $context.action.operationId) }}
+                                      {{ with (index . "request") }}
+                                          {{ $req := . }}
+                                          {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                          {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
 
-                                  {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
-                                  {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                          {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                                          {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
 
-                                  {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
-                                  {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
-
-                                  {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                  {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
-                                  {{ $s.Set "html" (index $req "html") }}
-                              {{ else }}
-                                  {{ warnf "Could not load html/json request for %q" $operationid }}
+                                          {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                          {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
+                                          {{ $s.Set "html" (index $req "html") }}
+                                      {{ else }}
+                                          {{ warnf "Could not load html/json request for %q" $operationid }}
+                                      {{ end }}
+                                  {{ else }}
+                                        {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                  {{ end }}
                               {{ end }}
-                            {{ end }}
                         {{ end }}
                       {{ end }}
                       {{ $json := ($s.Get "json") }}

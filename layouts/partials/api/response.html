@@ -38,16 +38,24 @@
                         {{ $s.Set "html" "" }}
                         {{ with $resourcePage.Resources.Match "examples.json" }}
                             {{ range . }}
-                            {{ $data := . | unmarshal}}
-                            {{ $res := (index (index (index $data $operationid) "responses") $response_code) }}
-                            {{ if $res }}
-                                {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
-                                {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
-                                {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                {{ $s.Set "html" (index $res "html") }}
-                            {{ else }}
-                                {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
-                            {{ end }}
+                                {{ $data := . | unmarshal}}
+                                {{ with (index $data $context.action.operationId) }}
+                                    {{ with (index . "responses") }}
+                                        {{ $res := (index . $response_code) }}
+                                        {{ if $res }}
+                                            {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
+                                            {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                            {{ $s.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                            {{ $s.Set "html" (index $res "html") }}
+                                        {{ else }}
+                                            {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
+                                        {{ end }}
+                                    {{ else }}
+                                        {{ warnf "Could not load html/json responses in data for operation %q" $context.action.operationId }}
+                                    {{ end }}
+                                {{ else }}
+                                    {{ warnf "Could not load html/json response for %q" $context.action.operationId }}
+                                {{ end }}
                             {{ end }}
                         {{ end }}
                         {{ $json := ($s.Get "json") }}
