@@ -22,9 +22,8 @@ further_reading:
 Shared dashboards and graphs allow you to display metric, trace, and log visualizations outside of Datadog.
 
 ## Dashboards
-When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
+When you share a dashboard by URL or email link, the shared page shows live, read-only contents of that dashboard. 
 
-If your shared dashboard has visible tags configured, [template variable][4] selectors are present on the shared page. The template variables' default values are the default values you set when you configure the share, as described next.
 ### Share a dashboard by public URL
 
 To share an entire dashboard publicly, generate a URL:
@@ -43,10 +42,7 @@ To share an entire dashboard publicly, generate a URL:
 6. (Optional) You can copy the URL to share; the specified email addresses will also receive an email with a link.
 7. Click **Done**.
 
-**Note**: 
-- The created URL has live, read-only access to the contents of that specific dashboard.
-- Dashboard [template variable][4] selectors are only present on dashboards when you configure visible tags. The template variables' default values are the default values set in Datadog. 
-- Additionally, widgets based on APM traces queries do not display data on public dashboards. All log based queries will show data, except the Log Stream widget.
+**Note**: Widgets based on APM traces queries do not display data on public dashboards. The Log Stream widget doesn't show data either, but other Log-based queries do.
 
 ### Revoke
 
