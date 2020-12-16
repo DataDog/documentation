@@ -28,7 +28,7 @@ Shared dashboards and graphs allow you to display metric, trace, and log visuali
 To share an entire dashboard publicly, generate a URL:
 
 1. On the dashboard's page, click the settings cog in the upper right.
-2. Choose the **Generate public URL** option.
+2. Select **Generate public URL**.
 3. Choose configuration options under "Time & Variable Setings" for "Allow changing timeframe" and/or template variables visible tags.
 4. Copy the URL and click **Done**.
 
